@@ -1,0 +1,24 @@
+{
+  "base": "e97ee9532b17beaf0c7ae38281c5bef12b64fa5b",
+  "added": [
+    "polymele",
+    "leucus",
+    "orus",
+    "eurybates",
+    "patroclus"
+  ],
+  "atlases": [
+    {
+      "filename": "planet-markers.webp",
+      "baseSha256": "edf551c0e098079f69651d710f6339a311189683ea8e1e0cfce58b71bb6e1908",
+      "outputSha256": "0ccc9f8c23ff9c027b10e232ec61554f07e7d8bed88bd37931a2f001a66915f6",
+      "preservedMarkers": 253
+    },
+    {
+      "filename": "planet-markers@2x.webp",
+      "baseSha256": "12b31b1a9f699e448103051c2497ec0ccf28077f3664be26c81f22427c631747",
+      "outputSha256": "f559ec2fc19cfe9fc8dcf61f724e74786f927664e57c79f7ce546b71bed3a20c",
+      "preservedMarkers": 253
+    }
+  ]
+}

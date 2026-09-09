@@ -3,6 +3,7 @@ import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { stripTypeScriptTypes } from "node:module";
 import { chromium } from "playwright";
+import sharp from "sharp";
 import { conformanceBrowserLaunch } from "./conformance-browser-launch.mjs";
 
 import { OBJECTS } from "../objects.mjs";
@@ -60,6 +61,8 @@ try {
     reports.push(await runCase(planet, "initial-shell", () => proveInitialShell(browser, planet, profile)));
     reports.push(await runCase(planet, "desktop", () => proveDesktop(browser, planet, profile)));
     reports.push(await runCase(planet, "mobile", () => proveMobile(browser, planet, profile)));
+    reports.push(await runCase(planet, "dataset-interactions", () => proveDatasetInteractions(browser, planet, profile)));
+    reports.push(await runCase(planet, "dataset-interactions-dpr-2", () => proveDatasetInteractions(browser, planet, profile, 2)));
     for (const motionRequested of [false, true]) {
       for (const hidden of [true, false]) {
         reports.push(await runCase(planet, `pre-ready-${hidden ? "hidden" : "visible"}-motion-${motionRequested ? "on" : "off"}`,
@@ -130,6 +133,64 @@ async function proveInitialShell(browser, planet, profile) {
     }
     return { id: planet.id, viewport: "initial-shell", speedDisabled: supportsSpeed };
   } finally { await page.close(); }
+}
+
+async function proveDatasetInteractions(browser, planet, profile, deviceScaleFactor = 1) {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor });
+  const evidence = observePage(page, baseUrl), datasets = [];
+  try {
+    await loadPlanet(page, planet, profile);
+    await profile.pause(page);
+    const baseline = await sceneState(page, profile);
+    const geometry = ({id,interior}) => {
+      const root=document.querySelector(interior?`.${id}-cutaway`:'.planet-stage .polycss-camera');
+      const nodes=[...root.querySelectorAll('s,u')].filter(node=>getComputedStyle(node).visibility==='visible'&&node.getBoundingClientRect().width>0);
+      window.__datasetGeometryProbe=nodes;
+      return nodes.map(node=>{const r=node.getBoundingClientRect();return [r.x,r.y,r.width,r.height];});
+    };
+    for (const lens of profile.objectControls.lenses?.controls ?? []) {
+      await page.locator(`button[name="lens"][value="${lens.id}"]`).click();
+      await page.waitForFunction(({id,lens}) => window[`__${id}`].runtime.selection().committed.lensId === lens,
+        {id:planet.id,lens:lens.id});
+      // Let the authored entry flight finish before measuring a user's drag.
+      await page.waitForTimeout(750);
+      await assertLensConsistency(page, planet, profile, lens.id);
+      const isInterior = await page.locator('.planet-stage').getAttribute('data-view') === 'interior';
+      const captureName = `${planet.id}-${lens.id}-dpr-${deviceScaleFactor}`;
+      if (evidenceDirectory) await page.screenshot({path:resolve(evidenceDirectory, `${captureName}.png`)});
+      const before = await page.evaluate(geometry,{id:planet.id,interior:isInterior});
+      assert.ok(before.length,`${planet.id}/${lens.id}: rendered geometry must exist`);
+      await page.mouse.move(770,500); await page.mouse.down();
+      await page.mouse.move(880,540,{steps:20}); await page.mouse.up();
+      await page.waitForTimeout(300);
+      assert.equal(await page.evaluate(() => window.__datasetGeometryProbe.every(node => node.isConnected)), true,
+        `${planet.id}/${lens.id}: dragging retains the original geometry nodes`);
+      const after = await page.evaluate(()=>window.__datasetGeometryProbe.map(node=>{const r=node.getBoundingClientRect();return [r.x,r.y,r.width,r.height];}));
+      assert.equal(after.length,before.length,`${planet.id}/${lens.id}: dragging preserves the rendered geometry`);
+      const displacement = Math.max(...after.map((r,i)=>Math.hypot(r[0]-before[i][0],r[1]-before[i][1])));
+      assert.ok(displacement>1,`${planet.id}/${lens.id}: rendered geometry must follow camera input`);
+      let shadowPixels = null;
+      if (isInterior) {
+        const images=[];
+        for (const shadows of [false,true]) {
+          await page.evaluate(value=>{const input=document.querySelector('input[name="shadows"]');if(input.checked!==value)input.click();},shadows);
+          await page.waitForFunction(({id,value})=>window[`__${id}`].runtime.selection().committed.shadows===value,{id:planet.id,value:shadows});
+          await page.waitForTimeout(250);
+          const bytes=await page.screenshot({clip:{x:470,y:250,width:500,height:500}});
+          images.push(await sharp(bytes).ensureAlpha().raw().toBuffer());
+          if(evidenceDirectory) await page.screenshot({path:resolve(evidenceDirectory,`${captureName}-shadows-${shadows}.png`)});
+        }
+        shadowPixels=0;
+        for(let i=0;i<images[0].length;i+=4) if(images[0][i]!==images[1][i]||images[0][i+1]!==images[1][i+1]||images[0][i+2]!==images[1][i+2])shadowPixels++;
+        assert.ok(shadowPixels>200,`${planet.id}/${lens.id}: Shadows must change the rendered cutaway`);
+      }
+      const state=await sceneState(page,profile);assertSceneStructure(state,planet.id);
+      assert.equal(state.stageElements,baseline.stageElements,`${planet.id}/${lens.id}: lens and lighting preserve DOM`);
+      datasets.push({id:lens.id,interior:isInterior,geometryDisplacement:displacement,shadowPixels});
+    }
+    assertEvidence(evidence,planet.id);
+    return {id:planet.id,case:'dataset-interactions',deviceScaleFactor,datasets};
+  } finally {await page.close();}
 }
 
 async function provePreReadyTarget(browser, planet, profile, finalHidden, motionRequested) {
@@ -415,7 +476,7 @@ async function proveDesktop(browser, planet, profile) {
   const evidence = observePage(page, baseUrl);
   try {
     await loadPlanet(page, planet, profile);
-    await enableMotion(page, planet.id);
+    const motionActivation = await enableMotion(page, planet.id);
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
         // All detail leaves belong to the one object camera. Prepared paint
@@ -527,6 +588,12 @@ async function proveDesktop(browser, planet, profile) {
       pitch: bounds.defaultPitch,
       zoom: bounds.defaultZoom,
     });
+    // Empty sky leaves the current selection and camera unchanged.
+    await page.evaluate(() => {
+      window.__conformanceDeselects = 0;
+      window.__conformanceDeselectProbe = event => { window.__conformanceDeselects++; event.preventDefault(); };
+      window.addEventListener('objectdeselect', window.__conformanceDeselectProbe, { capture: true });
+    });
     const beforeEmptyDoubleClick = await profile.camera(page);
     await page.mouse.dblclick(
       flyCoordinates.empty.x,
@@ -537,14 +604,28 @@ async function proveDesktop(browser, planet, profile) {
     assert.deepEqual(
       await profile.camera(page),
       beforeEmptyDoubleClick,
-      `${planet.id}: double click outside the projected body must do nothing`,
+      `${planet.id}: empty sky must not trigger a surface flight`,
     );
 
-    await profile.setCamera(page, {
-      pitch: bounds.maximumPitch + 100,
-      zoom: bounds.maximumZoom + 100,
-    });
-    const maximum = await profile.camera(page);
+    assert.equal(await page.evaluate(() => window.__conformanceDeselects), 0,
+      `${planet.id}: empty sky must not request deselection`);
+    await page.evaluate(() => window.removeEventListener('objectdeselect', window.__conformanceDeselectProbe, { capture: true }));
+
+    // Probe both setter limits in one task, then restore the selected view.
+    // Holding the maximum dolly distance intentionally enters overview; that
+    // handoff must not race the following retained-comet/planet assertions.
+    const { maximum, minimum } = await page.evaluate(({ id, bounds }) => {
+      const camera = window[`__${id}`].camera, before = camera.state();
+      const sample = () => { const state = camera.state(); return { pitch: state.pitch, zoom: state.zoom }; };
+      try {
+        camera.setState({ controlPitch: bounds.maximumPitch + 100, zoom: bounds.maximumZoom + 100 });
+        const maximum = sample();
+        camera.setState({ controlPitch: bounds.minimumPitch - 100, zoom: bounds.minimumZoom - 100 });
+        return { maximum, minimum: sample() };
+      } finally {
+        camera.setState({ controlPitch: before.controlPitch, controlYaw: before.controlYaw, zoom: before.zoom });
+      }
+    }, { id: planet.id, bounds });
     assert.equal(maximum.pitch, bounds.pitchBounded === false
       ? bounds.maximumPitch + 100
       : bounds.maximumPitch, bounds.pitchBounded === false
@@ -552,11 +633,6 @@ async function proveDesktop(browser, planet, profile) {
       : `${planet.id}: pitch must clamp at the prepared maximum`);
     assert.equal(maximum.zoom, bounds.maximumZoom,
       `${planet.id}: zoom must clamp at the prepared maximum`);
-    await profile.setCamera(page, {
-      pitch: bounds.minimumPitch - 100,
-      zoom: bounds.minimumZoom - 100,
-    });
-    const minimum = await profile.camera(page);
     assert.equal(minimum.pitch, bounds.pitchBounded === false
       ? bounds.minimumPitch - 100
       : bounds.minimumPitch, bounds.pitchBounded === false
@@ -617,6 +693,7 @@ async function proveDesktop(browser, planet, profile) {
     return {
       id: planet.id,
       viewport: "desktop",
+      motionActivation,
       surfaceFlyTo: {
         pitchDelta: afterFlyTo.pitch - beforeFlyTo.pitch,
         zoomRatio: afterFlyTo.zoom / beforeFlyTo.zoom,
@@ -661,12 +738,15 @@ async function surfaceFlyCoordinates(page) {
     // space. Use the same prepared-triangle picker as native input.
     coordinates.surface = await page.evaluate(async ({ id, hit, preferred, moduleUrl }) => {
       const { bindPreparedSurfaceHit } = await import(moduleUrl);
-      const camera = document.querySelector('.polycss-camera');
-      const scene = document.querySelector('.polycss-scene');
-      if (scene.querySelectorAll(`.${id}-body`).length !== 1 || document.querySelectorAll('.polycss-scene').length !== 1) {
-        throw new Error('Surface qualification requires one retained body and scene');
+      const camera = document.querySelector('.planet-stage > .polycss-camera');
+      const scene = camera?.querySelector('.polycss-scene');
+      // Prepared depth groups repeat transform wrappers beneath one camera.
+      // Surface picking uses the first, retained reference body transform.
+      if (!scene || scene.querySelectorAll(`.${id}-body`).length !== 1 || document.querySelectorAll('.planet-stage > .polycss-camera').length !== 1) {
+        throw new Error('Surface qualification requires one retained camera and reference body');
       }
-      const pick = bindPreparedSurfaceHit(hit, scene.querySelector(`.${id}-body`), scene, camera);
+      const pick = bindPreparedSurfaceHit(hit, scene.querySelector(`.${id}-body`), scene, camera,
+        () => document.querySelector('.planet-stage').dataset.lens);
       const box = camera.getBoundingClientRect(), size = Math.min(box.width, box.height);
       const candidates = [preferred];
       for (const y of [.06, -.06, .12, -.12, .2, -.2, 0]) for (const x of [.06, -.06, .12, -.12, .2, -.2, 0]) {
@@ -1562,17 +1642,29 @@ async function enableMotion(page, id) {
   const panel = page.locator(".planet-settings-panel");
   const action = page.locator(".planet-settings-action");
   const motion = page.locator(".planet-motion-setting");
-  await action.click();
-  assert.equal(await panel.isVisible(), true,
-    `${id}: settings action must open the settings panel`);
   assert.equal(await motion.isChecked(), false,
     `${id}: desktop motion must be off by default`);
-  await page.locator(".planet-motion-setting-control").click();
+  const settingsHidden = await action.evaluate(button => button.hidden);
+  if (settingsHidden) {
+    assert.equal(await panel.isVisible(), false,
+      `${id}: hidden Settings must leave its panel closed`);
+    // Settings is intentionally hidden. Exercise its retained input handler,
+    // as the pre-ready cases do, without changing the shell's visibility.
+    await motion.evaluate(input => input.click());
+  } else {
+    await action.click();
+    assert.equal(await panel.isVisible(), true,
+      `${id}: settings action must open the settings panel`);
+    await page.locator(".planet-motion-setting-control").click();
+  }
   await page.waitForFunction(() => window.__cssEarth?.lifecycle === "mounted");
   assert.equal(await motion.isChecked(), true,
     `${id}: motion setting must resume the scene`);
-  await page.keyboard.press("Escape");
-  assert.equal(await panel.isVisible(), false, `${id}: Escape must close settings`);
+  if (!settingsHidden) {
+    await page.keyboard.press("Escape");
+    assert.equal(await panel.isVisible(), false, `${id}: Escape must close settings`);
+  }
+  return settingsHidden ? "retained-input" : "visible-settings";
 }
 
 async function sceneState(page, profile) {

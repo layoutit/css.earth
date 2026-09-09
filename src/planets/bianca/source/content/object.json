@@ -45,7 +45,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Published 64 × 46 × 46 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
-        "title": "Published 64 × 46 × 46 km shape approximation. The third axis repeats the minor axis by the prolate model assumption; it is not an independently measured axis. The standard grid marks unavailable mapped surface imagery, not observed terrain or albedo.",
+        "title": "Approximate shape model",
         "detail": "Measured shape",
         "thumbnail": "/scenes/bianca/bianca-model-thumbnail.webp",
         "surface": "bianca-model-surface@2x.webp",
@@ -54,7 +54,8 @@
           "id": "measured-ellipsoid",
           "path": "../manifest.json",
           "url": "https://arxiv.org/abs/2401.04634"
-        }
+        },
+        "summary": "A 64 × 46 × 46 km shape estimate. Two axes are assumed equal; gray grid: no imagery, not observed terrain."
       }
     ]
   },

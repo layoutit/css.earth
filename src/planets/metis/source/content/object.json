@@ -79,7 +79,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
-        "title": "Galileo clear-filter images mapped onto the measured 60 × 40 × 34 km reference ellipsoid. Relative image brightness is normalized with a bounded photometric approximation. Finest sampling is about 3 km/pixel; other views are coarser. Gray grid marks unavailable or unreliable imagery. This is not a resolved terrain model or calibrated albedo.",
+        "title": "SSI mosaic",
         "detail": "Galileo SSI",
         "thumbnail": "/scenes/metis/metis-normal-thumbnail.webp",
         "surface": "metis-normal-surface@2x.webp",
@@ -88,7 +88,8 @@
           "id": "c0532890500",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/galileo/"
-        }
+        },
+        "summary": "The finest source pixels span about 3 km; other views are coarser. Brightness is adjusted; the gray grid marks unreliable data."
       }
     ]
   },

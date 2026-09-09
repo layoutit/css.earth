@@ -1,0 +1,133 @@
+PDS_VERSION_ID      = PDS3                                                    
+                                                                              
+RECORD_TYPE  = FIXED_LENGTH                                                   
+RECORD_BYTES = 56                                                             
+FILE_RECORDS = 62879                                                          
+                                                                              
+^TABLE  = "usgsdem.tab"                                                       
+                                                                              
+DATA_SET_ID           = "DS1-C-MICAS-5-BORRELLY-DEM-V1.0"                     
+PRODUCT_ID            = "DS1-USGS-DEM-V1.0"                                   
+PRODUCT_NAME          = "USGS DIGITAL ELEVATION MODEL PRODUCED FROM           
+                         THE DS1 MICAS IMAGES "                               
+PRODUCT_CREATION_TIME = 2003-10-10T13:25                                      
+                                                                              
+TARGET_NAME           = "19P/BORRELLY 1 (1904 Y2)"                            
+INSTRUMENT_HOST_NAME  = "DEEP SPACE 1"                                        
+INSTRUMENT_NAME       = "MINIATURE INTEGRATED CAMERA-SPECTROMETER"            
+START_TIME            = "N/A"                                                 
+STOP_TIME             = "N/A"                                                 
+SPACECRAFT_CLOCK_START_COUNT = "N/A"                                          
+SPACECRAFT_CLOCK_STOP_COUNT  = "N/A"                                          
+                                                                              
+DESCRIPTION           = "                                                     
+  USGS digital elevation map (DEM) of the nucleus of comet 19P/Borrelly       
+  (1904 Y2) created using the MICAS image data.  The axes represent an        
+  arbitrary coordinate system based on the images used to generate the map.   
+  The X and Y axes form a grid in the plane of the sky, with their origins    
+  near the center of mass of the nucleus.  The Z direction represents the     
+  elevation of the nucleus at each corresponding grid position.  Z increases  
+  toward the observer, with its zero point in the plane that intersects the   
+  most distant visible point on the limb.                                     
+                                                                              
+  From the DEM, the surface normal vectors were computed, and the X, Y and Z  
+  coordinates of these vectors are also included in the table.                
+                                                                              
+  This file represents the consolidation of information from six separate     
+  source files, The first two contained the X and Y distances, respectively,  
+  for each grid position (with a uniform distance of 16m between grid         
+  points).  The third file contained the elevations at each of the            
+  corresponding grid positions.  The last three files contained the X, Y and  
+  Z components of the surface normal vector at each position.                 
+                                                                              
+  For each grid point, the six values were extracted from their respective    
+  files and entered on a single line in this table.  Entries that contained   
+  null values in the source files (e.g. positions that were not on the        
+  visible part of the nucleus) were not included.                             
+ "                                                                            
+                                                                              
+OBJECT        = TABLE                                                         
+  INTERCHANGE_FORMAT = ASCII                                                  
+  COLUMNS     = 6                                                             
+  ROW_BYTES   = 56                                                            
+  ROWS        = 62879                                                         
+  DESCRIPTION = "Digital elevation map and surface normals for the nucleus of 
+      Comet 19P/Borrelly"                                                     
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "X"                                                       
+    BYTES         = 5                                                         
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 1                                                         
+    FORMAT        = "I5"                                                      
+    UNIT          = "METER"                                                   
+    MINIMUM       = -2792                                                     
+    MAXIMUM       =  2248                                                     
+    DESCRIPTION   = "Distance along the X-axis from the center of the         
+      coordinate system"                                                      
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "Y"                                                       
+    BYTES         = 5                                                         
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 7                                                         
+    FORMAT        = "I5"                                                      
+    UNIT          = "METER"                                                   
+    MINIMUM       = -3944                                                     
+    MAXIMUM       =  3016                                                     
+    DESCRIPTION   = "Distance along the Y-axis from the center of the         
+      coordinate_system"                                                      
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 3                                                         
+    NAME          = "Z"                                                       
+    BYTES         = 11                                                        
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 13                                                        
+    FORMAT        = "F11.6"                                                   
+    UNIT          = "METER"                                                   
+    MINIMUM       = -103.37   /* Approximately */                             
+    MAXIMUM       = 4436.61   /* Approximately */                             
+    DESCRIPTION   = "Perpendicular distance above the (X,Y) plane"            
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 4                                                         
+    NAME          = "NX"                                                      
+    BYTES         = 9                                                         
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 26                                                        
+    FORMAT        = "F9.6"                                                    
+    DESCRIPTION   = "X-component of the unit surface normal vector"           
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 5                                                         
+    NAME          = "NY"                                                      
+    BYTES         = 9                                                         
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 36                                                        
+    FORMAT        = "F9.6"                                                    
+    DESCRIPTION   = "Y-component of the unit surface normal vector"           
+  END_OBJECT                                                                  
+                                                                              
+  OBJECT        = COLUMN                                                      
+    COLUMN_NUMBER = 6                                                         
+    NAME          = "NZ"                                                      
+    BYTES         = 9                                                         
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 46                                                        
+    FORMAT        = "F9.6"                                                    
+    DESCRIPTION   = "Z-component of the unit surface normal vector"           
+  END_OBJECT                                                                  
+                                                                              
+END_OBJECT    = TABLE                                                         
+                                                                              
+END                                                                           
+                                                                              
+                                                                              
+                                                                              

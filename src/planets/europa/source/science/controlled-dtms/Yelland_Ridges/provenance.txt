@@ -1,0 +1,8 @@
+gdalwarp -r cubic -t_srs IAU_2015:50215 /Users/jlaura/europa_dtms/DTMs/Yelland_Ridges/Yelland_Ridges.cub Yelland_Ridges.vrt
+  gdal_translate Yelland_Ridges.vrt Yelland_Ridges.tif -of COG -co COMPRESS=DEFLATE -co PREDICTOR=3 -a_srs "IAU_2015:50215"
+gdalwarp -r cubic -t_srs IAU_2015:50215 /Users/jlaura/europa_dtms/DTMs/Yelland_Ridges/Yelland_Ridges_FOM.cub Yelland_Ridges_FOM.vrt
+ gdal_translate Yelland_Ridges_FOM.vrt Yelland_Ridges_FOM.tif -of COG -co COMPRESS=DEFLATE -co PREDICTOR=3 -a_srs "IAU_2015:50215"
+gdalwarp -r cubic -t_srs IAU_2015:50215 /Users/jlaura/europa_dtms/DTMs/Yelland_Ridges/Yelland_Ridges_ClrConf.tif Yelland_Ridges_ClrConf.vrt
+ gdal_translate Yelland_Ridges_FOM.vrt Yelland_Ridges_ClrConf.tif -of COG -co COMPRESS=DEFLATE -co PREDICTOR=3 -a_srs "IAU_2015:50215"
+gdaldem hillshade Yelland_Ridges.tif Yelland_Ridges_hillshade_vrt.tif
+gdal_translate Yelland_Ridges_hillshade.tif Yelland_Ridges_hillshade.jpg -scale -ot Byte -of JPEG -outsize 100% 0 -co QUALITY=95 -a_nodata 0 -a_srs IAU_2015:50215

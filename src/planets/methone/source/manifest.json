@@ -24,6 +24,12 @@
         "type": "camera-perspective",
         "coordinates": "survey/camera-fit.json",
         "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.IMG"
       }
     },
     {
@@ -42,7 +48,13 @@
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "consumers": [
         "cassini-frames"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.LBL"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -105,8 +117,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3644,
-      "expectedSha256": "0f5330332377d51551832198922a160311d4d8f94b15c30a9873161805818e5d",
+      "expectedBytes": 3486,
+      "expectedSha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
       "purpose": "Methone source evidence or authored preparation data."
     },
     {

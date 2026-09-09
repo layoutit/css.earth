@@ -14,7 +14,13 @@
       "consumers": [
         "scene",
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif"
+      }
     },
     {
       "id": "hubble-opal-uranus-2025a-fq727n",
@@ -28,7 +34,13 @@
       "redistribution": "checked scientific archive product with full credit",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-uranus-2025a-f845m",
@@ -42,7 +54,13 @@
       "redistribution": "checked scientific archive product with full credit",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits"
+      }
     },
     {
       "id": "pds-uranus-ring-table",
@@ -273,8 +291,8 @@
     {
       "id": "uranus-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14161,
-      "expectedSha256": "9e7314e33567e25fa03580e56926f5767522af3387346c31e687604e39690709",
+      "expectedBytes": 14483,
+      "expectedSha256": "bc585a6133fb7151c1d5e32a7c06323ed86e9bf0934651f917273be49ab668b7",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",

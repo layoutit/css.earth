@@ -44,7 +44,13 @@
         ]
       },
       "coverage": "USGS ISIS display export: exact zero indicates Null and is masked; valid values starting at one remain, including dark lakes and dunes. A small southern gap receives a gray grid. Grid edges extend by less than half a source pixel beyond the poles/meridian.",
-      "photometry": "Published weighted, high-pass-sharpened ISS mosaic at 938 nm. Haze and cloud residuals, variable native resolution and image boundaries remain. This is a display-stretched infrared observation, not visible color or calibrated albedo."
+      "photometry": "Published weighted, high-pass-sharpened ISS mosaic at 938 nm. Haze and cloud residuals, variable native resolution and image boundaries remain. This is a display-stretched infrared observation, not visible color or calibrated albedo.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -105,7 +111,13 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
-      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001."
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+      }
     },
     {
       "id": "cassini-radar-midr-270",
@@ -132,7 +144,989 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
-      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001."
+      "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
+      }
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "interpolated",
+      "label": "Interpolated height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 7422253,
+      "expectedSha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtied00n270_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "interpolated",
+      "label": "Interpolated height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 7393466,
+      "expectedSha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "coverage-distance",
+      "label": "Distance to data",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Kilometres to nearest input measurement",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 6386495,
+      "expectedSha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtded00n270_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "coverage-distance",
+      "label": "Distance to data",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Kilometres to nearest input measurement",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 6529382,
+      "expectedSha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "topography",
+      "label": "Measured height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 550734,
+      "expectedSha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtfed00n270_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "topography",
+      "label": "Measured height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 532494,
+      "expectedSha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af"
+    },
+    {
+      "id": "titan-geology-source-basins-cpg",
+      "path": "geology/Basins.cpg",
+      "expectedBytes": 5,
+      "expectedSha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/d09e5eac-2d61-4ff7-acd8-44a56f88b416/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-basins-dbf",
+      "path": "geology/Basins.dbf",
+      "expectedBytes": 219,
+      "expectedSha256": "3e705b42205fcf17781ffc7e59a84efdd5c8720cd4516f01dcb541fda2f5fef0",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/03f4ae5c-fe8b-47d3-add3-b8ff1f6aea7a/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-basins-lyr",
+      "path": "geology/Basins.lyr",
+      "expectedBytes": 6656,
+      "expectedSha256": "67cdab488d612a0234bebbf5f0a2a86d961ff12b6224f1d1348bfb60b5cdc05b",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/7e33341a-4218-4ba8-8b5d-f4789d212171/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-basins-prj",
+      "path": "geology/Basins.prj",
+      "expectedBytes": 158,
+      "expectedSha256": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/8f69ee44-75fa-42d2-8216-1f134f882a6d/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-basins-shp",
+      "path": "geology/Basins.shp",
+      "expectedBytes": 1829768,
+      "expectedSha256": "ade414034e43c25813e8a5a4cc0659ca51ed49011d38aae6f38eb417092e17a6",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/6904cb58-5032-4ae0-8b9c-961c3d5d363c/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-basins-shp-xml",
+      "path": "geology/Basins.shp.xml",
+      "expectedBytes": 23723,
+      "expectedSha256": "c9d4fbf24df7c30e2132aaa2a7c89aa68a38c824c0c1c986c1996dc1fd26b7f3",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/e2d84a57-6b52-48b4-b5e0-0df9661c5bd9/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-basins-shx",
+      "path": "geology/Basins.shx",
+      "expectedBytes": 108,
+      "expectedSha256": "6f1a2d7687485679530aa8c895b9df1adb9c4fc67dda44cdfc43a33a8511e7f6",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/e0a9d719-1156-46da-826e-e0857ae6075b/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-craters-cpg",
+      "path": "geology/Craters.cpg",
+      "expectedBytes": 5,
+      "expectedSha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/dcec9fde-5839-4740-8ca1-dd830bedc594/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-craters-dbf",
+      "path": "geology/Craters.dbf",
+      "expectedBytes": 219,
+      "expectedSha256": "6d645098235e8f0b6d37780a5927929b36b025f8a3d2f2542496d2f55d1daace",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/e4f40ffa-b769-4e1c-bc45-1035eb5e7b75/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-craters-lyr",
+      "path": "geology/Craters.lyr",
+      "expectedBytes": 7168,
+      "expectedSha256": "662b650d112f43b4782ea2d8eb5e36864573833a95e02a97ae57a05d8abe9d3b",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/43b75cb8-4885-4e52-b055-b4630e51ecfb/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-craters-prj",
+      "path": "geology/Craters.prj",
+      "expectedBytes": 158,
+      "expectedSha256": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/d7b8af2c-34b6-4ef2-b68f-38a9a60e803b/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-craters-shp",
+      "path": "geology/Craters.shp",
+      "expectedBytes": 107712,
+      "expectedSha256": "dd30b573d521acb25e839cb85e6789ba84a5ecafeb2ddfc221f8e0c9aae08c09",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/9333aa1c-2b7f-440d-88f1-b1a8a0d962e7/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-craters-shp-xml",
+      "path": "geology/Craters.shp.xml",
+      "expectedBytes": 23723,
+      "expectedSha256": "740d3b90fe8526fa6969ec3af26c141934f92b086582b778efc300f0158530c4",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/41cd4ae0-961e-46ce-94bb-87cf5801d67d/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-craters-shx",
+      "path": "geology/Craters.shx",
+      "expectedBytes": 108,
+      "expectedSha256": "e3ebe314234f20177b73d293376f347f4c0fbf1131f1724b5da2a38a94ee46cc",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/67f31f03-fcbb-4070-9593-0e5b828a61b0/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-dunes-cpg",
+      "path": "geology/Dunes.cpg",
+      "expectedBytes": 5,
+      "expectedSha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/2e594fe5-6294-490c-8d06-ab896683ba6c/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-dunes-dbf",
+      "path": "geology/Dunes.dbf",
+      "expectedBytes": 219,
+      "expectedSha256": "f4a01e3798c7604114f66e971af6eb30ed3c7b5170aeab19e61cb518e5f66839",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/855c6529-02d8-4bf3-add6-2f6ac0c6ddfe/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-dunes-lyr",
+      "path": "geology/Dunes.lyr",
+      "expectedBytes": 7168,
+      "expectedSha256": "8e71a42a1a641b4e46456d81f96b0f1037ce99434834ea68ae01d0631313db78",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/f66f8a92-e96f-40f4-8960-e29a78219735/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-dunes-prj",
+      "path": "geology/Dunes.prj",
+      "expectedBytes": 158,
+      "expectedSha256": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/5f45d94c-45cb-4e4d-b0cc-2278f5ba0cc0/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-dunes-shp",
+      "path": "geology/Dunes.shp",
+      "expectedBytes": 2320712,
+      "expectedSha256": "71bd90eb73d0cd617f22065d8849979caabeeb87e9ec6af4685cee0f1ee85ae9",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/675e1cd5-93c1-4677-8dec-c137b5faf59d/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-dunes-shp-xml",
+      "path": "geology/Dunes.shp.xml",
+      "expectedBytes": 23723,
+      "expectedSha256": "6810ba47449352f12bed589ad460c27a50ffd75eca29301a23404cacecd2aaac",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/26431bb3-1f48-4096-8e75-ab65389b6476/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-dunes-shx",
+      "path": "geology/Dunes.shx",
+      "expectedBytes": 108,
+      "expectedSha256": "16a8406fd7a493688fdaac011f53a2db721e536aa3ff4db31d60fd610129fe65",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/3cfe7617-db1c-4bdf-afa3-b50528678731/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-labyrinth-cpg",
+      "path": "geology/Labyrinth.cpg",
+      "expectedBytes": 5,
+      "expectedSha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/46dfb73b-109f-4a89-b1fe-8f65a7b8785b/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-labyrinth-dbf",
+      "path": "geology/Labyrinth.dbf",
+      "expectedBytes": 219,
+      "expectedSha256": "e3d7a5fc703f480ed902888da037af6ac96e1cdb60c3330478796ad3997f206d",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/70c41ef9-7db3-46ca-943b-6c75bd7ecf5e/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-labyrinth-lyr",
+      "path": "geology/Labyrinth.lyr",
+      "expectedBytes": 7168,
+      "expectedSha256": "777ea068f39f826ea62d53ff6fd7ae37f464427b0398e2c29eb6f4976f7c3dfb",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/e121350e-8bb2-41ee-a891-2467c095219c/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-labyrinth-prj",
+      "path": "geology/Labyrinth.prj",
+      "expectedBytes": 158,
+      "expectedSha256": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/b2e5b228-62e2-4728-b58d-8a00f7e0ac44/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-labyrinth-shp",
+      "path": "geology/Labyrinth.shp",
+      "expectedBytes": 614880,
+      "expectedSha256": "89e17602555e130be952ce116805abf59a6108420758ab11def14e44014c7d27",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/52590549-8788-4b27-881c-481c4db14064/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-labyrinth-shp-xml",
+      "path": "geology/Labyrinth.shp.xml",
+      "expectedBytes": 23723,
+      "expectedSha256": "794a7806f6fee33364384b98b2a3176ae5c628800ebc6d376dbc46372bbb7642",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/ed9fcb9a-2fb1-4e9c-b903-38847bd70031/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-labyrinth-shx",
+      "path": "geology/Labyrinth.shx",
+      "expectedBytes": 108,
+      "expectedSha256": "2104afea9a8927278ed1e18e7d6ef96bd65c16ef0579705091f364046db489c4",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/2b04b3cc-c5ad-43dd-b5f8-8a7b15c4555c/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-mountains-cpg",
+      "path": "geology/Mountains.cpg",
+      "expectedBytes": 5,
+      "expectedSha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/aee0b88b-817f-4ed9-9974-f6228799d7dd/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-mountains-dbf",
+      "path": "geology/Mountains.dbf",
+      "expectedBytes": 219,
+      "expectedSha256": "f04c8f03e3ae097a2ed0e65bff9b47a8485ce24ef9b986716d7d637b26cec411",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/7f32a524-89b3-434b-b4c8-f40d02b694ab/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-mountains-lyr",
+      "path": "geology/Mountains.lyr",
+      "expectedBytes": 7168,
+      "expectedSha256": "38b788b2c4d8656cb92a5d7ff23129a0b807497f8393378cb672af7f718f37b2",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/48a5d71a-6bb0-45bd-a500-7dff4fee1c70/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-mountains-prj",
+      "path": "geology/Mountains.prj",
+      "expectedBytes": 158,
+      "expectedSha256": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/80a83a32-c94a-468a-8d6f-71feda93f6f2/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-mountains-shp",
+      "path": "geology/Mountains.shp",
+      "expectedBytes": 7141100,
+      "expectedSha256": "3c0cd9c0c7b786c5970b0f9935fb226a2b0933d563581c176a5ffcccaafc4aa6",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/7385d31f-3d0c-4e6e-9ee0-c71689043e77/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-mountains-shp-xml",
+      "path": "geology/Mountains.shp.xml",
+      "expectedBytes": 23723,
+      "expectedSha256": "83fa31b8fee51f31f1f2e910cdaaf908a82ff230941391e30c4c241ee1083be6",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/80d59d4c-e7d0-4102-aee6-9d99ba66f8ce/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-mountains-shx",
+      "path": "geology/Mountains.shx",
+      "expectedBytes": 108,
+      "expectedSha256": "a79b1fb02cb4ed6afaacb15cfe26ec4a31b76e71f3343b36ff8a1782c195d527",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/28b6de37-243f-470d-a3fa-2e8561afa288/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-plains-3-cpg",
+      "path": "geology/Plains_3.cpg",
+      "expectedBytes": 5,
+      "expectedSha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/9d02a253-ac4e-4ecd-a14f-9a8b55aa32cf/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-plains-3-dbf",
+      "path": "geology/Plains_3.dbf",
+      "expectedBytes": 558,
+      "expectedSha256": "ef09274bf4606b8d3bdf3cd5b27eba04ca8f0405c1a12f9aa7f7b441bc68b122",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/827c6cdc-a23f-4e3f-97c2-cffc95f4a8ad/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-plains-3-lyr",
+      "path": "geology/Plains_3.lyr",
+      "expectedBytes": 7168,
+      "expectedSha256": "624484b136094d7085712532cf3fa82a47f4e2def62678bfaa4d61a28b499b1d",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/4de3c710-fb38-4287-996c-7ceab2e86147/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-plains-3-prj",
+      "path": "geology/Plains_3.prj",
+      "expectedBytes": 158,
+      "expectedSha256": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/6c0ece97-01a1-411b-bd35-cf6f4ec8e2f0/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-plains-3-shp",
+      "path": "geology/Plains_3.shp",
+      "expectedBytes": 9504948,
+      "expectedSha256": "894e84153cedf0a2d0709b95cdd05b1b14a567bd4318f66bb017c86782f8fa7c",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/6fb8f934-8de2-4cb1-afbd-8e17ec245386/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-plains-3-shp-xml",
+      "path": "geology/Plains_3.shp.xml",
+      "expectedBytes": 25862,
+      "expectedSha256": "2fb313f46a4107c5c39bc9f125cb2b39a2b3d71f0b6eb5f7e8e16bdb2ca929bd",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/32376b8e-4968-466f-8006-55259f0aa69c/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-geology-source-plains-3-shx",
+      "path": "geology/Plains_3.shx",
+      "expectedBytes": 132,
+      "expectedSha256": "7562f9fc44ea9644408558b546b94c4dda1697019edab25291a145bad80095b1",
+      "origin": "https://data.mendeley.com/public-files/datasets/f6jrtyfp66/files/178ca2a3-db16-426c-bfab-d74d893036c4/file_downloaded",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Download the original version-2 release file and verify its SHA-256.",
+      "redistribution": "Original source; prepared raster is derived from these unit polygons.",
+      "consumers": [
+        "geology-source"
+      ]
+    },
+    {
+      "id": "titan-global-geomorphology-grid",
+      "path": "geology/titan-geologic-units.tif",
+      "expectedBytes": 192457,
+      "expectedSha256": "815d7afab1d8e401714a3a141595d161e962ef98421632c77b8fe6002945fb9b",
+      "origin": "https://doi.org/10.17632/f6jrtyfp66.2",
+      "credit": "Ashley Schoenfeld; Lopes et al. (2020); NASA/JPL-Caltech/ASU",
+      "license": "CC BY 4.0; retain dataset and paper citations, indicate preparation changes",
+      "licenseEvidence": [
+        "https://creativecommons.org/licenses/by/4.0/",
+        "https://doi.org/10.17632/f6jrtyfp66.2"
+      ],
+      "acquisition": "Checked-in compact lossless grid; reproduce with tools/objects/acquisition/geology-grid.py source/geology/prepare-grid.json.",
+      "redistribution": "Derived pixel-center unit raster; map palette adapted from NASA/JPL PIA23174.",
+      "consumers": [
+        "geology"
+      ],
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2575000
+      },
+      "coverage": "Interpreted global geology; holes and unit conflicts withheld. This is not a direct-observation coverage map."
     }
   ],
   "generatedIntermediates": [],
@@ -169,8 +1163,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2146,
-      "expectedSha256": "df0ff235ffbc4836bcdb60d3931f7bc34bb29284b206d9b14c7236bf727d5b0c",
+      "expectedBytes": 11481,
+      "expectedSha256": "baad0759b526300aab67e29d536eee12aead0e301e773ef5ca1ad85dad7d771e",
       "purpose": "Authored preparation, shared source licensing or editorial content."
     },
     {
@@ -181,8 +1175,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1242,
-      "expectedSha256": "2a541c1c03ffab4df5f04302801b2f84525bd6a3b0526ae009a1381b8a4a9bf6",
+      "expectedBytes": 18519,
+      "expectedSha256": "8b24b84b948b215263deb57ad0f22dab71d3a62c8cbbb6ccd6540eb653051c18",
       "purpose": "Authored preparation, shared source licensing or editorial content."
     },
     {
@@ -193,8 +1187,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 8031,
-      "expectedSha256": "d24bbb16dd98c8baac6f94f865b28dce95547ee882026e93e1f2db4f0a82a77e",
+      "expectedBytes": 14398,
+      "expectedSha256": "f37f24e3d98d94c6fd18496b7bbd168a13a4ae5ca8344a607180c24b3dfad287",
       "purpose": "Authored preparation, shared source licensing or editorial content."
     },
     {
@@ -215,6 +1209,127 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1087,
       "expectedSha256": "ac7aa2fd6d80d4e2368427a1e035a1f4eb9d107689db48c6f948f456759edce4"
+    },
+    {
+      "path": "science/b2-intake/titan_topo_corlies.zip",
+      "origin": "https://data.astro.cornell.edu/titan_topo_corlies/titan_topo_corlies.zip",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 27504153,
+      "expectedSha256": "b398841e75c879240d4aaeabf3156478fcc2ef1342d449b36975644380ad2659"
+    },
+    {
+      "path": "science/b2-intake/topo_4PPD.cub",
+      "origin": "https://data.astro.cornell.edu/titan_topo_corlies/full_dataset/topo_4PPD.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 4213993,
+      "expectedSha256": "be033aa847cb985503061d51c468815e8270716b42ee105dcabb5bdf070c1c39"
+    },
+    {
+      "path": "science/b2-intake/topo_4PPD_interp.cub",
+      "origin": "https://data.astro.cornell.edu/titan_topo_corlies/full_dataset/topo_4PPD_interp.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 4213993,
+      "expectedSha256": "f0399e3010c73e10b5582d1e73114e46a24304923d446b6f88029928ac6c0ddd"
+    },
+    {
+      "path": "science/b2-intake/GTBED00N090_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N090_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13776,
+      "expectedSha256": "8258fdc14b5210bf412dcab924bd561f65d8d19d114b8371a9648f9e4c086f3e"
+    },
+    {
+      "path": "science/b2-intake/GTBED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N090_T126_V01.IMG.gz",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 142116,
+      "expectedSha256": "f90602fbc98f913c63f45933255f055da41e81cf52df1f7ff9ce5fa3866844e1"
+    },
+    {
+      "path": "science/b2-intake/GTBED00N270_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N270_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13493,
+      "expectedSha256": "8f9296fbd804c82e837b7a8e45abd7f6b13ec60a2ad030c4b2d56e3f05a71d0a"
+    },
+    {
+      "path": "science/b2-intake/GTBED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N270_T126_V01.IMG.gz",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 144329,
+      "expectedSha256": "5933680ce77dd59ceb379d976bd33c98c025b3cadca2f2ba14151c8ff44e5872"
+    },
+    {
+      "path": "science/b2-intake/GTIED00N090_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 3888,
+      "expectedSha256": "714ebd035a2d9b1829cb02658f278b22f63f91300bc9ca4bb3b4c7b4afc8ded7"
+    },
+    {
+      "path": "science/b2-intake/GTIED00N270_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N270_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 3892,
+      "expectedSha256": "b34f5b0059f4c1559e7630f22e64be39f6dec97a2fe24c144c3a5ec905a6129f"
+    },
+    {
+      "path": "science/b2-intake/GTDED00N090_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 3815,
+      "expectedSha256": "566cdb957317604356410ef7c1d76b1c2e87f198a10d8d0c13178122e615dc05"
+    },
+    {
+      "path": "science/b2-intake/GTDED00N270_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N270_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 3819,
+      "expectedSha256": "4caace4dc3fc65bee80a1f9ec5764610f42dfff491ac344f348b3b24c2f2b45b"
+    },
+    {
+      "path": "science/b2-intake/GTFED00N090_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13672,
+      "expectedSha256": "b2243eb0bfcb9aaa9fbe42e738746940bf4c45f6c4eaf4ef3b30b9aecd774cf7"
+    },
+    {
+      "path": "science/b2-intake/GTFED00N270_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N270_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13389,
+      "expectedSha256": "3cce9c43597f7a67430f7d0e4ad327bda4daa5d328d275aad8ba416a07a432eb"
+    },
+    {
+      "path": "validation/b2-scalar-anchors.json",
+      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
+      "expectedBytes": 10497,
+      "expectedSha256": "f80d63f678d46b8cc6e060e84803bc7c8620dc9b5ea94c3771995ae16f99c926"
+    },
+    {
+      "path": "geology/prepare-grid.json",
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 3809,
+      "expectedSha256": "312121d628434f15bf6fb26805d9596f8842ad9ae59c908bf95c9627aeaad2be"
+    },
+    {
+      "path": "geology/grid-receipt.json",
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 1189,
+      "expectedSha256": "e55da4f9cf857175d762542ff4cc0be84d943f3fe9e7b8a27c0c255bd06ceeb6"
+    },
+    {
+      "path": "geology/release-files.json",
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 11880,
+      "expectedSha256": "606dd98e97f58ee3e01ef42a6fa09c13d16037b5d449962b560d199f09169bb4"
+    },
+    {
+      "path": "geology/README.md",
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 2206,
+      "expectedSha256": "99b6b5aa300db84639f6aff7a5c744cbb3d310ed18d3bd00526fa8d741a8702d"
     }
   ]
 }

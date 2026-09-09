@@ -1,0 +1,267 @@
+{
+  "id": "comet-8p",
+  "source": {
+    "path": "shape/model.json",
+    "sha256": "5e77878847b22470f97526a424915efd34a6feef44d11482b2104b320c33d12e",
+    "vertices": 2052,
+    "faces": 4096
+  },
+  "prepared": {
+    "path": "prepared/terrain.json",
+    "sha256": "9749a761dea21bca4bba864d6e969e8728aea1baff72a18429eb1cd0075e477d",
+    "faces": 1000
+  },
+  "method": "Six orthographic +/-XYZ views; first surface intersection from outside the source bounding box; pixel-centered regular grids",
+  "gridPerView": [
+    96,
+    96
+  ],
+  "boundingBoxPadding": 1.04,
+  "totalRays": 55296,
+  "interpretation": "Sampled line-of-sight range differences in meters, conditional on both meshes being hit. Silhouette disagreements are reported separately. These are not exhaustive geometric error bounds or observational uncertainties.",
+  "raySidedness": "Two-sided geometry intersections; painted-side visibility and browser targeting are qualified separately.",
+  "sourceBoundsMeters": [
+    [
+      -2933.226197215643,
+      -2656.3132345414388,
+      -2656.3132345414388
+    ],
+    [
+      4656.240187188469,
+      2656.3132345414388,
+      2656.3132345414388
+    ]
+  ],
+  "views": [
+    {
+      "axis": "x",
+      "viewingFromSign": -1,
+      "bothHit": 6609,
+      "bothMiss": 2540,
+      "sourceOnly": 67,
+      "reducedOnly": 0,
+      "rangeDifferenceMeters": {
+        "samples": 6609,
+        "mean": 27.471335319046133,
+        "median": 20.892300011566476,
+        "p95": 80.18369076220188,
+        "max": 487.395571249388
+      },
+      "largestRangeDifference": {
+        "gridCell": [
+          75,
+          84
+        ],
+        "rangeDifferenceMeters": 487.395571249388,
+        "sourcePoint": [
+          -612.0939416520268,
+          1582.7199689142742,
+          2100.7010496498547
+        ],
+        "preparedPoint": [
+          -124.69837040263883,
+          1582.7199689142742,
+          2100.7010496498547
+        ],
+        "sourcePointToPreparedSurfaceMeters": 23.378982991009057,
+        "preparedPointToSourceSurfaceMeters": 16.02455738714162
+      }
+    },
+    {
+      "axis": "x",
+      "viewingFromSign": 1,
+      "bothHit": 6609,
+      "bothMiss": 2540,
+      "sourceOnly": 67,
+      "reducedOnly": 0,
+      "rangeDifferenceMeters": {
+        "samples": 6609,
+        "mean": 35.4268123515168,
+        "median": 22.36837165904035,
+        "p95": 98.27484425108014,
+        "max": 1601.2081379862848
+      },
+      "largestRangeDifference": {
+        "gridCell": [
+          30,
+          56
+        ],
+        "rangeDifferenceMeters": 1601.2081379862848,
+        "sourcePoint": [
+          3709.9646817147277,
+          -1007.185434763629,
+          489.2043540280481
+        ],
+        "preparedPoint": [
+          2108.756543728443,
+          -1007.185434763629,
+          489.2043540280481
+        ],
+        "sourcePointToPreparedSurfaceMeters": 4.433730967028612,
+        "preparedPointToSourceSurfaceMeters": 16.006358201953297
+      }
+    },
+    {
+      "axis": "y",
+      "viewingFromSign": -1,
+      "bothHit": 5476,
+      "bothMiss": 3682,
+      "sourceOnly": 58,
+      "reducedOnly": 0,
+      "rangeDifferenceMeters": {
+        "samples": 5476,
+        "mean": 28.596405935404707,
+        "median": 20.57760770482855,
+        "p95": 89.6691952193487,
+        "max": 540.9983790109818
+      },
+      "largestRangeDifference": {
+        "gridCell": [
+          65,
+          4
+        ],
+        "rangeDifferenceMeters": 540.9983790109818,
+        "sourcePoint": [
+          -2715.0290386640245,
+          -288.53841996885603,
+          1007.1854347636287
+        ],
+        "preparedPoint": [
+          -2715.0290386640245,
+          252.45995904212577,
+          1007.1854347636287
+        ],
+        "sourcePointToPreparedSurfaceMeters": 32.595570571043446,
+        "preparedPointToSourceSurfaceMeters": 3.1694030105961835
+      }
+    },
+    {
+      "axis": "y",
+      "viewingFromSign": 1,
+      "bothHit": 5476,
+      "bothMiss": 3682,
+      "sourceOnly": 58,
+      "reducedOnly": 0,
+      "rangeDifferenceMeters": {
+        "samples": 5476,
+        "mean": 27.789848794319322,
+        "median": 21.6233631162213,
+        "p95": 80.01350199625631,
+        "max": 469.6106308155868
+      },
+      "largestRangeDifference": {
+        "gridCell": [
+          83,
+          54
+        ],
+        "rangeDifferenceMeters": 469.6106308155868,
+        "sourcePoint": [
+          1395.9319195548692,
+          254.20656295480694,
+          2043.14759623479
+        ],
+        "preparedPoint": [
+          1395.9319195548692,
+          -215.40406786077983,
+          2043.14759623479
+        ],
+        "sourcePointToPreparedSurfaceMeters": 25.26349432353086,
+        "preparedPointToSourceSurfaceMeters": 2.3780922845219674
+      }
+    },
+    {
+      "axis": "z",
+      "viewingFromSign": -1,
+      "bothHit": 5468,
+      "bothMiss": 3682,
+      "sourceOnly": 66,
+      "reducedOnly": 0,
+      "rangeDifferenceMeters": {
+        "samples": 5468,
+        "mean": 28.81576657719575,
+        "median": 19.919702191667966,
+        "p95": 88.77635090309923,
+        "max": 582.7333987976654
+      },
+      "largestRangeDifference": {
+        "gridCell": [
+          65,
+          39
+        ],
+        "rangeDifferenceMeters": 582.7333987976654,
+        "sourcePoint": [
+          2300.3433303630254,
+          -489.20435402804844,
+          -385.56810701768154
+        ],
+        "preparedPoint": [
+          2300.3433303630254,
+          -489.20435402804844,
+          197.16529177998382
+        ],
+        "sourcePointToPreparedSurfaceMeters": 18.057635994761135,
+        "preparedPointToSourceSurfaceMeters": 21.79017153533713
+      }
+    },
+    {
+      "axis": "z",
+      "viewingFromSign": 1,
+      "bothHit": 5468,
+      "bothMiss": 3682,
+      "sourceOnly": 66,
+      "reducedOnly": 0,
+      "rangeDifferenceMeters": {
+        "samples": 5468,
+        "mean": 27.088773102720175,
+        "median": 20.03151647203231,
+        "p95": 82.86728152360774,
+        "max": 469.6106308155613
+      },
+      "largestRangeDifference": {
+        "gridCell": [
+          54,
+          12
+        ],
+        "rangeDifferenceMeters": 469.6106308155613,
+        "sourcePoint": [
+          1395.9319195548692,
+          -2043.14759623479,
+          254.20656295480694
+        ],
+        "preparedPoint": [
+          1395.9319195548692,
+          -2043.14759623479,
+          -215.40406786075437
+        ],
+        "sourcePointToPreparedSurfaceMeters": 25.263494323530846,
+        "preparedPointToSourceSurfaceMeters": 2.378092284523532
+      }
+    }
+  ],
+  "rangeDifferenceMeters": {
+    "samples": 35106,
+    "mean": 29.344015604867916,
+    "median": 20.914287076038818,
+    "p95": 86.6397028544634,
+    "max": 1601.2081379862848
+  },
+  "surfaceDistances": {
+    "sourceToPrepared": {
+      "sampling": "Every source vertex and source face centroid; unweighted by face area",
+      "samples": 6148,
+      "mean": 15.555421770670948,
+      "median": 15.185164872698918,
+      "p95": 31.991859036451885,
+      "max": 47.65677767209558
+    },
+    "preparedToSource": {
+      "sampling": "Every prepared face centroid and its three edge midpoints; unweighted by face area",
+      "samples": 4000,
+      "mean": 13.789459991390213,
+      "median": 13.463715518455787,
+      "p95": 31.290629101921184,
+      "max": 47.96652817173979
+    },
+    "interpretation": "Euclidean closest-point distances in meters on finite sample sets. This is not an exhaustive Hausdorff bound or the uncertainty of the underlying observations."
+  }
+}

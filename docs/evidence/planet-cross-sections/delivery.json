@@ -1,0 +1,164 @@
+{
+  "createdAt": "2026-09-09T13:12:32.002Z",
+  "freshInstall": {
+    "installed": 283,
+    "reused": 0
+  },
+  "verifiedBytes": 90012008,
+  "changedHeads": [
+    {
+      "filename": "earth-interior-mantle-poles@2x.webp",
+      "status": 200,
+      "bytes": 15634,
+      "sha256": "9263d70f1b5f2049b384ce4dc1930d59338e25bed814255b96d672c96eadb232",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9263d70f1b5f2049b384ce4dc1930d59338e25bed814255b96d672c96eadb232/earth-interior-mantle-poles@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-core-poles@2x.webp",
+      "status": 200,
+      "bytes": 17562,
+      "sha256": "ae4297773c515c0a3c6531b0121480f88bb0798fc5e9f7ebb6bf044f649f91e4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ae4297773c515c0a3c6531b0121480f88bb0798fc5e9f7ebb6bf044f649f91e4/earth-interior-outer-core-poles@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-lit-page-1@2x.webp",
+      "status": 200,
+      "bytes": 174476,
+      "sha256": "aa7475954004b33f8ae658927083ae5160931413c37eb677eea3bc573d3bdc3d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/aa7475954004b33f8ae658927083ae5160931413c37eb677eea3bc573d3bdc3d/earth-interior-outer-lit-page-1@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-lit-page-2@2x.webp",
+      "status": 200,
+      "bytes": 417014,
+      "sha256": "608b68a54fa6643965c271a3df5b9c0b0e806b0ed89310174a2b349db6e99a2b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/608b68a54fa6643965c271a3df5b9c0b0e806b0ed89310174a2b349db6e99a2b/earth-interior-outer-lit-page-2@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-lit-page-3@2x.webp",
+      "status": 200,
+      "bytes": 447968,
+      "sha256": "87fa00d276b1db709d28976e6f0ed39c2a321f45a796b94fb3abd12c0bfbbd1e",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/87fa00d276b1db709d28976e6f0ed39c2a321f45a796b94fb3abd12c0bfbbd1e/earth-interior-outer-lit-page-3@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-lit-page-4@2x.webp",
+      "status": 200,
+      "bytes": 310196,
+      "sha256": "4e4c6abfb7c058243f0f51caa369eee97df6cc15c327527638fcf9d85ef58393",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4e4c6abfb7c058243f0f51caa369eee97df6cc15c327527638fcf9d85ef58393/earth-interior-outer-lit-page-4@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-lit-page-5@2x.webp",
+      "status": 200,
+      "bytes": 137490,
+      "sha256": "2662342d6d126e686bb10de66a1ded2539eed14c357207ec467ea5b20961df86",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2662342d6d126e686bb10de66a1ded2539eed14c357207ec467ea5b20961df86/earth-interior-outer-lit-page-5@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-lit-page-6@2x.webp",
+      "status": 200,
+      "bytes": 22678,
+      "sha256": "61e0174bceeff57e8a1b942dba5a022da86af0550d4136bd5902ca7e928663b5",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/61e0174bceeff57e8a1b942dba5a022da86af0550d4136bd5902ca7e928663b5/earth-interior-outer-lit-page-6@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-lit-poles@2x.webp",
+      "status": 200,
+      "bytes": 117038,
+      "sha256": "84e782f5f81cfef6f3e98bc47fc27963d5d60db8f6580175e7b259115783927e",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/84e782f5f81cfef6f3e98bc47fc27963d5d60db8f6580175e7b259115783927e/earth-interior-outer-lit-poles@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-lit@2x.webp",
+      "status": 200,
+      "bytes": 82046,
+      "sha256": "9f8545f8be6556142fa8c55d90296efb6b2b1d0e6697749de396c16ebbcbff4e",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9f8545f8be6556142fa8c55d90296efb6b2b1d0e6697749de396c16ebbcbff4e/earth-interior-outer-lit@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-page-1@2x.webp",
+      "status": 200,
+      "bytes": 298550,
+      "sha256": "5d72b32ded9bab19b9e7ce50895dad66905049d4188c6986c625446171280a49",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5d72b32ded9bab19b9e7ce50895dad66905049d4188c6986c625446171280a49/earth-interior-outer-page-1@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-page-2@2x.webp",
+      "status": 200,
+      "bytes": 653024,
+      "sha256": "2fe3d1c0e9c8ac9fa4981b459850a2729c4f80dc04ad5c7faf7c0736c81a730f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2fe3d1c0e9c8ac9fa4981b459850a2729c4f80dc04ad5c7faf7c0736c81a730f/earth-interior-outer-page-2@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-page-3@2x.webp",
+      "status": 200,
+      "bytes": 685210,
+      "sha256": "66b0d66376641edd49f34c3928e6613ec5e03de295432dc1a8459eb5f692560c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/66b0d66376641edd49f34c3928e6613ec5e03de295432dc1a8459eb5f692560c/earth-interior-outer-page-3@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-page-4@2x.webp",
+      "status": 200,
+      "bytes": 492840,
+      "sha256": "014718f481eca632722afdac3b128676f1e9553c5e77c25725d77a7c19cebcc5",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/014718f481eca632722afdac3b128676f1e9553c5e77c25725d77a7c19cebcc5/earth-interior-outer-page-4@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-page-5@2x.webp",
+      "status": 200,
+      "bytes": 216534,
+      "sha256": "eaeea5a512bb7f3366f5e95c7850689e1b1e1f4720902f7d8498c90a525ad58f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/eaeea5a512bb7f3366f5e95c7850689e1b1e1f4720902f7d8498c90a525ad58f/earth-interior-outer-page-5@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-page-6@2x.webp",
+      "status": 200,
+      "bytes": 33860,
+      "sha256": "12eabd218c58c6bd270f792add1a1274551f08be1c20c0e44ccaf513422554f4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/12eabd218c58c6bd270f792add1a1274551f08be1c20c0e44ccaf513422554f4/earth-interior-outer-page-6@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer-poles@2x.webp",
+      "status": 200,
+      "bytes": 147088,
+      "sha256": "9c08ee340e835dfd554d665c437ebd6be148d43386214dc561900da81a94c4e2",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9c08ee340e835dfd554d665c437ebd6be148d43386214dc561900da81a94c4e2/earth-interior-outer-poles@2x.webp"
+    },
+    {
+      "filename": "earth-interior-outer@2x.webp",
+      "status": 200,
+      "bytes": 140768,
+      "sha256": "ada878a32a6f457fddaf107ddd39843364ab8cfbe46a8f8ef4c83e3a4a57e797",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ada878a32a6f457fddaf107ddd39843364ab8cfbe46a8f8ef4c83e3a4a57e797/earth-interior-outer@2x.webp"
+    },
+    {
+      "filename": "mercury-interior-outer-unlit-poles.webp",
+      "status": 200,
+      "bytes": 61350,
+      "sha256": "23d673810118f32924d150a77f4388e2102e46b040380da6196e7c969aff567f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/23d673810118f32924d150a77f4388e2102e46b040380da6196e7c969aff567f/mercury-interior-outer-unlit-poles.webp"
+    },
+    {
+      "filename": "mercury-interior-outer-unlit-poles@2x.webp",
+      "status": 200,
+      "bytes": 213934,
+      "sha256": "4e4bfda27a492e5cb77ecd93748228cf9c0e3dca02fc2b8e5c472c0ea81df46e",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4e4bfda27a492e5cb77ecd93748228cf9c0e3dca02fc2b8e5c472c0ea81df46e/mercury-interior-outer-unlit-poles@2x.webp"
+    },
+    {
+      "filename": "mercury-interior-outer-unlit.webp",
+      "status": 200,
+      "bytes": 1316058,
+      "sha256": "9be6b85b6df8ec4f91f0bdcc9129b83b46a19e01c36ba5cceef89c3e96a641a7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9be6b85b6df8ec4f91f0bdcc9129b83b46a19e01c36ba5cceef89c3e96a641a7/mercury-interior-outer-unlit.webp"
+    },
+    {
+      "filename": "mercury-interior-outer-unlit@2x.webp",
+      "status": 200,
+      "bytes": 5340028,
+      "sha256": "c483500b25a94b8be4dcd6490a14d346865c3dededb2ba5d0a6fd073b902bdf2",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c483500b25a94b8be4dcd6490a14d346865c3dededb2ba5d0a6fd073b902bdf2/mercury-interior-outer-unlit@2x.webp"
+    }
+  ]
+}

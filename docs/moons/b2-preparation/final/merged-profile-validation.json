@@ -1,0 +1,133 @@
+{
+  "status": "PASS",
+  "profiles": [
+    {
+      "id": "phobos",
+      "path": "src/planets/phobos/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-byte-monochrome"
+      ]
+    },
+    {
+      "id": "deimos",
+      "path": "src/planets/deimos/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "image-monochrome-no-data"
+      ]
+    },
+    {
+      "id": "dimorphos",
+      "path": "src/planets/dimorphos/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": []
+    },
+    {
+      "id": "io",
+      "path": "src/planets/io/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-rgb-alpha",
+        "geotiff-rgb-alpha"
+      ]
+    },
+    {
+      "id": "europa",
+      "path": "src/planets/europa/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-monochrome-alpha"
+      ]
+    },
+    {
+      "id": "ganymede",
+      "path": "src/planets/ganymede/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-rgb-alpha",
+        "geotiff-rgb-alpha"
+      ]
+    },
+    {
+      "id": "enceladus",
+      "path": "src/planets/enceladus/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-float-monochrome"
+      ]
+    },
+    {
+      "id": "tethys",
+      "path": "src/planets/tethys/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-rgb-alpha",
+        "image-rgb-no-data"
+      ]
+    },
+    {
+      "id": "dione",
+      "path": "src/planets/dione/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-rgb-alpha",
+        "image-rgb-no-data"
+      ]
+    },
+    {
+      "id": "rhea",
+      "path": "src/planets/rhea/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-rgb-alpha",
+        "image-rgb-no-data"
+      ]
+    },
+    {
+      "id": "titan",
+      "path": "src/planets/titan/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "image-monochrome-no-data"
+      ]
+    },
+    {
+      "id": "charon",
+      "path": "src/planets/charon/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-byte-monochrome",
+        "pds4-float-rgb"
+      ]
+    },
+    {
+      "id": "bennu",
+      "path": "src/planets/bennu/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-byte-monochrome",
+        "geotiff-byte-monochrome",
+        "geotiff-rgb-bands"
+      ]
+    },
+    {
+      "id": "eros",
+      "path": "src/planets/eros/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "geotiff-float-monochrome",
+        "geotiff-float-monochrome"
+      ]
+    },
+    {
+      "id": "vesta",
+      "path": "src/planets/vesta/source/preparation/terrestrial.json",
+      "status": "PASS",
+      "kinds": [
+        "image-rgb-no-data",
+        "pds3-rgb-zip"
+      ]
+    }
+  ]
+}

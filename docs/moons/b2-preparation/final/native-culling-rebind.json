@@ -1,0 +1,128 @@
+[
+  {
+    "id": "phobos",
+    "object": {
+      "id": "phobos",
+      "bytes": 7105707,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "f4142ff15289de3217e425df8b046b57fd23b9ec675a5aa0cb3600605116a92e"
+    },
+    "nativeLeaves": 1600,
+    "preserved": {
+      "scene.json": "42ae07e5d1dadab3d716db56e1e0de4c610fafefd39179bf86e80251c053d036",
+      "surfaces.json": "518703ffddfef8cc15f05e9795b0408899f74ffcc30cfbf16e6411f3c2e60114",
+      "material.json": "9ca5ccbeabc9d3e840c0ce44676ae9074991f6465c8f8f868e6d6979c9e1455b",
+      "assets.json": "cae9070ecd7e8f98365fdf5594b700bf98e33c6ba22dc8284566cd6ecdb36ec7"
+    },
+    "scope": "Two-sided native leaf presentation; prepared facing culling excludes these leaves. Source shape and scientific rasters unchanged."
+  },
+  {
+    "id": "deimos",
+    "object": {
+      "id": "deimos",
+      "bytes": 7108961,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "3839eee6f3f8a9b25492c0c098f297e177f15ef6c933c052506521d6603286c2"
+    },
+    "nativeLeaves": 1600,
+    "preserved": {
+      "scene.json": "5c7ca1002fc17fb628dfc0d5a2033e89800b0ba4d03cc26166a2f861d0c346f4",
+      "surfaces.json": "3bb14037af3cc59ebacbac509b7e9ccda196ab66ba5078e33785ffc264e6584f",
+      "material.json": "1858fbcd49b438ea6dab737a4fda7539e193f141a3fab53f5eba30899fe102fb",
+      "assets.json": "27fedaf809446520821505809adeb37558d5b4d29b0c158559e18256802c3f70"
+    },
+    "scope": "Two-sided native leaf presentation; prepared facing culling excludes these leaves. Source shape and scientific rasters unchanged."
+  },
+  {
+    "id": "dimorphos",
+    "object": {
+      "id": "dimorphos",
+      "bytes": 6901472,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "93aa1d306f869cd845413efd35df1cbbb7aabdc86c5ba6f1c939aba8bd806b00"
+    },
+    "nativeLeaves": 800,
+    "preserved": {
+      "scene.json": "c5623fa287fbf150632a16574259436892fa4596f0c93077aefbd19092ff2b6b",
+      "surfaces.json": "4afa99a0ceb6174c6481c90f1e322cdb1a8ff5fe72bf86273e0472db76a2fa01",
+      "material.json": "0fae669e047822cd3bf9f45f680335c77dd76be746b1fa66710749601cc12ca4",
+      "assets.json": "f7e2466d0034b4fffd5865aa48625b3144a048b991c4358a24682f9a9f60ee2e"
+    },
+    "scope": "Two-sided native leaf presentation; prepared facing culling excludes these leaves. Source shape and scientific rasters unchanged."
+  },
+  {
+    "id": "enceladus",
+    "object": {
+      "id": "enceladus",
+      "bytes": 7407647,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "fc5403d4ecbba5563e52771d9e5549c5d4eeecc38d7068e84aee57db519ed7eb"
+    },
+    "nativeLeaves": 2000,
+    "preserved": {
+      "scene.json": "160b6f421a1d85813c91bc13ce7fd087d242c155cf039eeb9d8d6c8a6ab198db",
+      "surfaces.json": "7806870ebc5a1f6185eac648f22ba1ccf8784c617f3b1c46ba16adf5369880f9",
+      "material.json": "b3b557bdcc4905ab42e367c50beac02b280ae7271a927fe035cd4f81e042bad6",
+      "assets.json": "e8ef91ac16aa6f7c264046c6f0e83663e93a2246705104cc0785723bd49b4ddd"
+    },
+    "scope": "Two-sided native leaf presentation; prepared facing culling excludes these leaves. Source shape and scientific rasters unchanged."
+  },
+  {
+    "id": "tethys",
+    "object": {
+      "id": "tethys",
+      "bytes": 7405969,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "113eda79c8c5a45a7eb0007bc71aa093b685eda522ea1bb8cf12b78abe08dd1e"
+    },
+    "nativeLeaves": 2000,
+    "preserved": {
+      "scene.json": "b7046e9658cc47abe79a4a20cf13796c0de8876bd31a319dd367d590a48c590d",
+      "surfaces.json": "198f6f926f4acce05b4b4ecc00499cb6fe456d0f51c6472d62bdd7a61001435d",
+      "material.json": "b01d69ce435d47ebc08fd767c192658554c35aa9570fa63ae87e1567cb2c28c4",
+      "assets.json": "e3fe1a2b31c4ac470fe2654f56e0190345a836c63b6747e52592084decc11fe5"
+    },
+    "scope": "Two-sided native leaf presentation; prepared facing culling excludes these leaves. Source shape and scientific rasters unchanged."
+  },
+  {
+    "id": "dione",
+    "object": {
+      "id": "dione",
+      "bytes": 7401567,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "7aca1d7f27b7e0a34f212705183179e216aff383100421d63bd0cc59ab909459"
+    },
+    "nativeLeaves": 2000,
+    "preserved": {
+      "scene.json": "4bae26ccf6670938bad68c5c18a4a112bb8a94adf2567ab59f0b479159f2fdeb",
+      "surfaces.json": "df85d4b8093fec621fbe681ea7164adc4a391e77114083c85c20fce4f089c446",
+      "material.json": "a38ead933d7c4d34b31fc14b06a28ec5ffecd89ee0084b6e06b9567e841a71ee",
+      "assets.json": "188cb4dc2421e1534532305feeebef8e1c1013e939975e0c7b830b2bced4d805"
+    },
+    "scope": "Two-sided native leaf presentation; prepared facing culling excludes these leaves. Source shape and scientific rasters unchanged."
+  },
+  {
+    "id": "rhea",
+    "object": {
+      "id": "rhea",
+      "bytes": 7402201,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "39b47f3b2e2ae361d104e2b588edab47b98a2254d16bf317d58967f3386195b5"
+    },
+    "nativeLeaves": 2000,
+    "preserved": {
+      "scene.json": "c7430f10c4acdf5acb09f4b44a1b8f046d90eb11bd143695ca7db5dec933a93f",
+      "surfaces.json": "3ed2738dbde45fee740d941680ddeb25d4ab2c41a514c3c4af5a20b98deb27c9",
+      "material.json": "281564404afc2ddd7328a2cd52178d432743586fbf20ce025eabcd93d9bd4053",
+      "assets.json": "7a3b4764bb6681fa594c275d468b85c64f98ac2c28df401441af383740ec5ca8"
+    },
+    "scope": "Two-sided native leaf presentation; prepared facing culling excludes these leaves. Source shape and scientific rasters unchanged."
+  }
+]

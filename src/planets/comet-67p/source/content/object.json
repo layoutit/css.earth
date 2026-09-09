@@ -43,14 +43,16 @@
       "albedo": "Albedo",
       "slope": "Spectral slope",
       "absorption": "3.2 µm absorption",
-      "ice": "Modeled ice"
+      "ice": "Modeled ice",
+      "regions": "Regions",
+      "geology": "Geology"
     },
     "controls": [
       {
         "id": "model",
         "label": "Shape model",
         "description": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material.",
-        "title": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material.",
+        "title": "Nucleus shape reconstruction",
         "detail": "ESA/RMOC",
         "thumbnail": "/scenes/comet-67p/comet-67p-model-thumbnail.webp",
         "surface": "comet-67p-model-surface@2x.webp",
@@ -77,7 +79,7 @@
         "id": "osiris",
         "label": "OSIRIS mosaic",
         "description": "Rosetta photographs fitted to the nucleus. Their brightness has been adjusted, but the original shadows and some seams remain.",
-        "title": "Rosetta photographs fitted to the nucleus. Their brightness has been adjusted, but the original shadows and some seams remain.",
+        "title": "OSIRIS image mosaic",
         "detail": "OSIRIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
         "surface": "comet-67p-osiris-surface@2x.webp",
@@ -91,20 +93,21 @@
           {
             "id": "observed",
             "label": "Observed",
-            "value": "5–6 Aug 2014"
+            "value": "Aug–Sep 2014"
           },
           {
             "id": "filter",
             "label": "Camera filter",
             "value": "Orange"
           }
-        ]
+        ],
+        "summary": "Photographs cover parts of the nucleus. Brightness is adjusted to match images; original shadows and some seams remain."
       },
       {
         "id": "albedo",
         "label": "Albedo",
         "description": "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale.",
-        "title": "How strongly surface grains scatter green light. Higher values mean more scattering. Turn Shadows off to read the color scale.",
+        "title": "VIRTIS single-scattering albedo",
         "detail": "VIRTIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-albedo-thumbnail.webp",
         "surface": "comet-67p-albedo-surface@2x.webp",
@@ -145,7 +148,7 @@
         "id": "slope",
         "label": "Spectral slope",
         "description": "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale.",
-        "title": "How much reflectance rises from green to red light. Higher values mean a redder spectrum. Turn Shadows off to read the color scale.",
+        "title": "VIRTIS visible spectral slope",
         "detail": "VIRTIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-slope-thumbnail.webp",
         "surface": "comet-67p-slope-surface@2x.webp",
@@ -186,7 +189,7 @@
         "id": "absorption",
         "label": "3.2 µm absorption",
         "description": "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale.",
-        "title": "Strength of the broad 3.2 µm absorption band. This measurement alone cannot tell us how much organic material is present. Turn Shadows off to read the scale.",
+        "title": "VIRTIS 3.2 µm absorption depth",
         "detail": "VIRTIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-absorption-thumbnail.webp",
         "surface": "comet-67p-absorption-surface@2x.webp",
@@ -227,7 +230,7 @@
         "id": "ice",
         "label": "Modeled ice",
         "description": "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale.",
-        "title": "Estimated ice seen in reflected light, not the ice stored inside the comet. A value of 0% means the model fitted no ice. Turn Shadows off to read the scale.",
+        "title": "VIRTIS surface ice fraction",
         "detail": "VIRTIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-ice-thumbnail.webp",
         "surface": "comet-67p-ice-surface@2x.webp",
@@ -268,6 +271,228 @@
             "value": "Ice mixed with dark grains"
           }
         ]
+      },
+      {
+        "id": "regions",
+        "label": "Regions",
+        "title": "Named regions of 67P",
+        "description": "Color separates the 26 named regions used to describe the comet’s terrain. These are geographical divisions, not different minerals. Grid marks places where the source maps could not be matched reliably to this shape.",
+        "detail": "OSIRIS",
+        "thumbnail": "/scenes/comet-67p/comet-67p-regions-thumbnail.webp",
+        "surface": "comet-67p-regions-surface@2x.webp",
+        "poles": "comet-67p-regions-poles@2x.webp",
+        "source": {
+          "id": "shap7-region-cells",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.17632/2845znt54k.1"
+        },
+        "facts": [
+          {
+            "id": "definition",
+            "label": "Region definitions",
+            "value": "Thomas et al. · 2018"
+          },
+          {
+            "id": "regions",
+            "label": "Named regions",
+            "value": "26"
+          }
+        ],
+        "legend": {
+          "kind": "categories",
+          "title": "Regions",
+          "items": [
+            {
+              "label": "Atum",
+              "color": "#c9997b"
+            },
+            {
+              "label": "Khonsu",
+              "color": "#8199c5"
+            },
+            {
+              "label": "Apis",
+              "color": "#d6ca6a"
+            },
+            {
+              "label": "Imhotep",
+              "color": "#58b9b0"
+            },
+            {
+              "label": "Anubis",
+              "color": "#bd82b5"
+            },
+            {
+              "label": "Bes",
+              "color": "#88ae77"
+            },
+            {
+              "label": "Seth",
+              "color": "#ae7765"
+            },
+            {
+              "label": "Geb",
+              "color": "#bb9fca"
+            },
+            {
+              "label": "Hapi",
+              "color": "#e4c582"
+            },
+            {
+              "label": "Anuket",
+              "color": "#79acc7"
+            },
+            {
+              "label": "Sobek",
+              "color": "#c797a6"
+            },
+            {
+              "label": "Ash",
+              "color": "#a9bb79"
+            },
+            {
+              "label": "Khepry",
+              "color": "#cf9670"
+            },
+            {
+              "label": "Aten",
+              "color": "#9ca1d0"
+            },
+            {
+              "label": "Babi",
+              "color": "#d5b098"
+            },
+            {
+              "label": "Neith",
+              "color": "#7db198"
+            },
+            {
+              "label": "Maftet",
+              "color": "#bcb77a"
+            },
+            {
+              "label": "Serqet",
+              "color": "#c18a97"
+            },
+            {
+              "label": "Nut",
+              "color": "#8fb9cf"
+            },
+            {
+              "label": "Anhur",
+              "color": "#a69172"
+            },
+            {
+              "label": "Wosret",
+              "color": "#a8a1b8"
+            },
+            {
+              "label": "Ma’at",
+              "color": "#d5aa68"
+            },
+            {
+              "label": "Hatmehit",
+              "color": "#b4cf9a"
+            },
+            {
+              "label": "Bastet",
+              "color": "#94c1ba"
+            },
+            {
+              "label": "Hathor",
+              "color": "#d4b5c5"
+            },
+            {
+              "label": "Aker",
+              "color": "#a7a987"
+            }
+          ]
+        }
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "title": "Geological features mapped from OSIRIS",
+        "description": "Fractures, cliffs, terraces and small features mapped from Rosetta images. Lines and dots are map symbols, not their true widths or sizes. Grid marks areas outside the study or without a reliable shape match.",
+        "detail": "OSIRIS",
+        "thumbnail": "/scenes/comet-67p/comet-67p-geology-thumbnail.webp",
+        "surface": "comet-67p-geology-surface@2x.webp",
+        "poles": "comet-67p-geology-poles@2x.webp",
+        "source": {
+          "id": "sbmt-geological-paths",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5270/esa-kokoti7"
+        },
+        "facts": [
+          {
+            "id": "coverage",
+            "label": "Study covers",
+            "value": "17 regions · mostly north"
+          },
+          {
+            "id": "source",
+            "label": "Mapping study",
+            "value": "Leon-Dasi et al. · 2021"
+          }
+        ],
+        "legend": {
+          "kind": "categories",
+          "title": "Geology",
+          "items": [
+            {
+              "label": "Mapped terrain",
+              "color": "#c6bda2"
+            },
+            {
+              "label": "Fractures",
+              "color": "#268bd2"
+            },
+            {
+              "label": "Scarps and cliffs",
+              "color": "#429e68"
+            },
+            {
+              "label": "Terraces",
+              "color": "#e1ac40"
+            },
+            {
+              "label": "Niches",
+              "color": "#d95b58"
+            },
+            {
+              "label": "Ridges",
+              "color": "#9b6b46"
+            },
+            {
+              "label": "Depression rims",
+              "color": "#7c8d99"
+            },
+            {
+              "label": "Pits",
+              "color": "#f5f3e5"
+            },
+            {
+              "label": "Boulders · locations",
+              "color": "#c86cad"
+            },
+            {
+              "label": "Outcrops · locations",
+              "color": "#393b3e"
+            },
+            {
+              "label": "Bright patches · locations",
+              "color": "#48bfc0"
+            },
+            {
+              "label": "Crater candidates · locations",
+              "color": "#ed8b49"
+            },
+            {
+              "label": "Circular mounds · locations",
+              "color": "#8cb457"
+            }
+          ]
+        }
       }
     ]
   },
@@ -278,7 +503,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",
@@ -295,6 +520,12 @@
       "role": "surface",
       "description": "MTP019 measured shape and reference frame",
       "href": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/"
+    },
+    {
+      "label": "OSIRIS",
+      "role": "surface",
+      "description": "September 2014 corrected photographs and geometry",
+      "href": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/"
     },
     {
       "label": "ESA/Rosetta/MPS · OSIRIS",
@@ -337,6 +568,18 @@
       "role": "observations",
       "description": "Modeled ice and its optical-mixture assumptions",
       "href": "https://doi.org/10.1093/mnras/stw3177"
+    },
+    {
+      "label": "Thomas et al. (2018)",
+      "role": "surface",
+      "description": "SHAP7 regional definitions · CC BY 4.0",
+      "href": "https://doi.org/10.17632/2845znt54k.1"
+    },
+    {
+      "label": "ESA · Leon-Dasi et al. (2021)",
+      "role": "surface",
+      "description": "Geological feature coordinates and mapping guide",
+      "href": "https://doi.org/10.5270/esa-kokoti7"
     }
   ],
   "provenance": {

@@ -136,124 +136,133 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "NASA Blue Marble, December 2004, with ESA WorldCover 2021 detail where available. These archival composites and the cloud layer are not live observations.",
-        "title": "Visible color: NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
+        "description": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones.",
+        "title": "Blue Marble Next Generation",
         "thumbnail": "/scenes/earth/earth-lens-normal.webp",
         "source": {
-          "id": "surface-observation"
+          "id": "nasa-blue-marble-july",
+          "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
         },
-        "detail": "Global mosaic"
+        "detail": "NASA · July 2004",
+        "summary": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones."
       },
       {
-        "id": "buenos-aires-noise",
-        "label": "Buenos Aires noise",
-        "description": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
-        "title": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
-        "legendNote": "APrA · 2025 daytime estimates. Uncolored areas have no estimate.",
-        "thumbnail": "/scenes/earth/earth-lens-noise.webp",
-        "legend": {
-          "kind": "ranges",
-          "title": "Noise level",
-          "ranges": [
-            {
-              "label": "30-35 dBA",
-              "color": "rgb(169,255,115)",
-              "low": 30
-            },
-            {
-              "label": "35-40 dBA",
-              "color": "rgb(76,230,0)",
-              "low": 35
-            },
-            {
-              "label": "40-45 dBA",
-              "color": "rgb(38,115,0)",
-              "low": 40
-            },
-            {
-              "label": "45-50 dBA",
-              "color": "rgb(255,255,0)",
-              "low": 45
-            },
-            {
-              "label": "50-55 dBA",
-              "color": "rgb(254,204,92)",
-              "low": 50
-            },
-            {
-              "label": "55-60 dBA",
-              "color": "rgb(230,152,0)",
-              "low": 55
-            },
-            {
-              "label": "60-65 dBA",
-              "color": "rgb(255,0,0)",
-              "low": 60
-            },
-            {
-              "label": "65-70 dBA",
-              "color": "rgb(115,0,0)",
-              "low": 65
-            },
-            {
-              "label": "70-75 dBA",
-              "color": "rgb(132,0,168)",
-              "low": 70
-            },
-            {
-              "label": "75-80 dBA",
-              "color": "rgb(0,38,255)",
-              "low": 75
-            },
-            {
-              "label": "80-85 dBA",
-              "color": "rgb(0,38,115)",
-              "low": 80
-            },
-            {
-              "label": "85-90 dBA",
-              "color": "rgb(0,38,115)",
-              "low": 85
-            },
-            {
-              "label": "90-95 dBA",
-              "color": "rgb(0,38,115)",
-              "low": 90
-            }
-          ]
-        },
+        "id": "clouds",
+        "label": "Cloud coverage",
+        "detail": "NASA · archival",
+        "title": "Blue Marble cloud composite",
+        "description": "Archival NASA cloud imagery over the July 2004 surface mosaic with brighter display midtones. Clouds and surface are from different observation periods; this is not live weather.",
+        "summary": "Archival NASA clouds over a brighter July 2004 surface mosaic. This is not live weather.",
+        "thumbnail": "/scenes/earth/earth-lens-clouds.webp",
         "source": {
-          "id": "noise-daytime"
-        },
-        "detail": "Daytime · dBA"
+          "id": "nasa-blue-marble-clouds",
+          "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif"
+        }
       },
       {
         "id": "topography",
         "label": "Elevation",
-        "description": "NASA Blue Marble topography and bathymetry, December 2004. Color and relief show land and seafloor elevation, not a photograph.",
-        "title": "Elevation: NASA Blue Marble topography and bathymetry",
+        "description": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
+        "title": "GEBCO land and seafloor heights",
         "thumbnail": "/scenes/earth/earth-lens-topography.webp",
         "source": {
-          "id": "surface-observation"
+          "id": "gebco-2026-elevation",
+          "url": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
         },
-        "detail": "Land + seafloor"
+        "detail": "GEBCO · 2026",
+        "summary": "GEBCO_2026 modeled terrain. Colors show height and depth relative to mean sea level; ocean depths include estimates.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Height / depth · m",
+          "sourceUrl": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid",
+          "image": "earth-topography-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "≤ −10,000 m",
+            "0 m",
+            "+10,000 m"
+          ]
+        },
+        "legendNote": "0 = mean sea level. Shading emphasizes relief; the color scale is unshaded. Some coastal source datums differ."
       },
       {
         "id": "night-lights",
         "label": "Night lights",
-        "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
-        "title": "Night lights: NASA Black Marble 2016 global composite",
+        "description": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting.",
+        "title": "Black Marble annual night lights · 2025",
         "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
         "source": {
-          "id": "surface-observation"
+          "id": "nasa-black-marble-2025-public-radiance",
+          "url": "https://www.lightpollutionmap.info/help.html"
         },
-        "detail": "Nighttime"
+        "detail": "NASA · 2025",
+        "summary": "2025 annual snow-free satellite radiance. Warm false color; logarithmic scale. Gray: missing data or outside 75°N–65°S. Aurora can remain at high latitudes. NASA Black Marble / Jurij Stare, lightpollutionmap.info.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Annual radiance · nW/cm²/sr",
+          "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+          "image": "earth-night-lights-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "0",
+            "≥ 100 nW/cm²/sr"
+          ]
+        },
+        "legendNote": "Logarithmic color scale, capped at 100 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness."
+      },
+      {
+        "id": "enso",
+        "label": "ENSO",
+        "detail": "7 Sept 2026",
+        "title": "ENSO: sea-surface temperature anomalies · 7 Sept 2026",
+        "description": "NASA MUR · 1 km source imagery · 7 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery.",
+        "thumbnail": "/scenes/earth/earth-lens-enso.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "13 August 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-09-09"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state."
       },
       {
         "id": "cross-section",
         "label": "Cross section",
         "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
-        "title": "Cross section: Schematic NASA Science source-backed interior",
+        "title": "Interior structure model",
         "thumbnail": "/scenes/earth/earth-view-interior.webp",
         "legend": {
           "kind": "categories",
@@ -261,22 +270,22 @@
           "items": [
             {
               "label": "Crust",
-              "description": "6,348 km inner radius",
+              "description": "Thin outer rock",
               "color": "#8b795e"
             },
             {
               "label": "Mantle",
-              "description": "3,478 km inner radius",
+              "description": "Solid rock",
               "color": "#cf5d35"
             },
             {
               "label": "Outer core",
-              "description": "1,221 km inner radius",
+              "description": "Liquid iron alloy",
               "color": "#ef9c3b"
             },
             {
               "label": "Inner core",
-              "description": "to the center",
+              "description": "Solid iron alloy",
               "color": "#f5d580"
             }
           ],
@@ -284,9 +293,56 @@
           "sourceUrl": "https://science.nasa.gov/earth/facts/"
         },
         "source": {
-          "id": "surface-observation"
+          "id": "surface-observation",
+          "url": "https://science.nasa.gov/earth/facts/"
         },
-        "detail": "Structure"
+        "detail": "Structure",
+        "summary": "A cut through Earth’s crust, rocky mantle, liquid outer core and solid inner core. Layer sizes follow the NASA Science model; colors are schematic."
+      },
+      {
+        "id": "mantle-tomography",
+        "label": "Mantle tomography",
+        "description": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
+        "title": "GLAD-M35 mantle tomography",
+        "thumbnail": "/scenes/earth/earth-view-tomography.webp",
+        "legend": {
+          "kind": "scale",
+          "title": "Mantle Vsv · % from depth mean",
+          "sourceUrl": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35",
+          "image": "earth-tomography-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "≤ −3%",
+            "0",
+            "≥ +3%"
+          ]
+        },
+        "source": {
+          "id": "glad-m35-vsv",
+          "url": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35"
+        },
+        "detail": "GLAD-M35 · 2024",
+        "summary": "Red and blue map slower and faster mantle waves relative to the mean at each depth. This is not temperature. Crust and core colors are schematic; gray marks depths outside the model.",
+        "falseColor": true,
+        "legendNote": "GLAD-M35 r0.1 · 10–2,890 km depth · 1° / 10 km sample grid. Gray: outside model depth coverage. Grid spacing is not resolving power.",
+        "facts": [
+          {
+            "id": "mapped-depth",
+            "label": "Mapped depth",
+            "value": "10–2,890 km"
+          },
+          {
+            "id": "outer-core",
+            "label": "Outer core",
+            "value": "Liquid iron alloy"
+          },
+          {
+            "id": "inner-core",
+            "label": "Inner core",
+            "value": "Solid iron alloy"
+          }
+        ]
       }
     ]
   },
@@ -353,28 +409,10 @@
   ],
   "resources": [
     {
-      "label": "Buenos Aires APrA",
-      "role": "noise",
-      "description": "2025 daytime noise estimates, CC-BY-2.5-AR",
-      "href": "https://data.buenosaires.gob.ar/dataset/mapa-ruido"
-    },
-    {
-      "label": "GeoNames",
-      "role": "places",
-      "description": "City names and locations, CC-BY-4.0",
-      "href": "https://www.geonames.org/export/"
-    },
-    {
       "label": "NASA",
       "role": "imagery",
       "description": "Surface & clouds",
       "href": "https://science.nasa.gov/earth/"
-    },
-    {
-      "label": "ESA WorldCover",
-      "role": "imagery",
-      "description": "2021 WorldCover satellite composite via Terrascope, CC-BY-4.0",
-      "href": "https://esa-worldcover.org/en/data-access"
     },
     {
       "label": "JPL",
@@ -399,6 +437,12 @@
       "role": "stars",
       "description": "Background star field",
       "href": "https://github.com/astronexus/HYG-Database"
+    },
+    {
+      "label": "NOAA",
+      "role": "climate",
+      "description": "ENSO advisory",
+      "href": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
     }
   ],
   "galleries": [],

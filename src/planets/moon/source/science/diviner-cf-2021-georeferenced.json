@@ -1,0 +1,23 @@
+{
+  "width": 2048,
+  "height": 1024,
+  "noData": -9999,
+  "origin": [
+    -5458203.076346907,
+    2729101.5381734534
+  ],
+  "resolution": [
+    5330.276441745026,
+    -5330.276441745026
+  ],
+  "referenceRadiusMeters": 1737400,
+  "sourceValidPixels": 51571287,
+  "sourceInvalidPixels": 38313,
+  "sourceMinimum": 6.926723003387451,
+  "sourceMaximum": 9.770793914794922,
+  "missingPixels": 468179,
+  "coordinatesVerified": "Every latitude and longitude cell matches the published axes exactly.",
+  "sampling": "Nearest published coordinate; finite positive wavelengths only; no gap fill.",
+  "output": "diviner-cf-2021-georeferenced.tif",
+  "sha256": "adc63e4654a70093f5c060069f6394311aec52d6bdffd3eec1165173734f6632"
+}

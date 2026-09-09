@@ -14,6 +14,16 @@ ISIS special pixels remain missing before interpolation. Gray grid marks unobser
 
 The minimaps and thumbnails come from these same prepared maps. The navigation/context marker samples observed terrain from the corrected mosaic and adds shared full-phase curvature. It is an illustrative terrain crop, not a newly observed full disc. Native source cubes are preserved byte-for-byte inside gzip, with original and compressed hashes in the manifest. A content-addressed source mirror avoids the release server's browser challenge during automated restoration. Large source binaries are excluded from Git and runtime installation.
 
+## Historical geology
+
+**Geology** uses Thomson and Baynham's [2026 digitized historical map](https://zenodo.org/records/20817533), released under CC BY 4.0. The exact GIS database, layer styles, publisher preview and release metadata are retained in `source/science/geology-2026/`. This is an interpretation of Voyager-era surface units, not measured composition, a new terrain model or newly controlled imagery.
+
+The archive stores page-sized XY coordinates under an incompatible Earth WGS84 orthographic CRS. Preparation does not apply that declaration as moon geography. The independently reviewed `registration.json` maps positive-east, normalized south-polar stereographic coordinates into the original GIS page. Titania uses six identified crater centroids for fitting and four separate named craters for validation. Miranda uses six publisher-graticule intersections for fitting and six interleaved intersections for validation, followed by three independently identified crater checks. The checked Miranda landmark differences are 1.3–3.3° (approximately 5–14 km); these are not uncertainty bounds for every unit boundary.
+
+The lens includes 18 nonempty styled polygon categories with their original unit names and colors. Source Z coordinates are not heights. Structural linework and annotation are not turned into terrain or extra polygon units. Publisher-preview overlap evidence establishes only a partial layer order; combinations with no unique supported winner remain missing. Original polygon holes are preserved. The nearest-neighbor categorical conversion uses a 1440 × 720 display grid, with no interpolation between classes, relief or artificial boundary detail. Valid black material is distinct from no-data code 65535. Its sampled, cosine-weighted reference-sphere coverage is approximately 44.2%; unmapped northern terrain remains unknown.
+
+Reproduce the categorical input with `python tools/objects/prepare-geologic-categories.py src/planets/miranda/source/preparation/geology-conversion.json`, using the dependency versions in the converter's header. The recipe pins the archive and registration, checks feature populations and archived CRS identity, and records ambiguous overlaps and the exact output hash in `categories.receipt.json`. Original release MD5 and acquisition SHA-256 receipts remain alongside the sources. Shared preparation then consumes the checked-in categorical input through the existing scientific GeoTIFF path. The runtime receives prepared images only.
+
 ## Dataset survey
 
 | Candidate | Disposition |
@@ -22,7 +32,7 @@ The minimaps and thumbnails come from these same prepared maps. The navigation/c
 | Schenk/LPI 2020 merged numeric DEM | Included as Elevation with its own validity, datum, scale and relief. |
 | [JPL simulator `ura5vuu2.tif`](https://space.jpl.nasa.gov/tmaps/uranus.html), 1440 × 720 | Superseded; not a duplicate Monochrome lens. |
 | [PIA01490 south-polar press mosaic](https://science.nasa.gov/photojournal/south-polar-view-of-miranda/) and color press views | Excluded from mapped lenses: a rendered disc or press image alone does not establish usable surface registration or global color coverage. |
-| [2026 digitized geological map](https://zenodo.org/records/20817533) | A distinct interpretive candidate, deferred. Its vector units, projection and coverage need separate qualification; this pass does not claim every available dataset is implemented. |
+| [2026 digitized geological map](https://zenodo.org/records/20817533) | Included as historical Geology after page-coordinate reconstruction and independent landmark checks; original coverage and degree-scale registration limits remain explicit. |
 | [USGS Voyager control network](https://astrogeology.usgs.gov/search/map/miranda_voyager_image_control_network) | Registration support, not a separate surface measurement or lens. |
 
 Physical/orbital values come from the vendored astronomy package: JPL satellite elements and IAU/NAIF rotation at the shared epoch. [NASA's overview](https://science.nasa.gov/uranus/moons/miranda/) supplies editorial facts. No atmospheric shell is supported. No body-specific controller is added.

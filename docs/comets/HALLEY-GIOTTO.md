@@ -6,7 +6,7 @@ inspection, but their registration to the Stooke shape has not been established.
 No encounter texture, surface coverage mask, camera attitude or new scene lens
 is published. Halley's existing **Historical model** remains unchanged.
 
-The [retrieval manifest](../../src/planets/comet-1p/candidates/giotto-hmc.json)
+The [retrieval manifest](../../src/planets/comet-1p/source/reference/giotto-hmc-intake.json)
 pins every source file by URL, byte count and SHA-256. The
 [numerical report](evidence/halley-giotto-intake.json) records the original
 headers, calibration, raster validity, dimensions and unresolved evidence.

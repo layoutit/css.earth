@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "35bf1c59e9bab26f283e9a88837312150d676c7b7d547c925e26aa87a3135107"
+          "sha256": "adc92d1680c0b857589f58eed3f53427735baf55d1e0d3c34c06d17485af20f2"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "31f4226f870acdc9d85576f025ff2dd50e1808127d353cfdfd904987f6e9062d"
+          "sha256": "af8920c60f1daefe1900ab861139460a83af14c4406545de3a52a1ebc9814ac2"
         },
         {
           "id": "title",
@@ -43,11 +43,11 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "af021aeb1e25499e57e87bb5c67b6e00bbee61edc251ceae9c7a5d136d564bd7"
+          "sha256": "37b3916975aab68da7f0c3a20a1ec3766e889f8d7ba3f64ce7f96ea4b709333d"
         }
       ],
       "shape": {
-        "kind": "sphere",
+        "kind": "radial-terrain",
         "radiusKm": 562.5
       },
       "surfaces": [
@@ -68,6 +68,26 @@
             },
             {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "relative-albedo",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "infrared",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ice-absorption",
               "source": "content",
               "material": "lighting"
             }
@@ -113,6 +133,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1ef465bd0de3f666c441a8d9ec7582f69be69647ad82bbedf0edef412db53f8d"
+    "sha256": "05256ab71aec27fd2f44429df2f873e0f7ce1157e8e000a4aebf423b4fd04356"
   }
 }

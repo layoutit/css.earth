@@ -1,0 +1,116 @@
+{
+  "schema": "cssearth-b2-legend-review-supplement@1",
+  "reviewedAt": "2026-09-09T04:24:38.554765+00:00",
+  "status": "REVIEWED_NO_SCALAR_LEGEND_CLIPPING_OR_DESCRIPTION_OVERLAP_IN_ENUMERATED_IMAGES",
+  "captureReport": {
+    "path": "output/playwright/b2-surfaces/legend-correction-2026-09-09T04-19-50.904Z/report.json",
+    "bytes": 780487,
+    "sha256": "fc5a38b3497fce68ee1a54f88695b2399105795da0ebce711913d3fe64495c6f",
+    "snapshot": "capture-report-snapshot.json"
+  },
+  "captureStatus": "CAPTURED_UNREVIEWED",
+  "captureStartedAt": "2026-09-09T04:19:51.097Z",
+  "captureFinishedAt": "2026-09-09T04:23:10.614Z",
+  "captureShutdown": {
+    "browserClose": "COMPLETE"
+  },
+  "head": "57d5f12bea735bbf4ee6e1ec00ea14827e0e7923",
+  "browserVersion": "152.0.7977.76",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "dprs": [
+    1,
+    2
+  ],
+  "inspectedPngCount": 22,
+  "inspectedPngBytes": 27972693,
+  "allHashesMatch": true,
+  "countsByBody": {
+    "moon": 4,
+    "phobos": 6,
+    "deimos": 6,
+    "dimorphos": 6
+  },
+  "mapsShellPin": {
+    "path": "site/maps-shell.css",
+    "bytes": 17844,
+    "sha256": "728cb7fafa196bc77fa8de27a5d6e686b6966d92afe864b957e103bb35a206f8"
+  },
+  "mapsShellCurrentMatches": true,
+  "scopedCaptureCases": [
+    {
+      "id": "moon",
+      "dpr": 1,
+      "status": "CAPTURED_UNREVIEWED",
+      "recordedErrors": [],
+      "capturedViews": 3
+    },
+    {
+      "id": "moon",
+      "dpr": 2,
+      "status": "CAPTURED_UNREVIEWED",
+      "recordedErrors": [],
+      "capturedViews": 3
+    },
+    {
+      "id": "phobos",
+      "dpr": 1,
+      "status": "CAPTURED_UNREVIEWED",
+      "recordedErrors": [],
+      "capturedViews": 4
+    },
+    {
+      "id": "phobos",
+      "dpr": 2,
+      "status": "CAPTURED_UNREVIEWED",
+      "recordedErrors": [],
+      "capturedViews": 4
+    },
+    {
+      "id": "deimos",
+      "dpr": 1,
+      "status": "CAPTURED_UNREVIEWED",
+      "recordedErrors": [],
+      "capturedViews": 4
+    },
+    {
+      "id": "deimos",
+      "dpr": 2,
+      "status": "CAPTURED_UNREVIEWED",
+      "recordedErrors": [],
+      "capturedViews": 4
+    },
+    {
+      "id": "dimorphos",
+      "dpr": 1,
+      "status": "CAPTURED_UNREVIEWED",
+      "recordedErrors": [],
+      "capturedViews": 4
+    },
+    {
+      "id": "dimorphos",
+      "dpr": 2,
+      "status": "CAPTURED_UNREVIEWED",
+      "recordedErrors": [],
+      "capturedViews": 4
+    }
+  ],
+  "findings": [
+    "Phobos and Deimos albedo right labels show the full 0.1 SPC relative scale, wrapping onto a second line at both DPRs.",
+    "Dimorphos elevation right label shows full 20 m \u00b7 75 m reference sphere; albedo shows full 1.30 unitless \u00b7 SPC relative brightness, wrapping to three lines.",
+    "Moon topography/rock-abundance and all three bodies slope units remain visible; no overlap between numeric labels and adjacent description was seen in the enumerated captures.",
+    "Dimorphos albedo screenshot has a scrolled information panel to fit the long description; breadcrumb position is above the visible panel crop. This is a capture framing fact, not missing legend or description."
+  ],
+  "supersedes": [
+    "Only earlier truncated scalar legend metadata findings for the enumerated body/lens/DPR cases."
+  ],
+  "doesNotSupersede": [
+    "Initial overall capture INVALID due to Charon connection refusal.",
+    "Earlier retained-drag receipts and their exact file pins.",
+    "Known mesh/pole-edge artifacts, lighting and supported-region framing limits.",
+    "No approval of uninspected captures, full-cohort visual acceptance or aggregate gates."
+  ],
+  "filenameQualification": "shadows-unsupported is the card-only harness filename; it does not establish that Phobos, Deimos or Dimorphos lack a Shadows capability."
+}

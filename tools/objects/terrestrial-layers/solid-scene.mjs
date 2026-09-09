@@ -1,3 +1,4 @@
+import {prepareScientificNavigation} from './scientific-focus.mjs';
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -54,6 +55,7 @@ export async function prepareSolidScene({ config, celestial, outputDirectory, ra
   const epoch = await prepareSolidEpochFrame({ config, celestial });
   const scene = { camera: epoch.camera, sky: epoch.sky, sun: epoch.sun,
     ...(radial ? { surfaceTriangles: radial.faces.map(face => face.vertices.map(v => [v[1] * BASE_TILE, v[0] * BASE_TILE, v[2] * BASE_TILE])) } : {}),
+    ...(radial?.lensRanges ? { surfaceLensRanges: radial.lensRanges } : {}),
     systemTransform: epoch.systemTransform,
     bodyLeaves: radial?.leaves ?? prepareSolidBodySurface({ id, radius: geometry.radius, mapUrl: geometry.mapUrl, polesUrl: geometry.polesUrl,
       sourceWidth: config.raster.width, sourceHeight: config.raster.height,
@@ -145,11 +147,18 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     demand: { capacity: 1, defaultFrame: Math.floor(lighting.frameCount / 2) },
     rotation: { kind: 'angle', source: 'view-sun', reference: 'prepared', baseDegrees: 0,
       zeroAtPole: false, property: `--${id}-light-roll` }, frameAttribute: null, modeAttribute: null, quoted: true };
+  const focus = new Map(['observations','mosaics','scientific','observedColors'].flatMap(kind =>
+    (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus])));
   const variants = surfaces.flatMap(s => [false, true].flatMap(shadows => [false, true].map(orbit => ({
+    ...(focus.has(s.id) ? {navigation: prepareScientificNavigation(id, focus.get(s.id), plan.camera)} : {}),
     when: { lensId: s.id, shadows, orbit }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, 'lighting'],
     writes: [
       { kind: 'texture', target: index(body), name: `--${id}-surface-image`, resource: s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, quoted: true },
       { kind: 'texture', target: index(body), name: `--${id}-poles-image`, resource: `poles:${s.id}`, quoted: true },
+      ...[...new Set(plan.bodyLeaves.map(leaf => leaf.attributes?.['data-surface-model']).filter(Boolean))].map(model => ({
+        kind: 'style', target: index(body), name: `--${id}-${model}-display`,
+        value: plan.bodyLeaves[plan.surfaceLensRanges.find(range => range.lensId === s.id).start].attributes['data-surface-model'] === model ? 'block' : 'none',
+      })),
       { kind: 'style', target: index(materialRoot), name: `--${id}-billboard-color`, value: s.billboardColor },
       { kind: 'attribute', target: -1, name: 'data-lens', value: s.id },
       { kind: 'class', target: -1, name: `${id}-hide-orbit`, value: !orbit },
@@ -173,6 +182,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
     tree, variants, materials: config.geometry.radialTerrain ? [] : [track], animations: [],
     ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles,
+      ...(plan.surfaceLensRanges ? { lensRanges: plan.surfaceLensRanges } : {}),
       // XYZ source coordinates swap X/Y for CSS: outward faces are clockwise.
       ...(config.geometry.radialTerrain?.sourceTopology === 'open' ? { frontFace: 'clockwise' } : {}) } } : {}),
     heliocentricView: { plan: plan.heliocentricView,

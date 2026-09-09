@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "afe13551de45e19607f48a60f7bffa25ecc93d1cceab1bbf02ebe89741aa6d93"
+          "sha256": "94c222df3f33d7bb1b13a9b1827d47c65c69c5e4983ad39571bc3f2d2869f902"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e33972e37428e6cf6ff97dc627e1ce187e221d5fa5c3d1fa2652cc9aa0305612"
+          "sha256": "3626c396dcbee2c7ef9e71873af5573407066c3e8b47309c7a1613801d2edb41"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "10c5270efc55d3a588b761ad1af26f340196efd0f95825c37a73cf0b6ab732ea"
+          "sha256": "d39ae777df7504252f6120b1e0f17a2ae0588bc7affafb43a6f4faece2d90693"
         },
         {
           "id": "rotation",
@@ -90,6 +90,16 @@
               "id": "ice",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "regions",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -133,6 +143,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b70e255d83b87879cd7c9aac5862727c462f7275e93ff32ef8e4cad5694915bf"
+    "sha256": "d2131b4114a59e9b0f993375587cb0b3dc8172af1dabb945b3ae97a6d550b960"
   }
 }

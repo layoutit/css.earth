@@ -13,34 +13,124 @@
     "poleSize": 512,
     "surfaceQuality": 95,
     "reportMissingPixels": true,
-    "observations": [
-      {
-        "id": "normal",
-        "validity": {
-          "kind": "pds3-byte-monochrome",
-          "noData": 0,
-          "connectedEdge": "north"
-        }
-      }
-    ],
+    "observations": [],
     "scientific": [
       {
-        "id": "elevation",
-        "label": "Elevation",
+        "id": "normal",
+        "label": "Relative albedo",
         "consumer": "scientific-surfaces",
-        "path": "shape/phoebe_ver128q.tab",
-        "format": "pds-vertex-facet",
+        "path": "science/2023/phoebe_albedo_c.cub",
+        "format": "isis3",
         "grid": {
-          "metersPerUnit": 1000,
-          "expectedVertices": 99846,
-          "expectedFaces": 196608
+          "width": 2222,
+          "height": 1111,
+          "targetName": "Phoebe",
+          "centerLongitude": 180.0,
+          "referenceRadiusMeters": 106500.0,
+          "polarRadiusMeters": 106500.0,
+          "origin": [
+            -334579.61760731,
+            167289.80880366
+          ],
+          "resolutionMeters": 301.26023555494,
+          "longitudeRange": [
+            0,
+            360
+          ],
+          "allowMissingLongitudeBounds": true,
+          "specialValueMagnitude": 1e+30
         },
-        "valueTransform": {
-          "scale": 0.001,
-          "offset": -106.8
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 0.5,
+        "maximum": 1.7,
+        "colors": [
+          "#404040",
+          "#eeeeee"
+        ],
+        "qualityMasks": [
+          {
+            "format": "isis3",
+            "path": "science/2023/phoebe_numimg_c.cub",
+            "grid": {
+              "width": 360,
+              "height": 180,
+              "targetName": "Phoebe",
+              "centerLongitude": 180.0,
+              "referenceRadiusMeters": 106500.0,
+              "polarRadiusMeters": 106500.0,
+              "origin": [
+                -334579.61760731,
+                167289.80880366
+              ],
+              "resolutionMeters": 1858.775653374,
+              "longitudeRange": [
+                0,
+                360
+              ],
+              "allowMissingLongitudeBounds": true,
+              "specialValueMagnitude": 1e+30
+            },
+            "sampling": "nearest",
+            "minimum": 5
+          },
+          {
+            "format": "isis3",
+            "path": "science/2023/phoebe_bestmap_c.cub",
+            "grid": {
+              "width": 360,
+              "height": 180,
+              "targetName": "Phoebe",
+              "centerLongitude": 180.0,
+              "referenceRadiusMeters": 106500.0,
+              "polarRadiusMeters": 106500.0,
+              "origin": [
+                -334579.61760731,
+                167289.80880366
+              ],
+              "resolutionMeters": 1858.775653374,
+              "longitudeRange": [
+                0,
+                360
+              ],
+              "allowMissingLongitudeBounds": true,
+              "specialValueMagnitude": 1e+30,
+              "noData": 99999
+            },
+            "sampling": "nearest",
+            "maximum": 1500
+          }
+        ]
+      },
+      {
+        "id": "elevation",
+        "label": "Radial height",
+        "consumer": "scientific-surfaces",
+        "path": "science/2023/phoebe_radius_c.cub",
+        "format": "isis3",
+        "grid": {
+          "width": 2222,
+          "height": 1111,
+          "targetName": "Phoebe",
+          "centerLongitude": 180.0,
+          "referenceRadiusMeters": 106500.0,
+          "polarRadiusMeters": 106500.0,
+          "origin": [
+            -334579.61760731,
+            167289.80880366
+          ],
+          "resolutionMeters": 301.26023555494,
+          "longitudeRange": [
+            0,
+            360
+          ],
+          "allowMissingLongitudeBounds": true,
+          "specialValueMagnitude": 1e+30
         },
-        "minimum": -12,
-        "maximum": 12,
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": -15,
+        "maximum": 15,
         "colors": [
           "#35306b",
           "#2c7db7",
@@ -50,8 +140,65 @@
           "#c76138",
           "#f8eee1"
         ],
+        "qualityMasks": [
+          {
+            "format": "isis3",
+            "path": "science/2023/phoebe_numimg_c.cub",
+            "grid": {
+              "width": 360,
+              "height": 180,
+              "targetName": "Phoebe",
+              "centerLongitude": 180.0,
+              "referenceRadiusMeters": 106500.0,
+              "polarRadiusMeters": 106500.0,
+              "origin": [
+                -334579.61760731,
+                167289.80880366
+              ],
+              "resolutionMeters": 1858.775653374,
+              "longitudeRange": [
+                0,
+                360
+              ],
+              "allowMissingLongitudeBounds": true,
+              "specialValueMagnitude": 1e+30
+            },
+            "sampling": "nearest",
+            "minimum": 5
+          },
+          {
+            "format": "isis3",
+            "path": "science/2023/phoebe_bestmap_c.cub",
+            "grid": {
+              "width": 360,
+              "height": 180,
+              "targetName": "Phoebe",
+              "centerLongitude": 180.0,
+              "referenceRadiusMeters": 106500.0,
+              "polarRadiusMeters": 106500.0,
+              "origin": [
+                -334579.61760731,
+                167289.80880366
+              ],
+              "resolutionMeters": 1858.775653374,
+              "longitudeRange": [
+                0,
+                360
+              ],
+              "allowMissingLongitudeBounds": true,
+              "specialValueMagnitude": 1e+30,
+              "noData": 99999
+            },
+            "sampling": "nearest",
+            "maximum": 1500
+          }
+        ],
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -106.5
+        },
         "relief": {
-          "referenceRadiusMeters": 106800,
+          "referenceRadiusMeters": 106500,
           "heightToMeters": 1000,
           "lightDirection": [
             -0.5,
@@ -59,11 +206,79 @@
             0.7071067811865476
           ],
           "ambient": 0.45
-        },
-        "sampleGrid": {
-          "width": 721,
-          "height": 361
         }
+      },
+      {
+        "id": "maplet-resolution",
+        "label": "Maplet resolution",
+        "consumer": "scientific-surfaces",
+        "path": "science/2023/phoebe_bestmap_c.cub",
+        "format": "isis3",
+        "grid": {
+          "width": 360,
+          "height": 180,
+          "targetName": "Phoebe",
+          "centerLongitude": 180.0,
+          "referenceRadiusMeters": 106500.0,
+          "polarRadiusMeters": 106500.0,
+          "origin": [
+            -334579.61760731,
+            167289.80880366
+          ],
+          "resolutionMeters": 1858.775653374,
+          "longitudeRange": [
+            0,
+            360
+          ],
+          "allowMissingLongitudeBounds": true,
+          "specialValueMagnitude": 1e+30,
+          "noData": 99999
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 125,
+        "maximum": 1500,
+        "colors": [
+          "#fff0a0",
+          "#35b5a5",
+          "#284675"
+        ]
+      },
+      {
+        "id": "image-count",
+        "label": "Image count",
+        "consumer": "scientific-surfaces",
+        "path": "science/2023/phoebe_numimg_c.cub",
+        "format": "isis3",
+        "grid": {
+          "width": 360,
+          "height": 180,
+          "targetName": "Phoebe",
+          "centerLongitude": 180.0,
+          "referenceRadiusMeters": 106500.0,
+          "polarRadiusMeters": 106500.0,
+          "origin": [
+            -334579.61760731,
+            167289.80880366
+          ],
+          "resolutionMeters": 1858.775653374,
+          "longitudeRange": [
+            0,
+            360
+          ],
+          "allowMissingLongitudeBounds": true,
+          "specialValueMagnitude": 1e+30
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "minimum": 0,
+        "maximum": 87,
+        "colors": [
+          "#29253c",
+          "#356da7",
+          "#3cbbb0",
+          "#e9ec8f"
+        ]
       }
     ],
     "observedColors": []
@@ -89,22 +304,27 @@
     "mapUrl": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
     "polesUrl": "/scenes/phoebe/phoebe-normal-poles@2x.webp",
     "radialTerrain": {
-      "path": "shape/phoebe_ver128q.tab",
-      "format": "pds-vertex-facet",
+      "path": "shape/2023/phoebe_128_o.obj",
+      "format": "wavefront-obj",
       "grid": {
         "metersPerUnit": 1000,
         "expectedVertices": 99846,
         "expectedFaces": 196608
       },
-      "latitudeSegments": 20,
-      "longitudeSegments": 32,
-      "faceBudget": 2000,
+      "faceBudget": 3500,
       "tileSize": 128,
-      "atlasColumns": 16
+      "atlasColumns": 32,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 3500,
+        "maximumErrorMeters": 1065,
+        "regularize": true
+      }
     }
   },
   "celestial": {
-    "sunSource": "Vendored JPL Horizons Saturn satellite elements and the Gaskell model’s documented body-fixed orientation at the shared epoch."
+    "sunSource": "JPL Phoebe orbit and the retained Gaskell source-model orientation; the 2023 release uses the same image/kernel set and shifts its origin to the center of figure. Present-day rotation phase is not independently qualified."
   },
   "presentation": {
     "defaultLens": "normal",

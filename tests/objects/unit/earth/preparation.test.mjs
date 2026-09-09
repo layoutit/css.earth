@@ -1,4 +1,3 @@
-import { PREPARED_EARTH_NOISE } from "../../unit/earth/prepared-fixture.mjs";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -13,7 +12,6 @@ import {
 } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_LENSES } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
-import { PREPARED_EARTH_CITY_PAGES } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_SKY_SUN } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_TITLE } from "../../unit/earth/prepared-fixture.mjs";
@@ -25,7 +23,7 @@ const publicRoot = resolve("public/scenes/earth");
 test("prepares Earth from a complete checked source closure", async () => {
   assert.deepEqual(await verifyEarthSourceManifest(), {
     inputCount: earthSourceManifest().inputs.length,
-    generatedIntermediateCount: 1,
+    generatedIntermediateCount: earthSourceManifest().generatedIntermediates.length,
     documentCount: earthSourceManifest().documents.length,
   });
 });
@@ -52,7 +50,7 @@ test("prepares the shared photographed cubic sky and independent Sun", () => {
 
 test("prepares flat opaque texel thumbnails for Earth surface lenses", async () => {
   for (const lens of PREPARED_EARTH_LENSES.controls.filter(
-    ({ id }) => id !== "cross-section",
+    ({ view }) => view !== "interior",
   )) {
     const { data, info } = await sharp(resolve(
       publicRoot,
@@ -189,8 +187,8 @@ test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal(Object.keys(PREPARED_EARTH_SCENE.counts).some((key) =>
     /moon|orbitGuide/u.test(key)), false);
   assert.equal(PREPARED_EARTH_SCENE.counts.retainedLeafCount,
-    453 + PREPARED_EARTH_CITY_PAGES.poolSize + PREPARED_EARTH_NOISE.poolSize);
-  assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 546);
+    453);
+  assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 516);
   assert.equal(PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount,
     PREPARED_EARTH_SCENE.counts.retainedLeafCount + PREPARED_EARTH_SCENE.counts.interiorLeafCount);
   assert.equal(PREPARED_EARTH_SCENE.counts.runtimeGeometryPreparation, false);
@@ -263,8 +261,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
     PREPARED_EARTH_SCENE.material.lighting.frames.at(-1).transform,
   );
   assert.equal("interior" in PREPARED_EARTH_SCENE.material, false);
-  assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom,
-    PREPARED_EARTH_CITY_PAGES.maximumZoom);
+  assert.equal(PREPARED_EARTH_SCENE.camera.maximumZoom, 4);
   assert.equal(PREPARED_EARTH_SCENE.body.assets.surface.url,
     "/scenes/earth/earth-surface.webp");
   assert.equal(PREPARED_EARTH_SCENE.body.assets.poles.url,
@@ -322,18 +319,6 @@ test("publishes the prepared Earth title and retained scene", async () => {
     interiorSource.layers);
   assert.equal(PREPARED_EARTH_SCENE.interior.runtimeGeometry, false);
   assert.equal(PREPARED_EARTH_SCENE.interior.runtimeRasterization, false);
-  assert.equal(PREPARED_EARTH_SCENE.interior.presentationLock.schema,
-    "cssearth-prepared-interior-presentation-lock@1");
-  assert.equal(
-    PREPARED_EARTH_SCENE.interior.presentationLock
-      .referenceControlYawDegrees,
-    -105,
-  );
-  assert.equal(
-    PREPARED_EARTH_SCENE.interior.presentationLock
-      .changesPhysicalAxialTiltClaim,
-    false,
-  );
   assert.equal(PREPARED_EARTH_SCENE.camera.orbitPlayback.schema,
     "cssearth-prepared-camera-orbit@1");
   assert.equal(PREPARED_EARTH_SCENE.camera.orbitPlayback.keyframes.length, 2);

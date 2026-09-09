@@ -1,0 +1,41 @@
+{
+  "browser": "152.0.7977.76",
+  "reports": [
+    {
+      "object": "ida",
+      "density": 1,
+      "initial": {
+        "nodes": 72558,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 882,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "ida",
+      "density": 2,
+      "initial": {
+        "nodes": 72558,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 882,
+        "texturedLeaves": 800,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    }
+  ],
+  "navigation": [],
+  "problems": []
+}

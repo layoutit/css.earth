@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "9e783c4db4c96e7ddcccdcfe9f3a27ac42372453525226832b14ba90a6312ead"
+          "sha256": "b88628b2b19d84eb9920adbaaee9c47c6839359682daab4a13fbb765d17c0e1a"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "56f13a4125b84fcdb77eaef50e5d875222f0a0924815429dbcbc65754f07e50f"
+          "sha256": "7427b79e3ae0f58d3c9b158cb5887655be993ef72299a48193a85bfe91632a6f"
         },
         {
           "id": "title",
@@ -43,11 +43,11 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "7b73ecc941f3a189e382e1455cc3e8bb13dacf84c555a43f49809d8d7e5830e0"
+          "sha256": "e9cecdb23b82d24073b8a26f21ed9ca957b5b78c98571c474004d19e09ebad2a"
         }
       ],
       "shape": {
-        "kind": "sphere",
+        "kind": "radial-terrain",
         "radiusKm": 252.3
       },
       "surfaces": [
@@ -63,6 +63,21 @@
             },
             {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "ice-absorption",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "infrared-ratio",
               "source": "content",
               "material": "lighting"
             }
@@ -108,6 +123,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0772914afaebc3dde831e7cf8043784faea39595ec172f2cfc077e3f8b895c5b"
+    "sha256": "0494ab31a8cc140e966873564a386c88d65a353d9d6705decaefb695dd7a7c45"
   }
 }

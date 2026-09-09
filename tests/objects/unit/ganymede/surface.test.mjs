@@ -1,50 +1,44 @@
-import assert from "node:assert/strict";
-import { test } from "node:test";
-import { readFile } from "node:fs/promises";
-import sharp from "sharp";
-import { fromFile } from "geotiff";
-import {createSourceManifest} from "../../../../src/platform/source-manifest.mjs";
-const source = await createSourceManifest({planetId:"ganymede",planetName:"Ganymede",sourceRoot:new URL("../../../../src/planets/ganymede/source/",import.meta.url).pathname});
-const verifyGanymedeSourceManifest = () => source.verify();
-const ganymedeSourceInputsFor = consumer => source.inputsFor(consumer);
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {fromFile} from 'geotiff';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
+import {publishedObservation,canonicalPoint,expectedMonochromeTexel,assertDisplayClose,countInteriorPixels} from '../observed-atlas-proof.mjs';
+const sourceRoot=new URL('../../../../src/planets/ganymede/source/',import.meta.url);
+const source=await createSourceManifest({planetId:'ganymede',planetName:'Ganymede',sourceRoot:sourceRoot.pathname});
+let normal,enhanced;
+async function observations(){normal??=await publishedObservation('ganymede','normal');enhanced??=await publishedObservation('ganymede','enhanced');}
 
-const root=new URL("../../../../public/scenes/ganymede/",import.meta.url);
-test("source maps retain georeference and valid observed terrain",async()=>{
- await verifyGanymedeSourceManifest();
- const entries=ganymedeSourceInputsFor("surfaces");
- for(const entry of entries) {
-  const tiff=await fromFile(new URL(`../../../../src/planets/ganymede/source/${entry.path}`,import.meta.url).pathname),image=await tiff.getImage();
-  assert.equal(image.getGDALNoData(),0);
-  const [x,y]=image.getOrigin(),[dx,dy]=image.getResolution(),radius=entry.projection.referenceRadiusMeters;
-  assert.ok(Math.abs(180+x/radius*180/Math.PI)<.02,"left edge is zero east, not a mirrored 180-degree origin");
-  assert.ok(Math.abs(y/radius*180/Math.PI-90)<.02);
-  assert.ok(dx>0&&dy<0);
-  await tiff.close();
+test('source maps retain georeference and valid observed terrain',async()=>{
+ await source.verify();await observations();
+ const anchors={normal:{origin:[-8270555.6754185,4135277.8377093],resolution:[1000.0671917072,-1000.0671917072]},
+  enhanced:{origin:[-8269755.621665,4134877.810833],resolution:[1435.72146209,-1435.72146209]}};
+ for(const entry of source.inputsFor('surfaces')){
+  const tiff=await fromFile(new URL(entry.path,sourceRoot).pathname);
+  try{const image=await tiff.getImage(),expected=anchors[entry.lensId];assert.equal(image.getGDALNoData(),0);
+   assert.equal(image.getGeoKeys().ProjCenterLongGeoKey,180);
+   assert.deepEqual(image.getOrigin().slice(0,2),expected.origin);assert.deepEqual(image.getResolution().slice(0,2),expected.resolution);
+   assert.deepEqual((entry.lensId==='normal'?normal:enhanced).record.sourceGeoreference.origin.slice(0,2),expected.origin);
+   if(entry.lensId==='normal')for(const [x,y]of [[1500,1500],[4000,2048],[6000,2000],[7200,2800]]){
+    const p=canonicalPoint(x,y,8192,4096),actual=normal.sample(p.longitude,p.latitude);
+    const value=await expectedMonochromeTexel(image,entry,normal.record.layout,actual);
+    assertDisplayClose(actual.rgb,[value,value,value],`native source-window anchor ${x},${y}`);
+   }
+  }finally{await tiff.close();}
  }
- const sourcePath=new URL("../../../../src/planets/ganymede/source/ganymede-mono.tif",import.meta.url).pathname;
- const map=await sharp(new URL('ganymede-normal-map.webp',root).pathname).removeAlpha().raw().toBuffer({resolveWithObject:true});
- assert.equal(map.info.width,8192);assert.equal(map.info.height,4096);
- const observed=await sharp(sourcePath).resize(8192,4096,{fit:"fill",kernel:"lanczos3"}).removeAlpha().raw().toBuffer();
- for(const [x,y]of [[1500,1500],[4000,2048],[6000,2000],[7200,2800]]){
-  const i=(y*8192+x)*3;for(let c=0;c<3;c++)assert.ok(Math.abs(map.data[i+c]-observed[i+c])<=1);
- }
+ assert.equal(normal.record.layout.width,8192);assert.equal(normal.record.layout.height,4096);
 });
 
-test("enhanced color preserves monochrome across synthesized and missing source coverage",async()=>{
- const normal=await sharp(new URL('ganymede-normal-map.webp',root).pathname).removeAlpha().raw().toBuffer();
- const enhanced=await sharp(new URL('ganymede-enhanced-map.webp',root).pathname).removeAlpha().raw().toBuffer();
- // 230 degrees west lies inside the independently documented synthesized-red sector.
+test('enhanced color preserves monochrome across synthesized and missing source coverage',async()=>{
+ await observations();
+ // 230 W = 130 E is inside the independently documented synthesized-red sector.
  const x=Math.floor(130/360*8192);
- for(const y of [300,1200,2048,3200,3800]) {
-  const i=(y*8192+x)*3;assert.deepEqual(enhanced.subarray(i,i+3),normal.subarray(i,i+3));
+ for(const y of [300,1200,2048,3200,3800]){
+  const p=canonicalPoint(x,y,8192,4096);
+  assertDisplayClose(enhanced.sample(p.longitude,p.latitude).rgb,normal.sample(p.longitude,p.latitude).rgb,'Source-synthesized red retains observed monochrome');
  }
- let colored=0;for(let i=0;i<enhanced.length;i+=3)if(Math.max(enhanced[i],enhanced[i+1],enhanced[i+2])-Math.min(enhanced[i],enhanced[i+1],enhanced[i+2])>12)colored++;
- assert.ok(colored>8192*4096/4,"enhanced lens retains real color outside withheld coverage");
- const metadata=JSON.parse(await readFile(new URL('../../../../src/planets/ganymede/prepared/surfaces.json',import.meta.url))).surfaces;
- assert.ok(metadata[1].withheldSyntheticPixels>0);assert.ok(metadata[1].monochromePixels>8192*4096/10);
- for(const surface of metadata) {
-  assert.equal(surface.layout.gutter,64,"atlas gutters scale with the canonical 8k map");
-  const poles=await sharp(new URL(`ganymede-${surface.id}-poles@2x.webp`,root).pathname).metadata();
-  assert.equal(poles.width,2048);assert.equal(poles.height,1024);
+ assert.ok(countInteriorPixels(enhanced,(r,g,b)=>Math.max(r,g,b)-Math.min(r,g,b)>12)>8192*4096/4,'The actual runtime atlas retains real color outside withheld coverage');
+ assert.ok(enhanced.record.withheldSyntheticPixels>0);assert.ok(enhanced.record.monochromePixels>8192*4096/10);
+ for(const surface of [normal,enhanced]){
+  assert.equal(surface.record.layout.gutter,64);assert.equal(surface.poles.info.width,2048);assert.equal(surface.poles.info.height,1024);
  }
 });

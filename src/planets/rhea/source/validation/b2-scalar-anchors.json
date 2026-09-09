@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-independent-scientific-anchors@1",
+  "sources": [
+    {
+      "path": "science/b2-intake/rhea_albedo_g.tif",
+      "expectedBytes": 9881887,
+      "expectedSha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123",
+      "minimum": 0.7717865705490112,
+      "maximum": 1.477596640586853,
+      "anchors": [
+        {
+          "row": 100,
+          "column": 100,
+          "longitudeEastDegrees": 16.244261977112956,
+          "latitudeDegrees": 73.7557380228873,
+          "value": 0.990327000617981
+        },
+        {
+          "row": 550,
+          "column": 1100,
+          "longitudeEastDegrees": 177.87870951056993,
+          "latitudeDegrees": 1.0202366328316779,
+          "value": 1.0086922645568848
+        },
+        {
+          "row": 900,
+          "column": 2000,
+          "longitudeEastDegrees": 323.3497122906812,
+          "latitudeDegrees": -55.55182000387827,
+          "value": 1.0023829936981201
+        }
+      ]
+    }
+  ],
+  "independentDecoder": "Pillow Float32 TIFF samples and GeoTIFF tiepoint/pixel-scale tags; independent spherical/polar inverse projection",
+  "qualifications": [
+    "Relative albedo is dimensionless and secondary to the SPC topography solution.",
+    "Source values and coordinate anchors only; prepared display and silhouette qualification are pending."
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "number": 25,
+  "name": "Phocaea",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/439",
+  "modelId": 697,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/697",
+  "catalog": "View model 347 10 9.935397 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "697",
+    "Asteroid": "(25) Phocaea",
+    "λ": "347",
+    "β": "10",
+    "P": "9.935397",
+    "YORP": "",
+    "t0": "2433498",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.68",
+    "p3": "0.06",
+    "p4": "-0.65",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-20",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/2754/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/2755/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/2756/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/2757/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2013)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/148",
+      "file": "reference-148.html",
+      "links": [
+        {
+          "label": "2013a&a...551a..67h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2013a&a...551a..67h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H",
+          "url": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H\n"
+        },
+        {
+          "label": "http://arxiv.org/abs/1301.6943",
+          "url": "http://arxiv.org/abs/1301.6943"
+        }
+      ]
+    }
+  ],
+  "id": "phocaea",
+  "displayName": "Phocaea",
+  "lambda": 347.0,
+  "beta": 10.0,
+  "periodHours": 9.935397,
+  "version": "2013-02-20",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 83.21,
+  "uncertaintyKm": 0.96,
+  "akari": {
+    "number": 25,
+    "name": "Phocaea",
+    "diameterKm": 83.21,
+    "uncertaintyKm": 0.96,
+    "detections": 8,
+    "originalRow": "25     Phocaea                        7.83  0.15  8   83.21  0.96 0.189 0.005"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2757/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2755/IAUspin.txt",
+  "shapeSha256": "508b7c0d7855f6aa60a8aa63d9ed3f2f7226718ca88d3eb72b0427228b69804e",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 0.9999999108089296,
+  "independentSignedVolume": 0.9999999108089295,
+  "originalVolumeEquivalentDiameter": 1.240700944912316,
+  "firstVertex": [
+    -0.141577,
+    0.186039,
+    0.556413
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.4955818624021666,
+    0.8196798138169562
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.685917,
+      0.723766
+    ],
+    [
+      -0.691386,
+      0.612661
+    ],
+    [
+      -0.617935,
+      0.559764
+    ]
+  ],
+  "scaleKmPerSourceUnit": 67.06692724077895,
+  "alternatives": [],
+  "distanceAu": 2.4015197093590164,
+  "orbitalPeriodYears": 3.721666345029508,
+  "sourceFields": {
+    "ID": "697",
+    "Asteroid": "(25) Phocaea",
+    "λ": "347",
+    "β": "10",
+    "P": "9.935397",
+    "YORP": "",
+    "t0": "2433498",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.68",
+    "p3": "0.06",
+    "p4": "-0.65",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-20",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates"
+}

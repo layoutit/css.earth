@@ -1,0 +1,137 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-8p",
+  "displayName": "Tuttle",
+  "panel": {
+    "introduction": "Tuttle’s nucleus is thought to have two touching lobes. Hubble, Spitzer and Arecibo observations give different estimates of their shape and size.",
+    "facts": [
+      {
+        "id": "period",
+        "label": "Orbital period",
+        "value": "About 13.5 years"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "About 11.4 hours"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Hubble · Spitzer",
+      "arecibo": "Arecibo"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Hubble · Spitzer",
+        "description": "Two touching spheres fitted to Hubble and Spitzer observations. This shape fits the thermal measurements better. Surface detail is unknown; the rotation phase is illustrative.",
+        "title": "Hubble-derived contact model scaled by Spitzer measurements.",
+        "detail": "Inferred shape",
+        "thumbnail": "/scenes/comet-8p/comet-8p-model-thumbnail.webp",
+        "surface": "comet-8p-model-surface@2x.webp",
+        "poles": "comet-8p-model-poles@2x.webp",
+        "source": {
+          "id": "contact-model",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1911.04897"
+        },
+        "facts": [
+          {
+            "id": "size",
+            "label": "Lobe radii",
+            "value": "≈2.7 km · ≈1.1 km"
+          },
+          {
+            "id": "rotation",
+            "label": "Rotation period",
+            "value": "About 11.4 hours"
+          }
+        ]
+      },
+      {
+        "id": "arecibo",
+        "label": "Arecibo",
+        "detail": "Radar model",
+        "title": "Alternative contact-body model fitted to Arecibo radar observations.",
+        "description": "Two elongated lobes fitted to radar echoes. Their axes are aligned with the other model for comparison. Surface detail is unknown; the orientation is illustrative.",
+        "thumbnail": "/scenes/comet-8p/comet-8p-arecibo-thumbnail.webp",
+        "surface": "comet-8p-arecibo-surface@2x.webp",
+        "poles": "comet-8p-arecibo-poles@2x.webp",
+        "source": {
+          "id": "arecibo-model",
+          "path": "../manifest.json",
+          "url": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf"
+        },
+        "facts": [
+          {
+            "id": "length",
+            "label": "Total length",
+            "value": "10.0 ± 0.9 km"
+          },
+          {
+            "id": "rotation",
+            "label": "Observed rotation",
+            "value": "About 11.4 hours"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Groussin et al. · 2019",
+      "role": "surface",
+      "description": "Hubble shape model and Spitzer size constraints",
+      "href": "https://arxiv.org/abs/1911.04897"
+    },
+    {
+      "label": "Harmon et al. · 2010",
+      "role": "observations",
+      "description": "The alternative Arecibo radar model",
+      "href": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1911.04897",
+      "credit": "Groussin et al. (2019)"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Lamy et al.; Groussin et al. (2019)"
+    }
+  }
+}

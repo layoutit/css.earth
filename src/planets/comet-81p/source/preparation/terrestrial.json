@@ -30,7 +30,65 @@
     ],
     "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "navcam",
+        "format": "encounter-fits",
+        "consumer": "photographs-navcam",
+        "frames": [
+          {
+            "id": "n2075we02-rr",
+            "path": "photography/navcam/n2075we02_rr.fit",
+            "labelPath": "photography/navcam/n2075we02_rr.lbl",
+            "controlPath": "photography/navcam/n2075we02_rr.json"
+          },
+          {
+            "id": "n2073we02-rr",
+            "path": "photography/navcam/n2073we02_rr.fit",
+            "labelPath": "photography/navcam/n2073we02_rr.lbl",
+            "controlPath": "photography/navcam/n2073we02_rr.json"
+          },
+          {
+            "id": "n2077we02-rr",
+            "path": "photography/navcam/n2077we02_rr.fit",
+            "labelPath": "photography/navcam/n2077we02_rr.lbl",
+            "controlPath": "photography/navcam/n2077we02_rr.json"
+          },
+          {
+            "id": "n2079we02-rr",
+            "path": "photography/navcam/n2079we02_rr.fit",
+            "labelPath": "photography/navcam/n2079we02_rr.lbl",
+            "controlPath": "photography/navcam/n2079we02_rr.json"
+          }
+        ],
+        "transfer": {
+          "maximumSourceDistanceMeters": 55,
+          "maximumSeparationMeters": 150,
+          "maximumEmissionDegrees": 75,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "observed",
+          "maximumGain": 1
+        },
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 32,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.3,
+          "maximumGain": 3
+        },
+        "displayPercentiles": [
+          1,
+          99.5
+        ],
+        "metadata": {
+          "label": "Stardust photographs",
+          "coverage": "Three Stardust photographs fitted to the measured part of the nucleus. Original shadows and some seams remain. The gray grid marks gaps; surface placement is approximate."
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,

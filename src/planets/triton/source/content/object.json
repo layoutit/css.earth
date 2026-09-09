@@ -92,7 +92,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
-        "title": "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
+        "title": "Clear-filter mosaic",
         "thumbnail": "/scenes/triton/triton-normal-thumbnail.webp",
         "surface": "triton-normal-surface@2x.webp",
         "poles": "triton-normal-poles@2x.webp",
@@ -101,13 +101,14 @@
           "path": "../manifest.json",
           "url": "https://doi.org/10.5066/P9MGH7FB"
         },
-        "detail": "Corrected Voyager mosaic"
+        "detail": "Corrected Voyager mosaic",
+        "summary": "Each image is corrected using its capture geometry before joining the mosaic. Missing coverage and unreliable views stay empty."
       },
       {
         "id": "enhanced",
         "label": "Enhanced color",
         "description": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
-        "title": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
+        "title": "Enhanced-color map",
         "thumbnail": "/scenes/triton/triton-enhanced-thumbnail.webp",
         "surface": "triton-enhanced-surface@2x.webp",
         "poles": "triton-enhanced-poles@2x.webp",
@@ -116,7 +117,8 @@
           "path": "../manifest.json",
           "url": "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
         },
-        "detail": "Corrected O/G/B color"
+        "detail": "Corrected O/G/B color",
+        "summary": "Orange, green and blue bands form an enhanced-color view. Detail varies; the unlit northern region stays unavailable."
       }
     ]
   },

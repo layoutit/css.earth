@@ -1,0 +1,401 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "polymele",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "d64d4f148eecca840b04b1778f9e4049dad30e2cf8b9eeb218553ef4e70f3249"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "fb0ce8f771f32d8118dc3509ddc55b32a745abae17f5397dc7cdb3404f2724b6",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "polymele",
+        "displayName": "Polymele",
+        "publicBase": "/scenes/polymele/",
+        "distanceAu": 5.2,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 9.496545373627304,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": -45,
+            "framingScale": 0.7034478054538744
+          },
+          "mapUrl": "/scenes/polymele/polymele-model-surface@2x.webp",
+          "polesUrl": "/scenes/polymele/polymele-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 237.41363434068262,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "3cd158fac21b7e49237b3438b21d206eba817b8b13d3ddd3f29ee43526ec20ea",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "polymele",
+        "displayName": "Polymele",
+        "panel": {
+          "introduction": "Polymele is a very flattened Jupiter Trojan and a Lucy target. This published ellipsoid is constrained by stellar occultations and its satellite's projected position. The grid marks unmapped terrain.",
+          "facts": [
+            {
+              "id": "shape",
+              "label": "Shape evidence",
+              "value": "Approximate ellipsoid"
+            },
+            {
+              "id": "dimensions",
+              "label": "Full approximation dimensions",
+              "value": "27 × 24.4 × 10.4 km"
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "Unresolved in this model"
+            },
+            {
+              "id": "class",
+              "label": "Population",
+              "value": "Jupiter Trojan"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "description": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
+              "title": "Occultation shape approximation",
+              "detail": "Approximate shape",
+              "thumbnail": "/scenes/polymele/polymele-model-thumbnail.webp",
+              "surface": "polymele-model-surface@2x.webp",
+              "poles": "polymele-model-poles@2x.webp",
+              "source": {
+                "id": "occultation-approximation",
+                "path": "../manifest.json",
+                "url": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Shape and dimensions",
+            "role": "surface",
+            "description": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70",
+            "href": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published model and interpretation",
+            "href": "https://doi.org/10.1007/s11214-025-01173-7"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published model and interpretation",
+            "href": "https://baas.aas.org/pub/2023n8i107p05"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
+            "credit": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
+      "credit": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "coverage": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 9496.545373627305
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "occultation-approximation",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
+      "credit": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "coverage": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 9496.545373627305
+      },
+      "sha256": "daeaea36b368b7012b45c0bc626085f87478d74d2f79fc75ab4be47a1ebba01c",
+      "bytes": 60316,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned body-specific source interpretation or preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned body-specific source interpretation or preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "3cd158fac21b7e49237b3438b21d206eba817b8b13d3ddd3f29ee43526ec20ea",
+      "bytes": 3591,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "occultation-approximation"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/polymele/polymele-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/polymele/polymele-model-surface@2x.webp",
+          "bytes": 43844,
+          "sha256": "c78078a9cc51a8e4ca1a8509933b6da44fae7f9718c7a76dc98eef763d688c8d",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5767,
+          "sha256": "a945122505c768db9b07b737853f5048342ecd8fe7d6b5ecb2850914f09eec4c",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

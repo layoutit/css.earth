@@ -1,0 +1,199 @@
+{
+  "number": 28,
+  "name": "Bellona",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/216",
+  "modelId": 1839,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1839",
+  "catalog": "View model 98 -10 15.70785 AO.png | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1839",
+    "Asteroid": "(28) Bellona",
+    "λ": "98",
+    "β": "-10",
+    "P": "15.70785",
+    "YORP": "",
+    "t0": "2438819",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "133",
+    "σD": "7",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-09-21",
+    "Comment": "",
+    "Created": "2017-09-21 14:26:25",
+    "Modified": "2017-09-21 14:33:46",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.png": "https://damit.cuni.cz/projects/damit/stored_files/open/954/AO.png",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/955/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/956/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/957/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Viikinkoski et al. (2017)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/171",
+      "file": "reference-171.html",
+      "links": [
+        {
+          "label": "2017a&a...607a.117v",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2017a&a...607a.117v"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2017A%26A...607A.117V",
+          "url": "http://adsabs.harvard.edu/abs/2017A%26A...607A.117V\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1708.05191",
+          "url": "https://arxiv.org/abs/1708.05191"
+        }
+      ]
+    }
+  ],
+  "id": "bellona",
+  "displayName": "Bellona",
+  "lambda": 98.0,
+  "beta": -10.0,
+  "periodHours": 15.70785,
+  "version": "2017-09-21",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 133.0,
+  "uncertaintyKm": 7.0,
+  "akari": {
+    "number": 28,
+    "name": "Bellona",
+    "diameterKm": 97.4,
+    "uncertaintyKm": 1.43,
+    "detections": 5,
+    "originalRow": "28     Bellona                        7.09  0.15  5   97.40  1.43 0.273 0.010"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/957/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/955/IAUspin.txt",
+  "shapeSha256": "ff1d83697f66dfc11511783c70c93f8cc5c44e88373e91d68b5103f19bfa5644",
+  "shapeBytes": 32486,
+  "vertices": 402,
+  "faces": 800,
+  "signedVolume": 1238792.6848966654,
+  "independentSignedVolume": 1238792.6848966652,
+  "originalVolumeEquivalentDiameter": 133.24983194134848,
+  "firstVertex": [
+    3.495762,
+    -2.827641,
+    68.708377
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    55.97320100461697,
+    79.9385745445805
+  ],
+  "extentsSourceUnits": [
+    [
+      -78.280438,
+      66.917462
+    ],
+    [
+      -65.231541,
+      74.770759
+    ],
+    [
+      -66.399423,
+      69.836177
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9981250862555802,
+  "alternatives": [
+    {
+      "modelId": 287,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/287",
+      "pole": [
+        "102",
+        "-8"
+      ],
+      "version": "2011-02-10"
+    }
+  ],
+  "distanceAu": 2.77802553680874,
+  "orbitalPeriodYears": 4.630336490636616,
+  "sourceFields": {
+    "ID": "1839",
+    "Asteroid": "(28) Bellona",
+    "λ": "98",
+    "β": "-10",
+    "P": "15.70785",
+    "YORP": "",
+    "t0": "2438819",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "133",
+    "σD": "7",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-09-21",
+    "Comment": "",
+    "Created": "2017-09-21 14:26:25",
+    "Modified": "2017-09-21 14:33:46",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

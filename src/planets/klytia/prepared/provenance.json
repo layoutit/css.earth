@@ -1,0 +1,548 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "klytia",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "86be24f7cd5ca579e171d9fb46fd6e6dee167fd0e4de08c8d59ac9fc0620560d"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "65e53c19995719a7ad2f3eb7b197451da1d5137d9b4912cf36d8de44fbf98ebe",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "klytia",
+        "displayName": "Klytia",
+        "publicBase": "/scenes/klytia/",
+        "distanceAu": 2.6653201228884313,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-142.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 36592.21681393436,
+                "expectedVertices": 1008,
+                "expectedFaces": 2012,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -22.7
+              },
+              "minimum": -20,
+              "maximum": 20,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 22700,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 454
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 22.7,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/klytia/klytia-shape-surface@2x.webp",
+          "polesUrl": "/scenes/klytia/klytia-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-142.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 36592.21681393436,
+              "expectedVertices": 1008,
+              "expectedFaces": 2012,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 454,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "DAMIT model 142 pole and period with JPL Horizons fixed-epoch heliocentric elements. Absolute body phase is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "429e8c116d26f5982e80b6fbfaa8ecf7fd95893d9c91aafb076f04bb761479c6",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "klytia",
+        "displayName": "Klytia",
+        "panel": {
+          "introduction": "Published convex shape with a shape-aware thermophysical size calibration. The grid marks unavailable imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "22.7 km (thermophysical size calibration)",
+              "source": {
+                "url": "https://arxiv.org/pdf/1803.06116",
+                "label": "Hanuš et al. (2018), Table A.3",
+                "checked": "2026-09-09",
+                "path": "source/reference/calibration.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.665 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2773%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.35 years",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2773%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 2026-09-03 epoch",
+                "checked": "2026-09-09",
+                "path": "source/reference/horizons-elements.txt"
+              }
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "8.28307 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/142",
+                "label": "DAMIT model 142",
+                "checked": "2026-09-09",
+                "path": "source/reference/damit-model.json"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 1.3 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative.",
+              "title": "DAMIT shape model",
+              "thumbnail": "/scenes/klytia/klytia-shape-thumbnail.webp",
+              "surface": "klytia-shape-surface@2x.webp",
+              "poles": "klytia-shape-surface@2x.webp",
+              "source": {
+                "id": "klytia-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape · grid marks missing imagery"
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radius on the shape model minus a 22.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
+              "thumbnail": "/scenes/klytia/klytia-elevation-thumbnail.webp",
+              "surface": "klytia-elevation-surface@2x.webp",
+              "poles": "klytia-elevation-surface@2x.webp",
+              "source": {
+                "id": "klytia-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "0",
+                  "20"
+                ],
+                "meta": "km · 22.7 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/142",
+                "image": "/scenes/klytia/klytia-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 142, version 2011-04-20",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/142"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Hanuš et al. (2018), Table A.3",
+            "href": "https://arxiv.org/pdf/1803.06116"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/142"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/142",
+            "credit": "DAMIT, Astronomical Institute of Charles University; A. Marciniak (2008), Hanuš (2011); model 142, version 2011-04-20."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        },
+        "title": {
+          "label": "Klytia",
+          "viewBox": "0 0 67.0572 35",
+          "width": 67.0572,
+          "height": 35,
+          "path": "M2.15 23.68L2.15 19.96Q2.84 19.1 3.54 18.28Q4.24 17.46 4.96 16.65Q5.67 15.83 6.41 15L12.18 8.63L16.06 8.63L7.41 18.13L7.22 18.13ZM0 29L0 8.63L3.05 8.63L3.05 15.22L3.05 19.81L3.05 21.3L3.05 29ZM12.54 29L5.54 18.98L7.42 16.6L16.13 29ZM21.04 8.63L21.04 29L18.13 29L18.13 8.63ZM24.63 34.66L24.81 32.24L26.11 32.25Q26.64 32.29 27.03 32.14Q27.42 31.98 27.73 31.59Q28.04 31.2 28.27 30.53L28.85 28.93L23.21 14.37L26.34 14.37L29.26 22.45Q29.68 23.65 30.05 24.84Q30.42 26.03 30.79 27.22L29.95 27.22Q30.31 26.03 30.68 24.84Q31.06 23.64 31.48 22.45L34.38 14.37L37.47 14.37L30.9 31.43Q30.46 32.54 29.84 33.27Q29.23 33.99 28.4 34.37Q27.57 34.74 26.55 34.74Q26.04 34.74 25.55 34.72Q25.06 34.7 24.63 34.66ZM46.83 14.37L46.83 16.78L38.49 16.78L38.49 14.37ZM40.97 10.5L43.88 10.5L43.88 25.1Q43.88 25.94 44.23 26.28Q44.58 26.62 45.44 26.62Q45.74 26.62 46.14 26.61Q46.53 26.59 46.82 26.58L46.93 28.97Q46.56 29.01 46.05 29.03Q45.54 29.05 45.06 29.05Q43.02 29.05 41.99 28.15Q40.97 27.25 40.97 25.47ZM49.18 29L49.18 14.37L52.09 14.37L52.09 29ZM50.66 11.91Q49.88 11.91 49.34 11.4Q48.81 10.9 48.81 10.16Q48.81 9.39 49.34 8.88Q49.88 8.37 50.64 8.37Q51.42 8.37 51.96 8.88Q52.49 9.39 52.49 10.16Q52.49 10.9 51.96 11.4Q51.42 11.91 50.66 11.91ZM59.81 29.26Q58.38 29.26 57.23 28.75Q56.08 28.25 55.42 27.26Q54.75 26.28 54.75 24.83Q54.75 23.59 55.23 22.78Q55.71 21.97 56.53 21.51Q57.35 21.04 58.38 20.8Q59.41 20.56 60.51 20.44Q61.86 20.26 62.67 20.16Q63.48 20.06 63.82 19.83Q64.17 19.59 64.17 19.07L64.17 18.96Q64.17 18.21 63.83 17.67Q63.49 17.13 62.84 16.81Q62.19 16.49 61.25 16.49Q60.32 16.49 59.61 16.8Q58.9 17.11 58.48 17.63Q58.07 18.14 57.97 18.76L55.12 18.6Q55.31 17.23 56.12 16.22Q56.93 15.22 58.25 14.67Q59.58 14.11 61.26 14.11Q62.52 14.11 63.58 14.42Q64.64 14.73 65.42 15.36Q66.2 15.98 66.63 16.9Q67.06 17.82 67.06 19.05L67.06 29L64.2 29L64.2 26.95L64.13 26.95Q63.83 27.52 63.29 28.06Q62.75 28.59 61.9 28.92Q61.06 29.26 59.81 29.26ZM60.43 26.91Q61.68 26.91 62.52 26.45Q63.37 25.99 63.78 25.23Q64.19 24.46 64.19 23.57L64.19 21.82Q64.04 21.96 63.67 22.06Q63.3 22.16 62.79 22.26Q62.29 22.36 61.74 22.44Q61.19 22.53 60.67 22.6Q59.87 22.71 59.18 22.96Q58.48 23.22 58.07 23.67Q57.65 24.13 57.65 24.88Q57.65 25.53 57.99 25.98Q58.33 26.43 58.96 26.67Q59.58 26.91 60.43 26.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "klytia-shape",
+      "path": "shape/model-142.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/299/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; A. Marciniak (2008), Hanuš (2011); model 142, version 2011-04-20.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original unit-volume counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "dimensionless uncalibrated DAMIT coordinates",
+        "metersPerUnit": 36592.21681393436,
+        "referenceRadiusMeters": 22700
+      },
+      "coverage": "Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 1.3 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative. Only a uniform scale from the published thermophysical fit is transferred to the archived nominal mesh. The varied-model ensemble does not establish identical mesh bytes or local surface accuracy. The alternative pole remains possible. No thermal or reflectance map is inferred.",
+      "sha256": "32e8a509863ce93032e7d97e906d1b7413d1c5db35b9229bee8953d0a8af54f7",
+      "bytes": 81574,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-142.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/299/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned original source record or authored scientific preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "429e8c116d26f5982e80b6fbfaa8ecf7fd95893d9c91aafb076f04bb761479c6",
+      "bytes": 8581,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radius on the shape model minus a 22.7 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "klytia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/klytia/klytia-elevation-thumbnail.webp",
+          "bytes": 5078,
+          "sha256": "896587789bd7edd365d02e722e6eb0464b86b04bcea49bca266f637c49551655",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/klytia/klytia-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/klytia/klytia-elevation-surface@2x.webp",
+          "bytes": 270842,
+          "sha256": "79302591a5ee7f729df83f4b57d95b3665eaf55bc95d46330acc915bd4c5528b",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 1.3 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "klytia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/klytia/klytia-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/klytia/klytia-shape-surface@2x.webp",
+          "bytes": 223734,
+          "sha256": "bbed2fdc91eb568101876af235920e16b3d64fa5c39549b32dd0d10ee72deddd",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5590,
+          "sha256": "581fca4142670ad86cb7c783127c73f39047154f374f495e7d1a29b8eea9ca8a",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 9504,
+          "sha256": "e51f06fa1aef70ea2f20c519051f2017e6c710d3d1b51ab5dececaa34e7f7fd4",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

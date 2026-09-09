@@ -1,0 +1,20 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 55.0,
+  "uncertaintyKm": 2.0,
+  "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+  "diameterSemantics": "Equivalent-volume size of the archived physical mesh; the thermal paper does not independently define volume semantics.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3090",
+  "sourceLabel": "DAMIT model 3090",
+  "reference": "DAMIT model 3090",
+  "limitations": "Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
+  "visibleDescription": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "publishedUncertainty": {
+    "lowerKm": 2,
+    "upperKm": 2,
+    "confidence": "3 sigma thermal-model fit",
+    "source": "Marciniak2019 Table2 and AppendixB"
+  },
+  "scaleKmPerSourceUnit": 0.9999999987755731,
+  "metersPerSourceUnit": 999.9999987755731
+}

@@ -1,0 +1,89 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16284",
+  "modelId": 16284,
+  "modelVersion": "2023-10-03",
+  "diameterKm": 103,
+  "diameterInterpretation": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 103,
+    "uncertaintyKm": 7,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16284",
+    "sourceLabel": "DAMIT model 16284",
+    "reference": "DAMIT model 16284",
+    "limitations": "The selected convex pole2 is preferred by nine occultation epochs in Marciniak2023 §5.2. Table1 gives103 km with asymmetric size interval96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole2 shape at100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
+    "visibleDescription": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "publishedUncertainty": {
+      "lowerKm": 7,
+      "upperKm": 6,
+      "confidence": "Envelope of acceptable vertically varied models, not a Gaussian sigma interval",
+      "source": "Marciniak2023 Table1 and section4"
+    },
+    "scaleKmPerSourceUnit": 0.9999999975028758,
+    "metersPerSourceUnit": 999.9999975028758
+  },
+  "periodHours": 14.93046,
+  "poleEclipticJ2000Degrees": [
+    264,
+    -2
+  ],
+  "modelLimitations": "The selected convex pole2 is preferred by nine occultation epochs in Marciniak2023 §5.2. Table1 gives103 km with asymmetric size interval96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole2 shape at100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/126589/shape.txt",
+    "vertices": 1020,
+    "faces": 2036,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 999.9999975028758,
+    "firstVertexKm": [
+      12.466979968868403,
+      8.141598979669416,
+      49.83690987555105
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      108.89773972806881,
+      112.66231971866819,
+      107.27281973212645
+    ],
+    "volumeCubicKm": 572150.5192632028,
+    "volumeEquivalentRadiusKm": 51.5,
+    "radialRangeKm": [
+      43.11012027159746,
+      60.72075527182414
+    ]
+  },
+  "elevation": [
+    -10,
+    10
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2036,
+    "sourceVertices": 1020,
+    "weldedVertices": 1020,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1030,
+    "estimatedErrorMeters": 477.7484436035156,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 570929092363810.9
+    }
+  }
+}

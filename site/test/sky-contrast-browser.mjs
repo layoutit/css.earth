@@ -40,7 +40,7 @@ async function checkContrast(page, id, dpr, view, expectedVolumeOpacity) {
   await page.waitForTimeout(1000);
   assert.equal(await page.locator('.planet-sky-contrast-setting').isChecked(), false);
   const before = await read(page);
-  assert.equal(before.mode, 'standard'); assert.equal(before.emphasis, .35);
+  assert.equal(before.mode, 'standard'); assert.equal(before.emphasis, .5);
   assert.equal(before.volumeOpacity, expectedVolumeOpacity);
   assert.ok(Math.abs(before.glow - before.preparedGlow) < 1e-6, 'Standard brightness uses the prepared distance gain');
   assert.ok(before.glow < 1, 'This view must exercise the brightness override');

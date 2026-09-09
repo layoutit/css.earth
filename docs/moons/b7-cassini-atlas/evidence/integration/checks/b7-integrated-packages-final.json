@@ -1,0 +1,110 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b7-cassini-atlas/verify-packages.mjs"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 1393917952,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 360448,
+      "freePercent": 75
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 182632448,
+      "freePercent": 75
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 295829504,
+      "freePercent": 75
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 409141248,
+      "freePercent": 75
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 476938240,
+      "freePercent": 75
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 511737856,
+      "freePercent": 75
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 534298624,
+      "freePercent": 75
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 649969664,
+      "freePercent": 75
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 694763520,
+      "freePercent": 74
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 736100352,
+      "freePercent": 74
+    },
+    {
+      "seconds": 2.8,
+      "rssBytes": 775897088,
+      "freePercent": 74
+    },
+    {
+      "seconds": 3.0,
+      "rssBytes": 812630016,
+      "freePercent": 74
+    },
+    {
+      "seconds": 3.3,
+      "rssBytes": 859406336,
+      "freePercent": 74
+    },
+    {
+      "seconds": 3.6,
+      "rssBytes": 916832256,
+      "freePercent": 74
+    },
+    {
+      "seconds": 3.9,
+      "rssBytes": 1076314112,
+      "freePercent": 74
+    },
+    {
+      "seconds": 4.1,
+      "rssBytes": 1092681728,
+      "freePercent": 74
+    },
+    {
+      "seconds": 4.4,
+      "rssBytes": 1180418048,
+      "freePercent": 77
+    },
+    {
+      "seconds": 4.7,
+      "rssBytes": 1276903424,
+      "freePercent": 77
+    },
+    {
+      "seconds": 5.0,
+      "rssBytes": 1393917952,
+      "freePercent": 77
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 5.2
+}

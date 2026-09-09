@@ -1,0 +1,912 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "dimorphos",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "2e7836e9ba750897ff33a6a0e51854abb02af3fbe30bc95f2b2c34f176983902"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "02535109d6f9ee4ad87707f89db30843eb0da3c1e1ebd326e34aeef119d1c335",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "dimorphos",
+        "displayName": "Dimorphos",
+        "publicBase": "/scenes/dimorphos/",
+        "distanceAu": 1.6427722213006,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "valueTransform": {
+                "scale": 1,
+                "offset": -75
+              },
+              "minimum": -20,
+              "maximum": 20,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 75,
+                "heightToMeters": 1,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            },
+            {
+              "id": "albedo",
+              "label": "Relative albedo",
+              "consumer": "albedo",
+              "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+              "format": "wavefront-obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "minimum": 0.45,
+              "maximum": 1.3,
+              "colors": [
+                "#404040",
+                "#f2f2f2"
+              ],
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 2
+              },
+              "facetField": {
+                "format": "fits-spc-facet-table",
+                "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+                "labelPath": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+                "field": "RELATIVE ALBEDO",
+                "target": "DIMORPHOS",
+                "sourceVersion": "dalyErnst_dimorphos230530",
+                "mapVersion": "004",
+                "maximumCentroidResidualMeters": 0.001,
+                "validity": "positive-sigma",
+                "facetOrder": "centroid-bijection"
+              }
+            },
+            {
+              "id": "slope",
+              "label": "Slope",
+              "consumer": "facet-science",
+              "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+              "format": "facet-scalars",
+              "meshPath": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 98306,
+                "expectedFaces": 196608
+              },
+              "table": {
+                "format": "pds4-fits",
+                "field": "SLOPE",
+                "units": "DEGREES",
+                "expectedRows": 196608,
+                "maximumCentroidErrorMeters": 0.001,
+                "labelPath": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+                "meshFile": "dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+                "target": "DIMORPHOS",
+                "registration": "centroid-bijection"
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 2
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "previewGrid": {
+                "width": 640,
+                "height": 320
+              },
+              "minimum": 0,
+              "maximum": 70,
+              "colors": [
+                "#20204b",
+                "#2d75b9",
+                "#4ebba7",
+                "#f1c45c",
+                "#cc543d"
+              ]
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 0.075,
+          "camera": {
+            "initialScenePitchDegrees": 46.741573033707866,
+            "defaultControlYawDegrees": 120
+          },
+          "mapUrl": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
+          "polesUrl": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 98306,
+              "expectedFaces": 196608
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 2,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons post-impact orbit; observed pole with arbitrary display phase. DART 2022 shape, not a post-impact terrain reconstruction."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "3bc06226f6b0f40911fd374884cb90e83240655234998dbda0c847740bb3fdf0",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "dimorphos",
+        "displayName": "Dimorphos",
+        "title": {
+          "label": "Dimorphos",
+          "viewBox": "0 0 134.4659 35",
+          "width": 134.4659,
+          "height": 35,
+          "path": "M6.59 29L1.59 29L1.59 26.33L6.41 26.33Q8.78 26.33 10.32 25.45Q11.87 24.56 12.63 22.86Q13.4 21.17 13.4 18.79Q13.4 16.42 12.65 14.75Q11.89 13.07 10.38 12.18Q8.86 11.29 6.6 11.29L1.48 11.29L1.48 8.63L6.81 8.63Q9.8 8.63 11.97 9.85Q14.14 11.08 15.3 13.35Q16.46 15.63 16.46 18.79Q16.46 21.96 15.29 24.24Q14.11 26.53 11.91 27.76Q9.71 29 6.59 29ZM3.05 8.63L3.05 29L0 29L0 8.63ZM19.26 29L19.26 14.37L22.17 14.37L22.17 29ZM20.73 11.91Q19.96 11.91 19.42 11.4Q18.89 10.9 18.89 10.16Q18.89 9.39 19.42 8.88Q19.96 8.37 20.72 8.37Q21.5 8.37 22.03 8.88Q22.57 9.39 22.57 10.16Q22.57 10.9 22.03 11.4Q21.5 11.91 20.73 11.91ZM25.5 29L25.5 14.37L28.32 14.37L28.33 17.53L28.07 17.53Q28.47 16.39 29.16 15.64Q29.85 14.88 30.74 14.49Q31.64 14.1 32.64 14.1Q34.33 14.1 35.49 15.07Q36.64 16.04 36.93 17.56L36.49 17.56Q36.79 16.53 37.48 15.75Q38.17 14.97 39.18 14.54Q40.18 14.1 41.36 14.1Q42.71 14.1 43.81 14.68Q44.91 15.26 45.56 16.42Q46.2 17.58 46.2 19.32L46.2 29L43.27 29L43.27 19.57Q43.27 18.04 42.41 17.34Q41.55 16.65 40.39 16.65Q39.43 16.65 38.74 17.06Q38.05 17.46 37.67 18.17Q37.3 18.88 37.3 19.8L37.3 29L34.41 29L34.41 19.38Q34.41 18.14 33.61 17.4Q32.81 16.65 31.6 16.65Q30.75 16.65 30.03 17.05Q29.3 17.45 28.86 18.21Q28.41 18.98 28.41 20.11L28.41 29ZM55.77 29.33Q53.7 29.33 52.13 28.36Q50.56 27.4 49.68 25.68Q48.81 23.97 48.81 21.71Q48.81 19.46 49.68 17.73Q50.56 16.01 52.13 15.04Q53.7 14.07 55.77 14.07Q57.87 14.07 59.43 15.04Q60.99 16.01 61.87 17.73Q62.74 19.46 62.74 21.71Q62.74 23.97 61.87 25.68Q60.99 27.4 59.43 28.36Q57.87 29.33 55.77 29.33ZM55.77 26.81Q57.05 26.81 57.95 26.17Q58.84 25.53 59.32 24.38Q59.8 23.23 59.8 21.73Q59.8 20.18 59.32 19.03Q58.84 17.88 57.95 17.24Q57.05 16.59 55.77 16.59Q54.51 16.59 53.61 17.23Q52.72 17.87 52.25 19.03Q51.78 20.18 51.78 21.73Q51.78 23.24 52.25 24.39Q52.72 25.53 53.62 26.17Q54.52 26.81 55.77 26.81ZM65.36 29L65.36 14.37L68.18 14.37L68.18 16.75L68.25 16.75Q68.64 15.53 69.54 14.86Q70.45 14.18 71.83 14.18Q72.14 14.18 72.43 14.21Q72.72 14.23 72.92 14.26L72.92 17Q72.74 16.94 72.31 16.89Q71.88 16.85 71.39 16.85Q70.53 16.85 69.82 17.23Q69.11 17.61 68.69 18.38Q68.27 19.16 68.27 20.3L68.27 29ZM75.19 34.71L75.19 14.37L78.05 14.37L78.05 16.53L78.13 16.53Q78.55 15.82 79.2 15.27Q79.84 14.73 80.69 14.42Q81.55 14.11 82.6 14.11Q84.45 14.11 85.87 15.05Q87.29 16 88.08 17.71Q88.86 19.42 88.86 21.7Q88.86 23.97 88.08 25.68Q87.29 27.39 85.87 28.34Q84.46 29.29 82.59 29.29Q81.55 29.29 80.71 28.97Q79.88 28.66 79.24 28.09Q78.61 27.52 78.17 26.77L78.1 26.77L78.1 34.71ZM81.99 26.79Q83.19 26.79 84.07 26.18Q84.95 25.57 85.43 24.43Q85.91 23.3 85.91 21.69Q85.91 20.07 85.42 18.94Q84.94 17.8 84.06 17.2Q83.19 16.6 81.99 16.6Q80.74 16.6 79.82 17.23Q78.91 17.86 78.42 19Q77.94 20.14 77.94 21.69Q77.94 23.2 78.43 24.36Q78.92 25.51 79.83 26.15Q80.74 26.79 81.99 26.79ZM94.4 20.52L94.4 29L91.48 29L91.48 8.63L94.4 8.63L94.4 18.01L93.74 18.01Q94.45 16.04 95.72 15.08Q96.98 14.11 98.79 14.11Q100.28 14.11 101.45 14.76Q102.63 15.41 103.31 16.68Q103.99 17.95 103.99 19.85L103.99 29L101.08 29L101.08 20.21Q101.08 18.49 100.25 17.6Q99.41 16.71 97.9 16.71Q96.93 16.71 96.13 17.12Q95.33 17.53 94.86 18.37Q94.4 19.21 94.4 20.52ZM113.57 29.33Q111.5 29.33 109.93 28.36Q108.36 27.4 107.48 25.68Q106.61 23.97 106.61 21.71Q106.61 19.46 107.48 17.73Q108.36 16.01 109.93 15.04Q111.5 14.07 113.57 14.07Q115.67 14.07 117.23 15.04Q118.79 16.01 119.66 17.73Q120.54 19.46 120.54 21.71Q120.54 23.97 119.66 25.68Q118.79 27.4 117.23 28.36Q115.67 29.33 113.57 29.33ZM113.57 26.81Q114.85 26.81 115.75 26.17Q116.64 25.53 117.12 24.38Q117.6 23.23 117.6 21.73Q117.6 20.18 117.12 19.03Q116.64 17.88 115.75 17.24Q114.85 16.59 113.57 16.59Q112.31 16.59 111.41 17.23Q110.52 17.87 110.05 19.03Q109.57 20.18 109.57 21.73Q109.57 23.24 110.05 24.39Q110.52 25.53 111.42 26.17Q112.32 26.81 113.57 26.81ZM128.55 29.33Q126.89 29.33 125.57 28.82Q124.25 28.3 123.44 27.27Q122.63 26.24 122.48 24.72L125.33 24.6Q125.48 25.76 126.3 26.38Q127.12 27 128.51 27Q129.9 27 130.7 26.44Q131.5 25.87 131.5 25.01Q131.5 24.27 130.95 23.81Q130.41 23.35 129.42 23.15L127 22.62Q124.94 22.15 123.88 21.1Q122.82 20.06 122.82 18.46Q122.82 17.16 123.54 16.17Q124.25 15.18 125.51 14.62Q126.77 14.07 128.45 14.07Q130.08 14.07 131.32 14.62Q132.57 15.18 133.3 16.2Q134.04 17.21 134.14 18.61L131.39 18.73Q131.31 17.73 130.55 17.06Q129.79 16.39 128.48 16.39Q127.26 16.39 126.51 16.97Q125.76 17.54 125.76 18.36Q125.76 19.12 126.3 19.57Q126.85 20.03 127.89 20.26L130.36 20.81Q132.47 21.28 133.47 22.26Q134.47 23.24 134.47 24.83Q134.47 26.2 133.7 27.22Q132.93 28.23 131.6 28.78Q130.27 29.33 128.55 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Dimorphos is the small moon of Didymos that NASA’s DART spacecraft struck in September 2022. This view preserves its encounter-era shape, reconstructed from DRACO and LICIACube images. DART changed its orbit and shape; this surface is not a model of the altered asteroid.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Shape reference radius",
+              "value": "75 m"
+            },
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "Didymos"
+            },
+            {
+              "id": "dimensions",
+              "label": "Encounter shape",
+              "value": "178 × 169 × 115 m"
+            },
+            {
+              "id": "impact",
+              "label": "DART impact",
+              "value": "26 September 2022"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown.",
+              "title": "SPC shape model v004",
+              "thumbnail": "/scenes/dimorphos/dimorphos-shape-thumbnail.webp",
+              "surface": "dimorphos-shape-surface@2x.webp",
+              "poles": "dimorphos-shape-surface@2x.webp",
+              "source": {
+                "id": "dimorphos-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "DART encounter shape",
+              "summary": "Shape from DART and LICIACube encounter images, including modeled terrain. It is not a post-impact map."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
+              "thumbnail": "/scenes/dimorphos/dimorphos-elevation-thumbnail.webp",
+              "surface": "dimorphos-elevation-surface@2x.webp",
+              "poles": "dimorphos-elevation-surface@2x.webp",
+              "source": {
+                "id": "dimorphos-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "0",
+                  "20"
+                ],
+                "meta": "m · 75 m reference sphere",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.xml",
+                "image": "/scenes/dimorphos/dimorphos-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height",
+              "summary": "Encounter-model height relative to a 75 m sphere. It shows the overall shape, not impact-induced changes."
+            },
+            {
+              "id": "albedo",
+              "label": "Relative albedo",
+              "detail": "DART surface brightness",
+              "description": "Grayscale shows relative surface brightness from the DART v004 stereophotoclinometry model of the encounter-facing surface before impact. Values are modeled relative albedo, not absolute geometric albedo or a photograph. Facets with positive multi-image uncertainty cover about 31% of the source model area; the ordinary grid marks withheld coverage. Linear display scale: 0.45–1.30.",
+              "title": "SPC relative albedo model",
+              "thumbnail": "/scenes/dimorphos/dimorphos-albedo-thumbnail.webp",
+              "surface": "dimorphos-albedo-surface@2x.webp",
+              "poles": "dimorphos-albedo-surface@2x.webp",
+              "source": {
+                "id": "dimorphos-relative-albedo",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Relative albedo",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.45",
+                  "0.875",
+                  "1.30"
+                ],
+                "meta": "unitless · SPC relative brightness",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+                "image": "/scenes/dimorphos/dimorphos-albedo-legend.webp"
+              },
+              "summary": "Grayscale shows modeled brightness before impact, not absolute albedo. Accepted facets cover about 31%; the grid marks the rest."
+            },
+            {
+              "id": "slope",
+              "label": "Slope",
+              "description": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+              "title": "Modeled surface slopes",
+              "detail": "Released facet values",
+              "thumbnail": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
+              "surface": "dimorphos-slope-surface@2x.webp",
+              "poles": "dimorphos-slope-surface@2x.webp",
+              "source": {
+                "id": "dimorphos-facet-science",
+                "path": "../manifest.json",
+                "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Slope",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "35",
+                  "70"
+                ],
+                "meta": "deg",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+                "image": "/scenes/dimorphos/dimorphos-slope-legend.webp"
+              }
+            }
+          ],
+          "labels": {
+            "slope": "Slope"
+          }
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Mission",
+            "role": "facts",
+            "description": "DART at Didymos and Dimorphos",
+            "href": "https://science.nasa.gov/solar-system/asteroids/didymos/"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Released DART v004 mesh",
+            "href": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/"
+          },
+          {
+            "label": "Data guide",
+            "role": "rotation",
+            "description": "DART shape-model documentation",
+            "href": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/document/dart_shapemodel_sis.pdf"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "Albedo data",
+            "role": "albedo",
+            "description": "DART v004 relative surface brightness",
+            "href": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/overview_data_derived_dimorphos_model_v004.txt",
+            "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "dimorphos-shape",
+      "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 75
+      },
+      "coverage": "Closed DART encounter model v004 derived from DRACO and LICIACube; source uncertainty varies with imaging coverage. Not a reconstructed post-impact surface.",
+      "sha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e",
+      "bytes": 14454228,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dimorphos-relative-albedo",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "lensId": "albedo",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "relative albedo",
+        "facetNumberBase": 0
+      },
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling.",
+      "sha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
+      "bytes": 4728960,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dimorphos-relative-albedo-label",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling.",
+      "sha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
+      "bytes": 6781,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "id": "dimorphos-facet-science",
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "coverage": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
+      "sha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
+      "bytes": 4726080,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "purpose": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "id": "authored-document:science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "kind": "authored-document",
+      "title": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
+      "bytes": 7093,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned source documentation or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "3bc06226f6b0f40911fd374884cb90e83240655234998dbda0c847740bb3fdf0",
+      "bytes": 13422,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Color shows source-mesh radius minus a 75 m reference sphere, including the overall flattened shape. It is not height above an equipotential or a map of impact-induced change. Terrain coverage and precision follow the published encounter model. Cartographic relief and optional Sun lighting are display treatments."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "dimorphos-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/dimorphos/dimorphos-elevation-thumbnail.webp",
+          "bytes": 4926,
+          "sha256": "23fa84b1ad4607a2f9febe182e90a7daaefab0c0905b3377c11d6e78ff2cf82e",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-elevation-surface@2x.webp",
+          "bytes": 454484,
+          "sha256": "c19c0941aa42da697721d9e4aee0290ed8601b68cd0c53b520d2850d870b1239",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "albedo",
+      "label": "Relative albedo",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Grayscale shows relative surface brightness from the DART v004 stereophotoclinometry model of the encounter-facing surface before impact. Values are modeled relative albedo, not absolute geometric albedo or a photograph. Facets with positive multi-image uncertainty cover about 31% of the source model area; the ordinary grid marks withheld coverage. Linear display scale: 0.45–1.30."
+      ],
+      "lensIds": [
+        "albedo"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "dimorphos-shape",
+        "dimorphos-relative-albedo",
+        "dimorphos-relative-albedo-label"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/dimorphos/dimorphos-albedo-thumbnail.webp",
+          "bytes": 2054,
+          "sha256": "40ae515de84bda9cc14eca9c251833fb6ee7088e35ce956339aa5f74a27c4f7b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-albedo-legend.webp",
+          "bytes": 64,
+          "sha256": "fbf50802a71d951fd9e6393c53c70993edffbe7d465f76e25428470bac81ac3f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-albedo-surface@2x.webp",
+          "bytes": 349196,
+          "sha256": "49a700dff7bf86a76887498f08548872d157697cde70c7a688a8f303f6cda7e5",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "slope",
+      "label": "Slope",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change."
+      ],
+      "lensIds": [
+        "slope"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "dimorphos-facet-science",
+        "dimorphos-shape",
+        "authored-document:science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/dimorphos/dimorphos-slope-thumbnail.webp",
+          "bytes": 1122,
+          "sha256": "80d0174445c6f14e65521f6926e39e75e663c34f92d710677e4b6999e1d9d9ab",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-slope-legend.webp",
+          "bytes": 232,
+          "sha256": "280a1b9142a95b4915e78f4dad454eb491ea0e9fbb6ffb6c721dd6fbf4b3b987",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-slope-surface@2x.webp",
+          "bytes": 2380766,
+          "sha256": "631da1b8ad9eab19cde87f260b6ac14e0a8364e08f3e8bd7df696af0c54b8f1c",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "The shared grid marks unavailable surface imagery over the released DART v004 global shape. DRACO and LICIACube observations constrain different regions; the closed mesh also contains modeled terrain. It represents the encounter-era body, not a measured post-impact surface. Lighting uses an arbitrary display phase about the observed pole; no photographic texture or albedo is shown."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "dimorphos-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/dimorphos/dimorphos-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/dimorphos/dimorphos-shape-surface@2x.webp",
+          "bytes": 210436,
+          "sha256": "768556dbc2cc8e3d6c2b967044ad6977bfdef2fd955e00bc030d8dde1d311bf2",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 7124,
+          "sha256": "a372601cf71091df4ceaa64dbc073c81b3114e1c6b7f05b7794d07010c261290",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 12988,
+          "sha256": "495cd437f29a45d2da35cc3dc44c17bbfa4611137e42d3212899761055b40c54",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:albedo",
+      "label": "Relative albedo preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "albedo"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/albedo.webp",
+          "bytes": 8124,
+          "sha256": "e7ccb5233be78eff69cde9b2321c4d0a80cb0ca8d8318dd035c8ba271e48345a",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:slope",
+      "label": "Slope preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "slope"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/slope.webp",
+          "bytes": 168022,
+          "sha256": "ea9c3bdced0a6cf38fd73a6cf5f99e88584e037bc5c5eb4496bb9c91613f1fdf",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

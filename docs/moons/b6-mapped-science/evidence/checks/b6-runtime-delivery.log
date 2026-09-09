@@ -1,0 +1,13 @@
+
+ ⛅️ wrangler 4.129.0
+────────────────────
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1m🚧 `wrangler r2 bulk put` is an experimental command. Please report any issues to https://github.com/cloudflare/workers-sdk/issues/new/choose[0m
+
+
+Resource location: remote 
+
+Starting bulk upload of 24 objects to bucket cssearth-assets using a concurrency of 1
+Uploaded 41% (10 out of 24)
+Uploaded 83% (20 out of 24)
+Uploaded 100% (24 out of 24)
+{"status":"PASS","base":"b3a0410f742501a1a1552dea14d9a3730fce7484","directory":"/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-delivery/run-Zorh3s","installation":"/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-delivery/run-Zorh3s/fresh-install","published":24,"newFiles":24,"newBytes":3770164,"installed":186,"reused":0}

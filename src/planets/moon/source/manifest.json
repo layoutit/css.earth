@@ -18,25 +18,13 @@
       "consumers": [
         "scene",
         "navigation"
-      ]
-    },
-    {
-      "id": "nasa-lro-lola-topography",
-      "path": "lenses/lola-topography-print.jpg",
-      "expectedSha256": "d8724a424e50926e0aeb722a3eff817895a100e8e30c5c34c1637913870bb0f9",
-      "expectedBytes": 158981,
-      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/LDEM_16.0centered.0centered_print.jpg",
-      "credit": "NASA GSFC Scientific Visualization Studio; LRO LOLA",
-      "license": "NASA media usage guidelines",
-      "licenseEvidence": [
-        "https://svs.gsfc.nasa.gov/4014/",
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
-      "acquisition": "checked NASA SVS cylindrical LOLA elevation map",
-      "redistribution": "NASA image with mission credit and no endorsement claim",
-      "consumers": [
-        "lenses"
-      ]
+      "capture": {
+        "spacecraftIds": [
+          "lro"
+        ],
+        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+      }
     },
     {
       "id": "nasa-grail-crustal-thickness",
@@ -54,7 +42,13 @@
       "redistribution": "NASA image with mission credit and no endorsement claim",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "grail"
+        ],
+        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
+      }
     },
     {
       "id": "jpl-satellite-physical",
@@ -127,8 +121,8 @@
     {
       "id": "moon-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedSha256": "98847e9f911898b5ce49dff021788efa2138d67aa145f8d99638c51be22b511e",
-      "expectedBytes": 2771,
+      "expectedSha256": "7e207c0a32f4a879c1767d2c2634505bb8b1639e937d7b4d7382165f1ae06101",
+      "expectedBytes": 2810,
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -174,6 +168,190 @@
       "consumers": [
         "starfield"
       ]
+    },
+    {
+      "id": "lro-lola-ldem16-numeric",
+      "path": "science/ldem_16.img",
+      "expectedSha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
+      "expectedBytes": 33177600,
+      "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
+      "credit": "David E. Smith and NASA GSFC LRO LOLA team; NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+      ],
+      "acquisition": "Exact public PDS binary download; original numeric samples, not a rendered press image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "lro"
+        ],
+        "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+      }
+    },
+    {
+      "id": "lro-diviner-rock-abundance-numeric",
+      "path": "science/dgdr_ra_avg_cyl_032_img.img",
+      "expectedSha256": "ee0ff6ddfcc9cb4bb2fe83992f3951471c468a169804f1fdb582dc2df99540e1",
+      "expectedBytes": 88473600,
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.img",
+      "credit": "Joshua Bandfield and UCLA LRO Diviner team; NASA PDS Geosciences Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml"
+      ],
+      "acquisition": "Exact public PDS binary download; original numeric samples, not a rendered press image",
+      "redistribution": "Derived numeric visualization with source version and producer/PDS attribution; no endorsement claim",
+      "consumers": [
+        "lenses"
+      ]
+    },
+    {
+      "id": "lro-diviner-christiansen-feature",
+      "path": "science/diviner-cf-2021-georeferenced.tif",
+      "expectedSha256": "adc63e4654a70093f5c060069f6394311aec52d6bdffd3eec1165173734f6632",
+      "expectedBytes": 3801047,
+      "origin": "https://zenodo.org/records/4558194",
+      "credit": "Lucey, Greenhagen, Donaldson Hanna, Bowles, Flom and Paige (2021)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/4558194",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Checked-in compact numeric grid. Reproduce using tools/objects/acquisition/coordinate-tiff-grid.py and science/prepare-cf-map.json from the three pinned original TIFFs.",
+      "redistribution": "Adapted under CC-BY-4.0; coordinate sampling and authored palette identified.",
+      "consumers": [
+        "lenses"
+      ],
+      "width": 2048,
+      "height": 1024
+    },
+    {
+      "id": "usgs-moon-geologic-units-grid",
+      "path": "geology/moon-geologic-units.tif",
+      "expectedBytes": 430857,
+      "expectedSha256": "16be1f099526cb91493e6004fa330b850b26f8ed72cd3a40dadcc5c427480bc5",
+      "origin": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
+      "credit": "USGS; Fortezzo, Spudis and Harrel (2020)",
+      "license": "USGS public-domain scientific mapping; preserve author citation",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits",
+        "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
+      ],
+      "acquisition": "Checked-in compact lossless unit grid, reproduced by tools/objects/acquisition/geology-grid.py from the pinned source shapefile using geology/prepare-grid.json.",
+      "redistribution": "Retain authors, scale and interpretation; palette colors are not observations.",
+      "consumers": [
+        "lenses"
+      ],
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1737400
+      },
+      "coverage": "Pixel-center categorical grid; unmapped, unknown and conflicting units withheld."
+    },
+    {
+      "path": "geology/GeoUnits.shp",
+      "expectedBytes": 126176440,
+      "expectedSha256": "122559104301f923cb75e48f5fadc87f31c3e1aeb354c499924b256c052770c1",
+      "id": "mapped-science-geology-geounits-shp",
+      "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
+      "credit": "Fortezzo, Spudis and Harrel (2020), USGS",
+      "license": "USGS public domain",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
+      ],
+      "acquisition": "Restore exact original via the mapped-science acquisition group; verify before running the body-owned intake plan.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ]
+    },
+    {
+      "path": "geology/GeoUnits.dbf",
+      "expectedBytes": 2670072,
+      "expectedSha256": "fd6c74b9545ff62a3d8382ec271825b0a4d5508263372cbe3f4d34d6ab0463c4",
+      "id": "mapped-science-geology-geounits-dbf",
+      "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
+      "credit": "Fortezzo, Spudis and Harrel (2020), USGS",
+      "license": "USGS public domain",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020"
+      ],
+      "acquisition": "Restore exact original via the mapped-science acquisition group; verify before running the body-owned intake plan.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ]
+    },
+    {
+      "path": "science/diviner_CF_space_weathering_corrected.tiff",
+      "expectedBytes": 206474632,
+      "expectedSha256": "350f6e1b9c3a12b18606182a0764985da4586875d99aa390ee2daf73b9097f52",
+      "id": "mapped-science-science-diviner-cf-space-weathering-corrected-tiff",
+      "origin": "https://zenodo.org/api/records/4558194/files/diviner_CF_space_weathering_corrected.tiff/content",
+      "credit": "Lucey et al. (2021)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/4558194",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Restore exact original via the mapped-science acquisition group; verify before running the body-owned intake plan.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ]
+    },
+    {
+      "path": "science/diviner_MI_latitude.tiff",
+      "expectedBytes": 206474614,
+      "expectedSha256": "f9fb1361f24f5d0d5b19e0a7a28fab8f5899bdc3123d8eae6daae568c081b276",
+      "id": "mapped-science-science-diviner-mi-latitude-tiff",
+      "origin": "https://zenodo.org/api/records/4558194/files/diviner_MI_latitude.tiff/content",
+      "credit": "Lucey et al. (2021)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/4558194",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Restore exact original via the mapped-science acquisition group; verify before running the body-owned intake plan.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ]
+    },
+    {
+      "path": "science/diviner_MI_longitude.tiff",
+      "expectedBytes": 206474614,
+      "expectedSha256": "eea24b573fca596791acfe6e5c74dee9eb39514ea00e585f47e0048609030229",
+      "id": "mapped-science-science-diviner-mi-longitude-tiff",
+      "origin": "https://zenodo.org/api/records/4558194/files/diviner_MI_longitude.tiff/content",
+      "credit": "Lucey et al. (2021)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/4558194",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Restore exact original via the mapped-science acquisition group; verify before running the body-owned intake plan.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ]
     }
   ],
   "generatedIntermediates": [],
@@ -192,8 +370,8 @@
     },
     {
       "path": "preparation/raster.json",
-      "expectedBytes": 1471,
-      "expectedSha256": "3446d4dea61ff66229387628bf3e31d448e925409643010d7d1811486911fab1",
+      "expectedBytes": 13969,
+      "expectedSha256": "ccb8c30e7840c19bc3d6e6958b40bea14e5fbf2049306b19cce02438c9af8bde",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
@@ -210,8 +388,8 @@
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 13677,
-      "expectedSha256": "d3697fb7fcaf344834607712df3bed01558d2b4e85724599fd73f751671027e3",
+      "expectedBytes": 26173,
+      "expectedSha256": "8013c65f1a2d60fb0a28458e3e8175b5fa02372bb4d550cb0895c78c2e78c9a2",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
@@ -222,8 +400,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 951,
-      "expectedSha256": "c9a425532390dc7fc5c41b769a6907f97be1afacdc60b6877bb894ba67aa3827",
+      "expectedBytes": 3387,
+      "expectedSha256": "527c814f547494492a0921ceff6fc842a7fdf6ec87b08e1e08df8f0deaa75c0e",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
@@ -238,6 +416,76 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 854,
       "expectedSha256": "482c3cbbba8892ec24ec4aea56f974d0d49a1546e9ba7be4f1467d533e8667eb"
+    },
+    {
+      "path": "science/ldem_16.lbl",
+      "expectedBytes": 5121,
+      "expectedSha256": "9aef29463ccc6ed3a3fbe0df3ecd830a99c69e16b564f455507dee2697096579",
+      "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.lbl",
+      "purpose": "Original PDS product identity, unit transform, reference frame, grid registration and coverage label."
+    },
+    {
+      "path": "science/ldem_16.xml",
+      "expectedBytes": 11941,
+      "expectedSha256": "011ebff260abb7c9a10a0f18601d7505e807b9a1b51d238b5587f5b02de59218",
+      "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml",
+      "purpose": "Original PDS product identity, unit transform, reference frame, grid registration and coverage label."
+    },
+    {
+      "path": "science/dgdr_ra_avg_cyl_032_img.lbl",
+      "expectedBytes": 4373,
+      "expectedSha256": "2c84b7d76764f503baf415ec780abfc5da55d9724030cf7587a09b868c5a0206",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.lbl",
+      "purpose": "Original PDS product identity, unit transform, reference frame, grid registration and coverage label."
+    },
+    {
+      "path": "science/dgdr_ra_avg_cyl_032_img.xml",
+      "expectedBytes": 11380,
+      "expectedSha256": "c23fc15be7057ad443936f51792f446f71ea1112842cf62cc1392de003cdab4b",
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml",
+      "purpose": "Original PDS product identity, unit transform, reference frame, grid registration and coverage label."
+    },
+    {
+      "path": "validation/scientific-source-anchors.json",
+      "purpose": "Independent raw-DN coordinate/coverage/unit anchors and full-grid numeric source statistics.",
+      "expectedSha256": "43b7773477dc1cf9445ad7353a7f0ee67654750e4a22ab325526c1ce2380fe35",
+      "expectedBytes": 7940
+    },
+    {
+      "path": "geology/GeoUnits.prj",
+      "expectedBytes": 393,
+      "expectedSha256": "4473b61e75ee5e9c120f4c342b4ab85276a0c69090a2c9d7771b4b88ba835fd4",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "science/prepare-cf-map.json",
+      "expectedBytes": 800,
+      "expectedSha256": "3201640d22eae25b296732b4da78754a3dac2024bb753e84860c00cc78bb1853",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "science/diviner-cf-2021-georeferenced.json",
+      "expectedBytes": 717,
+      "expectedSha256": "b0ba8825dfc6e38dfe911fda3eba9a885db011e756386c16a821a5829f922991",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "geology/prepare-grid.json",
+      "expectedBytes": 6867,
+      "expectedSha256": "3aa325574c1c7fbf5b3dfc0c490de426dc0c0bd5283c3e008215eb3447e72fb3",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "geology/moon-geologic-units.json",
+      "expectedBytes": 6835,
+      "expectedSha256": "42aeb5dfb20075035c9a04d3d5bbd9cf94996fbf02c6da1180875f9db54cc45f",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "geology/Unified_Geologic_Map_of_the_Moon_v2_March2020.txt",
+      "purpose": "Published B6 GIS metadata or original map symbols.",
+      "expectedBytes": 5054,
+      "expectedSha256": "d47f7d22481833224005b269b1d61e748875f49580d3396b54029a797f9b875b"
     }
   ]
 }

@@ -84,7 +84,13 @@
       },
       "lensId": "normal",
       "label": "Monochrome",
-      "falseColor": false
+      "falseColor": false,
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG"
+      }
     },
     {
       "id": "cassini-n1527002576-label",
@@ -107,14 +113,20 @@
         "type": "camera-perspective",
         "coordinates": "survey/camera.json",
         "referenceRadiusMeters": 1525.973578806757
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL"
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3809,
-      "expectedSha256": "b8b943dd692d115745ebaf75cd5559106c54762baef64f2712b186e6fd6db85b",
+      "expectedBytes": 3659,
+      "expectedSha256": "f1d7ece683cb3cfccf8b51cf05521e4bf4cf955049f09fb395f60161b83534bb",
       "purpose": "Scientific source and authored preparation evidence."
     },
     {

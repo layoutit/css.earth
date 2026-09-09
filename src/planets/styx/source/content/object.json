@@ -50,7 +50,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
-        "title": "An approximate ellipsoid based on the 10.6 × 6.0 × 5.3 km dimensions presented by Porter and colleagues in 2025. New Horizons resolved only a few pixels across Styx, so the grid marks unavailable surface coverage. The spin pole remains uncertain; lighting shows the modeled shape.",
+        "title": "Approximate shape model",
         "detail": "Measured axes",
         "thumbnail": "/scenes/styx/styx-model-thumbnail.webp",
         "surface": "styx-model-surface@2x.webp",
@@ -59,7 +59,8 @@
           "id": "measured-shape",
           "path": "../manifest.json",
           "url": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf"
-        }
+        },
+        "summary": "Shape estimated from New Horizons images that resolve only a few pixels. The pole is uncertain; gray grid: no imagery."
       }
     ]
   },

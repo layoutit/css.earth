@@ -1,6 +1,6 @@
 import { readFile, readdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { createRequire } from "node:module";
+import { createRequire, isBuiltin } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
@@ -100,7 +100,7 @@ function preparedLightingProjectionRecord(node, file) {
     field.value.object?.type === 'Identifier' && field.value.object.name === 'projection' && field.value.property?.name === 'sun';
 }
 
-export function inspectObjectRuntimeModule(source, file, { shared = false, shellContent = false,
+export function inspectObjectRuntimeModule(source, file, { shared = false, shellContent = false, serverOnly = false,
   objectIds = OBJECTS.map(o => o.id), registryImportOffsets = new Set(), registryDescriptors = new Set() } = {}) {
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
   let ast;
@@ -121,6 +121,11 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
       reason: `Invalid runtime source: ${error.message}` }], factoryCalls: 0, cameraFactories: [], dataOnly: false };
   }
   const imports = [], violations = [], aliases = new Map();
+  // Follow frontmatter dependencies as server code, including transitive
+  // helpers. Client script imports retain a separate, stricter browser visit.
+  const frontmatterImports = new Set(shellContent && ast.type === 'AstroRoot'
+    ? (ast.frontmatter?.program?.body ?? []).filter(node => node.type === 'ImportDeclaration') : []);
+  const serverImports = new Set(), clientImports = new Set();
   const ids = new Set(objectIds);
   const markerInventory = approvedNavigationMarkerInventory(ast, file, objectIds);
   const staticShellContent = shellContent && staticShellNavigationContent(ast, objectIds);
@@ -144,7 +149,9 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
       node.type === "ExportNamedDeclaration" && node.source || node.type === "ExportAllDeclaration") {
     if (node.importKind === 'type' || node.exportKind === 'type') return;
     const imported = node.source.value;
-    if (!registryDescriptors.has(imported)) imports.push(imported);
+    const onServer = ast.type === 'AstroRoot' ? frontmatterImports.has(node) : serverOnly;
+    (onServer ? serverImports : clientImports).add(imported);
+    if (!registryDescriptors.has(imported) && !(onServer && isBuiltin(imported))) imports.push(imported);
     for (const specifier of node.specifiers ?? []) {
       const name = specifier.imported?.name;
       if (name) aliases.set(specifier.local.name, name);
@@ -215,7 +222,7 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
       note(node, "Object content cannot publish native DOM or material state");
     }
   });
-  return { imports, violations, factoryCalls, cameraFactories, dataOnly: false, ast };
+  return { imports, serverImports: [...serverImports].filter(path => !clientImports.has(path)), violations, factoryCalls, cameraFactories, dataOnly: false, ast };
 }
 
 function registryLoaders(source, root) {
@@ -510,7 +517,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
   listRuntimeFiles = async directory => (await readdir(directory, { recursive: true })).filter(file => file.endsWith(".mjs")) } = {}) {
   const entries = [], sharedClosure = new Set(), sharedViolations = [], cameraFactorySites = [];
   let registry = { entries: new Map(), importOffsets: new Set(), descriptorImports: new Set() };
-  const sharedEdges = new Map(), sharedFactoryCalls = new Map();
+  const sharedEdges = new Map(), sharedFactoryCalls = new Map(), sharedVisits = new Map();
   const cache = new Map();
   const verify = verifyDefinition ?? (async (object, definition) => {
     if (definition?.schema === PREPARED_OBJECT_RUNTIME_SCHEMA) {
@@ -521,19 +528,32 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     requireObjectRuntimeDefinition({ ...definition, schema: PREPARED_OBJECT_RUNTIME_SCHEMA,
       id: object.id, controls: objectControls }, { objectId: object.id, controls: objectControls });
   });
-  const sources = new Map();
-  async function source(path) { if (!sources.has(path)) sources.set(path, await readText(path)); return sources.get(path); }
-  async function inspect(path, shared, shellContent = false) {
-    const key = `${shared}:${shellContent}:${path}`;
+  const sources = new Map(), sourceHashes = new Map();
+  async function source(path) {
+    if (!sources.has(path)) {
+      const text = await readText(path);
+      sources.set(path, text);
+      sourceHashes.set(path, createHash('sha256').update(text).digest('hex'));
+    }
+    return sources.get(path);
+  }
+  function releaseObjectSources(id) {
+    const prefix = resolve(root, 'src/planets', id) + '/';
+    for (const path of sources.keys()) if (path.startsWith(prefix) && !sharedClosure.has(path)) sources.delete(path);
+  }
+  async function inspect(path, shared, shellContent = false, serverOnly = false) {
+    const key = `${shared}:${shellContent}:${serverOnly}:${path}`;
     if (!cache.has(key)) {
-      cache.set(key, inspectObjectRuntimeModule(await source(path), relative(root, path), { shared, shellContent, objectIds: OBJECTS.map(o => o.id),
+      cache.set(key, inspectObjectRuntimeModule(await source(path), relative(root, path), { shared, shellContent, serverOnly, objectIds: OBJECTS.map(o => o.id),
         registryImportOffsets: path === resolve(root, registryPath) ? registry.importOffsets : new Set(),
         registryDescriptors: path === resolve(root, registryPath) ? registry.descriptorImports : new Set() }));
     }
     return cache.get(key);
   }
-  async function sharedVisit(path, shellContent = false) {
-    if (sharedClosure.has(path)) return;
+  async function sharedVisit(path, shellContent = false, serverOnly = false) {
+    // A server visit must never suppress a later client import of the same file.
+    if (sharedVisits.get(path) === false || sharedVisits.get(path) === true && serverOnly) return;
+    sharedVisits.set(path, serverOnly);
     sharedClosure.add(path);
     const file = relative(root, path);
     if (approvedSharedData.has(file)) {
@@ -549,11 +569,11 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     }
     // Stylesheets are source-bound shell content, not JavaScript ownership.
     if (file.endsWith(".css")) { await source(path); return; }
-    const facts = await inspect(path, true, shellContent);
-    sharedEdges.set(path, new Set());
+    const facts = await inspect(path, true, shellContent, serverOnly);
+    if (!sharedEdges.has(path)) sharedEdges.set(path, new Set());
     sharedFactoryCalls.set(path, facts.factoryCalls);
     sharedViolations.push(...facts.violations);
-    cameraFactorySites.push(...facts.cameraFactories);
+    for (const site of facts.cameraFactories) if (!cameraFactorySites.some(existing => existing.file === site.file && existing.line === site.line)) cameraFactorySites.push(site);
     for (const imported of facts.imports) {
       if (imported === '@layoutit/polycss') continue;
       const importedPath = imported.startsWith('.') ? resolve(dirname(path), imported) : null;
@@ -566,7 +586,7 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
         const target = await resolveRuntimeSource(imported, path, { root, source });
         if (!target) throw new Error(`Unclosed shared runtime import ${imported}`);
         sharedEdges.get(path).add(target);
-        await sharedVisit(target, shellContent);
+        await sharedVisit(target, shellContent, facts.serverImports?.includes(imported) ?? false);
       } catch (error) { sharedViolations.push({ file, line: 1, reason: error.message }); }
     }
   }
@@ -646,6 +666,8 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
         schema: prepared ? PREPARED_OBJECT_RUNTIME_SCHEMA : null, factoryCalls,
         presentation: prepared ? { file: relative(root, prepared.payloadPath), format: 'json', property: 'data' } : null,
         closure: [...(prepared?.closure ?? [])].map(path => relative(root, path)).sort(), owners, orphanExecutors, violations });
+      // Keep source receipts, not every body's multi-megabyte transport text.
+      releaseObjectSources(object.id);
       continue;
     }
     const runtimeDirectory = dirname(resolve(root, client));
@@ -716,11 +738,11 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     entries.push({ id: object.id, migrated: thin && violations.length === 0, entry: { file: client, exported: loader.exported, registry: registryPath },
       schema: plan ? PREPARED_OBJECT_RUNTIME_SCHEMA : null,
       factoryCalls, closure: [...visited].map(path => relative(root, path)).sort(), owners, orphanExecutors, violations });
+    releaseObjectSources(object.id);
   }
   const report = { schema: "cssearth-runtime-ownership@1", complete: entries.every(e => e.migrated) && !sharedViolations.length,
     entries, sharedClosure: [...sharedClosure].map(path => relative(root, path)).sort(), sharedViolations, cameraFactorySites,
-    sourceHashes: Object.fromEntries([...sources].sort(([a], [b]) => a.localeCompare(b)).map(([path, content]) =>
-      [relative(root, path), createHash("sha256").update(content).digest("hex")])),
+    sourceHashes: Object.fromEntries([...sourceHashes].sort(([a], [b]) => a.localeCompare(b)).map(([path, sha256]) => [relative(root, path), sha256])),
     nativeOwnership: { status: "UNPROVEN", reason: "Static closure does not observe native cameras, writes, scheduling, or resource lifetime." } };
   if (strict && !report.complete) {
     const failures = [...entries.flatMap(entry => entry.violations), ...sharedViolations];

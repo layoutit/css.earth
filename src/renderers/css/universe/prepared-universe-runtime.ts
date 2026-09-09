@@ -18,10 +18,11 @@ import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
-export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [], imageLayers = [], catalog }: {
+export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [], imageLayers = [], catalog, annotationPriorities }: {
   context: unknown; volume: PreparedCssVolume; stars: PreparedCssPointField;
   resolveStarResource(path: string): string; resolveResource(path: string): string;
   sprites: Readonly<Record<string, SpriteWithUrl>>;
+  annotationPriorities?: Readonly<Record<string, number>>;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   imageLayers?: readonly { payload: PreparedCssImageLayers; resolveResource(path: string): string }[];
   catalog?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number;
@@ -85,6 +86,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let pointField: ReturnType<typeof mountPreparedCssPointField> | null = null;
+      let overview = false;
+      let selectionPreview: string | null | undefined;
       let focusPoint: ReturnType<typeof mountWorldContextPointSource> = null;
       let environmentLabels: ReturnType<typeof mountEnvironmentLabels> | null = null;
       let galaxyCatalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
@@ -108,7 +111,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Billboards share the detail stage, so a nearer body can cover the selected detail.
-        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites });
+        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites, annotationPriorities });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, clusters: catalog.clusters?.payload, onSelect: onSelectGalaxy, pickingHost: stage });
@@ -116,8 +119,9 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
           selectGalaxy(id: string | null) { galaxyCatalog?.select(id); },
           resolveGalaxy(id: string) { return galaxyCatalog?.resolve(id) ?? null; },
           imageLayerFrames: Object.freeze(Object.fromEntries(imageLayers.map(({ payload }) => [payload.id, payload.frame]))),
-          setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
-          setNavigationIndicatorsVisible(visible: boolean) { spatial!.setNavigationIndicatorsVisible(visible); focusPoint?.setNavigationEnabled(visible); },
+          previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
+          setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },
+          setNavigationInFlight(active: boolean) { spatial!.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
           inspect() {
@@ -170,7 +174,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
               logarithmicFade(distanceM, catalog.fadeStartDistanceM, catalog.fullDistanceM), [...foregroundRects, ...environmentRects],
               catalog.clusters ? logarithmicFade(distanceM, catalog.clusters.fadeStartDistanceM, catalog.clusters.fullDistanceM) : 0) : [];
             pointField!.publish(world, viewport, 1 - fade, [...foregroundRects, ...environmentRects, ...galaxyRects]);
-            focusPoint?.publish(world, viewport, { opacity: 1 - fade, selectedDetail: selected.id === plan.focus.id,
+            const emphasizedId = selectionPreview === undefined ? (overview ? null : selected.id) : selectionPreview;
+            focusPoint?.publish(world, viewport, { opacity: (1 - fade) * (emphasizedId !== null && emphasizedId !== plan.focus.id ? .75 : 1), selectedDetail: selected.id === plan.focus.id,
               ...(selected.id === plan.focus.id ? {} : { occluder: selected }) });
             stage.dataset.contextScale = fade > 0 ? 'galactic' : stellarFade > 0 ? 'stellar' : Math.hypot(...world.pose.positionM.map((value, axis) => value - selected.positionM[axis])) > selected.radiusM * 100 ? 'system' : 'object';
           },

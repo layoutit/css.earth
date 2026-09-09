@@ -1,14 +1,10 @@
 # Enceladus sources and preparation
 
-Enceladus (NAIF 602) is a standalone moon of Saturn. Physical radius: 252.3 km
-from the vendored JPL astronomy body record. The viewer uses a mean-radius
-sphere; it does not render the measured triaxial outline or displaced relief.
-The physical reference axes reported by Thomas et al. (2016) are 256.2, 251.4,
-248.6 km. The largest spherical-outline discrepancy is about 1.6% in radius.
+Enceladus (NAIF 602) is a standalone moon of Saturn. The physical reference radius is 252.3 km from the vendored JPL body record. The proposed corrected-v2 source mesh supplies shape geometry at finite display resolution. The older Schenk elevation datum uses semi-axes 256.2, 251.4 and 248.6 km; these are not full diameters or the new DSK mesh coordinates.
 
-## Scientific surfaces
+## Schenk scientific surfaces
 
-Both products are Schenk and McKinnon (2024), published in the USGS/PDS archive
+The following two products are Schenk and McKinnon (2024), published in the USGS/PDS archive
 on 2024-08-12. Credit NASA/JPL-Caltech/Space Science Institute, Paul M. Schenk,
 William B. McKinnon, LPI/USRA. Archive access constraints: none; use constraint:
 please cite authors. Original source hashes, byte sizes and URLs are in
@@ -23,7 +19,7 @@ please cite authors. Original source hashes, byte sizes and URLs are in
   additional lighting and remain available.
 - Elevation: [terrain model](https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk).
   8049 × 4025 float pixels, 200 m archive grid. Values are **kilometres above
-  the 256.2 × 251.4 × 248.6 km reference ellipsoid**, not heights above the
+  the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km**, not heights above the
   256.2 km cartographic sphere. The display uses a blue–neutral–warm palette over −1 to +1 km,
   with zero at the neutral midpoint. The legend explicitly marks saturation at
   ≤−1 and ≥+1 km; underlying elevations are unchanged. About 98% of a uniform
@@ -41,7 +37,7 @@ Both GeoTIFFs are east-positive, planetocentric, equirectangular, center longitu
 are (-804900, 402500) m for imagery and (-805000, 402600) m for elevation. Native
 origins and resolutions are validated and consumed, rather than assuming an
 exact 2:1 source extent. Both prepare to 8192 × 4096: about 197 m per equatorial
-map texel (193.5 m on the displayed mean-radius sphere). The model's 200 m grid
+map texel (193.5 m on the 252.3 km display reference). The model's 200 m grid
 is slightly enlarged; this adds no detail. Runtime always uses this same bank,
 independent of DPR. Surface and pole display atlases use WebP Q90, with
 lossless alpha and unchanged dimensions. Source maps used for further preparation,
@@ -83,3 +79,24 @@ node tools/objects/dist/prepare-authored.js enceladus --write
 
 Raw source TIFFs are reacquired for preparation, not delivered to the browser.
 Prepared assets are local until an explicitly authorized publication step.
+
+## B2 corrected v2 shape
+
+The selected DSK is `cas_enceladus_ssd_spc_0256icq_v2.bds`, delivered in the Cassini SPICE archive in June 2026. NAIF states that images were reprocessed after errors in the original model. The 2024 original v1 DSK and the associated Zenodo spherical harmonics are excluded. The cited Park et al. paper (doi:10.1029/2023JE008054) describes the method; it is not a new publication validating the later corrected v2 release.
+
+A pinned SpiceyPy 6.0.3/CSPICE N0067 acquisition operator extracts native kilometre coordinates. Exact duplicates are welded, with every original vertex-to-output mapping preserved. No epsilon weld, rotation, scale, smoothing or synthetic terrain is introduced. Raw DSK counts are 396,294 vertices and 786,432 plates. The actual converter produced 393,218 vertices: 3,076 exact duplicates were welded, with exact reconstruction of all original coordinates through the retained mapping. Target 602, frame 10040 (IAU_ENCELADUS), surface 20122, data type 2, class 1. The retained PCK/FK document the recommended body frame. Geometry is static; kernel 1950–2050 coverage is not an observation date or temporal terrain model.
+
+Preparation requests 1,600 faces and a 1,000 m simplifier error ceiling. This is a requested approximation budget, not achieved accuracy. Original DSK radius extent is 247.68912735585084–257.59813481361255 km. The Shape view’s neutral grid distinguishes the geometry from observed imagery. The global family’s nominal 500 m resolution is not uniform detail in the selected Q256 model or the prepared mesh.
+
+The existing Schenk elevation grid is retained: kilometres above a reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km, not radius or full diameters. It must not be added to a sphere or to the JPL DSK. Salih crater at −5° East and other identifiable features provide cross-solution registration checks; actual image-to-v2 alignment and prepared error remain qualification work.
+
+Qualification status: source intake and recipe proposal. The formal pinned Python environment reproduced the exact ZIP hash (see docs/moons/b2-preparation/enceladus-dsk-reproduction.json). Mesh error/topology, restored-source and prepared browser/visual gates remain pending. No readiness is claimed.
+
+The visual-trial candidate uses 2,000 source-preserving native triangles with regularization and a 2,523 m rendering error ceiling. Its closed mesh has one component and Euler characteristic two. Four barycentric positions on every retained triangle gave a maximum one-way source distance of 1,822.01 m; source Cartesian extrema differ by at most 533 m. These rendering measurements are not source uncertainty or an exhaustive Hausdorff bound. Browser limb and feature qualification remains pending.
+
+## Cassini spectral surface views
+
+Ice absorption and Infrared ratio use six calibrated VIMS observations with matched
+navigation backplanes. They preserve partial support and archive filtering;
+illumination is not photometrically corrected. The [source interpretation](source/vims-chemistry/INTERPRETATION.md)
+defines every channel, coordinate, mask, overlap rule and scientific limit.

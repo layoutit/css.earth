@@ -36,7 +36,21 @@
         "assets",
         "lenses",
         "scene"
-      ]
+      ],
+      "title": "MESSENGER MDIS monochrome mosaic",
+      "displayCredit": "USGS · NASA/MESSENGER",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products",
+      "attributionGroup": {
+        "id": "messenger-mdis-global-maps",
+        "label": "MESSENGER MDIS global maps",
+        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "messenger"
+        ],
+        "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}"
+      }
     },
     {
       "id": "usgs-messenger-enhanced-global-z3",
@@ -55,7 +69,21 @@
         "assets",
         "lenses",
         "scene"
-      ]
+      ],
+      "title": "MESSENGER MDIS enhanced-color mosaic",
+      "displayCredit": "USGS · NASA/MESSENGER",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_basemap_enhanced_color_global_mosaic_665m",
+      "attributionGroup": {
+        "id": "messenger-mdis-global-maps",
+        "label": "MESSENGER MDIS global maps",
+        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "messenger"
+        ],
+        "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
+      }
     },
     {
       "id": "usgs-messenger-topography-z3",
@@ -75,7 +103,21 @@
         "assets",
         "lenses",
         "scene"
-      ]
+      ],
+      "title": "MESSENGER global shaded relief",
+      "displayCredit": "USGS · NASA/MESSENGER",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
+      "attributionGroup": {
+        "id": "messenger-mdis-global-maps",
+        "label": "MESSENGER MDIS global maps",
+        "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "messenger"
+        ],
+        "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}"
+      }
     },
     {
       "id": "usgs-messenger-topography-legend",
@@ -128,7 +170,9 @@
       "consumers": [
         "assets",
         "scene"
-      ]
+      ],
+      "title": "OpenSpace surface lighting",
+      "displayCredit": "OpenSpace Team"
     },
     {
       "id": "openspace-mercury-bdr-asset",
@@ -293,7 +337,10 @@
       "consumers": [
         "spectrum",
         "charts"
-      ]
+      ],
+      "title": "MESSENGER MASCS spectral cube",
+      "displayCredit": "M. D’Amore · DLR · NASA/MESSENGER",
+      "sourceUrl": "https://doi.org/10.5281/zenodo.7433033"
     },
     {
       "id": "nasa-psg-mercury-r240-rif",
@@ -324,7 +371,10 @@
         "interior",
         "charts",
         "panel"
-      ]
+      ],
+      "title": "Mercury interior structure",
+      "displayCredit": "NASA Science",
+      "sourceUrl": "https://science.nasa.gov/mercury/facts/"
     },
     {
       "id": "hyg-v41-mercury-field",
@@ -412,8 +462,8 @@
     {
       "id": "mercury-object-content",
       "path": "content/object.json",
-      "expectedSha256": "7d1ba284ef62d1037cf1698bf188033887b066fc18715ac768e750c6cf45dc04",
-      "expectedBytes": 15093,
+      "expectedSha256": "5f5aab004d2dc42d943d638ad40999dec7a4e17cb83fafe58d40068ddd4d3376",
+      "expectedBytes": 16176,
       "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -517,8 +567,8 @@
     {
       "id": "mercury-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "224e40068158743efcaf05e22502534bf746f3e68603ef16f819102897ecd5d0",
-      "expectedBytes": 4116,
+      "expectedSha256": "d4deecc2acfe395857d22f00ec2354b5d5591efcf1f39f89d78ddfb53eeb36f3",
+      "expectedBytes": 4265,
       "origin": "Repository-authored Mercury raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

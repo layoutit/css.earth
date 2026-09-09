@@ -36,7 +36,15 @@
         "referenceRadiusMeters": 1821460,
         "centerLongitudeDegrees": 0
       },
-      "coverage": "GDAL_NODATA=0; additionally withhold |latitude| >= 85 degrees because USGS documents interpolated polar color within approximately 5 degrees of either pole. Retain observed monochrome there."
+      "coverage": "GDAL_NODATA=0; additionally withhold |latitude| >= 85 degrees because USGS documents interpolated polar color within approximately 5 degrees of either pole. Retain observed monochrome there.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif"
+      }
     },
     {
       "id": "usgs-normal-global-1km",
@@ -74,7 +82,15 @@
         "referenceRadiusMeters": 1821460,
         "centerLongitudeDegrees": 0
       },
-      "coverage": "GeoTIFF GDAL_NODATA=0. Preserve valid dark pixels; withhold resampled no-data boundaries."
+      "coverage": "GeoTIFF GDAL_NODATA=0. Preserve valid dark pixels; withhold resampled no-data boundaries.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif"
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -142,6 +158,414 @@
         "lenses",
         "presentation"
       ]
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-dbf",
+      "path": "science/geology-sim3168/Io_GeoUnits.dbf",
+      "expectedBytes": 178964,
+      "expectedSha256": "ac09efc6635cf3d9d81fb5596a050393bf358ea5f204b79d4039952b369c53a3",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4029951286 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf"
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-prj",
+      "path": "science/geology-sim3168/Io_GeoUnits.prj",
+      "expectedBytes": 149,
+      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj"
+    },
+    {
+      "id": "usgs-sim3168-geologic-units",
+      "path": "science/geology-sim3168/Io_GeoUnits.shp",
+      "expectedBytes": 2798948,
+      "expectedSha256": "6a02334eee7af7518f90c5f97b1468552499de89b05d17656d627556e71aa64f",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2264103816 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp",
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "projection": {
+        "type": "geographic-vector",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821460
+      },
+      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps."
+    },
+    {
+      "id": "io-muse-original-485nm-slope-1",
+      "path": "muse/485nm_slope_io_night_1.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "fca35e89f83f222978ffbfd40154d91ef03ab85f09a86fb605ae0420de46479d",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/f08e392882467dd84082340af068d07945b26a0a",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-485nm-slope-2",
+      "path": "muse/485nm_slope_io_night_2.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "58ae63f314d44d3f724b9cc7aeeea7475d9f64ea29005e01c4369f88d3893c31",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/d5aa063e4c5c19fae8252a711ddbcb69df4a7e28",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-485nm-slope-3",
+      "path": "muse/485nm_slope_io_night_3.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "fbed77eb6281eb850ff0bc948da12bcec2861ae7a9b9ae453942ec3b668697ff",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/bab631394382359f2f0cff86835d95f0cb69317a",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-560nm-band-1",
+      "path": "muse/560nm_band_io_night_1.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "60126a3558ae1c414ac556d9029107aff209a53cd4bf6ddb8eb46bb76987bf3b",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/602fb0d67dac8ba495a0331f57c45f126d6d7042",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-560nm-band-2",
+      "path": "muse/560nm_band_io_night_2.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "576242a7c73658b8767f77eca70b9833f196ad95fef455cdc3002f0cd77bcfcc",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/54aa6d283d18ad16f98e0212f1274f52e728efb1",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-560nm-band-3",
+      "path": "muse/560nm_band_io_night_3.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "4e5747a2acb901f389ca962316f1b7250331c8ee7fcf92b040cedfc50e3cb6d5",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/3f445cfc37a93f0ec06e39abc0bc85c089a9417f",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-spectral-slope-night-1",
+      "path": "muse/io/485nm_slope-night-1.tif",
+      "expectedBytes": 12012,
+      "expectedSha256": "d8b3ce837b7db28a255eae9aaf9eda61717121ab1241f392f765014641ade58a",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "spectral-slope"
+      ],
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-spectral-slope-night-2",
+      "path": "muse/io/485nm_slope-night-2.tif",
+      "expectedBytes": 12028,
+      "expectedSha256": "41e87a8222840afce00a1427fbcff3491bfb13fe6e599dbb6336a96551196ba9",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "spectral-slope"
+      ],
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-spectral-slope-night-3",
+      "path": "muse/io/485nm_slope-night-3.tif",
+      "expectedBytes": 12297,
+      "expectedSha256": "b8667cc9de8bc46184aea14932bc950a6c66793bd99ce2f5dac9ee9aa230a99f",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "spectral-slope"
+      ],
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-visible-absorption-night-1",
+      "path": "muse/io/560nm_band-night-1.tif",
+      "expectedBytes": 12689,
+      "expectedSha256": "5a884deb172fbec39a1192b2149e5e2452644d0ac4402d4e948b7d5a204f3e02",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "visible-absorption"
+      ],
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-visible-absorption-night-2",
+      "path": "muse/io/560nm_band-night-2.tif",
+      "expectedBytes": 12790,
+      "expectedSha256": "eff9a10c9b342c06f9426d01c6a884e291dd9eb681bbb47804a5a3044c7e8a29",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "visible-absorption"
+      ],
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-visible-absorption-night-3",
+      "path": "muse/io/560nm_band-night-3.tif",
+      "expectedBytes": 12820,
+      "expectedSha256": "cd8fd566af1e3024c389b2c8d6816474aee9db56d0288e51c3993f063e9aca21",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "visible-absorption"
+      ],
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
     }
   ],
   "generatedIntermediates": [],
@@ -166,20 +590,20 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3072,
-      "expectedSha256": "176f9e0088a7ff3cae586fbce861477d62ed69b22deaba3d064dd3666d443b2a",
+      "expectedBytes": 11298,
+      "expectedSha256": "a2ca8a5abc1cbb507b93a10f8898661c5ce400ddacdb8687b083b47565c1152a",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 7156,
-      "expectedSha256": "1f914878677afdbd0ce81e0cba0e732276ad876ce0b1345db6a3d8f60ed0461c",
+      "expectedBytes": 14347,
+      "expectedSha256": "84b59a67cc9970f2728c781d8d7a4254d9ac39f96273a3b8598f46171689ade4",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "presentation/title-mark.json",
-      "expectedBytes": 1150,
-      "expectedSha256": "b5013944c360617b03bc43bc0c7d2a68ddd5c1ea11da30eebba653488ac9e8f9",
+      "expectedBytes": 1189,
+      "expectedSha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -190,8 +614,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1178,
-      "expectedSha256": "c44281a1f6e284ad0f6bdc5b6a0092ab5380f7ba58fe2b01eb5826e265d96528",
+      "expectedBytes": 3413,
+      "expectedSha256": "82875a6372ffe28a99fc83459e264922953eaf236233ec0a916e6a19fabcbe55",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -200,6 +624,400 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1413,
       "expectedSha256": "1a514750d68e2db4d3a778a3d4ce8ea56e1d7faceedde77643282b5b46d03d1c"
+    },
+    {
+      "id": "usgs-sim3168-io-geology-metadata-txt",
+      "path": "science/geology-sim3168/Io_geology_metadata.txt",
+      "expectedBytes": 13879,
+      "expectedSha256": "82ccc4b03c378f5923cc559eb223c147b34dea2ad1b792d309fe6c5c7c0d8d3f",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_geology_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3956181196 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_geology_metadata.txt",
+      "purpose": "Exact member Io_SIM3168_Database/Io_geology_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3956181196 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-dbf",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.dbf",
+      "expectedBytes": 36774,
+      "expectedSha256": "612e1954802f7e63a9b899f28424451eae2f8431ac1621eac7ef492eb30f2eb4",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3589708142 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3589708142 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-prj",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.prj",
+      "expectedBytes": 149,
+      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-shp",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.shp",
+      "expectedBytes": 208672,
+      "expectedSha256": "bba9d25bf947e074ecbad2394832b07d669bdb84c2788a12272888552791022f",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2431391025 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2431391025 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-shp-xml",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.shp.xml",
+      "expectedBytes": 15229,
+      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-shx",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.shx",
+      "expectedBytes": 2812,
+      "expectedSha256": "db4be3599357c56488cd71bae1d8e3a431b0f13336eb06d32c6a52fe61a32966",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1713454006 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1713454006 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geology-metadata-xml",
+      "path": "science/geology-sim3168/Io_geology_metadata.xml",
+      "expectedBytes": 15229,
+      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-shp-xml",
+      "path": "science/geology-sim3168/Io_GeoUnits.shp.xml",
+      "expectedBytes": 15229,
+      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-shx",
+      "path": "science/geology-sim3168/Io_GeoUnits.shx",
+      "expectedBytes": 12116,
+      "expectedSha256": "d7a25a6c6a53bc66025dd920922babc2b4fcefb0b5ffb29d896a4f7d3e7ced64",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2928892254 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2928892254 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-dbf",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.dbf",
+      "expectedBytes": 121662,
+      "expectedSha256": "2037f44e54a96092a61f28298f455b0e5824257e64c0a1c97cbf438359459c12",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 971230000 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 971230000 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-prj",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.prj",
+      "expectedBytes": 149,
+      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-shp",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.shp",
+      "expectedBytes": 42100,
+      "expectedSha256": "7e7c9117de8c61ee6aa6af3501e2b290ed278d30dc71ae32518467e7f6c4789a",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 124509718 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 124509718 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-shp-xml",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.shp.xml",
+      "expectedBytes": 15229,
+      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3047930696 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounitspoints-shx",
+      "path": "science/geology-sim3168/Io_GeoUnitsPoints.shx",
+      "expectedBytes": 12100,
+      "expectedSha256": "31848764354273ec382a463229a746f2a9a78d699348fe6f2f8a67a4e3905e02",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3829378934 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx",
+      "purpose": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3829378934 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-diffusedeposits-lyr",
+      "path": "science/geology-sim3168/Io_DiffuseDeposits.lyr",
+      "expectedBytes": 10752,
+      "expectedSha256": "4ae1dfcc5151fd8ea90987fb061a976717586e5d5f7e335f89eff89e941d0929",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4155375624 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr",
+      "purpose": "Exact member Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4155375624 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3168-io-geounits-lyr",
+      "path": "science/geology-sim3168/Io_GeoUnits.lyr",
+      "expectedBytes": 11776,
+      "expectedSha256": "68fb956b941c08c4a638dac9c55a258178936b5e90a613b69df74a1b7f82f5a2",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 585117473 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr",
+      "purpose": "Exact member Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 585117473 and SHA-256 verified."
+    },
+    {
+      "id": "sim3168-archive-index-json",
+      "path": "science/geology-sim3168/archive-index.json",
+      "expectedBytes": 66757,
+      "expectedSha256": "2e8c8515b68c2e09dc690bee4b783d05b831268c459d02a74cd3a090c317e5b9",
+      "origin": "https://pubs.usgs.gov/sim/3168/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3168-intake-downloads-json",
+      "path": "science/geology-sim3168/intake-downloads.json",
+      "expectedBytes": 10763,
+      "expectedSha256": "d3c06ea5a067784ecaf38e28d4bdafd975b982ddae6663f1cfa5fa58116b0112",
+      "origin": "https://pubs.usgs.gov/sim/3168/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3168-display-categories-json",
+      "path": "science/geology-sim3168/display-categories.json",
+      "expectedBytes": 1545,
+      "expectedSha256": "00ab4b24f2d97f365316c03bc8834e865bcf25c54a9327dbd68f25bd42e8215f",
+      "origin": "https://pubs.usgs.gov/sim/3168/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3168-registration-anchors",
+      "path": "science/geology-sim3168/registration-anchors.json",
+      "expectedBytes": 3542,
+      "expectedSha256": "0a38893d6bda62544ac8a05541d51a28d3de1e6787cb8a37754a6635566c4daf",
+      "origin": "https://pubs.usgs.gov/sim/3168/",
+      "credit": "USGS point and polygon layers; cssEarth comparison",
+      "license": "Repository-authored validation metadata of public domain GIS data",
+      "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained.",
+      "redistribution": "Small source-validation metadata.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained."
+    },
+    {
+      "path": "muse/source-qualification.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 12663,
+      "expectedSha256": "7fdd00cb2530b888a832fb8e7c2af61a7983389e555e3f85bc7dbc6f071b4bde"
+    },
+    {
+      "path": "muse/INTERPRETATION.md",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 3857,
+      "expectedSha256": "6c3a4c61987547a8ba3523ab046353f640b1a343595ab1611345b0ae96d60b1a"
+    },
+    {
+      "path": "muse/io-recipe.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 2175,
+      "expectedSha256": "a0dce284117c01ed762a05ab1a2f25af626bd9e73733daaddb4f327749073d81"
+    },
+    {
+      "path": "muse/datacite-license.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 5096,
+      "expectedSha256": "18391de14b9f22cfa4f83a08f9d26992f6aa1616b302c68025cee1d1784b368a"
+    },
+    {
+      "path": "muse/io/conversion-receipt.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 10483,
+      "expectedSha256": "9640accaa31acef0af9cb9008cb914815d86f47db2f219163d2c0c32a7d1a231"
     }
   ]
 }

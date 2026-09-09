@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "7328d671d50b98f41c0d8cf144cfb823cf29d81ae5d73993d1733a75764322db"
+          "sha256": "4e4b1df6415a820d771b2b31ce65cd2170de5b40324e9a40febee252e743a812"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "944f562cdfe2da209091fa5581100d93037e3b8c18aca245bfc3c9fbfc573e8e"
+          "sha256": "d52c3e5617fbff1e26d1703e8035af4f72f0c6d9e3a718baa21856d3546e9d91"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "f08978c561e19f306f8e68e9be6839e2a7a71f2c7ee89cacb0c213685d9fd85b"
+          "sha256": "326ce205234a4666cd6968f7eb49053baf4821796048fbbed94dc6eaf2bf2b8f"
         }
       ],
       "shape": {
@@ -62,7 +62,17 @@
               "material": "lighting"
             },
             {
+              "id": "enhanced-color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "albedo",
               "source": "content",
               "material": "lighting"
             }
@@ -108,6 +118,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8559b517b4ec2fdc210a3aba4c81b34ac30233cbcceb25393854fef14009d9e7"
+    "sha256": "7d828575f56d8ef73cd2a4418732f35bf76a4f8accbd4dbed69a5e251e8ec2d3"
   }
 }

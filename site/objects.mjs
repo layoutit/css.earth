@@ -1,3 +1,151 @@
+import annefrankDescriptor from "../src/planets/annefrank/object.json" with { type: "json" };
+import brailleDescriptor from "../src/planets/braille/object.json" with { type: "json" };
+import heraDescriptor from "../src/planets/hera/object.json" with { type: "json" };
+import klymeneDescriptor from "../src/planets/klymene/object.json" with { type: "json" };
+import artemisDescriptor from "../src/planets/artemis/object.json" with { type: "json" };
+import dione_106Descriptor from "../src/planets/dione-106/object.json" with { type: "json" };
+import felicitasDescriptor from "../src/planets/felicitas/object.json" with { type: "json" };
+import lydiaDescriptor from "../src/planets/lydia/object.json" with { type: "json" };
+import iphigeniaDescriptor from "../src/planets/iphigenia/object.json" with { type: "json" };
+import thyraDescriptor from "../src/planets/thyra/object.json" with { type: "json" };
+import lomiaDescriptor from "../src/planets/lomia/object.json" with { type: "json" };
+import peithoDescriptor from "../src/planets/peitho/object.json" with { type: "json" };
+import althaeaDescriptor from "../src/planets/althaea/object.json" with { type: "json" };
+import lachesisDescriptor from "../src/planets/lachesis/object.json" with { type: "json" };
+import gerdaDescriptor from "../src/planets/gerda/object.json" with { type: "json" };
+import brunhildDescriptor from "../src/planets/brunhild/object.json" with { type: "json" };
+import alkesteDescriptor from "../src/planets/alkeste/object.json" with { type: "json" };
+import liberatrixDescriptor from "../src/planets/liberatrix/object.json" with { type: "json" };
+import velledaDescriptor from "../src/planets/velleda/object.json" with { type: "json" };
+import johannaDescriptor from "../src/planets/johanna/object.json" with { type: "json" };
+import antigoneDescriptor from "../src/planets/antigone/object.json" with { type: "json" };
+import cyreneDescriptor from "../src/planets/cyrene/object.json" with { type: "json" };
+import sophrosyneDescriptor from "../src/planets/sophrosyne/object.json" with { type: "json" };
+import meliboeaDescriptor from "../src/planets/meliboea/object.json" with { type: "json" };
+import siwaDescriptor from "../src/planets/siwa/object.json" with { type: "json" };
+import vibiliaDescriptor from "../src/planets/vibilia/object.json" with { type: "json" };
+import lucinaDescriptor from "../src/planets/lucina/object.json" with { type: "json" };
+import protogeneiaDescriptor from "../src/planets/protogeneia/object.json" with { type: "json" };
+import galliaDescriptor from "../src/planets/gallia/object.json" with { type: "json" };
+import medusaDescriptor from "../src/planets/medusa/object.json" with { type: "json" };
+import nuwaDescriptor from "../src/planets/nuwa/object.json" with { type: "json" };
+import abundantiaDescriptor from "../src/planets/abundantia/object.json" with { type: "json" };
+import scyllaDescriptor from "../src/planets/scylla/object.json" with { type: "json" };
+import xanthippeDescriptor from "../src/planets/xanthippe/object.json" with { type: "json" };
+import dejaniraDescriptor from "../src/planets/dejanira/object.json" with { type: "json" };
+import aemiliaDescriptor from "../src/planets/aemilia/object.json" with { type: "json" };
+import unaDescriptor from "../src/planets/una/object.json" with { type: "json" };
+import athorDescriptor from "../src/planets/athor/object.json" with { type: "json" };
+import laurentiaDescriptor from "../src/planets/laurentia/object.json" with { type: "json" };
+import erigoneDescriptor from "../src/planets/erigone/object.json" with { type: "json" };
+import evaDescriptor from "../src/planets/eva/object.json" with { type: "json" };
+import loreleyDescriptor from "../src/planets/loreley/object.json" with { type: "json" };
+import rhodopeDescriptor from "../src/planets/rhodope/object.json" with { type: "json" };
+import urdaDescriptor from "../src/planets/urda/object.json" with { type: "json" };
+import sibyllaDescriptor from "../src/planets/sibylla/object.json" with { type: "json" };
+import baucisDescriptor from "../src/planets/baucis/object.json" with { type: "json" };
+import inoDescriptor from "../src/planets/ino/object.json" with { type: "json" };
+import phaedraDescriptor from "../src/planets/phaedra/object.json" with { type: "json" };
+import dejopejaDescriptor from "../src/planets/dejopeja/object.json" with { type: "json" };
+import lambertaDescriptor from "../src/planets/lamberta/object.json" with { type: "json" };
+import menippeDescriptor from "../src/planets/menippe/object.json" with { type: "json" };
+import kolgaDescriptor from "../src/planets/kolga/object.json" with { type: "json" };
+import ambrosiaDescriptor from "../src/planets/ambrosia/object.json" with { type: "json" };
+import eurykleiaDescriptor from "../src/planets/eurykleia/object.json" with { type: "json" };
+import byblisDescriptor from "../src/planets/byblis/object.json" with { type: "json" };
+import kallistoDescriptor from "../src/planets/kallisto/object.json" with { type: "json" };
+import hersiliaDescriptor from "../src/planets/hersilia/object.json" with { type: "json" };
+import heddaDescriptor from "../src/planets/hedda/object.json" with { type: "json" };
+import didoDescriptor from "../src/planets/dido/object.json" with { type: "json" };
+import isabellaDescriptor from "../src/planets/isabella/object.json" with { type: "json" };
+import medeaDescriptor from "../src/planets/medea/object.json" with { type: "json" };
+import lilaeaDescriptor from "../src/planets/lilaea/object.json" with { type: "json" };
+import ascheraDescriptor from "../src/planets/aschera/object.json" with { type: "json" };
+import oenoneDescriptor from "../src/planets/oenone/object.json" with { type: "json" };
+import eudoraDescriptor from "../src/planets/eudora/object.json" with { type: "json" };
+import stephaniaDescriptor from "../src/planets/stephania/object.json" with { type: "json" };
+import eosDescriptor from "../src/planets/eos/object.json" with { type: "json" };
+import henriettaDescriptor from "../src/planets/henrietta/object.json" with { type: "json" };
+import weringiaDescriptor from "../src/planets/weringia/object.json" with { type: "json" };
+import philosophiaDescriptor from "../src/planets/philosophia/object.json" with { type: "json" };
+import athamantisDescriptor from "../src/planets/athamantis/object.json" with { type: "json" };
+import vindobonaDescriptor from "../src/planets/vindobona/object.json" with { type: "json" };
+import asteropeDescriptor from "../src/planets/asterope/object.json" with { type: "json" };
+import coelestinaDescriptor from "../src/planets/coelestina/object.json" with { type: "json" };
+import hypatiaDescriptor from "../src/planets/hypatia/object.json" with { type: "json" };
+import vanadisDescriptor from "../src/planets/vanadis/object.json" with { type: "json" };
+import kriemhildDescriptor from "../src/planets/kriemhild/object.json" with { type: "json" };
+import veraDescriptor from "../src/planets/vera/object.json" with { type: "json" };
+import asporinaDescriptor from "../src/planets/asporina/object.json" with { type: "json" };
+import eukrateDescriptor from "../src/planets/eukrate/object.json" with { type: "json" };
+import ilseDescriptor from "../src/planets/ilse/object.json" with { type: "json" };
+import bettinaDescriptor from "../src/planets/bettina/object.json" with { type: "json" };
+import clementinaDescriptor from "../src/planets/clementina/object.json" with { type: "json" };
+import augustaDescriptor from "../src/planets/augusta/object.json" with { type: "json" };
+import silesiaDescriptor from "../src/planets/silesia/object.json" with { type: "json" };
+import tycheDescriptor from "../src/planets/tyche/object.json" with { type: "json" };
+import hubertaDescriptor from "../src/planets/huberta/object.json" with { type: "json" };
+import dresdaDescriptor from "../src/planets/dresda/object.json" with { type: "json" };
+import libussaDescriptor from "../src/planets/libussa/object.json" with { type: "json" };
+import annaDescriptor from "../src/planets/anna/object.json" with { type: "json" };
+import anahitaDescriptor from "../src/planets/anahita/object.json" with { type: "json" };
+import penthesileaDescriptor from "../src/planets/penthesilea/object.json" with { type: "json" };
+import antoniaDescriptor from "../src/planets/antonia/object.json" with { type: "json" };
+import philagoriaDescriptor from "../src/planets/philagoria/object.json" with { type: "json" };
+import sapientiaDescriptor from "../src/planets/sapientia/object.json" with { type: "json" };
+import adelheidDescriptor from "../src/planets/adelheid/object.json" with { type: "json" };
+import emmaDescriptor from "../src/planets/emma/object.json" with { type: "json" };
+import icleaDescriptor from "../src/planets/iclea/object.json" with { type: "json" };
+import bavariaDescriptor from "../src/planets/bavaria/object.json" with { type: "json" };
+import clarissaDescriptor from "../src/planets/clarissa/object.json" with { type: "json" };
+import unitasDescriptor from "../src/planets/unitas/object.json" with { type: "json" };
+import herthaDescriptor from "../src/planets/hertha/object.json" with { type: "json" };
+import thetisDescriptor from "../src/planets/thetis/object.json" with { type: "json" };
+import thaliaDescriptor from "../src/planets/thalia/object.json" with { type: "json" };
+import phocaeaDescriptor from "../src/planets/phocaea/object.json" with { type: "json" };
+import euterpeDescriptor from "../src/planets/euterpe/object.json" with { type: "json" };
+import bellonaDescriptor from "../src/planets/bellona/object.json" with { type: "json" };
+import pomonaDescriptor from "../src/planets/pomona/object.json" with { type: "json" };
+import circeDescriptor from "../src/planets/circe/object.json" with { type: "json" };
+import atalanteDescriptor from "../src/planets/atalante/object.json" with { type: "json" };
+import leda_38Descriptor from "../src/planets/leda-38/object.json" with { type: "json" };
+import laetitiaDescriptor from "../src/planets/laetitia/object.json" with { type: "json" };
+import isisDescriptor from "../src/planets/isis/object.json" with { type: "json" };
+import ariadneDescriptor from "../src/planets/ariadne/object.json" with { type: "json" };
+import hestiaDescriptor from "../src/planets/hestia/object.json" with { type: "json" };
+import aglajaDescriptor from "../src/planets/aglaja/object.json" with { type: "json" };
+import palesDescriptor from "../src/planets/pales/object.json" with { type: "json" };
+import kalypsoDescriptor from "../src/planets/kalypso/object.json" with { type: "json" };
+import alexandraDescriptor from "../src/planets/alexandra/object.json" with { type: "json" };
+import pandora_55Descriptor from "../src/planets/pandora-55/object.json" with { type: "json" };
+import meleteDescriptor from "../src/planets/melete/object.json" with { type: "json" };
+import elpisDescriptor from "../src/planets/elpis/object.json" with { type: "json" };
+import eratoDescriptor from "../src/planets/erato/object.json" with { type: "json" };
+import ausoniaDescriptor from "../src/planets/ausonia/object.json" with { type: "json" };
+import asiaDescriptor from "../src/planets/asia/object.json" with { type: "json" };
+import letoDescriptor from "../src/planets/leto/object.json" with { type: "json" };
+import hesperiaDescriptor from "../src/planets/hesperia/object.json" with { type: "json" };
+import niobeDescriptor from "../src/planets/niobe/object.json" with { type: "json" };
+import feroniaDescriptor from "../src/planets/feronia/object.json" with { type: "json" };
+import klytiaDescriptor from "../src/planets/klytia/object.json" with { type: "json" };
+import galatea_74Descriptor from "../src/planets/galatea-74/object.json" with { type: "json" };
+import freiaDescriptor from "../src/planets/freia/object.json" with { type: "json" };
+import eurynomeDescriptor from "../src/planets/eurynome/object.json" with { type: "json" };
+import alkmeneDescriptor from "../src/planets/alkmene/object.json" with { type: "json" };
+import beatrixDescriptor from "../src/planets/beatrix/object.json" with { type: "json" };
+import klioDescriptor from "../src/planets/klio/object.json" with { type: "json" };
+import io_85Descriptor from "../src/planets/io-85/object.json" with { type: "json" };
+import semeleDescriptor from "../src/planets/semele/object.json" with { type: "json" };
+import aeginaDescriptor from "../src/planets/aegina/object.json" with { type: "json" };
+import minervaDescriptor from "../src/planets/minerva/object.json" with { type: "json" };
+import arethusaDescriptor from "../src/planets/arethusa/object.json" with { type: "json" };
+import klothoDescriptor from "../src/planets/klotho/object.json" with { type: "json" };
+import iantheDescriptor from "../src/planets/ianthe/object.json" with { type: "json" };
+import polymeleDescriptor from "../src/planets/polymele/object.json" with { type: "json" };
+import leucusDescriptor from "../src/planets/leucus/object.json" with { type: "json" };
+import orusDescriptor from "../src/planets/orus/object.json" with { type: "json" };
+import eurybatesDescriptor from "../src/planets/eurybates/object.json" with { type: "json" };
+import patroclusDescriptor from "../src/planets/patroclus/object.json" with { type: "json" };
 import hiiakaDescriptor from "../src/planets/hiiaka/object.json" with { type: "json" };
 import squannitDescriptor from "../src/planets/squannit/object.json" with { type: "json" };
 import romulusDescriptor from "../src/planets/romulus/object.json" with { type: "json" };
@@ -253,9 +401,39 @@ import comet67pDescriptor from "../src/planets/comet-67p/object.json" with { typ
 import comet103pDescriptor from "../src/planets/comet-103p/object.json" with { type: "json" };
 import comet9pDescriptor from "../src/planets/comet-9p/object.json" with { type: "json" };
 import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { type: "json" };
+import comet8pDescriptor from "../src/planets/comet-8p/object.json" with { type: "json" };
+import comet137pDescriptor from "../src/planets/comet-137p/object.json" with { type: "json" };
+import comet143pDescriptor from "../src/planets/comet-143p/object.json" with { type: "json" };
+import comet162pDescriptor from "../src/planets/comet-162p/object.json" with { type: "json" };
+import comet19pDescriptor from "../src/planets/comet-19p/object.json" with { type: "json" };
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("polymele", "Polymele", "asteroid", "#a0a0a0", 5.191974805775306,
+    "Explore Polymele, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(polymeleDescriptor);
+    }, polymeleDescriptor.properties.worldFrame),
+  object("leucus", "Leucus", "asteroid", "#a0a0a0", 5.312733245360807,
+    "Explore Leucus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(leucusDescriptor);
+    }, leucusDescriptor.properties.worldFrame),
+  object("orus", "Orus", "asteroid", "#a0a0a0", 5.1231730197676795,
+    "Explore Orus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(orusDescriptor);
+    }, orusDescriptor.properties.worldFrame),
+  object("eurybates", "Eurybates", "asteroid", "#a0a0a0", 5.21783282489895,
+    "Explore Eurybates, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eurybatesDescriptor);
+    }, eurybatesDescriptor.properties.worldFrame),
+  object("patroclus", "Patroclus", "asteroid", "#a0a0a0", 5.206163281913244,
+    "Explore Patroclus, a Lucy target, through its observation-constrained approximate ellipsoid.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(patroclusDescriptor);
+    }, patroclusDescriptor.properties.worldFrame),
   object("hiiaka", "Hiʻiaka", "satellite", "#a0a0a0", 43.1,
     "Explore Hiʻiaka, a moon of Haumea, through its occultation-constrained ellipsoid.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
@@ -399,6 +577,31 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(kiviuqDescriptor);
     }, kiviuqDescriptor.properties.worldFrame),
+  object("comet-137p", "Shoemaker–Levy 2", "comet", "#b8b6b2", 4.525635799109316,
+    "Explore 137P/Shoemaker–Levy 2 through a shape approximation based on published lightcurve models.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet137pDescriptor);
+    }, comet137pDescriptor.properties.worldFrame),
+  object("comet-143p", "Kowal–Mrkos", "comet", "#b8b6b2", 4.744148140394379,
+    "Explore 143P/Kowal–Mrkos through a shape approximation based on published lightcurve models.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet143pDescriptor);
+    }, comet143pDescriptor.properties.worldFrame),
+  object("comet-162p", "Siding Spring", "comet", "#b8b6b2", 3.091276774723207,
+    "Explore 162P/Siding Spring through a shape approximation based on published lightcurve models.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet162pDescriptor);
+    }, comet162pDescriptor.properties.worldFrame),
+  object("comet-19p", "Borrelly", "comet", "#b8b6b2", 3.608969333559339,
+    "Explore Borrelly's MICAS photograph and independent USGS and DLR terrain reconstructions.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet19pDescriptor);
+    }, comet19pDescriptor.properties.worldFrame),
+  object("comet-8p", "Tuttle", "comet", "#b8b6b2", 5.706764532787596,
+    "Explore Tuttle's inferred contact-body model from Hubble and Spitzer observations.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet8pDescriptor);
+    }, comet8pDescriptor.properties.worldFrame),
   object("comet-1p", "Halley", "comet", "#b8b6b2", 17.859,
     "Explore Halley's historical Giotto/Vega shape model, with its uncertainty made explicit.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
@@ -1157,6 +1360,864 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(asteroid2002ce26Descriptor);
     }, asteroid2002ce26Descriptor.properties.worldFrame),
+
+  object("thetis", "Thetis", "asteroid", "#aaaaaa", 2.472287077212926,
+    "Explore Thetis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(thetisDescriptor);
+    }, thetisDescriptor.properties.worldFrame),
+
+  object("thalia", "Thalia", "asteroid", "#aaaaaa", 2.628581333515509,
+    "Explore Thalia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(thaliaDescriptor);
+    }, thaliaDescriptor.properties.worldFrame),
+
+  object("phocaea", "Phocaea", "asteroid", "#aaaaaa", 2.4015197093590164,
+    "Explore Phocaea in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(phocaeaDescriptor);
+    }, phocaeaDescriptor.properties.worldFrame),
+
+  object("euterpe", "Euterpe", "asteroid", "#aaaaaa", 2.347052758675226,
+    "Explore Euterpe in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(euterpeDescriptor);
+    }, euterpeDescriptor.properties.worldFrame),
+
+  object("bellona", "Bellona", "asteroid", "#aaaaaa", 2.77802553680874,
+    "Explore Bellona in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bellonaDescriptor);
+    }, bellonaDescriptor.properties.worldFrame),
+
+  object("pomona", "Pomona", "asteroid", "#aaaaaa", 2.588787675965266,
+    "Explore Pomona in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(pomonaDescriptor);
+    }, pomonaDescriptor.properties.worldFrame),
+
+  object("circe", "Circe", "asteroid", "#aaaaaa", 2.6871357085881864,
+    "Explore Circe in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(circeDescriptor);
+    }, circeDescriptor.properties.worldFrame),
+
+  object("atalante", "Atalante", "asteroid", "#aaaaaa", 2.74471241247624,
+    "Explore Atalante in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(atalanteDescriptor);
+    }, atalanteDescriptor.properties.worldFrame),
+
+  object("leda-38", "38 Leda", "asteroid", "#aaaaaa", 2.7426288995401285,
+    "Explore 38 Leda in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(leda_38Descriptor);
+    }, leda_38Descriptor.properties.worldFrame),
+
+  object("laetitia", "Laetitia", "asteroid", "#aaaaaa", 2.7684445031801124,
+    "Explore Laetitia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(laetitiaDescriptor);
+    }, laetitiaDescriptor.properties.worldFrame),
+
+  object("isis", "Isis", "asteroid", "#aaaaaa", 2.4444877106591107,
+    "Explore Isis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(isisDescriptor);
+    }, isisDescriptor.properties.worldFrame),
+
+  object("ariadne", "Ariadne", "asteroid", "#aaaaaa", 2.2042626853451814,
+    "Explore Ariadne in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ariadneDescriptor);
+    }, ariadneDescriptor.properties.worldFrame),
+
+  object("hestia", "Hestia", "asteroid", "#aaaaaa", 2.5255592116593393,
+    "Explore Hestia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hestiaDescriptor);
+    }, hestiaDescriptor.properties.worldFrame),
+
+  object("aglaja", "Aglaja", "asteroid", "#aaaaaa", 2.878732649484092,
+    "Explore Aglaja in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(aglajaDescriptor);
+    }, aglajaDescriptor.properties.worldFrame),
+
+  object("pales", "Pales", "asteroid", "#aaaaaa", 3.097178213859086,
+    "Explore Pales in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(palesDescriptor);
+    }, palesDescriptor.properties.worldFrame),
+
+  object("kalypso", "Kalypso", "asteroid", "#aaaaaa", 2.6180409355001784,
+    "Explore Kalypso in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(kalypsoDescriptor);
+    }, kalypsoDescriptor.properties.worldFrame),
+
+  object("alexandra", "Alexandra", "asteroid", "#aaaaaa", 2.7095146915447392,
+    "Explore Alexandra in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(alexandraDescriptor);
+    }, alexandraDescriptor.properties.worldFrame),
+
+  object("pandora-55", "55 Pandora", "asteroid", "#aaaaaa", 2.75816485113467,
+    "Explore 55 Pandora in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(pandora_55Descriptor);
+    }, pandora_55Descriptor.properties.worldFrame),
+
+  object("melete", "Melete", "asteroid", "#aaaaaa", 2.5988578205374266,
+    "Explore Melete in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(meleteDescriptor);
+    }, meleteDescriptor.properties.worldFrame),
+
+  object("elpis", "Elpis", "asteroid", "#aaaaaa", 2.7131621894421545,
+    "Explore Elpis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(elpisDescriptor);
+    }, elpisDescriptor.properties.worldFrame),
+
+  object("erato", "Erato", "asteroid", "#aaaaaa", 3.128605699285775,
+    "Explore Erato in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eratoDescriptor);
+    }, eratoDescriptor.properties.worldFrame),
+
+  object("ausonia", "Ausonia", "asteroid", "#aaaaaa", 2.39418991368127,
+    "Explore Ausonia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ausoniaDescriptor);
+    }, ausoniaDescriptor.properties.worldFrame),
+
+  object("asia", "Asia", "asteroid", "#aaaaaa", 2.4209257475173156,
+    "Explore Asia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asiaDescriptor);
+    }, asiaDescriptor.properties.worldFrame),
+
+  object("leto", "Leto", "asteroid", "#aaaaaa", 2.7855571261884413,
+    "Explore Leto in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(letoDescriptor);
+    }, letoDescriptor.properties.worldFrame),
+
+  object("hesperia", "Hesperia", "asteroid", "#aaaaaa", 2.9772137652759962,
+    "Explore Hesperia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hesperiaDescriptor);
+    }, hesperiaDescriptor.properties.worldFrame),
+
+  object("niobe", "Niobe", "asteroid", "#aaaaaa", 2.754299168249887,
+    "Explore Niobe in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(niobeDescriptor);
+    }, niobeDescriptor.properties.worldFrame),
+
+  object("feronia", "Feronia", "asteroid", "#aaaaaa", 2.265860062248244,
+    "Explore Feronia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(feroniaDescriptor);
+    }, feroniaDescriptor.properties.worldFrame),
+
+  object("klytia", "Klytia", "asteroid", "#aaaaaa", 2.6653201228884313,
+    "Explore Klytia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(klytiaDescriptor);
+    }, klytiaDescriptor.properties.worldFrame),
+
+  object("galatea-74", "74 Galatea", "asteroid", "#aaaaaa", 2.780620996918218,
+    "Explore 74 Galatea in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(galatea_74Descriptor);
+    }, galatea_74Descriptor.properties.worldFrame),
+
+  object("freia", "Freia", "asteroid", "#aaaaaa", 3.4087870327567744,
+    "Explore Freia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(freiaDescriptor);
+    }, freiaDescriptor.properties.worldFrame),
+
+  object("eurynome", "Eurynome", "asteroid", "#aaaaaa", 2.4443553139909806,
+    "Explore Eurynome in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eurynomeDescriptor);
+    }, eurynomeDescriptor.properties.worldFrame),
+
+  object("alkmene", "Alkmene", "asteroid", "#aaaaaa", 2.762763911317985,
+    "Explore Alkmene in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(alkmeneDescriptor);
+    }, alkmeneDescriptor.properties.worldFrame),
+
+  object("beatrix", "Beatrix", "asteroid", "#aaaaaa", 2.4311351389602276,
+    "Explore Beatrix in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(beatrixDescriptor);
+    }, beatrixDescriptor.properties.worldFrame),
+
+  object("klio", "Klio", "asteroid", "#aaaaaa", 2.3638584071567386,
+    "Explore Klio in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(klioDescriptor);
+    }, klioDescriptor.properties.worldFrame),
+
+  object("io-85", "85 Io", "asteroid", "#aaaaaa", 2.6540732054067564,
+    "Explore 85 Io in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(io_85Descriptor);
+    }, io_85Descriptor.properties.worldFrame),
+
+  object("semele", "Semele", "asteroid", "#aaaaaa", 3.102547858991143,
+    "Explore Semele in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(semeleDescriptor);
+    }, semeleDescriptor.properties.worldFrame),
+
+  object("aegina", "Aegina", "asteroid", "#aaaaaa", 2.5889074402927057,
+    "Explore Aegina in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(aeginaDescriptor);
+    }, aeginaDescriptor.properties.worldFrame),
+
+  object("minerva", "Minerva", "asteroid", "#aaaaaa", 2.753464096843689,
+    "Explore Minerva in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(minervaDescriptor);
+    }, minervaDescriptor.properties.worldFrame),
+
+  object("arethusa", "Arethusa", "asteroid", "#aaaaaa", 3.064764963618251,
+    "Explore Arethusa in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(arethusaDescriptor);
+    }, arethusaDescriptor.properties.worldFrame),
+
+  object("klotho", "Klotho", "asteroid", "#aaaaaa", 2.6688807426668064,
+    "Explore Klotho in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(klothoDescriptor);
+    }, klothoDescriptor.properties.worldFrame),
+
+  object("ianthe", "Ianthe", "asteroid", "#aaaaaa", 2.687221327524466,
+    "Explore Ianthe in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(iantheDescriptor);
+    }, iantheDescriptor.properties.worldFrame),
+
+  object("hertha", "Hertha", "asteroid", "#aaaaaa", 2.4274112698544013,
+    "Explore Hertha in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(herthaDescriptor);
+    }, herthaDescriptor.properties.worldFrame),
+
+  object("hera", "Hera", "asteroid", "#aaaaaa", 2.701015744250632,
+    "Explore Hera in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(heraDescriptor);
+    }, heraDescriptor.properties.worldFrame),
+
+  object("klymene", "Klymene", "asteroid", "#aaaaaa", 3.1462660059874397,
+    "Explore Klymene in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(klymeneDescriptor);
+    }, klymeneDescriptor.properties.worldFrame),
+
+  object("artemis", "Artemis", "asteroid", "#aaaaaa", 2.3721668452445526,
+    "Explore Artemis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(artemisDescriptor);
+    }, artemisDescriptor.properties.worldFrame),
+
+  object("dione-106", "106 Dione", "asteroid", "#aaaaaa", 3.1819345699171295,
+    "Explore 106 Dione in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(dione_106Descriptor);
+    }, dione_106Descriptor.properties.worldFrame),
+
+  object("felicitas", "Felicitas", "asteroid", "#aaaaaa", 2.6925655976731475,
+    "Explore Felicitas in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(felicitasDescriptor);
+    }, felicitasDescriptor.properties.worldFrame),
+
+  object("lydia", "Lydia", "asteroid", "#aaaaaa", 2.732268290476554,
+    "Explore Lydia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lydiaDescriptor);
+    }, lydiaDescriptor.properties.worldFrame),
+
+  object("iphigenia", "Iphigenia", "asteroid", "#aaaaaa", 2.4333836727227824,
+    "Explore Iphigenia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(iphigeniaDescriptor);
+    }, iphigeniaDescriptor.properties.worldFrame),
+
+  object("thyra", "Thyra", "asteroid", "#aaaaaa", 2.379742056440902,
+    "Explore Thyra in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(thyraDescriptor);
+    }, thyraDescriptor.properties.worldFrame),
+
+  object("lomia", "Lomia", "asteroid", "#aaaaaa", 2.9917431003179766,
+    "Explore Lomia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lomiaDescriptor);
+    }, lomiaDescriptor.properties.worldFrame),
+
+  object("peitho", "Peitho", "asteroid", "#aaaaaa", 2.4376754729416765,
+    "Explore Peitho in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(peithoDescriptor);
+    }, peithoDescriptor.properties.worldFrame),
+
+  object("althaea", "Althaea", "asteroid", "#aaaaaa", 2.5814366871947056,
+    "Explore Althaea in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(althaeaDescriptor);
+    }, althaeaDescriptor.properties.worldFrame),
+
+  object("lachesis", "Lachesis", "asteroid", "#aaaaaa", 3.119472040064257,
+    "Explore Lachesis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lachesisDescriptor);
+    }, lachesisDescriptor.properties.worldFrame),
+
+  object("gerda", "Gerda", "asteroid", "#aaaaaa", 3.2256949669977946,
+    "Explore Gerda in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(gerdaDescriptor);
+    }, gerdaDescriptor.properties.worldFrame),
+
+  object("brunhild", "Brunhild", "asteroid", "#aaaaaa", 2.6955168441339983,
+    "Explore Brunhild in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(brunhildDescriptor);
+    }, brunhildDescriptor.properties.worldFrame),
+
+  object("alkeste", "Alkeste", "asteroid", "#aaaaaa", 2.629388047968044,
+    "Explore Alkeste in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(alkesteDescriptor);
+    }, alkesteDescriptor.properties.worldFrame),
+
+  object("liberatrix", "Liberatrix", "asteroid", "#aaaaaa", 2.742985442216405,
+    "Explore Liberatrix in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(liberatrixDescriptor);
+    }, liberatrixDescriptor.properties.worldFrame),
+
+  object("velleda", "Velleda", "asteroid", "#aaaaaa", 2.43905767386019,
+    "Explore Velleda in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(velledaDescriptor);
+    }, velledaDescriptor.properties.worldFrame),
+
+  object("johanna", "Johanna", "asteroid", "#aaaaaa", 2.7565883306989893,
+    "Explore Johanna in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(johannaDescriptor);
+    }, johannaDescriptor.properties.worldFrame),
+
+  object("antigone", "Antigone", "asteroid", "#aaaaaa", 2.8676091430240436,
+    "Explore Antigone in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(antigoneDescriptor);
+    }, antigoneDescriptor.properties.worldFrame),
+
+  object("cyrene", "Cyrene", "asteroid", "#aaaaaa", 3.07124717724166,
+    "Explore Cyrene in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(cyreneDescriptor);
+    }, cyreneDescriptor.properties.worldFrame),
+
+  object("sophrosyne", "Sophrosyne", "asteroid", "#aaaaaa", 2.564014163529194,
+    "Explore Sophrosyne in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(sophrosyneDescriptor);
+    }, sophrosyneDescriptor.properties.worldFrame),
+
+  object("meliboea", "Meliboea", "asteroid", "#aaaaaa", 3.1311603864437165,
+    "Explore Meliboea in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(meliboeaDescriptor);
+    }, meliboeaDescriptor.properties.worldFrame),
+
+  object("siwa", "Siwa", "asteroid", "#aaaaaa", 2.72994935329283,
+    "Explore Siwa in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(siwaDescriptor);
+    }, siwaDescriptor.properties.worldFrame),
+
+  object("vibilia", "Vibilia", "asteroid", "#aaaaaa", 2.654067519715369,
+    "Explore Vibilia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(vibiliaDescriptor);
+    }, vibiliaDescriptor.properties.worldFrame),
+
+  object("lucina", "Lucina", "asteroid", "#aaaaaa", 2.7199394547827493,
+    "Explore Lucina in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lucinaDescriptor);
+    }, lucinaDescriptor.properties.worldFrame),
+
+  object("protogeneia", "Protogeneia", "asteroid", "#aaaaaa", 3.13636157165271,
+    "Explore Protogeneia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(protogeneiaDescriptor);
+    }, protogeneiaDescriptor.properties.worldFrame),
+
+  object("gallia", "Gallia", "asteroid", "#aaaaaa", 2.7707071057503048,
+    "Explore Gallia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(galliaDescriptor);
+    }, galliaDescriptor.properties.worldFrame),
+
+  object("medusa", "Medusa", "asteroid", "#aaaaaa", 2.174593942921186,
+    "Explore Medusa in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(medusaDescriptor);
+    }, medusaDescriptor.properties.worldFrame),
+
+  object("nuwa", "Nuwa", "asteroid", "#aaaaaa", 2.9879264955692397,
+    "Explore Nuwa in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(nuwaDescriptor);
+    }, nuwaDescriptor.properties.worldFrame),
+
+  object("abundantia", "Abundantia", "asteroid", "#aaaaaa", 2.5919374543282623,
+    "Explore Abundantia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(abundantiaDescriptor);
+    }, abundantiaDescriptor.properties.worldFrame),
+
+  object("scylla", "Scylla", "asteroid", "#aaaaaa", 2.7604931019999346,
+    "Explore Scylla in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(scyllaDescriptor);
+    }, scyllaDescriptor.properties.worldFrame),
+
+  object("xanthippe", "Xanthippe", "asteroid", "#aaaaaa", 2.732385125710907,
+    "Explore Xanthippe in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(xanthippeDescriptor);
+    }, xanthippeDescriptor.properties.worldFrame),
+
+  object("dejanira", "Dejanira", "asteroid", "#aaaaaa", 2.579713770510923,
+    "Explore Dejanira in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(dejaniraDescriptor);
+    }, dejaniraDescriptor.properties.worldFrame),
+
+  object("aemilia", "Aemilia", "asteroid", "#aaaaaa", 3.10892633182096,
+    "Explore Aemilia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(aemiliaDescriptor);
+    }, aemiliaDescriptor.properties.worldFrame),
+
+  object("una", "Una", "asteroid", "#aaaaaa", 2.728272185210906,
+    "Explore Una in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(unaDescriptor);
+    }, unaDescriptor.properties.worldFrame),
+
+  object("athor", "Athor", "asteroid", "#aaaaaa", 2.3789454823297382,
+    "Explore Athor in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(athorDescriptor);
+    }, athorDescriptor.properties.worldFrame),
+
+  object("laurentia", "Laurentia", "asteroid", "#aaaaaa", 3.0135299301481933,
+    "Explore Laurentia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(laurentiaDescriptor);
+    }, laurentiaDescriptor.properties.worldFrame),
+
+  object("erigone", "Erigone", "asteroid", "#aaaaaa", 2.367053015804557,
+    "Explore Erigone in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(erigoneDescriptor);
+    }, erigoneDescriptor.properties.worldFrame),
+
+  object("eva", "Eva", "asteroid", "#aaaaaa", 2.6327474235794797,
+    "Explore Eva in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(evaDescriptor);
+    }, evaDescriptor.properties.worldFrame),
+
+  object("loreley", "Loreley", "asteroid", "#aaaaaa", 3.126208058670846,
+    "Explore Loreley in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(loreleyDescriptor);
+    }, loreleyDescriptor.properties.worldFrame),
+
+  object("rhodope", "Rhodope", "asteroid", "#aaaaaa", 2.6866911021546116,
+    "Explore Rhodope in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(rhodopeDescriptor);
+    }, rhodopeDescriptor.properties.worldFrame),
+
+  object("urda", "Urda", "asteroid", "#aaaaaa", 2.853052645325009,
+    "Explore Urda in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(urdaDescriptor);
+    }, urdaDescriptor.properties.worldFrame),
+
+  object("sibylla", "Sibylla", "asteroid", "#aaaaaa", 3.3713315960899832,
+    "Explore Sibylla in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(sibyllaDescriptor);
+    }, sibyllaDescriptor.properties.worldFrame),
+
+  object("baucis", "Baucis", "asteroid", "#aaaaaa", 2.3794646807346385,
+    "Explore Baucis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(baucisDescriptor);
+    }, baucisDescriptor.properties.worldFrame),
+
+  object("ino", "Ino", "asteroid", "#aaaaaa", 2.742339935291223,
+    "Explore Ino in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(inoDescriptor);
+    }, inoDescriptor.properties.worldFrame),
+
+  object("phaedra", "Phaedra", "asteroid", "#aaaaaa", 2.8588859462315144,
+    "Explore Phaedra in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(phaedraDescriptor);
+    }, phaedraDescriptor.properties.worldFrame),
+
+  object("dejopeja", "Dejopeja", "asteroid", "#aaaaaa", 3.1906659584251518,
+    "Explore Dejopeja in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(dejopejaDescriptor);
+    }, dejopejaDescriptor.properties.worldFrame),
+
+  object("lamberta", "Lamberta", "asteroid", "#aaaaaa", 2.7320569169080615,
+    "Explore Lamberta in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lambertaDescriptor);
+    }, lambertaDescriptor.properties.worldFrame),
+
+  object("menippe", "Menippe", "asteroid", "#aaaaaa", 2.761609095120294,
+    "Explore Menippe in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(menippeDescriptor);
+    }, menippeDescriptor.properties.worldFrame),
+
+  object("kolga", "Kolga", "asteroid", "#aaaaaa", 2.8959502139804503,
+    "Explore Kolga in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(kolgaDescriptor);
+    }, kolgaDescriptor.properties.worldFrame),
+
+  object("ambrosia", "Ambrosia", "asteroid", "#aaaaaa", 2.59809056583152,
+    "Explore Ambrosia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ambrosiaDescriptor);
+    }, ambrosiaDescriptor.properties.worldFrame),
+
+  object("eurykleia", "Eurykleia", "asteroid", "#aaaaaa", 2.878679745406444,
+    "Explore Eurykleia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eurykleiaDescriptor);
+    }, eurykleiaDescriptor.properties.worldFrame),
+
+  object("byblis", "Byblis", "asteroid", "#aaaaaa", 3.1628105645290394,
+    "Explore Byblis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(byblisDescriptor);
+    }, byblisDescriptor.properties.worldFrame),
+
+  object("kallisto", "Kallisto", "asteroid", "#aaaaaa", 2.66979749127311,
+    "Explore Kallisto in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(kallistoDescriptor);
+    }, kallistoDescriptor.properties.worldFrame),
+
+  object("hersilia", "Hersilia", "asteroid", "#aaaaaa", 2.741003699475706,
+    "Explore Hersilia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hersiliaDescriptor);
+    }, hersiliaDescriptor.properties.worldFrame),
+
+  object("hedda", "Hedda", "asteroid", "#aaaaaa", 2.28374355631575,
+    "Explore Hedda in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(heddaDescriptor);
+    }, heddaDescriptor.properties.worldFrame),
+
+  object("dido", "Dido", "asteroid", "#aaaaaa", 3.1544316494785694,
+    "Explore Dido in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(didoDescriptor);
+    }, didoDescriptor.properties.worldFrame),
+
+  object("isabella", "Isabella", "asteroid", "#aaaaaa", 2.7224299951412174,
+    "Explore Isabella in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(isabellaDescriptor);
+    }, isabellaDescriptor.properties.worldFrame),
+
+  object("medea", "Medea", "asteroid", "#aaaaaa", 3.1164528663194453,
+    "Explore Medea in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(medeaDescriptor);
+    }, medeaDescriptor.properties.worldFrame),
+
+  object("lilaea", "Lilaea", "asteroid", "#aaaaaa", 2.752207905556241,
+    "Explore Lilaea in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(lilaeaDescriptor);
+    }, lilaeaDescriptor.properties.worldFrame),
+
+  object("aschera", "Aschera", "asteroid", "#aaaaaa", 2.610464215816688,
+    "Explore Aschera in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ascheraDescriptor);
+    }, ascheraDescriptor.properties.worldFrame),
+
+  object("oenone", "Oenone", "asteroid", "#aaaaaa", 2.76856663571234,
+    "Explore Oenone in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(oenoneDescriptor);
+    }, oenoneDescriptor.properties.worldFrame),
+
+  object("eudora", "Eudora", "asteroid", "#aaaaaa", 2.868342551130494,
+    "Explore Eudora in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eudoraDescriptor);
+    }, eudoraDescriptor.properties.worldFrame),
+
+  object("stephania", "Stephania", "asteroid", "#aaaaaa", 2.348271490890079,
+    "Explore Stephania in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(stephaniaDescriptor);
+    }, stephaniaDescriptor.properties.worldFrame),
+
+  object("eos", "Eos", "asteroid", "#aaaaaa", 3.011699855683851,
+    "Explore Eos in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eosDescriptor);
+    }, eosDescriptor.properties.worldFrame),
+
+  object("henrietta", "Henrietta", "asteroid", "#aaaaaa", 3.397844277767737,
+    "Explore Henrietta in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(henriettaDescriptor);
+    }, henriettaDescriptor.properties.worldFrame),
+
+  object("weringia", "Weringia", "asteroid", "#aaaaaa", 2.7118191273654264,
+    "Explore Weringia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(weringiaDescriptor);
+    }, weringiaDescriptor.properties.worldFrame),
+
+  object("philosophia", "Philosophia", "asteroid", "#aaaaaa", 3.152308355019594,
+    "Explore Philosophia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(philosophiaDescriptor);
+    }, philosophiaDescriptor.properties.worldFrame),
+
+  object("athamantis", "Athamantis", "asteroid", "#aaaaaa", 2.3819120669248703,
+    "Explore Athamantis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(athamantisDescriptor);
+    }, athamantisDescriptor.properties.worldFrame),
+
+  object("vindobona", "Vindobona", "asteroid", "#aaaaaa", 2.918785954300875,
+    "Explore Vindobona in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(vindobonaDescriptor);
+    }, vindobonaDescriptor.properties.worldFrame),
+
+  object("asterope", "Asterope", "asteroid", "#aaaaaa", 2.659113942812149,
+    "Explore Asterope in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asteropeDescriptor);
+    }, asteropeDescriptor.properties.worldFrame),
+
+  object("coelestina", "Coelestina", "asteroid", "#aaaaaa", 2.7617393088127553,
+    "Explore Coelestina in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(coelestinaDescriptor);
+    }, coelestinaDescriptor.properties.worldFrame),
+
+  object("hypatia", "Hypatia", "asteroid", "#aaaaaa", 2.905035805480087,
+    "Explore Hypatia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hypatiaDescriptor);
+    }, hypatiaDescriptor.properties.worldFrame),
+
+  object("vanadis", "Vanadis", "asteroid", "#aaaaaa", 2.662913987797179,
+    "Explore Vanadis in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(vanadisDescriptor);
+    }, vanadisDescriptor.properties.worldFrame),
+
+  object("kriemhild", "Kriemhild", "asteroid", "#aaaaaa", 2.8618233448142756,
+    "Explore Kriemhild in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(kriemhildDescriptor);
+    }, kriemhildDescriptor.properties.worldFrame),
+
+  object("vera", "Vera", "asteroid", "#aaaaaa", 3.098448648035085,
+    "Explore Vera in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(veraDescriptor);
+    }, veraDescriptor.properties.worldFrame),
+
+  object("asporina", "Asporina", "asteroid", "#aaaaaa", 2.6955752258853334,
+    "Explore Asporina in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(asporinaDescriptor);
+    }, asporinaDescriptor.properties.worldFrame),
+
+  object("eukrate", "Eukrate", "asteroid", "#aaaaaa", 2.7392482101612425,
+    "Explore Eukrate in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(eukrateDescriptor);
+    }, eukrateDescriptor.properties.worldFrame),
+
+  object("ilse", "Ilse", "asteroid", "#aaaaaa", 2.377447027685721,
+    "Explore Ilse in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ilseDescriptor);
+    }, ilseDescriptor.properties.worldFrame),
+
+  object("bettina", "Bettina", "asteroid", "#aaaaaa", 3.1419813494769286,
+    "Explore Bettina in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bettinaDescriptor);
+    }, bettinaDescriptor.properties.worldFrame),
+
+  object("clementina", "Clementina", "asteroid", "#aaaaaa", 3.159622955651379,
+    "Explore Clementina in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(clementinaDescriptor);
+    }, clementinaDescriptor.properties.worldFrame),
+
+  object("augusta", "Augusta", "asteroid", "#aaaaaa", 2.194929996448645,
+    "Explore Augusta in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(augustaDescriptor);
+    }, augustaDescriptor.properties.worldFrame),
+
+  object("silesia", "Silesia", "asteroid", "#aaaaaa", 3.1183254802109865,
+    "Explore Silesia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(silesiaDescriptor);
+    }, silesiaDescriptor.properties.worldFrame),
+
+  object("tyche", "Tyche", "asteroid", "#aaaaaa", 2.61507505241983,
+    "Explore Tyche in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tycheDescriptor);
+    }, tycheDescriptor.properties.worldFrame),
+
+  object("huberta", "Huberta", "asteroid", "#aaaaaa", 3.453696095317234,
+    "Explore Huberta in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(hubertaDescriptor);
+    }, hubertaDescriptor.properties.worldFrame),
+
+  object("dresda", "Dresda", "asteroid", "#aaaaaa", 2.884592869415074,
+    "Explore Dresda in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(dresdaDescriptor);
+    }, dresdaDescriptor.properties.worldFrame),
+
+  object("libussa", "Libussa", "asteroid", "#aaaaaa", 2.7991273130765797,
+    "Explore Libussa in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(libussaDescriptor);
+    }, libussaDescriptor.properties.worldFrame),
+
+  object("anna", "Anna", "asteroid", "#aaaaaa", 2.420854512785924,
+    "Explore Anna in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(annaDescriptor);
+    }, annaDescriptor.properties.worldFrame),
+
+  object("anahita", "Anahita", "asteroid", "#aaaaaa", 2.1978820172913154,
+    "Explore Anahita in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(anahitaDescriptor);
+    }, anahitaDescriptor.properties.worldFrame),
+
+  object("penthesilea", "Penthesilea", "asteroid", "#aaaaaa", 3.0044325414876942,
+    "Explore Penthesilea in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(penthesileaDescriptor);
+    }, penthesileaDescriptor.properties.worldFrame),
+
+  object("antonia", "Antonia", "asteroid", "#aaaaaa", 2.7790127024022557,
+    "Explore Antonia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(antoniaDescriptor);
+    }, antoniaDescriptor.properties.worldFrame),
+
+  object("philagoria", "Philagoria", "asteroid", "#aaaaaa", 3.0476100267473623,
+    "Explore Philagoria in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(philagoriaDescriptor);
+    }, philagoriaDescriptor.properties.worldFrame),
+
+  object("sapientia", "Sapientia", "asteroid", "#aaaaaa", 2.771802925757048,
+    "Explore Sapientia in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(sapientiaDescriptor);
+    }, sapientiaDescriptor.properties.worldFrame),
+
+  object("adelheid", "Adelheid", "asteroid", "#aaaaaa", 3.118003623819272,
+    "Explore Adelheid in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(adelheidDescriptor);
+    }, adelheidDescriptor.properties.worldFrame),
+
+  object("emma", "Emma", "asteroid", "#aaaaaa", 3.0505638561088526,
+    "Explore Emma in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(emmaDescriptor);
+    }, emmaDescriptor.properties.worldFrame),
+
+  object("iclea", "Iclea", "asteroid", "#aaaaaa", 3.1954918103121694,
+    "Explore Iclea in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(icleaDescriptor);
+    }, icleaDescriptor.properties.worldFrame),
+
+  object("bavaria", "Bavaria", "asteroid", "#aaaaaa", 2.7267724486531284,
+    "Explore Bavaria in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bavariaDescriptor);
+    }, bavariaDescriptor.properties.worldFrame),
+
+  object("clarissa", "Clarissa", "asteroid", "#aaaaaa", 2.405392127505063,
+    "Explore Clarissa in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(clarissaDescriptor);
+    }, clarissaDescriptor.properties.worldFrame),
+
+  object("unitas", "Unitas", "asteroid", "#aaaaaa", 2.357778522320458,
+    "Explore Unitas in 3D with its published shape model and radial elevation.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(unitasDescriptor);
+    }, unitasDescriptor.properties.worldFrame),
+
+  object("annefrank", "Annefrank", "asteroid", "#aaaaaa", 2.2123334934520815,
+    "Explore Annefrank with a clearly labelled approximation of its published flyby dimensions.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(annefrankDescriptor);
+    }, annefrankDescriptor.properties.worldFrame),
+
+  object("braille", "Braille", "asteroid", "#aaaaaa", 2.339551786449215,
+    "Explore Braille with a clearly labelled approximation of its published flyby dimensions.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(brailleDescriptor);
+    }, brailleDescriptor.properties.worldFrame),
 
   object("dike", "Dike", "asteroid", "#aaaaaa", 2.662672838262387,
     "Explore Dike in 3D with its published shape model and documented physical size scale.", async () => {

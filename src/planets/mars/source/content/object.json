@@ -143,7 +143,7 @@
         "id": "normal",
         "label": "Visible color",
         "description": "USGS Viking MDIM 2.1 global mosaic, colorized with NASA Ames processing. Source sampling is about 1 km; resolution and photographed lighting vary. This assembled historical map does not depict the scene date.",
-        "title": "Viking MDIM 2.1 visible-color mosaic. USGS Viking MDIM 2.1 colorized global mosaic",
+        "title": "MDIM 2.1 colorized global mosaic",
         "thumbnail": "/scenes/mars/mars-lens-normal.webp",
         "surface": "/scenes/mars/mars-surface.webp",
         "poles": "/scenes/mars/mars-poles.webp",
@@ -151,13 +151,14 @@
           "id": "normal",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic"
+        "detail": "Global mosaic",
+        "summary": "Surface detail comes from Viking images with NASA Ames color. Lighting and resolution vary; these are archival observations."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Mars Global Surveyor MOLA topography shown with the source pseudo-color shaded-relief palette. Colors indicate relative elevation, with cartographic shading; this is a prepared global display mosaic, not a current photograph or numeric height readout.",
-        "title": "MOLA topographic elevation with shaded relief. USGS MOLA elevation shown with the source pseudo-color shaded-relief palette",
+        "title": "MOLA global color shaded relief",
         "thumbnail": "/scenes/mars/mars-lens-elevation-thumbnail.webp",
         "surface": "/scenes/mars/mars-lens-elevation.webp",
         "poles": "/scenes/mars/mars-lens-elevation-poles.webp",
@@ -217,13 +218,14 @@
           "id": "elevation",
           "path": "../manifest.json"
         },
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "summary": "Colors describe terrain height and shading reveals slopes. This published relief image does not provide a numeric readout."
       },
       {
         "id": "thermal",
         "label": "Thermal infrared",
         "description": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Gray grid marks unavailable source coverage; dark interior samples remain. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
-        "title": "USGS/ASU THEMIS daytime infrared brightness mosaic from Mars Odyssey. Gray grid marks unavailable source coverage; dark interior samples remain. No Viking imagery fills thermal gaps. Multiple observations are combined; this is not a temperature map or the scene date.",
+        "title": "THEMIS daytime infrared mosaic",
         "thumbnail": "/scenes/mars/mars-lens-thermal-thumbnail.webp",
         "surface": "/scenes/mars/mars-lens-thermal.webp",
         "poles": "/scenes/mars/mars-lens-thermal-poles.webp",
@@ -231,7 +233,8 @@
           "id": "thermal",
           "path": "../manifest.json"
         },
-        "detail": "Infrared"
+        "detail": "Infrared",
+        "summary": "Brightness records daytime infrared imagery, not a temperature reading. The gray grid marks gaps left unfilled."
       }
     ]
   },

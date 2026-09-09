@@ -1,0 +1,536 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "educatio",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "5365e90e7cb4df4a2f4209e0fdbe26951a6cb07c10e726ae6aeebcb5c3197d8d"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "3bb55be6c28f6b3a584735911a9b53df73693b97f6b980a900b99dd318173724",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "educatio",
+        "displayName": "Educatio",
+        "publicBase": "/scenes/educatio/",
+        "distanceAu": 2.2152610738212455,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-9541.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 5308.289479882053,
+                "expectedVertices": 568,
+                "expectedFaces": 1132,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -3.293
+              },
+              "minimum": -2,
+              "maximum": 3,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 3293,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 65.86
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 3.293,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/educatio/educatio-shape-surface@2x.webp",
+          "polesUrl": "/scenes/educatio/educatio-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-9541.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 5308.289479882053,
+              "expectedVertices": 568,
+              "expectedFaces": 1132,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 65.86,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "a03dc3e0225aef0a113b01b536452351f2a45f116349a451dba11fb3c88ad444",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "educatio",
+        "displayName": "Educatio",
+        "title": {
+          "label": "Educatio",
+          "viewBox": "0 0 107.3091 35",
+          "width": 107.3091,
+          "height": 35,
+          "path": "M0 29L0 8.63L13.52 8.63L13.52 11.29L3.05 11.29L3.05 17.32L12.74 17.32L12.74 19.95L3.05 19.95L3.05 26.33L13.54 26.33L13.54 29ZM21.84 29.29Q19.97 29.29 18.54 28.34Q17.11 27.39 16.32 25.68Q15.54 23.97 15.54 21.7Q15.54 19.42 16.34 17.71Q17.14 16 18.55 15.05Q19.97 14.11 21.84 14.11Q22.88 14.11 23.71 14.42Q24.55 14.73 25.19 15.27Q25.83 15.82 26.24 16.54L26.3 16.54L26.3 8.63L29.21 8.63L29.21 29L26.35 29L26.35 26.76L26.28 26.76Q25.86 27.51 25.21 28.08Q24.56 28.66 23.72 28.97Q22.88 29.29 21.84 29.29ZM22.44 26.79Q23.69 26.79 24.59 26.15Q25.49 25.51 25.98 24.36Q26.46 23.2 26.46 21.69Q26.46 20.14 25.98 19Q25.49 17.86 24.59 17.23Q23.69 16.6 22.44 16.6Q21.24 16.6 20.36 17.2Q19.47 17.8 18.99 18.94Q18.5 20.07 18.5 21.69Q18.5 23.3 19 24.43Q19.49 25.57 20.37 26.18Q21.25 26.79 22.44 26.79ZM37.76 29.27Q36.27 29.27 35.09 28.62Q33.91 27.97 33.23 26.69Q32.54 25.4 32.54 23.52L32.54 14.37L35.45 14.37L35.45 23.18Q35.45 24.88 36.3 25.77Q37.15 26.66 38.64 26.66Q39.64 26.66 40.42 26.26Q41.21 25.86 41.67 25Q42.14 24.15 42.14 22.85L42.14 14.37L45.05 14.37L45.05 29L42.21 29L42.21 25.38L42.78 25.38Q42.1 27.35 40.83 28.31Q39.56 29.27 37.76 29.27ZM54.61 29.33Q52.53 29.33 50.97 28.36Q49.4 27.39 48.53 25.68Q47.66 23.97 47.66 21.71Q47.66 19.46 48.53 17.73Q49.4 16.01 50.97 15.04Q52.53 14.07 54.61 14.07Q55.88 14.07 56.96 14.45Q58.04 14.82 58.88 15.5Q59.72 16.18 60.25 17.11Q60.78 18.05 60.95 19.17L58.08 19.32Q57.96 18.72 57.68 18.21Q57.4 17.71 56.96 17.34Q56.52 16.98 55.94 16.78Q55.36 16.57 54.62 16.57Q53.35 16.57 52.46 17.23Q51.56 17.88 51.1 19.04Q50.63 20.2 50.63 21.73Q50.63 23.24 51.1 24.39Q51.56 25.53 52.46 26.17Q53.37 26.81 54.62 26.81Q55.38 26.81 55.94 26.61Q56.51 26.42 56.93 26.06Q57.36 25.71 57.65 25.19Q57.93 24.68 58.07 24.04L60.95 24.2Q60.8 25.31 60.28 26.25Q59.75 27.2 58.91 27.88Q58.07 28.56 56.98 28.95Q55.88 29.33 54.61 29.33ZM68.06 29.26Q66.63 29.26 65.48 28.75Q64.33 28.25 63.67 27.26Q63.01 26.28 63.01 24.83Q63.01 23.59 63.48 22.78Q63.96 21.97 64.78 21.51Q65.6 21.04 66.64 20.8Q67.67 20.56 68.76 20.44Q70.12 20.26 70.92 20.16Q71.73 20.06 72.08 19.83Q72.43 19.59 72.43 19.07L72.43 18.96Q72.43 18.21 72.08 17.67Q71.74 17.13 71.09 16.81Q70.44 16.49 69.5 16.49Q68.57 16.49 67.86 16.8Q67.15 17.11 66.74 17.63Q66.33 18.14 66.22 18.76L63.38 18.6Q63.57 17.23 64.37 16.22Q65.18 15.22 66.51 14.67Q67.83 14.11 69.51 14.11Q70.77 14.11 71.83 14.42Q72.89 14.73 73.67 15.36Q74.45 15.98 74.88 16.9Q75.31 17.82 75.31 19.05L75.31 29L72.45 29L72.45 26.95L72.39 26.95Q72.08 27.52 71.54 28.06Q71 28.59 70.16 28.92Q69.31 29.26 68.06 29.26ZM68.68 26.91Q69.94 26.91 70.78 26.45Q71.62 25.99 72.03 25.23Q72.44 24.46 72.44 23.57L72.44 21.82Q72.29 21.96 71.92 22.06Q71.55 22.16 71.05 22.26Q70.54 22.36 69.99 22.44Q69.45 22.53 68.93 22.6Q68.12 22.71 67.43 22.96Q66.74 23.22 66.32 23.67Q65.9 24.13 65.9 24.88Q65.9 25.53 66.25 25.98Q66.59 26.43 67.21 26.67Q67.83 26.91 68.68 26.91ZM85.5 14.37L85.5 16.78L77.16 16.78L77.16 14.37ZM79.64 10.5L82.55 10.5L82.55 25.1Q82.55 25.94 82.9 26.28Q83.24 26.62 84.11 26.62Q84.41 26.62 84.8 26.61Q85.2 26.59 85.49 26.58L85.6 28.97Q85.23 29.01 84.71 29.03Q84.2 29.05 83.72 29.05Q81.69 29.05 80.66 28.15Q79.64 27.25 79.64 25.47ZM87.85 29L87.85 14.37L90.76 14.37L90.76 29ZM89.32 11.91Q88.54 11.91 88.01 11.4Q87.48 10.9 87.48 10.16Q87.48 9.39 88.01 8.88Q88.54 8.37 89.31 8.37Q90.09 8.37 90.62 8.88Q91.16 9.39 91.16 10.16Q91.16 10.9 90.62 11.4Q90.09 11.91 89.32 11.91ZM100.34 29.33Q98.27 29.33 96.7 28.36Q95.13 27.4 94.25 25.68Q93.38 23.97 93.38 21.71Q93.38 19.46 94.25 17.73Q95.13 16.01 96.7 15.04Q98.27 14.07 100.34 14.07Q102.44 14.07 104 15.04Q105.56 16.01 106.43 17.73Q107.31 19.46 107.31 21.71Q107.31 23.97 106.43 25.68Q105.56 27.4 104 28.36Q102.44 29.33 100.34 29.33ZM100.34 26.81Q101.62 26.81 102.52 26.17Q103.41 25.53 103.89 24.38Q104.37 23.23 104.37 21.73Q104.37 20.18 103.89 19.03Q103.41 17.88 102.52 17.24Q101.62 16.59 100.34 16.59Q99.08 16.59 98.18 17.23Q97.29 17.87 96.82 19.03Q96.34 20.18 96.34 21.73Q96.34 23.24 96.82 24.39Q97.29 25.53 98.19 26.17Q99.09 26.81 100.34 26.81Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "3.293 km (size-calibrated model)",
+              "source": {
+                "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2440",
+                "label": "Masiero et al. (2014), ApJ 791, 121",
+                "checked": "2026-09-08",
+                "path": "source/reference/calibration.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.215 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "3.30 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "231.2 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9541",
+                "label": "DAMIT model 9541",
+                "checked": "2026-09-08",
+                "path": "source/reference/damit-model.json"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Thermal diameter 6.586 ± 0.128 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
+              "thumbnail": "/scenes/educatio/educatio-shape-thumbnail.webp",
+              "surface": "educatio-shape-surface@2x.webp",
+              "poles": "educatio-shape-surface@2x.webp",
+              "source": {
+                "id": "educatio-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape · grid marks missing imagery"
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radius on the shape model minus a 3.293 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
+              "thumbnail": "/scenes/educatio/educatio-elevation-thumbnail.webp",
+              "surface": "educatio-elevation-surface@2x.webp",
+              "poles": "educatio-elevation-surface@2x.webp",
+              "source": {
+                "id": "educatio-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-2",
+                  "0.5",
+                  "3"
+                ],
+                "meta": "km · 3.293 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9541",
+                "image": "/scenes/educatio/educatio-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 9541, version 2022-11-29",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9541"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Masiero et al. (2014), ApJ 791, 121",
+            "href": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2440"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9541"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/9541",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Educatio model 9541; original model authors identified in its pinned reference records."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "educatio-shape",
+      "path": "shape/model-9541.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/87916/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Educatio model 9541; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 5308.289479882053,
+        "referenceRadiusMeters": 3293
+      },
+      "coverage": "Published convex light-curve model 9541. Approximate scale from a thermal diameter of 6.586 ± 0.128 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sha256": "1aa7bf28a3514adb552d13c7061f7734b81e281b2d8e5a2f97958256ea2700f0",
+      "bytes": 45933,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-9541.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/87916/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "sha256": "a03dc3e0225aef0a113b01b536452351f2a45f116349a451dba11fb3c88ad444",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "bytes": 9616,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radius on the shape model minus a 3.293 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "educatio-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/educatio/educatio-elevation-thumbnail.webp",
+          "bytes": 4738,
+          "sha256": "2a2bd40e3fd9b6cc72ab87b20447813a7be1be44f299d50dca265200e630bfef",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/educatio/educatio-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/educatio/educatio-elevation-surface@2x.webp",
+          "bytes": 293944,
+          "sha256": "c4124f6a4ac4b4833f6fa49471c52eaf4dd2b4d5e752eeff583436210b2343c2",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Thermal diameter 6.586 ± 0.128 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "educatio-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/educatio/educatio-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/educatio/educatio-shape-surface@2x.webp",
+          "bytes": 181068,
+          "sha256": "f60060748a4ccde42529bad722a94ac161dd5dad6ae59cd362661ae3cb7aad2b",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6759,
+          "sha256": "953e97754eb268a272c77ecedffe8161b442791f758b046a235671feedaf2dd6",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 8758,
+          "sha256": "641f14fc700d2c1e132e8962e91045668cb1ed59df902e5335ac7dba78372eba",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

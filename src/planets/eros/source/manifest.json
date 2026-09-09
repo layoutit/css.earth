@@ -40,7 +40,13 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "expectedBytes": 16897935,
-      "expectedSha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458"
+      "expectedSha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
+      }
     },
     {
       "id": "eros-normal",
@@ -66,7 +72,45 @@
       },
       "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
       "expectedBytes": 228242957,
-      "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761"
+      "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+      }
+    },
+    {
+      "id": "eros-infrared",
+      "path": "maps/eros_nearmsi_filter4.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR; R. Gaskell; D. Golish and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "infrared",
+      "label": "Near infrared",
+      "falseColor": false,
+      "width": 10682,
+      "height": 5341,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 17000
+      },
+      "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+      "expectedBytes": 228242957,
+      "expectedSha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -101,14 +145,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 8097,
-      "expectedSha256": "c1d01d5b9b12221a3a3cacd9f5b9b239d1d843a1e6f0ceea819ceb4522fb8cb0"
+      "expectedBytes": 8561,
+      "expectedSha256": "e109d54d8fca87d8728247124508db74bfec5cbbc9a4b56ab0df9547c3a4b354"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 1007,
-      "expectedSha256": "c16c1b3116130df1dd88b6a0a2fc3ba8178ebb00107243ea87df6cbbb9ec4745"
+      "expectedBytes": 2475,
+      "expectedSha256": "4c680ec90ff29a7ee3c962ea5f55daa44cf5210d7008932934afb118c7dfc7db"
     },
     {
       "path": "preparation/navigation.json",
@@ -125,8 +169,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 3269,
-      "expectedSha256": "784b64e267b30453e93d49ebd3eda378c1c8ce1551e685adc810cd9b2e5debd1"
+      "expectedBytes": 3692,
+      "expectedSha256": "cb49e648ed0f8dd7258e22991e522cdc61b8d953a07048e27cae875c8ad21bdc"
     },
     {
       "path": "presentation/title-mark.json",
@@ -187,6 +231,18 @@
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 89770,
       "expectedSha256": "906f78c79d3a55d17498d4d02807899d7b06aa10da1e143eb00a8ad065f6d0bd"
+    },
+    {
+      "path": "reference/eros_nearmsi_filter4.lbl",
+      "purpose": "Unmodified publisher metadata for the 950 nm albedo map.",
+      "expectedBytes": 1515,
+      "expectedSha256": "b91269b57ebad2df1091ca3544784b1269ec07d4b22279aa23c5ad7029ff4c01"
+    },
+    {
+      "path": "reference/eros_nearmsi_filter4.xml",
+      "purpose": "Unmodified publisher metadata for the 950 nm albedo map.",
+      "expectedBytes": 10462,
+      "expectedSha256": "5e9c236b5b423104587b9dc0d351896c07fe709e635c35aff74e9c2ab7ab2c97"
     }
   ]
 }

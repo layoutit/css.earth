@@ -470,14 +470,14 @@ export function createRetainedCubicSkyOrbit({
       try { orientation.rebaseScene(change); publish(); }
       catch (error) { retireFailure(error); throw error; }
     },
-    flyToState({ controlPitch, controlYaw, zoom }: CameraAngles & { zoom: number }, { surfaceTarget = false } = {}) {
+    flyToState({ controlPitch, controlYaw, controlRoll = 0, zoom, transition }: CameraAngles & { zoom: number; controlRoll?: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } }, { surfaceTarget = false } = {}) {
       if (lifetime.disposed) return Promise.resolve({ completed: false });
       try {
-      if (![controlPitch, controlYaw, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
+      if (![controlPitch, controlYaw, controlRoll, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
       controls.stop();
       preparedFocus?.clear();
       const start = { ...safeCamera.state };
-      const targetZoom = clamp(zoom, minimumZoom(), maximumZoom());
+      const targetZoom = transition?.preserveZoom ? start.zoom : clamp(zoom, minimumZoom(), maximumZoom());
       const viewport = perspective?.viewport();
       const targetRotation = surfaceTarget && perspective && viewport
         ? prepareSurfaceTargetRotation(perspective.bodyCenter() ??
@@ -488,9 +488,12 @@ export function createRetainedCubicSkyOrbit({
         targetRotation[0], targetRotation[3], targetRotation[6], 0,
         targetRotation[1], targetRotation[4], targetRotation[7], 0,
         targetRotation[2], targetRotation[5], targetRotation[8], 0, 0, 0, 0, 1]);
-      const flight = orientation.prepareFlight({ controlPitch, controlYaw }, targetCorrection);
+      const roll = new DOMMatrix().rotateAxisAngle(0, 0, 1, controlRoll);
+      const correction = targetCorrection ? targetCorrection.multiply(roll) : roll;
+      const flight = orientation.prepareFlight({ controlPitch, controlYaw }, correction);
       const sample = (progress: number) => {
-        const frame = sampleDestinationFlight({ startZoom: start.zoom, targetZoom,
+        const ease = progress * progress * (3 - 2 * progress);
+        const frame = transition ? { rotation: ease, zoom: start.zoom * (targetZoom / start.zoom) ** ease } : sampleDestinationFlight({ startZoom: start.zoom, targetZoom,
           overviewZoom: cameraPlan.defaultZoom, angularDistance: flight.angularDistance }, progress);
         safeCamera.update({ rotX: start.rotX + (controlPitch - start.rotX) * frame.rotation,
           rotY: start.rotY + (controlYaw - start.rotY) * frame.rotation, zoom: frame.zoom });
@@ -501,7 +504,7 @@ export function createRetainedCubicSkyOrbit({
         sample(1);
         return Promise.resolve({ completed: true });
       }
-      return controls.flyTo({ sample });
+      return controls.flyTo({ sample, durationMilliseconds: transition?.durationMilliseconds });
       } catch (error) { retireFailure(error); throw error; }
     },
     // Native cache notifications report failures through the same fatal owner.

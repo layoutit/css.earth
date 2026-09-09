@@ -19,13 +19,19 @@ resolution, seams, and observed illumination remain visible. No color,
 elevation, ocean, or thermal map is inferred from this image.
 
 The GeoTIFF's cylindrical coordinates increase eastward, with a central
-longitude of 180° and a left edge at 0°. Rows run north to south. Its projection
-uses a 1,562,089.9658 m sphere; the rendered mean-radius sphere uses the
-astronomy catalogue's 1,560.8 km physical radius. It is not a resolved shape model.
+longitude of 180°. The actual outer left edge is −0.011003118° and the map spans
+360.003667706°, with rows running north to south. Native bilinear preparation
+back-projects each canonical output pixel centre through the GeoTIFF's actual
+origin and resolution; it does not stretch those bounds to exactly 0–360°.
+Its projection uses a 1,562,089.9658 m sphere; the rendered mean-radius sphere
+uses the astronomy catalogue's 1,560.8 km physical radius. It is not a resolved
+shape model.
 
-The explicit no-data value is zero. Preparation separates validity before
-resampling to 4096 × 2048, uses alpha-aware resampling to keep missing black
-from darkening adjacent observations, and withholds mixed boundary pixels.
+The explicit no-data value is zero. Preparation samples to 4096 × 2048 only
+where every nonzero-weight native bilinear contributor is valid, retaining dark
+nonzero observations and withholding incomplete or masked footprints. The
+corrected registration changes prepared monochrome pixels and their co-located
+color fallback; the original mosaic and controlled I/F source values are unchanged.
 The shared gray cartographic grid marks missing data. It is not invented terrain.
 Band textures are reprojected for the shared projective surface geometry;
 polar textures use the same map and hemisphere-specific longitude mapping.
@@ -158,3 +164,65 @@ preparer or runtime is required. Run `pnpm build:preparation` before the command
 above. Omit `--write` from preparation to generate an isolated comparison stage.
 
 Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+
+## Agenor relative stereo terrain
+
+The Elevation view adds the released
+[USGS controlled Agenor DTM](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/).
+It retains the original relative stereo heights in meters, with no vertical
+offset, no conversion to a global reference level, and no globe displacement.
+The regional independent relative solution is not combined with other sites.
+The view's −700…+300 m scale spans the actual −641.9267578125…+218.51205444335938 m
+source range. Fixed northwest cartographic relief shows slopes; it does not
+change the numeric legend or imply physical illumination.
+
+The exact Float32 COG is 642×133, with 39,032 finite non-special samples. Its
+planetocentric equirectangular CRS is centered on 180°E on a 1,560,800 m sphere,
+with origin (−1236786.1079616144, −1146374.9999678) m and pixel increments
+(+614.0078951699215, −614.0078951699215) m. This actual reprojected pixel spacing
+differs from the nominal 450 m DTM post spacing; effective resolved detail is
+about 3 km. Source documentation gives nominal 52 m vertical precision and an
+approximately 100 m empirical estimate, not a pointwise accuracy guarantee.
+The controlled frame differs from the old 2010 mosaic's registration.
+
+The genuine height no-data value and complete bilinear footprints control
+coverage. The released `FOM` and `ClrConf` files are byte-identical: the retained
+processing log translates the FOM VRT into both outputs and cubic-resamples the
+categorical FOM codes. Neither is used as a confidence or quality mask. Original
+files, STAC metadata, source processing, seven independently Pillow-decoded
+value anchors, and the exclusion evidence are retained under
+`source/science/controlled-dtms/`. Exact ignored source TIFFs have acquisition
+recipes; the CC0 release and source authors retain attribution.
+
+The body-owned lens focus is 142°E, 43.7°S at supported zoom 4. Shared preparation
+converts it through the actual solid mesh axes and system matrix to existing
+camera navigation. The X/Y swap in solid PolyCSS leaf coordinates is included;
+no source interpretation occurs in runtime. The Yelland trial and its broken
+quality products are retained only for the intake audit. Useful regional framing,
+source-versus-display visuals, and Chrome conformance remain separate B2 gates.
+
+## B6 mapped science
+
+The geology view preserves the ten source map units and no-data regions from
+[Leonard, Patthoff and Senske (2024), SIM 3513](https://pubs.usgs.gov/publication/sim3513),
+scale 1:15 million. Colors use the released ArcGIS CMYK symbols converted to RGB;
+sub-pixel vector detail is not invented. Slight source extent overshoot is
+clipped to the globe; `nd` remains missing.
+
+The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sz4-5024),
+observations 17ENGLOBAL01A and 17ENGLOBAL02A, Minnaert-corrected CIOF products.
+Following the archive guide, RGB selects same-parity bands near 1.50, 1.35 and
+0.74 µm; exact wavelengths and band numbers are pinned in `source/nims/prepare-composite.json`.
+The blue channels differ slightly (0.732919 and 0.740634 µm); this is a spectral
+color display, not a uniform quantitative abundance map. Fixed I/F ranges are
+R 0–0.6, G 0–1.2, B 0–1.5. Endpoint clipping retains calibrated noise and outliers.
+The first observation has priority in overlap. The USGS 2010 registration grid
+matches this body's global visible mosaic; it is not the newer 2021 control grid.
+
+Exact bytes, coordinates and validity rules are in the intake plans and receipts.
+Reproduction: `tools/objects/acquisition/MAPPED-SCIENCE.md`.
+
+The official USGS archive browser maps Individual Investigations to its working
+CloudFront endpoint in [main.js](https://pdsimage2.wr.usgs.gov/index-style/js/main.js).
+The original guides prescribe registered GeoTIFF geometry rather than COC
+backplanes. Unobserved cells remain the shared gray grid; no gap fill is used.

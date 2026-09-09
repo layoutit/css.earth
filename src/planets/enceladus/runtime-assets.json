@@ -17,14 +17,14 @@
       "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
     },
     {
-      "filename": "enceladus-elevation-poles@2x.webp",
-      "bytes": 318460,
-      "sha256": "661b291e352ea3a994892e82505276178de27e095dfd009c620812882db92899"
+      "filename": "enceladus-elevation-shadow@2x.webp",
+      "bytes": 4192386,
+      "sha256": "2e798da0e2fd15180f3f4dcf67f575f08703b940548e80a50f003a8741a9f245"
     },
     {
       "filename": "enceladus-elevation-surface@2x.webp",
-      "bytes": 11542378,
-      "sha256": "b4ec52da7e394d0bd21afe13f2372128d2d2d9c42e552049b0da940f3d80e60c"
+      "bytes": 10574576,
+      "sha256": "90ec8ae36835ca0c5a83d0cf2a83f7182fddf281f4e9a387b73624f9617d1900"
     },
     {
       "filename": "enceladus-elevation-thumbnail.webp",
@@ -32,24 +32,79 @@
       "sha256": "eef7b61cc108d1146a560fb5d5b7dded77dcda4e03e29df0342609a5fc431588"
     },
     {
+      "filename": "enceladus-ice-absorption-legend.webp",
+      "bytes": 146,
+      "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e"
+    },
+    {
+      "filename": "enceladus-ice-absorption-shadow@2x.webp",
+      "bytes": 161184,
+      "sha256": "781724b359cd6b3679357aacce68aeea80520f5bda79a17dc6c2aa3a9feadb93"
+    },
+    {
+      "filename": "enceladus-ice-absorption-surface@2x.webp",
+      "bytes": 67618,
+      "sha256": "530427bb129a342b15aaa01415a6d3106c64a389bcd125101d2a74d1c3bd3717"
+    },
+    {
+      "filename": "enceladus-ice-absorption-thumbnail.webp",
+      "bytes": 1520,
+      "sha256": "12fff2fb2f5df848aedc72db8598c2192a5b75521ac4c6e9b286805d743b10cc"
+    },
+    {
+      "filename": "enceladus-infrared-ratio-legend.webp",
+      "bytes": 196,
+      "sha256": "cb891375c261f05e633ed9af6366e538fe4a3551f53ea2e5edcdd8c0c7897c7f"
+    },
+    {
+      "filename": "enceladus-infrared-ratio-shadow@2x.webp",
+      "bytes": 169366,
+      "sha256": "ff63a35e0594ea11e10ebd350186fad1edbb396142a931e482fa17fb974cc394"
+    },
+    {
+      "filename": "enceladus-infrared-ratio-surface@2x.webp",
+      "bytes": 68880,
+      "sha256": "db9135d4a85f658a52b89c269b1eb624d262b12248bbc3b526aa60c826f188d6"
+    },
+    {
+      "filename": "enceladus-infrared-ratio-thumbnail.webp",
+      "bytes": 2166,
+      "sha256": "7ce993b429aa895f5d6f306b27ca52b08e5b53d4e8c7ceb99ba1eebf76301ae2"
+    },
+    {
       "filename": "enceladus-lighting.webp",
       "bytes": 1050836,
       "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
     },
     {
-      "filename": "enceladus-normal-poles@2x.webp",
-      "bytes": 145940,
-      "sha256": "43367587675766318ba3b0ffcfb57d193983b23b33f25229f10e72d1835d5c94"
+      "filename": "enceladus-normal-shadow@2x.webp",
+      "bytes": 1975778,
+      "sha256": "2476dd459c3182785e475188c4cd6dc7e7692e35ac4e8f745e728ab7ae2304e4"
     },
     {
       "filename": "enceladus-normal-surface@2x.webp",
-      "bytes": 6921712,
-      "sha256": "603301486bb65989b66cb7a12c32ce6adbfd3b2f17c275de81ea631e42088991"
+      "bytes": 6337990,
+      "sha256": "6c043a2fd0389034fb71739fce4d7a0726575b81b3111007e6bbea854a3ce1c2"
     },
     {
       "filename": "enceladus-normal-thumbnail.webp",
       "bytes": 1850,
       "sha256": "b1f5ecdd4895028a00197aab2cf9583d37846f0daf3aa171e3f9cfa839c092b5"
+    },
+    {
+      "filename": "enceladus-shape-shadow@2x.webp",
+      "bytes": 337782,
+      "sha256": "c4761917e9f3139e2194a9ece401e55809d6a924bf9272084479f6183bd2e2a0"
+    },
+    {
+      "filename": "enceladus-shape-surface@2x.webp",
+      "bytes": 460676,
+      "sha256": "8cad6dfddbf10543a581ab03a6737292410e7e9821afd1db57ee2fedf339150f"
+    },
+    {
+      "filename": "enceladus-shape-thumbnail.webp",
+      "bytes": 764,
+      "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d"
     },
     {
       "filename": "enceladus-starfield-back-standard.webp",

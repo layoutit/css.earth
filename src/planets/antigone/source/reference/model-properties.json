@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1810",
+  "modelId": 1810,
+  "modelVersion": "2017-06-14",
+  "diameterKm": 126,
+  "diameterInterpretation": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 126 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 126.0,
+    "uncertaintyKm": 3.0,
+    "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
+    "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1810",
+    "reference": "DAMIT model 1810",
+    "sourceLabel": "DAMIT model 1810",
+    "limitations": "Hanuš2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.",
+    "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 126 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9984514137134876,
+    "metersPerSourceUnit": 998.4514137134876
+  },
+  "periodHours": 4.95716,
+  "poleEclipticJ2000Degrees": [
+    205,
+    63
+  ],
+  "modelLimitations": "Hanuš2017 confirms the pole family using disk-resolved AO imaging, light curves and occultations. Section on129 describes eight AO images while TableA.1 lists nine; this discrepancy is retained. Archive D126±3 km is retained; local shape accuracy is not the diameter uncertainty.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/401/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 998.4514137134876,
+    "firstVertexKm": [
+      2.932891120698547,
+      -5.249655846119948,
+      43.24925791453985
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      125.34808660612552,
+      170.16527567805872,
+      100.35425174720125
+    ],
+    "volumeCubicKm": 1047394.4243362237,
+    "volumeEquivalentRadiusKm": 63,
+    "radialRangeKm": [
+      43.66530713263061,
+      87.31702543454658
+    ]
+  },
+  "elevation": [
+    -30,
+    30
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1260,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1047394424336222.8
+    }
+  }
+}

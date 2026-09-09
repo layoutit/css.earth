@@ -1,5 +1,9 @@
 # Qualification record
 
+[Tuttle](TUTTLE.md) adds the sixth comet with independent size/pole/orbit checks. [Its Arecibo comparison](TUTTLE-ARECIBO.md) qualifies two separate inferred models, dataset-specific surface targeting, and a fresh restoration of all 34 published assets. The records separate focused passes from unresolved aggregate failures.
+
+[Encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the latest Wild 2, Tempel 1 and Hartley 2 material qualification. Earlier geometry records below retain their original scope.
+
 [Halley's qualification](HALLEY.md) adds the fifth comet and brings the registry
 to 76 objects. It records current aggregate checks, a nine-case Halley interaction
 audit, production navigation, native surface targeting and matched drag traces.
@@ -50,4 +54,4 @@ These are unmodified Chrome screenshots. The original NAVCAM reference beside 67
 
 The earlier missing-graphics interpretation of Hartley 2 screenshots was disproved by identical file hashes and direct pixel checks. The [capture verification](evidence/capture-anomalies.json) preserves that correction; no application paint fix was made. Production attempts with the development-only conformance harness, hot-reload-interrupted captures and response-body collection failures are excluded from accepted evidence.
 
-Borrelly remains unresolved in [CANDIDATES.md](CANDIDATES.md), with no placeholder route. Halley's historical model is now included with the limitations in [HALLEY.md](HALLEY.md). No tail, coma or outgassing simulation is added. The completed Wild 2 shape uses published estimated geometry, explicitly labeled.
+[Borrelly](BORRELLY.md) now adds the seventh comet with its observed terrain, explicitly gridded estimated completion and five datasets; its own record gives the new qualification scope. Halley's historical model is now included with the limitations in [HALLEY.md](HALLEY.md). No tail, coma or outgassing simulation is added. The completed Wild 2 shape uses published estimated geometry, explicitly labeled.

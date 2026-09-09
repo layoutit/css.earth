@@ -1,0 +1,88 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/142",
+  "modelId": 142,
+  "modelVersion": "2011-04-20",
+  "diameterKm": 45.4,
+  "diameterInterpretation": "Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 1.3 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 45.4,
+    "uncertaintyKm": 1.3,
+    "uncertaintyKind": "Reported VS-TPM uncertainty; not a bound on local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter from Hanuš et al. (2018), Table A.3, for the selected Hanuš (2011) pole family.",
+    "scaleKmPerSourceUnit": 36.592216813934364,
+    "metersPerSourceUnit": 36592.21681393436,
+    "sourceUrl": "https://arxiv.org/pdf/1803.06116",
+    "reference": "Hanuš et al. (2018), Icarus 309, 297–337, Table A.3; doi:10.1016/j.icarus.2018.03.016",
+    "sourceLabel": "Hanuš et al. (2018), Table A.3",
+    "publishedPoleEclipticDegrees": [
+      44,
+      83
+    ],
+    "publishedPeriodHours": 8.28307,
+    "limitations": "Only a uniform scale from the published thermophysical fit is transferred to the archived nominal mesh. The varied-model ensemble does not establish identical mesh bytes or local surface accuracy. The alternative pole remains possible. No thermal or reflectance map is inferred.",
+    "visibleDescription": "Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 1.3 km. The published fit uses the same pole family; an alternative pole remains possible. The grid marks unavailable imagery and rotational phase is illustrative."
+  },
+  "periodHours": 8.28307,
+  "poleEclipticJ2000Degrees": [
+    44,
+    83
+  ],
+  "modelLimitations": "Only a uniform scale from the published thermophysical fit is transferred to the archived nominal mesh. The varied-model ensemble does not establish identical mesh bytes or local surface accuracy. The alternative pole remains possible. No thermal or reflectance map is inferred.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/299/shape.txt",
+    "vertices": 1008,
+    "faces": 2012,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates",
+    "metersPerUnit": 36592.21681393436,
+    "firstVertexKm": [
+      -5.296796568250627,
+      -1.9452788380455648,
+      20.265281962592248
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      61.42574430801181,
+      53.25569028331424,
+      38.63962452910762
+    ],
+    "volumeCubicKm": 48996.62669497341,
+    "volumeEquivalentRadiusKm": 22.7,
+    "radialRangeKm": [
+      18.03453764764931,
+      34.12832718087661
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2012,
+    "sourceVertices": 1008,
+    "weldedVertices": 1008,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 454,
+    "estimatedErrorMeters": 133.73574829101562,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 48935585581630.27
+    }
+  }
+}

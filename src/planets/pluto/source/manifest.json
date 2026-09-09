@@ -18,7 +18,13 @@
         "scene",
         "lenses",
         "navigation"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "new-horizons"
+        ],
+        "evidence": "https://science.nasa.gov/resource/pluto-global-color-map/"
+      }
     },
     {
       "id": "lenses-pluto-monochrome-tif",
@@ -35,7 +41,13 @@
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "new-horizons"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
+      }
     },
     {
       "id": "lenses-pluto-dem-tif",
@@ -52,7 +64,13 @@
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "new-horizons"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
+      }
     },
     {
       "id": "orbit-jpl-physical-html",
@@ -211,8 +229,8 @@
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 10589,
-      "expectedSha256": "997b0b188ef566701589fb86f7db88137b94728575233725e450e9975ff5d1d0",
+      "expectedBytes": 10753,
+      "expectedSha256": "32c83c3f2a19c14838d54ea72afb9f15324664736971c8c5aa7efcb1b5d0dd91",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {

@@ -7,6 +7,6 @@ export const browserProfile = createObjectBrowserProfile({ id: "titania", contro
     canonicalPreparedAssets: ["/scenes/titania/titania-normal-surface@2x.webp", "/scenes/titania/titania-normal-poles@2x.webp", "/scenes/titania/titania-lighting.webp"],
     lensRace: { defaultId: "normal", slowId: "elevation", winnerId: "normal",
       slowAsset: "/scenes/titania/titania-elevation-surface@2x.webp", preReadyDisabled: true },
-    retained: { lensIds: ["normal", "elevation"], allowedMountSelectors: [] },
+    retained: { lensIds: objectControls.lenses.controls.map(lens => lens.id), allowedMountSelectors: [] },
   },
 });

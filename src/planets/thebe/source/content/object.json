@@ -63,7 +63,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Galileo clear-filter observations registered to the PDS shape. Bounded illumination normalization and overlap brightness matching reduce photographed shading. This is relative image brightness, not calibrated albedo. Gray grid marks unobserved or unreliable samples; cast shadows are not reconstructed.",
-        "title": "Galileo clear-filter observations registered to the PDS shape. Bounded illumination normalization and overlap brightness matching reduce photographed shading. This is relative image brightness, not calibrated albedo. Gray grid marks unobserved or unreliable samples; cast shadows are not reconstructed.",
+        "title": "SSI mosaic",
         "detail": "Galileo SSI",
         "thumbnail": "/scenes/thebe/thebe-normal-thumbnail.webp",
         "surface": "thebe-normal-surface@2x.webp",
@@ -72,13 +72,14 @@
           "id": "c0532888400",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/galileo/"
-        }
+        },
+        "summary": "Brightness matching reduces photographed shading without measuring albedo. The gray grid marks missing or unreliable images."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radial height above a 49.3 km reference sphere from Stooke’s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5° grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
-        "title": "Radial height above a 49.3 km reference sphere from Stooke’s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5° grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
+        "title": "Shape-derived radial height",
         "detail": "Radial shape",
         "thumbnail": "/scenes/thebe/thebe-elevation-thumbnail.webp",
         "surface": "thebe-elevation-surface@2x.webp",
@@ -101,7 +102,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
           "image": "/scenes/thebe/thebe-elevation-legend.webp"
-        }
+        },
+        "summary": "Galileo-model height relative to a 49.3 km sphere. Unseen terrain is modeled; depressions may be exaggerated."
       }
     ]
   },

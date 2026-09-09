@@ -1,0 +1,108 @@
+PDS_VERSION_ID            = "PDS3"
+
+PRODUCT_VERSION_ID        = "V4.0"
+DATA_SET_ID               = "LRO-L-DLRE-5-GDR-V1.0"
+PRODUCT_ID                = "DGDR_RA_AVG_CYL_032_IMG.IMG"
+SOURCE_PRODUCT_ID         = "NONE"
+INSTRUMENT_HOST_NAME      = "LUNAR RECONNAISSANCE ORBITER"
+INSTRUMENT_HOST_ID        = "LRO"
+INSTRUMENT_NAME           = "DIVINER LUNAR RADIOMETER EXPERIMENT"
+INSTRUMENT_ID             = "DLRE"
+MISSION_PHASE_NAME        = {"NOMINAL MISSION"}
+TARGET_NAME               = MOON
+START_TIME                = 2009-07-05T00:00:00.000
+STOP_TIME                 = 2010-11-30T00:00:00.000
+PRODUCT_CREATION_TIME     = 2011-10-01T00:00:00.000
+PRODUCER_ID               = LRO_DLRE_TEAM
+PRODUCER_FULL_NAME        = "JOSHUA BANDFIELD"
+PRODUCER_INSTITUTION_NAME = "UNIVERSITY OF CALIFORNIA, LOS ANGELES"
+LRO:LOLA_DEM_VERS            = "1.0"
+LRO:DLRE_GEOM_VERSION_ID     = "1.0"
+LRO:CALIBRATION_SOFTWARE_VER_ID = "4.0"
+LRO:DLRE_JDATE_MIN           = 2455017.50000
+LRO:DLRE_JDATE_MAX           = 2455530.50000
+LRO:DLRE_CLOCTIME_MIN        = 0.0000
+LRO:DLRE_CLOCTIME_MAX        = 24.0000
+
+
+DESCRIPTION               = "
+
+Each sample represents the areal fraction of the surface 
+covered by rock fragments as estimated using the technique
+described in Bandfield et al. (2011). Values are
+scaled by the value of SCALING_FACTOR. Conversion
+from Digital Number (DN) to average is given by the
+equation:
+
+RA = (DN * SCALING_FACTOR) + OFFSET
+
+Data is derived from Diviner data collected from July 5, 2009 through
+November 30, 2010.  Data were restricted to local times of 1930 to
+0530 with the solar incidence angles greater than 90 degrees,
+latitudes between 60N and 60S, emission angles less than 15 degrees,
+brightness temperatures less than 200K. Several data quality
+constraints were used as well (quality flag for calibration, 0;
+quality flag for miscellaneous, 0; noise quality flag, 0 to 1).
+
+Data from diviner spectral channels 6, 7, and 8 were binned at 32
+pixels per degree in ten separate one hour increments of local time
+from 1930 to 0530. For each spatial bin, all retrieved values for the
+ten local times were averaged to produce a single map.
+"
+
+OBJECT                    = UNCOMPRESSED_FILE
+FILE_NAME                 = "DGDR_RA_AVG_CYL_032_IMG.IMG"
+RECORD_TYPE               = FIXED_LENGTH
+FILE_RECORDS              = 3840
+RECORD_BYTES              = 23040
+^IMAGE                    = "DGDR_RA_AVG_CYL_032_IMG.IMG"
+
+
+ OBJECT                   = IMAGE
+  NAME                    = "ROCK ABUNDANCE"
+  LINES                   = 3840
+  LINE_SAMPLES            = 11520
+  SAMPLE_TYPE             = LSB_INTEGER
+  SAMPLE_BITS             = 16
+  UNIT                    = NONE
+  SCALING_FACTOR          = 0.001 
+  OFFSET                  = 0.00
+  DERIVED_MINIMUM              = 0.0
+  DERIVED_MAXIMUM              = 1.06285250187
+  MISSING_CONSTANT        = -32768
+ END_OBJECT               = IMAGE
+
+END_OBJECT                = UNCOMPRESSED_FILE
+
+OBJECT                    = IMAGE_MAP_PROJECTION
+ ^DATA_SET_MAP_PROJECTION     = "DSMAP.CAT"
+ MAP_PROJECTION_TYPE          = "SIMPLE CYLINDRICAL"
+ KEYWORD_LATITUDE_TYPE        = "PLANETOCENTRIC"
+ MAP_RESOLUTION               = 32 <pix/degree>
+ A_AXIS_RADIUS                = 1737.4 <km>
+ B_AXIS_RADIUS                = 1737.4 <km>
+ C_AXIS_RADIUS                = 1737.4 <km>
+ FIRST_STANDARD_PARALLEL      = 'N/A'
+ SECOND_STANDARD_PARALLEL     = 'N/A'
+ POSITIVE_LONGITUDE_DIRECTION = "EAST"
+ CENTER_LATITUDE              = 0.0 <deg>
+ CENTER_LONGITUDE             = 180.0 <deg>
+ REFERENCE_LATITUDE           = 'N/A'
+ REFERENCE_LONGITUDE          = 'N/A'
+ LINE_FIRST_PIXEL             = 1
+ LINE_LAST_PIXEL              = 3840
+ SAMPLE_FIRST_PIXEL           = 1
+ SAMPLE_LAST_PIXEL            = 11520
+ MAP_PROJECTION_ROTATION      = 0.0
+ MAP_SCALE                    = 947.6047 <m/pix>
+ MAXIMUM_LATITUDE             = 60 <deg>
+ MINIMUM_LATITUDE             = -60 <deg>
+ WESTERNMOST_LONGITUDE        = 0.0 <deg>
+ EASTERNMOST_LONGITUDE        = 360.0 <deg>
+ LINE_PROJECTION_OFFSET       = 1919.5 <pixel>
+ SAMPLE_PROJECTION_OFFSET     = 5759.5 <pixel>
+ COORDINATE_SYSTEM_TYPE       = "BODY-FIXED ROTATING"
+ COORDINATE_SYSTEM_NAME       = "MEAN EARTH/POLAR AXIS OF DE421"
+END_OBJECT                    = IMAGE_MAP_PROJECTION
+
+END

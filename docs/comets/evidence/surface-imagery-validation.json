@@ -1,0 +1,52 @@
+{
+  "applicationCommit": "87ddd9680f76082eedd9915e86bda3253311b0f3",
+  "base": "a5a34bdefa849801d092f10755cf81f6f3f23f5e",
+  "checkedAt": "2026-09-09T20:06:54.621881+00:00",
+  "focusedTests": [
+    {
+      "log": "test-latest.log",
+      "sha256": "5be0a467e2a34ee9c966b3b0056ee3b1faf2f9597dc3abcd67bad9ff37e44fe8",
+      "passed": 70,
+      "failed": 0
+    },
+    {
+      "log": "test-contract-latest.log",
+      "sha256": "07b3a209c5cbde37d4a2ecce19c3651d2e0de2b4a1a97f92bdf9a48885a531b8",
+      "passed": 17,
+      "failed": 0
+    },
+    {
+      "log": "test-source-latest.log",
+      "sha256": "a63bd0c34bc21708c496c127d5c1fbd4c002c60c4a56048a45933197a2cdbfe2",
+      "passed": 12,
+      "failed": 0
+    }
+  ],
+  "production": {
+    "pages": 406,
+    "objects": 404,
+    "method": "Restore pinned transports; prepare minimap; Astro production build; finish copying independently hash-verified static runtime assets; assemble and verify every object inventory. All four comet source packages had already completed full preparation.",
+    "fullPnpmPrebuildClaim": false,
+    "runtimeFilesVerified": 15910,
+    "astroBuildLogSha256": "495be90dc7f475524858d484b4f5637228914932410e5ab3ea79601dfcce4317",
+    "assemblyLogSha256": "78b6ee07a5883b727f1e058f3b342ea96a06be6faf529c740edba8b3ced44d6b"
+  },
+  "rendererTests": {
+    "passed": 367,
+    "failed": 9,
+    "failures": [
+      "paging/capabilities.test.ts > actual paged surface and noise plans retain every prepared field, including metadata stubs",
+      "paging/capabilities.test.ts > invalid page ownership, budgets, roots and matrix bindings fail before mount",
+      "navigation/surface-target.test.ts > the actual prepared Buenos Aires destination reaches the physical content centre at city zoom",
+      "validation/depth-partitions.test.ts > the actual grouped surface keeps one object camera and validates before DOM construction",
+      "validation/depth-partitions.test.ts > transport rejects missing or duplicated depth ownership and invalid separating planes",
+      "validation/depth-partitions.test.ts > fixed visibility sequences cover the actual retained carriers",
+      "validation/paged-presentation.test.ts > the external runtime boundary preserves both actual Earth page plans and metadata stubs",
+      "validation/paged-presentation.test.ts > malformed page budgets, roots and matrices fail at the external runtime boundary",
+      "validation/paged-presentation.test.ts > internal page lens overrides cannot silently disagree with the validated binding"
+    ],
+    "trackedRendererAndEarthDeimosFixturesMatchMain": true,
+    "logSha256": "a2e4c329eb3c30f297762c6fee9c3d66a16c5259a4aa6e4c2099e0de2ee546d3"
+  },
+  "aggregateGreen": false
+}

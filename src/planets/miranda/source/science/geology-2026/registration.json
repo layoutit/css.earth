@@ -1,0 +1,109 @@
+{
+  "matrix": [
+    [
+      2.4611440203507224,
+      -0.04461569112075083
+    ],
+    [
+      0.04681403699354804,
+      2.4586648870707624
+    ]
+  ],
+  "translation": [
+    2.7062863991839015,
+    2.693256199019322
+  ],
+  "model": "Normalized south-polar stereographic sphere, east-positive; publisher graticule affine reconstruction combined with independently fitted GIS page-to-preview coordinates.",
+  "anchors": [
+    {
+      "name": "Alonso",
+      "id": "30",
+      "layer": "freshimpactcraters",
+      "role": "holdout",
+      "sourceXY": [
+        2.530832578825016,
+        3.6788155414862764
+      ],
+      "reference": [
+        352.6,
+        -44.0
+      ],
+      "referenceUrl": "http://planetarynames.wr.usgs.gov/Feature/200",
+      "reconstructed": [
+        350.9556370785001,
+        -45.6943837350925
+      ],
+      "angularResidualDegrees": 2.056616840244419,
+      "arcDistanceAt235_8KmRadius": 8.463978587094806,
+      "identity": "Visually identified in retained USGS named pictorial map and publisher geological preview; not assigned by nearest-coordinate distance."
+    },
+    {
+      "name": "Gonzalo",
+      "id": "21",
+      "layer": "freshimpactcraters",
+      "role": "holdout",
+      "sourceXY": [
+        4.694823457127254,
+        3.0700854584544968
+      ],
+      "reference": [
+        77.0,
+        -11.4
+      ],
+      "referenceUrl": "http://planetarynames.wr.usgs.gov/Feature/2220",
+      "reconstructed": [
+        80.3482470440008,
+        -11.152188062773813
+      ],
+      "angularResidualDegrees": 3.2929307258402893,
+      "arcDistanceAt235_8KmRadius": 13.552011539974746,
+      "identity": "Visually identified in retained USGS named pictorial map and publisher geological preview; not assigned by nearest-coordinate distance."
+    },
+    {
+      "name": "Stephano",
+      "id": "3",
+      "layer": "freshimpactcraters",
+      "role": "holdout",
+      "sourceXY": [
+        1.8266439998505115,
+        2.051295961953393
+      ],
+      "reference": [
+        234.10000000000002,
+        -41.1
+      ],
+      "referenceUrl": "http://planetarynames.wr.usgs.gov/Feature/5699",
+      "reconstructed": [
+        234.9237361358206,
+        -42.274842901325904
+      ],
+      "angularResidualDegrees": 1.326130285713455,
+      "arcDistanceAt235_8KmRadius": 5.457671123923423,
+      "identity": "Visually identified in retained USGS named pictorial map and publisher geological preview; not assigned by nearest-coordinate distance."
+    }
+  ],
+  "interpretation": "Historical interpreted-geology map registration. Not a new shape model, calibrated reflectance map, precise geodetic solution or analysis-ready surface product.",
+  "sourceInputs": [
+    {
+      "path": "Miranda map 1.gdb.zip",
+      "bytes": 224923,
+      "sha256": "ba6f803f8bc7ca2abbd96369390302953ecae405f94f69305ff2aeb071c196a7"
+    },
+    {
+      "path": "Screenshot 2026-06-23 124237.png",
+      "bytes": 461407,
+      "sha256": "d4fcba5a94254fb103d98c2aa58155f313ebff92ff4fe0c551fc9bffc8647035"
+    },
+    {
+      "path": "nomenclature.pdf",
+      "bytes": 2527631,
+      "sha256": "7b50f3ed3e50c6b9647f26023621efecba691744b2b019c0c22c7a50307cd5a8"
+    },
+    {
+      "path": "nomenclature.json",
+      "bytes": 10590,
+      "sha256": "a85c2dcf6446007b6f5f5c34dcd42f416969e254915bd17baa4822505fd45a59"
+    }
+  ],
+  "proofPath": "registration-proof.json"
+}

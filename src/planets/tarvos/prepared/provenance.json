@@ -1,0 +1,419 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "tarvos",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "76b25132065bc8ec2dd3dcf33c3d634e82e47d35dd4dc885bf6a4a131e0350ce"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "0dfdfb9a0d973f5c5536a2af99e60fe88ea405cb064e87f7de589c57adc7f788",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "tarvos",
+        "displayName": "Tarvos",
+        "publicBase": "/scenes/tarvos/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Approximate ellipsoid adopting minimum equatorial ratio 1.08:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 7.3,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": -45,
+            "framingScale": 0.9499866370426093
+          },
+          "mapUrl": "/scenes/tarvos/tarvos-model-surface@2x.webp",
+          "polesUrl": "/scenes/tarvos/tarvos-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 182.5,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Saturn-system ephemeris; Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "58560c751331506de814fa14f2c5aac2338bad9ee330dbf1be4ba18a4f710680",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "tarvos",
+        "displayName": "Tarvos",
+        "panel": {
+          "introduction": "Cassini measured a 10.691-hour rotation period for Tarvos and a modest minimum equatorial elongation. This ellipsoid uses an assumed polar depth and orientation. The grid marks unmapped terrain.",
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Diameter estimate",
+              "value": "15 (+4/−3) km"
+            },
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "Saturn"
+            },
+            {
+              "id": "shape",
+              "label": "Minimum equatorial ratio",
+              "value": "1.08:1 · uniform-reflectivity model"
+            },
+            {
+              "id": "rotation",
+              "label": "Observed rotation period",
+              "value": "10.691 ± 0.001 h"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "2000"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "scale-assumption",
+              "label": "Size assumption",
+              "value": "Geometric albedo 0.06; brightness-based estimate"
+            },
+            {
+              "id": "orientation-limit",
+              "label": "Orientation",
+              "value": "Unknown physical pole and phase; illustrative display"
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "description": "Approximate ellipsoid adopting minimum equatorial ratio 1.08:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+              "title": "Light-curve shape approximation",
+              "detail": "Approximate shape",
+              "thumbnail": "/scenes/tarvos/tarvos-model-thumbnail.webp",
+              "surface": "tarvos-model-surface@2x.webp",
+              "poles": "tarvos-model-poles@2x.webp",
+              "source": {
+                "id": "lightcurve-approximation",
+                "path": "../manifest.json",
+                "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Denk et al. (2018)",
+            "role": "surface",
+            "description": "Lightcurve shape constraints",
+            "href": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf"
+          },
+          {
+            "label": "Tilmann Denk",
+            "role": "facts",
+            "description": "Physical estimates and Cassini observations",
+            "href": "https://tilmanndenk.de/outersaturnianmoons/tarvos/"
+          },
+          {
+            "label": "NASA PDS",
+            "role": "observations",
+            "description": "Cassini ISS archive",
+            "href": "https://pds-rings.seti.org/cassini/iss/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://tilmanndenk.de/outersaturnianmoons/tarvos/",
+            "credit": "Tilmann Denk"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Denk et al. (2018); Denk and Mottola (2019)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+      "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
+      "license": "MIT authored representation from published scientific parameters",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/tarvos/"
+      ],
+      "acquisition": "Checked-in data. Formula, lower-limit interpretation, adopted scale and assumptions are in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "Approximate ellipsoid adopting minimum equatorial ratio 1.08:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 7300
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lightcurve-approximation",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+      "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
+      "license": "MIT authored representation from published scientific parameters",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/tarvos/"
+      ],
+      "acquisition": "Checked-in data. Formula, lower-limit interpretation, adopted scale and assumptions are in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "Approximate ellipsoid adopting minimum equatorial ratio 1.08:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 7300
+      },
+      "sha256": "4542095336a45c45f57edb960998e0794e5149ca411eb2b8095b398fa1401fc9",
+      "bytes": 59703,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Body-specific scientific interpretation, source evidence or preparation configuration.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "58560c751331506de814fa14f2c5aac2338bad9ee330dbf1be4ba18a4f710680",
+      "bytes": 3634,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Approximate ellipsoid adopting minimum equatorial ratio 1.08:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "lightcurve-approximation"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/tarvos/tarvos-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/tarvos/tarvos-model-surface@2x.webp",
+          "bytes": 56228,
+          "sha256": "0e7c550a7f2485eb556730129eb3804cc81afeeb5fbd32ebe1ed6861e37f656c",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5230,
+          "sha256": "4c4e14fa69204e623a6ff2dd1b630b6502348c08c3ac8fc4c18c695ccd7c954b",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

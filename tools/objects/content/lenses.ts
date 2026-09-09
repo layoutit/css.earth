@@ -1,3 +1,4 @@
+import { validateDatasetText } from "../../../site/dataset-content.mjs";
 import { prepareLensCategoryLegend, prepareLensScaleLegend } from "../../../site/prepared-lens-legends.mjs";
 import { LensRecipe, PreparedRasterAssets } from "./types";
 
@@ -62,6 +63,7 @@ export function prepareLenses(
     title: recipe.title,
     defaultLens: recipe.defaultLens,
     controls: recipe.controls.map((control) => {
+      validateDatasetText(control);
       const surface = assets.surfaces?.[control.id];
       const material = assets.materials?.[control.material ?? control.id];
       const poles = assets.poles;
@@ -84,6 +86,7 @@ export function prepareLenses(
         ...(control.view ? { view: control.view } : {}),
         thumbnailUrl: assetUrl(objectId, control.thumbnail),
         description: control.description,
+        ...(control.summary ? { summary: control.summary } : {}),
         ...(facts?.length ? { facts } : {}),
         title: control.title,
         ...(legend ? { legend } : {}),

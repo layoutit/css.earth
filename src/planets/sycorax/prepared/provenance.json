@@ -1,0 +1,400 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "sycorax",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "ca7cd73bcf6cb21286818a442e2aa531e6d39c4d23bcccb8e690636f09afb141"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "49af84b26a561a9e3e9dc4e502feda0b1d2c4940d2aab3c2ac415c5fad5b3bb8",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "sycorax",
+        "displayName": "Sycorax",
+        "publicBase": "/scenes/sycorax/",
+        "distanceAu": 19.19,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 78.5,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": -45,
+            "framingScale": 0.9289663867799363
+          },
+          "mapUrl": "/scenes/sycorax/sycorax-model-surface@2x.webp",
+          "polesUrl": "/scenes/sycorax/sycorax-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 1962.5,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons geometric vectors. Published doubled rotational interpretation; phase/pole are illustrative."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "b162fa98e4f2f41a59ed2aa71abf49b5a9c146773c3ffc491abc0cab1d1fabf2",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "sycorax",
+        "displayName": "Sycorax",
+        "panel": {
+          "introduction": "Sycorax is an outer moon of Uranus with measured rotational variability and thermal-size constraints. This ellipsoid adopts the minimum elongation under uniform reflectivity; depth and display orientation remain assumptions. The grid marks unmapped terrain.",
+          "facts": [
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "Uranus"
+            },
+            {
+              "id": "shape",
+              "label": "Shape evidence",
+              "value": "Approximate model"
+            },
+            {
+              "id": "dimensions",
+              "label": "Full model dimensions",
+              "value": "169 × 151 × 151 km"
+            },
+            {
+              "id": "scale",
+              "label": "Size evidence",
+              "value": "157 (+23/−15) km · thermophysical model"
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation interpretation",
+              "value": "6.9162 ± 0.0013 h"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "description": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+              "title": "Light-curve shape approximation",
+              "detail": "Approximate shape",
+              "thumbnail": "/scenes/sycorax/sycorax-model-thumbnail.webp",
+              "surface": "sycorax-model-surface@2x.webp",
+              "poles": "sycorax-model-poles@2x.webp",
+              "source": {
+                "id": "lightcurve-approximation",
+                "path": "../manifest.json",
+                "url": "https://arxiv.org/pdf/1706.06837"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+            "role": "surface",
+            "description": "Source measurements and model interpretation",
+            "href": "https://arxiv.org/pdf/1706.06837"
+          },
+          {
+            "label": "Uranian irregular satellites physical summary and occultation prospects",
+            "role": "facts",
+            "description": "Source measurements and model interpretation",
+            "href": "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://arxiv.org/pdf/1706.06837",
+            "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://arxiv.org/pdf/1706.06837"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "coverage": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 78500
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lightcurve-approximation",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://arxiv.org/pdf/1706.06837"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "coverage": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 78500
+      },
+      "sha256": "be764e8107e368f4ff439caa85f46fd0c313453ae851ff4ba9681ebf681f0dbf",
+      "bytes": 62404,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Scientific source interpretation and reproducible authored input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Scientific source interpretation and reproducible authored input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "b162fa98e4f2f41a59ed2aa71abf49b5a9c146773c3ffc491abc0cab1d1fabf2",
+      "bytes": 3381,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "lightcurve-approximation"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/sycorax/sycorax-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/sycorax/sycorax-model-surface@2x.webp",
+          "bytes": 56556,
+          "sha256": "2b76092f42976541ccb5f59e2922cf0fa67ca8ff375c1e2bf744d581dd6604d9",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6485,
+          "sha256": "e340e88f8157639ae335c52fd4804b0ac795d9bc4ffeda8b2502c96a7d773655",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

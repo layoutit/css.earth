@@ -37,7 +37,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map.",
-        "title": "The shared grid marks unavailable surface imagery over the final Didymos v003 stereophotoclinometry shape. Image-resolved regions contain greater detail; smoothly modeled regions lack image coverage. The source estimates approximately 14 m uncertainty in each Cartesian axis and 3.3% in volume. This is a shape model, not a photograph or an albedo map.",
+        "title": "SPC shape model v003",
         "thumbnail": "/scenes/didymos/didymos-shape-thumbnail.webp",
         "surface": "didymos-shape-surface@2x.webp",
         "poles": "didymos-shape-surface@2x.webp",
@@ -46,13 +46,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "An image-based shape model. Smooth regions lack image coverage; no surface photograph is mapped."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows radius in the published Didymos shape minus a 365 m reference sphere. It includes the equatorial ridge and overall flattened shape; it is not height above a gravitational equipotential. Smooth regions are less constrained by images. Cartographic relief and optional Sun lighting are display treatments.",
-        "title": "Color shows radius in the published Didymos shape minus a 365 m reference sphere. It includes the equatorial ridge and overall flattened shape; it is not height above a gravitational equipotential. Smooth regions are less constrained by images. Cartographic relief and optional Sun lighting are display treatments.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/didymos/didymos-elevation-thumbnail.webp",
         "surface": "didymos-elevation-surface@2x.webp",
         "poles": "didymos-elevation-surface@2x.webp",
@@ -74,14 +75,15 @@
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_obj_0000n00000_v003.xml",
           "image": "/scenes/didymos/didymos-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Height relative to a 365 m sphere, including the ridge. Smooth regions have weaker image constraints."
       },
       {
         "id": "albedo",
         "label": "Relative albedo",
         "detail": "DART surface brightness",
         "description": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
-        "title": "Grayscale shows the relative albedo solved with the final DART stereophotoclinometry shape. Values are relative brightness, not absolute geometric albedo or natural color. The gray grid marks facets without a multi-image uncertainty estimate; accepted source facets cover about 58% of the model area. This is a derived surface model, not a photograph.",
+        "title": "Relative-albedo model",
         "thumbnail": "/scenes/didymos/didymos-albedo-thumbnail.webp",
         "surface": "didymos-albedo-surface@2x.webp",
         "poles": "didymos-albedo-surface@2x.webp",
@@ -102,7 +104,8 @@
           "meta": "unitless · SPC relative brightness",
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_didymos_model_v003/didymos_g_9309mm_spc_alb_0000n00000_v003.xml",
           "image": "/scenes/didymos/didymos-albedo-legend.webp"
-        }
+        },
+        "summary": "Grayscale shows modeled brightness, not absolute albedo. Accepted facets cover about 58% of the shape; the grid marks the rest."
       }
     ]
   },

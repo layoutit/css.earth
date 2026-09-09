@@ -1,0 +1,1031 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "amalthea",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "d27cbdc2ce70e2abf52608ca937c17c380bb9c3a2d1a4e72dc5f7dfff8d0d243"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "2fd15ae8786fc1886e0aed3b55aa5c186afc20728f253ba70724eb5a8e529bae",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "amalthea",
+        "displayName": "Amalthea",
+        "publicBase": "/scenes/amalthea/",
+        "distanceAu": 5.2,
+        "raster": {
+          "width": 1024,
+          "height": 512,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 256,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "scientific-surfaces",
+              "path": "shape/j5amalthea.tab",
+              "format": "pds-radius-table",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 2522,
+                "expectedFaces": 5040,
+                "stepDegrees": 5,
+                "longitudeDirection": "west-positive"
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -83.5
+              },
+              "minimum": -35,
+              "maximum": 50,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 83500,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.45
+              },
+              "sampleGrid": {
+                "width": 361,
+                "height": 181
+              }
+            }
+          ],
+          "observedColors": [],
+          "mosaics": [
+            {
+              "id": "normal",
+              "format": "controlled-shape-camera",
+              "consumer": "galileo-frames",
+              "frames": [
+                {
+                  "id": "c0368603500",
+                  "path": "observations/C0368603500R.IMG",
+                  "labelPath": "observations/C0368603500R.LBL",
+                  "encoding": "vicar-byte-dn",
+                  "observerLatitude": -0.009,
+                  "observerWestLongitude": 333.853,
+                  "sunLatitude": -1.229,
+                  "sunWestLongitude": 22.432,
+                  "rangeKm": 818766.085,
+                  "northAzimuthDegrees": 0.2189999999999941,
+                  "center": [
+                    264.84,
+                    122.08
+                  ],
+                  "pixelAngleMicroradians": 10.15,
+                  "backgroundOffset": 0.0117647,
+                  "backgroundMaximum": 0.0078431
+                },
+                {
+                  "id": "c0420626379",
+                  "path": "observations/C0420626379R.IMG",
+                  "labelPath": "observations/C0420626379R.LBL",
+                  "encoding": "vicar-byte-dn",
+                  "observerLatitude": -0.511,
+                  "observerWestLongitude": 76.3,
+                  "sunLatitude": 0.131,
+                  "sunWestLongitude": 76.501,
+                  "rangeKm": 680739.779,
+                  "northAzimuthDegrees": 350.25,
+                  "center": [
+                    235.953,
+                    235.733
+                  ],
+                  "pixelAngleMicroradians": 10.15,
+                  "backgroundOffset": 0.0078431,
+                  "backgroundMaximum": 0.0078431
+                },
+                {
+                  "id": "c0420652501",
+                  "path": "observations/C0420652501R.IMG",
+                  "labelPath": "observations/C0420652501R.LBL",
+                  "encoding": "vicar-byte-dn",
+                  "observerLatitude": -0.839,
+                  "observerWestLongitude": 205.53,
+                  "sunLatitude": 0.13,
+                  "sunWestLongitude": 209.011,
+                  "rangeKm": 474680.745,
+                  "northAzimuthDegrees": 351.67,
+                  "center": [
+                    352.01,
+                    107.804
+                  ],
+                  "pixelAngleMicroradians": 10.15,
+                  "backgroundOffset": 0.0078431,
+                  "backgroundMaximum": 0.0078431
+                },
+                {
+                  "id": "c0512324200",
+                  "path": "observations/C0512324200R.IMG",
+                  "labelPath": "observations/C0512324200R.LBL",
+                  "encoding": "vicar-byte-dn",
+                  "observerLatitude": 0.708,
+                  "observerWestLongitude": 153.769,
+                  "sunLatitude": 3.208,
+                  "sunWestLongitude": 175.545,
+                  "rangeKm": 443554.251,
+                  "northAzimuthDegrees": 347.322,
+                  "center": [
+                    562.121,
+                    227.923
+                  ],
+                  "pixelAngleMicroradians": 10.15,
+                  "backgroundOffset": 0.0156863,
+                  "backgroundMaximum": 0.0078431
+                },
+                {
+                  "id": "c0532888100",
+                  "path": "observations/C0532888100R.IMG",
+                  "labelPath": "observations/C0532888100R.LBL",
+                  "encoding": "vicar-byte-dn",
+                  "observerLatitude": 0.184,
+                  "observerWestLongitude": 163.894,
+                  "sunLatitude": 3.388,
+                  "sunWestLongitude": 104.162,
+                  "rangeKm": 237799.22,
+                  "northAzimuthDegrees": 184.57299999999998,
+                  "center": [
+                    445.95,
+                    179.155
+                  ],
+                  "pixelAngleMicroradians": 10.15,
+                  "backgroundOffset": 0.023529411764705882,
+                  "backgroundMaximum": 0.011764705882352941,
+                  "coverageInsetPixels": 5
+                }
+              ],
+              "photometry": {
+                "weight": 0.5,
+                "maximumGain": 2,
+                "maximumIncidenceDegrees": 72,
+                "maximumEmissionDegrees": 75,
+                "displayMaximum": 0.42,
+                "gamma": 1,
+                "minimumLevel": 0.2,
+                "maximumLevel": 4,
+                "backgroundMaximum": 0.00784313725490196
+              },
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+                "attribution": {
+                  "label": "NASA/JPL; PDS Ring-Moon Systems Node",
+                  "url": "https://pds-rings.seti.org/galileo/ssi/"
+                }
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 83.5,
+          "camera": {
+            "initialScenePitchDegrees": 1.319689164252455,
+            "defaultControlYawDegrees": -20.79765038440197
+          },
+          "mapUrl": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
+          "polesUrl": "/scenes/amalthea/amalthea-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/j5amalthea.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "west-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 800,
+              "maximumErrorMeters": 1500,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Jupiter-system ephemeris and IAU/WGCCRE rotation; the PDS Stooke body origin and west-positive longitude are preserved."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            155,
+            151,
+            146
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "cfa2dd3c1b764ac2553963e7a0c9936cb6b180e67dc56fb244120fc971f0bed7",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "amalthea",
+        "displayName": "Amalthea",
+        "panel": {
+          "introduction": "Amalthea is Jupiter’s largest inner moon, an elongated, reddish world with giant craters and bright patches. Dust escaping its low-gravity surface helps form Jupiter’s faint gossamer ring.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "83.5 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "5.203 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Jupiter",
+              "value": "11.96 hours"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "Synchronous with its orbit"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Jupiter",
+              "value": "About 181,400 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Edward Emerson Barnard · 1892"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.01 ± 0.12 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "elevation": "Elevation"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+              "title": "SSI mosaic",
+              "detail": "Galileo",
+              "thumbnail": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
+              "surface": "amalthea-normal-surface@2x.webp",
+              "poles": "amalthea-normal-surface@2x.webp",
+              "source": {
+                "id": "c0532888100",
+                "path": "../manifest.json",
+                "url": "https://pds-rings.seti.org/galileo/ssi/"
+              },
+              "summary": "Surface brightness is adjusted to reduce photographed shading. Detail varies; the gray grid marks missing or unreliable images."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+              "title": "Shape-derived radial height",
+              "detail": "Radial shape",
+              "thumbnail": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
+              "surface": "amalthea-elevation-surface@2x.webp",
+              "poles": "amalthea-elevation-surface@2x.webp",
+              "source": {
+                "id": "stooke-shape",
+                "path": "../manifest.json",
+                "url": "https://sbn.psi.edu/pds/resource/stkshape.html"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−35",
+                  "0",
+                  "+50"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
+                "image": "/scenes/amalthea/amalthea-elevation-legend.webp"
+              },
+              "summary": "Height from a Voyager model, relative to an 83.5 km sphere. Unseen terrain and small features are uncertain."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Amalthea overview",
+            "href": "https://science.nasa.gov/jupiter/jupiter-moons/amalthea/"
+          },
+          {
+            "label": "NASA/JPL; PDS",
+            "role": "surface",
+            "description": "Galileo imagery and Stooke shape model",
+            "href": "https://sbn.psi.edu/pds/resource/stkshape.html"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/jupiter/jupiter-moons/amalthea/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "stooke-shape",
+      "path": "shape/j5amalthea.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j5amalthea.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/stkshape.html",
+      "credit": "Philip Stooke; NASA PDS",
+      "license": "Public PDS scientific data release; cite Stooke (2025), DOI 10.26033/yt84-5y91.",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/stkshape.html"
+      ],
+      "acquisition": "Download released radius grid.",
+      "redistribution": "Retain Stooke and PDS attribution.",
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-centered-radius-grid",
+        "longitudeDirection": "west-positive"
+      },
+      "coverage": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+      "sha256": "031ee6036cf67e170d39da24487672cd3d4dd2bbb5e9391cf1e3ad56c67706f1",
+      "bytes": 70226,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/j5amalthea.tab",
+        "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j5amalthea.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0368603500",
+      "path": "observations/C0368603500R.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG"
+      },
+      "sha256": "0c2786700d45f25d74828a2a274ffc1e8b2cd9fdaf049e5c461e44800b7d48ee",
+      "bytes": 831488,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0368603500R.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0368603500-label",
+      "path": "observations/C0368603500R.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0368603500",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL"
+      },
+      "sha256": "498fc2ee6c38eca35f33051a78f5e4b5ae082914e7dd8deee57f643259f02296",
+      "bytes": 4754,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0368603500R.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368603500R.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0420626379",
+      "path": "observations/C0420626379R.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420626379",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG"
+      },
+      "sha256": "5183ec1e59c472691fd82c30956f485b37d499154a0ca9fddbc245ccadf25e0a",
+      "bytes": 831488,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0420626379R.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0420626379-label",
+      "path": "observations/C0420626379R.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420626379",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL"
+      },
+      "sha256": "ba48dd397a1e9dfd94b6dce4c71c07e9c3c9f80f0958fa1140d9b4e67a793a73",
+      "bytes": 4842,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0420626379R.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0420652501",
+      "path": "observations/C0420652501R.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420652501",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG"
+      },
+      "sha256": "ed9310d63df477a715f46349aec4d07eb66466ef7878046f6de8fcc7a8e33495",
+      "bytes": 831488,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0420652501R.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0420652501-label",
+      "path": "observations/C0420652501R.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420652501",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL"
+      },
+      "sha256": "ec662262f35a5c10841283d69884888b2ba639bde352826224afd1ae8f35430d",
+      "bytes": 5012,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0420652501R.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0512324200",
+      "path": "observations/C0512324200R.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0512324200",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG"
+      },
+      "sha256": "28617d6c3a4e3efe8532db03d6479ed494f79712dd2c24d1ddd0e99964bc5b4f",
+      "bytes": 831488,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0512324200R.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0512324200-label",
+      "path": "observations/C0512324200R.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0512324200",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL"
+      },
+      "sha256": "2223991ed2b60d11428be5efc996132318c440be0f945ae4fc8f576e10a8dd32",
+      "bytes": 5010,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0512324200R.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0532888100",
+      "path": "observations/C0532888100R.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888100",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "width": 800,
+      "height": 800,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      },
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG"
+      },
+      "sha256": "a9984536219b37e770cd92036aca30cd53a83b91b9d87e881550ed0de23a01bf",
+      "bytes": 840192,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0532888100R.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "c0532888100-label",
+      "path": "observations/C0532888100R.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888100",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/galileo/ssi/"
+      ],
+      "acquisition": "Download the original Galileo SSI raw REDR image and detached PDS label.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL"
+      },
+      "sha256": "7f3421111331a7dad25384ac63a89eebc4b63e672d34905e977ece5f5dbbe73e",
+      "bytes": 5038,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/C0532888100R.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored source interpretation or preparation metadata.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored source interpretation or preparation metadata.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "cfa2dd3c1b764ac2553963e7a0c9936cb6b180e67dc56fb244120fc971f0bed7",
+      "bytes": 5644,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "stooke-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
+          "bytes": 6320,
+          "sha256": "9d847355902640f4324b2a5a9da0065c1c4bff1df78ae75631a13da2f12d1144",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/amalthea/amalthea-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/amalthea/amalthea-elevation-surface@2x.webp",
+          "bytes": 235688,
+          "sha256": "3628a7e922a59e4ad06bddce33da7c5177431d76e095c250fadae50d9ae57d18",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "parents": [],
+      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "mosaics"
+      },
+      "inputs": [
+        "c0368603500",
+        "c0368603500-label",
+        "c0420626379",
+        "c0420626379-label",
+        "c0420652501",
+        "c0420652501-label",
+        "c0512324200",
+        "c0512324200-label",
+        "c0532888100",
+        "c0532888100-label",
+        "stooke-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
+          "bytes": 3642,
+          "sha256": "981e03ba4ea6120c914657603ee990e7f850db49f7042f611e24bde026fcaa04",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
+          "bytes": 153080,
+          "sha256": "f2c72c3300ef926550eea6f0370f6cad7bef05bc2196cfbfdf34ca63be6bc7d0",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6982,
+          "sha256": "3b7f96c5d7aab4c3092d4a9e04fc4289f0334561457ee687f7cf7d3c550fb0ed",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 12248,
+          "sha256": "7a07e644c26a780b9e4432c2b8d6bf653779d66b8db0672ab147dddb30350aa8",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 15414,
+          "sha256": "aa8ecf230b3648353b7d843f66531788905d8ed91b7ee27c13fab5143895c2d5",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "orus",
+  "displayName": "Orus",
+  "panel": {
+    "introduction": "Orus is a dark Jupiter Trojan selected for Lucy's exploration of the leading swarm. This ellipsoid approximates the dimensions of the published light-curve and occultation model. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate ellipsoid"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "70.7 × 63 × 51.4 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "13.486190 ± 0.000017 h"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Jupiter Trojan"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. The original convex mesh and local concavities are not represented. Full approximation dimensions: 70.7 × 63 × 51.4 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain.",
+        "title": "Convex-model ellipsoid approximation",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/orus/orus-model-thumbnail.webp",
+        "surface": "orus-model-surface@2x.webp",
+        "poles": "orus-model-poles@2x.webp",
+        "source": {
+          "id": "occultation-approximation",
+          "path": "../manifest.json",
+          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape and dimensions",
+      "role": "surface",
+      "description": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70",
+      "href": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://doi.org/10.3847/PSJ/acaf79"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://doi.org/10.1007/s11214-025-01173-7"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70"
+    }
+  }
+}

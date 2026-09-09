@@ -10,7 +10,6 @@ export const browserProfile = createObjectBrowserProfile({
       "/scenes/earth/earth-surface-poles.webp",
     ]),
     preparedAssetPairs: Object.freeze([
-      Object.freeze({ one: "/scenes/earth/earth-starfield-front.webp", two: "/scenes/earth/earth-starfield-front@2x.webp" }),
       Object.freeze({ one: "/scenes/earth/earth-directional-sun.webp", two: "/scenes/earth/earth-directional-sun@2x.webp" }),
     ]),
     lensRace: Object.freeze({
@@ -21,10 +20,9 @@ export const browserProfile = createObjectBrowserProfile({
       preReadyDisabled: true,
     }),
     retained: Object.freeze({
-      lensIds: Object.freeze(["normal", "topography", "night-lights", "buenos-aires-noise", "cross-section"]),
+      lensIds: Object.freeze(["normal", "topography", "night-lights", "enso", "cross-section", "mantle-tomography"]),
       speedClicks: 5,
       allowedMountSelectors: Object.freeze([]),
     }),
   }),
-  visibleViews: [{ attribute: "data-view", value: "interior", lensId: "cross-section" }],
 });

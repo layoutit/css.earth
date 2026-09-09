@@ -25,6 +25,21 @@
             "lineOffset": 6675
           }
         }
+      },
+      {
+        "id": "ratios",
+        "validity": {
+          "kind": "pds3-rgb-zip",
+          "member": "Ceres_clementine_HAMO-1-2_global.pds",
+          "targetName": "VESTA",
+          "noData": 0,
+          "centerLongitude": 180,
+          "grid": {
+            "pixelsPerDegree": 74.176493209759,
+            "sampleOffset": 13351,
+            "lineOffset": 6675
+          }
+        }
       }
     ],
     "scientific": [

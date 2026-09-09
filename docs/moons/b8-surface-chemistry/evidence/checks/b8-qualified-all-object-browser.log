@@ -1,0 +1,716 @@
+18:51:24 [vite] connected.
+18:51:25 [types] Generated 0ms
+18:51:25 [vite] connected.
+ astro  v7.2.9 ready in 900 ms
+┃ Local    http://127.0.0.1:4291/
+18:51:25 watching for file changes...
+18:51:30 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:30 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:30 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:30 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:31 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:31 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:31 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:31 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:31 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:31 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:31 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:31 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:32 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:32 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:32 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:32 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:32 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:32 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:33 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:33 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:33 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:33 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:33 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:33 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:33 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:33 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:34 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:34 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:34 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:34 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:34 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:34 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:35 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:35 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:35 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:35 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:35 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:35 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:35 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:35 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:36 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:36 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:36 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:36 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:36 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:36 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:37 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:37 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:37 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:37 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:37 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:37 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:37 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:37 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:38 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:38 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:38 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:38 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:38 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:38 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:38 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:38 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:39 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:39 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:39 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:39 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:39 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:39 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:39 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:39 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:40 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:40 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:40 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:40 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:40 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:40 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:41 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:41 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:41 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:41 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:51:41 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:13:17)
+    at async loadObjectPageData (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:21:21)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:10:1)
+    at async callComponentAsTemplateResultOrResponse (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:203:25)
+    at async renderToAsyncIterable (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/astro/render.js:235:26)
+    at async renderPage (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/runtime/server/render/page.js:43:24)
+    at async handlePages (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/pages/handler.js:32:20)
+    at async callMiddleware (/Users/ekrof/fed/cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/core/middleware/callMiddleware.js:11:10)
+18:51:41 [ERROR] ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/polymele/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/object-page-data.mjs:5:17)
+    at async eval (/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/polymele.astro:4:1)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.goto: Timeout 15000ms exceeded.
+Call log:
+[2m  - navigating to "http://127.0.0.1:4291/polymele/", waiting until "networkidle"[22m
+
+    at /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dom-cleanliness-browser.mjs:25:18 {
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,343 @@
+{
+  "schema": "cssearth-b2-shape-trial@1",
+  "id": "enceladus",
+  "source": {
+    "path": "/tmp/moons-b2-dsk-conversion/enceladus-v2-q256.obj.zip",
+    "bytes": 10207923,
+    "sha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
+    "vertices": 393218,
+    "faces": 786432,
+    "boundsMeters": [
+      [
+        -255894.78,
+        -250535.24,
+        -248026.15
+      ],
+      [
+        257284.94999999998,
+        252617.67,
+        249704.51
+      ]
+    ],
+    "extrema": {
+      "minRadius": {
+        "vertex": 355342,
+        "pointMeters": [
+          -12239.43,
+          -31976.64,
+          -245311.22
+        ],
+        "radiusMeters": 247689.12735585085
+      },
+      "maxRadius": {
+        "vertex": 299256,
+        "pointMeters": [
+          256373.99,
+          9371.94,
+          -23266.780000000002
+        ],
+        "radiusMeters": 257598.13481361253
+      },
+      "minEllipsoidRadialResidual": {
+        "vertex": 177611,
+        "pointMeters": [
+          -218274.66,
+          -105317.68,
+          -69420.28
+        ],
+        "residualMeters": -2646.7995560004492
+      },
+      "maxEllipsoidRadialResidual": {
+        "vertex": 40805,
+        "pointMeters": [
+          106248.25,
+          -42037.85,
+          224815.78
+        ],
+        "residualMeters": 2209.0066782193317
+      },
+      "ellipsoidAbsResidualP95Meters": 1374.3158308292914,
+      "sphereAbsResidualP95Meters": 3913.8707781296107,
+      "axisRayRadiiMeters": [
+        {
+          "longitudeEastDegrees": 0,
+          "latitudeDegrees": 0,
+          "radiusMeters": 257238.7090394475
+        },
+        {
+          "longitudeEastDegrees": 90,
+          "latitudeDegrees": 0,
+          "radiusMeters": 252562.11003432857
+        },
+        {
+          "longitudeEastDegrees": 180,
+          "latitudeDegrees": 0,
+          "radiusMeters": 255814.43397576534
+        },
+        {
+          "longitudeEastDegrees": 270,
+          "latitudeDegrees": 0,
+          "radiusMeters": 250499.56096799654
+        },
+        {
+          "longitudeEastDegrees": 0,
+          "latitudeDegrees": 90,
+          "radiusMeters": 249250.94338623868
+        },
+        {
+          "longitudeEastDegrees": 0,
+          "latitudeDegrees": -90,
+          "radiusMeters": 247767.15468386989
+        }
+      ],
+      "residualSampling": "Quantiles across original source vertices (not area-weighted). Radius difference along each vertex direction relative to stated Thomas/Schenk semi-axes; different model solutions, not a height uncertainty estimate."
+    }
+  },
+  "trials": [
+    {
+      "targetFaces": 2000,
+      "regularize": false,
+      "maximumErrorMeters": 1000,
+      "ok": false,
+      "error": "Source mesh reached 2664 faces at 988.5131225585938 m estimated error; requested 2000 within 1000 m."
+    },
+    {
+      "targetFaces": 2000,
+      "regularize": true,
+      "maximumErrorMeters": 2523,
+      "ok": true,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute",
+          "RegularizeLight"
+        ],
+        "sourceFaces": 786432,
+        "sourceVertices": 393218,
+        "weldedVertices": 393218,
+        "targetFaces": 2000,
+        "outputFaces": 2000,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 2523,
+        "estimatedErrorMeters": 2505.1640625,
+        "topology": {
+          "vertices": 1002,
+          "edges": 3000,
+          "faces": 2000,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 66651851325118860
+        }
+      },
+      "independentGeometricSamples": {
+        "method": "Four barycentric points per retained face projected against the complete original mesh using closest-triangle BVH. One-way sampled surface deviation, not a full Hausdorff bound.",
+        "count": 8000,
+        "missing": 0,
+        "maximumMeters": 1822.0074684069336,
+        "p95Meters": 1076.5438397298433,
+        "rmsMeters": 641.8672052509456,
+        "worst": {
+          "face": 1629,
+          "weights": [
+            0.6,
+            0.2,
+            0.2
+          ],
+          "pointMeters": [
+            205801.19199999998,
+            147684.02,
+            -18324.888000000003
+          ],
+          "sourcePointMeters": [
+            207259.31308071216,
+            148771.2715182548,
+            -18432.024664900466
+          ],
+          "sourceFace": 642333,
+          "distanceMeters": 1822.0074684069336
+        }
+      },
+      "extremity": {
+        "boundsMeters": [
+          [
+            -255462.15,
+            -250113.87,
+            -247493.54
+          ],
+          [
+            257226.83999999997,
+            252205.57,
+            249653.33000000002
+          ]
+        ],
+        "sourceBoundInsetMeters": [
+          [
+            432.63000000000466,
+            421.36999999999534,
+            532.609999999986
+          ],
+          [
+            58.110000000015134,
+            412.1000000000058,
+            51.179999999993015
+          ]
+        ]
+      },
+      "facesSha256": "6f45b75e40569b840fedf2ed6b1d58e768b237a4ad9d55d4ce727cc11cc1e169"
+    },
+    {
+      "targetFaces": 2000,
+      "regularize": false,
+      "maximumErrorMeters": 2523,
+      "ok": true,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 786432,
+        "sourceVertices": 393218,
+        "weldedVertices": 393218,
+        "targetFaces": 2000,
+        "outputFaces": 1996,
+        "removedOppositeFaces": 4,
+        "maximumErrorMeters": 2523,
+        "estimatedErrorMeters": 1275.050048828125,
+        "topology": {
+          "vertices": 1000,
+          "edges": 2994,
+          "faces": 1996,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 66658704374764110
+        }
+      },
+      "independentGeometricSamples": {
+        "method": "Four barycentric points per retained face projected against the complete original mesh using closest-triangle BVH. One-way sampled surface deviation, not a full Hausdorff bound.",
+        "count": 7984,
+        "missing": 0,
+        "maximumMeters": 1828.7546320509305,
+        "p95Meters": 1085.815310232392,
+        "rmsMeters": 623.6617719765276,
+        "worst": {
+          "face": 632,
+          "weights": [
+            0.2,
+            0.6,
+            0.2
+          ],
+          "pointMeters": [
+            104575.28,
+            -207293.01400000002,
+            91747.012
+          ],
+          "sourcePointMeters": [
+            105305.12686518133,
+            -208804.47978763233,
+            92473.05485717152
+          ],
+          "sourceFace": 235127,
+          "distanceMeters": 1828.7546320509305
+        }
+      },
+      "extremity": {
+        "boundsMeters": [
+          [
+            -255729.81999999998,
+            -249664.4,
+            -247472.34
+          ],
+          [
+            256905.46999999997,
+            252498.97,
+            249532.41
+          ]
+        ],
+        "sourceBoundInsetMeters": [
+          [
+            164.96000000002095,
+            870.8399999999965,
+            553.8099999999977
+          ],
+          [
+            379.4800000000105,
+            118.70000000001164,
+            172.10000000000582
+          ]
+        ]
+      },
+      "facesSha256": "bc4298877428b1dd4497cb2517c56b1fe4070f074657bd7276886d75118aecd0"
+    }
+  ],
+  "context": {
+    "referenceSphereMeters": 252300,
+    "referenceEllipsoidSemiAxesMeters": [
+      256200,
+      251400,
+      248600
+    ],
+    "qualification": "Reference semi-axes, not full diameters. Thomas/Schenk reference and corrected v2 SPC are different solutions; residuals describe their geometric difference, not measured terrain uncertainty.",
+    "onePercentRadiusMeters": 2523,
+    "sixteenSegmentSagittaMeters": 4847.873754264962
+  },
+  "node": "v24.19.0",
+  "heapLimitMiB": 3072,
+  "toolchain": [
+    {
+      "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
+      "sha256": "052519f0840b76ce8ffe4dce869c79273f65c74661eff4c4150eb50655749e13"
+    },
+    {
+      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
+      "sha256": "35e3a7e966b10df9bdb17e00ae47e03d624acf8f7c232dc851cc42fdc79517c6"
+    }
+  ],
+  "elapsedMs": 6070,
+  "resources": {
+    "userCPUTime": 7213007,
+    "systemCPUTime": 364819,
+    "maxRSS": 1147232,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 103354,
+    "majorPageFault": 322,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 0,
+    "ipcSent": 0,
+    "ipcReceived": 576,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 200,
+    "involuntaryContextSwitches": 15160
+  },
+  "processMemory": {
+    "rss": 1065222144,
+    "heapTotal": 677560320,
+    "heapUsed": 484329024,
+    "external": 112017011,
+    "arrayBuffers": 14476039
+  },
+  "qualification": "Source-only candidates. Simplification error, geometric residuals and reference-ellipsoid comparison do not establish scientific absolute accuracy, map registration or rendered visual fidelity.",
+  "resourceContext": {
+    "before": {
+      "freeDiskGiB": 249,
+      "systemMemoryFreePercent": 69,
+      "compressorPages": 472624,
+      "swapins": 0,
+      "swapouts": 0
+    },
+    "after": {
+      "systemMemoryFreePercent": 53,
+      "compressorPages": 786072
+    },
+    "subsequent": {
+      "systemMemoryFreePercent": 55,
+      "compressorPages": 769375
+    },
+    "pageBytes": 16384,
+    "interpretation": "System-wide compressor rise exceeded this job maximum resident memory. No causal attribution to this process. The source job had already exited before the post-run check; no additional workload was started."
+  }
+}

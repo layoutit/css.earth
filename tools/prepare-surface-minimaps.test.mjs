@@ -10,6 +10,9 @@ test('a model-only lens can omit a misleading flat map without opening its image
   try {
     await mkdir(resolve(root, 'source/presentation'), { recursive: true });
     await mkdir(resolve(root, 'prepared'));
+    await mkdir(resolve(root, 'source/preparation'));
+    await writeFile(resolve(root, 'source/preparation/terrestrial.json'), JSON.stringify({ schema: 'cssearth-terrestrial-preparation@1', kind: 'solid-observation-body' }));
+    await writeFile(resolve(root, 'prepared/controls.json'), JSON.stringify({ lenses: { controls: [{ id: 'model' }] } }));
     await writeFile(resolve(root, 'prepared/surfaces.json'), JSON.stringify({ surfaces: [{ id: 'model', map: { url: '/not-a-geographic-map.png' } }] }));
     await writeFile(resolve(root, 'source/presentation/minimap.json'), JSON.stringify({ excludeLenses: ['model'] }));
     const options = { objectDirectory: root, publicDirectory: root, outputDirectory: resolve(root, 'prepared') };

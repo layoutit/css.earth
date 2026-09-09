@@ -59,6 +59,12 @@
         "metersPerUnit": 500,
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 18265.603887767425
+      },
+      "capture": {
+        "spacecraftIds": [
+          "new-horizons"
+        ],
+        "evidence": "https://ndownloader.figshare.com/files/24176543"
       }
     },
     {
@@ -93,8 +99,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3934,
-      "expectedSha256": "60542d6a0babf65316bc0f0d6e415227ccf8d911836a12a0d1d6aa1151bf6c11",
+      "expectedBytes": 3829,
+      "expectedSha256": "4d6704435d3b8091105fa75c411328e2eb442f4540d702ad8cdad7c788295bf7",
       "purpose": "Nix source identity, survey evidence or authored preparation and content."
     },
     {

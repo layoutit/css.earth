@@ -1,0 +1,155 @@
+PDS_VERSION_ID                   = PDS3
+
+/* File Structure */
+
+RECORD_TYPE                      = FIXED_LENGTH
+RECORD_BYTES                     = 512
+FILE_RECORDS                     = 486
+
+/* Pointers to Data Objects */
+
+^HEADER                          = ("v1500061170_1.qub", 1)
+^HISTORY                         = ("v1500061170_1.qub", 22)
+^QUBE                            = ("v1500061170_1.qub", 47)
+
+/* Identification Data Elements */
+
+MISSION_NAME                     = "CASSINI-HUYGENS"
+MISSION_PHASE_NAME               = "TOUR"
+INSTRUMENT_HOST_NAME             = "CASSINI ORBITER"
+INSTRUMENT_NAME                  = "VISUAL AND INFRARED MAPPING SPECTROMETER"
+INSTRUMENT_ID                    = VIMS
+DATA_SET_ID                      = "CO-E/V/J/S-VIMS-2-QUBE-V1.0"
+PRODUCT_ID                       = "1_1500061170.7438"
+PRODUCT_VERSION_TYPE             = "FINAL"
+FLIGHT_SOFTWARE_VERSION_ID       = "8.1"
+SOFTWARE_VERSION_ID              = "VIMS 10.0 11-23-2004"
+TARGET_NAME                      = "ENCELADUS"
+TARGET_DESC                      = "ENCELADUS"
+IMAGE_OBSERVATION_TYPE           = SCIENCE
+SPACECRAFT_CLOCK_CNT_PARTITION   = 1
+SPACECRAFT_CLOCK_START_COUNT     = "1/1500061180.001"
+SPACECRAFT_CLOCK_STOP_COUNT      = "1/1500061236.094"
+NATIVE_START_TIME                = "1500061170.07438"
+NATIVE_STOP_TIME                 = "1500061229.05983"
+START_TIME                       = 2005-195T19:11:43.633
+STOP_TIME                        = 2005-195T19:12:42.541
+HOUSEKEEPING_CLOCK_COUNT         = 1500061232.132
+PRODUCT_CREATION_TIME            = 2005-196T23:56:58.000
+OBSERVATION_ID                   = "VIMS_011EN_ENCELADUS111"
+COMMAND_FILE_NAME                = "VIMS_011EN_ENCELADUS128_ISS.V1.ioi"
+COMMAND_SEQUENCE_NUMBER          = 79
+EARTH_RECEIVED_START_TIME        = 2005-196T19:05:15.351
+EARTH_RECEIVED_STOP_TIME         = 2005-196T19:05:54.958
+MISSING_PACKET_FLAG              = NO
+DESCRIPTION                      = "N/A"
+PARAMETER_SET_ID                 = "VIMS_011EN_ENCELADUS128_ISS_006"
+SEQUENCE_ID                      = "S12"
+SEQUENCE_TITLE                   = "VIMS_011EN_ENCELADUS128_ISS"
+TELEMETRY_FORMAT_ID              = UNK
+DATA_REGION                      = "N/A"
+OVERWRITTEN_CHANNEL_FLAG         = OFF
+
+/* Instrument Status (IR, Visible) */
+   /* In the following section, parameters with single values apply to */
+   /* both the IR and visible portions of the instrument.   Parameters */
+   /* with two values apply to the IR and the visible respectively.  For */
+   /* parameters with more than two values, see the accompanying comment */
+   /* for an indication of how the values are to be applied. */
+
+INSTRUMENT_MODE_ID               = "IMAGE"
+INTERFRAME_DELAY_DURATION        = 700.000000
+COMPRESSOR_ID                    = 1
+INST_CMPRS_NAME                  = "OMEGA"
+INST_CMPRS_RATIO                 = 2.307706
+DATA_BUFFER_STATE_FLAG           = ENABLED
+INSTRUMENT_DATA_RATE             = 94.208000
+MISSING_PIXELS                   = 0
+POWER_STATE_FLAG                 = (ON,ON)
+GAIN_MODE_ID                     = (LOW,LOW)
+EXPOSURE_DURATION                = (160.000000,5000.000000)
+BACKGROUND_SAMPLING_MODE_ID      = (SINGLE,ZERO_SUB)
+X_OFFSET                         = 18
+Z_OFFSET                         = 28
+SWATH_WIDTH                      = 24
+SWATH_LENGTH                     = 12
+SPECTRAL_EDITING_FLAG            = OFF
+SPECTRAL_SUMMING_FLAG            = OFF
+OFFSET_FLAG                      = OFF
+SNAPSHOT_MODE_FLAG               = OFF
+PACKING_FLAG                     = OFF
+
+/* Temps shown are IR high res, IR low res, Visible (degrees K) */
+
+DETECTOR_TEMPERATURE             = (60.940937,60.215565,233.435440)
+
+/* Temps shown are IR primary, IR secondary, Visible (degrees K) */
+
+OPTICS_TEMPERATURE               = (136.066849,129.262970,274.901215)
+
+/* Sampling modes shown are IR, visible spatial, and visible spectral */
+
+SAMPLING_MODE_ID                 = ("HI-RES","NORMAL")
+
+/* Instrument status: IR */
+
+BIAS_STATE_ID                    = LOW
+SCAN_MODE_ID                     = BOTH
+SHUTTER_STATE_FLAG               = ENABLED
+INTEGRATION_DELAY_FLAG           = DISABLED
+INTERLINE_DELAY_DURATION         = 615.000000
+BACKGROUND_SAMPLING_FREQUENCY    = 1
+
+/* Temperatures shown are for spectrometer, then grating (degrees K). */
+
+INSTRUMENT_TEMPERATURE           = (134.451172,134.018524)
+FAST_HK_ITEM_NAME                = ("IR_DETECTOR_TEMP_HIGH_RES_1",
+                                    "IR_GRATING_TEMP",
+                                    "IR_PRIMARY_OPTICS_TEMP",
+                                    "IR_SPECTROMETER_BODY_TEMP_1")
+FAST_HK_PICKUP_RATE              = 2
+
+/* Instrument status: visible */
+
+ANTIBLOOMING_STATE_FLAG          = OFF
+
+/* Data Object Definitions */
+
+OBJECT                           = HEADER
+  BYTES                          = 10752
+  HEADER_TYPE                    = ISIS
+  INTERCHANGE_FORMAT             = ASCII
+END_OBJECT                       = HEADER
+
+OBJECT                           = HISTORY
+  BYTES                          = 12800
+  HISTORY_TYPE                   = ISIS
+  INTERCHANGE_FORMAT             = ASCII
+END_OBJECT                       = HISTORY
+
+OBJECT                           = SPECTRAL_QUBE
+  AXES                           = 3
+  AXIS_NAME                      = (SAMPLE,BAND,LINE)
+  FILE_STATE                     = CLEAN
+  CHECKSUM                       = 579579458
+
+/* Core description. */
+
+  CORE_ITEMS                     = (24,352,12)
+  ^STRUCTURE                     = "core_description.fmt"
+
+/* Suffix description. */
+
+  SUFFIX_ITEMS                   = (1,4,0)
+  SAMPLE_SUFFIX_NAME             = BACKGROUND
+  BAND_SUFFIX_NAME               = (IR_DETECTOR_TEMP_HIGH_RES_1,
+                                    IR_GRATING_TEMP,IR_PRIMARY_OPTICS_TEMP,
+                                    IR_SPECTROMETER_BODY_TEMP_1)
+  ^STRUCTURE                     = "suffix_description.fmt"
+
+/* Spectral axis description */
+
+  ^STRUCTURE                     = "band_bin_center.fmt"
+END_OBJECT                       = SPECTRAL_QUBE
+
+END

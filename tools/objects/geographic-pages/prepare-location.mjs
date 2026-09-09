@@ -63,20 +63,38 @@ export function prepareLocationPoint(scene, longitude, latitude) {
   return point;
 }
 
-export function prepareLocationCamera(scene, point, zoom, { body, camera }) {
+export function prepareLocationCamera(scene, point, zoom, { body, camera, northUp = false }) {
   const rotateZ = (p, angle) => {
     const c = Math.cos(radians(angle)), s = Math.sin(radians(angle));
     return [c * p[0] - s * p[1], s * p[0] + c * p[1], p[2]];
   };
-  let [x, y, z] = rotateZ(point, -body.meshRotationDegrees);
-  const tilt = radians(-body.obliquityDegrees);
-  [x, z] = [Math.cos(tilt) * x + Math.sin(tilt) * z, -Math.sin(tilt) * x + Math.cos(tilt) * z];
-  [x, y, z] = rotateZ([x, y, z], -body.presentationNodeDegrees);
+  const toScene = point => {
+    let [x, y, z] = rotateZ(point, -body.meshRotationDegrees);
+    const tilt = radians(-body.obliquityDegrees);
+    [x, z] = [Math.cos(tilt) * x + Math.sin(tilt) * z, -Math.sin(tilt) * x + Math.cos(tilt) * z];
+    [x, y, z] = rotateZ([x, y, z], -body.presentationNodeDegrees);
+    return [x, y, z];
+  };
+  const [x, y, z] = toScene(point);
   const pitch = degrees(Math.atan2(y, Math.hypot(x, z)));
+  const yaw = degrees(Math.atan2(-x, z));
+  // Project the body's north pole through the destination pitch/yaw. A final
+  // screen-axis rotation puts north above the equator without changing the
+  // geographic target, body attitude, or shared camera's drag behavior.
+  let roll;
+  if (northUp) {
+    const [nx, ny, nz] = toScene([0, 0, 1]);
+    const cy = Math.cos(radians(yaw)), sy = Math.sin(radians(yaw));
+    const cp = Math.cos(radians(pitch)), sp = Math.sin(radians(pitch));
+    const northX = cy * nx + sy * nz;
+    const northY = cp * ny - sp * (-sy * nx + cy * nz);
+    roll = degrees(Math.atan2(-northX, -northY));
+  }
   return {
     controlPitch: camera.defaultControlPitchDegrees +
       (1 - pitch / camera.initialScenePitchDegrees) *
       (camera.maximumControlPitchDegrees - camera.defaultControlPitchDegrees),
-    controlYaw: degrees(Math.atan2(-x, z)), zoom,
+    controlYaw: yaw, zoom,
+    ...(northUp ? { controlRoll: roll } : {}),
   };
 }

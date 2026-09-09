@@ -43,7 +43,139 @@
     ],
     "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "deep-impact",
+        "format": "encounter-fits",
+        "consumer": "photographs-deep-impact",
+        "frames": [
+          {
+            "id": "iv05070405-9000632-001-r",
+            "path": "photography/deep-impact/iv05070405_9000632_001_r.fit",
+            "labelPath": "photography/deep-impact/iv05070405_9000632_001_r.lbl",
+            "controlPath": "photography/deep-impact/iv05070405_9000632_001_r.json"
+          },
+          {
+            "id": "iv05070405-9000639-001-r",
+            "path": "photography/deep-impact/iv05070405_9000639_001_r.fit",
+            "labelPath": "photography/deep-impact/iv05070405_9000639_001_r.lbl",
+            "controlPath": "photography/deep-impact/iv05070405_9000639_001_r.json"
+          },
+          {
+            "id": "iv05070405-9000654-001-r",
+            "path": "photography/deep-impact/iv05070405_9000654_001_r.fit",
+            "labelPath": "photography/deep-impact/iv05070405_9000654_001_r.lbl",
+            "controlPath": "photography/deep-impact/iv05070405_9000654_001_r.json"
+          },
+          {
+            "id": "iv05070405-9000644-001-r",
+            "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
+            "labelPath": "photography/deep-impact/iv05070405_9000644_001_r.lbl",
+            "controlPath": "photography/deep-impact/iv05070405_9000644_001_r.json"
+          },
+          {
+            "id": "iv05070405-9000673-001-r",
+            "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+            "labelPath": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
+            "controlPath": "photography/deep-impact/iv05070405_9000673_001_r.json"
+          }
+        ],
+        "transfer": {
+          "maximumSourceDistanceMeters": 90,
+          "maximumSeparationMeters": 200,
+          "maximumEmissionDegrees": 75,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "observed",
+          "maximumGain": 1
+        },
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 32,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.3,
+          "maximumGain": 1.5
+        },
+        "displayPercentiles": [
+          1,
+          99.5
+        ],
+        "metadata": {
+          "label": "Deep Impact · 2005",
+          "coverage": "Photographs taken as the impactor approached Tempel 1, before the collision. Wider views surround a closer view of the impact region. The gray grid marks gaps; the original shadows remain."
+        }
+      },
+      {
+        "id": "next",
+        "format": "encounter-fits",
+        "consumer": "photographs-next",
+        "frames": [
+          {
+            "id": "n30033te02-rr",
+            "path": "photography/next/n30033te02_rr.fit",
+            "labelPath": "photography/next/n30033te02_rr.lbl",
+            "controlPath": "photography/next/n30033te02_rr.json"
+          },
+          {
+            "id": "n30039te02-rr",
+            "path": "photography/next/n30039te02_rr.fit",
+            "labelPath": "photography/next/n30039te02_rr.lbl",
+            "controlPath": "photography/next/n30039te02_rr.json"
+          },
+          {
+            "id": "n30036te02-rr",
+            "path": "photography/next/n30036te02_rr.fit",
+            "labelPath": "photography/next/n30036te02_rr.lbl",
+            "controlPath": "photography/next/n30036te02_rr.json"
+          },
+          {
+            "id": "n30042te02-rr",
+            "path": "photography/next/n30042te02_rr.fit",
+            "labelPath": "photography/next/n30042te02_rr.lbl",
+            "controlPath": "photography/next/n30042te02_rr.json"
+          },
+          {
+            "id": "n30045te02-rr",
+            "path": "photography/next/n30045te02_rr.fit",
+            "labelPath": "photography/next/n30045te02_rr.lbl",
+            "controlPath": "photography/next/n30045te02_rr.json"
+          },
+          {
+            "id": "n30048te02-rr",
+            "path": "photography/next/n30048te02_rr.fit",
+            "labelPath": "photography/next/n30048te02_rr.lbl",
+            "controlPath": "photography/next/n30048te02_rr.json"
+          }
+        ],
+        "transfer": {
+          "maximumSourceDistanceMeters": 90,
+          "maximumSeparationMeters": 200,
+          "maximumEmissionDegrees": 75,
+          "visibilityToleranceMeters": 0.5
+        },
+        "photometry": {
+          "model": "observed",
+          "maximumGain": 1
+        },
+        "selection": "finest-resolution",
+        "levelMatching": {
+          "samplesPerTriangle": 32,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.3,
+          "maximumGain": 3
+        },
+        "displayPercentiles": [
+          1,
+          99.5
+        ],
+        "metadata": {
+          "label": "Stardust-NExT · 2011",
+          "coverage": "Stardust returned six years after Deep Impact. These photographs show a different encounter and viewing direction, rather than a direct before-and-after comparison. Original shadows remain; the gray grid marks gaps."
+        }
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,

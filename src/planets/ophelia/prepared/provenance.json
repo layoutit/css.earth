@@ -1,0 +1,417 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "ophelia",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "c0694281dd2dd753824a0e9d8a16e98dfacf85e1757488238e20ef57ac371ffc"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "dd78880106fe6926b2fc9a643c722d27fb04bc80ec360ad279086b4b844e2454",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "ophelia",
+        "displayName": "Ophelia",
+        "publicBase": "/scenes/ophelia/",
+        "distanceAu": 19.19,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Source-constrained ellipsoid with no observed surface coverage; the standard gray cartographic grid identifies the untextured shape model."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 21.361102076705983,
+          "mapUrl": "/scenes/ophelia/ophelia-model-surface@2x.webp",
+          "polesUrl": "/scenes/ophelia/ophelia-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 614,
+              "expectedFaces": 1224,
+              "stepDegrees": 10,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 500,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          },
+          "camera": {
+            "initialScenePitchDegrees": -32.21838894216883,
+            "defaultControlYawDegrees": 34.15181793628052
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Uranus-system ephemeris; IAU Ophelia BODY707 from PCK00011 with the small periodic correction frozen at the prepared epoch."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "2ee775b442c7b5c1ec93a682e7b2ff5f1ae0b15277ca052f95f3a7bff4ea4b4e",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "ophelia",
+        "displayName": "Ophelia",
+        "panel": {
+          "introduction": "Ophelia is the outer shepherd of Uranus’s epsilon ring. Together with Cordelia, it helps confine the narrow ring through gravitational resonances.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Equivalent radius",
+              "value": "About 21.4 km"
+            },
+            {
+              "id": "dimensions",
+              "label": "Modeled dimensions",
+              "value": "About 54 × 38 × 38 km"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Uranus",
+              "value": "About 9.0 hours"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from Uranus",
+              "value": "About 53,764 km"
+            },
+            {
+              "id": "mass",
+              "label": "Ring-derived mass",
+              "value": "(3.57 ± 0.32) × 10¹⁶ kg"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "Voyager 2 · January 1986"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "description": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+              "title": "Approximate shape model",
+              "detail": "Published shape",
+              "thumbnail": "/scenes/ophelia/ophelia-model-thumbnail.webp",
+              "surface": "ophelia-model-surface@2x.webp",
+              "poles": "ophelia-model-poles@2x.webp",
+              "source": {
+                "id": "measured-shape",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.1006/icar.2001.6596"
+              },
+              "summary": "A 54 × 38 × 38 km shape estimate from Voyager. Two axes are assumed equal; gray grid: no surface imagery."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Ophelia discovery and naming",
+            "href": "https://science.nasa.gov/uranus/moons/ophelia/"
+          },
+          {
+            "label": "Karkoschka (2001)",
+            "role": "surface",
+            "description": "Adopted prolate dimensions and photometry",
+            "href": "https://doi.org/10.1006/icar.2001.6596"
+          },
+          {
+            "label": "French et al. (2024)",
+            "role": "physical",
+            "description": "Shape uncertainty and mass inferred from ring forcing",
+            "href": "https://arxiv.org/abs/2401.04634"
+          },
+          {
+            "label": "NASA/JPL; PDS",
+            "role": "observations",
+            "description": "Voyager ISS archive",
+            "href": "https://pds-rings.seti.org/voyager/iss/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/uranus/moons/ophelia/",
+            "credit": "NASA Science; discovery and naming only"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Karkoschka (2001); French et al. (2024)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://doi.org/10.1006/icar.2001.6596",
+      "credit": "cssEarth standard no-coverage grid",
+      "license": "MIT representation of published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1006/icar.2001.6596"
+      ],
+      "acquisition": "Checked in; radius formula, dimensions and material bytes are specified in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 21361.10207670598
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "measured-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://doi.org/10.1006/icar.2001.6596",
+      "credit": "Karkoschka (2001) adopted dimensions; cssEarth analytic prolate spheroid",
+      "license": "MIT representation of published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1006/icar.2001.6596"
+      ],
+      "acquisition": "Checked-in analytic radius table; formula and axes in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 21361.10207670598
+      },
+      "sha256": "67ff26d49e7921af41e37d85a1f5e9cea7f9235b88a94381b40f4d526d1812da",
+      "bytes": 14147,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Ophelia source evidence or authored preparation data.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Ophelia source evidence or authored preparation data.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "2ee775b442c7b5c1ec93a682e7b2ff5f1ae0b15277ca052f95f3a7bff4ea4b4e",
+      "bytes": 3764,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "A published 54 × 38 × 38 km prolate-spheroid approximation. The third axis repeats the minor axis by assumption. Voyager provides too few surface samples for a useful map, so the gray grid marks unavailable coverage. Ring disturbances independently constrain this moon’s mass."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "measured-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ophelia/ophelia-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ophelia/ophelia-model-surface@2x.webp",
+          "bytes": 49918,
+          "sha256": "4fa75b2304ef407d2a688641c7834bf541b521a972d186cb49b4788b6f2a2142",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5865,
+          "sha256": "59a50415139a34e2dec54c1ac58c4721b01643b7fa4143dabb3feecd48a2fe27",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

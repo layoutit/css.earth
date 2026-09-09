@@ -1,0 +1,337 @@
+{
+  "number": 119,
+  "name": "Althaea",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/238",
+  "modelId": 323,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/323",
+  "catalog": "View model 339 -67 11.46514 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "323",
+    "Asteroid": "(119) Althaea",
+    "λ": "339",
+    "β": "-67",
+    "P": "11.46514",
+    "YORP": "",
+    "t0": "2445831",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.41",
+    "p3": "0.06",
+    "p4": "-0.81",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:24:30",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1183/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1184/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1185/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1186/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/141",
+      "file": "reference-141.html",
+      "links": [
+        {
+          "label": "2011a&a...530a.134h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011a&a...530a.134h"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4114",
+          "url": "http://arxiv.org/abs/1104.4114\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H",
+          "url": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H"
+        }
+      ]
+    }
+  ],
+  "id": "althaea",
+  "displayName": "Althaea",
+  "lambda": 339.0,
+  "beta": -67.0,
+  "periodHours": 11.46514,
+  "version": "2011-04-21",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 58.79,
+  "uncertaintyKm": 0.62,
+  "akari": {
+    "number": 119,
+    "name": "Althaea",
+    "diameterKm": 58.79,
+    "uncertaintyKm": 0.62,
+    "detections": 9,
+    "originalRow": "119    Althaea                        8.42  0.15  9   58.79  0.62 0.221 0.006"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1186/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1184/IAUspin.txt",
+  "shapeSha256": "6d8297de717271593165d8e34c141a3d1565e851957dd91ddaea2ce0f15945c3",
+  "shapeBytes": 82384,
+  "vertices": 1018,
+  "faces": 2032,
+  "signedVolume": 0.9999999250627601,
+  "independentSignedVolume": 0.9999999250627601,
+  "originalVolumeEquivalentDiameter": 1.2407009508072302,
+  "firstVertex": [
+    0.233668,
+    0.173417,
+    0.453842
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.3426780442266472,
+    1.026945549425577
+  ],
+  "extentsSourceUnits": [
+    [
+      -1.000248,
+      0.825261
+    ],
+    [
+      -0.790793,
+      0.766307
+    ],
+    [
+      -0.336591,
+      0.476124
+    ]
+  ],
+  "scaleKmPerSourceUnit": 47.38450467193549,
+  "topology": {
+    "edges": 3048,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 1.2407009508072302,
+    "declaredDiameterKm": null,
+    "relativeDifference": null,
+    "scaledDiameterKm": 58.79
+  },
+  "alternatives": [
+    {
+      "modelId": 324,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/324",
+      "pole": [
+        "181",
+        "-61"
+      ],
+      "version": "2011-04-21",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Hanuš (2011)",
+          "url": "/projects/damit/references/view/141"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Hanuš2011 TableA.1 gives both poles(339,-67)/(181,-61), four dense curves over two apparitions and sparse data from three surveys. The selected solution retains the original source axes; the alternative remains possible.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "independentCenteredSignedVolume": 0.9999999250627604,
+  "surfaceAreaSourceUnitsSquared": 5.881321765974704,
+  "surfaceEquivalentDiameterSourceUnits": 1.3682407909200993,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.233668,
+        0.173417,
+        0.453842
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 7,
+      "sourcePoint": [
+        0.007431,
+        0.173417,
+        0.476124
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 454,
+      "sourcePoint": [
+        0.825261,
+        0.289866,
+        -0.138762
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 486,
+      "sourcePoint": [
+        0.313395,
+        0.766307,
+        -0.083638
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 509,
+      "sourcePoint": [
+        -0.949463,
+        0.271478,
+        -0.178415
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 522,
+      "sourcePoint": [
+        -1.000248,
+        0.147029,
+        -0.161409
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 560,
+      "sourcePoint": [
+        0.254155,
+        -0.790793,
+        -0.187801
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1016,
+      "sourcePoint": [
+        0.064033,
+        0.005875,
+        -0.336591
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1017,
+      "sourcePoint": [
+        -0.119534,
+        0.189443,
+        -0.336591
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "hanus-2011.pdf",
+      "url": "https://arxiv.org/pdf/1104.4114",
+      "label": "Hanuš et al. (2011), A&A 530, A134"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 58.79,
+    "uncertaintyKm": 0.62,
+    "reportedUncertaintyKm": 0.62,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 119,
+      "name": "Althaea",
+      "diameterKm": 58.79,
+      "uncertaintyKm": 0.62,
+      "detections": 9,
+      "originalRow": "119    Althaea                        8.42  0.15  9   58.79  0.62 0.221 0.006"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2011 TableA.1 gives both poles(339,-67)/(181,-61), four dense curves over two apparitions and sparse data from three surveys. The selected solution retains the original source axes; the alternative remains possible.",
+    "scaleKmPerSourceUnit": 47.38450467193549,
+    "metersPerSourceUnit": 47384.50467193549,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 58.79 km effective diameter (catalog ±0.62 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 2.5814366871947056,
+  "orbitalPeriodYears": 4.147633935319277,
+  "sourceFields": {
+    "ID": "323",
+    "Asteroid": "(119) Althaea",
+    "λ": "339",
+    "β": "-67",
+    "P": "11.46514",
+    "YORP": "",
+    "t0": "2445831",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.41",
+    "p3": "0.06",
+    "p4": "-0.81",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:24:30",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

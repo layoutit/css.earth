@@ -4,7 +4,7 @@
   "id": "comet-9p",
   "displayName": "Tempel 1",
   "panel": {
-    "introduction": "9P/Tempel 1 was visited by Deep Impact in 2005 and Stardust-NExT in 2011. Their images constrain the published nucleus model. In Source constraints, solid gray marks stereo control and blue marks limb silhouettes. The gray grid identifies poorly constrained regions in both views.",
+    "introduction": "Deep Impact struck Tempel 1 in 2005; Stardust returned in 2011. Explore the two encounters separately, alongside the shape model built from both visits.",
     "facts": [
       {
         "id": "diameter",
@@ -20,35 +20,26 @@
         "id": "source-epoch",
         "label": "Shape observations",
         "value": "2005 and 2011"
-      },
-      {
-        "id": "coverage",
-        "label": "Stereo coverage",
-        "value": "480 stereo control points on about 70% of the nucleus"
       }
     ],
-    "moreFacts": [
-      {
-        "id": "rendering",
-        "label": "Presentation",
-        "value": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
-      }
-    ]
+    "moreFacts": []
   },
   "lenses": {
     "titleKey": "lenses",
     "defaultLens": "constraints",
     "labels": {
       "model": "Shape model",
-      "constraints": "Source constraints"
+      "constraints": "Source constraints",
+      "deep-impact": "Deep Impact · 2005",
+      "next": "Stardust-NExT · 2011"
     },
     "controls": [
       {
         "id": "constraints",
         "label": "Source constraints",
-        "description": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
-        "title": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
-        "detail": "Grid = poorly constrained",
+        "description": "Shape measurements mapped onto the nucleus. Solid gray marks stereo measurements, blue marks limb outlines, and the grid marks poorly constrained regions.",
+        "title": "Shape-constraint map",
+        "detail": "PDS",
         "thumbnail": "/scenes/comet-9p/comet-9p-constraints-thumbnail.webp",
         "surface": "comet-9p-constraints-surface@2x.webp",
         "poles": "comet-9p-constraints-poles@2x.webp",
@@ -56,14 +47,26 @@
           "id": "pds-shape",
           "path": "../manifest.json",
           "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab"
-        }
+        },
+        "facts": [
+          {
+            "id": "stereo",
+            "label": "Gray",
+            "value": "Stereo measurements"
+          },
+          {
+            "id": "limb",
+            "label": "Blue",
+            "value": "Limb outlines"
+          }
+        ]
       },
       {
         "id": "model",
         "label": "Shape model",
-        "description": "Complete published PDS shape, simplified for display. The gray grid identifies source-flagged poorly constrained regions; solid gray covers stereo-controlled and limb-constrained regions. These are model materials, not observed albedo. Source constraints distinguishes the two better-constrained categories.",
-        "title": "Complete published PDS shape, simplified for display. The gray grid identifies source-flagged poorly constrained regions; solid gray covers stereo-controlled and limb-constrained regions. These are model materials, not observed albedo. Source constraints distinguishes the two better-constrained categories.",
-        "detail": "Grid = poorly constrained",
+        "description": "The published nucleus shape, simplified for display. Gray is a model material; the grid marks regions with weaker shape constraints.",
+        "title": "Nucleus shape reconstruction",
+        "detail": "PDS",
         "thumbnail": "/scenes/comet-9p/comet-9p-model-thumbnail.webp",
         "surface": "comet-9p-model-surface@2x.webp",
         "poles": "comet-9p-model-poles@2x.webp",
@@ -71,7 +74,75 @@
           "id": "pds-shape",
           "path": "../manifest.json",
           "url": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab"
-        }
+        },
+        "facts": [
+          {
+            "id": "diameter",
+            "label": "Equivalent diameter",
+            "value": "5.66 ± 0.20 km"
+          },
+          {
+            "id": "source-epoch",
+            "label": "Shape observations",
+            "value": "2005 and 2011"
+          }
+        ]
+      },
+      {
+        "id": "deep-impact",
+        "label": "Deep Impact · 2005",
+        "description": "Deep Impact photographed Tempel 1 shortly before impact in 2005. These views retain the original shadows. The gray grid marks gaps or poorly constrained shape.",
+        "title": "ITS mosaic",
+        "detail": "ITS",
+        "thumbnail": "/scenes/comet-9p/comet-9p-deep-impact-thumbnail.webp",
+        "surface": "comet-9p-deep-impact-surface@2x.webp",
+        "poles": "comet-9p-deep-impact-poles@2x.webp",
+        "source": {
+          "id": "iv05070405-9000632-001-r-path",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+        },
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "4 Jul 2005"
+          },
+          {
+            "id": "scale",
+            "label": "Image scale",
+            "value": "11–34 m/pixel"
+          }
+        ],
+        "summary": "These views show the surface just before the 2005 impact, with original shadows. The grid marks gaps or uncertain shape."
+      },
+      {
+        "id": "next",
+        "label": "Stardust-NExT · 2011",
+        "description": "Stardust returned to Tempel 1 six years after Deep Impact. The photographs retain their original shadows; viewing differences limit comparisons with 2005. The gray grid marks gaps.",
+        "title": "Encounter image mosaic",
+        "detail": "NAVCAM",
+        "thumbnail": "/scenes/comet-9p/comet-9p-next-thumbnail.webp",
+        "surface": "comet-9p-next-surface@2x.webp",
+        "poles": "comet-9p-next-poles@2x.webp",
+        "source": {
+          "id": "n30036te02-rr-path",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+        },
+        "facts": [
+          {
+            "id": "observed",
+            "label": "Observed",
+            "value": "15 Feb 2011"
+          },
+          {
+            "id": "scale",
+            "label": "Image scale",
+            "value": "12–42 m/pixel"
+          }
+        ],
+        "summary": "These images show the surface six years after the 2005 encounter. Lighting differs between visits; the grid marks gaps."
       }
     ]
   },
@@ -82,7 +153,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",
@@ -99,6 +170,18 @@
       "role": "surface",
       "description": "Farnham & Thomas 2013 shape model and constraint codes",
       "href": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/dataset.shtml"
+    },
+    {
+      "label": "NAVCAM",
+      "role": "surface",
+      "description": "Stardust-NExT · 2011 archived encounter images",
+      "href": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/dataset.shtml"
+    },
+    {
+      "label": "ITS",
+      "role": "surface",
+      "description": "Deep Impact · 2005 archived encounter images",
+      "href": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
     },
     {
       "label": "ESO",

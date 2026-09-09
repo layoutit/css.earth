@@ -1,0 +1,411 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "anthe",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "7d054d1b42059aa641981ccc79827fe2f8cb6ffb0b29dfe6375293a67de81703"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "5363531e03ac51d3f1cc60755e0c2333f687529eed03f0da18d8e54cce851eb3",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "anthe",
+        "displayName": "Anthe",
+        "publicBase": "/scenes/anthe/",
+        "distanceAu": 9.58,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 0.5,
+          "camera": {
+            "initialScenePitchDegrees": -15.27870100767149,
+            "defaultControlYawDegrees": 55.70926026083014
+          },
+          "mapUrl": "/scenes/anthe/anthe-model-surface@2x.webp",
+          "polesUrl": "/scenes/anthe/anthe-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 12.5,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Saturn-system ephemeris. Display pole aligned to the fitted orbital normal; arbitrary meridian, no measured spin or current landmark phase is claimed."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "266510e2f88d43ee311ce1ede11e04b93a76fb7913ffc6b39eb76ee66d4a2624",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "anthe",
+        "displayName": "Anthe",
+        "panel": {
+          "introduction": "Anthe is a tiny moon between Mimas and Enceladus, accompanied by a faint arc of dust. Cassini detected it, but did not resolve its shape accurately.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Estimated radius",
+              "value": "About 0.5 km"
+            },
+            {
+              "id": "dimensions",
+              "label": "Nominal dimensions",
+              "value": "1 × 1 × 1 km"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Distance from Saturn",
+              "value": "About 197,700 km"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Saturn",
+              "value": "About 24.9 hours"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery images",
+              "value": "Cassini imaging team · 2007"
+            },
+            {
+              "id": "shape",
+              "label": "Shape interpretation",
+              "value": "Nominal estimate; shape unresolved"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "description": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
+              "title": "Approximate shape model",
+              "detail": "Estimated size",
+              "thumbnail": "/scenes/anthe/anthe-model-thumbnail.webp",
+              "surface": "anthe-model-surface@2x.webp",
+              "poles": "anthe-model-poles@2x.webp",
+              "source": {
+                "id": "measured-ellipsoid",
+                "path": "../manifest.json",
+                "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
+              },
+              "summary": "A 1 km sphere represents the estimated size. The actual shape is unresolved; gray grid: no surface imagery."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Anthe overview",
+            "href": "https://science.nasa.gov/saturn/moons/anthe/"
+          },
+          {
+            "label": "Hedman et al.",
+            "role": "surface",
+            "description": "Cassini shape and photometric analysis",
+            "href": "https://arxiv.org/abs/1912.09192"
+          },
+          {
+            "label": "NASA/JPL; PDS",
+            "role": "observations",
+            "description": "Cassini source inventory",
+            "href": "https://pds-rings.seti.org/cassini/iss/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/saturn/moons/anthe/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "NASA/JPL nominal size estimate"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "credit": "NASA/JPL nominal size estimate; cssEarth standard grid",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 500
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "measured-ellipsoid",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "credit": "NASA/JPL nominal size estimate; cssEarth standard grid",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "coverage": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 500
+      },
+      "sha256": "b4ad5bdc90ca3fc53707b951d377fca947d791901dd72e46266914f31ac8be18",
+      "bytes": 59703,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Scientific source and authored preparation evidence.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Scientific source and authored preparation evidence.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "266510e2f88d43ee311ce1ede11e04b93a76fb7913ffc6b39eb76ee66d4a2624",
+      "bytes": 3435,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "measured-ellipsoid"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/anthe/anthe-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/anthe/anthe-model-surface@2x.webp",
+          "bytes": 57270,
+          "sha256": "4df51689d4131d18c3c1c4967b965f3254413dd4b6f4dd493daf43be55d2ad45",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 3977,
+          "sha256": "0dce7a67fc0253afbe68473dbf184e6001afef5edc49e88ac57ec21d402789b3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

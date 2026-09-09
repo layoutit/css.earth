@@ -1,0 +1,117 @@
+{
+  "body": "europa",
+  "lens": "enhanced",
+  "shadows": false,
+  "focus": {
+    "longitudeDegrees": 131.8798828125,
+    "latitudeDegrees": 28.4326171875,
+    "zoom": 1.2396521739130437
+  },
+  "pose": {
+    "controlPitch": 130.78769189390778,
+    "controlYaw": -164.70299854691237,
+    "zoom": 1.2396521739130437
+  },
+  "cameraPoint": [
+    0,
+    1.6653345369377348e-16,
+    1
+  ],
+  "scenePitchDegrees": -30.519100821393323,
+  "cameraContract": {
+    "state": {
+      "target": [
+        0,
+        0,
+        0
+      ],
+      "rotX": 34.230769230769226,
+      "rotY": 0,
+      "zoom": 1.1,
+      "distance": 0
+    },
+    "minimumControlPitchDegrees": 0,
+    "maximumControlPitchDegrees": 89,
+    "defaultControlPitchDegrees": 34.230769230769226,
+    "defaultControlYawDegrees": 0,
+    "initialScenePitchDegrees": 40,
+    "maximumScenePitchDegrees": 65,
+    "minimumZoom": 0.42,
+    "maximumZoom": 4,
+    "defaultZoom": 1.1,
+    "logicalBodyDiameter": 460,
+    "responsiveFit": {
+      "model": "continuous-aspect-smoothstep",
+      "portraitBaseWidthShare": 0.34,
+      "narrowPortraitWidthShareGain": 0.08,
+      "landscapeWidthShareGain": 0.02,
+      "narrowPortraitAspectRatio": 0.46,
+      "portraitAspectRatio": 0.75,
+      "squareAspectRatio": 1,
+      "maximumHeightShare": 0.61,
+      "maximumMobilePreviewShare": 0.925,
+      "minimumZoom": 0.42,
+      "maximumZoom": 2
+    },
+    "sceneScale": 0.02,
+    "horizontalOrbit": true,
+    "pitchBounded": false,
+    "yawBounded": false,
+    "cameraModel": "accumulated-matrix3d",
+    "defaultTransform": "scale(0.02) rotateX(40deg) rotate(0deg) translate3d(0px, 0px, 0px)",
+    "projection": {
+      "model": "css-perspective-shared-with-sky",
+      "horizontalFovDegrees": 60,
+      "focalLengthOverViewportWidth": 0.8660254037844386,
+      "cssPerspective": "86.60254037844386cqw",
+      "eyeOnCameraRootAxis": true,
+      "nearPlaneClipping": "javascript-before-publication"
+    },
+    "dolly": {
+      "model": "multiplicative-wheel-distance",
+      "wheelStepPerDelta": 0.006,
+      "minimumDistanceRadii": 1.2,
+      "maximumDistanceOverOrbitExtent": 4,
+      "maximumDistanceOverSystemExtent": 3,
+      "zoomIsSilhouetteFraming": true
+    },
+    "orbitLineFade": {
+      "visibleBelowDiscHeightShare": 0.12,
+      "hiddenAboveDiscHeightShare": 0.3
+    },
+    "levelOfDetail": {
+      "model": "silhouette-diameter-crossfade",
+      "billboardFadeStartDiscPixels": 20,
+      "billboardFullDiscPixels": 14,
+      "markerFadeStartDiscPixels": 8,
+      "markerFullDiscPixels": 4.5
+    },
+    "drag": {
+      "model": "screen-axis-tumble"
+    },
+    "planetarySystem": {
+      "model": "distance-over-orbit-extent-fade",
+      "hiddenBelowDistanceOverOrbitExtent": 1.5,
+      "visibleAboveDistanceOverOrbitExtent": 2.5
+    },
+    "sunMarker": {
+      "model": "sprite-diameter-crossfade",
+      "fadeStartSpritePixels": 16,
+      "fullSpritePixels": 8
+    },
+    "runtimeGeometryDerivation": false
+  },
+  "evidence": {
+    "independentPublishedColorAnchor": "tests/objects/unit/europa/surface.test.mjs:52",
+    "anchorCanonicalPixel": {
+      "x": 1500,
+      "y": 700,
+      "width": 4096,
+      "height": 2048
+    },
+    "sourceRecipe": "src/planets/europa/source/preparation/terrestrial.json",
+    "preparedFrame": "src/platform/solar-presentation-frame.mjs",
+    "poseHelper": "tools/objects/terrestrial-layers/scientific-focus.mjs"
+  },
+  "limit": "Pose targets the existing independently tested enhanced-vs-normal color anchor. No browser or new image decode was performed; no all-footprint color coverage assertion."
+}

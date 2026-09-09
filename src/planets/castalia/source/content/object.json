@@ -54,7 +54,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Published radar shape model",
-        "title": "Original radar reconstruction archived by NASA/JPL, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. The 1997 optical analysis statistically prefers the northern spin solution used here: period 4.089 h and ecliptic pole (253°, 56°). The alternative southern solution, period 4.094 h and pole (242°, 7°), was not absolutely excluded. This is the archived JPL shape, not a newly fitted model. Lighting uses the selected pole and an arbitrary display phase.",
+        "title": "Radar shape model",
         "thumbnail": "/scenes/castalia/castalia-shape-thumbnail.webp",
         "surface": "castalia-shape-surface@2x.webp",
         "poles": "castalia-shape-surface@2x.webp",
@@ -63,13 +63,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Shape from radar observations. The gray grid marks missing optical imagery; lighting shows the model."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Source shape · radial height",
-        "title": "Color shows original model radius minus a 0.542238 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same radar reconstruction, not an independent topographic measurement. Display resolution adds no observational detail.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/castalia/castalia-elevation-thumbnail.webp",
         "surface": "castalia-elevation-surface@2x.webp",
         "poles": "castalia-elevation-surface@2x.webp",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://echo.jpl.nasa.gov/asteroids/shapes/castalia.obj",
           "image": "/scenes/castalia/castalia-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
       }
     ]
   },

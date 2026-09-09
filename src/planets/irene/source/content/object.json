@@ -54,7 +54,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Calibrated DAMIT shape",
-        "title": "Published nonconvex DAMIT model 1842, version 2017-09-21, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. Observational constraints are uneven. Lighting uses the documented pole and an arbitrary display phase.",
+        "title": "DAMIT model 1842",
         "thumbnail": "/scenes/irene/irene-shape-thumbnail.webp",
         "surface": "irene-shape-surface@2x.webp",
         "poles": "irene-shape-surface@2x.webp",
@@ -63,13 +63,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Source shape · radial height",
-        "title": "Color shows the original model radius minus a 76.5 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/irene/irene-elevation-thumbnail.webp",
         "surface": "irene-elevation-surface@2x.webp",
         "poles": "irene-elevation-surface@2x.webp",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1842",
           "image": "/scenes/irene/irene-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
       }
     ]
   },

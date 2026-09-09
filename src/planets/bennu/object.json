@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7f97233cdd4cfc4142afae98041493453a8541616fc9af0b85dc219e7657f7e9"
+    "sha256": "c12a770aeed38bb78470a0bd564a4af0bf01aa7bccd12aeb7eb67ebd5d351587"
   },
   "id": "bennu",
   "properties": {
@@ -38,6 +38,11 @@
               "material": "lighting"
             },
             {
+              "id": "spectral",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "elevation",
               "source": "content",
               "material": "lighting"
@@ -61,7 +66,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "95b678ef073f8566a545d6a2e8276ccc5d0e0d95a0322be77eb4484663eb8281"
+          "sha256": "fa644763a02ddd161801ac5ec17d89494220d2f437e0860de78cca6c54459f9c"
         },
         {
           "id": "rotation",
@@ -71,7 +76,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "11ad30ad51acfbe05534ccd7f38e51bdd3e1ee5ad1c4403760d18d4c49c4c33e"
+          "sha256": "1f05f0f7dab37f7fa2398956477c053103a3c395ba4c975b13230bf6b726da96"
         },
         {
           "id": "title",
@@ -86,7 +91,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "085792a9f34ed29ffcd3f4d18dde52a2c1a802ec7aeb85efd76ff98e39bd99e0"
+          "sha256": "f6520b873d38373f357d5e08de62fd842b1558023ee4d14c7743164c157b06ba"
         }
       ]
     },

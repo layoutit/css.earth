@@ -1,0 +1,400 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "caliban",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "e4936e7d63dca15a7117e0a0010ab8817a955dc11897667076b1d2ee6491e3e8"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "c81435cf2ae3db9c455c2ca5b00550eb773e35bb2bd1919a544f8f225705984a",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "caliban",
+        "displayName": "Caliban",
+        "publicBase": "/scenes/caliban/",
+        "distanceAu": 19.19,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 21,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": -45,
+            "framingScale": 0.9064280432115993
+          },
+          "mapUrl": "/scenes/caliban/caliban-model-surface@2x.webp",
+          "polesUrl": "/scenes/caliban/caliban-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 525,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons geometric vectors. Published doubled rotational interpretation; phase/pole are illustrative."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "e56f6ad1cc5fe2cd0f058156b1ed3ce0b09f2a18e0b110c1c7dc943f665ca173",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "caliban",
+        "displayName": "Caliban",
+        "panel": {
+          "introduction": "Caliban is an outer moon of Uranus. Its light curve constrains a minimum elongation, while a tentative thermal measurement sets the adopted size. This is an illustrative ellipsoid with assumed depth and orientation. The grid marks unmapped terrain.",
+          "facts": [
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "Uranus"
+            },
+            {
+              "id": "shape",
+              "label": "Shape evidence",
+              "value": "Approximate model"
+            },
+            {
+              "id": "dimensions",
+              "label": "Full model dimensions",
+              "value": "46.3 × 40 × 40 km"
+            },
+            {
+              "id": "scale",
+              "label": "Size evidence",
+              "value": "42 (+20/−12) km · tentative thermal model"
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation interpretation",
+              "value": "9.948 ± 0.019 h"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "description": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+              "title": "Light-curve shape approximation",
+              "detail": "Approximate shape",
+              "thumbnail": "/scenes/caliban/caliban-model-thumbnail.webp",
+              "surface": "caliban-model-surface@2x.webp",
+              "poles": "caliban-model-poles@2x.webp",
+              "source": {
+                "id": "lightcurve-approximation",
+                "path": "../manifest.json",
+                "url": "https://arxiv.org/pdf/1706.06837"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+            "role": "surface",
+            "description": "Source measurements and model interpretation",
+            "href": "https://arxiv.org/pdf/1706.06837"
+          },
+          {
+            "label": "Uranian irregular satellites physical summary and occultation prospects",
+            "role": "facts",
+            "description": "Source measurements and model interpretation",
+            "href": "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://arxiv.org/pdf/1706.06837",
+            "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://arxiv.org/pdf/1706.06837"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "coverage": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 21000
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lightcurve-approximation",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://arxiv.org/pdf/1706.06837"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "coverage": "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 21000
+      },
+      "sha256": "830a9f52cc271ae4b4a61c5d79d86a75917babfbee528a114a8f07d37ef4b364",
+      "bytes": 62404,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Scientific source interpretation and reproducible authored input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Scientific source interpretation and reproducible authored input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e56f6ad1cc5fe2cd0f058156b1ed3ce0b09f2a18e0b110c1c7dc943f665ca173",
+      "bytes": 3378,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Approximate minimum-elongation ellipsoid from the K 2 light curve. The tentative thermal diameter is 42 (+20/−12)km. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "lightcurve-approximation"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/caliban/caliban-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/caliban/caliban-model-surface@2x.webp",
+          "bytes": 56776,
+          "sha256": "bad403e7cbd2f6458f2ad5a0f8ecc2f4293ba5aaa53732a7b520669589206c8c",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6241,
+          "sha256": "6d9705398cd21288e00915b43dcb1c01a74328b7ce757bf224c50fe4acbf1f4d",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

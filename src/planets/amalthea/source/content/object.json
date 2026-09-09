@@ -75,7 +75,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
-        "title": "Galileo clear and green-filter images registered to the PDS Stooke shape. Bounded correction and brightness matching reduce photographed shading; raw detector brightness is not calibrated albedo. Gray grid marks unavailable or unreliable samples. Resolved detail ranges from about 2.4 to 8.3 km per source pixel.",
+        "title": "SSI mosaic",
         "detail": "Galileo",
         "thumbnail": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
         "surface": "amalthea-normal-surface@2x.webp",
@@ -84,13 +84,14 @@
           "id": "c0532888100",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/galileo/ssi/"
-        }
+        },
+        "summary": "Surface brightness is adjusted to reduce photographed shading. Detail varies; the gray grid marks missing or unreliable images."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
-        "title": "Radial height above an 83.5 km reference sphere from Stooke’s Voyager-derived shape model. This shows the large irregular shape, not surveyed local topography. The 5° grid includes modeled unseen terrain; the archive warns that facets and depressions may be exaggerated.",
+        "title": "Shape-derived radial height",
         "detail": "Radial shape",
         "thumbnail": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
         "surface": "amalthea-elevation-surface@2x.webp",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
           "image": "/scenes/amalthea/amalthea-elevation-legend.webp"
-        }
+        },
+        "summary": "Height from a Voyager model, relative to an 83.5 km sphere. Unseen terrain and small features are uncertain."
       }
     ]
   },

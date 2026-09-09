@@ -20,6 +20,39 @@
           "noData": 0,
           "centerLongitude": 180
         }
+      },
+      {
+        "id": "enhanced",
+        "focus": {
+          "longitudeDegrees": 145.2,
+          "latitudeDegrees": -0.15,
+          "zoom": 1.1
+        },
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 180,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        }
+      },
+      {
+        "id": "infrared",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        },
+        "textureScale": 0.25,
+        "focus": {
+          "longitudeDegrees": 315,
+          "latitudeDegrees": -20,
+          "zoom": 1.1
+        }
       }
     ],
     "scientific": [],

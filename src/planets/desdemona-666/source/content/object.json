@@ -54,7 +54,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Calibrated DAMIT shape",
-        "title": "Published convex DAMIT model 6218, version 2022-10-18, at its original kilometer scale. The shared grid marks unavailable imagery. This is a ground-based shape reconstruction, not a photographic surface or a measured reflectance map. A convex light-curve model constrains the broad outline and cannot resolve craters or concavities. Lighting uses the documented pole and an arbitrary display phase. This is asteroid 666 Desdemona, distinct from the moon of Uranus. The source admits two pole solutions; this view uses model 6218.",
+        "title": "DAMIT model 6218",
         "thumbnail": "/scenes/desdemona-666/desdemona-666-shape-thumbnail.webp",
         "surface": "desdemona-666-shape-surface@2x.webp",
         "poles": "desdemona-666-shape-surface@2x.webp",
@@ -63,13 +63,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape"
+        "detail": "Published shape",
+        "summary": "Shape made from changes in brightness as the asteroid rotates. Gray grid: no surface imagery."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Source shape · radial height",
-        "title": "Color shows the original model radius minus a 14.2 km reference sphere. It includes global shape and is not height above a gravitational equipotential. This is a derived view of the same reconstruction, not an independent measured topographic map. Display resolution adds no observational detail.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/desdemona-666/desdemona-666-elevation-thumbnail.webp",
         "surface": "desdemona-666-elevation-surface@2x.webp",
         "poles": "desdemona-666-elevation-surface@2x.webp",
@@ -91,7 +92,8 @@
           "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6218",
           "image": "/scenes/desdemona-666/desdemona-666-elevation-legend.webp"
         },
-        "detail": "Shape-derived radial height"
+        "detail": "Shape-derived radial height",
+        "summary": "Distance above or below a reference sphere. Colors include the body's shape as well as local terrain."
       }
     ]
   },

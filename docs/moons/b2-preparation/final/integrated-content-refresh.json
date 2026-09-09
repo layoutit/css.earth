@@ -1,0 +1,218 @@
+[
+  {
+    "id": "moon",
+    "object": {
+      "id": "moon",
+      "bytes": 356226,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "6ad1fef826b448deb2a86a9093224fcbe1dab283459944ad89cb3d8be852f0fe"
+    },
+    "preserved": {
+      "scene.json": "481c9a8a8890622aad619460bfa108ea01698ae4836369ad3ec701c52b591277",
+      "surfaces.json": null,
+      "material.json": null,
+      "assets.json": null
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "phobos",
+    "object": {
+      "id": "phobos",
+      "bytes": 7327535,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "000b30a994b4e046877138e89e54ffed0d9a9b1dc25266d8ad676c0c81993837"
+    },
+    "preserved": {
+      "scene.json": "42ae07e5d1dadab3d716db56e1e0de4c610fafefd39179bf86e80251c053d036",
+      "surfaces.json": "518703ffddfef8cc15f05e9795b0408899f74ffcc30cfbf16e6411f3c2e60114",
+      "material.json": "9ca5ccbeabc9d3e840c0ce44676ae9074991f6465c8f8f868e6d6979c9e1455b",
+      "assets.json": "cae9070ecd7e8f98365fdf5594b700bf98e33c6ba22dc8284566cd6ecdb36ec7"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "deimos",
+    "object": {
+      "id": "deimos",
+      "bytes": 7398058,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "c32f491679e3cab7b35476c3b6538150c73774ccb1595c45e84c70d30fc3c741"
+    },
+    "preserved": {
+      "scene.json": "5c7ca1002fc17fb628dfc0d5a2033e89800b0ba4d03cc26166a2f861d0c346f4",
+      "surfaces.json": "3bb14037af3cc59ebacbac509b7e9ccda196ab66ba5078e33785ffc264e6584f",
+      "material.json": "1858fbcd49b438ea6dab737a4fda7539e193f141a3fab53f5eba30899fe102fb",
+      "assets.json": "27fedaf809446520821505809adeb37558d5b4d29b0c158559e18256802c3f70"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "io",
+    "object": {
+      "id": "io",
+      "bytes": 6311155,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "9a140ea0f48d575a0effa6025e88f3849cebea712df26f0cb695f3b5bfe43e9f"
+    },
+    "preserved": {
+      "scene.json": "5c147055abbdeb59b05a031f59116bbe2e32cdc10a54cf95c0e68bae0f12cb58",
+      "surfaces.json": "836627518c7aa5cca4b2bf8b539cf1a3acdf7058892ed3d6e61bd32ec2fb66a0",
+      "material.json": "401e4a691d27ace116403a6441e8fed69d1b0ee467ff1bab0c187110c0a4a9e2",
+      "assets.json": "6669997a6d4ac7c532b6261180084b0552f6a83510a5ca103a40129da050f326"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "europa",
+    "object": {
+      "id": "europa",
+      "bytes": 6317924,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "f62cec28cbc39f8a3025402efef0aaeefe4eb225a85e97c9c2f014d6fe9a776f"
+    },
+    "preserved": {
+      "scene.json": "458b5e61ff45e7c1c1f717306eb0d915bac87edad928a1ea6add63dd2d46ce52",
+      "surfaces.json": "d9ed082f4eede3dc7d24eb64e7254f9c7265938f78c41e8ad670b159c847403c",
+      "material.json": "a53b14c1ff4c661f45a6d0c32c06397d13c90861733ac449c1c8871dd5bb79ed",
+      "assets.json": "885d54e72fb130bdc009cacbc32e4352ff87bd78e01723cbffa0280fea2454c8"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "ganymede",
+    "object": {
+      "id": "ganymede",
+      "bytes": 6319830,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "1f6265f9599e91ac49b08ca4d5fd13a68d7fdb794a8889a2b6f7f49b5d980d7d"
+    },
+    "preserved": {
+      "scene.json": "752b1a705b9205708983661b88b6858f3bde489d32df2156d84abd71bc1de81f",
+      "surfaces.json": "56e5fe12d337d201f8371062e1c1c38f6351665543d4c313cf9b6499153b2d9a",
+      "material.json": "a0aca3adb07fca46e89faf2fe3eca1dbc8b9bdb233e3e6b32b825ca63eb5367e",
+      "assets.json": "14c3b701f57c3d4685aec2041107a4f99a4642a90bd7f3beb554d838e03ea9c3"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "enceladus",
+    "object": {
+      "id": "enceladus",
+      "bytes": 7795758,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "d4ebe80c7c540b234a455d4b5952be64acfe750b6517fa275600ee267818aec1"
+    },
+    "preserved": {
+      "scene.json": "160b6f421a1d85813c91bc13ce7fd087d242c155cf039eeb9d8d6c8a6ab198db",
+      "surfaces.json": "7806870ebc5a1f6185eac648f22ba1ccf8784c617f3b1c46ba16adf5369880f9",
+      "material.json": "b3b557bdcc4905ab42e367c50beac02b280ae7271a927fe035cd4f81e042bad6",
+      "assets.json": "e8ef91ac16aa6f7c264046c6f0e83663e93a2246705104cc0785723bd49b4ddd"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "tethys",
+    "object": {
+      "id": "tethys",
+      "bytes": 7684035,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "b92c2c53c5bcf8997e7f833e71398e4abac8d1064ae10186e9e21d073b98570d"
+    },
+    "preserved": {
+      "scene.json": "b7046e9658cc47abe79a4a20cf13796c0de8876bd31a319dd367d590a48c590d",
+      "surfaces.json": "198f6f926f4acce05b4b4ecc00499cb6fe456d0f51c6472d62bdd7a61001435d",
+      "material.json": "b01d69ce435d47ebc08fd767c192658554c35aa9570fa63ae87e1567cb2c28c4",
+      "assets.json": "e3fe1a2b31c4ac470fe2654f56e0190345a836c63b6747e52592084decc11fe5"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "dione",
+    "object": {
+      "id": "dione",
+      "bytes": 7679777,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "553cdea431334f91dc9fcd61accbf87a7b9670c6515651b953fcdf863c52b0ad"
+    },
+    "preserved": {
+      "scene.json": "4bae26ccf6670938bad68c5c18a4a112bb8a94adf2567ab59f0b479159f2fdeb",
+      "surfaces.json": "df85d4b8093fec621fbe681ea7164adc4a391e77114083c85c20fce4f089c446",
+      "material.json": "a38ead933d7c4d34b31fc14b06a28ec5ffecd89ee0084b6e06b9567e841a71ee",
+      "assets.json": "188cb4dc2421e1534532305feeebef8e1c1013e939975e0c7b830b2bced4d805"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "rhea",
+    "object": {
+      "id": "rhea",
+      "bytes": 7680243,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "bbb5a918394b0e263f30caf9344f9f518ffa0819492a3bf62b61491b1ad10e4a"
+    },
+    "preserved": {
+      "scene.json": "c7430f10c4acdf5acb09f4b44a1b8f046d90eb11bd143695ca7db5dec933a93f",
+      "surfaces.json": "3ed2738dbde45fee740d941680ddeb25d4ab2c41a514c3c4af5a20b98deb27c9",
+      "material.json": "281564404afc2ddd7328a2cd52178d432743586fbf20ce025eabcd93d9bd4053",
+      "assets.json": "7a3b4764bb6681fa594c275d468b85c64f98ac2c28df401441af383740ec5ca8"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "titan",
+    "object": {
+      "id": "titan",
+      "bytes": 6324242,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "96564ae40d1a56fceef4b754b8d307edbce719099e0f22670523178507d05791"
+    },
+    "preserved": {
+      "scene.json": "7e8e1515bc5b772bf8a53b4b0193b7636aa6f8308c05d93225ec951478111db2",
+      "surfaces.json": "6a8ab8508a1e1de2a12451789c599a99c25650a33c04798a5abf0ba591ceccc8",
+      "material.json": "8e1c587af8067ebf45c1fb2a3036ef97ab9be608bba73b3b4d6d52ebb7242377",
+      "assets.json": "9c9c67ca416af2645499e3ce7340f99d26a69d8414468228b9a78cff50cc241e"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "charon",
+    "object": {
+      "id": "charon",
+      "bytes": 6330789,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "73176f58e633859e4b51d0daba54df6c856877923f553146087452d233c98ab2"
+    },
+    "preserved": {
+      "scene.json": "5187ae429210d785b6a2bb8e00933b43443c7cc6518b91569b90f8e0f9720caa",
+      "surfaces.json": "525cbe814c5449cdb3dd3c561de518750e7245602939116dc5e492ec76e89919",
+      "material.json": "2d150cfeb7cbb5626e1c81c035ddac28a3be14e6a0b9e453a2451200c1e18e82",
+      "assets.json": "bd360ed280f70ee8253b2a8958d76725049728e6bee17fd7c543d4559eb93678"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  }
+]

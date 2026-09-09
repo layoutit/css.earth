@@ -1,0 +1,671 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "triton",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "116a6103f62e803924228220a30268e287bb846e171a80cae50c09c7c7e4b053"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "931308680fdd1456c0dd0d1a16a14b4880c3084043aad766c5eb06d84fded2e0",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "triton",
+        "displayName": "Triton",
+        "publicBase": "/scenes/triton/",
+        "distanceAu": 30.07,
+        "raster": {
+          "width": 14336,
+          "height": 7168,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 1024,
+          "surfaceQuality": 90,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "enhanced",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 0,
+                "centerLongitude": 0
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [
+            {
+              "id": "normal",
+              "format": "controlled-orthographic",
+              "consumer": "monochrome-frames",
+              "directory": "fully_processed",
+              "filter": "CLEAR",
+              "imageIds": [
+                "c1139255",
+                "c1139303",
+                "c1139330",
+                "c1139340",
+                "c1139350",
+                "c1139401",
+                "c1139411",
+                "c1139421",
+                "c1139427",
+                "c1139433",
+                "c1139445",
+                "c1139451",
+                "c1139457",
+                "c1139503",
+                "c1139509",
+                "c1139515",
+                "c1139521",
+                "c1139527",
+                "c1139533",
+                "c1139607",
+                "c1139613",
+                "c1139615",
+                "c1139617",
+                "c1139619",
+                "c1139621",
+                "c1139623",
+                "c1139625",
+                "c1139627",
+                "c1139629"
+              ],
+              "photometry": {
+                "consumer": "photometry",
+                "vectors": {
+                  "sun": "photometry/horizons-sun.json",
+                  "observer": "photometry/horizons-observer.json"
+                },
+                "model": "Lunar-Lambert",
+                "weight": 0.5,
+                "referenceIncidenceDegrees": 30,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 80,
+                "maximumEmissionDegrees": 80,
+                "maximumGain": 6,
+                "radiusKm": 1352.6,
+                "gamma": 1.4,
+                "displayMaximum": 0.9,
+                "phaseNormalization": false,
+                "matchStride": 16,
+                "minimumMatchSamples": 100,
+                "minimumLevel": 0.67,
+                "maximumLevel": 1.5
+              },
+              "metadata": {
+                "label": "Monochrome",
+                "falseColor": false,
+                "coverage": "Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
+                "projection": {
+                  "type": "equirectangular",
+                  "longitudeDegrees": [
+                    0,
+                    360
+                  ],
+                  "latitudeDegrees": [
+                    90,
+                    -90
+                  ],
+                  "longitudeDirection": "east-positive"
+                },
+                "source": {
+                  "id": "usgs-2023-triton-clear-frames",
+                  "sha256": "59c2a4133472869afddc42c00b5a9becd7c0dda028ac646490af933ac0ce2fac"
+                }
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 1352.6,
+          "camera": {
+            "initialScenePitchDegrees": 0.07660023829056974,
+            "defaultControlYawDegrees": 84.33721713315796
+          },
+          "mapUrl": "/scenes/triton/triton-normal-surface@2x.webp",
+          "polesUrl": "/scenes/triton/triton-normal-poles@2x.webp"
+        },
+        "celestial": {
+          "sunSource": "JPL Triton orbit plus VSOP87 Neptune position and IAU/WGCCRE Triton rotation"
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            184,
+            175,
+            165
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "fb3b4056001a0384a0c9077ac8b64e05d86f85a6ba65a9c43da83a91f60c2a2c",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "triton",
+        "displayName": "Triton",
+        "title": {
+          "label": "Triton",
+          "viewBox": "0 0 69.6842 35",
+          "width": 69.6842,
+          "height": 35,
+          "path": "M0 11.29L0 8.63L15.97 8.63L15.97 11.29L9.53 11.29L9.53 29L6.47 29L6.47 11.29ZM16.13 29L16.13 14.37L18.95 14.37L18.95 16.75L19.02 16.75Q19.41 15.53 20.32 14.86Q21.22 14.18 22.6 14.18Q22.91 14.18 23.2 14.21Q23.49 14.23 23.69 14.26L23.69 17Q23.52 16.94 23.09 16.89Q22.65 16.85 22.16 16.85Q21.3 16.85 20.59 17.23Q19.88 17.61 19.46 18.38Q19.05 19.16 19.05 20.3L19.05 29ZM25.94 29L25.94 14.37L28.86 14.37L28.86 29ZM27.42 11.91Q26.64 11.91 26.11 11.4Q25.57 10.9 25.57 10.16Q25.57 9.39 26.11 8.88Q26.64 8.37 27.41 8.37Q28.19 8.37 28.72 8.88Q29.25 9.39 29.25 10.16Q29.25 10.9 28.72 11.4Q28.19 11.91 27.42 11.91ZM39.24 14.37L39.24 16.78L30.9 16.78L30.9 14.37ZM33.38 10.5L36.29 10.5L36.29 25.1Q36.29 25.94 36.64 26.28Q36.99 26.62 37.85 26.62Q38.15 26.62 38.54 26.61Q38.94 26.59 39.23 26.58L39.34 28.97Q38.97 29.01 38.46 29.03Q37.94 29.05 37.46 29.05Q35.43 29.05 34.4 28.15Q33.38 27.25 33.38 25.47ZM47.58 29.33Q45.52 29.33 43.94 28.36Q42.37 27.4 41.5 25.68Q40.62 23.97 40.62 21.71Q40.62 19.46 41.5 17.73Q42.37 16.01 43.94 15.04Q45.52 14.07 47.58 14.07Q49.69 14.07 51.25 15.04Q52.8 16.01 53.68 17.73Q54.55 19.46 54.55 21.71Q54.55 23.97 53.68 25.68Q52.8 27.4 51.25 28.36Q49.69 29.33 47.58 29.33ZM47.58 26.81Q48.87 26.81 49.76 26.17Q50.66 25.53 51.14 24.38Q51.61 23.23 51.61 21.73Q51.61 20.18 51.14 19.03Q50.66 17.88 49.76 17.24Q48.87 16.59 47.58 16.59Q46.32 16.59 45.43 17.23Q44.53 17.87 44.06 19.03Q43.59 20.18 43.59 21.73Q43.59 23.24 44.06 24.39Q44.53 25.53 45.43 26.17Q46.34 26.81 47.58 26.81ZM60.09 20.52L60.09 29L57.17 29L57.17 14.37L60.03 14.37L60.03 18.01L59.43 18.01Q60.14 16.04 61.41 15.08Q62.67 14.11 64.48 14.11Q65.97 14.11 67.14 14.76Q68.32 15.41 69 16.68Q69.68 17.95 69.68 19.85L69.68 29L66.77 29L66.77 20.21Q66.77 18.49 65.94 17.6Q65.1 16.71 63.59 16.71Q62.62 16.71 61.82 17.12Q61.02 17.53 60.55 18.37Q60.09 19.21 60.09 20.52Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Neptune’s largest moon follows a retrograde orbit. Voyager revealed nitrogen frost, strange cantaloupe terrain and active geyser-like plumes.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "1,352.6 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "30.070 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Neptune",
+              "value": "5.88 days · retrograde"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "5.88 days (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Neptune",
+              "value": "About 354,800 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "William Lassell · 1846"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "2.06 ± 0.01 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "enhanced": "Enhanced color"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
+              "title": "Clear-filter mosaic",
+              "thumbnail": "/scenes/triton/triton-normal-thumbnail.webp",
+              "surface": "triton-normal-surface@2x.webp",
+              "poles": "triton-normal-poles@2x.webp",
+              "source": {
+                "id": "usgs-2023-triton-clear-frames",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.5066/P9MGH7FB"
+              },
+              "detail": "Corrected Voyager mosaic",
+              "summary": "Each image is corrected using its capture geometry before joining the mosaic. Missing coverage and unreliable views stay empty."
+            },
+            {
+              "id": "enhanced",
+              "label": "Enhanced color",
+              "description": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
+              "title": "Enhanced-color map",
+              "thumbnail": "/scenes/triton/triton-enhanced-thumbnail.webp",
+              "surface": "triton-enhanced-surface@2x.webp",
+              "poles": "triton-enhanced-poles@2x.webp",
+              "source": {
+                "id": "voyager-triton-enhanced-color",
+                "path": "../manifest.json",
+                "url": "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
+              },
+              "detail": "Corrected O/G/B color",
+              "summary": "Orange, green and blue bands form an enhanced-color view. Detail varies; the unlit northern region stays unavailable."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Triton overview",
+            "href": "https://science.nasa.gov/neptune/moons/triton/"
+          },
+          {
+            "label": "USGS",
+            "role": "surface",
+            "description": "Controlled Voyager imagery · Michael Bland",
+            "href": "https://doi.org/10.5066/P9MGH7FB"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "LPI",
+            "role": "surface",
+            "description": "2014 corrected color map",
+            "href": "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/neptune/moons/triton/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "credit": "NASA/JPL; Paul Schenk, Lunar and Planetary Institute",
+      "license": "NASA/JPL imagery; LPI permits public map use with the stated credit",
+      "licenseEvidence": [
+        "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
+      ],
+      "acquisition": "Restore the pinned source through source/preparation/acquisition.json.",
+      "redistribution": "Retain NASA/JPL and author credits.",
+      "id": "voyager-triton-enhanced-color",
+      "path": "observations/tnmap-cyl-KH.jpg",
+      "origin": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg",
+      "catalog": "https://www.lpi.usra.edu/icy_moons/neptune/triton/",
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 14138,
+      "height": 7069,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1352600
+      },
+      "coverage": "Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg"
+      },
+      "sha256": "ff533af3163f53cc5560cd983cfe0f06b1c2cd0f3db36518d4c5cc5f5ddfeabb",
+      "bytes": 12442504,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/tnmap-cyl-KH.jpg",
+        "url": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "voyager-triton-sun-vectors",
+      "path": "photometry/horizons-sun.json",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40801%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272447763.752269036%0A2447763.753363481%0A2447763.754474592%0A2447763.7567134807%0A2447763.7578079253%0A2447763.758919036%0A2447763.7599968025%0A2447763.7611079137%0A2447763.7621968025%0A2447763.763330136%0A2447763.764441247%0A2447763.765530136%0A2447763.766663469%0A2447763.76777458%0A2447763.7717134575%0A2447763.777269013%0A2447763.7828078903%0A2447763.7889356567%0A2447763.7944912123%0A2447763.8000300894%0A2447763.8033800893%0A2447763.806713411%0A2447763.8133800663%0A2447763.8167133997%0A2447763.820030066%0A2447763.823380055%0A2447763.826713388%0A2447763.830030055%0A2447763.8333633766%0A2447763.83669671%0A2447763.8400300434%0A2447763.8589188973%0A2447763.8622411196%0A2447763.863363342%0A2447763.864463342%0A2447763.865585564%0A2447763.866685564%0A2447763.867807775%0A2447763.868907775%0A2447763.870029997%0A2447763.871129997%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "license": "Public data",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/"
+      ],
+      "acquisition": "Pinned source response",
+      "redistribution": "Retain NASA/JPL credit",
+      "sha256": "0204e69032f964e6cde29c866bea48fff33c34d6db2947ab0bd2d43107c18779",
+      "bytes": 12149,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "voyager-triton-observer-vectors",
+      "path": "photometry/horizons-observer.json",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-32%27&CENTER=%27500%40801%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272447763.752269036%0A2447763.753363481%0A2447763.754474592%0A2447763.7567134807%0A2447763.7578079253%0A2447763.758919036%0A2447763.7599968025%0A2447763.7611079137%0A2447763.7621968025%0A2447763.763330136%0A2447763.764441247%0A2447763.765530136%0A2447763.766663469%0A2447763.76777458%0A2447763.7717134575%0A2447763.777269013%0A2447763.7828078903%0A2447763.7889356567%0A2447763.7944912123%0A2447763.8000300894%0A2447763.8033800893%0A2447763.806713411%0A2447763.8133800663%0A2447763.8167133997%0A2447763.820030066%0A2447763.823380055%0A2447763.826713388%0A2447763.830030055%0A2447763.8333633766%0A2447763.83669671%0A2447763.8400300434%0A2447763.8589188973%0A2447763.8622411196%0A2447763.863363342%0A2447763.864463342%0A2447763.865585564%0A2447763.866685564%0A2447763.867807775%0A2447763.868907775%0A2447763.870029997%0A2447763.871129997%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics",
+      "license": "Public data",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/"
+      ],
+      "acquisition": "Pinned source response",
+      "redistribution": "Retain NASA/JPL credit",
+      "sha256": "1f3e3ca7884365b866b5c26dc6243932dec7da61e927ed5614a5633a3382e32d",
+      "bytes": 13670,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "NASA/JPL; USGS Astrogeology",
+      "license": "Public domain / CC0",
+      "licenseEvidence": [
+        "https://www.usgs.gov/data/high-resolution-voyager-2-images-neptunes-moon-triton"
+      ],
+      "acquisition": "Restore the pinned source through source/preparation/acquisition.json.",
+      "redistribution": "Retain NASA/JPL and author credits.",
+      "id": "usgs-2023-triton-clear-frames",
+      "path": "observations/fully_processed.zip",
+      "origin": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594",
+      "catalog": "https://doi.org/10.5066/P9MGH7FB",
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594"
+      },
+      "sha256": "59c2a4133472869afddc42c00b5a9becd7c0dda028ac646490af933ac0ce2fac",
+      "bytes": 103721158,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/fully_processed.zip",
+        "url": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source metadata, license evidence, or authored preparation and content.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "fb3b4056001a0384a0c9077ac8b64e05d86f85a6ba65a9c43da83a91f60c2a2c",
+      "bytes": 7586,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "enhanced",
+      "label": "Enhanced color",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies."
+      ],
+      "lensIds": [
+        "enhanced"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 0,
+          "centerLongitude": 0
+        }
+      },
+      "inputs": [
+        "voyager-triton-enhanced-color"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/triton/triton-enhanced-thumbnail.webp",
+          "bytes": 5856,
+          "sha256": "e8ca1c373f4e61fcb31ff05b8d2ffa3021784eb6da957dd9cba9b61adba8997b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/triton/triton-enhanced-surface@2x.webp",
+          "bytes": 5029180,
+          "sha256": "1c3b28bf73b0b3ca1c018d5d2e4999f676ffbd2a81c32250ecb317e3bb83cfc6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/triton/triton-enhanced-poles@2x.webp",
+          "bytes": 36936,
+          "sha256": "8fe14ee708d9f96afc062965e71857132f18ea672f7d1fd045a04f3e4b737422",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "parents": [],
+      "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Monochrome: Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "mosaics"
+      },
+      "inputs": [
+        "voyager-triton-sun-vectors",
+        "voyager-triton-observer-vectors",
+        "usgs-2023-triton-clear-frames"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/triton/triton-normal-thumbnail.webp",
+          "bytes": 1894,
+          "sha256": "bb8cb6f3b17142ae3dac6c065e2d793e237b8064de5329fdf3a165d4d3b79a56",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/triton/triton-normal-surface@2x.webp",
+          "bytes": 1847950,
+          "sha256": "b22c23099fb25a4bbe4517090b5629e2768d66d55472d9605cd22516e0ff3d92",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/triton/triton-normal-poles@2x.webp",
+          "bytes": 24348,
+          "sha256": "32a8e63d88d593b12643819ece768c71a30aa09ced226b777356e7eb295e1ddc",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4521,
+          "sha256": "5f4dab5b02ff68bfc23ca3bb8e34ebc798d7deb17bc6f21f9bd0ab62099710c1",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:enhanced",
+      "label": "Enhanced color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "enhanced"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/enhanced.webp",
+          "bytes": 29774,
+          "sha256": "b542628b02e4665a3ea75d6a8ca85e0c2a24eb12e5403d314768c6536a6acaea",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/mosaics/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 9048,
+          "sha256": "34002d5aec5d79517004e4501a4d6361393a98ca4ca567bc4bba1f8517f9d295",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

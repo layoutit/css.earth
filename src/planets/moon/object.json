@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cf20e08fccca3595fc723df9578c9db82f65daba5641f90809e6e89f23895d38"
+    "sha256": "54c32ca7399b2a4d8a06222c484bf0acbb799cd535dd1f1f4abf4e897b55965c"
   },
   "id": "moon",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "3446d4dea61ff66229387628bf3e31d448e925409643010d7d1811486911fab1"
+          "sha256": "ccb8c30e7840c19bc3d6e6958b40bea14e5fbf2049306b19cce02438c9af8bde"
         },
         {
           "id": "geometry",
@@ -41,12 +41,12 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "d3697fb7fcaf344834607712df3bed01558d2b4e85724599fd73f751671027e3"
+          "sha256": "8013c65f1a2d60fb0a28458e3e8175b5fa02372bb4d550cb0895c78c2e78c9a2"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "98847e9f911898b5ce49dff021788efa2138d67aa145f8d99638c51be22b511e"
+          "sha256": "7e207c0a32f4a879c1767d2c2634505bb8b1639e937d7b4d7382165f1ae06101"
         },
         {
           "id": "navigation",
@@ -56,7 +56,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c9a425532390dc7fc5c41b769a6907f97be1afacdc60b6877bb894ba67aa3827"
+          "sha256": "527c814f547494492a0921ceff6fc842a7fdf6ec87b08e1e08df8f0deaa75c0e"
         },
         {
           "id": "physical",
@@ -86,6 +86,21 @@
             },
             {
               "id": "crust",
+              "source": "content",
+              "material": "curvature"
+            },
+            {
+              "id": "rock-abundance",
+              "source": "content",
+              "material": "curvature"
+            },
+            {
+              "id": "silicate-signature",
+              "source": "content",
+              "material": "curvature"
+            },
+            {
+              "id": "geology",
               "source": "content",
               "material": "curvature"
             }

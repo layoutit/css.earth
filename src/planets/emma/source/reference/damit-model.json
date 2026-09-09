@@ -1,0 +1,317 @@
+{
+  "number": 283,
+  "name": "Emma",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/160",
+  "modelId": 1859,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1859",
+  "catalog": "View model 257 23 6.895226 AO.png | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1859",
+    "Asteroid": "(283) Emma",
+    "λ": "257",
+    "β": "23",
+    "P": "6.895226",
+    "YORP": "",
+    "t0": "2443420.3",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "147",
+    "σD": "14",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-09-21",
+    "Comment": "",
+    "Created": "2017-09-21 14:26:25",
+    "Modified": "2017-09-21 14:37:24",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.png": "https://damit.cuni.cz/projects/damit/stored_files/open/565/AO.png",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/566/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/567/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/568/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Viikinkoski et al. (2017)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/171",
+      "file": "reference-171.html",
+      "links": [
+        {
+          "label": "2017a&a...607a.117v",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2017a&a...607a.117v"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2017A%26A...607A.117V",
+          "url": "http://adsabs.harvard.edu/abs/2017A%26A...607A.117V\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1708.05191",
+          "url": "https://arxiv.org/abs/1708.05191"
+        }
+      ]
+    }
+  ],
+  "id": "emma",
+  "displayName": "Emma",
+  "lambda": 257.0,
+  "beta": 23.0,
+  "periodHours": 6.895226,
+  "version": "2017-09-21",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 147.0,
+  "uncertaintyKm": 14.0,
+  "akari": {
+    "number": 283,
+    "name": "Emma",
+    "diameterKm": 122.07,
+    "uncertaintyKm": 1.38,
+    "detections": 12,
+    "originalRow": "283    Emma                           8.72  0.15 12  122.07  1.38 0.039 0.001"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/568/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/566/IAUspin.txt",
+  "shapeSha256": "69317058f905f986f877add7e2e51a6ff8c3870852a334e4551d8cfd0311a5a2",
+  "shapeBytes": 32486,
+  "vertices": 402,
+  "faces": 800,
+  "signedVolume": 1674280.6278942444,
+  "independentSignedVolume": 1674280.6278942444,
+  "originalVolumeEquivalentDiameter": 147.32503173934842,
+  "firstVertex": [
+    5.507804,
+    0.387291,
+    57.731355
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    56.58409367072978,
+    105.79148865834114
+  ],
+  "extentsSourceUnits": [
+    [
+      -104.149596,
+      91.289304
+    ],
+    [
+      -67.537009,
+      69.489191
+    ],
+    [
+      -61.573545,
+      61.385355
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9977937779105762,
+  "alternatives": [
+    {
+      "modelId": 196,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/196",
+      "pole": [
+        "251",
+        "22"
+      ],
+      "version": "2008-11-14",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "T. Michalowski (2006)",
+          "url": "/projects/damit/references/view/111"
+        },
+        {
+          "label": "M. Fauerbach (2004)",
+          "url": "/projects/damit/references/view/124"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves",
+  "selectionNotes": "The 2017 ADAM study combines29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent147±14 km; the paper ensemble is142±14 km, spanning different raw/deconvolved image and shape supports. The archived raw shape volume is explicitly reconciled to147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.",
+  "selectedPoleStatus": "resolved imaging rejects opposite pole",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "viikinkoski-2017.pdf",
+      "url": "https://arxiv.org/pdf/1708.05191",
+      "label": "Viikinkoski et al. (2017), A&A 607, A117"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 147.0,
+    "uncertaintyKm": 14.0,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1859",
+    "sourceLabel": "DAMIT model 1859",
+    "reference": "DAMIT model 1859",
+    "limitations": "The 2017 ADAM study combines29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent147±14 km; the paper ensemble is142±14 km, spanning different raw/deconvolved image and shape supports. The archived raw shape volume is explicitly reconciled to147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.",
+    "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 147 ± 14 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9977937779105762,
+    "metersPerSourceUnit": 997.7937779105762
+  },
+  "independentCenteredSignedVolume": 1674280.6278942444,
+  "surfaceAreaSourceUnitsSquared": 71510.03835394682,
+  "surfaceEquivalentDiameterSourceUnits": 150.87197277640178,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        5.507804,
+        0.387291,
+        57.731355
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 19,
+      "sourcePoint": [
+        -31.212696,
+        0.387291,
+        61.385355
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 154,
+      "sourcePoint": [
+        5.507804,
+        69.489191,
+        8.648855
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 171,
+      "sourcePoint": [
+        -9.760096,
+        -67.537009,
+        9.681055
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 181,
+      "sourcePoint": [
+        91.289304,
+        0.387291,
+        -1.366545
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 200,
+      "sourcePoint": [
+        -104.149596,
+        16.577691,
+        -1.366545
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 201,
+      "sourcePoint": [
+        -101.919596,
+        0.387291,
+        -1.366545
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 399,
+      "sourcePoint": [
+        -6.856996,
+        0.387291,
+        -61.573545
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 401,
+      "sourcePoint": [
+        5.507804,
+        0.387291,
+        -61.503845
+      ]
+    }
+  ],
+  "distanceAu": 3.0505638561088526,
+  "orbitalPeriodYears": 5.328173800897145,
+  "sourceFields": {
+    "ID": "1859",
+    "Asteroid": "(283) Emma",
+    "λ": "257",
+    "β": "23",
+    "P": "6.895226",
+    "YORP": "",
+    "t0": "2443420.3",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "147",
+    "σD": "14",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2017-09-21",
+    "Comment": "",
+    "Created": "2017-09-21 14:26:25",
+    "Modified": "2017-09-21 14:37:24",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

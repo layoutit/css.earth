@@ -1,3 +1,9 @@
+import {loadPdsFloatMap} from './pds-float-map.mjs';
+import { loadImageDemScience } from './image-dem-science.mjs';
+import {loadPdsImage} from './pds-image.mjs';
+import {loadFacetScalarSurface} from './facet-scalars.mjs';
+import {loadVtkCategories} from './vtk-categories.mjs';
+import {loadGeologySurface, categoryColorForValue} from './categorical-geology.mjs';
 import { loadScalarMap } from './pds-scalar-map.mjs';
 import { resolve } from 'node:path';
 import { fromFile } from 'geotiff';
@@ -9,7 +15,9 @@ import { loadPdsRadialTable } from './pds-radial-table.mjs';
 import { loadShapeScalarGrid } from './obj-shape.mjs';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
-export function colorForValue(value, { minimum, maximum, colors }) {
+export function colorForValue(value, recipe) {
+  if (recipe.categories) return categoryColorForValue(value, recipe);
+  const { minimum, maximum, colors } = recipe;
   const t = Math.max(0, Math.min(1, (value - minimum) / (maximum - minimum))) * (colors.length - 1);
   const i = Math.min(colors.length - 2, Math.floor(t)), fraction = t - i;
   const rgb = hex => [1, 3, 5].map(offset => parseInt(hex.slice(offset, offset + 2), 16));
@@ -71,7 +79,37 @@ export function scienceMapPoint(longitude, latitude, grid) {
   return [wrapped * radians * radius, latitude * radians * radius];
 }
 
+export function validateScienceQualityMasks(lens) {
+  if(lens.qualityMasks===undefined)return;
+  if(!['isis3','geotiff'].includes(lens.format)||lens.sampling!=='nearest'||lens.additionalGrids||
+      !Array.isArray(lens.qualityMasks)||!lens.qualityMasks.length||lens.qualityMasks.some(mask=>
+        !['isis3','geotiff'].includes(mask.format)||mask.sampling!=='nearest'||mask.qualityMasks||mask.additionalGrids||mask.valueTransform||
+        typeof mask.path!=='string'||!mask.path||mask.path.startsWith('/')||mask.path.split('/').includes('..')||
+        !mask.grid||![mask.grid.width,mask.grid.height].every(n=>Number.isSafeInteger(n)&&n>0)||
+        !Number.isFinite(mask.minimum)&&!Number.isFinite(mask.maximum)||
+        mask.minimum!==undefined&&!Number.isFinite(mask.minimum)||mask.maximum!==undefined&&!Number.isFinite(mask.maximum)||
+        mask.minimum!==undefined&&mask.maximum!==undefined&&mask.minimum>mask.maximum))
+    throw new TypeError('Scientific quality masks require bounded numeric nearest-neighbor grids and nearest source sampling.');
+}
+
 export async function loadScienceSurface(root, lens, sourceMesh) {
+  if (lens.format === 'image-plane-dem') return loadImageDemScience(root, lens, sourceMesh);
+  if(lens.qualityMasks!==undefined){
+    validateScienceQualityMasks(lens);
+    const source=await loadScienceSurface(root,{...lens,qualityMasks:undefined},sourceMesh);
+    const masks=await Promise.all(lens.qualityMasks.map(mask=>loadScienceSurface(root,mask)));
+    return {sample(longitude,latitude){
+      for(let i=0;i<masks.length;i++){
+        const value=masks[i].sample(longitude,latitude),limit=lens.qualityMasks[i];
+        if(value===null||!Number.isFinite(value)||value<(limit.minimum??-Infinity)||value>(limit.maximum??Infinity))return null;
+      }
+      return source.sample(longitude,latitude);
+    }};
+  }
+  if (lens.format === 'pds-image') return loadPdsImage(root, lens);
+  if (lens.format === 'facet-scalars') return loadFacetScalarSurface(root, lens, sourceMesh);
+  if (lens.format === 'vtk-cell-categories') return loadVtkCategories(root, lens, sourceMesh);
+  if (lens.format === 'geologic-shapefile') return loadGeologySurface(root, lens);
   if (lens.format === 'pds3-scalar-map') return loadScalarMap(root, lens, sourceMesh);
   if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {
     const loader = lens.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
@@ -94,6 +132,7 @@ export async function loadScienceSurface(root, lens, sourceMesh) {
       return null;
     } };
   }
+  if (lens.format === 'pds3-float-map') return loadPdsFloatMap(root, lens);
   if (lens.format === 'isis3') {
     const grid = lens.grid;
     const {data, origin, resolution} = await loadIsis3Raster(resolve(root, lens.path), grid);
@@ -151,22 +190,24 @@ export function sourceSurfaceBrightness({ point, normal }, relief) {
 }
 
 export function createSourceSurfacePainter(lens) {
-  const palette = Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
+  const palette = lens.categories ? null : Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
   return sample => {
-    const color = palette[Math.round(Math.max(0, Math.min(1, (sample.value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
+    const color = lens.categories ? categoryColorForValue(sample.value, lens) : palette[Math.round(Math.max(0, Math.min(1, (sample.value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
     const brightness = sourceSurfaceBrightness(sample, lens.relief);
     return color.map(c => Math.max(0, Math.min(255, Math.round(c * brightness))));
   };
 }
 
 export function paintScienceSurface(source, lens, width, height) {
+  const origin = lens.outputLongitudeOrigin ?? 0;
+  if (!Number.isFinite(origin) || origin < -180 || origin >= 360) throw new TypeError('Invalid scientific output longitude origin.');
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
-  const palette = Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
+  const palette = lens.categories ? null : Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-    const longitude = (x + 0.5) / width * 360, latitude = 90 - (y + 0.5) / height * 180;
+    const longitude = origin + (x + 0.5) / width * 360, latitude = 90 - (y + 0.5) / height * 180;
     const i = y * width + x, value = source.sample(longitude, latitude);
     if (value === null) { missing[i] = 1; continue; }
-    const color = palette[Math.round(Math.max(0, Math.min(1, (value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
+    const color = lens.categories ? categoryColorForValue(value, lens) : palette[Math.round(Math.max(0, Math.min(1, (value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
     const brightness = lens.relief ? terrainBrightness(source, longitude, latitude, 360 / width, lens.relief) : 1;
     for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.min(255, Math.round(color[c] * brightness));
   }

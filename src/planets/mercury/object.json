@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "07c6d4d9c7300a391acb51cf44ca80f97367d8a4370e66c19466c1862eb43bb0"
+    "sha256": "e6f1b8c79c14bd696eb38e5c324926acfebf746319f3482a72afc28da7643bc9"
   },
   "id": "mercury",
   "properties": {
@@ -58,7 +58,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "224e40068158743efcaf05e22502534bf746f3e68603ef16f819102897ecd5d0"
+          "sha256": "d4deecc2acfe395857d22f00ec2354b5d5591efcf1f39f89d78ddfb53eeb36f3"
         },
         {
           "id": "geometry",
@@ -78,7 +78,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "7d1ba284ef62d1037cf1698bf188033887b066fc18715ac768e750c6cf45dc04"
+          "sha256": "5f5aab004d2dc42d943d638ad40999dec7a4e17cb83fafe58d40068ddd4d3376"
         },
         {
           "id": "solar-system",

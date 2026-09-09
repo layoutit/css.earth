@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-162p",
+  "displayName": "Siding Spring",
+  "panel": {
+    "introduction": "Siding Spring has a large, elongated nucleus and rotates once in about thirty-three hours. Its thickness is less certain than its length.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Thermal radius",
+        "value": "≈7.0 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "32.86 hours"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape approximation"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape approximation",
+        "detail": "Lightcurves",
+        "title": "Inferred shape",
+        "description": "A smooth approximation of the published proportions. Its thickness is uncertain. The grid marks missing surface imagery; it does not show terrain. Rotation phase is illustrative.",
+        "thumbnail": "/scenes/comet-162p/comet-162p-model-thumbnail.webp",
+        "surface": "comet-162p-model-surface@2x.webp",
+        "poles": "comet-162p-model-poles@2x.webp",
+        "source": {
+          "id": "shape-parameters",
+          "path": "../manifest.json",
+          "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad"
+        },
+        "facts": [
+          {
+            "id": "radius",
+            "label": "Thermal radius",
+            "value": "≈7.0 km"
+          },
+          {
+            "id": "rotation",
+            "label": "Rotation period",
+            "value": "32.86 hours"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Donaldson · 2025",
+      "role": "surface",
+      "description": "Shape proportions and spin solutions",
+      "href": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad"
+    },
+    {
+      "label": "SEPPCoN",
+      "role": "observations",
+      "description": "Infrared nucleus size measurements",
+      "href": "https://doi.org/10.1016/j.icarus.2013.07.021"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+      "credit": "Donaldson (2025)"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Donaldson (2025); Fernández et al. (2013)"
+    }
+  }
+}

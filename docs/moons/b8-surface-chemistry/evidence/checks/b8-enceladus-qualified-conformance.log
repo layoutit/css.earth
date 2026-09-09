@@ -1,0 +1,187 @@
+18:49:52 [vite] connected.
+18:49:52 [types] Generated 0ms
+18:49:52 [vite] connected.
+ astro  v7.2.9 ready in 948 ms
+┃ Local    http://127.0.0.1:4291/
+18:49:52 watching for file changes...
+(node:18819) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START enceladus/mobile
+18:49:58 [200] /enceladus/ 1936ms
+18:50:02 [200] /objects/enceladus/0494ab31a8cc140e966873564a386c88d65a353d9d6705decaefb695dd7a7c45.json 7ms
+[conformance] PASS enceladus/mobile (10538ms)
+[conformance] START enceladus/dataset-interactions
+18:50:04 [200] /enceladus/ 52ms
+18:50:07 [200] /objects/enceladus/0494ab31a8cc140e966873564a386c88d65a353d9d6705decaefb695dd7a7c45.json 12ms
+[conformance] PASS enceladus/dataset-interactions (30031ms)
+[conformance] START enceladus/dataset-interactions-dpr-2
+18:50:34 [200] /enceladus/ 75ms
+18:50:37 [200] /objects/enceladus/0494ab31a8cc140e966873564a386c88d65a353d9d6705decaefb695dd7a7c45.json 8ms
+[conformance] PASS enceladus/dataset-interactions-dpr-2 (30285ms)
+[conformance] START enceladus/lens-race
+18:51:04 [200] /enceladus/ 47ms
+18:51:07 [200] /objects/enceladus/0494ab31a8cc140e966873564a386c88d65a353d9d6705decaefb695dd7a7c45.json 7ms
+[conformance] PASS enceladus/lens-race (4733ms)
+[conformance] START enceladus/lens-reacquire
+18:51:09 [200] /enceladus/ 44ms
+18:51:11 [200] /objects/enceladus/0494ab31a8cc140e966873564a386c88d65a353d9d6705decaefb695dd7a7c45.json 8ms
+[conformance] PASS enceladus/lens-reacquire (4645ms)
+[conformance] START enceladus/lens-rejection
+18:51:14 [200] /enceladus/ 48ms
+18:51:16 [200] /objects/enceladus/0494ab31a8cc140e966873564a386c88d65a353d9d6705decaefb695dd7a7c45.json 7ms
+[conformance] PASS enceladus/lens-rejection (4922ms)
+[conformance] START enceladus/lens-destroy
+18:51:19 [200] /enceladus/ 42ms
+18:51:21 [200] /objects/enceladus/0494ab31a8cc140e966873564a386c88d65a353d9d6705decaefb695dd7a7c45.json 7ms
+[conformance] PASS enceladus/lens-destroy (4729ms)
+{
+  "ok": true,
+  "reports": [
+    {
+      "id": "enceladus",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "enceladus",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "enceladus",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 111015,
+      "stable": true
+    },
+    {
+      "id": "enceladus",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 123.33253189755294,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 122.21208576062457,
+          "shadowPixels": null
+        },
+        {
+          "id": "shape",
+          "interior": false,
+          "geometryDisplacement": 122.69623630581845,
+          "shadowPixels": null
+        },
+        {
+          "id": "ice-absorption",
+          "interior": false,
+          "geometryDisplacement": 122.96847833160507,
+          "shadowPixels": null
+        },
+        {
+          "id": "infrared-ratio",
+          "interior": false,
+          "geometryDisplacement": 119.56537762716447,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "enceladus",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 2,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 123.33253189755294,
+          "shadowPixels": null
+        },
+        {
+          "id": "elevation",
+          "interior": false,
+          "geometryDisplacement": 122.21208576062457,
+          "shadowPixels": null
+        },
+        {
+          "id": "shape",
+          "interior": false,
+          "geometryDisplacement": 122.69623630581845,
+          "shadowPixels": null
+        },
+        {
+          "id": "ice-absorption",
+          "interior": false,
+          "geometryDisplacement": 122.6410172722645,
+          "shadowPixels": null
+        },
+        {
+          "id": "infrared-ratio",
+          "interior": false,
+          "geometryDisplacement": 121.91590406653496,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "enceladus",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "enceladus",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "enceladus",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "enceladus",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "enceladus",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "enceladus",
+      "case": "dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "enceladus",
+      "viewport": "lens-race",
+      "lens": "normal",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "enceladus",
+      "viewport": "lens-reacquire",
+      "lens": "elevation"
+    },
+    {
+      "id": "enceladus",
+      "viewport": "lens-rejection-retry",
+      "lens": "elevation"
+    },
+    {
+      "id": "enceladus",
+      "viewport": "lens-destroy"
+    }
+  ]
+}

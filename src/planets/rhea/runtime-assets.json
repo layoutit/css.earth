@@ -17,14 +17,14 @@
       "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
     },
     {
-      "filename": "rhea-elevation-poles@2x.webp",
-      "bytes": 96856,
-      "sha256": "decac25c3f880bda24f5e1522de16cc63246f2117b5a9cc45d65801aa38024b8"
+      "filename": "rhea-elevation-shadow@2x.webp",
+      "bytes": 1149214,
+      "sha256": "d47e69a03691d308fe51e8de2d2b1a1758c780fb4dadc700fc7d6de141d781ea"
     },
     {
       "filename": "rhea-elevation-surface@2x.webp",
-      "bytes": 3187148,
-      "sha256": "3388d655e6711263fcf5495b887bddfe1d37f39b8634a31bba94f22f06a30854"
+      "bytes": 3131398,
+      "sha256": "bbd7aba7459e9dcd93f5740c8fb873207f9cd89b1464211408361e37d025f921"
     },
     {
       "filename": "rhea-elevation-thumbnail.webp",
@@ -32,14 +32,14 @@
       "sha256": "684b40b3773bfca89f66f1d3cd691991a995372bafc2ba6bbc89427e75d169f4"
     },
     {
-      "filename": "rhea-enhanced-poles@2x.webp",
-      "bytes": 275808,
-      "sha256": "09cfb91c86325e448192a15c664c38a460bdd64cc71dfd7377bbc58d1c09c00a"
+      "filename": "rhea-enhanced-shadow@2x.webp",
+      "bytes": 4216366,
+      "sha256": "6beb6e2a5968413bddc0ae2022f96b9efe1eb6e124f18826406304279b57a258"
     },
     {
       "filename": "rhea-enhanced-surface@2x.webp",
-      "bytes": 12765242,
-      "sha256": "4fde5efd722ed40294cab583c51217a6f6b1f6ff55540187d57d8b21ec9aa157"
+      "bytes": 11123304,
+      "sha256": "4cdc64493a3659fab0412cafe3fc46627792b49b9b1225f5a8be8b12972144f1"
     },
     {
       "filename": "rhea-enhanced-thumbnail.webp",
@@ -47,24 +47,94 @@
       "sha256": "b6adc3b37aa5421f9c4cda8d4ed5ea0bf1650cbfa4557e4ef3a103e0734f5aec"
     },
     {
+      "filename": "rhea-ice-absorption-legend.webp",
+      "bytes": 162,
+      "sha256": "989724748ca27ff3f9100c05b4eeb7b936f787550b41223655a1fbee8c888477"
+    },
+    {
+      "filename": "rhea-ice-absorption-shadow@2x.webp",
+      "bytes": 191324,
+      "sha256": "0e764b668d277efc99dc5d9ddf8520438804f36135f13c597df6fef825e758f7"
+    },
+    {
+      "filename": "rhea-ice-absorption-surface@2x.webp",
+      "bytes": 180602,
+      "sha256": "4715f0187b7834a3738fa5af7ed8038b51c24ea036e1a44fbeacaddb3013fb72"
+    },
+    {
+      "filename": "rhea-ice-absorption-thumbnail.webp",
+      "bytes": 3478,
+      "sha256": "cb3139d6bf2483ab296243498ed7b56de563ac7713704398b73949d44e329cc8"
+    },
+    {
+      "filename": "rhea-infrared-shadow@2x.webp",
+      "bytes": 217476,
+      "sha256": "6a334003c44b8e0250d4cb5751cfdc46e75429cc1bb8c91bfc77206eeb2b3605"
+    },
+    {
+      "filename": "rhea-infrared-surface@2x.webp",
+      "bytes": 240274,
+      "sha256": "5254a1199767b509f94d44bbffea58b0b234662ee73a3b0bd4572486bb95ac55"
+    },
+    {
+      "filename": "rhea-infrared-thumbnail.webp",
+      "bytes": 4220,
+      "sha256": "909de69ac8d2b6a13f4999c523a509c4ad13340b2a002013babb9adb69d05d81"
+    },
+    {
       "filename": "rhea-lighting.webp",
       "bytes": 1050836,
       "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
     },
     {
-      "filename": "rhea-normal-poles@2x.webp",
-      "bytes": 91908,
-      "sha256": "2aef1ed652ae45a64f3db40a6638d37d196141cd741125ab8b4a520f18bca75a"
+      "filename": "rhea-normal-shadow@2x.webp",
+      "bytes": 1721576,
+      "sha256": "287f4ff1600c4ad37285b287583a4c803afaf01638a8da0c8818777893e51645"
     },
     {
       "filename": "rhea-normal-surface@2x.webp",
-      "bytes": 5119372,
-      "sha256": "db647fc4c82f22e12de12daea5cb9b27f02f0fdf05025de38438be7506619462"
+      "bytes": 4933780,
+      "sha256": "c1cc0f7903fd00bc594395360d93c61911dcf39e5cb3ef99dda6486afd67c04b"
     },
     {
       "filename": "rhea-normal-thumbnail.webp",
       "bytes": 2772,
       "sha256": "d629d4430b5fcfae757870c697e17b2e6b054b50b984ee52ec706dc0984c8ce9"
+    },
+    {
+      "filename": "rhea-relative-albedo-legend.webp",
+      "bytes": 276,
+      "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7"
+    },
+    {
+      "filename": "rhea-relative-albedo-shadow@2x.webp",
+      "bytes": 828302,
+      "sha256": "584224cfabcb1aa6f821c57155929aeebf92f5960e11baec1666ccc006c4da22"
+    },
+    {
+      "filename": "rhea-relative-albedo-surface@2x.webp",
+      "bytes": 1744154,
+      "sha256": "07537c6c45c6810003746dc5e09f3b95194d3fbc571e0f17724ab83cea094f8c"
+    },
+    {
+      "filename": "rhea-relative-albedo-thumbnail.webp",
+      "bytes": 3668,
+      "sha256": "97457e6cd6c860756fafb6b48b372a01a178bd7a28dcb7cb86110ea51cd43dab"
+    },
+    {
+      "filename": "rhea-shape-shadow@2x.webp",
+      "bytes": 338856,
+      "sha256": "8cd7911090d681a8ee56db1f9f35ed67bd61a16704c920584a20ca26a0d81eb6"
+    },
+    {
+      "filename": "rhea-shape-surface@2x.webp",
+      "bytes": 458908,
+      "sha256": "130fef512cc41d7778390a2718fb733b6d3de80b32b5208ce049c65224e667b7"
+    },
+    {
+      "filename": "rhea-shape-thumbnail.webp",
+      "bytes": 764,
+      "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d"
     },
     {
       "filename": "rhea-starfield-back-standard.webp",

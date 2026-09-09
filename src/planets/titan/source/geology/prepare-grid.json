@@ -1,0 +1,102 @@
+{
+  "pins": {
+    "Plains_3.shx": "7562f9fc44ea9644408558b546b94c4dda1697019edab25291a145bad80095b1",
+    "Craters.prj": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+    "Basins.prj": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+    "Labyrinth.shx": "2104afea9a8927278ed1e18e7d6ef96bd65c16ef0579705091f364046db489c4",
+    "Dunes.shx": "16a8406fd7a493688fdaac011f53a2db721e536aa3ff4db31d60fd610129fe65",
+    "Plains_3.shp": "894e84153cedf0a2d0709b95cdd05b1b14a567bd4318f66bb017c86782f8fa7c",
+    "Labyrinth.shp": "89e17602555e130be952ce116805abf59a6108420758ab11def14e44014c7d27",
+    "Dunes.shp": "71bd90eb73d0cd617f22065d8849979caabeeb87e9ec6af4685cee0f1ee85ae9",
+    "Labyrinth.dbf": "e3d7a5fc703f480ed902888da037af6ac96e1cdb60c3330478796ad3997f206d",
+    "Dunes.dbf": "f4a01e3798c7604114f66e971af6eb30ed3c7b5170aeab19e61cb518e5f66839",
+    "Plains_3.dbf": "ef09274bf4606b8d3bdf3cd5b27eba04ca8f0405c1a12f9aa7f7b441bc68b122",
+    "Mountains.prj": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+    "Craters.shp": "dd30b573d521acb25e839cb85e6789ba84a5ecafeb2ddfc221f8e0c9aae08c09",
+    "Basins.shp": "ade414034e43c25813e8a5a4cc0659ca51ed49011d38aae6f38eb417092e17a6",
+    "Plains_3.prj": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+    "Mountains.dbf": "f04c8f03e3ae097a2ed0e65bff9b47a8485ce24ef9b986716d7d637b26cec411",
+    "Craters.shx": "e3ebe314234f20177b73d293376f347f4c0fbf1131f1724b5da2a38a94ee46cc",
+    "Basins.shx": "6f1a2d7687485679530aa8c895b9df1adb9c4fc67dda44cdfc43a33a8511e7f6",
+    "Labyrinth.prj": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+    "Dunes.prj": "1c76355fdd6895c71727567bb7a240f6b5f37fa53336231a71212d01ec7a24e9",
+    "Mountains.shp": "3c0cd9c0c7b786c5970b0f9935fb226a2b0933d563581c176a5ffcccaafc4aa6",
+    "Basins.dbf": "3e705b42205fcf17781ffc7e59a84efdd5c8720cd4516f01dcb541fda2f5fef0",
+    "Craters.dbf": "6d645098235e8f0b6d37780a5927929b36b025f8a3d2f2542496d2f55d1daace",
+    "Mountains.shx": "a79b1fb02cb4ed6afaacb15cfe26ec4a31b76e71f3343b36ff8a1782c195d527"
+  },
+  "projectionPath": "Plains_3.prj",
+  "projectionWkt": "GEOGCS[\"GCS_Titan_2000\",DATUM[\"D_Titan_2000\",SPHEROID[\"Titan_2000_IAU_IAG\",2575000.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 2575000,
+  "width": 2048,
+  "height": 1024,
+  "field": "Meta_Terra",
+  "unknownValues": [],
+  "categories": [
+    {
+      "value": "Pl",
+      "label": "Plains",
+      "color": "#66f0cc"
+    },
+    {
+      "value": "Dn",
+      "label": "Dunes",
+      "color": "#b665cb"
+    },
+    {
+      "value": "Mt",
+      "label": "Hummocky terrain",
+      "color": "#ffcc66"
+    },
+    {
+      "value": "Ba",
+      "label": "Lakes and basins",
+      "color": "#6699ff"
+    },
+    {
+      "value": "Lb",
+      "label": "Labyrinth terrain",
+      "color": "#ff66e0"
+    },
+    {
+      "value": "Cr",
+      "label": "Craters",
+      "color": "#ff6666"
+    }
+  ],
+  "layers": [
+    {
+      "shapePath": "Plains_3.shp",
+      "attributePath": "Plains_3.dbf",
+      "expectedRecords": 4
+    },
+    {
+      "shapePath": "Dunes.shp",
+      "attributePath": "Dunes.dbf",
+      "expectedRecords": 1
+    },
+    {
+      "shapePath": "Mountains.shp",
+      "attributePath": "Mountains.dbf",
+      "expectedRecords": 1
+    },
+    {
+      "shapePath": "Basins.shp",
+      "attributePath": "Basins.dbf",
+      "expectedRecords": 1
+    },
+    {
+      "shapePath": "Labyrinth.shp",
+      "attributePath": "Labyrinth.dbf",
+      "expectedRecords": 1
+    },
+    {
+      "shapePath": "Craters.shp",
+      "attributePath": "Craters.dbf",
+      "expectedRecords": 1
+    }
+  ],
+  "output": "titan-geologic-units.tif",
+  "receipt": "grid-receipt.json"
+}

@@ -30,8 +30,12 @@ export const mountEarthClient=(stage,options={})=>createObjectRuntime(runtimeDef
 // envelope. Keep its descriptor hash synchronized instead of bypassing validation.
 export async function preparePagingDiagnostic(plan) {
   const descriptor=await read('object.json'),prepared=await read('prepared/object.json');
-  const layer=prepared.data.pageLayers.find(layer=>layer.id==='city');
-  layer.plan={...plan,schema:layer.plan.schema,assetPath:layer.plan.assetPath};
+  // Paging is an explicit diagnostic capability; the MVP Earth has no page pools.
+  const nodes=prepared.data.tree.nodes;
+  prepared.data.pageLayers=[{id:'city',plan:{...plan,schema:'cssearth-prepared-map-pages@1',assetPath:'/scenes/earth/'},
+    lensIds:['normal'],carrier:nodes.findIndex(node=>node.className==='polycss-mesh earth-body'),
+    system:nodes.findIndex(node=>node.className==='polycss-mesh earth-system'),
+    className:'earth-city-page',textureClassName:'earth-api-texture'}];
   const preparedJson=JSON.stringify(prepared)+'\n';
   descriptor.prepared.sha256=createHash('sha256').update(preparedJson).digest('hex');
   return {preparedJson,descriptorJson:JSON.stringify(descriptor),descriptorModule:`export default ${JSON.stringify(descriptor)};`};

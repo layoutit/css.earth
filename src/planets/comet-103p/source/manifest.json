@@ -135,6 +135,261 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "mv10110413-6000001-001-r-path",
+      "path": "photography/mri/mv10110413_6000001_001_r.fit",
+      "expectedBytes": 9512640,
+      "expectedSha256": "b08f4ce6206f6d96778cdaa444cf618a8366a0b27d310760d7f28bb50422781d",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000001_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "mv10110413-6000001-001-r-labelPath",
+      "path": "photography/mri/mv10110413_6000001_001_r.lbl",
+      "expectedBytes": 32160,
+      "expectedSha256": "392a2ac50ce1dfd0e2200b745779b4c5980a927d99fb7c0485d12d72cfa8fa16",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000001_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "mv10110413-6000001-001-r-controlPath",
+      "path": "photography/mri/mv10110413_6000001_001_r.json",
+      "expectedBytes": 14582,
+      "expectedSha256": "bf5fc034aa6130874592d90f68e7a9fec2af4aa310f57f1b1b5eb4ce2bbba1da",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "mv10110413-6000002-001-r-path",
+      "path": "photography/mri/mv10110413_6000002_001_r.fit",
+      "expectedBytes": 9512640,
+      "expectedSha256": "f97b508d325bce5d158a138c912d09bad7ebb97413569019b45b8601fe1c9271",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000002_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "mv10110413-6000002-001-r-labelPath",
+      "path": "photography/mri/mv10110413_6000002_001_r.lbl",
+      "expectedBytes": 32160,
+      "expectedSha256": "587ffcde7d28737d773100c72bade2da1e1c4abc04f1fad471e20d7c9586d89e",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110413_6000002_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "mv10110413-6000002-001-r-controlPath",
+      "path": "photography/mri/mv10110413_6000002_001_r.json",
+      "expectedBytes": 14618,
+      "expectedSha256": "bb438ff9ade24691d9810e89b0e4596f5253733e6c7883ca39cd87bef410d345",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "mv10110414-6000003-001-r-path",
+      "path": "photography/mri/mv10110414_6000003_001_r.fit",
+      "expectedBytes": 9512640,
+      "expectedSha256": "72c6dd3d9111eb4d2dfd26d136bf70190e313bc6f64297cc3dde935d28f5fa85",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110414_6000003_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "mv10110414-6000003-001-r-labelPath",
+      "path": "photography/mri/mv10110414_6000003_001_r.lbl",
+      "expectedBytes": 32160,
+      "expectedSha256": "435ce9cef892b13b1c1aa77974c8687dfea73bf8fd3d8f2b2e2bc3473fd1a83d",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/data/rad/2010/308/mv10110414_6000003_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-mri-3_4-epoxi-hartley2-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "mv10110414-6000003-001-r-controlPath",
+      "path": "photography/mri/mv10110414_6000003_001_r.json",
+      "expectedBytes": 16613,
+      "expectedSha256": "e969bf8a39f0dfe7ab439bddc5f2b5544d877d87c0d35ec09ecdaf165adb18fb",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "hv10110413-5004004-001-d050-path",
+      "path": "photography/hri/hv10110413_5004004_001_d050.fit",
+      "expectedBytes": 9501120,
+      "expectedSha256": "0c237b12aad0fa29e5427c2cc5c46bbf5b48059071912f278a731840cdbd07b3",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/data/deconv/2010/308/hv10110413_5004004_001_d050.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "hv10110413-5004004-001-d050-labelPath",
+      "path": "photography/hri/hv10110413_5004004_001_d050.lbl",
+      "expectedBytes": 28800,
+      "expectedSha256": "a25036b5c9254f2c6fc059c0b90a689889b772b5fc9c7d2dcbf8a66779c2dc23",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/data/deconv/2010/308/hv10110413_5004004_001_d050.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "hv10110413-5004004-001-d050-controlPath",
+      "path": "photography/hri/hv10110413_5004004_001_d050.json",
+      "expectedBytes": 12756,
+      "expectedSha256": "2f7da2da6c90bec0582475a86df202a4a662c037d3a9f2f9eeb986209cde2fbc",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "hv10110413-5004008-001-d050-path",
+      "path": "photography/hri/hv10110413_5004008_001_d050.fit",
+      "expectedBytes": 9501120,
+      "expectedSha256": "eec139c05808fa441b327d2905c5fa9cef45fc917d56d33b8edffe04f797d36f",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/data/deconv/2010/308/hv10110413_5004008_001_d050.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "hv10110413-5004008-001-d050-labelPath",
+      "path": "photography/hri/hv10110413_5004008_001_d050.lbl",
+      "expectedBytes": 28800,
+      "expectedSha256": "13f7c30bb653698fd2cf6bb8275db5a56a73ff49a223e4ed6c8d83b18c9b9c60",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/data/deconv/2010/308/hv10110413_5004008_001_d050.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv-5-epoxi-hartley2-deconv-v1.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
+    },
+    {
+      "id": "hv10110413-5004008-001-d050-controlPath",
+      "path": "photography/hri/hv10110413_5004008_001_d050.json",
+      "expectedBytes": 11985,
+      "expectedSha256": "d37072d51aa81e01433b2e6331f71be129aa78cddd6bea8f8138382d7d1af6c2",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in measured camera controls.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-mri"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -173,14 +428,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5824,
-      "expectedSha256": "8c49053f7fe3dbf0c7cb158afa0d5129d65d41ce30760cda4d4795d3dd433a35",
+      "expectedBytes": 5822,
+      "expectedSha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 736,
-      "expectedSha256": "84c66c54d4853ca9ce8e91cc88ff09e55b674421341ae56031efcf72ff096a7e",
+      "expectedBytes": 3596,
+      "expectedSha256": "c4974fbc229a727fe348ea21994baa5a257047ead48a638067e6acc141a3ba10",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
     },
     {
@@ -197,8 +452,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4752,
-      "expectedSha256": "96f1230ee45a0476ef3cdbda77594f8ad31486994e4728667b75ad56733f4b7c",
+      "expectedBytes": 7288,
+      "expectedSha256": "269899c03e5c22546fc5940bf2ed5dbb201187997375b5e2563c185f51e0535e",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
     },
     {
@@ -242,6 +497,30 @@
       "expectedBytes": 853,
       "expectedSha256": "e25995be192ffa81faad3695eb34be3d208fc94402945394d6059777433cb14e",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/encounter-photography.md",
+      "expectedBytes": 5948,
+      "expectedSha256": "142e98ffe05ff2326d48921a9260763a41433325dcfe47fb093a85901e5ecfbb",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/mri-dataset.cat",
+      "expectedBytes": 59840,
+      "expectedSha256": "9cd868412db788e1ea924e8c0a1ba0e39e10c6918fa9dc6b74dcc2d8f0fef609",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/hri-restoration-dataset.cat",
+      "expectedBytes": 25200,
+      "expectedSha256": "d30b289c57d61cf3c58d6a6ae93e87f0a71adc201a7a76e24e97ab2808485770",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+    },
+    {
+      "path": "reference/epoxi-sis.pdf",
+      "expectedBytes": 6311705,
+      "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa",
+      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
     }
   ]
 }

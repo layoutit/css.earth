@@ -1,0 +1,324 @@
+{
+  "number": 264,
+  "name": "Libussa",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/242",
+  "modelId": 331,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/331",
+  "catalog": "View model 157 18 9.22794 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "331",
+    "Asteroid": "(264) Libussa",
+    "λ": "157",
+    "β": "18",
+    "P": "9.22794",
+    "YORP": "",
+    "t0": "2447828",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.52",
+    "p3": "0.03",
+    "p4": "-1.01",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:27:55",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1219/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1220/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1221/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1222/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/141",
+      "file": "reference-141.html",
+      "links": [
+        {
+          "label": "2011a&a...530a.134h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011a&a...530a.134h"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4114",
+          "url": "http://arxiv.org/abs/1104.4114\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H",
+          "url": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H"
+        }
+      ]
+    }
+  ],
+  "id": "libussa",
+  "displayName": "Libussa",
+  "lambda": 157.0,
+  "beta": 18.0,
+  "periodHours": 9.22794,
+  "version": "2011-04-21",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 57.57,
+  "uncertaintyKm": 0.62,
+  "akari": {
+    "number": 264,
+    "name": "Libussa",
+    "diameterKm": 57.57,
+    "uncertaintyKm": 0.62,
+    "detections": 10,
+    "originalRow": "264    Libussa                        8.42  0.15 10   57.57  0.62 0.231 0.006"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1222/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1220/IAUspin.txt",
+  "shapeSha256": "90c6c85577e5615ac761ae75898680215bdae93bdb749b5aa4905a095fdca08c",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 0.9999999347925574,
+  "independentSignedVolume": 0.9999999347925573,
+  "originalVolumeEquivalentDiameter": 1.2407009548311534,
+  "firstVertex": [
+    0.209507,
+    0.318905,
+    0.429804
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.41672373423408465,
+    0.8730433576295051
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.78878,
+      0.791562
+    ],
+    [
+      -0.763186,
+      0.708523
+    ],
+    [
+      -0.424454,
+      0.457049
+    ]
+  ],
+  "scaleKmPerSourceUnit": 46.401189404931735,
+  "alternatives": [
+    {
+      "modelId": 332,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/332",
+      "pole": [
+        "338",
+        "-9"
+      ],
+      "version": "2011-04-21",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Hanuš (2011)",
+          "url": "/projects/damit/references/view/141"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Published convex inversion from Hanuš (2011). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "hanus-2011.pdf",
+      "url": "https://arxiv.org/pdf/1104.4114",
+      "label": "Hanuš et al. (2011), A&A 530, A134"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 57.57,
+    "uncertaintyKm": 0.62,
+    "reportedUncertaintyKm": 0.62,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 264,
+      "name": "Libussa",
+      "diameterKm": 57.57,
+      "uncertaintyKm": 0.62,
+      "detections": 10,
+      "originalRow": "264    Libussa                        8.42  0.15 10   57.57  0.62 0.231 0.006"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Published convex inversion from Hanuš (2011). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+    "scaleKmPerSourceUnit": 46.401189404931735,
+    "metersPerSourceUnit": 46401.189404931734,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 57.57 km effective diameter (catalog ±0.62 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "independentCenteredSignedVolume": 0.9999999347925574,
+  "surfaceAreaSourceUnitsSquared": 5.386964443373153,
+  "surfaceEquivalentDiameterSourceUnits": 1.3094747186739557,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.209507,
+        0.318905,
+        0.429804
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 5,
+      "sourcePoint": [
+        -0.053068,
+        0.304858,
+        0.457049
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 442,
+      "sourcePoint": [
+        0.791562,
+        0.182085,
+        -0.105802
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 470,
+      "sourcePoint": [
+        0.068974,
+        0.708523,
+        0.105703
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 503,
+      "sourcePoint": [
+        -0.78878,
+        -0.245216,
+        -0.156626
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "sourcePoint": [
+        -0.769447,
+        -0.384823,
+        -0.135367
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 532,
+      "sourcePoint": [
+        -0.282676,
+        -0.763186,
+        0.026896
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1020,
+      "sourcePoint": [
+        -0.1289,
+        0.273718,
+        -0.424454
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "sourcePoint": [
+        -0.260267,
+        0.405085,
+        -0.424454
+      ]
+    }
+  ],
+  "distanceAu": 2.7991273130765797,
+  "orbitalPeriodYears": 4.6831943403848735,
+  "sourceFields": {
+    "ID": "331",
+    "Asteroid": "(264) Libussa",
+    "λ": "157",
+    "β": "18",
+    "P": "9.22794",
+    "YORP": "",
+    "t0": "2447828",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.52",
+    "p3": "0.03",
+    "p4": "-1.01",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:27:55",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

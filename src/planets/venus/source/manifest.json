@@ -178,7 +178,13 @@
       "consumers": [
         "scene",
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "magellan"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
+      }
     },
     {
       "id": "usgs-nasa-magellan-colorized-topography-wms",
@@ -197,7 +203,13 @@
       "consumers": [
         "scene",
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "magellan"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
+      }
     },
     {
       "id": "openspace-venus-globe-specification",
@@ -371,8 +383,8 @@
     {
       "id": "venus-object-content",
       "path": "content/object.json",
-      "expectedSha256": "2c5f2088d7dd94ec9b9dc1eef58249c961a601d2dfe633bb4eb14693d4a0fa6d",
-      "expectedBytes": 16327,
+      "expectedSha256": "4c01d5f9dce6f3e557f18d69b7933a403f464902625107f519170addc9dbbdab",
+      "expectedBytes": 16667,
       "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

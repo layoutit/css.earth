@@ -1,0 +1,246 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/body-overview.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/canonical-image-density.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/chart-pixel-alignment.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/conformance-browser-launch.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-caption.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-content.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/dataset-spacecraft.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/diagnostic-recorder.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/explorer-rail.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/fact-order.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/google-analytics.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/load-browser-profile.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-preparation.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-router.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/navigation-timing.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-browser-profile.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-navigation.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-orbit-failure.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-package-contract.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-page-data.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-schema.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/object-sources.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/oracle-interaction.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/overview-context.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/overview-selection.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/planet-shell.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/planetary-scale.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-factsheet-model.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-icons.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-facts.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-labels.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-lens-legends.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-titles.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/prepared-world-navigation.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/production-diagnostics.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/projective-surface-seam-contract.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/rendered-motion-steps.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/root-orchestration.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/router-runtime.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/runtime-policy.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-contract.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scene-sources.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scientific-chart-order.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/scientific-chart-sources.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/seo-discovery.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/shell-lifetime.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/surface-minimap.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/system-framing.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/view-readout.test.mjs",
+    "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/test/view-url-runtime.test.mjs"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 1168801792,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 294912,
+      "freePercent": 63
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 153796608,
+      "freePercent": 63
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 315310080,
+      "freePercent": 63
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 409337856,
+      "freePercent": 63
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 484130816,
+      "freePercent": 63
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 540557312,
+      "freePercent": 63
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 587726848,
+      "freePercent": 63
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 640860160,
+      "freePercent": 63
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 692895744,
+      "freePercent": 65
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 810844160,
+      "freePercent": 65
+    },
+    {
+      "seconds": 2.8,
+      "rssBytes": 862945280,
+      "freePercent": 65
+    },
+    {
+      "seconds": 3.0,
+      "rssBytes": 973176832,
+      "freePercent": 65
+    },
+    {
+      "seconds": 3.3,
+      "rssBytes": 1064337408,
+      "freePercent": 65
+    },
+    {
+      "seconds": 3.6,
+      "rssBytes": 1168801792,
+      "freePercent": 65
+    },
+    {
+      "seconds": 3.9,
+      "rssBytes": 1047183360,
+      "freePercent": 65
+    },
+    {
+      "seconds": 4.1,
+      "rssBytes": 116637696,
+      "freePercent": 65
+    },
+    {
+      "seconds": 4.4,
+      "rssBytes": 118259712,
+      "freePercent": 64
+    },
+    {
+      "seconds": 4.7,
+      "rssBytes": 177389568,
+      "freePercent": 64
+    },
+    {
+      "seconds": 5.0,
+      "rssBytes": 121634816,
+      "freePercent": 64
+    },
+    {
+      "seconds": 5.2,
+      "rssBytes": 113508352,
+      "freePercent": 64
+    },
+    {
+      "seconds": 5.5,
+      "rssBytes": 150994944,
+      "freePercent": 64
+    },
+    {
+      "seconds": 5.8,
+      "rssBytes": 68403200,
+      "freePercent": 64
+    },
+    {
+      "seconds": 6.0,
+      "rssBytes": 134692864,
+      "freePercent": 64
+    },
+    {
+      "seconds": 6.3,
+      "rssBytes": 157138944,
+      "freePercent": 64
+    },
+    {
+      "seconds": 6.6,
+      "rssBytes": 69206016,
+      "freePercent": 64
+    },
+    {
+      "seconds": 6.9,
+      "rssBytes": 69648384,
+      "freePercent": 64
+    },
+    {
+      "seconds": 7.1,
+      "rssBytes": 179666944,
+      "freePercent": 64
+    },
+    {
+      "seconds": 7.4,
+      "rssBytes": 136986624,
+      "freePercent": 64
+    },
+    {
+      "seconds": 7.7,
+      "rssBytes": 159563776,
+      "freePercent": 64
+    },
+    {
+      "seconds": 8.0,
+      "rssBytes": 308461568,
+      "freePercent": 64
+    },
+    {
+      "seconds": 8.2,
+      "rssBytes": 97107968,
+      "freePercent": 64
+    },
+    {
+      "seconds": 8.5,
+      "rssBytes": 153255936,
+      "freePercent": 64
+    },
+    {
+      "seconds": 8.8,
+      "rssBytes": 197033984,
+      "freePercent": 64
+    },
+    {
+      "seconds": 9.1,
+      "rssBytes": 138575872,
+      "freePercent": 64
+    },
+    {
+      "seconds": 9.3,
+      "rssBytes": 120094720,
+      "freePercent": 64
+    },
+    {
+      "seconds": 9.6,
+      "rssBytes": 193822720,
+      "freePercent": 64
+    }
+  ],
+  "status": "FAIL",
+  "exitCode": 1,
+  "seconds": 9.9
+}

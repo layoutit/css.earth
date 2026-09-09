@@ -47,6 +47,91 @@
       "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
     },
     {
+      "filename": "moon-geology-poles.webp",
+      "bytes": 6168,
+      "sha256": "40bbc3148d161ffb760894708caffd6386c156a9b5a18414d8265376bbbac85d"
+    },
+    {
+      "filename": "moon-geology-poles@2x.webp",
+      "bytes": 13278,
+      "sha256": "fd0d6ebbbe045efc6c2ff3b547d3682a0f30eb8993c48453c8677dde6518cd6e"
+    },
+    {
+      "filename": "moon-geology-thumbnail.webp",
+      "bytes": 3722,
+      "sha256": "5ac01ef77302f05ff028fe41b80d6efdb73986cb2345a4cd298816e054973654"
+    },
+    {
+      "filename": "moon-geology.webp",
+      "bytes": 77392,
+      "sha256": "08b5df80ad85bc4ea682e75587f0010ee9c6f8f34de344d82a89cd11ef78620c"
+    },
+    {
+      "filename": "moon-geology@2x.webp",
+      "bytes": 180188,
+      "sha256": "ff32836a3e303e91139c7669fa119e2e7ba72e85ac0cad8845399dee200c82d9"
+    },
+    {
+      "filename": "moon-rock-abundance-legend.webp",
+      "bytes": 160,
+      "sha256": "a85a52b99e5f63b07042084f340eeb609b45b1f2c4192d09500aa075f462e567"
+    },
+    {
+      "filename": "moon-rock-abundance-poles.webp",
+      "bytes": 2550,
+      "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a"
+    },
+    {
+      "filename": "moon-rock-abundance-poles@2x.webp",
+      "bytes": 5948,
+      "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878"
+    },
+    {
+      "filename": "moon-rock-abundance-thumbnail.webp",
+      "bytes": 3018,
+      "sha256": "4c08682c9073d2d80ddaf46a7c5c567e22512c25cc9d4edea799196829039917"
+    },
+    {
+      "filename": "moon-rock-abundance.webp",
+      "bytes": 148488,
+      "sha256": "ae9cab0075a3b97e9542f00ecde380189165a37b2f72adc701005318d8ab1587"
+    },
+    {
+      "filename": "moon-rock-abundance@2x.webp",
+      "bytes": 558446,
+      "sha256": "3d736ad2b78f81d01fcaf54574fe8004d4d2f8d2bebbd816df150873c18d37b2"
+    },
+    {
+      "filename": "moon-silicate-signature-legend.webp",
+      "bytes": 186,
+      "sha256": "7763a02d81b4adc5bf60a0b79837712190cb860620b6690a54e327620825079f"
+    },
+    {
+      "filename": "moon-silicate-signature-poles.webp",
+      "bytes": 2550,
+      "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a"
+    },
+    {
+      "filename": "moon-silicate-signature-poles@2x.webp",
+      "bytes": 5948,
+      "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878"
+    },
+    {
+      "filename": "moon-silicate-signature-thumbnail.webp",
+      "bytes": 9240,
+      "sha256": "3c9445af0e519012bcb4bda61ed392fd9d9b88eea3f7c43894babca8635a6b44"
+    },
+    {
+      "filename": "moon-silicate-signature.webp",
+      "bytes": 625606,
+      "sha256": "f737bd286589ebce877ee049a87ca6865557b3df0d1f0c61e1d2199e2fdb353c"
+    },
+    {
+      "filename": "moon-silicate-signature@2x.webp",
+      "bytes": 2414732,
+      "sha256": "8114bfa66e4e13a889fc3019963b3f37309c33d2277b1d74600cb5a1848d4974"
+    },
+    {
       "filename": "moon-starfield-back-standard.webp",
       "bytes": 56952,
       "sha256": "9c52050fd9ba1e77e36cd0c75ce6bb07fb5cc024809151f27f346e266154faf5"
@@ -192,29 +277,34 @@
       "sha256": "46ca2b9b271f4a0bc628a899f710ac065b5c4fdbd01af38570b090f7c53be7cb"
     },
     {
+      "filename": "moon-topography-legend.webp",
+      "bytes": 192,
+      "sha256": "d88b473d5f54f0e6dac97b78338b4ecb4522951b75b6a1ff689810ea5ae314c5"
+    },
+    {
       "filename": "moon-topography-poles.webp",
-      "bytes": 19094,
-      "sha256": "4d507e8542b08d3c48deb4928fa5139ff3f79e9888a7e74b489b28d1c15bba57"
+      "bytes": 47866,
+      "sha256": "f460a6375079dec50f7d7d7f5c465c619bc6a6958cd20e7a854ffb88d2f01f32"
     },
     {
       "filename": "moon-topography-poles@2x.webp",
-      "bytes": 49528,
-      "sha256": "b4ab3abc2633c67ce6bf6d8d8a23117cad8ab2614bc8048f4c6c6c590a01c245"
+      "bytes": 149512,
+      "sha256": "e9f3a061b32a7e394dfed366fc39a4af0366fc1d301863f7fc85e6b6429df1d2"
     },
     {
       "filename": "moon-topography-thumbnail.webp",
-      "bytes": 3228,
-      "sha256": "157ee5ed9df127b6fefe20978369ac55c2d2f497df667a70a0018dbf0eec8b40"
+      "bytes": 8168,
+      "sha256": "c0f707fe1ccaddcd07cb6aec66dcbdc25811c20e5f9d3dccbd63d86a4a45c1e6"
     },
     {
       "filename": "moon-topography.webp",
-      "bytes": 220064,
-      "sha256": "b5922fe5586b3c6ecf2c18c7660b7db5e2845de61cf3df0e856620698b9476a8"
+      "bytes": 529956,
+      "sha256": "5662a74d505859d319028aed84d58142f6e14552b39f71d47f4031c3f5b5e644"
     },
     {
       "filename": "moon-topography@2x.webp",
-      "bytes": 498286,
-      "sha256": "91c2971cf964104000296d3786eeb8a5d6e54199629d9b44fb43f619a3b86639"
+      "bytes": 1763150,
+      "sha256": "dd10f4675f70a899a5562feba522886acf6bf9323ca0729a39bdc7f2dc81ffdf"
     }
   ]
 }

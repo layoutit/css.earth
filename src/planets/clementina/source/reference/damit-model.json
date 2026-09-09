@@ -1,0 +1,323 @@
+{
+  "number": 252,
+  "name": "Clementina",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1072",
+  "modelId": 1912,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1912",
+  "catalog": "View model 121 46 10.8619 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1912",
+    "Asteroid": "(252) Clementina",
+    "λ": "121",
+    "β": "46",
+    "P": "10.8619",
+    "YORP": "",
+    "t0": "2451110",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "1.48",
+    "p3": "0.15",
+    "p4": "-0",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-07-18",
+    "Comment": "",
+    "Created": "2018-07-19 12:40:45",
+    "Modified": "2018-07-19 12:40:45",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6260/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/6261/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/6262/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2018)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/175",
+      "file": "reference-175.html",
+      "links": [
+        {
+          "label": "2018a&a...617a..57d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2018a&a...617a..57d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2018A%26A...617A..57D",
+          "url": "http://adsabs.harvard.edu/abs/2018A%26A...617A..57D\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1807.02083",
+          "url": "https://arxiv.org/abs/1807.02083"
+        }
+      ]
+    }
+  ],
+  "id": "clementina",
+  "displayName": "Clementina",
+  "lambda": 121.0,
+  "beta": 46.0,
+  "periodHours": 10.8619,
+  "version": "2018-07-18",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 67.67,
+  "uncertaintyKm": 0.82,
+  "akari": {
+    "number": 252,
+    "name": "Clementina",
+    "diameterKm": 67.67,
+    "uncertaintyKm": 0.82,
+    "detections": 9,
+    "originalRow": "252    Clementina                     9.10  0.15  9   67.67  0.82 0.090 0.003"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6262/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6260/IAUspin.txt",
+  "shapeSha256": "15e30ddcead93addfefb8473a689b601d549eab3710abf227abce3b7761d2be4",
+  "shapeBytes": 44799,
+  "vertices": 554,
+  "faces": 1104,
+  "signedVolume": 1.0000000727612957,
+  "independentSignedVolume": 1.0000000727612954,
+  "originalVolumeEquivalentDiameter": 1.2407010118904696,
+  "firstVertex": [
+    -0.046658,
+    0.502842,
+    0.504777
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5682531264401455,
+    0.7893018321250749
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.737358,
+      0.660568
+    ],
+    [
+      -0.752933,
+      0.689728
+    ],
+    [
+      -0.584841,
+      0.529591
+    ]
+  ],
+  "scaleKmPerSourceUnit": 54.541746441304575,
+  "alternatives": [
+    {
+      "modelId": 1913,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1913",
+      "pole": [
+        "307",
+        "59"
+      ],
+      "version": "2018-07-18",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Ďurech et al. (2018)",
+          "url": "/projects/damit/references/view/175"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Published convex inversion from Ďurech et al. (2018). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "durech-2018.pdf",
+      "url": "https://arxiv.org/pdf/1707.03637",
+      "label": "Ďurech et al. (2018), BlueEye600 shape models"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 67.67,
+    "uncertaintyKm": 0.82,
+    "reportedUncertaintyKm": 0.82,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 252,
+      "name": "Clementina",
+      "diameterKm": 67.67,
+      "uncertaintyKm": 0.82,
+      "detections": 9,
+      "originalRow": "252    Clementina                     9.10  0.15  9   67.67  0.82 0.090 0.003"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Published convex inversion from Ďurech et al. (2018). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+    "scaleKmPerSourceUnit": 54.541746441304575,
+    "metersPerSourceUnit": 54541.746441304575,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 67.67 km effective diameter (catalog ±0.82 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "independentCenteredSignedVolume": 1.0000000727612957,
+  "surfaceAreaSourceUnitsSquared": 5.305115913655268,
+  "surfaceEquivalentDiameterSourceUnits": 1.29948868508634,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        -0.046658,
+        0.502842,
+        0.504777
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 3,
+      "sourcePoint": [
+        -0.070433,
+        0.338133,
+        0.529591
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 190,
+      "sourcePoint": [
+        -0.737358,
+        0.116543,
+        -0.081456
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 242,
+      "sourcePoint": [
+        0.660568,
+        -0.199046,
+        0.082335
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 271,
+      "sourcePoint": [
+        0.206664,
+        0.689728,
+        0.237385
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 277,
+      "sourcePoint": [
+        -0.222589,
+        0.587778,
+        -0.016295
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 312,
+      "sourcePoint": [
+        0.129285,
+        -0.752933,
+        -0.09121
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 552,
+      "sourcePoint": [
+        0.282137,
+        0.036451,
+        -0.584841
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 553,
+      "sourcePoint": [
+        0.065405,
+        0.253182,
+        -0.584841
+      ]
+    }
+  ],
+  "distanceAu": 3.159622955651379,
+  "orbitalPeriodYears": 5.616439602083767,
+  "sourceFields": {
+    "ID": "1912",
+    "Asteroid": "(252) Clementina",
+    "λ": "121",
+    "β": "46",
+    "P": "10.8619",
+    "YORP": "",
+    "t0": "2451110",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "1.48",
+    "p3": "0.15",
+    "p4": "-0",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-07-18",
+    "Comment": "",
+    "Created": "2018-07-19 12:40:45",
+    "Modified": "2018-07-19 12:40:45",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

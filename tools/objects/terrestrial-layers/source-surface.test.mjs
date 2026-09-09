@@ -68,12 +68,12 @@ test('the delivered scientific atlas samples source geometry, not the lossy flat
     // Atlas pixel (0,0) transports to (5,1/4,1/4) m on this retained face.
     const matrix=[BASE_TILE/2,0,0,0,0,0,BASE_TILE/2,0,0,0,1,0,0,5*BASE_TILE,0,1];
     const radial={faces:[face],width:2,height:2,tileSize:2,plans:[{face,rect:{x:0,y:0},geometry:{leafWidth:2,leafHeight:2},matrix}],scientificSurfaces:new Map([['elevation',createShapeSurfaceSampler(mesh,lens)]])};
-    await sharp({create:{width:2,height:1,channels:3,background:{r:17,g:17,b:17}}}).webp({lossless:true}).toFile(join(root,'preview.webp'));
+    // Deliberately absent: a direct source atlas must not decode its preview.
     const surfaces=[{id:'elevation',map:{url:'/scenes/test-body/preview.webp'},surfaceSampling:{...lens.surfaceSampling}}];
     await prepareRadialMaterials({radial,surfaces,config:{namespace:'test-body',publicBase:'/scenes/test-body/',geometry:{radiusKm:.001,radius:1,radialTerrain:{path:'fixture.obj'}},raster:{scientific:[lens],surfaceQuality:100}},source:{manifest:{generatedIntermediates:[]}},publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
     const {data}=await sharp(join(root,'test-body-elevation-surface@2x.webp')).removeAlpha().raw().toBuffer({resolveWithObject:true});
     const expected=Math.round((Math.sqrt(25+.25**2+.25**2)-1)/5*255);
-    for(const channel of data.subarray(0,3))assert.ok(Math.abs(channel-expected)<=2,`Expected source height color ${expected}, received ${channel}; preview was 17`);
+    for(const channel of data.subarray(0,3))assert.ok(Math.abs(channel-expected)<=2,`Expected source height color ${expected}, received ${channel}; preview file is deliberately absent`);
     assert.equal(surfaces[0].surfaceSampling.transfer.withheldTexels,0);
   } finally { await rm(root,{recursive:true,force:true}); }
 });

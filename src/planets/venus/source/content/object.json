@@ -143,7 +143,7 @@
         "id": "clouds",
         "label": "Clouds",
         "description": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
-        "title": "OpenSpace cloud presentation; observational lineage unresolved",
+        "title": "Cloud illustration",
         "thumbnail": "venus-lens-clouds.webp",
         "surface": "venus-clouds.webp",
         "source": {
@@ -155,13 +155,14 @@
         "shortLabel": "VIS",
         "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
         "falseColor": false,
-        "detail": "Illustration"
+        "detail": "Illustration",
+        "summary": "The cloud deck is illustrated with a texture from OpenSpace. Its original camera, wavelength and processing are unknown."
       },
       {
         "id": "radar",
         "label": "Radar",
         "description": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic. Colors represent an archival radar presentation, not visible surface color.",
-        "title": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
+        "title": "C3-MDIR synthetic-color radar mosaic",
         "thumbnail": "venus-lens-radar.webp",
         "surface": "venus-radar.webp",
         "source": {
@@ -173,13 +174,14 @@
         "shortLabel": "SAR",
         "qualification": "USGS/NASA Magellan C3-MDIR synthetic-color radar mosaic",
         "falseColor": true,
-        "detail": "Radar mosaic"
+        "detail": "Radar mosaic",
+        "summary": "Radar images map the ground beneath the clouds. The added colors do not represent the surface as a person would see it."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color.",
-        "title": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
+        "title": "C3-MDIR colorized topography",
         "thumbnail": "venus-lens-elevation.webp",
         "surface": "venus-elevation.webp",
         "source": {
@@ -234,7 +236,8 @@
         "shortLabel": "DEM",
         "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
         "falseColor": true,
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "summary": "Colors show elevation and shading reveals slopes. The map describes terrain beneath the clouds, not visible surface color."
       }
     ],
     "labels": {

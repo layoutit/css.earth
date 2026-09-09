@@ -1,0 +1,536 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "gyptis",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "8bc870501eab2c8006fa1c171d080fe11d676f492fb957ad679ad88e48df30db"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "91ebd809d5a22add7385dda4087783f64203d333a41ce38f96ea2d8fc906e79d",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "gyptis",
+        "displayName": "Gyptis",
+        "publicBase": "/scenes/gyptis/",
+        "distanceAu": 2.7713762475315957,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-5394.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 133819.50936020783,
+                "expectedVertices": 548,
+                "expectedFaces": 1092,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -83.015
+              },
+              "minimum": -20,
+              "maximum": 40,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 83015,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 1660.3
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 83.015,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
+          "polesUrl": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-5394.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 133819.50936020783,
+              "expectedVertices": 548,
+              "expectedFaces": 1092,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 1660.3,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "2283e44771b2c68a440b45e9de0ebf59176747a45b81a820fb8af60d563a305b",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "gyptis",
+        "displayName": "Gyptis",
+        "title": {
+          "label": "Gyptis",
+          "viewBox": "0 0 78.9855 35",
+          "width": 78.9855,
+          "height": 35,
+          "path": "M9.41 29.31Q6.64 29.31 4.53 28Q2.41 26.68 1.2 24.3Q0 21.93 0 18.83Q0 15.67 1.22 13.3Q2.43 10.93 4.55 9.62Q6.66 8.31 9.35 8.31Q11.02 8.31 12.47 8.82Q13.92 9.33 15.07 10.25Q16.21 11.17 16.96 12.44Q17.71 13.71 17.95 15.25L14.83 15.25Q14.62 14.32 14.13 13.55Q13.64 12.79 12.93 12.24Q12.22 11.69 11.33 11.4Q10.43 11.1 9.39 11.1Q7.51 11.1 6.08 12.05Q4.65 13 3.86 14.74Q3.06 16.48 3.06 18.83Q3.06 21.18 3.86 22.9Q4.65 24.63 6.09 25.58Q7.53 26.53 9.43 26.53Q11.06 26.53 12.33 25.84Q13.6 25.16 14.34 23.93Q15.08 22.7 15.08 21.06L15.93 21.13L10.06 21.13L10.06 18.58L18.1 18.58L18.1 20.93Q18.1 23.38 16.96 25.27Q15.82 27.17 13.86 28.24Q11.89 29.31 9.41 29.31ZM21.1 34.66L21.28 32.24L22.58 32.25Q23.11 32.29 23.5 32.14Q23.89 31.98 24.2 31.59Q24.5 31.2 24.74 30.53L25.31 28.93L19.68 14.37L22.81 14.37L25.72 22.45Q26.14 23.65 26.51 24.84Q26.88 26.03 27.25 27.22L26.42 27.22Q26.77 26.03 27.15 24.84Q27.53 23.64 27.95 22.45L30.85 14.37L33.94 14.37L27.36 31.43Q26.92 32.54 26.31 33.27Q25.69 33.99 24.87 34.37Q24.04 34.74 23.01 34.74Q22.51 34.74 22.02 34.72Q21.52 34.7 21.1 34.66ZM35.93 34.71L35.93 14.37L38.79 14.37L38.79 16.53L38.87 16.53Q39.3 15.82 39.94 15.27Q40.58 14.73 41.44 14.42Q42.29 14.11 43.34 14.11Q45.19 14.11 46.61 15.05Q48.03 16 48.82 17.71Q49.61 19.42 49.61 21.7Q49.61 23.97 48.82 25.68Q48.03 27.39 46.62 28.34Q45.2 29.29 43.33 29.29Q42.29 29.29 41.46 28.97Q40.62 28.66 39.99 28.09Q39.35 27.52 38.91 26.77L38.85 26.77L38.85 34.71ZM42.73 26.79Q43.93 26.79 44.81 26.18Q45.7 25.57 46.17 24.43Q46.65 23.3 46.65 21.69Q46.65 20.07 46.17 18.94Q45.68 17.8 44.81 17.2Q43.93 16.6 42.73 16.6Q41.48 16.6 40.57 17.23Q39.65 17.86 39.17 19Q38.68 20.14 38.68 21.69Q38.68 23.2 39.17 24.36Q39.67 25.51 40.58 26.15Q41.48 26.79 42.73 26.79ZM59.09 14.37L59.09 16.78L50.75 16.78L50.75 14.37ZM53.23 10.5L56.14 10.5L56.14 25.1Q56.14 25.94 56.49 26.28Q56.84 26.62 57.7 26.62Q58 26.62 58.39 26.61Q58.79 26.59 59.08 26.58L59.19 28.97Q58.82 29.01 58.31 29.03Q57.79 29.05 57.31 29.05Q55.28 29.05 54.25 28.15Q53.23 27.25 53.23 25.47ZM61.44 29L61.44 14.37L64.35 14.37L64.35 29ZM62.91 11.91Q62.13 11.91 61.6 11.4Q61.07 10.9 61.07 10.16Q61.07 9.39 61.6 8.88Q62.13 8.37 62.9 8.37Q63.68 8.37 64.21 8.88Q64.75 9.39 64.75 10.16Q64.75 10.9 64.21 11.4Q63.68 11.91 62.91 11.91ZM73.07 29.33Q71.41 29.33 70.09 28.82Q68.77 28.3 67.96 27.27Q67.15 26.24 67 24.72L69.85 24.6Q70 25.76 70.82 26.38Q71.64 27 73.02 27Q74.42 27 75.22 26.44Q76.02 25.87 76.02 25.01Q76.02 24.27 75.47 23.81Q74.92 23.35 73.94 23.15L71.52 22.62Q69.46 22.15 68.4 21.1Q67.34 20.06 67.34 18.46Q67.34 17.16 68.05 16.17Q68.77 15.18 70.03 14.62Q71.29 14.07 72.97 14.07Q74.6 14.07 75.84 14.62Q77.09 15.18 77.82 16.2Q78.56 17.21 78.66 18.61L75.91 18.73Q75.83 17.73 75.07 17.06Q74.31 16.39 73 16.39Q71.78 16.39 71.03 16.97Q70.28 17.54 70.28 18.36Q70.28 19.12 70.82 19.57Q71.37 20.03 72.41 20.26L74.88 20.81Q76.99 21.28 77.99 22.26Q78.99 23.24 78.99 24.83Q78.99 26.2 78.22 27.22Q77.45 28.23 76.12 28.78Q74.79 29.33 73.07 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "83.015 km (size-calibrated model)",
+              "source": {
+                "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+                "label": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+                "checked": "2026-09-08",
+                "path": "source/reference/calibration.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.771 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.61 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "6.21516 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394",
+                "label": "DAMIT model 5394",
+                "checked": "2026-09-08",
+                "path": "source/reference/damit-model.json"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Thermal diameter 166.03 ± 6.66 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "title": "Light-curve shape model",
+              "thumbnail": "/scenes/gyptis/gyptis-shape-thumbnail.webp",
+              "surface": "gyptis-shape-surface@2x.webp",
+              "poles": "gyptis-shape-surface@2x.webp",
+              "source": {
+                "id": "gyptis-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape · grid marks missing imagery"
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radius on the shape model minus a 83.015 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Shape-derived elevations",
+              "thumbnail": "/scenes/gyptis/gyptis-elevation-thumbnail.webp",
+              "surface": "gyptis-elevation-surface@2x.webp",
+              "poles": "gyptis-elevation-surface@2x.webp",
+              "source": {
+                "id": "gyptis-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-20",
+                  "10",
+                  "40"
+                ],
+                "meta": "km · 83.015 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394",
+                "image": "/scenes/gyptis/gyptis-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 5394, version 2019-10-23",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+            "href": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Gyptis model 5394; original model authors identified in its pinned reference records."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "gyptis-shape",
+      "path": "shape/model-5394.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/58886/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Gyptis model 5394; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 133819.50936020783,
+        "referenceRadiusMeters": 83015
+      },
+      "coverage": "Published convex light-curve model 5394. Convex light-curve reconstruction with approximate thermal size: 166.03 km effective diameter (catalog ±6.66 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. The convex inversion resolves the broad shape; craters and concavities are unresolved. Other published pole solutions remain possible.",
+      "sha256": "94376fbdeea8797ce676895cb19d9fe4c3853b0672024314875c10dcb77b7fc1",
+      "bytes": 44313,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-5394.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/58886/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "sha256": "2283e44771b2c68a440b45e9de0ebf59176747a45b81a820fb8af60d563a305b",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "bytes": 8513,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radius on the shape model minus a 83.015 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "gyptis-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/gyptis/gyptis-elevation-thumbnail.webp",
+          "bytes": 5400,
+          "sha256": "c582cf17be52a741fa3896c3a405cd03d28287a1bc2dd964c31cf5205834a70c",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/gyptis/gyptis-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/gyptis/gyptis-elevation-surface@2x.webp",
+          "bytes": 288110,
+          "sha256": "d0d934bba384b68b8f7eae68cd8c004795c2d0a247106666d3d41bb6452b4cc6",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Thermal diameter 166.03 ± 6.66 km; quoted error excludes unquantified shape, viewing and thermal-model effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "gyptis-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/gyptis/gyptis-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/gyptis/gyptis-shape-surface@2x.webp",
+          "bytes": 228110,
+          "sha256": "17da7354107308cc626e28fd06d5ae02609c57772eafd2861ef699ed633dd6ce",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5686,
+          "sha256": "e597962e4704e3e95fccec81f1d0e55b20f6eb55f2ade57cf3e5c9bd13e1e09c",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10640,
+          "sha256": "55c0493bdfad4151a54f9edac4dba82e93eb260a2fae5ca16274370c554f608c",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

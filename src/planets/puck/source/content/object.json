@@ -45,7 +45,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
-        "title": "Voyager 2 clear-filter image C2683716 registered to an approximate 81 km reference sphere. Illumination correction reduces photographed shading. Gray grid marks unseen or unreliable samples. Original detector sampling is about 4.77 km/pixel; the small image does not resolve fine terrain.",
+        "title": "Image C2683716",
         "detail": "Voyager clear",
         "thumbnail": "/scenes/puck/puck-normal-thumbnail.webp",
         "surface": "puck-normal-surface@2x.webp",
@@ -54,7 +54,8 @@
           "id": "c2683716",
           "path": "../manifest.json",
           "url": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716"
-        }
+        },
+        "summary": "Each source pixel spans about 4.77 km, too coarse for fine terrain. The gray grid marks unseen or unreliable areas."
       }
     ]
   },

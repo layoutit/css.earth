@@ -1,0 +1,682 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "ariel",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "86399de081016cf9f30c837b938c2cdcfc7e98d511bd614865e70bfbdebeb1ac"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "4979ea9b66dcb5e0cb6d31e5de86383b67f9b974636436e223b4f1b4e4ffe209",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "ariel",
+        "displayName": "Ariel",
+        "publicBase": "/scenes/ariel/",
+        "distanceAu": 19.2,
+        "raster": {
+          "width": 5760,
+          "height": 2880,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 1024,
+          "surfaceQuality": 95,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "isis3-float-monochrome",
+                "grid": {
+                  "width": 3652,
+                  "height": 1826,
+                  "targetName": "Ariel",
+                  "centerLongitude": 180,
+                  "referenceRadiusMeters": 581100,
+                  "polarRadiusMeters": 577700,
+                  "origin": [
+                    -3652000,
+                    913000
+                  ],
+                  "resolutionMeters": 1000,
+                  "specialValueMagnitude": 1e+30,
+                  "longitudeRange": [
+                    -180,
+                    180
+                  ]
+                },
+                "displayRange": [
+                  0,
+                  3000
+                ]
+              }
+            }
+          ],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "format": "isis3",
+              "path": "science/audem-ZTL-cyl-180180.cub.gz",
+              "description": "Voyager terrain model · shaded relief",
+              "title": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
+              "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+              "minimum": -8,
+              "maximum": 6,
+              "colors": [
+                "#1c5599",
+                "#bbab80",
+                "#aa3e24"
+              ],
+              "labels": [
+                "−8",
+                "−1",
+                "6"
+              ],
+              "units": "km",
+              "consumer": "scientific-surfaces",
+              "sampling": "bilinear",
+              "grid": {
+                "width": 3652,
+                "height": 1826,
+                "targetName": "Ariel",
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 581100,
+                "polarRadiusMeters": 577700,
+                "origin": [
+                  -3652000,
+                  913000
+                ],
+                "resolutionMeters": 1000,
+                "specialValueMagnitude": 1e+30,
+                "longitudeRange": [
+                  -180,
+                  180
+                ]
+              },
+              "relief": {
+                "referenceRadiusMeters": 581100,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.25
+              }
+            }
+          ],
+          "observedColors": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 578.9,
+          "camera": {
+            "initialScenePitchDegrees": 37.54960298331237,
+            "defaultControlYawDegrees": -104.50039439240241
+          },
+          "mapUrl": "/scenes/ariel/ariel-normal-surface@2x.webp",
+          "polesUrl": "/scenes/ariel/ariel-normal-poles@2x.webp"
+        },
+        "celestial": {
+          "sunSource": "Vendored JPL Horizons Uranus satellite elements and IAU/NAIF Ariel rotation at the shared epoch."
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            177,
+            177,
+            176
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "3dc55ec1d02b2bec3dd31afdce73fdcefc123164c2017fa6a17f2d172a17063f",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "ariel",
+        "displayName": "Ariel",
+        "panel": {
+          "introduction": "Ariel is an icy moon crossed by long fault valleys and troughs. Voyager 2 revealed a landscape of cratered plains, deep canyons, and smoother terrain reshaped by past geologic activity.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "578.9 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "System solar semimajor axis",
+              "value": "19.189 AU",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbit around Uranus",
+              "value": "About 2.52 days"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 2.52 days (synchronous)"
+            },
+            {
+              "id": "distance-from-parent",
+              "label": "Mean distance from Uranus",
+              "value": "About 190,900 km"
+            },
+            {
+              "id": "discovery",
+              "label": "Discovery",
+              "value": "William Lassell · 1851"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "1.54 ± 0.03 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "labels": {
+            "normal": "Monochrome",
+            "elevation": "Elevation"
+          },
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
+              "title": "Monochrome mosaic",
+              "detail": "Corrected mosaic",
+              "thumbnail": "/scenes/ariel/ariel-normal-thumbnail.webp",
+              "surface": "ariel-normal-surface@2x.webp",
+              "poles": "ariel-normal-poles@2x.webp",
+              "source": {
+                "id": "schenk-2020-ariel-normal",
+                "path": "../manifest.json",
+                "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+              },
+              "summary": "Brightness correction reduces broad shading, while local shadows and seams remain. The gray grid marks missing observations."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
+              "title": "Stereo, shading and limb terrain model",
+              "detail": "Shaded relief",
+              "thumbnail": "/scenes/ariel/ariel-elevation-thumbnail.webp",
+              "surface": "ariel-elevation-surface@2x.webp",
+              "poles": "ariel-elevation-poles@2x.webp",
+              "source": {
+                "id": "schenk-2020-ariel-elevation",
+                "path": "../manifest.json",
+                "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−8",
+                  "−1",
+                  "6"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+                "image": "/scenes/ariel/ariel-elevation-legend.webp"
+              },
+              "summary": "Height from stereo images, shading and limb measurements. Detail varies; the gray grid marks missing elevation data."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Ariel overview",
+            "href": "https://science.nasa.gov/uranus/moons/ariel/"
+          },
+          {
+            "label": "Schenk/LPI; NASA/JPL",
+            "role": "surface",
+            "description": "Voyager 2 mosaic and terrain model",
+            "href": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/uranus/moons/ariel/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        },
+        "title": {
+          "label": "Ariel",
+          "viewBox": "0 0 54.7309 35",
+          "width": 54.7309,
+          "height": 35,
+          "path": "M0 29L7.36 8.63L11.07 8.63L18.43 29L15.09 29L11.17 17.54Q10.69 16.11 10.14 14.34Q9.58 12.57 8.8 9.98L9.61 9.98Q8.86 12.58 8.3 14.35Q7.74 16.12 7.25 17.54L3.25 29ZM4.05 23.68L4.05 21.11L14.34 21.11L14.34 23.68ZM20.35 29L20.35 14.37L23.17 14.37L23.17 16.75L23.24 16.75Q23.63 15.53 24.54 14.86Q25.44 14.18 26.82 14.18Q27.13 14.18 27.42 14.21Q27.71 14.23 27.91 14.26L27.91 17Q27.74 16.94 27.31 16.89Q26.88 16.85 26.38 16.85Q25.52 16.85 24.81 17.23Q24.1 17.61 23.68 18.38Q23.27 19.16 23.27 20.3L23.27 29ZM30.16 29L30.16 14.37L33.08 14.37L33.08 29ZM31.64 11.91Q30.86 11.91 30.33 11.4Q29.79 10.9 29.79 10.16Q29.79 9.39 30.33 8.88Q30.86 8.37 31.63 8.37Q32.41 8.37 32.94 8.88Q33.47 9.39 33.47 10.16Q33.47 10.9 32.94 11.4Q32.41 11.91 31.64 11.91ZM42.68 29.33Q40.51 29.33 38.94 28.36Q37.38 27.4 36.54 25.68Q35.69 23.97 35.69 21.74Q35.69 19.5 36.56 17.77Q37.43 16.04 38.96 15.05Q40.49 14.07 42.5 14.07Q43.98 14.07 45.21 14.6Q46.44 15.12 47.35 16.11Q48.26 17.09 48.75 18.49Q49.24 19.88 49.24 21.66L49.24 22.51L37.09 22.51L37.09 20.3L47.74 20.3L46.43 20.99Q46.43 19.62 45.96 18.61Q45.48 17.6 44.61 17.05Q43.73 16.5 42.52 16.5Q41.3 16.5 40.42 17.06Q39.54 17.61 39.06 18.6Q38.58 19.59 38.58 20.91L38.58 22.23Q38.58 23.64 39.08 24.69Q39.58 25.75 40.49 26.32Q41.41 26.89 42.71 26.89Q43.64 26.89 44.36 26.62Q45.07 26.35 45.55 25.83Q46.03 25.31 46.25 24.63L49.04 24.78Q48.75 26.12 47.86 27.14Q46.96 28.17 45.63 28.75Q44.31 29.33 42.68 29.33ZM54.73 8.63L54.73 29L51.82 29L51.82 8.63Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "schenk-2020-ariel-normal",
+      "path": "observations/aumap-cyl-180180.cub.gz",
+      "origin": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download",
+      "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+      "mirror": "https://earth-assets.lowpoly.cc/source-assets/2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9/aumap-cyl-180180.cub.gz",
+      "upstreamSha256": "fd85bca38db1954253012f270f476100202b13709bb889dfb0cf5cc8e87cdd80",
+      "upstreamBytes": 26753560,
+      "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
+      "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+      "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+      "licenseEvidence": [
+        "observations/aaReadMe_uranian_MAP_DEM.txt",
+        "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+      ],
+      "acquisition": "Restore the byte-preserving compressed source mirror using preparation/acquisition.json.",
+      "redistribution": "Original cube retained byte-for-byte inside gzip; author, release reference and caveats accompany the prepared visualization.",
+      "width": 3652,
+      "height": 1826,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 581100
+      },
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "coverage": "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download"
+      },
+      "sha256": "2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9",
+      "bytes": 12992353,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/aumap-cyl-180180.cub.gz",
+        "url": "https://earth-assets.lowpoly.cc/source-assets/2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9/aumap-cyl-180180.cub.gz"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "schenk-2020-ariel-elevation",
+      "path": "science/audem-ZTL-cyl-180180.cub.gz",
+      "origin": "https://repository.hou.usra.edu/bitstreams/55639bf1-6c1c-4824-8634-d4a4500fb095/download",
+      "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
+      "mirror": "https://earth-assets.lowpoly.cc/source-assets/2f2568538e310cf26388a99ca59e43ea09f12e66b8208ca84f3466e048e8dc69/audem-ZTL-cyl-180180.cub.gz",
+      "upstreamSha256": "47a0d47ac9832ca912451d3b43c94d0f982b1dade6aa83e2a0c49f2be98a3288",
+      "upstreamBytes": 26745332,
+      "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
+      "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+      "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+      "licenseEvidence": [
+        "observations/aaReadMe_uranian_MAP_DEM.txt",
+        "https://repository.hou.usra.edu/handle/20.500.11753/1687"
+      ],
+      "acquisition": "Restore the byte-preserving compressed source mirror using preparation/acquisition.json.",
+      "redistribution": "Original cube retained byte-for-byte inside gzip; author, release reference and caveats accompany the prepared visualization.",
+      "width": 3652,
+      "height": 1826,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 581100
+      },
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "coverage": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/55639bf1-6c1c-4824-8634-d4a4500fb095/download"
+      },
+      "sha256": "2f2568538e310cf26388a99ca59e43ea09f12e66b8208ca84f3466e048e8dc69",
+      "bytes": 7759355,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/audem-ZTL-cyl-180180.cub.gz",
+        "url": "https://earth-assets.lowpoly.cc/source-assets/2f2568538e310cf26388a99ca59e43ea09f12e66b8208ca84f3466e048e8dc69/audem-ZTL-cyl-180180.cub.gz"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source metadata, license evidence, or authored preparation and content.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "3dc55ec1d02b2bec3dd31afdce73fdcefc123164c2017fa6a17f2d172a17063f",
+      "bytes": 7569,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Voyager 2 mosaic with source photometric correction. Detail varies and local shadows, seams, and processing marks remain. Gray grid marks missing observations; this is not a true albedo map."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "isis3-float-monochrome",
+          "grid": {
+            "width": 3652,
+            "height": 1826,
+            "targetName": "Ariel",
+            "centerLongitude": 180,
+            "referenceRadiusMeters": 581100,
+            "polarRadiusMeters": 577700,
+            "origin": [
+              -3652000,
+              913000
+            ],
+            "resolutionMeters": 1000,
+            "specialValueMagnitude": 1e+30,
+            "longitudeRange": [
+              -180,
+              180
+            ]
+          },
+          "displayRange": [
+            0,
+            3000
+          ]
+        }
+      },
+      "inputs": [
+        "schenk-2020-ariel-normal"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ariel/ariel-normal-thumbnail.webp",
+          "bytes": 2652,
+          "sha256": "ad6246d284f817fd5a0a2891fbce4a14f0962ebd9343d43840f142e4c6e98d4b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ariel/ariel-normal-surface@2x.webp",
+          "bytes": 1732534,
+          "sha256": "eb57f4b28f9ea9c2bb9d73ff97bd67fec36756574037df8a760ffdc8353b8377",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ariel/ariel-normal-poles@2x.webp",
+          "bytes": 63314,
+          "sha256": "8a54b16a8b31aab7add9c6ed42ed42fa9ce5747da52797b67ea083570bd49965",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Stereo, photoclinometry, and limb terrain model, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 1 km grid spacing is not uniform effective resolution."
+      },
+      "inputs": [
+        "schenk-2020-ariel-elevation"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ariel/ariel-elevation-thumbnail.webp",
+          "bytes": 3376,
+          "sha256": "c3f33c7a6b9e55023729656ee1d0eccec635ba47b05f0f31d1102e377f8e7521",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ariel/ariel-elevation-legend.webp",
+          "bytes": 180,
+          "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ariel/ariel-elevation-surface@2x.webp",
+          "bytes": 1842112,
+          "sha256": "c757f0e953da47442d332de6437b43c15760d39820927d003e1c14b176ddbb59",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ariel/ariel-elevation-poles@2x.webp",
+          "bytes": 137524,
+          "sha256": "34c262469bf4a6d24d0a2afe5ab93eee86657854dc3873cf0c99734d44b424c6",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4083,
+          "sha256": "cf1460a1e20aaa55ce4801bc71070d55e4719c4e4d0666a6b4948dcd5efb04da",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 31934,
+          "sha256": "e18c73184e65e7837553ef3034af460bbdda2cea173c1fc844aaa3be87e177de",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 27066,
+          "sha256": "58d5f9e8c1e1835c9bbaefa91c851766781e7b783b8d0cc8e247bea689e68425",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

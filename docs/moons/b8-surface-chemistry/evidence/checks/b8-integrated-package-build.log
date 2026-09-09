@@ -1,0 +1,81 @@
+Scope: 4 of 5 workspace projects
+
+> @cssearth/astronomy@0.0.0 build /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/astronomy
+> tsup
+
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/astronomy/tsup.config.ts
+CLI Target: es2022
+CLI Cleaning output folder
+ESM Build start
+CJS Build start
+ESM dist/index.js 1.62 MB
+ESM ⚡️ Build success in 53ms
+CJS dist/index.cjs 1.63 MB
+CJS ⚡️ Build success in 53ms
+DTS Build start
+DTS ⚡️ Build success in 786ms
+DTS dist/index.d.ts  64.39 KB
+DTS dist/index.d.cts 64.39 KB
+
+> @cssearth/catalog@0.0.0 build /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/catalog
+> tsup
+
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/catalog/tsup.config.ts
+CLI Target: es2022
+CLI Cleaning output folder
+ESM Build start
+CJS Build start
+ESM dist/index.js 5.78 KB
+ESM ⚡️ Build success in 8ms
+CJS dist/index.cjs 7.02 KB
+CJS ⚡️ Build success in 8ms
+DTS Build start
+DTS ⚡️ Build success in 317ms
+DTS dist/index.d.ts  3.95 KB
+DTS dist/index.d.cts 3.95 KB
+
+> @cssearth/objects@0.0.0 build /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/objects
+> tsup
+
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/objects/tsup.config.ts
+CLI Target: es2022
+CLI Cleaning output folder
+ESM Build start
+CJS Build start
+ESM dist/index.js 62.80 KB
+ESM ⚡️ Build success in 11ms
+CJS dist/index.cjs 65.15 KB
+CJS ⚡️ Build success in 11ms
+DTS Build start
+DTS ⚡️ Build success in 310ms
+DTS dist/index.d.ts  15.41 KB
+DTS dist/index.d.cts 15.41 KB
+
+> @cssearth/engine@0.0.0 build /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/engine
+> tsup
+
+CLI Building entry: src/index.ts
+CLI Using tsconfig: tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/engine/tsup.config.ts
+CLI Target: es2022
+CLI Cleaning output folder
+ESM Build start
+CJS Build start
+CJS dist/index.cjs 65.29 KB
+CJS ⚡️ Build success in 11ms
+ESM dist/index.js 60.45 KB
+ESM ⚡️ Build success in 11ms
+DTS Build start
+DTS ⚡️ Build success in 356ms
+DTS dist/index.d.ts  24.62 KB
+DTS dist/index.d.cts 24.62 KB

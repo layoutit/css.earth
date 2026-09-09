@@ -1,0 +1,20 @@
+{
+  "verifiedAt": "2026-09-09T11:09:35.053Z",
+  "sourceRoot": "/Users/ekrof/fed/cssEarth-comets/output/tuttle/fresh-sources-1DiMOs",
+  "verified": {
+    "inputCount": 6,
+    "generatedIntermediateCount": 1,
+    "documentCount": 14,
+    "verifiedCount": 21
+  },
+  "preservedDownloads": [
+    "stars/eso0932a.tif",
+    "presentation/InterVariable.ttf"
+  ],
+  "originalAcquisition": [
+    "https://cdn.eso.org/images/original/eso0932a.tif",
+    "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+  ],
+  "note": "Reused the two unchanged binary downloads from the original empty-destination source restoration; updated checked-in authored inputs, including both model descriptions and the neutral Arecibo material, then reverified the entire closure. No new download is claimed.",
+  "manifestSha256": "f345cab3d85ffa542b6a194b96c675601f66c6a0167bcbf80450f51391786d2d"
+}

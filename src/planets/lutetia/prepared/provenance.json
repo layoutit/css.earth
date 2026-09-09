@@ -1,0 +1,774 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "lutetia",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "3917ecdeff68bd69d8e1dfffd6adc383b64b3b8315dd504387289ed7486326bb"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "0e289d02429797207c6067110d1ca4e4390b75cb29ebac48bee9c57ce0703425",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "lutetia",
+        "displayName": "Lutetia",
+        "publicBase": "/scenes/lutetia/",
+        "distanceAu": 2.4345822333960907,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/lutetia_025k_cart.wrl",
+              "format": "vrml-mesh",
+              "grid": {
+                "metersPerUnit": 1000,
+                "expectedVertices": 12265,
+                "expectedFaces": 24526
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -49
+              },
+              "minimum": -16,
+              "maximum": 16,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 49000,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ],
+          "surfaceObservations": [
+            {
+              "id": "osiris",
+              "format": "osiris-camera",
+              "consumer": "osiris-observation",
+              "filter": "FFP-Vis_Orange",
+              "allowLossy": true,
+              "transfer": {
+                "maximumSourceDistanceMeters": 1200,
+                "maximumSeparationMeters": 600,
+                "maximumEmissionDegrees": 70,
+                "visibilityToleranceMeters": 0.5
+              },
+              "photometry": {
+                "model": "minnaert",
+                "referenceIncidenceDegrees": 0,
+                "referenceEmissionDegrees": 0,
+                "maximumIncidenceDegrees": 70,
+                "maximumEmissionDegrees": 70,
+                "maximumGain": 2.5,
+                "coefficient": 0.5505,
+                "phaseCoefficientPerDegree": 0.005
+              },
+              "displayPercentiles": [
+                1,
+                99
+              ],
+              "metadata": {
+                "label": "OSIRIS",
+                "coverage": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
+                "falseColor": false
+              },
+              "frames": [
+                {
+                  "id": "approach",
+                  "path": "observations/n20100710t154047674id4df22.img",
+                  "cameraPath": "observations/osiris-camera.json",
+                  "startTime": "2010-07-10T15:41:06.632"
+                },
+                {
+                  "id": "image-n20100710t154135529id4df22",
+                  "path": "observations/n20100710t154135529id4df22.img",
+                  "cameraPath": "observations/n20100710t154135529id4df22-camera.json",
+                  "startTime": "2010-07-10T15:41:54.488"
+                }
+              ],
+              "selection": "lowest-emission",
+              "levelMatching": {
+                "samplesPerTriangle": 24,
+                "minimumPairs": 64,
+                "maximumLogMad": 0.25,
+                "maximumGain": 1.35
+              }
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 49,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+          "polesUrl": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/lutetia_025k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 12265,
+              "expectedFaces": 24526
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 1200,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Pinned JPL Horizons heliocentric elements and the Jorda–Vincent rotation model released with the PDS Lutetia shape"
+        },
+        "presentation": {
+          "defaultLens": "osiris",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "8e1e2637ce07eb7f672c0270b747831c3bd371ea786e32ef38ff40849fab7c89",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "lutetia",
+        "displayName": "Lutetia",
+        "title": {
+          "label": "Lutetia",
+          "viewBox": "0 0 82.2848 35",
+          "width": 82.2848,
+          "height": 35,
+          "path": "M0 29L0 8.63L3.05 8.63L3.05 26.33L12.61 26.33L12.61 29ZM20.22 29.27Q18.73 29.27 17.55 28.62Q16.36 27.97 15.68 26.69Q15 25.4 15 23.52L15 14.37L17.91 14.37L17.91 23.18Q17.91 24.88 18.76 25.77Q19.6 26.66 21.09 26.66Q22.09 26.66 22.88 26.26Q23.67 25.86 24.13 25Q24.59 24.15 24.59 22.85L24.59 14.37L27.51 14.37L27.51 29L24.66 29L24.66 25.38L25.24 25.38Q24.55 27.35 23.28 28.31Q22.01 29.27 20.22 29.27ZM37.69 14.37L37.69 16.78L29.35 16.78L29.35 14.37ZM31.83 10.5L34.74 10.5L34.74 25.1Q34.74 25.94 35.09 26.28Q35.44 26.62 36.3 26.62Q36.6 26.62 37 26.61Q37.39 26.59 37.68 26.58L37.79 28.97Q37.42 29.01 36.91 29.03Q36.4 29.05 35.92 29.05Q33.88 29.05 32.85 28.15Q31.83 27.25 31.83 25.47ZM46.06 29.33Q43.89 29.33 42.32 28.36Q40.76 27.4 39.92 25.68Q39.07 23.97 39.07 21.74Q39.07 19.5 39.94 17.77Q40.81 16.04 42.34 15.05Q43.87 14.07 45.88 14.07Q47.36 14.07 48.59 14.6Q49.82 15.12 50.73 16.11Q51.64 17.09 52.13 18.49Q52.62 19.88 52.62 21.66L52.62 22.51L40.47 22.51L40.47 20.3L51.12 20.3L49.81 20.99Q49.81 19.62 49.34 18.61Q48.86 17.6 47.99 17.05Q47.11 16.5 45.9 16.5Q44.68 16.5 43.8 17.06Q42.92 17.61 42.44 18.6Q41.96 19.59 41.96 20.91L41.96 22.23Q41.96 23.64 42.46 24.69Q42.96 25.75 43.87 26.32Q44.79 26.89 46.09 26.89Q47.02 26.89 47.74 26.62Q48.45 26.35 48.93 25.83Q49.41 25.31 49.63 24.63L52.42 24.78Q52.13 26.12 51.24 27.14Q50.34 28.17 49.01 28.75Q47.69 29.33 46.06 29.33ZM62.06 14.37L62.06 16.78L53.72 16.78L53.72 14.37ZM56.2 10.5L59.11 10.5L59.11 25.1Q59.11 25.94 59.46 26.28Q59.81 26.62 60.67 26.62Q60.97 26.62 61.37 26.61Q61.76 26.59 62.05 26.58L62.16 28.97Q61.79 29.01 61.28 29.03Q60.76 29.05 60.29 29.05Q58.25 29.05 57.22 28.15Q56.2 27.25 56.2 25.47ZM64.41 29L64.41 14.37L67.32 14.37L67.32 29ZM65.88 11.91Q65.11 11.91 64.57 11.4Q64.04 10.9 64.04 10.16Q64.04 9.39 64.57 8.88Q65.11 8.37 65.87 8.37Q66.65 8.37 67.18 8.88Q67.72 9.39 67.72 10.16Q67.72 10.9 67.18 11.4Q66.65 11.91 65.88 11.91ZM75.04 29.26Q73.6 29.26 72.45 28.75Q71.31 28.25 70.64 27.26Q69.98 26.28 69.98 24.83Q69.98 23.59 70.46 22.78Q70.94 21.97 71.76 21.51Q72.58 21.04 73.61 20.8Q74.64 20.56 75.74 20.44Q77.09 20.26 77.9 20.16Q78.7 20.06 79.05 19.83Q79.4 19.59 79.4 19.07L79.4 18.96Q79.4 18.21 79.06 17.67Q78.72 17.13 78.07 16.81Q77.42 16.49 76.47 16.49Q75.54 16.49 74.83 16.8Q74.12 17.11 73.71 17.63Q73.3 18.14 73.19 18.76L70.35 18.6Q70.54 17.23 71.35 16.22Q72.15 15.22 73.48 14.67Q74.81 14.11 76.49 14.11Q77.75 14.11 78.81 14.42Q79.86 14.73 80.64 15.36Q81.42 15.98 81.85 16.9Q82.28 17.82 82.28 19.05L82.28 29L79.43 29L79.43 26.95L79.36 26.95Q79.06 27.52 78.52 28.06Q77.98 28.59 77.13 28.92Q76.28 29.26 75.04 29.26ZM75.65 26.91Q76.91 26.91 77.75 26.45Q78.59 25.99 79 25.23Q79.41 24.46 79.41 23.57L79.41 21.82Q79.26 21.96 78.89 22.06Q78.53 22.16 78.02 22.26Q77.51 22.36 76.97 22.44Q76.42 22.53 75.9 22.6Q75.09 22.71 74.4 22.96Q73.71 23.22 73.3 23.67Q72.88 24.13 72.88 24.88Q72.88 25.53 73.22 25.98Q73.56 26.43 74.18 26.67Q74.81 26.91 75.65 26.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Rosetta photographed Lutetia in 2010. Craters and ridges cover this irregular, roughly 100 km asteroid.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "49 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.435 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "3.80 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "8.168 hours"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "geometric-albedo",
+              "label": "Geometric albedo",
+              "value": "0.19",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+                "label": "JPL Horizons pinned physical record",
+                "checked": "2026-09-08",
+                "path": "source/reference/horizons-physical.txt"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "osiris",
+          "controls": [
+            {
+              "id": "osiris",
+              "label": "OSIRIS",
+              "detail": "OSIRIS",
+              "description": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
+              "title": "OSIRIS photographs",
+              "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
+              "surface": "lutetia-osiris-surface@2x.webp",
+              "poles": "lutetia-osiris-surface@2x.webp",
+              "source": {
+                "id": "lutetia-observations-n20100710t154047674id4df22-img",
+                "path": "../manifest.json"
+              },
+              "summary": "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs.",
+              "facts": [
+                {
+                  "id": "images",
+                  "label": "Images",
+                  "value": "2"
+                },
+                {
+                  "id": "image-scale",
+                  "label": "Image scale",
+                  "value": "78–88 m/pixel"
+                }
+              ]
+            },
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo.",
+              "title": "OSIRIS shape reconstruction",
+              "thumbnail": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
+              "surface": "lutetia-shape-surface@2x.webp",
+              "poles": "lutetia-shape-surface@2x.webp",
+              "source": {
+                "id": "lutetia-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "PDS",
+              "summary": "Rosetta shape detail in the north, coarser estimates elsewhere. Source seams remain; no imagery is mapped."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments.",
+              "title": "Shape-derived radial height",
+              "thumbnail": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
+              "surface": "lutetia-elevation-surface@2x.webp",
+              "poles": "lutetia-elevation-surface@2x.webp",
+              "source": {
+                "id": "lutetia-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-16",
+                  "0",
+                  "16"
+                ],
+                "meta": "km · 49 km reference sphere",
+                "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.lbl",
+                "image": "/scenes/lutetia/lutetia-elevation-legend.webp"
+              },
+              "detail": "PDS",
+              "summary": "Height relative to a 49 km sphere. Rosetta resolved the north; the far side is coarser, with source defects."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Imagery",
+            "role": "surface",
+            "description": "OSIRIS reflectance original archive",
+            "href": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img"
+          },
+          {
+            "label": "Mission",
+            "role": "facts",
+            "description": "Rosetta at Lutetia",
+            "href": "https://www.esa.int/ESA_Multimedia/Images/2011/10/Lutetia_coverage"
+          },
+          {
+            "label": "Shape data",
+            "role": "terrain",
+            "description": "Rosetta OSIRIS and Earth-based shape",
+            "href": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/dataset.shtml"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Released body-frame definition",
+            "href": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/document/lutetia_rotation.pdf"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/catalog/dataset.cat",
+            "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "lutetia-shape",
+      "path": "shape/lutetia_025k_cart.wrl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl",
+      "credit": "ESA/Rosetta/OSIRIS; Laurent Jorda, Robert Gaskell, Mikko Kaasalainen and Benoît Carry",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 49000
+      },
+      "coverage": "Closed published model: image-derived northern terrain joined to lightcurve/adaptive-optics constrained unseen regions; source seams and local defects remain.",
+      "capture": {
+        "spacecraftIds": [
+          "rosetta"
+        ],
+        "evidence": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl"
+      },
+      "sha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
+      "bytes": 2954640,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/lutetia_025k_cart.wrl",
+        "url": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lutetia-observations-n20100710t154047674id4df22-img",
+      "path": "observations/n20100710t154047674id4df22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
+      "bytes": 37775872,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/n20100710t154047674id4df22.img",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lutetia-observations-osiris-camera-json",
+      "path": "observations/osiris-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
+      "bytes": 5070,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lutetia-n20100710t154135529id4df22-img",
+      "path": "observations/n20100710t154135529id4df22.img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154135529id4df22.img",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
+      "bytes": 37775872,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "observations/n20100710t154135529id4df22.img",
+        "url": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154135529id4df22.img",
+        "headers": {
+          "User-Agent": "Mozilla/5.0"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "lutetia-n20100710t154135529id4df22-camera",
+      "path": "observations/n20100710t154135529id4df22-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "ESA/Rosetta/MPS OSIRIS team; PDS; NAIF",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
+      "bytes": 5104,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned source documentation or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "8e1e2637ce07eb7f672c0270b747831c3bd371ea786e32ef38ff40849fab7c89",
+      "bytes": 10094,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Color shows the published shape radius minus a 49 km reference sphere. It includes Lutetia’s overall irregular shape and is not height above a gravitational equipotential. Northern geometry is image-resolved; the unvisited side is more coarsely constrained. Source seams and local defects remain. Cartographic relief and optional Sun lighting are display treatments."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "lutetia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/lutetia/lutetia-elevation-thumbnail.webp",
+          "bytes": 6322,
+          "sha256": "28eadc457171bd3c6386469daa3fe910a13dd8318598c50868392df0d4114a30",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/lutetia/lutetia-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/lutetia/lutetia-elevation-surface@2x.webp",
+          "bytes": 375170,
+          "sha256": "7d7960dce265687aaba2acf3897e4cb20f9f87e9bf21c289490817286ce78534",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "The shared grid marks unavailable surface imagery over the published Lutetia shape under prepared lighting. Northern detail comes from Rosetta OSIRIS stereophotoclinometry; the rest is constrained by lightcurves and adaptive-optics outlines. The source contains a known seam and local shape defects. This view has no photographic surface texture and does not portray albedo."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "lutetia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/lutetia/lutetia-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
+          "bytes": 220590,
+          "sha256": "1080889eaa3f187ed7029f70483458f9b9cec4b3bbe392c20ea09b56ddc4b4fe",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "osiris",
+      "label": "OSIRIS",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "parents": [],
+      "process": "Prepare the surfaceObservations recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Two Rosetta close-ups show Lutetia’s craters and ridges, taken 48 seconds apart during the 2010 flyby. The grid marks areas without usable photographs."
+      ],
+      "lensIds": [
+        "osiris"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "surfaceObservations"
+      },
+      "inputs": [
+        "lutetia-observations-n20100710t154047674id4df22-img",
+        "lutetia-observations-osiris-camera-json",
+        "lutetia-n20100710t154135529id4df22-img",
+        "lutetia-n20100710t154135529id4df22-camera",
+        "lutetia-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
+          "bytes": 2266,
+          "sha256": "1632f8974f762530b7827e9f105f90eed71de8dbdb2987cbf656eb3b4bb62974",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/lutetia/lutetia-osiris-surface@2x.webp",
+          "bytes": 838004,
+          "sha256": "c9a1287c2b3fd59416e0e156442b3fc9cbac8629a59e8f277f1659b4be37fe97",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5551,
+          "sha256": "9cc88d6a15330045045e35973e150a807ea3b91c742102658e51fb7f26cc4804",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:osiris",
+      "label": "OSIRIS preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/surfaceObservations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "osiris"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/osiris.webp",
+          "bytes": 29868,
+          "sha256": "c54893d25775bc2d2a6ef038d7fa1352ace3896da4619cc7c54fb0bc8c27f9b4",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 13866,
+          "sha256": "acf728789c7a55400ab7276a2142ec306a5af20b16340264cd31562c7df6d2d3",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

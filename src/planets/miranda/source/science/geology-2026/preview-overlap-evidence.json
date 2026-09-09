@@ -1,0 +1,130 @@
+[
+  {
+    "a": "darkmaterial",
+    "b": "craterswithdarkstreaks",
+    "overlapSamples": 635,
+    "aColorSamples": 0,
+    "bColorSamples": 617,
+    "winner": "craterswithdarkstreaks"
+  },
+  {
+    "a": "freshimpactcraters",
+    "b": "craterswithdarkstreaks",
+    "overlapSamples": 1068,
+    "aColorSamples": 0,
+    "bColorSamples": 1044,
+    "winner": "craterswithdarkstreaks"
+  },
+  {
+    "a": "freshimpactcraters",
+    "b": "darkmaterial",
+    "overlapSamples": 10738,
+    "aColorSamples": 8300,
+    "bColorSamples": 0,
+    "winner": "freshimpactcraters"
+  },
+  {
+    "a": "heavilymantledcrateredterrain",
+    "b": "craterswithdarkstreaks",
+    "overlapSamples": 160,
+    "aColorSamples": 0,
+    "bColorSamples": 157,
+    "winner": "craterswithdarkstreaks"
+  },
+  {
+    "a": "heavilymantledcrateredterrain",
+    "b": "chaincraters",
+    "overlapSamples": 5674,
+    "aColorSamples": 0,
+    "bColorSamples": 4942,
+    "winner": "chaincraters"
+  },
+  {
+    "a": "heavilymantledcrateredterrain",
+    "b": "freshimpactcraters",
+    "overlapSamples": 973,
+    "aColorSamples": 0,
+    "bColorSamples": 277,
+    "winner": "freshimpactcraters"
+  },
+  {
+    "a": "lightalbedocanyon",
+    "b": "heavilymantledcrateredterrain",
+    "overlapSamples": 48,
+    "aColorSamples": 38,
+    "bColorSamples": 0,
+    "winner": "lightalbedocanyon"
+  },
+  {
+    "a": "lightalbedomaterial",
+    "b": "darkmaterial",
+    "overlapSamples": 17068,
+    "aColorSamples": 16273,
+    "bColorSamples": 0,
+    "winner": "lightalbedomaterial"
+  },
+  {
+    "a": "mediumalbedocanyon",
+    "b": "darkmaterial",
+    "overlapSamples": 1038,
+    "aColorSamples": 421,
+    "bColorSamples": 0,
+    "winner": "mediumalbedocanyon"
+  },
+  {
+    "a": "mediumalbedomaterialArden",
+    "b": "darkmaterial",
+    "overlapSamples": 5106,
+    "aColorSamples": 4830,
+    "bColorSamples": 0,
+    "winner": "mediumalbedomaterialArden"
+  },
+  {
+    "a": "northernridgedplains",
+    "b": "lightlymantledcrateredterrain",
+    "overlapSamples": 75,
+    "aColorSamples": 75,
+    "bColorSamples": 0,
+    "winner": "northernridgedplains"
+  },
+  {
+    "a": "southernridgedplainsv2",
+    "b": "flowmaterial",
+    "overlapSamples": 413,
+    "aColorSamples": 0,
+    "bColorSamples": 370,
+    "winner": "flowmaterial"
+  },
+  {
+    "a": "southernridgedplainsv2",
+    "b": "freshimpactcraters",
+    "overlapSamples": 1674,
+    "aColorSamples": 1068,
+    "bColorSamples": 0,
+    "winner": "southernridgedplainsv2"
+  },
+  {
+    "a": "southernridgedplainsv2",
+    "b": "heavilymantledcrateredterrain",
+    "overlapSamples": 285,
+    "aColorSamples": 285,
+    "bColorSamples": 0,
+    "winner": "southernridgedplainsv2"
+  },
+  {
+    "a": "verydarkalbedomaterial",
+    "b": "darkmaterial",
+    "overlapSamples": 998,
+    "aColorSamples": 801,
+    "bColorSamples": 0,
+    "winner": "verydarkalbedomaterial"
+  },
+  {
+    "a": "wisplikelightmaterial",
+    "b": "darkmaterial",
+    "overlapSamples": 263,
+    "aColorSamples": 242,
+    "bColorSamples": 0,
+    "winner": "wisplikelightmaterial"
+  }
+]

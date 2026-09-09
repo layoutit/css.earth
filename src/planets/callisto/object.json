@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1a35b14bd40a25773c635b4ab78cdb0c06fd42262f4891d9ec8e5708348a5158"
+    "sha256": "4ab7e45a4cec2c7999b5776bd8cb58ff467ecc0c72e1c66bdf2d098e59665ea3"
   },
   "id": "callisto",
   "properties": {
@@ -58,6 +58,16 @@
               "id": "normal",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "enhanced",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "infrared",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -78,12 +88,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "d437635e5b0f16f5c8f10458f89becb380616a97805a1e7c1ba0b088b408983e"
+          "sha256": "a266f5135c2bf1976fcce2f5611b641e551e8dbbed898ba88c03bde744169473"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a6285857a2d973a976faa33aff4538e4a21416702fb69de48f8ed22b6a0107c7"
+          "sha256": "c58df6c6f62d029f053d5f876fdd8deb481b061f958b58c51d86ee8a861914cb"
         },
         {
           "id": "title",
@@ -98,7 +108,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a210414d15be18834f204fd9fcedfa8c71485b6b83f0d0af136b114e1c2767fb"
+          "sha256": "da96933fb20410aa403d21ab545a19f7e15dac62637763285beb95508ea4c8a8"
         }
       ]
     }

@@ -2,3 +2,5 @@
 
 
 Physical and orbital data: NASA/JPL Horizons. ESO/S. Brunier sky and HYG notices remain in source/stars. Inter title outlines retain the SIL Open Font License.
+
+Spectral composite: NASA/Goddard/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology. Cite DellaGiustina et al. (2020), Science 370, eabc3660, DOI 10.1126/science.abc3660. Original Figshare data are licensed CC BY 4.0; retain author attribution.

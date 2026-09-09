@@ -1,0 +1,76 @@
+UNIFIED GEOLOGIC MAP OF THE MOON, 1:5,000,000-SCALE
+March 02, 2020
+Version 2
+
+by: Corey M. Fortezzo (USGS), Paul D. Spudis (LPI), and Shannon L. Harrel (SD Mines)
+U.S. Geologic Survey, Astrogeology Science Center, 
+2255 N. Gemini Dr., Flagstaff, Arizona
+Address all correspondence regarding this products to cfortezzo@usgs.gov
+
+Version 2 updates: 
+Two errors were addressed in this update:
+(1) Large area polygons were offset from their contacts, likely due to user error. Polygons were rebuilt 
+to fix the issue and post processing (dissolving, reattributing, etc.) to rectify the aestethic of the map. 
+(2) Contacts were not visible but should have been due to incorrect labeling as DND (do not draw). Those that 
+needed to be drawn have been reattributed as "certain" those that are not drawn are labeled as "internal".   
+Additionally, in version 1 of this data, crater polygons with similar attributes had been dissolved and lumped 
+into contiguous units. This has been changed so that all craters are now dicrete units. This adds ~1000 units 
+to the GeoUnits featureclass. There contacts are now visible and labeled as "certain".  
+
+abstract:
+   This new work represents a seamless, globally consistent, 1:5,000,000-scale geologic map derived from 
+   the six digitally renovated geologic maps [1-6, see "background" section below for access to these 
+   data]. The goal of this project was to create a digital resource for science research and analysis, 
+   future geologic mapping efforts, be it local-, regional-, or global-scale products, and as a resource
+   for the educators and the public interested in lunar geology. Here we present the completed mapping 
+   project as unit contacts, geologic unit polygons, linear features, and unit and feature nomenclature 
+   annotation. The product is overlies shaded-relief derived from SELENE Kaguya terrain camera stereo 
+   (equatorial, ~60 m/pix) and LOLA altimetry (north and south polar, 100 m/pix). These data are not 
+   included with this download due to size considerations, but a readme in the "Lunar_Raster" folder 
+   provides the download links. The download includes a PDF of the geologic map with a brief Description 
+   of Map Units and Explanation of Map Symbols, as well as a JPG of the map for quick access viewing.
+
+new digital release:
+https://astrogeology.usgs.gov/search/map/Moon/Geology/Unified_Geologic_Map_of_the_Moon
+
+abstract:
+Fortezzo, C. M. and Spudis, P. D. (2018) Digital Global Geologic Map of The Moon: Analysis Tool for Lunar 
+Fortezzo, C.M., Spudis, P. D. and Harrel, S. L. (2019). Release of the Digital Unified Global Geologic 
+Map of the Moon At 1:5,000,000-Scale. Paper presented at the 51st Lunar and Planetary Science Conference, 
+Lunar and Planetary Institute, Houston, TX. https://www.hou.usra.edu/meetings/lpsc2020/pdf/2760.pdf
+
+Acknowledgements: This work was funded by a grant from the NASA PDART Program, award number NNH16AC36I. 
+
+-----------------------------------------------------------------------------------------------------------
+
+background:
+   In 2013, we completed an initial digital renovation of the six 1:5,000,000-scale lunar geologic maps 
+   (near, central far, east, west, north, and south sides)[1-6]. This renovation allows the older geologic 
+   maps to be overlain on newer, higher resolution datasets including the Lunar Reconnaissance Orbiter 
+   Camera Wide Angle Camera mosaic and the Lunar Orbiter Laser Altimeter digital terrain model. The 
+   renovations involved redrafting the line work from the previously published maps, with only minor 
+   reinterpretations.
+    
+   These renovated lunar maps originally had different units and unit relationships across their boundaries.
+   The east, central far and west maps had abutting boundaries which allowed units to simply be matched 
+   across the boundary with minimal redrawing or remapping. The polar maps overlapped the boundaries 
+   of east, central far, and west side maps by 5 degrees. And finally, the near side map overlapped 
+   both poles and the east and west side maps to varying degrees given its irregular bounding shape. 
+   Within these overlaps, we have created a seamless boundary between the maps that respects the original 
+   authors interpretations and fits a concatenated global unit scheme.
+  
+Original maps:
+[1] Wilhelms, D.E. and J.F. Mac-Cauley (1971) Map I-703. 
+[2] Wilhelms, D.E., et al. (1979) Map I-1162. 
+[3] Lucchitta, B.K. (1978) Map I-1062. 
+[4] Wilhelms, D.E. and F. El-Baz (1977) Map I-948. 
+[5] Stuart-Alexander, D.E. (1978) Map I-1047.
+[6] Scott, D.H. et al. (1977) Map I-1034.
+
+original digital release: 
+https://astrogeology.usgs.gov/search/map/Moon/Geology/Lunar_Geologic_GIS_Renovation_March2013
+
+Renovation abstract:
+Fortezzo, C. M. and T. M. Hare (2013) Completed Digital Renovation of the 1:5,000,000 Lunar Geologic Map
+Series, 44th Lunar and Planetary Science Conference, Houston, TX,
+url: https://www.lpi.usra.edu/meetings/lpsc2012/pdf/2623.pdf

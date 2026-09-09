@@ -1,0 +1,113 @@
+[
+  {
+    "id": "c1137328",
+    "skyRectangles": [
+      [
+        404,
+        430,
+        429,
+        455
+      ],
+      [
+        519,
+        430,
+        544,
+        455
+      ],
+      [
+        404,
+        545,
+        429,
+        570
+      ],
+      [
+        519,
+        545,
+        544,
+        570
+      ]
+    ],
+    "skySamples": 2500,
+    "median": -0.0017000000000000001,
+    "robustSigma": 0.0017791200000000001,
+    "minimum": -0.0149,
+    "maximum": 0.0051,
+    "negativeSamples": 2066,
+    "zeroSamples": 42,
+    "backgroundMaximumAfterSubtraction": 0.00533736
+  },
+  {
+    "id": "c1137339",
+    "skyRectangles": [
+      [
+        397,
+        521,
+        422,
+        546
+      ],
+      [
+        512,
+        521,
+        537,
+        546
+      ],
+      [
+        397,
+        636,
+        422,
+        661
+      ],
+      [
+        512,
+        636,
+        537,
+        661
+      ]
+    ],
+    "skySamples": 2500,
+    "median": -0.0011,
+    "robustSigma": 0.00163086,
+    "minimum": -0.0077,
+    "maximum": 0.0049,
+    "negativeSamples": 1836,
+    "zeroSamples": 44,
+    "backgroundMaximumAfterSubtraction": 0.0048925800000000005
+  },
+  {
+    "id": "c1137350",
+    "skyRectangles": [
+      [
+        323,
+        306,
+        348,
+        331
+      ],
+      [
+        438,
+        306,
+        463,
+        331
+      ],
+      [
+        323,
+        421,
+        348,
+        446
+      ],
+      [
+        438,
+        421,
+        463,
+        446
+      ]
+    ],
+    "skySamples": 2500,
+    "median": -0.0037,
+    "robustSigma": 0.00207564,
+    "minimum": -0.011000000000000001,
+    "maximum": 0.004200000000000001,
+    "negativeSamples": 2359,
+    "zeroSamples": 9,
+    "backgroundMaximumAfterSubtraction": 0.00622692
+  }
+]

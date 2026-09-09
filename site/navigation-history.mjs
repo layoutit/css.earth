@@ -1,3 +1,5 @@
+import { overviewScopeFromUrl } from './navigation-scope.mjs';
+
 /** Preserve exact departed views while object selections create history entries. */
 export function createNavigationHistory({ windowTarget, objects, capture, navigate, onError = () => {} }) {
   const snapshots = new Map();
@@ -47,7 +49,7 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
     const id = event.detail?.objectId;
     if (!available(id)) return;
     event.preventDefault();
-    Promise.resolve(navigate(id)).catch(onError);
+    Promise.resolve(navigate(id, { sceneSelection: true })).catch(onError);
   };
   const click = event => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -58,7 +60,11 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
     const object = objects.find(object => object.route === url.pathname);
     if (!object || !supports(object.id)) return;
     event.preventDefault();
-    Promise.resolve(navigate(object.id, url.search || url.hash ? { url: url.href } : undefined)).catch(onError);
+    const scope = overviewScopeFromUrl(url.href);
+    const options = scope && !url.searchParams.has('v')
+      ? { overview: true, overviewScope: scope }
+      : url.search || url.hash ? { url: url.href } : { sceneSelection: true };
+    Promise.resolve(navigate(object.id, options)).catch(onError);
   };
   documentTarget.addEventListener('click', click);
   documentTarget.addEventListener('objectnavigate', select);

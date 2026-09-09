@@ -70,7 +70,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
-        "title": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+        "title": "ISS mosaic",
         "detail": "Cassini · corrected mosaic",
         "thumbnail": "/scenes/atlas/atlas-normal-thumbnail.webp",
         "surface": "atlas-normal-surface@2x.webp",
@@ -79,13 +79,14 @@
           "id": "n1870699307",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/access.html"
-        }
+        },
+        "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
-        "title": "Radial height above a 15.1 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid.",
+        "title": "Shape-derived radial height",
         "detail": "Shaded relief",
         "thumbnail": "/scenes/atlas/atlas-elevation-thumbnail.webp",
         "surface": "atlas-elevation-surface@2x.webp",
@@ -108,7 +109,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/atlas/atlas-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to a 15.1 km sphere, from the Cassini shape model. Accuracy varies by region."
       }
     ]
   },

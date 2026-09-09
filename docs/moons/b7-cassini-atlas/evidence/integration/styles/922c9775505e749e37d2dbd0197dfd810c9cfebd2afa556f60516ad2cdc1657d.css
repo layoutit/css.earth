@@ -1,0 +1,13 @@
+.example-stage:where([data-object-id="titan"]) > :is(.titan-sun-camera, .titan-camera, .titan-material-root) { position: absolute; inset: 0px; transform-origin: 50% 50%; pointer-events: none; }
+:where(.planet-stage[data-object-id="titan"]) .titan-sun-camera, :where(.planet-stage[data-object-id="titan"]) .titan-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="titan"]) .titan-scene { position: absolute; top: 50%; left: 50%; width: 0px; height: 0px; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="titan"]) .titan-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0px 0px 0px; }
+:where(.planet-stage[data-object-id="titan"]) .titan-body > s { position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px); margin: 0px; padding: 0px; transform-origin: 0px 0px; backface-visibility: hidden; background-image: var(--titan-surface-image); background-repeat: no-repeat; }
+:where(.planet-stage[data-object-id="titan"]) .titan-body > .titan-polar { background-image: var(--titan-poles-image); }
+:where(.planet-stage[data-object-id="titan"]) .titan-material-root { z-index: 3; --titan-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="titan"]) .titan-material, :where(.planet-stage[data-object-id="titan"]) .titan-billboard { position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px; margin: -230px 0px 0px -230px; pointer-events: none; }
+:where(.planet-stage[data-object-id="titan"]) .titan-material { background-repeat: no-repeat; transform: rotate(var(--titan-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="titan"]) .titan-billboard { border-radius: 50%; background-color: var(--titan-billboard-color); opacity: var(--titan-billboard-opacity); }
+.planet-stage:where([data-object-id="titan"])[data-lod="billboard"] .titan-scene, .planet-stage:where([data-object-id="titan"])[data-lod="marker"] .titan-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="titan"])[data-lod="marker"] .titan-billboard { opacity: 0; }
+.planet-stage:where([data-object-id="titan"]).titan-hide-orbit .planet-heliocentric-orbit-piece { visibility: hidden; }

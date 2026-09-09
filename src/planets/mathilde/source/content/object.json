@@ -66,7 +66,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved.",
-        "title": "Stooke and Pfau’s partial NEAR photomosaic retains photographed shadows and processing seams; it is not calibrated albedo. Gray grid marks exterior map gaps identified by a conservative connected-fill heuristic. The published Stooke visualization shape includes modeled unseen areas and aesthetically modified shadowed crater floors. Shadows adds illustrative lighting: the spin pole and phase are unresolved.",
+        "title": "MSI partial mosaic",
         "thumbnail": "/scenes/mathilde/mathilde-normal-thumbnail.webp",
         "surface": "mathilde-normal-surface@2x.webp",
         "poles": "mathilde-normal-surface@2x.webp",
@@ -75,13 +75,14 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "NEAR MSI · partial photomosaic"
+        "detail": "NEAR MSI · partial photomosaic",
+        "summary": "Only part of the surface is photographed; shadows and seams remain. The unseen shape is modeled and image gaps are marked."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
-        "title": "Color shows Thomas model radius minus a 26.4 km reference sphere. Source samples carrying the unobserved 26.5 km placeholder are withheld before interpolation and shown as gray grid. This is radial height, not gravitational elevation. The displayed Stooke visualization shape separately includes modeled unseen areas and modified crater floors; it is not the measured elevation surface. Brightness adds cartographic relief; Shadows adds illustrative directional lighting.",
+        "title": "Shape-derived radial height",
         "thumbnail": "/scenes/mathilde/mathilde-elevation-thumbnail.webp",
         "surface": "mathilde-elevation-surface@2x.webp",
         "poles": "mathilde-elevation-surface@2x.webp",
@@ -103,7 +104,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.xml",
           "image": "/scenes/mathilde/mathilde-elevation-legend.webp"
         },
-        "detail": "Thomas measured-region radius"
+        "detail": "Thomas measured-region radius",
+        "summary": "Height relative to a 26.4 km sphere, with unobserved values withheld. The display shape has modeled terrain."
       }
     ]
   },

@@ -1,0 +1,269 @@
+{
+  "applicationRevision": "4162dd8c91e1f056b4c888b7d06a3777ac27ba9e",
+  "node": "24.19.0",
+  "checks": [
+    {
+      "id": "renderer-build",
+      "status": "pass",
+      "command": "pnpm build:renderer",
+      "casesOrItems": null,
+      "log": {
+        "path": "output/tuttle/arecibo/build-renderer.log",
+        "bytes": 5697,
+        "sha256": "89d306587ddee65ffc55a8226f6f871871ec2de47ff9842cab95b5a2409abf18"
+      }
+    },
+    {
+      "id": "preparation-build",
+      "status": "pass",
+      "command": "pnpm build:preparation",
+      "casesOrItems": null,
+      "log": {
+        "path": "output/tuttle/arecibo/build-preparation-final.log",
+        "bytes": 1370,
+        "sha256": "6af4ac3ff7fe9c1ed98f46bf115fad05ebcb887ae33dd8e1c98bd57e7d6558c4"
+      }
+    },
+    {
+      "id": "renderer-typecheck",
+      "status": "pass",
+      "command": "pnpm typecheck:renderer",
+      "casesOrItems": null,
+      "log": {
+        "path": "output/tuttle/arecibo/typecheck-renderer.log",
+        "bytes": 154,
+        "sha256": "2adf479d977a9ecf9bcc28f30167788477b6a96c2a10c0352303ecbfbb69d5a8"
+      }
+    },
+    {
+      "id": "preparation-typecheck",
+      "status": "pass",
+      "command": "pnpm typecheck:preparation",
+      "casesOrItems": null,
+      "log": {
+        "path": "output/tuttle/arecibo/typecheck-preparation.log",
+        "bytes": 153,
+        "sha256": "e361afc5fb0481f75fa4194bc01d938bb05d775558d44e19c5b13fad7aad3dcd"
+      }
+    },
+    {
+      "id": "authored-preparation",
+      "status": "pass",
+      "command": "node tools/objects/dist/prepare-authored.js comet-8p --write",
+      "casesOrItems": null,
+      "log": {
+        "path": "output/tuttle/arecibo/prepare.log",
+        "bytes": 80,
+        "sha256": "4d153ff4082db705e5eb0841c7e9a6167f9ac405e8376dd4574a8878c1c2a489"
+      }
+    },
+    {
+      "id": "compiled-payload",
+      "status": "pass",
+      "command": "node tools/prepare-object-json.mjs comet-8p",
+      "casesOrItems": null,
+      "log": {
+        "path": "output/tuttle/arecibo/compile.log",
+        "bytes": 172,
+        "sha256": "e70a6f18610e01a73019f7833fec2c7e66dcf5c5a53940458b1e60b2f230af0d"
+      }
+    },
+    {
+      "id": "provenance-verification",
+      "status": "pass",
+      "command": "node tools/prepare-provenance.mjs comet-8p --verify",
+      "casesOrItems": null,
+      "log": {
+        "path": "output/tuttle/arecibo/provenance.log",
+        "bytes": 59,
+        "sha256": "b9e92bfc831ce6267d754955cf12a0055e688fbbecd1068ccbb7a74f372cfdfd"
+      }
+    },
+    {
+      "id": "site-build",
+      "status": "pass",
+      "command": "pnpm exec astro build",
+      "casesOrItems": 260,
+      "log": {
+        "path": "output/tuttle/arecibo/site-build.log",
+        "bytes": 13588,
+        "sha256": "79f584408e247c9f390baa711bbfa826c71a0d4c86c6d9541b64b2519eb9717d"
+      }
+    },
+    {
+      "id": "assembly",
+      "status": "pass",
+      "command": "node tools/objects/dist/operations.js assemble comet-8p",
+      "casesOrItems": 34,
+      "log": {
+        "path": "output/tuttle/arecibo/assemble.log",
+        "bytes": 4791,
+        "sha256": "b7bbb6a388f3d359f60b599994e617bb1f369fd97f661a742fe111c90a8ea79e"
+      }
+    },
+    {
+      "id": "source-closure",
+      "status": "pass",
+      "command": "node tools/objects/dist/operations.js acquire comet-8p --verify-only",
+      "casesOrItems": 21,
+      "log": {
+        "path": "output/tuttle/arecibo/source-verify.log",
+        "bytes": 86,
+        "sha256": "be56f85441b42e05bcb1e1c2e9b99e838e14e62da2bb7f3068623d8aca28c835"
+      }
+    },
+    {
+      "id": "model-and-provenance",
+      "status": "pass",
+      "command": "node --test tests/objects/unit/comet-8p/source.test.mjs",
+      "casesOrItems": 7,
+      "log": {
+        "path": "output/tuttle/arecibo/source-tests.log",
+        "bytes": 765,
+        "sha256": "6097e0010c5ba84a6324b099ea490b960b91fe083ab96f7bd230cdce11a9291f"
+      }
+    },
+    {
+      "id": "package-and-assets",
+      "status": "pass",
+      "command": "node --test --test-name-pattern='comet-8p:' tests/objects/source-closure.test.mjs",
+      "casesOrItems": 3,
+      "log": {
+        "path": "output/tuttle/arecibo/package-closure.log",
+        "bytes": 377,
+        "sha256": "64203555c9d2a896481b6c1f70026566090eab56dab097f4de50613eabd9a87e"
+      }
+    },
+    {
+      "id": "shared-radial-lighting-preview-provenance",
+      "status": "pass",
+      "command": "node --test tools/objects/terrestrial-layers/radial-terrain.test.mjs tools/objects/terrestrial-layers/source-mesh-lighting.test.mjs tools/prepare-surface-minimaps.test.mjs tools/object-provenance.test.mjs",
+      "casesOrItems": 21,
+      "log": {
+        "path": "output/tuttle/arecibo/shared-tests.log",
+        "bytes": 2084,
+        "sha256": "389755277d4cd5801734885810e8168f0fa04d4060497cbc072c31fcaa19e082"
+      }
+    },
+    {
+      "id": "presentation-and-provenance",
+      "status": "pass",
+      "command": "node --test tools/object-provenance.test.mjs src/platform/prepared-presentation-contract.test.mjs",
+      "casesOrItems": 21,
+      "log": {
+        "path": "output/tuttle/arecibo/preparation-contract-tests.log",
+        "bytes": 2049,
+        "sha256": "2dfe7c294826c1bbc862e811afc260c0770b9070b0bb5d2768bbee5df9fd2259"
+      }
+    },
+    {
+      "id": "transport-and-picking",
+      "status": "pass",
+      "command": "pnpm --filter @cssearth/engine exec vitest run --root ../../src/renderers/css validation/prepared-object.test.ts navigation/prepared-surface-hit.test.ts",
+      "casesOrItems": 13,
+      "log": {
+        "path": "output/tuttle/arecibo/transport-tests.log",
+        "bytes": 1130,
+        "sha256": "40a4e18476c116433f06dfa1efc86f2ebf69ed89627cf83722991c0780af773e"
+      }
+    },
+    {
+      "id": "renderer-regression",
+      "status": "pass",
+      "command": "pnpm --filter @cssearth/engine exec vitest run --root ../../src/renderers/css validation/prepared-object.test.ts validation/depth-partitions.test.ts navigation/prepared-surface-hit.test.ts rendering/prepared-facing.test.ts rendering/prepared-depth-partitions.test.ts",
+      "casesOrItems": 20,
+      "log": {
+        "path": "output/tuttle/arecibo/renderer-regression.log",
+        "bytes": 1377,
+        "sha256": "118918d202f817a5a5fccc17ea007201977479690be0ab3d4c464839aee869d8"
+      }
+    },
+    {
+      "id": "production-capture",
+      "status": "pass",
+      "command": "node tests/objects/browser/comet-8p/capture.mjs http://127.0.0.1:53135 output/playwright/tuttle/arecibo",
+      "casesOrItems": 3,
+      "log": {
+        "path": "output/tuttle/arecibo/capture.log",
+        "bytes": 970,
+        "sha256": "322c141cf12072d0e7fcd3a3e501dccff4a82aaa168450711d7819dfd617d660"
+      }
+    },
+    {
+      "id": "retained-dom",
+      "status": "pass",
+      "command": "node site/test/dom-cleanliness-browser.mjs http://127.0.0.1:53135 comet-8p",
+      "casesOrItems": 2,
+      "log": {
+        "path": "output/tuttle/arecibo/dom.log",
+        "bytes": 110,
+        "sha256": "9cfb08917a0876bf62a59b0de1604b25b68e38271f162f69e7c2fcd54bc38532"
+      }
+    },
+    {
+      "id": "lens-conformance",
+      "status": "pass",
+      "command": "CSSEARTH_CONFORMANCE_CASES=initial-shell,lens-race,lens-reacquire,lens-rejection,lens-destroy node site/test/planet-browser-conformance.mjs http://127.0.0.1:53136 comet-8p",
+      "casesOrItems": 5,
+      "log": {
+        "path": "output/tuttle/arecibo/lens-conformance.log",
+        "bytes": 1918,
+        "sha256": "f73be3a43302b693ae1823b7241d8be504e7f45fe06bc32d75a1998e6426f0cb"
+      }
+    },
+    {
+      "id": "comet-navigation",
+      "status": "pass",
+      "command": "node tests/objects/browser/comets/navigation.mjs http://127.0.0.1:53135",
+      "casesOrItems": 26,
+      "log": {
+        "path": "output/tuttle/arecibo/navigation.log",
+        "bytes": 96,
+        "sha256": "b14635a4fdf052573154c987d68176a5ea50badfae87414842ee828bac7ed524"
+      }
+    },
+    {
+      "id": "drag-model-dpr-1",
+      "status": "pass",
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:53135 1 output/playwright/tuttle/arecibo-traces/model-dpr-1 comet-8p model",
+      "log": {
+        "path": "output/tuttle/arecibo/trace-model-1.log",
+        "bytes": 5301,
+        "sha256": "7c4068d38411f33bbf28827159055d92c8a1a9ad06760e72b036b802dbe85d4b"
+      }
+    },
+    {
+      "id": "drag-model-dpr-2",
+      "status": "pass",
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:53135 2 output/playwright/tuttle/arecibo-traces/model-dpr-2 comet-8p model",
+      "log": {
+        "path": "output/tuttle/arecibo/trace-model-2.log",
+        "bytes": 5300,
+        "sha256": "82ec50385e27e2093e1ebb1b7fcd127b62210c7f52f3f962b9c92f95ac7d84c0"
+      }
+    },
+    {
+      "id": "drag-arecibo-dpr-1",
+      "status": "pass",
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:53135 1 output/playwright/tuttle/arecibo-traces/arecibo-dpr-1 comet-8p arecibo",
+      "log": {
+        "path": "output/tuttle/arecibo/trace-arecibo-1.log",
+        "bytes": 5308,
+        "sha256": "de46298b158f82542d4fcf990e3c4f806156c5c4aff3dda9d029566b9e8dd3a6"
+      }
+    },
+    {
+      "id": "drag-arecibo-dpr-2",
+      "status": "pass",
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:53135 2 output/playwright/tuttle/arecibo-traces/arecibo-dpr-2 comet-8p arecibo",
+      "log": {
+        "path": "output/tuttle/arecibo/trace-arecibo-2.log",
+        "bytes": 5303,
+        "sha256": "22b02ac47a7674a766acaa7e7ff5ecab00d5dcbae4e0e06d01bf0e286957d47d"
+      }
+    }
+  ],
+  "scope": "Focused completion checks; overlapping test runs are not summed. Final test-only changes use checked-in prepared runtime/recipes so they do not add an ignored-asset dependency. Browser output and application source are unchanged. No repository-wide all-green claim.",
+  "priorAggregateLimits": "../TUTTLE.md#gate-status-and-remaining-limits",
+  "priorCiFailure": "tuttle-arecibo-prior-ci-limit.json"
+}

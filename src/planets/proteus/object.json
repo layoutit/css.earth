@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "1babd88327cbad72a5b08ae076cded690d419b1b728f0925f32aea76c2747674"
+          "sha256": "f9c7b352f33c4d4ee6613952d34732ea08c4393dc5494dedd2985648b65054ef"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b7df3e6f593276fcf4a07ff90347efe5f72a47075ad3d9d189aa779fa6ed83ce"
+          "sha256": "5efb6760a5f50e233be36cdb24d6b3ecbb39910eabf674910348b0d131eb74b0"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "5d4c099b47720c6e0b3b038cca47d185247f39a293101a900f1019fd87f888ed"
+          "sha256": "39f3c5ae68d597577d860871e61f989f24ad09750932991b6840f1f6dd582628"
         }
       ],
       "shape": {
@@ -58,6 +58,11 @@
           "lenses": [
             {
               "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "filter-color",
               "source": "content",
               "material": "lighting"
             },
@@ -108,6 +113,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2fdb68aa9c2d6df238a71efbf7eff50bc7c5a990f02271953a57a3f0904d2d32"
+    "sha256": "ffba16e9d141fae8c84ccbfb106fa7e0349e978b267130e116d48516a810de89"
   }
 }

@@ -60,20 +60,21 @@
         "label": "L’LORRI observation",
         "detail": "Spacecraft observation",
         "description": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
-        "title": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+        "title": "L’LORRI encounter image",
         "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
         "surface": "donaldjohanson-llorri-surface@2x.webp",
         "poles": "donaldjohanson-llorri-surface@2x.webp",
         "source": {
           "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Only part of the encounter-facing surface is imaged. Brightness retains original lighting; the grid marks rejected or unseen areas."
       },
       {
         "id": "shape",
         "label": "Shape",
         "description": "Published Lucy shape model",
-        "title": "Original stereophotogrammetric reconstruction archived by NASA PDS/NAIF, at its published kilometer scale. The shared grid marks unavailable imagery. This is source geometry, not a photographic surface or reflectance map. Lucy stereo images constrain about 40% of the surface. The source authors completed the unseen part using a two-ellipsoid fit and symmetry; it is not all observed terrain. The body tumbles, and the preliminary frame is accurate only near the 2025 encounter. This display uses a fixed illustrative orientation and does not propagate that attitude. No registered optical surface map is supplied. Lighting is illustrative in a fixed model frame.",
+        "title": "Encounter shape model",
         "thumbnail": "/scenes/donaldjohanson/donaldjohanson-shape-thumbnail.webp",
         "surface": "donaldjohanson-shape-surface@2x.webp",
         "poles": "donaldjohanson-shape-surface@2x.webp",
@@ -82,7 +83,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Lucy shape model"
+        "detail": "Lucy shape model",
+        "summary": "Lucy's published encounter shape. The gray grid marks missing mapped imagery; lighting shows the model."
       }
     ]
   },
