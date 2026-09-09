@@ -353,8 +353,8 @@
     },
     {
       "filename": "earth-lens-night-lights.webp",
-      "bytes": 818,
-      "sha256": "4d255f6e8aab4fc9570fdfbaceec6f41b7ea7c8ede313988382d350726b7cb4c"
+      "bytes": 2836,
+      "sha256": "d88f52b66ae3f501ebbd6c4ef0a5fa6c20ba2b669eefd97110c342f451431db0"
     },
     {
       "filename": "earth-lens-normal.webp",
@@ -363,8 +363,8 @@
     },
     {
       "filename": "earth-lens-topography.webp",
-      "bytes": 2818,
-      "sha256": "304695ff0dede0d2fe5f4916bb67b50e5b2d71ad3538fcd45de0ec95a52de61d"
+      "bytes": 1950,
+      "sha256": "b9fa0fc3c2238ce31009358bebda5b48092cb64c4249df278aa6c66a99bcba86"
     },
     {
       "filename": "earth-lighting-default.webp",
@@ -542,44 +542,49 @@
       "sha256": "d1f7e639ace89a159cb0b356ac794bb03306f8c084d44e1326701500d3f85735"
     },
     {
+      "filename": "earth-night-lights-legend.png",
+      "bytes": 1932,
+      "sha256": "3a2e79ee42683af3e652b0ce460c3dc0bbf6b601e244ded4511bfff6aafb6bc4"
+    },
+    {
       "filename": "earth-night-lights-page-1.webp",
-      "bytes": 81902,
-      "sha256": "51942d1ebfff17fa55de5581e94946b0f3c15e86279b3d31410fe37610ebcd9f"
+      "bytes": 235660,
+      "sha256": "570b8cc6bf0b8de8a92b40c43be383cfdc1952f79f2595b6fea95531af4967ac"
     },
     {
       "filename": "earth-night-lights-page-2.webp",
-      "bytes": 180998,
-      "sha256": "c9f6c4e97c9bd7f1a8f87eef37545c1fe00d663a8354e683435c6f92659cd10e"
+      "bytes": 320088,
+      "sha256": "9bc313a895b2edbd10c31f64cbbdf9f19dcaf0bee98533b94023c857441c23b2"
     },
     {
       "filename": "earth-night-lights-page-3.webp",
-      "bytes": 565910,
-      "sha256": "d794a1e695e6460a5057eb3fd8728b1b630ea9c0bc7117ec8890fea593ed2c45"
+      "bytes": 839652,
+      "sha256": "04361dcd38276409544e1b10aa86bc9ffbb8d16a36855c8828f32c4f7e5b0adb"
     },
     {
       "filename": "earth-night-lights-page-4.webp",
-      "bytes": 466980,
-      "sha256": "5174666e03e728a89eb05801b4cc7a93d9a74809f8a0f0c6d63910fe09afda08"
+      "bytes": 841832,
+      "sha256": "d7dcbd074c785b3cb0c494867fc98b2defe971f6d445261e21b90af7ed094b8c"
     },
     {
       "filename": "earth-night-lights-page-5.webp",
-      "bytes": 237338,
-      "sha256": "6fde9f2f66d5c336bfae57d29ae80cafae67da9ff3df34bd51fb608e68a4031a"
+      "bytes": 601666,
+      "sha256": "ff4da52d9ec0ab50929b9b70667f266a349196664e3fe3d4fabb162adc3416d6"
     },
     {
       "filename": "earth-night-lights-page-6.webp",
-      "bytes": 40258,
-      "sha256": "092ff1f715f9df369410ef5749e56e4f847f33c22d9e71d680d404383efb9621"
+      "bytes": 113498,
+      "sha256": "c99599a1b3b1d013829b1c531d64c6b31ccfd671d47b53b4701fd245a69b45a1"
     },
     {
       "filename": "earth-night-lights-poles.webp",
-      "bytes": 18704,
-      "sha256": "ebb37d6ac2830151950ecb9e2aac353a21ceb7e3428b9f0da0eb48821695e89f"
+      "bytes": 7234,
+      "sha256": "1bca79f43bab7a97e661f5b85ab3e5c8047fd82715a232a8473fab6924b4a4b4"
     },
     {
       "filename": "earth-night-lights.webp",
-      "bytes": 85926,
-      "sha256": "c41ffa75726dba49d7f91dba8566179b8cb92be4bf821e9e52bfb44b2ee6c3d7"
+      "bytes": 44720,
+      "sha256": "3fd2bb8eb21b55ab7f0eddec4cd8ac5cec15e7f4be0a32b1a448c5ac82a70e09"
     },
     {
       "filename": "earth-photometric-phase-curve.svg",
@@ -838,13 +843,13 @@
     },
     {
       "filename": "earth-view-interior.webp",
-      "bytes": 1302,
-      "sha256": "4e8ee2c852e0799d4dd36fdfdf0c29eaa52e89e7c5033a5777d5147ba39db8a4"
+      "bytes": 1152,
+      "sha256": "3d7bc0d6a342734fcb496bc3c275e3df6043de5304a967f736f7b52ea2d465dc"
     },
     {
       "filename": "earth-view-tomography.webp",
-      "bytes": 1696,
-      "sha256": "a145ea87904d5e87c4c5f147143d8ef6fa4928cc6630acf7a97024c84e55ef1c"
+      "bytes": 2094,
+      "sha256": "dbbf6668d7688e11815e304c7d056c027871c4876b188618b7574e32766b115f"
     }
   ]
 }

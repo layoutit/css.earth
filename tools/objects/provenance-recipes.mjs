@@ -157,10 +157,18 @@ export function provenanceProducts({ id, recipes, manifest, lenses, assets, geog
         [map.path, ...paths(map.scientific), ...(map.compositeClouds ? [plan.surface.clouds.path] : [])],
         map.scientific?.kind === 'gebco-elevation'
           ? 'Decode signed terrain heights and coordinate axes, interpolate elevations, apply the authored palette and cartographic relief, and prepare the globe, minimap and unshaded legend.'
+          : map.scientific?.kind === 'black-marble-radiance'
+            ? 'Decode pinned annual snow-free radiance, average native cells by spherical area before applying logarithmic false color, and prepare the globe, poles, minimap, thumbnail and legend. Preserve missing coverage separately from valid zero radiance.'
           : 'Prepare the global reference map and its declared cloud composite.',
         map.scientific?.kind === 'gebco-elevation' ? {
           interpretation: { kind: 'modeled-elevation', units: 'm', datum: 'mean sea level',
             grid: map.scientific.grid, palette: map.scientific.palette, relief: map.scientific.relief },
+        } : map.scientific?.kind === 'black-marble-radiance' ? {
+          interpretation: { kind: 'observed-nighttime-radiance', units: map.scientific.units,
+            product: map.scientific.product, year: map.scientific.year, band: map.scientific.band,
+            grid: map.scientific.grid, display: map.scientific.display,
+            aggregation: 'spherical-area weighted mean; at least 50% valid coverage per displayed cell',
+            limitations: 'Public mosaic has no QA or observation-count bands. Aurora and transient lights can remain. This is not a sky-brightness model.' },
         } : {});
     });
     for (const lens of controls.filter(lens => !products.some(product => product.id === lens.id))) {
