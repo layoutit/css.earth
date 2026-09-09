@@ -392,6 +392,107 @@ export function createPerspectiveDolly({
     },
   });
 
+  const capturePresentation = (sceneMatrix: DOMMatrix, scenePresentation: string) => ({
+    distance: cameraState.distance, rotation: rotationFromMatrix3d(sceneMatrix), scenePresentation,
+    bodyCenter: bodyCenter === null ? null : [...bodyCenter] as PositionM,
+    focal, viewportWidth, viewportHeight, principalOffset, stageViewport, visibleRect,
+  });
+  function publishPresentation(snapshot: ReturnType<typeof capturePresentation>, publishedWorld: WorldCameraPose | null) {
+      const { distance, rotation, bodyCenter, focal, viewportWidth, viewportHeight,
+        principalOffset, stageViewport, visibleRect, scenePresentation } = snapshot;
+      const viewport = { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] as const };
+      const genericPresentation = publishedWorld && !heliocentric && worldContext
+        ? presentWorldCamera(publishedWorld, worldContext.frame, viewport) : null;
+      const genericTranslation = genericPresentation?.translateCssPixels ?? null;
+      // The system's visibility depends on the distance alone, so it is set
+      // before the projection decides whether to work on the system.
+      if (system !== null) {
+      systemOpacity = systemFade === null
+          ? 1
+          : planetarySystemOpacity(systemFade, distance / maximumExtent!);
+        heliocentric?.setSystemOpacity(systemOpacity);
+      }
+      if (heliocentric) {
+        projection = heliocentric.publish({
+          rotation, distance,
+          ...(bodyCenter === null ? {} : { bodyCenter }),
+          focal, viewportWidth, viewportHeight, principalOffset, visibleRect,
+        });
+      }
+      const [bodyX, bodyY, bodyZ] = projection?.body.translate ?? genericTranslation ?? [0, 0, focal - distance];
+      const transform =
+        `translate3d(${formatNumber(bodyX)}px, ${formatNumber(bodyY)}px, ` +
+        `${formatNumber(bodyZ)}px) ` +
+        `scale3d(${cameraPlan.sceneScale}, ${cameraPlan.sceneScale}, ` +
+        `${cameraPlan.sceneScale}) ${scenePresentation}`;
+      if (transform !== publishedSceneTransform) {
+        sceneElement.style.transform = transform;
+        publishedSceneTransform = transform;
+        transformWrites += 1;
+      }
+      if (projection && heliocentric) {
+        heliocentric.setOrbitOpacity(orbitLineOpacity(
+          cameraPlan.orbitLineFade,
+          projection.body.silhouetteDiameter / viewportHeight,
+        ));
+        lod = levelOfDetailFor(levelOfDetail, projection.body.silhouetteDiameter);
+        heliocentric.setMarkerOpacity(lod.markerOpacity);
+      }
+      if (system !== null && projection && heliocentric) {
+        sunMarkerOpacityValue = sunMarker === null
+          ? 0
+          : sunMarkerOpacity(sunMarker, projection.sun.spriteDiameter);
+        heliocentric.setSunMarkerOpacity(sunMarkerOpacityValue);
+      }
+      if (publishedWorld) worldContext?.onWorldPublish?.(publishedWorld, viewport);
+      const genericBody = genericPresentation === null ? undefined : genericBodyProjection(
+        genericPresentation, bodyRadius!, focal,
+      );
+      projectedBody = projection?.body ?? genericBody ?? null;
+      if (projectedBody) lod = levelOfDetailFor(levelOfDetail, projectedBody.silhouetteDiameter);
+      // The enclosing context owns its far-scale handoff. A marker LOD alone
+      // does not mean an opaque proxy covers this mesh. Wait until the context
+      // has fully retired, and keep nearby resolved detail even outside it.
+      const contextRetired = retirement && publishedWorld && lod.stage === 'marker' &&
+        Math.hypot(...publishedWorld.pose.positionM.map((value, axis) => value - retirement.originM[axis]!)) >= retirement.distanceM;
+      const hidden = Boolean(contextRetired || (projection && !projection.body.visible));
+      if (sceneElement.hidden !== hidden) sceneElement.hidden = hidden;
+      // Raw prepared scene coordinates to the physical eye. Overlay and page
+      // consumers compose their own retained body transforms after this matrix.
+      const scale = cameraPlan.sceneScale;
+      const physicalProjection = physicalProjectionFromCamera(rotation,
+        [bodyX - principalOffset[0], bodyY - principalOffset[1], bodyZ - focal], scale, viewport);
+      return Object.freeze({
+        distance,
+        projection: physicalProjection,
+        stageViewport,
+        focal,
+        viewportWidth,
+        viewportHeight,
+        principalOffset,
+        ...(projection === null && genericBody === undefined ? {} : {
+          body: projectedBody!, levelOfDetail: lod,
+          ...(projection === null ? {} : { sun: projection.sun }),
+        }),
+        ...(system === null ? {} : {
+          planetarySystem: Object.freeze({
+            opacity: systemOpacity,
+            sunMarkerOpacity: sunMarkerOpacityValue,
+            projected: projection !== null && projection.system !== null,
+          }),
+        }),
+      });
+  }
+  function preparePresentation(sceneMatrix: DOMMatrix, scenePresentation: string) {
+    const snapshot = capturePresentation(sceneMatrix, scenePresentation);
+    const world = !worldContext ? null : snapshot.bodyCenter === null
+      ? worldCameraFromCenteredPresentation({ rotation: snapshot.rotation, distanceUnits: snapshot.distance }, worldContext.frame,
+        { focalPixels: snapshot.focal, principalOffsetPixels: [snapshot.principalOffset[0], snapshot.principalOffset[1]] })
+      : worldCameraFromPresentation({ rotation: snapshot.rotation, bodyCenterUnits: snapshot.bodyCenter }, worldContext.frame);
+    return { world, viewport: snapshot.stageViewport,
+      commit: () => publishPresentation(snapshot, world) };
+  }
+
   return Object.freeze({
     camera,
     measure,
@@ -432,100 +533,9 @@ export function createPerspectiveDolly({
     // line that projects to the root's centre, then the rotation. The scene
     // scale must be uniform in three dimensions: a 2D scale() leaves the
     // body's depth unscaled, which a real perspective camera notices.
+    prepare: preparePresentation,
     publish(sceneMatrix: DOMMatrix, scenePresentation: string) {
-      const distance = cameraState.distance;
-      const rotation = rotationFromMatrix3d(sceneMatrix);
-      const viewport = { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] as const };
-      let publishedWorld: WorldCameraPose | null = null;
-      let genericTranslation: PositionM | null = null;
-      let genericPresentation: ReturnType<typeof presentWorldCamera> | null = null;
-      if (worldContext) {
-        publishedWorld = bodyCenter === null
-          ? worldCameraFromCenteredPresentation({ rotation, distanceUnits: distance }, worldContext.frame, viewport)
-          : worldCameraFromPresentation({ rotation, bodyCenterUnits: bodyCenter }, worldContext.frame);
-        if (!heliocentric) {
-          genericPresentation = presentWorldCamera(publishedWorld, worldContext.frame, viewport);
-          genericTranslation = genericPresentation.translateCssPixels;
-        }
-      }
-      // The system's visibility depends on the distance alone, so it is set
-      // before the projection decides whether to work on the system.
-      if (system !== null) {
-      systemOpacity = systemFade === null
-          ? 1
-          : planetarySystemOpacity(systemFade, distance / maximumExtent);
-        heliocentric?.setSystemOpacity(systemOpacity);
-      }
-      if (heliocentric) {
-        projection = heliocentric.publish({
-          rotation, distance,
-          ...(bodyCenter === null ? {} : { bodyCenter }),
-          focal, viewportWidth, viewportHeight, principalOffset, visibleRect,
-        });
-      }
-      const [bodyX, bodyY, bodyZ] = projection?.body.translate ?? genericTranslation ?? [0, 0, focal - distance];
-      const transform =
-        `translate3d(${formatNumber(bodyX)}px, ${formatNumber(bodyY)}px, ` +
-        `${formatNumber(bodyZ)}px) ` +
-        `scale3d(${cameraPlan.sceneScale}, ${cameraPlan.sceneScale}, ` +
-        `${cameraPlan.sceneScale}) ${scenePresentation}`;
-      if (transform !== publishedSceneTransform) {
-        sceneElement.style.transform = transform;
-        publishedSceneTransform = transform;
-        transformWrites += 1;
-      }
-      if (projection && heliocentric) {
-        heliocentric.setOrbitOpacity(orbitLineOpacity(
-          cameraPlan.orbitLineFade,
-          projection.body.silhouetteDiameter / viewportHeight,
-        ));
-        lod = levelOfDetailFor(levelOfDetail, projection.body.silhouetteDiameter);
-        heliocentric.setMarkerOpacity(lod.markerOpacity);
-      }
-      if (system !== null && projection && heliocentric) {
-        sunMarkerOpacityValue = sunMarker === null
-          ? 0
-          : sunMarkerOpacity(sunMarker, projection.sun.spriteDiameter);
-        heliocentric.setSunMarkerOpacity(sunMarkerOpacityValue);
-      }
-      if (publishedWorld) worldContext?.onWorldPublish?.(publishedWorld, viewport);
-      const genericBody = genericPresentation === null ? undefined : genericBodyProjection(
-        genericPresentation, bodyRadius, focal,
-      );
-      projectedBody = projection?.body ?? genericBody ?? null;
-      if (projectedBody) lod = levelOfDetailFor(levelOfDetail, projectedBody.silhouetteDiameter);
-      // The enclosing context owns its far-scale handoff. A marker LOD alone
-      // does not mean an opaque proxy covers this mesh. Wait until the context
-      // has fully retired, and keep nearby resolved detail even outside it.
-      const contextRetired = retirement && publishedWorld && lod.stage === 'marker' &&
-        Math.hypot(...publishedWorld.pose.positionM.map((value, axis) => value - retirement.originM[axis]!)) >= retirement.distanceM;
-      const hidden = Boolean(contextRetired || (projection && !projection.body.visible));
-      if (sceneElement.hidden !== hidden) sceneElement.hidden = hidden;
-      // Raw prepared scene coordinates to the physical eye. Overlay and page
-      // consumers compose their own retained body transforms after this matrix.
-      const scale = cameraPlan.sceneScale;
-      const physicalProjection = physicalProjectionFromCamera(rotation,
-        [bodyX - principalOffset[0], bodyY - principalOffset[1], bodyZ - focal], scale, viewport);
-      return Object.freeze({
-        distance,
-        projection: physicalProjection,
-        stageViewport,
-        focal,
-        viewportWidth,
-        viewportHeight,
-        principalOffset,
-        ...(projection === null && genericBody === undefined ? {} : {
-          body: projectedBody!, levelOfDetail: lod,
-          ...(projection === null ? {} : { sun: projection.sun }),
-        }),
-        ...(system === null ? {} : {
-          planetarySystem: Object.freeze({
-            opacity: systemOpacity,
-            sunMarkerOpacity: sunMarkerOpacityValue,
-            projected: projection !== null && projection.system !== null,
-          }),
-        }),
-      });
+      return preparePresentation(sceneMatrix, scenePresentation).commit();
     },
     // The drag trackball: the projected silhouette. A small body still orbits
     // comfortably: the trackball never shrinks below a fifth of the

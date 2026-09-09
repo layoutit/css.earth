@@ -12,6 +12,8 @@ import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
+import type { PlannedWorldContext } from './world-context-planner.js';
+import { createWorldContextPlannerClient } from './world-context-planner-client.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [] }: {
@@ -45,6 +47,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
     startup: [...entries, ...starEntries, ...shellEntries].map(entry => entry.key),
   };
   return Object.freeze({ assets,
+    createFramePlanner: () => createWorldContextPlannerClient(plan),
     mount(stage: HTMLElement) {
       const document = stage.ownerDocument;
       const root = document.createElement('div');
@@ -105,6 +108,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
+          captureFrame: (world: WorldCameraPose, viewport: WorldCameraViewport) => spatial!.captureFrame(world, viewport),
           previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
           setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },
           setHighContrastSky(enabled: boolean) {
@@ -130,7 +134,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             pointField!.setOccluder(body);
             root.dataset.selectedObject = id;
           },
-          publish(world: WorldCameraPose, viewport: WorldCameraViewport, shellVisibility: Readonly<Record<string, boolean>> = {}) {
+          publish(world: WorldCameraPose, viewport: WorldCameraViewport, shellVisibility: Readonly<Record<string, boolean>> = {}, frame?: PlannedWorldContext) {
             if (destroyed) return;
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
@@ -147,7 +151,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             for (const [index, shell] of shellLayers.entries()) {
               shell.publish(world, viewport, shellVisibility[shells[index]!.payload.id] !== false);
             }
-            spatial!.publish(world, viewport);
+            spatial!.publish(world, viewport, frame);
             const foregroundRects = spatial!.backgroundExclusionRects();
             const environmentRects = environmentLabels!.publish({ world, viewport,
               shellStats: shellLayers.map(shell => shell.stats()), blockerRects: foregroundRects });

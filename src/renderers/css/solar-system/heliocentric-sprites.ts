@@ -1,4 +1,5 @@
 import type { OrbitSegment } from './heliocentric-view.js';
+import { formatLineNumber, orbitSegmentTransform } from './orbit-segment-presentation.js';
 export interface Sprite {url?:string;index:number;count:number;size:number;}
 export interface SpriteWithUrl extends Sprite {url:string;}
 export interface PhaseAtlas {url:string;columns:number;rowCount:number;frameCount:number;minimumLightViewZ:number;maximumLightViewZ:number;baseLightAzimuthDegrees:number;}
@@ -11,19 +12,15 @@ const pieceStyles = new WeakMap<HTMLElement, { transform: string; opacity: strin
 // offsets are the translation as they are and the segment is the bar's x
 // axis. Pieces beyond the segment count are hidden.
 export function writePieces(pool:readonly HTMLElement[], segments:readonly OrbitSegment[], previousCount:number,
-  setVisible?: (index: number, visible: boolean) => void) {
+  setVisible?: (index: number, visible: boolean) => void, transforms?: readonly string[]) {
+  if (transforms && transforms.length !== segments.length) throw new TypeError('Orbit transforms must match their projected segments.');
   const count = Math.min(segments.length, pool.length);
   for (let index = 0; index < count; index += 1) {
-    const [x0, y0, x1, y1, weight] = segments[index];
-    const dx = x1 - x0;
-    const dy = y1 - y0;
-    const length = Math.hypot(dx, dy);
+    const weight = segments[index][4];
     const piece = pool[index];
     let written = pieceStyles.get(piece);
     if (!written) { written = { transform: '', opacity: '', weight: NaN }; pieceStyles.set(piece, written); }
-    const transform = `matrix(${formatLineNumber(dx)}, ${formatLineNumber(dy)}, ${
-      formatLineNumber(-dy / length)}, ${formatLineNumber(dx / length)}, ${
-      formatLineNumber(x0)}, ${formatLineNumber(y0)})`;
+    const transform = transforms?.[index] ?? orbitSegmentTransform(segments[index]);
     if (written.transform !== transform) { piece.style.transform = transform; written.transform = transform; }
     // The chord's trail weight: the line fades backwards from the body.
     if (written.weight !== weight) {
@@ -77,12 +74,6 @@ export function applySprite(element:HTMLElement, sprite:SpriteWithUrl) {
   element.style.backgroundPosition = `${(sprite.index /
     Math.max(1, sprite.count - 1) * 100).toFixed(4)}% center`;
   element.style.backgroundSize = `${sprite.count * 100}% 100%`;
-}
-
-// Orbit coordinates are clipped to the viewport before publication. CSS can
-// consume their fixed-decimal tokens without a JS parse/serialize round trip.
-function formatLineNumber(value: number) {
-  return Math.abs(value) < 1e-9 ? "0" : value.toFixed(6);
 }
 
 export function formatNumber(value:number) {

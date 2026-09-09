@@ -28,7 +28,16 @@ it('publishes physical scene coordinates without CSS perspective-origin or focal
   dolly.setBodyCenter(bodyCenter);
   const rotation = { m11: 0, m21: -1, m31: 0, m12: 1, m22: 0, m32: 0, m13: 0, m23: 0, m33: 1 } as DOMMatrix;
   const measured = layoutReads;
+  const beforePrepare = { ...options.sceneElement.style };
+  const captured = dolly.prepare(rotation, 'rotateZ(90deg)');
+  expect(options.sceneElement.style).toEqual(beforePrepare);
+  dolly.setBodyCenter([500, 300, -8000]);
+  const committed = captured.commit();
+  expect(committed.distance).toBe(Math.hypot(...bodyCenter));
+  expect(dolly.bodyCenter()).toEqual([500, 300, -8000], 'Committing an older frame must preserve newer requested input');
+  dolly.setBodyCenter(bodyCenter);
   const published = dolly.publish(rotation, 'rotateZ(90deg)');
+  expect(committed).toEqual(published);
   expect(layoutReads).toBe(measured, 'Camera publication must not force layout after its transform writes');
   expect(published.stageViewport).toEqual({ focalPixels: focal, widthPixels: width, heightPixels: height,
     principalOffsetPixels: [0, 0] });

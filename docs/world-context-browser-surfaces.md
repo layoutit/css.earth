@@ -1563,3 +1563,86 @@ This points the next investigation at recurring main-thread publication and
 browser lifecycle work, rather than treating video observation counts or rAF
 intervals alone as display-frame proof. Extracted events and inspected-frame
 identities are retained beside the capture.
+
+## Persistent frame planning with a matching camera commit
+
+World context projection, clipping, annotation placement and orbit matrix
+formatting now run in one persistent worker. The worker receives the prepared
+258-body bank once. Each request contains the camera/viewport snapshot and the
+last committed UI measurements and annotation history. It projects the existing
+prepared vertices; it never generates geometry, source data or assets.
+
+The application owns one queue across object navigation: one request in flight
+and one replaceable pending request. Normal camera input does not cancel an
+already planned view. On completion, the captured detailed camera, sky and
+context drawing/picking state commit together in the same task. Input continues
+updating the requested camera while the displayed camera remains coherent with
+its displayed annotations. A viewport revision or disposed object owner rejects
+an obsolete completion. A changed selection, hover or label measurement causes
+replanning against the current UI state. Initial mount and semantic UI updates
+keep their existing synchronous publication path.
+
+The geometry implementation is shared by synchronous publication and the worker.
+Prepared point-to-eye transforms and focus/selected/parent occlusion queries are
+shared within a frame. Retained DOM, six-decimal orbit matrices, marker clipping,
+opacity, label policy and surface rendering remain unchanged. No CSS-variable
+change is involved. Diagnostics now distinguish requested and presented cameras
+and report queue admission, completion, replacement and cancellation.
+
+The implementation passes 65 focused renderer tests, 34 router/recorder tests,
+renderer typecheck and build. Queue tests cover replacement without starvation,
+matched camera/drawing completion, stale viewport/owner rejection, changed UI
+state and failure delivery. Twenty-four DPR 1/2 browser views preserve exact
+camera, geometry styles, labels, retained nodes and node counts, with maximum
+full-image difference 1/255. Native Saturn orbit input preserves Mars keyboard
+focus, 16-to-20 px hover growth, immediate full selection and one landed camera.
+
+A separate real-browser transport check delays worker replies by 60 ms. Eighty
+rapid camera requests settle to the newest view with 78 superseded requests and
+no unbounded queue. Resizing discards obsolete work. Selecting Saturn immediately
+updates selection while Sun is still active; landing detaches the old camera,
+retains the input surface and leaves exactly one camera. Eight stale requests
+are discarded over that deliberately delayed scenario. No application errors
+occur. This is a race check, not a performance capture.
+
+The synchronized comparison uses Chrome Canary 155.0.8048.0 on the same M3 Max,
+1995 x 1236 CSS pixels, DPR 2, motion off and the same Sun → Milky Way → reversible
+native drag → Sun route and 258-body catalog. Planetary-band values use 5–5,000 AU
+as determined by recorder samples.
+
+| Measurement | Prepared extent order (`d0a452678`) | Persistent worker |
+| --- | ---: | ---: |
+| Whole-route rAF intervals >25 ms | 15/3477 | 8/3365 |
+| Planetary-band rAF intervals >25 ms | 12/753 | 5/737 |
+| Planetary-band main-frame p95 | 19.427 ms | 13.186 ms |
+| Main-frame tasks >16.667 ms | 71/753 | 4/737 |
+| Main-frame maximum | 27.604 ms | 21.683 ms |
+| Main-thread task occupancy | 82.19% | 73.35% |
+| Dropped-only compositor report groups | 2 | 1 |
+| Galaxy-drag rAF intervals >25 ms | 0/243 | 1/241 |
+
+Main-frame duration is `ProxyMain::BeginMainFrame`, not all main-thread work.
+Worker message callbacks now do the retained DOM commit outside rAF callbacks.
+The separate occupancy measure unions all `CrRendererMain` top-level task spans,
+including those callbacks, and clips them to recorder-derived band intervals:
+10,475.730/12,745.600 ms before, 9,073.613/12,370.200 ms after. This is elapsed
+occupancy, not CPU utilization. Compositor groups combine source/sequence states;
+they and rAF/video observations do not establish physical display FPS. These are
+single captures, not a statistical benchmark.
+
+The target remains unmet. The worst remaining main-frame task includes 9.015 ms
+style calculation affecting 4,149 elements, 2.287 ms layout with 2,097 dirty
+objects, 1.625 ms paint and 4.174 ms layer work. Main-thread style and layer work
+remain substantial. The queue stays at most one in flight and one pending; only
+one request is superseded during the normal route. Every sampled presented
+camera equals the committed runtime world camera and presentation metadata.
+
+Evidence: `output/world-context-zoom/worker-frame-publication-dpr2-r2/`, recorder
+`d5ecb040-c1fd-44a2-b10b-6d41e59f25bc`, base `d0a452678` plus the recorded 26-file
+source patch. All 49 tracked source hashes and the original patch match after
+capture. Recorder JSON, Chrome trace gzip and video contain 2845/2845 observations,
+-44 microseconds clock drift and 1.411 ms maximum PTS error, with no errors, HMR or
+trace loss. The 641 loaded-resource receipts include the worker response. The
+first attempt at `worker-frame-publication-dpr2/` failed loaded-response readback
+before recording began and is explicitly unqualified. Visual/input and delayed
+transport checks are in `output/playwright/worker-frame-publication/`.

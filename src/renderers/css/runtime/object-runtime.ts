@@ -38,7 +38,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const initialSelection = initialObjectSelection(definition.controls);
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, externalWorldContext = false, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, externalWorldContext = false, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
@@ -232,7 +232,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     function publishWorldSnapshot(publication: OrbitPublication) {
       if (!worldFrame || orbit === null || publication.focal === undefined ||
           !publication.principalOffset || publication.principalOffset.length !== 2) return;
-      const latestWorld = orbit.captureWorldCamera(worldFrame);
+      const latestWorld = publication.worldCamera ?? orbit.captureWorldCamera(worldFrame);
       const latestWorldViewport = publication.stageViewport ?? stageWorldViewport(stage, mounted?.cameraElement ?? null,
         publication.focal, publication.principalOffset);
       worldPublication.publish(latestWorld, latestWorldViewport);
@@ -317,7 +317,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       context.own(() => selection?.destroy());
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         cubicSky, skyPlan: definition.sky, directionalSun, directionalSunPlan: definition.sun ?? null, heliocentric, worldContext: orbitWorldContext,
-        cameraPlan, viewport, objectId: definition.id, requireSun: false, preparedSurfaceHitTest: mounted.surfaceHitTest,
+        cameraPlan, viewport, framePresenter, objectId: definition.id, requireSun: false, preparedSurfaceHitTest: mounted.surfaceHitTest,
         mobilePreviewElement, onPublish: publication => guarded(() => publish(publication)), onError: fatal });
       context.own(() => orbit?.destroy());
       if (latestWorldPublication !== null) publishWorldSnapshot(latestWorldPublication);

@@ -39,6 +39,7 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, cu
       const diagnostics = Object.freeze({ ready: true,
         view: () => orbit.state(), setView: (state: OrbitStateUpdate) => orbit.setState(state), lens: lensState, selectLens,
         camera: Object.freeze({ state: orbit.state, setState: orbit.setState, flyToState: orbit.flyToState, stats: orbit.stats,
+          publication: orbit.publicationState,
           captureWorldCamera: orbit.captureWorldCamera, applyWorldCamera: orbit.applyWorldCamera }),
         // Session knobs (development diagnostics): the orbit trails' spans,
         // the caption policy and the catalogue stars' exposure; null restores

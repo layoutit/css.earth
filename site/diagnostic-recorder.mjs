@@ -102,12 +102,15 @@ export function mountDiagnosticRecorder({ documentTarget: d, windowTarget: w, re
       }
     }
     const camera = readCamera();
+    const view = runtime?.runtime.view() ?? null;
+    const requestedCamera = camera?.navigation?.capture() ?? null;
     return {
       active: id ?? null, selected: app?.selectedObjectId ?? null, overview: app?.overview ?? null,
       mountedObjects: app?.mountedObjectCount ?? null, lifecycle: app?.lifecycle ?? null,
       playback: app?.playback ?? null, documentVisibility: d.visibilityState,
-      camera: camera?.navigation?.capture() ?? null, optics: camera?.navigation?.optics() ?? null,
-      view: runtime?.runtime.view() ?? null, selection: runtime?.runtime.selection() ?? null,
+      camera: view?.worldCamera ?? requestedCamera, requestedCamera, optics: camera?.navigation?.optics() ?? null,
+      framePublication: runtime?.camera?.publication?.() ?? null, worldFrames: w.__cssEarthUniverse?.frames?.() ?? null,
+      view, selection: runtime?.runtime.selection() ?? null,
       resources: runtime?.runtime.resources() ?? null, materials: runtime?.material.state() ?? null,
       geometry: geometry(),
     };

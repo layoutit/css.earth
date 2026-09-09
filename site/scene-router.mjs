@@ -143,9 +143,13 @@ export function createSceneRouter({
       if (loaded.cancelled || active !== session) return;
       // Keep the raw handle even if validation fails.
       let mount;
+      const framePresenter = worldContextMount?.createFramePresenter?.();
+      session.framePresenter = framePresenter;
+      if (framePresenter) session.lifetime.onDispose(() => framePresenter.destroy());
       mount = loaded.value(stage, {
         ...handoff?.mountOptions,
         ...(worldContextMount ? { externalWorldContext: true, viewport: worldContextMount.viewport } : {}),
+        ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
         onError(error) {
           if (active === session && session.mount === mount) fail(session, error);
@@ -522,6 +526,7 @@ export function createSceneRouter({
       if (active === session && worldContextMount === owner) owner.publish(world, viewport);
     });
     session.lifetime.onDispose(unsubscribe);
+    session.framePresenter?.enable();
   }
   function setOverview(enabled) {
     overview = enabled;

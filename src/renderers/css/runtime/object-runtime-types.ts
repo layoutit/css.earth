@@ -51,6 +51,7 @@ export interface ObjectMountOptions {
   worldContext?: PerspectiveWorldContext;
   /** The application owns the contextual universe layer for this mount. */
   externalWorldContext?: boolean;
+  framePresenter?: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
   viewport?: import('../navigation/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;
   /** The camera can accept the live application pose before surface activation completes. */
