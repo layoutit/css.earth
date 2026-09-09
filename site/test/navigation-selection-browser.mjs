@@ -7,6 +7,14 @@ const output = 'output/playwright/navigation-selection';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome', headless: true });
 const results = [], errors = [];
+async function requireHeldRequest(observed) {
+  let timer;
+  try {
+    await Promise.race([observed, new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error('The hash-addressed scene request was not intercepted.')), 10000);
+    })]);
+  } finally { clearTimeout(timer); }
+}
 try {
   for (const dpr of [1, 2]) {
     const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: dpr });
@@ -47,7 +55,7 @@ try {
     assert.equal(await page.evaluate(() => window.__cardSwaps), 1, 'One complete card swap in the click event');
     await page.screenshot({ path: `${output}/immediate-dpr-${dpr}.png` });
     await page.waitForFunction(() => window.__cssEarth?.selectedObjectId === 'ceres');
-    await ceresRequested;
+    await requireHeldRequest(ceresRequested);
     assert.equal(ceresHits, 1, 'The hash-addressed scene request is actually held');
     assert.equal(await page.evaluate(() => window.__cssEarth.activeObjectId), 'sun');
     release();
@@ -65,7 +73,7 @@ try {
     await page.locator('.planet-sidebar-search').fill('Venus');
     await page.locator('.planet-object-link[data-object-id="venus"]').click();
     assert.equal(await page.locator('.planet-information-panel .planet-title').first().getAttribute('aria-label'), 'Venus');
-    await venusRequested;
+    await requireHeldRequest(venusRequested);
     assert.equal(venusHits, 1, 'Interrupted navigation also holds the actual scene request');
     await page.mouse.move(900, 450); await page.mouse.wheel(0, 40);
     await page.waitForFunction(() => window.__cssEarth.ready && window.__cssEarth.selectedObjectId === 'ceres');

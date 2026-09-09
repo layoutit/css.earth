@@ -55,7 +55,7 @@ receipts are in [the evidence record](evidence/navigation-page-transport.json).
 
 | Measurement | Before | After |
 | --- | ---: | ---: |
-| Navigation HTML, four requests including automatic Sun handoffs | 31.297 MB | 0.874 MB |
+| Navigation HTML (decoded), four requests including automatic Sun handoffs | 31.297 MB | 0.874 MB |
 | Main-thread HTML parsing during capture | 172.207 ms | 10.005 ms |
 | Decoder worker module requests, including initial load | 5 | 1 |
 | Presented animation-frame intervals over 25 ms | 88/1,937 | 36/1,643 |
@@ -83,3 +83,9 @@ updated object transports were restored only after matching their new main
 pins, then their small page metadata was regenerated. The chart above remains
 explicitly tied to its captured revisions; it is not relabeled as a capture of
 that subsequent integration.
+
+The integrated static build also passes (810 pages). Metadata/package checks
+pass for all 404 objects. Router/preparation checks report 40 passes and one
+blocked source-reproduction check: Squannit's
+`source/presentation/context.png` is missing locally. No source bytes were
+fabricated and that check was not weakened or declared passing.

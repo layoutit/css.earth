@@ -178,7 +178,7 @@
   "remainingWorstFrame": {
     "intervalMs": 545.003,
     "body": "earth",
-    "mainCommitWaitMs": 402.733,
+    "mainCommitWaitMs": 402.729,
     "interpretation": "Main thread waits for browser raster/commit work; 254 raster tasks overlap this interval. Concurrent thread durations must not be summed."
   }
 }
