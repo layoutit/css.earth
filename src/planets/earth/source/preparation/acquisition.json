@@ -141,6 +141,18 @@
       "groups": [
         "refresh"
       ],
+      "path": "blue-marble-july.jpg",
+      "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
+      "headers": {
+        "accept": "*/*",
+        "user-agent": "cssEarth Earth source acquisition"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
       "path": "blue-marble-clouds.tif",
       "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif",
       "headers": {

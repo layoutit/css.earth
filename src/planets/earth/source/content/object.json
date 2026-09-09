@@ -136,14 +136,28 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
+        "description": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones.",
         "title": "Blue Marble Next Generation",
         "thumbnail": "/scenes/earth/earth-lens-normal.webp",
         "source": {
-          "id": "surface-observation"
+          "id": "nasa-blue-marble-july",
+          "url": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
         },
-        "detail": "Global mosaic",
-        "summary": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery."
+        "detail": "NASA · July 2004",
+        "summary": "NASA Blue Marble, July 2004. Cloud-free land and ocean mosaic with brighter display midtones."
+      },
+      {
+        "id": "clouds",
+        "label": "Cloud coverage",
+        "detail": "NASA · archival",
+        "title": "Blue Marble cloud composite",
+        "description": "Archival NASA cloud imagery over the July 2004 surface mosaic with brighter display midtones. Clouds and surface are from different observation periods; this is not live weather.",
+        "summary": "Archival NASA clouds over a brighter July 2004 surface mosaic. This is not live weather.",
+        "thumbnail": "/scenes/earth/earth-lens-clouds.webp",
+        "source": {
+          "id": "nasa-blue-marble-clouds",
+          "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif"
+        }
       },
       {
         "id": "topography",
