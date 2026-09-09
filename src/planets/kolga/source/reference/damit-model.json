@@ -1,0 +1,360 @@
+{
+  "number": 191,
+  "name": "Kolga",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2318",
+  "modelId": 4072,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4072",
+  "catalog": "View model 170 -39 17.60386 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "4072",
+    "Asteroid": "(191) Kolga",
+    "λ": "170",
+    "β": "-39",
+    "P": "17.60386",
+    "YORP": "",
+    "t0": "2450774",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.99",
+    "p3": "0.29",
+    "p4": "-0.8",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:49:37",
+    "Modified": "2019-09-26 09:49:37",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/12728/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/12729/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/12730/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2019)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/182",
+      "file": "reference-182.html",
+      "links": [
+        {
+          "label": "2019a&a...631a...2d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2019a&a...631a...2d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2019A&A...631A...2D",
+          "url": "http://adsabs.harvard.edu/abs/2019A&A...631A...2D"
+        }
+      ]
+    }
+  ],
+  "id": "kolga",
+  "displayName": "Kolga",
+  "lambda": 170.0,
+  "beta": -39.0,
+  "periodHours": 17.60386,
+  "version": "2019-05-07",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 100.93,
+  "uncertaintyKm": 1.4,
+  "akari": {
+    "number": 191,
+    "name": "Kolga",
+    "diameterKm": 100.93,
+    "uncertaintyKm": 1.4,
+    "detections": 7,
+    "originalRow": "191    Kolga                          9.07  0.15  7  100.93  1.40 0.041 0.001"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/12730/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/12728/IAUspin.txt",
+  "shapeSha256": "74994217a690be9e8736a7709f52c8e70c80a0f63c0d7160f73e7cd9924ec078",
+  "shapeBytes": 46419,
+  "vertices": 574,
+  "faces": 1144,
+  "signedVolume": 0.9999999908384961,
+  "independentSignedVolume": 0.9999999908384961,
+  "translatedSignedVolume": 0.9999999908384968,
+  "originalVolumeEquivalentDiameter": 1.2407009780099043,
+  "firstVertex": [
+    0.007608,
+    -0.201829,
+    0.588915
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5521717401778182,
+    0.8189797016587164
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.674102,
+      0.781526
+    ],
+    [
+      -0.67006,
+      0.67521
+    ],
+    [
+      -0.614505,
+      0.619632
+    ]
+  ],
+  "scaleKmPerSourceUnit": 81.34917420786807,
+  "topology": {
+    "edges": 1716,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 1144,
+    "minDoubleTriangleAreaSourceUnits2": 2.800000000050183e-11
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.007608,
+        -0.201829,
+        0.588915
+      ],
+      "radiusSourceUnits": 0.6225863025557179
+    },
+    {
+      "vertexIndex1": 5,
+      "pointSourceUnits": [
+        -0.199906,
+        -0.227641,
+        0.619632
+      ],
+      "radiusSourceUnits": 0.6897294028392584
+    },
+    {
+      "vertexIndex1": 184,
+      "pointSourceUnits": [
+        0.051845,
+        0.67521,
+        -0.144676
+      ],
+      "radiusSourceUnits": 0.6924793087890786
+    },
+    {
+      "vertexIndex1": 192,
+      "pointSourceUnits": [
+        -0.073936,
+        0.640149,
+        -0.109285
+      ],
+      "radiusSourceUnits": 0.6536057569529203
+    },
+    {
+      "vertexIndex1": 227,
+      "pointSourceUnits": [
+        -0.232248,
+        -0.67006,
+        0.001231
+      ],
+      "radiusSourceUnits": 0.7091692692615776
+    },
+    {
+      "vertexIndex1": 258,
+      "pointSourceUnits": [
+        0.781526,
+        0.190848,
+        0.019487
+      ],
+      "radiusSourceUnits": 0.8047270288420789
+    },
+    {
+      "vertexIndex1": 288,
+      "pointSourceUnits": [
+        -0.089537,
+        0.6454,
+        -0.177542
+      ],
+      "radiusSourceUnits": 0.675336357775146
+    },
+    {
+      "vertexIndex1": 297,
+      "pointSourceUnits": [
+        -0.674102,
+        -0.148242,
+        0.275349
+      ],
+      "radiusSourceUnits": 0.7431058260900664
+    },
+    {
+      "vertexIndex1": 563,
+      "pointSourceUnits": [
+        -0.103712,
+        0.273977,
+        -0.614505
+      ],
+      "radiusSourceUnits": 0.6807613168343218
+    },
+    {
+      "vertexIndex1": 574,
+      "pointSourceUnits": [
+        -0.118086,
+        0.288352,
+        -0.614505
+      ],
+      "radiusSourceUnits": 0.6889902570610124
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 4073,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4073",
+      "pole": [
+        "328",
+        "-42"
+      ],
+      "version": "2019-05-07",
+      "diameterKm": "",
+      "calibratedSize": "0 (No)",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 5.19405681511169,
+  "originalSurfaceEquivalentDiameter": 1.285814774238632,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Gaia DR2 plus Lowell inversion; publication table gives 520 Lowell and 26 Gaia points. The two published poles remain; select model 4072 as a reproducible representative, without rejecting model 4073.",
+  "papers": [
+    {
+      "file": "paper-durech-2019.pdf",
+      "url": "https://arxiv.org/pdf/1909.09395",
+      "label": "Ďurech et al. (2019), A&A 631, A2",
+      "sha256": "485d95cc7dbe0932f982f1721f583c8c1c647275dd28d954989dd917a619768e"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 100.93,
+    "uncertaintyKm": 1.4,
+    "reportedUncertaintyKm": 1.4,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 191,
+      "name": "Kolga",
+      "diameterKm": 100.93,
+      "uncertaintyKm": 1.4,
+      "detections": 7,
+      "originalRow": "191    Kolga                          9.07  0.15  7  100.93  1.40 0.041 0.001"
+    },
+    "limitations": "Gaia DR2 plus Lowell inversion; publication table gives 520 Lowell and 26 Gaia points. The two published poles remain; select model 4072 as a reproducible representative, without rejecting model 4073. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 100.93 km effective diameter (catalog ±1.4 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 81.34917420786807,
+    "metersPerSourceUnit": 81349.17420786807,
+    "sourceSignedVolume": 0.9999999908384961,
+    "sourceVolumeEquivalentDiameter": 1.2407009780099043,
+    "sourceSurfaceArea": 5.19405681511169,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 538343.4607721363,
+    "derivedVolumeEquivalentDiameterKm": 100.92999999999998,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2450774.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 2.8959502139804503,
+  "orbitalPeriodYears": 4.928273929443386,
+  "sourceFields": {
+    "ID": "4072",
+    "Asteroid": "(191) Kolga",
+    "λ": "170",
+    "β": "-39",
+    "P": "17.60386",
+    "YORP": "",
+    "t0": "2450774",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.99",
+    "p3": "0.29",
+    "p4": "-0.8",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:49:37",
+    "Modified": "2019-09-26 09:49:37",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

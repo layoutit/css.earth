@@ -1,0 +1,355 @@
+{
+  "number": 306,
+  "name": "Unitas",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/161",
+  "modelId": 197,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/197",
+  "catalog": "View model 79 -35 8.73875 3D.pdf | IAUspin.txt | occ_2004-07-06.pdf | shape.png | shape.txt | spin.txt | shape.obj preferred solution (based on IR data, Delbo & Tanga 2009), also preferred by occultation data, size from occultation is 49 +/- 5 km",
+  "fields": {
+    "ID": "197",
+    "Asteroid": "(306) Unitas",
+    "λ": "79",
+    "β": "-35",
+    "P": "8.73875",
+    "YORP": "",
+    "t0": "2444113.7",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "56",
+    "σD": "1",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2009-02-26",
+    "Comment": "preferred solution (based on IR data, Delbo & Tanga 2009), also preferred by occultation data, size from occultation is 49 +/- 5 km",
+    "Created": "",
+    "Modified": "2011-04-11 11:28:54",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/574/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/575/IAUspin.txt",
+    "occ_2004-07-06.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/576/occ_2004-07-06.pdf",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/577/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/578/shape.txt"
+  },
+  "references": [
+    {
+      "label": "J. Ďurech (2007)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/113",
+      "file": "reference-113.html",
+      "links": [
+        {
+          "label": "2007a&a...465..331d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2007a&a...465..331d"
+        },
+        {
+          "label": "https://ui.adsabs.harvard.edu/#abs/2007A&A...465..331D/abstract",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2007A&A...465..331D/abstract"
+        }
+      ]
+    },
+    {
+      "label": "M. Delbo and P. Tanga (2009)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/126",
+      "file": "reference-126.html",
+      "links": [
+        {
+          "label": "2009p&ss...57..259d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2009p&ss...57..259d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2009P%26SS...57..259D",
+          "url": "http://adsabs.harvard.edu/abs/2009P%26SS...57..259D"
+        }
+      ]
+    },
+    {
+      "label": "Ďurech et al. (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/139",
+      "file": "reference-139.html",
+      "links": [
+        {
+          "label": "2011icar..214..652d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011icar..214..652d"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4227",
+          "url": "http://arxiv.org/abs/1104.4227\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011Icar..214..652D",
+          "url": "http://adsabs.harvard.edu/abs/2011Icar..214..652D"
+        }
+      ]
+    }
+  ],
+  "id": "unitas",
+  "displayName": "Unitas",
+  "lambda": 79.0,
+  "beta": -35.0,
+  "periodHours": 8.73875,
+  "version": "2009-02-26",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 49.0,
+  "uncertaintyKm": 5.0,
+  "akari": {
+    "number": 306,
+    "name": "Unitas",
+    "diameterKm": 46.24,
+    "uncertaintyKm": 0.64,
+    "detections": 6,
+    "originalRow": "306    Unitas                         8.96  0.15  6   46.24  0.64 0.219 0.008"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/578/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/575/IAUspin.txt",
+  "shapeSha256": "e3b4f00f07c7daec58d937c2ec27613c00c336979c81241dcfeb593048bbca64",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 91952.32009268494,
+  "independentSignedVolume": 91952.32009268494,
+  "originalVolumeEquivalentDiameter": 55.99999949598512,
+  "firstVertex": [
+    -1.294314,
+    8.919461,
+    24.076687
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    22.79068618014925,
+    34.7819843643338
+  ],
+  "extentsSourceUnits": [
+    [
+      -33.832198,
+      32.923161
+    ],
+    [
+      -28.756724,
+      27.763241
+    ],
+    [
+      -25.472915,
+      24.625583
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.8750000078752326,
+  "alternatives": [
+    {
+      "modelId": 198,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/198",
+      "pole": [
+        "253",
+        "-17"
+      ],
+      "version": "2011-03-28",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "53",
+      "comment": "",
+      "references": [
+        {
+          "label": "J. Ďurech (2007)",
+          "url": "/projects/damit/references/view/113"
+        },
+        {
+          "label": "Ďurech et al. (2011)",
+          "url": "/projects/damit/references/view/139"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "The pole(79,−35) is preferred by both IRAS thermal fits and the2004 occultation negative chord. Delbo and Tanga2009 obtain a volume-equivalent thermal size range55–57 km, represented in DAMIT as56±1 km. The later Ďurech2011 Table3 fits the same pole family to five occultation chords at49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
+  "selectedPoleStatus": "preferred by occultation and thermal/period comparisons",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "sizeCalibratedByPublishedTransfer": true,
+  "papers": [
+    {
+      "file": "durech-occultations-2011.pdf",
+      "url": "https://arxiv.org/pdf/1104.4227",
+      "label": "Ďurech et al. (2011), Icarus 214, 652–670"
+    },
+    {
+      "file": "delbo-tanga-2009.pdf",
+      "url": "https://arxiv.org/pdf/0808.0869",
+      "label": "Delbo and Tanga (2009), Planetary and Space Science 57, 259–265"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 49.0,
+    "uncertaintyKm": 5.0,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://arxiv.org/pdf/1104.4227",
+    "sourceLabel": "Ďurech et al. (2011), Icarus 214, 652–670",
+    "reference": "Ďurech et al. (2011), Icarus 214, 652–670",
+    "limitations": "The pole(79,−35) is preferred by both IRAS thermal fits and the2004 occultation negative chord. Delbo and Tanga2009 obtain a volume-equivalent thermal size range55–57 km, represented in DAMIT as56±1 km. The later Ďurech2011 Table3 fits the same pole family to five occultation chords at49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
+    "visibleDescription": "Convex light-curve reconstruction, 49 ± 5 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.8750000078752326,
+    "metersPerSourceUnit": 875.0000078752325
+  },
+  "independentCenteredSignedVolume": 91952.32009268492,
+  "surfaceAreaSourceUnitsSquared": 10209.967641002382,
+  "surfaceEquivalentDiameterSourceUnits": 57.00818921652971,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        -1.294314,
+        8.919461,
+        24.076687
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 2,
+      "sourcePoint": [
+        -3.121501,
+        5.173327,
+        24.625583
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 447,
+      "sourcePoint": [
+        32.923161,
+        3.971091,
+        -2.968218
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 477,
+      "sourcePoint": [
+        7.136552,
+        27.763241,
+        4.531723
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 507,
+      "sourcePoint": [
+        -33.832198,
+        -4.470383,
+        -0.71671
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "sourcePoint": [
+        -33.616133,
+        -7.633046,
+        -1.685504
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 540,
+      "sourcePoint": [
+        -3.598406,
+        -28.756724,
+        1.729965
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1019,
+      "sourcePoint": [
+        5.141415,
+        9.769052,
+        -25.472915
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "sourcePoint": [
+        3.414791,
+        8.042428,
+        -25.472915
+      ]
+    }
+  ],
+  "distanceAu": 2.357778522320458,
+  "orbitalPeriodYears": 3.6204513263694147,
+  "sourceFields": {
+    "ID": "197",
+    "Asteroid": "(306) Unitas",
+    "λ": "79",
+    "β": "-35",
+    "P": "8.73875",
+    "YORP": "",
+    "t0": "2444113.7",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "56",
+    "σD": "1",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2009-02-26",
+    "Comment": "preferred solution (based on IR data, Delbo & Tanga 2009), also preferred by occultation data, size from occultation is 49 +/- 5 km",
+    "Created": "",
+    "Modified": "2011-04-11 11:28:54",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "Original archive coordinates flagged as km, with mesh volume-equivalent diameter 55.9999995 km and archive-declared diameter 56 km. The unchanged coordinates are uniformly rescaled by 0.87500000787523258 km per source unit to the explicitly selected published volume-equivalent diameter 49 km (Ďurech et al. (2011), Icarus 214, 652–670); the original archive diameter is not the adopted physical scale.",
+  "sourceUnitsDescription": "Original archive coordinates flagged as km, with mesh volume-equivalent diameter 55.9999995 km and archive-declared diameter 56 km. The unchanged coordinates are uniformly rescaled by 0.87500000787523258 km per source unit to the explicitly selected published volume-equivalent diameter 49 km (Ďurech et al. (2011), Icarus 214, 652–670); the original archive diameter is not the adopted physical scale."
+}

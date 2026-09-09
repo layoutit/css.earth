@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1799",
+  "modelId": 1799,
+  "modelVersion": "2017-06-14",
+  "diameterKm": 79,
+  "diameterInterpretation": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations, 79 ± 2 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 79,
+    "uncertaintyKm": 2,
+    "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
+    "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1799",
+    "reference": "DAMIT model 1799",
+    "sourceLabel": "DAMIT model 1799",
+    "limitations": "Hanuš2017 fits optical light curves, two disk-resolved AO images and one18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.",
+    "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations, 79 ± 2 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 0.9984548643441234,
+    "metersPerSourceUnit": 998.4548643441234
+  },
+  "periodHours": 8.4006,
+  "poleEclipticJ2000Degrees": [
+    276,
+    53
+  ],
+  "modelLimitations": "Hanuš2017 fits optical light curves, two disk-resolved AO images and one18-chord occultation. Archive D79±2 km is retained rather than paper ensemble D80±2 km. No resolved albedo or regolith map is supplied.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/427/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 998.4548643441234,
+    "firstVertexKm": [
+      5.04217310202108,
+      -13.823967040595553,
+      19.195801982086863
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      101.59627703903976,
+      110.89578580005448,
+      49.88899544279134
+    ],
+    "volumeCubicKm": 258154.6167222099,
+    "volumeEquivalentRadiusKm": 39.5,
+    "radialRangeKm": [
+      20.98762126265913,
+      65.1540932375521
+    ]
+  },
+  "elevation": [
+    -30,
+    30
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 790,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 258154616722209.25
+    }
+  }
+}

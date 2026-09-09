@@ -1,0 +1,307 @@
+{
+  "number": 286,
+  "name": "Iclea",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2887",
+  "modelId": 5017,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5017",
+  "catalog": "View model 31 13 15.3612 IAUspin | shape.png | shape.txt | occ_2008-06-15.png | spin.txt | shape.obj preferred",
+  "fields": {
+    "ID": "5017",
+    "Asteroid": "(286) Iclea",
+    "λ": "31",
+    "β": "13",
+    "P": "15.3612",
+    "YORP": "",
+    "t0": "2452425",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "86",
+    "σD": "13",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2023-10-03",
+    "Comment": "preferred",
+    "Created": "2020-10-05 13:10:00",
+    "Modified": "2023-10-12 08:46:37",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/127589/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/127590/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/127591/shape.txt",
+    "occ_2008-06-15.png": "https://damit.cuni.cz/projects/damit/stored_files/open/128668/occ_2008-06-15.png"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2023)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/667",
+      "file": "reference-667.html",
+      "links": [
+        {
+          "label": "2023a&a...679a..60m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2023a&a...679a..60m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2023A&A...679A..60M",
+          "url": "http://adsabs.harvard.edu/abs/2023A&A...679A..60M"
+        }
+      ]
+    }
+  ],
+  "id": "iclea",
+  "displayName": "Iclea",
+  "lambda": 31.0,
+  "beta": 13.0,
+  "periodHours": 15.3612,
+  "version": "2023-10-03",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 86.0,
+  "uncertaintyKm": 13.0,
+  "akari": {
+    "number": 286,
+    "name": "Iclea",
+    "diameterKm": 109.11,
+    "uncertaintyKm": 1.49,
+    "detections": 8,
+    "originalRow": "286    Iclea                          8.98  0.15  8  109.11  1.49 0.038 0.001"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/127591/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/127589/IAUspin",
+  "shapeSha256": "3212a810d5ca2f09b46bdac82d0817c197955b84313426df41f473fc6f7945fe",
+  "shapeBytes": 80439,
+  "vertices": 994,
+  "faces": 1984,
+  "signedVolume": 333038.14017642365,
+  "independentSignedVolume": 333038.1401764236,
+  "originalVolumeEquivalentDiameter": 85.99999977314368,
+  "firstVertex": [
+    -0.859148,
+    10.30857,
+    39.719421
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    36.81765962063022,
+    52.365369062816846
+  ],
+  "extentsSourceUnits": [
+    [
+      -50.53389,
+      50.13195
+    ],
+    [
+      -47.85231,
+      49.8282
+    ],
+    [
+      -44.681989,
+      39.719421
+    ]
+  ],
+  "scaleKmPerSourceUnit": 1.0000000026378641,
+  "alternatives": [
+    {
+      "modelId": 16295,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16295",
+      "pole": [
+        "196",
+        "44"
+      ],
+      "version": "2023-10-03",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "69",
+      "comment": "",
+      "references": [
+        {
+          "label": "Marciniak et al. (2023)",
+          "url": "/projects/damit/references/view/667"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Marciniak2023 §5.3 prefers pole1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole2. Table1 gives volume-equivalent86 km with asymmetric interval79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error. The archive keeps the larger13 km side as a symmetric error field; the actual asymmetric range is preserved here.",
+  "selectedPoleStatus": "preferred by occultation, independent pole recovery and thermal-size comparison",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "marciniak-2023.pdf",
+      "url": "https://winstars.net/wp-content/uploads/2023/09/Marciniak-et-al-2023-AA-Scaling-slowly-rotating-asteroids-stellar-occultations-accepted.pdf",
+      "label": "Marciniak et al. (2023), A&A 679, A60, accepted author manuscript"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 86.0,
+    "uncertaintyKm": 13.0,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Volume-equivalent diameter of selected archived shape; explicit published scale transfer where documented.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5017",
+    "sourceLabel": "DAMIT model 5017",
+    "reference": "DAMIT model 5017",
+    "limitations": "Marciniak2023 §5.3 prefers pole1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole2. Table1 gives volume-equivalent86 km with asymmetric interval79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error. The archive keeps the larger13 km side as a symmetric error field; the actual asymmetric range is preserved here.",
+    "visibleDescription": "Convex light-curve reconstruction scaled by stellar occultations: 86 km volume-equivalent diameter (model range79–99 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+    "publishedUncertainty": {
+      "lowerKm": 7,
+      "upperKm": 13,
+      "confidence": "Envelope of acceptable vertically varied models, not a Gaussian sigma interval",
+      "source": "Marciniak2023 Table1 and section4"
+    },
+    "scaleKmPerSourceUnit": 1.0000000026378641,
+    "metersPerSourceUnit": 1000.0000026378641
+  },
+  "independentCenteredSignedVolume": 333038.14017642365,
+  "surfaceAreaSourceUnitsSquared": 24510.951221873678,
+  "surfaceEquivalentDiameterSourceUnits": 88.32937276858166,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        -0.859148,
+        10.30857,
+        39.719421
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 440,
+      "sourcePoint": [
+        50.13195,
+        -12.16617,
+        1.581751
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 473,
+      "sourcePoint": [
+        9.015873,
+        49.8282,
+        4.129741
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 497,
+      "sourcePoint": [
+        -46.98236,
+        12.24569,
+        4.265564
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 503,
+      "sourcePoint": [
+        -50.53389,
+        -7.7808,
+        1.962264
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 533,
+      "sourcePoint": [
+        3.245851,
+        -47.85231,
+        -2.013748
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 943,
+      "sourcePoint": [
+        -5.866569,
+        2.551021,
+        -44.681989
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 993,
+      "sourcePoint": [
+        8.159028,
+        19.70936,
+        -42.054589
+      ]
+    }
+  ],
+  "distanceAu": 3.1954918103121694,
+  "orbitalPeriodYears": 5.7123494263518335,
+  "sourceFields": {
+    "ID": "5017",
+    "Asteroid": "(286) Iclea",
+    "λ": "31",
+    "β": "13",
+    "P": "15.3612",
+    "YORP": "",
+    "t0": "2452425",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "86",
+    "σD": "13",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2023-10-03",
+    "Comment": "preferred",
+    "Created": "2020-10-05 13:10:00",
+    "Modified": "2023-10-12 08:46:37",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

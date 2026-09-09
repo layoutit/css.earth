@@ -1,0 +1,24 @@
+{
+  "baseline": "eecf9d587",
+  "baselinePresentationSha256": "c7624fe73dc19e358cd2d84e81ba5bd045593822e287f8bf82ac3284b7942962",
+  "atlases": [
+    {
+      "filename": "planet-markers.webp",
+      "baselineSha256": "2cc0e56695d72a0dcc17e5b4314ac38015d7d9588c81b3d9cf70ec1e59c53477",
+      "sha256": "9a3cb7056a8f9d6d07d21548a057f9f489e98b4f0b795d61553c9af30491e35c",
+      "bytes": 112490,
+      "retainedTiles": 304,
+      "newTiles": 100,
+      "pixelEquality": true
+    },
+    {
+      "filename": "planet-markers@2x.webp",
+      "baselineSha256": "84e53efb4d56d61085574564692a2fb3ca9389380d8e907433313f6eee03c445",
+      "sha256": "321b8517700563d385d5d7eadd5b7e2ab38a749b6b6005c57e705894a4d62272",
+      "bytes": 328318,
+      "retainedTiles": 304,
+      "newTiles": 100,
+      "pixelEquality": true
+    }
+  ]
+}

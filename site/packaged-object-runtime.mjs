@@ -25,13 +25,14 @@ export function bindContextualObject(definition, context, frame = context.frame)
 export async function loadPackagedObject(descriptorInput) {
   return createNavigableObjectMount(descriptorInput, {
     async read(reference, signal) {
-      // Vite emits the prepared bytes as assets. The inventory is used only
-      // during mount; loading the registry never requests renderer content.
-      const preparedAssets = import.meta.glob('../src/planets/*/prepared/object.json', {
-        query: '?url', import: 'default', eager: true,
-      });
-      const url = preparedAssets[`../src/planets/${descriptorInput.id}/${reference}`];
-      if (typeof url !== 'string') throw new Error(`Prepared object asset is not available: ${reference}.`);
+      // Static endpoints copy the pinned transport bytes during the build.
+      // The bundler never needs to retain every scene as an eager URL asset.
+      if (reference !== 'prepared/object.json' || reference !== descriptorInput.prepared?.url ||
+          !/^[a-z][a-z0-9-]*$/u.test(descriptorInput.id) ||
+          !/^[0-9a-f]{64}$/u.test(descriptorInput.prepared.sha256)) {
+        throw new Error(`Prepared object asset is not available: ${reference}.`);
+      }
+      const url = `/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`;
       const response = await fetch(url, { signal });
       if (!response.ok) throw new Error(`Prepared object asset request failed: ${response.status}.`);
       return response.arrayBuffer();

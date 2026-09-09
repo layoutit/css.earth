@@ -17,8 +17,8 @@ test('Mercury titles link the main mosaic, not coverage-completion images or til
 
 test('direct source images take precedence over product pages, including WMS images', async () => {
   const earth = await read('earth');
-  earth.sources.find(source => source.path === 'blue-marble-december.jpg').sourceUrl = 'https://example.org/product';
-  assert.match(datasetCaption(earth, lens('normal')).href, /world\.200412\.3x21600x10800\.jpg$/u);
+  earth.sources.find(source => source.path === 'blue-marble-july.jpg').sourceUrl = 'https://example.org/product';
+  assert.match(datasetCaption(earth, lens('normal')).href, /world\.200407\.3x21600x10800\.jpg$/u);
   const venus = await read('venus');
   assert.equal(new URL(datasetCaption(venus, lens('radar')).href).searchParams.get('FORMAT'), 'image/png');
 });
@@ -26,6 +26,14 @@ test('direct source images take precedence over product pages, including WMS ima
 test('a source-defined single-input mosaic does not inherit the parent mosaic link', async () => {
   const io = await read('io');
   assert.match(datasetCaption(io, lens('enhanced')).href, /FalseColor_1km\.tif$/u);
+});
+
+test('a composite dataset links its declared primary input, which must belong to that product', async () => {
+  const earth = await read('earth');
+  assert.match(datasetCaption(earth, lens('clouds')).href, /cloud_combined_8192\.tif$/u);
+  const product = earth.products.find(product => product.id === 'clouds' || product.lensIds?.includes('clouds'));
+  product.inputs = product.inputs.filter(id => id !== 'nasa-blue-marble-clouds');
+  assert.equal(datasetCaption(earth, lens('clouds')).href, undefined);
 });
 
 test('a multi-image mosaic does not pass off an arbitrary exposure as its source image', async () => {
