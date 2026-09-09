@@ -1359,3 +1359,54 @@ task takes 44.634 ms elapsed and 7.875 ms thread CPU; the source of the gap is n
 established. A concurrent point-worker task is correlation, not proof of causation.
 The scroll-only capture has 24/3482 intervals over 25 ms and a 33.4 ms maximum,
 which reinforces why these runs do not prove general smoothness.
+
+## Orbit stylesheet isolation and sampling control
+
+A browser-only trial moved the existing inert orbit blocks into 257 shadow roots,
+with one shared stylesheet carrying their exact drawing rules. All 63,997 original
+world-context elements (61,938 `s` leaves, including body sprites) stayed connected;
+no line, source vertex or texture was removed. The first exploratory stylesheet
+missed the page-wide border-box rule and is unqualified. The corrected version
+matches computed styles, exact projected line values, camera and label state in
+12 DPR 2 views, with full-viewport differences at most 1/255. Native Saturn orbit
+hover grows its indicator from 16 to 20 px, shows a pointer, selects immediately
+on click and lands with one camera. These are trial results, not a new runtime DOM
+contract: production diagnostics and selectors would need explicit shadow-tree
+support before adopting such a change.
+
+The synchronized trial is `output/world-context-zoom/orbit-style-scope-trial-dpr2/`,
+recorder `567947f3-ad2a-4ae7-a58d-022f7deda7ef`, based on `f6d5aac18`. Its capture
+script records the injected stylesheet and pre-recording tree move. The recorded
+26 source hashes remain unchanged, with no source patch. All 2,927 observed frames
+are encoded, clock drift is +91 µs and maximum PTS error is 1.433 ms. There are no
+errors, HMR or trace loss; the trial tree, world, input, document and one camera
+remain stable throughout recording.
+
+| Planetary-band measurement | Normal stylesheet scope | Isolated orbit scope |
+| --- | ---: | ---: |
+| Intervals >25 ms | 17/740 | 17/748 |
+| Callback elapsed total | 4217.114 ms | 4258.373 ms |
+| Style elapsed total | 1650.511 ms | 1637.556 ms |
+| Layer elapsed total | 2044.080 ms | 2069.518 ms |
+
+**Rejected:** this trial does not show a useful reduction in recurring work and
+does not justify changing the tree architecture. It is not included in product
+code. Visual/input evidence lives in
+`output/playwright/orbit-style-scope-corrected/`; the initial unqualified trial
+remains in `output/playwright/orbit-style-scope/`.
+
+A separate instrumentation control runs the unchanged product and same recorder,
+video, timeline/cc/Viz/GPU tracing and input route, omitting only V8 CPU sampling.
+It is `output/world-context-zoom/cpu-sampling-control-dpr2/`, recorder
+`75ecc8ce-0191-497d-9ee0-8338946b1d27`. All 26 source hashes and the empty source patch
+match; all 2,940 observed frames are encoded, with +5 µs drift and 1.457 ms maximum
+PTS error. There are no errors, HMR or trace loss and the retained world/input/
+document and one camera remain stable. The trace contains no CPU profile events.
+
+That control still has 18/3487 route intervals over 25 ms and 16/749 in the
+planetary band, versus 19/3469 and 17/740 with CPU sampling. Its band callback,
+style and layer totals are 4132.119/1595.190/2016.811 ms. Host load differs and these
+are single runs, so they do not establish a precise sampling overhead. They do
+show that disabling CPU sampling does not remove the recurring stalls. This is
+not a product improvement or a replacement for the fully instrumented baseline.
+The performance target remains unmet.
