@@ -93,6 +93,32 @@
       "coverage": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles.",
       "expectedBytes": 493624548,
       "expectedSha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd"
+    },
+    {
+      "id": "bennu-spectral",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/Goddard/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public scientific data; cite the original authors and retain source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "spectral",
+      "label": "Spectral color",
+      "falseColor": true,
+      "width": 6284,
+      "height": 2268,
+      "projection": {
+        "kind": "equirectangular",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 250
+      },
+      "coverage": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
+      "expectedBytes": 114072003,
+      "expectedSha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c"
     }
   ],
   "generatedIntermediates": [
@@ -127,14 +153,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 9872,
-      "expectedSha256": "11ad30ad51acfbe05534ccd7f38e51bdd3e1ee5ad1c4403760d18d4c49c4c33e"
+      "expectedBytes": 11412,
+      "expectedSha256": "adcc73fb83c68f5a162e75bdf5dfe73a73ab1657b6a4bb272e236a0d0e5b4a6b"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 1198,
-      "expectedSha256": "085792a9f34ed29ffcd3f4d18dde52a2c1a802ec7aeb85efd76ff98e39bd99e0"
+      "expectedBytes": 2615,
+      "expectedSha256": "f6520b873d38373f357d5e08de62fd842b1558023ee4d14c7743164c157b06ba"
     },
     {
       "path": "preparation/navigation.json",
@@ -151,8 +177,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 3749,
-      "expectedSha256": "95b678ef073f8566a545d6a2e8276ccc5d0e0d95a0322be77eb4484663eb8281"
+      "expectedBytes": 4315,
+      "expectedSha256": "fa644763a02ddd161801ac5ec17d89494220d2f437e0860de78cca6c54459f9c"
     },
     {
       "path": "presentation/title-mark.json",
@@ -189,6 +215,18 @@
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 89771,
       "expectedSha256": "30af0bb7e1f7da7f55bbde209c6e61b4215a044089010dca9a483b8b2eb24c4a"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.lbl",
+      "purpose": "Unmodified publisher metadata for the spectral composite.",
+      "expectedBytes": 1365,
+      "expectedSha256": "1e90d211743797a8ea02b423e0a89bb9121a3996b6a8d1645e183ec652abb37a"
+    },
+    {
+      "path": "reference/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.History.IsisCube",
+      "purpose": "Unmodified publisher metadata for the spectral composite.",
+      "expectedBytes": 452,
+      "expectedSha256": "e49d3bd21459402c45596d36c8ec7c0304a69a4900237e389e90c9a5d3ae1d2d"
     }
   ]
 }

@@ -1,0 +1,14 @@
+Object = gdal_translate
+  GdalVersion       = 3.11.0
+  ProgramPath       = /home/thare/miniforge3/envs/gdal3/bin
+  ExecutionDateTime = 2026-06-17T19:13:42
+  HostName          = IGSWZA281L2116
+  UserName          = thare
+  Description       = "GDAL conversion"
+
+  Group = UserParameters
+    FROM      = Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif
+    TO        = Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.lbl
+    Force_360 = true
+  End_Group
+End_Object

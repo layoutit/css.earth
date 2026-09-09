@@ -70,6 +70,32 @@
       "expectedBytes": 457291404,
       "expectedSha256": "83b68b39c1485e179a58926dcb6b88960e598895cfce64f54e87204b7dbde533",
       "lensId": "elevation"
+    },
+    {
+      "id": "vesta-ratios",
+      "path": "maps/vesta-clementine.pds.zip",
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA; DLR Institute of Planetary Research",
+      "license": "Public scientific data; cite the original authors and retain source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "ratios",
+      "label": "Spectral ratios",
+      "falseColor": true,
+      "width": 26703,
+      "height": 13351,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 255000
+      },
+      "coverage": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+      "expectedBytes": 446346023,
+      "expectedSha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0"
     }
   ],
   "generatedIntermediates": [
@@ -122,14 +148,14 @@
     {
       "path": "content/object.json",
       "purpose": "Authored preparation or presentation data.",
-      "expectedBytes": 8662,
-      "expectedSha256": "2f03d4eb80483e5e3acb69cddc0a3cac3193985dc02925c2b6a663ce926056de"
+      "expectedBytes": 10120,
+      "expectedSha256": "447ceab3030bd4f1b99e96916228963c68e4020ef846134d3e2540e55c07aaae"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Authored preparation or presentation data.",
-      "expectedBytes": 752,
-      "expectedSha256": "b2aee1a460321be695c5fc0ed9cf4c1de79c22d518dcebe14ac681af80956f42"
+      "expectedBytes": 1016,
+      "expectedSha256": "2404f692eb9c5c31eb34186683fca69b26b0a23ccba6b144dc811b7816173f99"
     },
     {
       "path": "preparation/navigation.json",
@@ -146,8 +172,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Authored preparation or presentation data.",
-      "expectedBytes": 3415,
-      "expectedSha256": "8753bde9d25036ef1701f3bac7288de432eaa8f3ae678754f877e707e88a3b0e"
+      "expectedBytes": 3818,
+      "expectedSha256": "64d768d3e600631fe01c6b32e517ce1efc719fad24c9b283cbc582f70339dca9"
     },
     {
       "path": "presentation/title-mark.json",
@@ -184,6 +210,12 @@
       "purpose": "Pinned source metadata and coordinate interpretation.",
       "expectedBytes": 2177,
       "expectedSha256": "df28c23d38756f6863ca2daf6a1fe959de35a2b296852b7e92df75b5521994af"
+    },
+    {
+      "path": "reference/clementine.lbl",
+      "purpose": "Unmodified publisher metadata for the spectral composite.",
+      "expectedBytes": 2177,
+      "expectedSha256": "8fd6341b4d9b66445a76883783c323d503cd822ecf3719a4e62bcdc7e7818c53"
     }
   ]
 }

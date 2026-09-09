@@ -1,6 +1,42 @@
 import sharp from 'sharp';
 import {fromFile} from 'geotiff';
 import {sampleColorBand, loadScienceSurface} from './scientific-raster.mjs';
+import { prepareProjectedByteObservation } from './observed-image.mjs';
+
+/** Some published color products retain scientific band tags instead of RGB tags.
+ * The authored band order and alpha bind the decoder to the original composite.
+ */
+export async function prepareRgbBandObservation(path, entry, policy, width, height) {
+  const file = await fromFile(path);
+  try {
+    const image = await file.getImage(), keys = image.getGeoKeys();
+    const origin = image.getOrigin(), resolution = image.getResolution();
+    const { samples, alphaBand, sampleBytes, grid } = policy;
+    if (image.getWidth() !== entry.width || image.getHeight() !== entry.height ||
+        image.getSamplesPerPixel() !== 4 || image.getGDALNoData() !== policy.noData ||
+        [0, 1, 2, 3].some(b => image.getSampleFormat(b) !== 1 || image.getSampleByteSize(b) !== sampleBytes) ||
+        keys.GTRasterTypeGeoKey !== 1 || keys.ProjCoordTransGeoKey !== 17 ||
+        keys.ProjCenterLongGeoKey !== policy.centerLongitude || keys.ProjCenterLatGeoKey !== 0 || keys.ProjStdParallel1GeoKey !== 0 ||
+        keys.GeogSemiMajorAxisGeoKey !== entry.projection.referenceRadiusMeters ||
+        keys.GeogSemiMinorAxisGeoKey !== entry.projection.referenceRadiusMeters ||
+        resolution[0] !== policy.resolutionMeters || resolution[1] !== -policy.resolutionMeters ||
+        origin[0] !== policy.origin[0] || origin[1] !== policy.origin[1] ||
+        Math.abs(grid.pixelsPerDegree - entry.projection.referenceRadiusMeters * Math.PI / 180 / resolution[0]) > 1e-10 ||
+        grid.sampleOffset !== -origin[0] / resolution[0] - .5 || grid.lineOffset !== origin[1] / resolution[0] - .5) {
+      throw new Error(`RGB band observation grid changed: ${entry.id}`);
+    }
+    const bands = await image.readRasters({ samples: [...samples, alphaBand] });
+    const count = entry.width * entry.height, maximum = 2 ** (8 * sampleBytes) - 1;
+    const rgb = Buffer.alloc(count * 3), alpha = Buffer.alloc(count);
+    for (let i = 0; i < count; i++) {
+      // Source validity is evaluated before reducing 16-bit display codes to bytes.
+      alpha[i] = bands[3][i] === maximum && samples.some((_, c) => bands[c][i] !== policy.noData) ? 255 : 0;
+      for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.round(bands[c][i] * 255 / maximum);
+    }
+    return await prepareProjectedByteObservation(rgb, entry, policy, width, height,
+      { raw: { width: entry.width, height: entry.height, channels: 3 } }, alpha);
+  } finally { await file.close(); }
+}
 
 /** Scalar observations keep native georeferencing, validity and display range. */
 export async function prepareFloatObservation(path, entry, policy, width, height) {

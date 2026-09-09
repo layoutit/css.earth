@@ -12,15 +12,16 @@ export const browserProfile=createObjectBrowserProfile({id:'bennu',controls,audi
   ],
   "lensRace": {
     "defaultId": "normal",
-    "slowId": "elevation",
+    "slowId": "spectral",
     "winnerId": "normal",
-    "slowAsset": "/scenes/bennu/bennu-elevation-surface@2x.webp",
+    "slowAsset": "/scenes/bennu/bennu-spectral-surface@2x.webp",
     "preReadyDisabled": true
   },
   "retained": {
     "lensIds": [
       "normal",
       "surface",
+      "spectral",
       "elevation"
     ],
     "speedClicks": 5,

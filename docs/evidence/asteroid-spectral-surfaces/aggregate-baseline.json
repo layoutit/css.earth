@@ -1,0 +1,47 @@
+{
+  "baseCommit": "245d9b854a91747198e5b05488a15a338dc0f268",
+  "currentRendererGate": {
+    "passed": 340,
+    "failed": 6,
+    "failureScope": "Earth paging plans and Buenos Aires destination zoom expectations",
+    "packageTestsPassed": 761,
+    "platformAndShellReached": false
+  },
+  "unchangedInputs": [
+    {
+      "path": "src/planets/earth/prepared/runtime.json",
+      "unchangedFromMain": true,
+      "sha256": "d64e2a605d6119ea31b986948c31b1b2bac2b4006a0e167b811ccc77eed121d8"
+    },
+    {
+      "path": "src/renderers/css/navigation/surface-target.test.ts",
+      "unchangedFromMain": true,
+      "sha256": "092a0ba57e70159ab462b280ce64fac19b4f3648a1d9e4ea40fbea75ab9ead77"
+    },
+    {
+      "path": "src/renderers/css/paging/capabilities.test.ts",
+      "unchangedFromMain": true,
+      "sha256": "03ce1fcfd46e9eb0a752fb9f85afa2762cb8d0ae1d7ce7ade24b7d79aeac8b87"
+    },
+    {
+      "path": "src/renderers/css/validation/paged-presentation.test.ts",
+      "unchangedFromMain": true,
+      "sha256": "06cb586ebc5e95f0f7d84905b6c4214847cd1037220a16c667d27ed31730d133"
+    },
+    {
+      "path": "src/planets/earth/prepared/scene.json",
+      "sha256": "e9dce0b27b6cad44e996f0ab79db9b277824c8150008c563c11a32502909dd4c",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "src/planets/earth/source/preparation/paged-ellipsoid.json",
+      "sha256": "0a7a5812e30473533294696ce30e3ad362300bdfbec1b34fbfeffc53ad383933",
+      "unchangedFromMain": true
+    },
+    {
+      "path": "tools/objects/geographic-pages/prepare-location.mjs",
+      "sha256": "34d0245beb9c700d7bee5fd169557587fdf84ad43a2618aefc1d0773224ca48a",
+      "unchangedFromMain": true
+    }
+  ]
+}

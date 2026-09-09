@@ -75,7 +75,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "PolyCam · photometrically normalized"
+        "detail": "PolyCam · albedo"
       },
       {
         "id": "surface",
@@ -90,7 +90,22 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "PolyCam · global image mosaic"
+        "detail": "PolyCam"
+      },
+      {
+        "id": "spectral",
+        "label": "Spectral color",
+        "description": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
+        "title": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
+        "thumbnail": "/scenes/bennu/bennu-spectral-thumbnail.webp",
+        "surface": "bennu-spectral-surface@2x.webp",
+        "poles": "bennu-spectral-surface@2x.webp",
+        "source": {
+          "id": "bennu-spectral",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "detail": "MapCam"
       },
       {
         "id": "elevation",
@@ -146,6 +161,12 @@
       "role": "facts",
       "description": "Bennu exploration",
       "href": "https://science.nasa.gov/mission/osiris-rex/"
+    },
+    {
+      "label": "Spectral maps",
+      "role": "surface",
+      "description": "Spectral color source and interpretation",
+      "href": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm"
     },
     {
       "label": "Source data",
