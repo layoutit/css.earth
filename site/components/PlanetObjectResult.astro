@@ -3,12 +3,15 @@ import { objectClassificationLabel } from "../planet-search-objects.mjs";
 import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 
-const { object, activeObjectId } = Astro.props;
-const marker = PREPARED_NAVIGATION_MARKERS[object.id].presentation;
-const thumbnailScale = 14 / (marker.size + (marker.ringExtra ?? 0));
+const { object, activeObjectId, hidden = false } = Astro.props;
+// Fit the disks together so relative sizes survive without rings shrinking them.
+const thumbnailScale = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(
+  ({ presentation }) => presentation.size,
+));
 ---
 
-<li class="planet-object-item" data-object-name={object.name.toLocaleLowerCase("en")}
+<li class="planet-object-item" hidden={hidden} data-object-name={object.name.toLocaleLowerCase("en")}
+  data-object-distance-au={object.distanceAu}
   data-object-system-name={object.systemName.toLocaleLowerCase("en")}
   data-object-classification={object.classification}
   data-object-classification-name={objectClassificationLabel(object.classification).toLocaleLowerCase("en")}>
