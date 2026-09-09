@@ -4,7 +4,7 @@ import { writeFileSync } from 'node:fs';
 import { elementsUrl, vectorsUrl, horizons, parseElements, parseVectors } from './lib/horizons.mjs';
 
 const epochJdTt = 2461286.5;
-const bodies = [['comet-67p', 'DES=67P;CAP;'], ['comet-103p', 'DES=103P;CAP;'], ['comet-9p', 'DES=9P;CAP;'], ['comet-81p', 'DES=81P;CAP;'], ['comet-1p', 'DES=1P;CAP;'], ['comet-8p', 'DES=8P;CAP;'], ['comet-19p', 'DES=19P;CAP;'], ['comet-137p', 'DES=137P;CAP;'], ['comet-143p', 'DES=143P;CAP;'], ['comet-162p', 'DES=162P;CAP;']];
+const bodies = [['comet-67p', 'DES=67P;CAP;'], ['comet-103p', 'DES=103P;CAP;'], ['comet-9p', 'DES=9P;CAP;'], ['comet-81p', 'DES=81P;CAP;'], ['comet-1p', 'DES=1P;CAP;'], ['comet-8p', 'DES=8P;CAP;'], ['comet-19p', 'DES=19P;CAP;'], ['comet-137p', 'DES=137P;CAP;'], ['comet-143p', 'DES=143P;CAP;'], ['comet-162p', 'DES=162P;CAP;'], ['comet-2p', 'DES=2P;CAP;'], ['comet-209p', 'DES=209P;CAP;']];
 const records = {}, fixtures = {};
 for (const [id, command] of bodies) {
   const query = elementsUrl({ command, center: '500@10', startJd: epochJdTt, stopJd: epochJdTt + 1, stepDays: 1 });

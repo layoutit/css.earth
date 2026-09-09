@@ -1,0 +1,43 @@
+{
+  "reference": {
+    "url": "https://doi.org/10.3847/0004-6256/152/4/89",
+    "originalUrl": "https://arxiv.org/pdf/1605.01705",
+    "expectedBytes": 735891,
+    "expectedSha256": "510645a8cdcc4d747c683e88dc0282bd91166942a39e951645d2c1ea8a8c88e5",
+    "section": "Section 2.2, radar dimensions 3.9 × 2.7 × 2.6 km; sections 1 and 3.2, 10.93 h lightcurve period",
+    "credit": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016)"
+  },
+  "candidateSurvey": [
+    {
+      "source": "PDS Stooke and radar model releases; JPL radar publication index",
+      "url": "https://echo.jpl.nasa.gov/publications/pubs.html",
+      "disposition": "No downloadable original mesh for this nucleus identified. Use the cited numeric shape constraints; unresolved mesh access is not evidence of absence."
+    },
+    {
+      "source": "Original radar observations",
+      "url": "https://doi.org/10.3847/0004-6256/152/4/89",
+      "disposition": "Shape constraints only. Delay-Doppler images are not optical surface maps and are not draped as texture."
+    },
+    {
+      "source": "Optical and infrared observations",
+      "url": "https://doi.org/10.3847/0004-6256/152/4/89",
+      "disposition": "Constrain size and rotation; no resolved optical surface texture selected."
+    }
+  ],
+  "selectedModel": {
+    "schema": "cssearth-ellipsoid-parameters@1",
+    "source": "https://doi.org/10.3847/0004-6256/152/4/89",
+    "sourceSection": "Section 2.2, radar dimensions 3.9 × 2.7 × 2.6 km; sections 1 and 3.2, 10.93 h lightcurve period",
+    "scaleConvention": "published-semiaxes",
+    "semiaxesKm": [
+      1.95,
+      1.35,
+      1.3
+    ],
+    "subdivisions": 4,
+    "periodHours": 10.93,
+    "axisDefinition": "X is the longest model axis; Z is the shortest. These axes do not define a measured present-day attitude.",
+    "qualification": "Smooth approximation of published numeric dimensions, not a recovered surface mesh. No mapped terrain, albedo or rotation phase is claimed.",
+    "assumptions": "Half of the full dimensions reported in Schleicher & Knight (2016) section 2.2. Its cited 2014 conference abstract reports preliminary projected dimensions of about 2.5 × 3 km; the later three-axis dimensions are selected explicitly. A spin pole was not recovered."
+  }
+}

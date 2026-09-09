@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-ellipsoid-parameters@1",
+  "source": "https://doi.org/10.1016/j.icarus.2005.01.012",
+  "sourceSection": "Table 3: SAM1, P=11.1 h, a=4.58 km, axial ratio 2.60; section 4",
+  "scaleConvention": "published-semiaxes",
+  "semiaxesKm": [
+    4.58,
+    1.7615384615384615,
+    1.7615384615384615
+  ],
+  "subdivisions": 4,
+  "periodHours": 11.1,
+  "axisDefinition": "X is the longest model axis; Z is the shortest. These axes do not define a measured present-day attitude.",
+  "qualification": "Smooth approximation of published numeric dimensions, not a recovered surface mesh. No mapped terrain, albedo or rotation phase is claimed.",
+  "alternatives": [
+    {
+      "axisRatioAB": 2.04,
+      "disposition": "Alternative considered in Table 3. The 2.60 case matches the infrared size more closely; no separate dataset is introduced."
+    }
+  ],
+  "assumptions": "SAM1 short-axis-mode solution. Semiminor axes are 4.58/2.60 km. The paper does not establish a unique shape, and its projected-area effective radius is not used as a volume-equivalent radius."
+}
