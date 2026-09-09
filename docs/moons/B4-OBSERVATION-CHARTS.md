@@ -5,6 +5,8 @@ B4 adds **18 prepared observation views across all nine planned moons**, backed 
 uncertainties, original-source links and downloadable measurements. Negative values,
 noise, instrument gaps and quality flags remain explicit.
 
+Draft [PR #70](https://github.com/layoutit/cssEarth/pull/70); full application scene conformance remains unverified.
+
 Owner: Moons · Branch `feat/moons-observation-charts` · Started 2026-09-09.
 Started from merged [B3 PR #67](https://github.com/layoutit/cssEarth/pull/67),
 `c016fd31d711e204bab4521c82c7e2e192f6e0df`. Integrated the shared-card update from
@@ -139,3 +141,5 @@ node docs/moons/b4-observations/audit.mjs
 Final evidence is recorded in `b4-observations/`: numeric anchors, preparation hashes,
 closure, browser summary/captures, resource stops, and publication/fresh-download receipts.
 Aggregate readiness remains false until broader qualification is performed elsewhere.
+
+Runtime chart cost: PNGs are 32–67 KB each, 43–183 KB per moon (842 KB across all nine). CSVs total 955 KB and are fetched on download. Each 1080×696 RGBA image represents about 2.9 MiB of decoded pixels; the largest four-chart set is about 11.5 MiB before browser overhead. No plotting computation or chart animation runs in the browser.

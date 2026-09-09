@@ -398,9 +398,14 @@
           "Pallene"
         ],
         "panelBrowserCases": 36,
-        "focusedTestsPassed": 29
+        "focusedTestsPassed": 29,
+        "runtimeAssetsPublished": 36,
+        "runtimeAssetHeadsVerified": true,
+        "qualificationLevel": "measured-data-and-information-panel"
       },
-      "integrationBase": "ef2d27b2da3e774b2410f216b0e6024b972ee39a"
+      "integrationBase": "ef2d27b2da3e774b2410f216b0e6024b972ee39a",
+      "draft": true,
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/70"
     }
   ],
   "plannedBodies": 60,
