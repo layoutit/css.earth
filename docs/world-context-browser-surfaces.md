@@ -1197,3 +1197,51 @@ in `output/playwright/marker-animation-owner-settled/` and is not a timing captu
 This newly integrated opacity-owner conflict remains unresolved; the selection
 attribute cache does not remove it. It is the next concrete issue to address,
 while preserving selection feedback and direct camera-driven marker alpha.
+
+
+### Direct camera-owned marker alpha (`036eb215`)
+
+The body-marker opacity transition introduced by main is now removed. Camera
+samples publish the requested marker alpha directly. **Body selection and hover
+brightness feedback is immediate**; circle growth retains its 120 ms padding
+transition. This aligns actual marker visibility with its current camera state
+instead of restarting a 120 ms interpolation on every sample. No geometry,
+textures, colors, sizes, source alpha targets or DOM topology changed.
+
+During native wheel input, visible markers could lag their requested opacity by
+0.370219. The direct owner removes that lag (zero observed), with no active marker
+opacity transitions in the probe. Four controlled views (30, 12, 5 and 0.3 AU,
+DPR 2) have identical camera, marker and label state; full-view pixel differences
+are 0/1/0/0 on a 0–255 scale. Evidence is in
+`output/playwright/marker-alpha-static/` and `marker-alpha-parity*/`.
+The native-wheel end frames are not used as the fixed-state image oracle: their
+retained hidden transforms differ, and one pair keeps Earth's label on different
+sides (166/255 maximum difference). The existing declutter policy preserves a
+previously valid placement; the controlled pose sequence also matches that state.
+
+| Measurement | Selection cache `72719ccd` | Browser alpha trial | Product `036eb215` |
+| --- | ---: | ---: | ---: |
+| CSS opacity animation starts | 3,113 | 0 | 0 |
+| Whole-route rAF intervals >25 ms | 58/3464 | 33/3468 | 25/3478 |
+| Galaxy drag intervals >25 ms | 0/242 | 0/242 | 0/243 |
+| Planetary-band intervals >25 ms | 54/734 | — | 23/741 |
+| Planetary-band p95 | 33.3 ms | — | 16.8 ms |
+| Whole-route maximum | 50 ms | 50 ms | 50 ms |
+
+The product capture remains below 16.8 ms during galaxy dragging, but the
+**overall target is still unmet**: 25 long intervals remain, including a 50 ms
+outlier. The capture environment and host load remain confounders; animation
+elimination and opacity tracking are verified mechanisms, not a claim that every
+change in interval counts comes from this rule.
+
+The annotated browser trial is in
+`output/world-context-zoom/marker-alpha-owner-trial-dpr2/`, recorder
+`6ec226f4-05de-4469-a1d4-bce599b73909`; its injected CSS is explicitly recorded.
+The unmodified product capture is in
+`output/world-context-zoom/marker-alpha-owner-dpr2/`, recorder
+`2367dac8-e037-4042-998a-39c4326d454d`. Both include synchronized JSON, trace gzip
+and video, 26 matching source hashes and 630 loaded receipts, with no errors,
+HMR or trace loss. Generated Sun payload identity is checked against its
+committed descriptor; tracked inputs match the captured Git revision. All
+2,914/2,928 observations are encoded, with +13/-32 microseconds drift and maximum
+PTS error below 1.475 ms. World/input/document identities and one camera survive.
