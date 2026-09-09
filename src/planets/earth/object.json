@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cf37965b2c032a410f28e2a121d6c98718788db8d3af5b7aba7ce35ed3d8a1b9"
+    "sha256": "54a4611f91a0deb54dd6c78274568ef9ad6b4bc9dddb7bfb732659b83366ee26"
   },
   "id": "earth",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "d7942782e6b46ec8618179f21e78f2b827e4dcc81ec9e1c590f9a664068edb55"
+          "sha256": "0a7a5812e30473533294696ce30e3ad362300bdfbec1b34fbfeffc53ad383933"
         },
         {
           "id": "celestial",
@@ -36,12 +36,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "90d8c8d7e6a84a9e955f432464cee71c9b4154c1b6167ef1d4bb1c6466badb0d"
+          "sha256": "837bc6899102fa54a0badc9710791b2aabf498898549a8ebe542151c93011394"
         },
         {
           "id": "lens-bindings",
           "path": "source/content/lens-bindings.json",
-          "sha256": "3f92243f419cb28dbc9539459547114a237f0800862feabd557a127dd1009618"
+          "sha256": "f33c39cc2344ef29882a4d22587bc473c02ecd4407ea45669b4fe90563c17717"
         },
         {
           "id": "charts",
@@ -77,11 +77,6 @@
           "lenses": [
             {
               "id": "normal",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "buenos-aires-noise",
               "source": "content",
               "material": "lighting"
             },
@@ -123,17 +118,6 @@
       "atmosphere": {
         "source": "paged-ellipsoid",
         "material": "atmosphere"
-      },
-      "paging": {
-        "source": "paged-ellipsoid",
-        "surface": "body",
-        "maxResidentPages": 512,
-        "maxResidentBytes": 134217728,
-        "maxConcurrentLoads": 4
-      },
-      "destinations": {
-        "source": "paged-ellipsoid",
-        "maxEntries": 34135
       }
     },
     "worldFrame": {
@@ -160,7 +144,7 @@
         -0.3977771559319137,
         0.9174820620691819
       ],
-      "metersPerUnit": 25210.02766798419,
+      "metersPerUnit": 27731.03043478261,
       "bodyRadiusM": 6378137
     }
   },
