@@ -8,7 +8,8 @@ description: "Create, repair, and qualify source-backed celestial body packages 
 Maintain this skill in the repository. Read the selected checkout's
 [provenance and documentation contract](../../../docs/provenance/CONTRACT.md)
 and the target body's `README.md` (or legacy `SOURCE.md`), `NOTICE.md` and manifests.
-The contract adapts PDS4 documentation requirements to our docs and evidence.
+The contract combines PDS4 1.26.0 provenance guidance with ISO 24495-1:2023
+plain-language principles for our docs and evidence.
 Use its pinned references; add body-specific facts without another report format.
 This skill explains how to prepare and check a body. Update it in the same PR when shared
 preparation changes. Installed copies should follow this version.
@@ -159,12 +160,14 @@ and remove the duplicate. Update affected method notes, credits and original tes
 in the same change. Keep common usage and commands in the shared repo guides. Save screenshots you cite in Git or agreed storage and
 link them; a local output path alone cannot be reviewed by someone else.
 
-Before committing documentation, edit the changed paragraphs using the
+While drafting and before committing documentation, use the contract's
 [plain-language rules](../../../docs/provenance/CONTRACT.md#plain-language).
-Replace vague claims with the actual source, action and result. Remove generic
-praise and repeated explanations; preserve scientific terms and qualifications.
-Inspect the rendered README with methods collapsed: sources, results and material
-limitations must be readable without opening the details.
+Check the reader's task: can they find the source, understand the displayed
+quantity and its limits, inspect the result, and find the record to change?
+Replace vague claims with the source, action and result; preserve scientific
+terms and qualifications. Inspect the rendered README with methods collapsed.
+Use reader feedback to fix confusing wording or structure; do not treat agent
+review or a word count as reader testing.
 
 Finish with the working location/URL, supported views, checked outcomes and
 remaining limitations, including useful unresolved dataset candidates. A working

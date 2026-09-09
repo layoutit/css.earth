@@ -10,8 +10,8 @@ clouds are not live weather. Dataset selection is manual at every zoom.
 | Surface and clouds | NASA Blue Marble, July 2004 surface plus archival cloud TIFF | Brightness is adjusted for display. Surface and clouds are separate observations. |
 | Elevation | [GEBCO_2026](https://doi.org/10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa) | Sampled modeled height relative to sea level. Relief shading is exaggerated; globe geometry is unchanged. |
 | Night lights | [NASA VJ146A4.002](https://doi.org/10.5067/VIIRS/VJ146A4.002), 2025, via Jurij Stare | Annual radiance in logarithmic false color. Gaps and aurora remain; this is not ground-level sky darkness. |
-| Atmosphere and charts | OpenSpace atmosphere parameters; NASA PSG | Prepared physical-model output with display tone mapping. |
-| Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled mantle velocity anomaly relative to each depth’s mean, not temperature. Crust and core are schematic. |
+| Atmosphere and charts | OpenSpace atmosphere parameters; NASA Planetary Spectrum Generator (PSG) | Simulated atmosphere, spectrum and temperature/pressure charts. Atmosphere brightness is adjusted for display. |
+| Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled seismic wave speeds above or below the mean at each depth, not temperature. Crust and core are schematic. |
 | Geographic detail | ESA WorldCover 2021 via Terrascope WMTS | Source footprints do not guarantee valid imagery pixels. Blue Marble fills unavailable areas. |
 | Buenos Aires noise | [APrA 2025 map](https://data.buenosaires.gob.ar/dataset/mapa-ruido) | Annual daytime estimates in dBA, not live sensor readings. |
 | City search | GeoNames cities15000, September 2026 snapshot | Cities above 15,000 people or capitals; not every settlement. |
@@ -22,14 +22,14 @@ Existing reports; no body tests were rerun for this documentation edit.
 
 - **Surface:** source restoration, 179-file image installation and browser checks.
   The report records an ownership-test failure and excludes full-suite success.
-  [Results](../../../docs/earth/cloud-free-default/README.md).
+  [Surface verification results](../../../docs/earth/cloud-free-default/README.md).
 - **Scientific maps:** numeric height checks, six independent tomography anchors and
   geographic registration. [Elevation](../../../docs/evidence/earth-elevation/README.md) ·
   [Tomography](../../../docs/planet-cross-sections.md) · [Night-light interpretation](../../../docs/earth-night-lights.md).
 - **Geometry delivery:** the September 5 report records 19,632 published objects and
   25,344,236,995 bytes verified for release `fef1519d5f243617`, with Chrome checks at
-  DPR 1 and 2. This is dated delivery evidence, not a live availability check or
-  application deployment. [Report](../../../docs/global-earth-coverage.md).
+  device pixel ratios (DPR) 1 and 2. This is dated delivery evidence, not a live availability check or
+  application deployment. [Geometry delivery report](../../../docs/global-earth-coverage.md).
 
 ## Known problems
 
@@ -39,7 +39,7 @@ Existing reports; no body tests were rerun for this documentation edit.
   source gaps remain; city coverage and image coverage are different.
 - The old city-search notes cite ignored screenshots without a retrievable run report.
 
-[Inputs](source/manifest.json) · [Recipes](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

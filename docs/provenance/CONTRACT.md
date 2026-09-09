@@ -11,10 +11,17 @@ Follow [AGENTS.md](../../AGENTS.md) for application rules and the
 
 ## Standards basis
 
+Use **PDS4 1.26.0 and ISO 24495-1:2023 together**: PDS4 guides the provenance
+content; ISO guides its wording, organization and use by readers.
+
 This contract adapts the [PDS4 Standards Reference 1.26.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.26.0.0/StdRef_1.26.0.pdf)
 (SR). The [Data Provider’s Handbook 1.26.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.26.0.0/PDS4_DPH_1.26.0.pdf)
 (DPH) explains its use. Both are dated 1 April 2026; their versioned links fix the
 references used here. [ESA’s Planetary Science Archive uses PDS4 too](https://www.cosmos.esa.int/web/psa/pds4-standards).
+For plain language, use [ISO 24495-1:2023, first edition](https://www.iso.org/standard/78907.html),
+§4 and §5.1–5.4, as applied in [Plain language](#plain-language) below. Its
+[public preview](https://cdn.standards.iteh.ai/samples/78907/d194fac21d6a45f38bfcfec9657f7498/ISO-24495-1-2023.pdf)
+includes the principles and the start of the guidelines.
 
 | Reference | Rule we adopt for cssEarth |
 | --- | --- |
@@ -26,8 +33,8 @@ references used here. [ESA’s Planetary Science Archive uses PDS4 too](https://
 
 The table is our adaptation. Markdown READMEs, existing manifests, SHA-256 pins,
 Git revisions, reproduction comparisons and browser evidence are cssEarth choices.
-This contract does not claim PDS4 archive compliance or add XML labels, formal
-archive submission or a second provenance format.
+This contract does not claim PDS4 archive compliance or assessed ISO conformity.
+It adds no XML labels, formal archive submission or second provenance format.
 
 A body can combine PDS3, PDS4, Earth-observation, solar and other published data.
 Keep their native identifiers and metadata. Use a supplied PDS4 LIDVID, PDS3
@@ -213,9 +220,17 @@ infrastructure only when a specific tool needs it.
 
 ## Plain language
 
-Write for someone trying to understand the data. Each paragraph should explain
-a source, a decision, a method, a result or a limitation. Delete filler that could
-appear unchanged in any body's README.
+Apply ISO 24495-1:2023 to the content and its presentation. The primary readers
+are contributors and reviewers checking or changing a body. Assume basic repo
+knowledge, but not familiarity with each mission or instrument. The overview
+should also help a viewer understand what a map shows.
+
+| ISO principle | Application in this repository |
+| --- | --- |
+| Relevant (§5.1) | Answer the reader's source, meaning, processing and evidence questions. Keep the facts needed to judge a view; remove unrelated history and generic claims. |
+| Findable (§5.2) | Use the body layout above, descriptive links and dataset names in method headings. Keep each limitation beside its claim and essential problems outside collapsed details. |
+| Understandable (§5.3) | Name the source and action. Explain unfamiliar terms where needed; preserve scientific names, units, uncertainty and distinctions between observations and models. |
+| Usable (§5.4) | Review while drafting and after changes. Check whether readers can trace a claim to its source and test result, identify its limits, and find the record to update. |
 
 - Name the dataset and the action: what we downloaded, calculated, changed or
   checked. Remove praise such as “rigorous,” “comprehensive” or “seamless.”
@@ -237,6 +252,9 @@ Examples using the 67P records:
 | “The integration was successfully validated.” | “All 60 comet browser cases passed. The renderer suite had nine failures.” |
 | “The imagery is not a pixel-parity oracle.” | “The photographs and browser views have different camera settings, so they cannot be compared pixel by pixel.” |
 
-Before committing, read the changed paragraphs as an explanation to another
-contributor. Rewrite sentences that sound impressive but do not say what happened.
-Use this edit pass in the existing review; it needs no separate report or score.
+Use these reader tasks in the existing review, including the rendered page.
+For a new layout or recurring confusion, involve an intended reader on a small
+scale and revise from their feedback. Author and agent reviews help, but are
+not reader testing. Revisit the explanation when sources, behavior or reader
+feedback change. Word counts and readability scores do not establish usability.
+Keep this work in the existing review; it needs no separate report or approval.

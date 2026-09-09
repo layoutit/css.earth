@@ -7,8 +7,8 @@ They combine observations across one rotation, not one simultaneous view.
 
 | View | Source | What it means |
 | --- | --- | --- |
-| Photosphere | SDO/HMI continuum browse images | Central-meridian strips assembled into a map; color, brightness and polar coverage are adjusted. |
-| Magnetic field | JSOC HMI, CR2311 | Radial magnetic field in false color, resampled from sine latitude. |
+| Photosphere | SDO/HMI continuum browse images | Successive strips from the center of the Sun’s disk form a map; color, brightness and polar coverage are adjusted. |
+| Magnetic field | JSOC HMI, CR2311 | Magnetic field pointing into or out of the Sun, shown in false color. |
 | Chromosphere | SDO AIA 304 Å CR2311 FITS | Logarithmic intensity in false color. |
 | Corona | SDO AIA 171 Å CR2311 FITS | Logarithmic intensity in false color. |
 | Outside the disk | AIA browse images, 27 May 2026 | Separate stationary images behind the matching globe view; not rotating global maps. |
@@ -25,7 +25,7 @@ they are not passing results. No body tests were rerun for this documentation ed
 - Unobserved poles and missing samples are continued from nearby values.
 - These filled areas and color choices must not be read as additional observations.
 
-[Inputs](source/manifest.json) · [Recipes](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

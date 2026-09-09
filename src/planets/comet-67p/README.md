@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | Shape | ESA/RMOC MTP019 NAVCAM model | Reduced to 1,000 triangles. Default gray is an authored material, not measured color. |
 | OSIRIS | Six calibrated orange-filter photographs, August–September 2014 | Grayscale appearance with approximate illumination correction; not measured albedo. |
-| Albedo, spectral slope, absorption and ice | Rosetta VIRTIS maps | Separate scientific quantities; ice is a model result. Registration near the neck is uncertain. |
+| Albedo, spectral slope, absorption and ice | [Rosetta VIRTIS maps](https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/) | Reflectivity, its change with wavelength, infrared absorption and modeled ice. Registration near the neck is uncertain. |
 | Regions | [Thomas et al. (2018), v1](https://doi.org/10.17632/2845znt54k.1) | 26 named regions transferred from SHAP7 to the display mesh. |
 | Geology | [ESA OSIRIS geological map, v1.0](https://doi.org/10.5270/esa-kokoti7) | Lines and dots mark mapped features; their display widths are not measured sizes. |
 
@@ -35,11 +35,11 @@ Existing reports; no body tests were rerun for this documentation edit.
 
 - September 13/20 inputs have August 5 dates in the manifest. The recipe still describes
   four photographs although it lists six. The original labels disagree with those records.
-- Some original screenshots exist only as ignored local-path references.
+- Some original screenshot links point to local-only files.
 - Tests changed Shadows through a hidden input; they did not prove a user could open Settings.
 - These comparisons do not establish pixel matching with native photographs.
 
-[Inputs](source/manifest.json) · [Recipes](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

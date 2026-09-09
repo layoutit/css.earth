@@ -9,20 +9,21 @@
 | Monochrome | USGS Cassini–Voyager mosaic, 2012 | About 417 m/pixel. Source shadows and seams remain; documented gaps are gridded. |
 | Enhanced color | [NASA/JPL PIA18438](https://www.jpl.nasa.gov/images/pia18438-color-maps-of-rhea-2014/) | Includes ultraviolet and infrared information, beyond human-eye color. |
 | Shape and elevation | [Weirich et al. (2025), v1.0](https://doi.org/10.26033/tqxb-q714) | Shape reduced to 2,000 faces. Color shows modeled height above a 763.5 km reference sphere. |
-| Relative albedo | Same SPC release | Dimensionless brightness with terrain/shadow contamination; not calibrated reflectance. |
+| Relative albedo | [Weirich et al. (2025), v1.0](https://doi.org/10.26033/tqxb-q714) | Relative brightness, with no units. Terrain and shadows affect its values; it is not calibrated reflectance. |
 | Infrared and ice absorption | [Scipioni/Combe VIMS collection](https://doi.org/10.17189/ctqe-ta30) | Infrared is false color. Absorption is a spectral indicator, not ice percentage, grain size or temperature. |
 
 ## Evidence
 
 Existing reports; no body tests were rerun for this documentation edit.
 
-- **Shape:** the mesh was closed and connected. Maximum distance in 8,000 sampled
-  comparisons was 5,700.82 m; sampling does not establish a full error bound.
-  [B2 results](../../../docs/moons/b2-preparation/final/DELIVERY.md).
-- **VIMS:** independent cube-decoding and interpretation checks.
-  The mission's upstream reduction was accepted as supplied.
+- **Shape:** the mesh was closed and connected. The largest distance between the
+  source shape and simplified display mesh in 8,000 sampled comparisons was
+  5,700.82 m; sampling does not establish a full error bound.
+  [Shape and delivery results](../../../docs/moons/b2-preparation/final/DELIVERY.md).
+- **VIMS:** reading and interpreting the original spectral files were checked independently.
+  The mission team's earlier processing was not rerun.
   [Source review](../../../docs/moons/b7-cassini-atlas/evidence/source/SOURCE-REVIEW.md).
-- **Browser and delivery:** selected views at DPR 1 and 2, with saved images and
+- **Browser and delivery:** selected views at device pixel ratios (DPR) 1 and 2, with saved images and
   installation results. Settings access and full-suite checks remained incomplete.
   [Visual review](../../../docs/moons/b7-cassini-atlas/VISUAL-REVIEW.md) ·
   [Run results](../../../docs/moons/b7-cassini-atlas/evidence/integration/qualification.json).
@@ -34,7 +35,7 @@ Existing reports; no body tests were rerun for this documentation edit.
 - The [old catalog](source/observations/catalog.json) still says relative albedo was
   excluded, although the current recipe and content include it.
 
-[Inputs](source/manifest.json) · [Recipes](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -179,7 +180,7 @@ Infrared displays three measured reflectance channels in false color. Ice absorp
 continuum-relative indicator derived from those spectra; it is not ice percentage,
 crystallinity, grain size or temperature. Missing samples remain missing.
 
-Absolute registration at fractions of a native pixel remains unresolved. The B7 source review
-and test results are linked below.
+Absolute registration at fractions of a native pixel remains unresolved. The source review
+and test results are linked in [Evidence](#evidence).
 
 </details>

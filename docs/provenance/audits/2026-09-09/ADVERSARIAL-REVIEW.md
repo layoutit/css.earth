@@ -112,3 +112,27 @@ Local Markdown previews were inspected in a browser. The method disclosures open
 correctly; the four overviews fit without horizontal overflow at desktop and
 390-pixel widths in that preview. This was a document-layout check, not a body
 renderer test or an assertion about GitHub's stylesheet.
+
+## ISO 24495-1:2023 revision
+
+The shared contract now combines PDS4 1.26.0 provenance guidance with ISO's
+plain-language principles. The skill and contributor instructions reference both.
+Review uses reader tasks: find a source, interpret a view, inspect evidence and
+limits, and locate the record to change. No new format or approval step was added.
+
+Two agents reviewed the shared rules and four README examples. Corrections
+explain technical shorthand, name the meshes compared in Rhea's error result,
+improve source and report links, and add the missing object-definition link.
+The shared-rule review found no blocker. Scientific quantities, caveats and
+unresolved metadata remain intact.
+
+The maintainer's feedback about duplicated content and long pages informed the
+layout. This follow-up was an agent review, not reader testing of the final wording
+or a full ISO conformity assessment. The edition and public preview are linked in
+the contract; the complete ISO text was not assessed.
+
+Local rendered previews of all four READMEs were inspected again. They had no
+horizontal overflow at 1,200- and 390-pixel widths with methods closed. The local
+documentation check passed for 228 links across 27 changed Markdown files; skill
+validation and `git diff --check` also passed. No body tests were rerun for this
+wording and navigation change.
