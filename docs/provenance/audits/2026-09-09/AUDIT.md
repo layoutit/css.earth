@@ -5,7 +5,8 @@ instructions. It does not rerun scientific, browser or installation tests.
 
 These findings led to the proposal. The [adversarial review](ADVERSARIAL-REVIEW.md)
 then removed the proposed extra report format and validator. The contract now
-uses existing reports; the actions below describe that revised proposal.
+uses existing reports and maps its rules to PDS4 Standards Reference 1.26.0 and
+the corresponding handbook. The actions below describe that revised proposal.
 
 ## Scope and reproducibility
 

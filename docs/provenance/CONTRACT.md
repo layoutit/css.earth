@@ -9,22 +9,30 @@ Use the existing [source and prepared records](../object-provenance.md).
 Follow [AGENTS.md](../../AGENTS.md) for application rules and the
 [celestial skill](../../.agents/skills/celestial-skill/SKILL.md) for preparation.
 
-## Basis in PDS4
+## Standards basis
 
-This contract adapts NASA's [PDS4 Data Provider’s Handbook, version 1.22.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.22.0.0/PDS4_DataProvidersHandbook_1.22.0.pdf),
-especially §4.3.3 on documenting collection, processing, meaning and limitations,
-and §11 on checking metadata, data products and scientific content. ESA's
-[Planetary Science Archive also uses PDS4](https://www.cosmos.esa.int/web/psa/pds4-standards).
+This contract adapts the [PDS4 Standards Reference 1.26.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.26.0.0/StdRef_1.26.0.pdf)
+(SR). The [Data Provider’s Handbook 1.26.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.26.0.0/PDS4_DPH_1.26.0.pdf)
+(DPH) explains its use. Both are dated 1 April 2026; their versioned links fix the
+references used here. [ESA’s Planetary Science Archive uses PDS4 too](https://www.cosmos.esa.int/web/psa/pds4-standards).
 
-Our adaptation puts the explanation in Markdown and exact identities in the
-existing manifests. Browser behavior, visual comparisons and prepared-runtime
-checks are cssEarth additions. This is not a claim of PDS4 archive compliance;
-we are not adding XML labels or an archive submission process.
+| Reference | Rule we adopt for cssEarth |
+| --- | --- |
+| SR §6D.2–6D.3: identifiers and versions | Preserve the provider’s product identifier and release, separately from our file hash and code revision. |
+| SR §8–8A: documentation | Explain data origin, processing, meaning and limits in the body README. Keep necessary detailed records with the sources. |
+| SR §7 and §8D: units and geometry | Record applicable units, coordinate frame, datum, orientation, observation time and coverage. |
+| SR §8C; DPH §2.2.1: calibration and processing levels | Distinguish the provider’s processing from our calculations and display adjustments. |
+| DPH §11.1–11.4: validation | Separate metadata and file checks, correct reading of the data, scientific checks and completeness of the tested result. |
 
-Keep the provider's actual identifiers and versions: a PDS4 LIDVID where supplied,
-a PDS3 dataset/product ID, a DOI or another published release identifier. Retain
-the source's native metadata. Apply the same questions to Earth, the Sun and
-other sources without inventing PDS identifiers for them.
+The table is our adaptation. Markdown READMEs, existing manifests, SHA-256 pins,
+Git revisions, reproduction comparisons and browser evidence are cssEarth choices.
+This contract does not claim PDS4 archive compliance or add XML labels, formal
+archive submission or a second provenance format.
+
+A body can combine PDS3, PDS4, Earth-observation, solar and other published data.
+Keep their native identifiers and metadata. Use a supplied PDS4 LIDVID, PDS3
+dataset/product ID, DOI or published release identifier; do not invent a PDS
+identifier for a source that has none.
 
 ## Where things go
 
@@ -52,8 +60,12 @@ a root `EVIDENCE.md` and private executable tools inside a body package.
 
 For new or changed inputs, record the provider, product and release, URL, file
 size, hash, credits and terms in the existing manifest and acquisition recipe.
+A hash identifies bytes; it does not replace the provider’s product version.
 Required files must be checked in or downloadable through that recipe. Keep the
-labels and metadata needed to interpret them.
+labels and metadata needed to interpret them. Read dates, units, identifiers
+and processing levels from those records; do not copy them from another input.
+If a label, manifest or recipe disagrees, record the disagreement and resolve it
+from the source before using that fact in a scientific claim.
 
 Say which bytes the hash identifies. If we converted an image, normalized a
 response or assembled a mosaic before saving it, explain that step. If the
@@ -63,7 +75,10 @@ every temporary response.
 Explain the source meaning in the body README. Put lengthy field definitions
 and calculations in existing source notes and link them. Cover what matters:
 
-- Whether the data is observed, derived or modeled.
+- Whether the view shows observations, derived measurements, a model or an
+  illustration. Preserve the provider’s processing level and the system it uses,
+  when supplied. An untouched download of calibrated data is still calibrated.
+  Do not assign an official level to our display output without a source basis.
 - Units, coordinate frame, datum, epoch, resolution and coverage, where relevant.
 - Rules for valid or missing data, corrections made upstream and our processing.
 - Source uncertainty, display simplification and visual enhancement.
@@ -96,8 +111,10 @@ Make three things clear:
   a port number or Git commit alone cannot identify those differences. For files
   not fixed by the recorded revision or an existing manifest, record size and hash.
 - **What happened:** the command or method, selected cases, results, failures and
-  checks left out. Record environment details that affect the result. Browser
-  reports need the browser, viewport, DPR, camera, view and settings.
+  checks left out. Say whether a result checks metadata/files, decoding, scientific
+  meaning or application behavior; a pass in one does not establish the others.
+  Record environment details that affect the result. Browser reports need the
+  browser, viewport, DPR, camera, view and settings.
 - **Where to inspect it:** links to original reports and the screenshots needed
   to assess the result. If a report names a working path, show where that file
   was saved for review. A Git path at a recorded revision is enough. Files stored
@@ -105,7 +122,8 @@ Make three things clear:
   local path alone is not evidence another reviewer can retrieve.
 
 For a small correction, add a dated result to the existing report and update the
-README’s evidence section. Keep earlier outcomes intact. Do not overwrite a failure or label an old screenshot as new.
+README’s evidence section. Keep earlier outcomes intact. Do not overwrite a
+failure or label an old screenshot as new.
 
 ## Say what the checks prove
 
@@ -127,7 +145,8 @@ passing browser check.
 native capture, an earlier product image, or a reconstructed diagnostic. For a
 matched comparison, save the reference, new image and diff with matching capture
 settings. If the source or framing differs, explain the limit and do not claim
-pixel matching. Inspect the affected views, boundaries and lighting. Use the existing browser checks.
+pixel matching. Inspect the affected views, boundaries and lighting. Use the
+existing browser checks.
 
 **An old pass describes an old version.** Keep its original revision and outcome.
 To reuse it, name the new version in the README’s evidence section and show that
@@ -155,6 +174,12 @@ not authorize uploads or moving stored evidence.
 
 Write plainly. Name the dataset, processing step, test and limitation. Prefer
 concrete statements over process jargon or repeated disclaimers.
+
+For a new body or dataset, extend the same Sources, Evidence and Known problems
+sections with the relevant facts. Use existing source notes for detailed methods.
+Add a shared rule only when it fills a demonstrated gap; cite its standard and
+section, or identify it as a cssEarth requirement. Do not repeat this standards
+table in every body or add a compliance checklist to each PR.
 
 The documentation owner fixes shared guidance and contradictions. Contributors
 update their body notes and any shared instructions affected by their change;

@@ -4,7 +4,8 @@ The README is the body's source-and-evidence document. A reader should understan
 what is shown, where the data came from, what we changed, what was checked and
 what remains uncertain without opening several introduction files.
 
-Use sections such as these when they fit:
+Use the [standards mapping](CONTRACT.md#standards-basis) once, in the shared
+contract. Keep each body README focused on its own data. Use sections like these:
 
 ```markdown
 # Body name
@@ -13,13 +14,16 @@ Route and a sentence explaining what is shown.
 
 ## Sources
 
-Name the dataset behind each view, why it was selected and how it was processed.
-Explain units, dates, missing coverage and display changes that affect its meaning.
+Name the provider and dataset behind each view, its published identifier/version,
+why it was selected and its supplied processing level when available. Separate
+upstream processing from our calculations and display changes. Explain the units,
+observation dates, coordinate conventions and missing coverage that matter.
 Link the manifest, credits and detailed source calculations.
 
 ## Evidence
 
 State the tested version, method, result and links to the original reports or images.
+Distinguish file/metadata checks, scientific checks and browser/visual results.
 Explain what a reused result still covers. Record failures and tests not run.
 
 ## Known problems

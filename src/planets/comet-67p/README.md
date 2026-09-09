@@ -13,6 +13,13 @@ photographic mosaics and scientific maps.
 | Regions | Thomas et al. (2018), SHAP7 data with 26 named regions, mapped onto the display mesh. | Boundaries are transferred between source models. |
 | Geology | ESA's OSIRIS geological map: 843 paths and 2,265 feature centers across 17 studied regions. | Lines and dots are map symbols, not measured feature sizes. Coverage is incomplete. |
 
+The shape archive is `RO-C-MULTI-5-67P-SHAPE-V2.0`; the VIRTIS maps are
+`RO-C-VIRTIS-5-67P-MAPS-V1.0`. OSIRIS input records identify each calibrated GEO
+product and its matching quality companion. The September labels record level 5
+DDR products and level 4 RDR companions. These inputs already include the
+mission’s processing. Our registration, illumination correction and grayscale
+stretch produce a display mosaic, not a new calibrated albedo product.
+
 [SOURCE.md](SOURCE.md) records the source survey, coordinate conventions,
 selection rules and calculations. The [manifest](source/manifest.json) records
 the original files, URLs, sizes and hashes, including each OSIRIS image's quality
@@ -45,8 +52,9 @@ results and tested versions.
 
 ## Known problems
 
-- The September image entries in the manifest repeat an August 5 observation
-  date, while the recipe lists September dates. The recipe's display description
+- The original [September 13 label](source/reference/n20140913-200612-geo.lbl) and
+  [September 20 label](source/reference/n20140920-133916-geo.lbl) confirm those dates,
+  but their manifest entries repeat August 5. The recipe's display description
   also still says four photographs despite listing six. Those records need correction.
 - The committed comparison images are available, but some original screenshots
   are referenced only through ignored local paths.

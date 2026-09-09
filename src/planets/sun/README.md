@@ -13,6 +13,12 @@ beyond the visible disk.
 | Corona | NASA SDO AIA 171 Å CR2311 FITS map, 3,600 × 1,080. | A rotation-spanning map with a false-color display. |
 | Imagery outside the disk | Separate AIA browse observations from 27 May 2026, used only with their matching views. | Stationary image plates behind the globe, not rotating global maps. |
 
+The JSOC series selector and rotation number identify the magnetic-field input;
+the other source records identify their FITS maps and browse images. These are
+processed mission products. Strip assembly, grid resampling, polar continuation
+and color mapping are our additional preparation steps; browser textures are
+display outputs, not raw solar observations.
+
 CR2311 covers 12 May–9 June 2026. Each global map combines observations across
 one rotation. The views are not simultaneous or live. Missing AIA samples are
 filled from the nearest valid latitude in the same map.

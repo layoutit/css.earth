@@ -9,7 +9,9 @@ Read [AGENTS.md](../../AGENTS.md), the
 [provenance and documentation contract](../../docs/provenance/CONTRACT.md) and
 [celestial skill](../../.agents/skills/celestial-skill/SKILL.md) before body work.
 The skill explains source selection and preparation. The contract explains
-source notes, credits, test reports and where to save them.
+source notes, credits, test reports and where to save them. Its
+[standards mapping](../../docs/provenance/CONTRACT.md#standards-basis) adapts PDS4
+without changing the existing package or manifest formats.
 
 ## Package layout
 

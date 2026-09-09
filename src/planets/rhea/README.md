@@ -13,6 +13,12 @@ spacecraft-derived shape.
 | Relative albedo | The SPC brightness product, with dimensionless values normalized around 1 and a displayed range of 0.5–1.5. | Less validated than topography; terrain and shadow effects remain. It is not calibrated reflectance. |
 | Infrared and ice absorption | Scipioni and Combe's Cassini VIMS mosaic collection. Three reflectance channels provide false color; a continuum-relative calculation provides the absorption indicator. | The indicator is not ice percentage, grain size or temperature. Missing samples remain missing; subpixel registration is unresolved. |
 
+The SPC release is version 1.0, DOI `10.26033/tqxb-q714`; the VIMS collection is
+DOI `10.17189/ctqe-ta30`. The photographic mosaics, derived shape products and
+processed spectral cubes have different scientific meanings. Our mesh reduction,
+height conversion and absorption calculation are recorded separately from the
+provider’s processing. None of these display products is raw Cassini telemetry.
+
 [SOURCE.md](SOURCE.md) records source selection, projection and height calculations.
 The [VIMS interpretation](source/vims/INTERPRETATION.md) gives its field definitions
 and conversion limits. We use the mission's supplied mosaic reduction; we do not

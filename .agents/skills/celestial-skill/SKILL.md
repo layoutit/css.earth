@@ -8,8 +8,9 @@ description: "Create, repair, and qualify source-backed celestial body packages 
 Maintain this skill in the repository. Read the selected checkout's
 [provenance and documentation contract](../../../docs/provenance/CONTRACT.md)
 and the target body's `README.md`, `SOURCE.md`, `NOTICE.md` and manifests.
-The contract explains where docs go and what evidence to save. This skill
-explains how to prepare and check a body. Update it in the same PR when shared
+The contract adapts PDS4 documentation requirements to our docs and evidence.
+Use its pinned references; add body-specific facts without another report format.
+This skill explains how to prepare and check a body. Update it in the same PR when shared
 preparation changes. Installed copies should follow this version.
 
 Build a body whose appearance is supported by its sources and whose behavior
@@ -47,8 +48,11 @@ catalog or repeat this survey for an unrelated repair.
 Record the following for selected inputs in the existing source record and
 manifest:
 
-- Source identity, authoritative URLs, credits and reuse terms; required inputs
-  must be checked in or restorable from their pins.
+- Provider product identifier and version, authoritative URLs, credits and reuse
+  terms; required inputs must be checked in or restorable from their pins. Keep
+  the source’s native labels and stated processing level. Read metadata from the
+  selected product, not a neighboring input; resolve contradictory fields before
+  relying on them. File hashes, source versions and our code revision are distinct.
 - Dimensions, coordinate/longitude conventions, pole, spin, epoch and relevant
   observation geometry. Use the body's own evidence, not another body's values.
 - What each proposed view actually conveys: observation, corrected reflectance,

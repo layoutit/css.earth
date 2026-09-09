@@ -6,6 +6,10 @@ tested version, save results and explain any reused evidence. For a repair,
 check the defect and affected behavior. For a new body, also check its package,
 required sources and installable assets. Reuse completed checks that still apply.
 
+Separate metadata/file checks, correct decoding, scientific checks and browser
+behavior as described in the contract’s PDS4 mapping. Record what each test
+establishes; a valid manifest does not prove that its dates or units match the data.
+
 ## Check what changed
 
 | Change | Relevant evidence |

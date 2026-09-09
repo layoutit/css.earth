@@ -14,6 +14,6 @@
 
 ## Provenance and documentation
 
-- Follow [the provenance and documentation contract](docs/provenance/CONTRACT.md) for source records, credits and test evidence. PROVENANCE DOCUMENTATION maintains the shared instructions; contributors update the records affected by their change.
+- Follow [the provenance and documentation contract](docs/provenance/CONTRACT.md) for source records, credits and test evidence. It adapts the cited PDS4 standards to the existing repository formats. PROVENANCE DOCUMENTATION maintains the shared instructions; contributors update the records affected by their change.
 - For body work, use the checked-in [celestial skill](.agents/skills/celestial-skill/SKILL.md). Make the body README its source-and-evidence document: explain the datasets, processing, test results and known problems, with links to source details and original reports. Keep installation and common usage in shared repo guides.
 - Keep each report tied to the version it tested. When reusing an old result, explain why it still applies to the new version.
