@@ -1,0 +1,12 @@
+18:48:15 [vite] connected.
+18:48:16 [types] Generated 0ms
+18:48:16 [vite] connected.
+ astro  v7.2.9 ready in 1674 ms
+┃ Local    http://127.0.0.1:4291/
+18:48:16 watching for file changes...
+18:48:22 [200] /ganymede/ 2075ms
+18:48:26 [200] /objects/ganymede/cfa3c6808ec7b26f86d2e3276c5760f75e7c2610a9f5f726ae3dbd8e1872b68f.json 5ms
+PASS ganymede DPR 1: 109468 nodes; retained interaction
+18:48:27 [200] /ganymede/ 48ms
+18:48:30 [200] /objects/ganymede/cfa3c6808ec7b26f86d2e3276c5760f75e7c2610a9f5f726ae3dbd8e1872b68f.json 6ms
+PASS ganymede DPR 2: 109468 nodes; retained interaction

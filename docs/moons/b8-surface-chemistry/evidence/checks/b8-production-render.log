@@ -1,0 +1,115 @@
+18:31:37 [vite] Re-optimizing dependencies because vite config has changed
+18:31:38 [types] Generated 105ms
+18:31:38 [build] output: "static"
+18:31:38 [build] mode: "static"
+18:31:38 [build] directory: /Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/
+18:31:38 [build] Collecting build info...
+18:31:38 [build] ✓ Completed in 145ms.
+18:31:38 [build] Building static entrypoints...
+18:31:38 [WARN] [vite] 
+/scenes/jupiter/jupiter-surface@2x.webp referenced in /scenes/jupiter/jupiter-surface@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/jupiter/jupiter-poles@2x.webp referenced in /scenes/jupiter/jupiter-poles@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/jupiter/jupiter-lens-ultraviolet@2x.webp referenced in /scenes/jupiter/jupiter-lens-ultraviolet@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/jupiter/jupiter-lens-ultraviolet-poles@2x.webp referenced in /scenes/jupiter/jupiter-lens-ultraviolet-poles@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/jupiter/jupiter-lens-methane@2x.webp referenced in /scenes/jupiter/jupiter-lens-methane@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/jupiter/jupiter-lens-methane-poles@2x.webp referenced in /scenes/jupiter/jupiter-lens-methane-poles@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mercury/mercury-interior-core@2x.webp referenced in /scenes/mercury/mercury-interior-core@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mercury/mercury-interior-core-poles@2x.webp referenced in /scenes/mercury/mercury-interior-core-poles@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mercury/mercury-interior-section@2x.webp referenced in /scenes/mercury/mercury-interior-section@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-clouds@2x.webp referenced in /scenes/venus/venus-clouds@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-poles-clouds@2x.webp referenced in /scenes/venus/venus-poles-clouds@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-radar@2x.webp referenced in /scenes/venus/venus-radar@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-poles-radar@2x.webp referenced in /scenes/venus/venus-poles-radar@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-elevation@2x.webp referenced in /scenes/venus/venus-elevation@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-poles-elevation@2x.webp referenced in /scenes/venus/venus-poles-elevation@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-material@2x.webp referenced in /scenes/venus/venus-material@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-observation-material@2x.webp referenced in /scenes/venus/venus-observation-material@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/venus/venus-lighting@2x.webp referenced in /scenes/venus/venus-lighting@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mars/mars-surface@2x.webp referenced in /scenes/mars/mars-surface@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mars/mars-poles@2x.webp referenced in /scenes/mars/mars-poles@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mars/mars-lens-elevation@2x.webp referenced in /scenes/mars/mars-lens-elevation@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mars/mars-lens-elevation-poles@2x.webp referenced in /scenes/mars/mars-lens-elevation-poles@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mars/mars-lens-thermal@2x.webp referenced in /scenes/mars/mars-lens-thermal@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/mars/mars-lens-thermal-poles@2x.webp referenced in /scenes/mars/mars-lens-thermal-poles@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-surface-body.jpg referenced in /scenes/saturn/saturn-surface-body.jpg didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-interior-metallic@2x.webp referenced in /scenes/saturn/saturn-interior-metallic@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-interior-core@2x.webp referenced in /scenes/saturn/saturn-interior-core@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-surface-ultraviolet@2x.webp referenced in /scenes/saturn/saturn-surface-ultraviolet@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-surface-methane@2x.webp referenced in /scenes/saturn/saturn-surface-methane@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-surface-thermal@2x.webp referenced in /scenes/saturn/saturn-surface-thermal@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-poles-ultraviolet.webp referenced in /scenes/saturn/saturn-poles-ultraviolet.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-poles-methane.webp referenced in /scenes/saturn/saturn-poles-methane.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-poles-thermal.webp referenced in /scenes/saturn/saturn-poles-thermal.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-interior-outer-poles-ultraviolet@2x.webp referenced in /scenes/saturn/saturn-interior-outer-poles-ultraviolet@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-interior-outer-poles-methane@2x.webp referenced in /scenes/saturn/saturn-interior-outer-poles-methane@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-interior-outer-poles-thermal@2x.webp referenced in /scenes/saturn/saturn-interior-outer-poles-thermal@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-rings-ultraviolet@2x.webp referenced in /scenes/saturn/saturn-rings-ultraviolet@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-rings-methane@2x.webp referenced in /scenes/saturn/saturn-rings-methane@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:38 [WARN] [vite] 
+/scenes/saturn/saturn-rings-thermal@2x.webp referenced in /scenes/saturn/saturn-rings-thermal@2x.webp didn't resolve at build time, it will remain unchanged to be resolved at runtime
+18:31:41 [vite] ✓ built in 3.02s
+18:31:42 [WARN] [vite] [plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+18:31:42 [vite] ✓ built in 1.13s
+18:31:42 [build] Rearranging server assets...
+
+ generating static routes 
+18:31:42   ├─ /abundantia/index.html18:31:42 [ERROR] Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/abundantia/prepared/object.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async readPreparedObjectBytes (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/object-page-data_D-Nlhs_8.mjs:11:16)
+    at async loadObjectPageData (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/object-page-data_D-Nlhs_8.mjs:19:20)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/abundantia_DyA1NOOf.mjs:13:23
+    at async callComponentAsTemplateResultOrResponse (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/server_osskQB9Q.mjs:6042:24)
+    at async renderToString (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/server_osskQB9Q.mjs:6032:25)
+    at async renderPage (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/server_osskQB9Q.mjs:6517:16)
+    at async handlePages (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/prerender-entry.DEu9M1fA.mjs:14438:16)
+    at async callMiddleware (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/prerender-entry.DEu9M1fA.mjs:14936:9)
+18:31:42 [ERROR] [build] Caught error rendering /abundantia: Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/abundantia/prepared/object.json'
+ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/abundantia/prepared/object.json'
+  Stack trace:
+    at async open (node:internal/fs/promises:697:25)
+    at async readPreparedObjectBytes (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/object-page-data_D-Nlhs_8.mjs:11:16)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/abundantia_DyA1NOOf.mjs:13:23
+    at async renderToString (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/chunks/server_osskQB9Q.mjs:6032:25)
+    at async handlePages (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/.prerender/prerender-entry.DEu9M1fA.mjs:14438:16)

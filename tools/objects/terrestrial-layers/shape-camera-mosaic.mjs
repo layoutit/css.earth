@@ -250,7 +250,7 @@ export async function prepareShapeCameraColor(sourceDirectory,entries,recipe,wid
 /** Project source observations using their source mesh and camera solution.
  * All ray intersections, illumination normalization and level matching happen
  * here at preparation time. Unobserved/unstable pixels remain explicit gaps. */
-export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,width,height,shape){
+export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,width,height,shape,{retainContributions=false}={}){
   const p=recipe.photometry;
   const observed=p?.model==='observed';
   if(!recipe.frames?.length||!shape||!(p?.weight>=0&&p.weight<=1)||!(p.maximumGain>=1)||
@@ -269,9 +269,13 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
     points.set(point,i*3);normals.set(normalAt(h.faceId,point),i*3);valid[i]=1;
   }
   const values=new Float32Array(width*height),missing=new Uint8Array(values.length).fill(1),statistics=[];
+  // Optional preparation evidence: retain every contributor, including blends.
+  // These weights are never part of the material or runtime transport.
+  const contributions=retainContributions?[]:null;
   const minI=Math.cos(p.maximumIncidenceDegrees*rad),minE=Math.cos(p.maximumEmissionDegrees*rad),epsilon=.01;
   // Coarse coverage first; finer images replace only their reliable interior.
   for(const frame of frames.sort((a,b)=>b.rangeKm-a.rangeKm)){
+    const weights=contributions&&new Float32Array(values.length);
     const image=await loadShapeCameraImage(sourceDirectory,frame),camera=controlledShapeCamera(frame);
     maskBackground(image,frame.backgroundMaximum??p.backgroundMaximum);
     insetCoverage(image,frame.coverageInsetPixels);
@@ -295,14 +299,20 @@ export async function prepareShapeCameraMosaic(sourceDirectory,entries,recipe,wi
     ratios.sort((a,b)=>a-b);
     const level=ratios.length>=100?Math.max(p.minimumLevel,Math.min(p.maximumLevel,ratios[Math.floor(ratios.length/2)])):1;
     for(let j=0;j<samples.length;j+=3){const [i,value,weight]=samples.slice(j,j+3);
+      if(weights){
+        const applied=missing[i]?1:weight;
+        for(const previous of contributions)previous.weights[i]*=1-applied;
+        weights[i]=applied;
+      }
       values[i]=missing[i]?value*level:values[i]*(1-weight)+value*level*weight;missing[i]=0;}
+    if(weights)contributions.push({id:frame.id,path:frame.path,sha256:entry.expectedSha256,weights});
     statistics.push({id:frame.id,sourceWidth:image.width,sourceHeight:image.height,rasterOffset:image.offset,
       ...(image.allowFiniteSigned?{allowFiniteSigned:true,maskedSourceSamples:sampleStatistics(image.data,image.missing)}:{}),
       encoding:image.encoding,...(image.quality?{quality:image.quality}:{}),resolutionMeters:frame.rangeKm*frame.pixelAngleMicroradians*.001,correctedPixels:samples.length/3,level,overlapSamples:ratios.length});
   }
   const rgb=Buffer.alloc(values.length*3);
   for(let i=0;i<values.length;i++){const v=Math.round(255*Math.max(0,Math.min(1,values[i]/p.displayMaximum))**(1/p.gamma));rgb.fill(v,i*3,i*3+3);}
-  return {rgb,missing,grid:{model:'controlled-shape-camera',photometry:p,frames:statistics,
+  return {rgb,missing,...(contributions?{contributions}:{}),grid:{model:'controlled-shape-camera',photometry:p,frames:statistics,
     ...(frames.some(f=>f.allowFiniteSigned)?{beforeDisplay:sampleStatistics(values,missing)}:{}),
     coveragePixels:missing.reduce((sum,v)=>sum+1-v,0),totalPixels:values.length}};
 }

@@ -1,0 +1,202 @@
+{
+  "schema": "cssearth-muse-spectral-maps@1",
+  "recipeSha256": "c2dc147d0db95b7284949ce31b664374f652eadab4b9b4b3d48b5b12e5f15968",
+  "preparerSha256": "2d8910aed38cd53a847448a912fe219db0314266da31d5d90d430a61050875f8",
+  "target": "ganymede",
+  "registration": {
+    "mode": "author-grid-two-degree-nodes",
+    "absoluteSubpixelRegistration": "unresolved",
+    "evidence": [
+      "source-qualification.json"
+    ],
+    "limitation": "Native 2 degree registration scale; residual subpixel offsets unresolved, not a formal astrometric error bound.",
+    "width": 180,
+    "height": 90,
+    "centerLongitude": -1,
+    "referenceRadiusMeters": 2631200,
+    "origin": [
+      -8266158.590125465,
+      4087156.1917842575
+    ],
+    "resolution": [
+      91846.2065569496,
+      -91846.2065569496
+    ],
+    "geographicPixelAreaBounds": [
+      -181,
+      -91,
+      179,
+      89
+    ],
+    "maximumNodeCoordinateErrorDegrees": 2.842170943040401e-14,
+    "sampling": "nearest",
+    "wrapLongitude": true,
+    "physicalLatitudeRange": [
+      -90,
+      90
+    ],
+    "conversionResampling": false
+  },
+  "edgeWithholdNodes": 1,
+  "overlapPolicy": "first-valid-night-1-2-3",
+  "composites": {
+    "577.3nm_band": {
+      "priority": [
+        "577.3nm_band_ganymede_night_1.fits",
+        "577.3nm_band_ganymede_night_2.fits",
+        "577.3nm_band_ganymede_night_3.fits"
+      ],
+      "validNodes": 9319,
+      "missingNodes": 6881,
+      "selectedNodesBySource": {
+        "577.3nm_band_ganymede_night_1.fits": 3365,
+        "577.3nm_band_ganymede_night_2.fits": 2811,
+        "577.3nm_band_ganymede_night_3.fits": 3143
+      },
+      "overlapComparisons": [
+        {
+          "first": "577.3nm_band_ganymede_night_1.fits",
+          "second": "577.3nm_band_ganymede_night_2.fits",
+          "overlapNodes": 558,
+          "meanSecondMinusFirst": -0.0014340358602145246,
+          "medianAbsoluteDifference": 0.003212454258315456,
+          "p95AbsoluteDifference": 0.009437208419018184,
+          "maximumAbsoluteDifference": 0.01911952046580656
+        },
+        {
+          "first": "577.3nm_band_ganymede_night_1.fits",
+          "second": "577.3nm_band_ganymede_night_3.fits",
+          "overlapNodes": 226,
+          "meanSecondMinusFirst": -0.00040896819227466,
+          "medianAbsoluteDifference": 0.001854060626601317,
+          "p95AbsoluteDifference": 0.005290275080429618,
+          "maximumAbsoluteDifference": 0.011274608508690553
+        },
+        {
+          "first": "577.3nm_band_ganymede_night_2.fits",
+          "second": "577.3nm_band_ganymede_night_3.fits",
+          "overlapNodes": 0
+        }
+      ]
+    }
+  },
+  "outputs": [
+    {
+      "input": "577.3nm_band_ganymede_night_1.fits",
+      "sourceSha256": "9354868840c81e85d65c6a0882ea71e3f01d7258860fdd679321e4e88aa956b8",
+      "sourceBytes": 132480,
+      "fitsCards": {
+        "SIMPLE": "T",
+        "BITPIX": "-64",
+        "NAXIS": "2",
+        "NAXIS1": "180",
+        "NAXIS2": "90",
+        "EXTEND": "T"
+      },
+      "kind": "577.3nm_band",
+      "night": 1,
+      "quantity": {
+        "target": "ganymede",
+        "quantity": "565/577.3 nm reflectance ratio",
+        "unit": "ratio",
+        "unobservedWavelengthRangeNm": [
+          578,
+          605
+        ]
+      },
+      "path": "ganymede/577.3nm_band-night-1.tif",
+      "sha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f",
+      "bytes": 10416,
+      "noData": -9999,
+      "checked": {
+        "finiteNativeNodes": 3561,
+        "missingNativeNodes": 12639,
+        "edgeNodesWithheld": 196,
+        "retainedNativeNodes": 3365,
+        "maximumFloat32Error": 5.959679660882955e-08
+      },
+      "finiteNativeRange": [
+        0.990427624237225,
+        1.016415909664556
+      ]
+    },
+    {
+      "input": "577.3nm_band_ganymede_night_2.fits",
+      "sourceSha256": "7b6e1a2c27bfc1418147e0a59a628c96d5b28d5fd1b71295f21d64c2d386ac8d",
+      "sourceBytes": 132480,
+      "fitsCards": {
+        "SIMPLE": "T",
+        "BITPIX": "-64",
+        "NAXIS": "2",
+        "NAXIS1": "180",
+        "NAXIS2": "90",
+        "EXTEND": "T"
+      },
+      "kind": "577.3nm_band",
+      "night": 2,
+      "quantity": {
+        "target": "ganymede",
+        "quantity": "565/577.3 nm reflectance ratio",
+        "unit": "ratio",
+        "unobservedWavelengthRangeNm": [
+          578,
+          605
+        ]
+      },
+      "path": "ganymede/577.3nm_band-night-2.tif",
+      "sha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa",
+      "bytes": 10400,
+      "noData": -9999,
+      "checked": {
+        "finiteNativeNodes": 3565,
+        "missingNativeNodes": 12635,
+        "edgeNodesWithheld": 196,
+        "retainedNativeNodes": 3369,
+        "maximumFloat32Error": 5.960131987947648e-08
+      },
+      "finiteNativeRange": [
+        0.9836718982194164,
+        1.0172686334832668
+      ]
+    },
+    {
+      "input": "577.3nm_band_ganymede_night_3.fits",
+      "sourceSha256": "30f997e41fb7f9f99f626c45121e4b6066e97c39bd1fe7bcd6f081e09dc60220",
+      "sourceBytes": 132480,
+      "fitsCards": {
+        "SIMPLE": "T",
+        "BITPIX": "-64",
+        "NAXIS": "2",
+        "NAXIS1": "180",
+        "NAXIS2": "90",
+        "EXTEND": "T"
+      },
+      "kind": "577.3nm_band",
+      "night": 3,
+      "quantity": {
+        "target": "ganymede",
+        "quantity": "565/577.3 nm reflectance ratio",
+        "unit": "ratio",
+        "unobservedWavelengthRangeNm": [
+          578,
+          605
+        ]
+      },
+      "path": "ganymede/577.3nm_band-night-3.tif",
+      "sha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a",
+      "bytes": 10304,
+      "noData": -9999,
+      "checked": {
+        "finiteNativeNodes": 3565,
+        "missingNativeNodes": 12635,
+        "edgeNodesWithheld": 196,
+        "retainedNativeNodes": 3369,
+        "maximumFloat32Error": 5.960125282200579e-08
+      },
+      "finiteNativeRange": [
+        0.9889256543885226,
+        1.0142615878457621
+      ]
+    }
+  ]
+}

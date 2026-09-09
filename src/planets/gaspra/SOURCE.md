@@ -31,7 +31,9 @@ Elevation colors encode radius minus the 6.1 km reference sphere, using a -2 to 
 
 The full 90×180 sampled grid yields 32,040 triangles and 16,022 welded vertices before official meshoptimizer 1.2.0 simplification. The selected 800-face mesh uses native PolyCSS `u` raster triangles with 128-pixel cells, packed into 2048×6400 atlases. The 200 m library error allowance with `ErrorAbsolute` and `RegularizeLight` reaches an estimated 122.743 m. This estimate is not a guaranteed maximum radial deviation. A separate 3,200 equal-area ray sample finds mean 34.708 m, p95 87.307 m, p99 120.456 m and maximum 202.662 m error with zero missed rays. The mesh is closed and consistently wound: 402 vertices, 1,200 edges, 800 faces, one component, Euler characteristic 2.
 
-## Calibrated image
+## First calibrated image (retained source record)
+
+The two-image mosaic described below supersedes this original single-image presentation.
 
 The separate lens uses the original Domingue/GLLSSICAL I/F FITS `107318326rcal_clr.fit`, clear filter, acquired 1991-10-29T22:26:15.149Z. It retains the observation's illumination and applies only a fixed 0–0.12 I/F display stretch with gamma 2.2. It does not recover albedo or fill the unseen hemisphere. The original high-pass mosaic remains the default view.
 
@@ -48,3 +50,17 @@ Projection uses the source mesh's visibility and terrain-shadow rays, incidence/
 Restore pinned inputs with `node tools/objects/dist/operations.js acquire gaspra` and verify with the same command plus `--verify-only`. Generate consumed output with `node tools/objects/dist/prepare-authored.js gaspra --write`. The shared preparation owns radii, reorientation, masking, scalar maps, native triangles, lighting, thumbnails and minimaps. `source/preparation/navigation.json` records the context snapshot recipe, also implemented by the shared radial snapshot owner. Runtime installation uses the separate package runtime manifest.
 
 The source pins and source/mesh tests are distinct from parent-owned browser qualification, aggregate gates and runtime publication. Browser evidence must bind the exact prepared bytes, camera, lens and lighting state. A prepared preview alone is not native pixel parity or a performance claim.
+
+## Spacecraft mosaic update (2026-09-09)
+
+The SSI reflectance view now combines the complementary clear-filter close-ups **107318326** and **107318313**, both approximately 54 m/pixel. The second image restores photographic coverage at the other end of Gaspra. There is one reflectance dataset row. Thomas’s processed Monochrome mosaic remains because it supplies additional mapped coverage; it is not interchangeable with calibrated I/F.
+
+The original calibrated FITS/XML and raw detector FITS/label are pinned separately. Target, exact time, filter and spacecraft clock bind them to the archived `gaspbad.tab` block mask. The original four-pixel registration limit and five-pixel boundary inset remain. Four separated 16×16 patches on image 107318313 give 2.646 px RMS and 3.162 px maximum error with no local camera fitting. They check registration against the Thomas mosaic on the full original shape; that mosaic shares these photographs and is not independent absolute cartography.
+
+Clear-filter image 107315039 was also downloaded and tested. Its useful detector footprint did not establish four separate registration checks at the retained tolerance, so it is excluded. Earlier lower-resolution clear images are listed in the archive inventory but do not replace the complementary close-up pair.
+
+Both included photographs retain original illumination and the same fixed calibrated display transfer. No relative gain is fitted. The existing coarse-to-fine projection blends only near its geometric and detector boundaries. Run the contribution audit below to retain the actual weights for both sources.
+
+This package retains its original 800-triangle geometry, the ordinary prepared grid for missing coverage, and Shadows off. Renderer and shared interaction code are unchanged. Current mosaics supersede the single-photograph descriptions above.
+
+Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/planets/gaspra/source OUTPUT --frame 107318313 --profile reference/registration-107318313.json`. Run `node tools/objects/terrestrial-layers/audit-camera-mosaic.mjs src/planets/gaspra/source OUTPUT` for matched area-weighted before/after sampling and lossless Float32 contribution planes. The audit grids use the authored 4096×2048 cylindrical sampling, not atlas texel counts as surface area.
