@@ -186,19 +186,20 @@ bands. Preparation writes lossless 2,880 by 1,440 and DPR-2 4,096 by 2,048
 retained-globe surfaces. These views are therefore source-backed spectral
 interpretations, not natural-color photographs or pure single-band products.
 
-The Thermal view is a prepared Cassini-informed interpretation rather than a
-direct global temperature retrieval. Its palette and cloud-window response are
-anchored to the Cassini VIMS
-[high-contrast infrared scan PIA17469](https://science.nasa.gov/photojournal/high-contrast-infrared-scan-of-saturn-and-its-rings/),
-which assigns its red channel to 4.88 through 5.06 micrometers and shows heat
-from Saturn's interior. Its atmospheric and ring temperature interpretation is
-cross-checked against Cassini's
-[Composite Infrared Spectrometer](https://science.nasa.gov/mission/cassini/spacecraft/cassini-orbiter/composite-infrared-spectrometer/).
-The source observations are not one equirectangular, full-resolution map at the
-scene's viewing geometry. Preparation therefore applies a declared
-cloud-window and latitude response to the synchronized OpenSpace morphology.
-The result preserves spatial readability without claiming per-texel measured
-temperature.
+The **Thermal illustration** is explicitly schematic. Preparation uses visible
+luminance, cloud-window contrast, and authored latitude/longitude patterns.
+No Cassini detector samples or measured global thermal raster enter this view;
+its color is illustrative intensity, not infrared brightness or temperature.
+The visible label and legend identify this distinction without requiring a
+source-document or tooltip lookup.
+
+The Cassini VIMS [high-contrast infrared scan PIA17468](https://science.nasa.gov/resource/high-contrast-infrared-scan-of-saturn-and-its-rings/)
+was considered as a physical reference. It is a narrow observed swath in a
+particular viewing geometry, not a registered global thermal map suitable for
+this globe. It remains a reference, not a texture input. The existing sources
+do not qualify a global CIRS temperature map; such a dataset remains unresolved
+rather than being claimed nonexistent. The illustration retains its existing
+prepared geometry and pixels while removing instrument-measurement claims.
 
 The broad ring response is cross-checked against the same Hubble WFC3 program
 17843 sequence from 2025-08-29: `ifcu37ccq` in F225W, `ifcu37cdq` in F631N,
@@ -246,7 +247,7 @@ legibility; it does not claim that exposed material inside Saturn receives
 direct sunlight. The structural section, metallic-hydrogen, and diffuse-core
 textures are one shared schematic bank because none of the observation lenses
 measures below Saturn's atmosphere. Normal, F225W ultraviolet, FQ889N methane,
-and Cassini-informed thermal each have prepared outer-polar and atmospheric
+and the schematic thermal illustration each have prepared outer-polar and atmospheric
 cutaway materials; those declared false-color responses do not recolor the
 unobserved deep layers. The F225W interpretation follows NASA's
 [Hubble wavelength comparison](https://science.nasa.gov/mission/hubble/science/science-behind-the-discoveries/wavelengths/).
@@ -536,3 +537,7 @@ no atmospheric-layer parsing, scaling, or chart rendering at runtime.
 
 Source: [NASA GSFC Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/)
 and its [API](https://psg.gsfc.nasa.gov/helpapi.php), modeled 2026-08-29.
+
+## Context billboard
+
+The navigation portrait crops the pinned OpenSpace surface map. Because this is a flat map rather than an already-lit disc photograph, the shared marker preparer applies full-phase curvature inside its existing oblate ellipse (35% ambient, 65% diffuse). The centre retains the map brightness and the limb darkens symmetrically; no directional terminator or new surface detail is added. Both the small navigation atlas and the resolved Saturn context image use this same authored recipe.

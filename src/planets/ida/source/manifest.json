@@ -1,0 +1,247 @@
+{
+  "schema": "cssida-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "ida-shape",
+      "path": "shape/243ida.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab",
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original restored by source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "width": 181,
+      "height": 91,
+      "projection": {
+        "kind": "planetocentric-radius-grid",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 16000
+      },
+      "coverage": "Released 2-degree stereogrammetry and limb-fit radial model; source resolution and confidence vary.",
+      "expectedBytes": 527072,
+      "expectedSha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df"
+    },
+    {
+      "id": "ida-normal",
+      "path": "maps/243idam.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit",
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original restored by source/preparation/acquisition.json.",
+      "redistribution": "Source-backed display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 2520,
+      "height": 1260,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "centerLongitude": 0,
+        "referenceRadiusMeters": 16000
+      },
+      "coverage": "High-pass Galileo montage on a low-pass coarse-image background. 7 pixels per degree; best contributing images approximately 25 m/pixel. Exact zero marks unprojectable surface.",
+      "expectedBytes": 3179520,
+      "expectedSha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "ida-stooke-registration",
+      "path": "reference/ida_cylindrical_rev_mosaic.jpg",
+      "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/243ida/ida_cylindrical_rev_mosaic.jpg",
+      "credit": "Philip Stooke / University of Western Ontario; Galileo image team; P. C. Thomas",
+      "license": "Public domain; source requests attribution.",
+      "licenseEvidence": [
+        "reference/stooke-map-guide.html"
+      ],
+      "acquisition": "Pinned original restored by source/preparation/acquisition.json.",
+      "redistribution": "Public-domain visual reference with the author credit retained.",
+      "consumers": [
+        "registration-reference"
+      ],
+      "expectedBytes": 4375716,
+      "expectedSha256": "aedbdecc09a1f3cea1d7fa04baeceae646f69af48467502486c42176c91dc0ce"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit",
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "expectedBytes": 82228,
+      "expectedSha256": "13b575ec0accebfad5989e3da1f2053896a83e935db19dc9ed73026be96c606e",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "ida-normal",
+          "ida-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 70,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 7846,
+      "expectedSha256": "6dc79596c31e0088e2d8b462f6739f1dab12acba2746a87c96a7043656275b09"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 1508,
+      "expectedSha256": "76de1fbe2b8fb56cf315c2db9fda0f9aa54c84b82681643fc7546005ef39a20a"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 1296,
+      "expectedSha256": "b9c0defb9f9f4ed54068af189d7476f17972267493bdca8a64d4bf604ae8ca39"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 412,
+      "expectedSha256": "e9f1952a6c593ecbad2d0a8a544307ac64f75334db061d56ea72d77a31945ba5"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 3191,
+      "expectedSha256": "a9d83c77c898df17a8089909eee3cfda67b07b0b229ba3343c1474c087a09fea"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 2284,
+      "expectedSha256": "9d069652a17dc41f374dce86b05979f8b4914c343742dee33bc3e0cdf370faa9"
+    },
+    {
+      "path": "reference/243ida.xml",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 5886,
+      "expectedSha256": "6cf24f749a791938b7d634dfc1554cc13f1ff3ce4b2b8b93f2174bdd51eeecd0"
+    },
+    {
+      "path": "reference/243idaimg.tab",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 4320,
+      "expectedSha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a"
+    },
+    {
+      "path": "reference/243idaimg.xml",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 8830,
+      "expectedSha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13"
+    },
+    {
+      "path": "reference/243idam.xml",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 7458,
+      "expectedSha256": "917dabc37a1a6c3809e063b32fcedc5674b33c6a86a58ef8f49fd5a8d1a24318"
+    },
+    {
+      "path": "reference/calibrated-ssi-bundle-description.txt",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 7968,
+      "expectedSha256": "d8ab98d85239f906579328bed59af4f5179754f85e0cc3fa9a1606d00c5520bf"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 1285,
+      "expectedSha256": "f4b5b683d611db68de29f4bfbecb4577e29bc29c8ae82b81850f3d9fd1ce7439"
+    },
+    {
+      "path": "reference/pck00007.tpc",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 90332,
+      "expectedSha256": "ab7fd4ce7d34fe2c90217cb838b1f471f88d08308a521c86deefe271586ae6a0"
+    },
+    {
+      "path": "reference/stooke-map-guide.html",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 55559,
+      "expectedSha256": "721a2e655e7a39d9e800204b33914150c8df04b068ad9cc3e4cd782393aeeace"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source label, source documentation or authored package input.",
+      "expectedBytes": 89769,
+      "expectedSha256": "38f9c18df6ddeaa1a72504d5ebfaa4ed74321044c387e39115a5611a56dec279"
+    }
+  ]
+}

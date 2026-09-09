@@ -1,0 +1,89 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/352",
+  "modelId": 352,
+  "modelVersion": "2011-04-21",
+  "diameterKm": 34.1,
+  "diameterInterpretation": "Convex light-curve shape with published thermophysical size calibration: 34.1 ± 0.5 km volume-equivalent diameter. Alternative mirror-pole fit remains unresolved. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 34.1,
+    "uncertaintyKm": 0.5,
+    "reportedUncertaintyKm": 0.5,
+    "uncertaintyKind": "Reported VS-TPM spread accounting for shape/pole variation; physical mesh realization remains a nominal archived solution, not exact ensemble geometry",
+    "diameterSemantics": "Volume-equivalent diameter explicitly defined in Hanuš et al.2018TableA.3 using the same published convex shape/pole family.",
+    "sourceUrl": "https://arxiv.org/pdf/1803.06116",
+    "reference": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
+    "publishedPoleEclipticDegrees": [
+      328,
+      56
+    ],
+    "publishedPeriodHours": 6.86788,
+    "limitations": "Ducrosa nominal DAMIT352 pole328°,56°,period6.86788h matches the table. The mirrored model353 has a separately fitted35.2±1.1km; this alternative remains unresolved and is not mixed into model352.",
+    "scaleKmPerSourceUnit": 27.484465298016357,
+    "metersPerSourceUnit": 27484.465298016356,
+    "sourceLabel": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
+    "visibleDescription": "Convex light-curve shape with published thermophysical size calibration: 34.1 ± 0.5 km volume-equivalent diameter. Alternative mirror-pole fit remains unresolved. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 6.86788,
+  "poleEclipticJ2000Degrees": [
+    328,
+    56
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved. Other published pole solutions remain possible.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/1322/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 27484.465298016356,
+    "firstVertexKm": [
+      4.676371832596291,
+      -0.3361899795253361,
+      16.129945571773348
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      36.09287467400805,
+      43.38499803794716,
+      32.182165075683905
+    ],
+    "volumeCubicKm": 20761.64492584292,
+    "volumeEquivalentRadiusKm": 17.05,
+    "radialRangeKm": [
+      13.632654834543963,
+      25.770963818332486
+    ]
+  },
+  "elevation": [
+    -4,
+    9
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 341,
+    "estimatedErrorMeters": 136.69647216796875,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 20729457958878.08
+    }
+  }
+}

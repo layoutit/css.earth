@@ -1,0 +1,26 @@
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 433 Eros (A898 PA)            2026-Sep-07 14:39:09
+Rec #:     433 (+COV) Soln.date: 2021-May-24_17:55:05   # obs: 9130 (1893-2021)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2453311.5 ! 2004-Nov-02.00 (TDB)         Residual RMS= .3494
+   EC= .2228078944584026   QR= 1.133355399799004   TP= 2453371.5859943051
+   OM= 304.4010273379536   W=  178.665326776373    IN= 10.8291838260782
+   A= 1.458269315549994    MA= 326.37047603642     ADIST= 1.783183231300984
+   PER= 1.76102            N= .559689897           ANGMOM= .020250867
+   DAN= 1.78304            DDN= 1.13341            L= 123.090114
+   B= .2507387             MOID= .149124           TP= 2005-Jan-01.0859943051
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= .0004463            RAD= 8.42               ROTPER= 5.27
+   H= 10.4                 G= .460                 B-V= .921
+                           ALBEDO= .250            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#659, OCC=0           radar( 4 delay, 2 Dop.)
+2: source=ORB
+*******************************************************************************

@@ -55,7 +55,7 @@ export function mountPreparedCssSurfaceShell({ host, before, payload: input, res
     root.dataset.shellOpacity = String(opacity);
   }
   publishStats(0, 0, 0);
-  function publish(world: WorldCameraPose, viewport: WorldCameraViewport): void {
+  function publish(world: WorldCameraPose, viewport: WorldCameraViewport, enabled = true): void {
     if (destroyed) return;
     if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt) throw new TypeError('Prepared CSS surface shell and camera reference frames differ.');
     if (!Number.isFinite(viewport.focalPixels) || viewport.focalPixels <= 0 || viewport.principalOffsetPixels.length !== 2 || !viewport.principalOffsetPixels.every(Number.isFinite)) {
@@ -63,7 +63,7 @@ export function mountPreparedCssSurfaceShell({ host, before, payload: input, res
     }
     const local = presentPhysicalPoseInVolume(world.pose, payload.frame);
     const distanceM = Math.hypot(...local.positionUnits) * payload.frame.metersPerUnit;
-    const opacity = distanceOpacity(distanceM, payload.visibility);
+    const opacity = enabled ? distanceOpacity(distanceM, payload.visibility) : 0;
     write(root, 'opacity', String(opacity));
     write(root, 'visibility', opacity > 0 ? 'visible' : 'hidden');
     // Hidden shells retain their last material addresses and face visibility.

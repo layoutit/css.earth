@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27925%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              925 Alphonsina (A920 AA)         2026-Sep-07 22:24:42
+Rec #:     925 (+COV) Soln.date: 2026-Jun-05_04:13:54  # obs: 14346 (1902-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457882.5 ! 2017-May-09.00 (TDB)         Residual RMS= .1962
+   EC= .07869599388846195  QR= 2.48812979532017    TP= 2458090.836909255
+   OM= 299.5925460288811   W=  201.485507047313    IN= 21.07606799153251
+   A= 2.700660996603702    MA= 313.7336560217541   ADIST= 2.913192197887235
+   PER= 4.43827            N= .222074639           ANGMOM= .02818172
+   DAN= 2.896              DDN= 2.50081            L= 139.7601606
+   B= -7.568522            MOID= 1.51066005        TP= 2017-Dec-03.3369092550
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 28.7525            ROTPER= 7.88
+   H= 8.51                 G= .150                 B-V= .850
+                           ALBEDO= .248            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#135, OCC=0
+2: source=ORB
+*******************************************************************************

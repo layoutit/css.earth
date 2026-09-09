@@ -1,0 +1,34 @@
+{
+  "source": "https://doi.org/10.1093/mnras/stw081",
+  "openManuscript": "https://arxiv.org/abs/1601.02395",
+  "model": "Triaxial ellipsoid; rotation about c",
+  "axisRatioFamily": {
+    "a/b": "1+X",
+    "c/b": "1-X",
+    "acceptedRangeX": [
+      0.03,
+      0.133
+    ],
+    "selectedX": 0.133
+  },
+  "selection": "Sections 3.4 and 4 favor X≈0.13 from the combined light-curve and thermal constraints; this representative model is not a unique inversion.",
+  "scale": {
+    "jplReferenceRadiusKm": 170,
+    "jplRadiusUncertaintyKm": 25,
+    "interpretation": "Volume-normalized to the existing JPL nominal radius. This is a display convention; do not interpret the paper’s effective thermal diameter as a uniquely measured volume diameter.",
+    "paperThermalDiametersKm": {
+      "NEATM": 345,
+      "NEATMUncertainty": 15,
+      "selectedTPM": 335
+    }
+  },
+  "pole": {
+    "eclipticLongitudeDegrees": 320,
+    "eclipticLatitudeDegrees": 32,
+    "source": "Figure 8 representative model",
+    "conversionObliquityDegrees": 23.439291111,
+    "conversionInterpretation": "J2000 ecliptic-to-equatorial display convention; no unique measured pole or absolute meridian."
+  },
+  "captionDiscrepancy": "Figure 8 caption prints X=0.0133 in the manuscript. Sections 2.3, 3.4 and 4 explicitly use X=0.133 for the plotted feasible solution and long/short≈1.3. The recipe follows the explicit equations and repeated text, not that inconsistent caption decimal.",
+  "terrain": "No measured spatial terrain or reflectance map is inferred from the thermal roughness parameter. All surface texels remain missing-data grid."
+}

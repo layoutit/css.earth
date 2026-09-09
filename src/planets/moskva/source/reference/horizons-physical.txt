@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27787%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                787 Moskva (A914 HC)           2026-Sep-08 10:25:39
+Rec #:     787 (+COV) Soln.date: 2026-Jun-05_04:03:21   # obs: 6339 (1915-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457966.5 ! 2017-Aug-01.00 (TDB)         Residual RMS= .27197
+   EC= .1301124147549115   QR= 2.20857045494507    TP= 2457524.1959072556
+   OM= 183.8880760931556   W=  126.0880066310779   IN= 14.85154277409308
+   A= 2.53891478899864     MA= 107.7588241830501   ADIST= 2.86925912305221
+   PER= 4.04558            N= .243630629           ANGMOM= .027176773
+   DAN= 2.7031             DDN= 2.31826            L= 310.9074186
+   B= 11.9543245           MOID= 1.22877002        TP= 2016-May-15.6959072556
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 13.9635            ROTPER= 6.056
+   H= 9.63                 G= .150                 B-V= n.a.
+                           ALBEDO= .190            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#80, OCC=0
+2: source=ORB
+*******************************************************************************

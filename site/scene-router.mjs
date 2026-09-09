@@ -1,3 +1,4 @@
+import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { requireSceneLifecycle } from "./scene-contract.mjs";
 import { objectAdapter } from "./object-adapter.mjs";
 import { mountPlanetShell } from "./planet-shell-client.mjs";
@@ -13,7 +14,6 @@ import * as applicationWorldContext from './application-world-context.mjs';
 import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mjs';
 import { createNavigationTiming } from './navigation-timing.mjs';
 
-const DEVELOPMENT_DIAGNOSTICS = import.meta.env?.DEV === true;
 
 export function createSceneRouter({
   stage,
@@ -31,6 +31,9 @@ export function createSceneRouter({
   let active = null;
   let mountTask = null;
   let motionEnabled = false;
+  let heliosphereEnabled = false;
+  let asteroidOrbitsEnabled = false;
+  let asteroidLabelsEnabled = false;
   let scenePaused = true;
   let sceneError = null;
   let sceneState = "loading";
@@ -102,9 +105,21 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner = {};
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
+          } },
+          onHeliosphereChange(next) { if (shellOwner === owner && active) {
+            heliosphereEnabled = next === true;
+            worldContextMount?.setHeliosphereEnabled?.(heliosphereEnabled);
+          } },
+          onAsteroidOrbitsChange(next) { if (shellOwner === owner && active) {
+            asteroidOrbitsEnabled = next === true;
+            worldContextMount?.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
+          } },
+          onAsteroidLabelsChange(next) { if (shellOwner === owner && active) {
+            asteroidLabelsEnabled = next === true;
+            worldContextMount?.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
           } },
         });
       }
@@ -124,7 +139,7 @@ export function createSceneRouter({
       let mount;
       mount = loaded.value(stage, {
         ...handoff?.mountOptions,
-        ...(worldContextMount ? { externalWorldContext: true } : {}),
+        ...(worldContextMount ? { externalWorldContext: true, viewport: worldContextMount.viewport } : {}),
         onMotionRequest: requestMotion,
         onError(error) {
           if (active === session && session.mount === mount) fail(session, error);
@@ -279,7 +294,9 @@ export function createSceneRouter({
         motionRequested: motionEnabled, reducedMotion: reducedMotionActive,
         targetWorldCamera: request.options.targetWorldCamera,
         preserveView: request.options.preserveView,
+        cameraViewport: worldContextMount?.viewport,
         timing: request.timing,
+        presentWorld: worldContextMount ? (world, viewport) => worldContextMount?.publish(world, viewport) : null,
       });
       const loaded = await request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));
       if (loaded.cancelled || pending !== request) return false;
@@ -297,6 +314,7 @@ export function createSceneRouter({
       request.timing.mark(error?.name === 'AbortError' ? 'cancelled' : 'failed');
       if (pending !== request || request.controller.signal.aborted) return false;
       pending = null; request.controller.abort(); request.lifetime.destroy();
+      worldContextMount?.setNavigationIndicatorsVisible?.(true);
       if (active === source && source) {
         if (error?.preserveView === true) {
           const url = captureUrl();
@@ -376,6 +394,7 @@ export function createSceneRouter({
   }
 
   function publishSceneState() {
+    worldContextMount?.setNavigationIndicatorsVisible?.(!pending || pending.options.preserveView === true);
     const state = readSceneState();
     const root = documentTarget.documentElement;
     const body = documentTarget.body;
@@ -401,7 +420,7 @@ export function createSceneRouter({
       root.dataset.playing = String(sceneState === "ready" && !scenePaused);
     } else delete root.dataset.playing;
     shellOwner?.shell?.setPlaybackState?.(readPlayback());
-    if (DEVELOPMENT_DIAGNOSTICS) {
+    if (DIAGNOSTICS_ENABLED) {
       windowTarget.__cssEarth = Object.freeze({
         activeObjectId: objectId,
         get selectedObjectId() { return readSceneState().selectedObjectId; },
@@ -454,6 +473,9 @@ export function createSceneRouter({
           throw new TypeError('Persistent world context mount must publish and destroy.');
         }
         worldContextMount = value;
+        value.setHeliosphereEnabled?.(heliosphereEnabled);
+        value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
+        value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
         return value;
       }).catch(error => {
         if (worldContextAbort === controller) worldContextMountTask = null;

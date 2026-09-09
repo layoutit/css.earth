@@ -1,7 +1,7 @@
 import { MOBILE_VIEWPORT_QUERY } from "./runtime-policy.mjs";
 
 // Shell navigation only. Panel switches retain the mounted object scene.
-export function createExplorerRailController(documentTarget, windowTarget, { onOpenSolarSystem = () => {} } = {}) {
+export function createExplorerRailController(documentTarget, windowTarget, { onOpenSolarSystem = () => {}, onShowPanel = () => {} } = {}) {
   const explore = documentTarget.querySelector(".explorer-rail-explore");
   const about = documentTarget.querySelector(".explorer-rail-about");
   const panel = documentTarget.querySelector(".explorer-about-panel");
@@ -35,6 +35,7 @@ export function createExplorerRailController(documentTarget, windowTarget, { onO
       : "Planet information";
   };
   const show = (next) => {
+    onShowPanel();
     render(next);
     aside.scrollTop = 0;
     if (windowTarget.matchMedia(MOBILE_VIEWPORT_QUERY).matches) {

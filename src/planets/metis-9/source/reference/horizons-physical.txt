@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%279%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  9 Metis (A848 HA)            2026-Sep-07 20:44:15
+Rec #:       9 (+COV) Soln.date: 2026-Mar-11_21:13:05   # obs: 4122 (1849-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458018.5 ! 2017-Sep-22.00 (TDB)         Residual RMS= .17618
+   EC= .1221325472073973   QR= 2.09572752147275    TP= 2457563.8335676212
+   OM= 68.91568640193948   W=  6.21939494730011    IN= 5.575125335986625
+   A= 2.387293793392142    MA= 121.4893370804305   ADIST= 2.678860065311535
+   PER= 3.68865            N= .267205425           ANGMOM= .026379765
+   DAN= 2.09707            DDN= 2.67667            L= 75.1058905
+   B= .6030446             MOID= 1.10995996        TP= 2016-Jun-24.3335676212
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 95.                ROTPER= 5.079
+   H= 6.18                 G= .170                 B-V= .858
+                           ALBEDO= .118            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#148, OCC=0
+2: source=ORB
+*******************************************************************************

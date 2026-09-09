@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "miranda",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Miranda",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "8cc5a1cf0c7ebf7e742d52286c968805804dc842e636c868aae98b61f71fb43d"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "10ceda01821a91ce0387d89d45da178bba6b99f23f414126f7e39e7e427811f5"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "b4e1922ac32d3562695cdcab63f7e24c0e909cebe86e40303e1b042a32129cc3"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "d836d9eee1001e4b7a0840530db6d9f21508a0782e81b3c601540ef35f136d29"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "7b25ba4920cd5a13048458fdbebc8cfc05bd05b7e35449484660a24d46be4b37"
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 235.7
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1350789136612.4648,
+        2367089426360.8306,
+        1017457811700.5005
+      ],
+      "presentationToReference": [
+        0.464331326244368,
+        1.0408340855860843e-17,
+        -0.8856615716334014,
+        0.8125786050376453,
+        0.3977771559319137,
+        0.4260156626860008,
+        0.35229594108252327,
+        -0.9174820620691817,
+        0.18470039436357827
+      ],
+      "orbitUpReference": [
+        -1.0408340855860843e-17,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 1024.7826086956522,
+      "bodyRadiusM": 235700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "a9e5b7f2881f735505a235ff0f62c7daa50fabb6fa0011ac380bf298b37fd37a"
+  }
+}

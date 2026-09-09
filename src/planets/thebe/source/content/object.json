@@ -1,0 +1,159 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "thebe",
+  "displayName": "Thebe",
+  "panel": {
+    "introduction": "Thebe is a small, irregular moon inside Io’s orbit. Its battered surface includes the enormous crater Zethus, and dust from impacts feeds Jupiter’s faint outer gossamer ring.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "49.3 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "System solar semimajor axis",
+        "value": "5.203 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Jupiter",
+        "value": "16.2 hours"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "Synchronous with its orbit"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Mean distance from Jupiter",
+        "value": "About 222,000 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Stephen Synnott · Voyager 1 · 1979"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Galileo clear-filter observations registered to the PDS shape. Bounded illumination normalization and overlap brightness matching reduce photographed shading. This is relative image brightness, not calibrated albedo. Gray grid marks unobserved or unreliable samples; cast shadows are not reconstructed.",
+        "title": "Galileo clear-filter observations registered to the PDS shape. Bounded illumination normalization and overlap brightness matching reduce photographed shading. This is relative image brightness, not calibrated albedo. Gray grid marks unobserved or unreliable samples; cast shadows are not reconstructed.",
+        "detail": "Galileo SSI",
+        "thumbnail": "/scenes/thebe/thebe-normal-thumbnail.webp",
+        "surface": "thebe-normal-surface@2x.webp",
+        "poles": "thebe-normal-surface@2x.webp",
+        "source": {
+          "id": "c0532888400",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/galileo/"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radial height above a 49.3 km reference sphere from Stooke’s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5° grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
+        "title": "Radial height above a 49.3 km reference sphere from Stooke’s Galileo-derived shape model. Shows the broad irregular shape, not local altitude above a geoid. The archived 5° grid includes modeled unseen terrain and may exaggerate depressions; it is not a high-resolution terrain survey.",
+        "detail": "Radial shape",
+        "thumbnail": "/scenes/thebe/thebe-elevation-thumbnail.webp",
+        "surface": "thebe-elevation-surface@2x.webp",
+        "poles": "thebe-elevation-surface@2x.webp",
+        "source": {
+          "id": "stooke-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/stkshape.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−15",
+            "0",
+            "+15"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
+          "image": "/scenes/thebe/thebe-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Thebe overview",
+      "href": "https://science.nasa.gov/jupiter/moons/thebe/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "surface",
+      "description": "Galileo observations and Stooke shape model",
+      "href": "https://sbn.psi.edu/pds/resource/stkshape.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/jupiter/moons/thebe/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

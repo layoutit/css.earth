@@ -1,0 +1,13 @@
+
+> cssearth@0.1.0 typecheck:packages /Users/ekrof/fed/cssEarth-pluto-small-moons
+> pnpm -r --filter "./packages/**" typecheck
+
+Scope: 4 of 5 workspace projects
+packages/astronomy typecheck$ tsc --noEmit -p tsconfig.json
+packages/catalog typecheck$ tsc --noEmit -p tsconfig.json
+packages/objects typecheck$ tsc --noEmit -p tsconfig.json
+packages/catalog typecheck: Done
+packages/objects typecheck: Done
+packages/astronomy typecheck: Done
+packages/engine typecheck$ tsc --noEmit -p tsconfig.json
+packages/engine typecheck: Done

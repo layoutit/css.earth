@@ -137,7 +137,7 @@ try {
     const galaxy = page.locator('[data-galactic-overview]');
     assert.deepEqual(await galaxy.locator('.planet-title-tag').allTextContents(), ['Local Group', 'Galaxy']);
     assert.equal(await galaxy.locator('.planet-factsheet-section').evaluate(node => node.open), false);
-    assert.equal(await page.locator('[data-solar-system-results] .planet-factsheet-section').evaluate(node => node.open), false);
+    assert.equal(await page.locator('[data-solar-system-results] .planet-factsheet-section').count(), 0);
     assert.equal(await page.locator('[data-object-type-group="asteroid"]').count(), 0);
     const disabled = galaxy.locator('.planet-object-link[aria-disabled="true"]');
     assert.equal(await disabled.count(), 4);

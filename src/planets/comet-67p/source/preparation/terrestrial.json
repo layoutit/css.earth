@@ -1,0 +1,394 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "comet-67p",
+  "displayName": "67P",
+  "publicBase": "/scenes/comet-67p/",
+  "distanceAu": 3.46,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch."
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "albedo",
+        "label": "Albedo",
+        "consumer": "virtis-science",
+        "path": "science/al01_glb_m006_m006_v01.tab",
+        "labelPath": "science/al01_glb_m006_m006_v01.lbl",
+        "format": "pds3-scalar-map",
+        "datasetId": "RO-C-VIRTIS-5-67P-MAPS-V1.0",
+        "productId": "AL01_GLB_M006_M006_V01.LBL",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "stepDegrees": 0.5,
+          "noData": -1,
+          "frame": "cheops-planetocentric-east-positive",
+          "latitudeFirst": 90,
+          "latitudeStep": -0.5
+        },
+        "sampling": "nearest",
+        "sourceUnits": "fraction",
+        "displayUnits": "Fraction",
+        "valueTransform": {
+          "scale": 1,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 0.1,
+        "colors": [
+          "#201c3e",
+          "#414b7c",
+          "#287d8e",
+          "#57b5a1",
+          "#dfe7a2"
+        ],
+        "surfaceSampling": {
+          "method": "unique-radial-map",
+          "maximumDistanceMeters": 50,
+          "ambiguityReference": {
+            "path": "science/cg_spc_shap5_097k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "expectedVertices": 48420,
+              "expectedFaces": 96834,
+              "metersPerUnit": 1000
+            }
+          }
+        },
+        "sourceValidRange": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "slope",
+        "label": "Spectral slope",
+        "consumer": "virtis-science",
+        "path": "science/sl01_glb_m006_m006_v01.tab",
+        "labelPath": "science/sl01_glb_m006_m006_v01.lbl",
+        "format": "pds3-scalar-map",
+        "datasetId": "RO-C-VIRTIS-5-67P-MAPS-V1.0",
+        "productId": "SL01_GLB_M006_M006_V01.LBL",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "stepDegrees": 0.5,
+          "noData": -1,
+          "frame": "cheops-planetocentric-east-positive",
+          "latitudeFirst": 90,
+          "latitudeStep": -0.5
+        },
+        "sampling": "nearest",
+        "sourceUnits": "nm^-1",
+        "displayUnits": "% / 100 nm",
+        "valueTransform": {
+          "scale": 10000,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 30,
+        "colors": [
+          "#153e68",
+          "#2c82a0",
+          "#c1c7a0",
+          "#d69258",
+          "#922f39"
+        ],
+        "surfaceSampling": {
+          "method": "unique-radial-map",
+          "maximumDistanceMeters": 50,
+          "ambiguityReference": {
+            "path": "science/cg_spc_shap5_097k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "expectedVertices": 48420,
+              "expectedFaces": 96834,
+              "metersPerUnit": 1000
+            }
+          }
+        }
+      },
+      {
+        "id": "absorption",
+        "label": "3.2 µm absorption",
+        "consumer": "virtis-science",
+        "path": "science/bd01_glb_m006_m006_v01.tab",
+        "labelPath": "science/bd01_glb_m006_m006_v01.lbl",
+        "format": "pds3-scalar-map",
+        "datasetId": "RO-C-VIRTIS-5-67P-MAPS-V1.0",
+        "productId": "BD01_GLB_M006_M006_V01.LBL",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "stepDegrees": 0.5,
+          "noData": -1,
+          "frame": "cheops-planetocentric-east-positive",
+          "latitudeFirst": 90,
+          "latitudeStep": -0.5
+        },
+        "sampling": "nearest",
+        "sourceUnits": "fraction",
+        "displayUnits": "%",
+        "valueTransform": {
+          "scale": 100,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 25,
+        "colors": [
+          "#242540",
+          "#515990",
+          "#558da5",
+          "#9fc9bf",
+          "#f0e5a9"
+        ],
+        "surfaceSampling": {
+          "method": "unique-radial-map",
+          "maximumDistanceMeters": 50,
+          "ambiguityReference": {
+            "path": "science/cg_spc_shap5_097k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "expectedVertices": 48420,
+              "expectedFaces": 96834,
+              "metersPerUnit": 1000
+            }
+          }
+        },
+        "sourceValidRange": [
+          0,
+          1
+        ]
+      },
+      {
+        "id": "ice",
+        "label": "Modeled ice",
+        "consumer": "virtis-science",
+        "path": "science/wi01_glb_m006_m006_v01.tab",
+        "labelPath": "science/wi01_glb_m006_m006_v01.lbl",
+        "format": "pds3-scalar-map",
+        "datasetId": "RO-C-VIRTIS-5-67P-MAPS-V1.0",
+        "productId": "WI01_GLB_M006_M006_V01.LBL",
+        "grid": {
+          "width": 720,
+          "height": 360,
+          "projection": "equirectangular",
+          "stepDegrees": 0.5,
+          "noData": -1,
+          "frame": "cheops-planetocentric-east-positive",
+          "latitudeFirst": -90,
+          "latitudeStep": 0.5
+        },
+        "sampling": "nearest",
+        "sourceUnits": "fraction",
+        "displayUnits": "%",
+        "valueTransform": {
+          "scale": 100,
+          "offset": 0
+        },
+        "minimum": 0,
+        "maximum": 1.5,
+        "colors": [
+          "#292b35",
+          "#455076",
+          "#508da5",
+          "#97d1d2",
+          "#eff9e6"
+        ],
+        "surfaceSampling": {
+          "method": "unique-radial-map",
+          "maximumDistanceMeters": 50,
+          "ambiguityReference": {
+            "path": "science/cg_spc_shap5_097k_cart.wrl",
+            "format": "vrml-mesh",
+            "grid": {
+              "expectedVertices": 48420,
+              "expectedFaces": 96834,
+              "metersPerUnit": 1000
+            }
+          }
+        },
+        "sourceValidRange": [
+          0,
+          1
+        ]
+      }
+    ],
+    "observedColors": [],
+    "mosaics": [],
+    "surfaceObservations": [
+      {
+        "id": "osiris",
+        "format": "osiris-geo",
+        "consumer": "osiris-observation",
+        "filter": "FFP-Vis_Orange",
+        "allowLossy": true,
+        "transfer": {
+          "maximumSourceDistanceMeters": 50,
+          "maximumSeparationMeters": 20,
+          "maximumEmissionDegrees": 80,
+          "visibilityToleranceMeters": 0.5,
+          "interpretation": "Trial acceptance bounds, not estimates of source accuracy. Every bilinear contributor must be within 20 m of the closest RMOC source point; the same point must be visible in the full RMOC mesh."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3
+        },
+        "displayPercentiles": [
+          1,
+          99
+        ],
+        "metadata": {
+          "label": "OSIRIS mosaic",
+          "falseColor": false,
+          "coverage": "Four OSIRIS orange-filter observations, 5–6 August 2014. Grayscale with approximate illumination correction and bounded brightness matching; photographed shadows and some seams remain. Gray grid marks missing or rejected imagery. Shadows off shows the mosaic uniformly lit; Shadows on adds modeled lighting at the shared 3 September 2026 epoch. This is not an albedo map."
+        },
+        "frames": [
+          {
+            "id": "aug05-1944",
+            "path": "observations/n20140805t194314611id50f22.IMG",
+            "qualityPath": "observations/n20140805t194314611id40f22.IMG",
+            "startTime": "2014-08-05T19:44:22.918"
+          },
+          {
+            "id": "aug05-2344",
+            "path": "observations/n20140805t234316579id50f22.IMG",
+            "qualityPath": "observations/n20140805t234316579id40f22.IMG",
+            "startTime": "2014-08-05T23:44:24.891"
+          },
+          {
+            "id": "aug06-0244",
+            "path": "observations/n20140806t024316574id50f22.IMG",
+            "qualityPath": "observations/n20140806t024316574id40f22.IMG",
+            "startTime": "2014-08-06T02:44:24.890"
+          },
+          {
+            "id": "aug06-0520",
+            "path": "observations/n20140806t051914575id50f22.IMG",
+            "qualityPath": "observations/n20140806t051914575id40f22.IMG",
+            "startTime": "2014-08-06T05:20:22.894"
+          }
+        ],
+        "selection": "lowest-emission",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 128,
+          "maximumLogMad": 0.25,
+          "maximumGain": 1.35
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 1.65,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/comet-67p/comet-67p-model-surface@2x.webp",
+    "polesUrl": "/scenes/comet-67p/comet-67p-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/mtp019.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 52098,
+        "expectedFaces": 104192
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 1000,
+        "maximumErrorMeters": 50,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u",
+      "sourceLighting": {
+        "maximumDistanceMeters": 150,
+        "rayOffsetMeters": 0.25,
+        "ambient": 0.16,
+        "diffuse": 0.84,
+        "floodLights": [
+          {
+            "direction": [
+              0,
+              0,
+              1
+            ],
+            "weight": 0.36
+          },
+          {
+            "direction": [
+              0,
+              1,
+              0
+            ],
+            "weight": 0.24
+          },
+          {
+            "direction": [
+              1,
+              0,
+              0
+            ],
+            "weight": 0.24
+          }
+        ]
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons osculating elements; ESA/RMOC measured pole in the Cheops frame.",
+    "qualification": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch."
+  },
+  "presentation": {
+    "defaultLens": "model",
+    "pointColor": [
+      184,
+      182,
+      178
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

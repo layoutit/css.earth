@@ -13,9 +13,10 @@ const focus: PreparedNavigationFocus = { id: 'catalogue:7', positionM: [1e20, 2e
   limits: { minimumDistanceM: 1e13, maximumDistanceM: 1e22 }, upReference: [0, 0, 1], arrivalDistanceM: 4e18 };
 const optics = { focalPixels: 1000, principalOffsetPixels: [-170, 0] as const, framingRadiusPixels: 200 };
 
-function fixture() {
+function fixture(preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean) {
   class Surface extends EventTarget {
     style: Record<string, any> = { setProperty() {}, removeProperty() {} };
+    dataset: Record<string, string> = {};
     isConnected = true;
     ownerDocument: any;
     constructor(readonly x = 0) { super(); }
@@ -37,6 +38,7 @@ function fixture() {
     skyPlan: { cameraContract: 'scene-locked-unbounded-accumulated-matrix3d' },
     worldContext: { frame, bodyRadiusUnits: 100, kilometersPerUnit: .002, maximumExtentUnits: 1e8 },
     cameraPlan: scene.camera, objectId: 'unit', runtimePolicy: { MOBILE_VIEWPORT_QUERY: '(max-width: 500px)' },
+    preparedSurfaceHitTest,
     onPublish() { publications++; }, onError(error: unknown) { throw error; },
   } as any, { HTMLElement: Surface,
     createPerspectiveDolly(options: any) { physicalOwners++; return createPerspectiveDolly(options); },
@@ -72,6 +74,19 @@ function fixture() {
 function close(actual: readonly number[], expected: readonly number[], tolerance = 1e-10) {
   actual.forEach((value, axis) => expect(Math.abs(value - expected[axis]) / Math.max(1, Math.abs(expected[axis]))).toBeLessThan(tolerance));
 }
+
+it('uses prepared surface picking for detail flights and suppresses them while a catalogue focus owns input', () => {
+  const f = fixture((x, y) => x === 23 && y === 45);
+  f.roots[0]!.dataset.lod = 'geometry';
+  const hit = f.callbacks.drag.surfaceFlyToHitTest;
+  expect(hit(23, 45)).toBe(true);
+  expect(hit(24, 45)).toBe(false);
+  f.orbit.setPreparedFocus(focus, frame);
+  expect(hit(23, 45)).toBe(false);
+  f.orbit.setPreparedFocus(null, frame);
+  expect(hit(23, 45)).toBe(true);
+  f.orbit.destroy();
+});
 
 it('flies, drags and dollies around a prepared focus while retaining the original detail frame and camera', async () => {
   const f = fixture(), roots = [...f.roots], initial = f.world();

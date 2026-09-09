@@ -14,7 +14,10 @@ disc. The checked source manifest binds every input by byte count and SHA-256.
 
 ## Global surface sources
 
-- Photosphere field: JSOC `hmi.mrsynop_small_720s[2311]`, the 720 x 360 radial
+- Photosphere: colorized SDO/HMI continuum browse images, assembled from
+  central-meridian strips across CR2311. Source-derived limb normalization and
+  continuation beyond the observed polar latitudes are display approximations.
+- Magnetic field: JSOC `hmi.mrsynop_small_720s[2311]`, the 720 x 360 radial
   magnetic-field map for Carrington Rotation 2311. The FITS grid is equally
   spaced in sine latitude. Preparation resamples it to equal latitude and uses
   a declared bipolar blue-to-amber false-colour scale.
@@ -27,7 +30,7 @@ map, not a simultaneous snapshot. Preparation fills only missing AIA samples
 from the nearest valid latitude in the same checked map. It performs no
 runtime reconstruction.
 
-The three pinned 2026-08-29 SDO browse images remain separate, Earth-facing
+The pinned 2026-05-27 AIA browse images are separate, Earth-facing
 observations. AIA 304 and 171 contribute prepared off-limb context only to
 their matching lenses. The photosphere off-limb asset is transparent. These
 plates are stationary and sit behind the globe; they are never presented as a
@@ -49,7 +52,8 @@ or invented pole source.
 Each lens also has one source-derived, antialiased 512-pixel limb asset. It
 covers only the outer retained-leaf rim to remove transform-raster faceting;
 its transparent center does not replace the globe material. DPR 1 and DPR 2
-surface, polar, limb, and off-limb banks are selected once per mount.
+surface, polar, limb, and off-limb assets use the canonical highest-density bank,
+selected once per mount independently of device DPR.
 
 The retained cubic starfield is prepared from ESO/S. Brunier's photographic
 `eso0932a` full-sky panorama at DPR 1 and DPR 2. The HYG v4.1 subset remains

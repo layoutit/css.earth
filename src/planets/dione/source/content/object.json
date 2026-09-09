@@ -26,12 +26,24 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "About 562 km"
+        "value": "561.4 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "9.58 AU (mean)"
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
@@ -45,7 +57,7 @@
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Saturn",
+        "label": "Mean distance from Saturn",
         "value": "About 377,400 km"
       },
       {
@@ -54,7 +66,19 @@
         "value": "Giovanni Cassini · 1684"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.478 ± 0.003 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -68,7 +92,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini / Voyager · 154 m mosaic",
+        "description": "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
         "title": "USGS Cassini/Voyager mosaic, about 154 m per source pixel, downsampled to the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
         "thumbnail": "/scenes/dione/dione-normal-thumbnail.webp",
         "surface": "dione-normal-surface@2x.webp",
@@ -81,7 +105,7 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Cassini ISS · infrared–green–UV",
+        "description": "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Spherical shape approximation.",
         "title": "Published 2014 enhanced-color composite, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Source resolution varies; seams and residual photographed shading remain. Spherical shape approximation.",
         "thumbnail": "/scenes/dione/dione-enhanced-thumbnail.webp",
         "surface": "dione-enhanced-surface@2x.webp",
@@ -94,7 +118,7 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Cassini terrain model · shaded relief",
+        "description": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
         "title": "Color shows height above the PDS 561.4 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 1.58 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
         "thumbnail": "/scenes/dione/dione-elevation-thumbnail.webp",
         "surface": "dione-elevation-surface@2x.webp",

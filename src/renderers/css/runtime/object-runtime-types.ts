@@ -11,6 +11,7 @@ import type { HeliocentricMountOptions } from "../solar-system/heliocentric-view
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
 import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';
+import type { PreparedSurfaceHit } from '../navigation/prepared-surface-hit.js';
 
 export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition {
   readonly schema: string; readonly id: string; readonly controls: ObjectControls;
@@ -19,6 +20,7 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
   readonly heliocentricView?: { plan: HeliocentricMountOptions["plan"]; bodyMarker: HeliocentricMountOptions["markerSprite"];
     systemMarkers?: HeliocentricMountOptions["systemMarkers"]; labels?: HeliocentricMountOptions["labels"] } | null;
   readonly destinations?: unknown;
+  readonly surfaceHit?: PreparedSurfaceHit;
 }
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
 export interface PageLayerRuntime {
@@ -49,7 +51,12 @@ export interface ObjectMountOptions {
   worldContext?: PerspectiveWorldContext;
   /** The application owns the contextual universe layer for this mount. */
   externalWorldContext?: boolean;
+  viewport?: import('../navigation/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;
+  /** The camera can accept the live application pose before surface activation completes. */
+  onNavigationReady?(navigation: import('./world-navigation-types.js').ObjectWorldNavigation): void;
+  /** Caller keeps the destination coarse until ready; direct/restored views stay atomic. */
+  progressiveActivation?: boolean;
   initialProjection?: import('../rendering/physical-projection.js').PhysicalProjection;
 }
 export interface PreparedNavigation { maximumZoom: number; camera?: OrbitStateUpdate; }

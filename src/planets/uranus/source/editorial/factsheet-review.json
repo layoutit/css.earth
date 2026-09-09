@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-factsheet-source-review@1",
+  "objectId": "uranus",
+  "checked": "2026-09-08",
+  "references": [
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "values": {
+        "distance-from-sun": "19.189 AU"
+      }
+    },
+    {
+      "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+      "columns": [
+        "name",
+        "equatorialRadiusKm",
+        "meanRadiusKm",
+        "mass",
+        "densityGPerCm3",
+        "siderealRotationDays",
+        "siderealOrbitYears",
+        "magnitude",
+        "geometricAlbedo",
+        "equatorialGravityMPerSec2",
+        "escapeVelocityKmPerSec"
+      ],
+      "row": [
+        "Uranus",
+        "25559 [D] ±4",
+        "25362 [D] ±7",
+        "86.8099 [L] ±0.0040",
+        "1.270 [*] ±0.001",
+        "-0.71833 [C]",
+        "84.016846 [B]",
+        "-7.19 [B]",
+        "0.51 [B]",
+        "8.87 [*]",
+        "21.38 [*]"
+      ],
+      "massUnitKg": "1e24"
+    },
+    {
+      "url": "https://science.nasa.gov/uranus/moons/",
+      "values": {
+        "moon-count": "29 · Sep 2026"
+      }
+    }
+  ]
+}

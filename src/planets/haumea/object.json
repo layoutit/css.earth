@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ad11c872de01a72018926d024923f12908d0d14dfc66b6181a35acdd7024249a"
+    "sha256": "cdb8d9df7f7ed738347dd42927187fcb21878dd2ce54528919ab2ce0255cd966"
   },
   "properties": {
     "preparation": {
@@ -44,7 +44,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "ed04e0ea30c4e262527fcfa97718c5f583402ffda9409dcaea54b861e0b99252"
+          "sha256": "aadc2d17344c41f070f493cfa3ea650774c408f7f0c58fe3a196cf6debb11e59"
         },
         {
           "id": "acquisition",
@@ -67,7 +67,13 @@
           "id": "body",
           "source": "shape-model",
           "projection": "equirectangular",
-          "lenses": []
+          "lenses": [
+            {
+              "id": "illustration",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
         }
       ],
       "materials": [
@@ -85,20 +91,20 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -5487501697429.015,
-        -4698286149209.781,
-        1797331335450.44
+        -5487487239179.44,
+        -4698328457056.636,
+        1797316425255.33
       ],
       "presentationToReference": [
-        -0.8364334462528649,
+        -0.8364296575156682,
         -1.3877787807814457e-17,
-        0.5480685084818828,
-        -0.5028430253171388,
+        0.5480742906105174,
+        -0.5028483303164415,
         0.39777715593191365,
-        -0.7674126830517105,
-        -0.21800913255976923,
+        -0.7674092069532947,
+        -0.21801143255845273,
         -0.9174820620691818,
-        -0.3327141173767938
+        -0.33271261030368715
       ],
       "orbitUpReference": [
         1.3877787807814457e-17,

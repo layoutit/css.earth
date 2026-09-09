@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 0,
+  "declinationDegrees": 90,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "qualification": "Thomas mapping axes are parallel to J2000, with an arbitrary prime meridian. Mathilde has no solved spin pole or phase in this source. This fixed display orientation is not a measured rotation model; added directional lighting is illustrative.",
+  "source": "reference/253mathilde-legacy.lbl; reference/stooke-253mathilde.xml"
+}

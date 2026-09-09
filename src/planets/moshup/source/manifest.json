@@ -1,0 +1,213 @@
+{
+  "schema": "cssmoshup-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "moshup-shape",
+      "path": "shape/kw4a.obj",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj",
+      "credit": "Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 658.5
+      },
+      "coverage": "This is the archived Alpha model alone; its companion Squannit is not rendered. The source paper identifies regions constrained by weaker Goldstone images where reconstruction accuracy is lower. Table 2 supplies the equivalent diameter, rotation period and ecliptic pole; no gravitational-slope or optical albedo map is inferred.",
+      "expectedBytes": 288969,
+      "expectedSha256": "2bdeafb28dbb20b0aa74d79dbee76021ca7dd09e43fc72ff6cf43445dcc812bf"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "moshup-research-1999kw4.html",
+      "path": "reference/1999kw4.html",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html",
+      "credit": "Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 10439,
+      "expectedSha256": "5903a6917fd35b04aeb4346f9d971c4a4556c779a5b804a8116b980d1cd0bc41"
+    },
+    {
+      "id": "moshup-research-1999kw4.table2.gif",
+      "path": "reference/1999kw4.table2.gif",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.table2.gif",
+      "credit": "Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 17334,
+      "expectedSha256": "dfbeba97244d07296b2e7a8eb6b6d959d1dccc3d75f2388cb8327f223652757e"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj",
+      "credit": "Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 88812,
+      "expectedSha256": "9c738eaab73cb25931eb4bee02dbb4e206418a2735067c604dd5002ad4a630a8",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "moshup-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 8835,
+      "expectedSha256": "ae501a45c6319ebb5c3c5f7b853402a5f1e3f170fd360be491ba1e54fc662e36"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1170,
+      "expectedSha256": "6808bbdc130c3e96c5331610815a48bc3fd7a71999fc715177d8227b7c1ecc05"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1399,
+      "expectedSha256": "a14aef676fcfebdca726de6a284f84fb1ee7a05f7dc92ae21d5ce176763e4b6b"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1026,
+      "expectedSha256": "7b1d4a78cf1f62a105ff8209d5170ab163fffdbc99cf272601b4ec8e44617b7f"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2968,
+      "expectedSha256": "ded897fd45d0633c128a9627474e4a4c17bb692b1f08d20cf943256d71f12148"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3932,
+      "expectedSha256": "10532b2aad9833f701c6c80dd87b1a159210dae297976eb79ccce7fd9400cbba"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7759,
+      "expectedSha256": "513eaaadb6627a58fd5f902ff873f08886d20b44943dc80600f3157fe7b2bb27"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1755,
+      "expectedSha256": "c1261bd0e72e8ae5eb1299dced0d90b8830f867cf7cb76e1232be7fbbb945f07"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7049,
+      "expectedSha256": "eb194413b66635b5351a994c841cdcb281863c72cb80af73d929c772f71d4844"
+    },
+    {
+      "path": "reference/jpl-shape-index.html",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2608,
+      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1926,
+      "expectedSha256": "f84a57ed8a266df66c805c9897b98d1fa034c743665794e519f9f4de61d643cb"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 144975,
+      "expectedSha256": "18d5eb506f8114faf995d5397e6906eb31b25a02efc901ce34b7558fc56a49ad"
+    }
+  ]
+}

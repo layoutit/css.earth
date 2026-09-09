@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "despina",
+  "displayName": "Despina",
+  "panel": {
+    "introduction": "Despina is a small, irregular moon inside Neptune’s faint ring system. Voyager images constrain its overall shape, but do not provide reliable surface mapping at this scale.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Reference radius",
+        "value": "74 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Dimensions",
+        "value": "About 180 × 148 × 128 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Neptune",
+        "value": "About 8.03 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Mean distance from Neptune",
+        "value": "About 52,526 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "Synchronous model"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 science team · July 1989"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
+        "title": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
+        "detail": "Measured axes",
+        "thumbnail": "/scenes/despina/despina-model-thumbnail.webp",
+        "surface": "despina-model-surface@2x.webp",
+        "poles": "despina-model-poles@2x.webp",
+        "source": {
+          "id": "measured-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Despina overview",
+      "href": "https://science.nasa.gov/neptune/moons/despina/"
+    },
+    {
+      "label": "Karkoschka (2003)",
+      "role": "surface",
+      "description": "Voyager-derived ellipsoid dimensions and image limitations",
+      "href": "https://doi.org/10.1016/S0019-1035(03)00002-2"
+    },
+    {
+      "label": "NASA/PDS",
+      "role": "observations",
+      "description": "Calibrated Voyager ISS archive",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/neptune/moons/despina/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2003); IAU/WGCCRE; NASA/NAIF; JPL Horizons"
+    }
+  }
+}

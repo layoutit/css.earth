@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2752246%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS           52246 Donaldjohanson (1981 EQ5)     2026-Sep-08 04:12:16
+Rec #:   52246 (+COV) Soln.date: 2024-Sep-11_14:13:06   # obs: 1589 (2001-2024)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2460310.5 ! 2024-Jan-01.00 (TDB)         Residual RMS= .17317
+   EC= .1874831199365464   QR= 1.936449937362644   TP= 2460648.5005698544
+   OM= 262.7951724145965   W=  212.9285580998883   IN= 4.423903983190933
+   A= 2.383273486221501    MA= 269.4557899484184   ADIST= 2.830097035080358
+   PER= 3.67933            N= .267881827           ANGMOM= .026085448
+   DAN= 2.72894            DDN= 1.98684            L= 115.6457759
+   B= -2.4031185           MOID= .954449           TP= 2024-Dec-04.0005698544
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 1.9475             ROTPER= n.a.
+   H= 15.61                G= .150                 B-V= n.a.
+                           ALBEDO= .103            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#22, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,222 @@
+{
+  "schema": "cssdespina-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ],
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "measured-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003) measured ellipsoid; cssEarth standard no-coverage grid",
+      "license": "MIT display representation of published scientific parameters",
+      "licenseEvidence": [
+        "https://doi.org/10.1016/S0019-1035(03)00002-2"
+      ],
+      "acquisition": "Checked in; radius formula, dimensions and material bytes are specified in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 74000
+      },
+      "expectedBytes": 14147,
+      "expectedSha256": "33433bfde43462cb04ed29e2dce75928e249c8976d307a76bb65f7f15adf2560"
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003) measured ellipsoid; cssEarth standard no-coverage grid",
+      "license": "MIT display representation of published scientific parameters",
+      "licenseEvidence": [
+        "https://doi.org/10.1016/S0019-1035(03)00002-2"
+      ],
+      "acquisition": "Checked in; radius formula, dimensions and material bytes are specified in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes of 90 × 74 × 64 km. The images constrain the outline rather than a reliable map of craters or terrain. The standard gray grid marks unavailable surface coverage; shared lighting describes the model shape. The 74 km radius sets the scene scale and is not a replacement for the three measured axes.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 74000
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "expectedBytes": 135,
+      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3930,
+      "expectedSha256": "08ba7c446f9e0915340ae8fa081e865104d6fe36b6771ef77206077e0a566415",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 971,
+      "expectedSha256": "8886ba868c6ac11b725ccd9315af037b78a16138daf31dc79b63019112cd9a59",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "physical.txt",
+      "expectedBytes": 839,
+      "expectedSha256": "2e76aef29100533bde133835eb023100bf8e7617298822a2021d191dc61f6a6e",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1255,
+      "expectedSha256": "c1e31aa9f5f3fdf49b55fc7da75323eeadcaedc56862f347448a1110fd432361",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2389,
+      "expectedSha256": "a7020d3cb3c71b1de54b4c94b5e7529078b87579149417413ee1fbacf7183143",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4612,
+      "expectedSha256": "2a4a996977ea810e4baa0dca819cedc798e9157a453022058fa826dd4de52b8b",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "cf9f84c96437016a671b059857265f54330daae0eb259ec74c5025c5e9a1da59",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "survey/C1129447_GEOMED.LBL",
+      "expectedBytes": 3315,
+      "expectedSha256": "288824a32985ee945ade04f3b38d8c40eca65ceea448ba2764613d33a6247115",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "survey/C1130353_GEOMED.LBL",
+      "expectedBytes": 3315,
+      "expectedSha256": "2380b6c432bcf7656573d57f91450ad91a3974e5badf8bb76b4e4d5f99e419ad",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "survey/C1135301_GEOMED.LBL",
+      "expectedBytes": 3311,
+      "expectedSha256": "489e6e0fb9ca9636a83631a5947f2192097932063e05c605c69c2ea1cf562078",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "survey/C1135325_GEOMED.LBL",
+      "expectedBytes": 3311,
+      "expectedSha256": "412da08a2bfe972f4333999c3f65cef59e82147786035f0d1c42ec235ac6798f",
+      "purpose": "Despina scientific source or authored interpretation."
+    },
+    {
+      "path": "survey/opus-candidates.json",
+      "expectedBytes": 3974,
+      "expectedSha256": "7d9bdb12b6dfc3af517b8f71d0c7835e6c698c0fdf415c916c9f28aeef9b32b8",
+      "purpose": "Despina scientific source or authored interpretation."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003); cssEarth standard no-coverage grid",
+      "license": "Measured scientific parameters; MIT display representation.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "measured-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 40,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 69688,
+      "expectedSha256": "b8efc79f694b5f5012db90db86fdbe8d33251a063428faecfcf3aac9052abffe"
+    }
+  ]
+}

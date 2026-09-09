@@ -50,8 +50,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3018,
-      "expectedSha256": "90787e9472f8dfe4818b3490cfc80d5dbb488a7cd0fa5cb482b7d15b46cbf44d",
+      "expectedBytes": 3751,
+      "expectedSha256": "38fb6ca520c05085af323fbaf7ab386324e161a8828d199c770ba179ad2ba1b3",
       "purpose": "Object-owned preparation, content or attribution"
     },
     {
@@ -75,7 +75,7 @@
     {
       "path": "preparation/shape-model.json",
       "expectedBytes": 451,
-      "expectedSha256": "dadc3725ef59ca3f9f8674955c0c90326332dd3e9c1b2c4a3fa72973bd95a75a",
+      "expectedSha256": "abc023870658f0d1d49f23131ada3573ecc8acb8d50a4624eec9b619ed397723",
       "purpose": "Object-owned preparation, content or attribution"
     },
     {

@@ -1,0 +1,7 @@
+# Toutatis notices
+
+Geometry: Hudson, R. S., Ostro, S. J., and Scheeres, D. J. (2003), *High-resolution model of asteroid 4179 Toutatis*, Icarus 161, 346–355, DOI 10.1016/S0019-1035(02)00042-8. Public scientific archive: Neese, C., ed. (2020), *Small Body Radar Shape Models V1.0*, urn:nasa:pds:compil.ast.radar.shape-models::1.0, NASA Planetary Data System, DOI 10.26033/vtj1-tb13. Retain the dataset citation, source authors, Arecibo and Goldstone credits and original labels. The Shape view is a simplified scientific shape derivative with the shared no-imagery grid; neither NASA nor the source authors endorse this application.
+
+The published model does not resolve all actual terrain. Directional lighting uses a fixed arbitrary display orientation and does not simulate the measured non-principal-axis tumble. Physical size comes from the source mesh; orbital context comes from NASA/JPL Horizons.
+
+ESO/S. Brunier Milky Way panorama: CC BY 4.0; complete notice in `source/stars/ESO-IMAGE-LICENSE.md`. HYG Stellar Database: David Nash/Astronexus, CC BY-SA 4.0; `source/stars/LICENSE.md`. Inter title/font: Inter Project Authors, SIL Open Font License 1.1; `source/presentation/LICENSE.INTER-OFL`.

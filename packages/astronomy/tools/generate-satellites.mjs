@@ -7,7 +7,7 @@
 // are propagated as PRECESSING KEPLERIAN ELLIPSES. The element set for each
 // moon is derived here from JPL Horizons' own osculating elements, sampled
 // in the ICRF frame. Most use a 30-day cadence over 1900-01-01 .. 2100-01-01;
-// the fast and resonant added Saturn moons use a 5-day cadence over a
+// the fast and resonant added inner moons use a 5-day cadence over a
 // 2020-01-01 .. 2032-01-01 current-era window. That interval is deliberately
 // centred on the application's 2026 observing epoch: a single precessing
 // ellipse cannot carry their long-period resonant motion over the full source
@@ -64,45 +64,133 @@
 // claim. A precessing ellipse cannot represent a real satellite orbit; what the
 // test proves is that the propagator reproduces JPL data to within the residual
 // the fit leaves, at epochs the fit did not see.
-import { writeRecordSections } from './lib/write-record-sections.mjs'
+import { fitLibration } from './lib/fit-libration.mjs'
+import { fitPositionCorrection } from './lib/fit-position-correction.mjs'
+import { readRecordSections, writeRecordSections } from './lib/write-record-sections.mjs'
 import { elementsUrl, horizons, parseElements } from './lib/horizons.mjs'
 import { HEADER, shortest } from './lib/sources.mjs'
 
 const J2000 = 2451545.0
 const FROM_JD = 2415020.5
 const TO_JD = 2488069.5
-const CURRENT_SATURN_FROM_JD = 2458849.5
-const CURRENT_SATURN_TO_JD = 2463232.5
+const CURRENT_INNER_FROM_JD = 2458849.5
+const CURRENT_INNER_TO_JD = 2463232.5
 const INNER_SATURN_FROM_JD = 2433282.5
 const INNER_SATURN_TO_JD = 2469807.5
+// Daphnis has no Horizons ephemeris beyond 2018-01-17. Its later position
+// extrapolates this Cassini-era fit and carries that limited validity interval.
+const DAPHNIS_FROM_JD = 2453371.5
+const DAPHNIS_TO_JD = 2458119.5
 const STEP_DAYS = 30
 const DEG = Math.PI / 180
-const RADIAL_FIT_IDS = new Set(['hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'atlas', 'prometheus', 'pandora', 'pan'])
+const RADIAL_FIT_IDS = new Set(['paaliaq', 'tarvos', 'ijiraq', 'suttungr', 'mundilfari', 'skathi', 'erriapus', 'thrymr', 'bebhionn', 'bergelmir', 'bestla', 'fornjot', 'hati', 'hyrrokkin', 'loge', 'skoll', 'greip', 'tarqeq', 'caliban', 'sycorax', 'prospero', 'setebos', 'kiviuq', 'albiorix', 'siarnaq', 'ymir', 'nereid', 'himalia', 'polydeuces', 'anthe', 'aegaeon', 'dimorphos', 'hyperion', 'phoebe', 'janus', 'epimetheus', 'telesto', 'helene', 'calypso', 'daphnis', 'atlas', 'prometheus', 'pandora', 'pan', 'nix', 'hydra', 'kerberos', 'styx', 'puck', 'methone', 'pallene', 'portia', 'juliet', 'belinda', 'cordelia', 'ophelia', 'bianca', 'cressida', 'desdemona', 'rosalind'])
 
+// Metis and Adrastea need daily samples: Jupiter's strong J2 makes their
+// osculating mean-motion prediction ambiguous across a five-day sample gap.
 // id, Horizons target code, Horizons centre, parent body id, optional fit window and cadence
+const LIBRATION_FIT_IDS = new Set(['albiorix', 'himalia', 'polydeuces', 'anthe', 'aegaeon'])
+const POSITION_CORRECTION_FIT_IDS = new Set(['paaliaq', 'tarvos', 'ijiraq', 'suttungr', 'mundilfari', 'skathi', 'erriapus', 'thrymr', 'bebhionn', 'bergelmir', 'bestla', 'fornjot', 'hati', 'hyrrokkin', 'loge', 'skoll', 'greip', 'tarqeq', 'caliban', 'sycorax', 'prospero', 'setebos', 'kiviuq', 'albiorix', 'himalia', 'siarnaq', 'ymir'])
+// A fixed cosine basis resolves this strongly perturbed orbit without a
+// nonlinear frequency search. Both methods publish the same bounded series.
+const POSITION_CORRECTION_OPTIONS = {
+  albiorix: { count: 512, method: 'cosine' },
+  paaliaq: { count: 128, method: 'cosine' },
+  tarvos: { count: 128, method: 'cosine' },
+  ijiraq: { count: 128, method: 'cosine' },
+  suttungr: { count: 128, method: 'cosine' },
+  mundilfari: { count: 128, method: 'cosine' },
+  skathi: { count: 128, method: 'cosine' },
+  erriapus: { count: 128, method: 'cosine' },
+  thrymr: { count: 128, method: 'cosine' },
+  bebhionn: { count: 128, method: 'cosine' },
+  bergelmir: { count: 128, method: 'cosine' },
+  bestla: { count: 128, method: 'cosine' },
+  fornjot: { count: 128, method: 'cosine' },
+  hati: { count: 128, method: 'cosine' },
+  hyrrokkin: { count: 128, method: 'cosine' },
+  loge: { count: 128, method: 'cosine' },
+  skoll: { count: 128, method: 'cosine' },
+  greip: { count: 128, method: 'cosine' },
+  tarqeq: { count: 128, method: 'cosine' },
+  caliban: { count: 128, method: 'cosine' },
+  sycorax: { count: 128, method: 'cosine' },
+  prospero: { count: 128, method: 'cosine' },
+  setebos: { count: 128, method: 'cosine' },
+}
 const SATELLITES = [
+  ['paaliaq', '620', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['tarvos', '621', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['ijiraq', '622', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['suttungr', '623', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['mundilfari', '625', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['skathi', '627', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['erriapus', '628', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['thrymr', '630', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['bebhionn', '637', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['bergelmir', '638', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['bestla', '639', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['fornjot', '642', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['hati', '643', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['hyrrokkin', '644', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['loge', '646', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['skoll', '647', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['greip', '651', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['tarqeq', '652', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['caliban', '716', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['sycorax', '717', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['prospero', '718', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['setebos', '719', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+
+  ['siarnaq', '629', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['ymir', '619', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+
+  ['nereid', '802', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['himalia', '506', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['polydeuces', '634', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['anthe', '649', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['aegaeon', '653', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+
   ['phobos', '401', '500@499', 'mars'],
   ['deimos', '402', '500@499', 'mars'],
   ['io', '501', '500@599', 'jupiter'],
   ['europa', '502', '500@599', 'jupiter'],
   ['ganymede', '503', '500@599', 'jupiter'],
   ['callisto', '504', '500@599', 'jupiter'],
+  ['amalthea', '505', '500@599', 'jupiter'],
+  ['thebe', '514', '500@599', 'jupiter'],
+  ['adrastea', '515', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['metis', '516', '500@599', 'jupiter', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['methone', '632', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 1],
+  ['pallene', '633', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 1],
   ['mimas', '601', '500@699', 'saturn'],
   ['enceladus', '602', '500@699', 'saturn'],
   ['tethys', '603', '500@699', 'saturn'],
   ['dione', '604', '500@699', 'saturn'],
   ['rhea', '605', '500@699', 'saturn'],
   ['titan', '606', '500@699', 'saturn'],
-  ['hyperion', '607', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
+  ['hyperion', '607', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
   ['iapetus', '608', '500@699', 'saturn'],
   ['phoebe', '609', '500@699', 'saturn'],
-  ['janus', '610', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
-  ['epimetheus', '611', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
+  ['janus', '610', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['epimetheus', '611', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['helene', '612', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['calypso', '614', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['daphnis', '635', '500@699', 'saturn', DAPHNIS_FROM_JD, DAPHNIS_TO_JD, 5],
   ['telesto', '613', '500@699', 'saturn'],
-  ['atlas', '615', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
-  ['prometheus', '616', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
-  ['pandora', '617', '500@699', 'saturn', CURRENT_SATURN_FROM_JD, CURRENT_SATURN_TO_JD, 5],
+  ['atlas', '615', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['prometheus', '616', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['pandora', '617', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
   ['pan', '618', '500@699', 'saturn', INNER_SATURN_FROM_JD, INNER_SATURN_TO_JD, 5],
+  ['bianca', '708', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['cressida', '709', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['desdemona', '710', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['rosalind', '713', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['puck', '715', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['portia', '712', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['juliet', '711', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['belinda', '714', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['cordelia', '706', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['ophelia', '707', '500@799', 'uranus', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
   ['miranda', '705', '500@799', 'uranus'],
   ['ariel', '701', '500@799', 'uranus'],
   ['umbriel', '702', '500@799', 'uranus'],
@@ -110,6 +198,22 @@ const SATELLITES = [
   ['oberon', '704', '500@799', 'uranus'],
   ['triton', '801', '500@899', 'neptune'],
   ['proteus', '808', '500@899', 'neptune'],
+  ['larissa', '807', '500@899', 'neptune'],
+  ['naiad', '803', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['thalassa', '804', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['despina', '805', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['galatea', '806', '500@899', 'neptune', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  ['charon', '901', '500@999', 'pluto'],
+  // Circumbinary moons: fit about the system barycentre, then translate the
+  // result through the measured Charon mass ratio into Pluto-centred space.
+  ['nix', '902', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
+  ['hydra', '903', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
+  ['kerberos', '904', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
+  ['styx', '905', '500@9', 'pluto', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1, 'charon'],
+  ['kiviuq', '624', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 5],
+  ['albiorix', '626', '500@699', 'saturn', CURRENT_INNER_FROM_JD, CURRENT_INNER_TO_JD, 1],
+  // DART post-impact s547, a short window around the prepared epoch.
+  ['dimorphos', '120065803', '500@920065803', 'didymos', 2461256.5, 2461316.5, 1],
 ]
 
 const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length
@@ -232,8 +336,13 @@ function fitRotation(days, xs, ys) {
   return { rate, amplitude: Math.hypot(re, im), phaseAtEpoch: Math.atan2(im, re) }
 }
 
+// --object=id[,id] recomputes selected records and preserves other checked data.
+const requested = process.argv.slice(2)
+if (requested.some(arg => !/^--object=[a-z][a-z0-9-]*(?:,[a-z][a-z0-9-]*)*$/.test(arg))) throw new Error('Use --object=id[,id]')
+const selected = new Set(requested.flatMap(arg => arg.slice('--object='.length).split(',')))
+for (const id of selected) if (!SATELLITES.some(row => row[0] === id)) throw new Error(`Unknown satellite ${id}`)
 const results = []
-for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO_JD, fitStepDays = STEP_DAYS] of SATELLITES) {
+for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO_JD, fitStepDays = STEP_DAYS, barycentreCompanion] of SATELLITES.filter(([id]) => !selected.size || selected.has(id))) {
   const url = elementsUrl({ command, center, startJd: fitFromJdTdb, stopJd: fitToJdTdb, stepDays: fitStepDays })
   const rows = parseElements(await horizons(url, `elements-${command}`), id)
   const days = rows.map((r) => r.jd - J2000)
@@ -323,7 +432,13 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
     }
     lambda.push(placed)
   }
-  const lambdaFit = fitLine(days, lambda)
+  const line = fitLine(days, lambda)
+  const lambdaFit = LIBRATION_FIT_IDS.has(id) ? fitLibration(days, lambda, line) : line
+  const longitudeHarmonics = lambdaFit.harmonics
+  const correction = day => (longitudeHarmonics ?? []).reduce((sum, h) => {
+    const a = h.rateRadPerDay * (day + J2000 - h.epochJdTt)
+    return sum + h.cosineRad * Math.cos(a) + h.sineRad * Math.sin(a)
+  }, 0)
   const meanAnomalyAtEpochRad = lambdaFit.intercept - apsis.phaseAtEpoch
   const meanMotionRadPerDay = lambdaFit.slope - apsis.rate
 
@@ -340,7 +455,7 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
       const row = rows[i]
       const referenceEccentricAnomaly = solveKepler(row.meanAnomalyDeg * DEG, row.eccentricity)
       const referenceRadiusKm = row.semiMajorAxisKm * (1 - row.eccentricity * Math.cos(referenceEccentricAnomaly))
-      const fittedMeanAnomaly = meanAnomalyAtEpochRad + meanMotionRadPerDay * days[i]
+      const fittedMeanAnomaly = meanAnomalyAtEpochRad + meanMotionRadPerDay * days[i] + correction(days[i])
       const fittedEccentricAnomaly = solveKepler(fittedMeanAnomaly, eccentricity)
       const fittedRadiusPerKm = 1 - eccentricity * Math.cos(fittedEccentricAnomaly)
       const coefficient = fittedRadiusPerKm / referenceRadiusKm
@@ -350,17 +465,18 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
     semiMajorAxisKm = numerator / denominator
   }
   const worstLambdaResidual = Math.max(
-    ...lambda.map((value, i) => Math.abs(value - (lambdaFit.intercept + lambdaFit.slope * days[i]))),
+    ...lambda.map((value, i) => Math.abs(value - (lambdaFit.intercept + lambdaFit.slope * days[i] + correction(days[i])))),
   )
 
-  results.push({
+  const result = {
     id,
     parent,
     command,
     center,
+    barycentreCompanion,
     url,
-    fitFromJdTdb,
-    fitToJdTdb,
+    fitFromJdTdb: rows[0].jd,
+    fitToJdTdb: rows.at(-1).jd,
     fitStepDays,
     semiMajorAxisKm,
     eccentricity,
@@ -374,13 +490,18 @@ for (const [id, command, center, parent, fitFromJdTdb = FROM_JD, fitToJdTdb = TO
     meanAnomalyAtEpochRad,
     meanMotionRadPerDay,
     worstLambdaResidual,
-  })
+    longitudeHarmonics,
+  }
+  if (POSITION_CORRECTION_FIT_IDS.has(id)) {
+    result.positionCorrection = fitPositionCorrection(rows, result, basis, POSITION_CORRECTION_OPTIONS[id])
+  }
+  results.push(result)
 }
 
 const entry = (r) => `  ${r.id}: {
     parent: '${r.parent}',
-    horizonsCode: '${r.command}',
-    fitFromJdTdb: ${r.fitFromJdTdb},
+    horizonsCode: '${r.command}',${r.barycentreCompanion ? `\n    barycentreCompanion: '${r.barycentreCompanion}',` : ''}
+${r.positionCorrection ? `    positionCorrection: ${JSON.stringify(r.positionCorrection)},\n` : ''}${r.longitudeHarmonics ? `    longitudeHarmonics: ${JSON.stringify(r.longitudeHarmonics)},\n` : ''}    fitFromJdTdb: ${r.fitFromJdTdb},
     fitToJdTdb: ${r.fitToJdTdb},
     fitStepDays: ${r.fitStepDays},
     poleRightAscensionRad: ${shortest(r.poleRightAscensionRad, 1e-12)},
@@ -399,17 +520,32 @@ const entry = (r) => `  ${r.id}: {
     },
   },`
 
+const destination = new URL('../src/data/satelliteElements.data.ts', import.meta.url)
+const records = selected.size ? readRecordSections(destination, 'SATELLITE_ELEMENTS') : new Map()
+for (const result of results) records.set(result.id, entry(result))
+const recordText = SATELLITES.map(([id]) => {
+  const record = records.get(id)
+  if (!record) throw new Error(`No checked record for ${id}; run the full generator first`)
+  return record
+}).join('\n')
 const out = `${HEADER(
   `JPL Horizons osculating elements, ICRF frame, sampled at the body-specific fit ranges and cadences recorded below, reduced to mean elements in each moon's own Laplace plane`,
   'generate-satellites.mjs',
 )}
 import type { KeplerianElements } from '../kepler.js'
+import type { PeriodicVectorCorrection } from '../periodicCorrection.js'
 
 export interface SatelliteRecord {
+  /** Bounded prepared ICRF position residual about the fitted ellipse. */
+  readonly positionCorrection?: PeriodicVectorCorrection
+  /** Prepared slow libration in mean longitude; fitted inside the stated interval. */
+  readonly longitudeHarmonics?: readonly { readonly rateRadPerDay: number; readonly cosineRad: number; readonly sineRad: number; readonly epochJdTt: number }[]
   /** Body id of the planet this moon orbits. */
   readonly parent: string
   /** Horizons target code, so a fixture can be re-fetched without guessing. */
   readonly horizonsCode: string
+  /** Companion defining a binary barycentre; output remains parent-centred. */
+  readonly barycentreCompanion?: string
   /** First and last JPL Horizons epochs sampled by the element fit. */
   readonly fitFromJdTdb: number
   readonly fitToJdTdb: number
@@ -432,12 +568,12 @@ export interface SatelliteRecord {
  * see that file and README.md for the residual each one leaves.
  */
 export const SATELLITE_ELEMENTS = {
-${results.map(entry).join('\n')}
+${recordText}
 } as const satisfies Record<string, SatelliteRecord>
 
 export type SatelliteId = keyof typeof SATELLITE_ELEMENTS
 `
-writeRecordSections(new URL('../src/data/satelliteElements.data.ts', import.meta.url), out, 'satellites')
+writeRecordSections(destination, out, 'satellites')
 
 process.stdout.write('satellite   a(km)        e      i_L(deg)   n(rad/d)     node-dot(deg/yr)  peri-dot(deg/yr)  lambda resid(rad)  pole RA/Dec(deg)\n')
 for (const r of results) {

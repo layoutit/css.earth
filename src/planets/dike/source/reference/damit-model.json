@@ -1,0 +1,78 @@
+{
+  "modelId": 1144,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1144",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4173/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4171/IAUspin.txt",
+  "version": "2016-01-04",
+  "lambda": 233,
+  "beta": 50,
+  "periodHours": 18.11914,
+  "nonconvex": false,
+  "calibrated": false,
+  "sourceFields": {
+    "ID": "1144",
+    "Asteroid ID": "(99) Dike",
+    "Lambda": "233",
+    "Beta": "50",
+    "Period": "18.11914",
+    "YORP": "",
+    "JD0": "2444696",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0.47",
+    "LSM Parameter 3": "0.07",
+    "LSM Parameter 4": "-0.96",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "0 (No)",
+    "Equivalent Diameter": "",
+    "Equivalent Diameter Error": "",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": ""
+  },
+  "originalVolume": 1.0000000222552459,
+  "originalSignedVolume": 1.0000000222552459,
+  "originalVolumeEquivalentDiameter": 1.2407009910028353,
+  "originalUnits": "dimensionless DAMIT source units; uncalibrated model",
+  "vertices": 1022,
+  "faces": 2040,
+  "extentsSourceUnits": [
+    [
+      -0.626607,
+      0.722822
+    ],
+    [
+      -0.727989,
+      0.670433
+    ],
+    [
+      -0.541139,
+      0.585138
+    ]
+  ],
+  "radialRangeSourceUnits": [
+    0.5206365201683416,
+    0.7314616476678732
+  ],
+  "firstVertexSourceUnits": [
+    0.01634,
+    0.215417,
+    0.572039
+  ],
+  "firstFaceZeroBased": [
+    0,
+    1,
+    2
+  ]
+}

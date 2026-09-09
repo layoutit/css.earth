@@ -17,7 +17,7 @@ interface Props {
 
 const { preparedContent: content, preparedControls: controls, informationOnly = false } = Astro.props;
 const Panel = informationOnly ? PlanetInformationPanel : PlanetShell;
-const previewFiles = import.meta.glob<{ images: Array<{ id: string; path: string; width: number; height: number }> }>(
+const previewFiles = import.meta.glob<{ images: Array<{ id: string; path: string; width: number; height: number; attribution?: { label: string; url?: string } }> }>(
   "../../src/planets/*/prepared/minimaps.json",
   { import: "default" },
 );
@@ -35,7 +35,7 @@ const lenses = controls.lenses && {
     const preview = previews?.images.find(image => image.id === lens.id);
     if (!preview) return lens;
     const url = await imageFiles[`${objectRoot}/prepared/${preview.path}`]();
-    return { ...lens, texture: { url, width: preview.width, height: preview.height, minimap } };
+    return { ...lens, texture: { url, width: preview.width, height: preview.height, minimap, attribution: preview.attribution } };
   })),
 };
 ---

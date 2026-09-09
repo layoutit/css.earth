@@ -1,0 +1,159 @@
+PDS_VERSION_ID = PDS3                                                         
+LABEL_REVISION_NOTE   = "08 Jan 2013:  T. Farnham;  Created                   
+"                                                                             
+                                                                              
+RECORD_TYPE  = "FIXED_LENGTH"                                                 
+RECORD_BYTES = 34                                                             
+FILE_RECORDS = 48063                                                          
+                                                                              
+^COUNTS_TABLE       = ("TEMPEL1_2012_PLAN.TAB",1)                             
+^VERTEX_TABLE       = ("TEMPEL1_2012_PLAN.TAB",2)                             
+^PLATE_TABLE        = ("TEMPEL1_2012_PLAN.TAB",16024)                         
+                                                                              
+DATA_SET_ID  = "DIF-C-HRIV/ITS/MRI-5-TEMPEL1-SHAPE-V2.0"                      
+PRODUCT_NAME = "PLANETOCENTRIC PLATE MODEL FOR THE SURFACE OF COMET TEMPEL 1" 
+PRODUCT_ID   = "TEMPEL1-PLANETOCENTRIC-PLATE-MODEL"                           
+INSTRUMENT_HOST_NAME  = {"DEEP IMPACT FLYBY SPACECRAFT",                      
+                         "DEEP IMPACT IMPACTOR SPACECRAFT",                   
+                         "STARDUST"}                                          
+INSTRUMENT_NAME       =                                                       
+           {"DEEP IMPACT HIGH RESOLUTION INSTRUMENT - VISIBLE CCD",           
+            "DEEP IMPACT IMPACTOR TARGETING SENSOR - VISIBLE CCD",            
+            "DEEP IMPACT MEDIUM RESOLUTION INSTRUMENT - VISIBLE CCD",         
+            "NAVIGATION CAMERA"}                                              
+TARGET_NAME           = "9P/TEMPEL 1 (1867 G1)"                               
+START_TIME            = "N/A"                                                 
+STOP_TIME             = "N/A"                                                 
+PRODUCT_CREATION_TIME = 2013-01-08                                            
+                                                                              
+OBJECT     = COUNTS_TABLE                                                     
+  ROWS               = 1                                                      
+  ROW_BYTES          = 34                                                     
+  INTERCHANGE_FORMAT = ASCII                                                  
+  COLUMNS            = 2                                                      
+  DESCRIPTION        = "Table that gives the count of vertices and plates     
+    representing the surface of the numerical shape model.  The shape model   
+    comprises triangular plates and vertices that are specified in a          
+    body-fixed planetocentric coordinate system."                             
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "NUMVERTICES"                                             
+    DESCRIPTION   = "NUMBER OF VERTICES IN SHAPE MODEL"                       
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 5                                                         
+    BYTES         = 5                                                         
+    FORMAT        = "I5"                                                      
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "NUMPLATES"                                               
+    DESCRIPTION   = "NUMBER OF TRIANGULAR PLATES IN SHAPE MODEL"              
+    DATA_TYPE     = ASCII_INTEGER                                             
+    START_BYTE    = 13                                                        
+    BYTES         = 5                                                         
+    FORMAT        = "I5"                                                      
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = COUNTS_TABLE                                                     
+                                                                              
+OBJECT     = VERTEX_TABLE                                                     
+  ROWS               = 16022                                                  
+  ROW_BYTES          = 34                                                     
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 3                                                      
+  DESCRIPTION        = "Table of vertices of the numerical shape model.       
+    These are the vertices of plates that approximate the surface             
+    of the body.                                                              
+                                                                              
+    Each row of this table contains data for one vertex, in the form of the   
+    the latitude, longitude and distance from the center in a planetocentric  
+    coordinate system.                                                        
+                                                                              
+    The row also contains a flag denoting whether the point comes from a      
+    region well constrained by control points (1), a point constrained by a   
+    limb silhouette (2) or a point not well constrained (3).  "               
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "COORDINATES"                                             
+    DESCRIPTION   = "The latitude and longitude of one vertex in the model"   
+    UNIT          = "DEGREE"                                                  
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 1                                                         
+    BYTES         = 14                                                        
+    ITEMS         = 2                                                         
+    ITEM_BYTES    = 7                                                         
+    FORMAT        = "2(F7.1)"                                                 
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 2                                                         
+    NAME          = "DISTANCE"                                                
+    DESCRIPTION   = "The distance of the vertex from the center, in           
+                     planetocentric coordinates"                              
+    UNIT          = "KILOMETER"                                               
+    DATA_TYPE     = "ASCII_REAL"                                              
+    START_BYTE    = 18                                                        
+    BYTES         = 10                                                        
+    ITEMS         = 1                                                         
+    ITEM_BYTES    = 10                                                        
+    FORMAT        = "F10.4"                                                   
+  END_OBJECT = COLUMN                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 3                                                         
+    NAME          = "FLAG"                                                    
+                                                                              
+    DESCRIPTION   = "Flag denoting the derivation of the data point.          
+                     If 1, this denotes a point that was determined in a      
+                     region that was well constrained by control points, and  
+                     has an uncertainty of less than 60 m.                    
+                     If 2, this denotes a point that was constrained by the   
+                     silhouette of a limb, with uncertainty of ~100 m due to  
+                     the ambiguity in the location of the limb along the line 
+                     of sight.                                                
+                     If 3, the point is not constrained by either of the      
+                     other methods, and consequently has an uncertainty of    
+                     100-300 m.                                               
+                  "                                                           
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 32                                                        
+    BYTES         = 1                                                         
+    ITEMS         = 1                                                         
+    ITEM_BYTES    = 1                                                         
+    FORMAT        = "I1"                                                      
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = VERTEX_TABLE                                                     
+                                                                              
+OBJECT     = PLATE_TABLE                                                      
+  ROWS               = 32040                                                  
+  ROW_BYTES          =  34                                                    
+  INTERCHANGE_FORMAT = "ASCII"                                                
+  COLUMNS            = 1                                                      
+  DESCRIPTION        = "Table of triangular plates of the numerical shape     
+    model.  These triangular plates approximate the surface of the body.      
+                                                                              
+    Each row of this table contains three integer offsets that point to three 
+    vertices from the previous table.  The three entries are the vertices of  
+    one triangular plate of the shape model, and denote the offset from the   
+    first row in the table of vertices.  An offset of 0 points to the first   
+    row in the table of vertices, an offset of 1 to the second row, and so    
+    on.                                                                       
+    "                                                                         
+                                                                              
+  OBJECT     = COLUMN                                                         
+    COLUMN_NUMBER = 1                                                         
+    NAME          = "PLATE_VERTICES"                                          
+    DESCRIPTION   = "Offsets of the three vertices defining this              
+      triangular plane. The offsets refer to the vertices listed in           
+      the preceding vertex table."                                            
+    DATA_TYPE     = "ASCII_INTEGER"                                           
+    START_BYTE    = 3                                                         
+    BYTES         = 24                                                        
+    ITEMS         = 3                                                         
+    ITEM_BYTES    = 8                                                         
+    FORMAT        = "3(I8)"                                                   
+  END_OBJECT = COLUMN                                                         
+END_OBJECT = PLATE_TABLE                                                      
+END                                                                           

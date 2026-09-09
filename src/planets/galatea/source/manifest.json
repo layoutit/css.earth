@@ -1,0 +1,223 @@
+{
+  "schema": "cssgalatea-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "measured-ellipsoid",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 67525,
+      "expectedSha256": "880268acd131560411d7771635192b22afd7e56396598a5f6543397d47479023",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003); cssEarth standard no-coverage visualization",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1016/S0019-1035(03)00002-2"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "A smooth ellipsoid based on the 102 × 92 × 72 km semi-axes measured from Voyager images by Karkoschka (2003). The available images are strongly smeared and do not support a registered surface map. The standard gray grid marks missing imagery; shared lighting shows the model shape. No craters or local elevation are invented.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 88000
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 135,
+      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003); cssEarth standard no-coverage visualization",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://doi.org/10.1016/S0019-1035(03)00002-2"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "A smooth ellipsoid based on the 102 × 92 × 72 km semi-axes measured from Voyager images by Karkoschka (2003). The available images are strongly smeared and do not support a registered surface map. The standard gray grid marks missing imagery; shared lighting shows the model shape. No craters or local elevation are invented.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 88000
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4013,
+      "expectedSha256": "3e2838f60e2b2ebdbab317ea6a66c8a3f3ef246d33992bf05f42501c73ed0556",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 984,
+      "expectedSha256": "b3971ff689e617e414c1240ae09a1b3855b663c524f139ef0e7bfc6aa224ccd6",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1307,
+      "expectedSha256": "ab45f7882d99c0f56a24513e8cd03d6432e31c703dde41c872d7f60e0cb133db",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2570,
+      "expectedSha256": "05a46791c4e44882cccc44dc127ececc6adb02a110f22bb76df79315dec0f9e3",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5314,
+      "expectedSha256": "9d1fc2d22e26c33d29bb25b689dd91d0854f940074600fd74970669e68ecf2e7",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "90088867a210faeebed17ef9dcdb93227124e0ea6f92ea946c4d6cdcddffa5f3",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/1135055-metadata.json",
+      "expectedBytes": 11785,
+      "expectedSha256": "69a53d1e9bc3716a81f09b09e7158a4eb6b1f2398b09572c074b6f7fa94af52e",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/1144523-metadata.json",
+      "expectedBytes": 11718,
+      "expectedSha256": "b3e9664c03eab5d5961e1ec1d5b1d87f9989e0e1cee9eb5bc1f4241aa0e0e7f6",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/1144537-metadata.json",
+      "expectedBytes": 11783,
+      "expectedSha256": "26b03ac6762edd4705dcba2877d7132b7a615b654f67f7afb553bf96e077aa8f",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/1145807-metadata.json",
+      "expectedBytes": 11658,
+      "expectedSha256": "b75568bbe9f23f00c6e8d8a199bb005c680ca8e65660eaacd775dddc9e3ceb62",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/opus-finest.json",
+      "expectedBytes": 2405,
+      "expectedSha256": "5d1854cb159c086e91e8c541be77e4f5cf6b481ae99c9b621e73476bc7c66d27",
+      "purpose": "Galatea scientific source or authored preparation evidence."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 720,
+      "expectedSha256": "bf9fe9d1d57eaaca6e2c747f832e6a22a8ead0f16e15afe7196da48b5eca7591"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+      "credit": "Karkoschka (2003) dimensions; cssEarth no-coverage shape visualization",
+      "license": "MIT display representation from published scientific measurements; retain source citation.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "measured-ellipsoid",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 40,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 71335,
+      "expectedSha256": "9fbb35f7a290a96707bba3ef1b9a8c16894a080a094208a165ba5b8f0d723d8e"
+    }
+  ]
+}

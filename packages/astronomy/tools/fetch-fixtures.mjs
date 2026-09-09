@@ -6,7 +6,7 @@
 // the exact Horizons URL that produced it, so any row can be re-fetched with
 // curl and nothing else. `VEC_CORR='NONE'` matters: the Horizons default is
 // light-time corrected, and an ephemeris is a geometric statement.
-import { writeRecordSections } from './lib/write-record-sections.mjs'
+import { readRecordSections, writeRecordSections } from './lib/write-record-sections.mjs'
 import { horizons, parseVectors, vectorsUrl } from './lib/horizons.mjs'
 import { HEADER } from './lib/sources.mjs'
 
@@ -45,12 +45,49 @@ const targets = [
 ]
 
 const SATELLITES = [
+  ['paaliaq', '620', '500@699', 'daily'],
+  ['tarvos', '621', '500@699', 'daily'],
+  ['ijiraq', '622', '500@699', 'daily'],
+  ['suttungr', '623', '500@699', 'daily'],
+  ['mundilfari', '625', '500@699', 'daily'],
+  ['skathi', '627', '500@699', 'daily'],
+  ['erriapus', '628', '500@699', 'daily'],
+  ['thrymr', '630', '500@699', 'daily'],
+  ['bebhionn', '637', '500@699', 'daily'],
+  ['bergelmir', '638', '500@699', 'daily'],
+  ['bestla', '639', '500@699', 'daily'],
+  ['fornjot', '642', '500@699', 'daily'],
+  ['hati', '643', '500@699', 'daily'],
+  ['hyrrokkin', '644', '500@699', 'daily'],
+  ['loge', '646', '500@699', 'daily'],
+  ['skoll', '647', '500@699', 'daily'],
+  ['greip', '651', '500@699', 'daily'],
+  ['tarqeq', '652', '500@699', 'daily'],
+  ['caliban', '716', '500@799', 'daily'],
+  ['sycorax', '717', '500@799', 'daily'],
+  ['prospero', '718', '500@799', 'daily'],
+  ['setebos', '719', '500@799', 'daily'],
+
+  ['siarnaq', '629', '500@699', 'daily'],
+  ['ymir', '619', '500@699', 'daily'],
+
+  ['nereid', '802', '500@899', 'daily'],
+  ['himalia', '506', '500@599', 'daily'],
   ['phobos', '401', '500@499'],
   ['deimos', '402', '500@499'],
   ['io', '501', '500@599'],
   ['europa', '502', '500@599'],
   ['ganymede', '503', '500@599'],
   ['callisto', '504', '500@599'],
+  ['amalthea', '505', '500@599'],
+  ['thebe', '514', '500@599'],
+  ['adrastea', '515', '500@599', 'daily'],
+  ['metis', '516', '500@599', 'daily'],
+  ['methone', '632', '500@699', 'cassini-era'],
+  ['polydeuces', '634', '500@699', 'daily'],
+  ['anthe', '649', '500@699', 'daily'],
+  ['aegaeon', '653', '500@699', 'daily'],
+  ['pallene', '633', '500@699', 'cassini-era'],
   ['mimas', '601', '500@699'],
   ['enceladus', '602', '500@699'],
   ['tethys', '603', '500@699'],
@@ -62,11 +99,24 @@ const SATELLITES = [
   ['phoebe', '609', '500@699'],
   ['janus', '610', '500@699', 'limited'],
   ['epimetheus', '611', '500@699', 'limited'],
+  ['helene', '612', '500@699', 'limited'],
+  ['calypso', '614', '500@699', 'limited'],
+  ['daphnis', '635', '500@699', 'cassini-era'],
   ['telesto', '613', '500@699'],
   ['atlas', '615', '500@699', 'limited'],
   ['prometheus', '616', '500@699', 'limited'],
   ['pandora', '617', '500@699', 'limited'],
   ['pan', '618', '500@699', 'source-limited'],
+  ['bianca', '708', '500@799', 'daily'],
+  ['cressida', '709', '500@799', 'daily'],
+  ['desdemona', '710', '500@799', 'daily'],
+  ['rosalind', '713', '500@799', 'daily'],
+  ['puck', '715', '500@799', 'daily'],
+  ['portia', '712', '500@799', 'daily'],
+  ['juliet', '711', '500@799', 'daily'],
+  ['belinda', '714', '500@799', 'daily'],
+  ['cordelia', '706', '500@799', 'daily'],
+  ['ophelia', '707', '500@799', 'daily'],
   ['miranda', '705', '500@799'],
   ['ariel', '701', '500@799'],
   ['umbriel', '702', '500@799'],
@@ -74,6 +124,19 @@ const SATELLITES = [
   ['oberon', '704', '500@799'],
   ['triton', '801', '500@899'],
   ['proteus', '808', '500@899'],
+  ['larissa', '807', '500@899'],
+  ['naiad', '803', '500@899', 'daily'],
+  ['thalassa', '804', '500@899', 'daily'],
+  ['despina', '805', '500@899', 'daily'],
+  ['galatea', '806', '500@899', 'daily'],
+  ['charon', '901', '500@999'],
+  ['nix', '902', '500@999', 'daily'],
+  ['hydra', '903', '500@999', 'daily'],
+  ['kerberos', '904', '500@999', 'daily'],
+  ['styx', '905', '500@999', 'daily'],
+  ['kiviuq', '624', '500@699', 'daily'],
+  ['albiorix', '626', '500@699', 'daily'],
+  ['dimorphos', '120065803', '500@920065803', 'dart'],
 ]
 
 // Deliberately NOT the epochs the mean elements were fitted on: the satellite
@@ -82,7 +145,7 @@ const SATELLITES = [
 const SATELLITE_EPOCHS = [2415033.25, 2433295.75, 2451545.0, 2461041.5, 2469820.25, 2488056.25]
 
 // Six independent epochs inside the 2020-01-01 .. 2032-01-01 current-era fit
-// used for the fast and resonant added Saturn moons. None is on its 5-day grid.
+// used for the fast and resonant added inner moons. None is on its 5-day grid.
 const LIMITED_SATELLITE_EPOCHS = [2458862.25, 2460310.75, 2461041.5, 2461772.25, 2462502.75, 2463219.25]
 
 // Pan's source supports 1949-12-27 .. 2050-01-09 and its simple fit remains
@@ -124,23 +187,37 @@ ${rows
   },`
 }
 
+// Selected satellite regeneration preserves every unrelated checked fixture.
+const requested = process.argv.slice(2)
+if (requested.some(arg => !/^--object=[a-z][a-z0-9-]*(?:,[a-z][a-z0-9-]*)*$/.test(arg))) throw new Error('Use --object=id[,id]')
+const selected = new Set(requested.flatMap(arg => arg.slice('--object='.length).split(',')))
+for (const id of selected) if (!SATELLITES.some(row => row[0] === id)) throw new Error(`Unknown satellite ${id}`)
+const destination = new URL('../src/__fixtures__/horizons.ts', import.meta.url)
+const records = selected.size ? readRecordSections(destination, 'HORIZONS') : new Map()
 const blocks = []
-for (const [name, description, command, center, epochs] of targets) {
+for (const [name, description, command, center, epochs] of selected.size ? [] : targets) {
   blocks.push(await collect(name, description, command, center, epochs))
 }
-for (const [id, command, center, range] of SATELLITES) {
+for (const [id, command, center, range] of SATELLITES.filter(([id]) => !selected.size || selected.has(id))) {
   const epochs =
-    range === 'limited'
+    range === 'daily'
+      ? [2458862.25, 2460310.75, 2461041.625, 2461772.25, 2462502.75, 2463219.25]
+      : range === 'cassini-era'
+      ? [2453383.25, 2454113.75, 2455197.25, 2456658.75, 2457389.25, 2458110.25]
+      : range === 'dart'
+      ? [2461258.75, 2461267.25, 2461276.75, 2461286.75, 2461302.25, 2461314.75]
+      : range === 'limited'
       ? LIMITED_SATELLITE_EPOCHS
       : range === 'source-limited'
         ? SOURCE_LIMITED_SATELLITE_EPOCHS
         : SATELLITE_EPOCHS
   blocks.push(await collect(`${id}FromPlanet`, `${id} (${command}) relative to its planet`, command, center, epochs))
 }
-for (const [id, command] of DWARF_PLANETS) {
+for (const [id, command] of selected.size ? [] : DWARF_PLANETS) {
   blocks.push(await collect(`${id}Heliocentric`, `${id} (${command}) relative to the Sun`, command, '500@10', DWARF_EPOCHS))
 }
 
+for (const block of blocks) records.set(/^  (\w+):/.exec(block)[1], block)
 const out = `${HEADER('JPL Horizons vector ephemerides; every entry carries the URL that produced it', 'fetch-fixtures.mjs')}
 import type { Vec3 } from '../vec3.js'
 
@@ -160,7 +237,7 @@ export interface HorizonsFixture {
 
 /** ICRF equatorial (\`REF_PLANE='FRAME'\`), geometric (\`VEC_CORR='NONE'\`), km and km/day. */
 export const HORIZONS: Record<string, HorizonsFixture> = {
-${blocks.join('\n')}
+${[...records.values()].join('\n')}
 }
 
 /**
@@ -190,5 +267,5 @@ export const PLAN_MARS_ECLIPTIC = {
   ],
 } as const
 `
-writeRecordSections(new URL('../src/__fixtures__/horizons.ts', import.meta.url), out, 'horizons')
+writeRecordSections(destination, out, 'horizons')
 process.stdout.write(`wrote ${blocks.length} fixtures\n`)

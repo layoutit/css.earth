@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 31.834429368686816,
+  "declinationDegrees": -14.87916033060259,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 15,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Benner et al. (1999), Icarus 139, 309–327; Goldstone and NASA/JPL radar astronomy: ecliptic J2000 lambda 24 deg, beta -26 deg, period 15 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied."
+}

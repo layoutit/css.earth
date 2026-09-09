@@ -1,0 +1,654 @@
+{
+  "schema": "csshyperion-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "cassini-n1506383441",
+      "path": "observations/N1506383441_2_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "737553c1ebb0de17daa91d5c3fb5a81e3b3607b3b12db623a606a73f5b539d8e",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506383441",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506383441-label",
+      "path": "observations/N1506383441_2_CALIB.LBL",
+      "expectedBytes": 3824,
+      "expectedSha256": "bbfa8326d1cf52d27a6502106d1692569d6944be85732a80337be36a0ace4907",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506383441",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506388174",
+      "path": "observations/N1506388174_2_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "b255f7921c6a03784e0de245bca7b36477058ad6d4b57f3e82ff5c7121c83002",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506388174",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506388174-label",
+      "path": "observations/N1506388174_2_CALIB.LBL",
+      "expectedBytes": 3824,
+      "expectedSha256": "270ed65bab34a60ad9ad619b4874dfda1f48fca2ae9c627714171f6ed77431fa",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506388174",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506388518",
+      "path": "observations/N1506388518_2_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "049a41fa5fa30efa56bd3e5d929e60bccc2f8b3359f9a14329f8897f75461d80",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506388518",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506388518-label",
+      "path": "observations/N1506388518_2_CALIB.LBL",
+      "expectedBytes": 3824,
+      "expectedSha256": "f28dba2654e87e842fd9a620abce361f5fb43f5249b493497f03a930f40b2aeb",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506388518",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506388840",
+      "path": "observations/N1506388840_2_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "7fd3bb4d4c4fd1b8b26dfa6cf35c48a1f7711bfe5da307762720cb801a43f85e",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506388840",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506388840-label",
+      "path": "observations/N1506388840_2_CALIB.LBL",
+      "expectedBytes": 3826,
+      "expectedSha256": "e40148cd2d9fee3eee273de248ed9b9de65667ee6c8432645ba74b0d88e8856d",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506388840",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506389178",
+      "path": "observations/N1506389178_2_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "29ff6539441b348e70fe0d5327d5666275ace1a337f287afe2a93b92dd828854",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506389178",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1506389178-label",
+      "path": "observations/N1506389178_2_CALIB.LBL",
+      "expectedBytes": 3826,
+      "expectedSha256": "bc997dbf344cf676ddc22688e9fb2332b27df8a634b72af0911aaff166f137e1",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506389178",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1513999046",
+      "path": "observations/N1513999046_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "13b6d5694f2e9024f220e7564d5cb5ae8227047fa7a1659b62b7655769f97183",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1513999046",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1513999046-label",
+      "path": "observations/N1513999046_1_CALIB.LBL",
+      "expectedBytes": 3824,
+      "expectedSha256": "43892adf0226af67675dfcfccc6550e912520507d76cae00bc29c5f5a1b935a2",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1513999046",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1530182624",
+      "path": "observations/N1530182624_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "7ea627f7f51829068d449d9ae8b066dea1add7d878aa3f0486352321cfe71be3",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1530182624",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1530182624-label",
+      "path": "observations/N1530182624_1_CALIB.LBL",
+      "expectedBytes": 3818,
+      "expectedSha256": "5cb00f73b654a2b487d69b94fb1ace72f0ed94b6353ea953ca72a1d229ef3add",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1530182624",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1530201013",
+      "path": "observations/N1530201013_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "467a117f2e9068662ea944ba03e779fccc4c843e33daabcb59681c36e51dcd1e",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1530201013",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1530201013-label",
+      "path": "observations/N1530201013_1_CALIB.LBL",
+      "expectedBytes": 3830,
+      "expectedSha256": "5ff322200c549f14d70c5e17b80b05b95468aed8cc8625e210191e6f66e8b816",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1530201013",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1692997492",
+      "path": "observations/N1692997492_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "d1b49a960d1fd6188c68a816cca69058c0ad81d607e4f73deea8592426841444",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1692997492",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1692997492-label",
+      "path": "observations/N1692997492_1_CALIB.LBL",
+      "expectedBytes": 3851,
+      "expectedSha256": "880b961befcc824747e8a42d366dd226411f7629775e625c9d37909225ee2eba",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1692997492",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1694888328",
+      "path": "observations/N1694888328_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "48c5e31fbc53dcca25a079494af57f2aca0713326184fbba04ca04c01f6b6e64",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1694888328",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1694888328-label",
+      "path": "observations/N1694888328_1_CALIB.LBL",
+      "expectedBytes": 3849,
+      "expectedSha256": "7de79939a35619ab13ca0ad0c05b392b41cde038c18914f0d62b756e456cb8ef",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1694888328",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1811772616",
+      "path": "observations/N1811772616_1_CALIB.IMG",
+      "expectedBytes": 4202496,
+      "expectedSha256": "97471861a6b170aba8e84a04fbba79bfe54a485d568943219d2a974cf55e02fa",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1811772616",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "cassini-n1811772616-label",
+      "path": "observations/N1811772616_1_CALIB.LBL",
+      "expectedBytes": 3855,
+      "expectedSha256": "f1698496de0c66100faa2683a33270d803d079867f9dd6ee3dfc21b0039b6c09",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1811772616",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "consumers": [
+        "cassini-frames"
+      ],
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Individual clear-filter Cassini observation. Camera geometry is controlled to the Thomas Hyperion shape frame."
+    },
+    {
+      "id": "thomas-hyperion-shape",
+      "path": "shape/hyperion_30k_plt.tab",
+      "expectedBytes": 2195250,
+      "expectedSha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/hyperion_30k_plt.tab",
+      "catalog": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+      "credit": "Peter Thomas, Joseph, Ansty; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release. Cite DOI 10.26033/ewy3-jy61.",
+      "licenseEvidence": [
+        "shape/hyperion_document.pdf",
+        "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/bundle_description.txt"
+      ],
+      "acquisition": "Download the original PDS4 plate model.",
+      "redistribution": "Retain author and archive credits.",
+      "consumers": [
+        "shape",
+        "scientific-surfaces"
+      ],
+      "lensId": "elevation",
+      "label": "Elevation",
+      "falseColor": true,
+      "projection": {
+        "type": "body-fixed-mesh",
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Radius above a 135 km reference sphere from the Cassini stereo and limb shape model. This shows global relief and elongation, not a finely resolved terrain DEM; shape uncertainty reaches 6 km on the less-observed side."
+    },
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf",
+      "credit": "NASA/JPL/SSI; Peter Thomas; PDS",
+      "license": "Public NASA mission and PDS scientific data; retain source credits.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "thomas-hyperion-shape",
+          "cassini-n1506383441",
+          "cassini-n1506388174",
+          "cassini-n1506388518",
+          "cassini-n1506388840",
+          "cassini-n1506389178",
+          "cassini-n1513999046",
+          "cassini-n1530182624",
+          "cassini-n1530201013",
+          "cassini-n1692997492",
+          "cassini-n1694888328",
+          "cassini-n1811772616"
+        ],
+        "size": 512,
+        "longitudeDegrees": 160,
+        "latitudeDegrees": 11,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 168394,
+      "expectedSha256": "97376a7f617f026109c67fed4816e0955b8a1a52362a09fb31b4963aa86a860f"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 5943,
+      "expectedSha256": "20b36fea683f5ff8a15f0d37a3a081f1584197edbbaf54325094c34de19dd07e",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "observations/cas_iss_v10.ti",
+      "expectedBytes": 31060,
+      "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 6848,
+      "expectedSha256": "a016e0e6652a623421765531c5d507f768c5975e8f027da39c26c9aa6e5360e3",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1625,
+      "expectedSha256": "26271a96ee6c3b7378dd17736505a4374d048dee4cce31f998a641005b1f17a3",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 545,
+      "expectedSha256": "295eb4fa65594a9cb51080231e3bb026cc34a573eb9919f4500fc5cddfb4f238",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 10456,
+      "expectedSha256": "b2a0d47f36a2e7f2cfda842d8405c6155c304416f864cb08ad62f4af898a08a8",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3930,
+      "expectedSha256": "b61f1d4b7244be20c3806cc02d1fe18762460deb5573d51a3c59ae936f23bb83",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "shape/hyperion_30k_plt.xml",
+      "expectedBytes": 12766,
+      "expectedSha256": "78c04481a0e7350d1f882f89279d92851084f045096198f5eed63b34976c9864",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "shape/hyperion_document.pdf",
+      "expectedBytes": 79311,
+      "expectedSha256": "8d1a549688360a8bee5971b2b4bfe11660a010d2225d910070a3c94be9477942",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "dca0ab4c3926df203d8529da3643b838c2f1a61e64334fcd3d8336b158a5bb9b",
+      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 1089,
+      "expectedSha256": "1e080d1bb25bb379560684a3bdb79a47c59797bfa8ca41ff0545138700e5a9c5"
+    }
+  ]
+}

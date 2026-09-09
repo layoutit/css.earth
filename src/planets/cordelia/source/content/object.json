@@ -1,0 +1,133 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "cordelia",
+  "displayName": "Cordelia",
+  "panel": {
+    "introduction": "Cordelia travels just inside Uranus’s bright epsilon ring. Its gravity helps confine the ring’s inner edge, while Voyager observations constrain the moon’s elongated shape.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Projected radius",
+        "value": "21 ± 3 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Model dimensions",
+        "value": "50 × 36 × 36 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Uranus",
+        "value": "About 8.04 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Uranus",
+        "value": "About 49,752 km"
+      },
+      {
+        "id": "mass",
+        "label": "Mass from ring dynamics",
+        "value": "(6.08 ± 0.57) × 10¹⁶ kg"
+      },
+      {
+        "id": "ring-role",
+        "label": "Ring shepherd",
+        "value": "Inner edge of the epsilon ring"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation",
+        "value": "Synchronous model"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 2 imaging team · 1986"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "title": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "detail": "Measured shape",
+        "thumbnail": "/scenes/cordelia/cordelia-model-thumbnail.webp",
+        "surface": "cordelia-model-surface@2x.webp",
+        "poles": "cordelia-model-poles@2x.webp",
+        "source": {
+          "id": "measured-ellipsoid",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2401.04634"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Cordelia overview",
+      "href": "https://science.nasa.gov/uranus/moons/cordelia/"
+    },
+    {
+      "label": "Karkoschka; French et al.",
+      "role": "surface",
+      "description": "Published prolate dimensions, ring-derived mass and uncertainties",
+      "href": "https://arxiv.org/abs/2401.04634"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Voyager source inventory",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/uranus/moons/cordelia/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2001); French et al. (2024); IAU/WGCCRE"
+    }
+  }
+}

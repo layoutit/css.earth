@@ -27,6 +27,7 @@ import {
   BODY_FIXED_SUN_DIRECTIONS,
   BODY_FIXED_TO_ICRF_MATRICES,
   BODY_ORBITS,
+  BODY_HELIOCENTRIC_STATES,
   SOLAR_GEOMETRY_EPOCH_JD_TT,
   SOLAR_GEOMETRY_EPOCH_LABEL,
 } from "./solar-geometry.mjs";
@@ -78,7 +79,13 @@ export const SYSTEM_ORBIT_SEGMENTS = 120;
 export const GEOMETRIC_ALBEDO = Object.freeze({
   mercury: 0.142, venus: 0.689, earth: 0.434, mars: 0.170,
   jupiter: 0.538, saturn: 0.499, uranus: 0.488, neptune: 0.442,
-  pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81,
+  // Didymos system visible geometric albedo 0.15 ± 0.02: Daly et al. (2023),
+  // https://www.nature.com/articles/s41586-023-05810-5; approximate point photometry.
+  didymos: 0.15,
+  // Parent context only: common-system geometric albedos, not mapped surface colors.
+  // Scheirich et al.2021 Table4; JPL SBDB Grav2012/Mainzer2014, pinned in docs/moons/b1-preparation/parent-inputs.json.
+  moshup: 0.162, sylvia: 0.046, patroclus: 0.047,
+  pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81, vesta: 0.4228,
 });
 
 // Illumination and brightness are as seen from the observer body, not from
@@ -113,6 +120,7 @@ export async function preparePlanetarySystem({
   kilometersPerUnit,
   bodies = PLANETARY_SYSTEM_BODIES,
   dwarfPlanets = DWARF_PLANET_BODIES,
+  asteroids = [],
   astronomy = null,
 }) {
   if (!/^[a-z][a-z0-9-]*$/u.test(bodyId ?? "") ||
@@ -143,7 +151,23 @@ export async function preparePlanetarySystem({
     DWARF_PLANET_IDS,
     dwarfPlanetElements,
     dwarfPlanetPositionKm,
+    ASTEROID_IDS,
+    asteroidElements,
+    asteroidPositionKm,
+    COMET_IDS = [],
+    cometElements,
+    cometPositionKm,
   } = astronomy ?? await loadAstronomyPackage();
+  if (!Array.isArray(asteroids) || asteroids.some(id => !ASTEROID_IDS.includes(id)) ||
+      new Set([...bodies, ...dwarfPlanets, ...asteroids]).size !== bodies.length + dwarfPlanets.length + asteroids.length) {
+    throw new TypeError('Unknown or duplicate asteroid in planetary system.');
+  }
+  // A selected heliocentric small body participates in the same system even
+  // when it is not one of the context objects requested by a different scene.
+  const smallBodies = [...asteroids];
+  if ([...ASTEROID_IDS, ...COMET_IDS].includes(bodyId) && !smallBodies.includes(bodyId)) smallBodies.push(bodyId);
+  const smallBodyPosition = (id, epoch) => (COMET_IDS.includes(id) ? cometPositionKm : asteroidPositionKm)(id, epoch);
+  const smallBodyElements = id => (COMET_IDS.includes(id) ? cometElements : asteroidElements)(id);
   if (dwarfPlanets.some((id) => !DWARF_PLANET_IDS.includes(id))) {
     throw new TypeError("An unknown dwarf planet was requested.");
   }
@@ -158,10 +182,14 @@ export async function preparePlanetarySystem({
     return scale(toSun, -BODY_ORBITS[id].heliocentricDistanceAu);
   };
 
-  const satelliteObserver = ![...bodies, ...dwarfPlanets].includes(bodyId);
+  // A satellite's heliocentric asteroid parent is required even when the
+  // caller did not request additional context asteroids.
+  const centerBodyId = BODY_ORBITS[bodyId].centerBodyId;
+  if (ASTEROID_IDS.includes(centerBodyId) && !smallBodies.includes(centerBodyId)) smallBodies.push(centerBodyId);
+  const satelliteObserver = ![...bodies, ...dwarfPlanets, ...smallBodies].includes(bodyId);
   const observerUnitMeters = satelliteObserver ? M_PER_KM / 10 : M_PER_KM;
   const parent = satelliteObserver ? BODY_ORBITS[bodyId].centerBodyId : null;
-  if (satelliteObserver && !bodies.includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
+  if (satelliteObserver && ![...bodies, ...dwarfPlanets, ...smallBodies].includes(parent)) throw new TypeError("Observer parent is absent from the planetary system.");
   const observerPositionKm = satelliteObserver ? scale(
     applyMatrix(BODY_FIXED_TO_ICRF_MATRICES[bodyId], BODY_ORBITS[bodyId].centerPositionAu),
     -ASTRONOMICAL_UNIT_KILOMETERS) : null;
@@ -181,18 +209,22 @@ export async function preparePlanetarySystem({
       id,
       "sun",
       id === parent ? parentUnitMeters : M_PER_KM,
-      heliocentricIcrfAu(id),
+      BODY_HELIOCENTRIC_STATES[id]
+        ? scale(BODY_HELIOCENTRIC_STATES[id].positionKm, 1 / ASTRONOMICAL_UNIT_KILOMETERS)
+        : heliocentricIcrfAu(id),
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
   }
   // Dwarf planets: the package's own Keplerian position at the epoch (km,
   // ICRF, heliocentric), as one more km frame each under the Sun.
-  for (const id of dwarfPlanets) {
+  for (const id of [...dwarfPlanets, ...smallBodies]) {
     tree.add(fixedFrame(
       id,
       "sun",
-      M_PER_KM,
-      scale(dwarfPlanetPositionKm(id, SOLAR_GEOMETRY_EPOCH_JD_TT), 1 / ASTRONOMICAL_UNIT_KILOMETERS),
+      id === parent ? parentUnitMeters : M_PER_KM,
+      scale(BODY_HELIOCENTRIC_STATES[id]
+        ? BODY_HELIOCENTRIC_STATES[id].positionKm
+        : (smallBodies.includes(id) ? smallBodyPosition : dwarfPlanetPositionKm)(id, SOLAR_GEOMETRY_EPOCH_JD_TT), 1 / ASTRONOMICAL_UNIT_KILOMETERS),
       BODIES[id].meanRadiusKm * M_PER_KM,
     ));
   }
@@ -263,11 +295,30 @@ export async function preparePlanetarySystem({
     };
   };
   const orbitFacts = (id) => {
-    if (dwarfPlanets.includes(id)) {
-      const elements = dwarfPlanetElements(id);
+    if (BODY_HELIOCENTRIC_STATES[id]) {
+      // A primary-specific ephemeris can differ from the package's older
+      // barycentric conic. Derive this one osculating ellipse from the SAME
+      // position and velocity used by the frame tree, at the prepared epoch.
+      // All observers share this canonical state and its osculating conic.
+      const { semiMajorAxisKm, eccentricity, normalIcrf, perihelionIcrf } =
+        heliocentricOrbitFromState(BODY_HELIOCENTRIC_STATES[id], BODIES.sun.gravitationalParameterKm3PerS2);
+      return {
+        kind: COMET_IDS.includes(id) ? 'comet' : smallBodies.includes(id) ? 'asteroid' : dwarfPlanets.includes(id) ? 'dwarf-planet' : 'planet',
+        semiMajorAxisAu: semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
+        eccentricity,
+        inclinationDegrees: Math.acos(Math.max(-1, Math.min(1, normalIcrf[2]))) * 180 / Math.PI,
+        inclinationReference: "icrf-equator",
+        normal: icrfDirectionToScene(normalIcrf),
+        perihelionDirection: icrfDirectionToScene(perihelionIcrf),
+        trueAnomalyDegrees: null,
+        source: "source-primary-state-vector-via-solar-geometry",
+      };
+    }
+    if (dwarfPlanets.includes(id) || smallBodies.includes(id)) {
+      const elements = (smallBodies.includes(id) ? smallBodyElements : dwarfPlanetElements)(id);
       const { normalIcrf, perihelionIcrf } = keplerOrientation(elements);
       return {
-        kind: "dwarf-planet",
+        kind: COMET_IDS.includes(id) ? 'comet' : smallBodies.includes(id) ? 'asteroid' : 'dwarf-planet',
         semiMajorAxisAu: elements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity: elements.eccentricity,
         inclinationDegrees: elements.inclinationRad * 180 / Math.PI,
@@ -292,7 +343,7 @@ export async function preparePlanetarySystem({
       source: "vsop87a-state-vector-via-solar-geometry",
     };
   };
-  const others = [...bodies, ...dwarfPlanets].filter((id) => id !== bodyId).map((id) => {
+  const others = [...bodies, ...dwarfPlanets, ...smallBodies].filter((id) => id !== bodyId).map((id) => {
     const orbit = orbitFacts(id);
     const position = toScene(resolveKilometers(id));
     const { normal, perihelionDirection } = orbit;
@@ -461,6 +512,35 @@ export async function preparePlanetarySystem({
     maximumExtentUnits,
     runtimeGeometryDerivation: false,
   });
+}
+
+function heliocentricOrbitFromState({ positionKm, velocityKmPerDay }, muKm3PerS2) {
+  if (![positionKm, velocityKmPerDay].every(vector =>
+    Array.isArray(vector) && vector.length === 3 && vector.every(Number.isFinite)) || !positive(muKm3PerS2)) {
+    throw new TypeError("A parent heliocentric state requires finite ICRF km and km/day vectors and solar GM.");
+  }
+  const velocityKmPerSecond = scale(velocityKmPerDay, 1 / 86400);
+  const radius = magnitude(positionKm);
+  const speedSquared = dot(velocityKmPerSecond, velocityKmPerSecond);
+  const angularMomentum = cross(positionKm, velocityKmPerSecond);
+  const semiMajorAxisKm = 1 / (2 / radius - speedSquared / muKm3PerS2);
+  const eccentricityVector = subtract(
+    scale(cross(velocityKmPerSecond, angularMomentum), 1 / muKm3PerS2),
+    scale(positionKm, 1 / radius),
+  );
+  const eccentricity = magnitude(eccentricityVector);
+  if (!positive(radius) || !positive(magnitude(angularMomentum)) ||
+      !positive(semiMajorAxisKm) || !Number.isFinite(eccentricity) || eccentricity >= 1) {
+    throw new RangeError("The parent heliocentric state must define a bound, non-degenerate ellipse.");
+  }
+  return {
+    semiMajorAxisKm,
+    eccentricity,
+    normalIcrf: normalize(angularMomentum),
+    // At exact circularity perihelion is undefined; the epoch radius is a
+    // harmless ellipse-axis convention, without changing the orbit or phase.
+    perihelionIcrf: normalize(eccentricity > 1e-12 ? eccentricityVector : positionKm),
+  };
 }
 
 function applyMatrix(matrix, [x, y, z]) {

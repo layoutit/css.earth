@@ -1,0 +1,92 @@
+{
+  "modelId": 5394,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5394",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/58886/shape.txt",
+  "spinUrl": null,
+  "version": "2019-10-23",
+  "lambda": 58,
+  "beta": 15,
+  "periodHours": 6.21516,
+  "nonconvex": false,
+  "calibrated": false,
+  "sourceFields": {
+    "ID": "5394",
+    "Asteroid ID": "(444) Gyptis",
+    "Lambda": "58",
+    "Beta": "15",
+    "Period": "6.21516",
+    "YORP": "",
+    "JD0": "2457229",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "1.51",
+    "LSM Parameter 3": "0.22",
+    "LSM Parameter 4": "-0.45",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "",
+    "Equivalent Diameter": "",
+    "Equivalent Diameter Error": "",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:11:59",
+    "Modified": "2020-10-05 13:11:59"
+  },
+  "originalVolume": 1.0000000605846517,
+  "originalSignedVolume": 1.0000000605846517,
+  "originalVolumeEquivalentDiameter": 1.2407010068546118,
+  "originalUnits": "dimensionless DAMIT source units; uncalibrated model",
+  "vertices": 548,
+  "faces": 1092,
+  "extentsSourceUnits": [
+    [
+      -0.778607,
+      0.781438
+    ],
+    [
+      -0.621775,
+      0.765714
+    ],
+    [
+      -0.614178,
+      0.513012
+    ]
+  ],
+  "radialRangeSourceUnits": [
+    0.5231573082152251,
+    0.8470763538430288
+  ],
+  "firstVertexSourceUnits": [
+    0.349919,
+    -0.151761,
+    0.513012
+  ],
+  "firstFaceZeroBased": [
+    0,
+    1,
+    2
+  ],
+  "alternatives": [
+    {
+      "modelId": 5395,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5395",
+      "lambda": 234,
+      "beta": 38,
+      "periodHours": 6.21513,
+      "reason": "Original alternative pole solution retained as an unresolved ambiguity; one representative model is displayed."
+    }
+  ],
+  "selectionReason": "One original published model retained for a single body view. Alternative mirror poles remain unresolved, not averaged.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/658"
+  ]
+}

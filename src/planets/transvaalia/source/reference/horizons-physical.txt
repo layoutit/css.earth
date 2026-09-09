@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27715%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              715 Transvaalia (A911 HH)        2026-Sep-08 10:25:38
+Rec #:     715 (+COV) Soln.date: 2026-Jun-05_03:57:34   # obs: 7983 (1911-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458380.5 ! 2018-Sep-19.00 (TDB)         Residual RMS= .21705
+   EC= .0827190475630824   QR= 2.538848370681478   TP= 2458389.1018337915
+   OM= 46.08239623094483   W=  300.9224817143082   IN= 13.82022183933338
+   A= 2.767797983743784    MA= 358.1588314933956   ADIST= 2.996747596806089
+   PER= 4.60479            N= .21404372            ANGMOM= .028520538
+   DAN= 2.63678            DDN= 2.87089            L= 347.7519747
+   B= -11.824999           MOID= 1.56464005        TP= 2018-Sep-27.6018337915
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 12.729             ROTPER= 11.83
+   H= 10.04                G= .150                 B-V= n.a.
+                           ALBEDO= .273            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#73, OCC=0
+2: source=ORB
+*******************************************************************************

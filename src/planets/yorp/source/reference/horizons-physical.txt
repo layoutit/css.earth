@@ -1,0 +1,33 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2754509%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                54509 YORP (2000 PH5)          2026-Sep-08 06:30:55
+Rec #:   54509 (+COV) Soln.date: 2022-Dec-20_14:08:08    # obs: 550 (2000-2005)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2452655.5 ! 2003-Jan-16.00 (TDB)         Residual RMS= .5455
+   EC= .2299151720454501   QR= .77011696168592     TP= 2452765.0427546403
+   OM= 281.8868873799125   W=  274.1048068048547   IN= 1.833143913787904
+   A= 1.000041727521701    MA= 252.0405783759135   ADIST= 1.229966493357482
+   PER= 1.00008            N= .985545981           ANGMOM= .016741616
+   DAN= .93184             DDN= .9630300000000001  L= 195.9937888
+   B= -1.8284399           MOID= .00277233         TP= 2003-May-05.5427546403
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= n.a.               ROTPER= .2029
+   H= 22.66                G= .150                 B-V= n.a.
+                           ALBEDO= n.a.            STYP= n.a.
+
+Asteroid non-gravitational force model (AMRAT= m^2/kg;A1,A2,A3=au/d^2;R0=au):
+   AMRAT=  0.
+   A1= 0.                  A2= -8.720499863557E-14 A3= 0.
+ Non-standard or simulated/proxy model:
+   ALN=  1.            NK=  0.       NM=  2.       NN=  5.093    R0=  1.
+
+ASTEROID comments: 
+1: soln ref.= JPL#88, OCC=0           radar( 4 delay, 1 Dop.)
+2: source=ORB; Nongravitational accels. using nonstandard g(r) = (1 au/ r)^2
+*******************************************************************************

@@ -18,6 +18,7 @@ import {
 } from "../src/navigation/marker-descriptors.mjs";
 import {
   renderMarker,
+  readMarkerImage,
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
 } from "../src/navigation/marker-recipe.mjs";
@@ -86,7 +87,7 @@ export async function prepareNavigation({
     }));
     const generatedTargets = new Set(changes.map(({ target }) => target));
     const obsolete = [...descriptors.flatMap(({ planetId }) => [`${planetId}.webp`, `${planetId}-context.webp`]),
-      "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp"];
+      "blackhole-marker.webp", "blackhole-marker@2x.webp", "supernova-marker.webp", "supernova-marker@2x.webp", "sun-indicator-hexagon.png"];
     changes.push(...[...new Set(obsolete)].map((filename) => ({ target: resolve(outputRoot, filename) })).filter(({ target }) => !generatedTargets.has(target)));
     changes.push({ source: stagedPresentation, target: presentationPath });
     await mkdir(outputRoot, { recursive: true });
@@ -152,17 +153,16 @@ export async function moveNavigationFile(source, target, io = { rename, copyFile
 }
 
 // A moon's parent can occupy hundreds of pixels in the shared world view.
-// Derive the needed parents from the astronomy catalogue; UI icons stay tiny.
+// Parents and explicitly sized resolved views use their own image; UI icons stay tiny.
 export async function prepareContextMarkers({ projectRoot, outputRoot, descriptors, planets = PLANET_MARKER_PLANETS }) {
   const { BODIES } = await loadAstronomyPackage();
   const parents = new Set(planets.filter(({ classification }) => classification === "satellite")
     .map(({ id }) => BODIES[id]?.parent).filter(Boolean));
   const markers = {};
   for (const descriptor of descriptors) {
-    if (!parents.has(descriptor.planetId)) continue;
+    if (!parents.has(descriptor.planetId) && !descriptor.context) continue;
     const sourcePath = resolve(projectRoot, "src/planets", descriptor.planetId, "source", descriptor.source.path);
-    const bytes = await validateMarkerSourceBytes(descriptor.source, sourcePath);
-    let crop = sharp(bytes);
+    let crop = await readMarkerImage(descriptor.source, sourcePath);
     for (const operation of descriptor.operations) {
       if (operation.type === "resize") break;
       if (operation.type === "rotate") crop = crop.rotate();
@@ -171,7 +171,7 @@ export async function prepareContextMarkers({ projectRoot, outputRoot, descripto
     }
     const { info } = await crop.raw().toBuffer({ resolveWithObject: true });
     // Fixed canonical image, capped by the actual native crop, never the UI atlas.
-    const pixels = Math.min(1536, info.width, info.height);
+    const pixels = Math.min(descriptor.context?.pixels ?? 1536, info.width, info.height);
     const png = await renderMarker(descriptor, { sourcePath, tileSize: pixels });
     const filename = `${descriptor.planetId}-context.webp`;
     await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(outputRoot, filename));
@@ -489,23 +489,23 @@ export async function prepareSunIndicator({
   const swatch = JSON.parse(await readFile(resolve(projectRoot, "src/planets/sun/swatch.json"), "utf8"));
   const hex = swatch.display?.hex ?? swatch.hex;
   if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error("Invalid Sun swatch.");
-  const points = Array.from({ length: 6 }, (_, index) => {
-    const angle = index * Math.PI / 3;
+  const points = Array.from({ length: 7 }, (_, index) => {
+    const angle = index * Math.PI * 2 / 7 - Math.PI / 2;
     const radius = 9.1;
     return [10 + Math.cos(angle) * radius, 10 + Math.sin(angle) * radius];
   });
   const inset = (point, neighbour) => point.map((value, axis) => value + (neighbour[axis] - value) * .12);
   const rounded = points.map((point, index) => ({ point,
-    before: inset(point, points[(index + 5) % 6]), after: inset(point, points[(index + 1) % 6]),
+    before: inset(point, points[(index + 6) % 7]), after: inset(point, points[(index + 1) % 7]),
   }));
   const xy = point => point.map(value => value.toFixed(4)).join(" ");
   const path = `M ${xy(rounded[0].before)} ` + rounded.map(({ point, after }, index) =>
-    `Q ${xy(point)} ${xy(after)} L ${xy(rounded[(index + 1) % 6].before)}`).join(" ") + " Z";
+    `Q ${xy(point)} ${xy(after)} L ${xy(rounded[(index + 1) % 7].before)}`).join(" ") + " Z";
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 20 20">` +
     `<path d="${path}" fill="none" stroke="${hex}" stroke-width="1.5" stroke-linejoin="round"/>` +
     `<circle cx="10" cy="10" r="1" fill="${hex}"/></svg>`;
   await mkdir(outputRoot, { recursive: true });
-  await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, "sun-indicator-hexagon.png"));
+  await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, "sun-indicator-heptagon.png"));
 }
 
 async function loadObjectDescriptor(planetId, projectRoot) {

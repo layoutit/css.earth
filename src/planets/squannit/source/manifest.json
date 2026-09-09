@@ -1,0 +1,198 @@
+{
+  "schema": "csssquannit-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "radar-shape",
+      "path": "shape/kw4b.obj",
+      "expectedBytes": 67298,
+      "expectedSha256": "3d65690a33c5bb2ef1a7b2f40c0a6faf26f40bd87b0f6bc27a7f801d4ec50256",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+      "credit": "Ostro et al.(2006), JPL radar team; original1999 KW4 Beta model",
+      "license": "NASA/JPL original radar source; public-data catalog identifies public-domain release",
+      "licenseEvidence": [
+        "https://catalog.data.gov/dataset/radar-shape-models-of-asteroids-compiled-by-lawrence-v1-0"
+      ],
+      "acquisition": "Checked-in original JPL OBJ; exact restoration pin in acquisition recipe.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 225.50434622701192
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+      "credit": "Ostro et al.(2006), JPL radar team; original1999 KW4 Beta model",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "JPL radar shape model of 1999 KW 4 Beta, with finite resolution and uneven radar coverage. The original mesh is retained before simplification. Display phase is arbitrary; libration is not reproduced. The grid marks unmapped visible-light terrain. Later mutual-event photometry favors roughly 1.3 times the original radar model’s linear scale. This view retains the original 2006 mesh dimensions.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 225.50434622701192
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4609,
+      "expectedSha256": "61e4005cacfba53d1656a62fe3c2c53fb5ea974e9e68c90eb175b1886e923a9c",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 4101,
+      "expectedSha256": "ad81cd7d85cbcb64451b1f0e7423c5d337ea9b5ac50cf7ca63ee4bf21e6079a5",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "orbit/published-parameters.json",
+      "expectedBytes": 4407,
+      "expectedSha256": "0061b2a8a915b03b9cd65cb4216fb757249ae868face4c8014e95cdbb86bb2bf",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 690,
+      "expectedSha256": "d296165c1d1fe18a24b7f079dd46c96be87af7967bf133e634989d7b207d33ef",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1276,
+      "expectedSha256": "4a3a9121fdaf077e494d1931d00e1925478a5b17d35d6ff8425e04ad08cd0d02",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 384,
+      "expectedSha256": "f753949667c9f6adc347002677cedf00cf9ca4f89f9d833ef369ece55e143784",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2762,
+      "expectedSha256": "afc9c4605910f28e36255135839f796adea67c56ea17993385544749eab77995",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4688,
+      "expectedSha256": "758fa3478adcd5f9fd29df3c561709a3a25edc6beb89a02742f31bc68be25799",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 851,
+      "expectedSha256": "3be3b72362712deb434dbe2e7a89cf87d798900a1a80afa55a74103b962906c6",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "validation/epoch-state.json",
+      "expectedBytes": 2967,
+      "expectedSha256": "56bf6533cc0f6257bdb92bd25b94f39aef905d43799a3750c66267b151421b44",
+      "purpose": "Published orbit source receipt or independent fixed-epoch validation; limitations retained with the input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
+      "credit": "Ostro et al.(2006), JPL radar team; original1999 KW4 Beta model",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "radar-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 65601,
+      "expectedSha256": "1adf35ea1669416b9088e4cb707f8103a7e746925ab758af82917daee3fe32ce"
+    }
+  ]
+}

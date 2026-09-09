@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "galatea",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Galatea",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "05a46791c4e44882cccc44dc127ececc6adb02a110f22bb76df79315dec0f9e3"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "3e2838f60e2b2ebdbab317ea6a66c8a3f3ef246d33992bf05f42501c73ed0556"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "9d1fc2d22e26c33d29bb25b689dd91d0854f940074600fd74970669e68ecf2e7"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "ab45f7882d99c0f56a24513e8cd03d6432e31c703dde41c872d7f60e0cb133db"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 88
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4464307467441.321,
+        219889574690.3355,
+        -21105098323.99838
+      ],
+      "presentationToReference": [
+        0.9990634348829128,
+        5.551115123125783e-17,
+        -0.0432695398630011,
+        0.03969902665829092,
+        0.3977771559319137,
+        0.9166227803742946,
+        0.017211634505187173,
+        -0.9174820620691817,
+        0.39740461172329367
+      ],
+      "orbitUpReference": [
+        -5.551115123125783e-17,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 382.60869565217394,
+      "bodyRadiusM": 88000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "df6d8e1ce7bc7aaea3e838f8531423ce031eaa2ddc66f1c9eb19a282a941346f"
+  }
+}

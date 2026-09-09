@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "comet-1p",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "expectedBytes": 65726,
+    "expectedSha256": "88e4da495091cecc72e66dbc6a9676ea2ab40ca48bceaa367f1d97a95faa90da",
+    "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
+    "credit": "Philip Stooke; Alain Abergel (pointing); Giotto and Vega missions; NASA PDS",
+    "license": "PDS public scientific archive; credit Stooke and Abergel",
+    "licenseEvidence": [
+      "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.xml"
+    ],
+    "acquisition": "Checked-in model context; reproduced and hash-verified by shared preparation.",
+    "redistribution": "Preserve the PDS product identifier and the label request to credit both Abergel and Stooke.",
+    "consumers": [
+      "navigation"
+    ],
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "stooke-halley",
+        "model-surface"
+      ],
+      "size": 512,
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 15,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "model"
+    }
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

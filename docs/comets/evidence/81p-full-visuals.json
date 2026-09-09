@@ -1,0 +1,94 @@
+{
+  "id": "comet-81p",
+  "origin": "http://127.0.0.1:4258",
+  "browser": "152.0.7977.76",
+  "headless": true,
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "dpr": 1,
+  "runtimeSha256": "fc1f9770607126d27798b29c176966dad3485b77fa63518fa5e75e269596a6cb",
+  "loaded": [
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-surface@2x.webp",
+      "bytes": 171674,
+      "sha256": "8876359e9adf6ba2eb287a56daf76407b649ce2b804e6321ffbc7560476c827e"
+    },
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-shadow@2x.webp",
+      "bytes": 136968,
+      "sha256": "75c2f93feedd0dddf5490b0d78941bafcd04ad4bb704cb0b7f86d1a19d92aad2"
+    }
+  ],
+  "nonBodyResponses": [
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-surface@2x.webp",
+      "status": 304,
+      "kind": "not-modified"
+    },
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-shadow@2x.webp",
+      "status": 304,
+      "kind": "not-modified"
+    },
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-surface@2x.webp",
+      "status": 304,
+      "kind": "not-modified"
+    },
+    {
+      "url": "http://127.0.0.1:4258/scenes/comet-81p/comet-81p-model-shadow@2x.webp",
+      "status": 304,
+      "kind": "not-modified"
+    }
+  ],
+  "captures": [
+    {
+      "name": "81p-full-user-view",
+      "actions": "User camera URL from the reported missing-half view.",
+      "url": "http://127.0.0.1:4258/comet-81p/?v=MMZAItdz-qz75UFCxzNAAAAAP8Yl58BbCM8_11v9KMZwjD-2sTVp9MqUAAA",
+      "sceneTransform": "matrix3d(0.014357, 0.00575447, -0.0126792, 0, -0.000702082, 0.0184881, 0.00759585, 0, 0.0139062, -0.00500759, 0.0134737, 0, 0, 0, 116.843, 1)",
+      "shadows": true,
+      "bodyLeaves": 992,
+      "sha256": "160ce665c8b4cae4398b40121bb092359a3217769b401b7e01db0806d7b5dd90"
+    },
+    {
+      "name": "81p-full-front-shadows",
+      "actions": "Default production view.",
+      "url": "http://127.0.0.1:4258/comet-81p/",
+      "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 6e-06, 0, 116.839, 1)",
+      "shadows": true,
+      "bodyLeaves": 992,
+      "sha256": "311cf1212a8f351d76e5a172196baea17c8a185b0df406f7f07c6e3823e07693"
+    },
+    {
+      "name": "81p-full-front-flood",
+      "actions": "Toggle Shadows off through the existing control.",
+      "url": "http://127.0.0.1:4258/comet-81p/?v=MMZAItd3i1XW5UFCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 6e-06, 0, 116.839, 1)",
+      "shadows": false,
+      "bodyLeaves": 992,
+      "sha256": "3bd923755e6e2f21725facd393f8cee229b8465c82432f170b090bffee0c4f52"
+    },
+    {
+      "name": "81p-full-close-flood",
+      "actions": "One native wheel gesture: deltaY -450, pointer at 800,450.",
+      "url": "http://127.0.0.1:4258/comet-81p/?v=MMZAC4j8pI9DIkFCxzNAAAAAP8Y6Gn4LiWAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 0, 0, 834.148, 1)",
+      "shadows": false,
+      "bodyLeaves": 992,
+      "sha256": "8b8f8aadb6091e8a1603220d6fb6b8576f75f8cb7b8f5b6e48b2a4d87b43f9bd"
+    },
+    {
+      "name": "81p-full-far-side",
+      "actions": "Four native horizontal 250-pixel drags, matching the previous open-side capture; Shadows off.",
+      "url": "http://127.0.0.1:4258/comet-81p/?v=MEZAItd3i1XW5UFCxzNAAAAAv5GnZOXZU-a_xh39m__F8b-5B7B_bntDAAA",
+      "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -3e-06, 0, 116.839, 1)",
+      "shadows": false,
+      "bodyLeaves": 992,
+      "sha256": "8f326129960438f3785951c2706fc11b7395ceadbbde8112479aa93c841187f9"
+    }
+  ],
+  "errors": []
+}

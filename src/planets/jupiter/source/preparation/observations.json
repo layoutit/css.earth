@@ -197,8 +197,8 @@
           255
         ]
       ],
-      "qualification": "F275W single-band Hubble OPAL data with declared false color and Juno-structured continuation beyond measured polar coverage",
-      "operation": "scalar-harmonic-poles",
+      "qualification": "F275W single-band Hubble OPAL observation, 11 December 2025; declared false color. Gray grid marks unavailable polar-connected zero fill; no Juno structure or spectral extrapolation. Dark interior samples remain observations.",
+      "operation": "scalar-observed-gaps",
       "files": {
         "surface": "jupiter-lens-ultraviolet.webp",
         "surface2x": "jupiter-lens-ultraviolet@2x.webp",
@@ -215,53 +215,14 @@
           0.995
         ],
         "minimumCoverageFraction": 0.5,
-        "lookbackDegrees": 0.5,
-        "convergenceExponent": 2,
-        "edgeTransitionRows": 24
+        "noData": 0,
+        "coverage": "polar-connected-zero"
       },
-      "polarDetails": {
-        "north": {
-          "structure": {
-            "path": "surface/juno-pia23808-north-polar-projection.jpg",
-            "resize": {
-              "fit": "fill"
-            }
-          },
-          "contrast": 0.2,
-          "tint": 0,
-          "structureRadius": 0.9
-        },
-        "south": {
-          "structure": {
-            "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
-            "extract": {
-              "left": 875,
-              "top": 0,
-              "width": 2249,
-              "height": 2249
-            },
-            "resize": {
-              "fit": "fill"
-            }
-          },
-          "contrast": 0.18,
-          "tint": 0,
-          "structureRadius": 0.9
-        }
-      },
-      "continuation": {
+      "projection": {
         "overlap": 1.035,
-        "detailLookbackDegrees": 0.5,
-        "detailBlendStartRadius": 0.08,
-        "detailBlendEndRadius": 0.96,
-        "edgeStructureWeight": 0.3,
         "alphaOpaqueRadius": 0.43,
         "alphaTransparentRadius": 0.96,
-        "measuredProjectionEdgeLatitudeDegrees": 64
-      },
-      "structuralAuthority": {
-        "north": "NASA Juno PIA23808",
-        "south": "NASA Juno JIRAM PIA23556"
+        "boundaryLatitudeDegrees": 64
       }
     },
     {
@@ -289,8 +250,8 @@
           239
         ]
       ],
-      "qualification": "FQ889N single-band Hubble OPAL data with declared false color and Juno-structured continuation beyond measured polar coverage",
-      "operation": "scalar-harmonic-poles",
+      "qualification": "FQ889N single-band Hubble OPAL observation, 11 December 2025; declared false color. Gray grid marks unavailable polar-connected zero fill; no Juno structure or spectral extrapolation. Dark interior samples remain observations.",
+      "operation": "scalar-observed-gaps",
       "files": {
         "surface": "jupiter-lens-methane.webp",
         "surface2x": "jupiter-lens-methane@2x.webp",
@@ -307,53 +268,14 @@
           0.995
         ],
         "minimumCoverageFraction": 0.5,
-        "lookbackDegrees": 0.5,
-        "convergenceExponent": 2,
-        "edgeTransitionRows": 24
+        "noData": 0,
+        "coverage": "polar-connected-zero"
       },
-      "polarDetails": {
-        "north": {
-          "structure": {
-            "path": "surface/juno-pia23808-north-polar-projection.jpg",
-            "resize": {
-              "fit": "fill"
-            }
-          },
-          "contrast": 0.2,
-          "tint": 0,
-          "structureRadius": 0.9
-        },
-        "south": {
-          "structure": {
-            "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
-            "extract": {
-              "left": 875,
-              "top": 0,
-              "width": 2249,
-              "height": 2249
-            },
-            "resize": {
-              "fit": "fill"
-            }
-          },
-          "contrast": 0.18,
-          "tint": 0,
-          "structureRadius": 0.9
-        }
-      },
-      "continuation": {
+      "projection": {
         "overlap": 1.035,
-        "detailLookbackDegrees": 0.5,
-        "detailBlendStartRadius": 0.08,
-        "detailBlendEndRadius": 0.96,
-        "edgeStructureWeight": 0.3,
         "alphaOpaqueRadius": 0.43,
         "alphaTransparentRadius": 0.96,
-        "measuredProjectionEdgeLatitudeDegrees": 64
-      },
-      "structuralAuthority": {
-        "north": "NASA Juno PIA23808",
-        "south": "NASA Juno JIRAM PIA23556"
+        "boundaryLatitudeDegrees": 64
       }
     }
   ],

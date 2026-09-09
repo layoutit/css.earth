@@ -1,0 +1,159 @@
+{
+  "schema": "cssearth-halley-qualification@1",
+  "recordedAt": "2026-09-08T13:29:46.463866+00:00",
+  "applicationRevision": "f3e5c127ea705db533c0b61790c7f022680bb89a",
+  "node": "24.19.0",
+  "pnpm": "10.33.0",
+  "chrome": "152.0.7977.76",
+  "productionOrigin": "http://127.0.0.1:4258",
+  "developmentOrigin": "http://127.0.0.1:4259",
+  "fullTestScope": "Full suite ran with the Halley implementation at 0eca59390f23ee0b39d732da9d29f25a1eefd500. The final framing-only source/prepared correction was covered by seven focused tests, source closure and a new full build. All final browser captures bind f3e5c127 application bytes.",
+  "gates": [
+    {
+      "command": "pnpm acquire:planets -- --verify-only",
+      "result": "PASS: 76 registered source closures",
+      "log": "output/comet-intake/halley/acquire-final.log",
+      "bytes": 6682,
+      "sha256": "128bc89e4a02ee9b7d4489795df5aa43f1505262177b0094e1cccccd7b151c80"
+    },
+    {
+      "command": "pnpm test",
+      "result": "PASS: catalog 8, objects 38, astronomy 422, engine 47, renderer 308, platform 741, shell 220",
+      "log": "output/comet-intake/halley/test.log",
+      "bytes": 100062,
+      "sha256": "bbacf2548533a461a1ced9f1e74b0d60f5f700fc2ed4b83ca91806f2276baf26"
+    },
+    {
+      "command": "pnpm build",
+      "result": "PASS: full production build and runtime asset assembly",
+      "log": "output/comet-intake/halley/build-final.log",
+      "bytes": 665838,
+      "sha256": "ab6de85ed9d3a1903633fb37b500fe05b58bb74d324d6b9cccfdd71a2b09997f"
+    },
+    {
+      "command": "node --test tools/objects/terrestrial-layers/obj-shape.test.mjs tests/objects/unit/larissa/surface.test.mjs tests/objects/unit/proteus/surface.test.mjs",
+      "result": "PASS: 9 loader and existing-body coordinate regressions",
+      "log": "output/comet-intake/halley/radius-regression.log",
+      "bytes": 896,
+      "sha256": "4bdead8193253400e3716083ce5c4ab31a33bbfb097b2e9ef367cd9a17c5416d"
+    },
+    {
+      "command": "node --test src/platform/prepare-perspective-camera.test.mjs tests/objects/unit/comet-1p/surface.test.mjs",
+      "result": "PASS: 7 Halley and camera tests after final framing correction",
+      "log": "output/comet-intake/halley/framing-tests.log",
+      "bytes": 758,
+      "sha256": "91d27724ec50b795efd25be30fa311bac8469d2c135dad1fae4cfac81e40b5a7"
+    },
+    {
+      "command": "pnpm test:browser http://127.0.0.1:4258",
+      "result": "PASS: 152 object/DPR cases, two six-hop navigation cases, zero problems",
+      "log": "output/comet-intake/halley/dom-all.log",
+      "bytes": 8426,
+      "sha256": "049466419fe1b5aa4716e83a06f780ab6ee8eb8af72ca3a951029c7fce5ee8af"
+    },
+    {
+      "command": "CSSEARTH_CONFORMANCE_OUTPUT=output/playwright/halley-conformance pnpm test:browser:conformance http://127.0.0.1:4259 comet-1p",
+      "result": "PASS: 9 cases on development server; production diagnostics are intentionally unavailable",
+      "log": "output/comet-intake/halley/conformance-dev.log",
+      "bytes": 6376,
+      "sha256": "f2f6e004ae85191a0058f8e848a87583c498181418d940be65fd32f9d8bde73c"
+    },
+    {
+      "command": "node tests/objects/browser/comets/surface-hit.mjs http://127.0.0.1:4258 comet-1p",
+      "result": "PASS: each DPR has 705 native front-face interior hits, 4083 clear misses, zero mismatches across six views",
+      "log": "output/comet-intake/halley/surface-hit.log",
+      "bytes": 253,
+      "sha256": "a6618d06146f09f1c0a16a26332b5152bf66e7da963af800cca181db344fdff6"
+    },
+    {
+      "command": "node tests/objects/browser/comets/navigation.mjs http://127.0.0.1:4258",
+      "result": "PASS: all five comets plus Earth, 11 visits per DPR, one scene and retained shell/universe",
+      "log": "output/comet-intake/halley/navigation.log",
+      "bytes": 96,
+      "sha256": "2383fa34a247c942cad84d88c91686aea56ce646da3f14fef12518e2788910e7"
+    },
+    {
+      "command": "node tests/objects/browser/comets/source-fit.mjs output/comet-intake/halley/source-fit comet-1p",
+      "result": "RECORDED: sampled nearest-surface and line-of-sight differences; not an exhaustive bound",
+      "log": "output/comet-intake/halley/source-fit.log",
+      "bytes": 849,
+      "sha256": "0f48b275a63ea37a8cc66c9dc0ee79d12397ad42bd0baa5daf4bc75207928c33"
+    },
+    {
+      "command": "node output/comet-intake/halley/verify-fresh-sources.mjs",
+      "result": "PASS: empty-directory source restore, three downloads, 19 verified pins; local orchestration script",
+      "log": "output/comet-intake/halley/fresh-sources-final.log",
+      "bytes": 30,
+      "sha256": "613cd87a66e5c746fa0174f6c2bd91b68edb27c9467bd1c3ea10267e41ce3d0e"
+    },
+    {
+      "command": "node tools/publish-runtime-assets.mjs --object=comet-1p",
+      "result": "PASS: 31 immutable assets published to the existing runtime store",
+      "log": "output/comet-intake/halley/publish.log",
+      "bytes": 662,
+      "sha256": "c7726607e6d44152d82ffb0734a703325f4402cab7736650dd80316d7bf2ad5e"
+    },
+    {
+      "command": "pnpm setup:assets --object=comet-1p",
+      "result": "PASS: 31 downloaded, zero reused; public and production bytes match inventory",
+      "log": "output/comet-intake/halley/fresh-runtime.log",
+      "bytes": 252,
+      "sha256": "64d377c3025ceba40017e24c4934ca555d9ba05f3e18086157dd1ebb18a102f2"
+    },
+    {
+      "command": "node output/comet-intake/halley/capture-views.mjs",
+      "result": "PASS: eight inspected production desktop captures; local orchestration script, actions and hashes in visual record",
+      "log": "output/comet-intake/halley/visuals-final.log",
+      "bytes": 109,
+      "sha256": "bb577c5268a434a64c10130bc683bf81fd2c07b55649340747e876fa71e95ba1"
+    },
+    {
+      "command": "node output/comet-intake/halley/mobile.mjs",
+      "result": "PASS: two inspected production 390x844 DPR-2 captures; no horizontal overflow; local orchestration script",
+      "log": "output/comet-intake/halley/mobile.log",
+      "bytes": 50,
+      "sha256": "29d2956c69414ec10bb8b649c39ea8f5da95e441c870eaad0fbb729f8df3c83b"
+    },
+    {
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:4258 1 output/comet-intake/halley/drag-comet-1p-dpr-1 comet-1p",
+      "result": "PASS: retained DOM, stable atlas, no errors or interaction requests; timing limits reported separately",
+      "log": "output/comet-intake/halley/drag-comet-1p-dpr-1.log",
+      "bytes": 5293,
+      "sha256": "d3bc538cff2d22f76dd4eac47446291aea0dc0ac4705998d44065c5fa5f4d600"
+    },
+    {
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:4258 2 output/comet-intake/halley/drag-comet-1p-dpr-2 comet-1p",
+      "result": "PASS: retained DOM, stable atlas, no errors or interaction requests; timing limits reported separately",
+      "log": "output/comet-intake/halley/drag-comet-1p-dpr-2.log",
+      "bytes": 5296,
+      "sha256": "e0817e1a7327fa0a883d1a0fef84eeb3ebed1e8277db820c30f53809799217e4"
+    },
+    {
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:4258 1 output/comet-intake/halley/drag-comet-67p-dpr-1 comet-67p",
+      "result": "PASS: retained DOM, stable atlas, no errors or interaction requests; timing limits reported separately",
+      "log": "output/comet-intake/halley/drag-comet-67p-dpr-1.log",
+      "bytes": 5295,
+      "sha256": "a2d73f8d6abcce9ff515c078fadccec1df578174abddc5ae4e3dd82906648561"
+    },
+    {
+      "command": "node tests/objects/browser/comet-67p/drag-trace.mjs http://127.0.0.1:4258 2 output/comet-intake/halley/drag-comet-67p-dpr-2 comet-67p",
+      "result": "PASS: retained DOM, stable atlas, no errors or interaction requests; timing limits reported separately",
+      "log": "output/comet-intake/halley/drag-comet-67p-dpr-2.log",
+      "bytes": 5294,
+      "sha256": "e1d1285d3392d0c07c4af110f1ebf3e850efea45ec4d118b5184fb0ca5680fd5"
+    }
+  ],
+  "excludedAttempts": [
+    {
+      "log": "output/comet-intake/halley/conformance.log",
+      "reason": "Development-only diagnostics awaited on production server; replaced by successful dev-server run."
+    }
+  ],
+  "unverified": [
+    "Integration with newer main (PR currently conflicting).",
+    "Current-head CI.",
+    "Separate full preparation suite for this addition; seven previously reproduced baseline failures remain in QUALIFICATION.md.",
+    "Exhaustive source geometry or photographic pixel parity.",
+    "Measured GPU memory residency or other-device performance."
+  ]
+}

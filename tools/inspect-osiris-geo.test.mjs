@@ -1,0 +1,115 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL } from './objects/terrestrial-layers/osiris-geo.mjs';
+
+function fixture({ replace = text => text } = {}) {
+  let label = `PDS_VERSION_ID = PDS3\nRECORD_TYPE = FIXED_LENGTH\nRECORD_BYTES = 512\nFILE_RECORDS = 18\nLABEL_RECORDS = 8\nINSTRUMENT_ID = "OSINAC"\nIMAGE_ID = "12000700"\nSOFTWARE_VERSION_ID = "2.9.0"\nSTART_TIME = 2014-08-05T19:44:22.918\nFILTER_NAME = "FFP-Vis_Orange"\n`;
+  for (const [i, name] of PLANE_NAMES.entries()) label += `^${name} = ${10 + i}\n`;
+  for (const name of PLANE_NAMES) label += `OBJECT = ${name}\nLINE_SAMPLES = 2\nLINES = 2\nSAMPLE_BITS = 32\nSAMPLE_TYPE = ${name === 'FACET_INDEX_IMAGE' ? 'LSB_INTEGER' : 'PC_REAL'}\nBANDS = 1\nFIRST_LINE = 1\nFIRST_LINE_SAMPLE = 1\nLINE_DISPLAY_DIRECTION = DOWN\nSAMPLE_DISPLAY_DIRECTION = LEFT\nUNIT = "${name === 'IMAGE' ? 'W/M**2/SR/NM' : name === 'FACET_INDEX_IMAGE' ? 'INTEGER' : name.includes('ANGLE') ? 'RAD' : 'KM'}"\nEND_OBJECT = ${name}\n`;
+  assert.ok(label.length < 4096);
+  const bytes = Buffer.alloc(18 * 512, 32);
+  bytes.write(replace(label), 0, 'ascii');
+  bytes.write(`GEO_SHAPE_MODEL = "${GEO_SHAPE_MODEL}"\n`, 4096, 'ascii');
+  for (const [p, name] of PLANE_NAMES.entries()) for (let i = 0; i < 4; i++) {
+    const offset = (9 + p) * 512 + i * 4;
+    if (name === 'FACET_INDEX_IMAGE') bytes.writeInt32LE(1, offset);
+    else bytes.writeFloatLE(name === 'IMAGE' ? [-2, 0, 2, 4][i] : name.includes('ANGLE') ? .2 : name.includes('COORDINATE') ? 0 : 10, offset);
+  }
+  return bytes;
+}
+
+test('OSIRIS planes preserve signed radiance, explicit units and stored coordinates', () => {
+  const frame = decodeOsirisGeo(fixture());
+  assert.deepEqual([...frame.planes.IMAGE], [-2, 0, 2, 4]);
+  assert.equal(frame.valid(0), true);
+  assert.equal(frame.valid(1), true);
+  frame.planes.FACET_INDEX_IMAGE[2] = 0;
+  assert.equal(frame.valid(2), false);
+  frame.planes.COORDINATE_Z_IMAGE[3] = NaN;
+  assert.equal(frame.valid(3), false);
+  assert.equal(frame.valid(-1), false);
+  assert.equal(frame.startTime, '2014-08-05T19:44:22.918');
+});
+
+function qualityFixture() {
+  let label = `PDS_VERSION_ID = PDS3\nRECORD_TYPE = FIXED_LENGTH\nRECORD_BYTES = 512\nFILE_RECORDS = 7\nLABEL_RECORDS = 4\nINSTRUMENT_ID = "OSINAC"\nIMAGE_ID = "12000700"\nSOFTWARE_VERSION_ID = "2.9.0"\nSTART_TIME = 2014-08-05T19:44:22.918\nFILTER_NAME = "FFP-Vis_Orange"\nDATA_QUALITY_ID = "0000000000000000"\n`;
+  const names = ['IMAGE', 'SIGMA_MAP_IMAGE', 'QUALITY_MAP_IMAGE'];
+  for (const [i, name] of names.entries()) label += `^${name} = ${5 + i}\n`;
+  for (const name of names) label += `OBJECT = ${name}\nLINE_SAMPLES = 2\nLINES = 2\nBANDS = 1\nFIRST_LINE = 1\nFIRST_LINE_SAMPLE = 1\nLINE_DISPLAY_DIRECTION = DOWN\nSAMPLE_DISPLAY_DIRECTION = LEFT\nSAMPLE_BITS = ${name === 'QUALITY_MAP_IMAGE' ? 8 : 32}\nSAMPLE_TYPE = ${name === 'QUALITY_MAP_IMAGE' ? 'LSB_UNSIGNED_INTEGER' : 'PC_REAL'}\nUNIT = "W/M**2/SR/NM"\nEND_OBJECT = ${name}\n`;
+  assert.ok(label.length < 2048);
+  const bytes = Buffer.alloc(7 * 512, 32); bytes.write(label);
+  for (let i = 0; i < 4; i++) { bytes.writeFloatLE([-2, 0, 2, 4][i], 2048 + i * 4); bytes.writeFloatLE(.1, 2560 + i * 4); }
+  bytes.set([1, 9, 129, 0], 3072);
+  return bytes;
+}
+
+test('quality map requires positive VALID and exact companion identity/radiance', () => {
+  const frame = decodeOsirisGeo(fixture()), bytes = qualityFixture();
+  const quality = decodeOsirisQuality(bytes, frame);
+  assert.deepEqual([...quality.flags], [1, 9, 129, 0]);
+  assert.deepEqual([...quality.flags].map(q => acceptOsirisQuality(q, true)), [true, true, false, false]);
+  assert.equal(acceptOsirisQuality(9, false), false);
+  for (const bit of [2, 4, 16, 32, 64, 128]) assert.equal(acceptOsirisQuality(1 | bit, true), false);
+  frame.quality = { ...quality, allowLossy: true };
+  assert.equal(sampleGeo(frame, [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]], [0, 0, 0], { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 }).reason, 'quality');
+  const wrongImage = Buffer.from(bytes); wrongImage.writeFloatLE(0, 2048);
+  assert.throws(() => decodeOsirisQuality(wrongImage, frame), /radiance differs/);
+  const wrongDate = Buffer.from(bytes); wrongDate.write('2015', wrongDate.indexOf('2014'));
+  assert.throws(() => decodeOsirisQuality(wrongDate, frame), /identity mismatch/);
+});
+
+test('bounded disk normalization precedes interpolation and preserves signed radiance', () => {
+  const photometry = { maximumIncidenceDegrees: 80, maximumEmissionDegrees: 80, maximumGain: 3 };
+  assert.ok(Math.abs(lommelSeeligerGain(Math.PI / 3, 0, photometry) - 1.5) < 1e-12);
+  assert.ok(Math.abs(lommelSeeligerGain(0, Math.PI / 3, photometry) - .75) < 1e-12);
+  assert.equal(lommelSeeligerGain(80 * Math.PI / 180, 0, photometry), null);
+  assert.equal(lommelSeeligerGain(Math.PI / 2, 0, photometry), null);
+  const frame = decodeOsirisGeo(fixture());
+  frame.planes.INCIDENCE_ANGLE_IMAGE.set([0, Math.PI / 3, 0, Math.PI / 3]);
+  frame.planes.EMISSION_ANGLE_IMAGE.fill(0); frame.planes.IMAGE.fill(2);
+  const matrix = [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]], policy = { maximumSeparationMeters: 20, maximumEmissionDegrees: 80, photometry };
+  assert.ok(Math.abs(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance - 2.5) < 1e-6);
+  frame.planes.IMAGE.fill(-2);
+  assert.ok(Math.abs(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance + 2.5) < 1e-6);
+});
+
+test('OSIRIS rejects truncated, overlapping, differently oriented or unreliable GEO data', () => {
+  assert.throws(() => decodeOsirisGeo(fixture().subarray(0, -1)), /truncated/);
+  for (const [from, to] of [['^DISTANCE_IMAGE = 11', '^DISTANCE_IMAGE = 10'],
+    ['^COORDINATE_Z_IMAGE = 18', '^COORDINATE_Z_IMAGE = 19'], ['SAMPLE_TYPE = PC_REAL', 'SAMPLE_TYPE = MSB_REAL'],
+    ['LINE_DISPLAY_DIRECTION = DOWN', 'LINE_DISPLAY_DIRECTION = UP'], ['UNIT = "KM"', 'UNIT = "M"'],
+    ['LINE_SAMPLES = 2', 'LINE_SAMPLES = 9'], ['BANDS = 1', 'BANDS = 2']]) {
+    assert.throws(() => decodeOsirisGeo(fixture({ replace: text => text.replace(from, to) })), /layout|pointer/);
+  }
+  const badModel = fixture(); badModel.write('wrong-model', 4096 + 'GEO_SHAPE_MODEL = "'.length);
+  assert.throws(() => decodeOsirisGeo(badModel), /errata/);
+});
+
+test('camera recovered from noncoplanar points predicts unseen positions independently', () => {
+  const truth = [[1100, 80, 12, 40960], [-23, 1200, 20, 30960], [.1, -.2, 1, 40]];
+  const points = Array.from({ length: 80 }, (_, i) => [Math.sin(i * .71) * 2, Math.cos(i * 1.37), Math.sin(i * .93)]);
+  const camera = fitCamera(points, points.map(p => project(truth, p).slice(0, 2)), 2048, 2048);
+  for (const point of [[2, 1, 0], [-1, .6, .3], [.2, -.9, 1.1]]) {
+    const actual = project(camera.matrix, point), expected = project(truth, point);
+    assert.ok(Math.hypot(actual[0] - expected[0], actual[1] - expected[1]) < 1e-7);
+  }
+  for (const row of camera.matrix) assert.ok(Math.abs(row.slice(0, 3).reduce((s, n, i) => s + n * camera.positionKm[i], row[3])) < 1e-6);
+  assert.throws(() => fitCamera(Array(20).fill([1, 1, 1]), Array(20).fill([1, 1]), 2, 2), /Degenerate/);
+});
+
+test('surface sampling rejects occlusion boundaries and grazing geometry without rejecting darkness', () => {
+  const frame = decodeOsirisGeo(fixture()), matrix = [[1, 0, 0, .5], [0, 1, 0, .5], [0, 0, 1, 1]];
+  const policy = { maximumSeparationMeters: 20, maximumEmissionDegrees: 80 };
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance, 1);
+  frame.planes.IMAGE.fill(-2);
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).radiance, -2);
+  frame.planes.COORDINATE_Z_IMAGE[3] = .1;
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'geometry-mismatch');
+  frame.planes.COORDINATE_Z_IMAGE[3] = 0;
+  frame.planes.EMISSION_ANGLE_IMAGE[0] = Math.PI / 2;
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'grazing');
+  frame.planes.EMISSION_ANGLE_IMAGE[0] = .2;
+  frame.planes.FACET_INDEX_IMAGE[0] = 0;
+  assert.equal(sampleGeo(frame, matrix, [0, 0, 0], policy).reason, 'no-geometry');
+  assert.equal(sampleGeo(frame, matrix, [2, 0, 0], policy).reason, 'outside');
+});

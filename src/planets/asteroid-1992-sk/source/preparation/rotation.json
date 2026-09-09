@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 99.57828195354813,
+  "declinationDegrees": 20.140543606268487,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 7.3182,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy: ecliptic J2000 lambda 99 deg, beta -3 deg, period 7.3182 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied."
+}

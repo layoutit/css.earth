@@ -1,3 +1,4 @@
+import { NEPTUNE_ROTATION_MODELS } from './rotation-neptune.js'
 import { RAD_PER_DEG, normalizeAngleRad } from './angles.js'
 import { DAYS_PER_JULIAN_CENTURY, J2000_JD } from './time.js'
 import type { Vec3 } from './vec3.js'
@@ -229,6 +230,38 @@ const MODELS: Record<string, Model> = {
     }
   },
 
+  // IAU/WGCCRE coefficients archived in NAIF pck00011, including J1/J2 terms.
+  amalthea: (d, T) => {
+    const j1 = 73.32 + 91472.9 * T
+    return {
+      rightAscensionDeg: 268.05 - 0.009 * T - 0.84 * sinDeg(j1) + 0.01 * sinDeg(2 * j1),
+      declinationDeg: 64.49 + 0.003 * T - 0.36 * cosDeg(j1),
+      primeMeridianDeg: 231.67 + 722.631456 * d + 0.76 * sinDeg(j1) - 0.01 * sinDeg(2 * j1),
+      spinRateDegPerDay: 722.631456,
+    }
+  },
+  thebe: (d, T) => {
+    const j2 = 24.62 + 45137.2 * T
+    return {
+      rightAscensionDeg: 268.05 - 0.009 * T - 2.11 * sinDeg(j2) + 0.04 * sinDeg(2 * j2),
+      declinationDeg: 64.49 + 0.003 * T - 0.91 * cosDeg(j2) + 0.01 * cosDeg(2 * j2),
+      primeMeridianDeg: 8.56 + 533.700410 * d + 1.91 * sinDeg(j2) - 0.04 * sinDeg(2 * j2),
+      spinRateDegPerDay: 533.700410,
+    }
+  },
+  adrastea: (d, T) => ({
+    rightAscensionDeg: 268.05 - 0.009 * T,
+    declinationDeg: 64.49 + 0.003 * T,
+    primeMeridianDeg: 33.29 + 1206.9986602 * d,
+    spinRateDegPerDay: 1206.9986602,
+  }),
+  metis: (d, T) => ({
+    rightAscensionDeg: 268.05 - 0.009 * T,
+    declinationDeg: 64.49 + 0.003 * T,
+    primeMeridianDeg: 346.09 + 1221.2547301 * d,
+    spinRateDegPerDay: 1221.2547301,
+  }),
+
   io: (d, T) => {
     const j3 = 283.9 + 4850.7 * T
     const j4 = 355.8 + 1191.3 * T
@@ -412,40 +445,7 @@ const MODELS: Record<string, Model> = {
     }
   },
 
-  neptune: (d, T) => {
-    const n = 357.85 + 52.316 * T
-    return {
-      rightAscensionDeg: 299.36 + 0.7 * sinDeg(n),
-      declinationDeg: 43.46 - 0.51 * cosDeg(n),
-      primeMeridianDeg: 249.978 + 541.1397757 * d - 0.48 * sinDeg(n),
-      spinRateDegPerDay: 541.1397757,
-    }
-  },
-
-  triton: (d, T) => {
-    const n7 = 177.85 + 52.316 * T
-    let rightAscensionDeg = 299.36
-    let declinationDeg = 41.17
-    let primeMeridianDeg = 296.53 - 61.2572637 * d
-    const raCoefficients = [-32.35, -6.28, -2.08, -0.74, -0.28, -0.11, -0.07, -0.02, -0.01]
-    const decCoefficients = [22.55, -2.1, 0.55, 0.16, 0.05, 0.02, 0.01]
-    const wCoefficients = [22.25, 6.73, 2.05, 0.74, 0.28, 0.11, 0.05, 0.02, 0.01]
-    for (let k = 0; k < raCoefficients.length; k++) rightAscensionDeg += raCoefficients[k]! * sinDeg((k + 1) * n7)
-    for (let k = 0; k < decCoefficients.length; k++) declinationDeg += decCoefficients[k]! * cosDeg((k + 1) * n7)
-    for (let k = 0; k < wCoefficients.length; k++) primeMeridianDeg += wCoefficients[k]! * sinDeg((k + 1) * n7)
-    return { rightAscensionDeg, declinationDeg, primeMeridianDeg, spinRateDegPerDay: -61.2572637 }
-  },
-
-  proteus: (d, T) => {
-    const n = 357.85 + 52.316 * T
-    const n6 = 142.63 + 2824.6 * T
-    return {
-      rightAscensionDeg: 299.27 + 0.7 * sinDeg(n) - 0.05 * sinDeg(n6),
-      declinationDeg: 42.91 - 0.51 * cosDeg(n) - 0.04 * cosDeg(n6),
-      primeMeridianDeg: 93.38 + 320.7654228 * d - 0.48 * sinDeg(n) + 0.04 * sinDeg(n6),
-      spinRateDegPerDay: 320.7654228,
-    }
-  },
+  ...NEPTUNE_ROTATION_MODELS,
 
   // Dwarf planets. Only Pluto and Ceres have a published pole here — Eris,
   // Haumea and Makemake genuinely have none (no resolved-disk imagery to
@@ -463,6 +463,14 @@ const MODELS: Record<string, Model> = {
     rightAscensionDeg: 132.993,
     declinationDeg: -6.163,
     primeMeridianDeg: 302.695 + 56.3625225 * d,
+    spinRateDegPerDay: 56.3625225,
+  }),
+
+  // NAIF pck00011.tpc BODY901; synchronous with Pluto, opposite prime meridian.
+  charon: (d) => ({
+    rightAscensionDeg: 132.993,
+    declinationDeg: -6.163,
+    primeMeridianDeg: 122.695 + 56.3625225 * d,
     spinRateDegPerDay: 56.3625225,
   }),
 

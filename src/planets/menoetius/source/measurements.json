@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "menoetius",
+  "targetNaif": "120000617",
+  "parentNaif": "920000617",
+  "source": {
+    "url": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
+    "papers": [
+      "https://www2.boulder.swri.edu/~buie/biblio/pub099.html"
+    ],
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "semiAxesKm": [
+      58.5,
+      54,
+      45
+    ],
+    "fullAxesKm": [
+      117.0,
+      108,
+      90
+    ],
+    "referenceRadiusKm": 52.19000997884097,
+    "axisConvention": "a,b,c are semiaxes; full axes = 2a,2b,2c",
+    "scale": "Buie2015 mean-ellipsoidal full axes117×108×90km; not the observed projected117.2×93km limb.",
+    "qualification": "Published occultation/lightcurve approximate model; no artificial local void or random albedo.",
+    "semiAxesUncertaintyKm": null,
+    "uncertaintyNote": "No formal independent three-axis uncertainties quoted in checked source passage; local limb deviations and model uncertainty must not be replaced by fabricated ±values."
+  },
+  "approximation": {
+    "semiAxesKm": [
+      58.5,
+      54,
+      45
+    ],
+    "assumptions": [
+      "Use published model full axes, halved exactly.",
+      "Adopt2024 orbital pole for a synchronous illustrative spin axis; no claim of current longitude."
+    ],
+    "qualification": "Published occultation/lightcurve approximate model; no artificial local void or random albedo."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "spin": {
+    "periodDays": 4.282753,
+    "uncertaintyDays": 2.3e-05,
+    "poleIcrfRaDecDegrees": [
+      178,
+      -74.1
+    ],
+    "poleUncertaintyDegrees": [
+      0.5,
+      0.2
+    ],
+    "meridianDegrees": 0,
+    "meaning": "Doubly synchronous interpretation;2024 orbit pole used as spin-axis approximation, meridian arbitrary."
+  },
+  "unresolved": [
+    "Source discusses discrepant negative chords; do not model a crater from ambiguous unarchived tapes."
+  ],
+  "orbitEvidence": "validation/epoch-state.json"
+}

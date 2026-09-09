@@ -1,5 +1,7 @@
-/** The transparent input surface owns gestures; pick retained scene targets
- * beneath it without changing their celestial paint/occlusion order. */
+import { screenPicking } from './screen-picking.js';
+
+/** The transparent input surface owns gestures. The presentation publishes
+ * its already-clipped targets; input never searches the rendered document. */
 type SelectedClick = { x: number; y: number; timestamp: number; objectId: string };
 type SecondPress = { pointerId: number; pointerType: string; x: number; y: number };
 type PickingGesture = { selected: SelectedClick | null; second: SecondPress | null; consumeRelease: boolean };
@@ -7,7 +9,9 @@ const gestures = new WeakMap<HTMLElement, PickingGesture>();
 const DOUBLE_CLICK_MILLISECONDS = 500;
 const CLICK_SLOP_PIXELS = 5;
 
-export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElement) {
+export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElement,
+  readBounds?: () => { left: number; top: number; width: number; height: number },
+  detailOccludes?: (clientX: number, clientY: number) => boolean) {
   const document = inputSurface.ownerDocument;
   const windowTarget = document.defaultView;
   if (!windowTarget) throw new Error('World picking requires a mounted window.');
@@ -17,16 +21,18 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   gestures.set(inputSurface, gesture);
   let pointer: { id: number; x: number; y: number; dragged: boolean } | null = null;
   let hovered: HTMLElement | null = null;
+  const registry = screenPicking(host);
+  let fallbackBounds = readBounds ? null : host.getBoundingClientRect();
+  const resize = () => { fallbackBounds = host.getBoundingClientRect(); };
+  if (!readBounds) windowTarget.addEventListener('resize', resize);
   const pick = (event: MouseEvent) => {
-    const hits = document.elementsFromPoint(event.clientX, event.clientY)
-      .filter((element): element is HTMLElement => element instanceof HTMLElement && host.contains(element));
-    return hits.find(element => Boolean(element.dataset.objectNavigate) &&
-      element.style.pointerEvents === 'auto' && element.ariaDisabled !== 'true') ??
-      hits.find(element => {
-        const orbit = element.parentElement;
-        return orbit?.dataset.contextOrbit && orbit.dataset.objectNavigate && orbit.ariaDisabled !== 'true' &&
-          parseFloat(element.style.opacity || '1') > 0.1;
-      })?.parentElement ?? null;
+    const bounds = readBounds?.() ?? fallbackBounds!;
+    const target = registry.pick(event.clientX - bounds.left - bounds.width / 2,
+      event.clientY - bounds.top - bounds.height / 2);
+    // Context sprites paint behind the selected detailed surface. Their screen
+    // bounds can overlap it even when their centres are not occluded. Reuse the
+    // detail owner's existing hit contract for both hover and activation.
+    return target && detailOccludes?.(event.clientX, event.clientY) ? null : target;
   };
   let hoveredGroup: HTMLElement | null = null;
   const setHovered = (target: HTMLElement | null) => {
@@ -45,8 +51,22 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
       inputSurface.style.removeProperty('--object-hover-cursor');
     }
     hovered = target;
+    host.dispatchEvent(new Event('objecthoverchange'));
   };
-  const clearHover = () => setHovered(null);
+  let hoverPoint: PointerEvent | null = null, hoverFrame: number | null = null;
+  const scheduleHover = () => {
+    if (!hoverPoint || hoverFrame !== null) return;
+    hoverFrame = windowTarget.requestAnimationFrame(() => {
+      hoverFrame = null;
+      setHovered(hoverPoint ? pick(hoverPoint) : null);
+    });
+  };
+  const unsubscribe = registry.subscribe(scheduleHover);
+  const clearHover = () => {
+    hoverPoint = null;
+    if (hoverFrame !== null) windowTarget.cancelAnimationFrame(hoverFrame);
+    hoverFrame = null; setHovered(null);
+  };
   const matchesSelection = (event: MouseEvent) => {
     const selected = gesture.selected;
     return selected !== null && event.timeStamp >= selected.timestamp &&
@@ -68,8 +88,9 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     pointer = { id: event.pointerId, x: event.clientX, y: event.clientY, dragged: false };
   };
   const move = (event: PointerEvent) => {
-    setHovered(event.target === inputSurface && event.buttons === 0 && event.pointerType !== 'touch'
-      ? pick(event) : null);
+    if (event.target === inputSurface && event.buttons === 0 && event.pointerType !== 'touch') {
+      hoverPoint = event; scheduleHover();
+    } else clearHover();
     const second = gesture.second;
     if (second?.pointerId === event.pointerId) {
       if (Math.hypot(event.clientX - second.x, event.clientY - second.y) <= CLICK_SLOP_PIXELS) {
@@ -138,6 +159,8 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
   inputSurface.addEventListener('pointerleave', clearHover);
   return () => {
     clearHover();
+    unsubscribe();
+    if (!readBounds) windowTarget.removeEventListener('resize', resize);
     windowTarget.removeEventListener('pointerdown', down, { capture: true });
     windowTarget.removeEventListener('pointermove', move, { capture: true });
     windowTarget.removeEventListener('pointerup', up, { capture: true });

@@ -9,6 +9,9 @@ import { applyPreparedProjectiveLayout } from "../src/platform/prepared-projecti
 
 const cssName = name => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 const projectiveLeaf = node => node?.attributes?.["data-prepared-projection"] === "single-leaf";
+const rasterTriangle = node => node?.tag === "u" &&
+  node.attributes?.["data-polycss-texture-leaf-sizing"] === "raster" &&
+  node.attributes?.["data-polycss-texture-backend"] === "atlas";
 export function preparedStyleRecord(text, assignments = []) {
   const properties = new Map([...String(text).matchAll(/(?:^|;)\s*([\w-]+)\s*:\s*([^;]*)/g)].map(match => [match[1], match[2]]));
   // Match the retained publisher: cssText first, then every dictionary reference
@@ -34,8 +37,9 @@ function requireMatrix(value, label) {
   const matrix = /^matrix3d\(([^)]+)\)$/.exec(value);
   const values = matrix?.[1].split(",").map(Number);
   if (values?.length !== 16 || !values.every(Number.isFinite)) throw new TypeError(`Prepared projective ${label} transform is missing or invalid.`);
+  return values;
 }
-function requireLeaf(carrier) {
+function requireLeaf(carrier, nativeRaster = false) {
   for (const name of ["width", "height"]) {
     const value = carrier[name] || carrier.getPropertyValue(`--polycss-atlas-${name}`);
     if (!/^(?:\d+(?:\.\d*)?|\.\d+)px$/.test(value) || Number.parseFloat(value) <= 0) {
@@ -48,10 +52,21 @@ function requireLeaf(carrier) {
       !layer.trim().split(/\s+/).some(value => /^\d+(?:\.\d*)?px$/.test(value) && Number.parseFloat(value) > 0))) {
     throw new TypeError("Prepared projective texture requires an explicit backgroundSize.");
   }
-  if (carrier.transformStyle !== "preserve-3d") {
+  // Native u triangles receive their base primitive styles from PolyCSS CSS.
+  // Their dimensions, atlas address and affine matrix still belong to data.
+  if ((!nativeRaster || carrier.transformStyle) && carrier.transformStyle !== "preserve-3d") {
     throw new TypeError("Prepared projective carrier/texture flattening is invalid.");
   }
-  requireMatrix(carrier.transform, "carrier");
+  const matrix = requireMatrix(carrier.transform, "carrier");
+  if (nativeRaster) {
+    if ([3, 7, 11].some(index => matrix[index] !== 0) || matrix[15] !== 1) {
+      throw new TypeError("Prepared native raster triangle requires an affine transform.");
+    }
+    if (carrier.getPropertyValue("--polycss-atlas-leaf-sizing") !== "raster" ||
+        !/^-?\d+(?:\.\d+)?px\s+-?\d+(?:\.\d+)?px$/.test(carrier.backgroundPosition)) {
+      throw new TypeError("Prepared native raster triangle requires its raster sizing and texture address.");
+    }
+  }
 }
 
 export async function censusPreparedLeafLayouts({
@@ -75,7 +90,8 @@ export async function censusPreparedLeafLayouts({
     const children = new Map();
     for (const node of tree.nodes) children.set(node.parent, (children.get(node.parent) ?? 0) + 1);
     for (const [index, node] of tree.nodes.entries()) {
-      if (!projectiveLeaf(node)) continue;
+      const nativeRaster = rasterTriangle(node);
+      if (!projectiveLeaf(node) && !nativeRaster) continue;
       report.count++;
       try {
         if (node.parent < 0 || node.parent >= index || children.has(index)) {
@@ -86,14 +102,16 @@ export async function censusPreparedLeafLayouts({
           if (!Number.isSafeInteger(id) || id < 0 || id >= tree.properties.length) throw new TypeError("Prepared projective property reference is invalid.");
           return tree.properties[id];
         }).filter(property => !ignoreLayouts || !missing.includes(property.name));
-        requireLeaf(preparedStyleRecord(node.style, assignments(node)));
+        requireLeaf(preparedStyleRecord(node.style, assignments(node)), nativeRaster);
         // This detects the old stylesheet-only layout without depending on an
         // object id, private builder, or class-to-layout dispatch table.
-        try { applyPreparedProjectiveLayout(original, null, 2); }
-        catch { report.completedByDescriptor++; }
+        if (!nativeRaster) {
+          try { applyPreparedProjectiveLayout(original, null, 2); }
+          catch { report.completedByDescriptor++; }
+        }
       } catch (error) { report.failures.push({ file, path: `PREPARED_PRESENTATION.tree.nodes[${index}]`, error: error.message }); }
     }
-    if (!report.count) report.failures.push({ file, error: "No reachable prepared projective textures were found." });
+    if (!report.count) report.failures.push({ file, error: "No reachable prepared textures were found." });
     reports.push(report);
   }
   return {

@@ -1,0 +1,100 @@
+Ancillary	Data	
+This data set contains the Peter Thomas shape model for Saturn’s satellite Atlas (Saturn XV), based 
+on optical data from the Cassini Imaging Science Subsystem (ISS) Narrow-Angle Camera (NAC) 
+instrument. The current version of this data set contains the following shape model file: 
+atlas_30k_plt.tab 
+This shape model file also has a detached label file, with a suffix of .xml, which describes the 
+format and content. The shape model is in a plate model format and only represents the model 
+shape, with no gravity or slope information. 
+Coordinate	System	
++X is Saturn-facing; + Y is opposite the direction of orbital motion; +Z is along the positive rotation
+axis. Because of orbital eccentricity, the x-axis deviates slightly from perfect Saturn alignment
+around the orbit; these small deviations are accounted for in the rotation model used.
+The rotational model used in construction of this model is a binary kernel: 
+atlas_
+mst2018.bpc prepared by M. S. Tiscareno, and available through the Navigation and Ancillary 
+Information Facility (NAIF). 
+For information on using SPICE kernels, please see pck_req.txt - "PCK Required Reading", PCK 
+required reading document, last revised on 2009 Apr 15 by B.V. Semenov. 
+Confidence	Level	Notes	
+Images used and their associated viewing geometries are listed in Table 1 below. Uncertainties in 
+the shape model have been based on pixel scale and spatial density and solution residuals of 
+control points.  
+Likely uncertainty of model radii for Atlas range from 0.1 to 0.3 km; the south polar region is the 
+most uncertain. 
+	Limitations	
+The shape model is intended for global geometric, geologic, and geophysical studies. The 
+morphology of small craters is not reliably included; some relatively large craters can show 
+approximate measures such as depth/diameter. Regional slopes can be calculated to accuracies 
+estimated by the listed uncertainties. 
+Acknowledgements	
+The following people helped in the development of the software and/or models during the Cassini 
+mission:  Beatrice Mueller and Conor Kingston for direct assistance in formatting and submitting 
+the data sets, Brian Carcich for software development used to derive the shape models, Matt 
+Tiscareno for preparing small body kernels that improved the accuracy of the models, Mike Evans 
+for assistance in modifying the plate model format to meet PDS Requirements, Chuck Acton for 
+assistance in archiving kernels, Pam Smith for data management. 
+Table	1.	Cassini	ISS	Images	used	for	Atlas	shape	model	
+Filt: filters used in each filter wheel.  CL: clear; UV: ultraviolet; VIO: violet; BL: blue; GRN: green; 
+MT: methane; RED: red; CB: methane continuum; IR: infrared; P: polarization.  Details of filter 
+bandpasses and use in Porco et al. (2004). 
+SC lat lon: Sub spacecraft position in degrees. Lon is West longitude where 90ºW is the leading 
+point.  
+Solar lat lon: sub solar position in degrees 
+Range: distance to object center from spacecraft, km 
+Noraz: image orientation of the projected object spin axis, degrees clockwise from up.  
+Samp: object center x-coordinate in image 0 is at left of image in pixels 
+Line: object center y-coordinate in image; 0 is at top of image in pixels 
+Phase: solar phase angle at center of image in degrees. 
+Images used in construction of model of ATLAS: 
+                                                  S/C                    Sun 
+              filt  filt  lat    lon     lat    lon    range     noraz    samp     line     phase 
+N1496909886    RED  CL2  -4.61 249.50 -21.45 288.42  162467.0   269.92   508.30   582.40    41.31  
+N1496909975    CL1  GRN  -4.41 249.99 -21.45 289.03  162731.0   269.92   507.60   580.90    41.51  
+N1530369671    CL1  CL2  -0.35  95.04 -16.87 141.23  288133.4   359.91   515.40   519.50    48.38  
+N1530370251    CL1  CL2  -0.35  97.80 -16.87 145.25  282703.6   359.91   514.90   520.20    49.54  
+N1530370541    CL1  CL2  -0.35  99.21 -16.87 147.26  280020.3   359.91   516.80   518.50    50.10  
+N1530370686    CL1  CL2  -0.35  99.92 -16.87 148.26  278690.1   359.91   514.70   519.80    50.37  
+N1560303384    CL1  UV3 -51.11 164.80 -12.06  58.25   41684.0   341.37   520.80   528.80    90.70  
+N1560303424    CL1  UV3 -51.28 164.79 -12.06  58.54   41856.1   341.48   526.60   529.20    90.47  
+N1560303457    CL1  GRN -51.43 164.78 -12.06  58.79   42008.1   341.58   528.90   528.10    90.26  
+N1560303490    CL1  GRN -51.57 164.76 -12.06  59.00   42151.6   341.73   376.70   596.60    90.08  
+N1560303523    BL1  CL2 -51.70 164.75 -12.06  59.23   42294.7   341.76   534.90   531.20    89.90  
+N1560303556    BL1  CL2 -51.84 164.74 -12.06  59.45   42439.6   341.91   378.60   599.20    89.72  
+N1560303589    RED  CL2 -51.97 164.74 -12.06  59.70   42586.5   342.01   375.20   594.90    89.53  
+N1560303622    RED  CL2 -52.10 164.73 -12.06  59.92   42732.8   342.10   375.20   596.30    89.35  
+N1560303655    CL1  IR1 -52.22 164.72 -12.06  60.15   42879.7   342.14   538.70   529.30    89.17  
+N1560303688    CL1  IR1 -52.35 164.72 -12.06  60.38   43027.4   342.23   539.00   527.10    89.00  
+N1560303721    CL1  IR3 -52.48 164.81 -12.06  60.60   43169.1   342.31   537.90   529.10    88.88  
+N1560303754    CL1  IR3 -52.60 164.80 -12.06  60.82   43316.4   342.40   531.00   514.50    88.71  
+N1560303787    CL1  CL2 -52.71 164.70 -12.06  61.06   43474.6   342.51   539.60   528.20    88.48  
+N1560303820    CL1  CL2 -52.83 164.80 -12.06  61.29   43619.3   342.59   542.10   526.50    88.37  
+N1828131657    CL1  CL2  -3.66 213.63  25.59 269.64   23504.8   179.93   956.20   527.60    61.60  
+N1828131690    RED  CL2  -3.68 213.39  25.60 269.87   23588.6   179.92   959.50   526.50    62.01  
+N1828131756    BL1  CL2  -3.74 212.85  25.60 270.32   23745.5   179.92   846.70   529.80    62.89  
+N1828132956    BL1  CL2  -4.31 205.58  25.59 278.63   28113.4   179.92   939.90   525.70    76.72  
+N1828132989    CL1  IR1  -4.32 205.44  25.59 278.86   28268.8   179.92   947.40   523.20    77.05  
+N1828133023    P0   GRN  -4.32 205.30  25.59 279.10   28427.4   179.92   941.00   520.70    77.39  
+N1828133590    CL1  CL2  -4.39 203.29  25.60 283.02   31333.4   179.92   900.70   512.80    82.69  
+N1828133623    CL1  CL2  -4.39 203.21  25.60 283.25   31518.0   179.92   901.70   512.80    82.97  
+N1828133656    CL1  CL2  -4.39 203.11  25.60 283.48   31700.3   179.92   899.50   514.50    83.26  
+N1870694071    CL1  CL2  65.28  87.19  26.72 155.61  112516.4     7.31   531.90   462.20    56.92  
+N1870694877    BL1  CL2  64.77  92.17  26.73 161.20   98002.7     6.37   523.80   456.40    57.10  
+N1870695588    CL1  IR1  64.16  97.23  26.73 166.12   84794.5     6.05   518.10   446.70    56.97  
+N1870695654    CL1  CL2  64.09  97.74  26.73 166.58   83550.7     6.05   516.30   446.90    56.94  
+N1870697721    CL1  CL2  59.34 118.89  26.73 180.90   43606.5     8.74   484.40   401.50    53.08  
+N1870697837    CL1  GRN  58.73 120.56  26.72 181.70   41341.8     9.05   481.20   399.20    52.55  
+N1870698179    P60  GRN  56.41 125.98  26.72 184.06   34698.2     9.91   465.50   385.00    50.52  
+N1870698212    P12  GRN  56.13 126.55  26.73 184.29   34060.8     9.98   466.30   386.90    50.27  
+N1870698245    CL1  CL2  55.84 127.14  26.73 184.53   33417.2    10.05   461.80   384.50    50.02  
+N1870698933    CL1  CL2  45.04 141.88  26.73 189.29   20616.8     7.98   363.60   340.60    41.81  
+N1870698966    CL1  UV3  44.17 142.72  26.73 189.52   20060.3     7.48   350.90   372.50    41.24  
+N1870699054    CL1  IR1  41.46 145.14  26.73 190.14   18550.3     5.63   318.30   382.60    39.55  
+N1870699087    CL1  IR3  40.35 146.06  26.73 190.36   18012.9     4.76   305.40   391.90    38.89  
+N1870699153    CL1  UV3  37.87 147.96  26.72 190.80   16955.8     2.57   272.70   405.30    37.53  
+N1870699208    CL1  GRN  35.50 149.65  26.73 191.20   16089.7     0.17   248.20   424.60    36.36  
+N1870699241    CL1  IR1  33.96 150.68  26.72 191.43   15594.6   358.48   229.90   442.80    35.67  
+N1870699274    CL1  IR3  32.35 151.71  26.73 191.65   15121.7   356.58   215.00   460.50    35.00  
+N1870699307    CL1  CL2  30.57 152.80  26.73 191.89   14649.0   354.37   197.70   480.90    34.35  
+N1870699428    CL1  IR1  23.08 156.91  26.73 192.72   13106.7   343.93   150.80   587.50    32.58  
+N1870699461    CL1  IR3  20.76 158.07  26.73 192.95   12743.5   340.46   141.80   628.30    32.38  

@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-body-epoch-ephemeris@1",
+  "id": "hiiaka",
+  "centerBodyId": "haumea",
+  "epochJdTt": 2461286.5,
+  "requestEpochJdUtc": 2461286.499199259,
+  "ttMinusUtcSeconds": 69.184,
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "solution": "tnosat_v001b_20136108_jpl110_20221014",
+  "positionKm": [
+    -33281.96333993582,
+    -22828.13175945297,
+    -33532.59403386706
+  ],
+  "velocityKmPerDay": [
+    -4057.630802926777,
+    -409.3179756773064,
+    4337.365604762798
+  ],
+  "parentHeliocentricState": {
+    "positionKm": [
+      -5487487239.17944,
+      -4698328457.056636,
+      1797316425.25533
+    ],
+    "velocityKmPerDay": [
+      210094.2578290008,
+      -230096.3537848578,
+      -123974.8700480089
+    ]
+  },
+  "gravitationalParametersKm3PerS2": {
+    "body": 1.151,
+    "parent": 264.413,
+    "combined": 265.564
+  },
+  "sources": {
+    "relative": {
+      "path": "source/orbit/hiiaka-epoch.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136108&CENTER=500%40920136108&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "5c2d93c8540488799fa2e147849419e234138732a845c479b24af0385b608288",
+      "bytes": 6920,
+      "target": 120136108,
+      "center": 920136108
+    },
+    "parent": {
+      "path": "source/orbit/haumea-epoch.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "3337cf80561af77c3a24e634c5f0a58a258197b55a8c9faad3f43f8113c6d08f",
+      "bytes": 6815,
+      "target": 920136108,
+      "center": 10
+    },
+    "heliocentricCheck": {
+      "path": "source/orbit/hiiaka-heliocentric-check.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "fc598ca5242537ad0233dd7e5f8906b5e62005f2511b6572873e2b4d33e0d107",
+      "bytes": 6899,
+      "target": 120136108,
+      "center": 10
+    }
+  },
+  "validation": {
+    "model": "independent Horizons heliocentric query minus primary heliocentric query agrees with direct primary-relative query",
+    "positionResidualKm": [
+      -8.234565029852092e-07,
+      7.630878826603293e-07,
+      8.642091415822506e-07
+    ],
+    "velocityResidualKmPerDay": [
+      -5.002220859751105e-12,
+      1.8474111129762605e-11,
+      4.547473508864641e-12
+    ],
+    "maxPositionResidualKm": 8.642091415822506e-07,
+    "maxVelocityResidualKmPerDay": 1.8474111129762605e-11,
+    "positionToleranceKm": 1e-05,
+    "velocityToleranceKmPerDay": 1e-08,
+    "qualification": "This validates coordinate composition and parser wiring, not the scientific accuracy of the source orbit."
+  },
+  "limitations": [
+    "Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.",
+    "This is the retained JPL solution, not the newer Proudfoot et al. 2024 interacting solution; phase accuracy is limited.",
+    "The solution GM values define this orbit calculation and are separate from the occultation shape/size measurements."
+  ],
+  "runtimeExtrapolation": false
+}

@@ -1,0 +1,46 @@
+{
+  "modelId": 1864,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1864",
+  "fields": {
+    "ID": "1864",
+    "Asteroid ID": "(192) Nausikaa",
+    "Lambda": "139",
+    "Beta": "-45",
+    "Period": "13.62523",
+    "YORP": "",
+    "JD0": "2438360",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0.78",
+    "LSM Parameter 3": "0.03",
+    "LSM Parameter 4": "-0.82",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "94",
+    "Equivalent Diameter Error": "5",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2018-02-19",
+    "Comment": "",
+    "Created": "2018-02-19 13:37:18",
+    "Modified": "2018-02-19 13:39:01"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/487/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/488/occ_2018-02-04.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/489/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/490/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/103",
+    "https://damit.cuni.cz/projects/damit/references/view/112"
+  ]
+}

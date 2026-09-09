@@ -1,0 +1,1003 @@
+{
+  "id": "comet-81p",
+  "browser": "152.0.7977.76",
+  "pickerSha256": "1f5c9f894bcd1f31ea087770de6cc6919f480867a484d0e26414baa0f50cc87e",
+  "runtimeSha256": "fc1f9770607126d27798b29c176966dad3485b77fa63518fa5e75e269596a6cb",
+  "reports": [
+    {
+      "dpr": 1,
+      "views": [
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 255,
+          "clearMisses": 519,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 51,
+          "rasterEdgeSamples": [
+            {
+              "x": 600,
+              "y": 210,
+              "distanceCssPixels": 0.3606652064049104
+            },
+            {
+              "x": 570,
+              "y": 240,
+              "distanceCssPixels": 0.0634949242403005
+            },
+            {
+              "x": 630,
+              "y": 240,
+              "distanceCssPixels": 0.22284823863850597
+            },
+            {
+              "x": 870,
+              "y": 270,
+              "distanceCssPixels": 0.48564308920068205
+            },
+            {
+              "x": 630,
+              "y": 300,
+              "distanceCssPixels": 0.03595407704498023
+            },
+            {
+              "x": 960,
+              "y": 300,
+              "distanceCssPixels": 0.24531158341426412
+            },
+            {
+              "x": 780,
+              "y": 330,
+              "distanceCssPixels": 0.23962699934464746
+            },
+            {
+              "x": 570,
+              "y": 390,
+              "distanceCssPixels": 0.013845454593472625
+            },
+            {
+              "x": 660,
+              "y": 390,
+              "distanceCssPixels": 0.3048709830871716
+            },
+            {
+              "x": 900,
+              "y": 390,
+              "distanceCssPixels": 0.03783432640192617
+            },
+            {
+              "x": 600,
+              "y": 420,
+              "distanceCssPixels": 0.29518604841211804
+            },
+            {
+              "x": 960,
+              "y": 420,
+              "distanceCssPixels": 0.21828512644858458
+            },
+            {
+              "x": 540,
+              "y": 450,
+              "distanceCssPixels": 0.30750647412869814
+            },
+            {
+              "x": 930,
+              "y": 450,
+              "distanceCssPixels": 0.4599760890165749
+            },
+            {
+              "x": 480,
+              "y": 480,
+              "distanceCssPixels": 0.19633010783203128
+            },
+            {
+              "x": 540,
+              "y": 600,
+              "distanceCssPixels": 0.3115131390399135
+            },
+            {
+              "x": 930,
+              "y": 600,
+              "distanceCssPixels": 0.388598181268675
+            },
+            {
+              "x": 750,
+              "y": 660,
+              "distanceCssPixels": 0.43128130423127436
+            },
+            {
+              "x": 750,
+              "y": 690,
+              "distanceCssPixels": 0.22953657574762173
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 6e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 257,
+          "clearMisses": 529,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 39,
+          "rasterEdgeSamples": [
+            {
+              "x": 810,
+              "y": 330,
+              "distanceCssPixels": 0.2556799310101475
+            },
+            {
+              "x": 480,
+              "y": 390,
+              "distanceCssPixels": 0.47622126637872464
+            },
+            {
+              "x": 480,
+              "y": 420,
+              "distanceCssPixels": 0.18863149660658585
+            },
+            {
+              "x": 870,
+              "y": 420,
+              "distanceCssPixels": 0.3434209779171033
+            },
+            {
+              "x": 960,
+              "y": 420,
+              "distanceCssPixels": 0.052822199153196726
+            },
+            {
+              "x": 570,
+              "y": 450,
+              "distanceCssPixels": 0.15031459140297002
+            },
+            {
+              "x": 960,
+              "y": 480,
+              "distanceCssPixels": 0.30123675881949297
+            },
+            {
+              "x": 540,
+              "y": 540,
+              "distanceCssPixels": 0.4036676937375787
+            },
+            {
+              "x": 510,
+              "y": 570,
+              "distanceCssPixels": 0.09977930581892226
+            },
+            {
+              "x": 660,
+              "y": 570,
+              "distanceCssPixels": 0.24090573527778983
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.0134218, 0, -0.0148276, 0, 0.00507132, 0.0187939, 0.00459051, 0, 0.0139333, -0.0068404, 0.0126123, 0, -2e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 192,
+          "clearMisses": 592,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 41,
+          "rasterEdgeSamples": [
+            {
+              "x": 900,
+              "y": 210,
+              "distanceCssPixels": 0.14829722083338645
+            },
+            {
+              "x": 900,
+              "y": 240,
+              "distanceCssPixels": 0.08214011572523872
+            },
+            {
+              "x": 600,
+              "y": 270,
+              "distanceCssPixels": 0.13819151583403347
+            },
+            {
+              "x": 930,
+              "y": 270,
+              "distanceCssPixels": 0.3329498211842387
+            },
+            {
+              "x": 870,
+              "y": 390,
+              "distanceCssPixels": 0.31715029468590483
+            },
+            {
+              "x": 900,
+              "y": 390,
+              "distanceCssPixels": 0.14377258811771976
+            },
+            {
+              "x": 630,
+              "y": 450,
+              "distanceCssPixels": 0.18469714085009276
+            },
+            {
+              "x": 900,
+              "y": 450,
+              "distanceCssPixels": 0.19033837431290263
+            },
+            {
+              "x": 780,
+              "y": 480,
+              "distanceCssPixels": 0.2555822058729148
+            },
+            {
+              "x": 570,
+              "y": 510,
+              "distanceCssPixels": 0.31218212190368644
+            },
+            {
+              "x": 870,
+              "y": 540,
+              "distanceCssPixels": 0.4993084479624256
+            },
+            {
+              "x": 810,
+              "y": 600,
+              "distanceCssPixels": 0.024875780776453495
+            },
+            {
+              "x": 540,
+              "y": 630,
+              "distanceCssPixels": 0.23015697191170878
+            },
+            {
+              "x": 810,
+              "y": 660,
+              "distanceCssPixels": 0.24869588426533715
+            },
+            {
+              "x": 690,
+              "y": 690,
+              "distanceCssPixels": 0.3609357176416052
+            },
+            {
+              "x": 600,
+              "y": 720,
+              "distanceCssPixels": 0.031235651109415397
+            },
+            {
+              "x": 570,
+              "y": 750,
+              "distanceCssPixels": 0.06165405541543935
+            },
+            {
+              "x": 720,
+              "y": 750,
+              "distanceCssPixels": 0.34958135454378353
+            },
+            {
+              "x": 630,
+              "y": 780,
+              "distanceCssPixels": 0.14237508750322111
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.00198564, 0, -0.0199012, 0, 0.00680661, 0.0187939, -0.000679128, 0, 0.018701, -0.0068404, -0.00186589, 0, -2e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 215,
+          "clearMisses": 554,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 56,
+          "rasterEdgeSamples": [
+            {
+              "x": 930,
+              "y": 240,
+              "distanceCssPixels": 0.34690197905045433
+            },
+            {
+              "x": 870,
+              "y": 390,
+              "distanceCssPixels": 0.1409020041855064
+            },
+            {
+              "x": 570,
+              "y": 420,
+              "distanceCssPixels": 0.4708440856349354
+            },
+            {
+              "x": 510,
+              "y": 630,
+              "distanceCssPixels": 0.24143452818048353
+            },
+            {
+              "x": 540,
+              "y": 690,
+              "distanceCssPixels": 0.18585859213473696
+            },
+            {
+              "x": 600,
+              "y": 720,
+              "distanceCssPixels": 0.2222251059248455
+            },
+            {
+              "x": 630,
+              "y": 720,
+              "distanceCssPixels": 0.28902503499988225
+            },
+            {
+              "x": 810,
+              "y": 720,
+              "distanceCssPixels": 0.367171914593951
+            },
+            {
+              "x": 600,
+              "y": 780,
+              "distanceCssPixels": 0.2654397297373149
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.0160868, 0, -0.0118833, 0, 0.00406434, 0.0187939, -0.00550202, 0, 0.0111667, -0.0068404, -0.0151167, 0, 6e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 262,
+          "clearMisses": 511,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 52,
+          "rasterEdgeSamples": [
+            {
+              "x": 540,
+              "y": 240,
+              "distanceCssPixels": 0.16604834128718093
+            },
+            {
+              "x": 990,
+              "y": 420,
+              "distanceCssPixels": 0.17547589713381734
+            },
+            {
+              "x": 480,
+              "y": 510,
+              "distanceCssPixels": 0.4658059073401618
+            },
+            {
+              "x": 570,
+              "y": 600,
+              "distanceCssPixels": 0.2395127664615539
+            },
+            {
+              "x": 720,
+              "y": 630,
+              "distanceCssPixels": 0.17271370877819225
+            },
+            {
+              "x": 510,
+              "y": 660,
+              "distanceCssPixels": 0.2964496934737158
+            },
+            {
+              "x": 690,
+              "y": 660,
+              "distanceCssPixels": 0.43565577314852655
+            },
+            {
+              "x": 900,
+              "y": 690,
+              "distanceCssPixels": 0.4308522798459691
+            },
+            {
+              "x": 660,
+              "y": 720,
+              "distanceCssPixels": 0.43635115293258475
+            },
+            {
+              "x": 720,
+              "y": 720,
+              "distanceCssPixels": 0.3932524654258889
+            },
+            {
+              "x": 750,
+              "y": 780,
+              "distanceCssPixels": 0.347749266560755
+            },
+            {
+              "x": 720,
+              "y": 810,
+              "distanceCssPixels": 0.2893090598725785
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -3e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 234,
+          "clearMisses": 538,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 53,
+          "rasterEdgeSamples": [
+            {
+              "x": 480,
+              "y": 360,
+              "distanceCssPixels": 0.08282507016678513
+            },
+            {
+              "x": 540,
+              "y": 360,
+              "distanceCssPixels": 0.47625030573718097
+            },
+            {
+              "x": 450,
+              "y": 390,
+              "distanceCssPixels": 0.28894466750177866
+            },
+            {
+              "x": 780,
+              "y": 390,
+              "distanceCssPixels": 0.15264553152528743
+            },
+            {
+              "x": 630,
+              "y": 420,
+              "distanceCssPixels": 0.0019232642124072385
+            },
+            {
+              "x": 480,
+              "y": 450,
+              "distanceCssPixels": 0.12443158716355081
+            },
+            {
+              "x": 930,
+              "y": 450,
+              "distanceCssPixels": 0.09323860159122324
+            },
+            {
+              "x": 510,
+              "y": 540,
+              "distanceCssPixels": 0.15454329003150769
+            },
+            {
+              "x": 510,
+              "y": 570,
+              "distanceCssPixels": 0.058055054628798036
+            },
+            {
+              "x": 540,
+              "y": 600,
+              "distanceCssPixels": 0.4533613062292777
+            },
+            {
+              "x": 540,
+              "y": 660,
+              "distanceCssPixels": 0.1779920538293162
+            },
+            {
+              "x": 840,
+              "y": 660,
+              "distanceCssPixels": 0.308690003797026
+            },
+            {
+              "x": 690,
+              "y": 720,
+              "distanceCssPixels": 0.20642117296219492
+            },
+            {
+              "x": 900,
+              "y": 720,
+              "distanceCssPixels": 0.13456884699434116
+            },
+            {
+              "x": 720,
+              "y": 780,
+              "distanceCssPixels": 0.43429863422186166
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.0102275, 0, 0.0171872, 0, -0.00587835, 0.0187939, -0.00349801, 0, -0.0161506, -0.0068404, -0.0096107, 0, -3e-06, 0, 116.839, 1)"
+        }
+      ],
+      "totals": {
+        "hits": 1415,
+        "misses": 3243,
+        "back": 0,
+        "mismatches": 0
+      }
+    },
+    {
+      "dpr": 2,
+      "views": [
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 255,
+          "clearMisses": 519,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 51,
+          "rasterEdgeSamples": [
+            {
+              "x": 600,
+              "y": 210,
+              "distanceCssPixels": 0.3606652064049104
+            },
+            {
+              "x": 570,
+              "y": 240,
+              "distanceCssPixels": 0.0634949242403005
+            },
+            {
+              "x": 630,
+              "y": 240,
+              "distanceCssPixels": 0.22284823863850597
+            },
+            {
+              "x": 870,
+              "y": 270,
+              "distanceCssPixels": 0.48564308920068205
+            },
+            {
+              "x": 630,
+              "y": 300,
+              "distanceCssPixels": 0.03595407704498023
+            },
+            {
+              "x": 960,
+              "y": 300,
+              "distanceCssPixels": 0.24531158341426412
+            },
+            {
+              "x": 780,
+              "y": 330,
+              "distanceCssPixels": 0.23962699934464746
+            },
+            {
+              "x": 570,
+              "y": 390,
+              "distanceCssPixels": 0.013845454593472625
+            },
+            {
+              "x": 660,
+              "y": 390,
+              "distanceCssPixels": 0.3048709830871716
+            },
+            {
+              "x": 900,
+              "y": 390,
+              "distanceCssPixels": 0.03783432640192617
+            },
+            {
+              "x": 600,
+              "y": 420,
+              "distanceCssPixels": 0.29518604841211804
+            },
+            {
+              "x": 960,
+              "y": 420,
+              "distanceCssPixels": 0.21828512644858458
+            },
+            {
+              "x": 540,
+              "y": 450,
+              "distanceCssPixels": 0.30750647412869814
+            },
+            {
+              "x": 930,
+              "y": 450,
+              "distanceCssPixels": 0.4599760890165749
+            },
+            {
+              "x": 480,
+              "y": 480,
+              "distanceCssPixels": 0.19633010783203128
+            },
+            {
+              "x": 540,
+              "y": 600,
+              "distanceCssPixels": 0.3115131390399135
+            },
+            {
+              "x": 930,
+              "y": 600,
+              "distanceCssPixels": 0.388598181268675
+            },
+            {
+              "x": 750,
+              "y": 660,
+              "distanceCssPixels": 0.43128130423127436
+            },
+            {
+              "x": 750,
+              "y": 690,
+              "distanceCssPixels": 0.22953657574762173
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.02, 0, 0, 0, 0, 0.0187939, 0.0068404, 0, 0, -0.0068404, 0.0187939, 0, 6e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 257,
+          "clearMisses": 529,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 39,
+          "rasterEdgeSamples": [
+            {
+              "x": 810,
+              "y": 330,
+              "distanceCssPixels": 0.2556799310101475
+            },
+            {
+              "x": 480,
+              "y": 390,
+              "distanceCssPixels": 0.47622126637872464
+            },
+            {
+              "x": 480,
+              "y": 420,
+              "distanceCssPixels": 0.18863149660658585
+            },
+            {
+              "x": 870,
+              "y": 420,
+              "distanceCssPixels": 0.3434209779171033
+            },
+            {
+              "x": 960,
+              "y": 420,
+              "distanceCssPixels": 0.052822199153196726
+            },
+            {
+              "x": 570,
+              "y": 450,
+              "distanceCssPixels": 0.15031459140297002
+            },
+            {
+              "x": 960,
+              "y": 480,
+              "distanceCssPixels": 0.30123675881949297
+            },
+            {
+              "x": 540,
+              "y": 540,
+              "distanceCssPixels": 0.4036676937375787
+            },
+            {
+              "x": 510,
+              "y": 570,
+              "distanceCssPixels": 0.09977930581892226
+            },
+            {
+              "x": 660,
+              "y": 570,
+              "distanceCssPixels": 0.24090573527778983
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.0134218, 0, -0.0148276, 0, 0.00507132, 0.0187939, 0.00459051, 0, 0.0139333, -0.0068404, 0.0126123, 0, -2e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 192,
+          "clearMisses": 592,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 41,
+          "rasterEdgeSamples": [
+            {
+              "x": 900,
+              "y": 210,
+              "distanceCssPixels": 0.14829722083338645
+            },
+            {
+              "x": 900,
+              "y": 240,
+              "distanceCssPixels": 0.08214011572523872
+            },
+            {
+              "x": 600,
+              "y": 270,
+              "distanceCssPixels": 0.13819151583403347
+            },
+            {
+              "x": 930,
+              "y": 270,
+              "distanceCssPixels": 0.3329498211842387
+            },
+            {
+              "x": 870,
+              "y": 390,
+              "distanceCssPixels": 0.31715029468590483
+            },
+            {
+              "x": 900,
+              "y": 390,
+              "distanceCssPixels": 0.14377258811771976
+            },
+            {
+              "x": 630,
+              "y": 450,
+              "distanceCssPixels": 0.18469714085009276
+            },
+            {
+              "x": 900,
+              "y": 450,
+              "distanceCssPixels": 0.19033837431290263
+            },
+            {
+              "x": 780,
+              "y": 480,
+              "distanceCssPixels": 0.2555822058729148
+            },
+            {
+              "x": 570,
+              "y": 510,
+              "distanceCssPixels": 0.31218212190368644
+            },
+            {
+              "x": 870,
+              "y": 540,
+              "distanceCssPixels": 0.4993084479624256
+            },
+            {
+              "x": 810,
+              "y": 600,
+              "distanceCssPixels": 0.024875780776453495
+            },
+            {
+              "x": 540,
+              "y": 630,
+              "distanceCssPixels": 0.23015697191170878
+            },
+            {
+              "x": 810,
+              "y": 660,
+              "distanceCssPixels": 0.24869588426533715
+            },
+            {
+              "x": 690,
+              "y": 690,
+              "distanceCssPixels": 0.3609357176416052
+            },
+            {
+              "x": 600,
+              "y": 720,
+              "distanceCssPixels": 0.031235651109415397
+            },
+            {
+              "x": 570,
+              "y": 750,
+              "distanceCssPixels": 0.06165405541543935
+            },
+            {
+              "x": 720,
+              "y": 750,
+              "distanceCssPixels": 0.34958135454378353
+            },
+            {
+              "x": 630,
+              "y": 780,
+              "distanceCssPixels": 0.14237508750322111
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.00198564, 0, -0.0199012, 0, 0.00680661, 0.0187939, -0.000679128, 0, 0.018701, -0.0068404, -0.00186589, 0, -2e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 215,
+          "clearMisses": 554,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 56,
+          "rasterEdgeSamples": [
+            {
+              "x": 930,
+              "y": 240,
+              "distanceCssPixels": 0.34690197905045433
+            },
+            {
+              "x": 870,
+              "y": 390,
+              "distanceCssPixels": 0.1409020041855064
+            },
+            {
+              "x": 570,
+              "y": 420,
+              "distanceCssPixels": 0.4708440856349354
+            },
+            {
+              "x": 510,
+              "y": 630,
+              "distanceCssPixels": 0.24143452818048353
+            },
+            {
+              "x": 540,
+              "y": 690,
+              "distanceCssPixels": 0.18585859213473696
+            },
+            {
+              "x": 600,
+              "y": 720,
+              "distanceCssPixels": 0.2222251059248455
+            },
+            {
+              "x": 630,
+              "y": 720,
+              "distanceCssPixels": 0.28902503499988225
+            },
+            {
+              "x": 810,
+              "y": 720,
+              "distanceCssPixels": 0.367171914593951
+            },
+            {
+              "x": 600,
+              "y": 780,
+              "distanceCssPixels": 0.2654397297373149
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.0160868, 0, -0.0118833, 0, 0.00406434, 0.0187939, -0.00550202, 0, 0.0111667, -0.0068404, -0.0151167, 0, 6e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 262,
+          "clearMisses": 511,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 52,
+          "rasterEdgeSamples": [
+            {
+              "x": 540,
+              "y": 240,
+              "distanceCssPixels": 0.16604834128718093
+            },
+            {
+              "x": 990,
+              "y": 420,
+              "distanceCssPixels": 0.17547589713381734
+            },
+            {
+              "x": 480,
+              "y": 510,
+              "distanceCssPixels": 0.4658059073401618
+            },
+            {
+              "x": 570,
+              "y": 600,
+              "distanceCssPixels": 0.2395127664615539
+            },
+            {
+              "x": 720,
+              "y": 630,
+              "distanceCssPixels": 0.17271370877819225
+            },
+            {
+              "x": 510,
+              "y": 660,
+              "distanceCssPixels": 0.2964496934737158
+            },
+            {
+              "x": 690,
+              "y": 660,
+              "distanceCssPixels": 0.43565577314852655
+            },
+            {
+              "x": 900,
+              "y": 690,
+              "distanceCssPixels": 0.4308522798459691
+            },
+            {
+              "x": 660,
+              "y": 720,
+              "distanceCssPixels": 0.43635115293258475
+            },
+            {
+              "x": 720,
+              "y": 720,
+              "distanceCssPixels": 0.3932524654258889
+            },
+            {
+              "x": 750,
+              "y": 780,
+              "distanceCssPixels": 0.347749266560755
+            },
+            {
+              "x": 720,
+              "y": 810,
+              "distanceCssPixels": 0.2893090598725785
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.0196057, 0, 0.00395165, 0, -0.00135154, 0.0187939, -0.00670555, 0, -0.00371334, -0.0068404, -0.0184234, 0, -3e-06, 0, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 992,
+          "nativeFrontHits": 234,
+          "clearMisses": 538,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 53,
+          "rasterEdgeSamples": [
+            {
+              "x": 480,
+              "y": 360,
+              "distanceCssPixels": 0.08282507016678513
+            },
+            {
+              "x": 540,
+              "y": 360,
+              "distanceCssPixels": 0.47625030573718097
+            },
+            {
+              "x": 450,
+              "y": 390,
+              "distanceCssPixels": 0.28894466750177866
+            },
+            {
+              "x": 780,
+              "y": 390,
+              "distanceCssPixels": 0.15264553152528743
+            },
+            {
+              "x": 630,
+              "y": 420,
+              "distanceCssPixels": 0.0019232642124072385
+            },
+            {
+              "x": 480,
+              "y": 450,
+              "distanceCssPixels": 0.12443158716355081
+            },
+            {
+              "x": 930,
+              "y": 450,
+              "distanceCssPixels": 0.09323860159122324
+            },
+            {
+              "x": 510,
+              "y": 540,
+              "distanceCssPixels": 0.15454329003150769
+            },
+            {
+              "x": 510,
+              "y": 570,
+              "distanceCssPixels": 0.058055054628798036
+            },
+            {
+              "x": 540,
+              "y": 600,
+              "distanceCssPixels": 0.4533613062292777
+            },
+            {
+              "x": 540,
+              "y": 660,
+              "distanceCssPixels": 0.1779920538293162
+            },
+            {
+              "x": 840,
+              "y": 660,
+              "distanceCssPixels": 0.308690003797026
+            },
+            {
+              "x": 690,
+              "y": 720,
+              "distanceCssPixels": 0.20642117296219492
+            },
+            {
+              "x": 900,
+              "y": 720,
+              "distanceCssPixels": 0.13456884699434116
+            },
+            {
+              "x": 720,
+              "y": 780,
+              "distanceCssPixels": 0.43429863422186166
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.0102275, 0, 0.0171872, 0, -0.00587835, 0.0187939, -0.00349801, 0, -0.0161506, -0.0068404, -0.0096107, 0, -3e-06, 0, 116.839, 1)"
+        }
+      ],
+      "totals": {
+        "hits": 1415,
+        "misses": 3243,
+        "back": 0,
+        "mismatches": 0
+      }
+    }
+  ],
+  "errors": []
+}

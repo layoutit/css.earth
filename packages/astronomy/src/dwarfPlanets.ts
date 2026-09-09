@@ -1,8 +1,9 @@
-import { bodyData, DWARF_PLANET_IDS, type DwarfPlanetId } from './bodies.js'
+import { bodyData, moonsOf, DWARF_PLANET_IDS, type DwarfPlanetId } from './bodies.js'
 import { DWARF_PLANET_ELEMENTS } from './data/dwarfPlanetElements.data.js'
 import type { Frame } from './frames.js'
 import { keplerApoapsisKm, keplerPositionKm, type KeplerianElements } from './kepler.js'
-import { chooseFrameUnitM, SUN_FRAME_ID, type SolarSystemFrameSpec } from './solarSystem.js'
+import { chooseFrameUnitM, moonApoapsisKm, moonPositionRelativeToPlanetKm, SUN_FRAME_ID, type SolarSystemFrameSpec } from './solarSystem.js'
+import { isSceneSatellite } from './sceneSatellites.js'
 import { M_PER_AU, M_PER_KM } from './units.js'
 import type { Vec3 } from './vec3.js'
 
@@ -25,31 +26,20 @@ export const dwarfPlanetPositionKm = (id: DwarfPlanetId, epochJdTt: number): Vec
 /** `a(1 + e)` — the exact bound the body's frame `maxOffsetInParent` needs. */
 export const dwarfPlanetApoapsisKm = (id: DwarfPlanetId): number => keplerApoapsisKm(dwarfPlanetElements(id))
 
-/**
- * Frame specs for the five dwarf planets, each parented DIRECTLY on the Sun
- * frame — no barycentre level, because moons are out of scope here (see
- * `bodies.ts`'s `DwarfPlanetId` doc comment) and a dwarf planet's own frame is
- * therefore its whole heliocentric position, exactly the way a moon's frame is
- * its whole position relative to its planet.
- *
- * Deliberately a SEPARATE function from `solarSystemFrameSpecs`, not folded
- * into it: `solarSystem.test.ts`'s "declares maxOffsetInParent that really
- * bounds the origin" test sweeps every spec that function returns across the
- * package's 1900-2100 validity window, which is a claim about the VSOP87 and
- * ELP2000-82B truncation and does not apply to a single-epoch osculating
- * ellipse — see the data file's header. Keeping this separate means that test
- * keeps meaning exactly what it already asserts, unchanged, while these five
- * frames get their own coverage in `dwarfPlanets.test.ts` instead.
- *
- * The Sun frame's own unit is pinned at `M_PER_AU` by
- * `solarSystem.test.ts` ("picks every unit off the ladder" -> `unitOf.get
- * (SUN_FRAME_ID)).toBe(M_PER_AU)`), so `originInParent` here converts into au
- * directly rather than importing `solarSystemFrameSpecs` just to ask it.
+/** Dwarf-planet centre elements are heliocentric (not system barycentres).
+ * Their satellites use parent-relative fitted ellipses, with frame units
+ * derived from the same containment rule as every other satellite system.
+ * Scene-only satellites are excluded: they have neither a propagated state
+ * nor necessarily the same parent ephemeris as this time-domain frame tree.
+ * Their explicit scene-state API retains the matching primary state instead.
  */
 export const dwarfPlanetFrameSpecs = (): readonly SolarSystemFrameSpec[] =>
-  DWARF_PLANET_IDS.map((id) => {
+  DWARF_PLANET_IDS.flatMap((id) => {
     const radiusM = bodyData(id).meanRadiusKm * M_PER_KM
-    const unitM = chooseFrameUnitM(radiusM, 0, [])
+    const moons = moonsOf(id).filter(moon => !isSceneSatellite(moon))
+    const childUnits = moons.map(moon => chooseFrameUnitM(bodyData(moon).meanRadiusKm * M_PER_KM, 0, []))
+    const maxChildOffsetM = Math.max(0, ...moons.map(moon => moonApoapsisKm(moon) * M_PER_KM))
+    const unitM = chooseFrameUnitM(radiusM, maxChildOffsetM, childUnits)
     const kmPerAu = M_PER_AU / M_PER_KM
     const frame: Frame = {
       id,
@@ -62,5 +52,16 @@ export const dwarfPlanetFrameSpecs = (): readonly SolarSystemFrameSpec[] =>
         return [km[0] / kmPerAu, km[1] / kmPerAu, km[2] / kmPerAu]
       },
     }
-    return { body: id, frame }
+    return [{ body: id, frame }, ...moons.map((moon, index): SolarSystemFrameSpec => ({
+      body: moon,
+      frame: {
+        id: moon, parent: id, unitM: childUnits[index]!,
+        radiusM: bodyData(moon).meanRadiusKm * M_PER_KM,
+        maxOffsetInParent: moonApoapsisKm(moon) * M_PER_KM / unitM,
+        originInParent: epochJdTt => {
+          const km = moonPositionRelativeToPlanetKm(moon, epochJdTt)
+          return [km[0] * M_PER_KM / unitM, km[1] * M_PER_KM / unitM, km[2] * M_PER_KM / unitM]
+        },
+      },
+    }))]
   })

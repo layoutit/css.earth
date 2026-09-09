@@ -1,0 +1,121 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/678",
+  "modelId": 678,
+  "modelVersion": "2013-02-11",
+  "diameterKm": 24.38,
+  "diameterInterpretation": "Approximate scale from a thermal diameter of 24.38 ± 0.48 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects.",
+  "calibration": {
+    "diameterKm": 24.38,
+    "uncertaintyKm": 0.48,
+    "reportedUncertaintyKm": 0.48,
+    "uncertaintyMeaning": "Published thermal-model uncertainty propagated from flux, absolute magnitude and slope parameter. Shape, spin/aspect and fixed thermophysical assumptions are not fully included.",
+    "systematicUncertaintyFraction": null,
+    "systematicMeaning": "Usui2011 notes additional unquantified model effects and typically a few to approximately10% rotation-related size uncertainty; this is not an object-specific interval.",
+    "quantity": "Standard Thermal Model mean effective spherical diameter",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ63,1117-1138, AcuA V1",
+    "referenceUrl": "https://doi.org/10.1093/pasj/63.5.1117",
+    "selectedRow": {
+      "line": "1111   Reinmuthia         1927 CO    10.67  0.15  7   24.38  0.48 0.167 0.008",
+      "lineNumber": 1056,
+      "number": 1111,
+      "detections": 7,
+      "diameterKm": 24.38,
+      "diameterUncertaintyKm": 0.48
+    },
+    "sources": [
+      {
+        "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "sha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51",
+        "bytes": 120256
+      },
+      {
+        "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/ReadMe.AcuA.txt",
+        "sha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057",
+        "bytes": 3836
+      },
+      {
+        "url": "https://arxiv.org/pdf/1106.1948",
+        "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499",
+        "bytes": 635799
+      },
+      {
+        "url": "https://www.ir.isas.jaxa.jp/AKARI/results/20111013_AcuA/",
+        "sha256": "9fb77b99f8f1983ba7694234ff6d017723e348eaeaa8c0f4565202385e81979b",
+        "bytes": 11064
+      }
+    ],
+    "selectionReason": "Direct AKARI measured thermal diameter is available; no diameter exists in current SBDB or the queried NEOWISE V2 rows. No assumed-albedo size is used.",
+    "scaleKmPerSourceUnit": 19.650182471948504,
+    "formula": "scaleKmPerSourceUnit = diameterKm / cbrt(6 * signedSourceVolume / pi); meterScale =1000*scaleKmPerSourceUnit. Original shape coordinates are preserved.",
+    "approximate": true,
+    "limitations": [
+      "The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.",
+      "AKARI catalog ±0.48 km omits unquantified spin/aspect and thermal-model effects; Reinmuthia is elongated, so absolute scale remains approximate."
+    ],
+    "sourceLabel": "Usui et al. (2011), PASJ63,1117-1138, AcuA V1",
+    "visibleDescription": "Approximate scale from a thermal diameter of 24.38 ± 0.48 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects."
+  },
+  "periodHours": 4.007347,
+  "poleEclipticJ2000Degrees": [
+    153,
+    78
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/2681/shape.txt",
+    "vertices": 1018,
+    "faces": 2032,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 19650.182471948505,
+    "firstVertexKm": [
+      9.78604632340249,
+      0.38449512042861644,
+      7.352724927536163
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      35.047181198756114,
+      33.03572957038005,
+      15.26648221482893
+    ],
+    "volumeCubicKm": 7587.517856541891,
+    "volumeEquivalentRadiusKm": 12.189999999999992,
+    "radialRangeKm": [
+      8.31332428729759,
+      20.507346245660507
+    ]
+  },
+  "elevation": [
+    -4,
+    9
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2032,
+    "sourceVertices": 1018,
+    "weldedVertices": 1018,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 243.8,
+    "estimatedErrorMeters": 78.09556579589844,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 7580387314679.087
+    }
+  }
+}

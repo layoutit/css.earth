@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271125%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                1125 China (1957 UN1)          2026-Sep-08 10:25:57
+Rec #:    1125 (+COV) Soln.date: 2026-Jun-05_04:31:59   # obs: 5693 (1909-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458319.5 ! 2018-Jul-20.00 (TDB)         Residual RMS= .23989
+   EC= .2177656825501293   QR= 2.446563453568193   TP= 2458813.7798390137
+   OM= 97.16686736444427   W=  10.68261613950378   IN= 3.040567778087763
+   A= 3.127660598609547    MA= 271.9260362890428   ADIST= 3.808757743650901
+   PER= 5.53143            N= .178186438           ANGMOM= .029692143
+   DAN= 2.45417            DDN= 3.79047            L= 107.8347902
+   B= .56337               MOID= 1.46328998        TP= 2019-Nov-26.2798390137
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 13.042             ROTPER= 5.367
+   H= 11.67                G= .150                 B-V= n.a.
+                           ALBEDO= .078            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#72, OCC=0
+2: source=ORB
+*******************************************************************************

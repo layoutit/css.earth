@@ -4,12 +4,24 @@
 
 :root {
   --shell-text: #dfdfdf;
-  --shell-text-secondary: #a9acb5;
-  --shell-text-muted: #7f8187;
+  --shell-text-secondary: #b0b0b0;
+  --shell-text-muted: #858585;
+  --shell-background: #000;
+  --shell-surface: #0d0d0d;
+  --shell-surface-hover: #1a1a1a;
+  --shell-surface-selected: #151515;
+  --shell-border: rgb(255 255 255 / 20%);
+  --shell-border-hover: rgb(255 255 255 / 22%);
+  --shell-divider: #151515;
+  --shell-divider-muted: rgb(255 255 255 / 12%);
+  --shell-focus: #aaa;
+  --shell-selection: #444;
+  --shell-disabled-opacity: .5;
   --shell-ui-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
   color-scheme: dark;
-  background: #000;
+  accent-color: var(--shell-focus);
+  background: var(--shell-background);
 }
 
 *,
@@ -24,7 +36,19 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden;
-  background: #000;
+  background: var(--shell-background);
+}
+
+.planet-viewport {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  contain: layout paint;
+  background: var(--shell-background);
 }
 
 .planet-stage {
@@ -40,17 +64,17 @@ body {
   min-height: 0;
   margin: 0;
   overflow: hidden;
-  background-color: #000;
+  background-color: var(--shell-background);
 }
 
 .planet-stage > .planet-render-root {
   transform-origin: 50% 50%;
 }
 
-html:not([data-scene-presented="true"]) body.loading::after,
-body.priming::after {
+html:not([data-scene-presented="true"]) body.loading .planet-viewport::after,
+body.priming .planet-viewport::after {
   content: "";
-  position: fixed;
+  position: absolute;
   z-index: 120;
   inset: 0;
   width: 30px;
@@ -72,7 +96,7 @@ body.priming::after {
 html:not([data-scene-presented="true"]) .planet-stage { opacity: 0.001; }
 
 .planet-input-surface {
-  position: fixed;
+  position: absolute;
   z-index: 10;
   inset: 0;
   pointer-events: none;
@@ -80,6 +104,14 @@ html:not([data-scene-presented="true"]) .planet-stage { opacity: 0.001; }
 }
 html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; }
 .planet-input-surface:focus { outline: none; }
+
+.planet-scene-overlays {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  isolation: isolate;
+  pointer-events: none;
+}
 
 [data-context-label] {
   background: transparent;
@@ -96,7 +128,7 @@ html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; 
   padding: 2px;
   box-shadow: none;
   border-radius: 0;
-  background: url("/navigation/sun-indicator-hexagon.png") center / 100% 100% no-repeat;
+  background: url("/navigation/sun-indicator-heptagon.png") center / 100% 100% no-repeat;
 }
 
 .prepared-world-context [data-context-group][data-object-hovered="true"] > [data-context-indicator="sun"] {
@@ -113,4 +145,9 @@ html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; 
   overflow: hidden;
   white-space: nowrap;
   border: 0;
+}
+
+::selection {
+  color: var(--shell-text);
+  background: var(--shell-selection);
 }

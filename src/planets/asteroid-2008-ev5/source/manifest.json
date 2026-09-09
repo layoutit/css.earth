@@ -1,0 +1,210 @@
+{
+  "schema": "cssasteroid-2008-ev5-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "asteroid-2008-ev5-shape",
+      "path": "shape/2008ev5.obj",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj",
+      "credit": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 200
+      },
+      "coverage": "The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
+      "expectedBytes": 120483,
+      "expectedSha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "asteroid-2008-ev5-research-2008ev5",
+      "path": "reference/2008ev5.pdf",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/2008EV5/busch.etal.2011.2008ev5.pdf",
+      "credit": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 1610259,
+      "expectedSha256": "da32aca932a661196050a3078126c930778a5673b625ad389b0c3fa49d5c7fcc"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/2008ev5.obj",
+      "credit": "Busch et al. (2011), Icarus 212, 649–660; Arecibo, Goldstone, VLBA and NASA/JPL shape archive",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 93596,
+      "expectedSha256": "af0a5a6e7d098b7fce68d1aeb5c1465a1142e68ceacf06bf127228ceb7db413a",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "asteroid-2008-ev5-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 10483,
+      "expectedSha256": "fdd3dd4633e99a3ecfe011bc5fc2bd9eddc5ea1b4e199b9bb70e3a738efb2b6e"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 963,
+      "expectedSha256": "0751cefb482872ff54e543f810651530769f83079be2d0b269555269c2658667"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1350,
+      "expectedSha256": "ca6d798c25ba4f199c34c5cdfc7ffbead8615e87a40e033acd3deaf0137729ee"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 898,
+      "expectedSha256": "02afcc1d97d972b1570f5963396c131ca3c10c4ed7b66799649b3b4a28a03e5f"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3139,
+      "expectedSha256": "269d23f72d52f68c3d7cbc8016660bb5f8abba0796c88302575c3bc852afdf2f"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4409,
+      "expectedSha256": "a39471283797d4e8ce2c3179483546cc818766539e9b8893d4c1b1374fb5668a"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7757,
+      "expectedSha256": "6a11a69f261ca4f5063e5089117ec34e05e703c0a324af8399948c8310b94a35"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1758,
+      "expectedSha256": "2fb98a95d1cb97e87e84acdb09c74c4f2d59cbc8cbec567a8cbe8db18731d5ec"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7047,
+      "expectedSha256": "301c5b2144cac129b0f39e0307053a1aa7e508ee4aff1ee30f047c9f4fb0fb2b"
+    },
+    {
+      "path": "reference/jpl-shape-index.html",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2608,
+      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1989,
+      "expectedSha256": "68dd3ac59416dfa8cdaf6288b293871202e983157ec7420f7db30279f52cbca3"
+    },
+    {
+      "path": "reference/study.html",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4528,
+      "expectedSha256": "7ab43e6a96841d92760d3cff742509ef9407471cc4aa0cb0aca00e5074928e10"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 144986,
+      "expectedSha256": "0e8266bf0f175b42824608567ee7e6db576e06547322f50b1439e94d9f9c6065"
+    },
+    {
+      "path": "reference/source-survey.json",
+      "purpose": "Bounded source alternatives and scientific limitations.",
+      "expectedBytes": 2246,
+      "expectedSha256": "81508d487c0d1d781939d8e42119ac3016172160cca6c9468ac3887bfd2da14f"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { orderFacts } from "../fact-order.mjs";
 
 import PREPARED_EARTH_PANEL from "../../src/planets/earth/prepared/content.json" with { type: "json" };
 import PREPARED_CERES_PANEL from "../../src/planets/ceres/prepared/content.json" with { type: "json" };
@@ -39,7 +40,7 @@ const PLANET_PANELS = Object.freeze([
 ]);
 const CORE_PLANET_FACT_IDS = Object.freeze([
   "distance-from-sun",
-  "diameter",
+  "radius",
   "orbital-period",
   "rotation-period",
   "axial-tilt",
@@ -54,7 +55,12 @@ test("keeps every planet factsheet comparable and concise", () => {
       CORE_PLANET_FACT_IDS,
       `${panel.planetId} core facts`,
     );
-    assert.ok(panel.moreFacts.length <= 2, `${panel.planetId} signature facts`);
+    const ordered = orderFacts(panel.facts, panel.moreFacts);
+    assert.deepEqual(ordered.slice(0, 4).map(fact => fact.id), CORE_PLANET_FACT_IDS.slice(0, 4));
+    for (const id of ["mass", "density", "gravity"]) {
+      assert.ok(panel.moreFacts.some(fact => fact.id === id && fact.source?.url), `${id} has a scientific reference`);
+    }
+    assert.equal(panel.facts.find(fact => fact.id === "radius").label, "Mean radius");
   }
 });
 
@@ -73,7 +79,8 @@ test("uses unique semantic ids without hidden title-only content", () => {
 
 test("keeps Pluto concise and removes lens-presentation rows", () => {
   const facts = [...PREPARED_PLUTO_PANEL.facts, ...PREPARED_PLUTO_PANEL.moreFacts];
-  assert.equal(facts.length, 7);
+  assert.ok(facts.some(fact => fact.id === "mass"));
+  assert.ok(facts.some(fact => fact.id === "density"));
   assert.equal(facts[0].id, "distance-from-sun");
   assert.doesNotMatch(
     facts.map(({ label }) => label).join(" "),

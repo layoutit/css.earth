@@ -41,7 +41,7 @@ export async function preparePlanetTitleSources({
   const prepared = {};
   for (const planet of OBJECTS) {
     const source = createPlanetTitleSource(planet.name, font);
-    const exportName = `${planet.id.toUpperCase()}_TITLE_SOURCE`;
+    const exportName = `${planet.id.replaceAll('-', '_').toUpperCase()}_TITLE_SOURCE`;
     const moduleSource = serializePlanetTitleSource(exportName, source);
     await writeSource(planet, moduleSource, source);
     prepared[planet.id] = Object.freeze({ source, moduleSource });
@@ -53,12 +53,15 @@ export function createPlanetTitleSource(label, font) {
   if (!font || typeof font.layout !== "function") {
     throw new TypeError("Planet title generation requires a loaded font.");
   }
-  if (typeof label !== "string" || !/^[A-Za-z]+(?: [A-Za-z]+)*$/u.test(label)) {
+  if (typeof label !== "string" || !/^[\p{L}\p{N}]+(?:\.?[ /–-][\p{L}\p{N}]+)*$/u.test(label)) {
     throw new TypeError("Planet title label is invalid.");
   }
 
   const scale = PLANET_TITLE_RECIPE.fontSize / font.unitsPerEm;
   const run = font.layout(label);
+  if (run.glyphs.some(glyph => glyph.id === 0)) {
+    throw new Error(`Planet title ${label} contains a character missing from the title font.`);
+  }
   const paths = [];
   let penX = 0;
   let penY = 0;

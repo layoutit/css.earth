@@ -11,6 +11,7 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
   const variants = array(value, 'selection variants'); if (!variants.length) fail('selection variants are empty');
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [], settings = new Map(controls.settings?.controls.map(setting => [setting.name, setting]) ?? []);
   const keys: Record<string, unknown>[] = [];
+  const activationTargets = new Set(tree.activationGroups?.flat() ?? []);
   for (const input of variants) {
     const variant = record(input, 'variant', ['when', 'required', 'writes', 'materials', 'navigation']);
     const when = record(variant.when, 'selection key', ['lensId', ...settings.keys()]); keys.push(when);
@@ -20,6 +21,9 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
     }
     resourceList(variant.required, resources, 'selection resources');
     array(variant.writes, 'selection writes').forEach(write => requireWrite(write, tree, resources));
+    for (const input of variant.writes as PreparedVariant['writes']) {
+      if (input.kind === 'style' && input.name === 'display' && activationTargets.has(input.target)) fail('selection display cannot race prepared activation');
+    }
     const materials = array(variant.materials, 'selected materials'); unique(materials.map(value => record(value, 'selected material').track), 'selected tracks');
     if (materials.length !== tracks.length) fail('each variant must specify every material track');
     materials.forEach(value => requireSelectedMaterial(value, tracks));
@@ -87,14 +91,14 @@ export function requireAnimations(value: unknown, tree: PreparedTree, motion = f
     }
   }
 }
-export function requireFacing(value: unknown, tree: PreparedTree): void {
+export function requireFacing(value: unknown, tree: PreparedTree, partitionScenes: readonly number[] = []): void {
   const targets = new Set<number>();
   for (const item of array(value, 'facing planes')) {
     const face = record(item, 'facing plane', ['target', 'plane', 'tolerance']);
     positive(face.tolerance, 'native backface tolerance');
     const target = nodeReference(face.target, tree);
     if ([tree.camera, tree.scene].includes(target) || targets.has(target)) fail('facing target must be a unique prepared leaf');
-    if (!ancestor(target, tree.scene, tree)) fail('facing target must belong to scene');
+    if (![tree.scene, ...partitionScenes].some(scene => ancestor(target, scene, tree))) fail('facing target must belong to scene');
     if (tree.nodes.some(node => node.parent === target)) fail('facing target must be a leaf');
     targets.add(target);
     const plane = array(face.plane, 'facing plane coordinates');
@@ -105,6 +109,22 @@ export function requireFacing(value: unknown, tree: PreparedTree): void {
 }
 export function requireOptionalPresentation(plan: Record<string, unknown>, tree: PreparedTree, controls: ObjectControls): void {
   const lensIds = controls.lenses?.controls.map(lens => lens.id) ?? [];
+  if (plan.surfaceHit !== undefined) {
+    const hit = record(plan.surfaceHit, 'surface hit', ['target', 'triangles', 'frontFace']);
+    if (hit.frontFace !== undefined && !['clockwise','counter-clockwise'].includes(hit.frontFace as string)) fail('invalid surface front face');
+    if (!ancestor(nodeReference(hit.target, tree), tree.scene, tree)) fail('surface hit target must belong to scene');
+    const triangles = array(hit.triangles, 'surface hit triangles');
+    if (!triangles.length || triangles.length > 10000) fail('surface hit mesh exceeds its bounds');
+    for (const input of triangles) {
+      const triangle = array(input, 'surface triangle');
+      if (triangle.length !== 3) fail('surface triangle needs three points');
+      for (const value of triangle) {
+        const point = array(value, 'surface point');
+        if (point.length !== 3) fail('surface point needs three coordinates');
+        point.forEach(n => finite(n, 'surface coordinate'));
+      }
+    }
+  }
   if (plan.motionFrame !== undefined) {
     const frame = array(plan.motionFrame, 'motion frame'); if (!frame.length) fail('motion frame is empty'); unique(frame, 'motion frame');
     for (const value of frame) if (!ancestor(nodeReference(value, tree), tree.scene, tree)) fail('motion frame must belong to scene');

@@ -1,3 +1,4 @@
+import { SCENE_SATELLITE_STATES } from './data/sceneSatelliteStates.data.js'
 import {
   DWARF_PLANET_IDS,
   PLANET_IDS,
@@ -62,12 +63,52 @@ const VSOP_THEORY_DISCREPANCY_KM: Record<Vsop87BodyKey, number> = {
  * statistical uncertainties.
  */
 const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
+  paaliaq: 14686.766060114216,
+  tarvos: 14289.465037346157,
+  ijiraq: 9349.305144460977,
+  suttungr: 5537.38631019438,
+  mundilfari: 10946.297914741323,
+  skathi: 3135.098354373108,
+  erriapus: 11239.635338310401,
+  thrymr: 6327.4731443519795,
+  bebhionn: 35180.27199442682,
+  bergelmir: 4370.567300408625,
+  bestla: 13244.793674351526,
+  fornjot: 9860.7522653543,
+  hati: 10819.137219892531,
+  hyrrokkin: 7535.372343890514,
+  loge: 8681.363318931204,
+  skoll: 7169.2594630787,
+  greip: 9025.010316663893,
+  tarqeq: 4847.555696729821,
+  caliban: 191.0088910188856,
+  sycorax: 748.3042107793555,
+  prospero: 716.900566808697,
+  setebos: 2497.9418798052484,
+  kiviuq: 28145.685414789965,
+  albiorix: 18473.578208360203,
+
+  siarnaq: 280355.5692405671,
+  ymir: 161334.72011835242,
+  nereid: 10417.19020260089,
+  himalia: 54960.50018520494,
+  polydeuces: 939.7293216478489,
+  anthe: 2029.4157931053912,
+  aegaeon: 306.9010577737413,
+  bianca: 62.38429913291977,
+  cressida: 31.167287112096254,
+  desdemona: 99.17274979901151,
+  rosalind: 90.45546017581691,
   phobos: 1395.0463862179204,
   deimos: 112.87860276333798,
   io: 305.340674039755,
   europa: 948.8783552801129,
   ganymede: 3194.390212322053,
   callisto: 4428.458903772901,
+  amalthea: 1267.432064142389,
+  thebe: 530.0731982080321,
+  adrastea: 972.8679003969534,
+  metis: 946.8090712289422,
   mimas: 143728.96469762226,
   enceladus: 1915.539637717103,
   tethys: 12052.305125084453,
@@ -79,6 +120,9 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   phoebe: 640720.6899566406,
   janus: 113343.60390661786,
   epimetheus: 297616.7325933514,
+  helene: 79944.84840594218,
+  calypso: 17895.200900517168,
+  daphnis: 1129.3174840451686,
   telesto: 17176.524789155148,
   atlas: 7503.609904483168,
   prometheus: 1684.0659231836269,
@@ -91,6 +135,25 @@ const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
   oberon: 1380.33900460793,
   triton: 49252.75275560124,
   proteus: 684.0919384620709,
+  larissa: 471.54964789874685,
+  naiad: 237.63844794163802,
+  thalassa: 104.86029958307859,
+  despina: 63.347226539073226,
+  galatea: 54.73951237290662,
+  charon: 1.0206866493052924,
+  nix: 94.35775652756546,
+  hydra: 47.05466895261672,
+  kerberos: 125.18018743032951,
+  styx: 388.06247072435855,
+  puck: 46.42767332013248,
+  methone: 17510.670766114912,
+  pallene: 27.64911948293053,
+  belinda: 28.493677463456997,
+  juliet: 119.87199717537884,
+  portia: 92.4705283027405,
+  cordelia: 0.4561261348117766,
+  ophelia: 2.0127049908729133,
+  dimorphos: 0.054002378820475615,
 }
 
 const AU_KM = M_PER_AU / M_PER_KM
@@ -142,7 +205,7 @@ ACCURACY_BY_FRAME.set(
     'sun',
     'Eight-planet mass-weighted barycentric correction',
     'fit-residual',
-    164.69641135418354,
+    164.71062368999685,
     VSOP87A_VALID_FROM_JD,
     VSOP87A_VALID_TO_JD,
     'JPL Horizons DE441 Sun-to-SSB vector fixtures',
@@ -193,7 +256,9 @@ for (const id of SATELLITE_IDS) {
     id,
     metadata(
       id,
-      'Precessing Kepler ellipse fitted to JPL Horizons osculating elements',
+      record.positionCorrection
+        ? 'Horizons-fitted precessing ellipse with prepared periodic ICRF residuals'
+        : 'Precessing Kepler ellipse fitted to JPL Horizons osculating elements',
       'fit-residual',
       SATELLITE_FIXTURE_MAX_KM[id],
       record.fitFromJdTdb,
@@ -205,8 +270,15 @@ for (const id of SATELLITE_IDS) {
   )
 }
 
+// A retained state has one supported epoch, with source accuracy explicitly unquantified.
+for (const [id, record] of Object.entries(SCENE_SATELLITE_STATES)) {
+  ACCURACY_BY_FRAME.set(id, metadata(id, record.provenance.model, 'unknown', null,
+    record.epochJdTt, record.epochJdTt, 'Object-owned geometric state', record.provenance.source ?? '',
+    'Only the prepared scene epoch is supported. Source limitations are retained; coordinate-composition checks do not measure orbit accuracy.'))
+}
+
 for (const planet of PLANET_IDS) {
-  const moons = moonsOf(planet)
+  const moons = moonsOf(planet).filter(id => bodyData(id).gravitationalParameterKm3PerS2 > 0)
   if (moons.length === 0) {
     ACCURACY_BY_FRAME.set(
       planet,

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "erriapus",
+  "targetNaif": "628",
+  "parentNaif": "699",
+  "source": {
+    "url": "https://tilmanndenk.de/outersaturnianmoons/erriapus/",
+    "paper": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+    "table": "Denk et al. (2018), Table 3; author Table 1C notes 1,2,4,9",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "minimumEquatorialAxisRatio": 1.51,
+    "condition": "Uniform-reflectivity reference ellipsoid from published lightcurve amplitude; minimum a/b, not an exact recovered outline.",
+    "adoptedReferenceRadiusKm": 5.1,
+    "diameterEstimate": "10 (+3/−2) km",
+    "sizeInterpretation": "Brightness-based size assuming geometric albedo 0.06; uncertainty is source sensitivity, not measured axes.",
+    "observedRotationPeriod": "28.15 ± 0.25 h"
+  },
+  "approximation": {
+    "adoptedEquatorialAxisRatio": 1.51,
+    "semiAxesKm": [
+      6.712559386509957,
+      4.445403567225137,
+      4.445403567225137
+    ],
+    "formula": "b=c=R/cbrt(q); a=q*b; r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+    "assumptions": [
+      "Select published lower-limit equatorial ratio, not a full recovered shape.",
+      "Equal short axes (b=c).",
+      "Reference radius treated as equal-volume display scale only.",
+      "Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
+    ],
+    "qualification": "Strong useful elongation floor; a contact neck or binary would be speculative."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "photometryCheck": {
+    "minimumAmplitudeMagnitude": 0.4474423682329236,
+    "interpretation": "Algebraic consistency only; not a fit to observed Cassini lightcurves or a measured volume."
+  }
+}

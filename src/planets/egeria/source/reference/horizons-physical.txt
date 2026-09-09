@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2713%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 13 Egeria (A850 VA)           2026-Sep-07 20:32:40
+Rec #:      13 (+COV) Soln.date: 2026-Jun-05_03:03:20   # obs: 3875 (1850-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457919.5 ! 2017-Jun-15.00 (TDB)         Residual RMS= .25776
+   EC= .08365753176168814  QR= 2.360924482961064   TP= 2457813.1054666452
+   OM= 43.23834561984091   W=  80.4945900012834    IN= 16.53996566857861
+   A= 2.576465202469544    MA= 25.35636332602241   ADIST= 2.792005921978024
+   PER= 4.13566            N= .23832393            ANGMOM= .027514937
+   DAN= 2.52357            DDN= 2.59427            L= 123.3306047
+   B= 16.3064869           MOID= 1.44078004        TP= 2017-Feb-28.6054666452
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 101.318            ROTPER= 7.045
+   H= 6.92                 G= .150                 B-V= .745
+                           ALBEDO= .049            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#131, OCC=0
+2: source=ORB
+*******************************************************************************

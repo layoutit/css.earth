@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://doi.org/10.1006/icar.2001.6596",
+  "citation": "Karkoschka (2001), Icarus 151, 51–68, Table IV, printed page 55; prolate model defined in adjacent text. French et al. (2024), Table 3, reproduces Voyager Table V uncertainty quantities.",
+  "sourceModel": "Measured prolate ellipsoid approximation; B=C is an assumption, not independently measured third axis.",
+  "semiaxesKm": [
+    64,
+    32,
+    32
+  ],
+  "fullDimensionsKm": [
+    128,
+    64,
+    64
+  ],
+  "referenceRadiusKm": 40.317473596635935,
+  "referenceRadiusFormula": "cbrt(A*B*B)",
+  "projectedEquivalentRadiusKm": {
+    "value": 45,
+    "uncertainty": 8,
+    "definition": "sqrt(A*B), not volume-equivalent radius"
+  },
+  "axisRatio": {
+    "value": 0.5,
+    "uncertainty": 0.1,
+    "definition": "B/A; uncertainty is not a separate error on each axis"
+  },
+  "coordinateSystem": "East-positive right-handed IAU_BELINDA XYZ. Long A axis along X toward Uranus, Y and Z both B by source prolate convention.",
+  "grid": {
+    "path": "shape/ellipsoid.tab",
+    "stepDegrees": 5,
+    "units": "km",
+    "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/64)^2+(cos(lat)*sin(lon)/32)^2+(sin(lat)/32)^2)",
+    "longitudeDegrees": [
+      0,
+      360
+    ],
+    "latitudeDegrees": [
+      -90,
+      90
+    ],
+    "qualification": "Analytic sampling only; no measured terrain or DEM."
+  },
+  "material": {
+    "width": 64,
+    "height": 32,
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "noData": 160,
+    "qualification": "All texels unavailable, passed through the shared gray-grid presentation."
+  },
+  "excludedRadius": {
+    "pck00011Km": 33,
+    "reason": "Legacy spherical radius does not replace later published prolate shape."
+  },
+  "publications": [
+    {
+      "doi": "10.1006/icar.2001.6596",
+      "table": "IV",
+      "originalPdfSha256": "44d8d852a69117528e152801d3152d6f511e272833496f7e6c878d152cc414c3",
+      "retention": "Copyrighted full paper is retained only in ignored research; this is a factual measurement transcription."
+    },
+    {
+      "url": "https://arxiv.org/abs/2401.04634",
+      "table": "3",
+      "originalPdfSha256": "f733085381f1cd5458160fa2010ba3dc30ef1a653942ac6a8dd10005be6fdbff",
+      "originalVoyagerSourceDoi": "10.1006/icar.2001.6597"
+    }
+  ]
+}

@@ -26,35 +26,59 @@
       {
         "id": "radius",
         "label": "Mean radius",
-        "value": "2,410.3 km"
+        "value": "2,410.3 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "distance-from-sun",
-        "label": "Distance from Sun",
-        "value": "5.2 AU (mean)"
+        "label": "System solar semimajor axis",
+        "value": "5.203 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       },
       {
         "id": "orbital-period",
         "label": "Orbit around Jupiter",
-        "value": "16.69 Earth days"
+        "value": "16.69 days"
       },
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "16.69 Earth days"
+        "value": "16.69 days · synchronous"
       },
       {
         "id": "distance-from-parent",
-        "label": "Distance from Jupiter",
+        "label": "Mean distance from Jupiter",
         "value": "About 1,883,000 km"
       },
       {
-        "id": "atmosphere",
+        "id": "atmosphere-composition",
         "label": "Atmosphere",
         "value": "Very thin carbon dioxide, oxygen and hydrogen exosphere"
       }
     ],
-    "moreFacts": []
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.834 ± 0.003 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
   },
   "lenses": {
     "titleKey": "lenses",
@@ -63,7 +87,7 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Voyager and Galileo visible-light mosaic",
+        "description": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
         "title": "USGS mosaic on a 1 km grid; original image resolution varies from 400 m to 60 km per pixel. USGS normalized broad illumination and matched overlapping images. Photographed relief, coarse patches and some seams remain. Gray grid marks documented no-data and its resampled boundary. Added globe lighting is approximate.",
         "thumbnail": "/scenes/callisto/callisto-normal-thumbnail.webp",
         "surface": "callisto-normal-surface@2x.webp",

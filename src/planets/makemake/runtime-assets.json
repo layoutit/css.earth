@@ -2,6 +2,11 @@
   "schema": "cssmakemake-runtime-assets@1",
   "assets": [
     {
+      "filename": "illustration-thumbnail.webp",
+      "bytes": 3362,
+      "sha256": "2dcf4fa4060b880a5a280a06c6faf747e67c2a2e903689be122c16a640e1a1b6"
+    },
+    {
       "filename": "lighting.webp",
       "bytes": 20472,
       "sha256": "172032dfbe706cad6a9815cae9933c250d7329ede4285279648e65e2ddaba0ae"
@@ -148,13 +153,13 @@
     },
     {
       "filename": "poles.webp",
-      "bytes": 75404,
-      "sha256": "1ec0fbbc1b8720d5fa8645b7276c96a25877bb53f71e970826c74a350f72e09a"
+      "bytes": 103396,
+      "sha256": "3743047c4034761442e293485e3f1369b29d6d7b4675c91a6cf5467a6761aac9"
     },
     {
       "filename": "surface.webp",
-      "bytes": 2759312,
-      "sha256": "962947f201569698b8c63d203ed97e61a7f7ce33754c271c37e58dab1ebada46"
+      "bytes": 2451194,
+      "sha256": "d063a3a9e3c50e5c18496ea8281a55a58879a89314c74ddb87c02691176ddb5c"
     }
   ]
 }

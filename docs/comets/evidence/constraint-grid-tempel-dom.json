@@ -1,0 +1,41 @@
+{
+  "browser": "152.0.7977.76",
+  "reports": [
+    {
+      "object": "comet-9p",
+      "density": 1,
+      "initial": {
+        "nodes": 26830,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1000,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    },
+    {
+      "object": "comet-9p",
+      "density": 2,
+      "initial": {
+        "nodes": 26830,
+        "sceneCount": 1,
+        "cameraWidth": 1440,
+        "cameraHeight": 900,
+        "texturedLeaves": 1000,
+        "forbiddenRenderers": 0,
+        "duplicateIds": []
+      },
+      "interaction": {
+        "retained": true,
+        "topologyChanges": 0
+      }
+    }
+  ],
+  "navigation": [],
+  "problems": []
+}

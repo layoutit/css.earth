@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "prospero",
+  "targetNaif": "718",
+  "parentNaif": "799",
+  "source": {
+    "url": "https://arxiv.org/pdf/1706.06837",
+    "papers": [
+      "https://arxiv.org/pdf/1706.06837",
+      "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+    ],
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "semiAxesKm": [
+      32.15683831473364,
+      22.043134064691756,
+      22.043134064691756
+    ],
+    "fullAxesKm": [
+      64.31367662946728,
+      44.08626812938351,
+      44.08626812938351
+    ],
+    "referenceRadiusKm": 25,
+    "axisConvention": "a,b,c are semiaxes; full axes = 2a,2b,2c",
+    "scale": "D=50 km adopted from 2023 author table; assumed-albedo brightness scale, no quoted formal size uncertainty.",
+    "qualification": "Amplitude-constrained minimum-elongation approximation; it does not reproduce a measured light curve or establish terrain.",
+    "peakToPeakAmplitudeMagnitude": 0.41,
+    "amplitudeUncertaintyMagnitude": 0.07,
+    "minimumEquatorialRatio": 1.4588142602753484,
+    "ratioAtAmplitudeMinusPlus1Sigma": [
+      1.367728825595849,
+      1.5559656316050745
+    ],
+    "formula": "q=10^(0.4*Delta_m); b=c=R/q^(1/3); a=q*b",
+    "radiusUncertaintyKm": null
+  },
+  "approximation": {
+    "semiAxesKm": [
+      32.15683831473364,
+      22.043134064691756,
+      22.043134064691756
+    ],
+    "assumptions": [
+      "Uniform reflectivity and equator-on projected-area interpretation select a minimum elongation.",
+      "Equal short axes b=c; unknown polar compression is not measured.",
+      "Effective/photometric scale normalized as volume-equivalent display radius only.",
+      "Arbitrary ICRF north pole, spin sense and meridian, not current body attitude."
+    ],
+    "qualification": "Amplitude-constrained minimum-elongation approximation; it does not reproduce a measured light curve or establish terrain."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "spin": {
+    "periodHours": 14.29,
+    "uncertaintyHours": 0.184,
+    "meaning": "Published doubled rotational interpretation; phase/pole are illustrative.",
+    "poleIcrfRaDecDegrees": [
+      0,
+      90
+    ],
+    "meridianDegrees": 0
+  },
+  "unresolved": [
+    "K2 paper reports single-peaked photometric period 7.145h; selected shape-driven full rotation doubles it, consistent with2023 table. Not a uniquely established rotation period.",
+    "Competing K2 frequency4.415 cycles/day is reported; no claim of unique period."
+  ]
+}

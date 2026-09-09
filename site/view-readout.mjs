@@ -8,6 +8,7 @@ const referenceAxes = { prime: [1, 0, 0], east: [0, 1, 0], north: [0, 0, 1] };
 const dot = (a, b) => a.reduce((sum, value, i) => sum + value * b[i], 0);
 const units = [[9460730472580800, 'ly'], [149597870700, 'AU'], [1000, 'km'], [1, 'm']];
 const number = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 });
+const compactNumber = new Intl.NumberFormat('en-US', { notation: 'compact', maximumFractionDigits: 2 });
 const wholeNumber = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
 const calendarDate = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeZone: 'UTC' });
 const distanceUnit = meters => units.find(([size]) => meters >= size) ?? units.at(-1);
@@ -37,7 +38,8 @@ export function viewScale(metersPerPixel, maxWidth = 80) {
   const power = 10 ** Math.floor(Math.log10(maximum));
   const value = [5, 2, 1].find(step => step * power <= maximum) * power;
   const measurePixels = value * unitSize / metersPerPixel;
-  return { label: `${number.format(value)} ${unit}`, pixels: maxWidth, measurePixels };
+  const labelNumber = value >= 1e6 ? compactNumber : number;
+  return { label: `${labelNumber.format(value)} ${unit}`, pixels: maxWidth, measurePixels };
 }
 
 export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }) {
@@ -77,7 +79,7 @@ export function measurePreparedFocusView(world, focus, focalPixels) {
     scaleTitle: `Scale at the distance of ${focus.name}` };
 }
 
-export function createViewReadout({ drawer, documentTarget, windowTarget }) {
+export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }) {
   const root = documentTarget.querySelector('.planet-view-readout');
   if (!root) return { setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, destroy() {} };
   const dateGroup = root.querySelector('.planet-view-date'), date = root.querySelector('[data-view-date]');
@@ -93,20 +95,24 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
   const configs = new Map(maps.map(map => [map, JSON.parse(map.dataset.surfaceMinimap)]));
   const events = new AbortController();
   let camera = null, unsubscribe = null, frame = null, playing = false, disposed = false;
+  let timer = null, lastRender = -Infinity, dateDay = null, playbackReason = null;
   let overviewScope = 'solar-system';
   let preparedFocus = null;
   const write = (element, value) => { if (element.textContent !== value) element.textContent = value; };
   function render() {
     frame = null;
-    if (disposed) return;
+    if (disposed || documentTarget.hidden) return;
+    lastRender = windowTarget.performance.now();
     const navigation = camera?.navigation;
     const scene = documentTarget.querySelector('.polycss-scene');
     if (!navigation || !scene) { dateGroup.hidden = true; coordinates.hidden = true; scale.hidden = true; write(altitude, '—'); return; }
     const map = maps.find(map => !map.closest('[data-lens-details]')?.hidden) ?? maps[0];
-    const surface = preparedFocus ? null : surfaceMapContext(configs.get(map), camera, documentTarget, windowTarget);
+    const surface = preparedFocus ? null : surfaceReader ? surfaceReader.read(map, camera)
+      : surfaceMapContext(configs.get(map), camera, documentTarget, windowTarget);
     const world = navigation.capture(), optics = navigation.optics();
     dateGroup.hidden = !Number.isFinite(world.epochJdTt);
-    write(date, formatViewDate(world.epochJdTt));
+    const day = Number.isFinite(world.epochJdTt) ? Math.floor(world.epochJdTt + .5) : null;
+    if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
     const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : measureView({
       eyeM: world.pose.positionM.map((x, i) => x - navigation.frame.originM[i]),
       radiusM: navigation.frame.bodyRadiusM, rotation: worldRotationFromQuaternion(world.pose.orientationXyzw),
@@ -130,13 +136,38 @@ export function createViewReadout({ drawer, documentTarget, windowTarget }) {
     }
     if (playing) schedule();
   }
-  function schedule() { if (!disposed && frame === null) frame = windowTarget.requestAnimationFrame(render); }
-  windowTarget.addEventListener('resize', schedule, { signal: events.signal });
+  function schedule(immediate = false) {
+    if (disposed || documentTarget.hidden) return;
+    if (immediate && timer !== null) { windowTarget.clearTimeout(timer); timer = null; }
+    if (frame !== null || timer !== null) return;
+    const wait = immediate ? 0 : 100 - (windowTarget.performance.now() - lastRender);
+    if (wait > 0) timer = windowTarget.setTimeout(() => {
+      timer = null; schedule(true);
+    }, wait);
+    else frame = windowTarget.requestAnimationFrame(render);
+  }
+  const refresh = () => schedule(true);
+  windowTarget.addEventListener('resize', refresh, { signal: events.signal });
+  documentTarget.addEventListener('visibilitychange', () => {
+    if (documentTarget.hidden) {
+      if (timer !== null) windowTarget.clearTimeout(timer);
+      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+      timer = frame = null;
+    } else refresh();
+  }, { signal: events.signal });
   return {
-    setPreparedFocus(record) { preparedFocus = record; schedule(); },
-    setOverviewScope(scope) { overviewScope = scope; schedule(); },
-    setCamera(next) { unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(schedule) ?? null; schedule(); },
-    setPlaybackState(state) { playing = state.allowed; schedule(); },
-    destroy() { disposed = true; unsubscribe?.(); events.abort(); if (frame !== null) windowTarget.cancelAnimationFrame(frame); },
+    setPreparedFocus(record) { preparedFocus = record; refresh(); },
+    setOverviewScope(scope) { overviewScope = scope; refresh(); },
+    setCamera(next) { unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(() => schedule()) ?? null; refresh(); },
+    setPlaybackState(state) {
+      const changed = playing !== state.allowed || playbackReason !== state.reason;
+      playing = state.allowed; playbackReason = state.reason;
+      if (changed) refresh();
+    },
+    destroy() {
+      disposed = true; unsubscribe?.(); events.abort();
+      if (frame !== null) windowTarget.cancelAnimationFrame(frame);
+      if (timer !== null) windowTarget.clearTimeout(timer);
+    },
   };
 }

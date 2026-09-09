@@ -1,0 +1,137 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "eros",
+  "displayName": "Eros",
+  "publicBase": "/scenes/eros/",
+  "distanceAu": 1.458,
+  "raster": {
+    "width": 8192,
+    "height": 4096,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "normal",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 10,
+          "origin": [
+            -53410,
+            26710
+          ],
+          "displayRange": [
+            0.05,
+            0.4
+          ],
+          "specialValueMagnitude": 1e+30
+        }
+      }
+    ],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/ver128q.tab",
+        "format": "pds-vertex-facet",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 99846,
+          "expectedFaces": 196608
+        },
+        "sampleGrid": {
+          "width": 1025,
+          "height": 513
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -8.42
+        },
+        "minimum": -6,
+        "maximum": 10,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 8420,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 300
+        }
+      }
+    ],
+    "observedColors": [],
+    "surfaceQuality": 90
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 8.42,
+    "camera": {
+      "initialScenePitchDegrees": 25,
+      "defaultControlYawDegrees": 0
+    },
+    "mapUrl": "/scenes/eros/eros-normal-surface@2x.webp",
+    "polesUrl": "/scenes/eros/eros-normal-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ver128q.tab",
+      "format": "pds-vertex-facet",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 99846,
+        "expectedFaces": 196608
+      },
+      "faceBudget": 850,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 300,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Pinned JPL Horizons heliocentric elements and the source mission body-fixed rotation model"
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      180,
+      180,
+      180
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

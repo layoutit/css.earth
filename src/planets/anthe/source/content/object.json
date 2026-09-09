@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "anthe",
+  "displayName": "Anthe",
+  "panel": {
+    "introduction": "Anthe is a tiny moon between Mimas and Enceladus, accompanied by a faint arc of dust. Cassini detected it, but did not resolve its shape accurately.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Estimated radius",
+        "value": "About 0.5 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Nominal dimensions",
+        "value": "1 × 1 × 1 km"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Distance from Saturn",
+        "value": "About 197,700 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 24.9 hours"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery images",
+        "value": "Cassini imaging team · 2007"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Nominal estimate; shape unresolved"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
+        "title": "Nominal 1 km sphere representing an uncertain size estimate. Anthe’s shape is unresolved; this is not a measured spherical outline. The standard gray grid marks missing surface imagery.",
+        "detail": "Estimated size",
+        "thumbnail": "/scenes/anthe/anthe-model-thumbnail.webp",
+        "surface": "anthe-model-surface@2x.webp",
+        "poles": "anthe-model-poles@2x.webp",
+        "source": {
+          "id": "measured-ellipsoid",
+          "path": "../manifest.json",
+          "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Anthe overview",
+      "href": "https://science.nasa.gov/saturn/moons/anthe/"
+    },
+    {
+      "label": "Hedman et al.",
+      "role": "surface",
+      "description": "Cassini shape and photometric analysis",
+      "href": "https://arxiv.org/abs/1912.09192"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Cassini source inventory",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/anthe/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "NASA/JPL nominal size estimate"
+    }
+  }
+}

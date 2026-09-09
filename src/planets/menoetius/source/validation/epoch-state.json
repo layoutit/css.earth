@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-body-epoch-ephemeris@1",
+  "id": "menoetius",
+  "centerBodyId": "patroclus",
+  "epochJdTt": 2461286.5,
+  "requestEpochJdUtc": 2461286.499199259,
+  "ttMinusUtcSeconds": 69.184,
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "solution": "tnosat_v001_20000617_jpl082_20230601",
+  "positionKm": [
+    -646.3389934806856,
+    157.1377313775592,
+    182.9291042344346
+  ],
+  "velocityKmPerDay": [
+    228.7920070413377,
+    988.1548728191091,
+    -54.07113307946982
+  ],
+  "parentHeliocentricState": {
+    "positionKm": [
+      219530347.7320293,
+      587045097.8743559,
+      408156964.6816921
+    ],
+    "velocityKmPerDay": [
+      -1023130.592430021,
+      209778.8583424715,
+      535080.2656559118
+    ]
+  },
+  "gravitationalParametersKm3PerS2": {
+    "body": 0.020917,
+    "parent": 0.0740606,
+    "combined": 0.09497760000000001
+  },
+  "sources": {
+    "relative": {
+      "path": "source/orbit/menoetius-epoch.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120000617&CENTER=500%40920000617&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "f6469c4b2b71cf87e87f1965c8dccf57960669e0843fae1928f41a66d1b38b9b",
+      "bytes": 6811,
+      "target": 120000617,
+      "center": 920000617
+    },
+    "parent": {
+      "path": "source/orbit/patroclus-epoch.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920000617&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "427924d795a0887115acb4ee033f42f7a2c254d63a9a2d6abe51b421c9132a97",
+      "bytes": 6801,
+      "target": 920000617,
+      "center": 10
+    },
+    "heliocentricCheck": {
+      "path": "source/orbit/menoetius-heliocentric-check.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120000617&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sha256": "6f7fbf39c867990ad2ef04f9c632fe9c0a031467b6e48d937143ffc088469768",
+      "bytes": 6787,
+      "target": 120000617,
+      "center": 10
+    }
+  },
+  "validation": {
+    "model": "independent Horizons heliocentric query minus primary heliocentric query agrees with direct primary-relative query",
+    "positionResidualKm": [
+      -9.056634553417098e-09,
+      5.5355542372126365e-08,
+      -8.50930064189015e-08
+    ],
+    "velocityResidualKmPerDay": [
+      6.409379693650408e-10,
+      -2.6261659513693303e-11,
+      -3.112177182629239e-12
+    ],
+    "maxPositionResidualKm": 8.50930064189015e-08,
+    "maxVelocityResidualKmPerDay": 6.409379693650408e-10,
+    "positionToleranceKm": 1e-05,
+    "velocityToleranceKmPerDay": 1e-08,
+    "qualification": "This validates coordinate composition and parser wiring, not the scientific accuracy of the source orbit."
+  },
+  "limitations": [
+    "The JPL satellite solution uses its own JPL#82 barycenter, not the current integrated 617; orbit.",
+    "The response contains no covariance or scene-epoch uncertainty bound; do not infer one from printed digits.",
+    "The primary response contains an inconsistent satellite provisional-designation note; target and center numeric IDs plus the Menoetius response establish identity."
+  ],
+  "runtimeExtrapolation": false
+}

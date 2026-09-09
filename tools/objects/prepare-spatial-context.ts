@@ -4,7 +4,7 @@ import { pathToFileURL, fileURLToPath } from 'node:url';
 import { BODIES, M_PER_KM } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
-import type { OrbitalState, Vector3, WorldContextBodyFact } from '../../src/preparation/spatial-context.js';
+import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
 
 interface Orbit { readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly heliocentricDistanceAu: number; readonly perihelionDirection: Vector3; readonly trueAnomalyDegrees: number; readonly centerBodyId?: string; readonly centerPositionAu?: Vector3; }
 interface SolarGeometry {
@@ -14,6 +14,7 @@ interface SolarGeometry {
   readonly BODY_FIXED_ORBIT_NORMAL_DIRECTIONS: Readonly<Record<string, Vector3>>;
   readonly BODY_FIXED_TO_ICRF_MATRICES: Readonly<Record<string, readonly number[]>>;
   readonly BODY_ORBITS: Readonly<Record<string, Orbit>>;
+  readonly BODY_HELIOCENTRIC_STATES: Readonly<Record<string, { readonly positionKm: Vector3; readonly velocityKmPerDay: Vector3 }>>;
 }
 
 export interface SpatialContextPreparationOptions {
@@ -28,6 +29,11 @@ export interface SpatialContextPreparationOptions {
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
   const source = parseWorldContextSource(JSON.parse(await readFile(options.sourcePath, 'utf8')));
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
+  // The application registry owns classification; preparation bakes its orbit presentation.
+  const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mjs')).href) as {
+    OBJECTS: readonly { id: string; classification: string }[];
+  };
+  const planetIds = new Set(OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
   if (source.frame.epochJdTt !== geometry.SOLAR_GEOMETRY_EPOCH_JD_TT) throw new TypeError('World context and solar geometry epochs differ.');
   const auM = geometry.ASTRONOMICAL_UNIT_KILOMETERS * M_PER_KM;
   const objectsDirectory = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
@@ -46,19 +52,30 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const radiusM = await preparedRadius(body.id, positionM, source.frame.referenceFrame,
       source.frame.epochJdTt, resolve(objectsDirectory, body.id, 'object.json')) ?? (data ? data.meanRadiusKm * M_PER_KM : undefined);
     if (radiusM === undefined) throw new TypeError(`World context lacks a physical radius for ${body.id}.`);
-    facts[body.id] = { radiusM };
+    facts[body.id] = { radiusM, orbitStyle: planetIds.has(body.id) ? 'closed' : 'trail' };
   }
+  const orbitCenters: Record<string, WorldContextOrbitCenter> = {};
   for (const body of source.bodies) {
     const state = states[body.id]!;
-    const parentPosition = state.centerBodyId === source.focus.id ? source.frame.originM : states[state.centerBodyId]?.positionM;
-    if (!parentPosition || Math.hypot(...parentPosition.map((value, axis) => value - state.centerPositionM[axis]!)) > .001) {
+    if (!states[state.centerBodyId] && state.centerBodyId !== source.focus.id) {
+      const primary = geometry.BODY_HELIOCENTRIC_STATES[state.centerBodyId];
+      if (primary) orbitCenters[state.centerBodyId] = { positionM: scale(primary.positionKm, M_PER_KM), centerBodyId: 'sun' };
+    }
+    const parentPosition = state.centerBodyId === source.focus.id ? source.frame.originM :
+      (states[state.centerBodyId] ?? orbitCenters[state.centerBodyId])?.positionM;
+    // Matrix products at Neptune's distance have millimetre-scale roundoff.
+    // Keep the check within a few floating-point ULPs before using the exact
+    // prepared parent position below, rather than a fixed sub-ULP tolerance.
+    const tolerance = parentPosition ? Math.max(.001, 8 * Number.EPSILON *
+      Math.max(...parentPosition.map(Math.abs), ...state.centerPositionM.map(Math.abs))) : 0;
+    if (!parentPosition || Math.hypot(...parentPosition.map((value, axis) => value - state.centerPositionM[axis]!)) > tolerance) {
       throw new TypeError(`Prepared orbit centre is incompatible with its parent for ${body.id}.`);
     }
     // The parent and child ephemeris adapters can differ by sub-millimetre float roundoff.
     // Use one exact prepared centre so every consumer shares the same placement.
     states[body.id] = { ...state, centerPositionM: parentPosition };
   }
-  const prepared = prepareWorldContext(source, facts, states);
+  const prepared = prepareWorldContext(source, facts, states, orbitCenters);
   const text = `${JSON.stringify(prepared, null, 2)}\n`;
   try { if (await readFile(options.outputPath, 'utf8') === text) return; }
   catch (error: unknown) { if (!isMissingFile(error)) throw error; }
@@ -103,6 +120,10 @@ async function loadSolarGeometry(path: string): Promise<SolarGeometry> {
     BODY_FIXED_SUN_DIRECTIONS: vectors(input.BODY_FIXED_SUN_DIRECTIONS, 'Solar geometry Sun directions'),
     BODY_FIXED_ORBIT_NORMAL_DIRECTIONS: vectors(input.BODY_FIXED_ORBIT_NORMAL_DIRECTIONS, 'Solar geometry orbit normals'),
     BODY_FIXED_TO_ICRF_MATRICES: matrices(input.BODY_FIXED_TO_ICRF_MATRICES), BODY_ORBITS: orbits(input.BODY_ORBITS),
+    BODY_HELIOCENTRIC_STATES: Object.fromEntries(Object.entries(record(input.BODY_HELIOCENTRIC_STATES ?? {}, 'Primary states')).map(([id, value]) => {
+      const state = record(value, `${id} primary state`);
+      return [id, { positionKm: vector3(state.positionKm, `${id} primary position`), velocityKmPerDay: vector3(state.velocityKmPerDay, `${id} primary velocity`) }];
+    })),
   };
   return geometry;
 }

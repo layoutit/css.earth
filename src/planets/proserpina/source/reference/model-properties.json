@@ -1,0 +1,94 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1189",
+  "modelId": 1189,
+  "modelVersion": "2016-01-04",
+  "diameterKm": 87.45,
+  "diameterInterpretation": "Convex light-curve reconstruction with approximate thermal size: 87.45 km effective diameter (catalog ±0.95 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 87.45,
+    "uncertaintyKm": 0.95,
+    "reportedUncertaintyKm": 0.95,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 26,
+      "name": "Proserpina",
+      "diameterKm": 87.45,
+      "uncertaintyKm": 0.95,
+      "detections": 9,
+      "originalRow": "26     Proserpina                     7.50  0.15  9   87.45  0.95 0.234 0.006"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred.",
+    "scaleKmPerSourceUnit": 70.48434233363791,
+    "metersPerSourceUnit": 70484.3423336379,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 87.45 km effective diameter (catalog ±0.95 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 13.10977,
+  "poleEclipticJ2000Degrees": [
+    88,
+    -52
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/4308/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 70484.3423336379,
+    "firstVertexKm": [
+      -7.898686854934464,
+      15.761990570017442,
+      36.20308420585344
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      97.63540439095156,
+      99.95307053556625,
+      73.19235076609627
+    ],
+    "volumeCubicKm": 350169.2965739119,
+    "volumeEquivalentRadiusKm": 43.724999999999994,
+    "radialRangeKm": [
+      34.25600590250578,
+      54.77113419048797
+    ]
+  },
+  "elevation": [
+    -10,
+    12
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 874.5,
+    "estimatedErrorMeters": 421.5299377441406,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 349515567535423.9
+    }
+  }
+}

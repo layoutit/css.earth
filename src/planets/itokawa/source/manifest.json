@@ -1,0 +1,159 @@
+{
+  "schema": "cssitokawa-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "itokawa-shape",
+      "path": "shape/ver128q.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
+      "credit": "JAXA/ISAS/Hayabusa AMICA; R. Gaskell and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-triangle-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "meters",
+        "referenceRadiusMeters": 165
+      },
+      "coverage": "Released global model; detailed geometry is simplified for the display.",
+      "expectedBytes": 16897935,
+      "expectedSha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
+      "credit": "JAXA/ISAS/Hayabusa AMICA; R. Gaskell and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "expectedBytes": 188484,
+      "expectedSha256": "ce0b9e63e348a9d4a8f1c807b26a94e14df8a978bc1fd0c3f2ec3f41454b917c",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "itokawa-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 90,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "elevation"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 8711,
+      "expectedSha256": "eefeba821f7f5ad79c39b52ad02411bf86927d93b0291093b3b81c20f4d544f8"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 524,
+      "expectedSha256": "e99f4acb4d1d1884b3779cbdab568a7f43319a6f8479a245c9ac8ab99a00bbb8"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 1294,
+      "expectedSha256": "7bdf7f773b02c471be5f06cd2c0dc246489fcf1319a155cba28d0e52a73e98d5"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 344,
+      "expectedSha256": "616eb07ddbac529ff5d9ae9141544031730f616c61a32ed1e6a7a82ac1d2af49"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 2864,
+      "expectedSha256": "15c4eff105e17e03577972c15aed2ce102f6769e87f279f0dca43191b94fbf8d"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 4211,
+      "expectedSha256": "1007450a9cd24da50a2dd8d0d122f48380defb5ff91a2a5b862c1a98b5b7c3f4"
+    },
+    {
+      "path": "reference/bundle_description.txt",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 15441,
+      "expectedSha256": "f1ad5dacd8bcd36d10211a18f119e7ca9a17ba516242cfb51c468090cf362249"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 1654,
+      "expectedSha256": "773fe759e079fefcaec834bcbf7326a600bee612134d0839b04f03961638e164"
+    },
+    {
+      "path": "reference/pds-data-index.html",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 2186,
+      "expectedSha256": "8cbad5242a820937ebbe50677c8368dffb62e813f03a75b239fb2283248c6d0c"
+    },
+    {
+      "path": "reference/pds-document-index.html",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 4343,
+      "expectedSha256": "6b0a73aa4fb2683adfcef80131df69e5aa37f80ccb0daf6d78bfd5761bd08f86"
+    },
+    {
+      "path": "reference/ver128q.xml",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 9864,
+      "expectedSha256": "dc81556c9ccb2ccf7efa32ea76621a3c0a8289f4f98920e0007e65ce5b354d45"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 89773,
+      "expectedSha256": "d5d858a8261399806a884792db61716cfe7b7440e032c9f3c2cb8e559abca065"
+    }
+  ]
+}
