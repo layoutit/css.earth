@@ -1,7 +1,9 @@
 # B8: Surface chemistry on Io, Ganymede and Enceladus
 
 Owner: Moons. Accepted 2026-09-09. Branch: `feat/moons-surface-chemistry`.
-Base: main `2f6f8614add9a5a22ef03b86a47edef631950ade`, after merged B7 PR #81.
+Accepted base: main `2f6f8614add9a5a22ef03b86a47edef631950ade`, after merged B7 PR #81.
+Integration base: `1fb76e44d6bf831e7ebcf0516b83c0b10e1716da`, including PR #82's
+new asteroid marker indices. The incoming marker update is retained.
 Status: five views prepared; original-source reproduction and package closure
 pass; browser/delivery review in progress.
 

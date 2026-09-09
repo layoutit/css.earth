@@ -9,7 +9,7 @@ import {auditObjectRuntimeOwnership} from '../../../tools/check-object-runtime-o
 import {loadPlanetBrowserProfile} from '../../../site/test/load-browser-profile.mjs';
 import {serializeObjectJson} from '../../../tools/prepare-object-json.mjs';
 
-const ids=['io','ganymede','enceladus'],base=process.env.B8_QUALIFICATION_BASE ?? '2f6f8614add9a5a22ef03b86a47edef631950ade';
+const ids=['io','ganymede','enceladus'],base=process.env.B8_QUALIFICATION_BASE ?? '1fb76e44d6bf831e7ebcf0516b83c0b10e1716da';
 const objects=OBJECTS.filter(object=>ids.includes(object.id));assert.equal(objects.length,3);
 const frozen=execFileSync('git',['diff','--name-only',base,'--','src/renderers','src/platform','packages','site','src/navigation'],{encoding:'utf8'}).trim();
 assert.equal(frozen,'','Renderer, shell, navigation and camera code stay fixed');

@@ -53,7 +53,8 @@ avoids regenerating unchanged large imagery and geometry.
 `node docs/moons/b8-surface-chemistry/verify-packages.mjs` verifies all three body
 packages, source/runtime closure and shared runtime ownership. Scene bytes and
 retained runtime trees must match base
-`2f6f8614add9a5a22ef03b86a47edef631950ade`.
+`1fb76e44d6bf831e7ebcf0516b83c0b10e1716da` (including the subsequently merged
+asteroid navigation-marker update).
 
 ## Delivery and browser evidence
 
