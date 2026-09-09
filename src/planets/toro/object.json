@@ -110,7 +110,11 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/toro-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "24372239ff3d03ea096ba71068a804efd0112190bc1c2949ce9420bc19d6c5d5"
+      }
     }
   },
   "schema": "cssearth-object@1",

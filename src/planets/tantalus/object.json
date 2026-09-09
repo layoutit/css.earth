@@ -110,7 +110,11 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/tantalus-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0207a92f174b235412866c7114fee06be3fa8bec9983208bf3f6c5406871120b"
+      }
     }
   },
   "schema": "cssearth-object@1",

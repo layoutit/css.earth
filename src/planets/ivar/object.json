@@ -110,7 +110,11 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/ivar-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "77b4739a2b6c372d9c9ee0f615874ecbd46705854be0cdd1076f497aeead2030"
+      }
     }
   },
   "schema": "cssearth-object@1",

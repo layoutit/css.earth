@@ -110,7 +110,11 @@
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/cerberus-surfaces.css"
-      ]
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f00b6dde521a0f5b9644dc60d5191fec44600d643cc06e08821c42e659feba14"
+      }
     }
   },
   "schema": "cssearth-object@1",
