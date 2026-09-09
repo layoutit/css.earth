@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-mantle-tomography@1",
+  "source": {
+    "model": "GLAD-M35",
+    "revision": "r0.1",
+    "year": 2024,
+    "variable": "vsv",
+    "units": "km/s",
+    "url": "https://data.earthscope.org/archive/seismology/products/emc/netcdf/GLAD-M35.r0.1-n4c.nc",
+    "sha256": "07dc0c0b65c34996501334f9b0fd5d8576da435e04edbdfc66dea48d9e7d707b",
+    "bytes": 343763392,
+    "doi": "https://doi.org/10.1093/gji/ggae270"
+  },
+  "gridPath": "interior/glad-m35-vsv-subset.f32.gz",
+  "depth": {
+    "minimum": 10,
+    "step": 10,
+    "count": 289
+  },
+  "latitude": {
+    "minimum": -90,
+    "step": 1,
+    "count": 181
+  },
+  "longitude": {
+    "minimum": -180,
+    "step": 1,
+    "count": 361
+  },
+  "sectionLongitudesDegrees": [
+    67.5,
+    -180
+  ],
+  "geographicLongitudeOffsetDegrees": -180,
+  "modelRadiusKm": 6371,
+  "shellDepthKm": 29.967074317968045,
+  "reference": "Area-weighted horizontal mean of Vsv at each source depth, excluding the duplicated longitude endpoint. This display reference is not STW105, the inversion's reference model.",
+  "quantity": "100 * (Vsv / mean Vsv at the same depth - 1)",
+  "palette": [
+    {
+      "percent": -3,
+      "color": "#b2182b"
+    },
+    {
+      "percent": -1.5,
+      "color": "#ef8a62"
+    },
+    {
+      "percent": 0,
+      "color": "#f7f7f7"
+    },
+    {
+      "percent": 1.5,
+      "color": "#67a9cf"
+    },
+    {
+      "percent": 3,
+      "color": "#2166ac"
+    }
+  ],
+  "missingColor": "#a3a3a3",
+  "legend": {
+    "image": "earth-interior-legend.png",
+    "width": 620,
+    "height": 16
+  },
+  "interpretation": "Seismic inverse model, not a photograph or temperature measurement. Smooth interpolation does not add resolving power. Only the mantle portion of the schematic geometry is sampled; depths outside 10\u20132890 km are gray. Crust and core remain schematic.",
+  "webp": {
+    "quality": 90,
+    "effort": 6,
+    "smartSubsample": true
+  },
+  "longitudeSeam": "Average the coincident -180/+180 degree source samples before periodic sampling; their maximum published difference is 0.080645084 km/s, at 20 km depth and 55 degrees north."
+}

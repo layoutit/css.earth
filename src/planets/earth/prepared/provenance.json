@@ -4,12 +4,12 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "600266b0809239a3a45c9b03a3010bad2b98ac6f040247ef5e6c28d28f21a3ae"
+    "sha256": "5df319caaa49d982dc8429680ff808b47852a8b2bc52d61d1b64bf6c55d4c401"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "f328b5d7611a801d78c34af69b9c04b4e85a822286875a20d81ea264976e0037"
   },
   "recipes": [
     {
@@ -443,7 +443,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4e837505a0ef5de1ea6045b2388c6baa547aa8304bc3a00140d68a04f396d8f5",
+      "sha256": "b23a1f453de8a9588e5c323a31c8587bfac242b0fdcf1e75cefa66e78696854d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -678,42 +678,30 @@
             {
               "id": "cross-section",
               "label": "Cross section",
-              "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
-              "title": "Cross section: Schematic NASA Science source-backed interior",
+              "description": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
+              "title": "Cross section: GLAD-M35 mantle tomography",
               "thumbnail": "/scenes/earth/earth-view-interior.webp",
               "legend": {
-                "kind": "categories",
-                "title": "Structure",
-                "items": [
-                  {
-                    "label": "Crust",
-                    "description": "6,348 km inner radius",
-                    "color": "#8b795e"
-                  },
-                  {
-                    "label": "Mantle",
-                    "description": "3,478 km inner radius",
-                    "color": "#cf5d35"
-                  },
-                  {
-                    "label": "Outer core",
-                    "description": "1,221 km inner radius",
-                    "color": "#ef9c3b"
-                  },
-                  {
-                    "label": "Inner core",
-                    "description": "to the center",
-                    "color": "#f5d580"
-                  }
-                ],
-                "meta": "Schematic",
-                "sourceUrl": "https://science.nasa.gov/earth/facts/"
+                "kind": "scale",
+                "title": "Mantle Vsv · % from depth mean",
+                "sourceUrl": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35",
+                "image": "earth-interior-legend.png",
+                "width": 620,
+                "height": 16,
+                "labels": [
+                  "≤ −3%",
+                  "0",
+                  "≥ +3%"
+                ]
               },
               "source": {
-                "id": "surface-observation"
+                "id": "glad-m35-vsv",
+                "url": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35"
               },
-              "detail": "Structure",
-              "summary": "Schematic Earth interior based on NASA Science. Colors and interior shading illustrate inferred layers, not photographs. Shadows changes the exterior lighting."
+              "detail": "GLAD-M35 · 2024",
+              "summary": "Mantle shear-wave speed: % from the global mean at the same depth. Red is slower; blue is faster. Gray: outside the 10–2,890 km model. Crust and core are schematic. This is not temperature.",
+              "falseColor": true,
+              "legendNote": "GLAD-M35 r0.1 · 10–2,890 km depth · 1° / 10 km sample grid. Gray: outside model depth coverage. Grid spacing is not resolving power."
             }
           ]
         },
@@ -935,6 +923,85 @@
             ]
           }
         ]
+      }
+    },
+    {
+      "id": "mantle-tomography",
+      "path": "source/interior/tomography.json",
+      "sha256": "784a3c2d67a027dc900b1c2d9192d7f17c401d67d54f03fabc8961bc72bf1d97",
+      "parameters": {
+        "schema": "cssearth-mantle-tomography@1",
+        "source": {
+          "model": "GLAD-M35",
+          "revision": "r0.1",
+          "year": 2024,
+          "variable": "vsv",
+          "units": "km/s",
+          "url": "https://data.earthscope.org/archive/seismology/products/emc/netcdf/GLAD-M35.r0.1-n4c.nc",
+          "sha256": "07dc0c0b65c34996501334f9b0fd5d8576da435e04edbdfc66dea48d9e7d707b",
+          "bytes": 343763392,
+          "doi": "https://doi.org/10.1093/gji/ggae270"
+        },
+        "gridPath": "interior/glad-m35-vsv-subset.f32.gz",
+        "depth": {
+          "minimum": 10,
+          "step": 10,
+          "count": 289
+        },
+        "latitude": {
+          "minimum": -90,
+          "step": 1,
+          "count": 181
+        },
+        "longitude": {
+          "minimum": -180,
+          "step": 1,
+          "count": 361
+        },
+        "sectionLongitudesDegrees": [
+          67.5,
+          -180
+        ],
+        "geographicLongitudeOffsetDegrees": -180,
+        "modelRadiusKm": 6371,
+        "shellDepthKm": 29.967074317968045,
+        "reference": "Area-weighted horizontal mean of Vsv at each source depth, excluding the duplicated longitude endpoint. This display reference is not STW105, the inversion's reference model.",
+        "quantity": "100 * (Vsv / mean Vsv at the same depth - 1)",
+        "palette": [
+          {
+            "percent": -3,
+            "color": "#b2182b"
+          },
+          {
+            "percent": -1.5,
+            "color": "#ef8a62"
+          },
+          {
+            "percent": 0,
+            "color": "#f7f7f7"
+          },
+          {
+            "percent": 1.5,
+            "color": "#67a9cf"
+          },
+          {
+            "percent": 3,
+            "color": "#2166ac"
+          }
+        ],
+        "missingColor": "#a3a3a3",
+        "legend": {
+          "image": "earth-interior-legend.png",
+          "width": 620,
+          "height": 16
+        },
+        "interpretation": "Seismic inverse model, not a photograph or temperature measurement. Smooth interpolation does not add resolving power. Only the mantle portion of the schematic geometry is sampled; depths outside 10–2890 km are gray. Crust and core remain schematic.",
+        "webp": {
+          "quality": 90,
+          "effort": 6,
+          "smartSubsample": true
+        },
+        "longitudeSeam": "Average the coincident -180/+180 degree source samples before periodic sampling; their maximum published difference is 0.080645084 km/s, at 20 km depth and 55 degrees north."
       }
     }
   ],
@@ -1656,8 +1723,28 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c0578b8e31058dd4949fff1f9d6ab8017a03a1d3a78ce976674a40661a57a81a",
-      "bytes": 731,
+      "sha256": "e11f087d0b30d9b9c67cec44fdd27d10268a61e6b04a0b6d991b01cbe840931e",
+      "bytes": 943,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "glad-m35-vsv",
+      "path": "interior/glad-m35-vsv-subset.f32.gz",
+      "origin": "https://data.earthscope.org/archive/seismology/products/emc/netcdf/GLAD-M35.r0.1-n4c.nc",
+      "credit": "Cui et al. (2024), GLAD-M35 r0.1; EarthScope Earth Model Collaboration",
+      "license": "Public scientific model; attribution requested by EMC. No separate data license is stated in the downloaded model metadata.",
+      "licenseEvidence": [
+        "https://ds.iris.edu/ds/products/emc/",
+        "https://doi.org/10.1093/gji/ggae270"
+      ],
+      "acquisition": "Checked-in numeric subset of the SHA-256 pinned NetCDF. Recreate with tools/objects/paged-ellipsoid/extract-tomography.py; the upstream model pin and complete extraction recipe are in interior/tomography.json.",
+      "redistribution": "Numeric scientific-model subset with author, paper and repository attribution; no source illustration is copied.",
+      "sha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb",
+      "bytes": 520307,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1673,8 +1760,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4e837505a0ef5de1ea6045b2388c6baa547aa8304bc3a00140d68a04f396d8f5",
-      "bytes": 14356,
+      "sha256": "b23a1f453de8a9588e5c323a31c8587bfac242b0fdcf1e75cefa66e78696854d",
+      "bytes": 14444,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2191,28 +2278,198 @@
       "label": "Cross section",
       "recipe": "paged-ellipsoid",
       "selector": "/interiorPath",
-      "parents": [],
-      "process": "Prepare the source-defined schematic interior.",
+      "parents": [
+        "normal"
+      ],
+      "process": "Sample pinned mantle velocities on the cut planes and shell; normalize by the area-weighted depth mean and bake the signed palette. Keep crust and core schematic.",
       "limitations": [
-        "Schematic NASA Science source-backed interior"
+        "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic."
       ],
       "lensIds": [
         "cross-section"
       ],
       "recipeDependencies": [
-        "paged-ellipsoid"
+        "paged-ellipsoid",
+        "mantle-tomography"
       ],
       "interpretation": {
-        "kind": "schematic-interior"
+        "kind": "seismic-model-with-schematic-layers",
+        "quantity": "100 * (Vsv / mean Vsv at the same depth - 1)",
+        "reference": "Area-weighted horizontal mean of Vsv at each source depth, excluding the duplicated longitude endpoint. This display reference is not STW105, the inversion's reference model.",
+        "source": {
+          "model": "GLAD-M35",
+          "revision": "r0.1",
+          "year": 2024,
+          "variable": "vsv",
+          "units": "km/s",
+          "url": "https://data.earthscope.org/archive/seismology/products/emc/netcdf/GLAD-M35.r0.1-n4c.nc",
+          "sha256": "07dc0c0b65c34996501334f9b0fd5d8576da435e04edbdfc66dea48d9e7d707b",
+          "bytes": 343763392,
+          "doi": "https://doi.org/10.1093/gji/ggae270"
+        },
+        "depth": {
+          "minimum": 10,
+          "step": 10,
+          "count": 289
+        },
+        "sectionLongitudesDegrees": [
+          67.5,
+          -180
+        ]
       },
       "inputs": [
-        "authored-document:interior/earth-interior.json"
+        "authored-document:interior/earth-interior.json",
+        "glad-m35-vsv"
       ],
       "outputs": [
         {
+          "url": "/scenes/earth/earth-interior-inner-core-poles@2x.webp",
+          "bytes": 23702,
+          "sha256": "500d5f8def40ef6ef2d6f9f2bdb82021a215008735de3fd70fa4b0844df0c616",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-inner-core@2x.webp",
+          "bytes": 107008,
+          "sha256": "25b334494dfbb0959d04d53f8a3a2242682eea641a4d56dc738086c3b48d27e3",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-legend.png",
+          "bytes": 2083,
+          "sha256": "c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-mantle-poles@2x.webp",
+          "bytes": 65172,
+          "sha256": "2d8a1988e6ca41cfea2c2c218b0edb94ff779e1ac80bea09e16158347bc85bab",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-mantle@2x.webp",
+          "bytes": 117986,
+          "sha256": "39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-core-poles@2x.webp",
+          "bytes": 17562,
+          "sha256": "ae4297773c515c0a3c6531b0121480f88bb0798fc5e9f7ebb6bf044f649f91e4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-core@2x.webp",
+          "bytes": 88492,
+          "sha256": "59abf483313abb0d00cb05d2e66897f9b7418e3d20df301a387bd411d78f1dc9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x.webp",
+          "bytes": 174476,
+          "sha256": "aa7475954004b33f8ae658927083ae5160931413c37eb677eea3bc573d3bdc3d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-lit-page-2@2x.webp",
+          "bytes": 417014,
+          "sha256": "608b68a54fa6643965c271a3df5b9c0b0e806b0ed89310174a2b349db6e99a2b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-lit-page-3@2x.webp",
+          "bytes": 447968,
+          "sha256": "87fa00d276b1db709d28976e6f0ed39c2a321f45a796b94fb3abd12c0bfbbd1e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-lit-page-4@2x.webp",
+          "bytes": 310196,
+          "sha256": "4e4c6abfb7c058243f0f51caa369eee97df6cc15c327527638fcf9d85ef58393",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-lit-page-5@2x.webp",
+          "bytes": 137490,
+          "sha256": "2662342d6d126e686bb10de66a1ded2539eed14c357207ec467ea5b20961df86",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-lit-page-6@2x.webp",
+          "bytes": 22678,
+          "sha256": "61e0174bceeff57e8a1b942dba5a022da86af0550d4136bd5902ca7e928663b5",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-lit-poles@2x.webp",
+          "bytes": 117038,
+          "sha256": "84e782f5f81cfef6f3e98bc47fc27963d5d60db8f6580175e7b259115783927e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-lit@2x.webp",
+          "bytes": 82046,
+          "sha256": "9f8545f8be6556142fa8c55d90296efb6b2b1d0e6697749de396c16ebbcbff4e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-page-1@2x.webp",
+          "bytes": 298550,
+          "sha256": "5d72b32ded9bab19b9e7ce50895dad66905049d4188c6986c625446171280a49",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-page-2@2x.webp",
+          "bytes": 653024,
+          "sha256": "2fe3d1c0e9c8ac9fa4981b459850a2729c4f80dc04ad5c7faf7c0736c81a730f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-page-3@2x.webp",
+          "bytes": 685210,
+          "sha256": "66b0d66376641edd49f34c3928e6613ec5e03de295432dc1a8459eb5f692560c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-page-4@2x.webp",
+          "bytes": 492840,
+          "sha256": "014718f481eca632722afdac3b128676f1e9553c5e77c25725d77a7c19cebcc5",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-page-5@2x.webp",
+          "bytes": 216534,
+          "sha256": "eaeea5a512bb7f3366f5e95c7850689e1b1e1f4720902f7d8498c90a525ad58f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-page-6@2x.webp",
+          "bytes": 33860,
+          "sha256": "12eabd218c58c6bd270f792add1a1274551f08be1c20c0e44ccaf513422554f4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer-poles@2x.webp",
+          "bytes": 147088,
+          "sha256": "9c08ee340e835dfd554d665c437ebd6be148d43386214dc561900da81a94c4e2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-outer@2x.webp",
+          "bytes": 140768,
+          "sha256": "ada878a32a6f457fddaf107ddd39843364ab8cfbe46a8f8ef4c83e3a4a57e797",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-interior-section@2x.webp",
+          "bytes": 111944,
+          "sha256": "a36fc0a860f9a647eec5b173ed11e44ea31a5489c66195ce10e5b6f0b1650210",
+          "verification": "bytes-verified"
+        },
+        {
           "url": "/scenes/earth/earth-view-interior.webp",
-          "bytes": 1302,
-          "sha256": "4e8ee2c852e0799d4dd36fdfdf0c29eaa52e89e7c5033a5777d5147ba39db8a4",
+          "bytes": 1736,
+          "sha256": "97bd54b5ea62537b3562562ae024a5fa5757e5c059da08af80f213861fccdf11",
           "verification": "bytes-verified"
         }
       ],

@@ -955,6 +955,24 @@
       "consumers": [
         "topography"
       ]
+    },
+    {
+      "id": "glad-m35-vsv",
+      "path": "interior/glad-m35-vsv-subset.f32.gz",
+      "origin": "https://data.earthscope.org/archive/seismology/products/emc/netcdf/GLAD-M35.r0.1-n4c.nc",
+      "credit": "Cui et al. (2024), GLAD-M35 r0.1; EarthScope Earth Model Collaboration",
+      "license": "Public scientific model; attribution requested by EMC. No separate data license is stated in the downloaded model metadata.",
+      "licenseEvidence": [
+        "https://ds.iris.edu/ds/products/emc/",
+        "https://doi.org/10.1093/gji/ggae270"
+      ],
+      "acquisition": "Checked-in numeric subset of the SHA-256 pinned NetCDF. Recreate with tools/objects/paged-ellipsoid/extract-tomography.py; the upstream model pin and complete extraction recipe are in interior/tomography.json.",
+      "redistribution": "Numeric scientific-model subset with author, paper and repository attribution; no source illustration is copied.",
+      "consumers": [
+        "interior"
+      ],
+      "expectedBytes": 520307,
+      "expectedSha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb"
     }
   ],
   "generatedIntermediates": [
@@ -1016,8 +1034,8 @@
     },
     {
       "path": "interior/earth-interior.json",
-      "expectedSha256": "c0578b8e31058dd4949fff1f9d6ab8017a03a1d3a78ce976674a40661a57a81a",
-      "expectedBytes": 731,
+      "expectedSha256": "e11f087d0b30d9b9c67cec44fdd27d10268a61e6b04a0b6d991b01cbe840931e",
+      "expectedBytes": 943,
       "purpose": "Source-qualified schematic Earth interior presentation specification"
     },
     {
@@ -1064,14 +1082,14 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 14356,
-      "expectedSha256": "4e837505a0ef5de1ea6045b2388c6baa547aa8304bc3a00140d68a04f396d8f5",
+      "expectedBytes": 14444,
+      "expectedSha256": "b23a1f453de8a9588e5c323a31c8587bfac242b0fdcf1e75cefa66e78696854d",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 3233,
-      "expectedSha256": "58d0f25f6d76eed1f19a6ca73b3a8d4b189b8f076df82087b0f2dce1ecc138f5",
+      "expectedBytes": 3401,
+      "expectedSha256": "fcdafb7115fd9d2b9a13ec8687fe5bf6d39a5f5b6eab558c5efe93c6509f2d56",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -1110,6 +1128,24 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1222,
       "expectedSha256": "bfb96ae17afec52f4f872930edf7b0a64734e408987c524f93150eb777b003f7"
+    },
+    {
+      "path": "interior/tomography.json",
+      "purpose": "Authored GLAD-M35 Vsv extraction, coordinates, palette and interpretation.",
+      "expectedBytes": 2117,
+      "expectedSha256": "784a3c2d67a027dc900b1c2d9192d7f17c401d67d54f03fabc8961bc72bf1d97"
+    },
+    {
+      "path": "interior/glad-m35-metadata.geojson",
+      "purpose": "EarthScope metadata for the pinned GLAD-M35 r0.1 model.",
+      "expectedBytes": 7181,
+      "expectedSha256": "adc1aa1c4641459c035d9c7f738d13df11a693ecab38d7ad9ed3cbf8ab484581"
+    },
+    {
+      "path": "interior/glad-m35-catalog.json",
+      "purpose": "EarthScope catalog, citations and model revision history.",
+      "expectedBytes": 8464,
+      "expectedSha256": "f996e2ca9eee380309ccd1f9fec00f7a35d66505088fb67b6102040e52c5cb4e"
     }
   ]
 }

@@ -65,7 +65,7 @@
       "thumbnailUrl": "/scenes/earth/earth-view-interior.webp",
       "view": "interior",
       "maximumZoom": 4,
-      "qualification": "Schematic NASA Science source-backed interior",
+      "qualification": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
       "focus": {
         "longitude": 123.75,
         "latitude": 15,
@@ -82,6 +82,6 @@
     "normal": "NASA Blue Marble Next Generation December 2004 and Blue Marble clouds",
     "topography": "NASA Earth Observatory Blue Marble topography and bathymetry December 2004",
     "nightLights": "NASA Earth Observatory Black Marble 2016",
-    "interior": "NASA Science Facts About Earth, schematic presentation"
+    "interior": "Cui et al. (2024), GLAD-M35 r0.1 via EarthScope EMC; NASA Science schematic layer geometry"
   }
 }

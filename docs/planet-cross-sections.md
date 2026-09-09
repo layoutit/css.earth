@@ -1,8 +1,28 @@
-# Planet cross-section repair
+# Planet cross-section repair and Earth mantle tomography
+
+Earth's mantle now shows **GLAD-M35 r0.1 (2024)** seismic-model values on both
+cut planes and the outer mantle shell. Colors encode vertically polarized
+shear-wave velocity relative to the area-weighted global mean at the same
+depth, with an unshaded ±3% legend. Crust and core remain schematic. The numeric
+subset, authoritative metadata, original NetCDF hash and deterministic extractor
+are checked in; source definitions and limitations are documented in
+[Earth's source record](../src/planets/earth/SOURCE.md#mantle-tomography-source-and-interpretation).
+
+The original 343.8 MB volume is used only for source extraction. Normal offline
+preparation reads a 520 KB numeric subset; browsers load prepared WebP textures.
+No DOM geometry or camera topology was added for tomography. Six source-value
+anchors and six independent full-volume texel anchors verify sign, depth,
+latitude, reference mean and final texture sampling. Numeric subset extraction
+reproduced byte for byte from the upstream NetCDF. The tests also check missing
+depths, exterior registration, the palette and stale-cut rejection.
+
+The earlier eight-planet repair evidence below predates tomography. The final
+tomography validation and integrated screenshots are recorded separately so the
+old schematic images are not presented as evidence of the new data textures.
 
 Earth's cutaway no longer cancels the shared camera rotation. Selecting Cross section makes a 650 ms north-up entry into the cut, preserving the current zoom; subsequent drag rotates the same retained model as the exterior. The mantle and outer-core polar atlases now remove the same wedge as their shells, so those caps no longer cover the opening.
 
-Earth and Mercury now select complete prepared lit/unlit exterior banks when Shadows changes. Their inferred interior layers retain illustrative shape shading. No runtime geometry or imagery generation was added. Saturn's existing cutaway was checked without changing its rendering.
+Earth and Mercury now select complete prepared lit/unlit exterior banks when Shadows changes. Schematic layers retain illustrative shape shading; Earth's scientific mantle colors use the legend without lighting tint. No runtime geometry or imagery generation was added. Saturn's existing cutaway was checked without changing its rendering.
 
 ![Earth after a native drag in the production build](evidence/planet-cross-sections/earth-production-drag.png)
 

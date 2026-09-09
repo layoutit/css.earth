@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e6cdcb7132c5d69b35fec5e67eaf31d620332d9623a546a580a75d1138aca14a"
+    "sha256": "359101d2b665c8e8511a0628db92729f22e5aae5a6d7fed62297479f3fa85472"
   },
   "id": "earth",
   "properties": {
@@ -36,12 +36,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "4e837505a0ef5de1ea6045b2388c6baa547aa8304bc3a00140d68a04f396d8f5"
+          "sha256": "b23a1f453de8a9588e5c323a31c8587bfac242b0fdcf1e75cefa66e78696854d"
         },
         {
           "id": "lens-bindings",
           "path": "source/content/lens-bindings.json",
-          "sha256": "58d0f25f6d76eed1f19a6ca73b3a8d4b189b8f076df82087b0f2dce1ecc138f5"
+          "sha256": "fcdafb7115fd9d2b9a13ec8687fe5bf6d39a5f5b6eab558c5efe93c6509f2d56"
         },
         {
           "id": "charts",
@@ -62,6 +62,11 @@
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
           "sha256": "779c8e99f2b5046b9d543bb38b3c75acd9d0cb402a9758f040dd877792491309"
+        },
+        {
+          "id": "mantle-tomography",
+          "path": "source/interior/tomography.json",
+          "sha256": "784a3c2d67a027dc900b1c2d9192d7f17c401d67d54f03fabc8961bc72bf1d97"
         }
       ],
       "shape": {
