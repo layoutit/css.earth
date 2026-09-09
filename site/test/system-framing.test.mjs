@@ -143,3 +143,48 @@ test('clicking the already selected body in close-up does not zoom back out to i
   const closeMount = { navigation: { frame, capture: () => close, optics: () => optics } };
   assert.equal(navigation.systemTarget({ objectId: 'saturn', fromId: 'saturn', mount: closeMount }), null);
 });
+
+test('galactic breadcrumbs zoom straight out from the current view without panning or turning', async () => {
+  const { GALACTIC_VOLUME, volumeZoomTarget } = await import('../system-framing.mjs');
+  const { rotateWorldPosition, worldRotationFromQuaternion } = await import('../../src/renderers/css/dist/navigation.js');
+  for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5]]) {
+    const from = { ...world, pose: { positionM: [2e12, -3e12, 1e13], orientationXyzw } };
+    const viewport = { ...optics, principalOffsetPixels: [40, -20] };
+    const rect = systemFramingRect(viewport, {});
+    const { world: target, focusPositionM } = volumeZoomTarget(from, GALACTIC_VOLUME, viewport, rect, sun.originM);
+    assert.deepEqual(target.pose.orientationXyzw, orientationXyzw);
+    const reverse = worldRotationFromQuaternion(orientationXyzw.map((value, axis) => axis < 3 ? -value : value));
+    const displacement = rotateWorldPosition(reverse, target.pose.positionM.map((value, axis) => value - from.pose.positionM[axis]));
+    assert.ok(displacement[2] > 0, 'Zoom moves outward');
+    assert.ok(Math.abs(displacement[0] / displacement[2] - 40 / viewport.focalPixels) < 1e-12);
+    assert.ok(Math.abs(displacement[1] / displacement[2] + 20 / viewport.focalPixels) < 1e-12);
+    const flight = createSelectionFlight({ from: from.pose, to: target.pose, focusPositionM, durationS: .35 });
+    for (const progress of [.1, .3, .5, .8, 1]) {
+      const pose = sampleSelectionFlight(flight, flight.durationS * progress);
+      const shift = rotateWorldPosition(reverse, pose.positionM.map((value, axis) => value - focusPositionM[axis]));
+      assert.ok(Math.abs(shift[0] / shift[2] - 40 / viewport.focalPixels) < 1e-12, 'Flight stays on the zoom ray');
+      assert.ok(pose.orientationXyzw.every((value, axis) => Math.abs(value - orientationXyzw[axis]) < 1e-12));
+    }
+    for (const x of [GALACTIC_VOLUME.boundsUnits.min[0], GALACTIC_VOLUME.boundsUnits.max[0]])
+      for (const y of [GALACTIC_VOLUME.boundsUnits.min[1], GALACTIC_VOLUME.boundsUnits.max[1]])
+        for (const z of [GALACTIC_VOLUME.boundsUnits.min[2], GALACTIC_VOLUME.boundsUnits.max[2]]) {
+          const offset = rotateWorldPosition(worldRotationFromQuaternion(GALACTIC_VOLUME.localToReferenceXyzw),
+            [x, y, z].map(value => value * GALACTIC_VOLUME.metersPerUnit));
+          const point = GALACTIC_VOLUME.originM.map((value, axis) => value + offset[axis]);
+          const projected = presentWorldCamera(target, { ...sun, originM: point, bodyRadiusM: 1 }, viewport);
+          assert.ok(projected.centerPixels, 'The complete prepared volume is in front of the camera');
+          const [px, py] = projected.centerPixels;
+          assert.ok(px >= rect.left - .001 && px <= rect.right + .001 && py >= rect.top - .001 && py <= rect.bottom + .001);
+        }
+  }
+});
+
+test('a Solar System breadcrumb always restores the system framing from a Sun close-up', () => {
+  const navigation = createPreparedWorldNavigation({ objects: OBJECTS, windowTarget: {}, documentTarget: {} });
+  const closeup = createWorldSelectionTarget(world, sun, optics);
+  const camera = { navigation: { ...mount.navigation, capture: () => closeup } };
+  assert.equal(navigation.systemTarget({ objectId: 'sun', fromId: 'sun', mount: camera }), null);
+  const target = navigation.overviewTarget({ scope: 'solar-system', objectId: 'sun', fromId: 'sun', mount: camera });
+  assert.ok(target.world);
+  assert.equal(bodyCardViewAtCamera(target.world, sun, optics, 'sun'), 'overview');
+});

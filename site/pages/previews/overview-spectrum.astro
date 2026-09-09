@@ -1,0 +1,31 @@
+---
+import '../../site.css';
+import '../../planet-shell.css';
+import '../../explorer-rail.css';
+import '../../maps-shell.css';
+import PlanetBodyOverview from '../../components/PlanetBodyOverview.astro';
+import content from '../../../src/planets/uranus/prepared/content.json';
+---
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><title>Overview spectrum preview</title></head>
+  <body>
+    <main>
+      <div class="preview-label">Overview card preview</div>
+      <aside class="planet-sidebar">
+        <div class="planet-card preview-card">
+          <PlanetBodyOverview objectId="uranus" title={content.title} introduction={content.introduction} />
+        </div>
+      </aside>
+    </main>
+  </body>
+</html>
+<style is:global>
+  html, body { margin: 0; min-height: 100%; background: #000; color: #aaa; }
+  main { width: min(340px, calc(100% - 32px)); margin: 24px auto; }
+  .preview-label { margin: 0 0 12px; color: #888; font: 400 13px/18px var(--shell-ui-font); }
+  main .planet-sidebar { position: static; display: block; width: 100%; height: auto; max-height: none; margin: 0; padding: 0; overflow: visible; }
+  .preview-card { --explorer-card-padding-inline-start: 20px; --explorer-card-padding-inline-end: 20px; background: var(--shell-surface); padding-top: 16px; }
+  .preview-card .planet-object-tabs { border-top: 2px solid #000; }
+  .preview-card .planet-object-results-scroll { max-height: 180px; }
+</style>

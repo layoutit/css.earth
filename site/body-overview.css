@@ -1,0 +1,36 @@
+/* The distant body card shares its image row with the title and compact facts. */
+.planet-card > .planet-selected-panel[data-body-overview] { padding-bottom: 12px; }
+.planet-overview-facts {
+  display: grid; gap: 2px; margin: 4px 0 0; padding: 0; list-style: none;
+  color: var(--shell-text-secondary); font: 400 13px/20px var(--shell-ui-font);
+}
+.planet-selected-panel[data-body-overview][data-has-portrait] {
+  display: grid; grid-template-columns: minmax(0, 45%) 1fr;
+}
+.planet-selected-panel[data-body-overview][data-has-portrait]::after {
+  grid-column: 1 / -1; grid-row: 5;
+}
+.planet-selected-panel[data-body-overview][data-has-portrait] > .planet-breadcrumbs {
+  grid-column: 1 / -1; grid-row: 1; margin-bottom: 4px;
+}
+.planet-selected-panel[data-body-overview][data-has-portrait] > .planet-title-row {
+  grid-column: 1; grid-row: 2; z-index: 1; align-self: start; margin-top: 0;
+}
+.planet-overview-portrait {
+  grid-column: 1 / -1; grid-row: 2; position: relative; aspect-ratio: 300 / 134; overflow: hidden;
+}
+.planet-overview-portrait > .planet-body-overview-image {
+  position: absolute; top: 50%; width: 100%; height: auto; margin: 0;
+  transform: translate(40px, -50%);
+}
+.planet-selected-panel[data-body-overview][data-has-portrait] > .planet-overview-facts {
+  grid-column: 1; grid-row: 2; z-index: 1; align-self: start; margin-top: 34px;
+}
+.planet-selected-panel[data-body-overview] > .planet-introduction {
+  grid-column: 1 / -1; grid-row: 3; margin-top: 8px;
+}
+.planet-overview-spectrum { grid-column: 1 / -1; grid-row: 4; margin: 16px 0 0; }
+.planet-overview-spectrum > figcaption {
+  margin-bottom: 8px; color: var(--shell-text-secondary); font: 400 15px/20px var(--shell-ui-font);
+}
+.planet-overview-spectrum > img { display: block; width: 100%; height: auto; }
