@@ -1,0 +1,14 @@
+✔ fractional source origin maps canonical centres through native coordinates across the meridian (1.075166ms)
+✔ every nonzero interpolation contributor must be valid; no-data cannot bleed into supported terrain (0.210041ms)
+✔ an exact source centre preserves valid dark values and ignores zero-weight invalid neighbours (0.13925ms)
+✔ partial latitude footprint remains missing near both poles and source synthetic sectors stay withheld (0.141916ms)
+✔ a shorter longitude footprint is not stretched or cyclically filled to cover the globe (0.130542ms)
+✔ actual masked and legacy monochrome dispatch preserve the same nonintegral GeoTIFF grid (10.204625ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 108.787084

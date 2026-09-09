@@ -1,0 +1,56 @@
+[
+  {
+    "id": "tethys",
+    "object": {
+      "id": "tethys",
+      "bytes": 7683918,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "500d93454ed0d5c95faaef59ef353cd60c017be73c77b8bc38e3f7acbb788c79"
+    },
+    "preserved": {
+      "scene.json": "b7046e9658cc47abe79a4a20cf13796c0de8876bd31a319dd367d590a48c590d",
+      "surfaces.json": "198f6f926f4acce05b4b4ecc00499cb6fe456d0f51c6472d62bdd7a61001435d",
+      "material.json": "b01d69ce435d47ebc08fd767c192658554c35aa9570fa63ae87e1567cb2c28c4",
+      "assets.json": "e3fe1a2b31c4ac470fe2654f56e0190345a836c63b6747e52592084decc11fe5"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "dione",
+    "object": {
+      "id": "dione",
+      "bytes": 7679660,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "97900b49dda8fdad30c42056693bd5282679bbbce95200b594b47c9ae1a06bb0"
+    },
+    "preserved": {
+      "scene.json": "4bae26ccf6670938bad68c5c18a4a112bb8a94adf2567ab59f0b479159f2fdeb",
+      "surfaces.json": "df85d4b8093fec621fbe681ea7164adc4a391e77114083c85c20fce4f089c446",
+      "material.json": "a38ead933d7c4d34b31fc14b06a28ec5ffecd89ee0084b6e06b9567e841a71ee",
+      "assets.json": "188cb4dc2421e1534532305feeebef8e1c1013e939975e0c7b830b2bced4d805"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  },
+  {
+    "id": "rhea",
+    "object": {
+      "id": "rhea",
+      "bytes": 7680006,
+      "format": "cssearth-css-object@4",
+      "url": "prepared/object.json",
+      "sha256": "d7649e2e98c3d64756231bc8255f182a09519e3100a263a990b8d1e1040a7a7a"
+    },
+    "preserved": {
+      "scene.json": "c7430f10c4acdf5acb09f4b44a1b8f046d90eb11bd143695ca7db5dec933a93f",
+      "surfaces.json": "3ed2738dbde45fee740d941680ddeb25d4ab2c41a514c3c4af5a20b98deb27c9",
+      "material.json": "281564404afc2ddd7328a2cd52178d432743586fbf20ce025eabcd93d9bd4053",
+      "assets.json": "7a3b4764bb6681fa594c275d468b85c64f98ac2c28df401441af383740ec5ca8"
+    },
+    "runtimeImagesUnchanged": true,
+    "scope": "Merged main summaries and B2 scientific content; canonical binding regeneration"
+  }
+]

@@ -1,0 +1,100 @@
+{
+  "schema": "cssearth-independent-scientific-anchors@1",
+  "sources": [
+    {
+      "path": "science/b2-intake/tethys_eqalbedo_g.tif",
+      "expectedBytes": 6044029,
+      "expectedSha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
+      "minimum": 0.7566499710083008,
+      "maximum": 1.229728102684021,
+      "anchors": [
+        {
+          "row": 100,
+          "column": 100,
+          "longitudeEastDegrees": 16.282628262826307,
+          "latitudeDegrees": 38.71870397643595,
+          "value": 0.9980849027633667
+        },
+        {
+          "row": 130,
+          "column": 1419,
+          "longitudeEastDegrees": 229.98199819982,
+          "latitudeDegrees": 33.85861561119293,
+          "value": 0.9769738912582397
+        },
+        {
+          "row": 550,
+          "column": 2170,
+          "longitudeEastDegrees": 351.6561656165617,
+          "latitudeDegrees": -34.18262150220912,
+          "value": 1.0107587575912476
+        }
+      ]
+    },
+    {
+      "path": "science/b2-intake/tethys_npalbedo_g.tif",
+      "expectedBytes": 790789,
+      "expectedSha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
+      "minimum": 0.7440137267112732,
+      "maximum": 1.2568637132644653,
+      "anchors": [
+        {
+          "row": 150,
+          "column": 150,
+          "longitudeEastDegrees": 225.0,
+          "latitudeDegrees": 73.71332616190622,
+          "value": 1.0144096612930298
+        },
+        {
+          "row": 170,
+          "column": 300,
+          "longitudeEastDegrees": 123.26691584358777,
+          "latitudeDegrees": 74.86395777621973,
+          "value": 0.9799127578735352
+        },
+        {
+          "row": 300,
+          "column": 180,
+          "longitudeEastDegrees": 332.136274503576,
+          "latitudeDegrees": 75.6759333603554,
+          "value": 0.993399977684021
+        }
+      ]
+    },
+    {
+      "path": "science/b2-intake/tethys_spalbedo_g.tif",
+      "expectedBytes": 790789,
+      "expectedSha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
+      "minimum": 0.6824865937232971,
+      "maximum": 1.2451194524765015,
+      "anchors": [
+        {
+          "row": 150,
+          "column": 150,
+          "longitudeEastDegrees": 315.0,
+          "latitudeDegrees": -73.71332616190622,
+          "value": 1.0031319856643677
+        },
+        {
+          "row": 170,
+          "column": 300,
+          "longitudeEastDegrees": 56.73308415641224,
+          "latitudeDegrees": -74.86395777621973,
+          "value": 1.0494321584701538
+        },
+        {
+          "row": 300,
+          "column": 180,
+          "longitudeEastDegrees": 207.863725496424,
+          "latitudeDegrees": -75.6759333603554,
+          "value": 1.0063538551330566
+        }
+      ]
+    }
+  ],
+  "independentDecoder": "Pillow Float32 TIFF samples and GeoTIFF tiepoint/pixel-scale tags; independent spherical/polar inverse projection",
+  "qualifications": [
+    "Relative albedo is dimensionless and secondary to the SPC topography solution.",
+    "Source values and coordinate anchors only; prepared display and silhouette qualification are pending."
+  ]
+}

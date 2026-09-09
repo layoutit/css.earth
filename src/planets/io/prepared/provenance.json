@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "db87b220b74d59adc412ef13f00e018d71f3db867f84207ef61e09b897e177c1"
+    "sha256": "dbd14fe8c3fb0aa1f6334220705d1ff4fab1eab547eb070865a9d784f9197707"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "176f9e0088a7ff3cae586fbce861477d62ed69b22deaba3d064dd3666d443b2a",
+      "sha256": "62e0de8d49db3bc47a78b3736f670364a5b2352f3f3414b5b4f4e0ef8a1ea33e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -40,7 +40,8 @@
                 "channels": "rgb",
                 "zeroValidity": "all-channels",
                 "colorSpace": "srgb",
-                "resolutionMeters": 1000
+                "resolutionMeters": 1000,
+                "resampling": "source-georeferenced-bilinear"
               },
               "projection": {
                 "longitudeDegrees": [
@@ -59,7 +60,8 @@
                 "zeroValidity": "all-channels",
                 "colorSpace": "srgb",
                 "resolutionMeters": 1000,
-                "withholdLatitudeDegrees": 85
+                "withholdLatitudeDegrees": 85,
+                "resampling": "source-georeferenced-bilinear"
               },
               "monochromeBase": "normal",
               "projection": {
@@ -74,7 +76,116 @@
               }
             }
           ],
-          "scientific": [],
+          "scientific": [
+            {
+              "id": "geology",
+              "label": "Geology",
+              "format": "geologic-shapefile",
+              "path": "science/geology-sim3168/Io_GeoUnits.shp",
+              "consumer": "geology-surfaces",
+              "sampling": "nearest",
+              "overlapPolicy": "withhold-conflicts",
+              "sourceUrl": "https://pubs.usgs.gov/sim/3168/",
+              "description": "USGS SIM 3168 interpreted geologic units",
+              "title": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height.",
+              "grid": {
+                "attributePath": "science/geology-sim3168/Io_GeoUnits.dbf",
+                "projectionPath": "science/geology-sim3168/Io_GeoUnits.prj",
+                "coordinateSystem": "GCS_Io_2000",
+                "referenceRadiusMeters": 1821460,
+                "longitudeDirection": "east-positive",
+                "latitudeType": "planetocentric",
+                "longitudeDomain": [
+                  -180,
+                  180
+                ],
+                "field": "Unit",
+                "expectedRecords": 1502,
+                "expectedBounds": [
+                  -180,
+                  -88.99993352405727,
+                  180.00000000291644,
+                  88.99996644350102
+                ],
+                "unknownValues": [
+                  "NoData"
+                ],
+                "withheldDegenerateRings": []
+              },
+              "categories": [
+                {
+                  "value": "Pby",
+                  "label": "Bright plains",
+                  "color": "#efd969"
+                },
+                {
+                  "value": "Pbw",
+                  "label": "White plains",
+                  "color": "#f1ece0"
+                },
+                {
+                  "value": "Prb",
+                  "label": "Red-brown plains",
+                  "color": "#b77255"
+                },
+                {
+                  "value": "Pl",
+                  "label": "Layered plains",
+                  "color": "#d5aa79"
+                },
+                {
+                  "value": "Fb",
+                  "label": "Bright flows",
+                  "color": "#e69abd"
+                },
+                {
+                  "value": "Fd",
+                  "label": "Dark flows",
+                  "color": "#7b496e"
+                },
+                {
+                  "value": "Fu",
+                  "label": "Undivided flows",
+                  "color": "#ac79a6"
+                },
+                {
+                  "value": "PFb",
+                  "label": "Bright patera floors",
+                  "color": "#f2b651"
+                },
+                {
+                  "value": "PFd",
+                  "label": "Dark patera floors",
+                  "color": "#3c3747"
+                },
+                {
+                  "value": "PFu",
+                  "label": "Undivided patera floors",
+                  "color": "#978e94"
+                },
+                {
+                  "value": "Ml",
+                  "label": "Lineated mountains",
+                  "color": "#397eae"
+                },
+                {
+                  "value": "Mm",
+                  "label": "Mottled or hummocky mountains",
+                  "color": "#78b6d1"
+                },
+                {
+                  "value": "Mu",
+                  "label": "Undivided mountains",
+                  "color": "#577098"
+                },
+                {
+                  "value": "Tb",
+                  "label": "Tholi",
+                  "color": "#649c76"
+                }
+              ]
+            }
+          ],
           "observedColors": [],
           "surfaceQuality": 90
         },
@@ -154,7 +265,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f19b72e17ec7d16c549942b10ad358f302efab485d963b9b8d869a9e2f0b9fb8",
+      "sha256": "108710dc7c7c1566fa236cc3654a6b6afcd86fb203a701f049b1b7a4e0d372f9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -282,6 +393,122 @@
               },
               "detail": "Color mosaic",
               "summary": "Infrared, green and violet ratios with monochrome detail. Interpolated polar color is withheld."
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "detail": "Interpreted units",
+              "description": "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief.",
+              "title": "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief.",
+              "thumbnail": "/scenes/io/io-geology-thumbnail.webp",
+              "surface": "io-geology-surface@2x.webp",
+              "poles": "io-geology-poles@2x.webp",
+              "falseColor": true,
+              "source": {
+                "id": "usgs-sim3168-geologic-units",
+                "path": "../manifest.json",
+                "url": "https://pubs.usgs.gov/sim/3168/"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Interpreted geologic category"
+                },
+                {
+                  "id": "mapping-scale",
+                  "label": "Map scale",
+                  "value": "1:15,000,000"
+                },
+                {
+                  "id": "epoch",
+                  "label": "Publication",
+                  "value": "USGS SIM3168 · 2011"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Coverage",
+                  "value": "Base-unit polygons; polar/no-data gaps retained"
+                }
+              ],
+              "legend": {
+                "kind": "categories",
+                "title": "Geologic units",
+                "meta": "Symbols identify archived categories. Colors are chosen for this display.",
+                "sourceUrl": "https://pubs.usgs.gov/sim/3168/",
+                "items": [
+                  {
+                    "label": "Pby",
+                    "description": "Bright plains",
+                    "color": "#efd969"
+                  },
+                  {
+                    "label": "Pbw",
+                    "description": "White plains",
+                    "color": "#f1ece0"
+                  },
+                  {
+                    "label": "Prb",
+                    "description": "Red-brown plains",
+                    "color": "#b77255"
+                  },
+                  {
+                    "label": "Pl",
+                    "description": "Layered plains",
+                    "color": "#d5aa79"
+                  },
+                  {
+                    "label": "Fb",
+                    "description": "Bright flows",
+                    "color": "#e69abd"
+                  },
+                  {
+                    "label": "Fd",
+                    "description": "Dark flows",
+                    "color": "#7b496e"
+                  },
+                  {
+                    "label": "Fu",
+                    "description": "Undivided flows",
+                    "color": "#ac79a6"
+                  },
+                  {
+                    "label": "PFb",
+                    "description": "Bright patera floors",
+                    "color": "#f2b651"
+                  },
+                  {
+                    "label": "PFd",
+                    "description": "Dark patera floors",
+                    "color": "#3c3747"
+                  },
+                  {
+                    "label": "PFu",
+                    "description": "Undivided patera floors",
+                    "color": "#978e94"
+                  },
+                  {
+                    "label": "Ml",
+                    "description": "Lineated mountains",
+                    "color": "#397eae"
+                  },
+                  {
+                    "label": "Mm",
+                    "description": "Mottled or hummocky mountains",
+                    "color": "#78b6d1"
+                  },
+                  {
+                    "label": "Mu",
+                    "description": "Undivided mountains",
+                    "color": "#577098"
+                  },
+                  {
+                    "label": "Tb",
+                    "description": "Tholi",
+                    "color": "#649c76"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -321,6 +548,12 @@
             "role": "stars",
             "description": "Milky Way panorama",
             "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "USGS geology",
+            "role": "surface",
+            "description": "Interpreted geologic map and GIS · SIM3168",
+            "href": "https://pubs.usgs.gov/sim/3168/"
           }
         ],
         "provenance": {
@@ -383,7 +616,7 @@
       "sha256": "cf65a0323aac9c4c9eb582aa7b7ce0d36be8e445316fa6dba49ab5647b63584c",
       "bytes": 65546342,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -437,7 +670,7 @@
       "sha256": "337778617ffa6a3cdb5d36375265222ef37410db9495ca5ddbe7bc6786276d14",
       "bytes": 196637696,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -446,6 +679,84 @@
         "path": "io-color-1km.tif",
         "url": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3168-geologic-units",
+      "path": "science/geology-sim3168/Io_GeoUnits.shp",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2264103816 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp",
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "projection": {
+        "type": "geographic-vector",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821460
+      },
+      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps.",
+      "sha256": "6a02334eee7af7518f90c5f97b1468552499de89b05d17656d627556e71aa64f",
+      "bytes": 2798948,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3168-io-geounits-dbf",
+      "path": "science/geology-sim3168/Io_GeoUnits.dbf",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4029951286 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf",
+      "sha256": "ac09efc6635cf3d9d81fb5596a050393bf358ea5f204b79d4039952b369c53a3",
+      "bytes": 178964,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3168-io-geounits-prj",
+      "path": "science/geology-sim3168/Io_GeoUnits.prj",
+      "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+      "credit": "Williams et al. (2011), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj",
+      "sha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
+      "bytes": 149,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -458,10 +769,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1f914878677afdbd0ce81e0cba0e732276ad876ce0b1345db6a3d8f60ed0461c",
-      "bytes": 7156,
+      "sha256": "108710dc7c7c1566fa236cc3654a6b6afcd86fb203a701f049b1b7a4e0d372f9",
+      "bytes": 11577,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -491,7 +802,8 @@
           "channels": "rgb",
           "zeroValidity": "all-channels",
           "colorSpace": "srgb",
-          "resolutionMeters": 1000
+          "resolutionMeters": 1000,
+          "resampling": "source-georeferenced-bilinear"
         }
       },
       "inputs": [
@@ -500,21 +812,21 @@
       "outputs": [
         {
           "url": "/scenes/io/io-normal-thumbnail.webp",
-          "bytes": 3642,
-          "sha256": "8b1f1b03b7e0ed27952eecb0ea7e66bb95450cc746ef940e64c2c8c85af10d30",
-          "verification": "asset-manifest-pin"
+          "bytes": 2956,
+          "sha256": "6ef01913772fefcaf657519b6bdb26ce50fa7df55c4be24b86c409f1b821c9dd",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-normal-surface@2x.webp",
-          "bytes": 664996,
-          "sha256": "e2c95ed859e7b0977b7a901060fc7815239405c62469a128fe9990deb4fc7df5",
-          "verification": "asset-manifest-pin"
+          "bytes": 666484,
+          "sha256": "7c5647c27d2a006654a52b2503f5fe6028b7dc36760418c8c67726dcfe5e8436",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-normal-poles@2x.webp",
-          "bytes": 15516,
-          "sha256": "2142802e4ffab995143bc4820ee08db7a6698b454dc13b9deec8dbdf74832672",
-          "verification": "asset-manifest-pin"
+          "bytes": 16276,
+          "sha256": "94e3549ab68f0575281eedda16aaf2226f2e36c70b6573f123f1ae3b2800062c",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -546,7 +858,8 @@
           "zeroValidity": "all-channels",
           "colorSpace": "srgb",
           "resolutionMeters": 1000,
-          "withholdLatitudeDegrees": 85
+          "withholdLatitudeDegrees": 85,
+          "resampling": "source-georeferenced-bilinear"
         }
       },
       "inputs": [
@@ -555,21 +868,68 @@
       "outputs": [
         {
           "url": "/scenes/io/io-enhanced-thumbnail.webp",
-          "bytes": 8506,
-          "sha256": "68b41fa6b630873eba20236097e876926d71fadac97a5d76277b37d077b33e4b",
-          "verification": "asset-manifest-pin"
+          "bytes": 8488,
+          "sha256": "87a736050c59000f70525cd4c05905851b06941b9bf12f32a3f5b86b1e14f6b9",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-enhanced-surface@2x.webp",
-          "bytes": 817650,
-          "sha256": "0db2e0144d9dafc0adcaaffbe88ae5bb8de2aec650d70b78a705db0d0474642b",
-          "verification": "asset-manifest-pin"
+          "bytes": 813758,
+          "sha256": "69913c53fa4cd634a62c6fc4cd7e129eb4c2fa39c6461435b7a4f7d52bfe9ec7",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-enhanced-poles@2x.webp",
-          "bytes": 24994,
-          "sha256": "36cd743cf6cbf47220ca9dca853fc0428e18835e569e9819ceddb2789d5d3f2c",
-          "verification": "asset-manifest-pin"
+          "bytes": 27566,
+          "sha256": "44efdb1d16d9b4f66b8ea6d74e009622b71ece910b2a9e1883c3499157eb2880",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height."
+      },
+      "inputs": [
+        "usgs-sim3168-geologic-units",
+        "usgs-sim3168-io-geounits-dbf",
+        "usgs-sim3168-io-geounits-prj"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/io/io-geology-thumbnail.webp",
+          "bytes": 1342,
+          "sha256": "c174d19381e631edc930799dc978694cc60d179008a3c327b31bdeea0e4860e3",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-geology-surface@2x.webp",
+          "bytes": 198562,
+          "sha256": "ed0690bd5f1f66eac03f3b10bbfd6db6ca45da675681163a6a73b0dc69ea1db0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-geology-poles@2x.webp",
+          "bytes": 12162,
+          "sha256": "5e6994d95674f76a5537b4b687e2d03bdebcc96efb082246aee3070f4c08ec98",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -592,8 +952,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3610,
-          "sha256": "014dbc9c45588ff5ae7fe756030773c46cf4e96b61cf3a7d2fb04998d5a8d95a",
+          "bytes": 3753,
+          "sha256": "772003f378b5c2f2a664f70abcfb3eca70626bdf08060b6255cadf859e34a70e",
           "verification": "bytes-verified"
         }
       ],
@@ -617,8 +977,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 30296,
-          "sha256": "642fc04beda6b3d38cf6fc79ce7ddc43a4928cbf279e73476eb248b22ea4035d",
+          "bytes": 30634,
+          "sha256": "e6253fdf7246aa1167e5f349f99136b19d6caed64246a7d9510f4f2d87fb7708",
           "verification": "bytes-verified"
         }
       ]
@@ -641,8 +1001,32 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/enhanced.webp",
-          "bytes": 42650,
-          "sha256": "a75c91a4a1b9a2bef294ac5950b984086005fba288447e7deb677e36865db7fb",
+          "bytes": 42644,
+          "sha256": "d72a1f09875805007ac7179419e17b145e29c34aed898ee4ccfd5aa27e963284",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:geology",
+      "label": "Geology preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "geology"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/geology.webp",
+          "bytes": 117596,
+          "sha256": "e1cbb7b6365a5ab0c2e80dae001def65916b7b263048bf01cde36703bb1760e7",
           "verification": "bytes-verified"
         }
       ]

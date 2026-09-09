@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8f883c611596bf00ef75140ecb5e61ff604338a36857177589156b8696e9ef48"
+    "sha256": "1f6265f9599e91ac49b08ca4d5fd13a68d7fdb794a8889a2b6f7f49b5d980d7d"
   },
   "id": "ganymede",
   "properties": {
@@ -63,6 +63,11 @@
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -83,17 +88,17 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "4d76bbd1db574ecbd3a2d0fb42c7beb562990e3eb710963150d5fcab01206237"
+          "sha256": "e78ff1444c9db1f44f8e9bdf48018df201a70fabc5189f39032cfc4de07ed220"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "1b577689c1444be4c88fc00133d697e9b5f5415adca009fee31733691a8a29c2"
+          "sha256": "cd5df99c5c82ad4daa31ae2c16debb941d2dc1611c4965240c1ce52b5638d2de"
         },
         {
           "id": "title",
           "path": "source/presentation/title-mark.json",
-          "sha256": "0d5f9bd6ce07b0d083656b62b8c5b0f250a2e7ef08386cc822b8dbd821387026"
+          "sha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76"
         },
         {
           "id": "navigation",

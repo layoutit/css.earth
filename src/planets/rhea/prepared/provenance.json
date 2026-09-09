@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "755ccc4406967ad5ff553f6b8f7817e2e025cdeb356a7eae2175e96eb010ae46"
+    "sha256": "b1d902d883431c782145a574196aa32ed0d00ad6ce3885f5f7936cf7a3d2c0c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "ed36804c6ceebfea535edfc871a42efe419e23ce18afdc5c3cceb9caa183ada9",
+      "sha256": "32a257ed0ce51beff0716842cd39983c4bb2ce22c8e35e0cf43192ed32d2406f",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -59,7 +59,7 @@
               "format": "geotiff",
               "path": "observations/rhea_radius_g.tif",
               "description": "Cassini terrain model · shaded relief",
-              "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing and 2.15–4.3 km typical estimated height uncertainty. Gray grid marks uncovered raster edges. The globe remains spherical.",
+              "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
               "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
               "minimum": -10,
               "maximum": 10,
@@ -108,9 +108,59 @@
                 ],
                 "ambient": 0.25
               }
+            },
+            {
+              "id": "relative-albedo",
+              "label": "Relative albedo",
+              "format": "geotiff",
+              "path": "science/b2-intake/rhea_albedo_g.tif",
+              "description": "Cassini SPC relative albedo · dimensionless",
+              "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+              "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
+              "minimum": 0.5,
+              "maximum": 1.5,
+              "colors": [
+                "#403362",
+                "#aba0be",
+                "#f4f1e8",
+                "#c0a257",
+                "#755013"
+              ],
+              "labels": [
+                "0.5",
+                "1",
+                "≥ 1.5"
+              ],
+              "units": "relative to mean ≈ 1",
+              "consumer": "scientific-surfaces",
+              "sampling": "bilinear",
+              "grid": {
+                "width": 2222,
+                "height": 1111,
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 763500,
+                "noData": -3.4028226550889045e+38,
+                "specialValueMagnitude": 1e+30,
+                "origin": [
+                  -2398605.9910158,
+                  1199302.9955079
+                ],
+                "resolution": [
+                  2153.874190046,
+                  -2153.874190046
+                ]
+              },
+              "displaySampling": "nearest"
             }
           ],
-          "observedColors": []
+          "observedColors": [],
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
         },
         "lighting": {
           "frameSize": 512,
@@ -131,7 +181,26 @@
             "defaultControlYawDegrees": 0
           },
           "mapUrl": "/scenes/rhea/rhea-normal-surface@2x.webp",
-          "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp"
+          "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp",
+          "radialTerrain": {
+            "path": "science/b2-intake/rhea_128_o.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 98306,
+              "expectedFaces": 196608
+            },
+            "faceBudget": 2000,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 2000,
+              "maximumErrorMeters": 7635,
+              "regularize": false
+            }
+          }
         },
         "celestial": {
           "sunSource": "JPL Rhea orbit plus VSOP87 Saturn position and IAU/WGCCRE Rhea rotation"
@@ -150,7 +219,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d9994d1c2ea24ede78426398a84d3aa9dff0d950ea074d18042312c503a8bf75",
+      "sha256": "0374421d4a090ad629cd13d95a7efe42275c9fe10cccf6adb0df5cc4020d6aef",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -174,7 +243,7 @@
           "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
         },
         "panel": {
-          "introduction": "Saturn’s second-largest moon, an icy world covered in ancient craters, enormous impact basins and bright fractures.",
+          "introduction": "Saturn’s second-largest moon, an icy world covered in ancient craters, enormous impact basins and bright fractures. The shape view reveals a simplified Cassini SPC model. Relative albedo shows the model’s brightness variation; elevation uses its own stated reference sphere.",
           "facts": [
             {
               "id": "radius",
@@ -239,28 +308,29 @@
           "labels": {
             "normal": "Monochrome",
             "enhanced": "Enhanced color",
-            "elevation": "Elevation"
+            "elevation": "Elevation",
+            "relative-albedo": "Relative albedo",
+            "shape": "Shape"
           },
           "controls": [
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
-              "title": "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
+              "description": "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+              "title": "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
               "thumbnail": "/scenes/rhea/rhea-normal-thumbnail.webp",
               "surface": "rhea-normal-surface@2x.webp",
               "poles": "rhea-normal-poles@2x.webp",
               "source": {
                 "id": "cassini-voyager-2012-rhea",
                 "path": "../manifest.json"
-              },
-              "summary": "Cassini and Voyager mosaic with uneven detail and shadows. Gray grid: gaps. The display is spherical."
+              }
             },
             {
               "id": "enhanced",
               "label": "Enhanced color",
-              "description": "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Spherical shape approximation.",
-              "title": "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Spherical shape approximation.",
+              "description": "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+              "title": "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
               "thumbnail": "/scenes/rhea/rhea-enhanced-thumbnail.webp",
               "surface": "rhea-enhanced-surface@2x.webp",
               "poles": "rhea-enhanced-poles@2x.webp",
@@ -273,8 +343,8 @@
             {
               "id": "elevation",
               "label": "Elevation",
-              "description": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing and 2.15–4.3 km typical estimated height uncertainty. Gray grid marks uncovered raster edges. The globe remains spherical.",
-              "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing and 2.15–4.3 km typical estimated height uncertainty. Gray grid marks uncovered raster edges. The globe remains spherical.",
+              "description": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
+              "title": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape.",
               "thumbnail": "/scenes/rhea/rhea-elevation-thumbnail.webp",
               "surface": "rhea-elevation-surface@2x.webp",
               "poles": "rhea-elevation-poles@2x.webp",
@@ -295,8 +365,47 @@
                 "meta": "km",
                 "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
                 "image": "/scenes/rhea/rhea-elevation-legend.webp"
+              }
+            },
+            {
+              "id": "relative-albedo",
+              "label": "Relative albedo",
+              "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+              "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+              "thumbnail": "/scenes/rhea/rhea-relative-albedo-thumbnail.webp",
+              "surface": "rhea-relative-albedo-surface@2x.webp",
+              "poles": "rhea-relative-albedo-poles@2x.webp",
+              "source": {
+                "id": "cassini-spc-2025-rhea-rhea_albedo_g",
+                "path": "../manifest.json"
               },
-              "summary": "Cassini height relative to a 763.5 km sphere. Typical height errors are 2.15–4.3 km; raster gaps are marked."
+              "legend": {
+                "kind": "scale",
+                "title": "Relative albedo",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.5",
+                  "1",
+                  "≥ 1.5"
+                ],
+                "meta": "relative to mean ≈ 1",
+                "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
+                "image": "/scenes/rhea/rhea-relative-albedo-legend.webp"
+              }
+            },
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+              "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+              "thumbnail": "/scenes/rhea/rhea-shape-thumbnail.webp",
+              "surface": "rhea-shape-surface@2x.webp",
+              "poles": "rhea-shape-poles@2x.webp",
+              "source": {
+                "id": "cassini-spc-2025-rhea-q128-shape",
+                "path": "../manifest.json"
+              }
             }
           ]
         },
@@ -348,6 +457,12 @@
             "role": "stars",
             "description": "Milky Way panorama",
             "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "PDS",
+            "role": "shape",
+            "description": "2025 SPC shape and relative albedo products",
+            "href": "https://sbn.psi.edu/pds/resource/weirichrheashape.html"
           }
         ],
         "provenance": {
@@ -404,7 +519,7 @@
       "sha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7",
       "bytes": 66401915,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -412,6 +527,38 @@
         ],
         "path": "observations/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
         "url": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichrheashape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/rhea_128_o.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_128_o.obj",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
+      "id": "cassini-spc-2025-rhea-q128-shape",
+      "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
+      "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
+      "sha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
+      "bytes": 17694840,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/b2-intake/rhea_128_o.obj",
+        "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_128_o.obj",
+        "headers": {
+          "User-Agent": "cssEarth source verification (public PDS data)"
+        }
       },
       "verificationOperations": []
     },
@@ -449,7 +596,7 @@
       "sha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4",
       "bytes": 10389170,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -496,7 +643,7 @@
       "sha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -511,6 +658,43 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichrheashape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/rhea_albedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_albedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichrheashape.html",
+      "id": "cassini-spc-2025-rhea-rhea_albedo_g",
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 2222,
+      "height": 1111,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "sha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123",
+      "bytes": 9881887,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/b2-intake/rhea_albedo_g.tif",
+        "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_albedo_g.tif",
+        "headers": {
+          "User-Agent": "cssEarth source verification (public PDS data)"
+        }
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Source metadata, license evidence, or authored preparation and content.",
       "id": "authored-document:content/object.json",
@@ -520,10 +704,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "77d6548c5f9977fdde53403ff14831ff77336bede3d5a009a71d9f81a35a5584",
-      "bytes": 10097,
+      "sha256": "0374421d4a090ad629cd13d95a7efe42275c9fe10cccf6adb0df5cc4020d6aef",
+      "bytes": 13542,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -537,7 +721,7 @@
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
       "limitations": [
-        "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation."
+        "USGS 2012 Cassini/Voyager mosaic, about 417 m per source pixel, downsampled to 8192 × 4096. Photographed shadows and variable resolution remain; globe Shadows adds approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
       "lensIds": [
         "normal"
@@ -556,26 +740,21 @@
         }
       },
       "inputs": [
-        "cassini-voyager-2012-rhea"
+        "cassini-voyager-2012-rhea",
+        "cassini-spc-2025-rhea-q128-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/rhea/rhea-normal-thumbnail.webp",
           "bytes": 2772,
           "sha256": "d629d4430b5fcfae757870c697e17b2e6b054b50b984ee52ec706dc0984c8ce9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-normal-surface@2x.webp",
-          "bytes": 5119372,
-          "sha256": "db647fc4c82f22e12de12daea5cb9b27f02f0fdf05025de38438be7506619462",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/rhea/rhea-normal-poles@2x.webp",
-          "bytes": 91908,
-          "sha256": "2aef1ed652ae45a64f3db40a6638d37d196141cd741125ab8b4a520f18bca75a",
-          "verification": "asset-manifest-pin"
+          "bytes": 4933780,
+          "sha256": "c1cc0f7903fd00bc594395360d93c61911dcf39e5cb3ef99dda6486afd67c04b",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -588,7 +767,7 @@
       "parents": [],
       "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
       "limitations": [
-        "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Spherical shape approximation."
+        "Published 2014 enhanced-color composite, about 400 m per source pixel, photometrically corrected by Paul Schenk. Colors extend beyond human vision into ultraviolet and infrared. Real hemisphere differences, residual photographed shading and source seams remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences."
       ],
       "lensIds": [
         "enhanced"
@@ -604,26 +783,21 @@
         }
       },
       "inputs": [
-        "cassini-iss-2014-rhea-color"
+        "cassini-iss-2014-rhea-color",
+        "cassini-spc-2025-rhea-q128-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/rhea/rhea-enhanced-thumbnail.webp",
           "bytes": 5438,
           "sha256": "b6adc3b37aa5421f9c4cda8d4ed5ea0bf1650cbfa4557e4ef3a103e0734f5aec",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-enhanced-surface@2x.webp",
-          "bytes": 12765242,
-          "sha256": "4fde5efd722ed40294cab583c51217a6f6b1f6ff55540187d57d8b21ec9aa157",
-          "verification": "asset-manifest-pin"
-        },
-        {
-          "url": "/scenes/rhea/rhea-enhanced-poles@2x.webp",
-          "bytes": 275808,
-          "sha256": "09cfb91c86325e448192a15c664c38a460bdd64cc71dfd7377bbc58d1c09c00a",
-          "verification": "asset-manifest-pin"
+          "bytes": 11123304,
+          "sha256": "4cdc64493a3659fab0412cafe3fc46627792b49b9b1225f5a8be8b12972144f1",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -636,7 +810,7 @@
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing and 2.15–4.3 km typical estimated height uncertainty. Gray grid marks uncovered raster edges. The globe remains spherical."
+        "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape."
       ],
       "lensIds": [
         "elevation"
@@ -646,35 +820,116 @@
       ],
       "interpretation": {
         "kind": "scientific",
-        "qualification": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing and 2.15–4.3 km typical estimated height uncertainty. Gray grid marks uncovered raster edges. The globe remains spherical."
+        "qualification": "Color shows height above the PDS 763.5 km reference sphere. Brightness shows fixed northwest relief at true height scale; Shadows adds shared approximate globe lighting. Cassini SPC model released in 2025, about 2.15 km grid spacing. The producer’s one-to-two-grid-spacing accuracy estimate is based on simulations; it is not an independent uncertainty measurement for Rhea. Gray grid marks uncovered raster edges. The globe follows a simplified Q128 source shape."
       },
       "inputs": [
-        "cassini-spc-2025-rhea"
+        "cassini-spc-2025-rhea",
+        "cassini-spc-2025-rhea-rhea_albedo_g",
+        "cassini-spc-2025-rhea-q128-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/rhea/rhea-elevation-thumbnail.webp",
           "bytes": 7446,
           "sha256": "684b40b3773bfca89f66f1d3cd691991a995372bafc2ba6bbc89427e75d169f4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-surface@2x.webp",
-          "bytes": 3187148,
-          "sha256": "3388d655e6711263fcf5495b887bddfe1d37f39b8634a31bba94f22f06a30854",
-          "verification": "asset-manifest-pin"
+          "bytes": 3131398,
+          "sha256": "bbd7aba7459e9dcd93f5740c8fb873207f9cd89b1464211408361e37d025f921",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "relative-albedo",
+      "label": "Relative albedo",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps."
+      ],
+      "lensIds": [
+        "relative-albedo"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps."
+      },
+      "inputs": [
+        "cassini-spc-2025-rhea-rhea_albedo_g",
+        "cassini-spc-2025-rhea",
+        "cassini-spc-2025-rhea-q128-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/rhea/rhea-relative-albedo-thumbnail.webp",
+          "bytes": 3668,
+          "sha256": "97457e6cd6c860756fafb6b48b372a01a178bd7a28dcb7cb86110ea51cd43dab",
+          "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/rhea/rhea-elevation-poles@2x.webp",
-          "bytes": 96856,
-          "sha256": "decac25c3f880bda24f5e1522de16cc63246f2117b5a9cc45d65801aa38024b8",
-          "verification": "asset-manifest-pin"
+          "url": "/scenes/rhea/rhea-relative-albedo-legend.webp",
+          "bytes": 276,
+          "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/rhea/rhea-relative-albedo-surface@2x.webp",
+          "bytes": 1744154,
+          "sha256": "07537c6c45c6810003746dc5e09f3b95194d3fbc571e0f17724ab83cea094f8c",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "cassini-spc-2025-rhea-q128-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/rhea/rhea-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/rhea/rhea-shape-surface@2x.webp",
+          "bytes": 458908,
+          "sha256": "130fef512cc41d7778390a2718fb733b6d3de80b32b5208ce049c65224e667b7",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -697,8 +952,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5282,
-          "sha256": "a447bfb4711c56100a4ed1053ddd0727deafc5f7652b63b2c6ad44bfd6940e11",
+          "bytes": 5598,
+          "sha256": "b89558c0a115e4defb83167375348882ec06406aa90262fac280f4d55845d8b5",
           "verification": "bytes-verified"
         }
       ],
@@ -753,6 +1008,30 @@
       ]
     },
     {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 3072,
+          "sha256": "a9cb6cc97276626a14edcd279353d31529dcc61182f6fda4b87a655af951eae7",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:elevation",
       "label": "Elevation preview",
       "recipe": "terrestrial",
@@ -772,6 +1051,30 @@
           "url": "object:prepared/minimaps/elevation.webp",
           "bytes": 74034,
           "sha256": "6009141b1dd7b0bdb596fb07b9a0c0a235dd98803125e3c429f0e3f12f4b7726",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:relative-albedo",
+      "label": "Relative albedo preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "relative-albedo"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/relative-albedo.webp",
+          "bytes": 209020,
+          "sha256": "a20ca0df475afcd704d65574f511d8fa8af619aeb3a8ebe46fbd6ef9358708e2",
           "verification": "bytes-verified"
         }
       ]

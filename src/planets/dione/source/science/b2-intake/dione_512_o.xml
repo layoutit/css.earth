@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1F00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:satellite-dione.cassini.shape-models-maps:data:global_dione_512_o_obj</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>Global DTM Dione: dione_512_o</title>
+    <information_model_version>1.15.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Weirich, J.R.; Gaskell, R.</author_list>
+      <publication_year>2025</publication_year>
+      <description>OBJ shape of Dione at 1.58 km resolution, 1.6M vectors. Images and kernels used to
+build the topography can be found in dioneimglist.txt and dionekernellist.txt,
+respectively.</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable" />
+      <stop_date_time xsi:nil="true" nilReason="inapplicable" />
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>Cassini-Huygens</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.cassini-huygens</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Cassini Orbiter</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.co</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Imaging Science Subsystem - Narrow Angle for CO</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:issna.co</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Cassini Orbiter</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.co</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Imaging Science Subsystem - Wide Angle for CO</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:isswa.co</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Dione</name>
+      <type>Satellite</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:satellite.saturn.dione</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+  </Observation_Area>
+  <File_Area_Observational>
+    <File>
+      <file_name>dione_512_o.obj</file_name>
+      <local_identifier>file</local_identifier>
+      <file_size unit="byte">283115640</file_size>
+      <records>4718594</records>
+    </File>
+    <Table_Character>
+      <local_identifier>V</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>1572866</records>
+      <description>Vertices of the OBJ shape</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">60</record_length>
+        <Field_Character>
+          <name>Record Type</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>UTF8_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>v for vertex</description>
+          <Special_Constants>
+            <missing_constant>9</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>X</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">18</field_length>
+          <field_format>%18.9f</field_format>
+          <unit>km</unit>
+          <description>The X position of the vertices</description>
+          <Special_Constants>
+            <missing_constant>-9999999.999999999</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>Y</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">22</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">18</field_length>
+          <field_format>%18.9f</field_format>
+          <unit>km</unit>
+          <description>The Y position of the vertices</description>
+          <Special_Constants>
+            <missing_constant>-9999999.999999999</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>Z</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">41</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">18</field_length>
+          <field_format>%18.9f</field_format>
+          <unit>km</unit>
+          <description>The Z position of the vertices</description>
+          <Special_Constants>
+            <missing_constant>-9999999.999999999</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>F</local_identifier>
+      <offset unit="byte">94371960</offset>
+      <records>3145728</records>
+      <description>Facet values of the OBJ shape</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">60</record_length>
+        <Field_Character>
+          <name>Record Type</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>UTF8_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>f for facet</description>
+          <Special_Constants>
+            <missing_constant>9</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>V1</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">18</field_length>
+          <field_format>%18d</field_format>
+          <description>Index of the facet model vertices</description>
+          <Special_Constants>
+            <missing_constant>-9999999.999999999</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>V2</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">22</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">18</field_length>
+          <field_format>%18d</field_format>
+          <description>Index of the facet model vertices</description>
+          <Special_Constants>
+            <missing_constant>-9999999.999999999</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>V3</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">41</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">18</field_length>
+          <field_format>%18d</field_format>
+          <description>Index of the facet model vertices</description>
+          <Special_Constants>
+            <missing_constant>-9999999.999999999</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
+

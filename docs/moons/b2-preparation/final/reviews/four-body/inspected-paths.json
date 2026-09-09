@@ -1,0 +1,344 @@
+[
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr1/surface-shadows-unsupported-scene.png",
+    "bytes": 811193,
+    "sha256": "afdd39df0c6fb148bf54616c9b64ec4df82871f0b3caa200a71beb8a14339a44",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr1/topography-shadows-unsupported-scene.png",
+    "bytes": 837987,
+    "sha256": "9a2fe7a2ee2d4ac3357a16d4cf053d1f36e2f8b06e90b8d72f739047e4fc3b87",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr1/rock-abundance-shadows-unsupported-scene.png",
+    "bytes": 864465,
+    "sha256": "ba022c07390d2799877544d13bc45fd26f04365de7a51b4f933ed4432685dfe2",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr2/rock-abundance-shadows-unsupported-scene.png",
+    "bytes": 2629652,
+    "sha256": "15c5fe5182352dde862151cd3b98fb47394597045809dc2e58b62a175799005f",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr2/topography-shadows-unsupported-scene.png",
+    "bytes": 2421854,
+    "sha256": "eeea528e3ca6c355372045a2798d4f5b242250e20e4db8cb37a65c9ebddd4281",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr2/topography-shadows-unsupported-drag.png",
+    "bytes": 2380549,
+    "sha256": "2283a2f4152d624d33b3936bdc97d52150303e4a5cc3aa78d3df2b29020ae8dd",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr2/rock-abundance-shadows-unsupported-drag.png",
+    "bytes": 2554409,
+    "sha256": "1b477901dffb95a60b8561b601061e1ad609285416e2ec43fbe307aa40112cbd",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr1/card-factsheet.png",
+    "bytes": 755693,
+    "sha256": "9bdbf54ae1247deb6b5f61c3fb4db0aa5fe590f37131f5490aac514374819fd5",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/moon-dpr2/card-sources.png",
+    "bytes": 2191853,
+    "sha256": "fdee844bef197427b55082b360bd363fd2dd4cec9d94ed49bba090e5d1dd18d8",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr1/albedo-shadows-false-scene.png",
+    "bytes": 640730,
+    "sha256": "6d5cb58ecb3258ff355b0eb7ad15278df4e4b0f6864938091f61e25a1e5d3b5f",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr1/albedo-shadows-true-scene.png",
+    "bytes": 651576,
+    "sha256": "5c507fe84f1e98702d9f19935d06a83e039470d7ae90a5a5475f9dea64553b9a",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr1/slope-shadows-false-scene.png",
+    "bytes": 831142,
+    "sha256": "a61956e00d93645f79c5265918f92439c536560b2eb66f610522313114a18365",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr1/slope-shadows-true-scene.png",
+    "bytes": 761919,
+    "sha256": "90fff10bd6133baa22a3a988d9a6e74414385a8047b4971a2cab457e51170c4f",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/albedo-shadows-false-scene.png",
+    "bytes": 1711585,
+    "sha256": "00de751408c69316b1ffd844426451d754c2ac42da46d03d38ce5acd90dc5021",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/albedo-shadows-true-scene.png",
+    "bytes": 1733390,
+    "sha256": "47e617cc0596d4bd7f521dd63a568362df6efc57e09458e127cbfc0e3385fe79",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/slope-shadows-false-scene.png",
+    "bytes": 2346687,
+    "sha256": "c1c102c3b8f3eb8c1c047153199c8696baf4394b15479e8ee5ea9ada550ca090",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/slope-shadows-true-scene.png",
+    "bytes": 2094531,
+    "sha256": "762ab352bbcd182f2825b9ceb5ff2800fd594251d9e76fa5b6175443ea9b6d5f",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr1/normal-shadows-true-scene.png",
+    "bytes": 643064,
+    "sha256": "945196f5c7447c6431287aa434976d0a322464999b0ab593f98621baefc4be4b",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/normal-shadows-true-drag.png",
+    "bytes": 1829325,
+    "sha256": "8950c7f74f6edda8b9685022acfa2b66f1ab01934ee82d018f4c431e5cafdaa1",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/elevation-shadows-false-scene.png",
+    "bytes": 2131669,
+    "sha256": "72733d78e31cfc29b8929cc6561db00752ea4f2452087a1216737b56e2ad1791",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/elevation-shadows-true-scene.png",
+    "bytes": 1830913,
+    "sha256": "1174213c597d5b66847425d0e47e5b0f4e03f6b63797e0cdbc9a06fae17067da",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/albedo-shadows-true-drag.png",
+    "bytes": 1716891,
+    "sha256": "e7c9b97e2c320ac232c2d7c21cd738c9f49c183d924ba756ff1259e905d9fcbd",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr1/card-factsheet.png",
+    "bytes": 672672,
+    "sha256": "cb27642b2a19676f9a8098ac96d3d2fdda87dc5359e393b4614a94d423dff3f5",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/phobos-dpr2/card-sources.png",
+    "bytes": 1961043,
+    "sha256": "cc3dad740eb59481201a8a2d15d12456dd0d44a496acb34c82618fa6cd4fcd24",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr1/albedo-shadows-false-scene.png",
+    "bytes": 515888,
+    "sha256": "7584459135e8d5a67a72bbca11cd7802ee483073e22bed76c26212ae3befb86d",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr1/albedo-shadows-true-scene.png",
+    "bytes": 483243,
+    "sha256": "f631774fc51f8617cd6340d1d2ed3b246de62750e75162195ed641a3d386113f",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr1/slope-shadows-false-scene.png",
+    "bytes": 572280,
+    "sha256": "9c0d025181b0432ecbf8919964e8f1e48a24cce938c3d3cc31d34f119843e41c",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr1/slope-shadows-true-scene.png",
+    "bytes": 505510,
+    "sha256": "3da9ee556244b32a66ffe256091b06a4952bc99d4d782bae5e73aed9958552af",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr2/albedo-shadows-false-scene.png",
+    "bytes": 1320419,
+    "sha256": "de64ee13a40bae40981bbdb0cc47ef6cd2d3902df2823c7e5e8db522f36d0f29",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr2/albedo-shadows-true-scene.png",
+    "bytes": 1226718,
+    "sha256": "c0ddcc3fc0beec57a693686b02aebcd977b787c148d323c6c10ee73effef8fa9",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr2/slope-shadows-false-scene.png",
+    "bytes": 1506930,
+    "sha256": "af74a9522174701d1d7e50af10fd339ad48c6bc038765310a02e110e80bd115d",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr2/slope-shadows-true-scene.png",
+    "bytes": 1303251,
+    "sha256": "521a4517f1e8135779b8f72fa5eb62736a81948d010dbd0c6da27a762ca0e75b",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr2/albedo-shadows-true-drag.png",
+    "bytes": 1234497,
+    "sha256": "0bb1c98a5f65c53e8d5b57436285678261b3c12ad17417734867cd3c21f0c297",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr1/normal-shadows-false-scene.png",
+    "bytes": 605813,
+    "sha256": "77839f5e80fe1032ec65a6c399dec91af82a96c9138ddb969effff3e4dc48237",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr2/elevation-shadows-true-scene.png",
+    "bytes": 1370863,
+    "sha256": "ac98d2c12b01247d883699d60817dc77cab6e557157891bb781081f5cf18fa60",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr1/card-factsheet.png",
+    "bytes": 558428,
+    "sha256": "2e5657e8c03d9037040bf7a99c9d3377d46a36de10cb5b7a516174b2d8a8d10e",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/deimos-dpr2/card-sources.png",
+    "bytes": 1481954,
+    "sha256": "f583a534e4e78a012ab5cb30e2ff382171034da8693bbc2e04afeeaa4a92b10a",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/shape-shadows-false-scene.png",
+    "bytes": 476916,
+    "sha256": "1c0246d9ec9eedf068a482d423366fbbb8517f892f5575b1b06792c871aa09e9",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/elevation-shadows-false-scene.png",
+    "bytes": 676118,
+    "sha256": "26c602117469363b3f3ddfc103814c3ce46a742c234d19e41d5964ed871f751b",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/slope-shadows-false-scene.png",
+    "bytes": 653056,
+    "sha256": "0f48043d2000211f8ef6e4b89ebf2627f4c45125fd9373ba079000314c69aff7",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/albedo-shadows-false-scene.png",
+    "bytes": 501468,
+    "sha256": "e701599f6f682091ffa6d52bc274c0712bae8014f62afb7e66e52beb0d18e0ad",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/shape-shadows-true-scene.png",
+    "bytes": 500324,
+    "sha256": "a06ff1b7cd82a9c99279fb8cd1a61805e61125b48f83167248a385baea0227e6",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/elevation-shadows-true-scene.png",
+    "bytes": 615390,
+    "sha256": "d6044597dc1104af0afc75ef738d6f7298090b90d1a59421fc623e951623e415",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/slope-shadows-true-scene.png",
+    "bytes": 592249,
+    "sha256": "b583d60a7c57a394df319576a19484b430f724037873835ad334c02e080e2d7c",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/albedo-shadows-true-scene.png",
+    "bytes": 526099,
+    "sha256": "133fb4fa8388d8d71b5fc2a4cfc0730c648a846297a4d92aa9f1f1176423b83d",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/elevation-shadows-false-scene.png",
+    "bytes": 1776840,
+    "sha256": "c26b65e8bcbbd1730f5a6b8874d24a4de6fbafe5752fdf5fda6527b40db0011c",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/slope-shadows-false-scene.png",
+    "bytes": 1767055,
+    "sha256": "5d1c7571ba71332d444e4752c410d6fbd070a524b223064c02923811175d167e",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/albedo-shadows-false-scene.png",
+    "bytes": 1277758,
+    "sha256": "0809a676f8509dce487ac659a6a49173d54dba7a726eca645ac55e9fc8da2144",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/slope-shadows-true-scene.png",
+    "bytes": 1559186,
+    "sha256": "2dd2f7955818de18845ff8845ba7a16d18deb1e147de13af5fcbb5db14bca286",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/shape-shadows-true-drag.png",
+    "bytes": 1226377,
+    "sha256": "cc0509bf6563fd947715fc205cf1253d6625638805f33083b63f270cdd24dbba",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/elevation-shadows-true-drag.png",
+    "bytes": 1531687,
+    "sha256": "907ba681b248c8396e00eb0a1414d647b6c178f6308710e2f620b3657ba0c77e",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/slope-shadows-true-drag.png",
+    "bytes": 1540917,
+    "sha256": "b9733d6dd56a81868af11d897c7b9d80e68b4b763d5b1580fc61843dc84e6f08",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/albedo-shadows-true-drag.png",
+    "bytes": 1310118,
+    "sha256": "c56c38e22b5a187882b1a6ed33bf022905a6184e52aaf88ff11d13c3436dd125",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr1/card-factsheet.png",
+    "bytes": 483711,
+    "sha256": "038addfda20a875f61f152c5b1acafd4207d2475aaed0c6acbbc45cb1d828341",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/card-sources.png",
+    "bytes": 1251406,
+    "sha256": "d4adc006dec290d17f28076a4f21c53eaaad7f6a457a9f61e17597e6039a9f3c",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/albedo-shadows-true-scene.png",
+    "bytes": 1311485,
+    "sha256": "176c8aa169200a53479b04a2987fc8e109c407559592c9b361e9071049b0ca28",
+    "matchesCaptureReceipt": true
+  },
+  {
+    "path": "output/playwright/b2-surfaces/integrated-2026-09-09T03-59-04.219Z/dimorphos-dpr2/elevation-shadows-true-scene.png",
+    "bytes": 1565023,
+    "sha256": "8bc2fe02ff8c8c97da216fc60d64350a9ce5dfa6f81fe0a6782b0868deb56be5",
+    "matchesCaptureReceipt": true
+  }
+]

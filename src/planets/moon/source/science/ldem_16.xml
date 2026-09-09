@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/mission/lro/v1/PDS4_LRO_1H00_1020.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1H00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1H00_1950.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" 
+    xmlns:cart="http://pds.nasa.gov/pds4/cart/v1" 
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1" 
+    xmlns:lro="http://pds.nasa.gov/pds4/mission/lro/v1" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1         https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.xsd     http://pds.nasa.gov/pds4/mission/lro/v1 https://pds.nasa.gov/pds4/mission/lro/v1/PDS4_LRO_1H00_1020.xsd     http://pds.nasa.gov/pds4/disp/v1        https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1H00_1510.xsd     http://pds.nasa.gov/pds4/cart/v1        https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1H00_1950.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:lro_lola_rdr:data_gridded:ldem_16</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>LRO LOLA gridded science product: LDEM_16</title>
+    <information_model_version>1.17.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2021-10-11</modification_date>
+        <version_id>1.0</version_id>
+        <description>Initial version</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2009-07-13T17:33:17Z</start_date_time>
+      <stop_date_time>2016-11-29T05:48:19Z</stop_date_time>
+    </Time_Coordinates>
+    <Investigation_Area>
+      <name>Lunar Reconnaissance Orbiter</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.lunar_reconnaissance_orbiter</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>LOLA</name>
+      <Observing_System_Component>
+        <name>Lunar Reconnaissance Orbiter</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.lro</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Lunar Orbiter Laser Altimeter for LRO</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:lro.lola</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Moon</name>
+      <type>Satellite</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:satellite.earth.moon</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Mission_Area>
+      <lro:LRO_Parameters>
+        <lro:product_type>LOLA_DEM</lro:product_type>
+        <lro:product_version_id>V3.1</lro:product_version_id>
+        <lro:mission_phase_name>COMMISSIONING</lro:mission_phase_name>
+        <lro:mission_phase_name>NOMINAL MISSION</lro:mission_phase_name>
+        <lro:mission_phase_name>SCIENCE MISSION</lro:mission_phase_name>
+        <lro:mission_phase_name>EXTENDED SCIENCE MISSION</lro:mission_phase_name>
+        <lro:mission_phase_name>SECOND EXTENDED SCIENCE MISSION</lro:mission_phase_name>
+        <lro:mission_phase_name>THIRD EXTENDED SCIENCE MISSION</lro:mission_phase_name>
+        <lro:producer_institution_name>GODDARD SPACE FLIGHT CENTER</lro:producer_institution_name>
+      </lro:LRO_Parameters>
+    </Mission_Area>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>gridded_image</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>gridded_image</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">0</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">360</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">90</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">-90</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Equirectangular</cart:map_projection_name>
+                <cart:Equirectangular>
+                  <cart:standard_parallel_1 unit="deg">0</cart:standard_parallel_1>
+                  <cart:longitude_of_central_meridian unit="deg">180</cart:longitude_of_central_meridian>
+                </cart:Equirectangular>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">1895.21</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">1895.21</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">16</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">16</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">-5458204.8</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">2729102.4</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>Planetocentric</cart:latitude_type>
+              <cart:a_axis_radius unit="km">1737.4</cart:a_axis_radius>
+              <cart:b_axis_radius unit="km">1737.4</cart:b_axis_radius>
+              <cart:c_axis_radius unit="km">1737.4</cart:c_axis_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+              <cart:coordinate_system_type>Body-fixed Rotating</cart:coordinate_system_type>
+              <cart:coordinate_system_name>MEAN EARTH/POLAR AXIS OF DE421</cart:coordinate_system_name>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+    </Discipline_Area>
+  </Observation_Area>
+  <File_Area_Observational>
+    <File>
+      <file_name>ldem_16.img</file_name>
+      <creation_date_time>2019-03-15</creation_date_time>
+      <comment>This data product is a shape map (radius)
+   of the Moon at a resolution of 1895.21 m/pix by 1895.21 m/pix,
+   based on altimetry data acquired through mission phase LRO_ES_52
+   by the LOLA instrument. All LOLA data used for the generation of 
+   this GDR products are geolocated using precision orbits based on a 
+   revised lunar gravity field GRGM 900C[LEMOINEETAL2014].  The previous
+   version of this product was generated with data through LRO_ES_21.
+   An additional 505,763,339 data points have been added.
+
+   The gridfiles were produced in 45 degree latitude bands, and there 
+   may be edge artifacts at this boundary.  Unlike previous versions of
+   these products, the Generic Mapping Tools (GMT) program 'grdblend' was 
+   not used.  At higher resolutions, the GMT5.4.2 program 'surface' was
+   used to compensate for incomplete coverage. Tension was set to 0.5
+   and Anisotropy to 0.5 to minimize latitude distortion. The map is in
+   the form of a binary table with one row for each 0.0625 degrees of 
+   latitude, pixel registered.  Map values are relative to a radius of 
+   1737.4 km.
+
+   This label describes an IMG file in the form of a binary resampling
+   to pixel registration.</comment>
+    </File>
+    <Array_2D_Image>
+      <local_identifier>gridded_image</local_identifier>
+      <offset unit="byte">0</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>Each sample represents height relative to a
+      reference radius (OFFSET) and is generated using geolocated LOLA data
+      produced by the LOLA team.
+        
+        NOTE:                                                                  
+        Conversion from Digital Number to HEIGHT, i.e. elevation in meters, is:
+        HEIGHT = (DN * SCALING_FACTOR).                                        
+        The conversion from Digital Number to PLANETARY_RADIUS in meters is:   
+        PLANETARY_RADIUS = (DN * SCALING_FACTOR) + OFFSET                      
+        where OFFSET is the radius of a reference sphere.                      
+        The planetopotential TOPOGRAPHY is PLANETARY_RADIUS - GEOID_RADIUS,    
+        where GEOID_RADIUS is derived from a gravitational equipotential model.
+        By convention, the average GEOID_RADIUS at the equator is OFFSET.      
+      </description>
+      <Element_Array>
+        <data_type>SignedLSB2</data_type>
+        <unit>METER</unit>
+        <scaling_factor>0.5</scaling_factor>
+        <value_offset>1737400.</value_offset>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>2880</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>5760</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Object_Statistics>
+        <maximum>21580</maximum>
+        <minimum>-18150</minimum>
+      </Object_Statistics>
+    </Array_2D_Image>
+  </File_Area_Observational>
+  <File_Area_Observational_Supplemental>
+    <File>
+      <file_name>ldem_16.lbl</file_name>
+    </File>
+    <Stream_Text>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS3</parsing_standard_id>
+      <description>PDS3 label</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+    </Stream_Text>
+  </File_Area_Observational_Supplemental>
+</Product_Observational>

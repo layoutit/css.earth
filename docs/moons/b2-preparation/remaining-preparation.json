@@ -1,0 +1,68 @@
+{
+  "mode": "prepare",
+  "startedAt": "2026-09-09T01:51:43.036Z",
+  "requestedConcurrency": 1,
+  "concurrency": 1,
+  "elapsedMilliseconds": 543337.333916,
+  "results": [
+    {
+      "id": "deimos",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "succeeded",
+      "startedAt": "2026-09-09T01:51:43.037Z",
+      "exitCode": 0,
+      "signal": null,
+      "elapsedMilliseconds": 540995.6852920001
+    },
+    {
+      "id": "io",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "failed",
+      "startedAt": "2026-09-09T02:00:44.033Z",
+      "exitCode": 1,
+      "signal": null,
+      "error": "io preparation failed with exit 1.",
+      "elapsedMilliseconds": 2340.792374999961
+    },
+    {
+      "id": "europa",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "not-started"
+    },
+    {
+      "id": "ganymede",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "not-started"
+    },
+    {
+      "id": "enceladus",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "not-started"
+    },
+    {
+      "id": "tethys",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "not-started"
+    },
+    {
+      "id": "dione",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "not-started"
+    },
+    {
+      "id": "rhea",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "not-started"
+    },
+    {
+      "id": "titan",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "not-started"
+    },
+    {
+      "id": "charon",
+      "script": "/Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/prepare-authored.js",
+      "status": "not-started"
+    }
+  ]
+}

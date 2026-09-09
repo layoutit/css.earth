@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "31b08d144c2f92830ddfbad939c5313d04fdce620d0c997c0db6eff57a9ee6cd"
+    "sha256": "c083ec510dbad1ceeeecce617322a9fd846be3fd787d150688015ba43238b603"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4d76bbd1db574ecbd3a2d0fb42c7beb562990e3eb710963150d5fcab01206237",
+      "sha256": "e78ff1444c9db1f44f8e9bdf48018df201a70fabc5189f39032cfc4de07ed220",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -38,7 +38,8 @@
                 "noData": 0,
                 "centerLongitude": 180,
                 "channels": "monochrome",
-                "zeroValidity": "any-channel"
+                "zeroValidity": "any-channel",
+                "resampling": "source-georeferenced-bilinear"
               },
               "reportComposition": true
             },
@@ -53,13 +54,175 @@
                 "withholdLongitudeDegrees": [
                   110,
                   150
-                ]
+                ],
+                "resampling": "source-georeferenced-bilinear"
               },
               "monochromeBase": "normal",
               "reportComposition": true
             }
           ],
-          "scientific": [],
+          "scientific": [
+            {
+              "id": "geology",
+              "label": "Geology",
+              "format": "geologic-shapefile",
+              "path": "science/geology-sim3237/GeologyUnits.shp",
+              "consumer": "geology-surfaces",
+              "sampling": "nearest",
+              "overlapPolicy": "withhold-conflicts",
+              "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
+              "description": "USGS SIM 3237 interpreted geologic units",
+              "title": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height.",
+              "grid": {
+                "attributePath": "science/geology-sim3237/GeologyUnits.dbf",
+                "projectionPath": "science/geology-sim3237/GeologyUnits.prj",
+                "coordinateSystem": "GCS_Ganymede_2000",
+                "referenceRadiusMeters": 2632345,
+                "longitudeDirection": "east-positive",
+                "latitudeType": "planetocentric",
+                "longitudeDomain": [
+                  -180,
+                  180
+                ],
+                "field": "Unit",
+                "expectedRecords": 3046,
+                "expectedBounds": [
+                  -180,
+                  -90,
+                  180.00017138671876,
+                  89.5970728515625
+                ],
+                "unknownValues": [],
+                "withheldDegenerateRings": [
+                  {
+                    "record": 3023,
+                    "ring": 0,
+                    "point": [
+                      -179.9998779296875,
+                      72.97808837890625
+                    ]
+                  }
+                ]
+              },
+              "categories": [
+                {
+                  "value": "dc",
+                  "label": "Dark cratered terrain",
+                  "color": "#79574a"
+                },
+                {
+                  "value": "dl",
+                  "label": "Dark lineated terrain",
+                  "color": "#98705b"
+                },
+                {
+                  "value": "d",
+                  "label": "Dark terrain, undivided",
+                  "color": "#b38e78"
+                },
+                {
+                  "value": "r",
+                  "label": "Reticulate terrain",
+                  "color": "#998781"
+                },
+                {
+                  "value": "lg1",
+                  "label": "Light grooved terrain 1",
+                  "color": "#729e83"
+                },
+                {
+                  "value": "lg2",
+                  "label": "Light grooved terrain 2",
+                  "color": "#98bd94"
+                },
+                {
+                  "value": "lg3",
+                  "label": "Light grooved terrain 3",
+                  "color": "#c4d9a1"
+                },
+                {
+                  "value": "ls1",
+                  "label": "Light subdued terrain 1",
+                  "color": "#77aeb2"
+                },
+                {
+                  "value": "ls2",
+                  "label": "Light subdued terrain 2",
+                  "color": "#9bc9c6"
+                },
+                {
+                  "value": "ls3",
+                  "label": "Light subdued terrain 3",
+                  "color": "#c3e4d9"
+                },
+                {
+                  "value": "li1",
+                  "label": "Light irregular terrain 1",
+                  "color": "#8079a9"
+                },
+                {
+                  "value": "li2",
+                  "label": "Light irregular terrain 2",
+                  "color": "#aaa0c6"
+                },
+                {
+                  "value": "li3",
+                  "label": "Light irregular terrain 3",
+                  "color": "#d3c4e0"
+                },
+                {
+                  "value": "l",
+                  "label": "Light terrain, undivided",
+                  "color": "#d0d0bd"
+                },
+                {
+                  "value": "p",
+                  "label": "Palimpsest material",
+                  "color": "#daac75"
+                },
+                {
+                  "value": "pi",
+                  "label": "Palimpsest interior",
+                  "color": "#b88957"
+                },
+                {
+                  "value": "bi",
+                  "label": "Basin interior",
+                  "color": "#c87770"
+                },
+                {
+                  "value": "br",
+                  "label": "Rugged basin material",
+                  "color": "#a34f51"
+                },
+                {
+                  "value": "bs",
+                  "label": "Smooth basin material",
+                  "color": "#dea398"
+                },
+                {
+                  "value": "c1",
+                  "label": "Crater material 1",
+                  "color": "#ad8c27"
+                },
+                {
+                  "value": "c2",
+                  "label": "Crater material 2",
+                  "color": "#dbbc42"
+                },
+                {
+                  "value": "c3",
+                  "label": "Crater material 3",
+                  "color": "#f4df86"
+                },
+                {
+                  "value": "cu",
+                  "label": "Crater material, undivided",
+                  "color": "#d1c59f"
+                }
+              ]
+            }
+          ],
           "observedColors": [],
           "surfaceQuality": 90
         },
@@ -139,7 +302,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1b577689c1444be4c88fc00133d697e9b5f5415adca009fee31733691a8a29c2",
+      "sha256": "cd5df99c5c82ad4daa31ae2c16debb941d2dc1611c4965240c1ce52b5638d2de",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -255,6 +418,167 @@
               },
               "detail": "Infrared color",
               "summary": "Infrared, green and violet with monochrome detail. Missing or synthesized color stays monochrome."
+            },
+            {
+              "id": "geology",
+              "label": "Geology",
+              "detail": "Interpreted units",
+              "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+              "title": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+              "thumbnail": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
+              "surface": "ganymede-geology-surface@2x.webp",
+              "poles": "ganymede-geology-poles@2x.webp",
+              "falseColor": true,
+              "source": {
+                "id": "usgs-sim3237-geologic-units",
+                "path": "../manifest.json",
+                "url": "https://pubs.usgs.gov/sim/3237/"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Interpreted geologic category"
+                },
+                {
+                  "id": "mapping-scale",
+                  "label": "Map scale",
+                  "value": "1:15,000,000"
+                },
+                {
+                  "id": "epoch",
+                  "label": "Publication",
+                  "value": "USGS SIM3237 · 2013"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Coverage",
+                  "value": "Mapped polygons; uncovered areas retained"
+                }
+              ],
+              "legend": {
+                "kind": "categories",
+                "title": "Geologic units",
+                "meta": "Symbols identify archived categories. Colors are chosen for this display.",
+                "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
+                "items": [
+                  {
+                    "label": "dc",
+                    "description": "Dark cratered terrain",
+                    "color": "#79574a"
+                  },
+                  {
+                    "label": "dl",
+                    "description": "Dark lineated terrain",
+                    "color": "#98705b"
+                  },
+                  {
+                    "label": "d",
+                    "description": "Dark terrain, undivided",
+                    "color": "#b38e78"
+                  },
+                  {
+                    "label": "r",
+                    "description": "Reticulate terrain",
+                    "color": "#998781"
+                  },
+                  {
+                    "label": "lg1",
+                    "description": "Light grooved terrain 1",
+                    "color": "#729e83"
+                  },
+                  {
+                    "label": "lg2",
+                    "description": "Light grooved terrain 2",
+                    "color": "#98bd94"
+                  },
+                  {
+                    "label": "lg3",
+                    "description": "Light grooved terrain 3",
+                    "color": "#c4d9a1"
+                  },
+                  {
+                    "label": "ls1",
+                    "description": "Light subdued terrain 1",
+                    "color": "#77aeb2"
+                  },
+                  {
+                    "label": "ls2",
+                    "description": "Light subdued terrain 2",
+                    "color": "#9bc9c6"
+                  },
+                  {
+                    "label": "ls3",
+                    "description": "Light subdued terrain 3",
+                    "color": "#c3e4d9"
+                  },
+                  {
+                    "label": "li1",
+                    "description": "Light irregular terrain 1",
+                    "color": "#8079a9"
+                  },
+                  {
+                    "label": "li2",
+                    "description": "Light irregular terrain 2",
+                    "color": "#aaa0c6"
+                  },
+                  {
+                    "label": "li3",
+                    "description": "Light irregular terrain 3",
+                    "color": "#d3c4e0"
+                  },
+                  {
+                    "label": "l",
+                    "description": "Light terrain, undivided",
+                    "color": "#d0d0bd"
+                  },
+                  {
+                    "label": "p",
+                    "description": "Palimpsest material",
+                    "color": "#daac75"
+                  },
+                  {
+                    "label": "pi",
+                    "description": "Palimpsest interior",
+                    "color": "#b88957"
+                  },
+                  {
+                    "label": "bi",
+                    "description": "Basin interior",
+                    "color": "#c87770"
+                  },
+                  {
+                    "label": "br",
+                    "description": "Rugged basin material",
+                    "color": "#a34f51"
+                  },
+                  {
+                    "label": "bs",
+                    "description": "Smooth basin material",
+                    "color": "#dea398"
+                  },
+                  {
+                    "label": "c1",
+                    "description": "Crater material 1",
+                    "color": "#ad8c27"
+                  },
+                  {
+                    "label": "c2",
+                    "description": "Crater material 2",
+                    "color": "#dbbc42"
+                  },
+                  {
+                    "label": "c3",
+                    "description": "Crater material 3",
+                    "color": "#f4df86"
+                  },
+                  {
+                    "label": "cu",
+                    "description": "Crater material, undivided",
+                    "color": "#d1c59f"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -294,6 +618,12 @@
             "role": "stars",
             "description": "Milky Way panorama",
             "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "USGS geology",
+            "role": "surface",
+            "description": "Interpreted geologic map and GIS · SIM3237",
+            "href": "https://pubs.usgs.gov/sim/3237/"
           }
         ],
         "provenance": {
@@ -355,7 +685,7 @@
       "sha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
       "bytes": 136844537,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -408,7 +738,7 @@
       "sha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
       "bytes": 199204541,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -417,6 +747,84 @@
         "path": "ganymede-color.tif",
         "url": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3237-geologic-units",
+      "path": "science/geology-sim3237/GeologyUnits.shp",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2202359649 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp",
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "projection": {
+        "type": "geographic-vector",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2632345
+      },
+      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps.",
+      "sha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
+      "bytes": 2282348,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3237-geologyunits-dbf",
+      "path": "science/geology-sim3237/GeologyUnits.dbf",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 653643152 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf",
+      "sha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
+      "bytes": 387036,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "usgs-sim3237-geologyunits-prj",
+      "path": "science/geology-sim3237/GeologyUnits.prj",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj",
+      "sha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
+      "bytes": 167,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -429,10 +837,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "37bdd3c09a74d154190329604a544c4d731b4f649fb07171bb9f46577752faa8",
-      "bytes": 11192,
+      "sha256": "cd5df99c5c82ad4daa31ae2c16debb941d2dc1611c4965240c1ce52b5638d2de",
+      "bytes": 17028,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -460,7 +868,8 @@
           "noData": 0,
           "centerLongitude": 180,
           "channels": "monochrome",
-          "zeroValidity": "any-channel"
+          "zeroValidity": "any-channel",
+          "resampling": "source-georeferenced-bilinear"
         }
       },
       "inputs": [
@@ -469,21 +878,21 @@
       "outputs": [
         {
           "url": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
-          "bytes": 3174,
-          "sha256": "0455dbd9e1b7075f81b07f102c0b8edb44e1002c965371c4cbfd6da95a8893a2",
-          "verification": "asset-manifest-pin"
+          "bytes": 3172,
+          "sha256": "639999164186b8fe56726b0a0c2d71494212f1f9a9ab0b018987c80e7170b53e",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-surface@2x.webp",
-          "bytes": 6464260,
-          "sha256": "058f52dcc5601d6442ce4de514bdf431880f00f6b4acc2de99587767611426f7",
-          "verification": "asset-manifest-pin"
+          "bytes": 6411262,
+          "sha256": "eee2ba73dd90d85f32681f6da6d151a60bbfe6dfb7ff2edd373e93d5a2894005",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-poles@2x.webp",
-          "bytes": 173936,
-          "sha256": "c3e6cbdf22700a3a257f48ad1e03ec1e236c46174d3bfc7f2164357ee3c4bfe6",
-          "verification": "asset-manifest-pin"
+          "bytes": 176358,
+          "sha256": "2318592ae6bb16349c87e22c8a0910403e9641d2118b8086783d41f9be28e820",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -516,7 +925,8 @@
           "withholdLongitudeDegrees": [
             110,
             150
-          ]
+          ],
+          "resampling": "source-georeferenced-bilinear"
         }
       },
       "inputs": [
@@ -525,21 +935,68 @@
       "outputs": [
         {
           "url": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
-          "bytes": 5632,
-          "sha256": "61f2911a5f08b2663b2b548989f404de66a0310ae569d95f87ed35d2cae0c1c1",
-          "verification": "asset-manifest-pin"
+          "bytes": 5628,
+          "sha256": "bb1d5515bc0a443f9208479c9a0e4db9404eb1267edc77490138b8d06959bc4c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-surface@2x.webp",
-          "bytes": 7332626,
-          "sha256": "5a0ffc9f7ccf7a5a1f87c4067c92aabf021fe7e31812e358b0e20f4ee9fc54a9",
-          "verification": "asset-manifest-pin"
+          "bytes": 7029694,
+          "sha256": "90553d4fd9a4bd0140b4054c5bf002862fa102439617c76a413c9900cfa3dc8c",
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-poles@2x.webp",
-          "bytes": 212660,
-          "sha256": "b1f8320c46ca20d9693f7ba71228b7dace9023e1e8f1a442bd49e1f7cf41ed68",
-          "verification": "asset-manifest-pin"
+          "bytes": 208766,
+          "sha256": "88bfbe684db157327e55611e9b3764e67714a13a9c391cd3088e3723a576997d",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "geology",
+      "label": "Geology",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added."
+      ],
+      "lensIds": [
+        "geology"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height."
+      },
+      "inputs": [
+        "usgs-sim3237-geologic-units",
+        "usgs-sim3237-geologyunits-dbf",
+        "usgs-sim3237-geologyunits-prj"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
+          "bytes": 1662,
+          "sha256": "beb8f0d50137dd11ad57ba5fab690c57467dd40fa711933616bb0c43a09b7c29",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-geology-surface@2x.webp",
+          "bytes": 522684,
+          "sha256": "4d8ca3b202ba6ba3ca28c3dc80d69bac45851895ae5bafa4dc2b6220552b8742",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ganymede/ganymede-geology-poles@2x.webp",
+          "bytes": 24730,
+          "sha256": "e602a37e250e60775046ac77bb668649d1edf5c7b700929601faa1b1955af546",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -562,8 +1019,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7859,
-          "sha256": "1fc4bd4c1c5ef10c1a3ca40ddae3283dfff5423543495ed9a32c927b41ea6b4f",
+          "bytes": 8002,
+          "sha256": "b723af92d3981ec47e3926d605b7e370a4e0dee2e64fb4ff70eee5b195c888e2",
           "verification": "bytes-verified"
         }
       ],
@@ -587,8 +1044,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 37256,
-          "sha256": "ae7cb5175d91dce0dd5923fa0a9ba935241f9f1703fe24d695464da724a6af90",
+          "bytes": 37512,
+          "sha256": "6e86ee8c0ea904ed75a25dfae1b56da17b8ec5a3bad66ce35b3ac223cac4b2c3",
           "verification": "bytes-verified"
         }
       ]
@@ -611,8 +1068,32 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/enhanced.webp",
-          "bytes": 45018,
-          "sha256": "32ed78a3b07a602328de16de4053420ebbf60400c48f8cc3eae155130edda8fd",
+          "bytes": 44972,
+          "sha256": "b485983c88cc3161ae7d4a9159777bc6a0a6798ebd9bbfb8ca7e42075a114190",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:geology",
+      "label": "Geology preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "geology"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/geology.webp",
+          "bytes": 147512,
+          "sha256": "48161d8d2391267da01e2527ac8ec40525163fb542bfc5dce1c732b81e3bd198",
           "verification": "bytes-verified"
         }
       ]

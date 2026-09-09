@@ -1,0 +1,64 @@
+{
+  "schema": "cssearth-source-grid-anchors@1",
+  "sourcePath": "science/controlled-dtms/Agenor/Agenor.tif",
+  "sha256": "335c16fcb53c5e278f5660f3df5f42f58cd65d0ce78722c9a055ee2e7a053d62",
+  "independentDecoder": "Python Pillow TIFF decoder; separate from preparation geotiff.js decoder",
+  "width": 642,
+  "height": 133,
+  "validCount": 39032,
+  "minimumMeters": -641.9267578125,
+  "maximumMeters": 218.51205444335938,
+  "datum": "Original controlled Agenor independent relative stereo solution; no vertical offset or global radius conversion.",
+  "mask": "Only finite non-special original height values; no quality class reconstructed from broken FOM/ClrConf release.",
+  "anchors": [
+    {
+      "column": 272,
+      "row": 1,
+      "heightMeters": -101.54377746582031,
+      "longitudeEastDegrees": 140.74060896379825,
+      "latitudeDegrees": -42.1163629734343
+    },
+    {
+      "column": 256,
+      "row": 44,
+      "heightMeters": -257.5650939941406,
+      "longitudeEastDegrees": 140.37997276717144,
+      "latitudeDegrees": -43.08557275186891
+    },
+    {
+      "column": 556,
+      "row": 55,
+      "heightMeters": -156.39022827148438,
+      "longitudeEastDegrees": 147.14190145392456,
+      "latitudeDegrees": -43.333510137049856
+    },
+    {
+      "column": 460,
+      "row": 72,
+      "heightMeters": 4.950408458709717,
+      "longitudeEastDegrees": 144.97808427416356,
+      "latitudeDegrees": -43.71668609596586
+    },
+    {
+      "column": 40,
+      "row": 89,
+      "heightMeters": -392.51092529296875,
+      "longitudeEastDegrees": 135.51138411270918,
+      "latitudeDegrees": -44.09986205488188
+    },
+    {
+      "column": 59,
+      "row": 100,
+      "heightMeters": -296.11688232421875,
+      "longitudeEastDegrees": 135.93963959620356,
+      "latitudeDegrees": -44.347799440062815
+    },
+    {
+      "column": 55,
+      "row": 132,
+      "heightMeters": -417.5586853027344,
+      "longitudeEastDegrees": 135.84948054704682,
+      "latitudeDegrees": -45.06907183331649
+    }
+  ]
+}

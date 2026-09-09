@@ -4,16 +4,16 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**Start with B1: the 26-moon expansion.** Work can proceed incrementally within its branch; the reviewable PR covers the complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. Counts below are planning targets until the selected sources and implementations qualify.
+**B1 is merged; B2 is [draft PR #62](https://github.com/layoutit/cssEarth/pull/62).** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B2–B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
-| [B1 — Expand the moon roster by 26](#b1) | 26 new standalone moons; total roster 69 → 95 if the full batch qualifies. | 26 bodies |
-| [B2 — Add scientific surfaces and terrain to 15 moons](#b2) | 15 existing worlds gain a substantive scientific layer or source-backed geometry improvement. | 15 bodies |
-| [B3 — Complete a spacecraft-imagery cohort](#b3) | Two prospective new imaged moons and eight existing observation/registration improvements. | 10 bodies |
+| [B1 — Expand the moon roster by 26](#b1) | 26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461. | 26 bodies |
+| [B2 — Add scientific surfaces and terrain to 13 moons](#b2) | 13 existing worlds gain a substantive scientific layer or source-backed geometry improvement. | 13 bodies |
+| [B3 — Complete spacecraft imagery and geologic mapping](#b3) | Two prospective new imaged moons, eight existing observation/registration improvements, and two carried-forward geologic maps. | 12 bodies |
 | [B4 — Add measured light curves and spectra across nine existing moons](#b4) | A complete prepared observation-chart capability used by nine existing moon packages. | 9 bodies |
 
-B1 includes **22 additional benchmark moons**: 18 Saturn and four Uranus. If all qualify, benchmark coverage becomes **90/461 (19.5%)**, while the four additional companions bring the total standalone moon count to **95**. B3 could subsequently add two further asteroid moons. The 461-body denominator is unchanged.
+B1 added **22 benchmark moons**: 18 Saturn and four Uranus. Merged benchmark coverage is **90/461 (19.5%)**; four additional companions bring the total standalone moon count to **95**. B3 could subsequently add two further asteroid moons. The 461-body denominator is unchanged.
 
 These four batches account for **all 32 identified existing-scene improvements**, all **26 physical-model candidates**, and **two spacecraft-imaged observation candidates**. The other 39 observation candidates retain their source-research queue; 348 orbit-context rows and 37 retain-existing rows remain accounted for without a new implementation commitment.
 
@@ -21,11 +21,11 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 ## B1 — Expand the moon roster by 26
 
-**State:** implementing · **Owner:** Moons
+**State:** [merged PR #55](https://github.com/layoutit/cssEarth/pull/55) · **Owner:** Moons
 
 **Bodies:** Paaliaq, Tarvos, Ijiraq, Suttungr, Mundilfari, Skathi, Erriapus, Thrymr, Bebhionn, Bergelmir, Bestla, Fornjot, Hati, Hyrrokkin, Loge, Skoll, Greip, Tarqeq, Caliban, Sycorax, Prospero, Setebos, Hiʻiaka, Squannit, Romulus, Menoetius.
 
-**User-visible outcome.** 26 new standalone moons; total roster 69 → 95 if the full batch qualifies.
+**User-visible outcome.** 26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461.
 
 **Complete delivery.** A complete source-backed body package for every selected target: physical-model interpretation, parent-relative orbit, orientation limits, preparation, retained rendering, navigation, content, thumbnails, source restoration and qualification evidence.
 
@@ -35,29 +35,35 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 <a id="b2"></a>
 
-## B2 — Add scientific surfaces and terrain to 15 moons
+## B2 — Add scientific surfaces and terrain to 13 moons
 
-**State:** planned · **Owner:** Moons
+**State:** implementation; all 13 body preparations complete; browser and aggregate qualification in progress · **Owner:** Moons
 
-**Bodies:** Moon, Phobos, Deimos, Dimorphos, Io, Europa, Ganymede, Enceladus, Tethys, Dione, Rhea, Titan, Titania, Miranda, Charon.
+The user approved the 13-body delivery, carrying Titania and Miranda into B3.
 
-**User-visible outcome.** 15 existing worlds gain a substantive scientific layer or source-backed geometry improvement.
+See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [delivery evidence](b2-preparation/final/DELIVERY.md). Main `4848897ee` is integrated; all 13 preparations and fresh source restorations passed. All 551 published runtime images installed without cache reuse. Final browser reviews and aggregate gate outcomes remain separate from implementation completion.
+
+**Bodies:** Moon, Phobos, Deimos, Dimorphos, Io, Europa, Ganymede, Enceladus, Tethys, Dione, Rhea, Titan, Charon.
+
+**User-visible outcome.** 13 existing worlds gain a substantive scientific layer or source-backed geometry improvement.
 
 **Complete delivery.** Ship the shared preparation capabilities together with their body-specific consumers. Complete selected geometry/lenses, validity and confidence treatment, units/datums, scientific legends, thumbnails/minimaps and provenance as one user-visible surface upgrade.
 
 **Source closure before implementation.** Pin at least one genuinely new, supported product per body before freezing final implementation details. Resolve archive access and coordinate conventions; distinguish measured, interpolated and modeled support. Source-defined regional coverage and thermal local-time bins remain explicit.
 
-**Acceptance.** Each of the 15 bodies demonstrates the promised new information with independent source-to-display checks. Geometry changes preserve map registration and interaction behavior. A presentation improvement must add supported information rather than simply resample an existing image.
+**Acceptance.** Each of the 13 bodies demonstrates the promised new information with independent source-to-display checks. Geometry changes preserve map registration and interaction behavior. A presentation improvement must add supported information rather than simply resample an existing image.
 
 <a id="b3"></a>
 
-## B3 — Complete a spacecraft-imagery cohort
+## B3 — Complete spacecraft imagery and geologic mapping
+
+Titania and Miranda moved here from B2 by explicit user approval. Their exact GIS releases remain inaccessible; release access and georeferencing must close before implementation.
 
 **State:** planned · **Owner:** Moons
 
-**Bodies:** Dactyl, Selam, Callisto, Thebe, Hyperion, Phoebe, Aegaeon, Proteus, Nix, Hydra.
+**Bodies:** Dactyl, Selam, Callisto, Thebe, Hyperion, Phoebe, Aegaeon, Proteus, Nix, Hydra, Titania, Miranda.
 
-**User-visible outcome.** Two prospective new imaged moons and eight existing observation/registration improvements.
+**User-visible outcome.** Two prospective new imaged moons, eight existing observation/registration improvements, and two carried-forward geologic maps.
 
 **Complete delivery.** Deliver the observed views and all required camera/attitude, photometric, visibility and coverage preparation. Include source-frame comparisons and holdout registration evidence across the cohort. Any necessary shared registration improvements ship with these complete uses.
 
@@ -83,13 +89,13 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 ## Parallel execution
 
-Use subagents when independent work reduces elapsed time. For B1, divide body-owned source intake and package work into disjoint cohorts while the Moons owner handles shared preparers, registry integration and final qualification. Integrate the complete batch into one PR. Check source closure before launching expensive parallel bakes and honor the shared disk budget.
+Use subagents when independent work reduces elapsed time. For B1, divide body-owned source intake and package work into disjoint cohorts while the Moons owner handles shared preparers, registry integration and final qualification. Integrate the complete batch into one PR. Check source closure before preparation. Serialize expensive bakes, builds, tests and browser capture across lanes; honor the shared disk and memory limits.
 
 ## Shared completion requirements
 
 Each batch retains the generic object contract, one mounted scene and preparation-owned static work. Required source and runtime closure, package/router checks, `pnpm acquire:planets -- --verify-only`, `pnpm test`, `pnpm build`, `pnpm test:browser`, and real Chrome DPR 1/2 evidence apply at the exact PR head. Report existing aggregate failures separately from regressions and from unproven scientific interpretation.
 
-Source acquisition/preparation must follow workstation disk and process guardrails. Execution requires a suitable checkout that preserves unrelated work; the original planning pass changed only moon documents. B1 is now implementing in the existing Moons worktree; see [qualification status](B1-EXPANSION.md).
+Source acquisition/preparation must follow workstation disk and process guardrails. Execution requires a suitable checkout that preserves unrelated work; the original planning pass changed only moon documents. B1 merged through [PR #55](https://github.com/layoutit/cssEarth/pull/55), using the existing Moons worktree; see [qualification status](B1-EXPANSION.md).
 
 ## Planning validation
 

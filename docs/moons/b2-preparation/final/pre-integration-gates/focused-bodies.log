@@ -1,0 +1,33 @@
+{"inputCount":11,"generatedIntermediateCount":0,"documentCount":15,"verifiedCount":26}
+✔ publishes one prepared retained Moon scene (0.371667ms)
+✔ prepares sourced surface, numeric LOLA, preserved GRAIL, and Diviner lenses (12.1105ms)
+✔ keeps the Moon cubic sky and directional Sun fully prepared (0.145334ms)
+✔ binds the checked Moon sources and runtime asset closure (105.912209ms)
+✖ keeps runtime scene work retained and CSS-only (1973.027584ms)
+✔ moon: the actual definition satisfies the common contract (7.551792ms)
+✔ moon: cancellation releases actual startup assets without decode settlement (1.913208ms)
+✔ moon: startup rejection releases native siblings and rejects readiness once (0.628459ms)
+✔ moon: one native release failure does not retain other startup owners (0.366667ms)
+✔ Moon keeps finite retained bands across every sourced lens (8.66075ms)
+✔ Moon partial retained construction leaves an existing presentation untouched (0.200583ms)
+✔ Moon presentation disposal preserves a replacement and continues through native metadata failure (12.504167ms)
+✔ Moon topography matches independent original-DN anchors and source coverage (112.108125ms)
+✔ Moon rock-abundance matches independent original-DN anchors and source coverage (395.030458ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 13
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2869.100834
+
+✖ failing tests:
+
+test at tests/objects/unit/moon/preparation.test.mjs:114:1
+✖ keeps runtime scene work retained and CSS-only (1973.027584ms)
+  Error: src/planets/moon/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+      at auditObjectRuntimeOwnership (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/check-object-runtime-ownership.mjs:727:11)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tests/objects/unit/moon/preparation.test.mjs:121:17)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

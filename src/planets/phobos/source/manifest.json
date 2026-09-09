@@ -61,7 +61,8 @@
       "redistribution": "Retain the research and archive attribution.",
       "consumers": [
         "shape",
-        "scientific-surfaces"
+        "scientific-surfaces",
+        "facet-science"
       ],
       "lensId": "elevation",
       "label": "Elevation",
@@ -105,6 +106,25 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "credit": "Carolyn Ernst and colleagues; JHU/APL Small Body Mapping Tool",
+      "license": "Public scientific data release; cite Ernst et al. (2023).",
+      "acquisition": "Download the pinned original OBJ archive.",
+      "redistribution": "Retain the research and archive attribution.",
+      "licenseEvidence": [
+        "https://sbmt.jhuapl.edu/shared-files/"
+      ],
+      "id": "phobos-facet-science",
+      "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+      "origin": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+      "catalog": "https://doi.org/10.1186/s40623-023-01814-7",
+      "consumers": [
+        "facet-science"
+      ],
+      "expectedBytes": 34508570,
+      "expectedSha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
+      "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement."
     }
   ],
   "generatedIntermediates": [
@@ -131,15 +151,15 @@
         "lensId": "normal"
       },
       "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 148160,
-      "expectedSha256": "c00f33a022cf0b70a66c888aed7e2f86fa846db946e2af89396e1de1940f74dc"
+      "expectedBytes": 142252,
+      "expectedSha256": "c3f24ea5e2437825cadf13e531ee41579abf1c3f8320de2f297fe441e8151a34"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9152,
-      "expectedSha256": "5399bed4ffd4e9f70db28ca54d6c203e3b515e77bc0363641c9890740d1de587",
+      "expectedBytes": 11886,
+      "expectedSha256": "c8682309658501ed6b2a650720b273a3fccbc1c4c40ff55c1a68441994e8ebb1",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -150,20 +170,20 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 972,
-      "expectedSha256": "cffa49b9f971806a30bcd20ef338fb20b05323cd4ba4aad36ca0a7b98aa436fb",
+      "expectedBytes": 1229,
+      "expectedSha256": "890ba5324fedbfe217240001c9e98727fbc70e76c3a1cc1d564d5c0d077d7595",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1287,
-      "expectedSha256": "d89162ae9fe91d57a24d9a69bb0e96d6f3448fbff2f2e1b57be6b6bc68b7fb6c",
+      "expectedSha256": "958ce3a840ec70b894208a83420f821b2cbc97bff5f42acad92f787016845a7c",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3268,
-      "expectedSha256": "e3ab6bec60b1e6c21b370c92aea7d5be45a0d20caa619e32ca5fc1fb7c71851e",
+      "expectedBytes": 5913,
+      "expectedSha256": "2558b5d647fe5b8a0e391519361d5129c7dbd5089c93b9f33f6aa2315d6bee72",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

@@ -1,0 +1,19 @@
+{
+  "browser": "152.0.7977.76",
+  "chromeLaunch": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/dom-cleanliness/chrome-process-LIpYQ0/launch-chrome.sh",
+    "wrapperSha256": "d10b8d24722b997f03567e9e52972d68b534d60c3d1751d292641b63dd8eee4c",
+    "stdioLogPath": "output/dom-cleanliness/chrome-process-LIpYQ0/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "reports": [],
+  "navigation": [],
+  "problems": [
+    "500 http://127.0.0.1:4291/polymele/",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "500 http://127.0.0.1:4291/polymele/",
+    "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
+}

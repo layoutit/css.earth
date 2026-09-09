@@ -1,0 +1,158 @@
+✔ the standard browser launch stays unchanged unless explicitly opted in (0.776083ms)
+✔ the Chrome wrapper retains logs and arguments while preserving both CDP pipes (780.560458ms)
+✔ rail switches the retained About panel without storing or mounting a scene (1.522958ms)
+✔ Escape restores a visible keyboard focus target (0.224625ms)
+✔ settings shares the panel slot and mobile navigation returns to the top (0.172541ms)
+✔ settings stays selected on repeat clicks and closes through About, Solar System, or Escape (0.139333ms)
+✔ search stays visible in About and Settings and typing returns to the results (0.135375ms)
+✔ destroy resets retained markup and remount does not duplicate listeners (0.151541ms)
+✔ an incomplete rail fails clearly (0.180459ms)
+✔ objects without lenses or extra settings retain mandatory browser proof (0.842791ms)
+✔ declared content requires exact lens and setting DOM before optional checks (1.196917ms)
+✔ optional controls never excuse a missing shared panel or Motion (0.2505ms)
+✔ declared lenses require matching race IDs, and complete retained coverage (0.196333ms)
+✔ a single supplied lens keeps interaction proof without inventing a race (0.069208ms)
+✖ all objects retain browser evidence for the controls they support (88.276708ms)
+✖ every actual profile reads its recorded coordinates from the shared camera endpoint (93.26225ms)
+✔ coordinate field selection is immutable reporting data, with no private camera implementation (0.651416ms)
+✔ restoring a complete camera observation preserves yaw and the pitch alias (0.71375ms)
+✔ camera reporting rejects missing, repeated and unsupported coordinates (0.200083ms)
+✖ an already ready object does not depend on a redundant browser waiter (27.345ms)
+✔ a missing or loading object still requires successful readiness before returning (1.345833ms)
+✔ the actual Saturn profile observes one exclusive lens and rejects the former dual selection (4.685417ms)
+✔ keeps every implemented scene in one object registry (0.747708ms)
+✔ loads every object through the single adapter (24.566ms)
+✔ rejects incomplete scene lifecycle wiring (0.122916ms)
+✔ shared router owns minimal adapter shell lifecycle (1.006208ms)
+✔ shared router publishes a minimal adapter error (0.20925ms)
+✔ shared router contains synchronous shell bootstrap failure (0.100459ms)
+✔ shared router cancels a pending adapter before publication (0.120667ms)
+✖ keeps implemented routes backed by object-owned files (1.821875ms)
+✔ keeps source-backed chart data in canonical order with Reflectance first (59.179583ms)
+✔ keeps the shared shell planet-neutral (1.290667ms)
+✔ keeps lens descriptions source-bound in the object model (3.972292ms)
+✔ authored lens facts survive preparation and runtime publication without mutating the source (27.390625ms)
+✔ lens facts reject malformed rows and duplicate ids before publication (21.64675ms)
+✔ existing description-only lenses keep their original content contract (21.058375ms)
+✔ names arbitrary lens IDs without changing source data or assuming a fixed set of concepts (0.712041ms)
+✔ prepares a frozen, smoothly sampled scale legend (0.516583ms)
+✔ prepares source-backed category legends from hex and RGB colors (0.377333ms)
+✔ rejects invalid scale palettes (0.184458ms)
+✖ every object forwards its object-owned legend through the shared shell (36.357125ms)
+✔ automatic playback has one complete readiness, intent and environment policy (0.798667ms)
+✔ keeps one shared orientation-aware responsive shell boundary (0.429417ms)
+✔ uses one canonical high-density image bank for every mount (0.049875ms)
+✔ skybox orbit dragging is enabled by the shared input policy (0.044458ms)
+✔ discrete wheels and precision scroll gestures have separate shared gains (0.047416ms)
+✔ scroll input classification preserves accelerated precision gestures and permits device changes (0.121792ms)
+✔ updates wheel and touch policy without replacing controls (0.263625ms)
+✔ initial responsive failure removes its subscription and preserves startup rejection (0.210208ms)
+✔ live responsive failure retires the subscription before reporting fatal (0.105667ms)
+✖ asteroid Shadows default off in authored content and prepared runtime (2.197ms)
+✔ publishes one off-by-default Shadows control for every planet (55.34ms)
+✔ control content permits empty capabilities but rejects malformed or conflicting declarations (0.342041ms)
+ℹ tests 53
+ℹ suites 0
+ℹ pass 47
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6671.59975
+
+✖ failing tests:
+
+test at site/test/load-browser-profile.test.mjs:96:1
+✖ all objects retain browser evidence for the controls they support (88.276708ms)
+  AssertionError [ERR_ASSERTION]: itokawa: browser profile must provide lens race evidence inputs
+      at validatePlanetBrowserProfile (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-browser-profile.mjs:41:34)
+      at loadPlanetBrowserProfile (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-browser-profile.mjs:11:12)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-browser-profile.test.mjs:98:21)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at site/test/object-browser-profile.test.mjs:19:1
+✖ every actual profile reads its recorded coordinates from the shared camera endpoint (93.26225ms)
+  AssertionError [ERR_ASSERTION]: itokawa: browser profile must provide lens race evidence inputs
+      at validatePlanetBrowserProfile (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-browser-profile.mjs:41:34)
+      at loadPlanetBrowserProfile (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-browser-profile.mjs:11:12)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/object-browser-profile.test.mjs:21:21)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at site/test/object-browser-profile.test.mjs:52:1
+✖ an already ready object does not depend on a redundant browser waiter (27.345ms)
+  AssertionError [ERR_ASSERTION]: itokawa: browser profile must provide lens race evidence inputs
+      at validatePlanetBrowserProfile (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-browser-profile.mjs:41:34)
+      at loadPlanetBrowserProfile (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-browser-profile.mjs:11:12)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/object-browser-profile.test.mjs:54:21)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at site/test/planet-shell.test.mjs:237:1
+✖ keeps implemented routes backed by object-owned files (1.821875ms)
+  Error: ENOENT: no such file or directory, access '/Users/ekrof/fed/cssEarth-pluto-small-moons/src/planets/polymele/prepared/object.json'
+      at async access (node:internal/fs/promises:664:10)
+      at async Promise.all (index 4)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/planet-shell.test.mjs:249:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'access',
+    path: '/Users/ekrof/fed/cssEarth-pluto-small-moons/src/planets/polymele/prepared/object.json'
+  }
+
+test at site/test/prepared-lens-legends.test.mjs:59:1
+✖ every object forwards its object-owned legend through the shared shell (36.357125ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-pluto-small-moons/src/planets/polymele/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async readJson (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-object-content.mjs:8:45)
+      at async loadObjectContent (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/load-object-content.mjs:19:13)
+      at async file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/prepared-lens-legends.test.mjs:61:20
+      at async Promise.all (index 0)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/prepared-lens-legends.test.mjs:60:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-pluto-small-moons/src/planets/polymele/prepared/object.json'
+  }
+
+test at site/test/scene-contract.test.mjs:9:1
+✖ asteroid Shadows default off in authored content and prepared runtime (2.197ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-pluto-small-moons/src/planets/polymele/prepared/object.json'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async loadObjectTestDefinition (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/object-test-data.mjs:5:21)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/site/test/scene-contract.test.mjs:12:23)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-pluto-small-moons/src/planets/polymele/prepared/object.json'
+  }

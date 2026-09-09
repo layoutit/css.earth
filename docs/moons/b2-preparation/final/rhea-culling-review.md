@@ -1,0 +1,16 @@
+# Rhea culling probe visual review
+
+All six exact raw PNGs from the 03:54:37.758 capture were inspected with `view_image`; the tool displayed resized previews of the original 2880×2000 files. File hashes matched the retained report.
+
+Supports a Rhea body-local backface-visible correction accompanied by prepared rebind that excludes its facing plans. CSS-only was visibly insufficient. Source/mesh changes are not implicated by this browser-only comparison. Actual installed production correction still needs final visual qualification.
+
+- `/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/rhea-backface-probe-2026-09-09T03-54-37.758Z/01-shape-unlit-baseline.png`: Unlit baseline: fine dark dotted/angular loops are visible across the central neutral surface; broad globe and white grid remain visible.
+- `/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/rhea-backface-probe-2026-09-09T03-54-37.758Z/02-shape-unlit-css-only.png`: Unlit CSS-only: the same central dotted/angular loops remain visible. Disabling native CSS backfaces alone does not visibly cure them while prepared visibility remains active.
+- `/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/rhea-backface-probe-2026-09-09T03-54-37.758Z/03-shape-unlit-complete-two-sided.png`: Unlit complete two-sided: central dotted/angular loops disappear. Broad silhouette and continuous white grid are preserved in this matched pose.
+- `/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/rhea-backface-probe-2026-09-09T03-54-37.758Z/04-shape-lit-complete-two-sided.png`: Lit complete two-sided: the left lit crescent and grid remain continuous, with no new broad holes, exposed interior or silhouette break visible. Most of the hemisphere is too dark for a strong micro-artifact judgment.
+- `/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/rhea-backface-probe-2026-09-09T03-54-37.758Z/05-shape-lit-baseline.png`: Lit baseline: the main lighting profile, lit grid and broad silhouette match the complete-mode image. Strong shadow prevents using this image alone to rule out fine dark contours.
+- `/Users/ekrof/fed/cssEarth-pluto-small-moons/output/playwright/b2-surfaces/rhea-backface-probe-2026-09-09T03-54-37.758Z/06-shape-lit-complete-two-sided-after-drag.png`: Lit complete two-sided after real drag: changed pose preserves visible lit-surface/grid continuity and broad silhouette; no new broad holes or exposed interior visible. This is one small drag endpoint, not all-pose or motion-performance qualification.
+
+Runtime evidence: actual Chrome 152.0.7977.76, zero reported browser/network errors, context and browser closure COMPLETE. All 2,000 terrain leaves retained, textured, activated. In complete mode 2,000 computed visibilities remain visible even while the normal publisher keeps its inline hidden states. Matched camera pairs and real drag were asserted by the capture.
+
+Boundaries: DPR2 only at 1440x1000 CSS viewport; One default camera and one small real drag endpoint; No explicit pole or high-zoom closeup; Dark hemisphere micro-artifacts not qualified; No other bodies, other datasets, full rotation, DPR1 or performance claim; Temporary override evidence does not itself qualify the final baked/rebound package.

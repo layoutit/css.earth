@@ -1,0 +1,16 @@
+Selected original command/build completion lines; bulk runtime inventory JSON omitted. Full log hash is retained in qualification-gates.json.
+
+19:53:43 [build] output: "static"
+19:53:43 [build] mode: "static"
+19:53:43 [build] directory: /Users/ekrof/fed/cssEarth-pluto-small-moons/dist/
+19:53:43 [build] Collecting build info...
+19:53:43 [build] ✓ Completed in 152ms.
+19:53:45 [build] Building static entrypoints...
+19:54:45 [build] Rearranging server assets...
+19:55:11 [build] ✓ Completed in 1m 26s.
+19:55:11 [build] 254 page(s) built in 1m 28s
+19:55:11 [build] Complete!
+> cssearth@0.1.0 assemble:planets /Users/ekrof/fed/cssEarth-pluto-small-moons
+> node tools/run-implemented-planets.mjs assemble
+
+Completed runtime assembly manifest records: 253.

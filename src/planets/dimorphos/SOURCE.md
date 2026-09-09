@@ -9,7 +9,7 @@ Source: NASA PDS `urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004
 - DART v003 and v004 global and local OBJ/FITS releases were reviewed. Adopted global v004 at 0.972 m spacing; finer releases add geometry beyond the displayed budget. Local 5 cm impact-region products do not replace the global body and are deferred.
 - DRACO and LICIACube imagery contributes to the source model. Individual calibrated images require registered camera projection, coverage and photometry to become surface imagery; they are not silently used as global textures.
 - **Included:** the released v004 SPC relative-albedo FITS field, using the existing source-facet material path introduced for Didymos. Its values and uncertainties are bound to the original Dimorphos mesh as described below.
-- Gravity, slope and other ancillary FITS fields are scientifically distinct from radius. They are deferred rather than mislabeled as elevation.
+- The v004 972 mm gravity-relative Slope FITS table is selected as its own scientific view, including modeled regions under the source gravity assumptions. Other ancillary fields remain unselected; slope is not relabeled as elevation.
 - Shape uses the shared no-imagery grid and prepared directional lighting. Elevation uses source radius minus 75 m in meters, with cartographic relief; it is not measured impact displacement or height above an equipotential.
 
 ## Relative albedo
@@ -31,3 +31,18 @@ The shared solar context uses the post-impact DART s547 Dimorphos trajectory rel
 ## Reproduction
 
 Restore required inputs with the existing acquisition operations and verify each pinned byte. Run the authored object preparer for `dimorphos`; runtime consumers can download the separately published pinned scene inventory with `pnpm setup:assets --object=dimorphos`. Source/context/title/sky notices are retained beside the package. Qualification artifacts are under `output/asteroids-dart-radar/` in the implementation checkout.
+
+## Gravity-relative slope and B2 terrain
+
+Every one of the 196,608 slope-table rows is registered to its source triangle. Display colors use the closest point on the full-source mesh within the authored 2 m distance limit; they are not interpolated across facets. Original table row IDs are retained in the slope preparation atlas index.
+
+The exact v004 972 mm PDS slope table is used, in degrees and including modeled regions. Its label defines gravity using uniform density, rotation and Didymos. A verified centroid bijection reconciles 131,072 exporter-order differences; all rows match uniquely within 0.001 m (maximum observed residual 0.00002393 m). That residual measures source registration, not scientific accuracy. This gravity-relative field remains distinct from radius-based elevation and from the separately qualified, positive-sigma relative-albedo coverage.
+
+The slope facet-science flat preview is explicitly 640 × 320, with nearest, lossless
+packing for its minimap and temporary projective textures. It makes 204,800
+unique-ray queries; ambiguous radial intersections remain missing.
+This is a display-preview resolution, not a new scientific grid. The complete
+196,608-row slope table, native triangle atlas dimensions and original-row
+atlas indices are unchanged. Native slope material colors still query the full source
+surface directly and never sample this reduced flat preview. This preview contract
+is specific to the B2 slope lens; relative albedo retains its own source-facet path.

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "moon",
+    "changedSource": "title",
+    "oldSha256": "98847e9f911898b5ce49dff021788efa2138d67aa145f8d99638c51be22b511e",
+    "newSha256": "7e207c0a32f4a879c1767d2c2634505bb8b1639e937d7b4d7382165f1ae06101",
+    "frameUnchanged": true,
+    "scope": "Refresh only the verified source inventory in the existing physical-frame receipt after title schema metadata changed; no numerical frame or runtime asset changed."
+  },
+  {
+    "id": "io",
+    "changedSource": "title",
+    "oldSha256": "b5013944c360617b03bc43bc0c7d2a68ddd5c1ea11da30eebba653488ac9e8f9",
+    "newSha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235",
+    "frameUnchanged": true,
+    "scope": "Refresh only the verified source inventory in the existing physical-frame receipt after title schema metadata changed; no numerical frame or runtime asset changed."
+  },
+  {
+    "id": "europa",
+    "changedSource": "title",
+    "oldSha256": "fdd009d83cb3440824c59ded7526e65d757614e0fa16e13f920c5f4b2ad26dc7",
+    "newSha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a",
+    "frameUnchanged": true,
+    "scope": "Refresh only the verified source inventory in the existing physical-frame receipt after title schema metadata changed; no numerical frame or runtime asset changed."
+  },
+  {
+    "id": "ganymede",
+    "changedSource": "title",
+    "oldSha256": "0d5f9bd6ce07b0d083656b62b8c5b0f250a2e7ef08386cc822b8dbd821387026",
+    "newSha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76",
+    "frameUnchanged": true,
+    "scope": "Refresh only the verified source inventory in the existing physical-frame receipt after title schema metadata changed; no numerical frame or runtime asset changed."
+  }
+]

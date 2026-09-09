@@ -23,7 +23,218 @@
         }
       }
     ],
-    "scientific": [],
+    "scientific": [
+      {
+        "id": "topography",
+        "label": "Measured height",
+        "format": "pds3-float-map",
+        "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+        "grid": {
+          "projection": "equirectangular",
+          "productId": "GTFED00N090_T126_V01",
+          "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+          "targetName": "TITAN",
+          "width": 1440,
+          "height": 1440,
+          "pixelsPerDegree": 8,
+          "referenceRadiusMeters": 2575000,
+          "centerLongitudeWestDegrees": 180,
+          "sampleProjectionOffset": -0.5,
+          "lineProjectionOffset": 719.5,
+          "projectionRotation": "0.0000000",
+          "missingBits": "FF7FFFFB",
+          "longitudeRangeWest": [
+            0,
+            180
+          ]
+        },
+        "description": "Measured height · Cassini GTDR",
+        "title": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+        "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+        "minimum": -2500,
+        "maximum": 2500,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b35806"
+        ],
+        "labels": [
+          "−2500",
+          "0",
+          "+2500"
+        ],
+        "units": "m",
+        "consumer": "scientific-surfaces",
+        "sampling": "nearest",
+        "additionalGrids": [
+          {
+            "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+            "grid": {
+              "projection": "equirectangular",
+              "productId": "GTFED00N270_T126_V01",
+              "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+              "targetName": "TITAN",
+              "width": 1440,
+              "height": 1440,
+              "pixelsPerDegree": 8,
+              "referenceRadiusMeters": 2575000,
+              "centerLongitudeWestDegrees": 180,
+              "sampleProjectionOffset": 1439.5,
+              "lineProjectionOffset": 719.5,
+              "projectionRotation": "0.0000000",
+              "missingBits": "FF7FFFFB",
+              "longitudeRangeWest": [
+                180,
+                360
+              ]
+            }
+          }
+        ],
+        "displaySampling": "nearest"
+      },
+      {
+        "id": "interpolated",
+        "label": "Interpolated height",
+        "format": "pds3-float-map",
+        "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+        "grid": {
+          "projection": "equirectangular",
+          "productId": "GTIED00N090_T126_V01",
+          "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+          "targetName": "TITAN",
+          "width": 1440,
+          "height": 1440,
+          "pixelsPerDegree": 8,
+          "referenceRadiusMeters": 2575000,
+          "centerLongitudeWestDegrees": 180,
+          "sampleProjectionOffset": -0.5,
+          "lineProjectionOffset": 719.5,
+          "projectionRotation": "NULL",
+          "missingBits": "FF7FFFFB",
+          "longitudeRangeWest": [
+            0,
+            180
+          ]
+        },
+        "description": "Interpolated height · Cassini GTDR",
+        "title": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+        "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+        "minimum": -2500,
+        "maximum": 2500,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b35806"
+        ],
+        "labels": [
+          "−2500",
+          "0",
+          "+2500"
+        ],
+        "units": "m",
+        "consumer": "scientific-surfaces",
+        "sampling": "nearest",
+        "additionalGrids": [
+          {
+            "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+            "grid": {
+              "projection": "equirectangular",
+              "productId": "GTIED00N270_T126_V01",
+              "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+              "targetName": "TITAN",
+              "width": 1440,
+              "height": 1440,
+              "pixelsPerDegree": 8,
+              "referenceRadiusMeters": 2575000,
+              "centerLongitudeWestDegrees": 180,
+              "sampleProjectionOffset": 1439.5,
+              "lineProjectionOffset": 719.5,
+              "projectionRotation": "NULL",
+              "missingBits": "FF7FFFFB",
+              "longitudeRangeWest": [
+                180,
+                360
+              ]
+            }
+          }
+        ],
+        "displaySampling": "nearest"
+      },
+      {
+        "id": "coverage-distance",
+        "label": "Distance to data",
+        "format": "pds3-float-map",
+        "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+        "grid": {
+          "projection": "equirectangular",
+          "productId": "GTDED00N090_T126_V01",
+          "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+          "targetName": "TITAN",
+          "width": 1440,
+          "height": 1440,
+          "pixelsPerDegree": 8,
+          "referenceRadiusMeters": 2575000,
+          "centerLongitudeWestDegrees": 180,
+          "sampleProjectionOffset": -0.5,
+          "lineProjectionOffset": 719.5,
+          "projectionRotation": "NULL",
+          "missingBits": "FF7FFFFB",
+          "longitudeRangeWest": [
+            0,
+            180
+          ]
+        },
+        "description": "Distance to data · Cassini GTDR",
+        "title": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+        "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+        "minimum": 0,
+        "maximum": 1000,
+        "colors": [
+          "#253494",
+          "#2c7fb8",
+          "#7fcdbb",
+          "#edf8b1",
+          "#ffffd9"
+        ],
+        "labels": [
+          "0",
+          "500",
+          "1000"
+        ],
+        "units": "km",
+        "consumer": "scientific-surfaces",
+        "sampling": "nearest",
+        "additionalGrids": [
+          {
+            "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+            "grid": {
+              "projection": "equirectangular",
+              "productId": "GTDED00N270_T126_V01",
+              "dataSetId": "CO-SSA-RADAR-5-GTDR-V1.0",
+              "targetName": "TITAN",
+              "width": 1440,
+              "height": 1440,
+              "pixelsPerDegree": 8,
+              "referenceRadiusMeters": 2575000,
+              "centerLongitudeWestDegrees": 180,
+              "sampleProjectionOffset": 1439.5,
+              "lineProjectionOffset": 719.5,
+              "projectionRotation": "NULL",
+              "missingBits": "FF7FFFFB",
+              "longitudeRangeWest": [
+                180,
+                360
+              ]
+            }
+          }
+        ],
+        "displaySampling": "nearest"
+      }
+    ],
     "observedColors": [],
     "mosaics": [
       {

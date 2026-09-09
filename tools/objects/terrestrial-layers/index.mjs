@@ -1,3 +1,6 @@
+import { validateFacetScalarProfile } from './facet-scalars.mjs';
+import { validateGeologyProfile } from './categorical-geology.mjs';
+import { validatePds4ObservationPolicy } from './observed-pds4.mjs';
 import { validateScalarMapProfile } from './pds-scalar-map.mjs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -11,7 +14,7 @@ import { preparePlanetDirectionalSun } from '../../../src/platform/prepare-direc
 import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mjs';
 import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mjs';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mjs';
-import { prepareSolidRasters, prepareSolidMaterial } from './solid-raster.mjs';
+import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid } from './solid-raster.mjs';
 import { prepareSolidScene, prepareSolidPresentation } from './solid-scene.mjs';
 import { loadRadialTerrain, prepareRadialMaterials } from './radial-terrain.mjs';
 import { prepareAffineLayers } from './affine-preparation.mjs';
@@ -61,11 +64,15 @@ export function parseTerrestrialProfile(value) {
         !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
   }
   for (const lens of value.raster.scientific ?? []) {
+    scientificPreviewGrid(lens, value.raster);
+    if (![undefined, 'nearest'].includes(lens.displaySampling)) throw new TypeError('Scientific display sampling must preserve cells with nearest or use the existing default.');
+    if (lens.format === 'geologic-shapefile') {validateGeologyProfile(lens); continue;}
+    const facetTable = lens.format === 'facet-scalars';
     const meshGrid = ['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format);
     const tableGrid = lens.format === 'pds-radial-table';
     for (const {path, grid} of [lens, ...(lens.additionalGrids ?? [])]) {
       if (typeof path !== 'string' || path.startsWith('/') || path.split('/').includes('..') ||
-          !grid || (!meshGrid && !tableGrid && (!Number.isSafeInteger(grid.width) || grid.width <= 0 || !Number.isSafeInteger(grid.height) || grid.height <= 0)) ||
+          !grid || (!meshGrid && !tableGrid && !facetTable && (!Number.isSafeInteger(grid.width) || grid.width <= 0 || !Number.isSafeInteger(grid.height) || grid.height <= 0)) ||
           ![undefined, 'equirectangular', 'polar-stereographic'].includes(grid.projection) ||
           (grid.projection === 'polar-stereographic' && ![-90, 90].includes(grid.poleLatitude)) ||
           (grid.latitudeRange && (grid.latitudeRange.length !== 2 || !grid.latitudeRange.every(Number.isFinite) ||
@@ -73,8 +80,8 @@ export function parseTerrestrialProfile(value) {
         throw new TypeError('Invalid scientific source projection or extent.');
       }
     }
-    if (!['pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
-        (!meshGrid && !tableGrid && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
+    if (!['facet-scalars', 'pds-image', 'pds3-float-map', 'pds3-scalar-map', 'stl', 'geotiff', 'isis3', 'pds3-radius-zip', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table', 'pds-radial-table'].includes(lens.format) || !lens.grid ||
+        (!meshGrid && !tableGrid && !facetTable && (!Number.isSafeInteger(lens.grid.width) || !Number.isSafeInteger(lens.grid.height) || lens.grid.width <= 0 || lens.grid.height <= 0)) ||
         !(lens.minimum < lens.maximum) || !Array.isArray(lens.colors) || lens.colors.length < 2 ||
         lens.colors.some(color => !/^#[0-9a-f]{6}$/i.test(color)) ||
         (lens.sampling !== undefined && !['nearest', 'bilinear'].includes(lens.sampling)) ||
@@ -97,7 +104,8 @@ export function parseTerrestrialProfile(value) {
       validateFacetFieldRecipe(lens.facetField);
       if (!meshGrid || !lens.surfaceSampling) throw new TypeError('Facet fields require source-surface sampling.');
     }
-    if (lens.format === 'pds3-scalar-map') validateScalarMapProfile(lens, value.geometry.radialTerrain);
+    if (facetTable) validateFacetScalarProfile(lens, value.geometry.radialTerrain);
+    else if (lens.format === 'pds3-scalar-map') validateScalarMapProfile(lens, value.geometry.radialTerrain);
     else if (lens.surfaceSampling !== undefined && (!meshGrid || lens.surfaceSampling?.method !== 'closest-source-point' ||
         !Number.isFinite(lens.surfaceSampling.maximumDistanceMeters) || !(lens.surfaceSampling.maximumDistanceMeters > 0) ||
         lens.path !== value.geometry.radialTerrain?.path ||
@@ -111,12 +119,17 @@ export function parseTerrestrialProfile(value) {
   const observationIds = new Set();
   for (const observation of value.raster.observations) {
     const policy = observation.validity;
+    if (policy?.resampling !== undefined && (policy.resampling !== 'source-georeferenced-bilinear' ||
+        !['geotiff-rgb-alpha','geotiff-monochrome-alpha'].includes(policy.kind))) {
+      throw new TypeError('Source-georeferenced observation resampling requires a masked GeoTIFF.');
+    }
     if (!/^[a-z][a-z0-9-]*$/.test(observation.id) || observationIds.has(observation.id) ||
         (observation.monochromeBase && !observationIds.has(observation.monochromeBase)) ||
-        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'geotiff-rgb-bands', 'pds3-rgb-zip', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome', 'pds3-byte-monochrome', 'fits-byte-monochrome'].includes(policy?.kind)) {
+        !['south-connected-black', 'geotiff-monochrome-alpha', 'geotiff-rgb-alpha', 'geotiff-rgb-bands', 'pds3-rgb-zip', 'image-monochrome-no-data', 'image-rgb-no-data', 'geotiff-float-monochrome', 'geotiff-byte-monochrome', 'isis3-float-monochrome', 'pds3-byte-monochrome', 'fits-byte-monochrome', 'pds4-float-rgb'].includes(policy?.kind)) {
       throw new TypeError('Invalid observation identity, validity policy, or fallback ordering.');
     }
     const byteImage = ['image-monochrome-no-data', 'image-rgb-no-data'].includes(policy.kind);
+    if (policy.kind === 'pds4-float-rgb') validatePds4ObservationPolicy(policy);
     if (['pds3-rgb-zip', 'geotiff-rgb-bands'].includes(policy.kind) &&
         (policy.noData !== 0 || !Number.isFinite(policy.centerLongitude) || policy.centerLongitude < 0 || policy.centerLongitude > 360 ||
          !(policy.grid?.pixelsPerDegree > 0) || ![policy.grid.sampleOffset, policy.grid.lineOffset].every(Number.isFinite))) {

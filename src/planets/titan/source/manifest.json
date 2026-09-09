@@ -151,6 +151,192 @@
         ],
         "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
       }
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtied00n090_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "interpolated",
+      "label": "Interpolated height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 7422253,
+      "expectedSha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtied00n270_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "interpolated",
+      "label": "Interpolated height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Interpolated model between adjusted Cassini altimetry and SARtopo tracks, above the 2575.0 km reference sphere. Broad patterns between tracks are model estimates. Original missing cells remain gray. Compare Measured height and Distance to data to judge observational support. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 7393466,
+      "expectedSha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtded00n090_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "coverage-distance",
+      "label": "Distance to data",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Kilometres to nearest input measurement",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 6386495,
+      "expectedSha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtded00n270_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "coverage-distance",
+      "label": "Distance to data",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Kilometres to nearest input measurement",
+      "coverage": "Distance to the nearest input measurement in the GTDR topography solution, in kilometres. Large distances identify interpolation far from data. This is neither height uncertainty nor a measure of every Cassini instrument’s coverage. Original missing cells remain gray; tiny negative source roundoff is displayed at zero.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 6529382,
+      "expectedSha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtfed00n090_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "topography",
+      "label": "Measured height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 550734,
+      "expectedSha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad"
+    },
+    {
+      "credit": "Paul Corlies/Cornell University, Cassini RADAR Team, NASA PDS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N270_T126_V01.IMG.gz",
+      "catalog": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
+      "id": "cassini-gtdr-2019-gtfed00n270_t126_v01",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "topography",
+      "label": "Measured height",
+      "falseColor": true,
+      "width": 1440,
+      "height": 1440,
+      "units": "Metres above 2575.0 km sphere",
+      "coverage": "Adjusted Cassini altimetry and SARtopo measurements above the 2575.0 km reference sphere. The 2019 archive grid covers about 6.0% of Titan by area; gray grid preserves unmeasured cells. Source posting is 0.125° (about 5.62 km at the equator), with variable observation footprints. Height colors do not deform the sphere.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "west-positive",
+        "latitudeType": "planetographic on spherical reference",
+        "referenceRadiusMeters": 2575000
+      },
+      "expectedBytes": 532494,
+      "expectedSha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af"
     }
   ],
   "generatedIntermediates": [],
@@ -187,8 +373,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2146,
-      "expectedSha256": "df0ff235ffbc4836bcdb60d3931f7bc34bb29284b206d9b14c7236bf727d5b0c",
+      "expectedBytes": 9648,
+      "expectedSha256": "2d739c1689a556fe6cef9fba75c23653fb885908e7799f4c05a1795453462d3a",
       "purpose": "Authored preparation, shared source licensing or editorial content."
     },
     {
@@ -199,8 +385,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1242,
-      "expectedSha256": "2a541c1c03ffab4df5f04302801b2f84525bd6a3b0526ae009a1381b8a4a9bf6",
+      "expectedBytes": 7561,
+      "expectedSha256": "876ff1a80eddf0db76bf7d86d7870edc45e768f96976e58476f36f372b98110e",
       "purpose": "Authored preparation, shared source licensing or editorial content."
     },
     {
@@ -211,8 +397,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 8031,
-      "expectedSha256": "d24bbb16dd98c8baac6f94f865b28dce95547ee882026e93e1f2db4f0a82a77e",
+      "expectedBytes": 13127,
+      "expectedSha256": "e8782016d20253b69fc2badb860b0ecad10678eeb2f707421c05d25612904561",
       "purpose": "Authored preparation, shared source licensing or editorial content."
     },
     {
@@ -233,6 +419,103 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1087,
       "expectedSha256": "ac7aa2fd6d80d4e2368427a1e035a1f4eb9d107689db48c6f948f456759edce4"
+    },
+    {
+      "path": "science/b2-intake/titan_topo_corlies.zip",
+      "origin": "https://data.astro.cornell.edu/titan_topo_corlies/titan_topo_corlies.zip",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 27504153,
+      "expectedSha256": "b398841e75c879240d4aaeabf3156478fcc2ef1342d449b36975644380ad2659"
+    },
+    {
+      "path": "science/b2-intake/topo_4PPD.cub",
+      "origin": "https://data.astro.cornell.edu/titan_topo_corlies/full_dataset/topo_4PPD.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 4213993,
+      "expectedSha256": "be033aa847cb985503061d51c468815e8270716b42ee105dcabb5bdf070c1c39"
+    },
+    {
+      "path": "science/b2-intake/topo_4PPD_interp.cub",
+      "origin": "https://data.astro.cornell.edu/titan_topo_corlies/full_dataset/topo_4PPD_interp.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 4213993,
+      "expectedSha256": "f0399e3010c73e10b5582d1e73114e46a24304923d446b6f88029928ac6c0ddd"
+    },
+    {
+      "path": "science/b2-intake/GTBED00N090_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N090_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13776,
+      "expectedSha256": "8258fdc14b5210bf412dcab924bd561f65d8d19d114b8371a9648f9e4c086f3e"
+    },
+    {
+      "path": "science/b2-intake/GTBED00N090_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N090_T126_V01.IMG.gz",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 142116,
+      "expectedSha256": "f90602fbc98f913c63f45933255f055da41e81cf52df1f7ff9ce5fa3866844e1"
+    },
+    {
+      "path": "science/b2-intake/GTBED00N270_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N270_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13493,
+      "expectedSha256": "8f9296fbd804c82e837b7a8e45abd7f6b13ec60a2ad030c4b2d56e3f05a71d0a"
+    },
+    {
+      "path": "science/b2-intake/GTBED00N270_T126_V01.IMG.gz",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTBED00N270_T126_V01.IMG.gz",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 144329,
+      "expectedSha256": "5933680ce77dd59ceb379d976bd33c98c025b3cadca2f2ba14151c8ff44e5872"
+    },
+    {
+      "path": "science/b2-intake/GTIED00N090_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N090_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 3888,
+      "expectedSha256": "714ebd035a2d9b1829cb02658f278b22f63f91300bc9ca4bb3b4c7b4afc8ded7"
+    },
+    {
+      "path": "science/b2-intake/GTIED00N270_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTIED00N270_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 3892,
+      "expectedSha256": "b34f5b0059f4c1559e7630f22e64be39f6dec97a2fe24c144c3a5ec905a6129f"
+    },
+    {
+      "path": "science/b2-intake/GTDED00N090_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N090_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 3815,
+      "expectedSha256": "566cdb957317604356410ef7c1d76b1c2e87f198a10d8d0c13178122e615dc05"
+    },
+    {
+      "path": "science/b2-intake/GTDED00N270_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTDED00N270_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 3819,
+      "expectedSha256": "4caace4dc3fc65bee80a1f9ec5764610f42dfff491ac344f348b3b24c2f2b45b"
+    },
+    {
+      "path": "science/b2-intake/GTFED00N090_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N090_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13672,
+      "expectedSha256": "b2243eb0bfcb9aaa9fbe42e738746940bf4c45f6c4eaf4ef3b30b9aecd774cf7"
+    },
+    {
+      "path": "science/b2-intake/GTFED00N270_T126_V01.LBL",
+      "origin": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/GTFED00N270_T126_V01.LBL",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13389,
+      "expectedSha256": "3cce9c43597f7a67430f7d0e4ad327bda4daa5d328d275aad8ba416a07a432eb"
+    },
+    {
+      "path": "validation/b2-scalar-anchors.json",
+      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
+      "expectedBytes": 10497,
+      "expectedSha256": "f80d63f678d46b8cc6e060e84803bc7c8620dc9b5ea94c3771995ae16f99c926"
     }
   ]
 }

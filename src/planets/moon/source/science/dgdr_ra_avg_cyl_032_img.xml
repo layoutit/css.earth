@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/mission/lro/v1/PDS4_LRO_1H00_1030.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1H00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1H00_1950.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" 
+    xmlns:cart="http://pds.nasa.gov/pds4/cart/v1" 
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1" 
+    xmlns:lro="http://pds.nasa.gov/pds4/mission/lro/v1" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1         https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1H00.xsd     http://pds.nasa.gov/pds4/mission/lro/v1 https://pds.nasa.gov/pds4/mission/lro/v1/PDS4_LRO_1H00_1030.xsd     http://pds.nasa.gov/pds4/disp/v1        https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1H00_1510.xsd     http://pds.nasa.gov/pds4/cart/v1        https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1H00_1950.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:lro_diviner_derived1:data_derived_gdr_level3:dgdr_ra_avg_cyl_032_img</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>LRO Diviner Level 3 Gridded Data Product: dgdr_ra_avg_cyl_032_img</title>
+    <information_model_version>1.17.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2023-07-24</modification_date>
+        <version_id>1.0</version_id>
+        <description>Migrated to PDS4</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2009-07-05T00:00:00.000Z</start_date_time>
+      <stop_date_time>2010-11-30T00:00:00.000Z</stop_date_time>
+    </Time_Coordinates>
+    <Investigation_Area>
+      <name>Lunar Reconnaissance Orbiter</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.lunar_reconnaissance_orbiter</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>DIVINER</name>
+      <Observing_System_Component>
+        <name>Lunar Reconnaissance Orbiter</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.lro</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>DIVINER LUNAR RADIOMETER EXPERIMENT for LRO</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:lro.dlre</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Moon</name>
+      <type>Satellite</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:satellite.earth.moon</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Mission_Area>
+      <lro:LRO_Parameters>
+        <lro:product_type>GDR</lro:product_type>
+        <lro:product_version_id>V4.0</lro:product_version_id>
+        <lro:producer_full_name>JOSHUA BANDFIELD</lro:producer_full_name>
+        <lro:producer_institution_name>UNIVERSITY OF CALIFORNIA, LOS ANGELES</lro:producer_institution_name>
+        <lro:Diviner_Parameters>
+          <lro:lola_dem_vers>1.0</lro:lola_dem_vers>
+          <lro:dlre_geom_version_id>1.0</lro:dlre_geom_version_id>
+          <lro:calibration_software_ver_id>4.0</lro:calibration_software_ver_id>
+          <lro:Parameter_Range>
+            <lro:parameter_name>DLRE_JDATE</lro:parameter_name>
+            <lro:parameter_min>2455017.50000</lro:parameter_min>
+            <lro:parameter_max>2455530.50000</lro:parameter_max>
+          </lro:Parameter_Range>
+          <lro:Parameter_Range>
+            <lro:parameter_name>DLRE_CLOCTIME</lro:parameter_name>
+            <lro:parameter_min>0.0000</lro:parameter_min>
+            <lro:parameter_max>24.0000</lro:parameter_max>
+          </lro:Parameter_Range>
+          <lro:image_name>ROCK ABUNDANCE</lro:image_name>
+        </lro:Diviner_Parameters>
+      </lro:LRO_Parameters>
+    </Mission_Area>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>Image</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>Image</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">0.0</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">360.0</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">60</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">-60</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Equirectangular</cart:map_projection_name>
+                <cart:Equirectangular>
+                  <cart:standard_parallel_1 unit="deg">0.0</cart:standard_parallel_1>
+                  <cart:longitude_of_central_meridian unit="deg">180.0</cart:longitude_of_central_meridian>
+                </cart:Equirectangular>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">947.6047</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">947.6047</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">32</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">32</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">-5458203.072</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">1819401.024</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>Planetocentric</cart:latitude_type>
+              <cart:a_axis_radius unit="km">1737.4</cart:a_axis_radius>
+              <cart:b_axis_radius unit="km">1737.4</cart:b_axis_radius>
+              <cart:c_axis_radius unit="km">1737.4</cart:c_axis_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+              <cart:coordinate_system_type>Body-fixed Rotating</cart:coordinate_system_type>
+              <cart:coordinate_system_name>MEAN EARTH/POLAR AXIS OF DE421</cart:coordinate_system_name>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+    </Discipline_Area>
+  </Observation_Area>
+  <File_Area_Observational>
+    <File>
+      <file_name>dgdr_ra_avg_cyl_032_img.img</file_name>
+      <creation_date_time>2011-10-01T00:00:00.000</creation_date_time>
+      <comment>
+                Each sample represents the areal fraction of the surface 
+covered by rock fragments as estimated using the technique
+described in Bandfield et al. (2011). Values are
+scaled by the value of SCALING_FACTOR. Conversion
+from Digital Number (DN) to average is given by the
+equation:
+
+RA = (DN * SCALING_FACTOR) + OFFSET
+
+Data is derived from Diviner data collected from July 5, 2009 through
+November 30, 2010.  Data were restricted to local times of 1930 to
+0530 with the solar incidence angles greater than 90 degrees,
+latitudes between 60N and 60S, emission angles less than 15 degrees,
+brightness temperatures less than 200K. Several data quality
+constraints were used as well (quality flag for calibration, 0;
+quality flag for miscellaneous, 0; noise quality flag, 0 to 1).
+
+Data from diviner spectral channels 6, 7, and 8 were binned at 32
+pixels per degree in ten separate one hour increments of local time
+from 1930 to 0530. For each spatial bin, all retrieved values for the
+ten local times were averaged to produce a single map.
+            </comment>
+    </File>
+    <Array_2D_Image>
+      <local_identifier>Image</local_identifier>
+      <offset unit="byte">0</offset>
+      <axes>2</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <Element_Array>
+        <data_type>SignedLSB2</data_type>
+        <scaling_factor>0.001</scaling_factor>
+        <value_offset>0.00</value_offset>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>3840</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>11520</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>-32768</missing_constant>
+      </Special_Constants>
+    </Array_2D_Image>
+  </File_Area_Observational>
+  <File_Area_Observational_Supplemental>
+    <File>
+      <file_name>dgdr_ra_avg_cyl_032_img.lbl</file_name>
+    </File>
+    <Stream_Text>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS3</parsing_standard_id>
+      <description>PDS3 label</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+    </Stream_Text>
+  </File_Area_Observational_Supplemental>
+</Product_Observational>

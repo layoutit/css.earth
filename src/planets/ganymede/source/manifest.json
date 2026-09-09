@@ -156,6 +156,78 @@
         "lenses",
         "presentation"
       ]
+    },
+    {
+      "id": "usgs-sim3237-geologyunits-dbf",
+      "path": "science/geology-sim3237/GeologyUnits.dbf",
+      "expectedBytes": 387036,
+      "expectedSha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 653643152 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf"
+    },
+    {
+      "id": "usgs-sim3237-geologyunits-prj",
+      "path": "science/geology-sim3237/GeologyUnits.prj",
+      "expectedBytes": 167,
+      "expectedSha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj"
+    },
+    {
+      "id": "usgs-sim3237-geologic-units",
+      "path": "science/geology-sim3237/GeologyUnits.shp",
+      "expectedBytes": 2282348,
+      "expectedSha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2202359649 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-surfaces"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp",
+      "lensId": "geology",
+      "label": "Geology",
+      "falseColor": true,
+      "projection": {
+        "type": "geographic-vector",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2632345
+      },
+      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps."
     }
   ],
   "generatedIntermediates": [],
@@ -204,20 +276,20 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2667,
-      "expectedSha256": "4d76bbd1db574ecbd3a2d0fb42c7beb562990e3eb710963150d5fcab01206237",
+      "expectedBytes": 7273,
+      "expectedSha256": "e78ff1444c9db1f44f8e9bdf48018df201a70fabc5189f39032cfc4de07ed220",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 11192,
-      "expectedSha256": "37bdd3c09a74d154190329604a544c4d731b4f649fb07171bb9f46577752faa8",
+      "expectedBytes": 17028,
+      "expectedSha256": "cd5df99c5c82ad4daa31ae2c16debb941d2dc1611c4965240c1ce52b5638d2de",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "presentation/title-mark.json",
-      "expectedBytes": 5766,
-      "expectedSha256": "0d5f9bd6ce07b0d083656b62b8c5b0f250a2e7ef08386cc822b8dbd821387026",
+      "expectedBytes": 5805,
+      "expectedSha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -238,6 +310,237 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1094,
       "expectedSha256": "90cac5506bfd3b67134d3f09eaa0a6ff3e5a5323a195f0bbe5619c59f161806e"
+    },
+    {
+      "id": "usgs-sim3237-geologyunitpoints-dbf",
+      "path": "science/geology-sim3237/GeologyUnitPoints.dbf",
+      "expectedBytes": 324794,
+      "expectedSha256": "f666df0ffa6b2b6444b0ce0d44114aac66ddfcde9845396732cff4f56f8f35a2",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3914016364 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf",
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3914016364 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3237-geologyunitpoints-prj",
+      "path": "science/geology-sim3237/GeologyUnitPoints.prj",
+      "expectedBytes": 167,
+      "expectedSha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj",
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 907751357 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3237-geologyunitpoints-shp",
+      "path": "science/geology-sim3237/GeologyUnitPoints.shp",
+      "expectedBytes": 109636,
+      "expectedSha256": "bee27c8ebe94211ce1e4c03406d7681dc9152a84fd1c5c2bd7160af86314ffae",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1444943279 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp",
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1444943279 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3237-geologyunitpoints-shp-xml",
+      "path": "science/geology-sim3237/GeologyUnitPoints.shp.xml",
+      "expectedBytes": 5467,
+      "expectedSha256": "b756852dea03c66abe16dd6baaa3458d0df38f85a101041bc2ca208497e6f5e3",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1883658601 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml",
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1883658601 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3237-geologyunitpoints-shx",
+      "path": "science/geology-sim3237/GeologyUnitPoints.shx",
+      "expectedBytes": 31396,
+      "expectedSha256": "3729633106fc63da4be42e5d8a9d6308d9f4ebb1a9f7da4acdc841585f27559b",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 903487539 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx",
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnitPoints.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 903487539 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3237-geologyunits-shp-xml",
+      "path": "science/geology-sim3237/GeologyUnits.shp.xml",
+      "expectedBytes": 8992,
+      "expectedSha256": "2d7b7143de029e30842f98d7675733f473ea1a3b288b2ddbee9423178236abd2",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2559734367 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml",
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shp.xml from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2559734367 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3237-geologyunits-shx",
+      "path": "science/geology-sim3237/GeologyUnits.shx",
+      "expectedBytes": 24468,
+      "expectedSha256": "70961567d7de135e40d1f907ca817445e84b183727e75716c02e94e57dd1149f",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2179727759 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx",
+      "purpose": "Exact member Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.shx from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2179727759 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3237-sim3237-ganymede-metadata-txt",
+      "path": "science/geology-sim3237/sim3237_Ganymede_metadata.txt",
+      "expectedBytes": 15950,
+      "expectedSha256": "fdf37dff08b6bd0349bff8956b0b6140ac689b1672bf1ccf7645cbbb4a81a9d7",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3086016464 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt",
+      "purpose": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_metadata.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 3086016464 and SHA-256 verified."
+    },
+    {
+      "id": "usgs-sim3237-sim3237-ganymede-readme-txt",
+      "path": "science/geology-sim3237/sim3237_Ganymede_readme.txt",
+      "expectedBytes": 5871,
+      "expectedSha256": "ae3d4df8d2bd98b9ce06d50cf47690db8060fed055222c69bc65708fbc53bea2",
+      "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
+      "credit": "Collins et al. (2013), USGS, NASA/JPL",
+      "license": "Public domain USGS data",
+      "licenseEvidence": [
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_readme.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1096571830 and SHA-256 verified.",
+      "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "archiveMember": "Ganymede_SIM3237_Database/sim3237_Ganymede_readme.txt",
+      "purpose": "Exact member Ganymede_SIM3237_Database/sim3237_Ganymede_readme.txt from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 1096571830 and SHA-256 verified."
+    },
+    {
+      "id": "sim3237-archive-index-json",
+      "path": "science/geology-sim3237/archive-index.json",
+      "expectedBytes": 77087,
+      "expectedSha256": "ea2cced4be58f9f694c0b4f36aa07bfab1b83d58a4fc7999b4694d01a36ca5c0",
+      "origin": "https://pubs.usgs.gov/sim/3237/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3237-intake-downloads-json",
+      "path": "science/geology-sim3237/intake-downloads.json",
+      "expectedBytes": 7061,
+      "expectedSha256": "4dfa5788ffc797c99001473513f5d04bf67bdc0d273b00ceb38249951d5ec47b",
+      "origin": "https://pubs.usgs.gov/sim/3237/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3237-display-categories-json",
+      "path": "science/geology-sim3237/display-categories.json",
+      "expectedBytes": 2513,
+      "expectedSha256": "d0a9aaa943d6a587a6a272d90b4e714a586ea4dde13bd234e5fd0946b7f331ad",
+      "origin": "https://pubs.usgs.gov/sim/3237/",
+      "credit": "USGS source data; cssEarth intake record",
+      "license": "Repository-authored metadata of public domain USGS source",
+      "acquisition": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe.",
+      "redistribution": "Metadata only; retained in Git.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in source intake or display metadata, reproducible from the specified archive members and body recipe."
+    },
+    {
+      "id": "sim3237-registration-anchors",
+      "path": "science/geology-sim3237/registration-anchors.json",
+      "expectedBytes": 3178,
+      "expectedSha256": "37bd44758db3994be7168a6e5fc4739e67a54f360a7f859a6e7ec9c9e7f3d1fb",
+      "origin": "https://pubs.usgs.gov/sim/3237/",
+      "credit": "USGS point and polygon layers; cssEarth comparison",
+      "license": "Repository-authored validation metadata of public domain GIS data",
+      "acquisition": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained.",
+      "redistribution": "Small source-validation metadata.",
+      "consumers": [
+        "geology-validation"
+      ],
+      "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained."
     }
   ]
 }

@@ -113,6 +113,167 @@
         },
         "detail": "Infrared color",
         "summary": "Infrared, green and violet with monochrome detail. Missing or synthesized color stays monochrome."
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "detail": "Interpreted units",
+        "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+        "title": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+        "thumbnail": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
+        "surface": "ganymede-geology-surface@2x.webp",
+        "poles": "ganymede-geology-poles@2x.webp",
+        "falseColor": true,
+        "source": {
+          "id": "usgs-sim3237-geologic-units",
+          "path": "../manifest.json",
+          "url": "https://pubs.usgs.gov/sim/3237/"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Interpreted geologic category"
+          },
+          {
+            "id": "mapping-scale",
+            "label": "Map scale",
+            "value": "1:15,000,000"
+          },
+          {
+            "id": "epoch",
+            "label": "Publication",
+            "value": "USGS SIM3237 · 2013"
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Mapped polygons; uncovered areas retained"
+          }
+        ],
+        "legend": {
+          "kind": "categories",
+          "title": "Geologic units",
+          "meta": "Symbols identify archived categories. Colors are chosen for this display.",
+          "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
+          "items": [
+            {
+              "label": "dc",
+              "description": "Dark cratered terrain",
+              "color": "#79574a"
+            },
+            {
+              "label": "dl",
+              "description": "Dark lineated terrain",
+              "color": "#98705b"
+            },
+            {
+              "label": "d",
+              "description": "Dark terrain, undivided",
+              "color": "#b38e78"
+            },
+            {
+              "label": "r",
+              "description": "Reticulate terrain",
+              "color": "#998781"
+            },
+            {
+              "label": "lg1",
+              "description": "Light grooved terrain 1",
+              "color": "#729e83"
+            },
+            {
+              "label": "lg2",
+              "description": "Light grooved terrain 2",
+              "color": "#98bd94"
+            },
+            {
+              "label": "lg3",
+              "description": "Light grooved terrain 3",
+              "color": "#c4d9a1"
+            },
+            {
+              "label": "ls1",
+              "description": "Light subdued terrain 1",
+              "color": "#77aeb2"
+            },
+            {
+              "label": "ls2",
+              "description": "Light subdued terrain 2",
+              "color": "#9bc9c6"
+            },
+            {
+              "label": "ls3",
+              "description": "Light subdued terrain 3",
+              "color": "#c3e4d9"
+            },
+            {
+              "label": "li1",
+              "description": "Light irregular terrain 1",
+              "color": "#8079a9"
+            },
+            {
+              "label": "li2",
+              "description": "Light irregular terrain 2",
+              "color": "#aaa0c6"
+            },
+            {
+              "label": "li3",
+              "description": "Light irregular terrain 3",
+              "color": "#d3c4e0"
+            },
+            {
+              "label": "l",
+              "description": "Light terrain, undivided",
+              "color": "#d0d0bd"
+            },
+            {
+              "label": "p",
+              "description": "Palimpsest material",
+              "color": "#daac75"
+            },
+            {
+              "label": "pi",
+              "description": "Palimpsest interior",
+              "color": "#b88957"
+            },
+            {
+              "label": "bi",
+              "description": "Basin interior",
+              "color": "#c87770"
+            },
+            {
+              "label": "br",
+              "description": "Rugged basin material",
+              "color": "#a34f51"
+            },
+            {
+              "label": "bs",
+              "description": "Smooth basin material",
+              "color": "#dea398"
+            },
+            {
+              "label": "c1",
+              "description": "Crater material 1",
+              "color": "#ad8c27"
+            },
+            {
+              "label": "c2",
+              "description": "Crater material 2",
+              "color": "#dbbc42"
+            },
+            {
+              "label": "c3",
+              "description": "Crater material 3",
+              "color": "#f4df86"
+            },
+            {
+              "label": "cu",
+              "description": "Crater material, undivided",
+              "color": "#d1c59f"
+            }
+          ]
+        }
       }
     ]
   },
@@ -152,6 +313,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "USGS geology",
+      "role": "surface",
+      "description": "Interpreted geologic map and GIS · SIM3237",
+      "href": "https://pubs.usgs.gov/sim/3237/"
     }
   ],
   "provenance": {
