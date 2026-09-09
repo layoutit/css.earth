@@ -181,5 +181,13 @@ export const ASTEROID_ELEMENTS_4 = {
   "unitas": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27306%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 352718646.5213329, "eccentricity": 0.1521265620548384, "inclinationRad": 0.3185811629843852, "ascendingNodeRad": 0.25293210647469333, "argumentOfPeriapsisRad": 5.1676210953759885, "meanAnomalyAtEpochRad": 0.218718565818441, "meanMotionRadPerDay": 0.00475145839240133 }
+  },
+  "annefrank": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%275535%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 330960379.8987238, "eccentricity": 0.06322452320296322, "inclinationRad": 0.37655449361634413, "ascendingNodeRad": 0.17433652424671464, "argumentOfPeriapsisRad": 2.1098587934821786, "meanAnomalyAtEpochRad": 5.002608162369886, "meanMotionRadPerDay": 0.00522763852651289 }
+  },
+  "braille": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%279969%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 349991965.6451836, "eccentricity": 0.4340369448573852, "inclinationRad": 0.46641580074779515, "ascendingNodeRad": 5.024745856935828, "argumentOfPeriapsisRad": 5.320050823468057, "meanAnomalyAtEpochRad": 3.5149621854434625, "meanMotionRadPerDay": 0.004807092147618185 }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

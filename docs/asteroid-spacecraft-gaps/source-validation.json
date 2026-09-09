@@ -1,0 +1,30 @@
+[
+  {
+    "id": "annefrank",
+    "data": {
+      "assetCount": 31,
+      "sourceInputCount": 4
+    },
+    "source": {
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 11,
+      "verifiedCount": 16
+    },
+    "preparedSha256": "1bac46be0ceb2e84414a345a4934b8a1964b9a20ed5ed445bc44242be28750ac"
+  },
+  {
+    "id": "braille",
+    "data": {
+      "assetCount": 31,
+      "sourceInputCount": 4
+    },
+    "source": {
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 11,
+      "verifiedCount": 16
+    },
+    "preparedSha256": "62e3945c80991ebbbbffef669bff24e308aebc32306242db02dc7ccaf3b77dbc"
+  }
+]

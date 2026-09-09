@@ -1,0 +1,216 @@
+{
+  "capturedAt": "2026-09-09T20:22:42.064Z",
+  "browser": "152.0.7977.84",
+  "headless": true,
+  "origin": "http://127.0.0.1:4278",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "scope": "Production routes; new scene images served from the independently downloaded installation. Default and close views; optional shadows through the bound control change event because main hides the settings action; shared category, search and in-page navigation.",
+  "results": [
+    {
+      "id": "annefrank",
+      "dpr": 1,
+      "leaves": 480,
+      "shadowsDefault": false,
+      "orbitDefault": false,
+      "approximationLabel": true,
+      "forbiddenLeaves": 0,
+      "loadedFreshAssets": [
+        {
+          "id": "annefrank",
+          "filename": "annefrank-directional-sun@2x.webp",
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-lighting.webp",
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-system-point.webp",
+          "bytes": 96,
+          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-model-surface@2x.webp",
+          "bytes": 48228,
+          "sha256": "bdc6ba4fc1582341c3dd88c47bb098f2d015f4a02c331a9a63050908274da857"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-model-shadow@2x.webp",
+          "bytes": 34780,
+          "sha256": "604696129d25bf6289547101e4304c83969cdff752377dbbd78f6cf33cae7b39"
+        }
+      ]
+    },
+    {
+      "id": "braille",
+      "dpr": 1,
+      "leaves": 480,
+      "shadowsDefault": false,
+      "orbitDefault": false,
+      "approximationLabel": true,
+      "forbiddenLeaves": 0,
+      "loadedFreshAssets": [
+        {
+          "id": "braille",
+          "filename": "braille-directional-sun@2x.webp",
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-lighting.webp",
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-system-point.webp",
+          "bytes": 96,
+          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-model-surface@2x.webp",
+          "bytes": 49360,
+          "sha256": "832c3a85d6ee6a7d622fb1cfff541ac7c966cb8135898aadcfe70e4e7ff78201"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-model-shadow@2x.webp",
+          "bytes": 34894,
+          "sha256": "9e353334fb1a10a5c97dd05e8ff9aef1a491406f9b098c381be47a84f67d430a"
+        }
+      ]
+    },
+    {
+      "navigation": {
+        "asteroidCount": 287,
+        "listed": [
+          "annefrank",
+          "braille"
+        ],
+        "searchAndHandoff": [
+          "annefrank",
+          "braille"
+        ],
+        "oneCamera": true,
+        "oneScene": true
+      }
+    },
+    {
+      "id": "annefrank",
+      "dpr": 2,
+      "leaves": 480,
+      "shadowsDefault": false,
+      "orbitDefault": false,
+      "approximationLabel": true,
+      "forbiddenLeaves": 0,
+      "loadedFreshAssets": [
+        {
+          "id": "annefrank",
+          "filename": "annefrank-directional-sun@2x.webp",
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-system-point.webp",
+          "bytes": 96,
+          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-model-surface@2x.webp",
+          "bytes": 48228,
+          "sha256": "bdc6ba4fc1582341c3dd88c47bb098f2d015f4a02c331a9a63050908274da857"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-lighting.webp",
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "id": "annefrank",
+          "filename": "annefrank-model-shadow@2x.webp",
+          "bytes": 34780,
+          "sha256": "604696129d25bf6289547101e4304c83969cdff752377dbbd78f6cf33cae7b39"
+        }
+      ]
+    },
+    {
+      "id": "braille",
+      "dpr": 2,
+      "leaves": 480,
+      "shadowsDefault": false,
+      "orbitDefault": false,
+      "approximationLabel": true,
+      "forbiddenLeaves": 0,
+      "loadedFreshAssets": [
+        {
+          "id": "braille",
+          "filename": "braille-directional-sun@2x.webp",
+          "bytes": 12530,
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-lighting.webp",
+          "bytes": 1050836,
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-system-point.webp",
+          "bytes": 96,
+          "sha256": "d0ae999b83dcb1983f478efc04e5912bf1872146c4b98919111992eb90ed7caf"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-model-surface@2x.webp",
+          "bytes": 49360,
+          "sha256": "832c3a85d6ee6a7d622fb1cfff541ac7c966cb8135898aadcfe70e4e7ff78201"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+        },
+        {
+          "id": "braille",
+          "filename": "braille-model-shadow@2x.webp",
+          "bytes": 34894,
+          "sha256": "9e353334fb1a10a5c97dd05e8ff9aef1a491406f9b098c381be47a84f67d430a"
+        }
+      ]
+    }
+  ]
+}

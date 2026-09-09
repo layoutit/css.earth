@@ -1,0 +1,21 @@
+{
+  "base": "a5a34bdefa849801d092f10755cf81f6f3f23f5e",
+  "added": [
+    "annefrank",
+    "braille"
+  ],
+  "atlases": [
+    {
+      "filename": "planet-markers.webp",
+      "baseSha256": "9a3cb7056a8f9d6d07d21548a057f9f489e98b4f0b795d61553c9af30491e35c",
+      "outputSha256": "980779234321d5b257f222126667acdc40a43d3435ce059011c6864300bb435e",
+      "preservedMarkers": 404
+    },
+    {
+      "filename": "planet-markers@2x.webp",
+      "baseSha256": "321b8517700563d385d5d7eadd5b7e2ab38a749b6b6005c57e705894a4d62272",
+      "outputSha256": "6f87b64657e4b90352684877d3e80a8799c1c45c83132cdd57e275901feb9bbb",
+      "preservedMarkers": 404
+    }
+  ]
+}
