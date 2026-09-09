@@ -26,16 +26,14 @@ src/planets/<id>/
   source/content/              body-owned editorial content and controls
   source/                      original inputs, labels and necessary source notes
   prepared/                    generated content, geometry and lineage records
+  prepared/page.json           generated page assets and controls
   runtime-assets.json          generated runtime image inventory
 
 public/scenes/<id>/             installed/generated serving assets
 tests/objects/unit/<id>/        body-specific scientific and package checks
 tests/objects/browser/<id>/     profiles for the shared browser harness
-site/pages/<id>.astro           thin shared-layout integration
+site/pages/[id].astro           one shared route for all body ids
 ```
-
-New bodies use README for source documentation. Older bodies may still use SOURCE;
-follow the [migration rule](../../docs/provenance/CONTRACT.md#existing-bodies) when updating them.
 
 Use the current authored branch of `tools/object-package-contract.mjs` for
 required files and `tests/objects/source-closure.test.mjs` for source ownership.
@@ -87,7 +85,7 @@ pass. Tests requiring sources/assets need those dependencies installed.
 
 ## Update documentation with the change
 
-Use the [body README examples](../../docs/provenance/CONTRACT.md#existing-bodies).
+Use the [body README examples](../../docs/provenance/CONTRACT.md#examples).
 The README explains the body’s sources, processing, evidence and known problems.
 Link detailed source notes, exact manifests, credits and original reports from
 that explanation. Keep shared commands and usage here instead of repeating them

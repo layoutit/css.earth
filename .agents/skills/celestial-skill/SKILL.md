@@ -7,7 +7,7 @@ description: "Create, repair, and qualify source-backed celestial body packages 
 
 Maintain this skill in the repository. Read the selected checkout's
 [provenance and documentation contract](../../../docs/provenance/CONTRACT.md)
-and the target body's `README.md` (or legacy `SOURCE.md`), `NOTICE.md` and manifests.
+and the target body's `README.md`, `NOTICE.md` and manifests.
 The contract combines PDS4 1.26.0 provenance guidance with ISO 24495-1:2023
 plain-language principles for our docs and evidence.
 Use its pinned references; add body-specific facts without another report format.
@@ -87,8 +87,8 @@ examples of capabilities, not templates for a new controller or a whole planet.
   Keep input, lifecycle, typography and navigation behavior shared.
 - Preparation owns reprojection, atlases, lighting banks, charts and static scene
   work. Runtime consumes prepared data through retained DOM. Follow the current
-  canonical dataset/residency policy independently of DPR; do not introduce
-  runtime canvas, WebGL, SVG scenes, masks, clip-path, filters, gradients or blends.
+  canonical dataset/residency policy independently of DPR and the rendering
+  constraints in the selected checkout's `AGENTS.md`.
 - Honor the requested geometry and payload budgets. Extend a shared recipe only
   for a demonstrated missing capability; adding a body is not a platform rewrite.
 
@@ -155,10 +155,9 @@ Keep project-required checks; do not add a new dashboard, gate framework,
 Burnlist or exhaustive test matrix to implement an ordinary body.
 
 Update the body README with source choices, processing, results and known
-problems. When substantially rewriting legacy SOURCE documentation, merge it into README
-and remove the duplicate. Update affected method notes, credits and original test reports
-in the same change. Keep common usage and commands in the shared repo guides. Save screenshots you cite in Git or agreed storage and
-link them; a local output path alone cannot be reviewed by someone else.
+problems. Update affected credits and reports in the same change. Keep common
+usage and commands in shared guides. Save cited screenshots in Git or agreed
+storage and link them; a local output path cannot be reviewed by someone else.
 
 While drafting and before committing documentation, use the contract's
 [plain-language rules](../../../docs/provenance/CONTRACT.md#plain-language).

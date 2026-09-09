@@ -1,0 +1,173 @@
+{
+  "schema": "cssearth-camera-mosaic-audit@1",
+  "object": "gaspra",
+  "width": 2048,
+  "height": 1024,
+  "layout": "Cylindrical source sampling grid, east longitude 0..360, rows north to south; pixel centres; no atlas bleed.",
+  "sampling": "64 stratified barycentric samples per displayed triangle, weighted by physical triangle area; nearest prepared sampling-grid cell. An estimate of the displayed mesh, not exact global coverage.",
+  "samplesPerTriangle": 64,
+  "triangles": 800,
+  "meshSha256": "45d88f2513ac294613074b6c6ed5b26f2d0fc0915059d786efa9d81ea56bfe33",
+  "recipeSha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed",
+  "runs": [
+    {
+      "name": "before",
+      "frames": [
+        "107318326"
+      ],
+      "acceptedSquareMeters": 53900220.35629129,
+      "totalSquareMeters": 522727046.0115833,
+      "acceptedFraction": 0.10311350975150593,
+      "sourceSquareMeters": {
+        "107318326": 53900220.35629129
+      },
+      "maximumWeightSumError": 0,
+      "contributors": [
+        {
+          "id": "107318326",
+          "path": "observations/107318326rcal_clr.fit",
+          "sourceSha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6",
+          "file": "before-107318326-weights.f32.gz",
+          "encoding": "gzip-f32le",
+          "decodedBytes": 8388608,
+          "decodedSha256": "bf55465ea527143f5641a3884ef958daaf6549ac8192eedb7ee94c70cf122f63",
+          "bytes": 11609,
+          "sha256": "8730c4ea2a8e57c3f54d616a6c2e642353cafa5bebb557bc0be1102faf2cb5ea"
+        }
+      ],
+      "displayRgbSha256": "4b8bf15e29a17c6e033492dc8096f2975869e6ebbdc19858bd97437681aecdd4",
+      "coverageSha256": "3d9d6d33e714fff424af7280b2fd0e8bd8e28bebed6191838e6bfd224686594b",
+      "sourceGrid": {
+        "model": "controlled-shape-camera",
+        "photometry": {
+          "model": "observed",
+          "weight": 1,
+          "maximumGain": 1,
+          "displayMaximum": 0.12,
+          "gamma": 2.2,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
+          "minimumLevel": 1,
+          "maximumLevel": 1
+        },
+        "frames": [
+          {
+            "id": "107318326",
+            "sourceWidth": 800,
+            "sourceHeight": 800,
+            "rasterOffset": 2880,
+            "encoding": "fits-ssi-iof",
+            "quality": {
+              "records": 16,
+              "badBlockPixels": 5035,
+              "saturatedPixels": 1990,
+              "specialPixels": 176399,
+              "withheldPixels": 180103
+            },
+            "resolutionMeters": 53.68889149264668,
+            "correctedPixels": 222750,
+            "level": 1,
+            "overlapSamples": 0
+          }
+        ],
+        "coveragePixels": 222750,
+        "totalPixels": 2097152
+      }
+    },
+    {
+      "name": "after",
+      "frames": [
+        "107318326",
+        "107318313"
+      ],
+      "acceptedSquareMeters": 66696707.1821472,
+      "totalSquareMeters": 522727046.0115833,
+      "acceptedFraction": 0.12759375603585899,
+      "sourceSquareMeters": {
+        "107318313": 14808011.02693422,
+        "107318326": 51888696.15784839
+      },
+      "maximumWeightSumError": 2.9802322387695312e-08,
+      "contributors": [
+        {
+          "id": "107318313",
+          "path": "observations/107318313rcal_clr.fit",
+          "sourceSha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
+          "file": "after-107318313-weights.f32.gz",
+          "encoding": "gzip-f32le",
+          "decodedBytes": 8388608,
+          "decodedSha256": "02b2e7f69ab526c3d6b59ea43bd67575a649490d0a70580bf5d6e7c26781fd02",
+          "bytes": 47810,
+          "sha256": "34241a418c66cfb498ba542d51cac4cd50f18053b2277142d1aaccf6ccee5703"
+        },
+        {
+          "id": "107318326",
+          "path": "observations/107318326rcal_clr.fit",
+          "sourceSha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6",
+          "file": "after-107318326-weights.f32.gz",
+          "encoding": "gzip-f32le",
+          "decodedBytes": 8388608,
+          "decodedSha256": "ef9a8e89c431d9153ade4e8149f0dc145be6f1902907fc08c975bcf962606156",
+          "bytes": 50465,
+          "sha256": "b1a8a84dacb97c902bb44cde80fa5eda0e2940206da0d47fa11d2ec52531cf4b"
+        }
+      ],
+      "displayRgbSha256": "b764ecd0ad2f6d483c6dd16f1c0035f39e921d1cbceea8b24a14c9782b46f088",
+      "coverageSha256": "c526a4f3263c380ab6685acd513975fa4d1278698039d893aac7e1b0329cc50e",
+      "sourceGrid": {
+        "model": "controlled-shape-camera",
+        "photometry": {
+          "model": "observed",
+          "weight": 1,
+          "maximumGain": 1,
+          "displayMaximum": 0.12,
+          "gamma": 2.2,
+          "maximumIncidenceDegrees": 65,
+          "maximumEmissionDegrees": 65,
+          "minimumLevel": 1,
+          "maximumLevel": 1
+        },
+        "frames": [
+          {
+            "id": "107318313",
+            "sourceWidth": 800,
+            "sourceHeight": 800,
+            "rasterOffset": 2880,
+            "encoding": "fits-ssi-iof",
+            "quality": {
+              "records": 2,
+              "badBlockPixels": 800,
+              "saturatedPixels": 152,
+              "specialPixels": 222173,
+              "withheldPixels": 222666
+            },
+            "resolutionMeters": 54.36914030694459,
+            "correctedPixels": 52601,
+            "level": 1,
+            "overlapSamples": 0
+          },
+          {
+            "id": "107318326",
+            "sourceWidth": 800,
+            "sourceHeight": 800,
+            "rasterOffset": 2880,
+            "encoding": "fits-ssi-iof",
+            "quality": {
+              "records": 16,
+              "badBlockPixels": 5035,
+              "saturatedPixels": 1990,
+              "specialPixels": 176399,
+              "withheldPixels": 180103
+            },
+            "resolutionMeters": 53.68889149264668,
+            "correctedPixels": 222750,
+            "level": 1,
+            "overlapSamples": 2540
+          }
+        ],
+        "coveragePixels": 234758,
+        "totalPixels": 2097152
+      }
+    }
+  ]
+}

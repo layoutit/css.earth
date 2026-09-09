@@ -23,16 +23,17 @@ src/planets/<id>/
   source/content/object.json          content and supported controls
   source/presentation/                title and applicable map inputs
   prepared/                           generated runtime/content/controls/object JSON
+  prepared/page.json                  generated page assets and controls
   runtime-assets.json                 generated image inventory and hashes
 
 public/scenes/<id>/                    prepared assets
-site/pages/<id>.astro                  thin shared-layout integration
+site/pages/[id].astro                  one shared route for all body ids
 tests/objects/unit/<id>/               focused body tests
 tests/objects/browser/<id>/browser-profile.mjs
 ```
 
 The [documentation contract](../../../../docs/provenance/CONTRACT.md) explains
-where body docs and evidence go, including migration from legacy SOURCE files. Every file under `source/` needs a manifest
+where body docs and evidence go. Every file under `source/` needs a manifest
 entry. Keep test logs and browser screenshots outside it.
 
 Use `tools/object-package-contract.mjs` for actual required files. Its authored
@@ -50,7 +51,7 @@ fallback requirements are not the current authored-package template.
 | Source acquisition, verification and runtime inventory | `tools/objects/operations.ts`, `tools/objects/operations-acquisition.ts`, package source manifests and acquisition JSON |
 | Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene-contract.mjs`, `site/scene-router.mjs` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mjs`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
-| Shared page and content presentation | `site/layouts/PlanetLayout.astro`, `site/components/PreparedObjectHead.astro`, `site/components/PreparedObjectPanel.astro`, `site/components/PlanetShell.astro`, `site/planet-shell-client.mjs` |
+| Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mjs`, `site/object-page-contract.mjs`, `site/layouts/PlanetLayout.astro` |
 | Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mjs`, `tools/prepare-planet-title-sources.mjs`, `tools/prepare-surface-minimaps.mjs` |
 | Search and marker presentation | `site/planet-search-objects.mjs`, `tools/prepare-navigation.mjs`, `src/navigation/marker-presentation.mjs` |
 
@@ -60,10 +61,12 @@ lighting and other scene assets; the shared CSS renderer consumes prepared data.
 Body facts stay in the package. Extend a shared capability only when the source
 requires behavior the existing capability cannot express.
 
-`site/pages/triton.astro` demonstrates the thin page integration: prepared JSON
-feeds shared head/panel components and `PlanetLayout`. `site/objects.mjs` loads
-descriptors through `loadPackagedObject`. Preserve one registry, generic adapter,
-shared shell and active object scene; navigation uses the shared world camera.
+`site/pages/[id].astro` derives routes from `OBJECTS` and passes the selected id
+to `ObjectPage.astro`. That component loads the body's prepared page and content,
+applies its declared stylesheets, and uses the shared head/panel and `PlanetLayout`.
+`site/objects.mjs` loads descriptors through `loadPackagedObject`. Preserve one
+registry, generic adapter, shared shell and active object scene; navigation uses
+the shared world camera.
 
 Navigation marker appearance comes from each authored package's
 `source/preparation/navigation.json`. `tools/prepare-navigation.mjs` generates

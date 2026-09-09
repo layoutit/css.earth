@@ -1,5 +1,40 @@
 # Adrastea
 
-A source-constrained ellipsoid through the generic body contract. See SOURCE.md.
+## Sources
 
-`pnpm setup:assets --object=adrastea` installs prepared runtime assets.
+- The **Shape model** dataset uses a triaxial ellipsoid with semi-axes 10 × 8 × 7 km, from [NAIF pck00011](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc), BODY515_RADII.
+
+## Evidence
+
+- **Excluded as a surface texture:** five original Galileo SSI observations from the E4 and C9 encounters, C0374674100, C0401718000, C0401749000, C0401764300, C0401776900. Their pinned OPUS records give 6.614–8.747 km/pixel and only 2.286–3.024 pixels across the modeled maximum diameter. Frame metadata is retained in [source/survey](source/survey); original frames are available from the records’ PDS file specifications.
+
+## Known problems
+
+- This is a dimension-constrained approximation, not a detailed measured mesh. The standard gray cartographic grid marks the absence of observed surface imagery.
+
+- The rotation model assumes synchronous rotation; the Galileo evidence is insufficient to establish it precisely.
+
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+## Methods and source notes
+
+<details>
+<summary>Detailed source survey, assumptions and preparation</summary>
+
+<a id="adrastea-sources-and-presentation"></a>
+
+The long axis points toward Jupiter and the short axis is the pole. Units, sampling formula and constant neutral material are in source/measurements.json. The checked-in radius table is sampled at 10°; shared meshoptimizer reduces it before native raster-triangle preparation. The constant input is declared entirely no-data and rendered by the shared missing-coverage preparer; grid lines are not terrain or measured surface color. Flood displays the grid, while Shadows adds the shared fixed-epoch Sun lighting.
+
+## Dataset survey
+
+- **Included:** PCK dimensions and IAU rotation, with JPL Horizons physical and fitted orbit data.
+
+- This resolves an outline, not terrain.
+
+- **Excluded as a geometry source:** the NASA/JPL [PIA01624 montage](https://science.nasa.gov/photojournal/shapes-of-the-small-inner-satellites-of-jupiter/) illustrates the inferred axes but is not a downloadable numeric shape mesh.
+
+- **Literature:** [Denk et al., Io and the Minor Jovian Moons – Prospects for JUICE (2026)](https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf), Table 3 and section 3, explicitly says only Adrastea’s axis dimensions could be derived. Figure 10 identifies the five Galileo observations. No resolved elevation or composition map is qualified, so no such lens is offered.
+
+All surface pixels are marked as missing observational coverage on the approximate ellipsoid. The original science inputs remain separate from the prepared display assets. The surface, poles, thumbnail, small minimap and context portrait use the same standard grid.
+
+</details>

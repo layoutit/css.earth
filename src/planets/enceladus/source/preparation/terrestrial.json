@@ -80,6 +80,102 @@
           ],
           "ambient": 0.25
         }
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "minimum": 0.55,
+        "maximum": 0.81,
+        "colors": [
+          "#312b66",
+          "#327caf",
+          "#7fcdbb",
+          "#edf8b1"
+        ],
+        "labels": [
+          "0.55",
+          "0.68",
+          "0.81"
+        ],
+        "units": "near-2.02 µm band depth",
+        "title": "Partial Cassini VIMS water-ice signature",
+        "description": "Water-ice absorption in selected Cassini observations.",
+        "format": "geotiff",
+        "path": "vims-chemistry/enceladus-vims-depth.tif",
+        "consumer": "ice-absorption",
+        "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.125,
+        "grid": {
+          "width": 1024,
+          "height": 512,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 252100,
+          "noData": -9999,
+          "origin": [
+            -791995.5079699869,
+            395997.75398499344
+          ],
+          "resolution": [
+            1546.8662265038806,
+            -1546.8662265038806
+          ],
+          "wrapLongitude": true
+        },
+        "focus": {
+          "longitudeDegrees": 250,
+          "latitudeDegrees": -20,
+          "zoom": 1.1
+        }
+      },
+      {
+        "id": "infrared-ratio",
+        "label": "Infrared ratio",
+        "minimum": 0.01,
+        "maximum": 0.1,
+        "colors": [
+          "#44245e",
+          "#7659a3",
+          "#cc91c4",
+          "#f4dfbc"
+        ],
+        "labels": [
+          "0.01",
+          "0.055",
+          "0.10"
+        ],
+        "units": "near-3.1 / 1.66 µm reflectance",
+        "title": "Partial Cassini VIMS spectral ratio",
+        "description": "An ice-sensitive infrared ratio, with partial observation coverage.",
+        "format": "geotiff",
+        "path": "vims-chemistry/enceladus-vims-ratio.tif",
+        "consumer": "infrared-ratio",
+        "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.125,
+        "grid": {
+          "width": 1024,
+          "height": 512,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 252100,
+          "noData": -9999,
+          "origin": [
+            -791995.5079699869,
+            395997.75398499344
+          ],
+          "resolution": [
+            1546.8662265038806,
+            -1546.8662265038806
+          ],
+          "wrapLongitude": true
+        },
+        "focus": {
+          "longitudeDegrees": 250,
+          "latitudeDegrees": -20,
+          "zoom": 1.1
+        }
       }
     ],
     "observedColors": [],

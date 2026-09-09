@@ -1,3 +1,4 @@
+import type { PreparedLeafBounds } from '../rendering/prepared-leaf-frustum.js';
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedVolumeLeafStyle } from '../volume/types.js';
 
@@ -17,6 +18,7 @@ export interface PreparedCssSky {
     readonly rightIcrf: PositionM;
     readonly upIcrf: PositionM;
     readonly style: PreparedVolumeLeafStyle;
+    readonly boundsCssPixels?: PreparedLeafBounds;
   }[];
   readonly provenance: unknown;
   readonly approximation: unknown;

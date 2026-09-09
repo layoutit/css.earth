@@ -141,6 +141,15 @@
       ],
       "metersPerUnit": 13423.675889328062,
       "bodyRadiusM": 3396190
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mars-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7098058e60e0b0a77dfb89489d667a28a7795553f92613122e12aa43b8558c40"
+      }
     }
   },
   "schema": "cssearth-object@1",

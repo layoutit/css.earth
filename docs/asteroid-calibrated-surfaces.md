@@ -25,9 +25,9 @@ remains deferred: the candidate color registration did not qualify.
 
 Full source inventories, camera and quality semantics, reprojection limits,
 exact input hashes and reproduction commands are in the body
-[Ida](../src/planets/ida/SOURCE.md),
-[Gaspra](../src/planets/gaspra/SOURCE.md) and
-[Dimorphos](../src/planets/dimorphos/SOURCE.md) source notes.
+[Ida](../src/planets/ida/README.md),
+[Gaspra](../src/planets/gaspra/README.md) and
+[Dimorphos](../src/planets/dimorphos/README.md) source notes.
 
 ## Browser evidence
 

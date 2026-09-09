@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "eb9f3ebcaa1e47c0c7e440c9cf7e52c3125893bf7072efe57443bb5a78ab3704"
+    "sha256": "bb2281a1ff88d364d3a9bcd3b203caa2db0d5cf05e5d1df9b5eba593341ffe41"
   },
   "id": "steins",
   "properties": {
@@ -61,7 +61,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "3fda09b292444c3995018427bd5d947fa2de9dfd592bcdf8885fcba760cfb612"
+          "sha256": "a42cb22b0187eaf5886b9c829c60459d839be631d04a7ec19f784f5ff30ccb9d"
         },
         {
           "id": "rotation",
@@ -71,7 +71,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "38e6d811aaac8286ec44f760cb164edcd1463c155ae69602ef43ba613056213b"
+          "sha256": "39fcebc1eb16f4c5906bc3f3aae53422abac0b859011e1a24da920fe0fcc34a0"
         },
         {
           "id": "title",
@@ -86,7 +86,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "53218f3520a508eaf8e2949c607c1dd581e3cb1fc4731cf193d66a4225e24b05"
+          "sha256": "579ae74993161b67b086e5e37fd8970690dffaec00632ffe03941721fcbbeeca"
         }
       ]
     },
@@ -116,6 +116,15 @@
       ],
       "metersPerUnit": 11.217391304347826,
       "bodyRadiusM": 2580
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/steins-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "46873e6a74f32fdc909b9dca274a75e061b07a05bbba99a8f740ee4870e9bf9b"
+      }
     }
   },
   "schema": "cssearth-object@1",

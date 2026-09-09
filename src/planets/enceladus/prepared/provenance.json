@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "enceladus",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b00b3b8f80f95e1e564c0a8213f2d5d989cf7eb97b078fc5a93afc0679e1418a"
+    "sha256": "0a20f44c52fe80c2f93a1c3b9e2de30808012c58d571746af2b4bfb8c8bd1d32"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b85caab6ca861268f7309094e5e5dd4dcf07402e6ab3f1350645347e748949ac",
+      "sha256": "b88628b2b19d84eb9920adbaaee9c47c6839359682daab4a13fbb765d17c0e1a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -98,6 +98,102 @@
                 ],
                 "ambient": 0.25
               }
+            },
+            {
+              "id": "ice-absorption",
+              "label": "Ice absorption",
+              "minimum": 0.55,
+              "maximum": 0.81,
+              "colors": [
+                "#312b66",
+                "#327caf",
+                "#7fcdbb",
+                "#edf8b1"
+              ],
+              "labels": [
+                "0.55",
+                "0.68",
+                "0.81"
+              ],
+              "units": "near-2.02 µm band depth",
+              "title": "Partial Cassini VIMS water-ice signature",
+              "description": "Water-ice absorption in selected Cassini observations.",
+              "format": "geotiff",
+              "path": "vims-chemistry/enceladus-vims-depth.tif",
+              "consumer": "ice-absorption",
+              "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "textureScale": 0.125,
+              "grid": {
+                "width": 1024,
+                "height": 512,
+                "centerLongitude": 0,
+                "referenceRadiusMeters": 252100,
+                "noData": -9999,
+                "origin": [
+                  -791995.5079699869,
+                  395997.75398499344
+                ],
+                "resolution": [
+                  1546.8662265038806,
+                  -1546.8662265038806
+                ],
+                "wrapLongitude": true
+              },
+              "focus": {
+                "longitudeDegrees": 250,
+                "latitudeDegrees": -20,
+                "zoom": 1.1
+              }
+            },
+            {
+              "id": "infrared-ratio",
+              "label": "Infrared ratio",
+              "minimum": 0.01,
+              "maximum": 0.1,
+              "colors": [
+                "#44245e",
+                "#7659a3",
+                "#cc91c4",
+                "#f4dfbc"
+              ],
+              "labels": [
+                "0.01",
+                "0.055",
+                "0.10"
+              ],
+              "units": "near-3.1 / 1.66 µm reflectance",
+              "title": "Partial Cassini VIMS spectral ratio",
+              "description": "An ice-sensitive infrared ratio, with partial observation coverage.",
+              "format": "geotiff",
+              "path": "vims-chemistry/enceladus-vims-ratio.tif",
+              "consumer": "infrared-ratio",
+              "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "textureScale": 0.125,
+              "grid": {
+                "width": 1024,
+                "height": 512,
+                "centerLongitude": 0,
+                "referenceRadiusMeters": 252100,
+                "noData": -9999,
+                "origin": [
+                  -791995.5079699869,
+                  395997.75398499344
+                ],
+                "resolution": [
+                  1546.8662265038806,
+                  -1546.8662265038806
+                ],
+                "wrapLongitude": true
+              },
+              "focus": {
+                "longitudeDegrees": 250,
+                "latitudeDegrees": -20,
+                "zoom": 1.1
+              }
             }
           ],
           "observedColors": [],
@@ -168,7 +264,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8939ed6177dc04a3bcb418c0e0c0a9d935f7624559f5ce49c119596497325bd5",
+      "sha256": "7427b79e3ae0f58d3c9b158cb5887655be993ef72299a48193a85bfe91632a6f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -240,7 +336,9 @@
           "labels": {
             "normal": "Monochrome",
             "elevation": "Elevation",
-            "shape": "Shape"
+            "shape": "Shape",
+            "ice-absorption": "Ice absorption",
+            "infrared-ratio": "Infrared ratio"
           },
           "controls": [
             {
@@ -297,6 +395,68 @@
                 "id": "jpl-spc-enceladus-v2-q256",
                 "path": "../manifest.json"
               }
+            },
+            {
+              "id": "ice-absorption",
+              "label": "Ice absorption",
+              "description": "Water-ice absorption relative to a native 1.82–2.20 µm continuum. Six calibrated Cassini VIMS observations cover selected regions; gray grid marks unsupported areas. Strength also varies with viewing geometry and grain size. Archive noise filtering is retained; no photometric correction is applied. This is not ice percentage.",
+              "title": "Partial Cassini VIMS water-ice signature",
+              "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size and archive filtering affect the uncorrected values; these are not ice percentages.",
+              "thumbnail": "/scenes/enceladus/enceladus-ice-absorption-thumbnail.webp",
+              "surface": "enceladus-ice-absorption-surface@2x.webp",
+              "poles": "enceladus-ice-absorption-poles@2x.webp",
+              "source": {
+                "id": "enceladus-vims-ice-absorption",
+                "path": "../manifest.json",
+                "url": "https://vims.univ-nantes.fr/cube/1487299582_1"
+              },
+              "detail": "Partial VIMS",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Ice absorption",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.55",
+                  "0.68",
+                  "0.81"
+                ],
+                "meta": "band-depth fraction",
+                "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
+                "image": "/scenes/enceladus/enceladus-ice-absorption-legend.webp"
+              }
+            },
+            {
+              "id": "infrared-ratio",
+              "label": "Infrared ratio",
+              "description": "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas.",
+              "title": "Partial Cassini VIMS spectral ratio",
+              "summary": "A near-3.1/1.66 µm ice-sensitive ratio with partial Cassini coverage. Viewing angle, grain size and archive filtering affect the uncorrected values. Gray grid marks gaps; this does not measure temperature or crystallinity.",
+              "thumbnail": "/scenes/enceladus/enceladus-infrared-ratio-thumbnail.webp",
+              "surface": "enceladus-infrared-ratio-surface@2x.webp",
+              "poles": "enceladus-infrared-ratio-poles@2x.webp",
+              "source": {
+                "id": "enceladus-vims-infrared-ratio",
+                "path": "../manifest.json",
+                "url": "https://vims.univ-nantes.fr/cube/1487299582_1"
+              },
+              "detail": "Partial VIMS",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Infrared ratio",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.01",
+                  "0.055",
+                  "0.10"
+                ],
+                "meta": "reflectance ratio",
+                "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
+                "image": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp"
+              }
             }
           ]
         },
@@ -348,6 +508,12 @@
             "role": "shape",
             "description": "Corrected Enceladus v2 SPC shape and delivery notes",
             "href": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
+          },
+          {
+            "label": "Cassini VIMS",
+            "role": "surface",
+            "description": "Nantes calibrated cubes, navigation and CC BY 4.0 source data",
+            "href": "https://vims.univ-nantes.fr/cube/1487299582_1"
           }
         ],
         "provenance": {
@@ -424,7 +590,7 @@
       "sha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
       "bytes": 518340175,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -453,7 +619,7 @@
       "sha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
       "bytes": 10207923,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "dsk-mesh",
         "groups": [
@@ -517,7 +683,7 @@
       "sha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
       "bytes": 129613723,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -526,6 +692,88 @@
         "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
         "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "enceladus-vims-ice-absorption",
+      "path": "vims-chemistry/enceladus-vims-depth.tif",
+      "origin": "https://vims.univ-nantes.fr/cube/1487299582_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline index and partial mapping",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from the checked-in original C/N cubes with tools/objects/acquisition/enceladus-vims-spectral.py and vims-chemistry/prepare.json.",
+      "redistribution": "Small derived float32 GeoTIFF retained with original attribution and processing notice.",
+      "lensId": "ice-absorption",
+      "label": "Ice absorption",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 252100
+      },
+      "coverage": "Only supported interior source-center cells. Approximate union covers 23.8% of the reference sphere; output grid density is not native resolution. Absolute pointing remains unqualified.",
+      "sha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
+      "bytes": 101934,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "enceladus-vims-infrared-ratio",
+      "path": "vims-chemistry/enceladus-vims-ratio.tif",
+      "origin": "https://vims.univ-nantes.fr/cube/1487299582_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline index and partial mapping",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "vims-chemistry/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from the checked-in original C/N cubes with tools/objects/acquisition/enceladus-vims-spectral.py and vims-chemistry/prepare.json.",
+      "redistribution": "Small derived float32 GeoTIFF retained with original attribution and processing notice.",
+      "lensId": "infrared-ratio",
+      "label": "Infrared ratio",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 252100
+      },
+      "coverage": "Only supported interior source-center cells. Approximate union covers 23.8% of the reference sphere; output grid density is not native resolution. Absolute pointing remains unqualified.",
+      "sha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
+      "bytes": 109752,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -538,10 +786,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8939ed6177dc04a3bcb418c0e0c0a9d935f7624559f5ce49c119596497325bd5",
-      "bytes": 12196,
+      "sha256": "7427b79e3ae0f58d3c9b158cb5887655be993ef72299a48193a85bfe91632a6f",
+      "bytes": 15752,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -589,13 +837,13 @@
           "url": "/scenes/enceladus/enceladus-normal-thumbnail.webp",
           "bytes": 1850,
           "sha256": "b1f5ecdd4895028a00197aab2cf9583d37846f0daf3aa171e3f9cfa839c092b5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
           "bytes": 6337990,
           "sha256": "6c043a2fd0389034fb71739fce4d7a0726575b81b3111007e6bbea854a3ce1c2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -629,19 +877,111 @@
           "url": "/scenes/enceladus/enceladus-elevation-thumbnail.webp",
           "bytes": 8066,
           "sha256": "eef7b61cc108d1146a560fb5d5b7dded77dcda4e03e29df0342609a5fc431588",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
           "bytes": 10574576,
           "sha256": "90ec8ae36835ca0c5a83d0cf2a83f7182fddf281f4e9a387b73624f9617d1900",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "ice-absorption",
+      "label": "Ice absorption",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Water-ice absorption relative to a native 1.82–2.20 µm continuum. Six calibrated Cassini VIMS observations cover selected regions; gray grid marks unsupported areas. Strength also varies with viewing geometry and grain size. Archive noise filtering is retained; no photometric correction is applied. This is not ice percentage."
+      ],
+      "lensIds": [
+        "ice-absorption"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Partial Cassini VIMS water-ice signature"
+      },
+      "inputs": [
+        "enceladus-vims-ice-absorption",
+        "jpl-spc-enceladus-v2-q256"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/enceladus/enceladus-ice-absorption-thumbnail.webp",
+          "bytes": 1520,
+          "sha256": "12fff2fb2f5df848aedc72db8598c2192a5b75521ac4c6e9b286805d743b10cc",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/enceladus/enceladus-ice-absorption-legend.webp",
+          "bytes": 146,
+          "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/enceladus/enceladus-ice-absorption-surface@2x.webp",
+          "bytes": 67618,
+          "sha256": "530427bb129a342b15aaa01415a6d3106c64a389bcd125101d2a74d1c3bd3717",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "infrared-ratio",
+      "label": "Infrared ratio",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas."
+      ],
+      "lensIds": [
+        "infrared-ratio"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Partial Cassini VIMS spectral ratio"
+      },
+      "inputs": [
+        "enceladus-vims-infrared-ratio",
+        "jpl-spc-enceladus-v2-q256"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/enceladus/enceladus-infrared-ratio-thumbnail.webp",
+          "bytes": 2166,
+          "sha256": "7ce993b429aa895f5d6f306b27ca52b08e5b53d4e8c7ceb99ba1eebf76301ae2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp",
+          "bytes": 196,
+          "sha256": "cb891375c261f05e633ed9af6366e538fe4a3551f53ea2e5edcdd8c0c7897c7f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/enceladus/enceladus-infrared-ratio-surface@2x.webp",
+          "bytes": 68880,
+          "sha256": "db9135d4a85f658a52b89c269b1eb624d262b12248bbc3b526aa60c826f188d6",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -673,13 +1013,13 @@
           "url": "/scenes/enceladus/enceladus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
           "bytes": 460676,
           "sha256": "8cad6dfddbf10543a581ab03a6737292410e7e9821afd1db57ee2fedf339150f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -702,8 +1042,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7841,
-          "sha256": "564dc51408adb8882a1632d06bae4a56ea5bdf883442f945bf89e36defd5c600",
+          "bytes": 8016,
+          "sha256": "aa6d07c6e194fdd5c9d23911c7809a27804dc3d6ec8b5a5d74329d37b7b3ed83",
           "verification": "bytes-verified"
         }
       ],
@@ -777,6 +1117,54 @@
           "url": "object:prepared/minimaps/elevation.webp",
           "bytes": 102770,
           "sha256": "4604609b8226679581be1858b34ca834b3556883e8fe1ff5ed29bd3686399cd7",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:ice-absorption",
+      "label": "Ice absorption preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "ice-absorption"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/ice-absorption.webp",
+          "bytes": 29940,
+          "sha256": "36c8618c34b000bf074c9a5543c37be10c05860149c145f29c2a191e378de254",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:infrared-ratio",
+      "label": "Infrared ratio preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "infrared-ratio"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/infrared-ratio.webp",
+          "bytes": 32790,
+          "sha256": "8dd3c1d8da565fb70231d6ee441b18f86f769f998e32714d20c6a5a7818032dc",
           "verification": "bytes-verified"
         }
       ]

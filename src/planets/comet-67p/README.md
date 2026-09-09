@@ -19,8 +19,9 @@ grids mark missing or rejected imagery.
 
 Existing reports; no body tests were rerun for this documentation edit.
 
-- **Coverage:** 56.25% of the displayed mesh has accepted photography, up from 56.04%.
-  The two September images supply 1.76% of the area. [Mosaic report](../../../docs/comets/SURFACE-IMAGERY.md).
+- **Coverage estimates:** sampled photography coverage rose from 56.04% to 56.25%
+  of the displayed mesh area. The two September images supply an estimated 1.76%.
+  [Mosaic report](../../../docs/comets/SURFACE-IMAGERY.md).
 - **Browser:** 60 comet cases passed; the renderer suite had 367 passes and nine failures.
   Tested application: [87ddd9680f](https://github.com/layoutit/cssEarth/commit/87ddd9680f76082eedd9915e86bda3253311b0f3).
   [Browser results](../../../docs/comets/evidence/surface-imagery-browser.json) · [Conformance](../../../docs/comets/evidence/surface-imagery-conformance.json) · [Suite results](../../../docs/comets/evidence/surface-imagery-validation.json).

@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cdb4ad6f98e4731f2b170b2d3c602a4efe4acc42e542b925adc596e7edd233b0"
+    "sha256": "3fd89bb67747ec5db801c8ee90ba537d888c4e6790c17fd27d9221af35421418"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -2184,7 +2184,7 @@
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, wephm=y, watm=y, OBJECT-DATE=2026/08/29 12:00, OBJECT-NAME=Saturn",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "U.S. government scientific model response",
-      "acquisition": "shared verify-request operations in preparation/acquisition.json, with the checked seed and generator parameters documented in SOURCE.md",
+      "acquisition": "shared verify-request operations in preparation/acquisition.json, with the checked seed and generator parameters documented in README.md",
       "redistribution": "checked text configuration with NASA attribution",
       "sha256": "93165938d49f7682b5b9bf9b23537a1ed3a0c3f91fc6cec4f4af9e2274d9682e",
       "bytes": 8260,

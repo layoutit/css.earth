@@ -13,8 +13,8 @@ off by default, and missing observations use the shared gray grid.
 Bennu and Vesta are explicitly labeled as spectral colors rather than natural
 color or mineral abundance. The source records describe registration,
 missing-data limits, calibration and the source survey:
-[Bennu](../src/planets/bennu/SOURCE.md), [Eros](../src/planets/eros/SOURCE.md),
-[Vesta](../src/planets/vesta/SOURCE.md).
+[Bennu](../src/planets/bennu/README.md), [Eros](../src/planets/eros/README.md),
+[Vesta](../src/planets/vesta/README.md).
 
 ## Source interpretation
 

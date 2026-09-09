@@ -3,16 +3,22 @@ import '../body-overview.css';
 import PlanetCardHeader from './PlanetCardHeader.astro';
 import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
 import PlanetObjectResult from './PlanetObjectResult.astro';
+import PlanetFactsheet from './PlanetFactsheet.astro';
 import { PLANET_SEARCH_OBJECTS } from '../planet-search-objects.mjs';
 import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
 import { prepareBodyOverview } from '../prepare-body-overview.mjs';
 
-const { objectId, title, introduction } = Astro.props;
+const { objectId, title, introduction, facts = [], moreFacts = [] } = Astro.props;
 const overview = await prepareBodyOverview(objectId);
 const children = new Set(preparedWorld.bodies
   .filter(body => body.orbit?.centerBodyId === objectId).map(body => body.id));
 const moons = PLANET_SEARCH_OBJECTS.filter(object =>
   object.classification === 'satellite' && children.has(object.id));
+const tabs = [
+  { id: 'moons', label: 'Moons' },
+  { id: 'factsheet', label: 'Factsheet' },
+  { id: 'spectrum', label: 'Spectrum' },
+];
 ---
 
 <PlanetCardHeader {title} data-body-overview data-has-portrait={overview.image ? true : undefined}>
@@ -22,27 +28,33 @@ const moons = PLANET_SEARCH_OBJECTS.filter(object =>
       <img class="planet-body-overview-image" src={overview.image}
         width="1200" height="630" alt={title.label} loading="lazy" decoding="async" />
     </div>}
-    <ul class="planet-overview-facts">
-      <li>{overview.classification}</li>
-      {overview.radiusEarth && <li title={`${overview.radiusEarth} Earth radii`} aria-label={`${overview.radiusEarth} Earth radii`}>{overview.radiusEarth} R⊕</li>}
-      {overview.distanceAu !== null && <li>{overview.distanceAu} AU</li>}
-    </ul>
     {introduction && <p class="planet-introduction">{introduction}</p>}
-    {overview.spectrum && <figure class="planet-overview-spectrum">
-      <figcaption>{overview.spectrum.title}</figcaption>
-      <img src={overview.spectrum.src} width="300" height="90" alt={overview.spectrum.alt} loading="lazy" decoding="async" />
-    </figure>}
   </Fragment>
 </PlanetCardHeader>
-<div class="planet-object-tabs" data-body-overview role="tablist" aria-label="Orbiting objects">
-  <button type="button" role="tab" id={`${objectId}-moons-tab`}
-    aria-controls={`${objectId}-moons-content`} aria-selected="true" tabindex="0">
-    <span>Moons</span>{' '}<span class="planet-object-tab-count">({moons.length})</span>
-  </button>
+<div class="planet-object-tabs" data-body-overview role="tablist" aria-label="Body overview">
+  {tabs.map((tab, index) => <button type="button" role="tab"
+    id={`${objectId}-overview-${tab.id}-tab`} data-information-group="overview" data-information-tab={tab.id}
+    aria-controls={`${objectId}-overview-${tab.id}-content`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1}>
+    <span>{tab.label}</span>
+    {tab.id === 'moons' && <span class="planet-object-tab-count">({moons.length})</span>}
+  </button>)}
 </div>
-<div class="planet-object-results-scroll" data-body-overview id={`${objectId}-moons-content`}
-  role="tabpanel" aria-labelledby={`${objectId}-moons-tab`} tabindex="0">
+<div class="planet-object-results-scroll planet-card-tabpanel" data-body-overview
+  data-information-group="overview" data-information-panel="moons" id={`${objectId}-overview-moons-content`}
+  role="tabpanel" aria-labelledby={`${objectId}-overview-moons-tab`} tabindex="0">
   {moons.length > 0 ? <ul class="planet-object-list">
     {moons.map(object => <PlanetObjectResult {object} />)}
   </ul> : <p class="planet-object-empty">No moons in the catalogue</p>}
+</div>
+<div class="planet-object-results-scroll planet-card-tabpanel" data-body-overview
+  data-information-group="overview" data-information-panel="factsheet" id={`${objectId}-overview-factsheet-content`}
+  role="tabpanel" aria-labelledby={`${objectId}-overview-factsheet-tab`} tabindex="0" hidden>
+  <PlanetFactsheet id={`${objectId}-overview`} {facts} {moreFacts} embedded />
+</div>
+<div class="planet-object-results-scroll planet-card-tabpanel" data-body-overview
+  data-information-group="overview" data-information-panel="spectrum" id={`${objectId}-overview-spectrum-content`}
+  role="tabpanel" aria-labelledby={`${objectId}-overview-spectrum-tab`} tabindex="0" hidden>
+  {overview.spectrum ? <figure class="planet-overview-spectrum" aria-label={overview.spectrum.title}>
+    <img src={overview.spectrum.src} width="300" height="90" alt={overview.spectrum.alt} loading="lazy" decoding="async" />
+  </figure> : <p class="planet-object-empty">No reflectance spectrum available</p>}
 </div>

@@ -1,0 +1,68 @@
+{
+  "verifiedAt": "2026-09-09T20:58:16.746Z",
+  "scope": "Fresh download and hash verification of the ten new original observations and companions; existing source inputs copied from their verified local closure.",
+  "results": [
+    {
+      "id": "ida",
+      "newSourceDownloads": 4,
+      "downloadedBytes": 3231709,
+      "verified": {
+        "inputCount": 18,
+        "generatedIntermediateCount": 1,
+        "documentCount": 20,
+        "verifiedCount": 39
+      },
+      "requests": [
+        "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.fit",
+        "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-ida.ssi.cal-images/data/fits/0202560500rcal_gre.xml",
+        "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.fit",
+        "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i0500.lbl"
+      ]
+    },
+    {
+      "id": "gaspra",
+      "newSourceDownloads": 4,
+      "downloadedBytes": 3228433,
+      "verified": {
+        "inputCount": 16,
+        "generatedIntermediateCount": 1,
+        "documentCount": 31,
+        "verifiedCount": 48
+      },
+      "requests": [
+        "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.fit",
+        "https://sbnarchive.psi.edu/pds4/galileo/derived/galileo.ast-gaspra.ssi.cal-images/data/fits/107318313rcal_clr.xml",
+        "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.fit",
+        "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/gaspra/e8313.lbl"
+      ]
+    },
+    {
+      "id": "steins",
+      "newSourceDownloads": 1,
+      "downloadedBytes": 615424,
+      "verified": {
+        "inputCount": 15,
+        "generatedIntermediateCount": 1,
+        "documentCount": 24,
+        "verifiedCount": 40
+      },
+      "requests": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osiwac-4-ast1-steins-str-refl-v1.0/data/img/w20080905t183630497id4df17.img"
+      ]
+    },
+    {
+      "id": "lutetia",
+      "newSourceDownloads": 1,
+      "downloadedBytes": 37775872,
+      "verified": {
+        "inputCount": 16,
+        "generatedIntermediateCount": 1,
+        "documentCount": 22,
+        "verifiedCount": 39
+      },
+      "requests": [
+        "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154135529id4df22.img"
+      ]
+    }
+  ]
+}

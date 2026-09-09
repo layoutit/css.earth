@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Cassini VIMS Data Portal - USGS-ISIS3 calibration and navigation</title>
+  <meta name="description" content="Description of the USGS-ISIS3 calibration pipeline used for the VIMS cubes.">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/build/static/favicons/favicon-32x32.4822e8435011430b025b87766d73a81f.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/build/static/favicons/favicon-16x16.409cba7554355b3bbcbe7d7c519db9c1.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/build/static/favicons/apple-touch-icon.1be255d40cafd86adc7287e0aa9f5da8.png">
+  <link rel="mask-icon" href="/build/static/favicons/safari-pinned-tab.fb5b1f92804250b29c2a260db05d804b.svg" color="#2d89ef">
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="/build/layout.5c758e27.css">
+  
+<link rel="stylesheet" href="/build/terminal.f0b608ef.css">
+</head>
+<body>
+
+  
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="/" title="Go to the homepage" data-toggle="tooltip">
+        <img src="/build/static/favicons/safari-pinned-tab.fb5b1f92804250b29c2a260db05d804b.svg" width="20" height="20" class="d-inline-block align-text-bottom mr-1" alt="Cassini-logo">
+        VIMS Data Portal
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+    aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle "
+          href="#" id="dropdown-mission" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Targets</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown-mission">
+            <a class="dropdown-item" href="/target/titan/targeted">Titan</a>
+            <a class="dropdown-item" href="/target/enceladus/targeted">Enceladus</a>
+            <a class="dropdown-item" href="/target/dione/targeted">Dione</a>
+            <a class="dropdown-item" href="/target/rhea/targeted">Rhea</a>
+            <a class="dropdown-item" href="/target/targeted">All targets</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle "
+          href="#" id="dropdown-mission" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Missions</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown-mission">
+            <a class="dropdown-item" href="/mission/prime/targeted">Prime - 2004/2008</a>
+            <a class="dropdown-item" href="/mission/equinox/targeted">Equinox - 2008/2010</a>
+            <a class="dropdown-item" href="/mission/solstice/targeted">Solstice - 2010/2017</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle "
+          href="#" id="dropdown-mission" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Timeline</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown-mission">
+            <a class="dropdown-item" href="/timeline/targeted">Targeted flybys</a>
+            <a class="dropdown-item" href="/timeline/">All flybys</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/articles/">Publications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/links">Links</a>
+        </li>
+      </ul>
+        <form class="form-inline my-2 my-lg-0">
+                        <a class="nav-item text-light pl-3" data-toggle="collapse" href="#search-toggle" role="button" aria-expanded="false" aria-controls="search-toggle">
+                <small data-toggle="tooltip" title="Search"><i class="fas fa-search fa-lg"></i></small>
+            </a>
+            <a class="nav-item text-light pl-3" href="/about" title="About us" data-toggle="tooltip">
+                <small><i class="fas fa-info-circle fa-lg"></i></small>
+            </a>
+            <a class="nav-item text-light pl-3" href="/contact" title="Contact us" data-toggle="tooltip">
+                <small><i class="fas fa-envelope fa-lg"></i></small>
+            </a>
+        </form>
+    </div>
+    </nav>
+
+    <div class="navbar navbar-expand-md sticky-top collapse" style="background-color:lightgray" id="search-toggle">
+        <header class="d-flex w-100 p-2 mx-auto flex-row" id="search-input">
+            <div class="d-inline mx-3 w-100">
+                <input class="form-control typeahead w-100" type="text" placeholder="Search a target, a flyby, a cube or a phase mission.">
+            </div>
+            <button class="close float-right" type="button" data-toggle="collapse" data-target="#search-toggle" aria-expanded="true"
+                aria-controls="search-toggle" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </header>
+    </div>
+
+  <main class="container" role="main" id="main">
+    <article class="starter-template text-justify">
+    <head>
+        <h1 class="text-center">USGS-ISIS3 calibration and navigation</h1>
+    </head>
+    <section class="mt-4">
+        <p>
+            All the cubes available on this website were calibrated using the latest release of the
+            <a href="https://isis.astrogeology.usgs.gov/" target="_blank">USGS ISIS3</a> software.
+        </p>
+        <div class="terminal">
+            $ cat $ISIS_ROOT/version
+            3.5.2.0
+            2018-04-06 # Version date
+            v007       # 3rd party libraries version
+            stable     # release stage (alpha, beta, stable)
+        </div>
+        <p>
+            On the USGS website, a <a href="https://isis.astrogeology.usgs.gov/fixit/projects/isis/wiki/Working_with_Cassini_VIMS" target="_blank">
+            series of tutorials</a> are dedicated to the Cassini VIMS data. Detail documentation on ISIS3 functions, keywords and optional
+            parameters can be found in the <a href="https://isis.astrogeology.usgs.gov/Application/#Cassini" target="_blank">documentation</a>.
+        </p>
+        <p>
+            In this page, we will only present the generic pipeline used to provide calibrated and navigation data available
+            on this website.
+        </p>
+
+        <h2 class="mt-4">Cassini VIMS raw data</h2>
+        <p>
+            Like every other NASA missions, the Cassini raw data are archived on the
+            <a href="https://pds-imaging.jpl.nasa.gov/" target="_blank">Planetary Data System</a>
+            imaging node (PDS) under the supervision of the
+            <a href="https://www.jpl.nasa.gov/" target="_blank">Jet Propulsion Laboratory</a> and the
+            <a href="https://www.usgs.gov/centers/astrogeo-sc/science/cassini-huygens" target="_blank">USGS</a>.
+        </p>
+        <p>
+            The complete dataset of the VIMS data is composed of
+            <a href="https://pds-imaging.jpl.nasa.gov/volumes/vims.html" target="_blank">94 volumes</a>
+            covering in average 2-3 months of data. The data are
+            <a href="https://pds-imaging.jpl.nasa.gov/data/cassini/cassini_orbiter/" target="_blank">stored on the PDS</a>
+            in folders called <code>covims_*</code> for each release. Each folder includes a <code>data/</code> folder with
+            a collection of sub-folders containing 64 cubes each sorted by dates.
+            For example, the very least VIMS cube recorded by Cassini (<code>1884114114_1</code>) is located in the folder
+            <a href="https://pds-imaging.jpl.nasa.gov/data/cassini/cassini_orbiter/covims_0094/data/2017255T000819_2017257T195837" target="_blank"><code>covims_0094/data/2017255T000819_2017257T195837</code></a>.
+        </p>
+        <p>
+            No general rules apply on the way these data are store, especially due to the non-linear acquisition rate of the
+            instrument.
+            Therefore, it is mandatory to use a database of the complete dataset to back-trace the exact location the cube
+            based on their cube id. If you are looking for a cube raw data (<code>.qub</code>) containing a known icy moons
+            (for example, <code>1490951542_2</code>), go to
+            <a href="/cube/v1490951542_2.qub" download>
+                <code>vims.univ-nantes.fr/cube/v1490951542_2.qub</code>
+            </a>
+            to be redirected automatically to the correct location of this cube on the PDS archive.
+            The same shortcut applies for the label/metadata file (<code>.lbl</code>) associated with the cube, simply go to
+            <a href="/cube/v1490951542_2.lbl" target="_blank">
+                <code>vims.univ-nantes.fr/cube/v1490951542_2.lbl</code>
+            </a> to locate it on the PDS.
+        </p>
+        <p>
+            For a cube which does not contain icy moon in the field of view (e.g. only Saturn, the rings&hellip;), you will need
+            to use an other search engine like
+            <a href="https://tools.pds-rings.seti.org/opus" target="_blank">OPUS</a>,
+            <a href="https://pilot.wr.usgs.gov/" target="_blank">PILOT</a> or
+            <a href="https://pds-imaging.jpl.nasa.gov/search/" target="_blank">ATLAS</a>.
+            You can also build your own database from the <code>_md5.txt</code> file attached to each release
+            (e.g., a python implementation is available in <a href="https://github.com/seignovert/pypds" target="_blank">this repo</a>).
+        </p>
+        <p>
+            Therefore to download the raw data, you only need to do:
+        </p>
+        <div class="terminal">
+            $ wget https://vims.univ-nantes.fr/cube/v1490951542_2.qub
+            --2026-09-09 20:44:20--  https://vims.univ-nantes.fr/cube/v1490951542_2
+            Resolving vims.univ-nantes.fr (vims.univ-nantes.fr)... 193.52.104.60
+            Connecting to vims.univ-nantes.fr (vims.univ-nantes.fr)|193.52.104.60|:443... connected.
+            HTTP request sent, awaiting response... 302 Found
+            Location: https://pds-imaging.jpl.nasa.gov/data/cassini/cassini_orbiter/covims_0006/data/2005089T115353_2005090T131217/v1490951542_2.qub [following]
+            --2026-09-09 20:44:20--  https://pds-imaging.jpl.nasa.gov/data/cassini/cassini_orbiter/covims_0006/data/2005089T115353_2005090T131217/v1490951542_2.qub
+            Resolving pds-imaging.jpl.nasa.gov (pds-imaging.jpl.nasa.gov)... 128.149.114.60
+            Connecting to pds-imaging.jpl.nasa.gov (pds-imaging.jpl.nasa.gov)|128.149.114.60|:443... connected.
+            HTTP request sent, awaiting response... 200 OK
+            Length: 3063808 (2.9M) [text/plain]
+            Saving to: 'v1490951542_2.qub'
+            &nbsp;
+            v1490951542_2.qub              100%[====================>]   2.92M   --.-KB/s    in 0s
+            &nbsp;
+            2026-09-09 20:44:20 (123 KB/s) - 'v1490951542_2.qub' saved [3063808/3063808]
+        </div>
+
+        <h2 class="mt-4">Calibration of the data</h2>
+        <p>
+            The first step of the calibration is to convert the PDS3 raw Experiment
+            Data Record (EDR) images (ie. the <code>.qub</code> file) into a ISIS3 cube (<code>.cub</code>) with the
+            <code>vims2isis</code> function.
+        </p>
+        <div class="terminal">
+            $ vims2isis from=v1490951542_2.qub vis=v1490951542_2_vis.cub ir=v1490951542_2_ir.cub
+            Group = Results
+            &nbsp;&nbsp;VisCreated = true
+            &nbsp;&nbsp;IrCreated = true
+            End_Group
+        </div>
+        <p>
+            The <code>vims2isis</code> function will split the raw data into 2 separate files.
+            The first one corresponds to the visible part of spectrum recorded by the VIMS-VIS instrument
+            and the second one is the infrared counterpart recorded by VIMS-IR instrument.
+            Most of the time, both files are present and observed the same location.
+            However for some observations, the sampling mode of the two instruments are different or
+            one of them is turned-off. Therefore it is more reliable to split each cube to process their
+            data independently. In the rest of the calibration we will only use the infrared part of the
+            cube (<code>v*_ir.cub</code>) but the same process can be apply to the visible part of the cube
+            (<code>v*_vis.cub</code>).
+        </p>
+        <p>
+            <b>Note:</b> Only the <code>.qub</code> file is required by <code>vims2isis</code>
+            (the metadata <code>.lbl</code> file is already contained in the <code>.qub</code> file header).
+        </p>
+
+        <p>
+            The second step will provide the navigation information from
+            <a href="https://naif.jpl.nasa.gov/naif/data.html" target="_blank">SPICE routines</a>
+            to extract spacecraft and planetary ephemerids, the instrument C-matrix and event kernels.
+            These data are included into the cube header with the <code>spiceinit</code> function and
+            will be required for the radiometrically calibration (step 3).
+        </p>
+        <div class="terminal">
+            $ spiceinit from=v1490951542_2_ir.cub
+            Group = Kernels
+            &nbsp;&nbsp;NaifFrameCode             = -82371
+            &nbsp;&nbsp;LeapSecond                = $base/kernels/lsk/naif0012.tls
+            &nbsp;&nbsp;TargetAttitudeShape       = ($base/kernels/pck/pck00009.tpc, $cassini/kernels/pck/cpck15Dec2017.tpc)
+            &nbsp;&nbsp;TargetPosition            = $base/kernels/spk/de405.bsp
+            &nbsp;&nbsp;InstrumentPointing        = ($cassini/kernels/ck/05087_05092ra.bc, $cassini/kernels/fk/cas_v40_usgs.tf)
+            &nbsp;&nbsp;Instrument                = Null
+            &nbsp;&nbsp;SpacecraftClock           = $cassini/kernels/sclk/cas00172.tsc
+            &nbsp;&nbsp;InstrumentPosition        = $cassini/kernels/spk/180628RU_SCPSE_05081_05097.bspndum03pi
+            &nbsp;&nbsp;ShapeModel                = Null
+            &nbsp;&nbsp;InstrumentPositionQuality = Reconstructed
+            &nbsp;&nbsp;InstrumentPointingQuality = Reconstructed
+            &nbsp;&nbsp;CameraVersion             = 1
+            End_Group
+        </div>
+
+        <p>
+            The third step, we use the <code>vimscal</code> function to convert the digital count number of each pixel
+            into a the physical radiometric intensity (<em>I/F</em>):
+        </p>
+        <div class="terminal">
+            $ vimscal from=v1490951542_2_ir.cub to=C1490951542_2_ir_cal.cub units=IOF
+            Group = Results
+            &nbsp;&nbsp;InputLines      = 64
+            &nbsp;&nbsp;InputSamples    = 64
+            &nbsp;&nbsp;StartingLine    = 1
+            &nbsp;&nbsp;StartingSample  = 1
+            &nbsp;&nbsp;EndingLine      = 64
+            &nbsp;&nbsp;EndingSample    = 64
+            &nbsp;&nbsp;LineIncrement   = 1
+            &nbsp;&nbsp;SampleIncrement = 1
+            &nbsp;&nbsp;OutputLines     = 64
+            &nbsp;&nbsp;OutputSamples   = 64
+            End_Group
+            &nbsp;
+            Group = Results
+            &nbsp;&nbsp;CalibrationVersion        = RC19
+            &nbsp;&nbsp;SolarMultiplier           = 1000.00
+            &nbsp;&nbsp;IR_Multiplier             = 8112.34
+            &nbsp;&nbsp;VIS_Multiplier            = 39474.13
+            &nbsp;&nbsp;Wave-CalMultiplier        = 1000.00
+            &nbsp;&nbsp;OutputUnits               = I/F
+            &nbsp;&nbsp;SolarColorFile            = $cassini/calibration/vims/RC19/solar-spectrum/solar.2005_v0001.cub
+            &nbsp;&nbsp;Vis                       = false
+            &nbsp;&nbsp;SideplaneCorrection       = "Fit Delta"
+            &nbsp;&nbsp;FlatFile                  = $cassini/calibration/vims/flatfield/ir_flatfield_v0002.cub
+            &nbsp;&nbsp;SpecificEnergyFile        = $cassini/calibration/vims/RC19/RC19-mults/RC19.2005_v0001.cub
+            &nbsp;&nbsp;WavelengthCalibrationFile = $cassini/calibration/vims/RC19/wave-cal/wave.cal.2005_v0001.cub
+            &nbsp;&nbsp;BandwidthFile             = $cassini/calibration/vims/RC19/band-wavelengths/wavelengths.2005_v0001.cub
+            &nbsp;&nbsp;AverageBandwidthFile      = $cassini/calibration/vims/RC19/band-wavelengths/wavelengths_average_v0001.cub
+            End_Group
+        </div>
+        <p>
+            The current version of the calibration pipeline used by ISIS is <em>RC19</em>.
+            The complete documentation on the <em>RC19</em> calibration can be found
+            <a href="https://pds-imaging.jpl.nasa.gov/data/cassini/cassini_orbiter/vims-calibration-files/clark-et-al_vims-radiometric-calibration-pds-2018-v2.0.pdf"
+                target="_blank">here</a>.
+        </p>
+
+        <p>
+            In order to improve the quality of the calibration and to reduce the noise and spikes
+            in the cubes, we apply two additional steps: a <code>noisefilter</code> and a <code>lowpass</code> filter
+            when the smaller spacial dimension of the cube is larger than 5.
+        </p>
+
+        <p>
+            The <code>noisefilter</code> (included in ISIS3 functions) will remove the random pixel noise.
+            We use the boxcar size of <code>5&times;5</code> pixels that we compare to the standard deviation.
+            The tolerance value (<code>tolmin</code> and <code>tolmax</code>) are set to <code>2.5</code>.
+            If the pixel does not fit these criteria, it will be replaced by a <code>NULL</code> value.
+        </p>
+        <div class="terminal">
+            $ noisefilter from=C1490951542_2_ir_cal.cub to=C1490951542_2_ir_stdz.cub toldef=stddev tolmin=2.5 tolmax=2.5 replace=null samples=5 lines=5
+            Group = Results
+            &nbsp;&nbsp;DarkPixelsReplaced    = 2724
+            &nbsp;&nbsp;BrightPixelsReplaced  = 4257
+            &nbsp;&nbsp;SpecialPixelsReplaced = 0
+            &nbsp;&nbsp;TotalPixelsReplaced   = 6981
+            &nbsp;&nbsp;PercentChanged        = 170.4
+            End_Group
+        </div>
+
+        <p>
+            In the final step, we replace these <code>NULL</code> values by the average of the surrounding
+            valid pixels (<code>3&times;3</code>) using the <code>lowpass</code> filter of ISIS:
+        </p>
+        <div class="terminal">
+            $ lowpass from=C1490951542_2_ir_stdz.cub to=C1490951542_2_ir.cub samples=3 lines=3 filter=outside null=yes hrs=no his=no lrs=no replacement=center
+            [No output]
+        </div>
+
+        <p>
+            This latest file (<code>C*_ir.cub</code>) corresponds to the one provided at the bottom of the page
+            <a href="/cube/1490951542_2">
+                <code>vims.univ-nantes.fr/cube/1490951542_2</code>
+            </a> dedicated to this cube.
+            And, as before, if you only need to download this file alone, you can to get it at
+            <a href="/cube/C1490951542_2_ir.cub" download>
+                <code>vims.univ-nantes.fr/cube/C1490951542_2_ir.cub</code>
+            </a>.
+        </p>
+
+        <h2 class="mt-4">Navigation of the data</h2>
+        <p>
+            As soon as the <code>spiceinit</code> succeded, you can navigate the data with the ISIS function
+            <code>phocube</code>. By default we export the phase angle, the emission angle, the incidence angle,
+            the latitude, the longitude, the pixel resolution into a navigation file (<code>N*_ir.cub</code>).
+        </p>
+        <div class="terminal">
+            $ phocube from=C1490951542_2_ir.cub+1 to=N1490951542_2_ir.cub phase=true emission=true incidence=true latitude=true longitude=true pixelresolution=true
+            [No output]
+        </div>
+        <p>
+            <b>Note 1:</b> The <code>+1</code> in the <code>from</code> field is required to select only
+                the first channel of the cube. Otherwise, the function <code>phocube</code> will fail.<br>
+            <b>Note 2:</b> At the moment, the <code>phocube</code> function only provides the navigation values on the ground
+                of the icy moon and put <code>NULL</code> values outside.
+                Especially, the geometry of the pixels at the limb are not computed.
+        </p>
+        <p>
+            The visible and infrared navigation files are always attached on the page dedicated to a specific cube.
+            You can also choose to download it separately with the following shortcut:
+            <a href="/cube/N1490951542_2_ir.cub" download>
+                <code>vims.univ-nantes.fr/cube/N1490951542_2_ir.cub</code>
+            </a>
+        </p>
+
+        <h2 class="mt-4">How to retrieve the calibration information from the files?</h2>
+        <p>
+            In every cube file, the header contrains the complete calibration process through the different functions
+            with their outputs. Therefore you only need to parse the ascii part of the file to retreive the information.
+            For example, it is possible to get the calibration version using the <code>grep</code> function
+            on the binary header of the cube:
+        </p>
+        <div class="terminal">
+            $ grep -a Calibration C1490951542_2_ir.cub
+            &nbsp;&nbsp;CalibrationVersion        = RC19
+        </div>
+
+        <h2 class="mt-4">How to use the calibrated VIMS cubes?</h2>
+        <p>
+            Thanks to this website, getting the calibrated VIMS data is never been so easy.
+            Now, the real question is, how to use them to create actual images and scientific results.
+            For that end, you can use all regular ISIS tools, like <code>qview</code> to display them and
+            create your own composite.
+        </p>
+        <p>
+            But if you need more advanced tools, you can use the python library
+            <a href="https://pypi.org/project/pyvims/" target="_blank"><code>pyvims</code></a>
+            we created.
+            This package is still in beta and under active development. Contributions and feedbacks are welcome.
+            After installing it, try to reproduce this
+            <a href="https://nbviewer.jupyter.org/github/seignovert/pyvims/blob/master/pyvims.ipynb" target="_blank">Jupyter NoteBook</a>
+            to get your hands on the data.
+        </p>
+    </section>
+</article>
+  </main>
+
+  <footer class="footer">
+    <div class="container-fluid bg-dark text-white py-2 px-3">
+      <div class="d-flex justify-content-md-between align-items-center">
+        <a class="text-white" href="http://www.osuna.univ-nantes.fr/" target="_blank" title="Visit the OSUNA website">
+            <img src="/build/static/logos/osuna.5c120f6e8a2ca5664cf7f6d627d0e3b9.svg" height="30" alt="OSUNA-logo">
+        </a>
+        <a class="text-white" href="https://www.insu.cnrs.fr/" target="_blank" title="Visit the CNRS-INSU website">
+            <img src="/build/static/logos/cnrs.e6e5e5d2aa319bbd5309a42bb77d765a.svg" height="30" alt="CNRS-logo">
+            <span class="d-none d-sm-inline-block pl-2">INSU</span>
+        </a>
+        <a class="text-white" href="https://www.univ-nantes.fr/" target="_blank" title="Visit Nantes Université website">
+            <img src="/build/static/logos/univ-nantes.3807ed1e9850bc733e49f68c7ebee3d0.svg" height="30" alt="Nantes-University-logo">
+            <span class="d-none d-sm-inline-block">Nantes Université</span>
+        </a>
+        <a class="text-white" href="https://lpg-umr6112.fr/" target="_blank" title="Visit the LPG website">
+            <img src="/build/static/logos/lpg.1267652cf8999f0238964e834f5f35f2.svg" height="30" alt="LPG-logo">
+            <span class="d-none d-sm-inline-block pl-1">LPG</span>
+        </a>
+        <a class="text-white" href="https://cnes.fr/" target="_blank" title="Visit the CNES website">
+            <img class="mb-2" src="/build/static/logos/cnes.2aa31c5d33c0c7882dfecb7e6e549d76.svg" height="25" alt="CNES-logo">
+            <span class="d-none d-sm-inline-block">CNES</span>
+        </a>
+        <a class="text-white" href="https://lpg-umr6112.fr/index.php?option=com_content&view=article&id=1259" target="_blank" title="Visit the GeoPlaNet website">
+            <img src="/build/static/logos/geoplanet.70f5f849102f1520ca9bd696d68b6c23.svg" height="30" alt="GeoPlaNet-logo">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  
+      <script>
+        var API_MISSION = "/api/mission";
+        var API_TARGET = "/api/target";
+        var API_FLYBYS_TARGETED = "/api/flyby";
+        var API_FLYBYS_QUERY = "/api/flyby/FLYBY_QUERY";
+        var API_CUBES_QUERY = "/api/cube/CUBE_QUERY";
+    </script>
+    <script src="/build/runtime.9a71ee5d.js"></script>
+    <script src="/build/layout.3d3d3251.js"></script>
+   
+<script src="/build/terminal.448d5b8c.js"></script>
+</body>
+</html>

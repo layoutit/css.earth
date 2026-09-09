@@ -70,9 +70,6 @@
         "id": "osiris",
         "format": "osiris-camera",
         "consumer": "osiris-observation",
-        "path": "observations/n20100710t154047674id4df22.img",
-        "cameraPath": "observations/osiris-camera.json",
-        "startTime": "2010-07-10T15:41:06.632",
         "filter": "FFP-Vis_Orange",
         "allowLossy": true,
         "transfer": {
@@ -96,9 +93,30 @@
           99
         ],
         "metadata": {
-          "label": "OSIRIS reflectance",
-          "coverage": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+          "label": "OSIRIS",
+          "coverage": "Two Rosetta orange-filter close-ups show Lutetia’s craters and ridges. Each uses the published shape and a separately checked camera. Approximate disk correction reduces broad shading; the grid marks gaps.",
           "falseColor": false
+        },
+        "frames": [
+          {
+            "id": "approach",
+            "path": "observations/n20100710t154047674id4df22.img",
+            "cameraPath": "observations/osiris-camera.json",
+            "startTime": "2010-07-10T15:41:06.632"
+          },
+          {
+            "id": "image-n20100710t154135529id4df22",
+            "path": "observations/n20100710t154135529id4df22.img",
+            "cameraPath": "observations/n20100710t154135529id4df22-camera.json",
+            "startTime": "2010-07-10T15:41:54.488"
+          }
+        ],
+        "selection": "lowest-emission",
+        "levelMatching": {
+          "samplesPerTriangle": 24,
+          "minimumPairs": 64,
+          "maximumLogMad": 0.25,
+          "maximumGain": 1.35
         }
       }
     ]

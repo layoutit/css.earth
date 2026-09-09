@@ -1,6 +1,6 @@
 import { mountSpaceMinimap } from './minimap/minimap.mjs';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
-import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
+import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
@@ -71,26 +71,57 @@ export function createApplicationWorldContext() {
       const prepared = await loadApplicationUniverse();
       if (signal?.aborted) throw signal.reason;
       const resources = prepareObjectResources(prepared.assets, { signal });
+      let layer = null, framePlanner = null;
       try {
         await resources.ready;
         if (signal?.aborted) throw signal.reason;
-        const layer = prepared.mount(stage);
+        let refreshWorld = () => false;
+        layer = prepared.mount(stage, () => refreshWorld());
         layer.setHiddenOrbits(cometIds);
+        framePlanner = prepared.createFramePlanner();
         const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
         const minimap = mountSpaceMinimap(stage.ownerDocument);
-        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect }) : null;
-        if (diagnostics) target.__cssEarthUniverse = diagnostics;
         let heliosphereEnabled = false, publication = null, destroyed = false;
+        let stagedFrame = null;
         const publish = (world, viewport) => {
           if (destroyed) return;
           publication = { world, viewport };
-          layer.publish(world, viewport, { heliosphere: heliosphereEnabled });
+          const staged = stagedFrame?.world === world && stagedFrame.viewport === viewport ? stagedFrame : null;
+          const frame = staged && !staged.consumed && staged.snapshot.current() ? staged.frame : undefined;
+          if (staged) staged.consumed = true;
+          layer.publish(world, viewport, { heliosphere: heliosphereEnabled }, frame);
           minimap.publish(world, viewport);
         };
+        const frameQueue = createWorldFrameQueue(async request => {
+          const snapshot = layer.captureFrame(request.world, request.viewport);
+          const frame = await framePlanner.plan(snapshot.view);
+          return { current: snapshot.current, commit(camera) {
+            const staged = { world: request.world, viewport: request.viewport, frame, snapshot, consumed: false };
+            stagedFrame = staged;
+            try {
+              camera();
+              // Connected cameras publish through the navigation hub. Initial
+              // owners can commit before that subscription has been attached.
+              if (request.current() && !staged.consumed) publish(request.world, request.viewport);
+            } finally { stagedFrame = null; }
+          } };
+        });
+        refreshWorld = () => frameQueue.refresh();
+        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect, frames: frameQueue.stats }) : null;
+        if (diagnostics) target.__cssEarthUniverse = diagnostics;
         return { ...layer, viewport, publish,
+          createFramePresenter() {
+            let enabled = false, disposed = false;
+            return { enable() { enabled = true; }, destroy() { disposed = true; },
+              present(request) {
+                if (disposed || destroyed || !request.current()) return;
+                const owned = { ...request, current: () => !disposed && !destroyed && request.current() };
+                if (!enabled) { frameQueue.remember(owned); request.commit(); return; }
+                frameQueue.present(owned);
+              } };
+          },
           previewSelection(id) {
             layer.previewSelection(id);
-            if (publication) publish(publication.world, publication.viewport);
           },
           selectObject(id, frame) {
             layer.selectObject(id, frame);
@@ -105,16 +136,17 @@ export function createApplicationWorldContext() {
           setHeliosphereEnabled(enabled) {
             if (destroyed || heliosphereEnabled === (enabled === true)) return;
             heliosphereEnabled = enabled === true;
-            if (publication) publish(publication.world, publication.viewport);
+            if (publication && !refreshWorld()) publish(publication.world, publication.viewport);
           },
           destroy() {
             destroyed = true; publication = null;
+            frameQueue.destroy(); framePlanner.destroy(); stagedFrame = null;
             if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
             minimap.destroy();
             viewport.destroy(); layer.destroy(); resources.destroy();
           },
         };
-      } catch (error) { resources.destroy(); throw error; }
+      } catch (error) { framePlanner?.destroy(); layer?.destroy(); resources.destroy(); throw error; }
     },
   };
 }

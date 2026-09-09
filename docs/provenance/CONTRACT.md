@@ -1,260 +1,205 @@
 # Celestial provenance and documentation contract
 
-Maintained by **PROVENANCE DOCUMENTATION**.
-
-For every detailed body in `OBJECTS`, a contributor should be able to answer:
-**Where did this come from? What does it mean? What did we do to it? What did we check?**
-
-Use the existing [source and prepared records](../object-provenance.md).
-Follow [AGENTS.md](../../AGENTS.md) for application rules and the
+For every detailed body in `OBJECTS`, explain where its data came from, what the
+view means, how we processed it and what the checks prove. Use the existing
+[source and prepared records](../object-provenance.md),
+[AGENTS.md](../../AGENTS.md) for application rules and the
 [celestial skill](../../.agents/skills/celestial-skill/SKILL.md) for preparation.
 
 ## Standards basis
 
-Use **PDS4 1.26.0 and ISO 24495-1:2023 together**: PDS4 guides the provenance
-content; ISO guides its wording, organization and use by readers.
+Use **PDS4 1.26.0 and ISO 24495-1:2023 together**: PDS4 guides provenance content;
+ISO guides wording, organization and use by readers.
 
-This contract adapts the [PDS4 Standards Reference 1.26.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.26.0.0/StdRef_1.26.0.pdf)
-(SR). The [Data Provider’s Handbook 1.26.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.26.0.0/PDS4_DPH_1.26.0.pdf)
-(DPH) explains its use. Both are dated 1 April 2026; their versioned links fix the
-references used here. [ESA’s Planetary Science Archive uses PDS4 too](https://www.cosmos.esa.int/web/psa/pds4-standards).
-For plain language, use [ISO 24495-1:2023, first edition](https://www.iso.org/standard/78907.html),
-§4 and §5.1–5.4, as applied in [Plain language](#plain-language) below. Its
+The pinned PDS4 references are the [Standards Reference 1.26.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.26.0.0/StdRef_1.26.0.pdf)
+(SR) and [Data Provider’s Handbook 1.26.0](https://pds.nasa.gov/data/pds4/documents/document_pds4_standards/1.26.0.0/PDS4_DPH_1.26.0.pdf)
+(DPH), both dated 1 April 2026. [ESA’s Planetary Science Archive also uses PDS4](https://www.cosmos.esa.int/web/psa/pds4-standards).
+
+| Reference | Requirement adapted here |
+| --- | --- |
+| SR §6D.2–6D.3 | Product identifiers and versions, distinct from file hashes and code revisions |
+| SR §8–8A | Data origin, processing, meaning, limits and supporting documentation |
+| SR §7 and §8D | Units, coordinates, datum, orientation, observation time and coverage |
+| SR §8C; DPH §2.2.1 | Provider calibration and processing levels, distinct from our processing |
+| DPH §11.1–11.4 | Separate checks of metadata/files, decoding, scientific meaning and completeness |
+
+Apply [ISO 24495-1:2023, first edition](https://www.iso.org/standard/78907.html),
+§4 and §5.1–5.4, through [Plain language](#plain-language). Its
 [public preview](https://cdn.standards.iteh.ai/samples/78907/d194fac21d6a45f38bfcfec9657f7498/ISO-24495-1-2023.pdf)
 includes the principles and the start of the guidelines.
 
-| Reference | Rule we adopt for cssEarth |
-| --- | --- |
-| SR §6D.2–6D.3: identifiers and versions | Preserve the provider’s product identifier and release, separately from our file hash and code revision. |
-| SR §8–8A: documentation | Explain data origin, processing, meaning and limits in the body README. Keep necessary detailed records with the sources. |
-| SR §7 and §8D: units and geometry | Record applicable units, coordinate frame, datum, orientation, observation time and coverage. |
-| SR §8C; DPH §2.2.1: calibration and processing levels | Distinguish the provider’s processing from our calculations and display adjustments. |
-| DPH §11.1–11.4: validation | Separate metadata and file checks, correct reading of the data, scientific checks and completeness of the tested result. |
-
-The table is our adaptation. Markdown READMEs, existing manifests, SHA-256 pins,
-Git revisions, reproduction comparisons and browser evidence are cssEarth choices.
-This contract does not claim PDS4 archive compliance or assessed ISO conformity.
-It adds no XML labels, formal archive submission or second provenance format.
-
-A body can combine PDS3, PDS4, Earth-observation, solar and other published data.
-Keep their native identifiers and metadata. Use a supplied PDS4 LIDVID, PDS3
-dataset/product ID, DOI or published release identifier; do not invent a PDS
-identifier for a source that has none.
+This is a cssEarth adaptation using Markdown, existing manifests, SHA-256 pins,
+Git revisions, reproduction comparisons and browser evidence. It claims neither
+PDS4 archive compliance nor assessed ISO conformity, and requires no XML labels,
+archive submission or second provenance format.
 
 ## File ownership
 
 | File | Maintained content |
 | --- | --- |
-| Body `README.md` | One account of source selection, interpretation, our processing, evidence and known problems. |
-| Body `NOTICE.md` and supplied license files | Required acknowledgments and reuse terms. The README links here instead of repeating a credits section. |
-| `source/manifest.json` | Input identities, locations, byte pins, acquisition records and per-input credits, using its existing fields. |
-| `object.json` and `source/preparation/` | Executable preparation choices and exact parameters. Explain their scientific meaning in the README; do not keep another parameter list. |
-| `prepared/provenance.json` | Generated connections between inputs, processing and outputs. Never edit these connections by hand. |
-| Root `runtime-assets.json` | Generated delivery inventory used by installation and publication. |
-| Reports and images under `docs/` | Original evidence for a dated run and the version tested. The README states the result and links the report. |
-| Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow. |
+| Body `README.md` | The single account of sources and evidence described below |
+| Body `NOTICE.md` and supplied license files | Required acknowledgments and reuse terms; link here instead of duplicating credits |
+| `source/manifest.json` | Input identities, locations, byte pins, acquisition records and per-input credits |
+| `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
+| `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
+| `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
+| Reports and images under `docs/` | Original reports, screenshots and logs tied to the version tested |
+| Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |
 
-`prepared/runtime-assets.json`, where present, is a generated copy of the staging
-inventory. Provenance reads it; installation reads the root inventory. The two
-must agree. Preparation writes both; agents must not maintain them independently.
-See [prepared provenance](../object-provenance.md) for the machine record format.
+Every file under `source/` needs a manifest entry. Body packages contain data,
+not private executables. Shared astronomy, artwork and sky sources keep their
+existing records.
+
+Where present, `prepared/runtime-assets.json` is the staging inventory copy read
+by provenance; installation reads the inventory at the body root. Preparation writes
+both and they must agree. Do not maintain them independently.
 
 ### Body README
 
-Show **Sources**, **Evidence** and **Known problems** before technical methods.
-Use a small source table, brief result bullets and short paragraphs. Explain the
-selected data and its meaning without turning table cells into paragraphs.
-Do not add a separate SOURCE summary, EVIDENCE index or USAGE guide.
+Use one `README.md` per body. Show **Sources**, **Evidence** and **Known problems**
+before methods: a small source table, brief results with links to original reports,
+and short paragraphs.
+Keep observation dates, measured-versus-modeled meaning, false color, coverage
+limits, failures and unresolved problems beside their claims, outside collapsed methods.
 
-Put lengthy calculations, decoding steps and source surveys in clearly labeled
-`<details>` sections below that overview, inside the same README. Split expanded
-methods into short paragraphs or steps too. Link existing detailed method notes
-instead of copying them; do not create a second account to shorten the page.
+Put long calculations, decoding steps and source surveys in labeled `<details>`
+sections below the overview, using short paragraphs or steps. Link existing
+method notes instead of copying them. Do not create a second account, separate
+SOURCE summary, EVIDENCE index or body USAGE guide.
 
-Keep observation dates, measured-versus-modeled meaning, false color, material
-coverage limits, failures and unresolved problems visible without expanding
-anything. The overview states the consequence; the method explains the calculation.
-Check the rendered page with details closed before committing.
+### Examples
 
-Every file under `source/` needs a manifest entry. Reports, screenshots and test
-logs belong under `docs/`. Body packages contain data, not private executables.
-
-### Existing bodies
-
-New bodies use README. When substantially updating an older body's documentation,
-merge useful SOURCE content into README and remove the duplicate file. Update
-active links and audit paths; preserve paths and hashes inside historical reports.
-The package check accepts README or legacy SOURCE so other bodies keep working.
-A small unrelated correction does not require migrating the whole body.
-
-The migrated examples are [67P](../../src/planets/comet-67p/README.md),
+Examples: [67P](../../src/planets/comet-67p/README.md),
 [Earth](../../src/planets/earth/README.md), [Sun](../../src/planets/sun/README.md)
 and [Rhea](../../src/planets/rhea/README.md).
 
 ## Identify and explain the sources
 
-For new or changed inputs, record the provider, product and release, URL, file
-size, hash, credits and terms in the existing manifest and acquisition recipe.
-A hash identifies bytes; it does not replace the provider’s product version.
-Required files must be checked in or downloadable through that recipe. Keep the
+For each new or changed input, record provider, product/release, URL, byte count,
+hash, credits and terms in the existing manifest and acquisition recipe. Preserve
+native identifiers: PDS4 LIDVID, PDS3 dataset/product ID, DOI or other published
+release ID. Do not invent PDS identifiers. A hash identifies bytes, not the
+provider's version or our code revision.
+
+Bodies may combine PDS3, PDS4, Earth-observation, solar and other published data.
+Required inputs must be checked in or downloadable through their recipe. Keep
 labels and metadata needed to interpret them. Read dates, units, identifiers
-and processing levels from those records; do not copy them from another input.
-If a label, manifest or recipe disagrees, record the disagreement and resolve it
-from the source before using that fact in a scientific claim.
+and processing levels from the selected input. Record disagreements between
+labels, manifests and recipes, and resolve them from the source before making
+a scientific claim.
 
-Say which bytes the hash identifies. If we converted an image, normalized a
-response or assembled a mosaic before saving it, explain that step. If the
-original download's identity is unknown, say so. There is no requirement to keep
-every temporary response.
+Say which bytes a hash identifies. If we converted an image, normalized a response
+or assembled a mosaic before pinning it, explain that step. Disclose an unknown
+original download identity.
+Keeping every temporary response is unnecessary.
 
-Explain the source meaning in the body README. Put lengthy field definitions
-and calculations in existing source notes and link them. Cover what matters:
+Explain the following where relevant:
 
-- Whether the view shows observations, derived measurements, a model or an
-  illustration. Preserve the provider’s processing level and the system it uses,
-  when supplied. An untouched download of calibrated data is still calibrated.
-  Do not assign an official level to our display output without a source basis.
-- Units, coordinate frame, datum, epoch, resolution and coverage, where relevant.
-- Rules for valid or missing data, corrections made upstream and our processing.
-- Source uncertainty, display simplification and visual enhancement.
+- Observations, derived measurements, models or illustrations; the provider's
+  processing level and classification system. An untouched calibrated download
+  is still calibrated; our display output gets no official level without a source basis.
+- Units, coordinate frame, datum, orientation, epoch, observation dates, resolution
+  and coverage; valid/missing data, upstream corrections and our processing.
+- Source uncertainty, display simplification and visual enhancement. Keep limits
+  affecting viewers in the product's dataset description too.
 
-Keep limits that affect a viewer's interpretation in the product's dataset
-description too. Link generated processing records instead of rewriting them.
-For facts outside those records, such as a factsheet value or orbital assumption,
-name the source field or table and show the calculation. Shared astronomy,
-artwork and sky sources stay in their existing records.
-
-Record useful alternatives and why they were selected, rejected or left unresolved
-with the relevant dataset. A failed download does not show that a dataset
-does not exist. Update NOTICE when credits or terms change. Link the provider's
-terms, or say what remains unresolved; a publisher name or repository license
-alone does not establish the input's reuse terms.
+Link generated processing records. For facts outside them, such as factsheet
+values or orbital assumptions, name the source field/table and show any calculation.
+Record useful alternatives and why they were selected, rejected or unresolved;
+a failed download does not establish that a dataset does not exist. Link the
+provider's reuse terms or state what is unresolved: a publisher name or repository
+license alone does not establish an input's terms.
 
 ## Save enough evidence to check the result
 
-The body README summarizes the checks, results and known problems and links the
-original reports. Reuse their existing locations. A new independent run can use
-a descriptive dated folder under `docs/evidence/`. No extra JSON format or fixed
-set of files is required.
+Keep reports in their existing locations; new independent runs may use descriptive
+dated folders under `docs/evidence/`. No extra JSON format or fixed file set is required.
+Record:
 
-Make three things clear:
-
-- **What was tested:** the bodies and views, code revision, and relevant source,
-  prepared and runtime records. Link existing manifests rather than copying them.
-  Save any uncommitted changes and identify ignored files used by the test.
-  Include relevant shared code and the files actually served to the browser;
-  a port number or Git commit alone cannot identify those differences. For files
-  not fixed by the recorded revision or an existing manifest, record size and hash.
-- **What happened:** the command or method, selected cases, results, failures and
-  checks left out. Say whether a result checks metadata/files, decoding, scientific
-  meaning or application behavior; a pass in one does not establish the others.
-  Record environment details that affect the result. Browser reports need the
-  browser, viewport, DPR, camera, view and settings.
-- **Where to inspect it:** links to original reports and the screenshots needed
-  to assess the result. If a report names a working path, show where that file
-  was saved for review. A Git path at a recorded revision is enough. Files stored
-  elsewhere need a stable download location, byte count and hash. An ignored
-  local path alone is not evidence another reviewer can retrieve.
-
-For a small correction, add a dated result to the existing report and update the
-README’s evidence section. Keep earlier outcomes intact. Do not overwrite a
-failure or label an old screenshot as new.
+- **What was tested:** bodies and views, code revision, and relevant source,
+  prepared and runtime records. Link manifests. Save uncommitted changes, identify
+  ignored files and include relevant shared code and the files actually served
+  to the browser. A commit or port alone cannot identify those differences. Record
+  byte counts and hashes for files not fixed by the revision or a manifest.
+- **What happened:** command or method, cases, results, failures and omitted checks.
+  Distinguish metadata/file, decoding, scientific and application checks; a pass
+  in one does not establish the others. Include environment details that affect
+  the result. Browser reports need browser, viewport, DPR, camera, view and settings.
+- **Where to inspect it:** links to original reports and screenshots needed to assess the
+  result. Map working paths to retrievable copies. A Git path at the recorded
+  revision suffices; external files need a stable download location, byte count
+  and hash. An ignored local path alone is not retrievable evidence.
 
 ## Say what the checks prove
 
 **Reproduction needs a comparison.** State which inputs were downloaded, copied
-or verified. Before a reproduction run, name the expected output inventory.
-Compare regenerated files against that fixed target, exactly by default. If a
-numerical or visual tolerance is needed, state its limit and where it applies
-before comparing, then report the differences. Creating an inventory from the
-new output alone does not prove reproduction of a previous result.
+or verified. Choose the expected output inventory before the run and compare
+regenerated files against that fixed baseline, exactly by default. Declare any numerical/visual
+tolerance and its scope before comparing, then report differences. An inventory
+created only from new output cannot prove reproduction of an earlier result.
 
-**Scientific checks need an independent reference.** Check changed scientific
-meaning against source values or an independent calculation. Matching hashes or
-calling the same sampler twice cannot detect a shared interpretation error.
-The existing `recovered` and `prepared` labels describe how the provenance
-record was made; neither proves scientific accuracy, fresh acquisition or a
-passing browser check.
+**Scientific checks need an independent reference.** Compare changed scientific meaning with
+source values or an independent calculation. Matching hashes or calling the same
+sampler twice misses shared interpretation errors. `recovered` and `prepared`
+describe how provenance was made; neither proves scientific accuracy, fresh
+acquisition or passing browser checks.
 
-**Visual checks need inspected images.** Identify the reference: a source or
-native capture, an earlier product image, or a reconstructed diagnostic. For a
-matched comparison, save the reference, new image and diff with matching capture
-settings. If the source or framing differs, explain the limit and do not claim
-pixel matching. Inspect the affected views, boundaries and lighting. Use the
-existing browser checks.
+**Visual checks need inspected images.** Identify the reference as a source/native
+capture, earlier product image or reconstructed diagnostic. For matched comparisons,
+save reference, new image and diff with matching capture settings. Explain different
+sources or framing and withhold pixel-matching claims. Inspect images of affected
+views, boundaries and lighting. Use the existing browser checks.
 
-**An old pass describes an old version.** Keep its original revision and outcome.
-To reuse it, name the new version in the README’s evidence section and show that
-the dependencies relevant to the result still match. Do not add a permanent
-`CURRENT` flag to an old report. Unchanged textures do not prove camera or shell
-behavior after that code changes.
+**An old pass describes an old version.** Keep its original paths, hashes, revision
+and outcome. To reuse it, name the new version in the README's evidence section
+and show that relevant dependencies still match. Do not mark an old report permanently `CURRENT` or use
+unchanged textures to prove behavior after camera/shell changes.
 
-A passing body test is not a passing full suite. Installing runtime images does
-not prove source restoration, complete Earth paging or availability of every
-remote file. Report the checks actually performed and what they leave unknown.
+A passing body test is not a full-suite pass. Runtime image installation does
+not prove source restoration, complete Earth paging or every remote file's
+availability. State what remains unknown.
 
 ## Update the docs with the change
 
-Update the affected source records and credits, and explain the change in the
-body README. Run the relevant checks, save the original reports and update the
-README’s evidence and known problems. Fix older records needed for this work;
-an unrelated edit does not require documenting a body's entire history.
+Update affected records, NOTICE credits/terms and the body README's explanation,
+results and known problems. Run relevant checks. For small corrections, append
+a dated result to the existing report; never overwrite failures or present old
+screenshots as new. Extend existing sections when adding a dataset.
 
-Commit useful docs, source records and evidence needed for review. Keep scratch
-output and repetitive logs ignored. Explain unusually large additions once in
-the PR; use agreed storage when appropriate. Keep the originals needed to assess
-the result, including relevant failures and partial runs. Do not remove historical
-evidence until its replacement is authorized and verified. This contract does
-not authorize uploads or moving stored evidence.
+Commit the docs, source records and original evidence needed for review, including
+relevant failures and partial runs. Keep scratch output and repetitive logs ignored;
+explain unusually large additions once in the PR and use agreed storage. Historical
+evidence may be removed only after its replacement is authorized and verified.
+This contract authorizes neither uploads nor moving stored evidence.
 
-Extend the existing sections when adding a dataset. Add a shared rule only when
-it fills a demonstrated gap; cite its standard and
-section, or identify it as a cssEarth requirement. Do not repeat this standards
-table in every body or add a compliance checklist to each PR.
-
-The documentation owner fixes shared guidance and contradictions. Contributors
-update their body notes and any shared instructions affected by their change;
-there is no extra approval step. A new preparation operation still needs to
-record its sources and outputs and have tests in the existing tools. Add new
-infrastructure only when a specific tool needs it.
+**PROVENANCE DOCUMENTATION** maintains shared guidance and resolves contradictions;
+contributors update instructions affected by their change without an extra approval
+step. Add shared rules only for demonstrated gaps, citing the standard/section or
+identifying a cssEarth requirement. Do not repeat the standards table per body or
+add PR compliance checklists. New preparation operations still need source/output
+records and tests in existing tools; add infrastructure only for a specific tool need.
 
 ## Plain language
 
-Apply ISO 24495-1:2023 to the content and its presentation. The primary readers
-are contributors and reviewers checking or changing a body. Assume basic repo
-knowledge, but not familiarity with each mission or instrument. The overview
-should also help a viewer understand what a map shows.
+Write for contributors and reviewers checking or changing a body. Assume basic
+repository knowledge, not familiarity with every mission or instrument. The
+overview should also help viewers understand the map.
 
-| ISO principle | Application in this repository |
+| ISO principle | Apply it here |
 | --- | --- |
-| Relevant (§5.1) | Answer the reader's source, meaning, processing and evidence questions. Keep the facts needed to judge a view; remove unrelated history and generic claims. |
-| Findable (§5.2) | Use the body layout above, descriptive links and dataset names in method headings. Keep each limitation beside its claim and essential problems outside collapsed details. |
-| Understandable (§5.3) | Name the source and action. Explain unfamiliar terms where needed; preserve scientific names, units, uncertainty and distinctions between observations and models. |
-| Usable (§5.4) | Review while drafting and after changes. Check whether readers can trace a claim to its source and test result, identify its limits, and find the record to update. |
+| Relevant (§5.1) | Keep facts needed to judge the view; remove unrelated history and generic praise. |
+| Findable (§5.2) | Use the README layout above, descriptive links and dataset names in method headings. Keep limitations beside claims. |
+| Understandable (§5.3) | Name the dataset, action and result. Explain unfamiliar terms; preserve necessary technical terms, units, formulas and uncertainty. State unknowns; do not invent measurements. |
+| Usable (§5.4) | While drafting and after changes, check that readers can trace sources and results, understand meaning and limits, and locate the record to change. |
 
-- Name the dataset and the action: what we downloaded, calculated, changed or
-  checked. Remove praise such as “rigorous,” “comprehensive” or “seamless.”
-- Replace vague claims with evidence. “Validated” needs a named check and result;
-  “reproduced” needs a comparison. If the result is unknown, say so. Never invent
-  a measurement to make a sentence sound concrete.
-- Keep scientific names, units, formulas and necessary technical terms. Explain
-  an unfamiliar term when it matters. Remove agent-process jargon and descriptions
-  of how carefully the work was carried out.
-- State each explanation once. Put a limitation beside the claim it qualifies;
-  avoid repeating a general disclaimer after every paragraph. Use short paragraphs
-  with one subject, and bullets for separate results or decisions.
+State each explanation once. Remove repeated disclaimers, agent-process jargon
+and claims about how carefully work was done. Use short paragraphs with one subject
+and bullets for separate results or decisions; avoid table cells that become
+paragraphs. Replace vague “validated” claims with named checks and outcomes.
 
-Examples using the 67P records:
-
-| Replace | With |
-| --- | --- |
-| “A source-backed geometry pipeline preserves bounded fidelity.” | “We reduced the ESA shape model from 104,192 to 1,000 triangles.” |
-| “The integration was successfully validated.” | “All 60 comet browser cases passed. The renderer suite had nine failures.” |
-| “The imagery is not a pixel-parity oracle.” | “The photographs and browser views have different camera settings, so they cannot be compared pixel by pixel.” |
-
-Use these reader tasks in the existing review, including the rendered page.
-For a new layout or recurring confusion, involve an intended reader on a small
-scale and revise from their feedback. Author and agent reviews help, but are
-not reader testing. Revisit the explanation when sources, behavior or reader
-feedback change. Word counts and readability scores do not establish usability.
-Keep this work in the existing review; it needs no separate report or approval.
+Before committing, inspect the rendered README with methods collapsed. For a new
+layout or recurring confusion, involve an intended reader on a small scale and
+revise from feedback.
+Author and agent reviews are not reader testing; word counts and readability scores
+do not establish usability. Revisit explanations when sources, behavior or feedback
+change. Use the existing review, without a separate report.

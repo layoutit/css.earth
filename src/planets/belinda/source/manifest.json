@@ -91,18 +91,6 @@
   ],
   "documents": [
     {
-      "path": "NOTICE.md",
-      "expectedBytes": 1035,
-      "expectedSha256": "fa7548d4fe50c9ba70e45f3a08e01a244fd08b8164a8ee8c3cc2c52b12c7bf31",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
-    },
-    {
-      "path": "SOURCE.md",
-      "expectedBytes": 5030,
-      "expectedSha256": "44d4f5471fca006df528f40b19c1f1e221f92046497fc7e8b2c998cf55c71ed7",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
-    },
-    {
       "path": "content/object.json",
       "expectedBytes": 3821,
       "expectedSha256": "3907c8c5b61134e66686ab988fd8e6f4753c1714eb65e42ff91047727f41f58d",

@@ -1,13 +1,29 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
+import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mjs';
 
-const prepared = JSON.parse(await readFile(new URL('../../../../src/planets/deimos/prepared/object.json', import.meta.url), 'utf8')).data;
+const source = JSON.parse(await readFile(new URL('../../../planets/deimos/prepared/runtime.json', import.meta.url), 'utf8'));
+// The published Deimos package can retain native depth. Validate the optional
+// partition transport against explicit carriers, independent of that bake choice.
+const prepared = structuredClone(source), groups: { root: number; scene: number }[] = [];
+const node = (parent: number) => ({ parent, tag: 'div', className: null, style: '', properties: [], attributes: {} });
+prepared.facing = [];
+for (let index = 0; index < 2; index++) {
+  const root = prepared.tree.nodes.length, scene = root + 1, leaf = root + 2;
+  prepared.tree.nodes.push(node(prepared.tree.camera), node(root), node(scene));
+  groups.push({ root, scene });
+  prepared.facing.push({ target: leaf, plane: [0, 0, 1, 0], tolerance: 1 });
+}
+prepared.depthPartitions = { groups, order: { plane: [1, 0, 0, 0], back: { group: 0 }, front: { group: 1 } } };
+prepared.tree.activationGroups = prepareActivationGroups(prepared);
 
-test('the actual grouped surface keeps one object camera and validates before DOM construction', () => {
+test('the published package and explicit grouped carriers validate before DOM construction', () => {
+  expect(parsePreparedObjectRuntime(source)).toBe(source);
   const plan = parsePreparedObjectRuntime(prepared);
   expect(plan.depthPartitions?.groups.length).toBeGreaterThan(1);
-  expect(plan.facing?.length).toBe(plan.surfaceHit?.triangles.length);
+  expect(plan.tree.camera).toBe(source.tree.camera);
+  expect(plan.facing?.length).toBe(2);
 });
 
 test('transport rejects missing or duplicated depth ownership and invalid separating planes', () => {
@@ -26,7 +42,7 @@ test('transport rejects missing or duplicated depth ownership and invalid separa
   }
 });
 
-test('fixed visibility sequences cover the actual retained carriers', () => {
+test('fixed visibility sequences cover every retained carrier', () => {
   const plan = structuredClone(prepared);
   plan.depthPartitions.order = { sequence: plan.depthPartitions.groups.map((_: unknown, group: number) => ({ group })) };
   expect(parsePreparedObjectRuntime(plan).depthPartitions?.groups.length).toBe(plan.depthPartitions.groups.length);

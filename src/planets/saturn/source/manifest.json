@@ -116,7 +116,7 @@
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, wephm=y, watm=y, OBJECT-DATE=2026/08/29 12:00, OBJECT-NAME=Saturn",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "U.S. government scientific model response",
-      "acquisition": "shared verify-request operations in preparation/acquisition.json, with the checked seed and generator parameters documented in SOURCE.md",
+      "acquisition": "shared verify-request operations in preparation/acquisition.json, with the checked seed and generator parameters documented in README.md",
       "redistribution": "checked text configuration with NASA attribution",
       "consumers": [
         "spectrum",

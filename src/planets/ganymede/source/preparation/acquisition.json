@@ -40,6 +40,39 @@
       ],
       "path": "system/jupiter-hubble.png",
       "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/577.3nm_band_ganymede_night_1.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/38a80f72d220dc18ccb5d8b3296041cfcce8d703",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/577.3nm_band_ganymede_night_2.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/550f3c8f151a9360bcfa076fdb05b97d1065c01e",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "surface-chemistry"
+      ],
+      "path": "muse/577.3nm_band_ganymede_night_3.fits",
+      "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/c6016c8d28a08170a3660a89485bb7d5ebf5fafb",
+      "headers": {
+        "Accept": "application/vnd.github.raw+json"
+      }
     }
   ]
 }

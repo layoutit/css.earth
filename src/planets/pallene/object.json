@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 9.695652173913043,
       "bodyRadiusM": 2230
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pallene-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2066769ebac7922f7f1574b6bcab5b0e6a69b240a249b4cf545848e7b56c395b"
+      }
     }
   },
   "prepared": {

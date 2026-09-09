@@ -1,0 +1,163 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.84",
+  "baseUrl": "http://127.0.0.1:4291",
+  "browserLaunch": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b8-final-conformance/io/chrome-process-8T67Er/launch-chrome.sh",
+    "wrapperSha256": "317dd50bc220ebbd7d8c2c3ffe9cb7420927dfbdec935ab26a1cb7b08eaf8331",
+    "stdioLogPath": "output/playwright/b8-final-conformance/io/chrome-process-8T67Er/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "capturedAt": "2026-09-09T21:48:11.508Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "io",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "io",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "io",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 109467,
+      "stable": true
+    },
+    {
+      "id": "io",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 122.76932410490376,
+          "shadowPixels": null
+        },
+        {
+          "id": "enhanced",
+          "interior": false,
+          "geometryDisplacement": 122.37472365406153,
+          "shadowPixels": null
+        },
+        {
+          "id": "geology",
+          "interior": false,
+          "geometryDisplacement": 122.09286992064357,
+          "shadowPixels": null
+        },
+        {
+          "id": "spectral-slope",
+          "interior": false,
+          "geometryDisplacement": 125.10003493396728,
+          "shadowPixels": null
+        },
+        {
+          "id": "visible-absorption",
+          "interior": false,
+          "geometryDisplacement": 124.84667602985984,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "io",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 2,
+      "datasets": [
+        {
+          "id": "normal",
+          "interior": false,
+          "geometryDisplacement": 122.76932410490376,
+          "shadowPixels": null
+        },
+        {
+          "id": "enhanced",
+          "interior": false,
+          "geometryDisplacement": 122.37472365406153,
+          "shadowPixels": null
+        },
+        {
+          "id": "geology",
+          "interior": false,
+          "geometryDisplacement": 122.09286992064357,
+          "shadowPixels": null
+        },
+        {
+          "id": "spectral-slope",
+          "interior": false,
+          "geometryDisplacement": 134.20161611582344,
+          "shadowPixels": null
+        },
+        {
+          "id": "visible-absorption",
+          "interior": false,
+          "geometryDisplacement": 129.42920918864715,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "io",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "io",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "io",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "io",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "io",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "io",
+      "case": "dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "io",
+      "viewport": "lens-race",
+      "lens": "normal",
+      "slowDecodeCount": 1
+    },
+    {
+      "id": "io",
+      "viewport": "lens-reacquire",
+      "lens": "enhanced"
+    },
+    {
+      "id": "io",
+      "viewport": "lens-rejection-retry",
+      "lens": "enhanced"
+    },
+    {
+      "id": "io",
+      "viewport": "lens-destroy"
+    }
+  ]
+}

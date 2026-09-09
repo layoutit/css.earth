@@ -1,4 +1,4 @@
-/** Reuse the route's Astro output; this transport does not render a second shell. */
+/** The static fragment shares page components, but omits the resident card bank and catalog. */
 export function createNavigationContent({ documentTarget, windowTarget, fetchPage = windowTarget.fetch.bind(windowTarget) }) {
   let styles = [...documentTarget.head.querySelectorAll('style, link[rel="stylesheet"]')];
   const key = element => element.tagName === 'LINK' ? `link:${element.href}`
@@ -6,7 +6,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fetchPag
 
   return Object.freeze({
     async load(object, { signal }) {
-      const response = await fetchPage(object.route, { signal });
+      const response = await fetchPage(`/navigation/${object.id}/`, { signal });
       if (!response.ok) throw new Error(`Object content request failed: ${response.status}.`);
       const source = new windowTarget.DOMParser().parseFromString(await response.text(), 'text/html');
       if (signal.aborted) throw signal.reason;

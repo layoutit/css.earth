@@ -81,7 +81,7 @@ const report = {
     earthStyles: "src/renderers/css/styles/earth-surfaces.css",
     earthLenses: "src/planets/earth/prepared/lenses.json",
     earthSourceManifest: "src/planets/earth/source/manifest.json",
-    saturnSource: "src/planets/saturn/SOURCE.md",
+    saturnSource: "src/planets/saturn/README.md",
     saturnScene: "src/planets/saturn/prepared/scene.json",
     saturnAssets: "src/planets/saturn/runtime-assets.json",
     saturnClient: "src/renderers/css/dist/index.js",

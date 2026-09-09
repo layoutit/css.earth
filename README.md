@@ -189,8 +189,8 @@ object-owned NASA and JPL sources, without adding another registry entry here.
 cssEarth source code is [MIT licensed](LICENSE). Scientific data, imagery, and
 prepared derivatives retain the terms and attribution of their respective
 sources. See the planet-owned
-[Mars](src/planets/mars/SOURCE.md) and
-[Saturn](src/planets/saturn/SOURCE.md) source records for exact provenance,
+[Mars](src/planets/mars/README.md) and
+[Saturn](src/planets/saturn/README.md) source records for exact provenance,
 presentation limits, and credits. NASA and other source credits do not imply
 endorsement.
 

@@ -4,12 +4,12 @@ Six archived NASA/JPL radar models extend the registry from 78 to 84 asteroids. 
 
 | Number | Body and source notes | Original triangles | Prepared triangles | Reference radius (km) |
 | --- | --- | ---: | ---: | ---: |
-| 1620 | [Geographos](../src/planets/geographos/SOURCE.md) | 4,092 | 800 | 1.284042 |
-| 2063 | [Bacchus](../src/planets/bacchus/SOURCE.md) | 508 | 508 | 0.315 |
-| 4486 | [Mithra](../src/planets/mithra/SOURCE.md) | 5,996 | 800 | 0.845 |
-| 4660 | [Nereus](../src/planets/nereus/SOURCE.md) | 2,292 | 800 | 0.165 |
-| 6489 | [Golevka](../src/planets/golevka/SOURCE.md) | 4,092 | 800 | 0.265 |
-| 54509 | [YORP](../src/planets/yorp/SOURCE.md) | 572 | 572 | 0.0564 |
+| 1620 | [Geographos](../src/planets/geographos/README.md) | 4,092 | 800 | 1.284042 |
+| 2063 | [Bacchus](../src/planets/bacchus/README.md) | 508 | 508 | 0.315 |
+| 4486 | [Mithra](../src/planets/mithra/README.md) | 5,996 | 800 | 0.845 |
+| 4660 | [Nereus](../src/planets/nereus/README.md) | 2,292 | 800 | 0.165 |
+| 6489 | [Golevka](../src/planets/golevka/README.md) | 4,092 | 800 | 0.265 |
+| 54509 | [YORP](../src/planets/yorp/README.md) | 572 | 572 | 0.0564 |
 
 Original coordinates retain their kilometer scale. Reference radii supply display and scalar datums; they do not rescale the meshes. Geographos uses the volume-equivalent radius calculated from the selected archive geometry. The other five use the equivalent diameter associated with their published model.
 

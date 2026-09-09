@@ -1,0 +1,188 @@
+{
+  "base": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
+  "review": "Independent read-only review found no actionable scientific, editorial or provenance defects.",
+  "objects": [
+    {
+      "id": "io",
+      "sourceManifestSha256": "8fcf2b685e212acdb95fd16368a8f51817b3f21da16de5aeaef329d8f2c625b6",
+      "addedInputPins": [
+        {
+          "path": "muse/485nm_slope_io_night_1.fits",
+          "bytes": 132480,
+          "sha256": "fca35e89f83f222978ffbfd40154d91ef03ab85f09a86fb605ae0420de46479d"
+        },
+        {
+          "path": "muse/485nm_slope_io_night_2.fits",
+          "bytes": 132480,
+          "sha256": "58ae63f314d44d3f724b9cc7aeeea7475d9f64ea29005e01c4369f88d3893c31"
+        },
+        {
+          "path": "muse/485nm_slope_io_night_3.fits",
+          "bytes": 132480,
+          "sha256": "fbed77eb6281eb850ff0bc948da12bcec2861ae7a9b9ae453942ec3b668697ff"
+        },
+        {
+          "path": "muse/560nm_band_io_night_1.fits",
+          "bytes": 132480,
+          "sha256": "60126a3558ae1c414ac556d9029107aff209a53cd4bf6ddb8eb46bb76987bf3b"
+        },
+        {
+          "path": "muse/560nm_band_io_night_2.fits",
+          "bytes": 132480,
+          "sha256": "576242a7c73658b8767f77eca70b9833f196ad95fef455cdc3002f0cd77bcfcc"
+        },
+        {
+          "path": "muse/560nm_band_io_night_3.fits",
+          "bytes": 132480,
+          "sha256": "4e5747a2acb901f389ca962316f1b7250331c8ee7fcf92b040cedfc50e3cb6d5"
+        },
+        {
+          "path": "muse/io/485nm_slope-night-1.tif",
+          "bytes": 12012,
+          "sha256": "d8b3ce837b7db28a255eae9aaf9eda61717121ab1241f392f765014641ade58a"
+        },
+        {
+          "path": "muse/io/485nm_slope-night-2.tif",
+          "bytes": 12028,
+          "sha256": "41e87a8222840afce00a1427fbcff3491bfb13fe6e599dbb6336a96551196ba9"
+        },
+        {
+          "path": "muse/io/485nm_slope-night-3.tif",
+          "bytes": 12297,
+          "sha256": "b8667cc9de8bc46184aea14932bc950a6c66793bd99ce2f5dac9ee9aa230a99f"
+        },
+        {
+          "path": "muse/io/560nm_band-night-1.tif",
+          "bytes": 12689,
+          "sha256": "5a884deb172fbec39a1192b2149e5e2452644d0ac4402d4e948b7d5a204f3e02"
+        },
+        {
+          "path": "muse/io/560nm_band-night-2.tif",
+          "bytes": 12790,
+          "sha256": "eff9a10c9b342c06f9426d01c6a884e291dd9eb681bbb47804a5a3044c7e8a29"
+        },
+        {
+          "path": "muse/io/560nm_band-night-3.tif",
+          "bytes": 12820,
+          "sha256": "cd8fd566af1e3024c389b2c8d6816474aee9db56d0288e51c3993f063e9aca21"
+        }
+      ],
+      "priorInputsUnchanged": true
+    },
+    {
+      "id": "ganymede",
+      "sourceManifestSha256": "4b1a55dc054828c9d764c093e35aad58d41bdebb166c0a7f49282e7defba0bb5",
+      "addedInputPins": [
+        {
+          "path": "muse/577.3nm_band_ganymede_night_1.fits",
+          "bytes": 132480,
+          "sha256": "9354868840c81e85d65c6a0882ea71e3f01d7258860fdd679321e4e88aa956b8"
+        },
+        {
+          "path": "muse/577.3nm_band_ganymede_night_2.fits",
+          "bytes": 132480,
+          "sha256": "7b6e1a2c27bfc1418147e0a59a628c96d5b28d5fd1b71295f21d64c2d386ac8d"
+        },
+        {
+          "path": "muse/577.3nm_band_ganymede_night_3.fits",
+          "bytes": 132480,
+          "sha256": "30f997e41fb7f9f99f626c45121e4b6066e97c39bd1fe7bcd6f081e09dc60220"
+        },
+        {
+          "path": "muse/ganymede/577.3nm_band-night-1.tif",
+          "bytes": 10416,
+          "sha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f"
+        },
+        {
+          "path": "muse/ganymede/577.3nm_band-night-2.tif",
+          "bytes": 10400,
+          "sha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa"
+        },
+        {
+          "path": "muse/ganymede/577.3nm_band-night-3.tif",
+          "bytes": 10304,
+          "sha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a"
+        }
+      ],
+      "priorInputsUnchanged": true
+    },
+    {
+      "id": "enceladus",
+      "sourceManifestSha256": "0a20f44c52fe80c2f93a1c3b9e2de30808012c58d571746af2b4bfb8c8bd1d32",
+      "addedInputPins": [
+        {
+          "path": "vims-chemistry/native/C1487299582_1_ir.cub",
+          "bytes": 757411,
+          "sha256": "0ae941db5fb7d2cdcad92232fd6db09863bedeac37d98c7f3e3784021acac8c6"
+        },
+        {
+          "path": "vims-chemistry/native/N1487299582_1_ir.cub",
+          "bytes": 213344,
+          "sha256": "5a6e920af9d083a2e33d04a9b087a353a633e291fc04a55472c6c72de5d077ba"
+        },
+        {
+          "path": "vims-chemistry/native/C1489049741_1_ir.cub",
+          "bytes": 1107563,
+          "sha256": "df1b0ddb11694cde200398d4d153f180450a697606111a21a9d6aab3b7b2eb74"
+        },
+        {
+          "path": "vims-chemistry/native/N1489049741_1_ir.cub",
+          "bytes": 243496,
+          "sha256": "ba88b03a3b4581b928cfab37dc7f9615c7e3ad2db821abd4577be9d34cda0ee6"
+        },
+        {
+          "path": "vims-chemistry/native/C1702362997_1_ir.cub",
+          "bytes": 1170945,
+          "sha256": "8d4c78ee7c7e4710965b21f971e68b5c801eaa31275f13a4b3cd6888b6e429cc"
+        },
+        {
+          "path": "vims-chemistry/native/N1702362997_1_ir.cub",
+          "bytes": 360878,
+          "sha256": "7f40c09a40dfc1bfa27ace7ef930ad1038b862d68ee04b9c3af569d7d3a7dc23"
+        },
+        {
+          "path": "vims-chemistry/native/C1702361128_1_ir.cub",
+          "bytes": 299893,
+          "sha256": "765fb230fac501fcedc4d892825b3342383abdc90fdecb97d0f754397baefc84"
+        },
+        {
+          "path": "vims-chemistry/native/N1702361128_1_ir.cub",
+          "bytes": 155826,
+          "sha256": "2ab80161634205a0b8cb191a6d57a3b84a947fe6a2f173784947eac3db6ecd4b"
+        },
+        {
+          "path": "vims-chemistry/native/C1500061929_1_ir.cub",
+          "bytes": 562059,
+          "sha256": "cb800f624fbb67db7b49c7d9410372e1b08ae988718ca12e40636e8b6c306266"
+        },
+        {
+          "path": "vims-chemistry/native/N1500061929_1_ir.cub",
+          "bytes": 169992,
+          "sha256": "74bb3f1b9b266fb04aea6c2f94d13994197b3e48726f3565479a59aebc5625a1"
+        },
+        {
+          "path": "vims-chemistry/native/C1500061170_1_ir.cub",
+          "bytes": 446859,
+          "sha256": "eecba704d3ec11c14a1278f2ba96ac460d3ad4badb58a114044dcf5c41989d41"
+        },
+        {
+          "path": "vims-chemistry/native/N1500061170_1_ir.cub",
+          "bytes": 158792,
+          "sha256": "b2431342079d460b5111262868a33bb753be16fef3f160ece425500015a90b24"
+        },
+        {
+          "path": "vims-chemistry/enceladus-vims-depth.tif",
+          "bytes": 101934,
+          "sha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d"
+        },
+        {
+          "path": "vims-chemistry/enceladus-vims-ratio.tif",
+          "bytes": 109752,
+          "sha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec"
+        }
+      ],
+      "priorInputsUnchanged": true
+    }
+  ],
+  "visibleCopyReview": "Visual review prompted visible coverage, registration and interpretation caveats and shorter legend units; the numerical inputs and all image bytes remain unchanged."
+}

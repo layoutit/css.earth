@@ -1,5 +1,44 @@
 # 9P/Tempel 1
 
-Source-backed nucleus model with a categorical source-constraint lens. Read [SOURCE.md](SOURCE.md) for coverage and orientation limits; [shared qualification record](../../../docs/comets/QUALIFICATION.md) records verification.
+## Sources
 
-Both views mark source-flagged poorly constrained regions with the shared gray grid. The Source constraints view preserves stereo-control gray and limb-silhouette blue. See the [grid update](../../../docs/comets/CONSTRAINT-GRIDS.md) for current validation.
+- The original [Farnham & Thomas (2013) PDS dataset](https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/dataset.shtml) supplies 16,022 planetocentric vertices and 32,040 zero-indexed triangles.
+
+- 9P/Tempel 1 was visited by Deep Impact in 2005 and Stardust-NExT in 2011.
+
+## Evidence
+
+- The [constraint-grid qualification](../../../docs/comets/CONSTRAINT-GRIDS.md) records checks and captured views.
+
+- The [shared qualification record](../../../docs/comets/QUALIFICATION.md) records verification.
+
+## Known problems
+
+- The default Source constraints lens uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The grid means poorly constrained by those methods, not necessarily wholly unobserved. Neither view claims observed albedo.
+
+- Flag counts are vertex counts, not surface-area percentages. Weak regions are the original authors' estimates, not additional cssEarth terrain.
+
+- Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.
+
+[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+## Methods and source notes
+
+<details>
+<summary>Detailed source survey, assumptions and preparation</summary>
+
+<a id="9ptempel-1-source-and-interpretation"></a>
+
+Kilometres convert to metres; east-positive longitude and north-positive latitude define the released right-handed frame. Original table, label and catalogue bytes are pinned in source/manifest.json.
+
+Their images constrain the published nucleus model. 480 stereo control points on about 70% of the nucleus. The combined model pole is retained at RA 255°, Dec +64.5°.
+
+All published geometry is retained before simplification. Flag 1 means stereo control (11104 vertices), flag 2 limb silhouette (1450), and flag 3 not well constrained (3468). The Shape model view uses the same grid for flag 3 and neutral gray for flags 1 and 2. Nearest 2-degree grid sampling prepares the categorical map; raster filtering softens visual category boundaries and is not a quantitative uncertainty interpolation.
+
+The published equivalent-volume radius 2.83 km supplies scale only; it does not replace the mesh. No measured mass or GM is claimed (the astronomy registry uses its existing zero-for-unknown convention). JPL Horizons elements at JD 2461286.5 supply heliocentric placement; the conic omits perturbations and outgassing. Lighting uses that common epoch and the declared display orientation, not a reconstruction of encounter photographs. No dust, tails, jets or tumble simulation is included.
+
+Meshoptimizer retains original source vertices and closed, consistently wound connectivity, reduced to 1000 triangles. Estimated simplification error 25.353675842285156 m is neither a measurement uncertainty nor a Hausdorff bound. Original-mesh normals and cast shadows are baked into fixed atlases; no geometry, maps or illumination are computed at runtime.
+
+The source grid is selected by categorical flags before raster filtering and lighting. Both atlases per lens, their thumbnails, the constraint minimap, and the model-view context image/navigation marker use the same preparation. Geometry, native triangle leaves, camera and lighting recipes are unchanged.
+
+</details>

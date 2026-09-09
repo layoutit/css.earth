@@ -101,7 +101,7 @@ roster or benchmark denominator. B4 observation charts remain in draft.
 
 ## B7 — Cassini surface atlas
 
-**State:** [draft PR #81](https://github.com/layoutit/cssEarth/pull/81), implemented and delivered; pending aggregate qualification · **Owner:** Moons
+**State:** [merged PR #81](https://github.com/layoutit/cssEarth/pull/81); selected atlas delivered, historical aggregate gaps retained · **Owner:** Moons
 
 Five mapped views across **Titan, Dione and Rhea**: Titan's six-unit global
 geomorphology and paired Cassini VIMS infrared / water-ice absorption views for
@@ -116,6 +116,18 @@ See [scope and reproduction](B7-CASSINI-ATLAS.md), [source review](b7-cassini-at
 and [visual qualification](b7-cassini-atlas/VISUAL-REVIEW.md). This deepens existing
 scenes; the moon roster and benchmark denominator do not change. B4 remains a
 paused draft at the user's request.
+
+## B8 — Surface chemistry on Io, Ganymede and Enceladus
+
+**State:** [Draft PR #87](https://github.com/layoutit/cssEarth/pull/87); selected-body source, package, delivery, visual and interaction review complete; aggregate and newer-main integration gates remain · **Owner:** Moons
+
+The [B8 scope and intake](B8-SURFACE-CHEMISTRY.md) delivers Io's visible spectral
+slope and absorption, Ganymede's oxygen-sensitive reflectance ratio, and two
+partial Cassini VIMS spectral views for Enceladus. Final releases follow the
+completed numerical source review. The image inventory adds 20 files / 585,804
+bytes. Every transformation is offline; shared renderer, camera, navigation and
+shell code stay fixed, and scene geometry/retained trees are preserved. Unavailable or insufficiently
+qualified JIRAM/model products remain explicitly tracked for later work.
 
 ## Parallel execution
 
