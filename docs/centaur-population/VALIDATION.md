@@ -49,3 +49,5 @@ This is one recorded local workload, not a physical-device or every-pose perform
 Main hides the Settings action. Optional shadows were exercised through its existing bound checkbox change event; a visible Settings-button workflow is not claimed. The prepared ring image has fixed schematic opacity; it does not calculate illumination, scattering or ring cast shadows. No source imagery or unresolved terrain is fabricated.
 
 The current main3bad browser pass rechecked both bodies at DPR1/2, default/close views, optional Shadows and shared category/search/handoff. The trace was not repeated because body geometry and image banks are unchanged; its performance numbers describe its recorded earlier build.
+
+After the recorded browser pass, main PR89 added two comets. The data integration retains both comet packages and composes the Centaur additions against its408-body marker atlas. Eight page/minimap tests, two focused astronomy tests and both source/package closures pass on this410-body registry. Existing captures/trace retain their stated build identities; no body assets were rebaked.

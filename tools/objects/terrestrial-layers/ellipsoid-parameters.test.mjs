@@ -26,3 +26,15 @@ test('the common tessellation preserves the established contact-body topology', 
   assert.equal(m.positions.length,2052);assert.equal(m.indices.length,4096);
   assert.ok(Math.abs(m.centersMeters[1]-m.centersMeters[0]-4000*Math.sqrt(.9))<1e-9);
 });
+
+test('published semiaxes retain absolute lengths without a thermal-radius rescale', () => {
+  const model={schema:'cssearth-ellipsoid-parameters@1',scaleConvention:'published-semiaxes',semiaxesKm:[1.95,1.35,1.30],subdivisions:4};
+  const mesh=ellipsoidParameterMesh(model);
+  assert.deepEqual(mesh.axesMeters,[1950,1350,1300]);
+  for(let axis=0;axis<3;axis++){
+    assert.equal(Math.max(...mesh.positions.map(p=>p[axis])),mesh.axesMeters[axis]);
+    assert.equal(Math.min(...mesh.positions.map(p=>p[axis])),-mesh.axesMeters[axis]);
+  }
+  for(const patch of [{semiaxesKm:[1,2,3]},{semiaxesKm:[1,1,0]},{semiaxesKm:[1,1]},{semiaxesKm:[Infinity,1,1]},{thermalRadiusKm:4},{axisRatioAB:2}])assert.throws(()=>ellipsoidParameterMesh({...model,...patch}));
+  assert.throws(()=>ellipsoidParameterMesh({schema:model.schema,scaleConvention:'thermal-radius-as-volume-equivalent',axisRatioAB:1,axisRatioBC:1,thermalRadiusKm:1,semiaxesKm:[1,1,1],subdivisions:4}));
+});

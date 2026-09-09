@@ -42,7 +42,7 @@ node tools/objects/dist/operations.js acquire chariklo
 node tools/objects/dist/prepare-authored.js chariklo --write
 node tools/objects/dist/operations.js acquire bienor
 node tools/objects/dist/prepare-authored.js bienor --write
-node docs/lucy-targets/navigation.mjs --base=1fb76e44d6bf831e7ebcf0516b83c0b10e1716da --inputs=docs/centaur-population/inputs.json --evidence=docs/centaur-population/navigation-evidence.json
+node docs/lucy-targets/navigation.mjs --base=bd265cf3a091c4ef17e9be76dfeb23410364884f --inputs=docs/centaur-population/inputs.json --evidence=docs/centaur-population/navigation-evidence.json
 node docs/centaur-population/refresh-presentations.mjs
 node docs/centaur-population/refresh-transports.mjs
 node docs/centaur-population/integrate-context.mjs
@@ -54,3 +54,5 @@ node docs/centaur-population/verify.mjs
 Astronomy uses the existing JPL Horizons generator at the repository's fixed scene epoch. It does not claim current surface attitude or a real-time orbit solution. Delivery, focused source checks and remaining browser/build boundaries are recorded in [VALIDATION.md](VALIDATION.md).
 
 Main `3badfb535` replaces individual body page wrappers with shared object and navigation routes. Both Centaur packages declare their stylesheet through the existing page contract. Transport refresh writes the corresponding prepared page metadata, and minimap preparation includes both bodies in the spatial point index. Source closure, six shape/ring checks and the focused page/router/minimap contracts pass after integration. Shape, ring and scene asset bytes are unchanged. The818-page build, all408 transport/preload bindings, both bodies at DPR1/2 and shared category/search/handoff pass on the integrated main3bad build. The historical drag trace retains its original build identity.
+
+PR89 was integrated afterward at `bd265cf3a`: both new comet packages and their authored Sun destinations are retained, and the two Centaurs are added to its408-marker baseline with every prior visible marker pixel preserved. The410 scene/page bindings, minimap ownership and both source closures pass. This updates derived navigation data; body geometry, image banks and the captured body views are unchanged.

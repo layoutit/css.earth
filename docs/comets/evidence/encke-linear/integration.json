@@ -1,0 +1,1612 @@
+{
+  "verifiedAt": "2026-09-09T23:15:57.129Z",
+  "base": "3badfb535c106afa80a0888a7e9f488f0d06506b",
+  "existingBodyRuntimeCount": 397,
+  "existingGeometryMaterialsCameraPreserved": true,
+  "existingDescriptorChanges": "Prepared scene and page metadata hashes only; Sun additionally binds the updated world-context source.",
+  "existingContextImages": "Unchanged; the incidental full-rebuild difference for Borrelly was excluded.",
+  "navigationAtlasEntries": 408,
+  "rendererChangedFiles": [],
+  "transports": [
+    {
+      "id": "comet-2p",
+      "bytes": 6602471,
+      "sha256": "e12855a32b8ae97485a3365cdfd0a566052f639ded7277c3f545a4a3d0a34cfc"
+    },
+    {
+      "id": "comet-209p",
+      "bytes": 6631185,
+      "sha256": "db7b7d283563519c3c42f85abeb747a88c9af3b3c4ae28b89a79a40de0b20006"
+    }
+  ],
+  "objects": [
+    {
+      "id": "abundantia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "achilles",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "adelheid",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "adrastea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "aegaeon",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "aegina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "aemilia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "aglaja",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "albiorix",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "alexandra",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "alkeste",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "alkmene",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "alphonsina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "althaea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "amalthea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ambrosia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "amphitrite",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "anahita",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "angelina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "anna",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "annefrank",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "anthe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "antigone",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "antonia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "apophis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "arethusa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ariadne",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ariel",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "artemis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "aschera",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asporina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-1950-da",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-1992-sk",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-1994-cc",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-1996-hw1",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-1998-ml14",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-1998-wt24",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-1999-fr33",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-2001-qw16",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-2002-ce26",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asteroid-2008-ev5",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "asterope",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "astraea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "atalante",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "athamantis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "athor",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "atlas",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "augusta",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "auravictrix",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "aurora",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ausonia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bacchus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "badenia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bamberga",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "baucis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bavaria",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "beatrix",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bebhionn",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "belinda",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bellona",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bennu",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bergelmir",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bertha",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bestla",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bettina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "betulia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "bianca",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "braille",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "brucia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "brunhild",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "byblis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "caliban",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "callisto",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "calypso",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "camilla",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "castalia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ceres",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "charon",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "china",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "circe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "clarissa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "clementina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "coelestina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-103p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-137p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-143p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-162p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-19p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-1p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-67p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-81p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-8p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "comet-9p",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "cordelia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "cressida",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "crimea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "cybele",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "cyrene",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "daphne",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "daphnis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "davida",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "deimos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "dejanira",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "dejopeja",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "desdemona-666",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "desdemona",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "despina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "dido",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "didymos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "dike",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "dimorphos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "dione-106",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "dione",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "diotima",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "donaldjohanson",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "doris",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "dresda",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ducrosa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "echo",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "educatio",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "egeria",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "elektra",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eleonora",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "elpis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "emma",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "enceladus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "epimetheus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "erato",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "erigone",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eris",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eros",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "erriapus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eudora",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eugenia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eukrate",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eunomia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "euphrosyne",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "europa-52",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "europa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eurybates",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eurykleia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eurynome",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "euterpe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "eva",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "felicitas",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "feronia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "fides",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "flora",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "fornjot",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "fortuna",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "freia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "galatea-74",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "galatea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "gallia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ganymed",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ganymede",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "gaspra",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "geographos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "gerda",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "golevka",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "greip",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "gryphia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "gyptis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "harmonia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hati",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "haumea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hebe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hedda",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hekate",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hektor",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "helene",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "henrietta",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hera",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "herculina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hermione",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hersilia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hertha",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hesperia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hestia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hidalgo",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hiiaka",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "himalia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hopi",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "huberta",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hydra",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hygiea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hypatia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hyperion",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "hyrrokkin",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ianthe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "iapetus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "iau",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "iclea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ida",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ijiraq",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ilse",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ino",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "interamnia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "io-85",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "io",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "iphigenia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "irene",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "iris",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "isabella",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "isis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "itokawa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "janus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "johanna",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "juewa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "julia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "juliet",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "juno",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kalliope",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kallisto",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kalypso",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kerberos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kiviuq",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kleopatra",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "klio",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "klotho",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "klymene",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "klytia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kolga",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kressmannia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "kriemhild",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "lachesis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "laetitia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "lamberta",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "larissa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "laurentia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "leda-38",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "leto",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "leucus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "leukothea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "liberatrix",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "libussa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "lilaea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "loge",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "lomia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "loreley",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "lucia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "lucina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "lutetia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "lydia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "maja",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "makemake",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "massalia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "mathilde",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "medea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "medusa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "melete",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "meliboea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "melpomene",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "menippe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "menoetius",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "mercury",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "methone",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "metis-9",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "metis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "mimas",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "minerva",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "miranda",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "mithra",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "moshup",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "moskva",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "mr-spock",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "mundilfari",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "musa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "naiad",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "nausikaa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "nemausa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "nemesis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "nereid",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "nereus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "niobe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "nix",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "nuwa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "nysa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "oberon",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "oenone",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ophelia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "orus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "paaliaq",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "pales",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "pallas",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "pallene",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "palma",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "pan",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "pandora-55",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "pandora",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "panopaea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "parthenope",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "parysatis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "patroclus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "peitho",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "penelope",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "penthesilea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "petrina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "phaedra",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "phaethon",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "philagoria",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "philosophia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "phobos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "phocaea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "phoebe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "piazzia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "polydeuces",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "polyhymnia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "polymele",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "pomona",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "portia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "prometheus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "proserpina",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "prospero",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "proteus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "protogeneia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "psyche",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "puck",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ra-shalom",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "raup",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "reinmuthia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "rhea",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "rhodope",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "romulus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "rosalind",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "rosalinde",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "rusthawelia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ryugu",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "sapientia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "sappho",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "schaber",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "schorria",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "scylla",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "selinur",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "semele",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "setebos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "siarnaq",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "sibylla",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "silesia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "silvretta",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "siwa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "skathi",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "skoll",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "sophrosyne",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "squannit",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "steins",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "stephania",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "styx",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "susi",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "suttungr",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "sycorax",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "sylvia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "tarqeq",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "tartaglia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "tarvos",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "telesto",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "tethys",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "thalassa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "thalia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "thebe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "themis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "thetis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "thisbe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "thrymr",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "thule",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "thyra",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "titan",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "titania",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "toutatis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "transvaalia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "triton",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "tulipa",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "tyche",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "umbriel",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "una",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "unitas",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "united-nations",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "urania",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "urda",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "vanadis",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "velleda",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "venus",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "vera",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "veritas",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "vesta",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "vibilia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "victoria",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "vindobona",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "virginia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "virtanen",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "weringia",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "xanthippe",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "ymir",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "yorp",
+      "geometryMaterialsCameraPreserved": true
+    },
+    {
+      "id": "zachia",
+      "geometryMaterialsCameraPreserved": true
+    }
+  ]
+}

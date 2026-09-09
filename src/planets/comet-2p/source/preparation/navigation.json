@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "comet-2p",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "expectedBytes": 28740,
+    "expectedSha256": "48b805157b454da53eb8051749adae87eeeb7c89a2ac9cc9d2984da3782c6ade",
+    "origin": "https://doi.org/10.1016/j.icarus.2005.01.012",
+    "credit": "Harmon & Nolan (2005); cssEarth approximation",
+    "license": "Published scientific parameters; cssEarth implementation MIT",
+    "licenseEvidence": [
+      "https://doi.org/10.1016/j.icarus.2005.01.012",
+      "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+    ],
+    "acquisition": "Reproduced from the shape approximation and shared missing-imagery grid.",
+    "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
+    "consumers": [
+      "navigation"
+    ],
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "shape-parameters"
+      ],
+      "size": 512,
+      "longitudeDegrees": 70,
+      "latitudeDegrees": 20,
+      "ambient": 1,
+      "diffuse": 0,
+      "lensId": "model"
+    }
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}
