@@ -1,0 +1,11 @@
+{
+  "measurementPassed": true,
+  "measurementReceipt": "output/playwright/main-belt-asteroids-expansion/load-cost/report.json",
+  "observationReceipt": "output/main-belt-asteroids-expansion/final-load-cost-resources.json",
+  "processExitCode": 0,
+  "remainingDescendantsTerminated": [
+    59650,
+    59647
+  ],
+  "explanation": "All three measurement cases completed without errors and the Node process exited successfully. The task observer found two observed child processes still alive after the 250 ms post-exit check, terminated them, and stopped the enclosing sequence. Measurements are retained; the remaining drag cases resume in a new single-browser sequence."
+}
