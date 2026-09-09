@@ -245,7 +245,7 @@ function currentRemovalStrength(overlay: Overlay) {
 function refreshStarRemoval() {
   const overlay = currentOverlays.find(item => item.id === selectedOverlayId);
   starRemoval.setContext(currentTab === 0 && currentMode === 'density' && !busy && overlay ? {
-    imageId: overlay.id, label: overlay.label, supported: Boolean(overlay.variants?.length),
+    imageId: overlay.id, label: overlay.label,
   } : null);
 }
 async function restoreAppliedOverlay(overlay: Overlay) {

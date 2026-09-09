@@ -1,7 +1,7 @@
 import { createStarRemovalJobs, removalJobActive, type RemovalJob } from './star-removal-jobs';
 import type { RemovalProgress, StarRemovalResult } from './star-removal-types';
 
-interface Context { imageId: string; label: string; supported: boolean; }
+interface Context { imageId: string; label: string; }
 
 /** Small crop previews are optional; full removal belongs to the durable server job. */
 export function createStarRemovalControls(host: HTMLElement, options: {
@@ -45,7 +45,7 @@ export function createStarRemovalControls(host: HTMLElement, options: {
   }
   function render() {
     const running = removalJobActive(job), blocked = Boolean(pending) || installing || running;
-    preview.disabled = remove.disabled = !context?.supported || blocked;
+    preview.disabled = remove.disabled = !context || blocked;
     cancel.hidden = !pending && !running; cancel.disabled = installing;
     progress.hidden = !pending && !running && !installing;
     const crops = result?.previews ?? [], crop = crops[index];
@@ -109,7 +109,7 @@ export function createStarRemovalControls(host: HTMLElement, options: {
     return completed;
   }
   async function request(action: 'overview' | 'preview') {
-    if (!context?.supported) return false;
+    if (!context) return false;
     pending?.abort(); const owner = ++version, imageId = context.imageId;
     const controller = new AbortController(); pending = controller;
     const current = () => owner === version && context?.imageId === imageId && !controller.signal.aborted;
@@ -137,7 +137,7 @@ export function createStarRemovalControls(host: HTMLElement, options: {
   }
   preview.addEventListener('click', () => { if (!removalJobActive(job)) void request('preview'); });
   remove.addEventListener('click', () => {
-    if (!context?.supported || pending || installing || removalJobActive(job)) return;
+    if (!context || pending || installing || removalJobActive(job)) return;
     void (async () => {
       if (!result && !await request('overview')) return;
       if (!result || !context || result.imageId !== context.imageId || removalJobActive(job)) return;
@@ -156,12 +156,12 @@ export function createStarRemovalControls(host: HTMLElement, options: {
   render();
   return {
     setContext(value: Context | null) {
-      if (context?.imageId === value?.imageId && context?.supported === value?.supported) return;
+      if (context?.imageId === value?.imageId) return;
       version++; pending?.abort(); pending = null; jobs.stop(); context = value; result = null; job = null; installing = false; index = 0; showMask = false;
       delete host.dataset.removalJob; delete host.dataset.removalJobStatus; delete host.dataset.removalOperation; delete host.dataset.previewId;
       host.hidden = !value; render();
-      if (value?.supported) void request('overview');
-      else message(value ? 'NOX is not prepared for this source.' : '');
+      if (value) void request('overview');
+      else message('');
     },
     destroy() { version++; pending?.abort(); jobs.stop(); },
   };

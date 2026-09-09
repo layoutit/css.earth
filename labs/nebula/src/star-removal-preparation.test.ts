@@ -116,6 +116,61 @@ test('fresh NOX Apply works without legacy detections, separated files or varian
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
 
+test('an imported candidate needs no trial selection, alignment gate, recipe or existing star layers', async () => {
+  const f = await fixture();
+  try {
+    await f.json('labs/nebula/models/image-candidates.json', JSON.parse(await readFile(join(f.root, 'catalogue.json'), 'utf8')));
+    for (const path of [planPath, 'recipe.json', 'proof', '.local/approved', 'labs/nebula/models/lmc-star-separation/variants.json'])
+      await rm(join(f.root, path), { recursive: true });
+    const overview = await f.remove({ ...request, action: 'overview' }) as any;
+    assert.equal(f.calls.length, 0); assert.equal(overview.sourceSha256, f.source.sha256);
+    const result = await f.remove({ ...request, action: 'apply' }) as any;
+    assert.equal(f.calls.length, 1); assert.equal(f.calls[0].baseline, undefined);
+    assert.equal((await f.remove.resolveApplied(result.applied.resultId, request.imageId, hash(f.overview))).value.layers.length, 2);
+    await assert.rejects(f.remove({ ...request, imageId: 'missing-photo' }), /imported original/);
+    await f.write(f.source.path, 'changed original');
+    await assert.rejects(f.remove(request), /hash differs/);
+    assert.equal(f.calls.length, 1);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
+test('a candidate outside the saved selection processes without changing earlier result identities', async () => {
+  const f = await fixture();
+  try {
+    const earlier = await f.remove({ ...request, action: 'apply' }) as any;
+    const catalogue = JSON.parse(await readFile(join(f.root, 'catalogue.json'), 'utf8'));
+    catalogue.targets[0].images.push({ ...catalogue.targets[0].images[0], id: 'new-photo' });
+    await f.json('catalogue.json', catalogue);
+    const overlays = JSON.parse(await readFile(join(f.root, 'models/test/overlays.json'), 'utf8'));
+    overlays.overlays.push({ ...overlays.overlays[0], id: 'new-photo' });
+    await f.json('models/test/overlays.json', overlays);
+    const added = await f.remove({ ...request, imageId: 'new-photo', action: 'apply' }) as any;
+    assert.equal(added.imageId, 'new-photo'); assert.equal(f.calls[1].baseline, undefined);
+    assert.equal((await f.remove({ ...request, action: 'apply' }) as any).applied.resultId, earlier.applied.resultId);
+    assert.equal(f.calls.length, 2);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
+test('16-bit imported images get a separate full-size RGB8 input while their original is preserved', async () => {
+  const f = await fixture();
+  try {
+    const original = await sharp(f.sourceBytes).toColourspace('rgb16').tiff({ compression: 'none' }).toBuffer();
+    assert.equal((await sharp(original).metadata()).depth, 'ushort');
+    await f.write('.local/colour16.tif', original);
+    await f.json('labs/nebula/models/image-candidates.json', { targets: [{ directory: 'models/test',
+      images: [{ id: request.imageId, path: '.local/colour16.tif', sha256: hash(original) }] }] });
+    await rm(join(f.root, planPath));
+    const overview = await f.remove({ ...request, action: 'overview' }) as any;
+    assert.equal(f.calls.length, 0); assert.deepEqual(overview.nativeDimensions, [16, 12]);
+    const converted = await readFile(join(f.root, `${cachePath}-inputs/${hash(original)}-rgb8-v1.png`));
+    const metadata = await sharp(converted).metadata();
+    assert.equal(metadata.depth, 'uchar'); assert.equal(metadata.channels, 3);
+    assert.equal(overview.sourceSha256, hash(converted));
+    assert.deepEqual(await readFile(join(f.root, '.local/colour16.tif')), original);
+    assert.deepEqual(await f.remove({ ...request, action: 'overview' }), overview);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
 test('output pins, native crop bounds and exact accounting are required before atomic publication', async () => {
   for (const mutate of [(value: any) => { value.previews[0].origin = [15, 0]; },
     (value: any) => { value.artifactSha256['mask.png'] = '0'.repeat(64); },

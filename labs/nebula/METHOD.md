@@ -60,7 +60,7 @@ The stellar simulation's observer transform is reconstructed approximately from 
 
 The image sidebar uses **NOX automatic removal**. Manual star picking, profile calibration and harmonic removal are retired from the interactive workflow. Their earlier receipts remain provenance for existing prepared images; they are not a required user step.
 
-1. Verify the approved source, registration, native dimensions and pinned NOX model before processing. Preserve the original full image extent and orientation.
+1. Clicking Quick preview or Remove stars approves that operation for the selected imported image. Verify its original hash, native dimensions and pinned NOX model; existing star layers and trial recipes are not prerequisites. Preserve the full image extent and orientation. Non-RGB8 originals get a separate full-size RGB8 working PNG without an additional stretch. Registration and approval are still required before a later 3D bake.
 2. **Quick preview** runs the model on automatically selected native crops. Inspect bright stars, crowded regions and nebula detail. It never changes the full image or the reconstruction.
 3. **Remove stars** processes the full native image using overlapping tiles and bounded batches. The worker reports actual progress. Refresh reconnects to the server-owned job; only **Cancel** stops it. A server restart marks interrupted work honestly.
 4. Derive the positive original-minus-prediction residual. Preserve earlier approved removal when a baseline exists. Subtract once from the original; keep the exact native integer accounting `original = without stars + residual` and the actual changed-pixel mask.

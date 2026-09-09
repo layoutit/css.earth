@@ -71,10 +71,44 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     verifiedInputs.add(full); verifiedInputs.add(resolve(root, path)); return bytes;
   }
   const json = async (path: string, expected?: string) => JSON.parse((await pinned(path, expected)).toString());
+  async function catalogueSource(request: RemovalRequest, cataloguePath: string) {
+    const catalogue = await json(cataloguePath);
+    const matches = (catalogue.targets ?? []).flatMap((target: { directory: string; images: { id: string; path: string; sha256: string }[] }) =>
+      target.images.filter(image => image.id === request.imageId).map(image => ({ image, directory: target.directory })));
+    if (matches.length !== 1) throw new TypeError('This image needs a unique imported original in the image catalogue.');
+    const { image, directory } = matches[0];
+    if (!/^[a-f0-9]{64}$/.test(image.sha256)) throw new TypeError('Imported original is missing its source hash.');
+    let bytes: Buffer;
+    try { bytes = await pinned(image.path, image.sha256); }
+    catch (error) { if ((error as NodeJS.ErrnoException).code === 'ENOENT') throw new Error('Download this image’s original before removing stars.'); throw error; }
+    const metadata = await sharp(bytes, { unlimited: true }).metadata();
+    const nativeDimensions = [metadata.width, metadata.height];
+    if (!nativeDimensions.every(value => Number.isInteger(value) && value > 0 && value <= 40000) || (metadata.pages ?? 1) !== 1)
+      throw new TypeError('Star removal needs a single image with dimensions up to 40,000 pixels per side.');
+    let source = { path: image.path as string, sha256: image.sha256 as string, nativeDimensions };
+    // NOX consumes RGB8. Convert other imported rasters at full size, never the preview or original in place.
+    if (metadata.depth !== 'uchar' || metadata.channels !== 3 || metadata.space !== 'srgb' ||
+        !['png', 'jpeg', 'tiff', 'webp'].includes(metadata.format ?? '')) {
+      const path = `${cachePath}-inputs/${image.sha256}-rgb8-v1.png`;
+      const converted = await sharp(bytes, { unlimited: true }).toColourspace('srgb').removeAlpha().png().toBuffer();
+      const expected = hash(converted), existing = await readFile(resolve(root, path)).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
+      if (existing && hash(existing) !== expected) throw new TypeError('Prepared RGB input differs from its imported original.');
+      if (!existing) {
+        await mkdir(dirname(resolve(root, path)), { recursive: true });
+        await writeFile(resolve(root, path), converted, { flag: 'wx' }).catch(error => { if (error.code !== 'EEXIST') throw error; });
+      }
+      await pinned(path, expected); source = { path, sha256: expected, nativeDimensions };
+    }
+    return { source, directory, baseline: undefined,
+      planSha256: hash(JSON.stringify(['catalogue-rgb8-v1', image.id, image.path, image.sha256, directory])) };
+  }
   async function sourceFor(request: RemovalRequest) {
-    const planBytes = await pinned(planPath), plan = JSON.parse(planBytes.toString());
+    const planBytes = await pinned(planPath).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
+    if (!planBytes) return catalogueSource(request, 'labs/nebula/models/image-candidates.json');
+    const plan = JSON.parse(planBytes.toString());
     const selection = plan.selections?.find((value: { id: string }) => value.id === request.imageId);
-    if (plan.schema !== 'cssearth-image-processing-plan@1' || !selection) throw new TypeError('This image has not been selected for star-removal trials.');
+    if (plan.schema !== 'cssearth-image-processing-plan@1') throw new TypeError('Invalid saved star-removal plan.');
+    if (!selection) return catalogueSource(request, plan.catalogue);
     const recipe = await json(selection.recipe, selection.recipeSha256);
     const report = await json(plan.alignmentReport.path, plan.alignmentReport.sha256);
     const proof = report.sources?.find((value: { id: string }) => value.id === request.imageId);
@@ -260,10 +294,10 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     if (waiting >= 4) throw new Error('Star removal is busy; try again shortly.');
     waiting++;
     try {
-      notify(onProgress, { stage: 'validating', current: 0, total: 1, message: 'Verifying native source and alignment evidence.' });
+      notify(onProgress, { stage: 'validating', current: 0, total: 1, message: 'Verifying imported source image.' });
       const proof = await sourceFor(request);
       signal?.throwIfAborted();
-      notify(onProgress, { stage: 'validating', current: 1, total: 1, message: 'Native source and alignment verified.' });
+      notify(onProgress, { stage: 'validating', current: 1, total: 1, message: 'Source image verified.' });
       if (request.action === 'overview') {
         const result = await overview(request, proof); signal?.throwIfAborted();
         notify(onProgress, { stage: 'preparing', current: 1, total: 1, message: 'Original preview ready.' });
