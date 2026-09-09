@@ -78,3 +78,9 @@ src/planets/*/source/**/*.bpc
 /src/planets/*/source/reference/*.pdf
 # Pinned Borrelly orthophoto and coordinate cubes, restored from PDS.
 /src/planets/comet-19p/source/micas/*.cub
+
+# Near-Earth reference-paper originals are restored from pinned acquisition URLs.
+/src/planets/ivar/source/reference/hanus-2015.html
+/src/planets/toro/source/reference/durech-2018.html
+/src/planets/cerberus/source/reference/hanus-2015.html
+/src/planets/tantalus/source/reference/rozek-2022.html

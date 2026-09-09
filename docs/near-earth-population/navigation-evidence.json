@@ -1,0 +1,23 @@
+{
+  "base": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
+  "added": [
+    "ivar",
+    "toro",
+    "cerberus",
+    "tantalus"
+  ],
+  "atlases": [
+    {
+      "filename": "planet-markers.webp",
+      "baseSha256": "980779234321d5b257f222126667acdc40a43d3435ce059011c6864300bb435e",
+      "outputSha256": "ee6cb464b126540a86232fb208e6da47c18f12bc101be36a5f1b3a465b1c51bd",
+      "preservedMarkers": 406
+    },
+    {
+      "filename": "planet-markers@2x.webp",
+      "baseSha256": "6f87b64657e4b90352684877d3e80a8799c1c45c83132cdd57e275901feb9bbb",
+      "outputSha256": "326aca8efed5a9ba3b87fe7dff8822fcf3d236ee9bcc555062249f1960d29665",
+      "preservedMarkers": 406
+    }
+  ]
+}

@@ -357,6 +357,10 @@ import hyperionDescriptor from "../src/planets/hyperion/object.json" with { type
 import ryuguDescriptor from "../src/planets/ryugu/object.json" with { type: "json" };
 import bennuDescriptor from "../src/planets/bennu/object.json" with { type: "json" };
 import itokawaDescriptor from "../src/planets/itokawa/object.json" with { type: "json" };
+import ivarDescriptor from "../src/planets/ivar/object.json" with { type: "json" };
+import toroDescriptor from "../src/planets/toro/object.json" with { type: "json" };
+import cerberusDescriptor from "../src/planets/cerberus/object.json" with { type: "json" };
+import tantalusDescriptor from "../src/planets/tantalus/object.json" with { type: "json" };
 import erosDescriptor from "../src/planets/eros/object.json" with { type: "json" };
 import phoebeDescriptor from "../src/planets/phoebe/object.json" with { type: "json" };
 import deimosDescriptor from "../src/planets/deimos/object.json" with { type: "json" };
@@ -849,6 +853,30 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(itokawaDescriptor);
     }, itokawaDescriptor.properties.worldFrame),
+  object("ivar", "Ivar", "asteroid", "#aaaaaa", 1.8630871303717667,
+    "Explore Ivar, a near-Earth asteroid, through its published shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(ivarDescriptor);
+    }, ivarDescriptor.properties.worldFrame),
+
+  object("toro", "Toro", "asteroid", "#aaaaaa", 1.3678992132175503,
+    "Explore Toro, a near-Earth asteroid, through its published shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(toroDescriptor);
+    }, toroDescriptor.properties.worldFrame),
+
+  object("cerberus", "Cerberus", "asteroid", "#aaaaaa", 1.0799439098043286,
+    "Explore Cerberus, a near-Earth asteroid, through its published shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(cerberusDescriptor);
+    }, cerberusDescriptor.properties.worldFrame),
+
+  object("tantalus", "Tantalus", "asteroid", "#aaaaaa", 1.2900615327857758,
+    "Explore Tantalus, a near-Earth asteroid, through its published shape model.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(tantalusDescriptor);
+    }, tantalusDescriptor.properties.worldFrame),
+
   object("eros", "Eros", "asteroid", "#a49c8d", 1.458,
     "Explore Eros in 3D with cssEarth using mission-derived shape and surface data.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

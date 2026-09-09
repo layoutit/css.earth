@@ -1,0 +1,58 @@
+[
+  {
+    "id": "ivar",
+    "data": {
+      "assetCount": 35,
+      "sourceInputCount": 3
+    },
+    "source": {
+      "inputCount": 3,
+      "generatedIntermediateCount": 1,
+      "documentCount": 21,
+      "verifiedCount": 25
+    },
+    "preparedSha256": "c68a06686b7d182e79a414308f16a6d49b48dee83a9968bd09ad8cfa133a3298"
+  },
+  {
+    "id": "toro",
+    "data": {
+      "assetCount": 35,
+      "sourceInputCount": 3
+    },
+    "source": {
+      "inputCount": 3,
+      "generatedIntermediateCount": 1,
+      "documentCount": 20,
+      "verifiedCount": 24
+    },
+    "preparedSha256": "2f691b6707b004e2ab2fbbb40bb1f239cae67b160824f8180919f68f48193380"
+  },
+  {
+    "id": "cerberus",
+    "data": {
+      "assetCount": 35,
+      "sourceInputCount": 3
+    },
+    "source": {
+      "inputCount": 3,
+      "generatedIntermediateCount": 1,
+      "documentCount": 21,
+      "verifiedCount": 25
+    },
+    "preparedSha256": "8883a8b4b3cdeb68b087132da2a4d4f5811aed06a988e5cd0e3fe321f99e0826"
+  },
+  {
+    "id": "tantalus",
+    "data": {
+      "assetCount": 35,
+      "sourceInputCount": 3
+    },
+    "source": {
+      "inputCount": 3,
+      "generatedIntermediateCount": 1,
+      "documentCount": 20,
+      "verifiedCount": 24
+    },
+    "preparedSha256": "2215409ed4c542b58ddfd64456c4c8980826e97dada3940e47094445a2f45c0f"
+  }
+]
