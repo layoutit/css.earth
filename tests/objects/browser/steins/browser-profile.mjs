@@ -8,17 +8,18 @@ export const browserProfile=createObjectBrowserProfile({id:'steins',controls,aud
     }
   ],
   "canonicalPreparedAssets": [
-    "/scenes/steins/steins-normal-surface@2x.webp"
+    "/scenes/steins/steins-osiris-surface@2x.webp"
   ],
   "lensRace": {
-    "defaultId": "normal",
-    "slowId": "elevation",
-    "winnerId": "normal",
-    "slowAsset": "/scenes/steins/steins-elevation-surface@2x.webp",
+    "defaultId": "osiris",
+    "slowId": "normal",
+    "winnerId": "osiris",
+    "slowAsset": "/scenes/steins/steins-normal-surface@2x.webp",
     "preReadyDisabled": true
   },
   "retained": {
     "lensIds": [
+      "osiris",
       "normal",
       "elevation"
     ],
