@@ -705,9 +705,12 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       for (const { entry, x, y, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, inFrame, lineWidth, orbitVisibility, segments, labelPosition } of projectedBodies) {
         const { body, marker, indicator, label } = entry;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
-        marker.style.visibility = visible && markerOpacity > 0 && !pointSource ? '' : 'hidden';
+        const markerShown = visible && markerOpacity > 0 && !pointSource;
+        marker.style.visibility = markerShown ? '' : 'hidden';
         entry.navigation.update(visible && markerOpacity > 0.1 && !pointSource ? body.id : null, body.name);
-        if (visible) {
+        // Retain culled proxies without publishing transforms they cannot draw.
+        // The current camera supplies their complete state on the reveal frame.
+        if (markerShown) {
           marker.style.opacity = String(markerOpacity);
           marker.style.transform = `translate(${x}px,${y}px) scale(${Math.max(2.4, diameter) / entry.sprite.size})`;
         }
@@ -727,7 +730,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         entry.indicatorPick = indicatorShown && indicatorOpacity > .1 ? { element: indicator, rank: rank + 2,
           shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } } : null;
         if (entry.indicatorPick) pickTargets.push(entry.indicatorPick);
-        if (annotationVisible) {
+        if (indicatorShown) {
           lineFader.set(indicator, indicatorOpacity, resumeDuration);
           indicator.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
         }

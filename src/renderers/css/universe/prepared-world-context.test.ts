@@ -522,7 +522,21 @@ test('overlapping circles retain selection priority and reappear when separated'
   expect(mercury.style.visibility).toBe('');
   expect(venus.style.visibility).toBe('hidden');
   expect(venus.style.pointerEvents).toBe('none');
+  const venusMarker = find(root, 'contextBody', 'venus');
+  expect(venusMarker.style.visibility).toBe('hidden');
+  let writes = 0;
+  for (const node of [venus, venusMarker]) {
+    let transform = node.style.transform;
+    Object.defineProperty(node.style, 'transform', {
+      get: () => transform, set: value => { writes++; transform = value; },
+    });
+  }
+  publish(2200); publish(2500);
+  expect(writes).toBe(0);
   layer.selectObject('venus'); publish(2000);
+  expect(writes).toBe(2);
+  expect(venus.style.transform).toContain('translate(82px,0px)');
+  expect(venusMarker.style.transform).toContain('translate(82px,0px)');
   expect(venus.style.visibility).toBe('');
   expect(mercury.style.visibility).toBe('hidden');
   publish(160);

@@ -723,3 +723,43 @@ All 2,906 video observations are preserved in timestamp order, with 57 microseco
 recorder/trace drift and maximum video PTS error 1.439 ms. Source hashes match;
 world/input/document identities are stable; no errors, recording-time HMR or trace
 loss occurred. `qualification.json` records artifact hashes and validation.
+
+
+### Publish only visible body proxies
+
+The final presentation now writes marker/circle transforms only when the proxy
+can draw. Culled nodes stay mounted; their current position and alpha are
+published on the same callback that reveals them. Picking and decluttering still
+use the current projection. A native 45-wheel probe observes 15,715 marker and
+15,565 circle mutation records carrying changed hidden transforms before this
+change, and zero after it. These are observer records, not exact setter counts.
+
+The 61 affected tests, renderer typecheck and build pass. Tests exercise hidden
+camera changes and same-pose selection reveal. All 24 DPR 1/2 browser comparisons
+preserve orbit geometry, visible styles and retained nodes, with maximum pixel
+difference two. Hidden transforms intentionally retain their previous value;
+CSS declaration ordering is normalized in visible-style comparisons. Evidence:
+`output/playwright/hidden-publication/` and
+`output/playwright/visible-proxy-publication-visual/`.
+
+Two synchronized full DPR 2 routes have planetary-band p95 16.8 ms:
+
+| Capture | Recorder | Intervals over 25 ms | Whole-route max |
+| --- | --- | --- | --- |
+| `visible-proxy-publication-dpr2` | `99e8ff13-c081-4527-adae-64f7197fef01` | 32/760 (4.2%) | 150 ms |
+| `visible-proxy-publication-repeat-dpr2` | `a858bad0-a868-498d-9a86-bf0517ea7975` | 20/750 (2.7%) | 50 ms |
+
+The preceding opacity-owner route had 66/712 (9.3%), p95 33.3 ms. Each new capture
+contains native recorder JSON, Chrome trace gzip and all 2,949 video observations.
+Recorder/trace drift is -96/13 microseconds and maximum video PTS error is
+1.459/1.435 ms. Source hashes match, scene identities remain stable, and there are
+no application errors, HMR, trace loss or CSS opacity transitions. Qualification
+records identify tracked-source revisions separately from generated on-disk assets.
+
+**The planetary-band p95 improvement repeats; full smoothness is not established.**
+Native galaxy dragging has p95 16.8/33.3 ms across these runs. The 150 ms interval
+in the first run overlaps a 184.851 ms GPU `ScheduleOverlays` event with eight
+overlays at about 24.8 million AU; the repeat has a 48.513 ms event there. These
+are correlated observations, not proof of GPU causality or a statistical speedup.
+`residuals.json` maps the stalls back to recorder time. Host load, native input
+delivery and simultaneous capture remain measurement limitations.
