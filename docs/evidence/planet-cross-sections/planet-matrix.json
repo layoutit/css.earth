@@ -1,0 +1,502 @@
+[
+  {
+    "id": "mercury",
+    "runs": [
+      {
+        "id": "mercury",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 1,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 121.90171555513386,
+            "shadowPixels": null
+          },
+          {
+            "id": "enhanced",
+            "interior": false,
+            "geometryDisplacement": 122.32303151153411,
+            "shadowPixels": null
+          },
+          {
+            "id": "topography",
+            "interior": false,
+            "geometryDisplacement": 122.60532220866395,
+            "shadowPixels": null
+          },
+          {
+            "id": "interior",
+            "interior": true,
+            "geometryDisplacement": 141.9320555355206,
+            "shadowPixels": 130100
+          }
+        ]
+      },
+      {
+        "id": "mercury",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 2,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 121.90171555513386,
+            "shadowPixels": null
+          },
+          {
+            "id": "enhanced",
+            "interior": false,
+            "geometryDisplacement": 122.32303151153411,
+            "shadowPixels": null
+          },
+          {
+            "id": "topography",
+            "interior": false,
+            "geometryDisplacement": 122.60532220866395,
+            "shadowPixels": null
+          },
+          {
+            "id": "interior",
+            "interior": true,
+            "geometryDisplacement": 141.9320555355206,
+            "shadowPixels": 519635
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "venus",
+    "runs": [
+      {
+        "id": "venus",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 1,
+        "datasets": [
+          {
+            "id": "clouds",
+            "interior": false,
+            "geometryDisplacement": 99.42901363206364,
+            "shadowPixels": null
+          },
+          {
+            "id": "radar",
+            "interior": false,
+            "geometryDisplacement": 99.18622537649051,
+            "shadowPixels": null
+          },
+          {
+            "id": "elevation",
+            "interior": false,
+            "geometryDisplacement": 99.26239520985563,
+            "shadowPixels": null
+          }
+        ]
+      },
+      {
+        "id": "venus",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 2,
+        "datasets": [
+          {
+            "id": "clouds",
+            "interior": false,
+            "geometryDisplacement": 99.42901363206364,
+            "shadowPixels": null
+          },
+          {
+            "id": "radar",
+            "interior": false,
+            "geometryDisplacement": 99.18622537649051,
+            "shadowPixels": null
+          },
+          {
+            "id": "elevation",
+            "interior": false,
+            "geometryDisplacement": 99.26239520985563,
+            "shadowPixels": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "earth",
+    "runs": [
+      {
+        "id": "earth",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 1,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 122.82757945615012,
+            "shadowPixels": null
+          },
+          {
+            "id": "topography",
+            "interior": false,
+            "geometryDisplacement": 122.34994772170504,
+            "shadowPixels": null
+          },
+          {
+            "id": "night-lights",
+            "interior": false,
+            "geometryDisplacement": 122.00081384907494,
+            "shadowPixels": null
+          },
+          {
+            "id": "enso",
+            "interior": false,
+            "geometryDisplacement": 122.0277350637815,
+            "shadowPixels": null
+          },
+          {
+            "id": "cross-section",
+            "interior": true,
+            "geometryDisplacement": 57.24440590351319,
+            "shadowPixels": 38477
+          }
+        ]
+      },
+      {
+        "id": "earth",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 2,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 122.82757945615012,
+            "shadowPixels": null
+          },
+          {
+            "id": "topography",
+            "interior": false,
+            "geometryDisplacement": 122.34994772170504,
+            "shadowPixels": null
+          },
+          {
+            "id": "night-lights",
+            "interior": false,
+            "geometryDisplacement": 122.00081384907494,
+            "shadowPixels": null
+          },
+          {
+            "id": "enso",
+            "interior": false,
+            "geometryDisplacement": 122.0277350637815,
+            "shadowPixels": null
+          },
+          {
+            "id": "cross-section",
+            "interior": true,
+            "geometryDisplacement": 57.24440590351319,
+            "shadowPixels": 152833
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mars",
+    "runs": [
+      {
+        "id": "mars",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 1,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 126.99156899319557,
+            "shadowPixels": null
+          },
+          {
+            "id": "elevation",
+            "interior": false,
+            "geometryDisplacement": 126.97373356649278,
+            "shadowPixels": null
+          },
+          {
+            "id": "thermal",
+            "interior": false,
+            "geometryDisplacement": 126.47237341576755,
+            "shadowPixels": null
+          }
+        ]
+      },
+      {
+        "id": "mars",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 2,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 126.99156899319557,
+            "shadowPixels": null
+          },
+          {
+            "id": "elevation",
+            "interior": false,
+            "geometryDisplacement": 126.97373356649278,
+            "shadowPixels": null
+          },
+          {
+            "id": "thermal",
+            "interior": false,
+            "geometryDisplacement": 126.47237341576755,
+            "shadowPixels": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jupiter",
+    "runs": [
+      {
+        "id": "jupiter",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 1,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 121.35641727306823,
+            "shadowPixels": null
+          },
+          {
+            "id": "ultraviolet",
+            "interior": false,
+            "geometryDisplacement": 129.07338107456073,
+            "shadowPixels": null
+          },
+          {
+            "id": "methane",
+            "interior": false,
+            "geometryDisplacement": 125.00881071756322,
+            "shadowPixels": null
+          }
+        ]
+      },
+      {
+        "id": "jupiter",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 2,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 121.35641727306823,
+            "shadowPixels": null
+          },
+          {
+            "id": "ultraviolet",
+            "interior": false,
+            "geometryDisplacement": 129.07338107456073,
+            "shadowPixels": null
+          },
+          {
+            "id": "methane",
+            "interior": false,
+            "geometryDisplacement": 125.00881071756322,
+            "shadowPixels": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "saturn",
+    "runs": [
+      {
+        "id": "saturn",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 1,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 122.53361864676732,
+            "shadowPixels": null
+          },
+          {
+            "id": "ultraviolet",
+            "interior": false,
+            "geometryDisplacement": 152.8175068530862,
+            "shadowPixels": null
+          },
+          {
+            "id": "methane",
+            "interior": false,
+            "geometryDisplacement": 149.5395319681438,
+            "shadowPixels": null
+          },
+          {
+            "id": "thermal",
+            "interior": false,
+            "geometryDisplacement": 190.03119049133807,
+            "shadowPixels": null
+          },
+          {
+            "id": "cross-section",
+            "interior": true,
+            "geometryDisplacement": 124.90091775388838,
+            "shadowPixels": 134232
+          }
+        ]
+      },
+      {
+        "id": "saturn",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 2,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 122.53361864676732,
+            "shadowPixels": null
+          },
+          {
+            "id": "ultraviolet",
+            "interior": false,
+            "geometryDisplacement": 152.8175068530862,
+            "shadowPixels": null
+          },
+          {
+            "id": "methane",
+            "interior": false,
+            "geometryDisplacement": 149.5395319681438,
+            "shadowPixels": null
+          },
+          {
+            "id": "thermal",
+            "interior": false,
+            "geometryDisplacement": 190.03119049133807,
+            "shadowPixels": null
+          },
+          {
+            "id": "cross-section",
+            "interior": true,
+            "geometryDisplacement": 124.90091775388838,
+            "shadowPixels": 536832
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "uranus",
+    "runs": [
+      {
+        "id": "uranus",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 1,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 177.09222243834188,
+            "shadowPixels": null
+          },
+          {
+            "id": "methane",
+            "interior": false,
+            "geometryDisplacement": 429.97778548123387,
+            "shadowPixels": null
+          },
+          {
+            "id": "near-infrared",
+            "interior": false,
+            "geometryDisplacement": 1787.0059272144954,
+            "shadowPixels": null
+          }
+        ]
+      },
+      {
+        "id": "uranus",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 2,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 177.09222243834188,
+            "shadowPixels": null
+          },
+          {
+            "id": "methane",
+            "interior": false,
+            "geometryDisplacement": 429.97778548123387,
+            "shadowPixels": null
+          },
+          {
+            "id": "near-infrared",
+            "interior": false,
+            "geometryDisplacement": 1787.0059272144954,
+            "shadowPixels": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "neptune",
+    "runs": [
+      {
+        "id": "neptune",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 1,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 460.53664970705273,
+            "shadowPixels": null
+          },
+          {
+            "id": "methane",
+            "interior": false,
+            "geometryDisplacement": 461.3203788007748,
+            "shadowPixels": null
+          },
+          {
+            "id": "near-infrared",
+            "interior": false,
+            "geometryDisplacement": 251.35551439902454,
+            "shadowPixels": null
+          }
+        ]
+      },
+      {
+        "id": "neptune",
+        "case": "dataset-interactions",
+        "deviceScaleFactor": 2,
+        "datasets": [
+          {
+            "id": "normal",
+            "interior": false,
+            "geometryDisplacement": 460.53664970705273,
+            "shadowPixels": null
+          },
+          {
+            "id": "methane",
+            "interior": false,
+            "geometryDisplacement": 461.3203788007748,
+            "shadowPixels": null
+          },
+          {
+            "id": "near-infrared",
+            "interior": false,
+            "geometryDisplacement": 251.35551439902454,
+            "shadowPixels": null
+          }
+        ]
+      }
+    ]
+  }
+]
