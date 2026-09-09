@@ -1494,3 +1494,72 @@ source patch. All 26 source hashes and that patch match after capture. It includ
 synchronized recorder JSON, trace gzip, video and loaded-resource receipts, with
 2932/2932 frames, +19 µs clock drift and 1.450 ms maximum PTS error. There are no
 errors, HMR or trace loss; world/input/document identity and one camera remain.
+
+
+## Prepared traversal for hidden-orbit extent
+
+Hidden asteroid paths still need their projected extent for the existing marker
+fade. Walking consecutive chords spends work discovering a span that often
+saturates after visiting two separated parts of the same orbit. Preparation now
+emits `extentChords`: a complete permutation of positive-weight chords, visiting
+separated ranges first. Only hidden-path measurement consumes it. Drawing and
+picking retain the authored order, original clipping, occlusion and segment pool.
+Older banks use the original sequential path; runtime never constructs this order.
+
+Replaying 102 recorded planetary-band camera samples performs 10,698 hidden-orbit
+measurements. All saturated extents match exactly. Screen projections fall from
+546,319 to 451,158 overall (17.4%), and from 47,504 to 15,512 around 18–35 AU
+(67.3%). This is a deterministic work census, not a timing benchmark. All previous
+prepared values are unchanged; the 257 added orbit permutations reproduce exactly
+through the normal preparation command.
+
+The change passes 68 focused renderer tests and 11 preparation tests, plus both
+package typechecks/builds. The preparation gate exposed a stale assertion that
+Patroclus could only be a coordinate-only primary; it fails on the preceding
+revision too. The corrected assertion derives membership from the authored
+registry and still checks every independently sourced primary coordinate.
+
+Twenty-four DPR 1/2 comparisons retain exact cameras, orbit styles, labels and
+node counts, with maximum full-frame difference 1/255. Six additional DPR 2
+baseline/candidate views are pixel-identical while toggling asteroid orbits,
+hovering the hidden Itokawa indicator to reveal its orbit, leaving, and showing
+orbits again. The control changes only the measurement traversal in one guarded
+served-response replacement. Evidence: `output/playwright/prepared-extent-order/`.
+
+| Measurement | Interaction owner | Prepared extent order |
+| --- | ---: | ---: |
+| Whole-route rAF intervals >25 ms | 18/3477 | 15/3477 |
+| Planetary-band intervals >25 ms | 15/750 | 12/753 |
+| Planetary-band callback elapsed total | 3858.749 ms | 3736.129 ms |
+| Planetary-band callback maximum | 16.467 ms | 10.758 ms |
+| Planetary-band style elapsed total | 1677.455 ms | 1679.308 ms |
+| Planetary-band layer elapsed total | 2117.891 ms | 2051.143 ms |
+| Galaxy-drag intervals >25 ms | 1/242 | 0/243 |
+| Whole-route maximum | 33.4 ms | 50 ms |
+
+These are single captures, not a statistical frame-rate improvement. The source
+work reduction is established; browser style/layout/layer work persists and the
+smoothness target remains unmet. No CSS-variable change is involved.
+
+`output/world-context-zoom/prepared-extent-order-dpr2/` records
+`5947589e-4855-4ef0-aa79-ac7010a4460c`, base `c7e5e2951` plus the exact seven-file
+patch. All 27 source hashes and that patch match after capture. Recorder JSON,
+Chrome trace gzip, video and loaded-resource receipts remain synchronized:
+2925/2925 observations encoded, -58 microseconds clock drift, 1.450 ms maximum
+PTS error, no errors, HMR or trace loss, and stable world/input/document identity
+with one camera.
+
+### Separate presentation from video sampling
+
+Four inspected contemporaneous video frames around recorder 11.96–12.31 seconds
+have observation gaps of 145.755, 182.168 and 20.031 ms. The trace shows intervening
+`Display::DrawAndSwap` and `Swap` events; browser readback requests themselves skip
+many of these swaps. Those video gaps therefore do not establish equivalent
+presentation freezes. The compositor cadence nevertheless slows to roughly
+20–23 ms there, and Chrome reports dropped frames. The longest main-frame task
+in that cluster is 27.604 ms: 7.294 ms animation callback, 8.751 ms style affecting
+4,602 elements, 2.441 ms layout with 1,969 dirty objects, and 4.369 ms layerization.
+This points the next investigation at recurring main-thread publication and
+browser lifecycle work, rather than treating video observation counts or rAF
+intervals alone as display-frame proof. Extracted events and inspected-frame
+identities are retained beside the capture.

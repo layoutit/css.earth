@@ -74,7 +74,8 @@ export interface PreparedWorldContext {
   readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number };
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
     readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
-      readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[] } }[];
+      readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];
+      readonly extentChords: readonly number[] } }[];
   readonly camera: WorldContextSource['camera'];
   readonly system: WorldContextSource['system'];
   readonly volume: WorldContextSource['volume'];
@@ -165,6 +166,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     const trail = fact.orbitStyle === 'closed' ? freeze(Array.from({ length: source.orbit.segments }, () => 1))
       : trailWeights(source.orbit.segments, source.orbit.trail);
     const activeChords = freeze(trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+    const extentChords = prepareExtentChords(activeChords);
     // Enclose the actual authored trail, including the pinned ephemeris vertex.
     // A sphere containing its endpoints also contains every active chord.
     const endpoints = activeChords.length ? activeChords.flatMap(index => [verticesM[index]!, verticesM[(index + 1) % verticesM.length]!]) : verticesM;
@@ -172,12 +174,28 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     const bounds = freeze({ centerM: copy(centerM), radiusM: Math.max(...endpoints.map(vertex =>
       Math.hypot(...vertex.map((value, axis) => value - centerM[axis]!)))) * (1 + 8 * Number.EPSILON) });
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
-      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords }) });
+      orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords, extentChords }) });
   });
   return freeze({ schema: 'cssearth-world-context@1',
     ...(Object.keys(orbitCenters).length ? { orbitCenters: freeze(Object.fromEntries(Object.entries(orbitCenters).map(([id, center]) =>
       [id, freeze({ positionM: copy(center.positionM), centerBodyId: center.centerBodyId })]))) } : {}),
     sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM }), bodies: freeze(bodies), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
+}
+
+// Measurement can stop when the existing fade saturates. Visit separated
+// parts of the authored trail first, then fill every gap breadth-first. This
+// permutation never changes drawing order or omits a positive-weight chord.
+function prepareExtentChords(active: readonly number[]): readonly number[] {
+  if (active.length === 0) return freeze([]);
+  const order = [active[0]!], ranges: [number, number][] = [[1, active.length]];
+  for (let index = 0; index < ranges.length; index++) {
+    const [start, end] = ranges[index]!;
+    if (start >= end) continue;
+    const middle = Math.floor((start + end) / 2);
+    order.push(active[middle]!);
+    ranges.push([start, middle], [middle + 1, end]);
+  }
+  return freeze(order);
 }
 
 function parseStars(value: unknown, volumeFadeStartDistanceM: number): WorldContextSource['stars'] {

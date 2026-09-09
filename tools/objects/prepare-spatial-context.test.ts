@@ -128,8 +128,15 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
         assert(distance < initialDistance * 1.2 && distance > initialDistance * .8, `${id} ellipse left its parent centre`);
       }
     }
-    assert.equal(result.bodies.some((body: { id: string }) => body.id === 'patroclus'), false, 'the primary coordinate is not an added scene or marker');
-    assert.deepEqual(result.orbitCenters.patroclus, { centerBodyId: 'sun', positionM: sourcePrimaries.get('patroclus')!.map(value => value * 1000) });
+    const authoredIds = new Set(source.bodies.map((body: { id: string }) => body.id));
+    for (const [id, positionKm] of sourcePrimaries) {
+      if (authoredIds.has(id)) {
+        assert.equal(result.orbitCenters?.[id], undefined, 'an authored primary owns its body frame, without a duplicate coordinate-only entry');
+      } else {
+        assert.equal(result.bodies.some((body: { id: string }) => body.id === id), false, 'a primary coordinate must not add an unauthored scene or marker');
+        assert.deepEqual(result.orbitCenters[id], { centerBodyId: 'sun', positionM: positionKm.map(value => value * 1000) });
+      }
+    }
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

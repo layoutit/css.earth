@@ -260,6 +260,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     expect(body.positionM, `${body.id} context must match the selectable detail origin`).toEqual(frame.originM);
     expect(body.orbit?.bounds, `${body.id} orbit bounds are owned by preparation`).toBeDefined();
     expect(body.orbit?.activeChords).toEqual(body.orbit?.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+    expect([...(body.orbit?.extentChords ?? [])].sort((a, b) => a - b)).toEqual(body.orbit?.activeChords);
   }
   expect(() => parsePreparedWorldContext({ ...source, focus: { ...(source.focus as Record<string, unknown>), positionM: [1, 0, 0] } })).toThrow('frame origin');
   const camera = source.camera as Record<string, unknown>, presentation = camera.presentation as Record<string, unknown>;
@@ -275,6 +276,9 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     { ...(body.orbit as object), bounds: { centerM: [0, 0, 0], radiusM: Infinity } },
     { ...(body.orbit as object), activeChords: [] },
     { ...(body.orbit as object), activeChords: [0, 0] },
+    { ...(body.orbit as object), extentChords: [] },
+    { ...(body.orbit as object), extentChords: (body.orbit as { extentChords: number[] }).extentChords.map(() => 0) },
+    { ...(body.orbit as object), extentChords: (body.orbit as { extentChords: number[] }).extentChords.map((value, index) => index === 0 ? .5 : value) },
     { ...(body.orbit as object), runtimeEphemeris: true }]) {
     expect(() => parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit }, ...bodies.slice(1)] })).toThrow();
   }

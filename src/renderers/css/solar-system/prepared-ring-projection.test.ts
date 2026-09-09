@@ -119,6 +119,9 @@ test('measurement demand preserves the clipped extent up to its existing saturat
     });
     const trail = vertices.map((_, index) => view % 3 === 0 && index < 93 ? 0 : (index + 1) / 128);
     const active = trail.flatMap((weight, index) => weight > 0 ? [index] : []);
+    // Extent is independent of traversal order, including near-plane and
+    // occlusion splits. Drawing continues to consume the authored order.
+    const scattered = [...active].sort((a, b) => (a * 73) % 128 - (b * 73) % 128);
     const occluder: Vector3 = [30 * scale, -15 * scale, -100 * scale];
     const projector = createPreparedRingProjector({ ...limits, near: .1 * scale,
       hidden: point => rayHitsSphereBefore(point, occluder, 12 * scale),
@@ -128,6 +131,7 @@ test('measurement demand preserves the clipped extent up to its existing saturat
     const extent = Math.max(1, Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
     for (const saturation of [48, 128]) {
       expect(projector.measureExtent(vertices, trail, saturation, active)).toBe(Math.min(extent, saturation));
+      expect(projector.measureExtent(vertices, trail, saturation, scattered)).toBe(Math.min(extent, saturation));
     }
   }
 });
@@ -138,6 +142,11 @@ test('a saturated hidden orbit stops transforming chords while its visible path 
   const projector = createPreparedRingProjector({ ...limits, toEye: p => { transforms++; return p; }, hidden: () => false, mayOcclude: () => false });
   expect(projector.measureExtent(vertices, trail, 128)).toBe(128);
   expect(transforms).toBeLessThan(20);
+  const sequentialTransforms = transforms;
+  transforms = 0;
+  const separated = [0, 64, ...vertices.flatMap((_, index) => index === 0 || index === 64 ? [] : [index])];
+  expect(projector.measureExtent(vertices, trail, 128, separated)).toBe(128);
+  expect(transforms).toBeLessThan(sequentialTransforms);
   transforms = 0;
   expect(projector(vertices, trail)).toHaveLength(128);
   expect(transforms).toBe(128);

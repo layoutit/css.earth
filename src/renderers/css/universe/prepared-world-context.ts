@@ -101,7 +101,8 @@ export interface PreparedContextFocus extends PreparedContextPoint {
 }
 export interface PreparedContextBody extends PreparedContextPoint {
   readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
-    readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[] };
+    readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[];
+    readonly extentChords?: readonly number[] };
 }
 export interface PreparedContextCameraPresentation {
   readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
@@ -213,7 +214,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
     const body = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
     if (input.orbit === undefined) return body;
-    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords']);
+    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords']);
     const centerBodyId = text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM = vector(orbit.centerPositionM, 'orbit centre position');
     const verticesM = array(orbit.verticesM, 'orbit vertices').map(value => vector(value, 'orbit vertex'));
     const trail = numbers(orbit.trail, 'orbit trail');
@@ -227,6 +228,12 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
         throw new TypeError('Prepared active chords must match every positive trail weight in order.');
       }
     }
+    const extentChords = orbit.extentChords === undefined ? undefined : numbers(orbit.extentChords, 'extent orbit chords');
+    if (extentChords && (extentChords.length !== trail.filter(weight => weight > 0).length ||
+        new Set(extentChords).size !== extentChords.length ||
+        extentChords.some(index => !Number.isSafeInteger(index) || !(trail[index] > 0)))) {
+      throw new TypeError('Prepared extent chords must visit every positive trail weight exactly once.');
+    }
     let bounds: { readonly centerM: PositionM; readonly radiusM: number } | undefined;
     if (orbit.bounds !== undefined) {
       const input = record(orbit.bounds, 'orbit bounds', ['centerM', 'radiusM']);
@@ -239,7 +246,8 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     }
     // Older prepared banks retain the exact projection path; no runtime bounds bake.
     return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail),
-      ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}) }) });
+      ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}),
+      ...(extentChords ? { extentChords: Object.freeze(extentChords) } : {}) }) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
@@ -635,7 +643,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             // Hidden paths have no geometry consumer. Their proxies still need
             // the exact existing fade, which saturates at 48/128 CSS pixels.
             measuredExtent = projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
-              entry.closedOrbit ? 48 : 128, entry.orbit.activeChords);
+              entry.closedOrbit ? 48 : 128, entry.orbit.extentChords ?? entry.orbit.activeChords);
           } else segments = projector(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords, entry.orbitProjection);
         }
         if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments, entry.closedOrbit);
