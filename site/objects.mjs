@@ -1,3 +1,5 @@
+import bienorDescriptor from "../src/planets/bienor/object.json" with { type: "json" };
+import charikloDescriptor from "../src/planets/chariklo/object.json" with { type: "json" };
 import annefrankDescriptor from "../src/planets/annefrank/object.json" with { type: "json" };
 import brailleDescriptor from "../src/planets/braille/object.json" with { type: "json" };
 import heraDescriptor from "../src/planets/hera/object.json" with { type: "json" };
@@ -2723,6 +2725,16 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(erisDescriptor);
     }, erisDescriptor.properties.worldFrame),
+  object("chariklo", "Chariklo", "asteroid", "#aaaaaa", 15.733429335695405,
+    "Explore Chariklo, a Centaur, with its observation-constrained shape and two narrow rings.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(charikloDescriptor);
+    }, charikloDescriptor.properties.worldFrame),
+  object("bienor", "Bienor", "asteroid", "#aaaaaa", 16.60224445563277,
+    "Explore Bienor, a Centaur, with its observation-constrained shape.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(bienorDescriptor);
+    }, bienorDescriptor.properties.worldFrame),
 ]);
 
 export function requireObject(id) {
