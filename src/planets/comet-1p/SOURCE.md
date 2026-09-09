@@ -82,7 +82,7 @@ This package contains the nucleus model only; no coma, tail or outgassing scene.
 
 ## Giotto encounter-image intake
 
-The [pinned candidate manifest](candidates/giotto-hmc.json) and
+The [pinned candidate manifest](source/reference/giotto-hmc-intake.json) and
 [intake report](../../../docs/comets/HALLEY-GIOTTO.md) retain a reproducible
 seven-frame survey from the original PDS SBN release, including its separate
 FITS geometry headers. Raster decoding and calibration are verified; a

@@ -1,6 +1,6 @@
 {
-  "capturedAt": "2026-09-09T15:55:18.986Z",
-  "preparedSha256": "de3869e5c04cdee4e9f41203a470f7b70ad0464bf6f1f8568a065ea042e6a0b9",
+  "capturedAt": "2026-09-09T16:03:48.720Z",
+  "preparedSha256": "3b526b083a5a0da4971ae58c39b46707d30c28c9ca28b51f7a7145f9abd886c2",
   "freshInstallation": {
     "installed": 56,
     "reused": 0,
@@ -18,7 +18,6 @@
     "comet-67p-ice-legend.webp",
     "comet-67p-ice-thumbnail.webp",
     "comet-67p-lighting.webp",
-    "comet-67p-model-shadow@2x.webp",
     "comet-67p-model-surface@2x.webp",
     "comet-67p-model-thumbnail.webp",
     "comet-67p-osiris-thumbnail.webp",
@@ -212,9 +211,9 @@
       ],
       "transportedPrepared": [
         {
-          "url": "http://127.0.0.1:53135/_astro/object.BSyOO2EJ.json",
-          "bytes": 6813687,
-          "sha256": "de3869e5c04cdee4e9f41203a470f7b70ad0464bf6f1f8568a065ea042e6a0b9"
+          "url": "http://127.0.0.1:53135/_astro/object.B_YGUTJa.json",
+          "bytes": 6813688,
+          "sha256": "3b526b083a5a0da4971ae58c39b46707d30c28c9ca28b51f7a7145f9abd886c2"
         }
       ],
       "errors": [],
@@ -403,9 +402,9 @@
       ],
       "transportedPrepared": [
         {
-          "url": "http://127.0.0.1:53135/_astro/object.BSyOO2EJ.json",
-          "bytes": 6813687,
-          "sha256": "de3869e5c04cdee4e9f41203a470f7b70ad0464bf6f1f8568a065ea042e6a0b9"
+          "url": "http://127.0.0.1:53135/_astro/object.B_YGUTJa.json",
+          "bytes": 6813688,
+          "sha256": "3b526b083a5a0da4971ae58c39b46707d30c28c9ca28b51f7a7145f9abd886c2"
         }
       ],
       "errors": [],
@@ -415,7 +414,7 @@
     {
       "dpr": 1,
       "browser": "152.0.7977.84",
-      "url": "http://127.0.0.1:52365/comet-67p/",
+      "url": "http://127.0.0.1:53770/comet-67p/",
       "views": [
         {
           "id": "regions",
@@ -458,7 +457,7 @@
           "leaves": 1000,
           "atlases": [
             {
-              "url": "http://127.0.0.1:52365/scenes/comet-67p/comet-67p-regions-surface@2x.webp",
+              "url": "http://127.0.0.1:53770/scenes/comet-67p/comet-67p-regions-surface@2x.webp",
               "bytes": 49548,
               "sha256": "94aa45d4d0bae7a63d59a3cc6a0020b7eead3fd84ef846f06a5ee397f1b7c6c8"
             }
@@ -508,7 +507,7 @@
           "leaves": 1000,
           "atlases": [
             {
-              "url": "http://127.0.0.1:52365/scenes/comet-67p/comet-67p-regions-shadow@2x.webp",
+              "url": "http://127.0.0.1:53770/scenes/comet-67p/comet-67p-regions-shadow@2x.webp",
               "bytes": 676690,
               "sha256": "5987a7b302104a7b64c5f3eaab3829d3e2d8e1300bb6b35e5658f6a557ecc425"
             }
@@ -545,7 +544,7 @@
           "leaves": 1000,
           "atlases": [
             {
-              "url": "http://127.0.0.1:52365/scenes/comet-67p/comet-67p-geology-surface@2x.webp",
+              "url": "http://127.0.0.1:53770/scenes/comet-67p/comet-67p-geology-surface@2x.webp",
               "bytes": 259986,
               "sha256": "96e9aecc6881d76a13ef82869879409a6581ccb036c27ee892799a00e31e854b"
             }
@@ -582,7 +581,7 @@
           "leaves": 1000,
           "atlases": [
             {
-              "url": "http://127.0.0.1:52365/scenes/comet-67p/comet-67p-geology-shadow@2x.webp",
+              "url": "http://127.0.0.1:53770/scenes/comet-67p/comet-67p-geology-shadow@2x.webp",
               "bytes": 927194,
               "sha256": "11938d6063f9afda19e6e1b5cffaa38aef2af1e9a1a6e3613ff55dff27ea9f4c"
             }
@@ -594,9 +593,9 @@
       ],
       "transportedPrepared": [
         {
-          "url": "http://127.0.0.1:52365/_astro/object.BSyOO2EJ.json",
-          "bytes": 6813687,
-          "sha256": "de3869e5c04cdee4e9f41203a470f7b70ad0464bf6f1f8568a065ea042e6a0b9"
+          "url": "http://127.0.0.1:53770/_astro/object.B_YGUTJa.json",
+          "bytes": 6813688,
+          "sha256": "3b526b083a5a0da4971ae58c39b46707d30c28c9ca28b51f7a7145f9abd886c2"
         }
       ],
       "errors": [],

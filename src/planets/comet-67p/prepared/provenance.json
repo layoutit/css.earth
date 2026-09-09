@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a069cbb06e9afddf54076b896fd719a3588645be52ddab33d806c2536f3fcb04"
+    "sha256": "87df8a4332e96ba91fa4121e5ade699fc977dfd4df0bc48daedd18c280f6b9a1"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -748,7 +748,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3f018d1c03f90797a45020238601bdfbc87083d966f7a59a507ca67baf095192",
+      "sha256": "cff2da0c3cec3ae220786445548c75d4b48a129e2269fbfb38e5288df6a96e12",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -1254,7 +1254,7 @@
               "kind": "toggle",
               "name": "shadows",
               "label": "Shadows",
-              "checked": true
+              "checked": false
             },
             {
               "kind": "toggle",
@@ -2202,8 +2202,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3f018d1c03f90797a45020238601bdfbc87083d966f7a59a507ca67baf095192",
-      "bytes": 18672,
+      "sha256": "cff2da0c3cec3ae220786445548c75d4b48a129e2269fbfb38e5288df6a96e12",
+      "bytes": 18673,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

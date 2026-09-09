@@ -1,5 +1,7 @@
 # 67P regions and geological features
 
+Shadows defaults off across all seven comet scenes; Settings can enable it.
+
 Two datasets use the existing 1,000-triangle RMOC MTP019 scene and the shared
 selector, camera, lighting, facts and legend. No additional scene, feature picker
 or region navigation is introduced.
@@ -111,6 +113,14 @@ R2 publication and a separate empty-directory installation verified all 56 files
 proxy run, loaded the exact compiled object hash and the four new lighting atlas
 hashes. No original VTK/SBMT files or source-index maps were requested.
 
-![Regions with Shadows](evidence/67p-geology/regions-shadows.png)
+![Regions with Shadows off](evidence/67p-geology/regions-flood.png)
 
-![Geology with Shadows](evidence/67p-geology/geology-shadows.png)
+![Geology with Shadows off](evidence/67p-geology/geology-flood.png)
+
+The all-comet production check covers seven direct mounts and all 26 datasets:
+Shadows starts off, stays off during dataset changes, and remains available as an
+explicit opt-in. Each toggle preserves the retained scene. The source/prepared
+scene-contract test covers comets alongside asteroids. See
+[shadows-default.json](evidence/67p-geology/shadows-default.json). All 21 comet
+source/runtime-closure checks pass; the historical Halley intake manifest now
+lives under its pinned `source/reference` folder.

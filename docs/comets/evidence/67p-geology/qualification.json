@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-67p-geology-qualification@1",
-  "recordedAt": "2026-09-09T15:53:38.504Z",
+  "recordedAt": "2026-09-09T16:06:33.584273+00:00",
   "baseline": "b1c488c9b0ff5e86440c9bc1bbf6f4a9abb602be",
   "sourcePins": {
     "inputs": 32,
@@ -96,11 +96,19 @@
       "reused": 0,
       "bytes": 21526278
     },
-    "productionBrowserCaptures": 3
+    "productionBrowserCaptures": 3,
+    "allCometSourceRuntimeClosure": 21,
+    "allCometShadowsDefault": {
+      "comets": 7,
+      "datasets": 26,
+      "defaultShadows": false,
+      "explicitOptInWorks": true
+    }
   },
   "limits": [
     "Coverage percentages count display-atlas triangle-interior texels, not physical surface area.",
     "50 m bounds compare source model registration; they do not estimate instrument accuracy.",
     "Geology dots and strokes are cartographic symbols, not measured feature sizes."
-  ]
+  ],
+  "preparedSha256": "3b526b083a5a0da4971ae58c39b46707d30c28c9ca28b51f7a7145f9abd886c2"
 }
