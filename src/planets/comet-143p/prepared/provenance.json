@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef3795b47949a93a5d3b9fcab392eea6e0963114d11936b7558aaf22f9eb8f0a"
+    "sha256": "1a1a250710ae19f8691ab6efd2132c065f09a39f91649b0cfad5d2aaa27e933c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "7f2bc1e031212dbf5abf739fe10e29c008615162f1f4b9a0a6f2e5b2715e7c46"
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "89cfe244c3e8199da1d0ee79ae996d88d9cba015d5dced0868e753fb1ce4d65a",
+      "sha256": "a043542a63ef775eb0b940e534525bc1643814f172f6b3e62213969fb27a58fb",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -111,14 +111,15 @@
                   ],
                   "weight": 0.24
                 }
-              ]
+              ],
+              "uniformFlood": true
             },
             "thumbnail": {
               "size": 96,
               "longitudeDegrees": 70,
               "latitudeDegrees": 20,
-              "ambient": 0.45,
-              "diffuse": 0.55
+              "ambient": 1,
+              "diffuse": 0
             }
           }
         },
@@ -317,14 +318,14 @@
       "outputs": [
         {
           "url": "/scenes/comet-143p/comet-143p-model-thumbnail.webp",
-          "bytes": 1854,
-          "sha256": "55169882bee6d904e1cd88e3b1ab32bf92dddc7c5c1f9d97cc16ce4c26db2d1b",
+          "bytes": 1504,
+          "sha256": "53888388312bde6fad84f7ac5506007cc6385f483da75c051023951f0e030e1c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-143p/comet-143p-model-surface@2x.webp",
-          "bytes": 93386,
-          "sha256": "70a7d79432cd21ad3203f349ce8ce4705fda9e1442db8a338cbca68075bf6280",
+          "bytes": 112240,
+          "sha256": "288ceec39fa3f1b52ea6e9cf1218ab62f3a4e307a5b14e42ef504d3e8a7fa1ee",
           "verification": "bytes-verified"
         }
       ],

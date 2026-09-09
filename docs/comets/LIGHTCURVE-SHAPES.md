@@ -16,7 +16,7 @@ The thermal radius is used as a volume-equivalent display radius. This explicit 
 
 ## Preparation and validation
 
-The shared parameter loader subdivides an octahedron and scales it to the authored ellipsoid. The established meshoptimizer path reduces 2,048 triangles to 800, preserving a closed surface. Both material banks and the grid are baked into 64-pixel atlas cells. There is no runtime geometry, texture generation or extra scene owner.
+The shared parameter loader subdivides an octahedron and scales it to the authored ellipsoid. The established meshoptimizer path reduces 2,048 triangles to 800, preserving a closed surface. Both material banks and the grid are baked into 64-pixel atlas cells. The default bank preserves the plain grid without directional darkening. Only the opt-in Shadows bank uses source-normal lighting and cast shadows. There is no runtime geometry, texture generation or extra scene owner.
 
 Numerical checks use the published ratios, independent Horizons vectors and analytic ellipsoid surfaces. The sampled distance bounds use projected analytic surface points, covering every retained vertex, edge midpoint and face centre. They bound nearest-surface distance for those samples; they are neither exhaustive bounds nor observational accuracy. The fixed pole conversion is independently inverted to recover the published coordinates. Existing Tuttle geometry checks cover the extracted common tessellation.
 

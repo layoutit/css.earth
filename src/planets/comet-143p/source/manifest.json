@@ -58,8 +58,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 71514,
-      "expectedSha256": "b42c47c29c0ea6dcd0ab622ceab3073c95a37ca3c7d3717f1fd0f8d0454b56fc",
+      "expectedBytes": 40966,
+      "expectedSha256": "6caf4c9aba554ac33fa3f6c654482c6b4da2537c479639ab91a56cfb6a5eb0b0",
       "origin": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
       "credit": "Abbie L. Donaldson (2025); Fernández et al. (2013); cssEarth approximation",
       "license": "Published scientific parameters; cssEarth implementation MIT",
@@ -81,8 +81,8 @@
         "size": 512,
         "longitudeDegrees": 70,
         "latitudeDegrees": 20,
-        "ambient": 0.45,
-        "diffuse": 0.55,
+        "ambient": 1,
+        "diffuse": 0,
         "lensId": "model"
       }
     }
@@ -102,8 +102,8 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 1633,
-      "expectedSha256": "aef7d0ec7bbe7889f1acfbad103ed713d250987e21172db3ed2efcce0c406763",
+      "expectedBytes": 1627,
+      "expectedSha256": "41a5ac655a849f8820be61542dfb7d297338aa9ef9679f32f6263f45126dc5dd",
       "purpose": "Source evidence or authored preparation input."
     },
     {
@@ -114,8 +114,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2942,
-      "expectedSha256": "89cfe244c3e8199da1d0ee79ae996d88d9cba015d5dced0868e753fb1ce4d65a",
+      "expectedBytes": 2966,
+      "expectedSha256": "a043542a63ef775eb0b940e534525bc1643814f172f6b3e62213969fb27a58fb",
       "purpose": "Source evidence or authored preparation input."
     },
     {

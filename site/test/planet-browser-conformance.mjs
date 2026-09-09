@@ -612,11 +612,21 @@ async function proveDesktop(browser, planet, profile) {
       `${planet.id}: empty sky must request the shared deselection`);
     await page.evaluate(() => window.removeEventListener('objectdeselect', window.__conformanceDeselectProbe, { capture: true }));
 
-    await profile.setCamera(page, {
-      pitch: bounds.maximumPitch + 100,
-      zoom: bounds.maximumZoom + 100,
-    });
-    const maximum = await profile.camera(page);
+    // Probe both setter limits in one task, then restore the selected view.
+    // Holding the maximum dolly distance intentionally enters overview; that
+    // handoff must not race the following retained-comet/planet assertions.
+    const { maximum, minimum } = await page.evaluate(({ id, bounds }) => {
+      const camera = window[`__${id}`].camera, before = camera.state();
+      const sample = () => { const state = camera.state(); return { pitch: state.pitch, zoom: state.zoom }; };
+      try {
+        camera.setState({ controlPitch: bounds.maximumPitch + 100, zoom: bounds.maximumZoom + 100 });
+        const maximum = sample();
+        camera.setState({ controlPitch: bounds.minimumPitch - 100, zoom: bounds.minimumZoom - 100 });
+        return { maximum, minimum: sample() };
+      } finally {
+        camera.setState({ controlPitch: before.controlPitch, controlYaw: before.controlYaw, zoom: before.zoom });
+      }
+    }, { id: planet.id, bounds });
     assert.equal(maximum.pitch, bounds.pitchBounded === false
       ? bounds.maximumPitch + 100
       : bounds.maximumPitch, bounds.pitchBounded === false
@@ -624,11 +634,6 @@ async function proveDesktop(browser, planet, profile) {
       : `${planet.id}: pitch must clamp at the prepared maximum`);
     assert.equal(maximum.zoom, bounds.maximumZoom,
       `${planet.id}: zoom must clamp at the prepared maximum`);
-    await profile.setCamera(page, {
-      pitch: bounds.minimumPitch - 100,
-      zoom: bounds.minimumZoom - 100,
-    });
-    const minimum = await profile.camera(page);
     assert.equal(minimum.pitch, bounds.pitchBounded === false
       ? bounds.minimumPitch - 100
       : bounds.minimumPitch, bounds.pitchBounded === false

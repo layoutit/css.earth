@@ -4,6 +4,7 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {createServer} from 'node:http';
 import {chromium} from 'playwright';
+import sharp from 'sharp';
 import {runtimeAssets} from '../../../../tools/runtime-assets.mjs';
 import {installRuntimeAssets} from '../../../../tools/setup.mjs';
 const origin=process.argv[2]??'http://127.0.0.1:53135';
@@ -47,11 +48,21 @@ try{
    const shadows=page.locator('input[name="shadows"]');assert.equal(await shadows.isChecked(),false);
    const initial=await page.evaluate(id=>{const root=document.querySelector('.polycss-scene'),leaves=[...document.querySelectorAll(`.${id}-body > u`)];window.__expansionNodes={root,leaves,geometry:leaves.map(n=>n.style.transform)};return {leaves:leaves.length,dimensions:[...new Set(leaves.map(n=>getComputedStyle(n).width+' × '+getComputedStyle(n).height))],initialPose:getComputedStyle(root).transform};},id);assert.equal(initial.leaves,800);
    const details=page.locator('[data-lens-details="model"]');assert.equal(await details.locator('.planet-facts > li').count(),2);assert.equal(await details.locator('.planet-lens-details-copy').innerText(),content.lenses.controls[0].description);
+   let gridRange;
    const inspect=async lit=>{
     const suffix=`${id}-model-${lit?'shadow':'surface'}@2x.webp`;
     await page.waitForFunction(({id,suffix})=>[...document.querySelectorAll(`.${id}-body > u`)].every(n=>getComputedStyle(n).backgroundImage.includes(suffix)),{id,suffix});
     const urls=await page.locator(`.${id}-body > u`).evaluateAll(nodes=>[...new Set(nodes.map(n=>getComputedStyle(n).backgroundImage.match(/url\("?([^"\)]+)/)[1]))]);
-    for(const url of urls){const r=await context.request.get(url),bytes=await r.body();assert.equal(hash(bytes),pins.get(new URL(url).pathname.split('/').at(-1)).sha256);}return urls;
+    for(const url of urls){
+     const r=await context.request.get(url),bytes=await r.body();assert.equal(hash(bytes),pins.get(new URL(url).pathname.split('/').at(-1)).sha256);
+     if(!lit){
+      const {data,info}=await sharp(bytes).ensureAlpha().raw().toBuffer({resolveWithObject:true});let minimum=255,maximum=0;
+      for(let i=0;i<data.length;i+=info.channels)if(data[i+3])for(let c=0;c<3;c++){minimum=Math.min(minimum,data[i+c]);maximum=Math.max(maximum,data[i+c]);}
+      // The shared grid is RGB 82/84/82 through 112/115/111. Allow a small
+      // WebP encoding margin; directional darkening would fail this check.
+      assert.ok(minimum>=72&&maximum<=125,`Shadows off must preserve the plain grid (${minimum}..${maximum})`);gridRange={minimum,maximum};
+     }
+    }return urls;
    };
    const flood=await inspect(false);await page.screenshot({path:resolve(out,`${id}-dpr-${dpr}.png`)});
    await page.getByRole('button',{name:'Settings',exact:true}).click();await page.locator('label').filter({hasText:'Shadows'}).click();await page.keyboard.press('Escape');assert.equal(await shadows.isChecked(),true);await inspect(true);
@@ -66,7 +77,7 @@ try{
    const retained=await page.evaluate(id=>{const state=window.__expansionNodes,nodes=[...document.querySelectorAll(`.${id}-body > u`)];return state.root===document.querySelector('.polycss-scene')&&nodes.length===800&&nodes.every((n,i)=>n===state.leaves[i]&&n.style.transform===state.geometry[i]);},id);assert.ok(retained);
    const forbidden=await page.locator('.polycss-scene').evaluate(root=>[...root.querySelectorAll('*')].filter(n=>{const s=getComputedStyle(n);return ['CANVAS','SVG'].includes(n.tagName)||s.clipPath!=='none'||s.filter!=='none'||s.maskImage!=='none'||s.mixBlendMode!=='normal'||s.backgroundImage.includes('gradient(')}).length);assert.equal(forbidden,0);
    await Promise.all(pending);assert.deepEqual(errors,[]);assert.equal(loaded.length,requestsBefore,'Prepared interaction must not fetch scene assets');
-   reports.push({id,dpr,fresh,preparedSha256:hash(payload),initial,retained,defaultShadows:false,optInWorks:true,forbidden,errors,coldResponses:cold,coldBodyBytes:cold.reduce((s,r)=>s+r.responseBodySize,0),flood});
+   reports.push({id,dpr,fresh,preparedSha256:hash(payload),initial,retained,defaultShadows:false,gridRange,optInWorks:true,forbidden,errors,coldResponses:cold,coldBodyBytes:cold.reduce((s,r)=>s+r.responseBodySize,0),flood});
   }finally{await context.close();}
  }
  await writeFile(resolve(out,'report.json'),JSON.stringify({at:new Date().toISOString(),origin,browser:browser.version(),installation,stage,files:assets,reports,qualification:'DPR 1 uses newly installed scene assets through a local proxy. DPR 2 records normal production responses. Transfer totals are separate; neither represents GPU memory.'},null,2)+'\n');

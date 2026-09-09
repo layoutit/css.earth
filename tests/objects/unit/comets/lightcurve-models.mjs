@@ -6,12 +6,7 @@ import { ellipsoidParameterMesh } from '../../../../tools/objects/terrestrial-la
 import { readAuthoredRotation } from '../../../../tools/objects/authored-rotation.mjs';
 const json=async p=>JSON.parse(await readFile(p,'utf8'));
 const near=(a,b,t)=>assert.ok(Math.abs(a-b)<t,`${a} differs from ${b}`);
-// Independent source anchors: Donaldson (2025), Tables 4.3/4.4 and p.79.
-for(const [id,ab,bc,radius,longitude,latitude] of [
- ['comet-137p',1.06,1.30,4.04,132.5,-56.5],
- ['comet-143p',1.21,1.24,4.79,55.4,-58.3],
- ['comet-162p',1.6,2.2,7.03,118,-50],
-]) {
+export function testLightcurveModel(id,ab,bc,radius,longitude,latitude) {
  test(`${id}: delivered approximation retains published proportions and closes one surface`,async()=>{
   const root=resolve('src/planets',id),model=await json(`${root}/source/shape/model.json`);
   const mesh=ellipsoidParameterMesh(model),[a,b,c]=mesh.axesMeters;
@@ -23,6 +18,7 @@ for(const [id,ab,bc,radius,longitude,latitude] of [
   assert.match(surfaces.surfaces[0].appearance,/no-imagery grid/);
   assert.equal(surfaces.surfaces[0].layout.tileSize,64);
   assert.deepEqual(config.raster.observations,[]);
+  assert.equal(config.geometry.radialTerrain.sourceLighting.uniformFlood,true,'Shadows off must not bake directional shading into the grid');
   const points=new Map(),edges=new Map(),sampleErrors=[];
   const scale=config.geometry.radiusKm*1000/config.geometry.radius;
   for(const face of terrain.faces){
