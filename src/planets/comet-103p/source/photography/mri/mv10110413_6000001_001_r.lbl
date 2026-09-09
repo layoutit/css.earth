@@ -1,0 +1,402 @@
+PDS_VERSION_ID   = PDS3                                                       
+RECORD_TYPE      = "FIXED_LENGTH"                                             
+RECORD_BYTES     = 2880                                                       
+FILE_RECORDS     = 3303                                                       
+                                                                              
+^HEADER = ("MV10110413_6000001_001_R.FIT",1)                                  
+^IMAGE = ("MV10110413_6000001_001_R.FIT",19)                                  
+^EXT_QUALITY_FLAGS_HEADER = ("MV10110413_6000001_001_R.FIT",1476)             
+^EXT_QUALITY_FLAGS_IMAGE = ("MV10110413_6000001_001_R.FIT",1477)              
+^EXT_SNR_HEADER = ("MV10110413_6000001_001_R.FIT",1842)                       
+^EXT_SNR_IMAGE = ("MV10110413_6000001_001_R.FIT",1843)                        
+^EXT_DESTRIPE_HEADER = ("MV10110413_6000001_001_R.FIT",3300)                  
+^EXT_DESTRIPE_IMAGE = ("MV10110413_6000001_001_R.FIT",3301)                   
+                                                                              
+DATA_SET_ID          = "DIF-C-MRI-3/4-EPOXI-HARTLEY2-V1.0"                    
+MISSION_NAME         = "EPOXI"                                                
+INSTRUMENT_HOST_NAME = "DEEP IMPACT FLYBY SPACECRAFT"                         
+INSTRUMENT_HOST_ID   = "DIF"                                                  
+INSTRUMENT_NAME      =                                                        
+  "DEEP IMPACT MEDIUM RESOLUTION INSTRUMENT - VISIBLE CCD"                    
+INSTRUMENT_ID        = "MRI"                                                  
+                                                                              
+/***** PRODUCT INFORMATION *****/                                             
+PRODUCT_ID           = "MV10110413_6000001_001_R_FIT"                         
+PRODUCT_CREATION_TIME = 2011-06-10T17:26:19                                   
+PRODUCT_TYPE         = "RADIANCE_CLEANED"                                     
+                                                                              
+/***** TIME INFORMATION *****/                                                
+START_TIME           = 2010-11-04T13:59:12.526                                
+EPOXI:IMAGE_MID_TIME = 2010-11-04T13:59:12.586                                
+STOP_TIME            = 2010-11-04T13:59:12.646                                
+START_JULIAN_DATE_VALUE = 2455505.0827839                                     
+MID_JULIAN_DATE_VALUE   = 2455505.0827846                                     
+STOP_JULIAN_DATE_VALUE  = 2455505.0827853                                     
+SPACECRAFT_CLOCK_START_COUNT      = "1/0342149268.239"                        
+EPOXI:SPACECRAFT_CLOCK_MID_COUNT  = "1/0342149268.255"                        
+SPACECRAFT_CLOCK_STOP_COUNT       = "1/0342149269.014"                        
+EPOXI:EARTH_OBSERVER_MID_TIME     = 2010-11-04T14:00:30.519                   
+                                                                              
+/***** OBSERVATION INFORMATION *****/                                         
+MISSION_PHASE_NAME           = "HARTLEY 2 ENCOUNTER"                          
+EPOXI:MISSION_ACTIVITY_TYPE  = "FLYBY"                                        
+EPOXI:OBSERVATION_DESC       = "NADIR HIGH RES"                               
+EPOXI:POINTING_DESC          = "TO HARTLEY"                                   
+TARGET_NAME                  = "103P/HARTLEY 2 (1986 E2)"                     
+INSTRUMENT_MODE_ID           = "1"                                            
+EPOXI:INSTRUMENT_MODE_NAME   = "FF"                                           
+EPOXI:COMPRESSED_IMAGE_VALUE = "UNCOMPRESSED"                                 
+COMPRESSOR_ID          = "N/A"                                                
+EPOXI:OBSERVATION_ID   = "6000001"                                            
+EPOXI:IMAGE_NUMBER     = "001"                                                
+EPOXI:COMMANDED_IMAGE_COUNT = 1                                               
+FILTER_NUMBER          = "1"                                                  
+FILTER_NAME            = "CLEAR1"                                             
+CENTER_FILTER_WAVELENGTH    = 650 <NM>                                        
+EPOXI:INTEGRATION_DURATION  = 120.5000000 <MS>                                
+EPOXI:SPACECRAFT_PROCESSOR_ID = "SCU-A"                                       
+INSTRUMENT_TEMPERATURE =                                                      
+( 300.7666400 <K>                                                             
+, 300.4112160 <K>                                                             
+, "UNK"                                                                       
+, 300.2764000 <K>                                                             
+, 274.0485600 <K>                                                             
+, 180.1594553 <K>                                                             
+, 159.1412960 <K>                                                             
+, 157.7533737 <K>                                                             
+, 156.8156708 <K>                                                             
+, 150.8135110 <K>                                                             
+, 0.0000000 <K>                                                               
+)                                                                             
+INSTRUMENT_TEMPERATURE_POINT =                                                
+( "INSTRUMENT CONTROLLER PROCESSING BOARD"                                    
+, "CCD SIGNAL PROCESSING BOARD"                                               
+, "IR SIGNAL PROCESSING BOARD"                                                
+, "LVPS SIGNAL PROCESSING BOARD"                                              
+, "CCD PREAMP BOX"                                                            
+, "CCD ON-CHIP SENSOR"                                                        
+, "OPTICAL BENCH"                                                             
+, "PRIMARY MIRROR"                                                            
+, "SECONDARY MIRROR"                                                          
+, "STRUCTURE COVER"                                                           
+, "IR FPA ON-CHIP SENSOR"                                                     
+)                                                                             
+INSTRUMENT_VOLTAGE =                                                          
+( 1.2147211 <V>                                                               
+, 1.2186888 <V>                                                               
+, 1.2153315 <V>                                                               
+, 1.2083117 <V>                                                               
+, 5.1288890 <V>                                                               
+, 5.1185582 <V>                                                               
+, 5.1177635 <V>                                                               
+, 5.1241209 <V>                                                               
+, 5.0096865 <V>                                                               
+, -5.0176333 <V>                                                              
+, 5.0271695 <V>                                                               
+, -9.1856236 <V>                                                              
+, 0.0000000 <V>                                                               
+, 0.0000000 <V>                                                               
+, 0.0000000 <V>                                                               
+, "UNK"                                                                       
+)                                                                             
+INSTRUMENT_VOLTAGE_POINT =                                                    
+( "CCD OFFSET FROM ADC REF QUAD A"                                            
+, "CCD OFFSET FROM ADC REF QUAD B"                                            
+, "CCD OFFSET FROM ADC REF QUAD C"                                            
+, "CCD OFFSET FROM ADC REF QUAD D"                                            
+, "CCD OUTPUT AMP DRAIN QUAD A"                                               
+, "CCD OUTPUT AMP DRAIN QUAD B"                                               
+, "CCD OUTPUT AMP DRAIN QUAD C"                                               
+, "CCD OUTPUT AMP DRAIN QUAD D"                                               
+, "CCD SERIAL CLOCK POSITIVE"                                                 
+, "CCD SERIAL CLOCK NEGATIVE"                                                 
+, "CCD PARALLEL CLOCK POSITIVE"                                               
+, "CCD PARALELL CLOCK NEGATIVE"                                               
+, "IR RESET"                                                                  
+, "IR SUBSTRATE"                                                              
+, "IR BIASGATE"                                                               
+, "IR CALIB LAMP"                                                             
+)                                                                             
+                                                                              
+/***** IMAGE INFORMATION *****/                                               
+HORIZONTAL_PIXEL_SCALE   =     8.153 <M/PIXEL>                                
+VERTICAL_PIXEL_SCALE     =     8.153 <M/PIXEL>                                
+                                                                              
+/***** GEOMETRY PARAMETERS *****/                                             
+NOTE                         = "                                              
+  Earth Mean Equator and Vernal Equinox J2000 is the inertial reference       
+  system used to specify observational geometry.  Geometric parameters are    
+  based on the best available SPICE data at the time of product creation.     
+  Refer to the EPOXI SPICE archive for the most current observational         
+  geometry.  The observation midpoint was used to derive the geometry.        
+  All positions are relative to body centers."                                
+                                                                              
+EPOXI:GEOMETRY_QUALITY_FLAG       = "OK"                                      
+EPOXI:GEOMETRY_TYPE               = "RECONSTRUCTED"                           
+SPICE_FILE_NAME    = ( "NAIF0009.TLS",                                        
+                       "PCK00008.TPC",                                        
+                       "DI_TEMPEL1_V01.TPC",                                  
+                       "DI_HARTLEY_2_V01.TPC",                                
+                       "DIF_SCLKSCET_00084_SCIENCE.TSC",                      
+                       "DI_V18.TF",                                           
+                       "DIF_HRI_V10.TI",                                      
+                       "DIF_MRI_V10.TI",                                      
+                       "DIF_SC_090101_110228_V2.BC",                          
+                       "DIF_SC_101104_HIGHRATE.BC",                           
+                       "HARTLEY_2_2005_2020.BSP",                             
+                       "SPK_MARS_DRM232.BSP",                                 
+                       "JUP164_20YEAR.BSP",                                   
+                       "DIF_PREENC174_NAV_V1.BSP",                            
+                       "DI_FINALENC_NAV_V3_TO2006048.BSP",                    
+                       "DIF_DIXI_NAV_V1.BSP" )                                
+RIGHT_ASCENSION                  = 173.293805300 <DEG>                        
+DECLINATION                      =  82.580656800 <DEG>                        
+CELESTIAL_NORTH_CLOCK_ANGLE      = 309.2691 <DEG>                             
+EPOXI:ECLIPTIC_NORTH_CLOCK_ANGLE = 241.8804 <DEG>                             
+EPOXI:SUN_DIRECTION_CLOCK_ANGLE  = 182.0624 <DEG>                             
+EPOXI:BODY_POSITIVE_POLE_CLOCK_ANGLE = 322.1591 <DEG>                         
+SOLAR_ELONGATION                 = 100.9183 <DEG>                             
+PHASE_ANGLE                      =  79.161 <DEG>                              
+TARGET_CENTER_DISTANCE           =        815.2971 <KM>                       
+TARGET_HELIOCENTRIC_DISTANCE     =  159107872.581 <KM>                        
+TARGET_GEOCENTRIC_DISTANCE       =   23363846.472 <KM>                        
+EPOXI:SC_HELIOCENTRIC_DISTANCE   =  159107719.268 <KM>                        
+EPOXI:SC_GEOCENTRIC_DISTANCE     =   23363712.684 <KM>                        
+QUATERNION_DESC                   = "QUATERNION_DESC.ASC"                     
+QUATERNION                        =                                           
+(  0.389714000000                                                             
+, -0.062106000000                                                             
+, -0.018139200000                                                             
+,  0.918660300000                                                             
+)                                                                             
+EPOXI:SC_ROTATION_VELOCITY_VECTOR =                                           
+(   9.200200000000e-03 <RAD/S>                                                
+,   8.928100000000e-03 <RAD/S>                                                
+,   1.056400000000e-03 <RAD/S>                                                
+)                                                                             
+EPOXI:TARGET_SC_POSITION_VECTOR   =                                           
+(        105.183 <KM>                                                         
+,        -11.324 <KM>                                                         
+,       -808.404 <KM>                                                         
+)                                                                             
+EPOXI:TARGET_SC_VELOCITY_VECTOR   =                                           
+(   6.376266 <KM/S>                                                           
+,  -7.453745 <KM/S>                                                           
+,   7.453576 <KM/S>                                                           
+)                                                                             
+TARGET_SUN_POSITION_VECTOR        =                                           
+( -103703233.348 <KM>                                                         
+, -113092462.966 <KM>                                                         
+,  -42083836.928 <KM>                                                         
+)                                                                             
+TARGET_SUN_VELOCITY_VECTOR        =                                           
+(  26.382204 <KM/S>                                                           
+, -26.695384 <KM/S>                                                           
+,  -1.985533 <KM/S>                                                           
+)                                                                             
+EARTH_TARGET_POSITION_VECTOR      =                                           
+(   -6751965.001 <KM>                                                         
+,   22206098.794 <KM>                                                         
+,    2677586.028 <KM>                                                         
+)                                                                             
+EARTH_TARGET_VELOCITY_VECTOR      =                                           
+(  -6.001678 <KM/S>                                                           
+,   6.442368 <KM/S>                                                           
+,  -6.794312 <KM/S>                                                           
+)                                                                             
+SC_SUN_POSITION_VECTOR            =                                           
+( -103703338.531 <KM>                                                         
+, -113092451.642 <KM>                                                         
+,  -42083028.523 <KM>                                                         
+)                                                                             
+SC_EARTH_POSITION_VECTOR          =                                           
+(    6751544.684 <KM>                                                         
+,  -22206104.563 <KM>                                                         
+,   -2677430.650 <KM>                                                         
+)                                                                             
+SUB_SPACECRAFT_LONGITUDE     = "N/A"                                          
+SUB_SPACECRAFT_LATITUDE      = "N/A"                                          
+SUB_SOLAR_LONGITUDE          = "N/A"                                          
+SUB_SOLAR_LATITUDE           = "N/A"                                          
+/* Coordinate system for sub-spacecraft and sub-solar values */               
+COORDINATE_SYSTEM_TYPE       = "N/A"                                          
+COORDINATE_SYSTEM_NAME       = "N/A"                                          
+                                                                              
+/***** PROCESSING HISTORY *****/                                              
+EPOXI:SDC_PIPELINE_FILE_NAME = "MV0342149268_6000001_001_R.FIT"               
+EPOXI:DATA_TO_IOVERF_MULTIPLIER   = 0.0024766                                 
+EPOXI:DATA_TO_RADIANCE_MULTIPLIER = 1.0                                       
+EPOXI:DATA_TO_DN_MULTIPLIER       = 3416.5013000                              
+PROCESSING_HISTORY_TEXT      = "                                              
+FILEVERN=             1.1000000 / Version number of file format               
+PGMNAME = 'DICAL   '            / Program name that produced this file        
+PGMVERN =             5.0400000 / Version number of the above program         
+DATAQUAL=                  -999 / Data quality (1                             
+TMPVLTUP=                     F / Physical temps and voltages updated (T/F)   
+TMPVLTV = '        '            / Valid date of physical temps, voltages used 
+SMOBENT =            -1.0000000 / Smoothed over time version of OPTBENT [K]   
+CMPRESSN=                     F / Decompression performed (T/F)               
+LUTTABLE= '        '            / Lossy lookup table/algorithm applied        
+CMPRMETH=                  -999 / Decompress method. 1                        
+SATPIX  =                     T / Saturated pixels flagged (T/F)              
+SMSATVL =                 11000 / DN value where some pixels are saturated    
+MSTSATVL=                 15000 / DN value where most pixels are saturated    
+ADCSATVL=                 16383 / DN value where the ADC encoder is saturated 
+BITCORR =                     F / Uneven bit weighting corrected (T/F)        
+BITLUT  = '        '            / Bit weighting lookup table used             
+DARKCORR=                     T / Dark subtration (T/F)                       
+DARKALG = 'MODEL   '            / Algorithm used to create dark               
+DARKFN  = 'MRIVIS_020601_2_1.FIT' / File name for frame/model used            
+BIASFN  = 'SERIAL OVERCLOCK'    / Filename of bias frame used                 
+XTALK   =                     T / Electrical crosstalk removed (T/F)          
+XTALKFN = 'MRIVIS_071004_3_1.FIT' / Filename of crosstalk gains used          
+GAINCORR=                     F / Quadrant Gain correction performed (T/F)    
+GAINFN  = '        '            / Filename of gain values used                
+FLATCORR=                     T / Flat fielded                                
+FLATFILE= 'MRIVIS_100201_1_1_1.FIT' / Name of flat field applied              
+BPIXFL  =                     T / Bad pixels flagged (T/F)                    
+BPIXFILE= 'MRIVIS_020601_1_1_999.FIT' / Name of bad pixel map applied         
+CLEAN   =                     T / Cleaned/fill small gaps (T/F)               
+CLEANV  =                  9999 / Max filled gap size; -999999                
+CLNBAD  =                     T / Bad pixels cleaned                          
+CLNMISS =                     T / Missing data cleaned                        
+DESPIKE =                     F / Despiking applied (T/F)                     
+DESPIKET=                  -999 / Despiking threshold used (sigma)            
+DESPIKEI=                  -999 / Number of iterations of despiking           
+DESPIKEB=                  -999 / Boxsize for despiking                       
+DESPIKEM= '        '            / Metric used for despiking. Mean or Median   
+DENOISE =                     F / Denoising applied (T/F)                     
+DENOISEV= '        '            / Denoise parameter applied                   
+DECON   =                     F / Deconvolution performed (T/F)               
+DECONPSF= '        '            / Deconvolution psf used                      
+DECONALG= '        '            / Deconvolution algorithm used                
+DECONV  = '        '            / Deconvolution algorithm-specific parameter  
+RMSTRIPE=                     F / Stripe removal algorithm applied (T/F)      
+SMEAR   =                     T / Frame-transfer smear removed (T/F)          
+SMEARV  = 'POC ROWS'            / Smear removal algorithm applied             
+RADCAL  =                     T / Radiance calibration applied (T/F)          
+RADCALV =             0.0000353 / Rad cal constant used [W/(m^2 sr um)/(DN/s)]
+RADCALW =                626.07 / Radiance calib - wavelength used [nm]       
+IOFCAL  =                     F / I/F calibration applied (T/F)               
+IOFCALV =          1434.9129000 / I/F cal constant used [W/(m^2 sr um) @ 1 AU]
+IOFCALW =                610.28 / I/F calib - wavelength used [nm]            
+IOFCALD =             1.0635704 / I/F calib - Distance used [AU]              
+MULT2RAD=             1.0000000 / Multiplier to convert data to Radiance      
+MULT2IOF=             0.0024766 / Multiplier to convert data to I/F           
+MULT2DN =          3416.5013000 / Multiplier to convert data to DN            
+GEOMCAL =                     F / Geometric calibration performed (T/F)       
+GEOMFILE= '        '            / File used for geometric calibration         
+"                                                                             
+                                                                              
+/***** IMAGE STATISTICS *****/                                                
+EPOXI:BAD_PIXEL_COUNT               = 2048                                    
+EPOXI:MISSING_PIXEL_COUNT           = 50                                      
+EPOXI:DESPIKED_PIXEL_COUNT          = 0                                       
+EPOXI:INTERPOLATED_PIXEL_COUNT      = 2016                                    
+EPOXI:PARTIAL_SATURATED_PIXEL_COUNT = 1867                                    
+EPOXI:SATURATED_PIXEL_COUNT         = 1100                                    
+EPOXI:ADC_SATURATED_PIXEL_COUNT     = 63                                      
+EPOXI:ULTRA_COMPRESSED_PIXEL_COUNT  = 0                                       
+                                                                              
+OBJECT     = HEADER                                                           
+  BYTES              = 51840                                                  
+  HEADER_TYPE        = "FITS"                                                 
+  INTERCHANGE_FORMAT = "BINARY"                                               
+  RECORDS            = 18                                                     
+  DESCRIPTION        = "FITS format defined in                                
+     NASA/Science Office Standards Technology 100-1.0"                        
+END_OBJECT = HEADER                                                           
+                                                                              
+OBJECT             = IMAGE                                                    
+  LINE_SAMPLES     = 1024                                                     
+  LINES            = 1024                                                     
+  SAMPLE_BITS      = 32                                                       
+  SAMPLE_TYPE      = "IEEE_REAL"                                              
+  AXIS_ORDER_TYPE  = "FIRST_INDEX_FASTEST"                                    
+  LINE_DISPLAY_DIRECTION   = "UP"                                             
+  SAMPLE_DISPLAY_DIRECTION = "RIGHT"                                          
+  UNIT             = "W/(m**2*sr*um)"                                         
+  EPOXI:MINIMUM            = 1.86180000000e-03                                
+  EPOXI:MAXIMUM            = 3.98362000000e+00                                
+  EPOXI:MEDIAN             = 1.27934000000e-02                                
+  EPOXI:STANDARD_DEVIATION = 1.71403000000e-01                                
+END_OBJECT         = IMAGE                                                    
+                                                                              
+OBJECT     = EXT_QUALITY_FLAGS_HEADER                                         
+  BYTES              = 2880                                                   
+  HEADER_TYPE        = "FITS"                                                 
+  INTERCHANGE_FORMAT = "BINARY"                                               
+  RECORDS            = 1                                                      
+  DESCRIPTION        = "This extension provides quality flags for             
+   each pixel in the primary image array.  Each of the one-byte pixels        
+   in this map is composed of eight bits.  Each bit represents a specific     
+   characteristic about the corresponding pixel in the primary image          
+   array.  For a raw image, only the bit for a missing data value is set      
+   (bit 1 below).  The remaining 7 bits apply only to a calibrated image      
+   and are thus set to zero for a raw image.  The bits are described below    
+   and are listed from the least-significant (0) to most-significant (7):     
+     0 = Bad                                                                  
+     1 = Data for this pixel was not received from the spacecraft or          
+         this pixel is one of the image header bytes.                         
+     2 = Despiked                                                             
+     3 = Interpolated                                                         
+     4 = Partially saturated                                                  
+     5 = Mostly saturated                                                     
+     6 = ADC saturated                                                        
+     7 = Ultra compressed"                                                    
+END_OBJECT = EXT_QUALITY_FLAGS_HEADER                                         
+                                                                              
+OBJECT             = EXT_QUALITY_FLAGS_IMAGE                                  
+  LINE_SAMPLES     = 1024                                                     
+  LINES            = 1024                                                     
+  SAMPLE_BITS      = 8                                                        
+  SAMPLE_TYPE      = "MSB_UNSIGNED_INTEGER"                                   
+  AXIS_ORDER_TYPE  = "FIRST_INDEX_FASTEST"                                    
+  LINE_DISPLAY_DIRECTION   = "UP"                                             
+  SAMPLE_DISPLAY_DIRECTION = "RIGHT"                                          
+END_OBJECT         = EXT_QUALITY_FLAGS_IMAGE                                  
+                                                                              
+OBJECT     = EXT_SNR_HEADER                                                   
+  BYTES              = 2880                                                   
+  HEADER_TYPE        = "FITS"                                                 
+  INTERCHANGE_FORMAT = "BINARY"                                               
+  RECORDS            = 1                                                      
+  DESCRIPTION        = "This extension is the signal-to-noise ratio           
+   for each pixel in the primary image array."                                
+END_OBJECT = EXT_SNR_HEADER                                                   
+                                                                              
+OBJECT             = EXT_SNR_IMAGE                                            
+  LINE_SAMPLES     = 1024                                                     
+  LINES            = 1024                                                     
+  SAMPLE_BITS      = 32                                                       
+  SAMPLE_TYPE      = "IEEE_REAL"                                              
+  AXIS_ORDER_TYPE  = "FIRST_INDEX_FASTEST"                                    
+  LINE_DISPLAY_DIRECTION   = "UP"                                             
+  SAMPLE_DISPLAY_DIRECTION = "RIGHT"                                          
+END_OBJECT         = EXT_SNR_IMAGE                                            
+                                                                              
+OBJECT     = EXT_DESTRIPE_HEADER                                              
+  BYTES              = 2880                                                   
+  HEADER_TYPE        = "FITS"                                                 
+  INTERCHANGE_FORMAT = "BINARY"                                               
+  RECORDS            = 1                                                      
+  DESCRIPTION        = "This extension contains the two columns of DNs        
+   which have been subtracted from every non-overclock column in the          
+   left and right halves of the primary image array by the destriping         
+   module of the calibration pipeline.                                        
+                                                                              
+   See the comments in this FITS header for more details."                    
+END_OBJECT = EXT_DESTRIPE_HEADER                                              
+                                                                              
+OBJECT             = EXT_DESTRIPE_IMAGE                                       
+  LINE_SAMPLES     = 2                                                        
+  LINES            = 1024                                                     
+  SAMPLE_BITS      = 32                                                       
+  SAMPLE_TYPE      = "IEEE_REAL"                                              
+  AXIS_ORDER_TYPE  = "FIRST_INDEX_FASTEST"                                    
+  LINE_DISPLAY_DIRECTION   = "UP"                                             
+  SAMPLE_DISPLAY_DIRECTION = "RIGHT"                                          
+  UNIT             = "DATA_NUMBER"                                            
+END_OBJECT         = EXT_DESTRIPE_IMAGE                                       
+                                                                              
+END                                                                           
