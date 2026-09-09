@@ -1,0 +1,279 @@
+{
+  "schema": "cssgaspra-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "NASA PDS public scientific data; retain attribution and source notices.",
+      "acquisition": "Checked-in original; restore and hash-verify through preparation/acquisition.json.",
+      "redistribution": "Attributed scientific visualization derivatives; see NOTICE.md.",
+      "id": "gaspra-shape",
+      "path": "shape/951gaspra.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab",
+      "consumers": [
+        "terrain",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "planetocentric-radial-grid",
+        "longitudeDirection": "west",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 6100
+      },
+      "coverage": "Published complete radial model at 2° spacing. Observational constraints vary; unseen regions are uncertain.",
+      "expectedBytes": 527072,
+      "expectedSha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0"
+    },
+    {
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "NASA PDS public scientific data; retain attribution and source notices.",
+      "acquisition": "Checked-in original; restore and hash-verify through preparation/acquisition.json.",
+      "redistribution": "Attributed scientific visualization derivatives; see NOTICE.md.",
+      "id": "gaspra-normal",
+      "path": "maps/951gaspram.fit",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 720,
+      "height": 360,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "west",
+        "centerLongitude": 0,
+        "sourceColumnDirection": "east",
+        "sourceRowOrder": "north-to-south",
+        "registrationEvidence": "reference/registration.md"
+      },
+      "coverage": "High-pass filtered SSI observation mosaic at 2 px/degree, best native detail approximately55 m/px. Zero is poor or no coverage; 64.6022% of unweighted native map pixels are zero. Remaining imagery retains photographed illumination, not calibrated albedo.",
+      "expectedBytes": 262080,
+      "expectedSha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit",
+      "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
+      "license": "NASA PDS public scientific data; retain attribution and source notices.",
+      "expectedBytes": 91335,
+      "expectedSha256": "8d6b2077244356f99618c76e18a7d47c7d514f85e2f8c9c747b1837078b577b8",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "gaspra-normal",
+          "gaspra-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 300,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 10601,
+      "expectedSha256": "ba8053795edc7fca9ff5efb48faee7ba84a308eaf1d2b595c93b08eedb7629c2"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 902,
+      "expectedSha256": "d7d4be22828b52837fa70dfa7fe7d5122a3522d527f09b1d3590e63fb72a5bbb"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 1310,
+      "expectedSha256": "bbe53e9759329968afc528eecbf0bf04249ae9180a738514f526fabb051ec1d0"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 408,
+      "expectedSha256": "8b47b613cc29dd97ad41bb701310476a82578fe38948bc6cf21b92ea7cf269c8"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 3217,
+      "expectedSha256": "40b47de2d69a666ec0d3644b4863ef9cb55d2385b4018bc8e2181cb68750c4e2"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 4935,
+      "expectedSha256": "ea129b86bf5d3cd5e06e8bb2e32242a30df3200924d8908c80ff250a35248147"
+    },
+    {
+      "path": "reference/951gaspimg.tab",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 1152,
+      "expectedSha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6"
+    },
+    {
+      "path": "reference/951gaspimg.xml",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 8616,
+      "expectedSha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee"
+    },
+    {
+      "path": "reference/951gaspra.xml",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 5531,
+      "expectedSha256": "6d92d943bef6a9bee3e21580c9ea14e9b717490c6dfdf2e989dbdf9d2d62d9e3"
+    },
+    {
+      "path": "reference/951gaspram.lbl",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 3760,
+      "expectedSha256": "dba7b9d75c22d9e143fdf732c8ba8cb97ecc786ed9b2ce284c805066cddf4b21"
+    },
+    {
+      "path": "reference/951gaspram.xml",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 7034,
+      "expectedSha256": "6d1f4f0e728b1a3bef00ef038d9e4b22102fcd6c636fe6cd35157bebe10cd7d4"
+    },
+    {
+      "path": "reference/bundle-index.html",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 1413,
+      "expectedSha256": "922e36209c4a271fb1c4134157489b6e5ab2006de1384037137a76e2a8a3cef8"
+    },
+    {
+      "path": "reference/bundle_description.txt",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 8495,
+      "expectedSha256": "e9e95c6166d77a94f475da744fc1ff828f020f455eb5eda6b725334300bb735d"
+    },
+    {
+      "path": "reference/calibrated-description.txt",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 5371,
+      "expectedSha256": "1b0c5a3aef3c6b2df91ac55a6a721396bdabb3ec713c167c5a7897715b8cda2a"
+    },
+    {
+      "path": "reference/color-geometry-description.txt",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 6207,
+      "expectedSha256": "7ae7cdbd5a765556bd2e3b296276f694e546394eedf01dfa8482c02d867d3c7c"
+    },
+    {
+      "path": "reference/color-geometry-index.html",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 1457,
+      "expectedSha256": "16cf2fe5d3f85916868e13844f034c9d28b305441c7b3aff6ed3fd9a5899b1e5"
+    },
+    {
+      "path": "reference/gaspra-color-geometry.html",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 11295,
+      "expectedSha256": "c06f9a6ebfb34e1ed5e77ca5846a2f60e1d5415776f99cee6c3937e9c1a26f2d"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 7636,
+      "expectedSha256": "aa1a7acf9d6ae96b98ba85535f11458981f260bedf4ed1cde3f34283c26e178d"
+    },
+    {
+      "path": "reference/pck00011.tpc",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+    },
+    {
+      "path": "reference/registration.json",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 1724,
+      "expectedSha256": "09cdc6d98819f4a33e25904e1b30915b265845719392b142ecc1d72312b1c03f"
+    },
+    {
+      "path": "reference/registration.md",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 2476,
+      "expectedSha256": "3852552dd5f60c2e5e192eae4c56c8c28f2cafdecbe3d494e58c98e41c4ec49b"
+    },
+    {
+      "path": "reference/stooke-951gaspra.xml",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 7034,
+      "expectedSha256": "8d183c5b2f588ea7361a9f32c0fd2939430f6172ac143e7949de918c689bfbb3"
+    },
+    {
+      "path": "reference/stooke-description.txt",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 5105,
+      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+    },
+    {
+      "path": "reference/stooke-gascylmo.jpg",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 426988,
+      "expectedSha256": "af98d7470f31015182fc8d5b25e1464ec8d0d6750e98bd56df45c6fb5d0dd91b"
+    },
+    {
+      "path": "reference/stooke-gq5gedis.jpg",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 226540,
+      "expectedSha256": "52322646ebcc8c0a65dc34f3698a5dcaa59e0951a2421810aa323d74ea4c6893"
+    },
+    {
+      "path": "reference/stooke-map-guide.html",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 55559,
+      "expectedSha256": "721a2e655e7a39d9e800204b33914150c8df04b068ad9cc3e4cd782393aeeace"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 596,
+      "expectedSha256": "e0ce396ecd8248da152da0f67d7e2de2df102c6b81c2c88ca37d66bd35c03009"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source evidence or authored package input.",
+      "expectedBytes": 89772,
+      "expectedSha256": "506f238ccd2407eddad42f20cd79a5e32991e473371898f73a7d4242831fd266"
+    }
+  ]
+}

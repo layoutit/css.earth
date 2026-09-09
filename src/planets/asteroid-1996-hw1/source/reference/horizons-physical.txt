@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%278567%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                   8567 (1996 HW1)             2026-Sep-08 08:24:59
+Rec #:    8567 (+COV) Soln.date: 2025-Dec-09_05:26:03   # obs: 5530 (1955-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457924.5 ! 2017-Jun-20.00 (TDB)         Residual RMS= .27879
+   EC= .4494400229808387   QR= 1.126116747484797   TP= 2457930.8182563861
+   OM= 177.131835345233    W=  177.2976924450483   IN= 8.450731039563951
+   A= 2.045402489265224    MA= 357.8712083960718   ADIST= 2.96468823104565
+   PER= 2.92534            N= .336927069           ANGMOM= .021977246
+   DAN= 2.962              DDN= 1.12651            L= 354.458825
+   B= .3969841             MOID= .120416           TP= 2017-Jun-26.3182563861
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 1.464              ROTPER= 8.7573
+   H= 15.36                G= .150                 B-V= n.a.
+                           ALBEDO= .156            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#619, OCC=0           radar( 6 delay, 6 Dop.)
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,34 @@
+{
+  "semiAxesKm": [
+    27,
+    19,
+    19
+  ],
+  "fullAxesKm": [
+    54,
+    38,
+    38
+  ],
+  "axesFrame": "Adopted principal axes: x is the major axis toward Uranus; y and z have equal minor radii by the source prolate assumption. Standard IAU BODY707 body-fixed orientation.",
+  "model": "Published prolate-spheroid shape approximation; no resolved terrain",
+  "origin": "https://doi.org/10.1006/icar.2001.6596",
+  "radiusFormula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/27)^2+(cos(lat)*sin(lon)/19)^2+(sin(lat)/19)^2)",
+  "samplingStepDegrees": 10,
+  "units": "km",
+  "material": {
+    "path": "material/neutral.png",
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "size": [
+      64,
+      32
+    ],
+    "interpretation": "Every input pixel is a no-coverage sentinel; the shared gray grid depicts unavailable surface coverage, not measured terrain or albedo.",
+    "noData": 160
+  },
+  "referenceRadiusKm": 21.361102076705983,
+  "referenceRadiusSource": "Derived cube root of A B². The reported 23 ± 4 km is projected sqrt(A B) radius and does not renormalize the physical axes."
+}

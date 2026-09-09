@@ -6,6 +6,28 @@ import { join } from 'node:path';
 import sharp from 'sharp';
 import { prepareByteObservation } from './observed-image.mjs';
 
+test('projected RGB crops keep their extent, channel identity and dark valid samples', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-cropped-map-'));
+  try {
+    const path = join(directory, 'crop.png'), pixels = Buffer.alloc(12 * 5 * 3);
+    for (let y = 0; y < 5; y++) for (let x = 0; x < 12; x++) pixels.set([x + 1, y + 1, 0], (y * 12 + x) * 3);
+    await sharp(pixels, { raw: { width: 12, height: 5, channels: 3 } }).png().toFile(path);
+    const result = await prepareByteObservation(path, { id: 'crop', width: 12, height: 5 }, {
+      kind: 'image-rgb-no-data', noData: 0, centerLongitude: 180,
+      grid: { pixelsPerDegree: 1 / 30, sampleOffset: 5.5, lineOffset: 2.5 },
+    }, 12, 6);
+    assert.deepEqual(result.rgb.subarray(0, 12 * 5 * 3), pixels);
+    assert.ok(result.missing.subarray(0, 12 * 5).every(v => v === 0));
+    assert.ok(result.missing.subarray(12 * 5).every(v => v === 1), 'the cropped south row is not stretched into invented coverage');
+    const smaller = await prepareByteObservation(path, { id: 'crop', width: 12, height: 5 }, {
+      kind: 'image-rgb-no-data', noData: 0, centerLongitude: 180,
+      grid: { pixelsPerDegree: 1 / 30, sampleOffset: 5.5, lineOffset: 2.5 },
+    }, 6, 3);
+    assert.equal(smaller.rgb.length, 6 * 3 * 3);
+    assert.ok(smaller.rgb.some(v => v > 0), 'downsampling retains observed RGB rather than indexing a native-size joined alpha band');
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
 test('byte-map coverage preserves dark observations and rolls longitude without mirroring', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-byte-map-'));
   try {
@@ -30,4 +52,41 @@ test('byte-map coverage preserves dark observations and rolls longitude without 
     assert.deepEqual(color.rgb, colors, 'RGB ratios and black pixels survive source preparation');
     assert.equal(color.sourceMissingPixels,0);
   } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('polar-connected coverage preserves enclosed photographic black before resampling', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-polar-map-'));
+  try {
+    const path = join(directory, 'source.png');
+    // The right-hand gap reaches the north via the longitude seam. The enclosed
+    // black pixel is photographed terrain, not missing coverage.
+    await sharp(Buffer.from([0,100,100,100, 0,100,100,0, 100,100,100,100, 100,0,100,100]),
+      {raw:{width:4,height:4,channels:1}}).toColourspace('b-w').png().toFile(path);
+    const entry = {id:'polar',width:4,height:4};
+    const policy = {noData:0,centerLongitude:180,connectedEdge:'north'};
+    const result = await prepareByteObservation(path,entry,policy,4,4);
+    assert.deepEqual([...result.missing], [1,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0]);
+    assert.equal(result.rgb[13*3],0);
+    const resized = await prepareByteObservation(path,entry,policy,8,8);
+    assert.equal(resized.missing[7*8+3],0,'Enclosed dark terrain stays valid when resized');
+    await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedEdge:'typo'},4,4));
+  } finally { await rm(directory,{recursive:true,force:true}); }
+});
+
+test('a declared compressed gray exterior uses connected coverage without erasing isolated terrain', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-gray-exterior-'));
+  try {
+    const path = join(directory, 'source.png');
+    const gray = [78,75,110,110, 79,110,110,81, 110,110,110,110, 110,78,110,110];
+    await sharp(Buffer.from(gray), {raw:{width:4,height:4,channels:1}}).toColourspace('b-w').png().toFile(path);
+    const entry = {id:'gray-exterior',width:4,height:4};
+    const policy = {kind:'image-monochrome-no-data',noData:78,centerLongitude:180,
+      connectedEdge:'north',connectedFillRange:[75,81]};
+    const result = await prepareByteObservation(path,entry,policy,4,4);
+    assert.deepEqual([...result.missing], [1,1,0,0,1,0,0,1,0,0,0,0,0,0,0,0]);
+    assert.equal(result.rgb[13*3],78);
+    assert.equal(result.sourceMissingPixels,4);
+    await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedEdge:undefined},4,4),/range/);
+    await assert.rejects(prepareByteObservation(path,entry,{...policy,connectedFillRange:[81,75]},4,4),/range/);
+  } finally { await rm(directory,{recursive:true,force:true}); }
 });

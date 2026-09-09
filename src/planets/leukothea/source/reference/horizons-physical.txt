@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2735%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               35 Leukothea (A855 HA)          2026-Sep-08 10:25:10
+Rec #:      35 (+COV) Soln.date: 2026-Jun-05_03:03:29   # obs: 7743 (1860-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457479.5 ! 2016-Apr-01.00 (TDB)         Residual RMS= .23995
+   EC= .226254498591306    QR= 2.315559478755581   TP= 2457468.8363770079
+   OM= 353.7495477453215   W=  213.2346592280182   IN= 7.936737596710409
+   A= 2.992662929270457    MA= 2.030122059491116   ADIST= 3.669766379785333
+   PER= 5.1772             N= .190378266           ANGMOM= .028986763
+   DAN= 3.50226            DDN= 2.38762            L= 206.7318868
+   B= -4.3401337           MOID= 1.31672001        TP= 2016-Mar-21.3363770079
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 51.5275            ROTPER= 31.9
+   H= 8.68                 G= .150                 B-V= .703
+                           ALBEDO= .066            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#94, OCC=0
+2: source=ORB
+*******************************************************************************

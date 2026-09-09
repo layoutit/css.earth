@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271000%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               1000 Piazzia (A923 PF)          2026-Sep-08 10:25:51
+Rec #:    1000 (+COV) Soln.date: 2026-Jun-05_04:20:23   # obs: 6902 (1923-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458229.5 ! 2018-Apr-21.00 (TDB)         Residual RMS= .21173
+   EC= .2582307168529704   QR= 2.351451565181113   TP= 2458669.8474931759
+   OM= 323.7419753565355   W=  280.8964407540547   IN= 20.57483132655663
+   A= 3.170057885391057    MA= 283.104873906981    ADIST= 3.988664205601002
+   PER= 5.64429            N= .17462374            ANGMOM= .029588953
+   DAN= 2.82096            DDN= 3.11051            L= 245.361241
+   B= -20.187552           MOID= 1.43945003        TP= 2019-Jul-05.3474931759
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 23.89              ROTPER= 9.47
+   H= 10.63                G= .150                 B-V= n.a.
+                           ALBEDO= .1119           STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#79, OCC=0
+2: source=ORB
+*******************************************************************************

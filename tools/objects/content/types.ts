@@ -49,6 +49,7 @@ export interface LensRecipe {
   detail?: string;
   shortLabel?: string;
   description: string;
+  facts?: Array<{ id: string; label: string; value: string }>;
   title: string;
   filter?: string;
   qualification?: string;
@@ -99,8 +100,8 @@ export interface ObjectContentSource {
   title: TitleSource;
   panel: {
     introduction: string;
-    facts: Array<{ id: string; label: string; value: string }>;
-    moreFacts?: Array<{ id: string; label: string; value: string }>;
+    facts: Fact[];
+    moreFacts?: Fact[];
   };
   lenses: {
     titleKey: "lenses";
@@ -124,6 +125,13 @@ export interface ObjectContentSource {
   provenance: Record<string, { id?: string; path?: string; url?: string; credit?: string; license?: string }>;
 }
 
+export interface Fact {
+  id: string;
+  label: string;
+  value: string;
+  source?: { url: string; label: string; checked: string; path?: string };
+}
+
 export interface PreparedObjectContent {
   objectId: string;
   title: TitleSource & {
@@ -138,7 +146,7 @@ export interface PreparedObjectContent {
   lenses: {
     title: { label: string; src: string; width: number; height: number };
     defaultLens: string;
-    controls: Array<Record<string, unknown>>;
+    controls: Array<Record<string, unknown> & Pick<LensRecipe, "facts">>;
   };
   settings: {
     title: { label: string; src: string; width: number; height: number };

@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 102.40435320879244,
+  "declinationDegrees": -66.06280656730898,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 0.20290068129070193,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL: ecliptic J2000 lambda 180 deg, beta -85 deg, period 0.20290068129070193 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
+  "sourceEpoch": "2001-07-27T00:00:00Z",
+  "referenceSpinRateDegreesPerDay": 42582.41,
+  "measuredAccelerationDegreesPerDaySquared": 0.0002,
+  "displayPolicy": "Hold the published 2001 reference spin rate fixed; arbitrary phase. Do not integrate the measured acceleration to the scene epoch."
+}

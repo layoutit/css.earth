@@ -1,0 +1,28 @@
+{
+  "semiAxesKm": [
+    54,
+    50,
+    26
+  ],
+  "axesFrame": "Body-fixed X points toward Neptune, Y along orbital motion, Z north; synchronous reference orientation",
+  "model": "Karkoschka (2003) measured triaxial ellipsoid; no resolved terrain",
+  "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+  "radiusFormula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/54)^2+(cos(lat)*sin(lon)/50)^2+(sin(lat)/26)^2)",
+  "samplingStepDegrees": 10,
+  "units": "km",
+  "material": {
+    "path": "material/neutral.png",
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "size": [
+      64,
+      32
+    ],
+    "interpretation": "Every input pixel is an explicit no-coverage sentinel. The shared prepare-missing-coverage.mjs grid supplies the displayed material; grid lines are not measured terrain.",
+    "noData": 160
+  },
+  "referenceRadiusKm": 40
+}

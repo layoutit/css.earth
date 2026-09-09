@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27900%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               900 Rosalinde (A918 PJ)         2026-Sep-08 10:25:44
+Rec #:     900 (+COV) Soln.date: 2026-Jun-05_04:11:46   # obs: 9668 (1918-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458254.5 ! 2018-May-16.00 (TDB)         Residual RMS= .2067
+   EC= .163360510178787    QR= 2.068970163502369   TP= 2458710.9262526711
+   OM= 182.2952309567167   W=  121.9240332628075   IN= 11.56289271208897
+   A= 2.472953032547509    MA= 244.3219689577594   ADIST= 2.876935901592648
+   PER= 3.88895            N= .253442983           ANGMOM= .026687981
+   DAN= 2.63454            DDN= 2.21557            L= 304.7488744
+   B= 9.7951671            MOID= 1.07992995        TP= 2019-Aug-15.4262526711
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 9.809              ROTPER= 16.689
+   H= 11.71                G= .150                 B-V= .860
+                           ALBEDO= .085            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#77, OCC=0
+2: source=ORB
+*******************************************************************************

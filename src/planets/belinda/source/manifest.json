@@ -1,0 +1,242 @@
+{
+  "schema": "cssbelinda-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "karkoschka-belinda-prolate",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 62404,
+      "expectedSha256": "57e10512cfd4c062ea672fdfa28e3ae0ca1a06c1862cd6e3545b49421f675c82",
+      "origin": "https://doi.org/10.1006/icar.2001.6596",
+      "credit": "Karkoschka (2001), Table IV; French et al. (2024), Table 3; cssEarth analytic sampling",
+      "license": "Factual measurements; MIT implementation",
+      "licenseEvidence": [
+        "NOTICE.md",
+        "https://arxiv.org/abs/2401.04634"
+      ],
+      "acquisition": "Checked-in factual measurements and analytic table; measurements.json fully specifies the formula.",
+      "redistribution": "Retain attribution. No publisher paper or copied figure is distributed.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Measured prolate ellipsoid approximation. Equal short axes are assumed. No terrain.",
+      "projection": {
+        "type": "body-fixed-radius-table",
+        "metersPerUnit": 1000,
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 40317.47359663594
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://doi.org/10.1006/icar.2001.6596",
+      "credit": "cssEarth standard no-coverage visualization",
+      "license": "MIT",
+      "licenseEvidence": [
+        "../../../../LICENSE"
+      ],
+      "acquisition": "Checked-in 64×32 RGB160 raster, entirely no-data.",
+      "redistribution": "MIT presentation; retain explicit missing coverage.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "No qualified registered texture samples. Every source pixel is no-data before shared grid painting.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 40317.47359663594
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "NOTICE.md",
+      "expectedBytes": 1035,
+      "expectedSha256": "fa7548d4fe50c9ba70e45f3a08e01a244fd08b8164a8ee8c3cc2c52b12c7bf31",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "SOURCE.md",
+      "expectedBytes": 5030,
+      "expectedSha256": "44d4f5471fca006df528f40b19c1f1e221f92046497fc7e8b2c998cf55c71ed7",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3932,
+      "expectedSha256": "6eef1e3ee447ee09297543a1c856060d5a3a414e4c0c84aefefb68baf6434e64",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "kernels/naif0012.tls",
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "kernels/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2333,
+      "expectedSha256": "f7b279721ca64e755bbcef6d91f9dad6b3033e5cb44a440eb728c09f7cf9ca99",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 898,
+      "expectedSha256": "241d1a0c5c5438814a4617160772a1d0aee6b822f15eb48d39143ae2888dac2b",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1248,
+      "expectedSha256": "242318af8f4433d38e1835c580296473e0d8860bec30c842024ad53e18bd715a",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1527,
+      "expectedSha256": "084c12fb420812c280c7cde1096192b15bb7c2c033f0d02b074c355a8d296c95",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2494,
+      "expectedSha256": "babb61c0c53d7c73adec193fb7981eb2c7989e59f1be1a65a217a7279432c052",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4170,
+      "expectedSha256": "446cb45a014feb7a2eb2eba6dba993aa665f2de39a60b7dcce4d6a34848ef884",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "6fc36c893b36de9166c92f44c8fb1cb477017788e0f428267764e4d79efa1c4d",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "survey/C2673019_GEOMED.LBL",
+      "expectedBytes": 3334,
+      "expectedSha256": "7951ce6a484718d8ca628592ecc073026e59bad64eb8986c9746ac46604e443b",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "survey/opus-files.json",
+      "expectedBytes": 13409,
+      "expectedSha256": "1ae996f3f0226db970e36a640d1caa0de6128646faea92c18cd0bbe551bb93e9",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "survey/opus-finest.json",
+      "expectedBytes": 646,
+      "expectedSha256": "03dd32bb7e4f7bee70d03c97115874f0221b9fe735002830c9212dd67c5e1e1b",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "survey/opus-metadata.json",
+      "expectedBytes": 11607,
+      "expectedSha256": "050302afaccfb92b2f1b1a8c42e950825ddf418c582d7dfd8542fe0ed38655c6",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    },
+    {
+      "path": "survey/simplification.json",
+      "expectedBytes": 498,
+      "expectedSha256": "708e9805693defcc8bb81dd53f44e882889b5cf8bef776c19c9ff27b573e3a2a",
+      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-belinda-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1006/icar.2001.6596",
+      "credit": "Karkoschka (2001) shape measurements; cssEarth grid and portrait",
+      "license": "Factual measurements; MIT presentation",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "karkoschka-belinda-prolate",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 90,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 56017,
+      "expectedSha256": "109ef5065850ea19284480d11186bdc20d9e19c6d07cea7e5223adcc0f780a92"
+    }
+  ]
+}

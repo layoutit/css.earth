@@ -1,0 +1,230 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "epimetheus",
+  "displayName": "Epimetheus",
+  "publicBase": "/scenes/epimetheus/",
+  "distanceAu": 9.58,
+  "raster": {
+    "width": 2048,
+    "height": 1024,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "scientific-surfaces",
+        "path": "shape/epimetheus_30k_plt.tab",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 13915,
+          "expectedFaces": 27826,
+          "indexBase": 0
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -58.2
+        },
+        "minimum": -15,
+        "maximum": 15,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 58200,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.35
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+        "description": "Cassini shape · radial height",
+        "title": "Radial height from the Cassini-derived Epimetheus shape model above the 58.2 km reference sphere. Includes the broad irregular figure; not a local geodetic DEM.",
+        "labels": [
+          "-15",
+          "0",
+          "+15"
+        ]
+      }
+    ],
+    "observedColors": [],
+    "mosaics": [
+      {
+        "id": "normal",
+        "format": "controlled-shape-camera",
+        "consumer": "cassini-frames",
+        "frames": [
+          {
+            "id": "n1866366029_1",
+            "path": "observations/N1866366029_1_CALIB.IMG",
+            "labelPath": "observations/N1866366029_1_CALIB.LBL",
+            "observerLatitude": 67.71,
+            "observerWestLongitude": 306.88,
+            "sunLatitude": 26.9,
+            "sunWestLongitude": 194.68,
+            "rangeKm": 12812.6,
+            "northAzimuthDegrees": 30.56,
+            "center": [
+              614.7,
+              619.5
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1864504671_1",
+            "path": "observations/N1864504671_1_CALIB.IMG",
+            "labelPath": "observations/N1864504671_1_CALIB.LBL",
+            "observerLatitude": 76.72,
+            "observerWestLongitude": 52.95,
+            "sunLatitude": 27.03,
+            "sunWestLongitude": 198.3,
+            "rangeKm": 15353.1,
+            "northAzimuthDegrees": 302.12,
+            "center": [
+              685.5,
+              889.5
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1864504186_1",
+            "path": "observations/N1864504186_1_CALIB.IMG",
+            "labelPath": "observations/N1864504186_1_CALIB.LBL",
+            "observerLatitude": 75.78,
+            "observerWestLongitude": 71.77,
+            "sunLatitude": 27.03,
+            "sunWestLongitude": 195.09,
+            "rangeKm": 24904.3,
+            "northAzimuthDegrees": 322.03,
+            "center": [
+              478.2,
+              212.5
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1828124037_1",
+            "path": "observations/N1828124037_1_CALIB.IMG",
+            "labelPath": "observations/N1828124037_1_CALIB.LBL",
+            "observerLatitude": 3.54,
+            "observerWestLongitude": 236.68,
+            "sunLatitude": 25.31,
+            "sunWestLongitude": 216.59,
+            "rangeKm": 28382.5,
+            "northAzimuthDegrees": 180.08,
+            "center": [
+              402,
+              531.8
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          },
+          {
+            "id": "n1575363079_1",
+            "path": "observations/N1575363079_1_CALIB.IMG",
+            "labelPath": "observations/N1575363079_1_CALIB.LBL",
+            "observerLatitude": -40.22,
+            "observerWestLongitude": 97.46,
+            "sunLatitude": -9.53,
+            "sunWestLongitude": 31.44,
+            "rangeKm": 37178.9,
+            "northAzimuthDegrees": 180.27,
+            "center": [
+              482.8,
+              564.3
+            ],
+            "pixelAngleMicroradians": 5.989697719921734
+          }
+        ],
+        "photometry": {
+          "weight": 0.5,
+          "maximumGain": 2.5,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 78,
+          "displayMaximum": 0.6,
+          "gamma": 1,
+          "minimumLevel": 0.7,
+          "maximumLevel": 1.4,
+          "backgroundMaximum": 0.003
+        },
+        "metadata": {
+          "label": "Monochrome",
+          "falseColor": false,
+          "coverage": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+          "attribution": {
+            "label": "NASA/JPL/SSI; PDS Ring-Moon Systems Node",
+            "url": "https://pds-rings.seti.org/cassini/iss/"
+          }
+        }
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 58.2,
+    "camera": {
+      "initialScenePitchDegrees": 20.59023923165093,
+      "defaultControlYawDegrees": 9.995959973873523
+    },
+    "mapUrl": "/scenes/epimetheus/epimetheus-normal-surface@2x.webp",
+    "polesUrl": "/scenes/epimetheus/epimetheus-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/epimetheus_30k_plt.tab",
+      "format": "pds-plate-model",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 13915,
+        "expectedFaces": 27826,
+        "indexBase": 0
+      },
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 720,
+        "maximumErrorMeters": 1000
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Vendored JPL Saturn satellite orbit and the Archinal rotation frame documented with the PDS shape model."
+  },
+  "presentation": {
+    "defaultLens": "normal",
+    "pointColor": [
+      155,
+      151,
+      146
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "schema": "cssasteroid-1992-sk-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "asteroid-1992-sk-shape",
+      "path": "shape/sk.obj",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj",
+      "credit": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 500
+      },
+      "coverage": "This is the published 2006 combined radar and lightcurve model. The north polar region is poorly constrained and some structure there may be a fitting artifact. Its diameter uncertainty is about 20%. Later lightcurves favor a different pole and measured rotational acceleration; this historical model retains its original pole and period with arbitrary display phase, not a current attitude. No resolved optical surface map is supplied.",
+      "expectedBytes": 29083,
+      "expectedSha256": "c5edada6befa4cad50d4f73a2a11ff1e1dede7728bd3d39fb21c9de2974fe05c"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "asteroid-1992-sk-research-sk",
+      "path": "reference/sk.pdf",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/10115_1992SK/busch.etal.2006.1992sk.pdf",
+      "credit": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 1193012,
+      "expectedSha256": "2833d983fef4e8425134ce588f800f6ee9cebd8cf4ef050b65bec8af0dff2324"
+    },
+    {
+      "id": "asteroid-1992-sk-research-sk-spin-2022",
+      "path": "reference/sk-spin-2022.pdf",
+      "origin": "https://astro.troja.mff.cuni.cz/davok/papers/yorp_AA2022.pdf",
+      "credit": "Ďurech et al. (2022), Astronomy & Astrophysics 657, A5; doi:10.1051/0004-6361/202141844",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged primary article through the recorded author-hosted URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 1821019,
+      "expectedSha256": "f8b7a3d1890e36fb852d49ddd807ba1c24bcc2c0119078dfaa01ad9469d78b6b"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/sk.obj",
+      "credit": "Busch et al. (2006), Icarus 181, 145–155; Goldstone, optical observatories and NASA/JPL radar astronomy",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 65064,
+      "expectedSha256": "909b24fcb9e0594c074c82c618844f92274eda4764ad99d5daf0431c3ab67c00",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "asteroid-1992-sk-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 10645,
+      "expectedSha256": "00fafce9af99ba0a3546cd0e90d67f8351a2a749faee7c9fa736a0dbe9ec1e6b"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1175,
+      "expectedSha256": "b861c9cee388dc6547ab5dfb3663cb74ed43b5ba981f85b1d0eb6616f31697eb"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1353,
+      "expectedSha256": "5924e1d513981ea7b7a8a358524d5f2921436da36c4d99386e086fbd44765f67"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1067,
+      "expectedSha256": "54a599021d6f788cdd090f896721ced094e0e2a27478a325979b04bca2cd1756"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3120,
+      "expectedSha256": "83621c4f51238b972d934a9a4fead33fe8806d5c8ec290260b3399ac91adabbf"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4215,
+      "expectedSha256": "05db7726268c2ac4fb38ebf3115e935bad9eb028202ee36612ba90299bd7486e"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7756,
+      "expectedSha256": "f338ed08c1ceb41e5d1412a617b715592d793057ea32bce614850db5a0f1f07b"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1756,
+      "expectedSha256": "b2fafb2e5b53651590973df16f92d8f12c8c07a900a23eb19a1f848bd3b036b9"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7046,
+      "expectedSha256": "dbe9cb48e999242ba05dec48a90dfed13b6dd472aa70a71c57324dc4b7d2c971"
+    },
+    {
+      "path": "reference/jpl-shape-index.html",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2608,
+      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2042,
+      "expectedSha256": "489f1d245a9867f555a81b1e45934e4b3011896020bba2b9ff6651cb959aec1d"
+    },
+    {
+      "path": "reference/pds-a10115_1992sk.xml",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 10498,
+      "expectedSha256": "4d34e1414d5967dddcfe1ec0cb9a41fb21979c7cee84fef3ac865409502f57e4"
+    },
+    {
+      "path": "reference/pds-a10115_spin_state.csv",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 59,
+      "expectedSha256": "15b92e611bcb38cc70023f881e9d06bddb3323a2fda532324013acc50fe6982f"
+    },
+    {
+      "path": "reference/pds-a10115_spin_state.xml",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 10589,
+      "expectedSha256": "760fe679856e426ac44fd2f383696fccbf1e3abdb97c2bf347b52bf3cd48368a"
+    },
+    {
+      "path": "reference/pds-bundle_description.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7530,
+      "expectedSha256": "e60fe2bc0a6364689d1cf4e8b467e808dec7177a23d2f0bb26e62dada8f052ef"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 144985,
+      "expectedSha256": "1f11d03ad43dbd47bc85bb593fbc63a5e5de22ff783014ca3672cbed275d89d4"
+    },
+    {
+      "path": "reference/scalar-anchors.json",
+      "purpose": "Independent NumPy source-surface scalar anchors; measured against every original triangle.",
+      "expectedBytes": 8378,
+      "expectedSha256": "e2b830c74b49eb8553cc16db1b36524b594dc6b628c2d35c9cbf9765071e8c0c"
+    },
+    {
+      "path": "reference/pds-mesh-comparison.json",
+      "purpose": "Independent parsed-coordinate and connectivity comparison with the PDS archive counterpart.",
+      "expectedBytes": 169,
+      "expectedSha256": "6110d922a3f9dccefc720c4dc109d11a481f2ddfae249e7c538adcc053f5a3c3"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "epimetheus",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+    "credit": "NASA/JPL/Space Science Institute; Peter Thomas and NASA PDS",
+    "license": "Public PDS scientific data; retain mission and model attribution.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "n1866366029_1",
+        "n1864504671_1",
+        "n1864504186_1",
+        "n1828124037_1",
+        "n1575363079_1",
+        "thomas-2018-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 123,
+      "latitudeDegrees": 4,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "normal"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 137367,
+    "expectedSha256": "2badc18dba9c7ac7a732ee8a07782b4ff10020dd4b9756831dcaa61403ac0218"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

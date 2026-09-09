@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { expect, test, vi } from 'vitest';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
+import { screenPicking } from '../navigation/screen-picking.js';
 
 class Window {
   time = 0; next = 0; frames = new Map<number, (time: number) => void>();
@@ -25,9 +26,11 @@ const read = (path: string) => JSON.parse(readFileSync(new URL(`../../../objects
 test('one retained catalogue combines both classes; cluster fades, source-aware focus and aperture follow the same observer', () => {
   const payload = read('local-group/prepared/catalogue.json'), clusters = read('galaxy-clusters/prepared/catalogue.json');
   const galaxyCount = payload.objects.filter((row: { membership: { group: string } }) => row.membership.group === 'local-group').length;
-  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const document = new Document(), host = document.createElement(), before = document.createElement(), pickingHost = document.createElement(); host.append(before);
+  const picking = screenPicking(pickingHost as unknown as HTMLElement);
   const onSelect = vi.fn();
-  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, payload, clusters, onSelect });
+  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, payload, clusters, onSelect,
+    pickingHost: pickingHost as unknown as HTMLElement });
   expect(runtime.inspect().count).toBe(galaxyCount + clusters.objects.length);
   expect(runtime.inspect().clusterCount).toBe(clusters.objects.length);
   const object = clusters.objects[0], nodes = document.count;
@@ -40,7 +43,10 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   runtime.select(object.id);
   runtime.publish(pose, viewport, 1, [], 0); document.defaultView.advance(250);
   expect(Number(label.style.opacity)).toBe(0); expect(label.style.pointerEvents).toBe('none');
+  expect(picking.pick(0, -15)).not.toBe(label);
   runtime.publish(pose, viewport, 1, [], 1); document.defaultView.advance(350);
+  expect(picking.pick(0, -15)).toBe(label);
+  expect(screenPicking(host as unknown as HTMLElement).pick(0, -15)).toBeNull();
   expect(Number(label.style.opacity)).toBeCloseTo(.425); expect(Number(aperture.style.opacity)).toBeCloseTo(.1);
   const firstTransform = aperture.style.transform;
   const shifted = { ...pose, pose: { ...pose.pose, positionM: [pose.pose.positionM[0] + object.aperture.comovingRadiusM, ...pose.pose.positionM.slice(1)] as [number,number,number] } };
@@ -48,6 +54,7 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   expect(aperture.style.transform).not.toBe(firstTransform); expect(blockers.length).toBeGreaterThan(0);
   runtime.publish(shifted, viewport, 1, blockers, 1);
   expect(label.style.pointerEvents).toBe('none');
+  expect(picking.pick(-150, -15)).not.toBe(label);
   label.dispatchEvent(new Event('dblclick')); expect(onSelect).not.toHaveBeenCalled();
   document.defaultView.advance(400); expect(Number(label.style.opacity)).toBeGreaterThan(0); expect(Number(label.style.opacity)).toBeLessThan(.425);
   runtime.publish(shifted, viewport, 1, [], 1); document.defaultView.advance(600);
@@ -56,5 +63,9 @@ test('one retained catalogue combines both classes; cluster fades, source-aware 
   expect(document.count).toBe(nodes);
   runtime.publish({ ...pose, pose: { ...pose.pose, positionM: [object.positionM[0], object.positionM[1], object.positionM[2] - object.aperture.comovingRadiusM * 4] } }, viewport, 1, [], 1);
   document.defaultView.advance(800); expect(Number(label.style.opacity)).toBe(0); expect(Number(aperture.style.opacity)).toBe(0);
+  expect(picking.pick(0, -15)).not.toBe(label);
+  runtime.publish(pose, viewport, 1, [], 1);
+  expect(picking.pick(0, -15)).toBe(label);
   runtime.destroy(); expect(document.defaultView.frames.size).toBe(0); expect(host.children).toEqual([before]);
+  expect(picking.pick(0, -15)).toBeNull();
 });

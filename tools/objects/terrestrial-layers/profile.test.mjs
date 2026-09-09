@@ -20,3 +20,26 @@ test('disk normalization rejects unsupported physical or display assumptions',as
   assert.throws(()=>parseTerrestrialProfile(profile),/source-bound/);
  }
 });
+
+test('a shape display requires a source mesh and consumer for the shared no-imagery grid', async () => {
+ const profile=await read('ida');
+ profile.raster.observations=[];profile.raster.scientific=[];
+ profile.raster.shapeViews=[{id:'shape',label:'Shape',consumer:'geometry'}];
+ profile.presentation.defaultLens='shape';
+ assert.equal(parseTerrestrialProfile(profile).presentation.defaultLens,'shape');
+ assert.throws(()=>parseTerrestrialProfile({...profile,geometry:{...profile.geometry,radialTerrain:undefined}}),/pinned mesh/);
+ profile.raster.shapeViews[0].consumer='';
+ assert.throws(()=>parseTerrestrialProfile(profile),/source consumer/);
+});
+
+test('georeferenced photographs bind quality, physical distances and bounded disk normalization', async () => {
+ const profile = await read('comet-67p');
+ assert.equal(parseTerrestrialProfile(profile).raster.surfaceObservations[0].id, 'osiris');
+ for (const alter of [p => p.qualityPath = '../unbound.IMG', p => p.allowLossy = undefined,
+   p => p.transfer.maximumSourceDistanceMeters = 51, p => p.transfer.visibilityToleranceMeters = 2,
+   p => p.photometry.maximumGain = 4, p => p.photometry.maximumIncidenceDegrees = 90,
+   p => p.photometry.referenceIncidenceDegrees = 30, p => p.displayPercentiles = [99, 1]]) {
+  const changed = structuredClone(profile); alter(changed.raster.surfaceObservations[0]);
+  assert.throws(() => parseTerrestrialProfile(changed), /source-bound/);
+ }
+});

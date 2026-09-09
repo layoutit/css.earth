@@ -50,13 +50,40 @@
         "id": "appearance",
         "label": "Surface representation",
         "value": "NASA VTAD illustration; terrain details are not observations"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "About 285 years",
+        "source": {
+          "url": "https://science.nasa.gov/dwarf-planets/haumea/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
       }
     ]
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "",
-    "controls": []
+    "defaultLens": "illustration",
+    "controls": [
+      {
+        "id": "illustration",
+        "label": "Illustrative model",
+        "description": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+        "title": "NASA’s illustrative Haumea surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+        "qualification": "Illustration; not an observed surface map.",
+        "thumbnail": "illustration-thumbnail.webp",
+        "surface": "surface.webp",
+        "poles": "poles.webp",
+        "source": {
+          "id": "nasa-vtad-haumea-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/haumea-3d-model/"
+        }
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

@@ -1,0 +1,556 @@
+PDS_VERSION_ID                     = PDS3                                     
+                                                                              
+RECORD_TYPE                        = "FIXED_LENGTH"                           
+RECORD_BYTES                       = 108                                      
+FILE_RECORDS                       = 2228                                     
+                                                                              
+^TABLE                             = "DIAMALB.TAB"                            
+                                                                              
+DATA_SET_ID                        = "IRAS-A-FPA-3-RDR-IMPS-V6.0"             
+PRODUCT_NAME                       = "DIAMETERS AND ALBEDOS"                  
+PRODUCT_ID                         = "DIAMALB"                                
+INSTRUMENT_HOST_ID                 = "IRAS"                                   
+INSTRUMENT_HOST_NAME               = "INFRARED ASTRONOMICAL SATELLITE"        
+INSTRUMENT_ID                      = "FPA"                                    
+INSTRUMENT_NAME                    = "FOCAL PLANE ARRAY"                      
+TARGET_NAME                        = "ASTEROID"                               
+START_TIME                         = 1983-02-09                               
+STOP_TIME                          = 1983-11-18                               
+PRODUCT_CREATION_TIME              = 2004-04-22                               
+ABSTRACT_DESC                      = "The SIMPS albedos and diameters catalog 
+        provides averaged results for the 2228 numbered asteroids with at     
+        least two accepted observations."                                     
+                                                                              
+REFERENCE_KEY_ID                   = "TEDESCOETAL2002"                        
+NOTE                               = "The Asteroid Status Word (AStatW) is a  
+        32-bit code word generated for each sighting (whether accepted or     
+        rejected) as part of SIMPS processing. As such it is an important     
+        summary of various parameters for each sighting and also serves as a  
+        means for checking the disposition of each sighting                   
+        throughout the SIMPS processing.  Some flags are set if a sighting    
+        fails a particular acceptance criterion (see Veeder, G.V., Tedesco,   
+        E.F. 1992a, IMPS Chapter 5, 45 in [TEDESCOETAL1992]).  Others are set 
+        as a warning of a potential problem but no processing decisions are   
+        made based on these (see Veeder, G.V., Tedesco, E.F. 1992b, IMPS      
+        Chapter 6, 81 also in [TEDESCOETAL1992]).                             
+        "                                                                     
+                                                                              
+OBJECT                             = TABLE                                    
+ ROWS                              = 2228                                     
+ ROW_BYTES                         = 108                                      
+ INTERCHANGE_FORMAT                = "ASCII"                                  
+ COLUMNS                           = 43                                       
+ DESCRIPTION                       = "The SIMPS albedos and diameters catalog 
+        provides averaged results for the 2228 numbered asteroids with at     
+        least two accepted observations.                                      
+        "                                                                     
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 1                                        
+  NAME                             = "AST_NUMBER"                             
+  DESCRIPTION                      = "Asteroid number"                        
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 1                                        
+  BYTES                            = 6                                        
+  FORMAT                           = "I6"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 2                                        
+  NAME                             = "AST_DESIG"                              
+  DESCRIPTION                      = "Asteroid name or principal provisional  
+        designation"                                                          
+  DATA_TYPE                        = "CHARACTER"                              
+  START_BYTE                       = 8                                        
+  BYTES                            = 17                                       
+  FORMAT                           = "A17"                                    
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 3                                        
+  NAME                             = "H"                                      
+  DESCRIPTION                      = "Absolute magnitude, H, on the H, G      
+        system"                                                               
+  UNIT                             = "MAGNITUDES"                             
+  DATA_TYPE                        = "ASCII_REAL"                             
+  START_BYTE                       = 25                                       
+  BYTES                            = 5                                        
+  FORMAT                           = "F5.2"                                   
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 4                                        
+  NAME                             = "MEAN_ALBEDO"                            
+  DESCRIPTION                      = "Mean derived geometric albedo           
+        on the H,G system"                                                    
+  DATA_TYPE                        = "ASCII_REAL"                             
+  START_BYTE                       = 31                                       
+  BYTES                            = 6                                        
+  FORMAT                           = "F6.4"                                   
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 5                                        
+  NAME                             = "ALBEDO_UNC"                             
+  DESCRIPTION                      = "1-sigma uncertainty in MEAN_ALBEDO, due 
+        solely to the precision of the IRAS Flux data. "                      
+  DATA_TYPE                        = "ASCII_REAL"                             
+  START_BYTE                       = 38                                       
+  BYTES                            = 5                                        
+  FORMAT                           = "F5.3"                                   
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 6                                        
+  NAME                             = "DIAM"                                   
+  DESCRIPTION                      = "Mean diameter computed from H and       
+        MEAN_ALBEDO"                                                          
+  UNIT                             = "KILOMETERS"                             
+  DATA_TYPE                        = "ASCII_REAL"                             
+  START_BYTE                       = 45                                       
+  BYTES                            = 6                                        
+  FORMAT                           = "F6.2"                                   
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 7                                        
+  NAME                             = "DIAM_UNC"                               
+  DESCRIPTION                      = "1-sigma uncertainty in DIAM, due solely 
+        to the precision of the IRAS Flux data."                              
+  DATA_TYPE                        = "ASCII_REAL"                             
+  START_BYTE                       = 54                                       
+  BYTES                            = 4                                        
+  FORMAT                           = "F4.1"                                   
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 8                                        
+  NAME                             = "PLC"                                    
+  DESCRIPTION                      = "Probability of lightcurve variation.    
+      This quantity is used as a measure of the probability that a            
+      lightcurve effect is present in the data. Values are constrained        
+      to be between 0.10 and 1.00.  Less than significant variation is        
+      assigned a value of 0.10."                                              
+  DATA_TYPE                        = "ASCII_REAL"                             
+  START_BYTE                       = 59                                       
+  BYTES                            = 4                                        
+  FORMAT                           = "F4.2"                                   
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 9                                        
+  NAME                             = "N_SIGHT"                                
+  DESCRIPTION                      = "Number of sightings used to derive      
+        MEAN_ALBEDO.  A sighting is the detected passage of an asteroid       
+        across the IRAS focal plane."                                         
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 64                                       
+  BYTES                            = 2                                        
+  FORMAT                           = "I2"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 10                                       
+  NAME                             = "N_OBS"                                  
+  DESCRIPTION                      = "Number of observations used in deriving 
+        MEAN_ALBEDO.  An observation is a detection in a single band. There   
+        can be up to 3 accepted observations per sighting.  Note that         
+        sightings in the 100 micron band were never used due to infrared      
+        cirrus."                                                              
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 67                                       
+  BYTES                            = 2                                        
+  FORMAT                           = "I2"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 11                                       
+  NAME                             = "FOR"                                    
+  DESCRIPTION                      = "Fraction observed ratio:  The ratio     
+      of the number of times the asteroid was predicted to cross the IRAS     
+      focal plane to the number of crossings detected"                        
+  DATA_TYPE                        = "ASCII_REAL"                             
+  START_BYTE                       = 70                                       
+  BYTES                            = 4                                        
+  FORMAT                           = "F4.2"                                   
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 12                                       
+  NAME                             = "ASTATW1"                                
+  DESCRIPTION                      = "Set if the position score parameter is  
+        less than 0.5 (see Fowler, J.W and Chillemi, J.R. 1992, IMPS          
+        Chapter 4, 17).  Sightings with a value less than 0.4 are also        
+        rejected. This parameter is a measure of the difference between the   
+        predicted and observed positions for an asteroid association."        
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 75                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 13                                       
+  NAME                             = "ASTATW2"                                
+  DESCRIPTION                      = "Set for all sightings of an asteroid    
+        with identification number less than 3318 which was accepted in ADAS  
+        (Infrared Astronomical Satellite Asteroid and Comet Survey, 1986)."   
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 76                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 14                                       
+  NAME                             = "ASTATW3"                                
+  DESCRIPTION                      = "Set for all sightings of an asteroid    
+        with identification number less than 3318 which was rejected in ADAS  
+        (Infrared Astronomical Satellite Asteroid and Comet Survey, 1986)."   
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 77                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 15                                       
+  NAME                             = "ASTATW4"                                
+  DESCRIPTION                      = "Set for HCON (hours confirmed WSDB      
+        reject) asteroid sighting."                                           
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 78                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 16                                       
+  NAME                             = "ASTATW5"                                
+  DESCRIPTION                      = "All MCON (WSDB 'weeks' or months        
+        confirmed) asteroid sightings are rejected by SIMPS (cf., AStatW9)."  
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 79                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 17                                       
+  NAME                             = "ASTATW6"                                
+  DESCRIPTION                      = "Set to indicate resolved spatial        
+        structure (cf., IRAS Small Scale Structure Catalog, 1986)."           
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 80                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 18                                       
+  NAME                             = "ASTATW7"                                
+  DESCRIPTION                      = "Set if the ratio of observed to         
+        predicted flux density at 25 microns is either less than 0.3 or       
+        greater than 3.0."                                                    
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 81                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 19                                       
+  NAME                             = "ASTATW8"                                
+  DESCRIPTION                      = "Set to unity for every asteroid sighting
+        processed by SIMPS."                                                  
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 82                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 20                                       
+  NAME                             = "ASTATW9"                                
+  DESCRIPTION                      = "All asteroid sightings confused with    
+        sources in the IRAS Point Source Catalog (IRAS Explanatory Supplement,
+        1985) are rejected by SIMPS (subset of AStatW5)."                     
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 83                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 21                                       
+  NAME                             = "ASTATW10"                               
+  DESCRIPTION                      = "Set for outer slot sightings; all such  
+        sightings are rejected by SIMPS."                                     
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 84                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 22                                       
+  NAME                             = "ASTATW11"                               
+  DESCRIPTION                      = "Set a priori for all candidate          
+        associations of a SIMPS asteroid if no predicted 25 micron flux       
+        density is greater than 0.14 Jansky."                                 
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 85                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 23                                       
+  NAME                             = "ASTATW12"                               
+  DESCRIPTION                      = "Set for all sightings of each asteroid  
+        if the rate of successful detections (i.e., the fraction observed     
+        ratio, FOR, is less than 0.3."                                        
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 86                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 24                                       
+  NAME                             = "ASTATW13"                               
+  DESCRIPTION                      = "Set if 12 micron albedo was used; not   
+        set if the value was rejected or the asteroid was not detected in this
+        band."                                                                
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 87                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 25                                       
+  NAME                             = "ASTATW14"                               
+  DESCRIPTION                      = "Set if 25 micron albedo was used; not   
+        set if the value was rejected or the asteroid was not detected in this
+        band."                                                                
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 88                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 26                                       
+  NAME                             = "ASTATW15"                               
+  DESCRIPTION                      = "Set if 60 micron albedo was used; not   
+        set if the value was rejected or the asteroid was not detected in this
+        band."                                                                
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 89                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 27                                       
+  NAME                             = "ASTATW16"                               
+  DESCRIPTION                      = "No 100 micron detections contribute to  
+        derived SIMPS average values and so this bit is always 0."            
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 90                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 28                                       
+  NAME                             = "ASTATW17"                               
+  DESCRIPTION                      = "All asteroid sightings confused with    
+        sources in the IRAS Faint Source Survey (IRAS Faint Source Survey,    
+        1989) are rejected by SIMPS."                                         
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 91                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 29                                       
+  NAME                             = "ASTATW18"                               
+  DESCRIPTION                      = "Set if no 25 micron flux density greater
+        than 1 Jansky was used in the final SIMPS derived average products."  
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 92                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 30                                       
+  NAME                             = "ASTATW19"                               
+  DESCRIPTION                      = "Set for all sightings of an accepted    
+        asteroid if the range in albedo is large, i.e., if the ratio          
+        {[max-min]/[(max+min)/2]} is greater than 0.75 for all derived albedos
+        used in the final SIMPS average."                                     
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 93                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 31                                       
+  NAME                             = "ASTATW20"                               
+  DESCRIPTION                      = "All asteroid sightings confused with    
+        sources in the IRAS Serendipitous Survey Catalog (IRAS Serendipitous  
+        Survey Catalog, 1986) are rejected by SIMPS."                         
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 94                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 32                                       
+  NAME                             = "ASTATW21"                               
+  DESCRIPTION                      = "Set if sighting within the galactic     
+        plane, i.e., not covered by the IRAS Faint Source Survey (cf.,        
+        AStatW17)."                                                           
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 95                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 33                                       
+  NAME                             = "ASTATW22"                               
+  DESCRIPTION                      = "Asteroid 25 micron only sightings are   
+        rejected by SIMPS if near the galactic center, i.e., if within 3 deg  
+        in galactic latitude and 10 deg in galactic longitude (subset of      
+        AStatW bit number 21)."                                               
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 96                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 34                                       
+  NAME                             = "ASTATW23"                               
+  DESCRIPTION                      = "Set if provisional asteroid elements    
+        updated and numbered since 1985."                                     
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 97                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 35                                       
+  NAME                             = "ASTATW24"                               
+  DESCRIPTION                      = "Set if SIMPS decreased (low) flux       
+        densities to compensate for IRAS bias near its SNR cutoff, i.e., if   
+        the flux overestimation correction was applied."                      
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 98                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 36                                       
+  NAME                             = "ASTATW25"                               
+  DESCRIPTION                      = "Set if sighting is within an IRAS 12    
+        micron High Source Density Region (IRAS Explanatory Supplement, 1985) 
+        near the galactic center (cf., AStatW26)."                            
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 99                                       
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 37                                       
+  NAME                             = "ASTATW26"                               
+  DESCRIPTION                      = "Set if sighting is within an IRAS 25    
+        micron High Source Density Region (IRAS Explanatory Supplement, 1985) 
+        near the galactic center (cf., AStatW25)."                            
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 100                                      
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 38                                       
+  NAME                             = "ASTATW27"                               
+  DESCRIPTION                      = "Set if sighting is within an IRAS 60    
+        micron High Source Density Region (IRAS Explanatory Supplement, 1985) 
+        around the galactic center and anti-center."                          
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 101                                      
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 39                                       
+  NAME                             = "ASTATW28"                               
+  DESCRIPTION                      = "Set if sighting is within an IRAS 100   
+        micron High Source Density Region (IRAS Explanatory Supplement, 1985) 
+        around the galactic center and anti-center."                          
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 102                                      
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 40                                       
+  NAME                             = "ASTATW29"                               
+  DESCRIPTION                      = "Unset (zeroed) for every asteroid       
+        sighting processed by SIMPS."                                         
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 103                                      
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 41                                       
+  NAME                             = "ASTATW30"                               
+  DESCRIPTION                      = "Set if sighting associated with more    
+        than one asteroid prediction."                                        
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 104                                      
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 42                                       
+  NAME                             = "ASTATW31"                               
+  DESCRIPTION                      = "Set if more than one source is          
+        associated with a single asteroid prediction and therefore rejected by
+        SIMPS."                                                               
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 105                                      
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+ OBJECT                            = COLUMN                                   
+  COLUMN_NUMBER                    = 43                                       
+  NAME                             = "ASTATW32"                               
+  DESCRIPTION                      = "Also unset (zeroed) for every asteroid  
+        sighting processed by SIMPS."                                         
+  DATA_TYPE                        = "ASCII_INTEGER"                          
+  START_BYTE                       = 106                                      
+  BYTES                            = 1                                        
+  FORMAT                           = "I1"                                     
+ END_OBJECT                        = COLUMN                                   
+                                                                              
+END_OBJECT                         = TABLE                                    
+END                                                                           

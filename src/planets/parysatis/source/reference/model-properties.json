@@ -1,0 +1,98 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5820",
+  "modelId": 5820,
+  "modelVersion": "2019-10-23",
+  "diameterKm": 44.749,
+  "diameterInterpretation": "Approximate scale from a thermal diameter of 44.749 ± 0.37 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects.",
+  "calibration": {
+    "diameterKm": 44.749,
+    "quotedUncertaintyKm": 0.37,
+    "quantity": "effective body diameter",
+    "reference": "Masiero et al. (2014), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas14",
+    "notes": "NEOWISE Mas14 original record. Fitted diameter; minimum ensemble systematic uncertainty about10%, additional to quoted formal uncertainty.",
+    "basis": "effective spherical radiometric diameter applied as approximate volume-equivalent size",
+    "assumption": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.",
+    "methodSystematicFraction": 0.1,
+    "referenceUrl": "https://doi.org/10.1088/0004-637X/791/2/121",
+    "methodSystematicUncertaintyKm": 4.474900000000001,
+    "formalErrorDefinition": "statistical1σ from fitted data; excludes stated survey systematic floor and shape/rotation sampling assumptions",
+    "observingEpochJD": 2455362.471497,
+    "detectionsByBand": {
+      "W1": 10,
+      "W2": 10,
+      "W3": 10,
+      "W4": 10
+    },
+    "fitCode": "DVBI",
+    "beamingParameter": 1.115,
+    "uncertaintyKm": 0.37,
+    "scaleKmPerSourceUnit": 36.067511825251735,
+    "sourceUrl": "https://doi.org/10.1088/0004-637X/791/2/121",
+    "sourceLabel": "Masiero et al. (2014), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas14",
+    "diameterSemantics": "effective body diameter",
+    "limitations": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty. NEOWISE Mas14 original record. Fitted diameter; minimum ensemble systematic uncertainty about10%, additional to quoted formal uncertainty.",
+    "visibleDescription": "Approximate scale from a thermal diameter of 44.749 ± 0.37 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects."
+  },
+  "periodHours": 5.93333,
+  "poleEclipticJ2000Degrees": [
+    263,
+    -47
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/62120/shape.txt",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 36067.511825251735,
+    "firstVertexKm": [
+      3.328129653675104,
+      5.421776580107317,
+      23.489544156384397
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      50.170269624043414,
+      44.61158076904745,
+      44.042507567468625
+    ],
+    "volumeCubicKm": 46918.986921866664,
+    "volumeEquivalentRadiusKm": 22.374499999999987,
+    "radialRangeKm": [
+      19.780811372335513,
+      27.068142321290562
+    ]
+  },
+  "elevation": [
+    -3,
+    5
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 447.49,
+    "estimatedErrorMeters": 105.66453552246094,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 46895562359012.46
+    }
+  }
+}

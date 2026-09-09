@@ -1,0 +1,118 @@
+{
+  "id": "hidalgo",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hidalgo",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 30.7
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "33e3c2744279f87b6f1c064425f45019cc96c5a038df2d1c5f3748454d53bd2b"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "239ef94f1a7efb0899821976344b8f75ce2bf5e2a32998d78486dc89ba991273"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "f30c7a641723b33c5d7b9f14c451d70ee8b357a909bd640ec704b302918f703a"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "46aeb59e03f520c76c31d1b442d54922d25d415bd9c8de4a2cfea196a531b051"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "4f102b40be16fc8d70c5c6253887f129de99d92fee773743d87cd906c21d0d8d"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "c3ac229a1bfa3769535ac81192ad1a75966d235f78ad671cea7ca5d1b5fb6328"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -241545000499.73364,
+        -661662756492.0013,
+        -1213834379537.6304
+      ],
+      "presentationToReference": [
+        -0.2163714304978504,
+        -6.938893903907228e-18,
+        0.9763111205268094,
+        -0.8957479400820104,
+        0.39777715593191376,
+        -0.1985169062260263,
+        -0.38835426082785407,
+        -0.9174820620691818,
+        -0.08606761224835466
+      ],
+      "orbitUpReference": [
+        6.938893903907228e-18,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 133.47826086956522,
+      "bodyRadiusM": 30700
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "d4f73db72843459c8f58aef81359a3fa56ab1ba8a851b76abe152a9dffd4db9f"
+  }
+}

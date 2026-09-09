@@ -1,0 +1,255 @@
+{
+  "schema": "csspuck-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "reference-sphere",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 62404,
+      "expectedSha256": "45d0f9b644507f15a1e08ec5cb945382cd5739d7fab74909f12216753446b3fe",
+      "origin": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
+      "credit": "PDS Ring-Moon Systems Node; Karkoschka (2001)",
+      "license": "MIT display representation from published scientific dimensions",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/uranus/uranus_satellites_table.html"
+      ],
+      "acquisition": "Checked-in representation; exact dimensions, material and radius formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Approximate 81 km reference sphere for mapping the observed image, not detailed terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 81000
+      }
+    },
+    {
+      "id": "c2683716",
+      "path": "observations/C2683716_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "b13a0124dc199090c2047ef316df5bee68c12cb6b008ff2a49beb238a6c38832",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-clear-frames"
+      ],
+      "width": 1000,
+      "height": 1000,
+      "projection": {
+        "type": "camera-perspective",
+        "coordinates": "geometry/registration.json",
+        "longitudeDirection": "west-positive"
+      }
+    },
+    {
+      "id": "c2683716-label",
+      "path": "observations/C2683716_GEOMED.LBL",
+      "expectedBytes": 3294,
+      "expectedSha256": "084f2e10d36a1145501a2545a936ed106e52fdd63c33064395d54f02976dda88",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data archived in PDS; retain mission and calibration attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
+      "redistribution": "Retain NASA/JPL and PDS credits.",
+      "consumers": [
+        "voyager-clear-frames"
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3345,
+      "expectedSha256": "819987fa822ca9b49eac62ace035e6c8add59630cb4c137b6899b67fdb302d61",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "geometry/c2683716-opus.json",
+      "expectedBytes": 12606,
+      "expectedSha256": "b46bd312db063d77e659dfd5fb29e61ec9e7ea863990ff6fcbb31d9a229b5019",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "geometry/naif0012.tls",
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "geometry/registration.json",
+      "expectedBytes": 2614,
+      "expectedSha256": "4e521586b569abe28c967a7a8829cf70f9f952b9cbfb11b4e20bb7fbeff1a035",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "geometry/vg200051.tsc",
+      "expectedBytes": 108191,
+      "expectedSha256": "bf8ae3b237a4f75362ae4bf5fe133ec4a888877f6183f1705330b9433f81dcac",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "geometry/vg2_ura_version1_type1_iss_sedr.bc",
+      "expectedBytes": 272384,
+      "expectedSha256": "433f81e8c29623fa1143fb7832d4044a98a1c16c5cc641a901c8a371ee626f96",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "geometry/vg2_ura_version1_type1_iss_sedr.txt",
+      "expectedBytes": 3949,
+      "expectedSha256": "aa6f7ba781490dccc10b3744464a7d5a7a3e1686deed89a92504ed35b3e3ee22",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "geometry/vg2_v02.tf",
+      "expectedBytes": 12008,
+      "expectedSha256": "aa529b2dbf43b7f925b3e81e86a3d7e74a4d99c392113197e5f6d5bf13c37fcb",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 752,
+      "expectedSha256": "691ef196b259c0f04729a5e7c8db0e5bfb8304bf961f284e2f7b980dd239690d",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 1293,
+      "expectedSha256": "89acb0aee8e468830545387897d9c15444248e99cfca60f0ac2890feb857236e",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1217,
+      "expectedSha256": "451e9d28897e2d4c77ff9826c21211b06d902e1c11bfba9c8d219d55c1e1f687",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1015,
+      "expectedSha256": "cd6ec1b934c80e5644eb56e796a2b5195c2a8f37f37b0871d8272f5e604e1a57",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3668,
+      "expectedSha256": "3cd19d9fa8a72de4f03de9eb8aa44185f86c61408f78d2e878e6a9ff0276f6d7",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 2150,
+      "expectedSha256": "5fc41aad71394e5e15168aac5fea2127e39d2480ec915c5fbab94619901d3a71",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 847,
+      "expectedSha256": "358cf03c52b69d8b98a5b7d52f8b51e0c3bd738ea16c9541434115b09e9dfee4",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    },
+    {
+      "path": "survey/opus-finest.json",
+      "expectedBytes": 639,
+      "expectedSha256": "00d7362a36578b10ec5d8b53f8cf528ea79ecbf3329a02b122e94a180c17786b",
+      "purpose": "Puck scientific source or authored preparation evidence."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://pds-rings.seti.org/voyager/iss/",
+      "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain credits.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "c2683716",
+          "reference-sphere"
+        ],
+        "size": 512,
+        "longitudeDegrees": 306.355,
+        "latitudeDegrees": -56.091,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 126671,
+      "expectedSha256": "9de80fc3e93b6d47117ed00505995211e4bc12a1e857d569e34231b9ab812ebd"
+    }
+  ]
+}

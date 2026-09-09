@@ -16,6 +16,19 @@ test("Ceres's prepared camera keeps geometry scale separate from silhouette fram
   assert.equal(ceres.camera.state.zoom, 1.1);
 });
 
+test("elongated-body framing changes only the prepared viewport fit", () => {
+  const options = { sky: ceres.sky, radius: 110 };
+  const normal = preparePerspectiveCamera(options);
+  const elongated = preparePerspectiveCamera({ ...options, framingScale: 0.75 });
+  assert.deepEqual({ ...elongated, responsiveFit: normal.responsiveFit }, normal);
+  assert.equal(elongated.responsiveFit.portraitBaseWidthShare / normal.responsiveFit.portraitBaseWidthShare, 0.75);
+  assert.equal(elongated.responsiveFit.maximumHeightShare, normal.responsiveFit.maximumHeightShare * 0.75);
+  assert.equal(elongated.logicalBodyDiameter, 220);
+  for (const framingScale of [0, -1, 1.1, NaN, Infinity]) {
+    assert.throws(() => preparePerspectiveCamera({ ...options, framingScale }), /framing scale/);
+  }
+});
+
 for (const [id, definition] of [["ceres", ceres], ["mercury", mercury]]) {
   test(`${id} mesh vertices and lighting use the same world radius through perspective zoom`, () => {
     const { camera, tree, heliocentricView, viewBindings } = definition;

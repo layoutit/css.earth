@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271036%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               1036 Ganymed (A924 UB)          2026-Sep-07 22:24:44
+Rec #:    1036 (+COV) Soln.date: 2026-Jul-25_06:19:02  # obs: 13637 (1924-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457297.5 ! 2015-Oct-02.00 (TDB)         Residual RMS= .27231
+   EC= .5339521099280214   QR= 1.241205826799902   TP= 2457392.4762964472
+   OM= 215.5569647436122   W=  132.4802492347408   IN= 26.69228643211437
+   A= 2.663258118405395    MA= 338.4622954525938   ADIST= 4.085310410010888
+   PER= 4.34638            N= .226769261           ANGMOM= .023736094
+   DAN= 2.9777             DDN= 1.39935            L= 351.2620807
+   B= 19.3470088           MOID= .34108701         TP= 2016-Jan-04.9762964472
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 18.8375            ROTPER= 10.297
+   H= 9.17                 G= .300                 B-V= .842
+                           ALBEDO= .238            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#1541, OCC=0           radar( 0 delay, 1 Dop.)
+2: source=ORB
+*******************************************************************************

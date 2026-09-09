@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "comet-67p",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "expectedBytes": 97023,
+    "expectedSha256": "d8d3b35ca214168bf1c46f4d2fc754ae56c2d40d2f07a6e10528d9d9995c8295",
+    "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
+    "credit": "ESA/Rosetta/NAVCAM; ESA/RMOC",
+    "license": "CC BY-SA 3.0 IGO",
+    "licenseEvidence": [
+      "https://blogs.esa.int/rosetta/2015/11/30/new-comet-shape-model/"
+    ],
+    "acquisition": "Checked-in derived context image; regenerated and hash-verified by the radial snapshot recipe.",
+    "redistribution": "Retain ESA/Rosetta/NAVCAM credits and the CC BY-SA 3.0 IGO notice.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "mtp019",
+        "model-surface"
+      ],
+      "size": 512,
+      "longitudeDegrees": 90,
+      "latitudeDegrees": 25,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "model"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

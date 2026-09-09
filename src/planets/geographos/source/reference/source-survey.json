@@ -1,0 +1,36 @@
+{
+  "checked": "2026-09-08",
+  "scope": "Bounded JPL/PDS source archive and linked-research survey; no resolved optical map located among these candidates",
+  "candidates": [
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/geographos.obj",
+      "adds": "Nonconvex kilometer-scale radar geometry",
+      "status": "included",
+      "reason": "Unmodified JPL OBJ; its extents match the named radar model. Archived geometry is explicitly identified, including north-south ambiguity."
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/1620geographos.tab",
+      "adds": "PDS radar model at8192vertices/16380triangles",
+      "status": "excluded",
+      "reason": "A different archival geometry: extents5.112129×1.9997933×2.410471km and different first vertex. More vertices do not establish more independent resolving power; no silent substitute for the selected JPL version. PDS XML supplies family frame/units evidence, not exact byte identity."
+    },
+    {
+      "url": "https://arxiv.org/abs/1407.2127",
+      "adds": "Thermophysical analysis and comparison of radar, flattened radar and lightcurve shapes",
+      "status": "included as qualification",
+      "reason": "Concludes radar thickness can be overestimated. We preserve the cited radar release and disclose this alternative interpretation; no ad hoc flattening or invented correction."
+    },
+    {
+      "url": "https://astro.troja.mff.cuni.cz/projects/damit/asteroids/view/206",
+      "adds": "Lightcurve-derived convex shape and later YORP spin solutions",
+      "status": "excluded from this radar presentation",
+      "reason": "Distinct inversion assumptions and phase model. Useful future alternative, not a measured optical texture or a correction that can be spliced into the archived radar source."
+    },
+    {
+      "url": "https://sbn.psi.edu/pds/resource/geograph.html",
+      "adds": "1994 Goldstone delay-Doppler observations75–151m",
+      "status": "excluded from surface lens",
+      "reason": "Radar delay-Doppler pixels mix surface locations; cannot be treated as a registered optical/albedo texture."
+    }
+  ]
+}

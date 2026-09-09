@@ -1,4 +1,22 @@
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
+
+/** Read only the checked generated record sections, without evaluating code.
+ * A selected-body regeneration reuses these bytes for all unchanged bodies. */
+export function readRecordSections(destination, symbol) {
+  const index = readFileSync(destination, 'utf8');
+  const imports = [...index.matchAll(/^import \{ [A-Z_0-9]+ \} from '\.\/([^']+\.js)'$/gm)];
+  if (!imports.length) throw new Error(`Missing generated ${symbol} sections`);
+  const records = new Map();
+  for (const [, file] of imports) {
+    const source = readFileSync(new URL(file.replace(/\.js$/, '.ts'), destination), 'utf8');
+    if (!source.includes(`export const ${symbol}_`)) throw new Error(`Unexpected generated section ${file}`);
+    for (const record of source.matchAll(/^  ([\w]+): \{[\s\S]*?^  },?$/gm)) {
+      if (records.has(record[1])) throw new Error(`Duplicate generated record ${record[1]}`);
+      records.set(record[1], record[0]);
+    }
+  }
+  return records;
+}
 
 // Keep generated records intact while separating independently maintained systems.
 // Both generators call this writer; formatting a checked-in payload uses exactly
@@ -28,12 +46,31 @@ export function writeRecordSections(destination, source, kind) {
   const base = destination.pathname.split('/').at(-1).replace(/\.ts$/, '');
   const imports = [], spreads = [];
   const type = kind === 'satellites' ? 'SatelliteRecord' : 'HorizonsFixture';
+  // Keep complete records together as the catalog grows past one source file.
+  // The conservative body budget leaves room for generated headers and imports.
+  const chunks = [];
   for (const [group, records] of sections) {
+    let chunk = [], lines = 0, part = 1;
+    for (const record of records) {
+      const count = record.split('\n').length;
+      if (chunk.length && lines + count > 560) {
+        chunks.push([part === 1 ? group : `${group}-${part}`, chunk]);
+        chunk = []; lines = 0; part++;
+      }
+      chunk.push(record); lines += count;
+    }
+    chunks.push([part === 1 ? group : `${group}-${part}`, chunk]);
+  }
+  for (const [group, records] of chunks) {
     const name = `${symbol}_${group.replaceAll('-', '_').toUpperCase()}`;
     const file = `${base}.${group}.ts`;
     const header = source.slice(0, source.indexOf('import type'));
+    // Keep literal IDs while widening numeric payloads to their public interface.
+    // Large residual arrays otherwise exceed TypeScript's declaration serialization limit.
+    const keys = records.map(record => `'${/^  (\w+):/.exec(record)[1]}'`).join(' | ');
+    const annotation = kind === 'satellites' ? `: Readonly<Record<${keys}, ${type}>>` : '';
     const text = `${header}import type { ${type} } from './${base}.js'\n\n` +
-      `export const ${name} = {\n${records.join('\n')}\n} as const satisfies Record<string, ${type}>\n`;
+      `export const ${name}${annotation} = {\n${records.join('\n')}\n} as const satisfies Record<string, ${type}>\n`;
     if (text.trimEnd().split('\n').length > 600) throw new Error(`Generated section ${file} exceeds 600 lines`);
     writeFileSync(new URL(file, destination), text);
     imports.push(`import { ${name} } from './${file.replace(/\.ts$/, '.js')}'`);

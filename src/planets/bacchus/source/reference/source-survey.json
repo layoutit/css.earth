@@ -1,0 +1,30 @@
+{
+  "checked": "2026-09-08",
+  "scope": "Bounded JPL/PDS source archive and linked-research survey; no resolved optical map located among these candidates",
+  "candidates": [
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/shapes/bacchus.obj",
+      "adds": "Original low-density single-lobe radar mesh",
+      "status": "included",
+      "reason": "All256vertices/508faces retained, with dimensions matching the adopted1999 paper solution. No unnecessary subdivision."
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.radar.shape-models/data/2063bacchus.tab",
+      "adds": "Higher-density PDS representation2048vertices/4092faces",
+      "status": "excluded",
+      "reason": "The first256vertices equal the selected JPL source, but extra vertices change extents slightly. The paper’s256parameter model and coarse radar resolution do not justify treating subdivision as measured surface detail. PDS label supports km/principal-axis frame."
+    },
+    {
+      "url": "https://echo.jpl.nasa.gov/asteroids/benner.etal.1999.bacchus.pdf",
+      "adds": "Alternative two-lobe fit, optical lightcurves and radar albedo",
+      "status": "included as qualification",
+      "reason": "The authors adopt the conservative single-lobe working model. Two-lobe topology and surface composition are not uniquely established; no invented texture."
+    },
+    {
+      "url": "https://pds-smallbodies.astro.umd.edu/data_other/sptz_02_INNER/a2063.shtml",
+      "adds": "Spitzer thermal-infrared observations in2006,2015,2017",
+      "status": "excluded from surface lens",
+      "reason": "Disk-integrated observations do not provide registered resolved terrain, photographic texture, or a spatial temperature map."
+    }
+  ]
+}

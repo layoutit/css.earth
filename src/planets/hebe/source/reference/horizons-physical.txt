@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%276%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  6 Hebe (A847 NA)             2026-Sep-07 20:32:44
+Rec #:       6 (+COV) Soln.date: 2026-Jun-05_03:03:21   # obs: 6770 (1848-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457972.5 ! 2017-Aug-07.00 (TDB)         Residual RMS= .24891
+   EC= .2027917163802941   QR= 1.93317906885308    TP= 2458270.3407474081
+   OM= 138.6482860945493   W=  239.8572210058501   IN= 14.73742114198707
+   A= 2.424936003017336    MA= 282.2612121378451   ADIST= 2.916692937181592
+   PER= 3.77623            N= .261007899           ANGMOM= .02623087
+   DAN= 2.58884            DDN= 2.11031            L= 17.6663852
+   B= -12.7084596          MOID= .97490501         TP= 2018-May-31.8407474081
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 92.59              ROTPER= 7.2745
+   H= 5.62                 G= .240                 B-V= .822
+                           ALBEDO= .2679           STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#121, OCC=0
+2: source=ORB
+*******************************************************************************

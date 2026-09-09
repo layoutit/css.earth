@@ -1,0 +1,189 @@
+{
+  "schema": "cssvesta-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "dlr-hamo-natural-color",
+      "path": "maps/vesta-true-color.png",
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
+      "acquisition": "Unmodified PNG from the DLR Dawn mapping release.",
+      "redistribution": "Prepared display derivatives with the source credit and scientific limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Natural color",
+      "falseColor": false,
+      "width": 26704,
+      "height": 13080,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "coordinateSystem": "Dawn Claudia",
+        "referenceRadiusMeters": 255000
+      },
+      "coverage": "Published crop and exactly black RGB fill; no authoritative per-pixel validity mask. Channel fringes and uncertain dark terrain are retained.",
+      "expectedBytes": 374574072,
+      "expectedSha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca"
+    },
+    {
+      "id": "dlr-hamo-radius-model",
+      "path": "science/vesta-hamo-dtm-64.pds.zip",
+      "origin": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA; F. Preusker and colleagues",
+      "license": "Public Dawn scientific terrain data; attribution required. See NOTICE.md.",
+      "acquisition": "Unmodified ZIP from the DLR Dawn mapping release, 2014-06-19.",
+      "redistribution": "Prepared model and scientific display derivatives with source attribution.",
+      "consumers": [
+        "terrain",
+        "elevation"
+      ],
+      "width": 23041,
+      "height": 11521,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "coordinateSystem": "Dawn Claudia",
+        "units": "meters from body center"
+      },
+      "coverage": "Stereo-derived model with publisher-interpolated polar regions. No mask separates interpolated areas.",
+      "expectedBytes": 457291404,
+      "expectedSha256": "83b68b39c1485e179a58926dcb6b88960e598895cfce64f54e87204b7dbde533",
+      "lensId": "elevation"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Dawn source derivative; see NOTICE.md.",
+      "expectedBytes": 304346,
+      "expectedSha256": "31c4174cffe718db773866b85045e45c12bfbc76e686ad9315731ceffccaeee3",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "dlr-hamo-natural-color",
+          "dlr-hamo-radius-model"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": -25,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 89771,
+      "expectedSha256": "e5be273b5ab3fd256c49100db22e2e690f7f87ec3666cf4e9690fc59e7fbe703",
+      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96",
+      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
+      "purpose": "Shared sky input snapshot and attribution, retained for Ceres preparation. The astrometric sampling uses the common ICRF frame."
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored preparation or presentation data.",
+      "expectedBytes": 8662,
+      "expectedSha256": "2f03d4eb80483e5e3acb69cddc0a3cac3193985dc02925c2b6a663ce926056de"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Authored preparation or presentation data.",
+      "expectedBytes": 752,
+      "expectedSha256": "b2aee1a460321be695c5fc0ed9cf4c1de79c22d518dcebe14ac681af80956f42"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Authored preparation or presentation data.",
+      "expectedBytes": 1232,
+      "expectedSha256": "258d1305e2ff0c1f5545f83bd00dde95abf6a22b32a5d760dd2a19cd0a1053ca"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Authored preparation or presentation data.",
+      "expectedBytes": 526,
+      "expectedSha256": "3edc864c37944c1464cf5435ed9a637f321ce9d5f240913c42d6c614a3aac804"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Authored preparation or presentation data.",
+      "expectedBytes": 3415,
+      "expectedSha256": "8753bde9d25036ef1701f3bac7288de432eaa8f3ae678754f877e707e88a3b0e"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Authored preparation or presentation data.",
+      "expectedBytes": 3446,
+      "expectedSha256": "582eabadf35481b58ea0de864f551358690c7f97b8801a30eacaf37eee2c89aa"
+    },
+    {
+      "path": "reference/dawn_vesta_v04.tpc",
+      "purpose": "Pinned source metadata and coordinate interpretation.",
+      "expectedBytes": 7051,
+      "expectedSha256": "137ae97a3af618ca259445fd4ed54cfcfda4bcf2f27c4e228fb3f6e9d993ef0e"
+    },
+    {
+      "path": "reference/dlr-dtm.html",
+      "purpose": "Pinned source metadata and coordinate interpretation.",
+      "expectedBytes": 8313,
+      "expectedSha256": "719af65f64607ad76969b486cf10c80334375f4e6dcc96fc9b34be2cd449b6ab"
+    },
+    {
+      "path": "reference/dlr-mosaics.html",
+      "purpose": "Pinned source metadata and coordinate interpretation.",
+      "expectedBytes": 49198,
+      "expectedSha256": "c61db640b28ec1100def21230bd385ae49c7c654bc6d75257b9e582cff52e9d5"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source metadata and coordinate interpretation.",
+      "expectedBytes": 1322,
+      "expectedSha256": "6d35290bd1a64ab670eef17b718aa6336b60fa0e202203b6dde6dbf4d84408bc"
+    },
+    {
+      "path": "reference/true-color.lbl",
+      "purpose": "Pinned source metadata and coordinate interpretation.",
+      "expectedBytes": 2177,
+      "expectedSha256": "df28c23d38756f6863ca2daf6a1fe959de35a2b296852b7e92df75b5521994af"
+    }
+  ]
+}

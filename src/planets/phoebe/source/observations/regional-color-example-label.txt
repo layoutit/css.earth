@@ -1,0 +1,488 @@
+Object = IsisCube
+  Object = Core
+    StartByte   = 65537
+    Format      = Tile
+    TileSamples = 128
+    TileLines   = 408
+
+    Group = Dimensions
+      Samples = 961
+      Lines   = 408
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = Real
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+  End_Object
+
+  Group = Instrument
+    SpacecraftName          = Cassini-Huygens
+    InstrumentId            = ISSWA
+    TargetName              = Phoebe
+    StartTime               = 2004-163T20:04:38.952
+    StopTime                = 2004-163T20:04:40.152
+    ExposureDuration        = 1200.0 <Milliseconds>
+    AntibloomingStateFlag   = On
+    BiasStripMean           = 70.303329
+    CompressionRatio        = 5.223813
+    CompressionType         = Lossless
+    DataConversionType      = 12Bit
+    DelayedReadoutFlag      = Yes
+    FlightSoftwareVersionId = 1.3
+    GainModeId              = 29 <ElectronsPerDN>
+    GainState               = 2
+    ImageTime               = 2004-163T20:04:40.152
+    InstrumentDataRate      = 182.783997 <KilobitsPerSecond>
+    OpticsTemperature       = (7.024934, -999.000000 <DegreesCelcius>)
+    ReadoutCycleIndex       = 10
+    ShutterModeId           = BothSim
+    ShutterStateId          = Enabled
+    SummingMode             = 1
+    InstrumentModeId        = Full
+    SpacecraftClockCount    = 1/1465676923.068
+    ReadoutOrder            = 0
+  End_Group
+
+  Group = Archive
+    DataSetId     = CO-S-ISSNA/ISSWA-2-EDR-V1.0
+    ImageNumber   = 1465676924
+    ObservationId = ISS_000PH_HIRESC001_PRIME
+    ProductId     = 1_W1465676924.118
+  End_Group
+
+  Group = BandBin
+    FilterName   = CL1/RED
+    OriginalBand = 1
+    Center       = 647.282
+    Width        = 149.963
+  End_Group
+
+  Group = Kernels
+    NaifFrameCode             = -82361
+    LeapSecond                = $base/kernels/lsk/naif0012.tls
+    TargetAttitudeShape       = ($base/kernels/pck/pck00009.tpc,
+                                 $cassini/kernels/pck/cpck15Dec2017.tpc)
+    TargetPosition            = (Table, $base/kernels/spk/de405.bsp)
+    InstrumentPointing        = (Table, $cassini/kernels/ck/04161_04164ra.bc,
+                                 $cassini/kernels/fk/cas_v40.tf)
+    Instrument                = Null
+    SpacecraftClock           = $cassini/kernels/sclk/cas00172.tsc
+    InstrumentPosition        = (Table,
+                                 $cassini/kernels/spk/200128RU_SCPSE_04036_041-
+                                 82.bsp)
+    InstrumentAddendum        = $cassini/kernels/iak/IssWAAddendum004.ti
+    ShapeModel                = Null
+    InstrumentPositionQuality = Reconstructed
+    InstrumentPointingQuality = Reconstructed
+    CameraVersion             = 1
+  End_Group
+
+  Group = Radiometry
+    # Bitweight Correction Parameters
+    BitweightCorrectionPerformed = Yes
+    BitweightFile                = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /bitweight/wacg2p5_bwt.tab
+
+    # Bias Subtraction Parameters
+    BiasSubtractionPerformed     = Yes
+    BiasSubtractionMethod        = "Overclock fit"
+    NumberOfOverclocks           = 2
+
+    # Dark Current Subtraction Parameters
+    DarkSubtractionPerformed     = Yes
+    DarkParameterFile            = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /darkcurrent/wac_dark_parameters.full.cub
+    BiasDistortionTable          = "ISSWA: No bias distortion table used"
+
+    # Linearity Correction Parameters
+    LinearityCorrectionPerformed = Yes
+    LinearityCorrectionTable     = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /linearize/WAC2.lut
+
+    # DustRing Correction Parameters
+    DustRingCorrectionPerformed  = "No: ISSWA"
+    DustRingFile                 = "Not applicable: No dustring correction"
+    MottleCorrectionPerformed    = "No: dustring correction"
+    MottleFile                   = "Not applicable: No dustring correction"
+    EffectiveWavelengthFile      = "Not applicable: No dustring correction"
+    StrengthFactor               = "Not applicable: No dustring correction"
+
+    # Flatfield Correction Parameters
+    FlatfieldCorrectionPerformed = Yes
+    SlopeDataBase                = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /slope/slope_db_2.tab
+    FlatFile                     = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /slope/flat/flat075.full.cub
+
+    # DN to Flux Parameters
+    DNtoFluxPerformed            = Yes
+    DNtoElectrons                = Yes
+    TrueGain                     = 27.68
+    DividedByExposureTime        = Yes
+    ShutterOffsetFile            = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /offset/wacfm_so_p5.full.cub
+    DividedByAreaPixel           = Yes
+    SolidAngle                   = 3.6e-09
+    OpticsArea                   = 29.32
+    SumFactor                    = 1.0
+    DividedByEfficiency          = Yes
+    EfficiencyFactorMethod       = I/F
+    TransmissionFile             = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /efficiency/systrans/isswacl1red_systrans.-
+                                   tab
+    QuantumEfficiencyFile        = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /correction/wac_qe_correction.tab
+    SpectralFile                 = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /efficiency/solarflux.tab
+    SolarDistance                = 9.0120307124351
+    EfficiencyFactor             = 5.68252955742082e+13 <I/F>
+    TotalEfficiency              = 28.060045799102
+
+    # Correction Factor Parameters
+    CorrectionFactorPerformed    = Yes
+    CorrectionFactorFile         = /home/isis3bbdrtf/data/cassini/calibration-
+                                   /correction/correctionfactors_qecorr.tab
+    CorrectionFactor             = 1.02804
+    JupiterCorrectionFactor      = 1.0
+  End_Group
+
+  Group = Mapping
+    ProjectionName     = Equirectangular
+    CenterLongitude    = 0.0
+    TargetName         = Phoebe
+    EquatorialRadius   = 108950.0 <meters>
+    PolarRadius        = 101800.0 <meters>
+    LatitudeType       = Planetocentric
+    LongitudeDirection = PositiveEast
+    LongitudeDomain    = 180
+    MinimumLatitude    = -62.639713121098
+    MaximumLatitude    = 90.0
+    MinimumLongitude   = -180.0
+    MaximumLongitude   = 180.0
+    UpperLeftCornerX   = -342930.32581089 <meters>
+    UpperLeftCornerY   = 171821.6393356 <meters>
+    PixelResolution    = 712.95286031371 <meters/pixel>
+    Scale              = 2.667127556247 <pixels/degree>
+    CenterLatitude     = 0.0
+  End_Group
+
+  Group = AlphaCube
+    AlphaSamples        = 1024
+    AlphaLines          = 1024
+    AlphaStartingSample = 0.5
+    AlphaStartingLine   = 0.5
+    AlphaEndingSample   = 1024.5
+    AlphaEndingLine     = 1024.5
+    BetaSamples         = 1024
+    BetaLines           = 1024
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 65536
+End_Object
+
+Object = Table
+  Name        = "ISS Prefix Pixels"
+  StartByte   = 1736705
+  Bytes       = 24576
+  Records     = 1024
+  ByteOrder   = Lsb
+  Association = Lines
+
+  Group = Field
+    Name = OverclockPixels
+    Type = Double
+    Size = 3
+  End_Group
+End_Object
+
+Object = Table
+  Name                = InstrumentPointing
+  StartByte           = 1761281
+  Bytes               = 64
+  Records             = 1
+  ByteOrder           = Lsb
+  TimeDependentFrames = (-82000, 1)
+  ConstantFrames      = (14082361, -82361, -82000)
+  ConstantRotation    = (-4.60766564250016e-04, 2.53890149205477e-04,
+                         0.99999986161697, -0.99999915166539,
+                         -0.001218461310317, -4.60456881761331e-04,
+                         0.0012183442362362, -0.99999922544561,
+                         2.54451360053302e-04)
+  CkTableStartTime    = 140256343.73662
+  CkTableEndTime      = 140256343.73662
+  CkTableOriginalSize = 1
+  FrameTypeCode       = 3
+  Description         = "Created by spiceinit"
+  Kernels             = ($cassini/kernels/ck/04161_04164ra.bc,
+                         $cassini/kernels/fk/cas_v40.tf)
+
+  Group = Field
+    Name = J2000Q0
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q1
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q2
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q3
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV1
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV2
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV3
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = ET
+    Type = Double
+    Size = 1
+  End_Group
+End_Object
+
+Object = Table
+  Name                 = InstrumentPosition
+  StartByte            = 1761345
+  Bytes                = 56
+  Records              = 1
+  ByteOrder            = Lsb
+  CacheType            = Linear
+  SpkTableStartTime    = 140256343.73662
+  SpkTableEndTime      = 140256343.73662
+  SpkTableOriginalSize = 1.0
+  Description          = "Created by spiceinit"
+  Kernels              = $cassini/kernels/spk/200128RU_SCPSE_04036_04182.bsp
+
+  Group = Field
+    Name = J2000X
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Y
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Z
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000XV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000YV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000ZV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = ET
+    Type = Double
+    Size = 1
+  End_Group
+End_Object
+
+Object = Table
+  Name                = BodyRotation
+  StartByte           = 1761401
+  Bytes               = 64
+  Records             = 1
+  ByteOrder           = Lsb
+  TimeDependentFrames = (10047, 1)
+  CkTableStartTime    = 140256343.73662
+  CkTableEndTime      = 140256343.73662
+  CkTableOriginalSize = 1
+  FrameTypeCode       = 2
+  PoleRa              = (355.0, 0.0, 0.0)
+  PoleDec             = (68.7, 0.0, 0.0)
+  PrimeMeridian       = (178.58, 931.639, 0.0)
+  Description         = "Created by spiceinit"
+  Kernels             = ($base/kernels/spk/de405.bsp,
+                         $base/kernels/pck/pck00009.tpc,
+                         $cassini/kernels/pck/cpck15Dec2017.tpc)
+  SolarLongitude      = 330.52052237867
+
+  Group = Field
+    Name = J2000Q0
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q1
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q2
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Q3
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV1
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV2
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = AV3
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = ET
+    Type = Double
+    Size = 1
+  End_Group
+End_Object
+
+Object = Table
+  Name                 = SunPosition
+  StartByte            = 1761465
+  Bytes                = 56
+  Records              = 1
+  ByteOrder            = Lsb
+  CacheType            = Linear
+  SpkTableStartTime    = 140256343.73662
+  SpkTableEndTime      = 140256343.73662
+  SpkTableOriginalSize = 1.0
+  Description          = "Created by spiceinit"
+  Kernels              = $base/kernels/spk/de405.bsp
+
+  Group = Field
+    Name = J2000X
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Y
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000Z
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000XV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000YV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = J2000ZV
+    Type = Double
+    Size = 1
+  End_Group
+
+  Group = Field
+    Name = ET
+    Type = Double
+    Size = 1
+  End_Group
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1766929
+  Bytes     = 3096
+End_Object
+
+Object = NaifKeywords
+  BODY_CODE                      = 609
+  BODY609_RADII                  = (115.0, 110.0, 105.0)
+  BODY_FRAME_CODE                = 10047
+  INS-82361_CL1_RED_FOCAL_LENGTH = 200.74
+  INS-82361_PIXEL_PITCH          = 0.012
+  INS_-82361_FRAME_ID            = 14082361
+  INS-82361_TRANSX               = (0.0, 0.012, 0.0)
+  INS-82361_TRANSY               = (0.0, 0.0, 0.012)
+  INS-82361_ITRANSS              = (0.0, 83.333333333333, 0.0)
+  INS-82361_ITRANSL              = (0.0, 0.0, 83.333333333333)
+  INS-82361_BORESIGHT_LINE       = 512.5
+  INS-82361_BORESIGHT_SAMPLE     = 512.5
+  INS-82361_K1                   = 6.2e-05
+End_Object
+
+Object = Polygon
+  Name      = Footprint
+  StartByte = 1761521
+  Bytes     = 971
+End_Object
+
+Object = OriginalLabel
+  Name      = IsisCube
+  StartByte = 1762492
+  Bytes     = 4437
+End_Object
+End

@@ -1,0 +1,89 @@
+PDS_VERSION_ID                  = PDS3
+RECORD_TYPE                     = FIXED_LENGTH
+RECORD_BYTES                    = 1600
+FILE_RECORDS                    = 802
+^VICAR_HEADER                   = ("C1129120_CALIB.IMG", 1)
+^IMAGE                          = ("C1129120_CALIB.IMG", 2)
+^VICAR_EXTENSION_HEADER         = ("C1129120_CALIB.IMG", 802)
+
+DATA_SET_ID                     = "VG2-N-ISS-2/3/4/6-PROCESSED-V1.0"
+PRODUCT_ID                      = "C1129120_CALIB.IMG"
+PRODUCT_CREATION_TIME           = 2013-10-23T16:00:00
+SOURCE_PRODUCT_ID               = ("C1129120_CLEANED.IMG",
+                                   "DC2_NA_101_X100_3.IMG",
+                                   "FICOR77_VG2_NA_CLEAR.DAT",
+                                   "VGRSCF.DAT")
+PRODUCT_TYPE                    = CALIBRATED_IMAGE
+
+/* Image Description  */
+
+INSTRUMENT_HOST_NAME            = "VOYAGER 2"
+INSTRUMENT_HOST_ID              = VG2
+INSTRUMENT_NAME                 = "IMAGING SCIENCE SUBSYSTEM - NARROW ANGLE"
+INSTRUMENT_ID                   = "ISSN"
+MISSION_PHASE_NAME              = "NEPTUNE ENCOUNTER"
+TARGET_NAME                     = "NEREID"
+IMAGE_ID                        = "1256N2-004"
+IMAGE_NUMBER                    = "11291.20"
+IMAGE_TIME                      = 1989-08-21T20:46:21.00
+EARTH_RECEIVED_TIME             = 1989-08-22T00:51:50
+SCAN_MODE_ID                    = "10:1"
+SHUTTER_MODE_ID                 = "NAONLY"
+GAIN_MODE_ID                    = "LOW"
+EDIT_MODE_ID                    = "1:1"
+FILTER_NAME                     = "CLEAR"
+FILTER_NUMBER                   = "0"
+EXPOSURE_DURATION               = 3.8400 <SECOND>
+START_TIME                      = 1989-08-21T20:46:17.16
+STOP_TIME                       = 1989-08-21T20:46:21.00
+SPACECRAFT_CLOCK_START_COUNT    = "11291:19:736"
+SPACECRAFT_CLOCK_STOP_COUNT     = "11291:20:001"
+
+NOTE                            =
+"LONGITUDE COVERAGE & OPTICAL NAVIGATION."
+
+DESCRIPTION                     = "This image is the result of calibrating the
+corresponding CLEANED image (C1129120_CLEANED.IMG). It was created using the
+VICAR software package on a Compaq Alpha running OpenVMS. Routine FICOR77
+subtracted a background 'dark current' image (DC2_NA_101_X100_3.IMG) and
+converted from dimensionless raw numbers to two-byte integers that are
+proportional to I/F. The REFLECTANCE_SCALING_FACTOR value listed below defines
+the conversion factor.
+
+Note that this image contains geometric distortion, so the values for the
+horizontal and vertical pixel fields of view listed below are only
+approximate. See the corresponding GEOMED file (C1129120_GEOMED.IMG) for a
+geometrically corrected version. See file DOCUMENT/PROCESSING.TXT for more
+information about the image processing."
+
+OBJECT                          = VICAR_HEADER
+  HEADER_TYPE                   = VICAR
+  BYTES                         = 1600
+  RECORDS                       = 1
+  INTERCHANGE_FORMAT            = ASCII
+  DESCRIPTION                   = "VICAR format label for the image."
+END_OBJECT                      = VICAR_HEADER
+
+OBJECT                          = IMAGE
+  LINES                         = 800
+  LINE_SAMPLES                  = 800
+  SAMPLE_TYPE                   = LSB_INTEGER
+  SAMPLE_BITS                   = 16
+  SAMPLE_DISPLAY_DIRECTION      = RIGHT
+  LINE_DISPLAY_DIRECTION        = DOWN
+  HORIZONTAL_PIXEL_FOV          = 5.2200E-04 <DEGREE> /* approximate */
+  VERTICAL_PIXEL_FOV            = 5.2200E-04 <DEGREE> /* approximate */
+  HORIZONTAL_FOV                = 0.4176     <DEGREE> /* approximate */
+  VERTICAL_FOV                  = 0.4176     <DEGREE> /* approximate */
+  REFLECTANCE_SCALING_FACTOR    = 1.0000E-04
+END_OBJECT                      = IMAGE
+
+OBJECT                          = VICAR_EXTENSION_HEADER
+  HEADER_TYPE                   = VICAR
+  BYTES                         = 1600
+  RECORDS                       = 1
+  INTERCHANGE_FORMAT            = ASCII
+  DESCRIPTION                   = "Continuation of the VICAR header."
+END_OBJECT                      = VICAR_EXTENSION_HEADER
+
+END

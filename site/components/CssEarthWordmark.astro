@@ -14,8 +14,8 @@ const { twoLine = false } = Astro.props;
         <svg
           class={`planet-wordmark-two-line-${segment.label}`}
           viewBox={segment.viewBox}
-          width={segment.renderedWidth}
-          height={segment.renderedHeight}
+          width={(segment.width / segment.fontSize) + "em"}
+          height={(segment.height / segment.fontSize) + "em"}
           focusable="false"
         >
           <path d={segment.path} />

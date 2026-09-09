@@ -1,0 +1,37 @@
+# Proteus sources
+
+## Selected views and limits
+
+- **Monochrome:** clear-filter frames C1137317 and C1138920. The close frame provides about 1.14 km per geometrically corrected pixel; the other hemisphere is about 6.81 km/pixel. Native detector scale is respectively 1.35 and 8.03 km/pixel. The close image has strong dark-current background and low signal-to-noise; grain and differing resolution are source limitations. It is not an HD terrain survey.
+- **Elevation:** Stooke `n8proteus.tab`, radial height relative to 208 km, displayed from −35 to +25 km. The displayed shape uses 1,100 triangles with a 2 km simplification-error ceiling, below the 2,000-leaf budget.
+
+## Candidate survey
+
+| Candidate | Decision |
+| --- | --- |
+| [Original Voyager ISS archive](https://pds-rings.seti.org/voyager/iss/), clear frames C1137317 / C1138920 | Included: complementary coverage and the closest available observation. |
+| Violet C1137328, blue C1137339, green C1137350 | Inspected original calibrated frames. Excluded from this PR: the roughly 50–60-pixel disc and long-exposure blur do not yield a reliable useful mapped colour layer at the close frame's detail. This does not mean colour observations do not exist. |
+| [Ted Stryk colour composite](https://www.planetary.org/space-images/proteus_stryk) | Excluded as a texture: published under CC BY-NC-ND; no permission to reproject or redistribute derivatives is provided. |
+| Stooke global radius grid and shaded-relief drawings | Radius grid included as shape/Elevation; interpretive drawings excluded as photographic imagery. |
+| USGS/PDS map and terrain products; Stooke 1994 linked research | No separately registered colour, altimetric DEM or composition product was qualified. The paper download was unavailable; any linked data not present in the PDS release remain unresolved, not claimed absent. |
+
+## Source interpretation
+
+The PDS4 Stooke archive supplies a 5-degree west-positive longitude / planetocentric latitude / radius grid in kilometres. Preserve its origin (which is not necessarily the centre of figure), weld its duplicated seam and poles, and triangulate the published grid. This gives 2,522 vertices and 5,040 source triangles. Meshoptimizer simplifies that source before UV/lighting baking. The archive warns that the old model can exaggerate facets and depressions. Unseen shape is modelled, not measured local topography.
+
+Camera input is the original calibrated and geometrically corrected Voyager **GEOMED** VICAR product: 1,000 × 1,000 signed HALF samples, LOW byte order, explicit FICOR I/F multiplier. Camera scale is 7.841764329 microradians per corrected pixel. The attached raster header owns layout. OPUS supplies observer/Sun body coordinates and range; PDS ISS SEDR CK supplies image rotation. The original SEDR pointing is approximate, so image-centre translation is refined against sunlit limb gradients with orientation, range and shape held fixed. The authored solutions and sky samples are in `source/geometry/registration.json`; these are not modern photogrammetric control.
+
+A measured constant sky median is subtracted before the existing bounded lunar-Lambert illumination normalization (weight 0.5, maximum gain 2.5; incidence/emission below 75 degrees). This improves presentation, not a calibrated albedo inversion. Cast shadows, low-signal boundaries and unreliable samples remain gaps. No unseen terrain is painted into the photographic lens. Shared flood lighting and directional Shadows both remain available.
+
+Elevation is radius relative to the stated reference sphere, coloured with the shared elevation palette and prepared relief. It communicates broad shape, not a geoid, altimetry, or a high-resolution terrain survey. The minimap, surface, native triangle atlases and navigation portrait use the same interpretation. Navigation keeps the complete model silhouette while marking photographic gaps.
+
+## Sources and restoration
+
+- [Stooke PDS release](https://sbn.psi.edu/pds/resource/stkshape.html), Stooke (2025), DOI **10.26033/yt84-5y91**; underlying research: Stooke (1994), DOI 10.1007/BF00572198.
+- [PDS Voyager processing](https://pds-rings.seti.org/voyager/iss/calib_images.html) and [ISS pointing kernels](https://pds-rings.seti.org/voyager/ck/).
+- Geometry files preserve the original OPUS responses, PDS CK and NAIF clock/frame/leap-second kernels. `source/shape/pck00011.tpc` owns pole/spin conventions. Display ephemerides use the vendored astronomy package; Larissa's fitted precessing orbit has a measured maximum position residual of 472 km over the checked 1900–2100 Horizons fixture epochs. Do not claim navigation ephemeris precision beyond the recorded model budget.
+- `source/manifest.json` pins the original inputs and authored documents; `source/preparation/acquisition.json` restores missing image, radius-table, font and starfield inputs. Required small geometry documents and the pinned navigation portrait are checked in, so a fresh source restore does not depend on an ignored generated image.
+
+Runtime install: `pnpm setup:assets --object=proteus`.
+Source restore: `node tools/objects/dist/operations.js acquire proteus`.
+Rebuild: `node tools/objects/dist/prepare-authored.js proteus --write` after building the shared packages/preparation tools. Source preparation owns every image, triangle and lighting raster; the generic runtime only decodes the prepared package.

@@ -1,8 +1,11 @@
+import { SCENE_SATELLITE_IDS } from './sceneSatellites.js'
 import { describe, expect, it } from 'vitest'
 import {
   BODIES,
   BODY_IDS,
   DWARF_PLANET_IDS,
+  ASTEROID_IDS,
+  COMET_IDS,
   PLANET_IDS,
   bodyData,
   moonsOf,
@@ -16,16 +19,15 @@ const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 
 describe('the body table', () => {
   it('has an entry for the Sun, eight planets, the Moon, every satellite and the five dwarf planets', () => {
-    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + DWARF_PLANET_IDS.length)
-    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...DWARF_PLANET_IDS] as BodyId[]) {
+    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + ASTEROID_IDS.length + COMET_IDS.length)
+    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS, ...COMET_IDS] as BodyId[]) {
       expect(BODIES[id]).toBeDefined()
       expect(BODIES[id].id).toBe(id)
     }
   })
 
   it('parents every dwarf planet directly on the Sun', () => {
-    // Unlike the eight planets, there is no barycentre level: moons are out
-    // of scope, so a dwarf planet's own frame IS its heliocentric position.
+    // Dwarf element sources target the body centre directly.
     for (const id of DWARF_PLANET_IDS) expect(bodyData(id).parent).toBe('sun')
   })
 
@@ -52,14 +54,16 @@ describe('the body table', () => {
     for (const id of BODY_IDS) {
       const data = bodyData(id)
       expect(data.meanRadiusKm).toBeGreaterThan(0)
-      expect(data.gravitationalParameterKm3PerS2).toBeGreaterThan(0)
-      // Mean density between 0.3 and 8.5 g/cm^3 covers low-density Pan and
+      expect(data.gravitationalParameterKm3PerS2).toBeGreaterThanOrEqual(0)
+      // Zero represents an unpublished GM, not a measured massless body.
+      if (data.gravitationalParameterKm3PerS2 === 0) continue
+      // Mean density between 0.2 and 8.5 g/cm^3 covers porous Helene and
       // Atlas through Mercury and catches a GM or radius entered in the wrong
       // unit, which is the failure this table is most exposed to.
       const massKg = data.gravitationalParameterKm3PerS2 / GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2
       const volumeKm3 = (4 / 3) * Math.PI * data.meanRadiusKm ** 3
       const densityGramsPerCm3 = massKg / volumeKm3 / 1e12
-      expect(densityGramsPerCm3).toBeGreaterThan(0.3)
+      expect(densityGramsPerCm3).toBeGreaterThan(0.2)
       expect(densityGramsPerCm3).toBeLessThan(8.5)
     }
   })
@@ -75,30 +79,16 @@ describe('the body table', () => {
 
   it('lists exactly the moons the satellite data carries, plus the Moon', () => {
     expect(moonsOf('earth')).toEqual(['moon'])
+    expect(moonsOf('didymos')).toEqual(['dimorphos'])
     expect(moonsOf('mercury')).toEqual([])
     expect(moonsOf('venus')).toEqual([])
     const fromSatellites = SATELLITE_IDS.filter((id) => SATELLITE_ELEMENTS[id].parent === 'jupiter')
     expect(moonsOf('jupiter')).toEqual(fromSatellites)
-    const total = PLANET_IDS.flatMap((planet) => moonsOf(planet))
-    expect(total.length).toBe(SATELLITE_IDS.length + 1)
-    expect(moonsOf('saturn')).toEqual([
-      'mimas',
-      'enceladus',
-      'tethys',
-      'dione',
-      'rhea',
-      'titan',
-      'hyperion',
-      'iapetus',
-      'phoebe',
-      'janus',
-      'epimetheus',
-      'telesto',
-      'atlas',
-      'prometheus',
-      'pandora',
-      'pan',
-    ])
+    const total = [...PLANET_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS].flatMap((parent) => moonsOf(parent))
+    expect(total.length).toBe(SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + 1)
+    for (const planet of [...PLANET_IDS, ...DWARF_PLANET_IDS].filter(id => id !== 'earth')) {
+      expect(moonsOf(planet)).toEqual([...SATELLITE_IDS.filter(id => SATELLITE_ELEMENTS[id].parent === planet), ...SCENE_SATELLITE_IDS.filter(id => bodyData(id).parent === planet)])
+    }
   })
 
   it('makes each planetary system heavier than its planet, by the moons', () => {

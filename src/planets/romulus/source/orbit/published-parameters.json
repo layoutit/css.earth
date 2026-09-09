@@ -1,0 +1,83 @@
+{
+  "schema": "cssearth-published-mutual-orbit@1",
+  "id": "romulus",
+  "centerBodyId": "sylvia",
+  "referenceFrame": "EQJ2000",
+  "epochJd": 2455597.08689,
+  "timeScale": "TT",
+  "timeScaleQualification": "Table 3 labels tp as JD without a time scale. TT is an explicit preparation convention; the CDS observed timestamps are UTC. Choosing UTC instead would shift this phase by about one minute, smaller than the quoted 0.10085-day epoch uncertainty, but this does not establish a source-owned exact time scale.",
+  "semiMajorAxisKm": 1340.6,
+  "eccentricity": 0,
+  "inclinationDegrees": 7.4,
+  "ascendingNodeDegrees": 97.1,
+  "argumentPeriapsisDegrees": 171,
+  "meanAnomalyDegrees": 0,
+  "meanMotionDegreesPerDay": 98.86687575180021,
+  "quadraticMeanAnomalyDegreesPerYear2": 0,
+  "periodDays": 3.64126,
+  "source": {
+    "citation": "Carry et al. (2021), Astronomy & Astrophysics 650 A129, Table 3, page 5",
+    "doi": "10.1051/0004-6361/202140342",
+    "url": "https://www.aanda.org/articles/aa/pdf/2021/06/aa40342-21.pdf",
+    "retrievalUrl": "https://trepo.tuni.fi/bitstream/handle/10024/219664/aa40342_21.pdf?isAllowed=y&sequence=1",
+    "sha256": "f886c0b238fa136d1d101316e079884dd0dfe85272eed08859f8e1c3a9231651",
+    "bytes": 8248991,
+    "md5": "5a2c92a0a091e4fda304148226eb772c",
+    "checksumCrossCheck": "Clean payload MD5 matches Caltech published-file record 5a2c92a0a091e4fda304148226eb772c.",
+    "retrievalTransformation": "Institutional mirror returned multipart form-data. Extracted bytes from %PDF through %%EOF and its LF; no scientific content transformed. Full paper is not bundled.",
+    "versionComparison": "Published page 5 visually inspected; all Table 3 Romulus elements and uncertainties agree with arXiv:2103.06349v1. Table 1 lists 143 observations while Table 3 and CDS Table C1 contain 130; retain Table 3 membership."
+  },
+  "uncertainties": {
+    "confidence": "All Table 3 uncertainties are 3 sigma. Parameter covariance is not supplied.",
+    "periodDays": 5e-05,
+    "semiMajorAxisKm": 1.2,
+    "eccentricity": {
+      "minus": 0,
+      "plus": 0.009
+    },
+    "inclinationDegrees": 1.6,
+    "ascendingNodeDegrees": 5.8,
+    "argumentPeriapsisDegrees": 10.5,
+    "epochDays": 0.10085
+  },
+  "sourceObservations": {
+    "table3Count": 130,
+    "table3SpanDays": 6050,
+    "table3ReportedRmsMas": 9.85,
+    "cdsTableC1Count": 130,
+    "cdsFirstUtc": "2002-05-07T09:37:02.42",
+    "cdsLastUtc": "2018-11-29T04:41:40.71"
+  },
+  "qualifications": [
+    "Nominal circular Kepler orbit from printed elements. For e=0, argument of periapsis and pericenter epoch are individually degenerate; retain their published combination as the phase convention.",
+    "EQJ2000 is adopted as ICRF for this low-precision illustration; frame-bias milliarcseconds are negligible compared with measured source-projection disagreements.",
+    "No precession, perturbation or current phase correction is added. Runtime receives only the exact prepared epoch snapshot.",
+    "The paper fit RMS is not reproduced by the rounded-element illustration and must not be used as its accuracy claim.",
+    "Modern Miriade solution 1 is independently checked, not silently substituted or used to fit a correction."
+  ],
+  "gravityPolicy": "The effective combined GM is derived from the selected a and P: 4π²a³/(P·86400)². Body GM=0 denotes unmodeled satellite mass; assigning the combined value to the parent is a preparation convention, not a measurement of individual masses.",
+  "publishedMassesKg": {
+    "sylvia": {
+      "value": 1.44e+19,
+      "uncertainty3Sigma": 4e+16
+    },
+    "romulus": {
+      "value": 1400000000000000.0,
+      "uncertainty3Sigma": 1200000000000000.0
+    },
+    "qualification": "Paper describes satellite mass as effectively an upper limit; these values are retained separately from the effective two-body GM."
+  },
+  "timeQualification": "Table 3 labels tp as JD without a time scale. TT is an explicit preparation convention; the CDS observed timestamps are UTC. Choosing UTC instead would shift this phase by about one minute, smaller than the quoted 0.10085-day epoch uncertainty, but this does not establish a source-owned exact time scale.",
+  "citation": {
+    "citation": "Carry et al. (2021), Astronomy & Astrophysics 650 A129, Table 3, page 5",
+    "doi": "10.1051/0004-6361/202140342",
+    "url": "https://www.aanda.org/articles/aa/pdf/2021/06/aa40342-21.pdf",
+    "retrievalUrl": "https://trepo.tuni.fi/bitstream/handle/10024/219664/aa40342_21.pdf?isAllowed=y&sequence=1",
+    "sha256": "f886c0b238fa136d1d101316e079884dd0dfe85272eed08859f8e1c3a9231651",
+    "bytes": 8248991,
+    "md5": "5a2c92a0a091e4fda304148226eb772c",
+    "checksumCrossCheck": "Clean payload MD5 matches Caltech published-file record 5a2c92a0a091e4fda304148226eb772c.",
+    "retrievalTransformation": "Institutional mirror returned multipart form-data. Extracted bytes from %PDF through %%EOF and its LF; no scientific content transformed. Full paper is not bundled.",
+    "versionComparison": "Published page 5 visually inspected; all Table 3 Romulus elements and uncertainties agree with arXiv:2103.06349v1. Table 1 lists 143 observations while Table 3 and CDS Table C1 contain 130; retain Table 3 membership."
+  }
+}

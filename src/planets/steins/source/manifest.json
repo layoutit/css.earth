@@ -1,0 +1,248 @@
+{
+  "schema": "csssteins-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "acquisition": "Original restorable from pinned URL through preparation/acquisition.json.",
+      "redistribution": "Attributed scientific visualization; retain source credits. See NOTICE.md.",
+      "id": "steins-shape",
+      "path": "shape/steins_cart.wrl",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-steins-shape-v1.0/data/steins_cart.wrl",
+      "credit": "Jorda, L., Gaskell, R.W., and Kaasalainen, M.K.J.; T.L. Farnham (editor); NASA PDS,2013",
+      "license": "NASA PDS public scientific data with retained source credit.",
+      "consumers": [
+        "terrain",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 2580
+      },
+      "coverage": "Closed published shape. Approximately60% was imaged; unseen areas are constrained by lightcurve inversion. Source contains an acknowledged artificial elevation step at the SPC/lightcurve seam.",
+      "expectedBytes": 2470000,
+      "expectedSha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff"
+    },
+    {
+      "acquisition": "Original restorable from pinned URL through preparation/acquisition.json.",
+      "redistribution": "Attributed scientific visualization; retain source credits. See NOTICE.md.",
+      "id": "steins-normal",
+      "path": "maps/steins_cylindrical_mosaic.jpg",
+      "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
+      "credit": "Phil Stooke/NASA PDS; ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "Stooke Small Bodies Maps V3.0 states these maps are public domain; credit required.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 3600,
+      "height": 1800,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "centerLongitude": 0,
+        "sourceRowOrder": "north-to-south",
+        "registrationEvidence": "reference/registration.md"
+      },
+      "coverage": "Visual-only Stooke mosaic controlled by Leyrat2010, with revised south-pole interpretation and photographed illumination. A north-edge connected0..2sRGB display-code heuristic identifies exterior gaps before resampling; isolated dark terrain is retained. This is not calibrated albedo.",
+      "expectedBytes": 725269,
+      "expectedSha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
+      "credit": "Phil Stooke/NASA PDS; ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
+      "license": "Stooke Small Bodies Maps V3.0 states these maps are public domain; credit required.",
+      "expectedBytes": 95137,
+      "expectedSha256": "ffabff67434043f3953304863d9d1615b782c1c7d5497d827fbb43c20f9b3208",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "steins-normal",
+          "steins-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 20,
+        "latitudeDegrees": 10,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 9765,
+      "expectedSha256": "6bc2542c035193831976feba06851d7040849815463a0abd7b665bcbb1b5874e"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 1017,
+      "expectedSha256": "e911caa28be1088c5f599f16dbddfee2251338d1d96891817a7b6ded1a2ac7a3"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 1395,
+      "expectedSha256": "b947e5524ca6f8a2af80dc844d3c2bc13bbd0b1e6ed0b3a82884d618453016db"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 407,
+      "expectedSha256": "550429ed088ec14ff956495dc7edece9868df8c4ad10fa16b2dfd1bfbccbad40"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 3093,
+      "expectedSha256": "be4ad9616171869ae427b82a8fdee9a9afadf0f01e7d3c26d61083243b2d67e7"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 3676,
+      "expectedSha256": "ef3720e2653d747e7c9fc93919ce3fa4128cbcdb3ecc739f78ec9ca9d642499d"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 1288,
+      "expectedSha256": "6cc0f2b5a25c13e81f77e6ac3d3fc5dd0b46f726df414457c7cfc948f19bba2f"
+    },
+    {
+      "path": "reference/pck00011.tpc",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 131226,
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+    },
+    {
+      "path": "reference/plate_shape_definition.asc",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 6641,
+      "expectedSha256": "ce41e720a2a59c445c68894f3910839a7a42e98bd117eb3081d9051d6b07a651"
+    },
+    {
+      "path": "reference/reflect-dataset.cat",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 5838,
+      "expectedSha256": "ee03ea7c2e566d25d688a38634c9d50cad6235da95dc38685b6649230e7e1be2"
+    },
+    {
+      "path": "reference/reflect-image.lbl",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 23040,
+      "expectedSha256": "55e8d3070b9addff859489becb47a7b18ed11c16d853a00ca99dd8714a332cd9"
+    },
+    {
+      "path": "reference/reflect-index.lbl",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 4720,
+      "expectedSha256": "99e1b9d99b2e3c0b152cf722a00deadc005df727dd7d94645060c5f784bb7cf6"
+    },
+    {
+      "path": "reference/reflect-index.tab",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 109600,
+      "expectedSha256": "371a4dc98546a649d6a67b0e63a6f0d47051185a2f7c0b56e2cf4e11a0e8e7d5"
+    },
+    {
+      "path": "reference/registration.md",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 2853,
+      "expectedSha256": "22bc246f026f30ddce5780f78594462edd2913d9cd55e6ffa5e90d88d72aeadf"
+    },
+    {
+      "path": "reference/shape-dataset.cat",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 13360,
+      "expectedSha256": "36afa1c7f593891d39993a12448c7ab534004884ada68a09050bf154478b697f"
+    },
+    {
+      "path": "reference/steins_0n0e.png",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 46284,
+      "expectedSha256": "5151fa0b7f72caee69670f7d2c95e035a8f0f8c5b7ea5b370794f904d6c12e77"
+    },
+    {
+      "path": "reference/steins_90s.png",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 72148,
+      "expectedSha256": "bb89efdf24c7e6eaab9899b523228ee185aaa5308cca92f93bcc336caab4347c"
+    },
+    {
+      "path": "reference/steins_cart.lbl",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 10000,
+      "expectedSha256": "a2f107a2f7fd0f764e0df951324bf7d7db2203704e4445333798fd5c90bedfed"
+    },
+    {
+      "path": "reference/steins_map_grid.jpg",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 1379481,
+      "expectedSha256": "d2ece2d2c4d85613f38d0de0cd9fc1aec6354994eb3d1a23f46a232c0d727563"
+    },
+    {
+      "path": "reference/steins_map_names.jpg",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 1543156,
+      "expectedSha256": "0aae142b37e081dfb97c30a3d2bd1597efaf0aebff62ba9e2d33515d1d544c07"
+    },
+    {
+      "path": "reference/stooke-map-guide.html",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 55920,
+      "expectedSha256": "92d7616133f52312bb97c35fb766531ef05323c75f24cbec3c5e6ab422103c03"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 596,
+      "expectedSha256": "e0ce396ecd8248da152da0f67d7e2de2df102c6b81c2c88ca37d66bd35c03009"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "expectedBytes": 89772,
+      "expectedSha256": "52fe1b607889f667ba3085901b704730d579f0ae5dd925a107b205d3dfaaced1"
+    }
+  ]
+}

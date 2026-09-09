@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "naiad",
+  "displayName": "Naiad",
+  "panel": {
+    "introduction": "Naiad is Neptune’s innermost moon. Its elongated shape is inferred from Voyager observations; the grid marks the absence of a usable surface map.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Reference mean radius",
+        "value": "29 ± 6 km"
+      },
+      {
+        "id": "dimensions",
+        "label": "Dimensions",
+        "value": "About 96 × 60 × 52 km"
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Neptune",
+        "value": "About 7.06 hours"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Mean distance from Neptune",
+        "value": "About 48,200 km"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "Modeled as synchronous"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager Science Team · 1989"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+        "title": "A triaxial ellipsoid fitted to Voyager images by Karkoschka (2003), with semi-axes 48 × 30 × 26 km. The observations constrain the broad outline but cannot support a resolved surface map. The standard gray grid marks absent surface imagery; lighting describes the approximate shape.",
+        "detail": "Measured axes",
+        "thumbnail": "/scenes/naiad/naiad-model-thumbnail.webp",
+        "surface": "naiad-model-surface@2x.webp",
+        "poles": "naiad-model-poles@2x.webp",
+        "source": {
+          "id": "measured-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Naiad overview",
+      "href": "https://science.nasa.gov/neptune/moons/naiad/"
+    },
+    {
+      "label": "Karkoschka (2003)",
+      "role": "surface",
+      "description": "Voyager-derived ellipsoid dimensions",
+      "href": "https://doi.org/10.1016/S0019-1035(03)00002-2"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Voyager calibrated imagery",
+      "href": "https://pds-rings.seti.org/voyager/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/neptune/moons/naiad/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Karkoschka (2003); NASA/NAIF; JPL Horizons"
+    }
+  }
+}

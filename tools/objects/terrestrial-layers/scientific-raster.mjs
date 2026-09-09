@@ -1,7 +1,12 @@
+import { loadScalarMap } from './pds-scalar-map.mjs';
 import { resolve } from 'node:path';
 import { fromFile } from 'geotiff';
+import {loadIsis3Raster} from './isis3-raster.mjs';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mjs';
 import {composeCorrectedColor} from './photometric-observations.mjs';
+import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
+import { loadPdsRadialTable } from './pds-radial-table.mjs';
+import { loadShapeScalarGrid } from './obj-shape.mjs';
 
 /** Interpolate the authored numeric scale; source units remain unchanged. */
 export function colorForValue(value, { minimum, maximum, colors }) {
@@ -60,10 +65,24 @@ export function scienceMapPoint(longitude, latitude, grid) {
     const distance = 2 * radius * Math.tan(Math.PI / 4 - sign * latitude * radians / 2);
     return [distance * Math.sin(angle), -sign * distance * Math.cos(angle)];
   }
-  return [(longitude - grid.centerLongitude) * radians * radius, latitude * radians * radius];
+  if (grid.longitudeRange?.[0] === -180) longitude = ((longitude + 180) % 360 + 360) % 360 - 180;
+  const delta = longitude - grid.centerLongitude;
+  const wrapped = grid.wrapLongitude ? ((delta + 180) % 360 + 360) % 360 - 180 : delta;
+  return [wrapped * radians * radius, latitude * radians * radius];
 }
 
-export async function loadScienceSurface(root, lens) {
+export async function loadScienceSurface(root, lens, sourceMesh) {
+  if (lens.format === 'pds3-scalar-map') return loadScalarMap(root, lens, sourceMesh);
+  if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {
+    const loader = lens.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
+    const raster = await loader(resolve(root, lens.path), lens.grid, lens.sampleGrid);
+    return { sample(longitude, latitude) {
+      if (latitude < -90 || latitude > 90) return null;
+      const value = raster.sample(longitude, latitude);
+      return value === null ? null : value * (lens.valueTransform?.scale ?? 1) + (lens.valueTransform?.offset ?? 0);
+    } };
+  }
+  if (['stl', 'wavefront-obj', 'wavefront-obj-zip', 'pds-vertex-facet', 'pds-plate-model', 'vrml-mesh', 'pds-radius-table'].includes(lens.format)) return loadShapeScalarGrid(root, lens, sourceMesh);
   if (lens.additionalGrids?.length) {
     const rasters = await Promise.all([lens, ...lens.additionalGrids].map(entry =>
       loadScienceSurface(root, {...lens, ...entry, additionalGrids: undefined})));
@@ -74,6 +93,16 @@ export async function loadScienceSurface(root, lens) {
       }
       return null;
     } };
+  }
+  if (lens.format === 'isis3') {
+    const grid = lens.grid;
+    const {data, origin, resolution} = await loadIsis3Raster(resolve(root, lens.path), grid);
+    return {sample(longitude, latitude) {
+      if (latitude < -90 || latitude > 90) return null;
+      const [easting, northing] = scienceMapPoint(longitude, latitude, grid);
+      return sampleScienceGrid(data, grid, (easting - origin[0]) / resolution[0],
+        (northing - origin[1]) / resolution[1], lens);
+    }};
   }
   if (lens.format !== 'geotiff') throw new Error(`Unsupported scientific source format: ${lens.format}`);
   const tiff = await fromFile(resolve(root, lens.path));
@@ -104,6 +133,30 @@ export async function loadScienceSurface(root, lens) {
       return sampleScienceGrid(data, grid, x, y, lens);
     } };
   } finally { await tiff.close(); }
+}
+
+/** Cartographic relief from the matched source facet, in local east/north/up.
+ * The normal and radius come from that same surface, including overhangs; no
+ * finite difference can accidentally cross to another radial branch. */
+export function sourceSurfaceBrightness({ point, normal }, relief) {
+  if (!relief) return 1;
+  const radius = Math.hypot(...point), horizontal = Math.hypot(point[0], point[1]);
+  const east = horizontal > 0 ? [-point[1] / horizontal, point[0] / horizontal, 0] : [0, 1, 0];
+  const up = point.map(n => n / radius);
+  const north = [up[1]*east[2]-up[2]*east[1], up[2]*east[0]-up[0]*east[2], up[0]*east[1]-up[1]*east[0]];
+  const light = up.map((_, i) => east[i] * relief.lightDirection[0] + north[i] * relief.lightDirection[1] + up[i] * relief.lightDirection[2]);
+  const illumination = Math.max(0, normal.reduce((sum, n, i) => sum + n * light[i], 0));
+  return (relief.ambient + (1 - relief.ambient) * illumination) /
+    (relief.ambient + (1 - relief.ambient) * relief.lightDirection[2]);
+}
+
+export function createSourceSurfacePainter(lens) {
+  const palette = Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
+  return sample => {
+    const color = palette[Math.round(Math.max(0, Math.min(1, (sample.value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
+    const brightness = sourceSurfaceBrightness(sample, lens.relief);
+    return color.map(c => Math.max(0, Math.min(255, Math.round(c * brightness))));
+  };
 }
 
 export function paintScienceSurface(source, lens, width, height) {

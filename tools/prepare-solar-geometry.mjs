@@ -9,7 +9,9 @@
 //
 // Positions and velocities come from VSOP87A (heliocentric rectangular, J2000
 // ecliptic, rotated to ICRF) for planets, JPL Kepler elements for dwarf planets
-// and satellites, and ELP for Earth's Moon. Satellite state vectors are relative
+// and most satellites, and ELP for Earth's Moon. Retained Horizons states
+// replace six poor moon fits at this epoch and supply Earth's EMB offset.
+// Satellite state vectors are relative
 // to their parent; solar directions include the parent's heliocentric position.
 // and orientations from the IAU/WGCCRE rotation
 // elements, both provided by the vendored astronomy package
@@ -26,22 +28,26 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { OBJECTS } from "../site/objects.mjs";
 import { loadAstronomyPackage } from "../src/platform/astronomy-package.mjs";
+import { loadSceneEpochEphemeris } from "../packages/astronomy/tools/scene-ephemeris.mjs";
 
-// 2026-09-04T00:00:00 TT.
+// 2026-09-03T00:00:00 TT.
 const EPOCH_JD_TT = 2461286.5;
-const EPOCH_LABEL = "2026-09-04T00:00:00 TT";
+const EPOCH_LABEL = "2026-09-03T00:00:00 TT";
+const sourceKey = id => /^[a-z][a-z0-9]*$/.test(id) ? id : JSON.stringify(id);
 
-// VSOP87A has no Earth series; the Earth-Moon barycentre stands in for Earth.
-// The offset is under 4700 km against 1 au, which moves the direction by less
-// than 0.002 degrees.
+// VSOP87A supplies the Earth-Moon barycentre. Add the independently retained
+// Horizons Earth-relative-to-EMB state so Earth and its Moon use Earth's centre.
 const VSOP87A_KEY = Object.freeze({ earth: "emb" });
 
 const BODIES = OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite"].includes(body.classification)).map(body => body.id);
+  ["planet", "dwarf-planet", "satellite", "asteroid", "comet"].includes(body.classification)).map(body => body.id);
 
 const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
+  ASTEROID_IDS, asteroidElements,
+  COMET_IDS, cometElements,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
+  SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
   systemBarycentreHeliocentricAu,
   systemBarycentreVelocityAuPerDay,
   bodyRotationAt,
@@ -99,33 +105,64 @@ const authoredRotations = new Map(await Promise.all(BODIES.map(async id => {
 })));
 const rotationAtEpoch = id => authoredRotations.get(id) ?? bodyRotationAt(id, EPOCH_JD_TT);
 
+const epochStates = await loadSceneEpochEphemeris(EPOCH_JD_TT);
+for (const id of SCENE_SATELLITE_IDS) epochStates.set(id, sceneSatelliteStateKm(id, EPOCH_JD_TT));
+// A primary-specific satellite solution owns ONE heliocentric primary state
+// at this epoch. Every observer and the global context must use that same
+// origin; mixing it with an older parent conic breaks the physical hierarchy.
+const primaryStates = new Map();
+for (const state of epochStates.values()) {
+  if (!state.parentHeliocentricState) continue;
+  const primary = state.parentHeliocentricState;
+  const previous = primaryStates.get(state.centerBodyId);
+  if (previous && ['positionKm', 'velocityKmPerDay'].some(key =>
+    primary[key].some((value, axis) => value !== previous[key][axis]))) {
+    throw new TypeError(`Incompatible primary states for ${state.centerBodyId}.`);
+  }
+  primaryStates.set(state.centerBodyId, primary);
+}
+const planetPosition = id => systemBarycentreHeliocentricAu(VSOP87A_KEY[id] ?? id, EPOCH_JD_TT)
+  .map((value, axis) => value + (id === "earth" ? epochStates.get("earth").positionKm[axis] / ASTRONOMICAL_UNIT_KILOMETERS : 0));
+const planetVelocity = id => systemBarycentreVelocityAuPerDay(VSOP87A_KEY[id] ?? id, EPOCH_JD_TT)
+  .map((value, axis) => value + (id === "earth" ? epochStates.get("earth").velocityKmPerDay[axis] / ASTRONOMICAL_UNIT_KILOMETERS : 0));
+
 const entries = BODIES.map((body) => {
   const parent = ASTRONOMY_BODY_DATA[body].parent;
   const isSatellite = parent !== "sun";
-  const moonPosition = isSatellite ? moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT) : null;
+  const epochState = isSatellite ? epochStates.get(body) : null;
+  if (epochState && epochState.centerBodyId !== parent) throw new TypeError(`Ephemeris parent differs for ${body}.`);
+  const moonPosition = isSatellite ? epochState?.positionKm ?? moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT) : null;
   // ELP supplies the Earth's Moon position; take its centred derivative.
   // Other satellite records already expose their analytic Kepler velocity.
   const dt = 0.001;
-  const moonVelocity = !isSatellite ? null : SATELLITE_IDS.includes(body)
+  const moonVelocity = !isSatellite ? null : epochState ? epochState.velocityKmPerDay : SATELLITE_IDS.includes(body)
     ? satelliteStateKm(body, EPOCH_JD_TT).velocityKmPerDay
     : moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT + dt).map((value, index) =>
       (value - moonPositionRelativeToPlanetKm(body, EPOCH_JD_TT - dt)[index]) / (2 * dt));
   const parentPosition = isSatellite
-    ? systemBarycentreHeliocentricAu(VSOP87A_KEY[parent] ?? parent, EPOCH_JD_TT) : null;
+    ? primaryStates.has(parent)
+      ? primaryStates.get(parent).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : DWARF_PLANET_IDS.includes(parent)
+      ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : ASTEROID_IDS.includes(parent)
+      ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+      : planetPosition(parent) : null;
   const mu = isSatellite
-    ? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
-       ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
+    ? (epochState?.gravitationalParametersKm3PerS2?.combined ?? (ASTRONOMY_BODY_DATA[parent].gravitationalParameterKm3PerS2 +
+       ASTRONOMY_BODY_DATA[body].gravitationalParameterKm3PerS2)) * 86400 ** 2 / ASTRONOMICAL_UNIT_KILOMETERS ** 3
     : GM_SUN_AU3_PER_DAY2;
   const kepler = DWARF_PLANET_IDS.includes(body)
-    ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT) : null;
+    ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
+    : ASTEROID_IDS.includes(body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
+    : COMET_IDS.includes(body) ? keplerStateKm(cometElements(body), EPOCH_JD_TT) : null;
   const heliocentricAu = isSatellite
     ? parentPosition.map((value, index) => value + moonPosition[index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
-    ? kepler.positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-    : systemBarycentreHeliocentricAu(VSOP87A_KEY[body] ?? body, EPOCH_JD_TT);
+    ? (primaryStates.get(body) ?? kepler).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+    : planetPosition(body);
   const velocityAuPerDay = isSatellite
     ? moonVelocity.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : kepler
-    ? kepler.velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-    : systemBarycentreVelocityAuPerDay(VSOP87A_KEY[body] ?? body, EPOCH_JD_TT);
+    ? (primaryStates.get(body) ?? kepler).velocityKmPerDay.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
+    : planetVelocity(body);
   const orbitPositionAu = isSatellite ? moonPosition.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS) : heliocentricAu;
   const toSunIcrf = normalize(heliocentricAu.map((component) => -component));
   const orbitNormalIcrf = normalize(cross(orbitPositionAu, velocityAuPerDay));
@@ -260,13 +297,14 @@ const module = `// Generated by tools/prepare-solar-geometry.mjs. Do not edit by
 // to ICRF rotation itself.
 //
 // Positions: VSOP87A parent-system barycentres plus moon-relative offsets;
-// JPL Kepler elements for dwarf planets and satellites, ELP for the Moon.
+// Earth includes its Horizons offset from the Earth-Moon barycentre.
+// Six moon states use retained Horizons vectors at this exact prepared epoch.
+// Other satellites/dwarf planets use compact JPL Kepler fits, ELP for the Moon.
 // Satellite orbit elements are relative to their parent, not to the Sun.
-// Parent-system barycentres approximate planet centres in this solar view.
-// Existing planets retain their original preparation values.
+// Parent-system barycentres approximate planet centres except for Earth.
 // All vectors use ICRF. Orientation: IAU/WGCCRE elements, object-owned observed
-// poles, or explicitly arbitrary display orientations. Earth uses the
-// Earth-Moon barycentre series.
+// poles, or explicitly arbitrary display orientations.
+// A state at one epoch does not make an osculating orbit a predicted trajectory.
 //
 // BODY_ORBITS derives each body's osculating orbit from that same
 // state vector (vis-viva and the eccentricity vector), using GM_sun = k^2
@@ -280,12 +318,19 @@ export const SOLAR_GEOMETRY_EPOCH_JD_TT = ${EPOCH_JD_TT};
 export const SOLAR_GEOMETRY_EPOCH_LABEL = ${JSON.stringify(EPOCH_LABEL)};
 export const ASTRONOMICAL_UNIT_KILOMETERS = ${ASTRONOMICAL_UNIT_KILOMETERS};
 
+// Preparation provenance; these snapshots cannot be extrapolated to other dates.
+export const BODY_POSITION_PROVENANCE = Object.freeze(${JSON.stringify(Object.fromEntries([...epochStates, ...primaryStates].map(([id, state]) => [id, { ...state.provenance, ...(id === "earth" ? {model:"VSOP87A EMB plus Horizons Earth-center offset"} : {}) }])), null, 2)});
+
+// Canonical ICRF heliocentric primary states at this exact scene epoch. A
+// coordinate origin here need not have a visible surface or navigation marker.
+export const BODY_HELIOCENTRIC_STATES = Object.freeze(${JSON.stringify(Object.fromEntries(primaryStates), null, 2)});
+
 export const BODY_FIXED_SUN_DIRECTIONS = Object.freeze({
 ${
   entries.map(({ body, direction, subsolarLatitudeDegrees, subsolarLongitudeDegrees }) =>
     `  // subsolar latitude ${subsolarLatitudeDegrees.toFixed(3)}°, ` +
     `longitude ${subsolarLongitudeDegrees.toFixed(3)}°\n` +
-    `  ${body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     direction.map((component) => `    ${component},\n`).join("") +
     `  ]),`).join("\n")
 }
@@ -296,7 +341,7 @@ ${
   entries.map(({ body, eclipticNorth, poleTiltDegrees, sunEclipticLatitudeDegrees }) =>
     `  // pole tilt to the ecliptic ${poleTiltDegrees.toFixed(3)}°, ` +
     `Sun ecliptic latitude ${sunEclipticLatitudeDegrees.toFixed(3)}°\n` +
-    `  ${body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     eclipticNorth.map((component) => `    ${component},\n`).join("") +
     `  ]),`).join("\n")
 }
@@ -309,7 +354,7 @@ ${
   entries.map(({ body, orbitNormal, orbitInclinationDegrees, obliquityToOrbitDegrees }) =>
     `  // orbital inclination to the ecliptic ${orbitInclinationDegrees.toFixed(3)}°, ` +
     `obliquity to the orbit ${obliquityToOrbitDegrees.toFixed(3)}°\n` +
-    `  ${body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     orbitNormal.map((component) => `    ${component},\n`).join("") +
     `  ]),`).join("\n")
 }
@@ -322,7 +367,7 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS = Object.freeze({
 ${
   entries.map(({ body, orbitalVelocity, flightPathAngleDegrees }) =>
     `  // flight-path angle ${flightPathAngleDegrees.toFixed(3)}°\n` +
-    `  ${body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     orbitalVelocity.map((component) => `    ${component},\n`).join("") +
     `  ]),`).join("\n")
 }
@@ -337,7 +382,7 @@ ${
     `  // pole RA ${poleRightAscensionDegrees.toFixed(3)}°, ` +
     `Dec ${poleDeclinationDegrees.toFixed(3)}°, ` +
     `prime meridian W ${primeMeridianDegrees.toFixed(3)}°\n` +
-    `  ${body}: Object.freeze([\n` +
+    `  ${sourceKey(body)}: Object.freeze([\n` +
     [0, 3, 6].map((row) =>
       `    ${matrix.slice(row, row + 3).join(", ")},\n`).join("") +
     `  ]),`).join("\n")
@@ -368,8 +413,8 @@ ${
   ) =>
     `  // a ${semiMajorAxisAu.toPrecision(5)} AU, e ${eccentricity.toPrecision(5)}, ` +
     `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu.toPrecision(5)} AU\n` +
-    `  ${body}: Object.freeze({\n` +
-    (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n`) +
+    `  ${sourceKey(body)}: Object.freeze({\n` +
+    (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n${epochStates.get(body)?.parentHeliocentricState ? `    parentHeliocentricState: ${JSON.stringify(epochStates.get(body).parentHeliocentricState)},\n` : ""}`) +
     `    semiMajorAxisAu: ${semiMajorAxisAu},\n` +
     `    eccentricity: ${eccentricity},\n` +
     `    heliocentricDistanceAu: ${heliocentricDistanceAu},\n` +

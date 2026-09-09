@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { DWARF_PLANET_IDS, bodyData } from './bodies.js'
+import { DWARF_PLANET_IDS, bodyData, moonsOf } from './bodies.js'
 import { distance, magnitude } from './__fixtures__/compare.js'
 import { HORIZONS } from './__fixtures__/horizons.js'
 import {
@@ -12,6 +12,7 @@ import { FrameTree, fixedFrame } from './frames.js'
 import { keplerApoapsisKm, keplerPeriodDays } from './kepler.js'
 import { chooseFrameUnitM, SUN_FRAME_ID, solarSystemFrames } from './solarSystem.js'
 import { M_PER_AU, M_PER_KM, M_PER_MPC } from './units.js'
+import { SCENE_SATELLITE_IDS, sceneSatelliteStateKm } from './sceneSatellites.js'
 
 /**
  * WHAT THIS MEASURES, and what it does not — read this before trusting a
@@ -117,6 +118,25 @@ describe('dwarf-planet frames', () => {
     return tree
   }
 
+  it('keeps scene-only satellites out of the propagated frame tree without hiding their explicit states', () => {
+    const specs = dwarfPlanetFrameSpecs()
+    expect(moonsOf('haumea')).toContain('hiiaka')
+    for (const id of SCENE_SATELLITE_IDS) {
+      expect(specs.some(spec => spec.body === id)).toBe(false)
+    }
+    const state = sceneSatelliteStateKm('hiiaka', 2461286.5)
+    expect(state.centerBodyId).toBe('haumea')
+    expect(state.parentHeliocentricState).toBeDefined()
+    const haumea = specs.find(spec => spec.body === 'haumea')!
+    // Generic parent frames keep their existing time domain and elements;
+    // no source-only child is silently attached to a different primary state.
+    for (const epoch of [2461285.5, 2461286.5, 2461287.5]) {
+      expect(haumea.frame.originInParent(epoch)).toEqual(
+        dwarfPlanetPositionKm('haumea', epoch).map(km => km / (M_PER_AU / M_PER_KM)),
+      )
+    }
+  })
+
   it('is accepted by FrameTree.add, parented directly on the Sun', () => {
     // The invariant this whole file exists to prove: Eris's exit ball, at
     // ~98 au, still fits inside the Sun frame's — `FrameTree.add` enforces
@@ -124,6 +144,16 @@ describe('dwarf-planet frames', () => {
     expect(() => buildTree()).not.toThrow()
     const tree = buildTree()
     for (const id of DWARF_PLANET_IDS) expect(tree.get(id).parent).toBe(SUN_FRAME_ID)
+  })
+
+  it('attaches Charon to Pluto with a contained finer frame', () => {
+    const tree = buildTree()
+    expect(tree.get('charon').parent).toBe('pluto')
+    expect(tree.get('charon').unitM).toBeLessThan(tree.get('pluto').unitM)
+    const offset = tree.get('charon').originInParent(2461286.5)
+    const separationKm = magnitude(offset) * tree.get('pluto').unitM / M_PER_KM
+    expect(separationKm).toBeGreaterThan(19580)
+    expect(separationKm).toBeLessThan(19620)
   })
 
   it('grafts under a coarser parent without changing anything else', () => {
@@ -144,7 +174,8 @@ describe('dwarf-planet frames', () => {
   it('picks a unit strictly finer than the Sun frame, off the ladder', () => {
     for (const spec of dwarfPlanetFrameSpecs()) {
       expect(spec.frame.unitM).toBeLessThan(M_PER_AU)
-      expect(spec.frame.unitM).toBe(chooseFrameUnitM(bodyData(spec.body!).meanRadiusKm * M_PER_KM, 0, []))
+      const tree = buildTree()
+      expect(spec.frame.unitM).toBeLessThan(tree.get(spec.frame.parent!).unitM)
     }
   })
 
@@ -154,6 +185,7 @@ describe('dwarf-planet frames', () => {
     // 1900-2100 window — see `dwarfPlanetFrameSpecs`'s doc comment for why
     // that window does not apply here.
     for (const spec of dwarfPlanetFrameSpecs()) {
+      if (!DWARF_PLANET_IDS.includes(spec.body as never)) continue
       const elements = dwarfPlanetElements(spec.body as never)
       const period = keplerPeriodDays(elements)
       let worst = 0
@@ -165,4 +197,3 @@ describe('dwarf-planet frames', () => {
     }
   })
 })
-

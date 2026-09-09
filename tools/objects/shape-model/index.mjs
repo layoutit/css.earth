@@ -20,6 +20,7 @@ import { createPreparedNodeTree } from '../../prepared-node-tree.mjs';
 import { prepareCssomDeclarationReads } from '../../prepared-cssom.mjs';
 import { prepareModelMarker, prepareModelRasters, prepareRingRaster, prepareSphereLighting } from './raster.mjs';
 import { prepareShapeLighting } from './lighting.mjs';
+import { prepareCoplanarColorRaster } from '../material-composition/coplanar-raster.mjs';
 
 const writeJson = (dir, name, data) => writeFile(resolve(dir, name + '.json'), JSON.stringify(data) + '\n');
 
@@ -38,10 +39,27 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
       (config.ring && (!Number.isInteger(ringSegments) || ringSegments < 3 ||
         config.ring.innerRadiusKm <= axes[0] || config.ring.outerRadiusKm <= config.ring.innerRadiusKm))) throw new TypeError('Invalid shape tessellation, ring, or quad budget.');
   const sourceDirectory = resolve(objectDirectory, 'source'), publicBase = `/scenes/${id}/`;
+  const lenses = sources.get('content').value.lenses.controls;
+  const declaredLenses = descriptor.recipe.surfaces.flatMap(surface => surface.lenses);
+  if (lenses.length > 1 || lenses.length !== declaredLenses.length ||
+      lenses.some(lens => lens.id !== declaredLenses[0].id || lens.thumbnail !== `${lens.id}-thumbnail.webp`)) {
+    throw new TypeError('A shape model exposes its one base-color surface through the authored lens contract.');
+  }
+  const lens = lenses[0];
   const source = await createSourceManifest({ planetId: id, planetName: config.displayName, sourceRoot: sourceDirectory });
   await source.verify();
   await Promise.all([mkdir(outputDirectory, { recursive: true }), mkdir(publicDirectory, { recursive: true })]);
-  const { textures, source: modelSource } = await prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory });
+  const { textures, map, source: modelSource } = await prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensId: lens?.id });
+  if (lens) {
+    await writeJson(outputDirectory, 'assets', { surfaces: { [lens.id]: {
+      url: textures.surface, url2x: textures.surface, polesUrl: textures.poles, polesUrl2x: textures.poles,
+    } } });
+    const manifest = JSON.parse(await readFile(resolve(sourceDirectory, 'manifest.json'), 'utf8'));
+    const input = manifest.inputs.find(input => input.id === lens.source.id);
+    await writeJson(outputDirectory, 'surfaces', { objectId: id, surfaces: [{ id: lens.id, map,
+      attribution: { label: input.credit, url: lens.source.url ?? input.origin },
+    }] });
+  }
   textures.lighting = await prepareSphereLighting({ publicDirectory, publicBase });
   await writeFile(resolve(publicDirectory, 'marker.webp'), await prepareModelMarker(axes));
   const ringTexture = config.ring ? await prepareRingRaster({ config, publicDirectory, publicBase }) : null;
@@ -65,7 +83,23 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
     secondaryRadius: config.displayRadius * axes[1] / axes[0], polarRadius: config.displayRadius * axes[2] / axes[0],
     mapUrl: textures.surface, polesUrl: textures.poles, latitudeSegments, longitudeSegments,
     sourceWidth: width, sourceHeight: height, poleTileSize: poleSize, seamOverlap: config.mesh.seamOverlap });
-  const ringLeaves = ringTexture ? prepareRingLeaves(config, ringTexture, axes[0]) : [];
+  const ringFaces = [];
+  const sourceRingLeaves = ringTexture ? prepareRingLeaves(config, ringTexture, axes[0], geometry => {
+    const m = geometry.matrix.split(',').map(Number);
+    const vertices = [[0,0],[geometry.leafWidth,0],[geometry.leafWidth,geometry.leafHeight],[0,geometry.leafHeight]].map(([x,y]) => {
+      const w = m[3]*x + m[7]*y + m[15];
+      return [0,1,2].map(axis => (m[axis]*x + m[4+axis]*y + m[12+axis])/w);
+    });
+    ringFaces.push({ vertices, color: [config.ring.displayValue, config.ring.displayValue, config.ring.displayValue,
+      Math.round(config.ring.displayOpacity * 255)] });
+  }) : [];
+  const ringRaster = ringTexture ? await prepareCoplanarColorRaster({ faces: ringFaces,
+    pixelsPerUnit: ringTexture.width / (2 * Math.max(...ringFaces.flatMap(face => face.vertices.flatMap(v => [Math.abs(v[0]),Math.abs(v[1])])))) }) : null;
+  const ringLeaves = ringRaster ? ringRaster.tiles.map(tile => ({ tag: 's', className: 'shape-model-ring-quad',
+    style: `transform:matrix3d(${tile.matrix.join(',')});backface-visibility:visible;--polycss-atlas-width:${tile.width}px;` +
+      `--polycss-atlas-height:${tile.height}px;background-position:${-tile.x}px ${-tile.y}px;` +
+      `background-size:${ringRaster.width}px ${ringRaster.height}px;background-repeat:no-repeat` })) : [];
+  if (ringRaster) await writeFile(resolve(publicDirectory, 'ring.webp'), ringRaster.bytes);
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const phase = lambertAttenuationAtlas({ frameSize: 32, columns: 4, frameCount: 32, terminatorWidth: .1, directionalAmbient: .05, fullPhaseAmbient: .35, fullPhaseDiffuse: .65, maximumOpacity: .95 });
   await sharp(phase.pixels, { raw: { width: phase.width, height: phase.height, channels: 4 } }).webp({ lossless: true }).toFile(resolve(publicDirectory, 'marker-phase.webp'));
@@ -98,7 +132,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const definition = JSON.parse(JSON.stringify({ schema: 'cssearth-object-runtime@4', id, camera: { ...scene.camera, ...materialReference, responsiveFit: { ...scene.camera.responsiveFit, maximumHeightShare: config.camera.maximumHeightShare } }, sky: scene.starfield, sun,
     controls: preparedContent.controls, tree,
     assets: { entries, pools: [preparedResourcePool('mounted', entries)], startup: entries.map(entry => entry.key) },
-    variants: [{ when: {}, required: ['surface', 'poles', 'lighting', ...(ringTexture ? ['ring'] : [])], writes: [
+    variants: [{ when: lens ? { lensId: lens.id } : {}, required: ['surface', 'poles', 'lighting', ...(ringTexture ? ['ring'] : [])], writes: [
       { kind: 'texture', target: index(body), name: '--shape-surface', resource: 'surface', quoted: true },
       { kind: 'texture', target: index(body), name: '--shape-poles', resource: 'poles', quoted: true },
       ...(material ? [{ kind: 'texture', target: index(material), name: '--shape-lighting', resource: 'lighting', quoted: true }] : []),
@@ -115,14 +149,17 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   }));
   const { id: _id, controls: _controls, ...presentation } = definition;
   requirePreparedPresentation({ ...presentation, schema: 'cssearth-prepared-presentation@3' }, { controls: preparedContent.controls });
-  const geometry = { ...scene, bodyLeaves, ringLeaves, counts: { bodyQuads: bodyLeaves.length, ringQuads: ringLeaves.length, lightingQuads: 1, totalQuads: quadCount, budget: config.quadBudget },
+  const geometry = { ...scene, bodyLeaves, ringLeaves,
+    ...(ringRaster ? { ringCoverage: { sourceFaceCount: sourceRingLeaves.length, preparedTileCount: ringLeaves.length,
+      width: ringRaster.width, height: ringRaster.height, sourceFaces: ringFaces } } : {}),
+    counts: { bodyQuads: bodyLeaves.length, ringQuads: ringLeaves.length, lightingQuads: 1, totalQuads: bodyLeaves.length + ringLeaves.length + 1, budget: config.quadBudget },
     model: { semiAxesKm: axes, ...(config.ring ? { ring: config.ring } : {}), surface: 'NASA VTAD illustrative model texture; no observed terrain', modelSource, phase: 'arbitrary-display-phase', lighting: sphereLighting ? 'prepared full-phase curvature lighting fitted to the projected sphere; no directional Sun shadows' : 'prepared illustrative full-phase curvature fitted to the projected shape; no directional Sun shadows' } };
   await Promise.all([writeJson(outputDirectory, 'scene', geometry), writeJson(outputDirectory, 'runtime', definition),
     writeJson(outputDirectory, 'sky', scene.starfield), writeJson(outputDirectory, 'sun', sun)]);
   return { scene: geometry, definition, content: preparedContent.content };
 }
 
-export function prepareRingLeaves(config, texture, majorRadiusKm) {
+export function prepareRingLeaves(config, texture, majorRadiusKm, onGeometry) {
   const { segments, innerRadiusKm, outerRadiusKm } = config.ring, scale = config.displayRadius / majorRadiusKm;
   const point = (radius, angle) => [radius * scale * Math.cos(angle), radius * scale * Math.sin(angle), 0];
   return Array.from({ length: segments }, (_, i) => {
@@ -134,6 +171,7 @@ export function prepareRingLeaves(config, texture, majorRadiusKm) {
     const plan = computeTextureAtlasPlanPublic(polygon, i, { tileSize: 50, layerElevation: 50, textureLighting: 'baked', seamBleed: 0 });
     const g = plan && resolvePolyTextureLeafGeometry(plan, { backend: 'image', lighting: 'source', projection: 'projective' });
     if (!g) throw new TypeError(`Ring quad ${i} could not be prepared.`);
+    onGeometry?.(g);
     return { tag: 's', className: 'shape-model-ring-quad', style: `transform:matrix3d(${g.matrix});backface-visibility:visible;--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;background-image:url("${texture.url}");background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};background-repeat:no-repeat` };
   });
 }

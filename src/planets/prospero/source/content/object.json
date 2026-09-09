@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "prospero",
+  "displayName": "Prospero",
+  "panel": {
+    "introduction": "Prospero is an outer Uranian moon. Brightness variations support an elongated approximation, but several photometric periods are possible. The model uses a doubled, shape-driven period interpretation with assumed depth and orientation. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Uranus"
+      },
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate model"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full model dimensions",
+        "value": "64.3 × 44.1 × 44.1 km"
+      },
+      {
+        "id": "scale",
+        "label": "Size evidence",
+        "value": "50 km · assumed-albedo estimate"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation interpretation",
+        "value": "14.29 ± 0.184 h"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Approximate ellipsoid from brightness variability, using an assumed-albedo 50 km size. Equal short axes and orientation are assumed; the doubled period is one interpretation of an ambiguous light curve. The grid marks unmapped terrain.",
+        "title": "Approximate ellipsoid from brightness variability, using an assumed-albedo 50 km size. Equal short axes and orientation are assumed; the doubled period is one interpretation of an ambiguous light curve. The grid marks unmapped terrain.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/prospero/prospero-model-thumbnail.webp",
+        "surface": "prospero-model-surface@2x.webp",
+        "poles": "prospero-model-poles@2x.webp",
+        "source": {
+          "id": "lightcurve-approximation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/pdf/1706.06837"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "role": "surface",
+      "description": "Source measurements and model interpretation",
+      "href": "https://arxiv.org/pdf/1706.06837"
+    },
+    {
+      "label": "Uranian irregular satellites physical summary and occultation prospects",
+      "role": "facts",
+      "description": "Source measurements and model interpretation",
+      "href": "https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer"
+    }
+  }
+}

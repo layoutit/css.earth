@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "albiorix",
+  "targetNaif": "626",
+  "parentNaif": "699",
+  "source": {
+    "url": "https://tilmanndenk.de/outersaturnianmoons/albiorix/",
+    "paper": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+    "table": "Denk et al. (2018), Table 3 and footnote on minimum axis ratios",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "minimumEquatorialAxisRatio": 1.34,
+    "condition": "Uniform-reflectivity reference ellipsoid inferred from low-phase lightcurve amplitude; lower limit, not exact dimensions.",
+    "adoptedReferenceRadiusKm": 14.3,
+    "diameterEstimate": "29 ± 5.5 km",
+    "sizeInterpretation": "Uncertain NEOWISE thermal diameter; the author’s approximate 14.3 km reference radius supplies the display scale.",
+    "observedRotationPeriod": "13.33 ± 0.03 h"
+  },
+  "approximation": {
+    "adoptedEquatorialAxisRatio": 1.34,
+    "semiAxesKm": [
+      17.380912359304762,
+      12.97083011888415,
+      12.97083011888415
+    ],
+    "formula": "b=c=R/cbrt(q); a=q*b; r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+    "assumptions": [
+      "Select the lower-limit elongation, without treating it as a fitted full shape.",
+      "Equal short axes (b=c).",
+      "Reference radius interpreted as equal-volume scale for display only.",
+      "Arbitrary pole, spin sense and meridian; not an observed attitude."
+    ],
+    "qualification": "The available lightcurves do not uniquely determine its three-dimensional shape."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "photometryCheck": {
+    "minimumAmplitudeMagnitude": 0.31776199591201915,
+    "interpretation": "Zero-phase, equator-on, uniform-reflectivity projected-area model. This is a consistency check of the selected lower-limit ellipsoid, not a fit to the Cassini lightcurves."
+  }
+}

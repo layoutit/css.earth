@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-measured-ellipsoid@1",
+  "source": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+  "citation": "Karkoschka (2003), Sizes, shapes, and albedos of the inner satellites of Neptune, Icarus162,400–407",
+  "semiAxesKm": [
+    102,
+    92,
+    72
+  ],
+  "referenceRadiusKm": 88,
+  "formula": "r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/102)^2+(cos(lat)*sin(lon)/92)^2+(sin(lat)/72)^2)",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "orientation": "Synchronous long axis toward Neptune, with IAU Galatea pole and prime meridian from pck00011; orientation is an assumed ellipsoid alignment, not a detailed shape solution.",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Published triaxial fit to Voyager images; smooth interpolation represents the measured axes, not terrain. The PCK80679km spherical radius is older and is not used for dimensions."
+}

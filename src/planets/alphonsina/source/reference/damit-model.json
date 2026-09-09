@@ -1,0 +1,48 @@
+{
+  "modelId": 301,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/301",
+  "fields": {
+    "ID": "301",
+    "Asteroid ID": "(925) Alphonsina",
+    "Lambda": "294",
+    "Beta": "41",
+    "Period": "7.87754",
+    "YORP": "",
+    "JD0": "2444471",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0",
+    "LSM Parameter 3": "0.1",
+    "LSM Parameter 4": "-0.99",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "58",
+    "Equivalent Diameter Error": "16",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-02-18",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:55:21"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1063/3D.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1064/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1065/occ_2003-12-15.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1066/occ_2003-12-22.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1067/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1068/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/139",
+    "https://damit.cuni.cz/projects/damit/references/view/141"
+  ]
+}

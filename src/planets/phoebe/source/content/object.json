@@ -1,0 +1,171 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "phoebe",
+  "displayName": "Phoebe",
+  "panel": {
+    "introduction": "Phoebe is a dark, cratered moon on a distant, retrograde orbit around Saturn. Cassini’s 2004 flyby revealed an irregular, ice-bearing surface. It may be a captured object from the outer solar system.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "106.5 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 550 days (retrograde)"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "About 9 hours 16 minutes"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Mean distance from Saturn",
+        "value": "About 12.95 million km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "William Henry Pickering · 1899"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "1.64 ± 0.03 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+        "title": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+        "detail": "Cassini mosaic",
+        "thumbnail": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
+        "surface": "phoebe-normal-surface@2x.webp",
+        "poles": "phoebe-normal-poles@2x.webp",
+        "source": {
+          "id": "cassini-mosaic",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
+        "title": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
+        "detail": "Shaded relief",
+        "thumbnail": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
+        "surface": "phoebe-elevation-surface@2x.webp",
+        "poles": "phoebe-elevation-poles@2x.webp",
+        "source": {
+          "id": "gaskell-2012-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/phoebeshape.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−12",
+            "0",
+            "12"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
+          "image": "/scenes/phoebe/phoebe-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Phoebe overview",
+      "href": "https://science.nasa.gov/saturn/moons/phoebe/"
+    },
+    {
+      "label": "NASA/JPL/SSI; DLR",
+      "role": "surface",
+      "description": "Cassini surface mosaic",
+      "href": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/phoebe/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

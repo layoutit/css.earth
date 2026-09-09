@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
-import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
@@ -66,7 +66,11 @@ test("derives the complete owned file contract from planet identity", () => {
 });
 
 test("requires every registered object package file", async () => {
-  for (const planet of implemented) await validateObjectPackageFiles(planet);
+  for (const planet of implemented) {
+    await validateObjectPackageFiles(planet);
+    const { lenses } = JSON.parse(await readFile(new URL(`../../src/planets/${planet.id}/prepared/controls.json`, import.meta.url), 'utf8'));
+    assert.ok(lenses?.controls.length > 0, `${planet.id}: the displayed surface needs an identified dataset`);
+  }
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {
       accessFile: async (file) => {
@@ -86,7 +90,7 @@ test("requires every registered object package file", async () => {
 });
 
 test("validates local editorial identity and provenance", () => {
-  const planet = implemented[0];
+  const planet = implemented.find(object => object.id === "sun");
   const source = planetInformationSource(planet.id);
   const valid = {
     schemaVersion: 1,

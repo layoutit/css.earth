@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vot:VOTABLE version="1.4" xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 http://www.ivoa.net/xml/VOTable/v1.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vot="http://www.ivoa.net/xml/VOTable/v1.3" xmlns:stc="http://www.ivoa.net/xml/STC">
+  <vot:COOSYS ID="ICRS" system="ICRS" equinox="J2000"/>
+  <vot:INFO ID="status" name="QUERY_STATUS" value="OK"/>
+  <vot:INFO ID="supplier" name="Supplier" value="Provided by IMCCE/OBSPM/CNRS"/>
+  <vot:GROUP ID="Curation" utype="Curation">
+    <vot:PARAM name="Collection" datatype="char" arraysize="*" utype="DataID.Collection" value="Genoide"/>
+    <vot:PARAM name="Contact" datatype="char" arraysize="*" ucd="meta.human;meta.curation" utype="Curation.Contact.Name" value="F. Vachier"/>
+    <vot:PARAM name="CreationType" datatype="char" arraysize="*" utype="sed:Segment.DataID.CreationType" value="Calculation"/>
+    <vot:PARAM name="Creator" datatype="char" arraysize="*" utype="DataID.Creator" value="F. Vachier, J. Berthier, B. Carry"/>
+    <vot:PARAM name="Email" datatype="char" arraysize="*" utype="Curation.ContactEmail" value="vossp.lte@obspm.fr"/>
+    <vot:PARAM name="PubID" datatype="char" arraysize="*" ucd="meta.curation.pubid" utype="Curation.PubID" value="genoide.imcce.fr"/>
+    <vot:PARAM name="Publisher" datatype="char" arraysize="*" ucd="meta.organization;meta.curation" utype="Curation.Publisher" value="LTE/OBSPM/CNRS"/>
+    <vot:PARAM name="Reference" datatype="char" arraysize="*" ucd="meta.bib.bibcode" utype="spec:Curation.Reference" value="2012A&amp;amp;A...543A..68V">
+      <vot:DESCRIPTION>Vachier et al 2012, Determination of binary asteroid orbits with a genetic-based algorithm, A&amp;amp;A 543</vot:DESCRIPTION>
+    </vot:PARAM>
+  </vot:GROUP>
+  <vot:PARAM ID="coordinates" name="Coordinates" datatype="char" arraysize="*" ucd="meta.note" value="relative">
+    <vot:DESCRIPTION>Type of coordinates</vot:DESCRIPTION>
+  </vot:PARAM>
+  <vot:PARAM ID="system_name" name="System name" datatype="char" arraysize="*" ucd="meta.id" value="Sylvia">
+    <vot:DESCRIPTION>Name of the asteroidal system</vot:DESCRIPTION>
+  </vot:PARAM>
+  <vot:PARAM ID="system_num" name="System number" datatype="int" ucd="meta.id" value="87">
+    <vot:DESCRIPTION>Number of the asteroidal system</vot:DESCRIPTION>
+  </vot:PARAM>
+  <vot:PARAM ID="time_scale" name="Time scale" datatype="char" arraysize="*" ucd="time.scale" value="TT">
+    <vot:DESCRIPTION>Time scale of the ephemerides</vot:DESCRIPTION>
+  </vot:PARAM>
+  <vot:PARAM ID="request_epoch" name="Requested Epoch" datatype="char" arraysize="*" ucd="time.epoch" value="2018-11-07T00:00:00.000">
+    <vot:DESCRIPTION>Requested epoch of the ephemerides</vot:DESCRIPTION>
+  </vot:PARAM>
+  <vot:PARAM ID="nbdates" name="Number of dates" datatype="int" ucd="meta.number" value="3">
+    <vot:DESCRIPTION>Number of date of the ephemerides</vot:DESCRIPTION>
+  </vot:PARAM>
+  <vot:PARAM ID="stepsize" name="Step size" datatype="float" unit="h" ucd="time.interval" value="24.00"/>
+  <vot:PARAM ID="nbgensol" name="Number of GenSol" datatype="int" ucd="meta.number" value="1">
+    <vot:DESCRIPTION>Number of Genoide&apos;s solution provided in the VOTable</vot:DESCRIPTION>
+  </vot:PARAM>
+  <vot:RESOURCE ID="gensol_1" name="Sylvia">
+    <vot:DESCRIPTION>Miriade - Genoide ephemerides</vot:DESCRIPTION>
+    <vot:PARAM ID="gensystem_1" name="GenoideSystem" datatype="char" arraysize="*" ucd="meta.id" value="Sylvia">
+      <vot:DESCRIPTION>Name of the asteroidal system</vot:DESCRIPTION>
+    </vot:PARAM>
+    <vot:PARAM ID="gensoldate_1" name="GenoideSolutionDate" datatype="char" arraysize="*" ucd="time.processing" value="2024-01-16T21:19:51.861">
+      <vot:DESCRIPTION>Date of processing of the Genoide solution</vot:DESCRIPTION>
+    </vot:PARAM>
+    <vot:PARAM ID="gensolid_1" name="GenoideSolutionId" datatype="int" ucd="meta.id" value="1">
+      <vot:DESCRIPTION>ID of the Genoide solution</vot:DESCRIPTION>
+    </vot:PARAM>
+    <vot:PARAM ID="nbcomposyst_1" name="NbCompoSyst" datatype="int" ucd="meta.number" value="3">
+      <vot:DESCRIPTION>Number of components of the system</vot:DESCRIPTION>
+    </vot:PARAM>
+    <vot:PARAM ID="genmethod_1" name="GenoideMethod" datatype="char" arraysize="*" ucd="meta.note" value="Kepler">
+      <vot:DESCRIPTION>Method use to compute the orbit</vot:DESCRIPTION>
+    </vot:PARAM>
+    <vot:PARAM ID="genfomc_1" name="GenoideFomc" datatype="double" unit="mas" ucd="meta.code.qual" value="9.42">
+      <vot:DESCRIPTION>Quadratic mean of O-C</vot:DESCRIPTION>
+    </vot:PARAM>
+    <vot:PARAM ID="genproba_1" name="GenoideProba" datatype="int" ucd="stat.probability" value="100">
+      <vot:DESCRIPTION>Probability of success of the solution</vot:DESCRIPTION>
+    </vot:PARAM>
+    <vot:TABLE ID="Sylvia_1" name="Miriade.ephemsys.results" nrows="3">
+      <vot:DESCRIPTION>Ephemerides of component: Sylvia</vot:DESCRIPTION>
+      <vot:PARAM name="ComponentName" datatype="char" arraysize="*" ucd="meta.note" value="Sylvia">
+        <vot:DESCRIPTION>Name of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:PARAM name="Radius" datatype="double" unit="km" ucd="phys.size.radius" value="143.00">
+        <vot:DESCRIPTION>Mean equatorial radius of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:PARAM name="Radius_Err" datatype="double" unit="km" ucd="stat.error;phys.size.radius" value="6.00">
+        <vot:DESCRIPTION>Error on the mean equatorial radius of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:FIELD name="Date" datatype="double" unit="d" ucd="time.epoch">
+        <vot:DESCRIPTION>Julian day</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx" datatype="double" unit="mas" ucd="pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>X position of the component w.r.t. the system&apos;s center of mass</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy" datatype="double" unit="mas" ucd="pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>Y position of the component w.r.t. the system&apos;s center of mass</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>1-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>1-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>1-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>1-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>2-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>2-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>2-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>2-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>3-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>3-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>3-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>3-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:DATA>
+        <vot:TABLEDATA>
+          <vot:TR>
+            <vot:TD>2458429.499199259095</vot:TD>
+            <vot:TD>0.00</vot:TD>
+            <vot:TD>0.00</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+          <vot:TR>
+            <vot:TD>2458430.499199259095</vot:TD>
+            <vot:TD>0.00</vot:TD>
+            <vot:TD>0.00</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+          <vot:TR>
+            <vot:TD>2458431.499199259095</vot:TD>
+            <vot:TD>0.00</vot:TD>
+            <vot:TD>0.00</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+        </vot:TABLEDATA>
+      </vot:DATA>
+    </vot:TABLE>
+    <vot:TABLE ID="Romulus_1" name="Miriade.ephemsys.results" nrows="3">
+      <vot:DESCRIPTION>Ephemerides of component: Romulus</vot:DESCRIPTION>
+      <vot:PARAM name="ComponentName" datatype="char" arraysize="*" ucd="meta.note" value="Romulus">
+        <vot:DESCRIPTION>Name of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:PARAM name="Radius" datatype="double" unit="km" ucd="phys.size.radius" value="8.00">
+        <vot:DESCRIPTION>Mean equatorial radius of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:PARAM name="Radius_Err" datatype="double" unit="km" ucd="stat.error;phys.size.radius" value="3.00">
+        <vot:DESCRIPTION>Error on the mean equatorial radius of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:FIELD name="Date" datatype="double" unit="d" ucd="time.epoch">
+        <vot:DESCRIPTION>Julian day</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx" datatype="double" unit="mas" ucd="pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>X position of the component w.r.t. the system&apos;s center of mass</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy" datatype="double" unit="mas" ucd="pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>Y position of the component w.r.t. the system&apos;s center of mass</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>1-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>1-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>1-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>1-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>2-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>2-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>2-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>2-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>3-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>3-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>3-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>3-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:DATA>
+        <vot:TABLEDATA>
+          <vot:TR>
+            <vot:TD>2458429.499199259095</vot:TD>
+            <vot:TD>177.21</vot:TD>
+            <vot:TD>270.38</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+          <vot:TR>
+            <vot:TD>2458430.499199259095</vot:TD>
+            <vot:TD>-761.28</vot:TD>
+            <vot:TD>-51.32</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+          <vot:TR>
+            <vot:TD>2458431.499199259095</vot:TD>
+            <vot:TD>62.50</vot:TD>
+            <vot:TD>-254.92</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+        </vot:TABLEDATA>
+      </vot:DATA>
+    </vot:TABLE>
+    <vot:TABLE ID="Remus_1" name="Miriade.ephemsys.results" nrows="3">
+      <vot:DESCRIPTION>Ephemerides of component: Remus</vot:DESCRIPTION>
+      <vot:PARAM name="ComponentName" datatype="char" arraysize="*" ucd="meta.note" value="Remus">
+        <vot:DESCRIPTION>Name of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:PARAM name="Radius" datatype="double" unit="km" ucd="phys.size.radius" value="5.00">
+        <vot:DESCRIPTION>Mean equatorial radius of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:PARAM name="Radius_Err" datatype="double" unit="km" ucd="stat.error;phys.size.radius" value="3.00">
+        <vot:DESCRIPTION>Error on the mean equatorial radius of the component</vot:DESCRIPTION>
+      </vot:PARAM>
+      <vot:FIELD name="Date" datatype="double" unit="d" ucd="time.epoch">
+        <vot:DESCRIPTION>Julian day</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx" datatype="double" unit="mas" ucd="pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>X position of the component w.r.t. the system&apos;s center of mass</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy" datatype="double" unit="mas" ucd="pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>Y position of the component w.r.t. the system&apos;s center of mass</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>1-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>1-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>1-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_1sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>1-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>2-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>2-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>2-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_2sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>2-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_min_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>3-sigma minimum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_min_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>3-sigma minimum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dx_max_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.x;arith.diff">
+        <vot:DESCRIPTION>3-sigma maximum error on X position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:FIELD name="dy_max_err_3sigma" datatype="double" unit="mas" ucd="stat.error;pos.cartesian.y;arith.diff">
+        <vot:DESCRIPTION>3-sigma maximum error on Y position</vot:DESCRIPTION>
+      </vot:FIELD>
+      <vot:DATA>
+        <vot:TABLEDATA>
+          <vot:TR>
+            <vot:TD>2458429.499199259095</vot:TD>
+            <vot:TD>397.55</vot:TD>
+            <vot:TD>45.12</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+          <vot:TR>
+            <vot:TD>2458430.499199259095</vot:TD>
+            <vot:TD>-6.76</vot:TD>
+            <vot:TD>-136.22</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+          <vot:TR>
+            <vot:TD>2458431.499199259095</vot:TD>
+            <vot:TD>-390.07</vot:TD>
+            <vot:TD>-18.64</vot:TD>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+            <vot:TD/>
+          </vot:TR>
+        </vot:TABLEDATA>
+      </vot:DATA>
+    </vot:TABLE>
+  </vot:RESOURCE>
+</vot:VOTABLE>

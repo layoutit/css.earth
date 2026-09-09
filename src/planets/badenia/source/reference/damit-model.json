@@ -1,0 +1,83 @@
+{
+  "modelId": 3298,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3298",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/10414/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/10412/IAUspin.txt",
+  "version": "2019-05-07",
+  "lambda": 5,
+  "beta": -54,
+  "periodHours": 9.86107,
+  "nonconvex": false,
+  "calibrated": false,
+  "sourceFields": {
+    "ID": "3298",
+    "Asteroid ID": "(333) Badenia",
+    "Lambda": "5",
+    "Beta": "-54",
+    "Period": "9.86107",
+    "YORP": "",
+    "JD0": "2451110",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0.62",
+    "LSM Parameter 3": "0.08",
+    "LSM Parameter 4": "-0.81",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "0 (No)",
+    "Equivalent Diameter": "",
+    "Equivalent Diameter Error": "",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-05-07",
+    "Comment": "",
+    "Created": "2019-09-26 09:43:15",
+    "Modified": "2019-09-26 09:43:15"
+  },
+  "originalVolume": 1.00000000195728,
+  "originalSignedVolume": 1.00000000195728,
+  "originalVolumeEquivalentDiameter": 1.2407009826082664,
+  "originalUnits": "dimensionless DAMIT source units; uncalibrated model",
+  "vertices": 572,
+  "faces": 1140,
+  "extentsSourceUnits": [
+    [
+      -0.638689,
+      0.624999
+    ],
+    [
+      -0.873703,
+      0.663723
+    ],
+    [
+      -0.517433,
+      0.579139
+    ]
+  ],
+  "radialRangeSourceUnits": [
+    0.53504558615318,
+    0.8795410112291524
+  ],
+  "firstVertexSourceUnits": [
+    0.220602,
+    0.326196,
+    0.555599
+  ],
+  "firstFaceZeroBased": [
+    0,
+    1,
+    2
+  ],
+  "alternatives": [],
+  "selectionReason": "Original full convex model and its observed spin solution retained.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/182"
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "schema": "cssapophis-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "apophis-shape",
+      "path": "shape/apophis_v233s7.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-apophis.jpl.radar.shape_model_v1.0/data/apophis_v233s7.obj",
+      "credit": "Brozović et al. (2018), Icarus 300, 115–128; Lawrence and Benner (2026), NASA PDS radar shape release V1.0, doi:10.26033/ydyq-5756",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "acquisition": "Restore the unmodified archived OBJ through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "kilometers",
+        "referenceRadiusMeters": 170
+      },
+      "coverage": "The weak 2012–2013 radar data admit multiple shapes; the 2026 PDS release preserves the 2018 Model B rather than a new reconstruction. Apophis tumbles: the archived precession and rotation periods are 27.45 and 265.7 hours. This view uses a fixed illustrative frame, without propagating its tumbling attitude. No optical surface map is supplied.",
+      "expectedBytes": 197868,
+      "expectedSha256": "226c330bafda3a773533779228a01cf2a009e8d611f209329e872433fc00e266"
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "apophis-research-apophis-2018",
+      "path": "reference/apophis-2018.pdf",
+      "origin": "https://echo.jpl.nasa.gov/asteroids/brozovic.etal.apophis.2018.pdf",
+      "credit": "Brozović et al. (2018), Icarus 300, 115–128; Lawrence and Benner (2026), NASA PDS radar shape release V1.0, doi:10.26033/ydyq-5756",
+      "license": "Original scientific article; source publisher copyright retained.",
+      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
+      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
+      "consumers": [
+        "physical",
+        "rotation"
+      ],
+      "expectedBytes": 2680618,
+      "expectedSha256": "3f95993fcc37d0e6da5cc52eea19084e3c0905a09e4eebca87db52a2c12ee585"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-apophis.jpl.radar.shape_model_v1.0/data/apophis_v233s7.obj",
+      "credit": "Brozović et al. (2018), Icarus 300, 115–128; Lawrence and Benner (2026), NASA PDS radar shape release V1.0, doi:10.26033/ydyq-5756",
+      "license": "Public NASA/JPL scientific shape release; retain source authors and radar observatory attribution. See NOTICE.md.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 78871,
+      "expectedSha256": "5cee6ea05007881f8a160181940ad9f3cb8fd4e2b02b9247b5b7d7a4218ce272",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "apophis-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 9454,
+      "expectedSha256": "2e38c39331896a5c90480dfc3b8beb2773201b1a9be5eb41a6383c8481fe1bb8"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1026,
+      "expectedSha256": "8689b61e104fc4619164b386d5b4f43738c7373522aeadd71087789bff11b8c0"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1424,
+      "expectedSha256": "f11ea0b9bd5620cf0de6067bd43eaa105ab62f10bdcf2bff091fce238fca754f"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 710,
+      "expectedSha256": "4d9128e2fe01a3a29845e8969f24668472b4931e7509cc2e6ad07124feefa4c4"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2953,
+      "expectedSha256": "02d312b7f71557ace676953472d3874066120197ae6ec81c6c062a5074e51a12"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3971,
+      "expectedSha256": "e413e503eb27e7af64f70843cc12416499586e339e46f48656f5277a53053e1c"
+    },
+    {
+      "path": "reference/apophis_v233s7.xml",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 11175,
+      "expectedSha256": "650ed00cec34f9cb91f2ee0e81a7eb505c9a307c846ccfaf5fd8f75e4000f6b0"
+    },
+    {
+      "path": "reference/apophis_v233s7_spin_state.csv",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 91,
+      "expectedSha256": "9cc851fd9f33a2696b51ce765688d0816269769ec6b080bfd1d2f4cec96ba176"
+    },
+    {
+      "path": "reference/apophis_v233s7_spin_state.xml",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 12784,
+      "expectedSha256": "a307c97b287dcf0b9dffb45c4c41df002d8f6074605374af92e90594486a6413"
+    },
+    {
+      "path": "reference/bundle_description.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 3017,
+      "expectedSha256": "f1c9df2c8b00b9ce0dac61eafa02dca679032056ddee04e77ce931bedef9e3df"
+    },
+    {
+      "path": "reference/bundle_gbo.ast-apophis.jpl.radar.shape_model.xml",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7371,
+      "expectedSha256": "ef162961a2bf1e0df236e2ab74ab2aa991b8616c76745ce60d2cdfd3387e323c"
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7836,
+      "expectedSha256": "0ef0cd05182157a2713d27a4b4ba572a005997f99572c4d48b5d1aa3f57ef478"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1818,
+      "expectedSha256": "2cdd53e0d22e50d78f9060609f004c4ab21cf30dcb440f54cc1713edc03ff114"
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 7126,
+      "expectedSha256": "ab82fb131cc5f06231bff7fd9c2077faa23e66d96393deacea3a79460255ceaf"
+    },
+    {
+      "path": "reference/model-properties.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2118,
+      "expectedSha256": "e8508cf2a16ad28ba51c6c6fce31b8e7d9fbc00cd84c0c6f9700568f39cdd20a"
+    },
+    {
+      "path": "reference/ref.txt",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 1384,
+      "expectedSha256": "3aa2f959debad375f817d7c474f11725a743736563227cf8e945d6eb27d648e0"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned original scientific reference or authored preparation input.",
+      "expectedBytes": 144976,
+      "expectedSha256": "70be46a7cfe412b756267df0382b744e1af170f502918ee8a94aa88125690f51"
+    }
+  ]
+}

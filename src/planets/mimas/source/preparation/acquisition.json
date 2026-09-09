@@ -43,6 +43,17 @@
       "headers": {
         "User-Agent": "Mozilla/5.0"
       }
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "shape/mimas_128_o.obj",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.obj",
+      "headers": {
+        "User-Agent": "Mozilla/5.0"
+      }
     }
   ]
 }

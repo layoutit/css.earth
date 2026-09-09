@@ -65,7 +65,8 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       const document = stage.ownerDocument;
       const root = document.createElement('div');
       root.className = 'prepared-universe';
-      root.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:0';
+      // Keep the background below every depth-sorted body in the isolated stage.
+      root.style.cssText = `position:absolute;inset:0;pointer-events:none;z-index:${-plan.bodies.length - 2}`;
       stage.insertBefore(root, stage.firstChild);
       const end = document.createElement('span'); end.hidden = true; root.appendChild(end);
       const volumeHost = document.createElement('div');
@@ -106,15 +107,19 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         for (const bank of imageLayers) imageBanks.push(mountPreparedCssImageLayers({ host: root, before: end, ...bank }));
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
-        spatial = mountPreparedWorldContext({ host: root, before: end, plan, sprites });
-        focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource });
+        // Billboards share the detail stage, so a nearer body can cover the selected detail.
+        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites });
+        focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
-        if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, clusters: catalog.clusters?.payload, onSelect: onSelectGalaxy });
+        if (catalog) galaxyCatalog = mountPreparedGalaxyCatalog({ host: root, before: end, payload: catalog.payload, clusters: catalog.clusters?.payload, onSelect: onSelectGalaxy, pickingHost: stage });
         return Object.freeze({ root, destroy,
           selectGalaxy(id: string | null) { galaxyCatalog?.select(id); },
           resolveGalaxy(id: string) { return galaxyCatalog?.resolve(id) ?? null; },
           imageLayerFrames: Object.freeze(Object.fromEntries(imageLayers.map(({ payload }) => [payload.id, payload.frame]))),
           setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
+          setNavigationIndicatorsVisible(visible: boolean) { spatial!.setNavigationIndicatorsVisible(visible); focusPoint?.setNavigationEnabled(visible); },
+          setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
+          setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
           inspect() {
             return Object.freeze({ stars: pointField!.inspect(), bodies: spatial!.inspect(), environmentLabels: environmentLabels!.inspect(), galaxies: galaxyCatalog?.inspect(),
               foregroundLabelExclusions: [...spatial!.backgroundExclusionRects(), ...environmentLabels!.labelExclusionRects()] });
@@ -130,7 +135,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             pointField!.setOccluder(body);
             root.dataset.selectedObject = id;
           },
-          publish(world: WorldCameraPose, viewport: WorldCameraViewport) {
+          publish(world: WorldCameraPose, viewport: WorldCameraViewport, shellVisibility: Readonly<Record<string, boolean>> = {}) {
             if (destroyed) return;
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
@@ -154,7 +159,9 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
               bank.root.style.visibility = volumeOpacity > 0 ? 'visible' : 'hidden';
               if (volumeOpacity > 0) bank.publish({ world, viewport });
             }
-            for (const shell of shellLayers) shell.publish(world, viewport);
+            for (const [index, shell] of shellLayers.entries()) {
+              shell.publish(world, viewport, shellVisibility[shells[index]!.payload.id] !== false);
+            }
             spatial!.publish(world, viewport);
             const foregroundRects = spatial!.backgroundExclusionRects();
             const environmentRects = environmentLabels!.publish({ world, viewport,

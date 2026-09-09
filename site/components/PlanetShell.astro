@@ -7,9 +7,12 @@ import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mjs";
 import { sceneSources } from "../scene-sources.mjs";
 import PlanetObjectResults from "./PlanetObjectResults.astro";
-import SearchIcon from "./SearchIcon.astro";
+import MaterialSymbol from "./MaterialSymbol.astro";
+import SearchCategoryIcon from "./SearchCategoryIcon.astro";
+import CssEarthWordmark from "./CssEarthWordmark.astro";
 import PlanetCard from './PlanetCard.astro';
 import PlanetCardHeader from './PlanetCardHeader.astro';
+import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
 import PlanetFactsheet from './PlanetFactsheet.astro';
 import PlanetAccordion from './PlanetAccordion.astro';
 import PlanetNavigationMarker from './PlanetNavigationMarker.astro';
@@ -56,15 +59,15 @@ const sources = sceneSources(resources);
 const hasResources = sources.length > 0;
 ---
 
-<aside id={`${objectId}-sidebar`} class="planet-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Planet information">
-  <div class="planet-sidebar-search-card">
-    <span class="planet-sidebar-search-icon">
-      <SearchIcon />
-    </span>
+<header class="explorer-shell-header">
+  <div class="explorer-shell-wordmark">
+    <CssEarthWordmark />
+  </div>
+  <div class="planet-sidebar-search-card" role="search" aria-label="Object search">
     <input
       class="planet-sidebar-search"
       type="search"
-      placeholder={destinations?.searchLabel ?? `Search objects (${planetCount})`}
+      placeholder={destinations?.searchLabel ?? `Search (${planetCount})`}
       aria-label={destinations?.searchLabel ?? `Search ${planetCount} objects`}
       autocomplete="off"
       value={activeObject?.name ?? ""}
@@ -73,10 +76,48 @@ const hasResources = sources.length > 0;
       class="planet-sidebar-view-all"
       type="button"
       aria-controls={`${objectId}-object-browser`}
-      aria-label="View all objects"
-      aria-pressed="false"
-    >×</button>
+      aria-label="Search"
+      title="Search"
+    >
+      <span class="planet-sidebar-search-icon" aria-hidden="true">
+        <MaterialSymbol name="travel_explore" />
+      </span>
+    </button>
   </div>
+  <div class="planet-search-toolbar">
+
+    <div class="planet-search-categories" role="group" aria-label="Search categories">
+      {[
+        { label: "Planets", classification: "planet" },
+        { label: "Moons", classification: "satellite" },
+        { label: "Asteroids", classification: "asteroid" },
+      ].map(category => <button
+        class="planet-search-category"
+        type="button"
+        data-search-query={category.label}
+        data-search-classification={category.classification}
+        aria-pressed="false"
+      >
+        <SearchCategoryIcon kind={category.classification} />
+        <span>{category.label}</span>
+      </button>)}
+    </div>
+
+    <button
+      class="planet-sidebar-collapse"
+      type="button"
+      aria-controls={`${objectId}-sidebar`}
+      aria-expanded="true"
+      aria-label="Collapse sidebar"
+      title="Collapse sidebar"
+    >
+      <MaterialSymbol name="left_panel_close" />
+      <MaterialSymbol name="left_panel_open" />
+    </button>
+  </div>
+</header>
+<div class="planet-sidebar-frame">
+<aside id={`${objectId}-sidebar`} class="planet-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Planet information">
   <section class="explorer-about-panel" id={`${objectId}-about`} aria-labelledby={`${objectId}-about-title`} hidden>
     <h2 id={`${objectId}-about-title`}>About</h2>
     <div class="explorer-about-content">
@@ -131,10 +172,7 @@ const hasResources = sources.length > 0;
       <PlanetCard class="planet-galactic-overview" data-galactic-overview hidden>
         <PlanetCardHeader title={OVERVIEW_TITLES['milky-way']}
           introduction="Our galaxy: a barred spiral containing stars, planetary systems, gas and dust.">
-          <div class="planet-title-tags">
-            <span class="planet-system-tag planet-title-tag">{overviewFacts['milky-way'].facts.find(fact => fact.id === 'galaxy-group').value}</span>
-            <span class="planet-classification-tag planet-title-tag">Galaxy</span>
-          </div>
+          <PlanetBreadcrumbs scope="milky-way" />
         </PlanetCardHeader>
         <PlanetFactsheet id={`${objectId}-milky-way`} facts={overviewFacts['milky-way'].facts} />
         <PlanetAccordion title="Planetary systems" count={1 + unavailableSystems.length} open>
@@ -161,12 +199,8 @@ const hasResources = sources.length > 0;
       <PlanetCard data-solar-system-results>
         <PlanetCardHeader title={OVERVIEW_TITLES['solar-system']}
           introduction="The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids and comets.">
-          <div class="planet-title-tags">
-            <span class="planet-system-tag planet-title-tag">{overviewFacts['solar-system'].facts.find(fact => fact.id === 'galaxy').value}</span>
-            <span class="planet-classification-tag planet-title-tag">System</span>
-          </div>
+          <PlanetBreadcrumbs scope="solar-system" />
         </PlanetCardHeader>
-        <PlanetFactsheet id={`${objectId}-solar-system`} facts={overviewFacts['solar-system'].facts} />
         <PlanetObjectResults activeObjectId={objectId} />
       </PlanetCard>
       {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
@@ -199,13 +233,14 @@ const hasResources = sources.length > 0;
   <h2 id={`${objectId}-settings-title`}>{PREPARED_SHELL_TITLES.settings.label}</h2>
   <div class="planet-settings">
     <label class="planet-setting-control planet-motion-setting-control">
-      <input class="planet-motion-setting" type="checkbox" name="motion" />
-      <span class="planet-setting-text">Motion</span>
+      <input class="planet-motion-setting" type="checkbox" name="motion" aria-describedby={`${objectId}-motion-description`} />
+      <span class="planet-setting-text">Illustrative rotation</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
       <span id={`${objectId}-motion-blocked`} class="planet-motion-blocked" hidden>
         Paused by reduced motion
       </span>
     </label>
+    <p id={`${objectId}-motion-description`} class="planet-motion-description">Accelerated display rotation. The scene epoch stays fixed.</p>
     {speedSetting && <label class="planet-setting-control planet-speed-setting-control">
       <span class="planet-setting-text">{speedSetting.label}</span>
       <input
@@ -236,6 +271,21 @@ const hasResources = sources.length > 0;
       <span class="planet-setting-text">High contrast</span>
       <span class="planet-setting-switch" aria-hidden="true"></span>
     </label>
+    <label class="planet-setting-control">
+      <input class="planet-heliosphere-setting" type="checkbox" name="heliosphere" />
+      <span class="planet-setting-text">Heliosphere</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="planet-setting-control">
+      <input class="planet-asteroid-orbits-setting" type="checkbox" name="asteroidOrbits" />
+      <span class="planet-setting-text">Asteroids Orbits</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
+    <label class="planet-setting-control">
+      <input class="planet-asteroid-labels-setting" type="checkbox" name="asteroidLabels" />
+      <span class="planet-setting-text">Asteroid Labels</span>
+      <span class="planet-setting-switch" aria-hidden="true"></span>
+    </label>
     {remainingSettings.map((setting) => setting.kind === "cycle" ? (
       <button class="planet-setting-control" type="button" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>
         <span class="planet-setting-text">{setting.label}</span>
@@ -250,6 +300,8 @@ const hasResources = sources.length > 0;
       </div>
     </section>
 </aside>
+</div>
+
 {hasResources && <footer
   class="planet-attribution-footer"
   aria-label={`${title.label} and shared universe sources`}

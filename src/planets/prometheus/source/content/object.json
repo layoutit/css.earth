@@ -1,0 +1,171 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "prometheus",
+  "displayName": "Prometheus",
+  "panel": {
+    "introduction": "Prometheus is an elongated icy moon moving just inside Saturn’s F ring. Its gravity draws channels and streamers out of the ring. Cassini revealed craters and a soft-looking surface on this small, porous body.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "43.1 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 14.7 hours"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "Synchronous with its orbit"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Mean distance from Saturn",
+        "value": "About 139,400 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 1 science team · 1980"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "0.48 ± 0.04 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "title": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "detail": "Cassini · corrected mosaic",
+        "thumbnail": "/scenes/prometheus/prometheus-normal-thumbnail.webp",
+        "surface": "prometheus-normal-surface@2x.webp",
+        "poles": "prometheus-normal-surface@2x.webp",
+        "source": {
+          "id": "n1640497752_1",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+        "title": "Radial height above a 43.1 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+        "detail": "Cassini shape · radial height",
+        "thumbnail": "/scenes/prometheus/prometheus-elevation-thumbnail.webp",
+        "surface": "prometheus-elevation-surface@2x.webp",
+        "poles": "prometheus-elevation-surface@2x.webp",
+        "source": {
+          "id": "thomas-2018-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-18",
+            "0",
+            "+30"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+          "image": "/scenes/prometheus/prometheus-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Prometheus overview",
+      "href": "https://science.nasa.gov/saturn/moons/prometheus/"
+    },
+    {
+      "label": "NASA/JPL/SSI; PDS",
+      "role": "surface",
+      "description": "Cassini calibrated observations and measured shape",
+      "href": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/prometheus/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

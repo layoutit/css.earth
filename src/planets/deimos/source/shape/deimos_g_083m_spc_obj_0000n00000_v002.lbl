@@ -1,0 +1,21 @@
+MISSION = Multiple      \Name of mission
+TARGET  = DEIMOS        \Target object
+ORIGIN  = Ernst et al. 2023 https://doi.org/10.1186/s40623-023-01814-7
+DATASRC = SPC           \ Shape model data source
+DATEPRD = 2025-03-10    \ Date this product was produced in UTC
+DATASRC = Ernst_2023_finalPaper_SHIFTED_SBMT
+SOFTWARE= APL-pipeline  \ Software used to create product
+SOFT_VER= Terrasaur version 25.02.17-d5142eb \ Version of software used
+MAP_NAME= Digital Terrain Model          \ Product name
+MAP_VER = 002           \ Product version number
+MAP_TYPE= global        \ Defines global or local map
+GSD     =  083          \ [m] grid spacing in units/pixel
+COMMENT summary spatial information
+SRCMOD  =deimos_g_083m_spc_obj_0000n00000_v002.obj \ Source OBJ
+DENSITY = 1465.0 /[kg/m^3] bulk density
+ROTATION = 5.75788E-5 /[rad/s] rotation rate
+POTENTIAL = -607.7591871801394 /[J/kg] reference potential
+MASS = 6.417E+23 /[kg] mass of nearby body
+XPOS = 23463.2 /[km] X coordinate of nearby mass
+YPOS = 0. /[km] Y coordinate of nearby mass
+ZPOS = 0. /[km] Z coordinate of nearby mass

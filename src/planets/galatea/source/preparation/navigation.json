@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "galatea",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-ellipsoid-context",
+    "path": "presentation/context.png",
+    "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
+    "credit": "Karkoschka (2003) dimensions; cssEarth no-coverage shape visualization",
+    "license": "MIT display representation from published scientific measurements; retain source citation.",
+    "consumers": [
+      "navigation"
+    ],
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "measured-ellipsoid",
+        "model-surface"
+      ],
+      "size": 512,
+      "longitudeDegrees": 40,
+      "latitudeDegrees": 20,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "model"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "expectedBytes": 71335,
+    "expectedSha256": "9fbb35f7a290a96707bba3ef1b9a8c16894a080a094208a165ba5b8f0d723d8e"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

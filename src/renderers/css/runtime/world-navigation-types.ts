@@ -12,6 +12,7 @@ export interface ObjectWorldNavigation {
   flyToPreparedFocus(focus: PreparedNavigationFocus, options?: PreparedFocusFlightOptions): Promise<{ completed: boolean }>;
   setZoomOutCentering?(enabled: boolean): void;
   optics(): WorldCameraViewport & { framingRadiusPixels: number;
+    visibleRect: import('../solar-system/types.js').VisibleRect | null;
     detailHandoffDiameterPixels: number };
   subscribe(listener: ObjectWorldNavigationListener): () => void;
 }

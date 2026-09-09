@@ -1,0 +1,171 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "pandora",
+  "displayName": "Pandora",
+  "panel": {
+    "introduction": "Pandora is an irregular icy moon just outside Saturn’s F ring. Its gravity disturbs the ring, and Cassini revealed grooves, ridges and craters softened by a coating of fine debris.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius",
+        "value": "40.6 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "System solar semimajor axis",
+        "value": "9.537 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbit around Saturn",
+        "value": "About 15.1 hours"
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "Synchronous with its orbit"
+      },
+      {
+        "id": "distance-from-parent",
+        "label": "Mean distance from Saturn",
+        "value": "About 141,700 km"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Voyager 1 science team · 1980"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "density",
+        "label": "Mean density",
+        "value": "0.49 ± 0.05 g/cm³",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
+          "label": "NASA/JPL reference",
+          "checked": "2026-09-08",
+          "path": "source/editorial/factsheet-review.json"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "normal",
+    "labels": {
+      "normal": "Monochrome",
+      "elevation": "Elevation"
+    },
+    "controls": [
+      {
+        "id": "normal",
+        "label": "Monochrome",
+        "description": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "title": "Cassini clear-filter observations projected onto the released PDS shape using its measured camera geometry. Bounded illumination correction and exposure matching reduce photographed lighting. Gray grid marks unavailable samples; cast-shadow terrain is not reconstructed.",
+        "detail": "Cassini · corrected mosaic",
+        "thumbnail": "/scenes/pandora/pandora-normal-thumbnail.webp",
+        "surface": "pandora-normal-surface@2x.webp",
+        "poles": "pandora-normal-surface@2x.webp",
+        "source": {
+          "id": "n1504611846_1",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/cassini/iss/"
+        }
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "description": "Radial height above a 40.6 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+        "title": "Radial height above a 40.6 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
+        "detail": "Cassini shape · radial height",
+        "thumbnail": "/scenes/pandora/pandora-elevation-thumbnail.webp",
+        "surface": "pandora-elevation-surface@2x.webp",
+        "poles": "pandora-elevation-surface@2x.webp",
+        "source": {
+          "id": "thomas-2018-shape",
+          "path": "../manifest.json",
+          "url": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-12",
+            "0",
+            "+17"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
+          "image": "/scenes/pandora/pandora-elevation-legend.webp"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Pandora overview",
+      "href": "https://science.nasa.gov/saturn/moons/pandora/"
+    },
+    {
+      "label": "NASA/JPL/SSI; PDS",
+      "role": "surface",
+      "description": "Cassini calibrated observations and measured shape",
+      "href": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/saturn/moons/pandora/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../../../../../../packages/astronomy",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "himalia",
+  "displayName": "Himalia",
+  "panel": {
+    "introduction": "Himalia is Jupiter’s largest irregular moon. This approximate ellipsoid uses Cassini’s observed elongation with assumed equal short axes and orientation. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Mean radius estimate",
+        "value": "85 ± 10 km"
+      },
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Jupiter"
+      },
+      {
+        "id": "shape",
+        "label": "Shape interpretation",
+        "value": "Approximate prolate ellipsoid"
+      },
+      {
+        "id": "discovery",
+        "label": "Discovery",
+        "value": "Charles D. Perrine · 1904"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
+        "title": "Approximate elongated shape using Cassini’s observed 1.25:1 outline and JPL’s size estimate. Equal short axes and the viewing orientation are assumed. The gray grid marks unmapped terrain.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/himalia/himalia-model-thumbnail.webp",
+        "surface": "himalia-model-surface@2x.webp",
+        "poles": "himalia-model-poles@2x.webp",
+        "source": {
+          "id": "size-approximation",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1126/science.1079462"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Cassini ISS / JPL",
+      "role": "surface",
+      "description": "Observed elongation and model scale",
+      "href": "https://doi.org/10.1126/science.1079462"
+    },
+    {
+      "label": "NASA",
+      "role": "facts",
+      "description": "Himalia observation",
+      "href": "https://science.nasa.gov/resource/distant-himalia/"
+    },
+    {
+      "label": "NASA/JPL; PDS",
+      "role": "observations",
+      "description": "Cassini imaging archive",
+      "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://science.nasa.gov/resource/distant-himalia/",
+      "credit": "NASA Science"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Cassini ISS / Porco et al. (2003); JPL Solar System Dynamics"
+    }
+  }
+}

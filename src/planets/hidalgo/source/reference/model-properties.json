@@ -1,0 +1,87 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1057",
+  "modelId": 1057,
+  "modelVersion": "2016-01-04",
+  "diameterKm": 61.4,
+  "diameterInterpretation": "Approximate scale from a thermal diameter of 61.4 ± 12.7 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects.",
+  "calibration": {
+    "diameterKm": 61.4,
+    "quotedUncertaintyKm": 12.7,
+    "quantity": "NEATM effective spherical diameter",
+    "reference": "Licandro et al. (2016), A&A 585, A9, Table 3",
+    "notes": "WISE W3 and W4: 5 measurements in each band, observed at heliocentric distance9.067au, observer distance9.014au and phaseangle6.262deg (Table2); beamingparameter0.90±0.24 was fitted.",
+    "basis": "effective spherical radiometric diameter applied as approximate volume-equivalent size",
+    "assumption": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.",
+    "methodSystematicFraction": null,
+    "referenceUrl": "https://doi.org/10.1051/0004-6361/201526866",
+    "uncertaintyKm": 12.7,
+    "scaleKmPerSourceUnit": 49.48815317409647,
+    "sourceUrl": "https://doi.org/10.1051/0004-6361/201526866",
+    "sourceLabel": "Licandro et al. (2016), A&A 585, A9, Table 3",
+    "diameterSemantics": "NEATM effective spherical diameter",
+    "limitations": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty. WISE W3 and W4: 5 measurements in each band, observed at heliocentric distance9.067au, observer distance9.014au and phaseangle6.262deg (Table2); beamingparameter0.90±0.24 was fitted.",
+    "visibleDescription": "Approximate scale from a thermal diameter of 61.4 ± 12.7 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects."
+  },
+  "periodHours": 10.05822,
+  "poleEclipticJ2000Degrees": [
+    277,
+    16
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/3904/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 49488.15317409647,
+    "firstVertexKm": [
+      -5.2653910332643425,
+      27.418861777954977,
+      16.988392197910184
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      72.18144069361014,
+      89.14795912781739,
+      40.61992561345156
+    ],
+    "volumeCubicKm": 121200.31141935026,
+    "volumeEquivalentRadiusKm": 30.70000000000001,
+    "radialRangeKm": [
+      19.728570216114367,
+      47.648645742919925
+    ]
+  },
+  "elevation": [
+    -11,
+    17
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 614,
+    "estimatedErrorMeters": 245.63209533691406,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 121023463581339.31
+    }
+  }
+}

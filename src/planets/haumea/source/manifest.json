@@ -50,8 +50,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2642,
-      "expectedSha256": "ed04e0ea30c4e262527fcfa97718c5f583402ffda9409dcaea54b861e0b99252",
+      "expectedBytes": 3741,
+      "expectedSha256": "aadc2d17344c41f070f493cfa3ea650774c408f7f0c58fe3a196cf6debb11e59",
       "purpose": "Object preparation, content, or attribution"
     },
     {
@@ -107,6 +107,13 @@
       "purpose": "Object-owned preparation source",
       "expectedBytes": 127,
       "expectedSha256": "4a5b570337f9ae9054d3dfe34d37ed4a055d726b789792dce13582192fd26666"
+    },
+    {
+      "path": "editorial/factsheet-review.json",
+      "origin": "https://science.nasa.gov/dwarf-planets/haumea/",
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
+      "expectedBytes": 272,
+      "expectedSha256": "10122d07da9668df1bea395c8b5f4db9e76e66c34451a92767c5989ff523c1a1"
     }
   ],
   "generatedIntermediates": []

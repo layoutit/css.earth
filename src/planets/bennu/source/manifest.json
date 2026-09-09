@@ -1,0 +1,194 @@
+{
+  "schema": "cssbennu-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "bennu-shape",
+      "path": "shape/g_00880mm_alt_ptm_0000n00000_v020.obj",
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj",
+      "credit": "NASA/University of Arizona/CSA/York University/MDA; NASA Scientific Visualization Studio",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-triangle-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "meters",
+        "referenceRadiusMeters": 241
+      },
+      "coverage": "Released global model; detailed geometry is simplified for the display.",
+      "expectedBytes": 195300487,
+      "expectedSha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d"
+    },
+    {
+      "id": "bennu-normal",
+      "path": "maps/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
+      "credit": "NASA/University of Arizona/CSA/York University/MDA; NASA Scientific Visualization Studio",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "normal",
+      "label": "Albedo",
+      "falseColor": false,
+      "width": 25134,
+      "height": 12568,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 250
+      },
+      "coverage": "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps.",
+      "expectedBytes": 315960161,
+      "expectedSha256": "71bfeecce5615a5602d16d176c4cc17cc2550b2dc8c7cdac1332dea8d9f3da36"
+    },
+    {
+      "id": "bennu-surface",
+      "path": "maps/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif",
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif",
+      "credit": "NASA/University of Arizona/CSA/York University/MDA; NASA Scientific Visualization Studio",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "surface",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 31417,
+      "height": 15709,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 250
+      },
+      "coverage": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles.",
+      "expectedBytes": 493624548,
+      "expectedSha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
+      "credit": "NASA/University of Arizona/CSA/York University/MDA; NASA Scientific Visualization Studio",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "expectedBytes": 178217,
+      "expectedSha256": "ddfcec4744a629031d893e93a3c2fa3514316a04cf824dca1fc78e82bce4043a",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "bennu-normal",
+          "bennu-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "normal"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 9872,
+      "expectedSha256": "11ad30ad51acfbe05534ccd7f38e51bdd3e1ee5ad1c4403760d18d4c49c4c33e"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 1198,
+      "expectedSha256": "085792a9f34ed29ffcd3f4d18dde52a2c1a802ec7aeb85efd76ff98e39bd99e0"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 1363,
+      "expectedSha256": "ee13d93c58b003d26b94d1a2c64a3f55342f2705409ed5382a86fc2b91898585"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 400,
+      "expectedSha256": "89129496045033de730f7eb52a59208378f4c7f0a029657922f21c174a84de18"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 3749,
+      "expectedSha256": "95b678ef073f8566a545d6a2e8276ccc5d0e0d95a0322be77eb4484663eb8281"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 2893,
+      "expectedSha256": "9d0374bd644a31fb1a0727e516e2cc4df888814ba2250b9f5e4a24fc47174589"
+    },
+    {
+      "path": "reference/bennu_v17.tpc",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 18460,
+      "expectedSha256": "cdb4bc04f2869d32503db87bddd5a9ab8ea59b6ae91a39cd144e5d9e93339a0a"
+    },
+    {
+      "path": "reference/horizons-physical.txt",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 2913,
+      "expectedSha256": "d0192dbe1f3344ded793d9aef79ad4a5985082681c1945d255daa8292d98419a"
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "purpose": "Pinned source documentation or authored package input.",
+      "expectedBytes": 89771,
+      "expectedSha256": "30af0bb7e1f7da7f55bbde209c6e61b4215a044089010dca9a483b8b2eb24c4a"
+    }
+  ]
+}

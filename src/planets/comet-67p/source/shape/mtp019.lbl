@@ -1,0 +1,154 @@
+PDS_VERSION_ID        = PDS3                                                  
+LABEL_REVISION_NOTE   = "2016-05-05, Maud Barthelemy:  Creation               
+   2018-06-29 M. Barthelemy: Added INSTRUMENT_ID to label and                 
+                             UNIT to OBJ_VERTICES_TABLE columns               
+   2018-08-08 T.Barnes: Corrected SOURCE_PRODUCT_ID.                          
+   "                                                                          
+NOTE = "This product has remained unchanged since V2.0.                       
+    This product uses the reference frame described in CHEOPS_REF_FRAME_V1."  
+                                                                              
+RECORD_TYPE                  = FIXED_LENGTH                                   
+RECORD_BYTES                 = 33                                             
+FILE_RECORDS                 = 156290                                         
+                                                                              
+^OBJ_VERTICES_TABLE          = ("CSHP_DV_130_01_LORES_OBJ.OBJ", 1)            
+^OBJ_FACES_TABLE             = ("CSHP_DV_130_01_LORES_OBJ.OBJ", 52099)        
+                                                                              
+MISSION_NAME                 = "INTERNATIONAL ROSETTA MISSION"                
+INSTRUMENT_HOST_ID           = "RO"                                           
+INSTRUMENT_HOST_NAME         = "ROSETTA-ORBITER"                              
+INSTRUMENT_NAME              = "NAVIGATION CAMERA"                            
+INSTRUMENT_ID                = "NAVCAM"                                       
+DATA_SET_ID                  = "RO-C-MULTI-5-67P-SHAPE-V2.0"                  
+DATA_SET_NAME                = "SHAPE MODELS OF 67P/CHURYUMOV-GERASIMENKO     
+                                V2.0"                                         
+PRODUCT_CREATION_TIME        = 2016-03-28                                     
+PRODUCT_ID                   = "CSHP_DV_130_01_LORES_OBJ"                     
+PRODUCT_NAME                 = "                                              
+ SPC-ESA MTP019 CARTESIAN TRIPLATE MODEL FOR COMET 67P/C-G OBJ FORMAT LOW RES"
+SOURCE_PRODUCT_ID            = "CSHP_DV_130_01_LORES_00200_ROS"               
+TARGET_NAME                  = "67P/CHURYUMOV-GERASIMENKO 1 (1969 R1)"        
+                                                                              
+CITATION_DESC                = "ESA/RMOC,                                     
+ SPC-ESA MTP019 CARTESIAN TRIPLATE MODEL FOR COMET 67P/C-G OBJ FORMAT LOW RES,
+ RO-C-MULTI-5-67P-SHAPE-V2.0:CSHP_DV_130_01_LORES_OBJ,                        
+ NASA Planetary Data System and ESA Planetary Science Archive, 2017."         
+ABSTRACT_DESC                = "                                              
+   This data set contains the MTP019 version of shape models for the          
+   Rosetta target 67P/Churyumov-Gerasimenko 1 (1969 R1), produced using       
+   the stereophotoclinometry (SPC) technique.  These models were created      
+   by the flight operations team of the European Space Agency (ESA) using     
+   NAVCAM data obtained at the comet between Aug 6, 2014 and Aug 25, 2015.    
+   "                                                                          
+                                                                              
+START_TIME                   = "N/A"                                          
+STOP_TIME                    = "N/A"                                          
+SPACECRAFT_CLOCK_START_COUNT = "N/A"                                          
+SPACECRAFT_CLOCK_STOP_COUNT  = "N/A"                                          
+                                                                              
+MISSION_PHASE_NAME = "N/A"                                                    
+INSTRUMENT_MODE_ID = "N/A"                                                    
+                                                                              
+OBJECT                       = OBJ_VERTICES_TABLE                             
+ INTERCHANGE_FORMAT          = ASCII                                          
+ DESCRIPTION                 = "Table of Vertices of the OBJ file"            
+ ROWS                        = 52098                                          
+ COLUMNS                     = 4                                              
+ ROW_BYTES                   = 33                                             
+ OBJECT                      = COLUMN                                         
+     NAME                    = LETTER                                         
+     DESCRIPTION             = " v letter for vertex"                         
+     DATA_TYPE               = CHARACTER                                      
+     START_BYTE              = 1                                              
+     BYTES                   = 1                                              
+     FORMAT                  = "A1"                                           
+     COLUMN_NUMBER           = 1                                              
+ END_OBJECT                  = COLUMN                                         
+                                                                              
+ OBJECT                      = COLUMN                                         
+     NAME                    = VERTX                                          
+     DESCRIPTION             = " X coordinate of the Vertex in Cheops         
+                                reference frame."                             
+     DATA_TYPE               = ASCII_REAL                                     
+     UNIT                    = "KM"                                           
+     START_BYTE              = 3                                              
+     BYTES                   = 9                                              
+     FORMAT                  = "F9.6"                                         
+     COLUMN_NUMBER           = 2                                              
+ END_OBJECT                  = COLUMN                                         
+                                                                              
+ OBJECT                      = COLUMN                                         
+     NAME                    = VERTY                                          
+     DESCRIPTION             = " Y coordinate of the vertex in Cheops         
+                                reference frame."                             
+     DATA_TYPE               = ASCII_REAL                                     
+     UNIT                    = "KM"                                           
+     START_BYTE              = 13                                             
+     BYTES                   = 9                                              
+     FORMAT                  = "F9.6"                                         
+     COLUMN_NUMBER           = 3                                              
+ END_OBJECT                  = COLUMN                                         
+                                                                              
+ OBJECT                      = COLUMN                                         
+     NAME                    = VERTZ                                          
+     DESCRIPTION             = " Z coordinate of the vertex in Cheops         
+                                reference frame."                             
+     DATA_TYPE               = ASCII_REAL                                     
+     UNIT                    = "KM"                                           
+     START_BYTE              = 23                                             
+     BYTES                   = 9                                              
+     FORMAT                  = "F9.6"                                         
+     COLUMN_NUMBER           = 4                                              
+ END_OBJECT                  = COLUMN                                         
+                                                                              
+END_OBJECT                   = OBJ_VERTICES_TABLE                             
+                                                                              
+OBJECT                       = OBJ_FACES_TABLE                                
+ INTERCHANGE_FORMAT          = ASCII                                          
+ DESCRIPTION                 = "Table of Faces of the OBJ file"               
+ ROWS                        = 104192                                         
+ COLUMNS                     = 4                                              
+ ROW_BYTES                   = 33                                             
+ OBJECT                      = COLUMN                                         
+     NAME                    = LETTER                                         
+     DESCRIPTION             = " Number of the Face"                          
+     DATA_TYPE               = CHARACTER                                      
+     START_BYTE              = 1                                              
+     BYTES                   = 1                                              
+     FORMAT                  = "A1"                                           
+     COLUMN_NUMBER           = 1                                              
+ END_OBJECT                  = COLUMN                                         
+                                                                              
+ OBJECT                      = COLUMN                                         
+     NAME                    = INDICE1                                        
+     DESCRIPTION             = " Indice of the first vertex of the face."     
+     DATA_TYPE               = ASCII_INTEGER                                  
+     START_BYTE              = 3                                              
+     BYTES                   = 7                                              
+     FORMAT                  = "I7"                                           
+     COLUMN_NUMBER           = 2                                              
+ END_OBJECT                  = COLUMN                                         
+                                                                              
+ OBJECT                      = COLUMN                                         
+     NAME                    = INDICE2                                        
+     DESCRIPTION             = " Indice of the second vertex of the face."    
+     DATA_TYPE               = ASCII_INTEGER                                  
+     START_BYTE              = 11                                             
+     BYTES                   = 7                                              
+     FORMAT                  = "I7"                                           
+     COLUMN_NUMBER           = 3                                              
+ END_OBJECT                  = COLUMN                                         
+                                                                              
+ OBJECT                      = COLUMN                                         
+     NAME                    = INDICE3                                        
+     DESCRIPTION             = " Indice of the third vertex of the face."     
+     DATA_TYPE               = ASCII_INTEGER                                  
+     START_BYTE              = 19                                             
+     BYTES                   = 7                                              
+     FORMAT                  = "I7"                                           
+     COLUMN_NUMBER           = 4                                              
+ END_OBJECT                  = COLUMN                                         
+                                                                              
+END_OBJECT                   = OBJ_FACES_TABLE                                
+                                                                              
+END                                                                           

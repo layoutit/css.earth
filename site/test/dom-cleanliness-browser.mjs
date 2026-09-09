@@ -123,7 +123,7 @@ function census() {
   return { nodes: stage.querySelectorAll('*').length + 1,
     sceneCount: stage.querySelectorAll('.polycss-scene').length,
     cameraWidth: rect.width, cameraHeight: rect.height,
-    texturedLeaves: [...stage.querySelectorAll('.polycss-scene s')].filter(node => getComputedStyle(node).backgroundImage !== 'none').length,
+    texturedLeaves: [...stage.querySelectorAll(':scope > .polycss-camera :is(s,u)')].filter(node => getComputedStyle(node).backgroundImage !== 'none').length,
     forbiddenRenderers: stage.querySelectorAll('canvas,svg').length,
     duplicateIds: [...document.querySelectorAll('[id]')].map(node => node.id)
       .filter((id, i, ids) => ids.indexOf(id) !== i) };

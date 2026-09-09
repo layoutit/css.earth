@@ -22,7 +22,7 @@
       {
         "id": "orbital-period",
         "label": "Orbital period",
-        "value": "About 305 Earth years"
+        "value": "About 305 years"
       },
       {
         "id": "moon-count",
@@ -32,8 +32,8 @@
     ],
     "moreFacts": [
       {
-        "id": "distance",
-        "label": "Average solar distance",
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
         "value": "45.8 AU"
       },
       {
@@ -55,8 +55,24 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "",
-    "controls": []
+    "defaultLens": "illustration",
+    "controls": [
+      {
+        "id": "illustration",
+        "label": "Illustrative model",
+        "description": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+        "title": "NASA’s illustrative Makemake surface. Depicted terrain is not observed imagery; display coordinates are arbitrary.",
+        "qualification": "Illustration; not an observed surface map.",
+        "thumbnail": "illustration-thumbnail.webp",
+        "surface": "surface.webp",
+        "poles": "poles.webp",
+        "source": {
+          "id": "nasa-vtad-makemake-model",
+          "path": "../manifest.json",
+          "url": "https://science.nasa.gov/resource/makemake-3d-model/"
+        }
+      }
+    ]
   },
   "settings": {
     "titleKey": "settings",

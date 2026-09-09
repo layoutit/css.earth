@@ -1,0 +1,59 @@
+PDS_VERSION_ID           = PDS3                                               
+RECORD_BYTES             = 137                                                
+RECORD_TYPE              = FIXED_LENGTH                                       
+FILE_RECORDS             = 800                                                
+DATA_SET_ID              = "RO-A-OSINAC-4-AST1-STEINS-REFLECT-V1.0"           
+VOLUME_ID                = "ROOSI_2163"                                       
+PRODUCT_ID               = INDEX                                              
+PRODUCT_CREATION_TIME    = 2019-06-19T11:09:56.842                            
+^INDEX_TABLE             = "INDEX.TAB"                                        
+                                                                              
+OBJECT                   = INDEX_TABLE                                        
+  INTERCHANGE_FORMAT       = ASCII                                            
+  ROWS                     = 800                                              
+  ROW_BYTES                = 137                                              
+  COLUMNS                  = 4                                                
+  INDEX_TYPE               = SINGLE                                           
+  INDEXED_FILE_NAME        = {"DATA/*.LBL"}                                   
+  DESCRIPTION              = "INDEX.TAB lists all label files in this volume."
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                     = FILE_SPECIFICATION_NAME                        
+    DATA_TYPE                = CHARACTER                                      
+    START_BYTE               = 2                                              
+    BYTES                    = 39                                             
+    COLUMN_NUMBER            = 1                                              
+    DESCRIPTION              = "Pathname to the detached label which          
+               identifies this data file.  Or path name to text file."        
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                     = PRODUCT_ID                                     
+    DATA_TYPE                = CHARACTER                                      
+    START_BYTE               = 44                                             
+    BYTES                    = 30                                             
+    COLUMN_NUMBER            = 2                                              
+    DESCRIPTION              = "The name of the data file, which is unique    
+               within this data set."                                         
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                     = PRODUCT_CREATION_TIME                          
+    DATA_TYPE                = TIME                                           
+    START_BYTE               = 76                                             
+    BYTES                    = 19                                             
+    COLUMN_NUMBER            = 3                                              
+    DESCRIPTION              = "Time at which the data file was created."     
+  END_OBJECT               = COLUMN                                           
+                                                                              
+  OBJECT                   = COLUMN                                           
+    NAME                     = DATA_SET_ID                                    
+    DATA_TYPE                = CHARACTER                                      
+    START_BYTE               = 97                                             
+    BYTES                    = 38                                             
+    COLUMN_NUMBER            = 4                                              
+    DESCRIPTION              = "An identifier unique for this dataset"        
+  END_OBJECT               = COLUMN                                           
+                                                                              
+END_OBJECT               = INDEX_TABLE                                        
+END                                                                           

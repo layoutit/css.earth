@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27136617%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  136617 (1994 CC)             2026-Sep-07 22:14:14
+Rec #:  136617 (+COV) Soln.date: 2025-Jan-20_05:58:46    # obs: 739 (1988-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457189.5 ! 2015-Jun-16.00 (TDB)         Residual RMS= .22977
+   EC= .41694853916456     QR= .954963280314276    TP= 2457317.8426513551
+   OM= 268.5682992314125   W=  24.85325395776839   IN= 4.680555946554399
+   A= 1.63787134491685     MA= 299.6530391312183   ADIST= 2.320779409519423
+   PER= 2.09618            N= .470201918           ANGMOM= .020010218
+   DAN= .98172             DDN= 2.17662            L= 293.3486404
+   B= 1.9654154            MOID= .015978           TP= 2015-Oct-22.3426513551
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= n.a.               ROTPER= 2.3886
+   H= 17.97                G= .150                 B-V= n.a.
+                           ALBEDO= n.a.            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#177, PHA  OCC=0       radar(13 delay,14 Dop.)
+2: source=ORB
+*******************************************************************************

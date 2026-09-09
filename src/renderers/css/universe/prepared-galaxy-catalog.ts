@@ -5,6 +5,8 @@ import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import { admitGalaxyLabels, projectCatalogAperture, projectCatalogPosition } from './galaxy-catalog-layout.js';
 import type { ProjectedGalaxy } from './galaxy-catalog-layout.js';
+import { screenPicking } from '../navigation/screen-picking.js';
+import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 
 interface Entry {
   readonly object: PreparedCatalogObject;
@@ -17,8 +19,8 @@ interface Entry {
 }
 
 /** One fixed catalogue bank, shared by every detailed scene and every camera focus. */
-export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, onSelect = () => {} }: {
-  host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; onSelect?: (object: PreparedCatalogObject) => void;
+export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, onSelect = () => {}, pickingHost = host }: {
+  host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; onSelect?: (object: PreparedCatalogObject) => void; pickingHost?: HTMLElement;
 }) {
   const catalog = parsePreparedGalaxyCatalog(payload), document = host.ownerDocument;
   const clusterCatalog = clusters === undefined ? null : parsePreparedClusterCatalog(clusters);
@@ -29,6 +31,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
   root.className = 'prepared-galaxy-catalog';
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
   host.insertBefore(root, before);
+  const picking = screenPicking(pickingHost);
   const fader = createOpacityFader(document.defaultView!);
   // The source bank also preserves Local Volume nonmembers for future scopes.
   // Membership is a prepared scientific fact, never a runtime distance cut.
@@ -103,17 +106,24 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
           candidates.push({ object: entry.object, ...point, labelRect });
         }
       }
-      const admitted = admitGalaxyLabels(candidates, blockerRects, selectedId), ids = new Set(admitted.map(entry => entry.object.id));
+      const admitted = admitGalaxyLabels(candidates, blockerRects, selectedId);
+      const admittedById = new Map(admitted.map(entry => [entry.object.id, entry]));
+      const pickTargets: ScreenPickTarget[] = [];
       for (const entry of entries) {
         const objectAlpha = isPreparedCluster(entry.object) ? clusterAlpha : alpha;
-        const labelOpacity = ids.has(entry.object.id) ? objectAlpha * .85 : 0;
+        const projected = admittedById.get(entry.object.id);
+        const labelOpacity = projected ? objectAlpha * .85 : 0;
         fader.set(entry.label, labelOpacity, 200);
         fader.set(entry.marker, visible.has(entry.object.id) ? objectAlpha * .45 : 0, 200);
         if (entry.aperture) fader.set(entry.aperture, apertures.has(entry.object.id) ? objectAlpha * .2 : 0, 200);
         entry.label.style.pointerEvents = labelOpacity > .1 ? 'auto' : 'none';
         entry.label.tabIndex = labelOpacity > .1 ? 0 : -1;
         entry.label.ariaHidden = labelOpacity > .1 ? 'false' : 'true';
+        // Catalogue labels remain behind the focus point and detailed bodies.
+        if (projected && labelOpacity > .1) pickTargets.push({ element: entry.label, rank: -2,
+          shape: { kind: 'rect', ...projected.labelRect } });
       }
+      picking.publish(root, pickTargets);
       exclusions = admitted.map(entry => entry.labelRect);
       root.dataset.visibleLabels = String(admitted.length);
       root.dataset.catalogueCount = String(entries.length);
@@ -123,6 +133,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, on
       labels: Object.fromEntries(entries.map(entry => [entry.object.id, entry.label])) }; },
     destroy() {
       if (destroyed) return; destroyed = true; fader.destroy();
+      picking.remove(root);
       document.fonts?.removeEventListener('loadingdone', measure);
       for (const entry of entries) entry.label.removeEventListener('dblclick', entry.activate);
       root.remove();

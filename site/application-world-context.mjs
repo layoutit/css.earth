@@ -1,12 +1,19 @@
+import { mountSpaceMinimap } from './minimap/minimap.mjs';
+import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
 import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
+import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
+import { OBJECTS } from './objects.mjs';
+
 import galaxyCatalog from '../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
 import clusterCatalog from '../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
 import clusterPresentation from '../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
 import { createPreparedContextNavigation } from './prepared-context-navigation.mjs';
+
+const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 let universePromise = null;
@@ -70,7 +77,8 @@ function loadApplicationUniverse() {
 
 export function createApplicationWorldContext() {
   return {
-    async mount({ stage, signal, windowTarget = window }) {
+    async mount({ stage, signal, windowTarget = stage.ownerDocument.defaultView }) {
+      const target = stage.ownerDocument.defaultView;
       const prepared = await loadApplicationUniverse();
       if (signal?.aborted) throw signal.reason;
       const resources = prepareObjectResources(prepared.assets, { signal });
@@ -81,14 +89,42 @@ export function createApplicationWorldContext() {
         const layer = prepared.mount(stage, { onSelectGalaxy: object => { void contextNavigation.select(object); } });
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
           sources: [...galaxyCatalog.sources, ...clusterCatalog.sources], windowTarget });
-        const target = stage.ownerDocument.defaultView;
-        const diagnostics = import.meta.env?.DEV === true ? Object.freeze({ inspect: layer.inspect }) : null;
+        const viewport = createCameraViewport(stage, stage.ownerDocument.querySelector('.planet-sidebar'));
+        const minimap = mountSpaceMinimap(stage.ownerDocument);
+        const diagnostics = DIAGNOSTICS_ENABLED ? Object.freeze({ inspect: layer.inspect }) : null;
         if (diagnostics) target.__cssEarthUniverse = diagnostics;
-        return { ...layer, connectNavigation: contextNavigation.connect,
-          suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore, destroy() {
-          if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
-          contextNavigation.destroy(); layer.destroy(); resources.destroy();
-        } };
+        let heliosphereEnabled = false, publication = null, destroyed = false;
+        const publish = (world, viewport) => {
+          if (destroyed) return;
+          publication = { world, viewport };
+          layer.publish(world, viewport, { heliosphere: heliosphereEnabled });
+          minimap.publish(world, viewport);
+        };
+        return { ...layer, viewport, publish,
+          connectNavigation: contextNavigation.connect,
+          suspendFocus: contextNavigation.suspend, restoreFocus: contextNavigation.restore,
+          selectObject(id, frame) {
+            layer.selectObject(id, frame);
+            minimap.selectObject(frame);
+          },
+          setAsteroidOrbitsEnabled(enabled) {
+            if (!destroyed) layer.setHiddenOrbits(enabled === true ? [] : asteroidIds);
+          },
+          setAsteroidLabelsEnabled(enabled) {
+            if (!destroyed) layer.setHiddenLabels(enabled === true ? [] : asteroidIds);
+          },
+          setHeliosphereEnabled(enabled) {
+            if (destroyed || heliosphereEnabled === (enabled === true)) return;
+            heliosphereEnabled = enabled === true;
+            if (publication) publish(publication.world, publication.viewport);
+          },
+          destroy() {
+            destroyed = true; publication = null;
+            if (diagnostics && target.__cssEarthUniverse === diagnostics) delete target.__cssEarthUniverse;
+            contextNavigation.destroy(); minimap.destroy();
+            viewport.destroy(); layer.destroy(); resources.destroy();
+          },
+        };
       } catch (error) { resources.destroy(); throw error; }
     },
   };
