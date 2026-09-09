@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-lmc-scale-audit@1",
+  "date": "2026-09-10",
+  "projection": {
+    "testedLeafCenters": 144,
+    "maxGeometryErrorKpc": 1.408270079702233e-06,
+    "maxVolumePixelError": 3.636149145507065e-05,
+    "maxSkyPixelError": 1.1281043856788473e-09,
+    "method": "Actual prepared CSS leaf centers and actual renderer camera transforms versus independent ICRF quaternion/pinhole math, using the real LMC frame and common Solar observer."
+  },
+  "particles": {
+    "count": 1620000,
+    "units": "kpc",
+    "localMedian": [
+      2.835925701592398,
+      -0.12535603746713514,
+      0.2595372849433691
+    ],
+    "projectedMassRadiusAboutMedian": {
+      "0.5": 2.735486042921148,
+      "0.9": 8.331359965029108,
+      "0.95": 9.81496713983453,
+      "0.99": 12.712528758503273,
+      "0.999": 20.589250460450803
+    },
+    "localTransformSingularValues": [
+      1.0000000000004219,
+      1.000000000000139,
+      0.9999999999996285
+    ],
+    "projectedMassFractionsWithinKpc": {
+      "2.78": 0.5036092592592593,
+      "5": 0.6707493827160493,
+      "10": 0.9545617283950617,
+      "20": 0.9987487654320988,
+      "30": 0.9999907407407408
+    },
+    "comparisonObservedHalfLightRadiusKpc": 2.78264846465,
+    "interpretation": "Equal-mass simulated star-family particles, not calibrated light or gas. Similar half-mass and observed half-light radii are a rough scale check, not photometric validation."
+  },
+  "sameObserver": {
+    "focalPixels": 1247.08,
+    "distanceKpc": 49.590672750490434,
+    "widthFovDegrees": 59.99986398048073,
+    "world": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "pose": {
+        "positionM": [
+          0,
+          -65536,
+          0
+        ],
+        "orientationXyzw": [
+          0.01768669847817273,
+          0.17973685917567428,
+          -0.9788280334299664,
+          -0.09631989992847079
+        ]
+      }
+    }
+  },
+  "display": [
+    {
+      "image": "solar-panorama.png",
+      "peakDisplayLuma8": 20.144399999999997,
+      "halfPeakComponentPixels": 4541,
+      "brightCenterPixels": [
+        727.9949350363356,
+        455.117375027527
+      ],
+      "brightWidthDegrees": 5.279671802260881,
+      "brightHeightDegrees": 3.3988529527334275
+    },
+    {
+      "image": "solar-cloud.png",
+      "peakDisplayLuma8": 149.8296,
+      "halfPeakComponentPixels": 6792,
+      "brightCenterPixels": [
+        791.5694935217904,
+        456.78916372202593
+      ],
+      "brightWidthDegrees": 3.7994744326552663,
+      "brightHeightDegrees": 5.096277426668656
+    },
+    {
+      "image": "solar-horalek-widefield.png",
+      "peakDisplayLuma8": 195.50259999999997,
+      "halfPeakComponentPixels": 7696,
+      "brightCenterPixels": [
+        792.0537941787942,
+        457.3135395010395
+      ],
+      "brightWidthDegrees": 4.0279922348771064,
+      "brightHeightDegrees": 5.554541577919092
+    },
+    {
+      "image": "solar-wise-wide-infrared.png",
+      "peakDisplayLuma8": 187.94979999999998,
+      "halfPeakComponentPixels": 6516,
+      "brightCenterPixels": [
+        791.1718845917741,
+        457.0460405156538
+      ],
+      "brightWidthDegrees": 3.7994744326552663,
+      "brightHeightDegrees": 5.233803072133782
+    }
+  ]
+}
