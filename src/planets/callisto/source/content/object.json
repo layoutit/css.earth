@@ -98,6 +98,56 @@
         },
         "detail": "Global mosaic",
         "summary": "Source detail ranges from 400 m to 60 km per pixel. Photographed shadows and seams remain; the gray grid marks missing data."
+      },
+      {
+        "id": "enhanced",
+        "label": "Galileo color",
+        "description": "Published NASA/JPL/DLR processed color from Galileo in May 2001, registered to the controlled USGS map. About 8 km per source pixel near the disk center; detail becomes coarser toward the edge. This is display color, not calibrated I/F or albedo. Only views within 65° of the surface normal are retained; gray grid marks the rest of the globe. Photographed shading and color fringes remain; added globe lighting is approximate.",
+        "title": "Processed color mosaic",
+        "thumbnail": "/scenes/callisto/callisto-enhanced-thumbnail.webp",
+        "surface": "callisto-enhanced-surface@2x.webp",
+        "poles": "callisto-enhanced-poles@2x.webp",
+        "source": {
+          "id": "galileo-pia03456-registered-color",
+          "path": "../manifest.json"
+        },
+        "detail": "Partial processed color",
+        "summary": "May 2001 Galileo color over about 29% of the globe. Gray grid: unseen or withheld. Processed display colors, not albedo.",
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Coverage",
+          "items": [
+            {
+              "label": "Color",
+              "description": "Variable published RGB across observed terrain; this swatch is only a visual key.",
+              "color": "#8e6450"
+            },
+            {
+              "label": "Gray grid",
+              "description": "Unseen or withheld surface; no reconstructed colors.",
+              "color": "#777777"
+            }
+          ]
+        },
+        "legendNote": "Photographic colors have no numeric scale; they are the publisher’s processed display colors.",
+        "facts": [
+          {
+            "id": "release",
+            "label": "Observation",
+            "value": "Galileo · May 2001"
+          },
+          {
+            "id": "coverage",
+            "label": "Retained footprint",
+            "value": "28.74% of the globe · emission ≤65°"
+          },
+          {
+            "id": "resolution",
+            "label": "Source detail",
+            "value": "About 8 km per pixel near the disk center"
+          }
+        ]
       }
     ]
   },
@@ -131,6 +181,12 @@
       "role": "surface",
       "description": "Voyager/Galileo global mosaic",
       "href": "https://astrogeology.usgs.gov/search/map/callisto_galileo_voyager_global_mosaic_1km"
+    },
+    {
+      "label": "NASA/JPL/DLR",
+      "role": "surface",
+      "description": "PIA03456 processed Galileo color, May 2001",
+      "href": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
     },
     {
       "label": "ESO",

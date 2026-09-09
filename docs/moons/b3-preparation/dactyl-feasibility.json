@@ -1,0 +1,207 @@
+{
+  "schema": "cssearth-b3-dactyl-feasibility@1",
+  "status": "Historical source route feasible; not a registered or qualified standalone body",
+  "sourceReceipts": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i2278.fit",
+      "localPath": "/tmp/b3-jupiter-companions/i2278.fit",
+      "bytes": 645120,
+      "sha256": "aecdbd30e0c7aa3f2607a89b6c12c6d1553de2ba273cbd0ca9d2ffd1fa60c181"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i2278.lbl",
+      "localPath": "/tmp/b3-jupiter-companions/i2278.lbl",
+      "bytes": 10480,
+      "sha256": "0c527a1b56a9ba54a24d84c542c7283cad08929a48d052e7983fc3c7a0518eeb"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i2700.fit",
+      "localPath": "/tmp/b3-jupiter-companions/i2700.fit",
+      "bytes": 645120,
+      "sha256": "0666b3b2ac4651653cc65ba4c82ac2c5c34686630037ee378734df453111e997"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/i2700.lbl",
+      "localPath": "/tmp/b3-jupiter-companions/i2700.lbl",
+      "bytes": 10480,
+      "sha256": "3009babb4002308267bdcf1045881e99b76ec5705f6e80f277011528c2ab513c"
+    },
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/galileo/idagaspra/sbnig_0001/data/galileo_ssi/ida/idaidx.html",
+      "localPath": "/tmp/b3-jupiter-companions/idaidx.html",
+      "bytes": 13056,
+      "sha256": "6220f525311a0a58e9e751d953c51aed08b424551ba5d9523c4a4952522867c5"
+    }
+  ],
+  "originalFrames": [
+    {
+      "id": "i2278",
+      "sourceGeometryScope": "Ida: target, radii, sub-spacecraft, north and scale fields are not Dactyl geometry. Camera RA/Dec/twist must still be independently validated.",
+      "label": {
+        "PRODUCT_ID": "IGSSI-I2278-199509",
+        "SPACECRAFT_CLOCK_START_COUNT": "02025622.78",
+        "START_TIME": "1993-08-28T16:47:49.956Z",
+        "STOP_TIME": "1993-08-28T16:47:49.964Z",
+        "TARGET_NAME": "IDA",
+        "EXPOSURE_DURATION": "8.33",
+        "GAIN_MODE_ID": "40K",
+        "ENCODING_TYPE": "RATE CONTROL",
+        "TARGET_CENTER_DISTANCE": "3.958031e+03",
+        "SUB_SPACECRAFT_LATITUDE": "-20.239",
+        "SUB_SPACECRAFT_LONGITUDE": "112.126",
+        "TWIST_ANGLE": "40.169",
+        "RIGHT_ASCENSION": "198.306",
+        "DECLINATION": "32.600",
+        "SUB_SPACECRAFT_LINE": "26.068",
+        "SUB_SPACECRAFT_LINE_SAMPLE": "1212.594",
+        "NORTH_AZIMUTH": "0.000",
+        "HORIZONTAL_PIXEL_SCALE": "0.000000e+00",
+        "PHASE_ANGLE": "UNK",
+        "A_AXIS_RADIUS": "2.800000e+01",
+        "B_AXIS_RADIUS": "1.200000e+01",
+        "C_AXIS_RADIUS": "1.050000e+01"
+      },
+      "imageArray": {
+        "offsetBytes": 2880,
+        "width": 800,
+        "height": 800,
+        "sample": "unsigned 8-bit DN; no radiometric calibration coefficients or separate quality array in this FITS"
+      },
+      "view": "Resolved complete visible sunlit disk around stored x176..205,y563..598; a useful mapping fit view at approximately 39 m/pixel. Surrounding returned strips and gaps are not a global valid footprint."
+    },
+    {
+      "id": "i2700",
+      "sourceGeometryScope": "Ida: target, radii, sub-spacecraft, north and scale fields are not Dactyl geometry. Camera RA/Dec/twist must still be independently validated.",
+      "label": {
+        "PRODUCT_ID": "IGSSI-I2700-199509",
+        "SPACECRAFT_CLOCK_START_COUNT": "02025627.00",
+        "START_TIME": "1993-08-28T16:52:01.315Z",
+        "STOP_TIME": "1993-08-28T16:52:01.365Z",
+        "TARGET_NAME": "IDA",
+        "EXPOSURE_DURATION": "50.00",
+        "GAIN_MODE_ID": "100K",
+        "ENCODING_TYPE": "RATE CONTROL",
+        "TARGET_CENTER_DISTANCE": "2.391631e+03",
+        "SUB_SPACECRAFT_LATITUDE": "-66.782",
+        "SUB_SPACECRAFT_LONGITUDE": "70.892",
+        "TWIST_ANGLE": "330.583",
+        "RIGHT_ASCENSION": "255.196",
+        "DECLINATION": "81.633",
+        "SUB_SPACECRAFT_LINE": "-362.371",
+        "SUB_SPACECRAFT_LINE_SAMPLE": "3516.211",
+        "NORTH_AZIMUTH": "0.000",
+        "HORIZONTAL_PIXEL_SCALE": "0.000000e+00",
+        "PHASE_ANGLE": "UNK",
+        "A_AXIS_RADIUS": "2.800000e+01",
+        "B_AXIS_RADIUS": "1.200000e+01",
+        "C_AXIS_RADIUS": "1.050000e+01"
+      },
+      "imageArray": {
+        "offsetBytes": 2880,
+        "width": 800,
+        "height": 800,
+        "sample": "unsigned 8-bit DN; no radiometric calibration coefficients or separate quality array in this FITS"
+      },
+      "view": "Partially clipped at the detector left edge, mostly dark-side/Idashine with a narrow bright crescent. Useful partial limb holdout at approximately 24 m/pixel; not a second complete silhouette."
+    }
+  ],
+  "references": [
+    {
+      "url": "https://doi.org/10.1006/icar.1996.0044",
+      "title": "The Discovery and Orbit of 1993 (243)1 Dactyl",
+      "facts": "Non-unique mass-dependent orbital family, encounter position near 85 km and speed near 6 m/s. Table IV identifies encounter states in J2000 at 1993-08-28 16:52:04.66 UTC. Numeric Dactyl table rows have not been acquired/visually verified in this intake; they are not implementation-ready states."
+    },
+    {
+      "url": "https://doi.org/10.1006/icar.1996.0045",
+      "title": "Dactyl: Galileo Observations of Ida\u2019s Satellite",
+      "facts": "Published full principal diameters 1.6 \u00d7 1.4 \u00d7 1.2 km; longest axis approximately toward Ida and shortest approximately perpendicular to orbital plane. These constrain an approximate encounter attitude, not a measured contemporary rotation solution."
+    },
+    {
+      "url": "https://doi.org/10.1006/icar.1996.0032",
+      "title": "Galileo\u2019s Encounter with 243 Ida: An Overview of the Imaging Experiment",
+      "facts": "Dactyl rotation rate is unknown; the long-axis alignment suggests synchronism but does not prove it."
+    },
+    {
+      "url": "https://www.jpl.nasa.gov/images/pia00298-dactyl-dark-side-illuminated-by-idashine/",
+      "title": "Dactyl Dark Side Illuminated by Idashine",
+      "facts": "Confirms original field-edge clipping, approximately 24 m/pixel, faint reflected illumination from Ida. The press representation shifts the edge inward and enhances the dark side: use original pixels for registration."
+    }
+  ],
+  "comparisonWithSelam": {
+    "encounterState": "Stronger published route: original orbit work identifies a family of J2000 state vectors at an explicit 1993 epoch. Exact rows remain to be acquired and independently transcribed.",
+    "attitude": "The published parent-axis and orbit-normal alignments constrain a model, but these two original frames have not established a unique full attitude or uncertainty covariance. The I2700 clipping and low dark-side signal weaken the second silhouette constraint.",
+    "currentPhase": "No defensible current phase found. The original authors explicitly could not determine a unique orbit. A single family member propagated to 2026 would be an unsupported prediction."
+  },
+  "currentEphemerisProbe": {
+    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27Dactyl%27&MAKE_EPHEM=%27NO%27",
+    "path": "/tmp/b3-jupiter-companions/dactyl-horizons-identification.txt",
+    "sha256": "9b99d7101b197f3115b2546e4a4b1bcf782b1320934d0e5c2992f0053f669706",
+    "result": "No matching small-body name; no exact Dactyl ephemeris resolved. This name query alone is not a proof that all service aliases are absent."
+  },
+  "accessLimits": [
+    {
+      "source": "Publisher XML API",
+      "status": "1930-byte metadata acquired; identifies open archive and CC BY-NC-ND 4.0, but no article/table body returned."
+    },
+    {
+      "source": "Publisher PDF content negotiation",
+      "status": "HTTP 406 for both orbit and shape articles."
+    },
+    {
+      "source": "ScienceDirect full pages",
+      "status": "HTTP 403 in web access."
+    },
+    {
+      "source": "ADS original orbit PDF",
+      "status": "30-second timeout, zero bytes."
+    },
+    {
+      "source": "ResearchGate full paper",
+      "status": "Search-indexed original-paper text exposes Table IV heading/epoch, but direct fetch is HTTP 403; no numeric row was inferred."
+    }
+  ],
+  "nextSteps": [
+    {
+      "order": 1,
+      "action": "Acquire and visually verify the original Table IV numeric rows and uncertainty context. Retain the allowed mass-dependent family rather than selecting a nominal orbit silently."
+    },
+    {
+      "order": 2,
+      "action": "Resolve original SSI camera geometry, geometric distortion and returned-pixel coverage independently. Do not use Ida radii or zero-valued Dactyl-inapplicable label fields."
+    },
+    {
+      "order": 3,
+      "action": "Fit the published 1.6 \u00d7 1.4 \u00d7 1.2 km ellipsoid against I2278 with source-derived pointing, reserving I2700\u2019s visible dark limb as holdout. Additional earlier multicolor or 89 m/pixel imagery is needed to evaluate orientation degeneracy and map landmarks; report fit residuals and uncertainty instead of a unique attitude assertion."
+    },
+    {
+      "order": 4,
+      "action": "Register only confirmed photographed portions. Preserve dark observed terrain and distinguish spacecraft-observed Idashine from the ordinary direct-Sun lighting model."
+    },
+    {
+      "order": 5,
+      "action": "Use a generic explicitly historical scene capability if the state is implemented; never graft a 1993 state into the existing globally pinned 2026 context."
+    }
+  ],
+  "visualEvidence": [
+    {
+      "path": "/tmp/b3-jupiter-companions/dactyl-source-preview.png",
+      "sha256": "03f83a175e966ae708e254869eaac58d89fdf76334aee390ad5619a41d37f491",
+      "description": "Original I2278 decoded source preview, inspected."
+    },
+    {
+      "path": "/tmp/b3-jupiter-companions/dactyl-i2700-original.png",
+      "sha256": "04b8f896c9f6bc4e9e9d090f4cf9fe6919b62010d0311d1803c0f5baa2ceab9d",
+      "description": "Exact 800\u00d7800 DN values encoded as an 8-bit grayscale PNG; inspected."
+    },
+    {
+      "path": "/tmp/b3-jupiter-companions/dactyl-i2700-raw-crop-display.png",
+      "sha256": "0e117f8b3f8b22777374871f2037e3dbabaaa49abe1c7a344cc563e323265fb8",
+      "description": "Diagnostic source crop x0:120,y280:410, nearest 5\u00d7; display intensity clamp((DN-2)*15). No radiometric/quality interpretation. Inspected."
+    }
+  ],
+  "qualifiedModel": false,
+  "qualifiedRegistration": false,
+  "qualifiedEpochState": false,
+  "registryAdded": false,
+  "testsOrBakesRun": false
+}

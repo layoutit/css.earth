@@ -59,6 +59,16 @@ Shadows. Their minimaps and thumbnails use the same prepared interpretation.
 The navigation/context marker is an observed terrain crop with prepared
 full-phase curvature, not a new full-disc observation.
 
+## Historical geology
+
+**Geology** uses Thomson and Baynham's [2026 digitized historical map](https://zenodo.org/records/20819132), released under CC BY 4.0. The exact GIS database, layer styles, publisher preview and release metadata are retained in `source/science/geology-2026/`. This is an interpretation of Voyager-era surface units, not measured composition, a new terrain model or newly controlled imagery.
+
+The archive stores page-sized XY coordinates under an incompatible Earth WGS84 orthographic CRS. Preparation does not apply that declaration as moon geography. The independently reviewed `registration.json` maps positive-east, normalized south-polar stereographic coordinates into the original GIS page. Titania uses six identified crater centroids for fitting and four separate named craters for validation. Miranda uses six publisher-graticule intersections for fitting and six interleaved intersections for validation, followed by three independently identified crater checks. The checked Titania landmark differences are 0.33–0.83° (approximately 4.5–11.4 km); these are not uncertainty bounds for every unit boundary.
+
+The lens includes 10 nonempty styled polygon categories with their original unit names and colors. Source Z coordinates are not heights. Structural linework and annotation are not turned into terrain or extra polygon units. Publisher-preview overlap evidence establishes only a partial layer order; combinations with no unique supported winner remain missing. Original polygon holes are preserved. The nearest-neighbor categorical conversion uses a 1440 × 720 display grid, with no interpolation between classes, relief or artificial boundary detail. Valid black material is distinct from no-data code 65535. Its sampled, cosine-weighted reference-sphere coverage is approximately 35.3%; unmapped northern terrain remains unknown.
+
+Reproduce the categorical input with `python tools/objects/prepare-geologic-categories.py src/planets/titania/source/preparation/geology-conversion.json`, using the dependency versions in the converter's header. The recipe pins the archive and registration, checks feature populations and archived CRS identity, and records ambiguous overlaps and the exact output hash in `categories.receipt.json`. Original release MD5 and acquisition SHA-256 receipts remain alongside the sources. Shared preparation then consumes the checked-in categorical input through the existing scientific GeoTIFF path. The runtime receives prepared images only.
+
 ## Source survey
 
 | Candidate | Disposition |
@@ -71,9 +81,7 @@ full-phase curvature, not a new full-disc observation.
 | [NASA color composite](https://science.nasa.gov/uranus/moons/titania/) | Useful visual reference, excluded as a map lens: a published disc composite does not establish registered global color coverage. |
 | [USGS Gazetteer](https://planetarynames.wr.usgs.gov/Page/TITANIA/target) | Coordinate and nomenclature reference, not a separate observation lens. Named sample locations also appear in Nathan et al. Table A1. |
 
-No complete mapped color, geology or composition lens is claimed. The newer
-deblurring/geologic work remains useful for a separately registered view, not
-evidence that such information does not exist.
+No complete mapped color or composition lens is claimed. The historical Geology view retains its own mapped coverage and registration limits; it does not turn the newer deblurring study into a registered observation product.
 
 ## Reproduction and proof boundaries
 

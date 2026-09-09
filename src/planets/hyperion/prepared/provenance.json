@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a32c1b855ce1a1a203a3161103a471d6f20de282409fb885788c638f977c1a99"
+    "sha256": "2cf2a3b3f402d428cad448f4acc81f95b120ebd34ef06dcfcd0926c89c5da372"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "b2a0d47f36a2e7f2cfda842d8405c6155c304416f864cb08ad62f4af898a08a8",
+      "sha256": "53d1c8bbe2de7591f5ab025f349a06f017dca02f27aef88a2807e5f401ce1b3c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -258,6 +258,23 @@
                     223
                   ],
                   "pixelAngleMicroradians": 5.9896977199
+                },
+                {
+                  "id": "n1506391424",
+                  "observerLatitude": 10.62,
+                  "observerWestLongitude": 204.06,
+                  "sunLatitude": 11.11,
+                  "sunWestLongitude": 255.22,
+                  "rangeKm": 16782.2,
+                  "northAzimuthDegrees": 329.3949554495464,
+                  "center": [
+                    72.10596576651524,
+                    374.01763246187295
+                  ],
+                  "pixelAngleMicroradians": 5.9896977199,
+                  "path": "observations/N1506391424_2_CALIB.IMG",
+                  "labelPath": "observations/N1506391424_2_CALIB.LBL",
+                  "coverageInsetPixels": 16
                 }
               ],
               "photometry": {
@@ -274,7 +291,7 @@
               "metadata": {
                 "label": "Monochrome",
                 "falseColor": false,
-                "coverage": "CISSCAL clear-filter observations registered to the Thomas shape using the PDS controlled camera solutions. Approximate disk correction and overlap levels reduce baked illumination. Unobserved and unstable regions remain marked.",
+                "coverage": "Twelve CISSCAL clear-filter observations in the Thomas controlled shape frame, including a regional ~100 m/pixel close frame with independently checked camera correction. Approximate disk correction and overlap levels reduce photographed illumination; shadows, variable resolution and marked gaps remain.",
                 "projection": {
                   "type": "equirectangular",
                   "longitudeDegrees": [
@@ -353,7 +370,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9a7aacbc9ee63d91ad14cf7e15028f85a269dd7d7970e83bf19111b8a8b015d7",
+      "sha256": "e8feec52261253013e54e285b48d1d8fe3a19944d6f0ea0886f9d72aba835191",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -430,8 +447,8 @@
             {
               "id": "normal",
               "label": "Monochrome",
-              "description": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
-              "title": "ISS mosaic",
+              "description": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
+              "title": "ISS calibrated mosaic",
               "detail": "Cassini clear-filter mosaic",
               "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
               "surface": "hyperion-normal-surface@2x.webp",
@@ -441,7 +458,7 @@
                 "path": "../manifest.json",
                 "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
               },
-              "summary": "Photographs follow the irregular shape and retain crater shadows. Resolution varies across the surface; gaps are marked."
+              "summary": "Twelve Cassini frames, including a regional ~100 m/pixel close view. Shape and registration limit detail; shadows and marked gaps remain."
             },
             {
               "id": "elevation",
@@ -1365,6 +1382,78 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "cassini-n1506391424",
+      "path": "observations/N1506391424_2_CALIB.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506391424",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Regional FULL calibrated clear-filter close observation; Thomas camera corrected by disjoint image registration, as documented in validation/n1506391424-registration.json.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG"
+      },
+      "sha256": "b212dac15ff2cec9213da76d2f0a540a1d6dfb10646e727bc472db0a99e25669",
+      "bytes": 4202496,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506391424_2_CALIB.IMG",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "cassini-n1506391424-label",
+      "path": "observations/N1506391424_2_CALIB.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.LBL",
+      "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1506391424",
+      "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data. Retain NASA/JPL/SSI and calibration archive attribution.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/cassini/iss/access.html"
+      ],
+      "acquisition": "Download the pinned CISSCAL calibrated observation and detached label.",
+      "redistribution": "Retain mission and archive credits.",
+      "width": 1024,
+      "height": 1024,
+      "coverage": "Regional FULL calibrated clear-filter close observation; Thomas camera corrected by disjoint image registration, as documented in validation/n1506391424-registration.json.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.LBL"
+      },
+      "sha256": "0b98753adc1818c17392dc8590f90f6526ee576373589ffa4f871d3ade8b726c",
+      "bytes": 3825,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "observations/N1506391424_2_CALIB.LBL",
+        "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.LBL"
+      },
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Source documentation, controlled camera metadata or authored preparation.",
       "id": "authored-document:content/object.json",
@@ -1374,8 +1463,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9a7aacbc9ee63d91ad14cf7e15028f85a269dd7d7970e83bf19111b8a8b015d7",
-      "bytes": 5812,
+      "sha256": "e8feec52261253013e54e285b48d1d8fe3a19944d6f0ea0886f9d72aba835191",
+      "bytes": 5858,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1435,7 +1524,7 @@
       "parents": [],
       "process": "Prepare the mosaics recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked."
+        "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked."
       ],
       "lensIds": [
         "normal"
@@ -1469,19 +1558,21 @@
         "cassini-n1694888328-label",
         "cassini-n1811772616",
         "cassini-n1811772616-label",
+        "cassini-n1506391424",
+        "cassini-n1506391424-label",
         "thomas-hyperion-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
-          "bytes": 4322,
-          "sha256": "b018627a7e2b0a82b78ff431e4f01c7019c363639974e4e586293deff6bce9ea",
+          "bytes": 4314,
+          "sha256": "af9fb9ee2775cf477952cc9510a677b8e85e0a8fd309c0d515678fc020de43ff",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hyperion/hyperion-normal-surface@2x.webp",
-          "bytes": 1358390,
-          "sha256": "fbb68c18c9259fb3d73999834fcf1a95f91a115917308343aedaf92bdad79ea7",
+          "bytes": 1361026,
+          "sha256": "be463cf8477fc34d4426d152b0c9c2b9872aca12bfbbb03046281c3ab86a12ac",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -1530,8 +1621,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 42686,
-          "sha256": "8cf6d8b8352976aabfea224bcbfe9ef8e6fdbaa3286926ca21c14f77d87731d0",
+          "bytes": 43988,
+          "sha256": "010db482ea0825f1d30042106107e3cb7d5778f213a411f21b2b75d2d97df5ce",
           "verification": "bytes-verified"
         }
       ]

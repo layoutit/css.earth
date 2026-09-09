@@ -1,0 +1,45 @@
+{
+  "parameters": [
+    -0.14956761378453695,
+    145.20094678888793,
+    355.3222696772947,
+    323.2245440873881,
+    325.9541756735663,
+    319.874174604298
+  ],
+  "parameterNames": [
+    "observerLatitude",
+    "observerEastLongitude",
+    "northAzimuthDegrees",
+    "centerSample",
+    "centerLine",
+    "projectedRadiusPixels"
+  ],
+  "trainCorrelation": 0.8374308769465191,
+  "holdouts": [
+    {
+      "region": "upper-right",
+      "samples": 5524,
+      "unshiftedCorrelation": 0.8322815354799907,
+      "bestDiagnosticCorrelation": 0.8322815354799907,
+      "diagnosticOffsetPixels": [
+        0,
+        0
+      ],
+      "searchBoundary": false
+    },
+    {
+      "region": "lower-left",
+      "samples": 5464,
+      "unshiftedCorrelation": 0.6830660611628557,
+      "bestDiagnosticCorrelation": 0.6830660611628557,
+      "diagnosticOffsetPixels": [
+        0,
+        0
+      ],
+      "searchBoundary": false
+    }
+  ],
+  "method": "Two opposite quadrants fitted against controlled USGS mosaic, two disjoint quadrants withheld. High-pass brightness correlation; no source color change.",
+  "status": "exploratory"
+}

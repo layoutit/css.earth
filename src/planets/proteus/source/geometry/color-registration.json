@@ -1,0 +1,2580 @@
+{
+  "schema": "cssearth-voyager-color-registration@1",
+  "body": "proteus",
+  "sourceFaces": 5040,
+  "sourceVertices": 2522,
+  "method": "Fixed OPUS/CK geometry; fit translation using alternating 45-degree sunlit-limb sectors; reserve the intervening sectors. Five initializations; no source-image alteration.",
+  "limits": "Registration to the released coarse shape, not absolute ground truth. Six corrected pixels is a conservative working envelope, not a statistical confidence interval. Blurred color only supports broad patterns at roughly 40 km or coarser. The high-resolution clear frame is not refitted here.",
+  "provenance": [
+    {
+      "path": "geometry/naif0012.tls",
+      "bytes": 5257,
+      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+    },
+    {
+      "path": "geometry/vg200051.tsc",
+      "bytes": 108191,
+      "sha256": "bf8ae3b237a4f75362ae4bf5fe133ec4a888877f6183f1705330b9433f81dcac"
+    },
+    {
+      "path": "geometry/vg2_v02.tf",
+      "bytes": 12008,
+      "sha256": "aa529b2dbf43b7f925b3e81e86a3d7e74a4d99c392113197e5f6d5bf13c37fcb"
+    },
+    {
+      "path": "shape/pck00011.tpc",
+      "bytes": 131226,
+      "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+    },
+    {
+      "path": "geometry/vg2_nep_version1_type1_iss_sedr.bc",
+      "bytes": 885760,
+      "sha256": "f181a43f5785867afc81436a202a6ec453c8dd5538172ae916ca979981051f11"
+    },
+    {
+      "path": "shape/n8proteus.tab",
+      "bytes": 70226,
+      "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868"
+    },
+    {
+      "path": "geometry/c1137328-opus.json",
+      "bytes": 11716,
+      "sha256": "55f6021bc89b524cb4c1783d273a651cde563acbd3ddb80e09a1787b58e36b94"
+    },
+    {
+      "path": "observations/C1137328_GEOMED.IMG",
+      "bytes": 2002000,
+      "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de"
+    },
+    {
+      "path": "observations/C1137328_GEOMED.LBL",
+      "bytes": 3296,
+      "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42"
+    },
+    {
+      "path": "geometry/c1137339-opus.json",
+      "bytes": 11743,
+      "sha256": "f3f4271a94c03c1bc26cd1af287cd7926a93c21621065b107d3560cd2b981e16"
+    },
+    {
+      "path": "observations/C1137339_GEOMED.IMG",
+      "bytes": 2002000,
+      "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758"
+    },
+    {
+      "path": "observations/C1137339_GEOMED.LBL",
+      "bytes": 3310,
+      "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497"
+    },
+    {
+      "path": "geometry/c1137350-opus.json",
+      "bytes": 11728,
+      "sha256": "fc4cdb9829c78e933f815afde5aea1486f98f6105034680850690483451c8d59"
+    },
+    {
+      "path": "observations/C1137350_GEOMED.IMG",
+      "bytes": 2002000,
+      "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111"
+    },
+    {
+      "path": "observations/C1137350_GEOMED.LBL",
+      "bytes": 3311,
+      "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9"
+    }
+  ],
+  "frames": [
+    {
+      "id": "c1137328",
+      "time": "1989-08-24T14:28:45.000",
+      "observerLatitude": -26.955,
+      "observerWestLongitude": 95.465,
+      "sunLatitude": -23.66,
+      "sunWestLongitude": 118.937,
+      "rangeKm": 855785.645,
+      "northAzimuthDegrees": 13.455111379559261,
+      "pixelAngleMicroradians": 7.841764329210524,
+      "requestedCkTick": 6317206375.422595,
+      "returnedCkTick": 6317206415.0,
+      "center": [
+        473.69993148676184,
+        499.6632419233105
+      ],
+      "fitSamples": 11,
+      "holdoutSamples": 16,
+      "fitRms": 0.47193990372426864,
+      "holdoutRms": 1.1797775213997328,
+      "holdoutMax": 2.300000000000203,
+      "anchors": [
+        {
+          "angleDegrees": 0,
+          "modelRadius": 31.739484771239066,
+          "imageRadius": 30.239484771239216,
+          "residualPixels": -1.4999999999998508,
+          "contrast": 0.005402271673547623,
+          "illumination": -0.4732751452406576,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 5,
+          "modelRadius": 31.60424557930378,
+          "imageRadius": 27.104245579303885,
+          "residualPixels": -4.499999999999893,
+          "contrast": 0.0048799933518822135,
+          "illumination": -0.5598448772091715,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 10,
+          "modelRadius": 31.33208258024243,
+          "imageRadius": 25.732082580242523,
+          "residualPixels": -5.599999999999909,
+          "contrast": 0.0074847409107791935,
+          "illumination": -0.5598448772091715,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 15,
+          "modelRadius": 31.003882983947598,
+          "imageRadius": 25.103882983947685,
+          "residualPixels": -5.899999999999913,
+          "contrast": 0.011589615727021031,
+          "illumination": -0.4795069443026401,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 20,
+          "modelRadius": 30.689540342842466,
+          "imageRadius": 25.18954034284256,
+          "residualPixels": -5.499999999999908,
+          "contrast": 0.012609710744769203,
+          "illumination": -0.4037247171755604,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 25,
+          "modelRadius": 30.224470448484716,
+          "imageRadius": 24.72447044848481,
+          "residualPixels": -5.499999999999908,
+          "contrast": 0.010973442235754244,
+          "illumination": -0.33202561519079454,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 30,
+          "modelRadius": 29.7299085632695,
+          "imageRadius": 25.129908563269606,
+          "residualPixels": -4.599999999999895,
+          "contrast": 0.01431054679574556,
+          "illumination": -0.357318430455605,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 35,
+          "modelRadius": 29.50005469164509,
+          "imageRadius": 25.600054691645205,
+          "residualPixels": -3.899999999999885,
+          "contrast": 0.011312891313185731,
+          "illumination": -0.38310927879757584,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 40,
+          "modelRadius": 29.46523903733962,
+          "imageRadius": 25.76523903733974,
+          "residualPixels": -3.699999999999882,
+          "contrast": 0.010436414256259149,
+          "illumination": -0.38807034496319814,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 45,
+          "modelRadius": 29.60898290293347,
+          "imageRadius": 39.30898290293378,
+          "residualPixels": 9.700000000000308,
+          "contrast": 0.011443033736477159,
+          "illumination": -0.36189024009616544,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 50,
+          "modelRadius": 29.829899389366297,
+          "imageRadius": 29.629899389366464,
+          "residualPixels": -0.1999999999998323,
+          "contrast": 0.009542719574162821,
+          "illumination": -0.5323845412951855,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 55,
+          "modelRadius": 30.11950334581431,
+          "imageRadius": 31.6195033458145,
+          "residualPixels": 1.5000000000001918,
+          "contrast": 0.006602504400598289,
+          "illumination": -0.48150258811905183,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 60,
+          "modelRadius": 30.757962724447598,
+          "imageRadius": 26.857962724447713,
+          "residualPixels": -3.899999999999885,
+          "contrast": 0.00805322589260341,
+          "illumination": -0.4198401873439235,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 65,
+          "modelRadius": 30.652945646602504,
+          "imageRadius": 30.25294564660267,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.008315159402377037,
+          "illumination": -0.32095438795021125,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 70,
+          "modelRadius": 30.351128630456127,
+          "imageRadius": 28.551128630456272,
+          "residualPixels": -1.799999999999855,
+          "contrast": 0.005571011388164579,
+          "illumination": -0.04737395264873817,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 75,
+          "modelRadius": 29.53647669628107,
+          "imageRadius": 28.936476696281233,
+          "residualPixels": -0.599999999999838,
+          "contrast": 0.006441790319516624,
+          "illumination": -0.048161039534336425,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 80,
+          "modelRadius": 28.870594126057437,
+          "imageRadius": 31.570594126057646,
+          "residualPixels": 2.700000000000209,
+          "contrast": 0.006050337565265152,
+          "illumination": -0.11934384432913347,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 85,
+          "modelRadius": 28.54814055961025,
+          "imageRadius": 26.34814055961039,
+          "residualPixels": -2.1999999999998607,
+          "contrast": 0.006178617075661742,
+          "illumination": -0.20122667770640534,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 90,
+          "modelRadius": 28.889762115972488,
+          "imageRadius": 31.7897621159727,
+          "residualPixels": 2.9000000000002117,
+          "contrast": 0.0055669374303141325,
+          "illumination": -0.07518884163206857,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 95,
+          "modelRadius": 29.639867904973947,
+          "imageRadius": 31.13986790497414,
+          "residualPixels": 1.5000000000001918,
+          "contrast": 0.005005511554989062,
+          "illumination": -0.039259711377644224,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 100,
+          "modelRadius": 29.863344993035234,
+          "imageRadius": 29.363344993035398,
+          "residualPixels": -0.4999999999998366,
+          "contrast": 0.009248021408363189,
+          "illumination": -0.08825476912341806,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 105,
+          "modelRadius": 30.24176076950339,
+          "imageRadius": 28.04176076950353,
+          "residualPixels": -2.1999999999998607,
+          "contrast": 0.007317913346148581,
+          "illumination": -0.016305360595723295,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 110,
+          "modelRadius": 30.638519713014166,
+          "imageRadius": 31.438519713014347,
+          "residualPixels": 0.8000000000001819,
+          "contrast": 0.005679409078316472,
+          "illumination": -0.02239963462644634,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 115,
+          "modelRadius": 31.137168858980328,
+          "imageRadius": 33.237168858980525,
+          "residualPixels": 2.100000000000197,
+          "contrast": 0.009136008384317999,
+          "illumination": 0.0005651402573277342,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 120,
+          "modelRadius": 31.50696334151212,
+          "imageRadius": 32.0069633415123,
+          "residualPixels": 0.5000000000001776,
+          "contrast": 0.007123180402082752,
+          "illumination": 0.10992233362173365,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 125,
+          "modelRadius": 31.455865954800338,
+          "imageRadius": 31.255865954800505,
+          "residualPixels": -0.1999999999998323,
+          "contrast": 0.006502057160473336,
+          "illumination": 0.14339459586518166,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 130,
+          "modelRadius": 31.04168894178343,
+          "imageRadius": 30.841688941783598,
+          "residualPixels": -0.1999999999998323,
+          "contrast": 0.008573042560357135,
+          "illumination": 0.24428333639584315,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 135,
+          "modelRadius": 30.766802220846692,
+          "imageRadius": 31.96680222084688,
+          "residualPixels": 1.2000000000001876,
+          "contrast": 0.007905723011206152,
+          "illumination": 0.24713232179998884,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 140,
+          "modelRadius": 30.221533634048896,
+          "imageRadius": 28.521533634049042,
+          "residualPixels": -1.6999999999998536,
+          "contrast": 0.010447345075346393,
+          "illumination": 0.25978262415407666,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 145,
+          "modelRadius": 29.451062535197956,
+          "imageRadius": 28.25106253519811,
+          "residualPixels": -1.1999999999998465,
+          "contrast": 0.010166256971492104,
+          "illumination": 0.2860530243305407,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 150,
+          "modelRadius": 28.922963931981307,
+          "imageRadius": 29.222963931981482,
+          "residualPixels": 0.3000000000001748,
+          "contrast": 0.009294340988714954,
+          "illumination": 0.39383350659036054,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 155,
+          "modelRadius": 28.533177117034963,
+          "imageRadius": 27.53317711703512,
+          "residualPixels": -0.9999999999998437,
+          "contrast": 0.007361791504077449,
+          "illumination": 0.2822123312298417,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 160,
+          "modelRadius": 28.62361039169931,
+          "imageRadius": 27.523610391699464,
+          "residualPixels": -1.099999999999845,
+          "contrast": 0.008687315909268863,
+          "illumination": 0.2090516768426517,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 165,
+          "modelRadius": 28.892656934797426,
+          "imageRadius": 29.79265693479761,
+          "residualPixels": 0.9000000000001833,
+          "contrast": 0.009346339781899953,
+          "illumination": 0.36250844406472327,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 170,
+          "modelRadius": 29.32508867154407,
+          "imageRadius": 31.625088671544273,
+          "residualPixels": 2.300000000000203,
+          "contrast": 0.011854057187491959,
+          "illumination": 0.36409084061145447,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 175,
+          "modelRadius": 30.12409593587002,
+          "imageRadius": 31.124095935870205,
+          "residualPixels": 1.0000000000001847,
+          "contrast": 0.011864595456362809,
+          "illumination": 0.32376875976720493,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 180,
+          "modelRadius": 30.839829281211014,
+          "imageRadius": 31.33982928121119,
+          "residualPixels": 0.5000000000001776,
+          "contrast": 0.012921644004743014,
+          "illumination": 0.35803492284536204,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 185,
+          "modelRadius": 31.264746162624025,
+          "imageRadius": 30.76474616262419,
+          "residualPixels": -0.4999999999998366,
+          "contrast": 0.0143226223032533,
+          "illumination": 0.40704668039730807,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 190,
+          "modelRadius": 31.688420068719953,
+          "imageRadius": 32.28842006872013,
+          "residualPixels": 0.6000000000001755,
+          "contrast": 0.014545069370554147,
+          "illumination": 0.3788180031060845,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 195,
+          "modelRadius": 32.28871851072695,
+          "imageRadius": 32.88871851072713,
+          "residualPixels": 0.6000000000001791,
+          "contrast": 0.015799234606862844,
+          "illumination": 0.3457235277421521,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 200,
+          "modelRadius": 32.99164566267158,
+          "imageRadius": 32.89164566267175,
+          "residualPixels": -0.09999999999983089,
+          "contrast": 0.018666997213443306,
+          "illumination": 0.3711897923073361,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 205,
+          "modelRadius": 33.40678136061272,
+          "imageRadius": 33.40678136061289,
+          "residualPixels": 1.7053025658242404e-13,
+          "contrast": 0.01621377396487333,
+          "illumination": 0.436029129783565,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 210,
+          "modelRadius": 33.837563487395585,
+          "imageRadius": 33.737563487395754,
+          "residualPixels": -0.09999999999983089,
+          "contrast": 0.018133106663703154,
+          "illumination": 0.3645770944775954,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 215,
+          "modelRadius": 34.19318016506452,
+          "imageRadius": 34.29318016506469,
+          "residualPixels": 0.10000000000017195,
+          "contrast": 0.01637451753916391,
+          "illumination": 0.3733114349745783,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 220,
+          "modelRadius": 34.13894350138327,
+          "imageRadius": 33.13894350138342,
+          "residualPixels": -0.9999999999998437,
+          "contrast": 0.014481472041446057,
+          "illumination": 0.3734108108571851,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 225,
+          "modelRadius": 33.86004746528883,
+          "imageRadius": 33.860047465289,
+          "residualPixels": 1.7053025658242404e-13,
+          "contrast": 0.011829358794343322,
+          "illumination": 0.32129461705006196,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 230,
+          "modelRadius": 33.35613379428045,
+          "imageRadius": 34.156133794280635,
+          "residualPixels": 0.8000000000001819,
+          "contrast": 0.010307716255672842,
+          "illumination": 0.26499844044916326,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 235,
+          "modelRadius": 32.70987212572757,
+          "imageRadius": 34.60987212572777,
+          "residualPixels": 1.9000000000001975,
+          "contrast": 0.010959078211610997,
+          "illumination": 0.2656647465625825,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 240,
+          "modelRadius": 32.12791434732235,
+          "imageRadius": 30.927914347322506,
+          "residualPixels": -1.1999999999998465,
+          "contrast": 0.008788014653910062,
+          "illumination": 0.21392023266685145,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 245,
+          "modelRadius": 31.991141943657507,
+          "imageRadius": 31.59114194365767,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.0125290241097989,
+          "illumination": 0.42410657959180204,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 250,
+          "modelRadius": 31.678226032616372,
+          "imageRadius": 32.77822603261656,
+          "residualPixels": 1.1000000000001862,
+          "contrast": 0.008408162530264818,
+          "illumination": 0.27499183289636403,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 255,
+          "modelRadius": 31.055709918573065,
+          "imageRadius": 32.95570991857326,
+          "residualPixels": 1.9000000000001975,
+          "contrast": 0.006290820277219989,
+          "illumination": 0.10326001413638058,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 260,
+          "modelRadius": 30.089899175877772,
+          "imageRadius": 29.88989917587794,
+          "residualPixels": -0.1999999999998323,
+          "contrast": 0.007805575785181684,
+          "illumination": 0.16637017677627736,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 265,
+          "modelRadius": 29.053726212658702,
+          "imageRadius": 29.253726212658876,
+          "residualPixels": 0.20000000000017337,
+          "contrast": 0.007650368691177242,
+          "illumination": 0.048449763910297206,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 270,
+          "modelRadius": 28.16067573631208,
+          "imageRadius": 27.660675736312243,
+          "residualPixels": -0.4999999999998366,
+          "contrast": 0.00722464520170658,
+          "illumination": 0.02914990573834164,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 275,
+          "modelRadius": 27.538176929117288,
+          "imageRadius": 25.438176929117255,
+          "residualPixels": -2.1000000000000334,
+          "contrast": 0.006040777691615314,
+          "illumination": 0.06851163594198284,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 280,
+          "modelRadius": 27.364097318631146,
+          "imageRadius": 25.76409731863111,
+          "residualPixels": -1.600000000000037,
+          "contrast": 0.007938522300073126,
+          "illumination": 0.09398182842141367,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 285,
+          "modelRadius": 27.32775381216779,
+          "imageRadius": 27.727753812167744,
+          "residualPixels": 0.39999999999995595,
+          "contrast": 0.007603718770250862,
+          "illumination": 0.16054195509257596,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 290,
+          "modelRadius": 27.63077831949858,
+          "imageRadius": 27.63077831949854,
+          "residualPixels": -4.263256414560601e-14,
+          "contrast": 0.008204655108553966,
+          "illumination": -0.07681848688394388,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 295,
+          "modelRadius": 27.832526823565388,
+          "imageRadius": 25.932526823565354,
+          "residualPixels": -1.900000000000034,
+          "contrast": 0.008063444211182654,
+          "illumination": -0.017287393345641222,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 300,
+          "modelRadius": 28.349432724099618,
+          "imageRadius": 26.749432724099766,
+          "residualPixels": -1.5999999999998522,
+          "contrast": 0.007169613513063212,
+          "illumination": -0.3648146314274108,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 305,
+          "modelRadius": 29.18036829592051,
+          "imageRadius": 32.280368295920724,
+          "residualPixels": 3.1000000000002146,
+          "contrast": 0.006551509185048076,
+          "illumination": -0.1266426499058124,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 310,
+          "modelRadius": 29.936355020386024,
+          "imageRadius": 32.33635502038623,
+          "residualPixels": 2.4000000000002046,
+          "contrast": 0.007837546342169256,
+          "illumination": -0.2293757896604613,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 315,
+          "modelRadius": 30.595926392140505,
+          "imageRadius": 31.195926392140684,
+          "residualPixels": 0.6000000000001791,
+          "contrast": 0.007315238048636895,
+          "illumination": 0.06416717138744832,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 320,
+          "modelRadius": 31.15921866178158,
+          "imageRadius": 31.259218661781752,
+          "residualPixels": 0.10000000000017195,
+          "contrast": 0.009964560427438714,
+          "illumination": -0.08334980298437586,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 325,
+          "modelRadius": 31.467599976513956,
+          "imageRadius": 30.36759997651411,
+          "residualPixels": -1.099999999999845,
+          "contrast": 0.007775374249080643,
+          "illumination": -0.2279975673270691,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 330,
+          "modelRadius": 31.658769318564126,
+          "imageRadius": 31.558769318564295,
+          "residualPixels": -0.09999999999983089,
+          "contrast": 0.006752526717897826,
+          "illumination": -0.3819709246556007,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 335,
+          "modelRadius": 31.74319329739263,
+          "imageRadius": 34.04319329739283,
+          "residualPixels": 2.300000000000203,
+          "contrast": 0.00736368723617115,
+          "illumination": -0.36985392774682246,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 340,
+          "modelRadius": 31.78822330878149,
+          "imageRadius": 31.78822330878166,
+          "residualPixels": 1.7053025658242404e-13,
+          "contrast": 0.009224561762992627,
+          "illumination": -0.2479158516087402,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 345,
+          "modelRadius": 31.86436034786494,
+          "imageRadius": 30.9643603478651,
+          "residualPixels": -0.8999999999998423,
+          "contrast": 0.008246513493378939,
+          "illumination": -0.5421086779915844,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 350,
+          "modelRadius": 31.741393852557653,
+          "imageRadius": 32.141393852557826,
+          "residualPixels": 0.40000000000017266,
+          "contrast": 0.006977089809994478,
+          "illumination": -0.5894043390649366,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 355,
+          "modelRadius": 31.871926296703016,
+          "imageRadius": 28.57192629670314,
+          "residualPixels": -3.2999999999998764,
+          "contrast": 0.006381861282351244,
+          "illumination": -0.5894043390649366,
+          "role": "holdout",
+          "eligible": false
+        }
+      ],
+      "seed": [
+        473.0,
+        499.5
+      ],
+      "seedOffsets": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          -2,
+          -2
+        ],
+        [
+          2,
+          -2
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "maximumSeedCenterSeparationPixels": 0.3181976084516408,
+      "maximumVariantHoldoutResidualPixels": 4.599999999999895,
+      "uncertaintyPixels": 6,
+      "coverageInsetPixels": 9,
+      "seedChecks": [
+        {
+          "center": [
+            473.69993148676184,
+            499.6632419233105
+          ],
+          "fitSamples": 11,
+          "holdoutSamples": 16,
+          "fitRms": 0.47193990372426864,
+          "holdoutRms": 1.1797775213997328,
+          "holdoutMax": 2.300000000000203
+        },
+        {
+          "center": [
+            473.55560164790313,
+            499.37966016148624
+          ],
+          "fitSamples": 11,
+          "holdoutSamples": 16,
+          "fitRms": 0.5239708527631994,
+          "holdoutRms": 1.2101136310280936,
+          "holdoutMax": 2.200000000000202
+        },
+        {
+          "center": [
+            473.7405823236312,
+            499.6271646865434
+          ],
+          "fitSamples": 11,
+          "holdoutSamples": 16,
+          "fitRms": 0.5036232357987115,
+          "holdoutRms": 1.1600107758120684,
+          "holdoutMax": 2.300000000000203
+        },
+        {
+          "center": [
+            473.69355858848354,
+            499.65473970460704
+          ],
+          "fitSamples": 11,
+          "holdoutSamples": 16,
+          "fitRms": 0.49175012131994283,
+          "holdoutRms": 1.6236532881129553,
+          "holdoutMax": 4.599999999999895
+        },
+        {
+          "center": [
+            473.72068744496937,
+            499.6303164103396
+          ],
+          "fitSamples": 11,
+          "holdoutSamples": 16,
+          "fitRms": 0.5036232357987115,
+          "holdoutRms": 1.1651180197731519,
+          "holdoutMax": 2.300000000000203
+        }
+      ]
+    },
+    {
+      "id": "c1137339",
+      "time": "1989-08-24T14:37:33.000",
+      "observerLatitude": -27.05,
+      "observerWestLongitude": 97.385,
+      "sunLatitude": -23.66,
+      "sunWestLongitude": 120.904,
+      "rangeKm": 843163.326,
+      "northAzimuthDegrees": 12.960728432154356,
+      "pixelAngleMicroradians": 7.841764329210524,
+      "requestedCkTick": 6317215175.43396,
+      "returnedCkTick": 6317215215.000001,
+      "center": [
+        466.5813375784345,
+        591.0689911870909
+      ],
+      "fitSamples": 12,
+      "holdoutSamples": 15,
+      "fitRms": 0.805191488612124,
+      "holdoutRms": 1.337908816025924,
+      "holdoutMax": 2.0999999999998593,
+      "anchors": [
+        {
+          "angleDegrees": 0,
+          "modelRadius": 32.0283409889725,
+          "imageRadius": 28.22834098897262,
+          "residualPixels": -3.7999999999998835,
+          "contrast": 0.008692520967945717,
+          "illumination": -0.5005840872195796,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 5,
+          "modelRadius": 31.81637385735955,
+          "imageRadius": 27.41637385735966,
+          "residualPixels": -4.399999999999892,
+          "contrast": 0.009477200196750586,
+          "illumination": -0.3667515234322602,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 10,
+          "modelRadius": 31.497489097692863,
+          "imageRadius": 28.197489097692987,
+          "residualPixels": -3.2999999999998764,
+          "contrast": 0.008575774951943563,
+          "illumination": -0.23767426427486957,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 15,
+          "modelRadius": 31.152835033709877,
+          "imageRadius": 26.052835033709975,
+          "residualPixels": -5.099999999999902,
+          "contrast": 0.010498295345702211,
+          "illumination": -0.5057065623786463,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 20,
+          "modelRadius": 30.847309614058236,
+          "imageRadius": 27.047309614058353,
+          "residualPixels": -3.7999999999998835,
+          "contrast": 0.010566602334891373,
+          "illumination": -0.4284828179573233,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 25,
+          "modelRadius": 30.414697702484847,
+          "imageRadius": 26.41469770248496,
+          "residualPixels": -3.9999999999998863,
+          "contrast": 0.01165753216542723,
+          "illumination": -0.35572951064036984,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 30,
+          "modelRadius": 29.899934640798655,
+          "imageRadius": 26.199934640798773,
+          "residualPixels": -3.699999999999882,
+          "contrast": 0.013161531061831997,
+          "illumination": -0.35572951064036984,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 35,
+          "modelRadius": 29.898943495625076,
+          "imageRadius": 26.898943495625204,
+          "residualPixels": -2.999999999999872,
+          "contrast": 0.013333203692755827,
+          "illumination": -0.5426949794988911,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 40,
+          "modelRadius": 29.97147340349305,
+          "imageRadius": 27.571473403493187,
+          "residualPixels": -2.3999999999998636,
+          "contrast": 0.014506135006834082,
+          "illumination": -0.4339392188503415,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 45,
+          "modelRadius": 29.98733681016986,
+          "imageRadius": 30.187336810170034,
+          "residualPixels": 0.20000000000017337,
+          "contrast": 0.00952935631743497,
+          "illumination": -0.4339392188503415,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 50,
+          "modelRadius": 30.17225100346106,
+          "imageRadius": 32.07225100346126,
+          "residualPixels": 1.900000000000201,
+          "contrast": 0.012079685609893403,
+          "illumination": -0.44674815239843535,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 55,
+          "modelRadius": 30.778449806245362,
+          "imageRadius": 31.97844980624555,
+          "residualPixels": 1.2000000000001876,
+          "contrast": 0.009506551715064785,
+          "illumination": -0.5007289107705595,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 60,
+          "modelRadius": 31.447406663738214,
+          "imageRadius": 32.947406663738406,
+          "residualPixels": 1.5000000000001918,
+          "contrast": 0.008315717998494676,
+          "illumination": 0.0553754832007714,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 65,
+          "modelRadius": 31.08383209308036,
+          "imageRadius": 32.48383209308055,
+          "residualPixels": 1.4000000000001904,
+          "contrast": 0.008672141127732728,
+          "illumination": -0.33636000788944154,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 70,
+          "modelRadius": 30.868115980221784,
+          "imageRadius": 32.068115980221975,
+          "residualPixels": 1.2000000000001911,
+          "contrast": 0.009614514976853257,
+          "illumination": -0.051840784122613615,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 75,
+          "modelRadius": 30.053845122912964,
+          "imageRadius": 32.25384512291316,
+          "residualPixels": 2.2000000000001982,
+          "contrast": 0.01012300884088448,
+          "illumination": -0.0467732903737027,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 80,
+          "modelRadius": 29.38373090881268,
+          "imageRadius": 32.8837309088129,
+          "residualPixels": 3.5000000000002203,
+          "contrast": 0.010120634251286141,
+          "illumination": -0.1186550253796852,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 85,
+          "modelRadius": 28.977667310646314,
+          "imageRadius": 31.977667310646527,
+          "residualPixels": 3.000000000000213,
+          "contrast": 0.008531239260276475,
+          "illumination": -0.18726866600171427,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 90,
+          "modelRadius": 29.239811454432857,
+          "imageRadius": 32.839811454433075,
+          "residualPixels": 3.600000000000218,
+          "contrast": 0.010961798880576915,
+          "illumination": -0.10440582222525824,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 95,
+          "modelRadius": 29.972136073177815,
+          "imageRadius": 32.47213607317802,
+          "residualPixels": 2.500000000000206,
+          "contrast": 0.009952994828984426,
+          "illumination": -0.04735513269978936,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 100,
+          "modelRadius": 30.282980890374187,
+          "imageRadius": 31.78298089037438,
+          "residualPixels": 1.5000000000001918,
+          "contrast": 0.009846507399360594,
+          "illumination": -0.05337281828937668,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 105,
+          "modelRadius": 30.666567881794123,
+          "imageRadius": 33.76656788179434,
+          "residualPixels": 3.1000000000002146,
+          "contrast": 0.009874146489549011,
+          "illumination": -0.014718837312178823,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 110,
+          "modelRadius": 31.063269242942315,
+          "imageRadius": 34.56326924294254,
+          "residualPixels": 3.500000000000224,
+          "contrast": 0.010313357153461563,
+          "illumination": 0.029730421159271714,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 115,
+          "modelRadius": 31.563396567819986,
+          "imageRadius": 33.86339656782019,
+          "residualPixels": 2.300000000000203,
+          "contrast": 0.014784662038287683,
+          "illumination": 0.0059781805118453435,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 120,
+          "modelRadius": 31.96351517247247,
+          "imageRadius": 32.76351517247265,
+          "residualPixels": 0.8000000000001819,
+          "contrast": 0.017635678428577346,
+          "illumination": -0.07036778792723086,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 125,
+          "modelRadius": 31.944894707715044,
+          "imageRadius": 32.44489470771522,
+          "residualPixels": 0.5000000000001776,
+          "contrast": 0.01588678672441149,
+          "illumination": 0.15973726301292085,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 130,
+          "modelRadius": 31.554751057468675,
+          "imageRadius": 31.15475105746884,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.018066142302558028,
+          "illumination": 0.26624294580027374,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 135,
+          "modelRadius": 31.297847748703255,
+          "imageRadius": 30.29784774870341,
+          "residualPixels": -0.9999999999998437,
+          "contrast": 0.018377133708898607,
+          "illumination": 0.2712733138801887,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 140,
+          "modelRadius": 30.798416878875564,
+          "imageRadius": 29.89841687887572,
+          "residualPixels": -0.8999999999998423,
+          "contrast": 0.01782833303875702,
+          "illumination": 0.28462424391060576,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 145,
+          "modelRadius": 30.08357700168807,
+          "imageRadius": 29.683577001688235,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.018697053412999765,
+          "illumination": 0.3127509045009068,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 150,
+          "modelRadius": 29.536576146671244,
+          "imageRadius": 29.636576146671416,
+          "residualPixels": 0.10000000000017195,
+          "contrast": 0.01624555600981404,
+          "illumination": 0.42048765658922116,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 155,
+          "modelRadius": 29.154653477455184,
+          "imageRadius": 29.954653477455366,
+          "residualPixels": 0.8000000000001819,
+          "contrast": 0.018162469646683336,
+          "illumination": 0.3084009697422363,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 160,
+          "modelRadius": 29.198338288109028,
+          "imageRadius": 30.298338288109214,
+          "residualPixels": 1.1000000000001862,
+          "contrast": 0.018876372552662696,
+          "illumination": 0.42364129425678576,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 165,
+          "modelRadius": 29.517745288712064,
+          "imageRadius": 30.51774528871225,
+          "residualPixels": 1.0000000000001847,
+          "contrast": 0.01663790338142724,
+          "illumination": 0.38875546649365894,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 170,
+          "modelRadius": 29.887347448460645,
+          "imageRadius": 31.487347448460838,
+          "residualPixels": 1.6000000000001933,
+          "contrast": 0.01886572484430203,
+          "illumination": 0.38934885834221744,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 175,
+          "modelRadius": 30.701316107363407,
+          "imageRadius": 31.701316107363592,
+          "residualPixels": 1.0000000000001847,
+          "contrast": 0.020400817260480878,
+          "illumination": 0.3482149854848092,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 180,
+          "modelRadius": 31.46573395663047,
+          "imageRadius": 31.765733956630644,
+          "residualPixels": 0.3000000000001748,
+          "contrast": 0.018856517797768667,
+          "illumination": 0.43258463372088873,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 185,
+          "modelRadius": 31.8011027782437,
+          "imageRadius": 32.30110277824387,
+          "residualPixels": 0.5000000000001741,
+          "contrast": 0.01990933545822475,
+          "illumination": 0.35591126598108913,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 190,
+          "modelRadius": 32.24097398691209,
+          "imageRadius": 33.24097398691227,
+          "residualPixels": 1.0000000000001847,
+          "contrast": 0.020125301463892943,
+          "illumination": 0.40742153925120383,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 195,
+          "modelRadius": 32.64833924575866,
+          "imageRadius": 33.64833924575885,
+          "residualPixels": 1.0000000000001847,
+          "contrast": 0.016201917104608894,
+          "illumination": 0.37479039543997417,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 200,
+          "modelRadius": 33.38158676586001,
+          "imageRadius": 33.881586765860185,
+          "residualPixels": 0.5000000000001776,
+          "contrast": 0.01521003984079949,
+          "illumination": 0.37673650592610186,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 205,
+          "modelRadius": 33.827052220117,
+          "imageRadius": 33.727052220117166,
+          "residualPixels": -0.09999999999983089,
+          "contrast": 0.01793916346100187,
+          "illumination": 0.39043516543099255,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 210,
+          "modelRadius": 34.237429780379536,
+          "imageRadius": 33.6374297803797,
+          "residualPixels": -0.599999999999838,
+          "contrast": 0.01476306402242349,
+          "illumination": 0.3902322455946664,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 215,
+          "modelRadius": 34.602777847794805,
+          "imageRadius": 33.202777847794955,
+          "residualPixels": -1.3999999999998494,
+          "contrast": 0.013991229178348833,
+          "illumination": 0.2859908686079562,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 220,
+          "modelRadius": 34.55282051565889,
+          "imageRadius": 33.85282051565905,
+          "residualPixels": -0.6999999999998394,
+          "contrast": 0.01615654484933693,
+          "illumination": 0.39651567746125616,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 225,
+          "modelRadius": 34.299536091300524,
+          "imageRadius": 32.899536091300675,
+          "residualPixels": -1.3999999999998494,
+          "contrast": 0.015439228761156384,
+          "illumination": 0.4243660162097609,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 230,
+          "modelRadius": 33.88608529535938,
+          "imageRadius": 31.88608529535952,
+          "residualPixels": -1.999999999999858,
+          "contrast": 0.013489770315948817,
+          "illumination": 0.27744140306862614,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 235,
+          "modelRadius": 33.21954651943045,
+          "imageRadius": 31.519546519430598,
+          "residualPixels": -1.6999999999998536,
+          "contrast": 0.012641555139114117,
+          "illumination": 0.2790648919986323,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 240,
+          "modelRadius": 32.651666370469734,
+          "imageRadius": 30.85166637046988,
+          "residualPixels": -1.799999999999855,
+          "contrast": 0.015061854003483715,
+          "illumination": 0.34007758594585824,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 245,
+          "modelRadius": 32.42688175808816,
+          "imageRadius": 30.326881758088298,
+          "residualPixels": -2.0999999999998593,
+          "contrast": 0.012021201356998946,
+          "illumination": 0.43291175642565255,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 250,
+          "modelRadius": 32.18027559458887,
+          "imageRadius": 30.78027559458902,
+          "residualPixels": -1.3999999999998494,
+          "contrast": 0.012356229664991938,
+          "illumination": 0.18642081564461288,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 255,
+          "modelRadius": 31.58672026141585,
+          "imageRadius": 29.286720261415986,
+          "residualPixels": -2.299999999999862,
+          "contrast": 0.013870611879133873,
+          "illumination": 0.1049025139388971,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 260,
+          "modelRadius": 30.625863207319423,
+          "imageRadius": 29.02586320731957,
+          "residualPixels": -1.5999999999998522,
+          "contrast": 0.014316444382598995,
+          "illumination": 0.14530332221267556,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 265,
+          "modelRadius": 29.55514590633163,
+          "imageRadius": 28.355145906331785,
+          "residualPixels": -1.1999999999998465,
+          "contrast": 0.012069783726671493,
+          "illumination": 0.009319132360676219,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 270,
+          "modelRadius": 28.63077659568231,
+          "imageRadius": 27.23077659568246,
+          "residualPixels": -1.3999999999998494,
+          "contrast": 0.014225733691218916,
+          "illumination": 0.02137652261594103,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 275,
+          "modelRadius": 27.966091842965458,
+          "imageRadius": 27.566091842965623,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.010364575563744491,
+          "illumination": 0.06265231503419016,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 280,
+          "modelRadius": 27.75564560355662,
+          "imageRadius": 27.15564560355658,
+          "residualPixels": -0.6000000000000405,
+          "contrast": 0.009530064386426746,
+          "illumination": 0.08763554408081703,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 285,
+          "modelRadius": 27.727953138241592,
+          "imageRadius": 27.92795313824155,
+          "residualPixels": 0.19999999999995666,
+          "contrast": 0.012538908501158227,
+          "illumination": -0.08258985610724673,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 290,
+          "modelRadius": 27.98438988093455,
+          "imageRadius": 28.384389880934727,
+          "residualPixels": 0.4000000000001762,
+          "contrast": 0.013996142832480749,
+          "illumination": -0.08481257390358965,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 295,
+          "modelRadius": 28.179352290399912,
+          "imageRadius": 28.07935229040008,
+          "residualPixels": -0.09999999999983089,
+          "contrast": 0.011181934441115763,
+          "illumination": -0.024886503607966515,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 300,
+          "modelRadius": 28.699087662130733,
+          "imageRadius": 29.999087662130922,
+          "residualPixels": 1.300000000000189,
+          "contrast": 0.012169143427959963,
+          "illumination": -0.3696163008513723,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 305,
+          "modelRadius": 29.522487073871417,
+          "imageRadius": 30.4224870738716,
+          "residualPixels": 0.9000000000001833,
+          "contrast": 0.012031973715085142,
+          "illumination": -0.13355952849671643,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 310,
+          "modelRadius": 30.27411272131574,
+          "imageRadius": 31.67411272131593,
+          "residualPixels": 1.4000000000001904,
+          "contrast": 0.011472981556936395,
+          "illumination": 0.16655120357671294,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 315,
+          "modelRadius": 30.960018881541174,
+          "imageRadius": 31.860018881541357,
+          "residualPixels": 0.9000000000001833,
+          "contrast": 0.014070191121032478,
+          "illumination": 0.04925587605323539,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 320,
+          "modelRadius": 31.592966431681887,
+          "imageRadius": 32.092966431682065,
+          "residualPixels": 0.5000000000001776,
+          "contrast": 0.00987759320102385,
+          "illumination": -0.10423115181842826,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 325,
+          "modelRadius": 31.932075527317767,
+          "imageRadius": 31.43207552731793,
+          "residualPixels": -0.4999999999998366,
+          "contrast": 0.012923881139894122,
+          "illumination": -0.2495638898989071,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 330,
+          "modelRadius": 32.127529291313365,
+          "imageRadius": 31.927529291313533,
+          "residualPixels": -0.1999999999998323,
+          "contrast": 0.00921144778969387,
+          "illumination": -0.22919706268958612,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 335,
+          "modelRadius": 32.234132986176455,
+          "imageRadius": 32.53413298617663,
+          "residualPixels": 0.3000000000001748,
+          "contrast": 0.010678373203064775,
+          "illumination": -0.3939226152572406,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 340,
+          "modelRadius": 32.251757302457456,
+          "imageRadius": 32.35175730245763,
+          "residualPixels": 0.10000000000017195,
+          "contrast": 0.009702063998277534,
+          "illumination": -0.27725913476838615,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 345,
+          "modelRadius": 32.19644958797518,
+          "imageRadius": 31.29644958797534,
+          "residualPixels": -0.8999999999998423,
+          "contrast": 0.009564648201263716,
+          "illumination": -0.5678862441841369,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 350,
+          "modelRadius": 32.085733069110276,
+          "imageRadius": 34.085733069110475,
+          "residualPixels": 2.000000000000199,
+          "contrast": 0.009590340744838586,
+          "illumination": -0.3340294736590509,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 355,
+          "modelRadius": 32.17806847281168,
+          "imageRadius": 30.478068472811827,
+          "residualPixels": -1.6999999999998536,
+          "contrast": 0.007547224524019255,
+          "illumination": -0.1922159226575175,
+          "role": "holdout",
+          "eligible": false
+        }
+      ],
+      "seed": [
+        466.5,
+        593.0
+      ],
+      "seedOffsets": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          -2,
+          -2
+        ],
+        [
+          2,
+          -2
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "maximumSeedCenterSeparationPixels": 0.022651616846572263,
+      "maximumVariantHoldoutResidualPixels": 2.1999999999998607,
+      "uncertaintyPixels": 6,
+      "coverageInsetPixels": 9,
+      "seedChecks": [
+        {
+          "center": [
+            466.5813375784345,
+            591.0689911870909
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.805191488612124,
+          "holdoutRms": 1.337908816025924,
+          "holdoutMax": 2.0999999999998593
+        },
+        {
+          "center": [
+            466.5928317098552,
+            591.0620232359753
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.7958224257542719,
+          "holdoutRms": 1.3542525613783756,
+          "holdoutMax": 2.1999999999998607
+        },
+        {
+          "center": [
+            466.5687810014435,
+            591.0662573886358
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.7958224257542651,
+          "holdoutRms": 1.3480850616089555,
+          "holdoutMax": 2.0999999999998593
+        },
+        {
+          "center": [
+            466.56678544770136,
+            591.0808837130277
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.8005206639015671,
+          "holdoutRms": 1.3379088160259238,
+          "holdoutMax": 2.0999999999998593
+        },
+        {
+          "center": [
+            466.59311024333556,
+            591.088343192333
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.7852812659593672,
+          "holdoutRms": 1.331164903383458,
+          "holdoutMax": 2.0999999999998593
+        }
+      ]
+    },
+    {
+      "id": "c1137350",
+      "time": "1989-08-24T14:46:21.000",
+      "observerLatitude": -27.148,
+      "observerWestLongitude": 99.3,
+      "sunLatitude": -23.66,
+      "sunWestLongitude": 122.857,
+      "rangeKm": 830648.272,
+      "northAzimuthDegrees": 12.96074677895093,
+      "pixelAngleMicroradians": 7.841764329210524,
+      "requestedCkTick": 6317223975.445325,
+      "returnedCkTick": 6317224015.0,
+      "center": [
+        392.7015186610059,
+        375.5350675293314
+      ],
+      "fitSamples": 12,
+      "holdoutSamples": 15,
+      "fitRms": 0.9751068317540645,
+      "holdoutRms": 1.642761902001192,
+      "holdoutMax": 2.999999999999872,
+      "anchors": [
+        {
+          "angleDegrees": 0,
+          "modelRadius": 32.354147646203344,
+          "imageRadius": 29.95414764620348,
+          "residualPixels": -2.3999999999998636,
+          "contrast": 0.011265478723280091,
+          "illumination": -0.5921116996010565,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 5,
+          "modelRadius": 32.07765902550926,
+          "imageRadius": 29.877659025509402,
+          "residualPixels": -2.1999999999998607,
+          "contrast": 0.008887029035206225,
+          "illumination": -0.3766138108675159,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 10,
+          "modelRadius": 31.731335728043767,
+          "imageRadius": 29.73133572804391,
+          "residualPixels": -1.999999999999858,
+          "contrast": 0.00984438490474531,
+          "illumination": -0.3766138108675159,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 15,
+          "modelRadius": 31.323257472245952,
+          "imageRadius": 26.723257472246058,
+          "residualPixels": -4.599999999999895,
+          "contrast": 0.013981524084760125,
+          "illumination": -0.5311151130926272,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 20,
+          "modelRadius": 31.01395393221953,
+          "imageRadius": 28.013953932219657,
+          "residualPixels": -2.999999999999872,
+          "contrast": 0.009391806960553393,
+          "illumination": -0.4524484408467477,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 25,
+          "modelRadius": 30.67641114283915,
+          "imageRadius": 27.17641114283927,
+          "residualPixels": -3.499999999999879,
+          "contrast": 0.012410455454042787,
+          "illumination": -0.37867467207913885,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 30,
+          "modelRadius": 30.176116103517668,
+          "imageRadius": 26.976116103517793,
+          "residualPixels": -3.199999999999875,
+          "contrast": 0.011066011540957852,
+          "illumination": -0.38824415253783634,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 35,
+          "modelRadius": 30.587725199834566,
+          "imageRadius": 26.487725199834678,
+          "residualPixels": -4.099999999999888,
+          "contrast": 0.008370322395383826,
+          "illumination": -0.5650507626163102,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 40,
+          "modelRadius": 30.641090361832507,
+          "imageRadius": 26.64109036183262,
+          "residualPixels": -3.9999999999998863,
+          "contrast": 0.012187299982216295,
+          "illumination": -0.4551307477480324,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 45,
+          "modelRadius": 30.5963867044101,
+          "imageRadius": 29.09638670441025,
+          "residualPixels": -1.4999999999998508,
+          "contrast": 0.008362576144729322,
+          "illumination": -0.4551307477480324,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 50,
+          "modelRadius": 30.770806807935053,
+          "imageRadius": 31.070806807935227,
+          "residualPixels": 0.3000000000001748,
+          "contrast": 0.011497501294772922,
+          "illumination": -0.4648850505902822,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 55,
+          "modelRadius": 31.356000027266163,
+          "imageRadius": 32.956000027266356,
+          "residualPixels": 1.6000000000001933,
+          "contrast": 0.008871754737987245,
+          "illumination": -0.5190610061871404,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 60,
+          "modelRadius": 32.09000580856096,
+          "imageRadius": 26.190005808561047,
+          "residualPixels": -5.899999999999913,
+          "contrast": 0.017021001306309017,
+          "illumination": 0.05003042281775644,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 65,
+          "modelRadius": 31.588167081605704,
+          "imageRadius": 32.18816708160588,
+          "residualPixels": 0.6000000000001791,
+          "contrast": 0.0074079454772303065,
+          "illumination": -0.10686341929550042,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 70,
+          "modelRadius": 31.412947606630823,
+          "imageRadius": 28.712947606630955,
+          "residualPixels": -2.699999999999868,
+          "contrast": 0.00991602924714938,
+          "illumination": -0.05675337435303668,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 75,
+          "modelRadius": 30.67794566571212,
+          "imageRadius": 29.17794566571227,
+          "residualPixels": -1.4999999999998508,
+          "contrast": 0.008694496148478089,
+          "illumination": -0.044922140623992135,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 80,
+          "modelRadius": 29.965574725900094,
+          "imageRadius": 31.565574725900287,
+          "residualPixels": 1.6000000000001933,
+          "contrast": 0.0088105205395104,
+          "illumination": -0.11742970758893256,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 85,
+          "modelRadius": 29.4288945217413,
+          "imageRadius": 33.62889452174153,
+          "residualPixels": 4.20000000000023,
+          "contrast": 0.009891671836146112,
+          "illumination": -0.18815226293539983,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 90,
+          "modelRadius": 29.550271149086033,
+          "imageRadius": 32.750271149086245,
+          "residualPixels": 3.2000000000002125,
+          "contrast": 0.008535414476994643,
+          "illumination": -0.11138328841401124,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 95,
+          "modelRadius": 30.23487296674224,
+          "imageRadius": 30.93487296674242,
+          "residualPixels": 0.7000000000001805,
+          "contrast": 0.007800610232853741,
+          "illumination": -0.054932186233730196,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 100,
+          "modelRadius": 30.67840010606209,
+          "imageRadius": 34.17840010606231,
+          "residualPixels": 3.500000000000224,
+          "contrast": 0.007538533065910704,
+          "illumination": -0.04895083413478607,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 105,
+          "modelRadius": 31.06515039171327,
+          "imageRadius": 34.56515039171349,
+          "residualPixels": 3.5000000000002167,
+          "contrast": 0.00795632612625866,
+          "illumination": -0.01270139534963044,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 110,
+          "modelRadius": 31.456650508309153,
+          "imageRadius": 35.45665050830938,
+          "residualPixels": 4.000000000000227,
+          "contrast": 0.011635946219069007,
+          "illumination": -0.04002443985799675,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 115,
+          "modelRadius": 31.95023196884055,
+          "imageRadius": 34.750231968840765,
+          "residualPixels": 2.800000000000214,
+          "contrast": 0.016339967436050984,
+          "illumination": 0.01176850873994617,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 120,
+          "modelRadius": 32.40823537675341,
+          "imageRadius": 34.0082353767536,
+          "residualPixels": 1.6000000000001933,
+          "contrast": 0.01622139766774979,
+          "illumination": 0.0734894872335265,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 125,
+          "modelRadius": 32.466823869411684,
+          "imageRadius": 33.66682386941187,
+          "residualPixels": 1.2000000000001876,
+          "contrast": 0.014350988522893118,
+          "illumination": 0.17616619634169922,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 130,
+          "modelRadius": 32.10041918356971,
+          "imageRadius": 31.600419183569876,
+          "residualPixels": -0.4999999999998366,
+          "contrast": 0.015470150158022281,
+          "illumination": 0.2880703930894028,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 135,
+          "modelRadius": 31.873451564183064,
+          "imageRadius": 31.47345156418323,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.018270210684473202,
+          "illumination": 0.29522606194728496,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 140,
+          "modelRadius": 31.40462201043321,
+          "imageRadius": 31.004622010433376,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.01618809531324305,
+          "illumination": 0.17312216282128395,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 145,
+          "modelRadius": 30.803186899765258,
+          "imageRadius": 30.403186899765423,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.018904039561471714,
+          "illumination": 0.35202575352686793,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 150,
+          "modelRadius": 30.174618772197903,
+          "imageRadius": 30.374618772198076,
+          "residualPixels": 0.20000000000017337,
+          "contrast": 0.017268287389196196,
+          "illumination": 0.446684096856077,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 155,
+          "modelRadius": 29.822700190391014,
+          "imageRadius": 30.622700190391196,
+          "residualPixels": 0.8000000000001819,
+          "contrast": 0.01594050976893678,
+          "illumination": 0.38716822338138457,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 160,
+          "modelRadius": 29.730536097475923,
+          "imageRadius": 31.130536097476114,
+          "residualPixels": 1.4000000000001904,
+          "contrast": 0.016355323004798642,
+          "illumination": 0.44881750619992355,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 165,
+          "modelRadius": 30.086208213764174,
+          "imageRadius": 31.08620821376436,
+          "residualPixels": 1.0000000000001847,
+          "contrast": 0.017419929516960645,
+          "illumination": 0.41460557008890253,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 170,
+          "modelRadius": 30.35362334465598,
+          "imageRadius": 31.653623344656168,
+          "residualPixels": 1.300000000000189,
+          "contrast": 0.01582877327009178,
+          "illumination": 0.3237611375576207,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 175,
+          "modelRadius": 31.24104333848746,
+          "imageRadius": 32.441043338487646,
+          "residualPixels": 1.200000000000184,
+          "contrast": 0.019490812161856337,
+          "illumination": 0.37237222678962056,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 180,
+          "modelRadius": 31.9693796317592,
+          "imageRadius": 32.16937963175937,
+          "residualPixels": 0.20000000000016982,
+          "contrast": 0.016934168212014336,
+          "illumination": 0.45893547964036,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 185,
+          "modelRadius": 32.40786768998406,
+          "imageRadius": 32.907867689984236,
+          "residualPixels": 0.5000000000001776,
+          "contrast": 0.018633761145572476,
+          "illumination": 0.3849032160302507,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 190,
+          "modelRadius": 32.756963442995215,
+          "imageRadius": 33.5569634429954,
+          "residualPixels": 0.8000000000001819,
+          "contrast": 0.02062507580964056,
+          "illumination": 0.34865452355478216,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 195,
+          "modelRadius": 32.982483003665074,
+          "imageRadius": 33.98248300366526,
+          "residualPixels": 1.0000000000001847,
+          "contrast": 0.016327087334585176,
+          "illumination": 0.3710510836877436,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 200,
+          "modelRadius": 33.73934701646379,
+          "imageRadius": 33.83934701646396,
+          "residualPixels": 0.10000000000017195,
+          "contrast": 0.016749182600882772,
+          "illumination": 0.405451555753938,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 205,
+          "modelRadius": 34.189829660429666,
+          "imageRadius": 34.48982966042984,
+          "residualPixels": 0.3000000000001748,
+          "contrast": 0.016154707796360954,
+          "illumination": 0.4181992453929682,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 210,
+          "modelRadius": 34.56961930078394,
+          "imageRadius": 34.769619300784115,
+          "residualPixels": 0.20000000000017337,
+          "contrast": 0.013329615387232893,
+          "illumination": 0.4169267210562583,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 215,
+          "modelRadius": 34.967521850076,
+          "imageRadius": 33.56752185007615,
+          "residualPixels": -1.3999999999998494,
+          "contrast": 0.015213199829296226,
+          "illumination": 0.41847869209123384,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 220,
+          "modelRadius": 35.015650841714184,
+          "imageRadius": 33.715650841714336,
+          "residualPixels": -1.299999999999848,
+          "contrast": 0.013605886304814976,
+          "illumination": 0.3162031301446325,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 225,
+          "modelRadius": 34.7417210779365,
+          "imageRadius": 35.24172107793668,
+          "residualPixels": 0.5000000000001776,
+          "contrast": 0.013676584993048573,
+          "illumination": 0.31697958619059374,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 230,
+          "modelRadius": 34.430367496271884,
+          "imageRadius": 31.630367496272015,
+          "residualPixels": -2.7999999999998693,
+          "contrast": 0.011508588346499399,
+          "illumination": 0.3524692403039344,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 235,
+          "modelRadius": 33.81488746790017,
+          "imageRadius": 30.9148874679003,
+          "residualPixels": -2.8999999999998707,
+          "contrast": 0.011379854500477932,
+          "illumination": 0.1724539543018228,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 240,
+          "modelRadius": 33.20621400610558,
+          "imageRadius": 31.006214006105722,
+          "residualPixels": -2.1999999999998607,
+          "contrast": 0.010977673158225485,
+          "illumination": 0.34524283036685044,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 245,
+          "modelRadius": 32.81343933819411,
+          "imageRadius": 31.113439338194254,
+          "residualPixels": -1.6999999999998536,
+          "contrast": 0.011860132213759776,
+          "illumination": 0.4408618867971516,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 250,
+          "modelRadius": 32.74410489366575,
+          "imageRadius": 29.744104893665877,
+          "residualPixels": -2.999999999999872,
+          "contrast": 0.010528399897172552,
+          "illumination": 0.19275736913840014,
+          "role": "holdout",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 255,
+          "modelRadius": 32.20731585960211,
+          "imageRadius": 27.707315859602218,
+          "residualPixels": -4.499999999999893,
+          "contrast": 0.009143345611265122,
+          "illumination": 0.10509451790575858,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 260,
+          "modelRadius": 31.306705153841353,
+          "imageRadius": 29.406705153841497,
+          "residualPixels": -1.8999999999998565,
+          "contrast": 0.011368234641618007,
+          "illumination": 0.13977881085487354,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 265,
+          "modelRadius": 30.184502352530753,
+          "imageRadius": 29.484502352530914,
+          "residualPixels": -0.6999999999998394,
+          "contrast": 0.008780592359810761,
+          "illumination": -0.02703666523930809,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 270,
+          "modelRadius": 29.2164306111905,
+          "imageRadius": 27.616430611190648,
+          "residualPixels": -1.5999999999998522,
+          "contrast": 0.009014660356663725,
+          "illumination": -0.03422710330510853,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 275,
+          "modelRadius": 28.42508459723298,
+          "imageRadius": 29.525084597233167,
+          "residualPixels": 1.1000000000001862,
+          "contrast": 0.007577772797451698,
+          "illumination": 0.05635384030995949,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 280,
+          "modelRadius": 28.180448198237386,
+          "imageRadius": 27.280448198237544,
+          "residualPixels": -0.8999999999998423,
+          "contrast": 0.0069751166263801595,
+          "illumination": 0.08083136222528353,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 285,
+          "modelRadius": 28.10517327982741,
+          "imageRadius": 28.405173279827586,
+          "residualPixels": 0.3000000000001748,
+          "contrast": 0.009886847979401894,
+          "illumination": -0.08559960122826482,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 290,
+          "modelRadius": 28.335075693398693,
+          "imageRadius": 26.135075693398832,
+          "residualPixels": -2.1999999999998607,
+          "contrast": 0.011189442456355742,
+          "illumination": -0.0930791035147997,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 295,
+          "modelRadius": 28.49634626816997,
+          "imageRadius": 28.49634626817014,
+          "residualPixels": 1.7053025658242404e-13,
+          "contrast": 0.0094968477444047,
+          "illumination": -0.03282224754260127,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 300,
+          "modelRadius": 28.976054833632464,
+          "imageRadius": 30.576054833632657,
+          "residualPixels": 1.6000000000001933,
+          "contrast": 0.00979006928920774,
+          "illumination": -0.37441503045434077,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 305,
+          "modelRadius": 29.77659368189371,
+          "imageRadius": 31.77659368189391,
+          "residualPixels": 2.000000000000199,
+          "contrast": 0.009514303658578502,
+          "illumination": 0.0725211164730934,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 310,
+          "modelRadius": 30.544659847786814,
+          "imageRadius": 32.54465984778702,
+          "residualPixels": 2.0000000000002025,
+          "contrast": 0.009513360024040407,
+          "illumination": 0.15571141261368643,
+          "role": "fit",
+          "eligible": true
+        },
+        {
+          "angleDegrees": 315,
+          "modelRadius": 31.2203934131718,
+          "imageRadius": 31.22039341317197,
+          "residualPixels": 1.7053025658242404e-13,
+          "contrast": 0.011389372860302885,
+          "illumination": 0.03402737424182278,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 320,
+          "modelRadius": 32.00740366927913,
+          "imageRadius": 31.007403669279284,
+          "residualPixels": -0.9999999999998437,
+          "contrast": 0.01164774444056766,
+          "illumination": -0.1660716963525164,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 325,
+          "modelRadius": 32.35596446313056,
+          "imageRadius": 31.755964463130724,
+          "residualPixels": -0.599999999999838,
+          "contrast": 0.009285268561131332,
+          "illumination": -0.2710252452227745,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 330,
+          "modelRadius": 32.607660631395014,
+          "imageRadius": 32.20766063139518,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.00800226112459509,
+          "illumination": -0.25239350124438176,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 335,
+          "modelRadius": 32.719451323072505,
+          "imageRadius": 32.41945132307267,
+          "residualPixels": -0.29999999999983373,
+          "contrast": 0.008367095147801644,
+          "illumination": -0.27379616401960005,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 340,
+          "modelRadius": 32.76072546983858,
+          "imageRadius": 31.960725469838742,
+          "residualPixels": -0.7999999999998408,
+          "contrast": 0.009808577456563416,
+          "illumination": -0.3062248083927608,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 345,
+          "modelRadius": 32.492179824126524,
+          "imageRadius": 33.0921798241267,
+          "residualPixels": 0.6000000000001791,
+          "contrast": 0.010821637708962627,
+          "illumination": -0.27791539775307483,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 350,
+          "modelRadius": 32.41675029852932,
+          "imageRadius": 32.01675029852949,
+          "residualPixels": -0.39999999999983515,
+          "contrast": 0.008438862743201953,
+          "illumination": -0.3236856477345337,
+          "role": "holdout",
+          "eligible": false
+        },
+        {
+          "angleDegrees": 355,
+          "modelRadius": 32.50212922400127,
+          "imageRadius": 31.102129224001423,
+          "residualPixels": -1.3999999999998494,
+          "contrast": 0.007732642140012848,
+          "illumination": -0.22212232033835422,
+          "role": "holdout",
+          "eligible": false
+        }
+      ],
+      "seed": [
+        392.0,
+        377.5
+      ],
+      "seedOffsets": [
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          -2,
+          -2
+        ],
+        [
+          2,
+          -2
+        ],
+        [
+          -2,
+          2
+        ]
+      ],
+      "maximumSeedCenterSeparationPixels": 0.037103884088027395,
+      "maximumVariantHoldoutResidualPixels": 2.999999999999872,
+      "uncertaintyPixels": 6,
+      "coverageInsetPixels": 9,
+      "seedChecks": [
+        {
+          "center": [
+            392.7015186610059,
+            375.5350675293314
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.9751068317540645,
+          "holdoutRms": 1.642761902001192,
+          "holdoutMax": 2.999999999999872
+        },
+        {
+          "center": [
+            392.73243083316316,
+            375.55558912349306
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.9660917830793591,
+          "holdoutRms": 1.637681287674716,
+          "holdoutMax": 2.999999999999872
+        },
+        {
+          "center": [
+            392.69509631182,
+            375.5605460017713
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.9751068317540645,
+          "holdoutRms": 1.6169930941926043,
+          "holdoutMax": 2.8999999999998707
+        },
+        {
+          "center": [
+            392.7164105494573,
+            375.51074779671217
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.950876788373123,
+          "holdoutRms": 1.6508583625899746,
+          "holdoutMax": 2.999999999999872
+        },
+        {
+          "center": [
+            392.6967623308778,
+            375.5636900911084
+          ],
+          "fitSamples": 12,
+          "holdoutSamples": 15,
+          "fitRms": 0.9751068317540645,
+          "holdoutRms": 1.6169930941926043,
+          "holdoutMax": 2.8999999999998707
+        }
+      ]
+    }
+  ]
+}

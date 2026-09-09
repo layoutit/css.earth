@@ -68,7 +68,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "geology": "Geology"
     },
     "controls": [
       {
@@ -116,6 +117,98 @@
           "image": "/scenes/titania/titania-elevation-legend.webp"
         },
         "summary": "Voyager stereo and limb heights relative to the source ellipsoid. Detail varies; gray grid: no data."
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "detail": "Historical map",
+        "description": "Ten historical geologic units digitized from Voyager-era mapping. Registration reconstructed from crater landmarks; four independent checks differ by 0.33–0.83° (about 4.5–11.4 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+        "title": "Geologic map",
+        "summary": "Historical interpreted units; reconstructed registration. Gray grid: unmapped or conflicting units.",
+        "thumbnail": "/scenes/titania/titania-geology-thumbnail.webp",
+        "surface": "titania-geology-surface@2x.webp",
+        "poles": "titania-geology-poles@2x.webp",
+        "falseColor": true,
+        "source": {
+          "id": "geology-2026-categories",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/20819132"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Historical geologic category"
+          },
+          {
+            "id": "registration",
+            "label": "Independent checks",
+            "value": "Four crater centres · 0.33–0.83° residual"
+          },
+          {
+            "id": "coverage",
+            "label": "Mapped coverage",
+            "value": "About 35% of the reference sphere"
+          }
+        ],
+        "legend": {
+          "kind": "categories",
+          "title": "Historical geologic units",
+          "meta": "Source layer names and colors; reconstructed map registration.",
+          "sourceUrl": "https://zenodo.org/records/20819132",
+          "items": [
+            {
+              "label": "1",
+              "description": "Dark Albedo Patches",
+              "color": "#000000"
+            },
+            {
+              "label": "2",
+              "description": "Crater rim massifs",
+              "color": "#73b2ff"
+            },
+            {
+              "label": "3",
+              "description": "Elongate Craters",
+              "color": "#0070ff"
+            },
+            {
+              "label": "4",
+              "description": "Moderately degraded craters",
+              "color": "#e69800"
+            },
+            {
+              "label": "5",
+              "description": "Fresh appearing, no rays",
+              "color": "#cdaa66"
+            },
+            {
+              "label": "6",
+              "description": "Rayed/bright deposit craters",
+              "color": "#d7c29e"
+            },
+            {
+              "label": "7",
+              "description": "Heavily cratered plains",
+              "color": "#895a44"
+            },
+            {
+              "label": "8",
+              "description": "Moderately cratered Plains",
+              "color": "#704489"
+            },
+            {
+              "label": "9",
+              "description": "Smooth Plains",
+              "color": "#267300"
+            },
+            {
+              "label": "10",
+              "description": "Bright Slope Material",
+              "color": "#730000"
+            }
+          ]
+        }
       }
     ]
   },

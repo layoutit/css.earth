@@ -1,0 +1,14 @@
+# Independent B3 shared preparation review
+
+Two concrete issues were identified and their code/recipe corrections are present. The radial scientific-mask correction passes an independent encoded fixture. The corrected Phoebe atlas recipe is awaiting its bake receipt. No other blocking regression was found in the seven scoped shared files and actual Titania/Miranda/Proteus usages.
+
+- **Corrected and tested:** Phoebe numeric ISIS lenses reached the native-mesh fallback, which resampled them bilinearly and encoded them with lossy WebP despite nearest metadata. Root now honors nearest lookup and lossless flood/shadow encoding. The new `radial-scientific-raster.test.mjs` exercises two retained faces across 0°E with exact valid/unknown colors, then encodes and decodes both atlas banks. The default photographic behavior remains continuous.
+- **Recipe corrected; bake pending:** Phoebe's 3,500 faces × 128 px with 16 columns made an atlas 2048 × 28032. A tiny 2 × 28032 actual sharp/WebP probe returned `Processed image is too large for the WebP format`. The current recipe uses 32 columns to preserve 128 px tiles in at most 4096 × 14080. A bounded pipeline check confirms no later DPR/density scaling: raw atlas dimensions flow directly into WebP, and the emitter records actual decoded metadata. No body files were changed by this review.
+
+Focused tests passed **34/34**, zero failures/skips, 3.4 seconds, concurrency 1. They cover quality-mask boundaries/valid zero, ISIS missing-bound opt-in, encoded categorical palettes and unknown cells, camera orientation/signed calibrated values, three-channel rejection, focus transforms, and actual Titania/Miranda/Proteus source anchors. [The exact command, file pins and findings](review.json) and [test log](focused-tests.log) retain the tested uncommitted snapshot against `ef07fac2d`. Later recipe/pipeline pins are a separate read-only receipt, not a rebinding of that test run.
+
+Titania/Miranda have no native radial terrain and use the existing lossless categorical globe/pole path. Their black category 0 is valid, 65535 is unknown, and unresolved overlaps stay unknown. Proteus's common three-filter footprint is preparation-owned, with explicit signed-HALF calibration policy, conservative source inset, common stretch and fixed channel gains. The observation focus addition transports the existing prepared navigation contract; it does not add runtime geometry/source work.
+
+[The separate Callisto source-code review](callisto-review.md) found no blocking conversion or coordinate defect and records the limits of the registration evidence.
+
+This review does not qualify the rebaked Phoebe assets or root's pending focused Proteus view. Full build/test/browser and visual acceptance remain separate. The original 12-body B3 cohort is unchanged by the carry recommendations.

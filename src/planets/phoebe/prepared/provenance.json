@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "213385c077e4e0826c1ee92bdbc3d8508d8ab47ebc7d00d06bcb1627da47c34d"
+    "sha256": "f4d90a8c8ec3fa34996d950b2da8c9c9c94bc0a5d763b9c9af6437c3b774acbe"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5e86c9b34ab60d330e317a7cfb97b6f14514e99366f5f8c9cd86085b3d71d88c",
+      "sha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -31,34 +31,124 @@
           "poleSize": 512,
           "surfaceQuality": 95,
           "reportMissingPixels": true,
-          "observations": [
-            {
-              "id": "normal",
-              "validity": {
-                "kind": "pds3-byte-monochrome",
-                "noData": 0,
-                "connectedEdge": "north"
-              }
-            }
-          ],
+          "observations": [],
           "scientific": [
             {
-              "id": "elevation",
-              "label": "Elevation",
+              "id": "normal",
+              "label": "Relative albedo",
               "consumer": "scientific-surfaces",
-              "path": "shape/phoebe_ver128q.tab",
-              "format": "pds-vertex-facet",
+              "path": "science/2023/phoebe_albedo_c.cub",
+              "format": "isis3",
               "grid": {
-                "metersPerUnit": 1000,
-                "expectedVertices": 99846,
-                "expectedFaces": 196608
+                "width": 2222,
+                "height": 1111,
+                "targetName": "Phoebe",
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 106500,
+                "polarRadiusMeters": 106500,
+                "origin": [
+                  -334579.61760731,
+                  167289.80880366
+                ],
+                "resolutionMeters": 301.26023555494,
+                "longitudeRange": [
+                  0,
+                  360
+                ],
+                "allowMissingLongitudeBounds": true,
+                "specialValueMagnitude": 1e+30
               },
-              "valueTransform": {
-                "scale": 0.001,
-                "offset": -106.8
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": 0.5,
+              "maximum": 1.7,
+              "colors": [
+                "#404040",
+                "#eeeeee"
+              ],
+              "qualityMasks": [
+                {
+                  "format": "isis3",
+                  "path": "science/2023/phoebe_numimg_c.cub",
+                  "grid": {
+                    "width": 360,
+                    "height": 180,
+                    "targetName": "Phoebe",
+                    "centerLongitude": 180,
+                    "referenceRadiusMeters": 106500,
+                    "polarRadiusMeters": 106500,
+                    "origin": [
+                      -334579.61760731,
+                      167289.80880366
+                    ],
+                    "resolutionMeters": 1858.775653374,
+                    "longitudeRange": [
+                      0,
+                      360
+                    ],
+                    "allowMissingLongitudeBounds": true,
+                    "specialValueMagnitude": 1e+30
+                  },
+                  "sampling": "nearest",
+                  "minimum": 5
+                },
+                {
+                  "format": "isis3",
+                  "path": "science/2023/phoebe_bestmap_c.cub",
+                  "grid": {
+                    "width": 360,
+                    "height": 180,
+                    "targetName": "Phoebe",
+                    "centerLongitude": 180,
+                    "referenceRadiusMeters": 106500,
+                    "polarRadiusMeters": 106500,
+                    "origin": [
+                      -334579.61760731,
+                      167289.80880366
+                    ],
+                    "resolutionMeters": 1858.775653374,
+                    "longitudeRange": [
+                      0,
+                      360
+                    ],
+                    "allowMissingLongitudeBounds": true,
+                    "specialValueMagnitude": 1e+30,
+                    "noData": 99999
+                  },
+                  "sampling": "nearest",
+                  "maximum": 1500
+                }
+              ]
+            },
+            {
+              "id": "elevation",
+              "label": "Radial height",
+              "consumer": "scientific-surfaces",
+              "path": "science/2023/phoebe_radius_c.cub",
+              "format": "isis3",
+              "grid": {
+                "width": 2222,
+                "height": 1111,
+                "targetName": "Phoebe",
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 106500,
+                "polarRadiusMeters": 106500,
+                "origin": [
+                  -334579.61760731,
+                  167289.80880366
+                ],
+                "resolutionMeters": 301.26023555494,
+                "longitudeRange": [
+                  0,
+                  360
+                ],
+                "allowMissingLongitudeBounds": true,
+                "specialValueMagnitude": 1e+30
               },
-              "minimum": -12,
-              "maximum": 12,
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": -15,
+              "maximum": 15,
               "colors": [
                 "#35306b",
                 "#2c7db7",
@@ -68,8 +158,65 @@
                 "#c76138",
                 "#f8eee1"
               ],
+              "qualityMasks": [
+                {
+                  "format": "isis3",
+                  "path": "science/2023/phoebe_numimg_c.cub",
+                  "grid": {
+                    "width": 360,
+                    "height": 180,
+                    "targetName": "Phoebe",
+                    "centerLongitude": 180,
+                    "referenceRadiusMeters": 106500,
+                    "polarRadiusMeters": 106500,
+                    "origin": [
+                      -334579.61760731,
+                      167289.80880366
+                    ],
+                    "resolutionMeters": 1858.775653374,
+                    "longitudeRange": [
+                      0,
+                      360
+                    ],
+                    "allowMissingLongitudeBounds": true,
+                    "specialValueMagnitude": 1e+30
+                  },
+                  "sampling": "nearest",
+                  "minimum": 5
+                },
+                {
+                  "format": "isis3",
+                  "path": "science/2023/phoebe_bestmap_c.cub",
+                  "grid": {
+                    "width": 360,
+                    "height": 180,
+                    "targetName": "Phoebe",
+                    "centerLongitude": 180,
+                    "referenceRadiusMeters": 106500,
+                    "polarRadiusMeters": 106500,
+                    "origin": [
+                      -334579.61760731,
+                      167289.80880366
+                    ],
+                    "resolutionMeters": 1858.775653374,
+                    "longitudeRange": [
+                      0,
+                      360
+                    ],
+                    "allowMissingLongitudeBounds": true,
+                    "specialValueMagnitude": 1e+30,
+                    "noData": 99999
+                  },
+                  "sampling": "nearest",
+                  "maximum": 1500
+                }
+              ],
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -106.5
+              },
               "relief": {
-                "referenceRadiusMeters": 106800,
+                "referenceRadiusMeters": 106500,
                 "heightToMeters": 1000,
                 "lightDirection": [
                   -0.5,
@@ -77,11 +224,79 @@
                   0.7071067811865476
                 ],
                 "ambient": 0.45
-              },
-              "sampleGrid": {
-                "width": 721,
-                "height": 361
               }
+            },
+            {
+              "id": "maplet-resolution",
+              "label": "Maplet resolution",
+              "consumer": "scientific-surfaces",
+              "path": "science/2023/phoebe_bestmap_c.cub",
+              "format": "isis3",
+              "grid": {
+                "width": 360,
+                "height": 180,
+                "targetName": "Phoebe",
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 106500,
+                "polarRadiusMeters": 106500,
+                "origin": [
+                  -334579.61760731,
+                  167289.80880366
+                ],
+                "resolutionMeters": 1858.775653374,
+                "longitudeRange": [
+                  0,
+                  360
+                ],
+                "allowMissingLongitudeBounds": true,
+                "specialValueMagnitude": 1e+30,
+                "noData": 99999
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": 125,
+              "maximum": 1500,
+              "colors": [
+                "#fff0a0",
+                "#35b5a5",
+                "#284675"
+              ]
+            },
+            {
+              "id": "image-count",
+              "label": "Image count",
+              "consumer": "scientific-surfaces",
+              "path": "science/2023/phoebe_numimg_c.cub",
+              "format": "isis3",
+              "grid": {
+                "width": 360,
+                "height": 180,
+                "targetName": "Phoebe",
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 106500,
+                "polarRadiusMeters": 106500,
+                "origin": [
+                  -334579.61760731,
+                  167289.80880366
+                ],
+                "resolutionMeters": 1858.775653374,
+                "longitudeRange": [
+                  0,
+                  360
+                ],
+                "allowMissingLongitudeBounds": true,
+                "specialValueMagnitude": 1e+30
+              },
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": 0,
+              "maximum": 87,
+              "colors": [
+                "#29253c",
+                "#356da7",
+                "#3cbbb0",
+                "#e9ec8f"
+              ]
             }
           ],
           "observedColors": []
@@ -107,22 +322,27 @@
           "mapUrl": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
           "polesUrl": "/scenes/phoebe/phoebe-normal-poles@2x.webp",
           "radialTerrain": {
-            "path": "shape/phoebe_ver128q.tab",
-            "format": "pds-vertex-facet",
+            "path": "shape/2023/phoebe_128_o.obj",
+            "format": "wavefront-obj",
             "grid": {
               "metersPerUnit": 1000,
               "expectedVertices": 99846,
               "expectedFaces": 196608
             },
-            "latitudeSegments": 20,
-            "longitudeSegments": 32,
-            "faceBudget": 2000,
+            "faceBudget": 3500,
             "tileSize": 128,
-            "atlasColumns": 16
+            "atlasColumns": 32,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 3500,
+              "maximumErrorMeters": 1065,
+              "regularize": true
+            }
           }
         },
         "celestial": {
-          "sunSource": "Vendored JPL Horizons Saturn satellite elements and the Gaskell model’s documented body-fixed orientation at the shared epoch."
+          "sunSource": "JPL Phoebe orbit and the retained Gaskell source-model orientation; the 2023 release uses the same image/kernel set and shifts its origin to the center of figure. Present-day rotation phase is not independently qualified."
         },
         "presentation": {
           "defaultLens": "normal",
@@ -138,7 +358,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a0ee7f192414bfc49e6c4cc2c206b6254b06d70ccff3e006c78b6ca50aaed684",
+      "sha256": "e48d48ce5f724909c52934209145e077d677172db951b5b89312bcdf8d361938",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -208,55 +428,129 @@
           "titleKey": "lenses",
           "defaultLens": "normal",
           "labels": {
-            "normal": "Monochrome",
-            "elevation": "Elevation"
+            "normal": "Relative albedo",
+            "elevation": "Radial height",
+            "maplet-resolution": "Maplet resolution",
+            "image-count": "Image count"
           },
           "controls": [
             {
               "id": "normal",
-              "label": "Monochrome",
-              "description": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
-              "title": "ISS monochrome mosaic",
-              "detail": "Cassini mosaic",
+              "label": "Relative albedo",
+              "description": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
+              "title": "SPC relative brightness model",
+              "detail": "Modeled relative brightness",
               "thumbnail": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
               "surface": "phoebe-normal-surface@2x.webp",
               "poles": "phoebe-normal-poles@2x.webp",
               "source": {
-                "id": "cassini-mosaic",
+                "id": "phoebe-2023-albedo",
                 "path": "../manifest.json",
-                "url": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
+                "url": "https://doi.org/10.26033/3k3c-5713"
               },
-              "summary": "Photographed shadows remain and detail varies across the surface. The unobserved northern region is marked as missing data."
+              "legend": {
+                "kind": "scale",
+                "title": "Relative albedo",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.5",
+                  "1.1",
+                  "1.7"
+                ],
+                "meta": "relative; mean ≈ 1",
+                "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
+                "image": "/scenes/phoebe/phoebe-normal-legend.webp"
+              },
+              "summary": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
             },
             {
               "id": "elevation",
-              "label": "Elevation",
-              "description": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
-              "title": "Shape-derived radial height",
-              "detail": "Shaded relief",
+              "label": "Radial height",
+              "description": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
+              "title": "Q512 radial height model",
+              "detail": "Modeled radial height",
               "thumbnail": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
               "surface": "phoebe-elevation-surface@2x.webp",
               "poles": "phoebe-elevation-poles@2x.webp",
               "source": {
-                "id": "gaskell-2012-shape",
+                "id": "phoebe-2023-radius",
                 "path": "../manifest.json",
-                "url": "https://sbn.psi.edu/pds/resource/phoebeshape.html"
+                "url": "https://doi.org/10.26033/3k3c-5713"
               },
               "legend": {
                 "kind": "scale",
-                "title": "Elevation",
+                "title": "Radial height",
                 "width": 256,
                 "height": 16,
                 "labels": [
-                  "−12",
+                  "−15",
                   "0",
-                  "12"
+                  "15"
                 ],
-                "meta": "km",
-                "sourceUrl": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
+                "meta": "km above 106.5 km sphere",
+                "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
                 "image": "/scenes/phoebe/phoebe-elevation-legend.webp"
               },
-              "summary": "Gaskell-model height relative to a 106.8 km sphere. Terrain outside Cassini coverage is less certain."
+              "summary": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
+            },
+            {
+              "id": "maplet-resolution",
+              "label": "Maplet resolution",
+              "description": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
+              "title": "SPC maplet resolution",
+              "detail": "Best source maplet",
+              "thumbnail": "/scenes/phoebe/phoebe-maplet-resolution-thumbnail.webp",
+              "surface": "phoebe-maplet-resolution-surface@2x.webp",
+              "poles": "phoebe-maplet-resolution-poles@2x.webp",
+              "source": {
+                "id": "phoebe-2023-bestmap",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.26033/3k3c-5713"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Maplet resolution",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "125",
+                  "1500"
+                ],
+                "meta": "m/vertex",
+                "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
+                "image": "/scenes/phoebe/phoebe-maplet-resolution-legend.webp"
+              },
+              "summary": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing."
+            },
+            {
+              "id": "image-count",
+              "label": "Image count",
+              "description": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
+              "title": "SPC image coverage",
+              "detail": "Source coverage",
+              "thumbnail": "/scenes/phoebe/phoebe-image-count-thumbnail.webp",
+              "surface": "phoebe-image-count-surface@2x.webp",
+              "poles": "phoebe-image-count-poles@2x.webp",
+              "source": {
+                "id": "phoebe-2023-numimg",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.26033/3k3c-5713"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Image count",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "87"
+                ],
+                "meta": "images",
+                "sourceUrl": "https://doi.org/10.26033/3k3c-5713",
+                "image": "/scenes/phoebe/phoebe-image-count-legend.webp"
+              },
+              "summary": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy."
             }
           ]
         },
@@ -286,16 +580,22 @@
             "href": "https://science.nasa.gov/saturn/moons/phoebe/"
           },
           {
-            "label": "NASA/JPL/SSI; DLR",
+            "label": "NASA PDS / Weirich et al.",
             "role": "surface",
-            "description": "Cassini surface mosaic",
-            "href": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
+            "description": "Paired 2023 shape, relative albedo and quality maps",
+            "href": "https://doi.org/10.26033/3k3c-5713"
           },
           {
             "label": "ESO",
             "role": "stars",
             "description": "Milky Way panorama",
             "href": "https://www.eso.org/public/images/eso0932a/"
+          },
+          {
+            "label": "Cassini / DLR",
+            "role": "reference",
+            "description": "Earlier monochrome map: retained reference; its registration to the shifted 2023 model is unqualified",
+            "href": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/"
           }
         ],
         "provenance": {
@@ -317,45 +617,42 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "cassini-mosaic",
-      "path": "observations/SP_1M_0_0_SIMP.IMG",
-      "origin": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG",
-      "catalog": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
-      "credit": "NASA/JPL/Space Science Institute; DLR",
-      "license": "Public NASA mission data, archived in PDS. Retain mission and cartography credits.",
+      "id": "phoebe-2023-albedo",
+      "path": "science/2023/phoebe_albedo_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
       "licenseEvidence": [
-        "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
-        "observations/datainfo.txt"
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
       ],
-      "acquisition": "Download the pinned original PDS3 byte mosaic.",
-      "redistribution": "Retain the NASA/JPL/SSI and DLR attribution.",
-      "width": 2880,
-      "height": 1440,
-      "projection": {
-        "type": "equirectangular",
-        "longitudeDegrees": [
-          -180,
-          180
-        ],
-        "latitudeDegrees": [
-          90,
-          -90
-        ],
-        "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 106800
-      },
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
       "lensId": "normal",
-      "label": "Monochrome",
-      "falseColor": false,
-      "coverage": "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data.",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 2222,
+      "height": 1111,
+      "coverage": "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
+      "projection": {
+        "type": "simple-cylindrical",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "referenceRadiusMeters": 106500
+      },
       "capture": {
         "spacecraftIds": [
           "cassini"
         ],
-        "evidence": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG"
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub"
       },
-      "sha256": "e2a26482052ef9d67dd5c82df096daedc9cec0c0345c94e07f9b4461622aa69a",
-      "bytes": 4158720,
+      "sha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3",
+      "bytes": 9941545,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": {
@@ -363,35 +660,49 @@
         "groups": [
           "refresh"
         ],
-        "path": "observations/SP_1M_0_0_SIMP.IMG",
-        "url": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG"
+        "path": "science/2023/phoebe_albedo_c.cub",
+        "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub"
       },
       "verificationOperations": []
     },
     {
       "kind": "source-input",
-      "id": "gaskell-2012-shape",
-      "path": "shape/phoebe_ver128q.tab",
-      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab",
-      "catalog": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
-      "credit": "Robert Gaskell; NASA PDS Small Bodies Node",
-      "license": "Public PDS scientific data release; cite Gaskell and the PDS archive.",
+      "id": "phoebe-2023-numimg",
+      "path": "science/2023/phoebe_numimg_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
       "licenseEvidence": [
-        "shape/README.txt",
-        "https://sbn.psi.edu/pds/resource/phoebeshape.html"
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
       ],
-      "acquisition": "Download the original PDS4 vertex-facet table.",
-      "redistribution": "Retain the model author and archive credit.",
-      "lensId": "elevation",
-      "label": "Elevation",
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "lensId": "image-count",
+      "label": "Image count",
       "falseColor": true,
+      "width": 360,
+      "height": 180,
+      "coverage": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
       "projection": {
-        "type": "body-fixed-mesh",
-        "longitudeDirection": "east-positive"
+        "type": "simple-cylindrical",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "referenceRadiusMeters": 106500
       },
-      "coverage": "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained.",
-      "sha256": "92550ba0625255a2f91cd5d9a7b52e020fc4ba76c7ef3fd76a9728a66df697c2",
-      "bytes": 16897992,
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub"
+      },
+      "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d",
+      "bytes": 326413,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": {
@@ -399,8 +710,141 @@
         "groups": [
           "refresh"
         ],
-        "path": "shape/phoebe_ver128q.tab",
-        "url": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab"
+        "path": "science/2023/phoebe_numimg_c.cub",
+        "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "phoebe-2023-bestmap",
+      "path": "science/2023/phoebe_bestmap_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
+      "licenseEvidence": [
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "lensId": "maplet-resolution",
+      "label": "Maplet resolution",
+      "falseColor": true,
+      "width": 360,
+      "height": 180,
+      "coverage": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
+      "projection": {
+        "type": "simple-cylindrical",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "referenceRadiusMeters": 106500
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub"
+      },
+      "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15",
+      "bytes": 326427,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/2023/phoebe_bestmap_c.cub",
+        "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "phoebe-2023-radius",
+      "path": "science/2023/phoebe_radius_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
+      "licenseEvidence": [
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "lensId": "elevation",
+      "label": "Radial height",
+      "falseColor": true,
+      "width": 2222,
+      "height": 1111,
+      "coverage": "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry.",
+      "projection": {
+        "type": "simple-cylindrical",
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "referenceRadiusMeters": 106500
+      },
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub"
+      },
+      "sha256": "9d30106e1acd7a85ba374b4f6cd8af0da8cf9569efab5ca95439d9975858817d",
+      "bytes": 9942047,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/2023/phoebe_radius_c.cub",
+        "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "phoebe-2023-shape",
+      "path": "shape/2023/phoebe_128_o.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_128_o.obj",
+      "catalog": "https://doi.org/10.26033/3k3c-5713",
+      "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
+      "license": "Public PDS scientific data release; retain author/archive attribution and cite DOI 10.26033/3k3c-5713.",
+      "licenseEvidence": [
+        "science/2023/productdescription.txt",
+        "https://doi.org/10.26033/3k3c-5713"
+      ],
+      "acquisition": "Download the exact published PDS4 product using the pinned recipe.",
+      "redistribution": "Retain source authors, archive attribution and DOI.",
+      "projection": {
+        "type": "body-fixed-mesh",
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Published center-of-figure Q128 model, 1.195 km nominal GSD; poorly imaged terrain is less constrained. Source-preserving simplification is separately measured.",
+      "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+      "bytes": 17787240,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "shape/2023/phoebe_128_o.obj",
+        "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_128_o.obj"
       },
       "verificationOperations": []
     },
@@ -414,8 +858,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a0ee7f192414bfc49e6c4cc2c206b6254b06d70ccff3e006c78b6ca50aaed684",
-      "bytes": 5389,
+      "sha256": "e48d48ce5f724909c52934209145e077d677172db951b5b89312bcdf8d361938",
+      "bytes": 9452,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -425,13 +869,13 @@
   "products": [
     {
       "id": "normal",
-      "label": "Monochrome",
+      "label": "Relative albedo",
       "recipe": "terrestrial",
-      "selector": "/raster/observations/0",
+      "selector": "/raster/scientific/0",
       "parents": [],
-      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Cassini monochrome mosaic. Detail varies across the surface; photographed shadows remain. The uncovered north is marked as missing data."
+        "Relative brightness from the 2023 Cassini shape/albedo model, normalized near one; not natural color or measured geometric albedo. Cells with fewer than five images or no maplet are marked missing. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
       ],
       "lensIds": [
         "normal"
@@ -440,27 +884,32 @@
         "terrestrial"
       ],
       "interpretation": {
-        "validity": {
-          "kind": "pds3-byte-monochrome",
-          "noData": 0,
-          "connectedEdge": "north"
-        }
+        "kind": "scientific"
       },
       "inputs": [
-        "cassini-mosaic",
-        "gaskell-2012-shape"
+        "phoebe-2023-albedo",
+        "phoebe-2023-numimg",
+        "phoebe-2023-bestmap",
+        "phoebe-2023-radius",
+        "phoebe-2023-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/phoebe/phoebe-normal-thumbnail.webp",
-          "bytes": 4006,
-          "sha256": "7d0d026b93b966d9171b48104fa3a83b8cd4689e9d5c32471044d40d89e8f6ec",
+          "bytes": 2690,
+          "sha256": "22fd1e7fc37d0c1304e199681e64b898daf1f879701222aef6076377e2509fc0",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-normal-legend.webp",
+          "bytes": 64,
+          "sha256": "cfcce4825630d19b1fe535df129ca62108704286888e2482065eeb73ded6217a",
           "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phoebe/phoebe-normal-surface@2x.webp",
-          "bytes": 1538972,
-          "sha256": "eb17ce85d6fbe825ea1ffd60ce5ea416efedbe8fe36419810424e0b4b5112aa5",
+          "bytes": 6997442,
+          "sha256": "e7c05e093131d0885c8b2a3d68d39e0b31124ff3b64c1e64fc166a901f327d13",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -468,13 +917,13 @@
     },
     {
       "id": "elevation",
-      "label": "Elevation",
+      "label": "Radial height",
       "recipe": "terrestrial",
-      "selector": "/raster/scientific/0",
+      "selector": "/raster/scientific/1",
       "parents": [],
       "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
       "limitations": [
-        "Radial height above a 106.8 km sphere from the Gaskell shape model. Fixed relief lighting emphasizes slopes. Terrain outside Cassini image coverage is less constrained."
+        "Q512 model radius minus a 106.5 km sphere, in km; not a geoid or independent altimetry. The paired 2023 model is less certain in poorly imaged regions; unsupported cells are marked. The 3,500-face display approximates the source shape; map detail is finer than the displayed geometry."
       ],
       "lensIds": [
         "elevation"
@@ -486,13 +935,17 @@
         "kind": "scientific"
       },
       "inputs": [
-        "gaskell-2012-shape"
+        "phoebe-2023-radius",
+        "phoebe-2023-numimg",
+        "phoebe-2023-bestmap",
+        "phoebe-2023-albedo",
+        "phoebe-2023-shape"
       ],
       "outputs": [
         {
           "url": "/scenes/phoebe/phoebe-elevation-thumbnail.webp",
-          "bytes": 8604,
-          "sha256": "02c4d6086793030278e83129aaa948acc0e83f9060bd7f8c02b834b8d0d2dc23",
+          "bytes": 9002,
+          "sha256": "3bbbbac756d9d15c0b634dccef99527ddd7b106ea122edc2443b64cf9344f3cc",
           "verification": "asset-manifest-pin"
         },
         {
@@ -503,8 +956,104 @@
         },
         {
           "url": "/scenes/phoebe/phoebe-elevation-surface@2x.webp",
-          "bytes": 1130030,
-          "sha256": "a7d655af0c01a0fae4888c2d8e1ed7bf60e0e29efebefc3cfb330122dd1bc5ca",
+          "bytes": 25764046,
+          "sha256": "83b434713bda50da8d89caccace7a9aaf6a86e4eb14e5c0f527dee3e272d1cb9",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "maplet-resolution",
+      "label": "Maplet resolution",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing."
+      ],
+      "lensIds": [
+        "maplet-resolution"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "phoebe-2023-bestmap",
+        "phoebe-2023-albedo",
+        "phoebe-2023-radius",
+        "phoebe-2023-numimg",
+        "phoebe-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phoebe/phoebe-maplet-resolution-thumbnail.webp",
+          "bytes": 626,
+          "sha256": "08f676d93b80114b2cc58fd611107418a1d2617bf5d979c81609691a2bcba64d",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-maplet-resolution-legend.webp",
+          "bytes": 166,
+          "sha256": "075b018d6c1483c9c6626ab6f74ed823a82e2eb39d9df182e036f5d6f19f5522",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-maplet-resolution-surface@2x.webp",
+          "bytes": 368656,
+          "sha256": "9ec14c15d1ef5c240fe623068ddab85ba9069d79925cffdd1784f710acaa215c",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "image-count",
+      "label": "Image count",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/3",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy."
+      ],
+      "lensIds": [
+        "image-count"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "phoebe-2023-numimg",
+        "phoebe-2023-albedo",
+        "phoebe-2023-radius",
+        "phoebe-2023-bestmap",
+        "phoebe-2023-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/phoebe/phoebe-image-count-thumbnail.webp",
+          "bytes": 3126,
+          "sha256": "2e1b82aaea5747fc9aa28ff5433547d6898b267121eb022694f0b37c0e20680a",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-image-count-legend.webp",
+          "bytes": 200,
+          "sha256": "675054ccb3d587a2dd85173bf42182b89fcdd9a64d75134d64089d68b526aba9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/phoebe/phoebe-image-count-surface@2x.webp",
+          "bytes": 2451914,
+          "sha256": "4f70881a6295eebec8ba53d133879d6d04f4b16173f59e697151289d9f382735",
           "verification": "asset-manifest-pin"
         }
       ],
@@ -528,8 +1077,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5963,
-          "sha256": "4220e4426d2343e229ca702b742117ad18a82a8314ea10a85c22f67e4292eb8e",
+          "bytes": 6207,
+          "sha256": "c5f97f0c2458ace1445287cdbc4b163f366c8de4334a2f6adbace10c8e0b1291",
           "verification": "bytes-verified"
         }
       ],
@@ -537,9 +1086,9 @@
     },
     {
       "id": "preview:normal",
-      "label": "Monochrome preview",
+      "label": "Relative albedo preview",
       "recipe": "terrestrial",
-      "selector": "/raster/observations/0",
+      "selector": "/raster/scientific/0",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -553,17 +1102,17 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 36636,
-          "sha256": "bf470910b5dbe5a3f388e4a9798ed1fb7cb7ecdca2e7522bbed06328755cdaef",
+          "bytes": 70582,
+          "sha256": "8d5d282d3d5ee2e7b29c33c4dea57c2514b7c523f59057259d47033ab2af3d6e",
           "verification": "bytes-verified"
         }
       ]
     },
     {
       "id": "preview:elevation",
-      "label": "Elevation preview",
+      "label": "Radial height preview",
       "recipe": "terrestrial",
-      "selector": "/raster/scientific/0",
+      "selector": "/raster/scientific/1",
       "recipeDependencies": [
         "terrestrial"
       ],
@@ -577,8 +1126,56 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/elevation.webp",
-          "bytes": 24418,
-          "sha256": "0ea0fa20951f41bf7bb1f0e0336e5a7b8a9cba232098fdb49621158f5ce5a596",
+          "bytes": 181086,
+          "sha256": "fc70c97998da8946a332408ceb289b200773ebb5b7b56f719089de298781125f",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:maplet-resolution",
+      "label": "Maplet resolution preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "maplet-resolution"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/maplet-resolution.webp",
+          "bytes": 23306,
+          "sha256": "f7a8b8b19d7c32d095d0f3d508fad5d04e3e44ca2e7e34327622828b772a8dcc",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:image-count",
+      "label": "Image count preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/3",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "image-count"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/image-count.webp",
+          "bytes": 142656,
+          "sha256": "9ada2de2247e7942a875dfbd3ea1ed99c69b582d08455d2d675a0be725bb9068",
           "verification": "bytes-verified"
         }
       ]

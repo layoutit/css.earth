@@ -1,0 +1,402 @@
+{
+  "schema": "cssearth-phoebe-2023-source-statistics@1",
+  "method": "Independent NumPy little-endian Float32 reader at native ISIS StartByte; every published array element examined. Quality fixture coordinates are geographic centers of the source one-degree cells.",
+  "products": {
+    "albedo": {
+      "path": "phoebe_albedo_c.cub",
+      "bytes": 9941545,
+      "sha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3",
+      "shape": [
+        1111,
+        2222
+      ],
+      "allPixels": 2468642,
+      "finitePixels": 2468642,
+      "minimum": 0.5203444361686707,
+      "maximum": 1.6618609428405762,
+      "median": 1.0,
+      "nativePixelEdges": {
+        "longitude": [
+          1.5916157281026244e-12,
+          360.1296596434412
+        ],
+        "latitude": [
+          90.0000000000019,
+          -90.06482982171792
+        ]
+      },
+      "grid": {
+        "width": 2222,
+        "height": 1111,
+        "targetName": "Phoebe",
+        "centerLongitude": 180.0,
+        "referenceRadiusMeters": 106500.0,
+        "polarRadiusMeters": 106500.0,
+        "origin": [
+          -334579.61760731,
+          167289.80880366
+        ],
+        "resolutionMeters": 301.26023555494,
+        "longitudeRange": [
+          0,
+          360
+        ],
+        "allowMissingLongitudeBounds": true,
+        "specialValueMagnitude": 1e+30
+      }
+    },
+    "bestmap": {
+      "path": "phoebe_bestmap_c.cub",
+      "bytes": 326427,
+      "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15",
+      "shape": [
+        180,
+        360
+      ],
+      "allPixels": 64800,
+      "finitePixels": 64800,
+      "minimum": 125.0,
+      "maximum": 99999.0,
+      "median": 500.0,
+      "nativePixelEdges": {
+        "longitude": [
+          1.5916157281026244e-12,
+          360.0000000000092
+        ],
+        "latitude": [
+          90.0000000000019,
+          -90.0000000000019
+        ]
+      },
+      "grid": {
+        "width": 360,
+        "height": 180,
+        "targetName": "Phoebe",
+        "centerLongitude": 180.0,
+        "referenceRadiusMeters": 106500.0,
+        "polarRadiusMeters": 106500.0,
+        "origin": [
+          -334579.61760731,
+          167289.80880366
+        ],
+        "resolutionMeters": 1858.775653374,
+        "longitudeRange": [
+          0,
+          360
+        ],
+        "allowMissingLongitudeBounds": true,
+        "specialValueMagnitude": 1e+30
+      },
+      "histogram": {
+        "125.0": 1232,
+        "250.0": 9413,
+        "300.0": 13078,
+        "500.0": 27770,
+        "750.0": 821,
+        "1000.0": 3115,
+        "1500.0": 2657,
+        "99999.0": 6714
+      }
+    },
+    "numimg": {
+      "path": "phoebe_numimg_c.cub",
+      "bytes": 326413,
+      "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d",
+      "shape": [
+        180,
+        360
+      ],
+      "allPixels": 64800,
+      "finitePixels": 64800,
+      "minimum": 0.0,
+      "maximum": 87.0,
+      "median": 32.0,
+      "nativePixelEdges": {
+        "longitude": [
+          1.5916157281026244e-12,
+          360.0000000000092
+        ],
+        "latitude": [
+          90.0000000000019,
+          -90.0000000000019
+        ]
+      },
+      "grid": {
+        "width": 360,
+        "height": 180,
+        "targetName": "Phoebe",
+        "centerLongitude": 180.0,
+        "referenceRadiusMeters": 106500.0,
+        "polarRadiusMeters": 106500.0,
+        "origin": [
+          -334579.61760731,
+          167289.80880366
+        ],
+        "resolutionMeters": 1858.775653374,
+        "longitudeRange": [
+          0,
+          360
+        ],
+        "allowMissingLongitudeBounds": true,
+        "specialValueMagnitude": 1e+30
+      },
+      "histogram": {
+        "0.0": 3278,
+        "1.0": 28,
+        "2.0": 16,
+        "3.0": 67,
+        "4.0": 97,
+        "5.0": 29,
+        "6.0": 293,
+        "7.0": 148,
+        "8.0": 520,
+        "9.0": 1341,
+        "10.0": 1095,
+        "11.0": 384,
+        "12.0": 512,
+        "13.0": 1086,
+        "14.0": 1420,
+        "15.0": 522,
+        "16.0": 765,
+        "17.0": 757,
+        "18.0": 808,
+        "19.0": 785,
+        "20.0": 1095,
+        "21.0": 1086,
+        "22.0": 1504,
+        "23.0": 1626,
+        "24.0": 1600,
+        "25.0": 1525,
+        "26.0": 1487,
+        "27.0": 1632,
+        "28.0": 1463,
+        "29.0": 1326,
+        "30.0": 1659,
+        "31.0": 1913,
+        "32.0": 916,
+        "33.0": 1258,
+        "34.0": 1086,
+        "35.0": 1599,
+        "36.0": 1297,
+        "37.0": 941,
+        "38.0": 785,
+        "39.0": 713,
+        "40.0": 1097,
+        "41.0": 1218,
+        "42.0": 1340,
+        "43.0": 1031,
+        "44.0": 936,
+        "45.0": 603,
+        "46.0": 590,
+        "47.0": 803,
+        "48.0": 857,
+        "49.0": 753,
+        "50.0": 835,
+        "51.0": 606,
+        "52.0": 636,
+        "53.0": 705,
+        "54.0": 607,
+        "55.0": 597,
+        "56.0": 514,
+        "57.0": 434,
+        "58.0": 517,
+        "59.0": 490,
+        "60.0": 1490,
+        "61.0": 1057,
+        "62.0": 538,
+        "63.0": 650,
+        "64.0": 428,
+        "65.0": 556,
+        "66.0": 442,
+        "67.0": 452,
+        "68.0": 492,
+        "69.0": 457,
+        "70.0": 368,
+        "71.0": 355,
+        "72.0": 351,
+        "73.0": 347,
+        "74.0": 372,
+        "75.0": 220,
+        "76.0": 180,
+        "77.0": 149,
+        "78.0": 101,
+        "79.0": 81,
+        "80.0": 38,
+        "81.0": 20,
+        "82.0": 8,
+        "83.0": 4,
+        "84.0": 8,
+        "85.0": 2,
+        "86.0": 2,
+        "87.0": 1
+      }
+    },
+    "radius": {
+      "path": "phoebe_radius_c.cub",
+      "bytes": 9942047,
+      "sha256": "9d30106e1acd7a85ba374b4f6cd8af0da8cf9569efab5ca95439d9975858817d",
+      "shape": [
+        1111,
+        2222
+      ],
+      "allPixels": 2468642,
+      "finitePixels": 2468642,
+      "minimum": 93658.359375,
+      "maximum": 121287.4921875,
+      "median": 105526.296875,
+      "nativePixelEdges": {
+        "longitude": [
+          1.5916157281026244e-12,
+          360.1296596434412
+        ],
+        "latitude": [
+          90.0000000000019,
+          -90.06482982171792
+        ]
+      },
+      "grid": {
+        "width": 2222,
+        "height": 1111,
+        "targetName": "Phoebe",
+        "centerLongitude": 180.0,
+        "referenceRadiusMeters": 106500.0,
+        "polarRadiusMeters": 106500.0,
+        "origin": [
+          -334579.61760731,
+          167289.80880366
+        ],
+        "resolutionMeters": 301.26023555494,
+        "longitudeRange": [
+          0,
+          360
+        ],
+        "allowMissingLongitudeBounds": true,
+        "specialValueMagnitude": 1e+30
+      }
+    }
+  },
+  "qualityPolicy": {
+    "imageCountMinimum": 5,
+    "bestMapletMaximumMeters": 1500,
+    "bestMapletActualNoData": 99999,
+    "sourceProseNoData": 9999,
+    "allQualityCells": 64800,
+    "acceptedQualityCells": 57328,
+    "rejectedQualityCells": 7472,
+    "acceptedQualityCellFraction": 0.8846913580246913,
+    "nativeAlbedoAcceptedCenters": 2182175,
+    "nativeAlbedoRejectedCenters": 286467,
+    "albedoCentersOutsideGeographicDomain": 1111,
+    "unweightedGridFractionIsNotSurfaceAreaFraction": true
+  },
+  "fixtures": [
+    {
+      "kind": "no-maplet",
+      "qualityPixel": [
+        345,
+        21
+      ],
+      "longitudeDegrees": 345.5,
+      "latitudeDegrees": 68.5,
+      "imageCount": 13.0,
+      "bestMapletMeters": 99999.0,
+      "albedoPixel": [
+        2131,
+        132
+      ],
+      "rawAlbedo": 0.9865835905075073,
+      "accepted": false
+    },
+    {
+      "kind": "zero-images",
+      "qualityPixel": [
+        199,
+        4
+      ],
+      "longitudeDegrees": 199.5,
+      "latitudeDegrees": 85.5,
+      "imageCount": 0.0,
+      "bestMapletMeters": 1000.0,
+      "albedoPixel": [
+        1230,
+        27
+      ],
+      "rawAlbedo": 1.0,
+      "accepted": false
+    },
+    {
+      "kind": "few-images",
+      "qualityPixel": [
+        176,
+        17
+      ],
+      "longitudeDegrees": 176.5,
+      "latitudeDegrees": 72.5,
+      "imageCount": 3.0,
+      "bestMapletMeters": 1000.0,
+      "albedoPixel": [
+        1089,
+        107
+      ],
+      "rawAlbedo": 1.0054519176483154,
+      "accepted": false
+    },
+    {
+      "kind": "threshold-five",
+      "qualityPixel": [
+        185,
+        15
+      ],
+      "longitudeDegrees": 185.5,
+      "latitudeDegrees": 74.5,
+      "imageCount": 5.0,
+      "bestMapletMeters": 1000.0,
+      "albedoPixel": [
+        1144,
+        95
+      ],
+      "rawAlbedo": 0.9986279010772705,
+      "accepted": true
+    },
+    {
+      "kind": "mapped",
+      "qualityPixel": [
+        13,
+        71
+      ],
+      "longitudeDegrees": 13.5,
+      "latitudeDegrees": 18.5,
+      "imageCount": 69.0,
+      "bestMapletMeters": 125.0,
+      "albedoPixel": [
+        83,
+        441
+      ],
+      "rawAlbedo": 0.9710164070129395,
+      "accepted": true
+    },
+    {
+      "kind": "coarsest-accepted",
+      "qualityPixel": [
+        308,
+        25
+      ],
+      "longitudeDegrees": 308.5,
+      "latitudeDegrees": 64.5,
+      "imageCount": 26.0,
+      "bestMapletMeters": 1500.0,
+      "albedoPixel": [
+        1903,
+        157
+      ],
+      "rawAlbedo": 1.0000059604644775,
+      "accepted": true
+    }
+  ],
+  "limitations": [
+    "Finite interpolated albedo/radius is not evidence of observed coverage.",
+    "Minimum five images is a conservative display policy suggested by the source caution; counts do not establish independent viewing geometries.",
+    "99999 is measured in the published best-maplet array; the prose 9999 sentinel is inconsistent.",
+    "The paired Q512 radius and albedo cubes and Q128 display mesh share the released center-of-figure frame; raster detail does not increase display mesh precision."
+  ]
+}

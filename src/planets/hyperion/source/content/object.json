@@ -74,8 +74,8 @@
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini clear-filter imagery projected onto the measured irregular shape. Bounded correction reduces photographed shading; fine crater shadows remain. Coverage and resolution vary, and unavailable regions are marked.",
-        "title": "ISS mosaic",
+        "description": "Twelve calibrated Cassini frames mapped to the irregular shape, including a regional close view sampled at about 100 m/pixel. Registration and shape uncertainty limit detail; crater shadows remain, coverage varies and gaps are marked.",
+        "title": "ISS calibrated mosaic",
         "detail": "Cassini clear-filter mosaic",
         "thumbnail": "/scenes/hyperion/hyperion-normal-thumbnail.webp",
         "surface": "hyperion-normal-surface@2x.webp",
@@ -85,7 +85,7 @@
           "path": "../manifest.json",
           "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/document/hyperion_document.pdf"
         },
-        "summary": "Photographs follow the irregular shape and retain crater shadows. Resolution varies across the surface; gaps are marked."
+        "summary": "Twelve Cassini frames, including a regional ~100 m/pixel close view. Shape and registration limit detail; shadows and marked gaps remain."
       },
       {
         "id": "elevation",

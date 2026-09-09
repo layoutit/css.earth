@@ -1,0 +1,37 @@
+{
+  "command": [
+    "pnpm",
+    "exec",
+    "astro",
+    "build"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 9296150528,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 212992,
+      "freePercent": 84
+    },
+    {
+      "seconds": 2.0,
+      "rssBytes": 337690624,
+      "freePercent": 83
+    },
+    {
+      "seconds": 4.1,
+      "rssBytes": 5705433088,
+      "freePercent": 78
+    },
+    {
+      "seconds": 6.1,
+      "rssBytes": 9296150528,
+      "freePercent": 75
+    }
+  ],
+  "status": "STOPPED_RESOURCE_BOUND",
+  "exitCode": -15,
+  "seconds": 8.2
+}

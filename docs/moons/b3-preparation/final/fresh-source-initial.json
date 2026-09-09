@@ -1,0 +1,2159 @@
+{
+  "schema": "cssearth-b3-fresh-source-restoration@1",
+  "status": "FAILED",
+  "project": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "destination": "/tmp/moons-b3-fresh-sources-20260909",
+  "codeHead": "ef07fac2d3208e201dafc626374b30ed4644f561",
+  "startedAt": "2026-09-09T12:00:52.502Z",
+  "api": {
+    "path": "tools/objects/dist/operations.js",
+    "bytes": 48783,
+    "sha256": "4c6b1ea33fe2f65807e5683fbadaa5eb75eb109966837c6d64e696b0403eb18d"
+  },
+  "helperSha256": "5f96016529df377e0fc680e090142b2d65d8fdeefc0b47db41d956c044150b73",
+  "totals": {
+    "bodies": 6,
+    "sourceEntries": 263,
+    "copiedTrackedEntries": 218,
+    "copiedTrackedBytes": 32914364,
+    "restoredIgnoredEntries": 45,
+    "restoredIgnoredBytes": 467476192,
+    "manifestBytes": 179554
+  },
+  "scope": "All declared ignored sources for the six B3 packages; complete source closure with individually copied, pinned tracked entries. No runtime assets, cache links, copied ignored files or new checkout.",
+  "bodies": [
+    {
+      "id": "callisto",
+      "status": "PASS",
+      "sourceRoot": "sources/callisto",
+      "manifestSha256": "0033e0e4ccb54cdf8bf017821f52207068cbbf0cf58c2a0fb0c7c0727b0cbb2d",
+      "copied": [
+        {
+          "path": "presentation/surface-map.json",
+          "bytes": 155,
+          "sha256": "a3f124900fc2f62dc6d3b76ead7962907ae909c5203e3104950fe56368befde5"
+        },
+        {
+          "path": "observations/PIA03456-registered-rgba.tif",
+          "bytes": 771611,
+          "sha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32"
+        },
+        {
+          "path": "stars/hyg-v41-field.json",
+          "bytes": 851,
+          "sha256": "89c25f19bea74aed2e06d654b503d0c0b937b8d9d8a3edca31a28c37df5dcc93"
+        },
+        {
+          "path": "stars/ESO-IMAGE-LICENSE.md",
+          "bytes": 2192,
+          "sha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+        },
+        {
+          "path": "stars/LICENSE.md",
+          "bytes": 598,
+          "sha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+        },
+        {
+          "path": "preparation/terrestrial.json",
+          "bytes": 2588,
+          "sha256": "8756e5b7371fa3533f55691b2267c89eb20472a2761280bd31b2693e5b21812a"
+        },
+        {
+          "path": "content/object.json",
+          "bytes": 11502,
+          "sha256": "a18e1803468b2ab02cc46fd9fe5a3787d84a7f073e03e0ced8fb073159e40117"
+        },
+        {
+          "path": "presentation/title-mark.json",
+          "bytes": 4130,
+          "sha256": "21dc4663b57b1fc34278f405e23e70d0869ed510a9e3ef1a76b4b89e1ab32847"
+        },
+        {
+          "path": "preparation/navigation.json",
+          "bytes": 1943,
+          "sha256": "07bc4bcf33c4aeea29bdc791545be5e52f852884848b2eea2c78671d275d99b8"
+        },
+        {
+          "path": "preparation/acquisition.json",
+          "bytes": 1264,
+          "sha256": "a53d8515ad38074df1e8b91b4ecd5239d9e3de3817cf802dff2c22d77bef8bec"
+        },
+        {
+          "path": "editorial/factsheet-review.json",
+          "bytes": 1094,
+          "sha256": "b761a24cc68edbeef6157f0413efab632a7be327379bd054c0ee091e4a966781"
+        },
+        {
+          "path": "observations/C0605271600R.LBL",
+          "bytes": 5039,
+          "sha256": "6c101f7e030d1431ca905f5a207ab62eef91f9c80ca4965fe9a5ed57dc10dddc"
+        },
+        {
+          "path": "observations/CALLISTO-nomenclature.kmz",
+          "bytes": 211031,
+          "sha256": "620f3aff9dfe5a7ecca7c72358ca2a57ae47879ec7d3ab454893ec75e34a0f09"
+        },
+        {
+          "path": "observations/PIA03456-release.json",
+          "bytes": 1891,
+          "sha256": "067f6622f450eba67f98fb134ad443ebc37b1eb21bcb605ec5d80790e0486110"
+        },
+        {
+          "path": "observations/callisto-photo-database.pdf",
+          "bytes": 267563,
+          "sha256": "fba3191b10234799c29aa83fa56f1e75114a370f7d0332e7b01122769eebef98"
+        },
+        {
+          "path": "preparation/galileo-color-conversion.json",
+          "bytes": 808,
+          "sha256": "1b1f567714604ca209ec742fc5ecc18ed6d059f9f95e7cf405262d6f12349e7e"
+        },
+        {
+          "path": "preparation/prepare-galileo-color.py",
+          "bytes": 7090,
+          "sha256": "9b16349842530308f75826ae398f2f6f721d17ee40d98cead6eb41d67bd6f8ea"
+        },
+        {
+          "path": "validation/agent-feature-patches.png",
+          "bytes": 79851,
+          "sha256": "d58014dbeee7c63d2c6726185632d8345aebb4b55a9f7bbc351cc041fad35835"
+        },
+        {
+          "path": "validation/agent-named-fixed-camera.png",
+          "bytes": 1126581,
+          "sha256": "47656784b0da6410567c33efe3134ce6da589475793223954703ac93d4cc525f"
+        },
+        {
+          "path": "validation/agent-native-predicted.png",
+          "bytes": 223734,
+          "sha256": "5b4c7ee2ef3101598635201bf920aed1b2f899c60110ddb13c3cc24cf98f227f"
+        },
+        {
+          "path": "validation/agent-source-unmodified.png",
+          "bytes": 692797,
+          "sha256": "8934889dab1e589cdb491ee93392098e643469ac7bcef1dd44c8341a571545d7"
+        },
+        {
+          "path": "validation/galileo-color-conversion-proof.json",
+          "bytes": 1349,
+          "sha256": "5efaaf14b6df66b1adb3059ddef7d57da4cc7da3f204352c2b33938e404054d4"
+        },
+        {
+          "path": "validation/galileo-color-registration.json",
+          "bytes": 8943,
+          "sha256": "679e4ded797e5cb43854a52249c3e784ae5835aeb6b2255c141d7a19b32f5eba"
+        },
+        {
+          "path": "validation/registration-fit-original.log",
+          "bytes": 680,
+          "sha256": "a4a5ca080540cbd0409f0530870870e87e5d8c5fc94854f105bf8f3d2f0a99ef"
+        },
+        {
+          "path": "validation/registration-fit-original.py",
+          "bytes": 3651,
+          "sha256": "b2c70a8271062ef45f6094eacccd3a9510754ebeea38294f44717fe8b2d9f78e"
+        },
+        {
+          "path": "validation/registration-independent-original.py",
+          "bytes": 6254,
+          "sha256": "df4d626dbdd028f0dde8b3c658ee654c350974fc33e35267287554c90204cc1a"
+        },
+        {
+          "path": "validation/registration-independent-review.json",
+          "bytes": 9376,
+          "sha256": "87557ca1681d19525fb089ee7dcf66cd7a3531b1342e07d55272cd180d54699c"
+        },
+        {
+          "path": "validation/registration-independent-review.md",
+          "bytes": 2628,
+          "sha256": "0f7fbb5b8382dce3fa81afd5755f858260cdc1cc86dbafa4385f5eca4f27926d"
+        }
+      ],
+      "restored": [
+        {
+          "path": "callisto-global-1km.tif",
+          "bytes": 114640717,
+          "sha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "callisto-global-1km.tif",
+            "url": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif"
+          }
+        },
+        {
+          "path": "stars/eso0932a.tif",
+          "bytes": 29082084,
+          "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "stars/eso0932a.tif",
+            "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+          }
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "bytes": 862936,
+          "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "presentation/InterVariable.ttf",
+            "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+          }
+        },
+        {
+          "path": "system/jupiter-hubble.png",
+          "bytes": 1166501,
+          "sha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "system/jupiter-hubble.png",
+            "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png"
+          }
+        },
+        {
+          "path": "observations/PIA03456-usgs.png",
+          "bytes": 821031,
+          "sha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/PIA03456-usgs.png",
+            "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png"
+          }
+        }
+      ],
+      "startedAt": "2026-09-09T12:00:52.656Z",
+      "acquisition": {
+        "operationCount": 5
+      },
+      "verification": {
+        "inputCount": 7,
+        "generatedIntermediateCount": 0,
+        "documentCount": 26,
+        "verifiedCount": 33
+      },
+      "finishedAt": "2026-09-09T12:04:05.282Z"
+    },
+    {
+      "id": "hyperion",
+      "status": "PASS",
+      "sourceRoot": "sources/hyperion",
+      "manifestSha256": "92bd114c795375d618a2d5a6b15fe3d3966d94d62b638a32b0118e2f7b20a7e7",
+      "copied": [
+        {
+          "path": "observations/N1506383441_2_CALIB.LBL",
+          "bytes": 3824,
+          "sha256": "bbfa8326d1cf52d27a6502106d1692569d6944be85732a80337be36a0ace4907"
+        },
+        {
+          "path": "observations/N1506388174_2_CALIB.LBL",
+          "bytes": 3824,
+          "sha256": "270ed65bab34a60ad9ad619b4874dfda1f48fca2ae9c627714171f6ed77431fa"
+        },
+        {
+          "path": "observations/N1506388518_2_CALIB.LBL",
+          "bytes": 3824,
+          "sha256": "f28dba2654e87e842fd9a620abce361f5fb43f5249b493497f03a930f40b2aeb"
+        },
+        {
+          "path": "observations/N1506388840_2_CALIB.LBL",
+          "bytes": 3826,
+          "sha256": "e40148cd2d9fee3eee273de248ed9b9de65667ee6c8432645ba74b0d88e8856d"
+        },
+        {
+          "path": "observations/N1506389178_2_CALIB.LBL",
+          "bytes": 3826,
+          "sha256": "bc997dbf344cf676ddc22688e9fb2332b27df8a634b72af0911aaff166f137e1"
+        },
+        {
+          "path": "observations/N1513999046_1_CALIB.LBL",
+          "bytes": 3824,
+          "sha256": "43892adf0226af67675dfcfccc6550e912520507d76cae00bc29c5f5a1b935a2"
+        },
+        {
+          "path": "observations/N1530182624_1_CALIB.LBL",
+          "bytes": 3818,
+          "sha256": "5cb00f73b654a2b487d69b94fb1ace72f0ed94b6353ea953ca72a1d229ef3add"
+        },
+        {
+          "path": "observations/N1530201013_1_CALIB.LBL",
+          "bytes": 3830,
+          "sha256": "5ff322200c549f14d70c5e17b80b05b95468aed8cc8625e210191e6f66e8b816"
+        },
+        {
+          "path": "observations/N1692997492_1_CALIB.LBL",
+          "bytes": 3851,
+          "sha256": "880b961befcc824747e8a42d366dd226411f7629775e625c9d37909225ee2eba"
+        },
+        {
+          "path": "observations/N1694888328_1_CALIB.LBL",
+          "bytes": 3849,
+          "sha256": "7de79939a35619ab13ca0ad0c05b392b41cde038c18914f0d62b756e456cb8ef"
+        },
+        {
+          "path": "observations/N1811772616_1_CALIB.LBL",
+          "bytes": 3855,
+          "sha256": "f1698496de0c66100faa2683a33270d803d079867f9dd6ee3dfc21b0039b6c09"
+        },
+        {
+          "path": "observations/N1506391424_2_CALIB.LBL",
+          "bytes": 3825,
+          "sha256": "0b98753adc1818c17392dc8590f90f6526ee576373589ffa4f871d3ade8b726c"
+        },
+        {
+          "path": "presentation/context.png",
+          "bytes": 168939,
+          "sha256": "5ce12c03b1f3aae7b8897ddbc4186cedbf79a229968ef2dbff90e34b4084a6de"
+        },
+        {
+          "path": "content/object.json",
+          "bytes": 6280,
+          "sha256": "99883f02f97ddedb7bb0d19bc745d10b257ebfa7244710909dc8758ec6621fce"
+        },
+        {
+          "path": "observations/cas_iss_v10.ti",
+          "bytes": 31060,
+          "sha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68"
+        },
+        {
+          "path": "preparation/acquisition.json",
+          "bytes": 7404,
+          "sha256": "afd401f45af495c77008a72c65f95c06b7d9ab0a4bcf102969d080c7f875d0e2"
+        },
+        {
+          "path": "preparation/navigation.json",
+          "bytes": 1656,
+          "sha256": "bf4c90df3751f7c04e6a5ebf22a0893d2a6dc3aac14f884df65efafc77b9d924"
+        },
+        {
+          "path": "preparation/rotation.json",
+          "bytes": 545,
+          "sha256": "295eb4fa65594a9cb51080231e3bb026cc34a573eb9919f4500fc5cddfb4f238"
+        },
+        {
+          "path": "preparation/terrestrial.json",
+          "bytes": 11157,
+          "sha256": "53d1c8bbe2de7591f5ab025f349a06f017dca02f27aef88a2807e5f401ce1b3c"
+        },
+        {
+          "path": "presentation/minimap.json",
+          "bytes": 34,
+          "sha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+        },
+        {
+          "path": "presentation/title-mark.json",
+          "bytes": 3930,
+          "sha256": "b61f1d4b7244be20c3806cc02d1fe18762460deb5573d51a3c59ae936f23bb83"
+        },
+        {
+          "path": "shape/hyperion_30k_plt.xml",
+          "bytes": 12766,
+          "sha256": "78c04481a0e7350d1f882f89279d92851084f045096198f5eed63b34976c9864"
+        },
+        {
+          "path": "shape/hyperion_document.pdf",
+          "bytes": 79311,
+          "sha256": "8d1a549688360a8bee5971b2b4bfe11660a010d2225d910070a3c94be9477942"
+        },
+        {
+          "path": "stars/ESO-IMAGE-LICENSE.md",
+          "bytes": 2192,
+          "sha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+        },
+        {
+          "path": "stars/LICENSE.md",
+          "bytes": 598,
+          "sha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+        },
+        {
+          "path": "stars/hyg-v41-field.json",
+          "bytes": 851,
+          "sha256": "dca0ab4c3926df203d8529da3643b838c2f1a61e64334fcd3d8336b158a5bb9b"
+        },
+        {
+          "path": "editorial/factsheet-review.json",
+          "bytes": 1089,
+          "sha256": "1e080d1bb25bb379560684a3bdb79a47c59797bfa8ca41ff0545138700e5a9c5"
+        },
+        {
+          "path": "validation/n1506391424-registration.json",
+          "bytes": 10299,
+          "sha256": "41f066f90d72f352756ea3a2933ea46b317d91e72a391cc9952b1583dcc8ef45"
+        }
+      ],
+      "restored": [
+        {
+          "path": "observations/N1506383441_2_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "737553c1ebb0de17daa91d5c3fb5a81e3b3607b3b12db623a606a73f5b539d8e",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1506383441_2_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1506388174_2_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "b255f7921c6a03784e0de245bca7b36477058ad6d4b57f3e82ff5c7121c83002",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1506388174_2_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1506388518_2_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "049a41fa5fa30efa56bd3e5d929e60bccc2f8b3359f9a14329f8897f75461d80",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1506388518_2_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1506388840_2_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "7fd3bb4d4c4fd1b8b26dfa6cf35c48a1f7711bfe5da307762720cb801a43f85e",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1506388840_2_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1506389178_2_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "29ff6539441b348e70fe0d5327d5666275ace1a337f287afe2a93b92dd828854",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1506389178_2_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1513999046_1_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "13b6d5694f2e9024f220e7564d5cb5ae8227047fa7a1659b62b7655769f97183",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1513999046_1_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1530182624_1_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "7ea627f7f51829068d449d9ae8b066dea1add7d878aa3f0486352321cfe71be3",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1530182624_1_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1530201013_1_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "467a117f2e9068662ea944ba03e779fccc4c843e33daabcb59681c36e51dcd1e",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1530201013_1_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1692997492_1_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "d1b49a960d1fd6188c68a816cca69058c0ad81d607e4f73deea8592426841444",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1692997492_1_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1694888328_1_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "48c5e31fbc53dcca25a079494af57f2aca0713326184fbba04ca04c01f6b6e64",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1694888328_1_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.IMG"
+          }
+        },
+        {
+          "path": "observations/N1811772616_1_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "97471861a6b170aba8e84a04fbba79bfe54a485d568943219d2a974cf55e02fa",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1811772616_1_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.IMG"
+          }
+        },
+        {
+          "path": "shape/hyperion_30k_plt.tab",
+          "bytes": 2195250,
+          "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "shape/hyperion_30k_plt.tab",
+            "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/hyperion_30k_plt.tab"
+          }
+        },
+        {
+          "path": "stars/eso0932a.tif",
+          "bytes": 29082084,
+          "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "stars/eso0932a.tif",
+            "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+          }
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "bytes": 862936,
+          "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "presentation/InterVariable.ttf",
+            "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+          }
+        },
+        {
+          "path": "observations/N1506391424_2_CALIB.IMG",
+          "bytes": 4202496,
+          "sha256": "b212dac15ff2cec9213da76d2f0a540a1d6dfb10646e727bc472db0a99e25669",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/N1506391424_2_CALIB.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG"
+          }
+        }
+      ],
+      "startedAt": "2026-09-09T12:04:05.282Z",
+      "acquisition": {
+        "operationCount": 15
+      },
+      "verification": {
+        "inputCount": 27,
+        "generatedIntermediateCount": 1,
+        "documentCount": 15,
+        "verifiedCount": 43
+      },
+      "finishedAt": "2026-09-09T12:04:18.903Z"
+    },
+    {
+      "id": "phoebe",
+      "status": "PASS",
+      "sourceRoot": "sources/phoebe",
+      "manifestSha256": "363330a1ef627db920df17d07829cbee417b29db1d1c6bf06eef58421d8d194f",
+      "copied": [
+        {
+          "path": "science/2023/phoebe_albedo_c.cub",
+          "bytes": 9941545,
+          "sha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3"
+        },
+        {
+          "path": "science/2023/phoebe_radius_c.cub",
+          "bytes": 9942047,
+          "sha256": "9d30106e1acd7a85ba374b4f6cd8af0da8cf9569efab5ca95439d9975858817d"
+        },
+        {
+          "path": "science/2023/phoebe_bestmap_c.cub",
+          "bytes": 326427,
+          "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15"
+        },
+        {
+          "path": "science/2023/phoebe_numimg_c.cub",
+          "bytes": 326413,
+          "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d"
+        },
+        {
+          "path": "presentation/context.png",
+          "bytes": 115290,
+          "sha256": "4a2a1a9cb3c5b5b6b91663897ed302bd78bbed6b09df19fe72f8698af7c275d1"
+        },
+        {
+          "path": "content/object.json",
+          "bytes": 10368,
+          "sha256": "e4d1f629e482feb6574fc81439adac2d72f429a0e13fe5a076e93f00736fd87d"
+        },
+        {
+          "path": "observations/datainfo.txt",
+          "bytes": 2879,
+          "sha256": "e624ef80aadb786289ced6c7e7fb687ed43bf2a43681615ba2d3490346e90aa9"
+        },
+        {
+          "path": "observations/regional-color-example-label.txt",
+          "bytes": 13093,
+          "sha256": "383d1877fa726030589d125c57c46dc2432376408f44875527b0c3ccec2e8707"
+        },
+        {
+          "path": "preparation/acquisition.json",
+          "bytes": 2286,
+          "sha256": "bb9c243ce9a33fb04fe6475d3cd82d4a26c4025aa279ded13590e067884ee47d"
+        },
+        {
+          "path": "preparation/navigation.json",
+          "bytes": 1436,
+          "sha256": "3078fdf7c44cf8ee205193606d98a114bc9f7a70de92af89e385b699599a4923"
+        },
+        {
+          "path": "preparation/rotation.json",
+          "bytes": 668,
+          "sha256": "5dba43a0956e9dd4b84819ea83d253431569afb4b5126661ef5a9c28c2a39713"
+        },
+        {
+          "path": "preparation/terrestrial.json",
+          "bytes": 9433,
+          "sha256": "07bd55495c3a96a3ba45203a2f9bb69df5aa70c55701571f0ff0d1380a0dcb3c"
+        },
+        {
+          "path": "presentation/minimap.json",
+          "bytes": 34,
+          "sha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+        },
+        {
+          "path": "presentation/title-mark.json",
+          "bytes": 3892,
+          "sha256": "24ac25702c2b96ae23274cca88949210c6bb96f42afd4eeff450c7d9bb5f438a"
+        },
+        {
+          "path": "shape/README.txt",
+          "bytes": 5911,
+          "sha256": "c950ffefbadd767e022a772724ff5b5170134fa98d650c11559752b20fa3d7c2"
+        },
+        {
+          "path": "shape/icqmodel.asc",
+          "bytes": 7297,
+          "sha256": "1e4f9ac874076e5f02c15efb0cc803ff6d3c6d707f2f88edb1ec0ff1b75f8415"
+        },
+        {
+          "path": "shape/phoebe_ver128q.xml",
+          "bytes": 13891,
+          "sha256": "502d5119f3de1e7770594683e672e49c586ac9e0ad5b9cab85a109ee1537038e"
+        },
+        {
+          "path": "stars/ESO-IMAGE-LICENSE.md",
+          "bytes": 2192,
+          "sha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+        },
+        {
+          "path": "stars/LICENSE.md",
+          "bytes": 598,
+          "sha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+        },
+        {
+          "path": "stars/hyg-v41-field.json",
+          "bytes": 849,
+          "sha256": "c1c83cb4ab9949ee346e0211c2f169b08bea66ff8bfbaa9f9c16276ed6cdbe1b"
+        },
+        {
+          "path": "editorial/factsheet-review.json",
+          "bytes": 1085,
+          "sha256": "18382312259d453de290b2017d9d054e0551dcba57c88693b8be1eac2e3bc95a"
+        },
+        {
+          "path": "shape/2023/phoebe_128_o.xml",
+          "bytes": 8362,
+          "sha256": "ba1b4e2b48c1ddf3e4ba0f02d9a8f70f24fb0dfbd1ce29b41329cd3df3da08b7"
+        },
+        {
+          "path": "science/2023/phoebe_albedo_c.xml",
+          "bytes": 7182,
+          "sha256": "d2edeca7fc28031ef0b1d980d4cedb9a1479a4d5fa9fe5fb68e2bdad04fb0253"
+        },
+        {
+          "path": "science/2023/phoebe_radius_c.xml",
+          "bytes": 7137,
+          "sha256": "82159c91ae1218cd0d92c5147f871974f3645085b6f5b3227c5e62e367168ad3"
+        },
+        {
+          "path": "science/2023/phoebe_bestmap_c.xml",
+          "bytes": 7108,
+          "sha256": "91cd4e7be8c9fd1ddf51950c125f3f4e307ad77ae2aa4f0c8198fa4d0b7d1c81"
+        },
+        {
+          "path": "science/2023/phoebe_numimg_c.xml",
+          "bytes": 7110,
+          "sha256": "7b5056187db70dd6859872225de6fffd2988c354d3284849b59280a1fb951111"
+        },
+        {
+          "path": "science/2023/productdescription.txt",
+          "bytes": 16534,
+          "sha256": "b8a24258e4a2f97de3158453a01262571a0061ddfa00c3581b8aad4356b0a3a7"
+        },
+        {
+          "path": "science/2023/phoebekernellist.txt",
+          "bytes": 8233,
+          "sha256": "8bcffafa72f3d7d4f2c9711a9478a6ded84b1e48f15e33e1d890c3954ec964f3"
+        },
+        {
+          "path": "science/2023/phoebeimglist.txt",
+          "bytes": 3952,
+          "sha256": "d70688edd7b16c7baa6dbe1809be702ef95d3b69a13c3220d7f690368f859ac0"
+        },
+        {
+          "path": "science/2023/phoebeshapeassessment.pdf",
+          "bytes": 395600,
+          "sha256": "c84bc74796fa2bd29f9b631ffbfe8c5147cd5af3945e71d25c8453e263bf3c02"
+        },
+        {
+          "path": "validation/2023-geometry-initial-trial.json",
+          "bytes": 4524,
+          "sha256": "922b9cd4c4d2d0dea007e5d4f9f1fc999881d86da8d342a505e79aec3013850d"
+        },
+        {
+          "path": "validation/2023-geometry-qualification.json",
+          "bytes": 29982,
+          "sha256": "22b7e0291f5cc826250ec335e9b26270549846ab9d289a580ad4b79e6cb85565"
+        },
+        {
+          "path": "validation/2023-geometry-regularized-trial.json",
+          "bytes": 4401,
+          "sha256": "e5d7548e98a6f01027fadee7970968813f59dab10d05ef5a8ec386f1bb33f93e"
+        },
+        {
+          "path": "validation/2023-independent-geometry.json",
+          "bytes": 1549,
+          "sha256": "496106c374ccebee5ad373898d9f4af9f932c3173fa87aadc16add2a99c342cd"
+        },
+        {
+          "path": "validation/2023-mask-source-check.json",
+          "bytes": 608,
+          "sha256": "829386da334c8d6b492d66ebc7cd6f97ec124f6b24d0fe2bc68148f74b5d10b7"
+        },
+        {
+          "path": "validation/2023-source-statistics.json",
+          "bytes": 9783,
+          "sha256": "d148c26d174e7defaceb2d795f746069e2595f8227aa1fd01478136cf834c031"
+        },
+        {
+          "path": "validation/2023-context-generation.json",
+          "bytes": 2239,
+          "sha256": "6a8ab7858925801e7b75e7b43bb7e793d5f1e948d23a76cac07d4e1802b7812a"
+        }
+      ],
+      "restored": [
+        {
+          "path": "observations/SP_1M_0_0_SIMP.IMG",
+          "bytes": 4158720,
+          "sha256": "e2a26482052ef9d67dd5c82df096daedc9cec0c0345c94e07f9b4461622aa69a",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/SP_1M_0_0_SIMP.IMG",
+            "url": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG"
+          }
+        },
+        {
+          "path": "shape/phoebe_ver128q.tab",
+          "bytes": 16897992,
+          "sha256": "92550ba0625255a2f91cd5d9a7b52e020fc4ba76c7ef3fd76a9728a66df697c2",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "shape/phoebe_ver128q.tab",
+            "url": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab"
+          }
+        },
+        {
+          "path": "stars/eso0932a.tif",
+          "bytes": 29082084,
+          "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "stars/eso0932a.tif",
+            "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+          }
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "bytes": 862936,
+          "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "presentation/InterVariable.ttf",
+            "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+          }
+        },
+        {
+          "path": "shape/2023/phoebe_128_o.obj",
+          "bytes": 17787240,
+          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "shape/2023/phoebe_128_o.obj",
+            "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_128_o.obj"
+          }
+        }
+      ],
+      "startedAt": "2026-09-09T12:04:18.904Z",
+      "acquisition": {
+        "operationCount": 5
+      },
+      "verification": {
+        "inputCount": 9,
+        "generatedIntermediateCount": 1,
+        "documentCount": 32,
+        "verifiedCount": 42
+      },
+      "finishedAt": "2026-09-09T12:04:26.467Z"
+    },
+    {
+      "id": "proteus",
+      "status": "PASS",
+      "sourceRoot": "sources/proteus",
+      "manifestSha256": "f5decb51973c2820303288e56672eeada39430b929ba1b878205f95770b0d277",
+      "copied": [
+        {
+          "path": "observations/C1137317_GEOMED.LBL",
+          "bytes": 3310,
+          "sha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2"
+        },
+        {
+          "path": "observations/C1138920_GEOMED.LBL",
+          "bytes": 3337,
+          "sha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257"
+        },
+        {
+          "path": "observations/C1137328_GEOMED.LBL",
+          "bytes": 3296,
+          "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42"
+        },
+        {
+          "path": "observations/C1137339_GEOMED.LBL",
+          "bytes": 3310,
+          "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497"
+        },
+        {
+          "path": "observations/C1137350_GEOMED.LBL",
+          "bytes": 3311,
+          "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9"
+        },
+        {
+          "path": "presentation/context.png",
+          "bytes": 171596,
+          "sha256": "a9c3c8c3da8064423c8a14cea97470034ec1ee52c7500cdcc83b7926decf1546"
+        },
+        {
+          "path": "content/object.json",
+          "bytes": 6943,
+          "sha256": "e13b5cbfe39ee3c63615c6a1eb8ca5c9af6980fb3c2f8d0081249558b6aa0344"
+        },
+        {
+          "path": "geometry/c1137317-opus.json",
+          "bytes": 11743,
+          "sha256": "d3d1a5645feab5ac03bc94cc3bdb1e1890da0d417211c1b19bde01c150b5014f"
+        },
+        {
+          "path": "geometry/c1138920-opus.json",
+          "bytes": 11754,
+          "sha256": "6cc522851f17565b1fb25a10f609294718e68538ee704fcdec405c38b65a01cb"
+        },
+        {
+          "path": "geometry/naif0012.tls",
+          "bytes": 5257,
+          "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+        },
+        {
+          "path": "geometry/registration.json",
+          "bytes": 2833,
+          "sha256": "0583bb7518dfa54371efd062949d8cbce57b38d1874553d1344e4cb1ea16b7de"
+        },
+        {
+          "path": "geometry/vg200051.tsc",
+          "bytes": 108191,
+          "sha256": "bf8ae3b237a4f75362ae4bf5fe133ec4a888877f6183f1705330b9433f81dcac"
+        },
+        {
+          "path": "geometry/vg2_nep_version1_type1_iss_sedr.bc",
+          "bytes": 885760,
+          "sha256": "f181a43f5785867afc81436a202a6ec453c8dd5538172ae916ca979981051f11"
+        },
+        {
+          "path": "geometry/vg2_nep_version1_type1_iss_sedr.txt",
+          "bytes": 5575,
+          "sha256": "8bce7257eea9a974b3b6a488bb248c662048459c8669d19c1e1b3259a7fbfab7"
+        },
+        {
+          "path": "geometry/vg2_v02.tf",
+          "bytes": 12008,
+          "sha256": "aa529b2dbf43b7f925b3e81e86a3d7e74a4d99c392113197e5f6d5bf13c37fcb"
+        },
+        {
+          "path": "preparation/acquisition.json",
+          "bytes": 4156,
+          "sha256": "39f3c5ae68d597577d860871e61f989f24ad09750932991b6840f1f6dd582628"
+        },
+        {
+          "path": "preparation/navigation.json",
+          "bytes": 1255,
+          "sha256": "795a412edd657b6fb039fc48ac62b46b4d7a4149cc563fc2c85d95e973ae06a5"
+        },
+        {
+          "path": "preparation/terrestrial.json",
+          "bytes": 9373,
+          "sha256": "f9c7b352f33c4d4ee6613952d34732ea08c4393dc5494dedd2985648b65054ef"
+        },
+        {
+          "path": "presentation/minimap.json",
+          "bytes": 34,
+          "sha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+        },
+        {
+          "path": "presentation/title-mark.json",
+          "bytes": 3829,
+          "sha256": "2250fdbf3fb69cc02158364b864a01a80e113d5842acd2a1697948010cb3df6c"
+        },
+        {
+          "path": "shape/bundle_description.txt",
+          "bytes": 5105,
+          "sha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+        },
+        {
+          "path": "shape/n8proteus.xml",
+          "bytes": 6278,
+          "sha256": "2db42d2c7238b54cbde71e813f189c72b8cb1b1b91a82db184b9d6948a89b886"
+        },
+        {
+          "path": "shape/pck00011.tpc",
+          "bytes": 131226,
+          "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+        },
+        {
+          "path": "stars/ESO-IMAGE-LICENSE.md",
+          "bytes": 2192,
+          "sha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+        },
+        {
+          "path": "stars/LICENSE.md",
+          "bytes": 598,
+          "sha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+        },
+        {
+          "path": "stars/hyg-v41-field.json",
+          "bytes": 850,
+          "sha256": "3b4c2a9d5720930b2aeb7491dea51d3c2c22d5d372b11716c62ab6db0dd083f4"
+        },
+        {
+          "path": "editorial/factsheet-review.json",
+          "bytes": 1089,
+          "sha256": "dc1991bce819ba1b50ac5aa0b86f0f4c211f90872197cff914f915e01c4505fc"
+        },
+        {
+          "path": "geometry/c1137328-opus.json",
+          "bytes": 11716,
+          "sha256": "55f6021bc89b524cb4c1783d273a651cde563acbd3ddb80e09a1787b58e36b94"
+        },
+        {
+          "path": "geometry/c1137339-opus.json",
+          "bytes": 11743,
+          "sha256": "f3f4271a94c03c1bc26cd1af287cd7926a93c21621065b107d3560cd2b981e16"
+        },
+        {
+          "path": "geometry/c1137350-opus.json",
+          "bytes": 11728,
+          "sha256": "fc4cdb9829c78e933f815afde5aea1486f98f6105034680850690483451c8d59"
+        },
+        {
+          "path": "geometry/color-background.json",
+          "bytes": 1750,
+          "sha256": "89404347728a5e47cd3fb06c4f8cb9670289e036533baa39a60b497e33f67f53"
+        },
+        {
+          "path": "observations/PROCESSING.TXT",
+          "bytes": 28054,
+          "sha256": "2b56645227270a0d81bca988a776a8a175211351984d5fdeba225e69f2a6d945"
+        },
+        {
+          "path": "preparation/register-voyager-color.py",
+          "bytes": 11432,
+          "sha256": "b7f136cef203ce1aefd9ce2687fdd1f30c98b83318ced8a242adda3594766aca"
+        },
+        {
+          "path": "geometry/color-registration.json",
+          "bytes": 83989,
+          "sha256": "fda7547cb70e8464119219afe492a633a5aff77c4287816200f3c6ed42343bd0"
+        }
+      ],
+      "restored": [
+        {
+          "path": "observations/C1137317_GEOMED.IMG",
+          "bytes": 2002000,
+          "sha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/C1137317_GEOMED.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG"
+          }
+        },
+        {
+          "path": "observations/C1138920_GEOMED.IMG",
+          "bytes": 2002000,
+          "sha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/C1138920_GEOMED.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG"
+          }
+        },
+        {
+          "path": "shape/n8proteus.tab",
+          "bytes": 70226,
+          "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "shape/n8proteus.tab",
+            "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n8proteus.tab"
+          }
+        },
+        {
+          "path": "stars/eso0932a.tif",
+          "bytes": 29082084,
+          "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "stars/eso0932a.tif",
+            "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+          }
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "bytes": 862936,
+          "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "presentation/InterVariable.ttf",
+            "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+          }
+        },
+        {
+          "path": "observations/C1137328_GEOMED.IMG",
+          "bytes": 2002000,
+          "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/C1137328_GEOMED.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG"
+          }
+        },
+        {
+          "path": "observations/C1137339_GEOMED.IMG",
+          "bytes": 2002000,
+          "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/C1137339_GEOMED.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG"
+          }
+        },
+        {
+          "path": "observations/C1137350_GEOMED.IMG",
+          "bytes": 2002000,
+          "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/C1137350_GEOMED.IMG",
+            "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG"
+          }
+        }
+      ],
+      "startedAt": "2026-09-09T12:04:26.468Z",
+      "acquisition": {
+        "operationCount": 8
+      },
+      "verification": {
+        "inputCount": 13,
+        "generatedIntermediateCount": 1,
+        "documentCount": 28,
+        "verifiedCount": 42
+      },
+      "finishedAt": "2026-09-09T12:04:32.159Z"
+    },
+    {
+      "id": "titania",
+      "status": "FAILED",
+      "sourceRoot": "sources/titania",
+      "manifestSha256": "8682d5cde7e1d1bf7f9c125f3bacd812808de5612ef5387042b49fdd45e0b1db",
+      "copied": [
+        {
+          "path": "science/geology-2026/Titania surface.lyrx",
+          "bytes": 32660,
+          "sha256": "95c0a72b009403ee138407c775c4adcd33931a40d24b9d9ea2bd53f8697a749e"
+        },
+        {
+          "path": "science/geology-2026/Crater Materials .lyrx",
+          "bytes": 149715,
+          "sha256": "b3fa92f23f03b61629cbbacf9632fddef4cad3c651fc1f63475ba5936e19f9e2"
+        },
+        {
+          "path": "science/geology-2026/Plains Materials .lyrx",
+          "bytes": 74125,
+          "sha256": "6abdeb1388377c3c858c604c935c802cd13d17c5d6c78fd70968953f3241b597"
+        },
+        {
+          "path": "science/geology-2026/Titania Linework.lyrx",
+          "bytes": 11867,
+          "sha256": "43073f18b71601f52ba8c83e988f47bf985c45abe1b64b167139e5f6142cbae0"
+        },
+        {
+          "path": "science/geology-2026/Titania geologic map .lyrx",
+          "bytes": 33323,
+          "sha256": "bd57952e22b1f479d8aa50c4f6060e6653ffbcc970b9648cd6cb37123969b5af"
+        },
+        {
+          "path": "science/geology-2026/Additional Tectonic symbols.lyrx",
+          "bytes": 15530,
+          "sha256": "17e64bfef68ce942aafdda19c0636b291ef84e28c26111eaa2d1ddce25173028"
+        },
+        {
+          "path": "science/geology-2026/categories.tif",
+          "bytes": 25962,
+          "sha256": "fae52df10d453d09be1c98f7d000ff12ae56d0ffa3304190cb45f4fb838f038e"
+        },
+        {
+          "path": "preparation/terrestrial.json",
+          "bytes": 6435,
+          "sha256": "66af3b3720282972302367646b5d22f5f84790c4319c8d7a2da3a112788f5c6f"
+        },
+        {
+          "path": "preparation/navigation.json",
+          "bytes": 3296,
+          "sha256": "0b65cf876da337da6fa9fe38e3cbca12bb224f99910a8bf263d88fe4cf98a273"
+        },
+        {
+          "path": "preparation/acquisition.json",
+          "bytes": 3023,
+          "sha256": "6e81dbbc6d1e0f9712a6c81dd7940a6387ca2b299037207c0601f226780a2830"
+        },
+        {
+          "path": "content/object.json",
+          "bytes": 13358,
+          "sha256": "458a227ac06134254e4e4bf51a5c557f4f8a49b4e4efbe6936eef2c8d39d4149"
+        },
+        {
+          "path": "presentation/title-mark.json",
+          "bytes": 3820,
+          "sha256": "0801e9d717da2e92db9702fdafc807b3530f0df2e8b292d9b0898dedf6a2c07c"
+        },
+        {
+          "path": "presentation/minimap.json",
+          "bytes": 34,
+          "sha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+        },
+        {
+          "path": "stars/ESO-IMAGE-LICENSE.md",
+          "bytes": 2192,
+          "sha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+        },
+        {
+          "path": "stars/LICENSE.md",
+          "bytes": 598,
+          "sha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+        },
+        {
+          "path": "stars/hyg-v41-field.json",
+          "bytes": 850,
+          "sha256": "4f0dc5b304ec334d693054f2efc387ec680ed84b201d215fcd118bb4137bbb1d"
+        },
+        {
+          "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
+          "bytes": 2426,
+          "sha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
+        },
+        {
+          "path": "observations/source-inspection.json",
+          "bytes": 3755,
+          "sha256": "5173038594c35caf327347b439747918527b69df678d153e399746440b0417cd"
+        },
+        {
+          "path": "editorial/factsheet-review.json",
+          "bytes": 1078,
+          "sha256": "57ecaabe18cb3d09abded31c579a7c35b4a80ef2e1f3cf1d67893c4d38555fc9"
+        },
+        {
+          "path": "preparation/geology-conversion.json",
+          "bytes": 6105,
+          "sha256": "63f281e6d5472dbe303b2f687f1338c67803c6a13df8b878d28306fb89ca0943"
+        },
+        {
+          "path": "science/geology-2026/preview-overlap-evidence.json",
+          "bytes": 2440,
+          "sha256": "e18502516f75a95b1013419a128370eb11c2d13cd1f995475205e0059b84e8e4"
+        },
+        {
+          "path": "science/geology-2026/nomenclature.json",
+          "bytes": 10589,
+          "sha256": "7bbecba44adbe75155f3acc4fea477aee16939011ef451c8e712381e56397554"
+        },
+        {
+          "path": "science/geology-2026/categories.receipt.json",
+          "bytes": 2755,
+          "sha256": "8d55006e28bc6a4127e4e8db9c2215e48dae33875ceba881d7e36c5d2e36bd27"
+        },
+        {
+          "path": "science/geology-2026/registration.json",
+          "bytes": 4004,
+          "sha256": "49de4d090ca39167189fd4e9f74f2553a53b1030f0b2bf8968358dcadd3e4d07"
+        },
+        {
+          "path": "science/geology-2026/release-metadata.json",
+          "bytes": 6777,
+          "sha256": "c9cd9f54a5397bd7c432fb1e1fe5f2edca0ad6fdf1ebb69e0a4459ac540bf437"
+        },
+        {
+          "path": "science/geology-2026/acquisition-receipt.json",
+          "bytes": 2888,
+          "sha256": "7be47d4d17d200ca1c2bee6746af46635d82a25e72b1d1f9354388cf89146022"
+        },
+        {
+          "path": "science/geology-2026/nomenclature.pdf",
+          "bytes": 2446389,
+          "sha256": "c139389b02627f54bdd416afce3dfdce84bfa59d21efa8fd745da31082e3ef9f"
+        },
+        {
+          "path": "science/geology-2026/nomenclature.zip",
+          "bytes": 84339,
+          "sha256": "3a17713bc5527b46fe23685ebeee3bc4461f3f7ea2a21c3035c14702ca14b0cc"
+        }
+      ],
+      "restored": [
+        {
+          "path": "observations/tumap-cyl-180180.cub.gz",
+          "bytes": 2336639,
+          "sha256": "9bafb22e1b0be35212c078d77e9f1364e3ff6b6873d0e98c4073055f29ed91ae",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/tumap-cyl-180180.cub.gz",
+            "url": "https://earth-assets.lowpoly.cc/source-assets/9bafb22e1b0be35212c078d77e9f1364e3ff6b6873d0e98c4073055f29ed91ae/tumap-cyl-180180.cub.gz"
+          }
+        },
+        {
+          "path": "science/tudem-ZL-180180.cub.gz",
+          "bytes": 1807867,
+          "sha256": "3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "science/tudem-ZL-180180.cub.gz",
+            "url": "https://earth-assets.lowpoly.cc/source-assets/3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d/tudem-ZL-180180.cub.gz"
+          }
+        },
+        {
+          "path": "stars/eso0932a.tif",
+          "bytes": 29082084,
+          "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "stars/eso0932a.tif",
+            "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+          }
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "bytes": 862936,
+          "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "presentation/InterVariable.ttf",
+            "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+          }
+        },
+        {
+          "path": "science/geology-2026/Titania Map 2.gdb.zip",
+          "bytes": 126593,
+          "sha256": "6a2a2020440a3def8b9d014b95588badf9ac26d16a45251e4a93fd2da8632bbf",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "science/geology-2026/Titania Map 2.gdb.zip",
+            "url": "https://zenodo.org/api/records/20819132/files/Titania%20Map%202.gdb.zip/content"
+          }
+        },
+        {
+          "path": "science/geology-2026/Screenshot 2026-06-23 151155.png",
+          "bytes": 383332,
+          "sha256": "a98427ba99cd0e55440512f527daca2e7f1745229e22f7aca7f31f8b78a65319",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "science/geology-2026/Screenshot 2026-06-23 151155.png",
+            "url": "https://zenodo.org/api/records/20819132/files/Screenshot%202026-06-23%20151155.png/content"
+          }
+        }
+      ],
+      "startedAt": "2026-09-09T12:04:32.160Z",
+      "error": "Error: Source request failed 403: https://zenodo.org/api/records/20819132/files/Titania%20Map%202.gdb.zip/content.\n    at request (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/operations.js:404:29)\n    at async executeAcquisition (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/operations.js:415:40)\n    at async file:///Users/ekrof/fed/cssEarth-pluto-small-moons/docs/moons/b3-preparation/final/restore-fresh-sources.mjs:135:28",
+      "finishedAt": "2026-09-09T12:04:35.385Z"
+    },
+    {
+      "id": "miranda",
+      "status": "FAILED",
+      "sourceRoot": "sources/miranda",
+      "manifestSha256": "4df570221b10b4d6a102e7afd287119e9f0ec4aab0d8cc689be845f1b7fc0a89",
+      "copied": [
+        {
+          "path": "science/geology-2026/Rh Linework.lyrx",
+          "bytes": 11915,
+          "sha256": "6c746bd7f64359ff1eb844d8c7fe712bbbac55299738765a0f44480125b674b3"
+        },
+        {
+          "path": "science/geology-2026/Meranda geologic map.lyrx",
+          "bytes": 33058,
+          "sha256": "9cc601046b2fa83afc96614cf4e61cb24a4aa1ea5cfc784be014a5550a60a151"
+        },
+        {
+          "path": "science/geology-2026/lightly mantled cratered terrain.lyrx",
+          "bytes": 12919,
+          "sha256": "33fe68f2f6af6ef9b81aab9921b9a96c28258b26965c085bdbd001508a1ddc61"
+        },
+        {
+          "path": "science/geology-2026/fractured canyon floor.lyrx",
+          "bytes": 12866,
+          "sha256": "33599798ade470ef11fc6ac716a335f5897440461f4ee2b2347328e8a849d7e7"
+        },
+        {
+          "path": "science/geology-2026/Rm Linework.lyrx",
+          "bytes": 11915,
+          "sha256": "7020d6fdf64f65c72fc8293da9a654ed0395be579edf42f42482d0a7e62d3e90"
+        },
+        {
+          "path": "science/geology-2026/Miranda surface.lyrx",
+          "bytes": 32166,
+          "sha256": "96887943327f7f59d5fa2c491f84d4aff9f6f3eb2df739ed6c6f5e50e66b8301"
+        },
+        {
+          "path": "science/geology-2026/Pn Linework.lyrx",
+          "bytes": 11868,
+          "sha256": "095aefe1c0c2e2211188efd6eee25df7d468fc812e74c1c5ebaf172e329c1bbe"
+        },
+        {
+          "path": "science/geology-2026/Ce linework.lyrx",
+          "bytes": 11915,
+          "sha256": "faecf6ebeb9256b51201808974f0f162afa6186e649c62db588c8481ed60093a"
+        },
+        {
+          "path": "science/geology-2026/hummocky canyon floor.lyrx",
+          "bytes": 12858,
+          "sha256": "4c1f349225588b569b47bc3a1645b67a26fa0c8bbf590c5c1cedf1a8540f7423"
+        },
+        {
+          "path": "science/geology-2026/Ri linework.lyrx",
+          "bytes": 11915,
+          "sha256": "618d719b4bf3015468f81086483f2dad683e0fd5780d1fe4d03052f506d226f7"
+        },
+        {
+          "path": "science/geology-2026/dark albedo canyon slope.lyrx",
+          "bytes": 12928,
+          "sha256": "0cc2a2116b30c01226ebb0729875ceb4b0c24dd1d529ae87f7daef6643f25efe"
+        },
+        {
+          "path": "science/geology-2026/Pl Linework.lyrx",
+          "bytes": 11915,
+          "sha256": "d564e44bd987fbdae3ce9fa0ca78e4ad10ce6bd6f18e57d2531e0f2eb3c192fa"
+        },
+        {
+          "path": "science/geology-2026/Rd Linework.lyrx",
+          "bytes": 12429,
+          "sha256": "08ffed47e1664a6537e4478193110ea4131f2493b77659b3c54403d4b3af3eb5"
+        },
+        {
+          "path": "science/geology-2026/light albedo material.lyrx",
+          "bytes": 12860,
+          "sha256": "2395e9920df7d563bfed69a7b64d109f95baeae8c806f5a798c6177572ebd8cb"
+        },
+        {
+          "path": "science/geology-2026/Rf linework.lyrx",
+          "bytes": 11915,
+          "sha256": "d9eecfe664f0915fbba416ee9b01c7183f22c55b345347fcd7b953bfdd1474b0"
+        },
+        {
+          "path": "science/geology-2026/flow material.lyrx",
+          "bytes": 12838,
+          "sha256": "4a7dfa6ef7978709db8dc63ce5ea5c7da1c8b6a7e19de5f554fc7dab562986b9"
+        },
+        {
+          "path": "science/geology-2026/Pv Linework.lyrx",
+          "bytes": 11901,
+          "sha256": "9b8e552d8c70320b402a6db755f4822baae3a9237de0dbeb90924a751a16b958"
+        },
+        {
+          "path": "science/geology-2026/medium albedo material.lyrx",
+          "bytes": 12936,
+          "sha256": "2716e9fddc93c0e056cd11568a330fabb57f369ba007e5a0bcd71075234ea6ff"
+        },
+        {
+          "path": "science/geology-2026/heavily mantled cratered terrain.lyrx",
+          "bytes": 12921,
+          "sha256": "9e460834c973f33ceb425062d80bb096ff3566da860bfece8d1d85b0afb1ce50"
+        },
+        {
+          "path": "science/geology-2026/Cf Linework.lyrx",
+          "bytes": 11870,
+          "sha256": "ee8ad626da25f9cb7837a3aa296171f2eea24b7bfcca73c30cb2e9b6b59db1f6"
+        },
+        {
+          "path": "science/geology-2026/Pm Linework.lyrx",
+          "bytes": 11902,
+          "sha256": "90af9f201255f483b4a112b3b6efb0cba78f64c35d21cd60442acfb8581d3eee"
+        },
+        {
+          "path": "science/geology-2026/medium albedo canyon.lyrx",
+          "bytes": 12850,
+          "sha256": "2d913efed9e02bbd569c5e580dc1a9aad285ea997e3bb132315e7007ded5acfc"
+        },
+        {
+          "path": "science/geology-2026/wisp-like light material.lyrx",
+          "bytes": 12871,
+          "sha256": "aeff820b887abde6d983b04b1e4923bd9a59fb9ecb7c6cc5fe4c0786f79ff588"
+        },
+        {
+          "path": "science/geology-2026/Miranda linework.lyrx",
+          "bytes": 11902,
+          "sha256": "bd15050d6d7d7faf485790aa5e69f037987fc789c3f1fd9c6b0ba5726a2b71f3"
+        },
+        {
+          "path": "science/geology-2026/northern ridged plains.lyrx",
+          "bytes": 12863,
+          "sha256": "4acf482a7e6adf8bf24c551a148e2f3e774561bdaba378f5f8be065db333fc39"
+        },
+        {
+          "path": "science/geology-2026/Pf Linework.lyrx",
+          "bytes": 11891,
+          "sha256": "9552c58c4d6a6ce79663df504c819f12c49f69e371d4bda2d57a377ff32730a6"
+        },
+        {
+          "path": "science/geology-2026/light albedo canyon.lyrx",
+          "bytes": 12848,
+          "sha256": "2017072aad215f108d8363d34bb627d46d8f83197b72fa18c2c8427714102f79"
+        },
+        {
+          "path": "science/geology-2026/Mantled canyon rim.lyrx",
+          "bytes": 11945,
+          "sha256": "41b257626ef403012d70884c747b338b80c5804c11f6094d107c612e978ade8a"
+        },
+        {
+          "path": "science/geology-2026/Pd Linework.lyrx",
+          "bytes": 11903,
+          "sha256": "1aef7cf5ed1fc26b39500985e26714b8aafd3d72d17a1304e2a1cf02ff081cb2"
+        },
+        {
+          "path": "science/geology-2026/Ps Linework.lyrx",
+          "bytes": 11868,
+          "sha256": "6b6dada51533dd768292617dcfe7001b99e43536b801d96c184f2a622efbe9f4"
+        },
+        {
+          "path": "science/geology-2026/dark material.lyrx",
+          "bytes": 12814,
+          "sha256": "1561206a2a806d35c7420b94a2d22bffa9f148abe260900b30a1906444186192"
+        },
+        {
+          "path": "science/geology-2026/Pw Linework.lyrx",
+          "bytes": 11915,
+          "sha256": "11cd42ad6c61ca8dfb0ecee2ed33aa13a2a75d3819db813b00edbbb0753fd3a5"
+        },
+        {
+          "path": "science/geology-2026/very dark albedo material.lyrx",
+          "bytes": 12924,
+          "sha256": "d119a8649f39031f4e1abfd23ddec95a236e50a906e422c9281780eaad5554f5"
+        },
+        {
+          "path": "science/geology-2026/chain craters.lyrx",
+          "bytes": 12814,
+          "sha256": "c36bf63cdb284fab83e403092241289b07dda6979222595143ec0d42c0a12624"
+        },
+        {
+          "path": "science/geology-2026/southern ridged plains.lyrx",
+          "bytes": 12907,
+          "sha256": "7135c344357db01f2ba048d4ac1bb2c08ad06761887471d10cf314204d6d8386"
+        },
+        {
+          "path": "science/geology-2026/Mh Linework.lyrx",
+          "bytes": 11915,
+          "sha256": "39dbf1c3881368fbb99876239665b66fe00de354638151be461e46b50a54ed40"
+        },
+        {
+          "path": "science/geology-2026/fresh impact craters.lyrx",
+          "bytes": 12899,
+          "sha256": "b75af4ce09f5dfeb4fd74892611f082159c705a84f2620222b6730d26cb9cb4a"
+        },
+        {
+          "path": "science/geology-2026/Mantled Scarps .lyrx",
+          "bytes": 11891,
+          "sha256": "bf70ffe64f456197947722171576de56b57be1950bdea231ebe3660de3294549"
+        },
+        {
+          "path": "science/geology-2026/MI linework.lyrx",
+          "bytes": 11915,
+          "sha256": "501dd424b1240134ad4e9ef7557902c7f21b8b1286789f93c325bf40becbf3c3"
+        },
+        {
+          "path": "science/geology-2026/Craters with dark streaks on walls.lyrx",
+          "bytes": 12407,
+          "sha256": "4ca458e13cd8bfb255c0d936b2e6781be95d941e10c86bf9a63e5195ac3dc77f"
+        },
+        {
+          "path": "science/geology-2026/Prominent or Doubled Ridge.lyrx",
+          "bytes": 11954,
+          "sha256": "5c743ac28da7a18f96e0ba542264ceb45cea4543b8d9b0100c4640a7666af375"
+        },
+        {
+          "path": "science/geology-2026/categories.tif",
+          "bytes": 35464,
+          "sha256": "29af000760d36c23883e88f4a5de39acbc45a9ed0c69a3e8747794b327a50fd8"
+        },
+        {
+          "path": "preparation/terrestrial.json",
+          "bytes": 7628,
+          "sha256": "957bfd5b0f4ccf1f91962816fbb70828bedcc6533112e9330a7d8f19c8d2c900"
+        },
+        {
+          "path": "preparation/navigation.json",
+          "bytes": 3229,
+          "sha256": "d836d9eee1001e4b7a0840530db6d9f21508a0782e81b3c601540ef35f136d29"
+        },
+        {
+          "path": "preparation/acquisition.json",
+          "bytes": 11402,
+          "sha256": "a1b70b01e4044cf710c7e13e6a8ed3577d3f9923722beae328907b9ada6aa84d"
+        },
+        {
+          "path": "content/object.json",
+          "bytes": 15421,
+          "sha256": "b6f5bfd4e0684fa48e4666c421da219cb2893434f0172f160e12510618e5e5fd"
+        },
+        {
+          "path": "presentation/title-mark.json",
+          "bytes": 4848,
+          "sha256": "b4e1922ac32d3562695cdcab63f7e24c0e909cebe86e40303e1b042a32129cc3"
+        },
+        {
+          "path": "presentation/minimap.json",
+          "bytes": 34,
+          "sha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+        },
+        {
+          "path": "stars/ESO-IMAGE-LICENSE.md",
+          "bytes": 2192,
+          "sha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
+        },
+        {
+          "path": "stars/LICENSE.md",
+          "bytes": 598,
+          "sha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
+        },
+        {
+          "path": "stars/hyg-v41-field.json",
+          "bytes": 850,
+          "sha256": "cd34205b7db415dbbfbb54766ba4ee00d25d9386a84369a93f3ceed7ed9d6ea3"
+        },
+        {
+          "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
+          "bytes": 2426,
+          "sha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
+        },
+        {
+          "path": "editorial/factsheet-review.json",
+          "bytes": 1076,
+          "sha256": "743047fa1d0f2f78dc53450faf349ffaddfa004b8a683f7325c20888a6d970ea"
+        },
+        {
+          "path": "preparation/geology-conversion.json",
+          "bytes": 14291,
+          "sha256": "5e723e95052b5978ec8ba7cf1639d2efaa79c04a5e23fdc3ac5c81bdd8c7411e"
+        },
+        {
+          "path": "science/geology-2026/preview-overlap-evidence.json",
+          "bytes": 3018,
+          "sha256": "189c60834771ecf35999fe7559eef38f8d254f128f243e8a627d3ee1343abc12"
+        },
+        {
+          "path": "science/geology-2026/nomenclature.json",
+          "bytes": 10590,
+          "sha256": "a85c2dcf6446007b6f5f5c34dcd42f416969e254915bd17baa4822505fd45a59"
+        },
+        {
+          "path": "science/geology-2026/categories.receipt.json",
+          "bytes": 9526,
+          "sha256": "00452a96b76a0d5777c93c03d2751da74f39571cddee5218a6e067187a9d4cc0"
+        },
+        {
+          "path": "science/geology-2026/registration.json",
+          "bytes": 3367,
+          "sha256": "e43c52d5af339a805b9a3c0152b6a02fe73c492b25e93e56353e3b4fdc6380e3"
+        },
+        {
+          "path": "science/geology-2026/release-metadata.json",
+          "bytes": 15654,
+          "sha256": "73567ba3e54818f748897f2ab43f32415744c6a210c9e2711c042d1765ca0876"
+        },
+        {
+          "path": "science/geology-2026/acquisition-receipt.json",
+          "bytes": 14982,
+          "sha256": "4270eae4014b1854e4a3b996223c191a0bd6e8231f7f4534487136918c57d258"
+        },
+        {
+          "path": "science/geology-2026/registration-proof.json",
+          "bytes": 10518,
+          "sha256": "9be224b092edeb7512010b70006eb8a0070ae85d8a43564a2eb010ef8ed9c4b5"
+        },
+        {
+          "path": "science/geology-2026/nomenclature.pdf",
+          "bytes": 2527631,
+          "sha256": "7b50f3ed3e50c6b9647f26023621efecba691744b2b019c0c22c7a50307cd5a8"
+        },
+        {
+          "path": "science/geology-2026/nomenclature.zip",
+          "bytes": 84340,
+          "sha256": "142fe3942fc80c4dfcdbad0258da5259e656c395b273c759594a3c163cd58ecd"
+        }
+      ],
+      "restored": [
+        {
+          "path": "observations/mumap-cyl-180180.cub.gz",
+          "bytes": 33170078,
+          "sha256": "70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "observations/mumap-cyl-180180.cub.gz",
+            "url": "https://earth-assets.lowpoly.cc/source-assets/70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c/mumap-cyl-180180.cub.gz"
+          }
+        },
+        {
+          "path": "science/mudem-ZT-cyl.cub.gz",
+          "bytes": 31117604,
+          "sha256": "45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "science/mudem-ZT-cyl.cub.gz",
+            "url": "https://earth-assets.lowpoly.cc/source-assets/45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570/mudem-ZT-cyl.cub.gz"
+          }
+        },
+        {
+          "path": "stars/eso0932a.tif",
+          "bytes": 29082084,
+          "sha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "stars/eso0932a.tif",
+            "url": "https://cdn.eso.org/images/original/eso0932a.tif"
+          }
+        },
+        {
+          "path": "presentation/InterVariable.ttf",
+          "bytes": 862936,
+          "sha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "presentation/InterVariable.ttf",
+            "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+          }
+        },
+        {
+          "path": "science/geology-2026/Screenshot 2026-06-23 124237.png",
+          "bytes": 461407,
+          "sha256": "d4fcba5a94254fb103d98c2aa58155f313ebff92ff4fe0c551fc9bffc8647035",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "science/geology-2026/Screenshot 2026-06-23 124237.png",
+            "url": "https://zenodo.org/api/records/20817533/files/Screenshot%202026-06-23%20124237.png/content"
+          }
+        },
+        {
+          "path": "science/geology-2026/Miranda map 1.gdb.zip",
+          "bytes": 224923,
+          "sha256": "ba6f803f8bc7ca2abbd96369390302953ecae405f94f69305ff2aeb071c196a7",
+          "operation": {
+            "kind": "download",
+            "groups": [
+              "refresh"
+            ],
+            "path": "science/geology-2026/Miranda map 1.gdb.zip",
+            "url": "https://zenodo.org/api/records/20817533/files/Miranda%20map%201.gdb.zip/content"
+          }
+        }
+      ],
+      "startedAt": "2026-09-09T12:04:35.398Z",
+      "error": "Error: Source request failed 403: https://zenodo.org/api/records/20817533/files/Screenshot%202026-06-23%20124237.png/content.\n    at request (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/operations.js:404:29)\n    at async executeAcquisition (file:///Users/ekrof/fed/cssEarth-pluto-small-moons/tools/objects/dist/operations.js:415:40)\n    at async file:///Users/ekrof/fed/cssEarth-pluto-small-moons/docs/moons/b3-preparation/final/restore-fresh-sources.mjs:135:28",
+      "finishedAt": "2026-09-09T12:04:41.357Z"
+    }
+  ],
+  "requests": [
+    {
+      "body": "callisto",
+      "url": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+      "startedAt": "2026-09-09T12:00:52.657Z",
+      "httpStatus": 200,
+      "responseUrl": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+      "responseAt": "2026-09-09T12:00:54.383Z"
+    },
+    {
+      "body": "callisto",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "startedAt": "2026-09-09T12:04:01.308Z",
+      "httpStatus": 200,
+      "responseUrl": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "responseAt": "2026-09-09T12:04:01.434Z"
+    },
+    {
+      "body": "callisto",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "startedAt": "2026-09-09T12:04:02.516Z",
+      "httpStatus": 200,
+      "responseUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "responseAt": "2026-09-09T12:04:02.917Z"
+    },
+    {
+      "body": "callisto",
+      "url": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "startedAt": "2026-09-09T12:04:02.999Z",
+      "httpStatus": 200,
+      "responseUrl": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
+      "responseAt": "2026-09-09T12:04:03.158Z"
+    },
+    {
+      "body": "callisto",
+      "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
+      "startedAt": "2026-09-09T12:04:03.442Z",
+      "httpStatus": 200,
+      "responseUrl": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png",
+      "responseAt": "2026-09-09T12:04:04.240Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:05.283Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506383441_2_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:05.941Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:07.599Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506288646_1506388236/N1506388174_2_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:07.816Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:08.158Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388518_2_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:08.366Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:08.718Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506388840_2_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:08.919Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:09.285Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506389178_2_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:09.486Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:09.833Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1513745034_1514010212/N1513999046_1_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:10.050Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:10.473Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530158136_1530199809/N1530182624_1_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:10.682Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:11.062Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1530199842_1530335021/N1530201013_1_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:11.281Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:11.634Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1692994130_1693342058/N1692997492_1_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:11.859Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:12.352Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2069/data/1694815211_1694893186/N1694888328_1_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:12.573Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:12.867Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1811750343_1811933464/N1811772616_1_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:13.092Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/hyperion_30k_plt.tab",
+      "startedAt": "2026-09-09T12:04:13.378Z",
+      "httpStatus": 200,
+      "responseUrl": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/hyperion_30k_plt.tab",
+      "responseAt": "2026-09-09T12:04:14.049Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "startedAt": "2026-09-09T12:04:15.216Z",
+      "httpStatus": 200,
+      "responseUrl": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "responseAt": "2026-09-09T12:04:15.297Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "startedAt": "2026-09-09T12:04:16.331Z",
+      "httpStatus": 200,
+      "responseUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "responseAt": "2026-09-09T12:04:16.404Z"
+    },
+    {
+      "body": "hyperion",
+      "url": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG",
+      "startedAt": "2026-09-09T12:04:16.504Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506388291_1506396299/N1506391424_2_CALIB.IMG",
+      "responseAt": "2026-09-09T12:04:17.148Z"
+    },
+    {
+      "body": "phoebe",
+      "url": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG",
+      "startedAt": "2026-09-09T12:04:18.904Z",
+      "httpStatus": 200,
+      "responseUrl": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG",
+      "responseAt": "2026-09-09T12:04:19.693Z"
+    },
+    {
+      "body": "phoebe",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab",
+      "startedAt": "2026-09-09T12:04:21.119Z",
+      "httpStatus": 200,
+      "responseUrl": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab",
+      "responseAt": "2026-09-09T12:04:21.723Z"
+    },
+    {
+      "body": "phoebe",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "startedAt": "2026-09-09T12:04:23.699Z",
+      "httpStatus": 200,
+      "responseUrl": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "responseAt": "2026-09-09T12:04:23.805Z"
+    },
+    {
+      "body": "phoebe",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "startedAt": "2026-09-09T12:04:24.810Z",
+      "httpStatus": 200,
+      "responseUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "responseAt": "2026-09-09T12:04:24.892Z"
+    },
+    {
+      "body": "phoebe",
+      "url": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_128_o.obj",
+      "startedAt": "2026-09-09T12:04:25.007Z",
+      "httpStatus": 200,
+      "responseUrl": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_128_o.obj",
+      "responseAt": "2026-09-09T12:04:25.247Z"
+    },
+    {
+      "body": "proteus",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG",
+      "startedAt": "2026-09-09T12:04:26.468Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG",
+      "responseAt": "2026-09-09T12:04:27.084Z"
+    },
+    {
+      "body": "proteus",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG",
+      "startedAt": "2026-09-09T12:04:28.530Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG",
+      "responseAt": "2026-09-09T12:04:28.733Z"
+    },
+    {
+      "body": "proteus",
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n8proteus.tab",
+      "startedAt": "2026-09-09T12:04:28.937Z",
+      "httpStatus": 200,
+      "responseUrl": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n8proteus.tab",
+      "responseAt": "2026-09-09T12:04:29.170Z"
+    },
+    {
+      "body": "proteus",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "startedAt": "2026-09-09T12:04:29.335Z",
+      "httpStatus": 200,
+      "responseUrl": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "responseAt": "2026-09-09T12:04:29.408Z"
+    },
+    {
+      "body": "proteus",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "startedAt": "2026-09-09T12:04:30.492Z",
+      "httpStatus": 200,
+      "responseUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "responseAt": "2026-09-09T12:04:30.568Z"
+    },
+    {
+      "body": "proteus",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG",
+      "startedAt": "2026-09-09T12:04:30.669Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG",
+      "responseAt": "2026-09-09T12:04:30.878Z"
+    },
+    {
+      "body": "proteus",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG",
+      "startedAt": "2026-09-09T12:04:31.505Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG",
+      "responseAt": "2026-09-09T12:04:31.716Z"
+    },
+    {
+      "body": "proteus",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG",
+      "startedAt": "2026-09-09T12:04:31.820Z",
+      "httpStatus": 200,
+      "responseUrl": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG",
+      "responseAt": "2026-09-09T12:04:32.023Z"
+    },
+    {
+      "body": "titania",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/9bafb22e1b0be35212c078d77e9f1364e3ff6b6873d0e98c4073055f29ed91ae/tumap-cyl-180180.cub.gz",
+      "startedAt": "2026-09-09T12:04:32.161Z",
+      "httpStatus": 200,
+      "responseUrl": "https://earth-assets.lowpoly.cc/source-assets/9bafb22e1b0be35212c078d77e9f1364e3ff6b6873d0e98c4073055f29ed91ae/tumap-cyl-180180.cub.gz",
+      "responseAt": "2026-09-09T12:04:32.750Z"
+    },
+    {
+      "body": "titania",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d/tudem-ZL-180180.cub.gz",
+      "startedAt": "2026-09-09T12:04:32.886Z",
+      "httpStatus": 200,
+      "responseUrl": "https://earth-assets.lowpoly.cc/source-assets/3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d/tudem-ZL-180180.cub.gz",
+      "responseAt": "2026-09-09T12:04:32.920Z"
+    },
+    {
+      "body": "titania",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "startedAt": "2026-09-09T12:04:32.974Z",
+      "httpStatus": 200,
+      "responseUrl": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "responseAt": "2026-09-09T12:04:32.992Z"
+    },
+    {
+      "body": "titania",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "startedAt": "2026-09-09T12:04:34.391Z",
+      "httpStatus": 200,
+      "responseUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "responseAt": "2026-09-09T12:04:34.411Z"
+    },
+    {
+      "body": "titania",
+      "url": "https://zenodo.org/api/records/20819132/files/Titania%20Map%202.gdb.zip/content",
+      "startedAt": "2026-09-09T12:04:34.439Z",
+      "httpStatus": 403,
+      "responseUrl": "https://zenodo.org/api/records/20819132/files/Titania%20Map%202.gdb.zip/content",
+      "responseAt": "2026-09-09T12:04:35.344Z"
+    },
+    {
+      "body": "miranda",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c/mumap-cyl-180180.cub.gz",
+      "startedAt": "2026-09-09T12:04:35.400Z",
+      "httpStatus": 200,
+      "responseUrl": "https://earth-assets.lowpoly.cc/source-assets/70e1c06a87dbedf5c59d6f714626947b606c41a19cc659e66367e80b57b48a0c/mumap-cyl-180180.cub.gz",
+      "responseAt": "2026-09-09T12:04:35.993Z"
+    },
+    {
+      "body": "miranda",
+      "url": "https://earth-assets.lowpoly.cc/source-assets/45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570/mudem-ZT-cyl.cub.gz",
+      "startedAt": "2026-09-09T12:04:37.880Z",
+      "httpStatus": 200,
+      "responseUrl": "https://earth-assets.lowpoly.cc/source-assets/45149e3a69211d3199be6986734a6827663cff73b559b7104e9f864efbbba570/mudem-ZT-cyl.cub.gz",
+      "responseAt": "2026-09-09T12:04:37.906Z"
+    },
+    {
+      "body": "miranda",
+      "url": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "startedAt": "2026-09-09T12:04:39.065Z",
+      "httpStatus": 200,
+      "responseUrl": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "responseAt": "2026-09-09T12:04:39.147Z"
+    },
+    {
+      "body": "miranda",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "startedAt": "2026-09-09T12:04:40.156Z",
+      "httpStatus": 200,
+      "responseUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "responseAt": "2026-09-09T12:04:40.242Z"
+    },
+    {
+      "body": "miranda",
+      "url": "https://zenodo.org/api/records/20817533/files/Screenshot%202026-06-23%20124237.png/content",
+      "startedAt": "2026-09-09T12:04:40.343Z",
+      "httpStatus": 403,
+      "responseUrl": "https://zenodo.org/api/records/20817533/files/Screenshot%202026-06-23%20124237.png/content",
+      "responseAt": "2026-09-09T12:04:41.356Z"
+    }
+  ],
+  "freeBytesBefore": "163574435840",
+  "finishedAt": "2026-09-09T12:04:41.360Z"
+}
