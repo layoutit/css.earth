@@ -16,12 +16,14 @@ try {
         .map(node => node.outerHTML).sort(),
     });
     const initialMetadata = headMetadata(document);
+    const fragmentText = await fetch('/navigation/venus/').then(response => response.text());
+    if (new DOMParser().parseFromString(fragmentText,'text/html').querySelector('template[data-object-card], [data-solar-system-results]')) throw new Error('Fragment repeats resident cards/catalog');
     const expectedMetadata = headMetadata(new DOMParser().parseFromString(await fetch('/venus/').then(response => response.text()), 'text/html'));
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface'];
     const retained = selectors.map(selector => document.querySelector(selector));
     const sharedStyles = [...document.head.querySelectorAll('style[data-vite-dev-id]')]
       .filter(style => !style.dataset.viteDevId.includes('/src/planets/'));
-    const surfaceStyles = sharedStyles.filter(style => style.dataset.viteDevId.endsWith('/src/renderers/css/styles/planet-surfaces.css'));
+    const surfaceStyles = [...document.querySelectorAll('style[data-object-style="src/renderers/css/styles/planet-surfaces.css"]')];
     const camera = document.querySelector('.polycss-camera');
     const leaf = document.querySelector('.mercury-body > s:not(.mercury-polar)');
     const surfaceBefore = getComputedStyle(leaf).backgroundImage;
@@ -41,18 +43,7 @@ try {
     surfaceProbe.append(leaf);
     document.querySelector('.planet-stage').append(surfaceProbe);
     const shell = mountPlanetShell({ objectId: 'mercury', documentTarget: document, windowTarget: window });
-    const probeTagBrowsing = () => [...document.querySelectorAll('[data-object-query]')].map(tag => {
-      tag.click();
-      const search = document.querySelector('.planet-sidebar-search');
-      const result = {
-        expected: tag.dataset.objectQuery,
-        query: search.value,
-        open: !document.querySelector('.planet-object-browser').hidden,
-        informationHidden: document.querySelector('.planet-information-panel').hidden,
-      };
-      search.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-      return result;
-    });
+    const breadcrumbs = () => [...document.querySelectorAll('.planet-information-panel .planet-breadcrumbs a')].map(a => a.getAttribute('href'));
     shell.setObject(content);
     const first = {
       metadata: headMetadata(document),
@@ -67,9 +58,9 @@ try {
       selectedSearch: document.querySelector('.planet-sidebar-search').value,
       activeNavbar: document.querySelector('.scale-planet.active').dataset.planetId,
       activeBrowser: document.querySelector('.planet-object-link.is-active').dataset.objectId,
-      selectedTitle: document.querySelector('.planet-title').getAttribute('aria-label'),
+      selectedTitle: document.querySelector('.planet-information-panel .planet-title').getAttribute('aria-label'),
       aboutLabelBound: Boolean(document.getElementById(document.querySelector('.explorer-about-panel').getAttribute('aria-labelledby'))),
-      tagBrowsing: probeTagBrowsing(),
+      breadcrumbs: breadcrumbs(),
     };
     const reverse = await transport.load({ id: 'mercury', name: 'Mercury', route: '/mercury/' }, { signal: new AbortController().signal });
     shell.setObject(reverse);
@@ -79,7 +70,7 @@ try {
       selectedSearch: document.querySelector('.planet-sidebar-search').value,
       surfaceStylesRetained: surfaceStyles.every(style => style.isConnected),
       selectedSurface: getComputedStyle(leaf).backgroundImage,
-      tagBrowsing: probeTagBrowsing(),
+      breadcrumbs: breadcrumbs(),
     };
     surfaceProbe.remove();
     shell.destroy();
@@ -97,21 +88,17 @@ try {
   assert.equal(proof.first.surfaceStylesRetained, true);
   assert.match(proof.first.selectedSurface, /\/scenes\/venus\/venus-clouds@2x\.webp/,
     'Committing Venus content must activate its scoped surface image.');
-  assert.equal(proof.first.selectedSearch, 'Venus');
+  assert.equal(proof.first.selectedSearch, '', 'Selection closes browsing and clears the search query');
   assert.equal(proof.first.activeNavbar, 'venus');
   assert.equal(proof.first.activeBrowser, 'venus');
   assert.equal(proof.first.selectedTitle, 'Venus');
   assert.equal(proof.first.aboutLabelBound, true);
   for (const transition of [proof.first, proof.second]) {
-    assert.equal(transition.tagBrowsing.length, 2);
-    for (const tag of transition.tagBrowsing) {
-      assert.equal(tag.query, tag.expected, 'System and classification labels must filter after content replacement.');
-      assert.equal(tag.open, true);
-      assert.equal(tag.informationHidden, true);
-    }
+    assert.ok(transition.breadcrumbs.includes('/sun/?overview=milky-way'));
+    assert.ok(transition.breadcrumbs.includes('/sun/?overview=solar-system'));
   }
   assert.ok(proof.second.identities.every(Boolean));
-  assert.equal(proof.second.selectedSearch, 'Mercury');
+  assert.equal(proof.second.selectedSearch, '');
   assert.equal(proof.second.surfaceStylesRetained, true);
   assert.equal(proof.second.selectedSurface, proof.first.surfaceBefore,
     'Returning to Mercury must restore its image using the retained shared stylesheet.');

@@ -1,10 +1,9 @@
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { preparedPagingFixture as runtime } from './prepared-page-fixture.mjs';
 import { parsePreparedPagePlan } from './capabilities';
 
-const runtime = JSON.parse(await readFile(new URL('../../../planets/earth/prepared/runtime.json', import.meta.url), 'utf8'));
-test('actual paged surface and noise plans retain every prepared field, including metadata stubs', () => {
+test('source-backed paged surface and noise plans retain every prepared field, including metadata stubs', () => {
   assert.equal(runtime.pageLayers.length, 2);
   for (const layer of runtime.pageLayers) assert.equal(parsePreparedPagePlan(layer.plan), layer.plan);
   assert.ok(runtime.pageLayers.some(layer => layer.plan.roots.some(root => root.stub && root.children === undefined)));

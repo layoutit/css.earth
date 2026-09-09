@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 2.1739130434782608,
       "bodyRadiusM": 500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/anthe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b4be05474e4353f88116b1242561bdfcb6a07439f0191313e70f757160c1d469"
+      }
     }
   },
   "prepared": {
