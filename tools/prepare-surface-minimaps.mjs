@@ -91,7 +91,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     optionalJson(resolve(outputDirectory, 'lenses.json')),
     optionalJson(resolve(objectDirectory, 'source/content/lens-bindings.json')),
   ]);
-  assertSurfacePreviewCoverage(controls?.lenses?.controls ?? [], images,
+  assertSurfacePreviewCoverage((controls?.lenses?.controls ?? []).filter(lens => !excluded.includes(lens.id)), images,
     [...(lenses?.controls ?? []), ...(bindings?.controls ?? [])]);
   await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
   return images;

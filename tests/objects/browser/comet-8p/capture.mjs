@@ -55,7 +55,7 @@ async function capture(base,dpr,{fresh=false}={}){
   const requestOffset=requests.length;
   await page.mouse.move(930,430);await page.mouse.down();await page.mouse.move(1130,505,{steps:45});await page.mouse.up();await page.waitForTimeout(800);
   await page.screenshot({path:resolve(out,prefix+'-turned.png')});
-  await page.mouse.move(760,450);await page.mouse.wheel(160);await page.waitForTimeout(800);
+  await page.mouse.move(760,450);await page.mouse.wheel(0,160);await page.waitForTimeout(800);
   const interactionRequests=requests.slice(requestOffset);
   const state=await page.evaluate(()=>{
    const p=window.__tuttleNodes,root=document.querySelector('.polycss-scene'),leaves=[...document.querySelectorAll('.comet-8p-body > u')];
