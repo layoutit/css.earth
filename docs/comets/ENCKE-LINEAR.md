@@ -42,3 +42,17 @@ The nearby vector comparison checks the existing conic approximation; it is not 
 After building the shared packages, renderer and preparation tools, regenerate solar geometry and acquire/prepare `comet-2p` and `comet-209p` through the normal authored-object commands. Rebuild navigation, serialize the prepared object bindings, and regenerate the Sun world context. The checked-in context PNGs are reproducible source intermediates, byte-checked by the existing radial snapshot recipe.
 
 The evidence directory is [evidence/encke-linear](evidence/encke-linear). Its source restoration receipt records fresh downloads of the common sky and font binaries and verification of every source document and generated context snapshot. Final browser, runtime delivery, integration and production results are recorded there with their tested scope and any limitations.
+
+The [qualification receipt](evidence/encke-linear/qualification.json) covers main `3badfb535` and its shared page metadata contract. Both objects use the generic route and declare their existing surface rules under `src/styles`; the renderer diff is empty.
+
+- 762 package tests, 424 renderer tests, 425 world-frame/context tests, 56 router/metadata tests, 10 geometry/parameter tests and six source/runtime closure checks passed.
+- Both objects passed all 22 browser-conformance cases, including mobile, DPR 1/2, retained DOM, drag, wheel, dataset controls and interrupted startup. The wheel-publication test now waits for the preceding camera reset's queued frame before counting wheel effects; its assertion is unchanged.
+- Four production cases independently verified 800 native raster leaves, 64-pixel atlas cells, Shadows off, one dataset, exact atlas response hashes and retained nodes through lighting changes, drag and wheel.
+- All 62 runtime files (14,289,928 bytes) were published and downloaded into an empty destination through the unchanged installer, then byte- and hash-verified.
+- All 408 pinned scene transports reproduced; the 818-route production build and complete asset assembly passed. Existing geometry, materials and camera data are unchanged. Shared atlas indices/counts and their scene/page hashes account for the existing-package edits.
+
+The old static ownership/leaf census cannot parse the `packaged(descriptor)` registry helper introduced by main PR #50. That audit is not claimed as passing. The current package/source checks, renderer validation and actual browser retention evidence remain separate, recorded checks. Original Horizons response whitespace is intentionally preserved.
+
+![Encke with its complete missing-imagery grid](evidence/encke-linear/comet-2p.webp)
+
+![LINEAR with its complete missing-imagery grid](evidence/encke-linear/comet-209p.webp)
