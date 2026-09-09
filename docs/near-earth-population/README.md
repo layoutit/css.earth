@@ -27,7 +27,7 @@ pnpm build:preparation
 node tools/restore-source-inputs.mjs --object=ivar --object=toro --object=cerberus --object=tantalus
 node docs/near-earth-population/finalize-sources.mjs
 node tools/prepare-solar-geometry.mjs
-node docs/lucy-targets/navigation.mjs --inputs=docs/near-earth-population/navigation-inputs.json --base=1fb76e44d6bf831e7ebcf0516b83c0b10e1716da --evidence=docs/near-earth-population/navigation-evidence.json
+node docs/lucy-targets/navigation.mjs --inputs=docs/near-earth-population/navigation-inputs.json --base=bd265cf3a091c4ef17e9be76dfeb23410364884f --evidence=docs/near-earth-population/navigation-evidence.json
 node tools/objects/dist/prepare-authored.js ivar --write
 node tools/objects/dist/prepare-authored.js toro --write
 node tools/objects/dist/prepare-authored.js cerberus --write
@@ -73,3 +73,11 @@ The representative Tantalus Shape drag at DPR2 ran three 60-step vertical cycles
 Main PR #50 replaced per-body Astro wrappers with the generic `[id]` and navigation routes. These four packages declare their own stylesheet paths in the existing descriptor contract. Marker refresh emits page metadata from the exact refreshed scene SHA through `preparePageMetadata`; it does not recompile source geometry or imagery. Current-main page/router tests pass (46 tests), all source/package closures pass, and all410 object transports plus startup preload sets were verified.
 
 The prepared spatial minimap is regenerated after world-context refresh, so its body list and X-sorted point index include all four additions. The five focused minimap ownership, range and coverage tests pass. The browser evidence above precedes this additive four-point index refresh; body presentation and transport bytes are unchanged.
+
+## Encke and LINEAR integration
+
+Main `bd265cf3a` adds the source-backed Encke and LINEAR comet packages. This branch preserves their incoming scientific data and adds the four near-Earth asteroids to that 408-object baseline: 412 objects, 291 asteroids and 411 Sun destinations. Both navigation atlas densities preserve all 408 baseline markers. The existing marker, context, page metadata and minimap owners refresh their derived bindings without recompiling body presentations.
+
+The [integration receipt](comet-integration.json) verifies every tracked source/scientific payload in the four asteroid packages against the previously qualified branch, and both comet packages against incoming main. Runtime data outside marker bindings is identical. Eight focused page/minimap tests and all four source/package closures pass after this integration. Run `node docs/near-earth-population/verify-comet-integration.mjs` to reproduce the preservation checks.
+
+The earlier build, browser images and drag trace remain evidence of their explicitly recorded revision. They are not new captures of this metadata-only integration; no repeated geometry, scalar, atlas or browser preparation was needed.

@@ -33,3 +33,9 @@ The source estimates absolute errors around 500–1,000 m and warns that depress
 The public [Donaldson thesis](https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad) gives physical axis ratios and spin solutions for these three nuclei. Original convex mesh downloads were not found. The additions therefore expose smooth, explicitly labeled approximations, sized with SEPPCoN thermal radii and covered by the shared missing-imagery grid. They do not claim recovered terrain or photographic texels. [The qualification record](LIGHTCURVE-SHAPES.md) distinguishes alternative solutions and the scale convention.
 
 10P, 169P and 172P remain deferred: the thesis does not recover unique shape and spin solutions for them. A catalog entry alone is insufficient to choose their geometry.
+
+## Encke and LINEAR: radar-constrained approximations selected
+
+[Harmon & Nolan (2005)](https://doi.org/10.1016/j.icarus.2005.01.012) supports a strongly elongated Encke model under its 11.1-hour SAM1 rotation assumptions. The selected Table 3 case has semimajor axis 4.58 km and axis ratio 2.60; alternative ratios remain documented. [Schleicher & Knight (2016)](https://doi.org/10.3847/0004-6256/152/4/89), section 2.2, reports LINEAR radar dimensions of 3.9 × 2.7 × 2.6 km. These later values differ from the preliminary projected dimensions in the original 2014 conference abstract.
+
+Both are smooth approximations of those numeric constraints. No public original surface mesh was identified in the surveyed PDS and radar releases. Radar images are not optical surface maps; the entire surface uses the shared grid, with an illustrative fixed attitude and Shadows off. One dataset per object retains the source assumptions without duplicating similar models. See [the source and qualification record](ENCKE-LINEAR.md).
