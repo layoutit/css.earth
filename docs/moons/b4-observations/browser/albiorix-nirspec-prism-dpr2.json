@@ -1,0 +1,91 @@
+{
+  "id": "albiorix",
+  "chartId": "nirspec-prism",
+  "dpr": 2,
+  "status": "PASS",
+  "qualification": "Real SSR information panel and production chart/tab controllers; scene engine not mounted. Not a full application conformance result.",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "frozen": [
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "sha256": "95e51cd73a048fa621d915266fade781c0b42b20c41f7f8eced86ce8cdd42f3c"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "sha256": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "sha256": "84ac3f38733c699ee39450026bcd9b239c5f84cce59628a37276f95de9722130"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "sha256": "f213ff7f73724c21a59f6f8ff3b93097359d1608562ee116c1e782f94b5750e0"
+    },
+    {
+      "path": "src/planets/albiorix/prepared/content.json",
+      "sha256": "d0f42a4ed7e0e708327a27852eb20476d71dfdd3e093ad7dd4d03cf2416fd120"
+    },
+    {
+      "path": "src/planets/albiorix/source/content/charts.json",
+      "sha256": "0bf8eb19064efc34fe829edfe68db6af38f78e52fba827f1b47e991aceafd38f"
+    },
+    {
+      "path": "src/planets/albiorix/prepared/runtime-assets.json",
+      "sha256": "6d223ae780c7327eeaa5eb6bae93fe690af077d40ba9130de5a73ef4d85c10d5"
+    }
+  ],
+  "htmlSha256": "2a53cda7a317280635ca99ff248db33468026bf7e340e236113a6b2d2f5d965b",
+  "servedHtmlSha256": "1d06609bdba973dfc13a0ae0ccdb835cfbaca826720953c6164849938d8a4056",
+  "errors": [],
+  "loaded": [
+    {
+      "url": "/scenes/albiorix/albiorix-nirspec-prism.png",
+      "bytes": 42694,
+      "sha256": "81812bd6605e984de77048f2471ea866918cff8009e84d854a9dcb4ba8d0dac7"
+    },
+    {
+      "url": "/scenes/albiorix/albiorix-nirspec-prism.csv",
+      "bytes": 76334,
+      "sha256": "5d1c0d3c765afd87d9949cd61c97c8a921ebdf67984d57db119e096a63484063"
+    }
+  ],
+  "shutdown": {
+    "browser": "closed",
+    "server": "closed"
+  },
+  "chrome": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b4-observations/albiorix-nirspec-prism-dpr2/chrome-process-aixRew/launch-chrome.sh",
+    "wrapperSha256": "645be160a9589a15fb711f4c533a9e1b7df6a4de5abfde877b4b2debc7b58734",
+    "stdioLogPath": "output/playwright/b4-observations/albiorix-nirspec-prism-dpr2/chrome-process-aixRew/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "download": {
+    "filename": "albiorix-nirspec-prism.csv",
+    "bytes": 76334,
+    "sha256": "5d1c0d3c765afd87d9949cd61c97c8a921ebdf67984d57db119e096a63484063"
+  },
+  "retained": {
+    "cardSame": true,
+    "imagesSame": true,
+    "chartCount": 1
+  },
+  "geometry": {
+    "width": 330,
+    "scrollWidth": 330,
+    "captionFont": "13px"
+  },
+  "page.png": {
+    "path": "output/playwright/b4-observations/albiorix-nirspec-prism-dpr2/page.png",
+    "sha256": "568bd22fafcf81bb7a4a2d01af4d1106f38b649507e7b677803a240543a59029"
+  },
+  "chart.png": {
+    "path": "output/playwright/b4-observations/albiorix-nirspec-prism-dpr2/chart.png",
+    "sha256": "0b7f74ad1151a23be5cf9ed6453a71d4ee6c2f226531bf434039b8d1d54ecbad"
+  }
+}

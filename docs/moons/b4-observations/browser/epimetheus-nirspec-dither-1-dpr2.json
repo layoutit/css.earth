@@ -1,0 +1,91 @@
+{
+  "id": "epimetheus",
+  "chartId": "nirspec-dither-1",
+  "dpr": 2,
+  "status": "PASS",
+  "qualification": "Real SSR information panel and production chart/tab controllers; scene engine not mounted. Not a full application conformance result.",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "frozen": [
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "sha256": "95e51cd73a048fa621d915266fade781c0b42b20c41f7f8eced86ce8cdd42f3c"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "sha256": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "sha256": "84ac3f38733c699ee39450026bcd9b239c5f84cce59628a37276f95de9722130"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "sha256": "f213ff7f73724c21a59f6f8ff3b93097359d1608562ee116c1e782f94b5750e0"
+    },
+    {
+      "path": "src/planets/epimetheus/prepared/content.json",
+      "sha256": "067b2343774fda64f7deb07fb7b5eb2898e90559c350fd2366a091b2c0c5fc92"
+    },
+    {
+      "path": "src/planets/epimetheus/source/content/charts.json",
+      "sha256": "6a37d0a1a6cc020c7bc2d8091274d50025c5abfdbbc9754c82b84acdd35c4c5c"
+    },
+    {
+      "path": "src/planets/epimetheus/prepared/runtime-assets.json",
+      "sha256": "740a4f74705502cd74d67bc47f2c52aef4d0803d830aee08eabc1e5e8c770db6"
+    }
+  ],
+  "htmlSha256": "870b022921be5767559ad24894cea9400bf5dc4205c2162b0b920fa7facec794",
+  "servedHtmlSha256": "557883a52f3a882ab63bb52f0d99969275a016187c4d145bc584ea69f05f0b4d",
+  "errors": [],
+  "loaded": [
+    {
+      "url": "/scenes/epimetheus/epimetheus-nirspec-dither-1.png",
+      "bytes": 48517,
+      "sha256": "41ebc3497b0057ca0b1d43fd31548839dc17ad8bc223c2179f6ce82161ab095c"
+    },
+    {
+      "url": "/scenes/epimetheus/epimetheus-nirspec-dither-1.csv",
+      "bytes": 54905,
+      "sha256": "a4a5de7ffa2a8af3d4b23952031d7f1cde4fe765066313f3b00af31d3923d7c6"
+    }
+  ],
+  "shutdown": {
+    "browser": "closed",
+    "server": "closed"
+  },
+  "chrome": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b4-observations/epimetheus-nirspec-dither-1-dpr2/chrome-process-9UwqJ9/launch-chrome.sh",
+    "wrapperSha256": "f21dffdae6e3cb26b317c486c2d910f0cc4dba546a99241e124ff4e7dfe52836",
+    "stdioLogPath": "output/playwright/b4-observations/epimetheus-nirspec-dither-1-dpr2/chrome-process-9UwqJ9/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "download": {
+    "filename": "epimetheus-nirspec-dither-1.csv",
+    "bytes": 54905,
+    "sha256": "a4a5de7ffa2a8af3d4b23952031d7f1cde4fe765066313f3b00af31d3923d7c6"
+  },
+  "retained": {
+    "cardSame": true,
+    "imagesSame": true,
+    "chartCount": 2
+  },
+  "geometry": {
+    "width": 330,
+    "scrollWidth": 330,
+    "captionFont": "13px"
+  },
+  "page.png": {
+    "path": "output/playwright/b4-observations/epimetheus-nirspec-dither-1-dpr2/page.png",
+    "sha256": "70dcc67e95267deb93fa21b76b72d0e248a637286bb20e93194b9893449ecf73"
+  },
+  "chart.png": {
+    "path": "output/playwright/b4-observations/epimetheus-nirspec-dither-1-dpr2/chart.png",
+    "sha256": "426d7d663591ac31ed525a223fc96bbfc2c8ddd835e22a2b10d9a2f21053a536"
+  }
+}

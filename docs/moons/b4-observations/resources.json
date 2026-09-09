@@ -1,0 +1,704 @@
+[
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "himalia",
+      "nirspec-g235m",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1169440768,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.4
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "himalia",
+      "nirspec-g235m",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1185579008,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "himalia",
+      "nirspec-g395m",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1170931712,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "himalia",
+      "nirspec-g395m",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1188872192,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "himalia"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1780301824,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.5
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "epimetheus",
+      "nirspec-dither-1",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1174568960,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.4
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "epimetheus",
+      "nirspec-dither-1",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1181663232,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "epimetheus",
+      "nirspec-dither-2",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1171324928,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "epimetheus",
+      "nirspec-dither-2",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1183727616,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "epimetheus"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1853849600,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "telesto",
+      "nirspec-dither-1",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1168785408,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "telesto",
+      "nirspec-dither-1",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1174945792,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "telesto",
+      "nirspec-dither-2",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1174241280,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "telesto",
+      "nirspec-dither-2",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1194377216,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "telesto"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1844330496,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 8.1
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pandora",
+      "nirspec-dither-1",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1171095552,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pandora",
+      "nirspec-dither-1",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1187938304,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "pandora"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1875099648,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.5
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "ymir",
+      "218ot_ymicol029",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1166819328,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "ymir",
+      "218ot_ymicol029",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1180794880,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "ymir",
+      "165ot_ymirota065",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1155268608,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "ymir",
+      "165ot_ymirota065",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1188528128,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "ymir",
+      "165ot_ymirotb065",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1158463488,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "ymir",
+      "165ot_ymirotb065",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1193492480,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "ymir",
+      "168ot_ymirot095",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1178009600,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "ymir",
+      "168ot_ymirot095",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1193721856,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "ymir"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1683111936,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.5
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "albiorix",
+      "nirspec-prism",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1160445952,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "albiorix",
+      "nirspec-prism",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1175584768,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "albiorix"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1805746176,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "siarnaq",
+      "nirspec-prism",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1167441920,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "siarnaq",
+      "nirspec-prism",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1166540800,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "siarnaq"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1694040064,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "methone",
+      "vims-spectrum",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1048117248,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.4
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "methone",
+      "vims-spectrum",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1152483328,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.4
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "methone"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1681522688,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 8.0
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pallene",
+      "nirspec-dither-1-detail",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1178025984,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pallene",
+      "nirspec-dither-1-detail",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1194950656,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pallene",
+      "nirspec-dither-1",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1176174592,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 1.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pallene",
+      "nirspec-dither-1",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1187381248,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pallene",
+      "nirspec-dither-2-detail",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1168982016,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pallene",
+      "nirspec-dither-2-detail",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1196572672,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pallene",
+      "nirspec-dither-2",
+      "1"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1187495936,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.2
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "pallene",
+      "nirspec-dither-2",
+      "2"
+    ],
+    "limitRSSBytes": 1610612736,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1132134400,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 2.9
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/prepare-panel.mjs",
+      "pallene"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 1848475648,
+    "status": "PASS",
+    "exitCode": 0,
+    "seconds": 6.5
+  }
+]

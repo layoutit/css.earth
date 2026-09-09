@@ -1,0 +1,91 @@
+{
+  "id": "siarnaq",
+  "chartId": "nirspec-prism",
+  "dpr": 2,
+  "status": "PASS",
+  "qualification": "Real SSR information panel and production chart/tab controllers; scene engine not mounted. Not a full application conformance result.",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "frozen": [
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "sha256": "95e51cd73a048fa621d915266fade781c0b42b20c41f7f8eced86ce8cdd42f3c"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "sha256": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "sha256": "84ac3f38733c699ee39450026bcd9b239c5f84cce59628a37276f95de9722130"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "sha256": "f213ff7f73724c21a59f6f8ff3b93097359d1608562ee116c1e782f94b5750e0"
+    },
+    {
+      "path": "src/planets/siarnaq/prepared/content.json",
+      "sha256": "f8713d8e9184d9fffc11cee676cab7199aa426cb6e578cc686cc02542d845f55"
+    },
+    {
+      "path": "src/planets/siarnaq/source/content/charts.json",
+      "sha256": "6bc4dc9899145da6c2d66e60c76a8150b309df19cf3404bcff1329c434dcb3a7"
+    },
+    {
+      "path": "src/planets/siarnaq/prepared/runtime-assets.json",
+      "sha256": "5d9cd200316df5620d362f09c957731ce68e533597b648ae05c3df98b726e40c"
+    }
+  ],
+  "htmlSha256": "ccb5b4db0fd2a148235e8a4b94b4669128f0aace4f4fd9ee10954ec2b5c5344d",
+  "servedHtmlSha256": "b870d2b8e0941c5dd21592e52e464495940f947709e669c5cc35e049b3cca7f6",
+  "errors": [],
+  "loaded": [
+    {
+      "url": "/scenes/siarnaq/siarnaq-nirspec-prism.png",
+      "bytes": 49654,
+      "sha256": "b17b64107880d5b4f72c0ab2e06e5ca002b74a94a539738efce4b1c844df310d"
+    },
+    {
+      "url": "/scenes/siarnaq/siarnaq-nirspec-prism.csv",
+      "bytes": 76842,
+      "sha256": "fd3a67f2dacdd4a42672383aa3c11407db2724471d5658395cc8de7ee57acd55"
+    }
+  ],
+  "shutdown": {
+    "browser": "closed",
+    "server": "closed"
+  },
+  "chrome": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b4-observations/siarnaq-nirspec-prism-dpr2/chrome-process-asgbb5/launch-chrome.sh",
+    "wrapperSha256": "d81eddc4028615b1f530e68b8805d4b56d28eacb62e169dd6fecad40b591105b",
+    "stdioLogPath": "output/playwright/b4-observations/siarnaq-nirspec-prism-dpr2/chrome-process-asgbb5/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "download": {
+    "filename": "siarnaq-nirspec-prism.csv",
+    "bytes": 76842,
+    "sha256": "fd3a67f2dacdd4a42672383aa3c11407db2724471d5658395cc8de7ee57acd55"
+  },
+  "retained": {
+    "cardSame": true,
+    "imagesSame": true,
+    "chartCount": 1
+  },
+  "geometry": {
+    "width": 330,
+    "scrollWidth": 330,
+    "captionFont": "13px"
+  },
+  "page.png": {
+    "path": "output/playwright/b4-observations/siarnaq-nirspec-prism-dpr2/page.png",
+    "sha256": "b81bb1b3237a30b9d9af944cf65d71c788c18fbc7a7890e4948750a93bdeb2a2"
+  },
+  "chart.png": {
+    "path": "output/playwright/b4-observations/siarnaq-nirspec-prism-dpr2/chart.png",
+    "sha256": "ab36c05b75ec91364a36105506977a5b7f6d1f5b776e841cd7c8eea51867703d"
+  }
+}

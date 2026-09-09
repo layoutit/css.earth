@@ -1,0 +1,28 @@
+{
+  "command": [
+    "npx",
+    "--yes",
+    "wrangler@4.129.0",
+    "r2",
+    "bulk",
+    "put",
+    "cssearth-assets",
+    "--filename",
+    "output/b4-tests/publish-assets.json",
+    "--concurrency",
+    "1",
+    "--remote",
+    "--force",
+    "--content-type",
+    "application/octet-stream",
+    "--cache-control",
+    "public,max-age=31536000,immutable"
+  ],
+  "limitRSSBytes": 1610612736,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 634126336,
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 37.6
+}

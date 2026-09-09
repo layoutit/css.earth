@@ -30,12 +30,12 @@
         "Sycorax",
         "Prospero",
         "Setebos",
-        "Hi\u02bbiaka",
+        "Hiʻiaka",
         "Squannit",
         "Romulus",
         "Menoetius"
       ],
-      "outcome": "26 new standalone moons merged; roster 69 \u2192 95, benchmark coverage 90/461.",
+      "outcome": "26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461.",
       "scope": "18 Saturn irregulars, four Uranus irregulars, and four asteroid/dwarf-planet companions.",
       "delivery": "A complete source-backed body package for every selected target: physical-model interpretation, parent-relative orbit, orientation limits, preparation, retained rendering, navigation, content, thumbnails, source restoration and qualification evidence.",
       "closure": "Resolve actual source identities, scale, axes, frame, orbit window and any selected ancillary-file terms for all 26 before expensive preparation. Use the reviewed mesh or explicitly observation-constrained approximation. Published minimum elongation, assumed polar dimension and tentative spin must remain visible; this batch does not promise 26 measured terrain surfaces.",
@@ -63,7 +63,7 @@
         "Uranus|XVII",
         "Uranus|XVIII",
         "Uranus|XIX",
-        "Haumea|Hi\u02bbiaka",
+        "Haumea|Hiʻiaka",
         "Moshup|Squannit",
         "Sylvia|Romulus",
         "Patroclus|Menoetius"
@@ -365,20 +365,42 @@
           "Methone",
           "Pallene"
         ],
-        "archiveExtractionBodies": [
+        "preparedBodies": [
+          "Himalia",
+          "Epimetheus",
+          "Telesto",
+          "Pandora",
+          "Ymir",
+          "Albiorix",
+          "Siarnaq",
+          "Methone",
+          "Pallene"
+        ],
+        "qualifiedBodies": 0,
+        "aggregateReady": false,
+        "preparedChartViews": 18,
+        "pinnedMeasurementInputs": 13,
+        "archiveCalibratedTablesPinnedBodies": [
           "Himalia",
           "Albiorix",
           "Siarnaq"
         ],
-        "preparedBodies": [
+        "fullSceneBrowserQualified": false,
+        "panelQualifiedBodies": [
+          "Himalia",
           "Epimetheus",
           "Telesto",
           "Pandora",
+          "Ymir",
+          "Albiorix",
+          "Siarnaq",
+          "Methone",
           "Pallene"
         ],
-        "qualifiedBodies": 0,
-        "aggregateReady": false
-      }
+        "panelBrowserCases": 36,
+        "focusedTestsPassed": 29
+      },
+      "integrationBase": "ef2d27b2da3e774b2410f216b0e6024b972ee39a"
     }
   ],
   "plannedBodies": 60,

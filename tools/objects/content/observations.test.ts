@@ -133,3 +133,23 @@ test('FITS unit and unsigned-offset drift cannot silently change a scientific ch
   assert.throws(() => readJwstSpectrum(editCard('TUNIT2', "'mJy     '"), chart.fits), /units/);
   assert.throws(() => readJwstSpectrum(editCard('TZERO12', '0'), chart.fits), /quality/);
 });
+
+test('Cassini sequences and channel gaps preserve independent numeric anchors', async () => {
+  const anchors = JSON.parse(await readFile('docs/moons/b4-observations/cassini-anchors.json', 'utf8'));
+  for (const source of anchors) {
+    const directory = `src/planets/${source.body}/source`;
+    const config = JSON.parse(await readFile(`${directory}/content/charts.json`, 'utf8'));
+    const chart = config.charts.find((c: ObservationRecipe) => source.section ? c.section === source.section : c.format === 'whitespace');
+    const points = parseObservations(await readFile(`${directory}/${chart.source}`), chart);
+    assert.equal(points.length, source.rows);
+    for (const {row, values} of source.anchors) {
+      assert.equal(points[row].x, values[0]); assert.equal(points[row].y, values[1]);
+      assert.equal(points[row].error, values[2]);
+    }
+    if (source.body === 'ymir') {
+      if (source.section === 'ISS_218OT_YMICOL029') assert.ok(points.some((p, i) => i > 0 && p.x < points[i - 1].x), 'Author phase wrapping remains');
+      assert.equal(chart.y.reverse, true);
+      assert.equal((renderObservationChart(points, chart).match(/<circle /g) ?? []).length, source.rows);
+    } else for (const row of [46, 127, 180]) assert.equal(points[row].excluded, true);
+  }
+});

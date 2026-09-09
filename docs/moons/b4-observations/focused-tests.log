@@ -1,0 +1,37 @@
+✔ chart source-derived axis rounding is optional and preserves metadata defaults (11.299208ms)
+✔ signed measurements and their uncertainties survive unit conversion and plotting (1.527875ms)
+✔ source drift, missing columns, nonfinite values, unsorted wavelengths and negative errors fail closed (0.30275ms)
+✔ observing sequences preserve phase wraps and missing errors without inventing zero uncertainty (0.276625ms)
+✔ documented instrument gaps retain raw rows in the downloadable data (1.142042ms)
+✔ all released JWST flux rows match independently pinned numeric anchors (94.567208ms)
+✔ calibrated FITS values and unsigned quality flags agree with independent binary-table anchors (42.457084ms)
+✔ FITS unit and unsigned-offset drift cannot silently change a scientific chart (2.838542ms)
+✔ Cassini sequences and channel gaps preserve independent numeric anchors (5.968042ms)
+✔ publishes the canonical scientific chart order (0.634042ms)
+✔ orders any applicable subset without inventing missing charts (0.119542ms)
+✔ keeps unknown future chart types after known charts in source order (0.196416ms)
+✔ normalizes only explicit safe local runtime URLs (7.167792ms)
+✔ prepares and verifies the exact declared byte closure (11.98175ms)
+✔ rejects undeclared public files and removes only undeclared production files (7.706042ms)
+✔ preparation binds exact input and output bytes and excludes unused archive entries (16.362041ms)
+✔ changed source bytes invalidate provenance even when references and credit text are unchanged (7.34125ms)
+✔ acquired products retain their configuration input and verify its exact bytes (10.859667ms)
+✔ upstream verification requests are recorded without inventing acquisition history (7.665416ms)
+✔ changed output bytes invalidate a prepared record (7.269084ms)
+✔ changed recipe bytes cannot retain the old lineage identity (4.2715ms)
+✔ recovery preserves pins without claiming execution or requiring ignored source downloads (5.863541ms)
+✔ changing a binding or an output identity invalidates an existing preparation record (7.527667ms)
+✔ invalid source edges and cyclic products are rejected (6.569625ms)
+✔ an operation must resolve inside its pinned recipe (6.158166ms)
+✔ Saturn binds its actual base material and all contributing recipe identities (17.5665ms)
+✔ Earth globe provenance excludes the retired local noise dataset (15.401959ms)
+✔ spacecraft photographs bind their image, registration, and source-shape dependencies (149.015625ms)
+✔ Mercury coverage completion binds all three maps; previews retain their parent lineage (12.982541ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 806.894458

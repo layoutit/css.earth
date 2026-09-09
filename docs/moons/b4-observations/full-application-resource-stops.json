@@ -1,0 +1,34 @@
+[
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "himalia",
+      "nirspec-g235m",
+      "1"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 2776956928,
+    "status": "STOPPED_RESOURCE_BOUND",
+    "exitCode": 1,
+    "seconds": 11.4
+  },
+  {
+    "command": [
+      "node",
+      "docs/moons/b4-observations/browser-one.mjs",
+      "himalia",
+      "nirspec-g235m",
+      "1"
+    ],
+    "limitRSSBytes": 2684354560,
+    "minimumFreePercent": 30,
+    "timeoutSeconds": 900,
+    "peakRSSBytes": 2715009024,
+    "status": "STOPPED_RESOURCE_BOUND",
+    "exitCode": 1,
+    "seconds": 7.8
+  }
+]

@@ -1,0 +1,296 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "id": "himalia",
+      "chartId": "nirspec-g235m",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/himalia-nirspec-g235m-dpr1.json",
+      "peakRSSBytes": 1169440768
+    },
+    {
+      "id": "himalia",
+      "chartId": "nirspec-g235m",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/himalia-nirspec-g235m-dpr2.json",
+      "peakRSSBytes": 1185579008
+    },
+    {
+      "id": "himalia",
+      "chartId": "nirspec-g395m",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/himalia-nirspec-g395m-dpr1.json",
+      "peakRSSBytes": 1170931712
+    },
+    {
+      "id": "himalia",
+      "chartId": "nirspec-g395m",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/himalia-nirspec-g395m-dpr2.json",
+      "peakRSSBytes": 1188872192
+    },
+    {
+      "id": "epimetheus",
+      "chartId": "nirspec-dither-1",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/epimetheus-nirspec-dither-1-dpr1.json",
+      "peakRSSBytes": 1174568960
+    },
+    {
+      "id": "epimetheus",
+      "chartId": "nirspec-dither-1",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/epimetheus-nirspec-dither-1-dpr2.json",
+      "peakRSSBytes": 1181663232
+    },
+    {
+      "id": "epimetheus",
+      "chartId": "nirspec-dither-2",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/epimetheus-nirspec-dither-2-dpr1.json",
+      "peakRSSBytes": 1171324928
+    },
+    {
+      "id": "epimetheus",
+      "chartId": "nirspec-dither-2",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/epimetheus-nirspec-dither-2-dpr2.json",
+      "peakRSSBytes": 1183727616
+    },
+    {
+      "id": "telesto",
+      "chartId": "nirspec-dither-1",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/telesto-nirspec-dither-1-dpr1.json",
+      "peakRSSBytes": 1168785408
+    },
+    {
+      "id": "telesto",
+      "chartId": "nirspec-dither-1",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/telesto-nirspec-dither-1-dpr2.json",
+      "peakRSSBytes": 1174945792
+    },
+    {
+      "id": "telesto",
+      "chartId": "nirspec-dither-2",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/telesto-nirspec-dither-2-dpr1.json",
+      "peakRSSBytes": 1174241280
+    },
+    {
+      "id": "telesto",
+      "chartId": "nirspec-dither-2",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/telesto-nirspec-dither-2-dpr2.json",
+      "peakRSSBytes": 1194377216
+    },
+    {
+      "id": "pandora",
+      "chartId": "nirspec-dither-1",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/pandora-nirspec-dither-1-dpr1.json",
+      "peakRSSBytes": 1171095552
+    },
+    {
+      "id": "pandora",
+      "chartId": "nirspec-dither-1",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/pandora-nirspec-dither-1-dpr2.json",
+      "peakRSSBytes": 1187938304
+    },
+    {
+      "id": "ymir",
+      "chartId": "218ot_ymicol029",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/ymir-218ot_ymicol029-dpr1.json",
+      "peakRSSBytes": 1166819328
+    },
+    {
+      "id": "ymir",
+      "chartId": "218ot_ymicol029",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/ymir-218ot_ymicol029-dpr2.json",
+      "peakRSSBytes": 1180794880
+    },
+    {
+      "id": "ymir",
+      "chartId": "165ot_ymirota065",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/ymir-165ot_ymirota065-dpr1.json",
+      "peakRSSBytes": 1155268608
+    },
+    {
+      "id": "ymir",
+      "chartId": "165ot_ymirota065",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/ymir-165ot_ymirota065-dpr2.json",
+      "peakRSSBytes": 1188528128
+    },
+    {
+      "id": "ymir",
+      "chartId": "165ot_ymirotb065",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/ymir-165ot_ymirotb065-dpr1.json",
+      "peakRSSBytes": 1158463488
+    },
+    {
+      "id": "ymir",
+      "chartId": "165ot_ymirotb065",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/ymir-165ot_ymirotb065-dpr2.json",
+      "peakRSSBytes": 1193492480
+    },
+    {
+      "id": "ymir",
+      "chartId": "168ot_ymirot095",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/ymir-168ot_ymirot095-dpr1.json",
+      "peakRSSBytes": 1178009600
+    },
+    {
+      "id": "ymir",
+      "chartId": "168ot_ymirot095",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/ymir-168ot_ymirot095-dpr2.json",
+      "peakRSSBytes": 1193721856
+    },
+    {
+      "id": "albiorix",
+      "chartId": "nirspec-prism",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/albiorix-nirspec-prism-dpr1.json",
+      "peakRSSBytes": 1160445952
+    },
+    {
+      "id": "albiorix",
+      "chartId": "nirspec-prism",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/albiorix-nirspec-prism-dpr2.json",
+      "peakRSSBytes": 1175584768
+    },
+    {
+      "id": "siarnaq",
+      "chartId": "nirspec-prism",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/siarnaq-nirspec-prism-dpr1.json",
+      "peakRSSBytes": 1167441920
+    },
+    {
+      "id": "siarnaq",
+      "chartId": "nirspec-prism",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/siarnaq-nirspec-prism-dpr2.json",
+      "peakRSSBytes": 1166540800
+    },
+    {
+      "id": "methone",
+      "chartId": "vims-spectrum",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/methone-vims-spectrum-dpr1.json",
+      "peakRSSBytes": 1048117248
+    },
+    {
+      "id": "methone",
+      "chartId": "vims-spectrum",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/methone-vims-spectrum-dpr2.json",
+      "peakRSSBytes": 1152483328
+    },
+    {
+      "id": "pallene",
+      "chartId": "nirspec-dither-1-detail",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/pallene-nirspec-dither-1-detail-dpr1.json",
+      "peakRSSBytes": 1178025984
+    },
+    {
+      "id": "pallene",
+      "chartId": "nirspec-dither-1-detail",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/pallene-nirspec-dither-1-detail-dpr2.json",
+      "peakRSSBytes": 1194950656
+    },
+    {
+      "id": "pallene",
+      "chartId": "nirspec-dither-1",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/pallene-nirspec-dither-1-dpr1.json",
+      "peakRSSBytes": 1176174592
+    },
+    {
+      "id": "pallene",
+      "chartId": "nirspec-dither-1",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/pallene-nirspec-dither-1-dpr2.json",
+      "peakRSSBytes": 1187381248
+    },
+    {
+      "id": "pallene",
+      "chartId": "nirspec-dither-2-detail",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/pallene-nirspec-dither-2-detail-dpr1.json",
+      "peakRSSBytes": 1168982016
+    },
+    {
+      "id": "pallene",
+      "chartId": "nirspec-dither-2-detail",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/pallene-nirspec-dither-2-detail-dpr2.json",
+      "peakRSSBytes": 1196572672
+    },
+    {
+      "id": "pallene",
+      "chartId": "nirspec-dither-2",
+      "dpr": 1,
+      "status": "PASS",
+      "report": "browser/pallene-nirspec-dither-2-dpr1.json",
+      "peakRSSBytes": 1187495936
+    },
+    {
+      "id": "pallene",
+      "chartId": "nirspec-dither-2",
+      "dpr": 2,
+      "status": "PASS",
+      "report": "browser/pallene-nirspec-dither-2-dpr2.json",
+      "peakRSSBytes": 1132134400
+    }
+  ],
+  "scope": "Actual SSR panel and production chart/tab controllers. No scene engine, aggregate or physical-device qualification.",
+  "browserPeakRSSBytes": 1196572672,
+  "routeRenderingPeakRSSBytes": 1875099648
+}

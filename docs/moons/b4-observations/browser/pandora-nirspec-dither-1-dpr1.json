@@ -1,0 +1,91 @@
+{
+  "id": "pandora",
+  "chartId": "nirspec-dither-1",
+  "dpr": 1,
+  "status": "PASS",
+  "qualification": "Real SSR information panel and production chart/tab controllers; scene engine not mounted. Not a full application conformance result.",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "frozen": [
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "sha256": "95e51cd73a048fa621d915266fade781c0b42b20c41f7f8eced86ce8cdd42f3c"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "sha256": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "sha256": "84ac3f38733c699ee39450026bcd9b239c5f84cce59628a37276f95de9722130"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "sha256": "f213ff7f73724c21a59f6f8ff3b93097359d1608562ee116c1e782f94b5750e0"
+    },
+    {
+      "path": "src/planets/pandora/prepared/content.json",
+      "sha256": "782888c0ce5240b40d83479982cf5645af38a3cf20b4a92db4a8c0d45e14dd8a"
+    },
+    {
+      "path": "src/planets/pandora/source/content/charts.json",
+      "sha256": "cd0c5c26649825cfcf6fd33cc7d55f8ffd11104656ee431abcfab452ba812912"
+    },
+    {
+      "path": "src/planets/pandora/prepared/runtime-assets.json",
+      "sha256": "e6536ac9292780321340d120309900b9bba9cb2dcdb5177dac71843c5633a5e8"
+    }
+  ],
+  "htmlSha256": "32a57635199eeeec0c4e52f674184c0f45d6a684e6ff24659fc730b0b0e5f8d5",
+  "servedHtmlSha256": "01803fe7c9854d9899cbe35fe3474f860bc559e631e2677a86a431290972af27",
+  "errors": [],
+  "loaded": [
+    {
+      "url": "/scenes/pandora/pandora-nirspec-dither-1.png",
+      "bytes": 46742,
+      "sha256": "3121012614d445677a6b3f2197906f283de58e7d2369110a06e1ccc3f957c433"
+    },
+    {
+      "url": "/scenes/pandora/pandora-nirspec-dither-1.csv",
+      "bytes": 52663,
+      "sha256": "c2df16aac22ace2cc522d2ee82162a35ff4ac98a971e7addeccd902aa370e88a"
+    }
+  ],
+  "shutdown": {
+    "browser": "closed",
+    "server": "closed"
+  },
+  "chrome": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b4-observations/pandora-nirspec-dither-1-dpr1/chrome-process-1ZHOln/launch-chrome.sh",
+    "wrapperSha256": "cf28ed63d6afa9bbe92c92fd9575ce7a6607083a2ef2f8bee85db50df456dbd0",
+    "stdioLogPath": "output/playwright/b4-observations/pandora-nirspec-dither-1-dpr1/chrome-process-1ZHOln/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "download": {
+    "filename": "pandora-nirspec-dither-1.csv",
+    "bytes": 52663,
+    "sha256": "c2df16aac22ace2cc522d2ee82162a35ff4ac98a971e7addeccd902aa370e88a"
+  },
+  "retained": {
+    "cardSame": true,
+    "imagesSame": true,
+    "chartCount": 1
+  },
+  "geometry": {
+    "width": 300,
+    "scrollWidth": 300,
+    "captionFont": "13px"
+  },
+  "page.png": {
+    "path": "output/playwright/b4-observations/pandora-nirspec-dither-1-dpr1/page.png",
+    "sha256": "540b7bf3d83d83d8110a0b5039f4840b4b33f4fb75f5e8d9b344a5a73b518839"
+  },
+  "chart.png": {
+    "path": "output/playwright/b4-observations/pandora-nirspec-dither-1-dpr1/chart.png",
+    "sha256": "e91aa5c05f12484ecc2e35718e1fe88c8eb3e7b43f874c1810cbe5ee9fb09124"
+  }
+}

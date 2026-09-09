@@ -1,0 +1,333 @@
+{
+  "status": "PASS",
+  "scope": "36 new observation PNG/CSV files only",
+  "assets": [
+    {
+      "id": "himalia",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d04d66846be004200d712565b274c9b2037f8546794a28f6d5dc47dd3bf0a6fc/himalia-nirspec-g235m.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 113450,
+      "sha256": "d04d66846be004200d712565b274c9b2037f8546794a28f6d5dc47dd3bf0a6fc",
+      "verifiedAt": "2026-09-09T14:31:29.089Z"
+    },
+    {
+      "id": "himalia",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d8782ec4d302b335bb47582b5879fde970178bee41e2cb03e71664aa130196f0/himalia-nirspec-g235m.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 52385,
+      "sha256": "d8782ec4d302b335bb47582b5879fde970178bee41e2cb03e71664aa130196f0",
+      "verifiedAt": "2026-09-09T14:31:29.811Z"
+    },
+    {
+      "id": "himalia",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/867fefdb4d5a18e772d320f856eab1e172bcced9ed62f9a6ff0405abb7337716/himalia-nirspec-g395m.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 105741,
+      "sha256": "867fefdb4d5a18e772d320f856eab1e172bcced9ed62f9a6ff0405abb7337716",
+      "verifiedAt": "2026-09-09T14:31:30.841Z"
+    },
+    {
+      "id": "himalia",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/854aadba1595049be8fa07b50330276d410a79a87a5d4fb04ea4bf199242efe9/himalia-nirspec-g395m.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 46524,
+      "sha256": "854aadba1595049be8fa07b50330276d410a79a87a5d4fb04ea4bf199242efe9",
+      "verifiedAt": "2026-09-09T14:31:31.628Z"
+    },
+    {
+      "id": "epimetheus",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a4a5de7ffa2a8af3d4b23952031d7f1cde4fe765066313f3b00af31d3923d7c6/epimetheus-nirspec-dither-1.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 54905,
+      "sha256": "a4a5de7ffa2a8af3d4b23952031d7f1cde4fe765066313f3b00af31d3923d7c6",
+      "verifiedAt": "2026-09-09T14:31:32.423Z"
+    },
+    {
+      "id": "epimetheus",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/41ebc3497b0057ca0b1d43fd31548839dc17ad8bc223c2179f6ce82161ab095c/epimetheus-nirspec-dither-1.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 48517,
+      "sha256": "41ebc3497b0057ca0b1d43fd31548839dc17ad8bc223c2179f6ce82161ab095c",
+      "verifiedAt": "2026-09-09T14:31:33.171Z"
+    },
+    {
+      "id": "epimetheus",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/07122782e18a05e2058ff76c363b2d3e95d446326b0b1a409c0e8f06f1167090/epimetheus-nirspec-dither-2.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 52682,
+      "sha256": "07122782e18a05e2058ff76c363b2d3e95d446326b0b1a409c0e8f06f1167090",
+      "verifiedAt": "2026-09-09T14:31:33.916Z"
+    },
+    {
+      "id": "epimetheus",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/77d5faa6b177073172d4a460b2ead1499df52c41e9678f635f585d99764a0923/epimetheus-nirspec-dither-2.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 45345,
+      "sha256": "77d5faa6b177073172d4a460b2ead1499df52c41e9678f635f585d99764a0923",
+      "verifiedAt": "2026-09-09T14:31:34.742Z"
+    },
+    {
+      "id": "telesto",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a8af74b9f792d3fd76fbd77f1af0b7e9a011b8577294425bbfb36033540269e1/telesto-nirspec-dither-1.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 65621,
+      "sha256": "a8af74b9f792d3fd76fbd77f1af0b7e9a011b8577294425bbfb36033540269e1",
+      "verifiedAt": "2026-09-09T14:31:35.577Z"
+    },
+    {
+      "id": "telesto",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ebdd94fb1123a92396579565c417f6c625192ea45f197d8636a05374fb5d8602/telesto-nirspec-dither-1.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 38678,
+      "sha256": "ebdd94fb1123a92396579565c417f6c625192ea45f197d8636a05374fb5d8602",
+      "verifiedAt": "2026-09-09T14:31:36.278Z"
+    },
+    {
+      "id": "telesto",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/46dce4ef0fdae27694f53dc1f426f68d05efcc39835fead8062078f3d37d8981/telesto-nirspec-dither-2.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 65333,
+      "sha256": "46dce4ef0fdae27694f53dc1f426f68d05efcc39835fead8062078f3d37d8981",
+      "verifiedAt": "2026-09-09T14:31:37.078Z"
+    },
+    {
+      "id": "telesto",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e2eab1122d7d93f308f9fd6e067adeb77b23bad7c1d50474c7d47f6094d540b5/telesto-nirspec-dither-2.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 50762,
+      "sha256": "e2eab1122d7d93f308f9fd6e067adeb77b23bad7c1d50474c7d47f6094d540b5",
+      "verifiedAt": "2026-09-09T14:31:37.870Z"
+    },
+    {
+      "id": "pandora",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c2df16aac22ace2cc522d2ee82162a35ff4ac98a971e7addeccd902aa370e88a/pandora-nirspec-dither-1.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 52663,
+      "sha256": "c2df16aac22ace2cc522d2ee82162a35ff4ac98a971e7addeccd902aa370e88a",
+      "verifiedAt": "2026-09-09T14:31:38.633Z"
+    },
+    {
+      "id": "pandora",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3121012614d445677a6b3f2197906f283de58e7d2369110a06e1ccc3f957c433/pandora-nirspec-dither-1.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 46742,
+      "sha256": "3121012614d445677a6b3f2197906f283de58e7d2369110a06e1ccc3f957c433",
+      "verifiedAt": "2026-09-09T14:31:39.409Z"
+    },
+    {
+      "id": "ymir",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/6784bf4de3c9a36051d8dd5cf5b8f774b1177075b045521864591555b85a3807/ymir-165ot_ymirota065.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 2893,
+      "sha256": "6784bf4de3c9a36051d8dd5cf5b8f774b1177075b045521864591555b85a3807",
+      "verifiedAt": "2026-09-09T14:31:40.084Z"
+    },
+    {
+      "id": "ymir",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a543d654f0580aa1c4dbed579efce015ae7f43e74108bf6a4fd42e94a763d131/ymir-165ot_ymirota065.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 41661,
+      "sha256": "a543d654f0580aa1c4dbed579efce015ae7f43e74108bf6a4fd42e94a763d131",
+      "verifiedAt": "2026-09-09T14:31:40.859Z"
+    },
+    {
+      "id": "ymir",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9438025952dd1b026550b1855113b646993fe3eccea7633eb051758fa0088aeb/ymir-165ot_ymirotb065.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 2603,
+      "sha256": "9438025952dd1b026550b1855113b646993fe3eccea7633eb051758fa0088aeb",
+      "verifiedAt": "2026-09-09T14:31:41.638Z"
+    },
+    {
+      "id": "ymir",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e4d30d6946a4cb5d5e60be098c3cf7686ace69779e214fd3b3c332b6bf23409b/ymir-165ot_ymirotb065.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 39830,
+      "sha256": "e4d30d6946a4cb5d5e60be098c3cf7686ace69779e214fd3b3c332b6bf23409b",
+      "verifiedAt": "2026-09-09T14:31:42.543Z"
+    },
+    {
+      "id": "ymir",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/8f891cda2f76ed32ab5150c21eeed86288d700b7df59b15c163b45bf5f42ef9d/ymir-168ot_ymirot095.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 9197,
+      "sha256": "8f891cda2f76ed32ab5150c21eeed86288d700b7df59b15c163b45bf5f42ef9d",
+      "verifiedAt": "2026-09-09T14:31:43.241Z"
+    },
+    {
+      "id": "ymir",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/aee72178ead6983aab2c468d9952fe9dd70ab05500191e217bd54deaca5a7bfb/ymir-168ot_ymirot095.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 56967,
+      "sha256": "aee72178ead6983aab2c468d9952fe9dd70ab05500191e217bd54deaca5a7bfb",
+      "verifiedAt": "2026-09-09T14:31:43.997Z"
+    },
+    {
+      "id": "ymir",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/07480f2ec4a061a9510f8dbea8d3739c835fa1d1025e8c30eecb1a7b20225127/ymir-218ot_ymicol029.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 686,
+      "sha256": "07480f2ec4a061a9510f8dbea8d3739c835fa1d1025e8c30eecb1a7b20225127",
+      "verifiedAt": "2026-09-09T14:31:44.709Z"
+    },
+    {
+      "id": "ymir",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c065a6611b9985275daa67bac52573863d29c88a9b565d841c45e757bc7532b6/ymir-218ot_ymicol029.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 32087,
+      "sha256": "c065a6611b9985275daa67bac52573863d29c88a9b565d841c45e757bc7532b6",
+      "verifiedAt": "2026-09-09T14:31:45.440Z"
+    },
+    {
+      "id": "albiorix",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5d1c0d3c765afd87d9949cd61c97c8a921ebdf67984d57db119e096a63484063/albiorix-nirspec-prism.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 76334,
+      "sha256": "5d1c0d3c765afd87d9949cd61c97c8a921ebdf67984d57db119e096a63484063",
+      "verifiedAt": "2026-09-09T14:31:46.511Z"
+    },
+    {
+      "id": "albiorix",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/81812bd6605e984de77048f2471ea866918cff8009e84d854a9dcb4ba8d0dac7/albiorix-nirspec-prism.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 42694,
+      "sha256": "81812bd6605e984de77048f2471ea866918cff8009e84d854a9dcb4ba8d0dac7",
+      "verifiedAt": "2026-09-09T14:31:47.373Z"
+    },
+    {
+      "id": "siarnaq",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fd3a67f2dacdd4a42672383aa3c11407db2724471d5658395cc8de7ee57acd55/siarnaq-nirspec-prism.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 76842,
+      "sha256": "fd3a67f2dacdd4a42672383aa3c11407db2724471d5658395cc8de7ee57acd55",
+      "verifiedAt": "2026-09-09T14:31:48.064Z"
+    },
+    {
+      "id": "siarnaq",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b17b64107880d5b4f72c0ab2e06e5ca002b74a94a539738efce4b1c844df310d/siarnaq-nirspec-prism.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 49654,
+      "sha256": "b17b64107880d5b4f72c0ab2e06e5ca002b74a94a539738efce4b1c844df310d",
+      "verifiedAt": "2026-09-09T14:31:48.834Z"
+    },
+    {
+      "id": "methone",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/168cf4846bc2a195390eecfe54438bb1fc0422998921201ee037aecd46263aa1/methone-vims-spectrum.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 12153,
+      "sha256": "168cf4846bc2a195390eecfe54438bb1fc0422998921201ee037aecd46263aa1",
+      "verifiedAt": "2026-09-09T14:31:49.521Z"
+    },
+    {
+      "id": "methone",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e02b3b41b36b05d06dd3017a8c313ac586054bb44832f532d5eba804e15442e4/methone-vims-spectrum.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 66644,
+      "sha256": "e02b3b41b36b05d06dd3017a8c313ac586054bb44832f532d5eba804e15442e4",
+      "verifiedAt": "2026-09-09T14:31:50.271Z"
+    },
+    {
+      "id": "pallene",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e1fa4f1c318faec80806f50f79c5dd17a5fe359d99ada2f5e77c2e2bcb3ff5dc/pallene-nirspec-dither-1-detail.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 65630,
+      "sha256": "e1fa4f1c318faec80806f50f79c5dd17a5fe359d99ada2f5e77c2e2bcb3ff5dc",
+      "verifiedAt": "2026-09-09T14:31:51.028Z"
+    },
+    {
+      "id": "pallene",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/78b9d9a9d12bf0a576dd8ef4bf13c14b7c0287f36fd05899b63d4fe0b3d41935/pallene-nirspec-dither-1-detail.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 47782,
+      "sha256": "78b9d9a9d12bf0a576dd8ef4bf13c14b7c0287f36fd05899b63d4fe0b3d41935",
+      "verifiedAt": "2026-09-09T14:31:51.804Z"
+    },
+    {
+      "id": "pallene",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/914101d7466a6dd275f3c31f9970a4b09391848e59fcb9e01bee64583a5faac5/pallene-nirspec-dither-1.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 66270,
+      "sha256": "914101d7466a6dd275f3c31f9970a4b09391848e59fcb9e01bee64583a5faac5",
+      "verifiedAt": "2026-09-09T14:31:52.632Z"
+    },
+    {
+      "id": "pallene",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/313d8155d5642f71121236de3d43dd6aac21ee80e38ddfe4c90ab39af1c30e52/pallene-nirspec-dither-1.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 44763,
+      "sha256": "313d8155d5642f71121236de3d43dd6aac21ee80e38ddfe4c90ab39af1c30e52",
+      "verifiedAt": "2026-09-09T14:31:53.412Z"
+    },
+    {
+      "id": "pallene",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/73442798a636d0345c15f7db2450020aae98262d25f5cdc4d760578c98dbf3a6/pallene-nirspec-dither-2-detail.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 65432,
+      "sha256": "73442798a636d0345c15f7db2450020aae98262d25f5cdc4d760578c98dbf3a6",
+      "verifiedAt": "2026-09-09T14:31:54.163Z"
+    },
+    {
+      "id": "pallene",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/6c313c674fd9ce2354efdbd0fdbddb5fc814676ea336ec2544545ee850d9514a/pallene-nirspec-dither-2-detail.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 52647,
+      "sha256": "6c313c674fd9ce2354efdbd0fdbddb5fc814676ea336ec2544545ee850d9514a",
+      "verifiedAt": "2026-09-09T14:31:54.917Z"
+    },
+    {
+      "id": "pallene",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e57bf7eefc828266592a1d279c50194cabe8b88bc22b06237bb9f7ec3711cfc3/pallene-nirspec-dither-2.csv",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 66072,
+      "sha256": "e57bf7eefc828266592a1d279c50194cabe8b88bc22b06237bb9f7ec3711cfc3",
+      "verifiedAt": "2026-09-09T14:31:55.625Z"
+    },
+    {
+      "id": "pallene",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/049dbd882e98d991a583a03faa1b451ff303babd31a42fe9a4e62a1f16852ae6/pallene-nirspec-dither-2.png",
+      "headStatus": 200,
+      "getStatus": 200,
+      "bytes": 37820,
+      "sha256": "049dbd882e98d991a583a03faa1b451ff303babd31a42fe9a4e62a1f16852ae6",
+      "verifiedAt": "2026-09-09T14:31:56.334Z"
+    }
+  ],
+  "startedAt": "2026-09-09T14:31:28.287Z",
+  "headsVerified": true,
+  "finishedAt": "2026-09-09T14:31:56.334Z"
+}

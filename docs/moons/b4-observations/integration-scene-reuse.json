@@ -1,47 +1,65 @@
 [
   {
     "id": "himalia",
-    "preparedSceneLocal": false,
-    "sha256": "a1afde587a8bb9f094e0fd473cb4fdd326bc285a57e34e6f0887d98b8c93732b"
+    "sha256": "a1afde587a8bb9f094e0fd473cb4fdd326bc285a57e34e6f0887d98b8c93732b",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "a1afde587a8bb9f094e0fd473cb4fdd326bc285a57e34e6f0887d98b8c93732b",
+    "matchesIntegratedMain": true
   },
   {
     "id": "epimetheus",
-    "preparedSceneLocal": false,
-    "sha256": "df1e610a320cdd10a43b1aff6399f6f88ba89acd07f23bc9e73bb4ed7b0bef8e"
+    "sha256": "df1e610a320cdd10a43b1aff6399f6f88ba89acd07f23bc9e73bb4ed7b0bef8e",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "df1e610a320cdd10a43b1aff6399f6f88ba89acd07f23bc9e73bb4ed7b0bef8e",
+    "matchesIntegratedMain": true
   },
   {
     "id": "telesto",
-    "preparedSceneLocal": false,
-    "sha256": "a89817f429d8f1a8ebafbe1c439cbadc0a2ae9182c3fcd891df736a25e1f834c"
+    "sha256": "a89817f429d8f1a8ebafbe1c439cbadc0a2ae9182c3fcd891df736a25e1f834c",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "a89817f429d8f1a8ebafbe1c439cbadc0a2ae9182c3fcd891df736a25e1f834c",
+    "matchesIntegratedMain": true
   },
   {
     "id": "pandora",
-    "preparedSceneLocal": false,
-    "sha256": "130f5dc979197e06630e529795d7c682c4f67f33261f0cf4addfda08b0cd8bde"
+    "sha256": "130f5dc979197e06630e529795d7c682c4f67f33261f0cf4addfda08b0cd8bde",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "130f5dc979197e06630e529795d7c682c4f67f33261f0cf4addfda08b0cd8bde",
+    "matchesIntegratedMain": true
   },
   {
     "id": "ymir",
-    "preparedSceneLocal": false,
-    "sha256": "2b503269a78c497371991497a19bca81b0244fc9a1068feb4845edd79a1ab1d7"
+    "sha256": "2b503269a78c497371991497a19bca81b0244fc9a1068feb4845edd79a1ab1d7",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "2b503269a78c497371991497a19bca81b0244fc9a1068feb4845edd79a1ab1d7",
+    "matchesIntegratedMain": true
   },
   {
     "id": "albiorix",
-    "preparedSceneLocal": false,
-    "sha256": "919381be678c067219cde37898c62037b02da4157186b9bde5bf790fc8b80ced"
+    "sha256": "919381be678c067219cde37898c62037b02da4157186b9bde5bf790fc8b80ced",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "919381be678c067219cde37898c62037b02da4157186b9bde5bf790fc8b80ced",
+    "matchesIntegratedMain": true
   },
   {
     "id": "siarnaq",
-    "preparedSceneLocal": false,
-    "sha256": "b80ab4434946e1b085f82a5a705889e6897afb8dcfc7b2cf89d50874d819486e"
+    "sha256": "b80ab4434946e1b085f82a5a705889e6897afb8dcfc7b2cf89d50874d819486e",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "b80ab4434946e1b085f82a5a705889e6897afb8dcfc7b2cf89d50874d819486e",
+    "matchesIntegratedMain": true
   },
   {
     "id": "methone",
-    "preparedSceneLocal": false,
-    "sha256": "28d185d084e9736e311e239d85a80f2a0fc66ba2ff965571cba8266ec84201f4"
+    "sha256": "28d185d084e9736e311e239d85a80f2a0fc66ba2ff965571cba8266ec84201f4",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "28d185d084e9736e311e239d85a80f2a0fc66ba2ff965571cba8266ec84201f4",
+    "matchesIntegratedMain": true
   },
   {
     "id": "pallene",
-    "preparedSceneLocal": false,
-    "sha256": "7d64663aee55f3a1c9ec7dafba0578fbd3cd14b923f26836f4ee995daddd6e6d"
+    "sha256": "7d64663aee55f3a1c9ec7dafba0578fbd3cd14b923f26836f4ee995daddd6e6d",
+    "method": "tools/restore-object-json.mjs serialized the integrated main runtime without preparing geometry or assets",
+    "restoredSha256": "7d64663aee55f3a1c9ec7dafba0578fbd3cd14b923f26836f4ee995daddd6e6d",
+    "matchesIntegratedMain": true
   }
 ]

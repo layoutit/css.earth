@@ -1,0 +1,91 @@
+{
+  "id": "ymir",
+  "chartId": "218ot_ymicol029",
+  "dpr": 2,
+  "status": "PASS",
+  "qualification": "Real SSR information panel and production chart/tab controllers; scene engine not mounted. Not a full application conformance result.",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "frozen": [
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "sha256": "95e51cd73a048fa621d915266fade781c0b42b20c41f7f8eced86ce8cdd42f3c"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "sha256": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "sha256": "84ac3f38733c699ee39450026bcd9b239c5f84cce59628a37276f95de9722130"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "sha256": "f213ff7f73724c21a59f6f8ff3b93097359d1608562ee116c1e782f94b5750e0"
+    },
+    {
+      "path": "src/planets/ymir/prepared/content.json",
+      "sha256": "8d6a46b62a7099603d6d980be06f11a628342d13876e9ea627e546e0b76a598e"
+    },
+    {
+      "path": "src/planets/ymir/source/content/charts.json",
+      "sha256": "4e7421d9ac3d4698d3f6adec69916441102da7c7a231b2337c2b6bb155e5cfc6"
+    },
+    {
+      "path": "src/planets/ymir/prepared/runtime-assets.json",
+      "sha256": "797ff94f80d0f0666e58fc3ce1baab3f9145a76a5fccf029d0ebf0a59dffd1d4"
+    }
+  ],
+  "htmlSha256": "8e3b25979f2277ef29a775e646feef81007d143896a88ff4e4a2e4ea0d46e32e",
+  "servedHtmlSha256": "9d4a3b8ac76cd71a099fe0f1b3bc7f941efcf0351876badf9aa806b1941b6665",
+  "errors": [],
+  "loaded": [
+    {
+      "url": "/scenes/ymir/ymir-218ot_ymicol029.png",
+      "bytes": 32087,
+      "sha256": "c065a6611b9985275daa67bac52573863d29c88a9b565d841c45e757bc7532b6"
+    },
+    {
+      "url": "/scenes/ymir/ymir-218ot_ymicol029.csv",
+      "bytes": 686,
+      "sha256": "07480f2ec4a061a9510f8dbea8d3739c835fa1d1025e8c30eecb1a7b20225127"
+    }
+  ],
+  "shutdown": {
+    "browser": "closed",
+    "server": "closed"
+  },
+  "chrome": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b4-observations/ymir-218ot_ymicol029-dpr2/chrome-process-pyFy7e/launch-chrome.sh",
+    "wrapperSha256": "88c2dd5fcb529c1da4e00c51830715b659eb9f979c3bde5e6478462b10ff6759",
+    "stdioLogPath": "output/playwright/b4-observations/ymir-218ot_ymicol029-dpr2/chrome-process-pyFy7e/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "download": {
+    "filename": "ymir-218ot_ymicol029.csv",
+    "bytes": 686,
+    "sha256": "07480f2ec4a061a9510f8dbea8d3739c835fa1d1025e8c30eecb1a7b20225127"
+  },
+  "retained": {
+    "cardSame": true,
+    "imagesSame": true,
+    "chartCount": 4
+  },
+  "geometry": {
+    "width": 330,
+    "scrollWidth": 330,
+    "captionFont": "13px"
+  },
+  "page.png": {
+    "path": "output/playwright/b4-observations/ymir-218ot_ymicol029-dpr2/page.png",
+    "sha256": "e4b291878979910c7cad6541f80fbe4479e05f8ae9a70f49e6375d5be8c3a08f"
+  },
+  "chart.png": {
+    "path": "output/playwright/b4-observations/ymir-218ot_ymicol029-dpr2/chart.png",
+    "sha256": "73d95137284581a37a7dc9a218dc4df5b418b38db3d6014a56a8dc5c5fbe990f"
+  }
+}

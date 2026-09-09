@@ -1,0 +1,13 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b4-observations/verify-publication.mjs"
+  ],
+  "limitRSSBytes": 536870912,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 113246208,
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 28.3
+}

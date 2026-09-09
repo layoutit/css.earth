@@ -655,3 +655,5 @@ The [Wikipedia template](https://en.wikipedia.org/wiki/Template:Solar_System_moo
 - **2026-09-08 B1 delivery:** Merged [PR #55](https://github.com/layoutit/cssEarth/pull/55) with all 26 packages, 95 merged moon scenes, six representative views and source/runtime evidence. Frozen source-review rows and original inventory remain unchanged; final aggregate gates are tracked in the batch report.
 
 - **2026-09-09 B4 start:** B3 PR #67 merged at `c016fd31d711e204bab4521c82c7e2e192f6e0df`. B4 retains its nine-body cohort, with source intake and serial chart preparation tracked in [B4 observation charts](B4-OBSERVATION-CHARTS.md). The six B3 research carry-forwards remain unscheduled.
+
+- **2026-09-09 B4 delivery preparation:** All nine planned bodies now supply 18 measured observation views from 13 pinned numeric inputs. Numerical, panel and published-asset checks are recorded in [B4](B4-OBSERVATION-CHARTS.md); full application scene conformance remains unverified. This adds observational charts without changing resolved surface-coverage counts.

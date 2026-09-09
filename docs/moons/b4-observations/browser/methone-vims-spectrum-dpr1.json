@@ -1,0 +1,91 @@
+{
+  "id": "methone",
+  "chartId": "vims-spectrum",
+  "dpr": 1,
+  "status": "PASS",
+  "qualification": "Real SSR information panel and production chart/tab controllers; scene engine not mounted. Not a full application conformance result.",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "frozen": [
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "sha256": "95e51cd73a048fa621d915266fade781c0b42b20c41f7f8eced86ce8cdd42f3c"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "sha256": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "sha256": "84ac3f38733c699ee39450026bcd9b239c5f84cce59628a37276f95de9722130"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "sha256": "f213ff7f73724c21a59f6f8ff3b93097359d1608562ee116c1e782f94b5750e0"
+    },
+    {
+      "path": "src/planets/methone/prepared/content.json",
+      "sha256": "ac8a69dad5adb6dce104646dbb3bbd7c683eddb7c52fc053199b5d2e8ce54328"
+    },
+    {
+      "path": "src/planets/methone/source/content/charts.json",
+      "sha256": "322ae68aefbd91c27249e470fa9d0ac6e582962f3d823f6ececabcd4fc55799a"
+    },
+    {
+      "path": "src/planets/methone/prepared/runtime-assets.json",
+      "sha256": "c441c56bd3f5c6e9bc799280615d456ffe523e41a5f4968d2e4e261ecc203e50"
+    }
+  ],
+  "htmlSha256": "87031d6fb002424d0e95d814100d2cb5b3c6d50f35dcda33da54eaec98ddaaf3",
+  "servedHtmlSha256": "3c643dd85a68a294c59825ca5b7470752f1d195f0b19b72071031ade0d3457a5",
+  "errors": [],
+  "loaded": [
+    {
+      "url": "/scenes/methone/methone-vims-spectrum.png",
+      "bytes": 66644,
+      "sha256": "e02b3b41b36b05d06dd3017a8c313ac586054bb44832f532d5eba804e15442e4"
+    },
+    {
+      "url": "/scenes/methone/methone-vims-spectrum.csv",
+      "bytes": 12153,
+      "sha256": "168cf4846bc2a195390eecfe54438bb1fc0422998921201ee037aecd46263aa1"
+    }
+  ],
+  "shutdown": {
+    "browser": "closed",
+    "server": "closed"
+  },
+  "chrome": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b4-observations/methone-vims-spectrum-dpr1/chrome-process-byAQj9/launch-chrome.sh",
+    "wrapperSha256": "08da8a5b1c7ec087f88498789eb0ba993c264b3c3e9fc825ae4d4221163cfe82",
+    "stdioLogPath": "output/playwright/b4-observations/methone-vims-spectrum-dpr1/chrome-process-byAQj9/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "download": {
+    "filename": "methone-vims-spectrum.csv",
+    "bytes": 12153,
+    "sha256": "168cf4846bc2a195390eecfe54438bb1fc0422998921201ee037aecd46263aa1"
+  },
+  "retained": {
+    "cardSame": true,
+    "imagesSame": true,
+    "chartCount": 1
+  },
+  "geometry": {
+    "width": 300,
+    "scrollWidth": 300,
+    "captionFont": "13px"
+  },
+  "page.png": {
+    "path": "output/playwright/b4-observations/methone-vims-spectrum-dpr1/page.png",
+    "sha256": "09915441a2112309d6748bddfacb1b27bda0d7f790c79d60cd1adfe431cbf4db"
+  },
+  "chart.png": {
+    "path": "output/playwright/b4-observations/methone-vims-spectrum-dpr1/chart.png",
+    "sha256": "62ea719e3f30ec3a6c5e59874ca3d63e5c952afd8d1402c653629b04b0c45350"
+  }
+}

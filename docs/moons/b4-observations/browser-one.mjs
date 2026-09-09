@@ -49,6 +49,9 @@ try{
  const image=await imagePromise;const data=await context.request.get(`http://127.0.0.1:4292${chart.data.src}`);assert.equal(data.status(),200);
  for(const [url,bytes]of[[chart.src,await image.body()],[chart.data.src,await data.body()]]){const local=await readFile(`public${url}`);assert.equal(sha(bytes),sha(local));report.loaded.push({url,bytes:bytes.length,sha256:sha(bytes)});}
  await slide.screenshot({path:`${out}/chart.png`});await page.screenshot({path:`${out}/page.png`});
+ const [download]=await Promise.all([page.waitForEvent('download'),slide.locator('a[download]').click()]);
+ assert.equal(await download.failure(),null);const downloaded=await readFile(await download.path());
+ assert.equal(sha(downloaded),report.loaded.find(file=>file.url===chart.data.src).sha256);report.download={filename:download.suggestedFilename(),bytes:downloaded.length,sha256:sha(downloaded)};
  if(content.charts.length>1){for(let i=0;i<content.charts.length;i++)await switcher.locator('[data-chart-step="1"]').click();assert.equal(await switcher.getAttribute('data-active-chart'),chartId);}
  for(const tab of ['factsheet','sources','dataset']){await page.locator(`[data-information-tab="${tab}"]`).click();await page.locator(`[data-information-panel="${tab}"]`).waitFor({state:'visible'});}
  report.retained=await page.evaluate(()=>({cardSame:window.__b4Card===document.querySelector('.planet-information-panel'),imagesSame:window.__b4Images.every((img,i)=>img===document.querySelectorAll('.planet-chart')[i]),chartCount:document.querySelectorAll('.planet-chart').length}));

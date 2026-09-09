@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "scope": "All 18 prepared chart views and their actual desktop panel captions; narrow layout and download interaction checked by 36 browser cases. Not a scene rendering or physical mobile review.",
+  "reviewer": "Moons owner",
+  "notes": [
+    "Wavelength and brightness units remain attached to each plot.",
+    "Ymir is relative magnitude with brighter values upward, with four separate phase angles and sequences.",
+    "Negative samples and extreme outliers remain visible in the full spectra.",
+    "Pallene detail views expose the measured short-wavelength variation while retaining full-range companions.",
+    "Archive flux curves are visibly qualified, including Albiorix contamination and lack of thermal/solar correction.",
+    "Source links and CSV downloads are accessible; images and cards remain retained through chart and tab changes."
+  ],
+  "images": [
+    {
+      "path": "images/albiorix-nirspec-prism.png",
+      "sha256": "b701ec2e428c67d6a5adc9a69f0316cf90da19152872a86988e0ae3705ba8354"
+    },
+    {
+      "path": "images/epimetheus-nirspec-dither-1.png",
+      "sha256": "9258e911d0a966f781ad561257a2daec423471ccbfa8d39be39638501c033f55"
+    },
+    {
+      "path": "images/epimetheus-nirspec-dither-2.png",
+      "sha256": "f5b140d9eb88fc8dd2ea71f4b9ac93121f4ef940bd50ed2be1cba25e64a3bbf6"
+    },
+    {
+      "path": "images/himalia-nirspec-g235m.png",
+      "sha256": "9faeb49c18ba5bfdbce2a33cb9e0bd9be1708c0e376602af2ea9c46046ed26f4"
+    },
+    {
+      "path": "images/himalia-nirspec-g395m.png",
+      "sha256": "4db0328c950a6054a27a1d6c4a2323689b58bd3db3900c4a821047d1fe48d3f1"
+    },
+    {
+      "path": "images/methone-vims-spectrum.png",
+      "sha256": "62ea719e3f30ec3a6c5e59874ca3d63e5c952afd8d1402c653629b04b0c45350"
+    },
+    {
+      "path": "images/pallene-nirspec-dither-1-detail.png",
+      "sha256": "f76f198f0a0aa824cb9d089a28061c85011827d7fd83e31fe810a01aa4c27655"
+    },
+    {
+      "path": "images/pallene-nirspec-dither-1.png",
+      "sha256": "92f09e7511266bdf641e9946404a70e453c916c219133835109336f483a5adcb"
+    },
+    {
+      "path": "images/pallene-nirspec-dither-2-detail.png",
+      "sha256": "d43466e8fd5c0f9051940929f00398deb1adac6cf8caa93933e5b391cdbe151c"
+    },
+    {
+      "path": "images/pallene-nirspec-dither-2.png",
+      "sha256": "adb318d45d3c18be6a2142f9768435e51f49a5c703b9b790c86c945aca4a8426"
+    },
+    {
+      "path": "images/pandora-nirspec-dither-1.png",
+      "sha256": "e91aa5c05f12484ecc2e35718e1fe88c8eb3e7b43f874c1810cbe5ee9fb09124"
+    },
+    {
+      "path": "images/siarnaq-nirspec-prism.png",
+      "sha256": "24f2414ef1cdc74a57897c6c9c405473693973cb25e2674e62b175f8111ae892"
+    },
+    {
+      "path": "images/telesto-nirspec-dither-1.png",
+      "sha256": "3fc639471c2516d114b039b31551d6387812ffed465c80c2c85fddc33d59bce8"
+    },
+    {
+      "path": "images/telesto-nirspec-dither-2.png",
+      "sha256": "642de0b0a2b02e63dae256ff68665c3fd4a16cca9c0382de88e668a92d89e7fe"
+    },
+    {
+      "path": "images/ymir-165ot_ymirota065.png",
+      "sha256": "810730bd62515700e930b94e37a770efe06e39a3b98d87697b7aa40f33377013"
+    },
+    {
+      "path": "images/ymir-165ot_ymirotb065.png",
+      "sha256": "c9e1ddd215dcff69bcb45be711269c22ebcd117f70f84525fbbf96db01310a7a"
+    },
+    {
+      "path": "images/ymir-168ot_ymirot095.png",
+      "sha256": "e76bd080e889d439befb9e6fce8187eafbbb0b3fae8c5723bf2330b0fc73b4d9"
+    },
+    {
+      "path": "images/ymir-218ot_ymicol029.png",
+      "sha256": "ed86e71e132337f3f02b619e11196e0d13c48a63c80807879e9733e011bb500d"
+    }
+  ]
+}

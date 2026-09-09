@@ -1,0 +1,91 @@
+{
+  "id": "telesto",
+  "chartId": "nirspec-dither-1",
+  "dpr": 1,
+  "status": "PASS",
+  "qualification": "Real SSR information panel and production chart/tab controllers; scene engine not mounted. Not a full application conformance result.",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "frozen": [
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "sha256": "95e51cd73a048fa621d915266fade781c0b42b20c41f7f8eced86ce8cdd42f3c"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "sha256": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "sha256": "84ac3f38733c699ee39450026bcd9b239c5f84cce59628a37276f95de9722130"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "sha256": "f213ff7f73724c21a59f6f8ff3b93097359d1608562ee116c1e782f94b5750e0"
+    },
+    {
+      "path": "src/planets/telesto/prepared/content.json",
+      "sha256": "f26b799baa1c229a25f005c14a3cf5e803731248f38e9ccb05d0a610563a39d4"
+    },
+    {
+      "path": "src/planets/telesto/source/content/charts.json",
+      "sha256": "cdd335873869132e44659d940815091acd7a25aa9a95574472237f2c38bd5648"
+    },
+    {
+      "path": "src/planets/telesto/prepared/runtime-assets.json",
+      "sha256": "922b0afb8ae7774e48a7eb7a61eb90c07fbd313ad521d78d52bfc64b0669e50d"
+    }
+  ],
+  "htmlSha256": "7af6aeb93dfae1a6ca44baf1e0937a56740cab60ba06de35a9034207ca7b3877",
+  "servedHtmlSha256": "f04158d81eb2d2903e29a7e65b9f74457e140cd971e7041e2fd0daf13b138675",
+  "errors": [],
+  "loaded": [
+    {
+      "url": "/scenes/telesto/telesto-nirspec-dither-1.png",
+      "bytes": 38678,
+      "sha256": "ebdd94fb1123a92396579565c417f6c625192ea45f197d8636a05374fb5d8602"
+    },
+    {
+      "url": "/scenes/telesto/telesto-nirspec-dither-1.csv",
+      "bytes": 65621,
+      "sha256": "a8af74b9f792d3fd76fbd77f1af0b7e9a011b8577294425bbfb36033540269e1"
+    }
+  ],
+  "shutdown": {
+    "browser": "closed",
+    "server": "closed"
+  },
+  "chrome": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b4-observations/telesto-nirspec-dither-1-dpr1/chrome-process-gyJIqM/launch-chrome.sh",
+    "wrapperSha256": "439e3fa34272e963a428adbc5a2bffdaddc9e4850cd7cdb22b1dbb0e4962f311",
+    "stdioLogPath": "output/playwright/b4-observations/telesto-nirspec-dither-1-dpr1/chrome-process-gyJIqM/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "download": {
+    "filename": "telesto-nirspec-dither-1.csv",
+    "bytes": 65621,
+    "sha256": "a8af74b9f792d3fd76fbd77f1af0b7e9a011b8577294425bbfb36033540269e1"
+  },
+  "retained": {
+    "cardSame": true,
+    "imagesSame": true,
+    "chartCount": 2
+  },
+  "geometry": {
+    "width": 300,
+    "scrollWidth": 300,
+    "captionFont": "13px"
+  },
+  "page.png": {
+    "path": "output/playwright/b4-observations/telesto-nirspec-dither-1-dpr1/page.png",
+    "sha256": "e8280e9440fb9381374b049501b351306be07600fa4f25b0bf19633115f180ae"
+  },
+  "chart.png": {
+    "path": "output/playwright/b4-observations/telesto-nirspec-dither-1-dpr1/chart.png",
+    "sha256": "3fc639471c2516d114b039b31551d6387812ffed465c80c2c85fddc33d59bce8"
+  }
+}

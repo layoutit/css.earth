@@ -1,0 +1,91 @@
+{
+  "id": "himalia",
+  "chartId": "nirspec-g235m",
+  "dpr": 1,
+  "status": "PASS",
+  "qualification": "Real SSR information panel and production chart/tab controllers; scene engine not mounted. Not a full application conformance result.",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "frozen": [
+    {
+      "path": "site/components/PlanetInformationPanel.astro",
+      "sha256": "95e51cd73a048fa621d915266fade781c0b42b20c41f7f8eced86ce8cdd42f3c"
+    },
+    {
+      "path": "site/planet-shell-client.mjs",
+      "sha256": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590"
+    },
+    {
+      "path": "site/planet-shell.css",
+      "sha256": "84ac3f38733c699ee39450026bcd9b239c5f84cce59628a37276f95de9722130"
+    },
+    {
+      "path": "site/planet-shell-types.ts",
+      "sha256": "f213ff7f73724c21a59f6f8ff3b93097359d1608562ee116c1e782f94b5750e0"
+    },
+    {
+      "path": "src/planets/himalia/prepared/content.json",
+      "sha256": "768306dda94914d422a0586d73e6a56885019431931b51a08e3f5e56887e5157"
+    },
+    {
+      "path": "src/planets/himalia/source/content/charts.json",
+      "sha256": "b9cddaa815a46896da9453d397619d1cda9def3c313f6a1616afb8072c78b4da"
+    },
+    {
+      "path": "src/planets/himalia/prepared/runtime-assets.json",
+      "sha256": "554d8c858acd06979407521dd0586439b926645ff94d812e227a97dc913086fb"
+    }
+  ],
+  "htmlSha256": "2149ca67918fb813831031e22c0555bb6f59098fc162a49aec6eb81230b3abcb",
+  "servedHtmlSha256": "3ad7a0efc17308b57b9d7a49065c3a8cd66171a5795b1b79221d362bc6a5daa2",
+  "errors": [],
+  "loaded": [
+    {
+      "url": "/scenes/himalia/himalia-nirspec-g235m.png",
+      "bytes": 52385,
+      "sha256": "d8782ec4d302b335bb47582b5879fde970178bee41e2cb03e71664aa130196f0"
+    },
+    {
+      "url": "/scenes/himalia/himalia-nirspec-g235m.csv",
+      "bytes": 113450,
+      "sha256": "d04d66846be004200d712565b274c9b2037f8546794a28f6d5dc47dd3bf0a6fc"
+    }
+  ],
+  "shutdown": {
+    "browser": "closed",
+    "server": "closed"
+  },
+  "chrome": {
+    "mode": "installed-chrome-with-retained-stdio",
+    "executablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "wrapperPath": "output/playwright/b4-observations/himalia-nirspec-g235m-dpr1/chrome-process-7vlali/launch-chrome.sh",
+    "wrapperSha256": "f15f4402477801b94d28a27b0cdf14b5aa5e8c7778e7b93d020b7148c7d2d374",
+    "stdioLogPath": "output/playwright/b4-observations/himalia-nirspec-g235m-dpr1/chrome-process-7vlali/stdout-stderr.log",
+    "protocol": "Playwright CDP pipes on descriptors 3 and 4 are unchanged; only stdout and stderr are redirected."
+  },
+  "download": {
+    "filename": "himalia-nirspec-g235m.csv",
+    "bytes": 113450,
+    "sha256": "d04d66846be004200d712565b274c9b2037f8546794a28f6d5dc47dd3bf0a6fc"
+  },
+  "retained": {
+    "cardSame": true,
+    "imagesSame": true,
+    "chartCount": 2
+  },
+  "geometry": {
+    "width": 300,
+    "scrollWidth": 300,
+    "captionFont": "13px"
+  },
+  "page.png": {
+    "path": "output/playwright/b4-observations/himalia-nirspec-g235m-dpr1/page.png",
+    "sha256": "c257bbf7cb37ac1a57e1947b02b6406dfffb565905322a3ca7e73d8f78110187"
+  },
+  "chart.png": {
+    "path": "output/playwright/b4-observations/himalia-nirspec-g235m-dpr1/chart.png",
+    "sha256": "9faeb49c18ba5bfdbce2a33cb9e0bd9be1708c0e376602af2ea9c46046ed26f4"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "environment": {
+    "platform": "darwin",
+    "architecture": "arm64",
+    "node": "v24.19.0"
+  },
+  "scope": "36 PNG/CSV outputs reproduced from retained inputs and recipes in the current preparation environment. Cross-platform font/raster byte identity is not claimed.",
+  "bodies": [
+    {
+      "id": "himalia",
+      "outputsVerified": 4
+    },
+    {
+      "id": "epimetheus",
+      "outputsVerified": 4
+    },
+    {
+      "id": "telesto",
+      "outputsVerified": 4
+    },
+    {
+      "id": "pandora",
+      "outputsVerified": 2
+    },
+    {
+      "id": "ymir",
+      "outputsVerified": 8
+    },
+    {
+      "id": "albiorix",
+      "outputsVerified": 2
+    },
+    {
+      "id": "siarnaq",
+      "outputsVerified": 2
+    },
+    {
+      "id": "methone",
+      "outputsVerified": 2
+    },
+    {
+      "id": "pallene",
+      "outputsVerified": 8
+    }
+  ],
+  "maxRssKiB": 214944
+}

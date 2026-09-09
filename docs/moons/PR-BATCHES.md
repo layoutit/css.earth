@@ -100,3 +100,5 @@ Source acquisition/preparation must follow workstation disk and process guardrai
 ## Planning validation
 
 The structured [batch membership](PR-BATCHES.json) was checked against the frozen review: **60 unique assigned bodies**, **28 prospective new scenes**, **32 existing improvements**, every physical-model candidate assigned exactly once, and every existing improvement assigned exactly once. The remaining **424** reviewed rows plus these **60** account for the full **484**.
+
+B4 implementation and qualification: [18 observation views across the nine-body cohort](B4-OBSERVATION-CHARTS.md). The measured-data, panel and asset checks pass; full scene conformance remains unverified under the workstation resource limit.

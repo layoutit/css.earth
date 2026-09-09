@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "scope": "All new measurement inputs, recipe/document pins present locally, generated content, complete local runtime asset closure, bound PNG/CSV provenance and unchanged scene transports.",
+  "unproven": "Full historical scientific source acquisition and full scene browser conformance were not rerun.",
+  "bodies": [
+    {
+      "id": "himalia",
+      "charts": 2,
+      "measuredInputsVerified": 2,
+      "assetsVerified": 35,
+      "provenanceProducts": 5,
+      "sceneTransportMatchesPin": true
+    },
+    {
+      "id": "epimetheus",
+      "charts": 2,
+      "measuredInputsVerified": 2,
+      "assetsVerified": 39,
+      "provenanceProducts": 7,
+      "sceneTransportMatchesPin": true
+    },
+    {
+      "id": "telesto",
+      "charts": 2,
+      "measuredInputsVerified": 2,
+      "assetsVerified": 39,
+      "provenanceProducts": 7,
+      "sceneTransportMatchesPin": true
+    },
+    {
+      "id": "pandora",
+      "charts": 1,
+      "measuredInputsVerified": 1,
+      "assetsVerified": 37,
+      "provenanceProducts": 6,
+      "sceneTransportMatchesPin": true
+    },
+    {
+      "id": "ymir",
+      "charts": 4,
+      "measuredInputsVerified": 1,
+      "assetsVerified": 39,
+      "provenanceProducts": 7,
+      "sceneTransportMatchesPin": true
+    },
+    {
+      "id": "albiorix",
+      "charts": 1,
+      "measuredInputsVerified": 1,
+      "assetsVerified": 33,
+      "provenanceProducts": 4,
+      "sceneTransportMatchesPin": true
+    },
+    {
+      "id": "siarnaq",
+      "charts": 1,
+      "measuredInputsVerified": 1,
+      "assetsVerified": 33,
+      "provenanceProducts": 4,
+      "sceneTransportMatchesPin": true
+    },
+    {
+      "id": "methone",
+      "charts": 1,
+      "measuredInputsVerified": 1,
+      "assetsVerified": 33,
+      "provenanceProducts": 4,
+      "sceneTransportMatchesPin": true
+    },
+    {
+      "id": "pallene",
+      "charts": 4,
+      "measuredInputsVerified": 2,
+      "assetsVerified": 39,
+      "provenanceProducts": 7,
+      "sceneTransportMatchesPin": true
+    }
+  ],
+  "maxRssKiB": 266912
+}
