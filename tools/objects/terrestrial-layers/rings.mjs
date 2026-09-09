@@ -47,7 +47,8 @@ export async function prepareTerrestrialRings({ config, publicDirectory }) {
   const raster = await prepareCoplanarColorRaster({ faces, pixelsPerUnit: profile.textureSize / (2 * extent) });
   await writeFile(resolve(publicDirectory, `${config.namespace}-rings.webp`), raster.bytes);
   const leaves = raster.tiles.map(tile => ({ tag: 's', className: 'prepared-annular-ring',
-    style: `transform:matrix3d(${tile.matrix.join(',')});backface-visibility:visible;--polycss-atlas-width:${tile.width}px;` +
+    style: `position:absolute;display:block;width:${tile.width}px;height:${tile.height}px;margin:0;padding:0;transform-origin:0 0;` +
+      `transform:matrix3d(${tile.matrix.join(',')});backface-visibility:visible;--polycss-atlas-width:${tile.width}px;` +
       `--polycss-atlas-height:${tile.height}px;background-position:${-tile.x}px ${-tile.y}px;` +
       `background-size:${raster.width}px ${raster.height}px;background-repeat:no-repeat` }));
   return { leaves, resource: { key: 'rings', url, pool: 'mounted' },

@@ -32,6 +32,8 @@ test('two annuli retain the source radii, central aperture, gap, and separate op
     assert.equal(alpha(26 / 30), 0, 'gap stays transparent');
     assert.ok(alpha(29 / 30) >= 60 && alpha(29 / 30) <= 65, 'outer ring retains independent opacity');
     assert.ok(result.leaves.length <= 4, 'one bounded coplanar raster supplies retained tiles');
+    assert.match(result.leaves[0].style, /position:absolute;display:block;width:\d+px;height:\d+px/);
+    assert.match(result.leaves[0].style, /transform-origin:0 0/);
     assert.equal(result.resource.pool, 'mounted');
   } finally { await rm(publicDirectory, { recursive: true, force: true }); }
 });
