@@ -561,7 +561,7 @@
     },
     {
       "body": "comet-103p",
-      "lens": "hri",
+      "lens": "mri",
       "path": "photography/hri/hv10110413_5004004_001_d050.fit",
       "sha256": "0c237b12aad0fa29e5427c2cc5c46bbf5b48059071912f278a731840cdbd07b3",
       "width": 1024,
@@ -602,7 +602,7 @@
     },
     {
       "body": "comet-103p",
-      "lens": "hri",
+      "lens": "mri",
       "path": "photography/hri/hv10110413_5004008_001_d050.fit",
       "sha256": "eec139c05808fa441b327d2905c5fa9cef45fc917d56d33b8edffe04f797d36f",
       "width": 1024,
@@ -638,6 +638,336 @@
           "y": 1015,
           "radiance": 0.018616875633597374,
           "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-81p",
+      "lens": "navcam",
+      "path": "photography/navcam/n2079we02_rr.fit",
+      "sha256": "bf498d851c2189b0baca42c3f79a3969c1cc95d2f28e07f08f3141a7eea79b34",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 0.0,
+          "quality": 0
+        },
+        {
+          "x": 905,
+          "y": 617,
+          "radiance": -2.352870343003133e-09,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 2
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000644_001_r.fit",
+      "sha256": "2f9aa28cc08a216e56884e950fc83fcb79f6480e695d0c4dc5e3f9933cfbd087",
+      "width": 256,
+      "height": 256,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": -6.1853709206184784e-27,
+          "quality": 0
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "radiance": 0.027584711089730263,
+          "quality": 0
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "radiance": 1.3407166004180908,
+          "quality": 0
+        },
+        {
+          "x": 131,
+          "y": 121,
+          "radiance": 1.377724528312683,
+          "quality": 0
+        },
+        {
+          "x": 247,
+          "y": 247,
+          "radiance": 0.02522076666355133,
+          "quality": 0
+        },
+        {
+          "x": 252,
+          "y": 130,
+          "radiance": -2.900757975835e-13,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 220,
+          "radiance": null,
+          "quality": 0
+        },
+        {
+          "x": 4,
+          "y": 116,
+          "radiance": 0.0,
+          "quality": 9
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000673_001_r.fit",
+      "sha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026",
+      "width": 256,
+      "height": 256,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 3.412441332478338e+21,
+          "quality": 0
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "radiance": 0.9140347242355347,
+          "quality": 0
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "radiance": 1.4375663995742798,
+          "quality": 0
+        },
+        {
+          "x": 131,
+          "y": 121,
+          "radiance": 1.4284571409225464,
+          "quality": 0
+        },
+        {
+          "x": 247,
+          "y": 247,
+          "radiance": 1.5793297290802002,
+          "quality": 0
+        },
+        {
+          "x": 254,
+          "y": 128,
+          "radiance": -1.0054671505110857e-11,
+          "quality": 0
+        },
+        {
+          "x": 252,
+          "y": 108,
+          "radiance": null,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 131,
+          "radiance": -1.1487578082460003e+30,
+          "quality": 64
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30033te02_rr.fit",
+      "sha256": "7b6b3ea7dc38f0c00430538caa172037ecfdb8a87aaf3bbd548c71102bd087bc",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 2.9879940743882116e-09,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 1.1594612914223035e-07,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 1.0563385899331479e-07,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": -7.360004272705112e-11,
+          "quality": 0
+        },
+        {
+          "x": 1000,
+          "y": 728,
+          "radiance": -6.387641804384003e-11,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 2
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30045te02_rr.fit",
+      "sha256": "40012e16420e8a54f1528b8281cc7547a80243ee7693b7ab0684261ff3bba2b4",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": -7.31870730685813e-10,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 1.0232545477606436e-08,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 1.0326774990687682e-08,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 1.787328729463411e-09,
+          "quality": 0
+        },
+        {
+          "x": 207,
+          "y": 570,
+          "radiance": -7.383582634190589e-10,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 2
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "next",
+      "path": "photography/next/n30048te02_rr.fit",
+      "sha256": "fe0f92dd79880c4e39d646277e06e957844de800b15747e9b92a7685f7e03506",
+      "width": 1024,
+      "height": 1024,
+      "units": "W/(cm^2*nm*sr)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 0.0,
+          "quality": 2
+        },
+        {
+          "x": 256,
+          "y": 256,
+          "radiance": 3.48223283541671e-10,
+          "quality": 0
+        },
+        {
+          "x": 512,
+          "y": 512,
+          "radiance": 1.936542926017637e-09,
+          "quality": 0
+        },
+        {
+          "x": 515,
+          "y": 505,
+          "radiance": 1.9539505569099447e-09,
+          "quality": 0
+        },
+        {
+          "x": 1015,
+          "y": 1015,
+          "radiance": 4.332715297650225e-10,
+          "quality": 0
+        },
+        {
+          "x": 369,
+          "y": 623,
+          "radiance": -1.8377230293076252e-10,
+          "quality": 0
+        },
+        {
+          "x": 0,
+          "y": 512,
+          "radiance": 0.0,
+          "quality": 2
         }
       ]
     }

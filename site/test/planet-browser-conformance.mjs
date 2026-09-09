@@ -476,7 +476,7 @@ async function proveDesktop(browser, planet, profile) {
   const evidence = observePage(page, baseUrl);
   try {
     await loadPlanet(page, planet, profile);
-    await enableMotion(page, planet.id);
+    const motionActivation = await enableMotion(page, planet.id);
     const projectiveTextureReport = await page.locator(".planet-stage")
       .evaluate((stage) => {
         // All detail leaves belong to the one object camera. Prepared paint
@@ -694,6 +694,7 @@ async function proveDesktop(browser, planet, profile) {
     return {
       id: planet.id,
       viewport: "desktop",
+      motionActivation,
       surfaceFlyTo: {
         pitchDelta: afterFlyTo.pitch - beforeFlyTo.pitch,
         zoomRatio: afterFlyTo.zoom / beforeFlyTo.zoom,
@@ -1642,17 +1643,29 @@ async function enableMotion(page, id) {
   const panel = page.locator(".planet-settings-panel");
   const action = page.locator(".planet-settings-action");
   const motion = page.locator(".planet-motion-setting");
-  await action.click();
-  assert.equal(await panel.isVisible(), true,
-    `${id}: settings action must open the settings panel`);
   assert.equal(await motion.isChecked(), false,
     `${id}: desktop motion must be off by default`);
-  await page.locator(".planet-motion-setting-control").click();
+  const settingsHidden = await action.evaluate(button => button.hidden);
+  if (settingsHidden) {
+    assert.equal(await panel.isVisible(), false,
+      `${id}: hidden Settings must leave its panel closed`);
+    // Settings is intentionally hidden. Exercise its retained input handler,
+    // as the pre-ready cases do, without changing the shell's visibility.
+    await motion.evaluate(input => input.click());
+  } else {
+    await action.click();
+    assert.equal(await panel.isVisible(), true,
+      `${id}: settings action must open the settings panel`);
+    await page.locator(".planet-motion-setting-control").click();
+  }
   await page.waitForFunction(() => window.__cssEarth?.lifecycle === "mounted");
   assert.equal(await motion.isChecked(), true,
     `${id}: motion setting must resume the scene`);
-  await page.keyboard.press("Escape");
-  assert.equal(await panel.isVisible(), false, `${id}: Escape must close settings`);
+  if (!settingsHidden) {
+    await page.keyboard.press("Escape");
+    assert.equal(await panel.isVisible(), false, `${id}: Escape must close settings`);
+  }
+  return settingsHidden ? "retained-input" : "visible-settings";
 }
 
 async function sceneState(page, profile) {

@@ -1,5 +1,7 @@
 # 67P OSIRIS surface coverage
 
+This records the initial four-image August mosaic. [Surface imagery](SURFACE-IMAGERY.md) documents the later September additions and current coverage.
+
 This follow-up replaces the single-exposure OSIRIS lens with a four-observation
 mosaic on the same 1,000 retained RMOC facets. Shape model stays the default.
 The photographs span 5 August 2014 19:44:22.918 UTC to 6 August 2014

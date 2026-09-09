@@ -48,7 +48,7 @@ same nucleus scene. These use the existing dataset selector and shared legend.
 
 [67P VIRTIS scientific views](67P-VIRTIS.md) documents the four MTP006 datasets, numerical units, source-to-shape transfer, concise lens factsheets and validation evidence.
 
-[Wild 2, Tempel 1 and Hartley 2 encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the five optional photographic views, selected spacecraft products, camera checks and coverage limits.
+[Wild 2, Tempel 1 and Hartley 2 encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the initial photographic release. [The surface-imagery pass](SURFACE-IMAGERY.md) expands those mosaics and combines Hartley’s MRI/HRI photographs into one EPOXI view.
 
 [Tuttle](TUTTLE.md) records the sixth comet and its independent geometry/orbit checks. [The Arecibo comparison](TUTTLE-ARECIBO.md) records both datasets and the current browser, delivery and drag evidence.
 
