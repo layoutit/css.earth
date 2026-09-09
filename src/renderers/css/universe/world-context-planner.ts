@@ -203,7 +203,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const orbitVisibility = projected.orbitVisibility;
         if (!entry.orbit) continue;
         entry.orbitClip = { segments: orbitVisibility > 0 ? segments : [], x, y };
-        entry.indicatorCutout = entry.indicatorShown && (!navigationInFlight || entry.body.id === emphasizedId || entry.parent?.id === emphasizedId);
+        entry.indicatorCutout = entry.indicatorShown && (!navigationInFlight || emphasizedId === null || entry.body.id === emphasizedId || entry.parent?.id === emphasizedId);
         const clipped = entry.indicatorCutout
           ? orbitOutsideMarker(entry.orbitClip.segments, x, y, entry.indicatorRadius) : entry.orbitClip.segments;
         projected.segments = clipped;

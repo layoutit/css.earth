@@ -583,7 +583,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
         // current emphasis before their next reveal, and while an outgoing
         // fade can still draw; selection need not restyle every dormant orbit.
         if (entry.publishedEmphasis !== emphasizedId) {
-          const annotationsVisible = !navigationInFlight || entry.body.id === emphasizedId || entry.parent?.id === emphasizedId;
+          const annotationsVisible = !navigationInFlight || emphasizedId === null || entry.body.id === emphasizedId || entry.parent?.id === emphasizedId;
           const drawsAnnotations = (annotationsVisible && (projected.labelShown || projected.indicatorShown))
             || (projected.orbitVisibility > 0 && projected.segments.length > 0)
             || (entry.label.style.visibility !== 'hidden' && fader.current(entry.label) > 0)
@@ -602,7 +602,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
       // Only the resolved presentation owns DOM visibility and hit targets.
       for (const { entry, x, y, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, hovered, inFrame, lineWidth, orbitVisibility, segments, transforms, labelPosition } of projectedBodies) {
         const { body, marker, indicator, label } = entry;
-        const annotationsVisible = !navigationInFlight || body.id === emphasizedId || entry.parent?.id === emphasizedId;
+        // Overview flights retain system annotations; body flights fade unrelated ones.
+        const annotationsVisible = !navigationInFlight || emphasizedId === null || body.id === emphasizedId || entry.parent?.id === emphasizedId;
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         const markerShown = visible && markerOpacity > 0 && !pointSource;
         marker.style.visibility = markerShown ? '' : 'hidden';

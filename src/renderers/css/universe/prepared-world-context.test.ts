@@ -1606,6 +1606,26 @@ test('flights keep orbit projection live, fade unrelated annotations and retain 
   layer.destroy();
 });
 
+test('overview flights retain system annotations and orbit cutouts without enabling picking', () => {
+  const root = mount(1), layer = mounted.get(root)!;
+  const nodes = all(root);
+  layer.previewSelection(null);
+  const before = layer.inspect().map(entry => ({ id: entry.id, label: entry.label.style.opacity,
+    indicator: entry.indicator.style.opacity, orbit: entry.orbit.map(node => ({ ...node.style })) }));
+  layer.setNavigationInFlight(true);
+  for (const previous of before) {
+    const entry = layer.inspect().find(entry => entry.id === previous.id)!;
+    expect(entry.label.style.opacity).toBe(previous.label);
+    expect(entry.indicator.style.opacity).toBe(previous.indicator);
+    expect(entry.orbit.map(node => ({ ...node.style }))).toEqual(previous.orbit);
+    expect(entry.indicator.dataset.objectNavigate).toBeUndefined();
+  }
+  layer.setOverview(true);
+  layer.setNavigationInFlight(false);
+  expect(all(root)).toEqual(nodes);
+  layer.destroy();
+});
+
 test('selection emphasis previews immediately without changing the detailed occluder', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const sun = find(root, 'contextGroup', 'sun'), mercury = find(root, 'contextGroup', 'mercury');
