@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1J00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/sp/v1/PDS4_SP_1100.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="http://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1J00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+    xmlns:sp="http://pds.nasa.gov/pds4/sp/v1"
+    xmlns:cart="http://pds.nasa.gov/pds4/cart/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+    http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.xsd
+    http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1J00_1510.xsd
+    http://pds.nasa.gov/pds4/sp/v1 https://pds.nasa.gov/pds4/sp/v1/PDS4_SP_1100.xsd
+    http://pds.nasa.gov/pds4/cart/v1 http://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1J00_1970.xsd">
+    
+    <Identification_Area>
+        <!-- A product is one multiband image that cover the whole satellite. -->
+        <logical_identifier>urn:nasa:pds:dione.rhea_cassini_vims_ir-mosaic_scipioni_2022:data:rhea_notnorm_pc_modified_2</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>VIMS Spectral Cube of Rhea</title>
+        <information_model_version>1.19.0.0</information_model_version>
+        <product_class>Product_Observational</product_class>
+        <Citation_Information>
+            <author_list>Scipioni, Francesca; Combe, Jean-Philippe</author_list>
+            <publication_year>2022</publication_year>
+            <doi>10.17189/ctqe-ta30</doi>
+            <description>Cassini VIMS Global Hyperspectral Maps of Dione and Rhea by Francesca Scipioni as funded by a 2018 Cassini Data Analysis program (CDAP)</description>
+        </Citation_Information>
+    </Identification_Area>
+    
+    <Observation_Area>
+        <Time_Coordinates>
+            <start_date_time>2004-08-24Z</start_date_time>
+            <stop_date_time>2017-07-14Z</stop_date_time>
+        </Time_Coordinates>
+        <Investigation_Area>
+            <name>Cassini</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.cassini-huygens</lid_reference>
+                <reference_type>data_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        <Observing_System>
+            <name>Cassini VIMS</name>
+            <Observing_System_Component>
+                <name>Cassini</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.co</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>VIMS</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:vims.co</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+        </Observing_System>
+        <Target_Identification>
+            <name>Rhea</name>
+            <type>Satellite</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:satellite.saturn.rhea</lid_reference>
+                <reference_type>data_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+        
+        <Discipline_Area>
+        
+            <disp:Display_Settings>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>Array_3D_Spectrum</local_identifier_reference>
+                    <local_reference_type>display_settings_to_array</local_reference_type>
+                </Local_Internal_Reference>
+                <disp:Display_Direction>
+                    <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+                    <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+                    <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+                    <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+                </disp:Display_Direction>
+            </disp:Display_Settings>
+
+            <sp:Spectral_Characteristics>
+                <sp:bin_width_desc>VIMS IR channel covers the wavelength region 
+                    0.85-5.1 micrometer in 256 channels at a spectral resolution of
+                    0.0166 micrometer and an angular resolution of 0.5 mrad and a
+                    3.6 degree field of view.
+                </sp:bin_width_desc>
+                <sp:Local_Internal_Reference>
+                    <sp:local_identifier_reference>Array_3D_Spectrum</sp:local_identifier_reference>
+                    <sp:local_reference_type>spectral_characteristics_to_array_object</sp:local_reference_type>
+                </sp:Local_Internal_Reference>
+                <sp:Spectral_Lookup>
+                    <sp:Local_Internal_Reference>
+                        <sp:local_identifier_reference>vims_wavelengths_ir</sp:local_identifier_reference>
+                        <sp:local_reference_type>spectral_characteristics_to_bin_center_values</sp:local_reference_type>
+                    </sp:Local_Internal_Reference>
+                    <sp:Internal_Reference>
+                        <lid_reference>urn:nasa:pds:rhea_cassini_vims_ir-mosaic_scipioni_2022:data:vims_wavelengths_ir</lid_reference>
+                        <reference_type>data_to_ancillary_data</reference_type>
+                    </sp:Internal_Reference>
+                </sp:Spectral_Lookup>
+            </sp:Spectral_Characteristics>
+            
+            <cart:Cartography>
+                <Local_Internal_Reference>
+                    <local_identifier_reference>Array_3D_Spectrum</local_identifier_reference>
+                    <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+                </Local_Internal_Reference>
+                <cart:Spatial_Domain>
+                    <cart:Bounding_Coordinates>
+                        <cart:west_bounding_coordinate unit="deg">360.0</cart:west_bounding_coordinate>
+                        <cart:east_bounding_coordinate unit="deg">0.0</cart:east_bounding_coordinate>
+                        <cart:north_bounding_coordinate unit="deg">90.0</cart:north_bounding_coordinate>
+                        <cart:south_bounding_coordinate unit="deg">-90.0</cart:south_bounding_coordinate>
+                    </cart:Bounding_Coordinates>
+                </cart:Spatial_Domain>
+                <cart:Spatial_Reference_Information>
+                    <cart:Horizontal_Coordinate_System_Definition>
+                        <cart:Planar>
+                            <cart:Map_Projection>
+                                <cart:map_projection_name>Equirectangular</cart:map_projection_name>
+                                <cart:Equirectangular>
+                                    <cart:latitude_of_projection_origin unit="deg">0</cart:latitude_of_projection_origin>
+                                    <cart:standard_parallel_1 unit="deg">0</cart:standard_parallel_1>
+                                    <cart:longitude_of_central_meridian unit="deg">180</cart:longitude_of_central_meridian>
+                                </cart:Equirectangular>
+                            </cart:Map_Projection>
+                            <cart:Planar_Coordinate_Information>
+                                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                                <cart:Coordinate_Representation>
+                                    <cart:pixel_resolution_x unit="m/pixel">13334.3</cart:pixel_resolution_x>
+                                    <cart:pixel_resolution_y unit="m/pixel">13334.3</cart:pixel_resolution_y>
+                                    <cart:pixel_scale_x unit="pixel/deg">1.0</cart:pixel_scale_x>
+                                    <cart:pixel_scale_y unit="pixel/deg">1.0</cart:pixel_scale_y>
+                                </cart:Coordinate_Representation>
+                            </cart:Planar_Coordinate_Information>
+                            <cart:Geo_Transformation>
+                                <cart:upperleft_corner_x unit="m">-2393689.63</cart:upperleft_corner_x>
+                                <cart:upperleft_corner_y unit="m">1193421.24</cart:upperleft_corner_y>
+                            </cart:Geo_Transformation>
+                        </cart:Planar>
+                        <cart:Geodetic_Model>
+                            <cart:latitude_type>Planetocentric</cart:latitude_type>
+                            <cart:spheroid_name>Rhea_2000</cart:spheroid_name>
+                            <cart:a_axis_radius unit="m">764000</cart:a_axis_radius>
+                            <cart:b_axis_radius unit="m">764000</cart:b_axis_radius>
+                            <cart:c_axis_radius unit="m">764000</cart:c_axis_radius>
+                            <cart:longitude_direction>Positive East</cart:longitude_direction>
+                        </cart:Geodetic_Model>
+                    </cart:Horizontal_Coordinate_System_Definition>
+                </cart:Spatial_Reference_Information>
+            </cart:Cartography>
+            
+        </Discipline_Area>
+    </Observation_Area>
+
+    <Reference_List>
+        <External_Reference>
+            <doi>10.1016/j.icarus.2017.02.012</doi>
+            <reference_text> Scipioni, F.; Schenk, P.; Tosi, F.; D'Aversa, E.; Clark, R.; 
+                Combe, J. -Ph.; Ore, C. M. Dalle, 2017. 
+                Deciphering sub-micron ice particles on Enceladus surface. Icarus, 290, 183.  
+            </reference_text>
+        </External_Reference>
+    </Reference_List>
+
+    <File_Area_Observational>
+        <File>
+            <file_name>rhea_notnorm_pc_modified_2.img</file_name>
+            <local_identifier>rhea_notnorm_pc_modified_2</local_identifier>
+            <creation_date_time>2020-11-11T00:12:00</creation_date_time>
+            <file_size unit="byte">66355200</file_size>
+            <comment>VIMS Image Cube Global Cylindrical Map of Rhea in standard PDS4 IMG format.
+                     The image cube has 256 spectral bands.</comment>
+        </File>
+        
+        <!-- Image Cube Core -->
+        <Array_3D_Spectrum>
+            <name>VIMS Image Cube Global Cylindrical Mosaic of Rhea</name>
+            <local_identifier>Array_3D_Spectrum</local_identifier>            
+            <offset unit="byte">0</offset>
+            <axes>3</axes>
+            <axis_index_order>Last Index Fastest</axis_index_order>
+            <description>This image cube has 256 spectral bands with center
+                wavelengths from 0.8842 to 5.1234 micrometers. Wavelengths are given
+                in the VIMS Wavelength file VIMS_Wavelength.txt and in the ENVI header .hdr. 
+				Bands have 180 lines and 360 4-byte floating-point pixels per line. 
+				Bands are stored sequentially in the cube.</description>
+            <Element_Array>
+                <!-- Pixels are floating-point, 4-byte, single-precision, LSB ("Intel") values -->
+                <data_type>IEEE754LSBSingle</data_type>
+                <unit>Reflectance</unit>
+            </Element_Array>
+            <Axis_Array>
+                <axis_name>Band</axis_name>
+                <elements>256</elements>
+                <sequence_number>1</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Line</axis_name>
+                <elements>180</elements>
+                <sequence_number>2</sequence_number>
+            </Axis_Array>
+            <Axis_Array>
+                <axis_name>Sample</axis_name>
+                <elements>360</elements>
+                <sequence_number>3</sequence_number>
+            </Axis_Array>
+            <Special_Constants>
+                <missing_constant>-999.0</missing_constant>
+            </Special_Constants>
+        </Array_3D_Spectrum>
+    </File_Area_Observational>
+    
+    <File_Area_Observational_Supplemental>
+        <File>
+            <file_name>rhea_notnorm_pc_modified_2.hdr</file_name>
+            <comment>Supplemental information used to display image with ENVI commercial software</comment>
+        </File>
+        <Stream_Text>
+            <offset unit="byte">0</offset>
+            <parsing_standard_id>7-Bit ASCII Text</parsing_standard_id>
+            <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+        </Stream_Text>
+    </File_Area_Observational_Supplemental>
+    
+</Product_Observational>

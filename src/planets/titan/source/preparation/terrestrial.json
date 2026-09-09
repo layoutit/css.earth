@@ -233,6 +233,77 @@
           }
         ],
         "displaySampling": "nearest"
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "format": "geotiff",
+        "path": "geology/titan-geologic-units.tif",
+        "consumer": "geology",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "categories": [
+          {
+            "value": "Pl",
+            "label": "Plains",
+            "color": "#66f0cc"
+          },
+          {
+            "value": "Dn",
+            "label": "Dunes",
+            "color": "#b665cb"
+          },
+          {
+            "value": "Mt",
+            "label": "Hummocky terrain",
+            "color": "#ffcc66"
+          },
+          {
+            "value": "Ba",
+            "label": "Lakes and basins",
+            "color": "#6699ff"
+          },
+          {
+            "value": "Lb",
+            "label": "Labyrinth terrain",
+            "color": "#ff66e0"
+          },
+          {
+            "value": "Cr",
+            "label": "Craters",
+            "color": "#ff6666"
+          }
+        ],
+        "description": "Interpreted surface terrains",
+        "title": "Cassini global geomorphology · Lopes et al. (2020)",
+        "sourceUrl": "https://doi.org/10.17632/f6jrtyfp66.2",
+        "grid": {
+          "width": 2048,
+          "height": 1024,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 2575000,
+          "noData": -32768,
+          "origin": [
+            -8089601.082993717,
+            4044800.5414968585
+          ],
+          "resolution": [
+            7900.001057611052,
+            -7900.001057611052
+          ],
+          "wrapLongitude": true
+        },
+        "textureScale": 0.25,
+        "minimum": 0,
+        "maximum": 5,
+        "colors": [
+          "#66f0cc",
+          "#b665cb",
+          "#ffcc66",
+          "#6699ff",
+          "#ff66e0",
+          "#ff6666"
+        ]
       }
     ],
     "observedColors": [],

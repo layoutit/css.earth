@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-cassini-vims@1",
+  "target": "rhea",
+  "input": "data/rhea/rhea_notnorm_pc_modified_2.img",
+  "label": "data/rhea/rhea_notnorm_pc_modified_2.xml",
+  "header": "data/rhea/rhea_notnorm_pc_modified_2.hdr",
+  "wavelengths": "data/vims_wavelengths_ir.tab",
+  "guide": "document/information_file.pdf",
+  "width": 360,
+  "height": 180,
+  "registration": {
+    "mode": "guide-global-one-degree-bins",
+    "absoluteSubpixelRegistration": "unresolved",
+    "evidence": "The archive guide declares global one-degree bins; independent ISS comparison verifies longitude orientation and north-to-south row order. Original projected metadata disagrees at source-pixel scale. See VIMS-INTERPRETATION.md."
+  },
+  "rgb": {
+    "bands": [
+      69,
+      43,
+      12
+    ],
+    "wavelengthMicrometers": [
+      2.00141,
+      1.57321,
+      1.06495
+    ],
+    "displayRanges": [
+      [
+        0,
+        0.3
+      ],
+      [
+        0,
+        0.45
+      ],
+      [
+        0,
+        0.65
+      ]
+    ],
+    "output": "rhea-infrared.tif"
+  },
+  "depth": {
+    "bands": [
+      58,
+      70,
+      81
+    ],
+    "wavelengthMicrometers": [
+      1.82022,
+      2.01788,
+      2.1997
+    ],
+    "displayRange": [
+      0.3,
+      0.75
+    ],
+    "output": "rhea-water-ice.tif"
+  },
+  "pins": {
+    "document/information_file.pdf": "c6a7599777535917c6ab6d5fc38beab6e811e1045df5e651eba67f5a21da527e",
+    "document/information_file.xml": "d8170f3ed5c2d0dec2fef266ffee69951ebd765d474264dda83b67ec98dd1576",
+    "data/vims_wavelengths_ir.tab": "8cb35dca77944143d27db18860ddee6b5ee29369b0fd0e1441b246c90a89a449",
+    "data/vims_wavelengths_ir.xml": "a9c6ee4c5e159c214c20df41520333adac3f245a72600d7adc088392b375ca2f",
+    "data/rhea/rhea_notnorm_pc_modified_2.xml": "dcf80820dd4249f3c2081b409a930a8b3742c04032f1064ed0114d534a3f2eb8",
+    "data/rhea/rhea_notnorm_pc_modified_2.hdr": "6979fab284ba9eaf092a3a0fca553351233442eca3f696c8d8a434f52d5793a6",
+    "data/rhea/rhea_notnorm_pc_modified_2.img": "b36eb4c5d7c43c76c623fe2e1a5d8a133fd5836ba9f4c4c0442daf478553b9f6",
+    "data/rhea/rhea_phase_function_parameters.tab": "611ec18cecc3c9c06a165649f603e3d769ce47174faee0ac3131db9d6678cdf1",
+    "data/rhea/rhea_phase_function_parameters.xml": "47bade06970cb4acef142eb35306b585f2baf611e48a6c5def38b06e4b96ff2d",
+    "data/rhea/rhea_vims_cubes_list.tab": "a54ff9b243b284040e8fc61053cada1ffd719615d647444978331b34fb4961fb",
+    "data/rhea/rhea_vims_cubes_list.xml": "452f7f59effc48578dfa26e1d04cc59b5155d41de3f8712b19c34d6170ea5830"
+  },
+  "receipt": "conversion-receipt.json"
+}

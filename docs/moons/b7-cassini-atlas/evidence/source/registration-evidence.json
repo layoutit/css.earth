@@ -1,0 +1,64 @@
+{
+  "dione": {
+    "comparison": "PIA18434",
+    "band": 12,
+    "wavelengthMicrometers": 1.06495,
+    "nativeShape": [
+      360,
+      180
+    ],
+    "orientationCorrelationAgainstISSRedChannel": {
+      "as-declared": 0.8515890563247283,
+      "north-south-flip": 0.7674313765388772,
+      "east-west-flip": -0.6088030602640319,
+      "longitude-180-shift": -0.5598343090450288
+    },
+    "anchor": {
+      "name": "Creusa",
+      "longitudeWestDegrees": 76.32,
+      "longitudeEastDegrees": 283.68,
+      "latitudeDegrees": 49.19,
+      "source": "https://planetarynames.wr.usgs.gov/Feature/1331",
+      "nativeIndexZeroBased": [
+        283,
+        40
+      ],
+      "nativeIF": 0.5120400190353394,
+      "wrongNorthSouthIF": 0.46654000878334045,
+      "wrongLongitudeSignIF": -999.0,
+      "wrong180ShiftIF": 0.3293200135231018
+    },
+    "qualification": "Supports row direction and longitude orientation only. Source-pixel absolute registration remains unresolved."
+  },
+  "rhea": {
+    "comparison": "PIA18438",
+    "band": 12,
+    "wavelengthMicrometers": 1.06495,
+    "nativeShape": [
+      360,
+      180
+    ],
+    "orientationCorrelationAgainstISSRedChannel": {
+      "as-declared": 0.5098878183854114,
+      "north-south-flip": 0.48944841046084975,
+      "east-west-flip": -0.34807640885626073,
+      "longitude-180-shift": -0.21771713602928655
+    },
+    "anchor": {
+      "name": "Inktomi",
+      "longitudeWestDegrees": 112.1,
+      "longitudeEastDegrees": 247.9,
+      "latitudeDegrees": -14.1,
+      "source": "https://planetarynames.wr.usgs.gov/Feature/14671",
+      "nativeIndexZeroBased": [
+        247,
+        104
+      ],
+      "nativeIF": 0.5651699900627136,
+      "wrongNorthSouthIF": 0.505370020866394,
+      "wrongLongitudeSignIF": 0.43292000889778137,
+      "wrong180ShiftIF": 0.47909000515937805
+    },
+    "qualification": "Supports row direction and longitude orientation only. Source-pixel absolute registration remains unresolved."
+  }
+}

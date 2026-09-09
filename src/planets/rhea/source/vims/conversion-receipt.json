@@ -1,0 +1,206 @@
+{
+  "schema": "cssearth-cassini-vims@1",
+  "recipeSha256": "fb12b66906d104e0debc4cd5c5917565db04185a1d7709df67368fad51ec3e03",
+  "preparerSha256": "09354b3cc859b90017582071f39527371a7c71c40ad17af1515d0017b77f8233",
+  "source": {
+    "target": "rhea",
+    "width": 360,
+    "height": 180,
+    "bands": 256,
+    "fileName": "rhea_notnorm_pc_modified_2.img",
+    "fileBytes": 66355200,
+    "noData": -999.0,
+    "radiusMeters": 764000.0,
+    "publishedOriginMeters": [
+      -2393689.63,
+      1193421.24
+    ],
+    "publishedResolutionMeters": [
+      13334.3,
+      13334.3
+    ],
+    "publishedLiteralCornerBoundsDegrees": [
+      0.4865009643565372,
+      360.48608289376193,
+      89.50000030532631,
+      -90.49979065937637
+    ],
+    "publishedDegreesPerPixel": [
+      0.9999988386927926,
+      0.9999988386927926
+    ]
+  },
+  "registration": {
+    "mode": "guide-global-one-degree-bins",
+    "absoluteSubpixelRegistration": "unresolved",
+    "evidence": "The archive guide declares global one-degree bins; independent ISS comparison verifies longitude orientation and north-to-south row order. Original projected metadata disagrees at source-pixel scale. See VIMS-INTERPRETATION.md."
+  },
+  "width": 360,
+  "height": 180,
+  "origin": [
+    -2400176.787342602,
+    1200088.393671301
+  ],
+  "resolution": [
+    13334.315485236677,
+    -13334.315485236677
+  ],
+  "referenceRadiusMeters": 764000.0,
+  "rgb": {
+    "bands": [
+      69,
+      43,
+      12
+    ],
+    "wavelengthMicrometers": [
+      2.00141,
+      1.57321,
+      1.06495
+    ],
+    "displayRanges": [
+      [
+        0,
+        0.3
+      ],
+      [
+        0,
+        0.45
+      ],
+      [
+        0,
+        0.65
+      ]
+    ],
+    "output": "rhea-infrared.tif"
+  },
+  "depth": {
+    "bands": [
+      58,
+      70,
+      81
+    ],
+    "wavelengthMicrometers": [
+      1.82022,
+      2.01788,
+      2.1997
+    ],
+    "displayRange": [
+      0.3,
+      0.75
+    ],
+    "output": "rhea-water-ice.tif"
+  },
+  "continuumRightWeight": 0.5208706651206912,
+  "rgbValidNativePixels": 39073,
+  "depthNativeStatistics": {
+    "validPixels": 62072,
+    "missingPixels": 2728,
+    "minimum": 0.5391539931297302,
+    "maximum": 0.7452348470687866,
+    "percentiles": {
+      "1": 0.5492763131856918,
+      "5": 0.5701214522123337,
+      "50": 0.6423985660076141,
+      "95": 0.6822769671678544,
+      "99": 0.6959119403362274
+    }
+  },
+  "nativeBandStatistics": {
+    "12": {
+      "validPixels": 39073,
+      "missingPixels": 25727,
+      "minimum": 0.0,
+      "maximum": 0.6236299872398376,
+      "percentiles": {
+        "1": 0.0,
+        "5": 0.40735599398612976,
+        "50": 0.4731700122356415,
+        "95": 0.5219040036201478,
+        "99": 0.5460000038146973
+      }
+    },
+    "43": {
+      "validPixels": 61572,
+      "missingPixels": 3228,
+      "minimum": 0.0,
+      "maximum": 0.42552998661994934,
+      "percentiles": {
+        "1": 0.06560000032186508,
+        "5": 0.25366550087928774,
+        "50": 0.28273001313209534,
+        "95": 0.3126699924468994,
+        "99": 0.33076289743185044
+      }
+    },
+    "58": {
+      "validPixels": 62555,
+      "missingPixels": 2245,
+      "minimum": 0.0,
+      "maximum": 0.7182300090789795,
+      "percentiles": {
+        "1": 0.10999999940395355,
+        "5": 0.4043000042438507,
+        "50": 0.4646399915218353,
+        "95": 0.5135929822921752,
+        "99": 0.5644999742507935
+      }
+    },
+    "69": {
+      "validPixels": 62555,
+      "missingPixels": 2245,
+      "minimum": 0.0,
+      "maximum": 0.2629700005054474,
+      "percentiles": {
+        "1": 0.038600001484155655,
+        "5": 0.13975000381469727,
+        "50": 0.16532999277114868,
+        "95": 0.18883000314235687,
+        "99": 0.2021137988567352
+      }
+    },
+    "70": {
+      "validPixels": 62555,
+      "missingPixels": 2245,
+      "minimum": 0.0,
+      "maximum": 0.2554999887943268,
+      "percentiles": {
+        "1": 0.03840000182390213,
+        "5": 0.13505699783563613,
+        "50": 0.1607699990272522,
+        "95": 0.18419000506401062,
+        "99": 0.19641000032424927
+      }
+    },
+    "81": {
+      "validPixels": 62555,
+      "missingPixels": 2245,
+      "minimum": 0.0,
+      "maximum": 0.654670000076294,
+      "percentiles": {
+        "1": 0.09960000216960907,
+        "5": 0.366129994392395,
+        "50": 0.41589000821113586,
+        "95": 0.46307000517845154,
+        "99": 0.503849983215332
+      }
+    }
+  },
+  "outputs": [
+    {
+      "kind": "rgb",
+      "output": "rhea-infrared.tif",
+      "sha256": "6363e6ba38ca29df67a8dba301ef8db2a45daba0cd29896c2397e4e13b1b46d1",
+      "bytes": 48826,
+      "noData": 0,
+      "missingPixels": 25727
+    },
+    {
+      "kind": "depth",
+      "output": "rhea-water-ice.tif",
+      "sha256": "559e109a8bd3891ed2d7ddbfc9e505694574c6af80547f3c63e0f401aa1ded19",
+      "bytes": 133351,
+      "noData": -9999,
+      "missingPixels": 2728
+    }
+  ]
+}

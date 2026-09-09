@@ -1,0 +1,713 @@
+.prepared-world-context [data-context-group="sun"] { --shell-text: #ffe08a; }
+.prepared-world-context [data-context-group="mercury"] { --shell-text: #ffeed6; }
+.prepared-world-context [data-context-group="venus"] { --shell-text: #faffe8; }
+.prepared-world-context [data-context-group="earth"] { --shell-text: #a8cfff; }
+.prepared-world-context [data-context-group="mars"] { --shell-text: #ffb965; }
+.prepared-world-context [data-context-group="jupiter"] { --shell-text: #ffffeb; }
+.prepared-world-context [data-context-group="saturn"] { --shell-text: #ffefca; }
+.prepared-world-context [data-context-group="uranus"] { --shell-text: #c6f6ff; }
+.prepared-world-context [data-context-group="neptune"] { --shell-text: #ade7ff; }
+.prepared-world-context [data-context-label="sun"] { text-transform: uppercase; }
+.prepared-world-context [data-context-label="mercury"] { text-transform: uppercase; }
+.prepared-world-context [data-context-label="venus"] { text-transform: uppercase; }
+.prepared-world-context [data-context-label="earth"] { text-transform: uppercase; }
+.prepared-world-context [data-context-label="mars"] { text-transform: uppercase; }
+.prepared-world-context [data-context-label="jupiter"] { text-transform: uppercase; }
+.prepared-world-context [data-context-label="saturn"] { text-transform: uppercase; }
+.prepared-world-context [data-context-label="uranus"] { text-transform: uppercase; }
+.prepared-world-context [data-context-label="neptune"] { text-transform: uppercase; }
+:where(.prepared-world-context) [data-context-group="polymele"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="leucus"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="orus"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eurybates"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="patroclus"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hiiaka"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="squannit"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="romulus"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="menoetius"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="caliban"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="sycorax"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="prospero"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="setebos"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="paaliaq"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="tarvos"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="ijiraq"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="suttungr"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="mundilfari"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="skathi"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="erriapus"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="thrymr"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="bebhionn"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="bergelmir"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="bestla"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="fornjot"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="hati"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="hyrrokkin"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="loge"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="skoll"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="greip"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="tarqeq"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="albiorix"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="kiviuq"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-137p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-143p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-162p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-19p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-8p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-1p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-81p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-103p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-9p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-67p"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="ymir"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="siarnaq"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="himalia"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="nereid"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="aegaeon"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="anthe"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="polydeuces"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="rosalind"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="desdemona"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="cressida"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="bianca"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="ophelia"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="cordelia"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="belinda"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="juliet"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="portia"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="pallene"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="methone"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="puck"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="amalthea"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="thebe"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="metis"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="adrastea"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="naiad"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="thalassa"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="despina"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="galatea"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="proteus"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="larissa"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="daphnis"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="calypso"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="telesto"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="helene"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="moon"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="ryugu"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="bennu"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="itokawa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eros"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ida"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="gaspra"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="mathilde"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="lutetia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="steins"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="didymos"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="dimorphos"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="kleopatra"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="toutatis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="pallas"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hygiea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="juno"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="psyche"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="interamnia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="davida"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="sylvia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eunomia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="euphrosyne"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="bamberga"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="fortuna"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="themis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="amphitrite"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="egeria"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="elektra"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="iris"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hebe"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eugenia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="daphne"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eleonora"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="nemesis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="kalliope"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="nemausa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="parthenope"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="melpomene"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="julia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="victoria"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="urania"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="flora"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="europa-52"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="metis-9"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="camilla"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="thisbe"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="doris"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hermione"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="diotima"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="herculina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="nausikaa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="astraea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="irene"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="nysa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="sappho"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="betulia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="castalia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-1998-wt24"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-1994-cc"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="fides"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="penelope"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="alphonsina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="angelina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ganymed"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="moshup"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="cybele"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="aurora"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="palma"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="thule"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hektor"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hekate"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="phaethon"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="harmonia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="panopaea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="desdemona-666"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-1950-da"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="apophis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="donaldjohanson"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="geographos"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="bacchus"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="mithra"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="nereus"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="golevka"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="yorp"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-1996-hw1"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-2008-ev5"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ra-shalom"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-1992-sk"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-1998-ml14"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-2002-ce26"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="thetis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="thalia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="phocaea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="euterpe"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="bellona"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="pomona"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="circe"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="atalante"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="leda-38"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="laetitia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="isis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ariadne"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hestia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="aglaja"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="pales"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="kalypso"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="alexandra"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="pandora-55"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="melete"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="elpis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="erato"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ausonia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="leto"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hesperia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="niobe"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="feronia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="klytia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="galatea-74"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="freia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eurynome"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="alkmene"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="beatrix"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="klio"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="io-85"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="semele"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="aegina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="minerva"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="arethusa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="klotho"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ianthe"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hertha"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hera"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="klymene"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="artemis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="dione-106"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="felicitas"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="lydia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="iphigenia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="thyra"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="lomia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="peitho"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="althaea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="lachesis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="gerda"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="brunhild"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="alkeste"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="liberatrix"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="velleda"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="johanna"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="antigone"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="cyrene"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="sophrosyne"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="meliboea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="siwa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="vibilia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="lucina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="protogeneia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="gallia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="medusa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="nuwa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="abundantia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="scylla"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="xanthippe"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="dejanira"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="aemilia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="una"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="athor"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="laurentia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="erigone"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eva"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="loreley"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="rhodope"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="urda"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="sibylla"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="baucis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ino"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="phaedra"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="dejopeja"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="lamberta"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="menippe"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="kolga"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ambrosia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eurykleia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="byblis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="kallisto"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hersilia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hedda"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="dido"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="isabella"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="medea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="lilaea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="aschera"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="oenone"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eudora"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="stephania"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eos"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="henrietta"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="weringia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="philosophia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="athamantis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="vindobona"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asterope"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="coelestina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hypatia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="vanadis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="kriemhild"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="vera"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asporina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="eukrate"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ilse"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="bettina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="clementina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="augusta"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="silesia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="tyche"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="huberta"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="dresda"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="libussa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="anna"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="anahita"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="penthesilea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="antonia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="philagoria"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="sapientia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="adelheid"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="emma"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="iclea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="bavaria"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="clarissa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="unitas"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="dike"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="massalia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="proserpina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="polyhymnia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="leukothea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="virginia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="echo"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="maja"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="juewa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="bertha"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="lucia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="brucia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="badenia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="ducrosa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="gyptis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="petrina"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="veritas"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="gryphia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="selinur"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="achilles"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="musa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="auravictrix"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="transvaalia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="moskva"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="kressmannia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="parysatis"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="rosalinde"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="susi"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hidalgo"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="zachia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="piazzia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="tulipa"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="reinmuthia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="china"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="crimea"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="rusthawelia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="schorria"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="silvretta"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="virtanen"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="mr-spock"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="educatio"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="hopi"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="schaber"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="iau"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="united-nations"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="tartaglia"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="raup"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-2001-qw16"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="asteroid-1999-fr33"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="vesta"] { --context-base-line-opacity: 0.35; }
+:where(.prepared-world-context) [data-context-group="phobos"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="deimos"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="ceres"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="io"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="europa"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="ganymede"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="callisto"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="pan"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="atlas"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="prometheus"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="pandora"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="janus"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="epimetheus"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="hyperion"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="mimas"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="enceladus"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="tethys"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="dione"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="rhea"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="titan"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="iapetus"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="phoebe"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="miranda"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="ariel"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="umbriel"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="titania"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="oberon"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="triton"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="pluto"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="charon"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="styx"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="nix"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="kerberos"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="hydra"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="haumea"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="makemake"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="eris"] { --context-base-line-opacity: 0.5; }
+:where(.prepared-world-context) [data-context-group="comet-137p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-143p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-162p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-19p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-8p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-1p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-81p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-103p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-9p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="comet-67p"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="ceres"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="pluto"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="haumea"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="makemake"] { --context-base-label-opacity: .5; }
+:where(.prepared-world-context) [data-context-group="eris"] { --context-base-label-opacity: .5; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="polymele"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="leucus"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="orus"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eurybates"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="patroclus"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ryugu"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="bennu"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="itokawa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eros"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ida"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="gaspra"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="mathilde"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="lutetia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="steins"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="didymos"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="kleopatra"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="toutatis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="pallas"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hygiea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="juno"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="psyche"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="interamnia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="davida"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="sylvia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eunomia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="euphrosyne"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="bamberga"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="fortuna"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="themis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="amphitrite"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="egeria"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="elektra"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="iris"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hebe"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eugenia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="daphne"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eleonora"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="nemesis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="kalliope"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="nemausa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="parthenope"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="melpomene"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="julia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="victoria"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="urania"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="flora"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="europa-52"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="metis-9"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="camilla"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="thisbe"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="doris"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hermione"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="diotima"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="herculina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="nausikaa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="astraea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="irene"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="nysa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="sappho"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="betulia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="castalia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-1998-wt24"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-1994-cc"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="fides"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="penelope"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="alphonsina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="angelina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ganymed"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="moshup"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="cybele"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="aurora"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="palma"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="thule"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hektor"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hekate"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="phaethon"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="harmonia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="panopaea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="desdemona-666"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-1950-da"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="apophis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="donaldjohanson"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="geographos"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="bacchus"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="mithra"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="nereus"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="golevka"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="yorp"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-1996-hw1"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-2008-ev5"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ra-shalom"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-1992-sk"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-1998-ml14"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-2002-ce26"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="thetis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="thalia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="phocaea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="euterpe"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="bellona"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="pomona"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="circe"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="atalante"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="leda-38"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="laetitia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="isis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ariadne"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hestia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="aglaja"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="pales"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="kalypso"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="alexandra"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="pandora-55"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="melete"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="elpis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="erato"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ausonia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="leto"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hesperia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="niobe"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="feronia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="klytia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="galatea-74"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="freia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eurynome"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="alkmene"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="beatrix"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="klio"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="io-85"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="semele"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="aegina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="minerva"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="arethusa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="klotho"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ianthe"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hertha"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hera"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="klymene"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="artemis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="dione-106"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="felicitas"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="lydia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="iphigenia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="thyra"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="lomia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="peitho"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="althaea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="lachesis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="gerda"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="brunhild"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="alkeste"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="liberatrix"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="velleda"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="johanna"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="antigone"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="cyrene"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="sophrosyne"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="meliboea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="siwa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="vibilia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="lucina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="protogeneia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="gallia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="medusa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="nuwa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="abundantia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="scylla"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="xanthippe"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="dejanira"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="aemilia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="una"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="athor"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="laurentia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="erigone"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eva"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="loreley"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="rhodope"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="urda"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="sibylla"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="baucis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ino"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="phaedra"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="dejopeja"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="lamberta"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="menippe"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="kolga"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ambrosia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eurykleia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="byblis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="kallisto"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hersilia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hedda"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="dido"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="isabella"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="medea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="lilaea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="aschera"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="oenone"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eudora"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="stephania"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eos"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="henrietta"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="weringia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="philosophia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="athamantis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="vindobona"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asterope"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="coelestina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hypatia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="vanadis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="kriemhild"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="vera"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asporina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="eukrate"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ilse"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="bettina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="clementina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="augusta"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="silesia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="tyche"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="huberta"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="dresda"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="libussa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="anna"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="anahita"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="penthesilea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="antonia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="philagoria"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="sapientia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="adelheid"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="emma"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="iclea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="bavaria"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="clarissa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="unitas"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="dike"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="massalia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="proserpina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="polyhymnia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="leukothea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="virginia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="echo"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="maja"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="juewa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="bertha"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="lucia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="brucia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="badenia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="ducrosa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="gyptis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="petrina"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="veritas"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="gryphia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="selinur"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="achilles"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="musa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="auravictrix"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="transvaalia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="moskva"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="kressmannia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="parysatis"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="rosalinde"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="susi"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hidalgo"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="zachia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="piazzia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="tulipa"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="reinmuthia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="china"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="crimea"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="rusthawelia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="schorria"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="silvretta"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="virtanen"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="mr-spock"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="educatio"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="hopi"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="schaber"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="iau"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="united-nations"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="tartaglia"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="raup"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-2001-qw16"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="asteroid-1999-fr33"] > .context-orbit s { --context-orbit-pointer-events: none; }
+:where(body:not([data-asteroid-orbits="on"]) .prepared-world-context) [data-context-group="vesta"] > .context-orbit s { --context-orbit-pointer-events: none; }

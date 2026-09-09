@@ -40,3 +40,7 @@ changed upstream, so those screenshots do not qualify the integrated UI.
 Integrated browser captures, the full production build, the aggregate suite,
 full-registry ownership and all-object source/browser gates remain pending.
 The PR stays in draft.
+
+## Follow-up after merge
+
+PR #76 merged at `34da5b07` on 2026-09-09. The B7 branch rechecked the four B6 bodies on that main: 17 DPR1 view/lighting cases passed and six scientific views were visually inspected. The [current-main evidence](../b7-cassini-atlas/evidence/b6-current-main/index.json) closes this selected DPR1 rendering gap. Public Settings access remains blocked because current main hides its button; the harness exercised existing hidden bindings and records that limitation. Full-registry and deployment readiness are not inferred from these captures.

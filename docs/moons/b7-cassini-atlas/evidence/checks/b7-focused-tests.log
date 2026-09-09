@@ -1,0 +1,424 @@
+✔ persistent world context is mounted once and follows the active physical navigation (5.364042ms)
+✔ flight state covers system framing and resets after success, failure, cancellation and preserved-view navigation (4.433084ms)
+✔ the destination card stays held until arrival, including the new camera mount (0.614208ms)
+✔ asteroid label and orbit settings default off and reach the retained context independently (0.442459ms)
+✔ entering overview on the current object changes selection without invoking focus or restoring the camera (0.251083ms)
+✔ flight retains the source and one shell; target readiness and handoff precede history commit (0.749084ms)
+✔ rapid Mercury → Venus → Mercury cancels the stale factory without replacing shell or source (0.644541ms)
+✔ history back restores the departed exact view after target handoff without another push (0.76575ms)
+✔ saved-view anchors preserve query and hash across objects and on the already selected object (0.741583ms)
+✔ reselecting the source cancels a running flight at its painted view without another restore or mount (0.762167ms)
+✔ late rejected handoff is observed after replacement and cannot publish stale readiness (0.589ms)
+✔ navigation preserves requested playback and reduced-motion policy (0.350375ms)
+✔ real input interruption preserves the last painted source view and flushes it without restoring the old URL (0.298625ms)
+✔ input after the detailed handoff keeps the incoming scene and its painted pose, including saved-view links (0.450458ms)
+✔ navbar/search anchors and vault events share one route; modifier and unsupported links stay native (0.432584ms)
+✔ a failed persistent context mount can retry when the document restores (0.264458ms)
+✔ leaving the document releases its universe and a cached-page restore mounts one fresh owner (0.2815ms)
+✔ selecting the current object flies the retained camera without preparing or replacing detail (0.9055ms)
+✔ plain current-object anchors focus but saved-view links restore their specified view (0.308125ms)
+✔ a first selection frames the object system and changes its card, then the next click focuses (0.312333ms)
+✔ zooming out after first-click system framing restores the overview at the same camera pose (1.267875ms)
+✔ a first Sun click frames the Solar System card, and a repeat opens the Sun close-up (0.407666ms)
+✔ a second scene click can zoom while centering the current object is still in progress (0.227041ms)
+✔ selection emphasis previews immediately before the next detailed owner is ready (0.214ms)
+✔ empty-space clicks leave a close body selection, camera and card unchanged (2.232042ms)
+✔ wide-view empty-space deselection previews the overview and recenters the Sun through the normal router (0.399375ms)
+✔ overview breadcrumbs reframe, select the card, and retain separate history entries (0.538792ms)
+✔ overview links preserve native modifier clicks and exact saved views (0.333ms)
+✔ a direct overview URL frames once, but a saved overview URL retains its camera (0.432625ms)
+✔ selecting another list body during a flight still uses its system framing (0.417542ms)
+✔ loading remembers latest intent but cannot resume; media events never rewrite intent (3.082542ms)
+✔ playback reads cannot consume a pending media notification (0.408709ms)
+✔ repeated restoration has bounded subscriptions; old callbacks cannot affect the replacement (0.886542ms)
+✔ malformed mounts retain cleanup handles and failure cleanup survives a destructor error (0.26475ms)
+✔ malformed mounts still observe their rejected readiness promise (0.328208ms)
+✔ fatal pause failure cleans once and never publishes success (0.195208ms)
+✔ fatal resume failure cleans once and never publishes success (0.112334ms)
+✔ fatal report failure cleans once and never publishes success (0.081416ms)
+✔ an object destination can pause shared motion, and a retired object cannot change intent (0.164125ms)
+✔ normalizes only explicit safe local runtime URLs (7.305458ms)
+✔ prepares and verifies the exact declared byte closure (5.638458ms)
+✔ rejects undeclared public files and removes only undeclared production files (4.000125ms)
+✔ validates and verifies every authoritative source entry class (8.743041ms)
+✔ rejects a declared file missing from the source tree (0.6465ms)
+✔ streamed verification detects late corruption and truncation across file chunks (3.346625ms)
+✔ Dione B2 scalar coordinates retain independent source values and exact missing cells (146.6535ms)
+✔ Dione relative albedo retains narrow source projection join gaps (69.042167ms)
+✔ Dione elevation preserves source radius values and hemisphere orientation across three projections (77.192916ms)
+✔ Dione photographic maps retain their different source longitude origins and native pixels (14763.942667ms)
+✔ Rhea B2 scalar coordinates retain independent source values and exact missing cells (117.528166ms)
+✔ Rhea relative albedo retains the exact delivered footprint (96.294584ms)
+✔ Rhea elevation uses measured radii, actual geotransform and source bounds (100.48425ms)
+✔ GeoTIFF surface alignment follows Rhea origin easting rather than projection center alone (3265.147667ms)
+✔ Rhea prepared photographic maps retain observed geography and color (8256.139958ms)
+✔ Titan B2 scalar coordinates retain independent source values and exact missing cells (283.960834ms)
+✔ Titan scalar views preserve observed-versus-interpolated support (100.603625ms)
+✔ Titan keeps the dark northern seas at their independently mapped east longitudes (16737.255959ms)
+✔ prepared modules are parsed as JSON, without importing executable payloads (0.877917ms)
+✔ runtime definitions only bind static prepared data and actual controls (5.734208ms)
+✔ multiple prepared literal exports remain data, while a trailing helper is rejected (0.418375ms)
+✔ control content permits prepared label projection and rejects callbacks, getters and effects (0.55875ms)
+✔ source audit rejects second camera in the actual Moon record (19.993209ms)
+✔ source audit rejects undeclared texture resource in the actual Moon record (12.909125ms)
+✔ source audit rejects undeclared native node in the actual Moon record (11.96475ms)
+✔ source audit rejects selection camera write in the actual Moon record (10.680042ms)
+✔ source audit rejects unknown execution slot in the actual Moon record (10.394833ms)
+✔ adapter differences report actual data counts and source hashes without fabricating observed owners (13.229125ms)
+✔ authored JSON transport cannot escape its descriptor package (4.511792ms)
+✔ polygon sampling preserves holes, seam-split regions and categorical overlaps (0.648ms)
+✔ discrete colors reject fractional and unknown category indices (0.440667ms)
+✖ io archived geography, attribute identity and source pins remain intact (2.8395ms)
+✖ ganymede archived geography, attribute identity and source pins remain intact (0.986042ms)
+✖ Io label-point longitude is west while the same archived SHP coordinate is east (0.589ms)
+✖ Ganymede excludes only the declared zero-area ring, retaining its valid multipart polygon (0.462833ms)
+✔ category nearest is explicit while default solid and pole sampling stays bilinear (5.671125ms)
+✔ actual category pack, encoded atlases, poles, legend and thumbnail retain only source palette colors (32.0185ms)
+✔ explicit nearest numeric display preserves missing-cell colors through encoded globe and poles (20.797958ms)
+✔ ellipsoid axes and latitude bands agree with independently calculated coordinates (1.022458ms)
+✔ authored polar stabilization retains source edges and transparent outside corners (2.520083ms)
+✔ counter-rotated plane maps differently sized shapes using authored physical axes (0.529416ms)
+✔ ellipsoid scaling preserves axis ratios and the explicit volume convention (2.132042ms)
+✔ unsupported scales, invalid axes and unbounded subdivisions are rejected (0.17675ms)
+✔ the common tessellation preserves the established contact-body topology (1.466417ms)
+✔ calibrated zero and negative radiance survive; missing and saturated pixels do not (1.320458ms)
+✔ FITS records, axis layouts and product identity are checked (0.707625ms)
+✔ HRI quality uses the positive mask; residuals remain convergence diagnostics (0.181792ms)
+✔ source TAN projection preserves sky handedness and the zero-based detector center (0.469375ms)
+✔ reflection, shear and unbounded pointing corrections are rejected (0.112584ms)
+✔ finite overclock values are excluded even when the quality byte says good (0.212167ms)
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/docs/comets/evidence/encounter-decoder-anchors.json'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/encounter-sources.test.mjs:10:26 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/docs/comets/evidence/encounter-decoder-anchors.json'
+}
+
+Node.js v24.19.0
+✖ tools/objects/terrestrial-layers/encounter-sources.test.mjs (31.276208ms)
+✔ a bilinear footprint retains calibrated darkness and checks every contributor (0.499041ms)
+✔ detector edges never interpolate missing contributors (0.08775ms)
+✔ registration recomputes holdouts and cannot be approved by changing declared RMS (0.397166ms)
+✔ EPOXI north and east map to the documented detector axes (0.364458ms)
+✔ observed shadowed terrain remains eligible when the source camera can see it (0.590791ms)
+✔ facet previews alone can opt into smaller band-compatible dimensions; defaults remain global (6.991ms)
+✔ 640x320 facet preview bounds exact ray queries and cannot alter native atlas dimensions or original rows (291.672125ms)
+✔ facet CSV validates the complete source face correspondence and preserves valid zero values (1.10075ms)
+✔ source support and nearest 3D facet are retained through a concave radial overlap (0.51825ms)
+✔ PDS FITS joins by explicit zero-based facet IDs, verifies label/geometry and retains sigma without treating it as coverage (1.488917ms)
+✔ facet recipe binds its source mesh and transfer distance to the actual retained simplification (0.184375ms)
+✔ explicit centroid bijection reconciles exporter order and retains the original scalar row index (0.521458ms)
+✔ fractional source origin maps canonical centres through native coordinates across the meridian (0.932167ms)
+✔ every nonzero interpolation contributor must be valid; no-data cannot bleed into supported terrain (0.129708ms)
+✔ an exact source centre preserves valid dark values and ignores zero-weight invalid neighbours (0.107667ms)
+✔ partial latitude footprint remains missing near both poles and source synthetic sectors stay withheld (0.074ms)
+✔ a shorter longitude footprint is not stretched or cyclically filled to cover the globe (0.080042ms)
+✔ actual masked and legacy monochrome dispatch preserve the same nonintegral GeoTIFF grid (10.536667ms)
+✔ nearest native cells preserve coarse pixels and missing holes through seam and poles (0.233625ms)
+✔ nearest cell-boundary ties use the same half-open area for both physical moon radii (19.78125ms)
+✔ closes a boundary-only diagonal without moving the observation or pinching the rear (1.434ms)
+✔ fills an internal gap as estimated while preserving its observed rim (0.626542ms)
+✔ a vertical boundary triangle is retriangulated without moving points or filling gaps (1.561875ms)
+✔ image DEM preserves holes, source heights and metre frame through reflection (1.455625ms)
+✔ image DEM rejects changed counts, duplicate posts and implicit frame guesses (0.3385ms)
+✔ legacy ISIS2 keeps finite zero and negative values separate from special pixels (1.724875ms)
+✔ omitted ISIS longitude bounds require explicit verified global-grid opt-in (8.712708ms)
+✔ native padded global grid is preserved while missing coverage and incompatible grid fail (18.921042ms)
+✔ ISIS3 tiles retain rows, edge tiles and floating point special pixels (2.407ms)
+✔ mapped longitude extent selects the correct half of a wrapped ISIS3 mosaic (0.106375ms)
+✖ io independently archived label points anchor both hemispheres of the geology view (2.6915ms)
+✖ ganymede independently archived label points anchor both hemispheres of the geology view (1.521792ms)
+✖ Agenor preserves independently decoded source heights and withholds incomplete interpolation footprints (2.284417ms)
+✖ duplicated Europa confidence assets remain excluded from the scientific source recipe (0.568084ms)
+✔ reduced science textures preserve every normalized band and gutter address (1.068ms)
+✔ flagged PDS plates preserve observed, ellipsoid and joining provenance (1.434917ms)
+✔ closest source point preserves barycentric geometry, edges and physical distance bounds (0.481542ms)
+✔ two surfaces on a ray keep different source heights, while a flat preview withholds ambiguity (0.886542ms)
+✔ Rosetta VRML triangle coordinates retain the analytic body frame and units (0.456375ms)
+✔ VRML rejects transformed geometry, non-triangles, invalid indices and truncated source (0.2385ms)
+✔ sourced radial intersections preserve units, seam and polar shape (0.1345ms)
+✔ source layout mismatches fail instead of inventing a shape (0.08225ms)
+✔ PDS vertex-facet rows reproduce analytic octahedron intersections (0.427584ms)
+✔ radius tables retain west longitude, asymmetric radii and closed poles (0.58025ms)
+✔ ASCII and binary STL preserve the same physical mesh and reject malformed facets (0.832333ms)
+✔ robust overlap fit recovers connected source scales despite missing pairs and outliers (1.6855ms)
+✔ level matching rejects disconnected overlaps and excessive brightness gains (0.260584ms)
+✔ source selection preserves valid darkness, rejects missing samples, and resolves ties stably (0.072792ms)
+✔ overlap points stay inside their own triangle and include both shape lobes (0.170875ms)
+✔ the authored mosaic binds distinct images and rejects ambiguous frame policies (3.593333ms)
+✔ FITS preserves unsigned byte samples and existing big endian float values (1.20325ms)
+✔ source FITS rows and east/west longitudes map to the same north-up eastern grid (0.917834ms)
+✔ missing FITS footprints are withheld before brightness interpolation; dark valid data remain (0.174459ms)
+✔ 16-bit color bands preserve RGB identity, alpha validity, dark samples and map registration (6.102708ms)
+✔ geographic 64-bit reflectance respects longitude, latitude, zero and missing values (2.067667ms)
+✔ explicit source no-data distinguishes any-channel and complete-pixel masks (0.131584ms)
+✔ documented polar and synthetic-channel exclusions operate in source geographic coordinates (0.06075ms)
+✔ projected RGB crops keep their extent, channel identity and dark valid samples (7.6765ms)
+✔ byte-map coverage preserves dark observations and rolls longitude without mirroring (4.986792ms)
+✔ polar-connected coverage preserves enclosed photographic black before resampling (3.449542ms)
+✔ a declared compressed gray exterior uses connected coverage without erasing isolated terrain (3.099459ms)
+✔ PDS RGB planes retain channel order, projected crop and valid single-channel black (11.785375ms)
+✔ pinned label independently establishes dimensions, wavelengths, metric coordinates and finite missing bits (1.822708ms)
+✔ little-endian BSQ channels and north-up east-positive longitudes map without a latitude flip (0.638542ms)
+✔ finite PDS sentinel and nonfinite values invalidate the entire selected RGB footprint before interpolation (0.430292ms)
+✔ negative observations remain valid and unused-band missing values do not erase selected RGB (0.575791ms)
+✔ rounded extent retains the source metric origin instead of assigning an exact 360-degree array roll (0.513708ms)
+✔ unsupported identities, orders, projection conventions, units, scales and unsafe policies fail closed (0.86275ms)
+✔ open observations repair plate ordering without closing the missing base (1.456958ms)
+✔ nonmanifold edges, degenerate plates and ambiguous source orientation fail (0.128041ms)
+✔ orthographic center and east/north orientation follow the source projection (0.401209ms)
+✔ orthographic samples preserve dark observations and reject no-data boundary interpolation (0.103ms)
+✔ PDS western longitudes place both hemispheres without mirroring or hiding dark lakes (12.903166ms)
+✔ PDS rejects truncated data and unsupported raster encoding (0.256333ms)
+✔ uncompressed simple cylindrical data preserves interior black shadows under an edge-fill policy (6.02225ms)
+✔ PDS comet plates preserve zero-indexed connectivity, units and every source confidence category (1.299083ms)
+✔ plate coverage preserves observed black and grids both ellipsoid and joining plates (4.838833ms)
+✔ constraint colors wrap east longitude and retain source pole flags without category interpolation (1.122958ms)
+✔ a source-selected constraint grid preserves stereo and limb categories even with identical input colors (2.115542ms)
+✔ PDS floats preserve endian encoding and exact missing bits with the west-positive hemisphere placement (2.356291ms)
+✔ PDS sample support does not fill missing cells, cross hemispheres, or extrapolate past the pole (2.731041ms)
+✔ LOLA heights retain signed half-metre values without the radius offset (2.516125ms)
+✔ Diviner converts fraction to percent, preserves zero and rejects missing/physical outliers (0.290083ms)
+✔ nearest cells wrap longitude and preserve north-down registration and exact coverage (0.166583ms)
+✔ identity, numeric units, reference frame and registration fail closed (0.670625ms)
+✔ self-contained policy requires nearest sampling and valid full-longitude grid (0.14775ms)
+✔ all-missing grids remain missing and never report infinite extrema (0.477375ms)
+✔ radial table respects angular coordinates, source units, pole and seam (0.745583ms)
+✔ radial source gaps remain missing and malformed grids fail rather than being filled (0.3ms)
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/source/science/al01_glb_m006_m006_v01.lbl'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/pds-scalar-map.test.mjs:14:15 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/comet-67p/source/science/al01_glb_m006_m006_v01.lbl'
+}
+
+Node.js v24.19.0
+✖ tools/objects/terrestrial-layers/pds-scalar-map.test.mjs (29.078625ms)
+node:internal/fs/promises:697
+  return new FileHandle(await PromisePrototypeThen(
+                        ^
+
+Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mars/source/atmosphere/psg-mars-20260829.cfg'
+    at async open (node:internal/fs/promises:697:25)
+    at async readFile (node:internal/fs/promises:1348:14)
+    at async preparePhotographicAtmosphere (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/photographic-atmosphere.mjs:26:26)
+    at async file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/photographic-atmosphere.test.mjs:8:18 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/mars/source/atmosphere/psg-mars-20260829.cfg'
+}
+
+Node.js v24.19.0
+✖ tools/objects/terrestrial-layers/photographic-atmosphere.test.mjs (55.265917ms)
+✔ authored scientific body profiles dispatch without body-named executable recipes (4.558292ms)
+✔ observation recipes reject ambiguous masks and fallback ordering (0.833375ms)
+✔ disk normalization rejects unsupported physical or display assumptions (1.224791ms)
+✔ a shape display requires a source mesh and consumer for the shared no-imagery grid (0.565875ms)
+✔ georeferenced photographs bind quality, physical distances and bounded disk normalization (1.737666ms)
+✔ meshoptimizer retains source positions and a closed welded surface within its budget (31.182708ms)
+✔ meshoptimizer rejects a budget it cannot satisfy within the requested error (21.941792ms)
+✔ native radial fallback preserves numeric/missing cells through actual lossless flood and shadow encoding (11.40375ms)
+✔ a smaller baked atlas preserves original face plans and normalized CSS addresses (3.875791ms)
+✔ nearest scientific snapshots preserve adjacent valid/missing facet colors through PNG and final thumbnail WebP (9.072625ms)
+✔ scientific snapshot interpolation requires the explicit nearest policy (1.984625ms)
+✔ source topology preserves translated inward-facing facets and welds duplicated positions (2.998791ms)
+✔ radial geometry retains independently specified ellipsoid axes and rejects missing radii (4.761459ms)
+✔ streamed PDS floats preserve north, east, wrap and invalid interpolation footprints (11.128375ms)
+✔ two-sided radial preparation retains exact source geometry and atlas layout with opt-in coverage (3.205625ms)
+✔ Agenor focus transforms actual solid leaf coordinates to the camera centre (21.753291ms)
+✔ scientific quality masks intersect measured support without erasing valid zero or blending across boundaries (13.470417ms)
+✔ source-surface relief uses the actual local facet normal without radial finite differences (0.570625ms)
+✔ polar stereographic grids preserve cardinal orientation in both hemispheres (0.443041ms)
+✔ scientific interpolation converts radius to height without extending source coverage (0.164875ms)
+✔ relief preserves height units, latitude spacing, wrapping and coverage boundaries (0.176208ms)
+✔ numeric color scale clamps endpoints and interpolates authored colors (0.110333ms)
+✔ kilometre DEMs produce the same relief as their metre equivalents (0.07975ms)
+✔ float sampling uses pixel centers and excludes special values without masking black observations (0.097375ms)
+✔ observed color retains dark valid pixels and rejects incomplete footprints (0.065709ms)
+✔ channel composition uses all three bands from one observation and source density precedence (0.444ms)
+✔ Lambert atlas is transparent outside the body and carries distinct full-phase shading (0.212959ms)
+✔ capability selection and validity policy are independent of body names (3.354292ms)
+✔ a measured elevation lens can be the only surface capability (0.611667ms)
+✔ a declared output meridian shifts presentation without changing source coordinates (1.287917ms)
+✔ calibrated VICAR skips binary telemetry and honors source byte order (1.183625ms)
+✔ controlled perspective retains handedness, north azimuth and range scaling (0.564083ms)
+✔ PDS4 zero-based plate topology supports external camera and shadow rays (0.640875ms)
+✔ Voyager geometric images use signed HALF pixels and their FICOR I/F scale (0.785458ms)
+✔ raw BYTE camera skips telemetry and each row prefix without treating it as radiance (0.184833ms)
+✔ coverage uncertainty insets known gaps while retaining dark valid interior samples (0.174833ms)
+✔ texel projection uses local origins and a measured overhang casts a shadow (1.437375ms)
+✔ a missing nearby hit is reported and uses the supplied coarse normal (0.282542ms)
+✔ uniform flood preserves the unshaded surface while the opt-in bank keeps source shadows (0.178458ms)
+✔ itokawa: full-source regression coordinates keep height on the corresponding surface (3.182917ms)
+✔ ryugu: full-source regression coordinates keep height on the corresponding surface (0.833166ms)
+✔ eros: full-source regression coordinates keep height on the corresponding surface (0.63525ms)
+✔ bennu: full-source regression coordinates keep height on the corresponding surface (0.673542ms)
+✔ the delivered scientific atlas samples source geometry, not the lossy flat preview (5.74525ms)
+✔ categorical VTK requires exact topology, units and complete integer cell data (0.998584ms)
+✔ 3D categorical transfer distinguishes two sheets at the same radial direction and withholds gaps (3.377125ms)
+✔ SBMT latitude, longitude and kilometre radius preserve the full 3D position (0.597ms)
+ℹ tests 228
+ℹ suites 0
+ℹ pass 217
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 50377.227709
+
+✖ failing tests:
+
+test at tools/objects/terrestrial-layers/categorical-geology.test.mjs:45:38
+✖ io archived geography, attribute identity and source pins remain intact (2.8395ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/io/source/science/geology-sim3168/Io_GeoUnits.shp'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async Promise.all (index 0)
+      at async loadGeologySurface (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.mjs:148:36)
+      at async body (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.test.mjs:16:34)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.test.mjs:46:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/io/source/science/geology-sim3168/Io_GeoUnits.shp'
+  }
+
+test at tools/objects/terrestrial-layers/categorical-geology.test.mjs:45:38
+✖ ganymede archived geography, attribute identity and source pins remain intact (0.986042ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ganymede/source/science/geology-sim3237/GeologyUnits.shp'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async Promise.all (index 0)
+      at async loadGeologySurface (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.mjs:148:36)
+      at async body (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.test.mjs:16:34)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.test.mjs:46:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ganymede/source/science/geology-sim3237/GeologyUnits.shp'
+  }
+
+test at tools/objects/terrestrial-layers/categorical-geology.test.mjs:67:1
+✖ Io label-point longitude is west while the same archived SHP coordinate is east (0.589ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/io/source/science/geology-sim3168/Io_GeoUnits.shp'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async Promise.all (index 0)
+      at async loadGeologySurface (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.mjs:148:36)
+      at async body (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.test.mjs:16:34)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.test.mjs:68:35)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/io/source/science/geology-sim3168/Io_GeoUnits.shp'
+  }
+
+test at tools/objects/terrestrial-layers/categorical-geology.test.mjs:85:1
+✖ Ganymede excludes only the declared zero-area ring, retaining its valid multipart polygon (0.462833ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ganymede/source/science/geology-sim3237/GeologyUnits.shp'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async Promise.all (index 0)
+      at async loadGeologySurface (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.mjs:148:36)
+      at async body (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.test.mjs:16:34)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.test.mjs:86:26)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ganymede/source/science/geology-sim3237/GeologyUnits.shp'
+  }
+
+test at tools/objects/terrestrial-layers/encounter-sources.test.mjs:1:1
+✖ tools/objects/terrestrial-layers/encounter-sources.test.mjs (31.276208ms)
+  'test failed'
+
+test at tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs:12:38
+✖ io independently archived label points anchor both hemispheres of the geology view (2.6915ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/io/source/science/geology-sim3168/Io_GeoUnits.shp'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async Promise.all (index 0)
+      at async loadGeologySurface (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.mjs:148:36)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs:16:91)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/io/source/science/geology-sim3168/Io_GeoUnits.shp'
+  }
+
+test at tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs:12:38
+✖ ganymede independently archived label points anchor both hemispheres of the geology view (1.521792ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ganymede/source/science/geology-sim3237/GeologyUnits.shp'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async Promise.all (index 0)
+      at async loadGeologySurface (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/categorical-geology.mjs:148:36)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs:16:91)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/ganymede/source/science/geology-sim3237/GeologyUnits.shp'
+  }
+
+test at tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs:30:1
+✖ Agenor preserves independently decoded source heights and withholds incomplete interpolation footprints (2.284417ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/europa/source/science/controlled-dtms/Agenor/Agenor.tif'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs:34:17)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/europa/source/science/controlled-dtms/Agenor/Agenor.tif'
+  }
+
+test at tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs:47:1
+✖ duplicated Europa confidence assets remain excluded from the scientific source recipe (0.568084ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/europa/source/science/controlled-dtms/Agenor/Agenor_FOM.tif'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/terrestrial-layers/jovian-scientific-sources.test.mjs:51:15)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-moons-cassini-atlas/src/planets/europa/source/science/controlled-dtms/Agenor/Agenor_FOM.tif'
+  }
+
+test at tools/objects/terrestrial-layers/pds-scalar-map.test.mjs:1:1
+✖ tools/objects/terrestrial-layers/pds-scalar-map.test.mjs (29.078625ms)
+  'test failed'
+
+test at tools/objects/terrestrial-layers/photographic-atmosphere.test.mjs:1:1
+✖ tools/objects/terrestrial-layers/photographic-atmosphere.test.mjs (55.265917ms)
+  'test failed'

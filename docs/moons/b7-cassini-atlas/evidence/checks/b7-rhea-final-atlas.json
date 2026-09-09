@@ -1,0 +1,101 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b7-cassini-atlas/prepare-selected.mjs",
+    "rhea"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 769507328,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 458752,
+      "freePercent": 82
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 216743936,
+      "freePercent": 82
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 345079808,
+      "freePercent": 82
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 417611776,
+      "freePercent": 82
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 436699136,
+      "freePercent": 82
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 459898880,
+      "freePercent": 82
+    },
+    {
+      "seconds": 1.6,
+      "rssBytes": 481361920,
+      "freePercent": 82
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 505135104,
+      "freePercent": 82
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 521551872,
+      "freePercent": 82
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 563593216,
+      "freePercent": 82
+    },
+    {
+      "seconds": 2.7,
+      "rssBytes": 565264384,
+      "freePercent": 82
+    },
+    {
+      "seconds": 3.0,
+      "rssBytes": 566624256,
+      "freePercent": 82
+    },
+    {
+      "seconds": 3.3,
+      "rssBytes": 577617920,
+      "freePercent": 82
+    },
+    {
+      "seconds": 3.5,
+      "rssBytes": 613498880,
+      "freePercent": 82
+    },
+    {
+      "seconds": 3.8,
+      "rssBytes": 720601088,
+      "freePercent": 82
+    },
+    {
+      "seconds": 4.1,
+      "rssBytes": 762232832,
+      "freePercent": 82
+    },
+    {
+      "seconds": 4.3,
+      "rssBytes": 769507328,
+      "freePercent": 82
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 4.6
+}
