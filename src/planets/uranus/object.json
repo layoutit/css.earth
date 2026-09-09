@@ -203,6 +203,15 @@
       ],
       "metersPerUnit": 101023.71541501977,
       "bodyRadiusM": 25559000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/uranus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "925d089b2368f2385e79bcf4dddd5ec9b244c9d1b452974b902580f10f965d19"
+      }
     }
   },
   "schema": "cssearth-object@1",

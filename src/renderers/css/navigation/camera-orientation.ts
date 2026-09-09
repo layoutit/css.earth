@@ -240,6 +240,22 @@ export function createCubicSkyCameraOrientation({
       return presentation;
     },
 
+    /** A deferred frame must not consult a later input rotation. */
+    captureCounterRotation() {
+      counterMatrix ??= sceneMatrix.inverse().multiply(referenceSceneMatrix);
+      const captured = counterMatrix;
+      const presentations = new Map<string | DOMMatrix | null, string>();
+      return (localMatrix: string | DOMMatrix | null = null): string => {
+        const cached = presentations.get(localMatrix);
+        if (cached !== undefined) return cached;
+        const local = typeof localMatrix === 'string' ? new DOMMatrix(localMatrix) : localMatrix;
+        if (local !== null && !(local instanceof DOMMatrix)) throw new TypeError('Cubic-sky local counter basis is invalid.');
+        const value = formatMatrix3d(local === null ? captured : local.inverse().multiply(captured).multiply(local));
+        presentations.set(localMatrix, value);
+        return value;
+      };
+    },
+
     skybox() {
       if (skyboxPresentation !== null) return skyboxPresentation;
       const sunViewDirection = sunTracksScene

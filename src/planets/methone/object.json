@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 6.304347826086956,
       "bodyRadiusM": 1450
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/methone-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2ddb2f9b1e8b3836dc2bebc89d5a5839a0331083953092de25d71f476246b7a7"
+      }
     }
   },
   "prepared": {

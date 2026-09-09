@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 358.69565217391306,
       "bodyRadiusM": 82500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eleonora-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d9381160c3b25ed31faa1c950dc878779b11abeaa766ab3e5f713f4cb9f7717f"
+      }
     }
   },
   "schema": "cssearth-object@1",
