@@ -148,6 +148,22 @@
             "value": "About 8 km per pixel near the disk center"
           }
         ]
+      },
+      {
+        "id": "infrared",
+        "label": "Infrared",
+        "description": "Galileo NIMS observations assign red, green and blue to 0.77, 2.25 and 3.66 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
+        "title": "Galileo NIMS spectral color",
+        "thumbnail": "/scenes/callisto/callisto-infrared-thumbnail.webp",
+        "surface": "callisto-infrared-surface@2x.webp",
+        "poles": "callisto-infrared-poles@2x.webp",
+        "source": {
+          "id": "callisto-registered-nims-composite",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.17189/4sq6-x165"
+        },
+        "detail": "NIMS spectral bands",
+        "falseColor": true
       }
     ]
   },

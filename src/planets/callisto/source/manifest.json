@@ -178,6 +178,84 @@
         ],
         "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
       }
+    },
+    {
+      "id": "callisto-registered-nims-composite",
+      "path": "nims/callisto-nims-composite.tif",
+      "expectedBytes": 193313,
+      "expectedSha256": "23021089312fecb6c42df4502f93f57db52efe7fb4fa452c194fe5f1fcd17588",
+      "origin": "https://doi.org/10.17189/4sq6-x165",
+      "credit": "NASA/JPL Galileo NIMS team; Malaska et al., USGS/PDS registered archive",
+      "license": "Public NASA mission data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://doi.org/10.17189/4sq6-x165"
+      ],
+      "acquisition": "Checked-in compact derived RGB map. Reproduce with tools/objects/acquisition/nims-composite.py and nims/prepare-composite.json from pinned original registered cubes and wavelength tables.",
+      "redistribution": "Credited derived scientific visualization; authored channel display stretches are documented.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true,
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2409400
+      },
+      "coverage": "Intersection of valid samples in all three selected bands; no-data and ISIS special values remain missing. Earlier listed observation has priority; no blending or gap fill.",
+      "photometry": "Archive Minnaert-corrected I/F; fixed RGB display ranges, no independent frame normalization.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://doi.org/10.17189/4sq6-x165"
+      }
+    },
+    {
+      "path": "nims/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
+      "expectedBytes": 11242203,
+      "expectedSha256": "1b9680f47a051a20f4728bbd8b28e7437597254f10678044f969891bbe9e4a09",
+      "id": "mapped-science-nims-g8cnadlind01a-minn-mv03-ciof-72-gcp-adjust-export-from-gdal-tif",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
+      "credit": "NASA/JPL; Malaska et al., USGS/PDS registered archive",
+      "license": "Public NASA scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore exact original via the mapped-science acquisition group; verify before running the body-owned intake plan.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ]
+    },
+    {
+      "path": "nims/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+      "expectedBytes": 6577877,
+      "expectedSha256": "65db2ae482bc63299bcca1848a18af7aa32d6a976310877e2ccd5ce297b7e854",
+      "id": "mapped-science-nims-g8cnglobal02a-minn-mv03-ciof-67-gcp-adjust-export-from-gdal-tif",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+      "credit": "NASA/JPL; Malaska et al., USGS/PDS registered archive",
+      "license": "Public NASA scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore exact original via the mapped-science acquisition group; verify before running the body-owned intake plan.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ]
     }
   ],
   "generatedIntermediates": [],
@@ -202,14 +280,14 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 2588,
-      "expectedSha256": "8756e5b7371fa3533f55691b2267c89eb20472a2761280bd31b2693e5b21812a",
+      "expectedBytes": 3035,
+      "expectedSha256": "a266f5135c2bf1976fcce2f5611b641e551e8dbbed898ba88c03bde744169473",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 10814,
-      "expectedSha256": "dbbe045618046cebabfbd61ac26cfbd1bfe0e6bd15c15ff70cb5efbbd0c0c4aa",
+      "expectedBytes": 11802,
+      "expectedSha256": "c58df6c6f62d029f053d5f876fdd8deb481b061f958b58c51d86ee8a861914cb",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -226,8 +304,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1264,
-      "expectedSha256": "a53d8515ad38074df1e8b91b4ecd5239d9e3de3817cf802dff2c22d77bef8bec",
+      "expectedBytes": 3338,
+      "expectedSha256": "da96933fb20410aa403d21ab545a19f7e15dac62637763285beb95508ea4c8a8",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -344,6 +422,42 @@
       "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata.",
       "expectedBytes": 1127,
       "expectedSha256": "b982b2be31a14e64afd8a00df13554224e302f7503d76ed816d249ccac64c5ec"
+    },
+    {
+      "path": "nims/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.xml",
+      "expectedBytes": 11852,
+      "expectedSha256": "9d0af51843aeb782943dfbd5cf4a40edccef969acbff3505486e4397ed93cc01",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "nims/G8CNADLIND01A_MV03_wavelengths.csv",
+      "expectedBytes": 1950,
+      "expectedSha256": "a13171c916045eea4595394fd1ef84815136db49c5ed101b4ffb010d630e0fdd",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "nims/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.xml",
+      "expectedBytes": 11831,
+      "expectedSha256": "3ce395a2d0801d51a1d05e8c08e9a685aedc8c85ef2d0a0eb514927293bfc564",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "nims/G8CNGLOBAL02A_MV03_wavelengths.csv",
+      "expectedBytes": 1939,
+      "expectedSha256": "46307e3b635ff626f9c80bbcbd680aa46289e14d14a7197b7bc79f9f160a3dc2",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "nims/callisto-nims-composite.json",
+      "expectedBytes": 1264,
+      "expectedSha256": "8ff91d5a49adfa445a97b5970ce03de6a88dc8f83f9c6f65c9048c0c792c353c",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "nims/prepare-composite.json",
+      "expectedBytes": 3449,
+      "expectedSha256": "e457b5decd4debafb94a4a4ee9d72265ef9da385003a6bad0be4f63a7f2d3bf0",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
     }
   ]
 }

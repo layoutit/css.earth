@@ -1,0 +1,1315 @@
+{
+  "status": "PASS",
+  "base": "b3a0410f742501a1a1552dea14d9a3730fce7484",
+  "directory": "/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-delivery/run-Zorh3s",
+  "installation": "/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-delivery/run-Zorh3s/fresh-install",
+  "published": 24,
+  "newFiles": 24,
+  "newBytes": 3770164,
+  "installed": 186,
+  "reused": 0,
+  "assets": [
+    {
+      "id": "moon",
+      "filename": "moon-crustal-thickness-poles.webp",
+      "bytes": 13380,
+      "sha256": "fd4ba671d89e385a596b6459a988262d91a6db407870e0f8925afee0c85a2652",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fd4ba671d89e385a596b6459a988262d91a6db407870e0f8925afee0c85a2652/moon-crustal-thickness-poles.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-crustal-thickness-poles@2x.webp",
+      "bytes": 35532,
+      "sha256": "cd0d657288278f16ce42254b7526f7dacba27a4e45c3b22b862665eed0ff60be",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/cd0d657288278f16ce42254b7526f7dacba27a4e45c3b22b862665eed0ff60be/moon-crustal-thickness-poles@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-crustal-thickness-thumbnail.webp",
+      "bytes": 4676,
+      "sha256": "42dd84a4036d4d996c1c98cbb685f25219bfd212dc01cee5c5f408adc172fb3b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/42dd84a4036d4d996c1c98cbb685f25219bfd212dc01cee5c5f408adc172fb3b/moon-crustal-thickness-thumbnail.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-crustal-thickness.webp",
+      "bytes": 213074,
+      "sha256": "c751f7d4915fca9c2e6f68841318acc39dc9b5794d379519c6373378e9db17ac",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c751f7d4915fca9c2e6f68841318acc39dc9b5794d379519c6373378e9db17ac/moon-crustal-thickness.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-crustal-thickness@2x.webp",
+      "bytes": 476264,
+      "sha256": "5c2b146fe3c147075fed83797cee3ae2e0e4197ee40229572c7e71de7731abee",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5c2b146fe3c147075fed83797cee3ae2e0e4197ee40229572c7e71de7731abee/moon-crustal-thickness@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-curvature.webp",
+      "bytes": 17840,
+      "sha256": "f60e458f46c96da4b865f8c2c9586e0c5b47a3937ef640132a811fa7a43d503f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f60e458f46c96da4b865f8c2c9586e0c5b47a3937ef640132a811fa7a43d503f/moon-curvature.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-curvature@2x.webp",
+      "bytes": 48440,
+      "sha256": "44e7182701e1b726820365b7f2bb420c34bd3e77684ede4d7f94b73c9f56b038",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/44e7182701e1b726820365b7f2bb420c34bd3e77684ede4d7f94b73c9f56b038/moon-curvature@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/moon-directional-sun.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/moon-directional-sun@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-geology-poles.webp",
+      "bytes": 6168,
+      "sha256": "40bbc3148d161ffb760894708caffd6386c156a9b5a18414d8265376bbbac85d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/40bbc3148d161ffb760894708caffd6386c156a9b5a18414d8265376bbbac85d/moon-geology-poles.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-geology-poles@2x.webp",
+      "bytes": 13278,
+      "sha256": "fd0d6ebbbe045efc6c2ff3b547d3682a0f30eb8993c48453c8677dde6518cd6e",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fd0d6ebbbe045efc6c2ff3b547d3682a0f30eb8993c48453c8677dde6518cd6e/moon-geology-poles@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-geology-thumbnail.webp",
+      "bytes": 3722,
+      "sha256": "5ac01ef77302f05ff028fe41b80d6efdb73986cb2345a4cd298816e054973654",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5ac01ef77302f05ff028fe41b80d6efdb73986cb2345a4cd298816e054973654/moon-geology-thumbnail.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-geology.webp",
+      "bytes": 77392,
+      "sha256": "08b5df80ad85bc4ea682e75587f0010ee9c6f8f34de344d82a89cd11ef78620c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/08b5df80ad85bc4ea682e75587f0010ee9c6f8f34de344d82a89cd11ef78620c/moon-geology.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-geology@2x.webp",
+      "bytes": 180188,
+      "sha256": "ff32836a3e303e91139c7669fa119e2e7ba72e85ac0cad8845399dee200c82d9",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ff32836a3e303e91139c7669fa119e2e7ba72e85ac0cad8845399dee200c82d9/moon-geology@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-rock-abundance-legend.webp",
+      "bytes": 160,
+      "sha256": "a85a52b99e5f63b07042084f340eeb609b45b1f2c4192d09500aa075f462e567",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a85a52b99e5f63b07042084f340eeb609b45b1f2c4192d09500aa075f462e567/moon-rock-abundance-legend.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-rock-abundance-poles.webp",
+      "bytes": 2550,
+      "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a/moon-rock-abundance-poles.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-rock-abundance-poles@2x.webp",
+      "bytes": 5948,
+      "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878/moon-rock-abundance-poles@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-rock-abundance-thumbnail.webp",
+      "bytes": 3018,
+      "sha256": "4c08682c9073d2d80ddaf46a7c5c567e22512c25cc9d4edea799196829039917",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4c08682c9073d2d80ddaf46a7c5c567e22512c25cc9d4edea799196829039917/moon-rock-abundance-thumbnail.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-rock-abundance.webp",
+      "bytes": 148488,
+      "sha256": "ae9cab0075a3b97e9542f00ecde380189165a37b2f72adc701005318d8ab1587",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ae9cab0075a3b97e9542f00ecde380189165a37b2f72adc701005318d8ab1587/moon-rock-abundance.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-rock-abundance@2x.webp",
+      "bytes": 558446,
+      "sha256": "3d736ad2b78f81d01fcaf54574fe8004d4d2f8d2bebbd816df150873c18d37b2",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d736ad2b78f81d01fcaf54574fe8004d4d2f8d2bebbd816df150873c18d37b2/moon-rock-abundance@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-silicate-signature-legend.webp",
+      "bytes": 186,
+      "sha256": "7763a02d81b4adc5bf60a0b79837712190cb860620b6690a54e327620825079f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/7763a02d81b4adc5bf60a0b79837712190cb860620b6690a54e327620825079f/moon-silicate-signature-legend.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-silicate-signature-poles.webp",
+      "bytes": 2550,
+      "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a/moon-silicate-signature-poles.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-silicate-signature-poles@2x.webp",
+      "bytes": 5948,
+      "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878/moon-silicate-signature-poles@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-silicate-signature-thumbnail.webp",
+      "bytes": 9240,
+      "sha256": "3c9445af0e519012bcb4bda61ed392fd9d9b88eea3f7c43894babca8635a6b44",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3c9445af0e519012bcb4bda61ed392fd9d9b88eea3f7c43894babca8635a6b44/moon-silicate-signature-thumbnail.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-silicate-signature.webp",
+      "bytes": 625606,
+      "sha256": "f737bd286589ebce877ee049a87ca6865557b3df0d1f0c61e1d2199e2fdb353c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f737bd286589ebce877ee049a87ca6865557b3df0d1f0c61e1d2199e2fdb353c/moon-silicate-signature.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-silicate-signature@2x.webp",
+      "bytes": 2414732,
+      "sha256": "8114bfa66e4e13a889fc3019963b3f37309c33d2277b1d74600cb5a1848d4974",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/8114bfa66e4e13a889fc3019963b3f37309c33d2277b1d74600cb5a1848d4974/moon-silicate-signature@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-back-standard.webp",
+      "bytes": 56952,
+      "sha256": "9c52050fd9ba1e77e36cd0c75ce6bb07fb5cc024809151f27f346e266154faf5",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9c52050fd9ba1e77e36cd0c75ce6bb07fb5cc024809151f27f346e266154faf5/moon-starfield-back-standard.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-back-standard@2x.webp",
+      "bytes": 177014,
+      "sha256": "4f8cad89f248000213ac446732fff877ddd4fe7f26c469a4b2e808d5120138ff",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4f8cad89f248000213ac446732fff877ddd4fe7f26c469a4b2e808d5120138ff/moon-starfield-back-standard@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-back.webp",
+      "bytes": 216284,
+      "sha256": "3e39d61c0150f21f1ffc078302b941585da0f5494a8eb4ad9b10bce165a28380",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3e39d61c0150f21f1ffc078302b941585da0f5494a8eb4ad9b10bce165a28380/moon-starfield-back.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-back@2x.webp",
+      "bytes": 620360,
+      "sha256": "39b6a81f8e165de9aa5d1d0283bd05d29f61ebaa9f3bc1ab12ab1c6b61b4ea95",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/39b6a81f8e165de9aa5d1d0283bd05d29f61ebaa9f3bc1ab12ab1c6b61b4ea95/moon-starfield-back@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-bottom-standard.webp",
+      "bytes": 32036,
+      "sha256": "b3f3ee1f1deca568c5f83da8765225ecdfdfe1ae34189291626601eac4abca14",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b3f3ee1f1deca568c5f83da8765225ecdfdfe1ae34189291626601eac4abca14/moon-starfield-bottom-standard.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-bottom-standard@2x.webp",
+      "bytes": 112568,
+      "sha256": "6c6e433a5d391b1782d0a638e9c85edd233f459f28f8c971e7a26fcef7f26dae",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/6c6e433a5d391b1782d0a638e9c85edd233f459f28f8c971e7a26fcef7f26dae/moon-starfield-bottom-standard@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-bottom.webp",
+      "bytes": 144416,
+      "sha256": "e9469c3421870a3e42417a927ad19cd6c48fbdfa4129015535bde0e888cdf248",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e9469c3421870a3e42417a927ad19cd6c48fbdfa4129015535bde0e888cdf248/moon-starfield-bottom.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-bottom@2x.webp",
+      "bytes": 396940,
+      "sha256": "1643edb11a4dae8b43b86b19d3fced1c8071c11f6cf21d5e3b1b0cf0a71a277b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/1643edb11a4dae8b43b86b19d3fced1c8071c11f6cf21d5e3b1b0cf0a71a277b/moon-starfield-bottom@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-front-standard.webp",
+      "bytes": 66600,
+      "sha256": "66f6677ca02f381f439d31b73adc2f5e80fcec78089a9a8b81aafec336c44602",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/66f6677ca02f381f439d31b73adc2f5e80fcec78089a9a8b81aafec336c44602/moon-starfield-front-standard.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-front-standard@2x.webp",
+      "bytes": 207758,
+      "sha256": "deeb5d03751415de206a6aa9e4da7bdfbb5940695461fabaa6e17b44cb208b40",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/deeb5d03751415de206a6aa9e4da7bdfbb5940695461fabaa6e17b44cb208b40/moon-starfield-front-standard@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-front.webp",
+      "bytes": 238380,
+      "sha256": "79ef27ffc7f0eda735f07061d60c02debd795e527540855859a58bcfe408b95c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/79ef27ffc7f0eda735f07061d60c02debd795e527540855859a58bcfe408b95c/moon-starfield-front.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-front@2x.webp",
+      "bytes": 715592,
+      "sha256": "6f6d935cd27b72da011851e3dc97dec58cfb70ca9d6d95b0e533e9fb43490059",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/6f6d935cd27b72da011851e3dc97dec58cfb70ca9d6d95b0e533e9fb43490059/moon-starfield-front@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-left-standard.webp",
+      "bytes": 63036,
+      "sha256": "220527b3ddf5fd3330b9c27c32b6a444117996eb00e41413d9d256b7a18f940c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/220527b3ddf5fd3330b9c27c32b6a444117996eb00e41413d9d256b7a18f940c/moon-starfield-left-standard.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-left-standard@2x.webp",
+      "bytes": 191282,
+      "sha256": "78a789f9f2d10f1b614151549d33b25ff747059ba3586d6ee97a2b23eedb4ff7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/78a789f9f2d10f1b614151549d33b25ff747059ba3586d6ee97a2b23eedb4ff7/moon-starfield-left-standard@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-left.webp",
+      "bytes": 229874,
+      "sha256": "a786db4bf10063c80f0c8bc7f98cb640f3b104220621a9671feeec14aaeae354",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a786db4bf10063c80f0c8bc7f98cb640f3b104220621a9671feeec14aaeae354/moon-starfield-left.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-left@2x.webp",
+      "bytes": 655002,
+      "sha256": "91ffeae6f8dd97ad024d9885f4d9db1f3d78194555d89711118c832da84ec81b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/91ffeae6f8dd97ad024d9885f4d9db1f3d78194555d89711118c832da84ec81b/moon-starfield-left@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-right-standard.webp",
+      "bytes": 73142,
+      "sha256": "f1dc57e4b9a95a6ecb408c6c734e2a04ef01ae65eee69f6d4e890cff5b28ef2d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f1dc57e4b9a95a6ecb408c6c734e2a04ef01ae65eee69f6d4e890cff5b28ef2d/moon-starfield-right-standard.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-right-standard@2x.webp",
+      "bytes": 216664,
+      "sha256": "e427e188596791a49c3e88c340b358ac88dab845e4182585041d5ede43036c56",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e427e188596791a49c3e88c340b358ac88dab845e4182585041d5ede43036c56/moon-starfield-right-standard@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-right.webp",
+      "bytes": 260320,
+      "sha256": "231e5bd38bc22da1e9a540f61b12ebad7be010bb4ed7c4625ff8e873d25f5571",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/231e5bd38bc22da1e9a540f61b12ebad7be010bb4ed7c4625ff8e873d25f5571/moon-starfield-right.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-right@2x.webp",
+      "bytes": 722112,
+      "sha256": "23c6ccdf10bd5d42fa0176a99ecdac69f9bf88bb40535a7bca6cdbc700ccb08f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/23c6ccdf10bd5d42fa0176a99ecdac69f9bf88bb40535a7bca6cdbc700ccb08f/moon-starfield-right@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-top-standard.webp",
+      "bytes": 25010,
+      "sha256": "3bfc5e91750668797deebde304c9722dbcb02a34506e42c0b686546e0624e4b0",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3bfc5e91750668797deebde304c9722dbcb02a34506e42c0b686546e0624e4b0/moon-starfield-top-standard.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-top-standard@2x.webp",
+      "bytes": 87516,
+      "sha256": "97040d07ccaedd1e58b45d5775265222eb4e87360ee8f69fd58b1e2685051cd7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/97040d07ccaedd1e58b45d5775265222eb4e87360ee8f69fd58b1e2685051cd7/moon-starfield-top-standard@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-top.webp",
+      "bytes": 120304,
+      "sha256": "a0846c86d14dd40d4bfac3b408a16ff1cf818c1d3d8219207061ca609a8cd0f4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a0846c86d14dd40d4bfac3b408a16ff1cf818c1d3d8219207061ca609a8cd0f4/moon-starfield-top.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-starfield-top@2x.webp",
+      "bytes": 321290,
+      "sha256": "a7640bf24949e4961dcd889f933998fabe48a19e1a2fc42f6e544082853c23e0",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a7640bf24949e4961dcd889f933998fabe48a19e1a2fc42f6e544082853c23e0/moon-starfield-top@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-surface-poles.webp",
+      "bytes": 5624,
+      "sha256": "048cf0d10edddc0ed7babcf4364f03b9c18eaa98858999b3e769c3c80f8190d8",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/048cf0d10edddc0ed7babcf4364f03b9c18eaa98858999b3e769c3c80f8190d8/moon-surface-poles.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-surface-poles@2x.webp",
+      "bytes": 14032,
+      "sha256": "7a3729490730deab48820f38c4dfd413d33857defb0310775e7308bfaa555c11",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/7a3729490730deab48820f38c4dfd413d33857defb0310775e7308bfaa555c11/moon-surface-poles@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-surface-thumbnail.webp",
+      "bytes": 2752,
+      "sha256": "d781200e2456b17193e6c8f97bacf2fc8b21c095351b524f814cd029c06734b7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d781200e2456b17193e6c8f97bacf2fc8b21c095351b524f814cd029c06734b7/moon-surface-thumbnail.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-surface.webp",
+      "bytes": 139914,
+      "sha256": "ba3e8fc8df0eb68c3e35354eceeef55edf09a04bdfd2b0a0341b965b5693ac58",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/ba3e8fc8df0eb68c3e35354eceeef55edf09a04bdfd2b0a0341b965b5693ac58/moon-surface.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-surface@2x.webp",
+      "bytes": 468882,
+      "sha256": "46ca2b9b271f4a0bc628a899f710ac065b5c4fdbd01af38570b090f7c53be7cb",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/46ca2b9b271f4a0bc628a899f710ac065b5c4fdbd01af38570b090f7c53be7cb/moon-surface@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-topography-legend.webp",
+      "bytes": 192,
+      "sha256": "d88b473d5f54f0e6dac97b78338b4ecb4522951b75b6a1ff689810ea5ae314c5",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d88b473d5f54f0e6dac97b78338b4ecb4522951b75b6a1ff689810ea5ae314c5/moon-topography-legend.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-topography-poles.webp",
+      "bytes": 47866,
+      "sha256": "f460a6375079dec50f7d7d7f5c465c619bc6a6958cd20e7a854ffb88d2f01f32",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f460a6375079dec50f7d7d7f5c465c619bc6a6958cd20e7a854ffb88d2f01f32/moon-topography-poles.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-topography-poles@2x.webp",
+      "bytes": 149512,
+      "sha256": "e9f3a061b32a7e394dfed366fc39a4af0366fc1d301863f7fc85e6b6429df1d2",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e9f3a061b32a7e394dfed366fc39a4af0366fc1d301863f7fc85e6b6429df1d2/moon-topography-poles@2x.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-topography-thumbnail.webp",
+      "bytes": 8168,
+      "sha256": "c0f707fe1ccaddcd07cb6aec66dcbdc25811c20e5f9d3dccbd63d86a4a45c1e6",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c0f707fe1ccaddcd07cb6aec66dcbdc25811c20e5f9d3dccbd63d86a4a45c1e6/moon-topography-thumbnail.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-topography.webp",
+      "bytes": 529956,
+      "sha256": "5662a74d505859d319028aed84d58142f6e14552b39f71d47f4031c3f5b5e644",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/5662a74d505859d319028aed84d58142f6e14552b39f71d47f4031c3f5b5e644/moon-topography.webp"
+    },
+    {
+      "id": "moon",
+      "filename": "moon-topography@2x.webp",
+      "bytes": 1763150,
+      "sha256": "dd10f4675f70a899a5562feba522886acf6bf9323ca0729a39bdc7f2dc81ffdf",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/dd10f4675f70a899a5562feba522886acf6bf9323ca0729a39bdc7f2dc81ffdf/moon-topography@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/europa-directional-sun.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/europa-directional-sun@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-elevation-legend.webp",
+      "bytes": 232,
+      "sha256": "f38863733ca579d9738b556dec11eb3e318932eefaf6b5d3cffcda2b915871c3",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f38863733ca579d9738b556dec11eb3e318932eefaf6b5d3cffcda2b915871c3/europa-elevation-legend.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-elevation-poles@2x.webp",
+      "bytes": 9366,
+      "sha256": "bb3993ff36192399ed1dac66a7402b9d9000672ef9db4c2c4e931331a04b0632",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/bb3993ff36192399ed1dac66a7402b9d9000672ef9db4c2c4e931331a04b0632/europa-elevation-poles@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-elevation-surface@2x.webp",
+      "bytes": 47940,
+      "sha256": "7b2cd09d4632f30a83fdb816d79093c8bfd084285b8ae66fc7caa9517835952b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/7b2cd09d4632f30a83fdb816d79093c8bfd084285b8ae66fc7caa9517835952b/europa-elevation-surface@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-elevation-thumbnail.webp",
+      "bytes": 234,
+      "sha256": "41cb4721d67eced371ef087e99cf32710ee0b9dae47b9001c918fbb3b599ce4d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/41cb4721d67eced371ef087e99cf32710ee0b9dae47b9001c918fbb3b599ce4d/europa-elevation-thumbnail.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-enhanced-poles@2x.webp",
+      "bytes": 50426,
+      "sha256": "58a079ec75e35c9326e81d18b49886f5b4bab5405fb147a6a2988e0c2e974184",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/58a079ec75e35c9326e81d18b49886f5b4bab5405fb147a6a2988e0c2e974184/europa-enhanced-poles@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-enhanced-surface@2x.webp",
+      "bytes": 2186518,
+      "sha256": "0c4f1380187aec0a300b12338ea728700f6d9f6e77a0bb582754d3f5aa3a49ef",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0c4f1380187aec0a300b12338ea728700f6d9f6e77a0bb582754d3f5aa3a49ef/europa-enhanced-surface@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-enhanced-thumbnail.webp",
+      "bytes": 3882,
+      "sha256": "d60ccbcc119bbdd4b7bf1dbfed1d31b050bd442ed25e8ac9a8d4871607e85a4c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d60ccbcc119bbdd4b7bf1dbfed1d31b050bd442ed25e8ac9a8d4871607e85a4c/europa-enhanced-thumbnail.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-geology-poles@2x.webp",
+      "bytes": 5808,
+      "sha256": "de33bb1dd40652adcfc0e343687c60ac0d3956765d38de6e1110e82e7d00e502",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/de33bb1dd40652adcfc0e343687c60ac0d3956765d38de6e1110e82e7d00e502/europa-geology-poles@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-geology-surface@2x.webp",
+      "bytes": 43646,
+      "sha256": "0dfe30d132ad5e7a4b28e52a73d31efc9072b85afa70d9d7dce5b7f30a0bdd0d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0dfe30d132ad5e7a4b28e52a73d31efc9072b85afa70d9d7dce5b7f30a0bdd0d/europa-geology-surface@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-geology-thumbnail.webp",
+      "bytes": 918,
+      "sha256": "e2186f77bea7b30cec1ef3c966106bb03f1f1dd5bd74a03aa811c2ecf362780f",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e2186f77bea7b30cec1ef3c966106bb03f1f1dd5bd74a03aa811c2ecf362780f/europa-geology-thumbnail.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-infrared-poles@2x.webp",
+      "bytes": 9082,
+      "sha256": "fa89a9b84bfbe95307bf8a7211ed7fd1f76b53acbc6b3282c26a120857c88550",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/fa89a9b84bfbe95307bf8a7211ed7fd1f76b53acbc6b3282c26a120857c88550/europa-infrared-poles@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-infrared-surface@2x.webp",
+      "bytes": 135446,
+      "sha256": "4b9aaed008800306b597fdb0710fe32b56c89556dc0ec61f13db30a2033f486b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4b9aaed008800306b597fdb0710fe32b56c89556dc0ec61f13db30a2033f486b/europa-infrared-surface@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-infrared-thumbnail.webp",
+      "bytes": 4988,
+      "sha256": "f904becd83dfd47423212b95e4d408dffb7e74f96622973a38292e3ec5c2e045",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f904becd83dfd47423212b95e4d408dffb7e74f96622973a38292e3ec5c2e045/europa-infrared-thumbnail.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76/europa-lighting.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-normal-poles@2x.webp",
+      "bytes": 50426,
+      "sha256": "58a079ec75e35c9326e81d18b49886f5b4bab5405fb147a6a2988e0c2e974184",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/58a079ec75e35c9326e81d18b49886f5b4bab5405fb147a6a2988e0c2e974184/europa-normal-poles@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-normal-surface@2x.webp",
+      "bytes": 2393474,
+      "sha256": "2a268d580c1a7909066688eaee0222171762f03562d922199b34f4270d8d82b6",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2a268d580c1a7909066688eaee0222171762f03562d922199b34f4270d8d82b6/europa-normal-surface@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-normal-thumbnail.webp",
+      "bytes": 2898,
+      "sha256": "de3049fc5d85511eb8cbf21bd17fdc5c544110395bd081c13677ea3b05065abb",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/de3049fc5d85511eb8cbf21bd17fdc5c544110395bd081c13677ea3b05065abb/europa-normal-thumbnail.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-parent-jupiter.webp",
+      "bytes": 106146,
+      "sha256": "283e8eb46a6d2b287bea22cd526b43ded528aed1b2bd8994f6ac4d4f6ba0afb7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/283e8eb46a6d2b287bea22cd526b43ded528aed1b2bd8994f6ac4d4f6ba0afb7/europa-parent-jupiter.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-back-standard.webp",
+      "bytes": 53856,
+      "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9/europa-starfield-back-standard.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-back-standard@2x.webp",
+      "bytes": 171294,
+      "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0/europa-starfield-back-standard@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-back.webp",
+      "bytes": 210188,
+      "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7/europa-starfield-back.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-back@2x.webp",
+      "bytes": 598648,
+      "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf/europa-starfield-back@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-bottom-standard.webp",
+      "bytes": 63946,
+      "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90/europa-starfield-bottom-standard.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-bottom-standard@2x.webp",
+      "bytes": 200212,
+      "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687/europa-starfield-bottom-standard@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-bottom.webp",
+      "bytes": 232844,
+      "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8/europa-starfield-bottom.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-bottom@2x.webp",
+      "bytes": 690706,
+      "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a/europa-starfield-bottom@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-front-standard.webp",
+      "bytes": 67226,
+      "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d/europa-starfield-front-standard.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-front-standard@2x.webp",
+      "bytes": 208208,
+      "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d/europa-starfield-front-standard@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-front.webp",
+      "bytes": 251588,
+      "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28/europa-starfield-front.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-front@2x.webp",
+      "bytes": 687190,
+      "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d/europa-starfield-front@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-left-standard.webp",
+      "bytes": 31200,
+      "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828/europa-starfield-left-standard.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-left-standard@2x.webp",
+      "bytes": 112118,
+      "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa/europa-starfield-left-standard@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-left.webp",
+      "bytes": 142736,
+      "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650/europa-starfield-left.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-left@2x.webp",
+      "bytes": 413462,
+      "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9/europa-starfield-left@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-right-standard.webp",
+      "bytes": 23676,
+      "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8/europa-starfield-right-standard.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-right-standard@2x.webp",
+      "bytes": 83896,
+      "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79/europa-starfield-right-standard@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-right.webp",
+      "bytes": 116010,
+      "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa/europa-starfield-right.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-right@2x.webp",
+      "bytes": 312496,
+      "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85/europa-starfield-right@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-top-standard.webp",
+      "bytes": 64674,
+      "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738/europa-starfield-top-standard.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-top-standard@2x.webp",
+      "bytes": 202204,
+      "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3/europa-starfield-top-standard@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-top.webp",
+      "bytes": 235140,
+      "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310/europa-starfield-top.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-starfield-top@2x.webp",
+      "bytes": 682934,
+      "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4/europa-starfield-top@2x.webp"
+    },
+    {
+      "id": "europa",
+      "filename": "europa-system-point.webp",
+      "bytes": 96,
+      "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659/europa-system-point.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/callisto-directional-sun.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/callisto-directional-sun@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-enhanced-poles@2x.webp",
+      "bytes": 22082,
+      "sha256": "946ad57e6dcf0390cdffad9713b8ff1c36f00686b45a17d14026146fbcb94313",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/946ad57e6dcf0390cdffad9713b8ff1c36f00686b45a17d14026146fbcb94313/callisto-enhanced-poles@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-enhanced-surface@2x.webp",
+      "bytes": 993738,
+      "sha256": "1ae112da832085a9c7849db3c9bf2d8cd18f925b2b9f6039f0fe73d79871d40d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/1ae112da832085a9c7849db3c9bf2d8cd18f925b2b9f6039f0fe73d79871d40d/callisto-enhanced-surface@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-enhanced-thumbnail.webp",
+      "bytes": 3584,
+      "sha256": "64cd37bb4a98fcd073a999a8ca38b4a3eef03f1849b233367d6d3aa01f36cf60",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/64cd37bb4a98fcd073a999a8ca38b4a3eef03f1849b233367d6d3aa01f36cf60/callisto-enhanced-thumbnail.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-infrared-poles@2x.webp",
+      "bytes": 5376,
+      "sha256": "69161aa114ce5412b0bbb3aa2002987906e61f2d74d8d6819525cb7d5954fb8b",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/69161aa114ce5412b0bbb3aa2002987906e61f2d74d8d6819525cb7d5954fb8b/callisto-infrared-poles@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-infrared-surface@2x.webp",
+      "bytes": 82426,
+      "sha256": "48d6c8424b144291123b0189346c95a18af644000ddd2a2a69d385f391c3b1a4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/48d6c8424b144291123b0189346c95a18af644000ddd2a2a69d385f391c3b1a4/callisto-infrared-surface@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-infrared-thumbnail.webp",
+      "bytes": 3108,
+      "sha256": "4f3edbfa6472b3c7c92253523ba5e6879e7dde5b3119825ef7c39b65a925a9d6",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4f3edbfa6472b3c7c92253523ba5e6879e7dde5b3119825ef7c39b65a925a9d6/callisto-infrared-thumbnail.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76/callisto-lighting.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-normal-poles@2x.webp",
+      "bytes": 163564,
+      "sha256": "6781b161a0af4b85676bfba78f75ab0698893c9dfebef5a5514ba6c646a92eba",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/6781b161a0af4b85676bfba78f75ab0698893c9dfebef5a5514ba6c646a92eba/callisto-normal-poles@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-normal-surface@2x.webp",
+      "bytes": 6169044,
+      "sha256": "a3426f1dae912070335ede461e32150bf082c6f6203e0db50a158ad143fef367",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a3426f1dae912070335ede461e32150bf082c6f6203e0db50a158ad143fef367/callisto-normal-surface@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-normal-thumbnail.webp",
+      "bytes": 3134,
+      "sha256": "61e32f4d6d753f30b3bbb3ed561f52133f1d0d32ef99c5d3ee47f0d4428342c4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/61e32f4d6d753f30b3bbb3ed561f52133f1d0d32ef99c5d3ee47f0d4428342c4/callisto-normal-thumbnail.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-parent-jupiter.webp",
+      "bytes": 106146,
+      "sha256": "283e8eb46a6d2b287bea22cd526b43ded528aed1b2bd8994f6ac4d4f6ba0afb7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/283e8eb46a6d2b287bea22cd526b43ded528aed1b2bd8994f6ac4d4f6ba0afb7/callisto-parent-jupiter.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-back-standard.webp",
+      "bytes": 53856,
+      "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9/callisto-starfield-back-standard.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-back-standard@2x.webp",
+      "bytes": 171294,
+      "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0/callisto-starfield-back-standard@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-back.webp",
+      "bytes": 210188,
+      "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7/callisto-starfield-back.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-back@2x.webp",
+      "bytes": 598648,
+      "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf/callisto-starfield-back@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-bottom-standard.webp",
+      "bytes": 63946,
+      "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90/callisto-starfield-bottom-standard.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-bottom-standard@2x.webp",
+      "bytes": 200212,
+      "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687/callisto-starfield-bottom-standard@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-bottom.webp",
+      "bytes": 232844,
+      "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8/callisto-starfield-bottom.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-bottom@2x.webp",
+      "bytes": 690706,
+      "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a/callisto-starfield-bottom@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-front-standard.webp",
+      "bytes": 67226,
+      "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d/callisto-starfield-front-standard.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-front-standard@2x.webp",
+      "bytes": 208208,
+      "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d/callisto-starfield-front-standard@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-front.webp",
+      "bytes": 251588,
+      "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28/callisto-starfield-front.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-front@2x.webp",
+      "bytes": 687190,
+      "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d/callisto-starfield-front@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-left-standard.webp",
+      "bytes": 31200,
+      "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828/callisto-starfield-left-standard.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-left-standard@2x.webp",
+      "bytes": 112118,
+      "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa/callisto-starfield-left-standard@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-left.webp",
+      "bytes": 142736,
+      "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650/callisto-starfield-left.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-left@2x.webp",
+      "bytes": 413462,
+      "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9/callisto-starfield-left@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-right-standard.webp",
+      "bytes": 23676,
+      "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8/callisto-starfield-right-standard.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-right-standard@2x.webp",
+      "bytes": 83896,
+      "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79/callisto-starfield-right-standard@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-right.webp",
+      "bytes": 116010,
+      "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa/callisto-starfield-right.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-right@2x.webp",
+      "bytes": 312496,
+      "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85/callisto-starfield-right@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-top-standard.webp",
+      "bytes": 64674,
+      "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738/callisto-starfield-top-standard.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-top-standard@2x.webp",
+      "bytes": 202204,
+      "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3/callisto-starfield-top-standard@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-top.webp",
+      "bytes": 235140,
+      "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310/callisto-starfield-top.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-starfield-top@2x.webp",
+      "bytes": 682934,
+      "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4/callisto-starfield-top@2x.webp"
+    },
+    {
+      "id": "callisto",
+      "filename": "callisto-system-point.webp",
+      "bytes": 96,
+      "sha256": "e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e91fcf0ad457083d1f4e5007eb02377fd72765e2af972116f1dc91600991a659/callisto-system-point.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-albedo-legend.webp",
+      "bytes": 196,
+      "sha256": "736d11631a7c54a437a74430333a43dad33a9a63bb88261be3064ffdf93f2435",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/736d11631a7c54a437a74430333a43dad33a9a63bb88261be3064ffdf93f2435/charon-albedo-legend.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-albedo-poles@2x.webp",
+      "bytes": 6626,
+      "sha256": "99e24392167a3790fcbf0f3693e1dbf5aaef867264f20e2692214fd521d1180e",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/99e24392167a3790fcbf0f3693e1dbf5aaef867264f20e2692214fd521d1180e/charon-albedo-poles@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-albedo-surface@2x.webp",
+      "bytes": 132016,
+      "sha256": "f488fe48dedf328dee7bd9f09533e80ed9c13a732351cc5c7456cba36a630648",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f488fe48dedf328dee7bd9f09533e80ed9c13a732351cc5c7456cba36a630648/charon-albedo-surface@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-albedo-thumbnail.webp",
+      "bytes": 1518,
+      "sha256": "62d79f826284d5f1826ca11c80479ab2f84427908a2d73fdd177278b60ca8771",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62d79f826284d5f1826ca11c80479ab2f84427908a2d73fdd177278b60ca8771/charon-albedo-thumbnail.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce/charon-directional-sun.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940/charon-directional-sun@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-elevation-legend.webp",
+      "bytes": 180,
+      "sha256": "a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a61050d5ca54e9972808c8df55940f212c48dfa1bce97d6adb9ea43969a40362/charon-elevation-legend.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-elevation-poles@2x.webp",
+      "bytes": 55022,
+      "sha256": "33c65356e5d342fa5ac3d14ddc45a5e26b888b751cd466f15c7c9073203d2052",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/33c65356e5d342fa5ac3d14ddc45a5e26b888b751cd466f15c7c9073203d2052/charon-elevation-poles@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-elevation-surface@2x.webp",
+      "bytes": 2559100,
+      "sha256": "c7329a7ddbd484799b9388c4e7357759424e5db7bbd1b14abfe23434280501a3",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c7329a7ddbd484799b9388c4e7357759424e5db7bbd1b14abfe23434280501a3/charon-elevation-surface@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-elevation-thumbnail.webp",
+      "bytes": 4394,
+      "sha256": "4c9d95b24093e7c0a5937068624ba30a046b6bf7a1fcf8a5ad521c73ff803fa0",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4c9d95b24093e7c0a5937068624ba30a046b6bf7a1fcf8a5ad521c73ff803fa0/charon-elevation-thumbnail.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-enhanced-color-poles@2x.webp",
+      "bytes": 36788,
+      "sha256": "0899084045985bd7d5868f4e3baad691f936eb737dbcde1041afbbb796cc666c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0899084045985bd7d5868f4e3baad691f936eb737dbcde1041afbbb796cc666c/charon-enhanced-color-poles@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-enhanced-color-surface@2x.webp",
+      "bytes": 2203286,
+      "sha256": "27c5ae040df6a7c649b98a1592179cb4ac71288b0c5bc37ad6d63ade7e215824",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/27c5ae040df6a7c649b98a1592179cb4ac71288b0c5bc37ad6d63ade7e215824/charon-enhanced-color-surface@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-enhanced-color-thumbnail.webp",
+      "bytes": 4270,
+      "sha256": "2ddc21438bea327353ead88f43e91309ece5d4f6d8b88905e539dfdf81dfa7ff",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2ddc21438bea327353ead88f43e91309ece5d4f6d8b88905e539dfdf81dfa7ff/charon-enhanced-color-thumbnail.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76/charon-lighting.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-normal-poles@2x.webp",
+      "bytes": 68758,
+      "sha256": "63a60ac73881606ba0870cbd59da34eb99f3d3b31c0787a6b3b6348807d42630",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/63a60ac73881606ba0870cbd59da34eb99f3d3b31c0787a6b3b6348807d42630/charon-normal-poles@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-normal-surface@2x.webp",
+      "bytes": 5592554,
+      "sha256": "dc310910d19b395f1fbac788045bf58acc423e82c35f41487149f15f1a73d91c",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/dc310910d19b395f1fbac788045bf58acc423e82c35f41487149f15f1a73d91c/charon-normal-surface@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-normal-thumbnail.webp",
+      "bytes": 3452,
+      "sha256": "c9fd5a93cfd90fba665e2a0f2494bb2408c639f9c83805eecef7f523a09e2f27",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c9fd5a93cfd90fba665e2a0f2494bb2408c639f9c83805eecef7f523a09e2f27/charon-normal-thumbnail.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-back-standard.webp",
+      "bytes": 53856,
+      "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9/charon-starfield-back-standard.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-back-standard@2x.webp",
+      "bytes": 171294,
+      "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0/charon-starfield-back-standard@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-back.webp",
+      "bytes": 210188,
+      "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7/charon-starfield-back.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-back@2x.webp",
+      "bytes": 598648,
+      "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf/charon-starfield-back@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-bottom-standard.webp",
+      "bytes": 63946,
+      "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90/charon-starfield-bottom-standard.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-bottom-standard@2x.webp",
+      "bytes": 200212,
+      "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687/charon-starfield-bottom-standard@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-bottom.webp",
+      "bytes": 232844,
+      "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8/charon-starfield-bottom.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-bottom@2x.webp",
+      "bytes": 690706,
+      "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a/charon-starfield-bottom@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-front-standard.webp",
+      "bytes": 67226,
+      "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d/charon-starfield-front-standard.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-front-standard@2x.webp",
+      "bytes": 208208,
+      "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d/charon-starfield-front-standard@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-front.webp",
+      "bytes": 251588,
+      "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28/charon-starfield-front.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-front@2x.webp",
+      "bytes": 687190,
+      "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d/charon-starfield-front@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-left-standard.webp",
+      "bytes": 31200,
+      "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828/charon-starfield-left-standard.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-left-standard@2x.webp",
+      "bytes": 112118,
+      "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa/charon-starfield-left-standard@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-left.webp",
+      "bytes": 142736,
+      "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650/charon-starfield-left.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-left@2x.webp",
+      "bytes": 413462,
+      "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9/charon-starfield-left@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-right-standard.webp",
+      "bytes": 23676,
+      "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8/charon-starfield-right-standard.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-right-standard@2x.webp",
+      "bytes": 83896,
+      "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79/charon-starfield-right-standard@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-right.webp",
+      "bytes": 116010,
+      "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa/charon-starfield-right.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-right@2x.webp",
+      "bytes": 312496,
+      "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85/charon-starfield-right@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-top-standard.webp",
+      "bytes": 64674,
+      "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738/charon-starfield-top-standard.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-top-standard@2x.webp",
+      "bytes": 202204,
+      "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3/charon-starfield-top-standard@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-top.webp",
+      "bytes": 235140,
+      "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310/charon-starfield-top.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-starfield-top@2x.webp",
+      "bytes": 682934,
+      "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4/charon-starfield-top@2x.webp"
+    },
+    {
+      "id": "charon",
+      "filename": "charon-system-point.webp",
+      "bytes": 96,
+      "sha256": "d33fee1d20803adca7d7480ff33b6a627d7eb5eccb50930cffb85f23b9baa6db",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/d33fee1d20803adca7d7480ff33b6a627d7eb5eccb50930cffb85f23b9baa6db/charon-system-point.webp"
+    }
+  ]
+}

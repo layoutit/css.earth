@@ -416,6 +416,87 @@
       ],
       "path": "science/controlled-dtms/Agenor/provenance.txt",
       "url": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/provenance.txt"
+    },
+    {
+      "kind": "zip-member",
+      "url": "https://pubs.usgs.gov/sim/3513/sim3513_gis.zip",
+      "archiveSha256": "6f9212b670d36ae94d76fd6f0e655cfab7c65bde54fe27655474e4a6c4caa63a",
+      "archiveBytes": 148227036,
+      "member": "sim3513_Europa_GIS/shapefiles/GeoUnits_FINAL.shp",
+      "path": "geology/GeoUnits_FINAL.shp",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "zip-member",
+      "url": "https://pubs.usgs.gov/sim/3513/sim3513_gis.zip",
+      "archiveSha256": "6f9212b670d36ae94d76fd6f0e655cfab7c65bde54fe27655474e4a6c4caa63a",
+      "archiveBytes": 148227036,
+      "member": "sim3513_Europa_GIS/shapefiles/GeoUnits_FINAL.dbf",
+      "path": "geology/GeoUnits_FINAL.dbf",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "zip-member",
+      "url": "https://pubs.usgs.gov/sim/3513/sim3513_gis.zip",
+      "archiveSha256": "6f9212b670d36ae94d76fd6f0e655cfab7c65bde54fe27655474e4a6c4caa63a",
+      "archiveBytes": 148227036,
+      "member": "sim3513_Europa_GIS/shapefiles/GeoUnits_FINAL.prj",
+      "path": "geology/GeoUnits_FINAL.prj",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/europa_go_nims_reprojected_malaska_2023/data/primary_registered_files/17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.tif",
+      "path": "nims/17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.tif",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/europa_go_nims_reprojected_malaska_2023/data/primary_registered_files/17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.xml",
+      "path": "nims/17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.xml",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/europa_go_nims_reprojected_malaska_2023/data/primary_registered_files/17ENGLOBAL01A_MV01_wavelengths.csv",
+      "path": "nims/17ENGLOBAL01A_MV01_wavelengths.csv",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/europa_go_nims_reprojected_malaska_2023/data/primary_registered_files/17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.tif",
+      "path": "nims/17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.tif",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/europa_go_nims_reprojected_malaska_2023/data/primary_registered_files/17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.xml",
+      "path": "nims/17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.xml",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/europa_go_nims_reprojected_malaska_2023/data/primary_registered_files/17ENGLOBAL02A_MV01_wavelengths.csv",
+      "path": "nims/17ENGLOBAL02A_MV01_wavelengths.csv",
+      "groups": [
+        "mapped-science"
+      ]
     }
   ]
 }

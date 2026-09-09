@@ -40,6 +40,54 @@
       ],
       "path": "observations/PIA03456-usgs.png",
       "url": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Callisto%20-%20Galileo%20SSI%20Color%20Mosaic.png"
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
+      "path": "nims/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.xml",
+      "path": "nims/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.xml",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNADLIND01A_MV03_wavelengths.csv",
+      "path": "nims/G8CNADLIND01A_MV03_wavelengths.csv",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+      "path": "nims/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.xml",
+      "path": "nims/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.xml",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/callisto_go_nims_reprojected_malaska_2023/data/primary_registered_files/G8CNGLOBAL02A_MV03_wavelengths.csv",
+      "path": "nims/G8CNGLOBAL02A_MV03_wavelengths.csv",
+      "groups": [
+        "mapped-science"
+      ]
     }
   ]
 }

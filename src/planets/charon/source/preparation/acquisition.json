@@ -40,6 +40,22 @@
       ],
       "path": "observations/nh_charon_color_mosaic.img",
       "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.img"
+    },
+    {
+      "kind": "download",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.img",
+      "path": "science/nh_charon_bond.img",
+      "groups": [
+        "mapped-science"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx",
+      "path": "science/nh_charon_bond.lblx",
+      "groups": [
+        "mapped-science"
+      ]
     }
   ]
 }
