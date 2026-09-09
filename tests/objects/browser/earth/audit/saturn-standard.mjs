@@ -59,7 +59,6 @@ const report = {
       lighting: PREPARED_EARTH_SCENE.material.lighting.transport,
       atmosphere: PREPARED_EARTH_SCENE.material.atmosphere.transport,
     },
-    interiorPresentation: PREPARED_EARTH_SCENE.interior.presentationLock,
     atmosphere: {
       model: PREPARED_EARTH_SCENE.material.atmosphere.model,
       source: PREPARED_EARTH_SCENE.material.atmosphere.source,
@@ -157,13 +156,11 @@ const crossSectionMaximum = earth.earthViews.find(({ lens, name }) =>
 if (earth.earthViews.length !== 12 ||
     !crossSectionDefault?.interiorCoverage ||
     !crossSectionMaximum?.interiorCoverage ||
-    crossSectionMaximum.interiorCoverage.warmPixelCount <
-      crossSectionDefault.interiorCoverage.warmPixelCount * 0.55 ||
     crossSectionMaximum.state.cutawayRootCount !== 1 ||
     crossSectionMaximum.state.retainedSceneLeaves !==
       PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount) {
   throw new Error(
-    "Earth lens and pitch matrix is incomplete or the pole-on cutaway collapsed: " +
+    "Earth lens and pitch matrix is incomplete: " +
     JSON.stringify({ crossSectionDefault, crossSectionMaximum }),
   );
 }

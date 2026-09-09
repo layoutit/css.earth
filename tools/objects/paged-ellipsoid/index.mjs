@@ -48,7 +48,10 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   if (Boolean(paging) !== Boolean(destinations)) throw new TypeError('Geographic paging and destinations must be declared together.');
   const citySource = paging ? await json(resolve(sourceDirectory, config.cityPath)) : null;
   // The scene needs the declared retained pool capacity, not a previously prepared overlay.
-  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource: await json(resolve(sourceDirectory, config.interiorPath)), citySource, noise: paging ? { poolSize: config.geographic.noise.poolSize } : null, atmosphereModel, atmosphere, raster });
+  const interiorSource = await json(resolve(sourceDirectory, config.interiorPath));
+  if (interiorSource.tomographyPath && sources.get('mantle-tomography')?.reference.path !== `source/${interiorSource.tomographyPath}`)
+    throw new Error('Mantle tomography must bind its authored recipe for reproducible provenance.');
+  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, citySource, noise: paging ? { poolSize: config.geographic.noise.poolSize } : null, atmosphereModel, atmosphere, raster });
   const rasterAssets = await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster });
   const context = { sourceDirectory, publicDirectory, config, scene };
   let noise, catalog, city, report;

@@ -1,0 +1,43 @@
+{
+  "name": "EMC-GLAD-M35",
+  "overview": "A joint P and S global tomographic model with uncertainty quantification",
+  "summary": "<p>An elastic model with radial anisotropy confined to the upper mantle. The model is the successor of <a href=\"/dp/emc_model_viewer.html?id=EMC-GLAD-M25\">GLAD-M25</a> with a 50% increase in event number and more than double the number of windows.</p>",
+  "description": "<table>\n<tbody>\n<tr>\n<td><strong>Name</strong></td>\n<td>GLAD-M35</td>\n</tr>\n<tr>\n<td><strong>Title</strong></td>\n<td>A joint P and S global tomographic model with uncertainty quantification</td>\n</tr>\n<tr>\n<td><strong>Type</strong></td>\n<td>3-D Tomography Earth Model</td>\n</tr>\n<tr>\n<td><strong>Subtype</strong></td>\n<td>Joint P and S velocity, Uncertainty, Anisotropic (in the uppermost mantle)</td>\n</tr>\n<tr>\n<td><strong>Year</strong></td>\n<td>2024</td>\n</tr>\n<tr>\n<td><strong>Data Revision</strong></td>\n<td>r.0.1 (<a href=\"#revision\">revision history</a>)</td>\n</tr>\n<tr>\n<td><strong>Notes</strong></td>\n<td>r.0.1: Flattened the topography of 410km and 660km boundaries, which removes the wave speed discontinuities in the layers around them.</td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Prior Model</strong></td>\n<td>An elastic model with radial anisotropy confined to the upper mantle. The model is the successor of <a href=\"/dp/emc_model_viewer.html?id=EMC-GLAD-M25\">GLAD-M25</a> with a 50% increase in event number and more than double the number of windows. GLAD-M35 features improved constraints on the deep mantle, especially compressional wave speed which is typically harder to constrain than shear wave speed. An estimation of the standard deviation of the model parameters based on the BFGS update history is provided.</td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Authors:</strong></td>\n<td><strong>Congyue Cui</strong>, Department of Geosciences, Princeton University, Princeton, NJ, USA<br />\n<br style=\"line-height: 2px;\" /><br />\n<strong>Wenjie Lei</strong>, Google, Mountain View, NJ, USA<br />\n<br style=\"line-height: 2px;\" /><br />\n<strong>Qiancheng Liu</strong>, Institute of Geology and Geophysics, Chinese Academy of Sciences, Beijing, China<br />\n<br style=\"line-height: 2px;\" /><br />\n<strong>Daniel Peter</strong>, St. Gallen, Switzerland<br />\n<br style=\"line-height: 2px;\" /><br />\n<strong>Ebru Bozdağ</strong>, Departments of Applied Mathematics &amp; Statistics and<br />\nGeophysics, Colorado School of Mines, Golden, CO, USA<br />\n<br style=\"line-height: 2px;\" /><br />\n<strong>Jeroen Tromp</strong>, Program in Applied and Computational Mathematics, Princeton University, Princeton, NJ, USA<br />\n<br style=\"line-height: 2px;\" /><br />\n<strong>Norbert Podhorszki</strong>, Lawrence Livermore National Laboratory, Livermore, CA, USA<br />\n<br style=\"line-height: 2px;\" /><br />\n<strong>David Pugmire</strong>, Oak Ridge National Laboratory, Oak Ridge, TN, USA</td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Prior Model</strong></td>\n<td><a href=\"/dp/emc_model_viewer.html?id=EMC-GLAD-M25\">GLAD-M25</a></td>\n</tr>\n<tr>\n<td><strong>Prior Model</strong></td>\n<td><a href=\"/dp/emc_model_viewer.html?id=EMC-STW105\">STW105</a></td>\n</tr>\n<tr>\n<td><strong>Model Homepage</strong></td>\n<td><a href=\"https://github.com/icui/glad-m35\">https://github.com/icui/glad-m35</a></td>\n</tr>\n<tr>\n<td><strong>Model Download</strong></td>\n<td><a href=\"/data/emc/netcdf/GLAD-M35.r0.1-n4c.nc\">GLAD-M35.r0.1-n4c.nc</a> (see <a href=\"/dp/emc_json_viewer.html?file=GLAD-M35.r0.1-n4c.geojson\">metadata</a>), is the <a href=\"https://www.unidata.ucar.edu/software/netcdf/\"><strong>netCDF 4 Classic</strong></a> file for vertical shear wave speed (Vsv), horizontal shear wave speed (Vsh), vertical compressional wave speed (Vpv), horizontal compressional wave speed (Vph), dimensionless parameter eta, and standard deviations of shear and compressional wave speed (std_vs and std_vp).</td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Depth Coverage</strong></td>\n<td>Whole Mantle (10 to 2890 km)</td>\n</tr>\n<tr>\n<td><strong>Area</strong></td>\n<td>Global (–90°/90°, longitudes: –180°/180°)</td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td><strong>Dataset Description</strong></td>\n<td>2,160 earthquakes selected from the <a href=\"https://ds.iris.edu/ds/products/momenttensor/\">Global CMT Catalog</a>, and whose waveforms we downloaded from many data centers, including IRIS, ORFEUS, INGV, IPGP, ETH, and GEONET. Global Seismic Network (II, IU, IC, US, CU, and GT), GEOFON (GE), GEOSCOPE (G), regional and temporary networks, such as US Array (TA), Africa Array (AF), the Canadian National Seismograph Network (CN), Geoscience Australia (AU), the Antarctic Seismographic Argentinean Italian Network (AI), the New Zealand National Seismograph Network (NZ), and the F-net broadband seismograph network by NIED, MedNet (MN), the Brazilian Lithospheric Seismic Project (BL), the Chilean National Seismic Network&amp;copy;, and the Japan Meteorological Agency Seismic Network (JP).</td>\n</tr>\n</tbody>\n</table>\n<p><span id=\"figure\"></span></p>\n<p><a href=\"/catalog/emc/model_pages/images/EMC-GLAD-M35/GLAD-M35.png\"><img src=\"/catalog/emc/model_pages/images/EMC-GLAD-M35/GLAD-M35.png\" alt=\"\" /></a></p>",
+  "credits": "<ul>\n<li>r.0.0 model provided by Congyue Cui.</li>\n<li>r.0.1 model provided by Congyue Cui.</li>\n</ul>\n<h3 id=\"revision-history\">Revision History</h3>\n<p id='revision'>\n<p><strong>revision r.0.0</strong>: uploaded August 5, 2024.<br />\n<strong>revision r.0.1</strong>: uploaded August 12, 2024.</p>\n</p>",
+  "contributors": "",
+  "quicklinks": "<ul>\n<li><a href=\"../emc\">EMC home</a></li>\n<li><a href=\"../emc-earthmodels\">Earth models</a></li>\n<li><a href=\"https://github.com/iris-edu/emc-tools\">EMC Tools</a></li>\n<li><a href=\"https://github.com/iris-edu/EMC-ParaView\">EMC ParaView Plugins</a></li>\n<li><a href=\"/dms/products/emc/horizontalSlice.html\">Visualization tools</a></li>\n<li><a href=\"../emc-referencemodels\">Reference Earth models</a></li>\n<li><a href=\"/spud/earthmodel\">Model download via SPUD</a></li>\n<li><a href=\"../emc-contributionguide\">How to contribute Earth models to EMC</a></li>\n<li><a href=\"/ds/products/emc-news/\">News and updates</a></li>\n<li><a href=\"../emc-desktoptools\">Desktop Tools</a></li>\n<li><a href=\"#citation\">Citations</a></li>\n</ul>",
+  "changelog": "",
+  "citation": "<p><strong>To cite the original work behind this Earth model</strong>:</p>\n<ul>\n<li>Congyue Cui, Wenjie Lei, Qiancheng Liu, Daniel Peter, Ebru Bozd ̆ ag, Jeroen Tromp, Judith Hill, Norbert Podhorszki, and David Pugmire, GLAD-M35: A joint P and S global tomographic model with uncertainty quantification, Geophys. J. Int, 2024, Accepted, <a href=\"https://doi.org/10.1093/gji/ggae270\" target=\"_blank\" rel=\"noopener\">doi:10.1093/gji/ggae270</a>.</li>\n</ul>\n<p><strong>To cite EarthScope DS Data Products effort:</strong></p>\n<ul>\n<li>Trabant, C., A. R. Hutko, M. Bahavar, R. Karstens, T. Ahern, and R. Aster (2012), Data Products at the IRIS DMC: Stepping Stones for Research and Other Applications, Seismological Research Letters, 83(5), 846–854, <a href=\"https://doi.org/10.1785/0220120032\" target=\"_blank\" rel=\"noopener\">doi:10.1785/0220120032</a>.</li>\n</ul>\n<p><strong>DOI for this EMC webpage:</strong><br />\n10.17611/dp/emc.2024.gladm35.1</p>\n<p><span id=\"reference\" /></p>",
+  "doi": null,
+  "categories": [
+    "Contributed"
+  ],
+  "leaddev": "data-help",
+  "external_leaddevs": [],
+  "slug": "emc-glad-m35",
+  "external_url": null,
+  "spud_url": null,
+  "tags": [],
+  "created_date": "2024-08-05",
+  "modified_date": "2026-03-04",
+  "images": [
+    {
+      "title": "Map",
+      "url": "/catalog/emc/model_pages/images/EMC-GLAD-M35/GLAD-M35.png",
+      "caption": "<p>Map views of model GLAD-M35 at depths of 140 km, 600 km, 1,300 km, 1,700 km, 2,100 km, 2,500 km, and 2,800 km, showing shear wavespeed perturbations (Left column), bulk sound speed perturbations (Middle column), and compressional wavespeed perturbations (Right column).</p>"
+    }
+  ],
+  "timeline": [
+    "2024-08-05 Online",
+    "2026-03-04 Cloud migration"
+  ],
+  "contact": "es-help@earthscope.org",
+  "bbox": [
+    [
+      -180.0,
+      -90.0,
+      180.0,
+      90.0
+    ]
+  ]
+}

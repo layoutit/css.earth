@@ -23,7 +23,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     throw new Error("Object has no prepared billboard lighting atlas.");
   }
   for (const lens of lenses.controls) if (!/^#[0-9a-f]{6}$/u.test(lens.billboardColor ?? "")) throw new Error(`Object lens ${lens.id} has no prepared billboard colour.`);
-  const interiorKeys = ["outerSurface", "outerPoles", "core", "corePoles", "section"];
+  const interiorKeys = ["outerSurface", "outerPoles", "outerSurfaceUnlit", "outerPolesUnlit", "core", "corePoles", "section"];
   const entries = [...preparedSunResources(sun, "warm"),
     { key: "poles", url: canonicalPreparedAsset(assets.poles), pool: "warm" },
     { key: "shadowless", url: bank.presentations[bank.presentations.length - 1].url, pool: "warm" },
@@ -86,10 +86,12 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   const variants: PreparedVariant[] = lenses.controls.flatMap(lens => [false, true].flatMap(shadows => [false, true].map(orbit => {
     const interior = lens.view === "interior", writeTexture = (target: PreparedNode, name: string, resource: string): PreparedWrite => ({ kind: "texture", target: index(target), name, resource, quoted: true });
     return { when: { lensId: lens.id, shadows, orbit }, required: interior
-      ? [`surface:${lenses.defaultLens}`, "poles", ...interiorKeys.map(name => `interior:${name}`)] : [`surface:${lens.id}`, "poles"],
+      ? [`surface:${lenses.defaultLens}`, "poles", ...interiorKeys.filter(name => shadows ? !name.endsWith('Unlit') : !['outerSurface','outerPoles'].includes(name)).map(name => `interior:${name}`)] : [`surface:${lens.id}`, "poles"],
       writes: [
         { kind: "style", target: index(cutaway), name: "display", value: interior ? "block" : "none" },
-        ...(interior ? [writeTexture(cutawayBody, `--${ns}-surface-image`, `surface:${lenses.defaultLens}`), writeTexture(cutawayBody, `--${ns}-poles-image`, "poles")]
+        ...(interior ? [writeTexture(cutawayBody, `--${ns}-surface-image`, `surface:${lenses.defaultLens}`), writeTexture(cutawayBody, `--${ns}-poles-image`, "poles"),
+          writeTexture(cutawayBody, `--${ns}-interior-outer-image`, `interior:outerSurface${shadows?'':'Unlit'}`),
+          writeTexture(cutawayBody, `--${ns}-interior-outer-poles-image`, `interior:outerPoles${shadows?'':'Unlit'}`)]
           : [writeTexture(body, `--${ns}-surface-image`, `surface:${lens.id}`), writeTexture(cutawayBody, `--${ns}-surface-image`, `surface:${lens.id}`)]),
         { kind: "attribute", target: -1, name: "data-view", value: interior ? "interior" : null },
         { kind: "attribute", target: -1, name: "data-lens", value: interior || lens.id === lenses.defaultLens ? null : lens.id },

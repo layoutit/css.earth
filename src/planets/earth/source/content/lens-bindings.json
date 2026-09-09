@@ -65,13 +65,53 @@
       "thumbnailUrl": "/scenes/earth/earth-view-interior.webp",
       "view": "interior",
       "maximumZoom": 4,
-      "qualification": "Schematic NASA Science source-backed interior"
+      "qualification": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
+      "focus": {
+        "longitude": 145,
+        "latitude": 20,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      }
+    },
+    {
+      "id": "mantle-tomography",
+      "label": "Mantle tomography",
+      "shortLabel": "VSV",
+      "thumbnailUrl": "/scenes/earth/earth-view-tomography.webp",
+      "view": "interior",
+      "maximumZoom": 4,
+      "qualification": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
+      "focus": {
+        "longitude": 145,
+        "latitude": 20,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      },
+      "interiorSource": "mantle-tomography",
+      "interiorTextures": {
+        "/scenes/earth/earth-interior-section@2x.webp": "/scenes/earth/earth-tomography-section@2x.webp",
+        "/scenes/earth/earth-interior-mantle@2x.webp": "/scenes/earth/earth-tomography-mantle@2x.webp",
+        "/scenes/earth/earth-interior-mantle-poles@2x.webp": "/scenes/earth/earth-tomography-mantle-poles@2x.webp",
+        "/scenes/earth/earth-interior-outer-core@2x.webp": "/scenes/earth/earth-tomography-outer-core@2x.webp",
+        "/scenes/earth/earth-interior-outer-core-poles@2x.webp": "/scenes/earth/earth-tomography-outer-core-poles@2x.webp",
+        "/scenes/earth/earth-interior-inner-core@2x.webp": "/scenes/earth/earth-tomography-inner-core@2x.webp",
+        "/scenes/earth/earth-interior-inner-core-poles@2x.webp": "/scenes/earth/earth-tomography-inner-core-poles@2x.webp"
+      }
     }
   ],
   "provenance": {
     "normal": "NASA Blue Marble Next Generation December 2004 and Blue Marble clouds",
     "topography": "NASA Earth Observatory Blue Marble topography and bathymetry December 2004",
     "nightLights": "NASA Earth Observatory Black Marble 2016",
-    "interior": "NASA Science Facts About Earth, schematic presentation"
+    "interior": "NASA Science schematic layer geometry",
+    "mantleTomography": "Cui et al. (2024), GLAD-M35 r0.1 via EarthScope EMC"
   }
 }

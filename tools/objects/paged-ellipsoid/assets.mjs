@@ -5,6 +5,8 @@ import { readCoraltempAnomaly } from "./sst-anomaly.mjs";
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mjs";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.mjs";
 import { textureTintFactors } from "@layoutit/polycss";
+import { cutInteriorPoles } from "./interior-poles.mjs";
+import { readMantleTomography, tomographyLegend } from "./tomography.mjs";
 
 
 export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all' }) {
@@ -18,6 +20,10 @@ const source = path => resolve(sourceDirectory,path);
 const produced = new Set();
 const output = path => { produced.add(`${config.publicBase}${path}`); return resolve(publicDirectory,path); };
 await mkdir(publicDirectory,{recursive:true});
+if (mode === 'interior') {
+  await prepareInteriorAssets({ exterior: false });
+  return { assets: [...produced].sort() };
+}
 if (mode !== 'materials') {
   const inputs = new Map();
   const bindings = JSON.parse(await readFile(source('content/lens-bindings.json'), 'utf8'));
@@ -73,7 +79,7 @@ async function prepareMap(input, name, {
 async function writeSphereAssets({ data, width, height, channels, density,
   canonical = false, outputRoot = PUBLIC_ROOT, name, bandCount,
   polarCapBandSpan = 1, projectiveSurface = false,
-  longitudeOffsetDegrees, webp }) {
+  longitudeOffsetDegrees, webp, cutaway }) {
   const suffix = canonical ? "" : density === 2 ? "@2x" : "";
   let surfaceData = data;
   let surfaceWidth = width;
@@ -114,12 +120,13 @@ async function writeSphereAssets({ data, width, height, channels, density,
       Math.PI / bandCount * polarCapBandSpan,
     longitudeOffsetRadians: longitudeOffsetDegrees * Math.PI / 180,
   });
+  if (cutaway) cutInteriorPoles(poles, polarTileSize, cutaway);
   await sharp(poles, { raw: {
       width: polarTileSize * 4,
       height: polarTileSize,
       channels: 4,
     } })
-      .webp({ ...webp, alphaQuality: 100 })
+      .webp(cutaway ? { lossless: true } : { ...webp, alphaQuality: 100 })
       .toFile(output(`${name}-poles${suffix}.webp`));
 }
 
@@ -464,47 +471,57 @@ function applyLinearTint(channel, factor) {
   return Math.max(0, Math.min(255, Math.round(encoded * 255)));
 }
 
-async function prepareInteriorAssets() {
+async function prepareInteriorAssets({ exterior = true } = {}) {
   const interior = JSON.parse(await readFile(
     source(config.interiorPath),
     "utf8",
   ));
   validateInteriorSource(interior);
-  await prepareInteriorOuterPoles();
+  const tomography = await readMantleTomography(sourceDirectory, interior, config);
+  if (tomography) {
+    const legend = tomographyLegend(tomography.recipe);
+    await sharp(legend.data, { raw: legend }).png().toFile(output(tomography.recipe.legend.image));
+  }
+  if (exterior) await prepareInteriorOuterPoles();
+  for (const bank of [{ name: 'interior', tomography: null }, ...(tomography ? [{ name: 'tomography', tomography }] : [])]) {
+  const tomography = bank.tomography;
   for (const layer of interior.layers.slice(1)) {
+    if (tomography && layer.id !== 'mantle' && !tomography.recipe.schematicColors?.[layer.id]) continue;
     for (const density of [1, 2]) {
       const width = 1024 * density;
       const height = 512 * density;
-      const data = renderInteriorShell(width, height, hexRgb(layer.color));
+      const data = renderInteriorShell(width, height, hexRgb(tomography?.recipe.schematicColors?.[layer.id] ?? layer.color), layer.id === 'mantle' ? tomography : null);
       await writeSphereAssets({
         data,
         width,
         height,
         channels: 3,
         density,
-        name: `${config.namespace}-interior-${layer.id}`,
+        name: `${config.namespace}-${bank.name}-${layer.id}`,
         bandCount: 8,
         longitudeOffsetDegrees: 0,
-        webp: { lossless: true },
+        webp: layer.id === 'mantle' && tomography ? tomography.recipe.webp : { lossless: true },
+        cutaway: interior.presentation?.cutThroughCenter || layer.innerRadiusKm > 0 ? config.geometry.interiorCutaway : undefined,
       });
     }
   }
   for (const density of [1, 2]) {
     const faceSize = 512 * density;
-    const section = renderInteriorSection(interior, faceSize);
+    const section = renderInteriorSection(interior, faceSize, tomography);
     const suffix = density === 2 ? "@2x" : "";
     await sharp(section, {
       raw: { width: faceSize * 2, height: faceSize, channels: 4 },
-    }).webp({ lossless: true }).toFile(output(
-      `${config.namespace}-interior-section${suffix}.webp`,
+    }).webp(tomography ? { ...tomography.recipe.webp, alphaQuality: 100 } : { lossless: true }).toFile(output(
+      `${config.namespace}-${bank.name}-section${suffix}.webp`,
     ));
   }
-  const thumbnail = renderInteriorThumbnail(interior, 96);
+  const thumbnail = renderInteriorThumbnail(interior, 96, tomography);
   await sharp(thumbnail, {
     raw: { width: 96, height: 96, channels: 4 },
   }).webp({ quality: 88, alphaQuality: 100 }).toFile(
-    output(`${config.namespace}-view-interior.webp`),
+    output(`${config.namespace}-view-${bank.name}.webp`),
   );
+  }
 }
 
 async function prepareInteriorOuterPoles() {
@@ -524,51 +541,25 @@ async function prepareInteriorOuterPoles() {
       config,
       sourceDirectory,
     });
-    const data = prepareObjectLightingMap({
+    const lit = prepareObjectLightingMap({
       data: clouded,
       width,
       height,
       channels: info.channels,
     });
-    await writeSphereAssets({
+    for (const [suffix, data] of [["", clouded], ["-lit", lit]]) await writeSphereAssets({
       data,
       width,
       height,
       channels: info.channels,
       density,
-      name: `${config.namespace}-interior-outer`,
+      name: `${config.namespace}-interior-outer${suffix}`,
       projectiveSurface: true,
       bandCount: 16,
       longitudeOffsetDegrees: 0,
       webp: { quality: 88, smartSubsample: true },
+      cutaway: config.geometry.interiorCutaway,
     });
-    const tileSize = 128 * density;
-    const poles = preparePolarAtlas(data, {
-      width,
-      height,
-      channels: info.channels,
-      tileSize,
-      boundaryLatitudeRadians: Math.PI / 2 - Math.PI / 16,
-      longitudeOffsetRadians: 0,
-    });
-    for (let tile = 0; tile < 2; tile += 1) {
-      for (let y = 0; y < tileSize; y += 1) {
-        for (let x = 0; x < tileSize; x += 1) {
-          const unitX = (x + 0.5) / tileSize * 2 - 1;
-          const unitY = (y + 0.5) / tileSize * 2 - 1;
-          const longitude = Math.atan2(unitY, unitX) * 180 / Math.PI;
-          if (angularDistance(longitude, config.geometry.interiorCutaway.centerLongitudeDegrees) <= config.geometry.interiorCutaway.widthDegrees / 2) {
-            poles[(y * tileSize * 4 + tile * tileSize + x) * 4 + 3] = 0;
-          }
-        }
-      }
-    }
-    const suffix = density === 2 ? "@2x" : "";
-    await sharp(poles, {
-      raw: { width: tileSize * 4, height: tileSize, channels: 4 },
-    }).webp({ lossless: true }).toFile(output(
-      `${config.namespace}-interior-outer-poles${suffix}.webp`,
-    ));
   }
 }
 
@@ -604,10 +595,6 @@ function prepareObjectLightingMap({ data, width, height, channels }) {
   return output;
 }
 
-function angularDistance(left, right) {
-  return Math.abs(((left - right + 180) % 360 + 360) % 360 - 180);
-}
-
 function validateInteriorSource(value) {
   if (value?.schema !== config.interiorSchema ||
       !Number.isFinite(value[config.interiorRadiusKey]) || value[config.interiorRadiusKey] <= 0 ||
@@ -629,7 +616,7 @@ function validateInteriorSource(value) {
   }
 }
 
-function renderInteriorShell(width, height, color) {
+function renderInteriorShell(width, height, color, tomography) {
   const rgb = Buffer.alloc(width * height * 3);
   const light = normalizeVector([0.72, -0.38, 0.58]);
   for (let y = 0; y < height; y += 1) {
@@ -643,16 +630,17 @@ function renderInteriorShell(width, height, color) {
         Math.sin(latitude),
       ];
       const diffuse = 0.46 + 0.54 * Math.max(0, dotVector(normal, light));
+      const sampledColor = tomography?.shellColor(longitude * 180 / Math.PI, latitude * 180 / Math.PI);
       const offset = (y * width + x) * 3;
       for (let channel = 0; channel < 3; channel += 1) {
-        rgb[offset + channel] = Math.round(color[channel] * diffuse);
+        rgb[offset + channel] = sampledColor ? sampledColor[channel] : Math.round(color[channel] * diffuse);
       }
     }
   }
   return rgb;
 }
 
-function renderInteriorSection(interior, faceSize) {
+function renderInteriorSection(interior, faceSize, tomography) {
   const width = faceSize * 2;
   const rgba = Buffer.alloc(width * faceSize * 4);
   const faceGains = [0.86, 1];
@@ -667,12 +655,13 @@ function renderInteriorSection(interior, faceSize) {
           radius * interior[config.interiorRadiusKey] >= innerRadiusKm &&
           radius * interior[config.interiorRadiusKey] <= outerRadiusKm) ??
           interior.layers.at(-1);
-        const color = hexRgb(layer.color);
+        const scientific = tomography && layer.id === 'mantle';
+        const color = scientific ? tomography.sectionColor(face, radius, vertical, horizontal) : hexRgb(tomography?.recipe.schematicColors?.[layer.id] ?? layer.color);
         const radialShade = 0.74 + 0.26 * Math.sqrt(1 - radius * radius);
         const offset = (y * width + face * faceSize + x) * 4;
         for (let channel = 0; channel < 3; channel += 1) {
           rgba[offset + channel] = Math.round(
-            color[channel] * radialShade * faceGains[face],
+            color[channel] * (scientific ? 1 : radialShade * faceGains[face]),
           );
         }
         rgba[offset + 3] = 255;
@@ -682,7 +671,7 @@ function renderInteriorSection(interior, faceSize) {
   return rgba;
 }
 
-function renderInteriorThumbnail(interior, size) {
+function renderInteriorThumbnail(interior, size, tomography) {
   const rgba = Buffer.alloc(size * size * 4);
   const center = (size - 1) / 2;
   const radiusPixels = size * 0.46;
@@ -698,11 +687,13 @@ function renderInteriorThumbnail(interior, size) {
         radius * interior[config.interiorRadiusKey] >= innerRadiusKm &&
         radius * interior[config.interiorRadiusKey] <= outerRadiusKm) ??
         interior.layers.at(-1);
-      const color = inCutaway ? hexRgb(layer.color) : [42, 99, 139];
+      const scientific = inCutaway && tomography && layer.id === 'mantle';
+      const color = scientific ? tomography.sectionColor(0, radius, -dy, dx)
+        : inCutaway ? hexRgb(tomography?.recipe.schematicColors?.[layer.id] ?? layer.color) : [42, 99, 139];
       const shade = 0.64 + 0.36 * Math.sqrt(1 - radius * radius);
       const offset = (y * size + x) * 4;
       for (let channel = 0; channel < 3; channel += 1) {
-        rgba[offset + channel] = Math.round(color[channel] * shade);
+        rgba[offset + channel] = Math.round(color[channel] * (scientific ? 1 : shade));
       }
       rgba[offset + 3] = 255;
     }

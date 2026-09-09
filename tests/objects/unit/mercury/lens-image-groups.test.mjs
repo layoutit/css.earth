@@ -5,6 +5,28 @@ import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
 const pool = f => f.residency.stats().pools.find(pool => pool.id === "lenses");
 
+test("Mercury Shadows swaps both cutaway exterior textures while retaining the interior", async () => {
+  const f = await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const request = f.selection.dispatch({ kind: "lens", id: "interior" });
+    await f.settle(); await request;
+    const nodes = f.stage.querySelectorAll("*");
+    const body = nodes.find(node => node.classList.contains("mercury-cutaway-body"));
+    const read = () => ["--mercury-interior-outer-image", "--mercury-interior-outer-poles-image"]
+      .map(name => body.style.getPropertyValue(name));
+    const states = [];
+    for (const value of [false, true, false]) {
+      const change = f.selection.dispatch({ kind: "toggle", name: "shadows", value });
+      await f.settle(); await change;
+      states.push(read());
+      assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
+    }
+    assert.ok(states[0].every((url, index) => url.includes("-unlit") && url !== states[1][index]));
+    assert.deepEqual(states[0], states[2]);
+    assert.deepEqual(f.errors, []);
+  } finally { f.restore(); }
+});
+
 test("Mercury partial interior failure retires all siblings and retries independently", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {

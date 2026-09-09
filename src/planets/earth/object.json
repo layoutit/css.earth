@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9ae12b8da62bbbff824c96d42ce6de80184d04ce7358455327cf42cce0c0ad4a"
+    "sha256": "a43400680ea8c003ff6833957f13abbaffc6d470d200c54c493cf3d61885ddf8"
   },
   "id": "earth",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "aa325bee85ccc3a7c5206a210ccc76357e5ceb35d731947f540f111a7adad8ee"
+          "sha256": "0f7a222edb670316ba156b94c33470255baecde253a00afffc3e7d91e4ecf140"
         },
         {
           "id": "celestial",
@@ -36,12 +36,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "5e4859a9b3d82cefd412f0540ecda9ea8866fc7c66eac212478d7fc9dd980098"
+          "sha256": "a9cd18b8f0bebd7332da0c489b1ae35468beacc21050ccf690bd40750cd11f4f"
         },
         {
           "id": "lens-bindings",
           "path": "source/content/lens-bindings.json",
-          "sha256": "85a2dc6f4a0dd3da0925e358b97e54e93b2797276f774712182cc0b487be2f4f"
+          "sha256": "a4ab8b2f7bdb2890a22abf39d99712d5dfa49a31f59daece727827a0867238ed"
         },
         {
           "id": "charts",
@@ -62,6 +62,11 @@
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
           "sha256": "779c8e99f2b5046b9d543bb38b3c75acd9d0cb402a9758f040dd877792491309"
+        },
+        {
+          "id": "mantle-tomography",
+          "path": "source/interior/tomography.json",
+          "sha256": "b0b06aae3a042ca407a554fe0d6b0e6433bab0c3195d8bec1531171eb3175288"
         }
       ],
       "shape": {
@@ -97,6 +102,11 @@
             },
             {
               "id": "cross-section",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "mantle-tomography",
               "source": "content",
               "material": "lighting"
             }
