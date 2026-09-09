@@ -588,6 +588,13 @@ async function proveDesktop(browser, planet, profile) {
       pitch: bounds.defaultPitch,
       zoom: bounds.defaultZoom,
     });
+    // Empty sky requests the shared overview flight. Cancel that documented
+    // event here to isolate surface targeting, then assert it was requested.
+    await page.evaluate(() => {
+      window.__conformanceDeselects = 0;
+      window.__conformanceDeselectProbe = event => { window.__conformanceDeselects++; event.preventDefault(); };
+      window.addEventListener('objectdeselect', window.__conformanceDeselectProbe, { capture: true });
+    });
     const beforeEmptyDoubleClick = await profile.camera(page);
     await page.mouse.dblclick(
       flyCoordinates.empty.x,
@@ -598,8 +605,12 @@ async function proveDesktop(browser, planet, profile) {
     assert.deepEqual(
       await profile.camera(page),
       beforeEmptyDoubleClick,
-      `${planet.id}: double click outside the projected body must do nothing`,
+      `${planet.id}: empty sky must not trigger a surface flight when overview deselection is canceled`,
     );
+
+    assert.ok(await page.evaluate(() => window.__conformanceDeselects > 0),
+      `${planet.id}: empty sky must request the shared deselection`);
+    await page.evaluate(() => window.removeEventListener('objectdeselect', window.__conformanceDeselectProbe, { capture: true }));
 
     await profile.setCamera(page, {
       pitch: bounds.maximumPitch + 100,
@@ -727,7 +738,8 @@ async function surfaceFlyCoordinates(page) {
       if (scene.querySelectorAll(`.${id}-body`).length !== 1 || document.querySelectorAll('.polycss-scene').length !== 1) {
         throw new Error('Surface qualification requires one retained body and scene');
       }
-      const pick = bindPreparedSurfaceHit(hit, scene.querySelector(`.${id}-body`), scene, camera);
+      const pick = bindPreparedSurfaceHit(hit, scene.querySelector(`.${id}-body`), scene, camera,
+        () => document.querySelector('.planet-stage').dataset.lens);
       const box = camera.getBoundingClientRect(), size = Math.min(box.width, box.height);
       const candidates = [preferred];
       for (const y of [.06, -.06, .12, -.12, .2, -.2, 0]) for (const x of [.06, -.06, .12, -.12, .2, -.2, 0]) {

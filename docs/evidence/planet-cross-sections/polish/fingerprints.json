@@ -1,7 +1,7 @@
 {
-  "createdAt": "2026-09-09T15:01:07.719290+00:00",
-  "mainIntegrated": "ef2d27b2da3e774b2410f216b0e6024b972ee39a",
-  "scope": "Final polished working tree; includes ignored prepared object envelopes. No runtime source changes after these hashes.",
+  "createdAt": "2026-09-09T15:10:53.297472+00:00",
+  "mainIntegrated": "b1c488c9b0ff5e86440c9bc1bbf6f4a9abb602be",
+  "scope": "Final integrated runtime and prepared data; all object envelopes restored from checked-in parts and their pinned hashes.",
   "fingerprints": [
     {
       "path": "astro.config.mjs",
@@ -19,9 +19,19 @@
       "sha256": "d12264d67361b8975cbd0065ae4babc7ac4141b6c0c89eb1e9a9fe2f2a4981ef"
     },
     {
+      "path": "site/objects.mjs",
+      "bytes": 136131,
+      "sha256": "f44a800347711d38af7b1a39b4ce5523e56e34c3ee2a52d4d7d83502987addcf"
+    },
+    {
+      "path": "site/prepared-navigation-markers.mjs",
+      "bytes": 37837,
+      "sha256": "481c895c9d86932327975b39df3801bd19568f6d748cc273ef24123303f70db3"
+    },
+    {
       "path": "site/test/planet-browser-conformance.mjs",
-      "bytes": 84399,
-      "sha256": "5d47e6d7e092860726791c612a5b454714591733c94751d80dd0e8bf6b4c654f"
+      "bytes": 85223,
+      "sha256": "c4f7172d6ad1b4f4bfc17e1f364d080c9add0ce3bb26093f8960b70befa433da"
     },
     {
       "path": "src/planets/earth/NOTICE.md",
@@ -171,7 +181,7 @@
     {
       "path": "src/planets/mercury/object.json",
       "bytes": 4471,
-      "sha256": "63a684200745baf9111aec05c2686eee34217da4b460f1789b4b85161d9b07ba"
+      "sha256": "17b868f406d80a2ef30e0632a31785263800027b7a2162a500c4b74e6bb4eb5e"
     },
     {
       "path": "src/planets/mercury/prepared/assets.json",
@@ -196,7 +206,7 @@
     {
       "path": "src/planets/mercury/prepared/object.json",
       "bytes": 6197697,
-      "sha256": "33526278acacbda6e1be508022733cda170c664c5e8433fdf8669e7c5d993054"
+      "sha256": "e974df47927f889c1555c4176f31ff07f2874fac8ebe78044614e18584c10c95"
     },
     {
       "path": "src/planets/mercury/prepared/provenance.json",
@@ -206,7 +216,7 @@
     {
       "path": "src/planets/mercury/prepared/runtime.json",
       "bytes": 6197581,
-      "sha256": "26dff9b29b84e98977d4cdb37a1e30b3e22494509c2bd1ebd4bf710b2ff77a12"
+      "sha256": "a9f612a4b87b7106311667fda352fa0c41cf7f6e033d772d307928413b9f73b4"
     },
     {
       "path": "src/planets/mercury/prepared/scene.json",
@@ -291,17 +301,22 @@
     {
       "path": "src/planets/venus/object.json",
       "bytes": 4294,
-      "sha256": "52e7c7fbde6e6ceb1061a3a909fee4e6c129560a29d44a757688a0bfd270fbc1"
+      "sha256": "ce6900e236dfd2936e17e4f441edb2a3c5ed4f9166379fe51fb4713a8f730684"
     },
     {
       "path": "src/planets/venus/prepared/object.json",
       "bytes": 5850617,
-      "sha256": "27403d8d14e3ced51c5f5e02e43bf3a8b49c21d82b4ee891a98fa4473aa0ddee"
+      "sha256": "e16948720f9136c055a77278814cdce04b1bee56c6f7d6d13d28a8c856c853c5"
     },
     {
       "path": "src/planets/venus/runtime-assets.json",
       "bytes": 9448,
       "sha256": "0a6b59a42530efdb077e85605a90fd3d9a3843a1dfbe8c8fd6705c0e4b313b64"
+    },
+    {
+      "path": "src/platform/solar-geometry.mjs",
+      "bytes": 483631,
+      "sha256": "4fb8dc83a7924f1519f6296b93dbf8b6723987eaf446336e376bc443f0ad86da"
     },
     {
       "path": "src/preparation/raster/config.ts",
@@ -432,6 +447,11 @@
       "path": "tools/objects/provenance.mjs",
       "bytes": 11600,
       "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f"
+    },
+    {
+      "path": "tools/prepare-marker-bindings.mjs",
+      "bytes": 1143,
+      "sha256": "8f6f55d54782eac901ccf89551da634a82fea5869134c6621f783833ae3c5b7a"
     }
   ]
 }

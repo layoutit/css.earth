@@ -1,4 +1,64 @@
 {
+  "createdAt": "2026-09-09T15:06:41.090Z",
+  "mainIntegrated": "b1c488c9b0ff5e86440c9bc1bbf6f4a9abb602be",
+  "sources": [
+    {
+      "id": "mercury",
+      "inputCount": 33,
+      "generatedIntermediateCount": 0,
+      "documentCount": 4,
+      "verifiedCount": 37
+    },
+    {
+      "id": "venus",
+      "inputCount": 31,
+      "generatedIntermediateCount": 0,
+      "documentCount": 4,
+      "verifiedCount": 35
+    },
+    {
+      "id": "earth",
+      "inputCount": 57,
+      "generatedIntermediateCount": 2,
+      "documentCount": 25,
+      "verifiedCount": 84
+    },
+    {
+      "id": "mars",
+      "inputCount": 21,
+      "generatedIntermediateCount": 0,
+      "documentCount": 12,
+      "verifiedCount": 33
+    },
+    {
+      "id": "jupiter",
+      "inputCount": 39,
+      "generatedIntermediateCount": 0,
+      "documentCount": 2,
+      "verifiedCount": 41
+    },
+    {
+      "id": "saturn",
+      "inputCount": 39,
+      "generatedIntermediateCount": 1,
+      "documentCount": 3,
+      "verifiedCount": 43
+    },
+    {
+      "id": "uranus",
+      "inputCount": 29,
+      "generatedIntermediateCount": 0,
+      "documentCount": 3,
+      "verifiedCount": 32
+    },
+    {
+      "id": "neptune",
+      "inputCount": 32,
+      "generatedIntermediateCount": 0,
+      "documentCount": 3,
+      "verifiedCount": 35
+    }
+  ],
   "layouts": {
     "schema": "cssearth-prepared-leaf-layout-census@2",
     "evidence": "validated-source-data",
@@ -13,7 +73,7 @@
         "modules": [
           "src/planets/mercury/prepared/object.json"
         ],
-        "sourceSha256": "33526278acacbda6e1be508022733cda170c664c5e8433fdf8669e7c5d993054"
+        "sourceSha256": "e974df47927f889c1555c4176f31ff07f2874fac8ebe78044614e18584c10c95"
       },
       {
         "id": "venus",
@@ -23,7 +83,7 @@
         "modules": [
           "src/planets/venus/prepared/object.json"
         ],
-        "sourceSha256": "27403d8d14e3ced51c5f5e02e43bf3a8b49c21d82b4ee891a98fa4473aa0ddee"
+        "sourceSha256": "e16948720f9136c055a77278814cdce04b1bee56c6f7d6d13d28a8c856c853c5"
       },
       {
         "id": "earth",
@@ -771,7 +831,7 @@
       "site/maps-shell.css": "112291dbf8bbb3339668fb63218854df8abfdc030228a3884e1aa7a63ca99fb7",
       "site/minimap/minimap.css": "2aae01b925aaded376dc89d70498d9b69c044f54e85b367b4d825d44029fe234",
       "site/minimap/minimap.mjs": "95b0a15b3fc987dbec3c6a6989c5136156092f77a4f9aeafddedeeb662d51ddb",
-      "site/minimap/prepared.json": "b2bf003b51034b76a88dbd691a37ecd08c160358a8a0e0e4202ebf4c6c61edcb",
+      "site/minimap/prepared.json": "0a2d7aa148a1c5102724f27e1535f53f655745e6dcf531d9de584633db442e2c",
       "site/navigation-content.mjs": "e19fcdf2d3164e9f871bdd2ab38095b476b8c0b12d4ce12df1dd9abecf4fd79b",
       "site/navigation-history.mjs": "66874c3621f3a30554dcf7cb12f8842b33a98debc4f7def611f91a991c541753",
       "site/navigation-timing.mjs": "0b84fd7ee4c61f3daf1a626e4de0e06a56216adb703389f734e7a6b46568e8ee",
@@ -779,7 +839,7 @@
       "site/object-categories.mjs": "589e46a3a6a8c8195170dc3b1dfb42abb671014bbc37a94f343e396a8619117a",
       "site/object-schema.mjs": "a97c6aeb28f2e3aba59877ec54893daafa7bd014cd34e432b537fd16d46f364a",
       "site/object-sources.mjs": "b565cc0edd7a8672c78d440d65c6d9688468626679274a3241db7eb40139c0b7",
-      "site/objects.mjs": "02d9f4b639341914a4298912465e6184153038087279eeec8f0af8d96647db2b",
+      "site/objects.mjs": "f44a800347711d38af7b1a39b4ce5523e56e34c3ee2a52d4d7d83502987addcf",
       "site/overview-context.mjs": "a1df641d57fbd329a841c94adc71a6ed35a9b5eb21f3f944c123f89f4222d671",
       "site/overview-selection.mjs": "f27823491ff5371d85643170d037091229e29a56ac152d3da7c92e20c022c763",
       "site/packaged-object-runtime.mjs": "6692e9322147f48e5317e71a9a52c3d851c82f3c8319f50be09d46cec9eae979",
@@ -788,7 +848,7 @@
       "site/planet-shell-client.mjs": "0b2682ea2db3ceba8e868d11386b855d4c0fb4002bcd8f6010878b4d9f8af590",
       "site/planetary-scale.css": "33b7aae365bdec7ae56255a2d133fe21b5caf6238dfa609e91d533f7a8064c17",
       "site/planetary-scale.mjs": "ebec06a0717fc5a063f44745af2078e164c8565d5df4e9b19b0678964242a6dd",
-      "site/prepared-navigation-markers.mjs": "fa5f3d3a4e25bb1bc58ac7c3abf87fac2f4a0591e92fe88c8bd12ae050b7515f",
+      "site/prepared-navigation-markers.mjs": "481c895c9d86932327975b39df3801bd19568f6d748cc273ef24123303f70db3",
       "site/prepared-overview-titles.mjs": "477b66c64dffe2c975c29972c421d128198529d82bdaba59eb3b050573757d1e",
       "site/prepared-shell-icons.mjs": "3e5cd7772fcbe6dd78b348fc837d2093851295509b437258054ab3b3c7068068",
       "site/prepared-shell-titles.mjs": "458b5e1d893bfa5e997cb6b95a5d98692d0a7cbe0ba9eea9b8e7635678500cdb",
@@ -866,9 +926,9 @@
       "src/planets/mars/source/preparation/retired-delivery.json": "702386b207e2023e88a60464d62d3a0181b929f5f2decede44a86814a5e7ac93",
       "src/planets/mars/source/preparation/terrestrial.json": "d5bbb1f85e50f6fd5ced773093faa5d369179e553df255dd3e659febaa6c2712",
       "src/planets/mars/source/presentation/title-mark.json": "1ba809a2c4ba5abe4ceab7b2464cc174780c7db70eaa80be1166d83a399e8a6c",
-      "src/planets/mercury/object.json": "63a684200745baf9111aec05c2686eee34217da4b460f1789b4b85161d9b07ba",
-      "src/planets/mercury/prepared/object.json": "33526278acacbda6e1be508022733cda170c664c5e8433fdf8669e7c5d993054",
-      "src/planets/mercury/prepared/runtime.json": "26dff9b29b84e98977d4cdb37a1e30b3e22494509c2bd1ebd4bf710b2ff77a12",
+      "src/planets/mercury/object.json": "17b868f406d80a2ef30e0632a31785263800027b7a2162a500c4b74e6bb4eb5e",
+      "src/planets/mercury/prepared/object.json": "e974df47927f889c1555c4176f31ff07f2874fac8ebe78044614e18584c10c95",
+      "src/planets/mercury/prepared/runtime.json": "a9f612a4b87b7106311667fda352fa0c41cf7f6e033d772d307928413b9f73b4",
       "src/planets/mercury/prepared/scene.json": "30b41f84b3e8d910ed9a0a48e5db1f8e3690844d7b62fcc78dbc99820a18863a",
       "src/planets/mercury/prepared/world-navigation.json": "4b1d917c95dbdda3eaa74c18dd40b04f0bab8e504bb5c1e6dc98fe151c80ec2e",
       "src/planets/mercury/source/content/charts.json": "390a7527acc15ec81c5a89e79f637c2f6704c2ae9c12b9a24e79f494e49b12c4",
@@ -916,7 +976,7 @@
       "src/planets/saturn/source/preparation/satellite-catalog.json": "a8130fcdc23be3ab84e2d2e824d138287370ec374528ba9757a53c6de14b8ba1",
       "src/planets/saturn/source/preparation/surface.json": "174aaeebbc2c1aa6075903414eace181cf37974dd0eccf1106d62e5ae4dce0e8",
       "src/planets/saturn/source/presentation/title-mark.json": "9f9d9b32564f69f63cb364879b5ad818210809388aca6fb07e373d9e876b6ce1",
-      "src/planets/sun/prepared/world-context.json": "89d9e56a0201fc0be25aad949fcb438b9e6c92951ae40766d6f02d45285a534d",
+      "src/planets/sun/prepared/world-context.json": "d2be3e0f5733a5f2bb90e1ea1d30d014177e09c5da11c4d873a8a90a89876bf7",
       "src/planets/uranus/object.json": "1ba83d4b60c4e35c2338bb3f197076adf1da14182eb4e779ada71aaba5de913c",
       "src/planets/uranus/prepared/object.json": "f40a849c512d169c0ad21f7f9d67f8fe0f9aa4efa9a5d1b230089c26125d532a",
       "src/planets/uranus/prepared/runtime.json": "1f3883aa9f4e817f8be3e0a19c6e3683bf138353caf49a2fafd2fba399e5e3d4",
@@ -934,9 +994,9 @@
       "src/planets/uranus/source/preparation/presentation.json": "ef6c3e19766fc6deafaaa3e379c53a7f55c1eb62521b39fdff1fcf7a5207c960",
       "src/planets/uranus/source/preparation/rings.json": "0187ce35b4db1570a676b7b360a8066a22412cbc02a30c990bccf8c17a478fb1",
       "src/planets/uranus/source/presentation/title-mark.json": "5a445e3cd7da5859de675835f3c2e3a650f8805b364efe672e9074a084642aa3",
-      "src/planets/venus/object.json": "52e7c7fbde6e6ceb1061a3a909fee4e6c129560a29d44a757688a0bfd270fbc1",
-      "src/planets/venus/prepared/object.json": "27403d8d14e3ced51c5f5e02e43bf3a8b49c21d82b4ee891a98fa4473aa0ddee",
-      "src/planets/venus/prepared/runtime.json": "8030727786339715b3e347ed519f06c8ea44f4af83b5c04d59c95ae043d36e63",
+      "src/planets/venus/object.json": "ce6900e236dfd2936e17e4f441edb2a3c5ed4f9166379fe51fb4713a8f730684",
+      "src/planets/venus/prepared/object.json": "e16948720f9136c055a77278814cdce04b1bee56c6f7d6d13d28a8c856c853c5",
+      "src/planets/venus/prepared/runtime.json": "1e02e364eeab5710b37d1689b73f6da28aed6b85a3c7bef4ab8bf4450f686b00",
       "src/planets/venus/prepared/scene.json": "63ecd24c51c133bd4270ca9a43eae1e921751b311a5f080f2d14706194c1f11e",
       "src/planets/venus/prepared/world-navigation.json": "4cf4bd63ed0ae88cb3b7e5f1f19edd93c7a2e02fb9b9820df79e39f33f2089aa",
       "src/planets/venus/source/content/charts.json": "0b6e77d1c02d6d6a5406c934df69decfa81a59374a7aac1273d1d6c03a3f195a",
@@ -1081,54 +1141,46 @@
       "reason": "Static closure does not observe native cameras, writes, scheduling, or resource lifetime."
     }
   },
-  "sources": [
+  "markerCompatibility": [
     {
       "id": "mercury",
-      "inputCount": 33,
-      "generatedIntermediateCount": 0,
-      "documentCount": 4
+      "bodyAndDatasetRuntimeUnchanged": true,
+      "onlyChange": "Shared navigation atlas index/count rebinding, if needed."
     },
     {
       "id": "venus",
-      "inputCount": 31,
-      "generatedIntermediateCount": 0,
-      "documentCount": 4
+      "bodyAndDatasetRuntimeUnchanged": true,
+      "onlyChange": "Shared navigation atlas index/count rebinding, if needed."
     },
     {
       "id": "earth",
-      "inputCount": 57,
-      "generatedIntermediateCount": 2,
-      "documentCount": 25
+      "bodyAndDatasetRuntimeUnchanged": true,
+      "onlyChange": "Shared navigation atlas index/count rebinding, if needed."
     },
     {
       "id": "mars",
-      "inputCount": 21,
-      "generatedIntermediateCount": 0,
-      "documentCount": 12
+      "bodyAndDatasetRuntimeUnchanged": true,
+      "onlyChange": "Shared navigation atlas index/count rebinding, if needed."
     },
     {
       "id": "jupiter",
-      "inputCount": 39,
-      "generatedIntermediateCount": 0,
-      "documentCount": 2
+      "bodyAndDatasetRuntimeUnchanged": true,
+      "onlyChange": "Shared navigation atlas index/count rebinding, if needed."
     },
     {
       "id": "saturn",
-      "inputCount": 39,
-      "generatedIntermediateCount": 1,
-      "documentCount": 3
+      "bodyAndDatasetRuntimeUnchanged": true,
+      "onlyChange": "Shared navigation atlas index/count rebinding, if needed."
     },
     {
       "id": "uranus",
-      "inputCount": 29,
-      "generatedIntermediateCount": 0,
-      "documentCount": 3
+      "bodyAndDatasetRuntimeUnchanged": true,
+      "onlyChange": "Shared navigation atlas index/count rebinding, if needed."
     },
     {
       "id": "neptune",
-      "inputCount": 32,
-      "generatedIntermediateCount": 0,
-      "documentCount": 3
+      "bodyAndDatasetRuntimeUnchanged": true,
+      "onlyChange": "Shared navigation atlas index/count rebinding, if needed."
     }
   ]
 }

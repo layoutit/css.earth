@@ -52,22 +52,21 @@ and [final immutable delivery receipt](evidence/planet-cross-sections/polish/del
 
 ## Final validation
 
-The branch integrates `main` at `ef2d27b2d`, including the updated dataset cards.
+The final branch integrates `main` at `b1c488c9b`, including Borrelly and the updated dataset cards. Conflicts were limited to Mercury’s prepared runtime and descriptor; the repaired runtime was retained and its shared navigation markers rebound to the new atlas.
 
 - **60 dataset interactions across all eight planets at DPR 1 and 2**, plus eight
-  initial-shell checks, passed. Earth was rerun after the final polish; 34 current
-  fingerprints verify the other seven bodies' prepared objects and asset records
-  are unchanged. Every dataset was selected and dragged; all four cutaway datasets
+  initial-shell checks, passed. Earth and Mercury were rerun after the final integration. The other six
+  bodies retain earlier checks; a full runtime comparison proves that integration
+  changes only shared navigation marker indices/counts, with body and dataset
+  rendering unchanged. Every dataset was selected and dragged; all four cutaway datasets
   passed Shadows checks. [Browser matrix](evidence/planet-cross-sections/polish/planet-matrix.json).
 - **46 refreshed focused tests passed**, including scientific anchors, retained
   dataset switching, source lineage, camera and decoded inner-core polar openings.
-  The earlier unchanged Mercury lighting test also passed. Both prior typechecks
-  remain valid with no TypeScript changes; the final production build generated
-  all 301 pages.
+  The earlier Mercury lighting test also passed. Both typechecks were refreshed,
+  and the integrated production build generated all 302 pages.
 - All eight planets passed fresh source closure, prepared leaf-layout census and
-  runtime-ownership checks. Earth production asset assembly was refreshed; other
-  seven assemblies retain their previous passing result with unchanged prepared
-  data. [Contracts](evidence/planet-cross-sections/polish/contracts.json).
+  runtime-ownership checks. Production asset assembly was refreshed for all eight
+  planets. [Contracts](evidence/planet-cross-sections/polish/contracts.json).
 - Fresh production browser checks dragged both Earth datasets and switched back
   to structure, confirming retained geometry and restored textures. The clip uses
   native mouse input. Unchanged Mercury and Saturn cutaways retain earlier
