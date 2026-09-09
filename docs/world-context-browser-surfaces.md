@@ -1721,3 +1721,75 @@ tests, with four additional scientific-raster checks passing. Generated world
 context and minimap data did not change. The earlier nine aggregate renderer
 fixture failures remain explicitly unqualified. Details:
 `output/validation/main67-integration/report.json`.
+
+## Semantic changes share the world worker (2026-09-09)
+
+Main through `ef2d27b2d` (#69) is integrated at `1166102cf`. A new profile found
+that overview, hover, selection and visibility changes still called the local
+world planner, bypassing the worker used during camera motion. The two overview
+callbacks included synchronous orbit projection, extent traversal and publication.
+
+`d00980e07` routes these invalidations through the existing bounded frame queue.
+The queue retains the initial owner's captured camera for idle updates. A semantic
+change preserves newer pending input; an obsolete worker snapshot is replanned
+before its camera, drawing and picking commit together. Disposed owners cannot be
+revived. The shell still publishes the complete selected card immediately, and
+the existing flight fades remain immediate. Initial/standalone mounting retains
+its synchronous path. There are no CSS, geometry, asset or sidebar markup changes.
+
+The synchronized route is unchanged: Sun → Milky Way → reversible native drag →
+Sun, Chrome Canary 155.0.8048.0, 1995×1236 CSS pixels, DPR 2, motion off. A control
+at the same source head disables only the semantic-publication hook in the loaded
+application module, restoring inline planning for these changes.
+
+| Overview callback | Inline control | Shared worker |
+| --- | ---: | ---: |
+| Sun → overview, elapsed | 10.518 ms | 3.711 ms |
+| Sun → overview, thread CPU | 10.504 ms | 3.703 ms |
+| Overview → Sun, elapsed | 8.762 ms | 3.085 ms |
+| Overview → Sun, thread CPU | 8.758 ms | 3.079 ms |
+
+This is a reduction in callback work, **not completion of the smoothness target**.
+The worker capture still has a 31.505 ms main frame on opening the catalogue
+(10.758 ms style and 12.688 ms layout), and a 22.259 ms frame on return
+(16.202 ms style). Three rAF intervals exceed 25 ms: first input and two during
+the distant return. The 5–5,000 AU band has 0/781 intervals above 25 ms,
+main-frame p95 11.955 ms, maximum 16.362 ms, and 76.44% main-thread occupancy.
+The inline control has 0/765 band intervals above 25 ms, p95 11.701 ms, maximum
+17.228 ms, 74.90% occupancy, and ten whole-route intervals above 25 ms.
+Host load differed substantially (worker: 8.0→14.6; control: 17.3→20.2), so the
+whole-route difference is not attributed to this change. Neither metric nor
+screencast observations prove physical display FPS.
+
+Both recordings verify 58 source/transport identities against `d00980e07`.
+World/input/document identity and one camera are retained, all sampled presented
+cameras agree with the committed runtime camera, and both final queues are empty.
+There are no page errors, HMR during recording, or trace loss.
+
+| Capture directory under `output/world-context-zoom/` | Recorder | Video observations | Clock drift | Max PTS error |
+| --- | --- | ---: | ---: | ---: |
+| `semantic-world-worker-dpr2` | `4d5c244c-5938-4387-88aa-6d1f2ff3b44e` | 2927/2927 | +110 µs | 1.430 ms |
+| `semantic-world-inline-control-dpr2` | `5e693a65-2bb0-4bdf-b415-b8ac61c25964` | 2771/2771 | +3 µs | 1.380 ms |
+
+Each directory contains recorder JSON, Chrome trace gzip, contemporaneous video,
+synchronization, loaded-resource receipts and scheduling/switch analyses. The
+control also retains its exact original and patched module bytes.
+
+Renderer build/typecheck, 79 focused queue/planning/projection tests and 12 shell
+lifetime tests pass. Native Saturn orbit hover preserves Mars keyboard focus,
+16→20 px circle growth and pointer cursor. Clicking shows Saturn's title and
+introduction immediately while Sun remains the active detail; landing retains
+one camera. A separate 60 ms delayed-worker check covers an 80-input burst,
+resize and Saturn handoff: pending input stays bounded, old owner completions
+are rejected and the final queue empties. These checks are in
+`output/playwright/semantic-worker/`. Earlier aggregate fixture/source-closure
+failures remain unqualified.
+
+Sidebar retention experiments are excluded. The first trial's CSS was overridden
+by the global `[hidden]` rule, so it did not test layout retention despite passing
+visible-image comparisons. Corrected trials exposed extra scrollable space or
+retained layout work; the final variant preserved scroll geometry but added
+8.884 ms layout on return. Native row skipping reduced opening layout but left
+the large style pass. Their captures and proofs remain under
+`output/playwright/main69-frame-cost/` and the corresponding `catalogue-skipping`
+and `retained-sidebar-panels` capture directories. No such CSS is in product code.
