@@ -357,6 +357,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       orbitNavigable: false,
       orbitHidden: false, labelHidden: false,
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
+      publishedEmphasis: undefined as string | null | undefined,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, previousCount: 0,
       fade: { element: label, target: 0, hideTimer: null } as LabelFadeState };
   });
@@ -589,7 +590,12 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const [x, y] = project(eye);
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isSelected = body.id === selectedId;
-        entry.group.dataset.contextSelected = emphasizedId === null ? "overview" : String(body.id === emphasizedId);
+        // Selection styling belongs to selection changes, not camera samples.
+        // Retired entries adopt the current emphasis when they re-enter.
+        if (entry.publishedEmphasis !== emphasizedId) {
+          entry.group.dataset.contextSelected = emphasizedId === null ? "overview" : String(body.id === emphasizedId);
+          entry.publishedEmphasis = emphasizedId;
+        }
         const isAnchor = body.id === plan.focus.id;
         const inFrame = depth > body.radiusM && Math.abs(x) < width / 2 && Math.abs(y) < height / 2;
         const visible = inFrame && !hidden(eye, body.id) && !parentHidden(eye);
