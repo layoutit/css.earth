@@ -76,4 +76,5 @@
   --context-line-opacity: .75;
   --context-label-opacity: 1;
 }
-[data-context-body] { transition: opacity 120ms ease; }
+/* Camera samples also own body-marker alpha. Selection and hover brightness
+   update immediately; a transition here would keep restarting while zooming. */
