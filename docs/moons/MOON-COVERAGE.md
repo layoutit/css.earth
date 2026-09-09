@@ -628,7 +628,7 @@ The [Wikipedia template](https://en.wikipedia.org/wiki/Template:Solar_System_moo
 | --- | --- | --- |
 | Measure actual observation coverage | Prepared validity masks and reproducible area metrics, with source provenance and observed/modelled regions separated | Not started / — |
 | Preserve geometry confidence | Per-body measured, fitted and assumed axes/poles; source uncertainty separate from display simplification error | Reviewed in linked body evidence; implementation audit pending / — |
-| Add scientific layers from released products | Exact product ID, units, frame, coverage, interpretation and preparation closure; independent source-to-display comparison | 13-body B2 prepared; bounded visual review recorded, final qualification incomplete / [checkpoint](b2-preparation/qualification-checkpoint.md) |
+| Add scientific layers from released products | Exact product ID, units, frame, coverage, interpretation and preparation closure; independent source-to-display comparison | 13-body B2 prepared and freshly restored; 551 runtime images published and installed, final gate status tracked / [delivery](b2-preparation/final/DELIVERY.md) |
 | Revisit unreleased model leads | An actual downloadable release, license/attribution, axes/frame/pole and reproducibility evidence | Specific gaps recorded per body / — |
 | Record release qualification | Exact tested head; source/runtime closure, tests/build and Chrome DPR 1/2; aggregate failures retained | Not reassessed here / — |
 

@@ -118,7 +118,7 @@
       "owner": "Moons",
       "branch": "feat/moons-scientific-surfaces",
       "baseCommit": "55bda12f012e77e2206d41661a886c84fb01362d",
-      "integrationCommit": "7030be3b850734d73688cff595f12983234f42b2",
+      "integrationCommit": "93dcb4fe32d956549fbed9c62e1e3e836cc18393",
       "progress": {
         "sourceReadyBodies": 13,
         "sourceBlockedBodies": [],
@@ -161,7 +161,12 @@
         "carriedForwardBodies": [
           "Titania",
           "Miranda"
-        ]
+        ],
+        "sourceRestoredBodies": 13,
+        "publishedRuntimeImages": 551,
+        "freshInstalledRuntimeImages": 551,
+        "freshRuntimeReuse": 0,
+        "finalReport": "b2-preparation/final/DELIVERY.md"
       },
       "scopeDecision": {
         "originalCohort": 15,
