@@ -42,11 +42,21 @@ shards per material. Camera and material projection transforms are prepared
 keyframes transported through paused Web Animations; runtime changes only
 animation time, image addresses, and the camera scale.
 
-The cross-section remains a source-backed schematic, not a claim about a
-physically tilted interior. At near-pole-on camera angles, one prepared
-presentation-only orbit reveals the section faces without changing Earth's
-23.4 degree axial-tilt fact. The cutaway is decoded and mounted only after the
-user selects it, then retained for the remainder of the mount.
+The original Cross section dataset retains the schematic NASA Science layers.
+Mantle tomography is a separate dataset that combines modeled mantle velocities
+with the same schematic crust and core. Selecting either uses a
+prepared north-up camera at 145° E, 20° N, looking obliquely into the cut, then follows the shared camera's
+normal orbit controls. The cutaway and exterior use the same physical frame;
+Earth's 23.4 degree axial tilt is unchanged. The mantle and outer-core pole
+atlases use the same removed wedge as their shells. Shadows selects prepared
+lit or unlit exterior banks. Scientific mantle colors are unshaded so they share
+the legend's transfer; the crust and core retain illustrative shape shading.
+The wedge now passes through the inner core too, with matching transparent polar
+regions. The inner core is no longer an uncut sphere protruding through the
+section. In tomography, authored muted core colors distinguish schematic layers
+from the measured quantity; the original structure dataset retains its palette.
+Both datasets use the same geometry, camera limits and zoom. The revised cut
+removes 30 hidden inner-core faces (516 interior leaves, down from 546).
 
 ## Atmosphere charts
 
@@ -68,7 +78,80 @@ The starfield is a presentation layer prepared from HYG Database v4.1 at commit 
 
 `data/planets/earth.json` is prepared from NASA Science record 48583, `Facts About Earth`. NASA's block-feed endpoint currently fails server-side for this record. Earth acquisition therefore validates the canonical WordPress record and parses the same selected headings from its checked `content.rendered` field. The shared editorial tool and contract are unchanged.
 
-`source/interior/earth-interior.json` is an adapter-owned presentation specification based on the layer radii and descriptions in the checked NASA Science editorial snapshot. It is explicitly schematic; it is not a seismic tomography product.
+`source/interior/earth-interior.json` supplies schematic layer geometry based on
+NASA Science. The separate Mantle tomography dataset samples **GLAD-M35 r0.1 (2024)**, a seismic inverse
+model by Cui et al., distributed through EarthScope EMC. The model is not a
+photograph, a temperature measurement, or evidence for detailed core imagery.
+
+### Mantle tomography source and interpretation
+
+- Selected: [GLAD-M35](https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35),
+  [paper](https://doi.org/10.1093/gji/ggae270). The published NetCDF has 289 depths
+  (10–2,890 km in 10 km steps), 181 latitudes and 361 longitudes (1° steps).
+  We use `vsv`, vertically polarized shear-wave velocity in km/s. The r0.1
+  release flattens the 410/660 km boundary topography described by the authors.
+- Considered: [SEMUCB-WM1](https://ds.iris.edu/ds/products/emc-semucb-wm1/),
+  another downloadable whole-mantle shear-velocity model. It remains a useful
+  independent comparison; this view uses one identified model, without blending
+  incompatible inversions. No claim is made that GLAD-M35 is the newest model.
+- Giant-planet gravity and seismology constrain radial structure and diffuse
+  cores, but were not selected as spatially resolved interior appearance maps.
+
+The checked-in 520,307-byte numeric subset contains depth means, both cut planes,
+and the outer mantle shell slice. `interior/tomography.json` records the original
+343,763,392-byte NetCDF's URL and SHA-256. Catalog and metadata snapshots retain
+the provider's revision, variable definitions and citations. Normal preparation
+uses this pinned subset, and does not need Python or the complete volume.
+
+The color quantity is `100 * (Vsv / horizontalMeanVsv(depth) - 1)`. The mean
+weights the exact spherical areas of latitude cells; longitude integration
+counts the coincident −180/+180 endpoint once. The published endpoint values
+differ by up to 0.080645084 km/s (20 km depth, 55°N). The extractor averages
+that pair before periodic sampling. This display reference is **not STW105**,
+which is the reference used by the underlying inversion. Upper-mantle radial
+anisotropy means `Vsv` must not be relabeled as isotropic shear speed.
+
+The existing cut geometry samples 67.5°E and 180° meridians. The source raster's
+antimeridian origin is 180° from the mesh's longitude origin, as with Blue
+Marble. Source latitude increases northward; texture rows increase southward.
+We linearly interpolate velocity and the depth reference independently, then
+compute the percentage. No noise or additional spatial detail is synthesized.
+The 1°/10 km sample spacing does not imply that features of that size are resolved.
+
+Depth uses normalized ellipsoid radius times a 6,371 km reference radius. This
+is the display's spherical depth convention, not a local Moho reconstruction.
+The mantle shell is sampled at 29.967 km; the radial faces sample depth through
+the volume. Geometry remains schematic (including its uniform 30 km crust).
+Only mantle material receives the data colors. Source depths outside 10–2,890 km
+are gray, with no extrapolation into the core. The fixed diverging palette
+saturates at ±3%; neutral is the mean at that depth. The same palette prepares
+the legend and thumbnail. Crust, outer core and inner core remain schematic.
+
+Section and mantle surface textures use WebP q90; polar alpha textures remain
+lossless. Preparation compared q70/80/90/95 and lossless. On interior mantle
+pixels away from layer boundaries, q90's mean maximum RGB-channel difference
+was 1.91/255 (99th percentile 7/255); the canonical cut-plane atlas decreased
+from 600,026 to 111,944 bytes in the initial encoding trial. The current atlas
+changes only its schematic core palette; its exact delivered size is recorded
+in `runtime-assets.json`. This is display compression, not numeric source
+quantization. The original numeric values remain pinned.
+
+To reproduce the source subset, install `numpy==2.3.5` and `h5py==3.14.0` in an
+isolated Python environment, download the URL pinned in `tomography.json`, then:
+
+```sh
+python tools/objects/paged-ellipsoid/extract-tomography.py \
+  /path/to/GLAD-M35.r0.1-n4c.nc \
+  src/planets/earth/source/interior/tomography.json \
+  src/planets/earth/source/interior/glad-m35-vsv-subset.f32.gz
+node tools/objects/dist/prepare-authored.js earth --write
+```
+
+The extractor verifies the upstream SHA-256 and source axes before reading the
+volume. The checked subset allows deterministic offline JS texture preparation.
+The numeric tests compare six independently decoded NetCDF anchors, including
+both hemispheres and both meridians, and verify registration against the
+prepared geographic frame.
 
 ## Typography
 

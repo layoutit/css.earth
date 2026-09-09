@@ -1,0 +1,123 @@
+{
+  "base": "e018ba39227631ab86e752b8aa81e06dfab00823",
+  "planetTests": [
+    {
+      "file": "tests/objects/unit/earth/city-pages.test.mjs",
+      "test": "tests/objects/unit/earth/city-pages.test.mjs"
+    },
+    {
+      "file": "tests/objects/unit/earth/geographic-operations.test.mjs",
+      "test": "city publisher consumes only the exact producer inventory and preserves immutable hash checks"
+    },
+    {
+      "file": "tests/objects/unit/earth/global-release.test.mjs",
+      "test": "actual global pack ranges reproduce preparation through city, dateline and polar paths"
+    },
+    {
+      "file": "tests/objects/unit/earth/places.test.mjs",
+      "test": "tests/objects/unit/earth/places.test.mjs"
+    },
+    {
+      "file": "tests/objects/unit/earth/published-coverage.test.mjs",
+      "test": "tests/objects/unit/earth/published-coverage.test.mjs"
+    },
+    {
+      "file": "tests/objects/unit/jupiter/presentation-preparation.test.mjs",
+      "test": "authored normalized-disc composition reproduces the complete accepted runtime"
+    },
+    {
+      "file": "tests/objects/unit/mars/mars-page.test.mjs",
+      "test": "supplies complete Mars content to the shared shell"
+    },
+    {
+      "file": "tests/objects/unit/mars/panel-content.test.mjs",
+      "test": "publishes one source-bound Mars panel model"
+    },
+    {
+      "file": "tests/objects/unit/mercury/lens-image-groups.test.mjs",
+      "test": "Mercury retains one prepared interior and its shared pose animation across lens changes"
+    },
+    {
+      "file": "tests/objects/unit/mercury/runtime-contract.test.mjs",
+      "test": "Mercury uses one shared exclusive lens and the prepared playback owner for cutaway pose"
+    },
+    {
+      "file": "tests/objects/unit/neptune/presentation-preparation.test.mjs",
+      "test": "source-configured retained presentation equals the complete accepted runtime"
+    },
+    {
+      "file": "tests/objects/unit/saturn/ellipsoid-projection.test.mjs",
+      "test": "the cutaway's lower-density frame bank is expanded during preparation without a private runtime mapper"
+    },
+    {
+      "file": "tests/objects/unit/saturn/interior-view.test.mjs",
+      "test": "publishes a prepared retained Saturn interior view"
+    },
+    {
+      "file": "tests/objects/unit/saturn/panel-content.test.mjs",
+      "test": "publishes one source-bound Saturn panel model"
+    },
+    {
+      "file": "tests/objects/unit/saturn/preparation.test.mjs",
+      "test": "prepares Saturn from a complete checked source closure"
+    },
+    {
+      "file": "tests/objects/unit/saturn/preparation.test.mjs",
+      "test": "executes every pinned Saturn acquisition verifier"
+    },
+    {
+      "file": "tests/objects/unit/saturn/prepared-lighting.test.mjs",
+      "test": "ships every active material bank with exact pinned bytes and prepared addresses"
+    },
+    {
+      "file": "tests/objects/unit/saturn/prepared-lighting.test.mjs",
+      "test": "warms active material and shared sky assets before declaring ready"
+    },
+    {
+      "file": "tests/objects/unit/saturn/runtime-coordination.test.mjs",
+      "test": "Saturn commits one coherent latest exclusive lens with ring and shadow settings"
+    },
+    {
+      "file": "tests/objects/unit/saturn/runtime-coordination.test.mjs",
+      "test": "Saturn repeated cross-section selection stays selected while replacing a pending request"
+    },
+    {
+      "file": "tests/objects/unit/saturn/saturn-page.test.mjs",
+      "test": "publishes the prepared Saturn shell content"
+    },
+    {
+      "file": "tests/objects/unit/uranus/presentation-preparation.test.mjs",
+      "test": "source-configured retained presentation equals the complete accepted runtime"
+    }
+  ],
+  "platformFailures": [
+    {
+      "file": "src/platform/object-runtime.test.mjs",
+      "test": "Earth's actual prepared page layers join shared publication, playback and cleanup"
+    },
+    {
+      "file": "src/platform/object-runtime.test.mjs",
+      "test": "partial prepared page construction retires the actual tree and all resources"
+    },
+    {
+      "file": "src/platform/object-runtime.test.mjs",
+      "test": "prepared geographic destinations and lens targets use the physical surface flight while reset keeps authored framing"
+    },
+    {
+      "file": "tools/prepare-factsheets.test.mjs",
+      "test": "every registered factsheet reproduces its pinned authored facts and evidence"
+    },
+    {
+      "file": "tools/prepare-solar-geometry.test.mjs",
+      "test": "epoch refresh restores a compiled surface before updating its physical frame"
+    },
+    {
+      "file": "tools/prepared-presentation-bindings.test.mjs",
+      "test": "repreparation starts from canonical topology and reproduces the final depth transport"
+    }
+  ],
+  "platformHeapLimits": [
+    "tools/check-object-runtime-ownership.test.mjs",
+    "tools/check-prepared-leaf-layouts.test.mjs"
+  ]
+}

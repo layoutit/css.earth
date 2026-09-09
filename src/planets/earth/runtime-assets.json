@@ -233,8 +233,8 @@
     },
     {
       "filename": "earth-interior-inner-core-poles@2x.webp",
-      "bytes": 23702,
-      "sha256": "500d5f8def40ef6ef2d6f9f2bdb82021a215008735de3fd70fa4b0844df0c616"
+      "bytes": 20260,
+      "sha256": "798ca53f64696c3f65dfdf17057bd9fcdf6ca2501d1c993596f6fec10ecae793"
     },
     {
       "filename": "earth-interior-inner-core@2x.webp",
@@ -243,8 +243,8 @@
     },
     {
       "filename": "earth-interior-mantle-poles@2x.webp",
-      "bytes": 17918,
-      "sha256": "1432f843ffe1a8d242e24b84189366f4abf275e4ee6360cb6ff7f163e61bdbc5"
+      "bytes": 15634,
+      "sha256": "9263d70f1b5f2049b384ce4dc1930d59338e25bed814255b96d672c96eadb232"
     },
     {
       "filename": "earth-interior-mantle@2x.webp",
@@ -253,8 +253,8 @@
     },
     {
       "filename": "earth-interior-outer-core-poles@2x.webp",
-      "bytes": 20356,
-      "sha256": "6f9134b9bdd20b81353dbb3e82ab2b9aebff250ca58979199ce5abf45f7d61aa"
+      "bytes": 17562,
+      "sha256": "ae4297773c515c0a3c6531b0121480f88bb0798fc5e9f7ebb6bf044f649f91e4"
     },
     {
       "filename": "earth-interior-outer-core@2x.webp",
@@ -262,44 +262,84 @@
       "sha256": "59abf483313abb0d00cb05d2e66897f9b7418e3d20df301a387bd411d78f1dc9"
     },
     {
-      "filename": "earth-interior-outer-page-1@2x.webp",
+      "filename": "earth-interior-outer-lit-page-1@2x.webp",
       "bytes": 174476,
       "sha256": "aa7475954004b33f8ae658927083ae5160931413c37eb677eea3bc573d3bdc3d"
     },
     {
-      "filename": "earth-interior-outer-page-2@2x.webp",
+      "filename": "earth-interior-outer-lit-page-2@2x.webp",
       "bytes": 417014,
       "sha256": "608b68a54fa6643965c271a3df5b9c0b0e806b0ed89310174a2b349db6e99a2b"
     },
     {
-      "filename": "earth-interior-outer-page-3@2x.webp",
+      "filename": "earth-interior-outer-lit-page-3@2x.webp",
       "bytes": 447968,
       "sha256": "87fa00d276b1db709d28976e6f0ed39c2a321f45a796b94fb3abd12c0bfbbd1e"
     },
     {
-      "filename": "earth-interior-outer-page-4@2x.webp",
+      "filename": "earth-interior-outer-lit-page-4@2x.webp",
       "bytes": 310196,
       "sha256": "4e4c6abfb7c058243f0f51caa369eee97df6cc15c327527638fcf9d85ef58393"
     },
     {
-      "filename": "earth-interior-outer-page-5@2x.webp",
+      "filename": "earth-interior-outer-lit-page-5@2x.webp",
       "bytes": 137490,
       "sha256": "2662342d6d126e686bb10de66a1ded2539eed14c357207ec467ea5b20961df86"
     },
     {
-      "filename": "earth-interior-outer-page-6@2x.webp",
+      "filename": "earth-interior-outer-lit-page-6@2x.webp",
       "bytes": 22678,
       "sha256": "61e0174bceeff57e8a1b942dba5a022da86af0550d4136bd5902ca7e928663b5"
     },
     {
-      "filename": "earth-interior-outer-poles@2x.webp",
+      "filename": "earth-interior-outer-lit-poles@2x.webp",
       "bytes": 117038,
       "sha256": "84e782f5f81cfef6f3e98bc47fc27963d5d60db8f6580175e7b259115783927e"
     },
     {
-      "filename": "earth-interior-outer@2x.webp",
+      "filename": "earth-interior-outer-lit@2x.webp",
       "bytes": 82046,
       "sha256": "9f8545f8be6556142fa8c55d90296efb6b2b1d0e6697749de396c16ebbcbff4e"
+    },
+    {
+      "filename": "earth-interior-outer-page-1@2x.webp",
+      "bytes": 298550,
+      "sha256": "5d72b32ded9bab19b9e7ce50895dad66905049d4188c6986c625446171280a49"
+    },
+    {
+      "filename": "earth-interior-outer-page-2@2x.webp",
+      "bytes": 653024,
+      "sha256": "2fe3d1c0e9c8ac9fa4981b459850a2729c4f80dc04ad5c7faf7c0736c81a730f"
+    },
+    {
+      "filename": "earth-interior-outer-page-3@2x.webp",
+      "bytes": 685210,
+      "sha256": "66b0d66376641edd49f34c3928e6613ec5e03de295432dc1a8459eb5f692560c"
+    },
+    {
+      "filename": "earth-interior-outer-page-4@2x.webp",
+      "bytes": 492840,
+      "sha256": "014718f481eca632722afdac3b128676f1e9553c5e77c25725d77a7c19cebcc5"
+    },
+    {
+      "filename": "earth-interior-outer-page-5@2x.webp",
+      "bytes": 216534,
+      "sha256": "eaeea5a512bb7f3366f5e95c7850689e1b1e1f4720902f7d8498c90a525ad58f"
+    },
+    {
+      "filename": "earth-interior-outer-page-6@2x.webp",
+      "bytes": 33860,
+      "sha256": "12eabd218c58c6bd270f792add1a1274551f08be1c20c0e44ccaf513422554f4"
+    },
+    {
+      "filename": "earth-interior-outer-poles@2x.webp",
+      "bytes": 147088,
+      "sha256": "9c08ee340e835dfd554d665c437ebd6be148d43386214dc561900da81a94c4e2"
+    },
+    {
+      "filename": "earth-interior-outer@2x.webp",
+      "bytes": 140768,
+      "sha256": "ada878a32a6f457fddaf107ddd39843364ab8cfbe46a8f8ef4c83e3a4a57e797"
     },
     {
       "filename": "earth-interior-section@2x.webp",
@@ -712,6 +752,46 @@
       "sha256": "24b5c28e0c8ae1a9c82787d345ad27d391e2a3b0289263388fdaf583b73b829d"
     },
     {
+      "filename": "earth-tomography-inner-core-poles@2x.webp",
+      "bytes": 21366,
+      "sha256": "fa091a821de0d19607604b93266353511e4a32eb089e7e445a14eb442a0cdc1c"
+    },
+    {
+      "filename": "earth-tomography-inner-core@2x.webp",
+      "bytes": 115800,
+      "sha256": "e585328ba89004929bda4e9ff1d5932679c37e95cdb91968f355b55d46aed0d6"
+    },
+    {
+      "filename": "earth-tomography-legend.png",
+      "bytes": 2083,
+      "sha256": "c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286"
+    },
+    {
+      "filename": "earth-tomography-mantle-poles@2x.webp",
+      "bytes": 65172,
+      "sha256": "2d8a1988e6ca41cfea2c2c218b0edb94ff779e1ac80bea09e16158347bc85bab"
+    },
+    {
+      "filename": "earth-tomography-mantle@2x.webp",
+      "bytes": 117986,
+      "sha256": "39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b"
+    },
+    {
+      "filename": "earth-tomography-outer-core-poles@2x.webp",
+      "bytes": 17316,
+      "sha256": "6163fc9c55f0bca18e5a07c1ec3e88c621a1b6dc844dda9f1bddc663252539ca"
+    },
+    {
+      "filename": "earth-tomography-outer-core@2x.webp",
+      "bytes": 86368,
+      "sha256": "59671a6f82f756b1c8e74ef44429e5daccd1c33b0c59b856b05a95f72b2c8e99"
+    },
+    {
+      "filename": "earth-tomography-section@2x.webp",
+      "bytes": 110362,
+      "sha256": "db5505965d3bfdb697a79cf4aaaed0983708f0211fd9267291a34ac5deab8735"
+    },
+    {
       "filename": "earth-topography-legend.png",
       "bytes": 2066,
       "sha256": "cd30437db4818a37363dc9ac616ce395f3aec411d13c02960c4e03e46585496c"
@@ -760,6 +840,11 @@
       "filename": "earth-view-interior.webp",
       "bytes": 1302,
       "sha256": "4e8ee2c852e0799d4dd36fdfdf0c29eaa52e89e7c5033a5777d5147ba39db8a4"
+    },
+    {
+      "filename": "earth-view-tomography.webp",
+      "bytes": 1696,
+      "sha256": "a145ea87904d5e87c4c5f147143d8ef6fa4928cc6630acf7a97024c84e55ef1c"
     }
   ]
 }

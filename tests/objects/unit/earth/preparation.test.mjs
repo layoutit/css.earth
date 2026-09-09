@@ -50,7 +50,7 @@ test("prepares the shared photographed cubic sky and independent Sun", () => {
 
 test("prepares flat opaque texel thumbnails for Earth surface lenses", async () => {
   for (const lens of PREPARED_EARTH_LENSES.controls.filter(
-    ({ id }) => id !== "cross-section",
+    ({ view }) => view !== "interior",
   )) {
     const { data, info } = await sharp(resolve(
       publicRoot,
@@ -188,7 +188,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
     /moon|orbitGuide/u.test(key)), false);
   assert.equal(PREPARED_EARTH_SCENE.counts.retainedLeafCount,
     453);
-  assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 546);
+  assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 516);
   assert.equal(PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount,
     PREPARED_EARTH_SCENE.counts.retainedLeafCount + PREPARED_EARTH_SCENE.counts.interiorLeafCount);
   assert.equal(PREPARED_EARTH_SCENE.counts.runtimeGeometryPreparation, false);
@@ -319,18 +319,6 @@ test("publishes the prepared Earth title and retained scene", async () => {
     interiorSource.layers);
   assert.equal(PREPARED_EARTH_SCENE.interior.runtimeGeometry, false);
   assert.equal(PREPARED_EARTH_SCENE.interior.runtimeRasterization, false);
-  assert.equal(PREPARED_EARTH_SCENE.interior.presentationLock.schema,
-    "cssearth-prepared-interior-presentation-lock@1");
-  assert.equal(
-    PREPARED_EARTH_SCENE.interior.presentationLock
-      .referenceControlYawDegrees,
-    45,
-  );
-  assert.equal(
-    PREPARED_EARTH_SCENE.interior.presentationLock
-      .changesPhysicalAxialTiltClaim,
-    false,
-  );
   assert.equal(PREPARED_EARTH_SCENE.camera.orbitPlayback.schema,
     "cssearth-prepared-camera-orbit@1");
   assert.equal(PREPARED_EARTH_SCENE.camera.orbitPlayback.keyframes.length, 2);

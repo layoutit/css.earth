@@ -134,6 +134,15 @@ test('Earth globe provenance excludes the retired local noise dataset', async ()
   assert.ok(document.products.some(product => product.id === 'normal'));
   assert.ok(!document.products.some(product => product.id === 'buenos-aires-noise'));
   assert.ok(!document.sources.some(source => source.id.startsWith('buenos-aires-noise')));
+  const structure = document.products.find(product => product.id === 'cross-section');
+  assert.equal(structure.interpretation.kind, 'schematic-interior');
+  assert.ok(!productSourceIds(document, structure.id).includes('glad-m35-vsv'));
+  const section = document.products.find(product => product.id === 'mantle-tomography');
+  assert.ok(productSourceIds(document, section.id).includes('glad-m35-vsv'));
+  assert.equal(section.interpretation.kind, 'seismic-model-with-schematic-layers');
+  assert.ok(section.recipeDependencies.includes('mantle-tomography'));
+  for (const filename of ['earth-tomography-section@2x.webp', 'earth-tomography-mantle@2x.webp', 'earth-tomography-mantle-poles@2x.webp', 'earth-tomography-legend.png'])
+    assert.ok(section.outputs.some(output => output.url.endsWith('/' + filename)), filename);
 });
 
 test('spacecraft photographs bind their image, registration, and source-shape dependencies', async () => {

@@ -1,0 +1,26 @@
+[
+  {
+    "quality": 70,
+    "meanMaximumChannelError": 2.8193147857734644,
+    "p99": 12,
+    "maximum": 64
+  },
+  {
+    "quality": 80,
+    "meanMaximumChannelError": 2.494739577168896,
+    "p99": 10,
+    "maximum": 56
+  },
+  {
+    "quality": 90,
+    "meanMaximumChannelError": 1.9062823632974317,
+    "p99": 7,
+    "maximum": 40
+  },
+  {
+    "quality": 95,
+    "meanMaximumChannelError": 1.5520743948988045,
+    "p99": 5,
+    "maximum": 37
+  }
+]

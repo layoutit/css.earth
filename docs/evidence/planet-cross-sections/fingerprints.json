@@ -1,0 +1,61 @@
+{
+  "base": "e018ba39227631ab86e752b8aa81e06dfab00823",
+  "implementation": "97ad68c4f",
+  "fingerprints": [
+    {
+      "path": "tools/objects/paged-ellipsoid/presentation.mjs",
+      "bytes": 11481,
+      "sha256": "7f9d2b7186d4999623dc286286eff977bdccae3e3c405454bf62a99190d998fd"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/interior-poles.mjs",
+      "bytes": 659,
+      "sha256": "6859a82597b76b5f28f7c048b7732233ce9511008aa6e93e6538715d2b070b15"
+    },
+    {
+      "path": "tools/objects/paged-ellipsoid/assets.mjs",
+      "bytes": 29478,
+      "sha256": "fcb70d896efb331fae5d73b11444c132736d22c56e38c4f75c4ab9e4f298ef72"
+    },
+    {
+      "path": "src/preparation/raster/interior.ts",
+      "bytes": 6396,
+      "sha256": "2fda1f47063912c78cc745de2ae6aac7f5511d3447cf489a48d6be60f43951c0"
+    },
+    {
+      "path": "src/renderers/css/preparation/presentation/row-bank-cutaway.ts",
+      "bytes": 13154,
+      "sha256": "092662e14ef998154956b89d3923de05e22d42f96872e99ef96858321fd8f7b7"
+    },
+    {
+      "path": "src/planets/earth/object.json",
+      "bytes": 4360,
+      "sha256": "05e000cf7b38c02b9c7d0d065003a6a2c5d81212deaed7d1d1007c3fad9df987"
+    },
+    {
+      "path": "src/planets/earth/prepared/runtime.json",
+      "bytes": 963820,
+      "sha256": "cef1cc4ec42fbdc7edf266c2aedc0c70d56f5d2718428f6c1075ea07a5387e5f"
+    },
+    {
+      "path": "src/planets/earth/runtime-assets.json",
+      "bytes": 27342,
+      "sha256": "54e5373647e9cac520b5e7cee0bf53332ac96caaf20515caf1d72373794c7339"
+    },
+    {
+      "path": "src/planets/mercury/object.json",
+      "bytes": 4471,
+      "sha256": "34446da065b7b0c955ae31a73135486debbfb41bac029a6bc18b907325b11da8"
+    },
+    {
+      "path": "src/planets/mercury/prepared/runtime.json",
+      "bytes": 6197703,
+      "sha256": "95e9f52057ea860b539e756770493392096a3f12c6e218a4813a62af62b4c848"
+    },
+    {
+      "path": "src/planets/mercury/runtime-assets.json",
+      "bytes": 21204,
+      "sha256": "277ba7758f7f0a6a500337cb50c493492f37710c7a0cd02ac75cc03998fdaf48"
+    }
+  ]
+}

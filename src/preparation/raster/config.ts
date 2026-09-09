@@ -54,6 +54,8 @@ export interface InteriorRecipe {
     sectionHeight: number;
     outerOutput: string;
     outerPolesOutput: string;
+    outerUnlitOutput: string;
+    outerUnlitPolesOutput: string;
     coreOutput: string;
     corePolesOutput: string;
     sectionOutput: string;

@@ -82,7 +82,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       }
     }
   }
-  const { products: bindings, unresolved } = provenanceProducts({ id, recipes, manifest, lenses, assets, geographic });
+  const { products: bindings, unresolved } = provenanceProducts({ id, recipes, manifest, lenses, assets, geographic, runtimeUrls: [...outputPins.keys()] });
   const sources = new Map(), products = [], measuredOutputs = new Map();
   const bindSource = async (path, visiting = new Set()) => {
     const entry = byPath.get(path);
