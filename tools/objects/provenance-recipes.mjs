@@ -1,7 +1,7 @@
 // Dependency bindings for the shared preparers. These follow acquisition paths
 // and recipe operations, never factsheet links, publisher names, or UI credits.
 // Unknown capabilities remain explicit gaps rather than receiving invented edges.
-export function provenanceProducts({ id, recipes, manifest, lenses, assets, geographic }) {
+export function provenanceProducts({ id, recipes, manifest, lenses, assets, geographic, runtimeUrls = [] }) {
   const products = [], unresolved = [], prefix = `/scenes/${id}/`;
   const inputPaths = new Set([...manifest.inputs, ...(manifest.documents ?? []), ...(manifest.generatedIntermediates ?? [])].map(input => input.path));
   const controls = lenses?.controls ?? [];
@@ -164,8 +164,20 @@ export function provenanceProducts({ id, recipes, manifest, lenses, assets, geog
         } : {});
     });
     for (const lens of controls.filter(lens => !products.some(product => product.id === lens.id))) {
-      if (lens.id === 'cross-section') add(lens.id, 'paged-ellipsoid', '/interiorPath', [plan.interiorPath],
-        'Prepare the source-defined schematic interior.', { interpretation: { kind: 'schematic-interior' } });
+      if (lens.view === 'interior') {
+        const tomography = lens.interiorSource ? recipe(lens.interiorSource) : null;
+        add(lens.id, 'paged-ellipsoid', '/interiorPath', [plan.interiorPath, ...paths(tomography)],
+          tomography ? 'Sample pinned mantle velocities on the cut planes and shell; normalize by the area-weighted depth mean and bake the signed palette. Keep crust and core schematic.'
+            : 'Prepare the source-defined schematic interior.', {
+            interpretation: { kind: tomography ? 'seismic-model-with-schematic-layers' : 'schematic-interior',
+              ...(tomography ? { quantity: tomography.quantity, reference: tomography.reference, source: tomography.source, depth: tomography.depth, sectionLongitudesDegrees: tomography.sectionLongitudesDegrees } : {}) },
+            recipeDependencies: ['paged-ellipsoid', ...(tomography ? ['mantle-tomography'] : [])],
+            parents: controls.filter(control => control.surfaceUrl === prefix + plan.surface.maps[0].name + '.webp').map(control => control.id),
+            urls: [...runtimeUrls.filter(url => url.startsWith(prefix + id + '-interior-') && !Object.hasOwn(lens.interiorTextures ?? {}, url)),
+              ...Object.values(lens.interiorTextures ?? {}), lens.thumbnailUrl,
+              ...(tomography ? [prefix + tomography.legend.image] : [])],
+          });
+      }
       else if (geographic?.noise?.pin.id === lens.id) {
         const { pin, prepared, directory } = geographic.noise;
         add(lens.id, 'paged-ellipsoid', '/geographic/noise', [`${directory}/manifest.json`, `${directory}/${pin.file}`],

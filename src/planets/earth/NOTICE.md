@@ -10,6 +10,25 @@ The HYG star catalogue is redistributed under CC BY-SA 4.0. Its notice is in `so
 
 The Earth adapter's prepared HTML, CSS, modules, charts, textures, and scientific presentation specifications are project-authored derivatives. Source credits remain embedded in this record and in the prepared chart metadata.
 
+## GLAD-M35 mantle model
+
+Congyue Cui et al. (2024), *GLAD-M35: a joint P and S global tomographic model
+with uncertainty quantification*, Geophysical Journal International,
+[doi:10.1093/gji/ggae270](https://doi.org/10.1093/gji/ggae270).
+Data revision r0.1, provided by Congyue Cui through
+[EarthScope EMC](https://ds.iris.edu/ds/products/emc-glad-m35/),
+repository DOI 10.17611/dp/emc.2024.gladm35.1.
+
+EMC publicly distributes this scientific model and requests citation of the
+authors and repository. The downloaded model metadata and author repository do
+not state a separate data license; we do not label the data as CC BY merely
+because the paper is open access. cssEarth retains a numeric scientific-data
+subset and creates its own false-color textures, with the coordinate,
+interpolation, reference-mean and seam transformations described in SOURCE.md.
+No published illustration is copied and no author or EarthScope endorsement is
+implied. EMC repository citation: IRIS DMC (2011),
+[doi:10.17611/DP/EMC.1](https://doi.org/10.17611/DP/EMC.1).
+
 Retired city-detail prototype (outside the globe MVP): ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium. The 2021 v200 annual RGBNIR composites are licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The retired city lens used the provider-rendered RGB PNGs directly through Terrascope WMTS and prepared their placement. Earlier COG experiments extracted RGB, applied a fixed display transfer, resampled geographic pages and encoded WebP. It does not use the categorical land-cover map. The publisher's metadata and attribution are recorded in `source/city/provenance.json`; no ESA or Copernicus endorsement is implied.
 
 ## GeoNames city catalogue
