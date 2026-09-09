@@ -645,7 +645,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, annotat
         const orbitVisibility = projected.orbitVisibility;
         if (!entry.orbit) continue;
         entry.orbitClip = { segments: orbitVisibility > 0 ? segments : [], x, y };
-        entry.indicatorCutout = entry.indicatorShown && (!navigationInFlight || entry.body.id === emphasizedId || entry.parent?.id === emphasizedId);
+        entry.indicatorCutout = entry.indicatorShown && (!navigationInFlight || emphasizedId === null || entry.body.id === emphasizedId || entry.parent?.id === emphasizedId);
         const clipped = entry.indicatorCutout
           ? orbitOutsideMarker(entry.orbitClip.segments, x, y, entry.indicatorRadius) : entry.orbitClip.segments;
         projected.segments = clipped;
@@ -715,7 +715,9 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, annotat
       // Only the resolved presentation owns DOM visibility and hit targets.
       for (const { entry, x, y, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, hovered, inFrame, lineWidth, orbitVisibility, segments, labelPosition } of projectedBodies) {
         const { body, marker, indicator, label } = entry;
-        const annotationsVisible = !navigationInFlight || body.id === emphasizedId || entry.parent?.id === emphasizedId;
+        // An overview flight selects the whole system, so its annotations stay
+        // visible. Only a flight to a specific body fades unrelated annotations.
+        const annotationsVisible = !navigationInFlight || emphasizedId === null || body.id === emphasizedId || entry.parent?.id === emphasizedId;
         label.style.opacity = annotationsVisible ? 'calc(var(--context-label-alpha, 0) * var(--context-label-opacity, 1))' : '0';
         const pointSource = body.id === plan.focus.id && plan.focus.pointSource !== undefined;
         marker.style.visibility = visible && markerOpacity > 0 && !pointSource ? '' : 'hidden';
