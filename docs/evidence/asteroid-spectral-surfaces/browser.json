@@ -316,5 +316,43 @@
       ]
     }
   ],
-  "integratedMain": "e23a357b86d97b0400f5ab53f8eaf9faf2acd6ec"
+  "integratedMain": "e23a357b86d97b0400f5ab53f8eaf9faf2acd6ec",
+  "dragChecks": [
+    {
+      "id": "bennu",
+      "density": 1,
+      "totalDomNodes": 72574,
+      "retainedInteraction": true
+    },
+    {
+      "id": "bennu",
+      "density": 2,
+      "totalDomNodes": 72574,
+      "retainedInteraction": true
+    },
+    {
+      "id": "eros",
+      "density": 1,
+      "totalDomNodes": 72570,
+      "retainedInteraction": true
+    },
+    {
+      "id": "eros",
+      "density": 2,
+      "totalDomNodes": 72570,
+      "retainedInteraction": true
+    },
+    {
+      "id": "vesta",
+      "density": 1,
+      "totalDomNodes": 72578,
+      "retainedInteraction": true
+    },
+    {
+      "id": "vesta",
+      "density": 2,
+      "totalDomNodes": 72578,
+      "retainedInteraction": true
+    }
+  ]
 }

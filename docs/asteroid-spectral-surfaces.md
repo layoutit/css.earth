@@ -105,6 +105,13 @@ summaries and source-derived spacecraft associations. Their provenance records
 were recovered and verified against the actual local source and output bytes;
 the existing texture bakes were reused.
 
+GitHub's prepared-universe job passes 310 tests and fails an older assertion
+that Patroclus is absent from the visible body registry. The exact integrated
+main commit fails the same assertion. Neither that test nor its registry/context
+inputs change in this PR:
+[PR run](https://github.com/layoutit/cssEarth/actions/runs/34308708833),
+[main run](https://github.com/layoutit/cssEarth/actions/runs/34306051909).
+
 ## Preview
 
 Use the existing server on port 4278 and select the named dataset:

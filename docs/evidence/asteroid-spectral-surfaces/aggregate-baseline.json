@@ -49,5 +49,40 @@
     "files": 3,
     "passed": 1,
     "failed": 6
+  },
+  "githubPreparedUniverse": {
+    "prRun": "https://github.com/layoutit/cssEarth/actions/runs/34308708833",
+    "mainRun": "https://github.com/layoutit/cssEarth/actions/runs/34306051909",
+    "passed": 310,
+    "failed": 1,
+    "sameFailureOnMain": true,
+    "failure": "Patroclus is registered, but an older test expects it to be absent from scene bodies.",
+    "unchangedInputs": [
+      {
+        "path": "tools/objects/prepare-spatial-context.test.ts",
+        "sha256": "024b38388cae1be674e3e72f754b0d980145d0f64d9c079a545a82d57f1f83f2",
+        "unchangedFromMain": true
+      },
+      {
+        "path": "tools/objects/prepare-spatial-context.ts",
+        "sha256": "b59f1d31f851d4f34b6e5e8afd8937f092eb95f099ca5a2cef11621233754616",
+        "unchangedFromMain": true
+      },
+      {
+        "path": "site/objects.mjs",
+        "sha256": "844f698ace8c218f3575e374bd950c1df383303e0043968c3afb8a958bca8bf2",
+        "unchangedFromMain": true
+      },
+      {
+        "path": "src/planets/sun/source/navigation/universe.json",
+        "sha256": "a9771da079f19224beb7ddef65f05d1eb6c10af517c78bd526ef735af0e9995e",
+        "unchangedFromMain": true
+      },
+      {
+        "path": "src/planets/patroclus/object.json",
+        "sha256": "93136cec98b7b234446ca64254a8f4899e49a834a3d727103b4d2b57ca16a70d",
+        "unchangedFromMain": true
+      }
+    ]
   }
 }
