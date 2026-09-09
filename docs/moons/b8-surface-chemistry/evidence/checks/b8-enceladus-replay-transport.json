@@ -1,0 +1,61 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b8-surface-chemistry/finalize-one.mjs",
+    "enceladus"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 925941760,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 1015808,
+      "freePercent": 59
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 220839936,
+      "freePercent": 59
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 585973760,
+      "freePercent": 59
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 616939520,
+      "freePercent": 59
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 646987776,
+      "freePercent": 59
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 679575552,
+      "freePercent": 59
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 718356480,
+      "freePercent": 59
+    },
+    {
+      "seconds": 2.0,
+      "rssBytes": 925941760,
+      "freePercent": 59
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 617725952,
+      "freePercent": 58
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 2.5
+}

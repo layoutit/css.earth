@@ -203,6 +203,95 @@
             "color": "#d1c59f"
           }
         ]
+      },
+      {
+        "id": "oxygen-signature",
+        "label": "Oxygen signature",
+        "minimum": 0.98,
+        "maximum": 1.02,
+        "colors": [
+          "#2166ac",
+          "#92c5de",
+          "#f7f7f7",
+          "#f4a582",
+          "#b2182b"
+        ],
+        "labels": [
+          "0.98",
+          "1.00",
+          "1.02"
+        ],
+        "units": "565 / 577.3 nm reflectance ratio",
+        "title": "Oxygen-sensitive visible reflectance ratio",
+        "description": "A visible spectral signature associated with oxygen in surface ice.",
+        "format": "geotiff",
+        "path": "muse/ganymede/577.3nm_band-night-1.tif",
+        "consumer": "oxygen-signature",
+        "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "textureScale": 0.125,
+        "grid": {
+          "width": 180,
+          "height": 90,
+          "centerLongitude": -1,
+          "referenceRadiusMeters": 2631200,
+          "origin": [
+            -8266158.590125465,
+            4087156.1917842575
+          ],
+          "resolution": [
+            91846.2065569496,
+            -91846.2065569496
+          ],
+          "wrapLongitude": true,
+          "noData": -9999
+        },
+        "additionalGrids": [
+          {
+            "path": "muse/ganymede/577.3nm_band-night-2.tif",
+            "grid": {
+              "width": 180,
+              "height": 90,
+              "centerLongitude": -1,
+              "referenceRadiusMeters": 2631200,
+              "origin": [
+                -8266158.590125465,
+                4087156.1917842575
+              ],
+              "resolution": [
+                91846.2065569496,
+                -91846.2065569496
+              ],
+              "wrapLongitude": true,
+              "noData": -9999
+            }
+          },
+          {
+            "path": "muse/ganymede/577.3nm_band-night-3.tif",
+            "grid": {
+              "width": 180,
+              "height": 90,
+              "centerLongitude": -1,
+              "referenceRadiusMeters": 2631200,
+              "origin": [
+                -8266158.590125465,
+                4087156.1917842575
+              ],
+              "resolution": [
+                91846.2065569496,
+                -91846.2065569496
+              ],
+              "wrapLongitude": true,
+              "noData": -9999
+            }
+          }
+        ],
+        "focus": {
+          "longitudeDegrees": 156,
+          "latitudeDegrees": 0,
+          "zoom": 1.1
+        }
       }
     ],
     "observedColors": [],

@@ -228,6 +228,174 @@
         "referenceRadiusMeters": 2632345
       },
       "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps."
+    },
+    {
+      "id": "ganymede-muse-original-577-3nm-band-1",
+      "path": "muse/577.3nm_band_ganymede_night_1.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "9354868840c81e85d65c6a0882ea71e3f01d7258860fdd679321e4e88aa956b8",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/38a80f72d220dc18ccb5d8b3296041cfcce8d703",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "ganymede-muse-original-577-3nm-band-2",
+      "path": "muse/577.3nm_band_ganymede_night_2.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "7b6e1a2c27bfc1418147e0a59a628c96d5b28d5fd1b71295f21d64c2d386ac8d",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/550f3c8f151a9360bcfa076fdb05b97d1065c01e",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "ganymede-muse-original-577-3nm-band-3",
+      "path": "muse/577.3nm_band_ganymede_night_3.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "30f997e41fb7f9f99f626c45121e4b6066e97c39bd1fe7bcd6f081e09dc60220",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/c6016c8d28a08170a3660a89485bb7d5ebf5fafb",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "ganymede-muse-oxygen-signature-night-1",
+      "path": "muse/ganymede/577.3nm_band-night-1.tif",
+      "expectedBytes": 10416,
+      "expectedSha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "oxygen-signature"
+      ],
+      "lensId": "oxygen-signature",
+      "label": "Oxygen signature",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2631200
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "ganymede-muse-oxygen-signature-night-2",
+      "path": "muse/ganymede/577.3nm_band-night-2.tif",
+      "expectedBytes": 10400,
+      "expectedSha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "oxygen-signature"
+      ],
+      "lensId": "oxygen-signature",
+      "label": "Oxygen signature",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2631200
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "ganymede-muse-oxygen-signature-night-3",
+      "path": "muse/ganymede/577.3nm_band-night-3.tif",
+      "expectedBytes": 10304,
+      "expectedSha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/ganymede-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "oxygen-signature"
+      ],
+      "lensId": "oxygen-signature",
+      "label": "Oxygen signature",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 2631200
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
     }
   ],
   "generatedIntermediates": [],
@@ -276,14 +444,14 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 7273,
-      "expectedSha256": "e78ff1444c9db1f44f8e9bdf48018df201a70fabc5189f39032cfc4de07ed220",
+      "expectedBytes": 9818,
+      "expectedSha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16167,
-      "expectedSha256": "588883495cb31685751f694f3fb36b1d8feceb1ed0d1af806029e0b98069f7de",
+      "expectedBytes": 18331,
+      "expectedSha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -300,8 +468,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1193,
-      "expectedSha256": "caffd4d082b2300947b87d0a38e4ee9613d9813c187872f6e9e16bf970d7d438",
+      "expectedBytes": 2333,
+      "expectedSha256": "2ff31beb903ee65c63b4d741196b45b918b05380c51138478e1d817fa87a36ee",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -541,6 +709,36 @@
         "geology-validation"
       ],
       "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained."
+    },
+    {
+      "path": "muse/source-qualification.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 12663,
+      "expectedSha256": "7fdd00cb2530b888a832fb8e7c2af61a7983389e555e3f85bc7dbc6f071b4bde"
+    },
+    {
+      "path": "muse/INTERPRETATION.md",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 3943,
+      "expectedSha256": "eaf5e6ee0d43d8826952db8b83fa19544c38c778e5f7c24bdf36710840a52bda"
+    },
+    {
+      "path": "muse/datacite-license.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 5096,
+      "expectedSha256": "18391de14b9f22cfa4f83a08f9d26992f6aa1616b302c68025cee1d1784b368a"
+    },
+    {
+      "path": "muse/ganymede-recipe.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 1503,
+      "expectedSha256": "c2dc147d0db95b7284949ce31b664374f652eadab4b9b4b3d48b5b12e5f15968"
+    },
+    {
+      "path": "muse/ganymede/conversion-receipt.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 6015,
+      "expectedSha256": "fa2dd36f754ea0d2c1b39011236daa09d5ca08cd00652c9f7c040dc2d0f9e84a"
     }
   ]
 }

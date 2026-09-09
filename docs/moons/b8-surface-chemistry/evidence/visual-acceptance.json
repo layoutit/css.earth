@@ -1,0 +1,56 @@
+{
+  "status": "ACCEPTED_WITH_EXPLICIT_SCIENTIFIC_LIMITS",
+  "capturedHead": "b0df1a8ef46ad93a5c4893140a58772a79a80a11",
+  "reviewedViewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "dprs": [
+    1,
+    2
+  ],
+  "bodies": [
+    {
+      "id": "io",
+      "reviewer": "b8_ganymede_source",
+      "views": [
+        "normal",
+        "spectral-slope",
+        "visible-absorption"
+      ],
+      "result": "Visible caveat finding resolved. Menus, units, coarse samples, missing/withheld grid and retained night joins are readable and source-consistent."
+    },
+    {
+      "id": "ganymede",
+      "reviewer": "b7_vims_review",
+      "views": [
+        "normal",
+        "oxygen-signature"
+      ],
+      "result": "Visible caveat and crowded legend findings resolved. Wavelengths, no-concentration claim, sample spacing, approximate registration and night joins remain readable."
+    },
+    {
+      "id": "enceladus",
+      "reviewer": "b8_enceladus_source",
+      "views": [
+        "normal",
+        "ice-absorption",
+        "infrared-ratio"
+      ],
+      "result": "All twelve normal/new-view lighting scenes inspected. Summaries and legends fit; partial footprint patterns and unsupported grid agree qualitatively with native/projected panels."
+    }
+  ],
+  "checks": [
+    "No capture runtime or network errors",
+    "Actual object and image response pins match",
+    "Same canonical prepared density at both DPRs",
+    "Retained ownership and drag node identity stable",
+    "Capture contexts and browsers close"
+  ],
+  "limitations": [
+    "Source panels and browser projections/palettes differ; no native RGB pixel-parity claim",
+    "MUSE absolute subpixel registration and Enceladus absolute pointing unresolved",
+    "Partial/coarse/filtered measurements and observation joins remain explicit",
+    "Visual acceptance does not establish mobile interaction, public Settings reachability, compositor FPS or full release readiness; separate checks report those boundaries"
+  ]
+}
