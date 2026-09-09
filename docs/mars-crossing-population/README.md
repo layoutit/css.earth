@@ -37,4 +37,4 @@ node --test site/test/minimap-point-range.test.mjs site/test/minimap-point-cover
 
 `publish.mjs` uses the existing content-addressed runtime publisher, restricted to these five bodies and one upload at a time. `fresh-install.mjs` independently downloads the published inventories with concurrency one and validates every byte count and hash.
 
-Current state: serial source contexts and bakes are in progress. Final integration, delivery, numerical qualification and actual-browser images remain pending.
+Current state: all five source contexts and bakes are complete. Current-main navigation/page/minimap integration is complete, with 408 marker tiles preserved and five minimap tests passing. Delivery, focused numerical/package qualification and actual-browser images remain pending in the draft PR.
