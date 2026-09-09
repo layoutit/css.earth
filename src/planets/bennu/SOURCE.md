@@ -9,6 +9,39 @@ Included: the 6.25 cm zero-phase albedo map on OLA v20, the separate 5 cm global
 - Mission facts: https://science.nasa.gov/mission/osiris-rex/
 - Pole and spin: source/reference/bennu_v17.tpc
 
+## Spectral composite
+
+The [USGS MapCam release](https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm)
+adds the published false-color composite from [DellaGiustina et al. (2020)](https://figshare.com/articles/journal_contribution/Maps_DellaGiustina_et_al_Science_2020_abc3660/12996494).
+It is a separate lens. Red is x/v (847/550 nm), green is w-band strength near
+698 nm, and blue is b′/v (473/550 nm), overlaid on v-band normal reflectance.
+The authors filtered ratio maps with a 7 × 7 boxcar and removed shadows using
+their v-band mask. Preparation does not recalculate ratios or infer minerals.
+
+The release description calls the color product 8-bit, but its actual TIFF and
+ISIS label specify four unsigned 16-bit bands. The mapped TIFF has grayscale
+photometric tags and unspecified extra bands. An independent strip-byte audit
+matches all four bands exactly to the original Figshare RGB TIFF, including its
+associated alpha. The original embeds GIMP's sRGB profile. The recipe therefore
+reads bands 0/1/2 as sRGB display codes and band 3 as alpha. Only full-alpha,
+non-fill samples qualify; partial-alpha boundary pixels are withheld before
+resampling. Fully opaque channels are divided by 257 for byte display, with no
+new contrast curve. Individual zero channels remain valid; all-channel zero is
+source fill. This interpretation is bound in the source audit, not inferred
+from how an image looks.
+
+The exact map is 6,284 × 2,268 with a 250 m cartographic radius, 0.25 m pixels,
+origin (−785.5, 283.5) m and east-positive, planetocentric longitude. Its cropped
+rows cover approximately ±65° and must not be stretched to the poles. Projection
+offsets are 3141.5 / 1133.5 in the shared PDS pixel convention. The map's control
+and cartographic radius do not replace the independently sized 241 m OLA mesh.
+Local boulder alignment to that simplified silhouette remains approximate.
+
+The four individual MapCam albedo bands and scalar ratio FITS products remain
+outside this selection: the released composite supplies the intended spectral
+view without creating a new palette. Original color bytes and map metadata are
+pinned; the legacy albedo and PolyCam views retain their own data and coverage.
+
 ## Preparation and interpretation
 
 The source shape uses kilometers, right-handed body-fixed axes and east longitude. The shared preparer converts positions to meters and scales them by the independently sourced 0.241 km radius. Original connectivity is welded at exact position duplicates and simplified by meshoptimizer 1.2.0 before texture and lighting baking. The target is 800 native PolyCSS u triangles with 128px raster cells and a 10 m library error allowance. A regularized error estimate is not a guaranteed maximum surface deviation. The output has 800 faces; meshoptimizer reports 9.372 m estimated error. Exact coincident, oppositely wound pairs left by collapses are removed (0 faces), then every edge must have two opposite incidents. The result has one connected component and Euler characteristic two.

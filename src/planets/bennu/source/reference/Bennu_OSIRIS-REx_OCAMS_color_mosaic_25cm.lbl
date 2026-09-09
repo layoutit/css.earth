@@ -1,0 +1,54 @@
+Object = IsisCube
+#Converted from FigShare color image
+  Object = Core
+    StartByte = 55108
+    ^Core     = Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif
+    Format    = BandSequential
+
+    Group = Dimensions
+      Samples = 6284
+      Lines   = 2268
+      Bands   = 4
+    End_Group
+
+    Group = Pixels
+      Type       = UnsignedWord
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+  End_Object
+
+  Group = Mapping
+    TargetName           = Bennu
+    EquatorialRadius     = 250.0 <meters>
+    PolarRadius          = 250.0 <meters>
+    LatitudeType         = Planetocentric
+    LongitudeDirection   = PositiveEast
+    LongitudeDomain      = 360
+    MinimumLatitude      = -65.0
+    MinimumLongitude     = 0.0
+    MaximumLatitude      = 65.0
+    MaximumLongitude     = 360.0
+    ProjectionName       = Equirectangular
+    CenterLongitude      = 180.0
+    CenterLatitude       = 0.0
+    CenterLatitudeRadius = 250.0
+    UpperLeftCornerX     = -785.5
+    UpperLeftCornerY     = 283.5
+    PixelResolution      = 0.25 <meters/pixel>
+    Scale                = 17.453292519943293 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1365             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 452
+  ^History  = Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.History.IsisCube
+End_Object
+End
