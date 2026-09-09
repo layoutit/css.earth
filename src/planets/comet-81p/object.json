@@ -20,12 +20,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "84d4bcbc7b331e095f982b385743b14d02c60af4b6809b4648a7d8e5b6af17df"
+          "sha256": "2f790316c36dbf6d0ee62a91326f6dbb68ce9817d3dd96bfc734124ef69067e1"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "529751f9f86467699f64035f2e16e152bdeb756bd4d991e92ce130e3e361bad9"
+          "sha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0"
         },
         {
           "id": "title",
@@ -40,7 +40,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "debd09a94d205af00c766a2f54b2ccf1a971efe8cb401def01d7ed0ef1521d93"
+          "sha256": "b7e63348b416d11f18441036970ff197a6de7c0586b8a97dea9687c9a4b5536f"
         },
         {
           "id": "rotation",
@@ -111,7 +111,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9b0b44d43240a37e6b47111c126da348eab4e06702024a824796e9a8545531bd"
+    "sha256": "b123c2c58273abe23ebe1c28a60ab8853e371d2e0ee41c2c994ba618a4ade3ef"
   },
   "type": "layered-body",
   "id": "comet-81p"

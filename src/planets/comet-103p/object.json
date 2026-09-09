@@ -20,12 +20,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "bfd911ebda82fa674137698dd8e6d2bdf1a3063c8e0f339f5b1bdd3babae5a06"
+          "sha256": "269899c03e5c22546fc5940bf2ed5dbb201187997375b5e2563c185f51e0535e"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "643a2d40fdcd6384ed77d1d113b63e32e954ec0068415c422e3dccdb369af818"
+          "sha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551"
         },
         {
           "id": "title",
@@ -72,11 +72,6 @@
               "id": "mri",
               "source": "content",
               "material": "lighting"
-            },
-            {
-              "id": "hri",
-              "source": "content",
-              "material": "lighting"
             }
           ]
         }
@@ -121,7 +116,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1b998ab66d0fb64524f5c85dfb5f87d3c4136b469688c8a3dd6e9cc311260b42"
+    "sha256": "f51f71afd3cd560e117356d06c4be8e795c0264bd598beef54592d98979936cc"
   },
   "type": "layered-body",
   "id": "comet-103p"
