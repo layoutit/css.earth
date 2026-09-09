@@ -1,0 +1,18 @@
+{
+  "thesis": {
+    "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+    "pdf": "https://era.ed.ac.uk/server/api/core/bitstreams/7a6d2908-147e-404d-be07-d0b1f1598f48/content",
+    "expectedBytes": 33468310,
+    "expectedSha256": "5bcb3a07554aca411efcd1a59b7ede7e48a6619417ae34e2c2a5145c7b3c1e7f",
+    "author": "Abbie L. Donaldson",
+    "year": 2025,
+    "title": "Characterisation of Jupiter-family comet nuclei by time-series photometry",
+    "reference": "Table 4.3, Model 1; section 4.3.1.1; Table 4.5"
+  },
+  "thermalSize": {
+    "credit": "Fern\u00e1ndez et al. (2013), SEPPCoN; values retained in Donaldson (2025)",
+    "url": "https://doi.org/10.1016/j.icarus.2013.07.021"
+  },
+  "meshAvailability": "No public original mesh found in the thesis record or its conference abstract. The 162P paper makes the shape available on request. This package uses published numeric constraints only.",
+  "coordinateDiscrepancy": "Thesis Table 5.2 prints RA 188 degrees for Model 1, inconsistent with its ecliptic pole in section 4.3.1.1, Figure 4.29 and Tables 4.3/4.5. This package converts the repeatedly reported ecliptic pole (132.5, -56.5) directly, yielding RA 117.873 and Dec -37.100 degrees."
+}

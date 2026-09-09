@@ -197,6 +197,66 @@ test("Motion cannot enable Speed before the shared runtime is ready or after it 
   shell.destroy();
 });
 
+test('camera zoom switches body cards without replacing content or changing the search and detail tab', () => {
+  const f = fixture(), information = f.selectors.get('.planet-information-panel');
+  const datasetTab = new Element(), factsTab = new Element(), dataset = new Element(), facts = new Element();
+  datasetTab.dataset.informationTab = 'dataset'; factsTab.dataset.informationTab = 'factsheet';
+  dataset.dataset.informationPanel = 'dataset'; facts.dataset.informationPanel = 'factsheet';
+  information.selectors.set('[data-information-tab]:not([hidden])', [datasetTab, factsTab]);
+  information.selectors.set('[data-information-panel]', [dataset, facts]);
+  const shell = f.mount(), listeners = new Set(), search = f.selectors.get('.planet-sidebar-search');
+  const children = information.children;
+  let world = { pose: { positionM: [0, 0, 10000] } };
+  shell.setCamera({ navigation: { frame: { originM: [0,0,0], bodyRadiusM: 1000 },
+    optics: () => ({ focalPixels: 1000, detailHandoffDiameterPixels: 14 }), capture: () => world,
+    subscribe(callback) { listeners.add(callback); return () => listeners.delete(callback); },
+  } });
+  assert.equal(information.dataset.cardView, 'detail');
+  factsTab.dispatchEvent(new Event('click'));
+  search.value = 'my search';
+  for (const [range, view] of [[1e8, 'overview'], [10000, 'detail']]) {
+    world = { pose: { positionM: [0,0,range] } };
+    for (const callback of listeners) callback(world);
+    assert.equal(information.dataset.cardView, view);
+    assert.equal(information.children, children, 'Both views stay mounted');
+    assert.equal(facts.hidden, false); assert.equal(dataset.hidden, true);
+    assert.equal(factsTab.getAttribute('aria-selected'), 'true');
+    assert.equal(search.value, 'my search');
+  }
+  shell.destroy();
+  assert.equal(listeners.size, 0);
+});
+
+test('destination card stays fixed across flight poses and camera handoff, then follows manual zoom', () => {
+  const f = fixture(), shell = f.mount(), information = f.selectors.get('.planet-information-panel');
+  const frame = { originM: [0, 0, 0], bodyRadiusM: 1000 }, listeners = new Set();
+  const at = range => ({ pose: { positionM: [0, 0, range] } });
+  let world = at(10000);
+  const camera = { navigation: { frame,
+    optics: () => ({ focalPixels: 1000, detailHandoffDiameterPixels: 14 }), capture: () => world,
+    subscribe(callback) { listeners.add(callback); return () => listeners.delete(callback); },
+  } };
+  shell.setCamera(camera);
+  const finish = shell.beginCardNavigation({ id: 'fixture', worldFrame: frame }, at(1e8));
+  shell.beginObjectSelection({ id: 'fixture', name: 'Fixture' });
+  assert.equal(information.dataset.cardView, 'overview', 'The endpoint card appears immediately');
+  for (const range of [1e8, 10000, 1e7, 10000]) {
+    world = at(range); for (const notify of listeners) notify(world);
+    assert.equal(information.dataset.cardView, 'overview');
+  }
+  shell.setCamera(null);
+  shell.setObject({ id: 'fixture', name: 'Fixture', apply() {} });
+  assert.equal(information.dataset.cardView, 'overview', 'Card stays fixed while the destination mounts');
+  world = at(1e8); shell.setCamera(camera); finish();
+  assert.equal(information.dataset.cardView, 'overview');
+  world = at(10000); for (const notify of listeners) notify(world);
+  assert.equal(information.dataset.cardView, 'detail', 'Manual zoom works after the flight');
+  const cancelled = shell.beginCardNavigation({ id: 'fixture', worldFrame: frame }, at(1e8));
+  cancelled();
+  assert.equal(information.dataset.cardView, 'detail', 'Cancellation follows the actual camera');
+  shell.destroy();
+});
+
 test('camera scale changes retained overview content without moving the camera and search selects the matching category tab', () => {
   const f = fixture(), browser = f.selectors.get('.planet-object-browser');
   const galaxy = new Element(), system = new Element(), introduction = new Element();
@@ -406,5 +466,31 @@ test('an empty search survives dismissal, overview resets, and object commits', 
   search.value = 'venus'; search.dispatchEvent(new Event('input'));
   cancel();
   assert.equal(search.value, 'venus', 'Cancelling a card preview cannot overwrite a newer query');
+  shell.destroy();
+});
+
+
+test('choosing the current body from search shows its card without editing the query', () => {
+  const f = fixture(), shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  shell.setObject({ id: 'sun', name: 'Sun', apply() {} });
+  search.value = 'Sun'; search.dispatchEvent(new Event('input'));
+  assert.equal(f.selectors.get('.planet-information-panel').hidden, true);
+  const cancel = shell.beginObjectSelection({ id: 'sun', name: 'Sun' });
+  assert.equal(f.selectors.get('.planet-information-panel').hidden, false);
+  assert.equal(search.value, 'Sun');
+  shell.setOverview(false); cancel();
+  assert.equal(f.selectors.get('.planet-information-panel').hidden, false, 'Commit cannot reopen the search results');
+  assert.equal(search.value, 'Sun');
+  shell.destroy();
+});
+
+test('a Milky Way breadcrumb previews its own card and preserves the search query', () => {
+  const f = fixture(), shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  search.value = 'moon'; search.dispatchEvent(new Event('input'));
+  const cancel = shell.beginOverviewSelection('milky-way');
+  assert.equal(f.documentTarget.documentElement.dataset.selection, 'milky-way');
+  assert.equal(search.value, 'moon');
+  cancel();
+  assert.equal(search.value, 'moon');
   shell.destroy();
 });

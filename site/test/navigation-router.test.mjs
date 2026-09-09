@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createSceneRouter } from '../scene-router.mjs';
 import { formatSharedView } from '../../src/renderers/css/dist/index.js';
+import { worldCameraFromCenteredPresentation } from '../../src/renderers/css/dist/navigation.js';
 
 const flush = () => new Promise(setImmediate);
 function deferred() {
@@ -12,13 +13,13 @@ function deferred() {
 const saved = distance => ({ camera: { distanceKilometers: distance,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
-function harness({ prepare = async () => ({}), focus = undefined, centerTarget = undefined, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false } = {}) {
+function harness({ prepare = async () => ({}), focus = undefined, centerTarget = undefined, systemTarget = undefined, overviewTarget = undefined, initialUrl = null, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false, worldFrames = null } = {}) {
   const documentTarget = new EventTarget(), windowTarget = new EventTarget(), media = new EventTarget();
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
   documentTarget.body = { classList: { add() {}, remove() {} } };
   media.matches = false; windowTarget.matchMedia = () => media;
   windowTarget.setTimeout = setTimeout; windowTarget.clearTimeout = clearTimeout;
-  let location = new URL('https://example.test/mercury/?campaign=test#vault'), index = 0;
+  let location = new URL(initialUrl ?? 'https://example.test/mercury/?campaign=test#vault'), index = 0;
   const entries = [{ state: { campaign: 'preserved' }, url: location.href }], writes = [];
   Object.defineProperty(windowTarget, 'location', { get: () => location });
   windowTarget.history = {
@@ -29,6 +30,7 @@ function harness({ prepare = async () => ({}), focus = undefined, centerTarget =
   };
   const objects = ['mercury', 'venus', 'earth'].map(id => ({ id, name: id, route: `/${id}/` }));
   if (withSun) objects.push({ id: 'sun', name: 'Sun', route: '/sun/', classification: 'star', distanceAu: 0 });
+  if (worldFrames) for (const object of objects) object.worldFrame = worldFrames[object.id];
   const stage = { dataset: { objectId: 'mercury' } }, input = {}, renders = new Set(), mounts = [], errors = [], shells = [], preparations = [], disposedContent = [];
   let maxRendered = 0;
   const factory = id => (nativeStage, options) => {
@@ -57,6 +59,24 @@ function harness({ prepare = async () => ({}), focus = undefined, centerTarget =
         },
       };
     }
+    if (worldFrames?.[id]) {
+      const frame = worldFrames[id], cameraListeners = new Set();
+      const optics = { focalPixels: 1000, principalOffsetPixels: [0, 0] };
+      let world = options.initialWorldCamera ?? worldCameraFromCenteredPresentation({
+        rotation: frame.presentationToReference, distanceUnits: frame.bodyRadiusM * 10,
+      }, frame, optics);
+      mount.navigation = {
+        frame, capture: () => world, optics: () => optics,
+        subscribe(listener) {
+          cameraListeners.add(listener); listener(world, optics);
+          return () => cameraListeners.delete(listener);
+        },
+      };
+      mount.publishCamera = next => {
+        world = next;
+        for (const listener of cameraListeners) listener(world, optics);
+      };
+    }
     mounts.push(mount); renders.add(mount); maxRendered = Math.max(maxRendered, renders.size);
     assert.equal(renders.size, 1, 'At most one detailed scene may render');
     return mount;
@@ -78,7 +98,7 @@ function harness({ prepare = async () => ({}), focus = undefined, centerTarget =
       return { id: object.id, apply() { assert.equal(signal.aborted, false); }, dispose() { disposedContent.push(object.id); } };
     },
     navigation: {
-      focus, centerTarget,
+      focus, centerTarget, systemTarget, overviewTarget,
       supports: (from, to) => from !== 'earth' && to !== 'earth',
       prepare(options) { preparations.push(options); return prepare(options); },
     },
@@ -111,14 +131,14 @@ test('persistent world context is mounted once and follows the active physical n
   assert.deepEqual(events.at(-1), ['destroy']);
 });
 
-test('flight overlays follow the pending request through success and failure, while recentering keeps them visible', async () => {
+test('flight state covers system framing and resets after success, failure, cancellation and preserved-view navigation', async () => {
   let visible = true, flight = deferred();
-  const h = harness({ prepare: () => flight.promise, persistentWorldContext: { async mount() {
+  const h = harness({ prepare: () => flight.promise, systemTarget: () => ({ id: 'system-camera' }), persistentWorldContext: { async mount() {
     return { selectObject() {}, publish() {}, destroy() {},
-      setNavigationIndicatorsVisible(value) { visible = value; } };
+      setNavigationInFlight(value) { visible = !value; } };
   } } });
   await h.router.settled;
-  const selected = h.router.navigate('venus'); await flush();
+  const selected = h.router.navigate('venus', { sceneSelection: true }); await flush();
   assert.equal(visible, false);
   flight.resolve({}); assert.equal(await selected, true);
   assert.equal(visible, true);
@@ -127,8 +147,31 @@ test('flight overlays follow the pending request through success and failure, wh
   assert.equal(visible, false);
   flight.reject(new Error('Prepared asset unavailable'));
   assert.equal(await failed, false); assert.equal(visible, true);
+  flight = deferred();
+  const cancelled = h.router.navigate('mercury'); await flush();
+  assert.equal(visible, false);
+  flight.reject(Object.assign(new Error('Input interrupted the flight'), { name: 'AbortError', preserveView: true }));
+  assert.equal(await cancelled, false); assert.equal(visible, true);
   await h.router.navigate('venus', { overview: true, preserveView: true });
   assert.equal(visible, true);
+  h.router.destroy();
+});
+
+test('the destination card stays held until arrival, including the new camera mount', async () => {
+  const arrival = deferred(), target = { system: 'venus' };
+  const h = harness({ prepare: async () => ({ afterMount: () => arrival.promise }), systemTarget: () => target });
+  await h.router.settled;
+  let held = false;
+  h.shells[0].beginCardNavigation = (object, world) => {
+    assert.equal(object.id, 'venus'); assert.equal(world, target);
+    held = true; return () => { held = false; };
+  };
+  const selection = h.router.navigate('venus', { sceneSelection: true });
+  await flush();
+  assert.equal(h.mounts.at(-1).id, 'venus');
+  assert.equal(held, true, 'The camera handoff does not release the card');
+  arrival.resolve(); assert.equal(await selection, true);
+  assert.equal(held, false);
   h.router.destroy();
 });
 
@@ -336,7 +379,8 @@ test('input after the detailed handoff keeps the incoming scene and its painted 
 });
 
 test('navbar/search anchors and vault events share one route; modifier and unsupported links stay native', async () => {
-  const h = harness(); await h.router.settled;
+  const systemTarget = { pose: 'system-framing' };
+  const h = harness({ systemTarget: () => systemTarget }); await h.router.settled;
   const supportsLabel = objectId => {
     const event = new Event('objectnavigationquery', { cancelable: true }); event.detail = { objectId };
     h.documentTarget.dispatchEvent(event); return event.defaultPrevented;
@@ -355,6 +399,7 @@ test('navbar/search anchors and vault events share one route; modifier and unsup
   assert.equal(click('venus', { ctrlKey: true }).defaultPrevented, false);
   assert.equal(click('venus', { target: '_blank' }).defaultPrevented, false);
   assert.equal(click('venus').defaultPrevented, true); await h.router.settled;
+  assert.equal(h.preparations[0].targetWorldCamera, systemTarget, 'Plain body links use the same framing as scene selections');
   const event = new Event('objectnavigate', { cancelable: true }); event.detail = { objectId: 'mercury' };
   h.documentTarget.dispatchEvent(event); await h.router.settled;
   assert.equal(event.defaultPrevented, true);
@@ -432,9 +477,9 @@ test('plain current-object anchors focus but saved-view links restore their spec
 });
 
 
-test('a coarse selection changes the card and scene at the current scale, then the next click focuses', async () => {
-  const centered = { pose: 'centered' }, focuses = [];
-  const h = harness({ centerTarget: () => centered, focus: async options => { focuses.push(options); } });
+test('a first selection frames the object system and changes its card, then the next click focuses', async () => {
+  const centered = { pose: 'system-framing' }, focuses = [];
+  const h = harness({ systemTarget: () => centered, focus: async options => { focuses.push(options); } });
   await h.router.settled;
   assert.equal(await h.router.navigate('venus', { sceneSelection: true }), true);
   assert.equal(h.preparations[0].targetWorldCamera, centered);
@@ -446,6 +491,101 @@ test('a coarse selection changes the card and scene at the current scale, then t
   assert.equal(focuses.length, 1);
   assert.equal(focuses[0].targetWorldCamera, undefined);
   assert.equal(h.mounts.length, 2);
+  h.router.destroy();
+});
+
+test('zooming out after first-click system framing restores the overview at the same camera pose', async () => {
+  const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];
+  const frame = (originM, bodyRadiusM) => ({ originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1,
+    presentationToReference: rotation, metersPerUnit: 1 });
+  const worldFrames = { mercury: frame([500, 0, 0], 1), venus: frame([1000, 0, 0], 1), sun: frame([0, 0, 0], 10) };
+  const camera = distanceUnits => worldCameraFromCenteredPresentation({ rotation, distanceUnits },
+    worldFrames.venus, { focalPixels: 1000, principalOffsetPixels: [0, 0] });
+  const h = harness({ withSun: true, worldFrames, systemTarget: () => camera(20),
+    prepare: async ({ fromMount, targetWorldCamera, preserveView }) => ({
+      mountOptions: { initialWorldCamera: preserveView ? fromMount.navigation.capture() : targetWorldCamera },
+    }),
+  });
+  const timers = new Map(); let serial = 0;
+  h.windowTarget.setTimeout = callback => { timers.set(++serial, callback); return serial; };
+  h.windowTarget.clearTimeout = id => timers.delete(id);
+  try {
+    await h.router.settled;
+    await h.router.navigate('venus', { sceneSelection: true });
+    const selected = h.mounts.at(-1);
+    selected.publishCamera(camera(1400));
+    assert.equal(timers.size, 0, 'The selected system remains below the existing orbital cutoff');
+    selected.publishCamera(camera(1600));
+    assert.equal(timers.size, 1, 'First-click selection must not disable the zoom-out cutoff');
+    selected.publishCamera(camera(1400));
+    assert.equal(timers.size, 0, 'A transient crossing is cancelled');
+    const zoomedOut = camera(1700);
+    selected.publishCamera(zoomedOut);
+    for (const [id, callback] of timers) { timers.delete(id); callback(); }
+    await h.router.settled;
+    assert.equal(h.router.state().activeObjectId, 'sun');
+    assert.equal(h.router.state().selectedObjectId, null);
+    assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
+    assert.equal(h.preparations.at(-1).preserveView, true);
+    assert.deepEqual(h.mounts.at(-1).navigation.capture(), zoomedOut);
+    assert.equal(h.writes.filter(write => write === 'push').length, 1, 'Automatic deselection replaces history');
+    assert.deepEqual(h.errors, []);
+  } finally { h.router.destroy(); }
+});
+
+test('a first Sun click frames the Solar System card, and a repeat opens the Sun close-up', async () => {
+  const target = { pose: 'solar-system-framing' }, focuses = [], previews = [];
+  const h = harness({ withSun: true, systemTarget: () => target,
+    focus: async options => { focuses.push(options); },
+    persistentWorldContext: { async mount() {
+      return { selectObject() {}, publish() {}, destroy() {}, previewSelection: id => previews.push(id) };
+    } } });
+  await h.router.settled;
+  let overviewPreview = false;
+  h.shells[0].beginOverviewSelection = () => { overviewPreview = true; };
+  await h.router.navigate('sun', { sceneSelection: true });
+  assert.equal(h.preparations[0].targetWorldCamera, target);
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
+  assert.ok(overviewPreview);
+  assert.ok(previews.includes(null), 'the system card does not emphasize the Sun marker');
+  assert.equal(focuses.length, 0);
+  await h.router.navigate('sun', { sceneSelection: true });
+  assert.equal(focuses.length, 1);
+  assert.equal(focuses[0].targetWorldCamera, undefined);
+  assert.equal(h.windowTarget.location.searchParams.has('overview'), false);
+  h.router.destroy();
+});
+
+test('clicking the Sun from the Solar System overview opens its body instead of refitting the outer planets', async () => {
+  const focuses = [], systems = [];
+  const h = harness({ withSun: true,
+    systemTarget: options => { systems.push(options); return { pose: 'outer-planets' }; },
+    focus: async options => { focuses.push(options); },
+  });
+  await h.router.settled;
+  await h.router.navigate('sun', { overview: true, preserveView: true });
+  assert.equal(h.router.state().overview, true);
+  await h.router.navigate('sun', { sceneSelection: true });
+  assert.equal(systems.length, 0, 'The visible system is not fitted a second time');
+  assert.equal(focuses.length, 1);
+  assert.equal(focuses[0].targetWorldCamera, undefined, 'Use the normal Sun close-up');
+  assert.equal(h.router.state().selectedObjectId, 'sun');
+  assert.equal(h.windowTarget.location.searchParams.has('overview'), false);
+  assert.equal(h.mounts.length, 2, 'The mounted Sun scene is retained');
+  h.router.destroy();
+});
+
+test('clicking the Sun from a galactic overview still frames its Solar System first', async () => {
+  const target = { pose: 'solar-system-framing' }, focuses = [];
+  const h = harness({ withSun: true, systemTarget: () => target,
+    focus: async options => { focuses.push(options); },
+  });
+  await h.router.settled;
+  await h.router.navigate('sun', { overview: true, overviewScope: 'milky-way', preserveView: true });
+  await h.router.navigate('sun', { sceneSelection: true });
+  assert.equal(focuses[0].targetWorldCamera, target);
+  assert.equal(h.router.state().overview, true);
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
   h.router.destroy();
 });
 
@@ -531,4 +671,85 @@ test('wide-view empty-space deselection previews the overview and recenters the 
   assert.equal(h.preparations[0].centerSelection, true);
   assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
   h.router.destroy();
+});
+
+function clickRoute(h, href, modifiers = {}) {
+  const anchor = { href, target: '', hasAttribute: () => false };
+  const event = new Event('click', { cancelable: true });
+  Object.assign(event, { button: 0, ...modifiers });
+  Object.defineProperty(event, 'target', { value: { closest: () => anchor } });
+  h.documentTarget.dispatchEvent(event);
+  return event;
+}
+
+test('overview breadcrumbs reframe, select the card, and retain separate history entries', async () => {
+  const scopes = [], focused = [], previews = [];
+  const h = harness({ withSun: true, overviewTarget({ scope }) {
+    scopes.push(scope);
+    return { world: { scope }, focusPositionM: [1, 2, 3] };
+  }, focus: async options => focused.push(options) });
+  await h.router.settled;
+  h.shells[0].beginOverviewSelection = scope => { previews.push(scope); return () => {}; };
+  assert.equal(clickRoute(h, 'https://example.test/sun/?overview=solar-system').defaultPrevented, true);
+  assert.deepEqual(previews, ['solar-system'], 'The card changes before the flight finishes');
+  await h.router.settled;
+  assert.equal(h.router.state().overview, true);
+  assert.deepEqual(h.preparations[0].targetWorldCamera, { scope: 'solar-system' });
+  assert.deepEqual(h.preparations[0].targetFocusPositionM, [1, 2, 3]);
+  clickRoute(h, 'https://example.test/sun/?overview=milky-way');
+  await h.router.settled;
+  assert.deepEqual(scopes, ['solar-system', 'milky-way']);
+  assert.equal(focused[0].targetWorldCamera.scope, 'milky-way');
+  assert.equal(h.router.state().selectedObjectId, null);
+  assert.equal(h.entries.length, 3, 'Each ancestor is a distinct history destination');
+  h.windowTarget.history.back(); await h.router.settled;
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'solar-system');
+  assert.equal(scopes.length, 2, 'Back restores its saved view without reframing');
+  assert.equal(h.maxRendered(), 1);
+  assert.deepEqual(h.errors, []);
+  h.router.destroy();
+});
+
+test('overview links preserve native modifier clicks and exact saved views', async () => {
+  const scopes = [];
+  const h = harness({ withSun: true, overviewTarget: options => scopes.push(options) });
+  await h.router.settled;
+  assert.equal(clickRoute(h, 'https://example.test/sun/?overview=milky-way', { ctrlKey: true }).defaultPrevented, false);
+  const query = formatSharedView(saved(77777));
+  clickRoute(h, `https://example.test/sun/?overview=milky-way&${query}`);
+  await h.router.settled;
+  assert.deepEqual(scopes, []);
+  assert.ok(h.preparations[0].url.includes(query));
+  assert.equal(h.router.state().overview, true);
+  h.router.destroy();
+});
+
+test('a direct overview URL frames once, but a saved overview URL retains its camera', async () => {
+  for (const savedQuery of ['', `&${formatSharedView(saved(77777))}`]) {
+    const focused = [];
+    const h = harness({ initialUrl: `https://example.test/mercury/?overview=milky-way${savedQuery}`,
+      overviewTarget: () => ({ world: { fitted: true }, focusPositionM: [1, 2, 3] }),
+      focus: async options => focused.push(options) });
+    await h.router.settled;
+    assert.equal(focused.length, savedQuery ? 0 : 1);
+    if (!savedQuery) assert.equal(focused[0].reducedMotion, true);
+    assert.equal(h.router.state().overview, true);
+    h.router.destroy();
+  }
+});
+
+test('selecting another list body during a flight still uses its system framing', async () => {
+  const gate = deferred(), targets = [];
+  const h = harness({ withSun: true, prepare: ({ toId }) => toId === 'venus' ? gate.promise : {},
+    systemTarget: ({ objectId }) => { targets.push(objectId); return { system: objectId }; } });
+  await h.router.settled;
+  clickRoute(h, 'https://example.test/venus/');
+  const first = h.router.settled;
+  clickRoute(h, 'https://example.test/sun/');
+  assert.equal(await first, false);
+  await h.router.settled;
+  assert.deepEqual(targets, ['venus', 'sun']);
+  assert.deepEqual(h.preparations.at(-1).targetWorldCamera, { system: 'sun' });
+  assert.equal(h.router.state().overview, true);
+  gate.resolve({}); h.router.destroy();
 });

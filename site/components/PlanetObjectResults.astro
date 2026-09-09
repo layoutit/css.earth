@@ -1,32 +1,39 @@
 ---
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
 import PlanetObjectResult from "./PlanetObjectResult.astro";
-import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount } from "../object-categories.mjs";
+import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount, matchesObjectCategory } from "../object-categories.mjs";
 
 interface Props { activeObjectId?: string; }
 const { activeObjectId } = Astro.props;
+const defaultCategory = 'planet';
 const types = new Map(OBJECT_CATEGORIES);
 for (const object of PLANET_SEARCH_OBJECTS) if (!types.has(objectCategory(object.classification))) {
   types.set(object.classification, object.classification.replaceAll('-', ' ') + 's');
 }
 const classifications = PLANET_SEARCH_OBJECTS.map(object => object.classification);
+const defaultObjects = [
+  ...PLANET_SEARCH_OBJECTS.filter(object => object.classification === 'planet'),
+  ...PLANET_SEARCH_OBJECTS.filter(object => object.classification !== 'planet'),
+];
 const groups = [...types].map(([type, label]) => ({ type, label,
   count: objectCategoryCount(classifications, type),
 }));
 ---
 
 <div class="planet-object-tabs" role="tablist" aria-label="Object categories">
-  {groups.map((group, index) => <button type="button" role="tab"
+  {groups.map((group) => <button type="button" role="tab"
     id={`object-tab-${group.type}`} data-object-tab={group.type}
-    aria-controls="object-category-results" aria-selected={index === 0 ? 'true' : 'false'}
-    tabindex={index === 0 ? 0 : -1}>
+    aria-controls="object-category-results" aria-selected={group.type === defaultCategory ? 'true' : 'false'}
+    tabindex={group.type === defaultCategory ? 0 : -1}>
     <span>{group.label}</span>{" "}<span class="planet-object-tab-count">({group.count})</span>
   </button>)}
 </div>
 <div id="object-category-results" class="planet-object-results-scroll" role="tabpanel"
-  aria-labelledby="object-tab-all" tabindex="0">
+  aria-labelledby={`object-tab-${defaultCategory}`} tabindex="0"
+  style={`--object-category-visible-rows: ${Math.min(8, Number(objectCategoryCount(classifications, 'planet')))}`}>
   <ul class="planet-object-list">
-    {PLANET_SEARCH_OBJECTS.map(object => <PlanetObjectResult object={object} activeObjectId={activeObjectId} />)}
+    {defaultObjects.map(object => <PlanetObjectResult object={object} activeObjectId={activeObjectId}
+      hidden={!matchesObjectCategory(object.classification, defaultCategory)} />)}
   </ul>
   <p class="planet-object-empty" aria-live="polite" hidden>No matching objects</p>
 </div>

@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-ellipsoid-parameters@1",
+  "source": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+  "sourceSection": "Table 4.4, Model 1; section 4.3.1.2; Table 4.5",
+  "axisDefinition": "Physical maximum extents after alignment to the minimum-inertia X axis; Z is the spin axis.",
+  "axisRatioAB": 1.21,
+  "axisRatioBC": 1.24,
+  "thermalRadiusKm": 4.79,
+  "thermalRadiusUncertaintyKm": [
+    0.32,
+    0.33
+  ],
+  "scaleConvention": "thermal-radius-as-volume-equivalent",
+  "scaleQualification": "The SEPPCoN thermal effective radius is used as a volume-equivalent display radius. This is an explicit scale convention, not a measured volume or set of physical axis lengths.",
+  "subdivisions": 4,
+  "periodHours": 17.1988,
+  "periodUncertaintyHours": 0.0002,
+  "poleEclipticJ2000Degrees": [
+    55.4,
+    -58.3
+  ],
+  "alternatives": [
+    {
+      "model": "Model 2",
+      "axisRatioAB": 1.16,
+      "axisRatioBC": 0.94,
+      "poleEclipticDegrees": [
+        240.5,
+        -55.3
+      ],
+      "disposition": "Rejected by the thesis as inconsistent with stable principal-axis rotation. Not prepared."
+    }
+  ],
+  "qualification": "Smooth parameter-based approximation. The original convex mesh has not been obtained; no local shape features, concavities or surface textures are claimed."
+}

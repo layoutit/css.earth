@@ -1,0 +1,735 @@
+{
+  "status": "PASS",
+  "scope": "Six mapped views; selected-body qualification only",
+  "files": [
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/report.json",
+      "path": "browser/moon.json",
+      "bytes": 373931,
+      "sha256": "048305b52f5e850828ae3e1aebb21e54c59b4b6bdff228cee87f1d721f9db83f"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/moon-dpr1/geology-shadows-unsupported-scene.png",
+      "path": "screenshots/moon-dpr1-geology-shadows-unsupported-scene.png",
+      "bytes": 743588,
+      "sha256": "08541802989d878c7fce1d0fd8c9e80f26bb0baaff115bb214f116e9f777ea6c"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/moon-dpr1/silicate-signature-shadows-unsupported-scene.png",
+      "path": "screenshots/moon-dpr1-silicate-signature-shadows-unsupported-scene.png",
+      "bytes": 894859,
+      "sha256": "3f9fb9232157837d93d6c1cf55f8cbedbf5142bae86cf165df4b1201317a84e1"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/moon-dpr2/geology-shadows-unsupported-scene.png",
+      "path": "screenshots/moon-dpr2-geology-shadows-unsupported-scene.png",
+      "bytes": 1969186,
+      "sha256": "a60724e036dce772149c3e71f466af226bd288e4cb8a34469c6d75162ee8c597"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/moon-dpr2/silicate-signature-shadows-unsupported-scene.png",
+      "path": "screenshots/moon-dpr2-silicate-signature-shadows-unsupported-scene.png",
+      "bytes": 2724817,
+      "sha256": "0403c34875be10df655cbaefb987e780b6e609111ba806e5d7e52d0b6bddc252"
+    },
+    {
+      "source": "output/b3-resume/b6-browser-moon.json",
+      "path": "checks/b6-browser-moon.json",
+      "bytes": 13557,
+      "sha256": "e2a8102e6c1a0e51254fdd8107bce7101286d3e26bbe5b5bf307d17b62e01a35"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/1d3d00114d25b742df398aab4ac6ce2576ce56c0d008ea40ca4592751956c311.css",
+      "path": "styles/1d3d00114d25b742df398aab4ac6ce2576ce56c0d008ea40ca4592751956c311.css",
+      "bytes": 62002,
+      "sha256": "1d3d00114d25b742df398aab4ac6ce2576ce56c0d008ea40ca4592751956c311"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/9531a0ffcc971f0527adf01258681b67d07ce7daab3807b17b013c07d52f5d97.css",
+      "path": "styles/9531a0ffcc971f0527adf01258681b67d07ce7daab3807b17b013c07d52f5d97.css",
+      "bytes": 980,
+      "sha256": "9531a0ffcc971f0527adf01258681b67d07ce7daab3807b17b013c07d52f5d97"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/4cc9dc9fed25473a26502713919191487a139af8e3c27400664359e0f9d332b9.css",
+      "path": "styles/4cc9dc9fed25473a26502713919191487a139af8e3c27400664359e0f9d332b9.css",
+      "bytes": 880,
+      "sha256": "4cc9dc9fed25473a26502713919191487a139af8e3c27400664359e0f9d332b9"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/bc1a75e8299f8e78e22ed8103a96200536b59949a8ec53e1397481c338e64ea7.css",
+      "path": "styles/bc1a75e8299f8e78e22ed8103a96200536b59949a8ec53e1397481c338e64ea7.css",
+      "bytes": 1950,
+      "sha256": "bc1a75e8299f8e78e22ed8103a96200536b59949a8ec53e1397481c338e64ea7"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/6468b8673fa7100397e71fa3619be833c0340a42e7081916f97070671c1c6368.css",
+      "path": "styles/6468b8673fa7100397e71fa3619be833c0340a42e7081916f97070671c1c6368.css",
+      "bytes": 3506,
+      "sha256": "6468b8673fa7100397e71fa3619be833c0340a42e7081916f97070671c1c6368"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/a5cacc569e6b31d269df7a4f8dad4498e79981cdb938881817b60585ed5dbc1e.css",
+      "path": "styles/a5cacc569e6b31d269df7a4f8dad4498e79981cdb938881817b60585ed5dbc1e.css",
+      "bytes": 2617,
+      "sha256": "a5cacc569e6b31d269df7a4f8dad4498e79981cdb938881817b60585ed5dbc1e"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/0b1ef3c76da418263704c231276459ae8d1bbf621c95a632252142d089630e0f.css",
+      "path": "styles/0b1ef3c76da418263704c231276459ae8d1bbf621c95a632252142d089630e0f.css",
+      "bytes": 706,
+      "sha256": "0b1ef3c76da418263704c231276459ae8d1bbf621c95a632252142d089630e0f"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/9ed62178c9f41381b313c1050808ae4fc75d04cbf556da7696504fce98651a5c.css",
+      "path": "styles/9ed62178c9f41381b313c1050808ae4fc75d04cbf556da7696504fce98651a5c.css",
+      "bytes": 2192,
+      "sha256": "9ed62178c9f41381b313c1050808ae4fc75d04cbf556da7696504fce98651a5c"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/85f0eb8262d94d9138fd2c166474fb4e9a964578b670980c4f1c879849f2ad88.css",
+      "path": "styles/85f0eb8262d94d9138fd2c166474fb4e9a964578b670980c4f1c879849f2ad88.css",
+      "bytes": 3180,
+      "sha256": "85f0eb8262d94d9138fd2c166474fb4e9a964578b670980c4f1c879849f2ad88"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/ada9fdb61b95a56d22344ea9a45052ff2f6f1f1b6e69cb69a8aa11d043ad6657.css",
+      "path": "styles/ada9fdb61b95a56d22344ea9a45052ff2f6f1f1b6e69cb69a8aa11d043ad6657.css",
+      "bytes": 19142,
+      "sha256": "ada9fdb61b95a56d22344ea9a45052ff2f6f1f1b6e69cb69a8aa11d043ad6657"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css",
+      "path": "styles/df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15.css",
+      "bytes": 6098,
+      "sha256": "df7e008042a19ad9966a15d7a0738230198c9c9e1ef3042ce94c28602da4db15"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0.css",
+      "path": "styles/e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0.css",
+      "bytes": 12450,
+      "sha256": "e125434431ba6fa438a70265ed66687d4553f0789f5da3812e907808fa9a0db0"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/2911623f4ad6d7ac4dace6b1706e906ba8d2f25871ce27a5eaf59b6eb3d59b33.css",
+      "path": "styles/2911623f4ad6d7ac4dace6b1706e906ba8d2f25871ce27a5eaf59b6eb3d59b33.css",
+      "bytes": 2113,
+      "sha256": "2911623f4ad6d7ac4dace6b1706e906ba8d2f25871ce27a5eaf59b6eb3d59b33"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/53110a91baaa0d62ba522158ef0338df0f14f8007dc39085418e4ceaa85ea300.css",
+      "path": "styles/53110a91baaa0d62ba522158ef0338df0f14f8007dc39085418e4ceaa85ea300.css",
+      "bytes": 2125,
+      "sha256": "53110a91baaa0d62ba522158ef0338df0f14f8007dc39085418e4ceaa85ea300"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-36-54.955Z/styles/8761db7ba02fe3f906029eb499c20268636c39e92cb03ff481d87bc4cc2b0148.css",
+      "path": "styles/8761db7ba02fe3f906029eb499c20268636c39e92cb03ff481d87bc4cc2b0148.css",
+      "bytes": 36343,
+      "sha256": "8761db7ba02fe3f906029eb499c20268636c39e92cb03ff481d87bc4cc2b0148"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/report.json",
+      "path": "browser/europa.json",
+      "bytes": 492853,
+      "sha256": "7124838076b5e948ac65961c8e06cfdaebcf2cf78ed445a5f1ad1a07ddcd6449"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/europa-dpr1/geology-shadows-false-scene.png",
+      "path": "screenshots/europa-dpr1-geology-shadows-false-scene.png",
+      "bytes": 625677,
+      "sha256": "39134ec6a6cf3750c3c07a84112857ad4ff6a66824ff23ca740fa69c21672d91"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/europa-dpr1/geology-shadows-true-scene.png",
+      "path": "screenshots/europa-dpr1-geology-shadows-true-scene.png",
+      "bytes": 564486,
+      "sha256": "491f8f17e9b2743e11a0c0c1bc97cfbf1490350f6108a0884ca49bfd4427a8f5"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/europa-dpr1/infrared-shadows-false-scene.png",
+      "path": "screenshots/europa-dpr1-infrared-shadows-false-scene.png",
+      "bytes": 581887,
+      "sha256": "51ea966d8d98052e0289c46aa07105782817f963f42fa3c861a47b56ee034e1d"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/europa-dpr1/infrared-shadows-true-scene.png",
+      "path": "screenshots/europa-dpr1-infrared-shadows-true-scene.png",
+      "bytes": 511008,
+      "sha256": "36da334ebe1f51be3922e752d8df85986a6854a37b1fa3a30cf83ef3cd692cc9"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/europa-dpr2/geology-shadows-false-scene.png",
+      "path": "screenshots/europa-dpr2-geology-shadows-false-scene.png",
+      "bytes": 1542581,
+      "sha256": "a728b1a7879f762b05eae95f111457d2fc605f333629a4a4a1c8929091a5542b"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/europa-dpr2/geology-shadows-true-scene.png",
+      "path": "screenshots/europa-dpr2-geology-shadows-true-scene.png",
+      "bytes": 1379796,
+      "sha256": "874d12b17502efeefa631c18f05d6271172b3c5dc6323bd88d0e526613b575e0"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/europa-dpr2/infrared-shadows-false-scene.png",
+      "path": "screenshots/europa-dpr2-infrared-shadows-false-scene.png",
+      "bytes": 1471002,
+      "sha256": "97cb0fcd3d2e9720aa07c116e617cd6ca8e25e31feffdc4b3f695b8ade2e3a09"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/europa-dpr2/infrared-shadows-true-scene.png",
+      "path": "screenshots/europa-dpr2-infrared-shadows-true-scene.png",
+      "bytes": 1268408,
+      "sha256": "2503c12eb9de3360ca257da38a10cc6f614add35c8ab5f8e7dd208d26e5e1b48"
+    },
+    {
+      "source": "output/b3-resume/b6-browser-europa-complete.json",
+      "path": "checks/b6-browser-europa-complete.json",
+      "bytes": 19406,
+      "sha256": "d6b243c4dd66d0d6324d08829ba771f405f14673572208db4288031500d9da4e"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-04-14.642Z/styles/49deeccc3bd62ef94996a03c4839a7ab5e9638b1ad1ce72e795b0cd4167c26bb.css",
+      "path": "styles/49deeccc3bd62ef94996a03c4839a7ab5e9638b1ad1ce72e795b0cd4167c26bb.css",
+      "bytes": 2295,
+      "sha256": "49deeccc3bd62ef94996a03c4839a7ab5e9638b1ad1ce72e795b0cd4167c26bb"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-59-54.918Z/report.json",
+      "path": "browser/callisto.json",
+      "bytes": 249895,
+      "sha256": "6610d3dc4407ef06c71e6f1796428fe2e2374d6a23d1b71ef818eb62a177ab2d"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-59-54.918Z/callisto-dpr1/infrared-shadows-false-scene.png",
+      "path": "screenshots/callisto-dpr1-infrared-shadows-false-scene.png",
+      "bytes": 562405,
+      "sha256": "c2cd66132ee9b9efb58811b2a223d27c5f9dd4af817c2f80597e9fffcc3407d9"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-59-54.918Z/callisto-dpr1/infrared-shadows-true-scene.png",
+      "path": "screenshots/callisto-dpr1-infrared-shadows-true-scene.png",
+      "bytes": 544627,
+      "sha256": "fde92e24cc11217e0c36dd405e9beddd536c324c378bdc01f4a1c04f201f8eca"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-59-54.918Z/callisto-dpr2/infrared-shadows-false-scene.png",
+      "path": "screenshots/callisto-dpr2-infrared-shadows-false-scene.png",
+      "bytes": 1407518,
+      "sha256": "f2e5efd3bebe2475627af0d79139c076f21e04afc425fe84b82d253f88faa10c"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-59-54.918Z/callisto-dpr2/infrared-shadows-true-scene.png",
+      "path": "screenshots/callisto-dpr2-infrared-shadows-true-scene.png",
+      "bytes": 1361740,
+      "sha256": "85658fd81ced4e83656dfb6f854bcc415e7a5bffe96dc0085cf9d317b22d1c67"
+    },
+    {
+      "source": "output/b3-resume/b6-browser-callisto-final.json",
+      "path": "checks/b6-browser-callisto-final.json",
+      "bytes": 11580,
+      "sha256": "cb50917d980cb7922e644f4aaf72fbe882b7d9c6035a68f48bd3945bf49c4b58"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T17-59-54.918Z/styles/41b5038d3545f054574e61cdaac02bcc392c23002ee2454113dfe04a57bfa203.css",
+      "path": "styles/41b5038d3545f054574e61cdaac02bcc392c23002ee2454113dfe04a57bfa203.css",
+      "bytes": 2377,
+      "sha256": "41b5038d3545f054574e61cdaac02bcc392c23002ee2454113dfe04a57bfa203"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-00-58.965Z/report.json",
+      "path": "browser/charon-dpr1.json",
+      "bytes": 101796,
+      "sha256": "d30562ac526612ffd4e9fcaf377dfa5da6c3ca0fcaa92a0ed05784aa484c2d96"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-00-58.965Z/charon-dpr1/albedo-shadows-false-scene.png",
+      "path": "screenshots/charon-dpr1-albedo-shadows-false-scene.png",
+      "bytes": 690127,
+      "sha256": "965eb862220e754aa21410acc6cb85e473ce36fba4f34264674f470c425fddcc"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-00-58.965Z/charon-dpr1/albedo-shadows-true-scene.png",
+      "path": "screenshots/charon-dpr1-albedo-shadows-true-scene.png",
+      "bytes": 582645,
+      "sha256": "ea50ef9e431bf455a9be37e74c3718ea86fa887d9843a7b1014cd6987e06b8d0"
+    },
+    {
+      "source": "output/b3-resume/b6-browser-charon-final-dpr1.json",
+      "path": "checks/b6-browser-charon-final-dpr1.json",
+      "bytes": 5190,
+      "sha256": "2b68ede1e984284039857d740140646c29db439d460bc53d8e87526a93a29fed"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-00-58.965Z/styles/13a53a6e45db8b8074febd7d1c5805ec2b02d6f27b9aca0b85c3f62685210da3.css",
+      "path": "styles/13a53a6e45db8b8074febd7d1c5805ec2b02d6f27b9aca0b85c3f62685210da3.css",
+      "bytes": 2295,
+      "sha256": "13a53a6e45db8b8074febd7d1c5805ec2b02d6f27b9aca0b85c3f62685210da3"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-02-17.176Z/report.json",
+      "path": "browser/charon-dpr2.json",
+      "bytes": 101811,
+      "sha256": "4a459af9582be9aef0c068ccd48f6deec2e0dae6231d26cdfbfd44f7782d90c2"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-02-17.176Z/charon-dpr2/albedo-shadows-false-scene.png",
+      "path": "screenshots/charon-dpr2-albedo-shadows-false-scene.png",
+      "bytes": 1782214,
+      "sha256": "39accdbe80e955c5febf02344e4b9c1d7c552d2598dc6a87bc31611136fc51de"
+    },
+    {
+      "source": "output/playwright/b6-surfaces/integrated-2026-09-09T18-02-17.176Z/charon-dpr2/albedo-shadows-true-scene.png",
+      "path": "screenshots/charon-dpr2-albedo-shadows-true-scene.png",
+      "bytes": 1477879,
+      "sha256": "eb3d2ca3f0f6f8ca6c2ec027501b1f32def89c3a80976cd167c24448d33bd17e"
+    },
+    {
+      "source": "output/b3-resume/b6-browser-charon-final-dpr2.json",
+      "path": "checks/b6-browser-charon-final-dpr2.json",
+      "bytes": 5820,
+      "sha256": "3f77743529d559e358d86923c0b8a1aa07f58b8c25687009fe33a5e8721d17fb"
+    },
+    {
+      "source": "output/b6-source-proof/moon.json",
+      "path": "sources/moon.json",
+      "bytes": 20677,
+      "sha256": "8221306438cde9b13be86536d63c49732f0ae48f89bd7c4374c14551a775b917"
+    },
+    {
+      "source": "output/b6-previews/moon-geology.png",
+      "path": "sources/moon-geology.png",
+      "bytes": 120445,
+      "sha256": "a209d84652cf098c7a6232661e1feeadcdbe817038b1c96eaa38c11a7ef0dbff"
+    },
+    {
+      "source": "output/b6-previews/moon-silicate-signature.png",
+      "path": "sources/moon-silicate-signature.png",
+      "bytes": 666623,
+      "sha256": "28d184a41d0074fb6e59eb51e9ce4ab1e7d012e521d892846095e4e12d4b8e0a"
+    },
+    {
+      "source": "output/b6-source-proof/europa.json",
+      "path": "sources/europa.json",
+      "bytes": 26795,
+      "sha256": "aae21f6a96b314ba9a3df7274f738ed4dc0c9500e2815e3f461c0fd994fafa17"
+    },
+    {
+      "source": "output/b6-previews/europa-geology.png",
+      "path": "sources/europa-geology.png",
+      "bytes": 35268,
+      "sha256": "b5d9bd0b265e58afd628dc2fcbd96d351ca47f3997e5b0902c38a9af436dd684"
+    },
+    {
+      "source": "output/b6-previews/europa-infrared.png",
+      "path": "sources/europa-infrared.png",
+      "bytes": 62739,
+      "sha256": "afa3af7c51ff7a267a2caafddf22a97b285f488840e1dbf3596331d456a75d8d"
+    },
+    {
+      "source": "output/b6-source-proof/callisto.json",
+      "path": "sources/callisto.json",
+      "bytes": 17680,
+      "sha256": "96eac355280839b446bd24e28f65235937d915c6f7651b70eec49f35892e200a"
+    },
+    {
+      "source": "output/b6-previews/callisto-infrared.png",
+      "path": "sources/callisto-infrared.png",
+      "bytes": 36138,
+      "sha256": "7e87383bbdd70d21ab404d3c0b29aebe221af2ee0d179c60aa7b2301340af124"
+    },
+    {
+      "source": "output/b6-source-proof/charon.json",
+      "path": "sources/charon.json",
+      "bytes": 1358,
+      "sha256": "11c7209535bebe111b8e40f8a1ba395c793cc601a062f23fb3abff94dfb292cb"
+    },
+    {
+      "source": "output/b6-previews/charon-albedo.png",
+      "path": "sources/charon-albedo.png",
+      "bytes": 79027,
+      "sha256": "5168c19b74fcc7ee31d45055378823f461dcb0f302cb688fab4442504f79cc08"
+    },
+    {
+      "source": "output/b6-qualification/packages.json",
+      "path": "checks/packages.json",
+      "bytes": 60276,
+      "sha256": "4f3732545c4c66d299adcef16764fbdebfcf2aecdcbe050cbc36d93b96bc3e26"
+    },
+    {
+      "source": "output/b3-resume/b6-build-packages.json",
+      "path": "checks/b6-build-packages.json",
+      "bytes": 1895,
+      "sha256": "f03720cf87e04115ec9b707c1e5191bb1a45a6107c9ca2237df729989bde3a62"
+    },
+    {
+      "source": "output/b3-resume/b6-build-packages.log",
+      "path": "checks/b6-build-packages.log",
+      "bytes": 2424,
+      "sha256": "a40dc2e7a62993bf1f3c3db3dbb333a5340881ce2cc0a1f426b7f13f881bcfca"
+    },
+    {
+      "source": "output/b3-resume/b6-build-renderer-complete.json",
+      "path": "checks/b6-build-renderer-complete.json",
+      "bytes": 1923,
+      "sha256": "1823fee6786531e8e670b1db9d3b03bf6804d132bb20008193e96cce8294f28d"
+    },
+    {
+      "source": "output/b3-resume/b6-build-renderer-complete.log",
+      "path": "checks/b6-build-renderer-complete.log",
+      "bytes": 5809,
+      "sha256": "af58d29efb9d3525bceecdf6a4dc983f6a6af238637b522ffc7351c522517232"
+    },
+    {
+      "source": "output/b3-resume/b6-build-preparation.json",
+      "path": "checks/b6-build-preparation.json",
+      "bytes": 507,
+      "sha256": "91bf5276c22f000101f867616c83a072bfc15b81eb2df99be32b2ba886b077e8"
+    },
+    {
+      "source": "output/b3-resume/b6-build-preparation.log",
+      "path": "checks/b6-build-preparation.log",
+      "bytes": 1398,
+      "sha256": "38c4f27f5cdca67d5eb2d63d6d5342fd922599129a1c33104d8ad32c7606751b"
+    },
+    {
+      "source": "output/b3-resume/b6-typecheck-preparation.json",
+      "path": "checks/b6-typecheck-preparation.json",
+      "bytes": 1040,
+      "sha256": "c2ff5b2a08716a0915b90f7ff9b1c028f77a81af1c0989d9598a765a22844b80"
+    },
+    {
+      "source": "output/b3-resume/b6-typecheck-preparation.log",
+      "path": "checks/b6-typecheck-preparation.log",
+      "bytes": 167,
+      "sha256": "3f653a62100cb787ed5266c88099b5dc7dffb68981a4bba34f4850c203083a72"
+    },
+    {
+      "source": "output/b3-resume/b6-intake-tests.json",
+      "path": "checks/b6-intake-tests.json",
+      "bytes": 534,
+      "sha256": "76e8c1132257d3cc43682b037538364c0a2d54fee386692e4c442982abc6f38b"
+    },
+    {
+      "source": "output/b3-resume/b6-intake-tests.log",
+      "path": "checks/b6-intake-tests.log",
+      "bytes": 4500,
+      "sha256": "b97d39c7b87fba862cfcd0964fe17d56eb2cca1b1a8be5b9fdeff9175edc0fcf"
+    },
+    {
+      "source": "output/b3-resume/b6-focused-tests.json",
+      "path": "checks/b6-focused-tests.json",
+      "bytes": 4995,
+      "sha256": "aab9be41a108cea09b97f6442f662c89a53d36101106322342dc8d922f28d22b"
+    },
+    {
+      "source": "output/b3-resume/b6-focused-tests.log",
+      "path": "checks/b6-focused-tests.log",
+      "bytes": 9711,
+      "sha256": "2456f2a11b7fbcbe8e2a9e9fae0e81e8e50684f8ff5d825999f2ac0bc34cf549"
+    },
+    {
+      "source": "output/b3-resume/b6-json-restore.json",
+      "path": "checks/b6-json-restore.json",
+      "bytes": 487,
+      "sha256": "8065f1cf32a3eaa3b739290dd111da58b8124a0f6b994104ee91b752b3c8c5f4"
+    },
+    {
+      "source": "output/b3-resume/b6-json-restore.log",
+      "path": "checks/b6-json-restore.log",
+      "bytes": 37,
+      "sha256": "8f04198d0c737b9ec725ec799ea491f42d96aa8203150d1a0da1ce9c119c64fe"
+    },
+    {
+      "source": "output/b3-resume/b6-runtime-delivery.json",
+      "path": "checks/b6-runtime-delivery.json",
+      "bytes": 17341,
+      "sha256": "ba0cd96e9de8ee4cbeb75a380615afa4cfc715e3c874bc0ecd1ac248b5f66eae"
+    },
+    {
+      "source": "output/b3-resume/b6-runtime-delivery.log",
+      "path": "checks/b6-runtime-delivery.log",
+      "bytes": 829,
+      "sha256": "e8ddce97bf1ed6ac7b251e56a946c24042b87c5e75591f6949cd1fce94dabea2"
+    },
+    {
+      "source": "output/b3-resume/b6-build-renderer.json",
+      "path": "checks/b6-build-renderer-stopped.json",
+      "bytes": 1848,
+      "sha256": "244bfbe5504b5c1286b8c29cbc94c1d2624c60ddf725030a1904feda7c9c7088"
+    },
+    {
+      "source": "output/b3-resume/b6-build-renderer.log",
+      "path": "checks/b6-build-renderer-stopped.log",
+      "bytes": 3969,
+      "sha256": "e4cd71ee14d37c733cc6104ddf945f97f44163bb61ebf222472cde51b0f3db7b"
+    },
+    {
+      "source": "output/b6-delivery/run-Zorh3s/receipt.json",
+      "path": "delivery.json",
+      "bytes": 65889,
+      "sha256": "d724379ef4381900f6b8e51b1801d67e2b35a9ed2e55369e2fd51e26d070c6ea"
+    },
+    {
+      "source": "output/b6-delivery/run-Zorh3s/publication.json",
+      "path": "publication.json",
+      "bytes": 13695,
+      "sha256": "8f79fa24848d4d976596d73e859242658fed0cd1ca42abe79e90a67a26a0cd64"
+    }
+  ],
+  "cases": [
+    {
+      "id": "moon",
+      "dpr": 1,
+      "browser": "152.0.7977.84",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sourceReport": "browser/moon.json",
+      "views": [
+        {
+          "lens": "surface",
+          "shadows": null,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        },
+        {
+          "lens": "geology",
+          "shadows": null,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        },
+        {
+          "lens": "silicate-signature",
+          "shadows": null,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        }
+      ]
+    },
+    {
+      "id": "moon",
+      "dpr": 2,
+      "browser": "152.0.7977.84",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sourceReport": "browser/moon.json",
+      "views": [
+        {
+          "lens": "surface",
+          "shadows": null,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        },
+        {
+          "lens": "geology",
+          "shadows": null,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        },
+        {
+          "lens": "silicate-signature",
+          "shadows": null,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        }
+      ]
+    },
+    {
+      "id": "europa",
+      "dpr": 1,
+      "browser": "152.0.7977.84",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sourceReport": "browser/europa.json",
+      "views": [
+        {
+          "lens": "normal",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "normal",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        },
+        {
+          "lens": "geology",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "geology",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        },
+        {
+          "lens": "infrared",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "infrared",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        }
+      ]
+    },
+    {
+      "id": "europa",
+      "dpr": 2,
+      "browser": "152.0.7977.84",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sourceReport": "browser/europa.json",
+      "views": [
+        {
+          "lens": "normal",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "normal",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        },
+        {
+          "lens": "geology",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "geology",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        },
+        {
+          "lens": "infrared",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "infrared",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        }
+      ]
+    },
+    {
+      "id": "callisto",
+      "dpr": 1,
+      "browser": "152.0.7977.84",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sourceReport": "browser/callisto.json",
+      "views": [
+        {
+          "lens": "infrared",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "infrared",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        }
+      ]
+    },
+    {
+      "id": "callisto",
+      "dpr": 2,
+      "browser": "152.0.7977.84",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sourceReport": "browser/callisto.json",
+      "views": [
+        {
+          "lens": "infrared",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "infrared",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        }
+      ]
+    },
+    {
+      "id": "charon",
+      "dpr": 1,
+      "browser": "152.0.7977.84",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sourceReport": "browser/charon-dpr1.json",
+      "views": [
+        {
+          "lens": "albedo",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "albedo",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        }
+      ]
+    },
+    {
+      "id": "charon",
+      "dpr": 2,
+      "browser": "152.0.7977.84",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "sourceReport": "browser/charon-dpr2.json",
+      "views": [
+        {
+          "lens": "albedo",
+          "shadows": false,
+          "surfaceLeaves": 452,
+          "dragChecked": false
+        },
+        {
+          "lens": "albedo",
+          "shadows": true,
+          "surfaceLeaves": 452,
+          "dragChecked": true
+        }
+      ]
+    }
+  ],
+  "totalBytes": 25491564
+}

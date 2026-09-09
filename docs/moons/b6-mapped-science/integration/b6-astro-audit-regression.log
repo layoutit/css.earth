@@ -1,0 +1,11 @@
+✔ common shell ownership follows actual Astro imports, template expressions, and client scripts (72.182084ms)
+✔ Astro server builtins do not hide the same imports in browser scripts (21.640833ms)
+✔ literal navigation content is allowed only through the shell closure, not runtime dispatch (20.995292ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 396.962667

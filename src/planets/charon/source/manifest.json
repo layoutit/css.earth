@@ -159,13 +159,56 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "id": "new-horizons-charon-bond-albedo-grid",
+      "path": "science/nh-charon-bond-georeferenced.tif",
+      "expectedBytes": 107840,
+      "expectedSha256": "bb936d47510a45c1bb99b143c2cc25b6e677a344dc9eff579d1ff06d07057dfc",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx",
+      "credit": "New Horizons geology and geophysics team; NASA/JHUAPL/SwRI; NASA PDS Small Bodies Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx"
+      ],
+      "acquisition": "Checked-in lossless GeoTIFF wrapper of nh_charon_bond.img; no resampling. Reproduce with tools/objects/acquisition/pds4-byte-geotiff.py and science/prepare-bond-map.json.",
+      "redistribution": "Retain producer citation and photometric-model interpretation.",
+      "consumers": [
+        "bond-albedo"
+      ],
+      "width": 1518,
+      "height": 700,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 606000
+      },
+      "coverage": "Original DN zero is missing. Preserve metric pixel registration and incomplete southern extent."
+    },
+    {
+      "path": "science/nh_charon_bond.img",
+      "expectedBytes": 1062600,
+      "expectedSha256": "7e58c10961d1721bc2912e7cd48254f54abf22f1e09351aa5cdc80845f1fab11",
+      "id": "mapped-science-science-nh-charon-bond-img",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.img",
+      "credit": "NASA/JHUAPL/SwRI; New Horizons geophysics derived products",
+      "license": "Public NASA scientific data",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Restore exact original via the mapped-science acquisition group; verify before running the body-owned intake plan.",
+      "redistribution": "Public scientific input; preserve source attribution and the documented processing.",
+      "consumers": [
+        "mapped-science-inputs"
+      ]
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10544,
-      "expectedSha256": "1d019f22059c1b908384d58fc112fc396c3e78e2676b4d02d6fbb9698fe549a3",
+      "expectedBytes": 12035,
+      "expectedSha256": "d52c3e5617fbff1e26d1703e8035af4f72f0c6d9e3a718baa21856d3546e9d91",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -176,8 +219,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1240,
-      "expectedSha256": "632cc32e2ab12cce20afc1e3db833ecbb4516345ae7781abb8b823bb9807ce93",
+      "expectedBytes": 1776,
+      "expectedSha256": "326ce205234a4666cd6968f7eb49053baf4821796048fbbed94dc6eaf2bf2b8f",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -188,8 +231,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 4052,
-      "expectedSha256": "3932ef460c88f7d8592f3fffd6a1f51025ba683f411b13426b06f7b5eb0a38cd",
+      "expectedBytes": 5351,
+      "expectedSha256": "4e4b1df6415a820d771b2b31ce65cd2170de5b40324e9a40febee252e743a812",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -254,6 +297,24 @@
       "purpose": "Independent NumPy source mask counts and raw numeric/bit-pattern anchors.",
       "expectedBytes": 4575,
       "expectedSha256": "cc4a75bb4673a358d20ee4a3af9d893117785bbbadb8ec7fcf77a6182fcd88e7"
+    },
+    {
+      "path": "science/nh_charon_bond.lblx",
+      "expectedBytes": 10737,
+      "expectedSha256": "daa71e1c658e8c497203177290dc105c3ecad1c0280943affffaaa8ceddab867",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "science/prepare-bond-map.json",
+      "expectedBytes": 1919,
+      "expectedSha256": "07f9e0888d48d121243cd736165a91a5c365758b24a8309dfe8939882623575f",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+    },
+    {
+      "path": "science/nh-charon-bond-georeferenced.json",
+      "expectedBytes": 557,
+      "expectedSha256": "23bac0c15b44cb683ec4c3d55c647fad6c73036b68b56d79c62f8dee44ce0101",
+      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
     }
   ],
   "generatedIntermediates": []

@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-nims-composite@1",
+  "width": 2048,
+  "height": 1024,
+  "radiusMeters": 1564130,
+  "polarRadiusMeters": 1560930,
+  "pins": {
+    "17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.tif": "ce3db4c6f6a0dd863f0cc8f912f6d16d8bdeb8a24f34b1ada00b81a89fb8d52b",
+    "17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.xml": "a7d073d0d2d16bdb6fc7a293444b2906d6a38f745e237f80e0667f196c2e8d3f",
+    "17ENGLOBAL01A_MV01_wavelengths.csv": "b4aeb8d25c0b43b7c5eb78a9a5e84c3333bbeade56f568af09f7247867595453",
+    "17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.tif": "89d6ef7a7c1284ee729f1c6a884d0300eb89244213201143142e6a3d2af81b7e",
+    "17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.xml": "9ddbbb4e9329da7ed35352f257b8f4f0da10eedf32b07fcb778dc7195e6897f8",
+    "17ENGLOBAL02A_MV01_wavelengths.csv": "2b6f1a8884cb805c142e45731788b7bfe13629169bc8bfff832f09d619269be8"
+  },
+  "displayRanges": [
+    [
+      0,
+      0.6
+    ],
+    [
+      0,
+      1.2
+    ],
+    [
+      0,
+      1.5
+    ]
+  ],
+  "output": "europa-nims-composite.tif",
+  "receipt": "europa-nims-composite.json",
+  "observations": [
+    {
+      "path": "17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.tif",
+      "wavelengths": "17ENGLOBAL01A_MV01_wavelengths.csv",
+      "bands": [
+        41,
+        31,
+        3
+      ],
+      "wavelengthMicrometers": [
+        1.49601,
+        1.34184,
+        0.732919
+      ],
+      "shape": [
+        89,
+        137,
+        228
+      ],
+      "crsWkt": "PROJCS[\"Europa_Orthographic_17ENGLOBAL01A_subspacecraft\",GEOGCS[\"GCS_Europa_2000\",DATUM[\"D_Europa_2000\",SPHEROID[\"Europa_2000_IAU_IAG\",1564130,488.790625]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Orthographic\"],PARAMETER[\"latitude_of_origin\",-2.3],PARAMETER[\"central_meridian\",151.6],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "transform": [
+        26975.0269477613,
+        0.0,
+        -705233.9497137379,
+        0.0,
+        -25765.314797331,
+        1844700.1914370928,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "noData": -3.4028226550889045e+38
+    },
+    {
+      "path": "17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.tif",
+      "wavelengths": "17ENGLOBAL02A_MV01_wavelengths.csv",
+      "bands": [
+        65,
+        55,
+        7
+      ],
+      "wavelengthMicrometers": [
+        1.49601,
+        1.34184,
+        0.740634
+      ],
+      "shape": [
+        61,
+        109,
+        360
+      ],
+      "crsWkt": "PROJCS[\"Europa_Orthographic_17ENGLOBAL02A_subspacecraft\",GEOGCS[\"GCS_Europa_2000\",DATUM[\"D_Europa_2000\",SPHEROID[\"Europa_2000_IAU_IAG\",1564130,488.790625]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Orthographic\"],PARAMETER[\"latitude_of_origin\",0.2],PARAMETER[\"central_meridian\",-73.3],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "transform": [
+        28063.8502255776,
+        0.0,
+        -1567419.510296868,
+        0.0,
+        -30671.8376840698,
+        1744747.119097768,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "noData": -3.4028226550889045e+38
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-nims-composite@1",
+  "width": 2048,
+  "height": 1024,
+  "radiusMeters": 2409400,
+  "polarRadiusMeters": 2409300,
+  "pins": {
+    "G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif": "1b9680f47a051a20f4728bbd8b28e7437597254f10678044f969891bbe9e4a09",
+    "G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.xml": "9d0af51843aeb782943dfbd5cf4a40edccef969acbff3505486e4397ed93cc01",
+    "G8CNADLIND01A_MV03_wavelengths.csv": "a13171c916045eea4595394fd1ef84815136db49c5ed101b4ffb010d630e0fdd",
+    "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif": "65db2ae482bc63299bcca1848a18af7aa32d6a976310877e2ccd5ce297b7e854",
+    "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.xml": "3ce395a2d0801d51a1d05e8c08e9a685aedc8c85ef2d0a0eb514927293bfc564",
+    "G8CNGLOBAL02A_MV03_wavelengths.csv": "46307e3b635ff626f9c80bbcbd680aa46289e14d14a7197b7bc79f9f160a3dc2"
+  },
+  "displayRanges": [
+    [
+      0,
+      0.45
+    ],
+    [
+      0,
+      0.45
+    ],
+    [
+      0,
+      0.2
+    ]
+  ],
+  "output": "callisto-nims-composite.tif",
+  "receipt": "callisto-nims-composite.json",
+  "observations": [
+    {
+      "path": "G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
+      "wavelengths": "G8CNADLIND01A_MV03_wavelengths.csv",
+      "bands": [
+        6,
+        66,
+        144
+      ],
+      "wavelengthMicrometers": [
+        0.773205,
+        2.24748,
+        3.65902
+      ],
+      "shape": [
+        87,
+        147,
+        216
+      ],
+      "crsWkt": "PROJCS[\"Callisto_Orthographic_G8CNADLIND01A_subspacecraft\",GEOGCS[\"GCS_Callisto_2000\",DATUM[\"D_Callisto_2000\",SPHEROID[\"Callisto_2000_IAU_IAG\",2409400,24094]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Orthographic\"],PARAMETER[\"latitude_of_origin\",-37.7],PARAMETER[\"central_meridian\",-45.5],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "transform": [
+        9803.9540634139,
+        0.0,
+        60687.5089071673,
+        0.0,
+        -6766.94769338009,
+        -236380.19958672184,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "noData": -3.4028226550889045e+38
+    },
+    {
+      "path": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+      "wavelengths": "G8CNGLOBAL02A_MV03_wavelengths.csv",
+      "bands": [
+        6,
+        66,
+        144
+      ],
+      "wavelengthMicrometers": [
+        0.773275,
+        2.24762,
+        3.65916
+      ],
+      "shape": [
+        63,
+        118,
+        216
+      ],
+      "crsWkt": "PROJCS[\"G8CNGLOBAL02A_subspacecraft\",GEOGCS[\"GCS_Callisto_2000\",DATUM[\"D_Callisto_2000\",SPHEROID[\"Callisto_2000_IAU_IAG\",2409400,24094]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Orthographic\"],PARAMETER[\"latitude_of_origin\",-6.1],PARAMETER[\"central_meridian\",1.7],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "transform": [
+        48998.5907088568,
+        0.0,
+        -2721698.0776368743,
+        0.0,
+        -45653.6492994997,
+        2827573.7575767287,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "noData": -3.4028226550889045e+38
+    }
+  ]
+}

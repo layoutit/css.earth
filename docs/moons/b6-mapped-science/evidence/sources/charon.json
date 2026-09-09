@@ -1,0 +1,47 @@
+{
+  "body": "charon",
+  "status": "PASS",
+  "products": [
+    {
+      "id": "albedo",
+      "method": "All 1062600 original PDS bytes equal GeoTIFF cells, with geographic/value anchors",
+      "probes": [
+        {
+          "longitude": -2.0158057312681166,
+          "latitude": 78.02371786968926,
+          "DN": 40,
+          "bondAlbedo": 0.15686274509800002
+        },
+        {
+          "longitude": -108.73517332020207,
+          "latitude": 42.450595340044615,
+          "DN": 79,
+          "bondAlbedo": 0.30980392156855
+        },
+        {
+          "longitude": -2.0158057312681166,
+          "latitude": 6.877472810399972,
+          "DN": 84,
+          "bondAlbedo": 0.3294117647058
+        },
+        {
+          "longitude": 57.27273181813963,
+          "latitude": -28.695649719244678,
+          "DN": 0,
+          "bondAlbedo": null
+        },
+        {
+          "longitude": -2.0158057312681166,
+          "latitude": -64.26877224888932,
+          "DN": 0,
+          "bondAlbedo": null
+        }
+      ]
+    }
+  ],
+  "sourceManifestSha256": "00096da025be1265e80fd7cbecf2f9ada06ca20ff5e701966c8e0b6c765f76eb",
+  "scriptSha256": "b967e1d7e4f10e6eb69e303d0ef5a08dc67480cf018d6abf183cb545550cae5e",
+  "rasterSha256s": {
+    "science/nh-charon-bond-georeferenced.tif": "bb936d47510a45c1bb99b143c2cc25b6e677a344dc9eff579d1ff06d07057dfc"
+  }
+}

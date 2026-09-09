@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { createReadStream } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import { posix, relative, resolve, win32 } from "node:path";
 
@@ -143,13 +144,17 @@ export async function verifySourceManifest({ manifest, planetName, sourceRoot })
 }
 
 export function assertSourceBytes({ entry, bytes, planetName }) {
-  if (bytes.byteLength !== entry.expectedBytes) {
+  return assertSourceDigest({ entry, size: bytes.byteLength,
+    actual: createHash("sha256").update(bytes).digest("hex"), planetName });
+}
+
+function assertSourceDigest({ entry, size, actual, planetName }) {
+  if (size !== entry.expectedBytes) {
     throw new Error(
       `${planetName} source size drifted for ${entry.path}: expected ${
-        entry.expectedBytes}, received ${bytes.byteLength}.`,
+        entry.expectedBytes}, received ${size}.`,
     );
   }
-  const actual = createHash("sha256").update(bytes).digest("hex");
   if (actual !== entry.expectedSha256) {
     throw new Error(
       `${planetName} source hash drifted for ${entry.path}: expected ${
@@ -160,8 +165,15 @@ export function assertSourceBytes({ entry, bytes, planetName }) {
 }
 
 async function validateSourceEntry({ entry, planetName, sourceRoot }) {
-  const bytes = await readFile(resolve(sourceRoot, entry.path));
-  assertSourceBytes({ entry, bytes, planetName });
+  // Original scientific rasters can be hundreds of MB. Verification requires
+  // their bytes and digest, not a resident copy of every source file.
+  const digest = createHash("sha256");
+  let size = 0;
+  for await (const chunk of createReadStream(resolve(sourceRoot, entry.path))) {
+    size += chunk.length;
+    digest.update(chunk);
+  }
+  assertSourceDigest({ entry, size, actual: digest.digest("hex"), planetName });
 }
 
 function validateEntryBase(planetId, entry, kind, paths) {

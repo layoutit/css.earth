@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "724598bdbba050772328911f893682bfa878ddcc89d61ccc3ca189d768b06508"
+    "sha256": "54c32ca7399b2a4d8a06222c484bf0acbb799cd535dd1f1f4abf4e897b55965c"
   },
   "id": "moon",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "b0ec475cd7d21c58e606b7eea3e0a893c25e3d6d64628816a2b59b27ff242b24"
+          "sha256": "ccb8c30e7840c19bc3d6e6958b40bea14e5fbf2049306b19cce02438c9af8bde"
         },
         {
           "id": "geometry",
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "90d43458850500f299ecb4b928a5325de1dd3d3cf62eb119f81a9b76b13dcc8f"
+          "sha256": "8013c65f1a2d60fb0a28458e3e8175b5fa02372bb4d550cb0895c78c2e78c9a2"
         },
         {
           "id": "title",
@@ -56,7 +56,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "d92b36fc5bff6017f1c4d983a430872e20367865d946a1fb7d112b5eb03f69da"
+          "sha256": "527c814f547494492a0921ceff6fc842a7fdf6ec87b08e1e08df8f0deaa75c0e"
         },
         {
           "id": "physical",
@@ -91,6 +91,16 @@
             },
             {
               "id": "rock-abundance",
+              "source": "content",
+              "material": "curvature"
+            },
+            {
+              "id": "silicate-signature",
+              "source": "content",
+              "material": "curvature"
+            },
+            {
+              "id": "geology",
               "source": "content",
               "material": "curvature"
             }

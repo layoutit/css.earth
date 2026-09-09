@@ -34,6 +34,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     OBJECTS: readonly { id: string; classification: string }[];
   };
   const planetIds = new Set(OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
+  const classifications = new Map(OBJECTS.map(body => [body.id, body.classification]));
+  const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/runtime-policy.mjs')).href) as {
+    SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE: number;
+    SYSTEM_FRAMING_ANGLES: { readonly elevationsDegrees: readonly number[]; readonly azimuthStepDegrees: number };
+  };
   if (source.frame.epochJdTt !== geometry.SOLAR_GEOMETRY_EPOCH_JD_TT) throw new TypeError('World context and solar geometry epochs differ.');
   const auM = geometry.ASTRONOMICAL_UNIT_KILOMETERS * M_PER_KM;
   const objectsDirectory = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
@@ -52,7 +57,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const radiusM = await preparedRadius(body.id, positionM, source.frame.referenceFrame,
       source.frame.epochJdTt, resolve(objectsDirectory, body.id, 'object.json')) ?? (data ? data.meanRadiusKm * M_PER_KM : undefined);
     if (radiusM === undefined) throw new TypeError(`World context lacks a physical radius for ${body.id}.`);
-    facts[body.id] = { radiusM, orbitStyle: planetIds.has(body.id) ? 'closed' : 'trail' };
+    facts[body.id] = { radiusM, orbitStyle: planetIds.has(body.id) ? 'closed' : 'trail', classification: classifications.get(body.id) };
   }
   const orbitCenters: Record<string, WorldContextOrbitCenter> = {};
   for (const body of source.bodies) {
@@ -75,7 +80,8 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // Use one exact prepared centre so every consumer shares the same placement.
     states[body.id] = { ...state, centerPositionM: parentPosition };
   }
-  const prepared = prepareWorldContext(source, facts, states, orbitCenters);
+  const prepared = prepareWorldContext(source, facts, states, orbitCenters, {
+    minimumRadiusShare: SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, ...SYSTEM_FRAMING_ANGLES });
   const text = `${JSON.stringify(prepared, null, 2)}\n`;
   try { if (await readFile(options.outputPath, 'utf8') === text) return; }
   catch (error: unknown) { if (!isMissingFile(error)) throw error; }

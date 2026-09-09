@@ -27,8 +27,8 @@ export interface SelectionFlight {
   readonly from: PhysicalCameraPose;
   readonly to: PhysicalCameraPose;
   readonly focusPositionM: PositionM;
-  readonly fromDirection: PositionM;
-  readonly toDirection: PositionM;
+  readonly fromViewDirection: PositionM;
+  readonly toViewDirection: PositionM;
   readonly curve: SelectionFlightCurve;
   readonly positionDurationS: number;
   readonly orientationDurationS: number;
@@ -43,8 +43,9 @@ export interface SelectionFlightSample {
 
 // Galaxio navigation/orbitMath.ts buildSelectionFlightCurve and
 // selectionFlightProgress: measured range interpolation, including its metre
-// denominator floor. Camera orientation timing comes from orbitNavigation.ts
-// flyTo/update. Source data and reference-frame resolution remain caller-owned.
+// denominator floor. Position and orientation share that progress so an
+// oblique system arrival does not finish moving before it finishes turning.
+// Source data and reference-frame resolution remain caller-owned.
 export function buildSelectionFlightCurve(startRangeM: number, endRangeM: number): SelectionFlightCurve {
   if (![startRangeM, endRangeM].every(Number.isFinite)) throw new TypeError('Selection flight ranges must be finite metres.');
   const start = Math.max(.001, startRangeM), end = Math.max(.001, endRangeM);
@@ -79,12 +80,11 @@ export function createSelectionFlight({ from, to, focusPositionM, durationS }: {
   const startRangeM = Math.hypot(...fromOffset), endRangeM = Math.hypot(...toOffset);
   if (startRangeM < .001 || endRangeM < .001) throw new TypeError('A selection camera must be at least one millimetre from its focus.');
   const curve = buildSelectionFlightCurve(startRangeM, endRangeM);
-  const quaternionDot = dot4(from.orientationXyzw, to.orientationXyzw);
-  const orientationDurationS = 2 * Math.acos(Math.min(1, Math.abs(quaternionDot))) < .05 ? 0 : 1;
   const positionDurationS = durationS ?? curve.durationS;
   return Object.freeze({ from: copyPose(from), to: copyPose(to), focusPositionM: copyPosition(focusPositionM),
-    fromDirection: scale(fromOffset, 1 / startRangeM), toDirection: scale(toOffset, 1 / endRangeM), curve,
-    positionDurationS, orientationDurationS, durationS: Math.max(positionDurationS, orientationDurationS) });
+    fromViewDirection: viewDirection(fromOffset, startRangeM, from.orientationXyzw),
+    toViewDirection: viewDirection(toOffset, endRangeM, to.orientationXyzw), curve,
+    positionDurationS, orientationDurationS: positionDurationS, durationS: positionDurationS });
 }
 
 export function createSelectionFlightSample(): SelectionFlightSample {
@@ -96,15 +96,18 @@ export function sampleSelectionFlightInto(flight: SelectionFlight, elapsedS: num
   if (!Number.isFinite(elapsedS)) throw new TypeError('Flight elapsed time must be finite seconds.');
   const elapsed = Math.max(0, elapsedS);
   const progress = selectionFlightProgress(flight.curve, elapsed / flight.positionDurationS);
+  slerpQuaternionInto(out.orientationXyzw, flight.from.orientationXyzw, flight.to.orientationXyzw, progress);
   if (progress === 0) copy3Into(out.positionM, flight.from.positionM);
   else if (progress === 1) copy3Into(out.positionM, flight.to.positionM);
   else {
-    slerpDirectionInto(out.positionM, flight.fromDirection, flight.toDirection, progress);
+    // Interpolate the focus direction in the camera frame. Its on-screen
+    // position then approaches the destination without swinging off-screen
+    // while the camera rotates around it.
+    slerpDirectionInto(out.positionM, flight.fromViewDirection, flight.toViewDirection, progress);
+    rotateVectorInto(out.positionM, out.orientationXyzw, out.positionM);
     const rangeM = flight.curve.startRangeM + (flight.curve.endRangeM - flight.curve.startRangeM) * progress;
     for (let axis = 0; axis < 3; axis++) out.positionM[axis] = flight.focusPositionM[axis] + out.positionM[axis] * rangeM;
   }
-  const orientationProgress = flight.orientationDurationS === 0 ? progress : smoothstep(clamp01(elapsed / flight.orientationDurationS));
-  slerpQuaternionInto(out.orientationXyzw, flight.from.orientationXyzw, flight.to.orientationXyzw, orientationProgress);
   out.progress = progress;
   out.complete = elapsed >= flight.durationS;
   return out;
@@ -183,6 +186,10 @@ function copy3Into(out: MutablePosition, value: PositionM): void { out[0] = valu
 function subtract(a: PositionM, b: PositionM): PositionM { return Object.freeze([a[0] - b[0], a[1] - b[1], a[2] - b[2]]); }
 function add(a: PositionM, b: PositionM): PositionM { return Object.freeze([a[0] + b[0], a[1] + b[1], a[2] + b[2]]); }
 function scale(a: PositionM, factor: number): PositionM { return Object.freeze([a[0] * factor, a[1] * factor, a[2] * factor]); }
+function viewDirection(offset: PositionM, rangeM: number, orientation: OrientationXyzw): PositionM {
+  const [x, y, z, w] = orientation;
+  return rotateVector([-x, -y, -z, w], scale(offset, 1 / rangeM));
+}
 function dot4(a: OrientationXyzw, b: OrientationXyzw): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3]; }
 function multiplyQuaternion(a: OrientationXyzw, b: OrientationXyzw): OrientationXyzw {
   const [x, y, z, w] = a, [i, j, k, r] = b;
@@ -190,9 +197,16 @@ function multiplyQuaternion(a: OrientationXyzw, b: OrientationXyzw): Orientation
     w * k + x * j - y * i + z * r, w * r - x * i - y * j - z * k]);
 }
 function rotateVector(q: OrientationXyzw, value: PositionM): PositionM {
+  const out: MutablePosition = [0, 0, 0];
+  rotateVectorInto(out, q, value);
+  return Object.freeze(out);
+}
+function rotateVectorInto(out: MutablePosition, q: OrientationXyzw, value: PositionM): void {
   const [x, y, z, w] = q, [a, b, c] = value;
   const tx = 2 * (y * c - z * b), ty = 2 * (z * a - x * c), tz = 2 * (x * b - y * a);
-  return Object.freeze([a + w * tx + y * tz - z * ty, b + w * ty + z * tx - x * tz, c + w * tz + x * ty - y * tx]);
+  out[0] = a + w * tx + y * tz - z * ty;
+  out[1] = b + w * ty + z * tx - x * tz;
+  out[2] = c + w * tz + x * ty - y * tx;
 }
 function clamp01(value: number): number { return Math.max(0, Math.min(1, value)); }
 function smoothstep(value: number): number { return value * value * (3 - 2 * value); }

@@ -13,7 +13,9 @@ export function createSourceMeshLighting(mesh, config, metersPerUnit, sunDirecti
       !(metersPerUnit > 0) || !(config.maximumDistanceMeters > 0) ||
       !(config.rayOffsetMeters > 0) || config.rayOffsetMeters >= config.maximumDistanceMeters ||
       ![config.ambient, config.diffuse].every(n => Number.isFinite(n) && n >= 0) ||
-      config.ambient + config.diffuse > 1 || !Array.isArray(config.floodLights) || !config.floodLights.length ||
+      config.ambient + config.diffuse > 1 ||
+      (config.uniformFlood !== undefined && typeof config.uniformFlood !== 'boolean') ||
+      !Array.isArray(config.floodLights) || !config.floodLights.length ||
       config.floodLights.some(light => !Array.isArray(light.direction) || light.direction.length !== 3 ||
         light.direction.some(n => !Number.isFinite(n)) || Math.abs(Math.hypot(...light.direction) - 1) > 1e-9 ||
         !Number.isFinite(light.weight) || light.weight < 0) ||
@@ -50,7 +52,7 @@ export function createSourceMeshLighting(mesh, config, metersPerUnit, sunDirecti
     const shadowed = facing > 0 && !!mesh.intersect(rayOrigin, sunDirection);
     if (shadowed) report.castShadow++;
     return {
-      flood: config.ambient + config.floodLights.reduce((sum, light) => sum + light.weight * Math.max(0, dot(normal, light.direction)), 0),
+      flood: config.uniformFlood ? 1 : config.ambient + config.floodLights.reduce((sum, light) => sum + light.weight * Math.max(0, dot(normal, light.direction)), 0),
       shadow: config.ambient + config.diffuse * (shadowed ? 0 : facing),
     };
   }

@@ -1,3 +1,5 @@
+import { overviewScopeFromUrl } from './navigation-scope.mjs';
+
 /** Preserve exact departed views while object selections create history entries. */
 export function createNavigationHistory({ windowTarget, objects, capture, navigate, onError = () => {} }) {
   const snapshots = new Map();
@@ -58,7 +60,11 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
     const object = objects.find(object => object.route === url.pathname);
     if (!object || !supports(object.id)) return;
     event.preventDefault();
-    Promise.resolve(navigate(object.id, url.search || url.hash ? { url: url.href } : { sceneSelection: anchor.dataset?.objectId === object.id })).catch(onError);
+    const scope = overviewScopeFromUrl(url.href);
+    const options = scope && !url.searchParams.has('v')
+      ? { overview: true, overviewScope: scope }
+      : url.search || url.hash ? { url: url.href } : { sceneSelection: true };
+    Promise.resolve(navigate(object.id, options)).catch(onError);
   };
   const clear = event => {
     if (!deselect || event.defaultPrevented) return;

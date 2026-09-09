@@ -1,6 +1,6 @@
 # Further comet intake
 
-The seven comet scenes include 67P, Hartley 2, Tempel 1, the completed PDS Wild 2 model, Halley's historical model, Tuttle's two inferred contact models, and Borrelly's observed terrain. The original archive survey was made on 8 September 2026; the Tuttle comparison was added on 9 September. An unresolved candidate is not a claim that usable data does not exist.
+The original seven comet scenes include 67P, Hartley 2, Tempel 1, the completed PDS Wild 2 model, Halley's historical model, Tuttle's two inferred contact models, and Borrelly's observed terrain. The original archive survey was made on 8 September 2026; the Tuttle comparison was added on 9 September. An unresolved candidate is not a claim that usable data does not exist.
 
 ## 67P: regions and geological features selected
 
@@ -27,3 +27,9 @@ The source estimates absolute errors around 500–1,000 m and warns that depress
 [Groussin et al. (2019)](https://arxiv.org/abs/1911.04897) compares Hubble and radar contact-body models using Spitzer thermal observations. The selected model preserves the Hubble 7:3 lobe ratio and applies the square root of the fitted thermal flux scale. Its two smooth spheres represent inferred shape; no resolved terrain is available.
 
 [Harmon et al. (2010)](https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf) provides a credible alternative with two prolate lobes. That family is included as a separate Arecibo dataset at the same physical scale. Hubble/Spitzer remains the default because it fits the thermal measurements better. The radar dimensions are taken directly from the 2010 paper without Spitzer rescaling; its axes are aligned for comparison, with no unique radar pole claimed. Neither family is a measured global surface mesh. Unresolved Spitzer imagery and spectra do not qualify another surface texture. [The Arecibo comparison](TUTTLE-ARECIBO.md) gives the current numerical checks and delivery evidence.
+
+## 137P, 143P and 162P: published proportions selected
+
+The public [Donaldson thesis](https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad) gives physical axis ratios and spin solutions for these three nuclei. Original convex mesh downloads were not found. The additions therefore expose smooth, explicitly labeled approximations, sized with SEPPCoN thermal radii and covered by the shared missing-imagery grid. They do not claim recovered terrain or photographic texels. [The qualification record](LIGHTCURVE-SHAPES.md) distinguishes alternative solutions and the scale convention.
+
+10P, 169P and 172P remain deferred: the thesis does not recover unique shape and spin solutions for them. A catalog entry alone is insufficient to choose their geometry.

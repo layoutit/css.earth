@@ -1,0 +1,48 @@
+---
+import '../body-overview.css';
+import PlanetCardHeader from './PlanetCardHeader.astro';
+import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
+import PlanetObjectResult from './PlanetObjectResult.astro';
+import { PLANET_SEARCH_OBJECTS } from '../planet-search-objects.mjs';
+import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
+import { prepareBodyOverview } from '../prepare-body-overview.mjs';
+
+const { objectId, title, introduction } = Astro.props;
+const overview = await prepareBodyOverview(objectId);
+const children = new Set(preparedWorld.bodies
+  .filter(body => body.orbit?.centerBodyId === objectId).map(body => body.id));
+const moons = PLANET_SEARCH_OBJECTS.filter(object =>
+  object.classification === 'satellite' && children.has(object.id));
+---
+
+<PlanetCardHeader {title} data-body-overview data-has-portrait={overview.image ? true : undefined}>
+  <PlanetBreadcrumbs {objectId} />
+  <Fragment slot="image">
+    {overview.image && <div class="planet-overview-portrait">
+      <img class="planet-body-overview-image" src={overview.image}
+        width="1200" height="630" alt={title.label} loading="lazy" decoding="async" />
+    </div>}
+    <ul class="planet-overview-facts">
+      <li>{overview.classification}</li>
+      {overview.radiusEarth && <li title={`${overview.radiusEarth} Earth radii`} aria-label={`${overview.radiusEarth} Earth radii`}>{overview.radiusEarth} R⊕</li>}
+      {overview.distanceAu !== null && <li>{overview.distanceAu} AU</li>}
+    </ul>
+    {introduction && <p class="planet-introduction">{introduction}</p>}
+    {overview.spectrum && <figure class="planet-overview-spectrum">
+      <figcaption>{overview.spectrum.title}</figcaption>
+      <img src={overview.spectrum.src} width="300" height="90" alt={overview.spectrum.alt} loading="lazy" decoding="async" />
+    </figure>}
+  </Fragment>
+</PlanetCardHeader>
+<div class="planet-object-tabs" data-body-overview role="tablist" aria-label="Orbiting objects">
+  <button type="button" role="tab" id={`${objectId}-moons-tab`}
+    aria-controls={`${objectId}-moons-content`} aria-selected="true" tabindex="0">
+    <span>Moons</span>{' '}<span class="planet-object-tab-count">({moons.length})</span>
+  </button>
+</div>
+<div class="planet-object-results-scroll" data-body-overview id={`${objectId}-moons-content`}
+  role="tabpanel" aria-labelledby={`${objectId}-moons-tab`} tabindex="0">
+  {moons.length > 0 ? <ul class="planet-object-list">
+    {moons.map(object => <PlanetObjectResult {object} />)}
+  </ul> : <p class="planet-object-empty">No moons in the catalogue</p>}
+</div>
