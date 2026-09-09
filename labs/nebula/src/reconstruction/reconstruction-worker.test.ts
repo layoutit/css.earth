@@ -5,7 +5,7 @@ import { resolve, relative } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { createAlignedObservationMapping } from './reconstruction-geometry.js';
-import { prepareReconstruction, RECONSTRUCTION_SETTINGS, chooseReconstructionSampling } from './reconstruction-worker.js';
+import { prepareReconstruction, RECONSTRUCTION_SETTINGS, chooseReconstructionSampling, reconstructionSliceCounts } from './reconstruction-worker.js';
 import { validateCoherentAxisSampling } from './coherent-validation.js';
 import { defaultOverlayPlacement } from '../alignment/overlay-placement.js';
 import { prepareOverlayGeometry } from '../alignment/overlay-geometry.js';
@@ -53,9 +53,19 @@ test('actual prepared candidate matrices preserve Alignment CSS axes, pivot, all
   }
 });
 
-test('tiny offline bake retains every light channel, writes pinned XYZ resources and working all-light inspection',async()=>{
+test('default slicing follows physical extent, including rotated elongated clouds',async()=>{
+  const recipe=JSON.parse(await readFile('labs/nebula/models/lmc/full-density/source/volume.json','utf8'));
+  const bounds=recipe.grid.bounds,counts=reconstructionSliceCounts(bounds,RECONSTRUCTION_SETTINGS.longestAxisSlices);
+  const pitches=['x','y','z'].map((axis,i)=>(bounds.max[i]-bounds.min[i])/counts[axis as 'x'|'y'|'z']);
+  assert.ok(Math.max(...pitches)/Math.min(...pitches)<1.02,'Real default bank pitches must agree within2%.');
+  assert.deepEqual(reconstructionSliceCounts({min:[0,0,0],max:[2,8,4]},128),{x:32,y:128,z:64});
+  assert.deepEqual(reconstructionSliceCounts({min:[0,0,0],max:[8,4,2]},128),{x:128,y:64,z:32});
+  assert.throws(()=>reconstructionSliceCounts({min:[0,0,0],max:[0,1,1]},128),/bounds/);
+  assert.throws(()=>reconstructionSliceCounts(bounds,513),/1–512/);
+});
+
+test('tiny offline bake uses shared density support and writes pinned XYZ resources and cloud inspection',async()=>{
   assert.deepEqual([RECONSTRUCTION_SETTINGS.analysisWidth,RECONSTRUCTION_SETTINGS.masterWidth,RECONSTRUCTION_SETTINGS.deliveryWidth],[512,512,512]);
-  assert.deepEqual(RECONSTRUCTION_SETTINGS.sliceCounts,{x:48,y:48,z:96});
   const root=process.cwd(),directory=resolve(root,'.local/nebula-lab/reconstruction-test-'+randomUUID());
   await mkdir(directory,{recursive:true});
   try {
@@ -71,23 +81,22 @@ test('tiny offline bake retains every light channel, writes pinned XYZ resources
       original:{path:relative(root,resolve(directory,'source.png')),sha256:sha256(photo),removalResultId:'synthetic'},
       overlay:{widthPx:32,heightPx:32,transform:`matrix3d(${geometry.matrix})`,pivotCssPx:[0,0,0],placement:defaultOverlayPlacement()},frame,
       stellarPrior:{path:priorPath,sha256:sha256(priorBytes)},sourcePageUrl:'https://example.invalid/synthetic',credit:'Generated fixture'};
-    const settings={...RECONSTRUCTION_SETTINGS,analysisWidth:16,masterWidth:16,deliveryWidth:16,sliceCounts:{x:4,y:4,z:8},samplesPerSlab:32,
-      priorDimensions:[8,8,32] as [number,number,number],decomposition:{...RECONSTRUCTION_SETTINGS.decomposition,compactRadius:1,extendedRadii:[2,4]},
-      depth:{...RECONSTRUCTION_SETTINGS.depth,compactMinimumHalfThicknessKpc:1,extendedMinimumHalfThicknessKpc:1,diffuseHalfThicknessKpc:1}};
+    const settings={...RECONSTRUCTION_SETTINGS,analysisWidth:16,masterWidth:16,deliveryWidth:16,longestAxisSlices:8,samplesPerSlab:32};
     const events:string[]=[];const result=await prepareReconstruction(work,{settings,onProgress:p=>events.push(p.stage)});
     assert.equal(result.type,'complete');assert.ok(events.includes('slices'));assert.equal(events.at(-1),'complete');
     const provenance=JSON.parse(await readFile(resolve(work.outputDirectory,'source/provenance.json'),'utf8'));
     const slices=JSON.parse(await readFile(resolve(work.outputDirectory,'prepared/volume-slices.json'),'utf8'));
     assert.equal(slices.approximation.samplesPerSlab,provenance.validation.integrationSelection.samplesPerSlab);
     assert.equal(slices.approximation.samplesPerSlab,provenance.settings.samplesPerSlab);
-    assert.deepEqual(provenance.volume.channels,{compact:true,diffuse:true,extended:true});assert.equal(provenance.stellarPrior.unchanged,true);
-    const sums=provenance.decomposition;assert.ok(Math.abs(sums.inputSum-sums.compactSum-sums.extendedSum-sums.diffuseSum)<1e-4);
+    assert.equal(provenance.volume.noImageDepth,true);assert.equal(provenance.stellarPrior.unchanged,true);
+    assert.deepEqual(slices.boundsUnits,provenance.stellarPrior.grid.bounds);
+    assert.equal(provenance.volume.sharedSliceGeometry,true);
     const descriptor=JSON.parse(await readFile(resolve(work.outputDirectory,'object.json'),'utf8'));
     assert.equal(sha256(await readFile(resolve(work.outputDirectory,descriptor.prepared.url))),descriptor.prepared.sha256);
     const prepared=JSON.parse(await readFile(resolve(work.outputDirectory,'prepared/inspection.json'),'utf8'));
     const leaves=prepared.data.stacks.flatMap((s:{leaves:{id:string}[]})=>s.leaves.map(l=>l.id));
     const catalogue=parseCloudCatalogue(JSON.parse(await readFile(resolve(work.outputDirectory,'source/cloud-parts.json'),'utf8')),work.id,leaves);
-    const inspection=createCloudInspection(catalogue);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,16);
+    const inspection=createCloudInspection(catalogue);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,19);
     inspection.setSelection([]);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,0);
     for(const resource of prepared.data.resources){const bytes=await readFile(resolve(work.outputDirectory,'prepared',resource.path));assert.equal(sha256(bytes),resource.sha256);}
     assert.equal(sha256(await readFile(resolve(directory,'source.png'))),sha256(photo));

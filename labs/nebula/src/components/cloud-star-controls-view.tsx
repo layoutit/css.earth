@@ -52,7 +52,7 @@ export function createCloudStarControls({ host, onChange }: {
   host.hidden = true; root.render(<CloudStarControlsView />);
   return {
     setContext(next: CloudStarContext | null) {
-      if (context?.id === next?.id) return;
+      if (context?.id === next?.id) { if (next) onChange({ ...options }); return; }
       context = next; host.hidden = !next;
       if (!next) { render(); return; }
       options = { ...(saved.get(next.id) ?? defaults()) }; render(); onChange({ ...options });

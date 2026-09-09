@@ -4,6 +4,7 @@
 
 - [Workflow](workflows.md): Alignment → automatic star removal → explicit Process → compare saved reconstructions.
 - [Reconstruction](reconstruction.md): source selection, cache/jobs, exact current bake and depth limits.
+- [Slice stability](slice-stability.md): shared density/stars and measured XYZ calibration.
 - [Automatic star removal](star-removal.md): NOX, native products, persistence and dependencies.
 - [Image candidates](image-candidates.md): source quality, footprint and registration evidence.
 - [Simulation observer](registration.md) and [image registration](image-registration.md): measured source coordinates versus approximate model placement.

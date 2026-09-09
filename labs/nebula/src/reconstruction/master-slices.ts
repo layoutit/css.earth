@@ -29,10 +29,13 @@ export interface MasterVolumeOptions {
   /** Changes geometry units only: optical integration always uses kpc. */
   unitsPerSourceUnit: number;
   provenance: unknown;
+  /** Retain identical physical quads across material variants. */
+  cropTransparent?: boolean;
   onProgress?: (progress: MasterSliceProgress) => void;
 }
 const axes: Axis[] = ['x', 'y', 'z'];
 const byte = (value: number) => Math.round(Math.max(0, Math.min(1, value)) * 255);
+export const MASTER_QUANTIZATION = 'optical-rgb-error-carry@1';
 const positive = (value: number, name: string) => {
   if (!Number.isFinite(value) || value <= 0) throw new TypeError(`${name} must be finite and positive.`);
 };
@@ -93,12 +96,13 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
     min: bounds.min.map(v => v * scale) as Vector3, max: bounds.max.map(v => v * scale) as Vector3,
   };
   const masters: VolumeSlices = { quads: [], boundsUnits, provenance: options.provenance, approximation: {
-    method: 'Direct XYZ emissivity samples per kpc; shared exponential opacity and optical RGB ratios; lossless full-extent RGBA8 masters.',
+    method: `Direct XYZ emissivity samples per kpc; shared exponential opacity and optical RGB ratios; lossless full-extent RGBA8 masters. Quantization: ${MASTER_QUANTIZATION}.`,
     radialEmission: 'Provided entirely by the authored emissivity sampler.',
     limitations: ['This is display emission, not calibrated photometry; extinction is unsupported.',
       'Shared opacity preserves column-constant chromaticity before RGBA8 quantization; varying chromaticity is a slab approximation.',
       'Higher master resolution improves in-plane sampling only. Finite samples along each slab depth can alias high-frequency photograph detail, especially in X/Y banks.',
-      'Finite slabs, RGBA8 alpha and axis handoffs approximate a continuous volume.'],
+      'Finite slabs, RGBA8 alpha and axis handoffs approximate a continuous volume.',
+      'Optical RGB rounding residuals carry into the next emitting slab on each ray; true zero support remains transparent. Fully opaque byte255 resets its unrepresentable optical residual.'],
     samplesPerSlab: samples, opticalWeight: 1, exposureGain: options.exposureGain,
     emissionTransfer: 'shared-opacity', sliceCounts: { ...counts }, slabPitchUnits: { x: 0, y: 0, z: 0 },
   } };
@@ -115,6 +119,9 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
     await mkdir(resolve(options.masterDirectory, 'slices', axis), { recursive: true });
     const rgb: Vector3 = [0, 0, 0];
     const us = Float64Array.from({ length: width }, (_, col) => uMin + uSpan * (col + 0.5) / width);
+    // Carry only RGBA8 rounding error, never a fitted column gain. Independent
+    // RGB residuals also conserve faint hue when adjacent slabs differ in color.
+    const opticalError = new Float64Array(width * height * 3);
     for (let index = 0; index < counts[axis]; index++) {
       const depth = bounds.min[axial] + (index + 0.5) * pitch;
       const depths = Float64Array.from({ length: samples }, (_, sample) => depth + pitch * ((sample + 0.5) / samples - 0.5));
@@ -137,11 +144,25 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
           const peak = Math.max(red, green, blue), offset = 4 * (row * width + col);
           if (!Number.isFinite(peak)) throw new TypeError('Integrated optical emission overflowed.');
           if (peak > 0) {
-            rgba[offset + 3] = byte(-Math.expm1(-options.exposureGain * peak));
+            const errorOffset = 3 * (row * width + col);
+            const targetRed = options.exposureGain * red + opticalError[errorOffset]!;
+            const targetGreen = options.exposureGain * green + opticalError[errorOffset + 1]!;
+            const targetBlue = options.exposureGain * blue + opticalError[errorOffset + 2]!;
+            const correctedPeak = Math.max(0, targetRed, targetGreen, targetBlue);
+            const alphaByte = byte(-Math.expm1(-correctedPeak));
+            rgba[offset + 3] = alphaByte;
             if (rgba[offset + 3]) {
-              rgba[offset] = byte(red / peak); rgba[offset + 1] = byte(green / peak); rgba[offset + 2] = byte(blue / peak);
+              rgba[offset] = byte(targetRed / correctedPeak);
+              rgba[offset + 1] = byte(targetGreen / correctedPeak);
+              rgba[offset + 2] = byte(targetBlue / correctedPeak);
               nonzero++;
             }
+            // An opaque byte has infinite optical depth. It cannot support a
+            // finite residual; its display error is already below half a byte.
+            const encodedPeak = alphaByte === 255 ? 0 : -Math.log1p(-alphaByte / 255);
+            opticalError[errorOffset] = alphaByte === 255 ? 0 : targetRed - encodedPeak * rgba[offset]! / 255;
+            opticalError[errorOffset + 1] = alphaByte === 255 ? 0 : targetGreen - encodedPeak * rgba[offset + 1]! / 255;
+            opticalError[errorOffset + 2] = alphaByte === 255 ? 0 : targetBlue - encodedPeak * rgba[offset + 2]! / 255;
           }
         }
       }
@@ -162,7 +183,7 @@ export async function bakeMasterVolumeSlices(options: MasterVolumeOptions): Prom
   nonempty(masters);
   await manifest(options.masterDirectory, masters);
   const banks = await deriveMasterVolumeSlices({ masters, masterDirectory: options.masterDirectory,
-    deliveryBanks: options.deliveryBanks, onProgress: options.onProgress });
+    deliveryBanks: options.deliveryBanks, cropTransparent: options.cropTransparent, onProgress: options.onProgress });
   return { masters, banks };
 }
 

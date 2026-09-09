@@ -143,3 +143,61 @@ test('delivery height uses physical aspect before rounding and invalid field sam
   config.sampleEmission = (_x, _y, _z, out) => { out[0] = NaN; out[1] = out[2] = 0; };
   await assert.rejects(bakeMasterVolumeSlices(config), /finite nonnegative optical RGB/);
 });
+
+test('faint optical light survives 48/96 slab quantization with the same integrated brightness and hue', async t => {
+  const directory = await temporary(t), config = options(directory);
+  config.masterWidth = 2; config.sliceCounts = { x: 48, y: 48, z: 96 };
+  config.sampleEmission = (_x, _y, _z, out) => { out[0] = .05; out[1] = .025; out[2] = .0125; };
+  const { masters } = await bakeMasterVolumeSlices(config);
+  assert.match(masters.approximation.method, /optical-rgb-error-carry@1/);
+  const composites: number[][] = [];
+  for (const axis of ['x', 'y', 'z']) {
+    const composite = [0, 0, 0], optical = [0, 0, 0];
+    for (const quad of masters.quads.filter(q => q.axis === axis)) {
+      const pixels = await raster(config.masterDirectory, quad), alpha = pixels[3]! / 255;
+      for (let c = 0; c < 3; c++) {
+        composite[c] = composite[c]! * (1 - alpha) + pixels[c]! / 255 * alpha;
+        optical[c] += -Math.log1p(-alpha) * pixels[c]! / 255;
+      }
+    }
+    const display = -Math.expm1(-.05);
+    for (let c = 0; c < 3; c++) {
+      assert.ok(Math.abs(composite[c]! - display * [1, .5, .25][c]!) < .002, `${axis} display ${composite}`);
+      assert.ok(Math.abs(optical[c]! - [.05, .025, .0125][c]!) < .002, `${axis} optical ${optical}`);
+    }
+    composites.push(composite);
+  }
+  for (let c = 0; c < 3; c++) assert.ok(Math.max(...composites.map(v => v[c]!)) - Math.min(...composites.map(v => v[c]!)) < .0015);
+  // Mutation: independently rounding the original slabs discards ALL this light.
+  const oldAlpha = Math.round(-Math.expm1(-.05 / 96) * 255) / 255;
+  assert.equal(oldAlpha, 0);
+  assert.ok(Math.abs((1 - (1 - oldAlpha) ** 96) - (-Math.expm1(-.05))) > .002);
+});
+
+test('RGB error carry preserves faint colored layers and never deposits residuals in empty support', async t => {
+  const directory = await temporary(t), config = options(directory);
+  config.masterWidth = 2; config.sliceCounts = { x: 48, y: 48, z: 96 };
+  config.sampleEmission = (_x, _y, z, out) => {
+    out[0] = out[1] = out[2] = 0;
+    if (z > .25 && z < .75) return;
+    // Alternating faint red/blue slabs expose hue loss from scalar-only alpha carry.
+    out[Math.floor(z * 96) % 2 === 0 ? 0 : 2] = .16;
+  };
+  const { masters } = await bakeMasterVolumeSlices(config), optical = [0, 0, 0], composite = [0, 0, 0];
+  let emptySlabs = 0, visibleSlabs = 0;
+  for (const quad of masters.quads.filter(q => q.axis === 'z')) {
+    const pixels = await raster(config.masterDirectory, quad), alpha = pixels[3]! / 255;
+    if (quad.center[2] > .25 && quad.center[2] < .75) {
+      assert.ok(pixels.every(byte => byte === 0), `Empty ${quad.id} gained residual light`); emptySlabs++;
+    } else if (alpha > 0) visibleSlabs++;
+    for (let c = 0; c < 3; c++) {
+      optical[c] += -Math.log1p(-alpha) * pixels[c]! / 255;
+      composite[c] = composite[c]! * (1 - alpha) + pixels[c]! / 255 * alpha;
+    }
+  }
+  assert.equal(emptySlabs, 48); assert.ok(visibleSlabs > 0);
+  assert.equal(optical[1], 0);
+  assert.ok(Math.abs(optical[0]! - .04) < .002, `Red ${optical[0]}`);
+  assert.ok(Math.abs(optical[2]! - .04) < .002, `Blue ${optical[2]}`);
+  assert.ok(Math.abs(composite[0]! - composite[2]!) < .003, `Thin balanced layers acquired a hue bias: ${composite}`);
+});

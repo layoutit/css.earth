@@ -119,9 +119,11 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
       targetBytes = await readFile(await safe(`${reconstructedDirectory}/source/aligned-image.png`));
       if (digest(targetBytes) !== artifacts.artifacts?.['source/aligned-image.png']?.sha256) throw new TypeError('Reconstruction signal image differs.');
       target = await sharp(targetBytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
-      if (target.info.width !== provenance.photo.width || target.info.height !== provenance.photo.height || target.info.channels !== 3)
+      const signalMetadata = provenance.densityProjection ?? provenance.photo;
+      if (target.info.width !== signalMetadata.width || target.info.height !== signalMetadata.height || target.info.channels !== 3)
         throw new TypeError('Reconstruction signal dimensions differ.');
-      mapping = { boundsUnits: provenance.geometry.tangentBoundsKpc, distanceUnits: provenance.geometry.observerDistanceKpc };
+      const signalGeometry = provenance.densityProjection ?? provenance.geometry;
+      mapping = { boundsUnits: signalGeometry.tangentBoundsKpc, distanceUnits: signalGeometry.observerDistanceKpc };
     } else {
       const evidence = manifest.data.provenance?.reference, recipePin = evidence?.recipe;
     if (typeof recipePin?.path !== 'string' || typeof recipePin.sha256 !== 'string') throw new TypeError('Cloud reconstruction recipe pin is missing.');

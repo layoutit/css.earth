@@ -41,10 +41,12 @@ models/
 - Browsing/importing/alignment does not authorize expensive processing. A user's instruction for named candidates, or their explicit Quick preview / Remove stars / Process click, authorizes that operation. Do not ask again for work already authorized.
 - Source registration and the user's image-to-density fit are different. Preserve both. The visual fit is not measured distance, size, or correspondence between simulated and observed stars.
 - Remove stars on the full native pixel grid. Use the completed NOX native diffuse result for reconstruction, not an older separation preview or the small browser texture. RGB8 working copies must be separate from higher-depth originals.
-- Never remove stars again while reconstructing. Include the retained diffuse-image signal; do not silently discard its morphological compact/remainder channels.
+- Never remove stars again while reconstructing. Images supply color to the existing volume; they must not create support, thickness or an extruded photographic background.
 - Keep original source footprint/no-data and the unchanged full density prior. Do not crop either to force a match or invent color beyond observed coverage.
-- The current depth assignment is a visualization approximation guided by simulated stellar density; it is not recovered gas or dust geometry. Optical/infrared images remain separately labeled variants.
+- The shared full-density field owns shape/depth and the common XYZ slice geometry. Image RGB colors occupied points only; zero density stays empty. No per-image depth assignment, per-column normalization or image-dependent slice crop. This is simulated stellar morphology, not recovered gas/dust geometry.
+- The catalogue belongs to the density cloud: preserve the same star positions and support across image variants. Image coverage/color must not select or reposition stars. Keep the star toggle and use a common density projection for cutoff.
 - Bake XYZ image banks offline. Runtime only loads prepared geometry/textures; keep scene rendering within the existing PolyCSS rules.
+- Derive XYZ counts from physical bounds for comparable slice pitch. Validate bank handoffs at the same camera; successful bakes and conserved optical totals alone do not establish rotation stability. Record any failed visual gate explicitly.
 - Processing is server-owned and atomically publishes complete results. Refresh/navigation detach an observer, not the job. Explicit Cancel stops it. A server restart must report an interrupted job honestly.
 
 ## Validation

@@ -80,23 +80,19 @@ NOX predicts the background under stars. It is an image-processing model, not me
 - Infrared and optical composites are separate candidate color treatments. Do not average their colors as if they measured the same band. WISE W4/W2/W1 dust structure, VISTA Y/J/Ks stars and optical emission can differ legitimately.
 - A larger density field does not authorize inventing color beyond the image. Solve the footprint gap with verified observations, or retain explicit missing coverage.
 
-## 5. Assign structure and depth, then bake
+## 5. Color the common density volume, then bake
 
-In **Reconstruction**, choose the completed source and press **Process**. The request binds the native NOX result and saved Alignment placement; source selection alone loads only an existing result. Server-owned progress, cancellation and refresh reconnection follow the same lifecycle as removal.
+In **Reconstruction**, choose a completed source and press **Process**. The image supplies color/texture; the full physical density field owns shape, support and depth. Zero density must emit nothing, even under a bright photograph. Do not generate per-image cloud thickness, normalize each sightline independently, or extrude the entire rectangular image.
 
-The current worker maps the exact Alignment transform/pivot into physical observer rays, samples the native starless image into a **512px analysis plane**, and uses the existing filled-component coherent-depth model. Compact, extended and diffuse morphology all remain in the final light field; there is no second star-removal pass. This baseline uses all-light inspection, not individually identified nebulae.
+- Bind the native NOX result and exact saved Alignment matrix/pivot/placement. Project each occupied physical voxel through the same observer mapping into the image.
+- Multiply the common density by sampled RGB using one fixed density scale and exposure. Image channels remain color information; they do not create new matter or geometric components.
+- Preserve full density bounds, XYZ slice positions and texture dimensions across variants. Disable image-dependent delivery cropping. Missing image coverage remains uncolored, rather than filled with invented observations.
+- Prepare one image-independent density projection for cutoff. Keep the star catalogue independent of photographic color, extent and source choice: preserve measured angular positions and the existing inferred XYZ, check positive density, and use the same density projection for support.
+- Check independent XYZ integration convergence before baking. Raise integration sampling, never relax numerical gates to force a pass. Derive comparable physical slice pitch from the unchanged bounds: 128 slices on the longest axis gives the current LMC 128 X, 125 Y and 56 Z slices. Current comparison textures are 512px; native source detail is not all retained at this level.
+- Write lossless masters, compressed delivery banks, star catalogue, provenance and a manifest. Validate before atomic cache publication and browser decoding.
+- Compare all sources at fixed front, ±60° and edge views. Distinguish actual changes in projected path length from discontinuities at slice-bank handoffs. Calibrate prepared banks consistently; do not pump exposure or change color with the camera to hide defects.
 
-Independent ray/XYZ checks choose the minimum convergent integration sampling from 8, 16 or 32 samples per slab before baking. The actual bake uses that same count. Lossless masters produce 48 X, 48 Y and 96 Z delivery slabs. All resources and provenance must verify before atomic publication and browser decoding. Current comparison resolution does not preserve all native photographic detail; increase analysis/master resolution deliberately for a later detail experiment.
-
-
-- Decompose extended light into **filled structures plus a retained remainder**, with accounting back to the selected image. Sparse wavelet coefficients alone are not cloud footprints. Preserve related fine detail with its parent structure instead of spreading every feature across every depth layer.
-- Map registered pixels onto observer rays at the declared distance. A stellar density field supplies an uncertain depth prior; it does not measure gas geometry. Angular coverage becomes physical coverage through the projection and distance, not arbitrary percentage scaling.
-- Give connected structures explicit finite depth/thickness assumptions. Compare localized and broad-depth controls at fixed registration, target and exposure. Keep residual light and uncertainty visible.
-- Fit the selected Earth-facing projection before trimming empty volume bounds. Never cut the input density first to force the photograph to fit. Do not normalize layers independently or increase brightness to hide missing structure.
-- Bake lossless masters at the declared spatial/integration resolution; only then derive bounded compressed XYZ slice banks. Check all axis banks, oblique views and close views for repeated silhouettes, gaps, disappearing structure, whitening and brightness changes.
-- Keep observed stars separate from diffuse light. Use actual catalogue positions where available; inferred depth placement must be documented and constrained by the model, not a flat background plane.
-
-The earlier [coherent-depth](docs/research/coherent-depth.md) and [filled-observation](docs/research/filled-observation.md) experiments remain **rejected for production morphology**. Their numerical checks do not establish a successful general 3D reconstruction. The [research plan](docs/research/research-plan.md) records the remaining structure/depth work and rotation acceptance gates.
+The previous filled-component approach extruded photographic background and produced broad sheets from the side. It is retained only as historical evidence. The replacement uses the stellar simulation as the cloud's visualization shape; this still does not establish measured gas/dust geometry. A future physically informed structure model must preserve that distinction.
 
 ## Selected LMC inputs
 

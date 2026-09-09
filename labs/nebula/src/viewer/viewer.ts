@@ -654,7 +654,7 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
       mounted = instance;
       if (stars) { starLayer = mountPreparedLmcStars({ host, before: end, payload: stars }); starLayer.setVisible(false);
         starLayer.setCloudSupport(cloudFilter, cloud!.selection());
-        starInfo = { id: next.id, count: stars.stars.length, sourceUrl: stars.sourceUrl }; }
+        starInfo = { id: next.sourceSubjectId ?? next.id, count: stars.stars.length, sourceUrl: stars.sourceUrl }; }
       const roots = 'root' in instance ? [...instance.root.querySelectorAll<HTMLElement>('[data-image-layer-axis]')] : instance.roots;
       banks = loaded.stacks.map((stack, index) => {
         const nodes = [...roots[index].querySelectorAll<HTMLElement>('.css-volume-mesh s')], copies = isImage ? 1 : 3;

@@ -119,7 +119,7 @@ export async function reconstructionCatalogue(root: string, subjectId: string): 
 }
 
 type Runner = (work: ReconstructionWork, signal: AbortSignal, progress: (value: RemovalProgress) => void) => Promise<{
-  cloudParts?: { descriptor: string; catalogue: string }; framingRadiusUnits?: number;
+  cloudParts?: { descriptor: string; catalogue: string }; framingRadiusUnits?: number; stars?: string;
 }>;
 export function createReconstructor(root: string, options: { runner?: Runner } = {}) {
   let queue = Promise.resolve();
@@ -173,10 +173,11 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
       const recipe = await json(root, 'labs/nebula/models/lmc/clouds.json');
       const frame = parseLabModelJson((await pinned(root, recipe.frame.path, recipe.frame.sha256)).toString()).properties.volume;
       await pinned(root, recipe.stellarPrior.path, recipe.stellarPrior.sha256);
+      const stars = subject.stars ? { path: subject.stars, sha256: hash(await pinned(root, subject.stars)) } : undefined;
       const pins = Object.fromEntries(await Promise.all(['reconstruction/reconstruction-worker.ts', 'reconstruction/reconstruction-geometry.ts', 'reconstruction/filled-components.ts',
-        'reconstruction/filled-volume.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'reconstruction/master-slices.ts'].map(async name =>
+        'reconstruction/density-color-volume.ts', 'reconstruction/density-projection.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'reconstruction/master-slices.ts'].map(async name =>
         [name, hash(await pinned(root, `labs/nebula/src/${name}`))])));
-      const identity = { version: 1, request, sourceSha256: image.sha256, frame, stellarPrior: recipe.stellarPrior,
+      const identity = { version: 2, request, stars, sourceSha256: image.sha256, frame, stellarPrior: recipe.stellarPrior,
         overlay: { widthPx: overlay.widthPx, heightPx: overlay.heightPx, transform: overlay.style.transform, pivotCssPx: overlay.pivotCssPx }, pins };
       const resultId = hash(JSON.stringify(identity)), directory = `${cache}/${resultId}`, temporary = resolve(root, `${directory}.pending`);
       if (await stat(resolve(root, directory, 'result.json')).catch(() => null)) {
@@ -188,7 +189,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
           imageId: image.id, name: image.label, outputDirectory: temporary,
           source: { path: nativePath, sha256: removal.artifactSha256[removal.applied.images.diffuse], width: removal.nativeDimensions[0], height: removal.nativeDimensions[1] },
           original: { path: image.path, sha256: image.sha256, removalResultId: request.removalResultId },
-          overlay: { ...identity.overlay, placement: request.placement }, frame, stellarPrior: recipe.stellarPrior,
+          overlay: { ...identity.overlay, placement: request.placement }, frame, stellarPrior: recipe.stellarPrior, stars,
           sourcePageUrl: image.sourcePageUrl, credit: image.credit };
         const finished = await run(work, signal, progress); signal.throwIfAborted();
         const descriptor = await json(root, relative(root, resolve(temporary, 'object.json')));
@@ -200,9 +201,9 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
           imageId: image.id, removalResultId: request.removalResultId, placement: request.placement,
           subject: { ...subject, id: work.id, name: `${image.label} · reconstruction`, directory,
             sourceSubjectId: subject.id, imagePath: `${directory}/source/target.png`, comparisonImages: [],
-            sourcePageUrl: image.sourcePageUrl, credit: image.credit, stars: undefined,
+            sourcePageUrl: image.sourcePageUrl, credit: image.credit, stars: finished.stars ? `${directory}/${finished.stars}` : undefined,
             cloudParts: finished.cloudParts, framingRadiusUnits: finished.framingRadiusUnits ?? subject.framingRadiusUnits,
-            reconstructionImage: { group: subject.id, label: image.label, note: 'NOX starless image · density-guided 512px comparison bake; depth is modeled.' } } };
+            reconstructionImage: { group: subject.id, label: image.label, note: 'NOX image colors on the shared stellar-density volume; shape and stars are image-independent.' } } };
         await writeFile(resolve(temporary, 'request.json'), JSON.stringify(identity, null, 2) + '\n');
         await writeFile(resolve(temporary, 'result.json'), JSON.stringify(result, null, 2) + '\n');
         signal.throwIfAborted(); await rename(temporary, resolve(root, directory));

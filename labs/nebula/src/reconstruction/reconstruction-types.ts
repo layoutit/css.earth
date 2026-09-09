@@ -28,5 +28,6 @@ export interface ReconstructionWork {
   overlay: { widthPx: number; heightPx: number; transform: string; pivotCssPx: number[]; placement: OverlayPlacement };
   frame: DensityVolumeFrame;
   stellarPrior: { path: string; sha256: string };
+  stars?: { path: string; sha256: string };
   sourcePageUrl: string; credit: string;
 }
