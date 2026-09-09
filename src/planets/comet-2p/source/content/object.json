@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-2p",
+  "displayName": "Encke",
+  "panel": {
+    "introduction": "Encke returns to the Sun roughly every 3.3 years. Radar echoes and infrared measurements suggest a long, narrow nucleus, though its tumbling motion makes the exact shape uncertain.",
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Model length",
+        "value": "\u22489.2 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Dominant period",
+        "value": "\u224811.1 hours"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape approximation"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape approximation",
+        "detail": "Arecibo",
+        "title": "Radar and infrared model",
+        "description": "This smooth model follows one published radar and infrared solution for Encke. Its shape depends on the assumed tumbling motion. The grid marks absent surface photographs; the orientation is illustrative.",
+        "thumbnail": "/scenes/comet-2p/comet-2p-model-thumbnail.webp",
+        "surface": "comet-2p-model-surface@2x.webp",
+        "poles": "comet-2p-model-poles@2x.webp",
+        "source": {
+          "id": "shape-parameters",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1016/j.icarus.2005.01.012"
+        },
+        "facts": [
+          {
+            "id": "dimensions",
+            "label": "Model length",
+            "value": "\u22489.2 km"
+          },
+          {
+            "id": "rotation",
+            "label": "Dominant period",
+            "value": "\u224811.1 hours"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Radar and shape",
+      "role": "surface",
+      "description": "Harmon & Nolan (2005)",
+      "href": "https://doi.org/10.1016/j.icarus.2005.01.012"
+    },
+    {
+      "label": "JPL Horizons",
+      "role": "observations",
+      "description": "Orbit and fixed-epoch position",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1016/j.icarus.2005.01.012",
+      "credit": "Harmon & Nolan (2005)"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Harmon & Nolan (2005)"
+    }
+  }
+}

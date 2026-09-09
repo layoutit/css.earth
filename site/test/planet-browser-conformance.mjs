@@ -544,6 +544,8 @@ async function proveDesktop(browser, planet, profile) {
       zoom: bounds.defaultZoom,
     });
     const dolly = await wheelDolly(page, planet.id);
+    // Exclude the preceding camera reset's queued publication from the wheel probe.
+    await waitFrames(page);
     await beginZoomPublicationProbe(page);
     await wheel(page, profile.inputSelector, -240);
     const zoomPublication = await finishZoomPublicationProbe(page);
