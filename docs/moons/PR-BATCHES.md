@@ -4,7 +4,7 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**B1 and [B2 PR #62](https://github.com/layoutit/cssEarth/pull/62) are merged; B3 has an approved six-moon draft scope after all 12 source reviews.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B3–B4 counts remain planning targets until their selected sources and implementations qualify.
+**B1 and [B2 PR #62](https://github.com/layoutit/cssEarth/pull/62) are merged; [B3 draft PR #67](https://github.com/layoutit/cssEarth/pull/67) covers the approved six-moon scope after all 12 source reviews.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B3–B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
@@ -57,7 +57,7 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 ## B3 — Spacecraft color and scientific maps
 
-**State:** approved six-moon draft scope · **Owner:** Moons
+**State:** [draft PR #67](https://github.com/layoutit/cssEarth/pull/67) · **Owner:** Moons
 
 **Bodies:** Callisto, Hyperion, Phoebe, Proteus, Titania, Miranda.
 

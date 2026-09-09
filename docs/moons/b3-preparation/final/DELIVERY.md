@@ -1,5 +1,7 @@
 # B3: spacecraft imagery and geologic maps for six moons
 
+Draft: [PR #67](https://github.com/layoutit/cssEarth/pull/67).
+
 Six existing moons gain six new selectable views and three improved views. The original twelve targets are all source-reviewed; the user approved a six-body draft PR and carrying the other six dispositions forward. No new moon scene or roster increase is claimed.
 
 | Moon | Prepared result | Scientific boundary |

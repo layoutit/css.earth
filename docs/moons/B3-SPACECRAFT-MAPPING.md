@@ -2,6 +2,8 @@
 
 Owner: Moons · Started 2026-09-09 · Branch: `feat/moons-spacecraft-mapping` · Base: merged B2 `ef07fac2d3208e201dafc626374b30ed4644f561`.
 
+Draft: [PR #67](https://github.com/layoutit/cssEarth/pull/67).
+
 The user authorized the original 12-target B3 proposal and then approved one draft PR for the six completed upgrades: Callisto, Hyperion, Phoebe, Proteus, Titania and Miranda. All twelve targets have source dispositions; the other six remain in the explicit carry-forward queue. A source-review pass is not implementation or qualification.
 
 | Cohort | Targets | Source review |
