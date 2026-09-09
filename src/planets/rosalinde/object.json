@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 42.64782608695652,
       "bodyRadiusM": 9809
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/rosalinde-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "30722457548c2b7c5351d5db4a75665baf1d48740625fca77a062344f3552d7c"
+      }
     }
   },
   "schema": "cssearth-object@1",

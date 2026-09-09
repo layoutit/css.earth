@@ -118,6 +118,15 @@
       ],
       "metersPerUnit": 463.04347826086956,
       "bodyRadiusM": 106500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/phoebe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fb9271f8853ed3d2d3605f2d394cd660326f9c64c2a447650053cdcf027a65d7"
+      }
     }
   },
   "prepared": {

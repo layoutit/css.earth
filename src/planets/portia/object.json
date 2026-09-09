@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 294.12418120683725,
       "bodyRadiusM": 67648.56167757256
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/portia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d7d796687866fcc49a684d6f52cdef16088ac432cf70f20a43af2efc0a1860fd"
+      }
     }
   },
   "prepared": {

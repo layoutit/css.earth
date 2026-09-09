@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 369.5652173913044,
       "bodyRadiusM": 85000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/himalia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ec8f5d612df909fbfdab280ef68ea27dc71f3fc4d8964d72f195cdb83583c0fc"
+      }
     }
   },
   "prepared": {

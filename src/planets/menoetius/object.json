@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 226.91308686452595,
       "bodyRadiusM": 52190.00997884097
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/menoetius-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "55637c74d4a70dd4e1b922bdadbd9498dc4d05eb8ffba5cd10de5f10263465e9"
+      }
     }
   },
   "prepared": {

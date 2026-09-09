@@ -98,6 +98,15 @@
       ],
       "metersPerUnit": 382.60869565217394,
       "bodyRadiusM": 88000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/galatea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6726e84417a44647bf813380b09004d871aaa35f6b1305f8faae44e9c3c8a7d3"
+      }
     }
   },
   "prepared": {

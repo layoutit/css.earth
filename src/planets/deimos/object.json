@@ -113,6 +113,15 @@
       ],
       "metersPerUnit": 26.956521739130434,
       "bodyRadiusM": 6200
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/deimos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7e0f6dd149e3643e17a07349920cf1d19124a89b125dfe7ffe49da2ec9f1b55a"
+      }
     }
   },
   "prepared": {

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 1.3695652173913044,
       "bodyRadiusM": 315
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bacchus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "12eca77624686758571f004e9b2c6558f15efc3fbbce323076c0d4435d77d84b"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -118,6 +118,15 @@
       ],
       "metersPerUnit": 2331.7391304347825,
       "bodyRadiusM": 536300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/tethys-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c3b815176fe221a1970600c3372d005eb8dad50e3ee9a4a8ec73010058b7f680"
+      }
     }
   },
   "prepared": {

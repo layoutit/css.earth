@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 2516.9565217391305,
       "bodyRadiusM": 578900
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ariel-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f84c686352d9e10304c2dbc7fe1e30efaf8489fc0006e6d54c1009f34a42ac2a"
+      }
     }
   },
   "prepared": {

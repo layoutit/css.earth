@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 212.3913043478261,
       "bodyRadiusM": 48850
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eva-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "515966833725a1bfcaceb0874aca3fdc3a345f2b834915f105fecaafcc4ba63d"
+      }
     }
   },
   "schema": "cssearth-object@1",

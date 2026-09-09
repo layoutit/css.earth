@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 46.54347826086956,
       "bodyRadiusM": 10705
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/medusa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "dda16dd047e8665dbee3e5988abfa7dfb35348dc58b078055ae569f6433132f2"
+      }
     }
   },
   "schema": "cssearth-object@1",

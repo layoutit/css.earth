@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 360.9347826086956,
       "bodyRadiusM": 83015
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/gyptis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "748937bf6729d6902a2b8210ed79c55a98649269e6d8d73e0833fbc5bced7c0a"
+      }
     }
   },
   "schema": "cssearth-object@1",

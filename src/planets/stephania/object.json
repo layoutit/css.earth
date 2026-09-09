@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 70.19565217391305,
       "bodyRadiusM": 16145
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/stephania-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f7cc517381d372e62ce735c656ce7962568d99142d9a97297b4a9e5aa3ac260d"
+      }
     }
   },
   "schema": "cssearth-object@1",

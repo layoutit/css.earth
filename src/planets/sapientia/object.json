@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 223.91304347826087,
       "bodyRadiusM": 51500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/sapientia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0ff15d7ffe9ef5c9a48913d2f21e14f3ef828e4257801093574ae6be2981804c"
+      }
     }
   },
   "schema": "cssearth-object@1",

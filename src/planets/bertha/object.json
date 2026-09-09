@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 403.9782608695652,
       "bodyRadiusM": 92915
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/bertha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "eeea7b883e4e08a8a096a1df09afef6ce7cf0bd681845e65e8fcc39482090b8c"
+      }
     }
   },
   "schema": "cssearth-object@1",

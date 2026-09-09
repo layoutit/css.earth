@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 241.30434782608697,
       "bodyRadiusM": 55500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/harmonia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "58f75b01d69a6e9bc94a894b322857af23026ef10a13b0765a1abcb07baf9d10"
+      }
     }
   },
   "schema": "cssearth-object@1",

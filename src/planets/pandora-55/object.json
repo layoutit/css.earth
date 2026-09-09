@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 152.17391304347825,
       "bodyRadiusM": 35000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pandora-55-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "cf8040c8f24effe2bccb361d31968fb4156abff47547901465e1a73266869065"
+      }
     }
   },
   "schema": "cssearth-object@1",

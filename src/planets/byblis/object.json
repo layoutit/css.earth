@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 118.80434782608695,
       "bodyRadiusM": 27325
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/byblis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a3fbae2f5d20e388248477e0b33e508ec13e193b8fe90cba83badd2892a4129b"
+      }
     }
   },
   "schema": "cssearth-object@1",

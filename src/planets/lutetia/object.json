@@ -111,6 +111,15 @@
       ],
       "metersPerUnit": 213.04347826086956,
       "bodyRadiusM": 49000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lutetia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "88d59ae3bdd3fd3f20efc69b134d31cbbf8e60ef913aad71b7f939ae3a96788a"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 334.7826086956522,
       "bodyRadiusM": 77000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lucina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "54bc7aff33c7a739317078510ebb9047af8ea576787501370cac562396337482"
+      }
     }
   },
   "schema": "cssearth-object@1",

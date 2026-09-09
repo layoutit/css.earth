@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 423.9130434782609,
       "bodyRadiusM": 97500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hebe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "99abbe04c2d7a612279f7b1ef7a4bd7c48b302bb0ad28d53df8692720e6a5ed5"
+      }
     }
   },
   "schema": "cssearth-object@1",

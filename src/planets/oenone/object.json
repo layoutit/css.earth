@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 80.43478260869566,
       "bodyRadiusM": 18500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/oenone-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "6601f1a09b3660019214449fdc0c7c5b0cc1b6c208163a2a585532d4ab54b028"
+      }
     }
   },
   "schema": "cssearth-object@1",

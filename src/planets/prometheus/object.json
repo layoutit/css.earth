@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 187.3913043478261,
       "bodyRadiusM": 43100
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/prometheus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "46affc5ab430e20183955d49f745c6346d7a2e6c1aa6753957f039815d3484c3"
+      }
     }
   },
   "prepared": {

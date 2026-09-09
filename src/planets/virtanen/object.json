@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 20.13695652173913,
       "bodyRadiusM": 4631.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/virtanen-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0766a99036cbf5b03dcb233a27a42d71567b2bc767bdcd7a5361bc889f65da03"
+      }
     }
   },
   "schema": "cssearth-object@1",

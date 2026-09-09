@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 248.30434782608697,
       "bodyRadiusM": 57110
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/leda-38-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4094d22b08e5b98c188865ec3f06121d9573901847ea2dbde7996b63895bd69f"
+      }
     }
   },
   "schema": "cssearth-object@1",

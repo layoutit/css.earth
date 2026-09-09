@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 57.37608695652174,
       "bodyRadiusM": 13196.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/silvretta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "650ceb882638878100b94dd55f856b821ebfd2f4e3d405536d0c44172e959dce"
+      }
     }
   },
   "schema": "cssearth-object@1",

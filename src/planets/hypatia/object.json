@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 312.9782608695652,
       "bodyRadiusM": 71985
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hypatia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8d184bed14e4f46806799aa88805cfaee6b5373e921e08bced864bf043588d26"
+      }
     }
   },
   "schema": "cssearth-object@1",

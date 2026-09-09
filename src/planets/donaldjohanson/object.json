@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 10.457934782608694,
       "bodyRadiusM": 2405.325
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/donaldjohanson-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fbf257750b77c20b013e09f732b9bf161c63d4435ea135a2d296b5d01c1bd76e"
+      }
     }
   },
   "schema": "cssearth-object@1",

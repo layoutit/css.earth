@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 60.59782608695652,
       "bodyRadiusM": 13937.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/tulipa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "000965d33afaf19eb68d55659a0a8df0895d550befb785a83a549553533edda9"
+      }
     }
   },
   "schema": "cssearth-object@1",

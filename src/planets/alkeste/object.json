@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 176.93478260869566,
       "bodyRadiusM": 40695
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/alkeste-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ec9f2185784303fb7d140118010cf2ef3522faf4ca59f8c4078e2500c0c4041f"
+      }
     }
   },
   "schema": "cssearth-object@1",

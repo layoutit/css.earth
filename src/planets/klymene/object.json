@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 275,
       "bodyRadiusM": 63250
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/klymene-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "ab22457b7f077d1bf27c120c59c2bdfa06283f3e0ce5a1c4a5f8472fc4bdb21d"
+      }
     }
   },
   "schema": "cssearth-object@1",

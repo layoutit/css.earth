@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 268.54347826086956,
       "bodyRadiusM": 61765
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/artemis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "151ef34d0683795d23b8f591c675693428b7715f62e053073bae516290d366fa"
+      }
     }
   },
   "schema": "cssearth-object@1",

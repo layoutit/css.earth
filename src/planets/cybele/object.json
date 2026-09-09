@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 680.4347826086956,
       "bodyRadiusM": 156500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/cybele-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "12008a0889b5fc52bfe028f74155408e1c16b93f6e5e9348dae57ed2dcb25b83"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 133.47826086956522,
       "bodyRadiusM": 30700
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/hidalgo-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "15b7038627b77a253e045cf8085ae19195dd182e4e7fcf2203806240fd9097c3"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 443.4782608695652,
       "bodyRadiusM": 102000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/amphitrite-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "343597e3d1adef05713ee07a5a56103464c7aabc1cc0b98efe8a29105626b373"
+      }
     }
   },
   "schema": "cssearth-object@1",

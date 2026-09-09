@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 278.2608695652174,
       "bodyRadiusM": 64000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/panopaea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "97f5054aea1d43122d861f6a14abfa828800825323930a4c346055324b38ef61"
+      }
     }
   },
   "schema": "cssearth-object@1",

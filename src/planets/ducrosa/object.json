@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 74.1304347826087,
       "bodyRadiusM": 17050
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ducrosa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c62713cc6db5883928851d9808dba0ff18d1173f0faf4a56e1e501995471cbed"
+      }
     }
   },
   "schema": "cssearth-object@1",

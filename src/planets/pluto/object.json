@@ -126,6 +126,15 @@
       ],
       "metersPerUnit": 4696.837944664032,
       "bodyRadiusM": 1188300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/pluto-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "d724f2a3908f73b5c6d52decf911f7f1b6987824006fcd92694fb6c0f0e6b2fd"
+      }
     }
   },
   "schema": "cssearth-object@1",

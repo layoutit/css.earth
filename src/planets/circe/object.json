@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 232.6086956521739,
       "bodyRadiusM": 53500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/circe-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3e87f9d5aef7ea3280bd8ace39d9b9781bcf05b34fe86e24d924d56aafd1354f"
+      }
     }
   },
   "schema": "cssearth-object@1",

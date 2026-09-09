@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 315.04347826086956,
       "bodyRadiusM": 72460
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/lomia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9d8181a632f8ac32190a4675662cf7a6a04c3654ea83567e0b4d4a822f16e258"
+      }
     }
   },
   "schema": "cssearth-object@1",

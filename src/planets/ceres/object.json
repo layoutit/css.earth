@@ -111,6 +111,15 @@
           "sha256": "bbd89c12f8573468cdd8f6ccc3e010e88480841ab53f84189df01e59a20720d8"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ceres-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "13f69c7f0c6e0aaac6dd57a5e7364a0e72e5a53fe772415e11261aef21f2d92c"
+      }
     }
   },
   "schema": "cssearth-object@1",

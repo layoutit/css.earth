@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 95.65217391304348,
       "bodyRadiusM": 22000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/urda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5c9cb943d8195d12ebd4763f352ef2acece48a8f7aeaf7c65d1ad7972b9da6b5"
+      }
     }
   },
   "schema": "cssearth-object@1",

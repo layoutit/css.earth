@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 0.717391304347826,
       "bodyRadiusM": 165
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/nereus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f150b91e45f273dc4d2834e57810ee29b0d4ab8bc003f7fd0a01cfc2c80c32ef"
+      }
     }
   },
   "schema": "cssearth-object@1",

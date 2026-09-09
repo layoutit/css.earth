@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 31.73913043478261,
       "bodyRadiusM": 7300
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/tarvos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b97ff7511e99225872dc3baa76945003167df2ff02c9d46e0c2a48afdf1b7ef6"
+      }
     }
   },
   "prepared": {

@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 1024.7826086956522,
       "bodyRadiusM": 235700
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/miranda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a1ba4b6c0ef9c4a7b9226e79f2d13dda6d2f11e42a4537fc61d29efe45f6ce12"
+      }
     }
   },
   "prepared": {

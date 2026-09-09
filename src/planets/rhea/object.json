@@ -118,6 +118,15 @@
       ],
       "metersPerUnit": 3323.913043478261,
       "bodyRadiusM": 764500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/rhea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "38ad2b9a2c076df63c83479b419eeaf6eb0a569ea99d73c67ff453ee9518eeed"
+      }
     }
   },
   "prepared": {

@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 3193.478260869565,
       "bodyRadiusM": 734500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/iapetus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c8843df7ca5b9da34b10ee14072b7b7caa41204f86c1b3dc8f94dbfeae996bc3"
+      }
     }
   },
   "prepared": {

@@ -101,6 +101,15 @@
       ],
       "metersPerUnit": 537.2727272727273,
       "bodyRadiusM": 59100
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/kleopatra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0783e625f0884e88c1f884a9e2e4733debc7a85722a40dd0b30e08893a4db0f6"
+      }
     }
   },
   "schema": "cssearth-object@1",

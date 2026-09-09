@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 319.5652173913044,
       "bodyRadiusM": 73500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/massalia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "09332d0ab770c3a82aecce7420ab742e1baf32383e4c86980f458a53323539f5"
+      }
     }
   },
   "schema": "cssearth-object@1",

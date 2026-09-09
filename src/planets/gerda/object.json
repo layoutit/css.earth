@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 185.67391304347825,
       "bodyRadiusM": 42705
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/gerda-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b675060e38b63373034627e180723cab21eb4dbf3e5ddd188ea8e9803a8c3aa2"
+      }
     }
   },
   "schema": "cssearth-object@1",

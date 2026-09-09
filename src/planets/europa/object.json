@@ -121,6 +121,15 @@
           "sha256": "b0154c84662fa90ce2fcc10046dba1a5b6f09b1527682d7f81ee3344ccfcb3c0"
         }
       ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/europa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "11bfcd0d74732037105f31cd13508a9d2e895408df52a6146010ed1a7cf0650a"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -111,6 +111,15 @@
       ],
       "metersPerUnit": 0.717391304347826,
       "bodyRadiusM": 165
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/itokawa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a1d7eca95d0d8ac34cc7f55e52678387cd973240ba3268c61db77368b2655400"
+      }
     }
   },
   "schema": "cssearth-object@1",

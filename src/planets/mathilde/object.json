@@ -111,6 +111,15 @@
       ],
       "metersPerUnit": 114.78260869565217,
       "bodyRadiusM": 26400
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mathilde-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4374827fb9876000ea2d4c03e6d2efacbc81ed2400a89415654e664ec0407c67"
+      }
     }
   },
   "schema": "cssearth-object@1",

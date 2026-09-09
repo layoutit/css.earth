@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 0.980453679247878,
       "bodyRadiusM": 225.50434622701192
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/squannit-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4dac46400b7f1f6eee9186315e0a7b40c1fdd3b9aba89145a6c6cddf8fa144a7"
+      }
     }
   },
   "prepared": {

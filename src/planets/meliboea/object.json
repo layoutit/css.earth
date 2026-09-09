@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 312.54347826086956,
       "bodyRadiusM": 71885
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/meliboea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7e3b01a2bd0e6da278edf6b9ce92da8023dae74048e8d8e225ee3c38fbc3ef7e"
+      }
     }
   },
   "schema": "cssearth-object@1",

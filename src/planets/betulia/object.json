@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 11.717391304347826,
       "bodyRadiusM": 2695
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/betulia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "057f3f65c6ab057bb82d769ca5e69469f839fb9a79374c6911944b3fbb48bb97"
+      }
     }
   },
   "schema": "cssearth-object@1",

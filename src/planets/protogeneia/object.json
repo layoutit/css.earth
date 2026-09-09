@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 235.67391304347825,
       "bodyRadiusM": 54205
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/protogeneia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "df78eb578dc7b2289f74b88f620649cc9c202a6ebd958af1ce3ebd0872c1b490"
+      }
     }
   },
   "schema": "cssearth-object@1",

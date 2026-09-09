@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 16.52173913043478,
       "bodyRadiusM": 3800
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thrymr-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "cb0831a3ee452640aa3ea0aa78855b63bb77f01cccd8b7f4e5b72b40cd808dd2"
+      }
     }
   },
   "prepared": {

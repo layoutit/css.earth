@@ -98,6 +98,15 @@
       ],
       "metersPerUnit": 173.91304347826087,
       "bodyRadiusM": 40000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/thalassa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "146a95ee1723b09523fb0dfe42b6814464178d4b9a4c5404d6323cd5f2d2144e"
+      }
     }
   },
   "prepared": {

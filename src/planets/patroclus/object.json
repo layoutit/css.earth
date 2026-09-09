@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 246.4037924082009,
       "bodyRadiusM": 56672.872253886206
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/patroclus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "72556dd788272fc150d2ba07949fdd768b1130e73763faa0171dad87dd069e81"
+      }
     }
   },
   "prepared": {

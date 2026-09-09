@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 145.41304347826087,
       "bodyRadiusM": 33445
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/baucis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f198e2b3841421389e3d875dbf8c520247cc39e956deb0af82d4f36f7168ec7d"
+      }
     }
   },
   "schema": "cssearth-object@1",

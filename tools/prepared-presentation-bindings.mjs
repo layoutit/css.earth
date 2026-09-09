@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
-import { resolve, dirname } from 'node:path';
+import { resolve } from 'node:path';
+import { objectPageStyles } from '../site/object-page-contract.mjs';
 import { chromium } from 'playwright';
 import { prepareActivationGroups } from './prepared-activation-groups.mjs';
 import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mjs';
@@ -9,10 +10,8 @@ import { verifyDepthStyles } from './prepared-depth-styles.mjs';
  * explicit animation handles and planes, never a live style discovery pass. */
 export async function preparePresentationBindings(definition, root, { onDepthResult } = {}) {
   definition = restoreDepthSource(definition);
-  const pagePath = resolve(root, 'site/pages', `${definition.id}.astro`);
-  const page = await readFile(pagePath, 'utf8');
-  const styles = await Promise.all([...page.matchAll(/import\s+["']([^"']+\.css)["']/g)]
-    .map(match => readFile(resolve(dirname(pagePath), match[1]), 'utf8')));
+  const descriptor = JSON.parse(await readFile(resolve(root, 'src/planets', definition.id, 'object.json'), 'utf8'));
+  const styles = await Promise.all(objectPageStyles(descriptor).map(path => readFile(resolve(root, path), 'utf8')));
   const browser = await chromium.launch({ headless: true });
   try {
     const page = await browser.newPage();

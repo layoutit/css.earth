@@ -118,6 +118,15 @@
       ],
       "metersPerUnit": 11197.826086956522,
       "bodyRadiusM": 2575500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/titan-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2fae5f54a6151448b5497b710dc95b1611cbf2d7a659b337f9832478e257247f"
+      }
     }
   },
   "prepared": {

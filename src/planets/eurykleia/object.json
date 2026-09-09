@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 189.1304347826087,
       "bodyRadiusM": 43500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eurykleia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2bee138dc943e46cec2def384ea06bffa3d2d6a702e2c1a75ef808a017fa4f56"
+      }
     }
   },
   "schema": "cssearth-object@1",

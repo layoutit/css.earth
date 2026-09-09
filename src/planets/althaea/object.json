@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 127.80434782608695,
       "bodyRadiusM": 29395
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/althaea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7f3230c41339aa5dd1a930f96545e4d008673e69483038d75fef68200a22adf5"
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 88.75652173913043,
       "bodyRadiusM": 20414
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/selinur-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8d7809aed3f09b480fad7c8e14521043a8804a8347cfc060ddd795a0bdbc84fc"
+      }
     }
   },
   "schema": "cssearth-object@1",

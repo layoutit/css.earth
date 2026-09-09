@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 151.58695652173913,
       "bodyRadiusM": 34865
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/badenia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "31ad00b38681db8dd232a35620d32ad477fdbb323b86c61b272a93287f58d5ea"
+      }
     }
   },
   "schema": "cssearth-object@1",

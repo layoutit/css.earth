@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 98.69565217391305,
       "bodyRadiusM": 22700
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/klytia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8e3d2c2f383837315404877b8d3e232301bd82dacd596079764eca54d00b926f"
+      }
     }
   },
   "schema": "cssearth-object@1",

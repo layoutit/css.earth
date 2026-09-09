@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 174.06521739130434,
       "bodyRadiusM": 40035
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/vindobona-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "a65551c32702b577c08d7c410a7370dde42d911b81d65ff1e212743b869832e1"
+      }
     }
   },
   "schema": "cssearth-object@1",

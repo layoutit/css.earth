@@ -108,6 +108,15 @@
       ],
       "metersPerUnit": 904.3478260869565,
       "bodyRadiusM": 208000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/proteus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "24b7a8b04b68971a4c165d5f505e087801979d7ce3def73e2f7b8c7b3a12830a"
+      }
     }
   },
   "prepared": {

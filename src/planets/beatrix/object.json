@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 190.04347826086956,
       "bodyRadiusM": 43710
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/beatrix-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "9751621b6e87beb0a49cf09bb7d351dd22cb5b2a5c1eee91bfe9c34eaf34b7c5"
+      }
     }
   },
   "schema": "cssearth-object@1",

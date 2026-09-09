@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 326.60869565217394,
       "bodyRadiusM": 75120
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/eukrate-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "7599394269422dd4398e5c8987d98dd6eae0a6eb0bc7c593fb717af8fe22a998"
+      }
     }
   },
   "schema": "cssearth-object@1",

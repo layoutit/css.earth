@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 9.221739130434782,
       "bodyRadiusM": 2121
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/iau-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4371afcadb620591050032925fb683d29692ad08fc1d09073b748337b0f7beae"
+      }
     }
   },
   "schema": "cssearth-object@1",

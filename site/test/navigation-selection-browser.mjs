@@ -15,9 +15,10 @@ try {
     await page.goto(`${origin}/sun/`);
     await page.waitForFunction(() => window.__cssEarth?.ready);
     assert.equal(await page.locator('template[data-object-card]').count(), OBJECTS.length);
-    let release;
+    let release, sawCeres, ceresHits = 0;
+    const ceresRequested = new Promise(resolve => { sawCeres = resolve; });
     const hold = new Promise(resolve => { release = resolve; });
-    await page.route('**/src/planets/ceres/prepared/object.json', async route => { await hold; await route.continue(); });
+    await page.route('**/objects/ceres/*.json', async route => { ceresHits++; sawCeres(); await hold; await route.continue(); });
     await page.locator('.planet-sidebar-search').fill('Ceres');
     await page.evaluate(() => {
       const panel = document.querySelector('.planet-information-panel');
@@ -45,6 +46,10 @@ try {
     assert.ok(immediate.facts > 0); assert.ok(immediate.datasets > 0); assert.equal(immediate.minimap, true); assert.equal(immediate.hidden, false);
     assert.equal(await page.evaluate(() => window.__cardSwaps), 1, 'One complete card swap in the click event');
     await page.screenshot({ path: `${output}/immediate-dpr-${dpr}.png` });
+    await page.waitForFunction(() => window.__cssEarth?.selectedObjectId === 'ceres');
+    await ceresRequested;
+    assert.equal(ceresHits, 1, 'The hash-addressed scene request is actually held');
+    assert.equal(await page.evaluate(() => window.__cssEarth.activeObjectId), 'sun');
     release();
     await page.waitForFunction(() => window.__cssEarth?.ready && window.__cssEarth.activeObjectId === 'ceres');
     assert.equal(await page.evaluate(() => window.__cardSwaps), 1, 'Mount does not replace or flash the selected card');
@@ -53,15 +58,18 @@ try {
     assert.equal(await page.locator('.planet-stage').count(), 1);
     assert.equal(await page.evaluate(() => window.__cssEarth.mountedObjectCount), 1);
     // Interrupted navigation restores the retained source card, not a stale destination.
-    let releaseVenus;
+    let releaseVenus, sawVenus, venusHits = 0;
+    const venusRequested = new Promise(resolve => { sawVenus = resolve; });
     const holdVenus = new Promise(resolve => { releaseVenus = resolve; });
-    await page.route('**/src/planets/venus/prepared/object.json', async route => { await holdVenus; await route.continue(); });
+    await page.route('**/objects/venus/*.json', async route => { venusHits++; sawVenus(); await holdVenus; await route.continue(); });
     await page.locator('.planet-sidebar-search').fill('Venus');
     await page.locator('.planet-object-link[data-object-id="venus"]').click();
-    assert.equal(await page.locator('.planet-information-panel .planet-title').getAttribute('aria-label'), 'Venus');
+    assert.equal(await page.locator('.planet-information-panel .planet-title').first().getAttribute('aria-label'), 'Venus');
+    await venusRequested;
+    assert.equal(venusHits, 1, 'Interrupted navigation also holds the actual scene request');
     await page.mouse.move(900, 450); await page.mouse.wheel(0, 40);
     await page.waitForFunction(() => window.__cssEarth.ready && window.__cssEarth.selectedObjectId === 'ceres');
-    assert.equal(await page.locator('.planet-information-panel .planet-title').getAttribute('aria-label'), 'Ceres');
+    assert.equal(await page.locator('.planet-information-panel .planet-title').first().getAttribute('aria-label'), 'Ceres');
     assert.equal(await page.evaluate(() => [...document.querySelector('.planet-information-panel').childNodes].every((node, i) => node === window.__selectedCard[i])), true);
     releaseVenus();
     results.push({ dpr, immediate, cardSwaps: 1 });

@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 31.31086956521739,
       "bodyRadiusM": 7201.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/gryphia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3e20bb69d0e4ad8aea813700f9d7abc4e39a2abf5e0785099172fd0988a6d21e"
+      }
     }
   },
   "schema": "cssearth-object@1",

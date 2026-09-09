@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 125.15217391304348,
       "bodyRadiusM": 28785
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/libussa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "aff1fea134e22130dd2db08a6617e43502a560dc1eae983e436149654373ba95"
+      }
     }
   },
   "schema": "cssearth-object@1",
