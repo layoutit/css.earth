@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "dejopeja",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bf4b31c93023b9a126479c6e284eaf856095863b7ea9f1ad7fddc2d5e3bd34aa"
+    "sha256": "835eafb7bbd24967b47519751a9b182cf5b3ffb1f0d6e7d5d375e40d173aa673"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7028da6f5401e089561dbfe1979d3a7edd8701a1e6c0e9492fede0b3fe89b420",
+      "sha256": "eec526a75bd8dd2884a11f7b43990fb58bee6464dfc69ddfd7a0554c700200db",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 93 ±9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 93 ±9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 175 shape model",
               "thumbnail": "/scenes/dejopeja/dejopeja-shape-thumbnail.webp",
               "surface": "dejopeja-shape-surface@2x.webp",
               "poles": "dejopeja-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 46.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 46.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 175 radial height",
               "thumbnail": "/scenes/dejopeja/dejopeja-elevation-thumbnail.webp",
               "surface": "dejopeja-elevation-surface@2x.webp",
               "poles": "dejopeja-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7028da6f5401e089561dbfe1979d3a7edd8701a1e6c0e9492fede0b3fe89b420",
-      "bytes": 11446,
+      "sha256": "eec526a75bd8dd2884a11f7b43990fb58bee6464dfc69ddfd7a0554c700200db",
+      "bytes": 11089,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

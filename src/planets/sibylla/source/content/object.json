@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction with approximate thermal size: 146.48 km (catalog ±1.74 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
-        "title": "Convex light-curve reconstruction with approximate thermal size: 146.48 km (catalog ±1.74 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
+        "title": "DAMIT 6009 shape model",
         "thumbnail": "/scenes/sibylla/sibylla-shape-thumbnail.webp",
         "surface": "sibylla-shape-surface@2x.webp",
         "poles": "sibylla-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 73.24 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 73.24 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 6009 radial height",
         "thumbnail": "/scenes/sibylla/sibylla-elevation-thumbnail.webp",
         "surface": "sibylla-elevation-surface@2x.webp",
         "poles": "sibylla-elevation-surface@2x.webp",

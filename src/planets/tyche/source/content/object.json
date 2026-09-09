@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction with approximate thermal size: 64.37 km effective diameter (catalog ±0.89 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Convex light-curve reconstruction with approximate thermal size: 64.37 km effective diameter (catalog ±0.89 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 329 shape model",
         "thumbnail": "/scenes/tyche/tyche-shape-thumbnail.webp",
         "surface": "tyche-shape-surface@2x.webp",
         "poles": "tyche-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 32.185 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 32.185 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 329 radial height",
         "thumbnail": "/scenes/tyche/tyche-elevation-thumbnail.webp",
         "surface": "tyche-elevation-surface@2x.webp",
         "poles": "tyche-elevation-surface@2x.webp",

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "sapientia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cc19b52ce4f02e129985d1fed899ce158fb039dcedc538da6b220e663c7bb363"
+    "sha256": "4f4321d4f709c9de4904f7ad648398abbc463e8a0452271e80c1f824d0f86405"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d3b196ec4d5d1ccb683d91eb1612621d52a4c7ed83ff9bcad910087815f6255b",
+      "sha256": "6def713bdb7340d8df89c1a60dbb5b07776e9a5b367ef7d9d59417dc9691988c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 16284 shape model",
               "thumbnail": "/scenes/sapientia/sapientia-shape-thumbnail.webp",
               "surface": "sapientia-shape-surface@2x.webp",
               "poles": "sapientia-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 51.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 51.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 16284 radial height",
               "thumbnail": "/scenes/sapientia/sapientia-elevation-thumbnail.webp",
               "surface": "sapientia-elevation-surface@2x.webp",
               "poles": "sapientia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d3b196ec4d5d1ccb683d91eb1612621d52a4c7ed83ff9bcad910087815f6255b",
-      "bytes": 12060,
+      "sha256": "6def713bdb7340d8df89c1a60dbb5b07776e9a5b367ef7d9d59417dc9691988c",
+      "bytes": 11710,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

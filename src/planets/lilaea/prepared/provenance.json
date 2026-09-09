@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "lilaea",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "de609d8819d1f3579a2be86abb65ac582723f72c67b80310efb1a4207ad749d0"
+    "sha256": "0f95bc8c452df0efb8899e083c9cd90774bb337f08eb145d5a1914ae98774056"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ead2f71d8920126aa48d0af3082f1f68b2a1108ef6361dbea48552de6eaed608",
+      "sha256": "58903f29c18916234ef1ab95a4acce66f17f6b36b61d233d3d7552081bf43c39",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 76.31 km effective diameter (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 76.31 km effective diameter (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 9003 shape model",
               "thumbnail": "/scenes/lilaea/lilaea-shape-thumbnail.webp",
               "surface": "lilaea-shape-surface@2x.webp",
               "poles": "lilaea-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 38.155 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 38.155 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 9003 radial height",
               "thumbnail": "/scenes/lilaea/lilaea-elevation-thumbnail.webp",
               "surface": "lilaea-elevation-surface@2x.webp",
               "poles": "lilaea-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ead2f71d8920126aa48d0af3082f1f68b2a1108ef6361dbea48552de6eaed608",
-      "bytes": 9958,
+      "sha256": "58903f29c18916234ef1ab95a4acce66f17f6b36b61d233d3d7552081bf43c39",
+      "bytes": 9516,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "erigone",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cd910d5af1ce9672aef19656301588721a1530fd2207320c0c46b67963fc0530"
+    "sha256": "ab779976ea9d80e033982f49271d3e110f5f6ac77f8d6701194945401f2068c1"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7248bceb53533dcc6c8782ac6d65a62048b442b880ff2e4988396a14a9b8523a",
+      "sha256": "49a5d830f4c552a9bc8a96a9bd753fdbffec8348266efd748abaafc10e1db9d4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 72.14 km (catalog ±0.95 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 72.14 km (catalog ±0.95 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+              "title": "DAMIT 1399 shape model",
               "thumbnail": "/scenes/erigone/erigone-shape-thumbnail.webp",
               "surface": "erigone-shape-surface@2x.webp",
               "poles": "erigone-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 36.07 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 36.07 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1399 radial height",
               "thumbnail": "/scenes/erigone/erigone-elevation-thumbnail.webp",
               "surface": "erigone-elevation-surface@2x.webp",
               "poles": "erigone-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7248bceb53533dcc6c8782ac6d65a62048b442b880ff2e4988396a14a9b8523a",
-      "bytes": 10182,
+      "sha256": "49a5d830f4c552a9bc8a96a9bd753fdbffec8348266efd748abaafc10e1db9d4",
+      "bytes": 9754,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

@@ -72,8 +72,8 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 83492,
-      "expectedSha256": "6c6ba96c86e48c483afb346a878bac83c607eb928a40df6e3c54c5973a3868c5",
+      "expectedBytes": 83220,
+      "expectedSha256": "979f177e7db2b59d6db485cee1bf544ebb2d0c4c5228f87f4bb931cc5db8d2a4",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -93,8 +93,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 7526,
-      "expectedSha256": "45f37c796f344f0b70a0c2af8ddcc667ea2be88916ac56e1f323b8ac952094a9"
+      "expectedBytes": 7181,
+      "expectedSha256": "c9b5000c8d16cc09dfd9de41e3cf9eec66e5c4ab0827b3aa443584d840388540"
     },
     {
       "path": "preparation/acquisition.json",
@@ -106,7 +106,7 @@
       "path": "preparation/navigation.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 1247,
-      "expectedSha256": "7a8f9f2d92b2f007a66d8f6fd0bca76311bb17e22e5d188c4d06e0003992ff51"
+      "expectedSha256": "09be05d61020d5e4a37ad8febd783bc5e2c5d6941d3f7ee219564d3d63abe753"
     },
     {
       "path": "preparation/rotation.json",
@@ -117,8 +117,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 3143,
-      "expectedSha256": "5d655d98ab11bf865630abdd367e2408ac9087f0d0b4d1d3c6cb5795607048eb"
+      "expectedBytes": 3144,
+      "expectedSha256": "16a1aac987e8875dfc41d10c6bc4d320dbf10deee29ae4acb4aee261dc60c0cc"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -195,8 +195,8 @@
     {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 4105,
-      "expectedSha256": "8e6afdad6b281e2385b1b7d099d8ebbe266e74455791e088b56c29eff89bf04b"
+      "expectedBytes": 4079,
+      "expectedSha256": "c69f97ecc48b523a69a691bc0aed9d3bf8a9f13b1439ba0e11c71becb9a1163b"
     },
     {
       "path": "reference/reference-660.html",

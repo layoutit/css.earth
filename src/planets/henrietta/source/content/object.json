@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction with approximate thermal size: 107.57 km effective diameter (catalog ±1.5 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Convex light-curve reconstruction with approximate thermal size: 107.57 km effective diameter (catalog ±1.5 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 4859 shape model",
         "thumbnail": "/scenes/henrietta/henrietta-shape-thumbnail.webp",
         "surface": "henrietta-shape-surface@2x.webp",
         "poles": "henrietta-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 53.785 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 53.785 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 4859 radial height",
         "thumbnail": "/scenes/henrietta/henrietta-elevation-thumbnail.webp",
         "surface": "henrietta-elevation-surface@2x.webp",
         "poles": "henrietta-elevation-surface@2x.webp",

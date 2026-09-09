@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d6ffbc4bb6860b25e81527907d232d1f8bda14ba9755f899a79ac7df4e012415"
+    "sha256": "ebb60de9b3ae65ae8ddf1ad974668fc6fcc445a695dfc8ed346e38e9368a01fc"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3a32bcc8622a6904e781fef6d016ba246ab269f0dbd939deeb7652afdf2bdbf8",
+      "sha256": "de7140dd879aeccd902b9a932fb64fcc5fc541fdf74a3e9815d95571908c6e1a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 42.18 km (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 42.18 km (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+              "title": "DAMIT 4625 shape model",
               "thumbnail": "/scenes/abundantia/abundantia-shape-thumbnail.webp",
               "surface": "abundantia-shape-surface@2x.webp",
               "poles": "abundantia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 21.09 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 21.09 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 4625 radial height",
               "thumbnail": "/scenes/abundantia/abundantia-elevation-thumbnail.webp",
               "surface": "abundantia-elevation-surface@2x.webp",
               "poles": "abundantia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3a32bcc8622a6904e781fef6d016ba246ab269f0dbd939deeb7652afdf2bdbf8",
-      "bytes": 12253,
+      "sha256": "de7140dd879aeccd902b9a932fb64fcc5fc541fdf74a3e9815d95571908c6e1a",
+      "bytes": 11855,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

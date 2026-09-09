@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "83cab71aeecb4c8a5ecc2774feb53faf6304bf93ee56826aebf745074b8b90a4"
+    "sha256": "44ab0d45a571e5c241747b1b22d42fc1a82f067eea873491d567250f5f36378d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "59d288cc403bd87897ff8ddbbc93bcd3043db3d7cafcbcb79a627bf9cbff9669",
+      "sha256": "6564ebdb262762d9dbc564f92f70650877404fd72a9b14dbd0340ae2d8004a6b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 58.79 km effective diameter (catalog ±0.62 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 58.79 km effective diameter (catalog ±0.62 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 323 shape model",
               "thumbnail": "/scenes/althaea/althaea-shape-thumbnail.webp",
               "surface": "althaea-shape-surface@2x.webp",
               "poles": "althaea-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 29.395 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 29.395 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 323 radial height",
               "thumbnail": "/scenes/althaea/althaea-elevation-thumbnail.webp",
               "surface": "althaea-elevation-surface@2x.webp",
               "poles": "althaea-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "59d288cc403bd87897ff8ddbbc93bcd3043db3d7cafcbcb79a627bf9cbff9669",
-      "bytes": 10623,
+      "sha256": "6564ebdb262762d9dbc564f92f70650877404fd72a9b14dbd0340ae2d8004a6b",
+      "bytes": 10169,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

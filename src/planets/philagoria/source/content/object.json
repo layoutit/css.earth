@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction with approximate thermal size: 27.32 km effective diameter (catalog ±0.71 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Convex light-curve reconstruction with approximate thermal size: 27.32 km effective diameter (catalog ±0.71 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 883 shape model",
         "thumbnail": "/scenes/philagoria/philagoria-shape-thumbnail.webp",
         "surface": "philagoria-shape-surface@2x.webp",
         "poles": "philagoria-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 13.66 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 13.66 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 883 radial height",
         "thumbnail": "/scenes/philagoria/philagoria-elevation-thumbnail.webp",
         "surface": "philagoria-elevation-surface@2x.webp",
         "poles": "philagoria-elevation-surface@2x.webp",

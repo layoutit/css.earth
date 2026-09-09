@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "phaedra",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5f6896ba2105c24bad2047a581e66d2f7fe88b5e9919729ab57a5cfcd4abb531"
+    "sha256": "b5792dc9c8428567c65d9b3116a2715a282a7ec5f2032de087cf14022f2f76be"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d0676f2f2498d2aaab0742056707399bf084730231e7edc395d29868ca84a819",
+      "sha256": "3685f0544b16075bb6e36d0ce71dcbad9b4e5154c88f80227f183be601a2cf7f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 64.08 km (catalog ±0.77 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 64.08 km (catalog ±0.77 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
+              "title": "DAMIT 304 shape model",
               "thumbnail": "/scenes/phaedra/phaedra-shape-thumbnail.webp",
               "surface": "phaedra-shape-surface@2x.webp",
               "poles": "phaedra-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 32.04 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 32.04 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 304 radial height",
               "thumbnail": "/scenes/phaedra/phaedra-elevation-thumbnail.webp",
               "surface": "phaedra-elevation-surface@2x.webp",
               "poles": "phaedra-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d0676f2f2498d2aaab0742056707399bf084730231e7edc395d29868ca84a819",
-      "bytes": 11245,
+      "sha256": "3685f0544b16075bb6e36d0ce71dcbad9b4e5154c88f80227f183be601a2cf7f",
+      "bytes": 10853,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

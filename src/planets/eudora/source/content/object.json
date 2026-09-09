@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction with approximate thermal size: 67.8 km effective diameter (catalog ±1.18 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Convex light-curve reconstruction with approximate thermal size: 67.8 km effective diameter (catalog ±1.18 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 3998 shape model",
         "thumbnail": "/scenes/eudora/eudora-shape-thumbnail.webp",
         "surface": "eudora-shape-surface@2x.webp",
         "poles": "eudora-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 33.9 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 33.9 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 3998 radial height",
         "thumbnail": "/scenes/eudora/eudora-elevation-thumbnail.webp",
         "surface": "eudora-elevation-surface@2x.webp",
         "poles": "eudora-elevation-surface@2x.webp",

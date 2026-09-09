@@ -3,13 +3,14 @@ import PlanetLayout from "../layouts/PlanetLayout.astro";
 import PreparedObjectHead from "../components/PreparedObjectHead.astro";
 import PreparedObjectPanel from "../components/PreparedObjectPanel.astro";
 import preparedContent from "../../src/planets/comet-9p/prepared/content.json";
-import preparedObject from "../../src/planets/comet-9p/prepared/object.json";
+import { loadObjectPageData } from "../object-page-data.mjs";
 import type { PreparedObjectContentDocument } from "../../tools/objects/content/types";
 import "../../src/renderers/css/styles/comet-9p-surfaces.css";
 import "../planet-shell.css";
+const preparedPage = await loadObjectPageData("comet-9p");
 ---
 
 <PlanetLayout objectId="comet-9p">
-  <PreparedObjectHead slot="planet-head" preparedAssets={preparedObject.data.assets} />
-  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent as PreparedObjectContentDocument} preparedControls={preparedObject.data.controls} />
+  <PreparedObjectHead slot="planet-head" preparedAssets={preparedPage.assets} />
+  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent as PreparedObjectContentDocument} preparedControls={preparedPage.controls} />
 </PlanetLayout>

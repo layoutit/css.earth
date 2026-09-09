@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fef0e87551f51164a3707ec3e2b253b74f027d8a8392e731a313811ac47865f3"
+    "sha256": "e4eb326e16aabb1815db78b08ecf2ffe24362ae9e9b792b43f4556b99c2ad005"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "891732e4ec973571cdb5fec214d4f6fea8eec38a7bc46f62edc6b89a74e7c144",
+      "sha256": "6151da319a5001ee50ac3d99c35ccfcda8fade393dc489c5c007716120de8174",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images. Selected archive volume-equivalent diameter: 154 ±15 km. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images. Selected archive volume-equivalent diameter: 154 ±15 km. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 1837 shape model",
               "thumbnail": "/scenes/lucina/lucina-shape-thumbnail.webp",
               "surface": "lucina-shape-surface@2x.webp",
               "poles": "lucina-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 77 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 77 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1837 radial height",
               "thumbnail": "/scenes/lucina/lucina-elevation-thumbnail.webp",
               "surface": "lucina-elevation-surface@2x.webp",
               "poles": "lucina-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "891732e4ec973571cdb5fec214d4f6fea8eec38a7bc46f62edc6b89a74e7c144",
-      "bytes": 9323,
+      "sha256": "6151da319a5001ee50ac3d99c35ccfcda8fade393dc489c5c007716120de8174",
+      "bytes": 8997,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

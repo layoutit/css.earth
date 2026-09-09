@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 1850 shape model",
         "thumbnail": "/scenes/bettina/bettina-shape-thumbnail.webp",
         "surface": "bettina-shape-surface@2x.webp",
         "poles": "bettina-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 55 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 55 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 1850 radial height",
         "thumbnail": "/scenes/bettina/bettina-elevation-thumbnail.webp",
         "surface": "bettina-elevation-surface@2x.webp",
         "poles": "bettina-elevation-surface@2x.webp",

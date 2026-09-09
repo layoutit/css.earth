@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "oenone",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "51f657de13e3beb3ef3c5f8628868b17a87c3ca16f0abad9c40a5b3ed1732573"
+    "sha256": "1a35673f14ae4148e7591c6067f2826ee272babb6bd7a99612529af9e8b7de99"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d7e91c33244b6fd9795762065951d15c618223ed70d9664ad51983f11a735ec3",
+      "sha256": "7e664aa44655b8c1bc3796dd5dc74d26ff4a0f80afff7c5e36c24f8c779d7283",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex CITPM shape; 37 ± 2 km volume-equivalent thermal size. Occultations give 46 ± 1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex CITPM shape; 37 ± 2 km volume-equivalent thermal size. Occultations give 46 ± 1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 16312 shape model",
               "thumbnail": "/scenes/oenone/oenone-shape-thumbnail.webp",
               "surface": "oenone-shape-surface@2x.webp",
               "poles": "oenone-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 18.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 18.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 16312 radial height",
               "thumbnail": "/scenes/oenone/oenone-elevation-thumbnail.webp",
               "surface": "oenone-elevation-surface@2x.webp",
               "poles": "oenone-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d7e91c33244b6fd9795762065951d15c618223ed70d9664ad51983f11a735ec3",
-      "bytes": 9775,
+      "sha256": "7e664aa44655b8c1bc3796dd5dc74d26ff4a0f80afff7c5e36c24f8c779d7283",
+      "bytes": 9424,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

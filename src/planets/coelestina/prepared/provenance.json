@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "coelestina",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "044cdf6ee98cde032b28c1d14e77f553f49ba42560ff13dd273b705a82fad3ad"
+    "sha256": "299a7c0718ab34142c9015e4d74fb924a8bfab545d5026bf62052d17abd16c46"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "78bf0a101185e508bdd7be53a9ab747d85d6902ecf854d3b6ac68b0c1251c98f",
+      "sha256": "d2cc6c399fa0a846a91d3f98fb05b30ead080d5b6b4e0a5a90ef8aa5ccb576ae",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 39.51 km effective diameter (catalog ±0.69 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 39.51 km effective diameter (catalog ±0.69 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 1218 shape model",
               "thumbnail": "/scenes/coelestina/coelestina-shape-thumbnail.webp",
               "surface": "coelestina-shape-surface@2x.webp",
               "poles": "coelestina-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 19.755 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 19.755 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1218 radial height",
               "thumbnail": "/scenes/coelestina/coelestina-elevation-thumbnail.webp",
               "surface": "coelestina-elevation-surface@2x.webp",
               "poles": "coelestina-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "78bf0a101185e508bdd7be53a9ab747d85d6902ecf854d3b6ac68b0c1251c98f",
-      "bytes": 12332,
+      "sha256": "d2cc6c399fa0a846a91d3f98fb05b30ead080d5b6b4e0a5a90ef8aa5ccb576ae",
+      "bytes": 11890,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

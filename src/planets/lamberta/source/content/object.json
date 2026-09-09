@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 141 ±2 km. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 141 ±2 km. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 5914 shape model",
         "thumbnail": "/scenes/lamberta/lamberta-shape-thumbnail.webp",
         "surface": "lamberta-shape-surface@2x.webp",
         "poles": "lamberta-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 70.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 70.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 5914 radial height",
         "thumbnail": "/scenes/lamberta/lamberta-elevation-thumbnail.webp",
         "surface": "lamberta-elevation-surface@2x.webp",
         "poles": "lamberta-elevation-surface@2x.webp",

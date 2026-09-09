@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f9cac94caa76e41c87b326ac2fa24c0f4be67e5f1d77d85b817b310b33b187be"
+    "sha256": "8f5b3da2a9fa79ad2ad067ca634e5b4df17aad828b1a3b2c06a1d7c889fd6310"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "76cf3f824797b38907cc1761598e9cb345dfc8593edd49ee572a0137df60b926",
+      "sha256": "445dfa59c6a07bf5dcc313b91dedb9123ab8a91a7606404b8f909541b9a94a03",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 81.39 km effective diameter (catalog ±0.93 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 81.39 km effective diameter (catalog ±0.93 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 4511 shape model",
               "thumbnail": "/scenes/alkeste/alkeste-shape-thumbnail.webp",
               "surface": "alkeste-shape-surface@2x.webp",
               "poles": "alkeste-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 40.695 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 40.695 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 4511 radial height",
               "thumbnail": "/scenes/alkeste/alkeste-elevation-thumbnail.webp",
               "surface": "alkeste-elevation-surface@2x.webp",
               "poles": "alkeste-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "76cf3f824797b38907cc1761598e9cb345dfc8593edd49ee572a0137df60b926",
-      "bytes": 9806,
+      "sha256": "445dfa59c6a07bf5dcc313b91dedb9123ab8a91a7606404b8f909541b9a94a03",
+      "bytes": 9354,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

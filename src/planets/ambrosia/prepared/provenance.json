@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7b6ce7c1d2d5f37b5c5b7d6db971b1d4092afcbf21b100722109b21ad5d4f75f"
+    "sha256": "2cee09e6782e7c368a92ccc05539e73d9d9574fd67c91168b597096cb0eed731"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "86d2bed0f350324076b73953ed93be43d619c35cc939df7dcfb58404ce881e39",
+      "sha256": "858f21e207113fcc309d1e5b5203d9c075dbff2951c69a22316b3297678f55d5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 37.89 km effective diameter (catalog ±0.65 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 37.89 km effective diameter (catalog ±0.65 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 548 shape model",
               "thumbnail": "/scenes/ambrosia/ambrosia-shape-thumbnail.webp",
               "surface": "ambrosia-shape-surface@2x.webp",
               "poles": "ambrosia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 18.945 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 18.945 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 548 radial height",
               "thumbnail": "/scenes/ambrosia/ambrosia-elevation-thumbnail.webp",
               "surface": "ambrosia-elevation-surface@2x.webp",
               "poles": "ambrosia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "86d2bed0f350324076b73953ed93be43d619c35cc939df7dcfb58404ce881e39",
-      "bytes": 11345,
+      "sha256": "858f21e207113fcc309d1e5b5203d9c075dbff2951c69a22316b3297678f55d5",
+      "bytes": 10931,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction with approximate thermal size: 95.2 km effective diameter (catalog ±1.36 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Convex light-curve reconstruction with approximate thermal size: 95.2 km effective diameter (catalog ±1.36 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 578 shape model",
         "thumbnail": "/scenes/huberta/huberta-shape-thumbnail.webp",
         "surface": "huberta-shape-surface@2x.webp",
         "poles": "huberta-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 47.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 47.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 578 radial height",
         "thumbnail": "/scenes/huberta/huberta-elevation-thumbnail.webp",
         "surface": "huberta-elevation-surface@2x.webp",
         "poles": "huberta-elevation-surface@2x.webp",

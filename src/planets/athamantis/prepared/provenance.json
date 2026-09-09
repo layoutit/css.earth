@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "athamantis",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a8a5cf18924268e6d1a8c79f767198875d8f5cc33afbc6b9fd4fa9209bc7b9c8"
+    "sha256": "53df149d2f36acea19cbb838369d8f5840b8d041329cfad5d7acef6349b5a717"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3c95a20cd4453aa598c18bf57600900403566b19a73998843adcb1d64f6164be",
+      "sha256": "f2c1d3934bd746f6f95d3e394d8a2ecf4225f36c6c2f3433d5438f0e0f006b93",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction; 115 km volume-equivalent diameter (±12 km). The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction; 115 km volume-equivalent diameter (±12 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 185 shape model",
               "thumbnail": "/scenes/athamantis/athamantis-shape-thumbnail.webp",
               "surface": "athamantis-shape-surface@2x.webp",
               "poles": "athamantis-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 57.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 57.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 185 radial height",
               "thumbnail": "/scenes/athamantis/athamantis-elevation-thumbnail.webp",
               "surface": "athamantis-elevation-surface@2x.webp",
               "poles": "athamantis-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3c95a20cd4453aa598c18bf57600900403566b19a73998843adcb1d64f6164be",
-      "bytes": 11806,
+      "sha256": "f2c1d3934bd746f6f95d3e394d8a2ecf4225f36c6c2f3433d5438f0e0f006b93",
+      "bytes": 11498,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

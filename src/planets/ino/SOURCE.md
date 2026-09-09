@@ -27,3 +27,5 @@ No registered global image texture is supplied by the selected release. Shape di
 ## Preparation and qualification
 
 The established source-meshoptimizer path retains source connectivity, reduces to at most 800 faces, and emits native PolyCSS `u` triangles with 128 px raster cells. The error allowance is 1440 m; sampled source-fit error is qualified separately from source accuracy. Elevation uses closest-source-surface sampling with the same physical scale. Shadows are off by default. Shared runtime, camera, navigation and shell remain generic. Delivery and browser evidence are recorded in the PR’s validation report.
+
+The 800-face Meshoptimizer preparation disables triangle regularization. Dense transfer probes found three points beyond the unchanged 1,440 m correspondence limit in the regularized candidate. The source-preserving option reduced the trial maximum over 51,200 interior probes to 989 m, with no withheld probes; this sampled check is not an exhaustive bound or an observation-accuracy claim.

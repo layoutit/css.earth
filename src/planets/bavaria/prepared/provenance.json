@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "bavaria",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "50daab3f93e98fd7aa0642db434ec3ea832d203efccd01bb4ba9ee78697313cd"
+    "sha256": "e51a5b4b9f4da71c8de6f1f291d07b342c4530f695095d5f705f19a44c6348f1"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1436e37621f9a0d32b87df0c4156475c114d85656174cdd4b46508ccf33f7b25",
+      "sha256": "4de7afdb39bbfdbef57c578a13604eab9c340ecc3d401232b0c873a6c7049862",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 3090 shape model",
               "thumbnail": "/scenes/bavaria/bavaria-shape-thumbnail.webp",
               "surface": "bavaria-shape-surface@2x.webp",
               "poles": "bavaria-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 27.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 27.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 3090 radial height",
               "thumbnail": "/scenes/bavaria/bavaria-elevation-thumbnail.webp",
               "surface": "bavaria-elevation-surface@2x.webp",
               "poles": "bavaria-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1436e37621f9a0d32b87df0c4156475c114d85656174cdd4b46508ccf33f7b25",
-      "bytes": 11146,
+      "sha256": "4de7afdb39bbfdbef57c578a13604eab9c340ecc3d401232b0c873a6c7049862",
+      "bytes": 10714,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

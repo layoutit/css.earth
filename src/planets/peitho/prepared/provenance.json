@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "001ce295c2121cd00559bcc08bf29ebdd850b71f9b4562305c9ca1364b48d0f1"
+    "sha256": "7ef1fa3f9a65b8d9d2a7ecfffad31945f14309402a031381744ed9badc7f1f66"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "cc7fddd448514185bff254f174d3e6d462d7301dfb17026b5a64eee5840dc7d5",
+      "sha256": "b5ade93a76f27b1e1214d122b6949e7fcc038dced80f4f330be4798c8ad00c00",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 43.99 km effective diameter (catalog ±0.75 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The pole follows the archive’s occultation match. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 43.99 km effective diameter (catalog ±0.75 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The pole follows the archive’s occultation match. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 4397 shape model",
               "thumbnail": "/scenes/peitho/peitho-shape-thumbnail.webp",
               "surface": "peitho-shape-surface@2x.webp",
               "poles": "peitho-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 21.995 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 21.995 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 4397 radial height",
               "thumbnail": "/scenes/peitho/peitho-elevation-thumbnail.webp",
               "surface": "peitho-elevation-surface@2x.webp",
               "poles": "peitho-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "cc7fddd448514185bff254f174d3e6d462d7301dfb17026b5a64eee5840dc7d5",
-      "bytes": 9570,
+      "sha256": "b5ade93a76f27b1e1214d122b6949e7fcc038dced80f4f330be4798c8ad00c00",
+      "bytes": 9104,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

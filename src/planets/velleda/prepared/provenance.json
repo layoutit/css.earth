@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d6f19d923a29006eaa44072cab8384339ee8fd04589308e3d8ddcaa170fd0702"
+    "sha256": "239d5353951e9db171d8f1dd17b871dcb1a277a37cafbaa25ca745984f410543"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "63011fedbcc9d889ccb58dd9e4d9dc5a87dbcdde19bd688a01f8e06ece5d8698",
+      "sha256": "87ff365448e6a8c40a97203d9603b49ae4555a33e84f1931330783eb26b1b90d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 43.94 km effective diameter (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 43.94 km effective diameter (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 5958 shape model",
               "thumbnail": "/scenes/velleda/velleda-shape-thumbnail.webp",
               "surface": "velleda-shape-surface@2x.webp",
               "poles": "velleda-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 21.97 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 21.97 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 5958 radial height",
               "thumbnail": "/scenes/velleda/velleda-elevation-thumbnail.webp",
               "surface": "velleda-elevation-surface@2x.webp",
               "poles": "velleda-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "63011fedbcc9d889ccb58dd9e4d9dc5a87dbcdde19bd688a01f8e06ece5d8698",
-      "bytes": 10301,
+      "sha256": "87ff365448e6a8c40a97203d9603b49ae4555a33e84f1931330783eb26b1b90d",
+      "bytes": 9850,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

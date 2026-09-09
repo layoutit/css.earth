@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "silesia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "63942810124b94c5aab409286433e926f3283a61a11fe46438e6d05c1eeb0bb7"
+    "sha256": "0b774f1ff952df7599d48c19952d35cf5e86cc7ad13beb03323a5e85d4af48ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "14c15da90fa8cd069eb4b0263e03f123115742a2529eb6ab6ea385018a38369d",
+      "sha256": "168cd7cdad21a50b884951c4b450fa586b9fc81ef6311060e8daf0ea97281ff0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 79.2 km effective diameter (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 79.2 km effective diameter (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 702 shape model",
               "thumbnail": "/scenes/silesia/silesia-shape-thumbnail.webp",
               "surface": "silesia-shape-surface@2x.webp",
               "poles": "silesia-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 39.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 39.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 702 radial height",
               "thumbnail": "/scenes/silesia/silesia-elevation-thumbnail.webp",
               "surface": "silesia-elevation-surface@2x.webp",
               "poles": "silesia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "14c15da90fa8cd069eb4b0263e03f123115742a2529eb6ab6ea385018a38369d",
-      "bytes": 10801,
+      "sha256": "168cd7cdad21a50b884951c4b450fa586b9fc81ef6311060e8daf0ea97281ff0",
+      "bytes": 10321,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

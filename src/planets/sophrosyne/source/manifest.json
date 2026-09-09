@@ -93,8 +93,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 12652,
-      "expectedSha256": "9bc5c7699e20baa5ccb511b2fd84cd8609cde02fcf7def368ea54a495ac70a8d"
+      "expectedBytes": 12200,
+      "expectedSha256": "26ce99f8768cf9b629e273114c2123acb2ae0353a616e250445d1e34e5f11883"
     },
     {
       "path": "preparation/acquisition.json",

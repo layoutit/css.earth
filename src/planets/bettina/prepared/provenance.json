@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "bettina",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b079d7521fd55204d1153d640e6f1e8ebc7cf7e08c98d418ca6d19fb280a039"
+    "sha256": "3dadd225e62b86741e583666b0b6b48c4211803e7a13e7c9e07d999dc1072234"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "af52528fcfb41d684bd61405445f51bdb9eb370dbc004f10953bd2bc6ec3cc43",
+      "sha256": "f9979d6feb7efd4376bddb05127eceabcab8890217b0df48811d71deb27fcc7d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 1850 shape model",
               "thumbnail": "/scenes/bettina/bettina-shape-thumbnail.webp",
               "surface": "bettina-shape-surface@2x.webp",
               "poles": "bettina-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 55 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 55 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1850 radial height",
               "thumbnail": "/scenes/bettina/bettina-elevation-thumbnail.webp",
               "surface": "bettina-elevation-surface@2x.webp",
               "poles": "bettina-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "af52528fcfb41d684bd61405445f51bdb9eb370dbc004f10953bd2bc6ec3cc43",
-      "bytes": 10204,
+      "sha256": "f9979d6feb7efd4376bddb05127eceabcab8890217b0df48811d71deb27fcc7d",
+      "bytes": 9801,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

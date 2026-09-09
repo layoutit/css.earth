@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b7e8c750e0119c44381874b221ba75cda8db383c4cbb2e2f6ba0fe5e21480f11"
+    "sha256": "102ad6c80f2f3e276845dff8beeb69c868939deb823defc24a10556cf2014610"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e1564fe51ebc4a3385d0468cc66d4af290fe056cf0762371d7ddca16318708b6",
+      "sha256": "494a0727c96fe969c1ad75dd6f7964b679c16057a194961042368535c454d526",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 39.21 km (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 39.21 km (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+              "title": "DAMIT 920 shape model",
               "thumbnail": "/scenes/scylla/scylla-shape-thumbnail.webp",
               "surface": "scylla-shape-surface@2x.webp",
               "poles": "scylla-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 19.605 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 19.605 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 920 radial height",
               "thumbnail": "/scenes/scylla/scylla-elevation-thumbnail.webp",
               "surface": "scylla-elevation-surface@2x.webp",
               "poles": "scylla-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e1564fe51ebc4a3385d0468cc66d4af290fe056cf0762371d7ddca16318708b6",
-      "bytes": 9957,
+      "sha256": "494a0727c96fe969c1ad75dd6f7964b679c16057a194961042368535c454d526",
+      "bytes": 9556,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

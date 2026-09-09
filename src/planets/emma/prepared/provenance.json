@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "emma",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3902c07b70b9f3b6a8ba7e72a370e72c96097dd1b85903abc4f761f36df26b96"
+    "sha256": "fae0d6a0c5c5df54782c0098a7aa85f260e68220b671b98b47049b4fd86a8822"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ec2977c18856889b63b6c434db7c100b88f5f5da47b0e529d5141c92b2b1777e",
+      "sha256": "55a10d9c145c92fb744dd6d7595f8704ac116567e197e815362e72a8be5449ca",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 147 ± 14 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 147 ± 14 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 1859 shape model",
               "thumbnail": "/scenes/emma/emma-shape-thumbnail.webp",
               "surface": "emma-shape-surface@2x.webp",
               "poles": "emma-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1859 radial height",
               "thumbnail": "/scenes/emma/emma-elevation-thumbnail.webp",
               "surface": "emma-elevation-surface@2x.webp",
               "poles": "emma-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ec2977c18856889b63b6c434db7c100b88f5f5da47b0e529d5141c92b2b1777e",
-      "bytes": 8999,
+      "sha256": "55a10d9c145c92fb744dd6d7595f8704ac116567e197e815362e72a8be5449ca",
+      "bytes": 8658,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

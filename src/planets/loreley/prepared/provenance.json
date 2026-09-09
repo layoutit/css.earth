@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "loreley",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9a55e02cac4cf1d10ad204c654952453f28124c4c2f9f90296714e2f13c30b0"
+    "sha256": "86767c6500b251a5bf9efc816d37f2bde11694ca5322541644861d768cc28378"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e903572267781b462784e26901e349d84714d6ab687f90c9086f0858f29f4fb2",
+      "sha256": "298ebec6215c0a9ecb25dda6f94f4ef34e0c7049e2f478e61430793f6980c1fb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images. Selected archive volume-equivalent diameter: 177 ±5 km. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "ADAM nonconvex reconstruction constrained by Keck adaptive-optics images. Selected archive volume-equivalent diameter: 177 ±5 km. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 1809 shape model",
               "thumbnail": "/scenes/loreley/loreley-shape-thumbnail.webp",
               "surface": "loreley-shape-surface@2x.webp",
               "poles": "loreley-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 88.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 88.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1809 radial height",
               "thumbnail": "/scenes/loreley/loreley-elevation-thumbnail.webp",
               "surface": "loreley-elevation-surface@2x.webp",
               "poles": "loreley-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e903572267781b462784e26901e349d84714d6ab687f90c9086f0858f29f4fb2",
-      "bytes": 9427,
+      "sha256": "298ebec6215c0a9ecb25dda6f94f4ef34e0c7049e2f478e61430793f6980c1fb",
+      "bytes": 9070,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

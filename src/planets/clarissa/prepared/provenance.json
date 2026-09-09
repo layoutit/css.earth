@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8fac7aa8567ac0364475687225fdf5b16cfb514971d1753fa43da1c01af157ea"
+    "sha256": "cef72e8bc293f031a99ed91b568c7a87aae5195dfe1c85924e85c263042ec6b6"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d325024b62a618a53880ea2e6044c7047970ca33aa761ecc29042b9aa66cb72b",
+      "sha256": "aaf995395f2426427d12be6f0d763e24bd91f3625e55a54f4c696229886d2ca8",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction, 43 ± 4 km volume-equivalent diameter. This pole gives the preferred occultation fit; the rival pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 296 shape model",
               "thumbnail": "/scenes/clarissa/clarissa-shape-thumbnail.webp",
               "surface": "clarissa-shape-surface@2x.webp",
               "poles": "clarissa-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 21.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 21.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 296 radial height",
               "thumbnail": "/scenes/clarissa/clarissa-elevation-thumbnail.webp",
               "surface": "clarissa-elevation-surface@2x.webp",
               "poles": "clarissa-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d325024b62a618a53880ea2e6044c7047970ca33aa761ecc29042b9aa66cb72b",
-      "bytes": 11377,
+      "sha256": "aaf995395f2426427d12be6f0d763e24bd91f3625e55a54f4c696229886d2ca8",
+      "bytes": 10995,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

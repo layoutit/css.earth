@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "dresda",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "94be38e0adfe1efb742c64ca5e7967bdb6c6a4d63973b7bf8b901da0992e77fe"
+    "sha256": "e1424ef6761db5038058f3f15d1e78011303174042b54ace710844b7cce1de07"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "694b9c2038db68bc98966054fd57eea9229c554e8bd7879b612ab24614af2b6a",
+      "sha256": "70b38ee47d7f1fd7cac0f4bffac45f740dd7249a28c37af637958bb3bb11197a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 25.74 km effective diameter (catalog ±0.57 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 25.74 km effective diameter (catalog ±0.57 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 1163 shape model",
               "thumbnail": "/scenes/dresda/dresda-shape-thumbnail.webp",
               "surface": "dresda-shape-surface@2x.webp",
               "poles": "dresda-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 12.87 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 12.87 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1163 radial height",
               "thumbnail": "/scenes/dresda/dresda-elevation-thumbnail.webp",
               "surface": "dresda-elevation-surface@2x.webp",
               "poles": "dresda-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "694b9c2038db68bc98966054fd57eea9229c554e8bd7879b612ab24614af2b6a",
-      "bytes": 10779,
+      "sha256": "70b38ee47d7f1fd7cac0f4bffac45f740dd7249a28c37af637958bb3bb11197a",
+      "bytes": 10299,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1da9509ba3439604a06209d8b13108600ac616e62d75ed107cc72790d4c792b3"
+    "sha256": "13327878dc7a620c922660f29c4d303809798b81de1c994b291e6c1628aad6e3"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d07a9940b2a8669b07e9d2119f4ff7c660f8b161cbfc0ab376584a2e7183d446",
+      "sha256": "2685cbd2d779a4a6449e40d8459ad1363aa768998deb0ebcf92730fe519490f1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with a published 90–94 km diameter fit range; the archive mesh uses 92 km. Unusual scattering parameters make its vertical shape uncertain. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with a published 90–94 km diameter fit range; the archive mesh uses 92 km. Unusual scattering parameters make its vertical shape uncertain. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 154 shape model",
               "thumbnail": "/scenes/thyra/thyra-shape-thumbnail.webp",
               "surface": "thyra-shape-surface@2x.webp",
               "poles": "thyra-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 46 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 46 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 154 radial height",
               "thumbnail": "/scenes/thyra/thyra-elevation-thumbnail.webp",
               "surface": "thyra-elevation-surface@2x.webp",
               "poles": "thyra-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d07a9940b2a8669b07e9d2119f4ff7c660f8b161cbfc0ab376584a2e7183d446",
-      "bytes": 8811,
+      "sha256": "2685cbd2d779a4a6449e40d8459ad1363aa768998deb0ebcf92730fe519490f1",
+      "bytes": 8439,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

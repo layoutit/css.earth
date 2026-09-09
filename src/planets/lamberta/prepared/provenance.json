@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "lamberta",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "999539245597d37a3a6fd03c2642b36755f94b13d37d7277d479838dac5f8ecd"
+    "sha256": "0afbe33050003379f8f006b55b7142a334c7c204f6183f45f2f3a053cc66f70a"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "70a90d1dbcc0c83f607d596ac37475b5731b1412dc8305e111bee4da6bde2a83",
+      "sha256": "f726b160810220f53ad3c18bdfdfa20fe3eddffab0ba9c9447eada48ecf9bfe6",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 141 ±2 km. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 141 ±2 km. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 5914 shape model",
               "thumbnail": "/scenes/lamberta/lamberta-shape-thumbnail.webp",
               "surface": "lamberta-shape-surface@2x.webp",
               "poles": "lamberta-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 70.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 70.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 5914 radial height",
               "thumbnail": "/scenes/lamberta/lamberta-elevation-thumbnail.webp",
               "surface": "lamberta-elevation-surface@2x.webp",
               "poles": "lamberta-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "70a90d1dbcc0c83f607d596ac37475b5731b1412dc8305e111bee4da6bde2a83",
-      "bytes": 11394,
+      "sha256": "f726b160810220f53ad3c18bdfdfa20fe3eddffab0ba9c9447eada48ecf9bfe6",
+      "bytes": 11047,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

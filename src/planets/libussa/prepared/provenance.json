@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "libussa",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14bec09f5c2fd674c8631d32060515dcc8e2cd48639d5a5073a4b0d099b7e8d2"
+    "sha256": "7d41bd94721f319cba40eb8537387f0d866031bc2fca94800f7346b171b352bb"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a341dd4d27dae6551c6f41068f4d83e7d43ba4b166ce2db159b20d3f05a87ff9",
+      "sha256": "79a1c0fa2b0127f72480f34be96bb1a5a635515bd81c0295fcedf262f5ccd80a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 57.57 km effective diameter (catalog ±0.62 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 57.57 km effective diameter (catalog ±0.62 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 331 shape model",
               "thumbnail": "/scenes/libussa/libussa-shape-thumbnail.webp",
               "surface": "libussa-shape-surface@2x.webp",
               "poles": "libussa-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 28.785 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 28.785 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 331 radial height",
               "thumbnail": "/scenes/libussa/libussa-elevation-thumbnail.webp",
               "surface": "libussa-elevation-surface@2x.webp",
               "poles": "libussa-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a341dd4d27dae6551c6f41068f4d83e7d43ba4b166ce2db159b20d3f05a87ff9",
-      "bytes": 10783,
+      "sha256": "79a1c0fa2b0127f72480f34be96bb1a5a635515bd81c0295fcedf262f5ccd80a",
+      "bytes": 10300,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

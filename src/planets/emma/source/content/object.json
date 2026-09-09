@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 147 ± 14 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 147 ± 14 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 1859 shape model",
         "thumbnail": "/scenes/emma/emma-shape-thumbnail.webp",
         "surface": "emma-shape-surface@2x.webp",
         "poles": "emma-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 73.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 1859 radial height",
         "thumbnail": "/scenes/emma/emma-elevation-thumbnail.webp",
         "surface": "emma-elevation-surface@2x.webp",
         "poles": "emma-elevation-surface@2x.webp",

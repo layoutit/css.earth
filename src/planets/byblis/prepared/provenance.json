@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "87939ac04c96d133540e95cfe2548155671c47265ee667caf1637e02c5ff592b"
+    "sha256": "d0e83a8659338e5e8153fdbc7b828688d93f44fe0eae6c5dbfeae12b084514ea"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "22d9b9c31e5cae7f4657ff6c68f8e4a164d3c84cd76953ccf382da2174820921",
+      "sha256": "fdddfc854bbeb2595475ee3acc3b64946eee56282688cd4dd24e12de6642ce72",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 54.65 km effective diameter (catalog ±1.33 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 54.65 km effective diameter (catalog ±1.33 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 506 shape model",
               "thumbnail": "/scenes/byblis/byblis-shape-thumbnail.webp",
               "surface": "byblis-shape-surface@2x.webp",
               "poles": "byblis-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 27.325 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 27.325 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 506 radial height",
               "thumbnail": "/scenes/byblis/byblis-elevation-thumbnail.webp",
               "surface": "byblis-elevation-surface@2x.webp",
               "poles": "byblis-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "22d9b9c31e5cae7f4657ff6c68f8e4a164d3c84cd76953ccf382da2174820921",
-      "bytes": 9501,
+      "sha256": "fdddfc854bbeb2595475ee3acc3b64946eee56282688cd4dd24e12de6642ce72",
+      "bytes": 9087,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

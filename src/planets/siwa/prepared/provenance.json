@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eefde605dfa28d551783b891329ff96fa69d756c3803ba5d64e70c14aecba96d"
+    "sha256": "913c5894c1d7d183983284f54436bb7b4c3cf2ce3ecf4b18c7e58842dc997fa3"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "25843072c16af50d02227ac8b9759e9d1f0e8c4d66b3c2f80d05e44a32585b50",
+      "sha256": "d873611287293ecdcf72dc9b84fc4f66c2db39d878e8f0995fc432b0025d7d4f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 110.61 km effective diameter (catalog ±1.67 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 110.61 km effective diameter (catalog ±1.67 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 5987 shape model",
               "thumbnail": "/scenes/siwa/siwa-shape-thumbnail.webp",
               "surface": "siwa-shape-surface@2x.webp",
               "poles": "siwa-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 55.305 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 55.305 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 5987 radial height",
               "thumbnail": "/scenes/siwa/siwa-elevation-thumbnail.webp",
               "surface": "siwa-elevation-surface@2x.webp",
               "poles": "siwa-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "25843072c16af50d02227ac8b9759e9d1f0e8c4d66b3c2f80d05e44a32585b50",
-      "bytes": 9579,
+      "sha256": "d873611287293ecdcf72dc9b84fc4f66c2db39d878e8f0995fc432b0025d7d4f",
+      "bytes": 9126,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "aemilia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f1d84e045cdadb429a3c62e0a6c7017d20ab667f9612f06fca9e99cb9edb5a4c"
+    "sha256": "24f07c83b4dc3d91e56cc5ceae0768daeee2c1c059d0175a85c8be01704334fa"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5813d8e187007c322746af77122a03ec72ed2c647ece54494dfe9f654659b9fb",
+      "sha256": "4f658c937daf3edb14ba6fe786f0ed2ed7a244160db5f2fa724d986ecde8057e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -211,7 +211,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative.",
-              "title": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative.",
+              "title": "ISAM SAGE 102 shape model",
               "thumbnail": "/scenes/aemilia/aemilia-shape-thumbnail.webp",
               "surface": "aemilia-shape-surface@2x.webp",
               "poles": "aemilia-shape-surface@2x.webp",
@@ -220,13 +220,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the SAGE shape model minus a 67.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the SAGE shape model minus a 67.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "ISAM SAGE 102 radial height",
               "thumbnail": "/scenes/aemilia/aemilia-elevation-thumbnail.webp",
               "surface": "aemilia-elevation-surface@2x.webp",
               "poles": "aemilia-elevation-surface@2x.webp",
@@ -374,8 +374,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5813d8e187007c322746af77122a03ec72ed2c647ece54494dfe9f654659b9fb",
-      "bytes": 9884,
+      "sha256": "4f658c937daf3edb14ba6fe786f0ed2ed7a244160db5f2fa724d986ecde8057e",
+      "bytes": 9510,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d0c1ccbaa36d6c129d11ddabcaea8ef3cfd80dbbe324b1f70bc5c9de4188e4a"
+    "sha256": "33f64539eafb25649209f336c78e150449b8b08b714fb6530fa2006a0f4c51a5"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e59aa36bd53d753df4cedf2f2178a09326c472dde918cf180d3fd8c09f9ef778",
+      "sha256": "b622f3637069aba37c97933ba4d5a0d8c1c11706e4448c27981fd425b07ef23d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 48.22 km effective diameter (catalog ±0.6 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 48.22 km effective diameter (catalog ±0.6 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 4507 shape model",
               "thumbnail": "/scenes/brunhild/brunhild-shape-thumbnail.webp",
               "surface": "brunhild-shape-surface@2x.webp",
               "poles": "brunhild-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 24.11 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 24.11 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 4507 radial height",
               "thumbnail": "/scenes/brunhild/brunhild-elevation-thumbnail.webp",
               "surface": "brunhild-elevation-surface@2x.webp",
               "poles": "brunhild-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e59aa36bd53d753df4cedf2f2178a09326c472dde918cf180d3fd8c09f9ef778",
-      "bytes": 9889,
+      "sha256": "b622f3637069aba37c97933ba4d5a0d8c1c11706e4448c27981fd425b07ef23d",
+      "bytes": 9439,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

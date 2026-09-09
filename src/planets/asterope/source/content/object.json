@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Nonconvex ADAM reconstruction constrained by adaptive optics and occultation; 107 km volume-equivalent diameter (±3 km). The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Nonconvex ADAM reconstruction constrained by adaptive optics and occultation; 107 km volume-equivalent diameter (±3 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 1823 shape model",
         "thumbnail": "/scenes/asterope/asterope-shape-thumbnail.webp",
         "surface": "asterope-shape-surface@2x.webp",
         "poles": "asterope-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 53.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 53.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 1823 radial height",
         "thumbnail": "/scenes/asterope/asterope-elevation-thumbnail.webp",
         "surface": "asterope-elevation-surface@2x.webp",
         "poles": "asterope-elevation-surface@2x.webp",

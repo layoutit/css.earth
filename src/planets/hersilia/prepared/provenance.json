@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "50e205737d3fb8da51459a56f7e5134d14c4a47ff7a697738544a0234117c4f7"
+    "sha256": "054934aa7a73d2d463e007aafdb3c87cb8175ccfe94275cd34820c071fb07533"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e84914d55f5f637e84c0e6d0ae5c675a785741d73b45af7a508e711ecce812c8",
+      "sha256": "b512f6c4c4902773629a802bbf5b29a7321ecc77449601bd2dabdb809bd1283f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 93.93 km effective diameter (catalog ±0.94 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 93.93 km effective diameter (catalog ±0.94 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 3217 shape model",
               "thumbnail": "/scenes/hersilia/hersilia-shape-thumbnail.webp",
               "surface": "hersilia-shape-surface@2x.webp",
               "poles": "hersilia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 46.965 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 46.965 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 3217 radial height",
               "thumbnail": "/scenes/hersilia/hersilia-elevation-thumbnail.webp",
               "surface": "hersilia-elevation-surface@2x.webp",
               "poles": "hersilia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e84914d55f5f637e84c0e6d0ae5c675a785741d73b45af7a508e711ecce812c8",
-      "bytes": 10235,
+      "sha256": "b512f6c4c4902773629a802bbf5b29a7321ecc77449601bd2dabdb809bd1283f",
+      "bytes": 9823,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

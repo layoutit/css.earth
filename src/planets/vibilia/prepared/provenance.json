@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "33568869dfb7398eae08aaf67ca3d2b2d4300999d9bf0c89923e7613e7bf1211"
+    "sha256": "459e3d3c7ae9f3a89a7a1fac2f1aa5832063103c6d44371d40768a51a43ec8bf"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "74f877be6055d90ace05d7d038058f364d6921874fb45cc94dc4e6e8174a4f94",
+      "sha256": "1e2040c3a8741b0ef3015c5eab6a69163f5780b2c30b84876065fd4126a63156",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 143 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 143 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 1824 shape model",
               "thumbnail": "/scenes/vibilia/vibilia-shape-thumbnail.webp",
               "surface": "vibilia-shape-surface@2x.webp",
               "poles": "vibilia-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 71.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 71.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1824 radial height",
               "thumbnail": "/scenes/vibilia/vibilia-elevation-thumbnail.webp",
               "surface": "vibilia-elevation-surface@2x.webp",
               "poles": "vibilia-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "74f877be6055d90ace05d7d038058f364d6921874fb45cc94dc4e6e8174a4f94",
-      "bytes": 9360,
+      "sha256": "1e2040c3a8741b0ef3015c5eab6a69163f5780b2c30b84876065fd4126a63156",
+      "bytes": 8969,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

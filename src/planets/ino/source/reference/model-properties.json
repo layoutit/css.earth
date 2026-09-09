@@ -60,8 +60,7 @@
     "method": "source-meshoptimizer",
     "version": "1.2.0",
     "flags": [
-      "ErrorAbsolute",
-      "RegularizeLight"
+      "ErrorAbsolute"
     ],
     "sourceFaces": 3528,
     "sourceVertices": 1766,
@@ -70,14 +69,14 @@
     "outputFaces": 800,
     "removedOppositeFaces": 0,
     "maximumErrorMeters": 1440,
-    "estimatedErrorMeters": 1271.3656005859375,
+    "estimatedErrorMeters": 635.1492919921875,
     "topology": {
       "vertices": 402,
       "edges": 1200,
       "faces": 800,
       "components": 1,
       "eulerCharacteristic": 2,
-      "signedVolumeCubicMeters": 1547506679766415.5
+      "signedVolumeCubicMeters": 1550462365604706.8
     }
   }
 }

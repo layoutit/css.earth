@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "eos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "664c4e62affcd713753ceabd51e5953579f1cd957f9af74228f2f8b5b59eb2b0"
+    "sha256": "b21620ed194673aa6fce82dbdf0602951ef31a06b63ef575ba446f5518cad681"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "59421e07be82e7bcd98aa82a569b50f1c427ff246f88b5f14cd4d0a33c96ecbd",
+      "sha256": "be97a4224f59016c10759585a01459564ef2761d291968f1c4fdc03348142209",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 107.74 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 107.74 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 1743 shape model",
               "thumbnail": "/scenes/eos/eos-shape-thumbnail.webp",
               "surface": "eos-shape-surface@2x.webp",
               "poles": "eos-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 53.87 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 53.87 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1743 radial height",
               "thumbnail": "/scenes/eos/eos-elevation-thumbnail.webp",
               "surface": "eos-elevation-surface@2x.webp",
               "poles": "eos-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "59421e07be82e7bcd98aa82a569b50f1c427ff246f88b5f14cd4d0a33c96ecbd",
-      "bytes": 8274,
+      "sha256": "be97a4224f59016c10759585a01459564ef2761d291968f1c4fdc03348142209",
+      "bytes": 7832,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

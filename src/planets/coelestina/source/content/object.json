@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction with approximate thermal size: 39.51 km effective diameter (catalog ±0.69 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Convex light-curve reconstruction with approximate thermal size: 39.51 km effective diameter (catalog ±0.69 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 1218 shape model",
         "thumbnail": "/scenes/coelestina/coelestina-shape-thumbnail.webp",
         "surface": "coelestina-shape-surface@2x.webp",
         "poles": "coelestina-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 19.755 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 19.755 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 1218 radial height",
         "thumbnail": "/scenes/coelestina/coelestina-elevation-thumbnail.webp",
         "surface": "coelestina-elevation-surface@2x.webp",
         "poles": "coelestina-elevation-surface@2x.webp",

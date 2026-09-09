@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9655b4fa82b064a1df952251586c6bb693997069e941c8fff2ef1678988937a1"
+    "sha256": "681d4a6ef9a5d7d6566ad97ea514eb721ae312da4db042cfe3bf4313f3d8303c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d9b1f5f02af474b2f4f83ce8dc6a2324bfea0071e64fba3d46377e02d1d4e02c",
+      "sha256": "5876b0b37fc7478972339a2b200f218201607d583fbc129375519cefca0c2e26",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 139.65 km (catalog ±2.09 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 139.65 km (catalog ±2.09 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+              "title": "DAMIT 1185 shape model",
               "thumbnail": "/scenes/nuwa/nuwa-shape-thumbnail.webp",
               "surface": "nuwa-shape-surface@2x.webp",
               "poles": "nuwa-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 69.825 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 69.825 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 1185 radial height",
               "thumbnail": "/scenes/nuwa/nuwa-elevation-thumbnail.webp",
               "surface": "nuwa-elevation-surface@2x.webp",
               "poles": "nuwa-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d9b1f5f02af474b2f4f83ce8dc6a2324bfea0071e64fba3d46377e02d1d4e02c",
-      "bytes": 9147,
+      "sha256": "5876b0b37fc7478972339a2b200f218201607d583fbc129375519cefca0c2e26",
+      "bytes": 8747,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

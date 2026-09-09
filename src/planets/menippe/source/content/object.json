@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 327 shape model",
         "thumbnail": "/scenes/menippe/menippe-shape-thumbnail.webp",
         "surface": "menippe-shape-surface@2x.webp",
         "poles": "menippe-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 17.65 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 17.65 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 327 radial height",
         "thumbnail": "/scenes/menippe/menippe-elevation-thumbnail.webp",
         "surface": "menippe-elevation-surface@2x.webp",
         "poles": "menippe-elevation-surface@2x.webp",

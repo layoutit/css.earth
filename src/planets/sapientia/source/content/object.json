@@ -61,7 +61,7 @@
         "id": "shape",
         "label": "Shape",
         "description": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
-        "title": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+        "title": "DAMIT 16284 shape model",
         "thumbnail": "/scenes/sapientia/sapientia-shape-thumbnail.webp",
         "surface": "sapientia-shape-surface@2x.webp",
         "poles": "sapientia-shape-surface@2x.webp",
@@ -70,13 +70,13 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "Published shape · grid marks missing imagery"
+        "detail": "Published shape"
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radius on the shape model minus a 51.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-        "title": "Radius on the shape model minus a 51.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+        "title": "DAMIT 16284 radial height",
         "thumbnail": "/scenes/sapientia/sapientia-elevation-thumbnail.webp",
         "surface": "sapientia-elevation-surface@2x.webp",
         "poles": "sapientia-elevation-surface@2x.webp",

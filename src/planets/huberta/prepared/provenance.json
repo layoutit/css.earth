@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "huberta",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79c76047506cbca706095a96ec2ceef461ad9ba8df4abd001d77c432aae2a0de"
+    "sha256": "e62ccbf5ad9233fa017541e6dc3e1c44c9c4f16919b15d153d0eee36dc3e043f"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d20abac0ac50e899da446615e7dc1282eec93a55871c311a3997a594b5e27754",
+      "sha256": "ec0692e16eae830deb3cdb7a989527450a8355a0f43fd800986b1c6cd35fc7ec",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 95.2 km effective diameter (catalog ±1.36 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 95.2 km effective diameter (catalog ±1.36 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 578 shape model",
               "thumbnail": "/scenes/huberta/huberta-shape-thumbnail.webp",
               "surface": "huberta-shape-surface@2x.webp",
               "poles": "huberta-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 47.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 47.6 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 578 radial height",
               "thumbnail": "/scenes/huberta/huberta-elevation-thumbnail.webp",
               "surface": "huberta-elevation-surface@2x.webp",
               "poles": "huberta-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d20abac0ac50e899da446615e7dc1282eec93a55871c311a3997a594b5e27754",
-      "bytes": 10444,
+      "sha256": "ec0692e16eae830deb3cdb7a989527450a8355a0f43fd800986b1c6cd35fc7ec",
+      "bytes": 9964,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

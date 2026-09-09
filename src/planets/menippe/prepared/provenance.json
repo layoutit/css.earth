@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "menippe",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9a799aefc7d65b811adf0ad4e3191e2f4bc8631fa77ec196fde1c3bb37787ee5"
+    "sha256": "6fd7a0f7657cc8a8ebeb9e1ca5ef57f1d7d762802353883081a1f15a329436cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "444d98fbbb4f78f688f26a0aa3265732155c2d2aecbab726ac8902a920b39ceb"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "17a03545b3b23f13d5838c7486042a55f6374e2faf9e3aab831baee5d48f5594",
+      "sha256": "968af237c48bf5dacf4666a78f9f8dd0ee8660953d2ef612e4761873c367696f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 327 shape model",
               "thumbnail": "/scenes/menippe/menippe-shape-thumbnail.webp",
               "surface": "menippe-shape-surface@2x.webp",
               "poles": "menippe-shape-surface@2x.webp",
@@ -222,13 +222,13 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "Published shape"
             },
             {
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 17.65 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 17.65 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 327 radial height",
               "thumbnail": "/scenes/menippe/menippe-elevation-thumbnail.webp",
               "surface": "menippe-elevation-surface@2x.webp",
               "poles": "menippe-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "17a03545b3b23f13d5838c7486042a55f6374e2faf9e3aab831baee5d48f5594",
-      "bytes": 10569,
+      "sha256": "968af237c48bf5dacf4666a78f9f8dd0ee8660953d2ef612e4761873c367696f",
+      "bytes": 10220,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

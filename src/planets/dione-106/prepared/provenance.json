@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9284f3fff4c046a90919ae680bbdb59e2a613aceb54ef834563e0c25939b6b87"
+    "sha256": "a3a96ba94bc8e67cd7d70d9ca97f78812224e720cca87a0f418546af09a1084e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
-    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f3f4377ad7640b20773495e16326a5673d25bd18d9a68bb63b777a8b93ef6779",
+      "sha256": "5b9ee2d79fabd136fa034e7e0f984bb8e4f2a0e99334cdbea99880f60afa3db1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -213,7 +213,7 @@
               "id": "shape",
               "label": "Shape",
               "description": "Convex light-curve reconstruction with approximate thermal size: 153.42 km effective diameter (catalog ±2.38 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
-              "title": "Convex light-curve reconstruction with approximate thermal size: 153.42 km effective diameter (catalog ±2.38 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+              "title": "DAMIT 5942 shape model",
               "thumbnail": "/scenes/dione-106/dione-106-shape-thumbnail.webp",
               "surface": "dione-106-shape-surface@2x.webp",
               "poles": "dione-106-shape-surface@2x.webp",
@@ -228,7 +228,7 @@
               "id": "elevation",
               "label": "Elevation",
               "description": "Radius on the shape model minus a 76.71 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
-              "title": "Radius on the shape model minus a 76.71 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "DAMIT 5942 radial height",
               "thumbnail": "/scenes/dione-106/dione-106-elevation-thumbnail.webp",
               "surface": "dione-106-elevation-surface@2x.webp",
               "poles": "dione-106-elevation-surface@2x.webp",
@@ -376,8 +376,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f3f4377ad7640b20773495e16326a5673d25bd18d9a68bb63b777a8b93ef6779",
-      "bytes": 10987,
+      "sha256": "5b9ee2d79fabd136fa034e7e0f984bb8e4f2a0e99334cdbea99880f60afa3db1",
+      "bytes": 10535,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
