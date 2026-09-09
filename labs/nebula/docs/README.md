@@ -2,7 +2,9 @@
 
 ## Current app
 
-- [Workflow](workflows.md): Alignment → automatic star removal → explicit Process → compare saved reconstructions.
+- [Next steps](../NEXTSTEPS.md): current extragalactic handoff and the next bounded reconstruction experiment.
+- [Research and papers](../RESEARCH.md): implemented method, novelty assessment and objects without a simulation.
+- [Workflow](workflows.md): Alignment → automatic star removal → explicit Preview → compare saved reconstructions.
 - [Reconstruction](reconstruction.md): source selection, cache/jobs, exact current bake and depth limits.
 - [Slice stability](slice-stability.md): shared density/stars and measured XYZ calibration.
 - [Automatic star removal](star-removal.md): NOX, native products, persistence and dependencies.
