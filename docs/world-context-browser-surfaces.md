@@ -969,3 +969,69 @@ profile samples are elapsed sampling weights, not independently measured CPU
 consumption. Earlier thread-CPU figures should be read as reported values, not
 proof of exactly how much of a long task was waiting. CDP video remains a series
 of observations, not evidence of every display refresh.
+
+### Prepared volume-plane ordering (`bf972bad`)
+
+The next change addresses browser depth sorting, not CSS variables. Chromium
+155.0.8043.0 feeds 3D drawing polygons into a BSP tree whose partition pivot is
+the first remaining polygon. Parallel planes supplied in monotonic depth order
+produce a long partition chain. The exact browser sources are
+[`BspTree::BuildTree`](https://github.com/chromium/chromium/blob/155.0.8043.0/components/viz/service/display/bsp_tree.cc#L39)
+and [`DirectRenderer::FlushPolygons`](https://github.com/chromium/chromium/blob/155.0.8043.0/components/viz/service/display/direct_renderer.cc#L599).
+
+The volume preparer now emits median-depth planes first, recursively, keeping
+coplanar source siblings in their original order. Runtime simply mounts that
+prepared order; it adds no sorting, geometry, nodes, or camera work. All 456 leaf
+values and the 462-resource manifest remain identical. The only authored payload
+change is the leaf-array permutation and its authenticated descriptor hash.
+Browser physical depth sorting still determines the image.
+
+Preparation typecheck/build, 281 preparation tests and 83 volume/sky/universe
+runtime tests pass. The regression independently models first-pivot partitioning
+for 214 planes on each axis: maximum partition depth falls from 214 to 8 while
+preserving input and coplanar order. Existing source/resource integrity checks
+remain. The loader now verifies the exact prepared order instead of requiring
+raw source-slice order.
+
+A browser-only trial first permuted the same retained nodes, then the generated
+product was checked independently. Both cover 52 views: 13 camera poses, standard
+and high contrast, DPR 1/2. Trial versus original differs by at most 2/255; product
+versus qualified trial by at most 1/255. All camera/style state hashes and retained
+identities match, with no application errors. These are qualified views, not a
+proof of every possible camera pose. Evidence is under
+`output/playwright/balanced-volume-{order-native,product,preparation}/`.
+
+All following measurements use the same native route and `cc` capture categories:
+
+| Measurement | Original `9bb22fbf` | Browser trial | Product | Product repeat |
+| --- | ---: | ---: | ---: | ---: |
+| Drag draw-pass count | 831 | 831 | 831 | 831 |
+| Draw-pass elapsed total | 443.271 ms | 139.629 ms | 145.453 ms | 151.287 ms |
+| Largest draw pass | 5.037 ms | 1.896 ms | 1.825 ms | 1.830 ms |
+| Quads in largest pass | 445 | 445 | 445 | 445 |
+| Drag display draws | 120 | 120 | 120 | 120 |
+| Drag renderer BeginMainFrame total | 1330.931 ms | 1300.608 ms | 1402.272 ms | 1459.682 ms |
+| Drag rAF intervals >25 ms | 12/236 | 4/244 | 28/240 | 38/228 |
+| Whole-route intervals >25 ms | 23/3486 | 21/3512 | 111/3548 | 108/3559 |
+| Whole-route maximum | 33.5 ms | 33.4 ms | 33.5 ms | 66.7 ms |
+
+The repeated 66–69% draw-pass reduction is scoped to that browser task, not the
+application's total cost. **Overall smoothness is still unacceptable.** The two
+integrated runs miss more frames, including in the planetary band (60/772 and
+53/765, p95 33.3 ms), where this preparation change cannot reduce orbit work.
+Initial one-minute host load was 5.13/6.03/10.54/10.94 respectively; that is a
+comparison confounder, not proof that workstation contention caused the misses.
+Renderer style and layer work remain on the drag path. Neither the better trial
+nor lower draw-pass cost establishes an end-to-end frame-rate improvement.
+
+Product recorder IDs are `aea35007-4fec-4c25-97cb-bea546a875ed` and
+`62e1bdcb-b187-486b-b5d5-251cc3df2ef6`. Both capture clean `bf972bad` with all 22
+source hashes matching, 517 loaded receipts, verified prepared DOM order, stable
+world/input/document identities and one camera. Recorder JSON, gzip trace and
+video are retained in `output/world-context-zoom/balanced-volume-order{-repeat}-dpr2/`.
+All 2948/3009 observations are encoded; 33/96 arrived out of timestamp order and
+are preserved with original arrival indexes before chronological encoding.
+Clock drift is 14/43 microseconds, maximum PTS error 1.465/1.488 ms. There are no
+application/resource errors, HMR events or trace loss. Per-capture qualification
+files include artifact hashes and analysis scripts; video observations do not
+prove every display refresh.
