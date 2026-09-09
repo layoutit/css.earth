@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-trojan-population-evidence@1",
-  "browserQualified": false,
-  "browserStatus": "Pending coordinated Astro/browser slot",
+  "browserQualified": true,
+  "browserStatus": "20 headless Chrome cases passed, DPR1/2, exact fresh runtime images, both datasets and optional shadows",
   "bodyCount": 10,
   "bodies": [
     {
@@ -72,7 +72,7 @@
         "id": "diomedes",
         "sourceSha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
         "terrainSha256": "a2dd04c47600543d543a6e41934e8ad4b03c54986f64977986dec658a189ad0a",
-        "sceneSha256": "d67ff4983bcabd919cb0ddd59a092bf8259e6c149065092537bd85750833344f",
+        "sceneSha256": "f10d056c7604b6799e68310f193bb4cd4777699555fba9f4f1a689e93ce85a15",
         "configurationSha256": "c24b0b979ae7c74bb8b7e2f7005985df6321f8c85cf31e1e2637c44e151f7d5a",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -84,7 +84,55 @@
         "maximumChannelError": 3,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "4c92dd94b09521afe0b52dfa370c24bea9dd5e8199ad42319a522c021418517a"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "35e6acbcb3717c7e2d9a677d0047805bbf429d1209dab6a846c83fd9207dc8f0"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "416ceb81655c771a74bba082f9d4855ce8d4a2fe748f348209d2963327ebea2b"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "748c747e1df8bcdafed1cc5abdfd287e425fd30161661b9b290fa8f6fb3e84a6"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "4c92dd94b09521afe0b52dfa370c24bea9dd5e8199ad42319a522c021418517a"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "35e6acbcb3717c7e2d9a677d0047805bbf429d1209dab6a846c83fd9207dc8f0"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "416ceb81655c771a74bba082f9d4855ce8d4a2fe748f348209d2963327ebea2b"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "748c747e1df8bcdafed1cc5abdfd287e425fd30161661b9b290fa8f6fb3e84a6"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "ajax",
@@ -154,7 +202,7 @@
         "id": "ajax",
         "sourceSha256": "6df93884c639520f83f0b0722c09b7f5796a7edd1cb9a9abcfa5990f626a6cde",
         "terrainSha256": "362d84328ea1c2e1c7e4f8b43ffb5e58567aa8951cf51fc7283bdb894082b209",
-        "sceneSha256": "6fb0c65bbe138212c5cd86faad0b933c9befc16e4dfcc7c0133735e725d85ebb",
+        "sceneSha256": "8bdbb96e80678ba952dce2021e00f981812bb2effde88dfce5c242e9424a1b5b",
         "configurationSha256": "aa5675b06bab04e86148ad280c45e96e2be254cb9ddd7f0f815d87b58c5ce4c5",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -166,7 +214,55 @@
         "maximumChannelError": 2,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "d1f6f2b2cc0c52b2452bf3167c94551a663908d1510f2034952e8a16894d3590"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "124e95f8295219f31241f3755dc0a7f4c2acaa900aab82a8ee0e53801429af23"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "71c41cb362076d9797880a9817e315aec858433620937f6c60c4a37e57cebe8f"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "9fef426fd2f184611f68f59a83c3f867b37cde4ad74766151f94bc3f62547514"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "d1f6f2b2cc0c52b2452bf3167c94551a663908d1510f2034952e8a16894d3590"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "124e95f8295219f31241f3755dc0a7f4c2acaa900aab82a8ee0e53801429af23"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "71c41cb362076d9797880a9817e315aec858433620937f6c60c4a37e57cebe8f"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "9fef426fd2f184611f68f59a83c3f867b37cde4ad74766151f94bc3f62547514"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "ilioneus",
@@ -236,7 +332,7 @@
         "id": "ilioneus",
         "sourceSha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
         "terrainSha256": "9078639982014ec618f200767e2534fada48b02c150bf007f8373a61e2712f08",
-        "sceneSha256": "46414878736015e27e376b1ac528ac28f307d38d6a847b758ce0ac5a6bad4bfb",
+        "sceneSha256": "2471254880758709af6867e9f0dc037a837ac6acbb3cac58dab69b8864bce9f8",
         "configurationSha256": "74869ac20b4acfd9a27334bbd71362751708afc5ab722a6a032510bd6a500586",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -248,7 +344,55 @@
         "maximumChannelError": 2,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "e679a577dd544b4b8791b98cd9fd8b585561a6ea2eb3569303e9e9d894c53fc0"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "1d3a8e04e709ed631309232344a4ce303972baebc3e6db387e0179e2d5f5b51a"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "a31ab57bf8a463eb6699050aa5319f2f4ef3e6256e6782543972c206d27bf458"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "e86371ebffcbf9c1a168765aa457b013a70d77bf25e046fd78b08917b8d814ec"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "e679a577dd544b4b8791b98cd9fd8b585561a6ea2eb3569303e9e9d894c53fc0"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "1d3a8e04e709ed631309232344a4ce303972baebc3e6db387e0179e2d5f5b51a"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "a31ab57bf8a463eb6699050aa5319f2f4ef3e6256e6782543972c206d27bf458"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "e86371ebffcbf9c1a168765aa457b013a70d77bf25e046fd78b08917b8d814ec"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "pyrrhus",
@@ -318,7 +462,7 @@
         "id": "pyrrhus",
         "sourceSha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
         "terrainSha256": "3005c5408f7031f391cd74d847aff222cccc8343c6b5991762e86dd41368cc73",
-        "sceneSha256": "fa3b10aa29c749733cf9c74baeec649977d5413754e1dfb79fe1a6d5b7272600",
+        "sceneSha256": "c9254ff67e6f65a99455634ec99a4d4f31fc5fdc1fe64e571ec163121c15a36b",
         "configurationSha256": "e6654dc65438d01d3139a767b89b701ab8445a33c1746a04225708e14f641a80",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -330,7 +474,55 @@
         "maximumChannelError": 3,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "9cb6b53da83eec0a80fed4d8bfda0c63ccfae878086e06907f6e081c3425451c"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "4235852570e84678b4f0fa88f6dac96046b853cc7ae36096b8a1ad4463853e10"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "e215c64965274e35380e902031de31161fa541499ef6badf4c447c4be5e87ee5"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "3ea5ff75c82dbf84a768e50beb55517037841e327ef25acef055bfc02ad2bb10"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "9cb6b53da83eec0a80fed4d8bfda0c63ccfae878086e06907f6e081c3425451c"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "4235852570e84678b4f0fa88f6dac96046b853cc7ae36096b8a1ad4463853e10"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "e215c64965274e35380e902031de31161fa541499ef6badf4c447c4be5e87ee5"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "3ea5ff75c82dbf84a768e50beb55517037841e327ef25acef055bfc02ad2bb10"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "eumelos",
@@ -400,7 +592,7 @@
         "id": "eumelos",
         "sourceSha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
         "terrainSha256": "82572bd22c6c0773d1bf85d281be385d97a77628ca782945b85a1a5982b1b3da",
-        "sceneSha256": "7732284eb31a3611ded3f9b9074e97ebee96be7a28aea5849d38ba98cda9fd7e",
+        "sceneSha256": "612b0d52439dbf922d3e6d0820891ec95ccd07c8e9a6a43ef6d2f38a19fb2669",
         "configurationSha256": "4159c79b64c56e915e9db27dcf7ce68c68d70c7f671ae4eded5fa70516fad295",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -412,7 +604,55 @@
         "maximumChannelError": 3,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "a3b841d4f6abb1f481327d85da0b9dc4aad05202368de1821af9b6a82cb30954"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "cf0e871765c84f49176934d19204ea723f7ec6f5098c7f258e8b3671cf61baad"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "4d8822f6082ddcf93a083202808caa4b17f965f828f3eede129be79bd6092e49"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "449f82b2784abdbf0d411f435a19aef55229274cc4937b07e567774dd178f7b9"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "a3b841d4f6abb1f481327d85da0b9dc4aad05202368de1821af9b6a82cb30954"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "cf0e871765c84f49176934d19204ea723f7ec6f5098c7f258e8b3671cf61baad"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "4d8822f6082ddcf93a083202808caa4b17f965f828f3eede129be79bd6092e49"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "449f82b2784abdbf0d411f435a19aef55229274cc4937b07e567774dd178f7b9"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "lycomedes",
@@ -482,7 +722,7 @@
         "id": "lycomedes",
         "sourceSha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
         "terrainSha256": "fa73020f8382de6f529daec00142f93fa94819ea528807795b48e8a160637f25",
-        "sceneSha256": "1dfc768e22028aba4e039e80f311566d7f79c85cbd560879e1278999d325a94b",
+        "sceneSha256": "9bfe4d43ed99f78e890b9e75bada34fa0a2a3bbf01037b6fcedc1a61ec2e31cb",
         "configurationSha256": "99a4ed4a9141261672570722dd811e2ca6a2e284234637d01eb2865783d29b38",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -494,7 +734,55 @@
         "maximumChannelError": 3,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "e5a5043f9e257812a7c9383421eddfc58ea820799e9ca1f5862579229191e1f2"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "615aa90115396a17549a833a6752c851147332c846f258f4e87811ccaa533464"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "7d86cb9d7323d2c5e714fabee21dbb000defdd94ffb82b17620cbcc39f34c45e"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "9198d83dacadd5a622fc722462e10db888ae163df846f012a9bb1135f68a5aa0"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "e5a5043f9e257812a7c9383421eddfc58ea820799e9ca1f5862579229191e1f2"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "615aa90115396a17549a833a6752c851147332c846f258f4e87811ccaa533464"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "7d86cb9d7323d2c5e714fabee21dbb000defdd94ffb82b17620cbcc39f34c45e"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "9198d83dacadd5a622fc722462e10db888ae163df846f012a9bb1135f68a5aa0"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "demodokus",
@@ -564,7 +852,7 @@
         "id": "demodokus",
         "sourceSha256": "8bccce94993f84b19d6d0944ae3aff994cf00cd0a75b4b8599bad18b7d706855",
         "terrainSha256": "10d360695f62addd1fdccebdaee57f06b281ad33145da14c4eeef9ac72aee31e",
-        "sceneSha256": "faba6b553db3cffa7a60030ba80ff7ed76863dbd6e70f079cd2a2328d6d0f21c",
+        "sceneSha256": "320f649ceef4c6405ea005a27cef8a4b77e04fbdd9c78158908560162b0bb358",
         "configurationSha256": "69d3975061e8371226df8da238c956f6269f08e802a3e236bab78fd95497aff0",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -576,7 +864,55 @@
         "maximumChannelError": 2,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "87893005cf16ded0b1cd4d53d79620f8861eec96575e7f8bdf215a57c453f2fe"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "293a5bcbdb9b0f9f8569d4f68154a54e44193deb5c3165ab7afa8682c2347266"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "4155b826d362357096cfb47cafb0ac8a75bb57f17ee4884bbb5bc6680fa5b6cd"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "d3d4c878d5f024187cf025c90d8525a2c6a791b3e2fef63fa2efcfc0fb421249"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "87893005cf16ded0b1cd4d53d79620f8861eec96575e7f8bdf215a57c453f2fe"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "293a5bcbdb9b0f9f8569d4f68154a54e44193deb5c3165ab7afa8682c2347266"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "4155b826d362357096cfb47cafb0ac8a75bb57f17ee4884bbb5bc6680fa5b6cd"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "d3d4c878d5f024187cf025c90d8525a2c6a791b3e2fef63fa2efcfc0fb421249"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "menelaus",
@@ -646,7 +982,7 @@
         "id": "menelaus",
         "sourceSha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
         "terrainSha256": "eaa52a694e69328a5fef9c1e2b5d0273ca0e4eabe8297f7dfbcb0c2fc6aa6f38",
-        "sceneSha256": "f0466cdc991d043eea5743d286fc27d0170863b6ba595085cd5e02f78aa85bbf",
+        "sceneSha256": "71313e5e6d8d0f7a386a546386ada21c8a24fe88abc61bc4b3ce0414e51687ef",
         "configurationSha256": "d2d8f70a3df90838e1798d2dcb939658a174e54f5435c5a395073c1cee4f908d",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -658,7 +994,55 @@
         "maximumChannelError": 2,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "af740652aaafaad5de1ee58c61273e9e10843f18bbbcd13085ba20b13397335f"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "c563673d0261a671f0f0425a2076e53ea8bb5bba5be9bc45c62ff6357b232417"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "1e4767c83542534fa68faa516421ed8785a82a60c48cc9e15ce1e5f9a9b6183f"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "4217eb740dbdd3d30f773533604e7c6f6f17b8dcb4e9169cae6841f7e6992cfb"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "af740652aaafaad5de1ee58c61273e9e10843f18bbbcd13085ba20b13397335f"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "c563673d0261a671f0f0425a2076e53ea8bb5bba5be9bc45c62ff6357b232417"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "1e4767c83542534fa68faa516421ed8785a82a60c48cc9e15ce1e5f9a9b6183f"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "4217eb740dbdd3d30f773533604e7c6f6f17b8dcb4e9169cae6841f7e6992cfb"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "agenor",
@@ -728,7 +1112,7 @@
         "id": "agenor",
         "sourceSha256": "b6c5a04a7f568ec3a11326f659040cb0fedf1e06fa0e426e7776b5c4ba35f8a2",
         "terrainSha256": "cba01a20796b931ffa088d91adfb339acafdca88c494e8b33a88f180268f6711",
-        "sceneSha256": "368ed48977b3cefdd4bb9a1c3ea8a12cb63fa12eb500cdb81c7dc464ec70cafc",
+        "sceneSha256": "cf73e3905e39515989e34db7180c48ed3564e74771e594257ded4edc4ac641f9",
         "configurationSha256": "d1a178e88ccc78cab90f65a231e0a7ba764588a5f99d992c63f800e58992c6fc",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -740,7 +1124,55 @@
         "maximumChannelError": 2,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "b8747635ee230c40b2d22a2f2acc359e79c6a04eb359031394ec195386ad9528"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "92af4eea3991fbb4d566449c3a546aba3b3c3e3c88f22230301783aee8ff3b6e"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "284e2e0dc27f9ee5ddcfccbdc6553d3b7a723cd7862e78422384056862a5c02c"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "6936edd62a116308bf8a866490460457b1c96c63c10baef34eefaefe4e13c794"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "b8747635ee230c40b2d22a2f2acc359e79c6a04eb359031394ec195386ad9528"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "92af4eea3991fbb4d566449c3a546aba3b3c3e3c88f22230301783aee8ff3b6e"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "284e2e0dc27f9ee5ddcfccbdc6553d3b7a723cd7862e78422384056862a5c02c"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "6936edd62a116308bf8a866490460457b1c96c63c10baef34eefaefe4e13c794"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "mentor",
@@ -810,7 +1242,7 @@
         "id": "mentor",
         "sourceSha256": "649f240ede7aa6604f30dd9a05ddf905cc9bf0ff53d1765c5265f89082b195ab",
         "terrainSha256": "755c60aca6d39abf767fc43380890d9e2751267f3af81e703d7a0673006bd9b6",
-        "sceneSha256": "2fe8beeb4fa34a26f24ae30ecdbd91ba27379f0e6ea9e02241a17d43d6a4ab22",
+        "sceneSha256": "e03d199a89ec305257208372a3d2d64f84a5ef3c4ff46a11f9ad05b6d4183afa",
         "configurationSha256": "c4ff5d03564a14c922ae3f4ae0ad26e63c3c72b3bcc1c78ac17243e586240790",
         "method": "Actual retained matrices and pixel centers; independent NumPy full-source planar/edge projection; authored scalar conversion, 1024-step palette and relief evaluated independently; decoded WebP flood and shadow RGB.",
         "atlasSha256": {
@@ -822,7 +1254,58 @@
         "maximumChannelError": 3,
         "tolerance": 12,
         "passed": true
-      }
+      },
+      "browserCases": [
+        {
+          "density": 1,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "53e7aaa7889ca2805f5e2934f2392b559aaa5d540599fb18f6a635adb5d4f493"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "233ebac62224509a0408173b57218c9aaf9a0c92d1950fedb834a434ee3aa852"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "83be840424f695b580a704b3f3d05107bc5ddca542eb64533738727325aa004e"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "293254fd2a06f812a34ef2a358393d9a2e3e47a9ebed849b210adb5f6174bd76"
+            }
+          ]
+        },
+        {
+          "density": 2,
+          "leaves": 800,
+          "selectedDensity": 2,
+          "provenance": [
+            {
+              "path": "object.json",
+              "sha256": "53e7aaa7889ca2805f5e2934f2392b559aaa5d540599fb18f6a635adb5d4f493"
+            },
+            {
+              "path": "prepared/object.json",
+              "sha256": "233ebac62224509a0408173b57218c9aaf9a0c92d1950fedb834a434ee3aa852"
+            },
+            {
+              "path": "prepared/runtime.json",
+              "sha256": "83be840424f695b580a704b3f3d05107bc5ddca542eb64533738727325aa004e"
+            },
+            {
+              "path": "runtime-assets.json",
+              "sha256": "293254fd2a06f812a34ef2a358393d9a2e3e47a9ebed849b210adb5f6174bd76"
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "buildMode": "performance",
+  "browserRevision": "c09191cb2d8dd20b2a0ff218cfdb20251677730d",
+  "staticPages": 834
 }

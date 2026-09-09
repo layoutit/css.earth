@@ -1,0 +1,668 @@
+[
+  {
+    "path": "output/playwright/trojan-population/agenor-dpr1-new-view.png",
+    "bytes": 568220,
+    "sha256": "5be4ff41dea992bc350991e81c119a0e0f3d75009552b6562ee64dadf2944b35",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-dpr1-shadow-enabled.png",
+    "bytes": 530523,
+    "sha256": "231982aa1721e85800ecbe5ceb9700f0d2003540a25e8b74fa52fa9e63fb424e",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-dpr1-shape-shadows.png",
+    "bytes": 425709,
+    "sha256": "dfb9f27bf581b07eecc712f112915df0c271995adc5c1d68a48c90ecbb668563",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-dpr1-shape.png",
+    "bytes": 464202,
+    "sha256": "aaa14b2ade931fd2c59aab41ea75fa1139b06a7748802b20357281fd3e2fe421",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-dpr2-new-view.png",
+    "bytes": 1455170,
+    "sha256": "47e70349924423fabd0e90823b4a8745772a8dd751ddc43ceb8ee22856004902",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-dpr2-shadow-enabled.png",
+    "bytes": 1237359,
+    "sha256": "17b7e96d205aace933927e03be8aee21f363cdb2c1a54ae21d26cb73864e0f38",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-dpr2-shape-shadows.png",
+    "bytes": 1044871,
+    "sha256": "a7e1f6cc23d7563e650c8c8a1d524487e5b605187ae2bbb9d08c141651af9dd6",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-dpr2-shape.png",
+    "bytes": 1167528,
+    "sha256": "dc1bad6fa801c1d0774bd82ac5a09765aaf28b2e9a498ce49a80e17ffa5900ff",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-yaw180.png",
+    "bytes": 507099,
+    "sha256": "8bf0c50598bd00a5066e614f37543af587869efe400014826b7ef93bd5459495",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-yaw270.png",
+    "bytes": 574840,
+    "sha256": "2320d9b493a6341c03cdec7575bf7b7686e65e9fa42cba8da045440bf742d800",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/agenor-yaw90.png",
+    "bytes": 634124,
+    "sha256": "e5362f5cadd756cc75fea63ccafd5527b17f9196c5d58278d19ae8cf6dde0bd4",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-dpr1-new-view.png",
+    "bytes": 569754,
+    "sha256": "ec98d469c1d2588d73d9212ec626c5496e2f2d78ec5c0b84c3c96ab648c25975",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-dpr1-shadow-enabled.png",
+    "bytes": 526749,
+    "sha256": "e227d1feb19c10c2bcbbafaba1f9145c8f26f0fbbb01b5a16f9c1aa49bcc4520",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-dpr1-shape-shadows.png",
+    "bytes": 409449,
+    "sha256": "5322249d74cc6fb8b980a48aaa5b657c9198db66e330bd5c48090aac38dfdb74",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-dpr1-shape.png",
+    "bytes": 447746,
+    "sha256": "b8a8737f769793f8502388851969f74fbab7cf0d45b7c951b6ea3fda1074697b",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-dpr2-new-view.png",
+    "bytes": 1461648,
+    "sha256": "2a3134dcf745b865e8a98b40f31a214bafe3f5c04dabd52df78a71ab0fd631cc",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-dpr2-shadow-enabled.png",
+    "bytes": 1219013,
+    "sha256": "e8418f5fbb196f55a6bc06dba0e38b407aede9f26e6706038847327b03e9b995",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-dpr2-shape-shadows.png",
+    "bytes": 980796,
+    "sha256": "40b2210e327f61b9c8d7d88ab28b0a19b7450ecd7df9103e6f406559c5d4d1e6",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-dpr2-shape.png",
+    "bytes": 1094369,
+    "sha256": "a1fca361ad9afa0c4aefb938fb5ed85d1fc7831efccf618bf65fca9cc5b9a683",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-yaw180.png",
+    "bytes": 482593,
+    "sha256": "f01146a45ba379e299ff8920dc957c6b83d1fc8fac8a0cd863459f5352f86d44",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-yaw270.png",
+    "bytes": 594960,
+    "sha256": "3f006d3ef9a4be6a779c58ac6a3856e3c51f6d8e79855487844d1e2d5137417a",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ajax-yaw90.png",
+    "bytes": 424752,
+    "sha256": "c90996959824e048cdfd53440819aacbe12c8ce6949f0bb5f913821984aac9c4",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/asteroid-category-search.png",
+    "bytes": 628514,
+    "sha256": "623949b67dd4ff0fcb94d5e586a03b65b7261755fe902c3af1eda7b7297baf45",
+    "bundledInArchive": true
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-dpr1-new-view.png",
+    "bytes": 634206,
+    "sha256": "7951c6dac23095add33bb0d69812e9da1ec925b47f3b1f9aa20102e2bc2ead83",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-dpr1-shadow-enabled.png",
+    "bytes": 529685,
+    "sha256": "4659d9f5ed7c2afd41d3878d328fa973ca08692febd441e6e342f184c00edca8",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-dpr1-shape-shadows.png",
+    "bytes": 509310,
+    "sha256": "888ad4f86e4c641ff0bea6d174b93546175ebe9749711be85cf74d2b1fd9178b",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-dpr1-shape.png",
+    "bytes": 474055,
+    "sha256": "43d90e90fed91d56454399703cfaa8a4b90656d1b0e0895949812a10c880f1a5",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-dpr2-new-view.png",
+    "bytes": 1665904,
+    "sha256": "9e14636c43fe89dda29da27390800023d7917ee51120ef48abaf59561f0890eb",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-dpr2-shadow-enabled.png",
+    "bytes": 1594866,
+    "sha256": "d76ce1ce864849f2e498cbe97f58e35de83aad147a2e52a47e174caf94742429",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-dpr2-shape-shadows.png",
+    "bytes": 1278331,
+    "sha256": "46b0912791cabcd26bb622a48f36fb9d1341770bc79c4a608779e9798dec528d",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-dpr2-shape.png",
+    "bytes": 1176140,
+    "sha256": "f5f101e33bc0cedc72d67818c2426314df888ca166d345017d4dff095ccf1cab",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-yaw180.png",
+    "bytes": 535966,
+    "sha256": "2fd4a9e8b454dad7fc39ed1abe9c666a7b9d645a2e060ab322faebf50e114457",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-yaw270.png",
+    "bytes": 591829,
+    "sha256": "df983e799599729c9f538e3c2a90cc1d260b389cbe0e47e4a6f0939e4969b8ea",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/demodokus-yaw90.png",
+    "bytes": 456882,
+    "sha256": "bdc971ef287c4611869b023e28182f5afaa2c1275b3e48e24fe16a0bfc0e3c96",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-dpr1-new-view.png",
+    "bytes": 517980,
+    "sha256": "10a019bfb474ab313f747d39c131a9cd4477cb27bb95f6d7aa71eb849f009216",
+    "bundledInArchive": true
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-dpr1-shadow-enabled.png",
+    "bytes": 660803,
+    "sha256": "39f50a5cf25b73241ef3edbf3f97b9f692710c70ad910823816f0947bc385622",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-dpr1-shape-shadows.png",
+    "bytes": 419022,
+    "sha256": "daca1d6bee83beb25180984f442453cdec83b640165e289e6c96b2ae9ad59fbe",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-dpr1-shape.png",
+    "bytes": 423485,
+    "sha256": "c399569f1abbe8fb975474c806c522819cabdf578454a9a85f6a6df56f5bf275",
+    "bundledInArchive": true
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-dpr2-new-view.png",
+    "bytes": 1344036,
+    "sha256": "cb29fe0d7b9b5b7a728d7c431a5f8f8b3f3d6c49d1a68f5709f1d4cbb89500ba",
+    "bundledInArchive": true
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-dpr2-shadow-enabled.png",
+    "bytes": 1260097,
+    "sha256": "bd0d27d0dd2a28f464c210d0358653057cbca3d2a27602b770a08bd2ec52fec8",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-dpr2-shape-shadows.png",
+    "bytes": 1059390,
+    "sha256": "0b13866e66ab7d1bae3c794d5635c214056a31079c8af595cdd3abb9716a1a9c",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-dpr2-shape.png",
+    "bytes": 1083972,
+    "sha256": "64528c79a0c14f49407d8d513e930fc6dd55106e5b6dbe0bb7edc9be2f450370",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-yaw180.png",
+    "bytes": 547397,
+    "sha256": "154dc7ffbd044d0b8f4af8e20eebc746cee5cbb485b9da13c9543233e51c3d07",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-yaw270.png",
+    "bytes": 661030,
+    "sha256": "8613a00087bc001c17a54548e725802d2e10b8ff6b4ee3232266e267f1a92efb",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/diomedes-yaw90.png",
+    "bytes": 505015,
+    "sha256": "be8d7d852a264e56376908ff779e44adbb7c73badb33f7f585f9682357784f8c",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-dpr1-new-view.png",
+    "bytes": 580255,
+    "sha256": "be96d56f41cec00ef79e87ac6d785bf61174c95ec0d5503f5b5ac7e3f9b3bd5d",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-dpr1-shadow-enabled.png",
+    "bytes": 540089,
+    "sha256": "9a9d6699831e682e36cec20f19c42acb445cee9350898085092b3dcad569c184",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-dpr1-shape-shadows.png",
+    "bytes": 426281,
+    "sha256": "c59ebafb725a853bee1409f3386d5eafc23616fb87ab50e196b2cc15fd12e2ec",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-dpr1-shape.png",
+    "bytes": 460484,
+    "sha256": "5701570f991d700cb1d1511a63e7aca398ce540f075751c66d73ca1673597213",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-dpr2-new-view.png",
+    "bytes": 1507417,
+    "sha256": "45d8621a9540066c254744e6b3c74213b8baa9ac8e78b7cd2b985c3bd7f74990",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-dpr2-shadow-enabled.png",
+    "bytes": 1270577,
+    "sha256": "7b8828ee45d82a904948543c583fd13ea533d92864597897c4e7496650c636de",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-dpr2-shape-shadows.png",
+    "bytes": 1038534,
+    "sha256": "e124792c4ec7df9c378178e35a9f3bc7fba96c96def0981d150c27c580135daa",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-dpr2-shape.png",
+    "bytes": 1147657,
+    "sha256": "8dfadcaf5f7ef1e706d3b1472e8adb1da122a8f29b0dff794e60fed642ce0c9b",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-yaw180.png",
+    "bytes": 491437,
+    "sha256": "e523d31900fa954e5c6599613e0e4056665b77093587ded109e222cae48d8b1c",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-yaw270.png",
+    "bytes": 609179,
+    "sha256": "b4b5bbaad1a2ccb3a0329472bc8274d98ce896ec8d466efda2d68202c6b4e0b3",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/eumelos-yaw90.png",
+    "bytes": 502826,
+    "sha256": "64a77223766363af790f5125c0c3af5b66cadfc17c3a7de7ddc8cc4db31e4c8b",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-dpr1-new-view.png",
+    "bytes": 608577,
+    "sha256": "c7c8a3bc7a3152f7cebf89ca3515ec1cae3d5d651afcbe5e4e64ee9de48d6ad3",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-dpr1-shadow-enabled.png",
+    "bytes": 491475,
+    "sha256": "6bfcf4c02378aff10797fe23e74703b7ceadc254c3394862a021d254b6c80f4d",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-dpr1-shape-shadows.png",
+    "bytes": 472603,
+    "sha256": "cabf542e6af665ade5abefe130325a68a0bc0ab26acce9cc20f6f28f9854cf14",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-dpr1-shape.png",
+    "bytes": 456582,
+    "sha256": "bdccf046a1c11af5799efe39ee5313e6ac6c6868bb314dc3b4f2cc270bd66691",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-dpr2-new-view.png",
+    "bytes": 1597320,
+    "sha256": "3d3ee300a0f0460e45072c4e112bac646518988737de41776247e38155883344",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-dpr2-shadow-enabled.png",
+    "bytes": 1477098,
+    "sha256": "be56bd6699a540bfee78c965eaff1dbbfddc6fa321f265aa62de6d0e3a47e41a",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-dpr2-shape-shadows.png",
+    "bytes": 1172724,
+    "sha256": "08866897286f0e1632f75b686a445eff40350891e1370816c2ce7892e8b5a509",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-dpr2-shape.png",
+    "bytes": 1145452,
+    "sha256": "56e871b938b7544bf117060e8489f15a320ad551002664e20c58c0e6fdece5d6",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-yaw180.png",
+    "bytes": 581830,
+    "sha256": "99bb8e48d461846392535260fe32f59f9e44539ce3f5412e0e30010ed9b08cd9",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-yaw270.png",
+    "bytes": 563751,
+    "sha256": "18e0a9a4b07c117ed46fa3af021edbe7c5ca0403b81b7b34283d3e6a9f0332b8",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/ilioneus-yaw90.png",
+    "bytes": 663788,
+    "sha256": "029edb8bb24ba5b7458b81c2093664f04468a0ae76d68e817c3e432880876086",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-dpr1-new-view.png",
+    "bytes": 613235,
+    "sha256": "5414efb5d0dec78ffe9a98e553d7b48d3101c87a5adf2991054e822a1e4c65b1",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-dpr1-shadow-enabled.png",
+    "bytes": 542296,
+    "sha256": "d15ecb38ed14417017ba96b7b1606567a6e4f57c1d92c2a66901791a95af2c39",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-dpr1-shape-shadows.png",
+    "bytes": 495494,
+    "sha256": "65125f4f61d9d2b2587e13364cc9d39046acafb5ef5325a0a2acc262e98bfc43",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-dpr1-shape.png",
+    "bytes": 464920,
+    "sha256": "c16934bdcf2d9a915457c2f7859cbcb800426bb24252e20596e6a089361b5b00",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-dpr2-new-view.png",
+    "bytes": 1613973,
+    "sha256": "0ae7b599769a91cecd9af400d1ca8b239a2a80b6a7bbcb5462cdf4c9e4a6cd33",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-dpr2-shadow-enabled.png",
+    "bytes": 1538341,
+    "sha256": "3110a9f5d802387a88fe836b869c306e8318ffce3b099691b7a818aa7a612051",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-dpr2-shape-shadows.png",
+    "bytes": 1234171,
+    "sha256": "7b8760204486c5e579cd528e9a55728c8e3d8065697fd4b9d06261de547bb435",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-dpr2-shape.png",
+    "bytes": 1158933,
+    "sha256": "93ca0157ad66d018cecb083c97388549364492afa1f916af9d02ab3ecfa03f9b",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-yaw180.png",
+    "bytes": 474476,
+    "sha256": "dfeeb926331d76ab88f00d4184e780596e6a2264bffa87b59390638266ea6099",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-yaw270.png",
+    "bytes": 607314,
+    "sha256": "ff544d267ac5c368ff39c58a6dfa3c21be772ffb2064d598be63c1e7760d9ee5",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/lycomedes-yaw90.png",
+    "bytes": 465125,
+    "sha256": "1b59d885dde030e38083ae28d86c025d606c21cc2237f76628d1fbd3152d7014",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-dpr1-new-view.png",
+    "bytes": 528157,
+    "sha256": "50a8fcb747f164d5f6ad08ccb2ebc8266d423cf7e5c448cfc521cf0fff912ee3",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-dpr1-shadow-enabled.png",
+    "bytes": 499671,
+    "sha256": "bf587aebd35e158ff3a2345aed1a565e009b30a4ba52430107706fd102c8abea",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-dpr1-shape-shadows.png",
+    "bytes": 434144,
+    "sha256": "c6d60ea52f1284f1824ba6de8dbc8e49726d2f5f861dcb404a8c44429ed891ce",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-dpr1-shape.png",
+    "bytes": 450451,
+    "sha256": "cf286801897238fe9874bd296bc14ae5dba84cdc0ab172b156497efc8c84f12c",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-dpr2-new-view.png",
+    "bytes": 1320305,
+    "sha256": "0ecbf02eab7811b810107adbe82501ce81e1820da87e511bc6b2a0e89b3640da",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-dpr2-shadow-enabled.png",
+    "bytes": 1190640,
+    "sha256": "e4745f910ee4f771ea703757dbb7e6b7fb446c5b38e4f4904b89daa5ab9b1bb6",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-dpr2-shape-shadows.png",
+    "bytes": 1036945,
+    "sha256": "ebc7dc86f295dd56f684709367726662e0a608e610e876600c05bc4a2a2d4add",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-dpr2-shape.png",
+    "bytes": 1080569,
+    "sha256": "14ebd4703b078ad59cb0bc8bda7c135be6477164743d43676a5dea3c1ed44588",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-yaw180.png",
+    "bytes": 441590,
+    "sha256": "58a6000e8357b3781beaa4483c3ec354dfabb2c2a266761bebec6ab88b8a5316",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-yaw270.png",
+    "bytes": 557463,
+    "sha256": "0a4bc7cebe4c17d00af148635cd45c114b239fb43931a2c1b7d7a456bde25079",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/menelaus-yaw90.png",
+    "bytes": 367850,
+    "sha256": "8f3d1cdf310aec21f180d87b993cc1477534715b54b39d4044e63232579f4275",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-dpr1-new-view.png",
+    "bytes": 589273,
+    "sha256": "0505078712139ed8bbb843cd4d334ae05035097a4de856c75f7c69e8ebc26214",
+    "bundledInArchive": true
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-dpr1-shadow-enabled.png",
+    "bytes": 456572,
+    "sha256": "110c6fead71fcb3b532639f276932fa2c9af1a409f0dddc0628b27bab5047bd3",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-dpr1-shape-shadows.png",
+    "bytes": 416574,
+    "sha256": "e2bc5f1342138842d2299c75187646e410227c0c10869680ec9d9183026fcde8",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-dpr1-shape.png",
+    "bytes": 445982,
+    "sha256": "97bc21eb74a65144c7eeaf575266bba973a1e89779ca02708196959a3253decb",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-dpr2-new-view.png",
+    "bytes": 1569960,
+    "sha256": "60f91cf75170744e97c758bb565837f69f28fe538997ae9b05734789fe2bc85b",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-dpr2-shadow-enabled.png",
+    "bytes": 1367263,
+    "sha256": "6bcff05733802dff20c60fdc2e683f2d95dc7a6ca8c174d22e52233aed020680",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-dpr2-shape-shadows.png",
+    "bytes": 1047618,
+    "sha256": "54adf7a14b0d357dc681ea45e930868f8353d555fcfb895e315dde2629c9d151",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-dpr2-shape.png",
+    "bytes": 1143533,
+    "sha256": "4e00fc2594d7485b8f576c191a934ab44322dc3d1d0d8c36f1b82ddac48c9fa1",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-yaw180.png",
+    "bytes": 472173,
+    "sha256": "a6e8e2d4fa9a3fe95f24e654b37e2138b80f4a1635ab170d6dea23c7a5683098",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-yaw270.png",
+    "bytes": 518310,
+    "sha256": "7c7dbc325c3d5e455c2406e95aeeb0bdcf4b2a155a349e7b24afc00451375aaa",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/mentor-yaw90.png",
+    "bytes": 571876,
+    "sha256": "0ed5d2a8ecf52ecf940cd88be60e9912561a4ee3c0ac7d390224eb259671df06",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-dpr1-new-view.png",
+    "bytes": 616759,
+    "sha256": "c33247148dbf83b039574e8dc21c0ce2e38411bd885ca479882d04f9e46c600d",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-dpr1-shadow-enabled.png",
+    "bytes": 523241,
+    "sha256": "bc80daf7fbe712edd0547597793e6bac9ff3a39aecfd99c1e4c65699046f4b10",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-dpr1-shape-shadows.png",
+    "bytes": 441693,
+    "sha256": "1d521e8978212385cef6eda4ec7e93c3e2460598905f66dc4621babec881901a",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-dpr1-shape.png",
+    "bytes": 474270,
+    "sha256": "7f8ee5233512257dbdcf32fed5b6e7542c880aaab95bc0dd717dc647a60a6c49",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-dpr2-new-view.png",
+    "bytes": 1634429,
+    "sha256": "33e4d1c292f2aa05678c07d98b88add36373ea421cacc4f6f59dc2f3aea5471e",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-dpr2-shadow-enabled.png",
+    "bytes": 1415970,
+    "sha256": "a5bd909a25717ae5b9f209712ab7a644219e134961824df75323b6319880f9c6",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-dpr2-shape-shadows.png",
+    "bytes": 1095793,
+    "sha256": "127d418c2a3865806d1a95a63efa706203987adddf27d6b8b81f66ef312bae93",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-dpr2-shape.png",
+    "bytes": 1203697,
+    "sha256": "25ebfc7327e94204eb8fe49eb3ad4be8aa2181b97e856148d1f484672d9a807d",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-yaw180.png",
+    "bytes": 534486,
+    "sha256": "2032db648cefdd5bd269c1c3b1fae46c5ba1c0539846e7ac3fb0c96bc74a1346",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-yaw270.png",
+    "bytes": 607894,
+    "sha256": "3086b0b4c22ee5dbbc1866e3ef182a1e5cfcd1504e62f673c80eb11e52cb476e",
+    "bundledInArchive": false
+  },
+  {
+    "path": "output/playwright/trojan-population/pyrrhus-yaw90.png",
+    "bytes": 535503,
+    "sha256": "defb446ce605228c53a1c854362f72645c70242805b475aa69352bcb01680dd8",
+    "bundledInArchive": false
+  }
+]

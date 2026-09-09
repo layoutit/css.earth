@@ -55,7 +55,24 @@ The current registry has 416 objects and 297 asteroids. All 406 original navigat
 
 All thirty original inputs restored into empty destinations through the existing acquisition operations, using twelve distinct source downloads. All 350 runtime images, totaling 78,053,296 bytes, were published and freshly installed into an empty destination with every hash verified and zero cache reuse.
 
-**Browser qualification is pending.** The final Astro build, default-framing screenshots, lens transitions and representative drag trace will be recorded before PR delivery. No full-catalog browser pass is claimed.
+The final Astro build emits **834 static pages** and all ten production image inventories pass assembly. The ten focused source tests, two asteroid ephemeris tests, five minimap tests and 46 generic-page/router cases pass. These are focused checks; no full-catalog browser pass is claimed.
+
+**Twenty headless Chrome cases pass**: every new body at DPR 1 and 2, both datasets, both shadow states, canonical density 2, one scene and retained node identity. All use the freshly installed scene images with checked hashes. Forty default/rotated browser views were visually inspected. The Asteroids category exposes all ten additions among 297 entries; searching for Mentor and navigating from Diomedes mounts one scene/camera. The inherited long dataset detail was shortened in the source content so the Shape label remains readable in the shared panel.
+
+Diomedes's representative three-cycle vertical drag in Elevation records **372 frame sequences with zero dropped without presentation**, RAF median 16.7 ms and p95/max 16.8 ms, zero interaction requests and stable identity for all 112,052 stage nodes (including the shared environment; the body itself has 800 triangles). This is one measured headless workload on the recorded Mac, not a guarantee for every device or orientation.
+
+Browser and drag evidence use the explicit **`performance` build mode** at revision `c09191cb2d8dd20b2a0ff218cfdb20251677730d`. It uses the production page/styles/assets with inspection APIs enabled by `site/diagnostics-policy.mjs`; this is not an uninstrumented production trace. Exact decoded hashes are recorded for loaded JavaScript, prepared-object JSON and selected atlases. Chrome evicted the HTML document from its inspector body cache, so HTML has request sizes/status only, following the existing comet delivery capture.
+
+The [summary](evidence/trojan-population/summary.json), [browser report](evidence/trojan-population/browser.json), [drag report](evidence/trojan-population/drag.json) and [evidence archive](trojan-population-evidence.tar.gz) bind the results and reproduction helpers. The [capture inventory](evidence/trojan-population/browser-capture-inventory.json) identifies the full screenshots bundled here and those retained locally.
+
+## Browser views
+
+These are cropped, resized regions of the inspected default browser screenshots. Framing is independent per body; sizes and false-color ranges are not a physical comparison.
+
+![Ten Jupiter Trojan shapes](evidence/trojan-population/shape.webp)
+![Ten Jupiter Trojan shape-derived elevation views](evidence/trojan-population/elevation.webp)
+
+Full frames: [Diomedes Shape](evidence/trojan-population/diomedes-shape.png), [Diomedes Elevation](evidence/trojan-population/diomedes-elevation.png), [Mentor Elevation](evidence/trojan-population/mentor-elevation.png), [Asteroids search](evidence/trojan-population/asteroid-category-search.png).
 
 ## Source/result comparison
 
@@ -80,5 +97,13 @@ pnpm setup:assets --object=diomedes
 ```
 
 The qualification helpers are packaged in the evidence archive. They require NumPy and Pillow; the saved runner records this workstation's Python path, which should be adjusted on another machine. `author.py` records initial authoring and intentionally refuses to add existing ids; ordinary reproduction uses the checked-in recipes instead.
+
+```sh
+tar -xzf docs/trojan-population-evidence.tar.gz
+node output/trojan-population/catalog-audit.mjs
+node output/trojan-population/qualify-body.mjs diomedes
+```
+
+Fresh delivery can be replayed with `verify-runtime-install.mjs`, then `browser-check.mjs` using its returned `CSSEARTH_FRESH_RUNTIME_ROOT` and an existing preview on port 4278. The final Astro invocation was `pnpm exec astro build --mode performance`, followed by the existing `operations.js assemble` operation for each new body. The final capture did not run the all-object preparation or browser suites.
 
 After catalog navigation changes, `prepare-navigation.mjs` preserves the pinned baseline tiles and prepares only the new source tiles. `refresh-transports.mjs` updates marker bindings and hash-bound page metadata without recompiling presentations. Finish by running `node site/minimap/prepare.mjs` and its point-range/coverage tests before Astro. Full object preparation or raster rebakes are unnecessary for navigation-only changes.
