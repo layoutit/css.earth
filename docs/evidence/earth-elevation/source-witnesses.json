@@ -1,0 +1,146 @@
+{
+  "checked": "2026-09-09",
+  "method": "Independent provider ASCII requests at native grid cells; decoded separately from the binary preparer",
+  "records": [
+    {
+      "name": "Tibetan plateau",
+      "response": "Dataset {\n    Grid {\n     ARRAY:\n        Int16 elevation[lat = 1][lon = 1];\n     MAPS:\n        Float64 lat[lat = 1];\n        Float64 lon[lon = 1];\n    } elevation;\n} bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;\n---------------------------------------------\nelevation.elevation[1][1]\n[0], 5050\n\nelevation.lat[1]\n31.018749999999997\n\nelevation.lon[1]\n88.01875000000001\n\n\n",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation[29044][64324]",
+      "nativeIndex": [
+        29044,
+        64324
+      ],
+      "sampleIndex": [
+        2904,
+        6432
+      ],
+      "meters": 5050,
+      "latitude": 31.018749999999997,
+      "longitude": 88.01875000000001,
+      "expectedRange": [
+        4000,
+        6000
+      ]
+    },
+    {
+      "name": "Amazon lowlands",
+      "response": "Dataset {\n    Grid {\n     ARRAY:\n        Int16 elevation[lat = 1][lon = 1];\n     MAPS:\n        Float64 lat[lat = 1];\n        Float64 lon[lon = 1];\n    } elevation;\n} bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;\n---------------------------------------------\nelevation.elevation[1][1]\n[0], 63\n\nelevation.lat[1]\n-2.981250000000003\n\nelevation.lon[1]\n-59.98125\n\n\n",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation[20884][28804]",
+      "nativeIndex": [
+        20884,
+        28804
+      ],
+      "sampleIndex": [
+        2088,
+        2880
+      ],
+      "meters": 63,
+      "latitude": -2.981250000000003,
+      "longitude": -59.98125,
+      "expectedRange": [
+        -20,
+        250
+      ]
+    },
+    {
+      "name": "Andean plateau",
+      "response": "Dataset {\n    Grid {\n     ARRAY:\n        Int16 elevation[lat = 1][lon = 1];\n     MAPS:\n        Float64 lat[lat = 1];\n        Float64 lon[lon = 1];\n    } elevation;\n} bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;\n---------------------------------------------\nelevation.elevation[1][1]\n[0], 4035\n\nelevation.lat[1]\n-23.981250000000003\n\nelevation.lon[1]\n-67.98125\n\n\n",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation[15844][26884]",
+      "nativeIndex": [
+        15844,
+        26884
+      ],
+      "sampleIndex": [
+        1584,
+        2688
+      ],
+      "meters": 4035,
+      "latitude": -23.981250000000003,
+      "longitude": -67.98125,
+      "expectedRange": [
+        3000,
+        6000
+      ]
+    },
+    {
+      "name": "Central Pacific",
+      "response": "Dataset {\n    Grid {\n     ARRAY:\n        Int16 elevation[lat = 1][lon = 1];\n     MAPS:\n        Float64 lat[lat = 1];\n        Float64 lon[lon = 1];\n    } elevation;\n} bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;\n---------------------------------------------\nelevation.elevation[1][1]\n[0], -4451\n\nelevation.lat[1]\n0.018749999999997158\n\nelevation.lon[1]\n-149.98125\n\n\n",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation[21604][7204]",
+      "nativeIndex": [
+        21604,
+        7204
+      ],
+      "sampleIndex": [
+        2160,
+        720
+      ],
+      "meters": -4451,
+      "latitude": 0.018749999999997158,
+      "longitude": -149.98125,
+      "expectedRange": [
+        -6500,
+        -3000
+      ]
+    },
+    {
+      "name": "Mariana Trench",
+      "response": "Dataset {\n    Grid {\n     ARRAY:\n        Int16 elevation[lat = 1][lon = 1];\n     MAPS:\n        Float64 lat[lat = 1];\n        Float64 lon[lon = 1];\n    } elevation;\n} bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;\n---------------------------------------------\nelevation.elevation[1][1]\n[0], -10358\n\nelevation.lat[1]\n11.310416666666669\n\nelevation.lon[1]\n142.18541666666664\n\n\n",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation[24314][77324]",
+      "nativeIndex": [
+        24314,
+        77324
+      ],
+      "sampleIndex": [
+        2431,
+        7732
+      ],
+      "meters": -10358,
+      "latitude": 11.310416666666669,
+      "longitude": 142.18541666666664,
+      "expectedRange": [
+        -11000,
+        -6000
+      ]
+    },
+    {
+      "name": "Greenland ice surface",
+      "response": "Dataset {\n    Grid {\n     ARRAY:\n        Int16 elevation[lat = 1][lon = 1];\n     MAPS:\n        Float64 lat[lat = 1];\n        Float64 lon[lon = 1];\n    } elevation;\n} bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;\n---------------------------------------------\nelevation.elevation[1][1]\n[0], 2884\n\nelevation.lat[1]\n75.01875000000001\n\nelevation.lon[1]\n-39.98124999999999\n\n\n",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation[39604][33604]",
+      "nativeIndex": [
+        39604,
+        33604
+      ],
+      "sampleIndex": [
+        3960,
+        3360
+      ],
+      "meters": 2884,
+      "latitude": 75.01875000000001,
+      "longitude": -39.98124999999999,
+      "expectedRange": [
+        2000,
+        3500
+      ]
+    },
+    {
+      "name": "Antarctic ice surface",
+      "response": "Dataset {\n    Grid {\n     ARRAY:\n        Int16 elevation[lat = 1][lon = 1];\n     MAPS:\n        Float64 lat[lat = 1];\n        Float64 lon[lon = 1];\n    } elevation;\n} bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc;\n---------------------------------------------\nelevation.elevation[1][1]\n[0], 2320\n\nelevation.lat[1]\n-79.98125\n\nelevation.lon[1]\n0.01875000000001137\n\n\n",
+      "url": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.ascii?elevation[2404][43204]",
+      "nativeIndex": [
+        2404,
+        43204
+      ],
+      "sampleIndex": [
+        240,
+        4320
+      ],
+      "meters": 2320,
+      "latitude": -79.98125,
+      "longitude": 0.01875000000001137,
+      "expectedRange": [
+        2000,
+        4000
+      ]
+    }
+  ]
+}

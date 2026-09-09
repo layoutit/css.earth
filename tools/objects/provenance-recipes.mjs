@@ -154,8 +154,14 @@ export function provenanceProducts({ id, recipes, manifest, lenses, assets, geog
     plan.surface.maps.forEach((map, index) => {
       const lens = controls.find(lens => lens.surfaceUrl === prefix + map.name + '.webp');
       if (lens) add(lens.id, 'paged-ellipsoid', `/surface/maps/${index}`,
-        [map.path, ...(map.compositeClouds ? [plan.surface.clouds.path] : [])],
-        'Prepare the global reference map and its declared cloud composite.');
+        [map.path, ...paths(map.scientific), ...(map.compositeClouds ? [plan.surface.clouds.path] : [])],
+        map.scientific?.kind === 'gebco-elevation'
+          ? 'Decode signed terrain heights and coordinate axes, interpolate elevations, apply the authored palette and cartographic relief, and prepare the globe, minimap and unshaded legend.'
+          : 'Prepare the global reference map and its declared cloud composite.',
+        map.scientific?.kind === 'gebco-elevation' ? {
+          interpretation: { kind: 'modeled-elevation', units: 'm', datum: 'mean sea level',
+            grid: map.scientific.grid, palette: map.scientific.palette, relief: map.scientific.relief },
+        } : {});
     });
     for (const lens of controls.filter(lens => !products.some(product => product.id === lens.id))) {
       if (lens.id === 'cross-section') add(lens.id, 'paged-ellipsoid', '/interiorPath', [plan.interiorPath],
