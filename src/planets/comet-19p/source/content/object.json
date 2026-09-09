@@ -14,7 +14,7 @@
       {
         "id": "encounter",
         "label": "Spacecraft",
-        "value": "Deep Space 1 · 2001"
+        "value": "Deep Space 1 \u00b7 2001"
       }
     ],
     "moreFacts": []
@@ -34,7 +34,7 @@
         "id": "micas",
         "label": "MICAS",
         "detail": "Encounter photograph",
-        "description": "The mission team’s orthophoto laid onto USGS terrain, keeping the lighting seen by Deep Space 1. The grid covers missing imagery and the estimated far side.",
+        "description": "The mission team\u2019s orthophoto laid onto USGS terrain, keeping the lighting seen by Deep Space 1. The grid covers missing imagery and the estimated far side.",
         "title": "Encounter photograph",
         "thumbnail": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
         "surface": "comet-19p-micas-surface@2x.webp",
@@ -62,7 +62,7 @@
         "label": "USGS",
         "detail": "Stereo terrain",
         "description": "Terrain reconstructed from overlapping MICAS images, with manual stereo checks. Gray shows measured terrain; the grid fills the far side with an estimated shape.",
-        "title": "Stereo terrain",
+        "title": "USGS stereo terrain",
         "thumbnail": "/scenes/comet-19p/comet-19p-usgs-thumbnail.webp",
         "surface": "comet-19p-usgs-surface@2x.webp",
         "poles": "comet-19p-usgs-poles@2x.webp",
@@ -89,7 +89,7 @@
         "label": "DLR",
         "detail": "Stereo terrain",
         "description": "An independent reconstruction of the encounter images, aligned with USGS at the same scale. The grid marks gaps and the estimated far side.",
-        "title": "Stereo terrain",
+        "title": "DLR stereo terrain",
         "thumbnail": "/scenes/comet-19p/comet-19p-dlr-thumbnail.webp",
         "surface": "comet-19p-dlr-surface@2x.webp",
         "poles": "comet-19p-dlr-poles@2x.webp",
@@ -115,7 +115,7 @@
         "id": "height",
         "label": "Height",
         "detail": "Above the image plane",
-        "description": "Height toward the spacecraft from the source’s reference plane. This is not distance from the comet’s centre. Turn Shadows off to read the scale.",
+        "description": "Height toward the spacecraft from the source\u2019s reference plane. This is not distance from the comet\u2019s centre. Turn Shadows off to read the scale.",
         "title": "Above the image plane",
         "thumbnail": "/scenes/comet-19p/comet-19p-height-thumbnail.webp",
         "surface": "comet-19p-height-surface@2x.webp",
@@ -129,7 +129,7 @@
           {
             "id": "range",
             "label": "Released heights",
-            "value": "−0.10 to 4.44 km"
+            "value": "\u22120.10 to 4.44 km"
           },
           {
             "id": "direction",
@@ -143,11 +143,11 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "−0.2",
+            "\u22120.2",
             "2.15",
             "4.5"
           ],
-          "meta": "km · false color",
+          "meta": "km \u00b7 false color",
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/",
           "image": "/scenes/comet-19p/comet-19p-height-legend.webp"
         }
@@ -184,11 +184,11 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "≤−0.6",
+            "\u2264\u22120.6",
             "0",
-            "≥0.6"
+            "\u22650.6"
           ],
-          "meta": "km · false color",
+          "meta": "km \u00b7 false color",
           "sourceUrl": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/",
           "image": "/scenes/comet-19p/comet-19p-difference-legend.webp"
         }
@@ -215,7 +215,7 @@
   "charts": [],
   "resources": [
     {
-      "label": "PDS · USGS and DLR",
+      "label": "PDS \u00b7 USGS and DLR",
       "role": "surface",
       "description": "Released Borrelly terrain models",
       "href": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/"

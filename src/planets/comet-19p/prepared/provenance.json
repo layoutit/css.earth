@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "79935338aee12351517db1571798c80afe3c6f9cb3fb757ed64d9208c0e8b2d7"
+    "sha256": "82d14567b1acc469948fad6e773f3870a3f6f9b83f46431d03471836edc2c33c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -396,7 +396,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "5ef27a3447c24da3e270fef0a3e4f2c91bd73d62aa5f7a6cf0570d89350be628",
+      "sha256": "7d6a42940651ce580bffa72001fa8240c3edc1ffe2323ab33868d7845335e4f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -461,7 +461,7 @@
               "label": "USGS",
               "detail": "Stereo terrain",
               "description": "Terrain reconstructed from overlapping MICAS images, with manual stereo checks. Gray shows measured terrain; the grid fills the far side with an estimated shape.",
-              "title": "Stereo terrain",
+              "title": "USGS stereo terrain",
               "thumbnail": "/scenes/comet-19p/comet-19p-usgs-thumbnail.webp",
               "surface": "comet-19p-usgs-surface@2x.webp",
               "poles": "comet-19p-usgs-poles@2x.webp",
@@ -488,7 +488,7 @@
               "label": "DLR",
               "detail": "Stereo terrain",
               "description": "An independent reconstruction of the encounter images, aligned with USGS at the same scale. The grid marks gaps and the estimated far side.",
-              "title": "Stereo terrain",
+              "title": "DLR stereo terrain",
               "thumbnail": "/scenes/comet-19p/comet-19p-dlr-thumbnail.webp",
               "surface": "comet-19p-dlr-surface@2x.webp",
               "poles": "comet-19p-dlr-poles@2x.webp",
@@ -892,8 +892,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "5ef27a3447c24da3e270fef0a3e4f2c91bd73d62aa5f7a6cf0570d89350be628",
-      "bytes": 8236,
+      "sha256": "7d6a42940651ce580bffa72001fa8240c3edc1ffe2323ab33868d7845335e4f5",
+      "bytes": 8285,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
