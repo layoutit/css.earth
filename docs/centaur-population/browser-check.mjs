@@ -79,5 +79,5 @@ try{
   assert.deepEqual(errors,[]);await context.close();
  }
  await writeFile(defaultsOnly?'docs/centaur-population/default-views.json':navigationOnly?'docs/centaur-population/navigation-final.json':'docs/centaur-population/browser-validation.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:browser.version(),headless:true,origin,viewport:{width:1440,height:900},scope:defaultsOnly?'Actual production default views using fresh-installed scene images.':navigationOnly?'Final integrated production category, search and handoff using the fresh scene image installation.':'Production routes; new scene images served from the independently downloaded installation. Default and close views; optional shadows through the bound control change event because main hides the settings action; shared category, search and in-page navigation.',results},null,2)+'\n');
- console.log(navigationOnly?'Integrated shared navigation checks passed':'DPR 1/2 fresh asset, default settings, native triangles and shared navigation checks passed');
+ console.log(defaultsOnly?'DPR1 actual default views captured':navigationOnly?'Integrated shared navigation checks passed':'DPR 1/2 fresh asset, default settings, native triangles and shared navigation checks passed');
 }finally{await browser.close();}
