@@ -119,3 +119,29 @@ test('a saturated hidden orbit stops transforming chords while its visible path 
   expect(transforms).toBe(128);
   for (const invalid of [0, NaN, Infinity]) expect(() => projector.measureExtent(vertices, trail, invalid)).toThrow();
 });
+
+
+test('interior prepared chords share one camera projection per endpoint without reusing a stale view', () => {
+  const vertices: Vector3[] = Array.from({ length: 128 }, (_, index) => [
+    100 * Math.cos(index * Math.PI / 64), 80 * Math.sin(index * Math.PI / 64), -200]);
+  const trail = vertices.map(() => 1);
+  let projections = 0, offset = 0;
+  const projector = createPreparedRingProjector({ ...limits, hidden: () => { throw new Error('Unoccluded chord reached ray splitting'); },
+    mayOcclude: () => false, project: p => { projections++; return [offset + 800 * p[0] / -p[2], 800 * p[1] / -p[2]]; } });
+  const first = projector(vertices, trail);
+  expect(first).toHaveLength(128);
+  // Previously every chord projected both endpoints before and after clipping:
+  // 512 calls. A handful of endpoint rounding corrections may need a reproject.
+  expect(projections).toBeLessThan(150);
+  offset = 100; projections = 0;
+  const second = projector(vertices, trail);
+  expect(second).toHaveLength(128);
+  expect(projections).toBeLessThan(150);
+  for (let i = 0; i < first.length; i++) {
+    expect(second[i]![0]).toBeCloseTo(first[i]![0] + 100, 10);
+    expect(second[i]![2]).toBeCloseTo(first[i]![2] + 100, 10);
+    expect(second[i]![1]).toBe(first[i]![1]);
+    expect(second[i]![3]).toBe(first[i]![3]);
+    expect(second[i]![4]).toBe(first[i]![4]);
+  }
+});

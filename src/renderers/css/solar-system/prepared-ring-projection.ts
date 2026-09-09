@@ -38,7 +38,13 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   const visit = (vertices: readonly Vector3[], trail: readonly number[], activeChords: readonly number[] | undefined,
     segment: (x0: number, y0: number, x1: number, y1: number, weight: number) => boolean) => {
     const eyes: (Vector3 | undefined)[] = [];
+    const screens: (readonly number[] | undefined)[] = [];
     const eyeAt = (index: number) => eyes[index] ??= toEye(vertices[index]);
+    // A prepared polyline shares vertices between neighbouring chords. Project
+    // each endpoint once for this camera; only clipped/occluded endpoints need
+    // new projections. These caches belong to one visit, never a stale view.
+    const screenAt = (index: number) => screens[index] ??= project(eyeAt(index));
+    const inside = (p: readonly number[]) => Math.abs(p[0]) <= clipX && Math.abs(p[1]) <= clipY;
     for (let ordinal = 0; ordinal < (activeChords?.length ?? vertices.length); ordinal++) {
       const index = activeChords?.[ordinal] ?? ordinal;
       const weight = trail[index];
@@ -47,6 +53,20 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
       let start = eyeAt(index), end = eyeAt(next);
       let startDepth = -start[2], endDepth = -end[2];
       if (startDepth <= near && endDepth <= near) continue;
+      // Interior chords outside every occluder's conservative shadow already
+      // are their final screen segment. Do not run clipping, perspective lerps,
+      // visibility splitting and endpoint projection again for the common case.
+      if (startDepth > near && endDepth > near && mayOcclude) {
+        const a = screenAt(index), b = screenAt(next);
+        if (inside(a) && inside(b) && !mayOcclude(a, b)) {
+          // Preserve the detailed path's endpoint arithmetic exactly, even
+          // where a + (b - a) rounds differently from b at astronomical scales.
+          const endPoint = lerp(start, end, 1);
+          const last = endPoint[0] === end[0] && endPoint[1] === end[1] && endPoint[2] === end[2] ? b : project(endPoint);
+          if (Math.hypot(last[0] - a[0], last[1] - a[1]) >= 0.05 && !segment(a[0], a[1], last[0], last[1], weight)) return;
+          continue;
+        }
+      }
       if (startDepth <= near) {
         start = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
         startDepth = near;
@@ -54,7 +74,8 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
         end = lerp(start, end, (near - startDepth) / (endDepth - startDepth));
         endDepth = near;
       }
-      const startScreen = project(start), endScreen = project(end);
+      const startScreen = start === eyes[index] ? screenAt(index) : project(start);
+      const endScreen = end === eyes[next] ? screenAt(next) : project(end);
       const window = clipSegmentToRectangle(startScreen, endScreen, clipX, clipY);
       if (window === null) continue;
       const t0 = eyeFraction(window[0], startDepth, endDepth);

@@ -657,3 +657,36 @@ index. `synchronization-chronological.json` verifies all 3,041 encoded frames,
 -103 microseconds of recorder/trace drift and at most 1.503 ms of video PTS error.
 Use that chronological export for diagnosis. CDP observations still do not prove
 every display refresh.
+
+
+### Share projected orbit vertices within each camera publication
+
+Orbit projection now caches shared screen endpoints during one visit. Fully
+in-frame chords outside all conservative occluder shadows use their final
+endpoints directly; boundary and occluded chords retain the detailed clipping
+path. The fast path preserves the old endpoint arithmetic, including its
+floating-point rounding. No geometry, stroke, hover, picking or DOM policy changes.
+
+An isolated replay of 111 recorded planetary-band cameras and 12,862 orbit
+projections reduces endpoint projection calls from 3,855,764 to 1,006,940 (73.9%).
+All 939,703 resulting segments match exactly. This replay disables occlusion to
+isolate endpoint work; the existing limb/near-plane tests and real browser checks
+cover occlusion. It is not a frame-rate benchmark. Evidence and both projector
+versions: `output/playwright/shared-orbit-projection/`.
+
+All 24 real-browser comparisons at DPR 1/2 have identical published orbit geometry
+and label styles, retained nodes, and no errors. Screenshot differences are at
+most one channel level. The 89 affected renderer tests, typecheck and build pass.
+
+The synchronized full route is in
+`output/world-context-zoom/shared-orbit-projection-dpr2/`, recorder
+`af1983d4-f82a-477f-a0ce-e20446d838c1`. All 2,946 video observations are encoded in
+capture-time order (two arrived out of order), with -22 microseconds recorder/trace
+drift and maximum video PTS error 1.476 ms. Source hashes match, document/world/input
+identities remain stable, and there are no application errors, recording-time HMR
+or trace loss. `qualification.json` includes the three artifact SHA-256 values.
+
+**The frame target remains unmet:** 191/634 planetary-band intervals exceed 25 ms,
+p95 remains 33.4 ms, and the whole-route maximum is 50 ms. The preceding capture
+had 207/625 and a 150 ms maximum, but input delivery and host load differ. The
+verified improvement is reduced projection work, not a causal smoothness claim.
