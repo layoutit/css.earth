@@ -235,15 +235,14 @@
       "progress": {
         "sourceReviewedBodies": 12,
         "preparedBodies": [
-          "Titania",
-          "Miranda",
-          "Hyperion",
-          "Proteus"
-        ],
-        "implementationBodies": [
           "Callisto",
-          "Phoebe"
+          "Hyperion",
+          "Phoebe",
+          "Proteus",
+          "Titania",
+          "Miranda"
         ],
+        "implementationBodies": [],
         "qualifiedBodies": 0,
         "report": "B3-SPACECRAFT-MAPPING.md",
         "sourceOnlyBodies": [
@@ -253,6 +252,24 @@
           "Aegaeon",
           "Nix",
           "Hydra"
+        ],
+        "deliveryScopeDecision": "pending",
+        "sourceClosureTestsPassed": 18,
+        "bodyTestsPassed": 23,
+        "sourceRestoredRecords": 264,
+        "freshInstalledRuntimeImages": 228,
+        "freshRuntimeReuse": 0,
+        "browserIsolatedRunsPassed": 34,
+        "browserLightingStatesPassed": 68,
+        "browserDragsPassed": 34,
+        "visuallyReviewedBodies": 6,
+        "browserQualifiedBodies": 6,
+        "aggregateReady": false,
+        "finalReport": "b3-preparation/final/DELIVERY.md",
+        "aggregateLimits": [
+          "Whole-application production build stopped by resource guard",
+          "Nine renderer fixture failures reproduced on unchanged main inputs; full renderer run stopped by resource guard",
+          "Full platform/shell and physical mobile qualification not completed in the resumed run"
         ]
       }
     },

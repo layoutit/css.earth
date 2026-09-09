@@ -1,0 +1,46 @@
+{
+  "status": "NINE_FAILURES_REPRODUCED_ON_UNCHANGED_MAIN_INPUTS",
+  "mainCommit": "b60f5d588e109add53d80ec0660b8811b097cb59",
+  "method": "The resumed serial renderer run executed all four failing files before its resource stop. Git comparison shows the complete renderer, package sources, Earth and Deimos authored/prepared inputs, geographic-page tools and dependency lock are unchanged from main. The ignored compiled Deimos payload also matches the SHA256 pinned by main. This is a source/data identity comparison, not a separate clean-checkout build.",
+  "unchangedPaths": [
+    "src/renderers/css",
+    "packages",
+    "src/planets/earth",
+    "src/planets/deimos",
+    "site",
+    "src/platform",
+    "tools/objects/geographic-pages",
+    "package.json",
+    "pnpm-lock.yaml"
+  ],
+  "deimosCompiledPayload": {
+    "path": "src/planets/deimos/prepared/object.json",
+    "bytes": 7108961,
+    "sha256": "09c0d1c6b72932274d65d9990de3a35f335c87d315a01b10e6ce74e47df359ec"
+  },
+  "failures": [
+    {
+      "file": "validation/depth-partitions.test.ts",
+      "count": 3,
+      "cause": "The main-pinned Deimos payload has no depthPartitions groups expected by the fixture."
+    },
+    {
+      "file": "validation/paged-presentation.test.ts",
+      "count": 3,
+      "cause": "The main Earth runtime has zero page layers; fixture expects two."
+    },
+    {
+      "file": "paging/capabilities.test.ts",
+      "count": 2,
+      "cause": "The same absent Earth page plans."
+    },
+    {
+      "file": "navigation/surface-target.test.ts",
+      "count": 1,
+      "cause": "The main Buenos Aires destination produces 2482.523 rather than the fixture threshold above30000."
+    }
+  ],
+  "aggregateStatus": "INCOMPLETE_RESOURCE_STOP",
+  "log": "renderer-tests.log",
+  "resourceReceipt": "renderer-resource-stop.json"
+}

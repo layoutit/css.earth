@@ -1,6 +1,6 @@
 {
   "schema": "cssearth-b3-callisto-color-implementation@1",
-  "status": "source implementation and four focused source tests passed; body bake and runtime/browser qualification pending",
+  "status": "body bake and all nine focused source/retained-atlas/runtime tests passed; integrated descriptor and browser qualification remain root-owned",
   "bodyId": "callisto",
   "lensId": "enhanced",
   "label": "Galileo color",
@@ -18,7 +18,7 @@
   "registration": {
     "path": "src/planets/callisto/source/validation/galileo-color-registration.json",
     "bytes": 8943,
-    "sha256": "679e4ded797e5cb43854a52249c3e784ae5835aeb6b2255c141d7a19b32f5eba"
+    "sha256": "0cb2e52bb4bd1ab5680be022e80a9b7e14e72fa01da56f665bb5a7b869bcbaf9"
   },
   "converter": {
     "path": "src/planets/callisto/source/preparation/prepare-galileo-color.py",
@@ -28,19 +28,19 @@
   "recipe": {
     "path": "src/planets/callisto/source/preparation/galileo-color-conversion.json",
     "bytes": 808,
-    "sha256": "1b1f567714604ca209ec742fc5ecc18ed6d059f9f95e7cf405262d6f12349e7e"
+    "sha256": "a1a33f61bc88425dee17e5da37917a69ca68828f3e9ee533ed372918599e3cb7"
   },
   "proof": {
     "path": "src/planets/callisto/source/validation/galileo-color-conversion-proof.json",
     "bytes": 1349,
-    "sha256": "5efaaf14b6df66b1adb3059ddef7d57da4cc7da3f204352c2b33938e404054d4"
+    "sha256": "47f83e9f581273ee11e94b59936109fdc5fb43e366bafdca6db19d6535f2bbc5"
   },
   "limits": [
     "Published display colors, not calibrated I/F or measured albedo; no new radiometric correction.",
-    "65-degree maximum emission with all native contributing source alphas exactly255. 28.7352486568% spherical coverage; all other surface remains missing.",
-    "Approximately8km-class center detail; coarser foreshortened coverage toward the edge. Derived0.25-degree grid/8192pixel runtime atlas do not increase source resolution.",
-    "Physical camera radius2410300m differs from controlled reference-map radius2409300.0488m.",
-    "Local0-1pixel registration checks are comparison diagnostics, not absolute geodetic accuracy or a camera covariance.",
+    "65-degree maximum emission with all native contributing source alphas exactly 255. 28.7352486568% spherical coverage; all other surface remains missing.",
+    "Approximately 8km-class center detail; coarser foreshortened coverage toward the edge. Derived 0.25-degree grid/8192-pixel runtime atlas do not increase source resolution.",
+    "Physical camera radius 2410300 m differs from controlled reference-map radius 2409300.0488 m.",
+    "Local 0–1 pixel registration checks are comparison diagnostics, not absolute geodetic accuracy or a camera covariance.",
     "The controlled reference supplied registration evidence only; no reference color/texture enters the derivative."
   ],
   "registrationChecks": {
@@ -73,7 +73,101 @@
     "originalInputUnchanged": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638"
   },
   "pending": [
-    "Normal authored body preparation; actual retained-atlas and two-lens runtime tests.",
-    "Root-owned integrated metadata, browser profile, DPR1/2 real-Chrome qualification and aggregate gates."
-  ]
+    "Root-owned final compiled object descriptor and metadata/profile refresh against the integrated main state.",
+    "DPR1/2 real-Chrome visual/interaction qualification and required aggregate source/test/build/browser gates."
+  ],
+  "sourceVerification": {
+    "inputCount": 7,
+    "documentCount": 27,
+    "generatedIntermediateCount": 0,
+    "verifiedCount": 34,
+    "command": "node tools/objects/dist/operations.js acquire callisto --verify-only",
+    "qualification": "Independent source test verifies the final34-entry source closure. The explicit acquisition command first passed33 entries before the last archived fit receipt was added; root is also restoring/reverifying the final closure."
+  },
+  "bake": {
+    "command": "node tools/objects/dist/prepare-authored.js callisto --write",
+    "exitCode": 0,
+    "result": {
+      "id": "callisto",
+      "runtime": true
+    },
+    "stage": ".local/object-preparation/callisto-bUiav3",
+    "log": {
+      "path": "docs/moons/b3-preparation/callisto-color-bake.log",
+      "bytes": 80,
+      "sha256": "08b56056ebb256b80c53b0b0cf13e7592629e8ccf7e4a9aa04d898ba83f42d04"
+    },
+    "freeDiskBeforeGiB": 157
+  },
+  "focusedTests": {
+    "command": "node --test --test-concurrency=1 tests/objects/unit/callisto/*.test.mjs",
+    "passed": 9,
+    "failed": 0,
+    "log": {
+      "path": "docs/moons/b3-preparation/callisto-color-tests-final.log",
+      "bytes": 1043,
+      "sha256": "63402ed527a2594063cfdf064479d41e1fe01fe9f56ac9b21e980fc88d3de13a"
+    },
+    "scope": "Exact source closure; independent named controls; every source texel/mask; actual shared decoder; six retained-atlas native color anchors; missing hemisphere/poles; normal-source Valhalla/dark/no-data checks; two-lens controls, focus, lighting, Jupiter orbit and runtime asset closure."
+  },
+  "initialTestAttempt": {
+    "passed": 8,
+    "failed": 1,
+    "log": {
+      "path": "docs/moons/b3-preparation/callisto-color-tests-initial.log",
+      "bytes": 1806,
+      "sha256": "d8f563f4fa88995f4bf2a311bd42916319f60af8bb3343f413e21191e3931721"
+    },
+    "reason": "An authored test incorrectly required falseColor in runtime.controls. Existing serialization keeps it in prepared/lenses.json and the material report. The test now checks those established owners; source and runtime bytes were not changed by this test correction."
+  },
+  "runtimeEvidence": [
+    {
+      "path": "src/planets/callisto/source/manifest.json",
+      "bytes": 16386,
+      "sha256": "b7059f087a11b2457d4e9f029e9c7b9c6b5d27aac895d7599c32aee926302957"
+    },
+    {
+      "path": "src/planets/callisto/source/content/object.json",
+      "bytes": 11502,
+      "sha256": "a18e1803468b2ab02cc46fd9fe5a3787d84a7f073e03e0ced8fb073159e40117"
+    },
+    {
+      "path": "src/planets/callisto/source/preparation/terrestrial.json",
+      "bytes": 2588,
+      "sha256": "8756e5b7371fa3533f55691b2267c89eb20472a2761280bd31b2693e5b21812a"
+    },
+    {
+      "path": "src/planets/callisto/prepared/lenses.json",
+      "bytes": 4079,
+      "sha256": "d9f2a8355297aae23ef7eddc0d12d1a43c8a8b073bd11a05ac8d96c6d1ac0e22"
+    },
+    {
+      "path": "src/planets/callisto/prepared/material.json",
+      "bytes": 19072,
+      "sha256": "a4fa7037348b6eb83b517cef4513d29ac4857fdad425fe7932b4e220657acdc1"
+    },
+    {
+      "path": "src/planets/callisto/prepared/runtime.json",
+      "bytes": 6315370,
+      "sha256": "97ff88edfeb3929b71f9c01904308aac187e717b6bae6be1087cbd6820160dd2"
+    },
+    {
+      "path": "src/planets/callisto/prepared/scene.json",
+      "bytes": 6128003,
+      "sha256": "df952cb5636928956d74d5d4202e7d61900337c3e3dee0c97b3268f5bd7106db"
+    },
+    {
+      "path": "src/planets/callisto/runtime-assets.json",
+      "bytes": 6134,
+      "sha256": "4c6921d51b6f6fc6dcf2c28c5b6b47e5f7067342b13f7c0b60981cef466619d9"
+    }
+  ],
+  "preparedFocus": {
+    "maximumZoom": 4,
+    "camera": {
+      "controlPitch": 91.08136443291932,
+      "controlYaw": -121.09359713629944,
+      "zoom": 1.1
+    }
+  }
 }

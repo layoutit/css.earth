@@ -21,6 +21,14 @@ const plan = {
 };
 const ids = selectedIds.length ? selectedIds : Object.keys(plan);
 assert.ok(ids.length && new Set(ids).size === ids.length && ids.every(id => plan[id]), 'Select unique B3 cohort IDs.');
+const dprs = process.env.B3_DPR ? [Number(process.env.B3_DPR)] : [1,2];
+assert.ok(dprs.every(dpr => [1,2].includes(dpr)), 'B3_DPR must be 1 or 2.');
+const lensFilter = process.env.B3_LENS;
+if (lensFilter) {
+  assert.equal(ids.length, 1, 'A single-lens capture requires one body.');
+  assert.ok(plan[ids[0]].includes(lensFilter), 'Select a prepared lens for this body.');
+  plan[ids[0]] = [lensFilter];
+}
 const stamp = new Date().toISOString().replaceAll(':', '-');
 const parentOut = resolve(root, 'output/playwright/b3-surfaces');
 const out = resolve(parentOut, `integrated-${stamp}`);
@@ -44,7 +52,7 @@ const fingerprint = async path => {
 await mkdir(parentOut, {recursive:true}); await mkdir(out);
 const report = {schema:'cssearth-b3-visual-capture@1', status:'RUNNING', startedAt:new Date().toISOString(),
   root, baseUrl, head:execFileSync('git', ['rev-parse','HEAD'], {cwd:root, encoding:'utf8'}).trim(),
-  script:await fingerprint(relative(root, process.argv[1])), viewport, dprs:[1,2], selectedIds:ids,
+  script:await fingerprint(relative(root, process.argv[1])), viewport, dprs, selectedIds:ids,
   fullCohort:Object.keys(plan), plannedViews:plan, outputBudgetBytes:maxOutputBytes,
   qualification:'Actual Chrome captures and runtime checks; visual review pending. No baseline/native parity or compositor-FPS claim.',
   cases:[], frozenFiles:[], sharedFiles:[], styleArtifacts:[], outputBytes:0, shutdown:{browserClose:'NOT_STARTED'}};
@@ -82,7 +90,7 @@ try {
   const launch = await conformanceBrowserLaunch({channel:'chrome', evidenceDirectory:out});
   report.chromeLaunch = launch.diagnostics;
   browser = await chromium.launch(launch.options); report.browserVersion = browser.version();
-  for (const id of ids) for (const dpr of [1,2]) await captureBody(id, dpr, bodyInputs.get(id));
+  for (const id of ids) for (const dpr of dprs) await captureBody(id, dpr, bodyInputs.get(id));
   for (const file of report.frozenFiles) assert.deepEqual(await fingerprint(file.path), file, `INVALID: file changed during capture: ${file.path}`);
   report.status = 'CAPTURED_UNREVIEWED';
 } catch (error) {

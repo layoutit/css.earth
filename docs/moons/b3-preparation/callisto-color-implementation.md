@@ -28,10 +28,20 @@ Four focused source tests pass. They check every derived texel against the
 original plate, independent landmark coordinates, the complete source/pin chain
 and the actual shared GeoTIFF decoder. Isolated source reproduction produced
 the identical compressed TIFF; a corrupted input pin rejected before writing.
-Exact evidence hashes and commands are in the companion JSON. Body preparation,
-actual retained-atlas tests and integrated browser qualification remain pending.
+Exact evidence hashes and commands are in the companion JSON. The normal body bake completed successfully, followed by all nine focused
+source, retained-atlas and runtime tests. Six independent native-window color
+anchors, missing hemisphere/poles, the normal mosaic and its source-facing
+camera pass. The final focus is controlPitch 91.0813644329°, controlYaw
+−121.0935971363°, zoom 1.1. Root-owned compiled descriptor/metadata refresh,
+integrated real-Chrome DPR 1/2 inspection and aggregate qualification remain
+pending. This report does not claim that those final application gates passed.
 
 The source manifest’s stale pre-existing content pin was corrected alongside
 the authored content update. Runtime tests now target the delivered atlas rather
 than a noncanonical intermediate map. No shared code, registry entry or
 remote publication was changed in this lane.
+
+The final bake and test logs are retained beside this report. The first test
+attempt exposed an incorrect test assertion about the owner of `falseColor`;
+it was corrected to `prepared/lenses.json`, which already held the true value.
+No raster, source or runtime mutation was required.
