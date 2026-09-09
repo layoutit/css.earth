@@ -8,9 +8,10 @@ import {conformanceBrowserLaunch} from '../../site/test/conformance-browser-laun
 const ids=['annefrank','braille'],origin='http://127.0.0.1:4278';
 const output=resolve('output/playwright/asteroid-spacecraft-gaps');await mkdir(output,{recursive:true});
 const browser=await chromium.launch((await conformanceBrowserLaunch({evidenceDirectory:output,redirectStdio:true})).options);
+const navigationOnly=process.argv.includes('--navigation-only');
 const results=[];
 try{
- for(const dpr of [1,2]){
+ for(const dpr of navigationOnly?[1]:[1,2]){
   const context=await browser.newContext({viewport:{width:1440,height:900},deviceScaleFactor:dpr});
   const page=await context.newPage(),errors=[],loads=[];
   page.on('pageerror',e=>errors.push(e.message));
@@ -21,7 +22,7 @@ try{
    loads.push({id,filename,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')});
    await route.fulfill({body:bytes,contentType:filename.endsWith('.webp')?'image/webp':'application/octet-stream'});
   });
-  for(const id of ids){
+  for(const id of navigationOnly?[]:ids){
    const start=loads.length;
    await page.goto(`${origin}/${id}/`,{waitUntil:'networkidle'});
    await page.waitForFunction(id=>document.documentElement.dataset.ready==='true'&&document.querySelector('.planet-stage')?.dataset.objectId===id,id);
@@ -61,11 +62,13 @@ try{
     await page.locator(`.planet-object-link[data-object-id="${id}"]:visible`).click();
     await page.waitForFunction(id=>document.documentElement.dataset.ready==='true'&&document.querySelector('.planet-stage')?.dataset.objectId===id,id);
     assert.equal(await page.locator('.planet-stage').count(),1);assert.equal(await page.locator('.polycss-camera').count(),1);
+    assert.equal(await page.locator('input[name="shadows"]').isChecked(),false);
+    assert.equal(await page.locator(`.${id}-body > u[data-polycss-texture-leaf-sizing="raster"]`).count(),480);
    }
    results.push({navigation:{asteroidCount:listed.length,listed:ids,searchAndHandoff:ids,oneCamera:true,oneScene:true}});
   }
   assert.deepEqual(errors,[]);await context.close();
  }
- await writeFile('docs/asteroid-spacecraft-gaps/browser-validation.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:browser.version(),headless:true,origin,viewport:{width:1440,height:900},scope:'Production routes; new scene images served from the independently downloaded installation. Default and close views; optional shadows through the bound control change event because main hides the settings action; shared category, search and in-page navigation.',results},null,2)+'\n');
- console.log('DPR 1/2 fresh asset, default settings, native triangles and shared navigation checks passed');
+ await writeFile(navigationOnly?'docs/asteroid-spacecraft-gaps/navigation-final.json':'docs/asteroid-spacecraft-gaps/browser-validation.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:browser.version(),headless:true,origin,viewport:{width:1440,height:900},scope:navigationOnly?'Final integrated production category, search and handoff using the fresh scene image installation.':'Production routes; new scene images served from the independently downloaded installation. Default and close views; optional shadows through the bound control change event because main hides the settings action; shared category, search and in-page navigation.',results},null,2)+'\n');
+ console.log(navigationOnly?'Integrated shared navigation checks passed':'DPR 1/2 fresh asset, default settings, native triangles and shared navigation checks passed');
 }finally{await browser.close();}
