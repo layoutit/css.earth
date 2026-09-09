@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-borrelly-qualification@1",
+  "geometry": {
+    "usgs": 994,
+    "dlr": 1862,
+    "retainedLeaves": 2856
+  },
+  "sourceTests": 5,
+  "genericDemAndScienceTests": 8,
+  "sourceClosureTests": 3,
+  "sharedDatasetAndRouterTests": 39,
+  "ciUniversePreparationTests": 354,
+  "ciShellAndActivationTests": 331,
+  "ciRendererTests": 242,
+  "conformance": [
+    "[conformance] PASS comet-19p/initial-shell (622ms)",
+    "[conformance] PASS comet-19p/desktop (12715ms)",
+    "[conformance] PASS comet-19p/mobile (3593ms)",
+    "[conformance] PASS comet-19p/pre-ready-hidden-motion-off (3288ms)",
+    "[conformance] PASS comet-19p/pre-ready-visible-motion-off (3319ms)",
+    "[conformance] PASS comet-19p/pre-ready-hidden-motion-on (3218ms)",
+    "[conformance] PASS comet-19p/pre-ready-visible-motion-on (3380ms)",
+    "[conformance] PASS comet-19p/dpr-1 (21697ms)",
+    "[conformance] PASS comet-19p/dpr-2 (22332ms)",
+    "[conformance] PASS comet-19p/lens-race (3101ms)",
+    "[conformance] PASS comet-19p/lens-reacquire (3149ms)",
+    "[conformance] PASS comet-19p/lens-rejection (3427ms)",
+    "[conformance] PASS comet-19p/lens-destroy (3178ms)"
+  ],
+  "productionBuildPages": 302,
+  "integration": {
+    "base": "ef2d27b2da3e774b2410f216b0e6024b972ee39a",
+    "existingPackagesPreserved": 300,
+    "allowedChanges": "Semantic marker bindings, payload hashes, and the Sun source pin for adding Borrelly."
+  },
+  "scope": "Source, geometry, prepared materials, shared runtime and browser checks for this body. Physical mobile hardware and a fresh unrestricted all-body preparation run are not claimed."
+}

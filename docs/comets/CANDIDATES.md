@@ -1,6 +1,6 @@
 # Further comet intake
 
-The seven comet scenes include 67P, Hartley 2, Tempel 1, the completed PDS Wild 2 model, Halley's historical model Tuttle's two inferred contact models, and Borrelly's observed terrain. The original archive survey was made on 8 September 2026; the Tuttle comparison was added on 9 September. An unresolved candidate is not a claim that usable data does not exist.
+The seven comet scenes include 67P, Hartley 2, Tempel 1, the completed PDS Wild 2 model, Halley's historical model, Tuttle's two inferred contact models, and Borrelly's observed terrain. The original archive survey was made on 8 September 2026; the Tuttle comparison was added on 9 September. An unresolved candidate is not a claim that usable data does not exist.
 
 ## Wild 2: completed PDS model selected
 
