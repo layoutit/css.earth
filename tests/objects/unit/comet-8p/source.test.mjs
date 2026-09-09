@@ -9,13 +9,12 @@ const json = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'
 const near = (actual, expected, tolerance) => assert.ok(Math.abs(actual - expected) < tolerance, `${actual} vs ${expected}`);
 
 test('each model product binds its own shape source without blending the alternative', async () => {
-  const {prepareObjectProvenance} = await import('../../../../tools/objects/provenance.mjs');
-  const {fileURLToPath} = await import('node:url');
-  const objectDirectory=fileURLToPath(new URL('../',root));
-  const document=await prepareObjectProvenance({objectDirectory,outputDirectory:objectDirectory+'prepared',
-    publicDirectory:fileURLToPath(new URL('../../../../public/scenes/comet-8p/',import.meta.url)),write:false});
-  assert.deepEqual(document.products.find(p=>p.id==='model').inputs,['model-surface','contact-model']);
-  assert.deepEqual(document.products.find(p=>p.id==='arecibo').inputs,['arecibo-surface','arecibo-model']);
+  const {provenanceProducts} = await import('../../../../tools/objects/provenance-recipes.mjs');
+  const document=provenanceProducts({id:'comet-8p',
+    recipes:new Map([['terrestrial',{parameters:await json('preparation/terrestrial.json')}]]),
+    manifest:await json('manifest.json'),lenses:(await json('content/object.json')).lenses,assets:{}});
+  assert.deepEqual(document.products.find(p=>p.id==='model').inputPaths,['material/neutral.png','shape/model.json']);
+  assert.deepEqual(document.products.find(p=>p.id==='arecibo').inputPaths,['material/arecibo-neutral.png','shape/arecibo.json']);
 });
 
 test('Arecibo retains the published dimensions without Spitzer rescaling', async () => {

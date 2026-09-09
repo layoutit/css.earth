@@ -1,11 +1,11 @@
 # Comet scenes
 
-Six independently selectable nucleus packages use the generic object registry. The shared shell and camera remain the owners of interaction. Tuttle, Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. All geometry, maps, normals and shadows are prepared before runtime.
+Six independently selectable nucleus packages use the generic object registry. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. Tuttle retains two separate 1,000-triangle models and displays only the selected one. All geometry, maps, normals and shadows are prepared before runtime.
 
 | Object | Geometry source | What the default view represents |
 | --- | --- | --- |
 | [1P/Halley](../../src/planets/comet-1p/SOURCE.md) | Stooke's historical Giotto/Vega radius grid, 2,701 rows | Highly uncertain historical shape with neutral material and an illustrative fixed attitude. |
-| [8P/Tuttle](../../src/planets/comet-8p/SOURCE.md) | Hubble contact-sphere model with Spitzer thermal size constraints | Smooth inferred shape with a fixed illustrative rotation phase. |
+| [8P/Tuttle](../../src/planets/comet-8p/SOURCE.md) | Hubble/Spitzer contact spheres and an alternative Arecibo contact-ellipsoid model | Hubble/Spitzer is the default; Arecibo uses a separate inferred shape at the same physical scale. Both have illustrative attitudes. |
 | [67P/Churyumov–Gerasimenko](../../src/planets/comet-67p/SOURCE.md) | ESA/RMOC MTP019, 104,192 source triangles | Rosetta nucleus geometry with a neutral gray model material. The neck and non-convex topology are retained. |
 | [103P/Hartley 2](../../src/planets/comet-103p/SOURCE.md) | Farnham & Thomas (2013), EPOXI PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. The cartographic long axis is not treated as a spin axis. |
 | [9P/Tempel 1](../../src/planets/comet-9p/SOURCE.md) | Farnham & Thomas (2013), combined Deep Impact/Stardust-NExT PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. |
@@ -41,4 +41,4 @@ the MiARD candidate disposition and source-selection evidence.
 
 [Wild 2, Tempel 1 and Hartley 2 encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the five optional photographic views, selected spacecraft products, camera checks and coverage limits.
 
-[Tuttle](TUTTLE.md) records the sixth comet, its model selection, independent geometry/orbit checks and delivery evidence.
+[Tuttle](TUTTLE.md) records the sixth comet and its independent geometry/orbit checks. [The Arecibo comparison](TUTTLE-ARECIBO.md) records both datasets and the current browser, delivery and drag evidence.

@@ -1,5 +1,7 @@
 # Tuttle inferred nucleus
 
+This is the original single-dataset review. [The Arecibo comparison](TUTTLE-ARECIBO.md) supersedes its dataset count, thumbnails, scene bank, transfer sizes and browser/performance results. The source geometry, HST pole and orbital checks below remain applicable.
+
 Tuttle adds a sixth comet at `/comet-8p/`, using the same scene, camera, settings
 and navigation as the existing bodies. Its **Inferred shape** dataset has two
 smooth touching lobes. The explanation identifies the unknown surface detail

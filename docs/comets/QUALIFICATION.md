@@ -1,6 +1,6 @@
 # Qualification record
 
-[Tuttle](TUTTLE.md) adds the sixth comet with a source-backed inferred contact model, independent size/pole/orbit checks, and fresh published-asset restoration. Its record separates current focused results from unresolved aggregate failures.
+[Tuttle](TUTTLE.md) adds the sixth comet with independent size/pole/orbit checks. [Its Arecibo comparison](TUTTLE-ARECIBO.md) qualifies two separate inferred models, dataset-specific surface targeting, and a fresh restoration of all 34 published assets. The records separate focused passes from unresolved aggregate failures.
 
 [Encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the latest Wild 2, Tempel 1 and Hartley 2 material qualification. Earlier geometry records below retain their original scope.
 

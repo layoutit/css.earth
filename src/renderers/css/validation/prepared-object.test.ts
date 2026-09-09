@@ -21,7 +21,7 @@ test('external transport cannot silently omit prepared activation ownership', ()
 });
 
 test('Tuttle transport preserves selection ranges and rejects incomplete or invalid picking banks', async () => {
-  const original = JSON.parse(await readFile(new URL('../../../planets/comet-8p/prepared/object.json', import.meta.url), 'utf8')).data;
+  const original = JSON.parse(await readFile(new URL('../../../planets/comet-8p/prepared/runtime.json', import.meta.url), 'utf8'));
   const parsed = parsePreparedObjectRuntime(original);
   assert.deepEqual(parsed.surfaceHit?.lensRanges, [
     {lensId: 'model', start: 0, count: 1000}, {lensId: 'arecibo', start: 1000, count: 1000},
