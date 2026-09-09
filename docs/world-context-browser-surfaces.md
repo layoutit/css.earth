@@ -1410,3 +1410,87 @@ are single runs, so they do not establish a precise sampling overhead. They do
 show that disabling CPU sampling does not remove the recurring stalls. This is
 not a product improvement or a replacement for the fully instrumented baseline.
 The performance target remains unmet.
+
+## Rejected numeric publication, scratch storage and overflow trials
+
+Three additional trials do not justify product changes. All use the same fully
+instrumented route and 258-body catalog. The reference is the overview-owner
+capture above; elapsed totals are single-run observations, not isolated CPU costs.
+
+| Planetary-band measurement | Reference | CSS Typed OM | Retained projection scratch | Scene overflow clip |
+| --- | ---: | ---: | ---: | ---: |
+| Intervals >25 ms | 17/740 | 87/722 | 20/742 | 19/745 |
+| Callback elapsed total (ms) | 4217.114 | 4218.309 | 4201.763 | 4362.395 |
+| Style elapsed total (ms) | 1650.511 | 3278.094 | 1660.155 | 1686.417 |
+| Layer elapsed total (ms) | 2044.080 | 2043.032 | 2126.404 | 2119.352 |
+
+- CSS Typed OM replaces only the orbit matrix writer in the served response,
+  retaining six-decimal coefficients, visibility and alpha. Style time roughly
+  doubles in this trial. The exact original/replaced HTTP bodies are retained;
+  an earlier guard failure caused by Vite import rewriting remains unqualified.
+- Retained eye/screen scratch storage produces 990,257 exactly matching segments
+  and passes 70 focused tests, but does not meaningfully reduce callback time.
+  Its complete five-file patch is saved with the capture and reverted.
+- `overflow: clip` on the scene and viewport preserves clipping without making
+  those elements scroll containers. This browser-only trial does not reduce
+  layout or stalls; the sidebar's scrolling was unchanged.
+
+Each trial passes 24 DPR 1/2 comparisons with exact camera, geometry, label and
+retained-node state and at most 1/255 full-frame differences. Native Saturn orbit
+hover/click retains circle growth, immediate selection and one landed camera.
+These checks qualify the comparisons, not adoption of the rejected approaches.
+
+Synchronized recorder JSON, Chrome trace gzip, video and source/response receipts
+are retained in `output/world-context-zoom/`:
+
+| Capture | Recorder ID | Observed/encoded frames | Clock drift | Maximum PTS error |
+| --- | --- | ---: | ---: | ---: |
+| `typed-orbit-publication-trial-dpr2` | `34160e8a-142a-4b28-abff-cce466b39a73` | 2912/2912 | +38 µs | 1.469 ms |
+| `projection-workspace-dpr2` | `9ba58227-93ed-4680-932b-e0527ecb5107` | 2934/2934 | -55 µs | 1.467 ms |
+| `scene-overflow-clip-trial-dpr2` | `5a18dd88-0ee7-42b7-82b5-fa23cb5b251b` | 2911/2911 | +91 µs | 1.388 ms |
+
+All three retain world/input/document identity and one camera, with no errors,
+HMR during recording or trace loss. They are based on `7ea823da4`; recorded
+source hashes and patches are rechecked after capture. No trial implementation
+is included in product code.
+
+## Interaction events own hover and focus state
+
+World publication polled each retained body's group, label, marker and indicator
+hover attributes, plus the document's active element, on every camera sample.
+The existing `objecthoverchange`, `focusin` and `focusout` events now invalidate
+that state. The next publication reads the active element once and refreshes
+body interaction state; later camera-only publications reuse it. Hover emphasis
+and keyboard focus remain separate, so focusing one body while hovering another
+preserves both behaviors. Retired bodies also receive interaction changes before
+re-entry. No geometry, DOM capacity, visual policy or CSS variables change.
+
+The regression checks zero interaction readbacks across camera-only updates,
+interaction consumption before the scheduled annotation callback, coalesced
+events, retirement/re-entry, blur and destruction. All 68 focused renderer tests,
+renderer typecheck and build pass. The 24 DPR 1/2 comparisons preserve exact
+camera, orbit styles, labels and nodes with differences at most 1/255. Native
+input keeps Mars keyboard-focused while Saturn's orbit shows a pointer and grows
+its circle from 16 to 20 px; clicking immediately selects Saturn and lands with
+one camera. Evidence is in `output/playwright/interaction-state-owner/`.
+
+| Measurement | Overview-owner reference | Interaction event ownership |
+| --- | ---: | ---: |
+| Whole-route intervals >25 ms | 19/3469 | 18/3477 |
+| Planetary-band intervals >25 ms | 17/740 | 15/750 |
+| Planetary-band callback elapsed total | 4217.114 ms | 3858.749 ms |
+| Planetary-band style elapsed total | 1650.511 ms | 1677.455 ms |
+| Planetary-band layer elapsed total | 2044.080 ms | 2117.891 ms |
+| Galaxy-drag intervals >25 ms | 0/243 | 1/242 |
+| Whole-route maximum | 50 ms | 33.4 ms |
+
+The readback removal is verified; the roughly 8.5% lower callback total is one
+capture per version, not a statistical frame-rate claim. Browser style/layer
+cost persists and **the overall smoothness target remains unmet**.
+
+`output/world-context-zoom/interaction-state-owner-dpr2/` records
+`fa2da987-07fe-476a-9c77-9055220a1eb6`, base `7ea823da4` plus the exact two-file
+source patch. All 26 source hashes and that patch match after capture. It includes
+synchronized recorder JSON, trace gzip, video and loaded-resource receipts, with
+2932/2932 frames, +19 µs clock drift and 1.450 ms maximum PTS error. There are no
+errors, HMR or trace loss; world/input/document identity and one camera remain.

@@ -359,6 +359,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
       orbitProjection: createRetainedRingProjection(pieces.length),
       publishedEmphasis: undefined as string | null | undefined,
+      hovered: false, groupHovered: false,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, previousCount: 0,
       fade: { element: label, target: 0, hideTimer: null } as LabelFadeState };
   });
@@ -431,7 +432,9 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   const fonts = host.ownerDocument.fonts;
   fonts?.addEventListener('loadingdone', invalidateLabelSizes);
   let annotationFrame: number | null = null;
+  let interactionDirty = true;
   const refreshAnnotations = () => {
+    interactionDirty = true;
     if (destroyed || annotationFrame !== null) return;
     annotationFrame = windowTarget.requestAnimationFrame(() => {
       annotationFrame = null;
@@ -514,6 +517,18 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         throw new TypeError('Context and camera reference frames differ.');
       }
       latest = { world, viewport };
+      // Hover/focus events own interaction changes. A camera sample consumes
+      // their latest state without polling every retained body's DOM again.
+      if (interactionDirty) {
+        interactionDirty = false;
+        const activeElement = host.ownerDocument.activeElement;
+        for (const entry of bodies) {
+          entry.groupHovered = entry.group.dataset.objectHovered === 'true';
+          entry.hovered = entry.groupHovered || entry.label.dataset.objectHovered === 'true' ||
+            entry.marker.dataset.objectHovered === 'true' || entry.indicator.dataset.objectHovered === 'true' ||
+            activeElement === entry.label || activeElement === entry.indicator;
+        }
+      }
       const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
       const opacity = 1 - logarithmicFade(distanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
       // Publish the first zero-opacity frame normally to retire picking and
@@ -608,7 +623,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const parentDepth = parentEye === null ? 0 : -parentEye[2];
         const parentDiameter = entry.parent && parentDepth > entry.parent.radiusM
           ? 2 * focal * entry.parent.radiusM / Math.sqrt(parentDepth ** 2 - entry.parent.radiusM ** 2) : 0;
-        const hovered = entry.group.dataset.objectHovered === 'true' || label.dataset.objectHovered === 'true' || marker.dataset.objectHovered === 'true' || indicator.dataset.objectHovered === 'true' || host.ownerDocument.activeElement === label || host.ownerDocument.activeElement === indicator;
+        const hovered = entry.hovered;
         const bounds = entry.orbit?.bounds;
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
         if (navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 &&
@@ -722,7 +737,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         // Retain culled proxies without publishing transforms they cannot draw.
         // The current camera supplies their complete state on the reveal frame.
         if (markerShown) {
-          marker.style.opacity = String(markerOpacity * (emphasizedId !== null && body.id !== emphasizedId && entry.group.dataset.objectHovered !== "true" ? .75 : 1));
+          marker.style.opacity = String(markerOpacity * (emphasizedId !== null && body.id !== emphasizedId && !entry.groupHovered ? .75 : 1));
           marker.style.transform = `translate(${x}px,${y}px) scale(${Math.max(2.4, diameter) / entry.sprite.size})`;
         }
         if (!navigationIndicatorsVisible) continue;

@@ -207,6 +207,46 @@ test('keyboard focus also reveals a hidden label and orbit, then retires them on
   layer.destroy();
 });
 
+test('camera publication consumes interaction changes without polling retained DOM state', () => {
+  const root = mount(1), layer = mounted.get(root)!, host = root.parentNode!;
+  const group = find(root, 'contextGroup', 'mercury');
+  const label = find(root, 'contextLabel', 'mercury');
+  const circle = find(root, 'contextIndicator', 'mercury');
+  let hovered: string | undefined, focused: FakeElement | null = null;
+  let hoverReads = 0, focusReads = 0;
+  Object.defineProperty(group.dataset, 'objectHovered', { get() { hoverReads++; return hovered; } });
+  Object.defineProperty(root.ownerDocument, 'activeElement', { get() { focusReads++; return focused; } });
+  const publish = (distance = 1_000) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels: 800, heightPixels: 600 });
+  layer.setHiddenLabels(['mercury']);
+  for (let distance = 1_000; distance < 1_020; distance++) publish(distance);
+  expect(hoverReads).toBe(0); expect(focusReads).toBe(0);
+  hovered = 'true';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  // A camera sample can arrive before the scheduled annotation callback.
+  publish();
+  expect(label.style.visibility).toBe('');
+  expect(hoverReads).toBe(1); expect(focusReads).toBe(1);
+  root.ownerDocument.defaultView.advance(16);
+  expect(hoverReads).toBe(1); expect(focusReads).toBe(1);
+  publish(1e31); // Retire non-anchor publication.
+  hovered = undefined; focused = circle;
+  host.dispatchEvent(new Event('objecthoverchange'));
+  host.dispatchEvent(new Event('focusin'));
+  publish(1e31); publish();
+  expect(label.style.visibility).toBe('');
+  expect(hoverReads).toBe(2); expect(focusReads).toBe(2);
+  focused = null; host.dispatchEvent(new Event('focusout'));
+  publish(); root.ownerDocument.defaultView.advance(200);
+  expect(label.style.visibility).toBe('hidden');
+  expect(hoverReads).toBe(3); expect(focusReads).toBe(3);
+  layer.destroy();
+  host.dispatchEvent(new Event('objecthoverchange'));
+  root.ownerDocument.defaultView.advance(200);
+  expect(hoverReads).toBe(3); expect(focusReads).toBe(3);
+});
+
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   expect(parsePreparedWorldContext(source).bodies.map(body => body.id).sort())
@@ -710,8 +750,10 @@ test('crowded labels keep selection and hover priority, disable hidden targets, 
   venus.dispatchEvent(new Event('click')); expect(selections).toEqual([]);
   layer.selectObject('venus'); publish(); expect(shown()).toEqual(['Venus']);
   find(root, 'contextBody', 'mercury').dataset.objectHovered = 'true';
+  host.dispatchEvent(new Event('objecthoverchange'));
   publish(); expect(shown()).toEqual(['Venus']); // The selected label keeps priority over hover.
   delete find(root, 'contextBody', 'mercury').dataset.objectHovered;
+  host.dispatchEvent(new Event('objecthoverchange'));
   layer.selectObject('sun');
   publish(9200); expect(shown()).toEqual(['Venus']); // Keep the previously visible label until there is clearance.
   publish(10000); expect(shown()).toEqual(['Mercury', 'Venus']);
