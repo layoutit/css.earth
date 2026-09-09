@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a43400680ea8c003ff6833957f13abbaffc6d470d200c54c493cf3d61885ddf8"
+    "sha256": "7a5cd5f7ed695947e6fce4efa592de36f9131035b41b914f450008c2c5e38d1e"
   },
   "id": "earth",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "0f7a222edb670316ba156b94c33470255baecde253a00afffc3e7d91e4ecf140"
+          "sha256": "db931371818e779e87a3233a049e910f2c980942be962d2cf1be3a31ee9a66b9"
         },
         {
           "id": "celestial",
@@ -36,12 +36,12 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "a9cd18b8f0bebd7332da0c489b1ae35468beacc21050ccf690bd40750cd11f4f"
+          "sha256": "9d0704025475fa2828dc14d05fab7fb1a4f6a89bb237f8fce4803347f70ec1d0"
         },
         {
           "id": "lens-bindings",
           "path": "source/content/lens-bindings.json",
-          "sha256": "a4ab8b2f7bdb2890a22abf39d99712d5dfa49a31f59daece727827a0867238ed"
+          "sha256": "53ceedbdf8ccda01faba4ee44c52dbaa554cec07ed8bda450926c55589c803e1"
         },
         {
           "id": "charts",
@@ -61,7 +61,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "779c8e99f2b5046b9d543bb38b3c75acd9d0cb402a9758f040dd877792491309"
+          "sha256": "9126721bea166278882e757976f8151a2009bc19cc80467ad71bafe8950856f2"
         },
         {
           "id": "mantle-tomography",

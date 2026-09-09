@@ -1,0 +1,34 @@
+---
+import PlanetCardHeader from './PlanetCardHeader.astro';
+import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
+import PlanetObjectResult from './PlanetObjectResult.astro';
+import { PLANET_SEARCH_OBJECTS } from '../planet-search-objects.mjs';
+import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+const { objectId, title, introduction } = Astro.props;
+const hasImage = existsSync(resolve(`public/social/${objectId}.jpg`));
+const children = new Set(preparedWorld.bodies
+  .filter(body => body.orbit?.centerBodyId === objectId).map(body => body.id));
+const moons = PLANET_SEARCH_OBJECTS.filter(object =>
+  object.classification === 'satellite' && children.has(object.id));
+---
+
+<PlanetCardHeader {title} {introduction} data-body-overview>
+  <PlanetBreadcrumbs {objectId} />
+  {hasImage && <img slot="image" class="planet-body-overview-image" src={`/social/${objectId}.jpg`}
+    width="1200" height="630" alt={title.label} loading="lazy" decoding="async" />}
+</PlanetCardHeader>
+<div class="planet-object-tabs" data-body-overview role="tablist" aria-label="Orbiting objects">
+  <button type="button" role="tab" id={`${objectId}-moons-tab`}
+    aria-controls={`${objectId}-moons-content`} aria-selected="true" tabindex="0">
+    <span>Moons</span>{' '}<span class="planet-object-tab-count">({moons.length})</span>
+  </button>
+</div>
+<div class="planet-object-results-scroll" data-body-overview id={`${objectId}-moons-content`}
+  role="tabpanel" aria-labelledby={`${objectId}-moons-tab`} tabindex="0">
+  {moons.length > 0 ? <ul class="planet-object-list">
+    {moons.map(object => <PlanetObjectResult {object} />)}
+  </ul> : <p class="planet-object-empty">No moons in the catalogue</p>}
+</div>

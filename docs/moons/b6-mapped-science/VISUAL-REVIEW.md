@@ -5,11 +5,15 @@ silicate signature, Europa geology and Galileo NIMS infrared, Callisto NIMS
 infrared, and Charon modeled Bond albedo. Their coverage, units and interpretation
 are visible beside each map. Existing default views remain available.
 
-**Selected-body qualification: PASS.** Source checks, affected package checks,
+**Selected-body qualification at the capture base: PASS.** Source checks, affected package checks,
 mounted Chrome checks and fresh runtime delivery passed. The PR remains a draft
 pending repository-wide integration gates described below. This document records
 the inspected result on 2026-09-09; automated capture receipts deliberately retain
 their original `CAPTURED_UNREVIEWED` status.
+
+Main through PR #75 has since been integrated. The combined branch passes 100
+affected tests and all four package checks; [integration evidence](INTEGRATION.md)
+records the marker-reference conflict resolution and the remaining browser gap.
 
 ## The six views
 
@@ -170,8 +174,9 @@ and [completed](evidence/checks/b6-build-renderer-complete.json) receipts are re
 
 The full production site build, aggregate `pnpm test`, all-object source
 verification and all-object browser conformance have not run for this PR.
-The branch's browser evidence is against its stated base, before the two newer
-main commits from PRs #73 and #74. GitHub's shared-universe workflow checks the
+The branch's browser evidence is against its stated capture base, before the
+newer main commits from PRs #73, #74 and #75. Those commits are now integrated,
+but browser capture has not been repeated against the combined tree. GitHub's shared-universe workflow checks the
 merged tree, but does not substitute for those full-site gates. These boundaries
 keep the PR in draft; focused qualification alone is not a merge-ready claim.
 

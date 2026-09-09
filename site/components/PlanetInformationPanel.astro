@@ -1,6 +1,7 @@
 ---
 import type { Props } from "../planet-shell-types";
 import PlanetBreadcrumbs from "./PlanetBreadcrumbs.astro";
+import PlanetBodyOverview from "./PlanetBodyOverview.astro";
 import { orderScientificCharts } from "../scientific-chart-order.mjs";
 import PlanetCard from "./PlanetCard.astro";
 import PlanetCardHeader from "./PlanetCardHeader.astro";
@@ -20,6 +21,7 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
 ---
 
 <PlanetCard class="planet-information-panel">
+      <PlanetBodyOverview {objectId} {title} {introduction} />
       {destinations && <section class="planet-destination-intro">
         <button class="planet-find-destination" type="button">Find a city</button>
         <p>{destinations.description}</p>

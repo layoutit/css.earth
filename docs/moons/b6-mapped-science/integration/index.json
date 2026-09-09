@@ -1,0 +1,75 @@
+{
+  "upstream": "eecf9d5879433ed6398529274670a0ef73d47b04",
+  "files": [
+    {
+      "path": "merge.json",
+      "bytes": 549,
+      "sha256": "0a13f590253aca0fb0bf3583b85b6db436428b98554059be9d3048f422102367"
+    },
+    {
+      "path": "packages.json",
+      "bytes": 60578,
+      "sha256": "f8b34e0f5f29d6c5df1b63b0c85401b955a1f503448b53ce59dfae64de6dec22"
+    },
+    {
+      "path": "b6-integrated-build-packages.json",
+      "bytes": 1455,
+      "sha256": "1abb6e60d2495433438602e2203425d9c1e440e726bb6721cb22381a53cdb46c"
+    },
+    {
+      "path": "b6-integrated-build-packages.log",
+      "bytes": 2424,
+      "sha256": "23804a058e0db237b5033ca206506f0f158c65faa879e116357af8c9287c8006"
+    },
+    {
+      "path": "b6-integrated-build-renderer.json",
+      "bytes": 1749,
+      "sha256": "a5d0da97736ebedcd568589fa727d65c4cfeba0bf59bab1cc298b30bd7c40e66"
+    },
+    {
+      "path": "b6-integrated-build-renderer.log",
+      "bytes": 5809,
+      "sha256": "cd4781d0097ba27dbd658de78af25288c0acbf585b6ea009af7bf2437a27f44c"
+    },
+    {
+      "path": "b6-integrated-build-preparation.json",
+      "bytes": 507,
+      "sha256": "27805d29afc6fa9d3e5dbd2581b01569f10607d210ab736967a1c21ff6fa3386"
+    },
+    {
+      "path": "b6-integrated-build-preparation.log",
+      "bytes": 1398,
+      "sha256": "1428eb83895b9b75b380b99fa72d6fdcfb13b042b334f56696b1b3e2cb5e4d4d"
+    },
+    {
+      "path": "b6-integrated-tests.json",
+      "bytes": 4727,
+      "sha256": "38b864df08692c9f0646ff9b9466a76cabe62ce57748696d4b8ab317cfa8194b"
+    },
+    {
+      "path": "b6-integrated-tests.log",
+      "bytes": 9925,
+      "sha256": "2efd50182b1241cd45428daf4c5a903502f3ee74a85b601d5805e465fdfbf7d6"
+    },
+    {
+      "path": "b6-integrated-package-closure.json",
+      "bytes": 1952,
+      "sha256": "fa22faba364b3f6b3d18943176ad87e5712be8d6ecd5059dd08c8c9dcd97b79d"
+    },
+    {
+      "path": "b6-integrated-package-closure.log",
+      "bytes": 772,
+      "sha256": "0ca82ada972025cd3627839039ec24e8f00b15b109fbb372d93bf994d554bbdc"
+    },
+    {
+      "path": "b6-astro-audit-regression.json",
+      "bytes": 565,
+      "sha256": "5265c5dd34d10664fb62d1124b9eb6889d3033759836422fa40e1422ba8cc07a"
+    },
+    {
+      "path": "b6-astro-audit-regression.log",
+      "bytes": 424,
+      "sha256": "9ac235d87e7b8b84b872d1f2afefcecdaa9f24d82ce2c7920d77feb6608aaad7"
+    }
+  ]
+}

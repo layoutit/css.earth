@@ -7,7 +7,7 @@ import {validatePlanetData} from '../../../tools/object-package-contract.mjs';
 import {auditObjectRuntimeOwnership} from '../../../tools/check-object-runtime-ownership.mjs';
 import {loadPlanetBrowserProfile} from '../../../site/test/load-browser-profile.mjs';
 
-const ids=['moon','europa','callisto','charon'],base='b3a0410f742501a1a1552dea14d9a3730fce7484';
+const ids=['moon','europa','callisto','charon'],base=process.env.B6_QUALIFICATION_BASE ?? 'b3a0410f742501a1a1552dea14d9a3730fce7484';
 const objects=OBJECTS.filter(object=>ids.includes(object.id));assert.equal(objects.length,4);
 const frozen=execFileSync('git',['diff','--name-only',base,'--','src/renderers','site','src/navigation'],{encoding:'utf8'}).trim();
 assert.equal(frozen,'','Renderer, shell, navigation and camera code stay fixed');

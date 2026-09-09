@@ -973,6 +973,24 @@
       ],
       "expectedBytes": 520307,
       "expectedSha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb"
+    },
+    {
+      "id": "nasa-black-marble-2025-public-radiance",
+      "path": "science/night-lights-2025/radiance.zip",
+      "expectedSha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480",
+      "expectedBytes": 973526576,
+      "origin": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip",
+      "credit": "NASA Black Marble science team; Jurij Stare, www.lightpollutionmap.info",
+      "license": "NASA Earth science open data (CC0); public mosaic with publisher attribution",
+      "licenseEvidence": [
+        "https://www.lightpollutionmap.info/help.html#faq",
+        "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy"
+      ],
+      "acquisition": "2025 VJ146A4.002 AllAngle_Composite_Snow_Free, public Float32 EPSG:4326 mosaic. Archive checked 2026-09-09; HTTP Last-Modified 2026-03-29. Native 15 arc-second cells, 75 N to 65 S. QA/count bands are not included by the mirror; -999.9 is missing and zero is valid thresholded background.",
+      "redistribution": "NASA factual radiance with NASA Black Marble and Jurij Stare / lightpollutionmap.info attribution; no map screenshots or sky-brightness model reused.",
+      "consumers": [
+        "lenses"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -1034,8 +1052,8 @@
     },
     {
       "path": "interior/earth-interior.json",
-      "expectedSha256": "8b4b1e2d02d985ae83cb0b156b926ca140240002a6e0e3f0af6bc66f35c21fbc",
-      "expectedBytes": 1070,
+      "expectedSha256": "26c32ab22618b14d98c582dcf2e924e5a52d20f8715447a6bd1a60475d7d1c4a",
+      "expectedBytes": 1106,
       "purpose": "Source-qualified schematic Earth interior presentation specification"
     },
     {
@@ -1070,8 +1088,8 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 11653,
-      "expectedSha256": "0f7a222edb670316ba156b94c33470255baecde253a00afffc3e7d91e4ecf140",
+      "expectedBytes": 13283,
+      "expectedSha256": "db931371818e779e87a3233a049e910f2c980942be962d2cf1be3a31ee9a66b9",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -1082,14 +1100,14 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16141,
-      "expectedSha256": "a9cd18b8f0bebd7332da0c489b1ae35468beacc21050ccf690bd40750cd11f4f",
+      "expectedBytes": 17045,
+      "expectedSha256": "9d0704025475fa2828dc14d05fab7fb1a4f6a89bb237f8fce4803347f70ec1d0",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 4908,
-      "expectedSha256": "a4ab8b2f7bdb2890a22abf39d99712d5dfa49a31f59daece727827a0867238ed",
+      "expectedBytes": 5251,
+      "expectedSha256": "53ceedbdf8ccda01faba4ee44c52dbaa554cec07ed8bda450926c55589c803e1",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -1118,8 +1136,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 27625,
-      "expectedSha256": "779c8e99f2b5046b9d543bb38b3c75acd9d0cb402a9758f040dd877792491309",
+      "expectedBytes": 31726,
+      "expectedSha256": "9126721bea166278882e757976f8151a2009bc19cc80467ad71bafe8950856f2",
       "purpose": "Authored source acquisition and exact pinned derived-record restoration."
     },
     {
@@ -1146,6 +1164,12 @@
       "purpose": "EarthScope catalog, citations and model revision history.",
       "expectedBytes": 8464,
       "expectedSha256": "f996e2ca9eee380309ccd1f9fec00f7a35d66505088fb67b6102040e52c5cb4e"
+    },
+    {
+      "path": "science/night-lights-2025/provenance.json",
+      "expectedSha256": "e6a1704233f77c3721264de924a5b6e14a291ef78fd4d52db034a89ad32fc5a0",
+      "expectedBytes": 3060,
+      "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations."
     }
   ]
 }

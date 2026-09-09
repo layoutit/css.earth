@@ -13,5 +13,6 @@ const titleDescent = title.renderHeight - (title.baseline + title.renderPathOffs
       </svg>
     </h1>
   </div>
+  <slot name="image" />
   {introduction && <p class="planet-introduction">{introduction}</p>}
 </section>
