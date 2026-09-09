@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-209p",
+  "displayName": "LINEAR",
+  "panel": {
+    "introduction": "LINEAR releases very little gas for a comet of its size. Its close approach in 2014 let Arecibo measure the nucleus through the surrounding dust.",
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Nucleus size",
+        "value": "\u22483.9 \u00d7 2.7 \u00d7 2.6 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "\u224810.9 hours"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape approximation"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape approximation",
+        "detail": "Arecibo",
+        "title": "Radar dimensions",
+        "description": "A smooth approximation of LINEAR\u2019s published radar dimensions. The measurements constrain its size, but do not supply a detailed surface model. The grid marks absent surface photographs; the orientation is illustrative.",
+        "thumbnail": "/scenes/comet-209p/comet-209p-model-thumbnail.webp",
+        "surface": "comet-209p-model-surface@2x.webp",
+        "poles": "comet-209p-model-poles@2x.webp",
+        "source": {
+          "id": "shape-parameters",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/0004-6256/152/4/89"
+        },
+        "facts": [
+          {
+            "id": "dimensions",
+            "label": "Nucleus size",
+            "value": "\u22483.9 \u00d7 2.7 \u00d7 2.6 km"
+          },
+          {
+            "id": "rotation",
+            "label": "Rotation period",
+            "value": "\u224810.9 hours"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Radar and shape",
+      "role": "surface",
+      "description": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016)",
+      "href": "https://doi.org/10.3847/0004-6256/152/4/89"
+    },
+    {
+      "label": "JPL Horizons",
+      "role": "observations",
+      "description": "Orbit and fixed-epoch position",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/0004-6256/152/4/89",
+      "credit": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016)"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Howell et al. (2014), dimensions reported by Schleicher & Knight (2016)"
+    }
+  }
+}

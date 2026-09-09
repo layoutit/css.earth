@@ -1,0 +1,36 @@
+{
+  "verifiedAt": "2026-09-09T23:04:41.901Z",
+  "scope": "Fresh downloads of the common sky/font source binaries; every checked-in source and the reproducible context snapshot copied into a new staging directory and byte-verified. Scientific paper binaries are reference-only and not required for preparation.",
+  "results": [
+    {
+      "id": "comet-2p",
+      "downloads": 2,
+      "downloadedBytes": 29945020,
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 13,
+        "verifiedCount": 17
+      },
+      "requests": [
+        "https://cdn.eso.org/images/original/eso0932a.tif",
+        "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+      ]
+    },
+    {
+      "id": "comet-209p",
+      "downloads": 2,
+      "downloadedBytes": 29945020,
+      "verified": {
+        "inputCount": 3,
+        "generatedIntermediateCount": 1,
+        "documentCount": 13,
+        "verifiedCount": 17
+      },
+      "requests": [
+        "https://cdn.eso.org/images/original/eso0932a.tif",
+        "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+      ]
+    }
+  ]
+}
