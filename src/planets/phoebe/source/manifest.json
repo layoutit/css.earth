@@ -231,7 +231,7 @@
       "falseColor": true,
       "width": 360,
       "height": 180,
-      "coverage": "Finest contributing SPC maplet spacing in each 1\u00b0 cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
+      "coverage": "Finest contributing SPC maplet spacing in each 1° cell, in m/vertex. Smaller values mean finer local input, not guaranteed height accuracy. Cells without a maplet are marked missing.",
       "projection": {
         "type": "simple-cylindrical",
         "longitudeDirection": "east-positive",
@@ -272,7 +272,7 @@
       "falseColor": true,
       "width": 360,
       "height": 180,
-      "coverage": "Contributing image count in each 1\u00b0 source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
+      "coverage": "Contributing image count in each 1° source cell. Zero remains visible; fewer than five images warrants caution. Many images can share viewing geometry, so count alone does not establish accuracy.",
       "projection": {
         "type": "simple-cylindrical",
         "longitudeDirection": "east-positive",
@@ -325,8 +325,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10368,
-      "expectedSha256": "e4d1f629e482feb6574fc81439adac2d72f429a0e13fe5a076e93f00736fd87d",
+      "expectedBytes": 9452,
+      "expectedSha256": "e48d48ce5f724909c52934209145e077d677172db951b5b89312bcdf8d361938",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

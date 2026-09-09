@@ -76,7 +76,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
-        "title": "Voyager 2 mosaic with source photometric correction. Native detail varies; local cast shadows and image seams remain. Gray grid marks missing observations.",
+        "title": "Monochrome mosaic",
         "detail": "Corrected mosaic",
         "thumbnail": "/scenes/miranda/miranda-normal-thumbnail.webp",
         "surface": "miranda-normal-surface@2x.webp",
@@ -86,13 +86,13 @@
           "path": "../manifest.json",
           "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
         },
-        "summary": "Voyager 2 images with corrected illumination. Detail varies; cast shadows and seams remain, and gray grid: no data."
+        "summary": "Illumination is corrected, but cast shadows and image seams remain. Detail varies; the gray grid marks missing observations."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
-        "title": "Stereogrammetry and photoclinometry, in kilometres above the published reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 240 m grid spacing is not uniform effective resolution.",
+        "title": "Stereo and shading terrain model",
         "detail": "Shaded relief",
         "thumbnail": "/scenes/miranda/miranda-elevation-thumbnail.webp",
         "surface": "miranda-elevation-surface@2x.webp",
@@ -123,7 +123,7 @@
         "label": "Geology",
         "detail": "Historical map",
         "description": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
-        "title": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+        "title": "Geologic map",
         "summary": "Historical interpreted units; degree-scale registration limits. Gray grid: unmapped or conflicting units.",
         "thumbnail": "/scenes/miranda/miranda-geology-thumbnail.webp",
         "surface": "miranda-geology-surface@2x.webp",

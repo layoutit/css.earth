@@ -51,7 +51,7 @@
       "consumers": [
         "shape"
       ],
-      "coverage": "Ellipsoidal approximation to measured 1.4 \u00d7 0.5 \u00d7 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+      "coverage": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -74,7 +74,7 @@
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Ellipsoidal approximation to measured 1.4 \u00d7 0.5 \u00d7 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
+      "coverage": "Ellipsoidal approximation to measured 1.4 × 0.5 × 0.4 km dimensions. The exact irregular terrain is not reconstructed. The standard gray grid marks missing surface imagery.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -90,8 +90,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3495,
-      "expectedSha256": "faf44ec4faa881c6e9bf12f14bf47dab55661d5f16d003c49113a7f9860c783a",
+      "expectedBytes": 3477,
+      "expectedSha256": "20154a03836d82b659602bf6145095cd47c4bd35ee59cf657cd61f5209172335",
       "purpose": "Scientific source and authored preparation evidence."
     },
     {

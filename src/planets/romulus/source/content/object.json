@@ -46,7 +46,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.",
-        "title": "One published projected-limb solution, 23.1±0.7 km area-equivalent diameter and 2.7±0.3 axis ratio, with equal depth assumed. The 2020 reanalysis allows other correlated ellipse shapes. The grid marks unmapped terrain.",
+        "title": "Occultation shape approximation",
         "detail": "Approximate shape",
         "thumbnail": "/scenes/romulus/romulus-model-thumbnail.webp",
         "surface": "romulus-model-surface@2x.webp",

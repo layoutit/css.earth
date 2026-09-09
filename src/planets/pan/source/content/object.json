@@ -58,7 +58,7 @@
         "id": "normal",
         "label": "Monochrome",
         "description": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
-        "title": "Cassini I/F observations projected onto the released shape. Bounded photometric normalization reduces broad acquired shading; true cast shadows and unreliable geometry are withheld. Gray grid marks unobserved areas.",
+        "title": "ISS mosaic",
         "detail": "Cassini · corrected mosaic",
         "thumbnail": "/scenes/pan/pan-normal-thumbnail.webp",
         "surface": "pan-normal-surface@2x.webp",
@@ -68,13 +68,13 @@
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/access.html"
         },
-        "summary": "Cassini images mapped onto the shape. Shadows and unreliable samples are withheld; gray grid marks gaps."
+        "summary": "Photographs are mapped onto the measured shape. Shadows and unreliable samples are withheld; the gray grid marks gaps."
       },
       {
         "id": "elevation",
         "label": "Elevation",
         "description": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid. Fixed relief lighting shows slopes; shape uncertainties vary by region.",
-        "title": "Radial height above a 14 km reference sphere from the Cassini shape model. This includes the broad irregular shape; it is not height above a gravity-defined geoid.",
+        "title": "Shape-derived radial height",
         "detail": "Shaded relief",
         "thumbnail": "/scenes/pan/pan-elevation-thumbnail.webp",
         "surface": "pan-elevation-surface@2x.webp",

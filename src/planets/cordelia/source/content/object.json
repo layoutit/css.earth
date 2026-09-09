@@ -60,7 +60,7 @@
         "id": "model",
         "label": "Shape model",
         "description": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
-        "title": "Published prolate shape fit: 50 × 36 × 36 km. The third axis is assumed equal to the shorter measured axis. Voyager observations constrain size and elongation but do not resolve a useful mapped surface. The standard gray grid marks unavailable mapped imagery; no terrain or albedo pattern is invented.",
+        "title": "Shape approximation",
         "detail": "Measured shape",
         "thumbnail": "/scenes/cordelia/cordelia-model-thumbnail.webp",
         "surface": "cordelia-model-surface@2x.webp",

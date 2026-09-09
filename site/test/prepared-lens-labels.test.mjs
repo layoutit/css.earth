@@ -22,12 +22,12 @@ test("names arbitrary lens IDs without changing source data or assuming a fixed 
   });
   assert.deepEqual(result.controls.map(({ label, title }) => [label, title]), [
     ["Monochrome", "Instrument at 750 nm"],
-    ["Elevation", "Elevation: stereo model"],
-    ["Cross section", "Cross section"],
-    ["Thermal infrared", "Thermal infrared, source-informed model"],
+    ["Elevation", "Topography: stereo model"],
+    ["Cross section", "Interior"],
+    ["Thermal infrared", "Thermal, source-informed model"],
     ["Ice thickness", "Topography is used to estimate ice thickness"],
   ]);
-  const withoutNames = lenses => ({ ...lenses, controls: lenses.controls.map(({ label, title, ...data }) => data) });
+  const withoutNames = lenses => ({ ...lenses, controls: lenses.controls.map(({ label, ...data }) => data) });
   assert.deepEqual(withoutNames(result), withoutNames(source));
   assert.deepEqual(source, original);
 });

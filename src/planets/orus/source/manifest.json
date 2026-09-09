@@ -90,8 +90,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4153,
-      "expectedSha256": "c1413115deba066e0d31ef33bb2fe323fab59997f4a7768ed637788311606c8a",
+      "expectedBytes": 3790,
+      "expectedSha256": "1aeb5e660b78a935c76eb8972abb8545db4e895333736c50142e030457838281",
       "purpose": "Pinned body-specific source interpretation or preparation input."
     },
     {

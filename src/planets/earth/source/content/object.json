@@ -137,7 +137,7 @@
         "id": "normal",
         "label": "Visible color",
         "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
-        "title": "Visible color: NASA Blue Marble Next Generation with archival clouds",
+        "title": "Blue Marble Next Generation",
         "thumbnail": "/scenes/earth/earth-lens-normal.webp",
         "source": {
           "id": "surface-observation"
@@ -149,7 +149,7 @@
         "id": "topography",
         "label": "Elevation",
         "description": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
-        "title": "Elevation: GEBCO_2026 land and seafloor heights",
+        "title": "GEBCO land and seafloor heights",
         "thumbnail": "/scenes/earth/earth-lens-topography.webp",
         "source": {
           "id": "gebco-2026-elevation",
@@ -177,13 +177,13 @@
         "id": "night-lights",
         "label": "Night lights",
         "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
-        "title": "Night lights: NASA Black Marble 2016 global composite",
+        "title": "Black Marble night-light composite",
         "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
         "source": {
           "id": "surface-observation"
         },
         "detail": "Nighttime",
-        "summary": "NASA Black Marble's 2016 night-light composite. It combines dates and does not show current lighting."
+        "summary": "Artificial lighting is combined from observations taken in 2016. The composite does not show present-day lighting."
       },
       {
         "id": "enso",
@@ -233,7 +233,7 @@
         "id": "cross-section",
         "label": "Cross section",
         "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
-        "title": "Cross section: Schematic NASA Science source-backed interior",
+        "title": "Interior structure model",
         "thumbnail": "/scenes/earth/earth-view-interior.webp",
         "legend": {
           "kind": "categories",
@@ -267,7 +267,7 @@
           "id": "surface-observation"
         },
         "detail": "Structure",
-        "summary": "Earth's interior based on NASA models. Colors mark layers; the boundaries are inferred, not photographed."
+        "summary": "Colored layers distinguish the crust, mantle and core. Their boundaries follow a structural model, not interior photographs."
       }
     ]
   },
