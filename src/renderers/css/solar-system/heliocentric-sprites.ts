@@ -5,7 +5,7 @@ export interface PhaseAtlas {url:string;columns:number;rowCount:number;frameCoun
 export interface SystemMarkers {url:string;sun:Sprite;bodies:Readonly<Record<string,Sprite>>;phase:PhaseAtlas;}
 // This writer owns the line styles. Keep the last publication in JS so a
 // redundant-write check never asks CSSOM to serialize thousands of matrices.
-const pieceStyles = new WeakMap<HTMLElement, { transform: string; opacity: string }>();
+const pieceStyles = new WeakMap<HTMLElement, { transform: string; opacity: string; weight: number }>();
 // Writes screen-space segments onto a piece pool: each piece is a unit-width
 // bar laid out at the overlay's centre, so the projection's centre-relative
 // offsets are the translation as they are and the segment is the bar's x
@@ -20,14 +20,17 @@ export function writePieces(pool:readonly HTMLElement[], segments:readonly Orbit
     const length = Math.hypot(dx, dy);
     const piece = pool[index];
     let written = pieceStyles.get(piece);
-    if (!written) { written = { transform: '', opacity: '' }; pieceStyles.set(piece, written); }
-    const transform = `matrix(${formatNumber(dx)}, ${formatNumber(dy)}, ${
-      formatNumber(-dy / length)}, ${formatNumber(dx / length)}, ${
-      formatNumber(x0)}, ${formatNumber(y0)})`;
+    if (!written) { written = { transform: '', opacity: '', weight: NaN }; pieceStyles.set(piece, written); }
+    const transform = `matrix(${formatLineNumber(dx)}, ${formatLineNumber(dy)}, ${
+      formatLineNumber(-dy / length)}, ${formatLineNumber(dx / length)}, ${
+      formatLineNumber(x0)}, ${formatLineNumber(y0)})`;
     if (written.transform !== transform) { piece.style.transform = transform; written.transform = transform; }
     // The chord's trail weight: the line fades backwards from the body.
-    const opacity = formatNumber(weight);
-    if (written.opacity !== opacity) { piece.style.opacity = opacity; written.opacity = opacity; }
+    if (written.weight !== weight) {
+      const opacity = formatLineNumber(weight);
+      if (written.opacity !== opacity) { piece.style.opacity = opacity; written.opacity = opacity; }
+      written.weight = weight;
+    }
     if (setVisible) setVisible(index, true);
     else if (piece.style.visibility !== "") piece.style.visibility = "";
   }
@@ -74,6 +77,12 @@ export function applySprite(element:HTMLElement, sprite:SpriteWithUrl) {
   element.style.backgroundPosition = `${(sprite.index /
     Math.max(1, sprite.count - 1) * 100).toFixed(4)}% center`;
   element.style.backgroundSize = `${sprite.count * 100}% 100%`;
+}
+
+// Orbit coordinates are clipped to the viewport before publication. CSS can
+// consume their fixed-decimal tokens without a JS parse/serialize round trip.
+function formatLineNumber(value: number) {
+  return Math.abs(value) < 1e-9 ? "0" : value.toFixed(6);
 }
 
 export function formatNumber(value:number) {
