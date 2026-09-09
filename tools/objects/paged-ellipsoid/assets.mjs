@@ -5,6 +5,7 @@ import { readCoraltempAnomaly } from "./sst-anomaly.mjs";
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mjs";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.mjs";
 import { textureTintFactors } from "@layoutit/polycss";
+import { cutInteriorPoles } from "./interior-poles.mjs";
 
 
 export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all' }) {
@@ -73,7 +74,7 @@ async function prepareMap(input, name, {
 async function writeSphereAssets({ data, width, height, channels, density,
   canonical = false, outputRoot = PUBLIC_ROOT, name, bandCount,
   polarCapBandSpan = 1, projectiveSurface = false,
-  longitudeOffsetDegrees, webp }) {
+  longitudeOffsetDegrees, webp, cutaway }) {
   const suffix = canonical ? "" : density === 2 ? "@2x" : "";
   let surfaceData = data;
   let surfaceWidth = width;
@@ -114,12 +115,13 @@ async function writeSphereAssets({ data, width, height, channels, density,
       Math.PI / bandCount * polarCapBandSpan,
     longitudeOffsetRadians: longitudeOffsetDegrees * Math.PI / 180,
   });
+  if (cutaway) cutInteriorPoles(poles, polarTileSize, cutaway);
   await sharp(poles, { raw: {
       width: polarTileSize * 4,
       height: polarTileSize,
       channels: 4,
     } })
-      .webp({ ...webp, alphaQuality: 100 })
+      .webp(cutaway ? { lossless: true } : { ...webp, alphaQuality: 100 })
       .toFile(output(`${name}-poles${suffix}.webp`));
 }
 
@@ -486,6 +488,7 @@ async function prepareInteriorAssets() {
         bandCount: 8,
         longitudeOffsetDegrees: 0,
         webp: { lossless: true },
+        cutaway: layer.innerRadiusKm > 0 ? config.geometry.interiorCutaway : undefined,
       });
     }
   }
@@ -524,51 +527,25 @@ async function prepareInteriorOuterPoles() {
       config,
       sourceDirectory,
     });
-    const data = prepareObjectLightingMap({
+    const lit = prepareObjectLightingMap({
       data: clouded,
       width,
       height,
       channels: info.channels,
     });
-    await writeSphereAssets({
+    for (const [suffix, data] of [["", clouded], ["-lit", lit]]) await writeSphereAssets({
       data,
       width,
       height,
       channels: info.channels,
       density,
-      name: `${config.namespace}-interior-outer`,
+      name: `${config.namespace}-interior-outer${suffix}`,
       projectiveSurface: true,
       bandCount: 16,
       longitudeOffsetDegrees: 0,
       webp: { quality: 88, smartSubsample: true },
+      cutaway: config.geometry.interiorCutaway,
     });
-    const tileSize = 128 * density;
-    const poles = preparePolarAtlas(data, {
-      width,
-      height,
-      channels: info.channels,
-      tileSize,
-      boundaryLatitudeRadians: Math.PI / 2 - Math.PI / 16,
-      longitudeOffsetRadians: 0,
-    });
-    for (let tile = 0; tile < 2; tile += 1) {
-      for (let y = 0; y < tileSize; y += 1) {
-        for (let x = 0; x < tileSize; x += 1) {
-          const unitX = (x + 0.5) / tileSize * 2 - 1;
-          const unitY = (y + 0.5) / tileSize * 2 - 1;
-          const longitude = Math.atan2(unitY, unitX) * 180 / Math.PI;
-          if (angularDistance(longitude, config.geometry.interiorCutaway.centerLongitudeDegrees) <= config.geometry.interiorCutaway.widthDegrees / 2) {
-            poles[(y * tileSize * 4 + tile * tileSize + x) * 4 + 3] = 0;
-          }
-        }
-      }
-    }
-    const suffix = density === 2 ? "@2x" : "";
-    await sharp(poles, {
-      raw: { width: tileSize * 4, height: tileSize, channels: 4 },
-    }).webp({ lossless: true }).toFile(output(
-      `${config.namespace}-interior-outer-poles${suffix}.webp`,
-    ));
   }
 }
 
@@ -602,10 +579,6 @@ function prepareObjectLightingMap({ data, width, height, channels }) {
     }
   }
   return output;
-}
-
-function angularDistance(left, right) {
-  return Math.abs(((left - right + 180) % 360 + 360) % 360 - 180);
 }
 
 function validateInteriorSource(value) {

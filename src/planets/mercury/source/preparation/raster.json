@@ -136,6 +136,8 @@
     "thumbnail": "mercury-lens-interior.webp",
     "metadata": {
       "schema": "cssmercury-prepared-interior-assets@2"
-    }
+    },
+    "outerUnlitOutput": "mercury-interior-outer-unlit{suffix}.webp",
+    "outerUnlitPolesOutput": "mercury-interior-outer-unlit-poles{suffix}.webp"
   }
 }

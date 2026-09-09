@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "90ee912474d48e876461e4f5a6ed8d0d470a3d12849d857408e668c479665fea"
+    "sha256": "163da777b041584fe4b60a62804ad72a462109db7f0cba412e569391fd5bb53d"
   },
   "id": "mercury",
   "properties": {
@@ -58,7 +58,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "224e40068158743efcaf05e22502534bf746f3e68603ef16f819102897ecd5d0"
+          "sha256": "d4deecc2acfe395857d22f00ec2354b5d5591efcf1f39f89d78ddfb53eeb36f3"
         },
         {
           "id": "geometry",

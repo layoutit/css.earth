@@ -65,7 +65,17 @@
       "thumbnailUrl": "/scenes/earth/earth-view-interior.webp",
       "view": "interior",
       "maximumZoom": 4,
-      "qualification": "Schematic NASA Science source-backed interior"
+      "qualification": "Schematic NASA Science source-backed interior",
+      "focus": {
+        "longitude": 123.75,
+        "latitude": 15,
+        "zoom": 1.1,
+        "northUp": true,
+        "transition": {
+          "durationMilliseconds": 650,
+          "preserveZoom": true
+        }
+      }
     }
   ],
   "provenance": {

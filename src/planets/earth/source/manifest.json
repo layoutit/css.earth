@@ -1052,8 +1052,8 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 11703,
-      "expectedSha256": "aa325bee85ccc3a7c5206a210ccc76357e5ceb35d731947f540f111a7adad8ee",
+      "expectedBytes": 11653,
+      "expectedSha256": "0f7a222edb670316ba156b94c33470255baecde253a00afffc3e7d91e4ecf140",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -1064,14 +1064,14 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 14302,
-      "expectedSha256": "31774f43fac34265b7908087788a4c3bd82bc66fc1b9d04d9c695867109be0e7",
+      "expectedBytes": 14356,
+      "expectedSha256": "4e837505a0ef5de1ea6045b2388c6baa547aa8304bc3a00140d68a04f396d8f5",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 3004,
-      "expectedSha256": "85a2dc6f4a0dd3da0925e358b97e54e93b2797276f774712182cc0b487be2f4f",
+      "expectedBytes": 3233,
+      "expectedSha256": "58d0f25f6d76eed1f19a6ca73b3a8d4b189b8f076df82087b0f2dce1ecc138f5",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {

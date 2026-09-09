@@ -319,18 +319,6 @@ test("publishes the prepared Earth title and retained scene", async () => {
     interiorSource.layers);
   assert.equal(PREPARED_EARTH_SCENE.interior.runtimeGeometry, false);
   assert.equal(PREPARED_EARTH_SCENE.interior.runtimeRasterization, false);
-  assert.equal(PREPARED_EARTH_SCENE.interior.presentationLock.schema,
-    "cssearth-prepared-interior-presentation-lock@1");
-  assert.equal(
-    PREPARED_EARTH_SCENE.interior.presentationLock
-      .referenceControlYawDegrees,
-    45,
-  );
-  assert.equal(
-    PREPARED_EARTH_SCENE.interior.presentationLock
-      .changesPhysicalAxialTiltClaim,
-    false,
-  );
   assert.equal(PREPARED_EARTH_SCENE.camera.orbitPlayback.schema,
     "cssearth-prepared-camera-orbit@1");
   assert.equal(PREPARED_EARTH_SCENE.camera.orbitPlayback.keyframes.length, 2);

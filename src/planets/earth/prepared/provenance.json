@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "earth",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ae384e0e5f6e02fe130b656a71408c0cec090f9517019953299f2ca96bf76b0f"
+    "sha256": "600266b0809239a3a45c9b03a3010bad2b98ac6f040247ef5e6c28d28f21a3ae"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "aa325bee85ccc3a7c5206a210ccc76357e5ceb35d731947f540f111a7adad8ee",
+      "sha256": "0f7a222edb670316ba156b94c33470255baecde253a00afffc3e7d91e4ecf140",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -56,7 +56,6 @@
           "CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES": 89,
           "CAMERA_DEFAULT_CONTROL_PITCH_DEGREES": 34.230769230769226,
           "CAMERA_MILLISECONDS_PER_CONTROL_DEGREE": 1000,
-          "INTERIOR_REFERENCE_CONTROL_YAW_DEGREES": 45,
           "INTERIOR_LATITUDE_SEGMENTS": 8,
           "INTERIOR_LONGITUDE_SEGMENTS": 16,
           "interiorCutaway": {
@@ -444,7 +443,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "31774f43fac34265b7908087788a4c3bd82bc66fc1b9d04d9c695867109be0e7",
+      "sha256": "4e837505a0ef5de1ea6045b2388c6baa547aa8304bc3a00140d68a04f396d8f5",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -714,7 +713,7 @@
                 "id": "surface-observation"
               },
               "detail": "Structure",
-              "summary": "Earth's interior based on NASA models. Colors mark layers; the boundaries are inferred, not photographed."
+              "summary": "Schematic Earth interior based on NASA Science. Colors and interior shading illustrate inferred layers, not photographs. Shadows changes the exterior lighting."
             }
           ]
         },
@@ -1674,8 +1673,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "31774f43fac34265b7908087788a4c3bd82bc66fc1b9d04d9c695867109be0e7",
-      "bytes": 14302,
+      "sha256": "4e837505a0ef5de1ea6045b2388c6baa547aa8304bc3a00140d68a04f396d8f5",
+      "bytes": 14356,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,

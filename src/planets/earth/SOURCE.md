@@ -42,11 +42,12 @@ shards per material. Camera and material projection transforms are prepared
 keyframes transported through paused Web Animations; runtime changes only
 animation time, image addresses, and the camera scale.
 
-The cross-section remains a source-backed schematic, not a claim about a
-physically tilted interior. At near-pole-on camera angles, one prepared
-presentation-only orbit reveals the section faces without changing Earth's
-23.4 degree axial-tilt fact. The cutaway is decoded and mounted only after the
-user selects it, then retained for the remainder of the mount.
+The cross-section remains a source-backed schematic. Selecting it uses a
+prepared north-up camera aimed into the cut, then follows the shared camera's
+normal orbit controls. The cutaway and exterior use the same physical frame;
+Earth's 23.4 degree axial tilt is unchanged. The mantle and outer-core pole
+atlases use the same removed wedge as their shells. Shadows selects prepared
+lit or unlit exterior banks; interior colors retain illustrative shape shading.
 
 ## Atmosphere charts
 

@@ -93,7 +93,7 @@ export function parseRasterRecipe(value: unknown): RasterRecipe {
     }
     if (recipe.interior !== undefined) {
         const interior = record(recipe.interior, 'interior');
-        for (const key of ['source', 'surface', 'outerOutput', 'outerPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput', 'thumbnail'])
+        for (const key of ['source', 'surface', 'outerOutput', 'outerPolesOutput', 'outerUnlitOutput', 'outerUnlitPolesOutput', 'coreOutput', 'corePolesOutput', 'sectionOutput', 'thumbnail'])
             path(interior[key], `interior.${key}`);
         fields(interior, ['width', 'height', 'poleTile', 'sectionWidth', 'sectionHeight'], 'interior', true);
         fields(interior, ['ambientIntensity', 'coreNoiseSeed'], 'interior');

@@ -8,14 +8,18 @@ import { surfaceBankInventory } from "./surface-banks.mjs";
 export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, city, noise, controls }) {
  const cameraPlan=config.camera;
   const banks=surfaceBankInventory(plan,lenses,config.publicBase);
-  const pageKeys=lens=>banks.find(bank=>bank.id===(lens.surfaceBankId??lens.id)).urls.map((_,i)=>`page:${lens.surfaceBankId??lens.id}:${i}`);
-  const interiorUrls=[...new Set([plan.interior.outerAssets.poles,
+  const bankId=(lens,shadows=false)=>lens.view==="interior"&&shadows?`${lens.id}-lit`:lens.surfaceBankId??lens.id;
+  const pageKeys=(lens,shadows=false)=>banks.find(bank=>bank.id===bankId(lens,shadows)).urls.map((_,i)=>`page:${bankId(lens,shadows)}:${i}`);
+  const interiorUrls=[...new Set([
     ...plan.interior.shells.flatMap(shell=>shell.leaves.map(leaf=>leaf.asset)),
     ...plan.interior.sectionLeaves.map(leaf=>leaf.asset)].map(pair=>canonicalPreparedAsset(pair)))];
   const interiorKeys=interiorUrls.map((_,i)=>`interior:${i}`);
   const celestial=preparedSunResources(sun,"mounted");
   const entries=[...celestial,...banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"}))),
-    ...lenses.controls.filter(lens=>lens.view!=="interior").map(lens=>({key:`poles:${lens.id}`,url:canonicalPreparedAsset(lens.polesUrl),pool:"mounted"})),
+    ...lenses.controls.flatMap(lens=>lens.view==="interior"?
+      [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
+        {key:`poles:${lens.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
+      [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(lens.polesUrl),pool:"mounted"}]),
     ...interiorUrls.map((url,i)=>({key:interiorKeys[i],url,pool:"mounted"})),
     {key:"shadowless:lighting",url:canonicalPreparedAsset(plan.material.lighting.shadowlessAssets),pool:"mounted"},
     ...["lighting","atmosphere"].flatMap(id=>[
@@ -47,9 +51,8 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
     return {surface,polar};
   }
   const body=bands(system,plan.body.bands,`${config.namespace}-body`,`${config.namespace}-body-polar`,`${config.namespace}-polar`,plan.body.assets.surface.urls,canonicalPreparedAsset(plan.body.assets.poles));
-  const cutawayCounter=b.mesh(`${config.namespace}-cutaway-counter`),presentation=b.mesh(`${config.namespace}-cutaway-presentation`,plan.interior.presentationLock.transform);
-  const cutawaySystem=b.mesh(`${config.namespace}-system ${config.namespace}-cutaway-system`,plan[config.sceneBodyKey].systemTransform),cutaway=b.mesh(`${config.namespace}-cutaway`);
-  b.append(scene,cutawayCounter);b.append(cutawayCounter,presentation);b.append(presentation,cutawaySystem);b.append(cutawaySystem,cutaway);
+  const cutaway=b.mesh(`${config.namespace}-cutaway`);
+  b.append(system,cutaway);
   const interior=bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],canonicalPreparedAsset(plan.interior.outerAssets.poles));
   for(const shell of plan.interior.shells) {
     const mesh=b.mesh(`${config.namespace}-interior-shell ${shell.className}`,plan[config.sceneBodyKey].meshTransform);b.append(cutaway,mesh);
@@ -83,11 +86,11 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       frameAttribute:null,modeAttribute:null,quoted:true};
   });
   const variants=lenses.controls.flatMap(lens=>[false,true].flatMap(shadows=>[false,true].map(atmosphere=>{
-    const isInterior=lens.view==="interior",keys=pageKeys(lens),texture=(node,name,resource)=>({kind:"texture",target:index(node),name,resource,quoted:true});
+    const isInterior=lens.view==="interior",keys=pageKeys(lens,shadows),texture=(node,name,resource)=>({kind:"texture",target:index(node),name,resource,quoted:true});
     const pageWrites=(carriers,active)=>carriers.flatMap(node=>Array.from({length:pages},(_,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,active?keys[i]:null)));
-    return {when:{lensId:lens.id,shadows,atmosphere},navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,...(isInterior?interiorKeys:[`poles:${lens.id}`])],
+    return {when:{lensId:lens.id,shadows,atmosphere},navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,`poles:${bankId(lens,shadows)}`,...(isInterior?interiorKeys:[])],
       writes:[...pageWrites(isInterior?interior.surface:body.surface,true),
-        ...(!isInterior?body.polar.map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${lens.id}`)):[]),
+        ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(lens,shadows)}`)),
         ...pageWrites(isInterior?body.surface:interior.surface,false),
         {kind:"attribute",target:-1,name:"data-view",value:isInterior?"interior":null},
         {kind:"attribute",target:-1,name:"data-lens",value:isInterior?null:lens.id},
@@ -104,7 +107,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
       startup:[...celestial.map(entry=>entry.key),...pageKeys(lenses.controls.find(lens=>lens.id===lenses.defaultLens)),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
-    tree,variants,materials:tracks,viewBindings:[materialCounter,cutawayCounter].map(node=>({kind:"counter-rotation",target:index(node),systemTransform:null})),animations:[],
+    tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null}],animations:[],
     motionFrame:[index(system),index(body.surface[0])],
     pageLayers:(city?[{id:"city",plan:city,lensIds:["normal","buenos-aires-noise"]},{id:"noise",plan:noise,lensIds:["buenos-aires-noise"]}]:[])
       .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:config.publicBase},carrier:index(body.surface[0]),system:index(system),className:`${config.namespace}-city-page`,textureClassName:`${config.namespace}-api-texture`}))};

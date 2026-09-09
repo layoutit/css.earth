@@ -15,9 +15,10 @@ test('Earth uses the same globe camera limits and drag as Mercury and Saturn in 
   assert.equal(runtimeDefinition.camera.sceneScale,(await read('src/planets/mercury/prepared/runtime.json')).camera.sceneScale);
   for(const variant of runtimeDefinition.variants) {
     assert.equal(variant.navigation.maximumZoom,4);
-    if (variant.when.lensId === 'enso') {
+    if (['enso', 'cross-section'].includes(variant.when.lensId)) {
       assert.ok(Number.isFinite(variant.navigation.camera.controlYaw));
       assert.equal(variant.navigation.camera.zoom,1.1);
+      assert.deepEqual(variant.navigation.camera.transition, { durationMilliseconds: 650, preserveZoom: true });
     } else assert.equal(variant.navigation.camera,null);
   }
 });

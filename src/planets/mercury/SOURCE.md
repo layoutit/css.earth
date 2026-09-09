@@ -3,6 +3,10 @@
 Mercury is prepared entirely from committed, adapter-owned source snapshots.
 Runtime code does not fetch, derive, rasterize, or interpret source data.
 
+In the cross section, Shadows selects a prepared lit or unlit exterior and
+matching cut polar caps. The inferred interior retains its illustrative shape
+shading in both states.
+
 - Default surface: the USGS MESSENGER MDIS Map Projected Basemap RDR (BDR), acquired through the pinned OpenSpace WMS declaration. Its own source declaration identifies the one-band product as a global monochrome reflectance map compiled from NAC or WAC 750 nm images. No display color is added.
 - Enhanced lens: the official NASA Solar System Treks level-3 WMTS matrix for the USGS MESSENGER MDIS 665 m enhanced-color global mosaic. The 16-by-8 tile matrix is stitched without resampling into a 4096-by-2048 source snapshot. The USGS product has neutral-black no-data near the poles. Preparation completes only those pixels with latitude-coherent observed enhanced chroma and local BDR detail, falling back to the complete topography product where BDR is also absent. Dedicated pole assets use the observed outer-cap chroma with BDR detail to avoid an equirectangular pole singularity. The lens remains false color; prepared completion does not claim direct enhanced-color observations in filled regions. The published channel encoding uses principal components 2 and 1 in red and green, and the 430/1000 nm ratio in blue. That construction remains provenance rather than a viewing legend because it does not assign terrain classes to colors.
 - Topography lens: the USGS MESSENGER global color shaded-relief product, acquired through its pinned OpenSpace WMS declaration. It is false color. Its optional elevation legend is prepared from the ancillary legend published with the official USGS product; the default 750 nm lens has no legend.
