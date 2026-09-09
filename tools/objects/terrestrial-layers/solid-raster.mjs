@@ -48,7 +48,7 @@ export async function readObservation(sourceDirectory, entry, validity, width, h
   if (metadata.width !== entry.width || metadata.height !== entry.height) throw new Error(`Observation source dimensions changed: ${entry.path}`);
   if (['image-monochrome-no-data', 'image-rgb-no-data'].includes(validity.kind)) return prepareByteObservation(path, entry, validity, width, height);
   if(validity.kind==='geotiff-rgb-alpha')return prepareMaskedObservation(path,entry,validity,width,height);
-  if (validity.kind === 'geotiff-monochrome-alpha' && validity.resampling === 'source-georeferenced-bilinear') {
+  if (validity.kind === 'geotiff-monochrome-alpha' && ['source-georeferenced-bilinear','source-georeferenced-nearest'].includes(validity.resampling)) {
     return prepareMaskedObservation(path, entry, {...validity, channels:'monochrome', zeroValidity:validity.zeroValidity ?? 'all-channels'}, width, height);
   }
   if (validity.kind === 'south-connected-black') {
@@ -145,7 +145,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       ...(recipe.monochromeBase&&!recipe.reportComposition?{monochromePixels}:{}),
       ...(observation.sourceGeoreference ? { sourceGeoreference: observation.sourceGeoreference } : {}),
       ...(recipe.textureScale ? { textureScale: recipe.textureScale } : {}),
-    }, grid));
+    }, {...grid, ...(recipe.validity.resampling === 'source-georeferenced-nearest' ? {displaySampling:'nearest'} : {})}));
   }
   for (const view of config.raster.shapeViews ?? []) {
     const entries = await source.validateGroup(view.consumer);

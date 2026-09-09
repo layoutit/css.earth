@@ -1,0 +1,52 @@
+{
+  "command": [
+    "pnpm",
+    "exec",
+    "astro",
+    "build"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 1399472128,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 163840,
+      "freePercent": 72
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 124043264,
+      "freePercent": 72
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 216694784,
+      "freePercent": 72
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 271974400,
+      "freePercent": 72
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 330170368,
+      "freePercent": 72
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 537886720,
+      "freePercent": 72
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 1399472128,
+      "freePercent": 72
+    }
+  ],
+  "status": "FAIL",
+  "exitCode": 1,
+  "seconds": 1.9
+}

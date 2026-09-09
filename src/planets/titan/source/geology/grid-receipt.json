@@ -1,0 +1,58 @@
+{
+  "sourceRecords": {
+    "Pl": 4,
+    "Dn": 1,
+    "Mt": 1,
+    "Ba": 1,
+    "Lb": 1,
+    "Cr": 1
+  },
+  "width": 2048,
+  "height": 1024,
+  "unknownOrConflictingPixels": 495,
+  "missingPixels": 815,
+  "categories": [
+    {
+      "value": "Pl",
+      "label": "Plains",
+      "color": "#66f0cc"
+    },
+    {
+      "value": "Dn",
+      "label": "Dunes",
+      "color": "#b665cb"
+    },
+    {
+      "value": "Mt",
+      "label": "Hummocky terrain",
+      "color": "#ffcc66"
+    },
+    {
+      "value": "Ba",
+      "label": "Lakes and basins",
+      "color": "#6699ff"
+    },
+    {
+      "value": "Lb",
+      "label": "Labyrinth terrain",
+      "color": "#ff66e0"
+    },
+    {
+      "value": "Cr",
+      "label": "Craters",
+      "color": "#ff6666"
+    }
+  ],
+  "output": "titan-geologic-units.tif",
+  "sha256": "815d7afab1d8e401714a3a141595d161e962ef98421632c77b8fe6002945fb9b",
+  "transform": [
+    7900.001057611052,
+    0.0,
+    -8089601.082993717,
+    0.0,
+    -7900.001057611052,
+    4044800.5414968585
+  ],
+  "radiusMeters": 2575000,
+  "policy": "Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld; source edges clipped by global raster extent."
+}

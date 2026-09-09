@@ -87,7 +87,7 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 ## B6 — Mapped scientific surfaces across four existing moons
 
-**State:** [draft PR #76](https://github.com/layoutit/cssEarth/pull/76); selected-body qualification and runtime delivery complete · **Owner:** Moons
+**State:** [merged PR #76](https://github.com/layoutit/cssEarth/pull/76); selected-body qualification and runtime delivery complete · **Owner:** Moons
 
 Six new views: Moon geology and Diviner silicate signature, Europa geology and
 Galileo NIMS infrared, Callisto Galileo NIMS infrared, and Charon modeled Bond
@@ -98,6 +98,22 @@ remain fixed. See [scope and source decisions](B6-MAPPED-SCIENCE.md) and the
 
 This follow-up deepens four scenes already counted above. It adds no moon to the
 roster or benchmark denominator. B4 observation charts remain in draft.
+
+## B7 — Cassini surface atlas
+
+**State:** implemented and delivered; draft pending aggregate qualification · **Owner:** Moons
+
+Five mapped views across **Titan, Dione and Rhea**: Titan's six-unit global
+geomorphology and paired Cassini VIMS infrared / water-ice absorption views for
+Dione and Rhea. The atlas uses original released polygons and spectral cubes,
+with explicit source coverage and registration limits. Existing scene geometry,
+renderer, camera and shared shell remain unchanged. The new image inventory is
+17 files / 1,873,728 bytes across all three bodies.
+
+See [scope and reproduction](B7-CASSINI-ATLAS.md), [source review](b7-cassini-atlas/evidence/source/SOURCE-REVIEW.md)
+and [visual qualification](b7-cassini-atlas/VISUAL-REVIEW.md). This deepens existing
+scenes; the moon roster and benchmark denominator do not change. B4 remains a
+paused draft at the user's request.
 
 ## Parallel execution
 

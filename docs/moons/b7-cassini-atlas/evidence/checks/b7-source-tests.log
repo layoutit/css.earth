@@ -1,0 +1,67 @@
+........./Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:33: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x0, y0 = inv * (left, top)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:34: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x1, y1 = inv * (right, bottom)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:33: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x0, y0 = inv * (left, top)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:34: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x1, y1 = inv * (right, bottom)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:33: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x0, y0 = inv * (left, top)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:34: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x1, y1 = inv * (right, bottom)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(
+./Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:33: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x0, y0 = inv * (left, top)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:34: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x1, y1 = inv * (right, bottom)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(
+./Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:33: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x0, y0 = inv * (left, top)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:34: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x1, y1 = inv * (right, bottom)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:33: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x0, y0 = inv * (left, top)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/geology-grid.py:34: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x1, y1 = inv * (right, bottom)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(
+/Users/ekrof/fed/cssEarth-moons-mapped-science/output/b6-python/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+/Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/test_mapped_science.py:46: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+  actual=image.read(1)
+../Users/ekrof/fed/cssEarth-moons-cassini-atlas/tools/objects/acquisition/test_mapped_science.py:84: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  native=Affine(48998.5907088568,0,-2721698.0776368743,
+..
+----------------------------------------------------------------------
+Ran 15 tests in 0.317s
+
+OK
+{"sourceRecords": {"A": 1, "B": 1}, "width": 32, "height": 16, "unknownOrConflictingPixels": 128, "missingPixels": 256, "output": "units.tif", "sha256": "0f923b2bdcdf808a64e352cf644857e88f3cd8544ab0e1f6d2556368e3cc5939", "transform": [505600.0676871073, 0.0, -8089601.082993717, 0.0, -505600.0676871073, 4044800.5414968585], "radiusMeters": 2575000, "policy": "Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld; source edges clipped by global raster extent."}

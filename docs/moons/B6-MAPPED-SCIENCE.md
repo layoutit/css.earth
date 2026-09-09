@@ -1,6 +1,6 @@
 # B6: mapped surface science
 
-Status: [draft PR #76](https://github.com/layoutit/cssEarth/pull/76); six views implemented, source/package/browser checks complete, runtime assets delivered. Authorized 2026-09-09.
+Status: [merged PR #76](https://github.com/layoutit/cssEarth/pull/76); six views implemented, source/package/browser checks complete, runtime assets delivered. Merged 2026-09-09. Current-main follow-up is recorded in [B7 qualification](b7-cassini-atlas/VISUAL-REVIEW.md).
 Branch: `feat/moons-mapped-science`; base `b3a0410f742501a1a1552dea14d9a3730fce7484`.
 
 ## Accepted scope

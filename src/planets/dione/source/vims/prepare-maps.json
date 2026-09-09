@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-cassini-vims@1",
+  "target": "dione",
+  "input": "data/dione/dione_notnorm_pc_modified_2.img",
+  "label": "data/dione/dione_notnorm_pc_modified_2.xml",
+  "header": "data/dione/dione_notnorm_pc_modified_2.hdr",
+  "wavelengths": "data/vims_wavelengths_ir.tab",
+  "guide": "document/information_file.pdf",
+  "width": 360,
+  "height": 180,
+  "registration": {
+    "mode": "guide-global-one-degree-bins",
+    "absoluteSubpixelRegistration": "unresolved",
+    "evidence": "The archive guide declares global one-degree bins; independent ISS comparison verifies longitude orientation and north-to-south row order. Original projected metadata disagrees at source-pixel scale. See VIMS-INTERPRETATION.md."
+  },
+  "rgb": {
+    "bands": [
+      69,
+      43,
+      12
+    ],
+    "wavelengthMicrometers": [
+      2.00141,
+      1.57321,
+      1.06495
+    ],
+    "displayRanges": [
+      [
+        0,
+        0.3
+      ],
+      [
+        0,
+        0.45
+      ],
+      [
+        0,
+        0.65
+      ]
+    ],
+    "output": "dione-infrared.tif"
+  },
+  "depth": {
+    "bands": [
+      58,
+      70,
+      81
+    ],
+    "wavelengthMicrometers": [
+      1.82022,
+      2.01788,
+      2.1997
+    ],
+    "displayRange": [
+      0.3,
+      0.75
+    ],
+    "output": "dione-water-ice.tif"
+  },
+  "pins": {
+    "document/information_file.pdf": "c6a7599777535917c6ab6d5fc38beab6e811e1045df5e651eba67f5a21da527e",
+    "document/information_file.xml": "d8170f3ed5c2d0dec2fef266ffee69951ebd765d474264dda83b67ec98dd1576",
+    "data/vims_wavelengths_ir.tab": "8cb35dca77944143d27db18860ddee6b5ee29369b0fd0e1441b246c90a89a449",
+    "data/vims_wavelengths_ir.xml": "a9c6ee4c5e159c214c20df41520333adac3f245a72600d7adc088392b375ca2f",
+    "data/dione/dione_notnorm_pc_modified_2.xml": "b833840c69c52439e437c73b62ba12c2508afbd5b3af3b7582ddf5b2e05a377a",
+    "data/dione/dione_notnorm_pc_modified_2.hdr": "6aba6b6515ee0c60a220dc245b300b828078477b6ec99686e6e7b5a36a435a04",
+    "data/dione/dione_notnorm_pc_modified_2.img": "57eb3fcc82c5e2ac3e239008cde901c1ade5641d540088514a880c755de275e6",
+    "data/dione/dione_phase_function_parameters.tab": "4c598339ff2280f1a9e6901376aef02c84306bf6863d4ca6aabf9fa6b24c9736",
+    "data/dione/dione_phase_function_parameters.xml": "5405ffb4dcc3c4c4428748f336f5ece80949d04d840d8bbc79f43c01e3b5c2ff",
+    "data/dione/dione_vims_cubes_list.tab": "ac179a7b2eded9b32f3d4c958e7ed0e69aed0eb66cdb0f40bed0d77ca3ea9248",
+    "data/dione/dione_vims_cubes_list.xml": "3bf571ffcea3b08f1ef274b12d075fd7542edd707bb652003069374db0c4c96e"
+  },
+  "receipt": "conversion-receipt.json"
+}

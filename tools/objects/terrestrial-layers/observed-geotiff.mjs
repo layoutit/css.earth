@@ -87,9 +87,11 @@ export function observationPixelMissing(rgb,longitude,latitude,policy) {
 
 /** Map canonical output centres through the actual projected source grid.
  * Bilinear interpolation requires every nonzero-weight native contributor;
- * there is no image-wide stretch, integer roll, or extrapolation past centres. */
+ * nearest sampling retains the containing source pixel-area value and mask.
+ * Neither policy stretches the source extent or fills missing observations. */
 export function resampleGeoreferencedObservation(source, entry, policy, {origin, resolution}, width, height) {
   const {data, info} = source, channels = info.channels;
+  const nearest = policy.resampling === 'source-georeferenced-nearest';
   const radius = entry.projection.referenceRadiusMeters;
   if (![width,height,info.width,info.height].every(n => Number.isSafeInteger(n) && n > 0) ||
       info.width !== entry.width || info.height !== entry.height || ![1,3].includes(channels) ||
@@ -109,7 +111,7 @@ export function resampleGeoreferencedObservation(source, entry, policy, {origin,
     valid[i] = observationPixelMissing(pixel, longitude, latitude, policy) ? 0 : 1;
     if (policy.withholdLongitudeDegrees && longitude >= policy.withholdLongitudeDegrees[0] && longitude <= policy.withholdLongitudeDegrees[1]) withheldSyntheticPixels++;
   }
-  // The tolerance only removes arithmetic roundoff at an exact source centre;
+  // The tolerance only removes arithmetic roundoff at a source centre/boundary;
   // it scales with IEEE-754 precision, not any fraction of an output pixel.
   const tolerance = 32 * Number.EPSILON * Math.max(info.width, info.height);
   const stable = n => Math.abs(n - Math.round(n)) <= tolerance ? Math.round(n) : n;
@@ -123,10 +125,23 @@ export function resampleGeoreferencedObservation(source, entry, policy, {origin,
   for (let y = 0; y < height; y++) {
     const latitude = 90 - (y + .5) / height * 180;
     const sy = stable((latitude * radiansToMeters - origin[1]) / resolution[1] - .5);
-    if (sy < 0 || sy > info.height - 1) continue;
+    const areaY = stable(sy + .5);
+    if (nearest ? areaY < 0 || areaY >= info.height : sy < 0 || sy > info.height - 1) continue;
     const y0 = Math.floor(sy), fy = sy - y0;
     for (let x = 0; x < width; x++) {
       const sx = sourceX[x];
+      if (nearest) {
+        const areaX = stable(sx + .5);
+        if (areaX < 0 || areaX >= info.width) continue;
+        const cell = Math.floor(areaY) * info.width + Math.floor(areaX);
+        if (!valid[cell]) continue;
+        const index = y * width + x, offset = cell * channels;
+        rgb[index * 3] = data[offset];
+        rgb[index * 3 + 1] = data[offset + (channels === 1 ? 0 : 1)];
+        rgb[index * 3 + 2] = data[offset + (channels === 1 ? 0 : 2)];
+        missing[index] = 0;
+        continue;
+      }
       if (sx < 0 || sx > info.width - 1) continue;
       const x0 = Math.floor(sx), fx = sx - x0, index = y * width + x;
       let red = 0, green = 0, blue = 0, supported = true;
@@ -153,7 +168,7 @@ export async function prepareMaskedObservation(path,entry,policy,width,height) {
   const tiff=await fromFile(path);let origin,resolution;
   try {
     const image=await tiff.getImage(),keys=image.getGeoKeys();origin=image.getOrigin();resolution=image.getResolution();
-    if (policy.resampling === 'source-georeferenced-bilinear' && keys.GTRasterTypeGeoKey !== 1) throw new Error('Georeferenced observations require PixelIsArea coordinates.');
+    if (['source-georeferenced-bilinear','source-georeferenced-nearest'].includes(policy.resampling) && keys.GTRasterTypeGeoKey !== 1) throw new Error('Georeferenced observations require PixelIsArea coordinates.');
     if(image.getWidth()!==entry.width||image.getHeight()!==entry.height||image.getGDALNoData()!==policy.noData||
        resolution[0]<=0||resolution[1]>=0||keys.ProjCenterLongGeoKey!==policy.centerLongitude||
        Math.abs(keys.GeogSemiMajorAxisGeoKey-entry.projection.referenceRadiusMeters)>0.01||
@@ -164,7 +179,7 @@ export async function prepareMaskedObservation(path,entry,policy,width,height) {
   if(policy.colorSpace)pipeline.toColourspace(policy.colorSpace);
   const source=await pipeline.raw().toBuffer({resolveWithObject:true}),channels=source.info.channels;
   if(channels!==(policy.channels==='monochrome'?1:3))throw new Error(`Observed band count drifted: ${entry.id}`);
-  if (policy.resampling === 'source-georeferenced-bilinear') return resampleGeoreferencedObservation(source,entry,policy,{origin,resolution},width,height);
+  if (['source-georeferenced-bilinear','source-georeferenced-nearest'].includes(policy.resampling)) return resampleGeoreferencedObservation(source,entry,policy,{origin,resolution},width,height);
   const rgba=Buffer.alloc(entry.width*entry.height*4),radius=entry.projection.referenceRadiusMeters;
   let withheldSyntheticPixels=0;
   for(let y=0;y<entry.height;y++)for(let x=0;x<entry.width;x++){

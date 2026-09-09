@@ -1,0 +1,26 @@
+16:54:38 [vite] Re-optimizing dependencies because vite config has changed
+16:54:38 [types] Generated 106ms
+16:54:38 [build] output: "static"
+16:54:38 [build] mode: "static"
+16:54:38 [build] directory: /Users/ekrof/fed/cssEarth-moons-cassini-atlas/dist/
+16:54:38 [build] Collecting build info...
+16:54:38 [build] ✓ Completed in 154ms.
+16:54:38 [build] Building static entrypoints...
+16:54:39 [ERROR] [vite] ✗ Build failed in 571ms
+[UNRESOLVED_IMPORT] Could not resolve '../../src/planets/achilles/prepared/object.json' in site/pages/achilles.astro
+   ╭─[ site/pages/achilles.astro:6:28 ]
+   │
+ 6 │ import preparedObject from "../../src/planets/achilles/prepared/object.json";
+   │                            ────────────────────────┬────────────────────────  
+   │                                                    ╰────────────────────────── Module not found.
+   │ 
+   │ Help: 'site/pages/achilles.astro' is imported by the following path:
+   │         - site/pages/achilles.astro
+   │         - \0virtual:astro:page:site/pages/achilles@_@astro
+   │         - \0virtual:astro:pages
+   │         - \0virtual:astro:manifest
+   │         - ../cssEarth-moons-mapped-science/node_modules/.pnpm/astro@7.2.9_@emnapi+core@1.11.1_@emnapi+runtime@1.11.3_@types+node@26.4.0/node_modules/astro/dist/entrypoints/prerender.js
+───╯
+
+  Location:
+    /Users/ekrof/fed/cssEarth-moons-cassini-atlas/site/pages/achilles.astro:6:27
