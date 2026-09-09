@@ -45,6 +45,8 @@ node tools/objects/dist/prepare-authored.js bienor --write
 node docs/lucy-targets/navigation.mjs --base=1fb76e44d6bf831e7ebcf0516b83c0b10e1716da --inputs=docs/centaur-population/inputs.json --evidence=docs/centaur-population/navigation-evidence.json
 node docs/centaur-population/refresh-presentations.mjs
 node docs/centaur-population/refresh-transports.mjs
+node docs/centaur-population/integrate-context.mjs
+node tools/prepare-object-json.mjs sun
 node docs/centaur-population/verify.mjs
 ```
 

@@ -8,14 +8,14 @@ import {conformanceBrowserLaunch} from '../../site/test/conformance-browser-laun
 const ids=['chariklo','bienor'],origin='http://127.0.0.1:4278';
 const output=resolve('output/playwright/centaur-population');await mkdir(output,{recursive:true});
 const browser=await chromium.launch((await conformanceBrowserLaunch({evidenceDirectory:output,redirectStdio:true})).options);
-const navigationOnly=process.argv.includes('--navigation-only');
+const navigationOnly=process.argv.includes('--navigation-only'),defaultsOnly=process.argv.includes('--defaults-only');
 const results=[];
 try{
- for(const dpr of navigationOnly?[1]:[1,2]){
+ for(const dpr of (navigationOnly||defaultsOnly)?[1]:[1,2]){
   const context=await browser.newContext({viewport:{width:1440,height:900},deviceScaleFactor:dpr});
   const page=await context.newPage(),errors=[],loads=[];
-  page.on('pageerror',e=>errors.push(e.message));
-  page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+  page.on('pageerror',e=>{errors.push(e.message);console.error('Browser error:',e.message);});
+  page.on('console',m=>{if(m.type()==='error'){errors.push(m.text());console.error('Browser console:',m.text());}});
   await page.route(/\/scenes\/(chariklo|bienor)\//,async route=>{
    const [,,id,filename]=new URL(route.request().url()).pathname.split('/');
    const bytes=await readFile(resolve('output/centaur-population/fresh-runtime',id,filename));
@@ -44,6 +44,7 @@ try{
     assert.ok(rings.some(r=>r.rect.width>10&&r.rect.height>10),'Rings have a projected area in the default view');
    }
    const defaultPath=`${output}/${id}-dpr${dpr}.png`;await page.screenshot({path:defaultPath});
+   if(defaultsOnly){results.push({id,dpr,leaves:480,ringTiles:ringCount,shadowsDefault:false,orbitDefault:false,screenshot:defaultPath,loadedFreshAssets:loads.slice(start)});continue;}
    // Main currently hides the settings action. Exercise its existing bound
    // control event for optional-lighting evidence without changing the shell.
    const setShadows=checked=>page.locator('input[name="shadows"]').evaluate((node,checked)=>{node.checked=checked;node.dispatchEvent(new Event('change',{bubbles:true}));},checked);
@@ -55,7 +56,7 @@ try{
    await page.screenshot({path:`${output}/${id}-close-dpr${dpr}.png`});
    results.push({id,dpr,leaves:480,shadowsDefault:false,orbitDefault:false,approximationLabel:true,ringTiles:ringCount,ringPicking:"No separate ring surface-picking contract; body hit triangles only.",forbiddenLeaves:forbidden,loadedFreshAssets:loads.slice(start)});
   }
-  if(dpr===1){
+  if(dpr===1&&!defaultsOnly){
    await page.goto(`${origin}/sun/?overview=solar-system`,{waitUntil:'networkidle'});
    await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');
    assert.equal(await page.locator('input[name="asteroidOrbits"]').isChecked(),false);
@@ -77,6 +78,6 @@ try{
   }
   assert.deepEqual(errors,[]);await context.close();
  }
- await writeFile(navigationOnly?'docs/centaur-population/navigation-final.json':'docs/centaur-population/browser-validation.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:browser.version(),headless:true,origin,viewport:{width:1440,height:900},scope:navigationOnly?'Final integrated production category, search and handoff using the fresh scene image installation.':'Production routes; new scene images served from the independently downloaded installation. Default and close views; optional shadows through the bound control change event because main hides the settings action; shared category, search and in-page navigation.',results},null,2)+'\n');
+ await writeFile(defaultsOnly?'docs/centaur-population/default-views.json':navigationOnly?'docs/centaur-population/navigation-final.json':'docs/centaur-population/browser-validation.json',JSON.stringify({capturedAt:new Date().toISOString(),browser:browser.version(),headless:true,origin,viewport:{width:1440,height:900},scope:defaultsOnly?'Actual production default views using fresh-installed scene images.':navigationOnly?'Final integrated production category, search and handoff using the fresh scene image installation.':'Production routes; new scene images served from the independently downloaded installation. Default and close views; optional shadows through the bound control change event because main hides the settings action; shared category, search and in-page navigation.',results},null,2)+'\n');
  console.log(navigationOnly?'Integrated shared navigation checks passed':'DPR 1/2 fresh asset, default settings, native triangles and shared navigation checks passed');
 }finally{await browser.close();}
