@@ -8,10 +8,11 @@ export const browserProfile=createObjectBrowserProfile({id:'itokawa',controls,au
     }
   ],
   "canonicalPreparedAssets": [
-    "/scenes/itokawa/itokawa-elevation-surface@2x.webp"
+    "/scenes/itokawa/itokawa-amica-surface@2x.webp"
   ],
   "retained": {
     "lensIds": [
+      "amica",
       "elevation"
     ],
     "speedClicks": 5,

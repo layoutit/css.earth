@@ -1,0 +1,21 @@
+{
+  "format": "osiris-camera",
+  "image": "observations/w20080905t183606461id4df17.img",
+  "output": "observations/osiris-camera.json",
+  "mesh": "shape/steins_cart.wrl",
+  "bodyId": 2002867,
+  "kernels": [
+    "reference/naif0012.tls",
+    "reference/ROS_V33.TF",
+    "reference/ROS_OSIRIS_V15.TI",
+    "reference/ROS_STEINS_V05.TPC"
+  ],
+  "references": [
+    "reference/osiris-boresight.pdf",
+    "reference/osiris-photometry.pdf"
+  ],
+  "bodyFrame": "STEINS_FIXED",
+  "cameraFrame": "ROS_OSIRIS_WAC",
+  "correctedFocalLengthMm": 135.68,
+  "pixelPitchMm": 0.0135
+}
