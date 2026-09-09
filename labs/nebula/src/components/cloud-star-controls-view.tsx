@@ -57,6 +57,7 @@ export function createCloudStarControls({ host, onChange }: {
       if (!next) { render(); return; }
       options = { ...(saved.get(next.id) ?? defaults()) }; render(); onChange({ ...options });
     },
+    getValue: () => ({ ...options }),
     destroy() { destroyed = true; context = null; queueMicrotask(() => root.unmount()); },
   };
 }

@@ -14,6 +14,7 @@ import type { RemovalProgress } from '../star-removal/star-removal-types.js';
 import type { LabSubjectRecord } from '../viewer/viewer.js';
 import type { ReconstructionRequest, ReconstructionCatalogue, PreparedReconstruction, ReconstructionWork } from './reconstruction-types.js';
 import { parseCloudAppearance } from './cloud-appearance.js';
+import { lensSettingsHandler } from './lens-settings-server.js';
 
 const hash = (bytes: Buffer | string) => createHash('sha256').update(bytes).digest('hex');
 const cache = '.local/nebula-lab/reconstructions';
@@ -238,6 +239,7 @@ export function reconstructionPlugin(root: string): Plugin {
       await readPreparedReconstruction(root, value.resultId);
     } });
   return { name: 'nebula-reconstruction', configureServer(server) {
+    server.middlewares.use('/__nebula/lens-settings', lensSettingsHandler(root));
     server.middlewares.use('/__nebula/reconstruction-jobs', starRemovalJobsHandler(jobs, '/__nebula/reconstruction-jobs'));
     server.httpServer?.once('close', () => { void jobs.shutdown().catch(() => {}); });
     server.middlewares.use('/__nebula/reconstruction', async (request, response) => {

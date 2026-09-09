@@ -102,6 +102,13 @@ let pendingLayerActivation: number | null = null;
 let placementControls: ReturnType<typeof createOverlayPlacementControls> | null = null;
 const restoringImages = new Map<string, AbortController>(), restorationAttempts = new Set<string>(), restorationMessages = new Map<string, string>();
 const reconstruction = createReconstructionControls(element('reconstruction-processing'), {
+  captureSettings: () => ({
+    cloudId: viewer?.getCloudParts()?.id,
+    selection: cloudControls.getSelection(), brightness: cloudControls.getBrightness(),
+    densityDraft: cloudDensityControls.getValue(),
+    densityApplied: JSON.parse(element('viewer').dataset.cloudDensityFilter ?? 'null'),
+    stars: cloudStarControls.getValue(), starContext: viewer?.getStars(),
+  }),
   async onSelect(prepared, baseSubjectId, current) {
     if (!viewer || currentTab !== 1 || !current()) return false;
     const id = prepared ? registerReconstructionSubject(prepared.subject) : baseSubjectId;

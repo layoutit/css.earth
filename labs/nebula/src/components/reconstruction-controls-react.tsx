@@ -6,6 +6,7 @@ import type { PreparedReconstruction, ReconstructionCandidate, ReconstructionCat
 import { parseCloudAppearance, sameCloudAppearance, type CloudAppearance } from '../reconstruction/cloud-appearance';
 import { readCloudAppearance, saveCloudAppearance } from '../reconstruction/cloud-appearance-store';
 import { CloudAppearanceControls } from './cloud-appearance-controls';
+import { saveLensSettings } from '../reconstruction/lens-settings-export';
 
 interface Job {
   id: string; status: 'queued' | 'running' | 'cancelling' | 'completed' | 'failed' | 'cancelled' | 'interrupted';
@@ -27,6 +28,7 @@ function readSelection(subjectId: string): Selection {
 }
 
 interface Props { context: string | null; viewerBusy: boolean;
+  captureSettings?(): unknown;
   onSelect(prepared: PreparedReconstruction | null, subjectId: string, isCurrent: () => boolean): Promise<boolean>;
 }
 interface View { imageId: string; candidates: ReconstructionCandidate[]; selectDisabled: boolean; processDisabled: boolean;
@@ -35,9 +37,10 @@ interface View { imageId: string; candidates: ReconstructionCandidate[]; selectD
 const initialView: View = { imageId: 'benchmark', candidates: [], selectDisabled: true, processDisabled: true,
   appearance: parseCloudAppearance(), appearanceDirty: false,
   running: false, cancelling: false, job: null, text: '', error: false, credit: 'Historical photo-based LMC experiment.' };
-export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: Props) {
+export function ReconstructionControls({ context, viewerBusy: busy, onSelect, captureSettings }: Props) {
   const [view, setView] = useState<View>(initialView);
-  const actions = useRef<{ choose?(value: string): void; appearance?(value: CloudAppearance): void; process?(): void; cancel?(): void; busy?(value: boolean): void }>({});
+  const [exportLabel, setExportLabel] = useState('Save lens settings');
+  const actions = useRef<{ choose?(value: string): void; appearance?(value: CloudAppearance): void; process?(): void; cancel?(): void; export?(): void; busy?(value: boolean): void }>({});
   useEffect(() => {
   let messageText = '', messageError = false;
   let subjectId: string | null = null, catalogue: ReconstructionCatalogue | null = null, selection: Selection = { imageId: 'benchmark' };
@@ -155,6 +158,11 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
     if (!subjectId || !candidate() || loading || mounting || viewerBusy || active(job)) return;
     appearance = parseCloudAppearance(value); saveCloudAppearance(subjectId, selection.imageId, appearance); render();
   };
+  actions.current.export = () => {
+    if (!subjectId || loading || mounting || viewerBusy || active(job)) return;
+    setExportLabel('Saving…');
+    void saveLensSettings(subjectId, { ...selection }, captureSettings?.()).then(() => setExportLabel('✓ Lens settings saved'), error => { setExportLabel('Save lens settings'); message(error.message, true); });
+  };
   actions.current.process = () => {
     const row = candidate(); if (!row?.ready || !row.removalResultId || !catalogue || !subjectId || loading || mounting || active(job)) return;
     const previous = readJob(); if (previous && active(previous)) { void activateSelection(); return; }
@@ -242,6 +250,9 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
       {view.appearanceDirty && !view.running && !view.error && !view.processDisabled ? 'Changes ready · Preview to apply.' : view.text}</p>
     <progress id="reconstruction-progress" aria-label="Reconstruction progress" hidden={!view.running}
       max={total && Number.isFinite(current) ? total : undefined} value={total && Number.isFinite(current) ? current : undefined} />
+    <button id="save-lens-settings" type="button" className="text-button" disabled={view.selectDisabled || view.running}
+      title="Save this browser’s lens, filter, brightness and star settings locally for the app handoff. Includes stored settings for all images; does not bake."
+      onClick={() => actions.current.export?.()}>{exportLabel}</button>{' · '}
     <button className="text-button" type="button" popoverTarget="reconstruction-source-info">ⓘ Source</button>
     <div id="reconstruction-source-info" className="lab-info-popover" popover="auto">
       <button type="button" popoverTarget="reconstruction-source-info" popoverTargetAction="hide" aria-label="Close source information">×</button>
@@ -251,9 +262,9 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
   </section>;
 }
 
-export function createReconstructionControls(host: HTMLElement, options: Pick<Props, 'onSelect'>) {
+export function createReconstructionControls(host: HTMLElement, options: Pick<Props, 'onSelect' | 'captureSettings'>) {
   const root = createRoot(host); let context: string | null = null, viewerBusy = false, disposed = false;
-  const render = () => { if (!disposed) root.render(<ReconstructionControls context={context} viewerBusy={viewerBusy} onSelect={options.onSelect} />); };
+  const render = () => { if (!disposed) root.render(<ReconstructionControls context={context} viewerBusy={viewerBusy} onSelect={options.onSelect} captureSettings={options.captureSettings} />); };
   render();
   return { setContext(next: string | null) { if (next !== context) { context = next; render(); } },
     setBusy(next: boolean) { if (next !== viewerBusy) { viewerBusy = next; render(); } },

@@ -52,9 +52,12 @@ Current processing repaints the Alignment density cloud’s exact 144 prepared q
 | Native NOX outputs | `.local/nebula-lab/star-removal-nox-applied/`; diffuse, residual, mask and receipts |
 | Running/saved job records | Separate star-removal and reconstruction job directories in the local cache |
 | Completed reconstruction banks | `.local/nebula-lab/reconstructions/`; descriptors, XYZ textures, provenance and manifest |
+| Explicit lens-settings handoff | **Save lens settings** in Reconstruction writes `.local/nebula-lab/lens-settings/latest.json` and an immutable timestamped receipt |
 | Versioned recipes/evidence | `models/lmc/`, `models/smc/`, shared recipe files and `sources/` |
 
 An image-to-density placement change requires **Preview** again to produce a matching bank. Browsing a result does not rewrite it. Promotion into a checked-in model or production object is a separate explicit task, with source credits and replay instructions retained.
+
+For a handoff, click **Save lens settings** in the browser where you adjusted the lenses. It captures stored settings for every image, current result identity, cloud selection/axis brightness, stars and the active density draft separately from the applied filter. Wait for **✓ Lens settings saved**. It does not process or promote anything. Unvisited images have no personal settings to export; never substitute another browser's test bakes for the user's choices.
 
 ## Development checks
 
