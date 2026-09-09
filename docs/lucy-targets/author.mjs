@@ -15,8 +15,13 @@ import { paintMissingCoverage } from '../../src/platform/prepare-missing-coverag
 
 const root = resolve(import.meta.dirname, '../..');
 if (process.cwd() !== root) throw new Error('Run from the repository root.');
-const { bodies, checkedOn } = JSON.parse(await readFile(new URL('./inputs.json', import.meta.url)));
+const inputsArg = process.argv.find(arg => arg.startsWith('--inputs='));
+const inputsPath = inputsArg ? resolve(root, inputsArg.slice(9)) : new URL('./inputs.json', import.meta.url);
+const { bodies, checkedOn } = JSON.parse(await readFile(inputsPath));
+const reproduceCommand = `docs/lucy-targets/author.mjs${inputsArg ? ' ' + inputsArg : ''}`;
 const commonCommit = 'e97ee9532b17beaf0c7ae38281c5bef12b64fa5b';
+// Current page contract loads only metadata into Astro's build graph.
+const pageTemplateCommit = 'a5a34bdefa849801d092f10755cf81f6f3f23f5e';
 const common = 'src/planets/menoetius/';
 const readCommon = path => execFileSync('git', ['show', `${commonCommit}:${common}${path}`]);
 const commonJson = path => JSON.parse(readCommon(path));
@@ -108,10 +113,11 @@ for (const b of bodies) {
     { id: 'shape', label: 'Shape evidence', value: 'Approximate ellipsoid' },
     { id: 'dimensions', label: 'Full approximation dimensions', value: dimensions },
     { id: 'rotation', label: b.id === 'patroclus' ? 'Mutual orbital period' : 'Rotation period', value: b.periodText },
-    { id: 'class', label: 'Population', value: 'Jupiter Trojan' }
+    { id: 'class', label: 'Population', value: b.population ?? 'Jupiter Trojan' }
   ];
   content.panel.moreFacts = [];
-  content.lenses.controls[0].description = content.lenses.controls[0].title = coverage;
+  content.lenses.controls[0].description = coverage;
+  content.lenses.controls[0].title = b.datasetTitle ?? 'Published shape approximation';
   content.lenses.controls[0].detail = 'Approximate shape';
   content.lenses.controls[0].source.url = b.source;
   content.settings.controls.find(c => c.name === 'shadows').checked = false;
@@ -145,9 +151,9 @@ for (const b of bodies) {
   descriptor.prepared.sha256 = '0'.repeat(64);
   await write(resolve(pkg, 'object.json'), descriptor);
   await repin(b);
-  await write(resolve(pkg, 'SOURCE.md'), `# ${b.name}\n\n${b.introduction}\n\n## Shape, scale and orientation\n\n${coverage}\n\nSource: [${b.credit}](${b.source}). Checked ${checkedOn}. The full axes are halved once; the reference radius is the geometric mean of these semiaxes. This is the approximation's rendering scale, not an independent observed radius or the volume of the original convex reconstruction. Formal axis uncertainties are included only where the source supplies them.\n\nThe radius-table formula and pole conversion are in source/measurements.json. Reproduce authored geometry and its grid thumbnail with docs/lucy-targets/author.mjs; all scene geometry, texture and lighting are produced by the existing shared terrestrial preparer. Runtime uses retained native PolyCSS raster triangles.\n\n## Source survey\n\n- Included: published numerical shape constraints and matched pole evidence. ${b.shapeMeaning}\n- Included: existing normal missing-data grid. No resolved registered surface mosaic was qualified for this pre-encounter target. Integrated spectra are not surface maps.\n${b.unresolved.map(x => '- Unresolved: ' + x).join('\n')}\n- [Lucy mission summary](https://doi.org/10.1007/s11214-025-01173-7) supplies the mission context and complementary model descriptions.\n\n## Orbit\n\nJPL Horizons command ${JSON.stringify(b.horizons)}; osculating ICRF elements and independent vector fixtures use the existing astronomy generator at 2026-09-03 TT (TDB approximated as TT, below 2 ms). This is a fixed-date context, not a real-time trajectory or surface attitude.${b.id === 'patroclus' ? ' The existing Menoetius primary-specific JPL#82 state overrides the conic at this epoch for a consistent binary origin.' : ''}\n\n## Reproduction\n\nRestore pinned common inputs with the shared acquisition command and run the authored preparer for this object. No other body renderer or prepared scene is copied.\n`);
+  await write(resolve(pkg, 'SOURCE.md'), `# ${b.name}\n\n${b.introduction}\n\n## Shape, scale and orientation\n\n${coverage}\n\nSource: [${b.credit}](${b.source}). Checked ${checkedOn}. The full axes are halved once; the reference radius is the geometric mean of these semiaxes. This is the approximation's rendering scale, not an independent observed radius or the volume of the original convex reconstruction. Formal axis uncertainties are included only where the source supplies them.\n\nThe radius-table formula and pole conversion are in source/measurements.json. Reproduce authored geometry and its grid thumbnail with ${reproduceCommand}; all scene geometry, texture and lighting are produced by the existing shared terrestrial preparer. Runtime uses retained native PolyCSS raster triangles.\n\n## Source survey\n\n- Included: published numerical shape constraints and explicitly qualified orientation. ${b.shapeMeaning}\n- Included: existing normal missing-data grid. ${b.surfaceMeaning ?? 'No resolved registered surface mosaic was qualified for this pre-encounter target.'} Integrated spectra are not surface maps.\n${b.unresolved.map(x => '- Unresolved: ' + x).join('\n')}\n- [Mission context](${b.missionSource ?? 'https://doi.org/10.1007/s11214-025-01173-7'}).\n\n## Orbit\n\nJPL Horizons command ${JSON.stringify(b.horizons)}; osculating ICRF elements and independent vector fixtures use the existing astronomy generator at 2026-09-03 TT (TDB approximated as TT, below 2 ms). This is a fixed-date context, not a real-time trajectory or surface attitude.${b.id === 'patroclus' ? ' The existing Menoetius primary-specific JPL#82 state overrides the conic at this epoch for a consistent binary origin.' : ''}\n\n## Reproduction\n\nRestore pinned common inputs with the shared acquisition command and run the authored preparer for this object. No other body renderer or prepared scene is copied.\n`);
   await write(resolve(pkg, 'NOTICE.md'), `# Credits\n\nScientific shape constraints: ${b.credit}. Numerical extraction and ellipsoid approximation: cssEarth, MIT. Retain the source citations and approximate status; research papers are not relicensed or bundled. The missing-data grid is authored display content, not observed regolith. ESO/S. Brunier panorama: CC BY 4.0. Inter: SIL OFL 1.1. HYG metadata: Astronexus, CC BY-SA 4.0. See source/stars for full license records.\n`);
-  await write(resolve(root, `site/pages/${b.id}.astro`), replace(execFileSync('git', ['show', `${commonCommit}:site/pages/menoetius.astro`]).toString(), b));
+  await write(resolve(root, `site/pages/${b.id}.astro`), replace(execFileSync('git', ['show', `${pageTemplateCommit}:site/pages/menoetius.astro`]).toString(), b));
   await write(resolve(root, `src/renderers/css/styles/${b.id}-surfaces.css`), replace(execFileSync('git', ['show', `${commonCommit}:src/renderers/css/styles/menoetius-surfaces.css`]).toString(), b));
   await write(resolve(root, `tests/objects/browser/${b.id}/browser-profile.mjs`), replace(execFileSync('git', ['show', `${commonCommit}:tests/objects/browser/menoetius/browser-profile.mjs`]).toString(), b));
   console.log(JSON.stringify({ id: b.id, sourceFaces: mesh.indices.length, outputFaces: faces.length, radiusKm: radius, contextBytes: context.length }));
