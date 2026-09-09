@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 195.93478260869566,
       "bodyRadiusM": 45065
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/vanadis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "4d495dd975d7ef834ff3289f57fc9bf0af35f6da1547ea77ec9a98279538876a"
+      }
     }
   },
   "schema": "cssearth-object@1",

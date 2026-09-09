@@ -106,6 +106,15 @@
       ],
       "metersPerUnit": 115.78260869565217,
       "bodyRadiusM": 26630
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/rhodope-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "03f7b38ab6e4311b76ee9f79a7939b23620f45e6f55cb025f0fb12981465e560"
+      }
     }
   },
   "schema": "cssearth-object@1",

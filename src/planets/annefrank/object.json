@@ -103,6 +103,15 @@
       ],
       "metersPerUnit": 10.485113128601453,
       "bodyRadiusM": 2411.576019578334
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/annefrank-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "48e49de7017d762f1dbb21475d43e84228844dc447f58867f386d690929008a5"
+      }
     }
   },
   "prepared": {

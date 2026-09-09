@@ -1,3 +1,4 @@
+import type { WorldFramePresenter } from './world-frame-presenter.js';
 import { createObjectInteractionControls } from './object-interaction-controls.js';
 import type { InteractionServices } from './object-interaction-controls.js';
 export { createObjectInteractionControls } from './object-interaction-controls.js';
@@ -25,8 +26,8 @@ import { createPreparedFocusNavigation } from './prepared-focus.js';
 import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & Partial<ReturnType<PerspectiveDolly['state']>>;
-export interface OrbitPublication extends CameraAngles { sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection?: PhysicalProjection; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; stageViewport?: WorldCameraViewport; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
-export interface RetainedOrbitOptions { preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport?: import('./camera-viewport.js').CameraViewport; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
+export interface OrbitPublication extends CameraAngles { worldCamera?: WorldCameraPose; sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; sunPresentation: SunProjection | ReturnType<RetainedDirectionalSun['state']> | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection?: PhysicalProjection; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; stageViewport?: WorldCameraViewport; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
+export interface RetainedOrbitOptions { framePresenter?: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSun?: RetainedDirectionalSun | null; directionalSunPlan?: DirectionalSunPlan | null; heliocentric?: ReturnType<typeof mountRetainedHeliocentricView> | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport?: import('./camera-viewport.js').CameraViewport; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; }
 export interface OrbitServices extends InteractionServices { createPolyCamera?: typeof createPolyCamera; createCubicSkyCameraOrientation?: typeof createCubicSkyCameraOrientation; bindResponsiveOrbitPolicy?: RuntimePolicy['bindResponsiveOrbitPolicy']; selectPreparedResponsiveZoom?: typeof selectPreparedResponsiveZoom; createPerspectiveDolly?: typeof createPerspectiveDolly; HTMLElement?: typeof HTMLElement; matchMedia?: (query: string) => MediaQueryList; MutationObserver?: typeof MutationObserver; }
 export type RetainedCubicSkyOrbit = ReturnType<typeof createRetainedCubicSkyOrbit>;
 import { createPreparedCameraPublisher } from "../rendering/prepared-camera-runtime.js";
@@ -61,6 +62,7 @@ export function createRetainedCubicSkyOrbit({
   // Sun's direction in directionalSunPlan is observed, so it rides the scene.
   heliocentric = null,
   worldContext,
+  framePresenter,
   preparedSurfaceHitTest,
   cameraPlan,
   viewport,
@@ -229,19 +231,32 @@ export function createRetainedCubicSkyOrbit({
     : skySunViewDirection;
   let responsiveFit: ReturnType<typeof selectPreparedResponsiveZoom>;
   let projected: ReturnType<PerspectiveDolly["publish"]> | null = null;
+  let viewportEpoch = 0, requestedPublication = 0, presentedPublication = 0;
+  let presentedWorld: WorldCameraPose | null = null;
+  const publicationState = () => ({ requestedRevision: requestedPublication, presentedRevision: presentedPublication, presentedWorld });
   const publish = () => {
     if (lifetime.disposed) return;
+    // Resolve the active input pivot before an asynchronous frame captures the physical observer.
+    preparedFocus?.syncRotation();
     const sceneMatrix = orientation.scene();
     const sky = orientation.skybox();
     const zoom = safeCamera.state.zoom;
+    const controlPitch = safeCamera.state.rotX, controlYaw = safeCamera.state.rotY;
+    const captured = framePresenter && perspective && worldContext
+      ? perspective.prepare(orientation.sceneMatrix(), sceneMatrix) : null;
+    const counterRotationFor = captured ? orientation.captureCounterRotation()
+      : (local: string | DOMMatrix | null = null) => orientation.counterRotation(local);
+    const revision = ++requestedPublication, epoch = viewportEpoch;
+    const current = () => !lifetime.disposed && epoch === viewportEpoch;
+    const commit = () => {
+    if (!current()) return;
     const skyboxChanged = sky.matrix !== publishedSkyboxMatrix;
     const zoomChanged = zoom !== publishedZoom;
     // The Sun and the orbit, resolved relative to the camera in float64; the
     // same projection places the body.
     if (perspective) {
-      preparedFocus!.syncRotation();
       heliocentric?.setSkyView?.({ matrix: sky.matrix, exposure: cubicSky.starExposure?.() ?? null });
-      projected = perspective.publish(orientation.sceneMatrix(), sceneMatrix);
+      projected = captured ? captured.commit() : perspective.publish(orientation.sceneMatrix(), sceneMatrix);
     }
     else publishCamera!({ sceneMatrix, zoom });
     if (skyboxChanged || zoomChanged) {
@@ -264,19 +279,19 @@ export function createRetainedCubicSkyOrbit({
         : skySunViewDirection;
     }
     if (projected) sunPresentation = projected.sun ?? null;
+    presentedPublication = revision;
+    if (captured?.world) presentedWorld = captured.world;
     onPublish(Object.freeze({
       sceneMatrix,
       skyboxMatrix: sky.matrix,
       sunViewDirection: materialSunViewDirection,
       skySunViewDirection,
       sunPresentation,
-      counterRotation: orientation.counterRotation(),
-      counterRotationFor(localMatrix: string | DOMMatrix | null) {
-        return orientation.counterRotation(localMatrix);
-      },
-
-      controlPitch: safeCamera.state.rotX,
-      controlYaw: safeCamera.state.rotY,
+      counterRotation: counterRotationFor(),
+      counterRotationFor,
+      ...(captured?.world ? { worldCamera: captured.world } : {}),
+      controlPitch,
+      controlYaw,
       zoom,
       // The dolly's facts: the eye, the projected body and its level of
       // detail, for presentations that fit overlays to the silhouette and
@@ -294,6 +309,10 @@ export function createRetainedCubicSkyOrbit({
       }),
     }));
     publications += 1;
+    };
+    if (captured?.world && framePresenter) framePresenter.present({
+      world: captured.world, viewport: captured.viewport, commit, current, fail: retireFailure });
+    else commit();
   };
   const mobileQuery = matchMedia(runtimePolicy.MOBILE_VIEWPORT_QUERY);
   const publishCameraDelta = ({
@@ -387,6 +406,7 @@ export function createRetainedCubicSkyOrbit({
   const windowTarget = stage.ownerDocument.defaultView;
   if (!windowTarget) throw new Error("Orbit document has no window.");
   const handleViewportResize = guardNative(() => {
+    viewportEpoch++;
     // The dolly keeps its framing across the resize (the shared contract:
     // a breakpoint crossing preserves the camera state).
     perspective?.remeasure();
@@ -410,6 +430,7 @@ export function createRetainedCubicSkyOrbit({
       // The shell moves the render roots when the sidebar collapses; the eye
       // stays at the sky's vanishing point, so re-measure the offset then.
       const relayout = guardNative(() => {
+        viewportEpoch++;
         perspective.remeasure();
         publish();
       });
@@ -429,6 +450,7 @@ export function createRetainedCubicSkyOrbit({
   publish();
   constructing = false;
   return Object.freeze({
+    publicationState,
     mobilePageFlow: () => inputPolicy.mobile,
     initialResponsiveZoom: () => initialResponsiveZoom,
     currentResponsiveZoom: () => responsiveFit.zoom,
@@ -636,6 +658,7 @@ export function createRetainedCubicSkyOrbit({
         responsiveBaseZoom: responsiveFit.zoom,
         publications,
         preparedFocusId: preparedFocus?.current()?.id ?? null,
+        framePublication: publicationState(),
         directionalSunBillboardCount: hasDirectionalSun ? 1 : 0,
         interactionStarts,
         interactionEnds,

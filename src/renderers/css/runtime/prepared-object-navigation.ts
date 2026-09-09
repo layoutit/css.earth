@@ -18,7 +18,7 @@ export interface ObjectPreparationView { world: WorldCameraPose; viewport: World
 export function createObjectViewDemand(definition: ObjectRuntimeDefinition, frame: PreparedWorldCameraFrame) {
   const selection = initialObjectSelection(definition.controls);
   if (!selectedPreparedVariant(definition, selection).materials.length) {
-    const plan = resolvePreparedPresentation(definition, { selection, view: null });
+    const plan = resolvePreparedPresentation(definition, { selection, view: null, initial: true });
     return (_view: ObjectPreparationView) => plan;
   }
   const { camera, sky, sun } = definition;
@@ -36,7 +36,7 @@ export function createObjectViewDemand(definition: ObjectRuntimeDefinition, fram
     orientation.setSceneRotation(presentation.rotation);
     const radius = frame.bodyRadiusM / frame.metersPerUnit;
     const diameter = worldCameraSilhouetteDiameter(presentation, radius);
-    return resolvePreparedPresentation(definition, { selection, view: {
+    return resolvePreparedPresentation(definition, { selection, initial: true, view: {
       sceneMatrix: orientation.scene(), sunViewDirection: light(), reference,
       ...(camera.levelOfDetail ? { levelOfDetail: levelOfDetailFor(camera.levelOfDetail, diameter) } : {}),
     } });
