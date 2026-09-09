@@ -11,3 +11,9 @@
 - Do not use runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas, WebGL, or SVG scene rendering.
 - Preserve source/provenance files beside each planet and keep prepared outputs reproducible from the checked-in inputs.
 - Use source and runtime closure tests, object-package tests, router tests, and `OBJECTS`-derived browser conformance as proof. Do not duplicate those facts as declaration-only constants.
+
+## Provenance and documentation
+
+- Follow [the provenance and documentation contract](docs/provenance/CONTRACT.md) for source records, attribution, portable evidence and claims. The PROVENANCE DOCUMENTATION owner maintains that shared contract; contributors update their affected records in the same change.
+- For body work, use the repository-owned [celestial skill](.agents/skills/celestial-skill/SKILL.md). Start at the body README when present; otherwise use SOURCE.md, NOTICE.md and manifests and add an entry point as the body is next touched.
+- Keep historical evidence scoped to its tested candidate. Link existing runs without relabeling them as current qualification.

@@ -62,7 +62,11 @@ epoch, and the self-luminous Sun view deliberately does not bake a second Sun
 into the cube. Camera pitch and yaw are unbounded accumulated matrix3d
 rotations; the cube follows rotation without translation or parallax.
 
-`node src/planets/sun/tools/verify-reproduction.mjs` prepares all runtime raster
-assets in a temporary directory and requires every byte to match the accepted
-runtime closure. Runtime performs no source derivation, image processing,
+The shared source route is `node tools/objects/dist/operations.js acquire sun`,
+followed by `node tools/objects/dist/prepare-authored.js sun --write` after
+building the shared preparation tools. A fresh reproduction check needs an
+isolated destination and comparison against the pinned outputs; simply running
+preparation in a populated checkout does not prove it. The former private Sun
+verification script is no longer an executable owner. Dated checks and open
+qualification claims are indexed in [README.md](README.md). Runtime performs no source derivation, image processing,
 geometry construction, canvas, SVG scene rendering, or WebGL work.

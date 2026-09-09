@@ -30,16 +30,37 @@ The astronomy package supplies Rhea's Saturn-relative orbit, IAU orientation and
 
 Map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products. The final source-mesh scene samples these maps into prepared per-triangle atlases. Prepared surface/pole atlases use WebP quality 90 with lossless alpha; intermediate maps remain lossless. Native observations are downsampled, and larger textures would not increase the terrain model's detail.
 
-`source/manifest.json` pins source URLs, byte counts, hashes and credits. Ignored inputs are downloadable through the shared acquisition recipe; runtime uses prepared assets only. Remote installation remains unproven until the assets are published through the existing publisher.
+`source/manifest.json` pins source URLs, byte counts, hashes and credits. Ignored inputs are downloadable through the shared acquisition recipe; runtime uses prepared assets only. Dated installation evidence is indexed in [README.md](README.md); its scope
+and tested candidate must be checked before reusing it.
 
 ## B2 source shape and relative albedo
 
-The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 7,635 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 5700.82 m, 95th percentile 2867.32 m and RMS 1460.13 m. These samples do not establish a full Hausdorff bound. Geographic registration, silhouette and feature review remain pending. The original photographic-map projection radii remain separate from shape geometry and the numeric elevation datum.
+The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 7,635 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 5700.82 m, 95th percentile 2867.32 m and RMS 1460.13 m. These samples do not establish a full Hausdorff bound. Those sampled source distances do not by themselves qualify geographic
+registration, silhouette or feature appearance; see the dated evidence in
+[README.md](README.md). The original photographic-map projection radii remain separate from shape geometry and the numeric elevation datum.
 
 New relative albedo uses the published 2025 GeoTIFFs and their original equatorial/polar projections. Values are dimensionless and normalized around 1; the archive gives a nominal 0–2 domain. The visible 0.5–1.5 scale saturates above 1.5. No height conversion or relief shading is applied to this quantity. It is a secondary SPC brightness product, less validated than topography, and is neither geometric albedo nor calibrated reflectance. Tethys used uncalibrated ISS inputs; Dione and Rhea used calibrated frames. Source sigma is internal maplet agreement, not absolute height uncertainty.
 
 The Shape lens uses the shared neutral grid over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 8.6 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
 
-Qualification status: source intake and recipe proposal. Final mesh selection (where applicable), restored-source and prepared browser/visual gates remain pending. No readiness is claimed.
+The preceding B2 preparation measurements are historical. Current evidence
+links and unresolved qualification claims belong in [README.md](README.md).
 
 The relative-albedo GeoTIFF ends at 359.151742419° East and 89.575871210° South with its exact delivered pixel scale, leaving narrow longitude and south-polar gaps. These remain missing; the nominal global product is not stretched to force complete raster coverage. Independent tests check source cells and both unfilled strips.
+
+## Cassini VIMS infrared and ice absorption
+
+The [pinned VIMS interpretation](source/vims/INTERPRETATION.md) owns the full
+source/field definitions and conversion limits for the two added views.
+The source is Scipioni and Combe's Cassini VIMS mosaic collection,
+DOI [10.17189/ctqe-ta30](https://doi.org/10.17189/ctqe-ta30). Manifest entries
+prefixed `rhea-vims-source-` pin the cube, wavelengths, original labels and guide;
+`source/vims/prepare-maps.json` and the shared acquisition converter specify
+our conversion. The archived mission-to-mosaic reduction is not reproduced here.
+
+Infrared displays three measured reflectance channels in false color. Ice
+absorption is a continuum-relative indicator derived from those spectra;
+it is not ice percentage, crystallinity, grain size or temperature. Missing
+samples remain missing. Absolute registration at fractions of a native pixel
+remains unresolved. See [NOTICE](NOTICE.md) for attribution and [README](README.md)
+for the independent source review and scoped B7 evidence.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Celestial Skill"
+  short_description: "Build source-backed celestial bodies for cssEarth"
+  default_prompt: "Use $celestial-skill to create or repair a source-backed celestial body in cssEarth: inspect its sources, use the generic preparation recipe, inspect the result, and complete the relevant delivery checks."
