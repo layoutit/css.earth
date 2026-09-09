@@ -1,10 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { BASE_TILE } from '@layoutit/polycss';
+import { prepareRingLeaves } from '../shape-model/rings.mjs';
 import { prepareTerrestrialRings, validateTerrestrialRings } from './rings.mjs';
 
 const band = (id, innerRadiusKm, outerRadiusKm, displayOpacity) => ({
@@ -12,6 +14,19 @@ const band = (id, innerRadiusKm, outerRadiusKm, displayOpacity) => ({
   qualification: 'Measured dimensions; opacity is a schematic display value.',
 });
 const profile = { textureSize: 256, bands: [band('inner', 20, 24, 1), band('outer', 28, 30, .25)] };
+
+test('extracted Haumea helper preserves its existing annular geometry and image mapping', () => {
+  const leaves = prepareRingLeaves(
+    { displayRadius: 230, ring: { innerRadiusKm: 2252, outerRadiusKm: 2322, segments: 128 } },
+    { url: '/scenes/haumea/haumea-ring.webp', width: 2048, height: 64 },
+    1161,
+  );
+  // Captured from the original helper at 1fb76e44d6bf831e7ebcf0516b83c0b10e1716da.
+  // This checks every transform, texture projection, style and leaf order.
+  assert.equal(leaves.length, 128);
+  assert.equal(createHash('sha256').update(JSON.stringify(leaves)).digest('hex'),
+    '372bcf6a596c2754cdc821b8da74a00a4ac4b4cab778c835f0a22f1ba208024d');
+});
 
 test('two annuli retain the source radii, central aperture, gap, and separate opacity', async () => {
   const publicDirectory = await mkdtemp(resolve(tmpdir(), 'cssearth-annuli-'));
