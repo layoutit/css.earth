@@ -160,24 +160,24 @@ test.each([
     const camera: WorldCameraPose = { referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
       pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distance], orientationXyzw: [0, 0, 0, 1] } };
     mounted.publish(camera, viewport);
-    expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected, 12);
     const expectedGain = withBrightness ? gain : 1;
+    expect(Number(volumeRoot.dataset.volumeOpacity)).toBeCloseTo(expected, 12);
+    expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
     if (withBrightness && distance === gradedDistance) {
       expect(expectedGain).toBeGreaterThan(.23);
       expect(expectedGain).toBeLessThan(.25);
     }
-    expect(volumeImage.style.opacity).toBe(`var(--universe-volume-brightness-override, ${Number(volumeImage.dataset.volumeBrightness)})`);
+    expect(volumeImage.style.opacity).toBe(withSky ? '' : String(expectedGain));
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     if (withSky) {
       expect(skyRoot.style.visibility).toBe(expected < 1 ? 'visible' : 'hidden');
-      expect(skyRoot.style.opacity).toBeUndefined();
+      expect((1 - Number(volumeRoot.style.opacity)) * Number(skyRoot.style.opacity)).toBeCloseTo(1 - expected, 12);
       const skyWeight = Number(skyRoot.dataset.skyContribution);
       expect(skyWeight).toBeCloseTo(1 - expected, 12);
-      expect(Number(volumeRoot.style.opacity) + skyWeight).toBeCloseTo(1, 12);
-      // The two completed images are NASA and the separately graded B*volume.
-      // The host matte must not turn grading into additional NASA contribution.
+      expect(Number(volumeRoot.dataset.volumeOpacity) + skyWeight).toBeCloseTo(1, 12);
+      // Test the actual DOM source-over equation, not just reported weights.
+      // Regrouping must not turn exposure into extra NASA contribution.
       expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBeCloseTo(.4 * (expected * expectedGain + 1 - expected), 12);
-      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4, 1)).toBeCloseTo(.4, 12);
       if (distance === regressionDistance) {
         expect(expected).toBe(0);
         expect(skyWeight).toBe(1);
@@ -186,22 +186,31 @@ test.each([
         expect(completedPixel(volumeRoot, volumeImage, skyRoot, .4)).toBe(.4);
       }
     } else expect(completedPixel(volumeRoot, volumeImage, undefined, .4)).toBeCloseTo(.4 * expected * expectedGain, 12);
+    const starCalls = starPublish.mock.calls.length;
+    for (const high of [true, false]) {
+      mounted.setHighContrastSky(high);
+      const effectiveGain = high ? 1 : expectedGain;
+      expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? effectiveGain : 1), 12);
+      expect(completedPixel(volumeRoot, volumeImage, skyRoot, .2, .7)).toBeCloseTo(
+        .2 * expected * effectiveGain + (withSky ? .7 * (1 - expected) : 0), 12);
+      expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
+    }
+    expect(starPublish.mock.calls.length).toBe(starCalls);
     expect(starPublish).toHaveBeenLastCalledWith(camera, viewport, 1 - logarithmicFade(distance, context.volume.fadeStartDistanceM, context.volume.fullDistanceM), mounted.inspect().foregroundLabelExclusions);
     expect(starPublish.mock.lastCall![3]).toEqual(expect.arrayContaining(foregroundRects));
     expect(spatialPublish.mock.invocationCallOrder.at(-1)).toBeLessThan(starPublish.mock.invocationCallOrder.at(-1)!);
     mounted.publish({ ...camera, pose: { ...camera.pose, orientationXyzw: [0, 1, 0, 0] } }, viewport);
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
-    expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected, 12);
+    expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
   }
   expect(document.count).toBe(count); expect(root.children).toEqual(originalNodes);
   mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
 });
 
-/** Ordinary source-over of a completed volume image through the actual two DOM
- * opacity levels, including the outer host's optional opaque black backdrop. */
-function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement | undefined, value: number, override?: number): number {
-  const t = Number(host.style.opacity), g = override ?? Number(image.dataset.volumeBrightness);
+/** Ordinary source-over through the actual DOM opacity levels. */
+function completedPixel(host: FakeElement, image: FakeElement, sky: FakeElement | undefined, volumeValue: number, skyValue = volumeValue): number {
+  const t = Number(host.style.opacity), g = Number(image.style.opacity || '1');
   const foregroundAlpha = t * (host.style.background === '#000' ? 1 : g);
-  const underlay = sky?.style.visibility === 'visible' ? value : 0;
-  return t * g * value + (1 - foregroundAlpha) * underlay;
+  const underlay = sky?.style.visibility === 'visible' ? skyValue * Number(sky.style.opacity || '1') : 0;
+  return t * g * volumeValue + (1 - foregroundAlpha) * underlay;
 }

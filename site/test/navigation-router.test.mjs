@@ -110,6 +110,24 @@ test('persistent world context is mounted once and follows the active physical n
   assert.deepEqual(events.at(-1), ['destroy']);
 });
 
+test('contrast intent reaches a loading world once and survives detail navigation', async () => {
+  const gate = deferred(), changes = [];
+  const h = harness({ persistentWorldContext: { async mount() {
+    await gate.promise;
+    return { selectObject() {}, publish() {}, destroy() {}, setHighContrastSky(value) { changes.push(value); } };
+  } } });
+  h.shells[0].options.onSkyContrastChange(true);
+  gate.resolve(); await h.router.settled;
+  assert.deepEqual(changes, [true]);
+  await h.router.navigate('venus');
+  assert.deepEqual(changes, [true]);
+  h.shells[0].options.onSkyContrastChange(false);
+  assert.deepEqual(changes, [true, false]);
+  h.router.destroy(); h.shells[0].options.onSkyContrastChange(true);
+  assert.deepEqual(changes, [true, false]);
+  assert.deepEqual(h.errors, []);
+});
+
 test('flight overlays follow the pending request through success and failure, while recentering keeps them visible', async () => {
   let visible = true, flight = deferred();
   const h = harness({ prepare: () => flight.promise, persistentWorldContext: { async mount() {

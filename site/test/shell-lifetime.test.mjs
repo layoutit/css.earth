@@ -144,7 +144,7 @@ test("failed shell construction cleans earlier controllers and their scheduled w
 });
 
 test('object content replacement retains shell controls and input state without accumulating listeners', () => {
-  const f = fixture(), shell = f.mount();
+  const skyChanges = [], f = fixture({ onSkyContrastChange: value => skyChanges.push(value) }), shell = f.mount();
   const search = f.selectors.get('.planet-sidebar-search');
   const drawer = f.selectors.get('.planet-drawer-content');
   const motion = f.selectors.get('.planet-motion-setting');
@@ -166,6 +166,7 @@ test('object content replacement retains shell controls and input state without 
     assert.equal(heliosphere.checked, true);
     assert.equal(f.documentTarget.body.dataset.skyContrast, 'high');
   }
+  assert.deepEqual(skyChanges, [true], 'Content replacement preserves contrast without replaying intent');
   assert.deepEqual(f.changes, [true]);
   shell.destroy();
   assert.ok(f.elements.every(element => element.listeners.size === 0));

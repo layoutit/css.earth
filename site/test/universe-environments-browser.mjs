@@ -76,7 +76,10 @@ try {
     snapshots[name] = await read(page);
     assert.ok(Math.abs(snapshots[name].volumeOpacity - opacity) < 1e-6, `${name}: actual volume opacity follows prepared profile`);
     assert.equal(snapshots[name].skyVisibility, opacity < 1 ? 'visible' : 'hidden');
-    assert.equal(snapshots[name].skyOpacity, 1, 'crossfade must keep the background opaque');
+    assert.ok(Math.abs(snapshots[name].volumeCompositeOpacity - opacity * snapshots[name].volumeBrightness) < 1e-6);
+    assert.ok(Math.abs((1 - snapshots[name].volumeCompositeOpacity) * snapshots[name].skyOpacity - (1 - opacity)) < 1e-6,
+      'actual background composition preserves the prepared sky contribution');
+    assert.equal(snapshots[name].volumeImageOpacity, 1, 'exposure no longer nests inside the handoff');
     await page.screenshot({ path: resolve(output, `${name}.png`) });
   }
   await scrollTo(page, Math.max(opacityProfile.fullDistanceM * 2, brightnessProfile.fadeStartDistanceM) / 1000);
@@ -174,8 +177,10 @@ async function read(page) {
     }),
     volumeTransform: [...document.querySelectorAll('.css-volume-scene')].map(node => node.style.transform).join('|'),
     volumeMatrices: [...document.querySelectorAll('.css-volume-scene')].map(node => Array.from(new DOMMatrix(node.style.transform).toFloat64Array())),
-    volumeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
-    volumeBrightness: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
+    volumeOpacity: Number(document.querySelector('.prepared-volume-context').dataset.volumeOpacity),
+    volumeCompositeOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-context')).opacity),
+    volumeBrightness: Number(document.querySelector('.prepared-volume-image').dataset.volumeBrightness),
+    volumeImageOpacity: Number(getComputedStyle(document.querySelector('.prepared-volume-image')).opacity),
     skyFaces: document.querySelectorAll('[data-sky-face]').length,
     skyOpacity: Number(getComputedStyle(document.querySelector('.prepared-celestial-sky')).opacity),
     skyVisibility: getComputedStyle(document.querySelector('.prepared-celestial-sky')).visibility,

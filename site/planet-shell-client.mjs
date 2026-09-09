@@ -15,6 +15,8 @@ export function mountPlanetShell({
   windowTarget = window,
   motionEnabled = false,
   onMotionChange = () => {},
+  highContrastSky = false,
+  onSkyContrastChange = () => {},
   heliosphereEnabled = false,
   onHeliosphereChange = () => {},
   asteroidOrbitsEnabled = false,
@@ -54,7 +56,7 @@ export function mountPlanetShell({
     }));
     lifetime.onDispose(() => disposeContent());
     lifetime.onDispose(() => selectionPreview?.restore());
-    mountContent(objectId, motionEnabled, false);
+    mountContent(objectId, motionEnabled, highContrastSky);
   } catch (error) {
     const cleanupErrors = lifetime.destroy();
     if (cleanupErrors.length) {
@@ -143,7 +145,7 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+      { motionEnabled, onMotionChange, highContrastSky, onSkyContrastChange, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
         onAsteroidOrbitsChange(enabled) { asteroidOrbitsEnabled = enabled; onAsteroidOrbitsChange(enabled); },
         onAsteroidLabelsChange(enabled) { asteroidLabelsEnabled = enabled; onAsteroidLabelsChange(enabled); },
@@ -245,7 +247,7 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
 function createSettingsController(
   documentTarget,
   windowTarget,
-  { motionEnabled, onMotionChange, highContrastSky = false, heliosphereEnabled, onHeliosphereChange,
+  { motionEnabled, onMotionChange, highContrastSky = false, onSkyContrastChange, heliosphereEnabled, onHeliosphereChange,
     asteroidOrbitsEnabled, onAsteroidOrbitsChange, asteroidLabelsEnabled, onAsteroidLabelsChange },
   lifetime,
 ) {
@@ -292,6 +294,7 @@ function createSettingsController(
   skyContrast.addEventListener("change", () => {
     highContrastSky = skyContrast.checked;
     renderSkyContrast();
+    onSkyContrastChange(highContrastSky);
   }, { signal: events.signal });
   heliosphere.checked = heliosphereEnabled === true;
   heliosphere.addEventListener("change", () => onHeliosphereChange(heliosphere.checked), { signal: events.signal });

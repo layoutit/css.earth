@@ -74,6 +74,17 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       let selected = plan.focus;
       let destroyed = false;
+      let highContrastSky = false, volumeOpacity = 0, volumeBrightness = 1;
+      const publishBackground = () => {
+        const brightness = highContrastSky ? 1 : volumeBrightness;
+        // The completed images contribute (1-t)*sky + t*b*volume. Factoring
+        // t*b onto the volume avoids nesting its exposure inside its handoff.
+        // Compensate the opaque sky underlay so its contribution stays 1-t.
+        const alpha = skyLayer ? volumeOpacity * brightness : volumeOpacity;
+        volumeHost.style.opacity = String(alpha);
+        volumeImage.style.opacity = skyLayer ? '' : String(brightness);
+        if (skyLayer) skyLayer.root.style.opacity = String(alpha < 1 ? (1 - volumeOpacity) / (1 - alpha) : 0);
+      };
       const destroy = () => {
         if (destroyed) return;
         destroyed = true;
@@ -93,6 +104,11 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
           setOverview(enabled: boolean) { spatial!.setOverview(enabled); },
+          setHighContrastSky(enabled: boolean) {
+            if (destroyed || highContrastSky === enabled) return;
+            highContrastSky = enabled;
+            publishBackground();
+          },
           setNavigationIndicatorsVisible(visible: boolean) { spatial!.setNavigationIndicatorsVisible(visible); focusPoint?.setNavigationEnabled(visible); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
@@ -116,17 +132,12 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
             const fade = logarithmicFade(distanceM, plan.volume.fadeStartDistanceM, plan.volume.fullDistanceM);
             const stellarFade = logarithmicFade(distanceM, plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM);
-            const volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
-            const volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
+            volumeOpacity = preparedVolumeOpacity(distanceM, plan.volume.opacityProfile);
+            volumeBrightness = preparedVolumeOpacity(distanceM, plan.volume.brightnessProfile);
             volumeHost.style.visibility = volumeOpacity > 0 ? '' : 'hidden';
-            volumeHost.style.opacity = String(volumeOpacity);
             volumeHost.dataset.volumeOpacity = String(volumeOpacity);
-            // Attenuate the completed image against opaque black, outside every
-            // camera's 3D context. This does not change slab optical coefficients.
-            volumeImage.style.opacity = `var(--universe-volume-brightness-override, ${volumeBrightness})`;
             volumeImage.dataset.volumeBrightness = String(volumeBrightness);
-            // Both backgrounds are opaque completed images. Keep the sky underlay
-            // opaque: the two levels give (1-t)*sky+t*brightness*volume.
+            publishBackground();
             skyLayer?.publish(world, viewport, volumeOpacity < 1);
             if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - volumeOpacity);
             if (volumeOpacity > 0) volumeLayer!.publish({ world, viewport });

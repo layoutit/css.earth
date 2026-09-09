@@ -32,6 +32,7 @@ export function createSceneRouter({
   let mountTask = null;
   let motionEnabled = false;
   let heliosphereEnabled = false;
+  let highContrastSky = false;
   let asteroidOrbitsEnabled = false;
   let asteroidLabelsEnabled = false;
   let scenePaused = true;
@@ -105,9 +106,13 @@ export function createSceneRouter({
       if (!shellOwner) {
         const owner = {};
         shellOwner = owner;
-        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
+        owner.shell = mountShell({ objectId, documentTarget, windowTarget, motionEnabled, highContrastSky, heliosphereEnabled, asteroidOrbitsEnabled, asteroidLabelsEnabled,
           onMotionChange(next) { if (shellOwner === owner && active) {
             motionEnabled = next === true; syncPlayback(); active?.viewUrl?.schedule();
+          } },
+          onSkyContrastChange(next) { if (shellOwner === owner && active) {
+            highContrastSky = next === true;
+            worldContextMount?.setHighContrastSky?.(highContrastSky);
           } },
           onHeliosphereChange(next) { if (shellOwner === owner && active) {
             heliosphereEnabled = next === true;
@@ -469,6 +474,7 @@ export function createSceneRouter({
           throw new TypeError('Persistent world context mount must publish and destroy.');
         }
         worldContextMount = value;
+        value.setHighContrastSky?.(highContrastSky);
         value.setHeliosphereEnabled?.(heliosphereEnabled);
         value.setAsteroidOrbitsEnabled?.(asteroidOrbitsEnabled);
         value.setAsteroidLabelsEnabled?.(asteroidLabelsEnabled);
