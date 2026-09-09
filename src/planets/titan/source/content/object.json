@@ -192,6 +192,60 @@
           "sourceUrl": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/",
           "image": "/scenes/titan/titan-coverage-distance-legend.webp"
         }
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "description": "Six interpreted terrain classes from Cassini radar and infrared mapping: plains, dunes, hummocky terrain, lakes and basins, labyrinth terrain, and craters. Dataset correlations extend the interpretation beyond direct radar coverage. Colors identify terrains; they do not show visible color, liquid depth or age. Gray grid preserves small gaps and conflicting polygons.",
+        "summary": "Explore Titan’s dunes, plains, highlands and lake basins in the global Cassini interpretation.",
+        "title": "Cassini global geomorphology · Lopes et al. (2020)",
+        "thumbnail": "/scenes/titan/titan-geology-thumbnail.webp",
+        "surface": "titan-geology-surface@2x.webp",
+        "poles": "titan-geology-poles@2x.webp",
+        "source": {
+          "id": "titan-global-geomorphology-grid",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.17632/f6jrtyfp66.2"
+        },
+        "detail": "Mapped terrains",
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Terrain units",
+          "items": [
+            {
+              "label": "Plains",
+              "color": "#66f0cc",
+              "description": "Broad plains"
+            },
+            {
+              "label": "Dunes",
+              "color": "#b665cb",
+              "description": "Wind-shaped dune fields"
+            },
+            {
+              "label": "Hummocky terrain",
+              "color": "#ffcc66",
+              "description": "Hilly and mountainous terrain"
+            },
+            {
+              "label": "Lakes and basins",
+              "color": "#6699ff",
+              "description": "Areas now or formerly occupied by liquids"
+            },
+            {
+              "label": "Labyrinth terrain",
+              "color": "#ff66e0",
+              "description": "Dissected labyrinth terrain"
+            },
+            {
+              "label": "Craters",
+              "color": "#ff6666",
+              "description": "Impact crater terrain"
+            }
+          ],
+          "sourceUrl": "https://doi.org/10.17632/f6jrtyfp66.2"
+        }
       }
     ],
     "labels": {
@@ -250,6 +304,18 @@
       "role": "topography",
       "description": "Formal GTDR measured, interpolated and distance products (2019)",
       "href": "https://data.astro.cornell.edu/RADAR/DATA/GTDR/"
+    },
+    {
+      "label": "Titan geology data",
+      "role": "surface",
+      "description": "Schoenfeld (2026), global unit shapefiles, version 2; CC BY 4.0",
+      "href": "https://doi.org/10.17632/f6jrtyfp66.2"
+    },
+    {
+      "label": "Titan geology paper",
+      "role": "surface",
+      "description": "Lopes et al. (2020), global geomorphological interpretation",
+      "href": "https://doi.org/10.1038/s41550-019-0917-6"
     }
   ],
   "provenance": {

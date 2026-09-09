@@ -315,6 +315,275 @@
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 790785,
       "expectedSha256": "10c4f91d0686b03e554e8da9f9bc44acf60dccefae2406c8351e6bf01852a3b8"
+    },
+    {
+      "id": "dione-vims-source-information-file-pdf",
+      "path": "vims/document/information_file.pdf",
+      "expectedBytes": 201977,
+      "expectedSha256": "c6a7599777535917c6ab6d5fc38beab6e811e1045df5e651eba67f5a21da527e",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-information-file-xml",
+      "path": "vims/document/information_file.xml",
+      "expectedBytes": 2573,
+      "expectedSha256": "d8170f3ed5c2d0dec2fef266ffee69951ebd765d474264dda83b67ec98dd1576",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-vims-wavelengths-ir-tab",
+      "path": "vims/data/vims_wavelengths_ir.tab",
+      "expectedBytes": 2304,
+      "expectedSha256": "8cb35dca77944143d27db18860ddee6b5ee29369b0fd0e1441b246c90a89a449",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-vims-wavelengths-ir-xml",
+      "path": "vims/data/vims_wavelengths_ir.xml",
+      "expectedBytes": 5977,
+      "expectedSha256": "a9c6ee4c5e159c214c20df41520333adac3f245a72600d7adc088392b375ca2f",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.xml",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-dione-notnorm-pc-modified-2-xml",
+      "path": "vims/data/dione/dione_notnorm_pc_modified_2.xml",
+      "expectedBytes": 13446,
+      "expectedSha256": "b833840c69c52439e437c73b62ba12c2508afbd5b3af3b7582ddf5b2e05a377a",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.xml",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-dione-notnorm-pc-modified-2-hdr",
+      "path": "vims/data/dione/dione_notnorm_pc_modified_2.hdr",
+      "expectedBytes": 8780,
+      "expectedSha256": "6aba6b6515ee0c60a220dc245b300b828078477b6ec99686e6e7b5a36a435a04",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.hdr",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-dione-notnorm-pc-modified-2-img",
+      "path": "vims/data/dione/dione_notnorm_pc_modified_2.img",
+      "expectedBytes": 66355200,
+      "expectedSha256": "57eb3fcc82c5e2ac3e239008cde901c1ade5641d540088514a880c755de275e6",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.img",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-dione-phase-function-parameters-tab",
+      "path": "vims/data/dione/dione_phase_function_parameters.tab",
+      "expectedBytes": 25549,
+      "expectedSha256": "4c598339ff2280f1a9e6901376aef02c84306bf6863d4ca6aabf9fa6b24c9736",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_phase_function_parameters.tab",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-dione-phase-function-parameters-xml",
+      "path": "vims/data/dione/dione_phase_function_parameters.xml",
+      "expectedBytes": 7646,
+      "expectedSha256": "5405ffb4dcc3c4c4428748f336f5ece80949d04d840d8bbc79f43c01e3b5c2ff",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_phase_function_parameters.xml",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-dione-vims-cubes-list-tab",
+      "path": "vims/data/dione/dione_vims_cubes_list.tab",
+      "expectedBytes": 8694,
+      "expectedSha256": "ac179a7b2eded9b32f3d4c958e7ed0e69aed0eb66cdb0f40bed0d77ca3ea9248",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_vims_cubes_list.tab",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-source-dione-vims-cubes-list-xml",
+      "path": "vims/data/dione/dione_vims_cubes_list.xml",
+      "expectedBytes": 5724,
+      "expectedSha256": "3bf571ffcea3b08f1ef274b12d075fd7542edd707bb652003069374db0c4c96e",
+      "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_vims_cubes_list.xml",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Download the original PDS4 archive product and verify the pinned bytes.",
+      "redistribution": "Preserve PDS labels, authors and calibration description.",
+      "consumers": [
+        "vims-source"
+      ]
+    },
+    {
+      "id": "dione-vims-infrared",
+      "path": "vims/dione-infrared.tif",
+      "expectedBytes": 67254,
+      "expectedSha256": "d92f949b03e5446f10f0270ec3d71bfcb9df97d24db3767fa8e54cbbe4226698",
+      "origin": "https://doi.org/10.17189/ctqe-ta30",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Checked-in compact map; reproduce with tools/objects/acquisition/cassini-vims.py source/vims/prepare-maps.json.",
+      "redistribution": "Derived display composite or continuum-relative absorption indicator; retain scientific limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 360,
+      "height": 180,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 561400.0
+      },
+      "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved.",
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true
+    },
+    {
+      "id": "dione-vims-ice-absorption",
+      "path": "vims/dione-water-ice.tif",
+      "expectedBytes": 142499,
+      "expectedSha256": "e58c7acfa469ac606b8cf4db2133dc2d9ad0b29edb37030beafb89f8480abf54",
+      "origin": "https://doi.org/10.17189/ctqe-ta30",
+      "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
+      "license": "Public NASA PDS scientific data; retain creators and archive attribution",
+      "licenseEvidence": [
+        "https://doi.org/10.17189/ctqe-ta30",
+        "https://pds.nasa.gov/datastandards/citing/"
+      ],
+      "acquisition": "Checked-in compact map; reproduce with tools/objects/acquisition/cassini-vims.py source/vims/prepare-maps.json.",
+      "redistribution": "Derived display composite or continuum-relative absorption indicator; retain scientific limitations.",
+      "consumers": [
+        "ice-absorption"
+      ],
+      "width": 360,
+      "height": 180,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 561400.0
+      },
+      "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved."
     }
   ],
   "documents": [
@@ -368,8 +637,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 8964,
-      "expectedSha256": "e48d463a58538e1712e13851faedbc6bc32cc075f16c2064e1c7c03e7b34b01a",
+      "expectedBytes": 10735,
+      "expectedSha256": "adc92d1680c0b857589f58eed3f53427735baf55d1e0d3c34c06d17485af20f2",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -380,14 +649,14 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 8162,
-      "expectedSha256": "f1dc6f61fbbdc42d3340bf531baf3992f6a23ad0c3b2439d3ec0f63fe67b3b90",
+      "expectedBytes": 11324,
+      "expectedSha256": "37b3916975aab68da7f0c3a20a1ec3766e889f8d7ba3f64ce7f96ea4b709333d",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 11802,
-      "expectedSha256": "f077456e8f2da667752e659bb02f6266a24403b32590b5d2edeea04f5f69d524",
+      "expectedBytes": 14510,
+      "expectedSha256": "af8920c60f1daefe1900ab861139460a83af14c4406545de3a52a1ebc9814ac2",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -499,6 +768,24 @@
       "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
       "expectedBytes": 3159,
       "expectedSha256": "56229a4ac1aedb0cbe929f2daebf6887ae5503ee7ab8f1079a496ae760068006"
+    },
+    {
+      "path": "vims/prepare-maps.json",
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 2594,
+      "expectedSha256": "110495fa28aca3d2520759c4790f5a18c689df0765732bd082639e3a29bef7da"
+    },
+    {
+      "path": "vims/conversion-receipt.json",
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 4914,
+      "expectedSha256": "abdf538a454094c2cbe9653673c3fe2a4ee8297cc1a1592f5bd2d62482aa659f"
+    },
+    {
+      "path": "vims/INTERPRETATION.md",
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 11294,
+      "expectedSha256": "a64f9aa64816043325a0eedaf20bbb8c5ec640f1feab0212e9d4ec41ace479fc"
     }
   ],
   "generatedIntermediates": []

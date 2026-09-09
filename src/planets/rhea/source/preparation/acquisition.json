@@ -186,6 +186,94 @@
       "headers": {
         "User-Agent": "cssEarth source verification (public PDS data)"
       }
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf",
+      "path": "vims/document/information_file.pdf",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
+      "path": "vims/document/information_file.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",
+      "path": "vims/data/vims_wavelengths_ir.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.xml",
+      "path": "vims/data/vims_wavelengths_ir.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_notnorm_pc_modified_2.xml",
+      "path": "vims/data/rhea/rhea_notnorm_pc_modified_2.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_notnorm_pc_modified_2.hdr",
+      "path": "vims/data/rhea/rhea_notnorm_pc_modified_2.hdr",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_notnorm_pc_modified_2.img",
+      "path": "vims/data/rhea/rhea_notnorm_pc_modified_2.img",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_phase_function_parameters.tab",
+      "path": "vims/data/rhea/rhea_phase_function_parameters.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_phase_function_parameters.xml",
+      "path": "vims/data/rhea/rhea_phase_function_parameters.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_vims_cubes_list.tab",
+      "path": "vims/data/rhea/rhea_vims_cubes_list.tab",
+      "groups": [
+        "cassini-atlas"
+      ]
+    },
+    {
+      "kind": "download",
+      "url": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_vims_cubes_list.xml",
+      "path": "vims/data/rhea/rhea_vims_cubes_list.xml",
+      "groups": [
+        "cassini-atlas"
+      ]
     }
   ]
 }

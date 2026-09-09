@@ -70,21 +70,24 @@ def prepare(plan_path):
         raise ValueError('Duplicate or excessive categories')
     grid = np.full((height, width), -1, dtype='int16')
     counts = {}
-    with shapefile.Reader(shp=str(root / plan['shapePath']),
-                          dbf=str(root / plan['attributePath'])) as source:
-        if len(source) != plan['expectedRecords']:
-            raise ValueError('Source polygon count changed')
-        with rasterio.Env(GDAL_CACHEMAX=32 * 1024 * 1024, GDAL_NUM_THREADS='1'):
-            for feature in source.iterShapeRecords():
-                value = feature.record[plan['field']]
-                if value not in categories and value not in plan['unknownValues']:
-                    raise ValueError(f'Unmapped source category: {value}')
-                counts[value] = counts.get(value, 0) + 1
-                if not feature.shape.points:
-                    continue
-                category = categories.get(value, -2)
-                paint_polygon(grid, feature.shape.__geo_interface__, feature.shape.bbox,
-                              transform, category)
+    # Some authors distribute one shapefile per mapped unit. Keep those
+    # original layers and apply the same overlap rule across the entire set.
+    for layer in plan.get('layers', [plan]):
+        with shapefile.Reader(shp=str(root / layer['shapePath']),
+                              dbf=str(root / layer['attributePath'])) as source:
+            if len(source) != layer['expectedRecords']:
+                raise ValueError('Source polygon count changed')
+            with rasterio.Env(GDAL_CACHEMAX=32 * 1024 * 1024, GDAL_NUM_THREADS='1'):
+                for feature in source.iterShapeRecords():
+                    value = feature.record[plan['field']]
+                    if value not in categories and value not in plan['unknownValues']:
+                        raise ValueError(f'Unmapped source category: {value}')
+                    counts[value] = counts.get(value, 0) + 1
+                    if not feature.shape.points:
+                        continue
+                    category = categories.get(value, -2)
+                    paint_polygon(grid, feature.shape.__geo_interface__, feature.shape.bbox,
+                                  transform, category)
     conflict_pixels = int((grid == -2).sum())
     grid[grid < 0] = -32768
     output_transform = from_origin(-half, half / 2, 2 * half / width, half / height)

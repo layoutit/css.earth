@@ -86,3 +86,28 @@ test('actual masked and legacy monochrome dispatch preserve the same nonintegral
     }
   } finally {await rm(dir,{recursive:true,force:true});}
 });
+
+
+test('nearest native cells preserve coarse pixels and missing holes through seam and poles',()=>{
+  const f=fixture({width:4,height:2,origin:[0,90],resolution:[90,-90]});
+  f.source.data.fill(0,3,6); // missing northern second cell; never borrow its neighbor.
+  const r=resampleGeoreferencedObservation(f.source,f.entry,{...policy,resampling:'source-georeferenced-nearest'},f.grid,8,4);
+  assert.deepEqual(reds(r),[
+    10,10,0,0,42,42,58,58,10,10,0,0,42,42,58,58,
+    18,18,34,34,50,50,66,66,18,18,34,34,50,50,66,66,
+  ]);
+  assert.deepEqual([...r.missing],Array.from({length:32},(_,i)=>i<16 && [2,3].includes(i%8)?1:0));
+});
+
+
+test('nearest cell-boundary ties use the same half-open area for both physical moon radii',()=>{
+  for (const radius of [561400,764000]) {
+    const step=radius*Math.PI/180, f=fixture({width:360,height:180,origin:[0,90*step],resolution:[step,-step]});
+    f.entry.projection.referenceRadiusMeters=radius;
+    const r=resampleGeoreferencedObservation(f.source,f.entry,{...policy,resampling:'source-georeferenced-nearest'},f.grid,180,90);
+    for(let y=0;y<90;y++)for(let x=0;x<180;x++) {
+      const cell=(y*2+1)*360+x*2+1, target=y*180+x;
+      assert.deepEqual(r.rgb.subarray(target*3,target*3+3),f.source.data.subarray(cell*3,cell*3+3));
+    }
+  }
+});
