@@ -49,6 +49,7 @@ for b in bodies:
  extent=math.ceil(max(abs(low),abs(high))/step)*step
  config=replace(read(BASE/'source/preparation/terrestrial.json'),id,name)
  config['distanceAu']=b['distanceAu'];config['geometry']['radiusKm']=radius
+ config['geometry']['camera']['framingScale']=min(1,radius/(b['radialRangeSourceUnits'][1]*scale))
  grid=dict(metersPerUnit=scale*1000,expectedVertices=b['vertices'],expectedFaces=b['faces'],indexBase=1)
  radial=config['geometry']['radialTerrain'];radial.update(path=shape,grid=grid);radial['simplification']['maximumErrorMeters']=diameter*10
  scientific=config['raster']['scientific'][0];scientific.update(path=shape,grid=grid,minimum=-extent,maximum=extent,valueTransform=dict(scale=.001,offset=-radius))

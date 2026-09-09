@@ -87,7 +87,8 @@
     "radiusKm": 13.56,
     "camera": {
       "initialScenePitchDegrees": 25,
-      "defaultControlYawDegrees": 0
+      "defaultControlYawDegrees": 0,
+      "framingScale": 0.6787133818114748
     },
     "mapUrl": "/scenes/lyyli/lyyli-shape-surface@2x.webp",
     "polesUrl": "/scenes/lyyli/lyyli-shape-surface@2x.webp",
