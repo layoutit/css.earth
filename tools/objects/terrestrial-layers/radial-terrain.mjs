@@ -311,7 +311,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
     const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
-    const scalarSources = ['pds3-scalar-map', 'facet-scalars'].includes(scientific?.format) && Buffer.alloc(width * height * 4);
+    const scalarSources = ['pds3-scalar-map', 'facet-scalars', 'vtk-cell-categories'].includes(scientific?.format) && Buffer.alloc(width * height * 4);
     const observation = radial.observationSurfaces?.get(surface.id);
     // Direct source samplers never consume the flat preview, including its
     // withheld radial directions. Keep that map only for previews/minimaps.
@@ -456,7 +456,9 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     if (transfer) surface.surfaceSampling.transfer = transfer;
     if (scalarSources) {
       const bytes = Buffer.from(JSON.stringify({ schema: 'cssearth-atlas-scalar-index@1', width, height,
-        encoding: 'gzip-u32le-base64', layout: 'row-major; 0 withheld, otherwise original table row (1-based); includes atlas bleed',
+        encoding: 'gzip-u32le-base64', layout: scientific.format === 'vtk-cell-categories'
+          ? (scientific.symbols ? 'row-major; 0 withheld, 1 mapped background, otherwise SBMT feature ID + 1; includes atlas bleed' : 'row-major; 0 withheld, otherwise original VTK face ID + 1; includes atlas bleed')
+          : 'row-major; 0 withheld, otherwise original table row (1-based); includes atlas bleed',
         source: surface.source, data: gzipSync(scalarSources, { level: 9 }).toString('base64') }) + '\n');
       const file = `${surface.id}-source-index.json`;
       await writeFile(resolve(outputDirectory, file), bytes);

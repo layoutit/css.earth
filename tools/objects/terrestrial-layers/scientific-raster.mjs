@@ -2,6 +2,7 @@ import {loadPdsFloatMap} from './pds-float-map.mjs';
 import { loadImageDemScience } from './image-dem-science.mjs';
 import {loadPdsImage} from './pds-image.mjs';
 import {loadFacetScalarSurface} from './facet-scalars.mjs';
+import {loadVtkCategories} from './vtk-categories.mjs';
 import {loadGeologySurface, categoryColorForValue} from './categorical-geology.mjs';
 import { loadScalarMap } from './pds-scalar-map.mjs';
 import { resolve } from 'node:path';
@@ -107,6 +108,7 @@ export async function loadScienceSurface(root, lens, sourceMesh) {
   }
   if (lens.format === 'pds-image') return loadPdsImage(root, lens);
   if (lens.format === 'facet-scalars') return loadFacetScalarSurface(root, lens, sourceMesh);
+  if (lens.format === 'vtk-cell-categories') return loadVtkCategories(root, lens, sourceMesh);
   if (lens.format === 'geologic-shapefile') return loadGeologySurface(root, lens);
   if (lens.format === 'pds3-scalar-map') return loadScalarMap(root, lens, sourceMesh);
   if (['pds3-radius-zip', 'pds-radial-table'].includes(lens.format)) {

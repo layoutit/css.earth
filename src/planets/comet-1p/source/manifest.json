@@ -34,7 +34,7 @@
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed.",
+      "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5\u20131 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -117,8 +117,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3949,
-      "expectedSha256": "6126400f162d776dbc9f8b6aa8b6e6f7d0522b0b0b09694bc05afb88092be318",
+      "expectedBytes": 3950,
+      "expectedSha256": "02da4652868e0da43bf05fa7f962e6439d05871501ce8b3fc641c65ded48484a",
       "purpose": "Halley source evidence or authored preparation input."
     },
     {
@@ -198,6 +198,12 @@
       "expectedBytes": 851,
       "expectedSha256": "cccea4cd70e7d73b7585417f652f4cabd0892df85174ab43a993993675faa1f2",
       "purpose": "Halley source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/giotto-hmc-intake.json",
+      "expectedBytes": 8776,
+      "expectedSha256": "9aa7e995011774208c6b4ab492e91bdc535c1870915180f365893157c3a4c36d",
+      "purpose": "Preserved Giotto intake and retrieval pins; this unqualified survey is not a runtime input."
     }
   ]
 }

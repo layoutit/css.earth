@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "comet-1p",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b9d5b9cab4680644a28084f824382e5b65ee7a91afeb5d4a611e27b54c022af6"
+    "sha256": "3b272ff89b08baa13de67b8d85cca73a6282aa123e5ed9d785c85a41c1cb1b9d"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -142,7 +142,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6126400f162d776dbc9f8b6aa8b6e6f7d0522b0b0b09694bc05afb88092be318",
+      "sha256": "02da4652868e0da43bf05fa7f962e6439d05871501ce8b3fc641c65ded48484a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -211,7 +211,7 @@
               "kind": "toggle",
               "name": "shadows",
               "label": "Shadows",
-              "checked": true
+              "checked": false
             },
             {
               "kind": "toggle",
@@ -285,7 +285,7 @@
       "sha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
       "bytes": 174,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -304,7 +304,7 @@
       "sha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -325,10 +325,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6126400f162d776dbc9f8b6aa8b6e6f7d0522b0b0b09694bc05afb88092be318",
-      "bytes": 3949,
+      "sha256": "02da4652868e0da43bf05fa7f962e6439d05871501ce8b3fc641c65ded48484a",
+      "bytes": 3950,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -366,13 +366,13 @@
           "url": "/scenes/comet-1p/comet-1p-model-thumbnail.webp",
           "bytes": 44,
           "sha256": "72f6226f692921f3f9dd3a49250631234f64ef64995d7688732ee6b797b0e192",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/comet-1p/comet-1p-model-surface@2x.webp",
           "bytes": 82802,
           "sha256": "8d950b8eb503d9a46884f5862d2cc7265b677d9f8f81b62205b8046d3bf9b3a0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
