@@ -1,0 +1,89 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/152",
+  "modelId": 152,
+  "modelVersion": "2009-02-26",
+  "diameterKm": 91,
+  "diameterInterpretation": "Convex light-curve reconstruction with the thermally preferred pole and a published 90–92 km diameter fit range. The archive mesh uses 91 km; another pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 91.0,
+    "uncertaintyKm": 1.0,
+    "uncertaintyKind": "DAMIT represents the published 90–92 km thermophysical fit range as 91±1 km. This is a fit range, not an independently stated one-sigma Gaussian confidence interval or a local shape-accuracy bound.",
+    "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/152",
+    "reference": "DAMIT model 152",
+    "sourceLabel": "DAMIT model 152",
+    "limitations": "Delbo and Tanga2009 supplementary section on Lydia explicitly choose pole1 (149.3,-55), matching model152, because it fits slightly better (reduced chi-square0.7 versus0.76). The second pole remains possible. Its IRAS thermophysical diameter range is90–92 km versus94–97 km for pole2; the archive stores91±1 km.",
+    "visibleDescription": "Convex light-curve reconstruction with the thermally preferred pole and a published 90–92 km diameter fit range. The archive mesh uses 91 km; another pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 1.0000000790258456,
+    "metersPerSourceUnit": 1000.0000790258456,
+    "publishedSizeInterval": {
+      "minimumKm": 90,
+      "maximumKm": 92,
+      "interpretation": "Thermophysical fit range for selected pole; publication does not label it one-sigma",
+      "source": "Delbo and Tanga2009 supplementary results for110 Lydia"
+    }
+  },
+  "periodHours": 10.9258,
+  "poleEclipticJ2000Degrees": [
+    149,
+    -55
+  ],
+  "modelLimitations": "Delbo and Tanga2009 supplementary section on Lydia explicitly choose pole1 (149.3,-55), matching model152, because it fits slightly better (reduced chi-square0.7 versus0.76). The second pole remains possible. Its IRAS thermophysical diameter range is90–92 km versus94–97 km for pole2; the archive stores91±1 km.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/361/shape.txt",
+    "vertices": 1597,
+    "faces": 3190,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 1000.0000790258456,
+    "firstVertexKm": [
+      8.32964565825724,
+      -0.4776270377448776,
+      36.72562890227365
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      101.42697101535153,
+      108.39524756602543,
+      72.43615372432785
+    ],
+    "volumeCubicKm": 394568.85292638594,
+    "volumeEquivalentRadiusKm": 45.5,
+    "radialRangeKm": [
+      33.46193720906805,
+      59.006654748319164
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3190,
+    "sourceVertices": 1597,
+    "weldedVertices": 1597,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 910,
+    "estimatedErrorMeters": 548.0897827148438,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 392914844442667.5
+    }
+  }
+}

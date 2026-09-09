@@ -1,0 +1,360 @@
+{
+  "number": 204,
+  "name": "Kallisto",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2749",
+  "modelId": 4787,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4787",
+  "catalog": "View model 188 14 19.487 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "4787",
+    "Asteroid": "(204) Kallisto",
+    "λ": "188",
+    "β": "14",
+    "P": "19.487",
+    "YORP": "",
+    "t0": "2457278",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.46",
+    "p3": "0.07",
+    "p4": "-0.87",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:09:07",
+    "Modified": "2020-10-05 13:09:07",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/54274/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/54275/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/54276/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2020)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/658",
+      "file": "reference-658.html",
+      "links": [
+        {
+          "label": "2020a&a...643a..59d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2020a&a...643a..59d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D",
+          "url": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D"
+        }
+      ]
+    }
+  ],
+  "id": "kallisto",
+  "displayName": "Kallisto",
+  "lambda": 188.0,
+  "beta": 14.0,
+  "periodHours": 19.487,
+  "version": "2019-10-23",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 51.03,
+  "uncertaintyKm": 0.6,
+  "akari": {
+    "number": 204,
+    "name": "Kallisto",
+    "diameterKm": 51.03,
+    "uncertaintyKm": 0.6,
+    "detections": 10,
+    "originalRow": "204    Kallisto                       8.89  0.15 10   51.03  0.60 0.191 0.005"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/54276/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/54274/IAUspin",
+  "shapeSha256": "3108ee1d5da9b4004ac87f550e1a5f5561e02214612a4237757764eed1830f1f",
+  "shapeBytes": 45609,
+  "vertices": 564,
+  "faces": 1124,
+  "signedVolume": 0.9999999544970697,
+  "independentSignedVolume": 0.9999999544970697,
+  "translatedSignedVolume": 0.9999999544970685,
+  "originalVolumeEquivalentDiameter": 1.2407009629802896,
+  "firstVertex": [
+    -0.006628,
+    0.262325,
+    0.708747
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5579613534448421,
+    0.7931179576866231
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.667686,
+      0.703517
+    ],
+    [
+      -0.677509,
+      0.728604
+    ],
+    [
+      -0.591906,
+      0.71275
+    ]
+  ],
+  "scaleKmPerSourceUnit": 41.129975330575036,
+  "topology": {
+    "edges": 1686,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 1124,
+    "minDoubleTriangleAreaSourceUnits2": 1.3849371826909098e-09
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        -0.006628,
+        0.262325,
+        0.708747
+      ],
+      "radiusSourceUnits": 0.7557649409823136
+    },
+    {
+      "vertexIndex1": 8,
+      "pointSourceUnits": [
+        -0.04483,
+        0.250516,
+        0.71275
+      ],
+      "radiusSourceUnits": 0.7568226725303623
+    },
+    {
+      "vertexIndex1": 189,
+      "pointSourceUnits": [
+        -0.229613,
+        0.54273,
+        0.299738
+      ],
+      "radiusSourceUnits": 0.6611511561761046
+    },
+    {
+      "vertexIndex1": 250,
+      "pointSourceUnits": [
+        0.703517,
+        -0.076143,
+        -0.026315
+      ],
+      "radiusSourceUnits": 0.708114683482132
+    },
+    {
+      "vertexIndex1": 273,
+      "pointSourceUnits": [
+        0.054106,
+        0.728604,
+        -0.284499
+      ],
+      "radiusSourceUnits": 0.7840477849295923
+    },
+    {
+      "vertexIndex1": 283,
+      "pointSourceUnits": [
+        -0.332958,
+        0.503739,
+        0.129738
+      ],
+      "radiusSourceUnits": 0.6176131139548448
+    },
+    {
+      "vertexIndex1": 290,
+      "pointSourceUnits": [
+        -0.667686,
+        0.070136,
+        -0.003205
+      ],
+      "radiusSourceUnits": 0.6713672058694854
+    },
+    {
+      "vertexIndex1": 311,
+      "pointSourceUnits": [
+        -0.142537,
+        -0.677509,
+        -0.243958
+      ],
+      "radiusSourceUnits": 0.7340645388615363
+    },
+    {
+      "vertexIndex1": 563,
+      "pointSourceUnits": [
+        0.024512,
+        -0.092623,
+        -0.591906
+      ],
+      "radiusSourceUnits": 0.5996103494011757
+    },
+    {
+      "vertexIndex1": 564,
+      "pointSourceUnits": [
+        0.00383,
+        -0.071941,
+        -0.591906
+      ],
+      "radiusSourceUnits": 0.5962741728575874
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 4788,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4788",
+      "pole": [
+        "15",
+        "30"
+      ],
+      "version": "2019-10-23",
+      "diameterKm": "",
+      "calibratedSize": "",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 5.139839977676816,
+  "originalSurfaceEquivalentDiameter": 1.2790863451296808,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "ATLAS2015–2018 photometry gives 368 orange and 127 cyan measurements, with period located by the ellipsoid search and a subsequently reconstructed convex shape. Both mirror poles remain; model 4787 is selected without claiming that mirror 4788 is false. No calibrated volume or resolved terrain is supplied.",
+  "papers": [
+    {
+      "file": "paper-durech-2020.pdf",
+      "url": "https://arxiv.org/pdf/2010.01820",
+      "label": "Ďurech et al. (2020), A&A 643, A59",
+      "sha256": "c053b1ec5469a4b01df1d452633b49a22bdeadcbd6367e6ba8458903905ac169"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 51.03,
+    "uncertaintyKm": 0.6,
+    "reportedUncertaintyKm": 0.6,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 204,
+      "name": "Kallisto",
+      "diameterKm": 51.03,
+      "uncertaintyKm": 0.6,
+      "detections": 10,
+      "originalRow": "204    Kallisto                       8.89  0.15 10   51.03  0.60 0.191 0.005"
+    },
+    "limitations": "ATLAS2015–2018 photometry gives 368 orange and 127 cyan measurements, with period located by the ellipsoid search and a subsequently reconstructed convex shape. Both mirror poles remain; model 4787 is selected without claiming that mirror 4788 is false. No calibrated volume or resolved terrain is supplied. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 51.03 km effective diameter (catalog ±0.6 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 41.129975330575036,
+    "metersPerSourceUnit": 41129.975330575035,
+    "sourceSignedVolume": 0.9999999544970697,
+    "sourceVolumeEquivalentDiameter": 1.2407009629802896,
+    "sourceSurfaceArea": 5.139839977676816,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 69578.54253295834,
+    "derivedVolumeEquivalentDiameterKm": 51.029999999999994,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2457278.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 2.66979749127311,
+  "orbitalPeriodYears": 4.362401994221274,
+  "sourceFields": {
+    "ID": "4787",
+    "Asteroid": "(204) Kallisto",
+    "λ": "188",
+    "β": "14",
+    "P": "19.487",
+    "YORP": "",
+    "t0": "2457278",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.46",
+    "p3": "0.07",
+    "p4": "-0.87",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:09:07",
+    "Modified": "2020-10-05 13:09:07",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

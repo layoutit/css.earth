@@ -1,0 +1,345 @@
+{
+  "number": 172,
+  "name": "Baucis",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2696",
+  "modelId": 4695,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4695",
+  "catalog": "View model 203 -52 27.41 IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "4695",
+    "Asteroid": "(172) Baucis",
+    "λ": "203",
+    "β": "-52",
+    "P": "27.41",
+    "YORP": "",
+    "t0": "2457320",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "1.45",
+    "p3": "0.19",
+    "p4": "-0.29",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:07:45",
+    "Modified": "2020-10-05 13:07:45",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/53577/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/53578/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/53579/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2020)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/658",
+      "file": "reference-658.html",
+      "links": [
+        {
+          "label": "2020a&a...643a..59d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2020a&a...643a..59d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D",
+          "url": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D"
+        }
+      ]
+    }
+  ],
+  "id": "baucis",
+  "displayName": "Baucis",
+  "lambda": 203.0,
+  "beta": -52.0,
+  "periodHours": 27.41,
+  "version": "2019-10-23",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 66.89,
+  "uncertaintyKm": 0.82,
+  "akari": {
+    "number": 172,
+    "name": "Baucis",
+    "diameterKm": 66.89,
+    "uncertaintyKm": 0.82,
+    "detections": 8,
+    "originalRow": "172    Baucis                         8.79  0.15  8   66.89  0.82 0.121 0.004"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/53579/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/53577/IAUspin",
+  "shapeSha256": "f5b9e2aa2266ce412b20de2bddc7242224f042d7aa0aecbb1a579d00ab6d18ba",
+  "shapeBytes": 46419,
+  "vertices": 574,
+  "faces": 1144,
+  "signedVolume": 1.0000004253036394,
+  "independentSignedVolume": 1.0000004253036394,
+  "originalVolumeEquivalentDiameter": 1.2407011576903229,
+  "firstVertex": [
+    0.282909,
+    -0.006634,
+    0.655229
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5402556501981262,
+    0.8386563439377298
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.666694,
+      0.758955
+    ],
+    [
+      -0.609611,
+      0.59641
+    ],
+    [
+      -0.574642,
+      0.660105
+    ]
+  ],
+  "scaleKmPerSourceUnit": 53.913063258941236,
+  "topology": {
+    "edges": 1716,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 1.0836055601551933e-08
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        0.282909,
+        -0.006634,
+        0.655229
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 2,
+      "coordinates": [
+        0.26248,
+        -0.023242,
+        0.660105
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 191,
+      "coordinates": [
+        0.298664,
+        0.476601,
+        0.147025
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 243,
+      "coordinates": [
+        0.758955,
+        0.111439,
+        -0.115428
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 266,
+      "coordinates": [
+        -0.31302,
+        0.59641,
+        -0.070252
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 287,
+      "coordinates": [
+        -0.574082,
+        0.481659,
+        -0.097504
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 291,
+      "coordinates": [
+        -0.666694,
+        -0.087938,
+        -0.17856
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 312,
+      "coordinates": [
+        -0.323192,
+        -0.609611,
+        0.22276
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 563,
+      "coordinates": [
+        0.197254,
+        0.016619,
+        -0.574642
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 573,
+      "coordinates": [
+        0.223828,
+        -0.009954,
+        -0.574642
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 4696,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4696",
+      "pole": [
+        "6",
+        "-34"
+      ],
+      "version": "2019-10-23",
+      "periodHours": "27.413",
+      "comment": "",
+      "calibrated": "",
+      "diameterKm": "",
+      "uncertaintyKm": "",
+      "nonconvex": "0 (No)"
+    }
+  ],
+  "selectionNotes": "Select one complete 2020 ATLAS convex solution, 4695 (203,-52), keeping 4696 (6,-34). Both poles appear in the publication table; no rejected alternative is listed. The selected model is photometric, not a resolved image reconstruction.",
+  "shapeKind": "Convex light-curve reconstruction",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select one complete 2020 ATLAS convex solution, 4695 (203,-52), keeping 4696 (6,-34). Both poles appear in the publication table; no rejected alternative is listed. The selected model is photometric, not a resolved image reconstruction.",
+  "calibrationSelection": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics.",
+  "archiveVolumeDiameterMismatchFraction": null,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4695",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "Select one complete 2020 ATLAS convex solution, 4695 (203,-52), keeping 4696 (6,-34). Both poles appear in the publication table; no rejected alternative is listed. The selected model is photometric, not a resolved image reconstruction."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "included",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics."
+    }
+  ],
+  "visibleShapeDescription": "Convex light-curve reconstruction with approximate thermal size: 66.89 km (catalog ±0.82 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery.",
+  "papers": [
+    {
+      "file": "durech-2020.pdf",
+      "url": "https://arxiv.org/pdf/2010.01820",
+      "label": "Ďurech et al. (2020), ATLAS photometry"
+    }
+  ],
+  "selectedPoleStatus": "one of competing archived solutions",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 66.89,
+    "uncertaintyKm": 0.82,
+    "reportedUncertaintyKm": 0.82,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 172,
+      "name": "Baucis",
+      "diameterKm": 66.89,
+      "uncertaintyKm": 0.82,
+      "detections": 8,
+      "originalRow": "172    Baucis                         8.79  0.15  8   66.89  0.82 0.121 0.004"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select one complete 2020 ATLAS convex solution, 4695 (203,-52), keeping 4696 (6,-34). Both poles appear in the publication table; no rejected alternative is listed. The selected model is photometric, not a resolved image reconstruction.",
+    "scaleKmPerSourceUnit": 53.913063258941236,
+    "metersPerSourceUnit": 53913.063258941234,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 66.89 km (catalog ±0.82 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery."
+  },
+  "distanceAu": 2.3794646807346385,
+  "orbitalPeriodYears": 3.6705157880592996,
+  "sourceFields": {
+    "ID": "4695",
+    "Asteroid": "(172) Baucis",
+    "λ": "203",
+    "β": "-52",
+    "P": "27.41",
+    "YORP": "",
+    "t0": "2457320",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "1.45",
+    "p3": "0.19",
+    "p4": "-0.29",
+    "p5": "",
+    "Calibrated Size": "",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "1",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-10-23",
+    "Comment": "",
+    "Created": "2020-10-05 13:07:45",
+    "Modified": "2020-10-05 13:07:45",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

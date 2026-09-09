@@ -1,0 +1,23 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 115.0,
+  "uncertaintyKm": 12.0,
+  "reportedUncertaintyKm": 12.0,
+  "uncertaintyKind": "Published size-model uncertainty; not local terrain accuracy or automatically a one-sigma interval.",
+  "diameterSemantics": "Published volume-equivalent diameter of the selected shape solution; isotropic transfer retains source shape and connectivity.",
+  "sourceUrl": "https://arxiv.org/pdf/1308.0446",
+  "reference": "Hanuš et al. (2013), Icarus 226, 1045–1057",
+  "sourceLabel": "Hanuš et al. (2013), Icarus 226, 1045–1057",
+  "limitations": "Hanuš2013 Keck study Table3 independently confirms115±12 km for the first pole and116±12 km for the mirror, based on one adaptive-optics image. DAMIT comment slightly prefers pole(74,+27), selected here. The geometry remains a convex lightcurve model; AO constrains scale and silhouette, not a global photographic surface.",
+  "visibleDescription": "Convex light-curve reconstruction; 115 km volume-equivalent diameter (±12 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+  "scaleKmPerSourceUnit": 1.0000000315374733,
+  "metersPerSourceUnit": 1000.0000315374733,
+  "sourceSignedVolume": 796328.212495522,
+  "sourceVolumeEquivalentDiameter": 114.9999963731907,
+  "sourceSurfaceArea": 43492.236070985455,
+  "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+  "scaledSignedVolumeKm3": 796328.2878380636,
+  "derivedVolumeEquivalentDiameterKm": 115.0,
+  "archiveDeclaredDiameterKm": 115.0,
+  "archiveDeclaredUncertaintyKm": 12.0
+}

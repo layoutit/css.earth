@@ -1,0 +1,89 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/327",
+  "modelId": 327,
+  "modelVersion": "2011-04-21",
+  "diameterKm": 35.3,
+  "diameterInterpretation": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 35.3,
+    "uncertaintyKm": 0.9,
+    "uncertaintyKind": "Reported publication uncertainty for the fitted diameter; not a bound on local shape error.",
+    "diameterSemantics": "Volume-equivalent diameter from Hanuš et al. (2018), TableA.3, VS-TPM fit for the selected nominal pole family.",
+    "sourceUrl": "https://arxiv.org/pdf/1803.06116",
+    "reference": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
+    "sourceLabel": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
+    "sourceFile": "hanus-2018.pdf",
+    "publishedPoleEclipticDegrees": [
+      32,
+      48
+    ],
+    "publishedPeriodHours": 11.9765,
+    "scaleKmPerSourceUnit": 28.4516578727117,
+    "metersPerSourceUnit": 28451.657872711698,
+    "limitations": "A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible.",
+    "visibleDescription": "Convex light-curve reconstruction. Published thermophysical scale: 35.3 ±0.9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 11.97647,
+  "poleEclipticJ2000Degrees": [
+    32,
+    48
+  ],
+  "modelLimitations": "A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select Hanuš (2011) nominal pole1 model327 (32,48), with328 (198,25) retained. Hanuš et al. (2018), TableA.3, explicitly gives VS-TPM volume-equivalent35.3 ±0.9 km for this nominal pole and period11.9765 h; use this shape-aware calibration instead of AKARI39.33 ±0.44 km. The varied-shape ensemble does not establish identical mesh bytes or local shape accuracy, and its alternative pole remains possible.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/1204/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+    "metersPerUnit": 28451.657872711698,
+    "firstVertexKm": [
+      1.560345821055255,
+      6.194551855362537,
+      16.22535454833428
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      46.08172767353751,
+      37.97636247544365,
+      31.945919782690915
+    ],
+    "volumeCubicKm": 23031.527299470523,
+    "volumeEquivalentRadiusKm": 17.65,
+    "radialRangeKm": [
+      14.809435680052411,
+      24.643309625778453
+    ]
+  },
+  "elevation": [
+    -7,
+    7
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 353,
+    "estimatedErrorMeters": 120.83624267578125,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 22996304534962.1
+    }
+  }
+}

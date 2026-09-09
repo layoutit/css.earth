@@ -1,0 +1,20 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 91.0,
+  "uncertaintyKm": 1.0,
+  "uncertaintyKind": "DAMIT represents the published 90–92 km thermophysical fit range as 91±1 km. This is a fit range, not an independently stated one-sigma Gaussian confidence interval or a local shape-accuracy bound.",
+  "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/152",
+  "reference": "DAMIT model 152",
+  "sourceLabel": "DAMIT model 152",
+  "limitations": "Delbo and Tanga2009 supplementary section on Lydia explicitly choose pole1 (149.3,-55), matching model152, because it fits slightly better (reduced chi-square0.7 versus0.76). The second pole remains possible. Its IRAS thermophysical diameter range is90–92 km versus94–97 km for pole2; the archive stores91±1 km.",
+  "visibleDescription": "Convex light-curve reconstruction with the thermally preferred pole and a published 90–92 km diameter fit range. The archive mesh uses 91 km; another pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "scaleKmPerSourceUnit": 1.0000000790258456,
+  "metersPerSourceUnit": 1000.0000790258456,
+  "publishedSizeInterval": {
+    "minimumKm": 90,
+    "maximumKm": 92,
+    "interpretation": "Thermophysical fit range for selected pole; publication does not label it one-sigma",
+    "source": "Delbo and Tanga2009 supplementary results for110 Lydia"
+  }
+}

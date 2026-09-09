@@ -1,0 +1,324 @@
+{
+  "number": 174,
+  "name": "Phaedra",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/228",
+  "modelId": 304,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/304",
+  "catalog": "View model 266 5 5.750249 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "304",
+    "Asteroid": "(174) Phaedra",
+    "λ": "266",
+    "β": "5",
+    "P": "5.750249",
+    "YORP": "",
+    "t0": "2446858",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-02-18",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-04-20 09:30:25",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1088/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1089/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1090/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1091/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Marciniak (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/140",
+      "file": "reference-140.html",
+      "links": [
+        {
+          "label": "2011a&a...529a.107m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011a&a...529a.107m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011A%26A...529A.107M",
+          "url": "http://adsabs.harvard.edu/abs/2011A%26A...529A.107M"
+        }
+      ]
+    }
+  ],
+  "id": "phaedra",
+  "displayName": "Phaedra",
+  "lambda": 266.0,
+  "beta": 5.0,
+  "periodHours": 5.750249,
+  "version": "2011-02-18",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 64.08,
+  "uncertaintyKm": 0.77,
+  "akari": {
+    "number": 174,
+    "name": "Phaedra",
+    "diameterKm": 64.08,
+    "uncertaintyKm": 0.77,
+    "detections": 8,
+    "originalRow": "174    Phaedra                        8.48  0.15  8   64.08  0.77 0.187 0.005"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1091/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1089/IAUspin.txt",
+  "shapeSha256": "1805d5dbef19e6956892f348a8f2bfea20036c710c9641352aebd224cde62acd",
+  "shapeBytes": 80763,
+  "vertices": 998,
+  "faces": 1992,
+  "signedVolume": 0.9999999695071565,
+  "independentSignedVolume": 0.9999999695071565,
+  "originalVolumeEquivalentDiameter": 1.2407009691879662,
+  "firstVertex": [
+    -0.100366,
+    0.020804,
+    0.564742
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.48694224991162965,
+    0.8448015430087708
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.671406,
+      0.660108
+    ],
+    [
+      -0.821273,
+      0.825578
+    ],
+    [
+      -0.580925,
+      0.565578
+    ]
+  ],
+  "scaleKmPerSourceUnit": 51.64822273165475,
+  "topology": {
+    "edges": 2988,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 1.1349965889397731e-07
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        -0.100366,
+        0.020804,
+        0.564742
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1,
+      "coordinates": [
+        -0.110145,
+        0.0221,
+        0.565578
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 332,
+      "coordinates": [
+        0.609119,
+        -0.068794,
+        0.155568
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 382,
+      "coordinates": [
+        -0.671406,
+        0.214227,
+        0.23952
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 437,
+      "coordinates": [
+        0.660108,
+        -0.303087,
+        0.14824
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 470,
+      "coordinates": [
+        0.047259,
+        0.825578,
+        0.086749
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 499,
+      "coordinates": [
+        -0.653193,
+        0.096219,
+        0.184446
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 528,
+      "coordinates": [
+        0.108528,
+        -0.821273,
+        -0.07895
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 987,
+      "coordinates": [
+        0.038495,
+        -0.069569,
+        -0.580925
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 997,
+      "coordinates": [
+        0.166352,
+        -0.241459,
+        -0.550268
+      ]
+    }
+  ],
+  "alternatives": [],
+  "selectionNotes": "The selected Marciniak (2011) archive model 304 has one pole (266,5) and no calibrated size. Retain it as a convex light-curve model, with explicitly approximate thermal scale and no claim of measured craters or unique absolute rotational phase.",
+  "shapeKind": "Convex light-curve reconstruction",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. The selected Marciniak (2011) archive model 304 has one pole (266,5) and no calibrated size. Retain it as a convex light-curve model, with explicitly approximate thermal scale and no claim of measured craters or unique absolute rotational phase.",
+  "calibrationSelection": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics.",
+  "archiveVolumeDiameterMismatchFraction": null,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/304",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "The selected Marciniak (2011) archive model 304 has one pole (266,5) and no calibrated size. Retain it as a convex light-curve model, with explicitly approximate thermal scale and no claim of measured craters or unique absolute rotational phase."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "included",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Pinned AKARI AcuA v1.0 thermal effective-sphere diameter is assigned to mesh volume only as an explicit display-scale approximation; formal catalog errors omit additional shape, spin and thermal-model systematics."
+    }
+  ],
+  "visibleShapeDescription": "Convex light-curve reconstruction with approximate thermal size: 64.08 km (catalog ±0.77 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery.",
+  "papers": [],
+  "selectedPoleStatus": "single selected archive pole",
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 64.08,
+    "uncertaintyKm": 0.77,
+    "reportedUncertaintyKm": 0.77,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 174,
+      "name": "Phaedra",
+      "diameterKm": 64.08,
+      "uncertaintyKm": 0.77,
+      "detections": 8,
+      "originalRow": "174    Phaedra                        8.48  0.15  8   64.08  0.77 0.187 0.005"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. The selected Marciniak (2011) archive model 304 has one pole (266,5) and no calibrated size. Retain it as a convex light-curve model, with explicitly approximate thermal scale and no claim of measured craters or unique absolute rotational phase.",
+    "scaleKmPerSourceUnit": 51.64822273165475,
+    "metersPerSourceUnit": 51648.22273165475,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 64.08 km (catalog ±0.77 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery."
+  },
+  "distanceAu": 2.8588859462315144,
+  "orbitalPeriodYears": 4.833964391024968,
+  "sourceFields": {
+    "ID": "304",
+    "Asteroid": "(174) Phaedra",
+    "λ": "266",
+    "β": "5",
+    "P": "5.750249",
+    "YORP": "",
+    "t0": "2446858",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-02-18",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-04-20 09:30:25",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

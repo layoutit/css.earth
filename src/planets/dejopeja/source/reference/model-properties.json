@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/175",
+  "modelId": 175,
+  "modelVersion": "2007-09-21",
+  "diameterKm": 93,
+  "diameterInterpretation": "Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 93 ±9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 93,
+    "uncertaintyKm": 9,
+    "uncertaintyKind": "Archive estimate of volume-equivalent diameter error; not a bound on local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record; actual source publications and release differences are documented in selectionNotes.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/175",
+    "reference": "DAMIT model 175, version 2007-09-21",
+    "sourceLabel": "DAMIT model 175",
+    "scaleKmPerSourceUnit": 1.0000000094167596,
+    "metersPerSourceUnit": 1000.0000094167596,
+    "limitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select pole1 model175 (200,52). Hanuš et al. (2013), Tables2–3, reports this pole and its mirror (18,54), one Keck AO image, and volume-equivalent diameters93 ±9 and95 ±9 km; neither is marked rejected. The selected93-km archive calibration matches the paper. Convex geometry is still inferred from light curves; the AO silhouette calibrates size, not all local topography.",
+    "visibleDescription": "Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 93 ±9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 6.441111,
+  "poleEclipticJ2000Degrees": [
+    200,
+    52
+  ],
+  "modelLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select pole1 model175 (200,52). Hanuš et al. (2013), Tables2–3, reports this pole and its mirror (18,54), one Keck AO image, and volume-equivalent diameters93 ±9 and95 ±9 km; neither is marked rejected. The selected93-km archive calibration matches the paper. Convex geometry is still inferred from light curves; the AO silhouette calibrates size, not all local topography.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/481/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 1000.0000094167596,
+    "firstVertexKm": [
+      -9.537533089812655,
+      5.170952048693612,
+      44.928776423083484
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      107.4881120121897,
+      96.85102491202281,
+      90.4054938513268
+    ],
+    "volumeCubicKm": 421160.34034392115,
+    "volumeEquivalentRadiusKm": 46.5,
+    "radialRangeKm": [
+      41.44807819825051,
+      55.540738494935944
+    ]
+  },
+  "elevation": [
+    -10,
+    10
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 930,
+    "estimatedErrorMeters": 429.0478515625,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 420090246046533.56
+    }
+  }
+}

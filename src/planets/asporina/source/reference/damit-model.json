@@ -1,0 +1,319 @@
+{
+  "number": 246,
+  "name": "Asporina",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/535",
+  "modelId": 872,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/872",
+  "catalog": "View model 235 -10 16.25222 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "872",
+    "Asteroid": "(246) Asporina",
+    "λ": "235",
+    "β": "-10",
+    "P": "16.25222",
+    "YORP": "",
+    "t0": "2444084",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.38",
+    "p3": "0.06",
+    "p4": "-0.71",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/3333/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/3334/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/3335/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2016)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/161",
+      "file": "reference-161.html",
+      "links": [
+        {
+          "label": "2016a&a...586a.108h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2016a&a...586a.108h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H",
+          "url": "http://adsabs.harvard.edu/abs/2016A%26A...586A.108H"
+        }
+      ]
+    }
+  ],
+  "id": "asporina",
+  "displayName": "Asporina",
+  "lambda": 235.0,
+  "beta": -10.0,
+  "periodHours": 16.25222,
+  "version": "2016-01-04",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 59.93,
+  "uncertaintyKm": 0.66,
+  "akari": {
+    "number": 246,
+    "name": "Asporina",
+    "diameterKm": 59.93,
+    "uncertaintyKm": 0.66,
+    "detections": 9,
+    "originalRow": "246    Asporina                       8.62  0.15  9   59.93  0.66 0.177 0.005"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3335/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3333/IAUspin.txt",
+  "shapeSha256": "e6bad1a6ce84bdc4c206b59b166082c2c28e56dff40f22e1febc5df90f122f55",
+  "shapeBytes": 82384,
+  "vertices": 1018,
+  "faces": 2032,
+  "signedVolume": 0.9999999116337043,
+  "independentSignedVolume": 0.9999999116337044,
+  "originalVolumeEquivalentDiameter": 1.2407009452534157,
+  "firstVertex": [
+    0.031688,
+    -0.113816,
+    0.682931
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5177377801194346,
+    0.8411544763389184
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.77223,
+      0.775487
+    ],
+    [
+      -0.597291,
+      0.596701
+    ],
+    [
+      -0.578737,
+      0.687471
+    ]
+  ],
+  "scaleKmPerSourceUnit": 48.3033403248993,
+  "alternatives": [
+    {
+      "modelId": 873,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/873",
+      "pole": [
+        "47",
+        "-36"
+      ],
+      "version": "2016-01-04",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Hanuš et al. (2016)",
+          "url": "/projects/damit/references/view/161"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Published convex inversion from Hanuš et al. (2016). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "hanus-2016.pdf",
+      "url": "https://arxiv.org/pdf/1510.07422",
+      "label": "Hanuš et al. (2016), A&A 586, A108"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 59.93,
+    "uncertaintyKm": 0.66,
+    "reportedUncertaintyKm": 0.66,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 246,
+      "name": "Asporina",
+      "diameterKm": 59.93,
+      "uncertaintyKm": 0.66,
+      "detections": 9,
+      "originalRow": "246    Asporina                       8.62  0.15  9   59.93  0.66 0.177 0.005"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Published convex inversion from Hanuš et al. (2016). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+    "scaleKmPerSourceUnit": 48.3033403248993,
+    "metersPerSourceUnit": 48303.340324899305,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 59.93 km effective diameter (catalog ±0.66 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "independentCenteredSignedVolume": 0.9999999116337043,
+  "surfaceAreaSourceUnitsSquared": 5.258638777415552,
+  "surfaceEquivalentDiameterSourceUnits": 1.2937838732650877,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.031688,
+        -0.113816,
+        0.682931
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 5,
+      "sourcePoint": [
+        -0.040009,
+        -0.14179,
+        0.687471
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 422,
+      "sourcePoint": [
+        0.239657,
+        -0.597291,
+        0.051498
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 445,
+      "sourcePoint": [
+        0.775487,
+        0.273284,
+        -0.004034
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 476,
+      "sourcePoint": [
+        -0.31365,
+        0.596701,
+        -0.108873
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 507,
+      "sourcePoint": [
+        -0.77223,
+        0.066826,
+        -0.193204
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 509,
+      "sourcePoint": [
+        -0.76251,
+        -0.088221,
+        -0.136845
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1016,
+      "sourcePoint": [
+        0.198238,
+        -0.230781,
+        -0.578737
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1017,
+      "sourcePoint": [
+        0.212064,
+        -0.262756,
+        -0.576949
+      ]
+    }
+  ],
+  "distanceAu": 2.6955752258853334,
+  "orbitalPeriodYears": 4.42573480199043,
+  "sourceFields": {
+    "ID": "872",
+    "Asteroid": "(246) Asporina",
+    "λ": "235",
+    "β": "-10",
+    "P": "16.25222",
+    "YORP": "",
+    "t0": "2444084",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.38",
+    "p3": "0.06",
+    "p4": "-0.71",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-04",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}
