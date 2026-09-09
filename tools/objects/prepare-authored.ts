@@ -136,9 +136,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   if (source(sources, 'terrestrial')) {
+    const terrestrial = record(required(sources, 'terrestrial').value, 'terrestrial');
+    if (Boolean(terrestrial.rings) !== Boolean(descriptor.recipe.rings)) throw new TypeError('Prepared terrestrial rings must match the authored capability.');
     const { prepareTerrestrialLayers } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/terrestrial-layers/index.mjs')).href) as typeof import('./terrestrial-layers/index.mjs');
     const prepared = await prepareTerrestrialLayers({ sourceDirectory, publicDirectory, outputDirectory,
-      config: required(sources, 'terrestrial').value, prepareContent: prepareObjectContentAssets });
+      config: terrestrial, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
       manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
       allowPreparationArtifacts: true,
