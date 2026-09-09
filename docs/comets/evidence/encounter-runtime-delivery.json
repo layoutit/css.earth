@@ -1,0 +1,239 @@
+{
+  "status": "publication-pending",
+  "bucket": "cssearth-assets",
+  "totalFiles": 114,
+  "totalBytes": 24416222,
+  "newFiles": 15,
+  "newBytes": 2190882,
+  "localByteAndHashVerification": true,
+  "files": [
+    {
+      "filename": "comet-81p-navcam-shadow@2x.webp",
+      "bytes": 206164,
+      "sha256": "640eccbeff43a3a00e4e4f4a221478c148b422bd464d7d927daaa93e1907bf9e",
+      "id": "comet-81p",
+      "key": "runtime-assets/640eccbeff43a3a00e4e4f4a221478c148b422bd464d7d927daaa93e1907bf9e/comet-81p-navcam-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/640eccbeff43a3a00e4e4f4a221478c148b422bd464d7d927daaa93e1907bf9e/comet-81p-navcam-shadow@2x.webp"
+    },
+    {
+      "filename": "comet-81p-navcam-surface@2x.webp",
+      "bytes": 300492,
+      "sha256": "9e1527bc59aaf53eb8d57fc60d525251ce70e8f034a1b30bade23ab74404117d",
+      "id": "comet-81p",
+      "key": "runtime-assets/9e1527bc59aaf53eb8d57fc60d525251ce70e8f034a1b30bade23ab74404117d/comet-81p-navcam-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9e1527bc59aaf53eb8d57fc60d525251ce70e8f034a1b30bade23ab74404117d/comet-81p-navcam-surface@2x.webp"
+    },
+    {
+      "filename": "comet-81p-navcam-thumbnail.webp",
+      "bytes": 2134,
+      "sha256": "df05f8efad4588a087f4ec1f77de0227ccb68db90550a52927476235a9a7c7fa",
+      "id": "comet-81p",
+      "key": "runtime-assets/df05f8efad4588a087f4ec1f77de0227ccb68db90550a52927476235a9a7c7fa/comet-81p-navcam-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/df05f8efad4588a087f4ec1f77de0227ccb68db90550a52927476235a9a7c7fa/comet-81p-navcam-thumbnail.webp"
+    },
+    {
+      "filename": "comet-9p-deep-impact-shadow@2x.webp",
+      "bytes": 161462,
+      "sha256": "cb3035e478fa0d0bf13613ffe3f3a85b8b28712e75fb864acc08769c4df82ade",
+      "id": "comet-9p",
+      "key": "runtime-assets/cb3035e478fa0d0bf13613ffe3f3a85b8b28712e75fb864acc08769c4df82ade/comet-9p-deep-impact-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/cb3035e478fa0d0bf13613ffe3f3a85b8b28712e75fb864acc08769c4df82ade/comet-9p-deep-impact-shadow@2x.webp"
+    },
+    {
+      "filename": "comet-9p-deep-impact-surface@2x.webp",
+      "bytes": 204092,
+      "sha256": "0e9547d2147e9167e3b3eb4adc9c9ec719330135d532c5e429a9830d5532a49e",
+      "id": "comet-9p",
+      "key": "runtime-assets/0e9547d2147e9167e3b3eb4adc9c9ec719330135d532c5e429a9830d5532a49e/comet-9p-deep-impact-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0e9547d2147e9167e3b3eb4adc9c9ec719330135d532c5e429a9830d5532a49e/comet-9p-deep-impact-surface@2x.webp"
+    },
+    {
+      "filename": "comet-9p-deep-impact-thumbnail.webp",
+      "bytes": 2082,
+      "sha256": "571737aeceefb34d901670338e6942531e86e7f13f9404092ed966415a2da265",
+      "id": "comet-9p",
+      "key": "runtime-assets/571737aeceefb34d901670338e6942531e86e7f13f9404092ed966415a2da265/comet-9p-deep-impact-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/571737aeceefb34d901670338e6942531e86e7f13f9404092ed966415a2da265/comet-9p-deep-impact-thumbnail.webp"
+    },
+    {
+      "filename": "comet-9p-next-shadow@2x.webp",
+      "bytes": 169712,
+      "sha256": "c74ef89fc3e4ad7fd2b9f8b3365ec059ec5745712432bd27cf2ee44303873cef",
+      "id": "comet-9p",
+      "key": "runtime-assets/c74ef89fc3e4ad7fd2b9f8b3365ec059ec5745712432bd27cf2ee44303873cef/comet-9p-next-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c74ef89fc3e4ad7fd2b9f8b3365ec059ec5745712432bd27cf2ee44303873cef/comet-9p-next-shadow@2x.webp"
+    },
+    {
+      "filename": "comet-9p-next-surface@2x.webp",
+      "bytes": 318852,
+      "sha256": "f3b511dde8b480e4cddcb709858cc0dd65e370c0c784f643b3de7f7e39796718",
+      "id": "comet-9p",
+      "key": "runtime-assets/f3b511dde8b480e4cddcb709858cc0dd65e370c0c784f643b3de7f7e39796718/comet-9p-next-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f3b511dde8b480e4cddcb709858cc0dd65e370c0c784f643b3de7f7e39796718/comet-9p-next-surface@2x.webp"
+    },
+    {
+      "filename": "comet-9p-next-thumbnail.webp",
+      "bytes": 1868,
+      "sha256": "e155cc25157cc119909ea6a28530307d7144793d35671dc7c5021db97f656464",
+      "id": "comet-9p",
+      "key": "runtime-assets/e155cc25157cc119909ea6a28530307d7144793d35671dc7c5021db97f656464/comet-9p-next-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e155cc25157cc119909ea6a28530307d7144793d35671dc7c5021db97f656464/comet-9p-next-thumbnail.webp"
+    },
+    {
+      "filename": "comet-103p-hri-shadow@2x.webp",
+      "bytes": 174996,
+      "sha256": "c5943d2c5d7d5cbaf18fa7b79de6fa12dbdac520c6809a77b9bfdec9276face0",
+      "id": "comet-103p",
+      "key": "runtime-assets/c5943d2c5d7d5cbaf18fa7b79de6fa12dbdac520c6809a77b9bfdec9276face0/comet-103p-hri-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c5943d2c5d7d5cbaf18fa7b79de6fa12dbdac520c6809a77b9bfdec9276face0/comet-103p-hri-shadow@2x.webp"
+    },
+    {
+      "filename": "comet-103p-hri-surface@2x.webp",
+      "bytes": 256838,
+      "sha256": "2790811b2232e55a48e6fb14131d55460cd8abfa7c4b3fd9c18a21fe3e921756",
+      "id": "comet-103p",
+      "key": "runtime-assets/2790811b2232e55a48e6fb14131d55460cd8abfa7c4b3fd9c18a21fe3e921756/comet-103p-hri-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2790811b2232e55a48e6fb14131d55460cd8abfa7c4b3fd9c18a21fe3e921756/comet-103p-hri-surface@2x.webp"
+    },
+    {
+      "filename": "comet-103p-hri-thumbnail.webp",
+      "bytes": 1124,
+      "sha256": "b25d8169953fc3d4dceef7194cf71fc60be8ae527fa88451df71723dce311001",
+      "id": "comet-103p",
+      "key": "runtime-assets/b25d8169953fc3d4dceef7194cf71fc60be8ae527fa88451df71723dce311001/comet-103p-hri-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b25d8169953fc3d4dceef7194cf71fc60be8ae527fa88451df71723dce311001/comet-103p-hri-thumbnail.webp"
+    },
+    {
+      "filename": "comet-103p-mri-shadow@2x.webp",
+      "bytes": 149272,
+      "sha256": "46173b561b0653e8196c1901de33331c4e7dfb479e363db8c794ef08e204f3fc",
+      "id": "comet-103p",
+      "key": "runtime-assets/46173b561b0653e8196c1901de33331c4e7dfb479e363db8c794ef08e204f3fc/comet-103p-mri-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/46173b561b0653e8196c1901de33331c4e7dfb479e363db8c794ef08e204f3fc/comet-103p-mri-shadow@2x.webp"
+    },
+    {
+      "filename": "comet-103p-mri-surface@2x.webp",
+      "bytes": 240742,
+      "sha256": "101641273ee7bad10daed52e93ad679f56c44ae7d10dc730d2a7e26981bdce4b",
+      "id": "comet-103p",
+      "key": "runtime-assets/101641273ee7bad10daed52e93ad679f56c44ae7d10dc730d2a7e26981bdce4b/comet-103p-mri-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/101641273ee7bad10daed52e93ad679f56c44ae7d10dc730d2a7e26981bdce4b/comet-103p-mri-surface@2x.webp"
+    },
+    {
+      "filename": "comet-103p-mri-thumbnail.webp",
+      "bytes": 1052,
+      "sha256": "da9e15abaddc6c9200db297233875d681ae531f654a95281eca51df758ebe5b2",
+      "id": "comet-103p",
+      "key": "runtime-assets/da9e15abaddc6c9200db297233875d681ae531f654a95281eca51df758ebe5b2/comet-103p-mri-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/da9e15abaddc6c9200db297233875d681ae531f654a95281eca51df758ebe5b2/comet-103p-mri-thumbnail.webp"
+    }
+  ],
+  "heads": [
+    {
+      "id": "comet-81p",
+      "filename": "comet-81p-navcam-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/640eccbeff43a3a00e4e4f4a221478c148b422bd464d7d927daaa93e1907bf9e/comet-81p-navcam-shadow@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-81p",
+      "filename": "comet-81p-navcam-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/9e1527bc59aaf53eb8d57fc60d525251ce70e8f034a1b30bade23ab74404117d/comet-81p-navcam-surface@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-81p",
+      "filename": "comet-81p-navcam-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/df05f8efad4588a087f4ec1f77de0227ccb68db90550a52927476235a9a7c7fa/comet-81p-navcam-thumbnail.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-9p",
+      "filename": "comet-9p-deep-impact-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/cb3035e478fa0d0bf13613ffe3f3a85b8b28712e75fb864acc08769c4df82ade/comet-9p-deep-impact-shadow@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-9p",
+      "filename": "comet-9p-deep-impact-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/0e9547d2147e9167e3b3eb4adc9c9ec719330135d532c5e429a9830d5532a49e/comet-9p-deep-impact-surface@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-9p",
+      "filename": "comet-9p-deep-impact-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/571737aeceefb34d901670338e6942531e86e7f13f9404092ed966415a2da265/comet-9p-deep-impact-thumbnail.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-9p",
+      "filename": "comet-9p-next-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c74ef89fc3e4ad7fd2b9f8b3365ec059ec5745712432bd27cf2ee44303873cef/comet-9p-next-shadow@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-9p",
+      "filename": "comet-9p-next-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/f3b511dde8b480e4cddcb709858cc0dd65e370c0c784f643b3de7f7e39796718/comet-9p-next-surface@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-9p",
+      "filename": "comet-9p-next-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/e155cc25157cc119909ea6a28530307d7144793d35671dc7c5021db97f656464/comet-9p-next-thumbnail.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-103p",
+      "filename": "comet-103p-hri-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c5943d2c5d7d5cbaf18fa7b79de6fa12dbdac520c6809a77b9bfdec9276face0/comet-103p-hri-shadow@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-103p",
+      "filename": "comet-103p-hri-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2790811b2232e55a48e6fb14131d55460cd8abfa7c4b3fd9c18a21fe3e921756/comet-103p-hri-surface@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-103p",
+      "filename": "comet-103p-hri-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/b25d8169953fc3d4dceef7194cf71fc60be8ae527fa88451df71723dce311001/comet-103p-hri-thumbnail.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-103p",
+      "filename": "comet-103p-mri-shadow@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/46173b561b0653e8196c1901de33331c4e7dfb479e363db8c794ef08e204f3fc/comet-103p-mri-shadow@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-103p",
+      "filename": "comet-103p-mri-surface@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/101641273ee7bad10daed52e93ad679f56c44ae7d10dc730d2a7e26981bdce4b/comet-103p-mri-surface@2x.webp",
+      "status": 404,
+      "bytes": null
+    },
+    {
+      "id": "comet-103p",
+      "filename": "comet-103p-mri-thumbnail.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/da9e15abaddc6c9200db297233875d681ae531f654a95281eca51df758ebe5b2/comet-103p-mri-thumbnail.webp",
+      "status": 404,
+      "bytes": null
+    }
+  ],
+  "freshRemoteInstallation": null
+}

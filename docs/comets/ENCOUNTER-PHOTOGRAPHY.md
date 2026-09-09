@@ -27,3 +27,46 @@ The 2005/2011 Tempel lenses permit encounter inspection, not a precise before-an
 ## Qualification
 
 Numerical, browser, source-restoration and payload results are recorded with the final prepared assets below. The [independent FITS anchors](evidence/encounter-decoder-anchors.json) bind 14 original products to an Astropy read, including quality values and negative/nonfinite radiance cases. The regression tests also exercise detector overclock exclusion, retained shadowed pixels, projection handedness, independent EPOXI camera axes, disjoint footprints and recomputed holdout residuals.
+
+
+| View | Accepted surface area | Largest frame holdout RMS | Existing scene leaves |
+| --- | ---: | ---: | ---: |
+| Wild 2 / NAVCAM | 38.82% | 66.82 m | 992 |
+| Tempel 1 / ITS | 30.92% | 58.28 m | 1,000 |
+| Tempel 1 / NAVCAM | 49.73% | 27.72 m | 1,000 |
+| Hartley 2 / MRI | 43.34% | 11.66 m | 1,000 |
+| Hartley 2 / restored HRI | 32.31% | 13.29 m | 1,000 |
+
+The [numerical receipt](evidence/encounter-qualification.json) records every frame, source hash, fit and holdout result, overlap gain and coverage calculation. Coverage is estimated with 32 equal-area samples per retained triangle; it excludes atlas bleed. Both `terrain.json` and `scene.json` remain byte-for-byte identical to main at `e97ee9532b17beaf0c7ae38281c5bef12b64fa5b` for all three bodies.
+
+[Fresh source restoration](evidence/encounter-source-restore.json) downloaded 40 files (242,690,950 bytes) into three new empty source directories and verified the resulting source packages. The 90 tracked source pins were also checked against the exact Git blobs, preserving the archive labels' original fixed records.
+
+[Detailed Chrome conformance](evidence/encounter-conformance.json) passes 39 cases across the three bodies, including desktop/mobile interaction, pre-ready input and material request races. [Production lens readbacks](evidence/encounter-browser.json) pass six body/DPR runs: all five datasets, both lighting settings, DPR 1 and DPR 2. The same highest-density atlases are selected at both densities. Every scene retains its nodes across lens changes and dragging, with no runtime source-data requests, drag image fetches, forbidden rendering features or browser errors.
+
+## Runtime delivery
+
+The three runtime inventories contain 114 files totaling 24,416,222 bytes. This change adds 15 immutable images (2,190,882 bytes): five surface atlases, five shadow atlases and five minimaps. All local bytes match the manifests. [Delivery verification](evidence/encounter-runtime-delivery.json) currently records the new remote objects as unavailable; a fresh remote installation remains pending. No source FITS, reconstruction grids or source-index rasters are runtime downloads.
+
+## Production views
+
+These are unaltered Chrome screenshots at 1440 × 1000. Additional viewer shadows are disabled so the original photographic shading is visible. Each [capture receipt](evidence/encounter-posters.json) includes its saved view URL, scene transform, selected atlas, image hash and browser version. The pale grid deliberately exposes gaps; the photographs do not cover a complete nucleus.
+
+### Wild 2 — NAVCAM
+
+![Wild 2 NAVCAM photographs](evidence/encounter-comet-81p-navcam.png)
+
+### Tempel 1 — Deep Impact ITS, 2005
+
+![Tempel 1 pre-impact ITS photographs](evidence/encounter-comet-9p-deep-impact.png)
+
+### Tempel 1 — Stardust-NExT NAVCAM, 2011
+
+![Tempel 1 Stardust-NExT photographs](evidence/encounter-comet-9p-next.png)
+
+### Hartley 2 — MRI
+
+![Hartley 2 MRI photographs](evidence/encounter-comet-103p-mri.png)
+
+### Hartley 2 — restored HRI
+
+![Hartley 2 restored HRI photographs](evidence/encounter-comet-103p-hri.png)
