@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5298d8656a34d9dfc92cc6a5ec86a10689fbfbec71440361c0c9ac8276a0ef28"
+    "sha256": "364efe8206b6536318f13cbd396bcbed080bf328e140b3c5d7d042f09d664fb4"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "95b678ef073f8566a545d6a2e8276ccc5d0e0d95a0322be77eb4484663eb8281",
+      "sha256": "fa644763a02ddd161801ac5ec17d89494220d2f437e0860de78cca6c54459f9c",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -65,6 +65,31 @@
                   255
                 ],
                 "specialValueMagnitude": 1e+30
+              }
+            },
+            {
+              "id": "spectral",
+              "validity": {
+                "kind": "geotiff-rgb-bands",
+                "samples": [
+                  0,
+                  1,
+                  2
+                ],
+                "alphaBand": 3,
+                "sampleBytes": 2,
+                "noData": 0,
+                "centerLongitude": 180,
+                "resolutionMeters": 0.25,
+                "origin": [
+                  -785.5,
+                  283.5
+                ],
+                "grid": {
+                  "pixelsPerDegree": 17.453292519943293,
+                  "sampleOffset": 3141.5,
+                  "lineOffset": 1133.5
+                }
               }
             }
           ],
@@ -176,7 +201,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7aa642699c960a712a31d861d39030e39632170276e4efb369f68e93d09f35c6",
+      "sha256": "b19e51a75cabad3ad44f22e260d48d24603518f0d70a39bba44c17626fc8dbc3",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -254,7 +279,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "PolyCam · photometrically normalized",
+              "detail": "PolyCam · albedo",
               "summary": "Corrected PolyCam reflectance between about 55° north and south. The gray grid marks polar gaps."
             },
             {
@@ -270,8 +295,24 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "PolyCam · global image mosaic",
+              "detail": "PolyCam",
               "summary": "A 5 cm image basemap with shadows. Its control shape differs from the display mesh; small offsets remain."
+            },
+            {
+              "id": "spectral",
+              "label": "Spectral color",
+              "description": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
+              "title": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
+              "thumbnail": "/scenes/bennu/bennu-spectral-thumbnail.webp",
+              "surface": "bennu-spectral-surface@2x.webp",
+              "poles": "bennu-spectral-surface@2x.webp",
+              "source": {
+                "id": "bennu-spectral",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "detail": "MapCam",
+              "summary": "Published false-color MapCam composite. Colors emphasize spectral differences; gray grid marks missing coverage, including both poles."
             },
             {
               "id": "elevation",
@@ -328,6 +369,12 @@
             "role": "facts",
             "description": "Bennu exploration",
             "href": "https://science.nasa.gov/mission/osiris-rex/"
+          },
+          {
+            "label": "Spectral maps",
+            "role": "surface",
+            "description": "Spectral color source and interpretation",
+            "href": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm"
           },
           {
             "label": "Source data",
@@ -395,7 +442,7 @@
       "sha256": "71bfeecce5615a5602d16d176c4cc17cc2550b2dc8c7cdac1332dea8d9f3da36",
       "bytes": 315960161,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -434,7 +481,7 @@
       "sha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d",
       "bytes": 195300487,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -476,7 +523,7 @@
       "sha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd",
       "bytes": 493624548,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -485,6 +532,48 @@
         ],
         "path": "maps/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif",
         "url": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "bennu-spectral",
+      "path": "maps/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/bennu-osiris-rex-ocams-photometric-mosaics-25cm",
+      "credit": "NASA/Goddard/University of Arizona; D. N. DellaGiustina, D. R. Golish and colleagues; USGS Astrogeology",
+      "license": "Public scientific data; cite the original authors and retain source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "lensId": "spectral",
+      "label": "Spectral color",
+      "falseColor": true,
+      "width": 6284,
+      "height": 2268,
+      "projection": {
+        "kind": "equirectangular",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 250
+      },
+      "coverage": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
+      "capture": {
+        "spacecraftIds": [
+          "osiris-rex"
+        ],
+        "evidence": "OSIRIS-REx OCAMS MapCam composite; pinned USGS ISIS label and DellaGiustina et al. (2020), Figure 1A."
+      },
+      "sha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c",
+      "bytes": 114072003,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "maps/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif",
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif"
       },
       "verificationOperations": []
     },
@@ -498,10 +587,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "11ad30ad51acfbe05534ccd7f38e51bdd3e1ee5ad1c4403760d18d4c49c4c33e",
-      "bytes": 9872,
+      "sha256": "b19e51a75cabad3ad44f22e260d48d24603518f0d70a39bba44c17626fc8dbc3",
+      "bytes": 11958,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -549,13 +638,13 @@
           "url": "/scenes/bennu/bennu-normal-thumbnail.webp",
           "bytes": 3050,
           "sha256": "d109e039408b99c5100b7d51c3d1359df84a6d4239b3bf8028879873965f152d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "bytes": 4836700,
           "sha256": "f48e56950870b2f67ea5a0f21fefbf9e28a9f3529e1c5536a7d60518ee1e8e1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -602,13 +691,73 @@
           "url": "/scenes/bennu/bennu-surface-thumbnail.webp",
           "bytes": 3486,
           "sha256": "db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-surface-surface@2x.webp",
           "bytes": 7419092,
           "sha256": "e22c354a68e7e15677967a7c1fbd1287b66d503e12e2180f45a251dbf88f71f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "spectral",
+      "label": "Spectral color",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely."
+      ],
+      "lensIds": [
+        "spectral"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-rgb-bands",
+          "samples": [
+            0,
+            1,
+            2
+          ],
+          "alphaBand": 3,
+          "sampleBytes": 2,
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 0.25,
+          "origin": [
+            -785.5,
+            283.5
+          ],
+          "grid": {
+            "pixelsPerDegree": 17.453292519943293,
+            "sampleOffset": 3141.5,
+            "lineOffset": 1133.5
+          }
+        }
+      },
+      "inputs": [
+        "bennu-spectral",
+        "bennu-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/bennu/bennu-spectral-thumbnail.webp",
+          "bytes": 7048,
+          "sha256": "d99a8add79833c48f8490e193df1a142ebc4d1456c68f8d0df4241233316858d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/bennu/bennu-spectral-surface@2x.webp",
+          "bytes": 5680926,
+          "sha256": "70792870462b06dc89af0e468f1dabd0b0487e282f2c1c4ad0225827d0d05d8b",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -640,19 +789,19 @@
           "url": "/scenes/bennu/bennu-elevation-thumbnail.webp",
           "bytes": 7640,
           "sha256": "b5645f84329eabb9394de28aa23e38dfa73f32784a0bbd20261bf502548354a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-surface@2x.webp",
           "bytes": 2846108,
           "sha256": "f9c0122c83a6bda3f7d35f86dbe6e1c3f029e9625bf557ee42835d545639de36",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -675,8 +824,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4641,
-          "sha256": "dee87b2e004781ae268968973d57cea5eb1ccb01504416e6e627e4e18245e3f9",
+          "bytes": 4839,
+          "sha256": "3777ec5efbac7c52041ab3c7f48929f1c2555e8963e2d2345ac588aef0fe625b",
           "verification": "bytes-verified"
         }
       ],
@@ -726,6 +875,30 @@
           "url": "object:prepared/minimaps/surface.webp",
           "bytes": 88734,
           "sha256": "599d290b0c85bdc76a27f7fbb4d9ca14a5da5a5adae6b00ffc0c4c9a2ea5bd46",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:spectral",
+      "label": "Spectral color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "spectral"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/spectral.webp",
+          "bytes": 79914,
+          "sha256": "71fc8a92aa2382103656002f56430f479e4693897207ce68007ce63ebbfad5cb",
           "verification": "bytes-verified"
         }
       ]

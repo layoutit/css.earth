@@ -78,6 +78,22 @@
         "summary": "Dawn natural color at 650, 550 and 430 nm. Bright terrain clips to white; shadows and color offsets remain."
       },
       {
+        "id": "ratios",
+        "label": "Spectral ratios",
+        "description": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+        "title": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+        "thumbnail": "/scenes/vesta/vesta-ratios-thumbnail.webp",
+        "surface": "vesta-ratios-surface@2x.webp",
+        "poles": "vesta-ratios-surface@2x.webp",
+        "source": {
+          "id": "vesta-ratios",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "detail": "Dawn FC",
+        "summary": "Published false-color Dawn filter ratios emphasize spectral differences. Source seams and missing coverage remain visible."
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting.",
@@ -132,6 +148,12 @@
       "role": "facts",
       "description": "Dawn at Vesta",
       "href": "https://science.nasa.gov/mission/dawn/science/vesta/"
+    },
+    {
+      "label": "Spectral maps",
+      "role": "surface",
+      "description": "Spectral ratios source and interpretation",
+      "href": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php"
     },
     {
       "label": "DLR",

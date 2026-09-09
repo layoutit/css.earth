@@ -30,6 +30,24 @@
           ],
           "specialValueMagnitude": 1e+30
         }
+      },
+      {
+        "id": "infrared",
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 10,
+          "origin": [
+            -53410,
+            26710
+          ],
+          "displayRange": [
+            0.05,
+            0.4
+          ],
+          "specialValueMagnitude": 1e+30
+        }
       }
     ],
     "scientific": [

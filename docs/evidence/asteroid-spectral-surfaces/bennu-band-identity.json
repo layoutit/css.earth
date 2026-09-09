@@ -1,0 +1,45 @@
+{
+  "method": "Independent uncompressed TIFF strip decoding with Pillow tags and NumPy; all four native uint16 planes match exactly. Full-alpha sRGB codes are converted to display bytes only after validity evaluation.",
+  "records": [
+    {
+      "path": "output/asteroid-spectral-surfaces/bennu-original-figure1a.tif",
+      "width": 6284,
+      "height": 2268,
+      "planarConfiguration": 1,
+      "photometricInterpretation": 2,
+      "extraSamples": [
+        1
+      ],
+      "bandHashes": [
+        "84750acdfff544ce06bdf967938b8a6b29674d5eef587299f8a87e9c9b56e083",
+        "4163963ac330162127b0374e75c2cf27b39ed9ec9a896f3fde67f3be91f61388",
+        "5da8c5f4cd3b799c0bb67ce1581ad7f0a45d75be2411cfa0e5583a01686b438c",
+        "2ef89aac18511592dfd62dd0decaec3ce2029a3112632246214b840aec608707"
+      ],
+      "bytes": 114027620,
+      "sha256": "036826c4f61c5be1239818f9c1b4dacaf50fad141ed8ae0e1f0895c487d31c14",
+      "origin": "https://ndownloader.figshare.com/files/24762896"
+    },
+    {
+      "path": "src/planets/bennu/source/maps/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif",
+      "width": 6284,
+      "height": 2268,
+      "planarConfiguration": 2,
+      "photometricInterpretation": 1,
+      "extraSamples": [
+        0,
+        0,
+        0
+      ],
+      "bandHashes": [
+        "84750acdfff544ce06bdf967938b8a6b29674d5eef587299f8a87e9c9b56e083",
+        "4163963ac330162127b0374e75c2cf27b39ed9ec9a896f3fde67f3be91f61388",
+        "5da8c5f4cd3b799c0bb67ce1581ad7f0a45d75be2411cfa0e5583a01686b438c",
+        "2ef89aac18511592dfd62dd0decaec3ce2029a3112632246214b840aec608707"
+      ],
+      "bytes": 114072003,
+      "sha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c",
+      "origin": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Bennu/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.tif"
+    }
+  ]
+}
