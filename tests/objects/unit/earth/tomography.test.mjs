@@ -69,7 +69,7 @@ test('changed cut geometry rejects a stale source subset', async () => {
 });
 
 test('decoded cut-plane texels preserve independent volume samples within the q90 display tolerance', async () => {
-  const file = new URL('../../../../public/scenes/earth/earth-interior-section@2x.webp', import.meta.url);
+  const file = new URL('../../../../public/scenes/earth/earth-tomography-section@2x.webp', import.meta.url);
   const { data, info } = await sharp(fileURLToPath(file)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   // Direct full-volume trilinear samples, independently calculated with NumPy.
   // These are interior points away from layer boundaries, on both cut planes.

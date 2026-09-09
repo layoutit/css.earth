@@ -1,44 +1,45 @@
 {
-  "createdAt": "2026-09-09T14:10:44.521Z",
+  "createdAt": "2026-09-09T14:32:36.808Z",
   "freshInstall": {
-    "installed": 161,
+    "installed": 165,
     "reused": 0
   },
-  "verifiedBytes": 39428415,
-  "additionalInventoryBytes": 151525,
+  "verifiedBytes": 39575811,
+  "originalRepairAssetsPreserved": 160,
+  "additionalInventoryBytes": 298921,
   "publishedBytes": 298921,
   "changedHeads": [
     {
-      "filename": "earth-interior-legend.png",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286/earth-interior-legend.png",
+      "filename": "earth-tomography-legend.png",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286/earth-tomography-legend.png",
       "sha256": "c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286",
       "bytes": 2083,
       "status": 200
     },
     {
-      "filename": "earth-interior-mantle-poles@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d8a1988e6ca41cfea2c2c218b0edb94ff779e1ac80bea09e16158347bc85bab/earth-interior-mantle-poles@2x.webp",
+      "filename": "earth-tomography-mantle-poles@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/2d8a1988e6ca41cfea2c2c218b0edb94ff779e1ac80bea09e16158347bc85bab/earth-tomography-mantle-poles@2x.webp",
       "sha256": "2d8a1988e6ca41cfea2c2c218b0edb94ff779e1ac80bea09e16158347bc85bab",
       "bytes": 65172,
       "status": 200
     },
     {
-      "filename": "earth-interior-mantle@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b/earth-interior-mantle@2x.webp",
+      "filename": "earth-tomography-mantle@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b/earth-tomography-mantle@2x.webp",
       "sha256": "39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b",
       "bytes": 117986,
       "status": 200
     },
     {
-      "filename": "earth-interior-section@2x.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a36fc0a860f9a647eec5b173ed11e44ea31a5489c66195ce10e5b6f0b1650210/earth-interior-section@2x.webp",
+      "filename": "earth-tomography-section@2x.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/a36fc0a860f9a647eec5b173ed11e44ea31a5489c66195ce10e5b6f0b1650210/earth-tomography-section@2x.webp",
       "sha256": "a36fc0a860f9a647eec5b173ed11e44ea31a5489c66195ce10e5b6f0b1650210",
       "bytes": 111944,
       "status": 200
     },
     {
-      "filename": "earth-view-interior.webp",
-      "url": "https://earth-assets.lowpoly.cc/runtime-assets/97bd54b5ea62537b3562562ae024a5fa5757e5c059da08af80f213861fccdf11/earth-view-interior.webp",
+      "filename": "earth-view-tomography.webp",
+      "url": "https://earth-assets.lowpoly.cc/runtime-assets/97bd54b5ea62537b3562562ae024a5fa5757e5c059da08af80f213861fccdf11/earth-view-tomography.webp",
       "sha256": "97bd54b5ea62537b3562562ae024a5fa5757e5c059da08af80f213861fccdf11",
       "bytes": 1736,
       "status": 200

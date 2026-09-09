@@ -33,7 +33,7 @@
         "modules": [
           "src/planets/earth/prepared/object.json"
         ],
-        "sourceSha256": "384b998a3821e30af58851b1c482c46b8426df79bf7a5156df1ed94b6b2fbaf2"
+        "sourceSha256": "77896fc6c94e2ae46e4e336ba08559d2f919490d02fd7d85dc60d8ced6a5dbef"
       },
       {
         "id": "mars",
@@ -820,16 +820,16 @@
       "src/navigation/marker-presentation.mjs": "4018e8d1d6f074c399c7761b0ad22f1d4755222964399c4b6496cb2342177f4f",
       "src/objects/stellar-neighbourhood/object.json": "98179380cc1fba4ee9ec7cb4bf3328c2154fb783b8066a3233c63f3837166bbb",
       "src/objects/stellar-neighbourhood/prepared/stars.json": "cc998c3be7502f6b0c2feaa9011fc8fe5ec44aaf501f311d47dd64328c210377",
-      "src/planets/earth/object.json": "b49f4726b4bdf540585ca3e9f95dd54277d81092c29d94b2ce18fac90a44eb0f",
-      "src/planets/earth/prepared/object.json": "384b998a3821e30af58851b1c482c46b8426df79bf7a5156df1ed94b6b2fbaf2",
-      "src/planets/earth/prepared/runtime.json": "308270e4281cde548b0d23578417f85b625fdbf0a20afeae494cde4c82c54d9c",
+      "src/planets/earth/object.json": "166d1737f03aafc6ec15034815e682542b5712c7f95e06ef5bbea746626ac5f5",
+      "src/planets/earth/prepared/object.json": "77896fc6c94e2ae46e4e336ba08559d2f919490d02fd7d85dc60d8ced6a5dbef",
+      "src/planets/earth/prepared/runtime.json": "fd3d724f818112f354f71a8acbf12f10dbd590e0f057fda475a5b451bab9d962",
       "src/planets/earth/prepared/scene.json": "a026506882903851f91b6730ffb047e48b2d7aa51055c0f1c7a0c074ba505948",
-      "src/planets/earth/prepared/world-navigation.json": "32aac04329058893852339110796204c5ff71b8ea74e32580fb523ef3cd9ac84",
+      "src/planets/earth/prepared/world-navigation.json": "fe67b7be651fee760f0c4f3eb3d7568594d6410ee93467c644eab361c1fe32b6",
       "src/planets/earth/source/content/charts.json": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa",
-      "src/planets/earth/source/content/lens-bindings.json": "fcdafb7115fd9d2b9a13ec8687fe5bf6d39a5f5b6eab558c5efe93c6509f2d56",
-      "src/planets/earth/source/content/object.json": "0e0c328857567afd0addeed8485526dc531e6e6626705f713a9e1101e0e70ee5",
+      "src/planets/earth/source/content/lens-bindings.json": "07e2f455bad6f5f5b1ba67548d1abf694a36081b9bd21b311469089a5860af74",
+      "src/planets/earth/source/content/object.json": "0ab3cf97c8098bb98b3b6130aabb9579a21dd6ca5655c23d65aa6cf6eafa1614",
       "src/planets/earth/source/editorial/earth.json": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d",
-      "src/planets/earth/source/interior/tomography.json": "784a3c2d67a027dc900b1c2d9192d7f17c401d67d54f03fabc8961bc72bf1d97",
+      "src/planets/earth/source/interior/tomography.json": "0eb504244bf70f2e96fcd619a225587c7e6383510991f7e2249c12f19af74903",
       "src/planets/earth/source/preparation/acquisition.json": "779c8e99f2b5046b9d543bb38b3c75acd9d0cb402a9758f040dd877792491309",
       "src/planets/earth/source/preparation/celestial.json": "1d473392f7977901ae43bd7a30318cd620ebbe8915a526a72c5455a94952a55a",
       "src/planets/earth/source/preparation/paged-ellipsoid.json": "0f7a222edb670316ba156b94c33470255baecde253a00afffc3e7d91e4ecf140",

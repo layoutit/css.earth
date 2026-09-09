@@ -1,61 +1,75 @@
 # Planet cross-section repair and Earth mantle tomography
 
-Earth's mantle now shows **GLAD-M35 r0.1 (2024)** seismic-model values on both
-cut planes and the outer mantle shell. Colors encode vertically polarized
-shear-wave velocity relative to the area-weighted global mean at the same
-depth, with an unshaded ±3% legend. Crust and core remain schematic. The numeric
-subset, authoritative metadata, original NetCDF hash and deterministic extractor
-are checked in; source definitions and limitations are documented in
-[Earth's source record](../src/planets/earth/SOURCE.md#mantle-tomography-source-and-interpretation).
+Earth has two separate cutaway datasets:
 
-The original 343.8 MB volume is used only for source extraction. Normal offline
-preparation reads a 520 KB numeric subset; browsers load prepared WebP textures.
-No DOM geometry or camera topology was added for tomography. Six source-value
-anchors and six independent full-volume texel anchors verify sign, depth,
-latitude, reference mean and final texture sampling. Numeric subset extraction
-reproduced byte for byte from the upstream NetCDF. The tests also check missing
-depths, exterior registration, the palette and stale-cut rejection.
+- **Cross section** retains the original schematic NASA Science layer colors,
+  structure legend and thumbnail. All 160 image assets from the earlier repair
+  head (`905cb1064`) remain byte-for-byte unchanged.
+- **Mantle tomography** adds GLAD-M35 r0.1 (2024) values on the mantle's two cut
+  planes and outer shell. Its signed, unshaded palette shows vertically polarized
+  shear-wave velocity relative to the area-weighted global mean at the same
+  depth. Crust and core remain schematic. The model is not a temperature map.
 
-## Final tomography validation
+Both datasets use the same retained cutaway geometry and shared camera. A
+selection changes prepared texture addresses and dataset content; returning to
+Cross section restores the original textures without remounting anything.
+Each has its own thumbnail, legend, source and independent selection.
 
-This version integrates `main` at `ef2d27b2d`, including the newer dataset cards,
-and preserves the cross-section repairs. The images below come from the final
-301-page production build, after the integration.
+| Original Cross section | Separate Mantle tomography |
+| --- | --- |
+| ![Schematic structure](evidence/planet-cross-sections/tomography/earth-production.png) | ![GLAD-M35 mantle tomography](evidence/planet-cross-sections/tomography/earth-tomography-production.png) |
 
-![Earth mantle tomography after a native drag](evidence/planet-cross-sections/tomography/earth-production-drag.png)
+## Scientific source and delivery
 
-- **58 dataset interactions across all eight planets at DPR 1 and 2**, plus eight
-  initial-shell checks, passed. Every dataset was selected through its real
-  button and dragged; all three cutaways also passed the Shadows image-change
-  check. [Final matrix](evidence/planet-cross-sections/tomography/planet-matrix.json).
-- **45 focused tests passed**, including independent NetCDF value/texel anchors,
-  exterior coordinate registration, numeric/source lineage, retained camera
-  behavior, polar caps and Mercury's lighting transaction. Both typechecks and
-  the 301-page production build passed.
-- All eight planets passed production asset assembly, source closure, prepared
-  leaf-layout census and runtime-ownership checks.
-  [Contract receipt](evidence/planet-cross-sections/tomography/contracts.json).
-- Native production drags retained every original cutaway geometry leaf for
-  Earth, Mercury and Saturn, with no page errors.
-  [Production receipt](evidence/planet-cross-sections/tomography/production.json),
-  [Earth entry](evidence/planet-cross-sections/tomography/earth-production.png),
-  [Mercury](evidence/planet-cross-sections/tomography/mercury-production.png),
-  [Saturn](evidence/planet-cross-sections/tomography/saturn-production.png).
-- The mantle shell and section use **WebP quality 90**; polar alpha remains
-  lossless. The final section texture is **111,944 bytes**. Tomography adds
-  **151,525 bytes** to the image inventory compared with the earlier repair
-  head (`905cb1064`), not to every page's initial transfer. Five changed files
-  totaling 298,921 bytes were published to immutable URLs; a fresh install
-  downloaded and verified all 161 Earth assets, followed by successful HEAD
-  checks for those five files.
-  [Delivery](evidence/planet-cross-sections/tomography/delivery.json),
-  [compression comparison](evidence/planet-cross-sections/tomography/encoding.json).
+The checked-in 520 KB numeric subset, upstream metadata, original NetCDF hash,
+deterministic extractor, coordinate convention and interpretation are documented
+in [Earth's source record](../src/planets/earth/SOURCE.md#mantle-tomography-source-and-interpretation).
+Six independently decoded source anchors and six full-volume texel anchors check
+velocity, reference mean, sign, latitude, depth and rendered palette. Extraction
+reproduced byte for byte from the upstream NetCDF. Other tests check missing
+depths, geographic registration and stale-cut rejection.
+
+The 343.8 MB original volume is used only for source extraction. Browser assets
+are prepared ahead of time: WebP q90 for the scientific section and shell,
+lossless alpha for the poles. The canonical section texture is 111,944 bytes.
+Five additional files total **298,921 bytes**, increasing the installed Earth
+image inventory by that amount. This is an inventory delta, not a measured
+initial-page transfer; it excludes JSON transport. The original structure files
+are preserved. [Compression comparison](evidence/planet-cross-sections/tomography/encoding.json)
+and [immutable delivery receipt](evidence/planet-cross-sections/tomography/delivery.json).
+
+## Final validation
+
+The branch integrates `main` at `ef2d27b2d`, including the updated dataset cards.
+
+- **60 dataset interactions across all eight planets at DPR 1 and 2**, plus eight
+  initial-shell checks, passed. Earth was rerun after adding the second dataset;
+  the other seven bodies' prepared fingerprints are unchanged. Every dataset
+  was selected and dragged; all four cutaway datasets passed Shadows checks.
+  [Browser matrix](evidence/planet-cross-sections/tomography/planet-matrix.json).
+- **46 focused tests passed**, including the independent scientific anchors,
+  structure/tomography/restored-structure transaction, source lineage, camera,
+  polar caps and Mercury lighting. Both typechecks passed, and the final
+  production build generated all 301 pages.
+- All eight planets passed source closure, asset assembly, prepared leaf-layout
+  census and runtime-ownership checks.
+  [Contracts](evidence/planet-cross-sections/tomography/contracts.json).
+- Production browser checks dragged both Earth datasets and switched back to
+  structure, confirming original geometry nodes stay connected and the correct
+  textures return. Mercury and Saturn's unchanged cutaways also have production
+  drag evidence. [Production receipt](evidence/planet-cross-sections/tomography/production.json).
+- A fresh install downloaded and verified all 165 Earth images. The five new
+  immutable URLs passed independent HEAD checks.
+  [Delivery](evidence/planet-cross-sections/tomography/delivery.json).
 
 [Validation summary](evidence/planet-cross-sections/tomography/validation.json)
 and [final fingerprints](evidence/planet-cross-sections/tomography/fingerprints.json)
-bind these checks to the implementation and prepared data. The browser evidence
-covers desktop Chromium at two pixel densities; physical mobile hardware and a
-new aggregate-suite run are outside this evidence.
+bind these checks to the implementation and prepared data. Browser evidence is
+from desktop Chromium at two densities, not physical mobile hardware. The
+aggregate suite was not rerun for this addition; its earlier failures and
+memory limits are documented below, so this is not a claim of aggregate readiness.
+The existing shared-view URL format saves camera and playback, but does not
+encode dataset selection; reloading a link returns to the default dataset.
 
 ## Earlier repair evidence (`905cb1064`)
 

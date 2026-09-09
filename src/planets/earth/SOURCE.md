@@ -42,7 +42,9 @@ shards per material. Camera and material projection transforms are prepared
 keyframes transported through paused Web Animations; runtime changes only
 animation time, image addresses, and the camera scale.
 
-The cross-section combines modeled mantle velocities with schematic layers. Selecting it uses a
+The original Cross section dataset retains the schematic NASA Science layers.
+Mantle tomography is a separate dataset that combines modeled mantle velocities
+with the same schematic crust and core. Selecting either uses a
 prepared north-up camera aimed into the cut, then follows the shared camera's
 normal orbit controls. The cutaway and exterior use the same physical frame;
 Earth's 23.4 degree axial tilt is unchanged. The mantle and outer-core pole
@@ -71,7 +73,7 @@ The starfield is a presentation layer prepared from HYG Database v4.1 at commit 
 `data/planets/earth.json` is prepared from NASA Science record 48583, `Facts About Earth`. NASA's block-feed endpoint currently fails server-side for this record. Earth acquisition therefore validates the canonical WordPress record and parses the same selected headings from its checked `content.rendered` field. The shared editorial tool and contract are unchanged.
 
 `source/interior/earth-interior.json` supplies schematic layer geometry based on
-NASA Science. The mantle now samples **GLAD-M35 r0.1 (2024)**, a seismic inverse
+NASA Science. The separate Mantle tomography dataset samples **GLAD-M35 r0.1 (2024)**, a seismic inverse
 model by Cui et al., distributed through EarthScope EMC. The model is not a
 photograph, a temperature measurement, or evidence for detailed core imagery.
 

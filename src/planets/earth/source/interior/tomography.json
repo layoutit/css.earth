@@ -60,11 +60,11 @@
   ],
   "missingColor": "#a3a3a3",
   "legend": {
-    "image": "earth-interior-legend.png",
+    "image": "earth-tomography-legend.png",
     "width": 620,
     "height": 16
   },
-  "interpretation": "Seismic inverse model, not a photograph or temperature measurement. Smooth interpolation does not add resolving power. Only the mantle portion of the schematic geometry is sampled; depths outside 10\u20132890 km are gray. Crust and core remain schematic.",
+  "interpretation": "Seismic inverse model, not a photograph or temperature measurement. Smooth interpolation does not add resolving power. Only the mantle portion of the schematic geometry is sampled; depths outside 10–2890 km are gray. Crust and core remain schematic.",
   "webp": {
     "quality": 90,
     "effort": 6,

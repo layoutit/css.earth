@@ -1,13 +1,13 @@
 {
-  "createdAt": "2026-09-09T14:19:40.969320+00:00",
+  "createdAt": "2026-09-09T14:32:34.939559+00:00",
   "focusedTests": {
-    "passed": 45,
+    "passed": 46,
     "failed": 0,
     "logs": [
       {
-        "path": "output/tomography/final-focused.log",
-        "bytes": 4031,
-        "sha256": "f8ae2edd75af37e1f6c8248675442af4d1848e60a9f03df2be26cb926396ee4f"
+        "path": "output/tomography/two-datasets-focused.log",
+        "bytes": 4146,
+        "sha256": "56ad0b446af01e5c1cae46355c0dcc4143ddef596cf03f40b6997ac03c617b49"
       },
       {
         "path": "output/tomography/mercury-transaction.log",
@@ -25,9 +25,9 @@
     "status": "pass",
     "nodeOptions": "--max-old-space-size=12288",
     "log": {
-      "path": "output/tomography/production-build-final.log",
-      "bytes": 15523,
-      "sha256": "0b467c39a13cc1d31b305bb4523e7ac0eb12d8a897faf966acdc03ce3bef0576"
+      "path": "output/tomography/two-datasets-build.log",
+      "bytes": 15601,
+      "sha256": "a8a3535ee81a41bda56993aec8093b00effd720229ec4ea4d12a33a2dddd7fae"
     }
   },
   "sourceClosureAndProductionAssetAssembly": [
@@ -42,14 +42,16 @@
   ],
   "preparedLeafLayouts": "pass for all eight planets",
   "runtimeOwnership": "pass for all eight planets",
-  "browserDatasetRuns": 58,
+  "browserDatasetRuns": 60,
   "browserInitialShellChecks": 8,
   "productionNativeDrag": [
-    "earth",
-    "mercury",
-    "saturn"
+    "earth/cross-section",
+    "earth/mantle-tomography",
+    "mercury/cross-section",
+    "saturn/cross-section"
   ],
   "physicalMobileTested": false,
   "aggregateSuiteRerun": false,
-  "aggregateBoundary": "Earlier aggregate failures and default-heap limits are documented separately in ../baseline-failures.json; no claim that the aggregate suite is green."
+  "aggregateBoundary": "Earlier aggregate failures and default-heap limits are documented separately in ../baseline-failures.json; no claim that the aggregate suite is green.",
+  "scope": "Earth refreshed after the dataset split; unchanged Mercury/Saturn captures and other seven planet browser checks retained with fingerprint verification."
 }

@@ -37,3 +37,28 @@ test('Shadows publishes a complete distinct cutaway exterior bank without replac
     assert.deepEqual(read(),unlit);assert.deepEqual(f.stage.querySelectorAll('*'),nodes);assert.deepEqual(f.errors,[]);
   } finally {f.restore();}
 });
+
+test('structure and tomography swap textures on the same cutaway and restore the original structure', async () => {
+  const f=await preparedSelectionFixture(runtimeDefinition);
+  try {
+    const select=async id=>{const pending=f.selection.dispatch({kind:'lens',id});await f.settle();assert.equal(await pending,true);};
+    await select('cross-section');
+    const nodes=f.stage.querySelectorAll('*');
+    const faces=nodes.filter(n=>n.classList.contains('earth-interior-section-face'));
+    const mantle=nodes.filter(n=>n.classList.contains('earth-interior-mantle-leaf'));
+    const core=nodes.filter(n=>n.classList.contains('earth-interior-inner-core-leaf'));
+    assert.ok(faces.length&&mantle.length&&core.length);
+    const images=items=>items.map(n=>n.style['background-image']);
+    const original={faces:images(faces),mantle:images(mantle),core:images(core)};
+    assert.ok(original.faces.every(url=>url.includes('earth-interior-section@2x')));
+    await select('mantle-tomography');
+    assert.ok(images(faces).every(url=>url.includes('earth-tomography-section@2x')));
+    assert.ok(images(mantle).every(url=>url.includes('earth-tomography-mantle@2x')));
+    assert.deepEqual(images(core),original.core);
+    assert.deepEqual(f.stage.querySelectorAll('*'),nodes);
+    await select('cross-section');
+    assert.deepEqual({faces:images(faces),mantle:images(mantle),core:images(core)},original);
+    assert.deepEqual(f.stage.querySelectorAll('*'),nodes);
+    assert.deepEqual(f.errors,[]);
+  } finally {f.restore();}
+});

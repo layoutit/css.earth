@@ -155,7 +155,7 @@ async function proveDatasetInteractions(browser, planet, profile, deviceScaleFac
       // Let the authored entry flight finish before measuring a user's drag.
       await page.waitForTimeout(750);
       await assertLensConsistency(page, planet, profile, lens.id);
-      const isInterior = /cross section/i.test(lens.label);
+      const isInterior = await page.locator('.planet-stage').getAttribute('data-view') === 'interior';
       const captureName = `${planet.id}-${lens.id}-dpr-${deviceScaleFactor}`;
       if (evidenceDirectory) await page.screenshot({path:resolve(evidenceDirectory, `${captureName}.png`)});
       const before = await page.evaluate(geometry,{id:planet.id,interior:isInterior});

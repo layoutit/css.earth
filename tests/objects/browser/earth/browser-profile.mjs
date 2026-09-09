@@ -20,10 +20,9 @@ export const browserProfile = createObjectBrowserProfile({
       preReadyDisabled: true,
     }),
     retained: Object.freeze({
-      lensIds: Object.freeze(["normal", "topography", "night-lights", "enso", "cross-section"]),
+      lensIds: Object.freeze(["normal", "topography", "night-lights", "enso", "cross-section", "mantle-tomography"]),
       speedClicks: 5,
       allowedMountSelectors: Object.freeze([]),
     }),
   }),
-  visibleViews: [{ attribute: "data-view", value: "interior", lensId: "cross-section" }],
 });

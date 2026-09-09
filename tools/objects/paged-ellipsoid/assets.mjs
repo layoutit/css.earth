@@ -483,7 +483,10 @@ async function prepareInteriorAssets({ exterior = true } = {}) {
     await sharp(legend.data, { raw: legend }).png().toFile(output(tomography.recipe.legend.image));
   }
   if (exterior) await prepareInteriorOuterPoles();
+  for (const bank of [{ name: 'interior', tomography: null }, ...(tomography ? [{ name: 'tomography', tomography }] : [])]) {
+  const tomography = bank.tomography;
   for (const layer of interior.layers.slice(1)) {
+    if (tomography && layer.id !== 'mantle') continue;
     for (const density of [1, 2]) {
       const width = 1024 * density;
       const height = 512 * density;
@@ -494,7 +497,7 @@ async function prepareInteriorAssets({ exterior = true } = {}) {
         height,
         channels: 3,
         density,
-        name: `${config.namespace}-interior-${layer.id}`,
+        name: `${config.namespace}-${bank.name}-${layer.id}`,
         bandCount: 8,
         longitudeOffsetDegrees: 0,
         webp: layer.id === 'mantle' && tomography ? tomography.recipe.webp : { lossless: true },
@@ -509,15 +512,16 @@ async function prepareInteriorAssets({ exterior = true } = {}) {
     await sharp(section, {
       raw: { width: faceSize * 2, height: faceSize, channels: 4 },
     }).webp(tomography ? { ...tomography.recipe.webp, alphaQuality: 100 } : { lossless: true }).toFile(output(
-      `${config.namespace}-interior-section${suffix}.webp`,
+      `${config.namespace}-${bank.name}-section${suffix}.webp`,
     ));
   }
   const thumbnail = renderInteriorThumbnail(interior, 96, tomography);
   await sharp(thumbnail, {
     raw: { width: 96, height: 96, channels: 4 },
   }).webp({ quality: 88, alphaQuality: 100 }).toFile(
-    output(`${config.namespace}-view-interior.webp`),
+    output(`${config.namespace}-view-${bank.name}.webp`),
   );
+  }
 }
 
 async function prepareInteriorOuterPoles() {

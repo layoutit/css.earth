@@ -50,7 +50,7 @@ test("prepares the shared photographed cubic sky and independent Sun", () => {
 
 test("prepares flat opaque texel thumbnails for Earth surface lenses", async () => {
   for (const lens of PREPARED_EARTH_LENSES.controls.filter(
-    ({ id }) => id !== "cross-section",
+    ({ view }) => view !== "interior",
   )) {
     const { data, info } = await sharp(resolve(
       publicRoot,

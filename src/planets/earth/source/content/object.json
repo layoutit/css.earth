@@ -232,14 +232,55 @@
       {
         "id": "cross-section",
         "label": "Cross section",
+        "description": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
+        "title": "Interior structure model",
+        "thumbnail": "/scenes/earth/earth-view-interior.webp",
+        "legend": {
+          "kind": "categories",
+          "title": "Structure",
+          "items": [
+            {
+              "label": "Crust",
+              "description": "6,348 km inner radius",
+              "color": "#8b795e"
+            },
+            {
+              "label": "Mantle",
+              "description": "3,478 km inner radius",
+              "color": "#cf5d35"
+            },
+            {
+              "label": "Outer core",
+              "description": "1,221 km inner radius",
+              "color": "#ef9c3b"
+            },
+            {
+              "label": "Inner core",
+              "description": "to the center",
+              "color": "#f5d580"
+            }
+          ],
+          "meta": "Schematic",
+          "sourceUrl": "https://science.nasa.gov/earth/facts/"
+        },
+        "source": {
+          "id": "surface-observation",
+          "url": "https://science.nasa.gov/earth/facts/"
+        },
+        "detail": "Structure",
+        "summary": "Schematic Earth interior based on NASA Science. Colors and interior shading illustrate inferred layers, not photographs. Shadows changes the exterior lighting."
+      },
+      {
+        "id": "mantle-tomography",
+        "label": "Mantle tomography",
         "description": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
         "title": "GLAD-M35 mantle tomography",
-        "thumbnail": "/scenes/earth/earth-view-interior.webp",
+        "thumbnail": "/scenes/earth/earth-view-tomography.webp",
         "legend": {
           "kind": "scale",
           "title": "Mantle Vsv · % from depth mean",
           "sourceUrl": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35",
-          "image": "earth-interior-legend.png",
+          "image": "earth-tomography-legend.png",
           "width": 620,
           "height": 16,
           "labels": [

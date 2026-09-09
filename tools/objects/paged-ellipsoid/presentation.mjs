@@ -13,14 +13,21 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   const interiorUrls=[...new Set([
     ...plan.interior.shells.flatMap(shell=>shell.leaves.map(leaf=>leaf.asset)),
     ...plan.interior.sectionLeaves.map(leaf=>leaf.asset)].map(pair=>canonicalPreparedAsset(pair)))];
-  const interiorKeys=interiorUrls.map((_,i)=>`interior:${i}`);
+  const interiorBanks=new Map(lenses.controls.filter(lens=>lens.view==='interior').map(lens=>{
+    const overrides=lens.interiorTextures??{};
+    for(const [original,url] of Object.entries(overrides)) {
+      if(!interiorUrls.includes(original)||typeof url!=='string'||!url.startsWith(config.publicBase))
+        throw new TypeError(`Invalid prepared interior texture override for ${lens.id}: ${original}`);
+    }
+    return [lens.id,interiorUrls.map((url,i)=>({key:`interior:${lens.id}:${i}`,url:overrides[url]??url,pool:'mounted'}))];
+  }));
   const celestial=preparedSunResources(sun,"mounted");
   const entries=[...celestial,...banks.flatMap(bank=>bank.urls.map((url,i)=>({key:`page:${bank.id}:${i}`,url,pool:"pages"}))),
     ...lenses.controls.flatMap(lens=>lens.view==="interior"?
       [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(plan.interior.outerAssets.poles),pool:"mounted"},
         {key:`poles:${lens.id}-lit`,url:canonicalPreparedAsset(plan.interior.outerAssets.litPoles),pool:"mounted"}]:
       [{key:`poles:${lens.id}`,url:canonicalPreparedAsset(lens.polesUrl),pool:"mounted"}]),
-    ...interiorUrls.map((url,i)=>({key:interiorKeys[i],url,pool:"mounted"})),
+    ...[...interiorBanks.values()].flat(),
     {key:"shadowless:lighting",url:canonicalPreparedAsset(plan.material.lighting.shadowlessAssets),pool:"mounted"},
     ...["lighting","atmosphere"].flatMap(id=>[
       {key:`default:${id}`,url:canonicalPreparedAsset(plan.material[id].defaultAssets),pool:"default-materials"},
@@ -54,14 +61,16 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   const cutaway=b.mesh(`${config.namespace}-cutaway`);
   b.append(system,cutaway);
   const interior=bands(cutaway,plan.interior.outerBodyBands,`${config.namespace}-cutaway-body`,`${config.namespace}-cutaway-body-polar`,`${config.namespace}-interior-outer-polar`,[],canonicalPreparedAsset(plan.interior.outerAssets.poles));
+  const interiorTextureNodes=[];
   for(const shell of plan.interior.shells) {
     const mesh=b.mesh(`${config.namespace}-interior-shell ${shell.className}`,plan[config.sceneBodyKey].meshTransform);b.append(cutaway,mesh);
-    for(const leaf of shell.leaves) {const node=b.leaf(leaf);node.style.backgroundImage=`url("${canonicalPreparedAsset(leaf.asset)}")`;b.append(mesh,node);}
+    for(const leaf of shell.leaves) {const node=b.leaf(leaf),url=canonicalPreparedAsset(leaf.asset);node.style.backgroundImage=`url("${url}")`;b.append(mesh,node);interiorTextureNodes.push({node,url});}
   }
   const sections=b.mesh(`${config.namespace}-interior-sections`,plan[config.sceneBodyKey].meshTransform);b.append(cutaway,sections);
   for(const leaf of plan.interior.sectionLeaves) {
     const node=b.leaf(leaf);node.style.backgroundImage=`url("${canonicalPreparedAsset(leaf.asset)}")`;
     if(leaf.backfaceVisible)node.style.backfaceVisibility="visible";b.append(sections,node);
+    interiorTextureNodes.push({node,url:canonicalPreparedAsset(leaf.asset)});
   }
   const materialCounter=b.mesh(`${config.namespace}-material-counter`),materialSystem=b.mesh(`${config.namespace}-system`,plan[config.sceneBodyKey].systemTransform),materialMesh=b.mesh(`${config.namespace}-material`,plan.material.transform);
   b.append(scene,materialCounter);b.append(materialCounter,materialSystem);b.append(materialSystem,materialMesh);
@@ -87,13 +96,15 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   });
   const variants=lenses.controls.flatMap(lens=>[false,true].flatMap(shadows=>[false,true].map(atmosphere=>{
     const isInterior=lens.view==="interior",keys=pageKeys(lens,shadows),texture=(node,name,resource)=>({kind:"texture",target:index(node),name,resource,quoted:true});
+    const interiorBank=interiorBanks.get(lens.id);
     const pageWrites=(carriers,active)=>carriers.flatMap(node=>Array.from({length:pages},(_,i)=>texture(node,`--${config.namespace}-surface-page-${i}`,active?keys[i]:null)));
-    return {when:{lensId:lens.id,shadows,atmosphere},navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,`poles:${bankId(lens,shadows)}`,...(isInterior?interiorKeys:[])],
+    return {when:{lensId:lens.id,shadows,atmosphere},navigation:{maximumZoom:lens.maximumZoom,camera:lens.camera??null},required:[...keys,`poles:${bankId(lens,shadows)}`,...(interiorBank?.map(entry=>entry.key)??[])],
       writes:[...pageWrites(isInterior?interior.surface:body.surface,true),
+        ...(isInterior?interiorTextureNodes.map(({node,url})=>texture(node,'background-image',interiorBank[interiorUrls.indexOf(url)].key)):[]),
         ...(isInterior?interior.polar:body.polar).map(node=>texture(node,`--${config.namespace}-poles-texture`,`poles:${bankId(lens,shadows)}`)),
         ...pageWrites(isInterior?body.surface:interior.surface,false),
         {kind:"attribute",target:-1,name:"data-view",value:isInterior?"interior":null},
-        {kind:"attribute",target:-1,name:"data-lens",value:isInterior?null:lens.id},
+        {kind:"attribute",target:-1,name:"data-lens",value:lens.id},
         {kind:"class",target:-1,name:`${config.namespace}-hide-atmosphere`,value:!atmosphere}],
       materials:tracks.map(track=>({track:track.id,bank:track.id,mode:track.id==="lighting"&&!shadows?"fixed":plan.material[track.id].illumination?"frames":"default-pose",
         enabled:!isInterior&&(track.id==="lighting"?shadows&&lens.id!=="night-lights":atmosphere),rotationEnabled:track.id!=="lighting"||shadows,

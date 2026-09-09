@@ -1034,8 +1034,8 @@
     },
     {
       "path": "interior/earth-interior.json",
-      "expectedSha256": "e11f087d0b30d9b9c67cec44fdd27d10268a61e6b04a0b6d991b01cbe840931e",
-      "expectedBytes": 943,
+      "expectedSha256": "9f0fd57020b5601fbca3594f74623ff3d25786f36e0ec4adc2f5bbdf8bcbdef7",
+      "expectedBytes": 1016,
       "purpose": "Source-qualified schematic Earth interior presentation specification"
     },
     {
@@ -1082,14 +1082,14 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 14238,
-      "expectedSha256": "0e0c328857567afd0addeed8485526dc531e6e6626705f713a9e1101e0e70ee5",
+      "expectedBytes": 15751,
+      "expectedSha256": "0ab3cf97c8098bb98b3b6130aabb9579a21dd6ca5655c23d65aa6cf6eafa1614",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 3401,
-      "expectedSha256": "fcdafb7115fd9d2b9a13ec8687fe5bf6d39a5f5b6eab558c5efe93c6509f2d56",
+      "expectedBytes": 4442,
+      "expectedSha256": "07e2f455bad6f5f5b1ba67548d1abf694a36081b9bd21b311469089a5860af74",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -1132,8 +1132,8 @@
     {
       "path": "interior/tomography.json",
       "purpose": "Authored GLAD-M35 Vsv extraction, coordinates, palette and interpretation.",
-      "expectedBytes": 2117,
-      "expectedSha256": "784a3c2d67a027dc900b1c2d9192d7f17c401d67d54f03fabc8961bc72bf1d97"
+      "expectedBytes": 2116,
+      "expectedSha256": "0eb504244bf70f2e96fcd619a225587c7e6383510991f7e2249c12f19af74903"
     },
     {
       "path": "interior/glad-m35-metadata.geojson",

@@ -164,8 +164,8 @@ export function provenanceProducts({ id, recipes, manifest, lenses, assets, geog
         } : {});
     });
     for (const lens of controls.filter(lens => !products.some(product => product.id === lens.id))) {
-      if (lens.id === 'cross-section') {
-        const tomography = recipe('mantle-tomography');
+      if (lens.view === 'interior') {
+        const tomography = lens.interiorSource ? recipe(lens.interiorSource) : null;
         add(lens.id, 'paged-ellipsoid', '/interiorPath', [plan.interiorPath, ...paths(tomography)],
           tomography ? 'Sample pinned mantle velocities on the cut planes and shell; normalize by the area-weighted depth mean and bake the signed palette. Keep crust and core schematic.'
             : 'Prepare the source-defined schematic interior.', {
@@ -173,7 +173,9 @@ export function provenanceProducts({ id, recipes, manifest, lenses, assets, geog
               ...(tomography ? { quantity: tomography.quantity, reference: tomography.reference, source: tomography.source, depth: tomography.depth, sectionLongitudesDegrees: tomography.sectionLongitudesDegrees } : {}) },
             recipeDependencies: ['paged-ellipsoid', ...(tomography ? ['mantle-tomography'] : [])],
             parents: controls.filter(control => control.surfaceUrl === prefix + plan.surface.maps[0].name + '.webp').map(control => control.id),
-            urls: runtimeUrls.filter(url => url.startsWith(prefix + id + '-interior-') || url === prefix + id + '-view-interior.webp'),
+            urls: [...runtimeUrls.filter(url => url.startsWith(prefix + id + '-interior-') && !Object.hasOwn(lens.interiorTextures ?? {}, url)),
+              ...Object.values(lens.interiorTextures ?? {}), lens.thumbnailUrl,
+              ...(tomography ? [prefix + tomography.legend.image] : [])],
           });
       }
       else if (geographic?.noise?.pin.id === lens.id) {
