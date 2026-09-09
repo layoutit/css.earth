@@ -1,0 +1,34 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "--test-name-pattern=^(titan|dione|rhea):",
+    "tools/prepared-activation-transport.test.mjs",
+    "tools/prepare-object-json.test.mjs"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 250118144,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 278528,
+      "freePercent": 77
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 250118144,
+      "freePercent": 77
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 114130944,
+      "freePercent": 77
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 0.8
+}

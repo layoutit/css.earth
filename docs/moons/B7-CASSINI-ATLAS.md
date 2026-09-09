@@ -2,7 +2,9 @@
 
 Five scientific views deepen three existing moons through the current object
 contract. Branch `feat/moons-cassini-atlas` starts at merged B6 main
-`34da5b07d96fd53e2d1a9877db470c04a58dea2f`.
+`34da5b07d96fd53e2d1a9877db470c04a58dea2f`. The branch subsequently integrated
+main `a5a34bdefa849801d092f10755cf81f6f3f23f5e`, preserving its 404-object
+navigation and static object transport. Scientific images are unchanged.
 
 | Body | New views | Original source and meaning |
 | --- | --- | --- |

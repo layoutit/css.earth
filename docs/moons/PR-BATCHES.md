@@ -108,7 +108,9 @@ geomorphology and paired Cassini VIMS infrared / water-ice absorption views for
 Dione and Rhea. The atlas uses original released polygons and spectral cubes,
 with explicit source coverage and registration limits. Existing scene geometry,
 renderer, camera and shared shell remain unchanged. The new image inventory is
-17 files / 1,873,728 bytes across all three bodies.
+17 files / 1,873,728 bytes across all three bodies. The selected 32-case DPR1/2
+browser matrix and shared ownership audit pass on the `a5a34bde` integration;
+full-repository qualification and public Settings reachability remain open.
 
 See [scope and reproduction](B7-CASSINI-ATLAS.md), [source review](b7-cassini-atlas/evidence/source/SOURCE-REVIEW.md)
 and [visual qualification](b7-cassini-atlas/VISUAL-REVIEW.md). This deepens existing

@@ -1,6 +1,6 @@
 """Copy completed browser receipts and original screenshots; never alter pixels."""
 from pathlib import Path
-import hashlib,json,re,shutil
+import hashlib,json,re,shutil,os
 
 ROOT=Path(__file__).resolve().parents[3]
 DEST=ROOT/'docs/moons/b7-cassini-atlas/evidence'
@@ -8,6 +8,9 @@ LENSES={'titan':['geology'],'dione':['infrared','ice-absorption'],'rhea':['infra
 LABELS=['b7-titan-browser-dpr1','b7-titan-browser-dpr2',
         'b7-dione-browser-final-dpr1','b7-dione-browser-final-dpr2',
         'b7-rhea-browser-final-dpr1','b7-rhea-browser-final-dpr2']
+if os.environ.get('B7_INTEGRATED')=='1':
+    DEST=DEST/'integration'
+    LABELS=[f'b7-integrated-{body}-dpr{dpr}' for body in LENSES for dpr in [1,2]]
 index={'status':'CAPTURED_FOR_VISUAL_REVIEW','files':[],'cases':[]}
 def digest(path):
     with path.open('rb') as stream:return hashlib.file_digest(stream,'sha256').hexdigest()
