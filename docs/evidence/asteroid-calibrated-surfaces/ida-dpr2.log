@@ -1,0 +1,135 @@
+(node:29704) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START ida/dpr-2
+ida DPR 2: interactions passed
+[conformance] PASS ida/dpr-2 (21946ms)
+{
+  "ok": true,
+  "reports": [
+    {
+      "id": "ida",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "mobile",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "viewport": "dpr-2",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/ida/ida-normal-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 1.0330434782608697,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 391
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.6714782608695653,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 391
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.6839073054545455,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "ida-dpr-2.webm"
+    },
+    {
+      "id": "ida",
+      "case": "lens-race",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "lens-reacquire",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "lens-rejection",
+      "skipped": true
+    },
+    {
+      "id": "ida",
+      "case": "lens-destroy",
+      "skipped": true
+    }
+  ]
+}

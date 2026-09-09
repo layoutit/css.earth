@@ -1,0 +1,122 @@
+{
+  "reports": [
+    {
+      "id": "ida",
+      "operationCount": 9,
+      "verified": [
+        {
+          "path": "observations/0202561278rcal_gre.fit",
+          "expectedBytes": 2563200,
+          "expectedSha256": "172489ebbefee3c7c1a1630d7c72fc7269b7de5c38459eedc2450e5c2dbd0d8f"
+        },
+        {
+          "path": "observations/0202561278rcal_gre.xml",
+          "expectedBytes": 12912,
+          "expectedSha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed"
+        },
+        {
+          "path": "observations/i1278.fit",
+          "expectedBytes": 645120,
+          "expectedSha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16"
+        },
+        {
+          "path": "observations/i1278.lbl",
+          "expectedBytes": 10480,
+          "expectedSha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750"
+        },
+        {
+          "path": "observations/idabad.tab",
+          "expectedBytes": 23270,
+          "expectedSha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47"
+        },
+        {
+          "path": "observations/idabad.lbl",
+          "expectedBytes": 9760,
+          "expectedSha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441"
+        },
+        {
+          "path": "reference/gll36001.ti",
+          "expectedBytes": 9964,
+          "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+        },
+        {
+          "path": "reference/243idaimg.tab",
+          "expectedBytes": 4320,
+          "expectedSha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a"
+        },
+        {
+          "path": "reference/243idaimg.xml",
+          "expectedBytes": 8830,
+          "expectedSha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13"
+        }
+      ]
+    },
+    {
+      "id": "gaspra",
+      "operationCount": 9,
+      "verified": [
+        {
+          "path": "observations/107318326rcal_clr.fit",
+          "expectedBytes": 2563200,
+          "expectedSha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6"
+        },
+        {
+          "path": "observations/107318326rcal_clr.xml",
+          "expectedBytes": 9633,
+          "expectedSha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301"
+        },
+        {
+          "path": "observations/e8326.fit",
+          "expectedBytes": 645120,
+          "expectedSha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d"
+        },
+        {
+          "path": "observations/e8326.lbl",
+          "expectedBytes": 10480,
+          "expectedSha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792"
+        },
+        {
+          "path": "observations/gaspbad.tab",
+          "expectedBytes": 35828,
+          "expectedSha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654"
+        },
+        {
+          "path": "observations/gaspbad.lbl",
+          "expectedBytes": 9120,
+          "expectedSha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9"
+        },
+        {
+          "path": "reference/gll36001.ti",
+          "expectedBytes": 9964,
+          "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+        },
+        {
+          "path": "reference/951gaspimg.tab",
+          "expectedBytes": 1152,
+          "expectedSha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6"
+        },
+        {
+          "path": "reference/951gaspimg.xml",
+          "expectedBytes": 8616,
+          "expectedSha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee"
+        }
+      ]
+    },
+    {
+      "id": "dimorphos",
+      "operationCount": 2,
+      "verified": [
+        {
+          "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+          "expectedBytes": 4728960,
+          "expectedSha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd"
+        },
+        {
+          "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+          "expectedBytes": 6781,
+          "expectedSha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e"
+        }
+      ]
+    }
+  ]
+}
