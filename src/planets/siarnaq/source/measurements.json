@@ -1,0 +1,240 @@
+{
+  "schema": "cssearth-convex-approximation@1",
+  "source": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+  "citation": "Denk et al. (2018), The Irregular Satellites of Saturn; Denk and Mottola, Cassini lightcurve modelling",
+  "meanRadiusKm": 19.5,
+  "referenceRadiusKm": 19.5,
+  "gmKm3S2": 0,
+  "gmInterpretation": "Unmodeled mass, not measured physical zero",
+  "equatorialPolygonKm": [
+    [
+      -24.725136715813093,
+      -3.0655567547208125
+    ],
+    [
+      -24.140994835642683,
+      -5.986266155572867
+    ],
+    [
+      -22.875354095273458,
+      -8.030762736169304
+    ],
+    [
+      -20.636143554620215,
+      -9.97790233673734
+    ],
+    [
+      -11.192516491865241,
+      -15.137822278242636
+    ],
+    [
+      -6.22731051041675,
+      -17.182318858839075
+    ],
+    [
+      4.676671252764252,
+      -20.29774221974793
+    ],
+    [
+      8.473593473871922,
+      -20.492456179804737
+    ],
+    [
+      14.607083215661236,
+      -17.766460739009485
+    ],
+    [
+      19.08550429696772,
+      -13.774824557845012
+    ],
+    [
+      19.864360137194932,
+      -12.314469857418985
+    ],
+    [
+      20.448502017365346,
+      -9.101689516481725
+    ],
+    [
+      19.377575237052923,
+      3.8467888272957156
+    ],
+    [
+      16.748936776286076,
+      12.900987969937084
+    ],
+    [
+      13.925584355462425,
+      17.671479991328773
+    ],
+    [
+      12.07580173492279,
+      19.2291916717832
+    ],
+    [
+      8.376236493843521,
+      20.981617312294432
+    ],
+    [
+      4.481957292707449,
+      21.95518711257845
+    ],
+    [
+      1.1718199717417874,
+      21.760473152521648
+    ],
+    [
+      -5.15638373010433,
+      19.1318346917548
+    ],
+    [
+      -10.900445551780036,
+      15.43226945067553
+    ],
+    [
+      -19.759930734364602,
+      7.254283128289779
+    ],
+    [
+      -22.48592617515985,
+      3.8467888272957156
+    ],
+    [
+      -24.238351815671084,
+      0.634008486358456
+    ]
+  ],
+  "polarSemiAxisKm": 16.74540056488511,
+  "volumeEquivalentRadiusKm": 19.5,
+  "formula": "Let rho(lon) be the positive intersection of the equatorial ray with the CCW convex polygon. r(lon,lat)=1/sqrt((cos(lat)/rho(lon))^2+(sin(lat)/polarSemiAxisKm)^2). This assumes geometrically similar cross-sections scaled by sqrt(1-(z/c)^2).",
+  "stepDegrees": 5,
+  "longitudeDirection": "east-positive",
+  "material": {
+    "rgb": [
+      160,
+      160,
+      160
+    ],
+    "width": 64,
+    "height": 32,
+    "noData": 160
+  },
+  "qualification": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
+  "evidence": {
+    "figureUrl": "https://tilmanndenk.de/wp-content/uploads/629_Sia_0_Title2.png",
+    "figureSha256": "c9ffba097c957a5f4d8755f2be967b3577042c1fd1bf84f2ac543732148f22b1",
+    "figureSize": [
+      990,
+      660
+    ],
+    "northViewCropPixels": [
+      495,
+      95,
+      978,
+      563
+    ],
+    "outlineThreshold": 8,
+    "maximumOutlineSimplificationPixels": 3,
+    "northViewOutlinePixels": [
+      [
+        501,
+        368
+      ],
+      [
+        507,
+        398
+      ],
+      [
+        520,
+        419
+      ],
+      [
+        543,
+        439
+      ],
+      [
+        640,
+        492
+      ],
+      [
+        691,
+        513
+      ],
+      [
+        803,
+        545
+      ],
+      [
+        842,
+        547
+      ],
+      [
+        905,
+        519
+      ],
+      [
+        951,
+        478
+      ],
+      [
+        959,
+        463
+      ],
+      [
+        965,
+        430
+      ],
+      [
+        954,
+        297
+      ],
+      [
+        927,
+        204
+      ],
+      [
+        898,
+        155
+      ],
+      [
+        879,
+        139
+      ],
+      [
+        841,
+        121
+      ],
+      [
+        801,
+        111
+      ],
+      [
+        767,
+        113
+      ],
+      [
+        702,
+        140
+      ],
+      [
+        643,
+        178
+      ],
+      [
+        552,
+        262
+      ],
+      [
+        524,
+        297
+      ],
+      [
+        506,
+        330
+      ]
+    ],
+    "equatorialHalfHeightPixels": 172,
+    "kmPerFigurePixel": 0.0973569800284018,
+    "assumption": "Model views treated as approximately orthographic at common scale; projection angles are uncalibrated. Unseen meridional sections are assumed elliptical. Volume normalization uses the uncertain thermal diameter."
+  }
+}

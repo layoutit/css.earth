@@ -1,0 +1,78 @@
+{
+  "source": "https://echo.jpl.nasa.gov/asteroids/2002CE26/shepard.etal.2006.2002ce26.pdf",
+  "diameterKm": 3.46,
+  "diameterInterpretation": "Published radar-model equivalent diameter; original coordinates are not rescaled.",
+  "periodHours": 3.2931,
+  "poleEclipticJ2000Degrees": [
+    317,
+    -20
+  ],
+  "limitations": "Only the published primary shape is displayed; no secondary is included. The north polar region was hidden or seen above 60 degrees radar incidence. The selected retrograde pole is approximate, and arbitrary display phase does not establish the present rotational attitude.",
+  "shape": {
+    "source": "https://echo.jpl.nasa.gov/asteroids/shapes/ce26.obj",
+    "vertices": 1148,
+    "faces": 2292,
+    "units": "km",
+    "firstVertexKm": [
+      0,
+      0,
+      1.6
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      3.6506260000000004,
+      3.652092,
+      3.256482
+    ],
+    "volumeCubicKm": 21.671533742214205,
+    "volumeEquivalentRadiusKm": 1.7295522223321806,
+    "radialRangeKm": [
+      1.58721035849726,
+      1.8983202483927732
+    ]
+  },
+  "radialAmbiguity": {
+    "faceCentroids": 2292,
+    "ambiguous": 0,
+    "maxErrorMeters": 1.1368683772161603e-12,
+    "sphereDirections": 8192,
+    "secondHits": 0
+  },
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2292,
+    "sourceVertices": 1148,
+    "weldedVertices": 1148,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 35,
+    "estimatedErrorMeters": 28.439395904541016,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 21562044818.20224
+    }
+  },
+  "surfaceSampling": {
+    "method": "closest-source-point",
+    "maximumDistanceMeters": 35
+  },
+  "massKg": 19500000000000,
+  "massUncertaintyKg": 2500000000000,
+  "massSource": "https://echo.jpl.nasa.gov/asteroids/2002CE26/shepard.etal.2006.2002ce26.pdf",
+  "gravitationalParameterKm3PerS2": 0.0000013014885,
+  "massInterpretation": "Published primary mass from secondary orbit; GM = mass × CODATA 2018 G 6.67430e-20 km³ kg⁻¹ s⁻². No secondary geometry is included."
+}

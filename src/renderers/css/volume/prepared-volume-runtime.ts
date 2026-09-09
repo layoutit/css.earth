@@ -44,6 +44,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     roots.push(root); cameras.push(camera); scenes.push(scene);
   }
   let destroyed = false;
+  let previousPerspective = '', previousOrigin = '', previousTransform = '';
+  let previousOrientation: readonly number[] | null = null;
   const publish = ({ world, viewport }: VolumeCameraPublication) => {
     if (destroyed) return;
     if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt) {
@@ -56,11 +58,22 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     const cssTransform = `translate3d(${transform.translationCssPixels.map(value => `${format(value)}px`).join(',')}) ${worldRotationCss(transform.rotation)}`;
     const [principalX, principalY] = viewport.principalOffsetPixels;
     const perspectiveOrigin = `calc(50% + ${format(principalX)}px) calc(50% + ${format(principalY)}px)`;
-    for (const camera of cameras) {
-      camera.style.perspective = `${format(transform.focalPixels)}px`;
-      camera.style.perspectiveOrigin = perspectiveOrigin;
+    const perspective = `${format(transform.focalPixels)}px`;
+    if (perspective !== previousPerspective || perspectiveOrigin !== previousOrigin) {
+      for (const camera of cameras) {
+        if (perspective !== previousPerspective) camera.style.perspective = perspective;
+        if (perspectiveOrigin !== previousOrigin) camera.style.perspectiveOrigin = perspectiveOrigin;
+      }
+      previousPerspective = perspective; previousOrigin = perspectiveOrigin;
     }
-    for (const scene of scenes) scene.style.transform = cssTransform;
+    if (cssTransform !== previousTransform) {
+      for (const scene of scenes) scene.style.transform = cssTransform;
+      previousTransform = cssTransform;
+    }
+    // Optical length and stack mixing depend on direction, not observer
+    // translation. Updating inherited coefficients dirties every slice copy.
+    if (previousOrientation && previousOrientation.every((value, axis) => value === world.pose.orientationXyzw[axis])) return;
+    previousOrientation = [...world.pose.orientationXyzw];
     const local = presentPhysicalPoseInVolume(world.pose, payload.frame);
     const strengths = axisWeights(local);
     let total = 0;

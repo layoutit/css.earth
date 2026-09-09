@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "selinur",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/59539/shape.txt",
+    "credit": "DAMIT, Astronomical Institute of Charles University; Selinur model 5480; original model authors identified in its pinned reference records.",
+    "license": "CC-BY-4.0",
+    "consumers": [
+      "navigation"
+    ],
+    "expectedBytes": 85913,
+    "expectedSha256": "68cb75103ddd88b3fd085848187a11ce2bebccb9a647e7a61370312bd1bb5eed",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "selinur-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 35,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "shape"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

@@ -4,9 +4,9 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
-import { ASTEROID_IDS, asteroidPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
+import { ASTEROID_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
   systemBarycentreHeliocentricAu, M_PER_AU } from '@cssearth/astronomy';
-import type { AsteroidId, BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
+import type { AsteroidId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
 import { prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
@@ -85,9 +85,17 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       const row = response.split('$$SOE')[1]!.split('$$EOE')[0]!.trim().split(',');
       sourcePositions.set(record.id, row.slice(2, 5).map(Number));
     }
+    const sourcePrimaries = new Map<string, number[]>();
+    for (const id of ['hiiaka', 'menoetius', 'squannit', 'romulus']) {
+      const record = JSON.parse(await readFile(resolve(root, `src/planets/${id}/source/validation/epoch-state.json`), 'utf8'));
+      sourcePositions.set(id, record.positionKm);
+      if (record.parentHeliocentricState) sourcePrimaries.set(record.centerBodyId, record.parentHeliocentricState.positionKm);
+    }
     const modelPositionM = (id: BodyId): readonly number[] => {
       const parent = BODIES[id].parent;
       if (parent === null) return [0, 0, 0];
+      if (sourcePrimaries.has(id)) return sourcePrimaries.get(id)!.map(value => value * 1000);
+      if (COMET_IDS.includes(id as CometId)) return cometPositionKm(id as CometId, source.frame.epochJdTt).map(value => value * 1000);
       if (ASTEROID_IDS.includes(id as AsteroidId)) return asteroidPositionKm(id as AsteroidId, source.frame.epochJdTt).map(value => value * 1000);
       if (DWARF_PLANET_IDS.includes(id as DwarfPlanetId)) return dwarfPlanetPositionKm(id as DwarfPlanetId, source.frame.epochJdTt).map(value => value * 1000);
       if (parent !== 'sun') {
@@ -119,6 +127,29 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
         const distance = Math.hypot(...vertex.map((value: number, axis: number) => value - parent.positionM[axis]));
         assert(distance < initialDistance * 1.2 && distance > initialDistance * .8, `${id} ellipse left its parent centre`);
       }
+    }
+    assert.equal(result.bodies.some((body: { id: string }) => body.id === 'patroclus'), false, 'the primary coordinate is not an added scene or marker');
+    assert.deepEqual(result.orbitCenters.patroclus, { centerBodyId: 'sun', positionM: sourcePrimaries.get('patroclus')!.map(value => value * 1000) });
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+test('a non-visible primary must come from matching canonical geometry, without tolerance relaxation', async () => {
+  const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-hidden-primary-'));
+  try {
+    const source = JSON.parse(await readFile(sourcePath, 'utf8'));
+    source.bodies = source.bodies.filter((body: { id: string }) => body.id === 'menoetius');
+    const authored = resolve(directory, 'source.json');
+    await writeFile(authored, JSON.stringify(source));
+    const outputPath = resolve(directory, 'context.json');
+    await prepareSpatialContext({ sourcePath: authored, solarGeometryPath, outputPath, objectsDirectory: directory });
+    const prepared = JSON.parse(await readFile(outputPath, 'utf8'));
+    assert.deepEqual(prepared.bodies.map((body: { id: string }) => body.id), ['menoetius']);
+    assert.equal(prepared.bodies[0].orbit.centerBodyId, 'patroclus');
+    assert.deepEqual(prepared.bodies[0].orbit.centerPositionM, prepared.orbitCenters.patroclus.positionM);
+    for (const [name, override] of [['missing', '{}'], ['moved', "{...original.BODY_HELIOCENTRIC_STATES,patroclus:{...original.BODY_HELIOCENTRIC_STATES.patroclus,positionKm:[0,0,0]}}"]]) {
+      const fixtureGeometryPath = resolve(directory, `${name}.mjs`);
+      await writeFile(fixtureGeometryPath, `export * from ${JSON.stringify(pathToFileURL(solarGeometryPath).href)};\nimport * as original from ${JSON.stringify(pathToFileURL(solarGeometryPath).href)};\nexport const BODY_HELIOCENTRIC_STATES=${override};\n`);
+      await assert.rejects(() => prepareSpatialContext({ sourcePath: authored, solarGeometryPath: fixtureGeometryPath, outputPath, objectsDirectory: directory }), /incompatible with its parent/);
     }
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

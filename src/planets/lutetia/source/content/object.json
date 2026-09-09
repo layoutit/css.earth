@@ -60,8 +60,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "osiris",
     "controls": [
+      {
+        "id": "osiris",
+        "label": "OSIRIS reflectance",
+        "detail": "Spacecraft observation",
+        "description": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+        "title": "Rosetta OSIRIS orange-filter reflectance from 10 July 2010, registered to the source model and approximately disk-normalized with a published Minnaert model. This partial grayscale observation is not natural color or measured albedo. Photographed shadows remain; the ordinary grid marks missing or rejected coverage.",
+        "thumbnail": "/scenes/lutetia/lutetia-osiris-thumbnail.webp",
+        "surface": "lutetia-osiris-surface@2x.webp",
+        "poles": "lutetia-osiris-surface@2x.webp",
+        "source": {
+          "id": "lutetia-observations-n20100710t154047674id4df22-img",
+          "path": "../manifest.json"
+        }
+      },
       {
         "id": "shape",
         "label": "Shape",
@@ -116,7 +130,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",
@@ -128,6 +142,12 @@
   },
   "charts": [],
   "resources": [
+    {
+      "label": "Imagery",
+      "role": "surface",
+      "description": "OSIRIS reflectance original archive",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/ro-a-osinac-4-ast2-lutetia-str-refl-v1.0/data/img/n20100710t154047674id4df22.img"
+    },
     {
       "label": "Mission",
       "role": "facts",

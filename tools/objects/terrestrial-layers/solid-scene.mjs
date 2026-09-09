@@ -38,7 +38,7 @@ async function prepareSolidEpochFrame({ config, celestial }) {
   const sun = source ? { ...celestial.sun, localDirection: frame.sunDirection,
     referenceViewDirection: prepareSunReferenceViewDirection({ bodyId: id, ...config.geometry.camera, sceneDirection: frame.sunDirection }),
     provenance: { source: source.model, sourcePath: source.sourcePath,
-      qualification: `Computed Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL} from a retained parent-centered Horizons state plus the parent's heliocentric model. The surface attitude uses its separately authored rotation model.` } } : celestial.sun;
+      qualification: `Computed Sun direction at ${SOLAR_GEOMETRY_EPOCH_LABEL} from its retained source state and canonical heliocentric parent coordinates. The surface attitude uses its separately authored rotation model.` } } : celestial.sun;
   return { camera: preparePerspectiveCamera({ sky, radius, ...geometry.camera }), sky, sun,
     systemTransform: frame.cssTransform,
     heliocentricView: prepareHeliocentricView({ bodyId: id, presentationFrame: frame,
@@ -172,7 +172,9 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
         ? [preparedResourcePool('lenses', entries, { retention: 'selection', capacity: 4, concurrency: 2 })] : [])],
     startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
     tree, variants, materials: config.geometry.radialTerrain ? [] : [track], animations: [],
-    ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles } } : {}),
+    ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles,
+      // XYZ source coordinates swap X/Y for CSS: outward faces are clockwise.
+      ...(config.geometry.radialTerrain?.sourceTopology === 'open' ? { frontFace: 'clockwise' } : {}) } } : {}),
     heliocentricView: { plan: plan.heliocentricView,
       bodyMarker: { url: atlasUrl, ...sprite(id), size: 3 },
       systemMarkers: { url: atlasUrl, sun: sprite('sun'),

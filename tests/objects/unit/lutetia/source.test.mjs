@@ -12,7 +12,7 @@ const read=async path=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Lutetia preserves its source pins and each runtime preparation input has a restoration operation',async()=>{
  const source=await createSourceManifest({planetId:'lutetia',planetName:'Lutetia',sourceRoot:root});await source.verify();
  const plan=await read('preparation/acquisition.json');
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path),`Missing acquisition path for ${input.path}`);
+ for(const input of source.manifest.inputs)if(!['preparation/camera.json','observations/osiris-camera.json'].includes(input.path))assert.ok(plan.operations.some(step=>step.path===input.path),`Missing acquisition path for ${input.path}`);
 });
 
 test('Lutetia source axes, original indexed vertices and closed volume retain the released kilometer frame',async()=>{

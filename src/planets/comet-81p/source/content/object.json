@@ -1,0 +1,112 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-81p",
+  "displayName": "Wild 2",
+  "panel": {
+    "introduction": "81P/Wild 2 was visited by Stardust in 2004. This completed NASA PDS model combines measured terrain on about half the nucleus with a fitted ellipsoid on the unseen side. The gray grid marks the estimated surface and its joins.",
+    "facts": [
+      {
+        "id": "mission",
+        "label": "Explored by",
+        "value": "Stardust"
+      },
+      {
+        "id": "source-epoch",
+        "label": "Shape observations",
+        "value": "2 January 2004"
+      },
+      {
+        "id": "coverage",
+        "label": "Terrain coverage",
+        "value": "About half observed; gray grid marks the estimated completion"
+      },
+      {
+        "id": "resolution",
+        "label": "Source precision",
+        "value": "Observed source terrain: about 50 m horizontal resolution and 6 m vertical precision"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "rendering",
+        "label": "Presentation",
+        "value": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
+      },
+      {
+        "id": "scale",
+        "label": "Reference scale",
+        "value": "1.917 km equivalent radius of the published fitted ellipsoid (1.350 × 2.002 × 2.607 km semi-axes); an approximate navigation scale."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Completed shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Completed shape model",
+        "description": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
+        "title": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase.",
+        "detail": "Grid = estimated",
+        "thumbnail": "/scenes/comet-81p/comet-81p-model-thumbnail.webp",
+        "surface": "comet-81p-model-surface@2x.webp",
+        "poles": "comet-81p-model-poles@2x.webp",
+        "source": {
+          "id": "pds-shape",
+          "path": "../manifest.json",
+          "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/data/wild2_cart_full.tab"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": true
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "NASA PDS",
+      "role": "surface",
+      "description": "Farnham, Duxbury and Li (2005), Wild 2 full plate model with estimated unseen surface",
+      "href": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/catalog/dataset.cat",
+      "credit": "Farnham, Duxbury and Li (2005)"
+    },
+    "physical": {
+      "path": "../reference/dataset.cat",
+      "credit": "Farnham, Duxbury and Li (2005)"
+    }
+  }
+}

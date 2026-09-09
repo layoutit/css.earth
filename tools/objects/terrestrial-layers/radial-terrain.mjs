@@ -1,15 +1,20 @@
 import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+import { gzipSync } from 'node:zlib';
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { MeshoptSimplifier } from 'meshoptimizer/simplifier';
 import { computeSolidTrianglePlan, SOLID_TRIANGLE_CANONICAL_SIZE, SOLID_TRIANGLE_BLEED, BASE_TILE } from '@layoutit/polycss';
-import { loadStlShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, closestTrianglePoint } from './obj-shape.mjs';
+import { loadStlShape, loadPdsPlanetocentricShape, loadObjShape, loadPdsVertexFacetShape, loadPdsPlateShape, loadVrmlShape, loadPdsRadiusTable, closestTrianglePoint } from './obj-shape.mjs';
 import { createSourceSurfacePainter } from './scientific-raster.mjs';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mjs';
 import { loadPdsScalarGrid } from './pds-scalar-grid.mjs';
 import { loadPdsRadialTable } from './pds-radial-table.mjs';
 import { createRasterEmitter } from './solid-raster.mjs';
 import { renderRadialSnapshot } from './radial-snapshot.mjs';
+import { createSourceMeshLighting } from './source-mesh-lighting.mjs';
+import { preparePdsConstraintMap } from './pds-constraint-map.mjs';
+import { orientObservedSurface, validateObservedReduction } from './open-surface.mjs';
 
 const sub = (a, b) => a.map((v, i) => v - b[i]);
 const dot = (a, b) => a.reduce((sum, v, i) => sum + v * b[i], 0);
@@ -20,14 +25,27 @@ const unit = a => a.map(v => v / Math.hypot(...a));
 export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   const profile = config.geometry.radialTerrain;
   if (!profile) return null;
+  if (profile.backfaceVisible !== undefined && typeof profile.backfaceVisible !== 'boolean') {
+    throw new TypeError('Radial backface visibility must be boolean.');
+  }
   await source.validatePath(profile.path);
-  const loader = profile.format === 'stl' ? loadStlShape : profile.format === 'pds-radius-table' ? loadPdsRadiusTable
+  const loader = profile.format === 'pds-planetocentric-plate' ? loadPdsPlanetocentricShape
+    : profile.format === 'stl' ? loadStlShape : profile.format === 'pds-radius-table' ? loadPdsRadiusTable
     : ['wavefront-obj', 'wavefront-obj-zip'].includes(profile.format) ? loadObjShape
     : profile.format === 'vrml-mesh' ? loadVrmlShape
     : profile.format === 'pds-plate-model' ? loadPdsPlateShape
     : profile.format === 'pds-vertex-facet' ? loadPdsVertexFacetShape
     : profile.format === 'pds-radial-table' ? loadPdsRadialTable : loadPdsScalarGrid;
-  const grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
+  if (profile.sourceTopology !== undefined && profile.sourceTopology !== 'open') throw new TypeError('Unknown source mesh topology.');
+  let grid = await loader(resolve(sourceDirectory, profile.path), profile.grid);
+  if (profile.sourceTopology === 'open') {
+    if (profile.simplification?.method !== 'source-meshoptimizer') throw new TypeError('Open observations require source-preserving simplification.');
+    grid = orientObservedSurface(grid);
+  }
+  for (const entry of source.manifest.inputs.filter(entry =>
+    entry.generator === 'tools/objects/terrestrial-layers/pds-constraint-map.mjs')) {
+    source.assertBytes(entry, await preparePdsConstraintMap(grid, entry.recipe));
+  }
   const scale = config.geometry.radius / (config.geometry.radiusKm * 1000);
   if (profile.primitive !== undefined && profile.primitive !== 'u') throw new TypeError('Unknown radial triangle primitive.');
   const simplified = profile.simplification?.method === 'meshoptimizer'
@@ -57,8 +75,9 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
   });
   const leaves = plans.map(({ geometry: g }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
-    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster` }));
+    style: `transform:matrix3d(${g.matrix});background-position:${g.backgroundPosition.map(x => `${x}px`).join(' ')};background-size:${g.backgroundSize.map(x => `${x}px`).join(' ')};--polycss-atlas-width:${g.leafWidth}px;--polycss-atlas-height:${g.leafHeight}px;--polycss-atlas-leaf-sizing:raster${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
   return { grid, faces, plans, leaves, width, height, tileSize,
+    ...(grid.coverage ? { coverage: grid.coverage } : {}),
     ...(simplified || faces.simplification ? { simplification: simplified?.report ?? faces.simplification } : {}) };
 }
 
@@ -72,8 +91,10 @@ export async function simplifyRadialShape(mesh, profile, scale) {
       ['regularize', 'prune'].some(key => profile.simplification[key] !== undefined && typeof profile.simplification[key] !== 'boolean')) throw new TypeError('Invalid source mesh simplification.');
   await MeshoptSimplifier.ready;
   const preserveSource = profile.simplification.method === 'source-meshoptimizer';
+  const open = profile.sourceTopology === 'open';
+  if (open && (!preserveSource || profile.simplification.prune)) throw new TypeError('Open observations must retain every source boundary.');
   let sourceIndices = Uint32Array.from(mesh.indices.flat()), positions = mesh.positions;
-  if (preserveSource) {
+  if (preserveSource && !open) {
     // ICQ releases duplicate cube-edge positions. Weld before assigning UVs,
     // using the same meshoptimizer remap and physical compaction as Vesta.
     const remap = MeshoptSimplifier.generatePositionRemap(Float32Array.from(positions.flat()), 3);
@@ -84,7 +105,7 @@ export async function simplifyRadialShape(mesh, profile, scale) {
     positions = unique;
   }
   const flags = ['ErrorAbsolute', ...(preserveSource && profile.simplification.regularize ? ['RegularizeLight'] : []),
-    ...(preserveSource && profile.simplification.prune ? ['Prune'] : [])];
+    ...(preserveSource && profile.simplification.prune ? ['Prune'] : []), ...(open ? ['LockBorder'] : [])];
   const [simplified, error] = MeshoptSimplifier.simplify(sourceIndices,
     Float32Array.from(positions.flat()), 3, targetFaces * 3, maximumErrorMeters, flags);
   // Edge collapses can leave exactly coincident, oppositely wound face pairs
@@ -92,7 +113,8 @@ export async function simplifyRadialShape(mesh, profile, scale) {
   // No positions are moved and no source feature is approximated in cleanup.
   const indices = preserveSource ? removeOppositeFacePairs(simplified) : simplified;
   if (!indices.length || indices.length / 3 > targetFaces) throw new Error(`Source mesh reached ${indices.length / 3} faces at ${error} m estimated error; requested ${targetFaces} within ${maximumErrorMeters} m.`);
-  const topology = preserveSource ? validateClosedMesh(indices, positions) : undefined;
+  const topology = open ? validateObservedReduction(sourceIndices, indices, positions)
+    : preserveSource ? validateClosedMesh(indices, positions) : undefined;
   const triangles = [];
   for (let i = 0; i < indices.length; i += 3) triangles.push(Array.from(indices.subarray(i, i + 3),
     index => positions[index].map(value => value * scale)));
@@ -100,7 +122,8 @@ export async function simplifyRadialShape(mesh, profile, scale) {
   if (preserveSource) faces.simplification = { method: 'source-meshoptimizer', version: '1.2.0', flags,
     sourceFaces: mesh.indices.length, sourceVertices: mesh.positions.length, weldedVertices: positions.length,
     targetFaces, outputFaces: faces.length, removedOppositeFaces: (simplified.length - indices.length) / 3,
-    maximumErrorMeters, estimatedErrorMeters: error, topology };
+    maximumErrorMeters, estimatedErrorMeters: error, topology,
+    ...(open ? { sourceTopology: 'open', sourceOrientation: mesh.sourceOrientation } : {}) };
   return faces;
 }
 
@@ -224,6 +247,9 @@ export function createRadialScienceColorSampler(sourceSurface, lens, config) {
  */
 export async function prepareRadialMaterials({ radial, surfaces, config, source, publicDirectory, outputDirectory, sunDirection }) {
   const { width, height, tileSize } = radial;
+  const lightingRecipe = config.geometry.radialTerrain.sourceLighting;
+  const lighting = lightingRecipe ? createSourceMeshLighting(radial.grid, lightingRecipe,
+    config.geometry.radiusKm * 1000 / config.geometry.radius, sunDirection) : null;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
     const { data: map, info } = await sharp(resolve(publicDirectory, surface.map.url.split('/').at(-1))).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -231,10 +257,16 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
     const sampleScience = scientific && createRadialScienceColorSampler(sourceSurface, scientific, config);
+    const scalarSources = scientific?.format === 'pds3-scalar-map' && Buffer.alloc(width * height * 4);
+    const observation = radial.observationSurfaces?.get(surface.id);
+    const sampleSources = observation?.report.frames && Buffer.alloc(width * height);
+    const observationTransfer = observation && { interiorTexels: 0, counts: {}, maximumSourceDistanceMeters: 0,
+      maximumPixelSeparationMeters: 0, maximumPhotometricGain: 0,
+      method: 'Closest full-source triangle point; all bilinear GEO contributors checked before disk-normalized interpolation; atlas bleed clamped to retained face.' };
     const transfer = sourceSurface && { sampledTexels: 0, withheldTexels: 0, maximumDistanceMeters: 0,
       includesAtlasBleed: true, triangleInteriorTexels: 0, withheldTriangleInteriorTexels: 0,
       maximumAcceptedDistanceMeters: scientific.surfaceSampling.maximumDistanceMeters,
-      method: 'Closest full-source triangle point in 3D; source barycentric radius and normal. No radial branch selection.' };
+      method: scalarSources ? sourceSurface.report.registration : 'Closest full-source triangle point in 3D; source barycentric radius and normal. No radial branch selection.' };
     for (const { face, rect, geometry, matrix: m } of radial.plans) {
       const [a, b, c] = face.vertices, ab = sub(b, a), ac = sub(c, a), aa = dot(ab, ab), bb = dot(ac, ac), abac = dot(ab, ac);
       const denominator = aa * bb - abac * abac;
@@ -248,24 +280,53 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         // raster so antialiasing never samples a transparent triangle edge.
         const normal = unit(face.vertexNormals[0].map((n, i) => n * (1 - u - v) + face.vertexNormals[1][i] * u + face.vertexNormals[2][i] * v));
         // Fixed-epoch directional illumination is baked in the body's frame.
-        let illumination = .12 + .88 * Math.max(0, dot(normal, sunDirection));
+        const light = lighting?.sample(point, normal);
+        let illumination = light?.shadow ?? (.12 + .88 * Math.max(0, dot(normal, sunDirection)));
         const lon = (Math.atan2(point[1], point[0]) / (2 * Math.PI) + 1) % 1;
         const lat = Math.atan2(point[2], Math.hypot(point[0], point[1]));
         const sx = lon * info.width - .5, sy = Math.max(0, Math.min(info.height - 1, (.5 - lat / Math.PI) * info.height - .5));
         const x0 = (Math.floor(sx) + info.width) % info.width, x1 = (x0 + 1) % info.width, y0 = Math.floor(sy), y1 = Math.min(info.height - 1, y0 + 1), tx = sx - Math.floor(sx), ty = sy - y0;
         const offset = ((rect.y + py) * width + rect.x + px) * 4;
+        if (observation) {
+          const sample = observation.samplePoint(closestTrianglePoint(point, a, ab, ac).point);
+          if (sampleSources) sampleSources[offset / 4] = sample.reason ? 0 : sample.frameIndex + 1;
+          const interior = u >= 0 && v >= 0 && u + v <= 1;
+          if (interior) {
+            observationTransfer.interiorTexels++;
+            const key = sample.reason ?? 'accepted';
+            observationTransfer.counts[key] = (observationTransfer.counts[key] ?? 0) + 1;
+            if (!sample.reason) {
+              if (sample.frameId) {
+                observationTransfer.sources ??= {};
+                observationTransfer.sources[sample.frameId] = (observationTransfer.sources[sample.frameId] ?? 0) + 1;
+              }
+              observationTransfer.maximumSourceDistanceMeters = Math.max(observationTransfer.maximumSourceDistanceMeters, sample.distanceMeters);
+              observationTransfer.maximumPixelSeparationMeters = Math.max(observationTransfer.maximumPixelSeparationMeters, sample.separationMeters);
+              observationTransfer.maximumPhotometricGain = Math.max(observationTransfer.maximumPhotometricGain, sample.gain);
+            }
+          }
+          for (let channel = 0; channel < 3; channel++) {
+            // The observation is already disk-normalized. Uniform flood
+            // preserves its measured detail on every side of the source mesh.
+            flood[offset + channel] = sample.color[channel];
+            shadow[offset + channel] = Math.round(sample.color[channel] * illumination);
+          }
+          flood[offset + 3] = shadow[offset + 3] = 255;
+          continue;
+        }
         if (sourceSurface) {
           // Clamp the raster bleed to this retained triangle, never to an
           // unrelated surface beyond its edge. Runtime primitive coverage is
           // unchanged; source projection and color are entirely prepared here.
           const clamped = closestTrianglePoint(point, a, ab, ac).point;
           const sample = sampleScience(clamped);
+          if (scalarSources && sample.sourceCell !== undefined) scalarSources.writeUInt32LE(sample.sourceCell + 1, offset);
           transfer.sampledTexels++;
           const interior = u >= 0 && v >= 0 && u + v <= 1;
           if (interior) transfer.triangleInteriorTexels++;
           const color = sample.color;
           if (sample.radius !== undefined) {
-            illumination = .12 + .88 * Math.max(0, dot(sample.normal, sunDirection));
+            if (!scalarSources) illumination = .12 + .88 * Math.max(0, dot(sample.normal, sunDirection));
             transfer.maximumDistanceMeters = Math.max(transfer.maximumDistanceMeters, sample.distanceMeters);
           } else {
             transfer.withheldTexels++;
@@ -281,19 +342,45 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         for (let channel = 0; channel < 3; channel++) {
           const top = map[(y0 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y0 * info.width + x1) * 4 + channel] * tx;
           const bottom = map[(y1 * info.width + x0) * 4 + channel] * (1 - tx) + map[(y1 * info.width + x1) * 4 + channel] * tx;
-          flood[offset + channel] = Math.round(top * (1 - ty) + bottom * ty);
-          shadow[offset + channel] = Math.round(flood[offset + channel] * illumination);
+          const color = top * (1 - ty) + bottom * ty;
+          flood[offset + channel] = Math.round(color * (light?.flood ?? 1));
+          shadow[offset + channel] = Math.round((light ? color : Math.round(color)) * illumination);
         }
         flood[offset + 3] = shadow[offset + 3] = 255;
       }
     }
-    const encoding = { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
+    // Scientific colours retain exact palette values; the numeric source index is preparation-only.
+    const encoding = scalarSources ? { lossless: true, effort: 4 } : { quality: config.raster.surfaceQuality ?? 90, alphaQuality: 100, effort: 4 };
     surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw: { width, height, channels: 4 } }), encoding);
     surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
     surface.polesUrl = surface.surface.url;
     surface.layout = { kind: 'triangle-atlas', width, height, tileSize, faceCount: radial.faces.length };
     if (transfer) surface.surfaceSampling.transfer = transfer;
+    if (scalarSources) {
+      const bytes = Buffer.from(JSON.stringify({ schema: 'cssearth-atlas-scalar-index@1', width, height,
+        encoding: 'gzip-u32le-base64', layout: 'row-major; 0 withheld, otherwise original table row (1-based); includes atlas bleed',
+        source: surface.source, data: gzipSync(scalarSources, { level: 9 }).toString('base64') }) + '\n');
+      const file = `${surface.id}-source-index.json`;
+      await writeFile(resolve(outputDirectory, file), bytes);
+      surface.scalarMap.sampleSources = { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'), width, height };
+      const snapshot = await renderRadialSnapshot({ faces: radial.faces, sampleSurface: sampleScience, size: 96,
+        longitudeDegrees: 30, latitudeDegrees: 30, ambient: 1, diffuse: 0 });
+      surface.thumbnail = await emit(`${config.namespace}-${surface.id}-thumbnail.webp`, sharp(snapshot).resize(48, 48)
+        .extend({ left: 24, right: 24, top: 0, bottom: 0, background: { r: 0, g: 0, b: 0, alpha: 0 } }));
+    }
+    if (observationTransfer) surface.observation.transfer = observationTransfer;
+    if (sampleSources) {
+      const codes = { 0: 'no-qualified-observation', ...Object.fromEntries(observation.report.frames.map((frame, i) => [i + 1, frame.id])) };
+      const bytes = Buffer.from(JSON.stringify({ schema: 'cssearth-atlas-observation-index@1', width, height, codes,
+        encoding: 'gzip-u8-base64', layout: 'row-major; one source code per atlas texel; includes triangle bleed',
+        data: gzipSync(sampleSources, { level: 9 }).toString('base64') }) + '\n');
+      const file = `${surface.id}-source-index.json`;
+      await writeFile(resolve(outputDirectory, file), bytes);
+      surface.observation.sampleSources = { file, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'),
+        width, height, includesAtlasBleed: true, codes };
+    }
   }
+  if (lighting) await writeFile(resolve(outputDirectory, 'source-lighting.json'), JSON.stringify({ ...lighting.report, recipe: lightingRecipe }) + '\n');
   for (const entry of source.manifest.generatedIntermediates.filter(entry =>
     entry.generator === 'tools/objects/terrestrial-layers/radial-snapshot.mjs')) {
     const surface = surfaces.find(surface => surface.id === entry.recipe?.lensId);
@@ -307,6 +394,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   }
   await writeFile(resolve(outputDirectory, 'terrain.json'), JSON.stringify({ schema: 'cssearth-prepared-radial-terrain@1',
     source: config.geometry.radialTerrain, faces: radial.faces, width, height,
+    ...(radial.coverage ? { coverage: radial.coverage } : {}),
     ...(radial.simplification ? { simplification: radial.simplification } : {}) }) + '\n');
   return surfaces;
 }

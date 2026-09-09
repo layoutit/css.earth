@@ -1,0 +1,45 @@
+# (490) Veritas: sources and interpretation
+
+## Selected shape
+
+[DAMIT model 833](https://damit.cuni.cz/projects/damit/asteroid_models/view/833), version 2016-01-04, from Hanuš et al. (2016), is a convex lightcurve inversion mesh. The original 1019 vertices and 2034 triangular faces are preserved as the source input. Convex lightcurve inversion model; large-scale shape is inferred from disk-integrated brightness. Concavities, craters, surface texture and exact current rotation phase are not resolved.
+
+Model publication: [New and updated convex shape models of asteroids based on optical data from a large collaboration network](https://damit.cuni.cz/projects/damit/references/view/161).
+
+The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established 800-face meshoptimizer/PolyCSS raster preparation. This adds no new geometry or rendering technique.
+
+## Physical scale and uncertainty
+
+Adopted diameter: **118.803 ± 1.83 km**, meaning **effective body diameter**, from [Masiero et al. (2012), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas12](https://doi.org/10.1088/2041-8205/759/1/L8). The reference-sphere radius is 59.4015 km. The quoted statistical error excludes the approximately 20% survey systematic floor (about 23.7606 km), shape/orientation effects and rotational sampling limitations.
+
+Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.
+
+The source's signed tetrahedral volume integral is 1.00000018535 source units cubed, giving volume-equivalent diameter 1.24070105845 source units. The preparation conversion is:
+
+`metersPerUnit = D_km × 1000 / (2 × cbrt(3 × V_source / (4 × pi)))`
+
+For this input, `metersPerUnit = 95754.7341405669`. The raw mesh coordinates and connectivity are unchanged. Computed source topology has positive volume, consistent winding, each edge used twice, and Euler characteristic 2. This validates interpretation and source integrity; it does not establish the physical accuracy of the inversion.
+
+The exact original size record (where tabulated), its complete field definitions, parent-file identity, source URL, byte offset and line number are retained in the intake evidence. Multiple infrared epochs remain separate; they are not averaged into a falsely precise physical volume.
+
+## Orientation and time
+
+DAMIT metadata report J2000 ecliptic pole λ=56°, β=34°, and rounded sidereal period 7.92811 h. The original IAUspin file uses equatorial pole α=41°, δ=52°, dW/dt=1089.793154°/day, W0=277.3° at JD 2451545.0. These are different frame conventions. The existing recipe uses the paired model-record ecliptic pole and period, with arbitrary display phase. IAUspin is retained as provenance and as an independent frame/rate consistency check; its period agrees within the printed precision of the model record. The displayed phase is not propagated from the historical source epoch and does not claim exact current attitude. Model longitude zero is an inversion/display convention, not an observed landmark.
+
+Published alternate pole solutions remain plausible: model 834: λ=231°, β=43°, P=7.92812 h. The selected first archived solution is not asserted to be uniquely correct.
+
+## Views and source survey
+
+The Shape view uses the shared normal grid because the source release provides no registered surface imagery. The grid is a coordinate guide, not regolith, measured albedo or an optical photograph. Elevation is radius on this scaled shape minus the reference-sphere radius, using the original surface for the established source-to-face transfer. It is model-derived radial relief, not an independent DEM, gravitational height or resolved cratering. Its physical units inherit the scale uncertainty. Directional lighting is illustrative for the chosen model attitude; Shadows is off by default.
+
+| Source candidate | Disposition | Reason |
+| --- | --- | --- |
+| DAMIT model search | included | Original body-specific convex shape and spin. Current search found no size-calibrated model. |
+| SBDB physical size and cited radiometry | included-qualified | Effective spherical diameter for approximate uniform physical scaling; retains quoted error and method limitations. |
+| Optical surface / resolved DEM / composition map | excluded | No registered surface map is supplied by the selected lightcurve inversion release. Shared grid and source-shape radial elevation are appropriate; no fabricated texture. |
+
+No optical surface texture, composition map, temperature map, density or missing rotation period is invented. The model page and publication describe disk-integrated inversion data; such photometry cannot be repackaged as registered surface texels. Any unresolved complementary release remains a future source candidate rather than a fabricated view.
+
+## Provenance
+
+Checked 2026-09-08. Original shape, IAUspin, model metadata, citations, sizing inputs and format documentation are pinned by exact bytes and SHA-256 in the lane intake. Derived source notes retain the physical sizing assumption and pole alternatives. Runtime/prepared fit, source restoration, visual and installation qualification are separate work recorded by the integration owner.

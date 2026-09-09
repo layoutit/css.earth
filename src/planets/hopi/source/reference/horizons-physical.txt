@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272938%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 2938 Hopi (1980 LB)           2026-Sep-08 10:26:10
+Rec #:    2938 (+COV) Soln.date: 2026-Jun-05_07:04:40   # obs: 8842 (1980-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458537.5 ! 2019-Feb-23.00 (TDB)         Residual RMS= .24041
+   EC= .3285330627839106   QR= 2.117644709608371   TP= 2458918.3692327691
+   OM= 108.8707739231206   W=  263.3837005485384   IN= 41.4263897415322
+   A= 3.153758721744593    MA= 292.974931252777    ADIST= 4.189872733880815
+   PER= 5.60081            N= .175979215           ANGMOM= .028853212
+   DAN= 2.92405            DDN= 2.71075            L= 10.0770365
+   B= -41.0905287          MOID= 1.42203999        TP= 2020-Mar-09.8692327691
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 9.6335             ROTPER= n.a.
+   H= 11.81                G= .150                 B-V= n.a.
+                           ALBEDO= .109            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#72, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -53,8 +53,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "llorri",
     "controls": [
+      {
+        "id": "llorri",
+        "label": "L’LORRI observation",
+        "detail": "Spacecraft observation",
+        "description": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+        "title": "Lucy L’LORRI image from 20 April 2025, registered using the original camera and published surface landmarks. Grayscale retains the photographed illumination; it is relative detector brightness, not measured albedo. The image covers part of the encounter-facing surface and is cropped at one lobe. The ordinary grid marks unseen, grazing or rejected coverage, including the source model’s unobserved reconstruction.",
+        "thumbnail": "/scenes/donaldjohanson/donaldjohanson-llorri-thumbnail.webp",
+        "surface": "donaldjohanson-llorri-surface@2x.webp",
+        "poles": "donaldjohanson-llorri-surface@2x.webp",
+        "source": {
+          "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
+          "path": "../manifest.json"
+        }
+      },
       {
         "id": "shape",
         "label": "Shape",
@@ -80,7 +94,7 @@
         "kind": "toggle",
         "name": "shadows",
         "label": "Shadows",
-        "checked": true
+        "checked": false
       },
       {
         "kind": "toggle",
@@ -92,6 +106,12 @@
   },
   "charts": [],
   "resources": [
+    {
+      "label": "Imagery",
+      "role": "surface",
+      "description": "L’LORRI observation original archive",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.fit"
+    },
     {
       "label": "Research",
       "role": "facts",

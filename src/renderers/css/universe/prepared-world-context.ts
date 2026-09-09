@@ -1,3 +1,5 @@
+import { parsePreparedOrbitCenters } from './prepared-orbit-centers.js';
+import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
 import { createRetainedLeafPool } from '../rendering/retained-leaf-pool.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import type { ScreenPickTarget } from '../navigation/screen-picking.js';
@@ -10,13 +12,15 @@ import { rotateWorldPosition, transposeWorldRotation, validateWorldRotation, wor
 import { levelOfDetailFor, orbitLineOpacity } from '../navigation/perspective-dolly.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
 import { clipSegmentToRectangle, rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
-import { createPreparedRingProjector, createSphereChordTest } from '../solar-system/prepared-ring-projection.js';
+import { createPreparedRingProjector, createSphereChordTest, orbitBoundsMayContribute } from '../solar-system/prepared-ring-projection.js';
 import { applySprite, writePieces } from '../solar-system/heliocentric-sprites.js';
 import { bindObjectNavigationTarget } from '../solar-system/heliocentric-navigation.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import type { OrbitSegment } from '../solar-system/heliocentric-view.js';
 
 const BODY_INDICATOR_DIAMETER = 16;
+const CONTEXT_LINE_WIDTH = 1;
+const ORBIT_FADE_START_PIXELS = 12;
 
 function orbitPresentation(segments: readonly OrbitSegment[], closed: boolean) {
   let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
@@ -25,10 +29,10 @@ function orbitPresentation(segments: readonly OrbitSegment[], closed: boolean) {
     top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
   }
   const extent = Math.max(1, right - left, bottom - top);
-  const opacity = logarithmicFade(extent, 12, 48);
+  const opacity = logarithmicFade(extent, ORBIT_FADE_START_PIXELS, 48);
   // Closed planetary rings and their circles share one zoom fade.
   // Fading trails retain their earlier marker-crowding threshold.
-  return { width: 1, opacity, markerOpacity: closed ? opacity : logarithmicFade(extent, 48, 128) };
+  return { width: CONTEXT_LINE_WIDTH, opacity, markerOpacity: closed ? opacity : logarithmicFade(extent, 48, 128) };
 }
 
 function orbitOverlapsLabel(orbits: readonly { segments: readonly OrbitSegment[]; orbitVisibility: number; lineWidth: number }[], x: number, y: number, width: number, height: number): boolean {
@@ -91,7 +95,8 @@ export interface PreparedContextFocus extends PreparedContextPoint {
   readonly pointSource?: PreparedContextPointSource;
 }
 export interface PreparedContextBody extends PreparedContextPoint {
-  readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[] };
+  readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
+    readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[] };
 }
 export interface PreparedContextCameraPresentation {
   readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
@@ -112,6 +117,7 @@ export interface PreparedWorldContext {
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: PreparedContextFocus;
   readonly bodies: readonly PreparedContextBody[];
+  readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
     readonly presentation: PreparedContextCameraPresentation };
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
@@ -192,7 +198,7 @@ function parsePresentation(value: unknown): PreparedContextCameraPresentation {
     orbitLineFade: Object.freeze({ visibleBelowDiscHeightShare, hiddenAboveDiscHeightShare }), drag: Object.freeze({ model: drag.model }) });
 }
 export function parsePreparedWorldContext(value: unknown): PreparedWorldContext {
-  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'camera', 'volume', 'stars', 'system', 'sky']);
+  const input = record(value, 'world context', ['schema', 'frame', 'focus', 'bodies', 'orbitCenters', 'camera', 'volume', 'stars', 'system', 'sky']);
   if (input.schema !== 'cssearth-world-context@1') throw new TypeError('Unsupported prepared world context.');
   const frame = parsePreparedWorldCameraFrame(input.frame);
   if (!frame) throw new TypeError('World context requires its prepared frame.');
@@ -202,30 +208,37 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
     const body = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit']);
     if (input.orbit === undefined) return body;
-    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail']);
+    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords']);
     const centerBodyId = text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM = vector(orbit.centerPositionM, 'orbit centre position');
     const verticesM = array(orbit.verticesM, 'orbit vertices').map(value => vector(value, 'orbit vertex'));
     const trail = numbers(orbit.trail, 'orbit trail');
     if (verticesM.length < 8 || trail.length !== verticesM.length || trail.some(value => value < 0 || value > 1) || !equalPosition(body.positionM, verticesM[0]!)) {
       throw new TypeError('Context orbit must align with its body and carry matching prepared trail weights.');
     }
-    return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail) }) });
+    const activeChords = orbit.activeChords === undefined ? undefined : numbers(orbit.activeChords, 'active orbit chords');
+    if (activeChords) {
+      const expected = trail.flatMap((weight, index) => weight > 0 ? [index] : []);
+      if (activeChords.length !== expected.length || activeChords.some((index, ordinal) => index !== expected[ordinal])) {
+        throw new TypeError('Prepared active chords must match every positive trail weight in order.');
+      }
+    }
+    let bounds: { readonly centerM: PositionM; readonly radiusM: number } | undefined;
+    if (orbit.bounds !== undefined) {
+      const input = record(orbit.bounds, 'orbit bounds', ['centerM', 'radiusM']);
+      const centerM = vector(input.centerM, 'orbit bounds centre'), radiusM = positive(input.radiusM, 'orbit bounds radius');
+      if (verticesM.some((vertex, index) => (trail[index] > 0 || trail[(index + trail.length - 1) % trail.length] > 0) &&
+        Math.hypot(...vertex.map((value, axis) => value - centerM[axis])) > radiusM)) {
+        throw new TypeError('Prepared orbit bounds must contain every active chord endpoint.');
+      }
+      bounds = Object.freeze({ centerM, radiusM });
+    }
+    // Older prepared banks retain the exact projection path; no runtime bounds bake.
+    return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail),
+      ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}) }) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
-  const parents = new Map<string, PreparedContextBody>(bodies.map(body => [body.id, body]));
-  for (const body of bodies) {
-    if (!body.orbit) continue;
-    const parent = body.orbit.centerBodyId === focus.id ? focus : parents.get(body.orbit.centerBodyId);
-    if (!parent || parent.id === body.id || !equalPosition(parent.positionM, body.orbit.centerPositionM)) {
-      throw new TypeError('Context orbit centre must match a prepared parent body.');
-    }
-    const ancestors = new Set([body.id]);
-    for (let id: string | undefined = body.orbit.centerBodyId; id !== undefined && id !== focus.id; id = parents.get(id)?.orbit?.centerBodyId) {
-      if (ancestors.has(id) || !parents.has(id)) throw new TypeError('Context orbit parent hierarchy must terminate at a prepared point.');
-      ancestors.add(id);
-    }
-  }
+  const orbitCenters = parsePreparedOrbitCenters(input.orbitCenters, focus, bodies);
   const camera = record(input.camera, 'context camera', ['minimumDistanceM', 'maximumDistanceM', 'framingReferenceZoom', 'presentation']);
   const volume = record(input.volume, 'context volume', ['objectId', 'fadeStartDistanceM', 'fullDistanceM', 'opacityProfile', 'brightnessProfile']);
   const stars = record(input.stars, 'context stars', ['objectId', 'fadeStartDistanceM', 'fullDistanceM']);
@@ -251,6 +264,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   const objectId = text(volume.objectId, 'volume identity');
   if (!/^[a-z][a-z0-9-]*$/.test(objectId)) throw new TypeError('Invalid context volume identity.');
   return Object.freeze({ schema: 'cssearth-world-context@1', frame, focus, bodies: Object.freeze(bodies),
+    ...(input.orbitCenters === undefined ? {} : { orbitCenters }),
     camera: Object.freeze({ minimumDistanceM, maximumDistanceM, framingReferenceZoom, presentation }),
     volume: Object.freeze({ objectId, fadeStartDistanceM, fullDistanceM,
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
@@ -307,6 +321,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     indicator.dataset.contextIndicator = body.id;
     indicator.style.width = indicator.style.height = `${BODY_INDICATOR_DIAMETER}px`;
     indicator.style.visibility = 'hidden';
+    indicator.style.setProperty('--context-line-width', `${CONTEXT_LINE_WIDTH}px`);
     const label = host.ownerDocument.createElement('span');
     label.dataset.contextLabel = body.id;
     label.textContent = body.name;
@@ -318,6 +333,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     orbitRoot.className = 'context-orbit';
     orbitRoot.dataset.contextOrbit = body.id;
     orbitRoot.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+    orbitRoot.style.setProperty('--context-line-width', `${CONTEXT_LINE_WIDTH}px`);
+    orbitRoot.style.setProperty('--context-orbit-pointer-events', 'none');
     if (orbit) group.appendChild(orbitRoot);
     const piecePool = createRetainedLeafPool(orbitRoot, orbit ? orbit.verticesM.length * 2 : 0, 'context-orbit-block');
     const pieces = piecePool.elements;
@@ -326,12 +343,13 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     const indicatorNavigation = bindObjectNavigationTarget(indicator, host);
     const labelNavigation = bindObjectNavigationTarget(label, host);
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host) : null;
-    return { body, group, sprite, marker, indicator, label, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId)! : null, pieces, piecePool, navigation, indicatorNavigation, labelNavigation, orbitNavigation,
+    return { body, group, sprite, marker, indicator, label, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, indicatorNavigation, labelNavigation, orbitNavigation,
       closedOrbit: orbit?.trail.every(weight => weight === 1) === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       orbitPick: null as ScreenPickTarget | null,
       indicatorPick: null as ScreenPickTarget | null,
-      orbitAppearance: { width: 1, opacity: 1, markerOpacity: 1 },
+      orbitAppearance: { width: CONTEXT_LINE_WIDTH, opacity: 1, markerOpacity: 1 },
+      orbitNavigable: false,
       orbitHidden: false, labelHidden: false,
       orbitClip: null as { segments: readonly OrbitSegment[]; x: number; y: number } | null,
       labelSize: { width: 0, height: 0 }, labelShown: false, labelPlacement: 0, indicatorShown: false, previousCount: 0,
@@ -388,6 +406,13 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   let backgroundExclusions: readonly LabelScreenRect[] = [];
   let destroyed = false;
   let selectedId = plan.focus.id;
+  let selectedEntry = bodies[0]!;
+  const anchorOnly = [bodies[0]!];
+  let systemRetired = false;
+  let depthOrientation: readonly number[] | null = null;
+  let depthSelection: string | null = null;
+  let depthOrder = bodies;
+  let pickRanks = new Map<(typeof bodies)[number], number>();
   let overview = false;
   let selectionPreview: string | null | undefined;
   let navigationIndicatorsVisible = true;
@@ -410,6 +435,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     setNavigationIndicatorsVisible(visible: boolean) {
       if (destroyed || visible === navigationIndicatorsVisible) return;
       navigationIndicatorsVisible = visible;
+      systemRetired = false;
       if (!visible) {
         pickTargets = []; picking.publish(root, pickTargets);
         for (const entry of bodies) {
@@ -419,6 +445,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
           entry.labelNavigation.update(null, entry.body.name);
           entry.indicatorNavigation.update(null, entry.body.name);
           entry.orbitNavigation?.update(null, entry.body.name);
+          entry.orbitNavigable = false;
           entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', 'none');
         }
       } else {
@@ -463,8 +490,10 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       })));
     },
     selectObject(id: string) {
-      if (!bodies.some(entry => entry.body.id === id)) throw new TypeError('Selected context body is unavailable.');
+      const entry = bodies.find(entry => entry.body.id === id);
+      if (!entry) throw new TypeError('Selected context body is unavailable.');
       selectedId = id;
+      selectedEntry = entry;
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport) {
       if (destroyed) return;
@@ -474,14 +503,39 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       latest = { world, viewport };
       const distanceM = Math.hypot(...world.pose.positionM.map((value, axis) => value - plan.focus.positionM[axis]));
       const opacity = 1 - logarithmicFade(distanceM, plan.system.fadeOutStartDistanceM, plan.system.hiddenDistanceM);
+      // Publish the first zero-opacity frame normally to retire picking and
+      // start existing label fades. Later frames need only the anchor locator;
+      // its siblings keep their prepared DOM and finish their owned fades.
+      const publishingBodies = opacity === 0 && systemRetired ? anchorOnly : bodies;
+      systemRetired = opacity === 0;
       // Cache the retained UI text bounds before any projection writes.
-      for (const entry of bodies) if (navigationIndicatorsVisible && entry.labelSize.width === 0) {
+      for (const entry of publishingBodies) if (navigationIndicatorsVisible && entry.labelSize.width === 0) {
         const bounds = entry.label.getBoundingClientRect();
         entry.labelSize = { width: Math.ceil(bounds.width), height: Math.ceil(bounds.height) };
       }
       labels.reset();
       indicators.reset();
       const rotation = transposeWorldRotation(worldRotationFromQuaternion(world.pose.orientationXyzw));
+      // Camera translation adds the same depth offset to every prepared body.
+      // Only orientation changes their order; selection changes where the
+      // retained detail layers (0..3) sit within that order.
+      if (!depthOrientation || depthOrientation.some((value, axis) => value !== world.pose.orientationXyzw[axis])) {
+        depthOrientation = [...world.pose.orientationXyzw];
+        const depth = (entry: (typeof bodies)[number]) => -(
+          rotation[6]! * entry.body.positionM[0] + rotation[7]! * entry.body.positionM[1] + rotation[8]! * entry.body.positionM[2]);
+        depthOrder = [...bodies].sort((a, b) => depth(b) - depth(a));
+        pickRanks = new Map(depthOrder.map((entry, index) => [entry, index * 4]));
+        depthSelection = null;
+      }
+      if (depthSelection !== selectedId) {
+        depthSelection = selectedId;
+        const selectedIndex = depthOrder.indexOf(selectedEntry);
+        for (const [index, entry] of depthOrder.entries()) {
+          const relativeDepth = index - selectedIndex;
+          const zIndex = String(relativeDepth > 0 ? relativeDepth + 3 : relativeDepth);
+          if (entry.group.style.zIndex !== zIndex) entry.group.style.zIndex = zIndex;
+        }
+      }
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
       const emphasizedId = selectionPreview === undefined ? (overview ? null : selectedId) : selectionPreview;
@@ -493,7 +547,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const height = viewport.heightPixels ?? host.clientHeight;
       const project = (eye: readonly number[]): readonly number[] => [ox + focal * eye[0] / -eye[2], oy + focal * eye[1] / -eye[2]];
       const focusEye = toEye(plan.focus.positionM);
-      const selected = bodies.find(entry => entry.body.id === selectedId)!.body;
+      const selected = selectedEntry.body;
       const selectedEye = toEye(selected.positionM);
       const focusMayOcclude = createSphereChordTest(focusEye, plan.focus.radiusM, project);
       const selectedMayOcclude = selected.id === plan.focus.id ? focusMayOcclude
@@ -501,16 +555,17 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       const hidden = (eye: readonly number[], id?: string) =>
         (id !== plan.focus.id && rayHitsSphereBefore(eye, focusEye, plan.focus.radiusM)) ||
         (id !== selected.id && rayHitsSphereBefore(eye, selectedEye, selected.radiusM));
-      const near = Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...toEye(entry.body.positionM)))) * 0.01);
       const focusDiameter = selectedEye[2] < -selected.radiusM
         ? 2 * focal * selected.radiusM / Math.sqrt(selectedEye[2] ** 2 - selected.radiusM ** 2) : Number.POSITIVE_INFINITY;
       const lod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, focusDiameter);
       const orbitOpacity = orbitLineOpacity(plan.camera.presentation.orbitLineFade, focusDiameter / height);
-      let anchorLineWidth = 1;
+      const near = navigationIndicatorsVisible && opacity > 0 && orbitOpacity > 0
+        ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...toEye(entry.body.positionM)))) * 0.01) : 1;
+      let anchorLineWidth = CONTEXT_LINE_WIDTH;
       // Project first, resolve shared body visibility, then place labels and publish once.
       // Marker decluttering suppresses body proxies, not independently resolved orbit paths.
       const projectedBodies: { entry: (typeof bodies)[number]; x: number; y: number; depth: number; diameter: number; markerOpacity: number; indicatorOpacity: number; visible: boolean; annotationVisible: boolean; hovered: boolean; inFrame: boolean; parentDiameter: number; priority: number; lineWidth: number; orbitVisibility: number; segments: readonly OrbitSegment[]; labelPosition?: readonly number[] }[] = [];
-      for (const entry of bodies) {
+      for (const entry of publishingBodies) {
         const { body, marker, indicator, label } = entry;
         const eye = toEye(body.positionM), depth = -eye[2];
         const parentEye = entry.parent ? toEye(entry.parent.positionM) : null;
@@ -532,9 +587,11 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const parentDepth = parentEye === null ? 0 : -parentEye[2];
         const parentDiameter = entry.parent && parentDepth > entry.parent.radiusM
           ? 2 * focal * entry.parent.radiusM / Math.sqrt(parentDepth ** 2 - entry.parent.radiusM ** 2) : 0;
-        const segments = navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 ? createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
+        const bounds = entry.orbit?.bounds;
+        const segments = navigationIndicatorsVisible && entry.orbit && opacity > 0 && orbitOpacity > 0 &&
+          (!bounds || orbitBoundsMayContribute(toEye(bounds.centerM), bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS)) ? createPreparedRingProjector({ toEye, project, hidden: eye => hidden(eye) || parentHidden(eye),
           mayOcclude: (a, b) => focusMayOcclude(a, b) || selectedMayOcclude(a, b) || Boolean(parentMayOcclude?.(a, b)),
-          near, clipX: width / 2, clipY: height / 2 })(entry.orbit.verticesM, entry.orbit.trail) : [];
+          near, clipX: width / 2, clipY: height / 2 })(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords) : [];
         if (entry.orbit && navigationIndicatorsVisible) entry.orbitAppearance = orbitPresentation(segments, entry.closedOrbit);
         const appearance = entry.orbitAppearance;
         const bodyLod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, diameter);
@@ -547,7 +604,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         const indicatorOpacity = isAnchor && overview ? 1 :
           bodyLod.markerOpacity * (isAnchor ? 1 : entry.orbitHidden ? opacity : entry.closedOrbit
             ? orbitVisibility : opacity * (isSelected ? 1 : appearance.markerOpacity));
-        const primary = entry.parent === null || entry.parent.id === plan.focus.id;
+        const primary = !entry.orbit || entry.orbit.centerBodyId === plan.focus.id;
         const priority = (isAnchor ? 4e6 : 0) + (hovered ? 2e6 : 0) + (body.id === emphasizedId ? 6e6 : isSelected ? 1e6 : 0) + (primary ? 1000 : 0) + Math.min(99, diameter);
         if (navigationIndicatorsVisible && annotationVisible && indicatorOpacity > 0) {
           const radius = BODY_INDICATOR_DIAMETER / 2, padding = entry.indicatorShown ? 0 : 2;
@@ -556,15 +613,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             bottomOffsetPx: -radius - padding, topOffsetPx: radius + padding });
         }
         projectedBodies.push({ entry, x, y, depth, diameter, markerOpacity, indicatorOpacity, visible, annotationVisible, hovered, inFrame, parentDiameter, priority, lineWidth: appearance.width, orbitVisibility, segments });
-      }
-      // Reserve the existing detail layers (0..3). Far bodies stay behind them;
-      // near bodies paint above them, ordered by eye depth without moving DOM nodes.
-      const backToFront = [...projectedBodies].sort((a, b) => b.depth - a.depth);
-      const pickRanks = new Map(backToFront.map(({ entry }, index) => [entry, index * 4]));
-      const selectedIndex = backToFront.findIndex(({ entry }) => entry.body.id === selectedId);
-      for (const [index, { entry }] of backToFront.entries()) {
-        const relativeDepth = index - selectedIndex;
-        entry.group.style.zIndex = String(relativeDepth > 0 ? relativeDepth + 3 : relativeDepth);
       }
       // An orbitless anchor uses the same stroke as the visible system, then thins as it recedes.
       projectedBodies[0].lineWidth = anchorLineWidth;
@@ -655,7 +703,6 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
         entry.labelShown = labels.accepted(0, entry.body.id);
         const indicatorShown = entry.indicatorShown;
         indicator.style.visibility = indicatorShown ? '' : 'hidden';
-        indicator.style.setProperty('--context-line-width', `${lineWidth}px`);
         entry.indicatorNavigation.update(indicatorShown && indicatorOpacity > 0.1 ? body.id : null, body.name);
         entry.indicatorPick = indicatorShown && indicatorOpacity > .1 ? { element: indicator, rank: rank + 2,
           shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } } : null;
@@ -669,13 +716,16 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
             orbitBounds.left = Math.min(orbitBounds.left, x0, x1); orbitBounds.right = Math.max(orbitBounds.right, x0, x1);
             orbitBounds.top = Math.min(orbitBounds.top, y0, y1); orbitBounds.bottom = Math.max(orbitBounds.bottom, y0, y1);
           }
-          entry.orbitNavigation!.update(orbitVisibility > 0.1 && !entry.orbitHidden ? body.id : null, body.name);
-          // Only the painted chords are hit targets, never the full-stage group.
-          entry.orbitRoot.style.pointerEvents = 'none';
-          entry.orbitRoot.tabIndex = -1;
-          entry.orbitRoot.style.setProperty('--context-line-width', `${lineWidth}px`);
+          const navigable = orbitVisibility > 0.1 && !entry.orbitHidden;
+          if (entry.orbitNavigable !== navigable) {
+            entry.orbitNavigable = navigable;
+            entry.orbitNavigation!.update(navigable ? body.id : null, body.name);
+            // Only the painted chords are hit targets, never the full-stage group.
+            entry.orbitRoot.style.pointerEvents = 'none';
+            entry.orbitRoot.tabIndex = -1;
+            entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', navigable ? 'auto' : 'none');
+          }
           entry.orbitRoot.style.opacity = `calc(${orbitVisibility} * var(--context-line-opacity, 1))`;
-          entry.orbitRoot.style.setProperty('--context-orbit-pointer-events', orbitVisibility > 0.1 && !entry.orbitHidden ? 'auto' : 'none');
           const update = writePieces(entry.pieces, segments, entry.previousCount, entry.piecePool.setVisible);
           if (update.overflowed) throw new Error('Prepared context line pool overflowed.');
           entry.previousCount = update.count;

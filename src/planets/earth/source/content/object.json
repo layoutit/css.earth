@@ -136,98 +136,14 @@
       {
         "id": "normal",
         "label": "Visible color",
-        "description": "NASA Blue Marble, December 2004, with ESA WorldCover 2021 detail where available. These archival composites and the cloud layer are not live observations.",
-        "title": "Visible color: NASA Blue Marble; ESA WorldCover 2021 global source-footprint detail from the Terrascope WMTS service",
+        "description": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery.",
+        "title": "Visible color: NASA Blue Marble Next Generation with archival clouds",
         "thumbnail": "/scenes/earth/earth-lens-normal.webp",
         "source": {
           "id": "surface-observation"
         },
         "detail": "Global mosaic",
         "summary": "NASA Blue Marble 2004 with ESA WorldCover 2021 detail. The surface and clouds are archival, not live."
-      },
-      {
-        "id": "buenos-aires-noise",
-        "label": "Buenos Aires noise",
-        "description": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
-        "title": "Buenos Aires noise: Modeled daytime noise ranges published by the City of Buenos Aires; not live measurements. Transparent areas have no mapped estimate.",
-        "legendNote": "APrA · 2025 daytime estimates. Uncolored areas have no estimate.",
-        "thumbnail": "/scenes/earth/earth-lens-noise.webp",
-        "legend": {
-          "kind": "ranges",
-          "title": "Noise level",
-          "ranges": [
-            {
-              "label": "30-35 dBA",
-              "color": "rgb(169,255,115)",
-              "low": 30
-            },
-            {
-              "label": "35-40 dBA",
-              "color": "rgb(76,230,0)",
-              "low": 35
-            },
-            {
-              "label": "40-45 dBA",
-              "color": "rgb(38,115,0)",
-              "low": 40
-            },
-            {
-              "label": "45-50 dBA",
-              "color": "rgb(255,255,0)",
-              "low": 45
-            },
-            {
-              "label": "50-55 dBA",
-              "color": "rgb(254,204,92)",
-              "low": 50
-            },
-            {
-              "label": "55-60 dBA",
-              "color": "rgb(230,152,0)",
-              "low": 55
-            },
-            {
-              "label": "60-65 dBA",
-              "color": "rgb(255,0,0)",
-              "low": 60
-            },
-            {
-              "label": "65-70 dBA",
-              "color": "rgb(115,0,0)",
-              "low": 65
-            },
-            {
-              "label": "70-75 dBA",
-              "color": "rgb(132,0,168)",
-              "low": 70
-            },
-            {
-              "label": "75-80 dBA",
-              "color": "rgb(0,38,255)",
-              "low": 75
-            },
-            {
-              "label": "80-85 dBA",
-              "color": "rgb(0,38,115)",
-              "low": 80
-            },
-            {
-              "label": "85-90 dBA",
-              "color": "rgb(0,38,115)",
-              "low": 85
-            },
-            {
-              "label": "90-95 dBA",
-              "color": "rgb(0,38,115)",
-              "low": 90
-            }
-          ]
-        },
-        "source": {
-          "id": "noise-daytime"
-        },
-        "detail": "Daytime · dBA",
-        "summary": "Buenos Aires daytime noise estimates. Transparent areas have no estimate; these are not live measurements."
       },
       {
         "id": "topography",
@@ -358,28 +274,10 @@
   ],
   "resources": [
     {
-      "label": "Buenos Aires APrA",
-      "role": "noise",
-      "description": "2025 daytime noise estimates, CC-BY-2.5-AR",
-      "href": "https://data.buenosaires.gob.ar/dataset/mapa-ruido"
-    },
-    {
-      "label": "GeoNames",
-      "role": "places",
-      "description": "City names and locations, CC-BY-4.0",
-      "href": "https://www.geonames.org/export/"
-    },
-    {
       "label": "NASA",
       "role": "imagery",
       "description": "Surface & clouds",
       "href": "https://science.nasa.gov/earth/"
-    },
-    {
-      "label": "ESA WorldCover",
-      "role": "imagery",
-      "description": "2021 WorldCover satellite composite via Terrascope, CC-BY-4.0",
-      "href": "https://esa-worldcover.org/en/data-access"
     },
     {
       "label": "JPL",

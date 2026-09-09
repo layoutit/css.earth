@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:gbo.ast.jpl.radar.shape_models:data:a2100rashalom_obj</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>(2100) Ra-Shalom 3-D radar shape model</title>
+    <information_model_version>1.10.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Shepard, M., Clark, B., Nolan, M., Benner, L., Ostro, S., Giorgini, J., Vilas, F.,
+Jarvis, K., Lederer, S., Lim, L., McConnochie, T., Bell, J., Margot, J., Rivkin, A.,
+Magri, C., Scheeres, D., and Pravec, P.</author_list>
+      <publication_year>2020</publication_year>
+      <description>This shape model of asteroid (2100) Ra-Shalom was created by Shepard et al. (2008)
+based on radar, optical and infrared observations.  The model provides a good match
+to the imagine resolution of 75 to 150 m.</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2000-08-26Z</start_date_time>
+      <stop_date_time>2006-08-15Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Shape Model</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>None</name>
+      <type>Other Investigation</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:individual.none</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>305-m fixed spherical reflecting antenna</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Observatory</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo 2380 MHz Radar Receiver</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.recv_s</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>305-m fixed spherical reflecting antenna</name>
+        <type>Telescope</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:telescope:arecibo.305m</lid_reference>
+          <reference_type>is_telescope</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Observatory</name>
+        <type>Observatory</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:facility:observatory.arecibo</lid_reference>
+          <reference_type>is_facility</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Arecibo Planetary Radar Transmitter</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:arecibo.305m.trans_s</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>(2100) Ra-Shalom</name>
+      <type>Asteroid</type>
+    </Target_Identification>
+  </Observation_Area>
+  <File_Area_Observational>
+    <File>
+      <file_name>a2100rashalom.obj</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2020-02-20</creation_date_time>
+      <file_size unit="byte">110080</file_size>
+      <records>3440</records>
+    </File>
+    <Table_Character>
+      <local_identifier>Vertex_table</local_identifier>
+      <offset unit="byte">0</offset>
+      <records>1148</records>
+      <description>The VERTEX_TABLE is the first part of the file and describes the positions of the
+vertices of the shape model.  The floating point numbers x1 y1 z1 are the coordinates
+of vertex 1, and so on.  The units are kilometers (km).</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">33</record_length>
+        <Field_Character>
+          <name>Vertex Flag</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>A "v" indicates this record contains the coordinates of a vertex</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>x</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">3</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9.6f</field_format>
+          <description>X coordinate of the vertex</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>y</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">13</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9.6f</field_format>
+          <description>Y coordinate of the vertex</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>z</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">23</field_location>
+          <data_type>ASCII_Real</data_type>
+          <field_length unit="byte">9</field_length>
+          <field_format>%9.6f</field_format>
+          <description>Z coordinate of the vertex</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+    <Table_Character>
+      <local_identifier>Facet_table</local_identifier>
+      <offset unit="byte">37884</offset>
+      <records>2292</records>
+      <description>The FACET_TABLE is the second part of the shape model file providing the linking of
+vertices into facets.  The integers i1 j1 k1 are the indices of the 3 vertices that 
+form the triangular facet 1, and so on.  The units are kilometers (km).</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <Record_Character>
+        <fields>4</fields>
+        <groups>0</groups>
+        <record_length unit="byte">33</record_length>
+        <Field_Character>
+          <name>Facet flag</name>
+          <field_number>1</field_number>
+          <field_location unit="byte">1</field_location>
+          <data_type>ASCII_String</data_type>
+          <field_length unit="byte">1</field_length>
+          <field_format>%-1s</field_format>
+          <description>An "f" indicates this record contains the indices of three vertices defining a
+single, triangular, facet.</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>f1</name>
+          <field_number>2</field_number>
+          <field_location unit="byte">8</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">4</field_length>
+          <field_format>%4d</field_format>
+          <description>Index of the first vertex</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>f2</name>
+          <field_number>3</field_number>
+          <field_location unit="byte">18</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">4</field_length>
+          <field_format>%4d</field_format>
+          <description>Index of the second vertex</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+        <Field_Character>
+          <name>f3</name>
+          <field_number>4</field_number>
+          <field_location unit="byte">28</field_location>
+          <data_type>ASCII_Integer</data_type>
+          <field_length unit="byte">4</field_length>
+          <field_format>%4d</field_format>
+          <description>Index of the third vertex</description>
+          <Special_Constants>
+            <missing_constant>-999.99</missing_constant>
+          </Special_Constants>
+        </Field_Character>
+      </Record_Character>
+    </Table_Character>
+  </File_Area_Observational>
+</Product_Observational>
+

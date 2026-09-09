@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27500%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                500 Selinur (A903 BJ)          2026-Sep-08 10:25:32
+Rec #:     500 (+COV) Soln.date: 2026-Jun-05_03:40:54  # obs: 11675 (1903-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457294.5 ! 2015-Sep-29.00 (TDB)         Residual RMS= .19086
+   EC= .1460118842240427   QR= 2.23137056367795    TP= 2457415.7913277363
+   OM= 289.9420631717455   W=  74.55473345972983   IN= 9.77168763043699
+   A= 2.612882454049686    MA= 331.6955959479504   ADIST= 2.994394344421421
+   PER= 4.22365            N= .233358844           ANGMOM= .02750818
+   DAN= 2.46146            DDN= 2.66064            L= 4.2804995
+   B= 9.4155126            MOID= 1.25158           TP= 2016-Jan-28.2913277363
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 20.414             ROTPER= 8.0111
+   H= 9.45                 G= .150                 B-V= n.a.
+                           ALBEDO= .202            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#95, OCC=0
+2: source=ORB
+*******************************************************************************

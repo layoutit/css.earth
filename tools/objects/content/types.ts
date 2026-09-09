@@ -50,6 +50,7 @@ export interface LensRecipe {
   shortLabel?: string;
   description: string;
   summary?: string;
+  facts?: Array<{ id: string; label: string; value: string }>;
   title: string;
   filter?: string;
   qualification?: string;
@@ -146,7 +147,7 @@ export interface PreparedObjectContent {
   lenses: {
     title: { label: string; src: string; width: number; height: number };
     defaultLens: string;
-    controls: Array<Record<string, unknown>>;
+    controls: Array<Record<string, unknown> & Pick<LensRecipe, "facts">>;
   };
   settings: {
     title: { label: string; src: string; width: number; height: number };

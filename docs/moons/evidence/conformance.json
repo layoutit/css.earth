@@ -1,0 +1,506 @@
+[
+  {
+    "id": "kiviuq",
+    "applicationCommit": "139ea73d",
+    "note": "Subsequent 67P-only merge preserves both moon prepared hashes and the renderer sources.",
+    "cases": [
+      {
+        "name": "kiviuq/initial-shell",
+        "milliseconds": 4640
+      },
+      {
+        "name": "kiviuq/desktop",
+        "milliseconds": 9788
+      },
+      {
+        "name": "kiviuq/mobile",
+        "milliseconds": 2865
+      },
+      {
+        "name": "kiviuq/pre-ready-hidden-motion-off",
+        "milliseconds": 2841
+      },
+      {
+        "name": "kiviuq/pre-ready-visible-motion-off",
+        "milliseconds": 2898
+      },
+      {
+        "name": "kiviuq/pre-ready-hidden-motion-on",
+        "milliseconds": 2831
+      },
+      {
+        "name": "kiviuq/pre-ready-visible-motion-on",
+        "milliseconds": 2844
+      },
+      {
+        "name": "kiviuq/dpr-1",
+        "milliseconds": 17858
+      },
+      {
+        "name": "kiviuq/dpr-2",
+        "milliseconds": 17753
+      }
+    ],
+    "result": {
+      "ok": true,
+      "reports": [
+        {
+          "id": "kiviuq",
+          "viewport": "initial-shell",
+          "speedDisabled": false
+        },
+        {
+          "id": "kiviuq",
+          "viewport": "desktop",
+          "surfaceFlyTo": {
+            "pitchDelta": -20.54870119779431,
+            "zoomRatio": 2.8110312534607345
+          },
+          "zoomPublication": {
+            "skyCube": 0,
+            "skyOrientation": 0
+          },
+          "projectiveTextureReport": {
+            "texturedLeafCount": 480,
+            "nestedProjectiveTextureCount": 0,
+            "finiteTextureBounds": true
+          },
+          "mountedPlanets": 1,
+          "stageCount": 1,
+          "cameraCount": 1,
+          "canvasCount": 0,
+          "sceneSvgCount": 0,
+          "stageChildren": 6,
+          "stageElements": 52317,
+          "stable": true,
+          "retainedProof": {
+            "initialNodeCount": 52317,
+            "currentNodeCount": 52317,
+            "maximumNodeCount": 52317,
+            "initialNodesIntact": true,
+            "shellTextNodesIntact": true,
+            "undeclaredAddedRoots": [],
+            "undeclaredRemovedRoots": [],
+            "allowedMounts": []
+          }
+        },
+        {
+          "id": "kiviuq",
+          "viewport": "mobile",
+          "mountedPlanets": 1,
+          "stageCount": 1,
+          "cameraCount": 1,
+          "canvasCount": 0,
+          "sceneSvgCount": 0,
+          "stageChildren": 6,
+          "stageElements": 52317,
+          "stable": true
+        },
+        {
+          "id": "kiviuq",
+          "viewport": "pre-ready-hidden-motion-off",
+          "animationCount": 0
+        },
+        {
+          "id": "kiviuq",
+          "viewport": "pre-ready-visible-motion-off",
+          "animationCount": 0
+        },
+        {
+          "id": "kiviuq",
+          "viewport": "pre-ready-hidden-motion-on",
+          "animationCount": 0
+        },
+        {
+          "id": "kiviuq",
+          "viewport": "pre-ready-visible-motion-on",
+          "animationCount": 0
+        },
+        {
+          "id": "kiviuq",
+          "viewport": "dpr-1",
+          "selectedDensity": 2,
+          "requestedCanonicalAssets": [
+            "/scenes/kiviuq/kiviuq-lighting.webp",
+            "/scenes/kiviuq/kiviuq-model-surface@2x.webp"
+          ],
+          "skyboxPointerBoundary": [
+            {
+              "zoom": 0.5894676061660542,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            },
+            {
+              "zoom": 0.38315394400793523,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            }
+          ],
+          "interactionInterruptions": {
+            "wheelInterruptedInertia": true,
+            "wheelZoomRatio": 1.2908752418181817,
+            "wheelAnchorRotationApplied": true,
+            "pointerStoppedInertia": true,
+            "captureLossStoppedDrag": true,
+            "wheelCoexistedWithFlyTo": true,
+            "dragInterruptedFlyTo": true,
+            "repeatedDoubleClickRestartedFlyTo": true,
+            "flyToCompletedAndRested": true,
+            "activeMotionCount": 0
+          },
+          "wheelTakeover": {
+            "bodyPressStopsWheel": true,
+            "skyPressStopsWheel": true,
+            "resetStopsWheel": true,
+            "heldWheelCancelsGrab": true
+          },
+          "releasePosition": {
+            "nonLaunchingReleaseRetainsDragPose": true,
+            "pausedReleaseCannotRestartMotion": true
+          },
+          "video": "kiviuq-dpr-1.webm"
+        },
+        {
+          "id": "kiviuq",
+          "viewport": "dpr-2",
+          "selectedDensity": 2,
+          "requestedCanonicalAssets": [
+            "/scenes/kiviuq/kiviuq-lighting.webp",
+            "/scenes/kiviuq/kiviuq-model-surface@2x.webp"
+          ],
+          "skyboxPointerBoundary": [
+            {
+              "zoom": 0.5894676061660542,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            },
+            {
+              "zoom": 0.38315394400793523,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            }
+          ],
+          "interactionInterruptions": {
+            "wheelInterruptedInertia": true,
+            "wheelZoomRatio": 1.6839073054545455,
+            "wheelAnchorRotationApplied": true,
+            "pointerStoppedInertia": true,
+            "captureLossStoppedDrag": true,
+            "wheelCoexistedWithFlyTo": true,
+            "dragInterruptedFlyTo": true,
+            "repeatedDoubleClickRestartedFlyTo": true,
+            "flyToCompletedAndRested": true,
+            "activeMotionCount": 0
+          },
+          "wheelTakeover": {
+            "bodyPressStopsWheel": true,
+            "skyPressStopsWheel": true,
+            "resetStopsWheel": true,
+            "heldWheelCancelsGrab": true
+          },
+          "releasePosition": {
+            "nonLaunchingReleaseRetainsDragPose": true,
+            "pausedReleaseCannotRestartMotion": true
+          },
+          "video": "kiviuq-dpr-2.webm"
+        }
+      ]
+    }
+  },
+  {
+    "id": "albiorix",
+    "applicationCommit": "139ea73d",
+    "note": "Subsequent 67P-only merge preserves both moon prepared hashes and the renderer sources.",
+    "cases": [
+      {
+        "name": "albiorix/initial-shell",
+        "milliseconds": 1494
+      },
+      {
+        "name": "albiorix/desktop",
+        "milliseconds": 9080
+      },
+      {
+        "name": "albiorix/mobile",
+        "milliseconds": 2698
+      },
+      {
+        "name": "albiorix/pre-ready-hidden-motion-off",
+        "milliseconds": 2604
+      },
+      {
+        "name": "albiorix/pre-ready-visible-motion-off",
+        "milliseconds": 2559
+      },
+      {
+        "name": "albiorix/pre-ready-hidden-motion-on",
+        "milliseconds": 2508
+      },
+      {
+        "name": "albiorix/pre-ready-visible-motion-on",
+        "milliseconds": 2513
+      },
+      {
+        "name": "albiorix/dpr-1",
+        "milliseconds": 17456
+      },
+      {
+        "name": "albiorix/dpr-2",
+        "milliseconds": 17432
+      }
+    ],
+    "result": {
+      "ok": true,
+      "reports": [
+        {
+          "id": "albiorix",
+          "viewport": "initial-shell",
+          "speedDisabled": false
+        },
+        {
+          "id": "albiorix",
+          "viewport": "desktop",
+          "surfaceFlyTo": {
+            "pitchDelta": -20.548701164827413,
+            "zoomRatio": 2.811031254449414
+          },
+          "zoomPublication": {
+            "skyCube": 0,
+            "skyOrientation": 0
+          },
+          "projectiveTextureReport": {
+            "texturedLeafCount": 480,
+            "nestedProjectiveTextureCount": 0,
+            "finiteTextureBounds": true
+          },
+          "mountedPlanets": 1,
+          "stageCount": 1,
+          "cameraCount": 1,
+          "canvasCount": 0,
+          "sceneSvgCount": 0,
+          "stageChildren": 6,
+          "stageElements": 52349,
+          "stable": true,
+          "retainedProof": {
+            "initialNodeCount": 52349,
+            "currentNodeCount": 52349,
+            "maximumNodeCount": 52349,
+            "initialNodesIntact": true,
+            "shellTextNodesIntact": true,
+            "undeclaredAddedRoots": [],
+            "undeclaredRemovedRoots": [],
+            "allowedMounts": []
+          }
+        },
+        {
+          "id": "albiorix",
+          "viewport": "mobile",
+          "mountedPlanets": 1,
+          "stageCount": 1,
+          "cameraCount": 1,
+          "canvasCount": 0,
+          "sceneSvgCount": 0,
+          "stageChildren": 6,
+          "stageElements": 52349,
+          "stable": true
+        },
+        {
+          "id": "albiorix",
+          "viewport": "pre-ready-hidden-motion-off",
+          "animationCount": 0
+        },
+        {
+          "id": "albiorix",
+          "viewport": "pre-ready-visible-motion-off",
+          "animationCount": 0
+        },
+        {
+          "id": "albiorix",
+          "viewport": "pre-ready-hidden-motion-on",
+          "animationCount": 0
+        },
+        {
+          "id": "albiorix",
+          "viewport": "pre-ready-visible-motion-on",
+          "animationCount": 0
+        },
+        {
+          "id": "albiorix",
+          "viewport": "dpr-1",
+          "selectedDensity": 2,
+          "requestedCanonicalAssets": [
+            "/scenes/albiorix/albiorix-lighting.webp",
+            "/scenes/albiorix/albiorix-model-surface@2x.webp"
+          ],
+          "skyboxPointerBoundary": [
+            {
+              "zoom": 0.8499278653356802,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            },
+            {
+              "zoom": 0.5524531124681922,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            }
+          ],
+          "interactionInterruptions": {
+            "wheelInterruptedInertia": true,
+            "wheelZoomRatio": 1.2908752418181817,
+            "wheelAnchorRotationApplied": true,
+            "pointerStoppedInertia": true,
+            "captureLossStoppedDrag": true,
+            "wheelCoexistedWithFlyTo": true,
+            "dragInterruptedFlyTo": true,
+            "repeatedDoubleClickRestartedFlyTo": true,
+            "flyToCompletedAndRested": true,
+            "activeMotionCount": 0
+          },
+          "wheelTakeover": {
+            "bodyPressStopsWheel": true,
+            "skyPressStopsWheel": true,
+            "resetStopsWheel": true,
+            "heldWheelCancelsGrab": true
+          },
+          "releasePosition": {
+            "nonLaunchingReleaseRetainsDragPose": true,
+            "pausedReleaseCannotRestartMotion": true
+          },
+          "video": "albiorix-dpr-1.webm"
+        },
+        {
+          "id": "albiorix",
+          "viewport": "dpr-2",
+          "selectedDensity": 2,
+          "requestedCanonicalAssets": [
+            "/scenes/albiorix/albiorix-lighting.webp",
+            "/scenes/albiorix/albiorix-model-surface@2x.webp"
+          ],
+          "skyboxPointerBoundary": [
+            {
+              "zoom": 0.8499278653356802,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            },
+            {
+              "zoom": 0.5524531124681922,
+              "sky": {
+                "x": 1168,
+                "y": 96
+              },
+              "clickSky": {
+                "x": 1168,
+                "y": 96
+              },
+              "body": {
+                "x": 600,
+                "y": 400
+              },
+              "passed": true
+            }
+          ],
+          "interactionInterruptions": {
+            "wheelInterruptedInertia": true,
+            "wheelZoomRatio": 1.6839073054545455,
+            "wheelAnchorRotationApplied": true,
+            "pointerStoppedInertia": true,
+            "captureLossStoppedDrag": true,
+            "wheelCoexistedWithFlyTo": true,
+            "dragInterruptedFlyTo": true,
+            "repeatedDoubleClickRestartedFlyTo": true,
+            "flyToCompletedAndRested": true,
+            "activeMotionCount": 0
+          },
+          "wheelTakeover": {
+            "bodyPressStopsWheel": true,
+            "skyPressStopsWheel": true,
+            "resetStopsWheel": true,
+            "heldWheelCancelsGrab": true
+          },
+          "releasePosition": {
+            "nonLaunchingReleaseRetainsDragPose": true,
+            "pausedReleaseCannotRestartMotion": true
+          },
+          "video": "albiorix-dpr-2.webm"
+        }
+      ]
+    }
+  }
+]

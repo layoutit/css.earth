@@ -28,6 +28,11 @@
           "projection": "equirectangular",
           "lenses": [
             {
+              "id": "osiris",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "normal",
               "source": "content",
               "material": "lighting"
@@ -56,7 +61,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "be4ad9616171869ae427b82a8fdee9a9afadf0f01e7d3c26d61083243b2d67e7"
+          "sha256": "3fda09b292444c3995018427bd5d947fa2de9dfd592bcdf8885fcba760cfb612"
         },
         {
           "id": "rotation",
@@ -81,7 +86,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e911caa28be1088c5f599f16dbddfee2251338d1d96891817a7b6ded1a2ac7a3"
+          "sha256": "53218f3520a508eaf8e2949c607c1dd581e3cb1fc4731cf193d66a4225e24b05"
         }
       ]
     },

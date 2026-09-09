@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2777777%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  77777 (2001 QW16)            2026-Sep-08 10:26:18
+Rec #:   77777 (+COV) Soln.date: 2026-Jun-06_11:51:26   # obs: 3702 (1999-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458514.5 ! 2019-Jan-31.00 (TDB)         Residual RMS= .25369
+   EC= .08665460816250312  QR= 2.897801229508098   TP= 2459505.1975430385
+   OM= 25.41568392288318   W=  151.3173331464262   IN= 4.828305963266646
+   A= 3.172733180027559    MA= 187.2194571301132   ADIST= 3.447665130547019
+   PER= 5.65143            N= .174402919           ANGMOM= .03052541
+   DAN= 3.40799            DDN= 2.92644            L= 176.8186976
+   B= 2.3152729            MOID= 1.90252995        TP= 2021-Oct-17.6975430385
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 5.2015             ROTPER= n.a.
+   H= 13.51                G= .150                 B-V= n.a.
+                           ALBEDO= .086            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#59, OCC=0
+2: source=ORB
+*******************************************************************************

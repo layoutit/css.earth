@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2752760%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  52760 (1998 ML14)            2026-Sep-08 08:22:12
+Rec #:   52760 (+COV) Soln.date: 2025-Mar-23_06:20:58    # obs: 708 (1998-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458234.5 ! 2018-Apr-26.00 (TDB)         Residual RMS= .24295
+   EC= .6233806419829927   QR= .9070223172394208   TP= 2457918.7204614449
+   OM= 338.7207543133677   W=  20.31618623730603   IN= 2.427524973949589
+   A= 2.408326332494204    MA= 83.27507994664791   ADIST= 3.909630347748988
+   PER= 3.7375             N= .263712717           ANGMOM= .020873756
+   DAN= .92922             DDN= 3.54464            L= 359.0201972
+   B= .8426163             MOID= .0165781          TP= 2017-Jun-14.2204614449
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= .500               ROTPER= 14.28
+   H= 17.52                G= .150                 B-V= n.a.
+                           ALBEDO= n.a.            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#159, PHA  OCC=0       radar(11 delay, 7 Dop.)
+2: source=ORB
+*******************************************************************************

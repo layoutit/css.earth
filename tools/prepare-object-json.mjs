@@ -6,6 +6,7 @@ import { OBJECTS } from '../site/objects.mjs';
 import { authoredObject } from './authored-object.mjs';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mjs';
 import { writePreparedText } from './write-prepared-text.mjs';
+import { prepareMarkerBindings } from './prepare-marker-bindings.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = 'cssearth-css-object@4';
@@ -21,6 +22,7 @@ export async function writeObjectJson(id, definition, options) {
   }
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./objects/dist/prepare-world-navigation.js');
   const objectDirectory = resolve(root, 'src/planets', id);
+  definition = prepareMarkerBindings(definition);
   const preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot: root });
   definition = preparedNavigation.definition;
   definition = await preparePresentationBindings(definition, root, options);

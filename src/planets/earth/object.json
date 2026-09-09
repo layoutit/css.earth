@@ -26,7 +26,7 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "d7942782e6b46ec8618179f21e78f2b827e4dcc81ec9e1c590f9a664068edb55"
+          "sha256": "0a7a5812e30473533294696ce30e3ad362300bdfbec1b34fbfeffc53ad383933"
         },
         {
           "id": "celestial",
@@ -41,7 +41,7 @@
         {
           "id": "lens-bindings",
           "path": "source/content/lens-bindings.json",
-          "sha256": "3f92243f419cb28dbc9539459547114a237f0800862feabd557a127dd1009618"
+          "sha256": "f33c39cc2344ef29882a4d22587bc473c02ecd4407ea45669b4fe90563c17717"
         },
         {
           "id": "charts",
@@ -77,11 +77,6 @@
           "lenses": [
             {
               "id": "normal",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "buenos-aires-noise",
               "source": "content",
               "material": "lighting"
             },
@@ -123,17 +118,6 @@
       "atmosphere": {
         "source": "paged-ellipsoid",
         "material": "atmosphere"
-      },
-      "paging": {
-        "source": "paged-ellipsoid",
-        "surface": "body",
-        "maxResidentPages": 512,
-        "maxResidentBytes": 134217728,
-        "maxConcurrentLoads": 4
-      },
-      "destinations": {
-        "source": "paged-ellipsoid",
-        "maxEntries": 34135
       }
     },
     "worldFrame": {
@@ -160,7 +144,7 @@
         -0.3977771559319137,
         0.9174820620691819
       ],
-      "metersPerUnit": 25210.02766798419,
+      "metersPerUnit": 27731.03043478261,
       "bodyRadiusM": 6378137
     }
   },

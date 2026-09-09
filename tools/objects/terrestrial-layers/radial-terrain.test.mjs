@@ -4,7 +4,7 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from './radial-terrain.mjs';
+import { loadRadialTerrain, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from './radial-terrain.mjs';
 import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mjs';
 
 test('source topology preserves translated inward-facing facets and welds duplicated positions', async () => {
@@ -83,5 +83,37 @@ END\n`;
     assert.equal(grid.sample(180, 0), null);
     assert.equal(grid.sample(160, 5), null);
     assert.throws(() => parsePdsScalarLabel(label.replace('EAST', 'WEST'), profile), /coordinate system/);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
+
+test('two-sided radial preparation retains exact source geometry and atlas layout with opt-in coverage', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-radial-backface-'));
+  try {
+    await writeFile(join(directory, 'shape.obj'), 'v 1 0 0\nv 0 1 0\nv 0 0 1\nv 0 0 0\nf 1 2 3\nf 1 4 2\nf 2 4 3\nf 3 4 1\n');
+    const config = { namespace: 'fixture', geometry: { radius: 1, radiusKm: .001,
+      radialTerrain: { path: 'shape.obj', format: 'wavefront-obj', tileSize: 16, atlasColumns: 2,
+        grid: { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }, faceBudget: 4,
+        simplification: { method: 'source-meshoptimizer', targetFaces: 4, maximumErrorMeters: .001 } } } };
+    let validations = 0;
+    const source = { manifest: { inputs: [] }, async validatePath(path) { assert.equal(path, 'shape.obj'); validations++; } };
+    const prepare = async value => {
+      const profile = structuredClone(config);
+      if (value !== undefined) profile.geometry.radialTerrain.backfaceVisible = value;
+      return loadRadialTerrain({ config: profile, sourceDirectory: directory, source });
+    };
+    const baseline = await prepare(undefined), explicitDefault = await prepare(false), twoSided = await prepare(true);
+    const { grid: baselineGrid, ...baselineOutput } = baseline;
+    const { grid: explicitGrid, ...explicitOutput } = explicitDefault;
+    assert.deepEqual(explicitOutput, baselineOutput, 'omission and false preserve existing outputs');
+    assert.deepEqual(explicitGrid.positions, baselineGrid.positions);
+    assert.deepEqual(explicitGrid.indices, baselineGrid.indices);
+    assert.deepEqual(twoSided.faces, baseline.faces);
+    assert.deepEqual(twoSided.plans, baseline.plans);
+    assert.equal(twoSided.leaves.length, baseline.leaves.length);
+    assert.deepEqual(twoSided.leaves.map(leaf => ({ ...leaf, style: leaf.style.replace(';backface-visibility:visible', '') })), baseline.leaves);
+    assert.equal(validations, 3, 'all valid variants still validate the owned mesh source');
+    for (const value of ['true', 1, null]) await assert.rejects(prepare(value), /backface visibility must be boolean/);
+    assert.equal(validations, 3, 'invalid coverage policy is rejected before source loading');
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

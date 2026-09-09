@@ -1,0 +1,200 @@
+{
+  "schema": "csshyrrokkin-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "lightcurve-approximation",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 59703,
+      "expectedSha256": "3b7570478ea43376f1ba9fecf45c3e5ef54a495f4fd2fdb4cf306bccf4bff8a3",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+      "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
+      "license": "MIT authored representation from published scientific parameters",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/hyrrokkin/"
+      ],
+      "acquisition": "Checked-in data. Formula, lower-limit interpretation, adopted scale and assumptions are in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Approximate ellipsoid adopting minimum equatorial ratio 1.27:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 3800
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+      "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
+      "license": "MIT authored representation from published scientific parameters",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://tilmanndenk.de/outersaturnianmoons/hyrrokkin/"
+      ],
+      "acquisition": "Checked-in data. Formula, lower-limit interpretation, adopted scale and assumptions are in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Approximate ellipsoid adopting minimum equatorial ratio 1.27:1 under uniform reflectivity. Equal short axes and volume scaling are assumed. Orientation and phase are illustrative. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 3800
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3843,
+      "expectedSha256": "b35e229d1881236f07ce7b6e55ee7af41a516cfc66987ab1a87f35d833c28073",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1928,
+      "expectedSha256": "42954ccee8b737e43de747fd6eb33bd91943c328e3172452b5b9b41a32cb4000",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1375,
+      "expectedSha256": "f8f599e039ff274c49fe7c04e406fe11e7c13eed645e4949948671163511d5a6",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 435,
+      "expectedSha256": "26e0956a2aa85415020b3d760f100882f0b3c5ce17ac9d5225647f9ec3518ed9",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2507,
+      "expectedSha256": "c95f691026b8a47d77d690c4303da5036c43f184f830319af04c4db9512a2454",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3238,
+      "expectedSha256": "3a77455416b0bcf5def2cd574832ea1eccdbf79c99def71a6c4685d44f508404",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 852,
+      "expectedSha256": "8a0934d59fa848203a5b1ffb37ac428a6e34c8fafedb788a02bce8db29356b3e",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "survey/research.json",
+      "expectedBytes": 5749,
+      "expectedSha256": "fd242d1c85334571f545953be7ad0cb85446ece8ba7f4d73cb7e850e9c35da7c",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    },
+    {
+      "path": "validation/orbit-checks.json",
+      "expectedBytes": 25865,
+      "expectedSha256": "354716cacd2f633094715a0333d84cbdd751a8b27c3c12f891d477e6f2bc8f7a",
+      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+      "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
+      "license": "MIT display representation from published scientific measurements; retain source citation.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "lightcurve-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 76790,
+      "expectedSha256": "e791728a97ed6ae30aaf34ea5b6a81f1ae36c4a326217e74c339621ac54822d9"
+    }
+  ]
+}

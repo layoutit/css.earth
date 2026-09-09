@@ -9,7 +9,28 @@
 
 import type { SatelliteRecord } from './satelliteElements.data.js'
 
-export const SATELLITE_ELEMENTS_NEPTUNE = {
+export const SATELLITE_ELEMENTS_NEPTUNE: Readonly<Record<'nereid' | 'triton' | 'proteus' | 'larissa' | 'naiad' | 'thalassa' | 'despina' | 'galatea', SatelliteRecord>> = {
+  nereid: {
+    parent: 'neptune',
+    horizonsCode: '802',
+    fitFromJdTdb: 2458849.5,
+    fitToJdTdb: 2463232.5,
+    fitStepDays: 5,
+    poleRightAscensionRad: -1.695375960896,
+    poleDeclinationRad: 1.091654270502,
+    elements: {
+      epochJdTt: 2451545,
+      semiMajorAxisKm: 5513627.134,
+      eccentricity: 0.745919992331,
+      inclinationRad: 0.000119773436,
+      ascendingNodeRad: -1.049608347073,
+      argumentOfPeriapsisRad: -0.641573551197,
+      meanAnomalyAtEpochRad: -115.619068950216,
+      meanMotionRadPerDay: 0.017449662191936,
+      ascendingNodeRateRadPerDay: 0.000998283325439008,
+      argumentOfPeriapsisRateRadPerDay: -0.000999310101091455,
+    },
+  },
   triton: {
     parent: 'neptune',
     horizonsCode: '801',

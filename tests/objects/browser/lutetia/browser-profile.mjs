@@ -8,17 +8,18 @@ export const browserProfile=createObjectBrowserProfile({id:'lutetia',controls,au
     }
   ],
   "canonicalPreparedAssets": [
-    "/scenes/lutetia/lutetia-shape-surface@2x.webp"
+    "/scenes/lutetia/lutetia-osiris-surface@2x.webp"
   ],
   "lensRace": {
-    "defaultId": "shape",
-    "slowId": "elevation",
-    "winnerId": "shape",
-    "slowAsset": "/scenes/lutetia/lutetia-elevation-surface@2x.webp",
+    "defaultId": "osiris",
+    "slowId": "shape",
+    "winnerId": "osiris",
+    "slowAsset": "/scenes/lutetia/lutetia-shape-surface@2x.webp",
     "preReadyDisabled": true
   },
   "retained": {
     "lensIds": [
+      "osiris",
       "shape",
       "elevation"
     ],

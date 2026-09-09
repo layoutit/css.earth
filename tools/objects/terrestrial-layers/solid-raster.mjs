@@ -14,6 +14,8 @@ import { prepareControlledOrthographicMosaic } from './controlled-orthographic-m
 import { prepareShapeCameraMosaic } from './shape-camera-mosaic.mjs';
 import { preparePdsByteMosaic } from './pds-byte-mosaic.mjs';
 import {loadControlledObservationGeometry,matchObservedColorLevels} from './photometric-observations.mjs';
+import { loadGeoObservationSurface } from './observed-geo-surface.mjs';
+import { renderRadialSnapshot } from './radial-snapshot.mjs';
 
 export function createRasterEmitter(publicDirectory, publicBase) {
   return async (filename, pipeline, encoding = { lossless: true, effort: 4 }) => {
@@ -127,17 +129,39 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     surfaces.push(await packSurface(recipe.id, rgb, missing, { ...recipe.metadata,
       sourceIds: tiles.map(tile => tile.id), sourceGrid: grid }));
   }
+  for (const recipe of config.raster.surfaceObservations ?? []) {
+    if (!radial?.grid?.closestPoint) throw new Error('Georeferenced observations require source-preserving terrain.');
+    const observation = await loadGeoObservationSurface({ sourceDirectory, source, recipe, radial, config });
+    radial.observationSurfaces ??= new Map();
+    radial.observationSurfaces.set(recipe.id, observation);
+    const { rgb, missing } = observation.preview(width, height);
+    const surface = await packSurface(recipe.id, rgb, missing, { ...recipe.metadata, observation: observation.report });
+    const eye = observation.report.camera.positionKm;
+    const snapshot = await renderRadialSnapshot({ faces: radial.faces, sampleSurface: observation.samplePoint, size: 96,
+      longitudeDegrees: Math.atan2(eye[1], eye[0]) * 180 / Math.PI,
+      latitudeDegrees: Math.atan2(eye[2], Math.hypot(eye[0], eye[1])) * 180 / Math.PI, ambient: .4, diffuse: .6 });
+    surface.thumbnail = await emit(`${config.namespace}-${recipe.id}-thumbnail.webp`, sharp(snapshot).resize(48, 48)
+      .extend({ left: 24, right: 24, top: 0, bottom: 0, background: { r: 0, g: 0, b: 0, alpha: 0 } }));
+    surfaces.push(surface);
+  }
   for (const lens of config.raster.scientific ?? []) {
     await source.validateGroup(lens.consumer);
     const entry = source.manifest.inputs.find(input => input.lensId === lens.id);
-    if (!entry || entry.path !== lens.path) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
+    if (!entry || entry.path !== (lens.facetField?.path ?? lens.path)) throw new Error(`Scientific source ${lens.id} differs from its manifest.`);
+    if (lens.facetField && ![lens.path, lens.facetField.labelPath].every(path => source.manifest.inputs.some(input =>
+      input.path === path && input.consumers.includes(lens.consumer)))) throw new Error('Facet field lacks its pinned source mesh or label.');
     const additionalSources = (lens.additionalGrids ?? []).map(grid => {
       const input = source.manifest.inputs.find(input => input.path === grid.path && input.consumers.includes(lens.consumer));
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
       return {id: input.id, sha256: input.expectedSha256, width: input.width, height: input.height};
     });
-    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || lens.path !== config.geometry.radialTerrain.path)) {
+    if (lens.surfaceSampling && (!radial?.grid?.closestPoint || (lens.format !== 'pds3-scalar-map' && lens.path !== config.geometry.radialTerrain.path))) {
       throw new Error('Source-surface science requires the actual rendered source mesh.');
+    }
+    if (lens.format === 'pds3-scalar-map') {
+      for (const path of [lens.labelPath, lens.surfaceSampling.ambiguityReference.path]) {
+        if (!source.manifest.inputs.some(input => input.path === path && input.consumers.includes(lens.consumer))) throw new Error(`Unpinned scalar-map dependency: ${path}`);
+      }
     }
     // Reuse the already loaded geometry BVH, especially for large OLA meshes.
     const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling ? radial.grid : undefined);
@@ -153,6 +177,8 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       source: { id: entry.id, sha256: entry.expectedSha256, width: entry.width, height: entry.height },
       ...(additionalSources.length ? {additionalSources} : {}),
       projection: entry.projection, coverage: entry.coverage, scientific: true, legend,
+      ...(raster.fieldReport ? { facetField: raster.fieldReport } : {}),
+      ...(raster.report ? { scalarMap: raster.report } : {}),
       ...(lens.surfaceSampling ? { surfaceSampling: { ...lens.surfaceSampling,
         previewPolicy: 'Radial rays with more than one distinct source intersection are withheld; the triangle atlas samples the source surface in 3D.' } } : {}),
       missingPixels: missing.reduce((sum, value) => sum + value, 0) }));

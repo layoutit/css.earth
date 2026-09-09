@@ -93,6 +93,12 @@ test('satellite ellipses are translated to their parent with exact prepared cent
   assert.deepEqual(orbit.centerPositionM, states.parent!.positionM);
   assert.equal(orbit.centerBodyId, 'parent');
   assert.deepEqual(orbit.verticesM[0], [1007, 0, 0]);
+  assert(orbit.bounds.radiusM > 0);
+  assert.deepEqual(orbit.activeChords, orbit.trail.flatMap((weight, index) => weight > 0 ? [index] : []));
+  for (const index of orbit.activeChords) for (const vertex of [orbit.verticesM[index]!, orbit.verticesM[(index + 1) % orbit.verticesM.length]!]) {
+    assert(Math.hypot(...vertex.map((value, axis) => value - orbit.bounds.centerM[axis]!)) <= orbit.bounds.radiusM,
+      'prepared bound includes every active endpoint and therefore its convex chords');
+  }
   assert(Math.abs(orbit.verticesM[8]![0] - 987) < 1e-10, 'apocentre must remain around the parent, not the global origin');
   for (const [x, y, z] of orbit.verticesM) {
     assert(Math.abs(((x - 997) / 10) ** 2 + (y / Math.sqrt(91)) ** 2 - 1) < 1e-12);
@@ -102,6 +108,27 @@ test('satellite ellipses are translated to their parent with exact prepared cent
     satellite: { ...states.satellite!, centerPositionM: [0, 0, 0] } }), /parent/);
   assert.throws(() => prepareWorldContext(config, facts, { ...states,
     parent: { ...states.parent!, centerBodyId: 'satellite', centerPositionM: states.satellite!.positionM } }), /hierarchy/);
+
+  // A coordinate-only primary carries no body facts and emits no marker.
+  const visible = { ...config, bodies: [bodies[1]!] };
+  const visibleStates = { satellite: states.satellite! };
+  const centers = { parent: { positionM: states.parent!.positionM, centerBodyId: source.focus.id } };
+  const hiddenParent = prepareWorldContext(visible, { satellite: facts.satellite }, visibleStates, centers);
+  assert.deepEqual(hiddenParent.bodies.map(body => body.id), ['satellite']);
+  assert.deepEqual(hiddenParent.bodies[0]!.orbit, orbit);
+  assert.deepEqual(hiddenParent.orbitCenters, centers);
+  assert.throws(() => prepareWorldContext(visible, facts, visibleStates), /parent/);
+  assert.throws(() => prepareWorldContext(visible, facts, visibleStates,
+    { parent: { ...centers.parent, positionM: [1001, 0, 0] } }), /parent/);
+  assert.throws(() => prepareWorldContext(visible, facts, visibleStates,
+    { parent: { ...centers.parent, centerBodyId: 'satellite' } }), /hierarchy/);
+  assert.throws(() => prepareWorldContext(visible, facts, visibleStates,
+    { parent: { ...centers.parent, centerBodyId: 'missing' } }), /hierarchy/);
+  assert.throws(() => prepareWorldContext(config, facts, states, centers), /duplicates/);
+  assert.throws(() => prepareWorldContext(visible, facts, visibleStates,
+    { parent: { ...centers.parent, positionM: [NaN, 0, 0] } }), /finite/);
+  assert.throws(() => prepareWorldContext(visible, facts, visibleStates,
+    { ...centers, unused: { positionM: [0, 0, 0], centerBodyId: 'unused' } }), /hierarchy/);
 });
 
 test('prepared sky registration preserves the legacy default sky and rejects a missing baseline', async () => {

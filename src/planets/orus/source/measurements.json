@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "orus",
+  "source": {
+    "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
+    "papers": [
+      "https://doi.org/10.3847/PSJ/acaf79",
+      "https://doi.org/10.1007/s11214-025-01173-7"
+    ],
+    "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "fullAxesKm": [
+      70.7,
+      63,
+      51.4
+    ],
+    "semiAxesKm": [
+      35.35,
+      31.5,
+      25.7
+    ],
+    "fullAxesUncertaintyKm": null,
+    "referenceRadiusKm": 30.5875269554397,
+    "axisConvention": "Full axes are halved exactly. +Z is the adopted pole; +X is the arbitrary display meridian.",
+    "qualification": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. The original convex mesh and local concavities are not represented.",
+    "scale": "The reference radius is the geometric mean of the approximation semiaxes. It is a rendering scale, not an independent measured mean radius or convex-model volume."
+  },
+  "approximation": {
+    "semiAxesKm": [
+      35.35,
+      31.5,
+      25.7
+    ],
+    "assumptions": [
+      "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. The original convex mesh and local concavities are not represented.",
+      "Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
+    ],
+    "qualification": "Observation-constrained ellipsoid; no invented local terrain or albedo."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km",
+    "formula": "r = 1 / sqrt((cos(lat)*cos(lon)/a)^2 + (cos(lat)*sin(lon)/b)^2 + (sin(lat)/c)^2)"
+  },
+  "spin": {
+    "periodHours": 13.48619,
+    "periodText": "13.486190 ± 0.000017 h",
+    "poleEclipticDegrees": [
+      33,
+      -59
+    ],
+    "poleIcrfRaDecDegrees": [
+      54.173415088682646,
+      -42.44290791878544
+    ],
+    "eclipticToIcrfObliquityDegrees": 23.439291111,
+    "meridianDegrees": 0,
+    "meaning": "Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
+  },
+  "unresolved": [
+    "The checked paper's supporting material contains observation tables; an original downloadable convex mesh was not located.",
+    "The paper's 60.5 km surface-equivalent diameter is not a volume-equivalent diameter and is not used to rescale this approximation."
+  ],
+  "horizonsCommand": "21900;"
+}

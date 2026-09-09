@@ -1,3 +1,4 @@
+import { SCENE_SATELLITE_STATES } from './data/sceneSatelliteStates.data.js'
 import {
   DWARF_PLANET_IDS,
   PLANET_IDS,
@@ -62,6 +63,35 @@ const VSOP_THEORY_DISCREPANCY_KM: Record<Vsop87BodyKey, number> = {
  * statistical uncertainties.
  */
 const SATELLITE_FIXTURE_MAX_KM: Record<SatelliteId, number> = {
+  paaliaq: 14686.766060114216,
+  tarvos: 14289.465037346157,
+  ijiraq: 9349.305144460977,
+  suttungr: 5537.38631019438,
+  mundilfari: 10946.297914741323,
+  skathi: 3135.098354373108,
+  erriapus: 11239.635338310401,
+  thrymr: 6327.4731443519795,
+  bebhionn: 35180.27199442682,
+  bergelmir: 4370.567300408625,
+  bestla: 13244.793674351526,
+  fornjot: 9860.7522653543,
+  hati: 10819.137219892531,
+  hyrrokkin: 7535.372343890514,
+  loge: 8681.363318931204,
+  skoll: 7169.2594630787,
+  greip: 9025.010316663893,
+  tarqeq: 4847.555696729821,
+  caliban: 191.0088910188856,
+  sycorax: 748.3042107793555,
+  prospero: 716.900566808697,
+  setebos: 2497.9418798052484,
+  kiviuq: 28145.685414789965,
+  albiorix: 18473.578208360203,
+
+  siarnaq: 280355.5692405671,
+  ymir: 161334.72011835242,
+  nereid: 10417.19020260089,
+  himalia: 54960.50018520494,
   polydeuces: 939.7293216478489,
   anthe: 2029.4157931053912,
   aegaeon: 306.9010577737413,
@@ -175,7 +205,7 @@ ACCURACY_BY_FRAME.set(
     'sun',
     'Eight-planet mass-weighted barycentric correction',
     'fit-residual',
-    164.70978663615983,
+    164.71062368999685,
     VSOP87A_VALID_FROM_JD,
     VSOP87A_VALID_TO_JD,
     'JPL Horizons DE441 Sun-to-SSB vector fixtures',
@@ -226,7 +256,9 @@ for (const id of SATELLITE_IDS) {
     id,
     metadata(
       id,
-      'Precessing Kepler ellipse fitted to JPL Horizons osculating elements',
+      record.positionCorrection
+        ? 'Horizons-fitted precessing ellipse with prepared periodic ICRF residuals'
+        : 'Precessing Kepler ellipse fitted to JPL Horizons osculating elements',
       'fit-residual',
       SATELLITE_FIXTURE_MAX_KM[id],
       record.fitFromJdTdb,
@@ -236,6 +268,13 @@ for (const id of SATELLITE_IDS) {
       'Maximum sampled residual at the six committed vector-fixture epochs, which were not input samples to the element fit. It describes this compact fit only; it is neither a bound nor a statistical uncertainty.',
     ),
   )
+}
+
+// A retained state has one supported epoch, with source accuracy explicitly unquantified.
+for (const [id, record] of Object.entries(SCENE_SATELLITE_STATES)) {
+  ACCURACY_BY_FRAME.set(id, metadata(id, record.provenance.model, 'unknown', null,
+    record.epochJdTt, record.epochJdTt, 'Object-owned geometric state', record.provenance.source ?? '',
+    'Only the prepared scene epoch is supported. Source limitations are retained; coordinate-composition checks do not measure orbit accuracy.'))
 }
 
 for (const planet of PLANET_IDS) {

@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-observation-provenance@1",
+  "sourceIds": [
+    "osiris-20140805-geo",
+    "osiris-20140805-quality",
+    "osiris-20140805-2344-geo",
+    "osiris-20140805-2344-quality",
+    "osiris-20140806-0244-geo",
+    "osiris-20140806-0244-quality",
+    "osiris-20140806-0520-geo",
+    "osiris-20140806-0520-quality"
+  ],
+  "frame": "Corrected GEO XYZ are in the 67P body frame used by the SHAP7 product; projective camera fitted from their pixel correspondences, checked against held-out pixels and the RMOC shape.",
+  "quality": {
+    "radianceCompanion": "Every decoded L4 radiance pixel must equal its L5 counterpart before the quality map is used.",
+    "requiredBit": 1,
+    "allowedFlags": [
+      1,
+      9
+    ],
+    "rejected": "Missing VALID, bad, saturated, readout, nonlinear, shutter or reserved flags.",
+    "interpretation": "Bit 0 is positive VALID. The calibration-pipeline bit table and archived values take precedence over ambiguous all-zero wording in the science user guide. LOSSY is retained only for visual use."
+  },
+  "photometry": {
+    "source": "https://doi.org/10.1051/0004-6361/201525901",
+    "description": "Lommel-Seeliger disk normalization, D=2 cos(i)/(cos(i)+cos(e)); calibrated radiance divided by D before interpolation, normalized to D(0,0)=1. No phase, roughness or cast-shadow recovery. Not measured albedo.",
+    "applicationLighting": "Uniform flood displays normalized imagery without directional model lights. Shadows applies the existing source-mesh fixed-epoch Sun recipe. Both banks are prepared."
+  },
+  "manuals": [
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/calib/geo_products_v02.pdf",
+      "sha256": "f48bf2c2277248f558060a0d957a48397323044c505a474014e5c296e7e63e45",
+      "purpose": "Nine GEO planes, coordinates, angles and SHAP7 geometry."
+    },
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/calib/osiris_cal_pipeline_v06.pdf",
+      "sha256": "af602ed81e51b0705af474f8499078dab7a35ba316e694ab68eb3c26b1653624",
+      "purpose": "Section 3.15.2: quality bits; Section 3.16: GEO generated from L4 radiance."
+    },
+    {
+      "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/sis/osiris_sis_v05.pdf",
+      "sha256": "8f977b5de20ae9968ab53227bc22ece8b9ab8cc772eb9f328e9ffc14492e8c68",
+      "purpose": "PDS plane layout, stored image orientation and image metadata."
+    }
+  ],
+  "limits": [
+    "Four single-band observations within 9 hours 36 minutes; no color inference, extrapolation or backside fill.",
+    "RMOC and SHAP7 are distinct models; all sample correspondences are explicitly bounded.",
+    "Residual photographed cast shadows and scattering effects remain after disk normalization.",
+    "Positive, zero and negative finite radiance are retained when validity/geometry/photometry permit."
+  ],
+  "observations": [
+    {
+      "id": "aug05-1944",
+      "startTime": "2014-08-05T19:44:22.918",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "aug05-2344",
+      "startTime": "2014-08-05T23:44:24.891",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "aug06-0244",
+      "startTime": "2014-08-06T02:44:24.890",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "aug06-0520",
+      "startTime": "2014-08-06T05:20:22.894",
+      "filter": "FFP-Vis_Orange"
+    }
+  ],
+  "mosaic": {
+    "selection": "Lowest maximum source emission angle among qualified observations; source order breaks exact ties. No brightness-based coverage rejection.",
+    "levels": "One bounded gain per observation, fitted from robust log-ratios of co-located valid surface samples; first observation anchors the display. This is empirical level matching, not a phase correction.",
+    "display": "The first observation owns the common grayscale stretch.",
+    "sourceIndex": "The prepared lossless source-index raster records the winning observation at every atlas texel; zero marks no qualified observation."
+  }
+}

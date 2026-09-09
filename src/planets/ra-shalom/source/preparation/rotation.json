@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 71.46942211700359,
+  "declinationDegrees": 38.47926695546795,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "periodHours": 19.793,
+  "coordinateSystem": "Original body-fixed radar-model Cartesian axes; positive Z is the selected spin pole; east-positive longitude; arbitrary display phase",
+  "source": "Shepard et al. (2008), Icarus 193, 20–38; Arecibo and NASA/JPL radar astronomy: ecliptic J2000 lambda 75 deg, beta 16 deg, period 19.793 h; equatorial conversion uses J2000 obliquity 23.439291111 deg. This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied."
+}

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
@@ -15,6 +16,7 @@ import {
   BODY_FIXED_SUN_DIRECTIONS,
   BODY_FIXED_TO_ICRF_MATRICES,
   BODY_ORBITS,
+  BODY_HELIOCENTRIC_STATES,
   SOLAR_GEOMETRY_EPOCH_JD_TT,
 } from "./solar-geometry.mjs";
 import { loadAstronomyPackage } from "./astronomy-package.mjs";
@@ -72,6 +74,76 @@ test("satellite parent frames contain both close and distant moon orbits without
   }
 });
 
+test("companion parent rings reproduce the retained primary state, including its velocity and orbital plane", async () => {
+  const astronomy = await loadAstronomyPackage();
+  const mu = astronomy.BODIES.sun.gravitationalParameterKm3PerS2;
+  for (const id of ["hiiaka", "menoetius", "romulus"]) {
+    const receipt = JSON.parse(await readFile(new URL(`../planets/${id}/source/validation/epoch-state.json`, import.meta.url), "utf8"));
+    const state = receipt.parentHeliocentricState;
+    assert.ok(state, `${id}: a source-pinned primary state must exist`);
+    const frame = prepareEclipticPresentationFrame(id);
+    const kilometersPerUnit = astronomy.BODIES[id].meanRadiusKm / 230;
+    const system = await preparePlanetarySystem({ bodyId: id, presentationFrame: frame, kilometersPerUnit, astronomy });
+    const parent = system.bodies.find(body => body.id === astronomy.BODIES[id].parent);
+    const toScene = vector => frame.toPresentation(applyMatrix(transposeMatrix(BODY_FIXED_TO_ICRF_MATRICES[id]), vector));
+    const sourcePosition = toScene(state.positionKm);
+    const sourceVelocity = toScene(scale(state.velocityKmPerDay, 1 / 86400));
+    const retainedPosition = scale(subtract(parent.position, system.sun.position), kilometersPerUnit);
+    assert.ok(magnitude(subtract(retainedPosition, sourcePosition)) <= kilometersPerUnit,
+      `${id}: parent position must use the same retained primary, within integer scene rounding`);
+    assert.equal(parent.orbitSource, "source-primary-state-vector-via-solar-geometry");
+
+    // Independently reconstruct velocity from the prepared ellipse's radial
+    // and transverse components. A correct position alone cannot detect a
+    // stale conic, a reversed normal, or a mismatched perihelion direction.
+    const radial = scale(sourcePosition, 1 / magnitude(sourcePosition));
+    const transverse = cross(parent.orbit.normal, radial);
+    const semiLatusRectumKm = parent.semiMajorAxisAu * ASTRONOMICAL_UNIT_KILOMETERS * (1 - parent.eccentricity ** 2);
+    const cosNu = dot(radial, parent.orbit.perihelionDirection);
+    const sinNu = dot(radial, cross(parent.orbit.normal, parent.orbit.perihelionDirection));
+    const factor = Math.sqrt(mu / semiLatusRectumKm);
+    const reconstructedVelocity = radial.map((component, axis) => factor * (
+      parent.eccentricity * sinNu * component + (1 + parent.eccentricity * cosNu) * transverse[axis]));
+    assert.ok(magnitude(subtract(reconstructedVelocity, sourceVelocity)) < 1e-10, `${id}: velocity closure`);
+    assert.ok(Math.abs(dot(parent.orbit.normal, radial)) < 1e-14, `${id}: parent in orbital plane`);
+    assert.ok(Math.abs(dot(parent.orbit.normal, sourceVelocity)) < 1e-12, `${id}: velocity in orbital plane`);
+    assert.deepEqual(parent.orbit.vertices[0], parent.position);
+    for (const vertex of parent.orbit.vertices) {
+      const offset = subtract(vertex, system.sun.position);
+      const radius = magnitude(offset);
+      const expectedRadius = semiLatusRectumKm / kilometersPerUnit /
+        (1 + parent.eccentricity * dot(scale(offset, 1 / radius), parent.orbit.perihelionDirection));
+      assert.ok(Math.abs(radius - expectedRadius) < 2, `${id}: rounded ring remains on source ellipse`);
+      assert.ok(Math.abs(dot(offset, parent.orbit.normal)) < 1, `${id}: rounded ring remains in source plane`);
+    }
+  }
+});
+
+test("all observers use the same canonical primary states and matching conics", async () => {
+  const astronomy = await loadAstronomyPackage();
+  const system = await prepareMercurySystem({ astronomy, asteroids: ["patroclus", "sylvia"] });
+  for (const id of ["haumea", "patroclus", "sylvia"]) {
+    const parent = system.bodies.find(body => body.id === id);
+    const state = BODY_HELIOCENTRIC_STATES[id];
+    assert.equal(parent.orbitSource, "source-primary-state-vector-via-solar-geometry");
+    const heliocentricPosition = scale(subtract(parent.position, system.sun.position), KILOMETERS_PER_UNIT);
+    const expected = presentationFrame.toPresentation(applyMatrix(transposeMatrix(BODY_FIXED_TO_ICRF_MATRICES.mercury), state.positionKm));
+    assert.ok(magnitude(subtract(heliocentricPosition, expected)) < KILOMETERS_PER_UNIT, `${id}: same source primary from Mercury`);
+    if (BODY_ORBITS[id]) {
+      assert.ok(Math.abs(parent.semiMajorAxisAu / BODY_ORBITS[id].semiMajorAxisAu - 1) < 1e-12);
+      assert.ok(Math.abs(parent.eccentricity - BODY_ORBITS[id].eccentricity) < 1e-12);
+    }
+  }
+});
+
+function dot(a, b) {
+  return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+function cross(a, b) {
+  return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+}
+
 function applyMatrix(matrix, [x, y, z]) {
   return [
     matrix[0] * x + matrix[1] * y + matrix[2] * z,
@@ -125,7 +197,8 @@ test("prepares the other seven planets innermost first, then the five dwarf plan
   assert.deepEqual(system.planetIds, OTHER_BODIES);
   assert.deepEqual(system.dwarfPlanetIds, DWARFS);
   assert.deepEqual(planetsOf(system).map((body) => body.orbitSource), OTHER_BODIES.map(() => "vsop87a-state-vector-via-solar-geometry"));
-  assert.deepEqual(dwarfsOf(system).map((body) => body.orbitSource), DWARFS.map(() => "jpl-horizons-osculating-elements-via-astronomy-package"));
+  assert.deepEqual(dwarfsOf(system).map((body) => body.orbitSource), DWARFS.map(id => BODY_HELIOCENTRIC_STATES[id]
+    ? "source-primary-state-vector-via-solar-geometry" : "jpl-horizons-osculating-elements-via-astronomy-package"));
   for (const body of system.bodies) {
     assert.deepEqual(body.orbit.vertices[0], body.position);
     assert.equal(body.orbit.vertexCount, SYSTEM_ORBIT_SEGMENTS);
@@ -144,7 +217,7 @@ test("agrees with an independent frame-tree-free derivation of every body's posi
   const mercuryKm = scale(applyMatrix(mercuryMatrix, BODY_FIXED_SUN_DIRECTIONS.mercury),
     -BODY_ORBITS.mercury.heliocentricDistanceAu * ASTRONOMICAL_UNIT_KILOMETERS);
   for (const body of dwarfsOf(system)) {
-    const heliocentricKm = astronomy.dwarfPlanetPositionKm(body.id, SOLAR_GEOMETRY_EPOCH_JD_TT);
+    const heliocentricKm = BODY_HELIOCENTRIC_STATES[body.id]?.positionKm ?? astronomy.dwarfPlanetPositionKm(body.id, SOLAR_GEOMETRY_EPOCH_JD_TT);
     const bodyFixedKm = applyMatrix(transposed, subtract(heliocentricKm, mercuryKm));
     const direct = scale(presentationFrame.toPresentation(bodyFixedKm), 1 / KILOMETERS_PER_UNIT);
     const diff = magnitude(subtract(body.position, direct));

@@ -1,0 +1,192 @@
+{
+  "schema": "csssycorax-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "lightcurve-approximation",
+      "path": "shape/ellipsoid.tab",
+      "expectedBytes": 62404,
+      "expectedSha256": "be764e8107e368f4ff439caa85f46fd0c313453ae851ff4ba9681ebf681f0dbf",
+      "origin": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://arxiv.org/pdf/1706.06837"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 78500
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "license": "MIT authored approximation from published numerical scientific facts",
+      "licenseEvidence": [
+        "https://arxiv.org/pdf/1706.06837"
+      ],
+      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
+      "redistribution": "Retain scientific attribution and model limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Approximate minimum-elongation ellipsoid using K 2 variability and a 157 (+23/−15)km thermophysical diameter. Equal short axes, volume normalization and orientation are assumed. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 78500
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3562,
+      "expectedSha256": "ae057db89cbf9d1c15d6b60f814e51c4e12b1f8d0091196093174b9499a68c95",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2358,
+      "expectedSha256": "36ca46dff556301e89e71db1e0c4d530dd397c859b988bb313338a6ce1078d74",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1280,
+      "expectedSha256": "8264b25b9cc8de5016169c6c56afd9dd3d1c4676e8cc2bed411bbc2be1fea2ef",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 356,
+      "expectedSha256": "197e6833bf34e78148fe712019e01f68dc80b09b79a399497983d6cb7343f60c",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2444,
+      "expectedSha256": "49af84b26a561a9e3e9dc4e502feda0b1d2c4940d2aab3c2ac415c5fad5b3bb8",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4798,
+      "expectedSha256": "6544c713b5fe31a6cd599b4c8395b36d4c64ac29e1b7dc79ba7414033927f3e6",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "4cc8db7740540f44fa92138b3a38ea607d9112a8a9cb094f36fffc55c40bce1f",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    },
+    {
+      "path": "validation/orbit-checks.json",
+      "expectedBytes": 25813,
+      "expectedSha256": "69f7c78524003e22f08fc550164fa2b861b4940cd78b09c517aeb210932359d2",
+      "purpose": "Scientific source interpretation and reproducible authored input."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-ellipsoid-context",
+      "path": "presentation/context.png",
+      "origin": "https://arxiv.org/pdf/1706.06837",
+      "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "lightcurve-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 84021,
+      "expectedSha256": "4e63d4e7d0e4a0bd9fb8fe8225ef862f378d2934f2f6ea5e9e0612275f77be28"
+    }
+  ]
+}

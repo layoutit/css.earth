@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { distance, magnitude } from './__fixtures__/compare.js'
 import { HORIZONS } from './__fixtures__/horizons.js'
 import { bodyData } from './bodies.js'
+import { periodicCorrectionBoundKm } from './periodicCorrection.js'
 import { keplerApoapsisKm, type KeplerianElements } from './kepler.js'
 import {
   SATELLITE_IDS,
@@ -36,6 +37,35 @@ import {
  * deliberately compact model cannot carry.
  */
 const TOLERANCE_KM: Record<SatelliteId, number> = {
+  paaliaq: 16890,
+  tarvos: 16433,
+  ijiraq: 10752,
+  suttungr: 6368,
+  mundilfari: 12589,
+  skathi: 3606,
+  erriapus: 12926,
+  thrymr: 7277,
+  bebhionn: 40458,
+  bergelmir: 5027,
+  bestla: 15232,
+  fornjot: 11340,
+  hati: 12443,
+  hyrrokkin: 8666,
+  loge: 9984,
+  skoll: 8245,
+  greip: 10379,
+  tarqeq: 5575,
+  caliban: 220,
+  sycorax: 861,
+  prospero: 825,
+  setebos: 2873,
+  kiviuq: 32368,
+  albiorix: 21245,
+
+  siarnaq: 322409,
+  ymir: 185535,
+  nereid: 11980,
+  himalia: 63205,
   polydeuces: 1081,
   anthe: 2334,
   aegaeon: 353,
@@ -141,8 +171,9 @@ describe('satellite ephemerides against JPL Horizons', () => {
     for (const row of fixture.rows) {
       const computed = magnitude(satellitePositionKm(id, row.jdTdb))
       const reference = magnitude(row.positionKm)
-      // The strongly perturbed DART post-impact fit measures 3.135% radial residual.
-      const radialTolerance = id === 'dimorphos' ? 0.033 : 0.02
+      // The post-impact Dimorphos fit measures a 3.135% radial residual.
+      // Himalia's corrected fit is back inside the common 2% guard.
+      const radialTolerance = ({ dimorphos: 0.033 } as Partial<Record<SatelliteId, number>>)[id] ?? 0.02
       expect(Math.abs(computed - reference) / reference).toBeLessThan(radialTolerance)
     }
   })
@@ -154,7 +185,9 @@ describe('satellite ephemerides against JPL Horizons', () => {
     const companion = record.barycentreCompanion && bodyData(record.barycentreCompanion as SatelliteId)
     const weight = companion ? companion.gravitationalParameterKm3PerS2 /
       (companion.gravitationalParameterKm3PerS2 + bodyData(record.parent as 'pluto').gravitationalParameterKm3PerS2) : 0
-    expect(bound).toBe(keplerApoapsisKm(elements) + (companion ? satelliteApoapsisKm(companion.id as SatelliteId) * weight : 0))
+    expect(bound).toBe(keplerApoapsisKm(elements) +
+      (record.positionCorrection ? periodicCorrectionBoundKm(record.positionCorrection) : 0) +
+      (companion ? satelliteApoapsisKm(companion.id as SatelliteId) * weight : 0))
     const period = (2 * Math.PI) / elements.meanMotionRadPerDay
     let farthest = 0
     for (let i = 0; i <= 5000; i++) {

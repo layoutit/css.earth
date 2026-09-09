@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "tarqeq",
+  "targetNaif": "652",
+  "parentNaif": "699",
+  "source": {
+    "url": "https://tilmanndenk.de/outersaturnianmoons/tarqeq/",
+    "paper": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+    "table": "Denk et al. (2018), Table 3; author Table 1C notes 1,2,4,9",
+    "retrieved": "2026-09-08"
+  },
+  "constraints": {
+    "minimumEquatorialAxisRatio": 1.32,
+    "condition": "Uniform-reflectivity reference ellipsoid from published lightcurve amplitude; minimum a/b, not an exact recovered outline.",
+    "adoptedReferenceRadiusKm": 3,
+    "diameterEstimate": "6 (+1.75/−1) km",
+    "sizeInterpretation": "Brightness-based size assuming geometric albedo 0.06; uncertainty is source sensitivity, not measured axes.",
+    "observedRotationPeriod": "76.13 ± 0.04 h"
+  },
+  "approximation": {
+    "adoptedEquatorialAxisRatio": 1.32,
+    "semiAxesKm": [
+      3.6099723501129346,
+      2.7348275379643443,
+      2.7348275379643443
+    ],
+    "formula": "b=c=R/cbrt(q); a=q*b; r(lon,lat)=1/sqrt((cos(lat)*cos(lon)/a)^2+(cos(lat)*sin(lon)/b)^2+(sin(lat)/c)^2)",
+    "assumptions": [
+      "Select published lower-limit equatorial ratio, not a full recovered shape.",
+      "Equal short axes (b=c).",
+      "Reference radius treated as equal-volume display scale only.",
+      "Physical pole, spin sense and current rotational phase remain unmeasured. The displayed motion does not fit the Cassini lightcurve."
+    ],
+    "qualification": "Long 76.13-hour period and q=1.32 give a distinct bounded model opportunity."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km"
+  },
+  "photometryCheck": {
+    "minimumAmplitudeMagnitude": 0.30143482801462473,
+    "interpretation": "Algebraic consistency only; not a fit to observed Cassini lightcurves or a measured volume."
+  }
+}

@@ -1,9 +1,11 @@
+import { SCENE_SATELLITE_IDS } from './sceneSatellites.js'
 import { describe, expect, it } from 'vitest'
 import {
   BODIES,
   BODY_IDS,
   DWARF_PLANET_IDS,
   ASTEROID_IDS,
+  COMET_IDS,
   PLANET_IDS,
   bodyData,
   moonsOf,
@@ -17,8 +19,8 @@ const GRAVITATIONAL_CONSTANT_KM3_PER_KG_S2 = 6.6743e-20
 
 describe('the body table', () => {
   it('has an entry for the Sun, eight planets, the Moon, every satellite and the five dwarf planets', () => {
-    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + DWARF_PLANET_IDS.length + ASTEROID_IDS.length)
-    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS] as BodyId[]) {
+    expect(BODY_IDS.length).toBe(1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + ASTEROID_IDS.length + COMET_IDS.length)
+    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS, ...COMET_IDS] as BodyId[]) {
       expect(BODIES[id]).toBeDefined()
       expect(BODIES[id].id).toBe(id)
     }
@@ -83,9 +85,9 @@ describe('the body table', () => {
     const fromSatellites = SATELLITE_IDS.filter((id) => SATELLITE_ELEMENTS[id].parent === 'jupiter')
     expect(moonsOf('jupiter')).toEqual(fromSatellites)
     const total = [...PLANET_IDS, ...DWARF_PLANET_IDS, ...ASTEROID_IDS].flatMap((parent) => moonsOf(parent))
-    expect(total.length).toBe(SATELLITE_IDS.length + 1)
+    expect(total.length).toBe(SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + 1)
     for (const planet of [...PLANET_IDS, ...DWARF_PLANET_IDS].filter(id => id !== 'earth')) {
-      expect(moonsOf(planet)).toEqual(SATELLITE_IDS.filter(id => SATELLITE_ELEMENTS[id].parent === planet))
+      expect(moonsOf(planet)).toEqual([...SATELLITE_IDS.filter(id => SATELLITE_ELEMENTS[id].parent === planet), ...SCENE_SATELLITE_IDS.filter(id => bodyData(id).parent === planet)])
     }
   })
 

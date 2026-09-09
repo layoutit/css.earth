@@ -66,6 +66,13 @@ export function prepareLenses(
       const material = assets.materials?.[control.material ?? control.id];
       const poles = assets.poles;
       const legend = prepareLegend(objectId, control.legend);
+      if (control.facts !== undefined && (!Array.isArray(control.facts) ||
+          control.facts.some(fact => !fact || [fact.id, fact.label, fact.value].some(value =>
+            typeof value !== "string" || !value.trim())) ||
+          new Set(control.facts.map(fact => fact.id)).size !== control.facts.length)) {
+        throw new TypeError(`${objectId}/${control.id}: lens facts require unique ids and nonempty labels and values`);
+      }
+      const facts = control.facts?.map(({ id, label, value }) => ({ id, label, value }));
       return {
         id: control.id,
         label: control.label,
@@ -78,6 +85,7 @@ export function prepareLenses(
         thumbnailUrl: assetUrl(objectId, control.thumbnail),
         description: control.description,
         ...(control.summary ? { summary: control.summary } : {}),
+        ...(facts?.length ? { facts } : {}),
         title: control.title,
         ...(legend ? { legend } : {}),
         ...(control.legendNote ? { legendNote: control.legendNote } : {}),

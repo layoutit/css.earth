@@ -1,0 +1,186 @@
+{
+  "schema": "csssiarnaq-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "shape-approximation",
+      "path": "shape/model.tab",
+      "expectedBytes": 62404,
+      "expectedSha256": "205486009242afb802bd625cc22177419a872b5caac45e18ef9406d9e0229ef6",
+      "origin": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+      "credit": "Denk et al. model constraints; cssEarth approximate envelope and standard grid",
+      "license": "MIT authored approximation from cited scientific constraints",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/siarnaq/"
+      ],
+      "acquisition": "Checked-in numeric approximation; constraints, assumptions, polygon and radial formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 19500
+      }
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+      "credit": "Denk et al. model constraints; cssEarth approximate envelope and standard grid",
+      "license": "MIT authored approximation from cited scientific constraints",
+      "licenseEvidence": [
+        "https://tilmanndenk.de/outersaturnianmoons/siarnaq/"
+      ],
+      "acquisition": "Checked-in numeric approximation; constraints, assumptions, polygon and radial formula in measurements.json.",
+      "redistribution": "Retain source attribution and modeled status.",
+      "consumers": [
+        "surfaces"
+      ],
+      "coverage": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 19500
+      },
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3258,
+      "expectedSha256": "e9a1b60ed50331d3f6a2ef392a42956112a5e02788507b22cb1fe83a894f3c4e",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 4434,
+      "expectedSha256": "e70365672fd97903bcb16aeeb5ab43a08af45ba6af34bbf6b3013315d8deaa22",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1318,
+      "expectedSha256": "2dcce428088a9c043c0e227d2da9a364a46c0059e3acd75557683530152967a2",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 663,
+      "expectedSha256": "4444717028de92d5747cdcb7b02ceebb3d83b0152377e31801eed56f410b6008",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2492,
+      "expectedSha256": "577dd043f324a0ded5ee9525c245ceed2cfaaa4652912e5e22c06180340bf551",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 4996,
+      "expectedSha256": "2859dc97e4925a3b4a2b38808db636833b79c84dbd4b3d0be3069e090903fbf5",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Scientific source and authored preparation evidence."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 850,
+      "expectedSha256": "769981cba637d63a01fe963bc4fbec2a7d3d8df92d7415dae886abddcf969a65",
+      "purpose": "Scientific source and authored preparation evidence."
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-shape-context",
+      "path": "presentation/context.png",
+      "origin": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/",
+      "credit": "Denk et al. model constraints; cssEarth approximate envelope and standard grid",
+      "license": "MIT display representation from published scientific measurements; retain source citation.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "shape-approximation",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "expectedBytes": 76039,
+      "expectedSha256": "25dce8fa4a8f5f1bbc982ec94420169ec4b4894cfe2c1ed3ff820f6ed30d6199"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%275000%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 5000 IAU (1987 QN7)           2026-Sep-08 10:26:12
+Rec #:    5000 (+COV) Soln.date: 2026-Jun-05_08:55:48   # obs: 3138 (1951-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457950.5 ! 2017-Jul-16.00 (TDB)         Residual RMS= .24495
+   EC= .2658294067802306   QR= 1.8619280738244     TP= 2457441.0628257156
+   OM= 151.1458272714767   W=  232.2705689159241   IN= 6.272258206360099
+   A= 2.536097319914097    MA= 124.3213833763467   ADIST= 3.210266566003795
+   PER= 4.03884            N= .244036732           ANGMOM= .02640891
+   DAN= 2.81476            DDN= 2.02713            L= 23.2497788
+   B= -4.9570668           MOID= .871786           TP= 2016-Feb-22.5628257156
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 2.121              ROTPER= n.a.
+   H= 14.54                G= .150                 B-V= n.a.
+                           ALBEDO= .205            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#57, OCC=0
+2: source=ORB
+*******************************************************************************

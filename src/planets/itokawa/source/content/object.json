@@ -48,8 +48,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "elevation",
+    "defaultLens": "amica",
     "controls": [
+      {
+        "id": "amica",
+        "label": "AMICA mosaic",
+        "detail": "Hayabusa observations",
+        "description": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
+        "title": "Three Hayabusa AMICA v-band images from 24–29 September 2005 are registered with the archived Gaskell Cartesian backplanes. Grayscale shows flat-fielded detector brightness with approximate illumination correction and bounded overlap matching, not absolute albedo or natural color. The source images use lossy 8-bit compression; photographed shadows and some seams remain. The ordinary grid marks missing, grazing or geometrically rejected coverage.",
+        "thumbnail": "/scenes/itokawa/itokawa-amica-thumbnail.webp",
+        "surface": "itokawa-amica-surface@2x.webp",
+        "poles": "itokawa-amica-surface@2x.webp",
+        "source": {
+          "id": "amica-sep24-path",
+          "path": "../manifest.json"
+        }
+      },
       {
         "id": "elevation",
         "label": "Elevation",
@@ -100,6 +114,12 @@
   },
   "charts": [],
   "resources": [
+    {
+      "label": "Imagery",
+      "role": "surface",
+      "description": "AMICA Cartesian backplanes and original images",
+      "href": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=HAY-A-AMICA-3-AMICAGEOM-V1.0"
+    },
     {
       "label": "Mission",
       "role": "facts",

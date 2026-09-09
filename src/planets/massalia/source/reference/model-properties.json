@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16321",
+  "modelId": 16321,
+  "modelVersion": "2026-04-30 15:07:16",
+  "diameterKm": 147,
+  "diameterInterpretation": "Updated convex DAMIT shape at an approximate147km scale transferred from a published thermophysical model (±2km for that source fit; additional uncertainty for this model). The old preliminary spin solution is not used. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-diameter-cross-model-transfer",
+    "diameterKm": 147,
+    "uncertaintyKm": 2,
+    "reportedUncertaintyKm": 2,
+    "uncertaintyKind": "Published uncertainty on SAGE-based thermophysical diameter; not the total uncertainty of transferring that size to a different convex mesh.",
+    "diameterSemantics": "Volume-equivalent diameter147±2km from Alí-Lagoa et al.2020Table2 (SAGE1, HerschelPACS). The selected DAMIT16321 is a different convex model, so using this physical scale is explicitly approximate.",
+    "sourceUrl": "https://arxiv.org/pdf/2005.01479",
+    "reference": "Alí-Lagoa et al.(2020), A&A638,A84, Table2, doi:10.1051/0004-6361/202037718; SAGE model reference Podlewska-Gaca et al.(2020), A&A638,A11",
+    "limitations": "Published147±2km uncertainty belongs to the SAGE1thermophysical solution, not a scale fit to DAMIT16321. Neither SAGE mirror pole was rejected by the thermaldata. The original SAGE archive was surveyed but not retrievable during intake; no morphology transfer or replacement method is invented. LatestDAMIT16321source period8.0975859h and pole304.1°,63.7°are preserved, but absolute phase remains illustrative.",
+    "scaleKmPerSourceUnit": 36.17504654412783,
+    "metersPerSourceUnit": 36175.04654412783,
+    "sourceLabel": "Alí-Lagoa et al.(2020), A&A638,A84, Table2, doi:10.1051/0004-6361/202037718; SAGE model reference Podlewska-Gaca et al.(2020), A&A638,A11",
+    "visibleDescription": "Updated convex DAMIT shape at an approximate147km scale transferred from a published thermophysical model (±2km for that source fit; additional uncertainty for this model). The old preliminary spin solution is not used. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 8.0975859,
+  "poleEclipticJ2000Degrees": [
+    304.1,
+    63.7
+  ],
+  "modelLimitations": "Uses the updated 2026 DAMIT spin solution; older preliminary models had an incorrect spin. Published size is transferred from a separate shape reconstruction.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/130623/shape.txt",
+    "vertices": 1922,
+    "faces": 3840,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 36175.04654412783,
+    "firstVertexKm": [
+      2.4859706684025884,
+      8.843042943280002,
+      63.18653055058351
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      165.08393861548703,
+      182.3587641444045,
+      120.1533779089469
+    ],
+    "volumeCubicKm": 1663223.553459834,
+    "volumeEquivalentRadiusKm": 73.49999999999999,
+    "radialRangeKm": [
+      56.8943958511503,
+      98.40147937158265
+    ]
+  },
+  "elevation": [
+    -20,
+    30
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3840,
+    "sourceVertices": 1922,
+    "weldedVertices": 1922,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1470,
+    "estimatedErrorMeters": 711.342041015625,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1657278161839884.5
+    }
+  }
+}

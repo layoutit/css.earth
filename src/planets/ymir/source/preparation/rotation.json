@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 99.4936076474702,
+  "declinationDegrees": -70.14386231394958,
+  "source": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
+  "coordinateSystem": "ICRF/J2000",
+  "phase": "arbitrary-display-phase",
+  "displayMeridianDegrees": 0,
+  "qualification": "Published approximate spin pole converted from ecliptic J2000 to ICRF; arbitrary initial meridian. This is not a known current surface phase.",
+  "sourceEclipticPoleDegrees": [
+    230,
+    -85
+  ],
+  "sourcePoleUncertaintyDegrees": [
+    20,
+    10
+  ],
+  "siderealPeriodHours": 11.9222,
+  "siderealPeriodUncertaintyHours": 2e-05
+}

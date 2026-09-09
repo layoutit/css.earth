@@ -97,10 +97,95 @@
       "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
       "consumers": [
         "physical",
-        "rotation"
+        "rotation",
+        "camera-reference"
       ],
       "expectedBytes": 789535,
       "expectedSha256": "744a6482837456a97cd1d59f1eda426660030e72f2a5bd646f6bd4136766c8e0"
+    },
+    {
+      "id": "donaldjohanson-observations-lor_0798443290_04598_00035_1x1_sci_03-fit",
+      "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.fit",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "llorri-observation"
+      ],
+      "expectedBytes": 10526400,
+      "expectedSha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557"
+    },
+    {
+      "id": "donaldjohanson-reference-naif0012-tls",
+      "path": "reference/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+    },
+    {
+      "id": "donaldjohanson-reference-donaldjohanson_v12-tpc",
+      "path": "reference/donaldjohanson_v12.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/pds4/lucy/lucy_spice/spice_kernels/pck/donaldjohanson_v12.tpc",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 3384,
+      "expectedSha256": "c45817cad95c54e2a4c8c59d0b7944418b68e2b52409a1485d128afbc9da1021"
+    },
+    {
+      "id": "donaldjohanson-reference-lor_0798443290_04598_00035_1x1_sci_03-xml",
+      "path": "reference/lor_0798443290_04598_00035_1x1_sci_03.xml",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-lucy.llorri-v3.0/data_donaldjohanson_partially_processed/lor_0798443290_04598_00035_1x1_sci_03.xml",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 71280,
+      "expectedSha256": "732863d8aca2d3c723ae34de2e5bed1d79641434419a03f2efc68faba8488b9c"
+    },
+    {
+      "id": "donaldjohanson-preparation-camera-json",
+      "path": "preparation/camera.json",
+      "origin": "Authored source-bound camera profile",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "camera-reference"
+      ],
+      "expectedBytes": 1041,
+      "expectedSha256": "3d3955788f72b830eeefa708f02243f148cfd7d98e02ec0c54fe46255d603aa4"
+    },
+    {
+      "id": "donaldjohanson-observations-llorri-camera-json",
+      "path": "observations/llorri-camera.json",
+      "origin": "Prepared camera derived from the pinned mission image, kernels and source control evidence.",
+      "credit": "NASA/GSFC/SwRI/JHUAPL; Lucy team; DLR Mottola and Preusker",
+      "license": "Public scientific archive; retain original notices and full source attribution.",
+      "redistribution": "Attributed scientific display derivatives and original source records.",
+      "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "consumers": [
+        "llorri-observation"
+      ],
+      "expectedBytes": 9023,
+      "expectedSha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac"
     }
   ],
   "generatedIntermediates": [
@@ -134,14 +219,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 12528,
-      "expectedSha256": "1d974eaeaf6f46174b6a8a8b76f453b74b2897b59597bbef7c4536630e93bda0"
+      "expectedBytes": 14193,
+      "expectedSha256": "e0a5c596673c540c150a9593916184623d17bbf4edef8bde5b83d112bf511a29"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 1362,
-      "expectedSha256": "e294342dfa702e4efdfa9abc2db332e64a13f3e957fd1934867f41346ad8da4a"
+      "expectedBytes": 2536,
+      "expectedSha256": "6d051e079932bc28935173e413c0f048ce250d4568cb6877c1459bc2dd1770b6"
     },
     {
       "path": "preparation/navigation.json",
@@ -158,8 +243,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 2139,
-      "expectedSha256": "191ee2168a81e40bc7737b282efaf589cf3e833145a7f435f4ef53f72568a693"
+      "expectedBytes": 3627,
+      "expectedSha256": "67f8aac95c694d927968a12a22f9f131689774a060ec322d34bd589cf92c396e"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

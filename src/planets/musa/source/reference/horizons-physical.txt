@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27600%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 600 Musa (A906 LA)            2026-Sep-08 10:25:35
+Rec #:     600 (+COV) Soln.date: 2026-Jun-05_03:48:52  # obs: 14851 (1906-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458197.5 ! 2018-Mar-20.00 (TDB)         Residual RMS= .22962
+   EC= .05614582411671796  QR= 2.509921564007804   TP= 2458534.5696443422
+   OM= 139.2911011106709   W=  114.4359068065997   IN= 10.19959830741177
+   A= 2.659225999248197    MA= 283.3890505998397   ADIST= 2.80853043448859
+   PER= 4.33652            N= .227285223           ANGMOM= .028007443
+   DAN= 2.71388            DDN= 2.59067            L= 254.0725418
+   B= 9.2774854            MOID= 1.51362002        TP= 2019-Feb-20.0696443422
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 12.5575            ROTPER= 5.8856
+   H= 10.27                G= .150                 B-V= .840
+                           ALBEDO= .227            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#82, OCC=0
+2: source=ORB
+*******************************************************************************
