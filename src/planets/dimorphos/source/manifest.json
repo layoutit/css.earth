@@ -29,7 +29,8 @@
       "consumers": [
         "terrain",
         "shape",
-        "elevation"
+        "elevation",
+        "albedo"
       ],
       "lensId": "elevation",
       "projection": {
@@ -59,6 +60,42 @@
       ],
       "expectedBytes": 862936,
       "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "dimorphos-relative-albedo",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "albedo"
+      ],
+      "expectedBytes": 4728960,
+      "expectedSha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
+      "lensId": "albedo",
+      "projection": {
+        "kind": "source-triangle-facet-field",
+        "units": "relative albedo",
+        "facetNumberBase": 0
+      },
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling."
+    },
+    {
+      "id": "dimorphos-relative-albedo-label",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "credit": "NASA/JHUAPL DART; Daly, Barnouin, Ernst, Nair, Espiritu and Waller (2023)",
+      "license": "NASA PDS scientific data; retain the original dataset citation and source notices.",
+      "redistribution": "Attributed scientific display derivatives, with original labels and source notices retained.",
+      "acquisition": "Restore the unmodified original through source/preparation/acquisition.json.",
+      "consumers": [
+        "albedo"
+      ],
+      "expectedBytes": 6781,
+      "expectedSha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
+      "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling."
     }
   ],
   "generatedIntermediates": [
@@ -92,14 +129,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 10628,
-      "expectedSha256": "b72a21bb7645f63c91b3afe2049f8dd61cc1f18ac7a15509348da81e506a3014"
+      "expectedBytes": 12713,
+      "expectedSha256": "1aa6ab46a8870548543efe60560153696f235af794f4b2631b6dab24f1cbb78a"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 859,
-      "expectedSha256": "ebd4039d1be7fbdbf0fde58c1943a02ea507e65ee2351c0fc216b0007609ba46"
+      "expectedBytes": 1531,
+      "expectedSha256": "33ee724e4af0fe61b1ebc247c0c3d634f90adb55f28cda99fe48794a66a17abd"
     },
     {
       "path": "preparation/navigation.json",
@@ -116,8 +153,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 3059,
-      "expectedSha256": "b4e27a4501e22063a3d957ab0e7c4a737c30f4d97a0dd313e742222665e63b99"
+      "expectedBytes": 4260,
+      "expectedSha256": "a7cdc1b2f77c21bf64d25991fc827f335fce4263417777c8bb05cac05fe7802b"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",

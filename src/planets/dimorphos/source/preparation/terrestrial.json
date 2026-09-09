@@ -54,6 +54,44 @@
           "width": 721,
           "height": 361
         }
+      },
+      {
+        "id": "albedo",
+        "label": "Relative albedo",
+        "consumer": "albedo",
+        "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+        "format": "wavefront-obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 98306,
+          "expectedFaces": 196608
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "minimum": 0.45,
+        "maximum": 1.3,
+        "colors": [
+          "#404040",
+          "#f2f2f2"
+        ],
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 2
+        },
+        "facetField": {
+          "format": "fits-spc-facet-table",
+          "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+          "labelPath": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+          "field": "RELATIVE ALBEDO",
+          "target": "DIMORPHOS",
+          "sourceVersion": "dalyErnst_dimorphos230530",
+          "mapVersion": "004",
+          "maximumCentroidResidualMeters": 0.001,
+          "validity": "positive-sigma",
+          "facetOrder": "centroid-bijection"
+        }
       }
     ],
     "observedColors": [],

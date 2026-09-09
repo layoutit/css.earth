@@ -78,6 +78,21 @@
         "detail": "Galileo SSI · 1991 flyby"
       },
       {
+        "id": "calibrated",
+        "label": "Calibrated image",
+        "description": "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+        "title": "Galileo’s 1991 clear-filter image, calibrated to reflectance (I/F) and placed using the published shape and camera controls. Brightness retains the photographed illumination; it is not surface albedo. A fixed 0–0.12 I/F display range uses gamma 2.2. Bad detector pixels, uncertain edges and unobserved areas use the gray grid.",
+        "thumbnail": "/scenes/gaspra/gaspra-calibrated-thumbnail.webp",
+        "surface": "gaspra-calibrated-surface@2x.webp",
+        "poles": "gaspra-calibrated-surface@2x.webp",
+        "source": {
+          "id": "gaspra-107318326rcal_clr-fit",
+          "path": "../manifest.json"
+        },
+        "falseColor": false,
+        "detail": "Galileo SSI · I/F"
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
         "description": "Color shows the published shape radius minus a 6.1 km reference sphere, including Gaspra’s broad irregular shape. This is shape-derived height, not gravitational elevation or a photographic observation. Shape constraints vary with the flyby coverage; unseen regions are less certain. Brightness adds cartographic relief; Shadows adds approximate fixed-epoch Sun lighting.",
