@@ -42,7 +42,7 @@ export function createNavigationHistory({ windowTarget, objects, capture, naviga
   });
 }
 
-export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, deselect, onError = () => {} }) {
+export function bindNavigationLinks({ documentTarget, windowTarget, objects, supports, navigate, onError = () => {} }) {
   const available = id => typeof id === 'string' && objects.some(object => object.id === id) && supports(id);
   const query = event => { if (available(event.detail?.objectId)) event.preventDefault(); };
   const select = event => {
@@ -66,17 +66,10 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
       : url.search || url.hash ? { url: url.href } : { sceneSelection: true };
     Promise.resolve(navigate(object.id, options)).catch(onError);
   };
-  const clear = event => {
-    if (!deselect || event.defaultPrevented) return;
-    event.preventDefault();
-    Promise.resolve(deselect()).catch(onError);
-  };
-  documentTarget.addEventListener('objectdeselect', clear);
   documentTarget.addEventListener('click', click);
   documentTarget.addEventListener('objectnavigate', select);
   documentTarget.addEventListener('objectnavigationquery', query);
   return () => {
-    documentTarget.removeEventListener('objectdeselect', clear);
     documentTarget.removeEventListener('click', click);
     documentTarget.removeEventListener('objectnavigate', select);
     documentTarget.removeEventListener('objectnavigationquery', query);

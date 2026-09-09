@@ -61,7 +61,7 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
       // Recheck beneath the transparent input using the actual picker's hit
       // criteria before testing a deliberately empty-sky double click.
       const clickSky = await emptySkyPoint(page, planet.id, profile.inputSelector, sky, cameraPlan);
-      // Isolate surface picking from the shared, cancelable overview flight.
+      // Empty sky must neither deselect the body nor start a surface flight.
       await page.evaluate(() => {
         window.__skyBoundaryDeselects = 0;
         window.__skyBoundaryDeselect = event => { window.__skyBoundaryDeselects++; event.preventDefault(); };
@@ -69,10 +69,10 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
       });
       try {
         await page.mouse.dblclick(clickSky.x, clickSky.y, { delay: 45 });
-        assert.ok(await page.evaluate(() => window.__skyBoundaryDeselects > 0),
-          `${planet.id}: empty sky must request shared deselection`);
+        assert.equal(await page.evaluate(() => window.__skyBoundaryDeselects), 0,
+          `${planet.id}: empty sky must not request deselection`);
         assert.deepEqual(await cameraPose(page, planet.id), crossed,
-          `${planet.id}: canceled sky deselection must preserve the camera`);
+          `${planet.id}: empty sky must preserve the camera`);
         assert.equal((await motionStats(page, planet.id)).surfaceFlyTo.active, false,
           `${planet.id}: sky double-click must not launch a surface flight`);
       } finally {

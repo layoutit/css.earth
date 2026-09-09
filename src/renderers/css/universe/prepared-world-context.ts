@@ -607,7 +607,10 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, annotat
           focusDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
           rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : visible;
         const hovered = entry.group.dataset.objectHovered === 'true' || label.dataset.objectHovered === 'true' || marker.dataset.objectHovered === 'true' || indicator.dataset.objectHovered === 'true' || host.ownerDocument.activeElement === label || host.ownerDocument.activeElement === indicator;
-        const fullOrbit = hovered || (emphasizedId !== null && emphasizedId !== plan.focus.id && entry.parent?.id === emphasizedId);
+        // Satellites always use every prepared chord at uniform trail weight.
+        // Selection and hover must not switch their paths back to partial trails.
+        const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
+        const fullOrbit = satellite || hovered;
         // Prepared bounds enclose the faded trail, not necessarily the complete orbit.
         const bounds = fullOrbit ? undefined : entry.orbit?.bounds;
         const segments = entry.orbit && opacity > 0 && orbitOpacity > 0 &&
