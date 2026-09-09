@@ -3,8 +3,8 @@
   "interpretation": "Checks of the archived image-to-shape registration; the mosaic shares these Galileo observations and is not independent absolute ground truth.",
   "fitCount": 0,
   "checkCount": 4,
-  "rmsResidualPixels": 0.8660254037844386,
-  "maximumResidualPixels": 1.0,
+  "rmsResidualPixels": 2.6457513110645907,
+  "maximumResidualPixels": 3.1622776601683795,
   "limits": {
     "dogSigmaPixels": [
       1,
@@ -15,106 +15,106 @@
     "maximumResidualPixels": 4,
     "checkRectangles": [
       [
-        40,
-        370,
-        72,
-        402
+        752,
+        416,
+        768,
+        432
       ],
       [
-        100,
-        370,
-        132,
-        402
+        720,
+        448,
+        736,
+        464
       ],
       [
-        120,
-        440,
-        152,
-        472
+        752,
+        480,
+        768,
+        496
       ],
       [
-        165,
-        420,
-        197,
-        452
+        704,
+        528,
+        720,
+        544
       ]
     ],
-    "notes": "No local fitting. Four spatially separated surface patches check the archived Thomas camera. Four pixels correspond to about 444 m at Ida or 215 m at Gaspra; use a five-pixel source-boundary inset and retain the existing simplified mesh."
+    "notes": "Four separated 16-pixel surface patches check the published camera without fitting. The source pixel error limit and five-pixel boundary inset are unchanged; these smaller windows fit the useful detector footprint."
   },
   "checks": [
     {
       "rectangle": [
-        40,
-        370,
-        72,
-        402
+        752,
+        416,
+        768,
+        432
       ],
       "offsetPixels": [
         1,
-        0
+        -1
       ],
-      "correlation": 0.9538702116777044,
-      "residualPixels": 1.0
+      "correlation": 0.9854357312692269,
+      "residualPixels": 1.4142135623730951
     },
     {
       "rectangle": [
-        100,
-        370,
-        132,
-        402
+        720,
+        448,
+        736,
+        464
       ],
       "offsetPixels": [
-        1,
-        0
+        3,
+        -1
       ],
-      "correlation": 0.9508490723115269,
-      "residualPixels": 1.0
+      "correlation": 0.966419350569586,
+      "residualPixels": 3.1622776601683795
     },
     {
       "rectangle": [
-        120,
-        440,
-        152,
-        472
+        752,
+        480,
+        768,
+        496
       ],
       "offsetPixels": [
-        1,
-        0
+        2,
+        -2
       ],
-      "correlation": 0.9338990050874469,
-      "residualPixels": 1.0
+      "correlation": 0.9254789404260478,
+      "residualPixels": 2.8284271247461903
     },
     {
       "rectangle": [
-        165,
-        420,
-        197,
-        452
+        704,
+        528,
+        720,
+        544
       ],
       "offsetPixels": [
-        0,
-        0
+        2,
+        -2
       ],
-      "correlation": 0.8992437213473656,
-      "residualPixels": 0.0
+      "correlation": 0.8790785951372786,
+      "residualPixels": 2.8284271247461903
     }
   ],
   "provenance": [
     {
-      "path": "observations/107318326rcal_clr.fit",
-      "sha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6"
+      "path": "observations/107318313rcal_clr.fit",
+      "sha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e"
     },
     {
-      "path": "observations/107318326rcal_clr.xml",
-      "sha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301"
+      "path": "observations/107318313rcal_clr.xml",
+      "sha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b"
     },
     {
-      "path": "observations/e8326.fit",
-      "sha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d"
+      "path": "observations/e8313.fit",
+      "sha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00"
     },
     {
-      "path": "observations/e8326.lbl",
-      "sha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792"
+      "path": "observations/e8313.lbl",
+      "sha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3"
     },
     {
       "path": "observations/gaspbad.tab",
@@ -145,8 +145,8 @@
       "sha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed"
     },
     {
-      "path": "reference/calibrated-registration.json",
-      "sha256": "61ad2efa7008f775b57e80b844595e755de6ae0c47b7250fce65412041ee56fb"
+      "path": "reference/registration-107318313.json",
+      "sha256": "06cc9dffa163a79f446e48e913b6d56baa9388c55e4358e1ea45dce3c5f88d02"
     },
     {
       "path": "maps/951gaspram.fit",

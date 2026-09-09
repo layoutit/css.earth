@@ -3,8 +3,8 @@
   "interpretation": "Checks of the archived image-to-shape registration; the mosaic shares these Galileo observations and is not independent absolute ground truth.",
   "fitCount": 0,
   "checkCount": 4,
-  "rmsResidualPixels": 2.23606797749979,
-  "maximumResidualPixels": 3.605551275463989,
+  "rmsResidualPixels": 1.4142135623730951,
+  "maximumResidualPixels": 2.23606797749979,
   "limits": {
     "dogSigmaPixels": [
       1,
@@ -15,106 +15,106 @@
     "maximumResidualPixels": 4,
     "checkRectangles": [
       [
-        500,
-        150,
-        532,
-        182
+        112,
+        256,
+        128,
+        272
       ],
       [
-        540,
-        210,
-        572,
-        242
+        160,
+        288,
+        176,
+        304
       ],
       [
-        580,
-        180,
-        612,
-        212
+        224,
+        288,
+        240,
+        304
       ],
       [
-        600,
-        220,
-        632,
-        252
+        272,
+        320,
+        288,
+        336
       ]
     ],
-    "notes": "No local fitting. Four spatially separated surface patches check the archived Thomas camera. Four pixels correspond to about 444 m at Ida or 215 m at Gaspra; use a five-pixel source-boundary inset and retain the existing simplified mesh."
+    "notes": "Four separated 16-pixel surface patches check the published camera without fitting. The source pixel error limit and five-pixel boundary inset are unchanged; these smaller windows fit the useful detector footprint."
   },
   "checks": [
     {
       "rectangle": [
-        500,
-        150,
-        532,
-        182
+        112,
+        256,
+        128,
+        272
       ],
       "offsetPixels": [
         1,
-        0
+        1
       ],
-      "correlation": 0.7337107014129683,
-      "residualPixels": 1.0
+      "correlation": 0.759941624695059,
+      "residualPixels": 1.4142135623730951
     },
     {
       "rectangle": [
-        540,
-        210,
-        572,
-        242
+        160,
+        288,
+        176,
+        304
+      ],
+      "offsetPixels": [
+        0,
+        0
+      ],
+      "correlation": 0.8527365625046575,
+      "residualPixels": 0.0
+    },
+    {
+      "rectangle": [
+        224,
+        288,
+        240,
+        304
       ],
       "offsetPixels": [
         2,
-        1
+        -1
       ],
-      "correlation": 0.7338243952928145,
+      "correlation": 0.7490803186632279,
       "residualPixels": 2.23606797749979
     },
     {
       "rectangle": [
-        580,
-        180,
-        612,
-        212
+        272,
+        320,
+        288,
+        336
       ],
       "offsetPixels": [
-        2,
-        3
+        0,
+        -1
       ],
-      "correlation": 0.7480413243723466,
-      "residualPixels": 3.605551275463989
-    },
-    {
-      "rectangle": [
-        600,
-        220,
-        632,
-        252
-      ],
-      "offsetPixels": [
-        1,
-        0
-      ],
-      "correlation": 0.8002449527020549,
+      "correlation": 0.8769627921176004,
       "residualPixels": 1.0
     }
   ],
   "provenance": [
     {
-      "path": "observations/0202561278rcal_gre.fit",
-      "sha256": "172489ebbefee3c7c1a1630d7c72fc7269b7de5c38459eedc2450e5c2dbd0d8f"
+      "path": "observations/0202560500rcal_gre.fit",
+      "sha256": "1ff454dd43d90c53bb0523dd258f7870e0d1f9cf2d5de41b6002fa6f2bd59886"
     },
     {
-      "path": "observations/0202561278rcal_gre.xml",
-      "sha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed"
+      "path": "observations/0202560500rcal_gre.xml",
+      "sha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df"
     },
     {
-      "path": "observations/i1278.fit",
-      "sha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16"
+      "path": "observations/i0500.fit",
+      "sha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1"
     },
     {
-      "path": "observations/i1278.lbl",
-      "sha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750"
+      "path": "observations/i0500.lbl",
+      "sha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c"
     },
     {
       "path": "observations/idabad.tab",
@@ -145,8 +145,8 @@
       "sha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c"
     },
     {
-      "path": "reference/calibrated-registration.json",
-      "sha256": "0dcdb41d248be6b4f35e6b8985e7965792f19b2c23af0606a06e7f430707c7f0"
+      "path": "reference/registration-202560500.json",
+      "sha256": "8fe19fc97c0a2677ddaea051f6ed4cdd174097f9724b789cf7085062f239f4d4"
     },
     {
       "path": "maps/243idam.fit",

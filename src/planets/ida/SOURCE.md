@@ -28,7 +28,7 @@ The revised Stooke map explicitly places north at the top, 0° longitude at the 
 
 The source shape label pins J2000 pole RA 348.76° ±7.5°, Dec +87.10° ±0.4°, and a retrograde period of 0.1930680 days. The label loses the sign between the prime-meridian constant and daily term. The pinned Galileo [`pck00007.tpc`](https://naif.jpl.nasa.gov/pub/naif/GLL/kernels/pck/pck00007.tpc) resolves it as W = 265.95° − 1864.6280070° d at JD 2451545.0. Its Dec +87.12° differs by 0.02°; this package retains +87.10° from the shape label. `source/preparation/rotation.json` records that deliberate choice. No modern pole reversal is silently applied to this legacy east-longitude texture/shape pair.
 
-The pinned Horizons physical record reports radius 16 km, GM 0.00275 km³/s², mean orbital distance 2.861284886249381 AU and orbital period 4.84005 years. These are the scale/facts used by shared astronomy; the broad 16 km reference sphere does not replace the released irregular geometry. The common presentation epoch is 2026-09-04 TT. Shared heliocentric elements approximate TDB as TT and are not a long-term perturbation model. Flood and Shadows use prepared diffuse lighting in the source body frame. The photographic lens still contains its acquisition shading in either state.
+The pinned Horizons physical record reports radius 16 km, GM 0.00275 km³/s², mean orbital distance 2.861284886249381 AU and orbital period 4.84005 years. These are the scale/facts used by shared astronomy; the broad 16 km reference sphere does not replace the released irregular geometry. The common presentation epoch is 2026-09-03 TT. Shared heliocentric elements approximate TDB as TT and are not a long-term perturbation model. Flood and Shadows use prepared diffuse lighting in the source body frame. The photographic lens still contains its acquisition shading in either state.
 
 ## Preparation and restoration
 
@@ -38,7 +38,9 @@ Native PolyCSS `u` triangles use 128px raster cells. Shared preparation owns the
 
 Restore missing source bytes with `node tools/objects/dist/operations.js acquire ida`, verify with `acquire ida --verify-only`, then run `node tools/objects/dist/prepare-authored.js ida --write`. Acquisition downloads the original Thomas files and shared sky/font pins, checking manifest hashes before publication. Source labels, title outlines and HYG subset are checked inputs. The title uses the pinned Inter 4.001 font; sky credits are retained in `source/stars`. Runtime installation is separate through the generated `runtime-assets.json` inventory.
 
-## Calibrated image
+## First calibrated image (retained source record)
+
+The two-image mosaic described below supersedes this original single-image presentation.
 
 The separate lens uses the original Domingue/GLLSSICAL I/F FITS `0202561278rcal_gre.fit`, green (0.559 µm) filter, acquired 1993-08-28T16:37:43.324Z. It retains the observation's illumination and applies only a fixed 0–0.12 I/F display stretch with gamma 2.2. It does not recover albedo or fill the unseen hemisphere. The original high-pass mosaic remains the default view.
 
@@ -49,3 +51,17 @@ No local camera fitting or image warping is performed. Four spatially separated,
 Quality comes from the original `i1278.fit` detector data and `idabad.tab` bad-data blocks, not a brightness threshold. All recorded dropouts, saturated/low-full-well pixels, spikes and Reed–Solomon overflow are withheld, as are raw DN 255 and ISIS special values. The calibrated and raw labels must agree on observation identity, time, target and filter. Finite calibrated zero remains an eligible measurement. Bad-data rectangles use one-based inclusive line/sample coordinates; duplicate records are harmless. Archived lossy compression is retained and is not described as lossless.
 
 Projection uses the source mesh's visibility and terrain-shadow rays, incidence/emission limits of 65°, and a five-pixel inset around detector edges and flagged gaps. These conservative margins limit uncertain limb transfer. The pinhole control is checked at source resolution; the SSI kernel's small radial distortion is not applied to the catalog's controlled image coordinates. Any remaining distortion is included in the measured residuals at the checked patches; this does not establish an exact error bound everywhere. The display mesh keeps its existing 800 native PolyCSS `u` raster faces and 128-pixel cells. Raster coverage counts refer to the cylindrical preparation grid, not physical surface area. Shadows default off.
+
+## Spacecraft mosaic update (2026-09-09)
+
+The SSI reflectance view now combines green-filter images **0202561278** and **0202560500**. The additional 170 m/pixel frame contributes an earlier approach viewpoint; the 111 m/pixel frame still supplies finer overlapping coverage. There is one reflectance dataset row. Thomas’s processed Monochrome map remains because it has much broader coverage and finer source imagery; it cannot be replaced by this pair without losing terrain.
+
+The original calibrated FITS/XML and raw detector FITS/label are pinned separately. Both raw quality companions are identified by target, exact time, filter and spacecraft clock, with the released `idabad.tab` block mask. The original four-pixel registration limit and five-pixel quality-boundary inset remain. Four separated 16×16 patches of image 0202560500 give 1.414 px RMS and 2.236 px maximum residual with no local camera fit. These are checks against the Thomas mosaic on the original shape, which shares mission observations; they are not absolute independent cartography.
+
+The same-filter survey also tested green images 0202558300 and 0202559400. Their useful projected patches did not establish four spatial checks at the retained tolerance. They are not included. Close clear-filter photographs were identified in the archive inventory but are not mixed into the green-filter reflectance view.
+
+Galileo brightness keeps its original acquisition illumination and a common 0–0.12 I/F, gamma-2.2 display transfer. There is no fitted photometric gain. Coarser qualified samples are laid down first, with the finer image replacing the interior and blending at the existing incidence/emission and detector boundaries. Run the contribution audit below to retain the actual weights for both sources.
+
+This package retains its original 800-triangle geometry, the ordinary prepared grid for missing coverage, and Shadows off. Renderer and shared interaction code are unchanged. Current mosaics supersede the single-photograph descriptions above.
+
+Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/planets/ida/source OUTPUT --frame 202560500 --profile reference/registration-202560500.json`. Run `node tools/objects/terrestrial-layers/audit-camera-mosaic.mjs src/planets/ida/source OUTPUT` for matched area-weighted before/after sampling and lossless Float32 contribution planes. The audit grids use the authored 4096×2048 cylindrical sampling, not atlas texel counts as surface area.
