@@ -65,7 +65,7 @@ The user’s delivery direction is **substantial PRs with complete outcomes acro
 | [B4 — Measured light curves and spectra](PR-BATCHES.md#b4) | Paused in draft PR #70; public chart presentation remains deferred. | 9 |
 | [B6 — Mapped science](B6-MAPPED-SCIENCE.md) | Six surface views merged in PR #76. | 4 |
 | [B7 — Cassini surface atlas](B7-CASSINI-ATLAS.md) | Five surface views merged in PR #81; aggregate qualification limits remain documented. | 3 |
-| [B8 — Surface chemistry](B8-SURFACE-CHEMISTRY.md) | Five spectral views prepared for review; source, package, browser and aggregate results are recorded separately. | 3 |
+| [B8 — Surface chemistry](B8-SURFACE-CHEMISTRY.md) | Five spectral views in [draft PR #87](https://github.com/layoutit/cssEarth/pull/87); selected-body review complete, aggregate and newer-main integration gates remain. | 3 |
 
 **B1 and B2 are merged; [B3 merged PR #67](https://github.com/layoutit/cssEarth/pull/67) covers the approved six-moon scope.** The user approved 13 B2 bodies and carried Titania and Miranda to B3. Real Chrome scientific captures and bounded manual reviews are documented, with superseded cases, mesh-edge limits and failed/pending aggregate gates kept explicit in the [B2 qualification checkpoint](b2-preparation/qualification-checkpoint.md). The four batches and the explicit B3 carry-forward queue cover every physical-model candidate and all 32 existing improvements. Each PR includes source closure, preparation, usable content/assets and full qualification for its cohort. Remaining source blockers and possible scope changes are explicit in the plan.
 

@@ -119,7 +119,7 @@ paused draft at the user's request.
 
 ## B8 — Surface chemistry on Io, Ganymede and Enceladus
 
-**State:** selected-body source, package, delivery, visual and interaction review complete; draft with aggregate gaps · **Owner:** Moons
+**State:** [Draft PR #87](https://github.com/layoutit/cssEarth/pull/87); selected-body source, package, delivery, visual and interaction review complete; aggregate and newer-main integration gates remain · **Owner:** Moons
 
 The [B8 scope and intake](B8-SURFACE-CHEMISTRY.md) delivers Io's visible spectral
 slope and absorption, Ganymede's oxygen-sensitive reflectance ratio, and two
