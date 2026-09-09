@@ -35,7 +35,7 @@ test('primary-specific companion sources define one global parent origin and con
       assert.equal(geometry.BODY_POSITION_PROVENANCE[parent].sha256, geometry.BODY_HELIOCENTRIC_STATES[parent].provenance.sha256);
     }
   }
-  assert.equal(geometry.BODY_ORBITS.patroclus, undefined, 'a coordinate origin does not create a standalone scene');
+  assert.ok(geometry.BODY_ORBITS.patroclus, 'the explicit Patroclus package shares the existing primary-specific origin');
 });
 
 for (const id of ['phobos', 'mimas', 'janus', 'epimetheus', 'helene', 'triton']) {

@@ -377,6 +377,15 @@ test('descriptor context binding pins both prepared contexts to the shared facto
   const report = await audit({});
   assert.equal(report.complete, true);
   assert.ok(report.sharedClosure.includes(contextFile));
+  // Patroclus now has a visible package. Retain coverage of the supported
+  // coordinate-only parent form using the same physical source position.
+  const primary = context.bodies.find(body => body.id === 'patroclus');
+  assert.ok(primary);
+  const coordinateContext = { ...context,
+    bodies: context.bodies.filter(body => body !== primary),
+    orbitCenters: { ...context.orbitCenters,
+      patroclus: { positionM: primary.positionM, centerBodyId: primary.orbit.centerBodyId } } };
+  assert.equal((await audit({ [contextFile]: JSON.stringify(coordinateContext) })).complete, true);
   const orbitless = { ...context, bodies: context.bodies.map((body, index) => {
     if (index) return body;
     const { orbit, ...point } = body;
@@ -389,12 +398,12 @@ test('descriptor context binding pins both prepared contexts to the shared facto
     [{ [contextFile]: JSON.stringify({ ...context, volume: { ...context.volume, objectId: '../milky-way' } }) }, /volume identity is not pinned/],
     [{ [contextFile]: JSON.stringify({ ...context, frame: { ...context.frame, originM: [1, 0, 0] } }) }, /physical frame/],
     [{ [contextFile]: JSON.stringify({ ...context, bodies: [] }) }, /body inventory/],
-    [{ [contextFile]: JSON.stringify({ ...context, orbitCenters: undefined }) }, /body orbit parent/],
-    [{ [contextFile]: JSON.stringify({ ...context, orbitCenters: { patroclus: { ...context.orbitCenters.patroclus, positionM: [0, 0, 0] } } }) }, /body orbit parent/],
-    [{ [contextFile]: JSON.stringify({ ...context, orbitCenters: { patroclus: { ...context.orbitCenters.patroclus, centerBodyId: 'patroclus' } } }) }, /parent hierarchy/],
+    [{ [contextFile]: JSON.stringify({ ...coordinateContext, orbitCenters: undefined }) }, /body orbit parent/],
+    [{ [contextFile]: JSON.stringify({ ...coordinateContext, orbitCenters: { patroclus: { ...coordinateContext.orbitCenters.patroclus, positionM: [0, 0, 0] } } }) }, /body orbit parent/],
+    [{ [contextFile]: JSON.stringify({ ...coordinateContext, orbitCenters: { patroclus: { ...coordinateContext.orbitCenters.patroclus, centerBodyId: 'patroclus' } } }) }, /parent hierarchy/],
     [{ [contextFile]: JSON.stringify({ ...context, orbitCenters: { ...context.orbitCenters, unused: { positionM: [0, 0, 0], centerBodyId: 'missing' } } }) }, /parent hierarchy/],
     [{ [contextFile]: JSON.stringify({ ...context, orbitCenters: { ...context.orbitCenters, sun: { positionM: [0, 0, 0], centerBodyId: 'sun' } } }) }, /orbit centre identity/],
-    [{ [contextFile]: JSON.stringify({ ...context, orbitCenters: { patroclus: { ...context.orbitCenters.patroclus, radiusM: 1 } } }) }, /orbit centre identity/],
+    [{ [contextFile]: JSON.stringify({ ...coordinateContext, orbitCenters: { patroclus: { ...coordinateContext.orbitCenters.patroclus, radiusM: 1 } } }) }, /orbit centre identity/],
     [{ [contextFile]: JSON.stringify({ ...orbitless, bodies: orbitless.bodies.map((body, index) => index ? body : { ...body, radiusM: undefined }) }) }, /physical point/],
     [{ [contextFile]: JSON.stringify({ ...orbitless, bodies: orbitless.bodies.map((body, index) => index ? body : { ...body, orbit: null }) }) }, /body orbit parent/],
     [{ [contextFile]: JSON.stringify({ ...context, bodies: context.bodies.map((body, index) => index ? body : { ...body,

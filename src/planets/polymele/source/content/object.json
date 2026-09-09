@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "polymele",
+  "displayName": "Polymele",
+  "panel": {
+    "introduction": "Polymele is a very flattened Jupiter Trojan and a Lucy target. This published ellipsoid is constrained by stellar occultations and its satellite's projected position. The grid marks unmapped terrain.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Approximate ellipsoid"
+      },
+      {
+        "id": "dimensions",
+        "label": "Full approximation dimensions",
+        "value": "27 × 24.4 × 10.4 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "Unresolved in this model"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Jupiter Trojan"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
+        "title": "Published approximate ellipsoid from six stellar occultations, assuming the satellite's orbit is circular and equatorial. Full approximation dimensions: 27 × 24.4 × 10.4 km. The fitted pole assumes an equatorial satellite orbit. Rotation period and current longitude remain unqualified; the display meridian is arbitrary. The grid marks unmapped terrain.",
+        "detail": "Approximate shape",
+        "thumbnail": "/scenes/polymele/polymele-model-thumbnail.webp",
+        "surface": "polymele-model-surface@2x.webp",
+        "poles": "polymele-model-poles@2x.webp",
+        "source": {
+          "id": "occultation-approximation",
+          "path": "../manifest.json",
+          "url": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape and dimensions",
+      "role": "surface",
+      "description": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70",
+      "href": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://doi.org/10.1007/s11214-025-01173-7"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published model and interpretation",
+      "href": "https://baas.aas.org/pub/2023n8i107p05"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://occultations.org/publications/rasc/2023/2184Polymele1.pdf",
+      "credit": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Levison et al. (2023), ACM abstract 2184; Levison et al. (2025), Space Science Reviews 221, 70"
+    }
+  }
+}
