@@ -1,0 +1,67 @@
+{
+  "baseline": "be69e2aaa2f636ebcf4e82156fd6de2e25724d73",
+  "topography": {
+    "beforeBytes": 4255972,
+    "afterBytes": 2510604,
+    "reductionPercent": 41.00985626785138,
+    "includes": "seven globe atlas pages, poles, thumbnail, new legend"
+  },
+  "allEarth": {
+    "beforeBytes": 38359462,
+    "afterBytes": 36614094,
+    "files": 152
+  },
+  "changedAssets": [
+    {
+      "filename": "earth-lens-topography.webp",
+      "bytes": 2818,
+      "sha256": "304695ff0dede0d2fe5f4916bb67b50e5b2d71ad3538fcd45de0ec95a52de61d"
+    },
+    {
+      "filename": "earth-topography-legend.png",
+      "bytes": 2066,
+      "sha256": "cd30437db4818a37363dc9ac616ce395f3aec411d13c02960c4e03e46585496c"
+    },
+    {
+      "filename": "earth-topography-page-1.webp",
+      "bytes": 302048,
+      "sha256": "ca09f9accba30e928e5a37e5b01f29621c1ea7d0534f48a36649994265d29856"
+    },
+    {
+      "filename": "earth-topography-page-2.webp",
+      "bytes": 543574,
+      "sha256": "e6f70903bfa6863b793b4f9e0ec767b28d96eda71f6ad078a1d68fb9bec0153d"
+    },
+    {
+      "filename": "earth-topography-page-3.webp",
+      "bytes": 680668,
+      "sha256": "d0331556d5df01d0f3d67db3d1d86ef24c73c502bd4a85129b695d3a37cbb5c7"
+    },
+    {
+      "filename": "earth-topography-page-4.webp",
+      "bytes": 442992,
+      "sha256": "0e3cb36a67754a860592717e1921fa1ec36c305e7f496eb2f1020654cb2f8aa3"
+    },
+    {
+      "filename": "earth-topography-page-5.webp",
+      "bytes": 291264,
+      "sha256": "b9b8b0006bb10e04b6ecb9990de54c11b5c87da32c9299e11383ee893154a2a5"
+    },
+    {
+      "filename": "earth-topography-page-6.webp",
+      "bytes": 34268,
+      "sha256": "2f0088b9f88190fea9d76cbad1dcef2b4589aa1a959445927ab6828d5b3785dc"
+    },
+    {
+      "filename": "earth-topography-poles.webp",
+      "bytes": 43138,
+      "sha256": "90cbe1e58001cb8ca23f06e5221de6c9590cd1c03ac78f9aa1a74a16dbc26734"
+    },
+    {
+      "filename": "earth-topography.webp",
+      "bytes": 167768,
+      "sha256": "640f30496491fd0fccb23e1167e6d3d6d57477c7ee98a11b321dbce5332f1ae2"
+    }
+  ],
+  "unchangedAssets": 142
+}

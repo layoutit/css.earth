@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "klio",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "44d90e15fc85329d7b689e2a87a9c052cb8b252654af5713bbb3db9b9936810e"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "470fb94f84bd323b2b698252ff223a2bf7cd2cd4b30c7c996141135c18ec8cfb",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "9a7efcb811435f0d16dbaaa21840d2fe41bd3d0f80cf4b8645ffd06516d8b305",
       "bytes": 7964,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/klio/klio-elevation-thumbnail.webp",
           "bytes": 5728,
           "sha256": "b38c9e5ecbc1b303dbdba9c3ed76ececca9c1705235e82ce0268134867bb8fc3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klio/klio-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klio/klio-elevation-surface@2x.webp",
           "bytes": 332352,
           "sha256": "5034fc9a9e49ef2f6a5aa9bf953328521e68439480b808e88ba4e7ff304b0f3d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/klio/klio-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klio/klio-shape-surface@2x.webp",
           "bytes": 234182,
           "sha256": "23faa50faf2e9ebe5729eb9d3964c9a323f5847f50c235ad65835343452081da",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

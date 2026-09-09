@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "feronia",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "7de0487b51feeb5a4c21c19d73cb18504389aa2909c6bed6fec04d6136b34887"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "d8096c0152a3739961254f1d3b305b3c6da0ad42d80ce7fc073cb63702a40bcc",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "a3388bd6455bf8e2cfad41264f0ab4221294a7e5fb3ebe900888f89d9af5484d",
       "bytes": 9881,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/feronia/feronia-elevation-thumbnail.webp",
           "bytes": 5498,
           "sha256": "83fd877781ab4430f6af49ba84459d9a5d165b4766728e215af544b68c2669da",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/feronia/feronia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/feronia/feronia-elevation-surface@2x.webp",
           "bytes": 273386,
           "sha256": "4eb153a4bef0ccada24e181361deff4a0767e05b9841757ee5154de130dd36a7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/feronia/feronia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/feronia/feronia-shape-surface@2x.webp",
           "bytes": 205906,
           "sha256": "3c09e6237f4a0eb15f9bcac14293f60f2683cb6d5e1d4e807bb76ce8f2391f95",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

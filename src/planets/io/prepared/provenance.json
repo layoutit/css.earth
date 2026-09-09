@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -616,7 +616,7 @@
       "sha256": "cf65a0323aac9c4c9eb582aa7b7ce0d36be8e445316fa6dba49ab5647b63584c",
       "bytes": 65546342,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -670,7 +670,7 @@
       "sha256": "337778617ffa6a3cdb5d36375265222ef37410db9495ca5ddbe7bc6786276d14",
       "bytes": 196637696,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -715,7 +715,7 @@
       "sha256": "6a02334eee7af7518f90c5f97b1468552499de89b05d17656d627556e71aa64f",
       "bytes": 2798948,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -735,7 +735,7 @@
       "sha256": "ac09efc6635cf3d9d81fb5596a050393bf358ea5f204b79d4039952b369c53a3",
       "bytes": 178964,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -755,7 +755,7 @@
       "sha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
       "bytes": 149,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -772,7 +772,7 @@
       "sha256": "108710dc7c7c1566fa236cc3654a6b6afcd86fb203a701f049b1b7a4e0d372f9",
       "bytes": 11577,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -814,19 +814,19 @@
           "url": "/scenes/io/io-normal-thumbnail.webp",
           "bytes": 2956,
           "sha256": "6ef01913772fefcaf657519b6bdb26ce50fa7df55c4be24b86c409f1b821c9dd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/io/io-normal-surface@2x.webp",
           "bytes": 666484,
           "sha256": "7c5647c27d2a006654a52b2503f5fe6028b7dc36760418c8c67726dcfe5e8436",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/io/io-normal-poles@2x.webp",
           "bytes": 16276,
           "sha256": "94e3549ab68f0575281eedda16aaf2226f2e36c70b6573f123f1ae3b2800062c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -870,19 +870,19 @@
           "url": "/scenes/io/io-enhanced-thumbnail.webp",
           "bytes": 8488,
           "sha256": "87a736050c59000f70525cd4c05905851b06941b9bf12f32a3f5b86b1e14f6b9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/io/io-enhanced-surface@2x.webp",
           "bytes": 813758,
           "sha256": "69913c53fa4cd634a62c6fc4cd7e129eb4c2fa39c6461435b7a4f7d52bfe9ec7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/io/io-enhanced-poles@2x.webp",
           "bytes": 27566,
           "sha256": "44efdb1d16d9b4f66b8ea6d74e009622b71ece910b2a9e1883c3499157eb2880",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -917,19 +917,19 @@
           "url": "/scenes/io/io-geology-thumbnail.webp",
           "bytes": 1342,
           "sha256": "c174d19381e631edc930799dc978694cc60d179008a3c327b31bdeea0e4860e3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/io/io-geology-surface@2x.webp",
           "bytes": 198562,
           "sha256": "ed0690bd5f1f66eac03f3b10bbfd6db6ca45da675681163a6a73b0dc69ea1db0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/io/io-geology-poles@2x.webp",
           "bytes": 12162,
           "sha256": "5e6994d95674f76a5537b4b687e2d03bdebcc96efb082246aee3070f4c08ec98",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

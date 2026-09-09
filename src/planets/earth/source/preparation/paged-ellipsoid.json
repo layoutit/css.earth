@@ -12,7 +12,7 @@
     "searchLabel": "Search planets and cities",
     "descriptionSuffix": " cities worldwide.",
     "statuses": {
-      "detail": "WorldCover imagery \u00b7 2021. Source gaps retain the Earth base map.",
+      "detail": "WorldCover imagery · 2021. Source gaps retain the Earth base map.",
       "overview": "Earth overview. WorldCover detail is unavailable at this location."
     }
   },
@@ -104,9 +104,201 @@
         "thumbnail": "earth-lens-normal.webp"
       },
       {
-        "path": "blue-marble-topography.jpg",
+        "path": "science/gebco-2026/latitude-00.dods.gz",
         "name": "earth-topography",
-        "thumbnail": "earth-lens-topography.webp"
+        "thumbnail": "earth-lens-topography.webp",
+        "scientific": {
+          "kind": "gebco-elevation",
+          "metadata": "science/gebco-2026.das",
+          "grid": {
+            "width": 8640,
+            "height": 4320,
+            "firstIndex": 4,
+            "stride": 10,
+            "nativeCellDegrees": 0.004166666666666667
+          },
+          "palette": [
+            {
+              "meters": -10000,
+              "color": "#091d46"
+            },
+            {
+              "meters": -6000,
+              "color": "#164579"
+            },
+            {
+              "meters": -4000,
+              "color": "#2678ad"
+            },
+            {
+              "meters": -2000,
+              "color": "#62b5ca"
+            },
+            {
+              "meters": -200,
+              "color": "#b2d8d5"
+            },
+            {
+              "meters": -1,
+              "color": "#d5e9dd"
+            },
+            {
+              "meters": 0,
+              "color": "#628c49"
+            },
+            {
+              "meters": 500,
+              "color": "#a1ae65"
+            },
+            {
+              "meters": 1000,
+              "color": "#cfbd82"
+            },
+            {
+              "meters": 2000,
+              "color": "#c5a078"
+            },
+            {
+              "meters": 4000,
+              "color": "#a57d69"
+            },
+            {
+              "meters": 6000,
+              "color": "#bab2a6"
+            },
+            {
+              "meters": 8000,
+              "color": "#eeeae2"
+            },
+            {
+              "meters": 10000,
+              "color": "#ffffff"
+            }
+          ],
+          "relief": {
+            "referenceRadiusMeters": 6371008.8,
+            "heightToMeters": 4,
+            "lightDirection": [
+              -0.5,
+              0.5,
+              0.7071067811865476
+            ],
+            "ambient": 0.6
+          },
+          "legend": {
+            "image": "earth-topography-legend.png",
+            "width": 620,
+            "height": 16,
+            "minimum": -10000,
+            "maximum": 10000
+          },
+          "blocks": [
+            {
+              "path": "science/gebco-2026/latitude-00.dods.gz",
+              "rowOffset": 0,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-01.dods.gz",
+              "rowOffset": 240,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-02.dods.gz",
+              "rowOffset": 480,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-03.dods.gz",
+              "rowOffset": 720,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-04.dods.gz",
+              "rowOffset": 960,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-05.dods.gz",
+              "rowOffset": 1200,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-06.dods.gz",
+              "rowOffset": 1440,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-07.dods.gz",
+              "rowOffset": 1680,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-08.dods.gz",
+              "rowOffset": 1920,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-09.dods.gz",
+              "rowOffset": 2160,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-10.dods.gz",
+              "rowOffset": 2400,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-11.dods.gz",
+              "rowOffset": 2640,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-12.dods.gz",
+              "rowOffset": 2880,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-13.dods.gz",
+              "rowOffset": 3120,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/rows-3360.dods.gz",
+              "rowOffset": 3360,
+              "rows": 120
+            },
+            {
+              "path": "science/gebco-2026/rows-3480.dods.gz",
+              "rowOffset": 3480,
+              "rows": 120
+            },
+            {
+              "path": "science/gebco-2026/latitude-15.dods.gz",
+              "rowOffset": 3600,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/latitude-16.dods.gz",
+              "rowOffset": 3840,
+              "rows": 240
+            },
+            {
+              "path": "science/gebco-2026/rows-4080.dods.gz",
+              "rowOffset": 4080,
+              "rows": 120
+            },
+            {
+              "path": "science/gebco-2026/rows-4200.dods.gz",
+              "rowOffset": 4200,
+              "rows": 120
+            }
+          ]
+        },
+        "webp": {
+          "quality": 75,
+          "effort": 6
+        }
       },
       {
         "path": "black-marble-2016.jpg",
@@ -120,11 +312,11 @@
         "scientific": {
           "kind": "gibs-mur-imagery",
           "date": "2026-09-07",
-          "baseline": "2003\u20132014",
+          "baseline": "2003–2014",
           "checked": "2026-09-09T03:53:28.313Z",
           "advisory": {
             "date": "13 August 2026",
-            "status": "El Ni\u00f1o Advisory",
+            "status": "El Niño Advisory",
             "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
           }
         },

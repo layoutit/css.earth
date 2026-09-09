@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "ariadne",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "161dd62f919e420b2db30a1d0c13a5029c0d3d56c803f01ce0978c23d7b6a68f"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "c51298a00d557411c88c4d49eafcb6afc80fd1906891e9eb6c23829820f0c76f",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "fe83bd2ba55afeb7f0f0f2dba650656dac69ac229938a6a87d58f2a5ab2b804f",
       "bytes": 10042,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/ariadne/ariadne-elevation-thumbnail.webp",
           "bytes": 5174,
           "sha256": "26731e2bb970ddc4a1015754fb01f9014971f07cd59d8e5ba965370cdd33f4cc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ariadne/ariadne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ariadne/ariadne-elevation-surface@2x.webp",
           "bytes": 283394,
           "sha256": "e8493d3688cb6c9307f919e69a35705aedfab5d477c4436a763e667ef3b1d522",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/ariadne/ariadne-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ariadne/ariadne-shape-surface@2x.webp",
           "bytes": 192108,
           "sha256": "df600ec94f0ac9674bb43193010a44f178639db92c6ee5c7fc4d3be71038bc29",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

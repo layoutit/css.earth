@@ -1,0 +1,360 @@
+{
+  "schema": "cssearth-tuttle-gates@1",
+  "applicationRevision": "18095d92b0be53f3873cff55f1b39e838f71c473",
+  "integratedMain": "4848897ee01d37987f837351802ec35ca3cd1871",
+  "qualification": "Focused qualification is complete. Repository aggregate readiness is not all green. Logs remain at the relative local paths shown; each is bound by size and SHA-256. Overlapping focused counts must not be summed as unique tests.",
+  "checks": [
+    {
+      "log": "output/tuttle/build-current-main.log",
+      "status": "PASS",
+      "scope": "Full pnpm build after integration of main 4848897e.",
+      "bytes": 1596428,
+      "sha256": "39677e851ee71e4ab6aa1a3e039d87dbd08a4cd1dc744d881e6c812541e863e0"
+    },
+    {
+      "log": "output/tuttle/prepare-final-copy.log",
+      "status": "PASS",
+      "scope": "Final Tuttle preparation after the text edit.",
+      "bytes": 80,
+      "sha256": "4d153ff4082db705e5eb0841c7e9a6167f9ac405e8376dd4574a8878c1c2a489"
+    },
+    {
+      "log": "output/tuttle/final-presentation-build.log",
+      "status": "PASS",
+      "scope": "Final pnpm exec astro build: 260 pages.",
+      "bytes": 13570,
+      "sha256": "0b97fd7a1d338747f2d5f8d28744374f1996e9ad1c571d364dd2b9228234006f"
+    },
+    {
+      "log": "output/tuttle/final-assembly.log",
+      "status": "PASS",
+      "scope": "Final pnpm assemble:planets.",
+      "bytes": 1511619,
+      "sha256": "704c091056d065d24c55e1f85f621ab37c5ac1039952eb83aa48f5aab7001c12"
+    },
+    {
+      "log": "output/tuttle/final-source-tests.log",
+      "status": "PASS",
+      "scope": "Four independent Tuttle model, aspect and delivered-geometry checks.",
+      "bytes": 515,
+      "sha256": "132df255cebe65776a5e4f066e165719a63488daa314221dbb69b44ddf7dae1d",
+      "reportedCounts": {
+        "tests": [
+          4
+        ],
+        "pass": [
+          4
+        ],
+        "fail": [
+          0
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/shared-mesh-regression.log",
+      "status": "PASS",
+      "scope": "Fourteen shared loader, mesh and source-lighting checks; these implementation paths were unchanged by the later text edit.",
+      "bytes": 1413,
+      "sha256": "635f040220effa5f4caf3c11374d8ce0ba6d33f7b645a3cdfe5359d1646c39c4",
+      "reportedCounts": {
+        "tests": [
+          14
+        ],
+        "pass": [
+          14
+        ],
+        "fail": [
+          0
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/surface-preview-regression.log",
+      "status": "PASS",
+      "scope": "Five preparation preview checks after main integration.",
+      "bytes": 561,
+      "sha256": "4b02a2bbbe4001b2a3ee58bf336e7a9110da9883df46861008e610b4b6ffebfe",
+      "reportedCounts": {
+        "tests": [
+          5
+        ],
+        "pass": [
+          5
+        ],
+        "fail": [
+          0
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/package-closure-final.log",
+      "status": "PASS",
+      "scope": "Three Tuttle package, source and compiled asset-closure checks.",
+      "bytes": 379,
+      "sha256": "00c77e7a92377a304f68c8ec3d6d9a893ccfb707e59ad891b5c9ad33bd5e2cf9",
+      "reportedCounts": {
+        "tests": [
+          3
+        ],
+        "pass": [
+          3
+        ],
+        "fail": [
+          0
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/tuttle-source-current-main.log",
+      "status": "PASS",
+      "scope": "All 19 source entries verify.",
+      "bytes": 86,
+      "sha256": "ec8bdda5a2dd729a2a2b7819b62a994aa3f95e6115bc7c2911c3cdb9a8cb09d2"
+    },
+    {
+      "log": "output/tuttle/final-card-tests.log",
+      "status": "PASS",
+      "scope": "Fourteen current card, spacecraft, source and legend checks.",
+      "bytes": 1395,
+      "sha256": "f6c7b8da7e63f97f157530be1d2e7539e160943660c1108bf95785cc828f732e",
+      "reportedCounts": {
+        "tests": [
+          14
+        ],
+        "pass": [
+          14
+        ],
+        "fail": [
+          0
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/density-and-legends-final.log",
+      "status": "PASS",
+      "scope": "Six canonical-density and legend checks with an 8 GiB Node heap.",
+      "bytes": 561,
+      "sha256": "77c538601d94938ff08feef90b3b5bbc7061a6286b8b22d364d271da277e2740",
+      "reportedCounts": {
+        "tests": [
+          6
+        ],
+        "pass": [
+          6
+        ],
+        "fail": [
+          0
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/provenance-integration-tests.log",
+      "status": "PASS",
+      "scope": "Ten prepared source-provenance integration checks.",
+      "bytes": 1113,
+      "sha256": "9d7224fead4f9494cbdd21e0bf1a7ed4afcd1183cd6b0270b2d1a3a260eb6252",
+      "reportedCounts": {
+        "tests": [
+          10
+        ],
+        "pass": [
+          10
+        ],
+        "fail": [
+          0
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/final-dom.log",
+      "status": "PASS",
+      "scope": "Tuttle retained DOM at DPR 1 and 2.",
+      "bytes": 110,
+      "sha256": "d8d05e59059e7c918a0fda37dbc458307b99a5841d59437de931933868c973f0"
+    },
+    {
+      "log": "output/tuttle/navigation-current-main.log",
+      "status": "PASS",
+      "scope": "Six-comet navigation on integrated main before the final card trim; 13 visits at each DPR.",
+      "bytes": 96,
+      "sha256": "b14635a4fdf052573154c987d68176a5ea50badfae87414842ee828bac7ed524"
+    },
+    {
+      "log": "output/tuttle/capture-final.log",
+      "status": "PASS",
+      "scope": "Final production DPR 1 and 2 and fresh runtime DPR 1.",
+      "bytes": 282,
+      "sha256": "96c6fec745308319315e1766ab7f1a00e572e4c9318bc466ccca433c74433de7"
+    },
+    {
+      "log": "output/tuttle/runtime-publication-final.log",
+      "status": "PASS",
+      "scope": "R2 publication and empty-destination restoration of the unchanged 31-file runtime inventory.",
+      "bytes": 795,
+      "sha256": "e87566230411e6a45922e0388404def1d3cfe0f62c6046e3814761733d7522f2"
+    },
+    {
+      "log": "output/tuttle/trace-comet-8p-dpr-1.log",
+      "status": "PASS",
+      "scope": "Matched production drag trace; final application revision.",
+      "bytes": 5290,
+      "sha256": "033af21e51036521b2c9f1de5229868dfd2a6a9d14852c4e8eb923c274408618"
+    },
+    {
+      "log": "output/tuttle/trace-comet-8p-dpr-2.log",
+      "status": "PASS",
+      "scope": "Matched production drag trace; final application revision.",
+      "bytes": 5291,
+      "sha256": "25a676716de9023df4084f757819cb9a220d8c5c34e0deec87ef30bec50ba024"
+    },
+    {
+      "log": "output/tuttle/trace-comet-1p-dpr-1.log",
+      "status": "PASS",
+      "scope": "Matched production drag reference; final application revision.",
+      "bytes": 5289,
+      "sha256": "7af609c21d4880fdf8e24f7fc5fcd2bfabc46981ebeb22e54eac7d1c12496600"
+    },
+    {
+      "log": "output/tuttle/trace-comet-1p-dpr-2.log",
+      "status": "PASS",
+      "scope": "Matched production drag reference; final application revision.",
+      "bytes": 5296,
+      "sha256": "861fdc2195dd4f67f5dae287073aef58659ddefad4fcefc355b41f4d7f0525fa"
+    },
+    {
+      "log": "output/tuttle/test.log",
+      "status": "FAIL",
+      "scope": "Pre-main-integration aggregate: 761 package passes, then renderer 340 pass / 6 fail on Earth expectations; later stages did not run.",
+      "bytes": 17905,
+      "sha256": "b22330b2d3891c316d33d7448da60453b63c4001e6315c73e148c62783ba8ee1"
+    },
+    {
+      "log": "output/tuttle/preparation-tests.log",
+      "status": "FAIL",
+      "scope": "Pre-main-integration aggregate: 1175 pass / 112 fail. Not repeated after integration; not every existing failure has a separately reproduced clean-baseline run.",
+      "bytes": 301056,
+      "sha256": "ea50bfafe0ea6027c4d7950d6c4ed0998e6d94524c0e47c77f8918f159bf3eac",
+      "reportedCounts": {
+        "tests": [
+          1287
+        ],
+        "pass": [
+          1175
+        ],
+        "fail": [
+          112
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/shell-current-main.log",
+      "status": "PARTIALLY_RESOLVED",
+      "scope": "Initial integrated run: 250 pass / 8 fail. Final targeted reruns above cleared memory-limit, provenance and legend failures; four existing Itokawa browser-profile failures remain.",
+      "bytes": 39083,
+      "sha256": "151f46b229d3e6477e641263ef7ced2c54e3af3166047911a8e01ce8c8ccdfcc",
+      "reportedCounts": {
+        "tests": [
+          258
+        ],
+        "pass": [
+          250
+        ],
+        "fail": [
+          8
+        ],
+        "cancelled": [
+          0
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/main-source-verification.log",
+      "status": "FAIL",
+      "scope": "Stops on Aegaeon source size pin; both involved files equal main 4848897e. Separate exact-file receipt included.",
+      "bytes": 5219,
+      "sha256": "570a0fc340a53cf798cbe7ab6fc16300cbc6adc926a6caeee4e280990d55760f"
+    },
+    {
+      "log": "output/tuttle/platform-tests.log",
+      "status": "INTERRUPTED",
+      "scope": "Pre-integration aggregate intentionally interrupted before merging current main; no completion claim.",
+      "bytes": 176842,
+      "sha256": "0627478684efbc2ca523b45fc96ee1d45be035b006b06d06b8a3f25376f5f479",
+      "reportedCounts": {
+        "tests": [
+          1855
+        ],
+        "pass": [
+          1851
+        ],
+        "fail": [
+          3
+        ],
+        "cancelled": [
+          1
+        ],
+        "skipped": [
+          0
+        ]
+      }
+    },
+    {
+      "log": "output/tuttle/conformance-stable.log",
+      "status": "FAIL",
+      "scope": "Detailed development conformance requests comet diagnostics after minimum zoom navigates to Sun; reproduced with Tuttle and Halley.",
+      "bytes": 1555,
+      "sha256": "50129d68ce4d4a3b9c2248e049434a636d17dfa85b3aa4c37f47e7b92e5df3d6"
+    }
+  ]
+}

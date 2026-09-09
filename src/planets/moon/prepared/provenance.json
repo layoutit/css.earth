@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -576,7 +576,7 @@
       "sha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
       "bytes": 457942,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -603,7 +603,7 @@
       "sha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
       "bytes": 33177600,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -636,7 +636,7 @@
       "sha256": "d791cb16b0e6ee74bda94ca5bc1577fc9589a9e7d70cdade255ad199f83a5e95",
       "bytes": 300978,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -663,7 +663,7 @@
       "sha256": "ee0ff6ddfcc9cb4bb2fe83992f3951471c468a169804f1fdb582dc2df99540e1",
       "bytes": 88473600,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -687,7 +687,7 @@
       "sha256": "975584a72c38c0e8ced47a5c3ce94a6ecc2150a711cf6a83e0b33f3ffb6e87c7",
       "bytes": 14706,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -720,31 +720,31 @@
           "url": "/scenes/moon/moon-surface-thumbnail.webp",
           "bytes": 2752,
           "sha256": "d781200e2456b17193e6c8f97bacf2fc8b21c095351b524f814cd029c06734b7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface.webp",
           "bytes": 139914,
           "sha256": "ba3e8fc8df0eb68c3e35354eceeef55edf09a04bdfd2b0a0341b965b5693ac58",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface@2x.webp",
           "bytes": 468882,
           "sha256": "46ca2b9b271f4a0bc628a899f710ac065b5c4fdbd01af38570b090f7c53be7cb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface-poles.webp",
           "bytes": 5624,
           "sha256": "048cf0d10edddc0ed7babcf4364f03b9c18eaa98858999b3e769c3c80f8190d8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-surface-poles@2x.webp",
           "bytes": 14032,
           "sha256": "7a3729490730deab48820f38c4dfd413d33857defb0310775e7308bfaa555c11",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -776,31 +776,31 @@
           "url": "/scenes/moon/moon-topography-thumbnail.webp",
           "bytes": 8168,
           "sha256": "c0f707fe1ccaddcd07cb6aec66dcbdc25811c20e5f9d3dccbd63d86a4a45c1e6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography.webp",
           "bytes": 529956,
           "sha256": "5662a74d505859d319028aed84d58142f6e14552b39f71d47f4031c3f5b5e644",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography@2x.webp",
           "bytes": 1763150,
           "sha256": "dd10f4675f70a899a5562feba522886acf6bf9323ca0729a39bdc7f2dc81ffdf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography-poles.webp",
           "bytes": 47866,
           "sha256": "f460a6375079dec50f7d7d7f5c465c619bc6a6958cd20e7a854ffb88d2f01f32",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-topography-poles@2x.webp",
           "bytes": 149512,
           "sha256": "e9f3a061b32a7e394dfed366fc39a4af0366fc1d301863f7fc85e6b6429df1d2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -832,31 +832,31 @@
           "url": "/scenes/moon/moon-crustal-thickness-thumbnail.webp",
           "bytes": 4676,
           "sha256": "42dd84a4036d4d996c1c98cbb685f25219bfd212dc01cee5c5f408adc172fb3b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness.webp",
           "bytes": 213074,
           "sha256": "c751f7d4915fca9c2e6f68841318acc39dc9b5794d379519c6373378e9db17ac",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness@2x.webp",
           "bytes": 476264,
           "sha256": "5c2b146fe3c147075fed83797cee3ae2e0e4197ee40229572c7e71de7731abee",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness-poles.webp",
           "bytes": 13380,
           "sha256": "fd4ba671d89e385a596b6459a988262d91a6db407870e0f8925afee0c85a2652",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-crustal-thickness-poles@2x.webp",
           "bytes": 35532,
           "sha256": "cd0d657288278f16ce42254b7526f7dacba27a4e45c3b22b862665eed0ff60be",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -888,31 +888,31 @@
           "url": "/scenes/moon/moon-rock-abundance-thumbnail.webp",
           "bytes": 3018,
           "sha256": "4c08682c9073d2d80ddaf46a7c5c567e22512c25cc9d4edea799196829039917",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance.webp",
           "bytes": 148488,
           "sha256": "ae9cab0075a3b97e9542f00ecde380189165a37b2f72adc701005318d8ab1587",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance@2x.webp",
           "bytes": 558446,
           "sha256": "3d736ad2b78f81d01fcaf54574fe8004d4d2f8d2bebbd816df150873c18d37b2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance-poles.webp",
           "bytes": 2550,
           "sha256": "f1215e4fc7db45d20e92c5d4ed473143ed495c61ff97deaa9cd58cb5df78831a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/moon/moon-rock-abundance-poles@2x.webp",
           "bytes": 5948,
           "sha256": "d6689a7b30c5d65046d99f50b71f2b2c45620780f553a4b43760cf4f3f947878",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

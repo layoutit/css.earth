@@ -143,19 +143,35 @@
           "id": "surface-observation"
         },
         "detail": "Global mosaic",
-        "summary": "NASA Blue Marble 2004 with ESA WorldCover 2021 detail. The surface and clouds are archival, not live."
+        "summary": "NASA Blue Marble, December 2004, with an archival cloud composite. These global observations are not live imagery."
       },
       {
         "id": "topography",
         "label": "Elevation",
-        "description": "NASA Blue Marble topography and bathymetry, December 2004. Color and relief show land and seafloor elevation, not a photograph.",
-        "title": "Elevation: NASA Blue Marble topography and bathymetry",
+        "description": "GEBCO_2026 terrain model. Colors show meters above and below mean sea level; relief is shaded for readability. Ocean depths combine measured and estimated terrain. Land includes the ice surface.",
+        "title": "Elevation: GEBCO_2026 land and seafloor heights",
         "thumbnail": "/scenes/earth/earth-lens-topography.webp",
         "source": {
-          "id": "surface-observation"
+          "id": "gebco-2026-elevation",
+          "url": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid"
         },
-        "detail": "Land + seafloor",
-        "summary": "NASA Blue Marble topography from 2004. Colors and shading show land and seafloor elevation, not photos."
+        "detail": "GEBCO · 2026",
+        "summary": "GEBCO_2026 modeled terrain. Colors show height and depth relative to mean sea level; ocean depths include estimates.",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Height / depth · m",
+          "sourceUrl": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid",
+          "image": "earth-topography-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "≤ −10,000 m",
+            "0 m",
+            "+10,000 m"
+          ]
+        },
+        "legendNote": "0 = mean sea level. Shading emphasizes relief; the color scale is unshaded. Some coastal source datums differ."
       },
       {
         "id": "night-lights",

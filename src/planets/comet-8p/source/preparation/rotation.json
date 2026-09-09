@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 285,
+  "declinationDegrees": 20,
+  "displayMeridianDegrees": 0,
+  "phase": "arbitrary-display-phase",
+  "source": "shape/model.json",
+  "qualification": "The HST model pole is RA 285 ±12°, Dec +20 ±5° (Groussin et al. 2019). The display meridian and fixed rotational phase are illustrative; no 2026 attitude ephemeris is claimed."
+}

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "ianthe",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "61d38b3626a18c33be21587262d7a67519483770e864ffcc534b29f89fdd64c5"
@@ -9,7 +9,7 @@
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
-    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+    "bindingsSha256": "58fa0158be3b18b9d7f3923aa52ee9b0d75b3e1ad40278d03fb4081f878e448e"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "0b7c71c3ad49bdc31f45d662a68f4f4a29a637c6399b280eeb74a8eee9377d94",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "95ef66865b450ce58765ad6c3b1a23a8771c45b46d0f4e4106dba708a013bb61",
       "bytes": 9588,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/ianthe/ianthe-elevation-thumbnail.webp",
           "bytes": 5594,
           "sha256": "5f2ca0711931b1b79fd13028417cce57dfe4c733017e67b39378f811633d7f55",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ianthe/ianthe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ianthe/ianthe-elevation-surface@2x.webp",
           "bytes": 287838,
           "sha256": "00b91612d9fb36e2ed0b58ea6eaadebbb301fbac15c259b42d1b4c84efa4d98e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/ianthe/ianthe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ianthe/ianthe-shape-surface@2x.webp",
           "bytes": 243348,
           "sha256": "6d9a4196b167cac6ef2196b8d36c2a6d004fb25e03b987e679c931f636449f38",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

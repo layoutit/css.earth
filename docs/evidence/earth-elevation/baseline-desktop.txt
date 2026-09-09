@@ -1,0 +1,23 @@
+(node:52157) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[conformance] START earth/desktop
+[conformance] FAIL earth/desktop: earth: 821px landscape desktop mode must restore wheel zoom
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: earth: 821px landscape desktop mode must restore wheel zoom
+    at proveBreakpointCrossings (file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:1479:12)
+    at async proveDesktop (file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:576:5)
+    at async within (file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:100:12)
+    at async runCase (file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:88:20)
+    at async file:///private/tmp/cssEarth-elevation-baseline/site/test/planet-browser-conformance.mjs:61:18 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

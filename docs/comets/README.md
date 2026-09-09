@@ -1,10 +1,11 @@
-# Comet proof of concept
+# Comet scenes
 
-One PR adds five independently selectable nucleus packages to the existing generic object registry. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. All geometry, maps, normals and shadows are prepared before runtime.
+Six independently selectable nucleus packages use the generic object registry. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. Tuttle retains two separate 1,000-triangle models and displays only the selected one. All geometry, maps, normals and shadows are prepared before runtime.
 
 | Object | Geometry source | What the default view represents |
 | --- | --- | --- |
 | [1P/Halley](../../src/planets/comet-1p/SOURCE.md) | Stooke's historical Giotto/Vega radius grid, 2,701 rows | Highly uncertain historical shape with neutral material and an illustrative fixed attitude. |
+| [8P/Tuttle](../../src/planets/comet-8p/SOURCE.md) | Hubble/Spitzer contact spheres and an alternative Arecibo contact-ellipsoid model | Hubble/Spitzer is the default; Arecibo uses a separate inferred shape at the same physical scale. Both have illustrative attitudes. |
 | [67P/Churyumov–Gerasimenko](../../src/planets/comet-67p/SOURCE.md) | ESA/RMOC MTP019, 104,192 source triangles | Rosetta nucleus geometry with a neutral gray model material. The neck and non-convex topology are retained. |
 | [103P/Hartley 2](../../src/planets/comet-103p/SOURCE.md) | Farnham & Thomas (2013), EPOXI PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. The cartographic long axis is not treated as a spin axis. |
 | [9P/Tempel 1](../../src/planets/comet-9p/SOURCE.md) | Farnham & Thomas (2013), combined Deep Impact/Stardust-NExT PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. |
@@ -12,7 +13,7 @@ One PR adds five independently selectable nucleus packages to the existing gener
 
 For Hartley 2 and Tempel 1, gray marks stereo-controlled regions, blue marks limb-silhouette constraints, and grid texels mark poorly constrained source estimates in both views. Those estimates belong to the archived model. The Shape model lens uses gray for the stronger constraints. These are inspection materials, not albedo photographs. Halley has no regional confidence flags, so it uses a visible whole-model uncertainty label.
 
-The display does not simulate dust, a coma, jets, tails or outgassing. The PDS comet models have no invented uniform spin. All phases are explicitly arbitrary. Solar placement uses JPL Horizons osculating elements at JD 2461286.5 (3 September 2026 TT); it is not a long-term ephemeris. Independent Horizons vector checks at that epoch agree within 2 mm. At ±30 days the largest measured conic discrepancies include 329.06 km for 67P, 390.29 km for Hartley 2, 5,181.10 km for Tempel 1, and 557.99 km for Halley. Per-body regression guards add about 15% headroom under a separate 10,000 km nearby-placement budget. Runtime does not extrapolate the display epoch.
+The display does not simulate dust, a coma, jets, tails or outgassing. The PDS comet models have no invented uniform spin. All phases are explicitly arbitrary. Solar placement uses JPL Horizons osculating elements at JD 2461286.5 (3 September 2026 TT); it is not a long-term ephemeris. Independent Horizons vector checks at that epoch agree within 2 mm. At ±30 days the largest measured conic discrepancies include 329.06 km for 67P, 390.29 km for Hartley 2, 5,181.10 km for Tempel 1, and 557.99 km for Halley, and 437.44 km for Tuttle. Per-body regression guards add about 15% headroom under a separate 10,000 km nearby-placement budget. Runtime does not extrapolate the display epoch.
 
 ## Additional candidates
 
@@ -39,3 +40,5 @@ the MiARD candidate disposition and source-selection evidence.
 [67P VIRTIS scientific views](67P-VIRTIS.md) documents the four MTP006 datasets, numerical units, source-to-shape transfer, concise lens factsheets and validation evidence.
 
 [Wild 2, Tempel 1 and Hartley 2 encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the five optional photographic views, selected spacecraft products, camera checks and coverage limits.
+
+[Tuttle](TUTTLE.md) records the sixth comet and its independent geometry/orbit checks. [The Arecibo comparison](TUTTLE-ARECIBO.md) records both datasets and the current browser, delivery and drag evidence.

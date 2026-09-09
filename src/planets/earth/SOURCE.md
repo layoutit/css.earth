@@ -5,7 +5,7 @@ Earth is prepared from checked, adapter-owned source snapshots. Runtime reads pr
 ## Surface and observation layers
 
 - Normal colour: NASA Earth Observatory, Blue Marble Next Generation, December 2004. The checked 21,600 × 10,800 JPEG is `source/blue-marble-december.jpg`.
-- Topography: NASA Earth Observatory, Blue Marble topography and bathymetry, December 2004. The checked 21,600 × 10,800 JPEG is `source/blue-marble-topography.jpg`.
+- Elevation: GEBCO_2026 numeric land/ice-surface and seafloor height model. See the GEBCO preparation record below; the former Blue Marble shaded-color topography image is retired.
 - Clouds: NASA Visible Earth, Blue Marble Clouds. The checked 8,192 × 4,096 TIFF is `source/blue-marble-clouds.tif`.
 - Night lights: NASA Earth Observatory, Black Marble 2016. The checked global 3 km, 13,500 × 6,750 JPEG is `source/black-marble-2016.jpg`.
 - Navigation marker: NASA image-library Earth globe `GSFC_20171208_Archive_e001016`, checked as `source/earth-navigation.jpg`.
@@ -141,3 +141,13 @@ emulation. It exercises search, keyboard selection, camera centering, imagery
 loading, globe return, globally available destinations and retained scene identity. Phone
 emulation is not physical-device proof. Reports and actual screenshots are in
 `output/playwright/city-selection/`.
+
+## GEBCO elevation preparation (2026-09-09)
+
+[GEBCO_2026](https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2026-grid), DOI 10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa, supplies signed meters relative to mean sea level. The primary land-and-ice-surface version is used. This is a terrain model integrating measured and estimated seafloor depths; the 15 arc-second cell spacing does not imply measurements at that spacing everywhere. The publisher notes local coastal datum exceptions.
+
+The 20 pinned DAP2 latitude blocks contain 120 or 240 rows and together sample native indices 4:10:43194 in latitude and 4:10:86394 in longitude: 8,640 × 4,320 scalar values at 2.5 arc-minute spacing. It is a sampled overview, not a full-resolution DEM or a peak-preserving average. Latitude runs south to north, longitude west to east, and native cells are center-registered. Both coordinate arrays and the provider metadata are retained and validated. Acquisition uses the shared download operator with deterministic gzip encoding. Blocks are rejected on truncation, wrong coordinates, overlaps or gaps; only a complete globe is accepted.
+
+The existing paged-ellipsoid preparation bilinearly samples heights onto the 8,192 × 4,096 globe raster before coloring. The authored palette spans −10,000 to +10,000 m, saturating deeper trenches. Local cartographic relief reuses the scientific-raster finite-difference helper with a 6,371,008.8 m reference sphere, latitude-adjusted east-west spacing, 4× slope exaggeration, northwest light at 45° elevation, and 60% ambient contribution. This changes image shading, not globe geometry. Shared flood and directional lighting remain supported. The numeric legend is unshaded and uses the identical palette; globe pages, poles, thumbnail and minimap share the same interpretation.
+
+Candidate disposition: GEBCO_2026 selected for the current global numeric model; NOAA ETOPO 2022 remains a documented older alternative; the previous Blue Marble base plus relief is excluded because its land colors do not encode elevation. Source acquisition, scientific anchors, mounted views and payload results are recorded with the PR evidence.
