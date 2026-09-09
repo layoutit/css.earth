@@ -1,0 +1,80 @@
+{
+  "createdAt": "2026-09-09T15:01:07.719290+00:00",
+  "server": "production Astro preview",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 1,
+  "earth": {
+    "results": [
+      {
+        "id": "cross-section",
+        "retained": true,
+        "displacement": 68.55827984132965,
+        "images": [
+          "url(\"http://127.0.0.1:4332/scenes/earth/earth-interior-section@2x.webp\")",
+          "url(\"http://127.0.0.1:4332/scenes/earth/earth-interior-section@2x.webp\")"
+        ],
+        "visibleText": "Epoch: 2026-09-03 00:00 TT\n\u00b7\nAltitude: 24,965 km\n\u00b7\n1,000 km\nv0.419\nMilky Way\n\u00bb\nSolar System\nEarth\n\nEarth (our home planet) is the third planet from the Sun, and the fifth largest planet. It\u2019s the only place we know of inhabited by living things.\n\nDatasets\nFactsheet\nMissions\nSources\nVisible color\nGlobal mosaic\nElevation\nGEBCO \u00b7 2026\nNight lights\nNighttime\nENSO\n7 Sept 2026\nCross section\nStructure\nMantle tomography\nGLAD-M35 \u00b7 2024\nInterior structure model\nCrust\nThin outer rock\nMantle\nSolid rock\nOuter core\nLiquid iron alloy\nInner core\nSolid iron alloy\n\nA cut through Earth\u2019s crust, rocky mantle, liquid outer core and solid inner core. Layer sizes follow the NASA Science model; colors are schematic.\n\nImagery\nNASA\n\u00b7\nFacts\nJPL\n\u00b7\nScene\nOpenSpace\n\u00b7\nSpectra\nPSG\n\u00b7\nStars\nHYG\n\u00b7\nClimate\nNOAA\n\u00b7\nSky\nNASA SVS\n\u00b7\nGalaxy\nOpenSpace\n\u00b7\nHeliopause\nIBEX\n67P\nTuttle"
+      },
+      {
+        "id": "mantle-tomography",
+        "retained": true,
+        "displacement": 68.55827984132965,
+        "images": [
+          "url(\"http://127.0.0.1:4332/scenes/earth/earth-tomography-section@2x.webp\")",
+          "url(\"http://127.0.0.1:4332/scenes/earth/earth-tomography-section@2x.webp\")"
+        ],
+        "visibleText": "Epoch: 2026-09-03 00:00 TT\n\u00b7\nAltitude: 24,965 km\n\u00b7\n1,000 km\nv0.419\nMilky Way\n\u00bb\nSolar System\nEarth\n\nEarth (our home planet) is the third planet from the Sun, and the fifth largest planet. It\u2019s the only place we know of inhabited by living things.\n\nDatasets\nFactsheet\nMissions\nSources\nVisible color\nGlobal mosaic\nElevation\nGEBCO \u00b7 2026\nNight lights\nNighttime\nENSO\n7 Sept 2026\nCross section\nStructure\nMantle tomography\nGLAD-M35 \u00b7 2024\nGLAD-M35 mantle tomography\n\u2264 \u22123%\n0\n\u2265 +3%\n\nRed and blue map slower and faster mantle waves relative to the mean at each depth. This is not temperature. Crust and core colors are schematic; gray marks depths outside the model.\n\nMapped depth\n10\u20132,890 km\nOuter core\nLiquid iron alloy\nInner core\nSolid iron alloy\nImagery\nNASA\n\u00b7\nFacts\nJPL\n\u00b7\nScene\nOpenSpace\n\u00b7\nSpectra\nPSG\n\u00b7\nStars\nHYG\n\u00b7\nClimate\nNOAA\n\u00b7\nSky\nNASA SVS\n\u00b7\nGalaxy\nOpenSpace\n\u00b7\nHeliopause\nIBEX\n67P\nTuttle"
+      }
+    ],
+    "restoredStructureWithoutRemount": true,
+    "errors": []
+  },
+  "otherBodies": {
+    "scope": "Earlier Mercury and Saturn captures; current prepared-object and runtime-asset fingerprints verified unchanged in planet-matrix.json.",
+    "results": [
+      {
+        "id": "mercury",
+        "retained": true,
+        "displacement": 66.95518432933805,
+        "errors": [],
+        "visibleText": "Epoch: 2026-09-03 00:00 TT\n\u00b7\n34\u00b059\u203243.93\u2033 S\n\u00b7\n74\u00b026\u203207.10\u2033 E\n\u00b7\nAltitude: 9,549 km\n\u00b7\n500 km\nv0.413\nMilky Way\n\u00bb\nSolar System\nMercury\n\nClosest to the Sun, Mercury is the smallest planet: a cratered terrestrial world with a large metallic core and extreme surface temperatures.\n\nDatasets\nFactsheet\nMissions\nSources\nMonochrome\n750 nm\nEnhanced color\nFalse color\nElevation\nShaded relief\nCross section\nStructure\nInterior structure model\nMetallic core\n85% of radius\nMantle + crust\n366 km shell\n\nA large metallic core sits inside a rocky outer shell. Layer sizes follow the structural model; colors identify each layer.\n\nView source\nFacts\nNASA\n\u00b7\nTerrain\nUSGS\n\u00b7\nSpectrum\nDLR MASCS\n\u00b7\nScene\nOpenSpace\n\u00b7\nSky\nNASA SVS\n\u00b7\nGalaxy\nOpenSpace\n\u00b7\nStars\nHYG\n\u00b7\nHeliopause\nIBEX"
+      },
+      {
+        "id": "saturn",
+        "retained": true,
+        "displacement": 91.49512026117604,
+        "errors": [],
+        "visibleText": "Epoch: 2026-09-03 00:00 TT\n\u00b7\nAltitude: 235,894 km\n\u00b7\n10,000 km\nv0.413\nMilky Way\n\u00bb\nSolar System\nSaturn\n\nThe sixth planet from the Sun, Saturn is a vast gas giant surrounded by spectacular rings made of countless pieces of ice and rock.\n\nDatasets\nFactsheet\nMissions\nSources\nVisible color\nVisible light\nUltraviolet\n225 nm\nMethane\n889 nm\nThermal illustration\nSchematic\nCross section\nStructure\nInterior structure model\nMolecular envelope\nOuter atmosphere\nMetallic hydrogen\nConductive layer\nDiffuse core\nRock and ice mixture\nDeep core\nCentral region\n\nColored layers distinguish the inferred interior structure. Their boundaries illustrate a model, not a measured interior map.\n\nImagery\nNASA\n\u00b7\nOrbits\nJPL\n\u00b7\nScene\nOpenSpace\n\u00b7\nLenses\nHubble OPAL\n\u00b7\nSpectra\nPSG\n\u00b7\nStars\nHYG\n\u00b7\nSky\nNASA SVS\n\u00b7\nGalaxy\nOpenSpace\n\u00b7\nHeliopause\nIBEX"
+      }
+    ]
+  },
+  "urlDatasetPersistence": {
+    "supported": false,
+    "observedDatasetAfterReload": "normal",
+    "scope": "The existing shared-view format stores camera and playback only; dataset persistence was not added by this PR."
+  },
+  "comparison": {
+    "beforeHead": "3e5d97551",
+    "beforeTomography": "../tomography/earth-tomography-production.png",
+    "afterTomography": "earth-tomography.png",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "altitudeKm": 24965,
+    "motion": false,
+    "changes": "Identical viewport and altitude; intentional camera entry angle and cut geometry changes."
+  },
+  "video": {
+    "path": "docs/evidence/planet-cross-sections/polish/earth-cutaways.mp4",
+    "bytes": 3059179,
+    "sha256": "0f86cfa8bfcacc39a604574f18efc031feb3f8ef9c2a3bf2f6ce29ba85fa2f1b",
+    "durationSeconds": 15.4,
+    "recording": "Chromium production preview, native mouse drags and dataset selection",
+    "edit": "Trimmed idle lead and tail only: source 20.4\u201335.8 seconds; H.264 CRF 23 encode; no speed changes.",
+    "errors": []
+  }
+}

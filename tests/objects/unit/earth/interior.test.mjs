@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {readFile} from 'node:fs/promises';
+import sharp from 'sharp';
 import { cutInteriorPoles } from '../../../../tools/objects/paged-ellipsoid/interior-poles.mjs';
-import { runtimeDefinition } from './prepared-fixture.mjs';
+import { runtimeDefinition, PREPARED_EARTH_SCENE } from './prepared-fixture.mjs';
 import { preparedSelectionFixture } from '../../../../src/platform/test/object-runtime-package.mjs';
 
 test('both polar faces remove the cut wedge and retain the opposite quadrant', () => {
@@ -54,11 +56,26 @@ test('structure and tomography swap textures on the same cutaway and restore the
     await select('mantle-tomography');
     assert.ok(images(faces).every(url=>url.includes('earth-tomography-section@2x')));
     assert.ok(images(mantle).every(url=>url.includes('earth-tomography-mantle@2x')));
-    assert.deepEqual(images(core),original.core);
+    assert.ok(images(core).every(url=>url.includes('earth-tomography-inner-core@2x')));
     assert.deepEqual(f.stage.querySelectorAll('*'),nodes);
     await select('cross-section');
     assert.deepEqual({faces:images(faces),mantle:images(mantle),core:images(core)},original);
     assert.deepEqual(f.stage.querySelectorAll('*'),nodes);
     assert.deepEqual(f.errors,[]);
   } finally {f.restore();}
+});
+
+test('the inner core follows the same open cut as the surrounding layers at both poles', async () => {
+  const shells=PREPARED_EARTH_SCENE.interior.shells;
+  assert.equal(shells.at(-1).leaves.length,shells.find(s=>s.id==='outer-core').leaves.length);
+  for(const bank of ['interior','tomography']) {
+    const file=new URL(`../../../../public/scenes/earth/earth-${bank}-inner-core-poles@2x.webp`,import.meta.url);
+    const {data,info}=await sharp(await readFile(file)).ensureAlpha().raw().toBuffer({resolveWithObject:true});
+    const size=info.height;
+    for(const tile of [0,1]) {
+      const alpha=(x,y)=>data[(y*info.width+tile*size+x)*4+3];
+      assert.equal(alpha(Math.floor(size*.7),Math.floor(size*.2)),0,'removed wedge stays open');
+      assert.equal(alpha(Math.floor(size*.3),Math.floor(size*.8)),255,'opposite core remains opaque');
+    }
+  }
 });

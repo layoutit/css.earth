@@ -188,7 +188,7 @@ test("publishes the prepared Earth title and retained scene", async () => {
     /moon|orbitGuide/u.test(key)), false);
   assert.equal(PREPARED_EARTH_SCENE.counts.retainedLeafCount,
     453);
-  assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 546);
+  assert.equal(PREPARED_EARTH_SCENE.counts.interiorLeafCount, 516);
   assert.equal(PREPARED_EARTH_SCENE.counts.maximumRetainedLeafCount,
     PREPARED_EARTH_SCENE.counts.retainedLeafCount + PREPARED_EARTH_SCENE.counts.interiorLeafCount);
   assert.equal(PREPARED_EARTH_SCENE.counts.runtimeGeometryPreparation, false);

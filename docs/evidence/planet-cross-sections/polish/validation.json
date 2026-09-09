@@ -1,0 +1,66 @@
+{
+  "createdAt": "2026-09-09T15:01:07.719290+00:00",
+  "focusedTests": {
+    "passed": 46,
+    "failed": 0,
+    "logs": [
+      {
+        "path": "output/cutaway-polish/final-focused.log",
+        "bytes": 4254,
+        "sha256": "5588047274faa2c22e3421d3f6ee54d45e541efcd35862e3654de1c92867eb6c"
+      }
+    ],
+    "additionalUnchangedMercuryTest": {
+      "passed": 1,
+      "log": {
+        "path": "output/tomography/mercury-transaction.log",
+        "bytes": 214,
+        "sha256": "683a8e0d1ebf4cc735b20dad2025e2c301f9a9bbf79b20f2e1885239bbe5e02f"
+      }
+    }
+  },
+  "typechecks": {
+    "preparation": "pass",
+    "renderer": "pass",
+    "scope": "Prior typechecks retained; no TypeScript changes in this polish."
+  },
+  "productionBuild": {
+    "pages": 301,
+    "status": "pass",
+    "nodeOptions": "--max-old-space-size=12288",
+    "log": {
+      "path": "output/cutaway-polish/build.log",
+      "bytes": 15598,
+      "sha256": "16fd98c729c358c5f822b8bc248f057a25c048adac7cd078ea8b1b29c822b47f"
+    }
+  },
+  "sourceClosureAndProductionAssetAssembly": [
+    "mercury",
+    "venus",
+    "earth",
+    "mars",
+    "jupiter",
+    "saturn",
+    "uranus",
+    "neptune"
+  ],
+  "preparedLeafLayouts": "pass for all eight planets",
+  "runtimeOwnership": "pass for all eight planets",
+  "browserDatasetRuns": 60,
+  "browserInitialShellChecks": 8,
+  "productionNativeDrag": [
+    "earth/cross-section",
+    "earth/mantle-tomography",
+    "mercury/cross-section",
+    "saturn/cross-section"
+  ],
+  "physicalMobileTested": false,
+  "aggregateSuiteRerun": false,
+  "aggregateBoundary": "Earlier aggregate failures and default-heap limits are documented separately in ../baseline-failures.json; no claim that the aggregate suite is green.",
+  "scope": "Final Earth cut/palette/content refresh; earlier seven-planet browser and assembly results retained after prepared object and asset fingerprint verification.",
+  "earthAssetAssemblyLog": {
+    "path": "output/cutaway-polish/assembly.log",
+    "bytes": 23150,
+    "sha256": "72798ecfe7eb77cea8e889fd1737e0917d37b01ae2425c019659095d15ec24b4"
+  }
+}

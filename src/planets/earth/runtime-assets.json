@@ -233,8 +233,8 @@
     },
     {
       "filename": "earth-interior-inner-core-poles@2x.webp",
-      "bytes": 23702,
-      "sha256": "500d5f8def40ef6ef2d6f9f2bdb82021a215008735de3fd70fa4b0844df0c616"
+      "bytes": 20260,
+      "sha256": "798ca53f64696c3f65dfdf17057bd9fcdf6ca2501d1c993596f6fec10ecae793"
     },
     {
       "filename": "earth-interior-inner-core@2x.webp",
@@ -752,6 +752,16 @@
       "sha256": "24b5c28e0c8ae1a9c82787d345ad27d391e2a3b0289263388fdaf583b73b829d"
     },
     {
+      "filename": "earth-tomography-inner-core-poles@2x.webp",
+      "bytes": 21366,
+      "sha256": "fa091a821de0d19607604b93266353511e4a32eb089e7e445a14eb442a0cdc1c"
+    },
+    {
+      "filename": "earth-tomography-inner-core@2x.webp",
+      "bytes": 115800,
+      "sha256": "e585328ba89004929bda4e9ff1d5932679c37e95cdb91968f355b55d46aed0d6"
+    },
+    {
       "filename": "earth-tomography-legend.png",
       "bytes": 2083,
       "sha256": "c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286"
@@ -767,9 +777,19 @@
       "sha256": "39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b"
     },
     {
+      "filename": "earth-tomography-outer-core-poles@2x.webp",
+      "bytes": 17316,
+      "sha256": "6163fc9c55f0bca18e5a07c1ec3e88c621a1b6dc844dda9f1bddc663252539ca"
+    },
+    {
+      "filename": "earth-tomography-outer-core@2x.webp",
+      "bytes": 86368,
+      "sha256": "59671a6f82f756b1c8e74ef44429e5daccd1c33b0c59b856b05a95f72b2c8e99"
+    },
+    {
       "filename": "earth-tomography-section@2x.webp",
-      "bytes": 111944,
-      "sha256": "a36fc0a860f9a647eec5b173ed11e44ea31a5489c66195ce10e5b6f0b1650210"
+      "bytes": 110362,
+      "sha256": "db5505965d3bfdb697a79cf4aaaed0983708f0211fd9267291a34ac5deab8735"
     },
     {
       "filename": "earth-topography-legend.png",
@@ -823,8 +843,8 @@
     },
     {
       "filename": "earth-view-tomography.webp",
-      "bytes": 1736,
-      "sha256": "97bd54b5ea62537b3562562ae024a5fa5757e5c059da08af80f213861fccdf11"
+      "bytes": 1696,
+      "sha256": "a145ea87904d5e87c4c5f147143d8ef6fa4928cc6630acf7a97024c84e55ef1c"
     }
   ]
 }

@@ -45,12 +45,18 @@ animation time, image addresses, and the camera scale.
 The original Cross section dataset retains the schematic NASA Science layers.
 Mantle tomography is a separate dataset that combines modeled mantle velocities
 with the same schematic crust and core. Selecting either uses a
-prepared north-up camera aimed into the cut, then follows the shared camera's
+prepared north-up camera at 145° E, 20° N, looking obliquely into the cut, then follows the shared camera's
 normal orbit controls. The cutaway and exterior use the same physical frame;
 Earth's 23.4 degree axial tilt is unchanged. The mantle and outer-core pole
 atlases use the same removed wedge as their shells. Shadows selects prepared
 lit or unlit exterior banks. Scientific mantle colors are unshaded so they share
 the legend's transfer; the crust and core retain illustrative shape shading.
+The wedge now passes through the inner core too, with matching transparent polar
+regions. The inner core is no longer an uncut sphere protruding through the
+section. In tomography, authored muted core colors distinguish schematic layers
+from the measured quantity; the original structure dataset retains its palette.
+Both datasets use the same geometry, camera limits and zoom. The revised cut
+removes 30 hidden inner-core faces (516 interior leaves, down from 546).
 
 ## Atmosphere charts
 
@@ -125,7 +131,9 @@ Section and mantle surface textures use WebP q90; polar alpha textures remain
 lossless. Preparation compared q70/80/90/95 and lossless. On interior mantle
 pixels away from layer boundaries, q90's mean maximum RGB-channel difference
 was 1.91/255 (99th percentile 7/255); the canonical cut-plane atlas decreased
-from 600,026 to 111,944 bytes. This is display compression, not numeric source
+from 600,026 to 111,944 bytes in the initial encoding trial. The current atlas
+changes only its schematic core palette; its exact delivered size is recorded
+in `runtime-assets.json`. This is display compression, not numeric source
 quantization. The original numeric values remain pinned.
 
 To reproduce the source subset, install `numpy==2.3.5` and `h5py==3.14.0` in an

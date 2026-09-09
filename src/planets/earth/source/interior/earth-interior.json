@@ -34,5 +34,8 @@
       "color": "#f5d580"
     }
   ],
-  "tomographyPath": "interior/tomography.json"
+  "tomographyPath": "interior/tomography.json",
+  "presentation": {
+    "cutThroughCenter": true
+  }
 }

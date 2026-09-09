@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8d5507909566734c3989b35b20e54d867ae75be05eaef3b20dcb2d7e2b6bb8e4"
+    "sha256": "0e9a39c7b132c2d0ce725655d31859e5c6d297340cc17f5b626d91a35540e426"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -443,7 +443,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0ab3cf97c8098bb98b3b6130aabb9579a21dd6ca5655c23d65aa6cf6eafa1614",
+      "sha256": "a9cd18b8f0bebd7332da0c489b1ae35468beacc21050ccf690bd40750cd11f4f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -687,22 +687,22 @@
                 "items": [
                   {
                     "label": "Crust",
-                    "description": "6,348 km inner radius",
+                    "description": "Thin outer rock",
                     "color": "#8b795e"
                   },
                   {
                     "label": "Mantle",
-                    "description": "3,478 km inner radius",
+                    "description": "Solid rock",
                     "color": "#cf5d35"
                   },
                   {
                     "label": "Outer core",
-                    "description": "1,221 km inner radius",
+                    "description": "Liquid iron alloy",
                     "color": "#ef9c3b"
                   },
                   {
                     "label": "Inner core",
-                    "description": "to the center",
+                    "description": "Solid iron alloy",
                     "color": "#f5d580"
                   }
                 ],
@@ -714,7 +714,7 @@
                 "url": "https://science.nasa.gov/earth/facts/"
               },
               "detail": "Structure",
-              "summary": "Schematic Earth interior based on NASA Science. Colors and interior shading illustrate inferred layers, not photographs. Shadows changes the exterior lighting."
+              "summary": "A cut through Earth’s crust, rocky mantle, liquid outer core and solid inner core. Layer sizes follow the NASA Science model; colors are schematic."
             },
             {
               "id": "mantle-tomography",
@@ -740,9 +740,26 @@
                 "url": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35"
               },
               "detail": "GLAD-M35 · 2024",
-              "summary": "Mantle shear-wave speed: % from the global mean at the same depth. Red is slower; blue is faster. Gray: outside the 10–2,890 km model. Crust and core are schematic. This is not temperature.",
+              "summary": "Red and blue map slower and faster mantle waves relative to the mean at each depth. This is not temperature. Crust and core colors are schematic; gray marks depths outside the model.",
               "falseColor": true,
-              "legendNote": "GLAD-M35 r0.1 · 10–2,890 km depth · 1° / 10 km sample grid. Gray: outside model depth coverage. Grid spacing is not resolving power."
+              "legendNote": "GLAD-M35 r0.1 · 10–2,890 km depth · 1° / 10 km sample grid. Gray: outside model depth coverage. Grid spacing is not resolving power.",
+              "facts": [
+                {
+                  "id": "mapped-depth",
+                  "label": "Mapped depth",
+                  "value": "10–2,890 km"
+                },
+                {
+                  "id": "outer-core",
+                  "label": "Outer core",
+                  "value": "Liquid iron alloy"
+                },
+                {
+                  "id": "inner-core",
+                  "label": "Inner core",
+                  "value": "Solid iron alloy"
+                }
+              ]
             }
           ]
         },
@@ -969,7 +986,7 @@
     {
       "id": "mantle-tomography",
       "path": "source/interior/tomography.json",
-      "sha256": "0eb504244bf70f2e96fcd619a225587c7e6383510991f7e2249c12f19af74903",
+      "sha256": "b0b06aae3a042ca407a554fe0d6b0e6433bab0c3195d8bec1531171eb3175288",
       "parameters": {
         "schema": "cssearth-mantle-tomography@1",
         "source": {
@@ -1042,7 +1059,11 @@
           "effort": 6,
           "smartSubsample": true
         },
-        "longitudeSeam": "Average the coincident -180/+180 degree source samples before periodic sampling; their maximum published difference is 0.080645084 km/s, at 20 km depth and 55 degrees north."
+        "longitudeSeam": "Average the coincident -180/+180 degree source samples before periodic sampling; their maximum published difference is 0.080645084 km/s, at 20 km depth and 55 degrees north.",
+        "schematicColors": {
+          "outer-core": "#b38b67",
+          "inner-core": "#eee0bd"
+        }
       }
     }
   ],
@@ -1764,8 +1785,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "9f0fd57020b5601fbca3594f74623ff3d25786f36e0ec4adc2f5bbdf8bcbdef7",
-      "bytes": 1016,
+      "sha256": "8b4b1e2d02d985ae83cb0b156b926ca140240002a6e0e3f0af6bc66f35c21fbc",
+      "bytes": 1070,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1801,8 +1822,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "0ab3cf97c8098bb98b3b6130aabb9579a21dd6ca5655c23d65aa6cf6eafa1614",
-      "bytes": 15751,
+      "sha256": "a9cd18b8f0bebd7332da0c489b1ae35468beacc21050ccf690bd40750cd11f4f",
+      "bytes": 16141,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2341,8 +2362,8 @@
       "outputs": [
         {
           "url": "/scenes/earth/earth-interior-inner-core-poles@2x.webp",
-          "bytes": 23702,
-          "sha256": "500d5f8def40ef6ef2d6f9f2bdb82021a215008735de3fd70fa4b0844df0c616",
+          "bytes": 20260,
+          "sha256": "798ca53f64696c3f65dfdf17057bd9fcdf6ca2501d1c993596f6fec10ecae793",
           "verification": "bytes-verified"
         },
         {
@@ -2536,30 +2557,6 @@
       ],
       "outputs": [
         {
-          "url": "/scenes/earth/earth-interior-inner-core-poles@2x.webp",
-          "bytes": 23702,
-          "sha256": "500d5f8def40ef6ef2d6f9f2bdb82021a215008735de3fd70fa4b0844df0c616",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/earth/earth-interior-inner-core@2x.webp",
-          "bytes": 107008,
-          "sha256": "25b334494dfbb0959d04d53f8a3a2242682eea641a4d56dc738086c3b48d27e3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/earth/earth-interior-outer-core-poles@2x.webp",
-          "bytes": 17562,
-          "sha256": "ae4297773c515c0a3c6531b0121480f88bb0798fc5e9f7ebb6bf044f649f91e4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/earth/earth-interior-outer-core@2x.webp",
-          "bytes": 88492,
-          "sha256": "59abf483313abb0d00cb05d2e66897f9b7418e3d20df301a387bd411d78f1dc9",
-          "verification": "bytes-verified"
-        },
-        {
           "url": "/scenes/earth/earth-interior-outer-lit-page-1@2x.webp",
           "bytes": 174476,
           "sha256": "aa7475954004b33f8ae658927083ae5160931413c37eb677eea3bc573d3bdc3d",
@@ -2657,8 +2654,8 @@
         },
         {
           "url": "/scenes/earth/earth-tomography-section@2x.webp",
-          "bytes": 111944,
-          "sha256": "a36fc0a860f9a647eec5b173ed11e44ea31a5489c66195ce10e5b6f0b1650210",
+          "bytes": 110362,
+          "sha256": "db5505965d3bfdb697a79cf4aaaed0983708f0211fd9267291a34ac5deab8735",
           "verification": "bytes-verified"
         },
         {
@@ -2674,9 +2671,33 @@
           "verification": "bytes-verified"
         },
         {
+          "url": "/scenes/earth/earth-tomography-outer-core@2x.webp",
+          "bytes": 86368,
+          "sha256": "59671a6f82f756b1c8e74ef44429e5daccd1c33b0c59b856b05a95f72b2c8e99",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-tomography-outer-core-poles@2x.webp",
+          "bytes": 17316,
+          "sha256": "6163fc9c55f0bca18e5a07c1ec3e88c621a1b6dc844dda9f1bddc663252539ca",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-tomography-inner-core@2x.webp",
+          "bytes": 115800,
+          "sha256": "e585328ba89004929bda4e9ff1d5932679c37e95cdb91968f355b55d46aed0d6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/earth/earth-tomography-inner-core-poles@2x.webp",
+          "bytes": 21366,
+          "sha256": "fa091a821de0d19607604b93266353511e4a32eb089e7e445a14eb442a0cdc1c",
+          "verification": "bytes-verified"
+        },
+        {
           "url": "/scenes/earth/earth-view-tomography.webp",
-          "bytes": 1736,
-          "sha256": "97bd54b5ea62537b3562562ae024a5fa5757e5c059da08af80f213861fccdf11",
+          "bytes": 1696,
+          "sha256": "a145ea87904d5e87c4c5f147143d8ef6fa4928cc6630acf7a97024c84e55ef1c",
           "verification": "bytes-verified"
         },
         {

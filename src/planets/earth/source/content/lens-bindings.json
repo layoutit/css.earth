@@ -67,8 +67,8 @@
       "maximumZoom": 4,
       "qualification": "Schematic interior based on NASA Science. Layer boundaries and colors illustrate the model; this is not direct interior imaging.",
       "focus": {
-        "longitude": 123.75,
-        "latitude": 15,
+        "longitude": 145,
+        "latitude": 20,
         "zoom": 1.1,
         "northUp": true,
         "transition": {
@@ -86,8 +86,8 @@
       "maximumZoom": 4,
       "qualification": "GLAD-M35 (2024) seismic model. Mantle colors show slower and faster vertically polarized shear waves relative to the global mean at the same depth. Crust and core are schematic.",
       "focus": {
-        "longitude": 123.75,
-        "latitude": 15,
+        "longitude": 145,
+        "latitude": 20,
         "zoom": 1.1,
         "northUp": true,
         "transition": {
@@ -99,7 +99,11 @@
       "interiorTextures": {
         "/scenes/earth/earth-interior-section@2x.webp": "/scenes/earth/earth-tomography-section@2x.webp",
         "/scenes/earth/earth-interior-mantle@2x.webp": "/scenes/earth/earth-tomography-mantle@2x.webp",
-        "/scenes/earth/earth-interior-mantle-poles@2x.webp": "/scenes/earth/earth-tomography-mantle-poles@2x.webp"
+        "/scenes/earth/earth-interior-mantle-poles@2x.webp": "/scenes/earth/earth-tomography-mantle-poles@2x.webp",
+        "/scenes/earth/earth-interior-outer-core@2x.webp": "/scenes/earth/earth-tomography-outer-core@2x.webp",
+        "/scenes/earth/earth-interior-outer-core-poles@2x.webp": "/scenes/earth/earth-tomography-outer-core-poles@2x.webp",
+        "/scenes/earth/earth-interior-inner-core@2x.webp": "/scenes/earth/earth-tomography-inner-core@2x.webp",
+        "/scenes/earth/earth-interior-inner-core-poles@2x.webp": "/scenes/earth/earth-tomography-inner-core-poles@2x.webp"
       }
     }
   ],

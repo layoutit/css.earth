@@ -241,22 +241,22 @@
           "items": [
             {
               "label": "Crust",
-              "description": "6,348 km inner radius",
+              "description": "Thin outer rock",
               "color": "#8b795e"
             },
             {
               "label": "Mantle",
-              "description": "3,478 km inner radius",
+              "description": "Solid rock",
               "color": "#cf5d35"
             },
             {
               "label": "Outer core",
-              "description": "1,221 km inner radius",
+              "description": "Liquid iron alloy",
               "color": "#ef9c3b"
             },
             {
               "label": "Inner core",
-              "description": "to the center",
+              "description": "Solid iron alloy",
               "color": "#f5d580"
             }
           ],
@@ -268,7 +268,7 @@
           "url": "https://science.nasa.gov/earth/facts/"
         },
         "detail": "Structure",
-        "summary": "Schematic Earth interior based on NASA Science. Colors and interior shading illustrate inferred layers, not photographs. Shadows changes the exterior lighting."
+        "summary": "A cut through Earth’s crust, rocky mantle, liquid outer core and solid inner core. Layer sizes follow the NASA Science model; colors are schematic."
       },
       {
         "id": "mantle-tomography",
@@ -294,9 +294,26 @@
           "url": "https://data.earthscope.org/app/products/portal/emc_model_viewer.html?id=EMC-GLAD-M35"
         },
         "detail": "GLAD-M35 · 2024",
-        "summary": "Mantle shear-wave speed: % from the global mean at the same depth. Red is slower; blue is faster. Gray: outside the 10–2,890 km model. Crust and core are schematic. This is not temperature.",
+        "summary": "Red and blue map slower and faster mantle waves relative to the mean at each depth. This is not temperature. Crust and core colors are schematic; gray marks depths outside the model.",
         "falseColor": true,
-        "legendNote": "GLAD-M35 r0.1 · 10–2,890 km depth · 1° / 10 km sample grid. Gray: outside model depth coverage. Grid spacing is not resolving power."
+        "legendNote": "GLAD-M35 r0.1 · 10–2,890 km depth · 1° / 10 km sample grid. Gray: outside model depth coverage. Grid spacing is not resolving power.",
+        "facts": [
+          {
+            "id": "mapped-depth",
+            "label": "Mapped depth",
+            "value": "10–2,890 km"
+          },
+          {
+            "id": "outer-core",
+            "label": "Outer core",
+            "value": "Liquid iron alloy"
+          },
+          {
+            "id": "inner-core",
+            "label": "Inner core",
+            "value": "Solid iron alloy"
+          }
+        ]
       }
     ]
   },

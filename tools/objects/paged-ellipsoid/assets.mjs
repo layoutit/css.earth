@@ -486,11 +486,11 @@ async function prepareInteriorAssets({ exterior = true } = {}) {
   for (const bank of [{ name: 'interior', tomography: null }, ...(tomography ? [{ name: 'tomography', tomography }] : [])]) {
   const tomography = bank.tomography;
   for (const layer of interior.layers.slice(1)) {
-    if (tomography && layer.id !== 'mantle') continue;
+    if (tomography && layer.id !== 'mantle' && !tomography.recipe.schematicColors?.[layer.id]) continue;
     for (const density of [1, 2]) {
       const width = 1024 * density;
       const height = 512 * density;
-      const data = renderInteriorShell(width, height, hexRgb(layer.color), layer.id === 'mantle' ? tomography : null);
+      const data = renderInteriorShell(width, height, hexRgb(tomography?.recipe.schematicColors?.[layer.id] ?? layer.color), layer.id === 'mantle' ? tomography : null);
       await writeSphereAssets({
         data,
         width,
@@ -501,7 +501,7 @@ async function prepareInteriorAssets({ exterior = true } = {}) {
         bandCount: 8,
         longitudeOffsetDegrees: 0,
         webp: layer.id === 'mantle' && tomography ? tomography.recipe.webp : { lossless: true },
-        cutaway: layer.innerRadiusKm > 0 ? config.geometry.interiorCutaway : undefined,
+        cutaway: interior.presentation?.cutThroughCenter || layer.innerRadiusKm > 0 ? config.geometry.interiorCutaway : undefined,
       });
     }
   }
@@ -656,7 +656,7 @@ function renderInteriorSection(interior, faceSize, tomography) {
           radius * interior[config.interiorRadiusKey] <= outerRadiusKm) ??
           interior.layers.at(-1);
         const scientific = tomography && layer.id === 'mantle';
-        const color = scientific ? tomography.sectionColor(face, radius, vertical, horizontal) : hexRgb(layer.color);
+        const color = scientific ? tomography.sectionColor(face, radius, vertical, horizontal) : hexRgb(tomography?.recipe.schematicColors?.[layer.id] ?? layer.color);
         const radialShade = 0.74 + 0.26 * Math.sqrt(1 - radius * radius);
         const offset = (y * width + face * faceSize + x) * 4;
         for (let channel = 0; channel < 3; channel += 1) {
@@ -689,7 +689,7 @@ function renderInteriorThumbnail(interior, size, tomography) {
         interior.layers.at(-1);
       const scientific = inCutaway && tomography && layer.id === 'mantle';
       const color = scientific ? tomography.sectionColor(0, radius, -dy, dx)
-        : inCutaway ? hexRgb(layer.color) : [42, 99, 139];
+        : inCutaway ? hexRgb(tomography?.recipe.schematicColors?.[layer.id] ?? layer.color) : [42, 99, 139];
       const shade = 0.64 + 0.36 * Math.sqrt(1 - radius * radius);
       const offset = (y * size + x) * 4;
       for (let channel = 0; channel < 3; channel += 1) {

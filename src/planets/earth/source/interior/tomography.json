@@ -70,5 +70,9 @@
     "effort": 6,
     "smartSubsample": true
   },
-  "longitudeSeam": "Average the coincident -180/+180 degree source samples before periodic sampling; their maximum published difference is 0.080645084 km/s, at 20 km depth and 55 degrees north."
+  "longitudeSeam": "Average the coincident -180/+180 degree source samples before periodic sampling; their maximum published difference is 0.080645084 km/s, at 20 km depth and 55 degrees north.",
+  "schematicColors": {
+    "outer-core": "#b38b67",
+    "inner-core": "#eee0bd"
+  }
 }

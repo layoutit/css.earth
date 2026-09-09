@@ -456,7 +456,7 @@ function prepareInteriorPlan() {
   const shellLayers = interiorSource.layers.slice(1);
   const shells = Object.freeze(shellLayers.map((layer, index) => {
     const radiusScale = layer.outerRadiusKm / interiorSource[profile.interiorRadiusKey];
-    const cutaway = index < shellLayers.length - 1;
+    const cutaway = interiorSource.presentation?.cutThroughCenter || index < shellLayers.length - 1;
     const id = layer.id;
     const config = Object.freeze({
       latitudeSegments: INTERIOR_LATITUDE_SEGMENTS,
