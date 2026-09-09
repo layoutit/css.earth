@@ -1,0 +1,364 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-143p",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "1a1a250710ae19f8691ab6efd2132c065f09a39f91649b0cfad5d2aaa27e933c"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "a043542a63ef775eb0b940e534525bc1643814f172f6b3e62213969fb27a58fb",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-143p",
+        "displayName": "Kowal–Mrkos",
+        "publicBase": "/scenes/comet-143p/",
+        "distanceAu": 4.744148140394379,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Shape approximation"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 4.79,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.85
+          },
+          "mapUrl": "/scenes/comet-143p/comet-143p-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-143p/comet-143p-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.json",
+            "format": "ellipsoid-parameters",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 1026,
+              "expectedFaces": 2048
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 150
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 100,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 70,
+              "latitudeDegrees": 20,
+              "ambient": 1,
+              "diffuse": 0
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; nominal published pole with arbitrary fixed phase.",
+          "qualification": "A smooth approximation of the published proportions, sized from infrared observations. The grid marks missing surface imagery. Rotation phase is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "552a95ec8543c3e19d6b17f0dea782f5f937e8d0e3d85ce1c002b16856e4e71d",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-143p",
+        "displayName": "Kowal–Mrkos",
+        "panel": {
+          "introduction": "Kowal–Mrkos takes about seventeen hours to rotate. Changes in its brightness reveal a modestly elongated nucleus.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Thermal radius",
+              "value": "≈4.8 km"
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "17.20 hours"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape approximation"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape approximation",
+              "detail": "Lightcurves",
+              "title": "Inferred shape",
+              "description": "A smooth approximation of the published proportions, sized from infrared observations. The grid marks missing surface imagery. Rotation phase is illustrative.",
+              "thumbnail": "/scenes/comet-143p/comet-143p-model-thumbnail.webp",
+              "surface": "comet-143p-model-surface@2x.webp",
+              "poles": "comet-143p-model-poles@2x.webp",
+              "source": {
+                "id": "shape-parameters",
+                "path": "../manifest.json",
+                "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad"
+              },
+              "facts": [
+                {
+                  "id": "radius",
+                  "label": "Thermal radius",
+                  "value": "≈4.8 km"
+                },
+                {
+                  "id": "rotation",
+                  "label": "Rotation period",
+                  "value": "17.20 hours"
+                }
+              ]
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Donaldson · 2025",
+            "role": "surface",
+            "description": "Shape proportions and spin solutions",
+            "href": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad"
+          },
+          {
+            "label": "SEPPCoN",
+            "role": "observations",
+            "description": "Infrared nucleus size measurements",
+            "href": "https://doi.org/10.1016/j.icarus.2013.07.021"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+            "credit": "Donaldson (2025)"
+          },
+          "physical": {
+            "path": "../shape/model.json",
+            "credit": "Donaldson (2025); Fernández et al. (2013)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "shape-parameters",
+      "path": "shape/model.json",
+      "origin": "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+      "credit": "Abbie L. Donaldson (2025); Fernández et al. (2013); cssEarth approximation",
+      "license": "Published scientific parameters; cssEarth implementation MIT",
+      "licenseEvidence": [
+        "https://era.ed.ac.uk/items/cf7f5ebf-4f32-4f86-95d2-b8dd2e37c8ad",
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in numeric constraints transcribed from the cited tables and sections. The thesis is not redistributed.",
+      "redistribution": "Preserve attribution and the distinction from the original convex mesh.",
+      "sha256": "d191f56540f31b93e2c48626907b55af2c4f37aa07dc5e1f0d747343e92a3f88",
+      "bytes": 1325,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "552a95ec8543c3e19d6b17f0dea782f5f937e8d0e3d85ce1c002b16856e4e71d",
+      "bytes": 2941,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape approximation",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "A smooth approximation of the published proportions, sized from infrared observations. The grid marks missing surface imagery. Rotation phase is illustrative."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "shape-parameters"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-143p/comet-143p-model-thumbnail.webp",
+          "bytes": 1504,
+          "sha256": "53888388312bde6fad84f7ac5506007cc6385f483da75c051023951f0e030e1c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-143p/comet-143p-model-surface@2x.webp",
+          "bytes": 112240,
+          "sha256": "288ceec39fa3f1b52ea6e9cf1218ab62f3a4e307a5b14e42ef504d3e8a7fa1ee",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6805,
+          "sha256": "76253bee55c60794c1979eeb92e19f4204444a446a8f34471a17d48e008f6361",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -1,0 +1,1 @@
+Published numerical constraints: Abbie L. Donaldson (2025), University of Edinburgh; thermal radius: Fernández et al. (2013), SEPPCoN. Smooth ellipsoid approximation and missing-imagery grid: cssEarth, MIT. This is not the original convex mesh, a resolved surface, or a photograph. Background: ESO/S. Brunier, CC BY 4.0. Font: Rasmus Andersson / Inter, SIL OFL 1.1.

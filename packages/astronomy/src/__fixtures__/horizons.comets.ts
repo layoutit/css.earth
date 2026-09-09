@@ -308,5 +308,137 @@ export const COMET_FIXTURES = {
         ]
       }
     ]
+  },
+  "comet-137p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D137P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -425297080.4002727,
+          -604957714.9661789,
+          -257015881.5860173
+        ],
+        "velocity": [
+          1030728.034076535,
+          -9248.294145711678,
+          71060.29499112723
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -393980767.610754,
+          -604660462.9854324,
+          -254640638.0034741
+        ],
+        "velocity": [
+          1056989.706143465,
+          29502.29290971695,
+          87450.15848197704
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -361880450.3321167,
+          -603160025.3091671,
+          -251758759.8799217
+        ],
+        "velocity": [
+          1082975.75880256,
+          71008.89376914705,
+          104851.3534903237
+        ]
+      }
+    ]
+  },
+  "comet-143p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D143P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -415453399.9794281,
+          198250036.8168071,
+          38672100.5062401
+        ],
+        "velocity": [
+          -490569.026019233,
+          -1506563.658018782,
+          -619029.4599346948
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -428239887.4266514,
+          152213832.8231248,
+          19953119.36773478
+        ],
+        "velocity": [
+          -360206.5921428028,
+          -1560565.504035519,
+          -628010.6154477237
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -436975700.3066005,
+          104743580.2037186,
+          1048137.472882138
+        ],
+        "velocity": [
+          -220854.6878456768,
+          -1601829.747373639,
+          -631330.0686877391
+        ]
+      }
+    ]
+  },
+  "comet-162p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D162P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          27109059.56050534,
+          161126529.8769517,
+          166416613.2095471
+        ],
+        "velocity": [
+          -2171039.379617959,
+          395119.9135521655,
+          1218144.932267686
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -38228431.46805947,
+          167828237.9053158,
+          197400313.2663844
+        ],
+        "velocity": [
+          -2163776.53323268,
+          68393.6561527405,
+          858125.7477677831
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -101842600.1682603,
+          166150413.1871009,
+          218593800.9485306
+        ],
+        "velocity": [
+          -2067717.1218025,
+          -166739.9307778899,
+          566124.957336843
+        ]
+      }
+    ]
   }
 } as const

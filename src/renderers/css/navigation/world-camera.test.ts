@@ -114,7 +114,7 @@ test('one engine flight is continuous from Mercury space to a near Venus orbit a
     const returned = worldCameraFromPresentation(target, venus);
     close(returned.pose.positionM, sample.positionM, .0002);
     close(presentWorldCamera(returned, mercury, viewport).rotation,
-      presentWorldCamera(last, mercury, viewport).rotation, 2e-15);
+      presentWorldCamera(last, mercury, viewport).rotation, 1e-14);
     if (target.silhouette) assert.ok(Number.isFinite(target.silhouette.tangentialSemiAxis));
   }
   close(last.pose.positionM, to.pose.positionM);

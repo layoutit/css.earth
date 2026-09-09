@@ -400,6 +400,9 @@ import comet103pDescriptor from "../src/planets/comet-103p/object.json" with { t
 import comet9pDescriptor from "../src/planets/comet-9p/object.json" with { type: "json" };
 import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { type: "json" };
 import comet8pDescriptor from "../src/planets/comet-8p/object.json" with { type: "json" };
+import comet137pDescriptor from "../src/planets/comet-137p/object.json" with { type: "json" };
+import comet143pDescriptor from "../src/planets/comet-143p/object.json" with { type: "json" };
+import comet162pDescriptor from "../src/planets/comet-162p/object.json" with { type: "json" };
 import comet19pDescriptor from "../src/planets/comet-19p/object.json" with { type: "json" };
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
@@ -572,6 +575,21 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(kiviuqDescriptor);
     }, kiviuqDescriptor.properties.worldFrame),
+  object("comet-137p", "Shoemaker–Levy 2", "comet", "#b8b6b2", 4.525635799109316,
+    "Explore 137P/Shoemaker–Levy 2 through a shape approximation based on published lightcurve models.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet137pDescriptor);
+    }, comet137pDescriptor.properties.worldFrame),
+  object("comet-143p", "Kowal–Mrkos", "comet", "#b8b6b2", 4.744148140394379,
+    "Explore 143P/Kowal–Mrkos through a shape approximation based on published lightcurve models.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet143pDescriptor);
+    }, comet143pDescriptor.properties.worldFrame),
+  object("comet-162p", "Siding Spring", "comet", "#b8b6b2", 3.091276774723207,
+    "Explore 162P/Siding Spring through a shape approximation based on published lightcurve models.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet162pDescriptor);
+    }, comet162pDescriptor.properties.worldFrame),
   object("comet-19p", "Borrelly", "comet", "#b8b6b2", 3.608969333559339,
     "Explore Borrelly's MICAS photograph and independent USGS and DLR terrain reconstructions.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

@@ -1,3 +1,6 @@
+import { prepareSystemView } from './system-view.js';
+import type { PreparedSystemView, SystemViewPolicy } from './system-view.js';
+
 export type Vector3 = readonly [number, number, number];
 
 export interface PreparedWorldCameraFrame {
@@ -63,7 +66,7 @@ export interface OrbitalState {
   readonly eccentricity: number;
   readonly trueAnomalyRadians: number;
 }
-export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail'; }
+export interface WorldContextBodyFact { readonly radiusM: number; readonly orbitStyle?: 'closed' | 'trail'; readonly classification?: string; }
 /** A source-backed coordinate origin with no rendered body, surface or marker. */
 export interface WorldContextOrbitCenter { readonly positionM: Vector3; readonly centerBodyId: string; }
 export interface PreparedWorldContext {
@@ -71,8 +74,9 @@ export interface PreparedWorldContext {
   readonly orbitCenters?: Readonly<Record<string, WorldContextOrbitCenter>>;
   readonly sky: { readonly sceneRegistration: string };
   readonly frame: PreparedWorldCameraFrame;
-  readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number };
+  readonly focus: WorldContextFocus & { readonly positionM: Vector3; readonly radiusM: number; readonly systemView?: PreparedSystemView };
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly positionM: Vector3; readonly radiusM: number;
+    readonly systemView?: PreparedSystemView;
     readonly orbit: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[] } }[];
   readonly camera: WorldContextSource['camera'];
@@ -125,7 +129,8 @@ function parseVolumeOpacityProfile(value: unknown): VolumeOpacityProfile {
 /** Builds static true-ellipse vertices in physical metres from a same-epoch ephemeris adapter. */
 export function prepareWorldContext(source: WorldContextSource, facts: Readonly<Record<string, WorldContextBodyFact>>,
   states: Readonly<Record<string, OrbitalState>>,
-  orbitCenters: Readonly<Record<string, WorldContextOrbitCenter>> = {}): PreparedWorldContext {
+  orbitCenters: Readonly<Record<string, WorldContextOrbitCenter>> = {},
+  systemViewPolicy?: SystemViewPolicy): PreparedWorldContext {
   for (const [id, center] of Object.entries(orbitCenters)) {
     identifier(id, 'Orbit center id'); identifier(center.centerBodyId, `${id} orbit center parent`);
     if (!Array.isArray(center.positionM) || center.positionM.length !== 3 || center.positionM.some(value => !Number.isFinite(value))) {
@@ -174,10 +179,19 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     return freeze({ ...body, positionM: copy(state.positionM), radiusM: fact.radiusM,
       orbit: freeze({ centerBodyId: state.centerBodyId, centerPositionM: copy(state.centerPositionM), verticesM, bounds, trail, activeChords }) });
   });
+  const focus = { ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM };
+  // The root system frames its major planets, including the smaller terrestrial planets.
+  const focusView = systemViewPolicy === undefined ? undefined : prepareSystemView(focus,
+    bodies.filter(body => facts[body.id]?.classification === 'planet'), states,
+    { ...systemViewPolicy, minimumRadiusShare: 0 });
   return freeze({ schema: 'cssearth-world-context@1',
     ...(Object.keys(orbitCenters).length ? { orbitCenters: freeze(Object.fromEntries(Object.entries(orbitCenters).map(([id, center]) =>
       [id, freeze({ positionM: copy(center.positionM), centerBodyId: center.centerBodyId })]))) } : {}),
-    sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...source.focus, positionM: copy(source.frame.originM), radiusM: source.frame.bodyRadiusM }), bodies: freeze(bodies), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
+    sky: prepareSkyRegistration(source.sky), frame: source.frame, focus: freeze({ ...focus, ...(focusView ? { systemView: focusView } : {}) }),
+    bodies: freeze(bodies.map(body => {
+      const systemView = systemViewPolicy === undefined ? undefined : prepareSystemView(body, bodies, states, systemViewPolicy);
+      return systemView ? freeze({ ...body, systemView }) : body;
+    })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
 
 function parseStars(value: unknown, volumeFadeStartDistanceM: number): WorldContextSource['stars'] {

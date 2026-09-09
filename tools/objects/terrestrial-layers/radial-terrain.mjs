@@ -1,5 +1,6 @@
 import { removeOppositeFacePairs } from './mesh-face-pairs.mjs';
 import { resolve } from 'node:path';
+import { loadEllipsoidParameters } from './ellipsoid-parameters.mjs';
 import { loadContactEllipsoids } from './contact-ellipsoids.mjs';
 import { loadImageDem } from './image-dem.mjs';
 import { completeImageDem, reduceCompletedImageDem } from './image-dem-completion.mjs';
@@ -37,7 +38,8 @@ export async function loadRadialTerrain({ config, sourceDirectory, source }) {
     throw new TypeError('Contact bodies require full source connectivity.');
   }
   await source.validatePath(profile.path);
-  const loader = profile.format === 'contact-ellipsoids' ? loadContactEllipsoids
+  const loader = profile.format === 'ellipsoid-parameters' ? loadEllipsoidParameters
+    : profile.format === 'contact-ellipsoids' ? loadContactEllipsoids
     : profile.format === 'image-plane-dem' ? loadImageDem
     : profile.format === 'pds-planetocentric-plate' ? loadPdsPlanetocentricShape
     : profile.format === 'stl' ? loadStlShape : profile.format === 'pds-radius-table' ? loadPdsRadiusTable
