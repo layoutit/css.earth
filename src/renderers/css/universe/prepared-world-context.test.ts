@@ -314,7 +314,7 @@ test('prepared planetary systems retain moon orbits with a small selected planet
   layer.destroy();
 });
 
-test.each(['jupiter', 'saturn', 'uranus', 'neptune'])('selecting %s shows complete moon orbits and deselecting restores their trails', async planet => {
+test.each([...SYSTEM_VIEWS.keys()].filter(id => id !== 'sun'))('%s moon orbits stay complete across selection, hover, flight and zoom', async planet => {
   const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
@@ -331,13 +331,23 @@ test.each(['jupiter', 'saturn', 'uranus', 'neptune'])('selecting %s shows comple
   const root = layer.root as unknown as FakeElement, nodes = all(root);
   layer.selectObject(planet);
   layer.publish(target, viewport);
-  // A selection preview changes the same orbit policy immediately, before any camera movement.
-  for (const selection of [null, planet, null, undefined]) {
-    layer.previewSelection(selection);
-    const pieces = moons.flatMap(moon => moon.orbit.filter(piece => piece.style.visibility === ''));
-    expect(pieces.length).toBeGreaterThan(0);
-    if (selection === null) expect(pieces.some(piece => Number(piece.style.opacity) < 1)).toBe(true);
-    else expect(pieces.every(piece => piece.style.opacity === '1')).toBe(true);
+  for (const zoom of [.8, 1, 1.4]) {
+    layer.publish({ ...target, pose: { ...target.pose,
+      positionM: target.pose.positionM.map((value, axis) => frame.originM[axis] + (value - frame.originM[axis]) * zoom) as [number, number, number],
+    } }, viewport);
+    for (const selection of [null, planet, [...memberIds][0], undefined]) {
+      layer.previewSelection(selection);
+      for (const active of [true, false]) {
+        layer.setNavigationInFlight(active);
+        const circle = find(root, 'contextIndicator', [...memberIds][0]!);
+        circle.dataset.objectHovered = String(active);
+        host.dispatchEvent(new Event('objecthoverchange'));
+        document.defaultView.advance(16);
+        const pieces = moons.flatMap(moon => moon.orbit.filter(piece => piece.style.visibility === ''));
+        expect(pieces.length).toBeGreaterThan(0);
+        expect(pieces.every(piece => piece.style.opacity === '1')).toBe(true);
+      }
+    }
   }
   expect(all(root)).toEqual(nodes);
   layer.destroy();

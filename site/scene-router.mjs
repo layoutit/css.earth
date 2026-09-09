@@ -58,7 +58,7 @@ export function createSceneRouter({
   if (navigation && windowTarget.location?.href) {
     historyOwner = createNavigationHistory({ windowTarget, objects, capture: captureUrl, navigate, onError: report });
     unbindLinks = bindNavigationLinks({ documentTarget, windowTarget, objects,
-      supports: id => navigation.supports(objectId, id), navigate, deselect, onError: report });
+      supports: id => navigation.supports(objectId, id), navigate, onError: report });
   }
   mountTask = mountApplication();
 
@@ -66,7 +66,7 @@ export function createSceneRouter({
     get settled() { return mountTask; },
     state: readSceneState,
     playback: readPlayback,
-    navigate, deselect,
+    navigate,
     destroy() {
       if (destroyed) return;
       destroyed = true;
@@ -227,15 +227,6 @@ export function createSceneRouter({
     const saved = active?.mount?.sharedView?.capture(motionEnabled);
     if (saved) url.searchParams.set('v', new URLSearchParams(formatSharedView(saved)).get('v'));
     return url.pathname + url.search + url.hash;
-  }
-
-  function deselect() {
-    const sun = solarSystemFocus(objects);
-    if (!sun || !hasPresented) return Promise.resolve(false);
-    // Empty sky resets only the wide view, using the same detail boundary as
-    // first-click centering. Read the camera again so zooming in restores protection.
-    if (!navigation?.centerTarget?.({ objectId, mount: active?.mount })) return Promise.resolve(false);
-    return navigate(sun.id, { overview: true, recenter: true });
   }
 
   function navigate(id, options = {}) {
