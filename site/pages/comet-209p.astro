@@ -1,0 +1,16 @@
+---
+import PlanetLayout from "../layouts/PlanetLayout.astro";
+import PreparedObjectHead from "../components/PreparedObjectHead.astro";
+import PreparedObjectPanel from "../components/PreparedObjectPanel.astro";
+import preparedContent from "../../src/planets/comet-209p/prepared/content.json";
+import { loadObjectPageData } from '../object-page-data.mjs';
+import type { PreparedObjectContentDocument } from "../../tools/objects/content/types";
+import "../styles/comet-209p-surfaces.css";
+import "../planet-shell.css";
+const preparedPage = await loadObjectPageData("comet-209p");
+---
+
+<PlanetLayout objectId="comet-209p">
+  <PreparedObjectHead slot="planet-head" preparedAssets={preparedPage.assets} />
+  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent as PreparedObjectContentDocument} preparedControls={preparedPage.controls} />
+</PlanetLayout>

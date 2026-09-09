@@ -402,6 +402,8 @@ import comet103pDescriptor from "../src/planets/comet-103p/object.json" with { t
 import comet9pDescriptor from "../src/planets/comet-9p/object.json" with { type: "json" };
 import comet81pDescriptor from "../src/planets/comet-81p/object.json" with { type: "json" };
 import comet8pDescriptor from "../src/planets/comet-8p/object.json" with { type: "json" };
+import comet2pDescriptor from "../src/planets/comet-2p/object.json" with { type: "json" };
+import comet209pDescriptor from "../src/planets/comet-209p/object.json" with { type: "json" };
 import comet137pDescriptor from "../src/planets/comet-137p/object.json" with { type: "json" };
 import comet143pDescriptor from "../src/planets/comet-143p/object.json" with { type: "json" };
 import comet162pDescriptor from "../src/planets/comet-162p/object.json" with { type: "json" };
@@ -577,6 +579,16 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(kiviuqDescriptor);
     }, kiviuqDescriptor.properties.worldFrame),
+  object("comet-2p", "Encke", "comet", "#b8b6b2", 2.217736510492418,
+    "Explore 2P/Encke through a shape approximation constrained by radar observations.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet2pDescriptor);
+    }, comet2pDescriptor.properties.worldFrame),
+  object("comet-209p", "LINEAR", "comet", "#b8b6b2", 2.9567815032538625,
+    "Explore 209P/LINEAR through a shape approximation constrained by radar observations.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(comet209pDescriptor);
+    }, comet209pDescriptor.properties.worldFrame),
   object("comet-137p", "Shoemaker–Levy 2", "comet", "#b8b6b2", 4.525635799109316,
     "Explore 137P/Shoemaker–Levy 2 through a shape approximation based on published lightcurve models.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");

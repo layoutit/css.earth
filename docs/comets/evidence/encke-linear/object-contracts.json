@@ -1,0 +1,40 @@
+{
+  "frames": [
+    {
+      "id": "comet-2p",
+      "physicalFrameClosure": true
+    },
+    {
+      "id": "comet-209p",
+      "physicalFrameClosure": true
+    }
+  ],
+  "layouts": {
+    "schema": "cssearth-prepared-leaf-layout-census@2",
+    "evidence": "validated-source-data",
+    "complete": true,
+    "sharedViolations": [],
+    "objects": [
+      {
+        "id": "comet-2p",
+        "count": 800,
+        "completedByDescriptor": 0,
+        "failures": [],
+        "modules": [
+          "src/planets/comet-2p/prepared/object.json"
+        ],
+        "sourceSha256": "b1c4f82cccc5660cb2129222544e4ca11ff48a685e153f780a9163d7d54d58fa"
+      },
+      {
+        "id": "comet-209p",
+        "count": 800,
+        "completedByDescriptor": 0,
+        "failures": [],
+        "modules": [
+          "src/planets/comet-209p/prepared/object.json"
+        ],
+        "sourceSha256": "25832f58d90a1af95460ff6f1cf68dd5339fd111337b2ad7d76a55c2a203c14b"
+      }
+    ]
+  }
+}
