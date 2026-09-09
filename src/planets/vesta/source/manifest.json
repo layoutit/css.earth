@@ -43,7 +43,13 @@
       },
       "coverage": "Published crop and exactly black RGB fill; no authoritative per-pixel validity mask. Channel fringes and uncertain dark terrain are retained.",
       "expectedBytes": 374574072,
-      "expectedSha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca"
+      "expectedSha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca",
+      "capture": {
+        "spacecraftIds": [
+          "dawn"
+        ],
+        "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png"
+      }
     },
     {
       "id": "dlr-hamo-radius-model",
@@ -69,7 +75,13 @@
       "coverage": "Stereo-derived model with publisher-interpolated polar regions. No mask separates interpolated areas.",
       "expectedBytes": 457291404,
       "expectedSha256": "83b68b39c1485e179a58926dcb6b88960e598895cfce64f54e87204b7dbde533",
-      "lensId": "elevation"
+      "lensId": "elevation",
+      "capture": {
+        "spacecraftIds": [
+          "dawn"
+        ],
+        "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip"
+      }
     },
     {
       "id": "vesta-ratios",
@@ -95,7 +107,13 @@
       },
       "coverage": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
       "expectedBytes": 446346023,
-      "expectedSha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0"
+      "expectedSha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0",
+      "capture": {
+        "spacecraftIds": [
+          "dawn"
+        ],
+        "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -148,8 +166,8 @@
     {
       "path": "content/object.json",
       "purpose": "Authored preparation or presentation data.",
-      "expectedBytes": 10120,
-      "expectedSha256": "447ceab3030bd4f1b99e96916228963c68e4020ef846134d3e2540e55c07aaae"
+      "expectedBytes": 10523,
+      "expectedSha256": "0669b33ee9da4c675b4f51553915b7974c35ce6e9a2483b2342bf1770c4b1dce"
     },
     {
       "path": "preparation/acquisition.json",

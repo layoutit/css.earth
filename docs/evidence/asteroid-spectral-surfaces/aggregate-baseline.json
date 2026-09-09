@@ -1,17 +1,10 @@
 {
   "baseCommit": "245d9b854a91747198e5b05488a15a338dc0f268",
-  "currentRendererGate": {
-    "passed": 340,
-    "failed": 6,
-    "failureScope": "Earth paging plans and Buenos Aires destination zoom expectations",
-    "packageTestsPassed": 761,
-    "platformAndShellReached": false
-  },
   "unchangedInputs": [
     {
       "path": "src/planets/earth/prepared/runtime.json",
       "unchangedFromMain": true,
-      "sha256": "d64e2a605d6119ea31b986948c31b1b2bac2b4006a0e167b811ccc77eed121d8"
+      "sha256": "e0eeaf8b7c0bc1d589597b76f0cdc77e1239985bcd695b878777ab7f028b0dce"
     },
     {
       "path": "src/renderers/css/navigation/surface-target.test.ts",
@@ -43,5 +36,18 @@
       "sha256": "34d0245beb9c700d7bee5fd169557587fdf84ad43a2618aefc1d0773224ca48a",
       "unchangedFromMain": true
     }
-  ]
+  ],
+  "preIntegrationRendererGate": {
+    "passed": 340,
+    "failed": 6,
+    "failureScope": "Earth paging plans and Buenos Aires destination zoom expectations",
+    "packageTestsPassed": 761,
+    "platformAndShellReached": false
+  },
+  "integratedMain": "e23a357b86d97b0400f5ab53f8eaf9faf2acd6ec",
+  "postIntegrationFailingFilesRerun": {
+    "files": 3,
+    "passed": 1,
+    "failed": 6
+  }
 }

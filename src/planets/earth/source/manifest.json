@@ -103,7 +103,13 @@
         "navigation",
         "scene",
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "terra"
+        ],
+        "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg"
+      }
     },
     {
       "id": "nasa-blue-marble-topography",
@@ -154,7 +160,13 @@
       "redistribution": "NASA image with credit and no endorsement claim",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "suomi-npp"
+        ],
+        "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg"
+      }
     },
     {
       "id": "jpl-satellite-physical",

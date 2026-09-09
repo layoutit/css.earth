@@ -67,7 +67,8 @@
           "id": "n1867604669",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/access.html"
-        }
+        },
+        "summary": "Cassini images mapped onto the shape. Shadows and unreliable samples are withheld; gray grid marks gaps."
       },
       {
         "id": "elevation",
@@ -96,7 +97,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/pan/pan-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to a 14 km sphere, from the Cassini shape model. Accuracy varies by region."
       }
     ]
   },

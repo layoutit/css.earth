@@ -1,0 +1,536 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "hopi",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "3b12ef063f210b858acc8582c84dc094bb10d4feea53abbc5aaf0391b2e45fa2"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "7f41f1fa0f8971f26e10d8befc5c200d0d2b78b6f70a06091bcdffc739eb2b71",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "hopi",
+        "displayName": "Hopi",
+        "publicBase": "/scenes/hopi/",
+        "distanceAu": 3.153358490702003,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 512,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "consumer": "elevation",
+              "path": "shape/model-10234.txt",
+              "format": "pds-plate-model",
+              "grid": {
+                "metersPerUnit": 15529.12453954472,
+                "expectedVertices": 574,
+                "expectedFaces": 1144,
+                "indexBase": 1
+              },
+              "valueTransform": {
+                "scale": 0.001,
+                "offset": -9.6335
+              },
+              "minimum": -3,
+              "maximum": 7,
+              "colors": [
+                "#35306b",
+                "#2c7db7",
+                "#51b5ab",
+                "#c5d879",
+                "#f3c56b",
+                "#c76138",
+                "#f8eee1"
+              ],
+              "relief": {
+                "referenceRadiusMeters": 9633.5,
+                "heightToMeters": 1000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.55
+              },
+              "sampleGrid": {
+                "width": 721,
+                "height": 361
+              },
+              "surfaceSampling": {
+                "method": "closest-source-point",
+                "maximumDistanceMeters": 192.67000000000002
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90,
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 9.6335,
+          "camera": {
+            "initialScenePitchDegrees": 25,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/hopi/hopi-shape-surface@2x.webp",
+          "polesUrl": "/scenes/hopi/hopi-shape-surface@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model-10234.txt",
+            "format": "pds-plate-model",
+            "grid": {
+              "metersPerUnit": 15529.12453954472,
+              "expectedVertices": 574,
+              "expectedFaces": 1144,
+              "indexBase": 1
+            },
+            "latitudeSegments": 90,
+            "longitudeSegments": 180,
+            "faceBudget": 800,
+            "tileSize": 128,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 192.67000000000002,
+              "regularize": true
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            170,
+            170,
+            170
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "4fdb0d3278d1a385b32e7ba38c485a276c12c8014be18576a1f37c7e0f98869a",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "hopi",
+        "displayName": "Hopi",
+        "title": {
+          "label": "Hopi",
+          "viewBox": "0 0 55.2352 35",
+          "width": 55.2352,
+          "height": 35,
+          "path": "M0 29L0 8.63L3.05 8.63L3.05 17.24L13.18 17.24L13.18 8.63L16.24 8.63L16.24 29L13.18 29L13.18 19.91L3.05 19.91L3.05 29ZM26.04 29.33Q23.97 29.33 22.4 28.36Q20.83 27.4 19.95 25.68Q19.08 23.97 19.08 21.71Q19.08 19.46 19.95 17.73Q20.83 16.01 22.4 15.04Q23.97 14.07 26.04 14.07Q28.14 14.07 29.7 15.04Q31.26 16.01 32.14 17.73Q33.01 19.46 33.01 21.71Q33.01 23.97 32.14 25.68Q31.26 27.4 29.7 28.36Q28.14 29.33 26.04 29.33ZM26.04 26.81Q27.32 26.81 28.22 26.17Q29.12 25.53 29.59 24.38Q30.07 23.23 30.07 21.73Q30.07 20.18 29.59 19.03Q29.12 17.88 28.22 17.24Q27.32 16.59 26.04 16.59Q24.78 16.59 23.89 17.23Q22.99 17.87 22.52 19.03Q22.05 20.18 22.05 21.73Q22.05 23.24 22.52 24.39Q22.99 25.53 23.89 26.17Q24.79 26.81 26.04 26.81ZM35.63 34.71L35.63 14.37L38.49 14.37L38.49 16.53L38.57 16.53Q39 15.82 39.64 15.27Q40.28 14.73 41.14 14.42Q41.99 14.11 43.04 14.11Q44.89 14.11 46.31 15.05Q47.73 16 48.52 17.71Q49.3 19.42 49.3 21.7Q49.3 23.97 48.52 25.68Q47.73 27.39 46.32 28.34Q44.9 29.29 43.03 29.29Q41.99 29.29 41.16 28.97Q40.32 28.66 39.69 28.09Q39.05 27.52 38.61 26.77L38.54 26.77L38.54 34.71ZM42.43 26.79Q43.63 26.79 44.51 26.18Q45.39 25.57 45.87 24.43Q46.35 23.3 46.35 21.69Q46.35 20.07 45.87 18.94Q45.38 17.8 44.51 17.2Q43.63 16.6 42.43 16.6Q41.18 16.6 40.27 17.23Q39.35 17.86 38.87 19Q38.38 20.14 38.38 21.69Q38.38 23.2 38.87 24.36Q39.36 25.51 40.27 26.15Q41.18 26.79 42.43 26.79ZM51.93 29L51.93 14.37L54.84 14.37L54.84 29ZM53.4 11.91Q52.62 11.91 52.09 11.4Q51.56 10.9 51.56 10.16Q51.56 9.39 52.09 8.88Q52.62 8.37 53.39 8.37Q54.17 8.37 54.7 8.88Q55.24 9.39 55.24 10.16Q55.24 10.9 54.7 11.4Q54.17 11.91 53.4 11.91Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Coarse lightcurve reconstruction, with an approximate size from infrared observations. The grid marks unavailable surface imagery.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Display reference radius",
+              "value": "9.6335 km (size-calibrated model)",
+              "source": {
+                "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2938",
+                "label": "Masiero et al. (2014), ApJ 791, 121",
+                "checked": "2026-09-08",
+                "path": "source/reference/calibration.json"
+              }
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "3.153 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "5.60 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Model rotation period",
+              "value": "4.76799 hours",
+              "source": {
+                "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234",
+                "label": "DAMIT model 10234",
+                "checked": "2026-09-08",
+                "path": "source/reference/damit-model.json"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "description": "Thermal diameter 19.267 ± 0.147 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "title": "Thermal diameter 19.267 ± 0.147 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative.",
+              "thumbnail": "/scenes/hopi/hopi-shape-thumbnail.webp",
+              "surface": "hopi-shape-surface@2x.webp",
+              "poles": "hopi-shape-surface@2x.webp",
+              "source": {
+                "id": "hopi-shape",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "Published shape · grid marks missing imagery"
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Radius on the shape model minus a 9.6335 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "title": "Radius on the shape model minus a 9.6335 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height.",
+              "thumbnail": "/scenes/hopi/hopi-elevation-thumbnail.webp",
+              "surface": "hopi-elevation-surface@2x.webp",
+              "poles": "hopi-elevation-surface@2x.webp",
+              "source": {
+                "id": "hopi-shape",
+                "path": "../manifest.json"
+              },
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "-3",
+                  "2",
+                  "7"
+                ],
+                "meta": "km · 9.6335 km reference sphere",
+                "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234",
+                "image": "/scenes/hopi/hopi-elevation-legend.webp"
+              },
+              "detail": "Shape-derived radial height"
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Model record",
+            "role": "terrain",
+            "description": "DAMIT model 10234, version 2022-11-29",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234"
+          },
+          {
+            "label": "Size calibration",
+            "role": "facts",
+            "description": "Masiero et al. (2014), ApJ 791, 121",
+            "href": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D2938"
+          },
+          {
+            "label": "Rotation",
+            "role": "rotation",
+            "description": "Published pole and period; arbitrary display phase",
+            "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234",
+            "credit": "DAMIT, Astronomical Institute of Charles University; Hopi model 10234; original model authors identified in its pinned reference records."
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "hopi-shape",
+      "path": "shape/model-10234.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/91898/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hopi model 10234; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 15529.12453954472,
+        "referenceRadiusMeters": 9633.5
+      },
+      "coverage": "Published convex light-curve model 10234. Approximate scale from a thermal diameter of 19.267 ± 0.147 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "sha256": "f461f5fbac0aae84e2a70bd02695fd6c7b30c048a41bc48fa99f0d48dc73f746",
+      "bytes": 46419,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/model-10234.txt",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/91898/shape.txt"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "sha256": "4fdb0d3278d1a385b32e7ba38c485a276c12c8014be18576a1f37c7e0f98869a",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "bytes": 7506,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Radius on the shape model minus a 9.6335 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific"
+      },
+      "inputs": [
+        "hopi-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/hopi/hopi-elevation-thumbnail.webp",
+          "bytes": 5204,
+          "sha256": "739452ab953b0e699c307c2389e581a554c590cb5c38a3086b7b7bc02dc0beef",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/hopi/hopi-elevation-legend.webp",
+          "bytes": 298,
+          "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/hopi/hopi-elevation-surface@2x.webp",
+          "bytes": 299378,
+          "sha256": "ab6135839c999828fa2c770c72b8061bc209ce8aec03a3f38664e2c81d28324d",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Thermal diameter 19.267 ± 0.147 km; quoted fit error excludes about 10% systematic uncertainty and shape/aspect effects. This coarse convex model has uncertain shape and pole; rotational phase is illustrative."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "hopi-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/hopi/hopi-shape-thumbnail.webp",
+          "bytes": 764,
+          "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/hopi/hopi-shape-surface@2x.webp",
+          "bytes": 214534,
+          "sha256": "48b8fb6d837e6796cc610d4b8bbc86b1a6507a246897709d75bbe40c641e84ab",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 4360,
+          "sha256": "d973506f7110d20e1e1a7c3b8d67ae411eff48b4f08ca1cf39c23cbdb4a4ac36",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2964,
+          "sha256": "48405c0554b4a5fa841595f09122afa2b057cc4a531fe9103afc1b6c236807fd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 10262,
+          "sha256": "5c7bbaecf5d32e47e58ca9779d47f627d2932621f46748ec01d1b34d1985b0a3",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

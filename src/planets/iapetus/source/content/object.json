@@ -99,7 +99,8 @@
         "source": {
           "id": "cassini-voyager-2008-iapetus",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini and Voyager mosaic with coarse poles. Shadows and seams remain; the gray grid marks gaps."
       },
       {
         "id": "enhanced",
@@ -112,7 +113,8 @@
         "source": {
           "id": "cassini-iss-2014-iapetus-color",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Enhanced Cassini infrared and ultraviolet color. The dark hemisphere is real terrain, not missing imagery."
       }
     ]
   },

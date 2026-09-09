@@ -121,7 +121,13 @@ export function bindWorldCameraPicking(inputSurface: HTMLElement, host: HTMLElem
     if (event.button !== 0 || pointer?.dragged || event.target !== inputSurface) { pointer = null; return; }
     pointer = null;
     const target = pick(event);
-    if (!(target instanceof HTMLElement)) return;
+    if (!(target instanceof HTMLElement)) {
+      if (!event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey &&
+          !detailOccludes?.(event.clientX, event.clientY)) {
+        host.dispatchEvent(new Event('objectdeselect', { bubbles: true, cancelable: true }));
+      }
+      return;
+    }
     if (target.dataset.objectNavigateActivation === 'dblclick') {
       consume(event);
       return;

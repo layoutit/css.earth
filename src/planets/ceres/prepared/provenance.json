@@ -1,0 +1,748 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "ceres",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "6f0d1acc528487b7aa59b99aaa8f4e647822aa135290602c16278f510e69e815"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "6bd22cfa855102eae604cb600023643ad02685747aa8eb6aba99b2f4296a5159",
+    "bindingsSha256": "54574c43091174f69b44c11807432d95f5eb1d02f46fe69df619e191d2e6871d"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "be6a65986876dfd24e2df64f3f0038f934894692fae8a3eb260b271b3955d46c",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "ceres",
+        "displayName": "Ceres",
+        "publicBase": "/scenes/ceres/",
+        "distanceAu": 2.77,
+        "raster": {
+          "width": 4096,
+          "height": 2048,
+          "bandCount": 16,
+          "gutter": 32,
+          "poleSize": 512,
+          "reportMissingPixels": false,
+          "observations": [
+            {
+              "id": "normal",
+              "validity": {
+                "kind": "south-connected-black"
+              }
+            },
+            {
+              "id": "enhanced",
+              "validity": {
+                "kind": "south-connected-black"
+              }
+            }
+          ],
+          "scientific": [
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "format": "geotiff",
+              "path": "science/ceres-hamo-dtm.tif",
+              "description": "Dawn stereo model · shaded relief",
+              "title": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+              "sourceUrl": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m",
+              "minimum": -30000,
+              "maximum": 20000,
+              "colors": [
+                "#253494",
+                "#2c7fb8",
+                "#41b6c4",
+                "#ffffcc",
+                "#d95f0e"
+              ],
+              "labels": [
+                "−30",
+                "−5",
+                "20"
+              ],
+              "units": "km",
+              "consumer": "scientific-surfaces",
+              "grid": {
+                "width": 21600,
+                "height": 10800,
+                "centerLongitude": 180,
+                "referenceRadiusMeters": 470000,
+                "noData": -32768,
+                "withholdLatitudeDegrees": 60
+              },
+              "relief": {
+                "referenceRadiusMeters": 470000,
+                "lightDirection": [
+                  -0.5,
+                  0.5,
+                  0.7071067811865476
+                ],
+                "ambient": 0.25
+              }
+            }
+          ],
+          "observedColors": [],
+          "surfaceQuality": 90
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 469.7,
+          "camera": {
+            "initialScenePitchDegrees": 40,
+            "defaultControlYawDegrees": 0
+          },
+          "mapUrl": "/scenes/ceres/ceres-normal-surface@2x.webp",
+          "polesUrl": "/scenes/ceres/ceres-normal-poles@2x.webp"
+        },
+        "celestial": {
+          "sunSource": "JPL Kepler heliocentric positions with IAU/WGCCRE rotation elements"
+        },
+        "presentation": {
+          "defaultLens": "normal",
+          "pointColor": [
+            180,
+            180,
+            180
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "0ab94367cfd3b745c827c3182b48f1f2d03df9f8d6e2ac0ba6b0fd4e6420f2ae",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "ceres",
+        "displayName": "Ceres",
+        "title": {
+          "label": "Ceres",
+          "viewBox": "0 0 72.2574 35",
+          "width": 72.2574,
+          "height": 35,
+          "path": "M9.43 29.31Q6.66 29.31 4.53 28.01Q2.41 26.7 1.2 24.34Q0 21.99 0 18.83Q0 15.66 1.2 13.29Q2.39 10.93 4.53 9.62Q6.66 8.31 9.43 8.31Q11.09 8.31 12.52 8.81Q13.96 9.3 15.09 10.22Q16.21 11.14 16.96 12.44Q17.71 13.74 17.98 15.37L14.89 15.37Q14.66 14.36 14.16 13.56Q13.67 12.76 12.97 12.21Q12.26 11.66 11.37 11.38Q10.47 11.1 9.46 11.1Q7.51 11.1 6.07 12.05Q4.63 13 3.85 14.74Q3.06 16.48 3.06 18.83Q3.06 21.17 3.86 22.9Q4.65 24.63 6.08 25.58Q7.51 26.53 9.46 26.53Q10.49 26.53 11.37 26.25Q12.25 25.96 12.96 25.42Q13.67 24.88 14.16 24.08Q14.66 23.29 14.88 22.27L17.98 22.27Q17.72 23.87 16.99 25.17Q16.26 26.47 15.11 27.4Q13.97 28.33 12.54 28.82Q11.1 29.31 9.43 29.31ZM27 29.33Q24.83 29.33 23.26 28.36Q21.7 27.4 20.86 25.68Q20.02 23.97 20.02 21.74Q20.02 19.5 20.88 17.77Q21.75 16.04 23.28 15.05Q24.81 14.07 26.82 14.07Q28.3 14.07 29.53 14.6Q30.76 15.12 31.67 16.11Q32.58 17.09 33.07 18.49Q33.56 19.88 33.56 21.66L33.56 22.51L21.41 22.51L21.41 20.3L32.06 20.3L30.75 20.99Q30.75 19.62 30.28 18.61Q29.8 17.6 28.93 17.05Q28.05 16.5 26.84 16.5Q25.62 16.5 24.74 17.06Q23.86 17.61 23.38 18.6Q22.9 19.59 22.9 20.91L22.9 22.23Q22.9 23.64 23.4 24.69Q23.9 25.75 24.81 26.32Q25.73 26.89 27.03 26.89Q27.96 26.89 28.68 26.62Q29.39 26.35 29.87 25.83Q30.35 25.31 30.57 24.63L33.36 24.78Q33.07 26.12 32.18 27.14Q31.28 28.17 29.95 28.75Q28.63 29.33 27 29.33ZM36.14 29L36.14 14.37L38.96 14.37L38.96 16.75L39.02 16.75Q39.42 15.53 40.32 14.86Q41.23 14.18 42.61 14.18Q42.92 14.18 43.21 14.21Q43.49 14.23 43.7 14.26L43.7 17Q43.52 16.94 43.09 16.89Q42.66 16.85 42.17 16.85Q41.31 16.85 40.6 17.23Q39.89 17.61 39.47 18.38Q39.05 19.16 39.05 20.3L39.05 29ZM51.81 29.33Q49.64 29.33 48.07 28.36Q46.51 27.4 45.67 25.68Q44.83 23.97 44.83 21.74Q44.83 19.5 45.69 17.77Q46.56 16.04 48.09 15.05Q49.63 14.07 51.64 14.07Q53.11 14.07 54.34 14.6Q55.57 15.12 56.48 16.11Q57.39 17.09 57.88 18.49Q58.38 19.88 58.38 21.66L58.38 22.51L46.22 22.51L46.22 20.3L56.87 20.3L55.56 20.99Q55.56 19.62 55.09 18.61Q54.62 17.6 53.74 17.05Q52.87 16.5 51.65 16.5Q50.43 16.5 49.55 17.06Q48.67 17.61 48.19 18.6Q47.71 19.59 47.71 20.91L47.71 22.23Q47.71 23.64 48.21 24.69Q48.71 25.75 49.63 26.32Q50.54 26.89 51.84 26.89Q52.77 26.89 53.49 26.62Q54.21 26.35 54.68 25.83Q55.16 25.31 55.38 24.63L58.17 24.78Q57.88 26.12 56.99 27.14Q56.09 28.17 54.77 28.75Q53.44 29.33 51.81 29.33ZM66.34 29.33Q64.68 29.33 63.36 28.82Q62.04 28.3 61.23 27.27Q60.42 26.24 60.27 24.72L63.12 24.6Q63.28 25.76 64.1 26.38Q64.92 27 66.3 27Q67.69 27 68.49 26.44Q69.29 25.87 69.29 25.01Q69.29 24.27 68.74 23.81Q68.2 23.35 67.21 23.15L64.79 22.62Q62.73 22.15 61.67 21.1Q60.61 20.06 60.61 18.46Q60.61 17.16 61.33 16.17Q62.04 15.18 63.3 14.62Q64.56 14.07 66.24 14.07Q67.87 14.07 69.11 14.62Q70.36 15.18 71.1 16.2Q71.83 17.21 71.93 18.61L69.18 18.73Q69.1 17.73 68.34 17.06Q67.58 16.39 66.27 16.39Q65.05 16.39 64.3 16.97Q63.55 17.54 63.55 18.36Q63.55 19.12 64.1 19.57Q64.64 20.03 65.68 20.26L68.16 20.81Q70.26 21.28 71.26 22.26Q72.26 23.24 72.26 24.83Q72.26 26.2 71.49 27.22Q70.73 28.23 69.39 28.78Q68.06 29.33 66.34 29.33Z",
+          "source": "Inter Variable 4.001 git-9221beed3",
+          "sourceUrl": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+          "sourceSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+          "weight": 500,
+          "opticalSize": 28,
+          "fontSize": 28,
+          "letterSpacing": -0.1,
+          "baseline": 29,
+          "xOrigin": "trim-left-bearing",
+          "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
+        },
+        "panel": {
+          "introduction": "Ceres is the largest body in the asteroid belt. NASA's Dawn spacecraft mapped its cratered surface and bright salt deposits.",
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Mean radius",
+              "value": "469.7 km"
+            },
+            {
+              "id": "distance-from-sun",
+              "label": "Solar semimajor axis",
+              "value": "2.77 AU"
+            },
+            {
+              "id": "orbital-period",
+              "label": "Orbital period",
+              "value": "4.60 years"
+            },
+            {
+              "id": "rotation-period",
+              "label": "Rotation period",
+              "value": "About 9 hours"
+            },
+            {
+              "id": "moon-count",
+              "label": "Moons",
+              "value": "None"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "mass",
+              "label": "Mass",
+              "value": "9.384 × 10²⁰ kg",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            },
+            {
+              "id": "density",
+              "label": "Mean density",
+              "value": "2.162 g/cm³",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+                "label": "NASA/JPL reference",
+                "checked": "2026-09-08",
+                "path": "source/editorial/factsheet-review.json"
+              }
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "normal",
+          "controls": [
+            {
+              "id": "normal",
+              "label": "Monochrome",
+              "description": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+              "title": "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+              "thumbnail": "/scenes/ceres/ceres-normal-thumbnail.webp",
+              "surface": "ceres-normal-surface@2x.webp",
+              "poles": "ceres-normal-poles@2x.webp",
+              "source": {
+                "id": "usgs-dawn-fc-global-140m",
+                "path": "../manifest.json"
+              },
+              "detail": "Global mosaic",
+              "summary": "Dawn visible-light images with shadows. The gray grid marks known gaps; some dark edges remain uncertain."
+            },
+            {
+              "id": "enhanced",
+              "label": "Enhanced color",
+              "description": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+              "title": "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved.",
+              "thumbnail": "/scenes/ceres/ceres-enhanced-thumbnail.webp",
+              "surface": "ceres-enhanced-surface@2x.webp",
+              "poles": "ceres-enhanced-poles@2x.webp",
+              "source": {
+                "id": "nasa-dawn-fc-pia19977",
+                "path": "../manifest.json"
+              },
+              "detail": "False color",
+              "summary": "Dawn images at 920, 750 and 440 nm in false color. Shadows remain; the gray grid marks known gaps."
+            },
+            {
+              "id": "elevation",
+              "label": "Elevation",
+              "description": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+              "title": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+              "thumbnail": "/scenes/ceres/ceres-elevation-thumbnail.webp",
+              "surface": "ceres-elevation-surface@2x.webp",
+              "poles": "ceres-elevation-poles@2x.webp",
+              "legend": {
+                "kind": "scale",
+                "title": "Elevation",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "−30",
+                  "−5",
+                  "20"
+                ],
+                "meta": "km",
+                "sourceUrl": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m",
+                "image": "/scenes/ceres/ceres-elevation-legend.webp"
+              },
+              "source": {
+                "id": "dawn-elevation",
+                "path": "../manifest.json"
+              },
+              "detail": "Shaded relief",
+              "summary": "Height relative to a 470 km sphere. Interpolated polar terrain beyond 60° is withheld from this view."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "cycle",
+              "name": "speed",
+              "label": "Speed",
+              "state": "normal"
+            },
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "NASA",
+            "role": "facts",
+            "description": "Ceres facts",
+            "href": "https://science.nasa.gov/dwarf-planets/ceres/facts/"
+          },
+          {
+            "label": "USGS",
+            "role": "surface",
+            "description": "Dawn global mosaic",
+            "href": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m"
+          },
+          {
+            "label": "Dawn",
+            "role": "color",
+            "description": "Enhanced-color map",
+            "href": "https://science.nasa.gov/resource/hints-at-ceres-composition-from-color/"
+          },
+          {
+            "label": "DLR",
+            "role": "terrain",
+            "description": "Dawn stereo elevation model",
+            "href": "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/dwarf-planets/ceres/facts/",
+            "credit": "NASA Science"
+          },
+          "physical": {
+            "path": "../../../../../../packages/astronomy",
+            "credit": "Vendored JPL physical and orbital data"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "usgs-dawn-fc-global-140m",
+      "path": "ceres-fc-global.png",
+      "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public scientific imagery with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Retrieve exact published bytes; pinned 2026-09-05. Source changes require review, not automatic refresh.",
+      "redistribution": "Original binary is reacquired locally and ignored by Git; derived textures retain the source credit.",
+      "lensId": "normal",
+      "label": "Monochrome",
+      "falseColor": false,
+      "width": 4096,
+      "height": 2048,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
+      "capture": {
+        "spacecraftIds": [
+          "dawn"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png"
+      },
+      "sha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
+      "bytes": 9750062,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "ceres-fc-global.png",
+        "url": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "nasa-dawn-fc-pia19977",
+      "path": "PIA19977.jpg",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public scientific imagery with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/",
+        "https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits"
+      ],
+      "acquisition": "Retrieve exact published bytes; pinned 2026-09-05. Source changes require review, not automatic refresh.",
+      "redistribution": "Original binary is reacquired locally and ignored by Git; derived textures retain the source credit.",
+      "lensId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 3078,
+      "height": 1537,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive"
+      },
+      "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
+      "capture": {
+        "spacecraftIds": [
+          "dawn"
+        ],
+        "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078"
+      },
+      "sha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
+      "bytes": 1033656,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "PIA19977.jpg",
+        "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "dawn-elevation",
+      "path": "science/ceres-hamo-dtm.tif",
+      "origin": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif",
+      "credit": "DLR / Dawn Team / USGS",
+      "license": "Public NASA PDS / USGS scientific data with attribution; see NOTICE.md",
+      "licenseEvidence": [
+        "https://astrogeology.usgs.gov/search/map/ceres_dawn_fc2_hamo_global_dtm_137m"
+      ],
+      "acquisition": "Retrieve the pinned original product, 2026-09-06. No source substitution or automatic hash refresh.",
+      "redistribution": "Original binary is reacquired locally and excluded from Git; derived maps retain attribution.",
+      "lensId": "elevation",
+      "format": "geotiff",
+      "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
+      "capture": {
+        "spacecraftIds": [
+          "dawn"
+        ],
+        "evidence": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif"
+      },
+      "sha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
+      "bytes": 466647217,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/ceres-hamo-dtm.tif",
+        "url": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Authored scientific and presentation recipe for reusable capability preparation.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Authored scientific and presentation recipe for reusable capability preparation.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "d3054a61b64756703cc216af4b5de3e011f1667f2f0136a9857eeed0f6029e89",
+      "bytes": 9962,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "normal",
+      "label": "Monochrome",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Dawn visible-light mosaic. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved."
+      ],
+      "lensIds": [
+        "normal"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "south-connected-black"
+        }
+      },
+      "inputs": [
+        "usgs-dawn-fc-global-140m"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ceres/ceres-normal-thumbnail.webp",
+          "bytes": 3756,
+          "sha256": "57e7cb49b24c76096f5df3942cc926e9ae5e0422f6964d4a6c0cbcd6f7a47dd2",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ceres/ceres-normal-surface@2x.webp",
+          "bytes": 4533902,
+          "sha256": "d6d6c665ea67a1742ab7781778c4fe49149c49c693c3dee64e3d6af10144c560",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ceres/ceres-normal-poles@2x.webp",
+          "bytes": 163390,
+          "sha256": "49c47235bc306821f7cc5924561db009aa459a907624652f85caac2ddec5ce32",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "enhanced",
+      "label": "Enhanced color",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Dawn PIA19977, 920 / 750 / 440 nm false color. Original image shadows remain; added globe lighting is approximate. Gray grid marks identified gaps; uncertain dark edges are preserved."
+      ],
+      "lensIds": [
+        "enhanced"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "south-connected-black"
+        }
+      },
+      "inputs": [
+        "nasa-dawn-fc-pia19977"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ceres/ceres-enhanced-thumbnail.webp",
+          "bytes": 9784,
+          "sha256": "df339adeaa99dcb0dfce95bfc03e7cc40e8f6cb6b2c2883817273ebaa4356ed6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ceres/ceres-enhanced-surface@2x.webp",
+          "bytes": 2584476,
+          "sha256": "a16a55ad059afd9c70845cc782e534ac620fc28650ef0042da7fc99af406eebb",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ceres/ceres-enhanced-poles@2x.webp",
+          "bytes": 126134,
+          "sha256": "8d8016973c60d7fb3833267a1edc46a275e04e2d1ff9e8ce830827eb7061b849",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "elevation",
+      "label": "Elevation",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
+      ],
+      "lensIds": [
+        "elevation"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Color shows height above the source's 470 km reference sphere; brightness shows terrain relief under fixed northwest lighting. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data."
+      },
+      "inputs": [
+        "dawn-elevation"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ceres/ceres-elevation-thumbnail.webp",
+          "bytes": 6496,
+          "sha256": "333407659f6bc7b91073dcd7b1e0d6e896baae376c7131d52ca170ba2e96e94b",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ceres/ceres-elevation-legend.webp",
+          "bytes": 216,
+          "sha256": "c1cb75a0ff10d78c262808c8188b385da4e98881290b8dc68bd7aa18ba4bc66f",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ceres/ceres-elevation-surface@2x.webp",
+          "bytes": 1445458,
+          "sha256": "c733b1c283e7cca5b2a07a6cb0e87da224c3d1301e2696f27fa1f0f73c6322e4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/ceres/ceres-elevation-poles@2x.webp",
+          "bytes": 9906,
+          "sha256": "f496d03b0cd8655b0d5ced0abb7271abb3474cab9a5060c0f0fec3fc916cc3ab",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5626,
+          "sha256": "5a696b6f7238d67a1029c4f7c64b4d3195d2421c2f54f80411e3fd8dc6b7ff72",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:normal",
+      "label": "Monochrome preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "normal"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/normal.webp",
+          "bytes": 86690,
+          "sha256": "acd6dd31b5549c4d20be1403c12431e9502330af72350fe24e884054ea693cdd",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:enhanced",
+      "label": "Enhanced color preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "enhanced"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/enhanced.webp",
+          "bytes": 108120,
+          "sha256": "4841bb3b6c7ed97ea3307a5d767e8e379885a593d84f8f54709be37c96566ab0",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:elevation",
+      "label": "Elevation preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "elevation"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/elevation.webp",
+          "bytes": 50866,
+          "sha256": "933085a5ad4a78be7d04d2ad973e2d16b264c041dd06b46936d81c8df159044b",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

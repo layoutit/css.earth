@@ -84,7 +84,8 @@
           "id": "schenk-2020-titania-normal",
           "path": "../manifest.json",
           "url": "https://repository.hou.usra.edu/handle/20.500.11753/1687"
-        }
+        },
+        "summary": "Voyager 2 images with detail as fine as 2.9 km per pixel. Shadows and seams remain; gray grid: no observations."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
           "image": "/scenes/titania/titania-elevation-legend.webp"
-        }
+        },
+        "summary": "Voyager stereo and limb heights relative to the source ellipsoid. Detail varies; gray grid: no data."
       }
     ]
   },

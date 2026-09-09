@@ -65,8 +65,9 @@ pins. The Eros archive cache is itself hash-checked before member extraction.
 
 ## Validation
 
-- Four focused body tests pass: geometry, physical context, retained native
-  triangles, source radius anchors and local asset hashes.
+- Twenty-eight focused body and provenance tests pass after integrating main:
+  geometry, physical context, retained native triangles, source radius anchors,
+  local asset hashes, source lineage and spacecraft cards.
 - Fourteen decoder/profile tests pass, including RGB plane order, alpha,
   valid darkness, cropped map registration and rejection of changed labels.
 - Preparation TypeScript checks pass.
@@ -83,18 +84,26 @@ screenshots to the final descriptor, prepared runtime, object transport and
 runtime inventory hashes. These are source-versus-result inspections; a flat
 source mosaic and a rotated CSS mesh are not a pixel-parity oracle.
 
-The aggregate gates are **not fully green**. `pnpm acquire:planets -- --verify-only`
-stops at Hiiaka's missing existing source files. `pnpm test` passes 761 package
-tests and 340 renderer tests, then stops on six Earth paging/destination cases;
-platform and shell stages are not reached. The relevant Earth inputs and test
-files are unchanged from main, as recorded in the
+The aggregate gates are **not fully green**. Before integrating main's dataset
+cards and provenance change (`e23a357b`), `pnpm acquire:planets -- --verify-only`
+stopped at Hiiaka's missing existing source files. `pnpm test` passed 761 package
+tests and 340 renderer tests, then stopped on six Earth paging/destination cases;
+platform and shell stages were not reached. After integration, a focused rerun
+of those three failing files still produces the same six failures. The relevant
+Earth inputs and test files match the integrated main, as recorded in the
 [baseline evidence](evidence/asteroid-spectral-surfaces/aggregate-baseline.json).
 
-The normal-heap static build exhausted Node's heap. With an 8 GiB heap and the
-already-current preparation outputs (pre-build hooks disabled to avoid
-repeating all-object preparation), Astro generates all 259 pages. Final
-whole-catalog assembly then fails on the missing existing
-`hiiaka-directional-sun.webp`. This does not replace a green all-catalog gate.
+The pre-integration normal-heap static build exhausted Node's heap. With an
+8 GiB heap and the current preparation outputs (pre-build hooks disabled), Astro
+generated all 259 pages. Final whole-catalog assembly then failed on the missing
+existing `hiiaka-directional-sun.webp`. This is not a green all-catalog gate or a
+claim of a complete static build after integration. The three asteroid production
+assemblies were rechecked successfully after integration.
+
+The final browser captures use main's dataset cards, explicit false-color
+summaries and source-derived spacecraft associations. Their provenance records
+were recovered and verified against the actual local source and output bytes;
+the existing texture bakes were reused.
 
 ## Preview
 

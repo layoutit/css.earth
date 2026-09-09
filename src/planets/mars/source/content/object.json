@@ -151,7 +151,8 @@
           "id": "normal",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic"
+        "detail": "Global mosaic",
+        "summary": "USGS Viking mosaic with NASA Ames color. Detail and lighting vary; the map does not show the scene date."
       },
       {
         "id": "elevation",
@@ -217,7 +218,8 @@
           "id": "elevation",
           "path": "../manifest.json"
         },
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "summary": "Mars Global Surveyor topography in relief colors. Shading shows slopes; this image is not a numeric readout."
       },
       {
         "id": "thermal",
@@ -231,7 +233,8 @@
           "id": "thermal",
           "path": "../manifest.json"
         },
-        "detail": "Infrared"
+        "detail": "Infrared",
+        "summary": "Mars Odyssey daytime infrared mosaic. Brightness is not temperature; gray grid: gaps left unfilled."
       }
     ]
   },

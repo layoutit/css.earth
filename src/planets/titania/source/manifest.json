@@ -42,7 +42,13 @@
       "lensId": "normal",
       "label": "Monochrome",
       "falseColor": false,
-      "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations."
+      "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/1fe08644-1988-43d4-9f32-1267246f99a4/download"
+      }
     },
     {
       "id": "schenk-2020-titania-elevation",
@@ -84,7 +90,13 @@
       "lensId": "elevation",
       "label": "Elevation",
       "falseColor": true,
-      "coverage": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution."
+      "coverage": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution.",
+      "capture": {
+        "spacecraftIds": [
+          "voyager-2"
+        ],
+        "evidence": "https://repository.hou.usra.edu/bitstreams/e17f88cd-db20-4208-912b-7f30074054cc/download"
+      }
     },
     {
       "id": "eso-milky-way-panorama",

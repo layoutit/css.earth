@@ -153,7 +153,8 @@
           "id": "normal",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
         },
-        "detail": "Visible light"
+        "detail": "Visible light",
+        "summary": "Hubble color, October 2025. The north is observed; the unobserved south fades to a uniform Voyager color."
       },
       {
         "id": "methane",
@@ -198,7 +199,8 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
         },
-        "detail": "727 nm"
+        "detail": "727 nm",
+        "summary": "Hubble 727 nm false color, October 2025. The unobserved south uses uniform color, not measured detail."
       },
       {
         "id": "near-infrared",
@@ -243,7 +245,8 @@
           "id": "near-infrared",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
         },
-        "detail": "845 nm"
+        "detail": "845 nm",
+        "summary": "Hubble 845 nm false color, October 2025. The unobserved south uses uniform color, not measured detail."
       }
     ]
   },

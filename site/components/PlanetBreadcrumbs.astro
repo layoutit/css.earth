@@ -13,14 +13,13 @@ if (object && !scope) {
   const parentId = preparedWorld.bodies.find(body => body.id === object.id)?.orbit?.centerBodyId;
   const parent = object.classification === 'satellite' ? OBJECTS.find(body => body.id === parentId) : null;
   if (parent) crumbs.push({ label: parent.name, href: parent.route });
-  crumbs.push({ label: object.name });
 }
 ---
 
 <nav class="planet-breadcrumbs" aria-label="Breadcrumb">
   <ol>
     {crumbs.map((crumb, index) => <li>
-      {index === crumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
+      {scope && index === crumbs.length - 1 ? <span aria-current="page">{crumb.label}</span>
         : crumb.href ? <a href={crumb.href}>{crumb.label}</a>
         : <button type="button" data-object-query={crumb.query}>{crumb.label}</button>}
     </li>)}

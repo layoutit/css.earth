@@ -72,7 +72,8 @@
           "id": "c1137317",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/voyager/iss/"
-        }
+        },
+        "summary": "Voyager 2 images mapped onto the shape with adjusted brightness. Gray grid: missing or unreliable data."
       },
       {
         "id": "elevation",
@@ -101,7 +102,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
           "image": "/scenes/proteus/proteus-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to a 208 km sphere, from a Voyager shape model. Unseen terrain is modeled; small features are uncertain."
       }
     ]
   },

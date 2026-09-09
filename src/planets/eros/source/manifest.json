@@ -40,7 +40,13 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "expectedBytes": 16897935,
-      "expectedSha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458"
+      "expectedSha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
+      }
     },
     {
       "id": "eros-normal",
@@ -66,7 +72,13 @@
       },
       "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
       "expectedBytes": 228242957,
-      "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761"
+      "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+      }
     },
     {
       "id": "eros-infrared",
@@ -92,7 +104,13 @@
       },
       "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
       "expectedBytes": 228242957,
-      "expectedSha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b"
+      "expectedSha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -127,8 +145,8 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 9290,
-      "expectedSha256": "3cfb36a6454c733188f27e4fccab2d43fccc76576e517d9f55b8bb76f15508b2"
+      "expectedBytes": 9694,
+      "expectedSha256": "f563cc3c3a08aad339458bf3f24eabe51c1ac6cbd800d765b5353db47ae07c44"
     },
     {
       "path": "preparation/acquisition.json",

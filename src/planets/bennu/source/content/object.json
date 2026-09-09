@@ -75,7 +75,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "PolyCam · albedo"
+        "detail": "PolyCam · albedo",
+        "summary": "Corrected PolyCam reflectance between about 55° north and south. The gray grid marks polar gaps."
       },
       {
         "id": "surface",
@@ -90,7 +91,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "PolyCam"
+        "detail": "PolyCam",
+        "summary": "A 5 cm image basemap with shadows. Its control shape differs from the display mesh; small offsets remain."
       },
       {
         "id": "spectral",
@@ -105,7 +107,8 @@
           "path": "../manifest.json"
         },
         "falseColor": true,
-        "detail": "MapCam"
+        "detail": "MapCam",
+        "summary": "Published false-color MapCam composite. Colors emphasize spectral differences; gray grid marks missing coverage, including both poles."
       },
       {
         "id": "elevation",
@@ -133,7 +136,8 @@
           "sourceUrl": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj",
           "image": "/scenes/bennu/bennu-elevation-legend.webp"
         },
-        "detail": "Shape-derived height"
+        "detail": "Shape-derived height",
+        "summary": "Height relative to a 241 m sphere, from the shape model. Colors include Bennu's broad form; the outline is simplified."
       }
     ]
   },

@@ -83,6 +83,10 @@ export function createApplicationWorldContext() {
           minimap.publish(world, viewport);
         };
         return { ...layer, viewport, publish,
+          previewSelection(id) {
+            layer.previewSelection(id);
+            if (publication) publish(publication.world, publication.viewport);
+          },
           selectObject(id, frame) {
             layer.selectObject(id, frame);
             minimap.selectObject(frame);

@@ -36,6 +36,13 @@ function fixture(options = {}) {
   drawer.selectors.set(".planet-information-panel", selectors.get(".planet-information-panel"));
   const item = new Element();
   selectors.get(".planet-object-browser").selectors.set(".planet-object-item", [item]);
+  const tabs = ['all', 'planet', 'satellite', 'asteroid'].map(type => {
+    const tab = new Element(); tab.dataset.objectTab = type; tab.id = `object-tab-${type}`;
+    tab.selectors.set('.planet-object-tab-count', new Element()); elements.push(tab);
+    return tab;
+  });
+  selectors.get('.planet-object-browser').selectors.set('[data-object-tab]', tabs);
+  selectors.get('.planet-object-browser').selectors.set('#object-category-results', new Element());
   const row = new Element(), explanation = new Element();
   explanation.id = "fixture-motion-blocked";
   row.selectors.set(".planet-motion-blocked", explanation);
@@ -44,6 +51,7 @@ function fixture(options = {}) {
   documentTarget.selectors = selectors;
   documentTarget.body = new Element();
   documentTarget.documentElement = new Element();
+  for (const tab of tabs) tab.focus = () => { documentTarget.activeElement = tab; };
   selectors.get('.planet-sidebar-search').focus = () => {
     documentTarget.activeElement = selectors.get('.planet-sidebar-search');
   };
@@ -158,7 +166,7 @@ test('object content replacement retains shell controls and input state without 
     shell.setObject({ id, name: id, apply() {} });
     assert.equal(f.selectors.get('.planet-sidebar-search'), search);
     assert.equal(f.selectors.get('.planet-drawer-content'), drawer);
-    assert.equal(search.value, id);
+    assert.equal(search.value, "", "Object navigation does not write to search");
     assert.equal(search.listeners.size, searchListeners);
     assert.equal(drawer.listeners.size, drawerListeners);
     assert.equal(motion.checked, true);
@@ -189,21 +197,20 @@ test("Motion cannot enable Speed before the shared runtime is ready or after it 
   shell.destroy();
 });
 
-test('camera scale changes retained overview content without moving the camera and search opens matching body groups', () => {
+test('camera scale changes retained overview content without moving the camera and search selects the matching category tab', () => {
   const f = fixture(), browser = f.selectors.get('.planet-object-browser');
   const galaxy = new Element(), system = new Element(), introduction = new Element();
   system.selectors.set('.planet-introduction', introduction);
   browser.selectors.set('[data-galactic-overview]', galaxy);
   browser.selectors.set('[data-solar-system-results]', system);
-  const groups = ['planet', 'satellite'].map(type => {
-    const group = new Element(), item = new Element();
+  const items = ['planet', 'satellite'].map(type => {
+    const item = new Element();
     item.dataset = { objectName: type === 'planet' ? 'earth' : 'moon', objectSystemName: 'solar system',
       objectClassification: type, objectClassificationName: type === 'planet' ? 'planet' : 'moon' };
-    group.selectors.set('.planet-object-item', [item]); group.open = type === 'planet';
-    return group;
+    return item;
   });
-  browser.selectors.set('[data-object-type-group]', groups);
-  browser.selectors.set('.planet-object-item', groups.flatMap(group => group.querySelectorAll('.planet-object-item')));
+  browser.selectors.set('.planet-object-item', items);
+  const tabs = browser.querySelectorAll('[data-object-tab]');
   const shell = f.mount(), search = f.selectors.get('.planet-sidebar-search'), listeners = new Set();
   let world = { pose: { positionM: [0, 0, context.camera.maximumDistanceM] } };
   const before = structuredClone(world);
@@ -211,17 +218,25 @@ test('camera scale changes retained overview content without moving the camera a
   shell.setCamera({ navigation: { capture: () => world,
     subscribe(callback) { listeners.add(callback); callback(world); return () => listeners.delete(callback); },
   } });
-  assert.equal(search.value, 'Milky Way');
+  assert.equal(search.value, '');
   assert.equal(galaxy.hidden, false); assert.equal(system.hidden, true);
   assert.deepEqual(world, before, 'Only the sidebar context changes');
   world = { pose: { positionM: [0, 0, context.volume.fadeStartDistanceM * .9] } };
   for (const callback of listeners) callback(world);
-  assert.equal(search.value, 'Solar System'); assert.equal(system.hidden, false); assert.equal(galaxy.hidden, true);
+  assert.equal(search.value, ''); assert.equal(system.hidden, false); assert.equal(galaxy.hidden, true);
   search.value = 'moon'; search.dispatchEvent(new Event('input'));
   assert.equal(introduction.hidden, false, 'Search keeps the Solar System introduction visible');
-  assert.equal(groups[0].hidden, true); assert.equal(groups[1].hidden, false); assert.equal(groups[1].open, true);
+  assert.equal(items[0].hidden, true); assert.equal(items[1].hidden, false);
+  assert.equal(tabs[2].getAttribute('aria-selected'), 'true');
   search.value = 'Solar System'; search.dispatchEvent(new Event('input'));
-  assert.equal(groups[0].open, true); assert.equal(groups[1].open, false, 'Search preserves the previous collapsed state');
+  assert.equal(tabs[2].getAttribute('aria-selected'), 'true', 'The current category survives clearing the filter');
+  tabs[2].dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Home' }));
+  assert.equal(f.documentTarget.activeElement, tabs[0]);
+  assert.equal(items[0].hidden, false); assert.equal(items[1].hidden, false);
+  assert.equal(tabs[0].querySelector('.planet-object-tab-count').textContent, '(2)');
+  tabs[2].dispatchEvent(new Event('click'));
+  assert.equal(items[1].hidden, false);
+  assert.equal(browser.querySelector('#object-category-results').getAttribute('aria-labelledby'), tabs[2].id);
   shell.destroy(); assert.equal(listeners.size, 0);
 });
 
@@ -288,7 +303,7 @@ test('flight completion and overview handoff preserve a newer active search', ()
   f.selectors.get('.planet-sidebar-view-all').dispatchEvent(new Event('click'));
   assert.equal(search.value, 'second', 'Repeating search does not dismiss results');
   search.dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
-  assert.equal(search.value, 'First');
+  assert.equal(search.value, 'second', 'Dismissing results preserves the user query');
   shell.destroy();
 });
 
@@ -346,7 +361,7 @@ test('category pills reuse search, retain the query through navigation, and dism
   assert.equal(search.value, 'Asteroids');
   assert.equal(buttons[2].ariaPressed, 'true');
   buttons[2].dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
-  assert.equal(search.value, 'Mars');
+  assert.equal(search.value, 'Asteroids', 'Card changes never replace the query');
   assert.equal(f.documentTarget.activeElement, search);
   assert.equal(browser.hidden, true);
   assert.ok(buttons.every(button => button.ariaPressed === 'false'));
@@ -354,31 +369,42 @@ test('category pills reuse search, retain the query through navigation, and dism
   assert.ok(buttons.every(button => button.listeners.size === 0));
 });
 
-test('sidebar collapse survives object navigation, reveals search results, and cleans its listeners', () => {
-  const f = fixture(), shell = f.mount();
-  const sidebar = f.selectors.get('.planet-sidebar');
-  const toggle = f.selectors.get('.planet-sidebar-collapse');
-  const search = f.selectors.get('.planet-sidebar-search');
-  sidebar.scrollTop = 120;
-  toggle.dispatchEvent(new Event('click'));
-  assert.equal(sidebar.inert, true);
-  assert.equal(toggle.getAttribute('aria-expanded'), 'false');
-  assert.equal(f.documentTarget.body.dataset.sidebarCollapsed, 'true');
-  shell.setObject({ id: 'next', name: 'Next', apply() { sidebar.id = 'next-sidebar'; } });
-  assert.equal(sidebar.inert, true);
-  assert.equal(toggle.getAttribute('aria-controls'), 'next-sidebar');
-  toggle.dispatchEvent(new Event('click'));
-  assert.equal(sidebar.inert, false);
-  assert.equal(sidebar.scrollTop, 120);
-  for (const trigger of ['input', 'click']) {
-    toggle.dispatchEvent(new Event('click'));
-    const target = trigger === 'input' ? search : f.selectors.get('.planet-sidebar-view-all');
-    target.dispatchEvent(new Event(trigger));
-    assert.equal(sidebar.inert, false);
-    assert.equal(toggle.getAttribute('aria-expanded'), 'true');
-  }
+test('the overview preview changes immediately and survives a same-scene commit', () => {
+  const f = fixture(), shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  shell.setObject({ id: 'sun', name: 'Sun', apply() {} });
+  const cancel = shell.beginOverviewSelection();
+  assert.equal(search.value, '');
+  cancel();
+  assert.equal(search.value, '');
+  const restore = shell.beginOverviewSelection();
+  shell.setOverview(true);
+  restore();
+  assert.equal(search.value, '');
+  assert.equal(f.selectors.get('.planet-information-panel').hidden, true);
   shell.destroy();
-  toggle.dispatchEvent(new Event('click'));
-  assert.equal(f.documentTarget.body.dataset.sidebarCollapsed, undefined);
-  assert.ok(f.elements.every(element => element.listeners.size === 0));
+});
+
+
+test('an empty search survives dismissal, overview resets, and object commits', () => {
+  const f = fixture(), shell = f.mount(), search = f.selectors.get('.planet-sidebar-search');
+  shell.setObject({ id: 'sun', name: 'Sun', apply() {} });
+  shell.setOverview(true);
+  search.value = 'moon'; search.dispatchEvent(new Event('input'));
+  search.value = ''; search.dispatchEvent(new Event('input'));
+  search.dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
+  assert.equal(search.value, '', 'Escape does not insert the overview name');
+  const restore = shell.beginOverviewSelection();
+  assert.equal(search.value, '', 'Empty-scene selection leaves search empty');
+  shell.setOverview(true); restore();
+  assert.equal(search.value, '');
+  assert.equal(f.selectors.get('.planet-object-browser').hidden, false, 'The overview card remains visible');
+  shell.setObject({ id: 'jupiter', name: 'Jupiter', apply() {} });
+  assert.equal(search.value, '', 'An object commit cannot auto-search Jupiter');
+  assert.equal(f.selectors.get('.planet-information-panel').hidden, false);
+  search.value = 'mars'; search.dispatchEvent(new Event('input'));
+  const cancel = shell.beginOverviewSelection();
+  search.value = 'venus'; search.dispatchEvent(new Event('input'));
+  cancel();
+  assert.equal(search.value, 'venus', 'Cancelling a card preview cannot overwrite a newer query');
+  shell.destroy();
 });

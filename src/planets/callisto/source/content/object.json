@@ -96,7 +96,8 @@
           "id": "usgs-voyager-galileo-global-1km",
           "path": "../manifest.json"
         },
-        "detail": "Global mosaic"
+        "detail": "Global mosaic",
+        "summary": "USGS images with detail ranging from 400 m to 60 km per pixel. Shadows and seams remain; gray grid: no data."
       }
     ]
   },

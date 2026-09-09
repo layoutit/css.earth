@@ -72,7 +72,13 @@
       "consumers": [
         "scene"
       ],
-      "expectedBytes": 105281
+      "expectedBytes": 105281,
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
+      }
     },
     {
       "id": "saturn-approved-fixed-material",
@@ -310,7 +316,13 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880
+      "expectedBytes": 6482880,
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-2025b-f225w",
@@ -324,7 +336,13 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880
+      "expectedBytes": 6482880,
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-2025a-fq889n",
@@ -338,7 +356,13 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880
+      "expectedBytes": 6482880,
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits"
+      }
     },
     {
       "id": "hubble-opal-2025b-fq889n",
@@ -352,7 +376,13 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880
+      "expectedBytes": 6482880,
+      "capture": {
+        "spacecraftIds": [
+          "hubble"
+        ],
+        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
+      }
     },
     {
       "id": "eso-saturn-milky-way-panorama",
