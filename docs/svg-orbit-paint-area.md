@@ -94,3 +94,20 @@ files. The contrast browser test reaches the loaded Mercury scene after payload
 restoration but cannot complete: main intentionally hides the Settings button
 that the test tries to click. No production UI was changed to make that test pass.
 The merged branch is still a draft, not merge-qualified.
+
+## Drawing-sized boxes
+
+A further SVG trial fits each viewport to the projected path bounds plus a
+conservative 3px stroke margin, keeping the path coordinates unchanged through
+a matching `viewBox`. Capture `main-latest-svg-drawing-bounds-dpr2` at
+`a3fddf046` is synchronized and source-verified: recorder
+`5b8cf8fd-671b-4242-acb4-fadf077cdd31`, 832 video frames, -102 microseconds clock
+drift, 0.411 ms maximum PTS error, no page errors/HMR/data loss, one response patch.
+
+Style p95 is 2.130 ms, but layout p95 is 9.018 ms and main-frame p95 is 25.481 ms.
+Host load was 21–25, so comparisons with the earlier lower-load runs remain
+confounded. The per-frame viewport resizing does not establish a performance
+win and should not be adopted. Its static overview control also differed between
+two identical runs; that fixture is not proof of content preservation. This is
+not an antialiasing rejection. Subsequent work should avoid repeated viewport
+layout while keeping valid drawing bounds and retained path definitions.
