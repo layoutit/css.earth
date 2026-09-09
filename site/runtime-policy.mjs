@@ -10,6 +10,24 @@ export const WHEEL_ZOOM_SPEED_MULTIPLIER = 4;
 export const WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER = 1;
 export const WHEEL_ZOOM_USE_SCROLL_DISTANCE = true;
 
+export const CONTEXT_ANNOTATION_PRIORITY = Object.freeze({
+  planet: 3,
+  'dwarf-planet': 2,
+  comet: 1,
+  asteroid: 0,
+});
+
+// Initial system framing follows the larger moons; small distant satellites
+// remain available without forcing the main moon system into a few pixels.
+export const SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE = 0.2;
+export const SYSTEM_FRAMING_PADDING_PIXELS = 48;
+// Prepare oriented bounds for each system. Runtime projects those bounds
+// at the current viewing angle to fit the complete primary orbits.
+export const SYSTEM_FRAMING_ANGLES = Object.freeze({
+  elevationsDegrees: Object.freeze([30, 45, 60]),
+  azimuthStepDegrees: 15,
+});
+
 // Leave a body only once the observer has reached the scale of its orbit.
 // A much larger Sun disc is required to show its card again on approach.
 export const OVERVIEW_SELECTION_POLICY = Object.freeze({

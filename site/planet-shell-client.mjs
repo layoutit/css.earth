@@ -8,7 +8,7 @@ import { createSurfaceMinimap, loadSurfacePreview } from "./surface-minimap.mjs"
 import { createViewReadout } from "./view-readout.mjs";
 import { createSurfaceMapReader } from "./surface-map-context.mjs";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mjs';
-import { overviewScopeAtCamera } from './overview-context.mjs';
+import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mjs';
 
 export function mountPlanetShell({
   objectId,
@@ -30,9 +30,17 @@ export function mountPlanetShell({
   const lifetime = createSceneLifetime();
   let settingsController, objectBrowser, contentLifetime, minimapController, viewReadout;
   let selectionPreview = null;
+  let cardObjectId = objectId;
   let overview = false, overviewScope = 'solar-system', camera = null, unsubscribeOverview = null;
   lifetime.onDispose(() => unsubscribeOverview?.());
+  function updateBodyCard(world = camera?.navigation?.capture()) {
+    const information = drawer.querySelector('.planet-information-panel');
+    const view = bodyCardViewAtCamera(world, selectionPreview?.frame ?? camera?.navigation?.frame,
+      camera?.navigation?.optics?.(), selectionPreview?.id ?? cardObjectId);
+    if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
+  }
   function updateOverview(force = false, world = camera?.navigation?.capture()) {
+    updateBodyCard(world);
     if (selectionPreview) return;
     const scope = overview && world ? overviewScopeAtCamera(world, overviewScope) : 'solar-system';
     if (!force && scope === overviewScope) return;
@@ -88,7 +96,7 @@ export function mountPlanetShell({
         if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
       }
       information.ariaBusy = 'true'; information.inert = true;
-      const preview = { id: object.id, commit() {
+      const preview = { id: object.id, frame: object.worldFrame, commit() {
         selectionPreview = null;
         information.ariaBusy = previousBusy; information.inert = previousInert;
       }, restore() {
@@ -97,8 +105,10 @@ export function mountPlanetShell({
         information.replaceChildren(...previous);
         information.ariaBusy = previousBusy; information.inert = previousInert;
         restoreBrowser();
+        updateBodyCard();
       } };
       selectionPreview = preview;
+      updateBodyCard();
       return preview.restore;
     },
     setObject(content) {
@@ -110,6 +120,7 @@ export function mountPlanetShell({
       const contrast = documentTarget.querySelector('.planet-sky-contrast-setting').checked;
       disposeContent();
       content.apply({ preserveSidebar });
+      cardObjectId = content.id;
       overview = false; overviewScope = 'solar-system';
       objectBrowser.setObject(content.name);
       mountContent(content.id, motion, contrast);
@@ -405,8 +416,18 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   }
   const tabs = [...browser.querySelectorAll('[data-object-tab]')];
   const resultsPanel = browser.querySelector('#object-category-results');
-  let activeCategory = 'all';
+  const resultsList = resultsPanel.querySelector('.planet-object-list');
+  const distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceAu) - Number(b.dataset.objectDistanceAu));
+  const planetOrder = [
+    ...distanceOrder.filter(item => item.dataset.objectClassification === 'planet'),
+    ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
+  ];
+  let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
   const selectTab = (classification, { focus = false } = {}) => {
+    if (classification !== activeCategory) {
+      // Move the retained rows; All keeps distance order, Planets leads with major planets.
+      resultsList?.append(...(classification === 'planet' ? planetOrder : distanceOrder));
+    }
     activeCategory = classification;
     for (const tab of tabs) {
       const selected = tab.dataset.objectTab === classification;

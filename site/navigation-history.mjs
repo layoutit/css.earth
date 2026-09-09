@@ -58,7 +58,7 @@ export function bindNavigationLinks({ documentTarget, windowTarget, objects, sup
     const object = objects.find(object => object.route === url.pathname);
     if (!object || !supports(object.id)) return;
     event.preventDefault();
-    Promise.resolve(navigate(object.id, url.search || url.hash ? { url: url.href } : { sceneSelection: anchor.dataset?.objectId === object.id })).catch(onError);
+    Promise.resolve(navigate(object.id, url.search || url.hash ? { url: url.href } : { sceneSelection: true })).catch(onError);
   };
   const clear = event => {
     if (!deselect || event.defaultPrevented) return;
