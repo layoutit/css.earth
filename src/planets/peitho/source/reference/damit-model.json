@@ -1,0 +1,344 @@
+{
+  "number": 118,
+  "name": "Peitho",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2516",
+  "modelId": 4397,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4397",
+  "catalog": "View model 179 60 7.806396 IAUspin | shape.png | shape.txt | spin.txt | shape.obj this pole agrees with occultation",
+  "fields": {
+    "ID": "4397",
+    "Asteroid": "(118) Peitho",
+    "λ": "179",
+    "β": "60",
+    "P": "7.806396",
+    "YORP": "",
+    "t0": "2443482",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.69",
+    "p3": "0.06",
+    "p4": "-0.66",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2020-04-26",
+    "Comment": "this pole agrees with occultation",
+    "Created": "2020-05-06 17:36:17",
+    "Modified": "2020-05-06 17:38:15",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/51245/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/51246/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/51247/shape.txt"
+  },
+  "references": [],
+  "id": "peitho",
+  "displayName": "Peitho",
+  "lambda": 179.0,
+  "beta": 60.0,
+  "periodHours": 7.806396,
+  "version": "2020-04-26",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 43.99,
+  "uncertaintyKm": 0.75,
+  "akari": {
+    "number": 118,
+    "name": "Peitho",
+    "diameterKm": 43.99,
+    "uncertaintyKm": 0.75,
+    "detections": 5,
+    "originalRow": "118    Peitho                         9.14  0.15  5   43.99  0.75 0.217 0.010"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/51247/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/51245/IAUspin",
+  "shapeSha256": "9586fd3156698a4c8021a37ba6ad8868551a540f5412c7f3a6f06c049442488d",
+  "shapeBytes": 81655,
+  "vertices": 1009,
+  "faces": 2014,
+  "signedVolume": 0.9999998323247126,
+  "independentSignedVolume": 0.9999998323247126,
+  "originalVolumeEquivalentDiameter": 1.2407009124538315,
+  "firstVertex": [
+    0.016838,
+    0.025359,
+    0.452128
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.45315154805980745,
+    0.7756113344697846
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.700001,
+      0.647173
+    ],
+    [
+      -0.697488,
+      0.713209
+    ],
+    [
+      -0.465835,
+      0.452128
+    ]
+  ],
+  "scaleKmPerSourceUnit": 35.45576501027756,
+  "topology": {
+    "edges": 3021,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 1.2407009124538315,
+    "declaredDiameterKm": null,
+    "relativeDifference": null,
+    "scaledDiameterKm": 43.99
+  },
+  "alternatives": [
+    {
+      "modelId": 4474,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4474",
+      "pole": [
+        "346",
+        "34"
+      ],
+      "version": "2019-10-23",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Ďurech et al. (2020)",
+          "url": "/projects/damit/references/view/658"
+        }
+      ]
+    },
+    {
+      "modelId": 4475,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4475",
+      "pole": [
+        "176",
+        "59"
+      ],
+      "version": "2019-10-23",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Ďurech et al. (2020)",
+          "url": "/projects/damit/references/view/658"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Selected2020 archive update4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive. The prior opposite pole4474 remains listed as a comparison, not an equally supported orientation.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "archive update agrees with occultation",
+  "independentCenteredSignedVolume": 0.9999998323247127,
+  "surfaceAreaSourceUnitsSquared": 5.134201256681115,
+  "surfaceEquivalentDiameterSourceUnits": 1.278384534347487,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        0.016838,
+        0.025359,
+        0.452128
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 450,
+      "sourcePoint": [
+        0.647173,
+        -0.328222,
+        -0.039178
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 477,
+      "sourcePoint": [
+        0.120088,
+        0.713209,
+        -0.107215
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 504,
+      "sourcePoint": [
+        -0.697778,
+        0.210137,
+        0.01007
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 505,
+      "sourcePoint": [
+        -0.700001,
+        0.187561,
+        0.01007
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 536,
+      "sourcePoint": [
+        -0.072651,
+        -0.697488,
+        -0.090953
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1007,
+      "sourcePoint": [
+        0.05205,
+        -0.089685,
+        -0.465835
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1008,
+      "sourcePoint": [
+        -0.121786,
+        0.084151,
+        -0.465835
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "durech-2020.pdf",
+      "url": "https://arxiv.org/pdf/2010.01820",
+      "label": "Ďurech et al. (2020), A&A 643, A59"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 43.99,
+    "uncertaintyKm": 0.75,
+    "reportedUncertaintyKm": 0.75,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 118,
+      "name": "Peitho",
+      "diameterKm": 43.99,
+      "uncertaintyKm": 0.75,
+      "detections": 5,
+      "originalRow": "118    Peitho                         9.14  0.15  5   43.99  0.75 0.217 0.010"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Selected2020 archive update4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive. The prior opposite pole4474 remains listed as a comparison, not an equally supported orientation.",
+    "scaleKmPerSourceUnit": 35.45576501027756,
+    "metersPerSourceUnit": 35455.76501027756,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 43.99 km effective diameter (catalog ±0.75 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The pole follows the archive’s occultation match. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "upstreamShapeReferences": [
+    {
+      "label": "Ďurech et al. (2020)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/658",
+      "file": "reference-658.html",
+      "links": [
+        {
+          "label": "2020a&a...643a..59d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2020a&a...643a..59d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D",
+          "url": "http://adsabs.harvard.edu/abs/2020A&A...643A..59D"
+        }
+      ]
+    }
+  ],
+  "distanceAu": 2.4376754729416765,
+  "orbitalPeriodYears": 3.806028479777533,
+  "sourceFields": {
+    "ID": "4397",
+    "Asteroid": "(118) Peitho",
+    "λ": "179",
+    "β": "60",
+    "P": "7.806396",
+    "YORP": "",
+    "t0": "2443482",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.69",
+    "p3": "0.06",
+    "p4": "-0.66",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2020-04-26",
+    "Comment": "this pole agrees with occultation",
+    "Created": "2020-05-06 17:36:17",
+    "Modified": "2020-05-06 17:38:15",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

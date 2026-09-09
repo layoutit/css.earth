@@ -1,0 +1,89 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/157",
+  "modelId": 157,
+  "modelVersion": "2007-02-27",
+  "diameterKm": 51.1,
+  "diameterInterpretation": "Convex light-curve reconstruction with a thermophysical volume scale of 51.1 ± 2.1 km (reported model-ensemble range). An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 51.1,
+    "uncertaintyKm": 2.1,
+    "uncertaintyKind": "Empirical VS-TPM interval formed from the smallest range of14 best-fit varied-shape solutions out of20 (approximately68% of models), as defined in Hanuš2018 section3. It is not an independent Gaussian confidence interval or a local surface accuracy bound.",
+    "diameterSemantics": "Published volume-equivalent diameter for the same pole and nominal shape family; transferred uniformly to the archived nominal mesh.",
+    "sourceUrl": "https://arxiv.org/pdf/1803.06116",
+    "reference": "Hanuš et al. (2018), Table A.3",
+    "sourceLabel": "Hanuš et al. (2018), Table A.3",
+    "limitations": "Ďurech2007 is the actual published collaboration-network shape source. Hanuš2018 TableA.3 uses its pole(95,68), period3.96820 h, QF3 and VS-TPM volume-equivalent diameter51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.",
+    "visibleDescription": "Convex light-curve reconstruction with a thermophysical volume scale of 51.1 ± 2.1 km (reported model-ensemble range). An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 41.186395818873095,
+    "metersPerSourceUnit": 41186.3958188731,
+    "uncertaintyEnsemble": {
+      "acceptedModels": 14,
+      "totalModels": 20,
+      "method": "smallest parameter range among best-fitting varied-shape solutions",
+      "source": "Hanuš2018 section3 and TableA.3"
+    }
+  },
+  "periodHours": 3.968198,
+  "poleEclipticJ2000Degrees": [
+    95,
+    68
+  ],
+  "modelLimitations": "Ďurech2007 is the actual published collaboration-network shape source. Hanuš2018 TableA.3 uses its pole(95,68), period3.96820 h, QF3 and VS-TPM volume-equivalent diameter51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/383/shape.txt",
+    "vertices": 1598,
+    "faces": 3192,
+    "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration",
+    "metersPerUnit": 41186.3958188731,
+    "firstVertexKm": [
+      2.9962279230313795,
+      -6.503496645383336,
+      21.757372573652816
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      63.21320979397297,
+      49.3679909755006,
+      45.755449825435605
+    ],
+    "volumeCubicKm": 69865.26693621473,
+    "volumeEquivalentRadiusKm": 25.55,
+    "radialRangeKm": [
+      21.384245021454998,
+      32.70430969462872
+    ]
+  },
+  "elevation": [
+    -8,
+    8
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 3192,
+    "sourceVertices": 1598,
+    "weldedVertices": 1598,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 511,
+    "estimatedErrorMeters": 337.8763732910156,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 69567394893382.53
+    }
+  }
+}

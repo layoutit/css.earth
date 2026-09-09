@@ -78,18 +78,33 @@ export function requireDescriptorAdapterSource(text, exported) {
   const method = transport[0].value, reference = method.params[0]?.name, signal = method.params[1].name, nodes = [];
   const walk = node => { if (!node || typeof node !== 'object') return; if (node.type) nodes.push(node); for (const value of Object.values(node)) if (Array.isArray(value)) value.forEach(walk); else if (value && typeof value === 'object') walk(value); };
   walk(method.body);
-  const glob = nodes.filter(node => node.type === 'VariableDeclarator' && node.init?.type === 'CallExpression' && node.init.callee?.property?.name === 'glob');
-  if (glob.length !== 1 || glob[0].id.type !== 'Identifier') fail();
-  const call = glob[0].init, meta = call.callee.object;
-  const options = new Map(call.arguments[1]?.properties?.map(property => [property.key.name ?? property.key.value, property.value.value]));
-  if (meta?.type !== 'MetaProperty' || meta.meta.name !== 'import' || meta.property.name !== 'meta' || call.arguments[0]?.value !== '../src/planets/*/prepared/object.json' ||
-    options.size !== 3 || options.get('query') !== '?url' || options.get('import') !== 'default' || options.get('eager') !== true) fail();
-  const address = nodes.find(node => node.type === 'VariableDeclarator' && node.init?.type === 'MemberExpression' && node.init.object.name === glob[0].id.name);
-  const template = address?.init.property, objectId = template?.expressions?.[0];
-  if (!address?.init.computed || template?.type !== 'TemplateLiteral' || template.expressions.length !== 2 ||
-    objectId?.type !== 'MemberExpression' || objectId.computed || objectId.object?.name !== loader.params[0].name || objectId.property?.name !== 'id' ||
-    template.expressions[1]?.name !== reference || template.quasis[0].value.cooked !== '../src/planets/' ||
-    template.quasis[1].value.cooked !== '/' || template.quasis[2].value.cooked !== '') fail();
+  const memberIs = (node, parts) => {
+    if (node?.type === 'ChainExpression') return memberIs(node.expression, parts);
+    if (parts.length === 1) return node?.type === 'Identifier' && node.name === parts[0];
+    return node?.type === 'MemberExpression' && !node.computed && node.property?.name === parts.at(-1) && memberIs(node.object, parts.slice(0, -1));
+  };
+  const declarations = method.body.body.filter(node => node.type === 'VariableDeclaration').flatMap(node => node.declarations);
+  const address = declarations.find(node => node.init?.type === 'TemplateLiteral');
+  const template = address?.init;
+  if (address?.id.type !== 'Identifier' || template.expressions.length !== 2 ||
+    !memberIs(template.expressions[0], [descriptorInput, 'id']) ||
+    !memberIs(template.expressions[1], [descriptorInput, 'prepared', 'sha256']) ||
+    template.quasis.map(part => part.value.cooked).join('|') !== '/objects/|/|.json') fail();
+  const guard = method.body.body[0];
+  const alternatives = node => node?.type === 'LogicalExpression' && node.operator === '||'
+    ? [...alternatives(node.left), ...alternatives(node.right)] : [node];
+  const predicates = alternatives(guard?.test);
+  const rejects = (node, right) => node?.type === 'BinaryExpression' && node.operator === '!==' && node.left?.name === reference && right(node.right);
+  const matches = (node, pattern, parts) => node?.type === 'UnaryExpression' && node.operator === '!' &&
+    node.argument?.type === 'CallExpression' && node.argument.callee?.type === 'MemberExpression' && !node.argument.callee.computed &&
+    node.argument.callee.property?.name === 'test' && node.argument.callee.object?.regex?.pattern === pattern &&
+    node.argument.callee.object.regex.flags === 'u' && node.argument.arguments.length === 1 && memberIs(node.argument.arguments[0], parts);
+  if (guard?.type !== 'IfStatement' || guard.alternate || guard.consequent?.type !== 'BlockStatement' ||
+    guard.consequent.body.length !== 1 || guard.consequent.body[0].type !== 'ThrowStatement' || predicates.length !== 4 ||
+    !rejects(predicates[0], node => node?.value === 'prepared/object.json') ||
+    !rejects(predicates[1], node => memberIs(node, [descriptorInput, 'prepared', 'url'])) ||
+    !matches(predicates[2], '^[a-z][a-z0-9-]*$', [descriptorInput, 'id']) ||
+    !matches(predicates[3], '^[0-9a-f]{64}$', [descriptorInput, 'prepared', 'sha256'])) fail();
   const fetched = nodes.find(node => node.type === 'VariableDeclarator' && node.init?.type === 'AwaitExpression' && node.init.argument?.callee?.name === 'fetch');
   const fetchOptions = fetched?.init.argument.arguments[1];
   if (fetched?.init.argument.arguments.length !== 2 || fetched.init.argument.arguments[0].name !== address.id.name ||

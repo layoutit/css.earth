@@ -1,0 +1,307 @@
+{
+  "number": 115,
+  "name": "Thyra",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/136",
+  "modelId": 154,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/154",
+  "catalog": "View model 35 33 7.23996 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj weird Hapke parameters needed to keep the shape not too high",
+  "fields": {
+    "ID": "154",
+    "Asteroid": "(115) Thyra",
+    "λ": "35",
+    "β": "33",
+    "P": "7.23996",
+    "YORP": "",
+    "t0": "2443845.1",
+    "φ0": "0",
+    "Light Scattering Model": "Hapke",
+    "p1": "0.23",
+    "p2": "0.3",
+    "p3": "0.02",
+    "p4": "13.6",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "92",
+    "σD": "2",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2009-02-26",
+    "Comment": "weird Hapke parameters needed to keep the shape not too high",
+    "Created": "",
+    "Modified": "2010-05-27 10:32:10",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/366/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/367/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/368/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/369/shape.txt"
+  },
+  "references": [
+    {
+      "label": "T. Michalowski (2004)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/108",
+      "file": "reference-108.html",
+      "links": [
+        {
+          "label": "2004a&a...416..353m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2004a&a...416..353m"
+        },
+        {
+          "label": "https://ui.adsabs.harvard.edu/#abs/2004A&A...416..353M/abstract",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2004A&A...416..353M/abstract"
+        }
+      ]
+    },
+    {
+      "label": "M. Delbo and P. Tanga (2009)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/126",
+      "file": "reference-126.html",
+      "links": [
+        {
+          "label": "2009p&ss...57..259d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2009p&ss...57..259d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2009P%26SS...57..259D",
+          "url": "http://adsabs.harvard.edu/abs/2009P%26SS...57..259D"
+        }
+      ]
+    }
+  ],
+  "id": "thyra",
+  "displayName": "Thyra",
+  "lambda": 35.0,
+  "beta": 33.0,
+  "periodHours": 7.23996,
+  "version": "2009-02-26",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 92.0,
+  "uncertaintyKm": 2.0,
+  "akari": {
+    "number": 115,
+    "name": "Thyra",
+    "diameterKm": 80.65,
+    "uncertaintyKm": 0.88,
+    "detections": 9,
+    "originalRow": "115    Thyra                          7.51  0.12  9   80.65  0.88 0.270 0.007"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/369/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/367/IAUspin.txt",
+  "shapeSha256": "d3e017daf4e6a4b91d1854af583a2e128397c945dc62d2c384b8420bf8094a2f",
+  "shapeBytes": 82627,
+  "vertices": 1021,
+  "faces": 2038,
+  "signedVolume": 407720.0509201346,
+  "independentSignedVolume": 407720.05092013447,
+  "originalVolumeEquivalentDiameter": 91.99999755905095,
+  "firstVertex": [
+    14.139903,
+    3.882207,
+    44.502844
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    39.190699055662215,
+    56.423059032564645
+  ],
+  "extentsSourceUnits": [
+    [
+      -50.932749,
+      49.558948
+    ],
+    [
+      -51.792024,
+      47.537792
+    ],
+    [
+      -42.020095,
+      44.502844
+    ]
+  ],
+  "scaleKmPerSourceUnit": 1.0000000265320557,
+  "topology": {
+    "edges": 3057,
+    "eulerCharacteristic": 2,
+    "closed": true,
+    "oppositelyDirectedEdgeIncidents": true,
+    "nondegenerate": true
+  },
+  "declaredDiameterComparison": {
+    "sourceVolumeEquivalentDiameter": 91.99999755905095,
+    "declaredDiameterKm": 92.0,
+    "relativeDifference": -2.6532054886452272e-08,
+    "scaledDiameterKm": 92.00000000000001
+  },
+  "alternatives": [],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "The archive warns that unusual Hapke parameters were needed to keep the shape from becoming too high. This limits confidence in the vertical dimension. Delbo and Tanga2009 give a90–94 km thermophysical size range for this pole family, represented in DAMIT as92±2 km. The material roughness is not constrained; no Hapke-derived texture is synthesized.",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "selectedPoleStatus": "single archived pole, model uncertainty remains",
+  "independentCenteredSignedVolume": 407720.0509201346,
+  "surfaceAreaSourceUnitsSquared": 27659.69536471536,
+  "surfaceEquivalentDiameterSourceUnits": 93.83152180062343,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        14.139903,
+        3.882207,
+        44.502844
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 373,
+      "sourcePoint": [
+        9.488446,
+        47.537792,
+        -2.413708
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 454,
+      "sourcePoint": [
+        49.558948,
+        1.518104,
+        9.691917
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 510,
+      "sourcePoint": [
+        -50.932749,
+        -0.318112,
+        4.941912
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 541,
+      "sourcePoint": [
+        -1.476133,
+        -51.792024,
+        -4.647155
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1016,
+      "sourcePoint": [
+        -16.259447,
+        -12.588502,
+        -42.020095
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1020,
+      "sourcePoint": [
+        -8.056646,
+        -4.3857,
+        -42.020095
+      ]
+    }
+  ],
+  "papers": [
+    {
+      "file": "delbo-tanga-2009.pdf",
+      "url": "https://arxiv.org/pdf/0808.0869",
+      "label": "Delbo and Tanga (2009), Planetary and Space Science 57, 259–265"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 92.0,
+    "uncertaintyKm": 2.0,
+    "uncertaintyKind": "DAMIT represents the published 90–94 km thermophysical fit range as 92±2 km. This is a fit range, not an independently stated one-sigma Gaussian confidence interval or a local shape-accuracy bound.",
+    "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/154",
+    "reference": "DAMIT model 154",
+    "sourceLabel": "DAMIT model 154",
+    "limitations": "The archive warns that unusual Hapke parameters were needed to keep the shape from becoming too high. This limits confidence in the vertical dimension. Delbo and Tanga2009 give a90–94 km thermophysical size range for this pole family, represented in DAMIT as92±2 km. The material roughness is not constrained; no Hapke-derived texture is synthesized.",
+    "visibleDescription": "Convex light-curve reconstruction with a published 90–94 km diameter fit range; the archive mesh uses 92 km. Unusual scattering parameters make its vertical shape uncertain. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 1.0000000265320557,
+    "metersPerSourceUnit": 1000.0000265320557,
+    "publishedSizeInterval": {
+      "minimumKm": 90,
+      "maximumKm": 94,
+      "interpretation": "Thermophysical fit range; publication does not label it one-sigma",
+      "source": "Delbo and Tanga2009 supplementary results for115 Thyra"
+    }
+  },
+  "distanceAu": 2.379742056440902,
+  "orbitalPeriodYears": 3.6711576182914643,
+  "sourceFields": {
+    "ID": "154",
+    "Asteroid": "(115) Thyra",
+    "λ": "35",
+    "β": "33",
+    "P": "7.23996",
+    "YORP": "",
+    "t0": "2443845.1",
+    "φ0": "0",
+    "Light Scattering Model": "Hapke",
+    "p1": "0.23",
+    "p2": "0.3",
+    "p3": "0.02",
+    "p4": "13.6",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "92",
+    "σD": "2",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2009-02-26",
+    "Comment": "weird Hapke parameters needed to keep the shape not too high",
+    "Created": "",
+    "Modified": "2010-05-27 10:32:10",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

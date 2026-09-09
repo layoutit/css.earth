@@ -1,0 +1,331 @@
+{
+  "number": 173,
+  "name": "Ino",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/3413",
+  "modelId": 5913,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5913",
+  "catalog": "View model 28 -17 6.110939 AO.png | IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "5913",
+    "Asteroid": "(173) Ino",
+    "λ": "28",
+    "β": "-17",
+    "P": "6.110939",
+    "YORP": "",
+    "t0": "2443380",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "144",
+    "σD": "3",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2021-11-12",
+    "Comment": "",
+    "Created": "2021-11-18 09:21:22",
+    "Modified": "2021-11-18 09:22:36",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.png": "https://damit.cuni.cz/projects/damit/stored_files/open/63472/AO.png",
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/63473/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/63474/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/63475/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Vernazza et al. (2021)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/660",
+      "file": "reference-660.html",
+      "links": [
+        {
+          "label": "2021a&a...654a..56v",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2021a&a...654a..56v"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2021A&A...654A..56V",
+          "url": "http://adsabs.harvard.edu/abs/2021A&A...654A..56V"
+        }
+      ]
+    }
+  ],
+  "id": "ino",
+  "displayName": "Ino",
+  "lambda": 28.0,
+  "beta": -17.0,
+  "periodHours": 6.110939,
+  "version": "2021-11-12",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 144.0,
+  "uncertaintyKm": 3.0,
+  "akari": {
+    "number": 173,
+    "name": "Ino",
+    "diameterKm": 160.61,
+    "uncertaintyKm": 3.05,
+    "detections": 4,
+    "originalRow": "173    Ino                            7.66  0.01  4  160.61  3.05 0.059 0.003"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/63475/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/63473/IAUspin",
+  "shapeSha256": "b6b64c30f487bfb7f146122cf99b49143693e622f2f182bcf5d80b44adc73564",
+  "shapeBytes": 142972,
+  "vertices": 1766,
+  "faces": 3528,
+  "signedVolume": 1574200.8917261746,
+  "independentSignedVolume": 1574200.8917261746,
+  "originalVolumeEquivalentDiameter": 144.3290802067789,
+  "firstVertex": [
+    -3.311404,
+    9.253699,
+    59.116613
+  ],
+  "firstFace": [
+    591,
+    199,
+    596
+  ],
+  "radialRangeSourceUnits": [
+    52.708942703870335,
+    91.09588134222999
+  ],
+  "extentsSourceUnits": [
+    [
+      -73.453744,
+      83.212036
+    ],
+    [
+      -78.132141,
+      90.641889
+    ],
+    [
+      -57.859547,
+      60.370693
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9977199313796815,
+  "topology": {
+    "edges": 5292,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0,
+    "minimumTriangleAreaSourceUnitsSquared": 3.3523808448339247
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        -3.311404,
+        9.253699,
+        59.116613
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 420,
+      "coordinates": [
+        -73.453744,
+        -7.925191,
+        -8.646617
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 431,
+      "coordinates": [
+        -16.811244,
+        -78.132141,
+        -9.858297
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 588,
+      "coordinates": [
+        -8.601414,
+        -10.067571,
+        -51.050057
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 602,
+      "coordinates": [
+        -0.670014,
+        -0.316511,
+        60.370693
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 883,
+      "coordinates": [
+        -2.846304,
+        -66.421101,
+        37.888603
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1086,
+      "coordinates": [
+        5.379076,
+        90.641889,
+        4.878993
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1206,
+      "coordinates": [
+        83.212036,
+        5.375499,
+        -6.581967
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1731,
+      "coordinates": [
+        15.717806,
+        19.748769,
+        -57.859547
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1765,
+      "coordinates": [
+        -1.577454,
+        -13.273561,
+        -51.940577
+      ]
+    }
+  ],
+  "alternatives": [],
+  "selectionNotes": "Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329. Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images.",
+  "shapeKind": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images",
+  "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329. Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images.",
+  "calibrationSelection": "Selected archive volume-equivalent diameter, independently reconciled against the unmodified source mesh volume.",
+  "archiveVolumeDiameterMismatchFraction": 0.0022852792137424416,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5913",
+      "status": "included",
+      "adds": "Selected original shape, pole, spin and version",
+      "decision": "Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329. Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "comparison",
+      "adds": "Thermal effective-sphere diameter; not a surface map",
+      "decision": "Selected archive volume-equivalent diameter, independently reconciled against the unmodified source mesh volume."
+    },
+    {
+      "url": "https://observations.lam.fr/astero/",
+      "status": "unresolved",
+      "adds": "MPCD refined shape and individual SPHERE observations",
+      "decision": "Paper-linked release HTTP and HTTPS both returned417. This is not evidence the products do not exist. DAMIT ADAM geometry remains the selected source."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/654/A56",
+      "status": "included-reference",
+      "adds": "Publication diameter and observing metadata tables",
+      "decision": "Table1 explicitly defines volume-equivalent diameters. Tablea2/a3 are observation lists, not a registered global reflectance mosaic."
+    }
+  ],
+  "visibleShapeDescription": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 144 ±3 km. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "papers": [
+    {
+      "file": "vernazza-2021-eso.pdf",
+      "url": "https://www.eso.org/public/archives/releases/sciencepapers/eso2114/eso2114a.pdf",
+      "label": "Vernazza et al. (2021), ESO-hosted author manuscript"
+    }
+  ],
+  "selectedPoleStatus": "single selected archive pole",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 144.0,
+    "uncertaintyKm": 3.0,
+    "uncertaintyKind": "Archive estimate of volume-equivalent diameter error; not a bound on local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter in the selected DAMIT record; actual source publications and release differences are documented in selectionNotes.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5913",
+    "reference": "DAMIT model 5913, version 2021-11-12",
+    "sourceLabel": "DAMIT model 5913",
+    "scaleKmPerSourceUnit": 0.9977199313796815,
+    "metersPerSourceUnit": 997.7199313796815,
+    "limitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329. Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images.",
+    "visibleDescription": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 144 ±3 km. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "distanceAu": 2.742339935291223,
+  "orbitalPeriodYears": 4.5414039612846135,
+  "sourceFields": {
+    "ID": "5913",
+    "Asteroid": "(173) Ino",
+    "λ": "28",
+    "β": "-17",
+    "P": "6.110939",
+    "YORP": "",
+    "t0": "2443380",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "144",
+    "σD": "3",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2021-11-12",
+    "Comment": "",
+    "Created": "2021-11-18 09:21:22",
+    "Modified": "2021-11-18 09:22:36",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

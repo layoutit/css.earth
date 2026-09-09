@@ -1,0 +1,246 @@
+{
+  "number": 159,
+  "name": "Aemilia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1049",
+  "modelId": 102,
+  "modelUrl": "http://isam.astro.amu.edu.pl/home2.php?obiekt=159&lang=en&strona=1&typ=Interactive%20mode&nr_modelu=102",
+  "catalog": "View model 139 68 24.47869 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "target": "159",
+    "method": "SAGE",
+    "period[h]": "24.478724",
+    "lambda": "138.85848",
+    "beta": "65.93886",
+    "gamma": "210",
+    "jd_gamma0": "2447278.77327",
+    "number_of_vertices": "3842",
+    "number_of_facets": "7680"
+  },
+  "files": {
+    "original.obj": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2018)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/174",
+      "file": "reference-174.html",
+      "links": [
+        {
+          "label": "2018a&a...610a...7m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2018a&a...610a...7m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2018A%26A...610A...7M",
+          "url": "http://adsabs.harvard.edu/abs/2018A%26A...610A...7M\n"
+        },
+        {
+          "label": "https://arxiv.org/abs/1711.01893",
+          "url": "https://arxiv.org/abs/1711.01893"
+        }
+      ]
+    }
+  ],
+  "id": "aemilia",
+  "displayName": "Aemilia",
+  "lambda": 138.85848,
+  "beta": 65.93886,
+  "periodHours": 24.478724,
+  "version": "ISAM snapshot2026-09-09; source release date not declared",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 135,
+  "uncertaintyKm": 7,
+  "akari": {
+    "number": 159,
+    "name": "Aemilia",
+    "diameterKm": 130.04,
+    "uncertaintyKm": 2.29,
+    "detections": 5,
+    "originalRow": "159    Aemilia                        8.12  0.15  5  130.04  2.29 0.059 0.003"
+  },
+  "shapeUrl": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
+  "spinUrl": null,
+  "shapeSha256": "4d412ad36155b974bdc0d1d676d426449c60f883b18f64a7ee609bdc753d08c9",
+  "shapeBytes": 239882,
+  "vertices": 3842,
+  "faces": 7680,
+  "signedVolume": 19.225830895673912,
+  "independentSignedVolume": 19.225830895673912,
+  "originalVolumeEquivalentDiameter": 3.3237536856552974,
+  "firstVertex": [
+    -1.011548,
+    0.009636,
+    1.272103
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    1.3068082014377627,
+    1.9529222189754512
+  ],
+  "extentsSourceUnits": [
+    [
+      -1.842352,
+      1.717763
+    ],
+    [
+      -1.684642,
+      1.58222
+    ],
+    [
+      -1.706695,
+      1.630876
+    ]
+  ],
+  "scaleKmPerSourceUnit": 40.61672818375047,
+  "topology": {
+    "edges": 11520,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "degenerateFaces": 0
+  },
+  "anchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "coordinates": [
+        -1.011548,
+        0.009636,
+        1.272103
+      ]
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 101,
+      "url": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=101",
+      "pole": [
+        "348.7446",
+        "63.00558"
+      ],
+      "periodHours": 24.478694,
+      "version": "ISAM snapshot2026-09-09",
+      "comment": "SAGE mirror pole remains plausible; not selected"
+    },
+    {
+      "modelId": 1869,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1869",
+      "pole": [
+        "139.0",
+        "68.0"
+      ],
+      "periodHours": 24.47869,
+      "version": "2018-03-22",
+      "comment": "Convex comparison superseded by retrievable SAGE pole 1; original archive140-km mesh retained"
+    },
+    {
+      "modelId": 1870,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1870",
+      "pole": [
+        "348",
+        "59"
+      ],
+      "version": "2018-03-22",
+      "periodHours": "24.47866",
+      "comment": "",
+      "calibrated": "1 (Yes)",
+      "diameterKm": "141",
+      "uncertaintyKm": "7",
+      "nonconvex": "0 (No)"
+    }
+  ],
+  "selectionNotes": "Select ISAM SAGE model 102, the nonconvex pole 1 family from Marciniak et al. (2018). Its original OBJ pins target 159, method SAGE, pole(138.85848,65.93886) and period 24.478724h. The published paper finds SAGE pole 1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table 4 explicitly supplies a 135 ±7 km volume-equivalent occultation diameter for SAGE pole 1; Table 7 TPM137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole 2 remains possible. This source supersedes DAMIT 1869 convex 130 ±7 km in this package; the archive model and its raw 140-km size are retained as an excluded comparison.",
+  "shapeKind": "Nonconvex SAGE light-curve reconstruction",
+  "sourceLimitations": "Photometry constrains the broad nonconvex shape; basin depths and fine relief are not directly resolved. A publication volume scale from the matching nominal SAGE pole family is applied uniformly; byte identity with the paper fit is not separately established. Diameter uncertainty does not bound local shape errors. No global reflectance mosaic, craters or regolith texture is inferred. The original body frame and connectivity are retained. Absolute display phase is arbitrary. Select ISAM SAGE model 102, the nonconvex pole 1 family from Marciniak et al. (2018). Its original OBJ pins target 159, method SAGE, pole(138.85848,65.93886) and period 24.478724h. The published paper finds SAGE pole 1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table 4 explicitly supplies a 135 ±7 km volume-equivalent occultation diameter for SAGE pole 1; Table 7 TPM137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole 2 remains possible. This source supersedes DAMIT 1869 convex 130 ±7 km in this package; the archive model and its raw 140-km size are retained as an excluded comparison.",
+  "calibrationSelection": "Volume-equivalent diameter of SAGE pole 1 from the four-chord2009-05-02 occultation fit in Marciniak et al. (2018), Table 4.",
+  "archiveVolumeDiameterMismatchFraction": null,
+  "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
+  "sourceSurvey": [
+    {
+      "url": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
+      "status": "included",
+      "adds": "Original SAGE pole 1 nonconvex OBJ with source rotation header",
+      "decision": "Select ISAM SAGE model 102, the nonconvex pole 1 family from Marciniak et al. (2018). Its original OBJ pins target 159, method SAGE, pole(138.85848,65.93886) and period 24.478724h. The published paper finds SAGE pole 1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table 4 explicitly supplies a 135 ±7 km volume-equivalent occultation diameter for SAGE pole 1; Table 7 TPM137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole 2 remains possible. This source supersedes DAMIT 1869 convex 130 ±7 km in this package; the archive model and its raw 140-km size are retained as an excluded comparison."
+    },
+    {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1869",
+      "status": "excluded",
+      "adds": "DAMIT convex alternative",
+      "decision": "Original shape retained for comparison; superseded by the source-supported SAGE pole 1 mesh."
+    },
+    {
+      "url": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+      "status": "included",
+      "adds": "Primary published calibration and method comparison",
+      "decision": "Table 4: SAGE pole 1 volume-equivalent135±7 km, not surface-equivalent; no imagery inferred."
+    },
+    {
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "status": "comparison",
+      "adds": "Thermal effective-sphere size",
+      "decision": "Published shape-aware occultation calibration supplies the physical scale."
+    }
+  ],
+  "calibrationOverride": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 135,
+    "uncertaintyKm": 7,
+    "uncertaintyKind": "Reported occultation-fit diameter uncertainty, not a bound on local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter of SAGE pole 1 from the four-chord2009-05-02 occultation fit in Marciniak et al. (2018), Table 4.",
+    "sourceUrl": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+    "reference": "Marciniak et al. (2018), A&A610,A7, Table 4; SAGE pole 1.",
+    "sourceLabel": "Marciniak et al. (2018), Table 4: SAGE pole 1",
+    "sourceFile": "marciniak-2018-published.pdf",
+    "publishedPoleEclipticDegrees": [
+      139,
+      66
+    ],
+    "publishedPeriodHours": 24.4787,
+    "scaleKmPerSourceUnit": 40.61672818375047,
+    "metersPerSourceUnit": 40616.72818375047,
+    "limitations": "Photometry constrains the broad nonconvex shape; basin depths and fine relief are not directly resolved. A publication volume scale from the matching nominal SAGE pole family is applied uniformly; byte identity with the paper fit is not separately established. Diameter uncertainty does not bound local shape errors. No global reflectance mosaic, craters or regolith texture is inferred. The original body frame and connectivity are retained. Absolute display phase is arbitrary. Select ISAM SAGE model 102, the nonconvex pole 1 family from Marciniak et al. (2018). Its original OBJ pins target 159, method SAGE, pole(138.85848,65.93886) and period 24.478724h. The published paper finds SAGE pole 1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table 4 explicitly supplies a 135 ±7 km volume-equivalent occultation diameter for SAGE pole 1; Table 7 TPM137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole 2 remains possible. This source supersedes DAMIT 1869 convex 130 ±7 km in this package; the archive model and its raw 140-km size are retained as an excluded comparison.",
+    "visibleDescription": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative."
+  },
+  "visibleShapeDescription": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative.",
+  "papers": [
+    {
+      "file": "marciniak-2018-published.pdf",
+      "url": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+      "label": "Marciniak et al. (2018), published paper, Table 4"
+    }
+  ],
+  "selectedPoleStatus": "SAGE pole 1 marginally preferred by thermophysical fits; rival not rejected",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 135,
+    "uncertaintyKm": 7,
+    "uncertaintyKind": "Reported occultation-fit diameter uncertainty, not a bound on local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter of SAGE pole 1 from the four-chord2009-05-02 occultation fit in Marciniak et al. (2018), Table 4.",
+    "sourceUrl": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+    "reference": "Marciniak et al. (2018), A&A610,A7, Table 4; SAGE pole 1.",
+    "sourceLabel": "Marciniak et al. (2018), Table 4: SAGE pole 1",
+    "sourceFile": "marciniak-2018-published.pdf",
+    "publishedPoleEclipticDegrees": [
+      139,
+      66
+    ],
+    "publishedPeriodHours": 24.4787,
+    "scaleKmPerSourceUnit": 40.61672818375047,
+    "metersPerSourceUnit": 40616.72818375047,
+    "limitations": "Photometry constrains the broad nonconvex shape; basin depths and fine relief are not directly resolved. A publication volume scale from the matching nominal SAGE pole family is applied uniformly; byte identity with the paper fit is not separately established. Diameter uncertainty does not bound local shape errors. No global reflectance mosaic, craters or regolith texture is inferred. The original body frame and connectivity are retained. Absolute display phase is arbitrary. Select ISAM SAGE model 102, the nonconvex pole 1 family from Marciniak et al. (2018). Its original OBJ pins target 159, method SAGE, pole(138.85848,65.93886) and period 24.478724h. The published paper finds SAGE pole 1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table 4 explicitly supplies a 135 ±7 km volume-equivalent occultation diameter for SAGE pole 1; Table 7 TPM137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole 2 remains possible. This source supersedes DAMIT 1869 convex 130 ±7 km in this package; the archive model and its raw 140-km size are retained as an excluded comparison.",
+    "visibleDescription": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative."
+  },
+  "distanceAu": 3.10892633182096,
+  "orbitalPeriodYears": 5.481808363708463,
+  "sourceArchive": "ISAM",
+  "shapePath": "shape/isam-sage-102.obj",
+  "shapeFile": "isam-aemilia-sage102.obj",
+  "sourceFormat": "wavefront-obj",
+  "archiveCalibrated": false,
+  "originalUnits": "Unscaled ISAM/SAGE body-fixed coordinates; original coordinate units are not declared. Physical scale comes from the published occultation volume.",
+  "shapeLicense": "ISAM scientific shape data; no explicit reuse license is stated in the retrieved source record."
+}

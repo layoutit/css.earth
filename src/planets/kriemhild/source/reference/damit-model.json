@@ -1,0 +1,324 @@
+{
+  "number": 242,
+  "name": "Kriemhild",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/397",
+  "modelId": 621,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/621",
+  "catalog": "View model 284 -15 4.545177 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "621",
+    "Asteroid": "(242) Kriemhild",
+    "λ": "284",
+    "β": "-15",
+    "P": "4.545177",
+    "YORP": "",
+    "t0": "2450857",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.34",
+    "p3": "0.05",
+    "p4": "-1.02",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-11",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/2449/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/2450/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/2451/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/2452/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš et al. (2013)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/148",
+      "file": "reference-148.html",
+      "links": [
+        {
+          "label": "2013a&a...551a..67h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2013a&a...551a..67h"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H",
+          "url": "http://adsabs.harvard.edu/abs/2013A%26A...551A..67H\n"
+        },
+        {
+          "label": "http://arxiv.org/abs/1301.6943",
+          "url": "http://arxiv.org/abs/1301.6943"
+        }
+      ]
+    }
+  ],
+  "id": "kriemhild",
+  "displayName": "Kriemhild",
+  "lambda": 284.0,
+  "beta": -15.0,
+  "periodHours": 4.545177,
+  "version": "2013-02-11",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 45.14,
+  "uncertaintyKm": 0.51,
+  "akari": {
+    "number": 242,
+    "name": "Kriemhild",
+    "diameterKm": 45.14,
+    "uncertaintyKm": 0.51,
+    "detections": 8,
+    "originalRow": "242    Kriemhild                      9.20  0.15  8   45.14  0.51 0.184 0.005"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2452/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2450/IAUspin.txt",
+  "shapeSha256": "d1556ed22d1a7df79537f2d50d2cc6389142aa9eccda3e14f362efb2375bcb17",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.0000000210565527,
+  "independentSignedVolume": 1.0000000210565527,
+  "originalVolumeEquivalentDiameter": 1.2407009905070951,
+  "firstVertex": [
+    -0.122216,
+    0.113006,
+    0.47177
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.4843834232186316,
+    0.824010390034616
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.721359,
+      0.715494
+    ],
+    [
+      -0.758478,
+      0.817295
+    ],
+    [
+      -0.576261,
+      0.491788
+    ]
+  ],
+  "scaleKmPerSourceUnit": 36.38265814678727,
+  "alternatives": [
+    {
+      "modelId": 622,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/622",
+      "pole": [
+        "100",
+        "-40"
+      ],
+      "version": "2013-02-11",
+      "nonconvex": false,
+      "calibrated": false,
+      "declaredDiameter": "",
+      "comment": "",
+      "references": [
+        {
+          "label": "Hanuš et al. (2013)",
+          "url": "/projects/damit/references/view/148"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": false,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Published convex inversion from Hanuš et al. (2013). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "hanus-2013.pdf",
+      "url": "https://arxiv.org/pdf/1301.6943",
+      "label": "Hanuš et al. (2013), A&A 551, A67"
+    }
+  ],
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 45.14,
+    "uncertaintyKm": 0.51,
+    "reportedUncertaintyKm": 0.51,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "catalog": {
+      "number": 242,
+      "name": "Kriemhild",
+      "diameterKm": 45.14,
+      "uncertaintyKm": 0.51,
+      "detections": 8,
+      "originalRow": "242    Kriemhild                      9.20  0.15  8   45.14  0.51 0.184 0.005"
+    },
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Published convex inversion from Hanuš et al. (2013). The selected archive solution is retained as a reproducible coarse model. An alternative pole remains possible; no unique orientation is claimed. The release supplies no registered global surface imagery or measured local terrain. AKARI thermal effective diameter provides only an explicit volume-scale approximation.",
+    "scaleKmPerSourceUnit": 36.38265814678727,
+    "metersPerSourceUnit": 36382.658146787275,
+    "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 45.14 km effective diameter (catalog ±0.51 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "independentCenteredSignedVolume": 1.0000000210565527,
+  "surfaceAreaSourceUnitsSquared": 5.17594576732023,
+  "surfaceEquivalentDiameterSourceUnits": 1.2835710763682608,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        -0.122216,
+        0.113006,
+        0.47177
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 2,
+      "sourcePoint": [
+        -0.140263,
+        -0.072191,
+        0.491788
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 448,
+      "sourcePoint": [
+        0.128769,
+        -0.758478,
+        0.081427
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 476,
+      "sourcePoint": [
+        0.715494,
+        -0.245544,
+        0.136505
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 502,
+      "sourcePoint": [
+        -0.019749,
+        0.817295,
+        0.077295
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 511,
+      "sourcePoint": [
+        -0.057003,
+        0.811096,
+        0.120536
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 531,
+      "sourcePoint": [
+        -0.721359,
+        0.093104,
+        0.171237
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1015,
+      "sourcePoint": [
+        -0.282907,
+        -0.140805,
+        -0.576261
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1021,
+      "sourcePoint": [
+        -0.249719,
+        -0.173993,
+        -0.576261
+      ]
+    }
+  ],
+  "distanceAu": 2.8618233448142756,
+  "orbitalPeriodYears": 4.8414163812940805,
+  "sourceFields": {
+    "ID": "621",
+    "Asteroid": "(242) Kriemhild",
+    "λ": "284",
+    "β": "-15",
+    "P": "4.545177",
+    "YORP": "",
+    "t0": "2450857",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.34",
+    "p3": "0.05",
+    "p4": "-1.02",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2013-02-11",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}

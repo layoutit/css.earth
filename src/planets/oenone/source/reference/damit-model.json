@@ -1,0 +1,344 @@
+{
+  "number": 215,
+  "name": "Oenone",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/2772",
+  "modelId": 16312,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16312",
+  "catalog": "View model 45 85 27.9077 IAUspin | shape.png | shape.txt | spin.txt | shape.obj size from occultation 46 +/- 1 km",
+  "fields": {
+    "ID": "16312",
+    "Asteroid": "(215) Oenone",
+    "λ": "45",
+    "β": "85",
+    "P": "27.9077",
+    "YORP": "",
+    "t0": "2450842",
+    "φ0": "0",
+    "Light Scattering Model": "H",
+    "p1": "0.268",
+    "p2": "-0.323",
+    "p3": "0.02",
+    "p4": "1.278",
+    "p5": "20",
+    "Calibrated Size": "1 (Yes)",
+    "D": "37",
+    "σD": "2",
+    "Γ": "63",
+    "Γmin": "1",
+    "Γmax": "149",
+    "pV": "0.23",
+    "σpV": "0.04",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2025-07-15",
+    "Comment": "size from occultation 46 +/- 1 km",
+    "Created": "2025-07-15 11:16:06",
+    "Modified": "2025-07-17 08:15:24",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/129885/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/129886/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/129887/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Choukroun et al. (2025)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/678",
+      "file": "reference-678.html",
+      "links": [
+        {
+          "label": "2025a&a...698a.298c",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2025a&a...698a.298c"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2025A&A...698A.298C",
+          "url": "http://adsabs.harvard.edu/abs/2025A&A...698A.298C"
+        }
+      ]
+    }
+  ],
+  "id": "oenone",
+  "displayName": "Oenone",
+  "lambda": 45.0,
+  "beta": 85.0,
+  "periodHours": 27.9077,
+  "version": "2025-07-15",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 37.0,
+  "uncertaintyKm": 2.0,
+  "akari": {
+    "number": 215,
+    "name": "Oenone",
+    "diameterKm": 35.92,
+    "uncertaintyKm": 0.41,
+    "detections": 10,
+    "originalRow": "215    Oenone                         9.59  0.15 10   35.92  0.41 0.202 0.006"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/129887/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/129885/IAUspin",
+  "shapeSha256": "27a2a816bb4696dec5bc7a31dd1bc50cf6018abaaca213311ba81a0fdb33a4b9",
+  "shapeBytes": 46419,
+  "vertices": 574,
+  "faces": 1144,
+  "signedVolume": 26521.847920031152,
+  "independentSignedVolume": 26521.847920031152,
+  "translatedSignedVolume": 26521.847920031152,
+  "originalVolumeEquivalentDiameter": 36.999999599915625,
+  "firstVertex": [
+    -3.597496,
+    4.693375,
+    16.29401
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    14.950238219020223,
+    22.541925705853725
+  ],
+  "extentsSourceUnits": [
+    [
+      -21.96841,
+      21.74239
+    ],
+    [
+      -18.26386,
+      20.88398
+    ],
+    [
+      -15.39426,
+      17.09
+    ]
+  ],
+  "scaleKmPerSourceUnit": 1.0000000108130913,
+  "topology": {
+    "edges": 1716,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 1144,
+    "minDoubleTriangleAreaSourceUnits2": 0.0018315003867247835
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        -3.597496,
+        4.693375,
+        16.29401
+      ],
+      "radiusSourceUnits": 17.333912087025855
+    },
+    {
+      "vertexIndex1": 4,
+      "pointSourceUnits": [
+        -4.366566,
+        -0.583664,
+        17.09
+      ],
+      "radiusSourceUnits": 17.64867310301973
+    },
+    {
+      "vertexIndex1": 192,
+      "pointSourceUnits": [
+        -21.26076,
+        0.74239,
+        4.367532
+      ],
+      "radiusSourceUnits": 21.717421450548038
+    },
+    {
+      "vertexIndex1": 237,
+      "pointSourceUnits": [
+        21.74239,
+        -0.239743,
+        -1.892886
+      ],
+      "radiusSourceUnits": 21.825948250354323
+    },
+    {
+      "vertexIndex1": 258,
+      "pointSourceUnits": [
+        2.980707,
+        20.88398,
+        2.003362
+      ],
+      "radiusSourceUnits": 21.19053312598088
+    },
+    {
+      "vertexIndex1": 283,
+      "pointSourceUnits": [
+        -21.96841,
+        0.633331,
+        -0.390789
+      ],
+      "radiusSourceUnits": 21.981011399073108
+    },
+    {
+      "vertexIndex1": 288,
+      "pointSourceUnits": [
+        -21.35626,
+        -4.907794,
+        -1.931153
+      ],
+      "radiusSourceUnits": 21.99785523735087
+    },
+    {
+      "vertexIndex1": 307,
+      "pointSourceUnits": [
+        2.208308,
+        -18.26386,
+        -1.556265
+      ],
+      "radiusSourceUnits": 18.462588309137185
+    },
+    {
+      "vertexIndex1": 573,
+      "pointSourceUnits": [
+        -1.905798,
+        -5.047751,
+        -15.39426
+      ],
+      "radiusSourceUnits": 16.312421559118835
+    },
+    {
+      "vertexIndex1": 574,
+      "pointSourceUnits": [
+        -3.185606,
+        -3.767943,
+        -15.39426
+      ],
+      "radiusSourceUnits": 16.16566487918406
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 4825,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4825",
+      "pole": [
+        "233",
+        "85"
+      ],
+      "version": "2025-07-15",
+      "diameterKm": "37",
+      "calibratedSize": "0 (No)",
+      "comment": "size from occultation 48 +/- 1 km"
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 4482.780225254776,
+  "originalSurfaceEquivalentDiameter": 37.77450546715066,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Choukroun2025 Table4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table4 pole1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model16312 as pole1 without rejecting4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
+  "papers": [
+    {
+      "file": "paper-choukroun-2025.pdf",
+      "url": "https://arxiv.org/pdf/2505.09437",
+      "label": "Choukroun et al. (2025), A&A 698, A298",
+      "sha256": "cfda2253ff70b23be74fe8c023d13b266cdd97b7b37c0f79fc33450d48d05727"
+    }
+  ],
+  "archiveDeclaredDiameterKm": 37.0,
+  "archiveDeclaredUncertaintyKm": 2.0,
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 37.0,
+    "uncertaintyKm": 2.0,
+    "reportedUncertaintyKm": 2.0,
+    "uncertaintyKind": "Published size-model uncertainty; not local terrain accuracy or automatically a one-sigma interval.",
+    "diameterSemantics": "Published volume-equivalent diameter of the selected shape solution; isotropic transfer retains source shape and connectivity.",
+    "sourceUrl": "https://arxiv.org/pdf/2505.09437",
+    "reference": "Choukroun et al. (2025), A&A 698, A298",
+    "sourceLabel": "Choukroun et al. (2025), A&A 698, A298",
+    "limitations": "Choukroun2025 Table4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table4 pole1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model16312 as pole1 without rejecting4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
+    "visibleDescription": "Convex CITPM shape; 37 ± 2 km volume-equivalent thermal size. Occultations give 46 ± 1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 1.0000000108130913,
+    "metersPerSourceUnit": 1000.0000108130913,
+    "sourceSignedVolume": 26521.847920031152,
+    "sourceVolumeEquivalentDiameter": 36.999999599915625,
+    "sourceSurfaceArea": 4482.780225254776,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 26521.848780380653,
+    "derivedVolumeEquivalentDiameterKm": 37.0,
+    "archiveDeclaredDiameterKm": 37.0,
+    "archiveDeclaredUncertaintyKm": 2.0
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2450842.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Archive km coordinates; uniform diameter reconciliation only.",
+  "distanceAu": 2.76856663571234,
+  "orbitalPeriodYears": 4.606707878548557,
+  "sourceFields": {
+    "ID": "16312",
+    "Asteroid": "(215) Oenone",
+    "λ": "45",
+    "β": "85",
+    "P": "27.9077",
+    "YORP": "",
+    "t0": "2450842",
+    "φ0": "0",
+    "Light Scattering Model": "H",
+    "p1": "0.268",
+    "p2": "-0.323",
+    "p3": "0.02",
+    "p4": "1.278",
+    "p5": "20",
+    "Calibrated Size": "1 (Yes)",
+    "D": "37",
+    "σD": "2",
+    "Γ": "63",
+    "Γmin": "1",
+    "Γmax": "149",
+    "pV": "0.23",
+    "σpV": "0.04",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2025-07-15",
+    "Comment": "size from occultation 46 +/- 1 km",
+    "Created": "2025-07-15 11:16:06",
+    "Modified": "2025-07-17 08:15:24",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

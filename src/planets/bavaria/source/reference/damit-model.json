@@ -1,0 +1,314 @@
+{
+  "number": 301,
+  "name": "Bavaria",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/1718",
+  "modelId": 3090,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3090",
+  "catalog": "View model 226 70 12.2409 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "3090",
+    "Asteroid": "(301) Bavaria",
+    "λ": "226",
+    "β": "70",
+    "P": "12.2409",
+    "YORP": "",
+    "t0": "2453019",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "55",
+    "σD": "2",
+    "Γ": "50",
+    "Γmin": "15",
+    "Γmax": "100",
+    "pV": "0.047",
+    "σpV": "0.004",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-06-24",
+    "Comment": "",
+    "Created": "2019-06-24 15:55:36",
+    "Modified": "2019-06-25 11:32:51",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/9791/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/9792/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/9793/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Marciniak et al. (2019)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/179",
+      "file": "reference-179.html",
+      "links": [
+        {
+          "label": "2019a&a...625a.139m",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2019a&a...625a.139m"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2019A%26A...625A.139M",
+          "url": "http://adsabs.harvard.edu/abs/2019A%26A...625A.139M"
+        }
+      ]
+    }
+  ],
+  "id": "bavaria",
+  "displayName": "Bavaria",
+  "lambda": 226.0,
+  "beta": 70.0,
+  "periodHours": 12.2409,
+  "version": "2019-06-24",
+  "nonconvex": false,
+  "calibrated": true,
+  "diameterKm": 55.0,
+  "uncertaintyKm": 2.0,
+  "akari": {
+    "number": 301,
+    "name": "Bavaria",
+    "diameterKm": 51.9,
+    "uncertaintyKm": 0.82,
+    "detections": 6,
+    "originalRow": "301    Bavaria                       10.10  0.15  6   51.90  0.82 0.060 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/9793/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/9791/IAUspin.txt",
+  "shapeSha256": "5ee16a0fbf9aee1a4f1dbe206cbb2c80dc0f125c7f430595b4b128676eb21584",
+  "shapeBytes": 81736,
+  "vertices": 1010,
+  "faces": 2016,
+  "signedVolume": 87113.74661016026,
+  "independentSignedVolume": 87113.74661016025,
+  "originalVolumeEquivalentDiameter": 55.00000006734348,
+  "firstVertex": [
+    1.709223,
+    7.314681,
+    26.496573
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    24.001852314357198,
+    34.87834072058275
+  ],
+  "extentsSourceUnits": [
+    [
+      -31.849926,
+      31.496707
+    ],
+    [
+      -31.060101,
+      30.416481
+    ],
+    [
+      -27.099903,
+      26.538154
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9999999987755731,
+  "alternatives": [
+    {
+      "modelId": 3091,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3091",
+      "pole": [
+        "46",
+        "61"
+      ],
+      "version": "2019-06-24",
+      "nonconvex": false,
+      "calibrated": true,
+      "declaredDiameter": "55",
+      "comment": "",
+      "references": [
+        {
+          "label": "Marciniak et al. (2019)",
+          "url": "/projects/damit/references/view/179"
+        }
+      ]
+    }
+  ],
+  "archiveCalibrated": true,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
+  "selectedPoleStatus": "one of competing archived solutions",
+  "license": "CC-BY-4.0",
+  "licenseSourceUrl": "https://damit.cuni.cz/projects/damit/pages/documentation",
+  "papers": [
+    {
+      "file": "marciniak-2019.pdf",
+      "url": "https://hebe.astro.amu.edu.pl/docs/aa35129-19.pdf",
+      "label": "Marciniak et al. (2019), A&A 625, A139"
+    }
+  ],
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 55.0,
+    "uncertaintyKm": 2.0,
+    "uncertaintyKind": "Source-reported size uncertainty, not a local surface accuracy or an assumed Gaussian confidence interval.",
+    "diameterSemantics": "Equivalent-volume size of the archived physical mesh; the thermal paper does not independently define volume semantics.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3090",
+    "sourceLabel": "DAMIT model 3090",
+    "reference": "DAMIT model 3090",
+    "limitations": "Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
+    "visibleDescription": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "publishedUncertainty": {
+      "lowerKm": 2,
+      "upperKm": 2,
+      "confidence": "3 sigma thermal-model fit",
+      "source": "Marciniak2019 Table2 and AppendixB"
+    },
+    "scaleKmPerSourceUnit": 0.9999999987755731,
+    "metersPerSourceUnit": 999.9999987755731
+  },
+  "independentCenteredSignedVolume": 87113.74661016026,
+  "surfaceAreaSourceUnitsSquared": 9966.394038968283,
+  "surfaceEquivalentDiameterSourceUnits": 56.324077908180655,
+  "sourceCoordinateAnchors": [
+    {
+      "vertexIndexZeroBased": 0,
+      "sourcePoint": [
+        1.709223,
+        7.314681,
+        26.496573
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 25,
+      "sourcePoint": [
+        3.28293,
+        6.799968,
+        26.538154
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 434,
+      "sourcePoint": [
+        31.496707,
+        -10.842752,
+        5.765486
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 463,
+      "sourcePoint": [
+        -0.324317,
+        30.416481,
+        -6.835165
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 490,
+      "sourcePoint": [
+        -31.849926,
+        -0.336771,
+        5.403178
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 505,
+      "sourcePoint": [
+        -20.564983,
+        -17.962114,
+        -2.387426
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 520,
+      "sourcePoint": [
+        1.991382,
+        -31.060101,
+        4.614729
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1007,
+      "sourcePoint": [
+        1.114584,
+        -3.13797,
+        -27.099903
+      ]
+    },
+    {
+      "vertexIndexZeroBased": 1009,
+      "sourcePoint": [
+        0.960759,
+        -2.984146,
+        -27.099903
+      ]
+    }
+  ],
+  "distanceAu": 2.7267724486531284,
+  "orbitalPeriodYears": 4.502788498643991,
+  "sourceFields": {
+    "ID": "3090",
+    "Asteroid": "(301) Bavaria",
+    "λ": "226",
+    "β": "70",
+    "P": "12.2409",
+    "YORP": "",
+    "t0": "2453019",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "55",
+    "σD": "2",
+    "Γ": "50",
+    "Γmin": "15",
+    "Γmax": "100",
+    "pV": "0.047",
+    "σpV": "0.004",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "3",
+    "Nonconvex": "0 (No)",
+    "Version": "2019-06-24",
+    "Comment": "",
+    "Created": "2019-06-24 15:55:36",
+    "Modified": "2019-06-25 11:32:51",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}

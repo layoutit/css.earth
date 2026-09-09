@@ -1,0 +1,364 @@
+{
+  "number": 214,
+  "name": "Aschera",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/850",
+  "modelId": 1435,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1435",
+  "catalog": "View model 123 -37 6.8337 IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "1435",
+    "Asteroid": "(214) Aschera",
+    "λ": "123",
+    "β": "-37",
+    "P": "6.8337",
+    "YORP": "",
+    "t0": "2450888",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.45",
+    "p3": "0.15",
+    "p4": "-0.15",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-12",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/5057/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/5058/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/5059/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Ďurech et al. (2016)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/162",
+      "file": "reference-162.html",
+      "links": [
+        {
+          "label": "2016a&a...587a..48d",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2016a&a...587a..48d"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2016A%26A...587A..48D",
+          "url": "http://adsabs.harvard.edu/abs/2016A%26A...587A..48D"
+        },
+        {
+          "label": "http://arxiv.org/abs/1601.02909",
+          "url": "http://arxiv.org/abs/1601.02909"
+        }
+      ]
+    }
+  ],
+  "id": "aschera",
+  "displayName": "Aschera",
+  "lambda": 123.0,
+  "beta": -37.0,
+  "periodHours": 6.8337,
+  "version": "2016-01-12",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 26.07,
+  "uncertaintyKm": 0.34,
+  "akari": {
+    "number": 214,
+    "name": "Aschera",
+    "diameterKm": 26.07,
+    "uncertaintyKm": 0.34,
+    "detections": 9,
+    "originalRow": "214    Aschera                        9.50  0.51  9   26.07  0.34 0.419 0.013"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/5059/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/5057/IAUspin.txt",
+  "shapeSha256": "425c5eaa458c41fc0ecd53191819cd902e7f242a38b77aa0d4860b788d403674",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.000000046371027,
+  "independentSignedVolume": 1.000000046371027,
+  "translatedSignedVolume": 1.0000000463710272,
+  "originalVolumeEquivalentDiameter": 1.240701000976326,
+  "firstVertex": [
+    0.009546,
+    0.103936,
+    0.714301
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.534417678773822,
+    0.7671829259576884
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.699675,
+      0.75214
+    ],
+    [
+      -0.676643,
+      0.621121
+    ],
+    [
+      -0.526605,
+      0.718238
+    ]
+  ],
+  "scaleKmPerSourceUnit": 21.012314795817147,
+  "topology": {
+    "edges": 3060,
+    "eulerCharacteristic": 2,
+    "connectedComponents": 1,
+    "closed": true,
+    "consistentWinding": true,
+    "nondegenerateFaces": 2040,
+    "minDoubleTriangleAreaSourceUnits2": 2.766710863146748e-09
+  },
+  "independentAnchors": [
+    {
+      "vertexIndex1": 1,
+      "pointSourceUnits": [
+        0.009546,
+        0.103936,
+        0.714301
+      ],
+      "radiusSourceUnits": 0.7218862353674573
+    },
+    {
+      "vertexIndex1": 2,
+      "pointSourceUnits": [
+        0.009546,
+        0.061856,
+        0.718238
+      ],
+      "radiusSourceUnits": 0.7209598570627911
+    },
+    {
+      "vertexIndex1": 341,
+      "pointSourceUnits": [
+        -0.112197,
+        0.559117,
+        0.10537
+      ],
+      "radiusSourceUnits": 0.5799162210164499
+    },
+    {
+      "vertexIndex1": 431,
+      "pointSourceUnits": [
+        0.75214,
+        -0.108297,
+        -0.026799
+      ],
+      "radiusSourceUnits": 0.7603689934564665
+    },
+    {
+      "vertexIndex1": 466,
+      "pointSourceUnits": [
+        -0.037336,
+        0.621121,
+        -0.215807
+      ],
+      "radiusSourceUnits": 0.6586030175955772
+    },
+    {
+      "vertexIndex1": 501,
+      "pointSourceUnits": [
+        -0.699675,
+        0.043749,
+        -0.091865
+      ],
+      "radiusSourceUnits": 0.707034835670068
+    },
+    {
+      "vertexIndex1": 512,
+      "pointSourceUnits": [
+        -0.610965,
+        -0.209248,
+        -0.126019
+      ],
+      "radiusSourceUnits": 0.6579846085509903
+    },
+    {
+      "vertexIndex1": 533,
+      "pointSourceUnits": [
+        0.033359,
+        -0.676643,
+        -0.183976
+      ],
+      "radiusSourceUnits": 0.7020012399604434
+    },
+    {
+      "vertexIndex1": 1021,
+      "pointSourceUnits": [
+        -0.094722,
+        0.342493,
+        -0.526605
+      ],
+      "radiusSourceUnits": 0.635284612089731
+    },
+    {
+      "vertexIndex1": 1022,
+      "pointSourceUnits": [
+        -0.185992,
+        0.255569,
+        -0.526605
+      ],
+      "radiusSourceUnits": 0.6141834936319926
+    }
+  ],
+  "alternatives": [
+    {
+      "modelId": 1436,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1436",
+      "pole": [
+        "306",
+        "-42"
+      ],
+      "version": "2016-01-12",
+      "diameterKm": "",
+      "calibratedSize": "0 (No)",
+      "comment": ""
+    }
+  ],
+  "originalSurfaceAreaSourceUnits2": 5.147665709831301,
+  "originalSurfaceEquivalentDiameter": 1.2800597197820904,
+  "shapeKind": "Convex light-curve reconstruction",
+  "selectionNotes": "Ďurech2016 table reports 386 Lowell sparse measurements and a period identified by the ellipsoid method before convex reconstruction. Two poles remain. Select1435 as a reproducible representative and label the shape as coarse lightcurve inversion.",
+  "papers": [
+    {
+      "file": "paper-durech-2016.pdf",
+      "url": "https://arxiv.org/pdf/1601.02909",
+      "label": "Ďurech et al. (2016), A&A 587, A48",
+      "sha256": "e77cc99c203107f541b0c88ddf7fcc07999d75e220eac0fbc4ebb227684e21e9"
+    },
+    {
+      "file": "paper-usui-2011.pdf",
+      "url": "https://arxiv.org/pdf/1106.1948",
+      "label": "Usui et al. (2011), PASJ 63, 1117–1138",
+      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+    }
+  ],
+  "archiveDeclaredDiameterKm": null,
+  "archiveDeclaredUncertaintyKm": null,
+  "calibration": {
+    "method": "thermal-effective-diameter-as-volume-approximation",
+    "diameterKm": 26.07,
+    "uncertaintyKm": 0.34,
+    "reportedUncertaintyKm": 0.34,
+    "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
+    "systematicUncertaintyFraction": null,
+    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
+    "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+    "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "sourceLabel": "Usui et al. (2011), PASJ 63, 1117–1138",
+    "catalog": {
+      "number": 214,
+      "name": "Aschera",
+      "diameterKm": 26.07,
+      "uncertaintyKm": 0.34,
+      "detections": 9,
+      "originalRow": "214    Aschera                        9.50  0.51  9   26.07  0.34 0.419 0.013"
+    },
+    "limitations": "Ďurech2016 table reports 386 Lowell sparse measurements and a period identified by the ellipsoid method before convex reconstruction. Two poles remain. Select1435 as a reproducible representative and label the shape as coarse lightcurve inversion. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 26.07 km effective diameter (catalog ±0.34 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "scaleKmPerSourceUnit": 21.012314795817147,
+    "metersPerSourceUnit": 21012.314795817147,
+    "sourceSignedVolume": 1.000000046371027,
+    "sourceVolumeEquivalentDiameter": 1.240701000976326,
+    "sourceSurfaceArea": 5.147665709831301,
+    "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+    "scaledSignedVolumeKm3": 9277.302461146048,
+    "derivedVolumeEquivalentDiameterKm": 26.069999999999993,
+    "archiveDeclaredDiameterKm": null,
+    "archiveDeclaredUncertaintyKm": null
+  },
+  "coordinateConvention": {
+    "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
+    "longitude": "positive X is reference meridian; positive Z is spin axis",
+    "spinEpochJd": 2450888.0,
+    "spinPhaseDegrees": 0.0,
+    "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
+  },
+  "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
+  "distanceAu": 2.610464215816688,
+  "orbitalPeriodYears": 4.217788697555311,
+  "sourceFields": {
+    "ID": "1435",
+    "Asteroid": "(214) Aschera",
+    "λ": "123",
+    "β": "-37",
+    "P": "6.8337",
+    "YORP": "",
+    "t0": "2450888",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.45",
+    "p3": "0.15",
+    "p4": "-0.15",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-01-12",
+    "Comment": "",
+    "Created": "",
+    "Modified": "",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates; physical scale from the documented calibration"
+}
