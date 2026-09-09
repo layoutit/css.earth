@@ -1,0 +1,148 @@
+{
+  "scope": "Serial observed task process trees. Browser helper PIDs were matched and cleaned after successful tests; recorded cleaned PIDs were subsequently absent. Measurements are sampled RSS, not GPU memory or total workstation memory. Earlier verification attempts were terminated after exceeding the task-specific 4 GiB bound; verification now uses changed-path metadata and small serialized comparisons.",
+  "operations": [
+    {
+      "operation": "spacecraft-annefrank-final",
+      "command": [
+        "node",
+        "tools/objects/dist/prepare-authored.js",
+        "annefrank",
+        "--write"
+      ],
+      "exitCode": 0,
+      "stopReason": null,
+      "elapsedSeconds": 69.5,
+      "peakRssBytes": 3215228928,
+      "cleanedDescendantPids": []
+    },
+    {
+      "operation": "spacecraft-braille-prepare",
+      "command": [
+        "node",
+        "tools/objects/dist/prepare-authored.js",
+        "braille",
+        "--write"
+      ],
+      "exitCode": 0,
+      "stopReason": null,
+      "elapsedSeconds": 76.1,
+      "peakRssBytes": 2448097280,
+      "cleanedDescendantPids": []
+    },
+    {
+      "operation": "spacecraft-fresh-install",
+      "command": [
+        "node",
+        "docs/asteroid-spacecraft-gaps/fresh-install.mjs"
+      ],
+      "exitCode": 0,
+      "stopReason": null,
+      "elapsedSeconds": 37.2,
+      "peakRssBytes": 134496256,
+      "cleanedDescendantPids": []
+    },
+    {
+      "operation": "spacecraft-browser-bound-controls",
+      "command": [
+        "node",
+        "docs/asteroid-spacecraft-gaps/browser-check.mjs"
+      ],
+      "exitCode": 0,
+      "stopReason": "owned descendants remained after operation",
+      "elapsedSeconds": 30.8,
+      "peakRssBytes": 3876552704,
+      "cleanedDescendantPids": [
+        3309,
+        3312
+      ]
+    },
+    {
+      "operation": "spacecraft-integrated-build",
+      "command": [
+        "node",
+        "node_modules/astro/bin/astro.mjs",
+        "build"
+      ],
+      "exitCode": 0,
+      "stopReason": null,
+      "elapsedSeconds": 100.2,
+      "peakRssBytes": 2076475392,
+      "cleanedDescendantPids": []
+    },
+    {
+      "operation": "spacecraft-built-transports",
+      "command": [
+        "node",
+        "docs/asteroid-spacecraft-gaps/verify-built-transports.mjs"
+      ],
+      "exitCode": 0,
+      "stopReason": null,
+      "elapsedSeconds": 16.6,
+      "peakRssBytes": 407240704,
+      "cleanedDescendantPids": []
+    },
+    {
+      "operation": "spacecraft-main-reuse",
+      "command": [
+        "node",
+        "docs/asteroid-spacecraft-gaps/verify-reuse.mjs"
+      ],
+      "exitCode": 0,
+      "stopReason": null,
+      "elapsedSeconds": 20.6,
+      "peakRssBytes": 639647744,
+      "cleanedDescendantPids": []
+    },
+    {
+      "operation": "spacecraft-navigation-integrated",
+      "command": [
+        "node",
+        "docs/asteroid-spacecraft-gaps/browser-check.mjs",
+        "--navigation-only"
+      ],
+      "exitCode": 0,
+      "stopReason": null,
+      "elapsedSeconds": 10.5,
+      "peakRssBytes": 3768827904,
+      "cleanedDescendantPids": []
+    },
+    {
+      "operation": "spacecraft-annefrank-drag",
+      "command": [
+        "node",
+        "docs/lucy-targets/drag-trace.mjs",
+        "http://127.0.0.1:4278",
+        "1",
+        "output/playwright/asteroid-spacecraft-gaps/annefrank-drag",
+        "annefrank"
+      ],
+      "exitCode": 0,
+      "stopReason": "owned descendants remained after operation",
+      "elapsedSeconds": 24.8,
+      "peakRssBytes": 3652894720,
+      "cleanedDescendantPids": [
+        23143,
+        23146
+      ]
+    },
+    {
+      "operation": "spacecraft-braille-drag",
+      "command": [
+        "node",
+        "docs/lucy-targets/drag-trace.mjs",
+        "http://127.0.0.1:4278",
+        "1",
+        "output/playwright/asteroid-spacecraft-gaps/braille-drag",
+        "braille"
+      ],
+      "exitCode": 0,
+      "stopReason": "owned descendants remained after operation",
+      "elapsedSeconds": 24.8,
+      "peakRssBytes": 3459268608,
+      "cleanedDescendantPids": [
+        23886,
+        23889
+      ]
+    }
+  ]
+}

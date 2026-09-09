@@ -124,15 +124,20 @@ export function mountPlanetShell({
       // Detail controls wait for their renderer; navigation anchors stay usable
       // so another breadcrumb or moon can replace an in-progress selection.
       const pendingControls = [...information.querySelectorAll('.planet-card-tabs, [data-information-panel], .planet-destination-intro')]
+        .filter(node => node.dataset.informationGroup !== 'overview')
         .map(node => [node, node.inert]);
       for (const [node] of pendingControls) node.inert = true;
+      const previewLifetime = createSceneLifetime();
+      createInformationTabsController(drawer, previewLifetime, 'overview');
       information.ariaBusy = 'true';
       const preview = { id: object.id, frame: object.worldFrame, commit() {
+        previewLifetime.destroy();
         selectionPreview = null;
         information.ariaBusy = previousBusy;
         for (const [node, inert] of pendingControls) node.inert = inert;
       }, restore() {
         if (selectionPreview !== preview) return;
+        previewLifetime.destroy();
         selectionPreview = null;
         information.replaceChildren(...previous);
         information.ariaBusy = previousBusy;
@@ -215,31 +220,36 @@ export function mountPlanetShell({
   }
 }
 
-function createInformationTabsController(drawer, lifetime) {
+function createInformationTabsController(drawer, lifetime, requestedGroup) {
   const card = drawer.querySelector('.planet-information-panel');
-  const tabs = [...(card?.querySelectorAll('[data-information-tab]:not([hidden])') ?? [])];
+  const group = item => item.dataset.informationGroup ?? 'detail';
+  const tabs = [...(card?.querySelectorAll('[data-information-tab]:not([hidden])') ?? [])]
+    .filter(tab => requestedGroup === undefined || group(tab) === requestedGroup);
   const panels = [...(card?.querySelectorAll('[data-information-panel]') ?? [])];
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   const select = (tab, focus = false) => {
-    for (const item of tabs) {
+    for (const item of tabs.filter(item => group(item) === group(tab))) {
       const active = item === tab;
       item.setAttribute('aria-selected', String(active));
       item.tabIndex = active ? 0 : -1;
     }
-    for (const panel of panels) panel.hidden = panel.dataset.informationPanel !== tab.dataset.informationTab;
+    for (const panel of panels.filter(panel => group(panel) === group(tab))) {
+      panel.hidden = panel.dataset.informationPanel !== tab.dataset.informationTab;
+    }
     if (focus) tab.focus();
   };
   for (const tab of tabs) {
     tab.addEventListener('click', () => select(tab), { signal: events.signal });
     tab.addEventListener('keydown', event => {
-      const index = tabs.indexOf(tab);
-      const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
-        : event.key === 'ArrowRight' ? (index + 1) % tabs.length
-        : event.key === 'ArrowLeft' ? (index - 1 + tabs.length) % tabs.length : null;
+      const siblings = tabs.filter(item => group(item) === group(tab));
+      const index = siblings.indexOf(tab);
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? siblings.length - 1
+        : event.key === 'ArrowRight' ? (index + 1) % siblings.length
+        : event.key === 'ArrowLeft' ? (index - 1 + siblings.length) % siblings.length : null;
       if (next === null) return;
       event.preventDefault();
-      select(tabs[next], true);
+      select(siblings[next], true);
     }, { signal: events.signal });
   }
   return { destroy() { events.abort(); } };

@@ -1,3 +1,5 @@
+import annefrankDescriptor from "../src/planets/annefrank/object.json" with { type: "json" };
+import brailleDescriptor from "../src/planets/braille/object.json" with { type: "json" };
 import heraDescriptor from "../src/planets/hera/object.json" with { type: "json" };
 import klymeneDescriptor from "../src/planets/klymene/object.json" with { type: "json" };
 import artemisDescriptor from "../src/planets/artemis/object.json" with { type: "json" };
@@ -1265,6 +1267,18 @@ export const OBJECTS = defineObjects([
 
   object("unitas", "Unitas", "asteroid", "#aaaaaa", 2.357778522320458,
     "Explore Unitas in 3D with its published shape model and radial elevation.", packaged(unitasDescriptor), unitasDescriptor.properties.worldFrame),
+
+  object("annefrank", "Annefrank", "asteroid", "#aaaaaa", 2.2123334934520815,
+    "Explore Annefrank with a clearly labelled approximation of its published flyby dimensions.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(annefrankDescriptor);
+    }, annefrankDescriptor.properties.worldFrame),
+
+  object("braille", "Braille", "asteroid", "#aaaaaa", 2.339551786449215,
+    "Explore Braille with a clearly labelled approximation of its published flyby dimensions.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(brailleDescriptor);
+    }, brailleDescriptor.properties.worldFrame),
 
   object("dike", "Dike", "asteroid", "#aaaaaa", 2.662672838262387,
     "Explore Dike in 3D with its published shape model and documented physical size scale.", packaged(dikeDescriptor), dikeDescriptor.properties.worldFrame),

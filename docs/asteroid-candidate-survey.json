@@ -3294,5 +3294,34 @@
     "asteroidCoverageBefore": 90,
     "asteroidCoverageAfter": 139,
     "description": "Same-body original DAMIT meshes scaled through the existing physical-units reader using separately published size measurements. Thermal effective diameter transfers remain approximate, with statistical and systematic limitations disclosed. The archive models themselves remain marked uncalibrated where appropriate; this is an application-level physical scale with provenance, not a DAMIT archive reclassification."
+  },
+  "spacecraftApproximationContinuation": {
+    "checkedOn": "2026-09-09",
+    "scope": "Two previously deferred original-mesh candidates now have explicitly labelled published-dimension approximations. Their original global reconstructions remain unresolved. Historical archive observations above are retained.",
+    "bodies": [
+      {
+        "id": "annefrank",
+        "number": 5535,
+        "status": "included as preliminary minimum-size ellipsoid approximation",
+        "fullAxesKm": [
+          6.6,
+          5.0,
+          3.4
+        ],
+        "record": "../src/planets/annefrank/SOURCE.md"
+      },
+      {
+        "id": "braille",
+        "number": 9969,
+        "status": "included as published-size ellipsoid approximation",
+        "fullAxesKm": [
+          2.1,
+          1,
+          1
+        ],
+        "record": "../src/planets/braille/SOURCE.md"
+      }
+    ],
+    "survey": "asteroid-spacecraft-gaps/README.md"
   }
 }

@@ -322,22 +322,22 @@ test('hover coalesces pointer events and follows the latest published targets wh
   f.destroy();
 });
 
-test('only an unmodified empty-space click requests deselection, never a drag, body hit or control click', () => {
+test('empty-space clicks never deselect, while body hits still select', () => {
   const f = fixture(); let deselections = 0;
   f.host.addEventListener('objectdeselect', () => deselections++);
-  firstClick(f); assert.equal(deselections, 1);
+  firstClick(f); assert.equal(deselections, 0);
   f.fire('pointerdown', 600);
   f.fire('pointermove', 610, { clientX: 580 });
   f.fire('pointerup', 620, { clientX: 580 });
   f.fire('click', 620, { clientX: 580 });
-  assert.equal(deselections, 1);
-  f.fire('click', 900, { ctrlKey: true }); assert.equal(deselections, 1);
+  assert.equal(deselections, 0);
+  f.fire('click', 900, { ctrlKey: true }); assert.equal(deselections, 0);
   f.document.targets = [f.target];
   f.fire('pointerdown', 1100); f.fire('pointerup', 1120); f.fire('click', 1120);
-  assert.equal(f.selections, 1); assert.equal(deselections, 1);
+  assert.equal(f.selections, 1); assert.equal(deselections, 0);
   f.destroy();
   const detail = fixture(() => true, () => true);
   detail.host.addEventListener('objectdeselect', () => deselections++);
-  firstClick(detail); assert.equal(deselections, 1);
+  firstClick(detail); assert.equal(deselections, 0);
   detail.destroy();
 });

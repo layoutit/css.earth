@@ -10,12 +10,13 @@ import { OBJECTS } from '../../site/objects.mjs';
 import { loadMarkerDescriptors, prepareContextMarkers } from '../../tools/prepare-navigation.mjs';
 import { renderMarker } from '../../src/navigation/marker-recipe.mjs';
 
-const base = 'e97ee9532b17beaf0c7ae38281c5bef12b64fa5b';
+const argument = name => process.argv.find(arg => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
+const base = argument('base') ?? 'e97ee9532b17beaf0c7ae38281c5bef12b64fa5b';
 const root = resolve(import.meta.dirname, '../..');
 const git = path => execFileSync('git', ['show', `${base}:${path}`], { maxBuffer: 16 * 1024 * 1024 });
 const oldText = git('site/prepared-navigation-markers.mjs').toString();
 const old = JSON.parse(oldText.split('Object.freeze(')[1].slice(0, -3));
-const { bodies } = JSON.parse(await readFile(new URL('./inputs.json', import.meta.url)));
+const { bodies } = JSON.parse(await readFile(argument('inputs') ? resolve(root, argument('inputs')) : new URL('./inputs.json', import.meta.url)));
 const added = new Set(bodies.map(b => b.id));
 const planets = OBJECTS.toSorted((a, b) => a.distanceAu - b.distanceAu);
 if (planets.length !== Object.keys(old).length + added.size || planets.some(p => !old[p.id] && !added.has(p.id))) throw new Error('Unreviewed registry change.');
@@ -56,5 +57,5 @@ for (const density of [1, 2]) {
 const newContexts = await prepareContextMarkers({ projectRoot: root, outputRoot: resolve(root, 'public/navigation'), descriptors: descriptors.filter(d => added.has(d.planetId)), planets });
 const presentations = Object.fromEntries(descriptors.map((d, index) => [d.planetId, { index, count: descriptors.length, presentation: d.presentation, ...(newContexts[d.planetId] ?? old[d.planetId]?.context ? { context: newContexts[d.planetId] ?? old[d.planetId].context } : {}) }]));
 await writeFile(resolve(root, 'site/prepared-navigation-markers.mjs'), '// Generated from object-owned marker recipes. Do not edit.\nexport const PREPARED_NAVIGATION_MARKERS = Object.freeze(' + JSON.stringify(presentations) + ');\n');
-await writeFile(new URL('./navigation-evidence.json', import.meta.url), JSON.stringify({ base, added: [...added], atlases: evidence }, null, 2) + '\n');
+await writeFile(argument('evidence') ? resolve(root, argument('evidence')) : new URL('./navigation-evidence.json', import.meta.url), JSON.stringify({ base, added: [...added], atlases: evidence }, null, 2) + '\n');
 console.log(JSON.stringify({ added: [...added], preservedMarkers: Object.keys(old).length }));

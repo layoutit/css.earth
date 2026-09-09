@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "braille",
+  "horizonsCommand": "9969;",
+  "source": {
+    "url": "https://doi.org/10.1006/icar.2001.6648",
+    "papers": [
+      "https://www.usgs.gov/publications/a-model-rotation-and-shape-asteroid-9969-braille-ground-based-observations-and-images",
+      "https://doi.org/10.1016/j.icarus.2003.06.002"
+    ],
+    "credit": "Oberst et al. (2001), Icarus 153, 16–23; Buratti et al. (2004), Icarus 167, 129–135, Table 1",
+    "retrieved": "2026-09-09"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "fullAxesKm": [
+      2.1,
+      1,
+      1
+    ],
+    "semiAxesKm": [
+      1.05,
+      0.5,
+      0.5
+    ],
+    "fullAxesUncertaintyKm": null,
+    "referenceRadiusKm": 0.6402895824937471,
+    "axisConvention": "Full axes are halved exactly. +Z is the adopted pole; +X is the arbitrary display meridian.",
+    "qualification": "Ellipsoid approximation of the published 2.1 × 1 × 1 km size estimate combining Deep Space 1 images and ground-based photometry. The equal short axes are part of that coarse estimate; resolved local terrain is not represented.",
+    "scale": "The reference radius is the geometric mean of the approximation semiaxes. It is a rendering scale, not an independent measured mean radius or convex-model volume."
+  },
+  "approximation": {
+    "semiAxesKm": [
+      1.05,
+      0.5,
+      0.5
+    ],
+    "assumptions": [
+      "Ellipsoid approximation of the published 2.1 × 1 × 1 km size estimate combining Deep Space 1 images and ground-based photometry. The equal short axes are part of that coarse estimate; resolved local terrain is not represented.",
+      "Arbitrary display pole and meridian. The published 226.4 ± 1.3 h estimate is synodic and is not installed as a sidereal spin or an observed pole."
+    ],
+    "qualification": "Observation-constrained ellipsoid; no invented local terrain or albedo."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km",
+    "formula": "r = 1 / sqrt((cos(lat)*cos(lon)/a)^2 + (cos(lat)*sin(lon)/b)^2 + (sin(lat)/c)^2)"
+  },
+  "spin": {
+    "periodHours": null,
+    "periodText": "226.4 ± 1.3 h (synodic estimate)",
+    "poleEclipticDegrees": null,
+    "poleIcrfRaDecDegrees": [
+      0,
+      90
+    ],
+    "eclipticToIcrfObliquityDegrees": null,
+    "meridianDegrees": 0,
+    "meaning": "Arbitrary display pole and meridian. The published 226.4 ± 1.3 h estimate is synodic and is not installed as a sidereal spin or an observed pole."
+  },
+  "unresolved": [
+    "Original closed global mesh and registered surface imagery remain unresolved in the checked DS1 archive.",
+    "Integrated infrared spectra constrain composition, not the position of surface texels.",
+    "The quoted period is a probable synodic solution, not a qualified sidereal attitude model.",
+    "The arbitrary display pole and meridian are not measured orientation."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-approximate-ellipsoid@1",
+  "id": "annefrank",
+  "horizonsCommand": "5535;",
+  "source": {
+    "url": "https://doi.org/10.1029/2003JE002108",
+    "papers": [
+      "https://ntrs.nasa.gov/citations/20060040031"
+    ],
+    "credit": "Duxbury et al. (2004), Journal of Geophysical Research: Planets 109, E02002",
+    "retrieved": "2026-09-09"
+  },
+  "constraints": {
+    "kind": "approximate-ellipsoid",
+    "fullAxesKm": [
+      6.6,
+      5,
+      3.4
+    ],
+    "semiAxesKm": [
+      3.3,
+      2.5,
+      1.7
+    ],
+    "fullAxesUncertaintyKm": null,
+    "referenceRadiusKm": 2.4115760195783342,
+    "axisConvention": "Full axes are halved exactly. +Z is the adopted pole; +X is the arbitrary display meridian.",
+    "qualification": "Published preliminary ellipsoid using minimum full dimensions from Stardust flyby images. It does not reproduce the observed angular outline or establish a complete global shape.",
+    "scale": "The reference radius is the geometric mean of the approximation semiaxes. It is a rendering scale, not an independent measured mean radius or convex-model volume."
+  },
+  "approximation": {
+    "semiAxesKm": [
+      3.3,
+      2.5,
+      1.7
+    ],
+    "assumptions": [
+      "Published preliminary ellipsoid using minimum full dimensions from Stardust flyby images. It does not reproduce the observed angular outline or establish a complete global shape.",
+      "Arbitrary display pole and meridian. The flyby did not establish a spin pole or current surface longitude; the display orientation is not a measured attitude."
+    ],
+    "qualification": "Observation-constrained ellipsoid; no invented local terrain or albedo."
+  },
+  "sampling": {
+    "stepDegrees": 5,
+    "longitudeDirection": "east-positive",
+    "radiusUnit": "km",
+    "formula": "r = 1 / sqrt((cos(lat)*cos(lon)/a)^2 + (cos(lat)*sin(lon)/b)^2 + (sin(lat)/c)^2)"
+  },
+  "spin": {
+    "periodHours": null,
+    "periodText": "Unresolved in this approximation",
+    "poleEclipticDegrees": null,
+    "poleIcrfRaDecDegrees": [
+      0,
+      90
+    ],
+    "eclipticToIcrfObliquityDegrees": null,
+    "meridianDegrees": 0,
+    "meaning": "Arbitrary display pole and meridian. The flyby did not establish a spin pole or current surface longitude; the display orientation is not a measured attitude."
+  },
+  "unresolved": [
+    "Original closed scientific mesh and registered surface mosaic were not located in the checked Stardust archive.",
+    "The reported 6.6 × 5.0 × 3.4 km dimensions are minimum extents from limited viewing, not three exact global axis measurements.",
+    "The real body has angular surfaces that this preliminary ellipsoid does not reproduce.",
+    "Neither the arbitrary display pole nor its zero meridian is an observed physical orientation."
+  ]
+}

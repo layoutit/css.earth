@@ -158,7 +158,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           focusDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
           rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : visible;
         const hovered = entry.hovered;
-        const fullOrbit = hovered || (emphasizedId !== null && emphasizedId !== plan.focus.id && entry.parent?.id === emphasizedId);
+        // Satellites keep the complete, uniform path from the shared policy,
+        // including selection previews and hover during navigation.
+        const satellite = entry.parent !== null && entry.parent.id !== plan.focus.id;
+        const fullOrbit = satellite || hovered;
         // Prepared bounds enclose the faded trail, not necessarily the complete orbit.
         const bounds = fullOrbit ? undefined : entry.orbit?.bounds;
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;

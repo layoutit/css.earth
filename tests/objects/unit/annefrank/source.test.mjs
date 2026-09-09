@@ -1,0 +1,18 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+const root = new URL('../../../../src/planets/annefrank/source/', import.meta.url);
+test('Annefrank uses published full dimensions once and keeps unknown attitude unqualified', async () => {
+  const config = JSON.parse(await readFile(new URL('preparation/terrestrial.json', root)));
+  const shape = parsePdsRadiusTable(await readFile(new URL('shape/ellipsoid.tab', root), 'utf8'), config.geometry.radialTerrain.grid);
+  for (const [lon, lat, metres] of [[0, 0, 3300], [90, 0, 2500], [0, 90, 1700], [0, -90, 1700]]) assert.ok(Math.abs(shape.sample(lon, lat) - metres) < .001);
+  const topology = validateClosedMesh(Uint32Array.from(shape.indices.flat()), shape.positions);
+  assert.equal(topology.eulerCharacteristic, 2);
+  assert.equal(topology.components, 1);
+  const rotation = JSON.parse(await readFile(new URL('preparation/rotation.json', root)));
+  assert.equal(rotation.schema, 'cssearth-display-orientation@1');
+  assert.equal(rotation.periodHours, undefined);
+  assert.equal(rotation.phase, 'arbitrary-display-phase');
+});

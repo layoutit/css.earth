@@ -14,7 +14,7 @@ Direct URL and zoom checks (`output/playwright/earth-texture-levels-20260909/rep
 
 All 179 original runtime assets retain their HEAD manifest records. All 196 source/output level receipts match the actual image bytes. Older locally installed Earth images were found and replaced from exact HEAD-pinned local copies; prior bytes are retained under `prior-assets/`. The comparison below uses the corrected canonical images in both conditions.
 
-Renderer build and typecheck passed. 74 focused router, selection and residency tests 22 renderer lifecycle/resource/texture tests, and 11 Earth dataset/image-bank tests passed. These checks do not constitute an aggregate release or deployment qualification. New derived assets and their delivery manifest are local; no asset publication or merge was performed.
+Renderer build and typecheck passed. 74 focused router, selection and residency tests 22 renderer lifecycle/resource/texture tests, and 11 Earth dataset/image-bank tests passed. These checks do not constitute an aggregate release or deployment qualification. All 147 new prepared images (108,197,698 compressed bytes across all levels and datasets) are published at immutable CDN URLs. Every download passed its byte-size and SHA256 checks; see [delivery receipts](evidence/earth-texture-level-delivery.json). No pull request merge was performed.
 
 ## Controlled synchronized captures
 
@@ -35,3 +35,13 @@ The large Earth arrival stall is reduced. Overall frame consistency is not yet s
 - [Prepared-level trace](../output/playwright/sun-mars-earth-sun-texture-levels-20260909/trace.json.gz), [video](../output/playwright/sun-mars-earth-sun-texture-levels-20260909/sun-mars-earth-sun.mp4), [synchronization](../output/playwright/sun-mars-earth-sun-texture-levels-20260909/synchronization.json). Recorder JSON resides beside these files and is identified by the synchronization receipt.
 
 Both captures above are valid, synchronized, error-free and contain no HMR or trace data loss. A supplementary final recapture was interrupted by an ECONNRESET in the recorder's `route.fetch` transport; its incomplete artifacts are excluded. The live server remained healthy. The only runtime edit after the valid prepared-level capture supplies the same initial-coarse hint to the material-less preflight shortcut; Earth's preflight has materials and does not use that shortcut.
+
+## PR closeout integration
+
+Integrated main `f7b7e856e` with its new objects, overview tabs and complete moon-orbit policy. All 406 scene payloads reproduce their committed pins. The two new objects now use the shared registry route with their original authored CSS. Page metadata was refreshed from those verified payloads; no scene rebake was necessary. The minimap point index was regenerated with all 406 bodies and 2,048 catalog stars.
+
+World positions, radii, colors, orbit vertices and source trail weights match main exactly. The complete satellite-orbit policy runs in the prepared worker planner as well as its synchronous fallback. New Earth levels retain the same 983 scene nodes.
+
+Post-integration validation: 424 renderer tests, 530 integrated shell/navigation/activation/dataset checks, 462 preparation tests, seven source/raster checks, renderer/preparation typechecks, and headless Earth direct-URL/zoom/sidebar/cache tests at DPR 1 and 2 pass. The full renderer suite is now included in CI. Optional paging and partition-validation tests use explicit capability fixtures; they no longer assume every production Earth or Deimos bake enables those capabilities. The close-range destination oracle follows the authored globe radius.
+
+Functional browser evidence is in `output/playwright/earth-texture-levels-integrated-closeout-20260909/`. The paired performance measurements above remain tied to their original captured source patches; they were not relabeled as final-merge measurements. The earlier Deimos source-reproduction qualification and absent Squannit source-image limitation are outside these validation gates.
