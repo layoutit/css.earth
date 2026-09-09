@@ -1,0 +1,131 @@
+{
+  "id": "10.5281/zenodo.20819132",
+  "type": "dois",
+  "attributes": {
+    "doi": "10.5281/zenodo.20819132",
+    "identifiers": [
+      {
+        "identifier": "oai:zenodo.org:20819132",
+        "identifierType": "oai"
+      }
+    ],
+    "creators": [
+      {
+        "nameType": "Personal",
+        "affiliation": [
+          "University of Tennessee System"
+        ],
+        "givenName": "Bradley",
+        "familyName": "Thomson",
+        "name": "Thomson, Bradley",
+        "nameIdentifiers": [
+          {
+            "nameIdentifierScheme": "ORCID",
+            "nameIdentifier": "0000-0001-8635-8932"
+          }
+        ]
+      },
+      {
+        "nameType": "Personal",
+        "affiliation": [
+          "University of Tennessee Knoxville"
+        ],
+        "givenName": "Devon",
+        "familyName": "Baynham",
+        "name": "Baynham, Devon",
+        "nameIdentifiers": [
+          {
+            "nameIdentifierScheme": "ORCID",
+            "nameIdentifier": "0009-0006-2347-9255"
+          }
+        ]
+      }
+    ],
+    "titles": [
+      {
+        "title": "Digitized geologic map of the Uranian moon: Titania"
+      }
+    ],
+    "publisher": "Zenodo",
+    "container": {},
+    "publicationYear": 2026,
+    "subjects": [],
+    "contributors": [],
+    "dates": [
+      {
+        "date": "2026-06-23",
+        "dateType": "Issued"
+      },
+      {
+        "date": "2026-05-08",
+        "dateType": "Submitted",
+        "dateInformation": "Digitized geologic map of the Unranian moon Titania "
+      }
+    ],
+    "language": null,
+    "types": {
+      "schemaOrg": "Dataset",
+      "resourceTypeGeneral": "Dataset",
+      "citeproc": "dataset",
+      "bibtex": "misc",
+      "ris": "DATA",
+      "resourceType": ""
+    },
+    "relatedIdentifiers": [
+      {
+        "relationType": "IsVersionOf",
+        "relatedIdentifier": "10.5281/zenodo.20089664",
+        "relatedIdentifierType": "DOI"
+      }
+    ],
+    "relatedItems": [],
+    "sizes": [],
+    "formats": [],
+    "version": null,
+    "rightsList": [
+      {
+        "rightsIdentifierScheme": "SPDX",
+        "rightsUri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "schemeUri": "https://spdx.org/licenses/",
+        "rights": "Creative Commons Attribution 4.0 International",
+        "rightsIdentifier": "cc-by-4.0"
+      }
+    ],
+    "descriptions": [
+      {
+        "descriptionType": "Abstract",
+        "description": "An updated geologic map of the Uranian moon Titania is now available on ArcGIS Pro. These updated maps are part of the \"FOUNDATION FOR EXPLORING THE MOONS OF THE URANIAN SYSTEM: FIRST STEPS\" research project. A research project aimed at updating the original paper maps that were made based on the data prvided by the Voyager 2's 1986 flyby of the gas giant, Uranus.\u00a0"
+      }
+    ],
+    "geoLocations": [],
+    "fundingReferences": [],
+    "url": "https://zenodo.org/doi/10.5281/zenodo.20819132",
+    "contentUrl": null,
+    "metadataVersion": 2,
+    "schemaVersion": "http://datacite.org/schema/kernel-4",
+    "source": "api",
+    "isActive": true,
+    "state": "findable",
+    "reason": null,
+    "viewCount": 0,
+    "downloadCount": 0,
+    "referenceCount": 0,
+    "citationCount": 0,
+    "partCount": 0,
+    "partOfCount": 0,
+    "versionCount": 0,
+    "versionOfCount": 1,
+    "created": "2026-06-23T19:56:05Z",
+    "registered": "2026-06-23T19:56:05Z",
+    "published": null,
+    "updated": "2026-09-06T21:10:21Z"
+  },
+  "relationships": {
+    "client": {
+      "data": {
+        "id": "cern.zenodo",
+        "type": "clients"
+      }
+    }
+  }
+}

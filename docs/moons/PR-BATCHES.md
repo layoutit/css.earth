@@ -4,7 +4,7 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**B1 is merged; B2 is the next planned batch.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B2–B4 counts remain planning targets until their selected sources and implementations qualify.
+**B1 is merged; B2 is in implementation.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B2–B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
@@ -37,7 +37,9 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 ## B2 — Add scientific surfaces and terrain to 15 moons
 
-**State:** planned · **Owner:** Moons
+**State:** implementation; 13 source-ready bodies, two source-access blockers · **Owner:** Moons
+
+See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md). No B2 body is yet marked browser-qualified.
 
 **Bodies:** Moon, Phobos, Deimos, Dimorphos, Io, Europa, Ganymede, Enceladus, Tethys, Dione, Rhea, Titan, Titania, Miranda, Charon.
 
@@ -83,7 +85,7 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 ## Parallel execution
 
-Use subagents when independent work reduces elapsed time. For B1, divide body-owned source intake and package work into disjoint cohorts while the Moons owner handles shared preparers, registry integration and final qualification. Integrate the complete batch into one PR. Check source closure before launching expensive parallel bakes and honor the shared disk budget.
+Use subagents when independent work reduces elapsed time. For B1, divide body-owned source intake and package work into disjoint cohorts while the Moons owner handles shared preparers, registry integration and final qualification. Integrate the complete batch into one PR. Check source closure before preparation. Serialize expensive bakes, builds, tests and browser capture across lanes; honor the shared disk and memory limits.
 
 ## Shared completion requirements
 

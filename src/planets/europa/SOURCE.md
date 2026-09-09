@@ -158,3 +158,39 @@ preparer or runtime is required. Run `pnpm build:preparation` before the command
 above. Omit `--write` from preparation to generate an isolated comparison stage.
 
 Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+
+## Agenor relative stereo terrain
+
+The Elevation view adds the released
+[USGS controlled Agenor DTM](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/).
+It retains the original relative stereo heights in meters, with no vertical
+offset, no conversion to a global reference level, and no globe displacement.
+The regional independent relative solution is not combined with other sites.
+The view's −700…+300 m scale spans the actual −641.9267578125…+218.51205444335938 m
+source range. Fixed northwest cartographic relief shows slopes; it does not
+change the numeric legend or imply physical illumination.
+
+The exact Float32 COG is 642×133, with 39,032 finite non-special samples. Its
+planetocentric equirectangular CRS is centered on 180°E on a 1,560,800 m sphere,
+with origin (−1236786.1079616144, −1146374.9999678) m and pixel increments
+(+614.0078951699215, −614.0078951699215) m. This actual reprojected pixel spacing
+differs from the nominal 450 m DTM post spacing; effective resolved detail is
+about 3 km. Source documentation gives nominal 52 m vertical precision and an
+approximately 100 m empirical estimate, not a pointwise accuracy guarantee.
+The controlled frame differs from the old 2010 mosaic's registration.
+
+The genuine height no-data value and complete bilinear footprints control
+coverage. The released `FOM` and `ClrConf` files are byte-identical: the retained
+processing log translates the FOM VRT into both outputs and cubic-resamples the
+categorical FOM codes. Neither is used as a confidence or quality mask. Original
+files, STAC metadata, source processing, seven independently Pillow-decoded
+value anchors, and the exclusion evidence are retained under
+`source/science/controlled-dtms/`. Exact ignored source TIFFs have acquisition
+recipes; the CC0 release and source authors retain attribution.
+
+The body-owned lens focus is 142°E, 43.7°S at supported zoom 4. Shared preparation
+converts it through the actual solid mesh axes and system matrix to existing
+camera navigation. The X/Y swap in solid PolyCSS leaf coordinates is included;
+no source interpretation occurs in runtime. The Yelland trial and its broken
+quality products are retained only for the intake audit. Useful regional framing,
+source-versus-display visuals, and Chrome conformance remain separate B2 gates.

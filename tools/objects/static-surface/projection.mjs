@@ -27,9 +27,11 @@ export function preparePolarAtlas(data, {
   channels,
   tileSize,
   boundaryLatitudeRadians,
+  sampling = "bilinear",
 }) {
+  if (!["bilinear", "nearest"].includes(sampling)) throw new Error("Unsupported polar atlas sampling.");
   const output = Buffer.alloc(tileSize * 4 * tileSize * 4);
-  const supersampling = 2;
+  const supersampling = sampling === "nearest" ? 1 : 2;
   const samples = supersampling ** 2;
   const tiles = [
     { pole: "north", inner: false },
@@ -61,7 +63,7 @@ export function preparePolarAtlas(data, {
               Math.PI * 2) % (Math.PI * 2);
             const sourceX = longitude / (Math.PI * 2) * width - 0.5;
             const sourceY = (Math.PI / 2 - latitude) / Math.PI * height - 0.5;
-            const rgba = sampleBilinear(
+            const rgba = (sampling === "nearest" ? sampleNearest : sampleBilinear)(
               data,
               { width, height, channels },
               sourceX,
@@ -110,4 +112,13 @@ function sampleBilinear(data, { width, height, channels }, x, y) {
     rgba[channel] = Math.round(top * (1 - ty) + bottom * ty);
   }
   return rgba;
+}
+
+// The selected source texel owns both its RGB value and its missing-data style.
+// A single pixel-center sample also avoids blending across the polar footprint.
+function sampleNearest(data, { width, height, channels }, x, y) {
+  const sx = ((Math.floor(x + 0.5) % width) + width) % width;
+  const sy = Math.max(0, Math.min(height - 1, Math.floor(y + 0.5)));
+  const i = (sy * width + sx) * channels;
+  return [data[i], data[i + 1], data[i + 2], channels === 4 ? data[i + 3] : 255];
 }

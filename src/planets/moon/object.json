@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cf20e08fccca3595fc723df9578c9db82f65daba5641f90809e6e89f23895d38"
+    "sha256": "1d82bcdfd27adbcca48bd5948b8bdc426fff7c069fd8e31a5d71ea1e0bc85c9f"
   },
   "id": "moon",
   "properties": {
@@ -26,7 +26,7 @@
         {
           "id": "raster",
           "path": "source/preparation/raster.json",
-          "sha256": "3446d4dea61ff66229387628bf3e31d448e925409643010d7d1811486911fab1"
+          "sha256": "b0ec475cd7d21c58e606b7eea3e0a893c25e3d6d64628816a2b59b27ff242b24"
         },
         {
           "id": "geometry",
@@ -41,7 +41,7 @@
         {
           "id": "content",
           "path": "source/content/static.json",
-          "sha256": "d3697fb7fcaf344834607712df3bed01558d2b4e85724599fd73f751671027e3"
+          "sha256": "9bbf712a901e6fac078d739a8201f1798d44ff0a16d832579abe7a3191bbbf40"
         },
         {
           "id": "title",
@@ -56,7 +56,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c9a425532390dc7fc5c41b769a6907f97be1afacdc60b6877bb894ba67aa3827"
+          "sha256": "d92b36fc5bff6017f1c4d983a430872e20367865d946a1fb7d112b5eb03f69da"
         },
         {
           "id": "physical",
@@ -86,6 +86,11 @@
             },
             {
               "id": "crust",
+              "source": "content",
+              "material": "curvature"
+            },
+            {
+              "id": "rock-abundance",
               "source": "content",
               "material": "curvature"
             }

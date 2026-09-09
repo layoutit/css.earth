@@ -8,8 +8,8 @@ Source: NASA PDS `urn:nasa:pds:dart_shapemodel:data_derived_dimorphos_model_v004
 
 - DART v003 and v004 global and local OBJ/FITS releases were reviewed. Adopted global v004 at 0.972 m spacing; finer releases add geometry beyond the displayed budget. Local 5 cm impact-region products do not replace the global body and are deferred.
 - DRACO and LICIACube imagery contributes to the source model. Individual calibrated images require registered camera projection, coverage and photometry to become surface imagery; they are not silently used as global textures.
-- Released SPC relative-albedo FITS is a per-facet binary table with uncertainty, not the existing cylindrical FITS image capability. A value or sigma alone does not establish uniform observed coverage. This view is deferred pending a qualified facet-table material preparation path.
-- Gravity, slope and other ancillary FITS fields are scientifically distinct from radius. They are deferred rather than mislabeled as elevation.
+- Released SPC relative-albedo FITS is a per-facet binary table with uncertainty. The facet-table decoder is available, but this candidate remains excluded because finite values and zero sigma do not establish photographed coverage. Its source limits do not support treating every modeled facet as observed albedo.
+- The v004 972 mm gravity-relative Slope FITS table is selected as its own scientific view, including modeled regions under the source gravity assumptions. Other ancillary fields remain unselected; slope is not relabeled as elevation.
 - Shape uses the shared no-imagery grid and prepared directional lighting. Elevation uses source radius minus 75 m in meters, with cartographic relief; it is not measured impact displacement or height above an equipotential.
 
 ## Geometry and lighting
@@ -23,3 +23,17 @@ The shared solar context uses the post-impact DART s547 Dimorphos trajectory rel
 ## Reproduction
 
 Restore required inputs with the existing acquisition operations and verify each pinned byte. Run the authored object preparer for `dimorphos`; runtime consumers can download the separately published pinned scene inventory with `pnpm setup:assets --object=dimorphos`. Source/context/title/sky notices are retained beside the package. Qualification artifacts are under `output/asteroids-dart-radar/` in the implementation checkout.
+
+## B2 facet science and terrain
+
+Every one of the 196,608 source table rows is registered to its source triangle. Display colors use the nearest full-source triangle within the authored distance limit; they are not interpolated across facets. Original table row IDs are retained in the preparation atlas index.
+
+The exact v004 972 mm PDS slope table is used, including modeled regions. Its label defines gravity using uniform density, rotation and Didymos. A verified centroid bijection reconciles 131,072 exporter-order differences; all rows match uniquely within 0.001 m (maximum observed residual 0.00002393 m). That residual measures source registration, not scientific accuracy. The separately reviewed relative-albedo candidate remains withheld as a lens because finite values and zero sigma do not establish photographed coverage.
+
+The facet-science flat preview is explicitly 640 × 320, with nearest, lossless
+packing for its minimap and temporary projective textures. It makes 204,800
+unique-ray queries per lens; ambiguous radial intersections remain missing.
+This is a display-preview resolution, not a new scientific grid. The complete
+196,608-row source tables, native triangle atlas dimensions and original-row
+atlas indices are unchanged. Native material colors still query the full source
+surface directly and never sample this reduced flat preview.

@@ -68,7 +68,8 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "enhanced-color": "Enhanced color"
     },
     "controls": [
       {
@@ -85,6 +86,21 @@
           "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m"
         },
         "detail": "Corrected mosaic"
+      },
+      {
+        "id": "enhanced-color",
+        "label": "Enhanced color",
+        "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
+        "title": "Enhanced color combines MVIC near-infrared, red and blue bands with panchromatic detail. Colors are not natural color or measured albedo. Missing coverage remains a gray grid.",
+        "thumbnail": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
+        "surface": "charon-enhanced-color-surface@2x.webp",
+        "poles": "charon-enhanced-color-poles@2x.webp",
+        "source": {
+          "id": "new-horizons-charon-mvic-color",
+          "path": "../manifest.json",
+          "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
+        },
+        "detail": "MVIC color bands"
       },
       {
         "id": "elevation",
@@ -133,6 +149,12 @@
       "role": "surface",
       "description": "New Horizons mosaic and terrain model · Schenk et al.",
       "href": "https://fdp.astrogeology.usgs.gov/fdp/pluto/"
+    },
+    {
+      "label": "PDS",
+      "role": "surface",
+      "description": "MVIC enhanced-color mosaic · New Horizons team",
+      "href": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx"
     },
     {
       "label": "ESO",

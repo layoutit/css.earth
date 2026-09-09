@@ -123,6 +123,122 @@
           "path": "../manifest.json"
         },
         "detail": "Color mosaic"
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "detail": "Interpreted units",
+        "description": "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief.",
+        "title": "Fourteen base geologic units mapped from Voyager and Galileo observations. Colors distinguish interpreted plains, lava flows, patera floors and mountains. The separate diffuse-deposit overlay and structural linework are not shown. Gray grid marks unmapped or conflicting polygons; this view adds no measured relief.",
+        "thumbnail": "/scenes/io/io-geology-thumbnail.webp",
+        "surface": "io-geology-surface@2x.webp",
+        "poles": "io-geology-poles@2x.webp",
+        "falseColor": true,
+        "source": {
+          "id": "usgs-sim3168-geologic-units",
+          "path": "../manifest.json",
+          "url": "https://pubs.usgs.gov/sim/3168/"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Interpreted geologic category"
+          },
+          {
+            "id": "mapping-scale",
+            "label": "Map scale",
+            "value": "1:15,000,000"
+          },
+          {
+            "id": "epoch",
+            "label": "Publication",
+            "value": "USGS SIM3168 · 2011"
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Base-unit polygons; polar/no-data gaps retained"
+          }
+        ],
+        "legend": {
+          "kind": "categories",
+          "title": "Geologic units",
+          "meta": "Symbols identify archived categories. Colors are chosen for this display.",
+          "sourceUrl": "https://pubs.usgs.gov/sim/3168/",
+          "items": [
+            {
+              "label": "Pby · Bright plains",
+              "description": "Archived geologic map category",
+              "color": "#efd969"
+            },
+            {
+              "label": "Pbw · White plains",
+              "description": "Archived geologic map category",
+              "color": "#f1ece0"
+            },
+            {
+              "label": "Prb · Red-brown plains",
+              "description": "Archived geologic map category",
+              "color": "#b77255"
+            },
+            {
+              "label": "Pl · Layered plains",
+              "description": "Archived geologic map category",
+              "color": "#d5aa79"
+            },
+            {
+              "label": "Fb · Bright flows",
+              "description": "Archived geologic map category",
+              "color": "#e69abd"
+            },
+            {
+              "label": "Fd · Dark flows",
+              "description": "Archived geologic map category",
+              "color": "#7b496e"
+            },
+            {
+              "label": "Fu · Undivided flows",
+              "description": "Archived geologic map category",
+              "color": "#ac79a6"
+            },
+            {
+              "label": "PFb · Bright patera floors",
+              "description": "Archived geologic map category",
+              "color": "#f2b651"
+            },
+            {
+              "label": "PFd · Dark patera floors",
+              "description": "Archived geologic map category",
+              "color": "#3c3747"
+            },
+            {
+              "label": "PFu · Undivided patera floors",
+              "description": "Archived geologic map category",
+              "color": "#978e94"
+            },
+            {
+              "label": "Ml · Lineated mountains",
+              "description": "Archived geologic map category",
+              "color": "#397eae"
+            },
+            {
+              "label": "Mm · Mottled or hummocky mountains",
+              "description": "Archived geologic map category",
+              "color": "#78b6d1"
+            },
+            {
+              "label": "Mu · Undivided mountains",
+              "description": "Archived geologic map category",
+              "color": "#577098"
+            },
+            {
+              "label": "Tb · Tholi",
+              "description": "Archived geologic map category",
+              "color": "#649c76"
+            }
+          ]
+        }
       }
     ]
   },
@@ -162,6 +278,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "USGS geology",
+      "role": "surface",
+      "description": "Interpreted geologic map and GIS · SIM3168",
+      "href": "https://pubs.usgs.gov/sim/3168/"
     }
   ],
   "provenance": {

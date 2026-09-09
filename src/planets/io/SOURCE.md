@@ -107,3 +107,29 @@ preparer or runtime is required. Run `pnpm build:preparation` before the command
 above. Omit `--write` from preparation to generate an isolated comparison stage.
 
 Delivery keeps the prepared HD texture dimensions. Surface and polar atlases use WebP quality 90 with full-quality alpha; source maps remain lossless. The shared photographic sky uses quality 95. Lighting stays lossless. Only the selected sky mode is requested on first view.
+
+## Interpreted geology
+
+The Geology view uses the original `Io_GeoUnits` polygon/attribute/projection
+members from [USGS SIM3168](https://pubs.usgs.gov/sim/3168/), Williams et al.
+(2011), at 1:15,000,000. Fourteen base-unit categories distinguish plains, flows,
+patera floors and mountains. Five diffuse-deposit classes belong to a separate
+overlay and are not rendered here. Colors are authored categorical choices,
+not measured color, chemical abundance or elevation. No terrain displacement is
+derived from these polygons.
+
+Exact raw members and archive/member CRC32/SHA-256 receipts are retained in
+`source/science/geology-sim3168/`. The actual SHP is signed east-positive
+planetocentric degrees on a 1,821,460 m sphere. West-longitude point attributes
+independently verify the sign: the same first point is −97.1448317468° in SHP X
+and +97.144831747° in `Long_W`. The displayed 1,821,490 m radius retains those
+angular positions; the 30 m radius difference is not height. `NoData` polygons,
+unmapped polar areas and conflicting overlapping categories remain missing.
+
+The separate label-point layer differs from final polygon classifications at
+43 of 1,498 comparable points. These source discrepancies and the explicit
+`Pb/Pby`, `Pw/Pbw`, `T/Tb` aliases are retained in the registration audit, rather
+than forcing label points to replace the polygon `Unit` attribute. Six distributed
+anchors, exact source hashes, hole/seam behavior, and categorical exclusion rules
+are exercised by the focused geology/source tests. B2 preparation and browser
+qualification are recorded separately in `docs/moons/b2-preparation/`.

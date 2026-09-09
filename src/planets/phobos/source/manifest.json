@@ -55,7 +55,8 @@
       "redistribution": "Retain the research and archive attribution.",
       "consumers": [
         "shape",
-        "scientific-surfaces"
+        "scientific-surfaces",
+        "facet-science"
       ],
       "lensId": "elevation",
       "label": "Elevation",
@@ -99,6 +100,25 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "credit": "Carolyn Ernst and colleagues; JHU/APL Small Body Mapping Tool",
+      "license": "Public scientific data release; cite Ernst et al. (2023).",
+      "acquisition": "Download the pinned original OBJ archive.",
+      "redistribution": "Retain the research and archive attribution.",
+      "licenseEvidence": [
+        "https://sbmt.jhuapl.edu/shared-files/"
+      ],
+      "id": "phobos-facet-science",
+      "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+      "origin": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+      "catalog": "https://doi.org/10.1186/s40623-023-01814-7",
+      "consumers": [
+        "facet-science"
+      ],
+      "expectedBytes": 34508570,
+      "expectedSha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
+      "coverage": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table."
     }
   ],
   "generatedIntermediates": [
@@ -132,8 +152,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9152,
-      "expectedSha256": "5399bed4ffd4e9f70db28ca54d6c203e3b515e77bc0363641c9890740d1de587",
+      "expectedBytes": 11617,
+      "expectedSha256": "cff545f36d0e7ba78d3547bd88e98cc7cf7bfa6f4bb7e6f11b1268f901b0d6ea",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -144,8 +164,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 972,
-      "expectedSha256": "cffa49b9f971806a30bcd20ef338fb20b05323cd4ba4aad36ca0a7b98aa436fb",
+      "expectedBytes": 1229,
+      "expectedSha256": "890ba5324fedbfe217240001c9e98727fbc70e76c3a1cc1d564d5c0d077d7595",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -156,8 +176,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3268,
-      "expectedSha256": "e3ab6bec60b1e6c21b370c92aea7d5be45a0d20caa619e32ca5fc1fb7c71851e",
+      "expectedBytes": 5913,
+      "expectedSha256": "2558b5d647fe5b8a0e391519361d5129c7dbd5089c93b9f33f6aa2315d6bee72",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

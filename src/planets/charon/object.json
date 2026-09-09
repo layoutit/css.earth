@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "7328d671d50b98f41c0d8cf144cfb823cf29d81ae5d73993d1733a75764322db"
+          "sha256": "3932ef460c88f7d8592f3fffd6a1f51025ba683f411b13426b06f7b5eb0a38cd"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "944f562cdfe2da209091fa5581100d93037e3b8c18aca245bfc3c9fbfc573e8e"
+          "sha256": "1b0f83d5f1826120ad82516a5dff38f0d25b29c40516798dd20eb40d095e6708"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "f08978c561e19f306f8e68e9be6839e2a7a71f2c7ee89cacb0c213685d9fd85b"
+          "sha256": "632cc32e2ab12cce20afc1e3db833ecbb4516345ae7781abb8b823bb9807ce93"
         }
       ],
       "shape": {
@@ -58,6 +58,11 @@
           "lenses": [
             {
               "id": "normal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "enhanced-color",
               "source": "content",
               "material": "lighting"
             },

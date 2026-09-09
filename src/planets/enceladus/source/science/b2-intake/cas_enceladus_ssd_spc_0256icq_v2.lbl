@@ -1,0 +1,30 @@
+PDS_VERSION_ID               = PDS3
+RECORD_TYPE                  = FIXED_LENGTH
+RECORD_BYTES                 = 1024
+^SPICE_KERNEL                = "cas_enceladus_ssd_spc_0256icq_v2.bds"
+MISSION_NAME                 = "CASSINI-HUYGENS"
+SPACECRAFT_NAME              = "CASSINI ORBITER"
+DATA_SET_ID                  = "CO-S/J/E/V-SPICE-6-V1.0"
+KERNEL_TYPE_ID               = DSK
+PRODUCT_ID                   = "cas_enceladus_ssd_spc_0256icq_v2.bds"
+PRODUCT_CREATION_TIME        = 2026-06-11T12:07:07
+PRODUCER_ID                  = "SSD/JPL"
+MISSION_PHASE_NAME           = "N/A"
+PRODUCT_VERSION_TYPE         = ACTUAL
+PLATFORM_OR_MOUNTING_NAME    = "N/A"
+START_TIME                   = 1950-01-01T00:00:00
+STOP_TIME                    = 2050-01-01T00:00:00
+SPACECRAFT_CLOCK_START_COUNT = "N/A"
+SPACECRAFT_CLOCK_STOP_COUNT  = "N/A"
+TARGET_NAME                  = "N/A"
+INSTRUMENT_NAME              = "N/A"
+NAIF_INSTRUMENT_ID           = "N/A"
+SOURCE_PRODUCT_ID            = "N/A"
+NOTE                         = "See comments in the file for details"
+OBJECT                       = SPICE_KERNEL
+  INTERCHANGE_FORMAT         = BINARY
+  KERNEL_TYPE                = SHAPE
+  DESCRIPTION                = "Global coverage Enceladus shape model DSK,
+made using stereophotoclinometry (SPC) by R.S. Park, SSD/JPL. "
+END_OBJECT                   = SPICE_KERNEL
+END

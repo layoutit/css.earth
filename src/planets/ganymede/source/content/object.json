@@ -111,6 +111,167 @@
           "path": "../manifest.json"
         },
         "detail": "Infrared color"
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "detail": "Interpreted units",
+        "description": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+        "title": "Twenty-three archived map symbols distinguish interpreted dark and light terrains, crater and basin materials. Colors are categorical display choices. The GIS combines palimpsest age classes under p; the view preserves that combined symbol. Gray grid marks areas without an unambiguous polygon. No measured relief is added.",
+        "thumbnail": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
+        "surface": "ganymede-geology-surface@2x.webp",
+        "poles": "ganymede-geology-poles@2x.webp",
+        "falseColor": true,
+        "source": {
+          "id": "usgs-sim3237-geologic-units",
+          "path": "../manifest.json",
+          "url": "https://pubs.usgs.gov/sim/3237/"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Interpreted geologic category"
+          },
+          {
+            "id": "mapping-scale",
+            "label": "Map scale",
+            "value": "1:15,000,000"
+          },
+          {
+            "id": "epoch",
+            "label": "Publication",
+            "value": "USGS SIM3237 · 2013"
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "Mapped polygons; uncovered areas retained"
+          }
+        ],
+        "legend": {
+          "kind": "categories",
+          "title": "Geologic units",
+          "meta": "Symbols identify archived categories. Colors are chosen for this display.",
+          "sourceUrl": "https://pubs.usgs.gov/sim/3237/",
+          "items": [
+            {
+              "label": "dc · Dark cratered terrain",
+              "description": "Archived geologic map category",
+              "color": "#79574a"
+            },
+            {
+              "label": "dl · Dark lineated terrain",
+              "description": "Archived geologic map category",
+              "color": "#98705b"
+            },
+            {
+              "label": "d · Dark terrain, undivided",
+              "description": "Archived geologic map category",
+              "color": "#b38e78"
+            },
+            {
+              "label": "r · Reticulate terrain",
+              "description": "Archived geologic map category",
+              "color": "#998781"
+            },
+            {
+              "label": "lg1 · Light grooved terrain 1",
+              "description": "Archived geologic map category",
+              "color": "#729e83"
+            },
+            {
+              "label": "lg2 · Light grooved terrain 2",
+              "description": "Archived geologic map category",
+              "color": "#98bd94"
+            },
+            {
+              "label": "lg3 · Light grooved terrain 3",
+              "description": "Archived geologic map category",
+              "color": "#c4d9a1"
+            },
+            {
+              "label": "ls1 · Light subdued terrain 1",
+              "description": "Archived geologic map category",
+              "color": "#77aeb2"
+            },
+            {
+              "label": "ls2 · Light subdued terrain 2",
+              "description": "Archived geologic map category",
+              "color": "#9bc9c6"
+            },
+            {
+              "label": "ls3 · Light subdued terrain 3",
+              "description": "Archived geologic map category",
+              "color": "#c3e4d9"
+            },
+            {
+              "label": "li1 · Light irregular terrain 1",
+              "description": "Archived geologic map category",
+              "color": "#8079a9"
+            },
+            {
+              "label": "li2 · Light irregular terrain 2",
+              "description": "Archived geologic map category",
+              "color": "#aaa0c6"
+            },
+            {
+              "label": "li3 · Light irregular terrain 3",
+              "description": "Archived geologic map category",
+              "color": "#d3c4e0"
+            },
+            {
+              "label": "l · Light terrain, undivided",
+              "description": "Archived geologic map category",
+              "color": "#d0d0bd"
+            },
+            {
+              "label": "p · Palimpsest material",
+              "description": "Archived geologic map category",
+              "color": "#daac75"
+            },
+            {
+              "label": "pi · Palimpsest interior",
+              "description": "Archived geologic map category",
+              "color": "#b88957"
+            },
+            {
+              "label": "bi · Basin interior",
+              "description": "Archived geologic map category",
+              "color": "#c87770"
+            },
+            {
+              "label": "br · Rugged basin material",
+              "description": "Archived geologic map category",
+              "color": "#a34f51"
+            },
+            {
+              "label": "bs · Smooth basin material",
+              "description": "Archived geologic map category",
+              "color": "#dea398"
+            },
+            {
+              "label": "c1 · Crater material 1",
+              "description": "Archived geologic map category",
+              "color": "#ad8c27"
+            },
+            {
+              "label": "c2 · Crater material 2",
+              "description": "Archived geologic map category",
+              "color": "#dbbc42"
+            },
+            {
+              "label": "c3 · Crater material 3",
+              "description": "Archived geologic map category",
+              "color": "#f4df86"
+            },
+            {
+              "label": "cu · Crater material, undivided",
+              "description": "Archived geologic map category",
+              "color": "#d1c59f"
+            }
+          ]
+        }
       }
     ]
   },
@@ -150,6 +311,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "USGS geology",
+      "role": "surface",
+      "description": "Interpreted geologic map and GIS · SIM3237",
+      "href": "https://pubs.usgs.gov/sim/3237/"
     }
   ],
   "provenance": {

@@ -1,6 +1,6 @@
 # Rhea sources and preparation
 
-Rhea uses the generic object adapter, shared spherical scene, shell, controls and lighting. Its source imagery and terrain model are interpreted during preparation.
+Rhea uses the generic object adapter, shared source-mesh scene, shell, controls and lighting. Its source imagery and terrain model are interpreted during preparation.
 
 ## Monochrome and Enhanced color
 
@@ -20,14 +20,26 @@ Independent landmarks: [Tirawa](https://planetarynames.wr.usgs.gov/Feature/6026)
 
 The 2222 × 1111 equirectangular raster stores center-relative radius in meters. Displayed height is `radius * 0.001 - 763.5` km, with a −10 to +10 km color scale. The actual geotransform stops slightly short at the east and south edges. Those narrow strips are marked with the shared gray grid, without extrapolation. All source cells themselves are valid.
 
-The model uses 2719 Cassini images through 2015-02-15. Model spacing is about 2.15 km and the producer estimates typical height uncertainty at 2.15–4.3 km. It is a derived terrain model, not direct imagery. Color represents height; brightness adds fixed northwest relief at true height scale. Geometry stays spherical and shared globe lighting remains active.
+The model uses 2719 Cassini images through 2015-02-15. Model spacing is about 2.15 km and the producer’s one-to-two-grid-spacing estimate derives from simulation experience, not independent per-cell Rhea uncertainty. It is a derived terrain model, not direct imagery. Color represents height; brightness adds fixed northwest relief at true height scale. Geometry follows a simplified source mesh and shared globe lighting remains active.
 
 The secondary relative-albedo product is not a separate lens: it is coarser than the observations and the producer documents terrain/shadow leakage into it.
 
 ## Physical model and delivery
 
-The astronomy package supplies Rhea's Saturn-relative orbit, IAU orientation and 764.5 km rendered mean-radius sphere. [NASA](https://science.nasa.gov/saturn/moons/rhea/) rounds the radius to 764 km. Keep that physical value separate from the 764.1 km monochrome projection sphere and 763.5 km elevation datum. The very tenuous exosphere does not justify a visible halo; proposed rings are not rendered.
+The astronomy package supplies Rhea's Saturn-relative orbit, IAU orientation and 764.5 km display scale reference. [NASA](https://science.nasa.gov/saturn/moons/rhea/) rounds the radius to 764 km. Keep that physical value separate from the 764.1 km monochrome projection sphere and 763.5 km elevation datum. The very tenuous exosphere does not justify a visible halo; proposed rings are not rendered.
 
-All three lenses use the common 8192 × 4096 map layout, 16 projective bands and 1024-pixel pole caps. Prepared surface/pole atlases use WebP quality 90 with lossless alpha; intermediate maps remain lossless. Native observations are downsampled, and larger textures would not increase the terrain model's detail.
+Map preparation uses the shared 8192 × 4096 intermediate layout and 1024-pixel pole products. The final source-mesh scene samples these maps into prepared per-triangle atlases. Prepared surface/pole atlases use WebP quality 90 with lossless alpha; intermediate maps remain lossless. Native observations are downsampled, and larger textures would not increase the terrain model's detail.
 
 `source/manifest.json` pins source URLs, byte counts, hashes and credits. Ignored inputs are downloadable through the shared acquisition recipe; runtime uses prepared assets only. Remote installation remains unproven until the assets are published through the existing publisher.
+
+## B2 source shape and relative albedo
+
+The native global Q128 OBJ is 98,306 vertices and 196,608 triangles in kilometres, north along +Z and longitude zero along +X. Exact source topology is retained before simplification. Preparation uses the measured candidate of 2,000 faces with regularize:false, under a 7,635 m display approximation ceiling (1% of the model reference radius). This is a display approximation budget, not scientific uncertainty. The closed candidate has Euler characteristic 2, one component and 2,000 faces. Its 8,000 one-way barycentric source-distance samples have maximum 5700.82 m, 95th percentile 2867.32 m and RMS 1460.13 m. These samples do not establish a full Hausdorff bound. Geographic registration, silhouette and feature review remain pending. The original photographic-map projection radii remain separate from shape geometry and the numeric elevation datum.
+
+New relative albedo uses the published 2025 GeoTIFFs and their original equatorial/polar projections. Values are dimensionless and normalized around 1; the archive gives a nominal 0–2 domain. The visible 0.5–1.5 scale saturates above 1.5. No height conversion or relief shading is applied to this quantity. It is a secondary SPC brightness product, less validated than topography, and is neither geometric albedo nor calibrated reflectance. Tethys used uncalibrated ISS inputs; Dione and Rhea used calibrated frames. Source sigma is internal maplet agreement, not absolute height uncertainty.
+
+The Shape lens uses the shared neutral grid over the source mesh to distinguish geometry from imagery. The Photographic views retain pre-existing image seams, shadows and local control differences. Source reference radii and projections do not become spherical geometry constraints. The original Q128 spacing is about 8.6 km; finer numeric maps do not imply the simplified silhouette retains that full detail.
+
+Qualification status: source intake and recipe proposal. Final mesh selection (where applicable), restored-source and prepared browser/visual gates remain pending. No readiness is claimed.
+
+The relative-albedo GeoTIFF ends at 359.151742419° East and 89.575871210° South with its exact delivered pixel scale, leaving narrow longitude and south-polar gaps. These remain missing; the nominal global product is not stretched to force complete raster coverage. Independent tests check source cells and both unfilled strips.

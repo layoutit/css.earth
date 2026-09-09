@@ -140,3 +140,15 @@ test('a measured elevation lens can be the only surface capability', async () =>
   const otherFormat=structuredClone(config);otherFormat.raster.scientific[0].format='wavefront-obj';
   assert.throws(()=>parseTerrestrialProfile(otherFormat),/simplification-distance bound/);
 });
+
+test('a declared output meridian shifts presentation without changing source coordinates', async () => {
+  const {paintScienceSurface} = await import('./scientific-raster.mjs');
+  const seen = [], source = {sample(lon,lat) {seen.push([lon,lat]);return lon;}};
+  const lens = {minimum:-180,maximum:360,colors:['#000000','#ffffff']};
+  paintScienceSurface(source,lens,4,2);
+  assert.deepEqual(seen.slice(0,4).map(p=>p[0]),[45,135,225,315]);
+  seen.length=0;paintScienceSurface(source,{...lens,outputLongitudeOrigin:-180},4,2);
+  assert.deepEqual(seen.slice(0,4).map(p=>p[0]),[-135,-45,45,135]);
+  assert.deepEqual(seen.filter((_,i)=>i%4===0).map(p=>p[1]),[45,-45]);
+  assert.throws(()=>paintScienceSurface(source,{...lens,outputLongitudeOrigin:NaN},4,2),TypeError);
+});

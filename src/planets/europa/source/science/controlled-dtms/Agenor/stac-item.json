@@ -1,0 +1,872 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "Agenor",
+  "properties": {
+    "start_datetime": "1995-12-07T00:00:00.000000Z",
+    "end_datetime": "2003-08-21T00:00:00.000000Z",
+    "title": "DTM: Agenor",
+    "description": "Knowledge of a planetary surface's topography is necessary to understand its geology and enable landed mission operations. NASA's Solid State Imager (SSI) on board the Galileo spacecraft acquired more than 500 images of Jupiter's moon, Europa. Although moderate- and high-resolution coverage is extremely limited, repeat coverage of a small number of sites enables the creation of digital terrain models (DTMs) via stereophotogrammetry. Here we provide stereo-derived DTMs of five sites on Europa. The sites are the bright band Agenor Linea, Cilix crater, Pwyll crater, a site that includes numerous pits and chaos adjacent to Rhadamanthys Linea, and a site near Yelland Linea that includes ridged plains at high-resolution. We generated the DTMs using BAE's SOCET SET software and each was manually edited to correct identifiable errors from the automated stereo matching process. Additionally, we utilized the recently updated image pointing information provided by the U. S. Geological Survey [Bland et al. 2021], which enables the DTMs to easily be used in coordination with that globally controlled image set. The purpose of these products is to provide to the planetary community high-fidelity topographic models of Europa's surface that are aligned to the USGS geodetically controlled image data [Bland et al. 2021]. The DTMs were derived from stereophotogrammetry techniques using BAE's SOCET SET\u00ae software and utilized Galileo SSI images with updated SPICE pointing information (CKs) provided by the photogrammetric control solution of Bland et al. [2021]. That solution constrained the location of Europa's prime meridian (Cilix crater at 178o E) and therefore tied that dataset, and by extension these DTMs, to Europa's global coordinate system. All elevations are relative (not tied to a global elevation reference). Each DTM was manually edited to remove artifacts and correct other identifiable errors that result from the automated matching process. For each DTM, we include both a Figure of Merit and a Confidence Map that provides the user additional information on where the DTMs were edited and the relative quality of each pixel (see Process section for more information).\n\nThe DTMs were generated with a post spacing of 3 times the root-mean square (RMS) of the ground sample distance (pixel scale) of the image pair. We find that the horizontal \"resolution\"\ufffd(i.e., the smallest identifiable features) is typically 2-3 times the DTM post spacing, or ~10 times the RMS GSD of the images. Manual editing typically results in matching accuracy of ~0.2 pixels; however, Galileo images are challenging to work with, and in some cases post height adjustment was uncertain. For Galileo DTMs, the stereo-matching accuracy is approximately 0.5 pixels [Bland et al. 2022], resulting in effective vertical precisions (EP) that range from 36-100 m, depending on the DTM. We emphasize that the EP is the RMS uncertainty in a point elevation sampled from the DTM. Because DTM uncertainty follows a quasi-normal distribution, the 95% percentile error is ~1.645*EP, or 60-165 m. A few larger errors may exist in the DTMs and users are cautioned that care should be used when investigating localized or small-scale features.",
+    "missions": "Galileo",
+    "instruments": [
+      "Solid State Imager (SSI)"
+    ],
+    "gsd": 614.0078951699215,
+    "license": "CC0-1.0",
+    "proj:epsg": null,
+    "proj:wkt2": "\"PROJCS[\\\"Europa (2015) - Sphere / Ocentric / Equirectangular, clon = 180\\\",GEOGCS[\\\"Europa (2015) - Sphere / Ocentric\\\",DATUM[\\\"Europa (2015) - Sphere\\\",SPHEROID[\\\"Europa (2015) - Sphere\\\",1560800,0]],PRIMEM[\\\"Reference Meridian\\\",0],UNIT[\\\"degree\\\",0.0174532925199433,AUTHORITY[\\\"EPSG\\\",\\\"9122\\\"]]],PROJECTION[\\\"Equirectangular\\\"],PARAMETER[\\\"standard_parallel_1\\\",0],PARAMETER[\\\"central_meridian\\\",180],PARAMETER[\\\"false_easting\\\",0],PARAMETER[\\\"false_northing\\\",0],UNIT[\\\"metre\\\",1,AUTHORITY[\\\"EPSG\\\",\\\"9001\\\"]],AXIS[\\\"Easting\\\",EAST],AXIS[\\\"Northing\\\",NORTH]]\"",
+    "proj:projjson": {
+      "$schema": "https://proj.org/schemas/v0.6/projjson.schema.json",
+      "type": "ProjectedCRS",
+      "name": "Europa (2015) - Sphere / Ocentric / Equirectangular, clon = 180",
+      "base_crs": {
+        "name": "Europa (2015) - Sphere / Ocentric",
+        "datum": {
+          "type": "GeodeticReferenceFrame",
+          "name": "Europa (2015) - Sphere",
+          "ellipsoid": {
+            "name": "Europa (2015) - Sphere",
+            "radius": 1560800
+          },
+          "prime_meridian": {
+            "name": "Reference Meridian",
+            "longitude": 0
+          }
+        },
+        "coordinate_system": {
+          "subtype": "ellipsoidal",
+          "axis": [
+            {
+              "name": "Latitude",
+              "abbreviation": "lat",
+              "direction": "north",
+              "unit": "degree"
+            },
+            {
+              "name": "Longitude",
+              "abbreviation": "lon",
+              "direction": "east",
+              "unit": "degree"
+            }
+          ]
+        }
+      },
+      "conversion": {
+        "name": "Equidistant Cylindrical",
+        "method": {
+          "name": "Equidistant Cylindrical",
+          "id": {
+            "authority": "EPSG",
+            "code": 1028
+          }
+        },
+        "parameters": [
+          {
+            "name": "Latitude of 1st standard parallel",
+            "value": 0,
+            "unit": "degree",
+            "id": {
+              "authority": "EPSG",
+              "code": 8823
+            }
+          },
+          {
+            "name": "Latitude of natural origin",
+            "value": 0,
+            "unit": {
+              "type": "Unit",
+              "name": "",
+              "conversion_factor": 1
+            },
+            "id": {
+              "authority": "EPSG",
+              "code": 8801
+            }
+          },
+          {
+            "name": "Longitude of natural origin",
+            "value": 180,
+            "unit": "degree",
+            "id": {
+              "authority": "EPSG",
+              "code": 8802
+            }
+          },
+          {
+            "name": "False easting",
+            "value": 0,
+            "unit": "metre",
+            "id": {
+              "authority": "EPSG",
+              "code": 8806
+            }
+          },
+          {
+            "name": "False northing",
+            "value": 0,
+            "unit": "metre",
+            "id": {
+              "authority": "EPSG",
+              "code": 8807
+            }
+          }
+        ]
+      },
+      "coordinate_system": {
+        "subtype": "Cartesian",
+        "axis": [
+          {
+            "name": "Easting",
+            "abbreviation": "",
+            "direction": "east",
+            "unit": "metre"
+          },
+          {
+            "name": "Northing",
+            "abbreviation": "",
+            "direction": "north",
+            "unit": "metre"
+          }
+        ]
+      }
+    },
+    "proj:bbox": [
+      134.6329802270031,
+      -45.0312229156239,
+      149.012820803998,
+      -42.123851223356596
+    ],
+    "proj:centroid": {
+      "lat": -43.71393647494075,
+      "lon": 141.44571634741718
+    },
+    "proj:shape": [
+      133,
+      642
+    ],
+    "proj:transform": [
+      -1236786.1079616144,
+      614.0078951699215,
+      0,
+      -1146374.9999678,
+      0,
+      -614.0078951699215
+    ],
+    "cube:dimensions": {
+      "x": {
+        "type": "spatial",
+        "axis": "x",
+        "extent": [
+          134.6329802270031,
+          149.012820803998
+        ]
+      },
+      "y": {
+        "type": "spatial",
+        "axis": "y",
+        "extent": [
+          -45.0312229156239,
+          -42.123851223356596
+        ]
+      }
+    },
+    "ssys:targets": [
+      "Europa"
+    ],
+    "datetime": null,
+    "created": "2023-06-05T04:26:15.954Z",
+    "updated": "2023-06-05T04:26:15.954Z"
+  },
+  "geometry": {
+    "type": "MultiPolygon",
+    "coordinates": [
+      [
+        [
+          [
+            134.6329802270031,
+            -43.77576695759938
+          ],
+          [
+            134.86269014037362,
+            -43.7262094855721
+          ],
+          [
+            135.04645807107005,
+            -43.67665201354482
+          ],
+          [
+            135.2531969931035,
+            -43.62709454151753
+          ],
+          [
+            135.45993591513698,
+            -43.577537069490255
+          ],
+          [
+            135.66667483717046,
+            -43.527979597462966
+          ],
+          [
+            135.87341375920394,
+            -43.478422125435685
+          ],
+          [
+            136.05718168990035,
+            -43.4288646534084
+          ],
+          [
+            136.2639206119338,
+            -43.379307181381115
+          ],
+          [
+            136.44768854263023,
+            -43.32974970935383
+          ],
+          [
+            136.65442746466368,
+            -43.280192237326546
+          ],
+          [
+            136.83819539536012,
+            -43.23063476529927
+          ],
+          [
+            137.0449343173936,
+            -43.164558135929546
+          ],
+          [
+            137.27464423076412,
+            -43.09848150655984
+          ],
+          [
+            137.50435414413462,
+            -43.032404877190125
+          ],
+          [
+            137.68812207483109,
+            -42.98284740516285
+          ],
+          [
+            137.89486099686454,
+            -42.93328993313556
+          ],
+          [
+            138.07862892756097,
+            -42.88373246110828
+          ],
+          [
+            138.3083388409315,
+            -42.81765583173857
+          ],
+          [
+            138.51507776296498,
+            -42.75157920236885
+          ],
+          [
+            138.74478767633548,
+            -42.68550257299914
+          ],
+          [
+            138.974497589706,
+            -42.61942594362944
+          ],
+          [
+            139.02043957238013,
+            -42.602906786287
+          ],
+          [
+            139.25014948575065,
+            -42.58638762894457
+          ],
+          [
+            139.47985939912118,
+            -42.52031099957487
+          ],
+          [
+            139.68659832115463,
+            -42.45423437020515
+          ],
+          [
+            139.8933372431881,
+            -42.388157740835446
+          ],
+          [
+            140.1000761652216,
+            -42.322081111465735
+          ],
+          [
+            140.30681508725505,
+            -42.25600448209602
+          ],
+          [
+            140.5365250006256,
+            -42.189927852726306
+          ],
+          [
+            140.74326392265905,
+            -42.123851223356596
+          ],
+          [
+            140.90406086201844,
+            -42.27252363943845
+          ],
+          [
+            141.04188681004075,
+            -42.43771521286272
+          ],
+          [
+            141.17971275806306,
+            -42.58638762894457
+          ],
+          [
+            141.3175387060854,
+            -42.73506004502643
+          ],
+          [
+            141.4553646541077,
+            -42.86721330376585
+          ],
+          [
+            141.5472486194559,
+            -43.032404877190125
+          ],
+          [
+            141.6850745674782,
+            -43.181077293271976
+          ],
+          [
+            141.91478448084877,
+            -43.197596450614405
+          ],
+          [
+            142.1444943942193,
+            -43.11500066390227
+          ],
+          [
+            142.3282623249157,
+            -43.048924034532554
+          ],
+          [
+            142.55797223828623,
+            -43.08196234921742
+          ],
+          [
+            142.78768215165675,
+            -42.99936656250527
+          ],
+          [
+            143.01739206502728,
+            -42.91677077579314
+          ],
+          [
+            143.2471019783978,
+            -42.83417498908099
+          ],
+          [
+            143.47681189176834,
+            -42.98284740516285
+          ],
+          [
+            143.61463783979065,
+            -43.131519821244694
+          ],
+          [
+            143.75246378781296,
+            -43.296711394668975
+          ],
+          [
+            143.9821737011835,
+            -43.461902968093256
+          ],
+          [
+            144.18891262321696,
+            -43.379307181381115
+          ],
+          [
+            144.4186225365875,
+            -43.296711394668975
+          ],
+          [
+            144.64833244995802,
+            -43.21411560795684
+          ],
+          [
+            144.87804236332855,
+            -43.131519821244694
+          ],
+          [
+            145.084781285362,
+            -43.048924034532554
+          ],
+          [
+            145.31449119873253,
+            -42.96632824782042
+          ],
+          [
+            145.54420111210308,
+            -42.88373246110828
+          ],
+          [
+            145.77391102547358,
+            -42.94980909047799
+          ],
+          [
+            145.93470796483297,
+            -43.11500066390227
+          ],
+          [
+            146.07253391285528,
+            -43.263673079984116
+          ],
+          [
+            146.2103598608776,
+            -43.412345496065974
+          ],
+          [
+            146.44006977424812,
+            -43.412345496065974
+          ],
+          [
+            146.66977968761861,
+            -43.32974970935383
+          ],
+          [
+            146.87651860965212,
+            -43.247153922641694
+          ],
+          [
+            147.10622852302262,
+            -43.148038978587124
+          ],
+          [
+            147.3129674450561,
+            -43.06544319187499
+          ],
+          [
+            147.54267735842663,
+            -42.98284740516285
+          ],
+          [
+            147.77238727179716,
+            -42.88373246110828
+          ],
+          [
+            148.00209718516768,
+            -42.78461751705371
+          ],
+          [
+            148.2318070985382,
+            -42.91677077579314
+          ],
+          [
+            148.39260403789757,
+            -43.08196234921742
+          ],
+          [
+            148.5304299859199,
+            -43.23063476529927
+          ],
+          [
+            148.69122692527927,
+            -43.395826338723545
+          ],
+          [
+            148.85202386463862,
+            -43.544498754805396
+          ],
+          [
+            149.012820803998,
+            -43.69577945888868
+          ],
+          [
+            148.80245488333236,
+            -43.87488190165395
+          ],
+          [
+            148.56718357205918,
+            -43.97399684570852
+          ],
+          [
+            148.33747365868868,
+            -44.07311178976309
+          ],
+          [
+            148.1072801455005,
+            -44.17222673381765
+          ],
+          [
+            147.899332223923,
+            -44.254822520529785
+          ],
+          [
+            147.6708313100965,
+            -44.337418307241926
+          ],
+          [
+            147.46355505493236,
+            -44.4365332512965
+          ],
+          [
+            147.2404274724128,
+            -44.502609880666206
+          ],
+          [
+            147.01434455767443,
+            -44.370456621926785
+          ],
+          [
+            146.85354761831508,
+            -44.20526504850251
+          ],
+          [
+            146.69275067895566,
+            -44.05659263242066
+          ],
+          [
+            146.4702947628495,
+            -44.08963094710551
+          ],
+          [
+            146.2690635054056,
+            -44.17222673381765
+          ],
+          [
+            146.0628619165028,
+            -44.254822520529785
+          ],
+          [
+            145.83248705338306,
+            -44.353937464584355
+          ],
+          [
+            145.60162859044567,
+            -44.4365332512965
+          ],
+          [
+            145.37191867707517,
+            -44.519129038008636
+          ],
+          [
+            145.14220876370464,
+            -44.601724824720776
+          ],
+          [
+            144.90445900336613,
+            -44.684320611432916
+          ],
+          [
+            144.6713034412951,
+            -44.634763139405635
+          ],
+          [
+            144.53347749327273,
+            -44.469571565981354
+          ],
+          [
+            144.39565154525044,
+            -44.30437999255708
+          ],
+          [
+            144.2348546058911,
+            -44.1391884191328
+          ],
+          [
+            144.0087716911527,
+            -44.122669261790364
+          ],
+          [
+            143.8104957659276,
+            -44.20526504850251
+          ],
+          [
+            143.58018135278508,
+            -44.28786083521465
+          ],
+          [
+            143.35047143941455,
+            -44.370456621926785
+          ],
+          [
+            143.12076152604402,
+            -44.453052408638925
+          ],
+          [
+            142.8910516126735,
+            -44.535648195351065
+          ],
+          [
+            142.66134169930294,
+            -44.618243982063206
+          ],
+          [
+            142.4673644391234,
+            -44.684320611432916
+          ],
+          [
+            142.2386754587012,
+            -44.634763139405635
+          ],
+          [
+            142.01754944209347,
+            -44.71735892611777
+          ],
+          [
+            141.8105315201652,
+            -44.783435555487486
+          ],
+          [
+            141.70804555881526,
+            -44.81647387017234
+          ],
+          [
+            141.47144434804363,
+            -44.783435555487486
+          ],
+          [
+            141.23828878597257,
+            -44.71735892611777
+          ],
+          [
+            141.0189158187037,
+            -44.618243982063206
+          ],
+          [
+            140.85811887934432,
+            -44.453052408638925
+          ],
+          [
+            140.720292931322,
+            -44.30437999255708
+          ],
+          [
+            140.60543797463677,
+            -44.1391884191328
+          ],
+          [
+            140.46761202661443,
+            -43.97399684570852
+          ],
+          [
+            140.23279744850234,
+            -43.85836274431152
+          ],
+          [
+            140.06434351203063,
+            -43.92443937368123
+          ],
+          [
+            139.83046926689724,
+            -43.99051600305095
+          ],
+          [
+            139.6237303448638,
+            -44.00703516039337
+          ],
+          [
+            139.3969085970707,
+            -44.07311178976309
+          ],
+          [
+            139.21314066637427,
+            -44.122669261790364
+          ],
+          [
+            138.98416958605844,
+            -44.18874589116008
+          ],
+          [
+            138.77721731116426,
+            -44.254822520529785
+          ],
+          [
+            138.60007043091207,
+            -44.31759531843101
+          ],
+          [
+            138.36321398690333,
+            -44.370456621926785
+          ],
+          [
+            138.1840252407545,
+            -44.420014093954066
+          ],
+          [
+            137.97728631872104,
+            -44.535648195351065
+          ],
+          [
+            137.78862016193065,
+            -44.585205667378354
+          ],
+          [
+            137.60434551819006,
+            -44.634763139405635
+          ],
+          [
+            137.39760659615658,
+            -44.684320611432916
+          ],
+          [
+            137.21383866546014,
+            -44.733878083460205
+          ],
+          [
+            137.0070997434267,
+            -44.783435555487486
+          ],
+          [
+            136.82333181273026,
+            -44.83299302751476
+          ],
+          [
+            136.61709960374102,
+            -44.882550499542056
+          ],
+          [
+            136.45630266438164,
+            -44.93210797156933
+          ],
+          [
+            136.24860661770913,
+            -44.98166544359662
+          ],
+          [
+            136.03783769719544,
+            -45.0312229156239
+          ],
+          [
+            135.80450078519274,
+            -45.0312229156239
+          ],
+          [
+            135.56262975876146,
+            -45.0312229156239
+          ],
+          [
+            135.41399393246286,
+            -44.866031342199626
+          ],
+          [
+            135.2991389757776,
+            -44.70083976877534
+          ],
+          [
+            135.18428401909233,
+            -44.552167352693495
+          ],
+          [
+            135.0694290624071,
+            -44.386975779269214
+          ],
+          [
+            134.9545741057218,
+            -44.238303363187356
+          ],
+          [
+            134.83971914903657,
+            -44.07311178976309
+          ],
+          [
+            134.72486419235128,
+            -43.90792021633881
+          ],
+          [
+            134.6329802270031,
+            -43.77576695759938
+          ]
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/geo+json",
+      "href": "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod/collections/galileo_usgs_photogrammetrically_controlled_dtms/items/Agenor"
+    },
+    {
+      "rel": "parent",
+      "type": "application/json",
+      "href": "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod/collections/galileo_usgs_photogrammetrically_controlled_dtms"
+    },
+    {
+      "rel": "collection",
+      "type": "application/json",
+      "href": "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod/collections/galileo_usgs_photogrammetrically_controlled_dtms"
+    },
+    {
+      "rel": "root",
+      "type": "application/json",
+      "href": "https://g6goyz4w56.execute-api.us-west-2.amazonaws.com/prod"
+    }
+  ],
+  "assets": {
+    "thumbnail": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor_hillshade.jpg",
+      "type": "image/jpeg",
+      "title": "Image Thumbnail",
+      "key": "thumbnail",
+      "roles": [
+        "thumbnail"
+      ]
+    },
+    "hillshade": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor_hillshade.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Hillshade",
+      "key": "hillshade",
+      "roles": [
+        "data",
+        "overview"
+      ]
+    },
+    "dtm": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Digital Terrain Model: Agenor",
+      "key": "dtm",
+      "roles": [
+        "data"
+      ]
+    },
+    "provenance": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/provenance.txt",
+      "type": "text/plain",
+      "title": "Provenance",
+      "key": "provenance",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "fom": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor_FOM.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Figure of Merit",
+      "key": "fom",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "confidence": {
+      "href": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/Agenor_ClrConf.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Confidence Map",
+      "key": "confidence",
+      "roles": [
+        "metadata"
+      ]
+    }
+  },
+  "bbox": [
+    134.6329802270031,
+    -45.0312229156239,
+    149.012820803998,
+    -42.123851223356596
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/datacube/v1.0.0/schema.json",
+    "https://raw.githubusercontent.com/thareUSGS/ssys/main/json-schema/schema.json"
+  ],
+  "collection": "galileo_usgs_photogrammetrically_controlled_dtms"
+}

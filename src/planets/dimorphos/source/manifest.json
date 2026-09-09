@@ -29,7 +29,8 @@
       "consumers": [
         "terrain",
         "shape",
-        "elevation"
+        "elevation",
+        "facet-science"
       ],
       "lensId": "elevation",
       "projection": {
@@ -59,6 +60,22 @@
       ],
       "expectedBytes": 862936,
       "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",
+      "license": "Public mission scientific data; retain the dataset citation and source notices.",
+      "acquisition": "Pinned original restored through source/preparation/acquisition.json.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "id": "dimorphos-facet-science",
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "catalog": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "consumers": [
+        "facet-science"
+      ],
+      "expectedBytes": 4726080,
+      "expectedSha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
+      "coverage": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change."
     }
   ],
   "generatedIntermediates": [
@@ -92,14 +109,14 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 10628,
-      "expectedSha256": "b72a21bb7645f63c91b3afe2049f8dd61cc1f18ac7a15509348da81e506a3014"
+      "expectedBytes": 12123,
+      "expectedSha256": "9a008bbcf1677ed8931fc2e0fee6c72c97968aadce8eda951af0f5f5cbd47091"
     },
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 859,
-      "expectedSha256": "ebd4039d1be7fbdbf0fde58c1943a02ea507e65ee2351c0fc216b0007609ba46"
+      "expectedBytes": 2127,
+      "expectedSha256": "22f1e68bf72ce32a4eca435bc0e51769b3cea1a78f41ef25e6b29411253fb75c"
     },
     {
       "path": "preparation/navigation.json",
@@ -116,8 +133,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned source documentation or authored preparation input.",
-      "expectedBytes": 3059,
-      "expectedSha256": "b4e27a4501e22063a3d957ab0e7c4a737c30f4d97a0dd313e742222665e63b99"
+      "expectedBytes": 4369,
+      "expectedSha256": "084588c41e8bda19afdb5bdaf75350f5d39b1e919b914518eaae5828c2c4f4fe"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -178,6 +195,27 @@
       "purpose": "Pinned source documentation or authored preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
+    },
+    {
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "purpose": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "expectedBytes": 4728960,
+      "expectedSha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd"
+    },
+    {
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "purpose": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "expectedBytes": 6781,
+      "expectedSha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e"
+    },
+    {
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "purpose": "Exact reviewed B2 source candidate; only selected recipe fields become display layers.",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "expectedBytes": 7093,
+      "expectedSha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297"
     }
   ]
 }

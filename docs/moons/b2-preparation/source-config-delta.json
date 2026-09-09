@@ -1,0 +1,35 @@
+{
+  "checkedAtEpoch": 1788915715.247544,
+  "baseFullInventory": "source-closure-13.json",
+  "scope": "All four source configurations changed after the full 424-entry source inventory; scientific binary inputs are unchanged.",
+  "changes": [
+    {
+      "body": "europa",
+      "path": "source/content/object.json",
+      "bytes": 12668,
+      "sha256": "9cb3a38ce2bbaedcbf381497414df8e44ed8ec17feadce7e987167e3a3294c54",
+      "manifestAndDescriptorAgree": true
+    },
+    {
+      "body": "phobos",
+      "path": "source/preparation/terrestrial.json",
+      "bytes": 5913,
+      "sha256": "2558b5d647fe5b8a0e391519361d5129c7dbd5089c93b9f33f6aa2315d6bee72",
+      "manifestAndDescriptorAgree": true
+    },
+    {
+      "body": "deimos",
+      "path": "source/preparation/terrestrial.json",
+      "bytes": 5836,
+      "sha256": "c55768b273de837e73cfbd6c0845dafd8ffaf1ff859d51b14ae9be82d0a4f3db",
+      "manifestAndDescriptorAgree": true
+    },
+    {
+      "body": "dimorphos",
+      "path": "source/preparation/terrestrial.json",
+      "bytes": 4369,
+      "sha256": "084588c41e8bda19afdb5bdaf75350f5d39b1e919b914518eaae5828c2c4f4fe",
+      "manifestAndDescriptorAgree": true
+    }
+  ]
+}

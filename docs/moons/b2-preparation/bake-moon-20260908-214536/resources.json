@@ -1,0 +1,56 @@
+{
+  "id": "moon",
+  "pid": 19644,
+  "cwd": "/Users/ekrof/fed/cssEarth-pluto-small-moons",
+  "command": [
+    "/Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "tools/objects/dist/prepare-authored.js",
+    "moon",
+    "--write"
+  ],
+  "heapMiB": 4096,
+  "before": {
+    "time": 1788914736.224142,
+    "pressureLevel": 1,
+    "swapBytes": 8329164226.56,
+    "compressorBytes": 6389137408
+  },
+  "samples": [
+    {
+      "time": 1788914736.230748,
+      "pressureLevel": 1,
+      "swapBytes": 8329164226.56,
+      "compressorBytes": 6387597312,
+      "process": "19644 19638 19638   1136   0.0 /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node tools/objects/dist/prepare-authored.js moon --write"
+    },
+    {
+      "time": 1788914741.246861,
+      "pressureLevel": 1,
+      "swapBytes": 8178169282.56,
+      "compressorBytes": 7603617792,
+      "process": "19644 19638 19638 535232 117.6 /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node tools/objects/dist/prepare-authored.js moon --write"
+    },
+    {
+      "time": 1788914746.262829,
+      "pressureLevel": 1,
+      "swapBytes": 8161392066.56,
+      "compressorBytes": 8382300160,
+      "process": "19644 19638 19638 598816 106.5 /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node tools/objects/dist/prepare-authored.js moon --write"
+    },
+    {
+      "time": 1788914751.278134,
+      "pressureLevel": 1,
+      "swapBytes": 8144614850.56,
+      "compressorBytes": 10455433216,
+      "process": "19644 19638 19638 715872  98.9 /Users/ekrof/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node tools/objects/dist/prepare-authored.js moon --write"
+    }
+  ],
+  "after": {
+    "time": 1788914751.306149,
+    "pressureLevel": 1,
+    "swapBytes": 8144614850.56,
+    "compressorBytes": 10344710144
+  },
+  "exitCode": -15,
+  "stoppedReason": "compressor grew by more than2GiB"
+}

@@ -31,6 +31,11 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "slope",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -51,7 +56,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "b4e27a4501e22063a3d957ab0e7c4a737c30f4d97a0dd313e742222665e63b99"
+          "sha256": "084588c41e8bda19afdb5bdaf75350f5d39b1e919b914518eaae5828c2c4f4fe"
         },
         {
           "id": "rotation",
@@ -61,7 +66,7 @@
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "b72a21bb7645f63c91b3afe2049f8dd61cc1f18ac7a15509348da81e506a3014"
+          "sha256": "9a008bbcf1677ed8931fc2e0fee6c72c97968aadce8eda951af0f5f5cbd47091"
         },
         {
           "id": "title",
@@ -76,7 +81,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ebd4039d1be7fbdbf0fde58c1943a02ea507e65ee2351c0fc216b0007609ba46"
+          "sha256": "22f1e68bf72ce32a4eca435bc0e51769b3cea1a78f41ef25e6b29411253fb75c"
         }
       ]
     },

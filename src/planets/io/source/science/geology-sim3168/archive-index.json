@@ -1,0 +1,2485 @@
+{
+  "archiveUrl": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
+  "entries": [
+    {
+      "name": "Io_SIM3168_Database/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 0
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_geology_metadata.html",
+      "method": 8,
+      "crc": 782885918,
+      "compressed": 5356,
+      "bytes": 24493,
+      "offset": 50
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_geology_metadata.txt",
+      "method": 8,
+      "crc": 3956181196,
+      "compressed": 4334,
+      "bytes": 13879,
+      "offset": 5480
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_geology_metadata.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 9887
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 14553
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000001.gdbindexes",
+      "method": 8,
+      "crc": 2139981143,
+      "compressed": 115,
+      "bytes": 191,
+      "offset": 14626
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000001.gdbtable",
+      "method": 8,
+      "crc": 1349372870,
+      "compressed": 1322,
+      "bytes": 2029,
+      "offset": 14834
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000001.gdbtablx",
+      "method": 8,
+      "crc": 1451450082,
+      "compressed": 163,
+      "bytes": 5152,
+      "offset": 16247
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000002.gdbtable",
+      "method": 8,
+      "crc": 2030875298,
+      "compressed": 480,
+      "bytes": 920,
+      "offset": 16501
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000002.gdbtablx",
+      "method": 8,
+      "crc": 1371804875,
+      "compressed": 80,
+      "bytes": 5152,
+      "offset": 17072
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000003.gdbindexes",
+      "method": 8,
+      "crc": 2139981143,
+      "compressed": 115,
+      "bytes": 191,
+      "offset": 17243
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000003.gdbtable",
+      "method": 8,
+      "crc": 2499267665,
+      "compressed": 413,
+      "bytes": 825,
+      "offset": 17451
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000003.gdbtablx",
+      "method": 8,
+      "crc": 980621859,
+      "compressed": 41,
+      "bytes": 5152,
+      "offset": 17955
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000004.gdbtable",
+      "method": 8,
+      "crc": 3009204324,
+      "compressed": 151,
+      "bytes": 179,
+      "offset": 18087
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000004.gdbtablx",
+      "method": 8,
+      "crc": 3162900780,
+      "compressed": 34,
+      "bytes": 5152,
+      "offset": 18329
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000005.gdbindexes",
+      "method": 8,
+      "crc": 2139981143,
+      "compressed": 115,
+      "bytes": 191,
+      "offset": 18454
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000005.gdbtable",
+      "method": 8,
+      "crc": 2355796313,
+      "compressed": 195,
+      "bytes": 235,
+      "offset": 18662
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000005.gdbtablx",
+      "method": 8,
+      "crc": 3699540174,
+      "compressed": 34,
+      "bytes": 5152,
+      "offset": 18948
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000006.gdbindexes",
+      "method": 8,
+      "crc": 2139981143,
+      "compressed": 115,
+      "bytes": 191,
+      "offset": 19073
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000006.gdbtable",
+      "method": 8,
+      "crc": 4140152954,
+      "compressed": 423,
+      "bytes": 947,
+      "offset": 19281
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000006.gdbtablx",
+      "method": 8,
+      "crc": 2725119531,
+      "compressed": 72,
+      "bytes": 5152,
+      "offset": 19795
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000007.gdbtable",
+      "method": 8,
+      "crc": 277468180,
+      "compressed": 276,
+      "bytes": 491,
+      "offset": 19958
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000007.gdbtablx",
+      "method": 8,
+      "crc": 2040228144,
+      "compressed": 75,
+      "bytes": 5152,
+      "offset": 20325
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000008.gdbtable",
+      "method": 8,
+      "crc": 314488090,
+      "compressed": 563,
+      "bytes": 1912,
+      "offset": 20491
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000008.gdbtablx",
+      "method": 8,
+      "crc": 1418813120,
+      "compressed": 134,
+      "bytes": 5152,
+      "offset": 21145
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000017.gdbtable",
+      "method": 8,
+      "crc": 642858985,
+      "compressed": 190,
+      "bytes": 247,
+      "offset": 21370
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000017.gdbtablx",
+      "method": 8,
+      "crc": 4221537549,
+      "compressed": 19,
+      "bytes": 32,
+      "offset": 21651
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000018.gdbindexes",
+      "method": 8,
+      "crc": 2139981143,
+      "compressed": 115,
+      "bytes": 191,
+      "offset": 21761
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000018.gdbtable",
+      "method": 8,
+      "crc": 1614245074,
+      "compressed": 167,
+      "bytes": 201,
+      "offset": 21969
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000018.gdbtablx",
+      "method": 8,
+      "crc": 4221537549,
+      "compressed": 19,
+      "bytes": 32,
+      "offset": 22227
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000019.gdbindexes",
+      "method": 8,
+      "crc": 2139981143,
+      "compressed": 115,
+      "bytes": 191,
+      "offset": 22337
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000019.gdbtable",
+      "method": 8,
+      "crc": 2038481853,
+      "compressed": 431,
+      "bytes": 780,
+      "offset": 22545
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000019.gdbtablx",
+      "method": 8,
+      "crc": 885657639,
+      "compressed": 58,
+      "bytes": 5152,
+      "offset": 23067
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000001b.gdbtable",
+      "method": 8,
+      "crc": 2674926165,
+      "compressed": 800,
+      "bytes": 1864,
+      "offset": 23216
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000001b.gdbtablx",
+      "method": 8,
+      "crc": 2685604566,
+      "compressed": 65,
+      "bytes": 5152,
+      "offset": 24107
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000001c.freelist",
+      "method": 8,
+      "crc": 2268161159,
+      "compressed": 126,
+      "bytes": 16728,
+      "offset": 24263
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000001c.gdbindexes",
+      "method": 8,
+      "crc": 2139981143,
+      "compressed": 115,
+      "bytes": 191,
+      "offset": 24480
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000001c.gdbtable",
+      "method": 8,
+      "crc": 501563246,
+      "compressed": 16723,
+      "bytes": 144565,
+      "offset": 24688
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000001c.gdbtablx",
+      "method": 8,
+      "crc": 2635909763,
+      "compressed": 94,
+      "bytes": 5152,
+      "offset": 41502
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000024.gdbindexes",
+      "method": 8,
+      "crc": 2139981143,
+      "compressed": 115,
+      "bytes": 191,
+      "offset": 41687
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000024.gdbtable",
+      "method": 8,
+      "crc": 2019248350,
+      "compressed": 192,
+      "bytes": 268,
+      "offset": 41895
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000024.gdbtablx",
+      "method": 8,
+      "crc": 4221537549,
+      "compressed": 19,
+      "bytes": 32,
+      "offset": 42178
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000036.gdbindexes",
+      "method": 8,
+      "crc": 4025579243,
+      "compressed": 384,
+      "bytes": 690,
+      "offset": 42288
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000036.gdbtable",
+      "method": 8,
+      "crc": 2616765489,
+      "compressed": 60706,
+      "bytes": 126503,
+      "offset": 42765
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000036.gdbtablx",
+      "method": 8,
+      "crc": 2449417925,
+      "compressed": 994,
+      "bytes": 5152,
+      "offset": 103562
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000036.spx",
+      "method": 8,
+      "crc": 2910259761,
+      "compressed": 690,
+      "bytes": 12310,
+      "offset": 104647
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003a.freelist",
+      "method": 8,
+      "crc": 2140037773,
+      "compressed": 43,
+      "bytes": 4440,
+      "offset": 105423
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003a.gdbindexes",
+      "method": 8,
+      "crc": 3287230127,
+      "compressed": 388,
+      "bytes": 690,
+      "offset": 105557
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003a.gdbtable",
+      "method": 8,
+      "crc": 2159886324,
+      "compressed": 11699,
+      "bytes": 30359,
+      "offset": 106038
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003a.gdbtablx",
+      "method": 8,
+      "crc": 3703951456,
+      "compressed": 515,
+      "bytes": 5152,
+      "offset": 117828
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003a.spx",
+      "method": 8,
+      "crc": 1561687452,
+      "compressed": 600,
+      "bytes": 4118,
+      "offset": 118434
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003b.gdbindexes",
+      "method": 8,
+      "crc": 212050130,
+      "compressed": 389,
+      "bytes": 690,
+      "offset": 119120
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003b.gdbtable",
+      "method": 8,
+      "crc": 1678503919,
+      "compressed": 5127,
+      "bytes": 11160,
+      "offset": 119602
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003b.gdbtablx",
+      "method": 8,
+      "crc": 3333973357,
+      "compressed": 360,
+      "bytes": 5152,
+      "offset": 124820
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003b.spx",
+      "method": 8,
+      "crc": 4261527773,
+      "compressed": 486,
+      "bytes": 4118,
+      "offset": 125271
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003c.gdbindexes",
+      "method": 8,
+      "crc": 1443142314,
+      "compressed": 383,
+      "bytes": 690,
+      "offset": 125843
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003c.gdbtable",
+      "method": 8,
+      "crc": 3869934986,
+      "compressed": 136965,
+      "bytes": 318651,
+      "offset": 126319
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003c.gdbtablx",
+      "method": 8,
+      "crc": 522781872,
+      "compressed": 2969,
+      "bytes": 10272,
+      "offset": 263375
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003c.spx",
+      "method": 8,
+      "crc": 716318852,
+      "compressed": 3391,
+      "bytes": 24598,
+      "offset": 266435
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003d.gdbindexes",
+      "method": 8,
+      "crc": 3091607835,
+      "compressed": 384,
+      "bytes": 690,
+      "offset": 269912
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003d.gdbtable",
+      "method": 8,
+      "crc": 1755166493,
+      "compressed": 2993,
+      "bytes": 4962,
+      "offset": 270389
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003d.gdbtablx",
+      "method": 8,
+      "crc": 3581298818,
+      "compressed": 95,
+      "bytes": 5152,
+      "offset": 273473
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003d.spx",
+      "method": 8,
+      "crc": 1881794512,
+      "compressed": 96,
+      "bytes": 4118,
+      "offset": 273659
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003e.gdbindexes",
+      "method": 8,
+      "crc": 1848555004,
+      "compressed": 391,
+      "bytes": 690,
+      "offset": 273841
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003e.gdbtable",
+      "method": 8,
+      "crc": 3424846156,
+      "compressed": 7833,
+      "bytes": 16310,
+      "offset": 274325
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003e.gdbtablx",
+      "method": 8,
+      "crc": 1790228294,
+      "compressed": 577,
+      "bytes": 5152,
+      "offset": 282249
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003e.spx",
+      "method": 8,
+      "crc": 3469774667,
+      "compressed": 658,
+      "bytes": 4118,
+      "offset": 282917
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003f.gdbindexes",
+      "method": 8,
+      "crc": 2737497893,
+      "compressed": 389,
+      "bytes": 690,
+      "offset": 283661
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003f.gdbtable",
+      "method": 8,
+      "crc": 4104020746,
+      "compressed": 41219,
+      "bytes": 91160,
+      "offset": 284143
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003f.gdbtablx",
+      "method": 8,
+      "crc": 2897155357,
+      "compressed": 2863,
+      "bytes": 10272,
+      "offset": 325453
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a0000003f.spx",
+      "method": 8,
+      "crc": 4192095242,
+      "compressed": 4829,
+      "bytes": 24598,
+      "offset": 328407
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000067.gdbindexes",
+      "method": 8,
+      "crc": 157648268,
+      "compressed": 385,
+      "bytes": 694,
+      "offset": 333322
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000067.gdbtable",
+      "method": 8,
+      "crc": 1169631861,
+      "compressed": 1429955,
+      "bytes": 1528565,
+      "offset": 333800
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000067.gdbtablx",
+      "method": 8,
+      "crc": 2438221668,
+      "compressed": 4421,
+      "bytes": 10272,
+      "offset": 1763846
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000067.spx",
+      "method": 8,
+      "crc": 3134684213,
+      "compressed": 3062,
+      "bytes": 28694,
+      "offset": 1768358
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000068.gdbindexes",
+      "method": 8,
+      "crc": 4189426946,
+      "compressed": 389,
+      "bytes": 710,
+      "offset": 1771506
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000068.gdbtable",
+      "method": 8,
+      "crc": 2113053886,
+      "compressed": 842069,
+      "bytes": 934549,
+      "offset": 1771988
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000068.gdbtablx",
+      "method": 8,
+      "crc": 3502632788,
+      "compressed": 9638,
+      "bytes": 20512,
+      "offset": 2614148
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/a00000068.spx",
+      "method": 8,
+      "crc": 436889952,
+      "compressed": 7614,
+      "bytes": 57366,
+      "offset": 2623877
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/gdb",
+      "method": 0,
+      "crc": 441235862,
+      "compressed": 81,
+      "bytes": 81,
+      "offset": 2631577
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168.gdb/timestamps",
+      "method": 8,
+      "crc": 3046610907,
+      "compressed": 62,
+      "bytes": 400,
+      "offset": 2631734
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_Arcmap10.mxd",
+      "method": 8,
+      "crc": 2038557645,
+      "compressed": 658668,
+      "bytes": 2648064,
+      "offset": 2631879
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_Arcmap10.pmf",
+      "method": 8,
+      "crc": 2769393042,
+      "compressed": 287483,
+      "bytes": 752128,
+      "offset": 3290628
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_Arcmap93.mxd",
+      "method": 8,
+      "crc": 1776451802,
+      "compressed": 348327,
+      "bytes": 1347072,
+      "offset": 3578192
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 3926600
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.dbf",
+      "method": 8,
+      "crc": 3589708142,
+      "compressed": 9039,
+      "bytes": 36774,
+      "offset": 3926680
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 3935821
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.sbn",
+      "method": 8,
+      "crc": 2854654633,
+      "compressed": 2484,
+      "bytes": 3708,
+      "offset": 3936047
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.sbx",
+      "method": 8,
+      "crc": 3786701954,
+      "compressed": 264,
+      "bytes": 508,
+      "offset": 3938633
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp",
+      "method": 8,
+      "crc": 2431391025,
+      "compressed": 104397,
+      "bytes": 208672,
+      "offset": 3938999
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 4043498
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_DiffuseDeposits.shx",
+      "method": 8,
+      "crc": 1713454006,
+      "compressed": 1517,
+      "bytes": 2812,
+      "offset": 4048197
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoContacts.dbf",
+      "method": 8,
+      "crc": 498748962,
+      "compressed": 55450,
+      "bytes": 300416,
+      "offset": 4049816
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoContacts.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 4105364
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoContacts.sbn",
+      "method": 8,
+      "crc": 597213265,
+      "compressed": 20368,
+      "bytes": 34228,
+      "offset": 4105586
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoContacts.sbx",
+      "method": 8,
+      "crc": 3996407752,
+      "compressed": 1347,
+      "bytes": 3180,
+      "offset": 4126052
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoContacts.shp",
+      "method": 8,
+      "crc": 3579306296,
+      "compressed": 924913,
+      "bytes": 1577748,
+      "offset": 4127497
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoContacts.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 5052508
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoContacts.shx",
+      "method": 8,
+      "crc": 846642006,
+      "compressed": 13219,
+      "bytes": 27092,
+      "offset": 5057203
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_geology_metadata.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 5070520
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf",
+      "method": 8,
+      "crc": 4029951286,
+      "compressed": 49869,
+      "bytes": 178964,
+      "offset": 5075216
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 5125180
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.sbn",
+      "method": 8,
+      "crc": 3976639193,
+      "compressed": 10268,
+      "bytes": 15772,
+      "offset": 5125399
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.sbx",
+      "method": 8,
+      "crc": 1684331917,
+      "compressed": 751,
+      "bytes": 1764,
+      "offset": 5135762
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp",
+      "method": 8,
+      "crc": 2264103816,
+      "compressed": 1647626,
+      "bytes": 2798948,
+      "offset": 5136608
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 6784329
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.shx",
+      "method": 8,
+      "crc": 2928892254,
+      "compressed": 7123,
+      "bytes": 12116,
+      "offset": 6789021
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.dbf",
+      "method": 8,
+      "crc": 971230000,
+      "compressed": 25890,
+      "bytes": 121662,
+      "offset": 6796239
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 6822230
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.sbn",
+      "method": 8,
+      "crc": 4088464970,
+      "compressed": 10174,
+      "bytes": 15548,
+      "offset": 6822455
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.sbx",
+      "method": 8,
+      "crc": 2597546849,
+      "compressed": 656,
+      "bytes": 1524,
+      "offset": 6832730
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp",
+      "method": 8,
+      "crc": 124509718,
+      "compressed": 21243,
+      "bytes": 42100,
+      "offset": 6833487
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 6854831
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnitsPoints.shx",
+      "method": 8,
+      "crc": 3829378934,
+      "compressed": 2330,
+      "bytes": 12100,
+      "offset": 6859529
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_HotSpots_Locations.dbf",
+      "method": 8,
+      "crc": 1253611467,
+      "compressed": 11770,
+      "bytes": 223878,
+      "offset": 6861960
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_HotSpots_Locations.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 6873835
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_HotSpots_Locations.sbn",
+      "method": 8,
+      "crc": 245894159,
+      "compressed": 1282,
+      "bytes": 1908,
+      "offset": 6874064
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_HotSpots_Locations.sbx",
+      "method": 8,
+      "crc": 1579586382,
+      "compressed": 152,
+      "bytes": 284,
+      "offset": 6875451
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_HotSpots_Locations.shp",
+      "method": 8,
+      "crc": 3005835684,
+      "compressed": 1704,
+      "bytes": 4916,
+      "offset": 6875708
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_HotSpots_Locations.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 6877517
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_HotSpots_Locations.shx",
+      "method": 8,
+      "crc": 2117774499,
+      "compressed": 377,
+      "bytes": 1476,
+      "offset": 6882219
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Mountains.dbf",
+      "method": 8,
+      "crc": 3281871151,
+      "compressed": 3248,
+      "bytes": 42010,
+      "offset": 6882701
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Mountains.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 6886045
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Mountains.sbn",
+      "method": 8,
+      "crc": 1684317058,
+      "compressed": 1072,
+      "bytes": 1628,
+      "offset": 6886265
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Mountains.sbx",
+      "method": 8,
+      "crc": 1463467315,
+      "compressed": 144,
+      "bytes": 260,
+      "offset": 6887433
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Mountains.shp",
+      "method": 8,
+      "crc": 2227533157,
+      "compressed": 1506,
+      "bytes": 4020,
+      "offset": 6887673
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Mountains.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 6889275
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Mountains.shx",
+      "method": 8,
+      "crc": 115274605,
+      "compressed": 339,
+      "bytes": 1220,
+      "offset": 6893968
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_PointFeatures.dbf",
+      "method": 8,
+      "crc": 1622510206,
+      "compressed": 4657,
+      "bytes": 25011,
+      "offset": 6894403
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_PointFeatures.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 6899160
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_PointFeatures.sbn",
+      "method": 8,
+      "crc": 3748735522,
+      "compressed": 1765,
+      "bytes": 2868,
+      "offset": 6899384
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_PointFeatures.sbx",
+      "method": 8,
+      "crc": 2378869626,
+      "compressed": 200,
+      "bytes": 372,
+      "offset": 6901249
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_PointFeatures.shp",
+      "method": 8,
+      "crc": 1263064153,
+      "compressed": 3682,
+      "bytes": 7128,
+      "offset": 6901549
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_PointFeatures.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 6905331
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_PointFeatures.shx",
+      "method": 8,
+      "crc": 2158693824,
+      "compressed": 498,
+      "bytes": 2108,
+      "offset": 6910028
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Structure.dbf",
+      "method": 8,
+      "crc": 4277336886,
+      "compressed": 19406,
+      "bytes": 98742,
+      "offset": 6910626
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Structure.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 6930128
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Structure.sbn",
+      "method": 8,
+      "crc": 2274288467,
+      "compressed": 8099,
+      "bytes": 12428,
+      "offset": 6930348
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Structure.sbx",
+      "method": 8,
+      "crc": 2279725525,
+      "compressed": 670,
+      "bytes": 1588,
+      "offset": 6938543
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Structure.shp",
+      "method": 8,
+      "crc": 186042048,
+      "compressed": 264204,
+      "bytes": 554820,
+      "offset": 6939309
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Structure.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 7203609
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_Structure.shx",
+      "method": 8,
+      "crc": 2416667127,
+      "compressed": 4492,
+      "bytes": 8964,
+      "offset": 7208302
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_VolcanicCenters.dbf",
+      "method": 8,
+      "crc": 794259043,
+      "compressed": 710,
+      "bytes": 2722,
+      "offset": 7212890
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_VolcanicCenters.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 7213702
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_VolcanicCenters.sbn",
+      "method": 8,
+      "crc": 541949710,
+      "compressed": 203,
+      "bytes": 284,
+      "offset": 7213928
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_VolcanicCenters.sbx",
+      "method": 8,
+      "crc": 377880846,
+      "compressed": 88,
+      "bytes": 132,
+      "offset": 7214233
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_VolcanicCenters.shp",
+      "method": 8,
+      "crc": 340350006,
+      "compressed": 3638,
+      "bytes": 5928,
+      "offset": 7214423
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_VolcanicCenters.shp.xml",
+      "method": 8,
+      "crc": 3047930696,
+      "compressed": 4593,
+      "bytes": 15229,
+      "offset": 7218163
+    },
+    {
+      "name": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_VolcanicCenters.shx",
+      "method": 8,
+      "crc": 3754024565,
+      "compressed": 145,
+      "bytes": 228,
+      "offset": 7222862
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 7223109
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/iocor_I-2209.pdf",
+      "method": 8,
+      "crc": 1265309351,
+      "compressed": 2608,
+      "bytes": 4475,
+      "offset": 7223174
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/Io_AllGeologyLayers2012.lyr",
+      "method": 8,
+      "crc": 222036939,
+      "compressed": 7887,
+      "bytes": 56320,
+      "offset": 7225863
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/Io_DiffuseDeposits.lyr",
+      "method": 8,
+      "crc": 4155375624,
+      "compressed": 2475,
+      "bytes": 10752,
+      "offset": 7233842
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/Io_GeoContacts.lyr",
+      "method": 8,
+      "crc": 1260075228,
+      "compressed": 1832,
+      "bytes": 8192,
+      "offset": 7236404
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/Io_GeoUnits.lyr",
+      "method": 8,
+      "crc": 585117473,
+      "compressed": 2456,
+      "bytes": 11776,
+      "offset": 7238319
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/Io_HotSpots_Locations.lyr",
+      "method": 8,
+      "crc": 2280151391,
+      "compressed": 1740,
+      "bytes": 8192,
+      "offset": 7240855
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/Io_Mountains.lyr",
+      "method": 8,
+      "crc": 477510148,
+      "compressed": 1629,
+      "bytes": 7168,
+      "offset": 7242685
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/Io_PointFeatures.lyr",
+      "method": 8,
+      "crc": 3326470388,
+      "compressed": 2194,
+      "bytes": 13312,
+      "offset": 7244395
+    },
+    {
+      "name": "Io_SIM3168_Database/layerSymbology/Io_Structure.lyr",
+      "method": 8,
+      "crc": 844328104,
+      "compressed": 1755,
+      "bytes": 8704,
+      "offset": 7246674
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 7248510
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/Io2000_EqualAreaCylindrical_clon180.prj",
+      "method": 8,
+      "crc": 2350219408,
+      "compressed": 239,
+      "bytes": 386,
+      "offset": 7248572
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/Io2000_EquidistantCylindrical_clon180.prj",
+      "method": 8,
+      "crc": 2975895088,
+      "compressed": 238,
+      "bytes": 389,
+      "offset": 7248912
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/Io2000_Mercator_clon0.prj",
+      "method": 8,
+      "crc": 269328829,
+      "compressed": 220,
+      "bytes": 356,
+      "offset": 7249253
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/Io2000_Mercator_clon180.prj",
+      "method": 8,
+      "crc": 894323282,
+      "compressed": 224,
+      "bytes": 360,
+      "offset": 7249560
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/Io2000_NP_clon0.prj",
+      "method": 8,
+      "crc": 397908052,
+      "compressed": 231,
+      "bytes": 367,
+      "offset": 7249873
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/Io2000_NP_Orthographic_clon0.prj",
+      "method": 8,
+      "crc": 4294735563,
+      "compressed": 223,
+      "bytes": 370,
+      "offset": 7250185
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/Io2000_SP_clon0.prj",
+      "method": 8,
+      "crc": 814189203,
+      "compressed": 234,
+      "bytes": 368,
+      "offset": 7250502
+    },
+    {
+      "name": "Io_SIM3168_Database/projections/Io2000_SP_Orthographic_clon0.prj",
+      "method": 8,
+      "crc": 1186706821,
+      "compressed": 224,
+      "bytes": 371,
+      "offset": 7250817
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 7251135
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Io_Basemap_README.html",
+      "method": 8,
+      "crc": 3855730891,
+      "compressed": 3906,
+      "bytes": 9901,
+      "offset": 7251201
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Io_Basemap_README.txt",
+      "method": 8,
+      "crc": 1074696355,
+      "compressed": 3566,
+      "bytes": 8780,
+      "offset": 7255195
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 7258848
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/Io_SSI_VGR_bw_merc180.aux",
+      "method": 8,
+      "crc": 1717984505,
+      "compressed": 2166,
+      "bytes": 10664,
+      "offset": 7258931
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/Io_SSI_VGR_bw_merc180.tfw",
+      "method": 8,
+      "crc": 4108662384,
+      "compressed": 36,
+      "bytes": 38,
+      "offset": 7261205
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/Io_SSI_VGR_bw_merc180.tif",
+      "method": 8,
+      "crc": 2394160933,
+      "compressed": 15621552,
+      "bytes": 50807401,
+      "offset": 7261349
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/Io_SSI_VGR_bw_merc180.tif.xml",
+      "method": 8,
+      "crc": 3744204819,
+      "compressed": 400,
+      "bytes": 673,
+      "offset": 22883009
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/Io_SSI_VGR_color_merge_merc180.aux",
+      "method": 8,
+      "crc": 2058375929,
+      "compressed": 2712,
+      "bytes": 12492,
+      "offset": 22883521
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/Io_SSI_VGR_color_merge_merc180.tfw",
+      "method": 8,
+      "crc": 4108662384,
+      "compressed": 36,
+      "bytes": 38,
+      "offset": 22886350
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/Io_SSI_VGR_color_merge_merc180.tif",
+      "method": 8,
+      "crc": 431261387,
+      "compressed": 93544188,
+      "bytes": 152278783,
+      "offset": 22886503
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Mercator_clon180/Io_SSI_VGR_color_merge_merc180.tif.xml",
+      "method": 8,
+      "crc": 2671616862,
+      "compressed": 405,
+      "bytes": 691,
+      "offset": 116430808
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_north/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 116431334
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_north/Io_SSI_VGR_bw_npole.aux",
+      "method": 8,
+      "crc": 3762894643,
+      "compressed": 2152,
+      "bytes": 10672,
+      "offset": 116431412
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_north/Io_SSI_VGR_bw_npole.tfw",
+      "method": 8,
+      "crc": 911731101,
+      "compressed": 40,
+      "bytes": 46,
+      "offset": 116433665
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_north/Io_SSI_VGR_bw_npole.tif",
+      "method": 8,
+      "crc": 4039568138,
+      "compressed": 2786458,
+      "bytes": 14145893,
+      "offset": 116433806
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_north/Io_SSI_VGR_color_merge_npole.aux",
+      "method": 8,
+      "crc": 3630207793,
+      "compressed": 2246,
+      "bytes": 8864,
+      "offset": 119220365
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_north/Io_SSI_VGR_color_merge_npole.tfw",
+      "method": 8,
+      "crc": 911731101,
+      "compressed": 40,
+      "bytes": 46,
+      "offset": 119222721
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_north/Io_SSI_VGR_color_merge_npole.tif",
+      "method": 8,
+      "crc": 3080452469,
+      "compressed": 13725476,
+      "bytes": 42406051,
+      "offset": 119222871
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_south/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 132948457
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_south/Io_SSI_VGR_bw_spole.aux",
+      "method": 8,
+      "crc": 3630003423,
+      "compressed": 2160,
+      "bytes": 10672,
+      "offset": 132948535
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_south/Io_SSI_VGR_bw_spole.tfw",
+      "method": 8,
+      "crc": 911731101,
+      "compressed": 40,
+      "bytes": 46,
+      "offset": 132950796
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_south/Io_SSI_VGR_bw_spole.tif",
+      "method": 8,
+      "crc": 3069444358,
+      "compressed": 3649926,
+      "bytes": 14145893,
+      "offset": 132950937
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_south/Io_SSI_VGR_color_merge_spole.aux",
+      "method": 8,
+      "crc": 3432311338,
+      "compressed": 2250,
+      "bytes": 8864,
+      "offset": 136600964
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_south/Io_SSI_VGR_color_merge_spole.tfw",
+      "method": 8,
+      "crc": 911731101,
+      "compressed": 40,
+      "bytes": 46,
+      "offset": 136603324
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/Polar_south/Io_SSI_VGR_color_merge_spole.tif",
+      "method": 8,
+      "crc": 4018450136,
+      "compressed": 15454323,
+      "bytes": 42406051,
+      "offset": 136603474
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 152057907
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 152057991
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Emission.aux",
+      "method": 8,
+      "crc": 2084231138,
+      "compressed": 3179,
+      "bytes": 18194,
+      "offset": 152058090
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Emission.tif",
+      "method": 8,
+      "crc": 3128886133,
+      "compressed": 172584,
+      "bytes": 4114699,
+      "offset": 152061395
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Emission.tif.xml",
+      "method": 8,
+      "crc": 3686772955,
+      "compressed": 435,
+      "bytes": 794,
+      "offset": 152234105
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_ImgNum.pdf",
+      "method": 8,
+      "crc": 3797498341,
+      "compressed": 744221,
+      "bytes": 766523,
+      "offset": 152234670
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_ImgOutline.pdf",
+      "method": 8,
+      "crc": 4112790964,
+      "compressed": 132454,
+      "bytes": 151393,
+      "offset": 152979015
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Incidence.aux",
+      "method": 8,
+      "crc": 2653406899,
+      "compressed": 3195,
+      "bytes": 18194,
+      "offset": 153111597
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Incidence.tif",
+      "method": 8,
+      "crc": 1762013443,
+      "compressed": 162430,
+      "bytes": 4114699,
+      "offset": 153114919
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Incidence.tif.xml",
+      "method": 8,
+      "crc": 2948077627,
+      "compressed": 436,
+      "bytes": 797,
+      "offset": 153277476
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Phase.aux",
+      "method": 8,
+      "crc": 1697610778,
+      "compressed": 2549,
+      "bytes": 13385,
+      "offset": 153278043
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Phase.tif",
+      "method": 8,
+      "crc": 3066417590,
+      "compressed": 34977,
+      "bytes": 4114699,
+      "offset": 153280715
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Phase.tif.xml",
+      "method": 8,
+      "crc": 2837793246,
+      "compressed": 432,
+      "bytes": 785,
+      "offset": 153315815
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Resolution.aux",
+      "method": 8,
+      "crc": 2652794584,
+      "compressed": 3325,
+      "bytes": 18402,
+      "offset": 153316374
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Resolution.tif",
+      "method": 8,
+      "crc": 328519864,
+      "compressed": 67999,
+      "bytes": 4114699,
+      "offset": 153319827
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_BW_Resolution.tif.xml",
+      "method": 8,
+      "crc": 2161125400,
+      "compressed": 439,
+      "bytes": 800,
+      "offset": 153387954
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Emission.aux",
+      "method": 8,
+      "crc": 1385671302,
+      "compressed": 3140,
+      "bytes": 18194,
+      "offset": 153388525
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Emission.tif",
+      "method": 8,
+      "crc": 505894024,
+      "compressed": 48328,
+      "bytes": 4114699,
+      "offset": 153391794
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Emission.tif.xml",
+      "method": 8,
+      "crc": 3092884054,
+      "compressed": 437,
+      "bytes": 803,
+      "offset": 153440251
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_ImgNum.pdf",
+      "method": 8,
+      "crc": 1623364277,
+      "compressed": 632071,
+      "bytes": 648109,
+      "offset": 153440821
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_ImgOutline.pdf",
+      "method": 8,
+      "crc": 3945663469,
+      "compressed": 433334,
+      "bytes": 453307,
+      "offset": 154073019
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Incidence.aux",
+      "method": 8,
+      "crc": 268623985,
+      "compressed": 3217,
+      "bytes": 18282,
+      "offset": 154506484
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Incidence.tif",
+      "method": 8,
+      "crc": 2275121712,
+      "compressed": 56341,
+      "bytes": 4114699,
+      "offset": 154509831
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Incidence.tif.xml",
+      "method": 8,
+      "crc": 4291896078,
+      "compressed": 438,
+      "bytes": 806,
+      "offset": 154566302
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Phase.aux",
+      "method": 8,
+      "crc": 2147875358,
+      "compressed": 2382,
+      "bytes": 11598,
+      "offset": 154566874
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Phase.tif",
+      "method": 8,
+      "crc": 438557818,
+      "compressed": 17579,
+      "bytes": 4114699,
+      "offset": 154569382
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Phase.tif.xml",
+      "method": 8,
+      "crc": 4163068588,
+      "compressed": 437,
+      "bytes": 794,
+      "offset": 154587087
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Resolution.aux",
+      "method": 8,
+      "crc": 203817017,
+      "compressed": 3372,
+      "bytes": 18610,
+      "offset": 154587654
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Resolution.tif",
+      "method": 8,
+      "crc": 2254038984,
+      "compressed": 56904,
+      "bytes": 4114699,
+      "offset": 154591157
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI-only_Color_Resolution.tif.xml",
+      "method": 8,
+      "crc": 1601507572,
+      "compressed": 439,
+      "bytes": 809,
+      "offset": 154648192
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_BW_ImgNum.pdf",
+      "method": 8,
+      "crc": 616859504,
+      "compressed": 918788,
+      "bytes": 940109,
+      "offset": 154648766
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_BW_ImgOutline.pdf",
+      "method": 8,
+      "crc": 2294230200,
+      "compressed": 214065,
+      "bytes": 235624,
+      "offset": 155567678
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Emission.aux",
+      "method": 8,
+      "crc": 2805353162,
+      "compressed": 3167,
+      "bytes": 18155,
+      "offset": 155781871
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Emission.tif",
+      "method": 8,
+      "crc": 2004613349,
+      "compressed": 185942,
+      "bytes": 4114699,
+      "offset": 155785161
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Emission.tif.xml",
+      "method": 8,
+      "crc": 2579543619,
+      "compressed": 432,
+      "bytes": 785,
+      "offset": 155971226
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Incidence.aux",
+      "method": 8,
+      "crc": 1742079423,
+      "compressed": 3176,
+      "bytes": 18147,
+      "offset": 155971785
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Incidence.tif",
+      "method": 8,
+      "crc": 557520703,
+      "compressed": 183960,
+      "bytes": 4114699,
+      "offset": 155975085
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Incidence.tif.xml",
+      "method": 8,
+      "crc": 2171017923,
+      "compressed": 432,
+      "bytes": 788,
+      "offset": 156159169
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Phase.aux",
+      "method": 8,
+      "crc": 502719073,
+      "compressed": 2679,
+      "bytes": 13385,
+      "offset": 156159729
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Phase.tif",
+      "method": 8,
+      "crc": 3269007023,
+      "compressed": 41454,
+      "bytes": 4114699,
+      "offset": 156162528
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Phase.tif.xml",
+      "method": 8,
+      "crc": 524853893,
+      "compressed": 432,
+      "bytes": 776,
+      "offset": 156204102
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Resolution.aux",
+      "method": 8,
+      "crc": 2671080436,
+      "compressed": 3317,
+      "bytes": 18402,
+      "offset": 156204658
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Resolution.tif",
+      "method": 8,
+      "crc": 883729123,
+      "compressed": 70007,
+      "bytes": 4114699,
+      "offset": 156208100
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Ancillary_data/Io_SSI_VGR1_Resolution.tif.xml",
+      "method": 8,
+      "crc": 2470995277,
+      "compressed": 434,
+      "bytes": 791,
+      "offset": 156278232
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Io_color_merged_clon180.aux",
+      "method": 8,
+      "crc": 236198237,
+      "compressed": 2459,
+      "bytes": 11755,
+      "offset": 156278795
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Io_color_merged_clon180.tfw",
+      "method": 8,
+      "crc": 2782891907,
+      "compressed": 43,
+      "bytes": 156,
+      "offset": 156281365
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Io_color_merged_clon180.tif",
+      "method": 8,
+      "crc": 333576835,
+      "compressed": 105543075,
+      "bytes": 196591667,
+      "offset": 156281519
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Io_SSI_VGR_bw_Equi_Clon180_8bit.aux",
+      "method": 8,
+      "crc": 3250840338,
+      "compressed": 2057,
+      "bytes": 10780,
+      "offset": 261824705
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Io_SSI_VGR_bw_Equi_Clon180_8bit.tfw",
+      "method": 8,
+      "crc": 2782891907,
+      "compressed": 43,
+      "bytes": 156,
+      "offset": 261826881
+    },
+    {
+      "name": "Io_SIM3168_Database/raster_baseMaps/SimpleCylindrical/Io_SSI_VGR_bw_Equi_Clon180_8bit.tif",
+      "method": 8,
+      "crc": 3004568463,
+      "compressed": 18464804,
+      "bytes": 65595281,
+      "offset": 261827043
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 280291966
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/",
+      "method": 0,
+      "crc": 0,
+      "compressed": 0,
+      "bytes": 0,
+      "offset": 280292028
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Merc.dbf",
+      "method": 8,
+      "crc": 1719486989,
+      "compressed": 49,
+      "bytes": 73,
+      "offset": 280292101
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Merc.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 280292240
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Merc.sbn",
+      "method": 8,
+      "crc": 1136635735,
+      "compressed": 60,
+      "bytes": 132,
+      "offset": 280292454
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Merc.sbx",
+      "method": 8,
+      "crc": 2360022151,
+      "compressed": 58,
+      "bytes": 116,
+      "offset": 280292604
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Merc.shp",
+      "method": 8,
+      "crc": 3405520837,
+      "compressed": 52629,
+      "bytes": 151916,
+      "offset": 280292752
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Merc.shp.xml",
+      "method": 8,
+      "crc": 1774753236,
+      "compressed": 354,
+      "bytes": 546,
+      "offset": 280345471
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Merc.shx",
+      "method": 8,
+      "crc": 831222243,
+      "compressed": 55,
+      "bytes": 108,
+      "offset": 280345919
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_NPole_meters.dbf",
+      "method": 8,
+      "crc": 1058763366,
+      "compressed": 49,
+      "bytes": 73,
+      "offset": 280346064
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_NPole_meters.prj",
+      "method": 8,
+      "crc": 397908052,
+      "compressed": 231,
+      "bytes": 367,
+      "offset": 280346211
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_NPole_meters.sbn",
+      "method": 8,
+      "crc": 519081981,
+      "compressed": 77,
+      "bytes": 132,
+      "offset": 280346540
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_NPole_meters.sbx",
+      "method": 8,
+      "crc": 2690559394,
+      "compressed": 73,
+      "bytes": 116,
+      "offset": 280346715
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_NPole_meters.shp",
+      "method": 8,
+      "crc": 535891896,
+      "compressed": 216639,
+      "bytes": 253004,
+      "offset": 280346886
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_NPole_meters.shp.xml",
+      "method": 8,
+      "crc": 3916153002,
+      "compressed": 593,
+      "bytes": 1097,
+      "offset": 280563623
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_NPole_meters.shx",
+      "method": 8,
+      "crc": 1072857923,
+      "compressed": 70,
+      "bytes": 108,
+      "offset": 280564318
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Pole.dbf",
+      "method": 8,
+      "crc": 1719486989,
+      "compressed": 49,
+      "bytes": 73,
+      "offset": 280564486
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Pole.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 280564625
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Pole.sbn",
+      "method": 8,
+      "crc": 2164830409,
+      "compressed": 61,
+      "bytes": 132,
+      "offset": 280564839
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Pole.sbx",
+      "method": 8,
+      "crc": 542613926,
+      "compressed": 59,
+      "bytes": 116,
+      "offset": 280564990
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Pole.shp",
+      "method": 8,
+      "crc": 4093873589,
+      "compressed": 89217,
+      "bytes": 253004,
+      "offset": 280565139
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Pole.shp.xml",
+      "method": 8,
+      "crc": 3028108016,
+      "compressed": 356,
+      "bytes": 547,
+      "offset": 280654446
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_Pole.shx",
+      "method": 8,
+      "crc": 3349970987,
+      "compressed": 59,
+      "bytes": 108,
+      "offset": 280654896
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_SPole_meters.dbf",
+      "method": 8,
+      "crc": 1058763366,
+      "compressed": 49,
+      "bytes": 73,
+      "offset": 280655045
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_SPole_meters.prj",
+      "method": 8,
+      "crc": 814189203,
+      "compressed": 234,
+      "bytes": 368,
+      "offset": 280655192
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_SPole_meters.sbn",
+      "method": 8,
+      "crc": 519081981,
+      "compressed": 77,
+      "bytes": 132,
+      "offset": 280655524
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_SPole_meters.sbx",
+      "method": 8,
+      "crc": 2690559394,
+      "compressed": 73,
+      "bytes": 116,
+      "offset": 280655699
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_SPole_meters.shp",
+      "method": 8,
+      "crc": 3342754827,
+      "compressed": 94653,
+      "bytes": 115436,
+      "offset": 280655870
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_SPole_meters.shp.xml",
+      "method": 8,
+      "crc": 1314284000,
+      "compressed": 608,
+      "bytes": 1279,
+      "offset": 280750621
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Boundary_SPole_meters.shx",
+      "method": 8,
+      "crc": 1072857923,
+      "compressed": 70,
+      "bytes": 108,
+      "offset": 280751331
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30.dbf",
+      "method": 8,
+      "crc": 3609646350,
+      "compressed": 161,
+      "bytes": 929,
+      "offset": 280751499
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 280751752
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30.sbn",
+      "method": 8,
+      "crc": 2433070411,
+      "compressed": 486,
+      "bytes": 924,
+      "offset": 280751968
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30.sbx",
+      "method": 8,
+      "crc": 2273306694,
+      "compressed": 122,
+      "bytes": 228,
+      "offset": 280752546
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30.shp",
+      "method": 8,
+      "crc": 2250601252,
+      "compressed": 24011,
+      "bytes": 143524,
+      "offset": 280752760
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30.shx",
+      "method": 8,
+      "crc": 4126196341,
+      "compressed": 292,
+      "bytes": 676,
+      "offset": 280776863
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon0_60n-60s.dbf",
+      "method": 8,
+      "crc": 3746826704,
+      "compressed": 134,
+      "bytes": 642,
+      "offset": 280777247
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon0_60n-60s.prj",
+      "method": 8,
+      "crc": 269328829,
+      "compressed": 220,
+      "bytes": 356,
+      "offset": 280777492
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon0_60n-60s.sbn",
+      "method": 8,
+      "crc": 1388445811,
+      "compressed": 336,
+      "bytes": 604,
+      "offset": 280777823
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon0_60n-60s.sbx",
+      "method": 8,
+      "crc": 3495658889,
+      "compressed": 99,
+      "bytes": 164,
+      "offset": 280778270
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon0_60n-60s.shp",
+      "method": 8,
+      "crc": 1021456529,
+      "compressed": 19934,
+      "bytes": 99684,
+      "offset": 280778480
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon0_60n-60s.shx",
+      "method": 8,
+      "crc": 739976056,
+      "compressed": 244,
+      "bytes": 484,
+      "offset": 280798525
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon180_60n-60s.dbf",
+      "method": 8,
+      "crc": 3746826704,
+      "compressed": 134,
+      "bytes": 642,
+      "offset": 280798880
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon180_60n-60s.prj",
+      "method": 8,
+      "crc": 894323282,
+      "compressed": 224,
+      "bytes": 360,
+      "offset": 280799127
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon180_60n-60s.sbn",
+      "method": 8,
+      "crc": 289910723,
+      "compressed": 337,
+      "bytes": 604,
+      "offset": 280799464
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon180_60n-60s.sbx",
+      "method": 8,
+      "crc": 4281837579,
+      "compressed": 101,
+      "bytes": 164,
+      "offset": 280799914
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon180_60n-60s.shp",
+      "method": 8,
+      "crc": 2796488751,
+      "compressed": 20080,
+      "bytes": 99684,
+      "offset": 280800128
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_merc_clon180_60n-60s.shx",
+      "method": 8,
+      "crc": 1647767747,
+      "compressed": 243,
+      "bytes": 484,
+      "offset": 280820321
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_np30-90.dbf",
+      "method": 8,
+      "crc": 2093729536,
+      "compressed": 98,
+      "bytes": 354,
+      "offset": 280820677
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_np30-90.prj",
+      "method": 8,
+      "crc": 397908052,
+      "compressed": 231,
+      "bytes": 367,
+      "offset": 280820875
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_np30-90.sbn",
+      "method": 8,
+      "crc": 3440779275,
+      "compressed": 194,
+      "bytes": 348,
+      "offset": 280821206
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_np30-90.sbx",
+      "method": 8,
+      "crc": 3646970327,
+      "compressed": 66,
+      "bytes": 132,
+      "offset": 280821500
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_np30-90.shp",
+      "method": 8,
+      "crc": 4110822561,
+      "compressed": 16329,
+      "bytes": 53844,
+      "offset": 280821666
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_np30-90.shx",
+      "method": 8,
+      "crc": 3037670716,
+      "compressed": 147,
+      "bytes": 292,
+      "offset": 280838095
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_sp30-90.dbf",
+      "method": 8,
+      "crc": 560039121,
+      "compressed": 100,
+      "bytes": 354,
+      "offset": 280838342
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_sp30-90.prj",
+      "method": 8,
+      "crc": 814189203,
+      "compressed": 234,
+      "bytes": 368,
+      "offset": 280838542
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_sp30-90.sbn",
+      "method": 8,
+      "crc": 837760061,
+      "compressed": 195,
+      "bytes": 348,
+      "offset": 280838876
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_sp30-90.sbx",
+      "method": 8,
+      "crc": 2003118932,
+      "compressed": 66,
+      "bytes": 132,
+      "offset": 280839171
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_sp30-90.shp",
+      "method": 8,
+      "crc": 1724351249,
+      "compressed": 16284,
+      "bytes": 53844,
+      "offset": 280839337
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_30_30_sp30-90.shx",
+      "method": 8,
+      "crc": 3548824954,
+      "compressed": 147,
+      "bytes": 292,
+      "offset": 280855721
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_5_5.dbf",
+      "method": 8,
+      "crc": 957099152,
+      "compressed": 14838,
+      "bytes": 301933,
+      "offset": 280855968
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_5_5.prj",
+      "method": 8,
+      "crc": 2652932458,
+      "compressed": 124,
+      "bytes": 149,
+      "offset": 280870896
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_5_5.sbn",
+      "method": 8,
+      "crc": 1248636626,
+      "compressed": 33069,
+      "bytes": 58812,
+      "offset": 280871110
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_5_5.sbx",
+      "method": 8,
+      "crc": 1616619014,
+      "compressed": 2167,
+      "bytes": 8292,
+      "offset": 280904269
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_5_5.shp",
+      "method": 8,
+      "crc": 862903800,
+      "compressed": 105373,
+      "bytes": 559812,
+      "offset": 280906526
+    },
+    {
+      "name": "Io_SIM3168_Database/vector_misc/graticules/Graticule_5_5.shx",
+      "method": 8,
+      "crc": 33382930,
+      "compressed": 11522,
+      "bytes": 42436,
+      "offset": 281011989
+    }
+  ]
+}

@@ -21,7 +21,7 @@
     "sourceGenerator": "tools/prepare-planet-title-sources.mjs"
   },
   "panel": {
-    "introduction": "An icy moon of Saturn marked by the enormous Odysseus crater and Ithaca Chasma, a vast canyon crossing its surface. The display uses the atlas’s 536.3 km reference sphere; its physical mean radius is 531.1 km, and the elevation datum is a separate 531 km sphere.",
+    "introduction": "An icy moon of Saturn marked by the enormous Odysseus crater and Ithaca Chasma, a vast canyon crossing its surface. The shape view reveals a simplified Cassini SPC model. Relative albedo shows the model’s brightness variation; elevation uses its own stated reference sphere.",
     "facts": [
       {
         "id": "radius",
@@ -86,14 +86,16 @@
     "labels": {
       "normal": "Monochrome",
       "enhanced": "Enhanced color",
-      "elevation": "Elevation"
+      "elevation": "Elevation",
+      "relative-albedo": "Relative albedo",
+      "shape": "Shape"
     },
     "controls": [
       {
         "id": "normal",
         "label": "Monochrome",
-        "description": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
-        "title": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Spherical shape approximation.",
+        "description": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "title": "Cassini 2012 mosaic, 293 m per source pixel, delivered on the shared 8192 × 4096 layout. Photographed shadows and variable resolution remain; globe Shadows add approximate lighting. Gray grid marks explicit source no-data. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
         "thumbnail": "/scenes/tethys/tethys-normal-thumbnail.webp",
         "surface": "tethys-normal-surface@2x.webp",
         "poles": "tethys-normal-poles@2x.webp",
@@ -105,8 +107,8 @@
       {
         "id": "enhanced",
         "label": "Enhanced color",
-        "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Spherical shape approximation.",
-        "title": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Spherical shape approximation.",
+        "description": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
+        "title": "Published 2014 infrared–green–ultraviolet composite, photometrically corrected by Paul Schenk. Enhanced colors extend beyond human vision. Source resolution varies; seams and residual photographed shading remain. Mapped onto a simplified Cassini SPC shape; independent image control can leave local registration differences.",
         "thumbnail": "/scenes/tethys/tethys-enhanced-thumbnail.webp",
         "surface": "tethys-enhanced-surface@2x.webp",
         "poles": "tethys-enhanced-poles@2x.webp",
@@ -118,8 +120,8 @@
       {
         "id": "elevation",
         "label": "Elevation",
-        "description": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
-        "title": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe remains spherical; model detail and accuracy vary.",
+        "description": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
+        "title": "Color shows height above the PDS 531 km reference sphere. Brightness shows fixed northwest relief lighting at true height scale; Shadows adds the shared approximate globe lighting. Cassini SPC model released in 2025, about 1.5 km grid spacing. The globe uses a simplified version of the released Q128 shape; grid and geometry resolutions differ. Model detail and accuracy vary.",
         "thumbnail": "/scenes/tethys/tethys-elevation-thumbnail.webp",
         "surface": "tethys-elevation-surface@2x.webp",
         "poles": "tethys-elevation-poles@2x.webp",
@@ -140,6 +142,46 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
           "image": "/scenes/tethys/tethys-elevation-legend.webp"
+        }
+      },
+      {
+        "id": "relative-albedo",
+        "label": "Relative albedo",
+        "description": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "title": "Relative brightness solved together with the Cassini SPC shape model, normalized around 1. This secondary model product is less validated than topography. It is neither visible color nor calibrated reflectance. Colors show 0.5–1.5; values above 1.5 saturate. Gray grid preserves source gaps.",
+        "thumbnail": "/scenes/tethys/tethys-relative-albedo-thumbnail.webp",
+        "surface": "tethys-relative-albedo-surface@2x.webp",
+        "poles": "tethys-relative-albedo-poles@2x.webp",
+        "source": {
+          "id": "cassini-spc-2025-tethys-tethys_eqalbedo_g",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Relative albedo",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.5",
+            "1",
+            "≥ 1.5"
+          ],
+          "meta": "relative to mean ≈ 1",
+          "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
+          "image": "/scenes/tethys/tethys-relative-albedo-legend.webp"
+        }
+      },
+      {
+        "id": "shape",
+        "label": "Shape",
+        "description": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+        "title": "Neutral grid over a simplified source shape, without photographic texture or height exaggeration. Source model detail and accuracy vary. Cassini SPC Q128 model released in 2025. The 2,000-face view retains broad shape; small terrain details are omitted.",
+        "thumbnail": "/scenes/tethys/tethys-shape-thumbnail.webp",
+        "surface": "tethys-shape-surface@2x.webp",
+        "poles": "tethys-shape-poles@2x.webp",
+        "source": {
+          "id": "cassini-spc-2025-tethys-q128-shape",
+          "path": "../manifest.json"
         }
       }
     ]
@@ -192,6 +234,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "PDS",
+      "role": "shape",
+      "description": "2025 SPC shape and relative albedo products",
+      "href": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
     }
   ],
   "provenance": {

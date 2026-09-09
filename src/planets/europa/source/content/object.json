@@ -123,6 +123,63 @@
           "path": "../manifest.json"
         },
         "detail": "Color mosaic"
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "detail": "Agenor · relative",
+        "description": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Northwest cartographic relief shows slopes. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy.",
+        "title": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Northwest cartographic relief shows slopes. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy.",
+        "thumbnail": "/scenes/europa/europa-elevation-thumbnail.webp",
+        "surface": "europa-elevation-surface@2x.webp",
+        "poles": "europa-elevation-poles@2x.webp",
+        "falseColor": true,
+        "source": {
+          "id": "usgs-agenor-controlled-dtm",
+          "path": "../manifest.json",
+          "url": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
+        },
+        "facts": [
+          {
+            "id": "quantity",
+            "label": "Quantity",
+            "value": "Local stereo height · m"
+          },
+          {
+            "id": "datum",
+            "label": "Datum",
+            "value": "Independent relative stereo solution"
+          },
+          {
+            "id": "extent",
+            "label": "Region",
+            "value": "134.63–149.01°E ·42.12–45.03°S"
+          },
+          {
+            "id": "resolution",
+            "label": "Effective detail",
+            "value": "About 3km; 614 m reprojected grid"
+          },
+          {
+            "id": "precision",
+            "label": "Source precision",
+            "value": "Nominal 52 m; approximately 100 m empirical estimate, not a pointwise error bound"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Agenor local height (m)",
+          "image": "europa-elevation-legend.webp",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−700",
+            "−200",
+            "300"
+          ],
+          "meta": "Original released values; local relative datum. Fixed cartographic relief is not part of the numeric scale.",
+          "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
+        }
       }
     ]
   },
@@ -162,6 +219,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "USGS stereo terrain",
+      "role": "surface",
+      "description": "Controlled Europa DTMs, source precision and control documentation",
+      "href": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
     }
   ],
   "provenance": {

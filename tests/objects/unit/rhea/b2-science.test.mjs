@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {test} from 'node:test';
+import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+const sourceRoot=new URL('../../../../src/planets/rhea/source/',import.meta.url).pathname;
+test('Rhea B2 scalar coordinates retain independent source values and exact missing cells',async()=>{
+ const config=JSON.parse(await readFile(sourceRoot+'preparation/terrestrial.json'));
+ const receipt=JSON.parse(await readFile(sourceRoot+'validation/b2-scalar-anchors.json'));
+ for(const row of receipt.sources){const bytes=await readFile(sourceRoot+row.path);assert.equal(bytes.length,row.expectedBytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),row.expectedSha256);}
+ for(const lens of config.raster.scientific.filter(l=>l.id!=='elevation')){
+  const surface=await loadScienceSurface(sourceRoot,lens),paths=[lens.path,...(lens.additionalGrids??[]).map(g=>g.path)];
+  for(const source of receipt.sources.filter(s=>paths.includes(s.path)))for(const anchor of source.anchors){
+   const actual=surface.sample(anchor.longitudeEastDegrees,anchor.latitudeDegrees);
+   if(anchor.value===null)assert.equal(actual,null,'Do not fill a missing source cell');
+   else assert.ok(actual!==null&&Math.abs(actual-anchor.value)<1e-7,`${source.path} cell ${anchor.column},${anchor.row}: ${actual} differs from ${anchor.value}`);
+  }
+ }
+});
+
+test('Rhea relative albedo retains the exact delivered footprint',async()=>{const c=JSON.parse(await readFile(sourceRoot+'preparation/terrestrial.json'));const source=await loadScienceSurface(sourceRoot,c.raster.scientific.find(l=>l.id==='relative-albedo'));assert.equal(source.sample(359.6,0),null);assert.equal(source.sample(180,-89.8),null);assert.ok(Number.isFinite(source.sample(359,0)));assert.ok(Number.isFinite(source.sample(180,-89.5)));});

@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-b2-source-intake@1",
+  "files": [
+    {
+      "body": "phobos",
+      "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+      "url": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
+      "bytes": 3018535,
+      "sha256": "69fffc77f4fd799767e50fc03631bea43f8d9110edcae8f355fad926136339fa",
+      "status": "downloaded"
+    },
+    {
+      "body": "phobos",
+      "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+      "url": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
+      "bytes": 34508570,
+      "sha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
+      "status": "downloaded"
+    },
+    {
+      "body": "deimos",
+      "path": "shape/deimos_g_083m_spc_obj_0000n00000_v002.obj.zip",
+      "url": "https://sbmt.jhuapl.edu/shared-files/files/deimos_g_083m_spc_obj_0000n00000_v002.obj.zip",
+      "bytes": 3530934,
+      "sha256": "1572a49fa5dbe08eaf6f340ecd5c92f0cfcc41ceaae4c232b6a5d30bde53a68b",
+      "status": "downloaded"
+    },
+    {
+      "body": "deimos",
+      "path": "shape/deimos_g_083m_spc_obj_0000n00000_v002.csv.zip",
+      "url": "https://sbmt.jhuapl.edu/shared-files/files/deimos_g_083m_spc_obj_0000n00000_v002.csv.zip",
+      "bytes": 26366556,
+      "sha256": "ddb6fdcca05fab3ce471999ded12b0f532d28274ad983e261d85e5d1f8a4c4f1",
+      "status": "downloaded"
+    },
+    {
+      "body": "dimorphos",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.fits",
+      "bytes": 4728960,
+      "sha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
+      "status": "downloaded"
+    },
+    {
+      "body": "dimorphos",
+      "path": "science/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_alb_0000n00000_v004.xml",
+      "bytes": 6781,
+      "sha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
+      "status": "downloaded"
+    },
+    {
+      "body": "dimorphos",
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+      "bytes": 4726080,
+      "sha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
+      "status": "downloaded"
+    },
+    {
+      "body": "dimorphos",
+      "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+      "bytes": 7093,
+      "sha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
+      "status": "downloaded"
+    },
+    {
+      "body": "dimorphos",
+      "path": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+      "url": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+      "bytes": 14454228,
+      "sha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e",
+      "status": "downloaded"
+    }
+  ]
+}

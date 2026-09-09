@@ -5,7 +5,8 @@ import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometry
 // varies linearly down its texture. Bake the inverse mapping into each band so
 // the published equirectangular image lands at the correct surface coordinates.
 export function reprojectSolidBodySurfaceRaster(source, { width, height,
-  latitudeSegments = 16, longitudeSegments = 32, seamOverlap = 0.005 }) {
+  latitudeSegments = 16, longitudeSegments = 32, seamOverlap = 0.005, sampling = "bilinear" }) {
+  if (!["bilinear", "nearest"].includes(sampling)) throw new TypeError("Unsupported surface raster sampling.");
   const output = Buffer.from(source);
   const cellWidth = width / longitudeSegments, cellHeight = height / latitudeSegments;
   const latitudeStep = Math.PI / latitudeSegments, longitudeStep = 2 * Math.PI / longitudeSegments;
@@ -25,7 +26,7 @@ export function reprojectSolidBodySurfaceRaster(source, { width, height,
       for (let x = 0; x < width; x++) {
         const column = columns[x];
         sampleMap(source, width, height, column.longitude, Math.atan2(z, column.radius),
-          output, ((band * cellHeight + row) * width + x) * 4);
+          output, ((band * cellHeight + row) * width + x) * 4, sampling);
       }
     }
   }
@@ -33,7 +34,8 @@ export function reprojectSolidBodySurfaceRaster(source, { width, height,
 }
 
 export function prepareSolidBodyPoleRaster(source, { width, height, tileSize = 512,
-  radius = 230, polarRadius = radius, latitudeSegments = 16 }) {
+  radius = 230, polarRadius = radius, latitudeSegments = 16, sampling = "bilinear" }) {
+  if (!["bilinear", "nearest"].includes(sampling)) throw new TypeError("Unsupported pole raster sampling.");
   const output = Buffer.alloc(tileSize * tileSize * 2 * 4);
   const boundary = Math.PI / 2 - Math.PI / latitudeSegments;
   const capRadius = radius * Math.cos(boundary) * 1.035;
@@ -44,14 +46,22 @@ export function prepareSolidBodyPoleRaster(source, { width, height, tileSize = 5
     if (r > 1) continue;
     sampleMap(source, width, height, Math.atan2(pole === 0 ? dy : -dy, dx),
       (pole === 0 ? 1 : -1) * Math.atan2(capHeight / polarRadius, r * capRadius / radius),
-      output, (y * tileSize * 2 + pole * tileSize + x) * 4);
+      output, (y * tileSize * 2 + pole * tileSize + x) * 4, sampling);
   }
   return output;
 }
 
-function sampleMap(source, width, height, longitude, latitude, output, offset) {
+function sampleMap(source, width, height, longitude, latitude, output, offset, sampling) {
   const sx = ((longitude / (2 * Math.PI) + 1) % 1) * width - 0.5;
   const sy = Math.max(0, Math.min(height - 1, (0.5 - latitude / Math.PI) * height - 0.5));
+  // Category IDs have already become presentation colors: select one source
+  // cell, never a new mixture that can be mistaken for a different map unit.
+  if (sampling === "nearest") {
+    const x = (Math.floor(sx + 0.5) + width) % width;
+    const y = Math.min(height - 1, Math.floor(sy + 0.5));
+    source.copy(output, offset, (y * width + x) * 4, (y * width + x + 1) * 4);
+    return;
+  }
   const x0 = (Math.floor(sx) + width) % width, x1 = (x0 + 1) % width;
   const y0 = Math.floor(sy), y1 = Math.min(height - 1, y0 + 1);
   const u = sx - Math.floor(sx), v = sy - y0;

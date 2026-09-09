@@ -63,6 +63,11 @@
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -83,12 +88,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "4d76bbd1db574ecbd3a2d0fb42c7beb562990e3eb710963150d5fcab01206237"
+          "sha256": "5b4639ee29d7aeebfd093974a50154e9f5a40d07e8bfc90b53e26e116b110061"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "37bdd3c09a74d154190329604a544c4d731b4f649fb07171bb9f46577752faa8"
+          "sha256": "7c4b8fd1f9c32c0390cf63b5e333a23dbf7a84eeb68d8b3902a03ef0e808e844"
         },
         {
           "id": "title",

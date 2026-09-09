@@ -54,6 +54,49 @@
           "width": 721,
           "height": 361
         }
+      },
+      {
+        "id": "slope",
+        "label": "Slope",
+        "consumer": "facet-science",
+        "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.fits",
+        "format": "facet-scalars",
+        "meshPath": "shape/dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+        "grid": {
+          "metersPerUnit": 1000,
+          "expectedVertices": 98306,
+          "expectedFaces": 196608
+        },
+        "table": {
+          "format": "pds4-fits",
+          "field": "SLOPE",
+          "units": "DEGREES",
+          "expectedRows": 196608,
+          "maximumCentroidErrorMeters": 0.001,
+          "labelPath": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
+          "meshFile": "dimorphos_g_0972mm_spc_obj_0000n00000_v004.obj",
+          "target": "DIMORPHOS",
+          "registration": "centroid-bijection"
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 2
+        },
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "previewGrid": {
+          "width": 640,
+          "height": 320
+        },
+        "minimum": 0,
+        "maximum": 70,
+        "colors": [
+          "#20204b",
+          "#2d75b9",
+          "#4ebba7",
+          "#f1c45c",
+          "#cc543d"
+        ]
       }
     ],
     "observedColors": [],

@@ -118,8 +118,19 @@
         "Uranus|V",
         "Pluto|I"
       ],
-      "state": "planned",
-      "owner": "Moons"
+      "state": "implementation",
+      "owner": "Moons",
+      "branch": "feat/moons-scientific-surfaces",
+      "baseCommit": "55bda12f012e77e2206d41661a886c84fb01362d",
+      "progress": {
+        "sourceReadyBodies": 13,
+        "sourceBlockedBodies": [
+          "Titania",
+          "Miranda"
+        ],
+        "qualifiedBodies": 0,
+        "report": "B2-SCIENTIFIC-SURFACES.md"
+      }
     },
     {
       "id": "B3",

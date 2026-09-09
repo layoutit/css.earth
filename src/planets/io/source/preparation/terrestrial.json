@@ -56,7 +56,116 @@
         }
       }
     ],
-    "scientific": [],
+    "scientific": [
+      {
+        "id": "geology",
+        "label": "Geology",
+        "format": "geologic-shapefile",
+        "path": "science/geology-sim3168/Io_GeoUnits.shp",
+        "consumer": "geology-surfaces",
+        "sampling": "nearest",
+        "overlapPolicy": "withhold-conflicts",
+        "sourceUrl": "https://pubs.usgs.gov/sim/3168/",
+        "description": "USGS SIM 3168 interpreted geologic units",
+        "title": "Categorical map of interpreted geologic units; colors are cartographic choices, not measurements of surface color or height.",
+        "grid": {
+          "attributePath": "science/geology-sim3168/Io_GeoUnits.dbf",
+          "projectionPath": "science/geology-sim3168/Io_GeoUnits.prj",
+          "coordinateSystem": "GCS_Io_2000",
+          "referenceRadiusMeters": 1821460,
+          "longitudeDirection": "east-positive",
+          "latitudeType": "planetocentric",
+          "longitudeDomain": [
+            -180,
+            180
+          ],
+          "field": "Unit",
+          "expectedRecords": 1502,
+          "expectedBounds": [
+            -180.0,
+            -88.99993352405727,
+            180.00000000291644,
+            88.99996644350102
+          ],
+          "unknownValues": [
+            "NoData"
+          ],
+          "withheldDegenerateRings": []
+        },
+        "categories": [
+          {
+            "value": "Pby",
+            "label": "Bright plains",
+            "color": "#efd969"
+          },
+          {
+            "value": "Pbw",
+            "label": "White plains",
+            "color": "#f1ece0"
+          },
+          {
+            "value": "Prb",
+            "label": "Red-brown plains",
+            "color": "#b77255"
+          },
+          {
+            "value": "Pl",
+            "label": "Layered plains",
+            "color": "#d5aa79"
+          },
+          {
+            "value": "Fb",
+            "label": "Bright flows",
+            "color": "#e69abd"
+          },
+          {
+            "value": "Fd",
+            "label": "Dark flows",
+            "color": "#7b496e"
+          },
+          {
+            "value": "Fu",
+            "label": "Undivided flows",
+            "color": "#ac79a6"
+          },
+          {
+            "value": "PFb",
+            "label": "Bright patera floors",
+            "color": "#f2b651"
+          },
+          {
+            "value": "PFd",
+            "label": "Dark patera floors",
+            "color": "#3c3747"
+          },
+          {
+            "value": "PFu",
+            "label": "Undivided patera floors",
+            "color": "#978e94"
+          },
+          {
+            "value": "Ml",
+            "label": "Lineated mountains",
+            "color": "#397eae"
+          },
+          {
+            "value": "Mm",
+            "label": "Mottled or hummocky mountains",
+            "color": "#78b6d1"
+          },
+          {
+            "value": "Mu",
+            "label": "Undivided mountains",
+            "color": "#577098"
+          },
+          {
+            "value": "Tb",
+            "label": "Tholi",
+            "color": "#649c76"
+          }
+        ]
+      }
+    ],
     "observedColors": [],
     "surfaceQuality": 90
   },

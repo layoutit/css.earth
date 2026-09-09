@@ -39,7 +39,7 @@
         "format": "geotiff",
         "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
         "description": "Cassini terrain model · shaded relief",
-        "title": "Color shows height above the 256.2 × 251.4 × 248.6 km reference ellipsoid. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies.",
+        "title": "Color shows height above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km. Colors saturate below −1 and above +1 km. Brightness shows relief under fixed northwest light, without height exaggeration. Gray grid marks missing model values. The 200 m grid contains stereogrammetric and photogrammetric terrain estimates; effective detail varies. This Schenk terrain grid and the corrected JPL v2 shape use different control solutions; local registration differences may remain.",
         "sourceUrl": "https://astrogeology.usgs.gov/search/map/enceladus-cassini-global-dem-200m-schenk",
         "minimum": -1,
         "maximum": 1,
@@ -83,7 +83,14 @@
       }
     ],
     "observedColors": [],
-    "surfaceQuality": 90
+    "surfaceQuality": 90,
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -104,7 +111,27 @@
       "defaultControlYawDegrees": 0
     },
     "mapUrl": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
-    "polesUrl": "/scenes/enceladus/enceladus-normal-poles@2x.webp"
+    "polesUrl": "/scenes/enceladus/enceladus-normal-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/enceladus-v2-q256.obj.zip",
+      "format": "wavefront-obj-zip",
+      "grid": {
+        "member": "enceladus-v2-q256.obj",
+        "metersPerUnit": 1000,
+        "expectedVertices": 393218,
+        "expectedFaces": 786432
+      },
+      "faceBudget": 2000,
+      "tileSize": 128,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 2000,
+        "maximumErrorMeters": 2523,
+        "regularize": true
+      }
+    }
   },
   "celestial": {
     "sunSource": "JPL Enceladus orbit plus VSOP87 Saturn position and IAU/WGCCRE Enceladus rotation"

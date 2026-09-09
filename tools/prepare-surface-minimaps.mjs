@@ -11,6 +11,18 @@ async function optionalJson(path) {
   catch (error) { if (error.code === 'ENOENT') return null; throw error; }
 }
 
+// Preserve categorical/numeric cells only where the source contract requests it.
+// Ordinary images retain the established resize and WebP presentation.
+const nearestDisplay = (...records) => records.some(record => record && (
+  record.displaySampling === 'nearest' || record.categorical === true ||
+  (Array.isArray(record.categories) && record.categories.length > 0) ||
+  record.format === 'facet-scalars' || record.scalarMap?.sourceFormat === 'facet-scalars'
+));
+const minimapEncoding = nearest => nearest ? { lossless: true, effort: 4 }
+  : { quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true };
+const minimapResize = nearest => ({ width: 640, withoutEnlargement: true,
+  ...(nearest ? { kernel: 'nearest' } : {}) });
+
 // A dedicated sidebar asset: never transport a globe-resolution map for a minimap.
 export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory }) {
   const prepared = await optionalJson(resolve(outputDirectory, 'surfaces.json'));
@@ -35,8 +47,9 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       });
       const path = `minimaps/${plan.id}.webp`;
       await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-      const result = await sharp(data, { raw: info }).resize({ width: 640, withoutEnlargement: true })
-        .webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true })
+      const nearest = nearestDisplay(plan.scientific, plan);
+      const result = await sharp(data, { raw: info }).resize(minimapResize(nearest))
+        .webp(minimapEncoding(nearest))
         .toFile(resolve(outputDirectory, path));
       images.push({ id: plan.id, path, width: result.width, height: result.height });
     }
@@ -48,7 +61,8 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     if (!input) continue;
     const path = `minimaps/${surface.id}.webp`;
     await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
-    let pipeline = sharp(input).resize({ width: 640, withoutEnlargement: true });
+    const nearest = nearestDisplay(surface);
+    let pipeline = sharp(input).resize(minimapResize(nearest));
     if (framing?.centerLongitudeDegrees !== undefined) {
       if (!Number.isFinite(framing.centerLongitudeDegrees)) throw new Error('Invalid minimap framing');
       const { data, info } = await pipeline.raw().toBuffer({ resolveWithObject: true });
@@ -61,7 +75,7 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
       }
       pipeline = sharp(shifted, { raw: info });
     }
-    const result = await pipeline.webp({ quality: 90, alphaQuality: 100, effort: 4, smartSubsample: true })
+    const result = await pipeline.webp(minimapEncoding(nearest))
       .toFile(resolve(outputDirectory, path));
     images.push({ id: surface.id, path, width: result.width, height: result.height,
       ...(surface.attribution ? { attribution: surface.attribution } : {}) });

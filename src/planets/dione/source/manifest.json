@@ -188,6 +188,101 @@
       "consumers": [
         "title"
       ]
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/dione_128_o.obj",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_128_o.obj",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+      "id": "cassini-spc-2025-dione-q128-shape",
+      "consumers": [
+        "shape"
+      ],
+      "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
+      "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
+      "expectedBytes": 17694840,
+      "expectedSha256": "6fa66be6d8065fccb55bda4f9b272aefddbd2ddb1402ff284c00ca21e15df9ad"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/dione_eqalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+      "id": "cassini-spc-2025-dione-dione_eqalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 2222,
+      "height": 679,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 6044025,
+      "expectedSha256": "e08ad608fd0786dd507f290a6df8d29fbad9f24631d21aafd91c2dc4732fdfb6"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/dione_npalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+      "id": "cassini-spc-2025-dione-dione_npalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 790785,
+      "expectedSha256": "3b809800678f9a21574bd4ea45dda127ce8f122e35d13d9881c823ab4c4b2a4d"
+    },
+    {
+      "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
+      "license": "Public PDS archive; cite authors",
+      "licenseEvidence": [
+        "https://sbn.psi.edu/pds/resource/weirichdioneshape.html"
+      ],
+      "acquisition": "Download exact pinned public archive bytes through preparation/acquisition.json.",
+      "redistribution": "Retain mission, producer and archive credits.",
+      "path": "science/b2-intake/dione_spalbedo_g.tif",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spalbedo_g.tif",
+      "catalog": "https://sbn.psi.edu/pds/resource/weirichdioneshape.html",
+      "id": "cassini-spc-2025-dione-dione_spalbedo_g",
+      "consumers": [
+        "scientific-surfaces"
+      ],
+      "lensId": "relative-albedo",
+      "label": "Relative albedo",
+      "falseColor": true,
+      "width": 444,
+      "height": 444,
+      "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
+      "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "expectedBytes": 790785,
+      "expectedSha256": "10c4f91d0686b03e554e8da9f9bc44acf60dccefae2406c8351e6bf01852a3b8"
     }
   ],
   "documents": [
@@ -241,8 +336,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 5129,
-      "expectedSha256": "35bf1c59e9bab26f283e9a88837312150d676c7b7d547c925e26aa87a3135107",
+      "expectedBytes": 8964,
+      "expectedSha256": "e48d463a58538e1712e13851faedbc6bc32cc075f16c2064e1c7c03e7b34b01a",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -253,14 +348,14 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1945,
-      "expectedSha256": "af021aeb1e25499e57e87bb5c67b6e00bbee61edc251ceae9c7a5d136d564bd7",
+      "expectedBytes": 8162,
+      "expectedSha256": "f1dc6f61fbbdc42d3340bf531baf3992f6a23ad0c3b2439d3ec0f63fe67b3b90",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 9757,
-      "expectedSha256": "31f4226f870acdc9d85576f025ff2dd50e1808127d353cfdfd904987f6e9062d",
+      "expectedBytes": 13024,
+      "expectedSha256": "f91d6a99a82352fd1f235428267e83ea0a46446228db75db9a3f945ab684eece",
       "purpose": "Source metadata, license evidence, or authored preparation and content."
     },
     {
@@ -275,6 +370,103 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1084,
       "expectedSha256": "6b5e24ee84b3fb7382dfee9f0160b7e74e2d0eaa47827a52ad1561b64d7da11e"
+    },
+    {
+      "path": "science/b2-intake/dione_128_o.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_128_o.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9388,
+      "expectedSha256": "b84607d2265ca23102f78aad4571005b953c4555fea729428bbe7a37d1b8e81f"
+    },
+    {
+      "path": "science/b2-intake/dione_512_o.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_512_o.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9394,
+      "expectedSha256": "9dd3f004b938b284ef65b395b93396a53bb0151fa803bfbc592591c14137564d"
+    },
+    {
+      "path": "science/b2-intake/dione_sigma_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_sigma_c.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 326137,
+      "expectedSha256": "e71afa33f55516897279cdbbccb766293f25e22537a5fc989df18d7dddfca688"
+    },
+    {
+      "path": "science/b2-intake/dione_sigma_c.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_sigma_c.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 7250,
+      "expectedSha256": "3f2733812388bbcf9b6b29e324af5f521d74654195947e1cf60b61eeba85ee3e"
+    },
+    {
+      "path": "science/b2-intake/dione_numimg_c.cub",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_numimg_c.cub",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 326357,
+      "expectedSha256": "045b668298879b28ec647d3709510744e5762f6df24acde20bb1a29bd5d09ae0"
+    },
+    {
+      "path": "science/b2-intake/dione_numimg_c.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_numimg_c.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 7307,
+      "expectedSha256": "a81f30eb64081ef8d7044090b0b03c824ffe6ee0dbfd96b9cf2a6413f290e2f3"
+    },
+    {
+      "path": "science/b2-intake/dione_eqalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9199,
+      "expectedSha256": "5003e65b631cf706c4302e6018631c9f83fcc0276f17da998c72ecf86af1ea2e"
+    },
+    {
+      "path": "science/b2-intake/dione_npalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9239,
+      "expectedSha256": "e6fcdb2f90c230e56cd9fe47a26674692e249335521d6b139a8fcea59016746c"
+    },
+    {
+      "path": "science/b2-intake/dione_spalbedo_g.xml",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spalbedo_g.xml",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 9242,
+      "expectedSha256": "9fc3d80e517c2acda033ddfb813e8152f80274c07ff11596e145e8930c1eae15"
+    },
+    {
+      "path": "science/b2-intake/bundle_description.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/bundle_description.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 5596,
+      "expectedSha256": "8bcb74c206a494e16479e98c795bcec37e55ef8506963da4c4cf1f842d6d416d"
+    },
+    {
+      "path": "science/b2-intake/dionekernellist.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dionekernellist.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 24913,
+      "expectedSha256": "b77472fdff510ddc483c2bb7f671779a15d86cf3d6acac3f09cbeff7ce8581a3"
+    },
+    {
+      "path": "science/b2-intake/dioneimagelist.txt",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dioneimagelist.txt",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 64125,
+      "expectedSha256": "4532cd4c8d78636d884c48bcea5b0f49d6818e4d8f6d710dad321584c40206a8"
+    },
+    {
+      "path": "science/b2-intake/dioneshapeassessment.pdf",
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dioneshapeassessment.pdf",
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
+      "expectedBytes": 13768156,
+      "expectedSha256": "dfb338cb8f816f08ec011423ec516241e78c1bbe0475eed38ed009b1779e46d1"
+    },
+    {
+      "path": "validation/b2-scalar-anchors.json",
+      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
+      "expectedBytes": 3159,
+      "expectedSha256": "56229a4ac1aedb0cbe929f2daebf6887ae5503ee7ab8f1079a496ae760068006"
     }
   ],
   "generatedIntermediates": []

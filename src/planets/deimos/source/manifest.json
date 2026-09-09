@@ -54,7 +54,8 @@
       "redistribution": "Retain the research and archive attribution.",
       "consumers": [
         "shape",
-        "scientific-surfaces"
+        "scientific-surfaces",
+        "facet-science"
       ],
       "lensId": "elevation",
       "label": "Elevation",
@@ -80,8 +81,10 @@
       "acquisition": "Download the matching published facet attributes.",
       "redistribution": "Retain the research and archive attribution.",
       "consumers": [
-        "scientific-surfaces"
-      ]
+        "scientific-surfaces",
+        "facet-science"
+      ],
+      "coverage": "Slope relative to modeled gravity, using uniform density, rotation and Mars at the mean orbital distance. Values come from the released facet table. Grid marks facets without solved albedo support; this is a conservative mask, not a complete image-coverage measurement."
     },
     {
       "id": "eso-milky-way-panorama",
@@ -149,8 +152,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9228,
-      "expectedSha256": "2bc0a45fc3c39b40908f2a8624beeebff93fc77111456462cd730d90321be7d8",
+      "expectedBytes": 12185,
+      "expectedSha256": "fa4003aef2ce456d6f3a0da247579ce968cdf8f305c1ea5404538da4878538db",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {
@@ -173,8 +176,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 3191,
-      "expectedSha256": "81ab024909ad17566adb06ae0c935c1cdcaf68a23b911488885fd2db95f4a890",
+      "expectedBytes": 5836,
+      "expectedSha256": "c55768b273de837e73cfbd6c0845dafd8ffaf1ff859d51b14ae9be82d0a4f3db",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

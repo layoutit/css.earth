@@ -44,6 +44,43 @@ observed navigation crop, rather than enlarging the 32 px UI icon. Prepared
 this is a navigation illustration, not a new terrain or illumination dataset.
 No atmosphere shell is supplied: New Horizons found no detectable atmosphere.
 
+## New Horizons MVIC enhanced color
+
+The additional Enhanced color lens uses the PDS product
+[nh_charon_color_mosaic::1.0](https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_composition/mosaic/nh_charon_color_mosaic.lblx),
+retained as the original 116,006,912-byte four-band float32 array. SHA-256:
+`dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a`.
+The bands are CH4 895 nm, NIR 870 nm, red 625 nm and blue 475 nm;
+display RGB uses NIR/red/blue with one common linear 0–0.6 stretch.
+This is enhanced false color, not natural color or quantitative albedo.
+
+The PDS4 label declares 3,808 × 1,904, band-sequential little-endian float32,
+1,000 m grid spacing, equirectangular planetocentric/east-positive coordinates,
+606,000 m sphere, 0° central meridian, and upper-left corner
+(−1,904,000, 952,000) m. These coordinates differ from the existing USGS map.
+The preparer maps metric pixel centers rather than treating rounded extents as
+an exact 360° rectangle. Missing pixels use finite bit pattern `0xFF7FFFFB`;
+all selected channels and the complete bilinear footprint must be valid.
+Finite negative data remain observations and are clamped only for display.
+
+Independent NumPy decoding found 4,105,311 RGB-valid source pixels, about
+60.0019% of surface area after latitude weighting, before conservative
+interpolation. Unknown color coverage remains the neutral grid. A raw anchor
+at 0°E,80°N has NIR/red/blue values 0.2344332486/0.1650196165/0.1310233623,
+consistent with the mission's separately described reddish northern pole.
+The southern cap and unobserved longitudes retain missing values. Numeric and
+bit-pattern anchors are in source/validation/color-source-inspection.json.
+
+The source combines lower-resolution MVIC color with panchromatic detail;
+1 km post spacing is not uniform native color resolution. The archive applied
+lunar-Lambert normalization near L=0.65 at 15° phase, but explicitly warns that
+mosaicking means values are no longer strictly I/F. No additional photometric
+normalization is applied. The archive refers calibration uncertainties to
+Howett et al. (2017); there is no accompanying per-pixel uncertainty array.
+Retain NASA/JHUAPL/SwRI, Paul Schenk/LPI, New Horizons team and PDS attribution.
+The neighboring absorption-map files inspected in this archive target Pluto,
+so none is presented as a Charon composition map.
+
 ## Physical placement
 
 606 km radius and GM 106.10 km³/s²: JPL Horizons target 901, PLU060 physical
