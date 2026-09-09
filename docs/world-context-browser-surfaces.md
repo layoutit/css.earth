@@ -804,3 +804,110 @@ are no application errors, HMR, trace loss or CSS opacity transitions. Each
 `residuals.json` maps remaining stalls to recorder time and the profiler's source
 thread (not its delivery thread). The repeated p95 improvement is qualified;
 zero dropped frames and aggregate object readiness are not claimed.
+
+## Completed-background composition (`53b721d2`)
+
+The sky/volume path now factors the two prepared weights before compositing.
+For handoff `t` and exposure `b`, the completed images still contribute
+`(1-t)*sky + t*b*volume`. The volume host uses opacity `t*b`; its image is
+unattenuated, and the opaque sky underlay uses `(1-t)/(1-t*b)`. At `t*b=1`
+the sky is already retired and its opacity is zero. The existing flat 3D
+boundaries, all slab optical copies, geometry and resources remain intact.
+Contexts without a prepared sky retain the original matte/exposure composition.
+
+The existing high-contrast setting reaches the retained world owner through the
+shell/router callback, including changes made before world loading finishes.
+It updates only the completed-background coefficients, immediately at a stationary
+camera. It does not republish the star catalogue, rebuild a scene, or change the
+prepared exposure metadata. The old CSS exposure override is no longer needed.
+
+### Evidence and validation
+
+Two unchanged `e3431154` Canary captures in `overlay-fence-canary-dpr2` and
+`overlay-fence-canary-repeat-dpr2` exposed the nested
+`IOSurfaceImageBacking::WaitForCommandsToBeScheduled::Dawn` event. In the sky/volume
+handoff band, its largest waits were **161.791 and 101.804 ms**, with cumulative
+waits **344.589 and 232.475 ms**. The trace contains GPU thread synchronization,
+not that amount of application JavaScript CPU work.
+
+The browser-only trials `overlay-factorized-canary-dpr2` and
+`overlay-factorized-canary-repeat-dpr2` record exact original/modified module
+hashes and replacement receipts. They are diagnostic substitutions, not product
+revision qualifications. Their handoff maxima were **10.491/10.799 ms**, with
+cumulative waits **25.925/24.652 ms**. Draw-render-pass counts remained similar;
+this is evidence for changing the composition dependency, not eliminating a
+claimed number of render passes. Band assignment uses the preceding 125 ms
+recorder camera sample, so boundaries are approximate.
+
+Before/after product screenshots are in
+`output/playwright/background-composition/`: **52 views**, comprising 13 poses,
+standard/high contrast and DPR 1/2. Camera state, every prepared slab/sky transform,
+resource URL, leaf opacity/visibility and retained node identity match. The
+largest pixel difference is **4/255**; only **12 color channels** across the full
+set differ by more than 2/255. These are compositor rounding differences, not
+pixel identity. Standard handoff reference/result images were also inspected.
+
+Validation passes:
+
+- 63 sky, volume and world-context renderer tests; renderer typecheck and build.
+- 39 shell/router lifecycle tests, including pending-world contrast intent and
+  navigation persistence without replaying it.
+- Native DPR 1/2 high-contrast toggles at near, blended and galaxy views.
+- Existing native environment journey: reported Mercury view, heliosphere,
+  background transition, Milky Way drag, and return to Sun.
+- Native cloud-handoff check: continuous image signal, physical parallax, no dark
+  trough, no new image requests, and retained images on outward/return travel.
+
+The contrast browser check now uses the existing shared native-wheel helper;
+its old local helper omitted current input gains and failed to reach the new
+transition sample. Its failed output is retained separately. The corrected check
+passes using actual wheel input. Broader object readiness is not newly claimed.
+
+### Integrated captures and remaining limits
+
+Both captures below load clean revision `53b721d2e90d2cdf95323e50785ea635d52a0156`.
+Every recorded source hash still matches that implementation, including the
+changed shell/router files. Both retain one world/input/document and one detailed
+camera, without application errors, HMR or trace loss.
+
+| Measurement | `background-composition-dpr2` | `background-composition-compositor-dpr2` |
+| --- | --- | --- |
+| Recorder ID | `015f9fb7-0cad-4516-9008-f536a5e2dbed` | `9f2f6db6-e7a8-4fb6-81b9-3681df003fbe` |
+| Planetary-band intervals >25 ms | 12/768 | 11/762 |
+| Planetary-band p95 | 16.7 ms | 16.8 ms |
+| Whole-route intervals >25 ms | 31/3518 | 22/3486 |
+| Whole-route maximum | 216.6 ms | 49.9 ms |
+| Largest Dawn scheduling wait | 23.038 ms | 10.158 ms |
+| Video observations/encoded frames | 2921/2921 | 2953/2953 |
+| Reordered video observations | 47 | 0 |
+| Recorder/trace clock drift | 43 microseconds | 4 microseconds |
+| Maximum video PTS error | 1.464 ms | 1.460 ms |
+
+The second capture adds the normal `cc` trace category to distinguish compositor
+waiting from CPU execution; its timings include additional instrumentation. These
+runs and the browser trials are absolute observations, not a controlled claim of
+an overall speedup. Workstation load and native event delivery vary.
+
+**The full smoothness target remains unmet.** The first integrated capture's
+216.6 ms frame interval overlaps a 191.294 ms renderer task with only **22.294 ms
+of thread CPU time**, plus a 189.232 ms raster-worker task with **41.598 ms CPU**.
+The remaining wall time cannot be attributed to application JavaScript from
+sampling-profile duration alone; it can include waiting or scheduling delay.
+Original video observations at recorder times 24756.644/25010.629 ms were inspected
+and preserve the scene without a reset, while exposing the observation gap.
+
+The compositor diagnostic did not reproduce that long pause. Its largest normal
+commit wait was **1.685 ms**, so it does not establish a persistent commit-wait
+bottleneck or explain away the earlier hitch. Its largest BeginMainFrame was
+50.759 ms with 8.539 ms CPU. Other frames still exceed the frame budget with real
+CPU work. Further optimization must distinguish those cases before changing
+rendering or preparation again.
+
+The earlier stable Chrome 152 capture also has a separate 210.907 ms
+`FinishPaintRenderPass` event. Both stable Chrome 152 and Canary 155 used
+Graphite/Dawn/Metal on this machine; the issue is not qualified as Canary-only.
+No browser rendering flags were changed.
+
+The capture folders retain recorder JSON, gzip trace, original chronological video
+observations, encoded video, source/loaded receipts, and analysis/qualification
+files. CDP video observations do not prove every display refresh.
