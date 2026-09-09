@@ -280,7 +280,7 @@
         "label": "Oxygen signature",
         "description": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
         "title": "Oxygen-sensitive visible reflectance ratio",
-        "summary": "A visible spectral signature associated with oxygen in surface ice.",
+        "summary": "A 565/577.3 nm surface-ice oxygen signature, not oxygen concentration. These 2° samples have approximate registration. Gray grid marks missing or withheld data; joins between nights remain.",
         "thumbnail": "/scenes/ganymede/ganymede-oxygen-signature-thumbnail.webp",
         "surface": "ganymede-oxygen-signature-surface@2x.webp",
         "poles": "ganymede-oxygen-signature-poles@2x.webp",
@@ -301,7 +301,7 @@
             "1.00",
             "1.02"
           ],
-          "meta": "565 / 577.3 nm reflectance ratio",
+          "meta": "reflectance ratio",
           "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
           "image": "/scenes/ganymede/ganymede-oxygen-signature-legend.webp"
         }

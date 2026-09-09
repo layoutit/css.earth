@@ -4,7 +4,7 @@
   "objects": [
     {
       "id": "io",
-      "sourceManifestSha256": "fd792b4363103c265055067fffc22d091a9ad3f4cdfc9b7074836fe9714f0c94",
+      "sourceManifestSha256": "8fcf2b685e212acdb95fd16368a8f51817b3f21da16de5aeaef329d8f2c625b6",
       "addedInputPins": [
         {
           "path": "muse/485nm_slope_io_night_1.fits",
@@ -71,7 +71,7 @@
     },
     {
       "id": "ganymede",
-      "sourceManifestSha256": "36fda8073578cf334b985efa19a37e7021021a9adb0864a2af38b281efbaa110",
+      "sourceManifestSha256": "4b1a55dc054828c9d764c093e35aad58d41bdebb166c0a7f49282e7defba0bb5",
       "addedInputPins": [
         {
           "path": "muse/577.3nm_band_ganymede_night_1.fits",
@@ -108,7 +108,7 @@
     },
     {
       "id": "enceladus",
-      "sourceManifestSha256": "41505b1d9d4d6088c43d5df5cb8251ca5622a081d4b4dc18c949c7ecfa77fbce",
+      "sourceManifestSha256": "0a20f44c52fe80c2f93a1c3b9e2de30808012c58d571746af2b4bfb8c8bd1d32",
       "addedInputPins": [
         {
           "path": "vims-chemistry/native/C1487299582_1_ir.cub",
@@ -183,5 +183,6 @@
       ],
       "priorInputsUnchanged": true
     }
-  ]
+  ],
+  "visibleCopyReview": "Visual review prompted visible coverage, registration and interpretation caveats and shorter legend units; the numerical inputs and all image bytes remain unchanged."
 }

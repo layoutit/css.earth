@@ -16,8 +16,9 @@ pass; browser/delivery review in progress.
 | Enceladus | Ice absorption; Infrared ratio | Fixed native Cassini VIMS 2.02 µm continuum depth and near-3.1/1.66 µm ratio. Partial source-center coverage; uncorrected photometry and archive filtering are explicit. |
 
 One complete three-moon batch uses the existing dataset controls, legends,
-minimaps and scene. No renderer, shell, navigation, camera, geometry or retained
-tree change. Numerical interpretation, projections, masks and textures are
+minimaps and scene. Shared renderer, shell, navigation and camera code are
+unchanged; scene geometry and retained trees are preserved. Body-owned lens
+entry views focus the observed regions. Numerical interpretation, projections, masks and textures are
 prepared offline. Five views add **20 image files / 585,804 bytes**; this image
 increment excludes object JSON transport and existing/shared assets.
 
