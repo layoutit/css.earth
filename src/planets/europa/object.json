@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4d0e0827b08d48f925e7b5686cce1da3c9fe47fa2436de52da87797f83b28031"
+    "sha256": "2bb495bd296416bfccc8c59dbbe119a7a6c7385df043c5b9343a27a7138d4609"
   },
   "id": "europa",
   "properties": {
@@ -68,6 +68,16 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "geology",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "infrared",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -88,12 +98,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "4191287fe4c69d4d8af75d177e6569b1f67d9ebbdf9785e5f0ce3ca073d4e272"
+          "sha256": "8e8e832aefcefcab28c76a8c9c4eadb7eb31d5c8ff234a834d31967f83f73184"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "130e2725c2a135d3b687cb0b073020247b99daaf0d48d0ae9267d6c65ec622b3"
+          "sha256": "b7cd3a7d52d8b7ae1fe55fbc71eb313827b966d250e5edf80c644b26d05b8d6a"
         },
         {
           "id": "title",
@@ -108,7 +118,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2ab34145b03410298cddacd91b549e97ac977e9337d3706f3f4fcb43abbdf247"
+          "sha256": "b0154c84662fa90ce2fcc10046dba1a5b6f09b1527682d7f81ee3344ccfcb3c0"
         }
       ]
     }

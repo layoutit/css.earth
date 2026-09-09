@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4546c086196c42803a80891d89b47b4c5c61fab59ada810c2b91c9df32a68001"
+    "sha256": "00096da025be1265e80fd7cbecf2f9ada06ca20ff5e701966c8e0b6c765f76eb"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "3932ef460c88f7d8592f3fffd6a1f51025ba683f411b13426b06f7b5eb0a38cd",
+      "sha256": "4e4b1df6415a820d771b2b31ce65cd2170de5b40324e9a40febee252e743a812",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -124,6 +124,53 @@
                 ],
                 "ambient": 0.25
               }
+            },
+            {
+              "id": "albedo",
+              "label": "Bond albedo",
+              "format": "geotiff",
+              "path": "science/nh-charon-bond-georeferenced.tif",
+              "consumer": "bond-albedo",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "minimum": 0.1,
+              "maximum": 0.5,
+              "colors": [
+                "#263e63",
+                "#468e9c",
+                "#b4cebd",
+                "#f5ecc5"
+              ],
+              "labels": [
+                "0.1",
+                "0.3",
+                "0.5"
+              ],
+              "units": "fraction",
+              "description": "Modeled reflected sunlight",
+              "title": "New Horizons modeled Bond albedo",
+              "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx",
+              "valueTransform": {
+                "scale": 0.00392156862745,
+                "offset": 0
+              },
+              "grid": {
+                "width": 1518,
+                "height": 700,
+                "noData": 0,
+                "origin": [
+                  -1903805.1,
+                  951902.6
+                ],
+                "resolution": [
+                  2508.307177965,
+                  -2508.307177965
+                ],
+                "referenceRadiusMeters": 606000,
+                "centerLongitude": 0,
+                "wrapLongitude": true
+              },
+              "textureScale": 0.25
             }
           ],
           "observedColors": []
@@ -166,7 +213,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1d019f22059c1b908384d58fc112fc396c3e78e2676b4d02d6fbb9698fe549a3",
+      "sha256": "d52c3e5617fbff1e26d1703e8035af4f72f0c6d9e3a718baa21856d3546e9d91",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -238,7 +285,8 @@
           "labels": {
             "normal": "Monochrome",
             "elevation": "Elevation",
-            "enhanced-color": "Enhanced color"
+            "enhanced-color": "Enhanced color",
+            "albedo": "Bond albedo"
           },
           "controls": [
             {
@@ -301,6 +349,36 @@
                 "image": "/scenes/charon/charon-elevation-legend.webp"
               },
               "summary": "Stereo and shading height relative to a 606 km sphere. Detail varies; the gray grid marks missing data."
+            },
+            {
+              "id": "albedo",
+              "label": "Bond albedo",
+              "description": "New Horizons photometric model estimating the fraction of sunlight reflected by Charon. Derived from LORRI brightness and scattering assumptions, not a direct bolometric measurement. Gray grid marks missing source cells and uncovered southern latitudes. Colors span 0.1–0.5; values beyond those limits use endpoint colors.",
+              "title": "New Horizons modeled Bond albedo",
+              "thumbnail": "/scenes/charon/charon-albedo-thumbnail.webp",
+              "surface": "charon-albedo-surface@2x.webp",
+              "poles": "charon-albedo-poles@2x.webp",
+              "source": {
+                "id": "new-horizons-charon-bond-albedo-grid",
+                "path": "../manifest.json",
+                "url": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx"
+              },
+              "detail": "Photometric model",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Modeled Bond albedo",
+                "image": "charon-albedo-legend.webp",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "≤0.1",
+                  "0.3",
+                  "≥0.5"
+                ],
+                "meta": "fraction of incident sunlight",
+                "sourceUrl": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx"
+              }
             }
           ]
         },
@@ -534,6 +612,34 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "new-horizons-charon-bond-albedo-grid",
+      "path": "science/nh-charon-bond-georeferenced.tif",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx",
+      "credit": "New Horizons geology and geophysics team; NASA/JHUAPL/SwRI; NASA PDS Small Bodies Node",
+      "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx"
+      ],
+      "acquisition": "Checked-in lossless GeoTIFF wrapper of nh_charon_bond.img; no resampling. Reproduce with tools/objects/acquisition/pds4-byte-geotiff.py and science/prepare-bond-map.json.",
+      "redistribution": "Retain producer citation and photometric-model interpretation.",
+      "width": 1518,
+      "height": 700,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 606000
+      },
+      "coverage": "Original DN zero is missing. Preserve metric pixel registration and incomplete southern extent.",
+      "sha256": "bb936d47510a45c1bb99b143c2cc25b6e677a344dc9eff579d1ff06d07057dfc",
+      "bytes": 107840,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Source metadata, license evidence, or authored preparation and content.",
       "id": "authored-document:content/object.json",
@@ -543,8 +649,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1d019f22059c1b908384d58fc112fc396c3e78e2676b4d02d6fbb9698fe549a3",
-      "bytes": 10544,
+      "sha256": "d52c3e5617fbff1e26d1703e8035af4f72f0c6d9e3a718baa21856d3546e9d91",
+      "bytes": 12035,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -725,6 +831,57 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "albedo",
+      "label": "Bond albedo",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "New Horizons photometric model estimating the fraction of sunlight reflected by Charon. Derived from LORRI brightness and scattering assumptions, not a direct bolometric measurement. Gray grid marks missing source cells and uncovered southern latitudes. Colors span 0.1–0.5; values beyond those limits use endpoint colors."
+      ],
+      "lensIds": [
+        "albedo"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "New Horizons modeled Bond albedo"
+      },
+      "inputs": [
+        "new-horizons-charon-bond-albedo-grid"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/charon/charon-albedo-thumbnail.webp",
+          "bytes": 1518,
+          "sha256": "62d79f826284d5f1826ca11c80479ab2f84427908a2d73fdd177278b60ca8771",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/charon/charon-albedo-legend.webp",
+          "bytes": 196,
+          "sha256": "736d11631a7c54a437a74430333a43dad33a9a63bb88261be3064ffdf93f2435",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/charon/charon-albedo-surface@2x.webp",
+          "bytes": 132016,
+          "sha256": "f488fe48dedf328dee7bd9f09533e80ed9c13a732351cc5c7456cba36a630648",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/charon/charon-albedo-poles@2x.webp",
+          "bytes": 6626,
+          "sha256": "99e24392167a3790fcbf0f3693e1dbf5aaef867264f20e2692214fd521d1180e",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -817,6 +974,30 @@
           "url": "object:prepared/minimaps/elevation.webp",
           "bytes": 26390,
           "sha256": "dddc7cc66d7b203a52251f34998ecb22f624d6ec2751abad59649b20f6101169",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:albedo",
+      "label": "Bond albedo preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "albedo"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/albedo.webp",
+          "bytes": 82058,
+          "sha256": "6d959204ee8fe0708185d474c18778328d9af02a5e75719adadb69e9403adc60",
           "verification": "bytes-verified"
         }
       ]

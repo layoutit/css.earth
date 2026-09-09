@@ -1,0 +1,782 @@
+{
+  "body": "callisto",
+  "status": "PASS",
+  "products": [
+    {
+      "id": "infrared",
+      "method": "Independent inverse-coordinate native cube probes, fixed RGB ranges",
+      "probes": [
+        {
+          "longitude": -164.970703125,
+          "latitude": -80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -125.068359375,
+          "latitude": -80.068359375,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.11578711122274399,
+            0.10729113966226578,
+            0.03216831758618355
+          ],
+          "rgb": [
+            66,
+            62,
+            42
+          ]
+        },
+        {
+          "longitude": -84.990234375,
+          "latitude": -80.068359375,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.1114683672785759,
+            0.10610245168209076,
+            0.033698104321956635
+          ],
+          "rgb": [
+            64,
+            61,
+            44
+          ]
+        },
+        {
+          "longitude": -44.912109375,
+          "latitude": -80.068359375,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.13262969255447388,
+            0.1153218075633049,
+            0.038528528064489365
+          ],
+          "rgb": [
+            76,
+            66,
+            50
+          ]
+        },
+        {
+          "longitude": -5.009765625,
+          "latitude": -80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 35.068359375,
+          "latitude": -80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 74.970703125,
+          "latitude": -80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 115.048828125,
+          "latitude": -80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 154.951171875,
+          "latitude": -80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -164.970703125,
+          "latitude": -54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -125.068359375,
+          "latitude": -54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -84.990234375,
+          "latitude": -54.931640625,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.08848506957292557,
+            0.08390715718269348,
+            0.03892515227198601
+          ],
+          "rgb": [
+            51,
+            48,
+            50
+          ]
+        },
+        {
+          "longitude": -44.912109375,
+          "latitude": -54.931640625,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.10926531255245209,
+            0.11229788511991501,
+            0.04141673818230629
+          ],
+          "rgb": [
+            63,
+            64,
+            54
+          ]
+        },
+        {
+          "longitude": -5.009765625,
+          "latitude": -54.931640625,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.1928904801607132,
+            0.15491722524166107,
+            0.05512123927474022
+          ],
+          "rgb": [
+            110,
+            88,
+            71
+          ]
+        },
+        {
+          "longitude": 35.068359375,
+          "latitude": -54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 74.970703125,
+          "latitude": -54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 115.048828125,
+          "latitude": -54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 154.951171875,
+          "latitude": -54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -164.970703125,
+          "latitude": -25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -125.068359375,
+          "latitude": -25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -84.990234375,
+          "latitude": -25.048828125,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.03686726093292236,
+            0.02508022077381611,
+            0.012116131372749805
+          ],
+          "rgb": [
+            22,
+            15,
+            16
+          ]
+        },
+        {
+          "longitude": -44.912109375,
+          "latitude": -25.048828125,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.0708150714635849,
+            0.08445408195257187,
+            0.041481200605630875
+          ],
+          "rgb": [
+            41,
+            49,
+            54
+          ]
+        },
+        {
+          "longitude": -5.009765625,
+          "latitude": -25.048828125,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.10218130052089691,
+            0.10666785389184952,
+            0.04638192430138588
+          ],
+          "rgb": [
+            59,
+            61,
+            60
+          ]
+        },
+        {
+          "longitude": 35.068359375,
+          "latitude": -25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 74.970703125,
+          "latitude": -25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 115.048828125,
+          "latitude": -25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 154.951171875,
+          "latitude": -25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -164.970703125,
+          "latitude": -0.087890625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -125.068359375,
+          "latitude": -0.087890625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -84.990234375,
+          "latitude": -0.087890625,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.08405386656522751,
+            0.07077693194150925,
+            0.03098815307021141
+          ],
+          "rgb": [
+            48,
+            41,
+            40
+          ]
+        },
+        {
+          "longitude": -44.912109375,
+          "latitude": -0.087890625,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.08823711425065994,
+            0.10257340967655182,
+            0.04143279418349266
+          ],
+          "rgb": [
+            51,
+            59,
+            54
+          ]
+        },
+        {
+          "longitude": -5.009765625,
+          "latitude": -0.087890625,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.0993693470954895,
+            0.11953631788492203,
+            0.05244455859065056
+          ],
+          "rgb": [
+            57,
+            68,
+            68
+          ]
+        },
+        {
+          "longitude": 35.068359375,
+          "latitude": -0.087890625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 74.970703125,
+          "latitude": -0.087890625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 115.048828125,
+          "latitude": -0.087890625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 154.951171875,
+          "latitude": -0.087890625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -164.970703125,
+          "latitude": 25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -125.068359375,
+          "latitude": 25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -84.990234375,
+          "latitude": 25.048828125,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.006479185074567795,
+            0.007821078412234783,
+            0.004493908490985632
+          ],
+          "rgb": [
+            5,
+            5,
+            7
+          ]
+        },
+        {
+          "longitude": -44.912109375,
+          "latitude": 25.048828125,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.08621127158403397,
+            0.10664185136556625,
+            0.04820261895656586
+          ],
+          "rgb": [
+            50,
+            61,
+            62
+          ]
+        },
+        {
+          "longitude": -5.009765625,
+          "latitude": 25.048828125,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.17511945962905884,
+            0.21135130524635315,
+            0.09823058545589447
+          ],
+          "rgb": [
+            100,
+            120,
+            126
+          ]
+        },
+        {
+          "longitude": 35.068359375,
+          "latitude": 25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 74.970703125,
+          "latitude": 25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 115.048828125,
+          "latitude": 25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 154.951171875,
+          "latitude": 25.048828125,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -164.970703125,
+          "latitude": 54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -125.068359375,
+          "latitude": 54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -84.990234375,
+          "latitude": 54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -44.912109375,
+          "latitude": 54.931640625,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.1291065216064453,
+            0.1392020583152771,
+            0.04604245722293854
+          ],
+          "rgb": [
+            74,
+            80,
+            59
+          ]
+        },
+        {
+          "longitude": -5.009765625,
+          "latitude": 54.931640625,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.3068718910217285,
+            0.32142022252082825,
+            0.12721745669841766
+          ],
+          "rgb": [
+            174,
+            182,
+            163
+          ]
+        },
+        {
+          "longitude": 35.068359375,
+          "latitude": 54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 74.970703125,
+          "latitude": 54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 115.048828125,
+          "latitude": 54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 154.951171875,
+          "latitude": 54.931640625,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -164.970703125,
+          "latitude": 80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -125.068359375,
+          "latitude": 80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -84.990234375,
+          "latitude": 80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -44.912109375,
+          "latitude": 80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": -5.009765625,
+          "latitude": 80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 35.068359375,
+          "latitude": 80.068359375,
+          "observation": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+          "IF": [
+            0.25784850120544434,
+            0.23724044859409332,
+            0.09372695535421371
+          ],
+          "rgb": [
+            147,
+            135,
+            120
+          ]
+        },
+        {
+          "longitude": 74.970703125,
+          "latitude": 80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 115.048828125,
+          "latitude": 80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "longitude": 154.951171875,
+          "latitude": 80.068359375,
+          "observation": null,
+          "IF": null,
+          "rgb": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceManifestSha256": "440058bf9a72d062985e9b07afd3178057cd2fd9deb50fe6b427de5074ace1b4",
+  "scriptSha256": "b967e1d7e4f10e6eb69e303d0ef5a08dc67480cf018d6abf183cb545550cae5e",
+  "rasterSha256s": {
+    "nims/callisto-nims-composite.tif": "23021089312fecb6c42df4502f93f57db52efe7fb4fa452c194fe5f1fcd17588"
+  }
+}

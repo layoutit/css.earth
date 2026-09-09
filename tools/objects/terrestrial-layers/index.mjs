@@ -17,7 +17,7 @@ import { preparePlanetDirectionalSun } from '../../../src/platform/prepare-direc
 import { SOLAR_GEOMETRY_EPOCH_LABEL, requireBodyFixedSunDirection } from '../../../src/platform/solar-geometry.mjs';
 import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mjs';
 import { prepareEclipticPresentationFrame } from '../../../src/platform/solar-presentation-frame.mjs';
-import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid } from './solid-raster.mjs';
+import { prepareSolidRasters, prepareSolidMaterial, scientificPreviewGrid, lensTextureGrid } from './solid-raster.mjs';
 import { prepareSolidScene, prepareSolidPresentation } from './solid-scene.mjs';
 import { prepareRadialMaterials } from './radial-terrain.mjs';
 import { loadRadialModels, combineRadialModels } from './radial-models.mjs';
@@ -234,6 +234,12 @@ export function parseTerrestrialProfile(value) {
           ['sun', 'observer'].some(key => typeof vectors?.[key] !== 'string' || vectors[key].startsWith('/') || vectors[key].split('/').includes('..'))) {
         throw new TypeError('Invalid source-bound disk normalization or color-level profile.');
       }
+    }
+  }
+  for (const lens of [...value.raster.observations, ...(value.raster.scientific ?? [])]) {
+    if (lens.textureScale !== undefined) {
+      lensTextureGrid(lens, value.raster);
+      if (value.geometry.radialTerrain || value.geometry.radialModels) throw new TypeError('Texture scaling requires the fixed sphere atlas.');
     }
   }
   return value;

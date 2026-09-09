@@ -151,6 +151,16 @@ interface Props { title: string }
     [{ [shell]: "<script>const broken = ;</script>" }, /Invalid runtime source/],
   ]) await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, ...changed })), expected);
 });
+test("Astro server builtins do not hide the same imports in browser scripts", async () => {
+  const shell = 'site/components/PlanetShell.astro';
+  const frontmatter = "---\nimport { existsSync } from 'node:fs';\nimport { resolve } from 'node:path';\nconst hasImage = existsSync(resolve('public/social/moon.jpg'));\n---\n<aside>{hasImage}</aside>";
+  assert.equal((await auditObjectRuntimeOwnership(fixture({ [shell]: frontmatter }))).complete, true);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [shell]:
+    frontmatter + "<script>import { existsSync } from 'node:fs';</script>" })), /(?:Unclosed runtime source|Runtime import escapes the source root:) node:fs/);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [shell]:
+    "<script>import '../shared-client.mjs';</script>",
+    'site/shared-client.mjs': "import { resolve } from 'node:path';" })), /(?:Unclosed runtime source|Runtime import escapes the source root:) node:path/);
+});
 test("literal navigation content is allowed only through the shell closure, not runtime dispatch", async () => {
   const file = "site/navigation-content.mjs";
   const content = `export const MARKERS = Object.freeze(${JSON.stringify({moon:{label:"Moon"},saturn:{label:"Saturn"}})});`;

@@ -1,0 +1,62 @@
+
+> cssearth@0.1.0 build:renderer /Users/ekrof/fed/cssEarth-moons-mapped-science
+> pnpm --filter @cssearth/engine exec tsup --config ../../src/renderers/css/tsup.config.ts
+
+CLI Building entry: {"index":"/Users/ekrof/fed/cssEarth-moons-mapped-science/src/renderers/css/index.ts","universe":"/Users/ekrof/fed/cssEarth-moons-mapped-science/src/renderers/css/universe/index.ts","navigation":"/Users/ekrof/fed/cssEarth-moons-mapped-science/src/renderers/css/navigation/index.ts","testing":"/Users/ekrof/fed/cssEarth-moons-mapped-science/src/renderers/css/testing.ts","point-field-selection-worker":"/Users/ekrof/fed/cssEarth-moons-mapped-science/src/renderers/css/stars/point-field-selection-worker.ts","prepared-object-worker":"/Users/ekrof/fed/cssEarth-moons-mapped-science/src/renderers/css/prepared-object-worker.ts"}
+CLI Using tsconfig: ../../src/renderers/css/tsconfig.json
+CLI tsup v8.5.1
+CLI Using tsup config: /Users/ekrof/fed/cssEarth-moons-mapped-science/src/renderers/css/tsup.config.ts
+CLI Target: es2022
+CLI Cleaning output folder
+ESM Build start
+CJS Build start
+
+ WARN  [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1m"import.meta" is not available with the "cjs" output format and will be empty[0m [empty-import-meta]
+
+    ../../src/renderers/css/prepared-object-worker-client.ts:7:97:
+[37m      7 │ ...w Worker(new URL('./prepared-object-worker.js', [32mimport.meta[37m.url), {
+        ╵                                                    [32m~~~~~~~~~~~[0m
+
+  You need to set the output format to "esm" for "import.meta" to work correctly.
+
+
+
+
+ WARN  [33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1m"import.meta" is not available with the "cjs" output format and will be empty[0m [empty-import-meta]
+
+    ../../src/renderers/css/stars/point-field-selection-client.ts:22:103:
+[37m      22 │ ...ker(new URL('./point-field-selection-worker.js', [32mimport.meta[37m.url),
+         ╵                                                     [32m~~~~~~~~~~~[0m
+
+  You need to set the output format to "esm" for "import.meta" to work correctly.
+
+
+
+ESM ../../src/renderers/css/dist/chunk-BEKNENX4.js               132.37 KB
+ESM ../../src/renderers/css/dist/index.js                        182.85 KB
+ESM ../../src/renderers/css/dist/navigation.js                   3.99 KB
+ESM ../../src/renderers/css/dist/chunk-72UHM2PU.js               22.73 KB
+ESM ../../src/renderers/css/dist/testing.js                      3.05 KB
+ESM ../../src/renderers/css/dist/chunk-5SO7FUK4.js               75.61 KB
+ESM ../../src/renderers/css/dist/chunk-NFVWBLE3.js               69.47 KB
+ESM ../../src/renderers/css/dist/chunk-GELTBGHK.js               7.26 KB
+ESM ../../src/renderers/css/dist/prepared-object-worker.js       648.00 B
+ESM ../../src/renderers/css/dist/chunk-FYAUJ7OO.js               686.00 B
+ESM ../../src/renderers/css/dist/point-field-selection-worker.js 901.00 B
+ESM ../../src/renderers/css/dist/chunk-BPVWMTXK.js               57.89 KB
+ESM ../../src/renderers/css/dist/chunk-4H6PHH2Y.js               4.15 KB
+ESM ../../src/renderers/css/dist/chunk-NCTXCSIN.js               19.32 KB
+ESM ../../src/renderers/css/dist/universe.js                     1.73 KB
+ESM ../../src/renderers/css/dist/chunk-ZQMQUVRT.js               3.55 KB
+ESM ../../src/renderers/css/dist/chunk-FFAAQ5CX.js               80.18 KB
+ESM ../../src/renderers/css/dist/chunk-TLSO4G42.js               6.94 KB
+ESM ⚡️ Build success in 63ms
+CJS ../../src/renderers/css/dist/navigation.cjs                   41.50 KB
+CJS ../../src/renderers/css/dist/testing.cjs                      186.83 KB
+CJS ../../src/renderers/css/dist/universe.cjs                     204.49 KB
+CJS ../../src/renderers/css/dist/point-field-selection-worker.cjs 1.46 KB
+CJS ../../src/renderers/css/dist/prepared-object-worker.cjs       128.26 KB
+CJS ../../src/renderers/css/dist/index.cjs                        659.51 KB
+CJS ⚡️ Build success in 64ms
+DTS Build start
+ ELIFECYCLE  Command failed.

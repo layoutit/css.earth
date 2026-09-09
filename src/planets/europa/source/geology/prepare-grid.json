@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-geologic-grid-intake@1",
+  "shapePath": "GeoUnits_FINAL.shp",
+  "attributePath": "GeoUnits_FINAL.dbf",
+  "projectionPath": "GeoUnits_FINAL.prj",
+  "projectionWkt": "GEOGCS[\"GCS_Europa_2000\",DATUM[\"D_Europa_2000\",SPHEROID[\"Europa_2000_IAU_IAG\",1562090.0,0.0]],PRIMEM[\"Reference_Meridian\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+  "coordinateUnits": "degrees",
+  "radiusMeters": 1562090,
+  "width": 2048,
+  "height": 1024,
+  "expectedRecords": 436,
+  "field": "Geounits",
+  "unknownValues": [
+    "nd"
+  ],
+  "categories": [
+    {
+      "value": "c",
+      "label": "Crater material",
+      "color": "#ff8000"
+    },
+    {
+      "value": "ce",
+      "label": "Continuous crater ejecta",
+      "color": "#ffeb80"
+    },
+    {
+      "value": "cpre",
+      "label": "Pwyll radial crater ejecta",
+      "color": "#ffffb2"
+    },
+    {
+      "value": "cpr",
+      "label": "Pwyll crater rays",
+      "color": "#ffcc00"
+    },
+    {
+      "value": "chl",
+      "label": "Low-brightness chaos",
+      "color": "#99eb66"
+    },
+    {
+      "value": "chm",
+      "label": "Mottled chaos",
+      "color": "#ccff66"
+    },
+    {
+      "value": "chh",
+      "label": "High-brightness chaos",
+      "color": "#deffb2"
+    },
+    {
+      "value": "chM",
+      "label": "Moytura chaos",
+      "color": "#b2ff99"
+    },
+    {
+      "value": "b",
+      "label": "Bands",
+      "color": "#cc80ff"
+    },
+    {
+      "value": "pr",
+      "label": "Regional plains",
+      "color": "#ebffff"
+    }
+  ],
+  "pins": {
+    "GeoUnits_FINAL.shp": "e0614deec63c9ef07823bb5273f7075e8163e63e78a6abf639073834a186c757",
+    "GeoUnits_FINAL.dbf": "f5563f5e290d8d6f2458940ca0df0eeb58ee67ee720c89304233148aa968e2c6",
+    "GeoUnits_FINAL.prj": "3c8d7ec5c02a28ab92adaf06f259155557da66af5fb4b367f878b73d0828afb5"
+  },
+  "output": "europa-geologic-units.tif",
+  "receipt": "europa-geologic-units.json"
+}

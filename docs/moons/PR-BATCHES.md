@@ -4,7 +4,7 @@ Owner: Moons · Planned 2026-09-08 · Based on the completed [484-body review](r
 
 The delivery unit is a substantial, complete outcome across a named cohort. Every PR includes its source intake, preparation, body integration, content, assets and qualification evidence. The user’s direction is to make meaningful advances in each PR.
 
-**B1 and [B2 PR #62](https://github.com/layoutit/cssEarth/pull/62) are merged; [B3 draft PR #67](https://github.com/layoutit/cssEarth/pull/67) covers the approved six-moon scope after all 12 source reviews.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B3–B4 counts remain planning targets until their selected sources and implementations qualify.
+**B1 and [B2 PR #62](https://github.com/layoutit/cssEarth/pull/62) are merged; [B3 merged PR #67](https://github.com/layoutit/cssEarth/pull/67) covers the approved six-moon scope after all 12 source reviews.** Work can proceed incrementally within a branch; each reviewable PR covers its complete agreed batch. A discovered source blocker triggers an explicit cohort/scope decision before delivery, preserving the intended scale and source fidelity. B3–B4 counts remain planning targets until their selected sources and implementations qualify.
 
 | Batch | Outcome | Scope |
 | --- | --- | --- |
@@ -57,7 +57,7 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 ## B3 — Spacecraft color and scientific maps
 
-**State:** [draft PR #67](https://github.com/layoutit/cssEarth/pull/67) · **Owner:** Moons
+**State:** [merged PR #67](https://github.com/layoutit/cssEarth/pull/67) · **Owner:** Moons
 
 **Bodies:** Callisto, Hyperion, Phoebe, Proteus, Titania, Miranda.
 
@@ -73,7 +73,7 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 ## B4 — Add measured light curves and spectra across nine existing moons
 
-**State:** planned · **Owner:** Moons
+**State:** [draft PR #70](https://github.com/layoutit/cssEarth/pull/70), paused at the user’s request · **Owner:** Moons
 
 **Bodies:** Himalia, Epimetheus, Telesto, Pandora, Ymir, Albiorix, Siarnaq, Methone, Pallene.
 
@@ -84,6 +84,20 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 **Source closure before implementation.** Pin released numeric data or reproducible extraction inputs. The review identifies actual CSV/text for some targets and archive/reduction work for others. Normalize and validate each measurement on its own terms; disk-integrated spectra do not provide a spatial mineral map.
 
 **Acceptance.** All nine bodies expose useful measured observations with source/error checks, accessible content and stable retained DOM. Runtime consumes prepared results. The feature is exercised end to end by the full cohort.
+
+## B6 — Mapped scientific surfaces across four existing moons
+
+**State:** [draft PR #76](https://github.com/layoutit/cssEarth/pull/76); selected-body qualification and runtime delivery complete · **Owner:** Moons
+
+Six new views: Moon geology and Diviner silicate signature, Europa geology and
+Galileo NIMS infrared, Callisto Galileo NIMS infrared, and Charon modeled Bond
+albedo. Source preparation, maps and explanatory content use the existing object
+contract. Renderer, runtime, shared camera/shell/navigation and shape geometry
+remain fixed. See [scope and source decisions](B6-MAPPED-SCIENCE.md) and the
+[visual review, source checks and delivery receipts](b6-mapped-science/VISUAL-REVIEW.md).
+
+This follow-up deepens four scenes already counted above. It adds no moon to the
+roster or benchmark denominator. B4 observation charts remain in draft.
 
 ## Parallel execution
 

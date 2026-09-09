@@ -21,6 +21,23 @@
           "centerLongitude": 180,
           "resampling": "source-georeferenced-bilinear"
         }
+      },
+      {
+        "id": "infrared",
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        },
+        "textureScale": 0.5,
+        "focus": {
+          "longitudeDegrees": 155,
+          "latitudeDegrees": 0,
+          "zoom": 1.1
+        }
       }
     ],
     "scientific": [
@@ -82,6 +99,101 @@
           "latitudeDegrees": -43.7,
           "zoom": 4
         }
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "format": "geotiff",
+        "path": "geology/europa-geologic-units.tif",
+        "consumer": "geology",
+        "sampling": "nearest",
+        "displaySampling": "nearest",
+        "categories": [
+          {
+            "value": "c",
+            "label": "Crater material",
+            "color": "#ff8000"
+          },
+          {
+            "value": "ce",
+            "label": "Continuous crater ejecta",
+            "color": "#ffeb80"
+          },
+          {
+            "value": "cpre",
+            "label": "Pwyll radial crater ejecta",
+            "color": "#ffffb2"
+          },
+          {
+            "value": "cpr",
+            "label": "Pwyll crater rays",
+            "color": "#ffcc00"
+          },
+          {
+            "value": "chl",
+            "label": "Low-brightness chaos",
+            "color": "#99eb66"
+          },
+          {
+            "value": "chm",
+            "label": "Mottled chaos",
+            "color": "#ccff66"
+          },
+          {
+            "value": "chh",
+            "label": "High-brightness chaos",
+            "color": "#deffb2"
+          },
+          {
+            "value": "chM",
+            "label": "Moytura chaos",
+            "color": "#b2ff99"
+          },
+          {
+            "value": "b",
+            "label": "Bands",
+            "color": "#cc80ff"
+          },
+          {
+            "value": "pr",
+            "label": "Regional plains",
+            "color": "#ebffff"
+          }
+        ],
+        "description": "Interpreted geologic units",
+        "title": "USGS global geology (2024 SIM 3513)",
+        "sourceUrl": "https://pubs.usgs.gov/publication/sim3513",
+        "grid": {
+          "width": 2048,
+          "height": 1024,
+          "centerLongitude": 0,
+          "referenceRadiusMeters": 1562090,
+          "noData": -32768,
+          "origin": [
+            -4907450.46824608,
+            2453725.23412304
+          ],
+          "resolution": [
+            4792.4320978965625,
+            -4792.4320978965625
+          ],
+          "wrapLongitude": true
+        },
+        "textureScale": 0.5,
+        "minimum": 0,
+        "maximum": 9,
+        "colors": [
+          "#ff8000",
+          "#ffeb80",
+          "#ffffb2",
+          "#ffcc00",
+          "#99eb66",
+          "#ccff66",
+          "#deffb2",
+          "#b2ff99",
+          "#cc80ff",
+          "#ebffff"
+        ]
       }
     ],
     "observedColors": [

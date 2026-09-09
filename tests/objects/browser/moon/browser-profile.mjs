@@ -36,7 +36,7 @@ export const browserProfile = createObjectBrowserProfile({
       preReadyDisabled: true,
     }),
     retained: Object.freeze({
-      lensIds: Object.freeze(["surface", "topography", "crust", "rock-abundance"]),
+      lensIds: Object.freeze(objectControls.lenses.controls.map(lens => lens.id)),
       speedClicks: 5,
       allowedMountSelectors: Object.freeze([]),
     }),

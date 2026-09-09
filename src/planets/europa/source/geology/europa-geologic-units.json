@@ -1,0 +1,83 @@
+{
+  "sourceRecords": {
+    "nd": 3,
+    "chl": 50,
+    "c": 29,
+    "b": 102,
+    "chm": 51,
+    "ce": 18,
+    "pr": 56,
+    "chh": 13,
+    "chM": 1,
+    "cpr": 112,
+    "cpre": 1
+  },
+  "width": 2048,
+  "height": 1024,
+  "unknownOrConflictingPixels": 153397,
+  "missingPixels": 153397,
+  "categories": [
+    {
+      "value": "c",
+      "label": "Crater material",
+      "color": "#ff8000"
+    },
+    {
+      "value": "ce",
+      "label": "Continuous crater ejecta",
+      "color": "#ffeb80"
+    },
+    {
+      "value": "cpre",
+      "label": "Pwyll radial crater ejecta",
+      "color": "#ffffb2"
+    },
+    {
+      "value": "cpr",
+      "label": "Pwyll crater rays",
+      "color": "#ffcc00"
+    },
+    {
+      "value": "chl",
+      "label": "Low-brightness chaos",
+      "color": "#99eb66"
+    },
+    {
+      "value": "chm",
+      "label": "Mottled chaos",
+      "color": "#ccff66"
+    },
+    {
+      "value": "chh",
+      "label": "High-brightness chaos",
+      "color": "#deffb2"
+    },
+    {
+      "value": "chM",
+      "label": "Moytura chaos",
+      "color": "#b2ff99"
+    },
+    {
+      "value": "b",
+      "label": "Bands",
+      "color": "#cc80ff"
+    },
+    {
+      "value": "pr",
+      "label": "Regional plains",
+      "color": "#ebffff"
+    }
+  ],
+  "output": "europa-geologic-units.tif",
+  "sha256": "9aeae6182c48a4022c0bc86f8550a0cb4804b00172a89f3fa807deceb9706ba1",
+  "transform": [
+    4792.4320978965625,
+    0.0,
+    -4907450.46824608,
+    0.0,
+    -4792.4320978965625,
+    2453725.23412304
+  ],
+  "radiusMeters": 1562090,
+  "policy": "Pixel-center polygon inclusion; holes preserved; unknown or conflicting units withheld; source edges clipped by global raster extent."
+}

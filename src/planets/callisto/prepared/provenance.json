@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "77f33c4bc4248cb712730b559a0ba6bf5170d47e83c6c151a4f861f258e5fc27"
+    "sha256": "440058bf9a72d062985e9b07afd3178057cd2fd9deb50fe6b427de5074ace1b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8756e5b7371fa3533f55691b2267c89eb20472a2761280bd31b2693e5b21812a",
+      "sha256": "a266f5135c2bf1976fcce2f5611b641e551e8dbbed898ba88c03bde744169473",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -53,6 +53,23 @@
                 "channels": "rgb",
                 "zeroValidity": "all-channels",
                 "resampling": "source-georeferenced-bilinear"
+              }
+            },
+            {
+              "id": "infrared",
+              "validity": {
+                "kind": "geotiff-rgb-alpha",
+                "noData": 0,
+                "centerLongitude": 0,
+                "channels": "rgb",
+                "zeroValidity": "all-channels",
+                "resampling": "source-georeferenced-bilinear"
+              },
+              "textureScale": 0.25,
+              "focus": {
+                "longitudeDegrees": 315,
+                "latitudeDegrees": -20,
+                "zoom": 1.1
               }
             }
           ],
@@ -136,7 +153,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "dbbe045618046cebabfbd61ac26cfbd1bfe0e6bd15c15ff70cb5efbbd0c0c4aa",
+      "sha256": "c58df6c6f62d029f053d5f876fdd8deb481b061f958b58c51d86ee8a861914cb",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -287,6 +304,22 @@
                   "value": "About 8 km per pixel near the disk center"
                 }
               ]
+            },
+            {
+              "id": "infrared",
+              "label": "Infrared",
+              "description": "Galileo NIMS observations assign red, green and blue to 0.77, 2.25 and 3.66 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
+              "title": "Galileo NIMS spectral color",
+              "thumbnail": "/scenes/callisto/callisto-infrared-thumbnail.webp",
+              "surface": "callisto-infrared-surface@2x.webp",
+              "poles": "callisto-infrared-poles@2x.webp",
+              "source": {
+                "id": "callisto-registered-nims-composite",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.17189/4sq6-x165"
+              },
+              "detail": "NIMS spectral bands",
+              "falseColor": true
             }
           ]
         },
@@ -456,6 +489,52 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "callisto-registered-nims-composite",
+      "path": "nims/callisto-nims-composite.tif",
+      "origin": "https://doi.org/10.17189/4sq6-x165",
+      "credit": "NASA/JPL Galileo NIMS team; Malaska et al., USGS/PDS registered archive",
+      "license": "Public NASA mission data; preserve producer and PDS citation",
+      "licenseEvidence": [
+        "https://pds.nasa.gov/datastandards/citing/",
+        "https://doi.org/10.17189/4sq6-x165"
+      ],
+      "acquisition": "Checked-in compact derived RGB map. Reproduce with tools/objects/acquisition/nims-composite.py and nims/prepare-composite.json from pinned original registered cubes and wavelength tables.",
+      "redistribution": "Credited derived scientific visualization; authored channel display stretches are documented.",
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true,
+      "width": 2048,
+      "height": 1024,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 2409400
+      },
+      "coverage": "Intersection of valid samples in all three selected bands; no-data and ISIS special values remain missing. Earlier listed observation has priority; no blending or gap fill.",
+      "photometry": "Archive Minnaert-corrected I/F; fixed RGB display ranges, no independent frame normalization.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo"
+        ],
+        "evidence": "https://doi.org/10.17189/4sq6-x165"
+      },
+      "sha256": "23021089312fecb6c42df4502f93f57db52efe7fb4fa452c194fe5f1fcd17588",
+      "bytes": 193313,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
       "id": "authored-document:content/object.json",
@@ -465,8 +544,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "dbbe045618046cebabfbd61ac26cfbd1bfe0e6bd15c15ff70cb5efbbd0c0c4aa",
-      "bytes": 10814,
+      "sha256": "c58df6c6f62d029f053d5f876fdd8deb481b061f958b58c51d86ee8a861914cb",
+      "bytes": 11802,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -574,6 +653,57 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "infrared",
+      "label": "Infrared",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Galileo NIMS observations assign red, green and blue to 0.77, 2.25 and 3.66 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band."
+      ],
+      "lensIds": [
+        "infrared"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-rgb-alpha",
+          "noData": 0,
+          "centerLongitude": 0,
+          "channels": "rgb",
+          "zeroValidity": "all-channels",
+          "resampling": "source-georeferenced-bilinear"
+        }
+      },
+      "inputs": [
+        "callisto-registered-nims-composite"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/callisto/callisto-infrared-thumbnail.webp",
+          "bytes": 3108,
+          "sha256": "4f3edbfa6472b3c7c92253523ba5e6879e7dde5b3119825ef7c39b65a925a9d6",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/callisto/callisto-infrared-surface@2x.webp",
+          "bytes": 82426,
+          "sha256": "48d6c8424b144291123b0189346c95a18af644000ddd2a2a69d385f391c3b1a4",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/callisto/callisto-infrared-poles@2x.webp",
+          "bytes": 5376,
+          "sha256": "69161aa114ce5412b0bbb3aa2002987906e61f2d74d8d6819525cb7d5954fb8b",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -642,6 +772,30 @@
           "url": "object:prepared/minimaps/enhanced.webp",
           "bytes": 22524,
           "sha256": "fc1ea3a3e9a2434cfc810986b7495c29f647368a1d5e6db4fded931d9f7f756c",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:infrared",
+      "label": "Infrared preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "infrared"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/infrared.webp",
+          "bytes": 9306,
+          "sha256": "38713b5608e813079fffa41b6de8f0640f614881145bdfe5cefd10d1ac24470f",
           "verification": "bytes-verified"
         }
       ]
