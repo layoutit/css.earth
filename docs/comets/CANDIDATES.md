@@ -2,6 +2,10 @@
 
 The seven comet scenes include 67P, Hartley 2, Tempel 1, the completed PDS Wild 2 model, Halley's historical model, Tuttle's two inferred contact models, and Borrelly's observed terrain. The original archive survey was made on 8 September 2026; the Tuttle comparison was added on 9 September. An unresolved candidate is not a claim that usable data does not exist.
 
+## 67P: regions and geological features selected
+
+[Thomas et al. (2018)](https://doi.org/10.17632/2845znt54k.1) releases 26 region IDs on the SHAP7 source mesh. [ESA-AURORA (2021)](https://doi.org/10.5270/esa-kokoti7) supplies geological paths and feature locations mapped in 17 regions. Both now use the current 1,000-triangle 67P scene as Regions and Geology datasets. The [selection and qualification record](67P-GEOLOGY.md) records the bounded 3D registration, unsupported coverage, source credits and excluded flat projections.
+
 ## Wild 2: completed PDS model selected
 
 [PDS v2.1](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml) provides observed-only and completed plate models. The full model uses the archive's fitted ellipsoid and joining faces for unseen terrain, with explicit provenance flags. It now supplies Wild 2's closed 992-leaf scene. The viewer describes the estimated far side; no photographic or observed-terrain claim is made for it. See [the completion record](WILD2-COMPLETION.md).

@@ -75,7 +75,7 @@ export function prepareLensCategoryLegend({ title, items, meta, sourceUrl }) {
   }
   const preparedItems = items.map((item, index) => Object.freeze({
     label: validateLabel(item?.label, `item ${index} label`),
-    description: validateLabel(item?.description, `item ${index} description`),
+    ...(item?.description === undefined ? {} : { description: validateLabel(item.description, `item ${index} description`) }),
     color: serializeRgb(preparedRgb(item?.color, index)),
   }));
   const legend = {

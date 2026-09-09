@@ -38,6 +38,10 @@ The [original trial](67P-OSIRIS-TRIAL.md) preserves its separate camera comparis
 [67P OSIRIS coverage](67P-OSIRIS-COVERAGE.md) records the four-observation mosaic,
 the MiARD candidate disposition and source-selection evidence.
 
+[67P Regions and Geology](67P-GEOLOGY.md) records the 26 SHAP7 regional
+definitions and the ESA geological feature inventory, registered in 3D onto the
+same nucleus scene. These use the existing dataset selector and shared legend.
+
 [67P VIRTIS scientific views](67P-VIRTIS.md) documents the four MTP006 datasets, numerical units, source-to-shape transfer, concise lens factsheets and validation evidence.
 
 [Wild 2, Tempel 1 and Hartley 2 encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the five optional photographic views, selected spacecraft products, camera checks and coverage limits.
