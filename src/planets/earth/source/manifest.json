@@ -1052,8 +1052,8 @@
     },
     {
       "path": "interior/earth-interior.json",
-      "expectedSha256": "8b4b1e2d02d985ae83cb0b156b926ca140240002a6e0e3f0af6bc66f35c21fbc",
-      "expectedBytes": 1070,
+      "expectedSha256": "26c32ab22618b14d98c582dcf2e924e5a52d20f8715447a6bd1a60475d7d1c4a",
+      "expectedBytes": 1106,
       "purpose": "Source-qualified schematic Earth interior presentation specification"
     },
     {
@@ -1088,8 +1088,8 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 13037,
-      "expectedSha256": "3b099b13117f93184a350fcb32046de8ec85017d0c53a8328e5d23a3618e8be2",
+      "expectedBytes": 13283,
+      "expectedSha256": "db931371818e779e87a3233a049e910f2c980942be962d2cf1be3a31ee9a66b9",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -1106,8 +1106,8 @@
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 5201,
-      "expectedSha256": "32c0efd1aab2fad065ccbf9f291ec1574324e26dae7777ba2a64d7cf6346186f",
+      "expectedBytes": 5251,
+      "expectedSha256": "53ceedbdf8ccda01faba4ee44c52dbaa554cec07ed8bda450926c55589c803e1",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {

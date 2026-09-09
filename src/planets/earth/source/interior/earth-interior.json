@@ -36,6 +36,7 @@
   ],
   "tomographyPath": "interior/tomography.json",
   "presentation": {
-    "cutThroughCenter": true
+    "cutThroughCenter": true,
+    "thumbnailCutawayDegrees": 180
   }
 }

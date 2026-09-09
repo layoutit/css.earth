@@ -297,6 +297,11 @@
         "webp": {
           "quality": 75,
           "effort": 6
+        },
+        "thumbnailRegion": {
+          "longitude": -72,
+          "latitude": -20,
+          "spanDegrees": 40
         }
       },
       {
@@ -349,6 +354,11 @@
             ]
           },
           "provenancePath": "science/night-lights-2025/provenance.json"
+        },
+        "thumbnailRegion": {
+          "longitude": -74,
+          "latitude": 40.7,
+          "spanDegrees": 3
         }
       },
       {

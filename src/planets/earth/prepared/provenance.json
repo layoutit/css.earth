@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "81d5afc111ff78a0b53bf501c5008489cf4a4d85b2373343eebc26de6470bd0c"
+    "sha256": "26f54eb78f94523bfaf0bae575b69b06e1dc62405358bab0e7c034d0eb4eb19e"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "3b099b13117f93184a350fcb32046de8ec85017d0c53a8328e5d23a3618e8be2",
+      "sha256": "db931371818e779e87a3233a049e910f2c980942be962d2cf1be3a31ee9a66b9",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -315,6 +315,11 @@
               "webp": {
                 "quality": 75,
                 "effort": 6
+              },
+              "thumbnailRegion": {
+                "longitude": -72,
+                "latitude": -20,
+                "spanDegrees": 40
               }
             },
             {
@@ -367,6 +372,11 @@
                   ]
                 },
                 "provenancePath": "science/night-lights-2025/provenance.json"
+              },
+              "thumbnailRegion": {
+                "longitude": -74,
+                "latitude": 40.7,
+                "spanDegrees": 3
               }
             },
             {
@@ -1972,8 +1982,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8b4b1e2d02d985ae83cb0b156b926ca140240002a6e0e3f0af6bc66f35c21fbc",
-      "bytes": 1070,
+      "sha256": "26c32ab22618b14d98c582dcf2e924e5a52d20f8715447a6bd1a60475d7d1c4a",
+      "bytes": 1106,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2313,8 +2323,8 @@
       "outputs": [
         {
           "url": "/scenes/earth/earth-lens-topography.webp",
-          "bytes": 2818,
-          "sha256": "304695ff0dede0d2fe5f4916bb67b50e5b2d71ad3538fcd45de0ec95a52de61d",
+          "bytes": 1950,
+          "sha256": "b9fa0fc3c2238ce31009358bebda5b48092cb64c4249df278aa6c66a99bcba86",
           "verification": "bytes-verified"
         },
         {
@@ -2420,8 +2430,8 @@
       "outputs": [
         {
           "url": "/scenes/earth/earth-lens-night-lights.webp",
-          "bytes": 802,
-          "sha256": "72613e83b89191a2ede75e8e05b41d22e6c41a72a4099e08cd446e7a9e74f7d5",
+          "bytes": 2836,
+          "sha256": "d88f52b66ae3f501ebbd6c4ef0a5fa6c20ba2b669eefd97110c342f451431db0",
           "verification": "bytes-verified"
         },
         {
@@ -2717,8 +2727,8 @@
         },
         {
           "url": "/scenes/earth/earth-view-interior.webp",
-          "bytes": 1302,
-          "sha256": "4e8ee2c852e0799d4dd36fdfdf0c29eaa52e89e7c5033a5777d5147ba39db8a4",
+          "bytes": 1152,
+          "sha256": "3d7bc0d6a342734fcb496bc3c275e3df6043de5304a967f736f7b52ea2d465dc",
           "verification": "bytes-verified"
         }
       ],
@@ -2913,8 +2923,8 @@
         },
         {
           "url": "/scenes/earth/earth-view-tomography.webp",
-          "bytes": 1696,
-          "sha256": "a145ea87904d5e87c4c5f147143d8ef6fa4928cc6630acf7a97024c84e55ef1c",
+          "bytes": 2094,
+          "sha256": "dbbf6668d7688e11815e304c7d056c027871c4876b188618b7574e32766b115f",
           "verification": "bytes-verified"
         },
         {
