@@ -1,6 +1,7 @@
 import prepared from './prepared.json' with { type: 'json' };
 import { worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
 import { minimapPointRange } from './point-range.mjs';
+import { minimapPointCovered } from './point-coverage.mjs';
 
 // Spatial overview, published by the same camera as the main world.
 // No second scene/camera, navigation writes, ephemeris work, or runtime geometry.
@@ -25,7 +26,16 @@ export function mountSpaceMinimap(documentTarget) {
   });
   const rings = [...root.querySelectorAll('.space-minimap-ring[data-radius-m]')];
   const galaxy = root.querySelector('.space-minimap-galaxy');
+  const projected = dots.map((dot, index) => ({
+    index, radius: dotRadii[index], x: 0, y: 0, alpha: 0,
+    // Only the existing full-opacity marker classes can cover another point.
+    // An unfamiliar/transparent CSS color conservatively keeps drawing below it.
+    opaque: ['planet', 'star'].includes(prepared.points[index].classification) &&
+      /^rgb\(/.test(documentTarget.defaultView.getComputedStyle(dot).backgroundColor),
+  }));
+  const included = new Uint8Array(dots.length), foreground = [];
   let visiblePoints = new Set();
+  let viewportKey = '', coverageGuard = Infinity;
   let focus = prepared.defaultFocus, lastView = '', lastGridTransform = '', destroyed = false;
   return {
     selectObject(frame) { focus = { positionM: frame.originM, radiusM: frame.bodyRadiusM }; lastView = ''; },
@@ -37,6 +47,15 @@ export function mountSpaceMinimap(documentTarget) {
       const view = [...world.pose.orientationXyzw, ...world.pose.positionM, viewport.focalPixels, viewport.widthPixels, viewport.heightPixels].join(',');
       if (view === lastView) return;
       lastView = view;
+      const dpr = Math.min(1, documentTarget.defaultView.devicePixelRatio || 1);
+      const nextViewportKey = `${viewport.widthPixels},${viewport.heightPixels},${dpr}`;
+      if (nextViewportKey !== viewportKey) {
+        viewportKey = nextViewportKey;
+        const mapScale = Number(documentTarget.defaultView.getComputedStyle(root).getPropertyValue('--map-scale'));
+        // Reserve a device-pixel diagonal at the edges, using DPR 1 even on
+        // denser screens. Responsive scaling may require a larger local guard.
+        coverageGuard = mapScale > 0 ? Math.SQRT2 / (mapScale * dpr) : Infinity;
+      }
       const cameraToReference = worldRotationFromQuaternion(world.pose.orientationXyzw);
       const referenceToCamera = transpose(cameraToReference);
       const toFocus = focus.positionM.map((value, axis) => value - world.pose.positionM[axis]);
@@ -73,10 +92,11 @@ export function mountSpaceMinimap(documentTarget) {
       let visibleBodies = 0, visibleStars = 0;
       const previousVisible = visiblePoints;
       visiblePoints = new Set();
+      included.fill(0);
       const [first, end] = minimapPointRange(prepared.points, prepared.pointOrderX, centerM[0], rangeM);
       for (let entry = first; entry < end; entry++) {
         const index = prepared.pointOrderX[entry];
-        const point = prepared.points[index], dot = dots[index];
+        const point = prepared.points[index];
         const delta = point.positionM.map((value, axis) => value - centerM[axis]);
         // Bound the 3D neighborhood independently of the middle plane's tilt.
         // Inset by the marker radius so its full screen projection stays inside
@@ -84,16 +104,30 @@ export function mountSpaceMinimap(documentTarget) {
         const insetRadius = prepared.radius - dotRadii[index] - .5;
         const fraction = Math.hypot(...delta) * scale / insetRadius;
         const hidden = fraction >= 1;
-        if (dot.hidden !== hidden) dot.hidden = hidden;
         if (hidden) continue;
-        visiblePoints.add(index);
         const eye = rotate(referenceToCamera, delta);
         const x = eye[0] * scale, y = eye[1] * scale;
-        dot.style.transform = `translate(${x}px,${y}px)`;
         const opacity = point.classification === 'catalog-star' ? .6
           : ['planet', 'star'].includes(point.classification) ? 1 : .85;
-        dot.style.opacity = String(opacity * Math.min(1, (1 - fraction) / .06));
+        const projection = projected[index];
+        projection.x = x; projection.y = y;
+        projection.alpha = opacity * Math.min(1, (1 - fraction) / .06);
+        included[index] = 1;
         if (point.classification === 'catalog-star') visibleStars++; else visibleBodies++;
+      }
+      // Prepared point order is the retained DOM paint order. Visit foreground
+      // markers first, while leaving the DOM, source positions and counts intact.
+      foreground.length = 0;
+      for (let index = dots.length - 1; index >= 0; index--) {
+        if (!included[index]) continue;
+        const point = projected[index];
+        if (foreground.some(front => minimapPointCovered(point, front, coverageGuard))) continue;
+        const dot = dots[index];
+        visiblePoints.add(index);
+        if (dot.hidden) dot.hidden = false;
+        dot.style.transform = `translate(${point.x}px,${point.y}px)`;
+        dot.style.opacity = String(point.alpha);
+        if (point.opaque && point.alpha === 1) foreground.push(point);
       }
       for (const index of previousVisible) {
         if (!visiblePoints.has(index)) dots[index].hidden = true;
