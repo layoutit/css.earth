@@ -9,7 +9,7 @@ world camera, authored preparation, and retained CSS renderer.
 | --- | --- |
 | [DLR Dawn HAMO natural color](https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php) | Included. Calibrated and photometrically corrected 650/550/430 nm composite. The 26,704 × 13,080 PNG retains the publisher's bright-terrain clipping and some registration artifacts. |
 | DLR HAMO corrected monochrome | Complementary candidate, excluded from this selection: natural color supplies the same broad surface interpretation; a separate grayscale view would duplicate it. |
-| [DLR HAMO Clementine ratios](https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clementine/Vesta_clementine_HAMO-1-2_global.jp2) | Deferred. The 651,737,045-byte JP2 was downloaded and its 26,703 × 13,351 dimensions checked, but the project's portable image decoder does not support this container. No calibrated ratio lens is claimed. The ratios emphasize spectral differences, not mineral abundance. |
+| [DLR HAMO Clementine ratios](https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clementine/Vesta_clementine_HAMO-1-2_global.jp2) | Included from the publisher's original PDS ZIP. The three byte planes preserve the published 26,703 × 13,351 Clementine-style ratio composite. JP2 decoding is unnecessary. Ratios emphasize spectral differences, not mineral abundance. |
 | [DLR Dawn HAMO 64 ppd terrain](https://dawngis.dlr.de/data/Vesta/dtm_vesta.php) | Included. 23,041 × 11,521 big-endian float grid, about 69.5 m spacing. The release page explicitly defines values as radii in meters. |
 | [USGS 48 ppd terrain and relief](https://astrogeology.usgs.gov/search/map/vesta_dawn_fc_hamo_global_dtm_93m) | Excluded in favor of the higher-resolution DLR release and its original coordinate system. |
 | [Le Corre et al. 2017 controlled color mosaics](https://www.hou.usra.edu/meetings/metsoc2017/pdf/6135.pdf) | Unresolved. The conference abstract describes improved registration and planned PDS delivery; this survey has not located a downloadable release corresponding to that work. |
@@ -39,6 +39,28 @@ The package follows the release and actual numeric range, preserving the
 original archive and conflicting label. Missing code is −32768. Published
 polar interpolation has no separate validity mask; model-derived views must
 disclose that those regions are not independent stereo observations.
+
+## Spectral ratios
+
+The Clementine-style display uses the DLR composite unchanged: red is 749/438 nm,
+green is 749/917 nm, and blue is 438/749 nm. These are ratios of photometrically
+corrected Dawn FC images, not true colors or calibrated mineral fractions.
+No ratios, contrast stretches or color balancing are recomputed by cssEarth.
+
+The 446,346,023-byte archive misleadingly names its member
+`Ceres_clementine_HAMO-1-2_global.pds`; the attached label explicitly identifies
+**VESTA**, DLR, the 255 km projection radius and the expected Claudia grid.
+`source/reference/clementine.lbl` preserves that label unmodified. The byte
+image begins at record 4 (80,109 bytes), with three band-sequential RGB planes.
+The complete member is 1,069,615,368 bytes. The decoder checks target, encoding,
+dimensions, exact projection offsets and complete extraction before rendering.
+
+As in the existing natural-color view, exact all-channel black is treated as
+likely fill before interpolation; the source supplies no independent validity
+mask. This can also withhold photographed black. Single-channel zero is valid.
+Original mosaic seams, color fringes and dark nonzero samples are retained.
+The same 74.176493209759 pixels/degree and offsets 13351 / 6675 place this view
+on the existing terrain. Missing coverage uses the common gray grid.
 
 ## Physical registration
 
@@ -75,7 +97,7 @@ preserving the measured geometry. The cells are opaque; the native triangle
 primitive supplies their boundary. Runtime mounts the prepared leaves and
 does not construct geometry or lighting.
 
-Natural color and elevation each have an unlit and a fixed-epoch directional
+Natural color, spectral ratios and elevation each have an unlit and a fixed-epoch directional
 lighting bank. This approximates diffuse illumination, without cast shadows
 or reflected light. Elevation also has northwest cartographic relief, so its
 brightness is not a second physical measurement. Orientation stays fixed at

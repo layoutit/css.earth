@@ -1,0 +1,62 @@
+Object = IsisCube
+  Object = Core
+
+    Group = Dimensions
+      Samples = 10682
+      Lines   = 5341
+      Bands   = 1
+    End_Group
+
+    Group = Pixels
+      Type       = Real
+      ByteOrder  = Lsb
+      Base       = 0.0
+      Multiplier = 1.0
+    End_Group
+    StartByte = 32710
+    ^Core     = eros_nearmsi_filter4.tif
+    Format    = BandSequential
+  End_Object
+
+  Group = BandBin
+    FilterNumber = 4
+    Center       = 950 <nm>
+  End_Group
+
+  Group = Tracking
+    FileName = mos_dataf4final_tracking.cub
+  End_Group
+
+  Group = Mapping
+    TargetName           = Eros
+    EquatorialRadius     = 17000.0 <meters>
+    PolarRadius          = 17000.0 <meters>
+    LatitudeType         = Planetocentric
+    LongitudeDirection   = PositiveEast
+    LongitudeDomain      = 360
+    MinimumLatitude      = -90.0000000000000000
+    MinimumLongitude     =  0.00000000000000000000
+    MaximumLatitude      = 90.0000000000000000
+    MaximumLongitude     = 0.00000000000000000000
+    ProjectionName       = Equirectangular
+    CenterLongitude      = 180.0
+    CenterLatitude       = 0.0
+    CenterLatitudeRadius = 17000.0
+    UpperLeftCornerX     = -53410.0
+    UpperLeftCornerY     = 26710.0
+    PixelResolution      = 10.0 <meters/pixel>
+    Scale                = 29.6705972839036001 <pixels/degree>
+  End_Group
+End_Object
+
+Object = Label
+  Bytes = 1515             
+End_Object
+
+Object = History
+  Name      = IsisCube
+  StartByte = 1
+  Bytes     = 5437
+  ^History  = eros_nearmsi_filter4.History.IsisCube
+End_Object
+End

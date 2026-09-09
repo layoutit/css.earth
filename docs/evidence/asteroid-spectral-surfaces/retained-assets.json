@@ -1,0 +1,92 @@
+[
+  {
+    "id": "bennu",
+    "terrainSha256": "cc3222993af2c8c12d1583b188af029c8a7780892f7f70a308aa884422379604",
+    "faces": 800,
+    "terrainUnchanged": true,
+    "legacy": [
+      {
+        "id": "normal",
+        "unchanged": {
+          "map": true,
+          "surface": true,
+          "shadowSurface": true,
+          "thumbnail": true
+        }
+      },
+      {
+        "id": "surface",
+        "unchanged": {
+          "map": true,
+          "surface": true,
+          "shadowSurface": true,
+          "thumbnail": true
+        }
+      },
+      {
+        "id": "elevation",
+        "unchanged": {
+          "map": true,
+          "surface": true,
+          "shadowSurface": true,
+          "thumbnail": true
+        }
+      }
+    ],
+    "shadowsDefault": false
+  },
+  {
+    "id": "eros",
+    "terrainSha256": "a9d45cbfdeb9a1fa0c8041230554b4ac8395a252763a17d84aa59c9f94421fe6",
+    "faces": 796,
+    "terrainUnchanged": true,
+    "legacy": [
+      {
+        "id": "normal",
+        "unchanged": {
+          "map": true,
+          "surface": true,
+          "shadowSurface": true,
+          "thumbnail": true
+        }
+      },
+      {
+        "id": "elevation",
+        "unchanged": {
+          "map": true,
+          "surface": true,
+          "shadowSurface": true,
+          "thumbnail": true
+        }
+      }
+    ],
+    "shadowsDefault": false
+  },
+  {
+    "id": "vesta",
+    "terrainSha256": "c3b47de8aea65053b24acb1eb9561b3c6cd732a6e8f90c6e65a21112fca34561",
+    "faces": 800,
+    "terrainUnchanged": true,
+    "legacy": [
+      {
+        "id": "normal",
+        "unchanged": {
+          "map": true,
+          "surface": true,
+          "shadowSurface": true,
+          "thumbnail": true
+        }
+      },
+      {
+        "id": "elevation",
+        "unchanged": {
+          "map": true,
+          "surface": true,
+          "shadowSurface": true,
+          "thumbnail": true
+        }
+      }
+    ],
+    "shadowsDefault": false
+  }
+]

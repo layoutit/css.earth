@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6ade980835aee9e1d2894afd36a9fae7bc6750d36730f042a45e9a2c399978a4"
+    "sha256": "59b92a020b9000c3245b4e0afa46d156e638720e601c24163ecfdc9920bf1a07"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "784b64e267b30453e93d49ebd3eda378c1c8ce1551e685adc810cd9b2e5debd1",
+      "sha256": "cb49e648ed0f8dd7258e22991e522cdc61b8d953a07048e27cae875c8ad21bdc",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -33,6 +33,24 @@
           "observations": [
             {
               "id": "normal",
+              "validity": {
+                "kind": "geotiff-float-monochrome",
+                "noData": -3.4028226550889045e+38,
+                "centerLongitude": 180,
+                "resolutionMeters": 10,
+                "origin": [
+                  -53410,
+                  26710
+                ],
+                "displayRange": [
+                  0.05,
+                  0.4
+                ],
+                "specialValueMagnitude": 1e+30
+              }
+            },
+            {
+              "id": "infrared",
               "validity": {
                 "kind": "geotiff-float-monochrome",
                 "noData": -3.4028226550889045e+38,
@@ -157,7 +175,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6663476a4dcd7048ce475ff328526a8d495998ee89d3dfcb08017385f601c048",
+      "sha256": "f563cc3c3a08aad339458bf3f24eabe51c1ac6cbd800d765b5353db47ae07c44",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -235,8 +253,24 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "NEAR MSI · corrected 550 nm albedo",
+              "detail": "MSI · 550 nm",
               "summary": "NEAR's corrected 550 nm reflectance, stretched from 0.05 to 0.40. Monochrome imagery; some shading remains."
+            },
+            {
+              "id": "infrared",
+              "label": "Near infrared",
+              "description": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+              "title": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+              "thumbnail": "/scenes/eros/eros-infrared-thumbnail.webp",
+              "surface": "eros-infrared-surface@2x.webp",
+              "poles": "eros-infrared-surface@2x.webp",
+              "source": {
+                "id": "eros-infrared",
+                "path": "../manifest.json"
+              },
+              "falseColor": false,
+              "detail": "MSI · 950 nm",
+              "summary": "Corrected 950 nm reflectance, using the same brightness scale as the 550 nm view. Near-infrared imagery shown in grayscale."
             },
             {
               "id": "elevation",
@@ -360,7 +394,7 @@
       "sha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "bytes": 228242957,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "zip-member",
         "groups": [
@@ -402,7 +436,7 @@
       "sha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
       "bytes": 16897935,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -411,6 +445,51 @@
         ],
         "path": "shape/ver128q.tab",
         "url": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "eros-infrared",
+      "path": "maps/eros_nearmsi_filter4.tif",
+      "origin": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+      "credit": "NASA/JHUAPL/NEAR; R. Gaskell; D. Golish and colleagues",
+      "license": "Public mission scientific data; retain attribution and source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "lensId": "infrared",
+      "label": "Near infrared",
+      "falseColor": false,
+      "width": 10682,
+      "height": 5341,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 17000
+      },
+      "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
+      "capture": {
+        "spacecraftIds": [
+          "near-shoemaker"
+        ],
+        "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive."
+      },
+      "sha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
+      "bytes": 228242957,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "zip-member",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "url": "https://asc-pds-individual-investigations.s3.us-west-2.amazonaws.com/eros_global-albedo-maps_golish_2023/eros_global-albedo-maps_golish_2023.zip",
+        "archiveBytes": 2571702513,
+        "archiveSha256": "a8d56ce1de8edbb47c9dd3054456c60382703d503fde8e0afbea041d994a22a0",
+        "member": "data/eros_nearmsi_filter4.tif",
+        "path": "maps/eros_nearmsi_filter4.tif"
       },
       "verificationOperations": []
     },
@@ -424,10 +503,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c1d01d5b9b12221a3a3cacd9f5b9b239d1d843a1e6f0ceea819ceb4522fb8cb0",
-      "bytes": 8097,
+      "sha256": "f563cc3c3a08aad339458bf3f24eabe51c1ac6cbd800d765b5353db47ae07c44",
+      "bytes": 9694,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -475,13 +554,66 @@
           "url": "/scenes/eros/eros-normal-thumbnail.webp",
           "bytes": 3270,
           "sha256": "77accf9615eaf183f69f407eb84a1a7f49732eceda53e953d1655b05898408d6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eros/eros-normal-surface@2x.webp",
           "bytes": 2693140,
           "sha256": "62a13d42ba65f6d9058d3b907c62a2aaade7fcb202963c6789412448c1bc25f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "infrared",
+      "label": "Near infrared",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid."
+      ],
+      "lensIds": [
+        "infrared"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-float-monochrome",
+          "noData": -3.4028226550889045e+38,
+          "centerLongitude": 180,
+          "resolutionMeters": 10,
+          "origin": [
+            -53410,
+            26710
+          ],
+          "displayRange": [
+            0.05,
+            0.4
+          ],
+          "specialValueMagnitude": 1e+30
+        }
+      },
+      "inputs": [
+        "eros-infrared",
+        "eros-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/eros/eros-infrared-thumbnail.webp",
+          "bytes": 3388,
+          "sha256": "ff552f2688e6ed2444b8c3d0f11971cd6c4b08b8f29ccc0b979468474c8c1bbd",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/eros/eros-infrared-surface@2x.webp",
+          "bytes": 4196638,
+          "sha256": "81a72e39736dd03315608e461010a856e9e69d1fcc684fa22bb0efe6a523be0a",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -513,19 +645,19 @@
           "url": "/scenes/eros/eros-elevation-thumbnail.webp",
           "bytes": 5950,
           "sha256": "c539675bb3866856c490255573e9e4c46533f3080a8b533686f53f7f75caf57b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eros/eros-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eros/eros-elevation-surface@2x.webp",
           "bytes": 922744,
           "sha256": "deb0f2ed973f54fc0aaf840e703a65d4e6e5e0fee0e62400adcc8d8a9009e329",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -575,6 +707,30 @@
           "url": "object:prepared/minimaps/normal.webp",
           "bytes": 50530,
           "sha256": "5f4ce319c5e6ed9a6245e3553e4efee6697425f60e1c8827f0f907f5f618a217",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:infrared",
+      "label": "Near infrared preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "infrared"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/infrared.webp",
+          "bytes": 59426,
+          "sha256": "eb00f7c5f9807d19e3477c011ea3dda2c3cb55dc5331cdb4fea4ff451fd672ef",
           "verification": "bytes-verified"
         }
       ]

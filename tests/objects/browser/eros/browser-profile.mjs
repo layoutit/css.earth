@@ -12,14 +12,15 @@ export const browserProfile=createObjectBrowserProfile({id:'eros',controls,audit
   ],
   "lensRace": {
     "defaultId": "normal",
-    "slowId": "elevation",
+    "slowId": "infrared",
     "winnerId": "normal",
-    "slowAsset": "/scenes/eros/eros-elevation-surface@2x.webp",
+    "slowAsset": "/scenes/eros/eros-infrared-surface@2x.webp",
     "preReadyDisabled": true
   },
   "retained": {
     "lensIds": [
       "normal",
+      "infrared",
       "elevation"
     ],
     "speedClicks": 5,

@@ -55,13 +55,13 @@ export async function prepareByteObservation(path, entry, policy, width, height)
 /** PDS-labelled display images can be cropped and need not be exactly 2:1.
  * The explicit source grid prevents stretching such a crop across both poles.
  */
-async function prepareProjectedByteObservation(path, entry, policy, width, height) {
+export async function prepareProjectedByteObservation(path, entry, policy, width, height, inputOptions = {}, sourceAlpha) {
   const { pixelsPerDegree, sampleOffset, lineOffset } = policy.grid;
   if (![pixelsPerDegree, sampleOffset, lineOffset].every(Number.isFinite) || pixelsPerDegree <= 0 || policy.noData !== 0) throw new TypeError('Invalid projected byte-image grid.');
-  const options = { limitInputPixels: false };
+  const options = { limitInputPixels: false, ...inputOptions };
   // Bitwise OR is zero exactly when all source channels are zero. Resolve this
   // before interpolation; the alpha boundary never borrows fill as terrain.
-  const alpha = await sharp(path, options).bandbool('or').threshold(1).toColourspace('b-w').raw().toBuffer();
+  const alpha = sourceAlpha ?? await sharp(path, options).bandbool('or').threshold(1).toColourspace('b-w').raw().toBuffer();
   const intermediateHeight = Math.round(entry.height * width / entry.width);
   // Separate pipelines are intentional: joinChannel happens after resize in
   // libvips and a native-sized joined band would restore the original extent.
@@ -79,9 +79,10 @@ async function prepareProjectedByteObservation(path, entry, policy, width, heigh
     if (sx < 0 || sx > width - 1 || sy < 0 || sy > intermediateHeight - 1) { missing[i] = 1; continue; }
     const x0 = Math.floor(sx), x1 = Math.min(width - 1, x0 + 1), y0 = Math.floor(sy), y1 = Math.min(intermediateHeight - 1, y0 + 1);
     const indices = [y0 * width + x0, y0 * width + x1, y1 * width + x0, y1 * width + x1];
-    if (indices.some(j => validity[j] !== 255)) { missing[i] = 1; continue; }
-    const offsets = indices.map(j => j * 3);
     const u = sx - x0, v = sy - y0;
+    const weights = [(1 - u) * (1 - v), u * (1 - v), (1 - u) * v, u * v];
+    if (indices.some((j, k) => weights[k] > 0 && validity[j] !== 255)) { missing[i] = 1; continue; }
+    const offsets = indices.map(j => j * 3);
     for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.round((data[offsets[0] + c] * (1 - u) + data[offsets[1] + c] * u) * (1 - v) +
       (data[offsets[2] + c] * (1 - u) + data[offsets[3] + c] * u) * v);
   }

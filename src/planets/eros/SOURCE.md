@@ -15,6 +15,29 @@ The source shape uses kilometers, right-handed body-fixed axes and east longitud
 
 The shared frame is fixed at 2026-09-03 TT. Horizons osculating elements approximate TDB as TT; these conics are not long-term perturbation models. Rotation follows the pinned mission PCK. Shadows use prepared diffuse lighting in that body frame, not runtime physics. Elevation is radial height above the 8420 m sphere, not height above a gravitational equipotential. No geometry or image is synthesized at runtime.
 
+## Near-infrared albedo
+
+The [USGS 2023 deblurred MSI release](https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics)
+provides seven filters in two map projections. This addition uses the original
+filter 4 **950 nm** equirectangular GeoTIFF, with its PDS4 and ISIS labels.
+The 450, 760, 900, 1000 and 1050 nm maps remain outside this selection;
+no custom ratio or color composite is synthesized. The 950 nm filter adds a
+complementary near-infrared observation to the existing 550 nm albedo.
+
+The two selected maps share 10,682 × 5,341 samples, 10 m pixels, a 17 km
+cartographic radius and origin (−53,410, 26,710) m. The release registers them
+to the Gaskell control network and normalizes to phase/incidence/emission zero
+with a model for each filter. These are dimensionless I/F samples, displayed
+with the same linear 0.05–0.40 range so a view switch does not add an independent
+brightness normalization. This is not a quantitative mineral indicator.
+
+The source minimum float code (−3.4028226550889045e38) remains missing before
+interpolation. Valid faint pixels are not thresholded out. The detached ISIS
+label erroneously repeats 0° for MaximumLongitude; the GeoTIFF and PDS4 XML
+specify the actual 0–360° grid. The shared scalar reader validates the actual
+GeoTIFF. The body remains the independently sized 8.42 km Gaskell mesh;
+the 17 km projection radius only converts map coordinates.
+
 ## Reproduction
 
 Restore source pins with `node tools/objects/dist/operations.js acquire eros`, then prepare with `node tools/objects/dist/prepare-authored.js eros --write`. Build the preparation tools first with `pnpm build:preparation`. Archive members are extracted unmodified from a separately pinned ZIP. Runtime installation is separate: `pnpm setup:assets --object=eros` consumes runtime-assets.json.

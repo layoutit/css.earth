@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e9bb82dd83b79080658c2dfd8f767344a15a948ad2e08bb6f08e318634464677"
+    "sha256": "80c21887af201c6d7415d5db379216ec1ef55de95a4c9873fbcd2eb9e3a2be36"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "8753bde9d25036ef1701f3bac7288de432eaa8f3ae678754f877e707e88a3b0e",
+      "sha256": "64d768d3e600631fe01c6b32e517ce1efc719fad24c9b283cbc582f70339dca9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -35,6 +35,21 @@
               "id": "normal",
               "validity": {
                 "kind": "image-rgb-no-data",
+                "noData": 0,
+                "centerLongitude": 180,
+                "grid": {
+                  "pixelsPerDegree": 74.176493209759,
+                  "sampleOffset": 13351,
+                  "lineOffset": 6675
+                }
+              }
+            },
+            {
+              "id": "ratios",
+              "validity": {
+                "kind": "pds3-rgb-zip",
+                "member": "Ceres_clementine_HAMO-1-2_global.pds",
+                "targetName": "VESTA",
                 "noData": 0,
                 "centerLongitude": 180,
                 "grid": {
@@ -162,7 +177,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "00e4f137fb1adc7944acca1e4da5970294659765156a1b15561d25e98c2814a2",
+      "sha256": "0669b33ee9da4c675b4f51553915b7974c35ce6e9a2483b2342bf1770c4b1dce",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -243,6 +258,22 @@
               "summary": "Dawn natural color at 650, 550 and 430 nm. Bright terrain clips to white; shadows and color offsets remain."
             },
             {
+              "id": "ratios",
+              "label": "Spectral ratios",
+              "description": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+              "title": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+              "thumbnail": "/scenes/vesta/vesta-ratios-thumbnail.webp",
+              "surface": "vesta-ratios-surface@2x.webp",
+              "poles": "vesta-ratios-surface@2x.webp",
+              "source": {
+                "id": "vesta-ratios",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "detail": "Dawn FC",
+              "summary": "Published false-color Dawn filter ratios emphasize spectral differences. Source seams and missing coverage remain visible."
+            },
+            {
               "id": "elevation",
               "label": "Elevation",
               "description": "Color shows radius minus the source map’s 255 km reference sphere. Brightness adds fixed northwest cartographic relief without height exaggeration. The model includes publisher-interpolated polar regions without a separate validity mask; those areas are not independent stereo observations. Shadows adds approximate fixed-epoch Sun lighting.",
@@ -297,6 +328,12 @@
             "role": "facts",
             "description": "Dawn at Vesta",
             "href": "https://science.nasa.gov/mission/dawn/science/vesta/"
+          },
+          {
+            "label": "Spectral maps",
+            "role": "surface",
+            "description": "Spectral ratios source and interpretation",
+            "href": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php"
           },
           {
             "label": "DLR",
@@ -365,7 +402,7 @@
       "sha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca",
       "bytes": 374574072,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -406,7 +443,7 @@
       "sha256": "83b68b39c1485e179a58926dcb6b88960e598895cfce64f54e87204b7dbde533",
       "bytes": 457291404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -415,6 +452,48 @@
         ],
         "path": "science/vesta-hamo-dtm-64.pds.zip",
         "url": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "vesta-ratios",
+      "path": "maps/vesta-clementine.pds.zip",
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA; DLR Institute of Planetary Research",
+      "license": "Public scientific data; cite the original authors and retain source notices.",
+      "acquisition": "Pinned original or unmodified archive member; see preparation/acquisition.json.",
+      "redistribution": "Source-backed prepared display derivatives with attribution; see NOTICE.md.",
+      "lensId": "ratios",
+      "label": "Spectral ratios",
+      "falseColor": true,
+      "width": 26703,
+      "height": 13351,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "referenceRadiusMeters": 255000
+      },
+      "coverage": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
+      "capture": {
+        "spacecraftIds": [
+          "dawn"
+        ],
+        "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive."
+      },
+      "sha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0",
+      "bytes": 446346023,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "maps/vesta-clementine.pds.zip",
+        "url": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clementine/Vesta_clementine_HAMO-1-2_global.pds.zip"
       },
       "verificationOperations": []
     },
@@ -428,10 +507,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "2f03d4eb80483e5e3acb69cddc0a3cac3193985dc02925c2b6a663ce926056de",
-      "bytes": 8662,
+      "sha256": "0669b33ee9da4c675b4f51553915b7974c35ce6e9a2483b2342bf1770c4b1dce",
+      "bytes": 10523,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -474,13 +553,63 @@
           "url": "/scenes/vesta/vesta-normal-thumbnail.webp",
           "bytes": 6002,
           "sha256": "47f63a5a4d91ac1b76bc054bea22d6e3803356b5cf56ac702540ce1041faee5b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-normal-surface@2x.webp",
           "bytes": 2401754,
           "sha256": "0ed66aec44e88697a15410b37affcbae9a7fb7641cb2d528d82b09f6e9a7d5a6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "ratios",
+      "label": "Spectral ratios",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid."
+      ],
+      "lensIds": [
+        "ratios"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "pds3-rgb-zip",
+          "member": "Ceres_clementine_HAMO-1-2_global.pds",
+          "targetName": "VESTA",
+          "noData": 0,
+          "centerLongitude": 180,
+          "grid": {
+            "pixelsPerDegree": 74.176493209759,
+            "sampleOffset": 13351,
+            "lineOffset": 6675
+          }
+        }
+      },
+      "inputs": [
+        "vesta-ratios",
+        "dlr-hamo-radius-model"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/vesta/vesta-ratios-thumbnail.webp",
+          "bytes": 8258,
+          "sha256": "aa4ac057660924f899099dc645ce72e9bf68209ddebb99749fc01cfba5371746",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/vesta/vesta-ratios-surface@2x.webp",
+          "bytes": 3378534,
+          "sha256": "59252fe1b12ba4917bad014b5f7d3978fd901eb127db19f618a3daed3ec8e07a",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -512,19 +641,19 @@
           "url": "/scenes/vesta/vesta-elevation-thumbnail.webp",
           "bytes": 7354,
           "sha256": "d3493ac79ef0c7d57e7f8b63ed47e8aeddcc04584af550f3d8d299d6489e9132",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/vesta/vesta-elevation-surface@2x.webp",
           "bytes": 1819878,
           "sha256": "8141ca24ec36d809d035f1e34e709a917e1dbfc5b724cafd39d3a5b0e8bf7d85",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -547,8 +676,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5093,
-          "sha256": "dd390b652b8866a6672eb86ce417ff9dea311f0bad3b832e6e2d67b7fd12f1f9",
+          "bytes": 5254,
+          "sha256": "209b3dbf9303a586b1b02d8f80716c3eeb584add95b4e5a61c0ee13ac4560cb5",
           "verification": "bytes-verified"
         }
       ],
@@ -574,6 +703,30 @@
           "url": "object:prepared/minimaps/normal.webp",
           "bytes": 50288,
           "sha256": "c0a520b4c1cc869aa45bb899f8a9e4779eac4703d6939e38db173d01c027762c",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:ratios",
+      "label": "Spectral ratios preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "ratios"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/ratios.webp",
+          "bytes": 71866,
+          "sha256": "a9f43ea0419ed0de611cffea539b157e3a2f176cb40793f82ae916dd047ec043",
           "verification": "bytes-verified"
         }
       ]
