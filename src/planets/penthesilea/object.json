@@ -79,8 +79,40 @@
           "sha256": "fb4ce6753186136fab5c45dc534cf5d33dc314deef44b2ddbe02fc1332fe8a7d"
         }
       ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -183448611932.72345,
+        -399013947859.5394,
+        -205517193568.7067
+      ],
+      "presentationToReference": [
+        -0.37906130859902437,
+        -5.551115123125783e-17,
+        0.9253715601439214,
+        -0.8490118071810209,
+        0.3977771559319137,
+        -0.3477819510640755,
+        -0.3680916673743269,
+        -0.9174820620691817,
+        -0.1507819292583494
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 139.1304347826087,
+      "bodyRadiusM": 32000
     }
   },
   "schema": "cssearth-object@1",
-  "type": "layered-body"
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "1ed5c92e485f50597f894ecad75e1c2031ba8b7de0c8c036c9c1df94ab537f95"
+  }
 }
