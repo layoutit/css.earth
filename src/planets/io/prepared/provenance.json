@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "io",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dd75e7244e25e89b70dfe6b8b7c20ef2013d6b143ea3d28ba318f627faf1ff5a"
+    "sha256": "fd792b4363103c265055067fffc22d091a9ad3f4cdfc9b7074836fe9714f0c94"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "62e0de8d49db3bc47a78b3736f670364a5b2352f3f3414b5b4f4e0ef8a1ea33e",
+      "sha256": "a2ca8a5abc1cbb507b93a10f8898661c5ce400ddacdb8687b083b47565c1152a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -184,6 +184,182 @@
                   "color": "#649c76"
                 }
               ]
+            },
+            {
+              "id": "spectral-slope",
+              "label": "Spectral slope",
+              "minimum": 4.4,
+              "maximum": 6.6,
+              "colors": [
+                "#352b69",
+                "#855ba1",
+                "#d896b5",
+                "#fae1ac"
+              ],
+              "labels": [
+                "4.4",
+                "5.5",
+                "6.6"
+              ],
+              "units": "µm⁻¹ · normalized at 495 nm",
+              "title": "Sulfur-sensitive visible spectral slope",
+              "description": "A measured visible spectral slope sensitive to sulfur materials.",
+              "format": "geotiff",
+              "path": "muse/io/485nm_slope-night-1.tif",
+              "consumer": "spectral-slope",
+              "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "textureScale": 0.125,
+              "grid": {
+                "width": 180,
+                "height": 90,
+                "centerLongitude": -1,
+                "referenceRadiusMeters": 1821490,
+                "origin": [
+                  -5722379.602587272,
+                  2829398.8035014844
+                ],
+                "resolution": [
+                  63581.995584303026,
+                  -63581.995584303026
+                ],
+                "wrapLongitude": true,
+                "noData": -9999
+              },
+              "additionalGrids": [
+                {
+                  "path": "muse/io/485nm_slope-night-2.tif",
+                  "grid": {
+                    "width": 180,
+                    "height": 90,
+                    "centerLongitude": -1,
+                    "referenceRadiusMeters": 1821490,
+                    "origin": [
+                      -5722379.602587272,
+                      2829398.8035014844
+                    ],
+                    "resolution": [
+                      63581.995584303026,
+                      -63581.995584303026
+                    ],
+                    "wrapLongitude": true,
+                    "noData": -9999
+                  }
+                },
+                {
+                  "path": "muse/io/485nm_slope-night-3.tif",
+                  "grid": {
+                    "width": 180,
+                    "height": 90,
+                    "centerLongitude": -1,
+                    "referenceRadiusMeters": 1821490,
+                    "origin": [
+                      -5722379.602587272,
+                      2829398.8035014844
+                    ],
+                    "resolution": [
+                      63581.995584303026,
+                      -63581.995584303026
+                    ],
+                    "wrapLongitude": true,
+                    "noData": -9999
+                  }
+                }
+              ],
+              "focus": {
+                "longitudeDegrees": 60,
+                "latitudeDegrees": 0,
+                "zoom": 1.1
+              }
+            },
+            {
+              "id": "visible-absorption",
+              "label": "Visible absorption",
+              "minimum": 0.015,
+              "maximum": 0.06,
+              "colors": [
+                "#30265f",
+                "#7e4b99",
+                "#d58f91",
+                "#f5dc9c"
+              ],
+              "labels": [
+                "0.015",
+                "0.0375",
+                "0.060"
+              ],
+              "units": "mean 520–660 nm band depth (fraction)",
+              "title": "Continuum-relative visible absorption",
+              "description": "A broad visible absorption feature, with uncertain chemical attribution.",
+              "format": "geotiff",
+              "path": "muse/io/560nm_band-night-1.tif",
+              "consumer": "visible-absorption",
+              "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "textureScale": 0.125,
+              "grid": {
+                "width": 180,
+                "height": 90,
+                "centerLongitude": -1,
+                "referenceRadiusMeters": 1821490,
+                "origin": [
+                  -5722379.602587272,
+                  2829398.8035014844
+                ],
+                "resolution": [
+                  63581.995584303026,
+                  -63581.995584303026
+                ],
+                "wrapLongitude": true,
+                "noData": -9999
+              },
+              "additionalGrids": [
+                {
+                  "path": "muse/io/560nm_band-night-2.tif",
+                  "grid": {
+                    "width": 180,
+                    "height": 90,
+                    "centerLongitude": -1,
+                    "referenceRadiusMeters": 1821490,
+                    "origin": [
+                      -5722379.602587272,
+                      2829398.8035014844
+                    ],
+                    "resolution": [
+                      63581.995584303026,
+                      -63581.995584303026
+                    ],
+                    "wrapLongitude": true,
+                    "noData": -9999
+                  }
+                },
+                {
+                  "path": "muse/io/560nm_band-night-3.tif",
+                  "grid": {
+                    "width": 180,
+                    "height": 90,
+                    "centerLongitude": -1,
+                    "referenceRadiusMeters": 1821490,
+                    "origin": [
+                      -5722379.602587272,
+                      2829398.8035014844
+                    ],
+                    "resolution": [
+                      63581.995584303026,
+                      -63581.995584303026
+                    ],
+                    "wrapLongitude": true,
+                    "noData": -9999
+                  }
+                }
+              ],
+              "focus": {
+                "longitudeDegrees": 60,
+                "latitudeDegrees": 0,
+                "zoom": 1.1
+              }
             }
           ],
           "observedColors": [],
@@ -265,7 +441,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d46bd09d7eb6c79aa2a5b18ee22234284803eb910c00492896c0ca7b4b478b49",
+      "sha256": "e1f2c17e2088a4501836c34b6202b2d35d92042197ca69f0eb5aa53cc992262b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -509,8 +685,74 @@
                   }
                 ]
               }
+            },
+            {
+              "id": "spectral-slope",
+              "label": "Spectral slope",
+              "description": "Slope from 477.5 to 495 nm, normalized at 495 nm, in published VLT/MUSE observations from July 2019. Sulfur materials affect this slope; it is not sulfur-dioxide abundance. Native two-degree samples remain visible. Nights retain differences and seams; gray grid marks missing or conservatively withheld edges. Absolute subpixel registration is unresolved.",
+              "title": "Sulfur-sensitive visible spectral slope",
+              "summary": "A measured visible spectral slope sensitive to sulfur materials.",
+              "thumbnail": "/scenes/io/io-spectral-slope-thumbnail.webp",
+              "surface": "io-spectral-slope-surface@2x.webp",
+              "poles": "io-spectral-slope-poles@2x.webp",
+              "source": {
+                "id": "io-muse-spectral-slope-night-1",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.5281/zenodo.11402374"
+              },
+              "detail": "2019 MUSE",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Spectral slope",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "4.4",
+                  "5.5",
+                  "6.6"
+                ],
+                "meta": "µm⁻¹ · normalized at 495 nm",
+                "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+                "image": "/scenes/io/io-spectral-slope-legend.webp"
+              }
+            },
+            {
+              "id": "visible-absorption",
+              "label": "Visible absorption",
+              "description": "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance.",
+              "title": "Continuum-relative visible absorption",
+              "summary": "A broad visible absorption feature, with uncertain chemical attribution.",
+              "thumbnail": "/scenes/io/io-visible-absorption-thumbnail.webp",
+              "surface": "io-visible-absorption-surface@2x.webp",
+              "poles": "io-visible-absorption-poles@2x.webp",
+              "source": {
+                "id": "io-muse-visible-absorption-night-1",
+                "path": "../manifest.json",
+                "url": "https://doi.org/10.5281/zenodo.11402374"
+              },
+              "detail": "2019 MUSE",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Visible absorption",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.015",
+                  "0.0375",
+                  "0.060"
+                ],
+                "meta": "mean 520–660 nm band depth (fraction)",
+                "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+                "image": "/scenes/io/io-visible-absorption-legend.webp"
+              }
             }
-          ]
+          ],
+          "labels": {
+            "spectral-slope": "Spectral slope",
+            "visible-absorption": "Visible absorption"
+          }
         },
         "settings": {
           "titleKey": "settings",
@@ -554,6 +796,18 @@
             "role": "surface",
             "description": "Interpreted geologic map and GIS · SIM3168",
             "href": "https://pubs.usgs.gov/sim/3168/"
+          },
+          {
+            "label": "VLT / MUSE",
+            "role": "surface",
+            "description": "King et al. (2025), visible spectral mapping and interpretation",
+            "href": "https://doi.org/10.1029/2024JE008511"
+          },
+          {
+            "label": "MUSE data",
+            "role": "surface",
+            "description": "July 2019 spectral observations; released 2024; CC BY 4.0",
+            "href": "https://doi.org/10.5281/zenodo.11402374"
           }
         ],
         "provenance": {
@@ -616,7 +870,7 @@
       "sha256": "cf65a0323aac9c4c9eb582aa7b7ce0d36be8e445316fa6dba49ab5647b63584c",
       "bytes": 65546342,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -670,7 +924,7 @@
       "sha256": "337778617ffa6a3cdb5d36375265222ef37410db9495ca5ddbe7bc6786276d14",
       "bytes": 196637696,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -715,7 +969,7 @@
       "sha256": "6a02334eee7af7518f90c5f97b1468552499de89b05d17656d627556e71aa64f",
       "bytes": 2798948,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -735,7 +989,7 @@
       "sha256": "ac09efc6635cf3d9d81fb5596a050393bf358ea5f204b79d4039952b369c53a3",
       "bytes": 178964,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -755,7 +1009,247 @@
       "sha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
       "bytes": 149,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "io-muse-spectral-slope-night-1",
+      "path": "muse/io/485nm_slope-night-1.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "d8b3ce837b7db28a255eae9aaf9eda61717121ab1241f392f765014641ade58a",
+      "bytes": 12012,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "io-muse-spectral-slope-night-2",
+      "path": "muse/io/485nm_slope-night-2.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "41e87a8222840afce00a1427fbcff3491bfb13fe6e599dbb6336a96551196ba9",
+      "bytes": 12028,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "io-muse-spectral-slope-night-3",
+      "path": "muse/io/485nm_slope-night-3.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "b8667cc9de8bc46184aea14932bc950a6c66793bd99ce2f5dac9ee9aa230a99f",
+      "bytes": 12297,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "io-muse-visible-absorption-night-1",
+      "path": "muse/io/560nm_band-night-1.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "5a884deb172fbec39a1192b2149e5e2452644d0ac4402d4e948b7d5a204f3e02",
+      "bytes": 12689,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "io-muse-visible-absorption-night-2",
+      "path": "muse/io/560nm_band-night-2.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "eff9a10c9b342c06f9426d01c6a884e291dd9eb681bbb47804a5a3044c7e8a29",
+      "bytes": 12790,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "io-muse-visible-absorption-night-3",
+      "path": "muse/io/560nm_band-night-3.tif",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sha256": "cd8fd566af1e3024c389b2c8d6816474aee9db56d0288e51c3993f063e9aca21",
+      "bytes": 12820,
+      "dependencies": [],
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -769,10 +1263,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d46bd09d7eb6c79aa2a5b18ee22234284803eb910c00492896c0ca7b4b478b49",
-      "bytes": 10661,
+      "sha256": "e1f2c17e2088a4501836c34b6202b2d35d92042197ca69f0eb5aa53cc992262b",
+      "bytes": 14126,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -814,19 +1308,19 @@
           "url": "/scenes/io/io-normal-thumbnail.webp",
           "bytes": 2956,
           "sha256": "6ef01913772fefcaf657519b6bdb26ce50fa7df55c4be24b86c409f1b821c9dd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-normal-surface@2x.webp",
           "bytes": 666484,
           "sha256": "7c5647c27d2a006654a52b2503f5fe6028b7dc36760418c8c67726dcfe5e8436",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-normal-poles@2x.webp",
           "bytes": 16276,
           "sha256": "94e3549ab68f0575281eedda16aaf2226f2e36c70b6573f123f1ae3b2800062c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -870,19 +1364,19 @@
           "url": "/scenes/io/io-enhanced-thumbnail.webp",
           "bytes": 8488,
           "sha256": "87a736050c59000f70525cd4c05905851b06941b9bf12f32a3f5b86b1e14f6b9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-enhanced-surface@2x.webp",
           "bytes": 813758,
           "sha256": "69913c53fa4cd634a62c6fc4cd7e129eb4c2fa39c6461435b7a4f7d52bfe9ec7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-enhanced-poles@2x.webp",
           "bytes": 27566,
           "sha256": "44efdb1d16d9b4f66b8ea6d74e009622b71ece910b2a9e1883c3499157eb2880",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -917,19 +1411,125 @@
           "url": "/scenes/io/io-geology-thumbnail.webp",
           "bytes": 1342,
           "sha256": "c174d19381e631edc930799dc978694cc60d179008a3c327b31bdeea0e4860e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-geology-surface@2x.webp",
           "bytes": 198562,
           "sha256": "ed0690bd5f1f66eac03f3b10bbfd6db6ca45da675681163a6a73b0dc69ea1db0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-geology-poles@2x.webp",
           "bytes": 12162,
           "sha256": "5e6994d95674f76a5537b4b687e2d03bdebcc96efb082246aee3070f4c08ec98",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "spectral-slope",
+      "label": "Spectral slope",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Slope from 477.5 to 495 nm, normalized at 495 nm, in published VLT/MUSE observations from July 2019. Sulfur materials affect this slope; it is not sulfur-dioxide abundance. Native two-degree samples remain visible. Nights retain differences and seams; gray grid marks missing or conservatively withheld edges. Absolute subpixel registration is unresolved."
+      ],
+      "lensIds": [
+        "spectral-slope"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Sulfur-sensitive visible spectral slope"
+      },
+      "inputs": [
+        "io-muse-spectral-slope-night-1",
+        "io-muse-spectral-slope-night-2",
+        "io-muse-spectral-slope-night-3"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/io/io-spectral-slope-thumbnail.webp",
+          "bytes": 3670,
+          "sha256": "ea9f0e1afb89959592c368133cb3e5ba6618a214867d970d92d096a94d8b6234",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-spectral-slope-legend.webp",
+          "bytes": 192,
+          "sha256": "6a23e60e4569b6d9ac2d4d1649598d1f6bbc245d6971c85de4873c8d385a299c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-spectral-slope-surface@2x.webp",
+          "bytes": 26570,
+          "sha256": "7549167f5b6fc9a35464885d8ca33a23230d072b482dc802244bcd94835c6c8b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-spectral-slope-poles@2x.webp",
+          "bytes": 740,
+          "sha256": "56cfd06475fd74eb3d477d12b2e12a265034ff327d298e6b9c87b90de7a9a657",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "visible-absorption",
+      "label": "Visible absorption",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance."
+      ],
+      "lensIds": [
+        "visible-absorption"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Continuum-relative visible absorption"
+      },
+      "inputs": [
+        "io-muse-visible-absorption-night-1",
+        "io-muse-visible-absorption-night-2",
+        "io-muse-visible-absorption-night-3"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/io/io-visible-absorption-thumbnail.webp",
+          "bytes": 3646,
+          "sha256": "67501fdd61cd15d5174440af0a9c6a89a722b2e1d2883bb4b4b76274476bb583",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-visible-absorption-legend.webp",
+          "bytes": 198,
+          "sha256": "64cf4182fc9f4573b47f2155f999632cd462f451a7121ade22ce8defd96bf9db",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-visible-absorption-surface@2x.webp",
+          "bytes": 25444,
+          "sha256": "597d4d8bde2a60c565bca86a9c70161e29ea3c1817ffe91925994a544f8f5e36",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-visible-absorption-poles@2x.webp",
+          "bytes": 740,
+          "sha256": "56cfd06475fd74eb3d477d12b2e12a265034ff327d298e6b9c87b90de7a9a657",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -952,8 +1552,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 3753,
-          "sha256": "772003f378b5c2f2a664f70abcfb3eca70626bdf08060b6255cadf859e34a70e",
+          "bytes": 4081,
+          "sha256": "e4bcf0bb449591b3984cd0c5956c804e04f20460185c6af95f6bed68b193ba25",
           "verification": "bytes-verified"
         }
       ],
@@ -1027,6 +1627,54 @@
           "url": "object:prepared/minimaps/geology.webp",
           "bytes": 117596,
           "sha256": "e1cbb7b6365a5ab0c2e80dae001def65916b7b263048bf01cde36703bb1760e7",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:spectral-slope",
+      "label": "Spectral slope preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/1",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "spectral-slope"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/spectral-slope.webp",
+          "bytes": 17062,
+          "sha256": "d08f478f3be16e2d66ed948f55b217c5af7d07f67fe4134712c2772b7f109bca",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:visible-absorption",
+      "label": "Visible absorption preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "visible-absorption"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/visible-absorption.webp",
+          "bytes": 16574,
+          "sha256": "e4e2e3d7b0387fbe68d25f06b70300b5527449b7aa82b9b75f2289e4278ce3cb",
           "verification": "bytes-verified"
         }
       ]

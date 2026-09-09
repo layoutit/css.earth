@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-muse-spectral-maps@1",
+  "target": "io",
+  "registration": {
+    "mode": "author-grid-two-degree-nodes",
+    "absoluteSubpixelRegistration": "unresolved",
+    "evidence": [
+      "source-qualification.json"
+    ],
+    "limitation": "Native 2 degree registration scale; residual subpixel offsets unresolved, not a formal astrometric error bound."
+  },
+  "overlapPolicy": "first-valid-night-1-2-3",
+  "edgeWithholdNodes": 1,
+  "referenceRadiusMeters": 1821490,
+  "pins": {
+    "485nm_slope_io_night_1.fits": "fca35e89f83f222978ffbfd40154d91ef03ab85f09a86fb605ae0420de46479d",
+    "485nm_slope_io_night_2.fits": "58ae63f314d44d3f724b9cc7aeeea7475d9f64ea29005e01c4369f88d3893c31",
+    "485nm_slope_io_night_3.fits": "fbed77eb6281eb850ff0bc948da12bcec2861ae7a9b9ae453942ec3b668697ff",
+    "560nm_band_io_night_1.fits": "60126a3558ae1c414ac556d9029107aff209a53cd4bf6ddb8eb46bb76987bf3b",
+    "560nm_band_io_night_2.fits": "576242a7c73658b8767f77eca70b9833f196ad95fef455cdc3002f0cd77bcfcc",
+    "560nm_band_io_night_3.fits": "4e5747a2acb901f389ca962316f1b7250331c8ee7fcf92b040cedfc50e3cb6d5",
+    "source-qualification.json": "7fdd00cb2530b888a832fb8e7c2af61a7983389e555e3f85bc7dbc6f071b4bde"
+  },
+  "entries": [
+    {
+      "input": "485nm_slope_io_night_1.fits",
+      "kind": "485nm_slope",
+      "night": 1,
+      "output": "io/485nm_slope-night-1.tif"
+    },
+    {
+      "input": "485nm_slope_io_night_2.fits",
+      "kind": "485nm_slope",
+      "night": 2,
+      "output": "io/485nm_slope-night-2.tif"
+    },
+    {
+      "input": "485nm_slope_io_night_3.fits",
+      "kind": "485nm_slope",
+      "night": 3,
+      "output": "io/485nm_slope-night-3.tif"
+    },
+    {
+      "input": "560nm_band_io_night_1.fits",
+      "kind": "560nm_band",
+      "night": 1,
+      "output": "io/560nm_band-night-1.tif"
+    },
+    {
+      "input": "560nm_band_io_night_2.fits",
+      "kind": "560nm_band",
+      "night": 2,
+      "output": "io/560nm_band-night-2.tif"
+    },
+    {
+      "input": "560nm_band_io_night_3.fits",
+      "kind": "560nm_band",
+      "night": 3,
+      "output": "io/560nm_band-night-3.tif"
+    }
+  ],
+  "receipt": "io/conversion-receipt.json"
+}

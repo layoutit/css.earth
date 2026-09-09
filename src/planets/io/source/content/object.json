@@ -241,8 +241,74 @@
             }
           ]
         }
+      },
+      {
+        "id": "spectral-slope",
+        "label": "Spectral slope",
+        "description": "Slope from 477.5 to 495 nm, normalized at 495 nm, in published VLT/MUSE observations from July 2019. Sulfur materials affect this slope; it is not sulfur-dioxide abundance. Native two-degree samples remain visible. Nights retain differences and seams; gray grid marks missing or conservatively withheld edges. Absolute subpixel registration is unresolved.",
+        "title": "Sulfur-sensitive visible spectral slope",
+        "summary": "A measured visible spectral slope sensitive to sulfur materials.",
+        "thumbnail": "/scenes/io/io-spectral-slope-thumbnail.webp",
+        "surface": "io-spectral-slope-surface@2x.webp",
+        "poles": "io-spectral-slope-poles@2x.webp",
+        "source": {
+          "id": "io-muse-spectral-slope-night-1",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.11402374"
+        },
+        "detail": "2019 MUSE",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Spectral slope",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "4.4",
+            "5.5",
+            "6.6"
+          ],
+          "meta": "µm⁻¹ · normalized at 495 nm",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+          "image": "/scenes/io/io-spectral-slope-legend.webp"
+        }
+      },
+      {
+        "id": "visible-absorption",
+        "label": "Visible absorption",
+        "description": "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance.",
+        "title": "Continuum-relative visible absorption",
+        "summary": "A broad visible absorption feature, with uncertain chemical attribution.",
+        "thumbnail": "/scenes/io/io-visible-absorption-thumbnail.webp",
+        "surface": "io-visible-absorption-surface@2x.webp",
+        "poles": "io-visible-absorption-poles@2x.webp",
+        "source": {
+          "id": "io-muse-visible-absorption-night-1",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.11402374"
+        },
+        "detail": "2019 MUSE",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Visible absorption",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.015",
+            "0.0375",
+            "0.060"
+          ],
+          "meta": "mean 520–660 nm band depth (fraction)",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+          "image": "/scenes/io/io-visible-absorption-legend.webp"
+        }
       }
-    ]
+    ],
+    "labels": {
+      "spectral-slope": "Spectral slope",
+      "visible-absorption": "Visible absorption"
+    }
   },
   "settings": {
     "titleKey": "settings",
@@ -286,6 +352,18 @@
       "role": "surface",
       "description": "Interpreted geologic map and GIS · SIM3168",
       "href": "https://pubs.usgs.gov/sim/3168/"
+    },
+    {
+      "label": "VLT / MUSE",
+      "role": "surface",
+      "description": "King et al. (2025), visible spectral mapping and interpretation",
+      "href": "https://doi.org/10.1029/2024JE008511"
+    },
+    {
+      "label": "MUSE data",
+      "role": "surface",
+      "description": "July 2019 spectral observations; released 2024; CC BY 4.0",
+      "href": "https://doi.org/10.5281/zenodo.11402374"
     }
   ],
   "provenance": {

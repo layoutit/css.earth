@@ -69,7 +69,9 @@
     "labels": {
       "normal": "Monochrome",
       "elevation": "Elevation",
-      "shape": "Shape"
+      "shape": "Shape",
+      "ice-absorption": "Ice absorption",
+      "infrared-ratio": "Infrared ratio"
     },
     "controls": [
       {
@@ -126,6 +128,68 @@
           "id": "jpl-spc-enceladus-v2-q256",
           "path": "../manifest.json"
         }
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "description": "Water-ice absorption relative to a native 1.82–2.20 µm continuum. Six calibrated Cassini VIMS observations cover selected regions; gray grid marks unsupported areas. Strength also varies with viewing geometry and grain size. Archive noise filtering is retained; no photometric correction is applied. This is not ice percentage.",
+        "title": "Partial Cassini VIMS water-ice signature",
+        "summary": "Water-ice absorption in selected Cassini observations.",
+        "thumbnail": "/scenes/enceladus/enceladus-ice-absorption-thumbnail.webp",
+        "surface": "enceladus-ice-absorption-surface@2x.webp",
+        "poles": "enceladus-ice-absorption-poles@2x.webp",
+        "source": {
+          "id": "enceladus-vims-ice-absorption",
+          "path": "../manifest.json",
+          "url": "https://vims.univ-nantes.fr/cube/1487299582_1"
+        },
+        "detail": "Partial VIMS",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Ice absorption",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.55",
+            "0.68",
+            "0.81"
+          ],
+          "meta": "near-2.02 µm band depth",
+          "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
+          "image": "/scenes/enceladus/enceladus-ice-absorption-legend.webp"
+        }
+      },
+      {
+        "id": "infrared-ratio",
+        "label": "Infrared ratio",
+        "description": "Median reflectance in three channels near 3.1 µm divided by the near-1.66 µm channel. This samples an ice-sensitive infrared feature in six calibrated Cassini observations. Illumination, grain size and noise affect the ratio; it is not a crystallinity percentage or a temperature map. Archive filtering remains; no photometric correction. Gray grid marks unsupported areas.",
+        "title": "Partial Cassini VIMS spectral ratio",
+        "summary": "An ice-sensitive infrared ratio, with partial observation coverage.",
+        "thumbnail": "/scenes/enceladus/enceladus-infrared-ratio-thumbnail.webp",
+        "surface": "enceladus-infrared-ratio-surface@2x.webp",
+        "poles": "enceladus-infrared-ratio-poles@2x.webp",
+        "source": {
+          "id": "enceladus-vims-infrared-ratio",
+          "path": "../manifest.json",
+          "url": "https://vims.univ-nantes.fr/cube/1487299582_1"
+        },
+        "detail": "Partial VIMS",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Infrared ratio",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.01",
+            "0.055",
+            "0.10"
+          ],
+          "meta": "near-3.1 / 1.66 µm reflectance",
+          "sourceUrl": "https://vims.univ-nantes.fr/cube/1487299582_1",
+          "image": "/scenes/enceladus/enceladus-infrared-ratio-legend.webp"
+        }
       }
     ]
   },
@@ -177,6 +241,12 @@
       "role": "shape",
       "description": "Corrected Enceladus v2 SPC shape and delivery notes",
       "href": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/dskinfo.txt"
+    },
+    {
+      "label": "Cassini VIMS",
+      "role": "surface",
+      "description": "Nantes calibrated cubes, navigation and CC BY 4.0 source data",
+      "href": "https://vims.univ-nantes.fr/cube/1487299582_1"
     }
   ],
   "provenance": {

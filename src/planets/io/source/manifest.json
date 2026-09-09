@@ -230,6 +230,342 @@
         "referenceRadiusMeters": 1821460
       },
       "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps."
+    },
+    {
+      "id": "io-muse-original-485nm-slope-1",
+      "path": "muse/485nm_slope_io_night_1.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "fca35e89f83f222978ffbfd40154d91ef03ab85f09a86fb605ae0420de46479d",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/f08e392882467dd84082340af068d07945b26a0a",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-485nm-slope-2",
+      "path": "muse/485nm_slope_io_night_2.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "58ae63f314d44d3f724b9cc7aeeea7475d9f64ea29005e01c4369f88d3893c31",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/d5aa063e4c5c19fae8252a711ddbcb69df4a7e28",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-485nm-slope-3",
+      "path": "muse/485nm_slope_io_night_3.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "fbed77eb6281eb850ff0bc948da12bcec2861ae7a9b9ae453942ec3b668697ff",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/bab631394382359f2f0cff86835d95f0cb69317a",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-560nm-band-1",
+      "path": "muse/560nm_band_io_night_1.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "60126a3558ae1c414ac556d9029107aff209a53cd4bf6ddb8eb46bb76987bf3b",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/602fb0d67dac8ba495a0331f57c45f126d6d7042",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-560nm-band-2",
+      "path": "muse/560nm_band_io_night_2.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "576242a7c73658b8767f77eca70b9833f196ad95fef455cdc3002f0cd77bcfcc",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/54aa6d283d18ad16f98e0212f1274f52e728efb1",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-original-560nm-band-3",
+      "path": "muse/560nm_band_io_night_3.fits",
+      "expectedBytes": 132480,
+      "expectedSha256": "4e5747a2acb901f389ca962316f1b7250331c8ee7fcf92b040cedfc50e3cb6d5",
+      "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/3f445cfc37a93f0ec06e39abc0bc85c089a9417f",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Exact original FITS at author commit 1e162eaeb7e52c1e263555ec1fe30e30a993a7d7; retained in Git and restorable with the shared acquisition plan.",
+      "redistribution": "CC BY 4.0 original numeric map with attribution.",
+      "consumers": [
+        "surface-chemistry-originals"
+      ]
+    },
+    {
+      "id": "io-muse-spectral-slope-night-1",
+      "path": "muse/io/485nm_slope-night-1.tif",
+      "expectedBytes": 12012,
+      "expectedSha256": "d8b3ce837b7db28a255eae9aaf9eda61717121ab1241f392f765014641ade58a",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "spectral-slope"
+      ],
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-spectral-slope-night-2",
+      "path": "muse/io/485nm_slope-night-2.tif",
+      "expectedBytes": 12028,
+      "expectedSha256": "41e87a8222840afce00a1427fbcff3491bfb13fe6e599dbb6336a96551196ba9",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "spectral-slope"
+      ],
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-spectral-slope-night-3",
+      "path": "muse/io/485nm_slope-night-3.tif",
+      "expectedBytes": 12297,
+      "expectedSha256": "b8667cc9de8bc46184aea14932bc950a6c66793bd99ce2f5dac9ee9aa230a99f",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "spectral-slope"
+      ],
+      "lensId": "spectral-slope",
+      "label": "Spectral slope",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-visible-absorption-night-1",
+      "path": "muse/io/560nm_band-night-1.tif",
+      "expectedBytes": 12689,
+      "expectedSha256": "5a884deb172fbec39a1192b2149e5e2452644d0ac4402d4e948b7d5a204f3e02",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "visible-absorption"
+      ],
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-visible-absorption-night-2",
+      "path": "muse/io/560nm_band-night-2.tif",
+      "expectedBytes": 12790,
+      "expectedSha256": "eff9a10c9b342c06f9426d01c6a884e291dd9eb681bbb47804a5a3044c7e8a29",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "visible-absorption"
+      ],
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+    },
+    {
+      "id": "io-muse-visible-absorption-night-3",
+      "path": "muse/io/560nm_band-night-3.tif",
+      "expectedBytes": 12820,
+      "expectedSha256": "cd8fd566af1e3024c389b2c8d6816474aee9db56d0288e51c3993f063e9aca21",
+      "origin": "https://doi.org/10.5281/zenodo.11402374",
+      "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://doi.org/10.5281/zenodo.11402374",
+        "muse/datacite-license.json"
+      ],
+      "acquisition": "Reproduce with tools/objects/acquisition/muse-spectral-maps.py and muse/io-recipe.json from original FITS.",
+      "redistribution": "Small derived float32 map under CC BY 4.0 with processing notice.",
+      "consumers": [
+        "visible-absorption"
+      ],
+      "lensId": "visible-absorption",
+      "label": "Visible absorption",
+      "falseColor": true,
+      "width": 180,
+      "height": 90,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -181,
+          179
+        ],
+        "latitudeDegrees": [
+          89,
+          -91
+        ],
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 1821490
+      },
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
     }
   ],
   "generatedIntermediates": [],
@@ -254,14 +590,14 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 6272,
-      "expectedSha256": "62e0de8d49db3bc47a78b3736f670364a5b2352f3f3414b5b4f4e0ef8a1ea33e",
+      "expectedBytes": 11298,
+      "expectedSha256": "a2ca8a5abc1cbb507b93a10f8898661c5ce400ddacdb8687b083b47565c1152a",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 10661,
-      "expectedSha256": "d46bd09d7eb6c79aa2a5b18ee22234284803eb910c00492896c0ca7b4b478b49",
+      "expectedBytes": 14126,
+      "expectedSha256": "e1f2c17e2088a4501836c34b6202b2d35d92042197ca69f0eb5aa53cc992262b",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -278,8 +614,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1178,
-      "expectedSha256": "c44281a1f6e284ad0f6bdc5b6a0092ab5380f7ba58fe2b01eb5826e265d96528",
+      "expectedBytes": 3413,
+      "expectedSha256": "82875a6372ffe28a99fc83459e264922953eaf236233ec0a916e6a19fabcbe55",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
     },
     {
@@ -652,6 +988,36 @@
         "geology-validation"
       ],
       "purpose": "Checked-in anchors decoded from the separately archived label-point geometry/attributes. Original discrepancies are retained."
+    },
+    {
+      "path": "muse/source-qualification.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 12663,
+      "expectedSha256": "7fdd00cb2530b888a832fb8e7c2af61a7983389e555e3f85bc7dbc6f071b4bde"
+    },
+    {
+      "path": "muse/INTERPRETATION.md",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 3857,
+      "expectedSha256": "6c3a4c61987547a8ba3523ab046353f640b1a343595ab1611345b0ae96d60b1a"
+    },
+    {
+      "path": "muse/io-recipe.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 2175,
+      "expectedSha256": "a0dce284117c01ed762a05ab1a2f25af626bd9e73733daaddb4f327749073d81"
+    },
+    {
+      "path": "muse/datacite-license.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 5096,
+      "expectedSha256": "18391de14b9f22cfa4f83a08f9d26992f6aa1616b302c68025cee1d1784b368a"
+    },
+    {
+      "path": "muse/io/conversion-receipt.json",
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
+      "expectedBytes": 10483,
+      "expectedSha256": "9640accaa31acef0af9cb9008cb914815d86f47db2f219163d2c0c32a7d1a231"
     }
   ]
 }

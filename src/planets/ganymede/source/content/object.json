@@ -274,8 +274,42 @@
             }
           ]
         }
+      },
+      {
+        "id": "oxygen-signature",
+        "label": "Oxygen signature",
+        "description": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
+        "title": "Oxygen-sensitive visible reflectance ratio",
+        "summary": "A visible spectral signature associated with oxygen in surface ice.",
+        "thumbnail": "/scenes/ganymede/ganymede-oxygen-signature-thumbnail.webp",
+        "surface": "ganymede-oxygen-signature-surface@2x.webp",
+        "poles": "ganymede-oxygen-signature-poles@2x.webp",
+        "source": {
+          "id": "ganymede-muse-oxygen-signature-night-1",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.5281/zenodo.11402374"
+        },
+        "detail": "2019 MUSE",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Oxygen signature",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.98",
+            "1.00",
+            "1.02"
+          ],
+          "meta": "565 / 577.3 nm reflectance ratio",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.11402374",
+          "image": "/scenes/ganymede/ganymede-oxygen-signature-legend.webp"
+        }
       }
-    ]
+    ],
+    "labels": {
+      "oxygen-signature": "Oxygen signature"
+    }
   },
   "settings": {
     "titleKey": "settings",
@@ -319,6 +353,18 @@
       "role": "surface",
       "description": "Interpreted geologic map and GIS · SIM3237",
       "href": "https://pubs.usgs.gov/sim/3237/"
+    },
+    {
+      "label": "VLT / MUSE",
+      "role": "surface",
+      "description": "King et al. (2025), visible spectral mapping and interpretation",
+      "href": "https://doi.org/10.1029/2024JE008511"
+    },
+    {
+      "label": "MUSE data",
+      "role": "surface",
+      "description": "July 2019 spectral observations; released 2024; CC BY 4.0",
+      "href": "https://doi.org/10.5281/zenodo.11402374"
     }
   ],
   "provenance": {
