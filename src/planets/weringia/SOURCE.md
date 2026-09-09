@@ -28,3 +28,5 @@ No registered global image texture is supplied by the selected release. Shape di
 ## Preparation and qualification
 
 The established source-meshoptimizer path retains source connectivity, reduces to at most 800 faces, and emits native PolyCSS `u` triangles with 128 px raster cells. The error allowance is 322.6 m; sampled source-fit error is qualified separately from source accuracy. Elevation uses closest-source-surface sampling with the same physical scale. Shadows are off by default. Shared runtime, camera, navigation and shell remain generic. Delivery and browser evidence are recorded in the PR’s validation report.
+
+The surface atlases use the existing WebP quality setting at 95. Scientific color validation compares independent, source-derived RGB with decoded atlas pixels; numeric scalar values are verified separately.

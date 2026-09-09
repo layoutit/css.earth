@@ -72,8 +72,8 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 78739,
-      "expectedSha256": "11d175a6a166233dbf3ea4ce445c0b422ea3d01ea7238d865717c9a09f8accb1",
+      "expectedBytes": 77494,
+      "expectedSha256": "15ce66fc1284192ca1d42b57aa3cd698aeb0e59c424ad5fd6dd9d572bbd4d52d",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -106,7 +106,7 @@
       "path": "preparation/navigation.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 1257,
-      "expectedSha256": "e8b761c5dc458625c8366f4bb7c92d2a965115d3f6b85780512c93222e443a6b"
+      "expectedSha256": "63d66b0f21f1b25fd03db6eeace3b5945d975033a428523c3cb6f8366ed8ac9b"
     },
     {
       "path": "preparation/rotation.json",
@@ -117,8 +117,8 @@
     {
       "path": "preparation/terrestrial.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 3177,
-      "expectedSha256": "5ae062f3eebc1dd4d313cfe01b741a2c613326189a4c9848b136064b40fbcf73"
+      "expectedBytes": 3178,
+      "expectedSha256": "1cb63bc6beb57e7c767e25369862021d0b07a30dda27599ffbbe7f7f62aa9d0b"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -195,8 +195,8 @@
     {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 4153,
-      "expectedSha256": "c463d68efd1d8681cf5935dcd971555ef065280ea65936e95b2c8cc9b75fb185"
+      "expectedBytes": 4127,
+      "expectedSha256": "f33388f24537f27cb977e78c68c5f29e5fad2ff8a977cefec1198760eda80092"
     },
     {
       "path": "reference/reference-660.html",

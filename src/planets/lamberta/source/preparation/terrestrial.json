@@ -110,7 +110,7 @@
         "method": "source-meshoptimizer",
         "targetFaces": 800,
         "maximumErrorMeters": 1410.0,
-        "regularize": true
+        "regularize": false
       }
     }
   },

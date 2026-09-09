@@ -51,7 +51,7 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "5ae062f3eebc1dd4d313cfe01b741a2c613326189a4c9848b136064b40fbcf73"
+          "sha256": "1cb63bc6beb57e7c767e25369862021d0b07a30dda27599ffbbe7f7f62aa9d0b"
         },
         {
           "id": "rotation",
@@ -71,7 +71,7 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "e8b761c5dc458625c8366f4bb7c92d2a965115d3f6b85780512c93222e443a6b"
+          "sha256": "63d66b0f21f1b25fd03db6eeace3b5945d975033a428523c3cb6f8366ed8ac9b"
         },
         {
           "id": "acquisition",
@@ -79,8 +79,40 @@
           "sha256": "a6d374a4fb5bc89a043e45dd6263805a192f0240cb952a7becf2dd3c83981eb8"
         }
       ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -266840450315.92917,
+        207758160781.09927,
+        157921679141.87628
+      ],
+      "presentationToReference": [
+        -0.7250895313580992,
+        0,
+        -0.6886546097390854,
+        0.6318282513968639,
+        0.39777715593191365,
+        -0.6652566384152053,
+        0.27393107208141554,
+        -0.9174820620691817,
+        -0.2884240515796287
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191365,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 306.5217391304348,
+      "bodyRadiusM": 70500
     }
   },
   "schema": "cssearth-object@1",
-  "type": "layered-body"
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "1d21443dd0ef36d8cc32795fb5f5d1d7b5dc69fbb50e47faa89cc4e58997b8d8"
+  }
 }
