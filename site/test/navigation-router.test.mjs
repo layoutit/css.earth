@@ -96,7 +96,7 @@ function harness({ prepare = async () => ({}), focus = undefined, centerTarget =
       const shell = { input, options, destroyed: 0, selected: 'mercury',
         setPlaybackState(value) { this.playback = value; },
         setMotionEnabled(value) { options.onMotionChange(value); },
-        setPreparedFocus(record, sources) { this.preparedFocus = record; this.focusSources = sources; },
+        setPreparedFocus(record, sources, presentation) { this.preparedFocus = record; this.focusSources = sources; this.focusPresentation = presentation; },
         setObject(content) { assert.equal(renders.size, 0); content.apply(); this.selected = content.id; },
         destroy() { this.destroyed++; },
       };
@@ -164,15 +164,41 @@ test('ordinary planet selection clears the departed catalogue focus in both the 
       prepare: async ({ fromMount }) => { fromMount.navigation.setPreparedFocus(null); return {}; } });
     await h.router.settled;
     await h.router.navigate('mercury', { url: `https://example.test/mercury/?focus=catalogue:a&${formatSharedView(saved(3e12))}` });
+    h.windowTarget.location.searchParams.set('focusLens', 'departed-lens');
     await h.router.navigate(target);
     assert.equal(h.windowTarget.location.searchParams.has('focus'), false);
+    assert.equal(h.windowTarget.location.searchParams.has('focusLens'), false);
     assert.equal(h.mounts.at(-1).navigation.preparedFocus(), null);
     assert.equal(h.shells[0].preparedFocus, null);
-    if (target === 'venus') assert.equal(new URL(h.preparations.at(-1).url).searchParams.has('focus'), false);
+    if (target === 'venus') {
+      assert.equal(new URL(h.preparations.at(-1).url).searchParams.has('focus'), false);
+      assert.equal(new URL(h.preparations.at(-1).url).searchParams.has('focusLens'), false);
+    }
     assert.equal(h.maxRendered(), 1);
     assert.deepEqual([...h.errors, ...context.errors], []);
     h.router.destroy();
   }
+});
+
+test('focused lens state reaches the retained shell without replacing its detailed scene', async () => {
+  let contentChanged;
+  const context = { async mount() { return { publish() {}, destroy() {},
+    connectNavigation(owner, { onFocusContentChange }) { contentChanged = onFocusContentChange; return () => {}; },
+  }; } };
+  const h = harness({ persistentWorldContext: context });
+  await h.router.settled;
+  const record = { id: 'catalogue:galaxy' }, sources = [{ id: 'source' }];
+  const first = { objectId: 'prepared-galaxy', selectedLens: 'first', selectLens() {} };
+  contentChanged(record, sources, first);
+  assert.equal(h.shells[0].focusPresentation, first);
+  const second = { ...first, selectedLens: 'second' };
+  contentChanged(record, sources, second);
+  assert.equal(h.shells[0].focusPresentation, second);
+  assert.equal(h.shells[0].preparedFocus, record);
+  assert.equal(h.shells[0].focusSources, sources);
+  assert.equal(h.shells.length, 1); assert.equal(h.mounts.length, 1);
+  assert.equal(h.maxRendered(), 1);
+  h.router.destroy();
 });
 
 test('persistent world context is mounted once and follows the active physical navigation', async () => {

@@ -336,6 +336,32 @@ test('camera scale changes retained overview content without moving the camera a
   shell.destroy(); assert.equal(listeners.size, 0);
 });
 
+test('the planet lens controller ignores an earlier retained galaxy bank and binds its own lens controls', () => {
+  const f = fixture(), drawer = f.selectors.get('.planet-drawer-content');
+  const focusedBank = new Element(), planetBank = new Element(), option = new Element(), button = new Element(), detail = new Element();
+  const information = f.selectors.get('.planet-information-panel');
+  // A broad drawer query returns the earlier, initially hidden galaxy dataset section.
+  focusedBank.hidden = true;
+  drawer.selectors.set('.planet-lenses', focusedBank);
+  information.selectors.set('.planet-lenses', planetBank);
+  button.value = 'planet-observation'; button.ariaPressed = 'true';
+  detail.dataset.lensDetails = button.value; detail.hidden = true;
+  option.selectors.set('button[name="lens"]', button);
+  planetBank.selectors.set('[data-lens-option]', [option]);
+  information.selectors.set('[data-lens-details]', [detail]);
+  const observed = [];
+  f.windowTarget.MutationObserver = class {
+    observe(target) { observed.push(target); }
+    disconnect() {}
+  };
+  const shell = f.mount();
+  assert.deepEqual(observed, [button]);
+  assert.equal(detail.hidden, false);
+  assert.equal(focusedBank.hidden, true);
+  shell.destroy();
+  assert.equal(detail.hidden, true);
+});
+
 test('a prepared galaxy takes precedence over the retained Milky Way card and clears cleanly on planet return', () => {
   const f = fixture(), browser = f.selectors.get('.planet-object-browser'), drawer = f.selectors.get('.planet-drawer-content');
   const galaxy = new Element(), system = new Element(), card = new Element();
@@ -346,6 +372,11 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   for (const name of names) card.selectors.set(`[data-focus-${name}]`, new Element());
   const links = [new Element(), new Element(), new Element()];
   card.selectors.set('[data-focus-source]', links);
+  const lensBank = new Element(), lensButton = new Element(), lensDetail = new Element();
+  lensButton.value = 'prepared-dataset'; lensDetail.dataset.focusLensDetails = lensButton.value;
+  lensBank.selectors.set('[data-focus-lens]', [lensButton]);
+  lensBank.selectors.set('[data-focus-lens-details]', [lensDetail]);
+  card.selectors.set('[data-focus-lens-bank]', [lensBank]);
   const readout = new Element();
   for (const selector of ['.planet-view-date', '[data-view-date]', '.planet-view-coordinates', '[data-view-latitude]', '[data-view-longitude]',
     '[data-view-altitude]', '[data-view-distance-label]', '.planet-view-altitude', '.planet-view-scale', '[data-view-scale-label]', '.planet-view-ruler', '.planet-view-measure']) {
@@ -367,7 +398,15 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
     frame: { originM: [0,0,0], bodyRadiusM: 100 }, optics: () => ({ focalPixels: 1000, principalOffsetPixels: [0,0] }),
     subscribe: callback => { listeners.add(callback); return () => listeners.delete(callback); } } });
   assert.equal(search.value, '');
-  shell.setPreparedFocus(record, [source]);
+  lensBank.dataset.focusLensBank = record.detailedObjectId;
+  const lensSelections = [];
+  shell.setPreparedFocus(record, [source], { objectId: record.detailedObjectId,
+    selectedLens: lensButton.value, lenses: [{ id: lensButton.value }], starsVisible: true,
+    selectLens: id => lensSelections.push(id) });
+  assert.equal(lensBank.hidden, false); assert.equal(lensDetail.hidden, false);
+  assert.equal(lensButton.getAttribute('aria-pressed'), 'true');
+  lensButton.dispatchEvent(new Event('click'));
+  assert.deepEqual(lensSelections, [lensButton.value]);
   renderReadout();
   assert.equal(search.value, '', 'Galaxy focus does not write to search');
   assert.equal(card.hidden, false); assert.equal(galaxy.hidden, true); assert.equal(system.hidden, true);
@@ -428,6 +467,7 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   assert.equal(search.value, '   ');
   assert.equal(f.selectors.get('.planet-information-panel').hidden, false);
   shell.destroy();
+  assert.equal(lensButton.listeners.size, 0);
   assert.equal(f.timers.size, 0);
   assert.equal(listeners.size, 0);
 });

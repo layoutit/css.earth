@@ -16,15 +16,17 @@ import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import type { PreparedCatalogObject } from '@cssearth/catalog';
 import type { PreparedCssImageLayers } from '../image-layers/loader.js';
+import { createPreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
-export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [], imageLayers = [], catalog, annotationPriorities }: {
+export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [], imageLayers = [], volumeLenses = [], catalog, annotationPriorities }: {
   context: unknown; volume: PreparedCssVolume; stars: PreparedCssPointField;
   resolveStarResource(path: string): string; resolveResource(path: string): string;
   sprites: Readonly<Record<string, SpriteWithUrl>>;
   annotationPriorities?: Readonly<Record<string, number>>;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   imageLayers?: readonly { payload: PreparedCssImageLayers; resolveResource(path: string): string }[];
+  volumeLenses?: readonly Parameters<typeof createPreparedVolumeLenses>[0][];
   catalog?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number;
     clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 }) {
@@ -51,15 +53,22 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
     return payload.resources.map(resource => ({ key: `image-layers:${payload.id}:${resource.path}`,
       url: resolveResource(resource.path), pool: `image-layers:${payload.id}` }));
   });
+  const lensPlans = volumeLenses.map(options => {
+    const frame = options.payload.lenses[0]!.volume.frame;
+    if (frame.referenceFrame !== plan.frame.referenceFrame || frame.epochJdTt !== plan.frame.epochJdTt)
+      throw new TypeError('Prepared volume lenses must share the universe reference frame and epoch.');
+    return createPreparedVolumeLenses(options);
+  });
   const assets: PreparedAssets = {
-    entries: [...entries, ...starEntries, ...shellEntries, ...imageEntries],
+    entries: [...entries, ...starEntries, ...shellEntries, ...imageEntries, ...lensPlans.flatMap(bank => bank.assets.entries)],
     pools: [{ id: pool, retention: 'mount', capacity: entries.length, concurrency: 8, reuse: false, decoding: 'async' },
       { id: starPool, retention: 'mount', capacity: starEntries.length, concurrency: 8, reuse: false, decoding: 'async' },
       ...shells.map(({ payload }) => ({ id: `shell:${payload.id}`, retention: 'mount' as const,
         capacity: payload.resources.length, concurrency: 2, reuse: false, decoding: 'async' as const })),
       ...imageLayers.map(({ payload }) => ({ id: `image-layers:${payload.id}`, retention: 'mount' as const,
-        capacity: payload.resources.length, concurrency: 4, reuse: false, decoding: 'async' as const }))],
-    startup: [...entries, ...starEntries, ...shellEntries, ...imageEntries].map(entry => entry.key),
+        capacity: payload.resources.length, concurrency: 4, reuse: false, decoding: 'async' as const })),
+      ...lensPlans.flatMap(bank => bank.assets.pools)],
+    startup: [...entries, ...starEntries, ...shellEntries, ...imageEntries].map(entry => entry.key).concat(lensPlans.flatMap(bank => bank.assets.startup)),
   };
   return Object.freeze({ assets,
     mount(stage: HTMLElement, { onSelectGalaxy }: { onSelectGalaxy?: (object: PreparedCatalogObject) => void } = {}) {
@@ -92,6 +101,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
       let environmentLabels: ReturnType<typeof mountEnvironmentLabels> | null = null;
       let galaxyCatalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
       const imageBanks: ReturnType<typeof mountPreparedCssImageLayers>[] = [];
+      const lensBanks: ReturnType<ReturnType<typeof createPreparedVolumeLenses>['mount']>[] = [];
       const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
       let selected = plan.focus;
       let destroyed = false;
@@ -101,6 +111,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); pointField?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
         for (const bank of imageBanks) bank.destroy(); galaxyCatalog?.destroy();
+        for (const bank of lensBanks) bank.destroy();
         root.remove();
         delete stage.dataset.contextScale;
       };
@@ -108,6 +119,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         for (const bank of imageLayers) imageBanks.push(mountPreparedCssImageLayers({ host: root, before: end, ...bank }));
+        for (const bank of lensPlans) lensBanks.push(bank.mount({ host: root, before: end }));
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Billboards share the detail stage, so a nearer body can cover the selected detail.
@@ -119,6 +131,22 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
           selectGalaxy(id: string | null) { galaxyCatalog?.select(id); },
           resolveGalaxy(id: string) { return galaxyCatalog?.resolve(id) ?? null; },
           imageLayerFrames: Object.freeze(Object.fromEntries(imageLayers.map(({ payload }) => [payload.id, payload.frame]))),
+          volumeLensFrames: Object.freeze(Object.fromEntries(volumeLenses.map(({ payload }) => [payload.id,
+            { frame: payload.lenses[0]!.volume.frame, framingRadiusUnits: payload.framingRadiusUnits }]))),
+          volumeLensState(id: string) { return lensBanks[volumeLenses.findIndex(bank => bank.payload.id === id)]?.state() ?? null; },
+          selectVolumeLens(id: string, lens: string) {
+            const bank = lensBanks[volumeLenses.findIndex(bank => bank.payload.id === id)];
+            if (!bank) throw new TypeError('Unknown prepared volume lens bank.');
+            bank.selectLens(lens);
+          },
+          setVolumeStarsVisible(id: string, enabled: boolean) {
+            const bank = lensBanks[volumeLenses.findIndex(bank => bank.payload.id === id)];
+            if (!bank) throw new TypeError('Unknown prepared volume lens bank.');
+            bank.setStarsVisible(enabled);
+          },
+          subscribeVolumeLens(id: string, listener: () => void) {
+            return lensBanks[volumeLenses.findIndex(bank => bank.payload.id === id)]?.subscribe(listener) ?? (() => {});
+          },
           previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
           setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },
           setNavigationInFlight(active: boolean) { spatial!.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
@@ -161,6 +189,11 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             for (const bank of imageBanks) {
               bank.root.style.opacity = String(volumeOpacity);
               bank.root.style.visibility = volumeOpacity > 0 ? 'visible' : 'hidden';
+              if (volumeOpacity > 0) bank.publish({ world, viewport });
+            }
+            for (const bank of lensBanks) {
+              bank.root.style.opacity = String(volumeOpacity);
+              bank.root.style.display = volumeOpacity > 0 ? 'block' : 'none';
               if (volumeOpacity > 0) bank.publish({ world, viewport });
             }
             for (const [index, shell] of shellLayers.entries()) {

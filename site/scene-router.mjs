@@ -266,7 +266,7 @@ export function createSceneRouter({
     if (active) active.viewUrl = null;
     const url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) {
-      url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview'); url.searchParams.delete('focus');
+      url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview'); url.searchParams.delete('focus'); url.searchParams.delete('focusLens');
       if (options.overview) url.searchParams.set('overview', options.overviewScope ?? 'solar-system');
     }
     const request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
@@ -541,7 +541,7 @@ export function createSceneRouter({
     owner.setOverview?.(overview);
     const disconnectFocus = owner.connectNavigation?.(navigation, {
       onFocusChange(url) { if (active === session) session.url = url; },
-      onFocusContentChange(record, sources) { if (active === session) shellOwner?.shell?.setPreparedFocus?.(record, sources); },
+      onFocusContentChange(record, sources, presentation) { if (active === session) shellOwner?.shell?.setPreparedFocus?.(record, sources, presentation); },
       onFlightStart() {
         if (active !== session) return;
         motionEnabled = false; shellOwner?.shell?.setMotionEnabled?.(false); syncPlayback();

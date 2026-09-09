@@ -3,12 +3,46 @@ const words = value => value.replaceAll('-', ' ').replace(/^./u, letter => lette
 
 /** One retained card transports the selected prepared record; no catalogue is imported here. */
 export function createPreparedFocusCard(root) {
-  if (!root) return { set() {} };
+  if (!root) return { set() {}, destroy() {} };
   const fields = Object.fromEntries(['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
     .map(name => [name, root.querySelector(`[data-focus-${name}]`)]));
   const links = [...root.querySelectorAll('[data-focus-source]')];
+  const events = new AbortController();
+  let currentPresentation = null;
+  const banks = [...root.querySelectorAll('[data-focus-lens-bank]')].map(bank => ({ root: bank,
+    buttons: [...bank.querySelectorAll('[data-focus-lens]')],
+    details: [...bank.querySelectorAll('[data-focus-lens-details]')],
+    stars: bank.querySelector('[data-focus-stars]'),
+  }));
+  for (const bank of banks) {
+    for (const button of bank.buttons) button.addEventListener('click', () => {
+      if (currentPresentation?.objectId === bank.root.dataset.focusLensBank) currentPresentation.selectLens(button.value);
+    }, { signal: events.signal });
+    bank.stars?.addEventListener('change', () => {
+      if (currentPresentation?.objectId === bank.root.dataset.focusLensBank) currentPresentation.setStarsVisible?.(bank.stars.checked);
+    }, { signal: events.signal });
+  }
+  const setPresentation = (record, presentation) => {
+    currentPresentation = record?.detailedObjectId === presentation?.objectId ? presentation : null;
+    for (const bank of banks) {
+      const active = currentPresentation?.objectId === bank.root.dataset.focusLensBank;
+      bank.root.hidden = !active;
+      if (!active) continue;
+      const available = new Set(currentPresentation.lenses.map(lens => lens.id));
+      for (const button of bank.buttons) {
+        button.disabled = !available.has(button.value);
+        button.setAttribute('aria-pressed', String(button.value === currentPresentation.selectedLens));
+      }
+      for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
+      if (bank.stars) {
+        bank.stars.disabled = typeof currentPresentation.setStarsVisible !== 'function';
+        bank.stars.checked = currentPresentation.starsVisible;
+      }
+    }
+  };
   const write = (name, value) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
-  return { set(record, sources = []) {
+  return { set(record, sources = [], presentation = null) {
+    setPresentation(record, presentation);
     if (!record) { root.hidden = true; return; }
     root.dataset.preparedFocusId = record.id;
     write('name', record.name);
@@ -30,5 +64,5 @@ export function createPreparedFocusCard(root) {
       if (source) { link.href = source.url; link.textContent = source.citation; }
       else { link.removeAttribute('href'); link.textContent = ''; }
     }
-  } };
+  }, destroy() { events.abort(); currentPresentation = null; } };
 }

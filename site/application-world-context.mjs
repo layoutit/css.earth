@@ -1,6 +1,6 @@
 import { mountSpaceMinimap } from './minimap/minimap.mjs';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mjs';
-import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers } from '../src/renderers/css/dist/universe.js';
+import { createPreparedUniverse, prepareObjectResources, loadPreparedCssVolume, loadPreparedCssPointField, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses } from '../src/renderers/css/dist/universe.js';
 import applicationContext from '../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
@@ -60,7 +60,13 @@ function loadApplicationUniverse() {
       }));
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, contextMarkerSprite(sprite)]));
-    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells, imageLayers, annotationPriorities,
+    const volumeLenses = await Promise.all(Object.values(descriptors).filter(descriptor => descriptor.type === 'volume-lens-bank')
+      .map(async descriptor => {
+        const set = resourceSet(descriptor.id);
+        return { payload: await loadPreparedVolumeLenses(set.descriptor, set.transport),
+          resolveResource: path => set.resolve(`prepared/${path}`) };
+      }));
+    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells, imageLayers, volumeLenses, annotationPriorities,
       catalog: { payload: galaxyCatalog, fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM,
         fullDistanceM: galaxyPresentation.fullDistanceM,
         clusters: { payload: clusterCatalog, fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } },

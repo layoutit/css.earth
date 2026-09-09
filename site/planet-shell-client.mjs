@@ -36,6 +36,7 @@ export function mountPlanetShell({
   let overview = false, overviewScope = 'solar-system', camera = null, unsubscribeOverview = null;
   let preparedFocus = null;
   const focusCard = createPreparedFocusCard(drawer.querySelector('[data-prepared-focus-card]'));
+  lifetime.onDispose(() => focusCard.destroy());
   lifetime.onDispose(() => unsubscribeOverview?.());
   function updateBodyCard(world = camera?.navigation?.capture()) {
     const information = drawer.querySelector('.planet-information-panel');
@@ -165,9 +166,9 @@ export function mountPlanetShell({
       mountContent(content.id, motion, contrast);
     },
     setDestinations(provider) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
-    setPreparedFocus(record, sources = []) {
+    setPreparedFocus(record, sources = [], presentation = null) {
       if (lifetime.disposed) return;
-      preparedFocus = record; focusCard.set(record, sources);
+      preparedFocus = record; focusCard.set(record, sources, presentation);
       objectBrowser.setPreparedFocus(record); viewReadout.setPreparedFocus(record);
     },
     setOverview(enabled) {
@@ -294,7 +295,8 @@ function createMissionAgencyController(drawer, lifetime) {
 }
 
 function createLensBrowserController(drawer, windowTarget, lifetime) {
-  const root = drawer.querySelector(".planet-lenses");
+  const information = drawer.querySelector(".planet-information-panel");
+  const root = information?.querySelector(".planet-lenses");
   if (!root) {
     return Object.freeze({ destroy() {} });
   }
@@ -308,7 +310,7 @@ function createLensBrowserController(drawer, windowTarget, lifetime) {
     throw new Error("Planet shell surface lens browser has no valid lenses.");
   }
 
-  const details = [...drawer.querySelectorAll("[data-lens-details]")];
+  const details = [...information.querySelectorAll("[data-lens-details]")];
   const lensIds = new Set(buttons.map((button) => button.value));
   if (details.some((detail) => !lensIds.has(detail.dataset.lensDetails ?? ""))) {
     throw new Error("Planet shell surface lens details have no matching lens.");
