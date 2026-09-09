@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 http://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1J00.xsd">
+    <Identification_Area>
+        <logical_identifier>urn:nasa:pds:dione.rhea_cassini_vims_ir-mosaic_scipioni_2022:data:rhea_phase_function_parameters</logical_identifier>
+        <version_id>1.0</version_id>
+        <title>Rhea surface near-infared phase function polynomial parameters from Cassini VIMS</title>
+        <information_model_version>1.19.0.0</information_model_version>
+        <product_class>Product_Observational</product_class>
+        <Citation_Information>
+            <author_list>Scipioni, Francesca; Combe, Jean-Philippe</author_list>
+            <publication_year>2022</publication_year>
+            <doi>10.17189/ctqe-ta30</doi>
+            <description>Cassini VIMS Global Hyperspectral Maps of Dione and Rhea by Francesca Scipioni as funded by a 2018 Cassini Data Analysis program (CDAP)</description>
+        </Citation_Information>
+        <Modification_History>
+            <Modification_Detail>
+                <modification_date>2020-12-16</modification_date>
+                <version_id>1.0</version_id>
+                <description>Scipioni CDAP 2018 Rhea surface near-infared phase function 
+				   polynomial model parameters from Cassini VIMS.</description>
+            </Modification_Detail>
+        </Modification_History>
+    </Identification_Area>
+    <Observation_Area>
+        <Time_Coordinates>
+            <start_date_time>2004-08-24Z</start_date_time>
+            <stop_date_time>2017-07-14Z</stop_date_time>
+        </Time_Coordinates>
+        <Primary_Result_Summary>
+            <purpose>Science</purpose>
+            <processing_level>Derived</processing_level>
+            <description>Data from the Visual and Infared Imaging Spectrometer (VIMS) have been used to characterize
+              the surface photometry of Saturn's icy satellite Rhea.</description>
+        </Primary_Result_Summary>
+        <Investigation_Area>
+            <name>Cassini</name>
+            <type>Mission</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:investigation:mission.cassini-huygens</lid_reference>
+                <reference_type>data_to_investigation</reference_type>
+            </Internal_Reference>
+        </Investigation_Area>
+        <Observing_System>
+            <name>Cassini VIMS</name>
+            <Observing_System_Component>
+                <name>Cassini</name>
+                <type>Host</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.co</lid_reference>
+                    <reference_type>is_instrument_host</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>
+            <Observing_System_Component>
+                <name>VIMS</name>
+                <type>Instrument</type>
+                <Internal_Reference>
+                    <lid_reference>urn:nasa:pds:context:instrument:vims.co</lid_reference>
+                    <reference_type>is_instrument</reference_type>
+                </Internal_Reference>
+            </Observing_System_Component>            
+        </Observing_System>
+        <Target_Identification>
+            <name>Rhea</name>
+            <type>Satellite</type>
+            <Internal_Reference>
+                <lid_reference>urn:nasa:pds:context:target:satellite.saturn.rhea</lid_reference>
+                <reference_type>data_to_target</reference_type>
+            </Internal_Reference>
+        </Target_Identification>
+    </Observation_Area>
+    <Reference_List>
+        <External_Reference>
+            <doi>10.1016/j.icarus.2017.02.012</doi>
+            <reference_text> Scipioni, F.; Schenk, P.; Tosi, F.; D'Aversa, E.; Clark, R.; 
+               Combe, J. -Ph.; Ore, C. M. Dalle, 2017. 
+               Deciphering sub-micron ice particles on Enceladus surface. Icarus, 290, 183.  
+            </reference_text>
+        </External_Reference>
+    </Reference_List>
+    <File_Area_Observational>
+        <File>
+            <file_name>rhea_phase_function_parameters.tab</file_name>
+            <local_identifier>rhea_phase_function_parameters</local_identifier>
+            <creation_date_time>2020-12-17T02:03:48Z</creation_date_time>
+            <file_size unit="byte">25547</file_size>
+        </File>
+        <Header>
+            <offset unit="byte">0</offset>
+            <object_length unit="byte">459</object_length>
+            <parsing_standard_id>7-Bit ASCII Text</parsing_standard_id>
+            <description>The first ten rows of the table 
+			  contain a description of the phase function 
+			  and the column headings.</description>
+        </Header>
+        <Table_Character>
+            <name>Rhea surface near-infared phase function polynomial parameters from Cassini VIMS</name>
+            <offset unit="byte">459</offset>
+            <records>256</records>
+            <record_delimiter>Line-Feed</record_delimiter>
+            <Record_Character>
+                <fields>4</fields>
+                <groups>0</groups>
+                <record_length unit="byte">98</record_length>
+                <Field_Character>
+                    <name>Wavelength</name>
+                    <field_number>1</field_number>
+                    <field_location unit="byte">1</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">7</field_length>
+                    <unit>micrometer</unit>
+                    <description>VIMS wavelengths (micrometer) 
+                      for the near-infrared detector.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>a</name>
+                    <field_number>2</field_number>
+                    <field_location unit="byte">20</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">18</field_length>
+                    <description>First term of the phase function polynomial 
+                      model.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>b</name>
+                    <field_number>3</field_number>
+                    <field_location unit="byte">50</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">18</field_length>
+                    <description>Second term of the phase function polynomial 
+                      model.</description>
+                </Field_Character>
+                <Field_Character>
+                    <name>c</name>
+                    <field_number>4</field_number>
+                    <field_location unit="byte">80</field_location>
+                    <data_type>ASCII_Real</data_type>
+                    <field_length unit="byte">18</field_length>
+                    <description>Third term of the phase function polynomial 
+                      model.</description>
+                </Field_Character>
+            </Record_Character>
+        </Table_Character>
+    </File_Area_Observational>
+</Product_Observational>

@@ -93,7 +93,7 @@
           {
             "id": "observed",
             "label": "Observed",
-            "value": "5–6 Aug 2014"
+            "value": "Aug–Sep 2014"
           },
           {
             "id": "filter",
@@ -520,6 +520,12 @@
       "role": "surface",
       "description": "MTP019 measured shape and reference frame",
       "href": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/"
+    },
+    {
+      "label": "OSIRIS",
+      "role": "surface",
+      "description": "September 2014 corrected photographs and geometry",
+      "href": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/"
     },
     {
       "label": "ESA/Rosetta/MPS · OSIRIS",

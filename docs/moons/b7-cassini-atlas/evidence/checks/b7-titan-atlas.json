@@ -1,0 +1,71 @@
+{
+  "command": [
+    "node",
+    "docs/moons/b7-cassini-atlas/prepare-selected.mjs",
+    "titan"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 736985088,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 163840,
+      "freePercent": 58
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 140689408,
+      "freePercent": 58
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 303546368,
+      "freePercent": 58
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 370851840,
+      "freePercent": 58
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 436862976,
+      "freePercent": 58
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 443973632,
+      "freePercent": 58
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 520486912,
+      "freePercent": 58
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 575799296,
+      "freePercent": 58
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 620462080,
+      "freePercent": 59
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 706379776,
+      "freePercent": 59
+    },
+    {
+      "seconds": 2.7,
+      "rssBytes": 736985088,
+      "freePercent": 59
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 3.0
+}

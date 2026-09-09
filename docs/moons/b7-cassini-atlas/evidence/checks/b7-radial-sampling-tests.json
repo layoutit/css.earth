@@ -1,0 +1,29 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "tools/objects/terrestrial-layers/georeferenced-observation.test.mjs",
+    "tools/objects/terrestrial-layers/radial-scientific-raster.test.mjs",
+    "tools/objects/terrestrial-layers/lens-texture-scale.test.mjs"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 123322368,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 147456,
+      "freePercent": 60
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 123322368,
+      "freePercent": 60
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 0.5
+}

@@ -367,6 +367,32 @@ test('real input interruption preserves the last painted source view and flushes
   assert.deepEqual(h.errors, []); h.router.destroy();
 });
 
+test('a missing destination asset preserves the painted view and permits a fresh selection retry', async () => {
+  const failure = new Error('Prepared image did not decode: /scenes/venus/surface.webp.');
+  let attempt = 0;
+  const targets = [];
+  const h = harness({ systemTarget: ({ objectId }) => { targets.push(objectId); return { system: objectId }; },
+    prepare: async ({ fromMount }) => {
+      if (++attempt === 1) { fromMount.value = saved(123456); throw failure; }
+      return {};
+    },
+  });
+  await h.router.settled;
+  const restores = h.mounts[0].restores;
+  assert.equal(await h.router.navigate('venus', { sceneSelection: true }), false);
+  assert.equal(h.mounts[0].value.camera.distanceKilometers, 123456, 'Failure cannot restore the departure camera');
+  assert.equal(h.mounts[0].restores, restores);
+  assert.equal(h.windowTarget.location.searchParams.get('v'), new URLSearchParams(formatSharedView(saved(123456))).get('v'));
+  assert.equal(h.router.state().activeObjectId, 'mercury');
+  assert.equal(h.router.state().ready, true);
+  assert.equal(h.writes.includes('push'), false);
+  assert.deepEqual(h.errors, [failure], 'Keep the underlying loading error visible');
+  assert.equal(await h.router.navigate('venus', { sceneSelection: true }), true);
+  assert.deepEqual(targets, ['venus', 'venus'], 'Retry must not count the failed flight as a completed first click');
+  assert.equal(h.maxRendered(), 1);
+  h.router.destroy();
+});
+
 test('input after the detailed handoff keeps the incoming scene and its painted pose, including saved-view links', async () => {
   const h = harness({ prepare: async ({ toId }) => toId === 'venus' ? {
     afterMount(mount) {

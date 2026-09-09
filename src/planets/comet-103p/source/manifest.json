@@ -303,7 +303,7 @@
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
-        "photographs-hri"
+        "photographs-mri"
       ]
     },
     {
@@ -320,7 +320,7 @@
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
-        "photographs-hri"
+        "photographs-mri"
       ]
     },
     {
@@ -337,7 +337,7 @@
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
-        "photographs-hri"
+        "photographs-mri"
       ]
     },
     {
@@ -354,7 +354,7 @@
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
-        "photographs-hri"
+        "photographs-mri"
       ]
     },
     {
@@ -371,7 +371,7 @@
       "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
-        "photographs-hri"
+        "photographs-mri"
       ]
     },
     {
@@ -388,7 +388,7 @@
       "acquisition": "Checked-in measured camera controls.",
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
-        "photographs-hri"
+        "photographs-mri"
       ]
     }
   ],
@@ -428,8 +428,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7073,
-      "expectedSha256": "643a2d40fdcd6384ed77d1d113b63e32e954ec0068415c422e3dccdb369af818",
+      "expectedBytes": 5822,
+      "expectedSha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
     },
     {
@@ -452,8 +452,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 8265,
-      "expectedSha256": "bfd911ebda82fa674137698dd8e6d2bdf1a3063c8e0f339f5b1bdd3babae5a06",
+      "expectedBytes": 7288,
+      "expectedSha256": "269899c03e5c22546fc5940bf2ed5dbb201187997375b5e2563c185f51e0535e",
       "purpose": "103P/Hartley 2 source evidence or authored preparation input."
     },
     {
@@ -500,8 +500,8 @@
     },
     {
       "path": "reference/encounter-photography.md",
-      "expectedBytes": 4863,
-      "expectedSha256": "0e9b1d1dbfd4288924e4e750d8937953a38c3df4de2f16a71e855d267821c287",
+      "expectedBytes": 5948,
+      "expectedSha256": "142e98ffe05ff2326d48921a9260763a41433325dcfe47fb093a85901e5ecfbb",
       "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
     },
     {

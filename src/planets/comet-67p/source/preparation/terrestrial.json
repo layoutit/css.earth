@@ -629,6 +629,18 @@
             "path": "observations/n20140806t051914575id50f22.IMG",
             "qualityPath": "observations/n20140806t051914575id40f22.IMG",
             "startTime": "2014-08-06T05:20:22.894"
+          },
+          {
+            "id": "n20140913-200612",
+            "path": "observations/n20140913t200612355id50f22.img",
+            "qualityPath": "observations/n20140913t200612355id40f22.img",
+            "startTime": "2014-09-13T20:07:21.805"
+          },
+          {
+            "id": "n20140920-133916",
+            "path": "observations/n20140920t133916351id50f22.img",
+            "qualityPath": "observations/n20140920t133916351id40f22.img",
+            "startTime": "2014-09-20T13:40:25.993"
           }
         ],
         "selection": "lowest-emission",

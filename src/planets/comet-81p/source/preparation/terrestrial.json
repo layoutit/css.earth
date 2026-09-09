@@ -24,7 +24,7 @@
         "metadata": {
           "label": "Completed shape model",
           "modeled": true,
-          "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive\u2019s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
+          "coverage": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
         }
       }
     ],
@@ -54,6 +54,12 @@
             "path": "photography/navcam/n2077we02_rr.fit",
             "labelPath": "photography/navcam/n2077we02_rr.lbl",
             "controlPath": "photography/navcam/n2077we02_rr.json"
+          },
+          {
+            "id": "n2079we02-rr",
+            "path": "photography/navcam/n2079we02_rr.fit",
+            "labelPath": "photography/navcam/n2079we02_rr.lbl",
+            "controlPath": "photography/navcam/n2079we02_rr.json"
           }
         ],
         "transfer": {
@@ -159,7 +165,7 @@
   },
   "celestial": {
     "sunSource": "JPL Horizons osculating elements; PDS v2.1 Wild 2 model axes.",
-    "qualification": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive\u2019s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
+    "qualification": "Completed PDS shape model: measured terrain covers about half the nucleus. The gray grid marks the archive’s fitted ellipsoid and joining faces on the unobserved side. These regions are estimates, not observed terrain. The material is not albedo. Orientation is fixed at an arbitrary phase."
   },
   "presentation": {
     "defaultLens": "model",

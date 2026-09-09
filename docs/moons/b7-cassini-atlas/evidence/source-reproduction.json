@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "directory": "/Users/ekrof/fed/cssEarth-moons-cassini-atlas/output/b7-source-reproduction/run-oizkBI",
+  "objects": [
+    {
+      "id": "titan",
+      "operationCount": 42,
+      "restoredFiles": 42,
+      "outputs": [
+        {
+          "path": "geology/titan-geologic-units.tif",
+          "bytes": 192457,
+          "sha256": "815d7afab1d8e401714a3a141595d161e962ef98421632c77b8fe6002945fb9b",
+          "byteIdentical": true
+        }
+      ]
+    },
+    {
+      "id": "dione",
+      "operationCount": 11,
+      "restoredFiles": 11,
+      "outputs": [
+        {
+          "path": "vims/dione-infrared.tif",
+          "bytes": 67254,
+          "sha256": "d92f949b03e5446f10f0270ec3d71bfcb9df97d24db3767fa8e54cbbe4226698",
+          "byteIdentical": true
+        },
+        {
+          "path": "vims/dione-water-ice.tif",
+          "bytes": 142499,
+          "sha256": "e58c7acfa469ac606b8cf4db2133dc2d9ad0b29edb37030beafb89f8480abf54",
+          "byteIdentical": true
+        }
+      ]
+    },
+    {
+      "id": "rhea",
+      "operationCount": 11,
+      "restoredFiles": 11,
+      "outputs": [
+        {
+          "path": "vims/rhea-infrared.tif",
+          "bytes": 48826,
+          "sha256": "6363e6ba38ca29df67a8dba301ef8db2a45daba0cd29896c2397e4e13b1b46d1",
+          "byteIdentical": true
+        },
+        {
+          "path": "vims/rhea-water-ice.tif",
+          "bytes": 133351,
+          "sha256": "559e109a8bd3891ed2d7ddbfc9e505694574c6af80547f3c63e0f401aa1ded19",
+          "byteIdentical": true
+        }
+      ]
+    }
+  ]
+}

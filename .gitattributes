@@ -48,3 +48,9 @@ src/planets/comet-19p/source/reference/*.htm -text -whitespace
 
 # Original 67P categorical geometry and SBMT archive records are hash-pinned.
 src/planets/comet-67p/source/geology/** -text -whitespace
+
+# Exact archive labels used by the expanded comet photographic mosaics.
+src/planets/comet-67p/source/reference/n201409*-*.lbl -text -whitespace
+src/planets/comet-81p/source/photography/**/*.lbl -text -whitespace
+src/planets/comet-9p/source/photography/**/*.lbl -text -whitespace
+src/planets/comet-103p/source/photography/**/*.lbl -text -whitespace

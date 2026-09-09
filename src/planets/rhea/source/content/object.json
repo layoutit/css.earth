@@ -185,6 +185,54 @@
           "id": "cassini-spc-2025-rhea-q128-shape",
           "path": "../manifest.json"
         }
+      },
+      {
+        "id": "infrared",
+        "label": "Infrared",
+        "description": "Cassini VIMS false color: red 2.00 µm, green 1.57 µm, blue 1.06 µm. The archive corrects illumination to incidence 30° and emergence 0°; fixed display ranges are shared with Dione. One-degree source cells remain visible. Gray grid marks missing spectra. Archive registration is uncertain at about the source-pixel scale; no subdegree positional accuracy is implied.",
+        "summary": "Photometrically corrected infrared spectra, shown as false color.",
+        "title": "Cassini VIMS infrared mosaic",
+        "thumbnail": "/scenes/rhea/rhea-infrared-thumbnail.webp",
+        "surface": "rhea-infrared-surface@2x.webp",
+        "poles": "rhea-infrared-poles@2x.webp",
+        "source": {
+          "id": "rhea-vims-infrared",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.17189/ctqe-ta30"
+        },
+        "detail": "False color",
+        "falseColor": true
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "description": "Strength of the 2.02 µm water-ice absorption relative to a linear 1.82–2.20 µm continuum. Derived from Cassini VIMS; this is not ice percentage, grain size or crystallinity. Colors saturate below 0.30 and above 0.75. One-degree source cells and missing or invalid-continuum cells are retained. The archive has unresolved registration differences at source-pixel scale.",
+        "summary": "Water-ice absorption strength, derived from the original spectra.",
+        "title": "Continuum-relative water-ice absorption; not ice abundance",
+        "thumbnail": "/scenes/rhea/rhea-ice-absorption-thumbnail.webp",
+        "surface": "rhea-ice-absorption-surface@2x.webp",
+        "poles": "rhea-ice-absorption-poles@2x.webp",
+        "source": {
+          "id": "rhea-vims-ice-absorption",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.17189/ctqe-ta30"
+        },
+        "detail": "Water-ice signature",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Water-ice absorption",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "≤ 0.30",
+            "0.525",
+            "≥ 0.75"
+          ],
+          "meta": "2.02 µm band depth",
+          "sourceUrl": "https://doi.org/10.17189/ctqe-ta30",
+          "image": "/scenes/rhea/rhea-ice-absorption-legend.webp"
+        }
       }
     ]
   },
@@ -242,6 +290,12 @@
       "role": "shape",
       "description": "2025 SPC shape and relative albedo products",
       "href": "https://sbn.psi.edu/pds/resource/weirichrheashape.html"
+    },
+    {
+      "label": "Cassini VIMS",
+      "role": "surface",
+      "description": "Scipioni and Combe (2022), corrected global infrared mosaics; NASA PDS",
+      "href": "https://doi.org/10.17189/ctqe-ta30"
     }
   ],
   "provenance": {
