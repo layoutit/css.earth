@@ -70,12 +70,12 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
 
 it('descriptor discovery covers every authored object rather than a navigation-menu filter', () => {
   assert.ok(objects.length > 8);
-  assert.ok(objects.some(({ descriptor }) => descriptor.properties.recipe.paging));
+  assert.ok(objects.some(({ descriptor }) => descriptor.properties.recipe.sources.some((source: { id: string }) => source.id === 'paged-ellipsoid')));
   assert.ok(objects.some(({ descriptor }) => descriptor.properties.recipe.rings));
 });
 
 it('changed authored bytes fail the finalizer source pin before publication', async () => {
-  const object = objects.find(({ descriptor }) => descriptor.properties.recipe.paging)!;
+  const object = objects.find(({ descriptor }) => descriptor.properties.recipe.sources.some((source: { id: string }) => source.id === 'paged-ellipsoid'))!;
   const temporary = await mkdtemp(resolve(tmpdir(), 'physical-source-pin-'));
   try {
     await writeFile(resolve(temporary, 'object.json'), JSON.stringify(object.descriptor));

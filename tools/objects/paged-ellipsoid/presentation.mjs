@@ -97,7 +97,8 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
         frameOverride:null,clearWhenHidden:false,fixedMode:"shadowless",publishWhenHidden:"static",
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   })));
-  const prepared = {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,destinations:{catalog,defaultLens:"normal",statuses:config.destinations.statuses},
+  const prepared = {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,
+    ...(catalog?{destinations:{catalog,defaultLens:"normal",statuses:config.destinations.statuses}}:{}),
     assets:{entries,pools:[preparedResourcePool("mounted",entries,{concurrency:2}),preparedResourcePool("default-materials",entries,{retention:"warm"}),
       preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:pages*2}),
       ...tracks.map(track=>preparedResourcePool(track.id,entries,{retention:"selection",reuse:true,capacity:track.demand.capacity,concurrency:3,eviction:"capacity",stabilityMilliseconds:plan.material[track.id].illumination?0:120,decoding:"sync"}))],
@@ -105,7 +106,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
     tree,variants,materials:tracks,viewBindings:[materialCounter,cutawayCounter].map(node=>({kind:"counter-rotation",target:index(node),systemTransform:null})),animations:[],
     motionFrame:[index(system),index(body.surface[0])],
-    pageLayers:[{id:"city",plan:city,lensIds:["normal","buenos-aires-noise"]},{id:"noise",plan:noise,lensIds:["buenos-aires-noise"]}]
+    pageLayers:(city?[{id:"city",plan:city,lensIds:["normal","buenos-aires-noise"]},{id:"noise",plan:noise,lensIds:["buenos-aires-noise"]}]:[])
       .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:config.publicBase},carrier:index(body.surface[0]),system:index(system),className:`${config.namespace}-city-page`,textureClassName:`${config.namespace}-api-texture`}))};
  return {...prepared, schema:'cssearth-object-runtime@4', id:config.namespace, controls,
  materials:prepareMaterialTracks(prepared), variants:prepared.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
