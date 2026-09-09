@@ -17,14 +17,14 @@
       "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
     },
     {
-      "filename": "dione-elevation-poles@2x.webp",
-      "bytes": 65876,
-      "sha256": "db131c27d60d4eb1f8344df9c14df36e7cf523fc9499f8020c5d749445adf91d"
+      "filename": "dione-elevation-shadow@2x.webp",
+      "bytes": 1141136,
+      "sha256": "1fbc99589fa402e3de18635087195b687294b0ebbc74372bf62c14826186aa57"
     },
     {
       "filename": "dione-elevation-surface@2x.webp",
-      "bytes": 3596572,
-      "sha256": "e462ecb547c8bca1ce02e29c6e073fcf68d3fa8dfc6e17ba3ee9663eb2859cab"
+      "bytes": 3711216,
+      "sha256": "2e3b5af78c3547a7c5d48e653cb2fac2fb0269758be7251c1319e9fada5a61e8"
     },
     {
       "filename": "dione-elevation-thumbnail.webp",
@@ -32,14 +32,14 @@
       "sha256": "a78215a343e7974777db0d8bf527f09c685d5617477eafa5f75fdca1c8ebbbfd"
     },
     {
-      "filename": "dione-enhanced-poles@2x.webp",
-      "bytes": 188208,
-      "sha256": "a3091ffa52ae33b1aad34cda77765c2a5fffd918037f90933355498e1b8529c0"
+      "filename": "dione-enhanced-shadow@2x.webp",
+      "bytes": 2744592,
+      "sha256": "ca9c6ac5c711727d196f23cebbc1bbb7b58993861a6c9963ca29dc466305a5a8"
     },
     {
       "filename": "dione-enhanced-surface@2x.webp",
-      "bytes": 9388592,
-      "sha256": "b243ce1236ac3662f0974392df421b3ac1c5a5f2f6f44a97feae0d030f3f21f2"
+      "bytes": 7963588,
+      "sha256": "307caf835d40f77d20bd3df9d036bd4f21cf23892ec00ea5e27af49bf157255b"
     },
     {
       "filename": "dione-enhanced-thumbnail.webp",
@@ -52,19 +52,54 @@
       "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
     },
     {
-      "filename": "dione-normal-poles@2x.webp",
-      "bytes": 116138,
-      "sha256": "fd56a1f8e1e97d8e78edbe86cff73b28e10141b22619a029d9a5bedbda56be19"
+      "filename": "dione-normal-shadow@2x.webp",
+      "bytes": 4035886,
+      "sha256": "0139ed9d67b0222c4021e4ec7581e6b407e57e50de5d893047e87f8822d80ba7"
     },
     {
       "filename": "dione-normal-surface@2x.webp",
-      "bytes": 9810388,
-      "sha256": "4363c4cd59435a96f7763626e247cdc85121d17b48d7f965090b0802b21f2d1b"
+      "bytes": 9528006,
+      "sha256": "538bef027dea266add82922a0d4ed720b71cc65da443c51eab5cccdbaa995f87"
     },
     {
       "filename": "dione-normal-thumbnail.webp",
       "bytes": 3404,
       "sha256": "3fa0418a8627fd84fad2af811005c1cee1d2e707ceef5b6d9e81748a76c76175"
+    },
+    {
+      "filename": "dione-relative-albedo-legend.webp",
+      "bytes": 276,
+      "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7"
+    },
+    {
+      "filename": "dione-relative-albedo-shadow@2x.webp",
+      "bytes": 839056,
+      "sha256": "41564d14086cae2dcd455190e9648f8ca23cdfb2a29254bd8227c03905f41532"
+    },
+    {
+      "filename": "dione-relative-albedo-surface@2x.webp",
+      "bytes": 2884740,
+      "sha256": "ae823f52207862d7a16e28283344859de0cebb0a92ef9b9fd48db5a723d836a9"
+    },
+    {
+      "filename": "dione-relative-albedo-thumbnail.webp",
+      "bytes": 3820,
+      "sha256": "3ca9e442cf8651e4a6fec3b07a8ed444d28474af6feae454c13bf020e654c360"
+    },
+    {
+      "filename": "dione-shape-shadow@2x.webp",
+      "bytes": 322952,
+      "sha256": "de2ef59bcdab6cc4ff58641325426622f161da68c0b4dd8c96f18bb409fac45e"
+    },
+    {
+      "filename": "dione-shape-surface@2x.webp",
+      "bytes": 439616,
+      "sha256": "0c5e2a4c8a4ac2ce1d8e055952ddf7169b66b1ac05341cbfe3e274bb223f55d0"
+    },
+    {
+      "filename": "dione-shape-thumbnail.webp",
+      "bytes": 764,
+      "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d"
     },
     {
       "filename": "dione-starfield-back-standard.webp",

@@ -77,7 +77,7 @@
     },
     {
       "id": "B2",
-      "title": "Add scientific surfaces and terrain to 15 moons",
+      "title": "Add scientific surfaces and terrain to 13 moons",
       "anchor": "b2",
       "names": [
         "Moon",
@@ -92,15 +92,13 @@
         "Dione",
         "Rhea",
         "Titan",
-        "Titania",
-        "Miranda",
         "Charon"
       ],
-      "outcome": "15 existing worlds gain a substantive scientific layer or source-backed geometry improvement.",
+      "outcome": "13 existing worlds gain a substantive scientific layer or source-backed geometry improvement.",
       "scope": "Facet-relative albedo/slope for the Mars moons and Dimorphos; lunar numeric/science products; Europa terrain or spectra; mapped geology; Saturnian shape/relief; Charon color/composition.",
       "delivery": "Ship the shared preparation capabilities together with their body-specific consumers. Complete selected geometry/lenses, validity and confidence treatment, units/datums, scientific legends, thumbnails/minimaps and provenance as one user-visible surface upgrade.",
       "closure": "Pin at least one genuinely new, supported product per body before freezing final implementation details. Resolve archive access and coordinate conventions; distinguish measured, interpolated and modeled support. Source-defined regional coverage and thermal local-time bins remain explicit.",
-      "acceptance": "Each of the 15 bodies demonstrates the promised new information with independent source-to-display checks. Geometry changes preserve map registration and interaction behavior. A presentation improvement must add supported information rather than simply resample an existing image.",
+      "acceptance": "Each of the 13 bodies demonstrates the promised new information with independent source-to-display checks. Geometry changes preserve map registration and interaction behavior. A presentation improvement must add supported information rather than simply resample an existing image.",
       "keys": [
         "Earth|I",
         "Mars|I",
@@ -114,8 +112,6 @@
         "Saturn|IV",
         "Saturn|V",
         "Saturn|VI",
-        "Uranus|III",
-        "Uranus|V",
         "Pluto|I"
       ],
       "state": "implementation",
@@ -125,31 +121,58 @@
       "integrationCommit": "7030be3b850734d73688cff595f12983234f42b2",
       "progress": {
         "sourceReadyBodies": 13,
-        "sourceBlockedBodies": [
-          "Titania",
-          "Miranda"
-        ],
+        "sourceBlockedBodies": [],
         "preparedBodies": [
           "Moon",
           "Phobos",
-          "Dimorphos"
+          "Deimos",
+          "Dimorphos",
+          "Io",
+          "Europa",
+          "Ganymede",
+          "Enceladus",
+          "Tethys",
+          "Dione",
+          "Rhea",
+          "Titan",
+          "Charon"
         ],
         "preparationReceipts": {
           "Moon": "b2-preparation/bake-moon-20260908-222239/resources.json",
           "Phobos": "b2-preparation/phobos-post-bake-check.json",
-          "Dimorphos": "b2-preparation/dimorphos-preparation.log"
+          "Dimorphos": "b2-preparation/dimorphos-preparation.log",
+          "Deimos": "b2-preparation/remaining-preparation.json",
+          "Enceladus": "b2-preparation/saturn-outer-preparation.json",
+          "Tethys": "b2-preparation/saturn-outer-preparation.json",
+          "Dione": "b2-preparation/saturn-outer-preparation.json",
+          "Rhea": "b2-preparation/saturn-outer-preparation.json",
+          "Titan": "b2-preparation/saturn-outer-preparation.json",
+          "Charon": "b2-preparation/saturn-outer-preparation.json",
+          "Io": "b2-preparation/jovian-preparation.json",
+          "Europa": "b2-preparation/jovian-preparation.json",
+          "Ganymede": "b2-preparation/jovian-preparation.json"
         },
         "browserSmokeReceipts": {
           "Moon": "b2-preparation/moon-post-bake-check.json",
           "Phobos": "b2-preparation/phobos-post-bake-check.json"
         },
         "qualifiedBodies": 0,
-        "report": "B2-SCIENTIFIC-SURFACES.md"
+        "report": "B2-SCIENTIFIC-SURFACES.md",
+        "carriedForwardBodies": [
+          "Titania",
+          "Miranda"
+        ]
+      },
+      "scopeDecision": {
+        "originalCohort": 15,
+        "approvedCohort": 13,
+        "decision": "User approved shipping the 13 prepared upgrades after review and carrying Titania and Miranda into the next substantial batch. Their exact GIS releases remain inaccessible, not absent.",
+        "carriedTo": "B3"
       }
     },
     {
       "id": "B3",
-      "title": "Complete a spacecraft-imagery cohort",
+      "title": "Complete spacecraft imagery and geologic mapping",
       "anchor": "b3",
       "names": [
         "Dactyl",
@@ -161,12 +184,14 @@
         "Aegaeon",
         "Proteus",
         "Nix",
-        "Hydra"
+        "Hydra",
+        "Titania",
+        "Miranda"
       ],
-      "outcome": "Two prospective new imaged moons and eight existing observation/registration improvements.",
-      "scope": "Dactyl/Selam source reconstruction; Nix/Hydra mesh-camera registration; source-specific observation, color or mapping work for the other six existing bodies.",
+      "outcome": "Two prospective new imaged moons, eight existing observation/registration improvements, and the Titania/Miranda geologic maps carried forward from B2.",
+      "scope": "Dactyl/Selam source reconstruction; Nix/Hydra mesh-camera registration; source-specific observation, color or mapping work for the other six existing bodies.; Titania and Miranda digitized geologic maps, pending release access and registration.",
       "delivery": "Deliver the observed views and all required camera/attitude, photometric, visibility and coverage preparation. Include source-frame comparisons and holdout registration evidence across the cohort. Any necessary shared registration improvements ship with these complete uses.",
-      "closure": "This batch carries substantial research risk: several fitted attitudes, original calibrated frames or numeric mapping releases remain unresolved. Resolve the target-specific blocker in the review before opening the implementation PR. A new full-disk photograph may support a dated observation view without becoming a global texture.",
+      "closure": "This batch carries substantial research risk: several fitted attitudes, original calibrated frames or numeric mapping releases remain unresolved. Resolve the target-specific blocker in the review before opening the implementation PR. A new full-disk photograph may support a dated observation view without becoming a global texture. Titania and Miranda require the exact identified GIS releases; archive-access failures remain unresolved.",
       "acceptance": "Two new scene claims require qualified geometry as well as real images. Each existing body gains a defensible observation improvement; photographed lighting, unseen terrain, source sampling and temporal differences remain clear. The full cohort is the planning target, with any scope change recorded explicitly.",
       "keys": [
         "Ida|Dactyl",
@@ -178,7 +203,9 @@
         "Saturn|LIII",
         "Neptune|VIII",
         "Pluto|II",
-        "Pluto|III"
+        "Pluto|III",
+        "Uranus|III",
+        "Uranus|V"
       ],
       "state": "planned",
       "owner": "Moons"

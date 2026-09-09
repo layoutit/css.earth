@@ -1,0 +1,83 @@
+{
+  "scope": "Local actual runtime asset closure; not remote installation or browser qualification",
+  "bodies": [
+    {
+      "body": "moon",
+      "runtimeAssetCount": 50,
+      "runtimeAssetBytes": 10625644,
+      "allHashesVerified": true
+    },
+    {
+      "body": "phobos",
+      "runtimeAssetCount": 43,
+      "runtimeAssetBytes": 31528556,
+      "allHashesVerified": true
+    },
+    {
+      "body": "deimos",
+      "runtimeAssetCount": 43,
+      "runtimeAssetBytes": 18278872,
+      "allHashesVerified": true
+    },
+    {
+      "body": "dimorphos",
+      "runtimeAssetCount": 39,
+      "runtimeAssetBytes": 12075462,
+      "allHashesVerified": true
+    },
+    {
+      "body": "io",
+      "runtimeAssetCount": 38,
+      "runtimeAssetBytes": 8778452,
+      "allHashesVerified": true
+    },
+    {
+      "body": "europa",
+      "runtimeAssetCount": 39,
+      "runtimeAssetBytes": 11776254,
+      "allHashesVerified": true
+    },
+    {
+      "body": "ganymede",
+      "runtimeAssetCount": 38,
+      "runtimeAssetBytes": 21414814,
+      "allHashesVerified": true
+    },
+    {
+      "body": "enceladus",
+      "runtimeAssetCount": 38,
+      "runtimeAssetBytes": 30814820,
+      "allHashesVerified": true
+    },
+    {
+      "body": "tethys",
+      "runtimeAssetCount": 45,
+      "runtimeAssetBytes": 39427178,
+      "allHashesVerified": true
+    },
+    {
+      "body": "dione",
+      "runtimeAssetCount": 45,
+      "runtimeAssetBytes": 40556266,
+      "allHashesVerified": true
+    },
+    {
+      "body": "rhea",
+      "runtimeAssetCount": 45,
+      "runtimeAssetBytes": 36591174,
+      "allHashesVerified": true
+    },
+    {
+      "body": "titan",
+      "runtimeAssetCount": 46,
+      "runtimeAssetBytes": 32610922,
+      "allHashesVerified": true
+    },
+    {
+      "body": "charon",
+      "runtimeAssetCount": 38,
+      "runtimeAssetBytes": 17452516,
+      "allHashesVerified": true
+    }
+  ]
+}

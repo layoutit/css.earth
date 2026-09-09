@@ -9,8 +9,8 @@ The delivery unit is a substantial, complete outcome across a named cohort. Ever
 | Batch | Outcome | Scope |
 | --- | --- | --- |
 | [B1 — Expand the moon roster by 26](#b1) | 26 new standalone moons merged; roster 69 → 95, benchmark coverage 90/461. | 26 bodies |
-| [B2 — Add scientific surfaces and terrain to 15 moons](#b2) | 15 existing worlds gain a substantive scientific layer or source-backed geometry improvement. | 15 bodies |
-| [B3 — Complete a spacecraft-imagery cohort](#b3) | Two prospective new imaged moons and eight existing observation/registration improvements. | 10 bodies |
+| [B2 — Add scientific surfaces and terrain to 13 moons](#b2) | 13 existing worlds gain a substantive scientific layer or source-backed geometry improvement. | 13 bodies |
+| [B3 — Complete spacecraft imagery and geologic mapping](#b3) | Two prospective new imaged moons, eight existing observation/registration improvements, and two carried-forward geologic maps. | 12 bodies |
 | [B4 — Add measured light curves and spectra across nine existing moons](#b4) | A complete prepared observation-chart capability used by nine existing moon packages. | 9 bodies |
 
 B1 added **22 benchmark moons**: 18 Saturn and four Uranus. Merged benchmark coverage is **90/461 (19.5%)**; four additional companions bring the total standalone moon count to **95**. B3 could subsequently add two further asteroid moons. The 461-body denominator is unchanged.
@@ -35,31 +35,35 @@ These four batches account for **all 32 identified existing-scene improvements**
 
 <a id="b2"></a>
 
-## B2 — Add scientific surfaces and terrain to 15 moons
+## B2 — Add scientific surfaces and terrain to 13 moons
 
-**State:** implementation; 13 source-ready bodies, Moon, Phobos and Dimorphos preparation complete, two source-access blockers · **Owner:** Moons
+**State:** implementation; all 13 body preparations complete; browser and aggregate qualification in progress · **Owner:** Moons
 
-See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md). PR #56 is integrated at `7030be3b`; the final Moon bake passed after the display corrections. No B2 body is yet marked browser-qualified.
+The user approved the 13-body delivery, carrying Titania and Miranda into B3.
 
-**Bodies:** Moon, Phobos, Deimos, Dimorphos, Io, Europa, Ganymede, Enceladus, Tethys, Dione, Rhea, Titan, Titania, Miranda, Charon.
+See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md). PR #56 is integrated at `7030be3b`; all 13 source-ready body preparations have passed, including the three Jovian bodies after source-coordinate corrections. No B2 body is yet marked browser-qualified.
 
-**User-visible outcome.** 15 existing worlds gain a substantive scientific layer or source-backed geometry improvement.
+**Bodies:** Moon, Phobos, Deimos, Dimorphos, Io, Europa, Ganymede, Enceladus, Tethys, Dione, Rhea, Titan, Charon.
+
+**User-visible outcome.** 13 existing worlds gain a substantive scientific layer or source-backed geometry improvement.
 
 **Complete delivery.** Ship the shared preparation capabilities together with their body-specific consumers. Complete selected geometry/lenses, validity and confidence treatment, units/datums, scientific legends, thumbnails/minimaps and provenance as one user-visible surface upgrade.
 
 **Source closure before implementation.** Pin at least one genuinely new, supported product per body before freezing final implementation details. Resolve archive access and coordinate conventions; distinguish measured, interpolated and modeled support. Source-defined regional coverage and thermal local-time bins remain explicit.
 
-**Acceptance.** Each of the 15 bodies demonstrates the promised new information with independent source-to-display checks. Geometry changes preserve map registration and interaction behavior. A presentation improvement must add supported information rather than simply resample an existing image.
+**Acceptance.** Each of the 13 bodies demonstrates the promised new information with independent source-to-display checks. Geometry changes preserve map registration and interaction behavior. A presentation improvement must add supported information rather than simply resample an existing image.
 
 <a id="b3"></a>
 
-## B3 — Complete a spacecraft-imagery cohort
+## B3 — Complete spacecraft imagery and geologic mapping
+
+Titania and Miranda moved here from B2 by explicit user approval. Their exact GIS releases remain inaccessible; release access and georeferencing must close before implementation.
 
 **State:** planned · **Owner:** Moons
 
-**Bodies:** Dactyl, Selam, Callisto, Thebe, Hyperion, Phoebe, Aegaeon, Proteus, Nix, Hydra.
+**Bodies:** Dactyl, Selam, Callisto, Thebe, Hyperion, Phoebe, Aegaeon, Proteus, Nix, Hydra, Titania, Miranda.
 
-**User-visible outcome.** Two prospective new imaged moons and eight existing observation/registration improvements.
+**User-visible outcome.** Two prospective new imaged moons, eight existing observation/registration improvements, and two carried-forward geologic maps.
 
 **Complete delivery.** Deliver the observed views and all required camera/attitude, photometric, visibility and coverage preparation. Include source-frame comparisons and holdout registration evidence across the cohort. Any necessary shared registration improvements ship with these complete uses.
 

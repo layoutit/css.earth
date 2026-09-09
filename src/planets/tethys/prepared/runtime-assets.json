@@ -17,14 +17,14 @@
       "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
     },
     {
-      "filename": "tethys-elevation-poles@2x.webp",
-      "bytes": 66664,
-      "sha256": "e141397002eb57277188f025cf1b64a2ace393a4e5cc26703ebf0e579dad58f3"
+      "filename": "tethys-elevation-shadow@2x.webp",
+      "bytes": 1274848,
+      "sha256": "f677c3326a0304ec0b32f3fc1126218724a350b9a01c57190e0e124247dd83ab"
     },
     {
       "filename": "tethys-elevation-surface@2x.webp",
-      "bytes": 3566210,
-      "sha256": "8a5d0e92901e129a943f95c0ac39b7c14730bb342eb64813f99165f1390fa84f"
+      "bytes": 3480644,
+      "sha256": "708bf83ed3773a589e2f91fa7f80261f29ae686b1b2d5e53bc40b7975e7b3861"
     },
     {
       "filename": "tethys-elevation-thumbnail.webp",
@@ -32,14 +32,14 @@
       "sha256": "8521ccff8607bb1fc3c363cfbfb52ec18652c05c44223b75715b67a286b03eca"
     },
     {
-      "filename": "tethys-enhanced-poles@2x.webp",
-      "bytes": 178788,
-      "sha256": "a81911feaa11952047bd97bae41abea5293336c1a4b6ce3c503d50278d756325"
+      "filename": "tethys-enhanced-shadow@2x.webp",
+      "bytes": 4012548,
+      "sha256": "b7b6656df01ffa346797be540e64af63bda5b80d2bf259de8ea264ae4ccb5a22"
     },
     {
       "filename": "tethys-enhanced-surface@2x.webp",
-      "bytes": 10719888,
-      "sha256": "b79a22b49700473c31dcd4ce27fc447cb77d303d10f55f22269c98c17cc5e251"
+      "bytes": 9546302,
+      "sha256": "b4e5386fecaeebd62c6ecd8e20887f9b012963e8e05598065cc5043633743bfc"
     },
     {
       "filename": "tethys-enhanced-thumbnail.webp",
@@ -52,19 +52,54 @@
       "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
     },
     {
-      "filename": "tethys-normal-poles@2x.webp",
-      "bytes": 117016,
-      "sha256": "e1d404c3a8788a905fc44b4d9c53ec25946dcfc0cbf2cc3700c1cc9ce7d16bd3"
+      "filename": "tethys-normal-shadow@2x.webp",
+      "bytes": 3726822,
+      "sha256": "91aa0a84eaf5a7759dea519a6ebab765da97302da8fee768b0a4fcc5cf2a9b98"
     },
     {
       "filename": "tethys-normal-surface@2x.webp",
-      "bytes": 7772156,
-      "sha256": "1fe87762893a7bded9823a38446befcd643a0192b09b8e35af4573b8892e2d3b"
+      "bytes": 7399756,
+      "sha256": "b21714368e32da7f99379635334762c1e02f381169f4e9ddccafd98b660c4ea7"
     },
     {
       "filename": "tethys-normal-thumbnail.webp",
       "bytes": 3346,
       "sha256": "88d6c15ac8f7f5fc8a32a9e36ab91f5434b9d10e4401f06c1d6faa7c5a294444"
+    },
+    {
+      "filename": "tethys-relative-albedo-legend.webp",
+      "bytes": 276,
+      "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7"
+    },
+    {
+      "filename": "tethys-relative-albedo-shadow@2x.webp",
+      "bytes": 628158,
+      "sha256": "26002f592a6af55b2b1aa69b2ccea160269fc38a097b1a968aea9a8e73f7df6a"
+    },
+    {
+      "filename": "tethys-relative-albedo-surface@2x.webp",
+      "bytes": 1604256,
+      "sha256": "95f9495fcdb9f271e52f1c8f4204abd39d8ac588571d3577e3fb105b4c313bad"
+    },
+    {
+      "filename": "tethys-relative-albedo-thumbnail.webp",
+      "bytes": 3410,
+      "sha256": "293a567b012557e16ed3d24425f3cc28c09369218b8a36805ecf057f66a13d0c"
+    },
+    {
+      "filename": "tethys-shape-shadow@2x.webp",
+      "bytes": 343418,
+      "sha256": "c88bd8604ed663d1add4b79d4e9fc2553073810e4f742e617eef3d8f5ae4ffe2"
+    },
+    {
+      "filename": "tethys-shape-surface@2x.webp",
+      "bytes": 464516,
+      "sha256": "dcaecb1a58a830b5900dd46f9ac1d3529f3fb78ef623e48e2ff65e402b024d67"
+    },
+    {
+      "filename": "tethys-shape-thumbnail.webp",
+      "bytes": 764,
+      "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d"
     },
     {
       "filename": "tethys-starfield-back-standard.webp",

@@ -2,6 +2,26 @@
   "schema": "csstitan-runtime-assets@1",
   "assets": [
     {
+      "filename": "titan-coverage-distance-legend.webp",
+      "bytes": 210,
+      "sha256": "b2cc45c008b3baecb631091dc59b6f57df3e0c5d6852754337ff1cb0aba6a5ee"
+    },
+    {
+      "filename": "titan-coverage-distance-poles@2x.webp",
+      "bytes": 232152,
+      "sha256": "6a3f9d35e9fba589141de8a1e3e890994b9bfbd80c95091292a857299715b455"
+    },
+    {
+      "filename": "titan-coverage-distance-surface@2x.webp",
+      "bytes": 3707608,
+      "sha256": "d33c99869f88bc7bd40b84114f286ea75f3bb1a2c393db48c56dd0bf479b3682"
+    },
+    {
+      "filename": "titan-coverage-distance-thumbnail.webp",
+      "bytes": 6046,
+      "sha256": "03b8f86dce22c5c3f9c35b48c6ed30b9b59532db07b0ca6b6c037cd1bf90bffe"
+    },
+    {
       "filename": "titan-directional-sun.webp",
       "bytes": 4798,
       "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
@@ -10,6 +30,26 @@
       "filename": "titan-directional-sun@2x.webp",
       "bytes": 12530,
       "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "filename": "titan-interpolated-legend.webp",
+      "bytes": 240,
+      "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
+    },
+    {
+      "filename": "titan-interpolated-poles@2x.webp",
+      "bytes": 348004,
+      "sha256": "7c5454efbf874194a81f27e4c4452f537893df64878149e9da84a14cdf3e4e9e"
+    },
+    {
+      "filename": "titan-interpolated-surface@2x.webp",
+      "bytes": 3126600,
+      "sha256": "0f82f3c5bd1a75c7237b919e66fc35e0433f441539f31958b6400c83eebe1860"
+    },
+    {
+      "filename": "titan-interpolated-thumbnail.webp",
+      "bytes": 4142,
+      "sha256": "b0d2ac9fc90349eb08ec41e08694c61143a55e7944a8ce958fad962d8dd5b44e"
     },
     {
       "filename": "titan-lighting.webp",
@@ -170,6 +210,26 @@
       "filename": "titan-system-point.webp",
       "bytes": 96,
       "sha256": "339f6e08010e72f6f99e2458a20965222f4a75f50134c05b355d7f3a7659d847"
+    },
+    {
+      "filename": "titan-topography-legend.webp",
+      "bytes": 240,
+      "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
+    },
+    {
+      "filename": "titan-topography-poles@2x.webp",
+      "bytes": 146774,
+      "sha256": "bc4dc60eb638fa675050cd554a0defc11f3f184bbef3bebd5c61ecd034cc9658"
+    },
+    {
+      "filename": "titan-topography-surface@2x.webp",
+      "bytes": 1026758,
+      "sha256": "bd4593a4e39fd462e87bb62800895bd43c7dd124c0931945d6c5f3ddf42944f8"
+    },
+    {
+      "filename": "titan-topography-thumbnail.webp",
+      "bytes": 976,
+      "sha256": "d9ec8bcb3d8b4e03fec330baa7b1a4ef86e82214397e2636de5a560c5584f8e3"
     }
   ]
 }

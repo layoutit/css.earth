@@ -20,7 +20,8 @@ export const browserProfile=createObjectBrowserProfile({id:'dimorphos',controls,
   "retained": {
     "lensIds": [
       "shape",
-      "elevation"
+      "elevation",
+      "slope"
     ],
     "speedClicks": 5,
     "allowedMountSelectors": []

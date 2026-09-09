@@ -131,6 +131,9 @@ test('capability selection and validity policy are independent of body names', a
 
 test('a measured elevation lens can be the only surface capability', async () => {
   const config = JSON.parse(await readFile(new URL('../../../src/planets/itokawa/source/preparation/terrestrial.json', import.meta.url)));
+  // Keep this fixture elevation-only as the real body gains observed views.
+  config.raster.surfaceObservations = [];
+  config.presentation.defaultLens = 'elevation';
   assert.equal(parseTerrestrialProfile(config).presentation.defaultLens, 'elevation');
   assert.throws(() => parseTerrestrialProfile({...config, raster: {...config.raster, scientific: []}}), /Invalid terrestrial/);
   const excessive=structuredClone(config);excessive.raster.scientific[0].surfaceSampling.maximumDistanceMeters=1e6;

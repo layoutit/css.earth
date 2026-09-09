@@ -1,30 +1,28 @@
-# B2: scientific surfaces and terrain for 15 moons
+# B2: scientific surfaces and terrain for 13 moons
 
 Status: source implementation and preparation in progress; no B2 browser qualification yet. Branch `feat/moons-scientific-surfaces` now integrates PR #56 (`e97ee953`) at `7030be3b`, preserving the merged PR #55 base and B1 qualification records. Reuses the existing Moons checkout; no new worktree.
 
-The complete delivery is one substantive surface or geometry improvement for each of the 15 reviewed bodies, with preparation, source restoration, legends, visible scientific limits, context assets and browser qualification. Selected products must add information absent from the existing package. Existing imagery and earlier numeric elevation do not count as new work.
+The complete delivery is one substantive surface or geometry improvement for each of the 13 approved bodies, with preparation, source restoration, legends, visible scientific limits, context assets and browser qualification. Selected products must add information absent from the existing package. Existing imagery and earlier numeric elevation do not count as new work.
 
 | Body | Selected new information | Current evidence and remaining work |
 | --- | --- | --- |
 | Moon | Original numeric LOLA topography and Diviner rock abundance | Raw-DN, unit, meridian and footprint anchors pass. Final preparation after the nearest/lossless display fix and PR #56 integration passed (`runtime: true`). Initial Chrome smoke passed; full DPR 1/2, close-zoom lighting and pole qualification remain open. |
 | Phobos | Exact-mesh relative albedo and gravity-model slope; native source geometry | All 196,608 facet centroids registered; 1,600-face closed candidate measured. Full preparation and runtime asset hashes pass; Chrome desktop and DPR 1/2 interaction cases pass. Scientific views inspected; complete qualification pending. |
-| Deimos | Exact-mesh relative albedo and gravity-model slope; native source geometry | 124,012 supported facets, 72,596 withheld; 1,600-face closed candidate measured. Context regenerated, inspected and repinned; preparation and browser review pending. |
+| Deimos | Exact-mesh relative albedo and gravity-model slope; native source geometry | 124,012 supported facets, 72,596 withheld; 1,600-face closed candidate measured. Context regenerated, inspected and repinned. Full preparation and runtime asset hashes pass; browser review pending. |
 | Dimorphos | Released gravity-model slope | Complete 196,608-row centroid bijection repairs the documented FITS/OBJ ordering difference. Full preparation passes; browser review pending. |
-| Io | Released geologic units | Source polygons, categories and east-longitude registration validated. Exact categorical atlas tests pass. Full preparation and browser review pending. |
-| Europa | Controlled Agenor Linea regional terrain | Independent source-pixel anchors pass. Invalid exported confidence products excluded. Geographic focus passes the actual renderer navigation contract; full preparation and browser review pending. |
-| Ganymede | Released geologic units | Source polygons and categories validated; one explicitly identified zero-area ring excluded. Full preparation and browser review pending. |
-| Enceladus | Corrected June 2026 v2 DSK shape | Pinned conversion reproduced byte for byte. Closed 2,000-face candidate: 1,822 m maximum across 8,000 source-distance samples. Full preparation and visual shape review pending. |
-| Tethys | Relative albedo and native source shape | Independent albedo anchors pass; closed 2,000-face candidate measured. Full preparation and visual shape review pending. |
-| Dione | Relative albedo and native source shape | Independent albedo anchors pass; closed 2,000-face candidate measured. Full preparation and visual shape review pending. |
-| Rhea | Relative albedo and native source shape | Independent albedo and exact projection-gap anchors pass; closed 2,000-face candidate measured. Full preparation and visual shape review pending. |
-| Titan | Measured height, interpolated height and distance to measured data | Original PDS float grids and independent anchors pass. Measured area is about 6% in this product; interpolation remains separately labeled. Full preparation and browser review pending. |
-| Charon | PDS MVIC enhanced-color mosaic | Forty independent band-value anchors and exact finite missing sentinel validated. Full preparation and browser review pending. |
-| Titania | 2026 digitized geologic map | Exact release identified; GIS payload blocked by archive access. Registration and implementation remain open. |
-| Miranda | 2026 digitized geologic map | Exact release identified; GIS payload blocked by archive access. Registration and implementation remain open. |
+| Io | Released geologic units | Source polygons, categories and east-longitude registration validated. Exact categorical atlas tests pass. Full preparation and runtime asset hashes pass; browser review pending. |
+| Europa | Controlled Agenor Linea regional terrain | Independent source-pixel anchors pass. Invalid exported confidence products excluded. Geographic focus passes the actual renderer navigation contract; full preparation and runtime asset hashes pass; browser review pending. |
+| Ganymede | Released geologic units | Source polygons and categories validated; one explicitly identified zero-area ring excluded. Full preparation and runtime asset hashes pass; browser review pending. |
+| Enceladus | Corrected June 2026 v2 DSK shape | Pinned conversion reproduced byte for byte. Closed 2,000-face candidate: 1,822 m maximum across 8,000 source-distance samples. Full preparation and runtime asset hashes pass; visual shape review pending. |
+| Tethys | Relative albedo and native source shape | Independent albedo anchors pass; closed 2,000-face candidate measured. Full preparation and runtime asset hashes pass; visual shape review pending. |
+| Dione | Relative albedo and native source shape | Independent albedo anchors pass; closed 2,000-face candidate measured. Full preparation and runtime asset hashes pass; visual shape review pending. |
+| Rhea | Relative albedo and native source shape | Independent albedo and exact projection-gap anchors pass; closed 2,000-face candidate measured. Full preparation and runtime asset hashes pass; visual shape review pending. |
+| Titan | Measured height, interpolated height and distance to measured data | Original PDS float grids and independent anchors pass. Measured area is about 6% in this product; interpolation remains separately labeled. Full preparation and runtime asset hashes pass; browser review pending. |
+| Charon | PDS MVIC enhanced-color mosaic | Forty independent band-value anchors and exact finite missing sentinel validated. Full preparation and runtime asset hashes pass; browser review pending. |
 
-The [reviewed batch scope](PR-BATCHES.md#b2) and frozen body reviews remain authoritative for the agreed cohort. Detailed intake receipts live in `b2-preparation/` and then in each body's source notes and acquisition pins. Archive access or registration limitations remain unresolved until measured; they do not establish that a dataset is absent. Any required cohort change will be made explicit before PR delivery.
+The [reviewed batch scope](PR-BATCHES.md#b2) and frozen body reviews remain authoritative for the agreed cohort. Detailed intake receipts live in `b2-preparation/` and then in each body's source notes and acquisition pins. Archive access or registration limitations remain unresolved until measured; they do not establish that a dataset is absent. The original 15-body plan was explicitly revised by the user: deliver these 13 after review and carry Titania and Miranda into the next substantial batch.
 
-Body recipes and shared decoders are integrated for 13 bodies; none is marked ready. The Moons owner handles final integration and serialized qualification. Titania and Miranda remain in the agreed 15-body cohort. The bounded official-mirror search is recorded in [outer intake](b2-preparation/outer-intake.md); repeated archive retries are paused.
+Body recipes and shared decoders are integrated for 13 bodies; none is marked ready. The Moons owner handles final integration and serialized qualification. The user explicitly approved the 13-body delivery and moved Titania and Miranda to B3. The bounded official-mirror search is recorded in [outer intake](b2-preparation/outer-intake.md); repeated archive retries are paused.
 
 Source evidence is preparation evidence, not a claim of browser appearance or measurement accuracy. Geometry distance reports are sampled approximation bounds, not instrument uncertainty. Required aggregate gates and real Chrome DPR 1/2 checks remain open for B2. Existing B1 qualification is preserved separately.
 
@@ -38,6 +36,8 @@ The [bounded Moon seam review](b2-preparation/moon-seam-review/review.md) found 
 
 PR #56 preparation support is merged. The shared source lookup preserves B2 tables used by multiple lenses and the incoming nested FITS facet fields. Both validators, source checks and reports remain intact; each product keeps its own validity and registration rules.
 
+All 13 source-ready bodies have completed preparation. The [Saturn and Charon run](b2-preparation/saturn-outer-preparation.json) and [Jovian run](b2-preparation/jovian-preparation.json) completed with exit code 0. [Actual runtime asset closure](b2-preparation/runtime-asset-closure-13.json) verifies every runtime image for all 13 bodies. Io, Europa and Ganymede now use explicit native-coordinate remapping: their source image extents have real fractional pixel offsets that cannot be repaired by rounding an integer longitude roll. Six independent remapping tests pass. Charon's [content refresh](b2-preparation/charon-content-refresh.json) connects the existing elevation legend and makes enhanced-color interpretation visible without rebaking imagery. Mounted inspection and aggregate qualification remain open.
+
 ## Execution and resource limits
 
 The user authorized implementation of the complete B2 cohort. Following initial source selection, lane assignments include isolated preparation decoders and their focused tests, plus their body-owned recipes. The Moons owner integrates shared dispatch, painting, legends and acquisition hooks; reviewable lane patches can be applied centrally where automatic approval review retains an earlier intake-only scope.
@@ -50,6 +50,6 @@ Current isolated decoder ownership: Jupiter lane — categorical-geology.mjs; Sa
 
 1. Retain the completed Moon bake, unchanged GRAIL asset hashes and initial smoke evidence. Include the Moon in the full qualification below; the smoke check does not complete browser acceptance.
 2. Retain the reviewed Phobos/Deimos context pins and verify their reproduction during canonical preparation. The four Saturn native-shape changes have no geometry-dependent generated context source pin.
-3. Prepare the remaining 10 source-ready bodies serially and verify their assets and source transfer. Inspect lighting, limbs, missing coverage, legends and Europa’s regional focus.
+3. Retain all 13 completed preparations and asset closure receipts. Inspect lighting, limbs, missing coverage, legends and Europa’s regional focus.
 4. Run source verification, package and aggregate checks, production build, and real Chrome DPR 1/2 qualification against the integrated result, one workload at a time. Preserve separate source, preparation and browser evidence.
-5. Keep Titania and Miranda unresolved until their exact released GIS bytes and georeferencing close, or the user explicitly changes the 15-body delivery scope. No B2 PR has been opened.
+5. Deliver the user-approved 13-body B2 after qualification. Titania and Miranda now belong to B3; their archive-access limitations remain unresolved. No B2 PR has been opened.

@@ -1,5 +1,5 @@
 {
-  "checkedAtEpoch": 1788917645.738152,
+  "checkedAtEpoch": 1788921746.494883,
   "method": "Streaming SHA-256 and byte counts for every manifest entry; complete actual versus declared file inventory; 1 MiB buffer. Does not establish acquisition restoration or renderer readiness.",
   "bodies": [
     {
@@ -29,19 +29,19 @@
     {
       "body": "io",
       "entries": 38,
-      "bytes": 296917172,
+      "bytes": 296917286,
       "errors": []
     },
     {
       "body": "europa",
       "entries": 72,
-      "bytes": 323842436,
+      "bytes": 323842493,
       "errors": []
     },
     {
       "body": "ganymede",
       "entries": 35,
-      "bytes": 370493258,
+      "bytes": 370493500,
       "errors": []
     },
     {
@@ -65,7 +65,7 @@
     {
       "body": "rhea",
       "entries": 32,
-      "bytes": 145428968,
+      "bytes": 145429232,
       "errors": []
     },
     {
@@ -77,7 +77,7 @@
     {
       "body": "charon",
       "entries": 20,
-      "bytes": 388030680,
+      "bytes": 388031229,
       "errors": []
     }
   ]

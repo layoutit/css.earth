@@ -90,8 +90,8 @@
       {
         "id": "enhanced-color",
         "label": "Enhanced color",
-        "description": "Near-infrared, red and blue observations highlight surface differences. Gray grid marks missing color coverage; detail varies across the map.",
-        "title": "Enhanced color combines MVIC near-infrared, red and blue bands with panchromatic detail. Colors are not natural color or measured albedo. Missing coverage remains a gray grid.",
+        "description": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
+        "title": "Enhanced color combines MVIC near-infrared, red and blue bands, sharpened with panchromatic detail. It is not natural color or quantitative albedo. Gray grid marks missing color coverage; detail varies across the map.",
         "thumbnail": "/scenes/charon/charon-enhanced-color-thumbnail.webp",
         "surface": "charon-enhanced-color-surface@2x.webp",
         "poles": "charon-enhanced-color-poles@2x.webp",
@@ -115,7 +115,21 @@
           "path": "../manifest.json",
           "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m"
         },
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "−15",
+            "0",
+            "15"
+          ],
+          "meta": "km",
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m",
+          "image": "/scenes/charon/charon-elevation-legend.webp"
+        }
       }
     ]
   },
