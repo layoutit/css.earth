@@ -911,3 +911,61 @@ No browser rendering flags were changed.
 The capture folders retain recorder JSON, gzip trace, original chronological video
 observations, encoded video, source/loaded receipts, and analysis/qualification
 files. CDP video observations do not prove every display refresh.
+
+### Orbit line serialization (`9bb22fbf`)
+
+The current compositor trace identifies number formatting in the retained orbit
+writer as a separate cost from the previously completed custom-property work.
+Each matrix coefficient took the path `toFixed(6) -> Number -> toString` before
+CSS parsed it again. The line writer now sends the fixed-decimal token directly,
+with identical numeric precision, and retains the last numeric trail weight so
+unchanged opacity needs no formatting. Other presentation formatters are unchanged.
+
+A replay of 103 recorded planetary camera samples produces 883,547 segments with
+zero differences in the numeric matrix/opacity values. Six alternating measured
+Node writer passes have median 1411.307 ms before and 549.656 ms after. This 61.1%
+reduction is an isolated writer result, with no CSSOM/layout/browser rendering;
+it is not a whole-application speedup. Corpus generation disables occlusion,
+which is exercised separately in the real browser and existing renderer tests.
+
+All 129 affected renderer tests, renderer typecheck and build pass. The 24 DPR 1/2
+browser views preserve exact camera state, visible orbit styles, labels, navigation
+attributes and retained nodes. Full-frame differences reach 8/255 in the unchanged
+sidebar Chromosphere thumbnail in the Sun views (DPR2 x72..103, y786..813); outside
+that thumbnail the maximum is 2/255. No pixels were edited or omitted from the
+full-frame comparison. Evidence: `output/playwright/line-serialization-final/`;
+before images and the broader formatter trial remain in `line-serialization/`.
+
+Both following captures use the same normal `cc` instrumentation, Canary155,
+1995x1236 CSS viewport, DPR2 and native Sun–Milky Way–drag–Sun route:
+
+| Measurement | `53b721d2` | `9bb22fbf` |
+| --- | --- | --- |
+| Planetary-band intervals >25 ms | 11/762 | 10/762 |
+| Planetary-band p95 / maximum | 16.8 / 33.4 ms | 16.8 / 33.4 ms |
+| Planetary animation-callback elapsed total | 4843.787 ms | 4555.340 ms |
+| Number-formatting sampled self time | 693.476 ms | 329.620 ms |
+| Line-writer sampled self time (excluding formatter) | 573.791 ms | 578.506 ms |
+| Whole-route intervals >25 ms / maximum | 22/3486 / 49.9 ms | 23/3486 / 33.5 ms |
+| Galaxy-drag intervals >25 ms | 4/242 | 12/236 |
+
+The trace confirms reduced formatting work and about 6% less elapsed callback
+work in the planetary band. The missed-frame count there barely changes, and
+this run's galaxy drag is worse. Neither the isolated result nor the lower maximum
+establishes a general smoothness improvement. The prior 216.6 ms stall has not
+been proven eliminated. **The complete performance target remains unmet.**
+
+Recorder `11549ff5-0ac8-43aa-a370-3c0b825583ee` is paired with trace gzip and video
+in `output/world-context-zoom/line-serialization-dpr2/`. All 2946 observations are
+encoded, with no reordering, 52 microseconds clock drift and <1.460 ms video PTS
+error. There are no errors, HMR events or trace loss; all 20 source hashes match,
+the source checkout was clean, 517 loaded-resource receipts were collected, and
+the world/input/document identities and single camera survive. The comparison
+scripts, artifact hashes and full metrics are retained alongside the capture.
+
+Some `tdur` values in the expanded trace exceed their own wall duration. Those
+CPU-clock readings are unreliable. The totals above use elapsed event durations;
+profile samples are elapsed sampling weights, not independently measured CPU
+consumption. Earlier thread-CPU figures should be read as reported values, not
+proof of exactly how much of a long task was waiting. CDP video remains a series
+of observations, not evidence of every display refresh.
