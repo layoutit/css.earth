@@ -1,5 +1,7 @@
 # B7: Cassini surface atlas
 
+**Delivery:** [draft PR #81](https://github.com/layoutit/cssEarth/pull/81).
+
 Five scientific views deepen three existing moons through the current object
 contract. Branch `feat/moons-cassini-atlas` starts at merged B6 main
 `34da5b07d96fd53e2d1a9877db470c04a58dea2f`. The branch subsequently integrated

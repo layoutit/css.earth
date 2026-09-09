@@ -101,7 +101,7 @@ roster or benchmark denominator. B4 observation charts remain in draft.
 
 ## B7 — Cassini surface atlas
 
-**State:** implemented and delivered; draft pending aggregate qualification · **Owner:** Moons
+**State:** [draft PR #81](https://github.com/layoutit/cssEarth/pull/81), implemented and delivered; pending aggregate qualification · **Owner:** Moons
 
 Five mapped views across **Titan, Dione and Rhea**: Titan's six-unit global
 geomorphology and paired Cassini VIMS infrared / water-ice absorption views for
