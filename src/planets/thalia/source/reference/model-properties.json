@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1858",
+  "modelId": 1858,
+  "modelVersion": "2017-09-21",
+  "diameterKm": 114,
+  "diameterInterpretation": "Nonconvex model constrained by resolved imaging, 114 ± 8 km volume-equivalent diameter in the selected archive record. An alternative pole solution remains in the archive. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 114,
+    "uncertaintyKm": 8,
+    "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1858",
+    "reference": "DAMIT model 1858, version 2017-09-21",
+    "sourceLabel": "DAMIT model 1858",
+    "scaleKmPerSourceUnit": 0.9972228542918805,
+    "metersPerSourceUnit": 997.2228542918805,
+    "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The second pole is selected because Viikinkoski et al. (2017), section 3, find its AO fit more likely; the competing pole is not ruled out.",
+    "visibleDescription": "Nonconvex model constrained by resolved imaging, 114 ± 8 km volume-equivalent diameter in the selected archive record. An alternative pole solution remains in the archive. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 12.31241,
+  "poleEclipticJ2000Degrees": [
+    343,
+    -74
+  ],
+  "modelLimitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The second pole is selected because Viikinkoski et al. (2017), section 3, find its AO fit more likely; the competing pole is not ruled out.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/172/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 997.2228542918805,
+    "firstVertexKm": [
+      -2.5671218743408133,
+      6.602364209775822,
+      42.80362505243945
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      139.5570503998752,
+      133.4085731694532,
+      96.61972568491515
+    ],
+    "volumeCubicKm": 775734.6243950068,
+    "volumeEquivalentRadiusKm": 57,
+    "radialRangeKm": [
+      41.60676287088611,
+      72.23278770611276
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1140,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 775734624395006.5
+    }
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "number": 62,
+  "name": "Erato",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/235",
+  "modelId": 317,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/317",
+  "catalog": "View model 87 22 9.21819 3D.pdf | IAUspin.txt | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "317",
+    "Asteroid": "(62) Erato",
+    "λ": "87",
+    "β": "22",
+    "P": "9.21819",
+    "YORP": "",
+    "t0": "2444824",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.54",
+    "p3": "0.12",
+    "p4": "-0.92",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:22:50",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "3D.pdf": "https://damit.cuni.cz/projects/damit/stored_files/open/1157/3D.pdf",
+    "IAUspin.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1158/IAUspin.txt",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/1159/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/1160/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Hanuš (2011)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/141",
+      "file": "reference-141.html",
+      "links": [
+        {
+          "label": "2011a&a...530a.134h",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2011a&a...530a.134h"
+        },
+        {
+          "label": "http://arxiv.org/abs/1104.4114",
+          "url": "http://arxiv.org/abs/1104.4114\n"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H",
+          "url": "http://adsabs.harvard.edu/abs/2011A%26A...530A.134H"
+        }
+      ]
+    }
+  ],
+  "id": "erato",
+  "displayName": "Erato",
+  "lambda": 87.0,
+  "beta": 22.0,
+  "periodHours": 9.21819,
+  "version": "2011-04-21",
+  "nonconvex": false,
+  "calibrated": false,
+  "diameterKm": 78.62,
+  "uncertaintyKm": 0.9,
+  "akari": {
+    "number": 62,
+    "name": "Erato",
+    "diameterKm": 78.62,
+    "uncertaintyKm": 0.9,
+    "detections": 12,
+    "originalRow": "62     Erato                          8.76  0.15 12   78.62  0.90 0.091 0.002"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1160/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1158/IAUspin.txt",
+  "shapeSha256": "c4ea27f6c40f983f44fd05f49f21a60e1d4a90a303a795361f109d13cf8c7bfb",
+  "shapeBytes": 82708,
+  "vertices": 1022,
+  "faces": 2040,
+  "signedVolume": 1.0000000890705847,
+  "independentSignedVolume": 1.0000000890705847,
+  "originalVolumeEquivalentDiameter": 1.2407010186354528,
+  "firstVertex": [
+    0.17099,
+    0.076507,
+    0.5063
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    0.5021109094184272,
+    0.8775373200246244
+  ],
+  "extentsSourceUnits": [
+    [
+      -0.623895,
+      0.67377
+    ],
+    [
+      -0.632208,
+      0.810144
+    ],
+    [
+      -0.522635,
+      0.5063
+    ]
+  ],
+  "scaleKmPerSourceUnit": 63.367401830996975,
+  "alternatives": [
+    {
+      "modelId": 318,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/318",
+      "pole": [
+        "269",
+        "23"
+      ],
+      "version": "2011-04-21"
+    }
+  ],
+  "distanceAu": 3.128605699285775,
+  "orbitalPeriodYears": 5.533940054778803,
+  "sourceFields": {
+    "ID": "317",
+    "Asteroid": "(62) Erato",
+    "λ": "87",
+    "β": "22",
+    "P": "9.21819",
+    "YORP": "",
+    "t0": "2444824",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "0.54",
+    "p3": "0.12",
+    "p4": "-0.92",
+    "p5": "",
+    "Calibrated Size": "0 (No)",
+    "D": "",
+    "σD": "",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2011-05-02 13:22:50",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "dimensionless uncalibrated DAMIT coordinates"
+}

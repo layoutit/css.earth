@@ -1,0 +1,195 @@
+{
+  "number": 63,
+  "name": "Ausonia",
+  "asteroidUrl": "https://damit.cuni.cz/projects/damit/asteroids/view/128",
+  "modelId": 5924,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5924",
+  "catalog": "View model 121 -27 9.29759 AO.png | IAUspin | shape.png | shape.txt | spin.txt | shape.obj",
+  "fields": {
+    "ID": "5924",
+    "Asteroid": "(63) Ausonia",
+    "λ": "121",
+    "β": "-27",
+    "P": "9.29759",
+    "YORP": "",
+    "t0": "2442818",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "93",
+    "σD": "3",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2021-11-12",
+    "Comment": "",
+    "Created": "2021-11-26 09:59:12",
+    "Modified": "2021-11-26 10:00:02",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "files": {
+    "AO.png": "https://damit.cuni.cz/projects/damit/stored_files/open/64521/AO.png",
+    "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/64522/IAUspin",
+    "shape.png": "https://damit.cuni.cz/projects/damit/stored_files/open/64523/shape.png",
+    "shape.txt": "https://damit.cuni.cz/projects/damit/stored_files/open/64524/shape.txt"
+  },
+  "references": [
+    {
+      "label": "Vernazza et al. (2021)",
+      "url": "https://damit.cuni.cz/projects/damit/references/view/660",
+      "file": "reference-660.html",
+      "links": [
+        {
+          "label": "2021a&a...654a..56v",
+          "url": "https://ui.adsabs.harvard.edu/#abs/2021a&a...654a..56v"
+        },
+        {
+          "label": "http://adsabs.harvard.edu/abs/2021A&A...654A..56V",
+          "url": "http://adsabs.harvard.edu/abs/2021A&A...654A..56V"
+        }
+      ]
+    }
+  ],
+  "id": "ausonia",
+  "displayName": "Ausonia",
+  "lambda": 121.0,
+  "beta": -27.0,
+  "periodHours": 9.29759,
+  "version": "2021-11-12",
+  "nonconvex": true,
+  "calibrated": true,
+  "diameterKm": 93.0,
+  "uncertaintyKm": 3.0,
+  "akari": {
+    "number": 63,
+    "name": "Ausonia",
+    "diameterKm": 87.47,
+    "uncertaintyKm": 1.13,
+    "detections": 6,
+    "originalRow": "63     Ausonia                        7.55  0.25  6   87.47  1.13 0.232 0.008"
+  },
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/64524/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/64522/IAUspin",
+  "shapeSha256": "aa9daa8b781ee63a11e7a9efe3519ced4c1582ba90c9be3fd366ebaa6e177e76",
+  "shapeBytes": 46743,
+  "vertices": 578,
+  "faces": 1152,
+  "signedVolume": 423136.4387843295,
+  "independentSignedVolume": 423136.4387843295,
+  "originalVolumeEquivalentDiameter": 93.14522614054478,
+  "firstVertex": [
+    0.002907,
+    -0.00696,
+    35.739547
+  ],
+  "firstFace": [
+    1,
+    2,
+    3
+  ],
+  "radialRangeSourceUnits": [
+    29.49527964964323,
+    82.22915414391247
+  ],
+  "extentsSourceUnits": [
+    [
+      -79.775913,
+      74.102217
+    ],
+    [
+      -35.60613,
+      39.6611
+    ],
+    [
+      -35.956003,
+      39.138167
+    ]
+  ],
+  "scaleKmPerSourceUnit": 0.9984408632995786,
+  "alternatives": [
+    {
+      "modelId": 140,
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/140",
+      "pole": [
+        "120",
+        "-15"
+      ],
+      "version": "2011-03-28"
+    }
+  ],
+  "distanceAu": 2.39418991368127,
+  "orbitalPeriodYears": 3.7046407331328046,
+  "sourceFields": {
+    "ID": "5924",
+    "Asteroid": "(63) Ausonia",
+    "λ": "121",
+    "β": "-27",
+    "P": "9.29759",
+    "YORP": "",
+    "t0": "2442818",
+    "φ0": "0",
+    "Light Scattering Model": "LSL",
+    "p1": "0.1",
+    "p2": "",
+    "p3": "",
+    "p4": "",
+    "p5": "",
+    "Calibrated Size": "1 (Yes)",
+    "D": "93",
+    "σD": "3",
+    "Γ": "",
+    "Γmin": "",
+    "Γmax": "",
+    "pV": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
+    "Quality Flag": "4",
+    "Nonconvex": "1 (Yes)",
+    "Version": "2021-11-12",
+    "Comment": "",
+    "Created": "2021-11-26 09:59:12",
+    "Modified": "2021-11-26 10:00:02",
+    "Julian Date": "n/a",
+    "Image size (side) (px)": "300",
+    "Image size (side) (km)": "n/a",
+    "Image size (side) (milliarcsecond)": "n/a",
+    "Pixel size (km)": "n/a",
+    "Pixel size (milliarcsececond)": "n/a",
+    "Volume-equivalent diameter (px)": "n/a",
+    "Surface-equivalent diameter (px)": "n/a",
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
+  },
+  "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter"
+}
