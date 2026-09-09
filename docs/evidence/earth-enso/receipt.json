@@ -1,0 +1,285 @@
+{
+  "schema": "cssearth-earth-enso-evidence@1",
+  "baseCommit": "04799116a53c04bfbf418424d1a20c8b737b1e5c",
+  "previousDatasetCommit": "20a6cf6c",
+  "source": {
+    "product": "NASA MUR v4.1 via GIBS",
+    "date": "2026-09-07",
+    "baseline": "2003\u20132014",
+    "checked": "2026-09-09T03:53:28.313Z",
+    "kind": "Published color imagery, not raw numerical SST values",
+    "sourceGrid": [
+      40960,
+      20480
+    ],
+    "tileCount": 3200,
+    "allNativeTilesRetained": true,
+    "populatedTilesRequireExactDateAndLayer": true,
+    "emptyTilesWithoutHeaders": 777,
+    "emptyTileRule": "Absent headers are accepted only after decoding confirms every alpha is zero. No observation date is invented for these empty tiles.",
+    "sourceBytes": 47638424,
+    "archiveBytes": 45833893,
+    "archiveSha256": "56089aa7cca9172954a471034eee31d6e7ccf0292effd92f6704eeabb8e1d4e7",
+    "mosaic": {
+      "width": 16384,
+      "height": 8192,
+      "sourceWidth": 40960,
+      "sourceHeight": 20480,
+      "sampling": "nearest pixel centers",
+      "covered": 73783520,
+      "missing": 60434208,
+      "sha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0"
+    },
+    "advisory": {
+      "date": "13 August 2026",
+      "status": "El Ni\u00f1o Advisory",
+      "url": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml"
+    },
+    "displayBinsCelsius": 0.1,
+    "saturation": [
+      "below -3 C",
+      "at or above +3 C"
+    ],
+    "independentWitnessSha256": "8f7e11e64850c0b016570ad468e419436001c24b2db060f2e3a0b98a87a1f545"
+  },
+  "preparedSha256": "aeb51ec17464a82cf58c10ef4954b6d566218ab1a58f653c8258c0f2350cf00a",
+  "runtimeAssets": {
+    "count": 151,
+    "bytes": 38359462,
+    "ensoCount": 10,
+    "ensoBytes": 3766713,
+    "deltaFromCoraltempBytes": 1433981,
+    "initialMurQ84Bytes": 6525413,
+    "savedByEncodingBytes": 2758700,
+    "surfaceEncoding": {
+      "quality": 60,
+      "effort": 6,
+      "alphaQuality": 100
+    },
+    "existingNonEnsoAssetsUnchanged": true,
+    "geometryUnchanged": true,
+    "runtimeTextureBudget": "Existing 8K atlas; native 1 km imagery is sampled during preparation."
+  },
+  "productionBrowser": {
+    "passed": true,
+    "runs": [
+      {
+        "dpr": 1,
+        "retained": true,
+        "traffic": {
+          "coldGlobe": {
+            "bytes": 65506769,
+            "note": "Uncompressed production fixture response bodies; HTTP headers excluded.",
+            "requestCount": 716,
+            "ensoBytes": 5017,
+            "earthAssetBytes": 9094346
+          },
+          "firstEnso": {
+            "bytes": 73643399,
+            "note": "Uncompressed production fixture response bodies; HTTP headers excluded.",
+            "requestCount": 741,
+            "ensoBytes": 3766713,
+            "earthAssetBytes": 17230976
+          },
+          "allLenses": {
+            "bytes": 81655137,
+            "note": "Uncompressed production fixture response bodies; HTTP headers excluded.",
+            "requestCount": 766,
+            "ensoBytes": 3766713,
+            "earthAssetBytes": 25242714
+          }
+        },
+        "initialNorth": {
+          "x": 3.8225000005553955e-09,
+          "y": -0.019999981519500006,
+          "tiltDegrees": 1.0950665979717946e-05
+        },
+        "restoredNorth": {
+          "x": 3.8225000005553955e-09,
+          "y": -0.019999981519500006,
+          "tiltDegrees": 1.0950665979717946e-05
+        },
+        "initialUrl": "https://css.earth/earth/?v=MEZA3puvFbeOAUFCxzNAAAAAv8GAizzaCPa_4cw4qnK-xL_XBAiv8nP7AAIAAAAAAAAAAAAAAAAAAAAA",
+        "transition": {
+          "durationMs": 597.5,
+          "distanceRange": 0,
+          "sampleCount": 19
+        },
+        "description": "NASA MUR \u00b7 1 km source imagery \u00b7 7 Sept 2026. Sea-surface temperature departure from the 2003\u20132014 average. NASA colors saturate below \u22123 and at +3 \u00b0C. Gray: land, ice, or unavailable imagery.\n\nNOAA status\nEl Ni\u00f1o Advisory\nAdvisory issued\n13 August 2026\nSource checked\n2026-09-09\n\nTemperature anomaly \u00b7 \u00b0C\n\n< \u22123\n0\n\u2265 +3",
+        "zeroAlignmentPx": 0,
+        "finalUrl": "https://css.earth/earth/?v=MEZAxl2C_2I27kFCxzNAAAAAv8GAizzaCPa_4cw4qnK-xL_XBAiv8nP7AAIAAAAAAAAAAAAAAAAAAAAA",
+        "ensoAssets": [
+          "/scenes/earth/earth-enso-legend.png",
+          "/scenes/earth/earth-enso-page-1.webp",
+          "/scenes/earth/earth-enso-page-2.webp",
+          "/scenes/earth/earth-enso-page-3.webp",
+          "/scenes/earth/earth-enso-page-4.webp",
+          "/scenes/earth/earth-enso-page-5.webp",
+          "/scenes/earth/earth-enso-page-6.webp",
+          "/scenes/earth/earth-enso-poles.webp",
+          "/scenes/earth/earth-enso.webp",
+          "/scenes/earth/earth-lens-enso.webp"
+        ]
+      },
+      {
+        "dpr": 2,
+        "retained": true,
+        "traffic": {
+          "coldGlobe": {
+            "bytes": 65506769,
+            "note": "Uncompressed production fixture response bodies; HTTP headers excluded.",
+            "requestCount": 716,
+            "ensoBytes": 5017,
+            "earthAssetBytes": 9094346
+          },
+          "firstEnso": {
+            "bytes": 73388967,
+            "note": "Uncompressed production fixture response bodies; HTTP headers excluded.",
+            "requestCount": 740,
+            "ensoBytes": 3766713,
+            "earthAssetBytes": 16976544
+          },
+          "allLenses": {
+            "bytes": 81376727,
+            "note": "Uncompressed production fixture response bodies; HTTP headers excluded.",
+            "requestCount": 765,
+            "ensoBytes": 3766713,
+            "earthAssetBytes": 24964304
+          }
+        },
+        "initialNorth": {
+          "x": 3.8225000005553955e-09,
+          "y": -0.019999981519500006,
+          "tiltDegrees": 1.0950665979717946e-05
+        },
+        "restoredNorth": {
+          "x": 3.8225000005553955e-09,
+          "y": -0.019999981519500006,
+          "tiltDegrees": 1.0950665979717946e-05
+        },
+        "initialUrl": "https://css.earth/earth/?v=MEZA3puvFbeOAUFCxzNAAAAAv8GAizzaCPa_4cw4qnK-xL_XBAiv8nP7AAIAAAAAAAAAAAAAAAAAAAAA",
+        "transition": {
+          "durationMs": 627.5,
+          "distanceRange": 0,
+          "sampleCount": 19
+        },
+        "description": "NASA MUR \u00b7 1 km source imagery \u00b7 7 Sept 2026. Sea-surface temperature departure from the 2003\u20132014 average. NASA colors saturate below \u22123 and at +3 \u00b0C. Gray: land, ice, or unavailable imagery.\n\nNOAA status\nEl Ni\u00f1o Advisory\nAdvisory issued\n13 August 2026\nSource checked\n2026-09-09\n\nTemperature anomaly \u00b7 \u00b0C\n\n< \u22123\n0\n\u2265 +3",
+        "zeroAlignmentPx": 0,
+        "finalUrl": "https://css.earth/earth/?v=MEZAxl2C_2I27kFCxzNAAAAAv8GAizzaCPa_4cw4qnK-xL_XBAiv8nP7AAIAAAAAAAAAAAAAAAAAAAAA",
+        "ensoAssets": [
+          "/scenes/earth/earth-enso-legend.png",
+          "/scenes/earth/earth-enso-page-1.webp",
+          "/scenes/earth/earth-enso-page-2.webp",
+          "/scenes/earth/earth-enso-page-3.webp",
+          "/scenes/earth/earth-enso-page-4.webp",
+          "/scenes/earth/earth-enso-page-5.webp",
+          "/scenes/earth/earth-enso-page-6.webp",
+          "/scenes/earth/earth-enso-poles.webp",
+          "/scenes/earth/earth-enso.webp",
+          "/scenes/earth/earth-lens-enso.webp"
+        ]
+      }
+    ],
+    "errors": [],
+    "httpFailures": [],
+    "browserScientificSourceRequests": 0,
+    "loadedScripts": [
+      {
+        "path": "/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.DROapk26.js",
+        "method": "GET",
+        "bytes": 3890257,
+        "status": 200,
+        "sha256": "41b43f5926eef5672b8a2463064acd7b0cdfc5ed4f912b2e7a7a8080e9f65202"
+      },
+      {
+        "path": "/_astro/point-field-selection-worker-CMrTEVt-.js",
+        "method": "GET",
+        "bytes": 8296,
+        "status": 200,
+        "sha256": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8"
+      },
+      {
+        "path": "/_astro/packaged-object-runtime.BFTBRGo_.js",
+        "method": "GET",
+        "bytes": 226817,
+        "status": 200,
+        "sha256": "0c6343a7ae68b99e65375a2c09e120c01a85c75fda7614ffccb9e2a135a88d2c"
+      },
+      {
+        "path": "/_astro/prepared-object-worker-BNxg6pHC.js",
+        "method": "GET",
+        "bytes": 84088,
+        "status": 200,
+        "sha256": "5223c504108cec97a401130674f02ef6ab05fb86c227fb88c2fdfcf422cb0953"
+      }
+    ],
+    "captureHarnessSha256": "fef5c0cb8498a748d254f9612ead167002d73a75a7327c6e4cdf1a79a059595a",
+    "capturedAt": "2026-09-09T04:21:06.918Z",
+    "reportPath": "production-browser.json",
+    "reportSha256": "d0a5912336c557f3a24578f40bb8b9e5b3beb5393679a43047c2372a6d632e55",
+    "fixture": "Local production build served over an isolated HTTPS fixture. Response bodies are uncompressed; this is not deployed CDN traffic."
+  },
+  "checks": {
+    "focusedEarthRouterTests": 47,
+    "sourceClosure": {
+      "inputCount": 36,
+      "generatedIntermediateCount": 2,
+      "documentCount": 22,
+      "verifiedCount": 60
+    },
+    "offlineRestoration": {
+      "passed": true,
+      "sha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0"
+    },
+    "productionBuild": {
+      "command": "NODE_OPTIONS=--max-old-space-size=8192 pnpm exec astro build",
+      "pages": 259,
+      "passed": true
+    },
+    "runtimeAssembly": {
+      "passed": true,
+      "count": 151
+    },
+    "aggregatePrebuild": "This invocation waited in the unchanged all-object presentation compiler and was stopped; no aggregate-prebuild success claimed. Earth preparation was independently completed and the production site built from prepared objects."
+  },
+  "compression": {
+    "sweep": "compression-sweep.json",
+    "sweepSha256": "d1786c37036a09290f96df9bc9c6cd8d786a98ba3875682db68589dfffa5cd35",
+    "visualComparison": "compression-cliff.png",
+    "globeComparison": "globe-compression-comparison.png",
+    "judgment": "No abrupt numerical cliff; fine structures visibly merge around Q30\u201340 and clearly smear at Q20. Q60 is selected with a margin above that deterioration."
+  },
+  "media": {
+    "screenshot": {
+      "path": "latest.png",
+      "sha256": "1f533655db1a7b36cdbc0c548cdce7511f4fc0f331c08132a8dc201e66bac077"
+    },
+    "localVideo": {
+      "path": "output/playwright/earth-enso-mur/earth-enso-mur-q60.mp4",
+      "durationSeconds": 18.24,
+      "bytes": 4789840,
+      "sha256": "f8f3c82432a8a3109ffd48df8de463d0fa6797841932596b877aaa494efcd2f6",
+      "uneditedTiming": true,
+      "description": "Full DPR1 native browser recording transcoded to MP4; no speed change or omitted sequence."
+    }
+  },
+  "camera": {
+    "focus": {
+      "longitude": -110,
+      "latitude": 0,
+      "northUp": true
+    },
+    "transition": {
+      "durationMilliseconds": 650,
+      "preserveZoom": true
+    },
+    "previousLocalCommit": "645838a1"
+  },
+  "limitations": [
+    "Physical mobile was not tested.",
+    "The broader Earth test invocation passed 128 checks and failed its existing places.test.mjs because the MVP no longer publishes earth-places.json. That retired geographic test is unchanged in this branch.",
+    "The 1 km source is downsampled into the existing 8K runtime atlas.",
+    "GIBS RGB uses published 0.1 C bins and saturation endpoints; displayed resampled lossy WebP pixels are not exact numerical observations.",
+    "The isolated production fixture does not compress text/JSON. Its 65.5 MB cold-load body count must not be presented as a deployed compressed transfer measurement."
+  ]
+}

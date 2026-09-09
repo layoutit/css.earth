@@ -1,0 +1,20 @@
+{
+  "crop": [
+    458,
+    232,
+    980,
+    754
+  ],
+  "meanAbsoluteRgbDifference": 1.5637561260349855,
+  "images": [
+    {
+      "path": "output/playwright/earth-enso-mur-q80/enso-dpr-1.png",
+      "sha256": "e442eb0bd933435e83882ab92a5870b1e5c9d801aed68085d609e02d0e09c39a"
+    },
+    {
+      "path": "output/playwright/earth-enso-mur/enso-dpr-1.png",
+      "sha256": "1f533655db1a7b36cdbc0c548cdce7511f4fc0f331c08132a8dc201e66bac077"
+    }
+  ],
+  "note": "Same production globe at DPR1 and the same final ENSO camera, Q80 versus Q60. Difference panel is absolute RGB difference amplified four times, not a native-source accuracy oracle."
+}

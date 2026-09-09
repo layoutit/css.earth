@@ -287,7 +287,12 @@ export function requirePreparedPresentation(plan, { controls, assets = plan?.ass
       const {maximumZoom,camera}=variant.navigation;
       if(!Number.isFinite(maximumZoom)||maximumZoom<plan.camera.minimumZoom||maximumZoom>plan.camera.maximumZoom)fail("navigation zoom must be bounded");
       if(camera!==null) {
-        record(camera,"navigation camera",["controlPitch","controlYaw","zoom"]);
+        record(camera,"navigation camera",["controlPitch","controlYaw","controlRoll","zoom","transition"]);
+        if(camera.transition!==undefined) {
+          record(camera.transition,"camera transition",["durationMilliseconds","preserveZoom"]);
+          if(!Number.isFinite(camera.transition.durationMilliseconds)||camera.transition.durationMilliseconds<=0||camera.transition.durationMilliseconds>10000||typeof camera.transition.preserveZoom!=="boolean")fail("camera transition must be bounded");
+        }
+        if(camera.controlRoll!==undefined&&!Number.isFinite(camera.controlRoll))fail("navigation roll must be finite");
         if(![camera.controlPitch,camera.controlYaw,camera.zoom].every(Number.isFinite)||camera.zoom<plan.camera.minimumZoom||camera.zoom>maximumZoom)fail("navigation camera must be bounded");
       }
     }

@@ -1,6 +1,8 @@
 import { mkdir, readFile, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 import sharp from "sharp";
+import { readCoraltempAnomaly } from "./sst-anomaly.mjs";
+import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mjs";
 import { textureTintFactors } from "@layoutit/polycss";
 
 
@@ -16,17 +18,33 @@ const produced = new Set();
 const output = path => { produced.add(`${config.publicBase}${path}`); return resolve(publicDirectory,path); };
 await mkdir(publicDirectory,{recursive:true});
 if (mode !== 'materials') {
-  for (const map of config.surface.maps) await prepareMap(source(map.path),map.name,{compositeClouds:map.compositeClouds});
-  await prepareInteriorAssets();
-  for (const map of config.surface.maps) await prepareLensThumbnail(source(map.path),map.thumbnail);
+  const inputs = new Map();
+  const bindings = JSON.parse(await readFile(source('content/lens-bindings.json'), 'utf8'));
+  const focusByMap = new Map(bindings.controls.map(lens => [lens.surfacePagePrefix, lens.focus]));
+  for (const map of config.surface.maps) {
+    let input = source(map.path);
+    if (map.scientific) {
+      if (map.scientific.kind === "coraltemp-anomaly") {
+        const decoded = await readCoraltempAnomaly(input, map.scientific);
+        input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
+      } else if (map.scientific.kind === "gibs-mur-imagery") {
+        input = await verifyPreparedMurImage(sourceDirectory, map.scientific);
+        await writeMurLegend(sourceDirectory, output("earth-enso-legend.png"));
+      } else throw new TypeError("Unknown scientific surface source");
+    }
+    inputs.set(map.name, input);
+    if (mode !== 'thumbnails') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,kernel:map.scientific?"nearest":undefined,webp:map.webp});
+  }
+  if (mode !== 'thumbnails' && mode !== 'maps') await prepareInteriorAssets();
+  for (const map of config.surface.maps) await prepareLensThumbnail(inputs.get(map.name),map.thumbnail,focusByMap.get(map.name)?.longitude ?? null);
 }
-if (mode !== 'surfaces') await prepareMaterialBanks();
+if (mode !== 'surfaces' && mode !== 'thumbnails' && mode !== 'maps') await prepareMaterialBanks();
 return { assets: [...produced].sort() };
 async function prepareMap(input, name, {
-  compositeClouds = false,
+  compositeClouds = false, kernel = "lanczos3", webp = {},
 } = {}) {
   const { data: preparedData, info } = await preparePagedSurfaceMap({
-    config, sourceDirectory, map: { path: input, compositeClouds },
+    config, sourceDirectory, map: { path: input, compositeClouds }, kernel,
   });
   const { width, height } = info;
   await writeSphereAssets({
@@ -42,7 +60,7 @@ async function prepareMap(input, name, {
     polarCapBandSpan: 1,
     projectiveSurface: true,
     longitudeOffsetDegrees: 0,
-    webp: { quality: surfaceQuality, smartSubsample: true },
+    webp: { quality: surfaceQuality, smartSubsample: true, ...webp },
   });
 }
 
@@ -692,13 +710,13 @@ function hexRgb(value) {
   ));
 }
 
-async function prepareLensThumbnail(input, filename) {
+async function prepareLensThumbnail(input, filename, longitude = null) {
   const metadata = await sharp(input).metadata();
   const cropSize = Math.round(metadata.height / 2);
   const size = 96;
   await sharp(input)
     .extract({
-      left: Math.round((metadata.width - cropSize) / 2),
+      left: longitude === null ? Math.round((metadata.width - cropSize) / 2) : Math.max(0, Math.min(metadata.width - cropSize, Math.round((longitude + 180) / 360 * metadata.width - cropSize / 2))),
       top: Math.round((metadata.height - cropSize) / 2),
       width: cropSize,
       height: cropSize,
@@ -723,11 +741,11 @@ function clamp(value, minimum, maximum) {
 }
 
 // Shared interpretation for globe assets and the small sidebar preview.
-export async function preparePagedSurfaceMap({ config, sourceDirectory, map }) {
+export async function preparePagedSurfaceMap({ config, sourceDirectory, map, kernel = map.scientific ? "nearest" : "lanczos3" }) {
   const width = config.surface.width;
   const height = config.surface.height;
-  const { data, info } = await sharp(resolve(sourceDirectory, map.path))
-    .resize(width, height, { fit: "fill" })
+  const { data, info } = await sharp(Buffer.isBuffer(map.path) ? map.path : resolve(sourceDirectory, map.path))
+    .resize(width, height, { fit: "fill", kernel })
     .removeAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
