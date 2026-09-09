@@ -37,3 +37,11 @@ This is proposed research, not an implemented feature or an instruction to launc
 - A plausible volume is not a measured gas-density reconstruction. Record priors and uncertainty.
 - Keep processing explicit and server-owned; preserve refresh, progress and cancellation behavior.
 - Keep local artifacts local. Production/public promotion requires its own explicit scope.
+
+## Handoff checkpoint
+
+- Lab research, controls export and offline volume-lens promotion are committed on the lab branch. The extragalactic branch has merged main and includes those commits.
+- The generic runtime and focused sidebar support a fixed bank of image lenses, one retained catalogue point layer, per-lens appearance and a star toggle.
+- The isolated handoff check contains all three sources: 144 selected slices and 943 shared stars each. Output hashes, identical density alpha, distinct image colors, and matched cloud/star cutoff were verified. A real Chrome check verified retained nodes, lens switching, star visibility and distant-point fade. These are **automated fixture settings**, not accepted user values.
+- **Still pending:** the user must click Save lens settings in their Reconstruction browser. Resolve their saved result IDs and settings, preview unapplied material drafts if requested, create the production LMC recipe, promote the three lenses, and check them in the shared app. The app still uses the earlier LMC image bank until that installation. M31/SMC and catalogue data remain unchanged.
+- Existing XYZ slice stability limitations remain documented; the new bank loader does not solve them.
