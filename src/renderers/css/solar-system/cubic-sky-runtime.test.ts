@@ -45,7 +45,8 @@ test('the shared-universe path keeps camera orientation without unused sky image
     const view = { matrix: `rotateY(${zoom * 30}deg)`, zoom, defaultZoom: 1 };
     orientationOnly.setOrientation(view); standalone.setOrientation(view);
     expect(orientationOnly.orientation.style).toMatchObject({ transform: view.matrix });
-    expect(properties(orientationOnly.cube.style)).toEqual(properties(standalone.cube.style));
+    expect(properties(orientationOnly.cube.style)).toEqual({});
+    expect(properties(standalone.cube.style)).toEqual({});
     expect(properties(orientationOnly.root.style)).toEqual(properties(standalone.root.style));
   }
   orientationOnly.destroy(); standalone.destroy();

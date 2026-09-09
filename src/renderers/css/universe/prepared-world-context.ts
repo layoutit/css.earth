@@ -338,8 +338,7 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
     label.dataset.contextLabel = body.id;
     label.textContent = body.name;
     label.style.cssText = 'position:absolute;left:50%;top:50%;white-space:nowrap;visibility:hidden';
-    label.style.opacity = 'calc(var(--context-label-alpha, 0) * var(--context-label-opacity, 1))';
-    label.style.setProperty('--context-label-alpha', '0');
+    label.style.opacity = '0';
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
     const orbitRoot = host.ownerDocument.createElement('div');
     orbitRoot.className = 'context-orbit';
@@ -396,14 +395,14 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
   const labels = createLabelDeclutter({ capacity: bodies.length, spacingPixels: 4 });
   const indicators = createLabelDeclutter({ capacity: bodies.length, spacingPixels: 2 });
   const windowTarget = host.ownerDocument.defaultView!;
-  const fader = createOpacityFader(windowTarget, '--context-label-alpha');
+  const fader = createOpacityFader(windowTarget, 'var(--context-label-opacity, 1)');
   const clearHide = (state: LabelFadeState) => {
     if (state.hideTimer !== null) windowTarget.clearTimeout(state.hideTimer);
     state.hideTimer = null;
   };
   const fade = (state: LabelFadeState, target: number, cull: boolean) => {
     state.target = target;
-    if (cull || (target === 0 && Number(state.element.style.getPropertyValue('--context-label-alpha')) === 0)) {
+    if (cull || (target === 0 && fader.current(state.element) === 0)) {
       clearHide(state); fader.set(state.element, 0); state.element.style.visibility = 'hidden';
     } else if (target > 0) {
       clearHide(state); state.element.style.visibility = ''; fader.set(state.element, target, LABEL_FADE_MS);
@@ -451,6 +450,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites }: {
       if (!visible) {
         pickTargets = []; picking.publish(root, pickTargets);
         for (const entry of bodies) {
+          // The flight override owns opacity until annotations resume.
+          clearHide(entry.fade); fader.cancel(entry.label);
           for (const node of [entry.label, entry.indicator, entry.orbitRoot]) {
             suspendedOpacity.set(node, node.style.opacity); node.style.opacity = '0';
           }

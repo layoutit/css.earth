@@ -564,3 +564,49 @@ The separate `context-layout-islands-probe` is excluded from the product.
 Adding layout/style containment to body groups did not reduce the full-route
 style/layout cost (5,860/1,338 ms versus the preceding 5,283/1,168 ms capture).
 Its synchronized evidence is retained; no containment rule was shipped.
+
+
+### Finish direct publication for labels and sky handles
+
+The remaining navigation-time custom-property writes were label fade alpha and
+an unused per-object sky-orientation alias. Label fades now publish a numeric
+coefficient directly in `opacity`; the existing static CSS hover multiplier
+still supplies appearance policy. Flight suspension cancels both the fade and
+its pending hide timer before taking ownership of opacity. Resumption adopts
+the retained alpha and the current view. No label wrappers or render leaves
+were added. The sky keeps its direct orientation transform and functional shared
+zoom property; its unconsumed per-object aliases are no longer published.
+
+All 32 normal/group-hover/label-hover/focus comparisons at DPR 1 and 2 are
+pixel-identical, including partial alpha, with identical computed color, weight
+and opacity. The focused set has 77 passing checks, including fade reversal,
+cancellation/adoption, pending flight fades, retained picking, point-field
+transitions and standalone/shared sky orientation. Renderer typecheck and build
+pass. Evidence is in `output/playwright/direct-label-opacity-parity/`.
+
+The final matched DPR 2 route is
+`output/world-context-zoom/direct-publication-final-dpr2/`, recorder
+`fef415ff-2b04-43a6-8ead-001245cad34d`. It uses 384 outgoing wheel events, a native
+60-step rotation in each direction, and 396 returning wheel events. It records
+**zero programmatic custom-property writes** during movement. Source and loaded
+resource hashes are retained; the captured runtime source hashes still match
+the final source. World, input and document identities remain stable, with one
+detailed camera and Sun selected on return. Clock drift is 29 microseconds and
+maximum video PTS error is 1.96 ms. There are no application errors,
+recording-time HMR events or trace data loss.
+
+This is not a claim that the performance target is met. In the 5–5,000 AU band,
+162 of 647 native rAF intervals exceed 25 ms and p95 is 33.4 ms. Band membership
+uses the latest preceding native 125 ms camera sample. The return still has a
+116.6 ms interval, aligned with 128.9 ms in GPU `ScheduleOverlays()` for eight
+overlays. See `qualification.json` and `stall-correlation.json`. These figures
+remain absolute observations rather than a controlled causal speedup claim;
+input delivery and workstation load differ across captures.
+
+Exploratory DPR 1 runs do not qualify the established DPR 2 target. Earlier
+capture attempts with missing inspector response bodies or a full compositor
+trace buffer are retained and excluded from qualification; their artifacts were
+not substituted into the final run. The final capture uses the established
+bounded trace categories and hashes the worker catalog response as delivered.
+A separate disposable Sun backface probe changes visible pixels (up to 118
+channel levels at DPR 2) and is excluded from the product.

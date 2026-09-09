@@ -15,7 +15,7 @@ interface Entry {
 }
 
 /** Retained, wall-time opacity interpolation without CSS or Web Animations. */
-export function createOpacityFader(windowTarget: OpacityFaderWindow, property: 'opacity' | `--${string}` = 'opacity') {
+export function createOpacityFader(windowTarget: OpacityFaderWindow, multiplier?: string) {
   const entries = new Map<HTMLElement, Entry>();
   const active = new Set<Entry>();
   let frame: number | null = null;
@@ -24,15 +24,19 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow, property: '
   const now = () => windowTarget.performance.now();
   const clamp = (value: number) => Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
   const read = (element: HTMLElement) => {
-    const value = Number.parseFloat(property === 'opacity' ? element.style.opacity : element.style.getPropertyValue(property));
+    // A cancelled fade can be adopted again from its last published alpha.
+    const opacity = element.style.opacity;
+    const value = Number.parseFloat(multiplier && opacity.startsWith('calc(') ? opacity.slice(5) : opacity);
     return Number.isFinite(value) ? clamp(value) : 0;
   };
   const write = (entry: Entry, value: number) => {
     entry.current = clamp(value);
     if (entry.written !== entry.current) {
       entry.written = entry.current;
-      if (property === 'opacity') entry.element.style.opacity = String(entry.current);
-      else entry.element.style.setProperty(property, String(entry.current));
+      // Hover policy stays in CSS; changing alpha never changes an inherited
+      // custom property or requires a computed-style read.
+      entry.element.style.opacity = multiplier
+        ? `calc(${entry.current} * ${multiplier})` : String(entry.current);
     }
   };
   const valueAt = (entry: Entry, timestamp: number) => {
@@ -61,6 +65,7 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow, property: '
   };
 
   return Object.freeze({
+    current(element: HTMLElement) { return entries.get(element)?.current ?? read(element); },
     set(element: HTMLElement, alpha: number, durationMs = 0, preserveDeadline = false) {
       if (destroyed) return;
       const target = clamp(alpha), duration = Number.isFinite(durationMs) ? Math.max(0, durationMs) : 0;

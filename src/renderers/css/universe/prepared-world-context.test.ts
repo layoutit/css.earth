@@ -838,7 +838,7 @@ test('one retained focus label and locator survive system retirement at their ph
   document.defaultView.advance(200);
   expect(layer.inspect().filter(body => body.id !== 'anchor').every(body => body.marker.style.visibility === 'hidden')).toBe(true);
   expect(label.parentNode!.hidden).toBe(false);
-  expect(label.style.visibility).toBe(''); expect(label.style.getPropertyValue('--context-label-alpha')).toBe('1');
+  expect(label.style.visibility).toBe(''); expect(label.style.opacity).toBe('calc(1 * var(--context-label-opacity, 1))');
   expect(locator.style.visibility).toBe(''); expect(locator.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
   expect(locator.style.transform).toBe('translate(70px,-40px) translate(-50%,-50%)');
   expect(label.style.transform).toBe('translate(52px,-28px)');
@@ -946,7 +946,7 @@ test('solar text fades through system retirement, reverses continuously, and dis
     plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
   const label = layer.inspect().find(body => body.id === 'mercury')!.label as unknown as FakeElement;
   const nodes = all(host), clock = document.defaultView;
-  const alpha = () => Number(label.style.getPropertyValue('--context-label-alpha'));
+  const alpha = () => Number.parseFloat(label.style.opacity.replace('calc(', ''));
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(1000); expect(alpha()).toBe(0);
@@ -966,6 +966,37 @@ test('solar text fades through system retirement, reverses continuously, and dis
   expect(clock.timers.size).toBeGreaterThan(0); expect(clock.frames.size).toBeGreaterThan(0);
   expect(all(host)).toEqual(nodes);
   layer.destroy(); expect(clock.frames.size).toBe(0); expect(clock.timers.size).toBe(0);
+});
+
+test('flight suspension owns opacity even when a label fade is in progress', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: parsePreparedWorldContext({ ...plan(1), bodies: plan(1).bodies.map(({ orbit: _orbit, ...body }) => body) }), sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  const label = layer.inspect().find(body => body.id === 'mercury')!.label;
+  document.defaultView.advance(100);
+  const partialAlpha = Number.parseFloat(label.style.opacity.slice(5));
+  expect(partialAlpha).toBeGreaterThan(0); expect(partialAlpha).toBeLessThan(1);
+  layer.setNavigationIndicatorsVisible(false);
+  expect(document.defaultView.timers.size).toBe(0);
+  document.defaultView.advance(400);
+  expect(label.style.opacity).toBe('0');
+  layer.setNavigationIndicatorsVisible(true);
+  document.defaultView.advance(200);
+  expect(Number.parseFloat(label.style.opacity.slice(5))).toBeCloseTo(partialAlpha * 2);
+  layer.setHiddenLabels(['mercury']);
+  expect(document.defaultView.timers.size).toBeGreaterThan(0);
+  document.defaultView.advance(50);
+  layer.setNavigationIndicatorsVisible(false);
+  expect(document.defaultView.timers.size).toBe(0);
+  document.defaultView.advance(400);
+  expect(label.style.opacity).toBe('0');
+  layer.setNavigationIndicatorsVisible(true);
+  document.defaultView.advance(200);
+  expect(Number.parseFloat(label.style.opacity.slice(5))).toBe(0);
+  layer.destroy();
 });
 
 test('the Sun locator stays visible across galactic observer rotations while resolved occluders still hide it', () => {
@@ -989,7 +1020,7 @@ test('the Sun locator stays visible across galactic observer rotations while res
       orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)],
     } }, viewport);
     document.defaultView.advance(200);
-    expect(label.style.visibility, `${degrees} degrees`).toBe(''); expect(label.style.getPropertyValue('--context-label-alpha')).toBe('1');
+    expect(label.style.visibility, `${degrees} degrees`).toBe(''); expect(label.style.opacity).toBe('calc(1 * var(--context-label-opacity, 1))');
     expect(locator.style.visibility, `${degrees} degrees`).toBe(''); expect(locator.style.opacity).toBe('calc(1 * var(--context-line-opacity, 1))');
   }
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: {
@@ -997,7 +1028,7 @@ test('the Sun locator stays visible across galactic observer rotations while res
   } }, viewport);
   expect(label.style.pointerEvents).toBe('none');
   document.defaultView.advance(200);
-  expect(label.style.visibility).toBe('hidden'); expect(label.style.getPropertyValue('--context-label-alpha')).toBe('0');
+  expect(label.style.visibility).toBe('hidden'); expect(label.style.opacity).toBe('calc(0 * var(--context-label-opacity, 1))');
   layer.destroy();
 });
 
