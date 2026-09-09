@@ -128,6 +128,23 @@ test("live responsive failure retires the subscription before reporting fatal", 
   policy.destroy();
 });
 
+test("responsive cleanup preserves a non-Error startup failure as the aggregate cause", () => {
+  const mediaQuery = new FakeMediaQuery(false);
+  const cleanupFailure = new Error("remove touch action");
+  assert.throws(() => bindResponsiveOrbitPolicy({
+    mediaQuery,
+    inputSurface: { style: { removeProperty() { throw cleanupFailure; } } },
+    controls: { update() { throw null; } },
+  }), (error) => {
+    assert.ok(error instanceof AggregateError);
+    assert.equal(error.cause, null);
+    assert.equal(error.message, "null");
+    assert.deepEqual(error.errors, [null, cleanupFailure]);
+    return true;
+  });
+  assert.equal(mediaQuery.listenerCount, 0);
+});
+
 class FakeMediaQuery extends EventTarget {
   constructor(matches) {
     super();

@@ -12,9 +12,9 @@ Available at [css.earth](https://css.earth) 🌎
 
 ## How to Build
 
-Use Node.js 24 or Node.js 22.15+ and pnpm 10. Source preparation uses Node's
-[native Zstandard support](https://nodejs.org/api/zlib.html#zlibzstddecompresssyncbuffer-options),
-which is unavailable in earlier Node 22 releases.
+Use Node.js 24 or Node.js 22.18+ and pnpm 10. Shared TypeScript entrypoints use
+[native type stripping](https://nodejs.org/download/release/v22.18.0/docs/api/typescript.html#type-stripping),
+and source preparation uses Node's native Zstandard support.
 
 Install dependencies and download the prepared browser assets, then start the site:
 
@@ -35,6 +35,12 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 `pnpm prepare:checkout`; that is the full preparation workflow described below.
 
 ## Checks
+
+`pnpm typecheck` checks the shared packages, renderer, preparation, and migrated
+shell and ownership-tool TypeScript. `pnpm check:typescript-ownership` rejects new
+authored JavaScript and stale migration entries. See the
+[TypeScript ownership policy](docs/architecture/typescript-ownership.md) for the
+remaining backlog and justified JavaScript exceptions.
 
 `pnpm test` runs package, renderer, platform, and shell behavior tests. It does
 not reconstruct bodies or verify the full archive of scientific source files.

@@ -31,10 +31,11 @@ jobs:
           pnpm build:packages
           pnpm build:renderer
           pnpm build:preparation
-      - name: Typecheck renderer and preparation
+      - name: Typecheck shared code and enforce TypeScript ownership
         run: |
-          pnpm typecheck:renderer
-          pnpm typecheck:preparation
+          pnpm typecheck
+          pnpm check:typescript-ownership
+          pnpm test:typescript-ownership
       - name: Test prepared source, materials and world context
         run: |
           pnpm test:preparation --universe

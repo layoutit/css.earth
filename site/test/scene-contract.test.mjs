@@ -39,7 +39,11 @@ test("control content permits empty capabilities but rejects malformed or confli
   for (const content of [{}, { lenses: null }, { lenses: { controls: [{ id: "a" }, { id: "a" }] }, settings: null },
     { lenses: { default: "missing", controls: [{ id: "a" }] }, settings: null },
     { lenses: null, settings: { controls: [{ name: "motion", kind: "toggle", label: "Motion", checked: false }] } },
-    { lenses: null, settings: { controls: [{ name: "rings", kind: "invented", label: "Rings" }] } }]) {
+    { lenses: null, settings: { controls: [{ name: "rings", kind: "invented", label: "Rings" }] } },
+    { lenses: { controls: [null] }, settings: null },
+    { lenses: null, settings: { controls: [null] } },
+    { lenses: 1, settings: null },
+    { lenses: null, settings: { controls: [{ name: "rings", kind: "toggle", label: "Rings", checked: "false" }] } }]) {
     assert.throws(() => requireObjectControls(content, "future"));
   }
 });

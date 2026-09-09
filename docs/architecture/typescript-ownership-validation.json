@@ -1,0 +1,212 @@
+{
+  "scope": "TypeScript ownership foundation; no complete object-conformance or merge-readiness claim.",
+  "baseCommit": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "10.33.0"
+  },
+  "sourceSha256": {
+    "site/runtime-policy.mjs": "e7e18e71c948efa89c5d098b8a42c89a0f80634a9300cfa0d32556bf05234285",
+    "site/runtime-policy.mts": "986f8121209ee6cc478b4ba6f6609c44bddc51366c7bd2518389ad5ce8517a37",
+    "site/scene-contract.mjs": "1fbfae20e5d8700030c32ce4a712945c32bcdd8e868bc4deadb3d8ba0b21de53",
+    "site/scene-contract.mts": "46b8678d9eb35402a7e4054f47348f1244e4b96165046bf2e69a6764a3a61323",
+    "site/shell-contract-types.mts": "b8a32b94f6eaa9073c0ae52ca9f40a2b7a90edb0b8fb2bab8f9b5c359d930b0c",
+    "src/platform/camera-math.mjs": "5acbac3e8bfa1c0e775829bfc17c2953dfb9f21fc62bc6ff4941659600f33dfe",
+    "src/platform/sphere-drag.mjs": "dc292733053e3c1170864835dd2d57c759c7ccc4eb37f3ce3a9c46528c1a0a60",
+    "src/platform/scene-lifetime.mjs": "6496023b8f4421db65104c0232de527778e6e4fd26d40f346aaf5924462268e5",
+    "src/renderers/css/runtime/scene-native-waits.ts": "537750149c2c0c00ca7b949f09d2957d92776e6c0ecfda147ed592e957eb4670",
+    "src/renderers/css/tsup.config.ts": "29e325d4ce799102a863bda0bb20b487a79322b882912c61c6c0f98f52a6a9a4",
+    "packages/engine/src/navigation/camera-math.ts": "847b9eb112944c6ae9039158bd01f32257e622e32913077f0744654ac95b6c0a",
+    "packages/engine/src/navigation/sphere-drag.ts": "14fd7bcc9ea8185799118856c630204506ce013b5559a395cc9d0aad4821cb8e",
+    "packages/engine/src/runtime/scene-lifetime.ts": "e3938d195d7ca2db1af220b69eb6c8d58d409118121e8e3e676ef4d942a434a6",
+    "site/test/typescript-owners-browser.mts": "5df978323923c5a06d0b9a16b5168cde33ea0917815e9edecb34f8a32d6bc02a",
+    "tools/runtime-source-graph.mjs": "9ae52cd09c4f251955c47ad8ffabe58d5f128aa84f7b39673ece95916e34acb2"
+  },
+  "checks": [
+    {
+      "command": "pnpm typecheck",
+      "status": "PASS",
+      "coverage": "Packages, renderer, preparation, migrated shell, ownership tool and new browser harness."
+    },
+    {
+      "command": "pnpm build:packages; pnpm build:renderer; pnpm build:preparation",
+      "status": "PASS",
+      "note": "Run sequentially; no source acquisition or full scientific preparation."
+    },
+    {
+      "command": "pnpm exec astro build",
+      "status": "PASS",
+      "pages": 408,
+      "note": "Static compilation; full prepared-asset assembly/deployment is not claimed."
+    },
+    {
+      "command": "node --test src/platform/scene-lifetime.test.mjs src/platform/sphere-drag.test.mjs src/platform/google-earth-drag-inertia.test.mjs site/test/router-runtime.test.mjs site/test/navigation-router.test.mjs site/test/shell-lifetime.test.mjs site/test/runtime-policy.test.mjs site/test/scene-contract.test.mjs site/test/prepared-lens-facts.test.mjs site/test/prepared-lens-legends.test.mjs",
+      "status": "PASS",
+      "passed": 106
+    },
+    {
+      "command": "pnpm --filter @cssearth/engine exec vitest run --maxWorkers=2",
+      "status": "PASS",
+      "passed": 48
+    },
+    {
+      "command": "node --test tools/package-boundaries.test.mjs",
+      "status": "PASS",
+      "passed": 4
+    },
+    {
+      "command": "pnpm check:typescript-ownership; pnpm test:typescript-ownership",
+      "status": "PASS",
+      "passed": 8,
+      "legacyAuthoredModules": 421,
+      "note": "Includes source-relative, root/public URL and local /@fs import-boundary fixtures."
+    },
+    {
+      "command": "node --test --test-name-pattern='derives every root' site/test/root-orchestration.test.mjs",
+      "status": "PASS",
+      "passed": 1
+    },
+    {
+      "command": "node --test --test-name-pattern='descriptor loaders|typed shell compatibility|workspace runtime exports|actual Sun-only shell' tools/check-object-runtime-ownership.test.mjs",
+      "status": "FAIL",
+      "passed": 3,
+      "failed": 1,
+      "reason": "The Sun source receipt mismatch below reproduces unchanged on the base commit."
+    },
+    {
+      "command": "pnpm test:shell",
+      "status": "FAIL",
+      "passed": 288,
+      "failed": 14,
+      "note": "Initial broad attempt preceded build:preparation. Its missing preparation-entry failures were subsequently covered by the passing 106-test focused suite and root command check. The broad suite was not rerun and is not claimed green."
+    }
+  ],
+  "remainingBroadShellFailureGroups": [
+    "Base-commit Sun world-context source pin differs between authored descriptor and prepared receipt.",
+    "Missing pinned Sun continuum source image and Mercury phase-chart asset in the isolated checkout.",
+    "Earth retained-interaction and Itokawa lens-race browser profile requirements fail in unchanged profile/check source."
+  ],
+  "browser": {
+    "scope": "Shared helper integration only; no object scene, prepared asset or full conformance claim.",
+    "browser": "152.0.7977.84",
+    "origin": "http://127.0.0.1:4326",
+    "errors": [],
+    "waits": {
+      "completedFrames": 2,
+      "requestedFrames": 2,
+      "observedFrames": 1,
+      "cancelledFrames": 1,
+      "disposed": true
+    },
+    "pointer": {
+      "publications": 6,
+      "starts": 1,
+      "captured": true
+    },
+    "retirement": {
+      "publications": 6,
+      "noFurtherPublications": true,
+      "pointerReleased": true,
+      "activeMode": "idle"
+    },
+    "modules": [
+      "/src/platform/scene-lifetime.mjs",
+      "/src/renderers/css/dist/scene-native-waits.js",
+      "/src/platform/camera-input.mjs",
+      "/site/runtime-policy.mjs",
+      "/src/platform/sphere-drag.mjs",
+      "/src/platform/camera-math.mjs",
+      "/site/runtime-policy.mts"
+    ],
+    "status": "PASS"
+  },
+  "sunBaselineProof": {
+    "baselineSHA": "1fb76e44d6bf831e7ebcf0516b83c0b10e1716da",
+    "method": "Direct baseline and current validators loaded from their own source; baseline readText resolves every input through git show.",
+    "files": [
+      {
+        "path": "tools/authored-world-frame.mjs",
+        "baselineEqualsCurrent": true,
+        "baselineSha256": "7c639649dc24576d4ad86ba43daf471b778f59d34fff4b18ca423af3e6191d81",
+        "currentSha256": "7c639649dc24576d4ad86ba43daf471b778f59d34fff4b18ca423af3e6191d81"
+      },
+      {
+        "path": "src/planets/sun/object.json",
+        "baselineEqualsCurrent": true,
+        "baselineSha256": "2335554179a3837876880b0f6e7789ed19087bfb7df938b744f25c3744cc27d7",
+        "currentSha256": "2335554179a3837876880b0f6e7789ed19087bfb7df938b744f25c3744cc27d7"
+      },
+      {
+        "path": "src/planets/sun/prepared/world-navigation.json",
+        "baselineEqualsCurrent": true,
+        "baselineSha256": "863afa682ee4b43bf8e2f74a4924aab6403515bf7a97d94b05d3a7fcd0da4b2c",
+        "currentSha256": "863afa682ee4b43bf8e2f74a4924aab6403515bf7a97d94b05d3a7fcd0da4b2c"
+      },
+      {
+        "path": "src/planets/sun/prepared/scene.json",
+        "baselineEqualsCurrent": true,
+        "baselineSha256": "108f91f5fd02b4da725dc4ae7f411550a73aa6a76ac7bdb113fdbb719cfa2991",
+        "currentSha256": "108f91f5fd02b4da725dc4ae7f411550a73aa6a76ac7bdb113fdbb719cfa2991"
+      },
+      {
+        "path": "src/planets/sun/prepared/runtime.json",
+        "baselineEqualsCurrent": true,
+        "baselineSha256": "1d949f768c12033794bd3dae5c0fc0703d9f91520bf628fe11bf2867c9adf6af",
+        "currentSha256": "1d949f768c12033794bd3dae5c0fc0703d9f91520bf628fe11bf2867c9adf6af"
+      },
+      {
+        "path": "src/planets/sun/source/navigation/universe.json",
+        "baselineEqualsCurrent": true,
+        "baselineSha256": "c315ca0b52ced35cd557d3a0b0585cabfad9b6e38254e137edb15508358f206f",
+        "currentSha256": "c315ca0b52ced35cd557d3a0b0585cabfad9b6e38254e137edb15508358f206f"
+      }
+    ],
+    "mismatchedSource": {
+      "id": "world-context",
+      "path": "src/planets/sun/source/navigation/universe.json",
+      "receiptSourceIndex": 8,
+      "actualSha256": "c315ca0b52ced35cd557d3a0b0585cabfad9b6e38254e137edb15508358f206f"
+    },
+    "probes": [
+      {
+        "version": "baseline",
+        "schema": "cssearth-world-navigation-preparation@1",
+        "id": "sun",
+        "sourcesMatch": false,
+        "frameMatch": true,
+        "differences": [
+          {
+            "path": "sources.8.sha256",
+            "receipt": "580d8a568bf45f1b768641dd4707820042ed488cac78858d139de5bc66b69b7f",
+            "descriptor": "c315ca0b52ced35cd557d3a0b0585cabfad9b6e38254e137edb15508358f206f"
+          }
+        ],
+        "result": {
+          "valid": false,
+          "errorName": "TypeError",
+          "errorMessage": "Authored physical frame receipt differs from its authored source pins or descriptor."
+        }
+      },
+      {
+        "version": "current",
+        "schema": "cssearth-world-navigation-preparation@1",
+        "id": "sun",
+        "sourcesMatch": false,
+        "frameMatch": true,
+        "differences": [
+          {
+            "path": "sources.8.sha256",
+            "receipt": "580d8a568bf45f1b768641dd4707820042ed488cac78858d139de5bc66b69b7f",
+            "descriptor": "c315ca0b52ced35cd557d3a0b0585cabfad9b6e38254e137edb15508358f206f"
+          }
+        ],
+        "result": {
+          "valid": false,
+          "errorName": "TypeError",
+          "errorMessage": "Authored physical frame receipt differs from its authored source pins or descriptor."
+        }
+      }
+    ],
+    "sameValidatorFailure": true
+  }
+}

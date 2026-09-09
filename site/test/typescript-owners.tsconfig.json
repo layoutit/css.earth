@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "typeRoots": ["../../packages/engine/node_modules/@types"]
+  },
+  "include": ["typescript-owners-browser.mts"],
+  "exclude": []
+}

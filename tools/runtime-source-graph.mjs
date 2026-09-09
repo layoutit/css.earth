@@ -4,7 +4,7 @@ import { parseAst } from 'vite';
 import { parseForESLint } from '@typescript-eslint/parser';
 
 export function parseRuntimeSource(source, file) {
-  if (!file.endsWith('.ts')) return parseAst(source);
+  if (!/\.(?:ts|mts)$/.test(file)) return parseAst(source);
   const { ast } = parseForESLint(source, { sourceType: 'module', range: true, loc: true });
   const executable = node => ['TSAsExpression', 'TSTypeAssertion', 'TSNonNullExpression', 'TSSatisfiesExpression'].includes(node?.type) ? executable(node.expression) : node;
   const visit = node => {
@@ -79,7 +79,7 @@ export async function resolveRuntimeSource(imported, importer, { root, source })
       if (error.code !== 'ENOENT') throw error;
     }
   }
-  if (!/\.(?:mjs|js|ts|astro|css|json)$/.test(target)) throw new Error(`Unclosed runtime source ${imported}`);
+  if (!/\.(?:mjs|js|ts|mts|astro|css|json)$/.test(target)) throw new Error(`Unclosed runtime source ${imported}`);
   if (relative(root, target).startsWith('src/planets/')) throw new Error('Shared runtime imports an object package');
   await source(target);
   return target;

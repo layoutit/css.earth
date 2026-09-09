@@ -347,6 +347,18 @@ test('typed renderer closure rejects forbidden scene APIs, styles, hidden import
   ]) await assert.rejects(descriptorOverlay({ [file]: `${source}\n${injected}` }), expected);
 });
 
+test('typed shell compatibility exports remain inside the checked runtime closure', async () => {
+  const report = await descriptorOverlay();
+  for (const file of ['site/runtime-policy.mts', 'site/scene-contract.mts']) {
+    assert.ok(report.sharedClosure.includes(file), file);
+    assert.match(report.sourceHashes[file], /^[a-f0-9]{64}$/, file);
+    const source = await readFile(file, 'utf8');
+    await assert.rejects(descriptorOverlay({
+      [file]: `${source}\ndocument.createElement(('canvas' as const));`,
+    }), /Forbidden runtime canvas/);
+  }
+});
+
 test('workspace runtime exports and renderer build entries remain source-bound', async () => {
   const file = 'src/renderers/css/tsup.config.ts', config = await readFile(file, 'utf8');
   const renamed = config.replace('    index:', '    other:');

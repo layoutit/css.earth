@@ -11,3 +11,9 @@
 - Do not use runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas, WebGL, or SVG scene rendering.
 - Preserve source/provenance files beside each planet and keep prepared outputs reproducible from the checked-in inputs.
 - Use source and runtime closure tests, object-package tests, router tests, and `OBJECTS`-derived browser conformance as proof. Do not duplicate those facts as declaration-only constants.
+
+## TypeScript ownership
+
+- Write new application, preparation, and tooling implementations in strict TypeScript. Validate external values at runtime; do not replace runtime validation with type assertions or unchecked declaration files.
+- Keep generated outputs and preserved vendor code in their source-owned formats. Existing JavaScript compatibility modules must only re-export their typed owners.
+- `pnpm check:typescript-ownership` enforces the remaining authored-JavaScript backlog and justified exceptions. Remove migrated or retired entries; do not add new implementation debt to make the check pass. Run `pnpm typecheck` and behavior/source checks appropriate to each migration.
