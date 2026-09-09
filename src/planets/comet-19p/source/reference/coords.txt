@@ -1,0 +1,43 @@
+                                                                              
+Coordinate Systems                                                            
+=================                                                             
+                                                                              
+Because only one side of the comet nucleus was observed, the X-Y coordinate   
+system used for these data was a local space rectangular system defined by    
+the investigators.  The two models are similar in that the elevation, Z, is   
+defined with respect to a reference plane that is in the plane of the sky at  
+the time of the CCD_NEAR_01 image.  The X and Y axes are parallel to the sides
+of this image, and the Z axis increases toward the observer.  In both models, 
+the origin of the Z axis was set at the point on the visible image limb that  
+was farthest from the spacecraft.  (In principle, this makes all Z values     
+positive, but the SBN personnel noted that there are some negative Z values,  
+located mainly near the image limb.)                                          
+                                                                              
+For the USGS model, the X-Y origin is placed above the approximate center of  
+mass of the nucleus, with the nucleus extending to both positive and negetive 
+directions.  The X and Y coordinates were oversampled, so the entries are     
+regularly spaced at 16 meter intervals.                                       
+                                                                              
+For the DLR model, the X-Y origin corresponds to the corner of the image that 
+was used to produce the model, so X and Y are always positive.  No            
+oversampling was done, so the scale in this model is about 55 meters per      
+pixel.                                                                        
+                                                                              
+Using the geometric information from the image (CCD_NEAR_01), the X, Y and Z  
+axes for the both DEMs are oriented in approximately the following            
+directions:                                                                   
+                                                                              
+                       X axis       Y axis       Z axis                       
+                     ----------   ----------   -----------                    
+Ecliptic longitude      78.2        161.4        241.0                        
+Ecliptic latitude       38.2         -8.5         50.5                        
+                                                                              
+Right Ascension         70.7        159.7        249.4                        
+Declination             60.8         -0.6         29.2                        
+                                                                              
+                                                                              
+                                                                              
+The solar phase angle relating to the image was 51.624 degrees, so the Sun    
+was 39.376 degrees out of the plane of the image, with a clock angle of       
+265.116 degrees.                                                              
+                                                                              

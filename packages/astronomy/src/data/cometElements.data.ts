@@ -79,5 +79,18 @@ export const COMET_ELEMENTS = {
       "meanAnomalyAtEpochRad": 2.3099389373351933,
       "meanMotionRadPerDay": 0.0012618173983111104
     }
+  },
+  "comet-19p": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3D19P%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 539894127.7220751,
+      "eccentricity": 0.637453325548034,
+      "inclinationRad": 0.7270674696332426,
+      "ascendingNodeRad": 0.7874463180154027,
+      "argumentOfPeriapsisRad": 0.47437659436456125,
+      "meanAnomalyAtEpochRad": 4.199034138463935,
+      "meanMotionRadPerDay": 0.002509034620289767
+    }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

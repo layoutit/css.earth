@@ -311,6 +311,8 @@ export function parseObjShape(text, { metersPerUnit, expectedVertices, expectedF
   return radialShape(vertices, indices, { metersPerUnit, expectedVertices, expectedFaces });
 }
 
+export { radialShape as createIndexedShape };
+
 function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expectedFaces }) {
   if (!(metersPerUnit > 0)) throw new TypeError('Shape units must be explicit.');
   if (vertices.length !== expectedVertices || indices.length !== expectedFaces) throw new Error('OBJ shape dimensions changed.');
@@ -363,8 +365,8 @@ function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expec
     const lon=longitude*Math.PI/180, lat=latitude*Math.PI/180;
     return intersect([0,0,0],[Math.cos(lat)*Math.cos(lon),Math.cos(lat)*Math.sin(lon),Math.sin(lat)], Infinity, requireUnique);
   }
-  function closestPoint(point, maximumDistance = Infinity) {
-    if (!Array.isArray(point) || point.length !== 3 || !point.every(Number.isFinite) || !(maximumDistance > 0)) {
+  function closestPoint(point, maximumDistance = Infinity, requireUnique = true) {
+    if (!Array.isArray(point) || point.length !== 3 || !point.every(Number.isFinite) || !(maximumDistance > 0) || typeof requireUnique !== 'boolean') {
       throw new TypeError('Surface projection requires a finite point and positive distance bound.');
     }
     let distanceSquared = maximumDistance * maximumDistance, result = null, ambiguous = false;
@@ -394,7 +396,9 @@ function radialShape(vertices, indices, { metersPerUnit, expectedVertices, expec
       }
     }
     visit(root);
-    return ambiguous ? null : result;
+    // A distance-only geometry audit may accept either equally near point.
+    // Material transfer keeps the default unique correspondence requirement.
+    return requireUnique && ambiguous ? null : result;
   }
   return { vertices: vertices.length, faces: faces.length, positions: vertices, indices, bounds:[root.min,root.max], hit, intersect,
     closestPoint,
