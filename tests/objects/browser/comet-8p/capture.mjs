@@ -31,12 +31,12 @@ async function capture(base,dpr,{fresh=false}={}){
   p.catch(()=>{});pending.push(p);
  });
  try{
-  await page.goto(base+'/'+id+'/',{waitUntil:'networkidle'});await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+  await page.goto(base+'/'+id+'/',{waitUntil:'networkidle'});await page.waitForFunction(()=>document.documentElement.dataset.ready==='true' && document.querySelector('.planet-stage')?.dataset.objectId==='comet-8p' && document.querySelectorAll('.comet-8p-body > u').length===1000);
   await page.waitForTimeout(350);await Promise.all(pending);
   const cold=loaded.slice(),coldRequests=requests.length;
   assert.ok(!await page.evaluate(()=>!!window['__comet-8p']),'Use the production build.');
   const initial=await page.locator('.polycss-scene').evaluate(root=>{
-   const leaves=[...root.querySelectorAll('.comet-8p-body > u')];window.__tuttleNodes={root,leaves,geometry:leaves.map(n=>['transform','width','height','background-position','background-size'].map(k=>n.style.getPropertyValue(k)))};
+   const leaves=[...document.querySelectorAll('.comet-8p-body > u')];window.__tuttleNodes={root,leaves,geometry:leaves.map(n=>['transform','width','height','background-position','background-size'].map(k=>n.style.getPropertyValue(k)))};
    return {leaves:leaves.length,atlas:[...new Set(leaves.map(n=>getComputedStyle(n).backgroundImage))],dimensions:[...new Set(leaves.map(n=>{const s=getComputedStyle(n);return s.width+' × '+s.height}))]};
   });assert.equal(initial.leaves,1000);
   const inspectAtlases=async()=>{
@@ -58,7 +58,7 @@ async function capture(base,dpr,{fresh=false}={}){
   await page.mouse.move(760,450);await page.mouse.wheel(160);await page.waitForTimeout(800);
   const interactionRequests=requests.slice(requestOffset);
   const state=await page.evaluate(()=>{
-   const p=window.__tuttleNodes,root=document.querySelector('.polycss-scene'),leaves=[...root.querySelectorAll('.comet-8p-body > u')];
+   const p=window.__tuttleNodes,root=document.querySelector('.polycss-scene'),leaves=[...document.querySelectorAll('.comet-8p-body > u')];
    return {retained:root===p.root&&leaves.length===p.leaves.length&&leaves.every((n,i)=>n===p.leaves[i]),geometryRetained:leaves.every((n,i)=>['transform','width','height','background-position','background-size'].every((k,j)=>n.style.getPropertyValue(k)===p.geometry[i][j])),scenes:document.querySelectorAll('.polycss-scene').length,forbiddenElements:document.querySelectorAll('.planet-stage canvas,.planet-stage svg').length,forbiddenStyles:leaves.some(n=>{const s=getComputedStyle(n);return s.clipPath!=='none'||s.maskImage!=='none'||s.filter!=='none'||s.mixBlendMode!=='normal'||/gradient\(/.test(s.backgroundImage)}),lensFacts:document.querySelector('.planet-lens-legend-panel')?.innerText??null};
   });
   assert.ok(state.retained&&state.geometryRetained);assert.equal(state.scenes,1);assert.equal(state.forbiddenElements,0);assert.equal(state.forbiddenStyles,false);assert.deepEqual(errors,[]);assert.deepEqual(interactionRequests,[]);
