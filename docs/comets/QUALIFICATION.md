@@ -1,5 +1,7 @@
 # Qualification record
 
+[Encounter photography](ENCOUNTER-PHOTOGRAPHY.md) records the latest Wild 2, Tempel 1 and Hartley 2 material qualification. Earlier geometry records below retain their original scope.
+
 [Halley's qualification](HALLEY.md) adds the fifth comet and brings the registry
 to 76 objects. It records current aggregate checks, a nine-case Halley interaction
 audit, production navigation, native surface targeting and matched drag traces.

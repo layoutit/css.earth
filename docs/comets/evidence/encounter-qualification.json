@@ -1,0 +1,1652 @@
+{
+  "base": "e97ee9532b17beaf0c7ae38281c5bef12b64fa5b",
+  "bodies": [
+    {
+      "id": "comet-81p",
+      "geometry": {
+        "terrain.json": {
+          "unchanged": true,
+          "sha256": "0ff17c3a7c039278a84fcf55684508f9faf82c1ad17f4ab92a78f8cd4c233527",
+          "bytes": 462217
+        },
+        "scene.json": {
+          "unchanged": true,
+          "sha256": "1a1d000fc4754dc14de9ac3b2c9434e6a3d6f016df9108c05719e7ce31c06dac",
+          "bytes": 6564422
+        }
+      },
+      "views": [
+        {
+          "id": "navcam",
+          "areaCoverage": {
+            "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+            "samplesPerTriangle": 32,
+            "totalSquareMeters": 54177226.187834464,
+            "acceptedSquareMeters": 21033050.714280892,
+            "sourceSquareMeters": {
+              "n2073we02-rr": 16898905.053818617,
+              "n2077we02-rr": 813852.9371483248,
+              "n2075we02-rr": 3320292.723313601
+            },
+            "acceptedFraction": 0.3882267918508511
+          },
+          "levelMatching": {
+            "gains": [
+              1,
+              0.3470970985935014,
+              1.8352575168566625
+            ],
+            "pairs": [
+              {
+                "a": 0,
+                "b": 1,
+                "samples": 10001,
+                "medianLogRatio": -1.0546155900922325,
+                "logMad": 0.10019903935125796,
+                "accepted": true,
+                "residualLogRatio": 0.003535125050182053
+              },
+              {
+                "a": 0,
+                "b": 2,
+                "samples": 10840,
+                "medianLogRatio": 0.6058724739136251,
+                "logMad": 0.061049673058356846,
+                "accepted": true,
+                "residualLogRatio": -0.0013123339083794816
+              },
+              {
+                "a": 1,
+                "b": 2,
+                "samples": 8590,
+                "medianLogRatio": 1.6710537723427903,
+                "logMad": 0.12743617071482838,
+                "accepted": true,
+                "residualLogRatio": 0.005718249378371176
+              }
+            ],
+            "referenceIndex": 0,
+            "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo."
+          },
+          "transfer": {
+            "interiorTexels": 1714889,
+            "counts": {
+              "no-qualified-observation": 920550,
+              "accepted": 794339
+            },
+            "maximumSourceDistanceMeters": 54.995907389031544,
+            "maximumPixelSeparationMeters": 149.99401287879823,
+            "maximumPhotometricGain": 1,
+            "method": "Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.",
+            "sources": {
+              "n2073we02-rr": 628529,
+              "n2075we02-rr": 132592,
+              "n2077we02-rr": 33218
+            }
+          },
+          "sources": [
+            {
+              "id": "n2073we02-rr-path",
+              "sha256": "f6944a7e778a556afd929e365585bbd0919ccdd573e1422b4b2c0379b33c035f"
+            },
+            {
+              "id": "n2073we02-rr-labelPath",
+              "sha256": "005c37d785b6622598e76ecb528feb07ac82d16f7fb7dbf5bfa35ad7f15c6180"
+            },
+            {
+              "id": "n2073we02-rr-controlPath",
+              "sha256": "0267d6fe1f8a4c779b0821783337227af8b694bbf060848a8f4c0ab805c02239"
+            },
+            {
+              "id": "n2075we02-rr-path",
+              "sha256": "49729e94642129eccf402c03241a21717c31150725cc48826ecf31afa03d6fb0"
+            },
+            {
+              "id": "n2075we02-rr-labelPath",
+              "sha256": "ff61f12cc61b6113de1ebca60526de757fbb1aeb41663267d8833d5684f93e00"
+            },
+            {
+              "id": "n2075we02-rr-controlPath",
+              "sha256": "ee8baf4db4bdddc9606823ead83f6585709b7f04be79b2c2be80fc8c28e39e6a"
+            },
+            {
+              "id": "n2077we02-rr-path",
+              "sha256": "9973470135bcc89507adceaba79f4bd2d499893277f62eabebee353d96b2b575"
+            },
+            {
+              "id": "n2077we02-rr-labelPath",
+              "sha256": "a99e07f4e073b00a448122f111b99660d55f6d172aa516befde9b40dfcfb59d0"
+            },
+            {
+              "id": "n2077we02-rr-controlPath",
+              "sha256": "33930e6c289d2e6325455bd36947806fb80c6bf482ce03cb77449bbcfd131771"
+            }
+          ],
+          "frames": [
+            {
+              "id": "n2075we02-rr",
+              "startTime": "2004-01-02T19:21:48.437",
+              "registration": {
+                "method": "source-topography-feature-translation",
+                "fit": {
+                  "count": 19,
+                  "rmsPixels": 2.6252555607032138,
+                  "maximumPixels": 5.434067157533892,
+                  "rmsMeters": 40.24941615160964,
+                  "maximumMeters": 83.31304338263709
+                },
+                "holdout": {
+                  "count": 18,
+                  "rmsPixels": 3.231762762168136,
+                  "maximumPixels": 6.4565455631779765,
+                  "rmsMeters": 49.54815305026448,
+                  "maximumMeters": 98.98929200042092
+                },
+                "nominalPixelScaleMeters": 15.331618282841854,
+                "maximumRmsMeters": 85,
+                "maximumResidualMeters": 170,
+                "limitations": "Independent image matches check local topographic feature placement; no albedo or new astrometric pole is inferred. The source mesh still limits positional accuracy."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 15.331618282841854,
+                "bodyToJ2000": [
+                  [
+                    -0.806996430203223,
+                    -0.5075434846866711,
+                    -0.3019211367085215
+                  ],
+                  [
+                    -0.3238079707660089,
+                    -0.04725904802139589,
+                    0.9449417868040926
+                  ],
+                  [
+                    -0.49386755279898087,
+                    0.8603291193097108,
+                    -0.1262087428038308
+                  ]
+                ],
+                "offsetPixels": [
+                  -62.10526315789474,
+                  53.21052631578947
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  -110.85947023115429,
+                  57.1946069172428,
+                  224.67604411607817
+                ]
+              },
+              "quality": {
+                "instrument": "stardust-navcam",
+                "qualityPlane": "QUALITY_MAP",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 0
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  387,
+                  513,
+                  696,
+                  809
+                ],
+                "acceptedPixels": 59525,
+                "rejectedPixels": {
+                  "off-nucleus": 25729,
+                  "acquisition-angle": 1014,
+                  "unconstrained-source-shape": 5802
+                }
+              }
+            },
+            {
+              "id": "n2073we02-rr",
+              "startTime": "2004-01-02T19:21:28.437",
+              "registration": {
+                "method": "source-topography-feature-translation",
+                "fit": {
+                  "count": 7,
+                  "rmsPixels": 4.907304010661776,
+                  "maximumPixels": 9.57249461014318,
+                  "rmsMeters": 69.52493369520506,
+                  "maximumMeters": 135.61969089788724
+                },
+                "holdout": {
+                  "count": 7,
+                  "rmsPixels": 4.7164497197770565,
+                  "maximumPixels": 7.61979163033865,
+                  "rmsMeters": 66.82097814438194,
+                  "maximumMeters": 107.9544912480634
+                },
+                "nominalPixelScaleMeters": 14.16764348492631,
+                "maximumRmsMeters": 85,
+                "maximumResidualMeters": 170,
+                "limitations": "Independent image matches check local topographic feature placement; no albedo or new astrometric pole is inferred. The source mesh still limits positional accuracy."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 14.16764348492631,
+                "bodyToJ2000": [
+                  [
+                    -0.806996430203223,
+                    -0.5075434846866711,
+                    -0.3019211367085215
+                  ],
+                  [
+                    -0.3238079707660089,
+                    -0.04725904802139589,
+                    0.9449417868040926
+                  ],
+                  [
+                    -0.49386755279898087,
+                    0.8603291193097108,
+                    -0.1262087428038308
+                  ]
+                ],
+                "offsetPixels": [
+                  4.857142857142857,
+                  29.428571428571427
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  -182.9262102547752,
+                  -8.906406355365533,
+                  151.16923472604756
+                ]
+              },
+              "quality": {
+                "instrument": "stardust-navcam",
+                "qualityPlane": "QUALITY_MAP",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 0
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  290,
+                  458,
+                  590,
+                  758
+                ],
+                "acceptedPixels": 60972,
+                "rejectedPixels": {
+                  "off-nucleus": 25710,
+                  "unconstrained-source-shape": 2333,
+                  "acquisition-angle": 1586
+                }
+              }
+            },
+            {
+              "id": "n2077we02-rr",
+              "startTime": "2004-01-02T19:22:08.449",
+              "registration": {
+                "method": "source-topography-feature-translation",
+                "fit": {
+                  "count": 13,
+                  "rmsPixels": 1.9460170216418542,
+                  "maximumPixels": 3.6770518162208345,
+                  "rmsMeters": 37.73881590447626,
+                  "maximumMeters": 71.30851375929896
+                },
+                "holdout": {
+                  "count": 11,
+                  "rmsPixels": 2.170143139975688,
+                  "maximumPixels": 3.371478000125257,
+                  "rmsMeters": 42.085260064583956,
+                  "maximumMeters": 65.3825666259436
+                },
+                "nominalPixelScaleMeters": 19.392849849091263,
+                "maximumRmsMeters": 85,
+                "maximumResidualMeters": 170,
+                "limitations": "Independent image matches check local topographic feature placement; no albedo or new astrometric pole is inferred. The source mesh still limits positional accuracy."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 19.39284984909127,
+                "bodyToJ2000": [
+                  [
+                    -0.806996430203223,
+                    -0.5075434846866711,
+                    -0.3019211367085215
+                  ],
+                  [
+                    -0.3238079707660089,
+                    -0.04725904802139589,
+                    0.9449417868040926
+                  ],
+                  [
+                    -0.49386755279898087,
+                    0.8603291193097108,
+                    -0.1262087428038308
+                  ]
+                ],
+                "offsetPixels": [
+                  -64.53846153846153,
+                  68
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  -38.761417319792926,
+                  123.43240745025079,
+                  298.2004247454992
+                ]
+              },
+              "quality": {
+                "instrument": "stardust-navcam",
+                "qualityPlane": "QUALITY_MAP",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 0
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  486,
+                  485,
+                  707,
+                  745
+                ],
+                "acceptedPixels": 35388,
+                "rejectedPixels": {
+                  "off-nucleus": 15185,
+                  "acquisition-angle": 732,
+                  "unconstrained-source-shape": 6637
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "comet-9p",
+      "geometry": {
+        "terrain.json": {
+          "unchanged": true,
+          "sha256": "3a9766a2f649d0abc84042446eaa668d94684f98ba3788be6eec9d579ffa4bb4",
+          "bytes": 464764
+        },
+        "scene.json": {
+          "unchanged": true,
+          "sha256": "10741edc542f151774149176d17afa4c4b25f3fe3f8b04ecdc934d686acd593b",
+          "bytes": 6566460
+        }
+      },
+      "views": [
+        {
+          "id": "deep-impact",
+          "areaCoverage": {
+            "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+            "samplesPerTriangle": 32,
+            "totalSquareMeters": 108134678.91428222,
+            "acceptedSquareMeters": 33440439.158035543,
+            "sourceSquareMeters": {
+              "iv05070405-9000654-001-r": 10971600.27877316,
+              "iv05070405-9000632-001-r": 6104705.0367336925,
+              "iv05070405-9000639-001-r": 16364133.842528783
+            },
+            "acceptedFraction": 0.30924805523807586
+          },
+          "levelMatching": {
+            "gains": [
+              1,
+              0.9962907147991074,
+              0.9854785264766348
+            ],
+            "pairs": [
+              {
+                "a": 0,
+                "b": 1,
+                "samples": 7431,
+                "medianLogRatio": -0.003501823739264102,
+                "logMad": 0.03286672009659656,
+                "accepted": true,
+                "residualLogRatio": 0.0002143579192133093
+              },
+              {
+                "a": 0,
+                "b": 2,
+                "samples": 2617,
+                "medianLogRatio": -0.014842300016659607,
+                "logMad": 0.035978704106825604,
+                "accepted": true,
+                "residualLogRatio": -0.00021435791921330452
+              },
+              {
+                "a": 1,
+                "b": 2,
+                "samples": 2653,
+                "medianLogRatio": -0.010697402519755582,
+                "logMad": 0.03394697615287845,
+                "accepted": true,
+                "residualLogRatio": 0.000214357919213308
+              }
+            ],
+            "referenceIndex": 0,
+            "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo."
+          },
+          "transfer": {
+            "interiorTexels": 1743496,
+            "counts": {
+              "no-qualified-observation": 1237456,
+              "accepted": 506040
+            },
+            "maximumSourceDistanceMeters": 38.66902230876884,
+            "maximumPixelSeparationMeters": 171.02340855171636,
+            "maximumPhotometricGain": 1,
+            "method": "Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.",
+            "sources": {
+              "iv05070405-9000654-001-r": 154194,
+              "iv05070405-9000632-001-r": 76692,
+              "iv05070405-9000639-001-r": 275154
+            }
+          },
+          "sources": [
+            {
+              "id": "iv05070405-9000632-001-r-path",
+              "sha256": "53884c4e586680b1d7d286c253bb1f220c03208edb88a8481963781947659c81"
+            },
+            {
+              "id": "iv05070405-9000632-001-r-labelPath",
+              "sha256": "fb1f2818491dc9044faedc2be1088d6400b13ff8e8549a9c905a610ceb5f5a90"
+            },
+            {
+              "id": "iv05070405-9000632-001-r-controlPath",
+              "sha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51"
+            },
+            {
+              "id": "iv05070405-9000639-001-r-path",
+              "sha256": "acacb9588329abd83d742ba0f558fafd84c0aad554c7c0ead1ead2f913345599"
+            },
+            {
+              "id": "iv05070405-9000639-001-r-labelPath",
+              "sha256": "00474e4d21fded4b78524f21f7b4e25b34c9496cf1d413e2dbf27de1d8538cc5"
+            },
+            {
+              "id": "iv05070405-9000639-001-r-controlPath",
+              "sha256": "f43b5c3747b1b2fbc55c696067dc5fdea036a0ae6286c64e32a495967fd41628"
+            },
+            {
+              "id": "iv05070405-9000654-001-r-path",
+              "sha256": "fc64a20ea7c923e0c208fb3597632182ceaa44a6d2a0f4656968a4e6e1b48afb"
+            },
+            {
+              "id": "iv05070405-9000654-001-r-labelPath",
+              "sha256": "981707f100e66c0cb36c555ad2a9d269e18e19ddbf9a654fa0d2873c08dc98e1"
+            },
+            {
+              "id": "iv05070405-9000654-001-r-controlPath",
+              "sha256": "3f7535c22735e89e43f77f77b32ee423ea0fb8a18bfeba6b2a43c137bdb4234d"
+            }
+          ],
+          "frames": [
+            {
+              "id": "iv05070405-9000632-001-r",
+              "startTime": "2005-07-04T05:38:59.424",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 14,
+                  "rmsPixels": 1.1235045330612585,
+                  "maximumPixels": 2.4608225612510606,
+                  "rmsMeters": 38.740683309018316,
+                  "maximumMeters": 84.85408355705907
+                },
+                "holdout": {
+                  "count": 14,
+                  "rmsPixels": 1.690052715337336,
+                  "maximumPixels": 3.539177438748706,
+                  "rmsMeters": 58.27639773026202,
+                  "maximumMeters": 122.03791644293287
+                },
+                "nominalPixelScaleMeters": 34.482,
+                "maximumRmsMeters": 100,
+                "maximumResidualMeters": 200,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 34.482,
+                "bodyToJ2000": [
+                  [
+                    -0.07977201909091047,
+                    -0.9905660059968489,
+                    -0.11142447098196179
+                  ],
+                  [
+                    0.9090527984850294,
+                    -0.02643137955281935,
+                    -0.4158417869111657
+                  ],
+                  [
+                    0.40897363550318977,
+                    -0.13446326613014215,
+                    0.9025852843498605
+                  ]
+                ],
+                "offsetPixels": [
+                  -6.629120550705858,
+                  -0.2097542548171938
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  210.8655901212121,
+                  -2714.4066780914327,
+                  -2115.991128651882
+                ]
+              },
+              "quality": {
+                "instrument": "deep-impact-its",
+                "qualityPlane": "FLAGS",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 8
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  164,
+                  219,
+                  339,
+                  431
+                ],
+                "acceptedPixels": 18630,
+                "rejectedPixels": {
+                  "off-nucleus": 11996,
+                  "detector-quality": 135,
+                  "acquisition-angle": 370,
+                  "unconstrained-source-shape": 6357
+                }
+              }
+            },
+            {
+              "id": "iv05070405-9000639-001-r",
+              "startTime": "2005-07-04T05:39:56.424",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 12,
+                  "rmsPixels": 0.8358538701017499,
+                  "maximumPixels": 1.2539022815764298,
+                  "rmsMeters": 23.915450931351266,
+                  "maximumMeters": 35.87665208046481
+                },
+                "holdout": {
+                  "count": 10,
+                  "rmsPixels": 1.1177286131623598,
+                  "maximumPixels": 2.083640087957276,
+                  "rmsMeters": 31.980451079801437,
+                  "maximumMeters": 59.61711019663358
+                },
+                "nominalPixelScaleMeters": 28.612,
+                "maximumRmsMeters": 100,
+                "maximumResidualMeters": 200,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 28.612,
+                "bodyToJ2000": [
+                  [
+                    -0.07977201909091047,
+                    -0.9905660059968489,
+                    -0.11142447098196179
+                  ],
+                  [
+                    0.9090527984850294,
+                    -0.02643137955281935,
+                    -0.4158417869111657
+                  ],
+                  [
+                    0.40897363550318977,
+                    -0.13446326613014215,
+                    0.9025852843498605
+                  ]
+                ],
+                "offsetPixels": [
+                  -4.892661143535986,
+                  -2.2460977184198256
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  175.35749846372806,
+                  -2252.137739971903,
+                  -1755.938654697478
+                ]
+              },
+              "quality": {
+                "instrument": "deep-impact-its",
+                "qualityPlane": "FLAGS",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 8
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  18,
+                  83,
+                  229,
+                  255
+                ],
+                "acceptedPixels": 21674,
+                "rejectedPixels": {
+                  "off-nucleus": 8285,
+                  "detector-quality": 135,
+                  "acquisition-angle": 380,
+                  "unconstrained-source-shape": 4506,
+                  "detector-overclock": 1696
+                }
+              }
+            },
+            {
+              "id": "iv05070405-9000654-001-r",
+              "startTime": "2005-07-04T05:42:23.426",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 9,
+                  "rmsPixels": 1.6891753892101697,
+                  "maximumPixels": 4.124415723887664,
+                  "rmsMeters": 22.75826001882862,
+                  "maximumMeters": 55.568253047938505
+                },
+                "holdout": {
+                  "count": 9,
+                  "rmsPixels": 1.761993623358088,
+                  "maximumPixels": 4.3755842761142825,
+                  "rmsMeters": 23.73934008750352,
+                  "maximumMeters": 58.952246952087734
+                },
+                "nominalPixelScaleMeters": 13.473,
+                "maximumRmsMeters": 100,
+                "maximumResidualMeters": 200,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 13.473,
+                "bodyToJ2000": [
+                  [
+                    -0.07977201909091047,
+                    -0.9905660059968489,
+                    -0.11142447098196179
+                  ],
+                  [
+                    0.9090527984850294,
+                    -0.02643137955281935,
+                    -0.4158417869111657
+                  ],
+                  [
+                    0.40897363550318977,
+                    -0.13446326613014215,
+                    0.9025852843498605
+                  ]
+                ],
+                "offsetPixels": [
+                  -0.7354653541970935,
+                  -6.216369199603936
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  83.78208229517699,
+                  -1059.971864033039,
+                  -827.3799214089067
+                ]
+              },
+              "quality": {
+                "instrument": "deep-impact-its",
+                "qualityPlane": "FLAGS",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 8
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  0,
+                  56,
+                  255,
+                  255
+                ],
+                "acceptedPixels": 36228,
+                "rejectedPixels": {
+                  "detector-overclock": 5120,
+                  "off-nucleus": 5496,
+                  "detector-quality": 178,
+                  "acquisition-angle": 532,
+                  "unconstrained-source-shape": 3646
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "next",
+          "areaCoverage": {
+            "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+            "samplesPerTriangle": 32,
+            "totalSquareMeters": 108134678.91428222,
+            "acceptedSquareMeters": 53776695.02241626,
+            "sourceSquareMeters": {
+              "n30039te02-rr": 28177511.830132436,
+              "n30036te02-rr": 21873869.233983424,
+              "n30042te02-rr": 3725313.958300883
+            },
+            "acceptedFraction": 0.49731219958626555
+          },
+          "levelMatching": {
+            "gains": [
+              1,
+              0.5933999910022751,
+              2.108433709386516
+            ],
+            "pairs": [
+              {
+                "a": 0,
+                "b": 1,
+                "samples": 4953,
+                "medianLogRatio": -0.5344688778082017,
+                "logMad": 0.12115615246526623,
+                "accepted": true,
+                "residualLogRatio": -0.01258229151978496
+              },
+              {
+                "a": 0,
+                "b": 2,
+                "samples": 8448,
+                "medianLogRatio": 0.7542860680382475,
+                "logMad": 0.09864321470101933,
+                "accepted": true,
+                "residualLogRatio": 0.008340714030869667
+              },
+              {
+                "a": 1,
+                "b": 2,
+                "samples": 3723,
+                "medianLogRatio": 1.2520098395139432,
+                "logMad": 0.13586189716149444,
+                "accepted": true,
+                "residualLogRatio": -0.015822100781851423
+              }
+            ],
+            "referenceIndex": 0,
+            "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo."
+          },
+          "transfer": {
+            "interiorTexels": 1743496,
+            "counts": {
+              "accepted": 945807,
+              "no-qualified-observation": 797689
+            },
+            "maximumSourceDistanceMeters": 38.67399268733637,
+            "maximumPixelSeparationMeters": 107.6561988717319,
+            "maximumPhotometricGain": 1,
+            "method": "Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.",
+            "sources": {
+              "n30039te02-rr": 528991,
+              "n30042te02-rr": 61538,
+              "n30036te02-rr": 355278
+            }
+          },
+          "sources": [
+            {
+              "id": "n30036te02-rr-path",
+              "sha256": "3bad06293d092e0be85d473086dc7babdb5a00040fc449649d9603b2188fbe24"
+            },
+            {
+              "id": "n30036te02-rr-labelPath",
+              "sha256": "fa2b468b95fe75d16c432b42343168938f61f4b5785dbf9594579a7940373e92"
+            },
+            {
+              "id": "n30036te02-rr-controlPath",
+              "sha256": "0cf2cdb79d4e5a10173125aa102e628820ec61f31b15793490133dcea8c886e4"
+            },
+            {
+              "id": "n30039te02-rr-path",
+              "sha256": "7991991b7dbbb8c84b1f5777feb22d1687eb55453c719af64d533d466c1ce68a"
+            },
+            {
+              "id": "n30039te02-rr-labelPath",
+              "sha256": "99fb4fa6678e66610566b1137fbd62e120d5c6f58f6601066367191e1ba1a92c"
+            },
+            {
+              "id": "n30039te02-rr-controlPath",
+              "sha256": "90c0459b6a86faab62a1ca22e4bd3c079e3bae88e786d82260bb32925f577691"
+            },
+            {
+              "id": "n30042te02-rr-path",
+              "sha256": "d2c82af5395924f21660bf3466f22b63173c3adf1ac23b0b533b54bbf2eb1a95"
+            },
+            {
+              "id": "n30042te02-rr-labelPath",
+              "sha256": "bef821e9f2d607ed4ccf45722f0a5c854f73c9247e644bd6f2285f41ab7d7822"
+            },
+            {
+              "id": "n30042te02-rr-controlPath",
+              "sha256": "9e799a22bcfe3363817a606f77a5a9dbb60eaad94d1836221e65337d2e84447e"
+            }
+          ],
+          "frames": [
+            {
+              "id": "n30039te02-rr",
+              "startTime": "2011-02-15T04:39:20.906",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 8,
+                  "rmsPixels": 1.4912831696192579,
+                  "maximumPixels": 2.909938263654529,
+                  "rmsMeters": 18.1693223494,
+                  "maximumMeters": 35.45376720283862
+                },
+                "holdout": {
+                  "count": 11,
+                  "rmsPixels": 1.514419050432325,
+                  "maximumPixels": 2.78466633970215,
+                  "rmsMeters": 18.45120260185215,
+                  "maximumMeters": 33.927493713008104
+                },
+                "nominalPixelScaleMeters": 12.183683635374791,
+                "maximumRmsMeters": 100,
+                "maximumResidualMeters": 200,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 12.183683635374791,
+                "bodyToJ2000": [
+                  [
+                    0.5833633161611854,
+                    -0.8045320556844298,
+                    -0.11142447098196179
+                  ],
+                  [
+                    0.7079177748661183,
+                    0.5709010704904416,
+                    -0.4158417869111657
+                  ],
+                  [
+                    0.39817039742555993,
+                    0.1637074802477059,
+                    0.9025852843498605
+                  ]
+                ],
+                "offsetPixels": [
+                  15.193035955434544,
+                  37.697278265022035
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  68.14601854980724,
+                  178.70977434072677,
+                  71.58342483351737
+                ]
+              },
+              "quality": {
+                "instrument": "stardust-navcam",
+                "qualityPlane": "QUALITY_MAP",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 0
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  123,
+                  392,
+                  586,
+                  903
+                ],
+                "acceptedPixels": 143243,
+                "rejectedPixels": {
+                  "off-nucleus": 62428,
+                  "acquisition-angle": 4401,
+                  "unconstrained-source-shape": 27496
+                }
+              }
+            },
+            {
+              "id": "n30036te02-rr",
+              "startTime": "2011-02-15T04:39:02.906",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 15,
+                  "rmsPixels": 2.037332019585171,
+                  "maximumPixels": 3.755338709638851,
+                  "rmsMeters": 25.465908005563154,
+                  "maximumMeters": 46.9403657283438
+                },
+                "holdout": {
+                  "count": 13,
+                  "rmsPixels": 2.2178582117581027,
+                  "maximumPixels": 5.346151183147414,
+                  "rmsMeters": 27.722419638559806,
+                  "maximumMeters": 66.82494208361071
+                },
+                "nominalPixelScaleMeters": 12.499635680760747,
+                "maximumRmsMeters": 100,
+                "maximumResidualMeters": 200,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 12.499635680760747,
+                "bodyToJ2000": [
+                  [
+                    0.5833633161611854,
+                    -0.8045320556844298,
+                    -0.11142447098196179
+                  ],
+                  [
+                    0.7079177748661183,
+                    0.5709010704904416,
+                    -0.4158417869111657
+                  ],
+                  [
+                    0.39817039742555993,
+                    0.1637074802477059,
+                    0.9025852843498605
+                  ]
+                ],
+                "offsetPixels": [
+                  -82.09697707734055,
+                  11.059937834228617
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  163.32542432659585,
+                  102.22879734177339,
+                  -82.28249365808028
+                ]
+              },
+              "quality": {
+                "instrument": "stardust-navcam",
+                "qualityPlane": "QUALITY_MAP",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 0
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  106,
+                  293,
+                  570,
+                  751
+                ],
+                "acceptedPixels": 136280,
+                "rejectedPixels": {
+                  "off-nucleus": 55867,
+                  "unconstrained-source-shape": 12584,
+                  "acquisition-angle": 8704
+                }
+              }
+            },
+            {
+              "id": "n30042te02-rr",
+              "startTime": "2011-02-15T04:39:38.906",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 12,
+                  "rmsPixels": 1.0657666383829942,
+                  "maximumPixels": 1.6599864502712913,
+                  "rmsMeters": 21.72299317024989,
+                  "maximumMeters": 33.83468108615362
+                },
+                "holdout": {
+                  "count": 10,
+                  "rmsPixels": 0.8928511171691217,
+                  "maximumPixels": 1.4432625660481335,
+                  "rmsMeters": 18.198541802492485,
+                  "maximumMeters": 29.417305567669942
+                },
+                "nominalPixelScaleMeters": 20.382504375637538,
+                "maximumRmsMeters": 100,
+                "maximumResidualMeters": 200,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 20.382504375637538,
+                "bodyToJ2000": [
+                  [
+                    0.5833633161611854,
+                    -0.8045320556844298,
+                    -0.11142447098196179
+                  ],
+                  [
+                    0.7079177748661183,
+                    0.5709010704904416,
+                    -0.4158417869111657
+                  ],
+                  [
+                    0.39817039742555993,
+                    0.1637074802477059,
+                    0.9025852843498605
+                  ]
+                ],
+                "offsetPixels": [
+                  1.9432625660483502,
+                  43.16167209816126
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  -27.06436196472542,
+                  255.15003198065585,
+                  225.58118603224116
+                ]
+              },
+              "quality": {
+                "instrument": "stardust-navcam",
+                "qualityPlane": "QUALITY_MAP",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 0
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  451,
+                  392,
+                  734,
+                  747
+                ],
+                "acceptedPixels": 53321,
+                "rejectedPixels": {
+                  "off-nucleus": 27751,
+                  "acquisition-angle": 2270,
+                  "unconstrained-source-shape": 17762
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "comet-103p",
+      "geometry": {
+        "terrain.json": {
+          "unchanged": true,
+          "sha256": "fa7e76848650f51f412be88f4dcb436b838129a2f2b6c2efeb608fdf57be9466",
+          "bytes": 463738
+        },
+        "scene.json": {
+          "unchanged": true,
+          "sha256": "54e9e55ce8d76e9ff3dac33805ab51cbf017495380a518f5c003c3f051beff02",
+          "bytes": 6573590
+        }
+      },
+      "views": [
+        {
+          "id": "mri",
+          "areaCoverage": {
+            "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+            "samplesPerTriangle": 32,
+            "totalSquareMeters": 5224536.624031891,
+            "acceptedSquareMeters": 2264536.738207457,
+            "sourceSquareMeters": {
+              "mv10110413-6000002-001-r": 1726440.8049301878,
+              "mv10110413-6000001-001-r": 327031.88025417656,
+              "mv10110414-6000003-001-r": 211064.05302303657
+            },
+            "acceptedFraction": 0.43344260001758084
+          },
+          "levelMatching": {
+            "gains": [
+              1,
+              1.0542145615587808,
+              1.1185326665750341
+            ],
+            "pairs": [
+              {
+                "a": 0,
+                "b": 1,
+                "samples": 9266,
+                "medianLogRatio": 0.05009853752991331,
+                "logMad": 0.11315335221566611,
+                "accepted": true,
+                "residualLogRatio": -0.0026974607132803363
+              },
+              {
+                "a": 0,
+                "b": 2,
+                "samples": 6993,
+                "medianLogRatio": 0.11642403445538858,
+                "logMad": 0.1446199589434471,
+                "accepted": true,
+                "residualLogRatio": 0.004406327234191196
+              },
+              {
+                "a": 1,
+                "b": 2,
+                "samples": 10135,
+                "medianLogRatio": 0.055001838736683975,
+                "logMad": 0.14152703522789212,
+                "accepted": true,
+                "residualLogRatio": -0.004219870241319756
+              }
+            ],
+            "referenceIndex": 0,
+            "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo."
+          },
+          "transfer": {
+            "interiorTexels": 1755288,
+            "counts": {
+              "accepted": 865147,
+              "no-qualified-observation": 890141
+            },
+            "maximumSourceDistanceMeters": 12.08582072481994,
+            "maximumPixelSeparationMeters": 49.996593519964065,
+            "maximumPhotometricGain": 1,
+            "method": "Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.",
+            "sources": {
+              "mv10110413-6000002-001-r": 678195,
+              "mv10110413-6000001-001-r": 110358,
+              "mv10110414-6000003-001-r": 76594
+            }
+          },
+          "sources": [
+            {
+              "id": "mv10110413-6000001-001-r-path",
+              "sha256": "b08f4ce6206f6d96778cdaa444cf618a8366a0b27d310760d7f28bb50422781d"
+            },
+            {
+              "id": "mv10110413-6000001-001-r-labelPath",
+              "sha256": "392a2ac50ce1dfd0e2200b745779b4c5980a927d99fb7c0485d12d72cfa8fa16"
+            },
+            {
+              "id": "mv10110413-6000001-001-r-controlPath",
+              "sha256": "bf5fc034aa6130874592d90f68e7a9fec2af4aa310f57f1b1b5eb4ce2bbba1da"
+            },
+            {
+              "id": "mv10110413-6000002-001-r-path",
+              "sha256": "f97b508d325bce5d158a138c912d09bad7ebb97413569019b45b8601fe1c9271"
+            },
+            {
+              "id": "mv10110413-6000002-001-r-labelPath",
+              "sha256": "587ffcde7d28737d773100c72bade2da1e1c4abc04f1fad471e20d7c9586d89e"
+            },
+            {
+              "id": "mv10110413-6000002-001-r-controlPath",
+              "sha256": "bb438ff9ade24691d9810e89b0e4596f5253733e6c7883ca39cd87bef410d345"
+            },
+            {
+              "id": "mv10110414-6000003-001-r-path",
+              "sha256": "72c6dd3d9111eb4d2dfd26d136bf70190e313bc6f64297cc3dde935d28f5fa85"
+            },
+            {
+              "id": "mv10110414-6000003-001-r-labelPath",
+              "sha256": "435ce9cef892b13b1c1aa77974c8687dfea73bf8fd3d8f2b2e2bc3473fd1a83d"
+            },
+            {
+              "id": "mv10110414-6000003-001-r-controlPath",
+              "sha256": "e969bf8a39f0dfe7ab439bddc5f2b5544d877d87c0d35ec09ecdaf165adb18fb"
+            }
+          ],
+          "frames": [
+            {
+              "id": "mv10110413-6000001-001-r",
+              "startTime": "2010-11-04T13:59:12.526",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 8,
+                  "rmsPixels": 1.3950755328516617,
+                  "maximumPixels": 2.2374682371707877,
+                  "rmsMeters": 11.3740508193396,
+                  "maximumMeters": 18.242078537653434
+                },
+                "holdout": {
+                  "count": 7,
+                  "rmsPixels": 1.4297471090384324,
+                  "maximumPixels": 2.5645741756728153,
+                  "rmsMeters": 11.65672817999034,
+                  "maximumMeters": 20.908973254260463
+                },
+                "nominalPixelScaleMeters": 8.153,
+                "maximumRmsMeters": 20,
+                "maximumResidualMeters": 40,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 8.153,
+                "bodyToJ2000": [
+                  [
+                    -0.3483486635919943,
+                    0.7691399485303365,
+                    -0.5357956216211766
+                  ],
+                  [
+                    -0.5385457406831078,
+                    -0.6320620885472243,
+                    -0.5571947607555231
+                  ],
+                  [
+                    -0.7672168492452153,
+                    0.09445239963109572,
+                    0.6343950271228274
+                  ]
+                ],
+                "offsetPixels": [
+                  -140.73746823716692,
+                  43.353253343330614
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  589.6793042821278,
+                  11.702220625598855,
+                  -562.8943949043868
+                ]
+              },
+              "quality": {
+                "instrument": "deep-impact-mri",
+                "qualityPlane": "FLAGS",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 8
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  283,
+                  295,
+                  402,
+                  522
+                ],
+                "acceptedPixels": 16384,
+                "rejectedPixels": {
+                  "off-nucleus": 8641,
+                  "unconstrained-source-shape": 1364,
+                  "acquisition-angle": 956,
+                  "detector-quality": 15
+                }
+              }
+            },
+            {
+              "id": "mv10110413-6000002-001-r",
+              "startTime": "2010-11-04T13:59:46.637",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 8,
+                  "rmsPixels": 0.5913963413965709,
+                  "maximumPixels": 0.9562472002152571,
+                  "rmsMeters": 4.104882005633598,
+                  "maximumMeters": 6.637311816694099
+                },
+                "holdout": {
+                  "count": 8,
+                  "rmsPixels": 0.6788404175936175,
+                  "maximumPixels": 1.1181491319304517,
+                  "rmsMeters": 4.711831338517299,
+                  "maximumMeters": 7.761073124729266
+                },
+                "nominalPixelScaleMeters": 6.941,
+                "maximumRmsMeters": 20,
+                "maximumResidualMeters": 40,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 6.941,
+                "bodyToJ2000": [
+                  [
+                    -0.3483486635919943,
+                    0.7691399485303365,
+                    -0.5357956216211766
+                  ],
+                  [
+                    -0.5385457406831078,
+                    -0.6320620885472243,
+                    -0.5571947607555231
+                  ],
+                  [
+                    -0.7672168492452153,
+                    0.09445239963109572,
+                    0.6343950271228274
+                  ]
+                ],
+                "offsetPixels": [
+                  -183.5298531560066,
+                  50.59595195805496
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  455.9168048937498,
+                  363.2798061855377,
+                  -376.6716078260645
+                ]
+              },
+              "quality": {
+                "instrument": "deep-impact-mri",
+                "qualityPlane": "FLAGS",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 8
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  133,
+                  261,
+                  347,
+                  528
+                ],
+                "acceptedPixels": 25590,
+                "rejectedPixels": {
+                  "off-nucleus": 29172,
+                  "unconstrained-source-shape": 1877,
+                  "acquisition-angle": 981
+                }
+              }
+            },
+            {
+              "id": "mv10110414-6000003-001-r",
+              "startTime": "2010-11-04T14:00:25.728",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 9,
+                  "rmsPixels": 0.6925557445008294,
+                  "maximumPixels": 1.445568658664126,
+                  "rmsMeters": 5.818160809551467,
+                  "maximumMeters": 12.144222301437322
+                },
+                "holdout": {
+                  "count": 10,
+                  "rmsPixels": 1.0564165738523768,
+                  "maximumPixels": 2.8044313413362296,
+                  "rmsMeters": 8.874955636933818,
+                  "maximumMeters": 23.560027698565666
+                },
+                "nominalPixelScaleMeters": 8.401,
+                "maximumRmsMeters": 20,
+                "maximumResidualMeters": 40,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 8.401,
+                "bodyToJ2000": [
+                  [
+                    -0.3483486635919943,
+                    0.7691399485303365,
+                    -0.5357956216211766
+                  ],
+                  [
+                    -0.5385457406831078,
+                    -0.6320620885472243,
+                    -0.5571947607555231
+                  ],
+                  [
+                    -0.7672168492452153,
+                    0.09445239963109572,
+                    0.6343950271228274
+                  ]
+                ],
+                "offsetPixels": [
+                  -112.52294823258192,
+                  40.84692252736731
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  302.4770083909025,
+                  766.6223589441112,
+                  -163.04646102830964
+                ]
+              },
+              "quality": {
+                "instrument": "deep-impact-mri",
+                "qualityPlane": "FLAGS",
+                "acceptedQuality": 0,
+                "detectorBorderPixels": 8
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  187,
+                  301,
+                  417,
+                  522
+                ],
+                "acceptedPixels": 17421,
+                "rejectedPixels": {
+                  "off-nucleus": 30062,
+                  "unconstrained-source-shape": 3139,
+                  "acquisition-angle": 660
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "hri",
+          "areaCoverage": {
+            "method": "Deterministic equal-area barycentric samples on every retained triangle; excludes atlas bleed",
+            "samplesPerTriangle": 32,
+            "totalSquareMeters": 5224536.624031891,
+            "acceptedSquareMeters": 1687917.4116034792,
+            "sourceSquareMeters": {
+              "hv10110413-5004008-001-d050": 1626516.0816220026,
+              "hv10110413-5004004-001-d050": 61401.32998147987
+            },
+            "acceptedFraction": 0.32307504628053996
+          },
+          "levelMatching": {
+            "gains": [
+              1,
+              1.0072629234267456
+            ],
+            "pairs": [
+              {
+                "a": 0,
+                "b": 1,
+                "samples": 10031,
+                "medianLogRatio": 0.007236675413310577,
+                "logMad": 0.13607578916381513,
+                "accepted": true,
+                "residualLogRatio": 0
+              }
+            ],
+            "referenceIndex": 0,
+            "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo."
+          },
+          "transfer": {
+            "interiorTexels": 1755288,
+            "counts": {
+              "accepted": 604033,
+              "no-qualified-observation": 1151255
+            },
+            "maximumSourceDistanceMeters": 12.08582072481994,
+            "maximumPixelSeparationMeters": 49.98152164603687,
+            "maximumPhotometricGain": 1,
+            "method": "Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.",
+            "sources": {
+              "hv10110413-5004008-001-d050": 578655,
+              "hv10110413-5004004-001-d050": 25378
+            }
+          },
+          "sources": [
+            {
+              "id": "hv10110413-5004004-001-d050-path",
+              "sha256": "0c237b12aad0fa29e5427c2cc5c46bbf5b48059071912f278a731840cdbd07b3"
+            },
+            {
+              "id": "hv10110413-5004004-001-d050-labelPath",
+              "sha256": "a25036b5c9254f2c6fc059c0b90a689889b772b5fc9c7d2dcbf8a66779c2dc23"
+            },
+            {
+              "id": "hv10110413-5004004-001-d050-controlPath",
+              "sha256": "2f7da2da6c90bec0582475a86df202a4a662c037d3a9f2f9eeb986209cde2fbc"
+            },
+            {
+              "id": "hv10110413-5004008-001-d050-path",
+              "sha256": "eec139c05808fa441b327d2905c5fa9cef45fc917d56d33b8edffe04f797d36f"
+            },
+            {
+              "id": "hv10110413-5004008-001-d050-labelPath",
+              "sha256": "13f7c30bb653698fd2cf6bb8275db5a56a73ff49a223e4ed6c8d83b18c9b9c60"
+            },
+            {
+              "id": "hv10110413-5004008-001-d050-controlPath",
+              "sha256": "d37072d51aa81e01433b2e6331f71be129aa78cddd6bea8f8138382d7d1af6c2"
+            }
+          ],
+          "frames": [
+            {
+              "id": "hv10110413-5004004-001-d050",
+              "startTime": "2010-11-04T13:56:52.923",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 6,
+                  "rmsPixels": 1.839038554721011,
+                  "maximumPixels": 3.491252496013722,
+                  "rmsMeters": 8.301420036010644,
+                  "maximumMeters": 15.759513767005942
+                },
+                "holdout": {
+                  "count": 7,
+                  "rmsPixels": 2.943965362017327,
+                  "maximumPixels": 6.9547958770472,
+                  "rmsMeters": 13.289059644146215,
+                  "maximumMeters": 31.393948588991062
+                },
+                "nominalPixelScaleMeters": 4.514,
+                "maximumRmsMeters": 20,
+                "maximumResidualMeters": 40,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 4.514,
+                "bodyToJ2000": [
+                  [
+                    -0.3483486635919943,
+                    0.7691399485303365,
+                    -0.5357956216211766
+                  ],
+                  [
+                    -0.5385457406831078,
+                    -0.6320620885472243,
+                    -0.5571947607555231
+                  ],
+                  [
+                    -0.7672168492452153,
+                    0.09445239963109572,
+                    0.6343950271228274
+                  ]
+                ],
+                "offsetPixels": [
+                  -82.33682858011693,
+                  85.66643953178705
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  1137.7024816504727,
+                  -1428.8540662596622,
+                  -1325.8691436840927
+                ]
+              },
+              "quality": {
+                "instrument": "epoxi-hri-deconvolved",
+                "qualityPlane": "MASK",
+                "acceptedQuality": 1,
+                "detectorBorderPixels": 8,
+                "residualPolicy": "record-only",
+                "residualStatistics": {
+                  "count": 997608,
+                  "rms": 1.2673962383206536,
+                  "maximumAbsolute": 19.853912353515625
+                }
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  264,
+                  103,
+                  570,
+                  510
+                ],
+                "acceptedPixels": 50800,
+                "rejectedPixels": {
+                  "off-nucleus": 62998,
+                  "unconstrained-source-shape": 7826,
+                  "acquisition-angle": 3620,
+                  "detector-quality": 12
+                }
+              }
+            },
+            {
+              "id": "hv10110413-5004008-001-d050",
+              "startTime": "2010-11-04T13:57:20.525",
+              "registration": {
+                "method": "disjoint-limb-normal-translation",
+                "fit": {
+                  "count": 6,
+                  "rmsPixels": 0.48685347168475235,
+                  "maximumPixels": 0.8109385647526673,
+                  "rmsMeters": 1.885096642363361,
+                  "maximumMeters": 3.1399541227223278
+                },
+                "holdout": {
+                  "count": 6,
+                  "rmsPixels": 2.9422027228101837,
+                  "maximumPixels": 6.30524960951697,
+                  "rmsMeters": 11.39220894272103,
+                  "maximumMeters": 24.413926488049707
+                },
+                "nominalPixelScaleMeters": 3.872,
+                "maximumRmsMeters": 20,
+                "maximumResidualMeters": 40,
+                "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain."
+              },
+              "camera": {
+                "nominalPixelScaleMeters": 3.872,
+                "bodyToJ2000": [
+                  [
+                    -0.3483486635919943,
+                    0.7691399485303365,
+                    -0.5357956216211766
+                  ],
+                  [
+                    -0.5385457406831078,
+                    -0.6320620885472243,
+                    -0.5571947607555231
+                  ],
+                  [
+                    -0.7672168492452153,
+                    0.09445239963109572,
+                    0.6343950271228274
+                  ]
+                ],
+                "offsetPixels": [
+                  -122.50883281171511,
+                  99.82724600346828
+                ],
+                "maximumOffsetPixels": 256,
+                "sourcePixelOrigin": "zero-based pixel centers; stored rows increase upward",
+                "positionKm": [
+                  1029.337597166609,
+                  -1143.9913535314624,
+                  -1174.9999472325637
+                ]
+              },
+              "quality": {
+                "instrument": "epoxi-hri-deconvolved",
+                "qualityPlane": "MASK",
+                "acceptedQuality": 1,
+                "detectorBorderPixels": 8,
+                "residualPolicy": "record-only",
+                "residualStatistics": {
+                  "count": 996888,
+                  "rms": 1.363914812595081,
+                  "maximumAbsolute": 26.0078182220459
+                }
+              },
+              "sourceCoverage": {
+                "projectedBounds": [
+                  212,
+                  47,
+                  557,
+                  521
+                ],
+                "acceptedPixels": 68864,
+                "rejectedPixels": {
+                  "off-nucleus": 80344,
+                  "unconstrained-source-shape": 10309,
+                  "acquisition-angle": 4769,
+                  "detector-quality": 64
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
