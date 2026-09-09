@@ -1,0 +1,184 @@
+{
+  "scope": "Sun, wheel out, scene-click Mars, wheel out, scene-click Earth, wheel out, scene-click Sun",
+  "measurement": "Chrome AnimationFrame::Presentation intervals aligned to captured video, cropped to recorder stop; percentiles use nearest rank",
+  "viewport": {
+    "width": 1995,
+    "height": 1236,
+    "dpr": 2
+  },
+  "browser": "Chrome Canary 155.0.8048.0",
+  "limitations": [
+    "Two natural interactive journeys, not identical timed input replay; visible target distances and wheel packet counts differ.",
+    "Development server, cold browser instances, and simultaneous capture overhead. GPU driver/cache conditions were not controlled.",
+    "Both captures report the same missing /scenes/earth/earth-lens-clouds.webp. Synchronized evidence is not an error-free application qualification.",
+    "The initial card bank remains resident and duplicated in first-load static HTML."
+  ],
+  "runs": [
+    {
+      "label": "Before",
+      "sourceHead": "af85bc0f66a3d29f9773b33a38f13b093d29657e",
+      "artifacts": [
+        {
+          "path": "output/playwright/sun-mars-earth-sun-20260909-v2/trace.json.gz",
+          "sha256": "123c147a7ab513a875ddc70768b90ce60475e04b811618f41a08134f0d11a160",
+          "bytes": 47626176
+        },
+        {
+          "path": "output/playwright/sun-mars-earth-sun-20260909-v2/sun-mars-earth-sun.mp4",
+          "sha256": "84b3bf6df0efd047ae352db60306dc4517bb0a9966f462c8362cbbe043f43a19",
+          "bytes": 10977770
+        },
+        {
+          "path": "output/playwright/sun-mars-earth-sun-20260909-v2/cssearth-diagnostics-2dd2bce0-6aaa-49c5-95a5-0e025a940c79.json",
+          "sha256": "c859cfeab8209c93e59090287826ecce8cadad534c962045ce8e7aceb2c83270",
+          "bytes": 2931066
+        }
+      ],
+      "synchronization": {
+        "synchronized": true,
+        "applicationErrorFree": false,
+        "clockDriftUs": 14,
+        "maxPtsErrorMs": 0.6690449218731374,
+        "videoFrames": 1370,
+        "retained": {
+          "world": true,
+          "input": true,
+          "document": true,
+          "cameras": 1,
+          "selected": "sun"
+        }
+      },
+      "frameIntervals": {
+        "count": 1937,
+        "over25": 88,
+        "p95": 23.558,
+        "max": 905.844
+      },
+      "htmlParsingMs": 172.207,
+      "navigationHtmlBytes": 31297256,
+      "navigationRequests": 4,
+      "decodeWorkerModuleLoads": 5,
+      "inputs": [
+        {
+          "id": "mars",
+          "kind": "native-scene-click",
+          "point": {
+            "x": 801.880126953125,
+            "y": 841.6233520507812,
+            "kind": "marker",
+            "text": ""
+          },
+          "wheelPackets": 80
+        },
+        {
+          "id": "earth",
+          "kind": "native-scene-click",
+          "point": {
+            "x": 1084.9666137695312,
+            "y": 370.6089324951172,
+            "kind": "marker",
+            "text": ""
+          },
+          "wheelPackets": 136
+        },
+        {
+          "id": "sun",
+          "kind": "native-scene-click",
+          "point": {
+            "x": 1029.6988525390625,
+            "y": 858.6828002929688,
+            "kind": "marker",
+            "text": ""
+          },
+          "wheelPackets": 88
+        }
+      ]
+    },
+    {
+      "label": "After",
+      "sourceHead": "8fd4b9586656253f9b1b59ea3dd1c5a0a28da752",
+      "artifacts": [
+        {
+          "path": "output/playwright/sun-mars-earth-sun-page-transport-20260909/trace.json.gz",
+          "sha256": "7d63f5374262cc6447aece74ad29e688511b9275b73881dc77c5b994a7e37400",
+          "bytes": 38257792
+        },
+        {
+          "path": "output/playwright/sun-mars-earth-sun-page-transport-20260909/sun-mars-earth-sun.mp4",
+          "sha256": "d4f12a432bc117a4f495cffd4845bc3186123ab7b6bd5629ea295a98fc046183",
+          "bytes": 9036302
+        },
+        {
+          "path": "output/playwright/sun-mars-earth-sun-page-transport-20260909/cssearth-diagnostics-44309f0a-2cbf-401b-b86b-3e210fe109eb.json",
+          "sha256": "cce00e9422ecd4f650f4407952c38e5c327f7c753644b4cff08b0138b3a744fd",
+          "bytes": 2354524
+        }
+      ],
+      "synchronization": {
+        "synchronized": true,
+        "applicationErrorFree": false,
+        "clockDriftUs": -22,
+        "maxPtsErrorMs": 0.6108203124967986,
+        "videoFrames": 1210,
+        "retained": {
+          "world": true,
+          "input": true,
+          "document": true,
+          "cameras": 1,
+          "selected": "sun"
+        }
+      },
+      "frameIntervals": {
+        "count": 1643,
+        "over25": 36,
+        "p95": 19.043,
+        "max": 545.003
+      },
+      "htmlParsingMs": 10.005,
+      "navigationHtmlBytes": 874216,
+      "navigationRequests": 4,
+      "decodeWorkerModuleLoads": 1,
+      "inputs": [
+        {
+          "id": "mars",
+          "kind": "native-scene-click",
+          "point": {
+            "x": 593.6320190429688,
+            "y": 1079.6826782226562,
+            "kind": "marker",
+            "text": ""
+          },
+          "wheelPackets": 72
+        },
+        {
+          "id": "earth",
+          "kind": "native-scene-click",
+          "point": {
+            "x": 1149.8317260742188,
+            "y": 191.87693786621094,
+            "kind": "marker",
+            "text": ""
+          },
+          "wheelPackets": 128
+        },
+        {
+          "id": "sun",
+          "kind": "native-scene-click",
+          "point": {
+            "x": 1052.826171875,
+            "y": 1031.5570068359375,
+            "kind": "marker",
+            "text": ""
+          },
+          "wheelPackets": 80
+        }
+      ]
+    }
+  ],
+  "remainingWorstFrame": {
+    "intervalMs": 545.003,
+    "body": "earth",
+    "mainCommitWaitMs": 402.733,
+    "interpretation": "Main thread waits for browser raster/commit work; 254 raster tasks overlap this interval. Concurrent thread durations must not be summed."
+  }
+}

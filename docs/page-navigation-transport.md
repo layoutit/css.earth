@@ -43,3 +43,43 @@ Migration qualification on the 404-object registry:
 - Existing Deimos preparation test still fails its facing-count assertion
   (0 versus 1600). The three synthetic CSS compilation tests pass. This is
   not an aggregate merge-readiness claim.
+
+## Synchronized natural-navigation comparison
+
+The same Sun → wheel out → Mars → wheel out → Earth → wheel out → Sun
+procedure was captured at baseline `af85bc0f6` and implementation `8fd4b9586`.
+Both use Canary 155.0.8048.0, 1995×1236 CSS pixels, DPR 2, the normal renderer,
+and motion off. Recorder JSON, Chrome trace gzip and contemporaneous variable
+frame-rate video were collected together. Artifact hashes and exact input
+receipts are in [the evidence record](evidence/navigation-page-transport.json).
+
+| Measurement | Before | After |
+| --- | ---: | ---: |
+| Navigation HTML, four requests including automatic Sun handoffs | 31.297 MB | 0.874 MB |
+| Main-thread HTML parsing during capture | 172.207 ms | 10.005 ms |
+| Decoder worker module requests, including initial load | 5 | 1 |
+| Presented animation-frame intervals over 25 ms | 88/1,937 | 36/1,643 |
+| Presented interval p95, nearest rank | 23.558 ms | 19.043 ms |
+| Worst presented interval | 905.844 ms | 545.003 ms |
+
+This proves the redundant transport/parse work and worker churn were removed.
+It does not prove that the old 889 ms GPU flush wait was caused by that work:
+that wait did not recur, but GPU cache/driver conditions were not controlled.
+The remaining Earth stall includes a 403 ms main-thread commit wait and 254
+concurrent raster tasks. Presentation is still not consistently smooth.
+
+The after capture has 1,210 captured/encoded frames, −22 µs clock drift and
+0.611 ms maximum video timestamp error. World, input and document stay retained,
+with one camera and Sun selected at completion. Both runs contain the same
+missing Earth cloud-thumbnail request; they are synchronized, not error-free
+application qualifications. Natural wheel inputs stop on target visibility,
+so different packet counts and departure distances prevent a strict identical
+input or whole-route duration speedup claim. No response or renderer patches
+were used. Mars, Earth and Sun arrival frames were inspected.
+
+Latest-main integration after the matched capture includes `2f6f8614a` (#80),
+`96d930930` (#81), and the navigation-failure camera fix `0e7af35cf`. The seven
+updated object transports were restored only after matching their new main
+pins, then their small page metadata was regenerated. The chart above remains
+explicitly tied to its captured revisions; it is not relabeled as a capture of
+that subsequent integration.
