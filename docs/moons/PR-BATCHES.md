@@ -87,7 +87,7 @@ See [B2 implementation and qualification](B2-SCIENTIFIC-SURFACES.md) and its [de
 
 ## B6 — Mapped scientific surfaces across four existing moons
 
-**State:** implemented and delivered; prepared for draft PR review · **Owner:** Moons
+**State:** [draft PR #76](https://github.com/layoutit/cssEarth/pull/76); selected-body qualification and runtime delivery complete · **Owner:** Moons
 
 Six new views: Moon geology and Diviner silicate signature, Europa geology and
 Galileo NIMS infrared, Callisto Galileo NIMS infrared, and Charon modeled Bond

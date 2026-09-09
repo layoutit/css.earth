@@ -1,6 +1,6 @@
 # B6: mapped surface science
 
-Status: six views implemented, source/package/browser checks complete, runtime assets delivered; prepared for draft PR review. Authorized 2026-09-09.
+Status: [draft PR #76](https://github.com/layoutit/cssEarth/pull/76); six views implemented, source/package/browser checks complete, runtime assets delivered. Authorized 2026-09-09.
 Branch: `feat/moons-mapped-science`; base `b3a0410f742501a1a1552dea14d9a3730fce7484`.
 
 ## Accepted scope
