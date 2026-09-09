@@ -1,0 +1,22 @@
+{
+  "lidvid": "urn:nasa:pds:nh_derived:plutosystem_geophysics:nh_charon_bond::1.0",
+  "width": 1518,
+  "height": 700,
+  "noData": 0,
+  "origin": [
+    -1903805.1,
+    951902.6
+  ],
+  "resolution": [
+    2508.307177965,
+    -2508.307177965
+  ],
+  "referenceRadiusMeters": 606000.0,
+  "scale": 0.00392156862745,
+  "validPixels": 741546,
+  "missingPixels": 321054,
+  "minimum": 0.019607843137250003,
+  "maximum": 0.52941176470575,
+  "output": "nh-charon-bond-georeferenced.tif",
+  "sha256": "bb936d47510a45c1bb99b143c2cc25b6e677a344dc9eff579d1ff06d07057dfc"
+}

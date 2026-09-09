@@ -1,6 +1,6 @@
 import { readFile, readdir } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { createRequire } from "node:module";
+import { createRequire, isBuiltin } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
@@ -121,6 +121,11 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
       reason: `Invalid runtime source: ${error.message}` }], factoryCalls: 0, cameraFactories: [], dataOnly: false };
   }
   const imports = [], violations = [], aliases = new Map();
+  // Astro executes frontmatter on the server. Its native Node imports have no
+  // browser source closure; imports inside client scripts still require one.
+  const serverBuiltinImports = new Set(shellContent && ast.type === 'AstroRoot'
+    ? (ast.frontmatter?.program?.body ?? []).filter(node =>
+      node.type === 'ImportDeclaration' && isBuiltin(node.source.value)) : []);
   const ids = new Set(objectIds);
   const markerInventory = approvedNavigationMarkerInventory(ast, file, objectIds);
   const staticShellContent = shellContent && staticShellNavigationContent(ast, objectIds);
@@ -144,7 +149,7 @@ export function inspectObjectRuntimeModule(source, file, { shared = false, shell
       node.type === "ExportNamedDeclaration" && node.source || node.type === "ExportAllDeclaration") {
     if (node.importKind === 'type' || node.exportKind === 'type') return;
     const imported = node.source.value;
-    if (!registryDescriptors.has(imported)) imports.push(imported);
+    if (!registryDescriptors.has(imported) && !serverBuiltinImports.has(node)) imports.push(imported);
     for (const specifier of node.specifiers ?? []) {
       const name = specifier.imported?.name;
       if (name) aliases.set(specifier.local.name, name);

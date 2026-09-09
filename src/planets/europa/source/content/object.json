@@ -182,6 +182,95 @@
           "meta": "m",
           "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
         }
+      },
+      {
+        "id": "geology",
+        "label": "Geology",
+        "description": "USGS interpreted regional plains, bands, chaos terrains and crater deposits (2024; 1:15,000,000). Colors identify map units, not measured surface color. Gray grid marks no-data polygons. Fine line and point features are not represented by this polygon view.",
+        "title": "USGS global geology (2024 SIM 3513)",
+        "thumbnail": "/scenes/europa/europa-geology-thumbnail.webp",
+        "surface": "europa-geology-surface@2x.webp",
+        "poles": "europa-geology-poles@2x.webp",
+        "source": {
+          "id": "usgs-europa-geologic-units-grid",
+          "path": "../manifest.json",
+          "url": "https://pubs.usgs.gov/publication/sim3513"
+        },
+        "detail": "Mapped units",
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Geologic units",
+          "items": [
+            {
+              "label": "c",
+              "color": "#ff8000",
+              "description": "Crater material"
+            },
+            {
+              "label": "ce",
+              "color": "#ffeb80",
+              "description": "Continuous crater ejecta"
+            },
+            {
+              "label": "cpre",
+              "color": "#ffffb2",
+              "description": "Pwyll radial crater ejecta"
+            },
+            {
+              "label": "cpr",
+              "color": "#ffcc00",
+              "description": "Pwyll crater rays"
+            },
+            {
+              "label": "chl",
+              "color": "#99eb66",
+              "description": "Low-brightness chaos"
+            },
+            {
+              "label": "chm",
+              "color": "#ccff66",
+              "description": "Mottled chaos"
+            },
+            {
+              "label": "chh",
+              "color": "#deffb2",
+              "description": "High-brightness chaos"
+            },
+            {
+              "label": "chM",
+              "color": "#b2ff99",
+              "description": "Moytura chaos"
+            },
+            {
+              "label": "b",
+              "color": "#cc80ff",
+              "description": "Bands"
+            },
+            {
+              "label": "pr",
+              "color": "#ebffff",
+              "description": "Regional plains"
+            }
+          ],
+          "sourceUrl": "https://pubs.usgs.gov/publication/sim3513"
+        }
+      },
+      {
+        "id": "infrared",
+        "label": "Infrared",
+        "description": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
+        "title": "Galileo NIMS spectral color",
+        "thumbnail": "/scenes/europa/europa-infrared-thumbnail.webp",
+        "surface": "europa-infrared-surface@2x.webp",
+        "poles": "europa-infrared-poles@2x.webp",
+        "source": {
+          "id": "europa-registered-nims-composite",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.17189/4sz4-5024"
+        },
+        "detail": "NIMS spectral bands",
+        "falseColor": true
       }
     ]
   },

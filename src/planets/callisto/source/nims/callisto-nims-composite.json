@@ -1,0 +1,67 @@
+{
+  "width": 2048,
+  "height": 1024,
+  "referenceRadiusMeters": 2409400,
+  "origin": [
+    -7569353.339559248,
+    3784676.669779624
+  ],
+  "resolution": [
+    7391.946620663328,
+    -7391.946620663328
+  ],
+  "noData": 0,
+  "missingPixels": 1642739,
+  "displayRanges": [
+    [
+      0,
+      0.45
+    ],
+    [
+      0,
+      0.45
+    ],
+    [
+      0,
+      0.2
+    ]
+  ],
+  "observations": [
+    {
+      "path": "G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.tif",
+      "bands": [
+        6,
+        66,
+        144
+      ],
+      "wavelengthMicrometers": [
+        0.773205,
+        2.24748,
+        3.65902
+      ],
+      "sourceValidPixels": 3314,
+      "sourcePixels": 12789,
+      "mappedPixels": 7904,
+      "contributedPixels": 7904
+    },
+    {
+      "path": "G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.tif",
+      "bands": [
+        6,
+        66,
+        144
+      ],
+      "wavelengthMicrometers": [
+        0.773275,
+        2.24762,
+        3.65916
+      ],
+      "sourceValidPixels": 4255,
+      "sourcePixels": 7434,
+      "mappedPixels": 454170,
+      "contributedPixels": 446509
+    }
+  ],
+  "output": "callisto-nims-composite.tif",
+  "sha256": "23021089312fecb6c42df4502f93f57db52efe7fb4fa452c194fe5f1fcd17588"
+}
