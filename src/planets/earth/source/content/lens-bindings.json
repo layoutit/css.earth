@@ -34,7 +34,7 @@
       "surfaceUrl": "/scenes/earth/earth-night-lights.webp",
       "polesUrl": "/scenes/earth/earth-night-lights-poles.webp",
       "maximumZoom": 4,
-      "qualification": "NASA Black Marble 2016 global composite",
+      "qualification": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting.",
       "surfacePagePrefix": "earth-night-lights"
     },
     {
@@ -110,7 +110,7 @@
   "provenance": {
     "normal": "NASA Blue Marble Next Generation December 2004 and Blue Marble clouds",
     "topography": "NASA Earth Observatory Blue Marble topography and bathymetry December 2004",
-    "nightLights": "NASA Earth Observatory Black Marble 2016",
+    "nightLights": "NASA Black Marble VJ146A4 Collection 2 · 2025 AllAngle_Composite_Snow_Free radiance; public GeoTIFF mosaic by Jurij Stare, lightpollutionmap.info",
     "interior": "NASA Science schematic layer geometry",
     "mantleTomography": "Cui et al. (2024), GLAD-M35 r0.1 via EarthScope EMC"
   }

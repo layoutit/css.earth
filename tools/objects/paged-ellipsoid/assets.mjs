@@ -4,6 +4,7 @@ import sharp from "sharp";
 import { readCoraltempAnomaly } from "./sst-anomaly.mjs";
 import { verifyPreparedMurImage, writeMurLegend } from "./mur-imagery.mjs";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.mjs";
+import { prepareNightLightsMap, writeNightLightsLegend } from "./night-lights.mjs";
 import { textureTintFactors } from "@layoutit/polycss";
 import { cutInteriorPoles } from "./interior-poles.mjs";
 import { readMantleTomography, tomographyLegend } from "./tomography.mjs";
@@ -38,6 +39,10 @@ if (mode !== 'materials') {
         const decoded = await preparePagedSurfaceMap({ config, sourceDirectory, map });
         input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
         await writeElevationLegend(map.scientific, output(map.scientific.legend.image));
+      } else if (map.scientific.kind === "black-marble-radiance") {
+        const decoded = await preparePagedSurfaceMap({ config, sourceDirectory, map });
+        input = await sharp(decoded.data, { raw: decoded.info }).png().toBuffer();
+        await writeNightLightsLegend(map.scientific, output(map.scientific.legend.image));
       } else if (map.scientific.kind === "gibs-mur-imagery") {
         input = await verifyPreparedMurImage(sourceDirectory, map.scientific);
         await writeMurLegend(sourceDirectory, output("earth-enso-legend.png"));
@@ -743,6 +748,7 @@ export async function preparePagedSurfaceMap({ config, sourceDirectory, map, ker
   const width = config.surface.width;
   const height = config.surface.height;
   if (map.scientific?.kind === "gebco-elevation") return prepareElevationMap({ sourceDirectory, map, width, height });
+  if (map.scientific?.kind === "black-marble-radiance") return prepareNightLightsMap({ sourceDirectory, map, width, height });
   const { data, info } = await sharp(Buffer.isBuffer(map.path) ? map.path : resolve(sourceDirectory, map.path))
     .resize(width, height, { fit: "fill", kernel })
     .removeAlpha()

@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0e9a39c7b132c2d0ce725655d31859e5c6d297340cc17f5b626d91a35540e426"
+    "sha256": "81d5afc111ff78a0b53bf501c5008489cf4a4d85b2373343eebc26de6470bd0c"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
     "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "7f2bc1e031212dbf5abf739fe10e29c008615162f1f4b9a0a6f2e5b2715e7c46"
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
   },
   "recipes": [
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "0f7a222edb670316ba156b94c33470255baecde253a00afffc3e7d91e4ecf140",
+      "sha256": "3b099b13117f93184a350fcb32046de8ec85017d0c53a8328e5d23a3618e8be2",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -318,9 +318,56 @@
               }
             },
             {
-              "path": "black-marble-2016.jpg",
+              "path": "science/night-lights-2025/radiance.zip",
               "name": "earth-night-lights",
-              "thumbnail": "earth-lens-night-lights.webp"
+              "thumbnail": "earth-lens-night-lights.webp",
+              "webp": {
+                "quality": 90,
+                "effort": 6
+              },
+              "scientific": {
+                "kind": "black-marble-radiance",
+                "year": 2025,
+                "product": "VJ146A4.002",
+                "band": "AllAngle_Composite_Snow_Free",
+                "units": "nW/cm2/sr",
+                "member": "viirs_2025_raw.tif",
+                "archiveSha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480",
+                "archiveBytes": 973526576,
+                "grid": {
+                  "width": 86400,
+                  "height": 33600,
+                  "cellDegrees": 0.004166666666666667,
+                  "bounds": [
+                    -180,
+                    -65,
+                    180,
+                    75
+                  ]
+                },
+                "display": {
+                  "maximum": 100,
+                  "softening": 0.25,
+                  "missing": [
+                    38,
+                    42,
+                    49
+                  ]
+                },
+                "legend": {
+                  "kind": "scale",
+                  "title": "Annual radiance · nW/cm²/sr",
+                  "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+                  "image": "earth-night-lights-legend.png",
+                  "width": 620,
+                  "height": 16,
+                  "labels": [
+                    "0",
+                    "≥ 100 nW/cm²/sr"
+                  ]
+                },
+                "provenancePath": "science/night-lights-2025/provenance.json"
+              }
             },
             {
               "path": "science/mur-gibs.png",
@@ -443,7 +490,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a9cd18b8f0bebd7332da0c489b1ae35468beacc21050ccf690bd40750cd11f4f",
+      "sha256": "9d0704025475fa2828dc14d05fab7fb1a4f6a89bb237f8fce4803347f70ec1d0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -622,14 +669,29 @@
             {
               "id": "night-lights",
               "label": "Night lights",
-              "description": "NASA Black Marble 2016 night-light composite. This archival observation does not depict current lighting.",
-              "title": "Black Marble night-light composite",
+              "description": "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting.",
+              "title": "Black Marble annual night lights · 2025",
               "thumbnail": "/scenes/earth/earth-lens-night-lights.webp",
               "source": {
-                "id": "surface-observation"
+                "id": "nasa-black-marble-2025-public-radiance",
+                "url": "https://www.lightpollutionmap.info/help.html"
               },
-              "detail": "Nighttime",
-              "summary": "Artificial lighting is combined from observations taken in 2016. The composite does not show present-day lighting."
+              "detail": "NASA · 2025",
+              "summary": "2025 annual snow-free satellite radiance. Warm false color; logarithmic scale. Gray: missing data or outside 75°N–65°S. Aurora can remain at high latitudes. NASA Black Marble / Jurij Stare, lightpollutionmap.info.",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Annual radiance · nW/cm²/sr",
+                "sourceUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+                "image": "earth-night-lights-legend.png",
+                "width": 620,
+                "height": 16,
+                "labels": [
+                  "0",
+                  "≥ 100 nW/cm²/sr"
+                ]
+              },
+              "legendNote": "Logarithmic color scale, capped at 100 nW/cm²/sr. Native pixels are averaged for this globe. Aurora and transient lights can remain; this does not measure sky brightness."
             },
             {
               "id": "enso",
@@ -1723,24 +1785,19 @@
     },
     {
       "kind": "source-input",
-      "id": "nasa-black-marble-2016",
-      "path": "black-marble-2016.jpg",
-      "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg",
-      "credit": "NASA Earth Observatory",
-      "license": "NASA media usage guidelines",
+      "id": "nasa-black-marble-2025-public-radiance",
+      "path": "science/night-lights-2025/radiance.zip",
+      "origin": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip",
+      "credit": "NASA Black Marble science team; Jurij Stare, www.lightpollutionmap.info",
+      "license": "NASA Earth science open data (CC0); public mosaic with publisher attribution",
       "licenseEvidence": [
-        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+        "https://www.lightpollutionmap.info/help.html#faq",
+        "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy"
       ],
-      "acquisition": "checked Black Marble 2016 global 3 km image at 13500 by 6750 pixels",
-      "redistribution": "NASA image with credit and no endorsement claim",
-      "capture": {
-        "spacecraftIds": [
-          "suomi-npp"
-        ],
-        "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg"
-      },
-      "sha256": "230aac448ae68c358be433dd518888cccb3a85ccf66f7b44326441c324ad6725",
-      "bytes": 8106233,
+      "acquisition": "2025 VJ146A4.002 AllAngle_Composite_Snow_Free, public Float32 EPSG:4326 mosaic. Archive checked 2026-09-09; HTTP Last-Modified 2026-03-29. Native 15 arc-second cells, 75 N to 65 S. QA/count bands are not included by the mirror; -999.9 is missing and zero is valid thresholded background.",
+      "redistribution": "NASA factual radiance with NASA Black Marble and Jurij Stare / lightpollutionmap.info attribution; no map screenshots or sky-brightness model reused.",
+      "sha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480",
+      "bytes": 973526576,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": {
@@ -1748,11 +1805,141 @@
         "groups": [
           "refresh"
         ],
-        "path": "black-marble-2016.jpg",
-        "url": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg",
-        "headers": {
-          "accept": "*/*",
-          "user-agent": "cssEarth Earth source acquisition"
+        "path": "science/night-lights-2025/radiance.zip",
+        "url": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "science/night-lights-2025/provenance.json",
+      "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
+      "id": "authored-document:science/night-lights-2025/provenance.json",
+      "kind": "authored-document",
+      "origin": "object:source/science/night-lights-2025/provenance.json",
+      "title": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e6a1704233f77c3721264de924a5b6e14a291ef78fd4d52db034a89ad32fc5a0",
+      "bytes": 3060,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "json-document",
+        "groups": [
+          "refresh"
+        ],
+        "path": "science/night-lights-2025/provenance.json",
+        "value": {
+          "schema": "cssearth-nighttime-radiance-source@1",
+          "checked": "2026-09-09",
+          "product": "VJ146A4.002",
+          "platform": "NOAA-20 / JPSS-1 VIIRS",
+          "year": 2025,
+          "band": "AllAngle_Composite_Snow_Free",
+          "units": "nW/cm2/sr",
+          "productUrl": "https://doi.org/10.5067/VIIRS/VJ146A4.002",
+          "publisher": "NASA Black Marble science team",
+          "mirror": {
+            "publisher": "Jurij Stare, www.lightpollutionmap.info",
+            "documentation": "https://www.lightpollutionmap.info/help.html",
+            "url": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip",
+            "httpLastModified": "Sun, 29 Mar 2026 22:55:59 GMT",
+            "bytes": 973526576,
+            "sha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480"
+          },
+          "member": {
+            "filename": "viirs_2025_raw.tif",
+            "bytes": 1034233344,
+            "sha256": "1d085195298ddb12c30d2f13e5799cf02f34845719cf14ff3807bca7b05102c3",
+            "width": 86400,
+            "height": 33600,
+            "bands": 1,
+            "sampleFormat": "Float32",
+            "crs": "EPSG:4326",
+            "rasterType": "PixelIsArea",
+            "bounds": [
+              -180,
+              -65,
+              180,
+              75
+            ],
+            "cellDegrees": 0.004166666666666667,
+            "noData": -999.9000244140625,
+            "scaleFactor": 1,
+            "addOffset": 0
+          },
+          "anchors": [
+            {
+              "name": "Manhattan",
+              "longitude": -73.9857,
+              "latitude": 40.7484,
+              "column": 25443,
+              "row": 8220,
+              "radiance": 212.74862670898438
+            },
+            {
+              "name": "Tokyo",
+              "longitude": 139.7671,
+              "latitude": 35.6812,
+              "column": 76744,
+              "row": 9436,
+              "radiance": 153.54086303710938
+            },
+            {
+              "name": "Paris",
+              "longitude": 2.3522,
+              "latitude": 48.8566,
+              "column": 43764,
+              "row": 6274,
+              "radiance": 73.14937591552734
+            },
+            {
+              "name": "Buenos Aires",
+              "longitude": -58.3816,
+              "latitude": -34.6037,
+              "column": 29188,
+              "row": 26304,
+              "radiance": 188.12364196777344
+            },
+            {
+              "name": "Sahara",
+              "longitude": 15,
+              "latitude": 25,
+              "column": 46800,
+              "row": 12000,
+              "radiance": 0
+            },
+            {
+              "name": "Pacific",
+              "longitude": -130,
+              "latitude": 0,
+              "column": 12000,
+              "row": 18000,
+              "radiance": 0
+            },
+            {
+              "name": "Antarctic limit",
+              "longitude": 0,
+              "latitude": -64.99,
+              "column": 43200,
+              "row": 33597,
+              "radiance": 0
+            }
+          ],
+          "interpretation": {
+            "aggregation": "Native-pixel overlaps weighted by spherical area; numeric mean before false color.",
+            "minimumValidAreaFraction": 0.5,
+            "missing": "Gray; native missing value and uncovered polar regions.",
+            "zero": "Valid thresholded source background; never treated as missing.",
+            "display": "Warm false color. log1p(radiance/0.25) / log1p(100/0.25), saturated at 100 nW/cm2/sr.",
+            "quality": "The public mosaic contains no QA or observation-count bands. Aurora and transient lights remain, especially at high latitudes.",
+            "notMeasured": [
+              "live lighting",
+              "visual sky brightness",
+              "light-source color"
+            ]
+          }
         }
       },
       "verificationOperations": []
@@ -1822,8 +2009,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "a9cd18b8f0bebd7332da0c489b1ae35468beacc21050ccf690bd40750cd11f4f",
-      "bytes": 16141,
+      "sha256": "9d0704025475fa2828dc14d05fab7fb1a4f6a89bb237f8fce4803347f70ec1d0",
+      "bytes": 17045,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2187,9 +2374,9 @@
       "recipe": "paged-ellipsoid",
       "selector": "/surface/maps/2",
       "parents": [],
-      "process": "Prepare the global reference map and its declared cloud composite.",
+      "process": "Decode pinned annual snow-free radiance, average native cells by spherical area before applying logarithmic false color, and prepare the globe, poles, minimap, thumbnail and legend. Preserve missing coverage separately from valid zero radiance.",
       "limitations": [
-        "NASA Black Marble 2016 global composite"
+        "NASA Black Marble · 2025 annual snow-free radiance. Warm false color shows upward nighttime light on a logarithmic scale. Gray: missing data or outside 75°N–65°S coverage. This is an annual observation, not live lighting."
       ],
       "lensIds": [
         "night-lights"
@@ -2197,62 +2384,92 @@
       "recipeDependencies": [
         "paged-ellipsoid"
       ],
+      "interpretation": {
+        "kind": "observed-nighttime-radiance",
+        "units": "nW/cm2/sr",
+        "product": "VJ146A4.002",
+        "year": 2025,
+        "band": "AllAngle_Composite_Snow_Free",
+        "grid": {
+          "width": 86400,
+          "height": 33600,
+          "cellDegrees": 0.004166666666666667,
+          "bounds": [
+            -180,
+            -65,
+            180,
+            75
+          ]
+        },
+        "display": {
+          "maximum": 100,
+          "softening": 0.25,
+          "missing": [
+            38,
+            42,
+            49
+          ]
+        },
+        "aggregation": "spherical-area weighted mean; at least 50% valid coverage per displayed cell",
+        "limitations": "Public mosaic has no QA or observation-count bands. Aurora and transient lights can remain. This is not a sky-brightness model."
+      },
       "inputs": [
-        "nasa-black-marble-2016"
+        "nasa-black-marble-2025-public-radiance",
+        "authored-document:science/night-lights-2025/provenance.json"
       ],
       "outputs": [
         {
           "url": "/scenes/earth/earth-lens-night-lights.webp",
-          "bytes": 818,
-          "sha256": "4d255f6e8aab4fc9570fdfbaceec6f41b7ea7c8ede313988382d350726b7cb4c",
+          "bytes": 802,
+          "sha256": "72613e83b89191a2ede75e8e05b41d22e6c41a72a4099e08cd446e7a9e74f7d5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights.webp",
-          "bytes": 85926,
-          "sha256": "c41ffa75726dba49d7f91dba8566179b8cb92be4bf821e9e52bfb44b2ee6c3d7",
+          "bytes": 44720,
+          "sha256": "3fd2bb8eb21b55ab7f0eddec4cd8ac5cec15e7f4be0a32b1a448c5ac82a70e09",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-poles.webp",
-          "bytes": 18704,
-          "sha256": "ebb37d6ac2830151950ecb9e2aac353a21ceb7e3428b9f0da0eb48821695e89f",
+          "bytes": 7234,
+          "sha256": "1bca79f43bab7a97e661f5b85ab3e5c8047fd82715a232a8473fab6924b4a4b4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-1.webp",
-          "bytes": 81902,
-          "sha256": "51942d1ebfff17fa55de5581e94946b0f3c15e86279b3d31410fe37610ebcd9f",
+          "bytes": 235660,
+          "sha256": "570b8cc6bf0b8de8a92b40c43be383cfdc1952f79f2595b6fea95531af4967ac",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-2.webp",
-          "bytes": 180998,
-          "sha256": "c9f6c4e97c9bd7f1a8f87eef37545c1fe00d663a8354e683435c6f92659cd10e",
+          "bytes": 320088,
+          "sha256": "9bc313a895b2edbd10c31f64cbbdf9f19dcaf0bee98533b94023c857441c23b2",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-3.webp",
-          "bytes": 565910,
-          "sha256": "d794a1e695e6460a5057eb3fd8728b1b630ea9c0bc7117ec8890fea593ed2c45",
+          "bytes": 839652,
+          "sha256": "04361dcd38276409544e1b10aa86bc9ffbb8d16a36855c8828f32c4f7e5b0adb",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-4.webp",
-          "bytes": 466980,
-          "sha256": "5174666e03e728a89eb05801b4cc7a93d9a74809f8a0f0c6d63910fe09afda08",
+          "bytes": 841832,
+          "sha256": "d7dcbd074c785b3cb0c494867fc98b2defe971f6d445261e21b90af7ed094b8c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-5.webp",
-          "bytes": 237338,
-          "sha256": "6fde9f2f66d5c336bfae57d29ae80cafae67da9ff3df34bd51fb608e68a4031a",
+          "bytes": 601666,
+          "sha256": "ff4da52d9ec0ab50929b9b70667f266a349196664e3fe3d4fabb162adc3416d6",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/earth/earth-night-lights-page-6.webp",
-          "bytes": 40258,
-          "sha256": "092ff1f715f9df369410ef5749e56e4f847f33c22d9e71d680d404383efb9621",
+          "bytes": 113498,
+          "sha256": "c99599a1b3b1d013829b1c531d64c6b31ccfd671d47b53b4701fd245a69b45a1",
           "verification": "bytes-verified"
         }
       ],
@@ -2883,8 +3100,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/night-lights.webp",
-          "bytes": 16454,
-          "sha256": "4a367cabff60d545dad46dfd6a72e1690b699230f3638e85a204592e3a25b654",
+          "bytes": 18046,
+          "sha256": "5b3451025c107f05f58bf07dfe81685f05a21a7bfeb8def52b09a40d7866837f",
           "verification": "bytes-verified"
         }
       ]
