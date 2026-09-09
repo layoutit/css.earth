@@ -16,8 +16,8 @@ or shell for each new body.
 ```text
 src/planets/<id>/
   object.json                         authored recipe and prepared reference
-  README.md                           brief introduction and document links
-  SOURCE.md, NOTICE.md                 interpretation and credits
+  README.md                           sources, processing, evidence and known problems
+  SOURCE.md, NOTICE.md                 detailed source notes and credits
   source/manifest.json                 exact source closure
   source/preparation/*.json            acquisition and capability inputs
   source/content/object.json          content and supported controls

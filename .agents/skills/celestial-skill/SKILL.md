@@ -34,7 +34,8 @@ and useful complementary products, such as elevation, geology or composition.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
 
-Keep a short candidate list in the body's `SOURCE.md` or its linked source notes: source link,
+Explain the selected sources in the body's README. Keep a short candidate list
+in `SOURCE.md` or its linked source notes: source link,
 what it adds, and whether it is included, excluded or unresolved, with a reason.
 Compare detail, registration, coverage and reuse terms before choosing. A better
 mosaic can replace a weaker one without becoming a duplicate lens. Missing
@@ -148,9 +149,9 @@ Reuse passing evidence until changes or unresolved failures invalidate it.
 Keep project-required checks; do not add a new dashboard, gate framework,
 Burnlist or exhaustive test matrix to implement an ordinary body.
 
-Update the affected source notes, credits and test reports in the same change.
-Keep body READMEs to a brief introduction and links. Put results and open work
-in the linked reports. Save screenshots you cite in Git or agreed storage and
+Update the body README with source choices, processing, results and known
+problems. Update affected source notes, credits and original test reports in
+the same change. Keep common usage and commands in the shared repo guides. Save screenshots you cite in Git or agreed storage and
 link them; a local output path alone cannot be reviewed by someone else.
 
 Finish with the working location/URL, supported views, checked outcomes and

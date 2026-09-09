@@ -7,10 +7,10 @@ Start with [AGENTS.md](../AGENTS.md), the
 
 | Looking for | Read |
 | --- | --- |
-| Data choices, meaning and alternatives | The body's `SOURCE.md` and linked notes |
+| Sources, processing, test results and known problems | The body’s `README.md`, with links to detailed source notes and original reports |
 | Credits and reuse terms | Body `NOTICE.md`, license files and source manifest |
 | How outputs trace back to inputs, including the Sources UI | [Prepared object provenance](object-provenance.md) |
-| Test results, screenshots and known problems | [Evidence](evidence/README.md), then the body or batch report |
+| Saving original reports and screenshots | [Evidence](evidence/README.md) |
 | Code to prepare a new kind of data | [Celestial implementation map](../.agents/skills/celestial-skill/references/implementation-map.md) |
 | Documentation audit and proposal | [Provenance and documentation](provenance/README.md) |
 
@@ -18,7 +18,7 @@ Reports elsewhere in `docs/` keep their original dates, tested versions and limi
 A filename containing `final` or an old passing result does not show that today's
 checkout passes. Link the original report rather than copying it.
 
-The first four short body guides are [Earth](../src/planets/earth/README.md),
+The four body README examples are [Earth](../src/planets/earth/README.md),
 [Sun](../src/planets/sun/README.md), [Rhea](../src/planets/rhea/README.md) and
 [67P](../src/planets/comet-67p/README.md). Update other guides as work reaches them.
 

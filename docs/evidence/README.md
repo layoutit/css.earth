@@ -1,17 +1,18 @@
 # Evidence
 
-Save enough detail for someone else to identify the tested version, inspect the
-result and understand its limits. The [contract](../provenance/CONTRACT.md)
-explains what to record; the [examples](../provenance/TEMPLATES.md) show a short note.
-Link existing reports and screenshots. No extra report format is required.
+Each body's README explains what was checked, the results and remaining problems,
+alongside the sources and processing that produced the view. It links the original
+test reports, screenshots and logs stored under `docs/`.
 
-Keep test tables and open work out of body READMEs. An existing body or batch
-report is enough. If results span several reports, connect them in
-`docs/objects/<id>/EVIDENCE.md`, as in [Earth](../objects/earth/EVIDENCE.md),
-[Sun](../objects/sun/EVIDENCE.md), [Rhea](../objects/rhea/EVIDENCE.md) and
-[67P](../objects/comet-67p/EVIDENCE.md).
+See [67P](../../src/planets/comet-67p/README.md#evidence),
+[Earth](../../src/planets/earth/README.md#evidence),
+[Sun](../../src/planets/sun/README.md#evidence) and
+[Rhea](../../src/planets/rhea/README.md#evidence).
 
-Use the existing report location. A new independent run can use a descriptive
-dated folder under `docs/evidence/`. Keep old reports at their recorded versions
-and preserve their failures. Fix older links needed for the current change;
-there is no requirement to reorganize unrelated history.
+Use existing report locations. A new independent run can use a descriptive dated
+folder under `docs/evidence/`. Keep each report's tested version and failures.
+Update the README when a new result changes what is known; do not add another
+per-body index. A shared test report can cover several bodies.
+
+The [contract](../provenance/CONTRACT.md) explains file identity, reproduction,
+visual checks and reuse of earlier results. It requires no extra report format.

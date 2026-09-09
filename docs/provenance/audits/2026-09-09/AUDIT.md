@@ -79,8 +79,8 @@ still describes intake/qualification as pending and remote installation as
 unproven, while the batch reports installation and browser checks for selected cases.
 67P's README still describes four August photographs despite the integrated
 six-image mosaic. Sun SOURCE names a removed per-body reproduction script.
-The PR fixes these examples and adds four short body guides with links to their
-evidence. The other bodies still need their documentation checked.
+The PR fixes these examples and puts sources, processing, evidence and known
+problems together in four body READMEs. The other bodies still need their documentation checked.
 
 **F3 — Documentation delivery is dominated by raw evidence.**
 At main, docs contain **133 Markdown files / 3,467,791 bytes**, **606 JSON

@@ -15,8 +15,8 @@ source notes, credits, test reports and where to save them.
 
 ```text
 src/planets/<id>/
-  README.md                    brief introduction, route and document links
-  SOURCE.md                    source decisions and scientific interpretation
+  README.md                    sources, processing, evidence and known problems
+  SOURCE.md                    detailed source surveys and calculations
   NOTICE.md, LICENSE*          attribution and applicable terms
   object.json                  authored recipe and prepared transport reference
   source/manifest.json         exact inputs, documents and intermediate pins
@@ -57,11 +57,13 @@ Every new source note inside `source/` needs its own manifest entry.
 proof of fresh acquisition. Runtime inventories describe prepared delivery;
 source restoration and runtime installation are separate checks.
 
+Installation and common controls belong in the [root README](../../README.md).
 Read the current `package.json` and runner arguments before using commands:
 
 | Purpose | Entry point |
 | --- | --- |
 | Install published prepared assets for one body | `pnpm setup:assets --object=<id>` |
+| Start the shared development site | `pnpm dev` |
 | Acquire missing pins / verify present sources | `node tools/objects/dist/operations.js acquire <id>` / add `--verify-only` |
 | Prepare one authored package | `pnpm prepare:planets -- --object=<id>` |
 | Run body tests | `node --test tests/objects/unit/<id>/*.test.mjs` |
@@ -80,11 +82,11 @@ pass. Tests requiring sources/assets need those dependencies installed.
 
 ## Update documentation with the change
 
-Use the [body/source/evidence templates](../../docs/provenance/TEMPLATES.md).
-Keep a short body README linking source interpretation, attribution and a
-dedicated evidence note. Put results, open work and detailed payload references
-in that note; use an existing body/batch report or add an index when several
-reports need connecting.
+Use the [body README examples](../../docs/provenance/TEMPLATES.md).
+The README explains the body’s sources, processing, evidence and known problems.
+Link detailed source notes, exact manifests, credits and original reports from
+that explanation. Keep shared commands and usage here instead of repeating them
+for each body.
 Keep earlier test results and their limits. Do not replace original failure
 reports with summaries or claim a visual check without inspecting the images.
 The [evidence index](../../docs/evidence/README.md) explains where new reports go

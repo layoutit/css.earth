@@ -1,52 +1,41 @@
-# Small documentation examples
+# Writing a body README
 
-Use these where they help. The [contract](CONTRACT.md) does not require new
-files or fixed headings for every change.
+The README is the body's source-and-evidence document. A reader should understand
+what is shown, where the data came from, what we changed, what was checked and
+what remains uncertain without opening several introduction files.
 
-## Body README
+Use sections such as these when they fit:
 
 ```markdown
 # Body name
 
-Route: /body-id/. One sentence describing what is shown.
+Route and a sentence explaining what is shown.
 
-- [Sources and interpretation](SOURCE.md) · [Credits](NOTICE.md).
-- [Test results and known problems](path-to-existing-evidence-note.md).
-- [Contributor guide](../README.md).
+## Sources
+
+Name the dataset behind each view, why it was selected and how it was processed.
+Explain units, dates, missing coverage and display changes that affect its meaning.
+Link the manifest, credits and detailed source calculations.
+
+## Evidence
+
+State the tested version, method, result and links to the original reports or images.
+Explain what a reused result still covers. Record failures and tests not run.
+
+## Known problems
+
+List unresolved source, processing, evidence or display problems.
 ```
 
-Put detailed instructions and results in linked documents. Link an existing
-batch report if it gives a clear result for the body. Add an evidence index only
-when several reports need connecting.
+The actual examples are [67P](../../src/planets/comet-67p/README.md),
+[Earth](../../src/planets/earth/README.md), [Sun](../../src/planets/sun/README.md)
+and [Rhea](../../src/planets/rhea/README.md).
 
-## Source update
+Keep exact file sizes and hashes in existing manifests. Link detailed source
+notes instead of copying their calculations. Preserve original test reports;
+the README summarizes their results and names the versions they tested.
+Installation, common controls and preparation commands belong in the shared
+repository guides.
 
-Explain what changed, which manifest source IDs it uses, why those sources were
-chosen and how they were processed. Describe relevant limits: missing coverage,
-coordinate assumptions or uncertainty. Link details already written beside the
-data. For a value not covered by generated records, name the original field and
-calculation. Update NOTICE when credits or terms change. Keep useful alternative
-datasets and the reasons they were rejected or remain unresolved.
-
-## Test note
-
-```markdown
-# Body or batch: what was checked
-
-Tested version: code revision and links to source/prepared/runtime records.
-Include uncommitted changes and ignored or served files used by the test.
-For files not fixed by that revision or an existing manifest, record size and hash.
-
-Purpose: the behavior or scientific interpretation being checked.
-Method: command, selected cases and environment details that affect the result.
-Results: what passed or failed, with links to reports and inspected screenshots.
-Not checked: omissions, remaining problems and limits of any reused result.
-```
-
-For reproduction, name the expected inventory before the run and compare the
-new output against it. For visual checks, save the original images and explain
-the comparison. Link committed evidence at a recorded revision; files stored
-elsewhere need a stable download location, size and hash.
-
-An old report keeps its original tested version. To reuse a result, explain in
-the maintained note which new version it applies to and why.
+Follow the [contract](CONTRACT.md) for identifying uncommitted or ignored files,
+reproduction comparisons, visual evidence and reuse of old results.

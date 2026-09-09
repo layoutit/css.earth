@@ -23,3 +23,10 @@ claim from images with different sources or framing. Both are explicit in the
 The reviewers checked the instructions. They did not download sources, build
 the application or run browser tests. Existing body data and results still need
 the checks appropriate to each change.
+
+The maintainer subsequently rejected the separate introduction, evidence index
+and usage files as too fragmented. The current layout puts sources, processing,
+results and known problems in each body README. Original reports stay under
+`docs/`; detailed source notes stay beside the data. Shared usage belongs in the
+repository guides. The earlier reviews did not establish that the fragmented
+layout was useful.

@@ -97,9 +97,9 @@ when reporting a scene total, including worker requests. Development traffic
 and calculated gzip/Brotli sizes are not measured production transfer. Keep
 matched framing and workloads when comparing quality or cost.
 
-Link test reports and inspected screenshots from the body's evidence note.
-Keep the README short and `SOURCE.md` about the data's meaning and processing.
-Put dated test results in the evidence report. A recovered provenance record
+Put the results and known problems in the body's README, alongside its source
+explanation. Link the original test reports and inspected screenshots. Keep
+lengthy source calculations in the existing source notes. A recovered provenance record
 does not prove the preparation was rerun.
 
 Report concise outcomes and useful visual links, source/processing limitations
@@ -110,4 +110,4 @@ For reproduction, name the expected inventory before running and compare the
 regenerated files against it. An inventory made only from the new output does
 not prove reproduction of the old result. Link existing manifests. Keep old
 reports tied to their tested versions; explain any reuse for a new version in
-the maintained evidence note.
+the README’s evidence section.
