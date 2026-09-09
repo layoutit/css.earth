@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "bellona",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/957/shape.txt",
+    "credit": "DAMIT, Astronomical Institute of Charles University; Viikinkoski et al. (2017); model 1839, version 2017-09-21.",
+    "license": "CC-BY-4.0",
+    "consumers": [
+      "navigation"
+    ],
+    "expectedBytes": 85055,
+    "expectedSha256": "2bd55ba3c97a3b172a6173b28a41f37d8cf23c059bb6a2bc360888f5a38f8785",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "bellona-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 35,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "shape"
+    },
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1841",
+  "modelId": 1841,
+  "modelVersion": "2017-09-21",
+  "diameterKm": 104,
+  "diameterInterpretation": "Nonconvex model constrained by resolved imaging, 104 ± 4 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 104,
+    "uncertaintyKm": 4,
+    "uncertaintyKind": "Archive estimate of equivalent-diameter error; it does not describe local shape accuracy.",
+    "diameterSemantics": "Volume-equivalent diameter D in the selected DAMIT model record; its exact archive release is retained separately from publication-level ensemble estimates.",
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1841",
+    "reference": "DAMIT model 1841, version 2017-09-21",
+    "sourceLabel": "DAMIT model 1841",
+    "scaleKmPerSourceUnit": 0.3637666780773104,
+    "metersPerSourceUnit": 363.7666780773104,
+    "limitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The raw table has an equivalent diameter of 285.89754 source units, inconsistent with its km-calibrated flag and declared 104 km diameter; scale 0.363766684… km per source unit restores the declared diameter. The source remains an inverse model, not a directly measured surface. The original ADAM study used only one AO observation for this body, limiting the shape constraints.",
+    "visibleDescription": "Nonconvex model constrained by resolved imaging, 104 ± 4 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative."
+  },
+  "periodHours": 13.58364,
+  "poleEclipticJ2000Degrees": [
+    108,
+    44
+  ],
+  "modelLimitations": "The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The raw table has an equivalent diameter of 285.89754 source units, inconsistent with its km-calibrated flag and declared 104 km diameter; scale 0.363766684… km per source unit restores the declared diameter. The source remains an inverse model, not a directly measured surface. The original ADAM study used only one AO observation for this body, limiting the shape constraints.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/1150/shape.txt",
+    "vertices": 402,
+    "faces": 800,
+    "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
+    "metersPerUnit": 363.7666780773104,
+    "firstVertexKm": [
+      -5.202108675246563,
+      1.9510065577992304,
+      45.08080194482924
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      116.23687663612172,
+      121.8067628808381,
+      97.39347169837457
+    ],
+    "volumeCubicKm": 588977.4131146052,
+    "volumeEquivalentRadiusKm": 52,
+    "radialRangeKm": [
+      41.923864228352116,
+      67.24427935950511
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 800,
+    "sourceVertices": 402,
+    "weldedVertices": 402,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1040,
+    "estimatedErrorMeters": 0,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 588977413114604
+    }
+  }
+}

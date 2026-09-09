@@ -2,8 +2,10 @@
 // JPL Horizons, heliocentric ICRF; epoch 2026-09-03. TDB is approximated as TT (under 2 ms).
 import { ASTEROID_FIXTURES_1 } from './horizons.asteroids-1.js'
 import { ASTEROID_FIXTURES_2 } from './horizons.asteroids-2.js'
+import { ASTEROID_FIXTURES_3 } from './horizons.asteroids-3.js'
 
 export const ASTEROID_FIXTURES = {
   ...ASTEROID_FIXTURES_1,
   ...ASTEROID_FIXTURES_2,
+  ...ASTEROID_FIXTURES_3,
 } as const
