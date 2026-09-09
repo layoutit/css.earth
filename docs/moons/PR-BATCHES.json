@@ -350,7 +350,7 @@
         "Saturn|XXXII",
         "Saturn|XXXIII"
       ],
-      "state": "in-progress",
+      "state": "paused",
       "owner": "Moons",
       "branch": "feat/moons-observation-charts",
       "baseCommit": "c016fd31d711e204bab4521c82c7e2e192f6e0df",
@@ -405,7 +405,11 @@
       },
       "integrationBase": "ef2d27b2da3e774b2410f216b0e6024b972ee39a",
       "draft": true,
-      "pullRequest": "https://github.com/layoutit/cssEarth/pull/70"
+      "pullRequest": "https://github.com/layoutit/cssEarth/pull/70",
+      "publicationDecision": {
+        "status": "deferred",
+        "reason": "User finds the charts interesting but considers them potentially too much for the public interface. Keep PR #70 in draft until that product decision is revisited."
+      }
     }
   ],
   "plannedBodies": 60,

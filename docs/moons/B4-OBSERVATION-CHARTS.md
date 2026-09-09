@@ -5,7 +5,7 @@ B4 adds **18 prepared observation views across all nine planned moons**, backed 
 uncertainties, original-source links and downloadable measurements. Negative values,
 noise, instrument gaps and quality flags remain explicit.
 
-Draft [PR #70](https://github.com/layoutit/cssEarth/pull/70); full application scene conformance remains unverified.
+**Paused in [draft PR #70](https://github.com/layoutit/cssEarth/pull/70) at the user’s request.** The charts are useful research, but their exposure in the public interface is deferred. Keep the PR in draft until that product decision is revisited. Full application scene conformance also remains unverified.
 
 Owner: Moons · Branch `feat/moons-observation-charts` · Started 2026-09-09.
 Started from merged [B3 PR #67](https://github.com/layoutit/cssEarth/pull/67),
