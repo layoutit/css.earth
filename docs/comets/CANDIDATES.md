@@ -1,16 +1,16 @@
 # Further comet intake
 
-The six comet scenes include 67P, Hartley 2, Tempel 1, the completed PDS Wild 2 model, Halley's historical model and Tuttle's two inferred contact models. The original archive survey was made on 8 September 2026; the Tuttle comparison was added on 9 September. An unresolved candidate is not a claim that usable data does not exist.
+The seven comet scenes include 67P, Hartley 2, Tempel 1, the completed PDS Wild 2 model, Halley's historical model, Tuttle's two inferred contact models, and Borrelly's observed terrain. The original archive survey was made on 8 September 2026; the Tuttle comparison was added on 9 September. An unresolved candidate is not a claim that usable data does not exist.
 
 ## Wild 2: completed PDS model selected
 
 [PDS v2.1](https://pdssbn.astro.umd.edu/holdings/sdu-c-navcam-5-wild2-shape-model-v2.1/dataset.shtml) provides observed-only and completed plate models. The full model uses the archive's fitted ellipsoid and joining faces for unseen terrain, with explicit provenance flags. It now supplies Wild 2's closed 992-leaf scene. The viewer describes the estimated far side; no photographic or observed-terrain claim is made for it. See [the completion record](WILD2-COMPLETION.md).
 
-## Borrelly: image-frame terrain, not a closed nucleus
+## Borrelly: terrain, estimated completion and registered photography selected
 
-The [DS1 PDS catalogue](https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat) provides USGS and DLR stereo elevation models for the visible, illuminated side. Their coordinates are a local image-related frame; heights are relative to a reference plane. The [USGS label](https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/usgsdem.lbl) specifies a 16 m grid with missing positions omitted and includes surface normals. The catalogue reports roughly 85 m mean differences between the two independently processed models.
+The [DS1 PDS catalogue](https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/catalog/dataset.cat) provides USGS and DLR stereo elevation models for the visible, illuminated side. Their coordinates are a local image-related frame; heights are relative to a reference plane. The [USGS label](https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/usgsdem.lbl) specifies a 16 m grid with missing positions omitted and includes surface normals. The mapping paper infers about 85 m RMS uncertainty per model under its stated assumptions; this is not our registration's measured error.
 
-A useful implementation would preserve that terrain footprint, datum and observed framing. Treating these heights as global nucleus radii would be incorrect. This partial terrain presentation remains unresolved and is not registered.
+The included scene preserves those terrain footprints and datums in separate USGS and DLR banks. MICAS orthophotography is registered through its original XYZ cubes; Height retains the USGS image-plane datum, and Difference compares only overlapping terrain after a documented registration. The unobserved side and internal gaps receive an explicitly estimated completion with the shared missing-data grid. [Borrelly](BORRELLY.md) records source qualifications, alignment sensitivity and browser evidence.
 
 ## Halley: historical model selected
 

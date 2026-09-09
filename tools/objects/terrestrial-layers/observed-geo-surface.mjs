@@ -1,4 +1,5 @@
 import { validateEncounterRecipe, loadEncounterSurface } from './encounter-surface.mjs';
+import { validateOrthographicObservation, loadOrthographicObservation } from './image-dem-observation.mjs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, fitCamera, project, sampleGeo, diskGain } from './osiris-geo.mjs';
@@ -15,6 +16,7 @@ const framePaths = recipe => recipe.format === 'amica-gaskell'
   ? [recipe.path, recipe.labelPath, recipe.originalPath, recipe.flatPath]
   : archivedCamera(recipe) ? [recipe.path, recipe.cameraPath] : [recipe.path, recipe.qualityPath];
 export function validateGeoSurfaceRecipe(recipe, geometry) {
+  if (recipe.format === 'isis2-orthographic') return validateOrthographicObservation(recipe, geometry);
   if (recipe.format === 'encounter-fits') return validateEncounterRecipe(recipe, geometry);
   if (recipe.frames !== undefined) {
     const frames = recipe.frames, levels = recipe.levelMatching;
@@ -178,6 +180,7 @@ function previewGeoSurface(samplePoint, radial, config, width, height) {
 }
 
 export async function loadGeoObservationSurface(options) {
+  if (options.recipe.format === 'isis2-orthographic') return loadOrthographicObservation(options);
   if (options.recipe.format === 'encounter-fits') return loadEncounterSurface(options);
   const { sourceDirectory, source, recipe, radial, config } = options;
   validateGeoSurfaceRecipe(recipe, config.geometry.radialTerrain);

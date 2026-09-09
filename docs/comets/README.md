@@ -1,11 +1,12 @@
 # Comet scenes
 
-Six independently selectable nucleus packages use the generic object registry. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. Tuttle retains two separate 1,000-triangle models and displays only the selected one. All geometry, maps, normals and shadows are prepared before runtime.
+Seven independently selectable nucleus packages use the generic object registry. The shared shell and camera remain the owners of interaction. Halley, 67P, Hartley 2 and Tempel 1 each have 1,000 prepared native PolyCSS triangles; Wild 2 has 992. Tuttle retains two separate 1,000-triangle models and displays only the selected one. Borrelly retains 994 USGS and 1,862 DLR triangles, including explicitly gridded estimated closures, with only the selected terrain bank displayed. All geometry, maps, normals and shadows are prepared before runtime.
 
 | Object | Geometry source | What the default view represents |
 | --- | --- | --- |
 | [1P/Halley](../../src/planets/comet-1p/SOURCE.md) | Stooke's historical Giotto/Vega radius grid, 2,701 rows | Highly uncertain historical shape with neutral material and an illustrative fixed attitude. |
 | [8P/Tuttle](../../src/planets/comet-8p/SOURCE.md) | Hubble/Spitzer contact spheres and an alternative Arecibo contact-ellipsoid model | Hubble/Spitzer is the default; Arecibo uses a separate inferred shape at the same physical scale. Both have illustrative attitudes. |
+| [19P/Borrelly](../../src/planets/comet-19p/SOURCE.md) | Reviewed USGS and DLR image-plane DEMs | Registered MICAS photograph on the USGS terrain; independent terrain, Height and Difference views share the scene. |
 | [67P/Churyumov–Gerasimenko](../../src/planets/comet-67p/SOURCE.md) | ESA/RMOC MTP019, 104,192 source triangles | Rosetta nucleus geometry with a neutral gray model material. The neck and non-convex topology are retained. |
 | [103P/Hartley 2](../../src/planets/comet-103p/SOURCE.md) | Farnham & Thomas (2013), EPOXI PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. The cartographic long axis is not treated as a spin axis. |
 | [9P/Tempel 1](../../src/planets/comet-9p/SOURCE.md) | Farnham & Thomas (2013), combined Deep Impact/Stardust-NExT PDS model, 32,040 source triangles | The published complete model, colored by its source constraint flags. |
@@ -17,7 +18,7 @@ The display does not simulate dust, a coma, jets, tails or outgassing. The PDS c
 
 ## Additional candidates
 
-[CANDIDATES.md](CANDIDATES.md) records source limitations and dispositions. Wild 2 uses the archive's explicitly estimated completion; Halley uses the labelled historical model. Borrelly remains unresolved because its inspected source describes image-frame partial terrain, with no placeholder scene.
+[CANDIDATES.md](CANDIDATES.md) records source limitations and dispositions. Wild 2 uses the archive's explicitly estimated completion; Halley uses the labelled historical model. Borrelly preserves the measured image-plane terrain and marks its estimated completion with the shared grid, alongside photography and comparison views. See [the Borrelly record](BORRELLY.md).
 
 A discarded intake experiment removed all PDS faces touching a poorly constrained vertex. That broke Hartley 2's visible neck and made the display misleading. The included packages instead preserve the published scientific model and expose its uncertainty categories. This decision does not claim that the entire model was measured directly.
 

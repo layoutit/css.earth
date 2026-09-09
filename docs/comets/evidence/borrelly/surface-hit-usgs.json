@@ -1,0 +1,1820 @@
+{
+  "id": "comet-19p",
+  "lens": "micas",
+  "browser": "152.0.7977.84",
+  "pickerSha256": "15e19ab8515089c2c300454a9ad92800d3d1303586368b6ad97327e171c2f2b2",
+  "runtimeSha256": "eacc8142089ee60610a745735e511f8c0669ca075a4003eb9490d19ef5813b16",
+  "reports": [
+    {
+      "dpr": 1,
+      "views": [
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 85,
+          "clearMisses": 1234,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 25,
+          "rasterEdgeSamples": [
+            {
+              "x": 678,
+              "y": 306,
+              "distanceCssPixels": 0.3313164041148888,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 330,
+              "distanceCssPixels": 0.12994430784123162,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 330,
+              "distanceCssPixels": 0.0037451920138833767,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 354,
+              "distanceCssPixels": 0.20696919395110716,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 354,
+              "distanceCssPixels": 0.15887376927594288,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 378,
+              "distanceCssPixels": 0.06487759718968861,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 378,
+              "distanceCssPixels": 0.05209114515709976,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 402,
+              "distanceCssPixels": 0.36012037665650065,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 426,
+              "distanceCssPixels": 0.04213180406029856,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 450,
+              "distanceCssPixels": 0.49627571725083586,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 450,
+              "distanceCssPixels": 0.4964210526578832,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 450,
+              "distanceCssPixels": 0.26081907441347624,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 450,
+              "distanceCssPixels": 0.45186972751199017,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 498,
+              "distanceCssPixels": 0.13492760846343912,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 498,
+              "distanceCssPixels": 0.2767838311139656,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 570,
+              "distanceCssPixels": 0.21621346401994962,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 918,
+              "y": 594,
+              "distanceCssPixels": 0.053397729206253824,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 846,
+              "y": 618,
+              "distanceCssPixels": 0.3183904505835793,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 870,
+              "y": 642,
+              "distanceCssPixels": 0.08470103292146154,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 642,
+              "distanceCssPixels": 0.4364441962253748,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.0075865, 0.0142977, 0.0117482, 0, 0, 0.0126972, -0.0154526, 0, -0.0185053, -0.00586155, -0.00481635, 0, 1e-06, -1e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 106,
+          "clearMisses": 1205,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 33,
+          "rasterEdgeSamples": [
+            {
+              "x": 630,
+              "y": 282,
+              "distanceCssPixels": 0.08717965882473891,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 306,
+              "distanceCssPixels": 0.128922090233301,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 582,
+              "y": 306,
+              "distanceCssPixels": 0.1118287231356538,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 378,
+              "distanceCssPixels": 0.1670456811832415,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 402,
+              "distanceCssPixels": 0.2735535636446616,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 402,
+              "distanceCssPixels": 0.004172287605403682,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 510,
+              "y": 426,
+              "distanceCssPixels": 0.4641515944632455,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 426,
+              "distanceCssPixels": 0.32739968435274763,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 426,
+              "distanceCssPixels": 0.3495425851289586,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 450,
+              "distanceCssPixels": 0.352614846302341,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 450,
+              "distanceCssPixels": 0.34051608273034345,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 498,
+              "distanceCssPixels": 0.3714802439694008,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 498,
+              "distanceCssPixels": 0.03415094163714306,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 498,
+              "distanceCssPixels": 0.2786571090647827,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 498,
+              "distanceCssPixels": 0.24564008333830734,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 846,
+              "y": 498,
+              "distanceCssPixels": 0.14378943001680589,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 522,
+              "distanceCssPixels": 0.14136709247199195,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 822,
+              "y": 522,
+              "distanceCssPixels": 0.4245980167244183,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 846,
+              "y": 546,
+              "distanceCssPixels": 0.03897862865161019,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 546,
+              "distanceCssPixels": 0.24686044383978992,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 570,
+              "distanceCssPixels": 0.36285990639485416,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 570,
+              "distanceCssPixels": 0.48466100294579045,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 918,
+              "y": 570,
+              "distanceCssPixels": 0.003671893303111648,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 594,
+              "distanceCssPixels": 0.28851479883809533,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 846,
+              "y": 594,
+              "distanceCssPixels": 0.4730886549701996,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 918,
+              "y": 594,
+              "distanceCssPixels": 0.23576746802716567,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 618,
+              "distanceCssPixels": 0.23250785318564396,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 618,
+              "distanceCssPixels": 0.3343757033632447,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 642,
+              "distanceCssPixels": 0.28756640790731725,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.00361866, 0.0142977, 0.0135085, 0, -0.0114562, 0.0126972, -0.01037, 0, -0.0159894, -0.00586155, 0.0104872, 0, -1e-06, -2e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 90,
+          "clearMisses": 1220,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 34,
+          "rasterEdgeSamples": [
+            {
+              "x": 654,
+              "y": 282,
+              "distanceCssPixels": 0.1256321274683267,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 282,
+              "distanceCssPixels": 0.011859762924451093,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 582,
+              "y": 330,
+              "distanceCssPixels": 0.06460912687493361,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 330,
+              "distanceCssPixels": 0.37289342279071186,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 354,
+              "distanceCssPixels": 0.27675734472318075,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 486,
+              "y": 378,
+              "distanceCssPixels": 0.125309505299802,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 378,
+              "distanceCssPixels": 0.10235133379404843,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 378,
+              "distanceCssPixels": 0.4712410420910964,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 378,
+              "distanceCssPixels": 0.19167139669133096,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 402,
+              "distanceCssPixels": 0.20299766332375135,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 450,
+              "distanceCssPixels": 0.3567405809431642,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 510,
+              "y": 474,
+              "distanceCssPixels": 0.2014864860484055,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 474,
+              "distanceCssPixels": 0.13137449768854054,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 498,
+              "distanceCssPixels": 0.2769898619312174,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 498,
+              "distanceCssPixels": 0.03140937951750294,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 498,
+              "distanceCssPixels": 0.03609471448167234,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 522,
+              "distanceCssPixels": 0.19542649188805794,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 522,
+              "distanceCssPixels": 0.2190700507319208,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 546,
+              "distanceCssPixels": 0.04740733617734505,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 546,
+              "distanceCssPixels": 0.15062677343912095,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 546,
+              "distanceCssPixels": 0.0683385107145464,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 570,
+              "distanceCssPixels": 0.36451416371189393,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 570,
+              "distanceCssPixels": 0.041359707799691385,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 570,
+              "distanceCssPixels": 0.0487851489700447,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 570,
+              "distanceCssPixels": 0.07644911446294839,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 594,
+              "distanceCssPixels": 0.41642201038138876,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 594,
+              "distanceCssPixels": 0.08936752118312376,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 618,
+              "distanceCssPixels": 0.3966487801672029,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.0124434, 0.0142977, 0.00638263, 0, -0.0153762, 0.0126972, 0.00153416, 0, -0.00295531, -0.00586155, 0.018892, 0, -3e-06, -2e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 69,
+          "clearMisses": 1255,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 20,
+          "rasterEdgeSamples": [
+            {
+              "x": 750,
+              "y": 282,
+              "distanceCssPixels": 0.05496159053904482,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 282,
+              "distanceCssPixels": 0.13415530724374808,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 306,
+              "distanceCssPixels": 0.44727685352870217,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 330,
+              "distanceCssPixels": 0.24795670440756093,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 378,
+              "distanceCssPixels": 0.378726959992547,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 402,
+              "distanceCssPixels": 0.30952523269287674,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 426,
+              "distanceCssPixels": 0.0587923901686881,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 474,
+              "distanceCssPixels": 0.11835581323650354,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 474,
+              "distanceCssPixels": 0.35404820767597106,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 522,
+              "distanceCssPixels": 0.3316071978334246,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 546,
+              "distanceCssPixels": 0.2295653468857968,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 546,
+              "distanceCssPixels": 0.2718338735860243,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 546,
+              "distanceCssPixels": 0.16249520608205548,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 570,
+              "distanceCssPixels": 0.35133941965324655,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 570,
+              "distanceCssPixels": 0.474263803641177,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 594,
+              "distanceCssPixels": 0.40261565222876694,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 594,
+              "distanceCssPixels": 0.4522545601525853,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 642,
+              "distanceCssPixels": 0.07366720214748533,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.0130825, 0.0142977, -0.00494193, 0, -0.00918141, 0.0126972, 0.0124292, 0, 0.0120228, -0.00586155, 0.0148692, 0, -2e-06, -2e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 116,
+          "clearMisses": 1209,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 19,
+          "rasterEdgeSamples": [
+            {
+              "x": 822,
+              "y": 306,
+              "distanceCssPixels": 0.15655446696414996,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 330,
+              "distanceCssPixels": 0.013216492231857313,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 822,
+              "y": 354,
+              "distanceCssPixels": 0.16974964638212361,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 918,
+              "y": 378,
+              "distanceCssPixels": 0.2466241892790957,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 426,
+              "distanceCssPixels": 0.30710494459761,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 450,
+              "distanceCssPixels": 0.2552506347801938,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 474,
+              "distanceCssPixels": 0.011754856138666718,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 498,
+              "distanceCssPixels": 0.15102720522983734,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 522,
+              "distanceCssPixels": 0.38285505094271066,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 534,
+              "y": 546,
+              "distanceCssPixels": 0.045394545595722154,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 546,
+              "distanceCssPixels": 0.44016338412551,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 510,
+              "y": 570,
+              "distanceCssPixels": 0.179765299707553,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.0051157, 0.0142977, -0.0130156, 0, 0.00305316, 0.0126972, 0.0151479, 0, 0.0190921, -0.00586155, 0.00106508, 0, -1e-06, -3e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 125,
+          "clearMisses": 1178,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 41,
+          "rasterEdgeSamples": [
+            {
+              "x": 822,
+              "y": 306,
+              "distanceCssPixels": 0.3956067134006294,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 330,
+              "distanceCssPixels": 0.38239872111164647,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 354,
+              "distanceCssPixels": 0.15450434586187198,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 942,
+              "y": 354,
+              "distanceCssPixels": 0.06847574522079558,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 378,
+              "distanceCssPixels": 0.12045838543727667,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 378,
+              "distanceCssPixels": 0.34523967985326465,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 966,
+              "y": 402,
+              "distanceCssPixels": 0.38380601090931,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 426,
+              "distanceCssPixels": 0.40939217253807775,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 870,
+              "y": 426,
+              "distanceCssPixels": 0.4978752935007386,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 450,
+              "distanceCssPixels": 0.17976341533156692,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 942,
+              "y": 450,
+              "distanceCssPixels": 0.3399057333555082,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 474,
+              "distanceCssPixels": 0.20615046046227434,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 498,
+              "distanceCssPixels": 0.40563182834995515,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 498,
+              "distanceCssPixels": 0.07925949391448808,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 498,
+              "distanceCssPixels": 0.18487928422925137,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 498,
+              "distanceCssPixels": 0.4832214139721828,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 522,
+              "distanceCssPixels": 0.06335981240120332,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 522,
+              "distanceCssPixels": 0.36615610484725425,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 546,
+              "distanceCssPixels": 0.13084884449799866,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 510,
+              "y": 570,
+              "distanceCssPixels": 0.09523030005086136,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 570,
+              "distanceCssPixels": 0.129471214977769,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 594,
+              "distanceCssPixels": 0.22683830527710414,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 594,
+              "distanceCssPixels": 0.13583101316081478,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 618,
+              "distanceCssPixels": 0.3705863586142341,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 618,
+              "distanceCssPixels": 0.27935195065799173,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 642,
+              "distanceCssPixels": 0.4195094936003667,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 642,
+              "distanceCssPixels": 0.2059311896350125,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 642,
+              "distanceCssPixels": 0.39852848878069513,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 534,
+              "y": 666,
+              "distanceCssPixels": 0.32985774406605267,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 666,
+              "distanceCssPixels": 0.24423736414403213,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 666,
+              "distanceCssPixels": 0.25339549756564306,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.00621637, 0.0142977, -0.0125273, 0, 0.0132793, 0.0126972, 0.00790206, 0, 0.0136021, -0.00586155, -0.0134397, 0, -2e-06, 0, 116.839, 1)"
+        }
+      ],
+      "totals": {
+        "hits": 591,
+        "misses": 7301,
+        "back": 0,
+        "mismatches": 0
+      }
+    },
+    {
+      "dpr": 2,
+      "views": [
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 85,
+          "clearMisses": 1234,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 25,
+          "rasterEdgeSamples": [
+            {
+              "x": 678,
+              "y": 306,
+              "distanceCssPixels": 0.3313164041148888,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 330,
+              "distanceCssPixels": 0.12994430784123162,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 330,
+              "distanceCssPixels": 0.0037451920138833767,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 354,
+              "distanceCssPixels": 0.20696919395110716,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 354,
+              "distanceCssPixels": 0.15887376927594288,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 378,
+              "distanceCssPixels": 0.06487759718968861,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 378,
+              "distanceCssPixels": 0.05209114515709976,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 402,
+              "distanceCssPixels": 0.36012037665650065,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 426,
+              "distanceCssPixels": 0.04213180406029856,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 450,
+              "distanceCssPixels": 0.49627571725083586,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 450,
+              "distanceCssPixels": 0.4964210526578832,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 450,
+              "distanceCssPixels": 0.26081907441347624,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 450,
+              "distanceCssPixels": 0.45186972751199017,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 498,
+              "distanceCssPixels": 0.13492760846343912,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 498,
+              "distanceCssPixels": 0.2767838311139656,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 570,
+              "distanceCssPixels": 0.21621346401994962,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 918,
+              "y": 594,
+              "distanceCssPixels": 0.053397729206253824,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 846,
+              "y": 618,
+              "distanceCssPixels": 0.3183904505835793,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 870,
+              "y": 642,
+              "distanceCssPixels": 0.08470103292146154,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 642,
+              "distanceCssPixels": 0.4364441962253748,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.0075865, 0.0142977, 0.0117482, 0, 0, 0.0126972, -0.0154526, 0, -0.0185053, -0.00586155, -0.00481635, 0, 1e-06, -1e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 106,
+          "clearMisses": 1205,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 33,
+          "rasterEdgeSamples": [
+            {
+              "x": 630,
+              "y": 282,
+              "distanceCssPixels": 0.08717965882473891,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 306,
+              "distanceCssPixels": 0.128922090233301,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 582,
+              "y": 306,
+              "distanceCssPixels": 0.1118287231356538,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 378,
+              "distanceCssPixels": 0.1670456811832415,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 402,
+              "distanceCssPixels": 0.2735535636446616,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 402,
+              "distanceCssPixels": 0.004172287605403682,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 510,
+              "y": 426,
+              "distanceCssPixels": 0.4641515944632455,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 426,
+              "distanceCssPixels": 0.32739968435274763,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 426,
+              "distanceCssPixels": 0.3495425851289586,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 450,
+              "distanceCssPixels": 0.352614846302341,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 450,
+              "distanceCssPixels": 0.34051608273034345,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 498,
+              "distanceCssPixels": 0.3714802439694008,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 498,
+              "distanceCssPixels": 0.03415094163714306,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 498,
+              "distanceCssPixels": 0.2786571090647827,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 498,
+              "distanceCssPixels": 0.24564008333830734,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 846,
+              "y": 498,
+              "distanceCssPixels": 0.14378943001680589,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 522,
+              "distanceCssPixels": 0.14136709247199195,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 822,
+              "y": 522,
+              "distanceCssPixels": 0.4245980167244183,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 846,
+              "y": 546,
+              "distanceCssPixels": 0.03897862865161019,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 546,
+              "distanceCssPixels": 0.24686044383978992,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 570,
+              "distanceCssPixels": 0.36285990639485416,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 570,
+              "distanceCssPixels": 0.48466100294579045,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 918,
+              "y": 570,
+              "distanceCssPixels": 0.003671893303111648,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 594,
+              "distanceCssPixels": 0.28851479883809533,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 846,
+              "y": 594,
+              "distanceCssPixels": 0.4730886549701996,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 918,
+              "y": 594,
+              "distanceCssPixels": 0.23576746802716567,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 618,
+              "distanceCssPixels": 0.23250785318564396,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 618,
+              "distanceCssPixels": 0.3343757033632447,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 642,
+              "distanceCssPixels": 0.28756640790731725,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.00361866, 0.0142977, 0.0135085, 0, -0.0114562, 0.0126972, -0.01037, 0, -0.0159894, -0.00586155, 0.0104872, 0, -1e-06, -2e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 90,
+          "clearMisses": 1220,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 34,
+          "rasterEdgeSamples": [
+            {
+              "x": 654,
+              "y": 282,
+              "distanceCssPixels": 0.1256321274683267,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 282,
+              "distanceCssPixels": 0.011859762924451093,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 582,
+              "y": 330,
+              "distanceCssPixels": 0.06460912687493361,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 330,
+              "distanceCssPixels": 0.37289342279071186,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 354,
+              "distanceCssPixels": 0.27675734472318075,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 486,
+              "y": 378,
+              "distanceCssPixels": 0.125309505299802,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 378,
+              "distanceCssPixels": 0.10235133379404843,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 378,
+              "distanceCssPixels": 0.4712410420910964,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 378,
+              "distanceCssPixels": 0.19167139669133096,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 402,
+              "distanceCssPixels": 0.20299766332375135,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 450,
+              "distanceCssPixels": 0.3567405809431642,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 510,
+              "y": 474,
+              "distanceCssPixels": 0.2014864860484055,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 474,
+              "distanceCssPixels": 0.13137449768854054,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 498,
+              "distanceCssPixels": 0.2769898619312174,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 498,
+              "distanceCssPixels": 0.03140937951750294,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 498,
+              "distanceCssPixels": 0.03609471448167234,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 522,
+              "distanceCssPixels": 0.19542649188805794,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 522,
+              "distanceCssPixels": 0.2190700507319208,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 546,
+              "distanceCssPixels": 0.04740733617734505,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 546,
+              "distanceCssPixels": 0.15062677343912095,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 546,
+              "distanceCssPixels": 0.0683385107145464,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 570,
+              "distanceCssPixels": 0.36451416371189393,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 570,
+              "distanceCssPixels": 0.041359707799691385,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 570,
+              "distanceCssPixels": 0.0487851489700447,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 570,
+              "distanceCssPixels": 0.07644911446294839,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 594,
+              "distanceCssPixels": 0.41642201038138876,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 594,
+              "distanceCssPixels": 0.08936752118312376,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 618,
+              "distanceCssPixels": 0.3966487801672029,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.0124434, 0.0142977, 0.00638263, 0, -0.0153762, 0.0126972, 0.00153416, 0, -0.00295531, -0.00586155, 0.018892, 0, -3e-06, -2e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 69,
+          "clearMisses": 1255,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 20,
+          "rasterEdgeSamples": [
+            {
+              "x": 750,
+              "y": 282,
+              "distanceCssPixels": 0.05496159053904482,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 282,
+              "distanceCssPixels": 0.13415530724374808,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 306,
+              "distanceCssPixels": 0.44727685352870217,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 330,
+              "distanceCssPixels": 0.24795670440756093,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 378,
+              "distanceCssPixels": 0.378726959992547,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 402,
+              "distanceCssPixels": 0.30952523269287674,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 426,
+              "distanceCssPixels": 0.0587923901686881,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 474,
+              "distanceCssPixels": 0.11835581323650354,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 474,
+              "distanceCssPixels": 0.35404820767597106,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 522,
+              "distanceCssPixels": 0.3316071978334246,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 546,
+              "distanceCssPixels": 0.2295653468857968,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 546,
+              "distanceCssPixels": 0.2718338735860243,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 546,
+              "distanceCssPixels": 0.16249520608205548,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 570,
+              "distanceCssPixels": 0.35133941965324655,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 570,
+              "distanceCssPixels": 0.474263803641177,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 594,
+              "distanceCssPixels": 0.40261565222876694,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 594,
+              "distanceCssPixels": 0.4522545601525853,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 642,
+              "distanceCssPixels": 0.07366720214748533,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.0130825, 0.0142977, -0.00494193, 0, -0.00918141, 0.0126972, 0.0124292, 0, 0.0120228, -0.00586155, 0.0148692, 0, -2e-06, -2e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 116,
+          "clearMisses": 1209,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 19,
+          "rasterEdgeSamples": [
+            {
+              "x": 822,
+              "y": 306,
+              "distanceCssPixels": 0.15655446696414996,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 330,
+              "distanceCssPixels": 0.013216492231857313,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 822,
+              "y": 354,
+              "distanceCssPixels": 0.16974964638212361,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 918,
+              "y": 378,
+              "distanceCssPixels": 0.2466241892790957,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 426,
+              "distanceCssPixels": 0.30710494459761,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 450,
+              "distanceCssPixels": 0.2552506347801938,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 474,
+              "distanceCssPixels": 0.011754856138666718,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 498,
+              "distanceCssPixels": 0.15102720522983734,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 522,
+              "distanceCssPixels": 0.38285505094271066,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 534,
+              "y": 546,
+              "distanceCssPixels": 0.045394545595722154,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 546,
+              "distanceCssPixels": 0.44016338412551,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 510,
+              "y": 570,
+              "distanceCssPixels": 0.179765299707553,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(0.0051157, 0.0142977, -0.0130156, 0, 0.00305316, 0.0126972, 0.0151479, 0, 0.0190921, -0.00586155, 0.00106508, 0, -1e-06, -3e-06, 116.839, 1)"
+        },
+        {
+          "nativeLeaves": 994,
+          "nativeFrontHits": 125,
+          "clearMisses": 1178,
+          "backfaceOnlyMisses": 0,
+          "boundarySkipped": 41,
+          "rasterEdgeSamples": [
+            {
+              "x": 822,
+              "y": 306,
+              "distanceCssPixels": 0.3956067134006294,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 330,
+              "distanceCssPixels": 0.38239872111164647,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 894,
+              "y": 354,
+              "distanceCssPixels": 0.15450434586187198,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 942,
+              "y": 354,
+              "distanceCssPixels": 0.06847574522079558,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 378,
+              "distanceCssPixels": 0.12045838543727667,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 774,
+              "y": 378,
+              "distanceCssPixels": 0.34523967985326465,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 966,
+              "y": 402,
+              "distanceCssPixels": 0.38380601090931,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 426,
+              "distanceCssPixels": 0.40939217253807775,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 870,
+              "y": 426,
+              "distanceCssPixels": 0.4978752935007386,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 450,
+              "distanceCssPixels": 0.17976341533156692,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 942,
+              "y": 450,
+              "distanceCssPixels": 0.3399057333555082,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 474,
+              "distanceCssPixels": 0.20615046046227434,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 606,
+              "y": 498,
+              "distanceCssPixels": 0.40563182834995515,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 498,
+              "distanceCssPixels": 0.07925949391448808,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 702,
+              "y": 498,
+              "distanceCssPixels": 0.18487928422925137,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 798,
+              "y": 498,
+              "distanceCssPixels": 0.4832214139721828,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 522,
+              "distanceCssPixels": 0.06335981240120332,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 522,
+              "distanceCssPixels": 0.36615610484725425,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 546,
+              "distanceCssPixels": 0.13084884449799866,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 510,
+              "y": 570,
+              "distanceCssPixels": 0.09523030005086136,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 570,
+              "distanceCssPixels": 0.129471214977769,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 726,
+              "y": 594,
+              "distanceCssPixels": 0.22683830527710414,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 594,
+              "distanceCssPixels": 0.13583101316081478,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 678,
+              "y": 618,
+              "distanceCssPixels": 0.3705863586142341,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 750,
+              "y": 618,
+              "distanceCssPixels": 0.27935195065799173,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 642,
+              "distanceCssPixels": 0.4195094936003667,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 630,
+              "y": 642,
+              "distanceCssPixels": 0.2059311896350125,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 642,
+              "distanceCssPixels": 0.39852848878069513,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 534,
+              "y": 666,
+              "distanceCssPixels": 0.32985774406605267,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 558,
+              "y": 666,
+              "distanceCssPixels": 0.24423736414403213,
+              "kind": "pixel-boundary"
+            },
+            {
+              "x": 654,
+              "y": 666,
+              "distanceCssPixels": 0.25339549756564306,
+              "kind": "pixel-boundary"
+            }
+          ],
+          "mismatches": [],
+          "sceneTransform": "matrix3d(-0.00621637, 0.0142977, -0.0125273, 0, 0.0132793, 0.0126972, 0.00790206, 0, 0.0136021, -0.00586155, -0.0134397, 0, -2e-06, 0, 116.839, 1)"
+        }
+      ],
+      "totals": {
+        "hits": 591,
+        "misses": 7301,
+        "back": 0,
+        "mismatches": 0
+      }
+    }
+  ],
+  "errors": []
+}

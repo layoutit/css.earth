@@ -73,3 +73,6 @@ src/planets/*/source/**/*.bpc
 # Pinned thermophysical paper originals are restored through the body acquisition plans.
 /src/planets/klytia/source/reference/hanus-2018.pdf
 /src/planets/alkmene/source/reference/hanus-2018.pdf
+
+# Pinned Borrelly orthophoto and coordinate cubes, restored from PDS.
+/src/planets/comet-19p/source/micas/*.cub

@@ -193,10 +193,12 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       }
     }
     const dependencies = lens.format === 'facet-scalars' ? [lens.meshPath, lens.table.labelPath].filter(Boolean)
+      : lens.format === 'image-plane-dem' ? [lens.comparison?.path].filter(Boolean)
       : lens.format === 'geologic-shapefile' ? [lens.grid.attributePath, lens.grid.projectionPath]
       : lens.format === 'pds-image' ? [lens.labelPath] : [];
     for (const path of dependencies) {
       if (![...source.manifest.inputs, ...source.manifest.documents].some(input => input.path === path)) throw new Error(`Unpinned scientific dependency: ${path}`);
+      if (lens.format === 'image-plane-dem') await source.validatePath(path);
     }
     // Reuse the already loaded geometry BVH, especially for large OLA meshes.
     const raster = await loadScienceSurface(sourceDirectory, lens, lens.surfaceSampling ? radial.grid : undefined);
