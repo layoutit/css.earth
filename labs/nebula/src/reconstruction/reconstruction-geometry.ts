@@ -21,12 +21,9 @@ const project = (m: number[], x: number, y: number): Vec2 => {
   if (!Number.isFinite(d) || Math.abs(d) < 1e-12) throw new TypeError('Aligned image crosses the observer horizon.');
   return [(m[0]*x+m[1]*y+m[2])/d,(m[3]*x+m[4]*y+m[5])/d];
 };
-const multiply = (a:number[],b:number[]) => Array.from({length:9},(_,i)=>
-  [0,1,2].reduce((sum,k)=>sum+a[Math.floor(i/3)*3+k]*b[k*3+i%3],0));
 
 /** UV represents full image edges; CSS translations/rotations use CSS axes, including the physical XY swap. */
-export function createAlignedObservationMapping(alignment: ReconstructionAlignment, frame: OverlayFrame,
-  previewModelFit?:OverlayPlacement): ObservationMapping {
+export function createAlignedObservationMapping(alignment: ReconstructionAlignment, frame: OverlayFrame): ObservationMapping {
   const { style, pivotCssPx: pivot } = alignment;
   const dimension = (s: string) => /^\d+(?:\.\d+)?px$/.test(s) ? Number(s.slice(0,-2)) : NaN;
   const width = dimension(style.width), height = dimension(style.height);
@@ -59,12 +56,7 @@ export function createAlignedObservationMapping(alignment: ReconstructionAlignme
   });
   return [0,1,2].flatMap(row => columns.map(col => col[row]));
   };
-  let forward = matrixForPlacement(alignment.placement);
-  // Alignment's raw-simulation preview has a separate authored model fit. The
-  // accepted cloud/catalogue already owns its sky frame. Remove only that shared
-  // fit, retaining any subsequent user correction to this particular image.
-  if(previewModelFit) forward=multiply(multiply(matrixForPlacement(defaultOverlayPlacement()),
-    invert(matrixForPlacement(previewModelFit))),forward);
+  const forward = matrixForPlacement(alignment.placement);
   const inverse = invert(forward), uvCorners = [[0,0],[1,0],[1,1],[0,1]];
   if (uvCorners.some(([u,v])=>forward[6]*u+forward[7]*v+forward[8]<=1e-10))
     throw new TypeError('Aligned image is at or behind the observer.');

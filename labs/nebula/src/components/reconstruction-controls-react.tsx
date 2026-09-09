@@ -20,7 +20,7 @@ function readSelection(subjectId: string): Selection {
     if (saved && typeof saved.imageId === 'string') return { imageId: saved.imageId,
       ...(resultId(saved.displayedResultId) ? { displayedResultId: saved.displayedResultId } : {}) };
   } catch { /* The benchmark remains available without storage. */ }
-  return { imageId: 'benchmark' };
+  return { imageId: '' };
 }
 
 interface Props { context: string | null; viewerBusy: boolean;
@@ -29,7 +29,7 @@ interface Props { context: string | null; viewerBusy: boolean;
 interface View { imageId: string; candidates: ReconstructionCandidate[]; selectDisabled: boolean; processDisabled: boolean;
   running: boolean; cancelling: boolean; job: Job | null; text: string; error: boolean; credit: string; sourcePageUrl?: string; displayedResultId?: string; }
 const initialView: View = { imageId: 'benchmark', candidates: [], selectDisabled: true, processDisabled: true,
-  running: false, cancelling: false, job: null, text: '', error: false, credit: 'Original prepared LMC benchmark.' };
+  running: false, cancelling: false, job: null, text: '', error: false, credit: 'Historical photo-based LMC experiment.' };
 export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: Props) {
   const [view, setView] = useState<View>(initialView);
   const actions = useRef<{ choose?(value: string): void; process?(): void; cancel?(): void; busy?(value: boolean): void }>({});
@@ -49,7 +49,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
       selectDisabled: loading || mounting || viewerBusy || !subjectId,
       processDisabled: !row?.ready || loading || mounting || viewerBusy || running,
       running, cancelling: job?.status === 'cancelling', job, text: messageText, error: messageError,
-      credit: row?.credit ?? 'Original prepared LMC benchmark.', sourcePageUrl: row?.sourcePageUrl,
+      credit: row?.credit ?? 'Historical photo-based LMC experiment.', sourcePageUrl: row?.sourcePageUrl,
       displayedResultId: selection.displayedResultId });
   }
   function stopObserver() { version++; controller?.abort(); controller = null; job = null; }
@@ -75,7 +75,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
     try {
       if (await onSelect(prepared, subjectId, current) && current()) {
         selection.displayedResultId = prepared?.resultId; saveSelection();
-        message(prepared ? 'Reconstruction loaded.' : 'Original benchmark.');
+        message(prepared ? 'Reconstruction loaded.' : 'Historical benchmark.');
       }
     } finally { if (current()) { mounting = false; render(); } }
   }
@@ -183,6 +183,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
           if (owner !== version) return;
           if (value.subjectId !== next || !Array.isArray(value.candidates)) throw new TypeError('Invalid reconstruction source catalogue.');
           catalogue = value;
+          if (!selection.imageId) selection.imageId = value.candidates.find(row => row.prepared)?.imageId ?? 'benchmark';
           if (selection.imageId !== 'benchmark' && !candidate()) selection.imageId = 'benchmark';
           const requested = /^reconstruction-([a-f0-9]{64})$/.exec(new URL(location.href).searchParams.get('subject') ?? '')?.[1];
           if (requested) {
@@ -211,7 +212,7 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect }: 
     <label className="field-label" htmlFor="reconstruction-image">Source image</label>
     <select id="reconstruction-image" aria-describedby="reconstruction-image-status" value={view.imageId}
       disabled={view.selectDisabled} onChange={event => actions.current.choose?.(event.target.value)}>
-      <option value="benchmark">Original benchmark</option>
+      <option value="benchmark">Historical benchmark</option>
       {view.candidates.map(row => <option key={row.imageId} value={row.imageId}>{row.label}{row.prepared ? ' · saved' : ''}</option>)}
     </select>
     <div className="reconstruction-actions">

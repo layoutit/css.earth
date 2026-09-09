@@ -15,7 +15,7 @@ interface Receipt {
   earthDistance: number; projectedStars: ProjectionMatch[]; maximumStarErrorPx: number;
   cameraReset: boolean; opacityIndependent: boolean; sourceSwitchRetainsCamera: boolean; screenshot: string;
 }
-const ledgerPath = resolve(process.argv[2] ?? '.local/nebula-lab/material-reconstruction-acceptance.json');
+const ledgerPath = resolve(process.argv[2] ?? '.local/nebula-lab/alignment-material-acceptance.json');
 const baseURL = process.argv[3] ?? 'http://127.0.0.1:4331';
 const outputRoot = resolve(process.argv[4] ?? '.local/nebula-lab/reconstruction-reference');
 const singleSource = process.argv.includes('--single-source');

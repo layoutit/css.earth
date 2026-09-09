@@ -11,7 +11,8 @@ These records preserve earlier results and limitations. Their former source/benc
 | [Coherent depth](coherent-depth.md) | Repeatability does not establish plausible 3D morphology |
 | [Filled observation](filled-observation.md) | Earlier SMASH component/depth model and rejected side views |
 | [Cloud inspection](cloud-inspection.md) | Existing benchmark component and integrated-cutoff controls |
+| [Fixed-benchmark material](fixed-benchmark-material.md) | Rejected wrong-cloud selection and missing cross-tab registration check |
 | [Raw-density slice calibration](raw-density-slice-calibration.md) | Rejected smooth-field substitution and failed bank-handoff gates |
 | [Viewing-direction color](view-direction-color.md) | Opacity/color behavior and rotation diagnostics |
 
-For current operations use [Workflow](../workflows.md), [Reconstruction](../reconstruction.md) and [METHOD.md](../../METHOD.md). The current NOX-based variants repaint the accepted benchmark’s exact geometry and alpha. Candidate images supply chromaticity, while the original cloud and catalogue remain fixed.
+For current operations use [Workflow](../workflows.md), [Reconstruction](../reconstruction.md) and [METHOD.md](../../METHOD.md). Current NOX-based variants repaint the exact density cloud visible in Alignment. They preserve saved image placements; a common density-conditioned catalogue realization is shared across materials.

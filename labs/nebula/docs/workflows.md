@@ -41,7 +41,7 @@ Refresh reconnects to a running job. A completed result restores without inferen
 5. Use **Earth view** to restore the painter’s observer and **Original image** plus opacity to compare image features with the cloud and catalogue.
 6. Use brightness/axis calibration and integrated-signal cutoff to inspect the cloud. These controls do not establish physical depth or justify clipping unobserved data.
 
-Current processing repaints the accepted benchmark’s exact 416 prepared quads and preserves every alpha byte. A 1024px registered plane supplies candidate chromaticity; uncovered areas retain explicitly recorded benchmark color. The star toggle renders the same 943 catalogue stars independently of the image. The complete raw simulation remains in Alignment. This is a material comparison on modeled geometry, not measured gas depth. See [the exact method and limits](reconstruction.md).
+Current processing repaints the Alignment density cloud’s exact 144 prepared quads and preserves every alpha byte. A 1024px registered plane supplies candidate chromaticity; uncovered areas retain explicitly recorded neutral density color. The star toggle renders the same 943 catalogue stars placed through one fixed sky-to-density reference, independently of candidate image. Both tabs use the same density object and Earth framing. This is a material comparison on modeled geometry, not measured gas depth. See [the exact method and limits](reconstruction.md).
 
 ## Saved data
 

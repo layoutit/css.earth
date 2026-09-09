@@ -170,25 +170,28 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
       const removal = await json(root, `${removalCache}/${removalKey}/result.json`, removalSha);
       const nativePath = `${removalCache}/${removalKey}/${removal.applied.images.diffuse}`;
       await pinned(root, nativePath, removal.artifactSha256[removal.applied.images.diffuse]);
-      const recipe = await json(root, 'labs/nebula/models/lmc/clouds.json');
-      const frame = parseLabModelJson((await pinned(root, recipe.frame.path, recipe.frame.sha256)).toString()).properties.volume;
-      await pinned(root, recipe.stellarPrior.path, recipe.stellarPrior.sha256);
+      const cloudDirectory=subject.density!.directory,cloudPath=`${cloudDirectory}/object.json`;
+      const cloudObject=await json(root,cloudPath),frame=cloudObject.properties.volume;
+      const cloudDescriptor={path:cloudPath,sha256:hash(await pinned(root,cloudPath))};
+      const densityRecipe={path:`${cloudDirectory}/${cloudObject.properties.preparation.source}`,sha256:cloudObject.properties.preparation.sha256};
+      await pinned(root,densityRecipe.path,densityRecipe.sha256);
       const stars = subject.stars ? { path: subject.stars, sha256: hash(await pinned(root, subject.stars)) } : undefined;
-      if(!stars)throw new TypeError('The canonical reconstruction needs its aligned star catalogue.');
-      const starCatalogue=await json(root,stars.path,stars.sha256),cloudPath=`${subject.directory}/object.json`;
-      const cloudObject=await json(root,cloudPath),cloudDescriptor={path:cloudPath,sha256:hash(await pinned(root,cloudPath))};
-      if(starCatalogue.provenance?.depthModel?.cloudObject?.sha256!==cloudDescriptor.sha256)
-        throw new TypeError('Stars belong to a different canonical cloud.');
-      const slicesPath=`${subject.directory}/prepared/volume-slices.json`;
+      const referenceId=subject.density!.reconstructionReferenceImageId;
+      const referenceImage=target.images.find((item:{id:string})=>item.id===referenceId);
+      const referenceOverlay=overlays.overlays.find((item:{id:string})=>item.id===referenceId);
+      if(stars&&(!referenceImage?.wcs||!referenceOverlay))throw new TypeError('The Alignment cloud requires a configured sky-to-density star reference.');
+      const slicesPath=`${cloudDirectory}/prepared/volume-slices.json`;
       const cloud={descriptor:cloudDescriptor,slices:{path:slicesPath,sha256:hash(await pinned(root,slicesPath))},
-        signal:starCatalogue.provenance.depthModel.target,
-        provenance:{path:`${subject.directory}/${cloudObject.properties.preparation.source}`,sha256:cloudObject.properties.preparation.sha256}};
+        provenance:densityRecipe,
+        ...(stars?{starAlignment:{wcs:referenceImage.wcs,
+          alignment:{style:referenceOverlay.style,pivotCssPx:referenceOverlay.pivotCssPx,
+            placement:referenceOverlay.initialPlacement??defaultOverlayPlacement()},
+          provenancePin:{path:subject.density!.overlays!,sha256:hash(await pinned(root,subject.density!.overlays!))}}}:{})};
       const pins = Object.fromEntries(await Promise.all(['reconstruction/reconstruction-worker.ts', 'reconstruction/reconstruction-geometry.ts', 'reconstruction/filled-components.ts',
-        'reconstruction/cloud-material.ts', 'reconstruction/registered-image.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts'].map(async name =>
+        'reconstruction/cloud-material.ts', 'reconstruction/density-projection.ts', 'reconstruction/registered-image.ts', 'reconstruction/reconstruction-stars.ts', 'reconstruction/filled-products.ts', 'density/observation-prior.ts', 'alignment/overlay-wcs.ts', 'cli/prepare-lmc-stars.ts'].map(async name =>
         [name, hash(await pinned(root, `labs/nebula/src/${name}`))])));
-      const identity = { version: 3, request, stars, cloud, sourceSha256: image.sha256, frame, stellarPrior: recipe.stellarPrior,
-        overlay: { widthPx: overlay.widthPx, heightPx: overlay.heightPx, transform: overlay.style.transform, pivotCssPx: overlay.pivotCssPx,
-          previewModelFit:overlay.initialPlacement??defaultOverlayPlacement() }, pins };
+      const identity = { version: 4, request, stars, cloud, sourceSha256: image.sha256, frame, stellarPrior: densityRecipe,
+        overlay: { widthPx: overlay.widthPx, heightPx: overlay.heightPx, transform: overlay.style.transform, pivotCssPx: overlay.pivotCssPx }, pins };
       const resultId = hash(JSON.stringify(identity)), directory = `${cache}/${resultId}`, temporary = resolve(root, `${directory}.pending`);
       if (await stat(resolve(root, directory, 'result.json')).catch(() => null)) {
         progress({ stage: 'cached', current: 1, total: 1, message: 'Loading saved reconstruction.' }); return readPreparedReconstruction(root, resultId);
@@ -199,7 +202,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
           imageId: image.id, name: image.label, outputDirectory: temporary,
           source: { path: nativePath, sha256: removal.artifactSha256[removal.applied.images.diffuse], width: removal.nativeDimensions[0], height: removal.nativeDimensions[1] },
           original: { path: image.path, sha256: image.sha256, removalResultId: request.removalResultId },
-          overlay: { ...identity.overlay, placement: request.placement }, frame, stellarPrior: recipe.stellarPrior, stars, cloud,
+          overlay: { ...identity.overlay, placement: request.placement }, frame, stellarPrior: densityRecipe, stars, cloud,
           sourcePageUrl: image.sourcePageUrl, credit: image.credit };
         const finished = await run(work, signal, progress); signal.throwIfAborted();
         const descriptor = await json(root, relative(root, resolve(temporary, 'object.json')));
@@ -214,7 +217,7 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
             sourcePageUrl: image.sourcePageUrl, credit: image.credit, stars: finished.stars ? `${directory}/${finished.stars}` : undefined,
             reconstructionOverlay:finished.reconstructionOverlay?`${directory}/${finished.reconstructionOverlay}`:undefined,
             cloudParts: finished.cloudParts, framingRadiusUnits: finished.framingRadiusUnits ?? subject.framingRadiusUnits,
-            reconstructionImage: { group: subject.id, label: image.label, note: 'Candidate colors on the unchanged benchmark cloud and star catalogue.' } } };
+            reconstructionImage: { group: subject.id, label: image.label, note: 'Candidate colors on the unchanged Alignment density cloud; saved placement is preserved.' } } };
         await writeFile(resolve(temporary, 'request.json'), JSON.stringify(identity, null, 2) + '\n');
         await writeFile(resolve(temporary, 'result.json'), JSON.stringify(result, null, 2) + '\n');
         signal.throwIfAborted(); await rename(temporary, resolve(root, directory));

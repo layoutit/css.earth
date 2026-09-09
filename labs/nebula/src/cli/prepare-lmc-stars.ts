@@ -18,7 +18,9 @@ const number = (line: string, first: number, last: number) => {
   const text = line.slice(first - 1, last).trim(); return text ? Number(text) : NaN;
 };
 /** Conditional cloud-emission × stellar-density realization on measured sky rays. */
-export function sampleJointDepth(model: Pick<StarCloudModel, 'source'|'cloud'|'mapping'>, x0: number, y0: number, id: string): number {
+export function sampleJointDepth(model: Pick<StarCloudModel, 'source'|'mapping'> & {
+  cloud: Pick<StarCloudModel['cloud'], 'sample'|'supportBoundsKpc'>;
+}, x0: number, y0: number, id: string): number {
   const {source,cloud,mapping}=model;
   const [lower, upper] = [cloud.supportBoundsKpc.min[2], cloud.supportBoundsKpc.max[2]];
   if (!(lower > -mapping.distanceUnits) || !(upper > lower)) throw new TypeError('Joint depth bounds cross the observer.');

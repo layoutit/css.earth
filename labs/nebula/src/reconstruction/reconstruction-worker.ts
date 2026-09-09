@@ -1,4 +1,4 @@
-/** Offline material replacement on one pinned benchmark cloud. Never infer new shape from an image. */
+/** Offline material replacement on the exact pinned Alignment density cloud. Never infer new shape from an image. */
 import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
 import { dirname, resolve, relative, isAbsolute, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,16 +9,18 @@ import { createAlignedObservationMapping } from './reconstruction-geometry.js';
 import { rectifyObservation, writeObservationPanel } from './filled-products.js';
 import { registeredImageSampler, writeOriginalOverlay } from './registered-image.js';
 import { recolorCloudSlices } from './cloud-material.js';
+import { prepareDensityProjection } from './density-projection.js';
+import { parseVolumeRecipe } from '../../../../src/preparation/volume/config.js';
 import { prepareReconstructionStars } from './reconstruction-stars.js';
-import { sha256, containedPath } from '../../../../src/preparation/volume/source.js';
+import { sha256, containedPath, loadVolumeSource } from '../../../../src/preparation/volume/source.js';
 import type { VolumeSlices } from '../../../../src/preparation/volume/slices.js';
 import { compileCssVolume } from '../../../../src/renderers/css/preparation/volume.js';
 
 type Progress = { type:'progress'; stage:string; current:number; total:number; message:string };
 export const RECONSTRUCTION_SETTINGS = { analysisWidth:1024,originalWidth:2048,quality:92 };
 const implementationFiles=['reconstruction-worker.ts','reconstruction-geometry.ts','registered-image.ts','cloud-material.ts',
-  'reconstruction-stars.ts','filled-products.ts'].map(name=>'labs/nebula/src/reconstruction/'+name)
-  .concat(['labs/nebula/src/alignment/overlay-geometry.ts','src/preparation/volume/raster.ts','src/renderers/css/preparation/volume.ts']);
+  'reconstruction-stars.ts','filled-products.ts','density-projection.ts'].map(name=>'labs/nebula/src/reconstruction/'+name)
+  .concat(['labs/nebula/src/cli/prepare-lmc-stars.ts','labs/nebula/src/alignment/overlay-wcs.ts','labs/nebula/src/alignment/overlay-geometry.ts','src/preparation/volume/raster.ts','src/renderers/css/preparation/volume.ts']);
 const json=async(path:string,value:unknown)=>{const bytes=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,bytes);return sha256(bytes);};
 async function pinned(root:string,pin:{path:string;sha256:string}) {
   if(isAbsolute(pin.path)||!/^[a-f0-9]{64}$/.test(pin.sha256))throw new TypeError('Inputs require repository-relative paths and SHA256 pins.');
@@ -36,12 +38,11 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   if(!offset||offset==='..'||offset.startsWith('../')||isAbsolute(offset))throw new TypeError('Reconstruction outputs require their own ignored local directory.');
   const existing=await readdir(output).catch((error:NodeJS.ErrnoException)=>{if(error.code!=='ENOENT')throw error;return [];});
   if(existing.some(name=>name!=='request.json'))throw new TypeError('Reconstruction must not overwrite an existing output.');
-  progress('validating',0,3,'Verifying original image, saved starless pixels and the fixed benchmark cloud');
+  progress('validating',0,3,'Verifying original image, saved starless pixels and the Alignment density cloud');
   const native=await pinned(root,work.source),original=await pinned(root,work.original);
   const descriptor=parseLabModelJson((await pinned(root,work.cloud.descriptor)).toString());
   const sourceSlices=parseLabModelJson((await pinned(root,work.cloud.slices)).toString()) as VolumeSlices;
   const evidence=parseLabModelJson((await pinned(root,work.cloud.provenance)).toString());
-  const signalBytes=await pinned(root,work.cloud.signal);
   if(descriptor.properties.preparation.sha256!==work.cloud.provenance.sha256||
     JSON.stringify(descriptor.properties.volume.boundsUnits)!==JSON.stringify(sourceSlices.boundsUnits))throw new TypeError('Canonical cloud pins or bounds disagree.');
   const frame=descriptor.properties.volume;
@@ -53,7 +54,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
     throw new TypeError('Reconstruction needs a full native RGB8 starless PNG on the original pixel grid.');
   const w=work.overlay.widthPx,h=work.overlay.heightPx;
   const mapping=createAlignedObservationMapping({style:{width:`${w}px`,height:`${h}px`,transform:work.overlay.transform,
-    backgroundSize:`${w}px ${h}px`,backgroundPosition:'0px 0px'},pivotCssPx:work.overlay.pivotCssPx,placement:work.overlay.placement},frame,work.overlay.previewModelFit);
+    backgroundSize:`${w}px ${h}px`,backgroundPosition:'0px 0px'},pivotCssPx:work.overlay.pivotCssPx,placement:work.overlay.placement},frame);
   const implementation=Object.fromEntries(await Promise.all(implementationFiles.map(async path=>[path,sha256(await readFile(resolve(root,path)))])));
   await mkdir(resolve(output,'source'),{recursive:true});await mkdir(resolve(output,'prepared'),{recursive:true});
   progress('rectifying',0,2,'Registering image colors into the fixed cloud and catalogue frame');
@@ -67,13 +68,20 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   const originalPhoto=await rectifyObservation(original,mapping,referenceWidth);
   const reconstructionOverlay=await writeOriginalOverlay(output,originalPhoto,mapping,frame,
     {id:work.imageId,sourcePageUrl:work.sourcePageUrl,credit:work.credit});
-  // The benchmark's established cutoff field and stars remain identical across materials.
-  const signal=await sharp(signalBytes).flop().removeAlpha().raw().toBuffer({resolveWithObject:true});
-  await sharp(signal.data,{raw:{width:signal.info.width,height:signal.info.height,channels:3}}).png().toFile(resolve(output,'source/aligned-image.png'));
+  // Read the same pinned density source as Alignment; never rebuild its delivery geometry.
+  progress('density',0,1,'Preparing one source-independent density signal and stellar support');
+  const densitySource=await loadVolumeSource(dirname(resolve(root,work.cloud.provenance.path)),parseVolumeRecipe(evidence));
+  if(JSON.stringify(densitySource.recipe.grid.bounds)!==JSON.stringify(frame.boundsUnits))
+    throw new TypeError('Alignment density and prepared cloud bounds disagree.');
+  const densityProjection=prepareDensityProjection(densitySource,mapping.distanceUnits);
+  await writeObservationPanel(resolve(output,'source/aligned-image.png'),densityProjection.photo,undefined,false);
   let starsPath:string|undefined;
   if(work.stars) {
+    if(!work.cloud.starAlignment)throw new TypeError('Catalogue requires the common Alignment star reference.');
+    await pinned(root,work.cloud.starAlignment.provenancePin);
     const stars=prepareReconstructionStars(parseLabModelJson((await pinned(root,work.stars)).toString()),
-      {frame,source:work.stars,canonicalCloud:work.cloud.descriptor});
+      {frame,source:work.stars,canonicalCloud:work.cloud.descriptor,densitySource,
+        reference:work.cloud.starAlignment,sampleProjectedDensitySignal:densityProjection.sampleSignal});
     starsPath='prepared/stars.json';await json(resolve(output,starsPath),stars);
   }
   progress('material',0,sourceSlices.quads.length,'Painting the existing cloud; preserving every slice and alpha byte');
@@ -82,18 +90,20 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
     sampleImageRgb:registeredImageSampler(photo,mapping),outputDirectory:resolve(output,'prepared'),encoding:{format:'webp',quality:settings.quality},
     onProgress:p=>{if(p.completed%16===0||p.completed===p.total)progress('material',p.completed,p.total,`Painted ${p.completed}/${p.total} fixed cloud slices`);}});
   const validation={sameGeometry:true,sameAlpha:true,sameStars:true,coverage:painted.coverage};
-  const provenance={schema:'cssearth-nebula-reconstruction-provenance@1',method:'fixed-cloud-material-v1',request:work,settings,implementation,
+  const provenance={schema:'cssearth-nebula-reconstruction-provenance@1',method:'alignment-density-material-v1',request:work,settings,implementation,
     canonicalCloud:work.cloud,source:work.source,original:work.original,alignment:{...work.overlay,
-      convention:'Remove the shared raw-simulation preview fit; retain additional per-image corrections in the fixed benchmark sky frame.'},
-    geometry:{tangentBoundsKpc:mapping.boundsUnits,physicalBoundsKpc:sourceSlices.boundsUnits,observerDistanceKpc:mapping.distanceUnits},
+      convention:'Use the exact saved Alignment placement, including scale, pivot, all rotations and offsets.'},
+    geometry:{tangentBoundsKpc:mapping.boundsUnits,physicalBoundsKpc:sourceSlices.boundsUnits,observerDistanceKpc:mapping.distanceUnits,originalImageLandmarks:[0,.5,1].flatMap(v=>[0,.5,1].map(u=>{
+      const [x,y]=mapping.tangentAtUv(u,v),{min,max}=mapping.boundsUnits;
+      return {uv:[u,v],pixel:[(x-min[0])/(max[0]-min[0])*originalPhoto.width,(max[1]-y)/(max[1]-min[1])*originalPhoto.height]};}))},
     photo:{width:photo.width,height:photo.height,nativeDimensions:[work.source.width,work.source.height]},
-    densityProjection:{width:signal.info.width,height:signal.info.height,tangentBoundsKpc:{
-      min:evidence.observation.tangentBoundsKpc.min.slice(0,2),max:evidence.observation.tangentBoundsKpc.max.slice(0,2)},
-      observerDistanceKpc:evidence.observation.distanceKpc,meaning:'Unchanged canonical cloud reference projection; identical cutoff for all materials.'},
-    validation,limitations:['The accepted benchmark cloud is a modeled reconstruction, not measured gas depth.',
+    densityProjection:{width:densityProjection.photo.width,height:densityProjection.photo.height,
+      tangentBoundsKpc:densityProjection.boundsUnits,observerDistanceKpc:densityProjection.distanceUnits,
+      meaning:'Integrated signal of the untouched Alignment density source; identical cutoff for all materials.'},
+    validation,limitations:['The Alignment cloud is simulated stellar density, not measured gas depth.',
       'Candidate chromaticity paints the fixed cloud. Image brightness never changes geometry or alpha.',
-      'Uncovered or black image samples retain benchmark source colors; coverage counts record this mixed-source material.',
-      'Catalogue positions, inferred depths and reference cloud support remain unchanged.']};
+      'Uncovered or black image samples retain neutral density colors; coverage counts record this mixed-source material.',
+      'Catalogue astrometry is preserved; one common Alignment mapping and density-conditioned model supplies the same stellar positions for every material.']};
   painted.slices.provenance=provenance;
   await json(resolve(output,'prepared/volume-slices.json'),painted.slices);
   const data=compileCssVolume({id:work.id,frame,slices:painted.slices,recipe:{anchors:[]}});
@@ -109,7 +119,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   const inspectionSha=await json(resolve(output,'prepared/inspection.json'),inspection);
   const catalogueSha=await json(resolve(output,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id:work.id,
     parts:[{id:'all-light',label:'Reference cloud',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,
-    composition:'One immutable reference cloud; candidate images replace material colors only.'});
+    composition:'One immutable Alignment density cloud; candidate images replace material colors only.'});
   await json(resolve(output,'inspection-object.json'),{...resultDescriptor,properties:{...resultDescriptor.properties,
     preparation:{source:'source/cloud-parts.json',sha256:catalogueSha}},prepared:{format:prepared.format,url:'prepared/inspection.json',sha256:inspectionSha}});
   const artifacts:Record<string,{sha256:string;bytes:number}>={};

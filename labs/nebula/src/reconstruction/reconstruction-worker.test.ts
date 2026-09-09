@@ -39,17 +39,17 @@ test('actual prepared candidate matrices preserve Alignment CSS axes, pivot, all
   }
 });
 
-test('shared preview fit is removed while additional image corrections survive in the cloud frame',async()=>{
+test('saved Alignment scale and orientation are preserved instead of stripping its fit',async()=>{
   const catalogue=JSON.parse(await readFile('labs/nebula/models/lmc/candidates/overlays.json','utf8'));
   for(const id of ['vista-infrared','horalek-widefield','wise-wide-infrared']) {
-    const overlay=catalogue.overlays.find((row:{id:string})=>row.id===id),basis=overlay.initialPlacement;
+    const overlay=catalogue.overlays.find((row:{id:string})=>row.id===id);
     const reference=createAlignedObservationMapping({...overlay,placement:defaultOverlayPlacement()},catalogue.frame);
-    const actual=createAlignedObservationMapping({...overlay,placement:basis},catalogue.frame,basis);
-    const wrong=createAlignedObservationMapping({...overlay,placement:basis},catalogue.frame);
-    for(const [u,v] of [[0,0],[1,0],[1,1],[0,1],[.2,.7]]) close(actual.tangentAtUv(u,v),reference.tangentAtUv(u,v));
-    assert.ok(Math.hypot(...wrong.tangentAtUv(0,0).map((v,i)=>v-reference.tangentAtUv(0,0)[i]))>1);
-    const corrected=createAlignedObservationMapping({...overlay,placement:{...basis,x:basis.x+.6}},catalogue.frame,basis);
-    assert.ok(Math.hypot(...corrected.tangentAtUv(.2,.7).map((v,i)=>v-reference.tangentAtUv(.2,.7)[i]))>.1);
+    const actual=createAlignedObservationMapping({...overlay,placement:overlay.initialPlacement},catalogue.frame);
+    const vector=(m:typeof reference)=>m.tangentAtUv(.8,.5).map((v,i)=>v-m.tangentAtUv(.2,.5)[i]);
+    const a=vector(actual),b=vector(reference);
+    assert.ok(Math.abs(Math.hypot(...a)/Math.hypot(...b)-3)<1e-10,'The saved 300% scale must survive.');
+    const angle=Math.atan2(a[1],a[0])-Math.atan2(b[1],b[0]);
+    assert.ok(Math.abs(Math.cos(angle)-Math.cos(39*Math.PI/180))<1e-10,'The saved rotation must survive.');
   }
 });
 
@@ -61,15 +61,14 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     for(let y=0;y<32;y++)for(let x=0;x<32;x++){const v=40+Math.round(70*Math.exp(-((x-15)**2+(y-18)**2)/40));pixels.set([v,v-10,25],3*(y*32+x));}
     const photo=await sharp(pixels,{raw:{width:32,height:32,channels:3}}).png().toBuffer();
     const {writeFile}=await import('node:fs/promises');await writeFile(resolve(directory,'source.png'),photo);
-    const frame=JSON.parse(await readFile('labs/nebula/models/lmc/particles/object.json','utf8')).properties.volume;
+    const frame=JSON.parse(await readFile('labs/nebula/models/lmc/full-density/object.json','utf8')).properties.volume;
     const geometry=prepareOverlayGeometry([[-2,2,0],[2,2,0],[2,-2,0],[-2,-2,0]],32,32);
     const priorPath='labs/nebula/models/lmc/full-density/source/volume.json',priorBytes=await readFile(priorPath);
-    const descriptorPath='labs/nebula/models/lmc/clouds/object.json',slicesPath='labs/nebula/models/lmc/clouds/prepared/volume-slices.json';
+    const descriptorPath='labs/nebula/models/lmc/full-density/object.json',slicesPath='labs/nebula/models/lmc/full-density/prepared/volume-slices.json';
     const descriptor=JSON.parse(await readFile(descriptorPath,'utf8'));
     const pin=async(path:string)=>({path,sha256:sha256(await readFile(path))});
     const cloud={descriptor:await pin(descriptorPath),slices:await pin(slicesPath),
-      signal:await pin('labs/nebula/models/lmc/clouds-observation/source/target.png'),
-      provenance:await pin('labs/nebula/models/lmc/clouds/source/provenance.json')};
+      provenance:await pin('labs/nebula/models/lmc/full-density/source/volume.json')};
     const work={schema:'cssearth-nebula-reconstruction-work@1' as const,id:'reconstruction-'+'a'.repeat(64),imageId:'synthetic',name:'Synthetic native test',
       outputDirectory:resolve(directory,'output'),source:{path:relative(root,resolve(directory,'source.png')),sha256:sha256(photo),width:32,height:32},
       original:{path:relative(root,resolve(directory,'source.png')),sha256:sha256(photo),removalResultId:'synthetic'},
@@ -81,7 +80,7 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     const provenance=JSON.parse(await readFile(resolve(work.outputDirectory,'source/provenance.json'),'utf8'));
     const slices=JSON.parse(await readFile(resolve(work.outputDirectory,'prepared/volume-slices.json'),'utf8'));
     const reference=JSON.parse(await readFile(slicesPath,'utf8'));
-    assert.equal(provenance.method,'fixed-cloud-material-v1');
+    assert.equal(provenance.method,'alignment-density-material-v1');
     assert.deepEqual(slices.boundsUnits,descriptor.properties.volume.boundsUnits);
     assert.deepEqual(slices.quads.map((q:any)=>q.vertices),reference.quads.map((q:any)=>q.vertices));
     assert.equal(provenance.validation.sameGeometry,true);assert.equal(provenance.validation.sameAlpha,true);
@@ -93,7 +92,7 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     const prepared=JSON.parse(await readFile(resolve(work.outputDirectory,'prepared/inspection.json'),'utf8'));
     const leaves=prepared.data.stacks.flatMap((s:{leaves:{id:string}[]})=>s.leaves.map(l=>l.id));
     const catalogue=parseCloudCatalogue(JSON.parse(await readFile(resolve(work.outputDirectory,'source/cloud-parts.json'),'utf8')),work.id,leaves);
-    const inspection=createCloudInspection(catalogue);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,416);
+    const inspection=createCloudInspection(catalogue);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,144);
     inspection.setSelection([]);assert.equal(leaves.filter((id:string)=>inspection.includes(id)).length,0);
     for(const resource of prepared.data.resources){const bytes=await readFile(resolve(work.outputDirectory,'prepared',resource.path));assert.equal(sha256(bytes),resource.sha256);}
     assert.equal(sha256(await readFile(resolve(directory,'source.png'))),sha256(photo));

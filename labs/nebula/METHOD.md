@@ -2,7 +2,7 @@
 
 This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches.
 
-**Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Process** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the fixed benchmark cloud; it does not recover measured gas depth.
+**Current stage:** VISTA, Horálek and WISE have completed native NOX removal and separate 3D comparison bakes. Alignment imports/inspects sources; Reconstruction selects a completed native starless image and runs an explicit **Process** job. Other catalogue images remain available for comparison/removal without being automatically selected for reconstruction. The comparison repaints the Alignment density cloud; it does not recover measured gas depth.
 
 ## Order of operations
 
@@ -23,7 +23,7 @@ Star detections → verified image registration → full-density overlay
                            inspect and select
                                   │
                                   ▼
-                     Fixed accepted cloud + stars
+                     Fixed Alignment cloud + stars
                                   │
                      Registered image chromaticity
                                   │
@@ -80,20 +80,19 @@ NOX predicts the background under stars. It is an image-processing model, not me
 - Infrared and optical composites are separate candidate color treatments. Do not average their colors as if they measured the same band. WISE W4/W2/W1 dust structure, VISTA Y/J/Ks stars and optical emission can differ legitimately.
 - A larger density field does not authorize inventing color beyond the image. Solve the footprint gap with verified observations, or retain explicit missing coverage.
 
-## 5. Paint the fixed reference cloud
+## 5. Paint the Alignment density cloud
 
-In **Reconstruction**, choose a completed source and press **Process**. The accepted benchmark cloud is the shape reference. Switching image changes its material, not its geometry, opacity, size, placement, depth or stars. The full raw stellar simulation remains an independent Alignment reference; substituting that smoother field loses the benchmark's structures.
+In **Reconstruction**, choose a completed source and press **Process**. The source of shape is the exact density object already visible in Alignment. The older photo-derived benchmark is a historical experiment, not this reference.
 
-- Pin the accepted cloud descriptor, all prepared slices, its reference projection and its aligned star catalogue. Read the existing cloud; never rebuild its shape for a new image.
-- Register candidate pixels into that fixed cloud/catalogue frame. Candidate-to-SMASH stellar registrations establish scale/direction. Alignment also has a separate authored 3×/+39° raw-simulation preview fit: remove that shared fit for the benchmark frame while retaining additional per-image adjustments.
-- Sample the saved full-native NOX diffuse image through the registered Earth rays at each existing slice texel's physical XYZ. No second star removal occurs.
-- Candidate RGB divided by its largest channel supplies chromaticity. Preserve every original alpha byte and every quad's position, dimensions, crop and depth. Candidate brightness does not become new density.
-- Where an image has no coverage or zero RGB, keep the benchmark's existing source color. Record recolored, uncovered and fallback texel counts. These mixed-source regions are explicit, not invented observations or holes in the cloud.
-- Preserve all 943 catalogue positions, astrometry, photometry and reference-cutoff signals. Validate that the catalogue names the same canonical cloud hash. Image choice cannot relocate or reselect stars.
-- Prepare the original image, including its stars, as a separate registered plane. **Earth view** restores the observer used by the painter; **Original image** and its opacity control compare visible image features with cloud/catalogue locations.
-- Verify exact geometry and decoded-alpha equality against the benchmark, source/resource hashes and source switching at a retained camera. Atomically finalize only complete local results.
+- Pin `subject.density.directory`’s descriptor, existing slices, density recipe/grid and frame. Reuse all 144 LMC density quads and every decoded alpha byte. Do not regenerate a smoother volume or infer geometry from image light.
+- Preserve the selected image’s complete saved Alignment placement, including scale, all rotations, pivot and offsets. Never strip its shared authored fit. The fit remains an explicit model-placement assumption, not measured sky geometry.
+- Sample the full-native NOX diffuse image through the same fitted observer rays as Alignment. A 1024px registered color plane provides chromaticity; no second star-removal pass runs.
+- Candidate brightness cannot redefine density. Missing/zero-RGB samples retain the density bank’s neutral color, with explicit coverage counts. Switching material changes colors while the volume stays fixed.
+- Use one configured SMASH sky-to-model reference and the pinned full-density field to assign deterministic model depths to the existing 943 observed stars. Preserve their IDs, measured coordinates and photometry. All candidate images use the same resulting star positions; the candidate image cannot select or move stars.
+- Prepare an original-image comparison plane and nine source-UV landmarks through the actual painter mapping. **Earth view** uses one shared observer/framing in both tabs. Compare the same landmarks across tabs, including legacy object routes; testing one tab against its own transform misses this failure.
+- Verify the actual output against Alignment: every quad, every alpha byte, source/frame hashes, same stars across materials, and source switching at a retained camera. Keep the existing density source and saved browser placements untouched.
 
-Current color sampling uses a 1024px registered plane; original-image inspection uses up to 2048px within a four-million-pixel budget. The existing benchmark's delivery geometry/resolution is retained. This is a modeled cloud with interchangeable display colors, not a reconstruction of wavelength-dependent gas density or measured 3D structure.
+Original-image inspection uses up to 2048px within four million pixels. The cloud has simulated stellar density and modeled display colors/depths, not measured gas geometry. Rotation artifacts of the inherited density bank remain a separate rendering concern.
 
 ## Selected LMC inputs
 

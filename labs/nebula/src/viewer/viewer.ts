@@ -52,7 +52,8 @@ export interface LabSubjectRecord {
   stars?: string;
   /** Fixed original-image plane prepared from this saved result's exact image registration. */
   reconstructionOverlay?: string;
-  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; candidateImageIds?: string[] };
+  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; candidateImageIds?: string[];
+    reconstructionReferenceImageId?: string; referenceFramingRadiusUnits?: number };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
 export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${path}`;
@@ -61,6 +62,12 @@ const recipes = import.meta.glob('../../../../src/objects/*/source/recipe.json',
 const candidates = import.meta.glob('../../../../.local/nebula-lab/*-{cutout,diffuse,residual,mask}.png',
   { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
 function prepareSubjectRecord(record: LabSubjectRecord) {
+  const sharedDensity = record.density && subjectRecords.filter(item => item.density?.directory === record.density!.directory);
+  const configuredRadii = sharedDensity?.flatMap(item => item.density?.referenceFramingRadiusUnits === undefined ? [] : [item.density.referenceFramingRadiusUnits]) ?? [];
+  if (configuredRadii.some(value => !Number.isFinite(value) || value <= 0) || new Set(configuredRadii).size > 1)
+    throw new TypeError('Subjects sharing a density field must share one positive Earth-view framing radius.');
+  const sharedRadius = configuredRadii[0] ?? Math.max(...(sharedDensity?.map(item => item.framingRadiusUnits ?? 0) ?? [0]));
+  const density = record.density ? { ...record.density, ...(sharedRadius > 0 ? { referenceFramingRadiusUnits: sharedRadius } : {}) } : undefined;
   if (record.reconstructionImage !== undefined) {
     const image = record.reconstructionImage;
     if (!image || typeof image !== 'object' || Array.isArray(image) ||
@@ -107,7 +114,7 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
     if (url) sourceImages.push({ id: `${record.id}-${kind}`, name: `Extraction candidate · ${kind}`, sourceUrl: url,
       sourcePageUrl, credit: `Local extraction experiment. Not a calibrated measurement. ${credit ?? ''}` });
   }
-  return { ...record, sourceUrl, sourcePageUrl, credit, sourceImages, hasDetail: record.hasDetail ?? Boolean(recipe),
+  return { ...record, density, sourceUrl, sourcePageUrl, credit, sourceImages, hasDetail: record.hasDetail ?? Boolean(recipe),
     framingRadiusUnits: record.framingRadiusUnits ?? recipe?.geometry.supportRadiusKpc };
 }
 export const subjects = subjectRecords.map(prepareSubjectRecord);
@@ -511,33 +518,40 @@ export async function createNebulaLabViewer({ host, subjectId, mode: initialMode
   }
   const observer = new ResizeObserver(measure); observer.observe(host); measure();
   function reset() {
+    if (subject.referenceDistanceUnits !== undefined) { applyEarthCamera(); return; }
     controls.stop(); cameraScale = 1; pose = 'front'; rotation = new DOMMatrix().rotateAxisAngle(1, 0, 0, 180); measure();
-    if (subject.referenceDistanceUnits !== undefined) {
-      cameraScale = subject.referenceDistanceUnits * Math.min(width, height) * .32 / (radius * focal); measure();
-    }
     fitDistance = Math.max(radius * 2, focal * radius / (Math.min(width, height) * .32));
-    values.distance = subject.referenceDistanceUnits ?? fitDistance; values.zoom = fitDistance / values.distance;
+    values.distance = fitDistance; values.zoom = 1;
     values.rotX = values.rotY = 0; revision++;
     schedule(); report();
   }
   async function referenceView() {
     if (!payload) throw new Error('The prepared object is still loading.');
-    if (currentMode === 'photo') {
-      if (!(subject.referenceDistanceUnits !== undefined && subject.referenceDistanceUnits > 0))
-        throw new Error('This object has no prepared Earth observer distance.');
-      reset(); status = 'Earth view · prepared observer distance'; report(); return;
+    if (currentMode === 'density') {
+      const version = loadVersion, expectedPayload = payload;
+      await loadOverlayCatalogue();
+      if (disposed || version !== loadVersion || expectedPayload !== payload || currentMode !== 'density') return;
     }
+    applyEarthCamera();
+  }
+  function applyEarthCamera() {
+    if (!payload) throw new Error('The prepared object is still loading.');
+    const referenceDistance = Math.hypot(...payload.frame.originM) / payload.frame.metersPerUnit;
+    const referenceRadius = subject.density?.referenceFramingRadiusUnits ?? subject.framingRadiusUnits;
+    if (!(referenceDistance > 0) || referenceRadius === undefined || !(referenceRadius > 0))
+      throw new Error('Earth view requires a physical observer and a shared prepared framing radius.');
+    const declaredDistances = [subject.referenceDistanceUnits, currentMode === 'density' ? overlayCatalogue?.referenceDistanceUnits : undefined];
+    if (declaredDistances.some(value => value !== undefined && Math.abs(value - referenceDistance) > 1e-12 * referenceDistance))
+      throw new TypeError('Earth observer distance differs from the prepared physical frame.');
     controls.stop();
-    const version = loadVersion, expectedPayload = payload;
-    const overlays = await loadOverlayCatalogue();
-    if (disposed || version !== loadVersion || expectedPayload !== payload || currentMode !== 'density') return;
-    const referenceDistance = overlayCatalogue?.referenceDistanceUnits ?? Math.hypot(...payload.frame.originM) / payload.frame.metersPerUnit;
     const baseFocal = Math.max(width, height) * 1.15 * (subject.referenceProjectionScale ?? 1);
-    cameraScale = referenceDistance * Math.min(width, height) * .32 / (radius * baseFocal);
+    // One lens for the shared density field, independent of tab, route or rendered cloud bounds.
+    cameraScale = referenceDistance * Math.min(width, height) * .32 / (referenceRadius * baseFocal);
     pose = 'front'; rotation = new DOMMatrix().rotateAxisAngle(1, 0, 0, 180); measure();
     fitDistance = Math.max(radius * 2, focal * radius / (Math.min(width, height) * .32));
     values.distance = referenceDistance; values.zoom = fitDistance / values.distance; values.rotX = values.rotY = 0; revision++;
-    status = `${overlays.length} prepared image overlays · reference observer view`; schedule(); report();
+    host.dataset.earthFramingRadius = String(referenceRadius);
+    status = 'Earth view · shared observer and framing'; schedule(); report();
   }
   function fitCloud() {
     if (currentMode !== 'density' || !payload) throw new Error('Fit cloud is available in Density view only.');

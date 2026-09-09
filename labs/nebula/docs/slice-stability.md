@@ -1,47 +1,42 @@
-# Fixed cloud and slice stability
+# Shared density, registration and viewing checks
 
-The accepted benchmark owns geometry, opacity, depth and catalogue placement. Every candidate repaints its exact 416 prepared quads; all decoded alpha bytes and all 943 catalogue records remain identical. The full raw simulation is an Alignment reference, not a replacement for this cloud.
+Alignment and Reconstruction must use the same prepared density object and the same saved image placement. The older photo-derived benchmark is a separate historical experiment.
 
-Candidate chromaticity changes the material. Uncovered or zero-RGB texels retain explicitly counted benchmark color. This preserves the reference cloud’s boundaries and imperfections too; it does not establish measured nebular gas depth.
+## Invariants
 
-## Mapping correction
+- Repaint Alignment’s exact 144 prepared LMC quads, preserving all vertices, crops, bounds and every decoded alpha byte. Images supply chromaticity only; missing coverage retains neutral density color.
+- Preserve the whole saved Alignment image transform, including authored scale/rotation and pivot. Earth view uses the same physical observer, orientation and lens framing in both tabs, including legacy routes to the same density object.
+- Preserve observed stellar IDs, astrometry and photometry. One configured SMASH sky-to-density fit and deterministic density-conditioned depth realization place the same 943 stars for every image. Candidate images cannot move or select them.
+- Actual source density must be positive at every star. One faint star falls below the common projection’s eight-bit quantization; it keeps zero cutoff signal and stays visible when cutoff is zero. Do not invent a positive floor or remove it from the catalogue.
 
-The rejected painter applied Alignment’s shared 3× / +39° fit in the fixed benchmark frame and substituted the much broader, smoother stellar simulation. The current mapper removes that shared preview fit while retaining additional per-image adjustments. It uses the candidate’s verified sky registration and the benchmark/catalogue observer frame.
+## Why the previous check missed the problem
 
-**Earth view** and **Original image** expose the exact painter registration. Across VISTA, WISE and Horálek, the browser checked 25 catalogue rays against each original-image plane: maximum projected discrepancy was 0.000533 px, below the fixed 0.02 px gate. Both source switches retained the camera; Earth reset, original opacity and retained toggle checks passed without resource errors or processing requests. This tests coordinate consistency, not a fresh detection of matching photographic stars; source-registration evidence remains separate.
+The previous worker preserved the 416-slice photo-derived benchmark and stripped Alignment’s shared fit. Its original-image plane agreed with its own wrong mapping, so within-Reconstruction projection tests passed. The screenshots still differed from Alignment. See the [rejected fixed-benchmark experiment](research/fixed-benchmark-material.md) and [earlier density resampling](research/raw-density-slice-calibration.md).
 
-## Actual prepared outputs
+The current browser gate compares the same nine source-image landmarks in **both actual tabs**, using the saved placement, Earth view and two routes to the same density cloud. It requires a shared camera and at most 0.05 px image-point difference. Internal agreement in Reconstruction alone does not satisfy this gate.
 
-All three completed material jobs were decoded and checked against the benchmark: identical geometry, every alpha byte, catalogue records and resource hashes. Repainting took about 22–25 seconds per image with already completed native NOX inputs. The 145 lab tests and TypeScript check passed. An isolated mutation making image brightness alter alpha failed the independent output assertion, with the worker’s alpha guard removed in that disposable test copy.
+## Current evidence
 
-Horálek retained benchmark color at 9.57% of positive-alpha texels outside its footprint; VISTA at 7.05%; WISE covered all positive-alpha texels. These are texel counts across the prepared slices, not physical mass fractions or independent volume coverage measurements.
+The cross-tab browser gate passed all six comparisons (three sources × two routes). Maximum image-point discrepancies were 0.00839 px for Horálek, 0.00241 px for VISTA and 0.01210 px for WISE. The camera lens and distance matched; there were no browser errors or processing writes. Neutral original-image metadata reads returned existing prepared assets.
 
-Front, four oblique directions and both edge views were captured for all three materials. The shape remains fixed across materials. The inherited boundary and side-view texture artifacts remain visible.
+The VISTA, Horálek and WISE jobs are verified against Alignment’s prepared bank: exact geometry, every alpha byte, frame and resource hashes. All three catalogue outputs have identical model positions and preserved measured records. Repainting existing native NOX outputs takes a few seconds per image. No star-removal job is repeated.
 
-## Rotation gate remains failed
+Front, four oblique poses and both edge views were captured for all three materials. The inherited density shape remains fixed, without the photo-derived benchmark’s rectangular crop. Thin side-view slice banding and diffuse color projection remain visible; exact cloud ownership does not establish rotation stability or measured nebular gas depth.
 
-At the same camera pose, isolate each active bank with its existing optical-path correction. Use native brightness, zero cutoff, hidden catalogue stars and no original overlay. Thresholds remain 5% relative luminance and 0.04 normalized pixel L1, defined as sum(abs(A−B))/sum(A+B).
+At the final lab boundary, all 145 tests and TypeScript checking passed. The saved-placement scale/rotation assertion fails if the shared fit is stripped again.
 
-| Image | Y/Z luminance difference | X/Z luminance difference | Y/Z image L1 | X/Z image L1 |
-|---|---:|---:|---:|---:|
-| Horálek | 22.99% | 22.14% | 0.1221 | 0.1118 |
-| ESO VISTA | 24.06% | 23.39% | 0.1250 | 0.1162 |
-| NASA WISE | 21.80% | 20.78% | 0.1218 | 0.1069 |
+## Repeatable checks
 
-**All three still fail the strict bank-handoff gate.** Fixing cloud ownership and registration does not calibrate the benchmark’s axis-dependent compositing. Preserving exact alpha deliberately prevents hiding the defect by reshaping each material. No per-image or per-axis gain has been fitted to force these checks to pass.
-
-The remaining calibration belongs to the common prepared-bank encoding/compositing layer. Earlier sampling changes reached an impasse; see the [historical raw-density experiment](research/raw-density-slice-calibration.md). A future correction must improve identical-camera comparisons while retaining the accepted cloud, all stellar positions and local texture continuity. Do not declare rotation stability from passing unit tests, average color matching or successful bakes.
-
-## Repeat the saved-output checks
-
-From a clean repository setup, with the pinned inputs and completed material results available:
+From the repository root, with pinned inputs and completed results available:
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm lab:nebula
-# In a second terminal at the repository root, after the lab is ready:
+# In a second terminal at the repository root after the lab is ready:
+node --experimental-strip-types labs/nebula/src/run.ts browser-reconstruction-tabs
 node --experimental-strip-types labs/nebula/src/run.ts browser-reconstruction-reference
-node --experimental-strip-types labs/nebula/src/run.ts browser-reconstruction-stability
 ```
 
-An existing live lab should be reused. Both commands default to `.local/nebula-lab/material-reconstruction-acceptance.json`, accept an explicit ledger/base URL/output directory, inspect saved outputs only, and fail on absent or unverified evidence. They write local screenshots and reports. The stability command currently exits nonzero for the measured disagreement above.
+Reuse a running lab. Both commands inspect the `.local/nebula-lab/alignment-material-acceptance.json` ledger by default, accept an explicit ledger/base URL/output directory, and write local screenshots/reports. They never start image removal or reconstruction.
+
+The separate `browser-reconstruction-stability` command isolates active banks at the same camera. Its fixed thresholds are 5% relative luminance and 0.04 normalized pixel L1. Earlier failed measurements belong to the historical banks above; they are not evidence of calibrated current output. Preserve the thresholds and report future results honestly. Do not fit per-image exposure to conceal a coordinate or bank-compositing error.

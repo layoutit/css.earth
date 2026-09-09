@@ -34,7 +34,7 @@ export function parsePreparedLmcStars(value: unknown, expectedFrame: DensityVolu
     if (!star || typeof star.id !== 'string' || !star.id.startsWith('Bonanos2009:') || star.id.length > 100 || ids.has(star.id) ||
         typeof star.spectralType !== 'string' || !finiteArray(star.positionUnits, 3) || !Number.isFinite(star.raDeg) || star.raDeg < 0 || star.raDeg >= 360 ||
         !Number.isFinite(star.decDeg) || Math.abs(star.decDeg) > 90 || !Number.isFinite(star.magnitude) ||
-        !Number.isFinite(star.cloudSignal) || star.cloudSignal <= 0 || star.cloudSignal > 1 ||
+        !Number.isFinite(star.cloudSignal) || star.cloudSignal < 0 || star.cloudSignal > 1 ||
         !Array.isArray(star.cloudPartIds) || !star.cloudPartIds.length || star.cloudPartIds.some(id => typeof id !== 'string' || !id) ||
         new Set(star.cloudPartIds).size !== star.cloudPartIds.length ||
         !(star.colorIndexBv === null || Number.isFinite(star.colorIndexBv)) || !Number.isFinite(star.sizePx) || star.sizePx < .5 || star.sizePx > 4 ||

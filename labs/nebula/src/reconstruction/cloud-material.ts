@@ -1,4 +1,4 @@
-/** Offline material replacement on an accepted prepared cloud; geometry and opacity are immutable. */
+/** Offline material replacement on an Alignment prepared cloud; geometry and opacity are immutable. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import sharp from 'sharp';
@@ -7,7 +7,7 @@ import { containedPath, sha256 } from '../../../../src/preparation/volume/source
 import type { VolumeImageEncoding, Vector3 } from '../../../../src/preparation/volume/config.js';
 import type { VolumeSlices, VolumeSliceQuad } from '../../../../src/preparation/volume/slices.js';
 
-export const CLOUD_MATERIAL_METHOD = 'benchmark-opacity-image-chromaticity@1';
+export const CLOUD_MATERIAL_METHOD = 'density-opacity-image-chromaticity@1';
 export interface CloudMaterialCoverage {
   positiveAlphaTexels: number;
   recoloredTexels: number;
@@ -26,7 +26,7 @@ export interface CloudMaterialOptions {
 }
 
 /**
- * Paint candidate image chromaticity onto the accepted cloud's exact alpha.
+ * Paint candidate image chromaticity onto the Alignment cloud's exact alpha.
  * Image brightness never becomes new density. Outside coverage (or where RGB
  * is zero and has no chromaticity), keep the reference material explicitly.
  */
@@ -75,9 +75,9 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       crop: { left: 0, top: 0, width: info.width, height: info.height }, encoding });
     const { data: decoded, info: decodedInfo } = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     if (decodedInfo.width !== info.width || decodedInfo.height !== info.height || decodedInfo.channels !== 4 || decoded.length !== source.length)
-      throw new Error('Recoloring changed accepted cloud texture dimensions.');
+      throw new Error('Recoloring changed Alignment cloud texture dimensions.');
     for (let offset = 3; offset < source.length; offset += 4) if (decoded[offset] !== source[offset])
-      throw new Error(`Recoloring changed accepted cloud alpha: ${quad.texturePath}.`);
+      throw new Error(`Recoloring changed Alignment cloud alpha: ${quad.texturePath}.`);
     await mkdir(dirname(outputPath), { recursive: true });
     await writeFile(outputPath, bytes);
     quads.push({ ...structuredClone(quad), texturePath, sha256: sha256(bytes), bytes: bytes.length });
@@ -89,11 +89,11 @@ export async function recolorCloudSlices(options: CloudMaterialOptions): Promise
       reference: options.slices.provenance, coverage,
       opacity: 'Every decoded reference alpha byte is preserved exactly; no geometry, crop, extent or depth change.',
       color: 'Candidate RGB divided by its maximum channel supplies chromaticity only. Image brightness does not define density.',
-      fallback: 'Uncovered or zero-RGB pixels retain decoded benchmark RGB. Lossy delivery may re-encode RGB; alpha remains exact.' },
+      fallback: 'Uncovered or zero-RGB pixels retain decoded neutral density RGB. Lossy delivery may re-encode RGB; alpha remains exact.' },
     approximation: { ...structuredClone(options.slices.approximation),
       method: `${options.slices.approximation.method} Material: ${CLOUD_MATERIAL_METHOD}.`,
       limitations: [...options.slices.approximation.limitations,
-        'This is material replacement on the accepted reference cloud, not new geometry inference. Uncovered/black image regions retain reference-source color.'] } };
+        'This is material replacement on the accepted reference cloud, not new geometry inference. Uncovered/black image regions retain neutral density color.'] } };
   await mkdir(options.outputDirectory, { recursive: true });
   await writeFile(containedPath(options.outputDirectory, 'volume-slices.json'), JSON.stringify(slices, null, 2) + '\n');
   return { slices, coverage };

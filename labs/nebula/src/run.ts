@@ -28,7 +28,7 @@ if (command === 'test') {
   if (!names.length) throw new TypeError('No matching lab tests.');
   execution = ['--test', ...await Promise.all(names.map(compile))];
 } else if (['browser-removal-strength', 'prepare-overlay-variants', 'browser-overlay-variants', 'prepare-lmc-stars', 'browser-cloud-density', 'browser-cloud-controls', 'prepare-parts', 'browser-filled', 'prepare-filled', 'browser-overlays', 'prepare-overlays', 'prepare-full-density', 'browser-density', 'prepare-particles', 'prepare-master', 'prepare-coherent', 'prepare-prior-window',
-  'prepare-structures', 'getsf-run', 'getsf-install', 'extract', 'acquire-images', 'browser-coherent', 'browser-reconstruction-stability', 'browser-reconstruction-reference'].includes(command ?? '')) {
+  'prepare-structures', 'getsf-run', 'getsf-install', 'extract', 'acquire-images', 'browser-coherent', 'browser-reconstruction-stability', 'browser-reconstruction-reference', 'browser-reconstruction-tabs'].includes(command ?? '')) {
   const entry = files.filter(name => basename(name) === `${command}.ts`);
   if (entry.length !== 1) throw new TypeError(`Expected one lab command entry: ${command}`);
   execution = [await compile(entry[0]!), ...args];

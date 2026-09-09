@@ -418,7 +418,9 @@
         "smash-dr2-wide-mosaic",
         "ciel-austral-optical",
         "naztronomy-optical"
-      ]
+      ],
+      "reconstructionReferenceImageId": "smash-original",
+      "referenceFramingRadiusUnits": 5
     }
   }
 ]

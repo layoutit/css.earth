@@ -1,58 +1,79 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { prepareReconstructionStars, type ReconstructionStarsInput } from './reconstruction-stars.js';
-import { parsePreparedLmcStars, mountPreparedLmcStars, type PreparedLmcStars } from '../stars/lmc-stars.js';
+import { mountPreparedLmcStars, type PreparedLmcStars } from '../stars/lmc-stars.js';
+import { loadVolumeSource, sha256, sampleEncoded } from '../../../../src/preparation/volume/source.js';
+import { prepareDensityProjection } from './density-projection.js';
 
 const path = 'labs/nebula/models/lmc/stars/prepared/stars.json';
-const cloudPath = 'labs/nebula/models/lmc/clouds/object.json';
-async function fixture() {
-  const bytes = await readFile(path), catalogue = JSON.parse(bytes.toString()) as PreparedLmcStars, cloudBytes = await readFile(cloudPath);
-  const input: ReconstructionStarsInput = {
-    frame: catalogue.frame, source: { path, sha256: createHash('sha256').update(bytes).digest('hex') },
-    canonicalCloud: { path: cloudPath, sha256: createHash('sha256').update(cloudBytes).digest('hex') },
-  };
-  return { catalogue, input };
-}
+const cloudPath = 'labs/nebula/models/lmc/full-density/object.json';
+const referencePath = 'labs/nebula/models/lmc/overlays/overlays.json';
+const close = (a: number, b: number, tolerance = 1e-8) => assert.ok(Math.abs(a - b) < tolerance, `${a} != ${b}`);
+const fixturePromise = (async () => {
+  const bytes = await readFile(path), catalogue = JSON.parse(bytes.toString()) as PreparedLmcStars;
+  const referenceBytes = await readFile(referencePath), reference = JSON.parse(referenceBytes.toString());
+  const overlay = reference.overlays.find((row: { id: string }) => row.id === 'smash-original');
+  const recipe = JSON.parse(await readFile('labs/nebula/models/lmc/full-density/source/volume.json', 'utf8'));
+  const densitySource = await loadVolumeSource('labs/nebula/models/lmc/full-density/source', recipe);
+  const projection = prepareDensityProjection(densitySource, Math.hypot(...catalogue.frame.originM) / catalogue.frame.metersPerUnit);
+  const input: ReconstructionStarsInput = { frame: catalogue.frame, source: { path, sha256: sha256(bytes) },
+    canonicalCloud: { path: cloudPath, sha256: sha256(await readFile(cloudPath)) }, densitySource,
+    reference: { wcs: (catalogue.provenance as any).footprint.wcs, alignment: { ...overlay, placement: overlay.initialPlacement },
+      provenancePin: { path: referencePath, sha256: sha256(referenceBytes) } }, sampleProjectedDensitySignal: projection.sampleSignal };
+  return { catalogue, input, projection, overlay };
+})();
 
-test('all 943 accepted-cloud stars retain exact XYZ, observed astrometry, photometry and cloudSignal across image variants', async () => {
-  const { catalogue, input } = await fixture(), before = structuredClone(catalogue);
-  const result = prepareReconstructionStars(catalogue, input)!;
-  parsePreparedLmcStars(result, catalogue.frame);
-  const expected = catalogue.stars;
-  assert.equal(expected.length, 943);
-  assert.deepEqual(result.stars.map(star => star.id), expected.map(star => star.id));
-  result.stars.forEach((star, index) => {
-    const previous = expected[index];
-    assert.deepEqual(star, { ...previous, cloudPartIds: ['all-light'] });
-    assert.notEqual(star.positionUnits, previous.positionUnits);
+test('all 943 stars follow the fixed reference-image fit and occupy the unchanged source density', async () => {
+  const { catalogue, input, projection, overlay } = await fixturePromise, before = structuredClone(catalogue);
+  const gridBefore = sha256(input.densitySource.encodedRgba), result = prepareReconstructionStars(catalogue, input);
+  assert.equal(result.stars.length, 943); assert.deepEqual(catalogue, before);
+  assert.equal(sha256(input.densitySource.encodedRgba), gridBefore);
+  const m = overlay.style.transform.slice(9, -1).split(',').map(Number), w = input.reference.wcs;
+  const rad = Math.PI / 180, [a0, d0] = w.referenceValueDeg.map(v => v * rad), angle = w.rotationDeg * rad;
+  const distance = Math.hypot(...input.frame.originM) / input.frame.metersPerUnit, encoded: [number, number, number, number] = [0, 0, 0, 0];
+  let moved = 0;
+  result.stars.forEach((star, i) => {
+    const old = catalogue.stars[i];
+    assert.deepEqual({ ...star, positionUnits: old.positionUnits, cloudSignal: old.cloudSignal, cloudPartIds: old.cloudPartIds }, old);
+    sampleEncoded(input.densitySource, ...star.positionUnits, encoded); assert.ok(encoded[3] > 0, `${star.id} escaped density`);
+    close(star.cloudSignal, projection.sampleSignal(...star.positionUnits), 1e-12);
+    assert.deepEqual(star.cloudPartIds, ['all-light']);
+    // Independent spherical TAN inverse, then point-wise CSS scale/rotation/offset.
+    // This does not use either mapping helper that prepares the catalogue.
+    const a = star.raDeg * rad, d = star.decDeg * rad;
+    const den = Math.sin(d) * Math.sin(d0) + Math.cos(d) * Math.cos(d0) * Math.cos(a - a0);
+    const east = Math.cos(d) * Math.sin(a - a0) / den;
+    const north = (Math.sin(d) * Math.cos(d0) - Math.cos(d) * Math.sin(d0) * Math.cos(a - a0)) / den;
+    const fx = w.referencePixel[0] + (Math.cos(angle) * east + Math.sin(angle) * north) / (w.scaleDeg[0] * rad);
+    const fy = w.referencePixel[1] + (-Math.sin(angle) * east + Math.cos(angle) * north) / (w.scaleDeg[1] * rad);
+    const u = (fx - .5) / w.referenceDimension[0], v = 1 - (fy - .5) / w.referenceDimension[1];
+    const x = u * overlay.widthPx, y = v * overlay.heightPx, divisor = m[3] * x + m[7] * y + m[15];
+    const p = [0, 1, 2].map(c => (m[c] * x + m[c + 4] * y + m[c + 12]) / divisor);
+    const fit = overlay.initialPlacement, zAngle = fit.rotationZ * rad;
+    const cx = (p[0] - overlay.pivotCssPx[0]) * fit.scale, cy = (p[1] - overlay.pivotCssPx[1]) * fit.scale;
+    const fittedX = Math.cos(zAngle) * cx - Math.sin(zAngle) * cy + overlay.pivotCssPx[0] + fit.x * 50;
+    const fittedY = Math.sin(zAngle) * cx + Math.cos(zAngle) * cy + overlay.pivotCssPx[1] + fit.y * 50;
+    const factor = 1 + star.positionUnits[2] / distance;
+    close(star.positionUnits[0] / factor, fittedY / 50);
+    close(star.positionUnits[1] / factor, fittedX / 50);
+    if (Math.hypot(...star.positionUnits.map((value, j) => value - old.positionUnits[j])) > .1) moved++;
   });
-  assert.deepEqual(catalogue, before);
-  assert.deepEqual((result.provenance as any).inheritedCatalogue, input.source);
-  assert.deepEqual((result.provenance as any).inheritedProvenance, catalogue.provenance);
-  assert.deepEqual((result.provenance as any).canonicalCloud, input.canonicalCloud);
+  assert.ok(moved > 900, 'Old unregistered positions must not survive the accepted3x/39° fit.');
+  assert.deepEqual(prepareReconstructionStars(catalogue, input), result, 'Every candidate receives the identical common stellar realization.');
   assert.equal((result.provenance as any).excludedStars, 0);
-  assert.match(result.depthAssumption, /No new stellar distances/);
-  // Neither differing image bytes nor image dimensions enter this API.
-  assert.deepEqual(prepareReconstructionStars(catalogue, input), result);
-  assert.match((result.provenance as any).support, /No image/);
-  // Preserving old image-derived part membership would disable the new star layer.
-  assert.throws(() => assert.deepEqual(catalogue.stars[0].cloudPartIds, ['all-light']));
+  assert.equal((result.provenance as any).belowProjectionQuantization, 1);
 });
 
-test('wrong cloud identity and image/resampling inputs reject instead of filtering the accepted catalogue', async () => {
-  const { catalogue, input } = await fixture();
-  assert.throws(() => prepareReconstructionStars(catalogue, { ...input,
-    canonicalCloud: { ...input.canonicalCloud, sha256: 'a'.repeat(64) } }), /Canonical cloud differs/);
-  const changed = structuredClone(catalogue); delete (changed.provenance as any).depthModel.cloudObject;
-  assert.throws(() => prepareReconstructionStars(changed, input), /Canonical cloud differs/);
-  // Historical path aliases do not alter the verified object identity.
-  const aliased = prepareReconstructionStars(catalogue, { ...input,
-    canonicalCloud: { ...input.canonicalCloud, path: 'labs/nebula/models/lmc-clouds/object.json' } });
-  assert.deepEqual(aliased.stars, prepareReconstructionStars(catalogue, input).stars);
-  for (const additional of [{ imageId: 'any-image' }, { sampleDensity: () => 0 }, { sampleProjectedDensitySignal: () => .5 }])
-    assert.throws(() => prepareReconstructionStars(catalogue, { ...input, ...additional } as ReconstructionStarsInput), /not image or density resampling/);
+test('wrong reference/density, unsupported model rays and candidate-image inputs reject instead of placing or filtering stars', async () => {
+  const { catalogue, input } = await fixturePromise;
+  assert.throws(() => prepareReconstructionStars(catalogue, { ...input, canonicalCloud: { ...input.canonicalCloud, sha256: 'a'.repeat(64) } }), /Canonical density differs/);
+  assert.throws(() => prepareReconstructionStars(catalogue, { ...input, reference: { ...input.reference,
+    wcs: { ...input.reference.wcs, rotationDeg: input.reference.wcs.rotationDeg + 5 } } }), /original catalogue image footprint/);
+  assert.throws(() => prepareReconstructionStars(catalogue, { ...input, reference: { ...input.reference, alignment: { ...input.reference.alignment,
+    placement: { ...input.reference.alignment.placement, x: 1000 } } } }), /Cannot place 943\/943/);
+  assert.throws(() => prepareReconstructionStars(catalogue, { ...input, sampleProjectedDensitySignal: () => NaN }), /Cannot place 943\/943/);
+  assert.throws(() => prepareReconstructionStars(catalogue, { ...input, imageId: 'candidate' } as ReconstructionStarsInput), /not candidate image inputs/);
   assert.throws(() => prepareReconstructionStars(catalogue, { ...input,
     frame: { ...input.frame, metersPerUnit: input.frame.metersPerUnit * 3 } }), /different physical frames/);
 });
@@ -64,17 +85,17 @@ class Element {
   append(node: Element) { this.children.push(node); }
   remove() {}
 }
-test('all-light membership supports the existing retained star toggle and signal cutoff', async () => {
-  const { catalogue, input } = await fixture(), payload = prepareReconstructionStars(catalogue, input)!;
+test('the common density signal and all-light membership retain star toggle and cutoff behavior', async () => {
+  const { catalogue, input } = await fixturePromise, payload = prepareReconstructionStars(catalogue, input);
   const host = new Element(), layer = mountPreparedLmcStars({ host: host as unknown as HTMLElement, payload });
   const root = host.children[0], nodes = [...root.children];
-  layer.setVisible(false); assert.equal(root.style.display, 'none');
-  layer.setVisible(true); assert.equal(root.style.display, 'block');
-  layer.setCloudSupport({ cutoff: .5, softness: 0, showRemoved: false }, ['all-light']);
-  payload.stars.forEach((star, i) => assert.equal(Number(nodes[i].style.opacity), star.cloudSignal > .5 ? star.opacity : 0));
-  assert.ok(nodes.some(node => Number(node.style.opacity) > 0));
-  assert.ok(nodes.some(node => Number(node.style.opacity) === 0));
+  layer.setVisible(false); assert.equal(root.style.display, 'none'); layer.setVisible(true); assert.equal(root.style.display, 'block');
+  const cutoff = [...payload.stars].sort((a, b) => a.cloudSignal - b.cloudSignal)[471].cloudSignal;
+  layer.setCloudSupport({ cutoff, softness: 0, showRemoved: false }, ['all-light']);
+  payload.stars.forEach((star, i) => assert.equal(Number(nodes[i].style.opacity), star.cloudSignal >= cutoff ? star.opacity : 0));
+  assert.ok(nodes.some(node => Number(node.style.opacity) > 0)); assert.ok(nodes.some(node => Number(node.style.opacity) === 0));
+  layer.setCloudSupport({ cutoff: 0, softness: 0, showRemoved: false }, ['all-light']);
+  assert.ok(nodes.every((node, i) => Number(node.style.opacity) === payload.stars[i].opacity), 'A zero projected byte cannot remove a physically supported star at cutoff0.');
   layer.setCloudSupport({ cutoff: 0, softness: 0, showRemoved: false }, []);
-  assert.ok(nodes.every(node => Number(node.style.opacity) === 0));
-  assert.deepEqual(root.children, nodes);
+  assert.ok(nodes.every(node => Number(node.style.opacity) === 0)); assert.deepEqual(root.children, nodes);
 });

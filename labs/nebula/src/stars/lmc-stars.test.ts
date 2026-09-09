@@ -106,7 +106,7 @@ test('parser rejects mismatched frames, nonfinite geometry, duplicate identifier
     (v: PreparedLmcStars) => {v.stars[0].sizePx = 500;},
     (v: PreparedLmcStars) => {v.stars[0].cloudSignal = NaN;},
     (v: PreparedLmcStars) => {v.stars[0].cloudSignal = 1.1;},
-    (v: PreparedLmcStars) => {v.stars[0].cloudSignal = 0;},
+    (v: PreparedLmcStars) => {v.stars[0].cloudSignal = -.01;},
     (v: PreparedLmcStars) => {delete (v.stars[0] as Partial<typeof v.stars[0]>).cloudPartIds;},
     (v: PreparedLmcStars) => {v.stars[0].cloudPartIds = [];},
   ]) {const changed=structuredClone(p);mutate(changed);assert.throws(()=>parsePreparedLmcStars(changed,p.frame));}
