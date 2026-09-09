@@ -12,6 +12,7 @@ interface Entry {
   started: number;
   duration: number;
   written: number;
+  suppressed: boolean;
 }
 
 /** Retained, wall-time opacity interpolation without CSS or Web Animations. */
@@ -31,12 +32,13 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow, multiplier?
   };
   const write = (entry: Entry, value: number) => {
     entry.current = clamp(value);
-    if (entry.written !== entry.current) {
-      entry.written = entry.current;
+    const published = entry.suppressed ? 0 : entry.current;
+    if (entry.written !== published) {
+      entry.written = published;
       // Hover policy stays in CSS; changing alpha never changes an inherited
       // custom property or requires a computed-style read.
       entry.element.style.opacity = multiplier
-        ? `calc(${entry.current} * ${multiplier})` : String(entry.current);
+        ? `calc(${published} * ${multiplier})` : String(published);
     }
   };
   const valueAt = (entry: Entry, timestamp: number) => {
@@ -77,7 +79,7 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow, multiplier?
       const timestamp = now();
       if (!entry) {
         const current = read(element);
-        entry = { element, current, written: Number.NaN, target, from: current, started: timestamp, duration };
+        entry = { element, current, written: Number.NaN, suppressed: false, target, from: current, started: timestamp, duration };
         entries.set(element, entry);
       } else {
         entry.current = valueAt(entry, timestamp);
@@ -100,6 +102,13 @@ export function createOpacityFader(windowTarget: OpacityFaderWindow, multiplier?
       }
       active.add(entry);
       schedule();
+    },
+    /** Hide the published value while its existing fade continues unchanged. */
+    suppress(element: HTMLElement, suppressed: boolean) {
+      const entry = entries.get(element);
+      if (!entry || entry.suppressed === suppressed) return;
+      entry.suppressed = suppressed;
+      write(entry, valueAt(entry, now()));
     },
     cancel(element: HTMLElement) {
       const entry = entries.get(element);

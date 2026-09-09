@@ -16,10 +16,11 @@ import type { PlannedWorldContext } from './world-context-planner.js';
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
-export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [] }: {
+export function createPreparedUniverse({ context, volume, stars, resolveStarResource, resolveResource, sprites, shells = [], annotationPriorities }: {
   context: unknown; volume: PreparedCssVolume; stars: PreparedCssPointField;
   resolveStarResource(path: string): string; resolveResource(path: string): string;
   sprites: Readonly<Record<string, SpriteWithUrl>>;
+  annotationPriorities?: Readonly<Record<string, number>>;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
 }) {
   const plan = parsePreparedWorldContext(context), payload = validatePreparedCssVolume(volume);
@@ -47,7 +48,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
     startup: [...entries, ...starEntries, ...shellEntries].map(entry => entry.key),
   };
   return Object.freeze({ assets,
-    createFramePlanner: () => createWorldContextPlannerClient(plan),
+    createFramePlanner: () => createWorldContextPlannerClient(plan, undefined, annotationPriorities),
     mount(stage: HTMLElement, requestPublication?: () => boolean) {
       const document = stage.ownerDocument;
       const root = document.createElement('div');
@@ -104,7 +105,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
         pointField = mountPreparedCssPointField({ host: root, before: end, payload: stars, resolveResource: resolveStarResource, occluder: plan.focus, showLabels: false });
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Billboards share the detail stage, so a nearer body can cover the selected detail.
-        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites, requestPublication });
+        spatial = mountPreparedWorldContext({ host: stage, before: root, plan, sprites, requestPublication, annotationPriorities });
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: stars, resolveResource: resolveStarResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload) });
         return Object.freeze({ root, destroy,
@@ -116,7 +117,7 @@ export function createPreparedUniverse({ context, volume, stars, resolveStarReso
             highContrastSky = enabled;
             publishBackground();
           },
-          setNavigationIndicatorsVisible(visible: boolean) { spatial!.setNavigationIndicatorsVisible(visible); focusPoint?.setNavigationEnabled(visible); },
+          setNavigationInFlight(active: boolean) { spatial!.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
           inspect() {

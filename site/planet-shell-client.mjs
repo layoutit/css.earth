@@ -8,7 +8,7 @@ import { createSurfaceMinimap, loadSurfacePreview } from "./surface-minimap.mjs"
 import { createViewReadout } from "./view-readout.mjs";
 import { createSurfaceMapReader } from "./surface-map-context.mjs";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mjs';
-import { overviewScopeAtCamera } from './overview-context.mjs';
+import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mjs';
 
 export function mountPlanetShell({
   objectId,
@@ -32,9 +32,17 @@ export function mountPlanetShell({
   const lifetime = createSceneLifetime();
   let settingsController, objectBrowser, contentLifetime, minimapController, viewReadout;
   let selectionPreview = null;
+  let cardObjectId = objectId;
   let overview = false, overviewScope = 'solar-system', camera = null, unsubscribeOverview = null;
   lifetime.onDispose(() => unsubscribeOverview?.());
+  function updateBodyCard(world = camera?.navigation?.capture()) {
+    const information = drawer.querySelector('.planet-information-panel');
+    const view = bodyCardViewAtCamera(world, selectionPreview?.frame ?? camera?.navigation?.frame,
+      camera?.navigation?.optics?.(), selectionPreview?.id ?? cardObjectId);
+    if (information && information.dataset.cardView !== view) information.dataset.cardView = view;
+  }
   function updateOverview(force = false, world = camera?.navigation?.capture()) {
+    updateBodyCard(world);
     if (selectionPreview) return;
     const scope = overview && world ? overviewScopeAtCamera(world, overviewScope) : 'solar-system';
     if (!force && scope === overviewScope) return;
@@ -90,7 +98,7 @@ export function mountPlanetShell({
         if (!map.closest('[hidden], details:not([open])')) loadSurfacePreview(map);
       }
       information.ariaBusy = 'true'; information.inert = true;
-      const preview = { id: object.id, commit() {
+      const preview = { id: object.id, frame: object.worldFrame, commit() {
         selectionPreview = null;
         information.ariaBusy = previousBusy; information.inert = previousInert;
       }, restore() {
@@ -99,8 +107,10 @@ export function mountPlanetShell({
         information.replaceChildren(...previous);
         information.ariaBusy = previousBusy; information.inert = previousInert;
         restoreBrowser();
+        updateBodyCard();
       } };
       selectionPreview = preview;
+      updateBodyCard();
       return preview.restore;
     },
     setObject(content) {
@@ -112,6 +122,7 @@ export function mountPlanetShell({
       const contrast = documentTarget.querySelector('.planet-sky-contrast-setting').checked;
       disposeContent();
       content.apply({ preserveSidebar });
+      cardObjectId = content.id;
       overview = false; overviewScope = 'solar-system';
       objectBrowser.setObject(content.name);
       mountContent(content.id, motion, contrast);
@@ -433,12 +444,25 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   }
   browser.dataset.retained = '';
   information.dataset.retained = '';
-  let activeCategory = 'all';
+  const distanceOrder = items.toSorted((a, b) => Number(a.dataset.objectDistanceAu) - Number(b.dataset.objectDistanceAu));
+  const planetOrder = [
+    ...distanceOrder.filter(item => item.dataset.objectClassification === 'planet'),
+    ...distanceOrder.filter(item => item.dataset.objectClassification !== 'planet'),
+  ];
+  let activeCategory = tabs.find(tab => tab.getAttribute('aria-selected') === 'true')?.dataset.objectTab ?? 'planet';
   // Reset the outgoing layout before changing result visibility. Hidden panels
   // were reset when closed, so opening one needs no synchronous layout readback.
   const resetResultsScroll = () => { if (!browser.hidden) resultsPanel.scrollTop = 0; };
   const selectTab = (classification, { focus = false, resetScroll = true } = {}) => {
     if (resetScroll) resetResultsScroll();
+    if (classification !== activeCategory) {
+      // Reorder the retained rows inside their existing layout groups.
+      const order = classification === 'planet' ? planetOrder : distanceOrder;
+      for (const [index, chunk] of chunks.entries()) {
+        chunk.items = order.slice(index * 16, (index + 1) * 16);
+        chunk.node.querySelector('.planet-object-chunk-list').append(...chunk.items);
+      }
+    }
     activeCategory = classification;
     for (const tab of tabs) {
       const selected = tab.dataset.objectTab === classification;

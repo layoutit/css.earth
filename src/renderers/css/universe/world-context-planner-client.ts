@@ -11,7 +11,8 @@ export interface WorldPlannerWorker {
 /** The publication queue owns admission; this transport owns one persistent prepared bank. */
 export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   createWorker: () => WorldPlannerWorker = () => new Worker(new URL('./world-context-planner-worker.js', import.meta.url),
-    { type: 'module', name: 'cssearth-world-planner' })) {
+    { type: 'module', name: 'cssearth-world-planner' }),
+  annotationPriorities: Readonly<Record<string, number>> = {}) {
   const worker = createWorker();
   let resolveReady!: () => void, rejectReady!: (error: Error) => void;
   const ready = new Promise<void>((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
@@ -33,7 +34,7 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
     const complete = pending; pending = null; complete.resolve(data.frame);
   };
   worker.onerror = event => destroy(new Error(event.message));
-  worker.postMessage({ plan });
+  worker.postMessage({ plan, annotationPriorities });
   return { async plan(view: WorldContextView): Promise<PlannedWorldContext> {
     await ready;
     if (destroyed) throw new Error('World frame planner was destroyed.');

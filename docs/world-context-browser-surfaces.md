@@ -3,7 +3,7 @@
 PR #45 merged on 2026-09-08 as `c6850e2839520e32c3e6526bc1fd8a95866a9eb2`,
 with published head `e6e9f1f968ce1a0ad49e7adddba5f3a4465d347a`.
 This follow-up continues in draft PR #50. The measurements below identify their
-exact revisions; later integrations include 227 bodies from main. This work has
+exact revisions; the latest integration includes 301 bodies from main. This work has
 not established consistently smooth playback.
 
 ## Published cssGraphics mechanisms inspected
@@ -30,10 +30,9 @@ Retrieved bundle SHA-256 values:
 
 ## Local changes
 
-- Keep each orbit's opacity container as a nonempty centered 1 x 1 CSS-pixel
-  anchor, rather than an otherwise empty viewport-sized box. Original body
-  depth groups remain full size. Child stroke geometry, opacity, clipping,
-  hover growth and hit corridors stay owned by the existing renderer.
+- The original compact orbit-opacity container experiment is withdrawn in the
+  #74 integration below: native rasterization differs from main even with equal
+  stroke coordinates. Orbit opacity surfaces retain main's viewport bounds.
 - During preparation, exclude only volume slabs whose lossless decoded alpha is
   entirely zero. The Milky Way bank retains 456 of 544 slabs: stacks become
   214/214/28 rather than 256/256/32. With three optical copies per slab, this
@@ -1941,3 +1940,45 @@ checks and 25 shell/lens/Earth-night-light checks. The Ceres delayed-load and
 interrupted-flight browser checks pass at DPR 1 and 2: one complete immediate
 card replacement, retained through landing, with controls released on commit and
 one mounted detail scene. Earlier aggregate-gate limitations remain in force.
+
+
+### Main #74 integration and presentation correction
+
+Main `6c8169e95` adds system-framed cards, selected-body corners and stroke,
+classification-aware annotation placement, full moon orbits around a selected
+parent, and destination annotations during flights. These policies are carried
+into the existing worker planner and retained shell. Flights keep orbit
+projection live. Catalogue category changes reorder the original 301 row nodes
+inside their retained groups; the default Planet tab uses main's ordering.
+
+The previous immediate-opacity optimization changed presentation timing. It is
+withdrawn: orbit, label, circle and physical-marker opacity again use main's
+120 ms `ease` CSS transition. Flight suppression publishes zero independently
+of the ongoing 200 ms label fade, so resumption uses that fade's current value.
+The direct-alpha publisher retains numeric state and avoids inherited per-frame
+variables; suppression does not introduce another animation or reset the fade.
+Earlier sections reporting zero opacity transitions and their performance
+measurements describe older revisions, not this corrected implementation.
+
+An isolated renderer comparison uses 20 exact main source/asset receipts, main's
+prepared world context, and ten controlled Sun/giant-system views at DPR 2.
+The original 1 px orbit container differs by up to 3/255 across 97,885 channels
+in the overview despite matching projected geometry. A 2 px container has the
+same problem. Changing only the candidate container back to main's viewport
+bounds produces ten pixel-identical images with restored timing. That exact
+restoration is now integrated. Evidence and source-patch hashes are in
+`output/playwright/main74-integration/{settled,timing-restored}/`. This is an
+isolated overlay comparison, not whole-application or moving-frame parity.
+
+Native catalogue navigation passes at desktop and mobile sizes. Delayed Ceres
+loading and cancellation of a Venus flight pass at DPR 1/2: the complete card
+appears during the click and retains its nodes through landing. Cancellation
+restores the prior search and retained Ceres card; dismissing search reveals
+Ceres. The initial failure expected a visible detail card while the restored
+search remained open. Main's source explicitly restores that search state; no
+product change was made to satisfy the obsolete expectation.
+
+Validation includes 102 focused renderer/fader tests, 9 engine flight tests,
+55 shell/router/system-framing tests, renderer typecheck and build. The fresh
+synchronized route after this integration is still pending. Existing aggregate
+gate limitations remain unresolved; this section is not merge approval.

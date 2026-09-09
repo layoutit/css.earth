@@ -6,9 +6,12 @@ import { contextMarkerSprite } from '../src/navigation/marker-presentation.mjs';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { OBJECTS } from './objects.mjs';
+import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mjs';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
 const cometIds = OBJECTS.filter(object => object.classification === 'comet').map(object => object.id);
+const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
+  [object.id, CONTEXT_ANNOTATION_PRIORITY[object.classification] ?? 0]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 let universePromise = null;
@@ -45,7 +48,7 @@ function loadApplicationUniverse() {
       }));
     const sprites = Object.fromEntries(Object.entries(PREPARED_NAVIGATION_MARKERS)
       .map(([id, sprite]) => [id, contextMarkerSprite(sprite)]));
-    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells,
+    const universe = createPreparedUniverse({ context: applicationContext, volume, stars, sprites, shells, annotationPriorities,
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolveStarResource: path => starSet.resolve(`prepared/${path}`) });
     const markerPool = 'context-markers';

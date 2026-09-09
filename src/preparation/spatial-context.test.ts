@@ -90,6 +90,35 @@ test('satellite ellipses are translated to their parent with exact prepared cent
   const config = { ...source, bodies, orbit: { ...source.orbit, segments: 16 } };
   const facts = { parent: { radiusM: 2 }, satellite: { radiusM: 1 } };
   const orbit = prepareWorldContext(config, facts, states).bodies[1]!.orbit;
+  const policy = { minimumRadiusShare: .2, elevationsDegrees: [30, 45, 60], azimuthStepDegrees: 15 };
+  const view = prepareWorldContext(config, facts, states, {}, policy).bodies[0]!.systemView!;
+  assert.deepEqual(view.memberIds, ['satellite']);
+  assert.deepEqual(view.memberRadiiM, [1]);
+  assert.equal(view.candidates.length, 72);
+  // Include the far side omitted by the trail, with room for the moon itself.
+  assert.equal(view.candidates[0]!.minimumM[0], -14);
+  assert.equal(view.candidates[0]!.maximumM[0], 8);
+  for (const candidate of view.candidates) {
+    const rotation = candidate.cameraToReference;
+    const elevation = Math.asin(rotation[8]!) * 180 / Math.PI;
+    assert.ok(elevation >= 30 - 1e-10 && elevation <= 60 + 1e-10, 'every candidate is oblique');
+    const project = (point: readonly number[]) => [0, 1, 2].map(axis =>
+      point.reduce((sum, value, row) => sum + (value - states.parent!.positionM[row]!) * rotation[3 * row + axis]!, 0));
+    assert.deepEqual(candidate.memberPositionsM[0], project(states.satellite!.positionM));
+    for (const vertex of orbit.verticesM) for (const [axis, value] of project(vertex).entries()) {
+      assert.ok(value - 1 >= candidate.minimumM[axis]! - 1e-10 && value + 1 <= candidate.maximumM[axis]! + 1e-10);
+    }
+  }
+  const retrograde = prepareWorldContext(config, facts, { ...states,
+    satellite: { ...states.satellite!, normal: [0, 0, -1] } }, {}, policy).bodies[0]!.systemView!;
+  assert.ok(retrograde.candidates.every(candidate => candidate.cameraToReference[8]! < 0), 'retrograde orbital north is respected');
+  const renamed = prepareWorldContext({ ...config, bodies: bodies.map(body => ({ ...body, id: `${body.id}-renamed` })) },
+    { 'parent-renamed': facts.parent, 'satellite-renamed': facts.satellite },
+    { 'parent-renamed': states.parent!, 'satellite-renamed': { ...states.satellite!, centerBodyId: 'parent-renamed' } }, {}, policy);
+  assert.deepEqual(renamed.bodies[0]!.systemView!.candidates, view.candidates, 'body names have no influence on framing');
+  const reordered = prepareWorldContext({ ...config, bodies: [...bodies].reverse() }, facts, states, {}, policy);
+  assert.deepEqual(reordered.bodies.find(body => body.id === 'parent')!.systemView, view, 'registry order has no influence on framing');
+  assert.throws(() => prepareWorldContext(config, facts, states, {}, { ...policy, elevationsDegrees: [90] }), /oblique/);
   assert.deepEqual(orbit.centerPositionM, states.parent!.positionM);
   assert.equal(orbit.centerBodyId, 'parent');
   assert.deepEqual(orbit.verticesM[0], [1007, 0, 0]);

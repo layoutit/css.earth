@@ -375,7 +375,7 @@
 }
 
 /* A retained catalogue with one scrolling list beneath its category tabs. */
-.planet-sidebar .planet-card[data-solar-system-results] {
+.planet-sidebar .planet-card:is([data-solar-system-results], [data-card-view="overview"]) {
   display: flex;
   flex-direction: column;
   container-type: inline-size;
@@ -383,6 +383,7 @@
   max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-status-height) - var(--explorer-panel-bottom-gap));
 }
 [data-solar-system-results] > .planet-selected-panel,
+[data-card-view="overview"] > .planet-selected-panel,
 :is(.planet-object-tabs, .planet-card-tabs) { flex: 0 0 auto; }
 .planet-card[data-solar-system-results] > .planet-selected-panel { padding-bottom: 8px; }
 :is(.planet-object-tabs, .planet-card-tabs) {
@@ -421,6 +422,7 @@
   text-underline-offset: 3px;
 }
 .planet-object-results-scroll {
+  --object-results-scrollbar-inset: 4px;
   box-sizing: border-box;
   max-height: 280px;
   min-height: 0;
@@ -429,18 +431,49 @@
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: rgb(255 255 255 / 30%) transparent;
-  padding: 8px var(--explorer-card-padding-inline-end) 0 var(--explorer-card-padding-inline-start);
+  margin-inline-end: var(--object-results-scrollbar-inset);
+  /* Inset the scrollport while leaving the row content at the same coordinates. */
+  padding: 8px calc(var(--explorer-card-padding-inline-end) - var(--object-results-scrollbar-inset)) 0 var(--explorer-card-padding-inline-start);
 }
-.planet-sidebar .maps-object-results .planet-object-results-scroll .planet-object-list {
+#object-category-results {
+  /* 20px rows + 8px gaps, including the initial 8px padding. */
+  max-height: calc(var(--object-category-visible-rows) * 28px);
+}
+.planet-sidebar .planet-object-results-scroll .planet-object-list {
   /* Keep the scrollbar inside the card gutter, aligned with other tab content. */
   width: calc(100cqi - var(--explorer-card-padding-inline-start) - var(--explorer-card-padding-inline-end));
+  display: grid;
   gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .planet-object-results-scroll .planet-observation-control { text-decoration: none; }
+.planet-sidebar .planet-object-link .planet-lens-icon { opacity: 1; }
 .planet-object-results-scroll:focus-visible { outline: 0; box-shadow: inset 0 -1px var(--shell-focus); }
-.planet-sidebar .maps-object-results .planet-object-link:focus-visible .planet-object-name {
+.planet-sidebar .planet-object-results-scroll .planet-object-link:focus-visible .planet-object-name {
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* Keep both body cards retained; zoom only changes which view is visible. */
+.planet-information-panel:not([data-card-view="overview"]) > [data-body-overview],
+.planet-information-panel[data-card-view="overview"] > :not([data-body-overview]) {
+  display: none !important;
+}
+.planet-body-overview-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 12px;
+}
+.planet-card > .planet-selected-panel > .planet-body-overview-image + .planet-introduction {
+  margin-top: 12px;
+}
+.planet-object-results-scroll .planet-object-empty {
+  margin: 0;
+  color: var(--shell-text-muted);
+  font: 400 15px/20px var(--shell-ui-font);
 }
 
 /* Object tabs share the overview tabs without moving the card heading. */

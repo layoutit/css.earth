@@ -37,6 +37,23 @@ test('interpolates on wall time, retargets from the current value, and avoids We
   fader.destroy();
 });
 
+test('suppression preserves a running fade and resumes its current value without restarting', () => {
+  const clock = new Clock(), element = new Element(), fader = createOpacityFader(clock);
+  const target = element as unknown as HTMLElement;
+  fader.set(target, 1, 200); clock.frame(50);
+  fader.suppress(target, true);
+  expect(element.style.opacity).toBe('0');
+  clock.frame(50);
+  expect(element.style.opacity).toBe('0');
+  expect(fader.current(target)).toBe(.5);
+  fader.suppress(target, false);
+  expect(element.style.opacity).toBe('0.5');
+  clock.frame(100);
+  expect(element.style.opacity).toBe('1');
+  expect(clock.pending.size).toBe(0);
+  fader.destroy();
+});
+
 test('same target does not restart, duration zero adopts immediately, and cancel stops work',()=>{
   const clock=new Clock(),element=new Element(),second=new Element(),fader=createOpacityFader(clock);
   fader.set(element as unknown as HTMLElement,1,100);const firstFrame=1;
