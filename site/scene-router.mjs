@@ -539,13 +539,16 @@ export function createSceneRouter({
       isAvailable: () => active === session && sceneState === 'ready' && !pending && centeredObjectId !== objectId,
       windowTarget,
       onChange(next) {
-        if (!next.overview) {
-          // The overview already uses the Sun's camera and prepared detail.
-          // Showing its card must not move the view or allocate another scene.
-          setOverview(false);
-          const url = new URL(windowTarget.location.href); url.searchParams.delete('overview');
+        if (!next.overview || next.objectId === objectId) {
+          // The mounted Sun and its overview share the same camera, detail and
+          // subscriptions. Change their selection in place in either direction.
+          setOverview(next.overview);
+          const url = new URL(windowTarget.location.href);
+          if (next.overview) url.searchParams.set('overview', 'solar-system');
+          else url.searchParams.delete('overview');
           session.url = url.href;
           historyOwner?.commit(url.href, { history: 'replace' });
+          session.viewUrl?.flush();
           return;
         }
         void navigate(sun.id, { overview: true, history: 'replace', preserveView: true });

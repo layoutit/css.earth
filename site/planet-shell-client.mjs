@@ -378,7 +378,11 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
   const tabs = [...browser.querySelectorAll('[data-object-tab]')];
   const resultsPanel = browser.querySelector('#object-category-results');
   let activeCategory = 'all';
-  const selectTab = (classification, { focus = false } = {}) => {
+  // Reset the outgoing layout before changing result visibility. Hidden panels
+  // were reset when closed, so opening one needs no synchronous layout readback.
+  const resetResultsScroll = () => { if (!browser.hidden) resultsPanel.scrollTop = 0; };
+  const selectTab = (classification, { focus = false, resetScroll = true } = {}) => {
+    if (resetScroll) resetResultsScroll();
     activeCategory = classification;
     for (const tab of tabs) {
       const selected = tab.dataset.objectTab === classification;
@@ -393,7 +397,6 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       || !matchesObjectCategory(item.dataset.objectClassification, classification);
     visibleObjects = items.filter(item => !item.hidden).length;
     empty.hidden = visibleObjects > 0;
-    resultsPanel.scrollTop = 0;
   };
 
   const events = new AbortController();
@@ -418,7 +421,8 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
       button.ariaPressed = String(button.dataset.searchClassification === classification);
     }
   };
-  const filter = () => {
+  const filter = (resetScroll = true) => {
+    if (resetScroll) resetResultsScroll();
     markCategory();
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") : "")
@@ -466,10 +470,11 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     const nextCategory = classification ? objectCategory(classification)
       : showAll ? 'all' : matches.some(item => matchesObjectCategory(item.dataset.objectClassification, activeCategory))
         ? activeCategory : objectCategory(matches[0]?.dataset.objectClassification) ?? activeCategory;
-    selectTab(nextCategory);
+    selectTab(nextCategory, { resetScroll: false });
     empty.hidden = visibleObjects !== 0 || Boolean(destinations && !classification && !showAll);
   };
   const render = (next, { resetQuery = false } = {}) => {
+    resetResultsScroll();
     if (!next) browsing = false;
     if (overview && !next) next = true;
     open = next;
@@ -477,7 +482,7 @@ function createObjectBrowserController(documentTarget, windowTarget, lifetime) {
     destinations?.setOpen(next);
     information.hidden = next;
     browser.hidden = !next;
-    if (next) filter();
+    if (next) filter(false);
     else markCategory();
   };
 

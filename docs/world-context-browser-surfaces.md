@@ -1303,3 +1303,59 @@ The allocation/ownership change is verified. The modest timing difference is one
 capture per version and is not an isolated causal frame-rate claim. Browser work
 is essentially unchanged, and **the performance target is still unmet**. rAF
 intervals and video observations do not prove every display refresh.
+
+## Overview changes stay with their existing owners
+
+The 50 ms interval in `retained-orbit-projection-dpr2` overlaps the Sun-card to
+Solar System overview switch. The CPU profile attributes 18.741 ms of sampled
+elapsed time to `selectTab`, and the trace shows 14.551 ms of style recalculation
+(6,861 elements) plus 4.047 ms of layout inside that callback. `selectTab` changed
+row visibility and then assigned `scrollTop`, forcing the pending layout.
+
+The browser controller now resets the outgoing scroll position before changing
+visibility. Closing resets the visible panel; reopening a hidden panel needs no
+readback. Direct filtering and tab selection own their reset, while nested calls
+reuse the outer reset. No deferred scroll, cached guessed position or intermediate
+paint is introduced. Seven browser comparisons preserve native scrolling, tab
+selection, close/reopen, keyboard focus, camera and retained nodes, with differences
+at most 1/255. The baseline replacement URL/hash is recorded and both documents
+remain stable without HMR during the comparisons. The earlier attempt that
+incorrectly required one HTTP request rather than accepting duplicate identical
+preloads is retained as unqualified.
+
+Automatic Sun/overview toggles also no longer run a Sun-to-Sun navigation. They
+change the existing selection, centering policy and URL in place, retaining the
+camera, scene and continuous URL subscription. A different selected body still
+uses normal navigation to the Sun. Three mode comparisons are pixel-identical and
+preserve exact camera state with zero navigation requests. Reload, native Mercury
+selection and Back restore the exact saved overview URL, including its unrelated
+query and hash. Evidence: `output/playwright/overview-scroll-publication-settled/`
+and `output/playwright/overview-selection-owner/`. All 56 focused shell, router,
+selection, history and view-URL tests pass.
+
+| Outward overview inspection | Original owners | Scroll reset before writes | In-place selection too |
+| --- | ---: | ---: | ---: |
+| Callback elapsed | 32.517 ms | 14.544 ms | 6.935 ms |
+| Forced style/layout inside callback | 18.598 ms | 0 | 0 |
+| Navigation requests for the route | 1 | 1 | 0 |
+
+These are single synchronized captures of each version; timing is not a controlled
+statistical speedup claim. The removed forced readback and redundant navigation
+are directly evidenced by stacks and events.
+
+The combined capture `output/world-context-zoom/overview-selection-owner-dpr2/`
+records base `a669c6e99` plus its exact two-file `source.patch`; all 26 source hashes
+and the patch match after capture, with 630 loaded receipts. Recorder identity is
+`a9a6fb38-fcb9-48b5-93b6-9e4bd88243c1`. There are no errors, HMR or trace loss. All
+2,918 observed frames are encoded, clock drift is −45 µs, maximum PTS error is
+1.440 ms, and world/input/document identities and one camera remain retained.
+
+**The overall target remains unmet:** the route has 19/3469 rAF intervals over
+25 ms, including 17/740 in the planetary band and 0/243 during galaxy drag. The
+planetary-band callback/style/layer totals are 4217.114/1650.511/2044.080 ms, so the
+recurring drawing cost remains. The 50 ms maximum is at recorder time 5452.4 ms,
+before the overview callback at 8730.189 ms. Its overlapping renderer BeginMainFrame
+task takes 44.634 ms elapsed and 7.875 ms thread CPU; the source of the gap is not
+established. A concurrent point-worker task is correlation, not proof of causation.
+The scroll-only capture has 24/3482 intervals over 25 ms and a 33.4 ms maximum,
+which reinforces why these runs do not prove general smoothness.
