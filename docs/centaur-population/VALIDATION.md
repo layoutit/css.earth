@@ -9,9 +9,10 @@ Chariklo and Bienor use published global shape constraints. These smooth ellipso
 | Focused tests | Six tests pass: two independent body-shape checks and four annular preparation/compatibility tests. |
 | Source/package closure | Chariklo verifies 17 source records; Bienor 16. Both prepared transport SHA-256 pins and asset inventories pass existing validators. Shadows and Orbit default off. |
 | Orbit context | Existing JPL Horizons generator and independent vector fixtures at the repository epoch and ±30 days. Maximum epoch error is 0.000002055 km; maximum endpoint error is 820.390 km. The latter qualifies a bounded two-body approximation, not an encounter ephemeris. |
+| Delivery | All 63 content-addressed image assets published, then independently downloaded through the standard setup implementation into an empty directory with one transfer at a time. Zero files reused; all 14,047,134 bytes match manifest sizes and SHA-256 hashes. |
 | Shared navigation | Both densities preserve visible pixels of all 406 previous markers. The existing marker binding and object serializer refresh 408 transports without presentation recompilation; all non-marker runtime fields are asserted unchanged. |
 
-Delivery, production build and browser evidence are pending. No complete all-body test-suite or physical-device performance claim is made. The browser qualification must inspect Chariklo's initial framing, zoomed physical ring/body scale, optional shadows and drag. Ring triangles are not included in the body's surface-picking structure; no separate ring-picking capability is claimed.
+Production build and browser evidence are pending. No complete all-body test-suite or physical-device performance claim is made. The browser qualification must inspect Chariklo's initial framing, zoomed physical ring/body scale, optional shadows and drag. Ring triangles are not included in the body's surface-picking structure; no separate ring-picking capability is claimed.
 
 ## Reproduce focused checks
 

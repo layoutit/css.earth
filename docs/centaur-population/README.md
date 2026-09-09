@@ -48,4 +48,4 @@ node docs/centaur-population/refresh-transports.mjs
 node docs/centaur-population/verify.mjs
 ```
 
-Astronomy uses the existing JPL Horizons generator at the repository's fixed scene epoch. It does not claim current surface attitude or a real-time orbit solution. Delivery and browser checks remain pending until recorded in this PR's validation evidence.
+Astronomy uses the existing JPL Horizons generator at the repository's fixed scene epoch. It does not claim current surface attitude or a real-time orbit solution. Delivery, focused source checks and remaining browser/build boundaries are recorded in [VALIDATION.md](VALIDATION.md).
