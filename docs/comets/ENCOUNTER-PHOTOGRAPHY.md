@@ -43,6 +43,18 @@ The [numerical receipt](evidence/encounter-qualification.json) records every fra
 
 [Detailed Chrome conformance](evidence/encounter-conformance.json) passes 39 cases across the three bodies, including desktop/mobile interaction, pre-ready input and material request races. [Production lens readbacks](evidence/encounter-browser.json) pass six body/DPR runs: all five datasets, both lighting settings, DPR 1 and DPR 2. The same highest-density atlases are selected at both densities. Every scene retains its nodes across lens changes and dragging, with no runtime source-data requests, drag image fetches, forbidden rendering features or browser errors.
 
+## Shared application checks
+
+The validated application integrates main at `e97ee9532b17beaf0c7ae38281c5bef12b64fa5b` (253 objects). [The production browser gate](evidence/encounter-dom-all.json) passes all 506 object/DPR cases and two six-hop navigation cases, with zero problems. The platform suite passes 1,827 tests with an 8 GB Node heap. Packages and all 346 renderer tests also pass.
+
+The aggregate shell suite reports an Itokawa profile missing its material-race inputs. [The profile audit](evidence/encounter-baseline-profiles.json) verifies that its profile, controls and validator are unchanged from the integrated base; all other 252 profiles pass. The shell suite finishes at 239/243 passing, with all four failures caused by that profile.
+
+Main subsequently merged the five Lucy targets in `4e465026`. That integration is pending; the [exact 71-file generated-data inventory](evidence/encounter-main-integration.json) records the affected paths and hashes. The 253-object receipts above must not be presented as validation of the newer 258-object registry.
+
+The [preparation failure inventory](evidence/encounter-preparation-failures.json) records 1,153/1,263 passing tests. Its 103 directory-audit failures concern 101 existing `.gitignore` files and two local `candidates` directories; seven further failures concern Mercury/Venus compatibility, Ceres acquisition coverage and Itokawa's elevation-only expectation. None names Wild 2, Tempel 1 or Hartley 2. The separately run presentation stage also rejects the existing Mercury/Venus fixtures for missing prepared activation groups. Assertions and budgets were preserved.
+
+[Gate results and log hashes](evidence/encounter-gates.json) retain every command's scope and outcome. All 14 encounter tests and the preparation typecheck pass. The aggregate `pnpm test` and `pnpm test:preparation` gates are not green; this record does not claim full repository readiness.
+
 ## Runtime delivery
 
 The three runtime inventories contain 114 files totaling 24,416,222 bytes. This change adds 15 immutable images (2,190,882 bytes): five surface atlases, five shadow atlases and five minimaps. All local bytes match the manifests. [Delivery verification](evidence/encounter-runtime-delivery.json) currently records the new remote objects as unavailable; a fresh remote installation remains pending. No source FITS, reconstruction grids or source-index rasters are runtime downloads.
