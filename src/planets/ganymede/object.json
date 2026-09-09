@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ee951201cbcf2b304da3b51d9b0b0f3b716c5beb926ae252087ec5bb93af48ca"
+    "sha256": "cfa3c6808ec7b26f86d2e3276c5760f75e7c2610a9f5f726ae3dbd8e1872b68f"
   },
   "id": "ganymede",
   "properties": {
@@ -68,6 +68,11 @@
               "id": "geology",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "oxygen-signature",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -88,12 +93,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "e78ff1444c9db1f44f8e9bdf48018df201a70fabc5189f39032cfc4de07ed220"
+          "sha256": "b23900c986d151dd5656d7dbe781c189d9ad25c3fe4398462a72b6746fa821b9"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "588883495cb31685751f694f3fb36b1d8feceb1ed0d1af806029e0b98069f7de"
+          "sha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a"
         },
         {
           "id": "title",
@@ -108,7 +113,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "caffd4d082b2300947b87d0a38e4ee9613d9813c187872f6e9e16bf970d7d438"
+          "sha256": "2ff31beb903ee65c63b4d741196b45b918b05380c51138478e1d817fa87a36ee"
         }
       ]
     }

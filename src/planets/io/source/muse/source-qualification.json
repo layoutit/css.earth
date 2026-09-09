@@ -1,0 +1,318 @@
+{
+  "schema": "cssearth-muse-source-qualification@1",
+  "dataset": {
+    "conceptDoi": "10.5281/zenodo.11402373",
+    "versionDoi": "10.5281/zenodo.11402374",
+    "repository": "https://github.com/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse",
+    "tag": "v0.1.0",
+    "commit": "1e162eaeb7e52c1e263555ec1fe30e30a993a7d7",
+    "author": "Oliver King",
+    "rightsSource": "https://api.datacite.org/dois/10.5281/zenodo.11402374",
+    "rightsList": [
+      {
+        "rights": "Creative Commons Attribution 4.0 International",
+        "rightsUri": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "schemeUri": "https://spdx.org/licenses/",
+        "rightsIdentifier": "cc-by-4.0",
+        "rightsIdentifierScheme": "SPDX"
+      }
+    ],
+    "files": [
+      {
+        "name": "485nm_slope_io_night_1.fits",
+        "bytes": 132480,
+        "sha256": "fca35e89f83f222978ffbfd40154d91ef03ab85f09a86fb605ae0420de46479d",
+        "gitBlobSha1": "f08e392882467dd84082340af068d07945b26a0a",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/f08e392882467dd84082340af068d07945b26a0a",
+        "acceptHeader": "application/vnd.github.raw+json"
+      },
+      {
+        "name": "485nm_slope_io_night_2.fits",
+        "bytes": 132480,
+        "sha256": "58ae63f314d44d3f724b9cc7aeeea7475d9f64ea29005e01c4369f88d3893c31",
+        "gitBlobSha1": "d5aa063e4c5c19fae8252a711ddbcb69df4a7e28",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/d5aa063e4c5c19fae8252a711ddbcb69df4a7e28",
+        "acceptHeader": "application/vnd.github.raw+json"
+      },
+      {
+        "name": "485nm_slope_io_night_3.fits",
+        "bytes": 132480,
+        "sha256": "fbed77eb6281eb850ff0bc948da12bcec2861ae7a9b9ae453942ec3b668697ff",
+        "gitBlobSha1": "bab631394382359f2f0cff86835d95f0cb69317a",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/bab631394382359f2f0cff86835d95f0cb69317a",
+        "acceptHeader": "application/vnd.github.raw+json"
+      },
+      {
+        "name": "560nm_band_io_night_1.fits",
+        "bytes": 132480,
+        "sha256": "60126a3558ae1c414ac556d9029107aff209a53cd4bf6ddb8eb46bb76987bf3b",
+        "gitBlobSha1": "602fb0d67dac8ba495a0331f57c45f126d6d7042",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/602fb0d67dac8ba495a0331f57c45f126d6d7042",
+        "acceptHeader": "application/vnd.github.raw+json"
+      },
+      {
+        "name": "560nm_band_io_night_2.fits",
+        "bytes": 132480,
+        "sha256": "576242a7c73658b8767f77eca70b9833f196ad95fef455cdc3002f0cd77bcfcc",
+        "gitBlobSha1": "54aa6d283d18ad16f98e0212f1274f52e728efb1",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/54aa6d283d18ad16f98e0212f1274f52e728efb1",
+        "acceptHeader": "application/vnd.github.raw+json"
+      },
+      {
+        "name": "560nm_band_io_night_3.fits",
+        "bytes": 132480,
+        "sha256": "4e5747a2acb901f389ca962316f1b7250331c8ee7fcf92b040cedfc50e3cb6d5",
+        "gitBlobSha1": "3f445cfc37a93f0ec06e39abc0bc85c089a9417f",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/3f445cfc37a93f0ec06e39abc0bc85c089a9417f",
+        "acceptHeader": "application/vnd.github.raw+json"
+      },
+      {
+        "name": "577.3nm_band_ganymede_night_1.fits",
+        "bytes": 132480,
+        "sha256": "9354868840c81e85d65c6a0882ea71e3f01d7258860fdd679321e4e88aa956b8",
+        "gitBlobSha1": "38a80f72d220dc18ccb5d8b3296041cfcce8d703",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/38a80f72d220dc18ccb5d8b3296041cfcce8d703",
+        "acceptHeader": "application/vnd.github.raw+json"
+      },
+      {
+        "name": "577.3nm_band_ganymede_night_2.fits",
+        "bytes": 132480,
+        "sha256": "7b6e1a2c27bfc1418147e0a59a628c96d5b28d5fd1b71295f21d64c2d386ac8d",
+        "gitBlobSha1": "550f3c8f151a9360bcfa076fdb05b97d1065c01e",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/550f3c8f151a9360bcfa076fdb05b97d1065c01e",
+        "acceptHeader": "application/vnd.github.raw+json"
+      },
+      {
+        "name": "577.3nm_band_ganymede_night_3.fits",
+        "bytes": 132480,
+        "sha256": "30f997e41fb7f9f99f626c45121e4b6066e97c39bd1fe7bcd6f081e09dc60220",
+        "gitBlobSha1": "c6016c8d28a08170a3660a89485bb7d5ebf5fafb",
+        "url": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/c6016c8d28a08170a3660a89485bb7d5ebf5fafb",
+        "acceptHeader": "application/vnd.github.raw+json"
+      }
+    ]
+  },
+  "paper": {
+    "doi": "10.1029/2024JE008511",
+    "url": "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024JE008511",
+    "title": "Spatially Resolved Visible Wavelength Spectroscopy of the Galilean Moons With VLT/MUSE",
+    "year": 2025,
+    "observables": {
+      "485nm_slope": {
+        "target": "io",
+        "quantity": "normalized 477.5-495 nm spectral slope",
+        "unit": "micrometer^-1",
+        "normalizationWavelengthNm": 495
+      },
+      "560nm_band": {
+        "target": "io",
+        "quantity": "mean continuum-removed 520-660 nm band depth",
+        "unit": "fraction",
+        "unobservedWavelengthRangeNm": [
+          578,
+          605
+        ]
+      },
+      "577.3nm_band": {
+        "target": "ganymede",
+        "quantity": "565/577.3 nm reflectance ratio",
+        "unit": "ratio",
+        "unobservedWavelengthRangeNm": [
+          578,
+          605
+        ]
+      }
+    },
+    "cautions": [
+      "The Io observables are spectral proxies; neither is an SO2 abundance or definitive species identification.",
+      "Ganymede is the 565/577.3 nm reflectance ratio. Values below one remain valid source measurements.",
+      "The 578-605 nm adaptive-optics gap prevents a full 577.3 nm continuum estimate; spectral slope and curvature can affect terrain contrasts.",
+      "The paper applies photometric correction; cross-night differences remain. Fallback priority is a presentation choice, not a quality ranking or a merged photometric solution."
+    ]
+  },
+  "registration": {
+    "status": "qualified as an explicit native-grid interpretation; absolute subpixel registration unresolved",
+    "fitsHeaderLimitation": "The exact release headers contain structural FITS cards only, no WCS, coordinate, target, date, unit or uncertainty cards. Target and quantity come from pinned filenames and paper.",
+    "authorCode": {
+      "url": "https://github.com/ortk95/astro-tools/blob/040ecca96f4e05cf7ab965e36fb1785229f6ebf7/tools/mapping.py#L413-L414",
+      "commit": "040ecca96f4e05cf7ab965e36fb1785229f6ebf7",
+      "gitBlobSha1": "f418e6052195fb86d7dc5973a11b7b13e1eb31d4",
+      "sha256": "57a8533969cbf3fac8304d977d5a6c5f7c055af4d5e3a351cd7e343787ed8190",
+      "latitudeExpression": "np.arange(-90, 90, 1/ppd)",
+      "longitudeExpression": "np.arange(0, 360, 1/ppd)",
+      "inferredPixelsPerDegree": 0.5,
+      "limitation": "This source shows the author mapping convention but is not explicitly version-bound to the released FITS. Dimensions alone are insufficient evidence."
+    },
+    "coordinateInterpretation": {
+      "nativeShapeRowsColumns": [
+        90,
+        180
+      ],
+      "nativeLatitudeNodes": {
+        "first": -90,
+        "last": 88,
+        "step": 2,
+        "direction": "north positive"
+      },
+      "nativeLongitudeNodes": {
+        "first": 0,
+        "last": 358,
+        "step": 2,
+        "direction": "east positive"
+      },
+      "remainingRepresentativeOffsetCandidatesDegrees": [
+        -1,
+        0,
+        1
+      ],
+      "chosenOffsetDegrees": 0,
+      "uncertaintyMeaning": "Integer nodes follow the author convention, corroborated at feature and observation-footprint scale. Subpixel offsets are not distinguished by these anchors; the native 2 degree scale is a registration qualification limit, not a formal astrometric error bound."
+    },
+    "independentAnchors": [
+      {
+        "paperFigure": 10,
+        "longitudeWestDegrees": 100,
+        "latitudeNorthDegrees": -35,
+        "approximatePublishedSlopeMicrometerInverse": 4.6,
+        "originalZeroBasedRows": [
+          27,
+          28
+        ],
+        "originalZeroBasedColumns": [
+          130
+        ],
+        "releasedNeighborValuesByNight": {
+          "1": [
+            [
+              null
+            ],
+            [
+              null
+            ]
+          ],
+          "2": [
+            [
+              4.569578008458993
+            ],
+            [
+              4.470507632351007
+            ]
+          ],
+          "3": [
+            [
+              null
+            ],
+            [
+              null
+            ]
+          ]
+        },
+        "interpretation": "Feature-scale agreement and hemisphere rejection; approximate published value is not an exact pixel assertion."
+      },
+      {
+        "paperFigure": 10,
+        "longitudeWestDegrees": 345,
+        "latitudeNorthDegrees": 25,
+        "approximatePublishedSlopeMicrometerInverse": 6.2,
+        "originalZeroBasedRows": [
+          57,
+          58
+        ],
+        "originalZeroBasedColumns": [
+          7,
+          8
+        ],
+        "releasedNeighborValuesByNight": {
+          "1": [
+            [
+              5.908993668814073,
+              5.936396324966682
+            ],
+            [
+              6.0192056132971175,
+              6.049930554220348
+            ]
+          ],
+          "2": [
+            [
+              null,
+              null
+            ],
+            [
+              null,
+              null
+            ]
+          ],
+          "3": [
+            [
+              6.409451920235423,
+              6.398413420730691
+            ],
+            [
+              6.482897628111092,
+              6.4459102541257485
+            ]
+          ]
+        },
+        "interpretation": "Feature-scale agreement and hemisphere rejection; approximate published value is not an exact pixel assertion."
+      }
+    ],
+    "footprintCheck": {
+      "target": "ganymede",
+      "night": 3,
+      "validNodeCount": 3565,
+      "circularMeanLongitudeEastDegrees": 156.2313687522336,
+      "circularMeanLongitudeWestDegrees": 203.7686312477664,
+      "paperObservations": [
+        {
+          "utc": "2019-07-11T03:54:02",
+          "subObserverLongitudeWestDegrees": 203.4,
+          "subObserverLatitudeNorthDegrees": -2.8
+        },
+        {
+          "utc": "2019-07-11T04:20:07",
+          "subObserverLongitudeWestDegrees": 204.3,
+          "subObserverLatitudeNorthDegrees": -2.8
+        }
+      ],
+      "interpretation": "Observed footprint center agrees with the eastern-positive interpretation and rejects a longitude mirror or 180 degree shift; a footprint is not exact pixel WCS."
+    },
+    "hemisphereChecks": {
+      "io100W35S": {
+        "chosenLatitudeNight2": [
+          4.569578008458993,
+          4.470507632351007
+        ],
+        "latitudeMirroredNight2": [
+          5.211892821994304,
+          5.276499257161347
+        ],
+        "longitudeMirroredNight3": [
+          5.779694173574776,
+          5.752574876570061
+        ]
+      },
+      "io345W25N": {
+        "correctNight1ApproximateRange": [
+          5.91,
+          6.05
+        ],
+        "correctNight3ApproximateRange": [
+          6.4,
+          6.48
+        ],
+        "mirroredAlternativesApproximateRange": [
+          5.3,
+          5.5
+        ]
+      }
+    },
+    "maskBoundaryPolicy": "Withhold each finite node touching missing coverage in a cardinal neighbor, wrapping longitude. This one-native-node buffer reduces unsupported boundary claims without filling gaps or smoothing retained values."
+  },
+  "processing": {
+    "storage": "Each night is a separate float32 scientific GeoTIFF; NaN becomes -9999. Original double values change only by recorded float32 rounding.",
+    "mosaic": "First valid retained night 1, then 2, then 3. No averaging. Per-night overlap statistics are written to each conversion receipt.",
+    "sampling": "Nearest native node via pixel areas; circular longitude relative to central meridian -1 degree. Physical latitudes outside [-90,90], raster edges and missing source nodes remain unavailable.",
+    "polarCaution": "Native rows end at +88 and begin at -90. Pixel-area bounds extend to -91 and +89; do not stretch to canonical +/-90 corners, clamp, or extrapolate."
+  }
+}
