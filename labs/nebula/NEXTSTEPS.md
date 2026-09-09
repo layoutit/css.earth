@@ -2,7 +2,7 @@
 
 Updated 2026-09-10. Research sources and unimplemented methods are in [RESEARCH.md](RESEARCH.md). The current reproducible pipeline is in [METHOD.md](METHOD.md).
 
-## Current handoff: LMC into the extragalactic app
+## Completed handoff: LMC into the extragalactic app
 
 1. Keep lab work committed on `work/nebula-live-session`; preserve the live lab and all local source/removal/result caches.
 2. Work on `feat/local-group`, currently in the separate `cssEarth-main-sync` checkout. Fetch and merge current main there, resolving conflicts without dropping existing extragalactic catalogues or navigation.
@@ -43,7 +43,20 @@ This is proposed research, not an implemented feature or an instruction to launc
 - Lab research, controls export and offline volume-lens promotion are committed on the lab branch. The extragalactic branch has merged main and includes those commits.
 - The generic runtime and focused sidebar support a fixed bank of image lenses, one retained catalogue point layer, per-lens appearance and a star toggle.
 - The isolated handoff check contains all three sources: 144 selected slices and 943 shared stars each. Output hashes, identical density alpha, distinct image colors, and matched cloud/star cutoff were verified. A real Chrome check verified retained nodes, lens switching, star visibility and distant-point fade. These are **automated fixture settings**, not accepted user values.
-- **Still pending:** the user must click Save lens settings in their Reconstruction browser. Resolve their saved result IDs and settings, preview unapplied material drafts if requested, create the production LMC recipe, promote the three lenses, and check them in the shared app. The app still uses the earlier LMC image bank until that installation. M31/SMC and catalogue data remain unchanged.
+- **User handoff received:** one Save lens settings click at `2026-09-09T23:12:20.083Z` exported all persisted images. VISTA comes from the active displayed result; Horálek from the saved completed personal job; WISE from its saved applied density context (no newer personal appearance/job). The active density draft equals the applied filter. Exact recipe and selection evidence are stored in `models/lmc/app-lenses.json` and `models/lmc/app-lens-settings.json`.
+- **Installed:** the app LMC descriptor now selects the three prepared volume lenses. Each has the same 144 slices and 943 star positions; geometry, every alpha byte, star presentation and output hashes were checked. Colors remain different per image. Total promoted bank plus provenance is about 3.88 MB. Old LMC prepared slabs are superseded; their source/provenance and current M31/SMC/catalogues remain unchanged.
 - Existing XYZ slice stability limitations remain documented; the new bank loader does not solve them.
 - Final implementation checks: lab suite 153/153, focused sidebar/navigation suite 64/64, volume lens tests and real Chrome fixture passed; the shared site built all 408 pages. Broader renderer/shell suites are not clean: this checkout needed its pinned object JSON restored, and existing planetary depth/paging/profile fixtures and missing source originals still need separate triage. Do not report the whole repository test suite as passing.
-- Latest-main follow-up: merged navigation optimization PR #50; 98 renderer and 95 focused shell checks passed, and the updated build produced 814 pages including navigation responses. The synced extragalactic checkout now serves localhost:4210. Restored 2,617 hash-verified scene assets for the previously available 16 bodies; Chrome verified Sun plus shared-universe readiness with no errors. Lab remains on 4331. LMC promotion still awaits the browser settings receipt.
+- Latest-main follow-up: merged navigation optimization PR #50; 98 renderer and 95 focused shell checks passed, and the updated build produced 814 pages including navigation responses. The synced extragalactic checkout now serves localhost:4210. Restored 2,617 hash-verified scene assets for the previously available 16 bodies; Chrome verified Sun plus shared-universe readiness with no errors. Lab remains on 4331. The received browser settings have now been promoted into the LMC descriptor; the final app check is recorded below.
+
+
+## Installed app verification
+
+The actual app at `http://127.0.0.1:4210` loads the LMC volume bank in the existing Sun/shared-world owner. The useful framed URL is recorded in the local browser report at `.local/nebula-lab/volume-lens-browser/app-report.json` in the extragalactic checkout.
+
+- Three front and three oblique views inspected. Switching keeps the 1,296 cloud DOM nodes (renderer composites), 943 catalogue nodes, sidebar buttons, world pose and camera token. No additional LMC resources are requested during switches.
+- Catalogue stars toggle without recreating points; unresolved points fade away. A saved WISE focus/camera URL restores WISE and the same world pose; a link without a lens choice selects VISTA.
+- Fixed two integration defects found in the real app: the planet control binder now queries its own information panel, and the star switch reuses the visible shared switch styling outside the settings drawer.
+- Actual-browser flow has no script or HTTP errors. The 414 affected object-control checks, 16 LMC/focus/source checks and 814-page site build passed. The ownership regression fails when its scope fix is removed.
+- Checked source hashes and preserved M31, SMC, Local Group and cluster bytes. The live lab remains available on 4331. No native image processing was repeated for this promotion.
+- This verifies installation and interaction; existing oblique whitening/banding in the lab’s slice representation remains unresolved research, not a newly passed stability gate.

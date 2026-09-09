@@ -57,7 +57,7 @@ Current processing repaints the Alignment density cloud’s exact 144 prepared q
 
 An image-to-density placement change requires **Preview** again to produce a matching bank. Browsing a result does not rewrite it. Promotion into a checked-in model or production object is a separate explicit task, with source credits and replay instructions retained.
 
-For a handoff, click **Save lens settings** in the browser where you adjusted the lenses. It captures stored settings for every image, current result identity, cloud selection/axis brightness, stars and the active density draft separately from the applied filter. Wait for **✓ Lens settings saved**. It does not process or promote anything. Unvisited images have no personal settings to export; never substitute another browser's test bakes for the user's choices.
+For a handoff, click **Save lens settings** once in the browser where you adjusted the lenses; one click exports every image's stored settings, so repeating it for all sources is unnecessary. It captures stored settings for every image, current result identity, cloud selection/axis brightness, stars and the active density draft separately from the applied filter. Wait for **✓ Lens settings saved**. It does not process or promote anything. Unvisited images have no personal settings to export; never substitute another browser's test bakes for the user's choices.
 
 ## Development checks
 

@@ -59,9 +59,39 @@ const sharedSources = Object.freeze([
   },
   {
     "label": "NOIRLab",
-    "role": "LMC image",
+    "role": "LMC registration",
     "href": "https://noirlab.edu/public/images/noirlab2030a/",
-    "description": "Deepest, widest view of the Large Magellanic Cloud from SMASH. CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin. CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
+    "description": "SMASH reference image and sky registration for the LMC model. CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin. CC-BY-4.0. The active color lenses are VISTA, Horálek optical and WISE."
+  },
+  {
+    "label": "ESO VISTA",
+    "role": "LMC VISTA image",
+    "href": "https://www.eso.org/public/images/eso1914a/",
+    "description": "Near-infrared colors from ESO’s VISTA survey, painted onto the shared simulated LMC density cloud. ESO/VMC Survey."
+  },
+  {
+    "label": "NOIRLab Horálek",
+    "role": "LMC Horálek image",
+    "href": "https://noirlab.edu/public/images/iotw2547a/",
+    "description": "Visible-light colors from Petr Horálek’s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud. NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)."
+  },
+  {
+    "label": "NASA/IPAC WISE",
+    "role": "LMC WISE image",
+    "href": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+    "description": "Infrared colors from NASA/IPAC WISE survey data, painted onto the shared simulated LMC density cloud. IPAC/NASA; color HiPS by CDS (CNRS/Unistra)."
+  },
+  {
+    "label": "Dryad",
+    "role": "LMC density model",
+    "href": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "description": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure. All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred."
+  },
+  {
+    "label": "Bonanos",
+    "role": "LMC stars",
+    "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003",
+    "description": "Bonanos et al. (2009), AJ 138, 1003; CDS/VizieR J/AJ/138/1003. Original observed RA/DEC and photometry are retained as catalogue data. Rays are registered through the fixed reference-image WCS and its accepted Alignment fit to the simulation cloud. Depths are a deterministic density-conditioned display realization, not measured stellar distances or new astrometry. Candidate image material never selects or moves stars."
   },
   {
     "label": "NOIRLab",
