@@ -84,6 +84,7 @@ export function prepareLenses(
         ...(control.view ? { view: control.view } : {}),
         thumbnailUrl: assetUrl(objectId, control.thumbnail),
         description: control.description,
+        ...(control.summary ? { summary: control.summary } : {}),
         ...(facts?.length ? { facts } : {}),
         title: control.title,
         ...(legend ? { legend } : {}),

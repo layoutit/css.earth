@@ -59,7 +59,8 @@
           "id": "measured-shape",
           "path": "../manifest.json",
           "url": "https://doi.org/10.1016/S0019-1035(03)00002-2"
-        }
+        },
+        "summary": "Voyager-based shape estimate. The outline is measured but local terrain is unresolved; gray grid: no imagery."
       }
     ]
   },

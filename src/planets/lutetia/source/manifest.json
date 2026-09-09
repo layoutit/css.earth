@@ -41,7 +41,13 @@
       },
       "coverage": "Closed published model: image-derived northern terrain joined to lightcurve/adaptive-optics constrained unseen regions; source seams and local defects remain.",
       "expectedBytes": 2954640,
-      "expectedSha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52"
+      "expectedSha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
+      "capture": {
+        "spacecraftIds": [
+          "rosetta"
+        ],
+        "evidence": "https://pdssbn.astro.umd.edu/holdings/ro-a-osinac_osiwac-5-lutetia-shape-v1.0/data/lutetia_025k_cart.wrl"
+      }
     },
     {
       "id": "inter-title-font",

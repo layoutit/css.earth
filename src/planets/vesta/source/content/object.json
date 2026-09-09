@@ -74,7 +74,8 @@
           "id": "dlr-hamo-natural-color",
           "path": "../manifest.json"
         },
-        "detail": "Dawn HAMO"
+        "detail": "Dawn HAMO",
+        "summary": "Dawn natural color at 650, 550 and 430 nm. Bright terrain clips to white; shadows and color offsets remain."
       },
       {
         "id": "elevation",
@@ -102,7 +103,8 @@
           "id": "dlr-hamo-radius-model",
           "path": "../manifest.json"
         },
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "summary": "Height relative to a 255 km sphere. Polar gaps are interpolated; those areas are not stereo measurements."
       }
     ]
   },

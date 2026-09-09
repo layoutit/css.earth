@@ -84,7 +84,8 @@
           "path": "../manifest.json",
           "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_mosaic_300m"
         },
-        "detail": "Corrected mosaic"
+        "detail": "Corrected mosaic",
+        "summary": "New Horizons images with corrected lighting. Shadows remain; the unobserved south is left unavailable."
       },
       {
         "id": "elevation",
@@ -99,7 +100,8 @@
           "path": "../manifest.json",
           "url": "https://astrogeology.usgs.gov/search/map/charon_new_horizons_lorri_mvic_global_dem_300m"
         },
-        "detail": "Shaded relief"
+        "detail": "Shaded relief",
+        "summary": "Stereo and shading height relative to a 606 km sphere. Detail varies; the gray grid marks missing data."
       }
     ]
   },

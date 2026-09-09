@@ -18,7 +18,13 @@
       "consumers": [
         "scene",
         "navigation"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "lro"
+        ],
+        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+      }
     },
     {
       "id": "nasa-lro-lola-topography",
@@ -36,7 +42,13 @@
       "redistribution": "NASA image with mission credit and no endorsement claim",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "lro"
+        ],
+        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/LDEM_16.0centered.0centered_print.jpg"
+      }
     },
     {
       "id": "nasa-grail-crustal-thickness",
@@ -54,7 +66,13 @@
       "redistribution": "NASA image with mission credit and no endorsement claim",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "capture": {
+        "spacecraftIds": [
+          "grail"
+        ],
+        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
+      }
     },
     {
       "id": "jpl-satellite-physical",

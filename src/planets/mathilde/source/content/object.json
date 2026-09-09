@@ -75,7 +75,8 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "detail": "NEAR MSI · partial photomosaic"
+        "detail": "NEAR MSI · partial photomosaic",
+        "summary": "Partial NEAR mosaic with shadows and seams. Unseen shape is modeled; the gray grid marks image gaps."
       },
       {
         "id": "elevation",
@@ -103,7 +104,8 @@
           "sourceUrl": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.xml",
           "image": "/scenes/mathilde/mathilde-elevation-legend.webp"
         },
-        "detail": "Thomas measured-region radius"
+        "detail": "Thomas measured-region radius",
+        "summary": "Height relative to a 26.4 km sphere, with unobserved values withheld. The display shape has modeled terrain."
       }
     ]
   },

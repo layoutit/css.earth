@@ -36,7 +36,15 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2632344.9707
       },
-      "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome."
+      "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif"
+      }
     },
     {
       "id": "usgs-voyager-galileo-color",
@@ -72,7 +80,15 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2632345
       },
-      "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome."
+      "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome.",
+      "capture": {
+        "spacecraftIds": [
+          "galileo",
+          "voyager-1",
+          "voyager-2"
+        ],
+        "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif"
+      }
     },
     {
       "id": "eso-milky-way-panorama",

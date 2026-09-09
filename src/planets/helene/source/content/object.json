@@ -84,7 +84,8 @@
           "id": "n1563643679_1",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/cassini/iss/calibration.html"
-        }
+        },
+        "summary": "Cassini images mapped onto the shape with adjusted brightness. Gray grid: gaps and withheld shadows."
       },
       {
         "id": "elevation",
@@ -113,7 +114,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
           "image": "/scenes/helene/helene-elevation-legend.webp"
-        }
+        },
+        "summary": "Height relative to an 18 km sphere, from the Cassini shape model. Small craters are unresolved."
       }
     ]
   },

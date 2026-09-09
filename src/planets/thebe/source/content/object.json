@@ -72,7 +72,8 @@
           "id": "c0532888400",
           "path": "../manifest.json",
           "url": "https://pds-rings.seti.org/galileo/"
-        }
+        },
+        "summary": "Galileo images mapped onto the shape with adjusted brightness. Gray grid: missing or unreliable data."
       },
       {
         "id": "elevation",
@@ -101,7 +102,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/stkshape.html",
           "image": "/scenes/thebe/thebe-elevation-legend.webp"
-        }
+        },
+        "summary": "Galileo-model height relative to a 49.3 km sphere. Unseen terrain is modeled; depressions may be exaggerated."
       }
     ]
   },

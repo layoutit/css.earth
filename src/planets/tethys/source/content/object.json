@@ -100,7 +100,8 @@
         "source": {
           "id": "cassini-iss-2012-tethys",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini's 2012 mosaic at 293 m per source pixel. Shadows and uneven detail remain; gray grid: no source data."
       },
       {
         "id": "enhanced",
@@ -113,7 +114,8 @@
         "source": {
           "id": "cassini-iss-2014-tethys-color",
           "path": "../manifest.json"
-        }
+        },
+        "summary": "Cassini infrared, green and ultraviolet images in enhanced color. Detail varies; shadows and source seams remain."
       },
       {
         "id": "elevation",
@@ -140,7 +142,8 @@
           "meta": "km",
           "sourceUrl": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html",
           "image": "/scenes/tethys/tethys-elevation-legend.webp"
-        }
+        },
+        "summary": "Cassini height relative to a 531 km sphere. Shading shows slopes; the displayed globe remains spherical."
       }
     ]
   },

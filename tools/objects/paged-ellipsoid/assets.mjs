@@ -25,20 +25,10 @@ return { assets: [...produced].sort() };
 async function prepareMap(input, name, {
   compositeClouds = false,
 } = {}) {
-  const width = config.surface.width;
-  const height = config.surface.height;
-  const { data, info } = await sharp(input)
-    .resize(width, height, { fit: "fill" })
-    .removeAlpha()
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-  const preparedData = compositeClouds
-    ? await prepareCloudComposite(data, {
-      width,
-      height,
-      channels: info.channels,
-    })
-    : data;
+  const { data: preparedData, info } = await preparePagedSurfaceMap({
+    config, sourceDirectory, map: { path: input, compositeClouds },
+  });
+  const { width, height } = info;
   await writeSphereAssets({
     data: preparedData,
     width,
@@ -56,28 +46,6 @@ async function prepareMap(input, name, {
   });
 }
 
-async function prepareCloudComposite(base, { width, height, channels }) {
-  const { data: clouds, info } = await sharp(source(config.surface.clouds.path))
-    .resize(width, height, { fit: "fill" })
-    .removeAlpha()
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-  const output = Buffer.from(base);
-  for (let sourceIndex = 0, targetIndex = 0;
-    sourceIndex < clouds.length;
-    sourceIndex += info.channels, targetIndex += channels) {
-    const luminance = clouds[sourceIndex] * 0.2126 +
-      clouds[sourceIndex + 1] * 0.7152 + clouds[sourceIndex + 2] * 0.0722;
-    const alpha = Math.max(0, Math.min(config.surface.clouds.maximumAlpha, (luminance - config.surface.clouds.threshold) / 255 * config.surface.clouds.scale));
-    for (let channel = 0; channel < 3; channel += 1) {
-      const cloudColor = config.surface.clouds.color[channel];
-      output[targetIndex + channel] = Math.round(
-        base[targetIndex + channel] * (1 - alpha) + cloudColor * alpha,
-      );
-    }
-  }
-  return output;
-}
 
 async function writeSphereAssets({ data, width, height, channels, density,
   canonical = false, outputRoot = PUBLIC_ROOT, name, bandCount,
@@ -752,4 +720,46 @@ function clamp(value, minimum, maximum) {
   return Math.max(minimum, Math.min(maximum, value));
 }
 
+}
+
+// Shared interpretation for globe assets and the small sidebar preview.
+export async function preparePagedSurfaceMap({ config, sourceDirectory, map }) {
+  const width = config.surface.width;
+  const height = config.surface.height;
+  const { data, info } = await sharp(resolve(sourceDirectory, map.path))
+    .resize(width, height, { fit: "fill" })
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const preparedData = map.compositeClouds
+    ? await prepareCloudComposite(data, {
+      width,
+      height,
+      channels: info.channels, config, sourceDirectory,
+    })
+    : data;
+  return { data: preparedData, info };
+}
+
+async function prepareCloudComposite(base, { width, height, channels, config, sourceDirectory }) {
+  const { data: clouds, info } = await sharp(resolve(sourceDirectory, config.surface.clouds.path))
+    .resize(width, height, { fit: "fill" })
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const output = Buffer.from(base);
+  for (let sourceIndex = 0, targetIndex = 0;
+    sourceIndex < clouds.length;
+    sourceIndex += info.channels, targetIndex += channels) {
+    const luminance = clouds[sourceIndex] * 0.2126 +
+      clouds[sourceIndex + 1] * 0.7152 + clouds[sourceIndex + 2] * 0.0722;
+    const alpha = Math.max(0, Math.min(config.surface.clouds.maximumAlpha, (luminance - config.surface.clouds.threshold) / 255 * config.surface.clouds.scale));
+    for (let channel = 0; channel < 3; channel += 1) {
+      const cloudColor = config.surface.clouds.color[channel];
+      output[targetIndex + channel] = Math.round(
+        base[targetIndex + channel] * (1 - alpha) + cloudColor * alpha,
+      );
+    }
+  }
+  return output;
 }
