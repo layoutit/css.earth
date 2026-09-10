@@ -321,10 +321,14 @@
         "spectrum"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-earth-configuration",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -341,10 +345,14 @@
         "spectrum"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-earth-spectrum",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -484,10 +492,14 @@
         "starfield"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "hyg-v41-earth-cubic-sky-registration",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "HYG v4.1 at commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce; the local record retains the extracted stars or licence."
+          }
+        ]
       }
     },
     {
@@ -537,7 +549,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-earth-google-maps-earth-cubic-sky-sun-oracle-asset",
+            "catalogueId": "google-maps-sun-symbol",
             "role": "material",
             "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
           }
@@ -561,10 +573,8 @@
         "lighting"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "google-maps-earth-cubic-sky-sun-oracle-measurements",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
       }
     },
     {
@@ -748,10 +758,14 @@
         "enso"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-mur-gibs-tiles",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-07; mur-gibs-receipt.json records the layer, grid, returned tile dates and byte hashes. The mosaic is a local assembly of those tiles."
+          }
+        ]
       }
     },
     {
@@ -771,14 +785,8 @@
         "enso"
       ],
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-nasa-mur-gibs-receipt",
-            "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
-          }
-        ]
+        "kind": "local",
+        "reason": "Project-generated acquisition receipt containing the GIBS layer, requested date, per-tile response dates and hashes. The imagery and layer definition are separate published inputs."
       }
     },
     {
@@ -801,7 +809,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-earth-nasa-mur-gibs-layer",
+            "catalogueId": "gibs-mur-sst-anomalies",
             "role": "material",
             "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
           }
@@ -1506,10 +1514,14 @@
       ],
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-mur-gibs-mosaic",
-        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/generatedIntermediates/1",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-07; mur-gibs-receipt.json records the layer, grid, returned tile dates and byte hashes. The mosaic is a local assembly of those tiles."
+          }
+        ]
       }
     }
   ],

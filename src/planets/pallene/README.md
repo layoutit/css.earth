@@ -10,7 +10,7 @@ Pallene has one **Monochrome** view. The selected [PDS Cassini image N1496910582
 
 Detector translation is measured from the original image, independently of the north angle, fixed axes, range and plate scale. A least-squares fit of the illuminated ellipsoid limb/terminator gives zero-based center [510.40754617, 511.81032051], RMS 0.498 native pixel at I/F 0.12. Varying the boundary threshold from 0.08 to 0.20 changes the center by under 0.22 pixel and gives RMS 0.37–0.78 pixel. This is a pointing refinement, not an adjustment of the moon's shape. OPUS coordinates projected through the later kernel set do not reproduce the detector center; those predictions are retained in the receipt and are not used as pointing. The small body-frame/pointing discrepancy is part of the registration uncertainty; no exact spacecraft-navigation solution is claimed.
 
-[Source test definitions](../../../tests/objects/unit/pallene/source.test.mjs).
+[Source test definitions](../../../tests/objects/unit/pallene/source.test.mts).
 
 ## Known problems
 

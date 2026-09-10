@@ -14,7 +14,7 @@
 
 - Six distributed point anchors, exact input hashes, and decoder failure cases are tested.
 
-- Focused checks are defined in the [unit tests](../../../tests/objects/unit/ganymede) and [browser profile](../../../tests/objects/browser/ganymede/browser-profile.mjs).
+- Focused checks are defined in the [unit tests](../../../tests/objects/unit/ganymede) and [browser profile](../../../tests/objects/browser/ganymede/browser-profile.mts).
 
 ## Known problems
 

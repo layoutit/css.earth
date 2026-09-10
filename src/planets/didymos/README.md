@@ -12,7 +12,7 @@
 
 The retained source checks cover closed 800-face geometry, independent facet/centroid decoding and source-surface transfer. Maximum sampled radial simplification error was 7.01284 m; maximum sampled albedo transfer was 7.28123 m within 8 m. These are sampled preparation checks; no dated browser or installation report is linked here.
 
-[Source test definitions](../../../tests/objects/unit/didymos/source.test.mjs).
+[Source test definitions](../../../tests/objects/unit/didymos/source.test.mts).
 
 ## Known problems
 

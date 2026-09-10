@@ -176,10 +176,14 @@
       ],
       "expectedBytes": 8260,
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-saturn-expanded-configuration",
-        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -196,10 +200,14 @@
       ],
       "expectedBytes": 11913,
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-saturn-r240-rif-response",
-        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -219,7 +227,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-saturn-hyg-v41-saturn-field",
+            "catalogueId": "hyg-v41",
             "role": "material",
             "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
           }
@@ -263,10 +271,24 @@
       ],
       "expectedBytes": 226054,
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "saturn-moon-catalog",
-        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-satellite-discovery",
+            "role": "material",
+            "evidence": "Discovery names and dates; the local moon catalogue retains the source URL, retrieval date and hash."
+          },
+          {
+            "catalogueId": "jpl-satellite-mean-elements",
+            "role": "material",
+            "evidence": "Orbital elements and epochs; the local moon catalogue retains the source URL and hash."
+          },
+          {
+            "catalogueId": "mpc-mpec-2026-m19",
+            "role": "material",
+            "evidence": "Published approximate orbital radius for S/2009 S 2; the local record declares the Kepler-derived period and assigned phase."
+          }
+        ]
       }
     },
     {
@@ -641,7 +663,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-saturn-google-maps-saturn-cubic-sky-sun-oracle-asset",
+            "catalogueId": "google-maps-sun-symbol",
             "role": "material",
             "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
           }
@@ -665,10 +687,8 @@
         "lighting"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "google-maps-saturn-cubic-sky-sun-oracle-measurements",
-        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
       }
     },
     {
@@ -901,10 +921,8 @@
         "acquisition"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "saturn-authored-acquisition",
-        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored source restoration commands and verification settings."
       }
     },
     {
@@ -921,10 +939,8 @@
         "acquisition"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "saturn-authored-satellite-catalog",
-        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored extraction settings for the moon catalogue; the extracted table retains its source citations."
       }
     }
   ],

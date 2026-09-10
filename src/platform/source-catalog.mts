@@ -15,7 +15,6 @@ export interface SourceRecord {
 }
 export interface SourceCatalog {
   readonly schema: 'cssearth-source-catalog@1'; readonly records: readonly SourceRecord[];
-  readonly redirects: Readonly<Record<string, string>>;
 }
 export interface SourceCitation { readonly catalogueId: string; readonly checkedOn: string; readonly locator?: string; readonly evidence?: string; }
 export interface SourceReference { readonly catalogueId: string; readonly role: SourceRole; readonly evidence: string; readonly locator?: string; }
@@ -106,7 +105,7 @@ export function parseSourceCitation(raw: unknown, sources?: SourceResolver): Sou
     ...(value.locator === undefined ? {} : { locator: sourceText(value.locator) }), ...(value.evidence === undefined ? {} : { evidence: sourceText(value.evidence) }) });
 }
 export function parseSourceCatalog(raw: unknown): SourceCatalog {
-  const value = sourceObject(raw, ['schema','records','redirects']);
+  const value = sourceObject(raw, ['schema','records']);
   if (value.schema !== 'cssearth-source-catalog@1') throw new TypeError('Unsupported source catalogue.');
   const records = sourceArray(value.records, raw => {
     const record = sourceObject(raw, ['id','kind','identityLevel','title','identifiers','links','evidence','creators','publisher','publicationDate','version','relations','statements']);
@@ -139,16 +138,10 @@ export function parseSourceCatalog(raw: unknown): SourceCatalog {
     for (const relation of byId[id].relations) visit(relation.catalogueId, new Set([...ancestors,id]));
   };
   records.forEach(record => visit(record.id));
-  const redirects = Object.freeze(Object.fromEntries(Object.entries(sourceObject(value.redirects)).map(([id, raw]) => {
-    sourceId(id); const target = sourceId(raw);
-    if (Object.hasOwn(byId, id) || !Object.hasOwn(byId, target)) throw new TypeError('Invalid source redirect.');
-    return [id,target];
-  })));
-  return Object.freeze({schema: 'cssearth-source-catalog@1', records, redirects});
+  return Object.freeze({schema: 'cssearth-source-catalog@1', records});
 }
 export function sourceResolver(catalog: SourceCatalog): SourceResolver {
-  const records = Object.fromEntries(catalog.records.map(record => [record.id,record]));
-  for (const [id, target] of Object.entries(catalog.redirects)) records[id] = records[target];
-  return Object.freeze(records);
+  return Object.freeze(Object.fromEntries(catalog.records.map(record => [record.id, record])));
 }
+
 export function sourceCitationUrl(source: SourceRecord): string { return (source.links.find(link => link.role === 'landing') ?? source.links.find(link => link.role !== 'rights'))!.url; }

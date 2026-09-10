@@ -81,7 +81,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-eurybates-occultation-approximation",
+            "catalogueId": "doi-10-3847-psj-acaf79",
             "role": "method",
             "evidence": "src/planets/eurybates/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }
@@ -119,7 +119,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-eurybates-model-surface",
+            "catalogueId": "doi-10-3847-psj-acaf79",
             "role": "method",
             "evidence": "src/planets/eurybates/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }

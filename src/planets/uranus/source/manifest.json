@@ -193,10 +193,14 @@
         "charts"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-uranus-expanded-configuration",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -213,10 +217,14 @@
         "charts"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-uranus-r240-rif",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       }
     },
     {
@@ -236,10 +244,14 @@
         "starfield"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "hyg-v41-uranus-cubic-sky-registration",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "HYG v4.1 at commit c7f7f883fe678cc7680169a50ccd7dcc49b060ce; the local record retains the extracted stars or licence."
+          }
+        ]
       }
     },
     {
@@ -289,7 +301,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-uranus-google-maps-uranus-cubic-sky-sun-oracle-asset",
+            "catalogueId": "google-maps-sun-symbol",
             "role": "material",
             "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
           }
@@ -313,10 +325,8 @@
         "lighting"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "google-maps-uranus-cubic-sky-sun-oracle-measurements",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-recorded measurements of Google Maps Sun presentation. The measurement file records the observed route and date; the referenced Sun image is a separate input."
       }
     },
     {
@@ -423,10 +433,8 @@
         "observed-surfaces"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "uranus-authored-observations",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored processing settings for the separately recorded source observations."
       }
     },
     {
@@ -443,10 +451,8 @@
         "material-composition"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "uranus-authored-materials",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored material and lighting parameters; observations used by the product retain separate source records."
       }
     },
     {
@@ -463,10 +469,8 @@
         "geometry"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "uranus-authored-geometry",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored tessellation and texture coordinates; physical and observed inputs retain separate source records."
       }
     },
     {
@@ -483,10 +487,8 @@
         "presentation"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "uranus-authored-presentation",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored scene layout and camera settings."
       }
     },
     {
@@ -503,10 +505,8 @@
         "charts"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "uranus-authored-charts",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored chart layout, axes and units; numerical data and scientific methods retain separate source records."
       }
     },
     {
@@ -523,10 +523,15 @@
         "charts"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "uranus-authored-photometry",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1808-01973",
+            "role": "method",
+            "evidence": "Phase-equation coefficients transcribed from Mallama and Hilton. The local record states the angle limits and terms held fixed.",
+            "locator": "Equations 2–17; body-specific phase equation"
+          }
+        ]
       }
     },
     {
@@ -543,10 +548,8 @@
         "celestial"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "uranus-authored-celestial",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored sky and Sun display settings; photographic, star and Sun inputs retain separate source records."
       }
     },
     {
@@ -563,10 +566,8 @@
         "acquisition"
       ],
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "uranus-authored-acquisition",
-        "evidence": "src/planets/uranus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "local",
+        "reason": "Project-authored source restoration commands and verification settings."
       }
     }
   ],
