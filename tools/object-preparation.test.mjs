@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
-import { readObjectPreparation, resolveObjectPreparation, runObjectPreparation } from './object-preparation.mjs';
+import { readObjectPreparation, resolveObjectPreparation, runObjectPreparation } from './object-preparation.mts';
 
 const projectRoot = resolve(import.meta.dirname, '..');
 const expectedRecipes = {mercury: true, venus: true};
@@ -42,7 +42,7 @@ for (const id of Object.keys(expectedRecipes)) {
         await mkdir(dirname(path), { recursive: true });
         await writeFile(path, `import {appendFileSync} from 'node:fs';\nappendFileSync(process.env.PREPARATION_TEST_LOG, JSON.stringify({script:process.argv[1],args:process.argv.slice(2),cwd:process.cwd()})+'\\n');\n`);
       }
-      const code = `import {runObjectPreparation} from ${JSON.stringify(pathToFileURL(resolve(import.meta.dirname, 'object-preparation.mjs')).href)}; await runObjectPreparation(${JSON.stringify(descriptorPath)}, {projectRoot:${JSON.stringify(root)}});`;
+      const code = `import {runObjectPreparation} from ${JSON.stringify(pathToFileURL(resolve(import.meta.dirname, 'object-preparation.mts')).href)}; await runObjectPreparation(${JSON.stringify(descriptorPath)}, {projectRoot:${JSON.stringify(root)}});`;
       const child = spawnSync(process.execPath, ['--input-type=module', '-e', code], {
         cwd, env: { ...process.env, PREPARATION_TEST_LOG: log }, encoding: 'utf8',
       });

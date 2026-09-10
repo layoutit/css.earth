@@ -2,11 +2,11 @@
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 import { wheelWithReceipt } from './wheel-zoom-distance.mjs';
 
 const origin = process.argv[2] ?? process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
-const output = '.local/all-object-world-browser';
+const output = process.env.CSSEARTH_WORLD_BROWSER_OUTPUT ?? '.local/all-object-world-browser';
 const context = JSON.parse(await readFile('src/planets/sun/prepared/world-context.json', 'utf8'));
 const points = [context.focus, ...context.bodies];
 function requireFrames(objects) {
@@ -25,11 +25,14 @@ requireFrames(OBJECTS);
 assert.throws(() => requireFrames(OBJECTS.map((object, index) => index ? object : { ...object, worldFrame: null })), /registry world frame is required/);
 const controls = Object.fromEntries(await Promise.all(OBJECTS.map(async ({ id }) => [id,
   JSON.parse(await readFile(`src/planets/${id}/prepared/controls.json`, 'utf8'))])));
-const presentations = Object.fromEntries(await Promise.all(OBJECTS.map(async ({ id }) => {
+// Keep only each object's small expectation record; loading every retained
+// runtime concurrently exhausts Node's heap with a large open-ended registry.
+const presentations = {};
+for (const { id } of OBJECTS) {
   const definition = JSON.parse(await readFile(`src/planets/${id}/prepared/runtime.json`, 'utf8'));
-  return [id, { materialTracks: definition.materials.map(track => track.id),
-    assetUrls: Object.fromEntries(definition.assets.entries.map(entry => [entry.key, entry.url])) }];
-})));
+  presentations[id] = { materialTracks: definition.materials.map(track => track.id),
+    assetUrls: Object.fromEntries(definition.assets.entries.map(entry => [entry.key, entry.url])) };
+}
 const expected = Object.fromEntries(OBJECTS.map(({ id, worldFrame }) => [id, {
   frame: worldFrame, ...presentations[id], point: points.find(point => point.id === id),
   lenses: controls[id].lenses?.controls.map(lens => lens.id) ?? [], defaultLens: controls[id].lenses?.defaultLens ?? null,
@@ -110,7 +113,7 @@ try {
   });
   assert.ok(trace.every(sample => sample.roots <= 1), 'One detailed renderer throughout every frame.');
   assert.ok(trace.every(sample => sample.retained), 'Entire prepared universe survives every frame.');
-  report.trace = { frames: trace.length, maximumDetailedRoots: Math.max(...trace.map(sample => sample.roots)) };
+  report.trace = { frames: trace.length, maximumDetailedRoots: trace.reduce((maximum, sample) => Math.max(maximum, sample.roots), 0) };
   report.completedAt = new Date().toISOString();
   report.status = 'passed';
   console.log(`ALL_OBJECT_WORLD_BROWSER_PASSED: ${OBJECTS.length} native flights; Earth/Jupiter refocus; Earth/Saturn galaxy round trips; one retained universe.`);

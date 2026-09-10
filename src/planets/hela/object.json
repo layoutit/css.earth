@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a4235b316538013d0e11f577111f7d5e600be9d17865d4be5dc17c2684d3a2a0"
+          "sha256": "a1cb61e6fefb9cc2b10fb63d1d5abffdc5c3f1ea5191ce97189715b60ea2b2ac"
         }
       ]
     },
@@ -86,7 +86,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "46c44f185fae7de23502580140092c7fc6a9ddd98a25e375eeb2f858c2dd77fa"
+        "sha256": "821174866c31b3b2b70071ff185c6fc0d30081c0b1db8f4a9c9849ba2b7a013d"
       }
     },
     "worldFrame": {
@@ -115,6 +115,18 @@
       ],
       "metersPerUnit": 29.108695652173914,
       "bodyRadiusM": 6695
+    },
+    "catalog": {
+      "name": "Hela",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.615426166061675,
+      "description": "Explore Hela, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+      "systemName": "Solar System",
+      "order": 467,
+      "context": {
+        "order": 428
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6170fef4f395f876683e51eed8f8708d16946230f665a2a9ca6e3e1e11165252"
+    "sha256": "7e8864635e4ea5d71b46ff276dfc4c835cf1f8ba24c99770efb7300c852df50f"
   }
 }

@@ -38,11 +38,20 @@
       "falseColor": false,
       "coverage": "Stooke’s Viking and MRO mosaic. Large areas have only coarse observations; source shading, seams and polar interpolation remain. The source supplies no validity mask.",
       "capture": {
-        "spacecraftIds": [
-          "viking",
-          "mro"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg"
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Viking orbiters",
+            "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg",
+            "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "mro",
+            "missionId": "mro",
+            "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg"
+          }
+        ]
       }
     },
     {
@@ -161,12 +170,6 @@
       "path": "content/object.json",
       "expectedBytes": 11652,
       "expectedSha256": "b6af68af1cac32e84b6cd43385e0ab7eff0c4bff2cbffa89b8abef13d4e3953c",
-      "purpose": "Authored content, source documentation or preparation metadata."
-    },
-    {
-      "path": "observations/map-guide.html",
-      "expectedBytes": 55920,
-      "expectedSha256": "92d7616133f52312bb97c35fb766531ef05323c75f24cbec3c5e6ab422103c03",
       "purpose": "Authored content, source documentation or preparation metadata."
     },
     {

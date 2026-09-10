@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-published-body-epoch-ephemeris@1",
+  "id": "sn263-beta",
+  "centerBodyId": "asteroid-2001-sn263",
+  "epochJdTt": 2461286.5,
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "positionKm": [
+    6.720256664840212,
+    -14.47713770063651,
+    -4.778470524908781
+  ],
+  "velocityKmPerDay": [
+    -15.093123174529847,
+    -5.866765181999542,
+    -4.323182413292763
+  ],
+  "gravitationalParametersKm3PerS2": {
+    "body": 1.603463467019124e-08,
+    "parent": 6.119735484970955e-07,
+    "combined": 6.280081831672867e-07
+  },
+  "source": {
+    "path": "source/orbit/published-parameters.json",
+    "bytes": 3267,
+    "sha256": "c5806510c9b9c2350265ea3207d2cc2c805ffb768a088d57966bb618018c9bc8"
+  },
+  "sourcePins": {
+    "jplSatelliteCatalogue": {
+      "path": "source/orbit/jpl-satellites.txt",
+      "url": "https://ssd-api.jpl.nasa.gov/sb_sat.api?des=153591&orb=1&sigma=1&phys-par=1",
+      "bytes": 1560,
+      "sha256": "11e8f878ff43711088242490f91ab8d63d9828978fa97b88c75d68ebe2ded44b"
+    }
+  },
+  "parentHeliocentricSource": {
+    "path": "source/orbit/parent-heliocentric.txt",
+    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "bytes": 8527,
+    "sha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8",
+    "target": 153591,
+    "targetKind": "numbered-asteroid",
+    "center": 10,
+    "requestEpochJdUtc": 2461286.499199259,
+    "ttMinusUtcSeconds": 69.184
+  },
+  "parentHeliocentricState": {
+    "positionKm": [
+      387073626.3866632,
+      -153612111.7567281,
+      -55949815.9445668
+    ],
+    "velocityKmPerDay": [
+      143605.7135081395,
+      1016802.933761815,
+      573888.0015445706
+    ]
+  },
+  "validation": {
+    "sourceEpochState": {
+      "positionKm": [
+        -16.713995240199843,
+        0.8990692707451595,
+        -1.8863845193566848
+      ],
+      "velocityKmPerDay": [
+        0.27614632670607353,
+        15.417206476724473,
+        6.084473301496455
+      ]
+    },
+    "implementation": "Independent Python bisection solve and explicit plane-basis evaluation: packages/astronomy/tools/verify-sn263-orbits.py. The existing JS loader independently evaluates rotation matrices and compares both epochs.",
+    "sourceFrameIdentityCheck": "Original Fang et al. Table 4 checked at PDF page 6: equatorial J2000, MJD54509; no ecliptic frame conversion. Orbital angles/epoch agree with the JPL API when matched by orbital size, excluding its mismatched physical fields.",
+    "elapsedDaysFromSource": 6777.0,
+    "periodUncertaintyLinearPhaseScaleDegrees": 31479.750326607642,
+    "phaseSensitivityQualification": "Linear period sensitivity using the paper's adopted 1-sigma range. It spans many complete turns and is not a confidence interval or useful current phase bound; omitted dynamics further limit the result.",
+    "sourceEpochClockAmbiguityDegreesUpperScale": 0.04685408299866131,
+    "independentCurrentPosition": "No independent 2026 companion position acquired. Historical N-body radar residuals were not replayed by this Kepler approximation.",
+    "scientificPrecisionQualified": false
+  },
+  "limitations": [
+    "The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.",
+    "The original solution is a three-body integration. This two-body snapshot omits measured nodal and apsidal precession, mutual perturbations, primary oblateness and subsequent planetary encounters. Both orbital phase and plane at 2026 are unqualified.",
+    "Published adopted period uncertainties alone span many complete revolutions by the scene epoch; no useful present-day phase precision is claimed.",
+    "J2000 equatorial axes are treated as ICRF at this coarse precision. The source clock scale is unstated; its numerical epoch is treated as TT.",
+    "The numbered-asteroid Horizons solution is used as the Alpha heliocentric anchor. No independently resolved Alpha-center versus triple-system barycenter correction is available; the expected model offset is sub-kilometer.",
+    "Orbital elements do not establish a measured moon spin pole, current attitude or libration. The rendering orientation remains illustrative."
+  ],
+  "runtimeExtrapolation": false
+}

@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { completeImageDem } from './image-dem-completion.mjs';
-import { validateClosedMesh } from './radial-terrain.mjs';
-import { createIndexedShape } from './obj-shape.mjs';
+import { completeImageDem } from './image-dem-completion.mts';
+import { validateClosedMesh } from './radial-terrain.mts';
+import { createIndexedShape } from './obj-shape.mts';
 
 const recipe = { method: 'outline-depth-envelope', depthMeters: 3, faceBudget: 100 };
 function closedMesh(front, added) {

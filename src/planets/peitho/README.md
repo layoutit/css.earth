@@ -15,7 +15,7 @@ Convex light-curve reconstruction with approximate thermal size: 43.99 km effect
 
 ## Evidence
 
-The [peitho results](../../../docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **190.93 m**. This is a sampled comparison, not an exhaustive error bound.
+The [peitho results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **190.93 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The 2 browser cases predate final integration. The report compares their recorded body assets with the integrated files; it does not identify a tested code revision for these cases.
 
@@ -48,6 +48,8 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 <details>
 <summary>Source survey</summary>
+
+[Model fields and mesh measurements](source/reference/damit-model.json).
 
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/4397) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/51247/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.

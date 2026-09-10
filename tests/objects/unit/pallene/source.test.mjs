@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
-import {decodeCalibratedCamera,prepareShapeCameraMosaic} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mjs';
+import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
+import {decodeCalibratedCamera,prepareShapeCameraMosaic} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 const source=new URL('../../../../src/planets/pallene/source/',import.meta.url);
 const json=async path=>JSON.parse(await readFile(new URL(path,source),'utf8'));
 

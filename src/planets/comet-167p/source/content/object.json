@@ -1,0 +1,109 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-167p",
+  "displayName": "CINEOS",
+  "panel": {
+    "introduction": "CINEOS follows a distant orbit that stays beyond Saturn at its closest approach to the Sun. Its nucleus is represented here by a size illustration from Celestia’s catalog.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Catalog diameter",
+        "value": "≈66 km"
+      },
+      {
+        "id": "perihelion",
+        "label": "Closest to Sun",
+        "value": "11.9 AU"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Illustrative nucleus"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Illustrative nucleus",
+        "detail": "Celestia",
+        "title": "167P/CINEOS",
+        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "thumbnail": "/scenes/comet-167p/comet-167p-model-thumbnail.webp",
+        "surface": "comet-167p-model-surface@2x.webp",
+        "poles": "comet-167p-model-poles@2x.webp",
+        "source": {
+          "id": "celestia-mesh",
+          "path": "../manifest.json",
+          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+        },
+        "facts": [
+          {
+            "id": "diameter",
+            "label": "Catalog diameter",
+            "value": "≈66 km"
+          },
+          {
+            "id": "perihelion",
+            "label": "Closest to Sun",
+            "value": "11.9 AU"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Celestia",
+      "role": "surface",
+      "description": "Catalog entry and estimated scale",
+      "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+    },
+    {
+      "label": "JPL Horizons",
+      "role": "observations",
+      "description": "Position at 3 September 2026",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+    }
+  }
+}

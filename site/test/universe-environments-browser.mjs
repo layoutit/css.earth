@@ -26,7 +26,7 @@ try {
   const motion = page.locator('input[name="motion"]');
   if (await motion.isChecked()) await motion.uncheck({ force: true });
   await page.evaluate(async () => {
-    const { OBJECTS } = await import('/site/objects.mjs');
+    const { OBJECTS } = await import('/site/objects.mts');
     window.__environmentFrames = Object.fromEntries(OBJECTS.map(object => [object.id, object.worldFrame]));
   });
   snapshots.initial = await read(page);

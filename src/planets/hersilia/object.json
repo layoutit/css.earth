@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "9f203a0e654c639dd4c63161827a445e478e1d23b5b3940a4475e4af9fefc16c"
+          "sha256": "a5128d607b754d6c00b5057e804574a5785751f8fe240772a9f15374b9fb6e7f"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b13e448b6ed1b4b3e3a22bad42947893649f58cbdbc673523ae6c0cb63a37093"
+        "sha256": "edef1f6e4dc71ca217f0ffdd1d6e8be89b780ffd36a8755dd16874e4e4a71b5c"
+      }
+    },
+    "catalog": {
+      "name": "Hersilia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.741003699475706,
+      "description": "Explore Hersilia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 312,
+      "context": {
+        "order": 358
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a68fe00c580b8ff7d6540a634c506650ca637df6303b4fbed15d0a43a17f049c"
+    "sha256": "9890f7cad3053666b582c001820f5a19c3c6f7e667929a99ea694931ba262703"
   }
 }

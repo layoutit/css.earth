@@ -1,17 +1,7 @@
 {
   "schema": "cssearth-radial-layer-recipe@1",
   "units": "kilometers",
-  "sources": [
-    {
-      "id": "pds-uranus-ring-table",
-      "path": "rings/uranus-rings-table.html",
-      "expectedBytes": 29588,
-      "expectedSha256": "de6a861aacdd4de68cbfebc1975feaf2b1d4d0392eea21c3083d4225b24bbf4a",
-      "origin": "https://pds-rings.seti.org/uranus/uranus_rings_table.html",
-      "credit": "NASA Planetary Data System Rings Node",
-      "license": "United States government scientific data"
-    }
-  ],
+  "sources": [],
   "layers": [
     {
       "kind": "annular-field",
@@ -309,7 +299,7 @@
             "name": "Nu",
             "radiusKm": 67300,
             "widthKm": 3800,
-            "opticalDepth": 0.0000056,
+            "opticalDepth": 5.6e-06,
             "color": "red",
             "sourceLabel": "Nu",
             "widthQualification": "source-scaled-width"
@@ -332,7 +322,7 @@
             "name": "Mu",
             "radiusKm": 97700,
             "widthKm": 17000,
-            "opticalDepth": 0.0000085,
+            "opticalDepth": 8.5e-06,
             "color": "blue",
             "sourceLabel": "Mu",
             "widthQualification": "source-scaled-width"

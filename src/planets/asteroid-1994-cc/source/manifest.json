@@ -165,12 +165,6 @@
       "expectedSha256": "dc55d1daf04b8ac40dc1194b44f10dbfe00a061a722ea34b94fc708a8221b374"
     },
     {
-      "path": "reference/jpl-shape-index.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 2608,
-      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 1896,

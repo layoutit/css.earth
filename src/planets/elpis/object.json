@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fcbff27a30c7d523b28de898dc10343f2b6c43f30d85508f0810b705a875898f"
+        "sha256": "d56fedff976a0c43d70274c0c6d2aa81699fa3e2bee7ec0b6cafb4f16820c1f7"
+      }
+    },
+    "catalog": {
+      "name": "Elpis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7131621894421545,
+      "description": "Explore Elpis in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 235,
+      "context": {
+        "order": 277
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c726dbff030b0b3b81f7bd2f803f9129ac5a68c3c5196ef230e390565f50a5b5"
+    "sha256": "0f7eb4441e9072b501092e616448f13a68b3641fedaceb21c9beadc0dbec3b62"
   }
 }

@@ -42,10 +42,14 @@
       "expectedBytes": 3150352,
       "expectedSha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+          }
+        ]
       }
     },
     {
@@ -74,10 +78,14 @@
       "expectedBytes": 12965947,
       "expectedSha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
+          }
+        ]
       }
     },
     {
@@ -106,10 +114,14 @@
       "expectedBytes": 9557231,
       "expectedSha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://doi.org/10.7910/DVN/WW3IH0"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "missionId": "hayabusa2",
+            "evidence": "https://doi.org/10.7910/DVN/WW3IH0"
+          }
+        ]
       }
     },
     {
@@ -241,12 +253,6 @@
       "expectedSha256": "832a58efd9fe25e62325f333d28264e632c2d24ee47de683081b603a85d19622"
     },
     {
-      "path": "reference/dsk-index.html",
-      "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 23485,
-      "expectedSha256": "059460304a11166b18a6fb7755f85c99a69a44d75f5a2c767ac7debb0a597f3a"
-    },
-    {
       "path": "reference/horizons-physical.txt",
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 1652,
@@ -275,12 +281,6 @@
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 1000264,
       "expectedSha256": "d81f6379ea16479ca3cc15e31ff1632ba050c4cdf03733eebad0bc6819f360d1"
-    },
-    {
-      "path": "reference/pck-index.html",
-      "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 4609,
-      "expectedSha256": "ca40cd9382048496fdbe5d1a9211ecd70090a9c61ca0a158866643c846cfb8b5"
     },
     {
       "path": "reference/ryugu_global.lis",

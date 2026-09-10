@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-source-shape-measurements@1",
+  "id": "sn263-gamma",
+  "component": "gamma",
+  "release": "urn:nasa:pds:gbo.ast-153591.radar.shape-model::1.0",
+  "source": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab",
+  "sourceUnits": "km",
+  "radiusKm": 0.2242032362372403,
+  "volumeKm3": 0.047207852049539256,
+  "extentsKm": [
+    0.5549120000000001,
+    0.430533,
+    0.421852
+  ],
+  "vertices": 1148,
+  "faces": 2292,
+  "maxRadiusKm": 0.27933219364763523,
+  "publishedDiameter": "0.43 ± 0.14 km",
+  "referenceRadiusMeaning": "Equivalent-volume radius computed from the original closed triangular mesh; not an independent measurement.",
+  "shapeLimit": "Published radar shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative.",
+  "orbitLimit": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured.",
+  "physicalSource": "Becker et al. (2015), Table 4; physical API row order is not used."
+}

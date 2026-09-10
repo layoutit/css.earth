@@ -1,0 +1,38 @@
+{
+  "browser": "152.0.7977.84",
+  "origin": "http://127.0.0.1:4259",
+  "pages": [
+    {
+      "id": "dactyl",
+      "ready": true,
+      "scenes": 1,
+      "selector": "Shape\nGalileo",
+      "shadowsToggle": true
+    },
+    {
+      "navigation": "dactyl → ida",
+      "ready": true,
+      "scenes": 1
+    },
+    {
+      "id": "dinkinesh",
+      "ready": true,
+      "scenes": 1,
+      "selector": "Shape\nModel",
+      "shadowsToggle": true
+    },
+    {
+      "id": "selam",
+      "ready": true,
+      "scenes": 1,
+      "selector": "Shape\nLucy",
+      "shadowsToggle": true
+    },
+    {
+      "navigation": "selam → dinkinesh",
+      "ready": true,
+      "scenes": 1
+    }
+  ],
+  "errors": []
+}

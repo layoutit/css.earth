@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { BODIES, M_PER_KM } from '@cssearth/astronomy';
+import { BODIES, M_PER_KM, isSceneSatellite, sceneSatelliteStateKm } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
@@ -27,15 +27,25 @@ export interface SpatialContextPreparationOptions {
 
 /** Prepares a renderer-neutral solar context from a pinned source document and epoch geometry adapter. */
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
-  const source = parseWorldContextSource(JSON.parse(await readFile(options.sourcePath, 'utf8')));
+  const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
+  if (input.bodies === 'catalog') {
+    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string } }[]> };
+    const objects = await readCatalog(options.objectsDirectory);
+    input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
+      .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
+      .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color,
+        ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
+          ? { placement: 'approximate' as const } : {}) }));
+  }
+  const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
-  const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mjs')).href) as {
+  const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {
     OBJECTS: readonly { id: string; classification: string }[];
   };
   const planetIds = new Set(OBJECTS.filter(body => body.classification === 'planet').map(body => body.id));
   const classifications = new Map(OBJECTS.map(body => [body.id, body.classification]));
-  const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/runtime-policy.mjs')).href) as {
+  const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/runtime-policy.mts')).href) as {
     SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE: number;
     SYSTEM_FRAMING_ANGLES: { readonly elevationsDegrees: readonly number[]; readonly azimuthStepDegrees: number };
   };
@@ -71,8 +81,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // Matrix products at Neptune's distance have millimetre-scale roundoff.
     // Keep the check within a few floating-point ULPs before using the exact
     // prepared parent position below, rather than a fixed sub-ULP tolerance.
-    const tolerance = parentPosition ? Math.max(.001, 8 * Number.EPSILON *
-      Math.max(...parentPosition.map(Math.abs), ...state.centerPositionM.map(Math.abs))) : 0;
+    const tolerance = parentPosition ? positionToleranceM(parentPosition, state.centerPositionM) : 0;
     if (!parentPosition || Math.hypot(...parentPosition.map((value, axis) => value - state.centerPositionM[axis]!)) > tolerance) {
       throw new TypeError(`Prepared orbit centre is incompatible with its parent for ${body.id}.`);
     }
@@ -107,10 +116,17 @@ async function preparedRadius(id: string, originM: Vector3, referenceFrame: stri
   const frameEpoch = number(frame.epochJdTt, `${id} prepared world frame epoch`);
   const frameOrigin = vector3(frame.originM, `${id} prepared world frame origin`);
   const radiusM = positive(frame.bodyRadiusM, `${id} prepared world frame radius`);
-  if (frameReference !== referenceFrame || frameEpoch !== epochJdTt || Math.hypot(...frameOrigin.map((value, axis) => value - originM[axis]!)) > .001) {
+  // Saved frames and reconstructed positions can differ by millimetres after
+  // matrix roundoff at outer-planet distances. Use the orbit-centre allowance.
+  if (frameReference !== referenceFrame || frameEpoch !== epochJdTt ||
+      Math.hypot(...frameOrigin.map((value, axis) => value - originM[axis]!)) > positionToleranceM(frameOrigin, originM)) {
     throw new TypeError(`Prepared world frame is incompatible with solar context for ${id}.`);
   }
   return radiusM;
+}
+
+function positionToleranceM(a: Vector3, b: Vector3): number {
+  return Math.max(.001, 8 * Number.EPSILON * Math.max(...a.map(Math.abs), ...b.map(Math.abs)));
 }
 
 function isMissingFile(error: unknown): boolean {
@@ -147,7 +163,9 @@ function orbits(value: unknown): Readonly<Record<string, Orbit>> {
   const input = record(value, 'Solar geometry orbits'); return Object.freeze(Object.fromEntries(Object.entries(input).map(([id, value]) => {
     const orbit = record(value, `Solar geometry orbit ${id}`);
     if ((orbit.centerBodyId === undefined) !== (orbit.centerPositionAu === undefined)) throw new TypeError(`${id} orbit parent and centre must be declared together.`);
-    return [id, { semiMajorAxisAu: positive(orbit.semiMajorAxisAu, `${id} semi-major axis`), eccentricity: eccentricity(orbit.eccentricity, id), heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
+    const semiMajorAxisAu = number(orbit.semiMajorAxisAu, `${id} semi-major axis`), orbitEccentricity = eccentricity(orbit.eccentricity, id);
+    if (!(orbitEccentricity < 1 ? semiMajorAxisAu > 0 : semiMajorAxisAu < 0)) throw new TypeError(`${id} semi-major axis and eccentricity are incompatible.`);
+    return [id, { semiMajorAxisAu, eccentricity: orbitEccentricity, heliocentricDistanceAu: positive(orbit.heliocentricDistanceAu, `${id} distance`),
       perihelionDirection: vector3(orbit.perihelionDirection, `${id} perihelion`), trueAnomalyDegrees: number(orbit.trueAnomalyDegrees, `${id} anomaly`),
       ...(orbit.centerBodyId === undefined ? {} : { centerBodyId: text(orbit.centerBodyId, `${id} orbit parent`), centerPositionAu: vector3(orbit.centerPositionAu, `${id} orbit centre`) }) }];
   })));
@@ -161,12 +179,12 @@ function record(value: unknown, name: string): Record<string, unknown> { if (!va
 function text(value: unknown, name: string): string { if (typeof value !== 'string' || value.length === 0) throw new TypeError(`${name} must be text.`); return value; }
 function number(value: unknown, name: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${name} must be finite.`); return value; }
 function positive(value: unknown, name: string): number { const result = number(value, name); if (!(result > 0)) throw new TypeError(`${name} must be positive.`); return result; }
-function eccentricity(value: unknown, id: string): number { const result = number(value, `${id} eccentricity`); if (result < 0 || result >= 1) throw new TypeError(`${id} eccentricity is invalid.`); return result; }
+function eccentricity(value: unknown, id: string): number { const result = number(value, `${id} eccentricity`); if (result < 0 || result === 1) throw new TypeError(`${id} eccentricity is invalid.`); return result; }
 
 const invoked = process.argv[1] && basename(fileURLToPath(import.meta.url)) === 'prepare-spatial-context.js' &&
   resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invoked) {
-  const [sourcePath, outputPath, solarGeometryPath = resolve(process.cwd(), 'src/platform/solar-geometry.mjs')] = process.argv.slice(2);
-  if (!sourcePath || !outputPath || process.argv.length > 5) throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mjs]');
+  const [sourcePath, outputPath, solarGeometryPath = resolve(process.cwd(), 'src/platform/solar-geometry.mts')] = process.argv.slice(2);
+  if (!sourcePath || !outputPath || process.argv.length > 5) throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mts]');
   await prepareSpatialContext({ sourcePath: resolve(sourcePath), outputPath: resolve(outputPath), solarGeometryPath });
 }

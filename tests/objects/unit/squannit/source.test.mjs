@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=new URL('../../../../src/planets/squannit/source/',import.meta.url);
 test('Squannit retains original JPL Beta mesh scale and topology',async()=>{
  const bytes=await readFile(new URL('shape/kw4b.obj',root));assert.equal(createHash('sha256').update(bytes).digest('hex'),'3d65690a33c5bb2ef1a7b2f40c0a6faf26f40bd87b0f6bc27a7f801d4ec50256');

@@ -61,21 +61,6 @@
       "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
     },
     {
-      "id": "moshup-research-1999kw4.html",
-      "path": "reference/1999kw4.html",
-      "origin": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html",
-      "credit": "Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL",
-      "license": "Original scientific article; source publisher copyright retained.",
-      "acquisition": "Restore the unchanged article through the recorded public NASA/JPL URL.",
-      "redistribution": "Original article remains a restoration input; no article pages are distributed as runtime assets.",
-      "consumers": [
-        "physical",
-        "rotation"
-      ],
-      "expectedBytes": 10439,
-      "expectedSha256": "5903a6917fd35b04aeb4346f9d971c4a4556c779a5b804a8116b980d1cd0bc41"
-    },
-    {
       "id": "moshup-research-1999kw4.table2.gif",
       "path": "reference/1999kw4.table2.gif",
       "origin": "https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.table2.gif",
@@ -128,8 +113,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 1170,
-      "expectedSha256": "6808bbdc130c3e96c5331610815a48bc3fd7a71999fc715177d8227b7c1ecc05"
+      "expectedBytes": 955,
+      "expectedSha256": "76baa01a56db142eace9ad30089d15c97ba1faf61a08fc68593c4dc71d4d3fc3"
     },
     {
       "path": "preparation/navigation.json",
@@ -178,12 +163,6 @@
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 7049,
       "expectedSha256": "eb194413b66635b5351a994c841cdcb281863c72cb80af73d929c772f71d4844"
-    },
-    {
-      "path": "reference/jpl-shape-index.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 2608,
-      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
     },
     {
       "path": "reference/model-properties.json",

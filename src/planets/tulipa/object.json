@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d124fe707e4b7e3ab6e756d497a92262f366f38b28645f567089a4d0c9ad6fc6"
+        "sha256": "3443582fbe047da59cca50451cb00f3dcd0f0666daa60cf8f292229900fae129"
+      }
+    },
+    "catalog": {
+      "name": "Tulipa",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0255703303423154,
+      "description": "Explore Tulipa in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 403,
+      "context": {
+        "order": 207
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4ca89c6cf82ffad0a0217923ba4214d74c84d417d3ac6f56f6ee981be7eced03"
+    "sha256": "09178143dbc07765231501401c9a85d582fa7b17b25ea94d09204628ffbf2f55"
   }
 }

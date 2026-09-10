@@ -15,7 +15,7 @@ Convex light-curve reconstruction with approximate thermal size: 40.84 km (catal
 
 ## Evidence
 
-The [athor results](../../../docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **115.86 m**. This is a sampled comparison, not an exhaustive error bound.
+The [athor results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **115.86 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The 2 browser cases predate final integration. The report compares their recorded body assets with the integrated files; it does not identify a tested code revision for these cases.
 
@@ -49,9 +49,11 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/461) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/1801/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Franco et al. (2012)](https://damit.cuni.cz/projects/damit/references/view/146) — original model publication record.
+- [Franco et al. (2012), Shape and spin axis model for 161 Athor](https://ui.adsabs.harvard.edu/abs/2012MPBu...39..234F) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 40.84 ± 0.52 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 
 </details>

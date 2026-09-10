@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import sharp from 'sharp';
-import {prepareCoplanarColorRaster} from './coplanar-raster.mjs';
+import {prepareCoplanarColorRaster} from './coplanar-raster.mts';
 const face=(x,color,z=3)=>({vertices:[[x,0,z],[x+2,0,z],[x+2,2,z],[x,2,z]],color});
 test('coplanar preparation preserves holes, source alpha, paint order and affine world coordinates',async()=>{
  const result=await prepareCoplanarColorRaster({faces:[face(0,[120,60,30,128]),face(4,[30,60,120,255])],pixelsPerUnit:4,tilePixels:8});

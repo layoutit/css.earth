@@ -6,14 +6,16 @@ Checked 2026-09-09. Original [DAMIT model 1862](https://damit.cuni.cz/projects/d
 
 Convex lightcurve model at a thermophysical diameter of 3.5 km; the published interval is 3.1–3.8 km.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-Recorded four-body results retain their [original build identities](../../../docs/non-belt-populations/README.md#evidence-identity).
+Recorded four-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).
 
-- Original mesh, scalar and sampled distance checks are in the [qualification record](../../../docs/near-earth-population/qualification.json). These are sampled distances, not an exhaustive Hausdorff bound or source-model accuracy.
+- Original mesh, scalar and sampled distance checks are in the [qualification record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/qualification.json). These are sampled distances, not an exhaustive Hausdorff bound or source-model accuracy.
 - Production browser checks passed at DPR 1 and 2. Settings was hidden, so optional
   Shadows was exercised through a bound control event.
-  [Browser record](../../../docs/near-earth-population/browser-validation.json) · [Source restoration](../../../docs/near-earth-population/source-restoration.json) · [Fresh asset installation](../../../docs/near-earth-population/fresh-install.json).
+  [Browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/browser-validation.json) · [Source restoration](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/source-restoration.json) · [Fresh asset installation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/fresh-install.json).
 
 ## Known problems
 
@@ -43,7 +45,7 @@ Source pole: ecliptic J2000 (71°,-69°). Reference sidereal period: 10.1978 h. 
 
 - [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/6127/shape.txt) — selected, pinned unchanged.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Ďurech et al. (2018)](https://damit.cuni.cz/projects/damit/references/view/172)
+- [Ďurech et al. (2018), YORP and Yarkovsky effects in asteroids (1685) Toro, (2100) Ra-Shalom, (3103) Eger, and (161989) Cacus](https://ui.adsabs.harvard.edu/abs/2018A%26A...609A..86D)
 - [Ďurech et al. (2018), Toro thermophysical scale and YORP](https://arxiv.org/html/1711.05987)
 
 Alternative shapes/poles: None in the checked target listing.

@@ -44,10 +44,14 @@
       "expectedBytes": 527072,
       "expectedSha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243ida.tab"
+          }
+        ]
       }
     },
     {
@@ -77,10 +81,14 @@
       "expectedBytes": 3179520,
       "expectedSha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit"
+          }
+        ]
       }
     },
     {
@@ -408,12 +416,6 @@
       "expectedSha256": "ab7fd4ce7d34fe2c90217cb838b1f471f88d08308a521c86deefe271586ae6a0"
     },
     {
-      "path": "reference/stooke-map-guide.html",
-      "purpose": "Pinned source label, source documentation or authored package input.",
-      "expectedBytes": 55559,
-      "expectedSha256": "721a2e655e7a39d9e800204b33914150c8df04b068ad9cc3e4cd782393aeeace"
-    },
-    {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 2177,
@@ -454,6 +456,18 @@
       "purpose": "Measured, unfitted registration checks for the added Galileo observation.",
       "expectedBytes": 3879,
       "expectedSha256": "bbabb5e40ea58c5c74cb85ed1d8138b4d2b381425756cb9a312b5289ab581b6c"
+    },
+    {
+      "path": "preparation/photometry.json",
+      "expectedBytes": 521,
+      "expectedSha256": "2fd6c1c3ecb63954fbcba458ef260e0c1d5fbe7b8f029f4c85474dc810188666",
+      "purpose": "Ida parent point photometry and the original JPL SBDB response."
+    },
+    {
+      "path": "preparation/sbdb-photometry.json",
+      "expectedBytes": 5362,
+      "expectedSha256": "1639b5b74d5b4f66ffcf5d8b0ce8c3bb249bc1bd6f27b69cc747f662f38a69ed",
+      "purpose": "Ida parent point photometry and the original JPL SBDB response."
     }
   ]
 }

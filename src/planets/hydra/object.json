@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "69ff6f856e774b62744d588059d38f4178355278463c28e93d0591b1c7428ff9"
+        "sha256": "731f1d1fa0e95ebbc42b5bf396f059f2a9996570c99b97e2bf2ac22c1880136f"
+      }
+    },
+    "catalog": {
+      "name": "Hydra",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 39.482,
+      "description": "Explore Hydra’s irregular New Horizons shape and northern depression.",
+      "systemName": "Solar System",
+      "order": 459,
+      "context": {
+        "order": 125
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4ed6f04126f8fe58f6e02ee895adfeb3dfce4beb81bab21d27b73ef58e83302c"
+    "sha256": "b1ae03927d0178e62b2316809a473c3d32df8999da6eacfbd4a0611627c61b16"
   }
 }

@@ -63,7 +63,6 @@
     {
       "label": "Torppa et al. (2003)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/106",
-      "file": "reference-106.html",
       "links": [
         {
           "label": "2003icar..164..346t",
@@ -73,12 +72,12 @@
           "label": "http://adsabs.harvard.edu/abs/2003Icar..164..346T",
           "url": "http://adsabs.harvard.edu/abs/2003Icar..164..346T"
         }
-      ]
+      ],
+      "title": "Shapes and rotational properties of thirty asteroids from photometric data"
     },
     {
       "label": "Ďurech et al. (2011)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/139",
-      "file": "reference-139.html",
       "links": [
         {
           "label": "2011icar..214..652d",
@@ -92,7 +91,8 @@
           "label": "http://adsabs.harvard.edu/abs/2011Icar..214..652D",
           "url": "http://adsabs.harvard.edu/abs/2011Icar..214..652D"
         }
-      ]
+      ],
+      "title": "Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes"
     }
   ],
   "id": "pandora-55",

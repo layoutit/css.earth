@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "423ee25f228db25ba0bb7d0f2138bc7fd1a2cac889f76e0d5c4d64a232b0aeb0"
+        "sha256": "725e2bb841d38503d74657ea1b000cc1a8f0aabef0a27b09b2d47124b59bf285"
+      }
+    },
+    "catalog": {
+      "name": "Tarqeq",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Tarqeq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 48,
+      "context": {
+        "order": 244
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fde9f83b16ec46051f40482aa4032523481ab5e00adf07ecb6103f81fa25528e"
+    "sha256": "8957598ce442030a38f761d9fffa4f7cbf1e8720230b4bfd9b028658ba685913"
   }
 }

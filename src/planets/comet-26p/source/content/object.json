@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-26p",
+  "displayName": "Grigg–Skjellerup",
+  "panel": {
+    "introduction": "Grigg–Skjellerup was Giotto’s second comet encounter. The spacecraft passed about 200 km from its nucleus in July 1992, six years after visiting Halley.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Catalog diameter",
+        "value": "≈2.6 km"
+      },
+      {
+        "id": "perihelion",
+        "label": "Closest to Sun",
+        "value": "1.08 AU"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Illustrative nucleus"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Illustrative nucleus",
+        "detail": "Celestia",
+        "title": "26P/Grigg–Skjellerup",
+        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "thumbnail": "/scenes/comet-26p/comet-26p-model-thumbnail.webp",
+        "surface": "comet-26p-model-surface@2x.webp",
+        "poles": "comet-26p-model-poles@2x.webp",
+        "source": {
+          "id": "celestia-mesh",
+          "path": "../manifest.json",
+          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+        },
+        "facts": [
+          {
+            "id": "diameter",
+            "label": "Catalog diameter",
+            "value": "≈2.6 km"
+          },
+          {
+            "id": "perihelion",
+            "label": "Closest to Sun",
+            "value": "1.08 AU"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Celestia",
+      "role": "surface",
+      "description": "Catalog entry and estimated scale",
+      "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+    },
+    {
+      "label": "JPL Horizons",
+      "role": "observations",
+      "description": "Position at 3 September 2026",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "About this comet",
+      "role": "observations",
+      "description": "Observations and history",
+      "href": "https://historicalarchives.esa.int/giotto-cometary-encounters-and-archival-sources"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://historicalarchives.esa.int/giotto-cometary-encounters-and-archival-sources",
+      "credit": "Sources listed in reference/source-record.json"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+    }
+  }
+}

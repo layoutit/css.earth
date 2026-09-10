@@ -120,13 +120,26 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "848485f59f61bd537d6158da649843f4dc44fb8f0406293f4401d448364f488a"
+        "sha256": "d675e03a3625f9b4e3072f2f44366b4f3efc71abe5e346e653a04f35a8cc07ff"
+      }
+    },
+    "catalog": {
+      "name": "Deimos",
+      "classification": "satellite",
+      "color": "#99948e",
+      "distanceAu": 1.52,
+      "description": "Explore Deimos in 3D with cssEarth. Inspect mapped spacecraft imagery, elevation and the measured irregular shape of Mars’s moon.",
+      "systemName": "Solar System",
+      "order": 423,
+      "context": {
+        "order": 6,
+        "color": "#a49b90"
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d4170f7d97b6faf295f4482736c7221a2457f4b8130012a6333d616f3ca714b7"
+    "sha256": "7849e65a1bb8ba0b813ec57b44ae9364e178b38f56416a9d45349bfb8c3fdead"
   }
 }

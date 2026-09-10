@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "varuna",
+  "displayName": "Varuna",
+  "panel": {
+    "introduction": "Varuna’s rapid rotation and changing brightness reveal an elongated world beyond Neptune. This smooth model follows a published light-curve fit; its absolute size remains approximate.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Published light-curve ellipsoid"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "1098 × 659 × 474 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "About 6.34357 hours from photometry; display phase is illustrative"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Trans-Neptunian object"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Illustrative scale model of the published Jacobi fit: b/a=0.60, c/b=0.72, scaled to the paper’s adopted approximate 700 km volume-equivalent diameter. These smooth axes are inferred, not resolved terrain. Uses one published pole interpretation, ecliptic longitude 53° ±10° and latitude −64° ±6°, converted with the J2000 mean obliquity for display. The antipodal pole is also allowed; equinox and meridian are display conventions, not a qualified absolute attitude. The grid marks unmapped terrain.",
+        "title": "Published light-curve ellipsoid",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/varuna/varuna-model-thumbnail.webp",
+        "surface": "varuna-model-surface@2x.webp",
+        "poles": "varuna-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1909.04698"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Fernández-Valenzuela et al. (2019), ApJL; multi-epoch rotational photometry",
+      "href": "https://arxiv.org/abs/1909.04698"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://doi.org/10.3847/2041-8213/ab40c2"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/1401.5962"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1909.04698",
+      "credit": "Fernández-Valenzuela et al. (2019), ApJL; multi-epoch rotational photometry"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Fernández-Valenzuela et al. (2019), ApJL; multi-epoch rotational photometry"
+    }
+  }
+}

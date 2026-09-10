@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mjs';
-import { sceneSources } from '../scene-sources.mjs';
+import { OBJECTS } from '../objects.mts';
+import { sceneSources } from '../scene-sources.mts';
 const sharedLabels = ['NASA SVS', 'OpenSpace', 'HYG', 'IBEX', 'LVDB', 'McConnachie', 'ESA/Hubble', 'ESO', 'NOIRLab', 'ESO VISTA', 'NOIRLab Horálek', 'NASA/IPAC WISE', 'Dryad', 'Bonanos', 'NOIRLab', 'MCXC-II'];
 
 test('small shell attribution records match the checked scientific provenance', async () => {

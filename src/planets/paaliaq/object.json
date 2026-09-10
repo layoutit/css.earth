@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "35a1272411d002fae5b84b39af4b06083af43eb7dfb0c5ca7f005cfd7dfa9280"
+        "sha256": "9b4eba971bbee2d13abeb34fc1a55e8911eff181cff6a4a83401e47e9731d0df"
+      }
+    },
+    "catalog": {
+      "name": "Paaliaq",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Paaliaq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 31,
+      "context": {
+        "order": 227
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6b232238977fa75bbd7631f3543096d7cd34c4d2c27b7f8f2e903012e37882a7"
+    "sha256": "56c9dc13bfb8e665254460211c11498a672d537316fc44de8283edba0c7d8c09"
   }
 }

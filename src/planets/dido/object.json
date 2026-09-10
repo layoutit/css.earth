@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e208ab09596498465062f539e4f1f817dd6fdad6a7fc5f395e9ab01568a14308"
+          "sha256": "1b2686d50c91d11c12a12eea94b99bb416a3d1753aefb8bb2203828f0e0a1641"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e9a07fe9ff588077cf45951a43dad464c1d42075b99a62605f6252778b39f7fb"
+        "sha256": "2c57fffa36ae309e7aed19f63281dd5c78fbb4a00aef552880999f6f67aafc7b"
+      }
+    },
+    "catalog": {
+      "name": "Dido",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1544316494785694,
+      "description": "Explore Dido in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 314,
+      "context": {
+        "order": 360
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "89c669ae49418d84a94308b8b852755815a177d984d400c14576b53f4b9aa400"
+    "sha256": "7a0bd7def4d5b141162088c7950c88d304e9e7dfd82319cb127a3e88fd1ea484"
   }
 }

@@ -1,6 +1,6 @@
 import { isObjectBrowserProfile } from "./object-browser-profile.mjs";
 import assert from "node:assert/strict";
-import { authoredObject } from '../../tools/authored-object.mjs';
+import { authoredObject } from '../../tools/authored-object.mts';
 
 export async function loadPlanetBrowserProfile(planet) {
   if (await authoredObject(planet.id)) {

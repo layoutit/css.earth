@@ -66,7 +66,7 @@
         {
           "id": "world-context",
           "path": "source/navigation/universe.json",
-          "sha256": "1eb5e377e7a50b4bb3c2afa844d3b083de1681578e1b349f686146d0b041b92d"
+          "sha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78"
         }
       ],
       "shape": {
@@ -144,6 +144,15 @@
         "url": "prepared/page.json",
         "sha256": "e1c77f71a60d9f6ecb8d78921eb3fa1976a3fa2b9f127365d43050b1ffbb2844"
       }
+    },
+    "catalog": {
+      "name": "Sun",
+      "classification": "star",
+      "color": "#f5a623",
+      "distanceAu": 0,
+      "description": "Explore the Sun in 3D with cssEarth. Discover our nearest star, its glowing atmosphere, and the science behind the center of the solar system.",
+      "systemName": "Solar System",
+      "order": 116
     }
   },
   "schema": "cssearth-object@1",

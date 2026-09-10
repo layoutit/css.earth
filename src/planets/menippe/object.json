@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "dc461bb71dadbbd203271a08da8722fe50e62e190da3faf1b286f9c7487ffe41"
+          "sha256": "4780561b4f5dce45583c0338c468a36cdc779b670e7bff102be34794462c2d96"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "383e91020250dc463ecbde5413d8aca32ea02af9312e64572a68c4ee8e08374a"
+        "sha256": "75386505ad0ce19f12d810e7efbb64ef01a674bb33b2386419dfc5501880921c"
+      }
+    },
+    "catalog": {
+      "name": "Menippe",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.761609095120294,
+      "description": "Explore Menippe in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 306,
+      "context": {
+        "order": 352
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b36edc7c56e8fca1d92e44925c0daa14798e326b03b54a63045fb08b91e65b3a"
+    "sha256": "75ed016ec94f92484495020ce3f3dcea66705055a6d2ddc928435dc9dc3a98c0"
   }
 }

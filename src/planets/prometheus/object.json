@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "18b927fc649ea9a56ef9e6e04be4136c78c8413df58bd2dfde544e2f99d76ad9"
+        "sha256": "766b36b48c4a2a69153a0a2f2cdab86d7fff64fcdcb6a2350219d08bc5263ff0"
+      }
+    },
+    "catalog": {
+      "name": "Prometheus",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Explore Prometheus with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 433,
+      "context": {
+        "order": 42
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "800451d1e441417051fee593208f48bd1d7ad742272cb15261417ed23d8333a3"
+    "sha256": "1d6f101124850460b8ecd2150d73650140ac827fc6574d384de2eb6f66df1ca0"
   }
 }

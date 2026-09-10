@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "55dc79c35c5d1d542691b6b51590bbf31bfa0fda8eeee9fdcc076b69603f0508"
+        "sha256": "ef7553991674fe8935f2ae73bb7d6c9aac595d5ff33cfe177192a616449f7728"
+      }
+    },
+    "catalog": {
+      "name": "Pan",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Explore Pan with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 431,
+      "context": {
+        "order": 40
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "14c29f921628e6c7d17cc83fc3f42bdeeaa34be6c341278014c2112f422574ec"
+    "sha256": "16f658dd105cd019ad407214c24e8d3a674445255cd628cd2e1e70ea86156f3b"
   }
 }

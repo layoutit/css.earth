@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-published-mutual-orbit@1",
+  "id": "selam",
+  "centerBodyId": "dinkinesh",
+  "placement": "approximate",
+  "referenceFrame": "ECLIPJ2000",
+  "epochJd": 2461286.5,
+  "timeScale": "TT",
+  "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
+  "semiMajorAxisKm": 3.11,
+  "eccentricity": 0,
+  "inclinationDegrees": 177.05,
+  "ascendingNodeDegrees": 185.53,
+  "argumentPeriapsisDegrees": 0,
+  "meanAnomalyDegrees": 0,
+  "meanMotionDegreesPerDay": 164.04025061704954,
+  "quadraticMeanAnomalyDegreesPerYear2": 0,
+  "citation": {
+    "title": "A Contact Binary Satellite of the Asteroid (152830) Dinkinesh",
+    "url": "https://doi.org/10.1038/s41586-024-07378-0",
+    "locator": "Levison et al. (2024): 3.11 ± 0.05 km, 52.67 ± 0.04 h; Jackson et al. (2025): primary ecliptic pole (95.53, −87.05) degrees."
+  },
+  "modelQualification": "Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
+  "derivedAssumptions": "Circular equatorial approximation using the primary pole: i=90−beta, ascending node=lambda+90. No node or phase fit is claimed.",
+  "gravityQualification": "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+}

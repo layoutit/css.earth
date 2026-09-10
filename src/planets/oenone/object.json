@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "5258f26bfa346ce5e67ca0f3dceb5b6a51e47fe1be88c1a41dab68bc037326ca"
+          "sha256": "e0a26e38eb85c20febb67999fd382e2adf0b4f21739947dadc9a2f605eb71207"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cf857d2d64703abc692978752c4b87ac80576d00c13274e8c3571e09e6a266c0"
+        "sha256": "a34908800e2744418ec004701027b165fbbb78b2dbd191d12a219174460e5eb6"
+      }
+    },
+    "catalog": {
+      "name": "Oenone",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.76856663571234,
+      "description": "Explore Oenone in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 319,
+      "context": {
+        "order": 365
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "00d3cece50a9d8329f163dc67e3e2270105cac287ef35507b15154aa78eb7ef9"
+    "sha256": "a967c67f3d20aa6f0049726e37713b745eb4e3d3429343039b17f11cfc428b70"
   }
 }

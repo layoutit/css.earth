@@ -13,7 +13,7 @@ import {
   WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
   wheelZoomInputKind,
-} from "../runtime-policy.mjs";
+} from "../runtime-policy.mts";
 
 test("automatic playback has one complete readiness, intent and environment policy", () => {
   for (const sceneState of ["loading", "ready", "error", "destroyed"]) {
@@ -126,6 +126,23 @@ test("live responsive failure retires the subscription before reporting fatal", 
   mediaQuery.setMatches(true); mediaQuery.setMatches(false);
   assert.equal(errors.length, 1);
   policy.destroy();
+});
+
+test("responsive cleanup preserves a non-Error startup failure as the aggregate cause", () => {
+  const mediaQuery = new FakeMediaQuery(false);
+  const cleanupFailure = new Error("remove touch action");
+  assert.throws(() => bindResponsiveOrbitPolicy({
+    mediaQuery,
+    inputSurface: { style: { removeProperty() { throw cleanupFailure; } } },
+    controls: { update() { throw null; } },
+  }), (error) => {
+    assert.ok(error instanceof AggregateError);
+    assert.equal(error.cause, null);
+    assert.equal(error.message, "null");
+    assert.deepEqual(error.errors, [null, cleanupFailure]);
+    return true;
+  });
+  assert.equal(mediaQuery.listenerCount, 0);
 });
 
 class FakeMediaQuery extends EventTarget {

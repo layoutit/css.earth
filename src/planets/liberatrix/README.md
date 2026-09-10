@@ -15,7 +15,7 @@ Convex light-curve reconstruction with a thermophysical volume scale of 51.1 ± 
 
 ## Evidence
 
-The [liberatrix results](../../../docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **285.81 m**. This is a sampled comparison, not an exhaustive error bound.
+The [liberatrix results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **285.81 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The 2 browser cases predate final integration. The report compares their recorded body assets with the integrated files; it does not identify a tested code revision for these cases.
 
@@ -49,9 +49,11 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/157) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/383/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [J. Ďurech (2007)](https://damit.cuni.cz/projects/damit/references/view/113) — original model publication record.
+- [J. Ďurech (2007), Physical models of ten asteroids from an observers' collaboration network](https://ui.adsabs.harvard.edu/abs/2007A&A...465..331D/abstract) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 43.17 ± 0.67 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 - [Hanuš et al. (2018), Icarus 309, 297–337](https://arxiv.org/pdf/1803.06116) — retained primary publication; see the body-specific selection and calibration above.
 

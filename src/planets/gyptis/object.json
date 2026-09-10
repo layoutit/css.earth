@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c7be7da4b67d8262e63dc07bdab10334c0a2acf4bff398da62f1524e08ee4752"
+          "sha256": "fbbbba549204f75855e502d64496b38b5c09690cb1bdff7a3d31147d8855da92"
         }
       ]
     },
@@ -89,15 +89,15 @@
         96976475872.63539
       ],
       "presentationToReference": [
-        0.00004274878420368333,
+        4.274878420368333e-05,
         2.7755575615628914e-17,
         -0.9999999990862705,
         0.9174820612308517,
         0.39777715593191365,
-        0.00003922124268213034,
+        3.922124268213034e-05,
         0.39777715556845306,
         -0.9174820620691817,
-        0.000017004489800021005
+        1.7004489800021005e-05
       ],
       "orbitUpReference": [
         -2.7755575615628914e-17,
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8c71da5143d9a34ef847ae20fb68be6f73cf4c880e691b32cf8b8f97ba1c5a56"
+        "sha256": "f8ea11a9f879a3c10b6e163453f62b8362c556d8761ee859662451959baad73a"
+      }
+    },
+    "catalog": {
+      "name": "Gyptis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7713762475315957,
+      "description": "Explore Gyptis in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 386,
+      "context": {
+        "order": 190
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5fff10bbeb3d876fadaa08e6425c3e1353059279b324c3358e66b38fad9eadc8"
+    "sha256": "7c3b3cfbcf18d66b135623aecb28e92edbe5d5efc1b00004534cd9a2f54f4a65"
   }
 }

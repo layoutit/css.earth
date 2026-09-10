@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../../../../site/objects.mjs';
+import { OBJECTS } from '../../../../site/objects.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4258';
 const comets = OBJECTS.filter(object => object.classification === 'comet');
 assert.ok(comets.length > 0);

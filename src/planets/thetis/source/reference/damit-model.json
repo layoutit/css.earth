@@ -63,7 +63,6 @@
     {
       "label": "J. Ďurech et al. (2009)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/123",
-      "file": "reference-123.html",
       "links": [
         {
           "label": "2009a&a...493..291a",
@@ -73,12 +72,12 @@
           "label": "http://adsabs.harvard.edu/abs/2009A%26A...493..291A",
           "url": "http://adsabs.harvard.edu/abs/2009A%26A...493..291A"
         }
-      ]
+      ],
+      "title": "Asteroid models from combined sparse and dense photometric data"
     },
     {
       "label": "Ďurech et al. (2011)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/139",
-      "file": "reference-139.html",
       "links": [
         {
           "label": "2011icar..214..652d",
@@ -92,7 +91,8 @@
           "label": "http://adsabs.harvard.edu/abs/2011Icar..214..652D",
           "url": "http://adsabs.harvard.edu/abs/2011Icar..214..652D"
         }
-      ]
+      ],
+      "title": "Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes"
     }
   ],
   "id": "thetis",

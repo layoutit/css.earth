@@ -4,8 +4,8 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {createServer} from 'node:http';
 import {chromium} from 'playwright';
-import {runtimeAssets} from '../../../../tools/runtime-assets.mjs';
-import {installRuntimeAssets} from '../../../../tools/setup.mjs';
+import {runtimeAssets} from '../../../../tools/runtime-assets.mts';
+import {installRuntimeAssets} from '../../../../tools/setup.mts';
 
 const origin=process.argv[2]??'http://127.0.0.1:53135',out=resolve('output/playwright/67p-geology/delivery');
 await mkdir(out,{recursive:true});

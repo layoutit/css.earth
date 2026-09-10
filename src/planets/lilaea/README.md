@@ -15,7 +15,7 @@ Convex light-curve reconstruction with approximate thermal size: 76.31 km effect
 
 ## Evidence
 
-The [lilaea results](../../../docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **129.35 m**. This is a sampled comparison, not an exhaustive error bound.
+The [lilaea results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **129.35 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The 2 browser cases predate final integration. The report compares their recorded body assets with the integrated files; it does not identify a tested code revision for these cases.
 
@@ -49,9 +49,11 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/9003) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/84844/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Ďurech & Hanuš (2023)](https://damit.cuni.cz/projects/damit/references/view/665) — original model publication record.
+- [Ďurech & Hanuš (2023), Reconstruction of asteroid spin states from Gaia DR3 photometry](https://ui.adsabs.harvard.edu/abs/2023A&A...675A..24D) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 76.31 ± 0.97 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 - [Ďurech & Hanuš (2023), A&A 675, A24](https://arxiv.org/pdf/2305.10798) — retained primary publication; see the body-specific selection and calibration above.
 - [Usui et al. (2011), PASJ 63, 1117–1138](https://arxiv.org/pdf/1106.1948) — retained primary publication; see the body-specific selection and calibration above.

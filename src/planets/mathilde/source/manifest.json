@@ -42,10 +42,14 @@
       "expectedBytes": 70226,
       "expectedSha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab"
+          }
+        ]
       }
     },
     {
@@ -73,10 +77,14 @@
       "expectedBytes": 236192,
       "expectedSha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab"
+          }
+        ]
       }
     },
     {
@@ -109,10 +117,14 @@
       "expectedBytes": 330486,
       "expectedSha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg"
+          }
+        ]
       }
     },
     {
@@ -277,46 +289,10 @@
       "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
     },
     {
-      "path": "reference/stooke-data-index.html",
-      "purpose": "Pinned source label, survey evidence or authored package input.",
-      "expectedBytes": 1230,
-      "expectedSha256": "dc948ce1990ba668cc621abb01b0c5e213a4fa9b85b8d0cadb50f87d5ee63cd0"
-    },
-    {
-      "path": "reference/stooke-map-guide.html",
-      "purpose": "Pinned source label, survey evidence or authored package input.",
-      "expectedBytes": 55559,
-      "expectedSha256": "721a2e655e7a39d9e800204b33914150c8df04b068ad9cc3e4cd782393aeeace"
-    },
-    {
       "path": "reference/stooke-mapindex.tab",
       "purpose": "Pinned source label, survey evidence or authored package input.",
       "expectedBytes": 38880,
       "expectedSha256": "ae74da29036ac2d4ff84aea829fa6cf63311234abadb0de95295407372a6a048"
-    },
-    {
-      "path": "reference/stooke-mathilde-index.html",
-      "purpose": "Pinned source label, survey evidence or authored package input.",
-      "expectedBytes": 5507,
-      "expectedSha256": "eb58c6beb76c0a5914126f30265bd13e8ce54b3c540a10a40db99ffc4d877ecb"
-    },
-    {
-      "path": "reference/stooke-root.html",
-      "purpose": "Pinned source label, survey evidence or authored package input.",
-      "expectedBytes": 1958,
-      "expectedSha256": "77fb524c957b5d1607d6f13215b667a06d0fbe6cc0abbe59e448c95e4c391735"
-    },
-    {
-      "path": "reference/thomas-document-index.html",
-      "purpose": "Pinned source label, survey evidence or authored package input.",
-      "expectedBytes": 14070,
-      "expectedSha256": "858e4fecb634d71d15f5cb26dc07b2f29bb0de83b676deb89e9153a37846f20a"
-    },
-    {
-      "path": "reference/thomas-root.html",
-      "purpose": "Pinned source label, survey evidence or authored package input.",
-      "expectedBytes": 1413,
-      "expectedSha256": "922e36209c4a271fb1c4134157489b6e5ab2006de1384037137a76e2a8a3cef8"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "9cb564fba8db441bfda697055a9ffe3fb412ab204f3b4e675511ce83d385992d"
+          "sha256": "13b7ecc332b25c7f5c94004ba9c5c4afca97c86de71abd0197e5f49c0511d0bf"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "49391ded5965e6332c15c351b7c1d653aa1fff64d616405605fd90df816d6e00"
+        "sha256": "a7f1833b41bbd92a7235cd5193cb9acd6c7f50be893fb974f0e5bac18549f692"
+      }
+    },
+    "catalog": {
+      "name": "Antigone",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.8676091430240436,
+      "description": "Explore Antigone in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 276,
+      "context": {
+        "order": 321
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8daed9ff9f73f66ac52b6a76ab65da7427c14dd4e254b91bda985e3a4db5fd3c"
+    "sha256": "599aaa84b01b4e999414b1e8f0bfa6cf40c04999438ea01f1abe129b7907bdc2"
   }
 }

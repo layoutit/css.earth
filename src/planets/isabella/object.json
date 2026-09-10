@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a1b60093b1f004caef89516325176be114833c10ec899aa560a88ea2bf3179b4"
+          "sha256": "5749637ff46a806bbf69cbf12d46502d5476c06d9b9e8e90bc0dacf0ff6b80c0"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "858084ec5885f9763a7addbd0c8990ef00fb2d57b6e039e742dda4b4a9ccefe0"
+        "sha256": "dd7f90f56e2fe683c02353aed929e38016c3bf21a8fd7a67c02a4954a6395b1f"
+      }
+    },
+    "catalog": {
+      "name": "Isabella",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7224299951412174,
+      "description": "Explore Isabella in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 315,
+      "context": {
+        "order": 361
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3b9206da6ea719a19912b1485904dcb3092111d622d3527c30fb7a3e6079094d"
+    "sha256": "9e0ef8b44e1104e677c0afdda25a1a221f74b8715b32a5c40b1c9dbe58de5e39"
   }
 }

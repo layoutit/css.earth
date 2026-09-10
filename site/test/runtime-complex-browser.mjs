@@ -6,7 +6,7 @@ import { chromium } from "playwright";
 import NEPTUNE from "../../src/planets/neptune/prepared/runtime.json" with { type: "json" };
 import SATURN from "../../src/planets/saturn/prepared/runtime.json" with { type: "json" };
 import { selectedPreparedVariant, preparedMaterialState } from "../../src/renderers/css/dist/testing.js";
-import { waitForAuditPreparedReadiness } from "../../tools/audit-prepared-readiness.mjs";
+import { waitForAuditPreparedReadiness } from "../../tools/audit-prepared-readiness.mts";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const selected = process.argv[3] ?? "all";
@@ -14,7 +14,7 @@ assert.ok(["all", "saturn", "neptune"].includes(selected));
 const output = resolve(process.argv[4] ?? `output/playwright/runtime-complex-${Date.now()}`);
 await mkdir(output, { recursive: true });
 const report = { capturedAt: new Date().toISOString(), baseUrl, source: {}, cases: [] };
-for (const file of ["site/scene-router.mjs", "site/packaged-object-runtime.mjs",
+for (const file of ["site/scene-router.mts", "site/packaged-object-runtime.mts",
   "src/renderers/css/dist/index.js", "src/renderers/css/dist/testing.js",
   "src/renderers/css/runtime/object-runtime.ts", "src/renderers/css/rendering/object-selection-runtime.ts",
   "src/renderers/css/rendering/prepared-presentation.ts", "src/renderers/css/rendering/prepared-material.ts",

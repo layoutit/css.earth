@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8dd0de78c6ac26711307882e61e5ff459030dbd83c90e49109d0cdadec7f8872"
+        "sha256": "7d59d2e9421f1982b5921ab082d3338638c745b9db6348155edb376a3d84211b"
+      }
+    },
+    "catalog": {
+      "name": "LINEAR",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 2.9567815032538625,
+      "description": "Explore 209P/LINEAR through a shape approximation constrained by radar observations.",
+      "systemName": "Solar System",
+      "order": 72,
+      "context": {
+        "order": 406
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a855d1c0bdd033cfac0a7345e4b00c52f4e70098e6a831e51fd36073a2c3977a"
+    "sha256": "5102f02bdb66ca9d52c674f8fd6a680d73eca8bcb12bbf7fbc5cc3a0b85bdbb5"
   }
 }

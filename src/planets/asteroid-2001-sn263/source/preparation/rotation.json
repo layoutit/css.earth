@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 67.81021605848582,
+  "declinationDegrees": -73.18097403705876,
+  "periodHours": 3.4256,
+  "phase": "arbitrary-display-phase",
+  "displayMeridianDegrees": 0,
+  "source": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591pole.tab",
+  "coordinateSystem": "ICRF/J2000; converted from published ecliptic J2000 pole",
+  "qualification": "Measured primary pole has about 15 degree uncertainty. Display meridian is arbitrary."
+}

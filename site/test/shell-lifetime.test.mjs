@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { mountPlanetShell } from "../planet-shell-client.mjs";
+import { mountPlanetShell } from "../planet-shell-client.mts";
 import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
 import catalogue from '../../src/objects/local-group/prepared/catalogue.json' with { type: 'json' };
 import clusters from '../../src/objects/galaxy-clusters/prepared/catalogue.json' with { type: 'json' };
@@ -421,7 +421,9 @@ test('a prepared galaxy takes precedence over the retained Milky Way card and cl
   }
   f.selectors.set('.planet-view-readout', readout);
   const bounds = { x: 0, y: 0, left: 0, top: 0, right: 1000, bottom: 800, width: 1000, height: 800 };
-  f.selectors.set('.polycss-scene', { closest: () => ({ getBoundingClientRect: () => bounds }) });
+  f.selectors.set('.polycss-scene', { ownerDocument: f.documentTarget });
+  f.selectors.set('.polycss-camera', { getBoundingClientRect: () => bounds });
+  f.selectors.set('.planet-stage', { getBoundingClientRect: () => bounds });
   const renderReadout = () => { const frames = [...f.frames.values()]; f.frames.clear(); frames.forEach(callback => callback()); };
   const retained = [...card.selectors.values()], source = catalogue.sources.find(value => value.id === 'lvdb-v1.1.1');
   const record = catalogue.objects.find(value => value.detailedObjectId === 'm31');

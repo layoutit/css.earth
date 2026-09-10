@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createPreparedFocusCard } from '../prepared-focus-card.mjs';
+import { createPreparedFocusCard } from '../prepared-focus-card.mts';
 
 class Element extends EventTarget {
   dataset = {}; selectors = new Map(); attributes = new Map(); hidden = false; checked = false; disabled = false; textContent = '';

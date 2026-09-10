@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "fe3bae836a08f520a6cd12d7484a463a63cb5663d3b0773fd9f366d1bfaf3411"
+          "sha256": "e83a9829b6b65fc929f93a3b975ae9e132f5aabe5a1d13415ab6b15cc09d3a1d"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f6e2de2c0d8478c991d51b16304b7f43b27d5c63926d4c47b761aa793b60228d"
+        "sha256": "5ee32b99a8f00800c64bf62abef47ceab29368b83742cff3eac93d85c48e0ecd"
+      }
+    },
+    "catalog": {
+      "name": "Aschera",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.610464215816688,
+      "description": "Explore Aschera in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 318,
+      "context": {
+        "order": 364
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "41ce61f618f94ffaf04e602bf3171c467ef0bac8c34c6cc5be7e69901a6bfe73"
+    "sha256": "101afa6bfc5cb616ff30a8727881927af1f14c01ee5f66e5c37b3331bdea5c5e"
   }
 }

@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b885a2136d1eb7ddb3d42b0adf70985ce007393419059d86bd9d51e97fa21871"
+          "sha256": "c411886dea7d73a73449716c3a41e36628d124f94f7a5972fd63a7968c6e1ea0"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a8e5150bdf1feca8bedba4754fad204f17aa23c2f289ca10098051ccbc70d2e3"
+        "sha256": "1c332278e1656c67cd91b2125929326d0754c22da9b2622d7d651e942dd41ea9"
+      }
+    },
+    "catalog": {
+      "name": "Brunhild",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6955168441339983,
+      "description": "Explore Brunhild in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 271,
+      "context": {
+        "order": 316
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5ddc18b8bcd294af2b0e66c02e10e2ccf2ace68d6cb9db64af696c2450a8b614"
+    "sha256": "29631fd383de4c599de9c7d053fbf3ffa952a323885300a219d78e869bfaab40"
   }
 }

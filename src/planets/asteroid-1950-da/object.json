@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "eb9921c9f9ed2aecfcdc695030568f7f5b20a6eb49b9dc3a105303e046769473"
+        "sha256": "b66cb7ea2855eaffe38044af6b3aaa64417b047e33387615576c85a1d5676390"
+      }
+    },
+    "catalog": {
+      "name": "1950 DA",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.6984168410443714,
+      "description": "Explore 1950 DA in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 201,
+      "context": {
+        "order": 144
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5460f2a16bf2089e00f1b82b725139f27b675a7c78b092a78777ff1c2472d003"
+    "sha256": "1b9ffee3e32daa75f4848a92cb668193badac348a3b0b6952df0e57bba0a7bbe"
   }
 }

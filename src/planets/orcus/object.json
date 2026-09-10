@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "orcus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Orcus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "aeb82862fd6f3d1ca1c8323b3a3d97d5efcfffcac0f466f29957d55d83466d06"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "adac5d3afa9d6e4bf69fb72c14a3a090be3d0f70bae376e38907e17faaeee1ba"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "4ba1dd898708a30a0c19945d1b4e17793eb8f1b16937d5c1f0d1a04bf06a3be5"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "53fa5f50e0d3fb97a0406aa0838316863cb63f0bf092b9f57e3716ff99f4c52b"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "14d322af343b2fdbe1d8ab464f599b854f233cec5628fcef31fcd865d970a81e"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "07cb8c8d496e5b0bdff57b9663a2bc1b11c2066e648f38a18927ac69b33ff868"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 454.99999999999983
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/orcus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "34ba037ee5b5a822d23fcf1eeabb056b8e81a637c0a4d8ce47632f851e73a56a"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6575634530112.959,
+        2326127297512.2446,
+        -1694818733544.3945
+      ],
+      "presentationToReference": [
+        -0.9762257842787679,
+        0,
+        -0.2167561258864546,
+        0.19886985734443152,
+        0.3977771559319137,
+        -0.8956696456051882,
+        0.08622063528593377,
+        -0.9174820620691818,
+        -0.38832031601781025
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1978.2608695652166,
+      "bodyRadiusM": 454999.9999999998
+    },
+    "catalog": {
+      "name": "Orcus",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 47.98129781525766,
+      "description": "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.",
+      "systemName": "Solar System",
+      "order": 11,
+      "context": {
+        "order": 434
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "e513e2bebdf67e1db57e18837b690d9dd72b6c1fa2ccece6564d5cdd430d58a6"
+  }
+}

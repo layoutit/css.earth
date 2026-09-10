@@ -105,13 +105,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e4f91150ae44c60e33771b87dcc6c5fdc2030d73d335415a4c37f8a131cab133"
+        "sha256": "8199f8b699b694df8a56f369f5d6d6eb87f4e44b17334af3b79bdaee9bda3357"
+      }
+    },
+    "catalog": {
+      "name": "Umbriel",
+      "classification": "satellite",
+      "color": "#918f8c",
+      "distanceAu": 19.2,
+      "description": "Explore Umbriel in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
+      "systemName": "Solar System",
+      "order": 449,
+      "context": {
+        "order": 30
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "79f5b8f79104a46e3a111f9e19c242f487cfbb4803cf92076d0a954d5559a9ae"
+    "sha256": "5cd086b7f623491f842cb51a0f3a7a68a08b28997502cb856762ec355475cbc1"
   }
 }

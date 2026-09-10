@@ -105,13 +105,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1775e608ceefc6b7d0a94678a4821e734b25608b718596b9fb659be0d195a97f"
+        "sha256": "cd254f66079addba4b93d5944660a3b947c4d9bd47b4156a13c3646f8ab46fd5"
+      }
+    },
+    "catalog": {
+      "name": "Thalassa",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 30.07,
+      "description": "Explore Thalassa through its Voyager-derived shape model.",
+      "systemName": "Solar System",
+      "order": 107,
+      "context": {
+        "order": 67
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "24a60c70909648ceedbb116791a7d55cdf828b921bad4e1ae0e8bd50b7b177ea"
+    "sha256": "93ef524b229ca62c190f12a0530821ca2ca716ad443563877001193d1ab8cc3f"
   }
 }

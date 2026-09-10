@@ -4,7 +4,7 @@ import {gzipSync} from 'node:zlib';
 import {mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import {decodePdsFloatImage,loadPdsFloatMap} from './pds-float-map.mjs';
+import {decodePdsFloatImage,loadPdsFloatMap} from './pds-float-map.mts';
 const grid={productId:'EXAMPLE_090',dataSetId:'EXAMPLE',targetName:'TITAN',width:2,height:2,pixelsPerDegree:1/90,referenceRadiusMeters:1000,centerLongitudeWestDegrees:180,sampleProjectionOffset:-0.5,lineProjectionOffset:0.5,projectionRotation:'NULL',missingBits:'FF7FFFFB',longitudeRangeWest:[0,180]};
 function fixture(overrides={}) {
  const fields={PDS_VERSION_ID:'PDS3',RECORD_TYPE:'FIXED_LENGTH',RECORD_BYTES:8,FILE_RECORDS:514,'^IMAGE':513,PRODUCT_ID:'EXAMPLE_090',DATA_SET_ID:'EXAMPLE',TARGET_NAME:'TITAN',LINES:2,LINE_SAMPLES:2,SAMPLE_TYPE:'PC_REAL',SAMPLE_BITS:32,MISSING_CONSTANT:'16#FF7FFFFB#',SCALING_FACTOR:1,OFFSET:0,MAP_PROJECTION_TYPE:'EQUIRECTANGULAR',CENTER_LATITUDE:0,COORDINATE_SYSTEM_NAME:'PLANETOGRAPHIC',COORDINATE_SYSTEM_TYPE:'"BODY-FIXED ROTATING"',POSITIVE_LONGITUDE_DIRECTION:'WEST',MAP_PROJECTION_ROTATION:'NULL',A_AXIS_RADIUS:1,B_AXIS_RADIUS:1,C_AXIS_RADIUS:1,CENTER_LONGITUDE:180,SAMPLE_PROJECTION_OFFSET:-0.5,LINE_PROJECTION_OFFSET:0.5,MAP_RESOLUTION:1/90,MAXIMUM_LATITUDE:90,MINIMUM_LATITUDE:-90,EASTERNMOST_LONGITUDE:0,WESTERNMOST_LONGITUDE:180,...overrides};

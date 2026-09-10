@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createSourceManifest} from '../../../src/platform/source-manifest.mjs';
-import {validateClosedMesh} from '../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
+import {validateClosedMesh} from '../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
 const projectRoot = resolve(import.meta.dirname, '../../..');
 const near = (actual, expected, label, relativeTolerance = 1e-10) => {

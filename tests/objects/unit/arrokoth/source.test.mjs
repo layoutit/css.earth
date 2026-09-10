@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {readFitsPrimary} from '../../../../tools/objects/static-surface/fits-map.mjs';
-import {parseObjTextureCoordinates,createObjUvFitsSampler} from '../../../../tools/objects/terrestrial-layers/obj-uv-fits.mjs';
+import {parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {readFitsPrimary} from '../../../../tools/objects/static-surface/fits-map.mts';
+import {parseObjTextureCoordinates,createObjUvFitsSampler} from '../../../../tools/objects/terrestrial-layers/obj-uv-fits.mts';
 const root=new URL('../../../../src/planets/arrokoth/source/',import.meta.url);
 const json=async path=>JSON.parse(await readFile(new URL(path,root)));
 test('released Arrokoth topology retains two closed source lobes at kilometre scale',async()=>{
@@ -24,7 +24,7 @@ test('released Arrokoth topology retains two closed source lobes at kilometre sc
 });
 test('Arrokoth UV orientation matches independently decoded released PNG scalar anchors',async()=>{
  const config=await json('preparation/terrestrial.json'),lens=config.raster.scientific[0];
- const receipt=JSON.parse(await readFile(new URL('../../../../docs/trans-neptunian/arrokoth-registration.json',import.meta.url)));
+ const receipt=JSON.parse(await readFile(new URL('../../fixtures/arrokoth/arrokoth-registration.json',import.meta.url)));
  const bytes=await readFile(new URL(lens.path,root)),fits=readFitsPrimary(bytes);
  assert.equal(createHash('sha256').update(bytes).digest('hex'),receipt.sourceFitsSha256);
  const png=await readFile(new URL('science/albedo_arrokoth4_fp36h2_masked1.png',root));
@@ -46,7 +46,7 @@ test('Arrokoth UV orientation matches independently decoded released PNG scalar 
   for(const axis of [0,1])assert.ok(Math.abs(sample.uv[axis]-mapping.faces[faceId].reduce((s,i)=>s+mapping.uv[i][axis]/3,0))<1e-8);
  }
  assert.equal(lens.grid.noData,undefined,'the uniform source baseline is not an inferred observation mask');
- const content=await json('content/object.json');assert.equal(content.lenses.defaultLens,'model');
- assert.match(content.lenses.controls.find(l=>l.id==='albedo').description,/uniform baseline/);
+ const content=await json('content/object.json');assert.equal(content.lenses.defaultLens,'albedo');
+ assert.match(content.lenses.controls.find(l=>l.id==='albedo').description,/unconstrained model fill/);
  assert.ok(content.settings.controls.filter(c=>['shadows','orbit'].includes(c.name)).every(c=>c.checked===false));
 });

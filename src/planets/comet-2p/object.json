@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7bb6be27c740fcbe76164b157969cd0726852088503e16c1ea58bb0696a668cb"
+        "sha256": "0d2eba015f7db4cc9abf8f362f7f0dbbfcd32ec379429dcf48437752c2aff091"
+      }
+    },
+    "catalog": {
+      "name": "Encke",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 2.217736510492418,
+      "description": "Explore 2P/Encke through a shape approximation constrained by radar observations.",
+      "systemName": "Solar System",
+      "order": 71,
+      "context": {
+        "order": 405
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b2e4dae8069f49223513470a320af827e376ca2600f9d9d993142dce284d8e11"
+    "sha256": "ae1b20b8e00f02205e207a57cfc9aa943ef1bc7ef6ee472ac9c68a335a16b826"
   }
 }

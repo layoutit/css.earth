@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "7a1a1be608fc97c67c1a0e14e20473ef5205408526d6551f1315f896bd42f7ca"
+          "sha256": "a1367a412b3fb02b23bb04ecbd474eb72f707c10ba4e4d5fc610cd98a7e3d0be"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "20dc39e53c25f048020397d9d8dfb149a0d2d6c279c669f5ec3a603b97d4c3e2"
+        "sha256": "12daa135c2856c3e2f0cd980e1c18023be80e63cf530533bce46443c918dd20e"
+      }
+    },
+    "catalog": {
+      "name": "Ilse",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.377447027685721,
+      "description": "Explore Ilse in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 336,
+      "context": {
+        "order": 382
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "19782bddff65ba8dfcb03b642f265c655e5c58883092c3f12982dac0c1ff5aa8"
+    "sha256": "8e05695c339c0c92c0d32df1d2855c16f996930cd7dbae02b951dc75e42aa86e"
   }
 }

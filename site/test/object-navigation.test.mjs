@@ -3,11 +3,11 @@ import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mjs";
-import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mjs";
-import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mjs";
-import { markerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mjs";
+import { objectNavigation, PLANET_SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../planet-search-objects.mts";
+import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
+import { markerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 
 test("search contains every object, including the Sun; only planets enter the scale", () => {
@@ -23,17 +23,19 @@ test("search contains every object, including the Sun; only planets enter the sc
   assert.deepEqual(objectNavigation(unknown).planets.map(({ id }) => id), ["future-planet"]);
 });
 
-test("prepared marker identity, atlas order, and presentation follow packages", async () => {
-  for (const [searchIndex, { id }] of PLANET_SEARCH_OBJECTS.entries()) {
-    assert.equal(PREPARED_NAVIGATION_MARKERS[id].index, searchIndex, `Search/atlas order drifted: ${id}`);
+test("prepared marker addresses and presentation follow packages", async () => {
+  for (const { id } of PLANET_SEARCH_OBJECTS) {
+    assert.equal(PREPARED_NAVIGATION_MARKERS[id].url, `/navigation/body-${id}.webp`);
+    assert.equal(PREPARED_NAVIGATION_MARKERS[id].index, 0);
+    assert.equal(PREPARED_NAVIGATION_MARKERS[id].count, 1);
   }
   const descriptors = await loadMarkerDescriptors();
   assert.deepEqual(Object.keys(PREPARED_NAVIGATION_MARKERS), descriptors.map(({ planetId }) => planetId));
-  for (const [index, descriptor] of descriptors.entries()) {
+  for (const descriptor of descriptors) {
     const marker = PREPARED_NAVIGATION_MARKERS[descriptor.planetId];
     const { context: _context, ...atlasMarker } = marker;
-    assert.deepEqual(atlasMarker, { index, count: descriptors.length, presentation: descriptor.presentation });
-    assert.ok(markerStyle(marker, { color: "#ffffff" }).style.includes(`--planet-marker-count:${descriptors.length}`));
+    assert.deepEqual(atlasMarker, { url: `/navigation/body-${descriptor.planetId}.webp`, url2x: `/navigation/body-${descriptor.planetId}@2x.webp`, index: 0, count: 1, presentation: descriptor.presentation });
+    assert.ok(markerStyle(marker, { color: "#ffffff" }).style.includes('--planet-marker-count:1'));
   }
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.scale.ringExtra, 20);
   assert.equal(PREPARED_NAVIGATION_MARKERS.saturn.presentation.ringExtra, 14);
@@ -61,7 +63,7 @@ test("scale overrides must form a complete presentation after inheritance", () =
   }
   const presentation = { size: 8, ringAngle: 0, ringExtra: 12, ringHeight: 4, scale: { ringExtra: 20 } };
   assert.equal(validateMarkerPresentation(presentation), presentation);
-  const result = markerStyle({ index: 0, count: 1, presentation }, { color: "#ffffff", view: "scale" });
+  const result = markerStyle({ url2x: '/navigation/body-test@2x.webp', index: 0, count: 1, presentation }, { color: "#ffffff", view: "scale" });
   assert.equal(result.ringed, true);
   assert.match(result.style, /--planet-ring-extra:20px/);
   assert.match(result.style, /--planet-ring-height:4px/);

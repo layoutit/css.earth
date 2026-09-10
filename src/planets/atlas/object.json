@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f92db968626ede2f872a98391f6f3834964c771a3aca94a4b1e3a761cbfb1222"
+        "sha256": "6675f62fb3688210a3d347c0536e9b5ceec7d7e95f7380b7937dea645823c6ed"
+      }
+    },
+    "catalog": {
+      "name": "Atlas",
+      "classification": "satellite",
+      "color": "#a6a29a",
+      "distanceAu": 9.58,
+      "description": "Explore Atlas with Cassini imagery, mapped radial height and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 432,
+      "context": {
+        "order": 41
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "25fb4ade5cd08c1ba4d28b0a74bb541f2e56b26b4d745a604d3f6fe9d42ab5dc"
+    "sha256": "605f5a31d8986619781c0adb73d1fc871dbd17f9ddcf550d0d292eb578a121ee"
   }
 }

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { parsePdsRadialTable } from './pds-radial-table.mjs';
+import { parsePdsRadialTable } from './pds-radial-table.mts';
 
 const profile = { latitudeStepDegrees: 90, longitudeStepDegrees: 90,
   metersPerUnit: 1000, longitudeDirection: 'east', expectedRecords: 15 };

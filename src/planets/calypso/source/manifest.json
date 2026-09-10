@@ -26,10 +26,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.IMG"
+          }
+        ]
       }
     },
     {
@@ -50,10 +54,14 @@
         "cassini-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.LBL"
+          }
+        ]
       }
     },
     {
@@ -81,10 +89,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644755203_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644755203_1_CALIB.IMG"
+          }
+        ]
       }
     },
     {
@@ -105,10 +117,14 @@
         "cassini-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644755203_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644755203_1_CALIB.LBL"
+          }
+        ]
       }
     },
     {
@@ -136,10 +152,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756472_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756472_1_CALIB.IMG"
+          }
+        ]
       }
     },
     {
@@ -160,10 +180,14 @@
         "cassini-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756472_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756472_1_CALIB.LBL"
+          }
+        ]
       }
     },
     {
@@ -191,10 +215,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756964_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756964_1_CALIB.IMG"
+          }
+        ]
       }
     },
     {
@@ -215,10 +243,14 @@
         "cassini-frames"
       ],
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756964_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756964_1_CALIB.LBL"
+          }
+        ]
       }
     },
     {
@@ -249,10 +281,14 @@
       },
       "coverage": "Radial height above a 10.7 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/calypso_30k_plt.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/calypso_30k_plt.tab"
+          }
+        ]
       }
     },
     {

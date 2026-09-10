@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "46087129c31855f34bb3e015a3402e4182136a8f9298b88937a5b93d34194d73"
+        "sha256": "f4bb4ff583927314473c7e4da0b9d0619ec952c96c6343cee72a5fab31a66bad"
+      }
+    },
+    "catalog": {
+      "name": "Julia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.550930934639707,
+      "description": "Explore Julia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 164,
+      "context": {
+        "order": 95
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f598df825cb421ec6f0e3c076481d5e319f5bce4af217ffe343d07987e22487f"
+    "sha256": "b5ab0778eadf7f0b4a38fc72a1b12cd51a36cfc9390920aa9bdc90a49a402b55"
   }
 }

@@ -1,0 +1,87 @@
+import { requireControls } from '../src/renderers/css/dist/index.js';
+import { record } from './browser-types.mts';
+import type { Props, PlanetTitle, PreparedTitle, Fact, Chart, Gallery, Lens } from './planet-shell-types.js';
+
+const object = (value: unknown, label: string): Record<string, unknown> => {
+  if (!record(value)) throw new TypeError(`Prepared ${label} must be an object.`);
+  return value;
+};
+const text = (value: unknown, label: string): string => {
+  if (typeof value !== 'string') throw new TypeError(`Prepared ${label} must be text.`);
+  return value;
+};
+const number = (value: unknown, label: string): number => {
+  if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`Prepared ${label} must be finite.`);
+  return value;
+};
+const optionalText = (value: unknown, label: string) => value === undefined ? undefined : text(value, label);
+const optionalBoolean = (value: unknown, label: string) => {
+  if (value !== undefined && typeof value !== 'boolean') throw new TypeError(`Prepared ${label} must be boolean.`);
+  return value;
+};
+const array = (value: unknown, label: string): readonly unknown[] => {
+  if (!Array.isArray(value)) throw new TypeError(`Prepared ${label} must be an array.`);
+  return value;
+};
+function rasterTitle(value: unknown): PreparedTitle {
+  const title = object(value, 'raster title');
+  return { label: text(title.label, 'title label'), src: text(title.src, 'title image'), width: number(title.width, 'title width'), height: number(title.height, 'title height') };
+}
+function planetTitle(value: unknown): PlanetTitle {
+  const title = object(value, 'object title');
+  return { label: text(title.label, 'title label'), path: text(title.path, 'title path'), viewBox: text(title.viewBox, 'title view box'),
+    renderViewBox: text(title.renderViewBox, 'title render view box'), renderWidth: number(title.renderWidth, 'title width'), renderHeight: number(title.renderHeight, 'title height'),
+    renderPathOffsetY: number(title.renderPathOffsetY, 'title offset'), baseline: number(title.baseline, 'title baseline') };
+}
+function facts(value: unknown): Fact[] {
+  return array(value, 'facts').map(value => { const fact = object(value, 'fact'); return { id: text(fact.id, 'fact id'), label: text(fact.label, 'fact label'), value: text(fact.value, 'fact value') }; });
+}
+function chart(value: unknown): Chart {
+  const chart = object(value, 'chart'), title = object(chart.title, 'chart title');
+  return { id: text(chart.id, 'chart id'), title: { label: text(title.label, 'chart title') }, open: optionalBoolean(chart.open, 'chart open'), src: text(chart.src, 'chart image'),
+    width: number(chart.width, 'chart width'), height: number(chart.height, 'chart height'), alt: text(chart.alt, 'chart description') };
+}
+function gallery(value: unknown): Gallery {
+  const gallery = object(value, 'gallery');
+  return { id: text(gallery.id, 'gallery id'), title: rasterTitle(gallery.title), open: optionalBoolean(gallery.open, 'gallery open'), hidden: optionalBoolean(gallery.hidden, 'gallery hidden'),
+    qualification: optionalText(gallery.qualification, 'gallery qualification'), items: array(gallery.items, 'gallery images').map(value => {
+      const item = object(value, 'gallery image');
+      return { id: text(item.id, 'image id'), label: text(item.label, 'image label'), src: text(item.src, 'image URL'), width: number(item.width, 'image width'), height: number(item.height, 'image height'),
+        alt: text(item.alt, 'image alt'), caption: text(item.caption, 'image caption'), sourceUrl: text(item.sourceUrl, 'image source') };
+    }) };
+}
+function legend(value: unknown, label: string): Lens['legend'] {
+  if (value === undefined) return undefined;
+  const legend = Array.isArray(value) ? { kind: 'categories', title: label, items: value } : object(value, 'legend');
+  if (legend.kind !== 'scale' && legend.kind !== 'categories') throw new TypeError('Prepared legend kind is invalid.');
+  return { kind: legend.kind, title: text(legend.title, 'legend title'), meta: optionalText(legend.meta, 'legend metadata'), src: optionalText(legend.src, 'legend image'),
+    width: legend.width === undefined ? undefined : number(legend.width, 'legend width'), height: legend.height === undefined ? undefined : number(legend.height, 'legend height'),
+    sourceUrl: optionalText(legend.sourceUrl, 'legend source'), colors: legend.colors === undefined ? undefined : array(legend.colors, 'legend colors').map(value => text(value, 'legend color')),
+    labels: legend.labels === undefined ? undefined : array(legend.labels, 'legend labels').map(value => text(value, 'legend label')),
+    items: legend.items === undefined ? undefined : array(legend.items, 'legend categories').map(value => { const item = object(value, 'legend category');
+      return { label: text(item.label, 'legend category label'), description: optionalText(item.description, 'legend category description') ?? '', color: text(item.color, 'legend category color') }; }) };
+}
+function lens(value: unknown): Lens {
+  const lens = object(value, 'lens'), label = text(lens.label, 'lens label');
+  return { id: text(lens.id, 'lens id'), label, title: text(lens.title, 'lens title'), description: text(lens.description, 'lens description'),
+    summary: optionalText(lens.summary, 'lens summary'), detail: optionalText(lens.detail, 'lens detail'), thumbnailUrl: text(lens.thumbnailUrl, 'lens thumbnail'),
+    facts: lens.facts === undefined ? undefined : facts(lens.facts), legend: legend(lens.legend, label) };
+}
+
+/** Validate the fields the shared Astro panel renders, before assigning display types. */
+export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId' | 'title' | 'introduction' | 'facts' | 'moreFacts' | 'charts' | 'galleries' | 'resources' | 'destinations'> {
+  const content = object(value, 'panel content');
+  if (content.schema !== 'cssearth-prepared-content@1') throw new TypeError('Prepared panel content schema is incompatible.');
+  const destinations = content.destinations === undefined ? undefined : object(content.destinations, 'destinations');
+  return { objectId: text(content.objectId, 'object id'), title: planetTitle(content.title), introduction: text(content.introduction, 'introduction'),
+    facts: facts(content.facts), moreFacts: facts(content.moreFacts), charts: array(content.charts, 'charts').map(chart), galleries: array(content.galleries, 'galleries').map(gallery),
+    resources: array(content.resources, 'source links').map(value => { const resource = object(value, 'source link'); return { label: text(resource.label, 'source label'), role: text(resource.role, 'source role'), description: text(resource.description, 'source description'), href: text(resource.href, 'source URL') }; }),
+    destinations: destinations ? { searchLabel: text(destinations.searchLabel, 'destination search label'), description: text(destinations.description, 'destination description') } : undefined };
+}
+
+export function parsePanelControls(input: unknown): Pick<Props, 'lenses' | 'settings'> {
+  requireControls(input);
+  const controls = input;
+  return { lenses: controls.lenses ? { title: rasterTitle(controls.lenses.title), defaultLens: controls.lenses.defaultLens, controls: controls.lenses.controls.map(lens) } : undefined,
+    settings: controls.settings ? { title: rasterTitle(controls.settings.title), controls: [...controls.settings.controls] } : undefined };
+}

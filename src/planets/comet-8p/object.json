@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ded632189e912fe770bcf7dfd780b8f3effa21c7ed83eaa57244e9f56729bee2"
+        "sha256": "da19f86ac0e5f4bbf8ab0d63c50f1ef8bf174177ebe3f654c2b2c33f63b45708"
+      }
+    },
+    "catalog": {
+      "name": "Tuttle",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 5.706764532787596,
+      "description": "Explore Tuttle's inferred contact-body model from Hubble and Spitzer observations.",
+      "systemName": "Solar System",
+      "order": 77,
+      "context": {
+        "order": 169
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f5a5969d22e6d5dd5d263f6c6a2950a27371f64055586a49f3df52c19c24015f"
+    "sha256": "a13dff07ca5e9cfd400812985275224102ce5de76fec2f17e4c48f3a1d85f194"
   }
 }

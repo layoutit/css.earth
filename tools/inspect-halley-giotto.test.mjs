@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { decodeGiottoFrame, loadPinned } from './objects/comet-1p/inspect-giotto.mjs';
+import { decodeGiottoFrame, loadPinned } from './objects/comet-1p/inspect-giotto.mts';
 
 function fixture(extra = []) {
   const cards = [

@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "f5804373a5f5c69b42409165260279fd13019ba77744dc4bdf8d7b2979e7443f"
+          "sha256": "e09fe1abc344f9c39b69fe66939569bd34e7a7dba2d336c427b1ccbfb14326b2"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5f69f010d294c4c2a0cf927a0c2e8d5e22e0f7bd149530eff4919a707f8e95ad"
+        "sha256": "0c892f85d2a2f8c7852aa2e21624e5b28df0b04fc9835bae1a5960352bfad86a"
+      }
+    },
+    "catalog": {
+      "name": "Tantalus",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.2900615327857758,
+      "description": "Explore Tantalus, a near-Earth asteroid, through its published shape model.",
+      "systemName": "Solar System",
+      "order": 128,
+      "context": {
+        "order": 422
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7973cbacfdebb471004f89f0f5157061567f6238c8e87504895c86b4b6f71a1f"
+    "sha256": "b83139f17e549d94e28662e7a2b73a6a057b432097edbf08c7a7322967bcce8a"
   }
 }

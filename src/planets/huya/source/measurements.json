@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-10",
+  "id": "huya",
+  "name": "Huya",
+  "horizons": "38628;",
+  "distanceAu": 29.392166722642536,
+  "fullAxesKm": [
+    436.1,
+    436.1,
+    375.0
+  ],
+  "radiusKm": 207.35021245858007,
+  "poleIcrfDegrees": [
+    20.8,
+    34.9
+  ],
+  "periodHours": null,
+  "periodText": "6.725 hours; no qualified phase",
+  "population": "Plutino (3:2 resonance with Neptune)",
+  "classification": "trans-neptunian",
+  "shapeLabel": "Occultation-constrained oblate model",
+  "source": "https://arxiv.org/abs/2501.09739",
+  "credit": "Rommel et al. (2025), PSJ 6, 48; Table 6 and Appendix C.",
+  "papers": [
+    "https://arxiv.org/abs/2501.09739"
+  ],
+  "shapeMeaning": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions.",
+  "orientationMeaning": "Uses the paper’s J2000-equatorial satellite-orbit pole RA 20.8° ±1.9°, Dec 34.9° ±1.9° as a body-pole prior under the explicit equatorial-orbit assumption. Arbitrary prime meridian and rotational phase.",
+  "introduction": "Huya is a trans-Neptunian world with a moon. Occultations and the satellite orbit constrain this oblate model of Huya itself; the grid marks its unmapped surface.",
+  "survey": [
+    "Selected: the 2025 multi-event analysis and equatorial-orbit oblate interpretation.",
+    "Earlier 2019 occultation-only fits remain supporting data; the new paper reports timing/profile disagreements and poor Keplerian satellite-orbit fit quality.",
+    "The primary is not asserted to be in hydrostatic equilibrium. No satellite is fabricated or embedded in this body scene."
+  ],
+  "references": [
+    {
+      "file": "huya-rommel-2025.pdf",
+      "url": "https://arxiv.org/pdf/2501.09739",
+      "sha256": "5f9dc9b853085da6b17c2bf3855dbf74e0839803d44e9475f4b753b30477bffe",
+      "bytes": 5003145,
+      "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+      "licenseEvidence": [
+        "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "extraction": "Appendix C PDFp22: a=b218.05km,c187.5km; Table 6 p13: J2000-equatorial orbital pole20.8°,34.9°; equatorial-orbit assumption."
+    }
+  ]
+}

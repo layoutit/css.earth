@@ -5,6 +5,7 @@ import type { SharedView } from "../navigation/view-url.js";
 import type { RetainedHeliocentricView } from "../solar-system/heliocentric-view-runtime.js";
 import type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './world-navigation-types.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
+import type { ObjectDatasets } from './deferred-object-mount.js';
 import { errorMessage } from "../navigation/types.js";
 import { publishObjectDiagnostics } from "./object-diagnostics.js";
 export type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
@@ -60,10 +61,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let startupDecodedAssets = 0;
     let revision = 0, selection: ReturnType<typeof createObjectSelectionRuntime> | null = null, controls: ReturnType<typeof createObjectControlBinding> | null = null;
     const viewListeners = new Set<() => void>();
+    const datasetListeners = new Set<(id: string) => void>();
+    const datasetRequests = new Map<symbol, string>();
     const worldPublication = createWorldNavigationPublicationHub(fatal);
     let latestWorldPublication: OrbitPublication | null = null;
     const notifyView = () => { if (readyPublished) for (const listener of viewListeners) listener(); };
-    lifetime.onDispose(() => { viewListeners.clear(); worldPublication.destroy(); });
+    lifetime.onDispose(() => { viewListeners.clear(); datasetListeners.clear(); datasetRequests.clear(); worldPublication.destroy(); });
     const playback = environment.createPlayback();
     lifetime.onDispose(() => playback.destroy());
     if (preparedTree) lifetime.onDispose(() => preparedTree.destroy());
@@ -163,7 +166,23 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         return worldPublication.subscribe(listener);
       },
     }) : undefined;
-    const controller = Object.freeze({ ready, sharedView, ...(destinations ? { destinations } : {}), ...(navigation ? { navigation } : {}),
+    const datasets: ObjectDatasets | undefined = definition.controls.lenses && definition.controls.lenses.controls.length ? Object.freeze({
+      ids: Object.freeze(definition.controls.lenses.controls.map(item => item.id)),
+      defaultId: definition.controls.lenses.defaultLens,
+      current: () => lifetime.disposed ? null : selection?.state().committed?.lensId ?? null,
+      async select(id: string, options: { signal?: AbortSignal } = {}) {
+        if (!readyPublished || lifetime.disposed || options.signal?.aborted) return false;
+        const token = Symbol();
+        datasetRequests.set(token, id);
+        try { return await getSelection().dispatch({ kind: 'lens', id }, options); }
+        finally { datasetRequests.delete(token); }
+      },
+      subscribe(listener: (id: string) => void) {
+        if (!lifetime.disposed) datasetListeners.add(listener);
+        return () => { datasetListeners.delete(listener); };
+      },
+    }) : undefined;
+    const controller = Object.freeze({ ready, sharedView, ...(datasets ? { datasets } : {}), ...(destinations ? { destinations } : {}), ...(navigation ? { navigation } : {}),
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
       pause() { if (!lifetime.disposed) guarded(() => setAllowed(false)); },
       resume() { if (!lifetime.disposed) guarded(() => setAllowed(true)); },
@@ -206,9 +225,13 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (state.committed && !state.pending) notifyView();
       if (!state.committed || state.pending || !orbit || state.committed.lensId === navigatedLens) return;
       navigatedLens = state.committed.lensId;
+      if (readyPublished && navigatedLens !== null) for (const listener of datasetListeners) listener(navigatedLens);
       const navigation = state.plan?.navigation;
       if (!navigation) return;
       maximumZoom = navigation.maximumZoom;
+      // A dataset URL changes the material while retaining the shared camera.
+      // Manual controls may still use a prepared lens's framing action.
+      if (navigatedLens !== null && [...datasetRequests.values()].includes(navigatedLens)) return;
       if (navigation.camera) { stopMotion(); alignMotionFrame(); }
       orbit.setState({ zoom: Math.min(orbit.state().zoom, maximumZoom) });
       if (navigation.camera) orbit.flyToState(navigation.camera, { surfaceTarget: true });
@@ -252,7 +275,16 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls = environment.createControls({ stage, controls: definition.controls, initialSelection,
         getState: () => selection?.state() ?? { desired: initialSelection, committed: null, pending: true, plan: null, loadingMaterial: false, ready: false, error: null, viewRevision: null },
-        onAction: action => selection?.dispatch(action) ?? false, onError: error => console.error(error) });
+        onAction: async action => {
+          const before = selection?.state().committed?.lensId;
+          const committed = await (selection?.dispatch(action) ?? false);
+          // Re-selecting the committed lens is still an explicit valid choice,
+          // including when it replaces an invalid dataset URL.
+          if (committed && action.kind === 'lens' && action.id === before && !lifetime.disposed) {
+            for (const listener of datasetListeners) listener(action.id);
+          }
+          return committed;
+        }, onError: error => console.error(error) });
       context.own(() => controls?.destroy());
       // A claimed preflight bank already completed and released default startup.
       // Re-running it would pin obsolete lighting rows beside the incoming view.

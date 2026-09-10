@@ -19,6 +19,12 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check documentation links and organization
+        run: |
+          python3 tools/audits/test_documentation_links.py
+          python3 tools/audits/test_provenance_documentation_inventory.py
+          python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
+          python3 tools/audits/check-documentation-links.py --all
       - name: Check tracked files against ignore rules
         run: |
           git ls-files -z > "$RUNNER_TEMP/tracked-paths"
@@ -39,24 +45,34 @@ jobs:
           pnpm build:packages
           pnpm build:renderer
           pnpm build:preparation
+          pnpm prepare:world-context
+          pnpm prepare:minimap
       - name: Restore generated environment images
         run: pnpm prepare:environment-images
       - name: Check source restoration and tracked inputs
-        run: node --test tools/restore-source-inputs.test.mjs
-      - name: Typecheck renderer and preparation
         run: |
-          pnpm typecheck:renderer
-          pnpm typecheck:preparation
+          node --test tools/restore-source-inputs.test.mjs
+          node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mjs
+      - name: Check independent body additions
+        run: node --test tools/body-additions.test.mjs tools/prepare-marker-bindings.test.mjs
+      - name: Typecheck shared code and enforce TypeScript ownership
+        run: |
+          pnpm typecheck
+          pnpm check:typescript-ownership
+          pnpm test:typescript-ownership
       - name: Test prepared source, materials and world context
         run: |
           pnpm test:preparation --universe
           node --test tools/objects/material-composition/coplanar-raster.test.mjs
-      - name: Test shared scientific source credits
-        run: node --test site/test/scene-sources.test.mjs
+      - name: Test provenance and scientific source credits
+        run: >-
+          node --test tools/object-provenance.test.mjs
+          site/test/object-sources.test.mjs site/test/dataset-spacecraft.test.mjs
+          site/test/scene-sources.test.mjs
       - name: Restore pinned JSON transports for runtime and shell tests
         run: |
           node --test tools/restore-object-json.test.mjs
-          node tools/restore-object-json.mjs
+          node tools/restore-object-json.mts
       - name: Test selected dataset textures and bounded residency
         run: |
           node --test src/platform/object-selection-runtime.test.mjs src/platform/prepared-residency.test.mjs tests/objects/unit/earth/dataset-selection.test.mjs tests/objects/unit/earth/surface-image-banks.test.mjs

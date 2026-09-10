@@ -12,32 +12,43 @@ clouds are not live weather. Dataset selection is manual at every zoom.
 | Night lights | [NASA VJ146A4.002](https://doi.org/10.5067/VIIRS/VJ146A4.002), 2025, via Jurij Stare | Annual radiance in logarithmic false color. Gaps and aurora remain; this is not ground-level sky darkness. |
 | Atmosphere and charts | OpenSpace atmosphere parameters; NASA Planetary Spectrum Generator (PSG) | Simulated atmosphere, spectrum and temperature/pressure charts. Atmosphere brightness is adjusted for display. |
 | Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled seismic wave speeds above or below the mean at each depth, not temperature. Crust and core are schematic. |
-| Geographic detail | ESA WorldCover 2021 via Terrascope WMTS | Source footprints do not guarantee valid imagery pixels. Blue Marble fills unavailable areas. |
-| Buenos Aires noise | [APrA 2025 map](https://data.buenosaires.gob.ar/dataset/mapa-ruido) | Annual daytime estimates in dBA, not live sensor readings. |
-| City search | GeoNames cities15000, September 2026 snapshot | Cities above 15,000 people or capitals; not every settlement. |
+| ENSO | [NASA MUR v4.1](https://doi.org/10.5067/GHGMR-4FJ04), 7 September 2026, via GIBS | Sea-surface temperature anomaly imagery relative to 2003–2014; published color bins, not a raw numerical field. |
+
+WorldCover imagery, Buenos Aires noise and GeoNames city inputs remain in the
+[source history](#retained-geographic-sources). The current globe does not enable
+geographic paging, city search or the noise lens.
 
 ## Evidence
 
-Existing reports; no body tests were rerun for this documentation edit.
+The linked reports identify their tested sources, prepared files and limitations.
+
+- **Softer lighting, 10 September 2026:** the applied Shadows-off view matches
+  the selected 25% white-overlay preview exactly. Checked in Chrome at DPR 1/2,
+  with directional lighting and the surface, clouds, elevation, night-light and
+  ENSO views. TypeScript, preparation build and 35 focused checks passed.
+  [Verification and limits](evidence/soft-light-overlay.json) ·
+  [Before](evidence/soft-light-before.png) · [After](evidence/soft-light-after.png) ·
+  [Absolute difference](evidence/soft-light-diff.png).
 
 - **Surface:** source restoration, 179-file image installation and browser checks.
   The report records an ownership-test failure and excludes full-suite success.
-  [Surface verification results](../../../docs/earth/cloud-free-default/README.md).
+  [Surface verification results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md).
 - **Scientific maps:** numeric height checks, six independent tomography anchors and
-  geographic registration. [Elevation](../../../docs/evidence/earth-elevation/README.md) ·
-  [Tomography](../../../docs/planet-cross-sections.md) · [Night-light interpretation](../../../docs/earth-night-lights.md).
-- **Geometry delivery:** the September 5 report records 19,632 published objects and
+  geographic registration. [Elevation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-elevation/README.md) ·
+  [Tomography](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/planet-cross-sections.md) · [Night-light interpretation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-night-lights.md) ·
+  [MUR native pixel checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-enso/mur-native-witnesses.json).
+- **Retired geographic release:** the September 5 report records 19,632 published objects and
   25,344,236,995 bytes verified for release `fef1519d5f243617`, with Chrome checks at
   device pixel ratios (DPR) 1 and 2. This is dated delivery evidence, not a live availability check or
-  application deployment. [Geometry delivery report](../../../docs/global-earth-coverage.md).
+  application deployment. [Geometry delivery report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/global-earth-coverage.md).
 
 ## Known problems
 
 - Night-light coverage stops at 75° N and 65° S. The mirror lacks quality bands;
   aurora and transient lights cannot be filtered further.
-- WorldCover leaves Antarctica and the far north uncovered. Coastal and polar
-  source gaps remain; city coverage and image coverage are different.
-- The old city-search notes cite ignored screenshots without a retrievable run report.
+- ENSO uses NASA's display colors and clipped anomaly range. Transparent land,
+  ice and unavailable imagery remain gaps; the display does not reconstruct
+  continuous temperature measurements from RGB.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -68,7 +79,12 @@ observations or live weather.
 
 One retained surface displays the selected image bank.
 
-The [cloud-free comparison](../../../docs/earth/cloud-free-default/README.md) considered
+With Shadows off, Earth uses a white limb overlay at one quarter of the original
+shading alpha. This display adjustment brightens the edge without modifying the
+source imagery. The directional Shadows bank and atmosphere are unchanged.
+Other bodies retain their existing lighting.
+
+The [cloud-free comparison](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md) considered
 December with clouds, cloud-free December and cloud-free July; July was selected for clearer
 northern land. Recent daily VIIRS imagery remains an unqualified candidate because of polar
 gaps and daily mosaic incompleteness. Sentinel-2 mosaics were surveyed but not qualified for
@@ -109,7 +125,7 @@ thumbnail and minimap share the same interpretation.
 
 We selected GEBCO_2026 for the global numeric model. NOAA ETOPO 2022 remains an older
 alternative; the previous Blue Marble base plus relief is excluded because its land colors do
-not encode elevation. The [elevation report](../../../docs/evidence/earth-elevation/README.md)
+not encode elevation. The [elevation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-elevation/README.md)
 records the source download, numerical checks, browser views and file sizes.
 
 </details>
@@ -152,6 +168,34 @@ authentication; NASA GIBS annual display mosaics still offer only 2012/2016; the
 download directory returns HTTP 401. OpenGeoHub's public 2024 derivative is older and rescales
 the numeric values. The selected public NASA-derived 2025 numerical mosaic retains the original
 float radiance units and has verifiable grid metadata and explicit attribution.
+
+</details>
+
+<details>
+<summary>ENSO anomaly imagery and offline restoration</summary>
+
+The ENSO view uses the 7 September 2026 NASA GIBS MUR v4.1 sea-surface temperature
+anomaly image relative to a 2003–2014 climatology. Its separately dated NOAA
+advisory provides context; the map and advisory are not live feeds.
+
+The 1 km imagery grid is 40,960 × 20,480 pixels: 3,200 original 512-pixel PNG tiles.
+The [receipt](source/science/mur-gibs-receipt.json) pins each tile's URL, bytes,
+hash and response date; populated tiles must attest the requested layer and date.
+A tile without those headers is accepted only when decoded alpha shows that it
+contains no observations. The 47,638,424 source bytes are retained in the
+45,833,893-byte `source/science/mur-gibs-tiles.tar.gz` archive.
+
+Pixel-center nearest sampling creates a 16,384 × 8,192 intermediate before globe
+atlas sampling. Display resolution does not retain every native source pixel.
+The pinned [NASA color table](source/science/mur-gibs-colormap.xml) supplies 0.1 °C
+bins and saturation below −3 and at +3 °C. RGB is not inverted into continuous
+measurements; transparent land, ice and unavailable observations stay gray.
+
+Shared source restoration rebuilds a missing `source/science/mur-gibs.png` from
+the tile archive and verifies its expected mosaic hash before preparation.
+The [original acquisition, native witnesses and browser evidence](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-enso.md)
+record the qualified snapshot. The earlier CoralTemp comparison used a different
+1991–2020 baseline and display range, so it is not a resolution-only comparison.
 
 </details>
 
@@ -269,7 +313,7 @@ Mantle textures use WebP q90; polar alpha textures remain lossless. This is disp
 compression, not numeric source quantization. The original numeric values remain pinned.
 
 The [encoding
-comparison](../../../docs/evidence/planet-cross-sections/tomography/encoding.json) records
+comparison](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/planet-cross-sections/tomography/encoding.json) records
 errors and size measurements for the tested version.
 
 To reproduce the source subset, install `numpy==2.3.5` and `h5py==3.14.0` in an isolated Python
@@ -290,12 +334,19 @@ verify registration against the prepared geographic frame.
 
 </details>
 
-<details>
-<summary>Geographic imagery, noise and city coordinates</summary>
+<a id="retained-geographic-sources"></a>
 
-The normal lens loads the official [ESA WorldCover 2021 RGB composite through Terrascope
-WMTS](https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html). The browser places
-each unchanged 256-pixel PNG using prepared CSS matrices and rectangular texture crops. It does
+<details>
+<summary>Retained geographic imagery, noise and city-coordinate history</summary>
+
+These inputs describe the retired geographic feature. The current `object.json`
+declares neither `recipe.paging` nor `recipe.destinations`; shared preparation
+therefore omits the geographic pages, noise overlay and city catalogue. The
+source data and earlier processing record remain for provenance.
+
+The earlier normal lens loaded the official [ESA WorldCover 2021 RGB composite through Terrascope
+WMTS](https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html). Its browser placed
+each unchanged 256-pixel PNG using prepared CSS matrices and rectangular texture crops. It did
 not download COG files or resample imagery.
 
 The imagery remains subject to the provider's availability and
@@ -307,71 +358,72 @@ established.
 It describes source footprints, including water and nodata, rather than a land mask or
 pixel-validity guarantee. It does not supply Antarctica or the far northern gap.
 
-Blue Marble remains the fallback outside available imagery.
+Blue Marble was the fallback outside available imagery.
 
 [The geometry release record](source/city/wmts-release.json) pins `fef1519d5f243617`.
-Preparation maps the provider images to Earth's face planes, including seams and polar caps.
-Each image can have several placement pieces; all pieces are prepared before runtime.
+The archived preparation mapped provider images to Earth's face planes, including seams and
+polar caps. Each image could have several placement pieces, all prepared before runtime.
 
 File installation does not establish that every imagery page is available or contains valid
 pixels.
 
-The [global delivery guide](../../../docs/global-earth-coverage.md) describes pack layout,
-memory limits, local and remote serving, preparation and delivery checks. Its publication
-result is summarized in Evidence below. Earlier resampled-COG experiments in
+The [historical global delivery report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/global-earth-coverage.md) records pack layout,
+memory limits, serving, preparation and delivery checks. Its dated publication
+result is summarized in Evidence above. Earlier resampled-COG experiments in
 `source/city/manifest.json` describe a different dataset; their publication commands do not
 publish the WMTS release.
 
 #### Noise
 
-The optional lens uses [Buenos Aires APrA's 2025 daytime noise
+The retired noise lens used [Buenos Aires APrA's 2025 daytime noise
 estimates](https://data.buenosaires.gob.ar/dataset/mapa-ruido), licensed under [CC BY 2.5
 Argentina](https://creativecommons.org/licenses/by/2.5/ar/). This is an annual estimated noise
 map, not live sensor readings. The original CRS84 GeoJSON is pinned as
 `source/noise/buenos-aires-day-2025.geojson.gz`; its source URL, compressed and decoded SHA-256
 hashes, year, units and license are recorded beside it.
 
-`tools/prepare-noise-lens.mjs` rasterizes the 181 source features offline, preserving the
+Its preparation rasterized the 181 source features offline, preserving the
 official 30–95 dBA color bins. Sixteen lossless transparent WebP tiles total 3,659,288 bytes.
-Their prepared CSS transforms align them with the same accepted Earth face as the base imagery.
+Their prepared CSS transforms aligned them with the same Earth face as the base imagery.
 
-Uncolored locations have no estimate. The lens has a fixed 32-slot retained pool, 16 tiles at
-most, a prepared Buenos Aires camera destination and a visible source legend. Independent
-point-in-polygon tests compare geographic source samples with the prepared raster colors.
+Uncolored locations have no estimate. The lens used a fixed 32-slot retained pool, 16 tiles at
+most, a prepared Buenos Aires camera destination and a source legend. Recorded independent
+point-in-polygon tests compared geographic source samples with the prepared raster colors.
 
 #### City coordinates
 
-`source/places/` holds a checked-in GeoNames cities15000 snapshot and its country, region and
+`source/places/` retains the GeoNames cities15000 snapshot and its country, region and
 license records, acquired September 4, 2026. The snapshot contains 34,135 populated-place
 records. Its scope is cities above 15,000 people or capitals; it is not every settlement.
 
-GeoNames data is CC BY 4.0 and receives visible attribution in the shell.
+GeoNames data is CC BY 4.0 and was attributed in the geographic search UI.
 
-`tools/prepare-places.mjs` verifies source hashes, normalizes names and aliases, and prepares
-camera controls against the accepted Earth face projection. It writes `earth-places.json` and a
-hash/size descriptor. Runtime fetches this local catalogue only when city search is used,
-verifies its identity, searches prepared labels, and applies the prepared camera settings for
-the selected place.
+The historical catalogue preparation verified source hashes, normalized names and aliases,
+and prepared camera controls against the Earth face projection. It wrote `earth-places.json`
+and a hash/size descriptor. The retired search fetched that catalogue on demand, verified its
+identity, searched prepared labels and applied the selected place's prepared camera settings.
 
-No geocoder or geometry derivation runs in the browser. The existing camera rounds control
-angles to hundredths of a degree; this is city navigation, not a precision survey marker.
+No geocoder or geometry derivation ran in the browser. That camera rounded control angles to
+hundredths of a degree; it was city navigation, not a precision survey marker.
 
 Place coverage and imagery coverage are distinct. Locations within the pinned WorldCover source
-footprints open at 1024x; other locations open an overview and report that detail is
-unavailable. City search does not control which geographic regions are prepared.
+footprints opened at 1024x; other locations opened an overview and reported that detail was
+unavailable. City search did not control which geographic regions were prepared.
 
-The accepted animated fly-to is preserved, and surface lenses remain available after selecting
-a destination. Prepared footprint coverage does not certify every source pixel.
+The recorded implementation kept animated fly-to and surface lenses after a destination
+selection. Prepared footprint coverage does not certify every source pixel. WorldCover leaves
+Antarctica and the far north uncovered, with coastal and polar source gaps. The old city-search
+notes cite ignored screenshots without a retrievable run report.
 
 </details>
 
 <details>
 <summary>Moon facts, sky image and typography</summary>
 
-The checked JPL Solar System Dynamics physical-parameter and mean-element pages provide the
-Moon's radius, density, mean orbital distance, inclination, period, and Earth GM.
-`source/moon/earth-moon.json` is a generated normalization that records those values and both
-authority hashes.
+The [Moon record](source/moon/earth-moon.json) keeps the selected JPL physical and
+mean-element values: radius 1,737.4 km, density 3.344 g/cm³, mean orbital distance
+384,400 km, inclination 5.16°, period 27.322 days and Earth GM 398,600.436 km³/s².
+It identifies the source URLs and hashes of the responses used for extraction.
 
 The Moon is a separate object package and route. Earth keeps only the checked relationship
 facts used by its information panel; the Earth scene does not prepare, mount, animate, toggle,

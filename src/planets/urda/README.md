@@ -15,7 +15,7 @@ Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 
 
 ## Evidence
 
-The [urda results](../../../docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **178.81 m**. This is a sampled comparison, not an exhaustive error bound.
+The [urda results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **178.81 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The 2 browser cases predate final integration. The report compares their recorded body assets with the integrated files; it does not identify a tested code revision for these cases.
 
@@ -51,11 +51,13 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/172) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/467/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Slivan et al. (2003)](https://damit.cuni.cz/projects/damit/references/view/105) — original model publication record.
-- [B. D. Warner (2008)](https://damit.cuni.cz/projects/damit/references/view/120) — original model publication record.
-- [Ďurech et al. (2011)](https://damit.cuni.cz/projects/damit/references/view/139) — original model publication record.
+- [Slivan et al. (2003), Spin vectors in the Koronis family: Comprehensive results from two independent analyses of 213 rotation lightcurves](https://ui.adsabs.harvard.edu/abs/2003Icar..162..285S) — original model publication record.
+- [B. D. Warner (2008), Shape and spin models for four asteroids](https://ui.adsabs.harvard.edu/abs/2008MPBu...35..167W) — original model publication record.
+- [Ďurech et al. (2011), Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes](https://ui.adsabs.harvard.edu/abs/2011Icar..214..652D) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 38.36 ± 0.46 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 - [Ďurech et al. (2011), occultation silhouette scaling](https://arxiv.org/pdf/1104.4227) — retained primary publication; see the body-specific selection and calibration above.
 - [Hanuš et al. (2018), VS-TPM size study, Table A.3](https://arxiv.org/pdf/1803.06116) — retained primary publication; see the body-specific selection and calibration above.

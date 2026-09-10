@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseObjShape } from './obj-shape.mjs';
-import { createSourceMeshLighting } from './source-mesh-lighting.mjs';
+import { parseObjShape } from './obj-shape.mts';
+import { createSourceMeshLighting } from './source-mesh-lighting.mts';
 const recipe = { maximumDistanceMeters: 2, rayOffsetMeters: .001, ambient: .2, diffuse: .8,
   floodLights: [{ direction: [0,0,1], weight: .8 }] };
 const floor = 'v -10 -10 0\nv 10 -10 0\nv 0 10 0\nf 1 2 3\n';

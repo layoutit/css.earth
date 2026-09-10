@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2d65bfd7c0fe35248bf4af55f7ebdaad7759ef717d57a9c073b16d2d1abbdadb"
+        "sha256": "09238f35fd07aa9e3160b0af61f78ff48b453fa35325de95586cb46d8687eb0b"
+      }
+    },
+    "catalog": {
+      "name": "Portia",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Portia through its published prolate shape model.",
+      "systemName": "Solar System",
+      "order": 98,
+      "context": {
+        "order": 129
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "baa23fdc0589f1131e70e1491a5909c5482ca48ece9c014fae3bb96a88079010"
+    "sha256": "22b44f04d883d232b846c4b99060c07ef5f062a51adc1335ada5eb15a7eef335"
   }
 }

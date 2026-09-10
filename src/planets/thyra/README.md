@@ -15,7 +15,7 @@ Convex light-curve reconstruction with a published 90–94 km diameter fit range
 
 ## Evidence
 
-The [thyra results](../../../docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **347.33 m**. This is a sampled comparison, not an exhaustive error bound.
+The [thyra results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **347.33 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The 2 browser cases predate final integration. The report compares their recorded body assets with the integrated files; it does not identify a tested code revision for these cases.
 
@@ -51,10 +51,12 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/154) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/369/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [T. Michalowski (2004)](https://damit.cuni.cz/projects/damit/references/view/108) — original model publication record.
-- [M. Delbo and P. Tanga (2009)](https://damit.cuni.cz/projects/damit/references/view/126) — original model publication record.
+- [T. Michalowski (2004), Photometry and models of selected main-belt asteroids (I): 52 Europa, 115 Thyra, and 382 Dodona](https://ui.adsabs.harvard.edu/abs/2004A&A...416..353M/abstract) — original model publication record.
+- [M. Delbo and P. Tanga (2009), Thermal inertia of main belt asteroids smaller than 100 km from IRAS data](https://ui.adsabs.harvard.edu/abs/2009P%26SS...57..259D) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 80.65 ± 0.88 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 - [Delbo and Tanga (2009), Planetary and Space Science 57, 259–265](https://arxiv.org/pdf/0808.0869) — retained primary publication; see the body-specific selection and calibration above.
 

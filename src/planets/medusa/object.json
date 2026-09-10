@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "29cbc5b70c0ad0ae399e124e91c8b9a5ccf6cdeaee5b601180d41da564c67ceb"
+          "sha256": "4c8c35cfc1f2221cbb32d8547ba96be305823b8ccc01db27fb1833e745b65e76"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cc6e6ba0a8efe2ab75a2024b5ff516de55757859774d39de80ef3cfb1e6c66d6"
+        "sha256": "adb26cd4d006f6ab20cf5dfaaebe4316cf02e736ea34b1adbc729197976f2237"
+      }
+    },
+    "catalog": {
+      "name": "Medusa",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.174593942921186,
+      "description": "Explore Medusa in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 285,
+      "context": {
+        "order": 331
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a3b1a88fefc466858610db7d1a438747e9ac401d910967d88b4f1f70e16f8a91"
+    "sha256": "24875007980ebdb67ae976373e7a9b8a8e0ab8eb52b595550056896d04200b64"
   }
 }

@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
-import { OBJECTS } from "../../../../site/objects.mjs";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";
+import { OBJECTS } from "../../../../site/objects.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 objectRuntimePackageTests(runtimeDefinition);
 test("Mercury's actual import closure has only shared runtime owners", async () => {
   const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "mercury") });

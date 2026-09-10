@@ -1,4 +1,4 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 const runtimeDefinition = await loadObjectTestDefinition('moon');

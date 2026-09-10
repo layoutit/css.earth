@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-published-body-epoch-ephemeris@1",
+  "id": "dactyl",
+  "centerBodyId": "ida",
+  "epochJdTt": 2461286.5,
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "runtimeExtrapolation": false,
+  "positionKm": [
+    -13.63556841922599,
+    -68.61321519127789,
+    0
+  ],
+  "velocityKmPerDay": [
+    -610.3393011041204,
+    121.29330007269124,
+    31.52308963248956
+  ],
+  "gravitationalParametersKm3PerS2": {
+    "combined": 0.003163524143427717,
+    "body": 0,
+    "parent": 0.003163524143427717
+  },
+  "source": {
+    "path": "source/orbit/published-parameters.json",
+    "bytes": 1662,
+    "sha256": "64e0bceb305b89bbc469edef488afba4c9c82c1e6e8e1a0fd1a5d11ea53afd0e"
+  },
+  "limitations": [
+    "Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured.",
+    "Plane taken opposite the existing Ida pole (RA 348.76, Dec 87.1 degrees). This neglects the roughly 8-degree mutual inclination and does not select a unique stable solution. Periapsis and phase are illustrative.",
+    "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+  ],
+  "validation": {
+    "sourceEpochState": {
+      "positionKm": [
+        -13.63556841922599,
+        -68.61321519127789,
+        0
+      ],
+      "velocityKmPerDay": [
+        -610.3393011041204,
+        121.29330007269124,
+        31.52308963248956
+      ]
+    },
+    "scope": "Arithmetic consistency of the declared illustrative conic only; no independent 2026 phase or astrometric residual is available."
+  }
+}

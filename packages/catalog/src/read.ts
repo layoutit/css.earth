@@ -7,6 +7,7 @@ import {
   type CatalogHeader,
   type ColumnHeader,
   type NumericType,
+  type NumericArray,
 } from './format.js'
 
 export interface Catalog {
@@ -18,7 +19,7 @@ export interface Catalog {
    * A typed-array view **over the original buffer** — no copy, so it can be
    * uploaded straight to a GPU buffer. Do not mutate it.
    */
-  numeric(name: string): ArrayBufferView & { length: number }
+  numeric(name: string): NumericArray
   /** Decoded once per column, then cached. */
   strings(name: string): readonly string[]
 }

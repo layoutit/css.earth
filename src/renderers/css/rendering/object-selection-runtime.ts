@@ -69,8 +69,8 @@ export function createObjectSelectionRuntime({
     request.previous = null;
     return request.ticket;
   }
-  function run(selection: ObjectSelection, kind: SelectionRequest["kind"]) {
-    if (!live()) return Promise.resolve(false);
+  function run(selection: ObjectSelection, kind: SelectionRequest["kind"], signal?: AbortSignal) {
+    if (!live() || signal?.aborted) return Promise.resolve(false);
     let previous = active;
     while (previous && !previous.ticket) previous = previous.previous;
     const request: SelectionRequest = { selection, kind, ticket: null, plan: null, previous };
@@ -79,6 +79,19 @@ export function createObjectSelectionRuntime({
     error = null;
     requests++;
     const current = () => live() && active === request;
+    let cancel!: () => void;
+    const cancelled = new Promise<{ cancelled: true }>(resolve => { cancel = () => resolve({ cancelled: true }); });
+    const abort = () => {
+      cancel();
+      if (!current()) return;
+      discard(request);
+      discard(request.previous);
+      active = null;
+      desired = committed ?? initialSelection;
+      busy = false;
+      notify();
+    };
+    signal?.addEventListener('abort', abort, { once: true });
     const work = (async () => {
       try { busy = true; notify(); }
       catch (failure) { if (current()) onFatalError(failure); throw failure; }
@@ -90,7 +103,7 @@ export function createObjectSelectionRuntime({
           const plan = resolve(selection);
           ticket = request.ticket && request.plan && sameKeys(plan.required, planFor(request).required) && sameKeys(plan.prewarm, planFor(request).prewarm)
             ? request.ticket : preparePass(request, plan);
-          const result = await lifetime.wait(ticket.ready);
+          const result = await Promise.race([lifetime.wait(ticket.ready), cancelled]);
           if (!current() || result.cancelled) { discard(request); return false; }
           if (!result.value || request.ticket !== ticket) continue;
         } catch (failure) {
@@ -144,7 +157,7 @@ export function createObjectSelectionRuntime({
     // The binder observes user errors; frame-only failures retain the current
     // material and are reported separately from fatal partial DOM publication.
     work.catch(() => {});
-    return work.then(value => live() && value);
+    return work.then(value => live() && value).finally(() => signal?.removeEventListener('abort', abort));
   }
   return Object.freeze({
     start() {
@@ -154,11 +167,11 @@ export function createObjectSelectionRuntime({
       started = true;
       return run(desired, "initial");
     },
-    dispatch(action: ObjectAction) {
+    dispatch(action: ObjectAction, options: { signal?: AbortSignal } = {}) {
       if (!live() || !committed) return Promise.resolve(false);
       const valid = requireObjectAction(definition.controls, action);
       const next = reduceObjectSelection(desired, valid);
-      return run(next, "selection");
+      return run(next, "selection", options.signal);
     },
     setView(next: PreparedView) {
       if (!live()) return;

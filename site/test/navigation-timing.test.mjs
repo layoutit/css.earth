@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { performance } from 'node:perf_hooks';
-import { createNavigationTiming } from '../navigation-timing.mjs';
+import { createNavigationTiming } from '../navigation-timing.mts';
 
 test('navigation timing records phases once and bounds retained entries without clearing unrelated timing', () => {
   performance.mark('unrelated');

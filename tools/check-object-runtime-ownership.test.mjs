@@ -1,50 +1,60 @@
-import { loadObjectTestDefinition } from './object-test-data.mjs';
+import { loadObjectTestDefinition } from './object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { OBJECTS } from "../site/objects.mjs";
-import { auditObjectRuntimeOwnership, inspectObjectRuntimeModule } from "./check-object-runtime-ownership.mjs";
+import { OBJECTS } from "../site/objects.mts";
+import { auditObjectRuntimeOwnership, inspectObjectRuntimeModule } from "./check-object-runtime-ownership.mts";
 const { controls: objectControls } = await loadObjectTestDefinition('moon');
-import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mjs";
-import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mjs";
-import { readPreparedJsonModule } from "./check-prepared-presentation.mjs";
+import { requireObjectRuntimeDefinition } from "./object-runtime-contract.mts";
+import { PREPARED_OBJECT_RUNTIME_SCHEMA } from "../src/platform/prepared-presentation-contract.mts";
+import { readPreparedJsonModule } from "./check-prepared-presentation.mts";
 
 const root = "/ownership-fixture", prefix = "src/planets/moon/runtime/";
 const client = prefix + "client.mjs", definitionPath = prefix + "definition.mjs";
-const binding = `import { createObjectRuntime as bind } from '../../../platform/object-runtime.mjs';
+const binding = `import { createObjectRuntime as bind } from '../../../platform/object-runtime.mts';
 import { runtimeDefinition as definition } from './definition.mjs';
 export const mountMoonClient = bind(definition);`;
 // Legacy parser fixtures remain adversarial tests, not production dependencies.
-const definition = `import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../../../platform/prepared-schema.mjs';
+const definition = `import { PREPARED_OBJECT_RUNTIME_SCHEMA } from '../../../platform/prepared-schema.mts';
 import { objectControls } from '../site/control-content.mjs';
 import { PREPARED_PRESENTATION } from './preparedPresentation.mjs';
 export const runtimeDefinition = Object.freeze({ ...PREPARED_PRESENTATION, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: 'moon', controls: objectControls });`;
 const { id: _id, controls: _controls, ...moonPresentation } = await loadObjectTestDefinition('moon');
 moonPresentation.schema = 'cssearth-prepared-presentation@3';
 const prepared = `export const PREPARED_PRESENTATION = Object.freeze(${JSON.stringify(moonPresentation)});`;
-const registrySource = (await readFile(new URL("../site/objects.mjs", import.meta.url), "utf8"))
-  .replace(/defineObjects\(\[[\s\S]*?\]\);/, `defineObjects([
+const registrySource = `import { defineObject, defineObjects } from './object-schema.mts';
+export const OBJECTS = defineObjects([
   object("moon", "Moon", "satellite", "#aaa7a0", 1, "Moon fixture", async () => {
     const { mountMoonClient } = await import("../src/planets/moon/runtime/client.mjs");
     return mountMoonClient;
   }),
-]);`).replace(/^import \w+Descriptor from[^\n]+\n/gm, '');
+]);
+function object(id, name, classification, color, distanceAu, description, loadScene, worldFrame = null, systemName = "Solar System") {
+  return defineObject({ id, name, classification, color, distanceAu, description, systemName,
+    route: \`/\${id}/\`,
+    loadScene,
+    worldFrame,
+  });
+}
+`;
 const sunContext = await readFile(new URL("../src/planets/sun/prepared/world-context.json", import.meta.url), "utf8");
-const objectSchema = await readFile(new URL("../site/object-schema.mjs", import.meta.url), "utf8");
+const objectSchema = await readFile(new URL("../site/object-schema.mts", import.meta.url), "utf8");
+const isArray = await readFile(new URL("../src/platform/is-array.mts", import.meta.url), "utf8");
+const browserTypes = await readFile(new URL("../site/browser-types.mts", import.meta.url), "utf8");
 const shared = `import { createPolyCamera } from '@layoutit/polycss';
 export function createObjectRuntime(definition) { return createPolyCamera(definition); }`;
 function fixture(extra = {}, definitionTail = "") {
   const files = { [client]: binding, [definitionPath]: definition + definitionTail,
-    "site/objects.mjs": registrySource, "site/object-schema.mjs": objectSchema,
+    "site/objects.mts": registrySource, "site/object-schema.mts": objectSchema, "site/browser-types.mts": browserTypes, "src/platform/is-array.mts": isArray,
     "site/layouts/PlanetLayout.astro": "<main><slot /></main>",
     "site/components/PlanetShell.astro": "<aside><slot /></aside>",
     "src/planets/sun/prepared/world-context.json": sunContext,
     [prefix + "preparedPresentation.mjs"]: prepared,
     "src/planets/moon/site/control-content.mjs": `export const objectControls = ${JSON.stringify(objectControls)};`,
-    "src/platform/prepared-schema.mjs": `export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@3";`,
-    "src/platform/object-runtime.mjs": shared, ...extra };
+    "src/platform/prepared-schema.mts": `export const PREPARED_OBJECT_RUNTIME_SCHEMA = "cssearth-object-runtime@3";`,
+    "src/platform/object-runtime.mts": shared, ...extra };
   return { root, objects: [{ id: "moon" }],
     verifyDefinition(object, plan) { requireObjectRuntimeDefinition({ ...plan, schema: PREPARED_OBJECT_RUNTIME_SCHEMA, id: object.id, controls: objectControls }); },
     listRuntimeFiles: async () => Object.keys(files).filter(file => file.startsWith(prefix)).map(file => file.slice(prefix.length)),
@@ -58,8 +68,8 @@ test("accepts one bound factory and the real existing Moon plan; static proof ne
   assert.equal(report.cameraFactorySites.length, 1);
   assert.equal(report.nativeOwnership.status, "UNPROVEN");
   assert.match(report.sourceHashes[prefix + "preparedPresentation.mjs"], /^[a-f0-9]{64}$/);
-  assert.match(report.sourceHashes["site/objects.mjs"], /^[a-f0-9]{64}$/);
-  assert.deepEqual(report.entries[0].entry, { file: client, exported: "mountMoonClient", registry: "site/objects.mjs" });
+  assert.match(report.sourceHashes["site/objects.mts"], /^[a-f0-9]{64}$/);
+  assert.deepEqual(report.entries[0].entry, { file: client, exported: "mountMoonClient", registry: "site/objects.mts" });
 });
 test("follows imported helpers instead of trusting a thin client", async () => {
   const options = fixture({ [prefix + "hidden.mjs"]: "export function hidden() { return new Image(); }" },
@@ -72,6 +82,8 @@ test("follows imported helpers instead of trusting a thin client", async () => {
 test("private synchronous material publication is rejected even when its file is unreferenced", async () => {
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [prefix + "presentation.mjs"]:
     "export function publish(node, value) { node.style.backgroundPosition = value; }" })), /Unreferenced private runtime executor/);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ [prefix + "presentation.mts"]:
+    "export function publish(node: HTMLElement, value: string): void { node.style.backgroundPosition = value; }" })), /Unreferenced private runtime executor/);
   const facts = inspectObjectRuntimeModule("node.style.backgroundPosition = prepared.position;", prefix + "presentation.mjs");
   assert.ok(facts.violations.some(item => /native DOM or material/.test(item.reason)));
 });
@@ -101,7 +113,7 @@ for (const dispatch of [
   "const ids=new Set(['moon','saturn']); if(ids.has(definition.id)) return;",
   "switch (definition.id) {case 'moon': return;}", "const table={moon:1,saturn:2}; return table[definition.id];",
 ]) test(`shared owners reject object-ID dispatch: ${dispatch.slice(0, 50)}`, async () => {
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mjs": shared + `\nfunction hidden(definition) { ${dispatch} }` })), /object-ID dispatch/);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mts": shared + `\nfunction hidden(definition) { ${dispatch} }` })), /object-ID dispatch/);
 });
 test('nullable physical lighting projection is data while adjacent identity tables remain forbidden', () => {
   const file = 'src/renderers/css/navigation/perspective-dolly.ts';
@@ -110,7 +122,7 @@ test('nullable physical lighting projection is data while adjacent identity tabl
   for (const expression of ['{ sun: renderSun }', '{ sun: projection.moon }', '{ moon: projection.moon }', '{ sun: projection.sun, moon: renderMoon }']) {
     assert.ok(inspect(`const table = ${expression};`).some(issue => /object-ID dispatch/.test(issue.reason)));
   }
-  assert.ok(inspect('const table = { sun: projection.sun };', 'src/platform/object-runtime.mjs').some(issue => /object-ID dispatch/.test(issue.reason)));
+  assert.ok(inspect('const table = { sun: projection.sun };', 'src/platform/object-runtime.mts').some(issue => /object-ID dispatch/.test(issue.reason)));
 });
 test("shared owners reject private packages, fixed asset namespaces, v1 hooks and an extra native camera", async () => {
   for (const [source, expected] of [
@@ -120,7 +132,7 @@ test("shared owners reject private packages, fixed asset namespaces, v1 hooks an
     [shared + '\nfunction hidden(value) { return value.createPresentation(); }', /Legacy object callbacks/],
     [shared + '\ncreatePolyCamera({});', /native camera factory site; found 2/],
     [shared + '\nimport("./hidden.mjs");', /Dynamic runtime imports/],
-  ]) await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mjs": source })), expected);
+  ]) await assert.rejects(auditObjectRuntimeOwnership(fixture({ "src/platform/object-runtime.mts": source })), expected);
 });
 test("object controls cannot hide an executor behind label projection", async () => {
   const controlsPath = "src/planets/moon/site/control-content.mjs";
@@ -177,14 +189,14 @@ test("transitive Astro server helpers cannot hide Node imports on a client path"
   }
 });
 test("literal navigation content is allowed only through the shell closure, not runtime dispatch", async () => {
-  const file = "site/navigation-content.mjs";
+  const file = "site/navigation-content.mts";
   const content = `export const MARKERS = Object.freeze(${JSON.stringify({moon:{label:"Moon"},saturn:{label:"Saturn"}})});`;
   const files = { [file]: content,
-    "site/components/PlanetShell.astro": "---\nimport { MARKERS } from '../navigation-content.mjs';\n---\n<nav>{Object.values(MARKERS).map(marker => marker.label)}</nav>" };
+    "site/components/PlanetShell.astro": "---\nimport { MARKERS } from '../navigation-content.mts';\n---\n<nav>{Object.values(MARKERS).map(marker => marker.label)}</nav>" };
   assert.equal((await auditObjectRuntimeOwnership(fixture(files))).complete, true);
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files,
-    "src/platform/object-runtime.mjs": shared + "\nimport { MARKERS } from '../../site/navigation-content.mjs';" })), /navigation-content.mjs.*object-ID dispatch/);
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, [file]: content + "\nexport function dispatch(id) { return MARKERS[id](); }" })), /navigation-content.mjs.*object-ID dispatch/);
+    "src/platform/object-runtime.mts": shared + "\nimport { MARKERS } from '../../site/navigation-content.mts';" })), /navigation-content.mts.*object-ID dispatch/);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, [file]: content + "\nexport function dispatch(id) { return MARKERS[id](); }" })), /navigation-content.mts.*object-ID dispatch/);
 });
 test("malicious generated code is rejected without importing it", async () => {
   const key = "__executedPreparedOwnershipPayload"; delete globalThis[key];
@@ -211,14 +223,14 @@ test("the actual Moon registry import must point to the audited client and retur
     registrySource.replace(/\bloadScene,\n/u, "loadScene: () => loadScene(),\n"),
   ]) {
     assert.notEqual(source, registrySource, "The mutation must change the actual registry");
-    await assert.rejects(auditObjectRuntimeOwnership(fixture({ "site/objects.mjs": source })), /Actual OBJECTS registry|registered runtime loader/);
+    await assert.rejects(auditObjectRuntimeOwnership(fixture({ "site/objects.mts": source })), /Actual OBJECTS registry|registered runtime loader/);
   }
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [client]: binding.replace("mountMoonClient", "differentExport") })), /one bound shared factory export/);
 });
 test("the actual OBJECTS registry has only normalized packages and one shared source closure", async () => {
   const report = await auditObjectRuntimeOwnership();
   assert.equal(report.complete, true);
-  for (const file of ["src/platform/prepared-presentation-contract.mjs", "src/platform/cubic-sky-contract.mjs", "src/platform/directional-sun-contract.mjs", "tools/object-runtime-contract.mjs", "src/platform/latest-selection.mjs"])
+  for (const file of ["src/platform/prepared-presentation-contract.mts", "src/platform/cubic-sky-contract.mts", "src/platform/directional-sun-contract.mts", "tools/object-runtime-contract.mts", "src/platform/latest-selection.mjs"])
     assert.ok(!report.sharedClosure.includes(file), `${file} must stay outside the browser`);
   assert.deepEqual(report.entries.map(entry => entry.id), OBJECTS.map(object => object.id));
   for (const entry of report.entries) {
@@ -233,7 +245,7 @@ test("the actual OBJECTS registry has only normalized packages and one shared so
 test('literal metadata defaults do not hide loader ownership, executable defaults are rejected', async () => {
   const changed = registrySource.replace('systemName = "Solar System"', 'systemName = resolveSystem()');
   assert.notEqual(changed, registrySource);
-  await assert.rejects(auditObjectRuntimeOwnership(fixture({ 'site/objects.mjs': changed })), /Actual OBJECTS registry/);
+  await assert.rejects(auditObjectRuntimeOwnership(fixture({ 'site/objects.mts': changed })), /Actual OBJECTS registry/);
 });
 
 const descriptorObjects = OBJECTS.filter(object => ['mercury', 'venus'].includes(object.id));
@@ -303,7 +315,7 @@ test('authored JSON transport rejects mismatched bytes, controls, source pins an
 });
 
 test('descriptor binding cannot bypass the shared factory or redirect the prepared inventory', async () => {
-  const file = 'site/packaged-object-runtime.mjs', source = await readFile(file, 'utf8');
+  const file = 'site/packaged-object-runtime.mts', source = await readFile(file, 'utf8');
   for (const changed of [source.replace('return createNavigableObjectMount(', 'return differentFactory('),
     source.replace('`/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`', '`/elsewhere/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`'),
     source.replace('`/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`', '`/objects/${otherDescriptor.id}/${descriptorInput.prepared.sha256}.json`'),
@@ -312,7 +324,7 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
     source.replace('createNavigableObjectMount(descriptorInput,', 'createNavigableObjectMount(otherDescriptor,'),
     source.replace('bindContextualObject(definition, applicationContext,', 'bindContextualObject(definition, otherContext,'),
     source.replace('definition => descriptorInput.properties.worldFrame', 'definition => true'),
-    source.replace('bindContextualObject(definition, applicationContext, descriptorInput.properties.worldFrame)',
+    source.replace('bindContextualObject(definition, applicationContext, parsePreparedWorldCameraFrame(descriptorInput.properties.worldFrame) ?? undefined)',
       'bindContextualObject(definition, applicationContext, applicationContext.frame)'),
     source.replace(': bindPackagedObject(definition)', ': bindPackagedObject(otherDefinition)'),
     source.replace('mount = createObjectRuntime(definition)', 'mount = createObjectRuntime(otherDefinition)'),
@@ -323,13 +335,16 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
     assert.notEqual(changed, source, 'Mutation must change the actual loader');
     await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport|Contextual binding/);
   }
-  const registry = await readFile('site/objects.mjs', 'utf8');
-  await assert.rejects(descriptorOverlay({ 'site/objects.mjs': registry.replace('loadPackagedObject(mercuryDescriptor)', 'loadPackagedObject(venusDescriptor)') }), /own actual JSON descriptor/);
-  for (const source of [registry.replace('mercuryDescriptor.properties.worldFrame', 'venusDescriptor.properties.worldFrame'),
-    registry.replace(', mercuryDescriptor.properties.worldFrame', ''),
-    registry.replace('    worldFrame,', '    worldFrame: null,')]) {
-    assert.notEqual(source, registry, 'World-frame mutation must change the actual binding');
-    await assert.rejects(descriptorOverlay({ 'site/objects.mjs': source }), /world frame/);
+  const catalogPath = 'site/prepared-object-catalog.mts', catalog = await readFile(catalogPath, 'utf8');
+  const wrongDescriptor = catalog.replace('../src/planets/mercury/object.json', '../src/planets/venus/object.json');
+  assert.notEqual(wrongDescriptor, catalog, 'Descriptor mutation must change the actual import');
+  await assert.rejects(descriptorOverlay({ [catalogPath]: wrongDescriptor }), /unique JSON descriptor imports/);
+  const helperPath = 'site/object-catalog.mts', helper = await readFile(helperPath, 'utf8');
+  for (const source of [helper.replace('input.properties.worldFrame', 'other.properties.worldFrame'),
+    helper.replace('worldFrame: input.properties.worldFrame, ', ''),
+    helper.replace('worldFrame: input.properties.worldFrame', 'worldFrame: null')]) {
+    assert.notEqual(source, helper, 'World-frame mutation must change the actual binding');
+    await assert.rejects(descriptorOverlay({ [helperPath]: source }), /world frame/);
   }
 });
 
@@ -345,6 +360,18 @@ test('typed renderer closure rejects forbidden scene APIs, styles, hidden import
     ["import { createPolyCamera } from '@layoutit/polycss'; (createPolyCamera as typeof createPolyCamera)({});", /native camera factory site; found 2/],
     ["function hidden() { createObjectRuntime({}); }", /actual shared factory call/],
   ]) await assert.rejects(descriptorOverlay({ [file]: `${source}\n${injected}` }), expected);
+});
+
+test('typed shell compatibility exports remain inside the checked runtime closure', async () => {
+  const report = await descriptorOverlay();
+  for (const file of ['site/runtime-policy.mts', 'site/scene-contract.mts']) {
+    assert.ok(report.sharedClosure.includes(file), file);
+    assert.match(report.sourceHashes[file], /^[a-f0-9]{64}$/, file);
+    const source = await readFile(file, 'utf8');
+    await assert.rejects(descriptorOverlay({
+      [file]: `${source}\ndocument.createElement(('canvas' as const));`,
+    }), /Forbidden runtime canvas/);
+  }
 });
 
 test('workspace runtime exports and renderer build entries remain source-bound', async () => {
@@ -366,11 +393,11 @@ test('the actual Sun-only shell and navigation share exactly one typed camera ow
   assert.ok(report.sharedClosure.includes('src/renderers/css/index.ts'));
   assert.ok(report.sharedClosure.includes('src/renderers/css/universe/world-context-runtime.ts'));
   assert.ok(report.sharedClosure.includes('src/renderers/css/universe/prepared-world-context.ts'));
-  assert.ok(!report.sharedClosure.includes('src/platform/object-runtime.mjs'));
+  assert.ok(!report.sharedClosure.includes('src/platform/object-runtime.mts'));
   assert.ok(report.sharedClosure.includes('src/renderers/css/navigation/index.ts'));
   assert.ok(report.sharedClosure.includes('src/renderers/css/runtime/object-runtime.ts'));
   assert.ok(!report.sharedClosure.some(file => /^src\/planets\/[^/]+\/runtime\//u.test(file)));
-  for (const file of ['site/scene-router.mjs', 'site/view-url-runtime.mjs', 'site/prepared-world-navigation.mjs']) {
+  for (const file of ['site/scene-router.mts', 'site/view-url-runtime.mts', 'site/prepared-world-navigation.mts']) {
     const source = await readFile(file, 'utf8');
     const changed = source.replace('/dist/navigation.js', '/dist/index.js');
     assert.notEqual(changed, source, 'Mutation must reconnect the native renderer entry');
@@ -385,6 +412,24 @@ test('the actual Sun-only shell and navigation share exactly one typed camera ow
 
 });
 
+test('a shared registry loader factory must forward one unchanged descriptor without side effects', async () => {
+  const path = 'site/objects.mts', original = await readFile(path, 'utf8');
+  const options = overrides => ({ objects: [OBJECTS[0]], readText: async file =>
+    file === resolve(path) ? overrides : readFile(file, 'utf8') });
+  const accepted = await auditObjectRuntimeOwnership(options(original));
+  assert.equal(accepted.entries[0].factoryCalls, 1);
+  for (const [before, after, reason] of [
+    ['async () => {', 'async () => { console.log(descriptor);', /loader factory/],
+    ['return loadPackagedObject(descriptor);', 'return loadPackagedObject({ ...descriptor });', /bound descriptor unchanged/],
+    ['return loadPackagedObject(descriptor);', 'return loadPackagedObject(venusDescriptor);', /bound descriptor unchanged/],
+    ['catalogEntry(descriptor,', 'catalogEntry(otherDescriptor,', /bound descriptor unchanged/],
+  ]) {
+    const changed = original.replace(before, after);
+    assert.notEqual(changed, original, 'The mutation must alter the actual shared loader');
+    await assert.rejects(auditObjectRuntimeOwnership(options(changed)), reason);
+  }
+});
+
 test('every independently selected registry object closes over exactly its own native camera assembly', async () => {
   for (const object of OBJECTS) {
     const report = await auditObjectRuntimeOwnership({ objects: [object] });
@@ -393,9 +438,24 @@ test('every independently selected registry object closes over exactly its own n
   }
 });
 
+test('the generated catalogue is checked as data without executing source overlays', async () => {
+  const file = 'site/prepared-object-catalog.mts', source = await readFile(file, 'utf8');
+  const payload = '__cataloguePayloadExecuted';
+  delete globalThis[payload];
+  for (const changed of [source + `\nglobalThis.${payload} = true;`,
+    source.replace('= [', '= [unknownDescriptor,')]) {
+    assert.notEqual(changed, source);
+    await assert.rejects(descriptorOverlay({ [file]: changed }), /prepared catalogue/);
+  }
+  assert.equal(globalThis[payload], undefined);
+  const descriptor = 'src/planets/mercury/object.json';
+  const value = JSON.parse(await readFile(descriptor, 'utf8'));
+  await assert.rejects(descriptorOverlay({ [descriptor]: JSON.stringify({ ...value, id: 'other-body' }) }), /own actual JSON descriptor/);
+});
+
 test('descriptor context binding pins both prepared contexts to the shared factories and physical references', async () => {
   const contextFile = 'src/planets/sun/prepared/world-context.json';
-  const packagedFile = 'site/packaged-object-runtime.mjs', applicationFile = 'site/application-world-context.mjs', starsDescriptorFile = 'src/objects/stellar-neighbourhood/object.json';
+  const packagedFile = 'site/packaged-object-runtime.mts', applicationFile = 'site/application-world-context.mts', starsDescriptorFile = 'src/objects/stellar-neighbourhood/object.json';
   const starsPayloadFile = 'src/objects/stellar-neighbourhood/prepared/stars.json';
   const [contextText, packaged, application, starDescriptorText, starsPayloadText] = await Promise.all([
     readFile(contextFile, 'utf8'), readFile(packagedFile, 'utf8'), readFile(applicationFile, 'utf8'),

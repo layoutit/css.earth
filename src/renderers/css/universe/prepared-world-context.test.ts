@@ -5,9 +5,9 @@ import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpa
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
-import { OBJECTS } from '../../../../site/objects.mjs';
-import { CONTEXT_ANNOTATION_PRIORITY } from '../../../../site/runtime-policy.mjs';
-import { SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mjs';
+import { OBJECTS } from '../../../../site/objects.mts';
+import { CONTEXT_ANNOTATION_PRIORITY } from '../../../../site/runtime-policy.mts';
+import { SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];
@@ -48,6 +48,28 @@ class Clock {
 class FakeDocument { defaultView = new Clock(); createElement(tagName: string): FakeElement { return new FakeElement(this, tagName); } }
 
 const mounted = new WeakMap<FakeElement, ReturnType<typeof mountPreparedWorldContext>>();
+
+test('approximate orbit cues stay on retained groups through selection and publication', () => {
+  const original = plan(1);
+  const input = { ...original, bodies: [{ ...original.bodies[0], placement: 'approximate' }, original.bodies[1]] };
+  const prepared = parsePreparedWorldContext(input);
+  expect(prepared.bodies[0]!.placement).toBe('approximate');
+  expect(prepared.bodies[0]!.orbit).toEqual(original.bodies[0]!.orbit);
+  expect(() => parsePreparedWorldContext({ ...input, bodies: [{ ...input.bodies[0], placement: 'unknown' }] })).toThrow(/placement/);
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: prepared, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const root = layer.root as unknown as FakeElement;
+  const group = find(root, 'contextGroup', 'mercury'), count = all(root).length;
+  layer.selectObject('mercury');
+  layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
+  expect(group.dataset.contextPlacement).toBe('approximate');
+  expect(find(root, 'contextLabel', 'mercury').textContent).toBe('Mercury (approx)');
+  expect(find(root, 'contextGroup', 'venus').dataset.contextPlacement).toBeUndefined();
+  expect(all(root).length).toBe(count);
+  layer.destroy();
+});
 const sprite = { url: '/marker.png', index: 0, count: 1, size: 16 };
 const presentation = {
   projection: { model: 'css-perspective-shared-with-sky', cssPerspective: '86.60254037844386cqw' },
@@ -87,6 +109,22 @@ function mount(scale: number, requestPublication?: () => boolean) {
   mounted.set(layer.root as unknown as FakeElement, layer);
   return layer.root as unknown as FakeElement;
 }
+
+test('open world trajectories validate their epoch vertex and never accept a closing weight', () => {
+  const original = plan(1), body = original.bodies[0]!;
+  const verticesM = [[-100, -50, 0], [-50, -30, 0], [0, -10, 0], [100, 0, 0],
+    [150, 20, 0], [200, 50, 0], [250, 90, 0], [300, 140, 0]];
+  const orbit = { centerBodyId: 'sun', centerPositionM: [0, 0, 0], verticesM, closed: false,
+    bodyVertexIndex: 3, displayExtentAu: 600, trailModel: 'finite-open-trajectory-constant-weight',
+    trail: Array(7).fill(1), activeChords: [0, 1, 2, 3, 4, 5, 6], extentChords: [0, 3, 1, 5, 2, 4, 6] };
+  const input = { ...original, bodies: [{ ...body, orbit }, original.bodies[1]] };
+  expect(parsePreparedWorldContext(input).bodies[0]!.orbit).toEqual(orbit);
+  for (const invalid of [{ closed: true }, { bodyVertexIndex: undefined }, { bodyVertexIndex: 0 }, { bodyVertexIndex: 8 },
+    { trail: Array(8).fill(1) }, { trail: [0, 1, 1, 1, 1, 1, 1] }, { displayExtentAu: 0 },
+    { activeChords: [0, 1, 2, 3, 4, 5, 7] }]) {
+    expect(() => parsePreparedWorldContext({ ...input, bodies: [{ ...body, orbit: { ...orbit, ...invalid } }, original.bodies[1]] })).toThrow();
+  }
+});
 
 test('semantic changes invalidate worker snapshots without synchronously republishing geometry', () => {
   const request = vi.fn(() => true), root = mount(1, request), layer = mounted.get(root)!;
@@ -362,11 +400,10 @@ test('camera publication consumes interaction changes without polling retained D
 
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
-  expect(parsePreparedWorldContext(source).bodies.map(body => body.id).sort())
-    .toEqual(OBJECTS.filter(object => object.id !== 'sun' && object.worldFrame).map(object => object.id).sort());
-  const authored = JSON.parse(await readFile(new URL('../../../planets/sun/source/navigation/universe.json', import.meta.url), 'utf8')) as { bodies: { id: string }[] };
-  expect(parsePreparedWorldContext(source).bodies.map(body => body.id))
-    .toEqual(authored.bodies.map(body => body.id));
+  const { readCatalog } = await import('../../../../tools/prepare-catalog.mts');
+  const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
+    .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
+  expect(parsePreparedWorldContext(source).bodies.map(body => body.id)).toEqual(contextEntries.map(body => body.id));
   for (const body of parsePreparedWorldContext(source).bodies) {
     const frame = OBJECTS.find(object => object.id === body.id)!.worldFrame!;
     expect(body.radiusM, `${body.id} context must match the selectable detail radius`).toBe(frame.bodyRadiusM);

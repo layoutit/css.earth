@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "06dabab9dacc742e43197358968704ec1abb1149217347985e6ae48fead28efc"
+        "sha256": "c3ce055b5c5f38960edd9a879bcd23e0f060c04a029b7e2b3508ab86765739fe"
+      }
+    },
+    "catalog": {
+      "name": "Minerva",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.753464096843689,
+      "description": "Explore Minerva in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 253,
+      "context": {
+        "order": 295
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "350332d45e976c96a001222912b26bf6d14387481b7521a9e4f43f4033b7eb03"
+    "sha256": "6c6533f5765d3c6a1df1cdbafb445a2f28e94313ec9cd4784a9123a650690f41"
   }
 }

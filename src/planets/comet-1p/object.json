@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "556d240b647e2030abd3df761c8cd667a16477d7369c757a13e35f436afaee87"
+          "sha256": "5494e1f6ddce35dde8a998547dbe984691495bbe99dc42f13fc21bab4ed96c67"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "02da4652868e0da43bf05fa7f962e6439d05871501ce8b3fc641c65ded48484a"
+          "sha256": "bf88b81e1a75015c01dd98ad266f47bd029df8579738aa239cd8e4894b2812fd"
         },
         {
           "id": "title",
@@ -38,12 +38,12 @@
         {
           "id": "navigation",
           "path": "source/preparation/navigation.json",
-          "sha256": "4389852fcdfed3e07beb1979b0aed397a854e27f93977d8a4d28d299a25f93fe"
+          "sha256": "5a3880d937ea8462f398ab14892c3b1527e768e65fcfa70d1dd4e796c6582d33"
         },
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "02d3dab0ddb1c825547477af287fc0448afc7ba1a0bf64869dd24ba472f6432c"
+          "sha256": "42e44c6cad46a27c63fd3e48c82d165e81f773c376015ecfc3fabc43ce5c5851"
         },
         {
           "id": "rotation",
@@ -63,6 +63,11 @@
           "lenses": [
             {
               "id": "model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "giotto",
               "source": "content",
               "material": "lighting"
             }
@@ -110,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6b748e80cafc4d4807925a05c7f6f8c7db9c67468a643d92cc8e54e04bc5b7c5"
+        "sha256": "a7b158c8c2f9b975ef351bbb963844be812af2f13de8999d9d1cda663b3eefc2"
+      }
+    },
+    "catalog": {
+      "name": "Halley",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 17.859,
+      "description": "Explore Halley’s historical nucleus shape and Giotto–Vega photographic mosaic.",
+      "systemName": "Solar System",
+      "order": 78,
+      "context": {
+        "order": 168
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ae17f6b8f655f451d8a7e0b6cf6e389d4a321fb1997d5b9aac156b0d36c34456"
+    "sha256": "5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7"
   }
 }

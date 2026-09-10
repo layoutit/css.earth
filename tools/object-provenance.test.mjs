@@ -4,9 +4,9 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { prepareObjectProvenance } from './objects/provenance.mjs';
-import { productSourceIds, validateObjectProvenance } from '../src/platform/object-provenance.mjs';
-import { provenanceIdentity } from './prepare-provenance.mjs';
+import { prepareObjectProvenance } from './objects/provenance.mts';
+import { productSourceIds, validateObjectProvenance } from '../src/platform/object-provenance.mts';
+import { provenanceIdentity } from './prepare-provenance.mts';
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const read = async path => JSON.parse(await readFile(path, 'utf8'));
@@ -69,6 +69,49 @@ test('upstream verification requests are recorded without inventing acquisition 
   const document = await prepareObjectProvenance(context);
   assert.equal(document.sources[0].acquisitionOperation, null);
   assert.deepEqual(document.sources[0].verificationOperations, [verification]);
+});
+
+test('document storage does not assign project authorship to an archive input', async t => {
+  const context = await fixture(t), path = resolve(context.source, 'manifest.json');
+  const manifest = await read(path), [observation] = manifest.inputs.splice(0, 1);
+  delete observation.id; delete observation.credit; delete observation.acquisition;
+  manifest.documents.push(observation);
+  await writeFile(path, JSON.stringify(manifest));
+  await writeFile(resolve(context.source, 'preparation/acquisition.json'), JSON.stringify({ operations: [
+    { kind: 'download', path: observation.path, url: observation.origin },
+  ] }));
+  let document = await prepareObjectProvenance(context);
+  assert.equal(document.sources[0].kind, 'source-document');
+  assert.equal(document.sources[0].id, 'source-document:observation.dat');
+  assert.equal(document.sources[0].credit, 'Credit not recorded in source manifest.');
+  assert.equal(document.sources[0].acquisition, 'Acquisition not recorded in source manifest.');
+  assert.equal(document.sources[0].acquisitionOperation.kind, 'download');
+  Object.assign(observation, { kind: 'provider-label', credit: 'Fixture mission',
+    acquisition: 'Original archive label', upstreamLineage: 'Fixture product v1' });
+  await writeFile(path, JSON.stringify(manifest));
+  document = await prepareObjectProvenance(context);
+  assert.equal(document.sources[0].kind, 'provider-label');
+  assert.equal(document.sources[0].credit, 'Fixture mission');
+  assert.equal(document.sources[0].acquisition, 'Original archive label');
+  assert.equal(document.sources[0].upstreamLineage, 'Fixture product v1');
+});
+
+test('authored records and generated intermediates retain their declared ownership', async t => {
+  const context = await fixture(t), path = resolve(context.source, 'manifest.json');
+  const manifest = await read(path), [observation] = manifest.inputs.splice(0, 1);
+  delete observation.credit; delete observation.acquisition;
+  observation.kind = 'authored-document';
+  manifest.documents.push(observation);
+  await writeFile(path, JSON.stringify(manifest));
+  assert.equal((await prepareObjectProvenance(context)).sources[0].credit, 'cssEarth contributors');
+  manifest.documents = []; manifest.generatedIntermediates.push(observation);
+  delete observation.kind;
+  Object.assign(observation, { generator: 'fixture converter', credit: 'Fixture archive; conversion by fixture author' });
+  await writeFile(path, JSON.stringify(manifest));
+  const source = (await prepareObjectProvenance(context)).sources[0];
+  assert.equal(source.kind, 'generated-intermediate');
+  assert.equal(source.acquisition, 'fixture converter');
+  assert.equal(source.credit, observation.credit);
 });
 
 test('changed output bytes invalidate a prepared record', async t => {

@@ -21,10 +21,14 @@
       "expectedBytes": 789926,
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
       }
     },
     {
@@ -45,10 +49,14 @@
       "expectedBytes": 1045440,
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
+          }
+        ]
       }
     },
     {
@@ -69,10 +77,14 @@
       "expectedBytes": 1045440,
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits"
+          }
+        ]
       }
     },
     {
@@ -108,68 +120,6 @@
         "lenses"
       ],
       "expectedBytes": 338632,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
-    },
-    {
-      "id": "jpl-neptune-discovery-table",
-      "path": "jpl/discovery.html",
-      "expectedSha256": "4836d801269036704bcc685000d198d92a3eb36dc9622b298b3e7c94d8c0daa5",
-      "origin": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-      "credit": "NASA/JPL Solar System Dynamics",
-      "license": "NASA/JPL United States government data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked public factual table",
-      "consumers": [
-        "moons",
-        "panel"
-      ],
-      "expectedBytes": 116148,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
-    },
-    {
-      "id": "jpl-neptune-mean-elements",
-      "path": "jpl/elements.html",
-      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
-      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "credit": "NASA/JPL Solar System Dynamics",
-      "license": "NASA/JPL United States government data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked public factual table",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 418952,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
-    },
-    {
-      "id": "jpl-neptune-physical-parameters",
-      "path": "jpl/physical.html",
-      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
-      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "credit": "NASA/JPL Solar System Dynamics",
-      "license": "NASA/JPL United States government data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked public factual table",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 84633,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
-    },
-    {
-      "id": "pds-neptune-ring-table",
-      "path": "pds/neptune-rings.html",
-      "expectedSha256": "bf12c609c781da68134e7bb3b4eabe9dfe3656382103e47447796bc1f3b537d8",
-      "origin": "https://pds-rings.seti.org/neptune/neptune_tables.html",
-      "credit": "NASA PDS Rings Node, SETI Institute",
-      "license": "public NASA Planetary Data System scientific data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked public factual table",
-      "consumers": [
-        "rings",
-        "panel"
-      ],
-      "expectedBytes": 14304,
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
     },
     {
@@ -335,8 +285,8 @@
     {
       "id": "neptune-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 3791,
-      "expectedSha256": "fee3c1d33b6cb97a068942ef53ae26cd15f48e89bf3ae25ed4067315a0d36ea7",
+      "expectedBytes": 3378,
+      "expectedSha256": "177e3fdc36690fe70646f7b68a8375a8a5ac391402b07fbc11f4f4306a72f464",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -503,8 +453,8 @@
     {
       "id": "neptune-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3753,
-      "expectedSha256": "2533634cfe016f466a29490ba0d394ec723e1bbddc2b4c74bcf18317a27401c3",
+      "expectedBytes": 3019,
+      "expectedSha256": "22b65e4b3ae72156ea64c98ba71d3d8ef347537e05d2ef6ba8bcfc1cccdfa0a2",
       "origin": "Checked source restoration and verification operations",
       "credit": "cssEarth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",
@@ -535,6 +485,12 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1340,
       "expectedSha256": "f44e1f69eadcbc9d132e594f75013934416a5044bf5b71b120fb191d72c05c6f"
+    },
+    {
+      "path": "presentation/overview.json",
+      "expectedBytes": 39,
+      "expectedSha256": "7f08503fc83aac60a0584ca706b5b6cb4868c9f20d2743cca87426f6772163d2",
+      "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
     }
   ]
 }

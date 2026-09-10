@@ -15,22 +15,33 @@
     "reportMissingPixels": true,
     "observations": [
       {
-        "id": "model",
+        "id": "giotto",
         "validity": {
           "kind": "image-rgb-no-data",
-          "noData": null,
+          "noData": 0,
           "centerLongitude": 180
         },
         "metadata": {
-          "label": "Historical model",
-          "modeled": true,
-          "coverage": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
+          "label": "Giotto + Vega",
+          "coverage": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid."
+        },
+        "focus": {
+          "longitudeDegrees": 196,
+          "latitudeDegrees": -15,
+          "zoom": 1.1
         }
       }
     ],
     "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "mosaics": [],
+    "shapeViews": [
+      {
+        "id": "model",
+        "consumer": "shape",
+        "label": "Historical model"
+      }
+    ]
   },
   "lighting": {
     "frameSize": 512,
@@ -102,7 +113,8 @@
             ],
             "weight": 0.24
           }
-        ]
+        ],
+        "uniformFlood": true
       }
     }
   },

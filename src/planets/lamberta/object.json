@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "a6d374a4fb5bc89a043e45dd6263805a192f0240cb952a7becf2dd3c83981eb8"
+          "sha256": "073cb3ffce2e2d99583ba194e0f3172b82e6075e273a97dc58cbb42c5ebe4d04"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d6fba2e876c93acaab902c76cf134ecfff279fc840a6fda1a1d9a87239b4c114"
+        "sha256": "3cf40ca05a274fe8b9080f522c38ef11ae1af37a5eb2cd770ea6fae26bfeddbd"
+      }
+    },
+    "catalog": {
+      "name": "Lamberta",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7320569169080615,
+      "description": "Explore Lamberta in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 305,
+      "context": {
+        "order": 351
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0707f84c98e60519d49dda9e4df48307a402c09b66f161e3d0db4e9a29fc0223"
+    "sha256": "a45e262fda8d9090c55ea99cbfc2d4fc32c6a0c08b68903adc7f1ded59a45708"
   }
 }

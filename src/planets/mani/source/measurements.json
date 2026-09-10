@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-09",
+  "periodHours": null,
+  "population": "Trans-Neptunian object",
+  "surfaceMeaning": "Standard grid on a source-informed shape model; no resolved global surface map.",
+  "id": "mani",
+  "name": "Máni",
+  "aliases": [
+    "Mani",
+    "307261 Mani",
+    "2002 MS4",
+    "2002 MS₄"
+  ],
+  "horizons": "307261;",
+  "fullAxesKm": [
+    824,
+    824,
+    770
+  ],
+  "radiusKm": 402.7959116616533,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "source": "https://arxiv.org/abs/2308.08062",
+  "credit": "Rommel et al. (2023), A&A 678, A167; nine stellar-occultation campaigns",
+  "shapeMeaning": "Silhouette-constrained oblate approximation: the observed 824 × 770 km projected ellipse is represented by full axes 824 × 824 × 770 km. The equal equatorial depth and equator-on interpretation are assumptions; true flattening may be larger.",
+  "orientationMeaning": "Illustrative pole RA 0°, declination 90° and arbitrary meridian; the occultation position angle does not determine an inertial spin pole.",
+  "periodText": "Unresolved; published alternatives include 7.33 and 10.44 hours",
+  "introduction": "Formerly 2002 MS4, Máni has an outline measured through many stellar occultations. One event revealed a large depression along its edge, but its global terrain and three-dimensional shape remain unresolved.",
+  "papers": [
+    "https://doi.org/10.1051/0004-6361/202346892",
+    "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_011.pdf"
+  ],
+  "numericEvidence": {
+    "section": "Rommel et al. (2023), 2020 August 8 ellipse fit and section 4",
+    "projectedSemiAxesKm": [
+      412,
+      385
+    ],
+    "projectedSemiAxisErrorsKm": [
+      10,
+      17
+    ],
+    "projectedAreaEquivalentRadiusKm": 398,
+    "projectedAreaEquivalentRadiusErrorKm": 12,
+    "axisOrdering": "The two equal 824 km full axes are the assumed equator; the 770 km full axis is the minimum-flattening polar interpretation of the projected limb.",
+    "radiusFormula": "cbrt(412 * 412 * 385); model volume radius, distinct from the measured area-equivalent radius 398 km",
+    "namingReference": "WGSBN Bulletin 5(11), 2025 June 9, page 13: (307261) Máni = 2002 MS4"
+  },
+  "unresolved": [
+    "The occultations measure projected limbs, not depth; true oblateness and spin pole remain unresolved.",
+    "Observed limb depressions are not a global elevation map and are not extruded around the model.",
+    "Rotational period alternatives and doubled aliases are unresolved."
+  ],
+  "sourceSurvey": [
+    {
+      "url": "https://arxiv.org/abs/2308.08062",
+      "provides": "Measured elliptical silhouette and local limb features",
+      "disposition": "included",
+      "reason": "Numeric silhouette anchors the smooth assumed-depth model. No crater or limb-feature extrusion."
+    },
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202346892",
+      "provides": "Same study’s thermal-size comparison and preference for an oblate interpretation",
+      "disposition": "included-as-context",
+      "reason": "Thermal size is not substituted for the directly observed outline; the pole and true flattening remain undetermined."
+    },
+    {
+      "url": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_011.pdf",
+      "provides": "Official name assignment",
+      "disposition": "included",
+      "reason": "Use current name Máni while preserving the provisional designation as a search alias."
+    }
+  ],
+  "referenceFiles": [
+    "ms4-rommel-2023.html",
+    "mani-wgsbn-2025-011.pdf"
+  ],
+  "radiusMeaning": "Volume-equivalent radius of the selected displayed model; not an independently measured mean radius.",
+  "reuse": "Numeric measurements and authored interpretation with primary citations. Downloaded papers are local research references, not surface assets.",
+  "distanceAu": 45.97552197787258,
+  "classification": "trans-neptunian",
+  "shapeLabel": "Occultation-constrained approximation",
+  "references": [
+    {
+      "sourceUrl": "https://arxiv.org/html/2308.08062",
+      "resolvedUrl": "https://arxiv.org/html/2308.08062",
+      "retrievedAt": "2026-09-10T02:41:17.000941+00:00",
+      "url": "https://arxiv.org/html/2308.08062"
+    },
+    {
+      "file": "mani-wgsbn-2025-011.pdf",
+      "sourceUrl": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_011.pdf",
+      "resolvedUrl": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_011.pdf",
+      "bytes": 477754,
+      "sha256": "f824fe6e69e4edf29d040b26b017eed46d00be58ef20fb4e9453a599f394b7ce",
+      "retrievedAt": "2026-09-10T02:41:21.971324+00:00",
+      "url": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_011.pdf"
+    }
+  ],
+  "survey": [
+    "Included: Measured elliptical silhouette and local limb features Numeric silhouette anchors the smooth assumed-depth model. No crater or limb-feature extrusion. https://arxiv.org/abs/2308.08062",
+    "Included-as-context: Same study’s thermal-size comparison and preference for an oblate interpretation Thermal size is not substituted for the directly observed outline; the pole and true flattening remain undetermined. https://doi.org/10.1051/0004-6361/202346892",
+    "Included: Official name assignment Use current name Máni while preserving the provisional designation as a search alias. https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_011.pdf"
+  ]
+}

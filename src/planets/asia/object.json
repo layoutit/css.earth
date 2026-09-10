@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "08257f1ef49ceb8bc4476465dac817c2d9d69bdba3b8cf42658d4db6161a9a39"
+        "sha256": "624763088fc2d84ad79d8f9b99a06f8c3aeabacb44396115f19651093bbf699f"
+      }
+    },
+    "catalog": {
+      "name": "Asia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4209257475173156,
+      "description": "Explore Asia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 238,
+      "context": {
+        "order": 280
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c1b05bd18af6d396b9095ea109f2619f806a07c3bed5f250b47e3039ba10c473"
+    "sha256": "2bf49c08b1f0d3a00c2df5a195b27f29868f7566e42cffefc359caf28d072740"
   }
 }

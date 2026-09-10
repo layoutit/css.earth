@@ -26,7 +26,7 @@
         {
           "id": "paged-ellipsoid",
           "path": "source/preparation/paged-ellipsoid.json",
-          "sha256": "7c7de1182eb70fc8bcaa3532fe8916763cd48de23aaf297d0b20abeff67db2fd"
+          "sha256": "3644c336b0dab1d58934826b3195bf01858c537463f0b3d477ed7606869a0e7f"
         },
         {
           "id": "celestial",
@@ -61,7 +61,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "249bb925d410e70c18e4cf267eeba6564ec6acc01ea808d7e39b44936bd3941d"
+          "sha256": "fa50032aeddf5cc08467deab029c40cab14ce15bbd04d297cb6f0bb40239fc3a"
         },
         {
           "id": "mantle-tomography",
@@ -174,6 +174,18 @@
       "metadata": {
         "url": "prepared/page.json",
         "sha256": "e27b84b2e9c5dcb68452848710c7454fdbfadddce9ef99601f3e5ac603c84ee0"
+      }
+    },
+    "catalog": {
+      "name": "Earth",
+      "classification": "planet",
+      "color": "#5b82a7",
+      "distanceAu": 1,
+      "description": "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.",
+      "systemName": "Solar System",
+      "order": 119,
+      "context": {
+        "order": 2
       }
     }
   },

@@ -1,0 +1,52 @@
+{
+  "id": "calypso",
+  "classification": "satellite",
+  "order": 237,
+  "physical": {
+    "name": "Calypso",
+    "horizonsCode": "614",
+    "meanRadiusKm": 10.7,
+    "gravitationalParameterKm3PerS2": 0.00024,
+    "parent": "saturn"
+  },
+  "physicalNotes": "Calypso radius: NASA profile; GM: Horizons target 614 OBJ_DATA.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "614",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 5,
+    "poleRightAscensionRad": 0.683099647076,
+    "poleDeclinationRad": 1.45980934154,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 294673.33,
+      "eccentricity": 0.000473939757,
+      "inclinationRad": 0.02576074386,
+      "ascendingNodeRad": -0.810644053132,
+      "argumentOfPeriapsisRad": 0.27922214049,
+      "meanAnomalyAtEpochRad": -24306.82151933539,
+      "meanMotionRadPerDay": 3.324840312257817,
+      "ascendingNodeRateRadPerDay": -0.003448495585932733,
+      "argumentOfPeriapsisRateRadPerDay": 0.006915134524370508
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "614",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 5,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "614",
+      "center": "500@699",
+      "range": "limited"
+    }
+  }
+}

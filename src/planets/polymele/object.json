@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "678a7d5b9472210f4f8851917b5631757cdfa559fd46e58651c5552c6c01d227"
+        "sha256": "8fd7a8cab0200a4c14b0a682666c10e3b65921e77e599be642d287c25b5c1fc0"
+      }
+    },
+    "catalog": {
+      "name": "Polymele",
+      "classification": "asteroid",
+      "color": "#a0a0a0",
+      "distanceAu": 5.191974805775306,
+      "description": "Explore Polymele, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "systemName": "Solar System",
+      "order": 18,
+      "context": {
+        "order": 253
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0d591e00605f1e6c02abf64e5c7487fbeca598ab1388b36c43155e658966a675"
+    "sha256": "208d9f82e43b6b530d47d7f042b603d4a65c15d18a92d9f4d8850d2e0103a159"
   }
 }

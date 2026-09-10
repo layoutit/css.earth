@@ -42,10 +42,14 @@
       "expectedBytes": 16897935,
       "expectedSha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa",
+            "missionId": "hayabusa",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab"
+          }
+        ]
       }
     },
     {
@@ -306,18 +310,6 @@
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 1654,
       "expectedSha256": "773fe759e079fefcaec834bcbf7326a600bee612134d0839b04f03961638e164"
-    },
-    {
-      "path": "reference/pds-data-index.html",
-      "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 2186,
-      "expectedSha256": "8cbad5242a820937ebbe50677c8368dffb62e813f03a75b239fb2283248c6d0c"
-    },
-    {
-      "path": "reference/pds-document-index.html",
-      "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 4343,
-      "expectedSha256": "6b0a73aa4fb2683adfcef80131df69e5aa37f80ccb0daf6d78bfd5761bd08f86"
     },
     {
       "path": "reference/ver128q.xml",

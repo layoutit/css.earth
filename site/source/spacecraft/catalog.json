@@ -1,775 +1,2553 @@
 {
-  "schema": "cssearth-spacecraft-catalog@1",
-  "spacecraft": [
+  "schema": "cssearth-spacecraft-catalog@2",
+  "references": [
     {
       "id": "messenger",
-      "name": "MESSENGER",
-      "sourceUrl": "https://science.nasa.gov/mission/messenger/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "MESSENGER",
-          "url": "https://science.nasa.gov/mission/messenger/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2004"
-        },
-        {
-          "label": "Ended",
-          "value": "2015",
-          "sourceUrl": "https://science.nasa.gov/mission/messenger/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/MESSENGER_mission_emblem.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:MESSENGER_mission_emblem.png",
-        "sourceSha256": "f110348ac9deaa7a8e21cb95216da6de6de7613bd9934753164e2b1334bf4ba3",
-        "sourceBytes": 4754643,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Orbited Mercury to study its geology, magnetic field, and surface composition. Its measurements also confirmed water ice in deposits near the poles."
+      "title": "MESSENGER",
+      "url": "https://science.nasa.gov/mission/messenger/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "cassini",
-      "name": "Cassini",
-      "sourceUrl": "https://science.nasa.gov/mission/cassini/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Cassini",
-          "url": "https://science.nasa.gov/mission/cassini/",
-          "detail": "NASA / ESA / ASI"
-        },
-        {
-          "label": "Launched",
-          "value": "1997"
-        },
-        {
-          "label": "Ended",
-          "value": "2017",
-          "sourceUrl": "https://science.nasa.gov/mission/cassini/grand-finale/cassini-end-of-mission-timeline/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/cassini.png",
-        "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA",
-        "kind": "icon",
-        "sourceSha256": "3466f42b90c07ba0271db0686cfd39f6e07536642e1e238516ce124d04c180f3",
-        "sourceBytes": 4243095
-      },
-      "description": "Explored Saturn, its rings, and its moons from orbit. Observations revealed methane rivers and seas on Titan and jets of ice and gas from Enceladus."
+      "title": "Cassini",
+      "url": "https://science.nasa.gov/mission/cassini/",
+      "checkedOn": "2026-09-08"
+    },
+    {
+      "id": "cassini-end",
+      "title": "Cassini: end of mission",
+      "url": "https://science.nasa.gov/mission/cassini/grand-finale/cassini-end-of-mission-timeline/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "dawn",
-      "name": "Dawn",
-      "sourceUrl": "https://science.nasa.gov/mission/dawn/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Dawn",
-          "url": "https://science.nasa.gov/mission/dawn/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2007"
-        },
-        {
-          "label": "Ended",
-          "value": "2018",
-          "sourceUrl": "https://science.nasa.gov/mission/dawn/mission-status/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Dawn_logo.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dawn_logo.png",
-        "sourceSha256": "f23ffa823e1f69ab05d281ec51c41aac0928b5d29ef3dcf0ff4ca96d941f6abb",
-        "sourceBytes": 2159257,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Visited Vesta and Ceres in the main asteroid belt, spending time in orbit around each. The two worlds offered a comparison between a giant asteroid and a dwarf planet."
+      "title": "Dawn",
+      "url": "https://science.nasa.gov/mission/dawn/",
+      "checkedOn": "2026-09-08"
+    },
+    {
+      "id": "dawn-end",
+      "title": "Dawn: end of mission",
+      "url": "https://science.nasa.gov/mission/dawn/mission-status/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "galileo",
-      "name": "Galileo",
-      "sourceUrl": "https://science.nasa.gov/mission/galileo/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Galileo",
-          "url": "https://science.nasa.gov/mission/galileo/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "1989"
-        },
-        {
-          "label": "Ended",
-          "value": "2003",
-          "sourceUrl": "https://science.nasa.gov/mission/galileo/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Galileo_mission_patch.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Galileo_mission_patch.png",
-        "sourceSha256": "a188f9dffc5f5c4c78cd57dfeaf24e79ead2e651031fa78a2105b18f0557a08a",
-        "sourceBytes": 15797,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Orbited Jupiter for almost eight years and made close passes by its major moons. Its observations provided evidence for an ocean beneath the ice on Europa."
+      "title": "Galileo",
+      "url": "https://science.nasa.gov/mission/galileo/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "hubble",
-      "name": "Hubble",
-      "sourceUrl": "https://science.nasa.gov/mission/hubble/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Hubble",
-          "url": "https://science.nasa.gov/mission/hubble/",
-          "detail": "NASA / ESA"
-        },
-        {
-          "label": "Launched",
-          "value": "1990"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/hubble/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hubble.png",
-        "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA",
-        "kind": "icon",
-        "sourceSha256": "a9ef77327e05ad881936c14939401509dc178a2953e5943f184576d6c7bedeb6",
-        "sourceBytes": 5912305
-      },
-      "description": "Observes planets, stars, and galaxies from Earth orbit in ultraviolet, visible, and near-infrared light. Its cameras record images, while its spectrographs measure light to study composition.",
-      "descriptionSourceUrl": "https://science.nasa.gov/mission/hubble/overview/about-hubble/"
+      "title": "Hubble",
+      "url": "https://science.nasa.gov/mission/hubble/",
+      "checkedOn": "2026-09-08"
+    },
+    {
+      "id": "hubble-description",
+      "title": "Hubble: mission account",
+      "url": "https://science.nasa.gov/mission/hubble/overview/about-hubble/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "juno",
-      "name": "Juno",
-      "sourceUrl": "https://science.nasa.gov/mission/juno/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Juno",
-          "url": "https://science.nasa.gov/mission/juno/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2011"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/juno/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Juno_mission_insignia.jpg",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Juno_mission_insignia.jpg",
-        "sourceSha256": "99c404414cecb0d9eeb75697f16b2ad81949ad3e5f39a94f53da11da3bb3902b",
-        "sourceBytes": 53760,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Studies Jupiter beneath its clouds to understand how the planet formed. Close passes revealed polar storms, deep winds, and volcanic activity on its moon Io."
+      "title": "Juno",
+      "url": "https://science.nasa.gov/mission/juno/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "new-horizons",
-      "name": "New Horizons",
-      "sourceUrl": "https://science.nasa.gov/mission/new-horizons/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "New Horizons",
-          "url": "https://science.nasa.gov/mission/new-horizons/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2006"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/new-horizons/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/New_Horizons_-_Logo2_big.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:New_Horizons_-_Logo2_big.png",
-        "sourceSha256": "8dd95ff0e56bbc1aa6839dc83af20f04555e11557240856f3eaeb6f0d65ad362",
-        "sourceBytes": 1069353,
-        "kind": "emblem",
-        "credit": "NASA/JPL/APL/SwRI"
-      },
-      "description": "Flew past Pluto and its moons, then continued to the Kuiper Belt object Arrokoth. These encounters provided the first close views of both distant worlds."
+      "title": "New Horizons",
+      "url": "https://science.nasa.gov/mission/new-horizons/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "sdo",
-      "name": "SDO",
-      "sourceUrl": "https://science.nasa.gov/mission/sdo/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "SDO",
-          "url": "https://science.nasa.gov/mission/sdo/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2010"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/sdo/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Solar_Dynamics_Observatory_insignia.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Solar_Dynamics_Observatory_insignia.png",
-        "sourceSha256": "c38e61ee80dbfdfef5875ba3d1bf152c137407e7019bb9e3785b9a657a02ff80",
-        "sourceBytes": 2051141,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Monitors the Sun’s interior, atmosphere, magnetic field, and energy output. These observations help explain how solar activity develops and how it drives changes in space weather."
+      "title": "SDO",
+      "url": "https://science.nasa.gov/mission/sdo/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "voyager-1",
-      "name": "Voyager 1",
-      "sourceUrl": "https://science.nasa.gov/mission/voyager/voyager-1/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Voyager 1",
-          "url": "https://science.nasa.gov/mission/voyager/voyager-1/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "1977"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/voyager/voyager-1/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Voyager_-_mission_logo.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voyager_-_mission_logo.png",
-        "sourceSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
-        "sourceBytes": 108545,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Flew past Jupiter and Saturn before crossing into interstellar space. Its journey carried it beyond the heliopause, the boundary of the region dominated by the solar wind."
+      "title": "Voyager 1",
+      "url": "https://science.nasa.gov/mission/voyager/voyager-1/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "voyager-2",
-      "name": "Voyager 2",
-      "sourceUrl": "https://science.nasa.gov/mission/voyager/voyager-2/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Voyager 2",
-          "url": "https://science.nasa.gov/mission/voyager/voyager-2/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "1977"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/voyager/voyager-2/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Voyager_-_mission_logo.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voyager_-_mission_logo.png",
-        "sourceSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
-        "sourceBytes": 108545,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Explored Jupiter and Saturn, then continued to Uranus and Neptune. It became the only spacecraft to visit those two planets before entering interstellar space in 2018."
+      "title": "Voyager 2",
+      "url": "https://science.nasa.gov/mission/voyager/voyager-2/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "lro",
-      "name": "Lunar Reconnaissance Orbiter",
-      "sourceUrl": "https://science.nasa.gov/mission/lro/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Lunar Reconnaissance Orbiter",
-          "url": "https://science.nasa.gov/mission/lro/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2009"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/lro/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/LRO_mission_logo_%28transparent_background%29_01.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:LRO_mission_logo_(transparent_background)_01.png",
-        "sourceSha256": "26fc61ffad652b18a256d3b91d2425442ac3f9aa5805761801fa988d77c9db8a",
-        "sourceBytes": 2028960,
-        "kind": "emblem",
-        "credit": "National Aeronautics and Space Administration   http://lro.gsfc.nasa.gov/gallery-media.html >"
-      },
-      "description": "Maps the Moon’s terrain and measures its temperature, composition, and radiation environment. The observations help identify landing sites and locate resources near the lunar south pole."
-    },
-    {
-      "id": "grail",
-      "name": "GRAIL · Ebb & Flow",
-      "sourceUrl": "https://science.nasa.gov/mission/grail/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "GRAIL · Ebb & Flow",
-          "url": "https://science.nasa.gov/mission/grail/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2011"
-        },
-        {
-          "label": "Ended",
-          "value": "2012",
-          "sourceUrl": "https://science.nasa.gov/mission/grail/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/GRAIL_-_GRAIL-logo-sm.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:GRAIL_-_GRAIL-logo-sm.png",
-        "sourceSha256": "dae76b78ac8a15f72b880bb9794fdfacf0f1b167e001f0b6b3654a8a3a2a7841",
-        "sourceBytes": 465402,
-        "kind": "emblem",
-        "credit": "NASA/JPL/Corby Waste"
-      },
-      "description": "Two probes, Ebb and Flow, flew around the Moon together. Changes in their separation measured variations in lunar gravity, helping scientists determine the Moon’s internal structure."
-    },
-    {
-      "id": "viking",
-      "name": "Viking orbiters",
-      "sourceUrl": "https://science.nasa.gov/mission/viking/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Viking orbiters",
-          "url": "https://science.nasa.gov/mission/viking/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "1975"
-        },
-        {
-          "label": "Ended",
-          "value": "1980",
-          "sourceUrl": "https://science.nasa.gov/mission/viking/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg",
-        "sourceSha256": "ddc9ba676f17dc2899295a76f0a93015ec972eee156891f0b43bc468e1c10714",
-        "sourceBytes": 1924048,
-        "kind": "emblem",
-        "credit": "THIS LOGO IS IN THE NASA PUBLIC DOMAIN"
-      },
-      "description": "Sent two orbiters and two landers to Mars. The landers returned images from the surface, beginning a program of close observation that later Mars missions built on."
+      "title": "Lunar Reconnaissance Orbiter",
+      "url": "https://science.nasa.gov/mission/lro/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "mro",
-      "name": "Mars Reconnaissance Orbiter",
-      "sourceUrl": "https://science.nasa.gov/mission/mars-reconnaissance-orbiter/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Mars Reconnaissance Orbiter",
-          "url": "https://science.nasa.gov/mission/mars-reconnaissance-orbiter/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2005"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/mars-reconnaissance-orbiter/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Mars_Reconnaissance_Orbiter_insignia.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mars_Reconnaissance_Orbiter_insignia.png",
-        "sourceSha256": "05a7052993d547de48731d9ac0cb1e8c1eed48e2bd7d91fac975b5bf28b9b414",
-        "sourceBytes": 129628,
-        "kind": "emblem",
-        "credit": "National Aeronautics and Space Administration (NASA)  /  Jet Propulsion Laboratory"
-      },
-      "description": "Examines the history of water on Mars using close surface images, mineral measurements, and subsurface observations. It also monitors the atmosphere and helps identify potential landing sites."
+      "title": "Mars Reconnaissance Orbiter",
+      "url": "https://science.nasa.gov/mission/mars-reconnaissance-orbiter/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "odyssey",
-      "name": "Mars Odyssey",
-      "sourceUrl": "https://science.nasa.gov/mission/odyssey/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Mars Odyssey",
-          "url": "https://science.nasa.gov/mission/odyssey/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2001"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/odyssey/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Mars_Odyssey-2.png",
-        "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA",
-        "kind": "icon",
-        "sourceSha256": "ccebe04bf13fa1d7c5c8c517cd1a20f7f2d6025a08c5f2d1f8b9092c977c7179",
-        "sourceBytes": 2722477
-      },
-      "description": "Mapped the chemical elements and minerals on the Martian surface. Its observations also record clouds, fog, frost, and surface rocks to support the study and exploration of Mars."
+      "title": "Mars Odyssey",
+      "url": "https://science.nasa.gov/mission/odyssey/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "near-shoemaker",
-      "name": "NEAR Shoemaker",
-      "sourceUrl": "https://science.nasa.gov/mission/near-shoemaker/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "NEAR Shoemaker",
-          "url": "https://science.nasa.gov/mission/near-shoemaker/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "1996"
-        },
-        {
-          "label": "Ended",
-          "value": "2001",
-          "sourceUrl": "https://science.nasa.gov/mission/near-shoemaker/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/near.png",
-        "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA",
-        "kind": "icon",
-        "sourceSha256": "e7e762caa1a1ee193015542d5b9139702c6d99080ac9edc5eb5bec919b5f3e41",
-        "sourceBytes": 156205
-      },
-      "description": "Became the first spacecraft to orbit an asteroid when it reached Eros. After a year of observations, it touched down on the surface, also making the first asteroid landing."
+      "title": "NEAR Shoemaker",
+      "url": "https://science.nasa.gov/mission/near-shoemaker/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "osiris-rex",
-      "name": "OSIRIS-REx",
-      "sourceUrl": "https://science.nasa.gov/mission/osiris-rex/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "OSIRIS-REx",
-          "url": "https://science.nasa.gov/mission/osiris-rex/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "2016"
-        },
-        {
-          "label": "Status",
-          "value": "Active as APEX",
-          "sourceUrl": "https://science.nasa.gov/mission/osiris-rex/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/OSIRIS-REx_Mission_Logo.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:OSIRIS-REx_Mission_Logo.png",
-        "sourceSha256": "027fb2600a23395b4286c8005ce46c97a8ca352dbfa6a7ed5ef5cc0379bc6743",
-        "sourceBytes": 447581,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Collected rocks and dust from asteroid Bennu and delivered them to Earth in a capsule. The spacecraft then continued toward Apophis under the new mission name OSIRIS-APEX."
+      "title": "OSIRIS-REx",
+      "url": "https://science.nasa.gov/mission/osiris-rex/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "hayabusa2",
-      "name": "Hayabusa2",
-      "sourceUrl": "https://global.jaxa.jp/projects/sas/hayabusa2/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Hayabusa2",
-          "url": "https://global.jaxa.jp/projects/sas/hayabusa2/",
-          "detail": "JAXA"
-        },
-        {
-          "label": "Launched",
-          "value": "2014"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://www.hayabusa2.jaxa.jp/en/topics/20220629_logo_e/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_2.png",
-        "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA",
-        "kind": "icon",
-        "sourceSha256": "b3f9dfce8e1a3ab7f4b9f5ad252ff42ca225d3ef2838c52b99131da4fe080386",
-        "sourceBytes": 1195703
-      },
-      "description": "Collected material from the surface and subsurface of asteroid Ryugu. It returned the samples to Earth in a capsule, allowing researchers to study them in laboratories."
+      "title": "Hayabusa2",
+      "url": "https://global.jaxa.jp/projects/sas/hayabusa2/",
+      "checkedOn": "2026-09-08"
+    },
+    {
+      "id": "hayabusa2-status",
+      "title": "Hayabusa2: mission status",
+      "url": "https://www.hayabusa2.jaxa.jp/en/topics/20220629_logo_e/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "hayabusa",
-      "name": "Hayabusa",
-      "sourceUrl": "https://global.jaxa.jp/projects/sas/muses_c/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Hayabusa",
-          "url": "https://global.jaxa.jp/projects/sas/muses_c/",
-          "detail": "JAXA"
-        },
-        {
-          "label": "Launched",
-          "value": "2003"
-        },
-        {
-          "label": "Ended",
-          "value": "2010",
-          "sourceUrl": "https://www.isas.jaxa.jp/e/topics/2010/0614.shtml",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_1.png",
-        "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA",
-        "kind": "icon",
-        "sourceSha256": "1f6aed2ace5cc97fc65e3cc091431be85b8564c75bec42dc0c3ea72273f046a1",
-        "sourceBytes": 393166
-      },
-      "description": "Traveled to asteroid Itokawa to collect material and return it to Earth. The recovered capsule carried rocky grains that could be examined directly in laboratories.",
-      "descriptionSourceUrl": "https://darts.isas.jaxa.jp/en/missions/hayabusa"
+      "title": "Hayabusa",
+      "url": "https://global.jaxa.jp/projects/sas/muses_c/",
+      "checkedOn": "2026-09-08"
+    },
+    {
+      "id": "hayabusa-description",
+      "title": "Hayabusa: mission account",
+      "url": "https://darts.isas.jaxa.jp/en/missions/hayabusa",
+      "checkedOn": "2026-09-08"
+    },
+    {
+      "id": "hayabusa-end",
+      "title": "Hayabusa: end of mission",
+      "url": "https://www.isas.jaxa.jp/e/topics/2010/0614.shtml",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "rosetta",
-      "name": "Rosetta",
-      "sourceUrl": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_factsheet",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Rosetta",
-          "url": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_factsheet",
-          "detail": "ESA"
-        },
-        {
-          "label": "Launched",
-          "value": "2004"
-        },
-        {
-          "label": "Ended",
-          "value": "2016",
-          "sourceUrl": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_factsheet",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/rosetta.png",
-        "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA",
-        "kind": "icon",
-        "sourceSha256": "faa3d7e0c36462f0c997a4dee9b990fd71a6d67944849486e028a5a428c20a5c",
-        "sourceBytes": 3567990
-      },
-      "description": "Followed comet 67P/Churyumov–Gerasimenko to study its nucleus and surrounding environment. It also delivered the Philae probe to the surface during its stay at the comet."
+      "title": "Rosetta",
+      "url": "https://www.esa.int/Science_Exploration/Space_Science/Rosetta/Rosetta_factsheet",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "terra",
-      "name": "Terra",
-      "sourceUrl": "https://science.nasa.gov/mission/terra/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Terra",
-          "url": "https://science.nasa.gov/mission/terra/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "1999"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/terra/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Terra_logo.png",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Terra_logo.png",
-        "sourceSha256": "3853ec2ec5cda451b46a2844941de323892324a65794022b0ec6d443d570df85",
-        "sourceBytes": 1189300,
-        "kind": "emblem",
-        "credit": "NASA"
-      },
-      "description": "Measures interactions between Earth’s land, oceans, atmosphere, and energy balance. Its observations track environmental change and help study natural hazards such as fires and volcanic activity."
+      "title": "Terra",
+      "url": "https://science.nasa.gov/mission/terra/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "suomi-npp",
-      "name": "Suomi NPP",
-      "sourceUrl": "https://science.nasa.gov/mission/suomi-npp/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Suomi NPP",
-          "url": "https://science.nasa.gov/mission/suomi-npp/",
-          "detail": "NASA / NOAA"
-        },
-        {
-          "label": "Launched",
-          "value": "2011"
-        },
-        {
-          "label": "Status",
-          "value": "Active",
-          "sourceUrl": "https://science.nasa.gov/mission/suomi-npp/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Suomi_NPP-2.png",
-        "sourceUrl": "https://science.nasa.gov/multimedia/spacecraft-icons/",
-        "credit": "NASA",
-        "kind": "icon",
-        "sourceSha256": "931bba8f7ba9f8136d23e31fcff30be80c0bcc74cc72a36761d84642c80cc204",
-        "sourceBytes": 4114140
-      },
-      "description": "Observes clouds, oceans, vegetation, ice, land, and the atmosphere from Earth orbit. The measurements support studies of daily weather conditions and changes in climate over longer periods."
+      "title": "Suomi NPP",
+      "url": "https://science.nasa.gov/mission/suomi-npp/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "magellan",
-      "name": "Magellan",
-      "sourceUrl": "https://science.nasa.gov/mission/magellan/",
-      "facts": [
-        {
-          "label": "Mission",
-          "value": "Magellan",
-          "url": "https://science.nasa.gov/mission/magellan/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "1989"
-        },
-        {
-          "label": "Ended",
-          "value": "1994",
-          "sourceUrl": "https://science.nasa.gov/mission/magellan/",
-          "checked": "2026-09-08"
-        }
-      ],
-      "image": {
-        "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia18/pia18175/PIA18175.jpg",
-        "sourceUrl": "https://science.nasa.gov/photojournal/magellan-orbit-artists-concept/",
-        "credit": "NASA/JPL-Caltech",
-        "kind": "illustration",
-        "sourceSha256": "90b9c7a65a85bf05e3bb8f9df5d021908382650ff3ea1facffc97e95dbdfb454",
-        "sourceBytes": 84026
-      },
-      "description": "Used radar to map the surface of Venus from orbit. Its observations covered almost the entire planet, revealing terrain hidden beneath the thick cloud cover."
+      "title": "Magellan",
+      "url": "https://science.nasa.gov/mission/magellan/",
+      "checkedOn": "2026-09-08"
     },
     {
       "id": "mars-global-surveyor",
-      "name": "Mars Global Surveyor",
-      "sourceUrl": "https://science.nasa.gov/mission/mars-global-surveyor/",
-      "facts": [
+      "title": "Mars Global Surveyor",
+      "url": "https://science.nasa.gov/mission/mars-global-surveyor/",
+      "checkedOn": "2026-09-08"
+    },
+    {
+      "id": "viking-1",
+      "title": "NASA Viking 1",
+      "url": "https://science.nasa.gov/mission/viking-1/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "viking-2",
+      "title": "NASA Viking 2",
+      "url": "https://science.nasa.gov/mission/viking-2/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "grail",
+      "title": "NASA GRAIL",
+      "url": "https://science.nasa.gov/mission/grail/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "osiris-transition",
+      "title": "NASA: OSIRIS-REx spacecraft departs for a new mission",
+      "url": "https://science.nasa.gov/blogs/osiris-rex/2023/09/24/osiris-rex-spacecraft-departs-for-new-mission/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "huygens",
+      "title": "NASA: Huygens probe",
+      "url": "https://science.nasa.gov/mission/cassini/spacecraft/huygens-probe/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "minerva",
+      "title": "ISAS: MINERVA explores the surface of Itokawa",
+      "url": "https://www.isas.jaxa.jp/e/snews/2005/1103.shtml",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "minerva-ii1",
+      "title": "JAXA: The small exploration rovers, MINERVA-II1",
+      "url": "https://www.hayabusa2.jaxa.jp/en/topics/20180919e/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "minerva-ii2",
+      "title": "JAXA: MINERVA-II2 (Rover2) separation operation",
+      "url": "https://www.hayabusa2.jaxa.jp/en/topics/20191001e_MNRVII2/",
+      "checkedOn": "2026-09-10"
+    },
+    {
+      "id": "mascot",
+      "title": "JAXA: The small asteroid lander, MASCOT",
+      "url": "https://www.hayabusa2.jaxa.jp/en/topics/20181002e_MSC/",
+      "checkedOn": "2026-09-10"
+    }
+  ],
+  "spacecraft": [
+    {
+      "id": "messenger",
+      "name": {
+        "value": "MESSENGER",
+        "referenceIds": [
+          "messenger"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Orbited Mercury to study its geology, magnetic field, and surface composition. Its measurements also confirmed water ice in deposits near the poles.",
+        "referenceIds": [
+          "messenger"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "messenger"
+        ]
+      },
+      "launch": {
+        "value": "2004",
+        "referenceIds": [
+          "messenger"
+        ]
+      },
+      "imageId": "messenger"
+    },
+    {
+      "id": "cassini",
+      "name": {
+        "value": "Cassini",
+        "referenceIds": [
+          "cassini"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Explored Saturn, its rings, and its moons from orbit. Observations revealed methane rivers and seas on Titan and jets of ice and gas from Enceladus.",
+        "referenceIds": [
+          "cassini"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "cassini"
+        ]
+      },
+      "launch": {
+        "value": "1997",
+        "referenceIds": [
+          "cassini"
+        ]
+      },
+      "imageId": "cassini"
+    },
+    {
+      "id": "dawn",
+      "name": {
+        "value": "Dawn",
+        "referenceIds": [
+          "dawn"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Visited Vesta and Ceres in the main asteroid belt, spending time in orbit around each. The two worlds offered a comparison between a giant asteroid and a dwarf planet.",
+        "referenceIds": [
+          "dawn"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "dawn"
+        ]
+      },
+      "launch": {
+        "value": "2007",
+        "referenceIds": [
+          "dawn"
+        ]
+      },
+      "imageId": "dawn"
+    },
+    {
+      "id": "galileo",
+      "name": {
+        "value": "Galileo",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Orbited Jupiter for almost eight years and made close passes by its major moons. Its observations provided evidence for an ocean beneath the ice on Europa.",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "launch": {
+        "value": "1989",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "imageId": "galileo"
+    },
+    {
+      "id": "hubble",
+      "name": {
+        "value": "Hubble",
+        "referenceIds": [
+          "hubble"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Observes planets, stars, and galaxies from Earth orbit in ultraviolet, visible, and near-infrared light. Its cameras record images, while its spectrographs measure light to study composition.",
+        "referenceIds": [
+          "hubble-description"
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "referenceIds": [
+          "hubble"
+        ]
+      },
+      "launch": {
+        "value": "1990",
+        "referenceIds": [
+          "hubble"
+        ]
+      },
+      "imageId": "hubble"
+    },
+    {
+      "id": "juno",
+      "name": {
+        "value": "Juno",
+        "referenceIds": [
+          "juno"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Studies Jupiter beneath its clouds to understand how the planet formed. Close passes revealed polar storms, deep winds, and volcanic activity on its moon Io.",
+        "referenceIds": [
+          "juno"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "juno"
+        ]
+      },
+      "launch": {
+        "value": "2011",
+        "referenceIds": [
+          "juno"
+        ]
+      },
+      "imageId": "juno"
+    },
+    {
+      "id": "new-horizons",
+      "name": {
+        "value": "New Horizons",
+        "referenceIds": [
+          "new-horizons"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Flew past Pluto and its moons, then continued to the Kuiper Belt object Arrokoth. These encounters provided the first close views of both distant worlds.",
+        "referenceIds": [
+          "new-horizons"
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "referenceIds": [
+          "new-horizons"
+        ]
+      },
+      "launch": {
+        "value": "2006",
+        "referenceIds": [
+          "new-horizons"
+        ]
+      },
+      "imageId": "new-horizons"
+    },
+    {
+      "id": "sdo",
+      "name": {
+        "value": "SDO",
+        "referenceIds": [
+          "sdo"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Monitors the Sun’s interior, atmosphere, magnetic field, and energy output. These observations help explain how solar activity develops and how it drives changes in space weather.",
+        "referenceIds": [
+          "sdo"
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "referenceIds": [
+          "sdo"
+        ]
+      },
+      "launch": {
+        "value": "2010",
+        "referenceIds": [
+          "sdo"
+        ]
+      },
+      "imageId": "sdo"
+    },
+    {
+      "id": "voyager-1",
+      "name": {
+        "value": "Voyager 1",
+        "referenceIds": [
+          "voyager-1"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Flew past Jupiter and Saturn before crossing into interstellar space. Its journey carried it beyond the heliopause, the boundary of the region dominated by the solar wind.",
+        "referenceIds": [
+          "voyager-1"
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "referenceIds": [
+          "voyager-1"
+        ]
+      },
+      "launch": {
+        "value": "1977",
+        "referenceIds": [
+          "voyager-1"
+        ]
+      },
+      "imageId": "voyager-1"
+    },
+    {
+      "id": "voyager-2",
+      "name": {
+        "value": "Voyager 2",
+        "referenceIds": [
+          "voyager-2"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Explored Jupiter and Saturn, then continued to Uranus and Neptune. It became the only spacecraft to visit those two planets before entering interstellar space in 2018.",
+        "referenceIds": [
+          "voyager-2"
+        ]
+      },
+      "kind": {
+        "value": "flyby",
+        "referenceIds": [
+          "voyager-2"
+        ]
+      },
+      "launch": {
+        "value": "1977",
+        "referenceIds": [
+          "voyager-2"
+        ]
+      },
+      "imageId": "voyager-2"
+    },
+    {
+      "id": "lro",
+      "name": {
+        "value": "Lunar Reconnaissance Orbiter",
+        "referenceIds": [
+          "lro"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Maps the Moon’s terrain and measures its temperature, composition, and radiation environment. The observations help identify landing sites and locate resources near the lunar south pole.",
+        "referenceIds": [
+          "lro"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "lro"
+        ]
+      },
+      "launch": {
+        "value": "2009",
+        "referenceIds": [
+          "lro"
+        ]
+      },
+      "imageId": "lro"
+    },
+    {
+      "id": "mro",
+      "name": {
+        "value": "Mars Reconnaissance Orbiter",
+        "referenceIds": [
+          "mro"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Examines the history of water on Mars using close surface images, mineral measurements, and subsurface observations. It also monitors the atmosphere and helps identify potential landing sites.",
+        "referenceIds": [
+          "mro"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "mro"
+        ]
+      },
+      "launch": {
+        "value": "2005",
+        "referenceIds": [
+          "mro"
+        ]
+      },
+      "imageId": "mro"
+    },
+    {
+      "id": "odyssey",
+      "name": {
+        "value": "Mars Odyssey",
+        "referenceIds": [
+          "odyssey"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Mapped the chemical elements and minerals on the Martian surface. Its observations also record clouds, fog, frost, and surface rocks to support the study and exploration of Mars.",
+        "referenceIds": [
+          "odyssey"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "odyssey"
+        ]
+      },
+      "launch": {
+        "value": "2001",
+        "referenceIds": [
+          "odyssey"
+        ]
+      },
+      "imageId": "odyssey"
+    },
+    {
+      "id": "near-shoemaker",
+      "name": {
+        "value": "NEAR Shoemaker",
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Became the first spacecraft to orbit an asteroid when it reached Eros. After a year of observations, it touched down on the surface, also making the first asteroid landing.",
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      },
+      "launch": {
+        "value": "1996",
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      },
+      "imageId": "near-shoemaker"
+    },
+    {
+      "id": "osiris-rex",
+      "name": {
+        "value": "OSIRIS-REx",
+        "referenceIds": [
+          "osiris-rex"
+        ]
+      },
+      "aliases": [
         {
-          "label": "Mission",
-          "value": "Mars Global Surveyor",
-          "url": "https://science.nasa.gov/mission/mars-global-surveyor/",
-          "detail": "NASA"
-        },
-        {
-          "label": "Launched",
-          "value": "1996"
-        },
-        {
-          "label": "Ended",
-          "value": "2006",
-          "sourceUrl": "https://science.nasa.gov/mission/mars-global-surveyor/",
-          "checked": "2026-09-08"
+          "value": "OSIRIS-APEX",
+          "referenceIds": [
+            "osiris-transition"
+          ]
         }
       ],
-      "image": {
-        "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia17/pia17486/PIA17486.jpg",
-        "sourceUrl": "https://science.nasa.gov/photojournal/mars-global-surveyor-artists-concept/",
-        "credit": "NASA/JPL-Caltech",
-        "kind": "illustration",
-        "sourceSha256": "876add3d1e67c7abca7a38bdcb99b133a655dd31c4318a4e9e9170be11b3de1f",
-        "sourceBytes": 4604289
+      "description": {
+        "value": "Collected rocks and dust from asteroid Bennu and delivered them to Earth in a capsule. The spacecraft then continued toward Apophis under the new mission name OSIRIS-APEX.",
+        "referenceIds": [
+          "osiris-rex"
+        ]
       },
-      "description": "Mapped Mars and studied its atmosphere, surface, and interior. It also identified potential landing sites and relayed data for later missions operating on the surface."
+      "kind": {
+        "value": "sample-return",
+        "referenceIds": [
+          "osiris-rex"
+        ]
+      },
+      "launch": {
+        "value": "2016",
+        "referenceIds": [
+          "osiris-rex"
+        ]
+      },
+      "imageId": "osiris-rex"
+    },
+    {
+      "id": "hayabusa2",
+      "name": {
+        "value": "Hayabusa2",
+        "referenceIds": [
+          "hayabusa2"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Collected material from the surface and subsurface of asteroid Ryugu. It returned the samples to Earth in a capsule, allowing researchers to study them in laboratories.",
+        "referenceIds": [
+          "hayabusa2"
+        ]
+      },
+      "kind": {
+        "value": "sample-return",
+        "referenceIds": [
+          "hayabusa2"
+        ]
+      },
+      "launch": {
+        "value": "2014",
+        "referenceIds": [
+          "hayabusa2"
+        ]
+      },
+      "imageId": "hayabusa2"
+    },
+    {
+      "id": "hayabusa",
+      "name": {
+        "value": "Hayabusa",
+        "referenceIds": [
+          "hayabusa"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Traveled to asteroid Itokawa to collect material and return it to Earth. The recovered capsule carried rocky grains that could be examined directly in laboratories.",
+        "referenceIds": [
+          "hayabusa-description"
+        ]
+      },
+      "kind": {
+        "value": "sample-return",
+        "referenceIds": [
+          "hayabusa"
+        ]
+      },
+      "launch": {
+        "value": "2003",
+        "referenceIds": [
+          "hayabusa"
+        ]
+      },
+      "imageId": "hayabusa"
+    },
+    {
+      "id": "rosetta",
+      "name": {
+        "value": "Rosetta",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Followed comet 67P/Churyumov–Gerasimenko to study its nucleus and surrounding environment. It also delivered the Philae probe to the surface during its stay at the comet.",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "launch": {
+        "value": "2004",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "imageId": "rosetta"
+    },
+    {
+      "id": "terra",
+      "name": {
+        "value": "Terra",
+        "referenceIds": [
+          "terra"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Measures interactions between Earth’s land, oceans, atmosphere, and energy balance. Its observations track environmental change and help study natural hazards such as fires and volcanic activity.",
+        "referenceIds": [
+          "terra"
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "referenceIds": [
+          "terra"
+        ]
+      },
+      "launch": {
+        "value": "1999",
+        "referenceIds": [
+          "terra"
+        ]
+      },
+      "imageId": "terra"
+    },
+    {
+      "id": "suomi-npp",
+      "name": {
+        "value": "Suomi NPP",
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Observes clouds, oceans, vegetation, ice, land, and the atmosphere from Earth orbit. The measurements support studies of daily weather conditions and changes in climate over longer periods.",
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      },
+      "kind": {
+        "value": "observatory",
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      },
+      "launch": {
+        "value": "2011",
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      },
+      "imageId": "suomi-npp"
+    },
+    {
+      "id": "magellan",
+      "name": {
+        "value": "Magellan",
+        "referenceIds": [
+          "magellan"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Used radar to map the surface of Venus from orbit. Its observations covered almost the entire planet, revealing terrain hidden beneath the thick cloud cover.",
+        "referenceIds": [
+          "magellan"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "magellan"
+        ]
+      },
+      "launch": {
+        "value": "1989",
+        "referenceIds": [
+          "magellan"
+        ]
+      },
+      "imageId": "magellan"
+    },
+    {
+      "id": "mars-global-surveyor",
+      "name": {
+        "value": "Mars Global Surveyor",
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Mapped Mars and studied its atmosphere, surface, and interior. It also identified potential landing sites and relayed data for later missions operating on the surface.",
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      },
+      "launch": {
+        "value": "1996",
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      },
+      "imageId": "mars-global-surveyor"
+    },
+    {
+      "id": "viking-1-orbiter",
+      "name": {
+        "value": "Viking 1 orbiter",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The orbiter of the Viking 1 mission to Mars.",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "launch": {
+        "value": "1975",
+        "referenceIds": [
+          "viking-1"
+        ]
+      }
+    },
+    {
+      "id": "viking-1-lander",
+      "name": {
+        "value": "Viking 1 lander",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The lander of the Viking 1 mission to Mars.",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "kind": {
+        "value": "lander",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "launch": {
+        "value": "1975",
+        "referenceIds": [
+          "viking-1"
+        ]
+      }
+    },
+    {
+      "id": "viking-2-orbiter",
+      "name": {
+        "value": "Viking 2 orbiter",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The orbiter of the Viking 2 mission to Mars.",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "launch": {
+        "value": "1975",
+        "referenceIds": [
+          "viking-2"
+        ]
+      }
+    },
+    {
+      "id": "viking-2-lander",
+      "name": {
+        "value": "Viking 2 lander",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The lander of the Viking 2 mission to Mars.",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "kind": {
+        "value": "lander",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "launch": {
+        "value": "1975",
+        "referenceIds": [
+          "viking-2"
+        ]
+      }
+    },
+    {
+      "id": "grail-a",
+      "name": {
+        "value": "GRAIL-A",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Ebb",
+          "referenceIds": [
+            "grail"
+          ]
+        }
+      ],
+      "description": {
+        "value": "Ebb was one of the two lunar gravity-mapping GRAIL spacecraft.",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "launch": {
+        "value": "2011",
+        "referenceIds": [
+          "grail"
+        ]
+      }
+    },
+    {
+      "id": "grail-b",
+      "name": {
+        "value": "GRAIL-B",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "aliases": [
+        {
+          "value": "Flow",
+          "referenceIds": [
+            "grail"
+          ]
+        }
+      ],
+      "description": {
+        "value": "Flow was one of the two lunar gravity-mapping GRAIL spacecraft.",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "kind": {
+        "value": "orbiter",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "launch": {
+        "value": "2011",
+        "referenceIds": [
+          "grail"
+        ]
+      }
+    },
+    {
+      "id": "huygens",
+      "name": {
+        "value": "Huygens",
+        "referenceIds": [
+          "huygens"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Huygens descended through Titan’s atmosphere and transmitted measurements from its surface.",
+        "referenceIds": [
+          "huygens"
+        ]
+      },
+      "kind": {
+        "value": "probe",
+        "referenceIds": [
+          "huygens"
+        ]
+      },
+      "launch": {
+        "value": "1997",
+        "referenceIds": [
+          "huygens"
+        ]
+      }
+    },
+    {
+      "id": "galileo-probe",
+      "name": {
+        "value": "Galileo atmospheric probe",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Galileo’s deployed probe measured Jupiter’s atmosphere and relayed its observations through the orbiter.",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "kind": {
+        "value": "probe",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "launch": {
+        "value": "1989",
+        "referenceIds": [
+          "galileo"
+        ]
+      }
+    },
+    {
+      "id": "philae",
+      "name": {
+        "value": "Philae",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The Rosetta mission’s lander carried instruments to study comet 67P from its surface.",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "kind": {
+        "value": "lander",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "launch": {
+        "value": "2004",
+        "referenceIds": [
+          "rosetta"
+        ]
+      }
+    },
+    {
+      "id": "minerva",
+      "name": {
+        "value": "MINERVA",
+        "referenceIds": [
+          "minerva"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Hayabusa carried this small experimental robot for exploring Itokawa.",
+        "referenceIds": [
+          "minerva"
+        ]
+      },
+      "kind": {
+        "value": "rover",
+        "referenceIds": [
+          "minerva"
+        ]
+      }
+    },
+    {
+      "id": "minerva-ii-1a",
+      "name": {
+        "value": "MINERVA-II Rover-1A",
+        "referenceIds": [
+          "minerva-ii1"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Hayabusa2 carried MINERVA-II Rover-1A as a small rover for exploring Ryugu.",
+        "referenceIds": [
+          "minerva-ii1"
+        ]
+      },
+      "kind": {
+        "value": "rover",
+        "referenceIds": [
+          "minerva-ii1"
+        ]
+      }
+    },
+    {
+      "id": "minerva-ii-1b",
+      "name": {
+        "value": "MINERVA-II Rover-1B",
+        "referenceIds": [
+          "minerva-ii1"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Hayabusa2 carried MINERVA-II Rover-1B as a small rover for exploring Ryugu.",
+        "referenceIds": [
+          "minerva-ii1"
+        ]
+      },
+      "kind": {
+        "value": "rover",
+        "referenceIds": [
+          "minerva-ii1"
+        ]
+      }
+    },
+    {
+      "id": "minerva-ii-2",
+      "name": {
+        "value": "MINERVA-II Rover-2",
+        "referenceIds": [
+          "minerva-ii2"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Hayabusa2 carried MINERVA-II Rover-2 as a small rover for exploring Ryugu.",
+        "referenceIds": [
+          "minerva-ii2"
+        ]
+      },
+      "kind": {
+        "value": "rover",
+        "referenceIds": [
+          "minerva-ii2"
+        ]
+      }
+    },
+    {
+      "id": "mascot",
+      "name": {
+        "value": "MASCOT",
+        "referenceIds": [
+          "mascot"
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "Hayabusa2 carried MASCOT as a small lander for exploring Ryugu.",
+        "referenceIds": [
+          "mascot"
+        ]
+      },
+      "kind": {
+        "value": "lander",
+        "referenceIds": [
+          "mascot"
+        ]
+      }
+    }
+  ],
+  "missions": [
+    {
+      "id": "messenger",
+      "name": {
+        "value": "MESSENGER",
+        "referenceIds": [
+          "messenger"
+        ]
+      },
+      "description": {
+        "value": "Orbited Mercury to study its geology, magnetic field, and surface composition. Its measurements also confirmed water ice in deposits near the poles.",
+        "referenceIds": [
+          "messenger"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "messenger"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "messenger",
+          "role": "orbiter",
+          "referenceIds": [
+            "messenger"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2004",
+        "referenceIds": [
+          "messenger"
+        ]
+      },
+      "imageId": "messenger",
+      "emblemId": "messenger",
+      "ended": {
+        "value": "2015",
+        "referenceIds": [
+          "messenger"
+        ]
+      }
+    },
+    {
+      "id": "cassini",
+      "name": {
+        "value": "Cassini",
+        "referenceIds": [
+          "cassini"
+        ]
+      },
+      "description": {
+        "value": "Explored Saturn, its rings, and its moons from orbit. Observations revealed methane rivers and seas on Titan and jets of ice and gas from Enceladus.",
+        "referenceIds": [
+          "cassini"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA",
+          "ESA",
+          "ASI"
+        ],
+        "referenceIds": [
+          "cassini"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "cassini",
+          "role": "orbiter",
+          "referenceIds": [
+            "cassini"
+          ]
+        },
+        {
+          "spacecraftId": "huygens",
+          "role": "probe",
+          "referenceIds": [
+            "huygens"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1997",
+        "referenceIds": [
+          "cassini"
+        ]
+      },
+      "imageId": "cassini",
+      "emblemId": "cassini",
+      "ended": {
+        "value": "2017",
+        "referenceIds": [
+          "cassini-end"
+        ]
+      }
+    },
+    {
+      "id": "dawn",
+      "name": {
+        "value": "Dawn",
+        "referenceIds": [
+          "dawn"
+        ]
+      },
+      "description": {
+        "value": "Visited Vesta and Ceres in the main asteroid belt, spending time in orbit around each. The two worlds offered a comparison between a giant asteroid and a dwarf planet.",
+        "referenceIds": [
+          "dawn"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "dawn"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "dawn",
+          "role": "orbiter",
+          "referenceIds": [
+            "dawn"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2007",
+        "referenceIds": [
+          "dawn"
+        ]
+      },
+      "imageId": "dawn",
+      "emblemId": "dawn",
+      "ended": {
+        "value": "2018",
+        "referenceIds": [
+          "dawn-end"
+        ]
+      }
+    },
+    {
+      "id": "galileo",
+      "name": {
+        "value": "Galileo",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "description": {
+        "value": "Orbited Jupiter for almost eight years and made close passes by its major moons. Its observations provided evidence for an ocean beneath the ice on Europa.",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "galileo",
+          "role": "orbiter",
+          "referenceIds": [
+            "galileo"
+          ]
+        },
+        {
+          "spacecraftId": "galileo-probe",
+          "role": "probe",
+          "referenceIds": [
+            "galileo"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1989",
+        "referenceIds": [
+          "galileo"
+        ]
+      },
+      "imageId": "galileo",
+      "emblemId": "galileo",
+      "ended": {
+        "value": "2003",
+        "referenceIds": [
+          "galileo"
+        ]
+      }
+    },
+    {
+      "id": "hubble",
+      "name": {
+        "value": "Hubble",
+        "referenceIds": [
+          "hubble"
+        ]
+      },
+      "description": {
+        "value": "Observes planets, stars, and galaxies from Earth orbit in ultraviolet, visible, and near-infrared light. Its cameras record images, while its spectrographs measure light to study composition.",
+        "referenceIds": [
+          "hubble-description"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA",
+          "ESA"
+        ],
+        "referenceIds": [
+          "hubble"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "hubble",
+          "role": "observatory",
+          "referenceIds": [
+            "hubble"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1990",
+        "referenceIds": [
+          "hubble"
+        ]
+      },
+      "imageId": "hubble",
+      "emblemId": "hubble",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "hubble"
+        ]
+      }
+    },
+    {
+      "id": "juno",
+      "name": {
+        "value": "Juno",
+        "referenceIds": [
+          "juno"
+        ]
+      },
+      "description": {
+        "value": "Studies Jupiter beneath its clouds to understand how the planet formed. Close passes revealed polar storms, deep winds, and volcanic activity on its moon Io.",
+        "referenceIds": [
+          "juno"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "juno"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "juno",
+          "role": "orbiter",
+          "referenceIds": [
+            "juno"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2011",
+        "referenceIds": [
+          "juno"
+        ]
+      },
+      "imageId": "juno",
+      "emblemId": "juno",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "juno"
+        ]
+      }
+    },
+    {
+      "id": "new-horizons",
+      "name": {
+        "value": "New Horizons",
+        "referenceIds": [
+          "new-horizons"
+        ]
+      },
+      "description": {
+        "value": "Flew past Pluto and its moons, then continued to the Kuiper Belt object Arrokoth. These encounters provided the first close views of both distant worlds.",
+        "referenceIds": [
+          "new-horizons"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "new-horizons"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "new-horizons",
+          "role": "flyby",
+          "referenceIds": [
+            "new-horizons"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2006",
+        "referenceIds": [
+          "new-horizons"
+        ]
+      },
+      "imageId": "new-horizons",
+      "emblemId": "new-horizons",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "new-horizons"
+        ]
+      }
+    },
+    {
+      "id": "sdo",
+      "name": {
+        "value": "SDO",
+        "referenceIds": [
+          "sdo"
+        ]
+      },
+      "description": {
+        "value": "Monitors the Sun’s interior, atmosphere, magnetic field, and energy output. These observations help explain how solar activity develops and how it drives changes in space weather.",
+        "referenceIds": [
+          "sdo"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "sdo"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "sdo",
+          "role": "observatory",
+          "referenceIds": [
+            "sdo"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2010",
+        "referenceIds": [
+          "sdo"
+        ]
+      },
+      "imageId": "sdo",
+      "emblemId": "sdo",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "sdo"
+        ]
+      }
+    },
+    {
+      "id": "voyager-1",
+      "name": {
+        "value": "Voyager 1",
+        "referenceIds": [
+          "voyager-1"
+        ]
+      },
+      "description": {
+        "value": "Flew past Jupiter and Saturn before crossing into interstellar space. Its journey carried it beyond the heliopause, the boundary of the region dominated by the solar wind.",
+        "referenceIds": [
+          "voyager-1"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "voyager-1"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "voyager-1",
+          "role": "flyby",
+          "referenceIds": [
+            "voyager-1"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1977",
+        "referenceIds": [
+          "voyager-1"
+        ]
+      },
+      "imageId": "voyager-1",
+      "emblemId": "voyager-1",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "voyager-1"
+        ]
+      }
+    },
+    {
+      "id": "voyager-2",
+      "name": {
+        "value": "Voyager 2",
+        "referenceIds": [
+          "voyager-2"
+        ]
+      },
+      "description": {
+        "value": "Explored Jupiter and Saturn, then continued to Uranus and Neptune. It became the only spacecraft to visit those two planets before entering interstellar space in 2018.",
+        "referenceIds": [
+          "voyager-2"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "voyager-2"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "voyager-2",
+          "role": "flyby",
+          "referenceIds": [
+            "voyager-2"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1977",
+        "referenceIds": [
+          "voyager-2"
+        ]
+      },
+      "imageId": "voyager-2",
+      "emblemId": "voyager-2",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "voyager-2"
+        ]
+      }
+    },
+    {
+      "id": "lro",
+      "name": {
+        "value": "Lunar Reconnaissance Orbiter",
+        "referenceIds": [
+          "lro"
+        ]
+      },
+      "description": {
+        "value": "Maps the Moon’s terrain and measures its temperature, composition, and radiation environment. The observations help identify landing sites and locate resources near the lunar south pole.",
+        "referenceIds": [
+          "lro"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "lro"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "lro",
+          "role": "orbiter",
+          "referenceIds": [
+            "lro"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2009",
+        "referenceIds": [
+          "lro"
+        ]
+      },
+      "imageId": "lro",
+      "emblemId": "lro",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "lro"
+        ]
+      }
+    },
+    {
+      "id": "mro",
+      "name": {
+        "value": "Mars Reconnaissance Orbiter",
+        "referenceIds": [
+          "mro"
+        ]
+      },
+      "description": {
+        "value": "Examines the history of water on Mars using close surface images, mineral measurements, and subsurface observations. It also monitors the atmosphere and helps identify potential landing sites.",
+        "referenceIds": [
+          "mro"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "mro"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "mro",
+          "role": "orbiter",
+          "referenceIds": [
+            "mro"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2005",
+        "referenceIds": [
+          "mro"
+        ]
+      },
+      "imageId": "mro",
+      "emblemId": "mro",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "mro"
+        ]
+      }
+    },
+    {
+      "id": "odyssey",
+      "name": {
+        "value": "Mars Odyssey",
+        "referenceIds": [
+          "odyssey"
+        ]
+      },
+      "description": {
+        "value": "Mapped the chemical elements and minerals on the Martian surface. Its observations also record clouds, fog, frost, and surface rocks to support the study and exploration of Mars.",
+        "referenceIds": [
+          "odyssey"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "odyssey"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "odyssey",
+          "role": "orbiter",
+          "referenceIds": [
+            "odyssey"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2001",
+        "referenceIds": [
+          "odyssey"
+        ]
+      },
+      "imageId": "odyssey",
+      "emblemId": "odyssey",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "odyssey"
+        ]
+      }
+    },
+    {
+      "id": "near-shoemaker",
+      "name": {
+        "value": "NEAR Shoemaker",
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      },
+      "description": {
+        "value": "Became the first spacecraft to orbit an asteroid when it reached Eros. After a year of observations, it touched down on the surface, also making the first asteroid landing.",
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "near-shoemaker",
+          "role": "orbiter",
+          "referenceIds": [
+            "near-shoemaker"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1996",
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      },
+      "imageId": "near-shoemaker",
+      "emblemId": "near-shoemaker",
+      "ended": {
+        "value": "2001",
+        "referenceIds": [
+          "near-shoemaker"
+        ]
+      }
+    },
+    {
+      "id": "osiris-rex",
+      "name": {
+        "value": "OSIRIS-REx",
+        "referenceIds": [
+          "osiris-rex"
+        ]
+      },
+      "description": {
+        "value": "Collected rocks and dust from asteroid Bennu and delivered them to Earth in a capsule. The spacecraft then continued toward Apophis under the new mission name OSIRIS-APEX.",
+        "referenceIds": [
+          "osiris-rex"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "osiris-rex"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "osiris-rex",
+          "role": "sample-return",
+          "referenceIds": [
+            "osiris-rex"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2016",
+        "referenceIds": [
+          "osiris-rex"
+        ]
+      },
+      "imageId": "osiris-rex",
+      "emblemId": "osiris-rex",
+      "ended": {
+        "value": "2023-09-24",
+        "referenceIds": [
+          "osiris-transition"
+        ]
+      }
+    },
+    {
+      "id": "hayabusa2",
+      "name": {
+        "value": "Hayabusa2",
+        "referenceIds": [
+          "hayabusa2"
+        ]
+      },
+      "description": {
+        "value": "Collected material from the surface and subsurface of asteroid Ryugu. It returned the samples to Earth in a capsule, allowing researchers to study them in laboratories.",
+        "referenceIds": [
+          "hayabusa2"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "JAXA"
+        ],
+        "referenceIds": [
+          "hayabusa2"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "hayabusa2",
+          "role": "sample-return",
+          "referenceIds": [
+            "hayabusa2"
+          ]
+        },
+        {
+          "spacecraftId": "minerva-ii-1a",
+          "role": "rover",
+          "referenceIds": [
+            "minerva-ii1"
+          ]
+        },
+        {
+          "spacecraftId": "minerva-ii-1b",
+          "role": "rover",
+          "referenceIds": [
+            "minerva-ii1"
+          ]
+        },
+        {
+          "spacecraftId": "minerva-ii-2",
+          "role": "rover",
+          "referenceIds": [
+            "minerva-ii2"
+          ]
+        },
+        {
+          "spacecraftId": "mascot",
+          "role": "lander",
+          "referenceIds": [
+            "mascot"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2014",
+        "referenceIds": [
+          "hayabusa2"
+        ]
+      },
+      "imageId": "hayabusa2",
+      "emblemId": "hayabusa2",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "hayabusa2-status"
+        ]
+      }
+    },
+    {
+      "id": "hayabusa",
+      "name": {
+        "value": "Hayabusa",
+        "referenceIds": [
+          "hayabusa"
+        ]
+      },
+      "description": {
+        "value": "Traveled to asteroid Itokawa to collect material and return it to Earth. The recovered capsule carried rocky grains that could be examined directly in laboratories.",
+        "referenceIds": [
+          "hayabusa-description"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "JAXA"
+        ],
+        "referenceIds": [
+          "hayabusa"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "hayabusa",
+          "role": "sample-return",
+          "referenceIds": [
+            "hayabusa"
+          ]
+        },
+        {
+          "spacecraftId": "minerva",
+          "role": "rover",
+          "referenceIds": [
+            "minerva"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2003",
+        "referenceIds": [
+          "hayabusa"
+        ]
+      },
+      "imageId": "hayabusa",
+      "emblemId": "hayabusa",
+      "ended": {
+        "value": "2010",
+        "referenceIds": [
+          "hayabusa-end"
+        ]
+      }
+    },
+    {
+      "id": "rosetta",
+      "name": {
+        "value": "Rosetta",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "description": {
+        "value": "Followed comet 67P/Churyumov–Gerasimenko to study its nucleus and surrounding environment. It also delivered the Philae probe to the surface during its stay at the comet.",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "ESA"
+        ],
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "rosetta",
+          "role": "orbiter",
+          "referenceIds": [
+            "rosetta"
+          ]
+        },
+        {
+          "spacecraftId": "philae",
+          "role": "lander",
+          "referenceIds": [
+            "rosetta"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2004",
+        "referenceIds": [
+          "rosetta"
+        ]
+      },
+      "imageId": "rosetta",
+      "emblemId": "rosetta",
+      "ended": {
+        "value": "2016",
+        "referenceIds": [
+          "rosetta"
+        ]
+      }
+    },
+    {
+      "id": "terra",
+      "name": {
+        "value": "Terra",
+        "referenceIds": [
+          "terra"
+        ]
+      },
+      "description": {
+        "value": "Measures interactions between Earth’s land, oceans, atmosphere, and energy balance. Its observations track environmental change and help study natural hazards such as fires and volcanic activity.",
+        "referenceIds": [
+          "terra"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "terra"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "terra",
+          "role": "observatory",
+          "referenceIds": [
+            "terra"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1999",
+        "referenceIds": [
+          "terra"
+        ]
+      },
+      "imageId": "terra",
+      "emblemId": "terra",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "terra"
+        ]
+      }
+    },
+    {
+      "id": "suomi-npp",
+      "name": {
+        "value": "Suomi NPP",
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      },
+      "description": {
+        "value": "Observes clouds, oceans, vegetation, ice, land, and the atmosphere from Earth orbit. The measurements support studies of daily weather conditions and changes in climate over longer periods.",
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA",
+          "NOAA"
+        ],
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "suomi-npp",
+          "role": "observatory",
+          "referenceIds": [
+            "suomi-npp"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2011",
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      },
+      "imageId": "suomi-npp",
+      "emblemId": "suomi-npp",
+      "status": {
+        "value": {
+          "value": "active",
+          "asOf": "2026-09-08"
+        },
+        "referenceIds": [
+          "suomi-npp"
+        ]
+      }
+    },
+    {
+      "id": "magellan",
+      "name": {
+        "value": "Magellan",
+        "referenceIds": [
+          "magellan"
+        ]
+      },
+      "description": {
+        "value": "Used radar to map the surface of Venus from orbit. Its observations covered almost the entire planet, revealing terrain hidden beneath the thick cloud cover.",
+        "referenceIds": [
+          "magellan"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "magellan"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "magellan",
+          "role": "orbiter",
+          "referenceIds": [
+            "magellan"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1989",
+        "referenceIds": [
+          "magellan"
+        ]
+      },
+      "imageId": "magellan",
+      "emblemId": "magellan",
+      "ended": {
+        "value": "1994",
+        "referenceIds": [
+          "magellan"
+        ]
+      }
+    },
+    {
+      "id": "mars-global-surveyor",
+      "name": {
+        "value": "Mars Global Surveyor",
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      },
+      "description": {
+        "value": "Mapped Mars and studied its atmosphere, surface, and interior. It also identified potential landing sites and relayed data for later missions operating on the surface.",
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "mars-global-surveyor",
+          "role": "orbiter",
+          "referenceIds": [
+            "mars-global-surveyor"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1996",
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      },
+      "imageId": "mars-global-surveyor",
+      "emblemId": "mars-global-surveyor",
+      "ended": {
+        "value": "2006",
+        "referenceIds": [
+          "mars-global-surveyor"
+        ]
+      }
+    },
+    {
+      "id": "viking-1",
+      "name": {
+        "value": "Viking 1",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "description": {
+        "value": "Viking 1 explored Mars using an orbiter and a lander.",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "viking-1-orbiter",
+          "role": "orbiter",
+          "referenceIds": [
+            "viking-1"
+          ]
+        },
+        {
+          "spacecraftId": "viking-1-lander",
+          "role": "lander",
+          "referenceIds": [
+            "viking-1"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1975",
+        "referenceIds": [
+          "viking-1"
+        ]
+      },
+      "ended": {
+        "value": "1982",
+        "referenceIds": [
+          "viking-1"
+        ]
+      }
+    },
+    {
+      "id": "viking-2",
+      "name": {
+        "value": "Viking 2",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "description": {
+        "value": "Viking 2 explored Mars using an orbiter and a lander.",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "viking-2-orbiter",
+          "role": "orbiter",
+          "referenceIds": [
+            "viking-2"
+          ]
+        },
+        {
+          "spacecraftId": "viking-2-lander",
+          "role": "lander",
+          "referenceIds": [
+            "viking-2"
+          ]
+        }
+      ],
+      "started": {
+        "value": "1975",
+        "referenceIds": [
+          "viking-2"
+        ]
+      },
+      "ended": {
+        "value": "1980",
+        "referenceIds": [
+          "viking-2"
+        ]
+      }
+    },
+    {
+      "id": "grail",
+      "name": {
+        "value": "GRAIL",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "description": {
+        "value": "GRAIL used two orbiters to measure the Moon’s gravity field and investigate its interior.",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "grail-a",
+          "role": "orbiter",
+          "referenceIds": [
+            "grail"
+          ]
+        },
+        {
+          "spacecraftId": "grail-b",
+          "role": "orbiter",
+          "referenceIds": [
+            "grail"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2011",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "ended": {
+        "value": "2012",
+        "referenceIds": [
+          "grail"
+        ]
+      },
+      "imageId": "grail",
+      "emblemId": "grail"
+    },
+    {
+      "id": "osiris-apex",
+      "name": {
+        "value": "OSIRIS-APEX",
+        "referenceIds": [
+          "osiris-transition"
+        ]
+      },
+      "description": {
+        "value": "The spacecraft that returned the OSIRIS-REx Bennu sample continues to Apophis under the OSIRIS-APEX mission.",
+        "referenceIds": [
+          "osiris-transition"
+        ]
+      },
+      "agencyIds": {
+        "value": [
+          "NASA"
+        ],
+        "referenceIds": [
+          "osiris-transition"
+        ]
+      },
+      "participants": [
+        {
+          "spacecraftId": "osiris-rex",
+          "role": "probe",
+          "referenceIds": [
+            "osiris-transition"
+          ]
+        }
+      ],
+      "started": {
+        "value": "2023-09-24",
+        "referenceIds": [
+          "osiris-transition"
+        ]
+      }
     }
   ]
 }

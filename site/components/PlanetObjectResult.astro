@@ -1,5 +1,7 @@
 ---
-import { objectClassificationLabel } from "../planet-search-objects.mjs";
+import type { ObjectEntry } from '../object-schema.mts';
+interface Props { object: ObjectEntry; activeObjectId?: string; hidden?: boolean; }
+import { objectClassificationLabel } from "../planet-search-objects.mts";
 import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 

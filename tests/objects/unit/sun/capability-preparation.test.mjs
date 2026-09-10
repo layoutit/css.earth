@@ -5,12 +5,12 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { projectRoot, readPreparedFixture } from '../../fixtures.mjs';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
-import { prepareBandSurfaceScene } from '../../../../tools/objects/static-surface/band-scene.mjs';
-import { prepareSegmentedSurfaceScene } from '../../../../tools/objects/static-surface/segmented-scene.mjs';
-import { prepareBandSurfacePresentation, prepareEmissiveSurfacePresentation } from '../../../../tools/objects/static-surface/presentation.mjs';
-import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from '../../../../tools/objects/static-surface/fits-map.mjs';
-import { readPhysicalFacts } from '../../../../tools/objects/static-surface/physical.mjs';
-import { contextualizeStaticSurfaceScene } from '../../../../tools/objects/static-surface/index.mjs';
+import { prepareBandSurfaceScene } from '../../../../tools/objects/static-surface/band-scene.mts';
+import { prepareSegmentedSurfaceScene } from '../../../../tools/objects/static-surface/segmented-scene.mts';
+import { prepareBandSurfacePresentation, prepareEmissiveSurfacePresentation } from '../../../../tools/objects/static-surface/presentation.mts';
+import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from '../../../../tools/objects/static-surface/fits-map.mts';
+import { readPhysicalFacts } from '../../../../tools/objects/static-surface/physical.mts';
+import { contextualizeStaticSurfaceScene } from '../../../../tools/objects/static-surface/index.mts';
 import { prepareWorldNavigationDefinition } from '../../../../tools/objects/dist/prepare-world-navigation.js';
 
 const read = async path => JSON.parse(await readFile(resolve(projectRoot, path), 'utf8'));

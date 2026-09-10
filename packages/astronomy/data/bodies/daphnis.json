@@ -1,0 +1,52 @@
+{
+  "id": "daphnis",
+  "classification": "satellite",
+  "order": 238,
+  "physical": {
+    "name": "Daphnis",
+    "horizonsCode": "635",
+    "meanRadiusKm": 3.8,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "saturn"
+  },
+  "physicalNotes": "Daphnis: WGCCRE radii 4.6 x 4.5 x 2.8 km; no published Horizons GM.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "635",
+    "fitFromJdTdb": 2453371.5,
+    "fitToJdTdb": 2458119.5,
+    "fitStepDays": 5,
+    "poleRightAscensionRad": 0.708332139828,
+    "poleDeclinationRad": 1.45800283727,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 136505.613,
+      "eccentricity": 6.47643e-06,
+      "inclinationRad": 1.7498087e-05,
+      "ascendingNodeRad": 3.071262917655,
+      "argumentOfPeriapsisRad": -5.064751064191,
+      "meanAnomalyAtEpochRad": -19309.815718775317,
+      "meanMotionRadPerDay": 10.527310186353633,
+      "ascendingNodeRateRadPerDay": -0.05033104242925075,
+      "argumentOfPeriapsisRateRadPerDay": 0.09934485098293436
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "635",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2453371.5,
+      "toJd": 2458119.5,
+      "stepDays": 5,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "635",
+      "center": "500@699",
+      "range": "cassini-era"
+    }
+  }
+}

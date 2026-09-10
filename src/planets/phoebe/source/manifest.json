@@ -37,10 +37,14 @@
       "falseColor": false,
       "coverage": "Historical source retained for provenance, outside the mounted view roster. Registration of the old monochrome mosaic to the 2023 shifted shape has not been demonstrated.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG"
+          }
+        ]
       }
     },
     {
@@ -161,10 +165,14 @@
         "referenceRadiusMeters": 106500
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub"
+          }
+        ]
       }
     },
     {
@@ -202,10 +210,14 @@
         "referenceRadiusMeters": 106500
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub"
+          }
+        ]
       }
     },
     {
@@ -243,10 +255,14 @@
         "referenceRadiusMeters": 106500
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub"
+          }
+        ]
       }
     },
     {
@@ -284,10 +300,14 @@
         "referenceRadiusMeters": 106500
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub"
+          }
+        ]
       }
     },
     {
@@ -379,10 +399,14 @@
       },
       "coverage": "Supported detector apertures cover approximately 1.84% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1"
+          }
+        ]
       }
     },
     {
@@ -417,10 +441,14 @@
       },
       "coverage": "Supported detector apertures cover approximately 1.84% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1"
+          }
+        ]
       }
     }
   ],
@@ -654,12 +682,6 @@
       "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
       "expectedBytes": 946,
       "expectedSha256": "41944b166965998dff08963811ebc9bd83f637215ab3a8e1f8411e81f6cacce0"
-    },
-    {
-      "path": "cassini-ice/evidence/license-about.html",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 22564,
-      "expectedSha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9"
     },
     {
       "path": "cassini-ice/evidence/native-registration-fit.json",

@@ -1,0 +1,364 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.84",
+  "baseUrl": "http://127.0.0.1:4259",
+  "capturedAt": "2026-09-10T12:46:03.675Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "dactyl",
+      "viewport": "initial-shell",
+      "speedDisabled": false
+    },
+    {
+      "id": "dactyl",
+      "viewport": "desktop",
+      "motionActivation": "retained-input",
+      "surfaceFlyTo": {
+        "pitchDelta": -20.548701862973218,
+        "zoomRatio": 2.8110312536764224
+      },
+      "zoomPublication": {
+        "skyCube": 0,
+        "skyOrientation": 0
+      },
+      "projectiveTextureReport": {
+        "texturedLeafCount": 512,
+        "nestedProjectiveTextureCount": 0,
+        "finiteTextureBounds": true
+      },
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 124730,
+      "stable": true,
+      "retainedProof": {
+        "initialNodeCount": 124730,
+        "currentNodeCount": 124730,
+        "maximumNodeCount": 124730,
+        "initialNodesIntact": true,
+        "shellTextNodesIntact": true,
+        "undeclaredAddedRoots": [],
+        "undeclaredRemovedRoots": [],
+        "allowedMounts": []
+      }
+    },
+    {
+      "id": "dactyl",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 124730,
+      "stable": true
+    },
+    {
+      "id": "dactyl",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "shape",
+          "interior": false,
+          "geometryDisplacement": 129.70852914806034,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "dactyl",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 2,
+      "datasets": [
+        {
+          "id": "shape",
+          "interior": false,
+          "geometryDisplacement": 129.70852914806034,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "dactyl",
+      "viewport": "pre-ready-hidden-motion-off",
+      "animationCount": 0
+    },
+    {
+      "id": "dactyl",
+      "viewport": "pre-ready-visible-motion-off",
+      "animationCount": 0
+    },
+    {
+      "id": "dactyl",
+      "viewport": "pre-ready-hidden-motion-on",
+      "animationCount": 0
+    },
+    {
+      "id": "dactyl",
+      "viewport": "pre-ready-visible-motion-on",
+      "animationCount": 0
+    },
+    {
+      "id": "dactyl",
+      "viewport": "dpr-1",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/dactyl/dactyl-shape-surface@2x.webp"
+      ],
+      "replacedPrivateCelestialAssets": [
+        "/scenes/dactyl/dactyl-directional-sun.webp",
+        "/scenes/dactyl/dactyl-directional-sun@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-back-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-back-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-back.webp",
+        "/scenes/dactyl/dactyl-starfield-back@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-bottom-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-bottom-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-bottom.webp",
+        "/scenes/dactyl/dactyl-starfield-bottom@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-front-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-front-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-front.webp",
+        "/scenes/dactyl/dactyl-starfield-front@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-left-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-left-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-left.webp",
+        "/scenes/dactyl/dactyl-starfield-left@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-right-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-right-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-right.webp",
+        "/scenes/dactyl/dactyl-starfield-right@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-top-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-top-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-top.webp",
+        "/scenes/dactyl/dactyl-starfield-top@2x.webp"
+      ],
+      "warmedPrivateCelestialAssets": [
+        "/scenes/dactyl/dactyl-directional-sun@2x.webp"
+      ],
+      "sharedSky": [
+        {
+          "id": "px",
+          "bytes": 52116,
+          "sha256": "136d8ab4b013ba6f4e4b0f4cdc62b3a421df9eaabc83d48aa0385481b859fed4"
+        },
+        {
+          "id": "nx",
+          "bytes": 45762,
+          "sha256": "90e64eb3a6efef26d9187c57d58f7c3a4619a3ea58a023d054dcc69cc832ea34"
+        },
+        {
+          "id": "py",
+          "bytes": 55020,
+          "sha256": "8333bfd18cfa37ffee58a248359fc658ecfaececcbb77acf45a927ab77266572"
+        },
+        {
+          "id": "ny",
+          "bytes": 48376,
+          "sha256": "fa8315fc7dbfd9b48b391884953c316f114555e2505976ff3f978113f2d89dac"
+        },
+        {
+          "id": "pz",
+          "bytes": 52212,
+          "sha256": "d1e2900e423cff11bfee6456ab866c84c8b90db43394ececbc32eefbdf714c62"
+        },
+        {
+          "id": "nz",
+          "bytes": 64558,
+          "sha256": "5772dbef53c537f81f5dcd9016cf1b3afe6ab8ad61fcac26395ca5c841a0f912"
+        }
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 0.7747826086956523,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.503608695652174,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.2908752418181817,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "dactyl-dpr-1.webm"
+    },
+    {
+      "id": "dactyl",
+      "viewport": "dpr-2",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/dactyl/dactyl-shape-surface@2x.webp"
+      ],
+      "replacedPrivateCelestialAssets": [
+        "/scenes/dactyl/dactyl-directional-sun.webp",
+        "/scenes/dactyl/dactyl-directional-sun@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-back-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-back-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-back.webp",
+        "/scenes/dactyl/dactyl-starfield-back@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-bottom-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-bottom-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-bottom.webp",
+        "/scenes/dactyl/dactyl-starfield-bottom@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-front-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-front-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-front.webp",
+        "/scenes/dactyl/dactyl-starfield-front@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-left-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-left-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-left.webp",
+        "/scenes/dactyl/dactyl-starfield-left@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-right-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-right-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-right.webp",
+        "/scenes/dactyl/dactyl-starfield-right@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-top-standard.webp",
+        "/scenes/dactyl/dactyl-starfield-top-standard@2x.webp",
+        "/scenes/dactyl/dactyl-starfield-top.webp",
+        "/scenes/dactyl/dactyl-starfield-top@2x.webp"
+      ],
+      "warmedPrivateCelestialAssets": [
+        "/scenes/dactyl/dactyl-directional-sun@2x.webp"
+      ],
+      "sharedSky": [
+        {
+          "id": "px",
+          "bytes": 52116,
+          "sha256": "136d8ab4b013ba6f4e4b0f4cdc62b3a421df9eaabc83d48aa0385481b859fed4"
+        },
+        {
+          "id": "nx",
+          "bytes": 45762,
+          "sha256": "90e64eb3a6efef26d9187c57d58f7c3a4619a3ea58a023d054dcc69cc832ea34"
+        },
+        {
+          "id": "py",
+          "bytes": 55020,
+          "sha256": "8333bfd18cfa37ffee58a248359fc658ecfaececcbb77acf45a927ab77266572"
+        },
+        {
+          "id": "ny",
+          "bytes": 48376,
+          "sha256": "fa8315fc7dbfd9b48b391884953c316f114555e2505976ff3f978113f2d89dac"
+        },
+        {
+          "id": "pz",
+          "bytes": 52212,
+          "sha256": "d1e2900e423cff11bfee6456ab866c84c8b90db43394ececbc32eefbdf714c62"
+        },
+        {
+          "id": "nz",
+          "bytes": 64558,
+          "sha256": "5772dbef53c537f81f5dcd9016cf1b3afe6ab8ad61fcac26395ca5c841a0f912"
+        }
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 0.7747826086956523,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.503608695652174,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.6839073054545455,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "dactyl-dpr-2.webm"
+    }
+  ]
+}

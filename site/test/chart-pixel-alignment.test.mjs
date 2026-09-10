@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createChartPixelAlignmentController } from '../chart-pixel-alignment.mjs';
+import { createChartPixelAlignmentController } from '../chart-pixel-alignment.mts';
 
 test('hidden charts schedule no work; visible charts batch reads, retain corrections, and retire cleanly', () => {
   const calls = [], frames = new Map();

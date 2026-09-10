@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "08a3c7f990598f4b7a770e45dfc7fadf20d7e59431c5ba82597f6f79e133d3ae"
+        "sha256": "b412a470876220e695f2ef772bb8fd43dd7c4cea6970b7a23e39479f87e199d3"
+      }
+    },
+    "catalog": {
+      "name": "Patroclus",
+      "classification": "asteroid",
+      "color": "#a0a0a0",
+      "distanceAu": 5.206163281913244,
+      "description": "Explore Patroclus, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "systemName": "Solar System",
+      "order": 22,
+      "context": {
+        "order": 257
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8ec10854fe8bd4a32ce13eaf71cb01a74577d6b305d07b903966b636f48eddbe"
+    "sha256": "85ddf570eb300a232eec9b7e0e3f5cc52ae913080bba0bfb4af025779e83ba78"
   }
 }

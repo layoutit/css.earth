@@ -1,13 +1,37 @@
+<!--
+Title: <type>[optional scope][!]: <summary>
+Use Conventional Commits 1.0.0: feat(universe): ..., fix: ..., docs: ...
+Apply ISO 24495-1:2023 plain language throughout and the repository's PDS4 1.26.0
+adaptation to source and processing claims.
+Headings are optional; a small PR can be one paragraph. Delete unused prompts.
+Omit Sources and processing when sources, processing and interpretation are unchanged.
+-->
+
 ## Change
 
-Describe what changed and why.
+[What was wrong or missing, what now happens, and which bodies or shared components change.]
 
-## Checks and evidence
+[Link the updated body README or shared guide when documentation changes.]
 
-Update the affected body README’s sources, evidence and known problems. Link
-the relevant source notes, credits, test reports and inspected screenshots.
-State which version was tested, what passed or failed, and what was not checked.
-If reusing an old result, explain why it still applies. For a docs-only change,
-report link and diff checks here.
+## Sources and processing
 
-Explain unusually large evidence additions. See `docs/provenance/CONTRACT.md`.
+- **Source:** [Provider product/release and link to its maintained source record.]
+- **Processing:** [What changed between the input and displayed result.]
+- **Meaning and limits:** [Relevant interpretation, coverage or uncertainty; measured versus modeled where it matters.]
+
+## Evidence and limits
+
+- [Command or check] — [result and link to original evidence or inspected images].
+- [Relevant failure, check not run or unresolved problem].
+
+<!--
+Add only relevant checks. GitHub already records CI revisions. For local or reused
+evidence, name the tested revision and relevant differences, including uncommitted changes.
+Explain why reused evidence still applies and what added evidence or unusually large files support.
+Do not repeat source inventories or paste run logs here.
+For images, use GitHub attachments or repository URLs pinned to a commit.
+Reload the published PR and inspect every image; fix broken embeds before handoff.
+If required visual evidence is unavailable, keep the PR in draft and say what is missing.
+-->
+
+[PR rules: titles, PDS4 provenance and ISO plain language](https://github.com/layoutit/cssEarth/blob/main/docs/provenance/CONTRACT.md#pull-requests).

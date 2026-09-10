@@ -1,10 +1,10 @@
-import {loadObjectTestDefinition} from './object-test-data.mjs';
+import {loadObjectTestDefinition} from './object-test-data.mts';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
-import { OBJECTS } from '../site/objects.mjs';
+import { OBJECTS } from '../site/objects.mts';
 
 for (const object of OBJECTS) {
   let text;

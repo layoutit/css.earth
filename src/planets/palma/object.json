@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5d414e54070bf812155c81f46357cde7efa073bc6e1e1861938a7aebc7afe3be"
+        "sha256": "0ab947c6613a3d3b44e6030cd99d51cb387c9dd6ca0f11b1be0a467019fe65fc"
+      }
+    },
+    "catalog": {
+      "name": "Palma",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.163095282258092,
+      "description": "Explore Palma in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 193,
+      "context": {
+        "order": 136
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e73f9f8cd759e64da7da93e398752fe08bc4cfd63b319353c547b694bed2ab7d"
+    "sha256": "969788bf19e207c73ca0d281ee683511b8fa87a499c11fe254fe468e389521b0"
   }
 }

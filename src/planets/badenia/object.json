@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "eda68e624bc2348d15149aa060d151550a48ac7f550e68463e02912fea715935"
+          "sha256": "352bee92f14221705553b339c07053125d3c7b1f0ea6958d9bfc7b0dda9ca8d7"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b2c58e6dcd5e1f15645f761e176c6ed21034e369a82a59e18e8439434e438104"
+        "sha256": "9216d0745755d8f24e081fde5c8d7bc0c0ca05638567089046e76d95431a6563"
+      }
+    },
+    "catalog": {
+      "name": "Badenia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.13175476216037,
+      "description": "Explore Badenia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 384,
+      "context": {
+        "order": 188
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9000154c2a2314e9409989ec158ffd00ddec64ce5095f22eac3b10edc69d31c7"
+    "sha256": "d6750a2d9b8eb02b2e12191eeb1a12dbf2e59e7e62a8ffb8ab608a4a2d2dbecb"
   }
 }

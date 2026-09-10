@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "mani",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Máni",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "8b9d9aa4eed55545ce519b83e91e7be42cae77af8f75ce2abb016779afb5894b"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "0933e0920cd8203260f8aab69b46e7e75fed0f5beb32d41f902cf059014aa4da"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "ff35bdcf8a5a0865f8b6352a0d1cda4712f75112ead9c6b0667b145ec7f0f981"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "926afe3504dd10403b87d47e6cc1f77fbb60a04ee9ca51a60f74f6d1916e7417"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "ffb8ecce1e775928cace50b4c91e2fd8fd71444dc800ea3c4aaa466b9c5d5337"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "371a052ca398de217c644d22f26e726d83165e9757182d05d93bf53e61727f1b"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 402.7959116616533
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/mani-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "288d76fdc749f395a7b0c1bb45113ff3f4070f2c7fad1220a53f68c76fb32505"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2232278950957.8438,
+        -6476619942731.6875,
+        -612381018738.2418
+      ],
+      "presentationToReference": [
+        0.33944634729795164,
+        0,
+        0.940625418169251,
+        -0.863006948296611,
+        0.3977771559319137,
+        0.3114359346807763,
+        -0.37415930363663175,
+        -0.9174820620691818,
+        0.13502400261965583
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1751.286572441971,
+      "bodyRadiusM": 402795.9116616533
+    },
+    "catalog": {
+      "name": "Máni (2002 MS4)",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 45.97552197787258,
+      "description": "Formerly 2002 MS4, Máni has an outline measured through many stellar occultations. One event revealed a large depression along its edge, but its global terrain and three-dimensional shape remain unresolved.",
+      "systemName": "Solar System",
+      "order": 7,
+      "context": {
+        "order": 438,
+        "name": "Máni"
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "398774380f45d32bbf656746d9e3f7064ebb6e79123cf1bc11428eefe61bd564"
+  }
+}

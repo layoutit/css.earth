@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "958a840d84f3a71cddb1d63a30090708e80767cce66428b7637cfd134fe6f9f1"
+          "sha256": "cbb69cdbb9ecb2488850222f54f9b5b1ee4856fb6e6fb39e2f530d1d60f12fbb"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ed9d4bb026a1e026857cb633b5617efe13868a32feb8b10a09d950f23aef4466"
+        "sha256": "ae61063da91b78cb79740e9412da3508ae8ee648b2d7fd6f145467a110500add"
+      }
+    },
+    "catalog": {
+      "name": "Lucia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1448952145576423,
+      "description": "Explore Lucia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 382,
+      "context": {
+        "order": 186
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ae2c3ffba5a93e6df6a06cd478d3fb3cd9a7c180515d90f4cb644860231a3f0f"
+    "sha256": "f3b6b7144af930c8594e3a6ef924abc67c8275b6c4c3a6dc013480bdf92ddc37"
   }
 }

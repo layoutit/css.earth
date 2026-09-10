@@ -10,7 +10,7 @@ import {
   labelBox,
   labelFontPixels,
   validateLabelPolicy,
-} from "./label-field.mjs";
+} from "./label-field.mts";
 
 const policy = DEFAULT_LABEL_POLICY;
 const box = (anchor, widthPx, priority, owner = LABEL_OWNER_BODY, id = "x") => ({

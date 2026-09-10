@@ -1,0 +1,69 @@
+export interface CoverageRaster { width: number; height: number; channels: number; }
+// Prepare-only cartographic styling. Gray is a data gap, never inferred terrain.
+// Images without validity channels may restrict exact black fill to a polar edge.
+// Interior photographed black and nonzero edge pixels remain observations.
+export function blackFillCoverage(data: Uint8Array, { width, height, channels }: CoverageRaster, { southConnected = false, northConnected = false } = {}) {
+  const missing = new Uint8Array(width * height);
+  const black = (i: number) => {
+    for (let c = 0; c < channels; c++) if (data[i * channels + c] !== 0) return false;
+    return true;
+  };
+  if (!southConnected && !northConnected) {
+    for (let i = 0; i < missing.length; i++) missing[i] = Number(black(i));
+    return missing;
+  }
+  const queue = new Uint32Array(width * height);
+  let head = 0, tail = 0;
+  const visit = (i: number) => {
+    if (!missing[i] && black(i)) { missing[i] = 1; queue[tail++] = i; }
+  };
+  for (let x = 0; x < width; x++) {
+    if (northConnected) visit(x);
+    if (southConnected) visit((height - 1) * width + x);
+  }
+  while (head < tail) {
+    const i = queue[head++], x = i % width;
+    if (i >= width) visit(i - width);
+    if (i + width < missing.length) visit(i + width);
+    visit(x === 0 ? i + width - 1 : i - 1);
+    visit(x === width - 1 ? i - width + 1 : i + 1);
+  }
+  return missing;
+}
+
+export function sampleCoverage(missing: Uint8Array, source: Pick<CoverageRaster, "width" | "height">, width: number, height: number) {
+  const output = new Uint8Array(width * height);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const sx = Math.min(source.width - 1, Math.floor((x + 0.5) * source.width / width));
+    const sy = Math.min(source.height - 1, Math.floor((y + 0.5) * source.height / height));
+    output[y * width + x] = missing[sy * source.width + sx];
+  }
+  return output;
+}
+
+export function missingCoverageColor(longitude: number, latitude: number, pixelDegrees: number) {
+  const base = [82, 84, 82], line = [112, 115, 111];
+  const distance = (angle: number, step: number) => Math.abs(angle - Math.round(angle / step) * step);
+  const parallel = distance(latitude, 10);
+  const meridian = distance(longitude, 30) * Math.cos(latitude * Math.PI / 180);
+  // Fade converging meridians at the pole so they do not become a bright disk.
+  const poleFade = Math.max(0, Math.min(1, (88 - Math.abs(latitude)) / 8));
+  const stroke = (d: number) => Math.max(0, Math.min(1, (0.16 + pixelDegrees / 2 - d) / pixelDegrees));
+  // Do not straddle the equatorial atlas seam with a painted parallel.
+  const amount = Math.max(Math.abs(latitude) > 1 && Math.abs(latitude) < 88 ? stroke(parallel) : 0, stroke(meridian) * poleFade);
+  return base.map((value, c) => Math.round(value + (line[c] - value) * amount));
+}
+
+export function paintMissingCoverage(data: Uint8Array, { width, height, channels }: CoverageRaster, missing: Uint8Array) {
+  if (missing.length !== width * height || data.length !== width * height * channels || channels !== 3) {
+    throw new Error("Coverage and RGB raster dimensions must match.");
+  }
+  const output = Buffer.from(data), pixelDegrees = 180 / height;
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    if (!missing[y * width + x]) continue;
+    const color = missingCoverageColor((x + 0.5) * 360 / width, 90 - (y + 0.5) * pixelDegrees, pixelDegrees);
+    const i = (y * width + x) * channels;
+    for (let c = 0; c < channels; c++) output[i + c] = color[c];
+  }
+  return output;
+}

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0dfa03bc639783c8c79ea976578773ba4e0f8a87c9061366531206e9d385bee1"
+        "sha256": "81c71bfe92e4b85c51280c5961b985b19b575111541058e53fb849f856fb105f"
+      }
+    },
+    "catalog": {
+      "name": "38 Leda",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7426288995401285,
+      "description": "Explore 38 Leda in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 224,
+      "context": {
+        "order": 266
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0f63973c5865755a8b1fb4a7e501144a6f4be9e3c74436abae6b729b4f6dcecc"
+    "sha256": "efee8d4296e28185a44a5e3976f3806797b12758ceb122cdd99ac483ad0e684e"
   }
 }

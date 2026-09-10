@@ -117,8 +117,8 @@ test("keeps runtime scene work retained and CSS-only", async () => {
     readFile(new URL("../../../../src/renderers/css/dist/index.js", import.meta.url), "utf8"),
     readFile(new URL("../../../../src/renderers/css/styles/moon-surfaces.css", import.meta.url), "utf8"),
   ]);
-  const { auditObjectRuntimeOwnership } = await import("../../../../tools/check-object-runtime-ownership.mjs");
-  const { OBJECTS } = await import("../../../../site/objects.mjs");
+  const { auditObjectRuntimeOwnership } = await import("../../../../tools/check-object-runtime-ownership.mts");
+  const { OBJECTS } = await import("../../../../site/objects.mts");
   const audit = await auditObjectRuntimeOwnership({ objects: OBJECTS.filter(object => object.id === "moon") });
   assert.equal(audit.complete, true);
   assert.ok(audit.sharedClosure.includes("src/renderers/css/solar-system/cubic-sky-runtime.ts"));

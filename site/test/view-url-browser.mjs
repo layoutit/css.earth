@@ -5,7 +5,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
 import sharp from "sharp";
-import { parseSharedView } from "../../src/platform/view-url.mjs";
+import { parseSharedView } from "../../src/platform/view-url.mts";
 import { wheelWithReceipt } from "./wheel-zoom-distance.mjs";
 
 const baseUrl = process.argv.find(argument => /^https?:/u.test(argument)) ?? "http://127.0.0.1:4210";

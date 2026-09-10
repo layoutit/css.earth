@@ -10,7 +10,7 @@
 
 ## Evidence
 
-[The 9 September 2026 mosaic report](../../../docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](../../../docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
+[The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
 
 The broader preparation suite was not green (1,666/1,957 passed); global platform and shell audits were stopped. A later overview/navigation change was outside the tested implementation.
 
@@ -82,7 +82,7 @@ Projection uses the source mesh's visibility and terrain-shadow rays, incidence/
 
 **Spacecraft mosaic update (2026-09-09)**
 
-Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/planets/ida/source OUTPUT --frame 202560500 --profile reference/registration-202560500.json`. Run `node tools/objects/terrestrial-layers/audit-camera-mosaic.mjs src/planets/ida/source OUTPUT` for matched area-weighted before/after sampling and lossless Float32 contribution planes. The audit grids use the authored 4096×2048 cylindrical sampling, not atlas texel counts as surface area.
+Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/planets/ida/source OUTPUT --frame 202560500 --profile reference/registration-202560500.json`. Run `node tools/objects/terrestrial-layers/audit-camera-mosaic.mts src/planets/ida/source OUTPUT` for matched area-weighted before/after sampling and lossless Float32 contribution planes. The audit grids use the authored 4096×2048 cylindrical sampling, not atlas texel counts as surface area.
 
 The original calibrated FITS/XML and raw detector FITS/label are pinned separately. Both raw quality companions are identified by target, exact time, filter and spacecraft clock, with the released `idabad.tab` block mask. The original four-pixel registration limit and five-pixel quality-boundary inset remain. Four separated 16×16 patches of image 0202560500 give 1.414 px RMS and 2.236 px maximum residual with no local camera fit. These are checks against the Thomas mosaic on the original shape, which shares mission observations; they are not absolute independent cartography.
 

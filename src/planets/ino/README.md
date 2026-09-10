@@ -15,7 +15,7 @@ ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive
 
 ## Evidence
 
-The [ino results](../../../docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **951.06 m**. This is a sampled comparison, not an exhaustive error bound.
+The [ino results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids-expansion/summary.json) record a maximum sampled source-to-display distance of **951.06 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The 2 browser cases predate final integration. The report compares their recorded body assets with the integrated files; it does not identify a tested code revision for these cases.
 
@@ -51,9 +51,11 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/5913) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/63475/shape.txt) — included unchanged. ADAM nonconvex reconstruction constrained by VLT/SPHERE images; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [Vernazza et al. (2021)](https://damit.cuni.cz/projects/damit/references/view/660) — original model publication record.
+- [Vernazza et al. (2021), VLT/SPHERE imaging survey of the largest main-belt asteroids: Final results and synthesis](https://ui.adsabs.harvard.edu/abs/2021A&A...654A..56V) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — retained for comparison; the documented physical calibration supplies the selected scale. Its fitted nonrotating-sphere diameter is 160.61 ± 3.05 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 - [Vernazza et al. (2021), ESO-hosted author manuscript](https://www.eso.org/public/archives/releases/sciencepapers/eso2114/eso2114a.pdf) — retained primary publication; see the body-specific selection and calibration above.
 

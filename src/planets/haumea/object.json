@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a3ec80f110dc149a0166386d23e1dc2d5b614cc877c6a198b956fd67ec786ffa"
+    "sha256": "65c4609c5b7faa98b569c34c0ed76067af276bd56e155e99ae29256ba2252c88"
   },
   "properties": {
     "preparation": {
@@ -120,7 +120,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a627aa49a80f8d9589646c238a66f6a8ec802c4f8c51d0c1b9ff7b5e68a613cb"
+        "sha256": "561c04c489ebd8a6a16cdcc932822842db38233026f9a710d06e52a769f04f44"
+      }
+    },
+    "catalog": {
+      "name": "Haumea",
+      "classification": "dwarf-planet",
+      "color": "#cccccc",
+      "distanceAu": 43.1,
+      "description": "Explore Haumea’s measured elongated shape and narrow ring, with an illustrative NASA surface texture.",
+      "systemName": "Solar System",
+      "order": 460,
+      "context": {
+        "order": 37
       }
     }
   }

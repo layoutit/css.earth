@@ -6,12 +6,12 @@
   "fields": {
     "ID": "6205",
     "Asteroid": "(2102) Tantalus",
-    "\u03bb": "36",
-    "\u03b2": "30",
+    "λ": "36",
+    "β": "30",
     "P": "2.39006",
     "YORP": "",
     "t0": "2457754.4",
-    "\u03c60": "0",
+    "φ0": "0",
     "Light Scattering Model": "LSL",
     "p1": "0.1",
     "p2": "",
@@ -20,14 +20,14 @@
     "p5": "",
     "Calibrated Size": "1 (Yes)",
     "D": "1.45",
-    "\u03c3D": "0.2",
-    "\u0393": "270",
-    "\u0393min": "190",
-    "\u0393max": "346",
+    "σD": "0.2",
+    "Γ": "270",
+    "Γmin": "190",
+    "Γmax": "346",
     "pV": "",
-    "\u03c3pV": "",
-    "\u03b3c": "",
-    "\u03f1c": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
     "Quality Flag": "3",
     "Nonconvex": "1 (Yes)",
     "Version": "2022-07-13",
@@ -42,13 +42,13 @@
     "Pixel size (milliarcsececond)": "n/a",
     "Volume-equivalent diameter (px)": "n/a",
     "Surface-equivalent diameter (px)": "n/a",
-    "Subsolar-point longitude (\u00b0)": "n/a",
-    "Subsolar-point latitude (\u00b0)": "n/a",
-    "Subearth-point longitude (\u00b0)": "n/a",
-    "Subearth-point latitude (\u00b0)": "n/a",
-    "Phase-angle-bisector longitude (\u00b0)": "n/a",
-    "Phase-angle-bisector latitude (\u00b0)": "n/a",
-    "Solar phase angle (\u00b0)": "n/a"
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
   },
   "files": {
     "IAUspin": "https://damit.cuni.cz/projects/damit/stored_files/open/66621/IAUspin",
@@ -57,9 +57,9 @@
   },
   "references": [
     {
-      "label": "Ro\u017cek et al. (2022)",
+      "label": "Rożek et al. (2022)",
       "url": "https://damit.cuni.cz/projects/damit/references/view/663",
-      "file": "reference-663.html"
+      "title": "Physical properties of near-Earth asteroid (2102) Tantalus from multiwavelength observations"
     }
   ],
   "id": "tantalus",
@@ -143,15 +143,15 @@
     "reference": "DAMIT model 6205, version 2022-07-13",
     "scaleKmPerSourceUnit": 1.0000000100385358,
     "metersPerSourceUnit": 1000.0000100385358,
-    "limitations": "The prograde radar/optical model6205 is selected because Ro\u017cek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
-    "visibleDescription": "Radar and optical shape reconstruction. Radar-calibrated diameter: 1.45 \u00b1 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative."
+    "limitations": "The prograde radar/optical model6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
+    "visibleDescription": "Radar and optical shape reconstruction. Radar-calibrated diameter: 1.45 ± 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative."
   },
-  "selectionNotes": "The prograde radar/optical model6205 is selected because Ro\u017cek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted.",
+  "selectionNotes": "The prograde radar/optical model6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted.",
   "papers": [
     {
       "url": "https://arxiv.org/html/2206.14306",
       "file": "rozek-2022.html",
-      "label": "Ro\u017cek et al. (2022), radar and optical Tantalus shape"
+      "label": "Rożek et al. (2022), radar and optical Tantalus shape"
     }
   ],
   "distanceAu": 1.2900615327857758,
@@ -159,12 +159,12 @@
   "sourceFields": {
     "ID": "6205",
     "Asteroid": "(2102) Tantalus",
-    "\u03bb": "36",
-    "\u03b2": "30",
+    "λ": "36",
+    "β": "30",
     "P": "2.39006",
     "YORP": "",
     "t0": "2457754.4",
-    "\u03c60": "0",
+    "φ0": "0",
     "Light Scattering Model": "LSL",
     "p1": "0.1",
     "p2": "",
@@ -173,14 +173,14 @@
     "p5": "",
     "Calibrated Size": "1 (Yes)",
     "D": "1.45",
-    "\u03c3D": "0.2",
-    "\u0393": "270",
-    "\u0393min": "190",
-    "\u0393max": "346",
+    "σD": "0.2",
+    "Γ": "270",
+    "Γmin": "190",
+    "Γmax": "346",
     "pV": "",
-    "\u03c3pV": "",
-    "\u03b3c": "",
-    "\u03f1c": "",
+    "σpV": "",
+    "γc": "",
+    "ϱc": "",
     "Quality Flag": "3",
     "Nonconvex": "1 (Yes)",
     "Version": "2022-07-13",
@@ -195,14 +195,14 @@
     "Pixel size (milliarcsececond)": "n/a",
     "Volume-equivalent diameter (px)": "n/a",
     "Surface-equivalent diameter (px)": "n/a",
-    "Subsolar-point longitude (\u00b0)": "n/a",
-    "Subsolar-point latitude (\u00b0)": "n/a",
-    "Subearth-point longitude (\u00b0)": "n/a",
-    "Subearth-point latitude (\u00b0)": "n/a",
-    "Phase-angle-bisector longitude (\u00b0)": "n/a",
-    "Phase-angle-bisector latitude (\u00b0)": "n/a",
-    "Solar phase angle (\u00b0)": "n/a"
+    "Subsolar-point longitude (°)": "n/a",
+    "Subsolar-point latitude (°)": "n/a",
+    "Subearth-point longitude (°)": "n/a",
+    "Subearth-point latitude (°)": "n/a",
+    "Phase-angle-bisector longitude (°)": "n/a",
+    "Phase-angle-bisector latitude (°)": "n/a",
+    "Solar phase angle (°)": "n/a"
   },
   "originalUnits": "km according to DAMIT calibrated-size flag; reconciled to declared equivalent diameter",
-  "modelLimitations": "The prograde radar/optical model6205 is selected because Ro\u017cek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred."
+  "modelLimitations": "The prograde radar/optical model6205 is selected because Rożek et al.2022 find it more consistent with WISE size determination than retrograde6204. The alternative pole remains unresolved. The convex-only model6203 is not substituted. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred."
 }

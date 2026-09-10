@@ -12,9 +12,11 @@
 
 The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-The [asteroid validation report](../../../docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 116.357 m, maximum 300.551 m. These are sampled distances, not exhaustive geometric bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
 
@@ -42,6 +44,10 @@ Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z
 The record gives diameter 94 km, period 13.62523 h and ecliptic J2000 pole (139°, -45°). The original mesh has measured volume-equivalent radius 47.000000 km and Cartesian extents 103.606 × 113.422 × 80.136 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
 
 This is a convex light-curve reconstruction at a calibrated size. It cannot establish craters, concavities or fine topography; Elevation only restates the radius of this same convex model.
+
+- [Kaasalainen et al. (2002), Models of twenty asteroids from photometric data](https://ui.adsabs.harvard.edu/abs/2002Icar..159..369K) — selected model publication.
+
+- [Marchis et al. (2006), Shape, size and multiplicity of main-belt asteroids. I. Keck Adaptive Optics survey](https://ui.adsabs.harvard.edu/abs/2006Icar..185...39M) — selected model publication.
 
 </details>
 

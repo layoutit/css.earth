@@ -1,19 +1,19 @@
-# cssEarth 🪐
+# css.earth 🌎
 
-A 3D CSS astrovisualization platform. cssEarth renders celestial bodies as real HTML and CSS 3D
+A 3D CSS astrovisualization platform. [css.earth](https://css.earth) renders celestial bodies as real HTML and CSS 3D
 geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without
 a WebGL or canvas scene renderer. It preprocesses planetary data into
 browser-ready textures, charts, and retained scene plans, then lets you explore the universe.
 
-Available at [css.earth](https://css.earth) 🌎
+Available at [css.earth](https://css.earth) 🪐
 
-<img src="docs/css-earth.webp" alt="Saturn, Jupiter, and Mars rendered as retained HTML and CSS geometry in cssEarth" width="960">
+<img src="https://raw.githubusercontent.com/layoutit/cssEarth/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/css-earth.webp" alt="Saturn, Jupiter, and Mars rendered as retained HTML and CSS geometry in cssEarth" width="960">
 
 ## How to Build
 
-Use Node.js 24 or Node.js 22.15+ and pnpm 10. Source preparation uses Node's
-[native Zstandard support](https://nodejs.org/api/zlib.html#zlibzstddecompresssyncbuffer-options),
-which is unavailable in earlier Node 22 releases.
+Use Node.js 24 or Node.js 22.18+ and pnpm 10. Shared TypeScript entrypoints use
+[native type stripping](https://nodejs.org/download/release/v22.18.0/docs/api/typescript.html#type-stripping),
+and source preparation uses Node's native Zstandard support.
 
 Install dependencies and download the prepared browser assets, then start the site:
 
@@ -25,15 +25,21 @@ pnpm dev
 
 For Earth alone, use `pnpm setup:assets --object=earth` and open `/earth/`.
 Setup resumes existing files and verifies them against the checked-in runtime
-inventories. It does not require source imagery, preparation tools, or the
-25.4 GB Earth geometry mirror. Development and preview fetch the visible
-geometry ranges from the published release when no local mirror is present.
+inventories. Running the prepared globe does not require source imagery,
+preparation tools or the retained 25.4 GB geographic release. The current Earth
+package does not enable city search, WorldCover paging or the noise lens.
 
 To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 `pnpm preview`. To regenerate assets from source instead, run
 `pnpm prepare:checkout`; that is the full preparation workflow described below.
 
 ## Checks
+
+`pnpm typecheck` checks the shared packages, renderer, preparation, and migrated
+shell and ownership-tool TypeScript. `pnpm check:typescript-ownership` rejects new
+authored JavaScript and stale migration entries. See the
+[TypeScript ownership policy](docs/architecture/typescript-ownership.md) for the
+remaining backlog and justified JavaScript exceptions.
 
 `pnpm test` runs package, renderer, platform, and shell behavior tests. It does
 not reconstruct bodies or verify the full archive of scientific source files.
@@ -78,7 +84,7 @@ camera input interrupts flight at the last drawn view. Existing object routes
 and compact `?v` links remain supported, including translated camera positions.
 The [implementation map](.agents/skills/celestial-skill/references/implementation-map.md)
 locates the current preparation, renderer and shell code. Earlier
-[runtime ownership checks](docs/generic-runtime-contract-proof.md) cover an
+[runtime ownership checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/generic-runtime-contract-proof.md) cover an
 eleven-object version at the revisions recorded there.
 
 ## Build and Runtime
@@ -121,19 +127,18 @@ immutable URLs on the project asset CDN. After changing prepared outputs,
 maintainers publish their updated inventories with `pnpm publish:runtime-assets`
 (or `--object=earth`) before pushing the code that references them.
 
-`prepare:checkout` restores the exact source bytes
-and Earth's published geometry release, then generates `public/scenes/` locally.
-The pinned worldwide release contains 19,632 packs (25.4 GB) outside Git and
-`dist`. Acquisition resumes valid local packs and validates every replacement
-before publishing it atomically to `.local/wmts-global/<version>/`.
-See [Earth reproduction](docs/global-earth-coverage.md#reproduction-and-checks)
-for acquisition and explicit geometry-authoring commands.
+`prepare:checkout` restores source bytes and generates `public/scenes/` locally.
+This full-source command still restores Earth's retained 19,632-pack geographic
+release (25.4 GB), although the current globe does not use it. Normal
+`setup:assets` installs only prepared browser assets. The release's earlier
+[reproduction record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/global-earth-coverage.md#reproduction-and-checks)
+remains available as source history.
 
 The vendored astronomy package (`packages/astronomy`, see its `SOURCE.md`) is
 a preparation dependency only. It is consumed through its own build, which
 `pnpm install` runs as `postinstall` (`pnpm build:astronomy` repeats it);
 `pnpm prepare:planets` builds it first, and `pnpm prepare:solar-geometry`
-regenerates the checked-in `src/platform/solar-geometry.mjs` from it
+regenerates the checked-in `src/platform/solar-geometry.mts` from it
 bit-for-bit. The browser runtime never loads it.
 
 Surface minimaps are separate prepared WebP images, at most 640 pixels wide
@@ -155,7 +160,6 @@ chains run in parallel, with a conservative limit based on available CPU and
 memory. Unchanged objects reuse prepared files only after their source, generator,
 toolchain, and output hashes have been verified. Missing or changed output files
 rebuild their object. A changed shared generator invalidates affected caches.
-Earth's pinned geometry packs are included in its input verification.
 
 Use `pnpm prepare:planets:full` for a full rebuild, including reproducibility
 checks. Use `pnpm prepare:planets --object=saturn` to prepare one existing object,
@@ -164,11 +168,9 @@ are recorded in `.local/preparation/latest-run.json`. Saturn's preparation
 generates its normal material masters once and verifies them before composing
 the complete scene.
 
-Measured on the development Mac on 2026-09-05, the complete serial rebuild took
-44m39s. Two forced builds with three workers took 18m24s and 19m28s and produced
-identical outputs. The verified unchanged run took 44s with all eleven cache
-entries reused; reading and hashing Earth's 25.4 GB input release took 38s of
-that run. These are local measurements, not guaranteed build times.
+The [September 2026 preparation measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/README.md#build-and-runtime)
+cover the earlier eleven-object version. They are not build-time estimates for
+the current registry.
 
 The existing NASA description collection is prepared separately and committed
 under `data/planets/`. Other objects may own their source snapshots and parsers;

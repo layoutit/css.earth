@@ -14,7 +14,7 @@ try {
     await page.route('**/__preview-fixture', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><body></body>' }));
     await page.goto(`${origin}/__preview-fixture`);
     await page.evaluate(async () => {
-      const { createSurfaceMinimap } = await import('/site/surface-minimap.mjs');
+      const { createSurfaceMinimap } = await import('/site/surface-minimap.mts');
       document.body.innerHTML = `<details><summary>Surface Lens</summary>${['a','b'].map(id =>
         `<div data-lens-details ${id === 'b' ? 'hidden' : ''}><div class="planet-surface-minimap">
           <img data-surface-preview-src="/__preview-${id}.png" width="200" height="100" alt="Prepared surface">

@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "0d5316246eeeb845aee989581496e2fea1399d3ceaeaab3d9545ac3ca4e55bee"
+          "sha256": "ed85865e1dc85e732d966cec5d65f1ba3c741edd6ccabda3520374ce2b3edd57"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fb95c6249093d0bd0255f81e453db8d5de041e8ef3e13b0ef8b80786a93763d5"
+        "sha256": "89c9b430f8e5b489b44b3ff48f9dfdbefe2cef16cf6fa6d3c2df03ab2533e31d"
+      }
+    },
+    "catalog": {
+      "name": "Thyra",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.379742056440902,
+      "description": "Explore Thyra in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 265,
+      "context": {
+        "order": 310
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a6b4f8612ce8497280a7d69aa6e7d760790fc991f93c079fc2d79dde6b0b2e6c"
+    "sha256": "be050e4305e20582db9e7d255c9df18800a6981cdfd9b573e6d6ea01ace2028a"
   }
 }

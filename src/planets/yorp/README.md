@@ -4,7 +4,7 @@ YORP is a small near-Earth asteroid with a radar-derived flattened northern hemi
 
 ## Sources
 
-Geometry is the unchanged [yorp.obj](https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf): Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL. The index, original OBJ, paper and supporting material, Horizons responses and authored recipe are pinned under source/.
+Geometry is the unchanged [yorp.obj](https://echo.jpl.nasa.gov/asteroids/shapes/yorp.obj) from the [NASA/JPL radar model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html). Interpretation comes from [the original research](https://echo.jpl.nasa.gov/asteroids/taylor%2B2007_PH5.pdf): Taylor et al. (2007), Science 316, 274–277 and supporting material; Arecibo, Goldstone and NASA/JPL. The original OBJ, paper and supporting material, Horizons responses and authored recipe are pinned under source/.
 
 - Included: the original JPL shape and its scientific paper provide source geometry, scale, spin and limits. Shape displays the shared missing-imagery grid under prepared lighting.
 - Included: Elevation derives source radius minus the 0.0564 km reference sphere, with a -0.03 to 0.03 km palette. This is a second visualization of the radar inverse model; it is not independent topography, optical albedo or gravitational elevation.

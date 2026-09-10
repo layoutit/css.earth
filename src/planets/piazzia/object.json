@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1c885343cfb2dc208b563ae2b80033e46f90f97fecc65700948d93037105aa3e"
+        "sha256": "982459fb7c1e319770bb6c04cf3e98226c5cee961faf178008c9cee30bebd73f"
+      }
+    },
+    "catalog": {
+      "name": "Piazzia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1710520001451843,
+      "description": "Explore Piazzia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 402,
+      "context": {
+        "order": 206
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9198b64317aa5bfed0d478eb62416d33359a16b6030f56919f1461509b718650"
+    "sha256": "094cf99990abb99fd2df12e043abc3efb407b1e716f8269ef8c975a3e53db3c0"
   }
 }

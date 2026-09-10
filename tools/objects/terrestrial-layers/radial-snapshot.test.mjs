@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';
-import {renderRadialSnapshot} from './radial-snapshot.mjs';
+import {renderRadialSnapshot} from './radial-snapshot.mts';
 
 const normal=[1,0,0];
 const faces=[

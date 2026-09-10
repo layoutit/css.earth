@@ -32,7 +32,10 @@ No dated test report is cited in the existing source notes.
 
 **Shape, scale and orientation**
 
-The radius-table formula and pole conversion are in source/measurements.json. The authored geometry and grid thumbnail come from `docs/lucy-targets/author.mjs`; shared preparation then produces the scene.
+The [measurements](source/measurements.json) record the radius-table formula and
+pole conversion. The [table tool](../../../tools/objects/source-authoring/README.md)
+reproduces the pinned radii. The [navigation recipe](source/preparation/navigation.json)
+records the context image; shared preparation produces the scene.
 
 **Source survey**
 

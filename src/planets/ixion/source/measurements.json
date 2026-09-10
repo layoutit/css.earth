@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-10",
+  "id": "ixion",
+  "name": "Ixion",
+  "horizons": "28978;",
+  "distanceAu": 37.41243146579822,
+  "fullAxesKm": [
+    726.84,
+    726.84,
+    667.96
+  ],
+  "radiusKm": 353.3290693408871,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "No secure rotation period",
+  "population": "Plutino (3:2 resonance with Neptune)",
+  "classification": "trans-neptunian",
+  "shapeLabel": "Occultation-outline illustration",
+  "source": "https://arxiv.org/abs/2601.09639",
+  "credit": "Kilic et al. (2026), multi-chord occultations of Ixion, global limb fit (Fig. 2).",
+  "papers": [
+    "https://arxiv.org/abs/2601.09639"
+  ],
+  "shapeMeaning": "The 2020–2023 global projected ellipse has semiaxes 363.42 (+3.53/−3.85) and 333.98 (+7.07/−4.96) km. This axisymmetric edge-on illustration assumes equatorial depth equal to the long projected diameter; the 726.84 × 726.84 × 667.96 km full axes are not a measured 3D shape. True flattening and depth remain unresolved.",
+  "orientationMeaning": "Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement.",
+  "introduction": "Ixion is a large world beyond Neptune. Several stellar occultations constrain its flattened outline; the displayed depth is assumed and its surface is unmapped.",
+  "survey": [
+    "Selected: the 2026 combined multi-chord fit supersedes older thermal-size-only illustrations.",
+    "The 12.4-hour period estimate is not secure in the 2026 analysis. No measured pole or current rotational phase is installed.",
+    "No resolved global imagery or topographic mesh was supplied by the selected occultation study; its ellipse constrains only the projected limb."
+  ],
+  "references": [
+    {
+      "file": "ixion-kilic-2026.pdf",
+      "url": "https://arxiv.org/pdf/2601.09639",
+      "sha256": "7169924fc5b849b6d6009e4bb712b0b44820631d8eecbd29a1c3162ba1acbee4",
+      "bytes": 6578792,
+      "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+      "licenseEvidence": [
+        "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "extraction": "Global limb fit Fig.2, PDF p.7; §discussion: projected ellipse, no determined 3D depth or secure spin."
+    }
+  ]
+}

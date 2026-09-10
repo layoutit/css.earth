@@ -15,7 +15,7 @@ Convex light-curve reconstruction, 89 ± 7 km volume-equivalent diameter in the 
 
 ## Evidence
 
-The [pomona results](../../../docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **398.64 m**. This is a sampled comparison, not an exhaustive error bound.
+The [pomona results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **398.64 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The report includes 2 browser cases tied to recorded body assets. It does not identify the tested code revision.
 
@@ -48,6 +48,8 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 <details>
 <summary>Source survey</summary>
+
+[Model fields and mesh measurements](source/reference/damit-model.json).
 
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/16306) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/129497/shape.txt) — included unchanged. Convex light-curve inversion; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.

@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "98ead56c636801526114c7325215c702b031792f75fb3ec656c9069406d23a27"
+        "sha256": "b9496630e3c3670e244ef1f90fbcaf802a08f71ea5fea9e47e56177803f201d0"
+      }
+    },
+    "catalog": {
+      "name": "Bergelmir",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Bergelmir, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 40,
+      "context": {
+        "order": 236
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cbe39fcbee102f464ab58dc609979208fe1b894f28f8e8abc20f5e5c5a85a36a"
+    "sha256": "3fe0939a14b36ad8e85ac01b658d33be45c44e8eaec9cc0b2ed0e89b3143c917"
   }
 }

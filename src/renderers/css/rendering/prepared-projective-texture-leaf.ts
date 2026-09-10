@@ -1,3 +1,4 @@
+export type PreparedProjectiveStyle = Pick<CSSStyleDeclaration, "width" | "height" | "backgroundPosition" | "backgroundSize" | "getPropertyValue" | "setProperty">;
 export interface PreparedProjectiveLayout { width?: string; height?: string; backgroundSize?: string; }
 export interface PreparedProjectiveTextureLeaf {
   tag?: string; className?: string; style: string;
@@ -17,7 +18,7 @@ export function scalePreparedPixelLengths(value: string | number, scale: number)
   );
 }
 
-export function scalePreparedBackgroundAddresses(style: CSSStyleDeclaration, scale: number) {
+export function scalePreparedBackgroundAddresses(style: PreparedProjectiveStyle, scale: number) {
   const references = new Set<string>();
   for (const value of [style.backgroundPosition, style.backgroundSize]) {
     for (const match of String(value).matchAll(/var\(\s*(--[\w-]+)/g)) {
@@ -37,7 +38,7 @@ export function scalePreparedBackgroundAddresses(style: CSSStyleDeclaration, sca
   style.backgroundSize = scalePreparedPixelLengths(style.backgroundSize, scale);
 }
 
-export function applyPreparedProjectiveLayout(style: CSSStyleDeclaration, layout: PreparedProjectiveLayout | null, rasterScale: number) {
+export function applyPreparedProjectiveLayout(style: Pick<PreparedProjectiveStyle, "width" | "height" | "backgroundSize" | "getPropertyValue">, layout: PreparedProjectiveLayout | null, rasterScale: number) {
   if (!Number.isFinite(rasterScale) || rasterScale < 1) {
     throw new TypeError("Prepared projective texture raster scale is invalid.");
   }

@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2da07b74da3e07ad2f9353e86fc75b1cd3734a2864de31c6799090b0d59e2457"
+          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
         },
         {
           "id": "rotation",
@@ -86,7 +86,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "207e8cf571dc473e864d718a97644fe06220b78bbdd34a5bcbbd56c7849ce412"
+        "sha256": "4b394e466bc850055698948cd23a7d9370cd2f66597e054e8f149679ca32c765"
       }
     },
     "worldFrame": {
@@ -115,11 +115,24 @@
       ],
       "metersPerUnit": 2379.018845256929,
       "bodyRadiusM": 547174.3344090937
+    },
+    "catalog": {
+      "name": "Quaoar",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 43.16573948799057,
+      "description": "Explore its published shape and source constraints.",
+      "systemName": "Solar System",
+      "order": 358,
+      "context": {
+        "order": 424,
+        "color": "#9d9388"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "452364f2cdc2c0458b8bb6c2a6b1d38ccaee2188afc17d09c2b5970e6651ae6f"
+    "sha256": "91b4966ba712b7aa2af2eee359ecd00711d8047b2b5decaac838616b81c20d59"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fe6d507f68a0048086b29580f9b5ee5b3b7acfdd9428abfabd153beb71b5ce47"
+        "sha256": "b98edf019caa641ac7476747919b226504606c225e00d9983622ee5aa21addc2"
+      }
+    },
+    "catalog": {
+      "name": "Kressmannia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.192543456333038,
+      "description": "Explore Kressmannia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 396,
+      "context": {
+        "order": 200
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7f46f401803c566fe08406c999031d103cd1b754186dafe41d20ab2b92f1c797"
+    "sha256": "7b4baa0815dbed6a1a6e7f8fda49923120c1dbac40de469ba6c5837f086f1887"
   }
 }

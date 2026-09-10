@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../src/planets/polydeuces/source/', import.meta.url);
 const read = async path => JSON.parse(await readFile(new URL(path, root)));
 
@@ -17,7 +17,7 @@ test('Polydeuces preserves the source dimensions as a closed physical surface', 
   assert.equal(topology.eulerCharacteristic, 2); assert.equal(topology.components, 1);
 });
 
-import {decodeCalibratedCamera,prepareShapeCameraMosaic} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mjs';
+import {decodeCalibratedCamera,prepareShapeCameraMosaic} from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 test('Polydeuces retains calibrated native pixels and withholds the unseen hemisphere', async () => {
   const recipe = await read('preparation/terrestrial.json'), manifest = await read('manifest.json');
   const chosen = recipe.raster.mosaics[0];

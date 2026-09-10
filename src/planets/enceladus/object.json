@@ -125,13 +125,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "15bf3ce91fca450159fd78c28a8e755e3c60e4b5921bcbf227314a030dc2000b"
+        "sha256": "c9b67e149910d19e37f6d6b2b671ca2a4f2ba00c6011c3bc6ff6bea3701d840a"
+      }
+    },
+    "catalog": {
+      "name": "Enceladus",
+      "classification": "satellite",
+      "color": "#d3d7d8",
+      "distanceAu": 9.58,
+      "description": "Explore Enceladus in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s fractured icy ocean moon.",
+      "systemName": "Solar System",
+      "order": 439,
+      "context": {
+        "order": 20
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ee4e5424d79bf97417f72241eb0bf68172bb1c8affe6887856ebb157d452856c"
+    "sha256": "92be4479e91e6cafc6df33e13e4548924edb1915c9bae68815ae7588a61b1715"
   }
 }

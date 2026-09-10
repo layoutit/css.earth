@@ -1,0 +1,52 @@
+{
+  "id": "naiad",
+  "classification": "satellite",
+  "order": 260,
+  "physical": {
+    "name": "Naiad",
+    "horizonsCode": "803",
+    "meanRadiusKm": 29,
+    "gravitationalParameterKm3PerS2": 0.00853,
+    "parent": "neptune"
+  },
+  "physicalNotes": "Current Horizons GMs; Karkoschka ellipsoid dimensions belong to body sources.",
+  "satellite": {
+    "parent": "neptune",
+    "horizonsCode": "803",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": -1.055926199218,
+    "poleDeclinationRad": 0.74949922468,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 48293.8,
+      "eccentricity": 0.000153250201,
+      "inclinationRad": 0.082672895875,
+      "ascendingNodeRad": 0.677066913547,
+      "argumentOfPeriapsisRad": 1.260881212475,
+      "meanAnomalyAtEpochRad": -155891.81128522652,
+      "meanMotionRadPerDay": 21.313271838473046,
+      "ascendingNodeRateRadPerDay": -0.02990005732999839,
+      "argumentOfPeriapsisRateRadPerDay": 0.05953386353861316
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "803",
+      "center": "500@899",
+      "parent": "neptune",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "803",
+      "center": "500@899",
+      "range": "daily"
+    }
+  }
+}

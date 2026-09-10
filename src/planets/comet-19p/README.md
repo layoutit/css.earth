@@ -12,7 +12,7 @@ Borrelly compares two reconstructions of the Deep Space 1 encounter terrain and 
 
 ## Evidence
 
-The [9 September 2026 browser record](../../../docs/comets/evidence/borrelly/browser.json) covers five datasets, lighting states, DPR 1/2 and a fresh asset installation. The [qualification report](../../../docs/comets/BORRELLY.md) links source-fit, registration and capture evidence. These are recorded results; they do not establish physical-mobile performance or a fresh unrestricted all-body preparation run.
+The [9 September 2026 browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/borrelly/browser.json) covers five datasets, lighting states, DPR 1/2 and a fresh asset installation. The [qualification report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/BORRELLY.md) links source-fit, registration and capture evidence. These are recorded results; they do not establish physical-mobile performance or a fresh unrestricted all-body preparation run.
 
 ## Known problems
 
@@ -133,6 +133,6 @@ The [contributor guide](../README.md) covers shared commands. The body-specific
 registration audit is under `tests/objects/oracle/comet-19p/registration.py`
 and requires NumPy and SciPy.
 The broader qualification and delivery evidence is in
-[`docs/comets/BORRELLY.md`](../../../docs/comets/BORRELLY.md).
+[`docs/comets/BORRELLY.md`](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/BORRELLY.md).
 
 </details>

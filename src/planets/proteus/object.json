@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "87b513e6956b7c415d2357abdd155f75d26a44eac9e42dbcb93cbfaf9caa26e2"
+        "sha256": "43be5416aa475a84783f6ed75636c360447c7b9cbcd60cb103829749d9bd1e28"
+      }
+    },
+    "catalog": {
+      "name": "Proteus",
+      "classification": "satellite",
+      "color": "#a39e96",
+      "distanceAu": 30.07,
+      "description": "Explore Proteus with Voyager 2 imagery and its source-backed irregular shape.",
+      "systemName": "Solar System",
+      "order": 110,
+      "context": {
+        "order": 60
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "590d984b55277fbafd52e980136dca4b43c7ed21c58ae3a933cca67ac4d4b0d4"
+    "sha256": "5cd6c2b6d549f1b244d78b05df23ade1544bcaad050509235445cb9ca5121d08"
   }
 }

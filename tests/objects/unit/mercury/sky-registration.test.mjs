@@ -5,16 +5,16 @@ import {
   ASTROMETRIC_CUBE_FRAME,
   prepareAstrometricCubeSampling,
   prepareAstrometricSkySceneRegistration,
-} from "../../../../src/platform/astrometric-sky-registration.mjs";
+} from "../../../../src/platform/astrometric-sky-registration.mts";
 import {
   ICRS_TO_GALACTIC,
   transformDirection,
   transposeMatrix,
-} from "../../../../src/platform/galactic-frame.mjs";
+} from "../../../../src/platform/galactic-frame.mts";
 import {
   requireBodyFixedSunDirection,
   requireBodyFixedToIcrf,
-} from "../../../../src/platform/solar-geometry.mjs";
+} from "../../../../src/platform/solar-geometry.mts";
 import PREPARED_MERCURY_SCENE from "../../../../src/planets/mercury/prepared/scene.json" with {type: "json"};
 import PREPARED_MERCURY_SKY_SUN from "../../../../src/planets/mercury/prepared/sun.json" with {type: "json"};
 import PREPARED_MERCURY_STARFIELD from "../../../../src/planets/mercury/prepared/sky.json" with {type: "json"};

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createSceneRouter } from '../scene-router.mjs';
+import { createSceneRouter } from '../scene-router.mts';
 import { formatSharedView } from '../../src/renderers/css/dist/index.js';
-import { createPreparedContextNavigation } from '../prepared-context-navigation.mjs';
+import { createPreparedContextNavigation } from '../prepared-context-navigation.mts';
 import { worldCameraFromCenteredPresentation } from '../../src/renderers/css/dist/navigation.js';
 
 const flush = () => new Promise(setImmediate);
@@ -14,7 +14,7 @@ function deferred() {
 const saved = distance => ({ camera: { distanceKilometers: distance,
   pose: { schema: 'cssearth-camera-pose@2', scene: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' } },
   playback: { times: [1234], speed: 1, motionRequested: false } });
-function harness({ prepare = async () => ({}), focus = undefined, centerTarget = undefined, systemTarget = undefined, overviewTarget = undefined, initialUrl = null, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false, worldFrames = null } = {}) {
+function harness({ prepare = async () => ({}), focus = undefined, centerTarget = undefined, systemTarget = undefined, overviewTarget = undefined, initialUrl = null, factoryGate = null, contentGate = null, persistentWorldContext = null, withSun = false, worldFrames = null, datasets = false, datasetGate = null } = {}) {
   const documentTarget = new EventTarget(), windowTarget = new EventTarget(), media = new EventTarget();
   documentTarget.hidden = false; documentTarget.documentElement = { dataset: {} };
   documentTarget.body = { classList: { add() {}, remove() {} } };
@@ -86,6 +86,25 @@ function harness({ prepare = async () => ({}), focus = undefined, centerTarget =
         for (const listener of cameraListeners) listener(world, optics);
       };
     }
+    if (datasets) {
+      let selected = 'normal', live = true;
+      const changes = new Set();
+      const publish = id => { selected = id; for (const listener of changes) listener(id); };
+      mount.datasets = { ids: ['normal', 'mapped', 'failed'], defaultId: 'normal', current: () => selected,
+        async select(id, { signal } = {}) {
+          if (!this.ids.includes(id)) throw new RangeError('Unknown dataset');
+          if (id === 'failed') throw new Error('Dataset decode failed');
+          if (signal?.aborted || !live) return false;
+          if (datasetGate && id === 'mapped') await Promise.race([datasetGate.promise, new Promise(resolve => signal?.addEventListener('abort', resolve, { once: true }))]);
+          if (signal?.aborted || !live) return false;
+          publish(id); return true;
+        },
+        subscribe(listener) { changes.add(listener); return () => changes.delete(listener); },
+      };
+      mount.manualDataset = publish;
+      const destroy = mount.destroy.bind(mount);
+      mount.destroy = () => { live = false; changes.clear(); destroy(); };
+    }
     mounts.push(mount); renders.add(mount); maxRendered = Math.max(maxRendered, renders.size);
     assert.equal(renders.size, 1, 'At most one detailed scene may render');
     return mount;
@@ -95,6 +114,8 @@ function harness({ prepare = async () => ({}), focus = undefined, centerTarget =
     mountShell(options) {
       const shell = { input, options, destroyed: 0, selected: 'mercury',
         setPlaybackState(value) { this.playback = value; },
+        showDataset() { this.datasetShown = true; },
+        setDatasetNotice(message) { this.datasetNotice = message; },
         setMotionEnabled(value) { options.onMotionChange(value); },
         setPreparedFocus(record, sources, presentation) { this.preparedFocus = record; this.focusSources = sources; this.focusPresentation = presentation; },
         setObject(content) { assert.equal(renders.size, 0); content.apply(); this.selected = content.id; },
@@ -861,4 +882,79 @@ test('selecting another list body during a flight still uses its system framing'
   assert.deepEqual(h.preparations.at(-1).targetWorldCamera, { system: 'sun' });
   assert.equal(h.router.state().overview, true);
   gate.resolve({}); h.router.destroy();
+});
+
+test('dataset links commit one same-body history entry, preserve the camera and restore the default on back', async () => {
+  let focuses = 0;
+  const h = harness({ datasets: true, focus: async () => { focuses++; } }); await h.router.settled;
+  const mount = h.mounts[0]; mount.value = saved(54321);
+  assert.equal(await h.router.navigate('mercury', { url: '/mercury/#dataset=mapped' }), true);
+  assert.equal(mount.datasets.current(), 'mapped'); assert.equal(focuses, 0);
+  assert.equal(mount.value.camera.distanceKilometers, 54321);
+  assert.equal(h.windowTarget.location.hash, '#dataset=mapped');
+  assert.equal(h.writes.filter(write => write === 'push').length, 1);
+  assert.equal(h.shells[0].datasetShown, true);
+  h.windowTarget.history.back(); await h.router.settled;
+  assert.equal(mount.datasets.current(), 'normal');
+  assert.equal(mount.value.camera.distanceKilometers, 54321);
+  assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.mounts.length, 1); h.router.destroy();
+});
+
+test('manual datasets replace history and ordinary body navigation removes only the dataset fragment', async () => {
+  const h = harness({ datasets: true }); await h.router.settled;
+  h.mounts[0].manualDataset('mapped');
+  assert.equal(h.windowTarget.location.hash, '#vault&dataset=mapped');
+  assert.equal(h.writes.includes('push'), false);
+  await h.router.navigate('venus');
+  assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.mounts[1].datasets.current(), 'normal');
+  h.windowTarget.history.back(); await h.router.settled;
+  assert.equal(h.mounts.at(-1).datasets.current(), 'mapped');
+  assert.equal(h.windowTarget.location.hash, '#vault&dataset=mapped');
+  h.mounts.at(-1).manualDataset('normal'); assert.equal(h.windowTarget.location.hash, '#vault');
+  h.router.destroy();
+});
+
+test('direct dataset links wait for readiness without pushing, and invalid direct links remain diagnostic', async () => {
+  for (const id of ['mapped', 'missing']) {
+    const h = harness({ datasets: true, initialUrl: `https://example.test/mercury/#dataset=${id}` });
+    await h.router.settled;
+    assert.equal(h.mounts[0].datasets.current(), id === 'mapped' ? 'mapped' : 'normal');
+    assert.equal(h.router.state().ready, true); assert.equal(h.writes.includes('push'), false);
+    assert.equal(h.windowTarget.location.hash, `#dataset=${id}`);
+    if (id === 'missing') assert.match(h.shells[0].datasetNotice, /unavailable/);
+    h.router.destroy();
+  }
+});
+
+test('a failed same-body dataset leaves the committed selection and URL together', async () => {
+  const h = harness({ datasets: true }); await h.router.settled;
+  await h.router.navigate('mercury', { url: '/mercury/#dataset=mapped' });
+  for (const id of ['failed', 'missing']) {
+    assert.equal(await h.router.navigate('mercury', { url: `/mercury/#dataset=${id}` }), false);
+    assert.equal(h.mounts[0].datasets.current(), 'mapped');
+    assert.equal(h.windowTarget.location.hash, '#dataset=mapped');
+    assert.ok(h.shells[0].datasetNotice);
+  }
+  assert.equal(h.writes.filter(write => write === 'push').length, 1); h.router.destroy();
+});
+
+test('a cancelled dataset cannot publish after a replacement navigation', async () => {
+  const gate = deferred(), h = harness({ datasets: true, datasetGate: gate }); await h.router.settled;
+  const pending = h.router.navigate('mercury', { url: '/mercury/#dataset=mapped' }); await flush();
+  assert.equal(h.mounts[0].datasets.current(), 'normal'); assert.equal(h.writes.includes('push'), false);
+  await h.router.navigate('venus'); assert.equal(await pending, false);
+  gate.resolve(); await flush();
+  assert.equal(h.windowTarget.location.pathname, '/venus/'); assert.equal(h.windowTarget.location.hash, '#vault');
+  assert.equal(h.mounts[1].datasets.current(), 'normal'); assert.equal(h.maxRendered(), 1); h.router.destroy();
+});
+
+test('cross-body dataset failure finishes on the destination default without claiming the failed dataset', async () => {
+  const h = harness({ datasets: true }); await h.router.settled;
+  assert.equal(await h.router.navigate('venus', { url: '/venus/#dataset=failed' }), true);
+  assert.equal(h.windowTarget.location.pathname, '/venus/'); assert.equal(h.windowTarget.location.hash, '');
+  assert.equal(h.mounts.at(-1).datasets.current(), 'normal');
+  assert.match(h.shells[0].datasetNotice, /default dataset/);
+  assert.equal(h.writes.filter(write => write === 'push').length, 1); h.router.destroy();
 });

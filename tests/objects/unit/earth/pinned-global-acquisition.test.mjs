@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import test from "node:test";
-import { acquirePinnedGlobalWmts } from "../../../../tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mjs";
+import { acquirePinnedGlobalWmts } from "../../../../tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mts";
 
 const version = "1111111111111111", sourcePath = "src/planets/earth/source/";
 const fixtureOrigin = "https://wmts-fixture.invalid";

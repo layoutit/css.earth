@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "693ab181094ed1ab0eef5e0bf36179dd1e91e482fd3d7a994a7d0859a8d46f0d"
+        "sha256": "460ec4423af8463f6076339d0ed4242d731115870369c554126d62ea000528b5"
+      }
+    },
+    "catalog": {
+      "name": "Veritas",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1755270453241122,
+      "description": "Explore Veritas in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 388,
+      "context": {
+        "order": 192
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6c5bc2f40129e8ad8ff339471173d59e35873e1a421f98d00f8f6700b3f95af9"
+    "sha256": "347f1d0056cb75dfcfe39aa4e5eaf28fa0235f8bb1da1a0667501180cc45c5d5"
   }
 }

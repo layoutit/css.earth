@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "aaa555b5b83cc010cb20a3aef53d95d290b2ecff4ca1b49873f92b70db920bde"
+        "sha256": "368bf187c6da366597714c58ca1c5952b6530aff548aef452e3358a1b250e786"
+      }
+    },
+    "catalog": {
+      "name": "Ajax",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.281571123923134,
+      "description": "Explore Ajax in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 363,
+      "context": {
+        "order": 408
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9ff7a5350c3d3744342fb51b1411f801437b2ce220ef04cdbac8e17a092b5de9"
+    "sha256": "967867e4b8db6cf3b94000495ad7f3e33e2eb6ca47811b91764fbd8ec9d7c130"
   }
 }

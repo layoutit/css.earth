@@ -1,4 +1,7 @@
 ---
+import type { HTMLAttributes } from 'astro/types';
+import type { PlanetTitle } from '../planet-shell-types';
+interface Props extends Omit<HTMLAttributes<'section'>, 'title'> { title: PlanetTitle; introduction?: string; }
 const { title, introduction = '', ...attributes } = Astro.props;
 const titleScale = title.renderHeight / Number(title.renderViewBox.split(' ')[3]);
 const titleDescent = title.renderHeight - (title.baseline + title.renderPathOffsetY) * titleScale;

@@ -79,8 +79,8 @@ Terrain shading is derived from that same signed DEM using latitude-corrected sp
   signedness, compression, strip bounds, and no-data metadata. It does not pass
   negative elevations through an unsigned image conversion.
   <https://astrogeology.usgs.gov/search/map/pluto_new_horizons_lorri_mvic_global_dem_300m>
-- **Physical facts:** checked JPL physical-parameter HTML plus NASA's Pluto facts
-  record. Preparation parses and checks their Pluto identities and values. The
+- **Physical facts:** the [selected JPL Pluto row values](source/orbit/jpl-physical.json)
+  and NASA's Pluto facts record. Preparation checks their identities and values. The
   radius is 1,188.3 km; density 1.853 g/cm³; sidereal rotation −6.3872 days; orbital
   period 247.92065 years. NASA supplies the rounded mean solar distance of 39 AU.
   <https://ssd.jpl.nasa.gov/planets/phys_par.html>

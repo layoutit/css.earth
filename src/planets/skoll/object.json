@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c90b63449b566ac3f66581ecea7746cf3bcab6792366f7920ababbc2d7723563"
+        "sha256": "88cc389cc668c4aea18cfabb68249439f7c64872e160f5892340094c361079ee"
+      }
+    },
+    "catalog": {
+      "name": "Skoll",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Skoll, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 46,
+      "context": {
+        "order": 242
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4f59632e691e06fe8934337a63e6bf0b23046193764c971e9e66ff940ad48223"
+    "sha256": "b45c27abce42b06b64d638d2afe50323fc6765fce8124df56bbe0d1434848d7e"
   }
 }

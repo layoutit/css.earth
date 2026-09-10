@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2b68eadd0ff99121dc7a4aa85139889ad38df47d3c3eacee92fb98246cb954b0"
+          "sha256": "2e65bd54fc3aeda85a826a1f1ccf897c0a5734a93d24e0fe41232061c415a2d6"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3c96fc5231bd842de734145b68a52efbb0c8f18845450f4f89deece98c6d92f2"
+        "sha256": "2223cffa0d01b89665db586f0ac99c69127b361d54e01696663e2731cf4f869f"
+      }
+    },
+    "catalog": {
+      "name": "Anahita",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.1978820172913154,
+      "description": "Explore Anahita in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 346,
+      "context": {
+        "order": 392
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3ae1918003e79eaed8a47c2e6c25bd4c0f603e4f6b704df27488e6c814757bd7"
+    "sha256": "9f08ef1b229178e58b5e54c71f5751443cd9004648a5dc417d5d2d1105959c7b"
   }
 }

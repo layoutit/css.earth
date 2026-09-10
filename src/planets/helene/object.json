@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d0ec4804b056156a0376bdc7cbedeab4cd6f68867bbbc7a60342f31d85f603ac"
+        "sha256": "617c05099ce9d700b28c0a6a0edabfbca9da9761c0ac04a1d37aec5e09fe44f6"
+      }
+    },
+    "catalog": {
+      "name": "Helene",
+      "classification": "satellite",
+      "color": "#c3bfb7",
+      "distanceAu": 9.58,
+      "description": "Explore Helene in 3D with Cassini imagery and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 115,
+      "context": {
+        "order": 52
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a1802cb8231d416fa0166afc9107545a0aa66549ff3857d5224363d3c249421f"
+    "sha256": "977eade8e079726d9a10a3b2eb86b2d7f5e4e3328137db5788d719904cdc7ee9"
   }
 }

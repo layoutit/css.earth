@@ -3,7 +3,7 @@ import test from 'node:test';
 import {readFile,mkdtemp,readdir,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {continueBoundaryMean,percentileFalseColor,completeUniformCoverage,polarDiscAtlas,parseObservedSurfaceRecipe,prepareObservedSurfaces} from './observations.mjs';
+import {continueBoundaryMean,percentileFalseColor,completeUniformCoverage,polarDiscAtlas,parseObservedSurfaceRecipe,prepareObservedSurfaces} from './observations.mts';
 
 test('boundary continuation retains observed rows and varies only source-derived longitude',()=>{
   const input=new Float32Array([0,0,0,0,2,6,10,12,14,16,18,20]);

@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "179d88798c6c26483c43cdd4314c3e30829d12eff5b4073dd1472f59fd2ea022"
+          "sha256": "aebc0de44160f7c75371d32291666efaaf13a30e30e4a9b0cf5204e5a1edd594"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0a15a0c15493de6a14f305c8a78a88547eee708f3d2721c87b0c6c3bb63f8696"
+        "sha256": "2681912e199e12b718969ba43270a21cd980934703871e198ed72f2898a59bf1"
+      }
+    },
+    "catalog": {
+      "name": "Meliboea",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1311603864437165,
+      "description": "Explore Meliboea in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 279,
+      "context": {
+        "order": 325
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3b854380e1774964da2a665b037e458401f8eef0de6005f4dac1fd0fcf430bc6"
+    "sha256": "5ee9ebf34638121b661f881775855f4a593881a9ce2e5ebd1b31bc59ef4b220e"
   }
 }

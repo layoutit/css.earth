@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e55203f6fffd133cb23f1752e40bfcb9c8d0fdac5a8dc048a59833650a33cecb"
+        "sha256": "13ff98fe49f9f39742edfeb598daf4234975c7c191019cb3736ac9e754fa8950"
+      }
+    },
+    "catalog": {
+      "name": "Hesperia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.9772137652759962,
+      "description": "Explore Hesperia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 240,
+      "context": {
+        "order": 282
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "83b5c24f7a5384067cf4ddb8bdb42bca2b3ea1922e2730c0b8e1733779762c51"
+    "sha256": "5b97ff5fd46ae2ed5acf0e203303f9fe5351934c78c4f89aedb57ca09120f11b"
   }
 }

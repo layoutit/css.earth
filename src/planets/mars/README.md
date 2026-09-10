@@ -156,10 +156,9 @@ request or scientific calculation.
 
 The checked OpenSpace GLB models preserve the irregular source shapes of
 Phobos and Deimos. Their scene axes are cross-checked against OpenSpace's
-planet-owned globe assets. Physical mean radii and mean orbital elements come
-from checked JPL Solar System Dynamics MAR099 snapshots. The separate
-OpenSpace scene snapshot pins the MAR097 SPICE kernel used by that source
-scene; it is not the authority for the prepared mean-element table.
+planet-owned globe assets. The [JPL satellite tables](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html)
+identify Phobos and Deimos. Mars’s information panel records two moons. The
+OpenSpace scene record pins the MAR097 SPICE kernel used by that source scene.
 
 These are physical/source records, not rendered satellites in the Mars scene.
 The earlier `mars-moon-billboards.webp` and `mars-moon-billboards@2x.webp`
@@ -207,3 +206,7 @@ See the [contributor guide](../README.md) for shared commands. Body checks live
 under `tests/objects/unit/mars/`.
 
 </details>
+
+## Catalogue attribution
+
+The visible mosaic retains its collective Viking-orbiter capture credit. The catalogue now distinguishes Viking 1 and Viking 2 and their orbiters and landers, but this pinned image alone does not identify its individual contributors. The Missions tab presents that limit without assigning the mosaic to the landers or guessing individual mission links. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.

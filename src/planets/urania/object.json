@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f29208c700ce9fcec345de4712f3b8e78ad1aafa93250ae3df3f28d12a07bd0d"
+        "sha256": "7f6258e68785a902ce4a463915bc4a63755636fb3d88620cba6c98f6655258fc"
+      }
+    },
+    "catalog": {
+      "name": "Urania",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.365562509475688,
+      "description": "Explore Urania in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 166,
+      "context": {
+        "order": 97
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b71743966ba6b67ec9ac953cd14148a24d8cc29a16f1d123c4834016ad98494a"
+    "sha256": "effc23e2bbc63efa0b8f51b26468099eb59ba689d8b979c963d9532a2c3aa601"
   }
 }

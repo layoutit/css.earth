@@ -1,34 +1,37 @@
 ---
-import catalog from '../prepared-spacecraft.json';
-import { datasetSpacecraft } from '../dataset-spacecraft.mjs';
+import type { MissionRecord } from '../../src/platform/exploration-catalog.mts';
+import { EXPLORATION, referenceUrl, missionDatasets, REFERENCES } from '../exploration-catalog.mts';
 import SelectedContent from './SelectedContent.astro';
-const { provenance, lensId, missions, visibleMissionIds } = Astro.props;
-const spacecraft = missions ?? datasetSpacecraft(provenance, lensId, catalog);
-const dateRange = mission => {
-  const launched = mission.facts.find(fact => fact.label === 'Launched')?.value;
-  const ended = mission.facts.find(fact => fact.label === 'Ended')?.value;
-  const status = mission.facts.find(fact => fact.label === 'Status')?.value;
-  const end = ended ?? (status?.startsWith('Active') ? 'present' : null);
-  return launched && (end ? `${launched}–${end}` : launched);
-};
+import SpacecraftDetails from './SpacecraftDetails.astro';
+interface Props { objectId: string; missions: readonly MissionRecord[]; visibleMissionIds?: readonly string[]; }
+const { objectId, missions, visibleMissionIds } = Astro.props;
+const dateRange = (mission: MissionRecord) => mission.started ? `${mission.started.value}${mission.ended ? `–${mission.ended.value}` : ''}` : null;
+const contributors = (missionId: string) => new Set((EXPLORATION.graph.byMission[missionId] ?? []).map(index => EXPLORATION.graph.edges[index])
+  .filter(edge => edge.objectId === objectId && edge.lensIds.length).flatMap(edge => edge.attribution.kind === 'spacecraft' ? [edge.attribution.spacecraftId] : []));
 ---
-{spacecraft.length > 0 && <div class="planet-dataset-spacecraft" aria-label="Source spacecraft">
-  {spacecraft.map(mission => <article class="planet-spacecraft" data-spacecraft={mission.id}
-    hidden={visibleMissionIds && !visibleMissionIds.includes(mission.id)}>
-    <SelectedContent title={mission.name} metadata={dateRange(mission)} description={mission.description} href={mission.descriptionSourceUrl ?? mission.sourceUrl}>
-    <div class="planet-spacecraft-preview">
-      <a class="planet-spacecraft-image-link" href={mission.image.sourceUrl} target="_blank" rel="noreferrer"
-      aria-label={`${mission.name} ${mission.image.kind === 'model-render' ? '3D model render' : 'spacecraft illustration'} — ${mission.image.credit}`}>
-      <img class="planet-spacecraft-image" src={mission.image.src}
-        width={mission.image.width} height={mission.image.height}
-        alt={`${mission.name} ${mission.image.kind === 'model-render' ? '3D model render' : 'spacecraft illustration'}`} loading="lazy" decoding="async" />
-      </a>
-      {mission.emblem && <a class="planet-spacecraft-emblem" href={mission.emblem.sourceUrl} target="_blank" rel="noreferrer"
-        aria-label={`${mission.name} mission emblem — ${mission.emblem.credit}`}>
-        <img src={mission.emblem.src} width={mission.emblem.width} height={mission.emblem.height}
-          alt={`${mission.name} mission emblem`} loading="lazy" decoding="async" />
-      </a>}
-    </div>
-    </SelectedContent>
-  </article>)}
+{missions.length > 0 && <div class="planet-dataset-spacecraft" aria-label="Contributing missions">
+  {missions.map(mission => {
+    const image = mission.imageId ? EXPLORATION.images[mission.imageId] : null;
+    const emblem = mission.emblemId ? EXPLORATION.emblems[mission.emblemId] : null;
+    const vehicles = contributors(mission.id);
+    const references = [...new Set([mission.name, mission.description, mission.agencyIds, ...(mission.started ? [mission.started] : []), ...(mission.ended ? [mission.ended] : []), ...(mission.status ? [mission.status] : [])].flatMap(field => field.referenceIds).concat(mission.participants.flatMap(member => member.referenceIds)))];
+    return <article class="planet-spacecraft" data-mission={mission.id} hidden={visibleMissionIds && !visibleMissionIds.includes(mission.id)}>
+      <SelectedContent title={mission.name.value} metadata={dateRange(mission)} description={mission.description.value} href={referenceUrl(mission.description)}>
+        {(image || emblem) && <div class="planet-spacecraft-preview">
+          {image && <a class="planet-spacecraft-image-link" href={image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${mission.name.value} mission artwork — ${image.credit}`}>
+            <img class="planet-spacecraft-image" src={image.src} width={image.width} height={image.height} alt={`${mission.name.value} mission illustration`} loading="lazy" decoding="async" />
+          </a>}
+          {emblem && <a class="planet-spacecraft-emblem" href={emblem.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${mission.name.value} mission emblem — ${emblem.credit}`}>
+            <img src={emblem.src} width={emblem.width} height={emblem.height} alt={`${mission.name.value} mission emblem`} loading="lazy" decoding="async" />
+          </a>}
+        </div>}
+      </SelectedContent>
+      {mission.status && <p class="planet-mission-status"><a href={referenceUrl(mission.status)} target="_blank" rel="noreferrer">{mission.status.value.value}</a> as of {mission.status.value.asOf}</p>}
+      <h4>Datasets on this body</h4>
+      <ul class="planet-mission-datasets">{missionDatasets(mission.id, objectId).map(view => <li><a href={view.href} data-dataset-link data-dataset-object={view.objectId} data-dataset-id={view.lensId}>{view.label}</a></li>)}</ul>
+      <h4>Spacecraft</h4>
+      {mission.participants.map(member => <SpacecraftDetails spacecraftId={member.spacecraftId} {objectId} contributed={vehicles.has(member.spacecraftId)} />)}
+      <details class="planet-mission-references"><summary>Mission references</summary><ul>{references.map(id => <li><a href={REFERENCES[id].url} target="_blank" rel="noreferrer">{REFERENCES[id].title}</a></li>)}</ul></details>
+    </article>;
+  })}
 </div>}

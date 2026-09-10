@@ -1,0 +1,52 @@
+{
+  "id": "cressida",
+  "classification": "satellite",
+  "order": 74,
+  "physical": {
+    "name": "Cressida",
+    "horizonsCode": "709",
+    "meanRadiusKm": 39.78509749046438,
+    "gravitationalParameterKm3PerS2": 0.01227,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "709",
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 1.349208683378,
+    "poleDeclinationRad": 0.26530429246,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 61769.496,
+      "eccentricity": 0.004361895113,
+      "inclinationRad": 0.03101072085,
+      "ascendingNodeRad": 2.057801544727,
+      "argumentOfPeriapsisRad": -4.331291062176,
+      "meanAnomalyAtEpochRad": -98996.49153838356,
+      "meanMotionRadPerDay": 13.539836693351395,
+      "ascendingNodeRateRadPerDay": -0.014085961985914441,
+      "argumentOfPeriapsisRateRadPerDay": 0.028165427705870782
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "709",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "709",
+      "center": "500@799",
+      "range": "daily"
+    }
+  }
+}

@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 2064,
-      "expectedSha256": "8c6edeae538cbce3cd960ba2eac050f5b095ee520af77aa69e9fb154bbd97046"
+      "expectedBytes": 984,
+      "expectedSha256": "f6a64d018f526ec7459d2dce468817e46fb24edc26da35756872ab49bd72d671"
     },
     {
       "path": "preparation/navigation.json",
@@ -146,21 +146,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 7578,
-      "expectedSha256": "51a28a0fe54ee789dadee88a967afaf051bf142e0413e264f87722570f8cf303"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
-    },
-    {
-      "path": "reference/hanus-2015.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 350433,
-      "expectedSha256": "4bf15fb973657aa827465e983c6d67dc697b957fc492c77606e2942342f4753e"
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
+      "expectedBytes": 7653,
+      "expectedSha256": "279ca6a2e1b71607229b052c4066405cf5a0b7607a11fac6a80d70b30ba3f8e1",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/456",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -175,28 +166,10 @@
       "expectedSha256": "fbe615498f9ecd7be0d3514b944f53aeca96029b22e7c44af8257adf8308027e"
     },
     {
-      "path": "reference/model-456.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 126487,
-      "expectedSha256": "9ad8f6aa582bbdd68fc07826f062f7b100e3d38e6f374a81ff54c568482dbf74"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 3951,
       "expectedSha256": "340a23306a7460631db3d23fb55654b0d86a91df50042c6289d96e89fb49aad8"
-    },
-    {
-      "path": "reference/reference-144.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 22055,
-      "expectedSha256": "aeb40fed59ef5b3b974604fe44bf5f835cdc9aa69ea28c48788a33a33fe28277"
-    },
-    {
-      "path": "reference/reference-163.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 13367,
-      "expectedSha256": "b9ab47803c760fb255cce7fb3e4ea6714c2c42ec017e1a4f61bd1c126db549cd"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

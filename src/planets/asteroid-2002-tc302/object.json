@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "asteroid-2002-tc302",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "2002 TC302",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "60596eb698195f196f0bed80212ac7db479cc75656c168492afe5ba277fe3d8b"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "c6d69e279371a3d1c8dbcad83aa7ef74130d69c85df20c0862cff22f68da35ac"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "97f940a8a12e587996aca419e332f39de35e448b8c5fc38bb7e3d17d1a4aff5f"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "7da079bcaf049f834f8b2c79392c412cd11290d19cd608e9f3e94a999633415c"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "d0687caf1db9a4a35e481016db1c3ebf0404c4a72cff10127ace81ee3e55da7b"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "634b743cf23b3a14bf79ebfe28bbb0d5766815efd28dc2ead0f0ef1090d1539a"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 256.86505029826975
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/asteroid-2002-tc302-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "c4a11cfd2343963ca09a4d284aa1f75cd03dc4085b6349a7dc54a1afb8ab249a"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3524803528426.4517,
+        3631520428419.1255,
+        3896828736008.266
+      ],
+      "presentationToReference": [
+        0.5853780546088755,
+        0,
+        -0.8107604659715029,
+        0.7438581841637052,
+        0.3977771559319137,
+        0.5370738646325972,
+        0.3225019922961776,
+        -0.9174820620691818,
+        0.23285001770727498
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1116.8045665142163,
+      "bodyRadiusM": 256865.05029826975
+    },
+    "catalog": {
+      "name": "2002 TC302",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 42.69638663728584,
+      "description": "2002 TC302 has a flattened outline measured during a stellar occultation. Its displayed depth is assumed; newer thermal analysis suggests a possible companion, which is not part of this primary-body model.",
+      "systemName": "Solar System",
+      "order": 2,
+      "context": {
+        "order": 466
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "a3af88063cc7fae6d50dc2f58dcb2016cc3f48c8269d4ef58dc39c2b71d644e1"
+  }
+}

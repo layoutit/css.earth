@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "7bd1acf63685c054d31b86582f328e9bb6c65f29a5874910d87e0c6c513e38dc"
+          "sha256": "a5489e6f2463065ce853cd67d1dd32392762e9c7f65797028f26171f57881b5a"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "692602f72c1dd83d15305d1ab53a0fc8b99d9839ea66c95ac94e7038153f248d"
+        "sha256": "083ea62d915e9d02aa588454061c0b845fa7e321c978203364f7f1fcd727dd1f"
+      }
+    },
+    "catalog": {
+      "name": "Vindobona",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.918785954300875,
+      "description": "Explore Vindobona in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 327,
+      "context": {
+        "order": 373
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cf3d2ff56b57c9f41184e21c4b8ac94338c0523d95fd5e3ff7250c325d361e13"
+    "sha256": "b026a6b85fbd41bfaa0d05ce5d01bdf688bebf7f98214afd4f67c83ff855e8a8"
   }
 }

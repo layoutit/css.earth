@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e5c886c8da52622c63060a65bef0f4d9ec77621ca89e0e4009024d1dc5966c8f"
+          "sha256": "0e81b5175e304860c2152b1a99e4f94f804d8620d8840b2d1a03d5eeefcfac00"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f15d310ee5e152022e5ae490c76925c5d329064ecc79849fcf24b67cf7256000"
+        "sha256": "8f4b54eedcfe5362deabd33d87ab3767d65b5beff9e912df37f6125cbb697232"
+      }
+    },
+    "catalog": {
+      "name": "Eudora",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.868342551130494,
+      "description": "Explore Eudora in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 320,
+      "context": {
+        "order": 366
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "46049f0ecd3ba36978742c11981607f2d7242e10f4fc5a7a1d7b7553868fbe7f"
+    "sha256": "7e6c01025fd45e7b974a96f2dccdbf70e095ba61b32eb40abfe913f40c4521e2"
   }
 }

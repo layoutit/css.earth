@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e8c41d642eb24410ce580340c5500716a20fd16fdb68798d1baa83650d95e276"
+        "sha256": "01a84e24d5625d0d9837be1d72ba39294338442b0a2114fa520828c73e9f57b6"
+      }
+    },
+    "catalog": {
+      "name": "Thebe",
+      "classification": "satellite",
+      "color": "#9f9287",
+      "distanceAu": 5.2,
+      "description": "Explore Thebe with Galileo imagery and its source-backed irregular shape.",
+      "systemName": "Solar System",
+      "order": 103,
+      "context": {
+        "order": 63
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "618e5d1460688b0f87b6525dd66472ce0210136cefbb296619bac0b8e231f7a2"
+    "sha256": "4906a6577d5030a0323c256aec72277eeba683c133c20e4e1972607e1cd19487"
   }
 }

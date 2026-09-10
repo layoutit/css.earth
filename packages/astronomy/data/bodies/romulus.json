@@ -1,0 +1,90 @@
+{
+  "id": "romulus",
+  "classification": "satellite",
+  "order": 62,
+  "physical": {
+    "name": "Romulus",
+    "horizonsCode": null,
+    "meanRadiusKm": 9.787866191310176,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sylvia"
+  },
+  "physicalNotes": "Shapes: occultation ellipsoid, original radar mesh and explicitly assumed-depth models.",
+  "sceneSatellite": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      169.91109416443356,
+      1329.085919271818,
+      -43.2342372805489
+    ],
+    "velocityKmPerDay": [
+      -2275.493744412642,
+      300.28342981731714,
+      288.44839802409075
+    ],
+    "centerBodyId": "sylvia",
+    "gravitationalParametersKm3PerS2": {
+      "body": 0,
+      "parent": 0.9610069228988848,
+      "combined": 0.9610069228988848
+    },
+    "systemGmKm3PerS2": 0.9610069228988848,
+    "parentHeliocentricState": {
+      "positionKm": [
+        -303715339.4835702,
+        392807937.420781,
+        259332875.2341258
+      ],
+      "velocityKmPerDay": [
+        -1091984.678341611,
+        -661020.912473434,
+        -108839.3132098869
+      ],
+      "provenance": {
+        "model": "Horizons numbered-asteroid geometric state at prepared epoch",
+        "epochJdTt": 2461286.5,
+        "referenceFrame": "ICRF",
+        "target": 87,
+        "targetKind": "numbered-asteroid",
+        "center": 10,
+        "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259&CENTER=500%4010&VEC_CORR=NONE",
+        "sourcePath": "src/planets/romulus/source/orbit/sylvia-heliocentric.txt",
+        "sha256": "52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118",
+        "qualification": [
+          "This is an extrapolation of rounded 2021 published elements to 2026-09-03, beyond the retained 2002–2018 astrometry; current phase is approximate.",
+          "The full model covariance and an explicit time scale for the printed pericenter epoch are absent. Quoted independent parameter uncertainties must not be treated as a scene covariance.",
+          "The six independent Miriade 2024-solution projections differ by 23–63 mas, including about 42 mas (140 km on the sky plane) at the scene epoch; this is measured disagreement, not a guaranteed error bound.",
+          "The printed parameters differ from six reported paper-fit positions by 7–62 mas with the documented geometric projection. The paper’s 9.85 mas fit RMS is not achieved or asserted for this illustration.",
+          "Miriade permits orbit computation from 1990 to 2030, but its position-error service stops at 2026-Jan-01; empty errors at this scene date are unavailable, not zero.",
+          "Sky-plane checks do not independently determine the line-of-sight component, and geocentric projection omits observatory parallax and differential aberration.",
+          "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
+        ]
+      }
+    },
+    "provenance": {
+      "model": "Published mutual-orbit model evaluated once at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "source": "https://www.aanda.org/articles/aa/pdf/2021/06/aa40342-21.pdf",
+      "sourcePath": "src/planets/romulus/source/orbit/published-parameters.json",
+      "sha256": "8a1e50f6040b207756bec082d48d03537da1dcc8a466a5b363e184e73b4e6362",
+      "timeQualification": "Table 3 labels tp as JD without a time scale. TT is an explicit preparation convention; the CDS observed timestamps are UTC. Choosing UTC instead would shift this phase by about one minute, smaller than the quoted 0.10085-day epoch uncertainty, but this does not establish a source-owned exact time scale.",
+      "limitations": [
+        "This is an extrapolation of rounded 2021 published elements to 2026-09-03, beyond the retained 2002–2018 astrometry; current phase is approximate.",
+        "The full model covariance and an explicit time scale for the printed pericenter epoch are absent. Quoted independent parameter uncertainties must not be treated as a scene covariance.",
+        "The six independent Miriade 2024-solution projections differ by 23–63 mas, including about 42 mas (140 km on the sky plane) at the scene epoch; this is measured disagreement, not a guaranteed error bound.",
+        "The printed parameters differ from six reported paper-fit positions by 7–62 mas with the documented geometric projection. The paper’s 9.85 mas fit RMS is not achieved or asserted for this illustration.",
+        "Miriade permits orbit computation from 1990 to 2030, but its position-error service stops at 2026-Jan-01; empty errors at this scene date are unavailable, not zero.",
+        "Sky-plane checks do not independently determine the line-of-sight component, and geocentric projection omits observatory parallax and differential aberration.",
+        "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
+      ]
+    }
+  },
+  "acquisition": {
+    "sceneSatellite": {
+      "parent": "sylvia",
+      "target": null,
+      "center": null
+    }
+  }
+}

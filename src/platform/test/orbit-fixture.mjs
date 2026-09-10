@@ -1,4 +1,4 @@
-import { createRetainedCubicSkyOrbit } from "../object-orbit.mjs";
+import { createRetainedCubicSkyOrbit } from "../object-orbit.mts";
 
 export class Surface {
   constructor() {

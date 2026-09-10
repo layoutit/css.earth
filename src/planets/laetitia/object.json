@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "24ce72d6a45e84c13e052ccfe94e4fcbfe3ce8ff9bfefc540b4a15cf44a52156"
+        "sha256": "8f50fd96d402b91d82086431af66ef5b6a7e7af52091cd67a3954cdb1f43589b"
+      }
+    },
+    "catalog": {
+      "name": "Laetitia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7684445031801124,
+      "description": "Explore Laetitia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 225,
+      "context": {
+        "order": 267
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5dd60ebe3a5d04cd357d745779377b385a0eb43879fb1fcc89eee2176985d083"
+    "sha256": "99865c7d8af3ca6b71aa4f0adea8d761d6df2b6145113d303a96164a37d4dbee"
   }
 }

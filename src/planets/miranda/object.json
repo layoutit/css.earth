@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4c6591cd7cdfccf5c568d0b237faff2d763a8b262a3c7d55a019ba920960bc59"
+        "sha256": "dd365940d7570bda7eca9d99d3252e116cf4152fe91f36bed0a30117b3dd5c69"
+      }
+    },
+    "catalog": {
+      "name": "Miranda",
+      "classification": "satellite",
+      "color": "#aaa8a0",
+      "distanceAu": 19.2,
+      "description": "Explore Miranda in 3D with cssEarth. Inspect Voyager imagery of Uranus’s small moon, its giant scarps, and its ridged coronae.",
+      "systemName": "Solar System",
+      "order": 447,
+      "context": {
+        "order": 28
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3523467da7378aa3ae2e7d499c8840511af2176e4d128d837009fe33378c9cd1"
+    "sha256": "4f5257c9565fab97e8c72bf53018b157a3f2b539a26ad6985a93d31eacf57b57"
   }
 }

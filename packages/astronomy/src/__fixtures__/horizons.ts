@@ -1,12 +1,8 @@
-import { HORIZONS_PLANETARY } from './horizons.planetary.js'
-import { HORIZONS_MOONS_AND_SMALL_BODIES } from './horizons.moons-and-small-bodies.js'
-import { HORIZONS_MOONS_AND_SMALL_BODIES_2 } from './horizons.moons-and-small-bodies-2.js'
-import { HORIZONS_MOONS_AND_SMALL_BODIES_3 } from './horizons.moons-and-small-bodies-3.js'
 
 // GENERATED FILE — do not edit by hand.
 //
 // Source:    JPL Horizons vector ephemerides; every entry carries the URL that produced it
-// Generator: packages/astronomy/tools/fetch-fixtures.mjs
+// Generator: packages/astronomy/tools/fetch-fixtures.mts
 //
 // Regenerate with `node tools/fetch-fixtures.mjs` from packages/astronomy. The
 // generator re-downloads the source series, re-derives the truncation, and
@@ -29,12 +25,7 @@ export interface HorizonsFixture {
 }
 
 /** ICRF equatorial (`REF_PLANE='FRAME'`), geometric (`VEC_CORR='NONE'`), km and km/day. */
-export const HORIZONS: Record<string, HorizonsFixture> = {
-  ...HORIZONS_PLANETARY,
-  ...HORIZONS_MOONS_AND_SMALL_BODIES,
-  ...HORIZONS_MOONS_AND_SMALL_BODIES_2,
-  ...HORIZONS_MOONS_AND_SMALL_BODIES_3,
-}
+export { HORIZONS } from '../data/generated/horizons.js'
 
 /**
  * The two Mars states PLAN.md's appendix pins, verbatim, in au and au/day and

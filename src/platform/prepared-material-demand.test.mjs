@@ -1,11 +1,11 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../../site/objects.mjs";
+import { OBJECTS } from "../../site/objects.mts";
 import { preparedMaterialAddress, preparedMaterialFrame, preparedMaterialState } from '../renderers/css/dist/testing.js';
 import { resolvePreparedMaterialDemand } from '../renderers/css/dist/testing.js';
 import materialSource from '../planets/jupiter/source/preparation/materials.json' with {type:'json'};
-import {prepareNormalizedDiscAddresses} from '../../tools/objects/giant-layers/normalized-disc-presentation.mjs';
+import {prepareNormalizedDiscAddresses} from '../../tools/objects/giant-layers/normalized-disc-presentation.mts';
 const lighting=prepareNormalizedDiscAddresses(materialSource);
 
 const definitions = await Promise.all(OBJECTS.map(({id}) => loadObjectTestDefinition(id)));
