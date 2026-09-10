@@ -77,8 +77,8 @@
     "radius": 230,
     "radiusKm": 9.948,
     "camera": {
-      "initialScenePitchDegrees": 20,
-      "defaultControlYawDegrees": -45,
+      "initialScenePitchDegrees": -20,
+      "defaultControlYawDegrees": 135,
       "framingScale": 0.5105107661972121
     },
     "mapUrl": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
@@ -106,7 +106,7 @@
     "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim."
   },
   "presentation": {
-    "defaultLens": "model",
+    "defaultLens": "albedo",
     "pointColor": [
       160,
       160,
