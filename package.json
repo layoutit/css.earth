@@ -52,13 +52,13 @@
     "test:browser:galaxy-handoff": "node site/test/galaxy-handoff-browser.mts",
     "test:browser:mercury-rotation": "node tests/objects/browser/mercury/rotation-limits-browser.mts",
     "benchmark:payloads": "node tools/measure-object-payloads.mts",
-    "oracle:venus": "node tests/objects/oracle/venus/run.mjs",
+    "oracle:venus": "node tests/objects/oracle/venus/run.mts",
     "analyze:trace:saturn": "node tests/objects/browser/saturn/audit/analyze-user-trace.mts",
     "trace:saturn": "node tests/objects/browser/saturn/audit/trace.mts",
     "refresh:earth-enso": "node tools/objects/paged-ellipsoid/refresh-earth-enso.mts && node tools/objects/dist/prepare-authored.js earth --write",
     "prepare:earth-global": "node tools/objects/geographic-pages/operations/prepare-global-wmts.mts --object=earth && node tools/objects/geographic-pages/operations/integrate-global-wmts.mts --object=earth --latest",
     "test:earth-global": "node tests/objects/browser/earth/wmts-tree-browser.mts --global",
-    "oracle:interactions": "node tests/objects/oracle/mars/google-earth-pro/run-interaction-suite.mjs",
+    "oracle:interactions": "node tests/objects/oracle/mars/google-earth-pro/run-interaction-suite.mts",
     "lint:packages": "eslint packages --max-warnings 0",
     "build:engine": "pnpm --filter @cssearth/engine build",
     "build:objects": "pnpm --filter @cssearth/objects build",
@@ -123,7 +123,8 @@
     "test:browser:nebula": "node --experimental-strip-types labs/nebula/src/run.ts browser-coherent",
     "prepare:environment-images": "node tools/objects/dist/restore-environment-images.js",
     "lab:nebula:verify": "node --experimental-strip-types labs/nebula/src/run.ts verify-nebula",
-    "typecheck:tests": "node tools/typecheck-tests.mts"
+    "typecheck:tests": "node tools/typecheck-tests.mts",
+    "typecheck:oracles": "tsc -p tests/objects/oracle/tsconfig.json"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",

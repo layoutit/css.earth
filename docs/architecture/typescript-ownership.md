@@ -1,23 +1,48 @@
 # TypeScript ownership
 
-Application, preparation, source-authoring, tests, executable fixture helpers and capture/oracle implementations use strictly checked TypeScript. Native Node tools use erasable `.mts` source; browser and package code is bundled from `.ts` or `.mts`. Compiled package imports retain their `.js` extension, while source-only Node imports name the actual `.mts` file. Preparation declarations come from their implementations.
+Application, preparation, source-authoring, tests, executable fixture helpers and capture/oracle implementations are required to use strictly checked TypeScript. Native Node tools use erasable `.mts` source; browser and package code is bundled from `.ts` or `.mts`. Compiled package imports retain their `.js` extension, while source-only Node imports name the actual `.mts` file. Preparation declarations come from their implementations.
 
-The [ownership inventory](../../tools/typescript-ownership.json) records the remaining authored JavaScript as exact backlog entries. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
+The [ownership inventory](../../tools/typescript-ownership.json) has no remaining authored JavaScript backlog entries. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
 
 ## Where JavaScript belongs
 
 Test directories and capture filenames do not exempt authored code. Data fixtures retain their native formats; executable fixture helpers and browser/oracle harnesses are TypeScript. Generated browser bundles and package distributions are ignored build products. The inventory names the remaining JavaScript exceptions individually:
 
-- Five generated data modules, each with its generator and source anchor.
+- Four tracked generated data modules, each with its generator and source anchor. The navigation-marker module is also generated, but ignored.
 - Three preserved Cesium modules with their upstream provenance.
 - The Astro and ESLint configuration entry points.
-- Five compatibility entry points that only re-export typed implementations.
 
-Those compatibility paths are `src/platform/camera-math.mjs`, `sphere-drag.mjs`, `scene-lifetime.mjs`, `site/runtime-policy.mjs`, and `site/scene-contract.mjs`. The guard checks their exact exports and rejects implementation statements. Historical source records retain the original generator identity and pinned bytes; a historical `.mjs` name does not execute a deleted implementation.
+Application and test consumers import typed owners directly. The five obsolete
+JavaScript compatibility entry points have been removed. Historical source
+records retain the original generator identity and pinned bytes; a historical
+`.mjs` name does not execute a deleted implementation.
+
+## Retained and retired oracle tools
+
+The final authored-JavaScript inventory contained 46 oracle modules. Forty-three
+were retained as strict TypeScript: seven Venus image/capture owners and 36 Mars
+native-capture, calibration and comparison owners. Shared decoders validate the
+external records those tools consume without discarding unrelated evidence.
+
+Three superseded Mars tools were retired: `capture-pixelmatch` used the removed
+material-cache API, while `prepare-google-calibration-overlay` and
+`map-google-calibration-overlay-draws` used the old KML/color-similarity mapping.
+The retained rendered-frame/triptych and exact cache-address calibration workflows
+provide their replacements. Historical source records and original evidence stay
+unchanged.
 
 ## Strict checking
 
-The test and capture migration is in progress. Some renamed TypeScript files still have compiler errors; an `.mts` extension alone does not establish strict ownership. The full test gate must pass before this migration is complete.
+`pnpm typecheck:oracles` checks the retained native Mars and Venus owners, their
+transitive imports and direct regression tests in strict mode. Their migration
+also repairs relocated app/cache paths, obsolete capture selectors and input
+receipt decoding. Native captures require the documented local Google Earth Pro
+setup; compilation and offline comparison do not establish live native parity.
+
+The repository-wide gate still covers earlier TypeScript migrations and all other
+surfaces. An `.mts` extension alone does not establish strict ownership. Missing
+local prepared assets or failures in that broader gate must be reported separately,
+not hidden by the focused oracle check.
 
 `pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tests/tsconfig.json) in sequential compiler groups to bound memory use; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
 
@@ -38,8 +63,10 @@ An Earth texture-level recipe already had its new hash in the descriptor but its
 ## Contributor checks
 
 ```sh
+pnpm install
 pnpm check:typescript-ownership
 pnpm test:typescript-ownership
+pnpm typecheck:oracles
 pnpm typecheck
 pnpm build
 pnpm test:packages

@@ -3,9 +3,11 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {prepareScientificFocus} from './scientific-focus.mts';
 import {prepareEclipticPresentationFrame} from '../../../src/platform/solar-presentation-frame.mts';
-import {preparedScenePitch} from '../../../src/platform/camera-math.mjs';
+import {preparedScenePitch} from '@cssearth/engine';
+import {parseScientificCamera} from './source-records.mts';
+import {requireRecord} from '../../source-values.mts';
 test('Agenor focus transforms actual solid leaf coordinates to the camera centre',async()=>{
-  const camera=JSON.parse(await readFile(new URL('../../../src/planets/europa/prepared/scene.json',import.meta.url))).camera;
+  const camera=parseScientificCamera(requireRecord(JSON.parse(await readFile(new URL('../../../src/planets/europa/prepared/scene.json',import.meta.url), 'utf8')), 'Europa scene').camera);
   const focus={longitudeDegrees:142,latitudeDegrees:-43.7,zoom:4};
   const result=prepareScientificFocus('europa',focus,camera),r=Math.PI/180;
   const [x,y,z]=prepareEclipticPresentationFrame('europa').toPresentation([

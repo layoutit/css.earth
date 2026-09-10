@@ -2,20 +2,24 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { prepareAtmosphereFrame, compositePreparedAtmosphere } from "./prepared-atmosphere.mts";
 import { readFile } from "node:fs/promises";
-import { MARS_ATMOSPHERE_PROFILE, prepareMarsAtmosphereFrame, prepareMarsMaterialFrame } from "../tests/objects/unit/mars/prepared-fixture.mjs";
+import { MARS_ATMOSPHERE_PROFILE, prepareMarsAtmosphereFrame, prepareMarsMaterialFrame } from "../tests/objects/unit/mars/prepared-fixture.mts";
 import { createAtmospherePreparation } from "./objects/paged-ellipsoid/atmosphere.mts";
 import { resolve } from "node:path";
 
-const json = async path => JSON.parse(await readFile(path, 'utf8'));
+import { parsePagedProfile } from './objects/paged-ellipsoid/profile-source.mts';
+import { validateSourceManifest } from '../src/platform/source-manifest.mts';
+import { validateDirectionalSunPlan } from '../src/platform/directional-sun-contract.mts';
+import { requireRecord } from './source-values.mts';
+const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
 const earthPreparation = createAtmospherePreparation({
-  config: await json('src/planets/earth/source/preparation/paged-ellipsoid.json'),
+  config: parsePagedProfile(await json('src/planets/earth/source/preparation/paged-ellipsoid.json')),
   sourceDirectory: resolve('src/planets/earth/source'),
-  sourceManifest: await json('src/planets/earth/source/manifest.json'),
-  sun: (await json('src/planets/earth/prepared/runtime.json')).sun,
+  sourceManifest: validateSourceManifest('earth', await json('src/planets/earth/source/manifest.json')),
+  sun: validateDirectionalSunPlan(requireRecord(await json('src/planets/earth/prepared/runtime.json'), 'Earth runtime').sun),
 });
 const earth = earthPreparation.atmosphereProfile(await earthPreparation.readAtmosphereModel());
 const view = { width: 96, disc: { centerX: 48, centerY: 48, radiusX: 43, radiusY: 43 } };
-function alpha(data, side) {
+function alpha(data: Uint8Array, side?: "left" | "right") {
   let sum = 0;
   for (let y = 0; y < 96; y++) for (let x = 0; x < 96; x++) {
     if (side === "left" && x >= 48 || side === "right" && x < 48) continue;
@@ -23,7 +27,7 @@ function alpha(data, side) {
   }
   return sum;
 }
-for (const [name, profile] of [["Mars", MARS_ATMOSPHERE_PROFILE], ["Earth", earth]]) {
+for (const [name, profile] of [["Mars", MARS_ATMOSPHERE_PROFILE], ["Earth", earth]] as const) {
   test(`${name} uses the same shell integrator with its own source profile`, () => {
     const right = prepareAtmosphereFrame({ ...view, profile, lightDirection: [1, 0, 0] });
     const left = prepareAtmosphereFrame({ ...view, profile, lightDirection: [-1, 0, 0] });
@@ -51,7 +55,7 @@ test("profile differences affect prepared output without object dispatch", () =>
   assert.throws(() => prepareAtmosphereFrame({ ...view, profile: { ...earth, radiusKm: 0 }, lightDirection: [0, 0, 1] }), /profile/);
 });
 test("Mars composes both ground modes from one atmosphere and preserves curvature", () => {
-  const lightDirection = [1, 0, 0];
+  const lightDirection: [number, number, number] = [1, 0, 0];
   const atmosphere = prepareMarsAtmosphereFrame(40, 1, { lightDirection });
   for (const shadows of [false, true]) {
     const ground = prepareMarsMaterialFrame(40, 1, { lightDirection, shadows, atmosphere: false });

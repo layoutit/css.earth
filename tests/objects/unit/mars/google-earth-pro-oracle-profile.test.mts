@@ -5,13 +5,13 @@ import {
   createMarsNativeCaptureKml,
   GOOGLE_EARTH_PRO_MARS_ORACLE,
   GOOGLE_EARTH_PRO_MARS_POSES,
-} from "../../oracle/mars/google-earth-pro/profile.mjs";
+} from "../../oracle/mars/google-earth-pro/profile.mts";
 import {
   GOOGLE_EARTH_PRO_APPLE_EVENT_API,
   GOOGLE_EARTH_PRO_MARS_ORACLE_PATCH,
-} from "../../oracle/mars/google-earth-pro/api-contract.mjs";
+} from "../../oracle/mars/google-earth-pro/api-contract.mts";
 import { parseViewInfo } from
-  "../../oracle/mars/google-earth-pro/controller.mjs";
+  "../../oracle/mars/google-earth-pro/controller.mts";
 
 test("Mars Google Earth Pro oracle binds the corrected native renderer facts", () => {
   const oracle = GOOGLE_EARTH_PRO_MARS_ORACLE;
@@ -142,3 +142,43 @@ test("Mars oracle parses Google Earth's Apple-event view record", () => {
   );
 });
 
+
+test("Mars oracle resolves native application members inside the recorded app bundle", async () => {
+  const { appBundleForMember } = await import("../../oracle/mars/google-earth-pro/native-evidence.mts");
+  const app = "/tmp/native oracle/Google Earth Pro Mars Oracle.app";
+  assert.equal(appBundleForMember(`${app}/Contents/Frameworks/headless.dylib`), app);
+  assert.equal(appBundleForMember(`${app}/Contents/MacOS/Google Earth`), app);
+  assert.throws(() => appBundleForMember("/tmp/src/planets/mars"), /application member/u);
+});
+
+test("Mars interaction corpus rejects malformed external event and camera values", async () => {
+  const { loadInteractionCorpus, parseInteractionScenario } = await import("../../oracle/mars/google-earth-pro/interaction-corpus.mts");
+  const corpus = await loadInteractionCorpus();
+  const scenario = corpus.scenarios[0];
+  assert.deepEqual(parseInteractionScenario(scenario), scenario);
+  assert.ok(Object.isFrozen(scenario.events));
+  assert.throws(() => parseInteractionScenario({ ...scenario, startCamera: { ...scenario.startCamera, distance: "11000000" } }), /finite/u);
+  assert.throws(() => parseInteractionScenario({ ...scenario, events: [{ ...scenario.events[0], atMilliseconds: null }] }), /finite/u);
+  assert.throws(() => parseInteractionScenario({ ...scenario, events: [{ ...scenario.events[0], kind: "teleport" }] }), /Unknown event kind/u);
+});
+
+test("Mars native event parser preserves batch receipts without inventing gesture fields", async () => {
+  const { parseNativeCaptureEvent, parseRenderedFrame, parseRenderedMotionScenario } = await import("../../oracle/mars/google-earth-pro/rendered-motion-inputs.mts");
+  const batch = { event: "native-input-batch-accepted", revision: 100, acceptedMonotonicSeconds: 12.5 };
+  assert.deepEqual(JSON.parse(JSON.stringify(parseNativeCaptureEvent(batch))), batch);
+  assert.equal(parseNativeCaptureEvent(batch).kind, undefined);
+  assert.throws(() => parseNativeCaptureEvent({ ...batch, revision: "100" }), /finite/u);
+  assert.throws(() => parseRenderedMotionScenario({ untilNativeStops: "false" }), /boolean/u);
+  const frame = { event: "rendered-frame", revision: 100, presentIndex: 7, monotonicSeconds: 12.6, path: "frame.png", width: 350, height: 350 };
+  assert.deepEqual(JSON.parse(JSON.stringify(parseRenderedFrame(frame))), frame);
+  assert.throws(() => parseRenderedFrame({ ...frame, width: 350.5 }), /integer/u);
+});
+
+test("Mars native window audit and suite resume reject invalid process and path fields", async () => {
+  const { parseWindowAudit } = await import("../../oracle/mars/google-earth-pro/native-evidence.mts");
+  const { parseSuiteManifest } = await import("../../oracle/mars/google-earth-pro/interaction-suite-manifest.mts");
+  assert.throws(() => parseWindowAudit({ visibleWindowCount: 0, frontmostApplication: { pid: "123" }, windows: [] }), /finite/u);
+  const manifest = { schema: "cssearth-oracle-interaction-suite@1", startedAt: "2026-09-11T00:00:00Z", configPath: "config.json", configurationSha256: "hash", configuration: { appRoot: "app", renderHook: "hook", seedAudit: "seed", outputRoot: "out", cases: [] }, cases: [{ id: "test", set: "training", tags: [], runs: [{ repeat: 0, status: "captured", native: "report.json" }] }] };
+  assert.deepEqual(JSON.parse(JSON.stringify(parseSuiteManifest(manifest))), manifest);
+  assert.throws(() => parseSuiteManifest({ ...manifest, cases: [{ ...manifest.cases[0], runs: [{ repeat: 0, status: "captured", native: 17 }] }] }), /string/u);
+});

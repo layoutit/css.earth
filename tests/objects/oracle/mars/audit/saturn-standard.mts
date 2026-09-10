@@ -7,7 +7,7 @@ import { resolve } from "node:path";
 import { chromium, type Page } from "playwright";
 import sharp from "sharp";
 
-import { PREPARED_MARS_CAMERA,PREPARED_MARS_LIGHTING,PREPARED_MARS_SCENE } from "../../../unit/mars/prepared-fixture.mjs";
+import { PREPARED_MARS_CAMERA,PREPARED_MARS_LIGHTING,PREPARED_MARS_SCENE } from "../../../unit/mars/prepared-fixture.mts";
 
 interface RuntimeProbe { readonly ready: boolean; readonly dom: { readonly retainedLeafCount: number }; assertStableDomIdentity(): boolean; }
 interface MarsAuditRuntime extends RuntimeProbe { selectLens(id: string): void; setView(view: { readonly pitch: number; readonly zoom: number }): void; view(): { readonly pitch: number }; readonly renderStats: { readonly selectedPreparedDensity: number; materialCache(): { readonly pendingRowCount: number; readonly appliedFrame: number; readonly desiredFrame: number; readonly appliedRow: number; readonly desiredRow: number; readonly maximumRetainedRowCount: number; readonly retainedRowCount: number } }; }
