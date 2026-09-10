@@ -1,5 +1,5 @@
 {
-  "schema": "cssasteroid-1998-ml14-authoritative-sources@1",
+  "schema": "cssasteroid-1998-ml14-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-1998-ml14-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude.",
       "expectedBytes": 29003,
-      "expectedSha256": "8166bb5a7f6d8baa5cc82cec22304c011202f1254a403be1ff19eba0abfe6abe"
+      "expectedSha256": "8166bb5a7f6d8baa5cc82cec22304c011202f1254a403be1ff19eba0abfe6abe",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-shape",
+            "role": "material",
+            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-1998-ml14-research-ml14",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 5047547,
-      "expectedSha256": "b304439c2fd6a8770ba70719c4b286117ab6cf6be1c1717e094f2f0c6770bb3e"
+      "expectedSha256": "b304439c2fd6a8770ba70719c4b286117ab6cf6be1c1717e094f2f0c6770bb3e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-research-ml14",
+            "role": "method",
+            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-1998-ml14-warner-2014",
@@ -88,7 +128,17 @@
         "rotation"
       ],
       "expectedBytes": 21762404,
-      "expectedSha256": "a2032ef0a45802f42038619c2ec531fc40d5a45a0a0337bb2c2501d7b174cc96"
+      "expectedSha256": "a2032ef0a45802f42038619c2ec531fc40d5a45a0a0337bb2c2501d7b174cc96",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-warner-2014",
+            "role": "method",
+            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -123,7 +173,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 9947,
-      "expectedSha256": "ca538e7c9579ca1f609a59b9bfa0d202ae8594971c4e31d73a2ffd028c02f0ac"
+      "expectedSha256": "ca538e7c9579ca1f609a59b9bfa0d202ae8594971c4e31d73a2ffd028c02f0ac",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

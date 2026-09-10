@@ -1,12 +1,14 @@
 ---
-import { SPACECRAFT, EXPLORATION, REFERENCES, referenceUrl, missionParticipation, spacecraftDatasets } from '../exploration-catalog.mts';
+import { uniqueCitations } from '../sources-catalog.mts';
+import SourceCitations from './SourceCitations.astro';
+import { SPACECRAFT, EXPLORATION, referenceUrl, missionParticipation, spacecraftDatasets } from '../exploration-catalog.mts';
 interface Props { spacecraftId: string; objectId: string; contributed: boolean; }
 const { spacecraftId, contributed } = Astro.props;
 const vehicle = SPACECRAFT[spacecraftId];
 const image = vehicle.imageId ? EXPLORATION.images[vehicle.imageId] : null;
 const participation = missionParticipation(spacecraftId);
 const uses = spacecraftDatasets(spacecraftId);
-const referenceIds = [...new Set([vehicle.name, vehicle.description, vehicle.kind, ...vehicle.aliases, ...(vehicle.launch ? [vehicle.launch] : [])].flatMap(field => field.referenceIds))];
+const references = uniqueCitations([vehicle.name, vehicle.description, vehicle.kind, ...vehicle.aliases, ...(vehicle.launch ? [vehicle.launch] : [])].flatMap(field => field.citations));
 ---
 <details class="planet-spacecraft-details" data-spacecraft={vehicle.id}>
   <summary><span>{vehicle.name.value}</span> <small>{contributed ? 'Dataset contributor' : 'Mission participant'}</small></summary>
@@ -21,5 +23,5 @@ const referenceIds = [...new Set([vehicle.name, vehicle.description, vehicle.kin
   <h4>Used in cssEarth</h4>
   {uses.length ? <ul class="planet-mission-datasets">{uses.map(view => <li><a href={view.href} data-dataset-link data-dataset-object={view.objectId} data-dataset-id={view.lensId}>{view.objectName} · {view.label}</a></li>)}</ul>
     : <p>No prepared dataset attributes observations to this vehicle.</p>}
-  <details class="planet-mission-references"><summary>Spacecraft references</summary><ul>{referenceIds.map(id => <li><a href={REFERENCES[id].url} target="_blank" rel="noreferrer">{REFERENCES[id].title}</a>{REFERENCES[id].locator && <> · {REFERENCES[id].locator}</>}</li>)}</ul></details>
+  <details class="planet-mission-references"><summary>Spacecraft references</summary><SourceCitations citations={references} /></details>
 </details>

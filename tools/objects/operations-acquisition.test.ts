@@ -12,7 +12,7 @@ import { gzipSync } from 'node:zlib';
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const rawSource = (bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img',
   expectedBytes:bytes.length,expectedSha256:sha256(bytes)});
-const rawManifest = (bytes: Uint8Array): SourceManifest => ({schema:'cssearth-authoritative-sources@1',
+const rawManifest = (bytes: Uint8Array): SourceManifest => ({schema:'cssearth-authoritative-sources@2',
   inputs:[rawSource(bytes)],generatedIntermediates:[],documents:[]});
 const rawPlan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{
   kind:'download',path:'source.img',url:'https://example.test/source.img',groups:['refresh'],headers:{'X-Source':'fixture'},
@@ -128,7 +128,7 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
     const step = {kind:'zip-member', path:'restored.bin', url:'https://example.test/archive.zip',
       archiveSha256:digest(archive), archiveBytes:archive.length, member:'source.bin', groups:['restore']};
     const plan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1', operations:[step]});
-    const manifest = {schema:'cssfixture-authoritative-sources@1', inputs:[{id:'fixture',path:'restored.bin',
+    const manifest = {schema:'cssfixture-authoritative-sources@2', inputs:[{id:'fixture',path:'restored.bin',
       expectedBytes:content.length,expectedSha256:digest(content)}], generatedIntermediates:[],documents:[]};
     await assert.rejects(executeAcquisition({sourceRoot:directory,manifest,plan,group:'restore',
       transport:{fetch:async()=>new Response(Buffer.from('wrong archive'))}}), /ZIP source pin differs/);

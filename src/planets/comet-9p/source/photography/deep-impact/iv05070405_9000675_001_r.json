@@ -1,0 +1,2382 @@
+{
+  "schema": "cssearth-encounter-control@1",
+  "observation": {
+    "instrument": "deep-impact-its",
+    "width": 256,
+    "height": 256,
+    "startTime": "2005-07-04T05:43:06.026",
+    "filter": "N/A",
+    "target": "9P/TEMPEL 1",
+    "detectorBorderPixels": 8
+  },
+  "camera": {
+    "bodyToJ2000": [
+      [
+        -0.07977201909091047,
+        -0.9905660059968489,
+        -0.11142447098196179
+      ],
+      [
+        0.9090527984850294,
+        -0.02643137955281935,
+        -0.4158417869111657
+      ],
+      [
+        0.40897363550318977,
+        -0.13446326613014215,
+        0.9025852843498605
+      ]
+    ],
+    "offsetPixels": [
+      -1.9908515185516544,
+      -11.302368866853069
+    ],
+    "maximumOffsetPixels": 256
+  },
+  "registration": {
+    "method": "registered-image-feature-translation",
+    "sourceShapeSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
+    "reference": {
+      "id": "iv05070405-9000673-001-r",
+      "imageSha256": "26ecb6a0e4f51ea717f922aea44702585d73303c858771a8417368135a1ab026",
+      "controlSha256": "41a8b4f8558f50db5dfd8fa7e54aa2bee03d0c5f8a6ef1a0944d914314ef36e1"
+    },
+    "nominalPixelScaleMeters": 9.078,
+    "maximumRmsMeters": 9.078,
+    "maximumResidualMeters": 18.156,
+    "limitations": "Relative overlap registration inherits the reference photograph and 2012 shape placement uncertainty. Subpixel relative residuals do not establish subpixel absolute surface coordinates.",
+    "controls": [
+      {
+        "id": "patch-1-1",
+        "partition": "fit",
+        "sourcePixel": [
+          43.66565968442483,
+          43.759433972132996
+        ],
+        "seedPixel": [
+          46,
+          55
+        ],
+        "correlation": 0.989123505165942,
+        "peakMargin": 0.2639609428352947,
+        "jointValidFraction": 0.9515570934256056,
+        "sourcePointMeters": [
+          2069.0272703901937,
+          2198.7092095743865,
+          -1381.4322097809054
+        ],
+        "referencePixel": [
+          55.89659789428729,
+          57.93976312675855
+        ]
+      },
+      {
+        "id": "patch-1-2",
+        "partition": "holdout",
+        "sourcePixel": [
+          65.86617648232352,
+          43.78239022474022
+        ],
+        "seedPixel": [
+          68,
+          55
+        ],
+        "correlation": 0.9880214256356284,
+        "peakMargin": 0.2589497296913945,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          2218.374168436305,
+          2022.5277302869363,
+          -1340.4339592264732
+        ],
+        "referencePixel": [
+          74.00069727244492,
+          57.94122614607139
+        ]
+      },
+      {
+        "id": "patch-1-3",
+        "partition": "fit",
+        "sourcePixel": [
+          87.89216129770718,
+          43.72920043408496
+        ],
+        "seedPixel": [
+          90,
+          55
+        ],
+        "correlation": 0.9774204692269474,
+        "peakMargin": 0.3798055337393196,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          2363.1460020650557,
+          1905.5895439797314,
+          -1253.4188486384228
+        ],
+        "referencePixel": [
+          92.10333898099414,
+          57.94187613425856
+        ]
+      },
+      {
+        "id": "patch-1-4",
+        "partition": "holdout",
+        "sourcePixel": [
+          109.81238999915256,
+          43.705718592113605
+        ],
+        "seedPixel": [
+          112,
+          55
+        ],
+        "correlation": 0.9748320532430362,
+        "peakMargin": 0.44068114011611303,
+        "jointValidFraction": 0.9550173010380623,
+        "sourcePointMeters": [
+          2505.436025828043,
+          1820.9430139306933,
+          -1141.3057851180201
+        ],
+        "referencePixel": [
+          110.20546733856004,
+          57.94208276306185
+        ]
+      },
+      {
+        "id": "patch-1-5",
+        "partition": "fit",
+        "sourcePixel": [
+          131.83532052372172,
+          43.7736653960501
+        ],
+        "seedPixel": [
+          134,
+          55
+        ],
+        "correlation": 0.9780028661845219,
+        "peakMargin": 0.3738176393388173,
+        "jointValidFraction": 0.9757785467128027,
+        "sourcePointMeters": [
+          2646.9519620930005,
+          1746.4259985095123,
+          -1021.313987046713
+        ],
+        "referencePixel": [
+          128.30753915327125,
+          57.94215027249565
+        ]
+      },
+      {
+        "id": "patch-1-6",
+        "partition": "holdout",
+        "sourcePixel": [
+          153.99736009431243,
+          43.718293450149396
+        ],
+        "seedPixel": [
+          156,
+          55
+        ],
+        "correlation": 0.9726213023603385,
+        "peakMargin": 0.45655947180881595,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          2786.8882505117,
+          1692.7087369603105,
+          -885.1312406366924
+        ],
+        "referencePixel": [
+          146.40972757774261,
+          57.941932051959256
+        ]
+      },
+      {
+        "id": "patch-1-7",
+        "partition": "fit",
+        "sourcePixel": [
+          176.1153447441155,
+          43.52055765088396
+        ],
+        "seedPixel": [
+          178,
+          55
+        ],
+        "correlation": 0.9745124100323781,
+        "peakMargin": 0.3666410458202505,
+        "jointValidFraction": 0.8650519031141869,
+        "sourcePointMeters": [
+          2926.4279298110196,
+          1644.3496914018178,
+          -744.7640252832789
+        ],
+        "referencePixel": [
+          164.51218976668235,
+          57.94164017088934
+        ]
+      },
+      {
+        "id": "patch-2-0",
+        "partition": "fit",
+        "sourcePixel": [
+          21.74595658453711,
+          65.76999252251629
+        ],
+        "seedPixel": [
+          24,
+          77
+        ],
+        "correlation": 0.9819893070596403,
+        "peakMargin": 0.24026675628251004,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          1801.6461886555117,
+          1993.273437284166,
+          -1538.9393680505455
+        ],
+        "referencePixel": [
+          37.79823264050005,
+          76.04409328194549
+        ]
+      },
+      {
+        "id": "patch-2-1",
+        "partition": "holdout",
+        "sourcePixel": [
+          43.822743702257476,
+          65.86141813250237
+        ],
+        "seedPixel": [
+          46,
+          77
+        ],
+        "correlation": 0.9875472489010724,
+        "peakMargin": 0.3547166316742789,
+        "jointValidFraction": 0.9446366782006921,
+        "sourcePointMeters": [
+          1948.2310485040216,
+          1852.9001958329463,
+          -1470.1547631392023
+        ],
+        "referencePixel": [
+          55.90123236354559,
+          76.0447924259001
+        ]
+      },
+      {
+        "id": "patch-2-2",
+        "partition": "fit",
+        "sourcePixel": [
+          65.81990443581451,
+          65.75072090128624
+        ],
+        "seedPixel": [
+          68,
+          77
+        ],
+        "correlation": 0.9881734197753719,
+        "peakMargin": 0.3375169832185484,
+        "jointValidFraction": 0.9688581314878892,
+        "sourcePointMeters": [
+          2096.3787052998596,
+          1691.931442981935,
+          -1417.4146206518635
+        ],
+        "referencePixel": [
+          74.00398471469347,
+          76.04568237043867
+        ]
+      },
+      {
+        "id": "patch-2-3",
+        "partition": "holdout",
+        "sourcePixel": [
+          87.97312742252312,
+          65.80801460132403
+        ],
+        "seedPixel": [
+          90,
+          77
+        ],
+        "correlation": 0.9894814522404749,
+        "peakMargin": 0.3224747785344877,
+        "jointValidFraction": 0.9896193771626297,
+        "sourcePointMeters": [
+          2240.7860163220175,
+          1579.255085703102,
+          -1327.1528526564362
+        ],
+        "referencePixel": [
+          92.10552394548849,
+          76.04612557978467
+        ]
+      },
+      {
+        "id": "patch-2-4",
+        "partition": "fit",
+        "sourcePixel": [
+          109.89001599448714,
+          65.7683871489139
+        ],
+        "seedPixel": [
+          112,
+          77
+        ],
+        "correlation": 0.989307844190538,
+        "peakMargin": 0.314482254186391,
+        "jointValidFraction": 0.9792387543252595,
+        "sourcePointMeters": [
+          2382.6161102809347,
+          1500.0497245558072,
+          -1210.8653117725626
+        ],
+        "referencePixel": [
+          110.20658096905908,
+          76.04625901271274
+        ]
+      },
+      {
+        "id": "patch-2-5",
+        "partition": "holdout",
+        "sourcePixel": [
+          131.91859669815256,
+          65.79765060957054
+        ],
+        "seedPixel": [
+          134,
+          77
+        ],
+        "correlation": 0.9898580050235661,
+        "peakMargin": 0.3556732195032789,
+        "jointValidFraction": 0.9653979238754326,
+        "sourcePointMeters": [
+          2525.233134444017,
+          1410.5499646441313,
+          -1102.589803865063
+        ],
+        "referencePixel": [
+          128.307650917301,
+          76.046487755619
+        ]
+      },
+      {
+        "id": "patch-2-6",
+        "partition": "fit",
+        "sourcePixel": [
+          153.91685502123727,
+          65.703567570251
+        ],
+        "seedPixel": [
+          156,
+          77
+        ],
+        "correlation": 0.9839614864574954,
+        "peakMargin": 0.4340974137262382,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          2665.483347838548,
+          1352.0434913584031,
+          -970.1893755788915
+        ],
+        "referencePixel": [
+          146.40873817616324,
+          76.04642953905424
+        ]
+      },
+      {
+        "id": "patch-2-7",
+        "partition": "holdout",
+        "sourcePixel": [
+          176.09675334596145,
+          65.70913969979455
+        ],
+        "seedPixel": [
+          178,
+          77
+        ],
+        "correlation": 0.9845034468244492,
+        "peakMargin": 0.3036661122467237,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          2805.326336433842,
+          1298.9962596193654,
+          -833.5268437794875
+        ],
+        "referencePixel": [
+          164.51005697158791,
+          76.04632073952001
+        ]
+      },
+      {
+        "id": "patch-2-8",
+        "partition": "fit",
+        "sourcePixel": [
+          198.094192562967,
+          65.71527478633438
+        ],
+        "seedPixel": [
+          200,
+          77
+        ],
+        "correlation": 0.9753356919824802,
+        "peakMargin": 0.3694065992366542,
+        "jointValidFraction": 0.9653979238754326,
+        "sourcePointMeters": [
+          2943.246258432293,
+          1271.430680439691,
+          -676.9996619863668
+        ],
+        "referencePixel": [
+          182.6119298508094,
+          76.04597594884716
+        ]
+      },
+      {
+        "id": "patch-2-9",
+        "partition": "holdout",
+        "sourcePixel": [
+          220.16706195206473,
+          65.69471671003588
+        ],
+        "seedPixel": [
+          222,
+          77
+        ],
+        "correlation": 0.9848720046524061,
+        "peakMargin": 0.3409752868565984,
+        "jointValidFraction": 0.9619377162629758,
+        "sourcePointMeters": [
+          3079.313596316948,
+          1268.6072905476904,
+          -501.165058236802
+        ],
+        "referencePixel": [
+          200.71468735228004,
+          76.04540202202068
+        ]
+      },
+      {
+        "id": "patch-3-0",
+        "partition": "holdout",
+        "sourcePixel": [
+          21.840827131257292,
+          87.84261202316587
+        ],
+        "seedPixel": [
+          24,
+          99
+        ],
+        "correlation": 0.9935100798383798,
+        "peakMargin": 0.1235961949289881,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          1677.954615745788,
+          1686.5724377816077,
+          -1597.3115341460798
+        ],
+        "referencePixel": [
+          37.80308157262256,
+          94.14695323121798
+        ]
+      },
+      {
+        "id": "patch-3-1",
+        "partition": "fit",
+        "sourcePixel": [
+          43.83308574410826,
+          87.89230021384444
+        ],
+        "seedPixel": [
+          46,
+          99
+        ],
+        "correlation": 0.9923974689283633,
+        "peakMargin": 0.23832088803089557,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          1824.4561854047788,
+          1546.916375756613,
+          -1528.0374466142384
+        ],
+        "referencePixel": [
+          55.9051154379749,
+          94.1473763138229
+        ]
+      },
+      {
+        "id": "patch-3-2",
+        "partition": "holdout",
+        "sourcePixel": [
+          65.91061668755752,
+          87.87730651545627
+        ],
+        "seedPixel": [
+          68,
+          99
+        ],
+        "correlation": 0.9848759333683047,
+        "peakMargin": 0.34967114107366326,
+        "jointValidFraction": 0.9930795847750865,
+        "sourcePointMeters": [
+          1970.4355481964376,
+          1413.7283032302512,
+          -1453.762419196195
+        ],
+        "referencePixel": [
+          74.00651596054377,
+          94.14776862440873
+        ]
+      },
+      {
+        "id": "patch-3-3",
+        "partition": "fit",
+        "sourcePixel": [
+          87.87989805657674,
+          87.81276173866915
+        ],
+        "seedPixel": [
+          90,
+          99
+        ],
+        "correlation": 0.9916500838128017,
+        "peakMargin": 0.29382381817242054,
+        "jointValidFraction": 0.9792387543252595,
+        "sourcePointMeters": [
+          2116.5231484327524,
+          1278.870238266536,
+          -1380.8134595360607
+        ],
+        "referencePixel": [
+          92.10745125250246,
+          94.14816899263195
+        ]
+      },
+      {
+        "id": "patch-3-4",
+        "partition": "holdout",
+        "sourcePixel": [
+          110.06822031971195,
+          87.75509628823649
+        ],
+        "seedPixel": [
+          112,
+          99
+        ],
+        "correlation": 0.9856008244335844,
+        "peakMargin": 0.23980689861548243,
+        "jointValidFraction": 0.972318339100346,
+        "sourcePointMeters": [
+          2260.7337379560704,
+          1168.1698167481227,
+          -1289.0899965233402
+        ],
+        "referencePixel": [
+          110.20775617302353,
+          94.14845409650117
+        ]
+      },
+      {
+        "id": "patch-3-5",
+        "partition": "fit",
+        "sourcePixel": [
+          132.06380310512512,
+          87.67094127836162
+        ],
+        "seedPixel": [
+          134,
+          99
+        ],
+        "correlation": 0.9814126378253539,
+        "peakMargin": 0.23518864127139572,
+        "jointValidFraction": 0.986159169550173,
+        "sourcePointMeters": [
+          2402.5400538844697,
+          1088.686308582197,
+          -1173.077974567539
+        ],
+        "referencePixel": [
+          128.3077485358392,
+          94.1485901642009
+        ]
+      },
+      {
+        "id": "patch-3-6",
+        "partition": "holdout",
+        "sourcePixel": [
+          154.01374181959474,
+          87.72370836702216
+        ],
+        "seedPixel": [
+          156,
+          99
+        ],
+        "correlation": 0.9849088621054533,
+        "peakMargin": 0.2827760476112421,
+        "jointValidFraction": 0.9584775086505191,
+        "sourcePointMeters": [
+          2544.4991479710516,
+          1007.2042147694156,
+          -1058.6224742808845
+        ],
+        "referencePixel": [
+          146.4077336210635,
+          94.14873577696926
+        ]
+      },
+      {
+        "id": "patch-3-7",
+        "partition": "fit",
+        "sourcePixel": [
+          176.0740238136251,
+          87.67951094836008
+        ],
+        "seedPixel": [
+          178,
+          99
+        ],
+        "correlation": 0.97526183665109,
+        "peakMargin": 0.3953029453391108,
+        "jointValidFraction": 0.9688581314878892,
+        "sourcePointMeters": [
+          2683.7113310288114,
+          961.7329909480177,
+          -916.113592871232
+        ],
+        "referencePixel": [
+          164.50798686783688,
+          94.14870939596082
+        ]
+      },
+      {
+        "id": "patch-3-8",
+        "partition": "holdout",
+        "sourcePixel": [
+          198.08351357816113,
+          87.77517263633024
+        ],
+        "seedPixel": [
+          200,
+          99
+        ],
+        "correlation": 0.9896374285485185,
+        "peakMargin": 0.27038771995061595,
+        "jointValidFraction": 0.9653979238754326,
+        "sourcePointMeters": [
+          2821.4170965347002,
+          936.2348340572789,
+          -758.022733064834
+        ],
+        "referencePixel": [
+          182.6087938186104,
+          94.14858760179962
+        ]
+      },
+      {
+        "id": "patch-3-9",
+        "partition": "fit",
+        "sourcePixel": [
+          220.08213087760453,
+          87.69097211730976
+        ],
+        "seedPixel": [
+          222,
+          99
+        ],
+        "correlation": 0.9745073874027621,
+        "peakMargin": 0.4332261154200837,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          2959.9624247826723,
+          899.9423379002837,
+          -608.3197418024065
+        ],
+        "referencePixel": [
+          200.70990255041232,
+          94.14851733853584
+        ]
+      },
+      {
+        "id": "patch-4-0",
+        "partition": "fit",
+        "sourcePixel": [
+          21.919105163035702,
+          109.86166498187818
+        ],
+        "seedPixel": [
+          24,
+          121
+        ],
+        "correlation": 0.9911595586117105,
+        "peakMargin": 0.1944840274678078,
+        "jointValidFraction": 0.9757785467128027,
+        "sourcePointMeters": [
+          1553.7400288933932,
+          1387.7211972122313,
+          -1649.6869926088257
+        ],
+        "referencePixel": [
+          37.807750096360365,
+          112.24790413925487
+        ]
+      },
+      {
+        "id": "patch-4-1",
+        "partition": "holdout",
+        "sourcePixel": [
+          43.8499279481036,
+          109.75169704727921
+        ],
+        "seedPixel": [
+          46,
+          121
+        ],
+        "correlation": 0.9796606934153853,
+        "peakMargin": 0.21938790717279455,
+        "jointValidFraction": 0.9930795847750865,
+        "sourcePointMeters": [
+          1701.2098965178666,
+          1235.2469216244062,
+          -1590.4491367468145
+        ],
+        "referencePixel": [
+          55.909109454576615,
+          112.24806091731666
+        ]
+      },
+      {
+        "id": "patch-4-2",
+        "partition": "fit",
+        "sourcePixel": [
+          65.8604717331955,
+          109.88221441710233
+        ],
+        "seedPixel": [
+          68,
+          121
+        ],
+        "correlation": 0.9857217206263373,
+        "peakMargin": 0.40932165851728686,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          1849.087672912232,
+          1077.14562575554,
+          -1535.6257640012773
+        ],
+        "referencePixel": [
+          74.00989522316623,
+          112.24821930925883
+        ]
+      },
+      {
+        "id": "patch-4-3",
+        "partition": "holdout",
+        "sourcePixel": [
+          87.94964726142796,
+          109.72572864388273
+        ],
+        "seedPixel": [
+          90,
+          121
+        ],
+        "correlation": 0.991808142870996,
+        "peakMargin": 0.1543424775677118,
+        "jointValidFraction": 0.9757785467128027,
+        "sourcePointMeters": [
+          1995.0978116327606,
+          942.8425377942622,
+          -1462.3191402207594
+        ],
+        "referencePixel": [
+          92.10973678401673,
+          112.24837089211485
+        ]
+      },
+      {
+        "id": "patch-4-4",
+        "partition": "fit",
+        "sourcePixel": [
+          110.18869414949584,
+          109.72939047740533
+        ],
+        "seedPixel": [
+          112,
+          121
+        ],
+        "correlation": 0.9865191808947215,
+        "peakMargin": 0.1319298706839077,
+        "jointValidFraction": 0.986159169550173,
+        "sourcePointMeters": [
+          2138.6316416317713,
+          840.4146973825991,
+          -1364.2230669066776
+        ],
+        "referencePixel": [
+          110.20890969701557,
+          112.24851335110533
+        ]
+      },
+      {
+        "id": "patch-4-5",
+        "partition": "holdout",
+        "sourcePixel": [
+          132.07808281424002,
+          109.72775613983066
+        ],
+        "seedPixel": [
+          134,
+          121
+        ],
+        "correlation": 0.9832661773179602,
+        "peakMargin": 0.22660904991713593,
+        "jointValidFraction": 0.9826989619377162,
+        "sourcePointMeters": [
+          2280.7621006078407,
+          756.1357446553884,
+          -1252.0039489049232
+        ],
+        "referencePixel": [
+          128.3078573168253,
+          112.2486506145408
+        ]
+      },
+      {
+        "id": "patch-4-6",
+        "partition": "fit",
+        "sourcePixel": [
+          153.98299599274418,
+          109.72971741829701
+        ],
+        "seedPixel": [
+          156,
+          121
+        ],
+        "correlation": 0.9851234318028387,
+        "peakMargin": 0.26304675427691504,
+        "jointValidFraction": 0.9411764705882353,
+        "sourcePointMeters": [
+          2422.6979782630224,
+          674.3711851098342,
+          -1137.8283911313629
+        ],
+        "referencePixel": [
+          146.40676997753988,
+          112.2487871581232
+        ]
+      },
+      {
+        "id": "patch-4-7",
+        "partition": "holdout",
+        "sourcePixel": [
+          176.12253113209624,
+          109.71255141103995
+        ],
+        "seedPixel": [
+          178,
+          121
+        ],
+        "correlation": 0.9909603243239585,
+        "peakMargin": 0.22465657861663169,
+        "jointValidFraction": 0.9826989619377162,
+        "sourcePointMeters": [
+          2562.28871303051,
+          623.2646221111063,
+          -999.7620554635068
+        ],
+        "referencePixel": [
+          164.50590559539492,
+          112.2489149251907
+        ]
+      },
+      {
+        "id": "patch-4-8",
+        "partition": "fit",
+        "sourcePixel": [
+          197.99894892567085,
+          109.859663587696
+        ],
+        "seedPixel": [
+          200,
+          121
+        ],
+        "correlation": 0.994201432331025,
+        "peakMargin": 0.18362881073315385,
+        "jointValidFraction": 0.986159169550173,
+        "sourcePointMeters": [
+          2701.1903415822744,
+          581.3336218752665,
+          -854.528764734976
+        ],
+        "referencePixel": [
+          182.6054099515169,
+          112.24904006648657
+        ]
+      },
+      {
+        "id": "patch-4-9",
+        "partition": "holdout",
+        "sourcePixel": [
+          220.0499654261756,
+          109.6606140531675
+        ],
+        "seedPixel": [
+          222,
+          121
+        ],
+        "correlation": 0.9885537690561812,
+        "peakMargin": 0.24954004967802135,
+        "jointValidFraction": 0.9896193771626297,
+        "sourcePointMeters": [
+          2840.7827634535497,
+          530.5106341170613,
+          -716.2107961329166
+        ],
+        "referencePixel": [
+          200.70510060859945,
+          112.24916775384324
+        ]
+      },
+      {
+        "id": "patch-5-0",
+        "partition": "holdout",
+        "sourcePixel": [
+          21.877182971892832,
+          131.84381208699287
+        ],
+        "seedPixel": [
+          24,
+          143
+        ],
+        "correlation": 0.9944676775758912,
+        "peakMargin": 0.15334528611674647,
+        "jointValidFraction": 0.9100346020761245,
+        "sourcePointMeters": [
+          1433.9930815800253,
+          1032.6745158596896,
+          -1745.875204763026
+        ],
+        "referencePixel": [
+          37.81374149553737,
+          130.34678034055054
+        ]
+      },
+      {
+        "id": "patch-5-1",
+        "partition": "fit",
+        "sourcePixel": [
+          43.86108488701033,
+          131.76839930981527
+        ],
+        "seedPixel": [
+          46,
+          143
+        ],
+        "correlation": 0.990163135400159,
+        "peakMargin": 0.3028495336775838,
+        "jointValidFraction": 0.9134948096885813,
+        "sourcePointMeters": [
+          1581.6957114390825,
+          876.766042970703,
+          -1689.392670263187
+        ],
+        "referencePixel": [
+          55.91399572212504,
+          130.3465945365792
+        ]
+      },
+      {
+        "id": "patch-5-2",
+        "partition": "holdout",
+        "sourcePixel": [
+          65.96266578702759,
+          131.8335954878464
+        ],
+        "seedPixel": [
+          68,
+          143
+        ],
+        "correlation": 0.9956680263396899,
+        "peakMargin": 0.12078203729513581,
+        "jointValidFraction": 0.9896193771626297,
+        "sourcePointMeters": [
+          1726.8730450810472,
+          753.017919589649,
+          -1607.9173713285709
+        ],
+        "referencePixel": [
+          74.01309672879283,
+          130.34654388814891
+        ]
+      },
+      {
+        "id": "patch-5-3",
+        "partition": "fit",
+        "sourcePixel": [
+          87.87232098966071,
+          131.75219043694977
+        ],
+        "seedPixel": [
+          90,
+          143
+        ],
+        "correlation": 0.9781268398763797,
+        "peakMargin": 0.45268277353220054,
+        "jointValidFraction": 0.903114186851211,
+        "sourcePointMeters": [
+          1871.898137997021,
+          631.0187255983474,
+          -1525.1024820102612
+        ],
+        "referencePixel": [
+          92.11178193234434,
+          130.34650053481928
+        ]
+      },
+      {
+        "id": "patch-5-4",
+        "partition": "holdout",
+        "sourcePixel": [
+          110.11668663778957,
+          131.72858736446435
+        ],
+        "seedPixel": [
+          112,
+          143
+        ],
+        "correlation": 0.9883470933908849,
+        "peakMargin": 0.2831463010558629,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          2013.6674595492732,
+          550.9614291122416,
+          -1409.6439979586285
+        ],
+        "referencePixel": [
+          110.20985280480701,
+          130.34663361966125
+        ]
+      },
+      {
+        "id": "patch-5-5",
+        "partition": "fit",
+        "sourcePixel": [
+          132.10903208600726,
+          131.74359417798865
+        ],
+        "seedPixel": [
+          134,
+          143
+        ],
+        "correlation": 0.9848721318128283,
+        "peakMargin": 0.37179170840310827,
+        "jointValidFraction": 0.9584775086505191,
+        "sourcePointMeters": [
+          2155.8053816746906,
+          466.11705319886096,
+          -1297.9152567804558
+        ],
+        "referencePixel": [
+          128.30792265181506,
+          130.34674655744394
+        ]
+      },
+      {
+        "id": "patch-5-6",
+        "partition": "holdout",
+        "sourcePixel": [
+          153.91617402075042,
+          131.75138572689818
+        ],
+        "seedPixel": [
+          156,
+          143
+        ],
+        "correlation": 0.9895081125505414,
+        "peakMargin": 0.12374931500916875,
+        "jointValidFraction": 0.9584775086505191,
+        "sourcePointMeters": [
+          2298.507603968661,
+          373.90396682266146,
+          -1191.9317207223503
+        ],
+        "referencePixel": [
+          146.40591795677278,
+          130.3468284738004
+        ]
+      },
+      {
+        "id": "patch-5-7",
+        "partition": "fit",
+        "sourcePixel": [
+          176.15653455797764,
+          131.70374517909644
+        ],
+        "seedPixel": [
+          178,
+          143
+        ],
+        "correlation": 0.9912208897607947,
+        "peakMargin": 0.14367738400951857,
+        "jointValidFraction": 0.9826989619377162,
+        "sourcePointMeters": [
+          2439.8643300562617,
+          299.176437378861,
+          -1072.3235674084863
+        ],
+        "referencePixel": [
+          164.50393727704153,
+          130.34698398437806
+        ]
+      },
+      {
+        "id": "patch-5-8",
+        "partition": "holdout",
+        "sourcePixel": [
+          198.19236701300082,
+          131.65326426219818
+        ],
+        "seedPixel": [
+          200,
+          143
+        ],
+        "correlation": 0.9902674419791636,
+        "peakMargin": 0.12820356884724649,
+        "jointValidFraction": 0.9826989619377162,
+        "sourcePointMeters": [
+          2579.599811823362,
+          245.67016157892067,
+          -936.1646128459834
+        ],
+        "referencePixel": [
+          182.60226304197906,
+          130.3472288399143
+        ]
+      },
+      {
+        "id": "patch-5-9",
+        "partition": "fit",
+        "sourcePixel": [
+          220.21180363362444,
+          131.59047925974545
+        ],
+        "seedPixel": [
+          222,
+          143
+        ],
+        "correlation": 0.9775327196532598,
+        "peakMargin": 0.22273267020951815,
+        "jointValidFraction": 0.972318339100346,
+        "sourcePointMeters": [
+          2719.984632589032,
+          183.7815206530504,
+          -806.531464517233
+        ],
+        "referencePixel": [
+          200.70067953129805,
+          130.34743842398677
+        ]
+      },
+      {
+        "id": "patch-6-0",
+        "partition": "fit",
+        "sourcePixel": [
+          21.8342976888148,
+          153.73973036116638
+        ],
+        "seedPixel": [
+          24,
+          165
+        ],
+        "correlation": 0.9827439310469352,
+        "peakMargin": 0.33273639819021084,
+        "jointValidFraction": 0.9480968858131488,
+        "sourcePointMeters": [
+          1311.6475978126691,
+          712.2313978015445,
+          -1815.2709226119332
+        ],
+        "referencePixel": [
+          37.818925181748746,
+          148.44361181417466
+        ]
+      },
+      {
+        "id": "patch-6-1",
+        "partition": "holdout",
+        "sourcePixel": [
+          43.8701410241557,
+          153.7325017729945
+        ],
+        "seedPixel": [
+          46,
+          165
+        ],
+        "correlation": 0.9911059020035848,
+        "peakMargin": 0.1460203244407451,
+        "jointValidFraction": 0.9619377162629758,
+        "sourcePointMeters": [
+          1458.1048009367587,
+          571.9383480475517,
+          -1746.710245768656
+        ],
+        "referencePixel": [
+          55.917866613536205,
+          148.44321767202655
+        ]
+      },
+      {
+        "id": "patch-6-2",
+        "partition": "fit",
+        "sourcePixel": [
+          65.811807753963,
+          153.52504707698506
+        ],
+        "seedPixel": [
+          68,
+          166
+        ],
+        "correlation": 0.974114606518688,
+        "peakMargin": 0.12947019591015774,
+        "jointValidFraction": 0.8615916955017301,
+        "sourcePointMeters": [
+          1597.3075620571035,
+          438.5305915105855,
+          -1664.6422960530035
+        ],
+        "referencePixel": [
+          74.01609283348014,
+          149.2655243724049
+        ]
+      },
+      {
+        "id": "patch-6-3",
+        "partition": "holdout",
+        "sourcePixel": [
+          87.92292649204917,
+          153.65339940704115
+        ],
+        "seedPixel": [
+          90,
+          165
+        ],
+        "correlation": 0.9766136664792332,
+        "peakMargin": 0.3852507869611238,
+        "jointValidFraction": 0.9896193771626297,
+        "sourcePointMeters": [
+          1746.0251712347017,
+          354.7855377155356,
+          -1560.2771006883122
+        ],
+        "referencePixel": [
+          92.1134721446291,
+          148.44298109954414
+        ]
+      },
+      {
+        "id": "patch-6-4",
+        "partition": "fit",
+        "sourcePixel": [
+          110.05882068952316,
+          153.73872760915938
+        ],
+        "seedPixel": [
+          112,
+          165
+        ],
+        "correlation": 0.9715258075528955,
+        "peakMargin": 0.3846875285622392,
+        "jointValidFraction": 0.9238754325259516,
+        "sourcePointMeters": [
+          1889.172599464815,
+          256.4890385766048,
+          -1459.0736315603135
+        ],
+        "referencePixel": [
+          110.21082442149522,
+          148.44295221372343
+        ]
+      },
+      {
+        "id": "patch-6-6",
+        "partition": "fit",
+        "sourcePixel": [
+          153.67940583552235,
+          153.72991475384111
+        ],
+        "seedPixel": [
+          155,
+          165
+        ],
+        "correlation": 0.9306694396774151,
+        "peakMargin": 0.21615813265841866,
+        "jointValidFraction": 0.9930795847750865,
+        "sourcePointMeters": [
+          2171.410787859568,
+          32.30770187580492,
+          -1286.2835485727992
+        ],
+        "referencePixel": [
+          145.58232594383398,
+          148.44261639609525
+        ]
+      },
+      {
+        "id": "patch-6-7",
+        "partition": "holdout",
+        "sourcePixel": [
+          176.0656155024305,
+          153.67997485264644
+        ],
+        "seedPixel": [
+          178,
+          165
+        ],
+        "correlation": 0.9953132781303984,
+        "peakMargin": 0.18012799610875685,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          2318.0266027991456,
+          -31.308579704840668,
+          -1149.9894163063727
+        ],
+        "referencePixel": [
+          164.50191653312947,
+          148.44292706755925
+        ]
+      },
+      {
+        "id": "patch-6-8",
+        "partition": "fit",
+        "sourcePixel": [
+          198.097269967877,
+          153.61909839345705
+        ],
+        "seedPixel": [
+          200,
+          165
+        ],
+        "correlation": 0.9849396063894847,
+        "peakMargin": 0.48085957257279044,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          2457.860167405255,
+          -86.74932561407331,
+          -1015.3918612780981
+        ],
+        "referencePixel": [
+          182.59915413291336,
+          148.44327139166265
+        ]
+      },
+      {
+        "id": "patch-6-9",
+        "partition": "holdout",
+        "sourcePixel": [
+          220.20880709294295,
+          153.62464907690278
+        ],
+        "seedPixel": [
+          222,
+          165
+        ],
+        "correlation": 0.9864833995023331,
+        "peakMargin": 0.1547961011433916,
+        "jointValidFraction": 0.9930795847750865,
+        "sourcePointMeters": [
+          2597.510455408381,
+          -139.675309653976,
+          -878.8200872336747
+        ],
+        "referencePixel": [
+          200.69664980392096,
+          148.44363766229165
+        ]
+      },
+      {
+        "id": "patch-7-1",
+        "partition": "fit",
+        "sourcePixel": [
+          43.94302590593713,
+          175.75073271297092
+        ],
+        "seedPixel": [
+          46,
+          187
+        ],
+        "correlation": 0.9809221636063619,
+        "peakMargin": 0.3073445420165781,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          1332.422934012393,
+          294.9536691766698,
+          -1782.4563467693515
+        ],
+        "referencePixel": [
+          55.92121103561636,
+          166.53831123126758
+        ]
+      },
+      {
+        "id": "patch-7-2",
+        "partition": "holdout",
+        "sourcePixel": [
+          66.07564504223359,
+          175.73486418203322
+        ],
+        "seedPixel": [
+          68,
+          187
+        ],
+        "correlation": 0.9792360997532795,
+        "peakMargin": 0.36457130798314696,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          1478.5235060054692,
+          158.65087987866718,
+          -1710.8791839925107
+        ],
+        "referencePixel": [
+          74.01872509360071,
+          166.53769505012232
+        ]
+      },
+      {
+        "id": "patch-7-3",
+        "partition": "fit",
+        "sourcePixel": [
+          87.93705100948883,
+          175.76478460670452
+        ],
+        "seedPixel": [
+          90,
+          187
+        ],
+        "correlation": 0.9934457810175219,
+        "peakMargin": 0.22656202250456714,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          1624.1541247905188,
+          28.107812690432183,
+          -1634.8431624437217
+        ],
+        "referencePixel": [
+          92.11566936155535,
+          166.53715469358076
+        ]
+      },
+      {
+        "id": "patch-7-6",
+        "partition": "holdout",
+        "sourcePixel": [
+          153.55134976703084,
+          176.48723302605003
+        ],
+        "seedPixel": [
+          157,
+          187
+        ],
+        "correlation": 0.9294261575582362,
+        "peakMargin": 0.1740141135228318,
+        "jointValidFraction": 0.8546712802768166,
+        "sourcePointMeters": [
+          2060.8702613384085,
+          -283.0556248076027,
+          -1336.0595068056136
+        ],
+        "referencePixel": [
+          147.22657066199918,
+          166.536649770647
+        ]
+      },
+      {
+        "id": "patch-7-7",
+        "partition": "fit",
+        "sourcePixel": [
+          176.0668252881769,
+          175.65181752948183
+        ],
+        "seedPixel": [
+          178,
+          187
+        ],
+        "correlation": 0.9731531122037942,
+        "peakMargin": 0.36903200776741263,
+        "jointValidFraction": 0.9757785467128027,
+        "sourcePointMeters": [
+          2195.6406530778695,
+          -353.41584313171916,
+          -1221.2393988578115
+        ],
+        "referencePixel": [
+          164.49996110201718,
+          166.53685051199733
+        ]
+      },
+      {
+        "id": "patch-7-8",
+        "partition": "holdout",
+        "sourcePixel": [
+          198.02290485169715,
+          175.7152196751243
+        ],
+        "seedPixel": [
+          200,
+          187
+        ],
+        "correlation": 0.9961602155482697,
+        "peakMargin": 0.08410555473248882,
+        "jointValidFraction": 0.9653979238754326,
+        "sourcePointMeters": [
+          2335.648988789355,
+          -411.757353066816,
+          -1088.9561682556523
+        ],
+        "referencePixel": [
+          182.5961353090735,
+          166.53726401536855
+        ]
+      },
+      {
+        "id": "patch-7-9",
+        "partition": "fit",
+        "sourcePixel": [
+          220.12882046718352,
+          175.64189115830047
+        ],
+        "seedPixel": [
+          222,
+          187
+        ],
+        "correlation": 0.9834010951474373,
+        "peakMargin": 0.27401072953741124,
+        "jointValidFraction": 0.9965397923875432,
+        "sourcePointMeters": [
+          2476.059327018549,
+          -475.235780164483,
+          -960.6721355485497
+        ],
+        "referencePixel": [
+          200.69241146042904,
+          166.5376096526246
+        ]
+      },
+      {
+        "id": "patch-8-0",
+        "partition": "fit",
+        "sourcePixel": [
+          21.966493296983252,
+          197.94873471586558
+        ],
+        "seedPixel": [
+          24,
+          209
+        ],
+        "correlation": 0.9838165086219189,
+        "peakMargin": 0.48334384840347067,
+        "jointValidFraction": 0.889273356401384,
+        "sourcePointMeters": [
+          1060.4687367822407,
+          157.434727009153,
+          -1887.3776801009662
+        ],
+        "referencePixel": [
+          37.82728004904621,
+          184.63268529707761
+        ]
+      },
+      {
+        "id": "patch-8-1",
+        "partition": "holdout",
+        "sourcePixel": [
+          43.76772855804491,
+          197.69234542836168
+        ],
+        "seedPixel": [
+          46,
+          209
+        ],
+        "correlation": 0.9789421036387272,
+        "peakMargin": 0.21042264633740282,
+        "jointValidFraction": 0.986159169550173,
+        "sourcePointMeters": [
+          1207.8627243048832,
+          4.630287652951665,
+          -1828.6831036555814
+        ],
+        "referencePixel": [
+          55.92481164925927,
+          184.63152016145975
+        ]
+      },
+      {
+        "id": "patch-8-2",
+        "partition": "fit",
+        "sourcePixel": [
+          66.09327546886593,
+          197.72149860707776
+        ],
+        "seedPixel": [
+          68,
+          209
+        ],
+        "correlation": 0.9933772573485784,
+        "peakMargin": 0.06512384814236283,
+        "jointValidFraction": 0.9792387543252595,
+        "sourcePointMeters": [
+          1354.1023865511888,
+          -133.77635962155182,
+          -1758.808225867455
+        ],
+        "referencePixel": [
+          74.02147342010844,
+          184.63060960262152
+        ]
+      },
+      {
+        "id": "patch-8-3",
+        "partition": "holdout",
+        "sourcePixel": [
+          87.9065324621652,
+          197.747356814225
+        ],
+        "seedPixel": [
+          90,
+          209
+        ],
+        "correlation": 0.9916094188480749,
+        "peakMargin": 0.16060058653464981,
+        "jointValidFraction": 0.9930795847750865,
+        "sourcePointMeters": [
+          1498.4849380357919,
+          -248.67590792151168,
+          -1670.643262822181
+        ],
+        "referencePixel": [
+          92.11736789840323,
+          184.6301152345709
+        ]
+      },
+      {
+        "id": "patch-8-4",
+        "partition": "fit",
+        "sourcePixel": [
+          110.04592512757813,
+          197.6946088657299
+        ],
+        "seedPixel": [
+          112,
+          209
+        ],
+        "correlation": 0.9789003904036988,
+        "peakMargin": 0.39444665555478853,
+        "jointValidFraction": 0.986159169550173,
+        "sourcePointMeters": [
+          1642.587821056848,
+          -360.156789897359,
+          -1579.8309308590833
+        ],
+        "referencePixel": [
+          110.21292331769116,
+          184.62968126456656
+        ]
+      },
+      {
+        "id": "patch-8-6",
+        "partition": "fit",
+        "sourcePixel": [
+          154.13272140803085,
+          197.67553990088973
+        ],
+        "seedPixel": [
+          156,
+          209
+        ],
+        "correlation": 0.977035348888391,
+        "peakMargin": 0.31469022740521213,
+        "jointValidFraction": 0.9896193771626297,
+        "sourcePointMeters": [
+          1926.5440385876645,
+          -528.7435870715417,
+          -1355.8383135948097
+        ],
+        "referencePixel": [
+          146.4033544705673,
+          184.62977684610104
+        ]
+      },
+      {
+        "id": "patch-8-7",
+        "partition": "holdout",
+        "sourcePixel": [
+          176.09166329628547,
+          197.65120106094315
+        ],
+        "seedPixel": [
+          178,
+          209
+        ],
+        "correlation": 0.9915182773753871,
+        "peakMargin": 0.2399957077479068,
+        "jointValidFraction": 0.9584775086505191,
+        "sourcePointMeters": [
+          2068.246555517231,
+          -609.5078089520102,
+          -1241.0918444372946
+        ],
+        "referencePixel": [
+          164.4985310868318,
+          184.6298871792924
+        ]
+      },
+      {
+        "id": "patch-8-8",
+        "partition": "fit",
+        "sourcePixel": [
+          198.21366741454636,
+          197.63515288672792
+        ],
+        "seedPixel": [
+          200,
+          209
+        ],
+        "correlation": 0.9862997552106602,
+        "peakMargin": 0.25029628344090926,
+        "jointValidFraction": 0.9930795847750865,
+        "sourcePointMeters": [
+          2209.6586390287557,
+          -686.5120770493522,
+          -1123.4112056801096
+        ],
+        "referencePixel": [
+          182.59374168275062,
+          184.63006417939437
+        ]
+      },
+      {
+        "id": "patch-8-9",
+        "partition": "holdout",
+        "sourcePixel": [
+          220.08808961545222,
+          197.62061788493932
+        ],
+        "seedPixel": [
+          222,
+          209
+        ],
+        "correlation": 0.9872909721048074,
+        "peakMargin": 0.2074683732840975,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          2350.2957757486947,
+          -753.4287555783521,
+          -997.8528882701648
+        ],
+        "referencePixel": [
+          200.6891446067102,
+          184.63042008149242
+        ]
+      },
+      {
+        "id": "patch-9-4",
+        "partition": "holdout",
+        "sourcePixel": [
+          110.0608020132067,
+          219.6688414628655
+        ],
+        "seedPixel": [
+          112,
+          231
+        ],
+        "correlation": 0.9908343750428202,
+        "peakMargin": 0.1557046979816724,
+        "jointValidFraction": 0.9757785467128027,
+        "sourcePointMeters": [
+          1516.7739698740625,
+          -634.4802433436271,
+          -1613.8583361824276
+        ],
+        "referencePixel": [
+          110.21378596977755,
+          202.72090174917503
+        ]
+      },
+      {
+        "id": "patch-9-5",
+        "partition": "fit",
+        "sourcePixel": [
+          131.87647177830323,
+          219.66056480502246
+        ],
+        "seedPixel": [
+          134,
+          231
+        ],
+        "correlation": 0.9787317711003836,
+        "peakMargin": 0.29413424871519434,
+        "jointValidFraction": 0.8823529411764706,
+        "sourcePointMeters": [
+          1659.1994597584926,
+          -724.93308730016,
+          -1506.7117890738882
+        ],
+        "referencePixel": [
+          128.30821743972663,
+          202.72078967421163
+        ]
+      },
+      {
+        "id": "patch-9-6",
+        "partition": "holdout",
+        "sourcePixel": [
+          154.18680168563043,
+          219.6938428199672
+        ],
+        "seedPixel": [
+          156,
+          231
+        ],
+        "correlation": 0.9831703478053553,
+        "peakMargin": 0.29978913988815237,
+        "jointValidFraction": 0.9757785467128027,
+        "sourcePointMeters": [
+          1801.537837576274,
+          -814.3190202292753,
+          -1398.73826333147
+        ],
+        "referencePixel": [
+          146.40255216452158,
+          202.72070127033868
+        ]
+      },
+      {
+        "id": "patch-9-7",
+        "partition": "fit",
+        "sourcePixel": [
+          176.1641989570702,
+          219.6541984397928
+        ],
+        "seedPixel": [
+          178,
+          231
+        ],
+        "correlation": 0.9907296840119555,
+        "peakMargin": 0.24664826504797177,
+        "jointValidFraction": 0.9757785467128027,
+        "sourcePointMeters": [
+          1943.6359456486753,
+          -900.6538840562571,
+          -1288.3881961948937
+        ],
+        "referencePixel": [
+          164.4968203767355,
+          202.72068069030135
+        ]
+      },
+      {
+        "id": "patch-9-8",
+        "partition": "holdout",
+        "sourcePixel": [
+          197.95441453988482,
+          219.66374754291942
+        ],
+        "seedPixel": [
+          200,
+          231
+        ],
+        "correlation": 0.983009158080954,
+        "peakMargin": 0.2946562353392861,
+        "jointValidFraction": 1,
+        "sourcePointMeters": [
+          2085.5377260899404,
+          -984.4836245689075,
+          -1176.0855902397307
+        ],
+        "referencePixel": [
+          182.59105649033947,
+          202.72071581281793
+        ]
+      },
+      {
+        "id": "patch-9-9",
+        "partition": "fit",
+        "sourcePixel": [
+          220.25566511704312,
+          219.59248811087787
+        ],
+        "seedPixel": [
+          222,
+          231
+        ],
+        "correlation": 0.9853534168496185,
+        "peakMargin": 0.22876572261857497,
+        "jointValidFraction": 0.9688581314878892,
+        "sourcePointMeters": [
+          2226.3524073495137,
+          -1054.23867271794,
+          -1052.7919879477704
+        ],
+        "referencePixel": [
+          200.68549108366247,
+          202.72106411347303
+        ]
+      }
+    ]
+  },
+  "matching": {
+    "patchRadius": 8,
+    "searchRadius": 40,
+    "gridStride": 22,
+    "gridOrigin": 22,
+    "targetSmoothingSigma": 0.85,
+    "minimumCorrelation": 0.86,
+    "minimumPeakMargin": 0.03,
+    "minimumJointValidFraction": 0.85,
+    "excluded": [
+      {
+        "id": "patch-0-0",
+        "pixel": [
+          22,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.7104089814490555,
+        "peakMargin": 0.05142622151234144
+      },
+      {
+        "id": "patch-0-1",
+        "pixel": [
+          44,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.5430121990921952,
+        "peakMargin": 0.031125715714505398
+      },
+      {
+        "id": "patch-0-2",
+        "pixel": [
+          66,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.6065566179247855,
+        "peakMargin": 0.05726425584939976
+      },
+      {
+        "id": "patch-0-3",
+        "pixel": [
+          88,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.6184109406670939,
+        "peakMargin": 0.02703512173579059
+      },
+      {
+        "id": "patch-0-4",
+        "pixel": [
+          110,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.6498534399830542,
+        "peakMargin": 0.04417190073196098
+      },
+      {
+        "id": "patch-0-5",
+        "pixel": [
+          132,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.7244312707241324,
+        "peakMargin": 0.06501426811945787
+      },
+      {
+        "id": "patch-0-6",
+        "pixel": [
+          154,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.6955046853813966,
+        "peakMargin": 0.08313358718010255
+      },
+      {
+        "id": "patch-0-7",
+        "pixel": [
+          176,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.4295524037972038,
+        "peakMargin": 0.1388559950225356
+      },
+      {
+        "id": "patch-0-8",
+        "pixel": [
+          198,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.3419755856023297,
+        "peakMargin": 0.09466845363965426
+      },
+      {
+        "id": "patch-0-9",
+        "pixel": [
+          220,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.32701829676003147,
+        "peakMargin": 0.1724104286937598
+      },
+      {
+        "id": "patch-0-10",
+        "pixel": [
+          242,
+          22
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-1-0",
+        "pixel": [
+          22,
+          44
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.7374603577227349,
+        "peakMargin": 0.025514543919797683
+      },
+      {
+        "id": "patch-1-8",
+        "pixel": [
+          198,
+          44
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.5471766669018072,
+        "peakMargin": 0.10747619226881416
+      },
+      {
+        "id": "patch-1-9",
+        "pixel": [
+          220,
+          44
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.5528286887664365,
+        "peakMargin": 0.08055289434730706
+      },
+      {
+        "id": "patch-1-10",
+        "pixel": [
+          242,
+          44
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-2-10",
+        "pixel": [
+          242,
+          66
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-3-10",
+        "pixel": [
+          242,
+          88
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-4-10",
+        "pixel": [
+          242,
+          110
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-5-10",
+        "pixel": [
+          242,
+          132
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-6-5",
+        "pixel": [
+          132,
+          154
+        ],
+        "reason": "invalid-anchor",
+        "correlation": 0.9926310878005873,
+        "peakMargin": 0.2913613784504733
+      },
+      {
+        "id": "patch-6-10",
+        "pixel": [
+          242,
+          154
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-7-0",
+        "pixel": [
+          22,
+          176
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.7327377785169987,
+        "peakMargin": 0.04536338894308234
+      },
+      {
+        "id": "patch-7-4",
+        "pixel": [
+          110,
+          176
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.7133167600641767,
+        "peakMargin": 0.08092192547699972
+      },
+      {
+        "id": "patch-7-5",
+        "pixel": [
+          132,
+          176
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.6896862091287927,
+        "peakMargin": 0.00404521368798616
+      },
+      {
+        "id": "patch-7-10",
+        "pixel": [
+          242,
+          176
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-8-5",
+        "pixel": [
+          132,
+          198
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.7560703800988517,
+        "peakMargin": 0.022504750937422324
+      },
+      {
+        "id": "patch-8-10",
+        "pixel": [
+          242,
+          198
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-9-0",
+        "pixel": [
+          22,
+          220
+        ],
+        "reason": "weak-correlation",
+        "correlation": 0.8108025623544046,
+        "peakMargin": 0.05569650642860202
+      },
+      {
+        "id": "patch-9-1",
+        "pixel": [
+          44,
+          220
+        ],
+        "reason": "ambiguous-peak",
+        "correlation": 0.9009259703962285,
+        "peakMargin": 0.015696346359923008
+      },
+      {
+        "id": "patch-9-2",
+        "pixel": [
+          66,
+          220
+        ],
+        "reason": "ambiguous-peak",
+        "correlation": 0.868816303776758,
+        "peakMargin": 0.014073255772166227
+      },
+      {
+        "id": "patch-9-3",
+        "pixel": [
+          88,
+          220
+        ],
+        "reason": "ambiguous-peak",
+        "correlation": 0.9862623533686318,
+        "peakMargin": 0.020656083550441795
+      },
+      {
+        "id": "patch-9-10",
+        "pixel": [
+          242,
+          220
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-0",
+        "pixel": [
+          22,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-1",
+        "pixel": [
+          44,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-2",
+        "pixel": [
+          66,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-3",
+        "pixel": [
+          88,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-4",
+        "pixel": [
+          110,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-5",
+        "pixel": [
+          132,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-6",
+        "pixel": [
+          154,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-7",
+        "pixel": [
+          176,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-8",
+        "pixel": [
+          198,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-9",
+        "pixel": [
+          220,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      },
+      {
+        "id": "patch-10-10",
+        "pixel": [
+          242,
+          242
+        ],
+        "reason": "weak-correlation",
+        "correlation": -2,
+        "peakMargin": 0
+      }
+    ]
+  },
+  "frameBinding": [
+    [
+      -0.07977201909091047,
+      -0.9905660059968489,
+      -0.11142447098196179
+    ],
+    [
+      0.9090527984850294,
+      -0.02643137955281935,
+      -0.4158417869111657
+    ],
+    [
+      0.40897363550318977,
+      -0.13446326613014215,
+      0.9025852843498605
+    ]
+  ]
+}

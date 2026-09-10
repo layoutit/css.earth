@@ -142,5 +142,21 @@
     },
     "bounds": "Conservative Cartesian cube with half-extent equal to the largest original source radius, 383 AU. Positive barycentric radius interpolation cannot exceed that source radius; this encloses the curved display interpolation as well as original samples."
   },
-  "attribution": "Scientific geometry: Reisenfeld et al. (2021), ApJS 254, 40, DOI 10.3847/1538-4365/abf658, IBEX. Galaxio rim-presentation software derivation: Copyright (c) 2026 Juan Cruz Fortunatti, MIT; see separate unchanged LICENSE.GALAXIO-MIT.txt."
+  "attribution": "Scientific geometry: Reisenfeld et al. (2021), ApJS 254, 40, DOI 10.3847/1538-4365/abf658, IBEX. Galaxio rim-presentation software derivation: Copyright (c) 2026 Juan Cruz Fortunatti, MIT; see separate unchanged LICENSE.GALAXIO-MIT.txt.",
+  "sourceBinding": {
+    "kind": "catalogued",
+    "references": [
+      {
+        "catalogueId": "ibex-heliosphere-map-2021",
+        "role": "reference",
+        "evidence": "src/objects/heliosphere/source/provenance.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/publication"
+      }
+    ]
+  },
+  "catalogueDisplay": {
+    "feature": "heliopause",
+    "label": "IBEX",
+    "credit": "Heliopause model · Reisenfeld et al. (2021).",
+    "description": "Reisenfeld et al. (2021): IBEX-derived envelope, published Z–H model; tail distances are ENA sounding limits, not a measured heliopause closure."
+  }
 }

@@ -1,0 +1,582 @@
+
+> cssearth@0.1.0 test:shell /Users/ekrof/fed/cssEarth-sources-catalogue
+> node --test site/test/*.test.mjs
+
+✔ overview charts retain every supplied spectrum sample across the registry (235.731ms)
+✔ overview measurements use the body reference radius and catalogue distance (0.51975ms)
+✔ compact spectra reject unordered or nonfinite samples (0.1435ms)
+✖ every object mounts one canonical high-density image bank (184816.69175ms)
+✔ the shared shell does not choose image assets by device DPR (3.484167ms)
+✔ hidden charts schedule no work; visible charts batch reads, retain corrections, and retire cleanly (1.116416ms)
+✔ the standard browser launch stays unchanged unless explicitly opted in (0.8675ms)
+✔ the Chrome wrapper retains logs and arguments while preserving both CDP pipes (419.616583ms)
+✔ Mercury titles link the main mosaic, not coverage-completion images or tile templates (29.18375ms)
+✔ direct source images take precedence over product pages, including WMS images (7.929291ms)
+✔ a source-defined single-input mosaic does not inherit the parent mosaic link (7.251333ms)
+✔ a composite dataset links its declared primary input, which must belong to that product (3.533042ms)
+✔ a multi-image mosaic does not pass off an arbitrary exposure as its source image (3.012792ms)
+✔ missing, internal, and malformed source URLs leave a plain title (3.3245ms)
+✔ every registered dataset has a specific authored title, independent of category and source-link availability (817.4905ms)
+✔ missing titles, category labels, paragraphs and repeated descriptions are rejected (0.650625ms)
+✔ capture attribution follows the selected dataset, including derived maps (53.028292ms)
+✔ multi-mission composites preserve every evidenced contributor without repeating dataset destinations (21.967625ms)
+✔ schematic and synthetic views do not inherit observations from their outer texture (17.407667ms)
+✔ agency choices count individual missions and preserve joint credits (0.251917ms)
+✔ every migrated capture stays bound to its source; the full prepared graph is deterministic (800.424375ms)
+✔ OSIRIS-REx retains Bennu observations and successor participation creates no APEX observations (0.225666ms)
+✔ approved artwork and emblems retain source bytes, dimensions and transparency (176.582375ms)
+✔ unknown identities, impossible capture pairs, stale lenses and damaged indexes fail closed (10.086875ms)
+✔ records one correlated run, copies changing camera state, and is idle after stop (9.6535ms)
+✔ a failed diagnostic read is captured without interrupting the application (0.657875ms)
+✔ rail switches the retained About panel without storing or mounting a scene (1.225041ms)
+✔ Escape restores a visible keyboard focus target (0.495125ms)
+✔ settings shares the panel slot and mobile navigation returns to the top (0.277042ms)
+✔ settings stays selected on repeat clicks and closes through About, Solar System, or Escape (0.159208ms)
+✔ search stays visible in About and Settings and typing returns to the results (0.806958ms)
+✔ destroy resets retained markup and remount does not duplicate listeners (0.146375ms)
+✔ an incomplete rail fails clearly (0.21375ms)
+✔ orders comparable facts before stable planet-specific facts (0.734875ms)
+✔ keeps unknown facts in their authored order (0.084709ms)
+✔ prioritizes a satellite's own orbit over its parent's solar orbit (0.11425ms)
+✔ rejects facts without unique semantic ids (0.209042ms)
+✔ analytics ignores local visits and loads on css.earth (1.771291ms)
+✔ objects without lenses or extra settings retain mandatory browser proof (1.947791ms)
+✔ declared content requires exact lens and setting DOM before optional checks (2.509667ms)
+✔ optional controls never excuse a missing shared panel or Motion (0.258125ms)
+✔ declared lenses require matching race IDs, and complete retained coverage (0.219166ms)
+✔ a single supplied lens keeps interaction proof without inventing a race (0.076792ms)
+✔ all objects retain browser evidence for the controls they support (612.223792ms)
+✔ only a later fully opaque marker covers a complete earlier marker (0.390209ms)
+✔ edge contact, motion out of coverage and responsive raster guards keep drawing (0.102125ms)
+✔ prepared minimap index includes every source point once without changing DOM order (1.711542ms)
+✔ X range keeps inclusive duplicate boundaries and handles empty/disjoint ranges (0.330459ms)
+✔ indexed candidates preserve exact 3D visible points across physical scales and off-origin views (70.222292ms)
+✖ adding and reordering bodies preserves existing marker bytes (544.114958ms)
+✔ metadata-only preparation does not replace or remove images (38.432375ms)
+✔ composes every orbiting-object marker descriptor in catalog order (395.35275ms)
+✖ reproduces the checked-in body images and utility markers (425.498417ms)
+✖ failed object source preserves accepted files or recoverable backups outside public (490.056ms)
+✖ failed late utility source preserves accepted files or recoverable backups outside public (343.751958ms)
+✖ failed publication preserves accepted files or recoverable backups outside public (323.161334ms)
+✖ failed rollback preserves accepted files or recoverable backups outside public (280.921125ms)
+✔ cross-device moves copy and unlink safely for publication and rollback (4.664292ms)
+✔ persistent world context is mounted once and follows the active physical navigation (9.322916ms)
+✔ contrast intent reaches a loading world once and survives detail navigation (11.65275ms)
+✔ flight state covers system framing and resets after success, failure, cancellation and preserved-view navigation (5.296625ms)
+✔ the destination card stays held until arrival, including the new camera mount (0.748083ms)
+✔ asteroid label and orbit settings default off and reach the retained context independently (0.535583ms)
+✔ entering overview on the current object changes selection without invoking focus or restoring the camera (0.299875ms)
+✔ flight retains the source and one shell; target readiness and handoff precede history commit (0.840417ms)
+✔ rapid Mercury → Venus → Mercury cancels the stale factory without replacing shell or source (0.487708ms)
+✔ history back restores the departed exact view after target handoff without another push (0.961542ms)
+✔ saved-view anchors preserve query and hash across objects and on the already selected object (1.032292ms)
+✔ reselecting the source cancels a running flight at its painted view without another restore or mount (3.256208ms)
+✔ late rejected handoff is observed after replacement and cannot publish stale readiness (0.509084ms)
+✔ navigation preserves requested playback and reduced-motion policy (0.315042ms)
+✔ real input interruption preserves the last painted source view and flushes it without restoring the old URL (0.280959ms)
+✔ a missing destination asset preserves the painted view and permits a fresh selection retry (0.39125ms)
+✔ input after the detailed handoff keeps the incoming scene and its painted pose, including saved-view links (0.452666ms)
+✔ navbar/search anchors and vault events share one route; modifier and unsupported links stay native (0.466333ms)
+✔ a failed persistent context mount can retry when the document restores (0.26925ms)
+✔ leaving the document releases its universe and a cached-page restore mounts one fresh owner (0.235709ms)
+✔ selecting the current object flies the retained camera without preparing or replacing detail (2.39475ms)
+✔ plain current-object anchors focus but saved-view links restore their specified view (1.804125ms)
+✔ a first selection frames the object system and changes its card, then the next click focuses (0.488375ms)
+✔ zooming out after first-click system framing restores the overview at the same camera pose (2.231667ms)
+✔ a first Sun click frames the Solar System card, and a repeat opens the Sun close-up (2.246667ms)
+✔ clicking the Sun from the Solar System overview opens its body instead of refitting the outer planets (1.136916ms)
+✔ clicking the Sun from a galactic overview still frames its Solar System first (1.591625ms)
+✔ a second scene click can zoom while centering the current object is still in progress (0.309583ms)
+✔ selection emphasis previews immediately before the next detailed owner is ready (0.2965ms)
+✔ empty-space clicks leave selection, camera and card unchanged (wide=false) (3.359ms)
+✔ empty-space clicks leave selection, camera and card unchanged (wide=true) (4.218875ms)
+✔ overview breadcrumbs reframe, select the card, and retain separate history entries (1.524375ms)
+✔ overview links preserve native modifier clicks and exact saved views (0.31925ms)
+✔ a direct overview URL frames once, but a saved overview URL retains its camera (0.311458ms)
+✔ selecting another list body during a flight still uses its system framing (0.3145ms)
+✔ dataset links commit one same-body history entry, preserve the camera and restore the default on back (0.42525ms)
+✔ manual datasets replace history and ordinary body navigation removes only the dataset fragment (0.424959ms)
+✔ direct dataset links wait for readiness without pushing, and invalid direct links remain diagnostic (0.24825ms)
+✔ a failed same-body dataset leaves the committed selection and URL together (0.312ms)
+✔ a cancelled dataset cannot publish after a replacement navigation (4.048041ms)
+✔ cross-body dataset failure finishes on the destination default without claiming the failed dataset (0.339459ms)
+✔ navigation timing records phases once and bounds retained entries without clearing unrelated timing (6.544291ms)
+✔ timing is optional in non-browser hosts (0.121583ms)
+✔ every actual profile reads its recorded coordinates from the shared camera endpoint (1026.644583ms)
+✔ coordinate field selection is immutable reporting data, with no private camera implementation (0.383833ms)
+✔ restoring a complete camera observation preserves yaw and the pitch alias (0.797875ms)
+✔ camera reporting rejects missing, repeated and unsupported coordinates (0.241833ms)
+✔ an already ready object does not depend on a redundant browser waiter (845.3475ms)
+✔ a missing or loading object still requires successful readiness before returning (5.96075ms)
+✔ the actual Saturn profile observes one exclusive lens and rejects the former dual selection (3.763792ms)
+✔ search contains every object, including the Sun; only planets enter the scale (0.882583ms)
+✔ prepared marker addresses and presentation follow packages (548.515833ms)
+✔ an unknown object loads its own marker; missing packages fail without fallback (380.948958ms)
+✔ scale overrides must form a complete presentation after inheritance (0.844083ms)
+✔ mercury material failure through shared wheel retires once and disables retained callbacks (26.051375ms)
+✔ mercury material failure through shared drag retires once and disables retained callbacks (17.05375ms)
+✔ mercury material failure through shared resize retires once and disables retained callbacks (32.076334ms)
+✔ mercury material failure through shared invalidate retires once and disables retained callbacks (20.58725ms)
+✔ mercury material failure through shared refresh retires once and disables retained callbacks (15.430292ms)
+✔ mercury material failure through shared setState retires once and disables retained callbacks (22.228459ms)
+✔ mercury material failure through shared media-change retires once and disables retained callbacks (15.505417ms)
+✔ mercury initial material failure stops construction before live error reporting (14.225667ms)
+✔ venus material failure through shared wheel retires once and disables retained callbacks (7.087792ms)
+✔ venus material failure through shared drag retires once and disables retained callbacks (7.674709ms)
+✔ venus material failure through shared resize retires once and disables retained callbacks (6.777292ms)
+✔ venus material failure through shared invalidate retires once and disables retained callbacks (7.093459ms)
+✔ venus material failure through shared refresh retires once and disables retained callbacks (22.678584ms)
+✔ venus material failure through shared setState retires once and disables retained callbacks (6.029875ms)
+✔ venus material failure through shared media-change retires once and disables retained callbacks (5.839917ms)
+✔ venus initial material failure stops construction before live error reporting (5.845833ms)
+✔ mars material failure through shared wheel retires once and disables retained callbacks (7.305625ms)
+✔ mars material failure through shared drag retires once and disables retained callbacks (6.876959ms)
+✔ mars material failure through shared resize retires once and disables retained callbacks (6.825167ms)
+✔ mars material failure through shared invalidate retires once and disables retained callbacks (6.922125ms)
+✔ mars material failure through shared refresh retires once and disables retained callbacks (10.968125ms)
+✔ mars material failure through shared setState retires once and disables retained callbacks (6.552958ms)
+✔ mars material failure through shared media-change retires once and disables retained callbacks (8.624167ms)
+✔ mars initial material failure stops construction before live error reporting (7.4975ms)
+✔ accepts a complete non-NASA package and still rejects corrupt or undeclared bytes (85.59525ms)
+✔ derives the complete owned file contract from planet identity (3.327ms)
+✔ requires every registered object package file (966.089125ms)
+✔ validates local editorial identity and provenance (1.103875ms)
+✔ validates runtime asset manifest entries (0.127125ms)
+✔ page metadata stays hash-bound to its scene without needing scene bytes during page emission (54.210708ms)
+✔ all registry objects own ordered CSS and scene-bound page metadata (11924.779917ms)
+✔ generic routes derive membership from OBJECTS and never import scene transports (2.22325ms)
+✔ defines one generic renderable-object contract (0.674583ms)
+✔ world-frame capability is validated and copied at the registry boundary (2.524ms)
+✔ rejects invalid object definitions and renderer-specific fields (0.326083ms)
+✔ keeps one open-ended object registry with unique ids and routes (0.461167ms)
+✔ derives deterministic test discovery from an authored object id (9.895167ms)
+✔ derives shared preparation and external browser scripts from the descriptor (13.448ms)
+✔ shared attribution keeps Mercury’s three distinct product links and credits them once (6.559ms)
+✔ every registered body uses the same projection and keeps every consumed source identity (536.920625ms)
+✔ grouping preserves every link and underlying rights while showing the shared credit once (4.417625ms)
+✔ factsheet URLs and arbitrary URL-like strings cannot become source evidence (1.699708ms)
+✔ oracle comparison never borrows a future pose and retains the slower tail (1.110041ms)
+✔ a wheel comparison rejects a lost held button and validates the delivered Qt event (0.746584ms)
+✔ native repeat alignment preserves later event and pose timing (0.133167ms)
+✔ input qualification records delivery lag and rejects missing input (0.375ms)
+✔ an interruption interval ends at each renderer's next actual input receipt (0.19775ms)
+✔ oracle registration rejects an independent CSS translation of the scene (0.204083ms)
+✔ motion-only timing rejects reference readback overlapping the gesture (0.197292ms)
+✔ natural motion reports retain the observed clock and reject hidden readback (20.698833ms)
+✔ input pairing retains the final consumed release position even without a throw (36.966917ms)
+✔ body cards switch at the shared camera detail threshold, independent of camera aim (0.869041ms)
+✔ overview follows the prepared galaxy fade and restores correctly at maximum zoom (0.102792ms)
+✔ galactic distance is measured from the Sun, independent of selected body and surface radius (0.08175ms)
+✔ deselection uses physical orbital scale, not the selected body radius alone (1.035917ms)
+✔ only approaching the Sun opens a card, with separate entry and exit thresholds (0.419167ms)
+✔ camera sampling settles before changing selection and releases timers and subscriptions (0.316041ms)
+✔ continuous outward camera updates cannot postpone the Sun overview flip (0.64025ms)
+✔ keeps every implemented scene in one object registry (0.76875ms)
+✔ loads every object through the single adapter (31.311167ms)
+✔ rejects incomplete scene lifecycle wiring (0.136125ms)
+✔ shared router owns minimal adapter shell lifecycle (1.128625ms)
+✔ shared router publishes a minimal adapter error (0.222791ms)
+✔ shared router contains synchronous shell bootstrap failure (0.115334ms)
+✔ shared router cancels a pending adapter before publication (0.132708ms)
+✔ keeps implemented routes backed by object-owned files (900.720875ms)
+✔ keeps source-backed chart data in canonical order with Reflectance first (92.055333ms)
+✔ keeps the shared shell planet-neutral (16.922167ms)
+✔ keeps lens descriptions source-bound in the object model (7.31575ms)
+✔ derives the accessible logarithmic scale from catalog distances (0.837792ms)
+✔ rejects unusable scale bounds and distances (0.234083ms)
+✔ keeps every planet factsheet comparable and concise (0.922875ms)
+✔ uses unique semantic ids without hidden title-only content (0.260084ms)
+✔ keeps Pluto concise and removes lens-presentation rows (0.122083ms)
+✔ keeps object-internal identifiers out of the Moon factsheet (0.065667ms)
+✔ prepares one source-bound 20px SVG family for sidebar sections (11.37275ms)
+✔ authored lens facts survive preparation and runtime publication without mutating the source (32.670083ms)
+✔ lens facts reject malformed rows and duplicate ids before publication (27.472791ms)
+✔ existing description-only lenses keep their original content contract (26.801542ms)
+✔ names arbitrary lens IDs without changing source data or assuming a fixed set of concepts (0.798667ms)
+✔ prepares a frozen, smoothly sampled scale legend (0.579334ms)
+✔ prepares source-backed category legends from hex and RGB colors (0.579083ms)
+✔ rejects invalid scale palettes (0.218791ms)
+✔ named categories can omit a redundant description while supplied descriptions stay validated (0.151125ms)
+✔ every object forwards its object-owned legend through the shared shell (13608.624375ms)
+✔ every registered object supplies typed shared panel content and controls (348.472084ms)
+✔ unknown panel values are rejected before they can claim rendered field types (2.398083ms)
+✔ generates all shared title assets once from checked source vectors (17.32875ms)
+✔ keeps planet title rendering facts object-owned and source-bound (10893.530708ms)
+✔ normalizes every implemented planet title to the complete Saturn standard (10831.804041ms)
+✔ a falsy camera publication failure rejects and releases native flight listeners (1.88575ms)
+✔ a terminal extreme-range pose finishes without a tail of identical publications (19.805333ms)
+✔ the exact final camera demand finishes before the old scene is handed off (4.887458ms)
+✔ an overview starts moving before factory and assets are ready, then holds before target detail (12.042834ms)
+✔ overview preserves the latest drawn camera through slow preparation, without a flight or input interception (1.308ms)
+✔ a cancelled preserved-view handoff releases its unmounted resources (0.462ms)
+✔ overview handoff uses the requested distant camera instead of flying into the Sun (7.533208ms)
+✔ the same object can recenter at overview distance without resetting to its close-up (3.745791ms)
+✔ handoff precedes large destination approach and continues the same numeric flight from the exact drawn checkpoint (7.722083ms)
+✔ slow asset preparation holds only the distant checkpoint and resumes after readiness (7.126375ms)
+✔ new selection cancellation stops painting and releases destination preparation (0.937ms)
+✔ cancellation between prepared handoff and mount releases resources and all interruption listeners (1.4895ms)
+✔ an already cancelled request cannot start a frame or retain input listeners (0.572333ms)
+✔ input during a delayed preparation interrupts at the last drawn checkpoint and releases late resources (3.999417ms)
+✔ input after the early handoff preserves the destination owner drawn pose (1.479875ms)
+✔ reduced motion waits for preparation, then mounts the exact arrival without enlarging a source proxy (0.239834ms)
+✔ saved camera endpoints survive the early owner handoff unchanged (9.027583ms)
+✔ refocusing the selected object paints one existing owner without reloading its prepared bank (3.016833ms)
+✔ the application keeps flying while destination groups activate, then transfers the live pose without a reset (6.623958ms)
+✔ cancellation during connected activation stops the application flight and releases its resources (1.661041ms)
+✔ real input interrupts a same-object focus at the last painted camera (0.518208ms)
+✔ replacement departure uses the retained world while its previous detail owner is retired (5.355417ms)
+✔ the current body accepts wide-view centering only while below its prepared detail threshold (0.298584ms)
+✔ centering changes the focus at the same range and orientation, then focus zooms in (6.013334ms)
+✔ production runtime removes development observations from the executable closure (933.032625ms)
+✔ all prepared planet surfaces use the measured Chrome seam contract (0.388416ms)
+✔ keeps reversal and every camera-advancing present in its recorded step (2.312542ms)
+✔ advances uncaptured native frames instead of skipping their camera work (0.643083ms)
+✔ rejects missing frame clocks and an already moving start (0.5635ms)
+✔ does not replay a preceding gesture still retained before the new press (0.129958ms)
+✔ ignores a pointer point stored after a non-launching release (0.089959ms)
+✔ pairs a fresh press during coast, held jitter and a second release independently (0.267417ms)
+✔ binds click-only receipts without fabricating a drag launch (0.334125ms)
+✔ advances an uncaptured receipt-only present (0.141708ms)
+✔ binds click receipts before a later drag without treating clicks as launches (0.180125ms)
+✔ pairs a source-consumed drag and following stop click (0.180833ms)
+✔ derives every root planet lane from the validated catalog (1203.896042ms)
+✔ loads object-owned browser and audit expectations for every implementation (519.120417ms)
+✔ loading remembers latest intent but cannot resume; media events never rewrite intent (3.306ms)
+✔ playback reads cannot consume a pending media notification (0.468709ms)
+✔ repeated restoration has bounded subscriptions; old callbacks cannot affect the replacement (1.05125ms)
+✔ malformed mounts retain cleanup handles and failure cleanup survives a destructor error (0.249375ms)
+✔ malformed mounts still observe their rejected readiness promise (5.347625ms)
+✔ fatal pause failure cleans once and never publishes success (0.307042ms)
+✔ fatal resume failure cleans once and never publishes success (0.138625ms)
+✔ fatal report failure cleans once and never publishes success (0.105125ms)
+✔ an object destination can pause shared motion, and a retired object cannot change intent (0.232083ms)
+✔ automatic playback has one complete readiness, intent and environment policy (0.820208ms)
+✔ keeps one shared orientation-aware responsive shell boundary (0.0725ms)
+✔ uses one canonical high-density image bank for every mount (0.045958ms)
+✔ skybox orbit dragging is enabled by the shared input policy (0.044ms)
+✔ discrete wheels and precision scroll gestures have separate shared gains (0.049208ms)
+✔ scroll input classification preserves accelerated precision gestures and permits device changes (0.121334ms)
+✔ updates wheel and touch policy without replacing controls (0.26225ms)
+✔ initial responsive failure removes its subscription and preserves startup rejection (0.210334ms)
+✔ live responsive failure retires the subscription before reporting fatal (0.967084ms)
+✔ responsive cleanup preserves a non-Error startup failure as the aggregate cause (0.488125ms)
+✔ asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime (8391.906542ms)
+✔ publishes one off-by-default Shadows control for every planet (60.572125ms)
+✔ control content permits empty capabilities but rejects malformed or conflicting declarations (0.473333ms)
+✔ small shell attribution records match the checked scientific provenance (4.454709ms)
+✔ every shared route retains its object sources and the actual environment credits (142.408917ms)
+✔ omits only the superseded ESO panorama, preserving other ESO and object OpenSpace sources (0.627625ms)
+✔ merges duplicate source links without dropping full credits or changing the caller (0.14775ms)
+✔ app credits and prepared body provenance have separate consumers on direct and cached routes (3.458417ms)
+✔ publishes the canonical scientific chart order (0.779917ms)
+✔ orders any applicable subset without inventing missing charts (0.158417ms)
+✔ keeps unknown future chart types after known charts in source order (0.218708ms)
+✔ binds phase charts to explicit primary-source provenance (14.746208ms)
+✔ discovers objects through multiple pages and resolves relative links at their source (0.597291ms)
+✔ rejects the orphaned Sun even when its inspected page retains a self-link (0.549208ms)
+✔ rejects a disconnected cycle even when every object has a link from another page (0.155375ms)
+✔ external links with a matching pathname do not discover a local object (9.266875ms)
+✔ retained catalogue groups follow filters and release their visibility observer (3.232375ms)
+✔ Asteroids Orbits starts off and retains its independent preference across body navigation (1.010041ms)
+✔ Asteroid Labels starts off and retains its independent preference across body navigation (15.911083ms)
+✔ shell with no optional controls keeps Motion/high contrast and accessible blocked intent (2.890084ms)
+✔ failed shell construction cleans earlier controllers and their scheduled work (0.368791ms)
+✔ object content replacement retains shell controls and input state without accumulating listeners (1.176042ms)
+✔ Motion cannot enable Speed before the shared runtime is ready or after it retires (0.355583ms)
+✔ overview and detail tabs keep independent selections and keyboard focus across camera zoom (1.256625ms)
+✔ destination card stays fixed across flight poses and camera handoff, then follows manual zoom (0.604708ms)
+✔ camera scale changes retained overview content without moving the camera and search selects the matching category tab (2.466459ms)
+✔ clearing search keeps the current object or overview card and permits another search (1.710583ms)
+✔ flight completion and overview handoff preserve a newer active search (1.152ms)
+✔ category pills reuse search, retain the query through navigation, and dismiss with Escape (1.115458ms)
+✔ the overview preview changes immediately and survives a same-scene commit (0.942417ms)
+✔ an empty search survives dismissal, overview resets, and object commits (0.625916ms)
+✔ choosing the current body from search shows its card without editing the query (0.291959ms)
+✔ a Milky Way breadcrumb previews its own card and preserves the search query (0.189ms)
+✔ surface consumers use the published clipped viewport without measuring the scene (0.749833ms)
+✔ vendored Cesium helpers reproduce the pinned upstream methods verbatim (7.117875ms)
+✔ flat map cardinal landmarks retain east-west order and north-up orientation (0.685541ms)
+✔ map navigation rotates camera and eye together, retaining distance and roll (0.494416ms)
+✔ opposite-side clicks and seam crossings stay finite and reach the requested point (0.344625ms)
+✔ minimap uses the upstream Cesium rectangle for zoom, roll, poles and horizon cases (7.244666ms)
+✔ Cesium whole-globe fallback is retained and the rectangle shrinks with close zoom (0.222791ms)
+✔ out-of-view globe hides the rectangle and zero-longitude bounds wrap on the texture (0.093125ms)
+✔ system flights keep the viewing angle and approach the center from QMbBW5Yy (15.534084ms)
+✔ system flights keep the viewing angle and approach the center from QIZBtofG (8.38125ms)
+✔ fitting the current angle is independent of prepared box order and member names (1.470791ms)
+✔ each system fits its complete primary orbits at 1524x1237, offset 0,0 (27.11575ms)
+✔ each system fits its complete primary orbits at 1280x720, offset 0,0 (22.441834ms)
+✔ each system fits its complete primary orbits at 390x844, offset 0,0 (23.831583ms)
+✔ each system fits its complete primary orbits at 1024x700, offset 40,-20 (21.242708ms)
+✔ selecting the system root pulls back from a planet to all major planets, with a normal close-up on repeat (0.555792ms)
+✔ system fit leaves clearance for the visible sidebar, header and footer (0.232ms)
+✔ adding a small distant moon does not pull the initial camera away from the larger moons (0.364291ms)
+✔ a body without moons uses its normal close-up target on first selection (0.204292ms)
+✔ clicking the already selected body in close-up does not zoom back out to its moons (0.109333ms)
+✔ galactic breadcrumbs zoom straight out from the current view without panning or turning (0.616ms)
+✔ a Solar System breadcrumb always restores the system framing from a Sun close-up (0.42375ms)
+✔ scene date includes the calendar time and TT scale across calendar days (1.436333ms)
+✔ coordinates carry rounded seconds and preserve hemispheres (0.105375ms)
+✔ altitude and distance scale use physical units across camera ranges (0.600292ms)
+✔ surface ruler measures the front surface, not the center plane (0.540834ms)
+✔ looking away supplies no invented surface coordinates or behind-camera ruler (0.119834ms)
+✔ objects without prepared geographic axes still have altitude and scale (0.086709ms)
+✔ galaxy distances keep a finite ruler without a spurious surface hit (0.120667ms)
+✔ camera changes coalesce into replaceState while preserving the route, other queries, hash and history state (2.145583ms)
+✔ incoming links restore before motion resumes without rewriting their saved playback position (0.604625ms)
+✔ existing JSON links shrink on restore while preserving their exact saved time and route (0.48225ms)
+✔ old physical camera links migrate to one pose without resampling saved motion time (0.492583ms)
+✔ invalid links leave the current scene usable and are replaced only after a camera change (0.28ms)
+✔ popstate restores the stored camera and disposal removes history listeners and scheduled work (0.263042ms)
+ℹ tests 326
+ℹ suites 0
+ℹ pass 319
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 185547.623041
+
+✖ failing tests:
+
+test at site/test/canonical-image-density.test.mjs:10:1
+✖ every object mounts one canonical high-density image bank (184816.69175ms)
+  Error: src/planets/achlys/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/mani/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/varuna/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/salacia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/orcus/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/gonggong/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/sedna/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/oumuamua/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/earth/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/mars/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/ivar/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/toro/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/cerberus/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/tantalus/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/moshup/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/hertha/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/hera/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/klymene/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/artemis/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/dione-106/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/felicitas/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/lydia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/iphigenia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/thyra/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/lomia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/peitho/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/althaea/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/lachesis/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/gerda/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/brunhild/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/alkeste/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/liberatrix/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/velleda/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/johanna/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/antigone/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/cyrene/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/sophrosyne/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/meliboea/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/siwa/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/vibilia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/lucina/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/protogeneia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/gallia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/medusa/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/nuwa/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/abundantia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/scylla/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/xanthippe/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/dejanira/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/aemilia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/una/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/athor/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/laurentia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/erigone/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/eva/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/loreley/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/rhodope/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/urda/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/sibylla/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/baucis/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/ino/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/phaedra/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/dejopeja/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/lamberta/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/menippe/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/kolga/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/ambrosia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/eurykleia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/byblis/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/kallisto/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/hersilia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/hedda/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/dido/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/isabella/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/medea/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/lilaea/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/aschera/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/oenone/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/eudora/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/stephania/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/eos/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/henrietta/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/weringia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/philosophia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/athamantis/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/vindobona/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/asterope/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/coelestina/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/hypatia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/vanadis/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/kriemhild/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/vera/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/asporina/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/eukrate/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/ilse/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/bettina/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/clementina/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/augusta/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/silesia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/tyche/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/huberta/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/dresda/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/libussa/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/anna/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/anahita/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/penthesilea/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/antonia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/philagoria/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/sapientia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/adelheid/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/emma/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/iclea/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/bavaria/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/clarissa/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/unitas/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/quaoar/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/massalia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/proserpina/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/polyhymnia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/leukothea/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/virginia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/echo/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/maja/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/juewa/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/bertha/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/lucia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/brucia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/badenia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/ducrosa/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/gyptis/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/petrina/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/reinmuthia/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/jupiter/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/uranus/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/neptune/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/pluto/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/aethra/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/lyyli/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/hela/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/kemi/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+  src/planets/taurinensis/object.json:1: Authored physical frame receipt differs from its authored source pins or descriptor.
+      at auditObjectRuntimeOwnership (file:///Users/ekrof/fed/cssEarth-sources-catalogue/tools/check-object-runtime-ownership.mts:918:11)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-sources-catalogue/site/test/canonical-image-density.test.mjs:12:21)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at site/test/navigation-preparation.test.mjs:29:1
+✖ adding and reordering bodies preserves existing marker bytes (544.114958ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async validateMarkerSourceBytes (file:///Users/ekrof/fed/cssEarth-sources-catalogue/src/navigation/marker-recipe.mts:75:17)
+      at async readMarkerImage (file:///Users/ekrof/fed/cssEarth-sources-catalogue/src/navigation/marker-recipe.mts:87:17)
+      at async renderMarker (file:///Users/ekrof/fed/cssEarth-sources-catalogue/src/navigation/marker-recipe.mts:101:15)
+      at async prepareBodyMarkers (file:///Users/ekrof/fed/cssEarth-sources-catalogue/tools/prepare-navigation.mts:238:20)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-sources-catalogue/site/test/navigation-preparation.test.mjs:35:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg'
+  }
+
+test at site/test/navigation-preparation.test.mjs:80:1
+✖ reproduces the checked-in body images and utility markers (425.498417ms)
+  Error: ENOENT: no such file or directory, open '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg'
+      at async open (node:internal/fs/promises:697:25)
+      at async readFile (node:internal/fs/promises:1348:14)
+      at async validateMarkerSourceBytes (file:///Users/ekrof/fed/cssEarth-sources-catalogue/src/navigation/marker-recipe.mts:75:17)
+      at async readMarkerImage (file:///Users/ekrof/fed/cssEarth-sources-catalogue/src/navigation/marker-recipe.mts:87:17)
+      at async renderMarker (file:///Users/ekrof/fed/cssEarth-sources-catalogue/src/navigation/marker-recipe.mts:101:15)
+      at async prepareBodyMarkers (file:///Users/ekrof/fed/cssEarth-sources-catalogue/tools/prepare-navigation.mts:238:20)
+      at async renderNavigation (file:///Users/ekrof/fed/cssEarth-sources-catalogue/tools/prepare-navigation.mts:248:3)
+      at async prepareNavigation (file:///Users/ekrof/fed/cssEarth-sources-catalogue/tools/prepare-navigation.mts:97:72)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-sources-catalogue/site/test/navigation-preparation.test.mjs:84:3)
+      at async Test.run (node:internal/test_runner/test:1389:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg'
+  }
+
+test at site/test/navigation-preparation.test.mjs:115:3
+✖ failed object source preserves accepted files or recoverable backups outside public (490.056ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-SMfvEV/src/planets/new-body/source/source.jpg'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-sources-catalogue/site/test/navigation-preparation.test.mjs:127:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-SMfvEV/src/planets/new-body/source/source.jpg'
+  }
+
+test at site/test/navigation-preparation.test.mjs:115:3
+✖ failed late utility source preserves accepted files or recoverable backups outside public (343.751958ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-VOO5dw/src/planets/new-body/source/source.jpg'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-sources-catalogue/site/test/navigation-preparation.test.mjs:127:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-VOO5dw/src/planets/new-body/source/source.jpg'
+  }
+
+test at site/test/navigation-preparation.test.mjs:115:3
+✖ failed publication preserves accepted files or recoverable backups outside public (323.161334ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-0IgxXG/src/planets/new-body/source/source.jpg'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-sources-catalogue/site/test/navigation-preparation.test.mjs:127:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-0IgxXG/src/planets/new-body/source/source.jpg'
+  }
+
+test at site/test/navigation-preparation.test.mjs:115:3
+✖ failed rollback preserves accepted files or recoverable backups outside public (280.921125ms)
+  Error: ENOENT: no such file or directory, copyfile '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg' -> '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-TAYPxA/src/planets/new-body/source/source.jpg'
+      at async copyFile (node:internal/fs/promises:679:10)
+      at async TestContext.<anonymous> (file:///Users/ekrof/fed/cssEarth-sources-catalogue/site/test/navigation-preparation.test.mjs:127:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    errno: -2,
+    code: 'ENOENT',
+    syscall: 'copyfile',
+    path: '/Users/ekrof/fed/cssEarth-sources-catalogue/src/planets/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg',
+    dest: '/var/folders/5m/cq7ng7p923937j53n3vcbttc0000gn/T/cssearth-navigation-failure-TAYPxA/src/planets/new-body/source/source.jpg'
+  }
+ ELIFECYCLE  Command failed with exit code 1.

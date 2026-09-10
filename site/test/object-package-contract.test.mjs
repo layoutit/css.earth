@@ -33,7 +33,7 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "local-data.bin"), bytes);
   await writeFile(paths.runtimeAssets, JSON.stringify({ schema: "csslocal-body-runtime-assets@1", assets: [{ filename: "surface.webp", bytes: bytes.length, sha256: hash }] }));
-  await writeFile(paths.sourceManifest, JSON.stringify({ schema: "csslocal-body-authoritative-sources@1", inputs: [{ id: "local", path: "local-data.bin", expectedSha256: hash, expectedBytes: bytes.length, origin: "Project-authored test fixture", credit: "cssEarth", license: "MIT", acquisition: "Checked local fixture", redistribution: "MIT", consumers: ["scene"] }], generatedIntermediates: [], documents: [] }));
+  await writeFile(paths.sourceManifest, JSON.stringify({ schema: "csslocal-body-authoritative-sources@2", inputs: [{ id: "local", path: "local-data.bin", expectedSha256: hash, expectedBytes: bytes.length, origin: "Project-authored test fixture", credit: "cssEarth", license: "MIT", acquisition: "Checked local fixture", redistribution: "MIT", sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ["scene"] }], generatedIntermediates: [], documents: [] }));
   assert.deepEqual(await validatePlanetData(object, { projectRoot }), { assetCount: 1, sourceInputCount: 1 });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), "corrupt");
   await assert.rejects(validatePlanetData(object, { projectRoot }), /runtime asset drifted/);

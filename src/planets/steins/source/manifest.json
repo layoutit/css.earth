@@ -1,5 +1,5 @@
 {
-  "schema": "csssteins-authoritative-sources@1",
+  "schema": "csssteins-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "acquisition": "Original restorable from pinned URL through preparation/acquisition.json.",
@@ -40,7 +50,17 @@
       },
       "coverage": "Closed published shape. Approximately60% was imaged; unseen areas are constrained by lightcurve inversion. Source contains an acknowledged artificial elevation step at the SPC/lightcurve seam.",
       "expectedBytes": 2470000,
-      "expectedSha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff"
+      "expectedSha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-shape",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "acquisition": "Original restorable from pinned URL through preparation/acquisition.json.",
@@ -78,6 +98,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-normal",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -92,7 +122,17 @@
         "osiris-observation"
       ],
       "expectedBytes": 615424,
-      "expectedSha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6"
+      "expectedSha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-observations-w20080905t183606461id4df17-img",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "steins-reference-naif0012-tls",
@@ -106,7 +146,17 @@
         "camera-reference"
       ],
       "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-reference-naif0012-tls",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "steins-reference-ROS_V33-TF",
@@ -120,7 +170,17 @@
         "camera-reference"
       ],
       "expectedBytes": 237356,
-      "expectedSha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1"
+      "expectedSha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-reference-ros-v33-tf",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "steins-reference-ROS_OSIRIS_V15-TI",
@@ -134,7 +194,17 @@
         "camera-reference"
       ],
       "expectedBytes": 23016,
-      "expectedSha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587"
+      "expectedSha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-reference-ros-osiris-v15-ti",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "steins-reference-ROS_STEINS_V05-TPC",
@@ -148,7 +218,17 @@
         "camera-reference"
       ],
       "expectedBytes": 6314,
-      "expectedSha256": "cfdc8738633af838008c6f67c23019c5179c4fc7888a5653f06b7a3dfbc846c1"
+      "expectedSha256": "cfdc8738633af838008c6f67c23019c5179c4fc7888a5653f06b7a3dfbc846c1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-reference-ros-steins-v05-tpc",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "steins-reference-osiris-boresight-pdf",
@@ -162,7 +242,17 @@
         "camera-reference"
       ],
       "expectedBytes": 801308,
-      "expectedSha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318"
+      "expectedSha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-reference-osiris-boresight-pdf",
+            "role": "method",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "steins-reference-osiris-photometry-pdf",
@@ -176,7 +266,17 @@
         "camera-reference"
       ],
       "expectedBytes": 2400378,
-      "expectedSha256": "6b47bcb9c9f810e1a2e8136aa6d0c83e2862edc0619d233de0135fd6fcaa8dac"
+      "expectedSha256": "6b47bcb9c9f810e1a2e8136aa6d0c83e2862edc0619d233de0135fd6fcaa8dac",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1702-00184",
+            "role": "method",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "steins-preparation-camera-json",
@@ -190,7 +290,13 @@
         "camera-reference"
       ],
       "expectedBytes": 568,
-      "expectedSha256": "e6710af8ae266103c46eec3a9fd47f37c407bcc711f3f15e55c00648a3889c10"
+      "expectedSha256": "e6710af8ae266103c46eec3a9fd47f37c407bcc711f3f15e55c00648a3889c10",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "steins-preparation-camera-json",
+        "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "steins-observations-osiris-camera-json",
@@ -204,7 +310,11 @@
         "osiris-observation"
       ],
       "expectedBytes": 2899,
-      "expectedSha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9"
+      "expectedSha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "steins-w20080905t183630497id4df17-camera",
@@ -218,7 +328,11 @@
         "osiris-observation"
       ],
       "expectedBytes": 2932,
-      "expectedSha256": "c300b7604f69398ee30f89554bd79e5aaeaa722ef48e4fb58a9d0425ca87430e"
+      "expectedSha256": "c300b7604f69398ee30f89554bd79e5aaeaa722ef48e4fb58a9d0425ca87430e",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "steins-w20080905t183630497id4df17-img",
@@ -232,7 +346,17 @@
         "osiris-observation"
       ],
       "expectedBytes": 615424,
-      "expectedSha256": "f3c3f69503c25b4508d9d9b3fc37a602b0d25b8b7c843016c099c31d72e1791d"
+      "expectedSha256": "f3c3f69503c25b4508d9d9b3fc37a602b0d25b8b7c843016c099c31d72e1791d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-steins-steins-w20080905t183630497id4df17-img",
+            "role": "material",
+            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "steins-w20080905t183630497id4df17-camera-json",
@@ -246,7 +370,13 @@
         "camera-reference"
       ],
       "expectedBytes": 588,
-      "expectedSha256": "480d77ff1d87c57ffc9fc54506e2ecb99bf2e46a37cd06d3a401be7973db9c4f"
+      "expectedSha256": "480d77ff1d87c57ffc9fc54506e2ecb99bf2e46a37cd06d3a401be7973db9c4f",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "steins-w20080905t183630497id4df17-camera-json",
+        "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -282,7 +412,11 @@
       "path": "content/object.json",
       "purpose": "Source evidence or authored preparation input.",
       "expectedBytes": 10442,
-      "expectedSha256": "39fcebc1eb16f4c5906bc3f3aae53422abac0b859011e1a24da920fe0fcc34a0"
+      "expectedSha256": "39fcebc1eb16f4c5906bc3f3aae53422abac0b859011e1a24da920fe0fcc34a0",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

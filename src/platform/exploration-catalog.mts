@@ -1,12 +1,13 @@
+import { parseSourceCitation } from './source-catalog.mts';
+import type { SourceCitation, SourceResolver } from './source-catalog.mts';
 /** Shared runtime validation for the authored and prepared exploration catalogues. */
-export interface Cited<T> { readonly value: T; readonly referenceIds: readonly string[]; }
-export interface Reference { readonly id: string; readonly title: string; readonly url: string; readonly checkedOn: string; readonly locator?: string; }
+export interface Cited<T> { readonly value: T; readonly citations: readonly SourceCitation[]; }
 export type VehicleKind = 'orbiter' | 'lander' | 'rover' | 'probe' | 'observatory' | 'flyby' | 'sample-return';
 export interface SpacecraftRecord {
   readonly id: string; readonly name: Cited<string>; readonly aliases: readonly Cited<string>[];
   readonly description: Cited<string>; readonly kind: Cited<VehicleKind>; readonly launch?: Cited<string>; readonly imageId?: string;
 }
-export interface Participant { readonly spacecraftId: string; readonly role: VehicleKind; readonly referenceIds: readonly string[]; }
+export interface Participant { readonly spacecraftId: string; readonly role: VehicleKind; readonly citations: readonly SourceCitation[]; }
 export interface MissionRecord {
   readonly id: string; readonly name: Cited<string>; readonly description: Cited<string>;
   readonly agencyIds: Cited<readonly string[]>; readonly participants: readonly Participant[];
@@ -16,7 +17,7 @@ export interface MissionRecord {
 }
 export interface Agency { readonly name: string; readonly sourceUrl: string; readonly src?: string; readonly assetUrl?: string; readonly sha256?: string; readonly bytes?: number; }
 export interface ExplorationCatalog {
-  readonly schema: 'cssearth-spacecraft-catalog@2'; readonly references: readonly Reference[];
+  readonly schema: 'cssearth-spacecraft-catalog@3';
   readonly spacecraft: readonly SpacecraftRecord[]; readonly missions: readonly MissionRecord[];
 }
 export type CaptureAttribution =
@@ -85,24 +86,18 @@ export function parseAgencies(input: unknown): Readonly<Record<string, Agency>> 
     return [id, Object.freeze({ ...base, src, assetUrl: explorationUrl(value.assetUrl), sha256, bytes })];
   })));
 }
-export function parseExplorationCatalog(input: unknown, agencies: Readonly<Record<string, Agency>>): ExplorationCatalog {
-  const value = explorationRecord(input, ['schema', 'references', 'spacecraft', 'missions']);
-  if (value.schema !== 'cssearth-spacecraft-catalog@2') throw new TypeError('Unsupported spacecraft catalogue schema.');
-  const references = explorationArray(value.references, raw => {
-    const ref = explorationRecord(raw, ['id', 'title', 'url', 'checkedOn', 'locator']);
-    return Object.freeze({ id: explorationId(ref.id), title: explorationText(ref.title), url: explorationUrl(ref.url), checkedOn: explorationDate(ref.checkedOn, true),
-      ...(ref.locator === undefined ? {} : { locator: explorationText(ref.locator) }) });
-  });
-  unique(references.map(ref => ref.id), 'reference ID');
-  const referenceIds = new Set(references.map(ref => ref.id));
+export function parseExplorationCatalog(input: unknown, agencies: Readonly<Record<string, Agency>>, sources: SourceResolver): ExplorationCatalog {
+  const value = explorationRecord(input, ['schema', 'spacecraft', 'missions']);
+  if (value.schema !== 'cssearth-spacecraft-catalog@3') throw new TypeError('Unsupported spacecraft catalogue schema.');
   const refs = (raw: unknown) => {
-    const ids = explorationArray(raw, explorationId); unique(ids, 'reference');
-    if (!ids.length || ids.some(id => !referenceIds.has(id))) throw new TypeError('Missing catalogue reference.');
-    return ids;
+    const citations = explorationArray(raw, value => parseSourceCitation(value, sources));
+    unique(citations.map(citation => JSON.stringify(citation)), 'citation');
+    if (!citations.length) throw new TypeError('Missing catalogue citation.');
+    return citations;
   };
   const cited = <T,>(raw: unknown, parse: (raw: unknown) => T): Cited<T> => {
-    const record = explorationRecord(raw, ['value', 'referenceIds']);
-    return Object.freeze({ value: parse(record.value), referenceIds: refs(record.referenceIds) });
+    const record = explorationRecord(raw, ['value', 'citations']);
+    return Object.freeze({ value: parse(record.value), citations: refs(record.citations) });
   };
   const spacecraft = explorationArray(value.spacecraft, raw => {
     const record = explorationRecord(raw, ['id', 'name', 'aliases', 'description', 'kind', 'launch', 'imageId']);
@@ -118,10 +113,10 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
   const missions = explorationArray(value.missions, raw => {
     const record = explorationRecord(raw, ['id', 'name', 'description', 'agencyIds', 'participants', 'started', 'ended', 'status', 'imageId', 'emblemId']);
     const participants = explorationArray(record.participants, raw => {
-      const member = explorationRecord(raw, ['spacecraftId', 'role', 'referenceIds']);
+      const member = explorationRecord(raw, ['spacecraftId', 'role', 'citations']);
       const spacecraftId = explorationId(member.spacecraftId);
       if (!spacecraftIds.has(spacecraftId)) throw new TypeError(`Unknown participating spacecraft: ${spacecraftId}.`);
-      return Object.freeze({ spacecraftId, role: vehicleKind(member.role), referenceIds: refs(member.referenceIds) });
+      return Object.freeze({ spacecraftId, role: vehicleKind(member.role), citations: refs(member.citations) });
     });
     unique(participants.map(member => member.spacecraftId), 'mission participant');
     if (!participants.length) throw new TypeError('A spacecraft mission needs a participant.');
@@ -144,7 +139,7 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
       ...(record.emblemId === undefined ? {} : { emblemId: explorationId(record.emblemId) }) });
   });
   unique(missions.map(record => record.id), 'mission ID');
-  return Object.freeze({ schema: 'cssearth-spacecraft-catalog@2', references, spacecraft, missions });
+  return Object.freeze({ schema: 'cssearth-spacecraft-catalog@3', spacecraft, missions });
 }
 
 export function parseCapture(input: unknown): Capture {

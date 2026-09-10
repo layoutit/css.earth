@@ -1,5 +1,5 @@
 {
-  "schema": "csssun-authoritative-sources@1",
+  "schema": "csssun-authoritative-sources@2",
   "inputs": [
     {
       "id": "inter-sun-title-vector",
@@ -13,7 +13,13 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 2062
+      "expectedBytes": 2062,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "inter-sun-title-vector",
+        "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "sdo-hmi-continuum-cr2311-20260513",
@@ -41,6 +47,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/13/20260513_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260513",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -73,6 +89,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/14/20260514_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260514",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -101,6 +127,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/15/20260515_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260515",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -133,6 +169,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/16/20260516_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260516",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
       }
     },
     {
@@ -161,6 +207,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/17/20260517_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260517",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
         ]
       }
@@ -193,6 +249,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/18/20260518_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260518",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
       }
     },
     {
@@ -221,6 +287,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/19/20260519_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260519",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
           }
         ]
       }
@@ -253,6 +329,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/20/20260520_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260520",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
       }
     },
     {
@@ -281,6 +367,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/21/20260521_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260521",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
           }
         ]
       }
@@ -313,6 +409,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/22/20260522_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260522",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
       }
     },
     {
@@ -341,6 +447,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/23/20260523_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260523",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
           }
         ]
       }
@@ -373,6 +489,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/24/20260524_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260524",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
       }
     },
     {
@@ -401,6 +527,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/25/20260525_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260525",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
           }
         ]
       }
@@ -433,6 +569,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260527",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
       }
     },
     {
@@ -461,6 +607,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/28/20260528_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260528",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
           }
         ]
       }
@@ -493,6 +649,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/29/20260529_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260529",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
       }
     },
     {
@@ -521,6 +687,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/30/20260530_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260530",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
           }
         ]
       }
@@ -553,6 +729,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/31/20260531_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260531",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
       }
     },
     {
@@ -581,6 +767,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/01/20260601_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260601",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
           }
         ]
       }
@@ -613,6 +809,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/02/20260602_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260602",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
       }
     },
     {
@@ -641,6 +847,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/03/20260603_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260603",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
           }
         ]
       }
@@ -673,6 +889,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/04/20260604_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260604",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
       }
     },
     {
@@ -701,6 +927,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/05/20260605_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260605",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
           }
         ]
       }
@@ -733,6 +969,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/06/20260606_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260606",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
       }
     },
     {
@@ -761,6 +1007,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/07/20260607_000000_1024_HMIIC.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260607",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
           }
         ]
       }
@@ -793,6 +1049,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/08/20260608_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260608",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+          }
+        ]
       }
     },
     {
@@ -823,6 +1089,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/06/09/20260609_000000_1024_HMIIC.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260609",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+          }
+        ]
       }
     },
     {
@@ -849,6 +1125,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://jsoc1.stanford.edu/SUM89/D2005165426/S00000/synopMr.fits"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-jsoc-hmi-cr2311-radial-field-synoptic-map",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
           }
         ]
       }
@@ -879,6 +1165,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000710_1024_0171.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-aia-171-cr2311-context",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+          }
+        ]
       }
     },
     {
@@ -905,6 +1201,16 @@
             "spacecraftId": "sdo",
             "missionId": "sdo",
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/browse/2026/05/27/20260527_000906_1024_0304.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-aia-304-cr2311-context",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
           }
         ]
       }
@@ -935,6 +1241,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-aia-304-cr2311-synoptic-map",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+          }
+        ]
       }
     },
     {
@@ -963,6 +1279,16 @@
             "evidence": "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0171/CR2311.fits"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-sdo-aia-171-cr2311-synoptic-map",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
       }
     },
     {
@@ -980,7 +1306,17 @@
         "panel"
       ],
       "expectedBytes": 11481,
-      "expectedSha256": "d07e94cf068cbf0815d8f9a0dfc3614c3b30bab087a3154c800a957b1f443bb8"
+      "expectedSha256": "d07e94cf068cbf0815d8f9a0dfc3614c3b30bab087a3154c800a957b1f443bb8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-sun-facts",
+            "role": "reference",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      }
     },
     {
       "id": "hyg-v41-sun-field",
@@ -998,7 +1334,17 @@
         "starfield"
       ],
       "expectedBytes": 144971,
-      "expectedSha256": "7027ab18259eb6a89108ecbe625b3ffed565f29f7ed8535e7d168e7da8250e03"
+      "expectedSha256": "7027ab18259eb6a89108ecbe625b3ffed565f29f7ed8535e7d168e7da8250e03",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sun-hyg-v41-sun-field",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+          }
+        ]
+      }
     },
     {
       "id": "eso-sun-milky-way-panorama",
@@ -1016,7 +1362,17 @@
         "scene"
       ],
       "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      }
     },
     {
       "id": "sun-authored-acquisition",
@@ -1030,7 +1386,13 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "acquisition"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "sun-authored-acquisition",
+        "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "sun-world-context-navigation",
@@ -1045,7 +1407,13 @@
       ],
       "expectedBytes": 3321,
       "expectedSha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
-      "sha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78"
+      "sha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "sun-world-context-navigation",
+        "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -1084,7 +1452,11 @@
       "path": "content/static.json",
       "expectedBytes": 18248,
       "expectedSha256": "f5b6ecd76597ff594505f40a946840645add4d749887ff8e922aaf18dbbe8cf0",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicit authored content document in the retained provenance record."
+      }
     },
     {
       "path": "preparation/navigation.json",

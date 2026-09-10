@@ -1,5 +1,5 @@
 {
-  "schema": "cssasteroid-1996-hw1-authoritative-sources@1",
+  "schema": "cssasteroid-1996-hw1-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/asteroid-1996-hw1/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-1996-hw1-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied.",
       "expectedBytes": 83069,
-      "expectedSha256": "f40ee6ba66abccd5393f991fdfe240b54df49c31559e07a431760996024d2996"
+      "expectedSha256": "f40ee6ba66abccd5393f991fdfe240b54df49c31559e07a431760996024d2996",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-shape",
+            "role": "material",
+            "evidence": "src/planets/asteroid-1996-hw1/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/asteroid-1996-hw1/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "asteroid-1996-hw1-research-1996hw1",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 3069644,
-      "expectedSha256": "f75956f9f1cbfe74213979e71615a2a71ce8a280f4a189e02b210b826bda3129"
+      "expectedSha256": "f75956f9f1cbfe74213979e71615a2a71ce8a280f4a189e02b210b826bda3129",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-asteroid-1996-hw1-asteroid-1996-hw1-research-1996hw1",
+            "role": "method",
+            "evidence": "src/planets/asteroid-1996-hw1/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 9550,
-      "expectedSha256": "3a50b3c8d37da24915f6a03ea993cd1ac8409d6542a6bb0ca5297e08a196baa8"
+      "expectedSha256": "3a50b3c8d37da24915f6a03ea993cd1ac8409d6542a6bb0ca5297e08a196baa8",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

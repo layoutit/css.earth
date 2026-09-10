@@ -1,5 +1,5 @@
 {
-  "schema": "cssbetulia-authoritative-sources@1",
+  "schema": "cssbetulia-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/betulia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "betulia-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The southern depression and overall irregular form are resolved unevenly. Fine surface material and photographic reflectance are not supplied by this model.",
       "expectedBytes": 67284,
-      "expectedSha256": "9fcf177c2b17a52154b3bfb84948366300b54ed860927d4043f96c9045eb1a1a"
+      "expectedSha256": "9fcf177c2b17a52154b3bfb84948366300b54ed860927d4043f96c9045eb1a1a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betulia-betulia-shape",
+            "role": "material",
+            "evidence": "src/planets/betulia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/betulia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "betulia-research-betulia",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 1310882,
-      "expectedSha256": "9442b95d40d8e5526797fa57748d5f357a5f411940ee333f574cc17446efc3db"
+      "expectedSha256": "9442b95d40d8e5526797fa57748d5f357a5f411940ee333f574cc17446efc3db",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betulia-betulia-research-betulia",
+            "role": "method",
+            "evidence": "src/planets/betulia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 8028,
-      "expectedSha256": "bd6462fee2c9a19d0c884862b6a0e7f9f59f6b5a29aff4d1701b1a8ae28efa97"
+      "expectedSha256": "bd6462fee2c9a19d0c884862b6a0e7f9f59f6b5a29aff4d1701b1a8ae28efa97",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

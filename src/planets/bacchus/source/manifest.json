@@ -1,5 +1,5 @@
 {
-  "schema": "cssbacchus-authoritative-sources@1",
+  "schema": "cssbacchus-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/bacchus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "bacchus-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "This is the paper’s conservative single-lobe working model, not a uniquely resolved shape. Radar data cover about half a rotation, and the degree of bifurcation remains uncertain. The pole is uncertain by tens of degrees; the sidereal period is 15.0 ± 0.2 hours. No resolved optical surface map is supplied.",
       "expectedBytes": 14163,
-      "expectedSha256": "c4e8dd389eb60a0dba628f6f369a1d04fbfa7ff31ca7502248ed91502ec7090b"
+      "expectedSha256": "c4e8dd389eb60a0dba628f6f369a1d04fbfa7ff31ca7502248ed91502ec7090b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bacchus-bacchus-shape",
+            "role": "material",
+            "evidence": "src/planets/bacchus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/bacchus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "bacchus-research-bacchus",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 1097021,
-      "expectedSha256": "b515e3c66eafe8c15e44fb79b0ff517a3fd4b8709c3e319903460074c423d7e1"
+      "expectedSha256": "b515e3c66eafe8c15e44fb79b0ff517a3fd4b8709c3e319903460074c423d7e1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-bacchus-bacchus-research-bacchus",
+            "role": "method",
+            "evidence": "src/planets/bacchus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 10485,
-      "expectedSha256": "fa99c3d12d673f06214a4fd73934027af1176253ecd64482c64824bd62b6303c"
+      "expectedSha256": "fa99c3d12d673f06214a4fd73934027af1176253ecd64482c64824bd62b6303c",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

@@ -1,6 +1,8 @@
 import { isArray } from './is-array.mts';
-export interface SourceEntry { path: string; expectedBytes: number; expectedSha256: string; }
-export interface SourceInput extends SourceEntry { id: string; origin: string; credit: string; license: string; acquisition: string; redistribution: string; consumers: readonly string[]; licenseEvidence?: readonly string[]; }
+import { parseSourceBinding } from './source-catalog.mts';
+import type { SourceBinding } from './source-catalog.mts';
+export interface SourceEntry { path: string; expectedBytes: number; expectedSha256: string; sourceBinding?: SourceBinding; }
+export interface SourceInput extends SourceEntry { id: string; origin: string; credit: string; license: string; acquisition: string; redistribution: string; consumers: readonly string[]; licenseEvidence?: readonly string[]; sourceBinding: SourceBinding; }
 export interface SourceManifest { schema: string; inputs: readonly SourceInput[]; generatedIntermediates: readonly (SourceEntry & { generator: string })[]; documents: readonly (SourceEntry & { purpose: string })[]; }
 export interface SourceManifestLocation { planetId: string; planetName: string; sourceRoot: string; }
 export interface SourceVerification { entry: SourceEntry; planetName: string; sourceRoot: string; }
@@ -59,7 +61,7 @@ export async function createSourceManifest({ planetId, planetName, sourceRoot }:
 export function validateSourceManifest(planetId: string, input: unknown): Readonly<SourceManifest> {
   const value = input as SourceManifest;
   if (!value || typeof value !== "object" || isArray(value) ||
-      value.schema !== `css${planetId}-authoritative-sources@1`) {
+      value.schema !== `css${planetId}-authoritative-sources@2`) {
     throw new TypeError(`Planet ${planetId} source manifest is incompatible.`);
   }
   for (const collection of COLLECTIONS) {
@@ -74,6 +76,7 @@ export function validateSourceManifest(planetId: string, input: unknown): Readon
   const ids = new Set<string>();
   const paths = new Set<string>();
   for (const input of value.inputs) {
+    parseSourceBinding(input.sourceBinding);
     validateEntryBase(planetId, input, "input", paths);
     for (const field of [
       "id",
@@ -107,6 +110,7 @@ export function validateSourceManifest(planetId: string, input: unknown): Readon
   }
 
   for (const generated of value.generatedIntermediates) {
+    if (generated.sourceBinding) parseSourceBinding(generated.sourceBinding);
     validateEntryBase(planetId, generated, "generated intermediate", paths);
     if (!nonEmpty(generated.generator)) {
       throw new TypeError(
@@ -116,6 +120,7 @@ export function validateSourceManifest(planetId: string, input: unknown): Readon
   }
 
   for (const document of value.documents) {
+    if (document.sourceBinding) parseSourceBinding(document.sourceBinding);
     validateEntryBase(planetId, document, "document", paths);
     if (!nonEmpty(document.purpose)) {
       throw new TypeError(`Planet ${planetId} document ${document.path} has no purpose.`);

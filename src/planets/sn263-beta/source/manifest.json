@@ -1,5 +1,5 @@
 {
-  "schema": "csssn263-beta-authoritative-sources@1",
+  "schema": "csssn263-beta-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/sn263-beta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -33,7 +43,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/sn263-beta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "radar-shape",
@@ -58,7 +78,17 @@
         "referenceRadiusMeters": 394.55452137070836
       },
       "expectedBytes": 144480,
-      "expectedSha256": "f4b13bd627d65f085a70855a706f3bd6afc4704aa4973356b6d96da80f549feb"
+      "expectedSha256": "f4b13bd627d65f085a70855a706f3bd6afc4704aa4973356b6d96da80f549feb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sn263-beta-radar-shape",
+            "role": "material",
+            "evidence": "src/planets/sn263-beta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -93,7 +123,11 @@
       "path": "content/object.json",
       "expectedBytes": 4354,
       "expectedSha256": "44b6e07c7589c7d3404b5f40d4e09a12802a8f518ee987d0fc7fdec8b26098cf",
-      "purpose": "Source metadata, numerical interpretation or authored preparation input."
+      "purpose": "Source metadata, numerical interpretation or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "measurements.json",

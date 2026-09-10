@@ -1,0 +1,281 @@
+{
+  "implementationRevision": "3b2bc4bedebf5009bf1450cf2b9c9654528b85c4",
+  "baselineRevision": "5e9e1a4ade55496357cd4a70bb4ffd0afec34157",
+  "browser": "152.0.7977.84",
+  "mode": "Installed Google Chrome, headless, production Astro build",
+  "method": "Before substitutes the baseline surface atlas at its original URL. All other production files, viewport, camera and system transform stay identical. After uses the clean R2 installation. Each loaded body asset is hashed. Differences are absolute RGB values without amplification.",
+  "focus": "http://127.0.0.1:53137/comet-9p/?v=MEZAFFLL8O6p_UFCxzNAAAAAv7Biu98jLQ8_y0q70qtF7r_R8HjBdsoVAAA#dataset=deep-impact",
+  "whole": "http://127.0.0.1:53137/comet-9p/?v=MMZAJ_WeyOWb1EFCxzNAAAAAP9W9euMcAk2_16Fpbpnku7_C1Vgw1PW5AAA#dataset=deep-impact",
+  "geometrySha256": "3a9766a2f649d0abc84042446eaa668d94684f98ba3788be6eec9d579ffa4bb4",
+  "inventorySha256": "8ad813cdb15ebcc66fcbc0525b5241aabc0a68e9531be27db584457f211fecb8",
+  "runs": [
+    {
+      "dpr": 1,
+      "version": "before",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": {
+        "url": "http://127.0.0.1:53137/comet-9p/?v=MEZAFFLL8O6p_UFCxzNAAAAAv7Biu98jLQ8_y0q70qtF7r_R8HjBdsoVAAA#dataset=deep-impact",
+        "shadows": false,
+        "lens": "deep-impact",
+        "sceneCount": 1,
+        "triangles": 1000,
+        "canvas": 0,
+        "sceneTransform": "matrix3d(-0.0166934, -0.00478124, 0.00992329, 0, 0, 0.0180176, 0.00868127, 0, -0.0110151, 0.00724597, -0.0150387, 0, 0, 0, 834.148, 1)",
+        "systemTransform": "matrix3d(-0.634745, -0.102952, -0.765833, 0, 0.772203, -0.048192, -0.633546, 0, 0.028318, -0.993518, 0.11009, 0, 0, 0, 0, 1)"
+      },
+      "errors": [],
+      "substitutions": 1,
+      "assets": [
+        {
+          "filename": "comet-9p-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "filename": "comet-9p-system-point.webp",
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "filename": "comet-9p-constraints-surface@2x.webp",
+          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb"
+        },
+        {
+          "filename": "comet-9p-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "filename": "comet-9p-constraints-thumbnail.webp",
+          "sha256": "7774a449797f6faba021e6c4892299d9913fcfaa07ae29af9fed38148053cdb0"
+        },
+        {
+          "filename": "comet-9p-model-thumbnail.webp",
+          "sha256": "7a901a417ecdf9a14d561c7919d7aa95325462a6e6df58e48477c348f41607ff"
+        },
+        {
+          "filename": "comet-9p-next-thumbnail.webp",
+          "sha256": "e81c2984489f500ab115586c381085bdc0e434c40fb85f21e9270448b582240f"
+        },
+        {
+          "filename": "comet-9p-deep-impact-thumbnail.webp",
+          "sha256": "416ffb53b24aec606c8a4e80991e0461d9fa4eb35e4faa46b9495de1d73fc7ac"
+        },
+        {
+          "filename": "comet-9p-deep-impact-surface@2x.webp",
+          "sha256": "3ed43aaef482ff3291a74958f475ca722a23fedb459c4ea097b2314641c6046b"
+        }
+      ]
+    },
+    {
+      "dpr": 1,
+      "version": "after",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": {
+        "url": "http://127.0.0.1:53137/comet-9p/?v=MEZAFFLL8O6p_UFCxzNAAAAAv7Biu98jLQ8_y0q70qtF7r_R8HjBdsoVAAA#dataset=deep-impact",
+        "shadows": false,
+        "lens": "deep-impact",
+        "sceneCount": 1,
+        "triangles": 1000,
+        "canvas": 0,
+        "sceneTransform": "matrix3d(-0.0166934, -0.00478124, 0.00992329, 0, 0, 0.0180176, 0.00868127, 0, -0.0110151, 0.00724597, -0.0150387, 0, 0, 0, 834.148, 1)",
+        "systemTransform": "matrix3d(-0.634745, -0.102952, -0.765833, 0, 0.772203, -0.048192, -0.633546, 0, 0.028318, -0.993518, 0.11009, 0, 0, 0, 0, 1)"
+      },
+      "errors": [],
+      "substitutions": 0,
+      "assets": [
+        {
+          "filename": "comet-9p-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "filename": "comet-9p-system-point.webp",
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "filename": "comet-9p-constraints-surface@2x.webp",
+          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb"
+        },
+        {
+          "filename": "comet-9p-model-thumbnail.webp",
+          "sha256": "7a901a417ecdf9a14d561c7919d7aa95325462a6e6df58e48477c348f41607ff"
+        },
+        {
+          "filename": "comet-9p-constraints-thumbnail.webp",
+          "sha256": "7774a449797f6faba021e6c4892299d9913fcfaa07ae29af9fed38148053cdb0"
+        },
+        {
+          "filename": "comet-9p-deep-impact-thumbnail.webp",
+          "sha256": "416ffb53b24aec606c8a4e80991e0461d9fa4eb35e4faa46b9495de1d73fc7ac"
+        },
+        {
+          "filename": "comet-9p-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "filename": "comet-9p-next-thumbnail.webp",
+          "sha256": "e81c2984489f500ab115586c381085bdc0e434c40fb85f21e9270448b582240f"
+        },
+        {
+          "filename": "comet-9p-deep-impact-surface@2x.webp",
+          "sha256": "7bf85add71c15b7c83635aec718f18da1207f363c68a9403738f3dbe3c39f8dc"
+        },
+        {
+          "filename": "comet-9p-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "filename": "comet-9p-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "filename": "comet-9p-system-point.webp",
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "filename": "comet-9p-constraints-surface@2x.webp",
+          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb"
+        },
+        {
+          "filename": "comet-9p-constraints-thumbnail.webp",
+          "sha256": "7774a449797f6faba021e6c4892299d9913fcfaa07ae29af9fed38148053cdb0"
+        },
+        {
+          "filename": "comet-9p-model-thumbnail.webp",
+          "sha256": "7a901a417ecdf9a14d561c7919d7aa95325462a6e6df58e48477c348f41607ff"
+        },
+        {
+          "filename": "comet-9p-deep-impact-thumbnail.webp",
+          "sha256": "416ffb53b24aec606c8a4e80991e0461d9fa4eb35e4faa46b9495de1d73fc7ac"
+        },
+        {
+          "filename": "comet-9p-next-thumbnail.webp",
+          "sha256": "e81c2984489f500ab115586c381085bdc0e434c40fb85f21e9270448b582240f"
+        },
+        {
+          "filename": "comet-9p-deep-impact-surface@2x.webp",
+          "sha256": "7bf85add71c15b7c83635aec718f18da1207f363c68a9403738f3dbe3c39f8dc"
+        }
+      ]
+    },
+    {
+      "dpr": 2,
+      "version": "before",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": {
+        "url": "http://127.0.0.1:53137/comet-9p/?v=MEZAFFLL8O6p_UFCxzNAAAAAv7Biu98jLQ8_y0q70qtF7r_R8HjBdsoVAAA#dataset=deep-impact",
+        "shadows": false,
+        "lens": "deep-impact",
+        "sceneCount": 1,
+        "triangles": 1000,
+        "canvas": 0,
+        "sceneTransform": "matrix3d(-0.0166934, -0.00478124, 0.00992329, 0, 0, 0.0180176, 0.00868127, 0, -0.0110151, 0.00724597, -0.0150387, 0, 0, 0, 834.148, 1)",
+        "systemTransform": "matrix3d(-0.634745, -0.102952, -0.765833, 0, 0.772203, -0.048192, -0.633546, 0, 0.028318, -0.993518, 0.11009, 0, 0, 0, 0, 1)"
+      },
+      "errors": [],
+      "substitutions": 1,
+      "assets": [
+        {
+          "filename": "comet-9p-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "filename": "comet-9p-system-point.webp",
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "filename": "comet-9p-constraints-surface@2x.webp",
+          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb"
+        },
+        {
+          "filename": "comet-9p-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "filename": "comet-9p-constraints-thumbnail.webp",
+          "sha256": "7774a449797f6faba021e6c4892299d9913fcfaa07ae29af9fed38148053cdb0"
+        },
+        {
+          "filename": "comet-9p-deep-impact-thumbnail.webp",
+          "sha256": "416ffb53b24aec606c8a4e80991e0461d9fa4eb35e4faa46b9495de1d73fc7ac"
+        },
+        {
+          "filename": "comet-9p-model-thumbnail.webp",
+          "sha256": "7a901a417ecdf9a14d561c7919d7aa95325462a6e6df58e48477c348f41607ff"
+        },
+        {
+          "filename": "comet-9p-next-thumbnail.webp",
+          "sha256": "e81c2984489f500ab115586c381085bdc0e434c40fb85f21e9270448b582240f"
+        },
+        {
+          "filename": "comet-9p-deep-impact-surface@2x.webp",
+          "sha256": "3ed43aaef482ff3291a74958f475ca722a23fedb459c4ea097b2314641c6046b"
+        }
+      ]
+    },
+    {
+      "dpr": 2,
+      "version": "after",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": {
+        "url": "http://127.0.0.1:53137/comet-9p/?v=MEZAFFLL8O6p_UFCxzNAAAAAv7Biu98jLQ8_y0q70qtF7r_R8HjBdsoVAAA#dataset=deep-impact",
+        "shadows": false,
+        "lens": "deep-impact",
+        "sceneCount": 1,
+        "triangles": 1000,
+        "canvas": 0,
+        "sceneTransform": "matrix3d(-0.0166934, -0.00478124, 0.00992329, 0, 0, 0.0180176, 0.00868127, 0, -0.0110151, 0.00724597, -0.0150387, 0, 0, 0, 834.148, 1)",
+        "systemTransform": "matrix3d(-0.634745, -0.102952, -0.765833, 0, 0.772203, -0.048192, -0.633546, 0, 0.028318, -0.993518, 0.11009, 0, 0, 0, 0, 1)"
+      },
+      "errors": [],
+      "substitutions": 0,
+      "assets": [
+        {
+          "filename": "comet-9p-directional-sun@2x.webp",
+          "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+        },
+        {
+          "filename": "comet-9p-lighting.webp",
+          "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+        },
+        {
+          "filename": "comet-9p-system-point.webp",
+          "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+        },
+        {
+          "filename": "comet-9p-constraints-surface@2x.webp",
+          "sha256": "d7b3e3c2cda8711194a56b39397829a5cacfde88345cdc5945ee9aa82fe66bcb"
+        },
+        {
+          "filename": "comet-9p-constraints-thumbnail.webp",
+          "sha256": "7774a449797f6faba021e6c4892299d9913fcfaa07ae29af9fed38148053cdb0"
+        },
+        {
+          "filename": "comet-9p-model-thumbnail.webp",
+          "sha256": "7a901a417ecdf9a14d561c7919d7aa95325462a6e6df58e48477c348f41607ff"
+        },
+        {
+          "filename": "comet-9p-next-thumbnail.webp",
+          "sha256": "e81c2984489f500ab115586c381085bdc0e434c40fb85f21e9270448b582240f"
+        },
+        {
+          "filename": "comet-9p-deep-impact-thumbnail.webp",
+          "sha256": "416ffb53b24aec606c8a4e80991e0461d9fa4eb35e4faa46b9495de1d73fc7ac"
+        },
+        {
+          "filename": "comet-9p-deep-impact-surface@2x.webp",
+          "sha256": "7bf85add71c15b7c83635aec718f18da1207f363c68a9403738f3dbe3c39f8dc"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+---
+import type { SourceRecord } from '../../src/platform/source-catalog.mts';
+import { sourceHref, sourceDatasets, sourceUses } from '../sources-catalog.mts';
+interface Props { source: SourceRecord; objectId: string; }
+const { source, objectId } = Astro.props;
+const uses = sourceUses(source.id), datasets = sourceDatasets(source.id);
+const local = uses.filter(use => use.objectId === objectId);
+const metadata = [...new Map(uses.filter(use => use.consumerKind !== 'object-product').map(use => [`${use.consumerKind}/${use.consumerId}`,use])).values()];
+const terms = [...new Set(local.flatMap(use => [use.credit,use.license,use.redistribution].filter((value): value is string => !!value)))];
+const limitations = [...new Set(local.flatMap(use => use.limitations))];
+---
+<details id={`${objectId}-source-${source.id}`} class="planet-source-details" data-source={source.id}>
+  <summary>{source.title} <small>{source.kind.replaceAll('-', ' ')}</small></summary>
+  <p><a href={sourceHref(source.id)} target="_blank" rel="noreferrer">Open source</a>{source.version && <> · Version {source.version}</>}</p>
+  {source.identifiers.length > 0 && <ul>{source.identifiers.map(id => <li>{id.type}: {id.value}</li>)}</ul>}
+  <h4>Used in cssEarth</h4>
+  {datasets.length > 0 && <ul class="planet-source-datasets">{datasets.map(view => <li><a href={view.href} data-dataset-link data-dataset-object={view.objectId} data-dataset-id={view.lensId}>{view.objectName} · {view.label}</a></li>)}</ul>}
+  {metadata.length > 0 && <ul>{metadata.map(use => <li>{use.consumerLabel} · {use.consumerKind === 'mission' || use.consumerKind === 'spacecraft' ? 'metadata citation' : use.kind.replaceAll('-', ' ')}{(use.credit || use.limitations.length > 0) && <p>{use.credit} {use.limitations.join(' ')}</p>}</li>)}</ul>}
+  {!datasets.length && <p>No prepared dataset destination is bound to this source.</p>}
+  {local.length > 0 && <>
+    {limitations.map(limit => <p>{limit}</p>)}
+    <details class="planet-source-credits"><summary>Credits and preparation on {objectId.replaceAll('-', ' ')}</summary>
+      <ul>{[...new Map(local.map(use => [`${use.productId}/${use.kind}`,use])).values()].map(use => <li>{use.consumerLabel} · {use.kind.replaceAll('-', ' ')}</li>)}</ul>
+      {terms.map(term => <p>{term}</p>)}
+    </details>
+  </>}
+  {source.statements.map(statement => <p>{statement.text} · {statement.scope}</p>)}
+  {source.links.filter(link => link.url !== sourceHref(source.id)).map(link => <p><a href={link.url} target="_blank" rel="noreferrer">{link.label}</a></p>)}
+</details>
+<style>
+  .planet-source-details { border-top: 1px solid var(--line, #ffffff24); padding: 0.65rem 0; }
+  summary { cursor: pointer; line-height: 1.45; }
+  small { display: block; opacity: 0.65; }
+  h4 { margin: 0.9rem 0 0.35rem; }
+  p, ul { font-size: 0.82rem; line-height: 1.5; overflow-wrap: anywhere; }
+  ul { padding-left: 1.2rem; }
+  li + li { margin-top: 0.3rem; }
+</style>
