@@ -54,3 +54,6 @@ src/planets/comet-67p/source/reference/n201409*-*.lbl -text -whitespace
 src/planets/comet-81p/source/photography/**/*.lbl -text -whitespace
 src/planets/comet-9p/source/photography/**/*.lbl -text -whitespace
 src/planets/comet-103p/source/photography/**/*.lbl -text -whitespace
+
+# Preserve the pinned Apophis spin-state row, including its CRLF ending.
+src/planets/apophis/source/reference/apophis_v233s7_spin_state.csv -text -whitespace

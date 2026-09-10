@@ -19,6 +19,14 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check tracked files against ignore rules
+        run: |
+          git ls-files -z > "$RUNNER_TEMP/tracked-paths"
+          set +e
+          git check-ignore --no-index --stdin -z < "$RUNNER_TEMP/tracked-paths" > "$RUNNER_TEMP/ignored-tracked"
+          check_result=$?
+          tr '\0' '\n' < "$RUNNER_TEMP/ignored-tracked"
+          test "$check_result" -eq 1
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:

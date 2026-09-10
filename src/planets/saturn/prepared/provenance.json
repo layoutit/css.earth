@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3fd89bb67747ec5db801c8ee90ba537d888c4e6790c17fd27d9221af35421418"
+    "sha256": "eb71a909ea8aeb1049e99a5d98d987c4eb54ff8eecd3a9346e7c5086807d1290"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -1951,7 +1951,14 @@
       "bytes": 1036492,
       "dependencies": [],
       "verification": "manifest-pin",
-      "acquisitionOperation": null,
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore"
+        ],
+        "path": "saturn-surface-original.jpg",
+        "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/1/saturn.jpg"
+      },
       "verificationOperations": []
     },
     {
@@ -2045,7 +2052,14 @@
       "bytes": 2059,
       "dependencies": [],
       "verification": "manifest-pin",
-      "acquisitionOperation": null,
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore"
+        ],
+        "path": "color_original_single.png",
+        "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/color_original_single.png"
+      },
       "verificationOperations": []
     },
     {
@@ -2064,7 +2078,14 @@
       "bytes": 2303,
       "dependencies": [],
       "verification": "manifest-pin",
-      "acquisitionOperation": null,
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore"
+        ],
+        "path": "trans_original_single.png",
+        "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/saturn/saturn/textures/4/trans_original_single.png"
+      },
       "verificationOperations": []
     },
     {

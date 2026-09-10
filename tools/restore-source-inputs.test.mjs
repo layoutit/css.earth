@@ -11,10 +11,10 @@ const project = resolve(import.meta.dirname, '..');
 const pin = (path, bytes) => ({ path, expectedBytes: bytes.length,
   expectedSha256: createHash('sha256').update(bytes).digest('hex') });
 const json = (path, value) => writeFile(path, JSON.stringify(value));
-async function fixture(t) {
+async function fixture(t, id = 'titan') {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['tools/objects/dist', 'site', 'src/planets/titan/source/preparation', 'src/planets/titan/prepared', 'public/scenes/titan']) {
+  for (const dir of ['tools/objects/dist', 'site', `src/planets/${id}/source/preparation`, `src/planets/${id}/prepared`, `public/scenes/${id}`]) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await copyFile(resolve(project, 'tools/restore-source-inputs.mjs'), resolve(root, 'tools/restore-source-inputs.mjs'));
@@ -22,8 +22,8 @@ async function fixture(t) {
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));
-  await writeFile(resolve(root, 'site/objects.mjs'), "export const OBJECTS = [{id:'titan',name:'Titan'}];");
-  await json(resolve(root, 'src/planets/titan/object.json'), { id: 'titan' });
+  await writeFile(resolve(root, 'site/objects.mjs'), `export const OBJECTS = [{id:'${id}',name:'${id}'}];`);
+  await json(resolve(root, `src/planets/${id}/object.json`), { id });
   return root;
 }
 async function run(root, args) {
@@ -59,6 +59,38 @@ test('checkout restores a missing compressed observation without refreshing exis
   assert.deepEqual(requests, ['/observation.IMG.gz']);
   assert.deepEqual(await readFile(resolve(source, 'observation.IMG.gz')), radar);
   assert.deepEqual(await readFile(resolve(source, 'existing.png')), existing);
+});
+
+test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {
+  const root = await fixture(t, 'earth'), source = resolve(root, 'src/planets/earth/source');
+  const mosaic = Buffer.from('pinned mosaic'), archive = Buffer.from('pinned archive');
+  const restore = resolve(root, 'tools/objects/paged-ellipsoid/mur-imagery.mjs');
+  for (const dir of ['src/planets/earth/source/science', 'tools/objects/paged-ellipsoid', 'tools/objects/geographic-pages/operations']) {
+    await mkdir(resolve(root, dir), { recursive: true });
+  }
+  await writeFile(restore, `
+    import assert from 'node:assert/strict';
+    import { writeFile } from 'node:fs/promises';
+    import { resolve } from 'node:path';
+    assert.equal(process.argv[2], 'restore');
+    await writeFile(resolve(process.argv[3], 'mur-gibs.png'), 'pinned mosaic');
+  `);
+  await writeFile(resolve(root, 'tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mjs'), '');
+  await writeFile(resolve(source, 'science/mur-gibs-tiles.tar.gz'), archive);
+  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@1', inputs: [{
+    ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', consumers: ['enso'],
+    credit: 'Fixture', license: 'CC0', acquisition: 'Pinned archive', redistribution: 'Allowed',
+  }], generatedIntermediates: [{ ...pin('science/mur-gibs.png', mosaic), generator: 'MUR archive restore' }], documents: [] });
+  const args = ['tools/restore-source-inputs.mjs', '--object=earth'];
+  await run(root, args);
+  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), mosaic);
+
+  await writeFile(restore, "throw new Error('Existing mosaic must not be restored.');");
+  await run(root, args);
+  const corrupted = Buffer.from('wrong! mosaic');
+  await writeFile(resolve(source, 'science/mur-gibs.png'), corrupted);
+  await assert.rejects(run(root, args), /Source hash drifted for science\/mur-gibs\.png/);
+  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), corrupted);
 });
 
 test('manifest refresh keeps runtime and shell images but excludes preparation maps', async t => {

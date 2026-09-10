@@ -1,7 +1,7 @@
 # Provenance and documentation audit — 9 September 2026
 
-Owner: **PROVENANCE DOCUMENTATION**. This audit examines files and contributor
-instructions. It does not rerun scientific, browser or installation tests.
+Owner: **PROVENANCE DOCUMENTATION**. The initial audit examined files and
+contributor instructions. Follow-up checks are recorded below.
 
 The initial findings below describe their recorded snapshots. The
 [final review](ADVERSARIAL-REVIEW.md#complete-migration-and-final-review) records
@@ -186,8 +186,8 @@ on 10 September 2026 UTC, using the same inventory command. Logical file sizes:
 The largest storage cost is prepared body data, which clean checkouts consume.
 This audit does not establish that it can be removed or restored elsewhere.
 The tracked tree contains no files under `output/`, `.local/`, `node_modules/`
-or `dist/`. All 409 tracked files matching ignore rules are source files;
-matching an ignore rule does not make them disposable.
+or `dist/`. The initial sparse-worktree query reported 409 tracked files matching
+ignore rules. The complete-tree check below corrects that undercount.
 
 Changes made:
 
@@ -207,3 +207,53 @@ archives match their receipts' byte counts, SHA-256 pins and member counts;
 their saved mappings make original local paths retrievable from the archives.
 This cleanup does not reduce Git history or restore captures absent from those
 archives.
+
+## Source tracking and restoration
+
+At `a285ac26262d2cbdd0c085dfda2232c7b7ad239c`, **498 tracked source files matched
+ignore rules**. The earlier query missed 89 paths outside the sparse checkout.
+The complete check feeds every Git path to
+`git check-ignore --no-index --stdin -z`.
+
+Changes made:
+
+- Corrected ignore rules for required models, material images, source metadata
+  and inspected evidence. These files have no complete restoration operation.
+  CI now rejects tracked files that match ignore rules.
+- Added **125 missing source files (6,753,680 bytes)** from existing local copies.
+  Every file matches its previously committed manifest size and SHA-256.
+- Removed **18 raw downloads (25,871,428 bytes)** from tracking after restoring
+  each into an initially absent path in a temporary directory and comparing it
+  with the original Git blob. Their acquisition operations and manifest pins remain committed.
+- Added nine missing download operations in Mercury, Venus, Mars and Saturn.
+  Each restored the existing manifest pin. The Google Sun references remain
+  ignored; their existing records still state that redistribution is unverified.
+- Connected Earth's existing offline MUR mosaic restoration to the checkout
+  command. A fresh reconstruction from the committed tile archive produced the
+  pinned 16,384 × 8,192 PNG: 22,564,700 bytes,
+  SHA-256 `eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0`.
+  This avoids committing another copy of that image.
+
+Four Zenodo originals remain tracked because both tested download routes returned
+HTTP 403. Mars's navigation image is now tracked from its pinned local copy:
+its upstream URL returns different bytes. The saved originals preserve the manifest identities.
+
+The [download receipt](source-restoration.json) contains all 22 restoration
+results and the four alternate-route failures. Its `sourceRuns` names identify
+the original temporary run files; their results are included in the receipt.
+The [missing-source receipt](missing-source-restoration.json) records the nine
+successful downloads and the changed Mars image. These checks used the recorded
+revision's existing restoration code and pins.
+
+The final index has **zero tracked files matching ignore rules**. All recovered
+files were checked against their pins again after staging. An independent check
+covered all 10,780 required entries in 408 manifests: 9,162 have tracked files,
+1,617 have acquisition operations and one uses Earth's offline mosaic restore.
+No entry lacks both a tracked file and a restoration definition. Twelve focused
+provenance tests and three checkout-restoration tests passed. The latter check
+Earth's restoration order, preservation of existing files and rejection of
+wrong hashes. Regenerated provenance for the four changed bodies retains
+`basis: recovered`; product and recipe records are unchanged.
+
+These checks do not establish availability of every upstream service or rerun
+full body preparation, scientific qualification or browser comparisons.
