@@ -12,4 +12,4 @@ CC BY-SA 4.0. Title font: Inter / Rasmus Andersson, SIL OFL 1.1.
 
 ## B6 sources
 
-The added views derive from credited public USGS/NASA scientific products. Preserve the source authors, PDS citation and processing qualifications recorded in SOURCE.md and the source manifest. No endorsement is implied.
+The added views derive from credited public USGS/NASA scientific products. Preserve the source authors, PDS citation and processing qualifications recorded in README.md and the source manifest. No endorsement is implied.

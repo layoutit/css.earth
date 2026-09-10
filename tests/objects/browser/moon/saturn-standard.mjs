@@ -86,7 +86,7 @@ const report = Object.freeze({
   moon,
   contactSheet,
   sourceFingerprints: await fingerprints({
-    moonSource: "src/planets/moon/SOURCE.md",
+    moonSource: "src/planets/moon/README.md",
     moonScene: "src/planets/moon/prepared/scene.json",
     moonLenses: "src/planets/moon/prepared/lenses.json",
     moonAssets: "src/planets/moon/runtime-assets.json",

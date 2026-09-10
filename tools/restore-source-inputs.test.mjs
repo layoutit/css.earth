@@ -1,20 +1,22 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { createServer } from 'node:http';
 import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import test from 'node:test';
+import { setupObjectIds } from './runtime-assets.mjs';
+import { validateObjectPackageFiles } from './object-package-contract.mjs';
 
 const project = resolve(import.meta.dirname, '..');
 const pin = (path, bytes) => ({ path, expectedBytes: bytes.length,
   expectedSha256: createHash('sha256').update(bytes).digest('hex') });
 const json = (path, value) => writeFile(path, JSON.stringify(value));
-async function fixture(t) {
+async function fixture(t, id = 'titan') {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['tools/objects/dist', 'site', 'src/planets/titan/source/preparation', 'src/planets/titan/prepared', 'public/scenes/titan']) {
+  for (const dir of ['tools/objects/dist', 'site', `src/planets/${id}/source/preparation`, `src/planets/${id}/prepared`, `public/scenes/${id}`]) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await copyFile(resolve(project, 'tools/restore-source-inputs.mjs'), resolve(root, 'tools/restore-source-inputs.mjs'));
@@ -22,8 +24,8 @@ async function fixture(t) {
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));
-  await writeFile(resolve(root, 'site/objects.mjs'), "export const OBJECTS = [{id:'titan',name:'Titan'}];");
-  await json(resolve(root, 'src/planets/titan/object.json'), { id: 'titan' });
+  await writeFile(resolve(root, 'site/objects.mjs'), `export const OBJECTS = [{id:'${id}',name:'${id}'}];`);
+  await json(resolve(root, `src/planets/${id}/object.json`), { id });
   return root;
 }
 async function run(root, args) {
@@ -36,6 +38,28 @@ async function run(root, args) {
     child.on('close', code => code === 0 ? accept() : reject(new Error(output)));
   });
 }
+
+test('every registered body has its package files and tracked or restorable sources', async () => {
+  const tracked = new Set(execFileSync('git', ['ls-files', '--cached', '-z'], {
+    cwd: project, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
+  }).split('\0'));
+  const missing = [];
+  for (const id of setupObjectIds([])) {
+    await validateObjectPackageFiles({ id }, { projectRoot: project,
+      accessFile: async path => assert.ok(tracked.has(relative(project, path)), path) });
+    const source = `src/planets/${id}/source`;
+    const [manifest, plan] = await Promise.all(['manifest.json', 'preparation/acquisition.json']
+      .map(async path => JSON.parse(await readFile(resolve(project, source, path), 'utf8'))));
+    const restored = new Set(plan.operations.map(operation => operation.path));
+    for (const entry of [...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates]) {
+      // The archive-backed Earth restore runs before acquisition; exercised below.
+      if (id === 'earth' && entry.path === 'science/mur-gibs.png') continue;
+      const path = `${source}/${entry.path}`;
+      if (!tracked.has(path) && !restored.has(entry.path)) missing.push(path);
+    }
+  }
+  assert.deepEqual(missing, [], 'Required source files must be tracked or have an acquisition operation.');
+});
 
 test('checkout restores a missing compressed observation without refreshing existing inputs', async t => {
   const root = await fixture(t), source = resolve(root, 'src/planets/titan/source');
@@ -59,6 +83,46 @@ test('checkout restores a missing compressed observation without refreshing exis
   assert.deepEqual(requests, ['/observation.IMG.gz']);
   assert.deepEqual(await readFile(resolve(source, 'observation.IMG.gz')), radar);
   assert.deepEqual(await readFile(resolve(source, 'existing.png')), existing);
+
+  const manifestPath = resolve(source, 'manifest.json');
+  const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+  manifest.generatedIntermediates.push({ ...pin('presentation/context.png', Buffer.from('reviewed context')),
+    generator: 'fixture-renderer' });
+  await json(manifestPath, manifest);
+  await assert.rejects(run(root, ['tools/restore-source-inputs.mjs', '--object=titan']),
+    /No authored acquisition restores: presentation\/context\.png/);
+});
+
+test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {
+  const root = await fixture(t, 'earth'), source = resolve(root, 'src/planets/earth/source');
+  const mosaic = Buffer.from('pinned mosaic'), archive = Buffer.from('pinned archive');
+  const restore = resolve(root, 'tools/objects/paged-ellipsoid/mur-imagery.mjs');
+  for (const dir of ['src/planets/earth/source/science', 'tools/objects/paged-ellipsoid', 'tools/objects/geographic-pages/operations']) {
+    await mkdir(resolve(root, dir), { recursive: true });
+  }
+  await writeFile(restore, `
+    import assert from 'node:assert/strict';
+    import { writeFile } from 'node:fs/promises';
+    import { resolve } from 'node:path';
+    assert.equal(process.argv[2], 'restore');
+    await writeFile(resolve(process.argv[3], 'mur-gibs.png'), 'pinned mosaic');
+  `);
+  await writeFile(resolve(root, 'tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mjs'), '');
+  await writeFile(resolve(source, 'science/mur-gibs-tiles.tar.gz'), archive);
+  await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@1', inputs: [{
+    ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', consumers: ['enso'],
+    credit: 'Fixture', license: 'CC0', acquisition: 'Pinned archive', redistribution: 'Allowed',
+  }], generatedIntermediates: [{ ...pin('science/mur-gibs.png', mosaic), generator: 'MUR archive restore' }], documents: [] });
+  const args = ['tools/restore-source-inputs.mjs', '--object=earth'];
+  await run(root, args);
+  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), mosaic);
+
+  await writeFile(restore, "throw new Error('Existing mosaic must not be restored.');");
+  await run(root, args);
+  const corrupted = Buffer.from('wrong! mosaic');
+  await writeFile(resolve(source, 'science/mur-gibs.png'), corrupted);
+  await assert.rejects(run(root, args), /Source hash drifted for science\/mur-gibs\.png/);
+  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), corrupted);
 });
 
 test('manifest refresh keeps runtime and shell images but excludes preparation maps', async t => {
