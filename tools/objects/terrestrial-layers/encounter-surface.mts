@@ -7,6 +7,7 @@ type EncounterRecipe = ReturnType<typeof parseEncounterRecipe>;
 interface EncounterBackplane {accepted:Uint8Array;xyz:Float64Array;gains:Float32Array;emissions:Float32Array;reasons:string[];
  report:{projectedBounds:number[];acceptedPixels:number;rejectedPixels:Record<string,number>}}
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { decodeEncounterFits } from './encounter-fits.mts';
 import { encounterCamera } from './encounter-camera.mts';
@@ -97,6 +98,24 @@ export function buildEncounterBackplane(frame: EncounterFrame,camera: Camera,mes
   return {...plane,report:{projectedBounds:bounds,acceptedPixels:accepted,rejectedPixels:tally}};
 }
 
+interface BoundEncounter {
+  id:string;imageSha256:string;controlSha256:string;frame:EncounterFrame;camera:Camera;plane:EncounterBackplane;
+  sampleSource(point:readonly number[]):GeoSample;control:ReturnType<typeof parseEncounterSourceControl>;registration:ReturnType<typeof validateEncounterRegistration>;
+}
+
+/** A close-up must inherit an already-qualified, byte-pinned photograph in this
+ * mosaic. Recheck its actual reference pixels against the original mesh. */
+export function validateEncounterImageReference(control:ReturnType<typeof parseEncounterSourceControl>,reference:Pick<BoundEncounter,'id'|'imageSha256'|'controlSha256'|'camera'|'sampleSource'>|undefined,mesh:SourceMesh) {
+  const r=control.registration;if(r.method!=='registered-image-feature-translation')return;
+  if(!r.reference||!reference||reference.id!==r.reference.id||reference.imageSha256!==r.reference.imageSha256||reference.controlSha256!==r.reference.controlSha256)throw new Error('Close-up reference must be an earlier qualified image with matching source hashes.');
+  for(const p of r.controls){
+    const projected=reference.camera.project(p.sourcePointMeters);
+    if(!p.referencePixel||!projected||Math.hypot(projected[0]-p.referencePixel[0],projected[1]-p.referencePixel[1])>1e-6||reference.sampleSource(p.sourcePointMeters).reason)throw new Error('Close-up control is not bound to a qualified reference pixel.');
+    const delta=sub(p.sourcePointMeters,reference.camera.positionMeters),distance=Math.hypot(...delta),hit=mesh.intersect(reference.camera.positionMeters,Array.from(delta,n=>n/distance),distance+.5);
+    if(!hit||Math.abs(hit.radius-distance)>.5)throw new Error('Close-up reference control is occluded or off the source mesh.');
+  }
+}
+
 export async function loadEncounterSurface({sourceDirectory,source,recipe:value,radial,config}: SurfaceOptions) {
   const recipe=parseEncounterRecipe(value);
   validateEncounterRecipe(recipe,config.geometry.radialTerrain);
@@ -104,15 +123,17 @@ export async function loadEncounterSurface({sourceDirectory,source,recipe:value,
   if(entries.length!==paths.length || new Set(paths).size!==paths.length || !paths.every(p=>entries.some(e=>e.path===p))) throw new Error('Encounter surface must consume its exact pinned photographs, labels and controls.');
   if(recipe.frames.length>1 && (!recipe.levelMatching || !Number.isInteger(recipe.levelMatching.minimumPairs) || recipe.levelMatching.minimumPairs<64 || !(recipe.levelMatching.maximumLogMad>0 && recipe.levelMatching.maximumLogMad<=.3) || !(recipe.levelMatching.maximumGain>=1 && recipe.levelMatching.maximumGain<=3))) throw new Error('Invalid encounter level-matching budget.');
   const shape=await source.validatePath(config.geometry.radialTerrain.path);
-  const observations: {frame:EncounterFrame;camera:Camera;plane:EncounterBackplane;sampleSource(point:readonly number[]):GeoSample;control:ReturnType<typeof parseEncounterSourceControl>;registration:ReturnType<typeof validateEncounterRegistration>}[]=[];const metersPerUnit=config.geometry.radiusKm*1000/config.geometry.radius;
+  const observations: BoundEncounter[]=[];const metersPerUnit=config.geometry.radiusKm*1000/config.geometry.radius;
   for(const f of recipe.frames) {
-    const control=parseEncounterSourceControl(JSON.parse(await readFile(resolve(sourceDirectory,f.controlPath),'utf8')));
-    const frame=decodeEncounterFits(await readFile(resolve(sourceDirectory,f.path)),control.observation);
+    const controlBytes=await readFile(resolve(sourceDirectory,f.controlPath)),imageBytes=await readFile(resolve(sourceDirectory,f.path));
+    const control=parseEncounterSourceControl(JSON.parse(controlBytes.toString('utf8')));
+    const frame=decodeEncounterFits(imageBytes,control.observation);
     const camera=encounterCamera(frame.header,control.camera);
     const registration=validateEncounterRegistration(camera,control.registration,shape.expectedSha256);
     const plane=buildEncounterBackplane(frame,camera,radial.grid,recipe);
     const sampleSource=(point: readonly number[])=>sampleEncounterFootprint(frame,camera,plane,point,recipe.transfer);
-    observations.push({frame,camera,plane,sampleSource,control,registration});
+    validateEncounterImageReference(control,observations.find(o=>o.id===control.registration.reference?.id),radial.grid);
+    observations.push({id:f.id,imageSha256:createHash('sha256').update(imageBytes).digest('hex'),controlSha256:createHash('sha256').update(controlBytes).digest('hex'),frame,camera,plane,sampleSource,control,registration});
   }
   const missing=(point: readonly number[],reason: string)=>({reason,color:missingCoverageColor(Math.atan2(point[1],point[0])*180/Math.PI,Math.atan2(point[2],Math.hypot(point[0],point[1]))*180/Math.PI,180/config.raster.height)});
   const sampleAll=(displayPoint: readonly number[]): Array<GeoSample & {color?:number[];distanceMeters?:number} | {reason:string;color:number[];radiance?:never;maximumEmissionDegrees?:never}>=>{

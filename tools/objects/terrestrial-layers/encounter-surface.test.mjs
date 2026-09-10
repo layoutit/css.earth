@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {sampleEncounterFootprint} from './encounter-surface.mts';
+import {sampleEncounterFootprint,validateEncounterImageReference} from './encounter-surface.mts';
 import {validateEncounterRegistration} from './encounter-registration.mts';
 import {encounterCamera} from './encounter-camera.mts';
 const sample=()=>({frame:{width:2,height:2,values:[0,-1,2,3]},camera:{project:()=>[.5,.5,10]},plane:{accepted:new Uint8Array([1,1,1,1]),xyz:new Float64Array([0,0,0,1,0,0,0,1,0,1,1,0]),gains:[1,1,1,1],emissions:[0,10,20,30],reasons:[]}});
@@ -24,6 +24,18 @@ test('registration recomputes holdouts and cannot be approved by changing declar
  r.holdout={rmsPixels:0,maximumPixels:0};r.controls[11].sourcePixel[0]+=20;
  assert.throws(()=>validateEncounterRegistration(camera,r,r.sourceShapeSha256),/budget/);
  assert.throws(()=>validateEncounterRegistration(camera,r,'b'.repeat(64)),/source-bound/);
+});
+test('image overlap controls require the pinned earlier reference and visible source points',()=>{
+ const sha='a'.repeat(64),reference={id:'reference',imageSha256:sha,controlSha256:sha,camera:{positionMeters:[0,0,10],project:p=>[p[0],p[1],10]},sampleSource:()=>({radiance:1})};
+ const control={registration:{method:'registered-image-feature-translation',reference:{id:'reference',imageSha256:sha,controlSha256:sha},controls:[{referencePixel:[0,0],sourcePointMeters:[0,0,0]}]}};
+ const mesh={intersect:()=>({radius:10})};
+ validateEncounterImageReference(control,reference,mesh);
+ assert.throws(()=>validateEncounterImageReference(control,undefined,mesh),/earlier qualified/);
+ assert.throws(()=>validateEncounterImageReference(control,{...reference,controlSha256:'b'.repeat(64)},mesh),/source hashes/);
+ assert.throws(()=>validateEncounterImageReference(control,{...reference,sampleSource:()=>({reason:'bad-source-pixel'})},mesh),/qualified reference pixel/);
+ assert.throws(()=>validateEncounterImageReference(control,reference,{intersect:()=>({radius:5})}),/occluded/);
+ control.registration.controls[0].referencePixel=[3,4];
+ assert.throws(()=>validateEncounterImageReference(control,reference,mesh),/qualified reference pixel/);
 });
 test('EPOXI north and east map to the documented detector axes',()=>{
  const h={GEOMSTAT:'OK',GEOMQUAL:'RECONSTRUCTED',DNAXIS1:'RIGHT, +Xinstr',DNAXIS2:'UP, -Yinstr',TARSCRX:-10,TARSCRY:0,TARSCRZ:0,TARSUNRX:100,TARSUNRY:0,TARSUNRZ:0,BORERA:0,BOREDEC:0,CELESTN:0,TARSCR:10,PXLSCALE:100,NAXIS1:8,NAXIS2:8};

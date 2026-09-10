@@ -970,6 +970,183 @@
           "quality": 2
         }
       ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
+      "sha256": "1e16220cef4edf6961f06b0a0651be5bb1202c8cf716ebdb0e2c74c7fe115520",
+      "width": 256,
+      "height": 256,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": -6.931504321983084e-05,
+          "quality": 0
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "radiance": 0.03763037174940109,
+          "quality": 0
+        },
+        {
+          "x": 128,
+          "y": 128,
+          "radiance": 1.4364032745361328,
+          "quality": 0
+        },
+        {
+          "x": 247,
+          "y": 247,
+          "radiance": 1.538759708404541,
+          "quality": 0
+        },
+        {
+          "x": 255,
+          "y": 255,
+          "radiance": 1.3335111141204834,
+          "quality": 0
+        },
+        {
+          "x": 255,
+          "y": 131,
+          "radiance": 1.8924322128295898,
+          "quality": 64
+        },
+        {
+          "x": 2,
+          "y": 105,
+          "radiance": -4.323667346459864e-13,
+          "quality": 0
+        },
+        {
+          "x": 232,
+          "y": 127,
+          "radiance": 1.2292977571487427,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.fit",
+      "sha256": "8cf1f35342c0caec7a22e6a610d66b2d8a91f866d70b4c0f5a9a41de6b799a70",
+      "width": 128,
+      "height": 128,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": -2.657092981442551e+31,
+          "quality": 0
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "radiance": 1.1976796388626099,
+          "quality": 0
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "radiance": 1.328391671180725,
+          "quality": 0
+        },
+        {
+          "x": 119,
+          "y": 119,
+          "radiance": 1.2145028114318848,
+          "quality": 0
+        },
+        {
+          "x": 127,
+          "y": 127,
+          "radiance": 1.906449317932129,
+          "quality": 0
+        },
+        {
+          "x": 125,
+          "y": 61,
+          "radiance": 0.0,
+          "quality": 9
+        },
+        {
+          "x": 126,
+          "y": 48,
+          "radiance": -5.0664364231957125e+33,
+          "quality": 0
+        },
+        {
+          "x": 10,
+          "y": 64,
+          "radiance": 1.4125498533248901,
+          "quality": 0
+        }
+      ]
+    },
+    {
+      "body": "comet-9p",
+      "lens": "deep-impact",
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.fit",
+      "sha256": "360666794a059670d870c3049354c0a1f6cdbc53619a005817cb2fe940f9fe82",
+      "width": 128,
+      "height": 128,
+      "units": "W/(m^2*sr*um)",
+      "anchors": [
+        {
+          "x": 0,
+          "y": 0,
+          "radiance": 1.7897826912315638e+18,
+          "quality": 0
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "radiance": 1.4466252326965332,
+          "quality": 0
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "radiance": 1.15560781955719,
+          "quality": 0
+        },
+        {
+          "x": 119,
+          "y": 119,
+          "radiance": 1.0431008338928223,
+          "quality": 0
+        },
+        {
+          "x": 127,
+          "y": 127,
+          "radiance": 1.884467363357544,
+          "quality": 0
+        },
+        {
+          "x": 125,
+          "y": 59,
+          "radiance": 0.0,
+          "quality": 9
+        },
+        {
+          "x": 0,
+          "y": 73,
+          "radiance": -0.00021536077838391066,
+          "quality": 0
+        },
+        {
+          "x": 17,
+          "y": 64,
+          "radiance": 1.509569525718689,
+          "quality": 0
+        }
+      ]
     }
   ]
 }

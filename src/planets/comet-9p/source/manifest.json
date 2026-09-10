@@ -34,7 +34,7 @@
       "consumers": [
         "surfaces"
       ],
-      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
       "projection": {
         "type": "equirectangular",
         "longitudeDirection": "east-positive",
@@ -86,7 +86,7 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2830
       },
-      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
+      "coverage": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255\u00b0, Dec +64.5\u00b0. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed.",
       "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
       "recipe": {
         "width": 512,
@@ -696,6 +696,176 @@
       "consumers": [
         "photographs-next"
       ]
+    },
+    {
+      "id": "iv05070405_9000675_001_r-fit",
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.fit",
+      "expectedBytes": 662400,
+      "expectedSha256": "1e16220cef4edf6961f06b0a0651be5bb1202c8cf716ebdb0e2c74c7fe115520",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405_9000675_001_r-lbl",
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "72fa11fcdd26d2259f5bc1c0764cf7c651c8776b2658f543181d04c33ce671db",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405_9000675_001_r-control",
+      "path": "photography/deep-impact/iv05070405_9000675_001_r.json",
+      "expectedBytes": 57084,
+      "expectedSha256": "87d8b0a9e4992ad62bd57fd7c8165f0cce39e639ce7873d7bff67634c583eacb",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405_9000680_001_r-fit",
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.fit",
+      "expectedBytes": 216000,
+      "expectedSha256": "8cf1f35342c0caec7a22e6a610d66b2d8a91f866d70b4c0f5a9a41de6b799a70",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405_9000680_001_r-lbl",
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "b74737563964f780b19367d8c9418498f7aa3a536f5407cb9401f16013472d40",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405_9000680_001_r-control",
+      "path": "photography/deep-impact/iv05070405_9000680_001_r.json",
+      "expectedBytes": 15703,
+      "expectedSha256": "75faeb131deaf390f5931556db492878570eb94fb72d185b6ef55d70fb69c7b1",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405_9000688_001_r-fit",
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.fit",
+      "expectedBytes": 216000,
+      "expectedSha256": "360666794a059670d870c3049354c0a1f6cdbc53619a005817cb2fe940f9fe82",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.fit",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405_9000688_001_r-lbl",
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.lbl",
+      "expectedBytes": 32880,
+      "expectedSha256": "be1f12db5f5bf473485a9c575d669a6b3274b6a6e524ebecf09307066cbd2d9f",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.lbl",
+      "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
+      "license": "PDS public scientific archive",
+      "licenseEvidence": [
+        "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/dataset.shtml"
+      ],
+      "acquisition": "Restore the exact archived product with the acquisition recipe; verify bytes and SHA-256.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "iv05070405_9000688_001_r-control",
+      "path": "photography/deep-impact/iv05070405_9000688_001_r.json",
+      "expectedBytes": 16038,
+      "expectedSha256": "5c081d34acb7869b2432322ff1bc13ace9b9d935ed4aaee412b8d335e1e7156d",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth source-camera registration",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/cssEarth/blob/main/LICENSE"
+      ],
+      "acquisition": "Reproduce with node tools/objects/comet-9p/prepare-closeups.mts --write.",
+      "redistribution": "Retain source attribution and product identity.",
+      "consumers": [
+        "photographs-deep-impact"
+      ]
+    },
+    {
+      "id": "tempel-closeup-registration",
+      "path": "preparation/closeups.json",
+      "expectedBytes": 1554,
+      "expectedSha256": "65221b0b656805620f31c35be63d023392c133f8734073fe5166720ad7b2908b",
+      "origin": "https://github.com/layoutit/css.earth",
+      "credit": "cssEarth image registration; NASA/JPL-Caltech ITS photographs",
+      "license": "MIT",
+      "licenseEvidence": [
+        "https://github.com/layoutit/css.earth/blob/main/LICENSE"
+      ],
+      "acquisition": "Checked-in preparation recipe for tools/objects/comet-9p/prepare-closeups.mts.",
+      "redistribution": "Retain source attribution.",
+      "consumers": [
+        "closeup-registration"
+      ]
     }
   ],
   "generatedIntermediates": [
@@ -734,14 +904,14 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6943,
-      "expectedSha256": "371a9b1b35e34b3f31ff17034d78e8c2d1fd677c729567a8d3122a3c106d1c04",
+      "expectedBytes": 7026,
+      "expectedSha256": "d0ec3bbfd36638a1f8cadda2f7544ae52cceed8dc2b0f1e33f7fe041aac31e8c",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 6813,
-      "expectedSha256": "9eee30544d619fef5749ccc8a40ac4d87ed71e43f22d8895c631235c09acf284",
+      "expectedBytes": 8529,
+      "expectedSha256": "ba81ddbcdea80bdc3a6a2e600fab4cbf980e75c8e21f484fc085d856ab5588eb",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {
@@ -758,8 +928,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 9768,
-      "expectedSha256": "bea0cfd4dfda09a4706f9e101fe59e47ab1122dcbbcedc28524b8b90273867fd",
+      "expectedBytes": 10733,
+      "expectedSha256": "89f308b718a7729029a33a51e7ac3ba8a1727b99ce01ad265e54868f4def0430",
       "purpose": "9P/Tempel 1 source evidence or authored preparation input."
     },
     {
@@ -806,8 +976,8 @@
     },
     {
       "path": "reference/encounter-photography.md",
-      "expectedBytes": 6154,
-      "expectedSha256": "7c844decbdbc51bf1a8bf03b58dd257a451060a941c76730bc0f158f1d212d56",
+      "expectedBytes": 10460,
+      "expectedSha256": "13b2379ca63ac16934d439f69dc7e33a7d0f969b7cc45f1d7c219d8e089cfeba",
       "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
     },
     {
