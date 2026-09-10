@@ -1,0 +1,10 @@
+{
+  "id": "taurinensis",
+  "passed": true,
+  "queryCount": 830,
+  "sourceSha256": "23d5892b451e70763b68e7edc06b731de621fd79a98820621f63c11de034580e",
+  "maxPointDifferenceMeters": 3.097844294684696e-10,
+  "maxValueDifferenceKilometers": 8.881784197001252e-14,
+  "maxDistanceDifferenceMeters": 3.083571049147453e-10,
+  "qualification": "Product surface sampler compared to independently computed full-source planar/edge projection. Includes all retained face centroids, six source extrema and all decoded-atlas interior/bleed coordinate probes. Exact shared-edge normal identity is not asserted."
+}
