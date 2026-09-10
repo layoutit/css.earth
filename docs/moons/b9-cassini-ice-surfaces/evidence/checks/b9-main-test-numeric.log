@@ -1,7 +1,0 @@
-.........../Users/ekrof/fed/cssEarth-moons-cassini-atlas/output/b9-python/lib/python3.12/site-packages/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
-  return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
-..................
-----------------------------------------------------------------------
-Ran 29 tests in 0.166s
-
-OK

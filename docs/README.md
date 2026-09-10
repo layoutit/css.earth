@@ -1,31 +1,39 @@
-# Documentation map
+# Documentation
 
-Start with [AGENTS.md](../AGENTS.md), the
-[body contributor guide](../src/planets/README.md), the
-[provenance contract](provenance/CONTRACT.md) and the
-[celestial skill](../.agents/skills/celestial-skill/SKILL.md).
-
-| Looking for | Read |
-| --- | --- |
-| Sources, processing, test results and known problems | The body’s `README.md`, with links to substantial methods and original reports |
-| Credits and reuse terms | Body `NOTICE.md`, license files and source manifest |
-| Image decoding, UV mapping, mesh reduction and texture atlases | [Image and surface preparation](surface-preparation.md) |
-| How outputs trace back to inputs, including the Sources UI | [Prepared object provenance](object-provenance.md) |
-| Saving original reports and screenshots | [Evidence rules](provenance/CONTRACT.md#save-enough-evidence-to-check-the-result) |
-| Code to prepare a new kind of data | [Celestial implementation map](../.agents/skills/celestial-skill/references/implementation-map.md) |
-| Documentation audit and reviews | [Initial audit and committed-file cleanup](provenance/audits/2026-09-09/AUDIT.md), [review and completed migration](provenance/audits/2026-09-09/ADVERSARIAL-REVIEW.md#complete-migration-and-final-review) |
-
-Reports elsewhere in `docs/` keep their original dates, tested versions and limits.
-A filename containing `final` or an old passing result does not show that today's
-checkout passes. The shared-runtime proposal, implementation and proof describe
-an earlier eleven-object version. Use the implementation map above for current
-code ownership. Link original reports rather than copying them.
-
-The four body README examples are [Earth](../src/planets/earth/README.md),
+For a body's sources, processing, evidence and known problems, read its
+`src/planets/<id>/README.md`. Examples: [Earth](../src/planets/earth/README.md),
 [Sun](../src/planets/sun/README.md), [Rhea](../src/planets/rhea/README.md) and
 [67P](../src/planets/comet-67p/README.md).
 
-Check changed local links with
-`python3 tools/audits/check-documentation-links.py --base <review-base>`.
-It supports sparse checkouts and checks file paths and heading anchors.
-It does not check external URLs or scientific claims.
+## Guides
+
+| Topic | Guide |
+| --- | --- |
+| Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
+| Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |
+| Connecting prepared outputs to their inputs | [Prepared object provenance](object-provenance.md) |
+| Deriving factsheet values | [Factsheets](factsheets.md) |
+| Scene navigation and prepared data | [Navigation ownership](prepared-navigation-ownership.md) |
+| Loading objects in the browser | [Page navigation transport](page-navigation-transport.md) |
+| Changing objects and cancelling a flight | [Flight lifecycle](flight-lifecycle.md) |
+| Page titles, descriptions and search indexing | [SEO](seo.md) |
+
+For contribution steps, use the [body contributor guide](../src/planets/README.md).
+[AGENTS.md](../AGENTS.md) sets application rules; the
+[celestial skill](../.agents/skills/celestial-skill/SKILL.md) points agents to the
+same workflow and implementation.
+
+## Where work belongs
+
+Keep maintained explanations and their illustrations here. Put processing code in
+`tools/`, test fixtures in `tests/`, and source identities beside the body.
+Link historical evidence at its exact Git revision from the account that uses it.
+Plans, superseded proposals and raw run output do not need a permanent copy in
+the current tree.
+
+Update the affected guide or body README in the same PR as the change. Use the
+[PR template](../.github/pull_request_template.md) for the result and checks;
+do not add a separate completion report to `docs/`.
+
+CI checks local links and heading anchors. Run the same check with
+`python3 tools/audits/check-documentation-links.py --all`.

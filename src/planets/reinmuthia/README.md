@@ -15,7 +15,7 @@ The adopted diameter is **24.38 km** from [Usui et al. (2011), PASJ63,1117-1138,
 
 ## Evidence
 
-The [reinmuthia validation record](../../../docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
+The [reinmuthia validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
 
 ## Known problems
 

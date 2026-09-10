@@ -15,7 +15,7 @@ Convex light-curve reconstruction, 70 ± 7 km volume-equivalent diameter in the 
 
 ## Evidence
 
-The [pandora-55 results](../../../docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **282.30 m**. This is a sampled comparison, not an exhaustive error bound.
+The [pandora-55 results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **282.30 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The report includes 2 browser cases tied to recorded body assets. It does not identify the tested code revision.
 

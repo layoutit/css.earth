@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check relative Markdown links in a selected documentation diff, including sparse trees.
+"""Check relative Markdown links in a diff or the current tree, including sparse trees.
 
 This checks repository paths and Markdown heading anchors, not external URLs or
 scientific claims. It does not execute linked files or require body assets.
@@ -13,7 +13,9 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--base', required=True, help='Git commit/ref to compare with the working tree')
+selection = parser.add_mutually_exclusive_group(required=True)
+selection.add_argument('--base', help='Git commit/ref to compare with the working tree')
+selection.add_argument('--all', action='store_true', help='Check all current Markdown files')
 args = parser.parse_args()
 
 def git(*argv):
@@ -22,11 +24,11 @@ def git(*argv):
 root = Path(git('rev-parse', '--show-toplevel').strip())
 if root != Path.cwd():
     parser.error('Run from the repository root')
-base = git('rev-parse', '--verify', args.base + '^{commit}').strip()
+base = git('rev-parse', '--verify', args.base + '^{commit}').strip() if args.base else None
 untracked = set(git('ls-files', '--others', '--exclude-standard').splitlines())
-changed = set(git('diff', '--name-only', '--diff-filter=ACMR', base).splitlines()) | untracked
+changed = set(git('diff', '--name-only', '--diff-filter=ACMR', base).splitlines()) | untracked if base else set()
 known = set(git('ls-files').splitlines()) | untracked
-deleted = set(git('diff', '--name-only', '--diff-filter=D', base).splitlines())
+deleted = set(git('diff', '--name-only', '--diff-filter=D', base).splitlines()) if base else set()
 # A file added since the review base and removed locally has no net diff to base.
 deleted.update(git('diff', '--name-only', '--diff-filter=D', 'HEAD').splitlines())
 known -= deleted
@@ -65,10 +67,10 @@ def anchors(text):
     return result
 
 errors, checked = [], 0
-markdown = sorted(path for path in changed if path.endswith('.md'))
+markdown = sorted(path for path in (known if args.all else changed) if path.endswith('.md'))
 for file in markdown:
     source = without_fences(contents(file))
-    for target in re.findall(r'!?\[[^\]\n]*\]\(([^)\n]+)\)', source):
+    for target in re.findall(r'!?\[[^\]]*\]\(([^)\n]+)\)', source):
         target = target.strip().strip('<>').split(' "')[0]
         if re.match(r'^[a-z][a-z0-9+.-]*:', target, re.I):
             continue

@@ -17,7 +17,7 @@ Hygiea is a nearly spherical main-belt asteroid. VLT/SPHERE observations reveale
 
 ## Evidence
 
-The [asteroid validation report](../../../docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 3612.2 m error; the authored stopping threshold is 3700 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1963.7 m and maximum 3432.2 m.
 

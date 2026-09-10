@@ -2,12 +2,15 @@
 
 Describe what changed and why.
 
+Link the body README or shared guide updated with the source choices, behavior
+and limits. Put reusable explanations there, not in a new PR report under `docs/`.
+
 ## Checks and evidence
 
-Update the affected body README’s sources, evidence and known problems. Link
-the relevant source notes, credits, test reports and inspected screenshots.
-State which version was tested, what passed or failed, and what was not checked.
-If reusing an old result, explain why it still applies. For a docs-only change,
-report link and diff checks here.
+State the tested revision, commands, results and checks not run. Link reports and
+inspected images needed to assess the change. If reusing evidence, link its exact
+revision and explain why it still applies. For documentation changes, include
+link and diff checks.
 
-Explain unusually large evidence additions. See `docs/provenance/CONTRACT.md`.
+For added artifacts, name the claim, explanation or test that uses them; explain
+unusually large additions. Follow [the provenance contract](https://github.com/layoutit/cssEarth/blob/main/docs/provenance/CONTRACT.md).

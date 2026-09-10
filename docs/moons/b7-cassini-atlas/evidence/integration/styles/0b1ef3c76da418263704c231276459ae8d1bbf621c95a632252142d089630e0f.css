@@ -1,5 +1,0 @@
-.css-volume-projection { position: absolute; inset: 0px; overflow: visible; pointer-events: none; background: rgb(0, 0, 0); transform-style: flat; }
-.css-volume-camera, .css-volume-scene, .css-volume-mesh { position: absolute; left: 50%; top: 50%; width: 0px; height: 0px; transform-origin: 0px 0px; transform-style: preserve-3d; pointer-events: none; }
-.css-volume-camera { inset: 0px; width: 100%; height: 100%; perspective-origin: 50% 50%; }
-.css-volume-scene { left: 50%; top: 50%; }
-.css-volume-mesh s { display: block; position: absolute; left: 0px; top: 0px; transform-origin: 0px 0px; transform-style: preserve-3d; backface-visibility: visible; background-repeat: no-repeat; pointer-events: none; }

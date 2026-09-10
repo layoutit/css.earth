@@ -17,13 +17,18 @@ Original images, meshes and labels
 | Step | Implementation |
 | --- | --- |
 | Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations.ts) and [checkout restoration](../tools/restore-source-inputs.mjs) |
+| Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../tools/objects/terrestrial-layers/index.mjs) |
 | Record input, recipe and output identities | [Provenance bindings](../tools/objects/provenance-recipes.mjs) and [record generation](../tools/objects/provenance.mjs) |
 
 The [implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
-locates other preparation families. This guide explains surface processing;
-Earth's paged imagery has its own [dataset and resolution guide](earth-prepared-texture-levels.md).
+locates other preparation families. Earth selects among offline atlas levels
+according to projected CSS size, independently of DPR; dataset selection remains
+manual. These texture levels are separate from its retired geographic paging.
+The [texture-level implementation and measurements](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth-prepared-texture-levels.md)
+record that change; [Earth's README](../src/planets/earth/README.md) describes the
+current datasets and retained source history.
 
 ## Decode the source before choosing its display
 
@@ -46,6 +51,12 @@ and quality-mask paths use their declared sampling rules. Some image paths use
 other resampling methods; inspect the selected decoder before changing them.
 The [coverage guidance](../.agents/skills/celestial-skill/references/surface-preparation.md#coverage)
 explains why darkness alone cannot define missing data.
+
+![Cassini VIMS maps with observed patches surrounded by gray missing coverage](images/cassini-coverage.png)
+
+Cassini VIMS example: infrared false color at left, ice absorption at right;
+gray marks unsupported data. The [original input record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b9-cassini-ice-surfaces/source-review/source-maps.json)
+identifies the cubes and processing behind this illustration.
 
 ## Map a surface point to source pixels
 
@@ -82,6 +93,13 @@ atlas addresses.
 Longitude direction, latitude convention, physical scale, pole and meridian
 belong to the source recipe. A generic image resize cannot establish them.
 
+![Gaspra detector image beside a reprojected mosaic, with four matching patches marked](images/gaspra-registration.png)
+
+Gaspra registration example: detector image at left, published mosaic reprojected
+through the archived camera at right. Compare the marked landmarks; the display
+stretches differ. Both use related observations, so this is a registration check.
+[Gaspra's README](../src/planets/gaspra/README.md) records the source, residuals and limits.
+
 ## Reduce geometry and bake the atlas
 
 [radial-terrain.mjs](../tools/objects/terrestrial-layers/radial-terrain.mjs)
@@ -91,6 +109,14 @@ reduces source triangles instead; it can retain surfaces that a single radius
 cannot describe. Face budgets, open boundaries and error limits are checked by
 that path. The simplifier's error estimate and the measured source-transfer
 distance are separate quantities.
+
+![Nine asteroid pairs comparing each original source mesh with its reduced mesh](images/mesh-source-comparison.webp)
+
+Mesh reduction example: each pair shows the source mesh at left and prepared mesh
+at right. Each is normalized to its own maximum radius, so compare shape rather
+than physical scale. The [original comparison method](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/main-belt-asteroids.md)
+records the camera settings and remaining views. These three illustrations are
+historical processing examples, not new browser checks.
 
 For mesh surfaces, preparation samples each retained triangle into its own
 raster tile and emits a native PolyCSS `u` triangle with prepared CSS addresses.

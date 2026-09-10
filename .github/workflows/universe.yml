@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Check documentation links
+        run: python3 tools/audits/check-documentation-links.py --all
       - name: Check tracked files against ignore rules
         run: |
           git ls-files -z > "$RUNNER_TEMP/tracked-paths"

@@ -37,10 +37,6 @@ src/planets/proteus/source/observations/C1137339_GEOMED.LBL -text -whitespace
 src/planets/proteus/source/observations/C1137350_GEOMED.LBL -text -whitespace
 src/planets/proteus/source/observations/PROCESSING.TXT -text -whitespace
 
-# Preserve raw execution transcripts; collapse generated capture records in reviews.
-docs/moons/b3-preparation/callisto-color-tests-initial.log -whitespace
-docs/moons/b3-preparation/final/renderer-tests.log -whitespace
-docs/moons/b3-preparation/final/browser/*.json linguist-generated=true
 src/planets/comet-19p/source/reference/*.cat -text -whitespace
 src/planets/comet-19p/source/reference/*.lbl -text -whitespace
 src/planets/comet-19p/source/reference/*.txt -text -whitespace
@@ -59,15 +55,7 @@ src/planets/comet-103p/source/photography/**/*.lbl -text -whitespace
 # Preserve the pinned Apophis spin-state row, including its CRLF ending.
 src/planets/apophis/source/reference/apophis_v233s7_spin_state.csv -text -whitespace
 
-# B9 preserves pinned binary cubes, archive text and captured CSS byte-for-byte.
+# Preserve pinned Cassini cubes and archive text byte-for-byte.
 src/planets/*/source/cassini-ice/**/*.cub binary
 src/planets/*/source/cassini-ice/**/*.qub binary
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.qub binary
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.lbl -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.html -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.cpp -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.c -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/evidence/styles/*.css -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/source-review/tethys-corrected/*.txt -text -whitespace
 src/planets/*/source/cassini-ice/evidence/*.html -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/evidence/checks/*.log -text -whitespace
