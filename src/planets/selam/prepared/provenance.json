@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "selam",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf59f7f03216c65a17858fbb2691e9ee3f22320b5022127a9fbefcb6d0f5cb01"
+    "sha256": "9b95b8d823e19e8a4bfefd0e6b4e76c9b90e490fb356fadf6665c6e1cd54b4e5"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -219,7 +219,7 @@
       "origin": "https://doi.org/10.1038/s41586-024-07378-0",
       "credit": "Levison et al. (2024), Lucy science team",
       "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
-      "acquisition": "Reproduce from the published numerical dimensions through scaffold.mjs and the shared ellipsoid preparer.",
+      "acquisition": "The checked-in shape/model.json transcribes the cited numerical dimensions; the shared ellipsoid preparer tessellates these parameters.",
       "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
       "coverage": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation.",
       "sha256": "7b5a16b99d453beddac8a2c98113f020732b1a9fbfd7299855a4a7ac4f920409",

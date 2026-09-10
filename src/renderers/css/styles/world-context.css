@@ -125,10 +125,10 @@
 }
 [data-context-body] { transition: opacity 120ms ease; }
 
-/* A shortened retained unit bar leaves a gap in each prepared orbit chord.
-   Hover and full-orbit projection preserve the same uncertainty cue. */
-.prepared-world-context [data-context-placement="approximate"] .context-orbit s {
-  width: .6px;
+/* Alternate the paint on retained chords. Fractional unit-bar widths can
+   round back to solid strokes before the browser scales their projection. */
+.prepared-world-context [data-context-placement="approximate"] .context-orbit s:nth-child(even) {
+  background: transparent;
 }
 .prepared-world-context [data-context-placement="approximate"][data-context-selected="true"] > [data-context-indicator] {
   border-radius: 50%;

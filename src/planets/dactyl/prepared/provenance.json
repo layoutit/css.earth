@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "dactyl",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a177c2067c38d83f4847f5defd46c688bc4d398bdac39fe1e682775489fad4c6"
+    "sha256": "487b18f16050765fd4d562e965a7af43ebd94c37222b80b8e04d9f1814815506"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -225,7 +225,7 @@
       "origin": "https://doi.org/10.1006/icar.1996.0045",
       "credit": "Veverka et al. (1996), Galileo imaging team",
       "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
-      "acquisition": "Reproduce from the published numerical dimensions through scaffold.mjs and the shared ellipsoid preparer.",
+      "acquisition": "The checked-in shape/model.json transcribes the cited numerical dimensions; the shared ellipsoid preparer tessellates these parameters.",
       "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
       "coverage": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery.",
       "sha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4",

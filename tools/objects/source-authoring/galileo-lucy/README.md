@@ -6,7 +6,7 @@ New object packages: Dactyl, Dinkinesh and Selam. All use the existing authored-
 
 Run from the repository root, serially. The checked-in body inputs are sufficient for normal `prepare-authored`; the authoring commands below reconstruct them from the selected originals and published measurements.
 
-1. Restore missing imagery/font inputs using each package’s acquisition recipe. Shape parameters, original CMOD, converted OBJ, source observations and attribution are checked in.
+1. Restore missing imagery/font inputs using each package’s acquisition recipe. Shape parameters, original CMOD, converted OBJ, reference records and attribution are checked in.
 2. To reconvert Dinkinesh, run `python3 tools/objects/source-authoring/galileo-lucy/cmod.py src/planets/dinkinesh/source/shape/dinkinesh.cmod src/planets/dinkinesh/source/shape/model.obj --volume-equivalent-radius-km 0.369`. Dactyl and Selam’s checked-in `shape/model.json` files transcribe the cited dimensions directly.
 3. Run `node tools/objects/source-authoring/galileo-lucy/orbits.mts` to regenerate illustrative mutual orbits and display orientation. Its retained Celestia input may be copied from Dactyl’s source/reference directory to `output/galileo-lucy/celestia/asteroids.ssc`.
 4. Run `node packages/astronomy/tools/generate-asteroids.mts --object=dinkinesh` and `node packages/astronomy/tools/generate-scene-satellites.mts` when refreshing ephemerides. Retain the Horizons responses in the body source directory. The asteroid generator uses independent vector fixtures.
