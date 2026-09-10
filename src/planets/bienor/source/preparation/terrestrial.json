@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "bienor",
+  "displayName": "Bienor",
+  "publicBase": "/scenes/bienor/",
+  "distanceAu": 16.60224445563277,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "consumer": "model-surface",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "Smooth triaxial ellipsoid fitted to stellar-occultation chords and rotational light curves, with semiaxes 127 ± 5, 55 ± 4 and 45 ± 4 km (Rizos et al. 2024). This is the study's global reference shape, not resolved terrain. It cannot explain all observed light-curve asymmetry; the paper also explores albedo, irregular-shape and satellite alternatives without uniquely resolving them. Full approximation dimensions: 254 × 110 × 90 km. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary. The grid marks unmapped terrain."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 67.99228574542066,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": -45,
+      "framingScale": 0.5353723287040997
+    },
+    "mapUrl": "/scenes/bienor/bienor-model-surface@2x.webp",
+    "polesUrl": "/scenes/bienor/bienor-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ellipsoid.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 480,
+        "maximumErrorMeters": 1699.8071436355165,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary."
+  },
+  "presentation": {
+    "defaultLens": "model",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

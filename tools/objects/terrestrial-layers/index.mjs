@@ -26,6 +26,7 @@ import { validateRadialTableProfile } from './pds-radial-table.mjs';
 import { validateFitsObservationPolicy } from './observed-fits.mjs';
 import { validateGeoSurfaceRecipe } from './observed-geo-surface.mjs';
 import { validateFacetFieldRecipe } from './fits-facet-field.mjs';
+import { validateTerrestrialRings } from './rings.mjs';
 
 export function parseTerrestrialProfile(value) {
   if (value?.schema === 'cssearth-terrestrial-preparation@1' && value.kind === 'affine-photographic-atmosphere') {
@@ -53,6 +54,7 @@ export function parseTerrestrialProfile(value) {
       value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.mosaics ?? []), ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(lens => lens.id === value.presentation?.defaultLens)) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
+  validateTerrestrialRings(value.rings, value.geometry.radiusKm);
   for (const recipe of value.raster.surfaceObservations ?? []) validateGeoSurfaceRecipe(recipe, value.geometry.radialTerrain);
   if (value.raster.surfaceQuality !== undefined &&
       (!Number.isInteger(value.raster.surfaceQuality) || value.raster.surfaceQuality < 1 || value.raster.surfaceQuality > 100)) {

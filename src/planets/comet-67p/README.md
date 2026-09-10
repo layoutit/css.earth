@@ -7,38 +7,41 @@
 | View | Source | What it means |
 | --- | --- | --- |
 | Shape | ESA/RMOC MTP019 NAVCAM model | Reduced to 1,000 triangles. Default gray is an authored material, not measured color. |
-| OSIRIS | Six calibrated orange-filter photographs, August–September 2014 | Grayscale appearance with approximate illumination correction; not measured albedo. |
+| OSIRIS | Eight calibrated orange-filter photographs: August 2014 and October–November 2015 | Grayscale composite with solar-distance, disk and approximate phase correction; not measured albedo. |
 | Albedo, spectral slope, absorption and ice | [Rosetta VIRTIS maps](https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/) | Reflectivity, its change with wavelength, infrared absorption and modeled ice. Registration near the neck is uncertain. |
 | Regions | [Thomas et al. (2018), v1](https://doi.org/10.17632/2845znt54k.1) | 26 named regions transferred from SHAP7 to the display mesh. |
 | Geology | [ESA OSIRIS geological map, v1.0](https://doi.org/10.5270/esa-kokoti7) | Lines and dots mark mapped features; their display widths are not measured sizes. |
 
-The displayed rotation phase is arbitrary. Photographic shadows and seams remain;
-grids mark missing or rejected imagery.
+The displayed rotation phase is arbitrary. Grid marks missing or rejected imagery.
+The [southern coverage report](../../../docs/comets/67P-SOUTHERN-OSIRIS.md) describes
+the current eight-image selection and its calibration.
 
 ## Evidence
 
-Existing reports; no body tests were rerun for this documentation edit.
+Recorded results for the southern coverage update:
 
-- **Coverage estimates:** sampled photography coverage rose from 56.04% to 56.25%
-  of the displayed mesh area. The two September images supply an estimated 1.76%.
-  [Mosaic report](../../../docs/comets/SURFACE-IMAGERY.md).
-- **Browser:** 60 comet cases passed; the renderer suite had 367 passes and nine failures.
-  Tested application: [87ddd9680f](https://github.com/layoutit/cssEarth/commit/87ddd9680f76082eedd9915e86bda3253311b0f3).
-  [Browser results](../../../docs/comets/evidence/surface-imagery-browser.json) · [Conformance](../../../docs/comets/evidence/surface-imagery-conformance.json) · [Suite results](../../../docs/comets/evidence/surface-imagery-validation.json).
-- **Files:** the four-comet run downloaded 16 new source files and installed 167 runtime files;
-  sizes and hashes matched. Older inputs were copied.
-  [Restoration](../../../docs/comets/evidence/surface-imagery-source-restore.json) · [Installation](../../../docs/comets/evidence/surface-imagery-delivery.json).
-- **Images:** earlier and new atlases were compared with matching renderer settings.
-  [Comparisons and differences](../../../docs/comets/SURFACE-IMAGERY.md#matched-visual-comparisons).
-  [VIRTIS checks](../../../docs/comets/67P-VIRTIS.md) · [Geology checks](../../../docs/comets/67P-GEOLOGY.md).
+- **Coverage:** estimated accepted area rose from 56.25% to 71.26%, using 24
+  deterministic samples per triangle, weighted by area. This measures the displayed
+  mesh, not exact coverage of the nucleus. [Coverage record](../../../docs/comets/evidence/67p-southern/coverage.json).
+- **Browser:** 15 conformance cases passed before integration with `7ae81ba2d`.
+  Later production captures at DPR 1 and 2 are recorded separately.
+  [Conformance](../../../docs/comets/evidence/67p-southern/conformance.json) · [Integration results](../../../docs/comets/evidence/67p-southern/integration.json).
+- **Delivery:** a fresh installation verified all 56 runtime assets (21,933,880
+  bytes) against their hashes, with no reused local files.
+  [Delivery record](../../../docs/comets/evidence/67p-southern/runtime-delivery.json).
+
+The wider recorded runs include two missing Europa originals, three Earth fixture
+failures and two registry-audit failures. The [report](../../../docs/comets/67P-SOUTHERN-OSIRIS.md#verification-records)
+separates those results from the comet checks. Earlier runs are retained below.
 
 ## Known problems
 
-- September 13/20 inputs have August 5 dates in the manifest. The recipe still describes
-  four photographs although it lists six. The original labels disagree with those records.
-- Some original screenshot links point to local-only files.
-- Tests changed Shadows through a hidden input; they did not prove a user could open Settings.
-- These comparisons do not establish pixel matching with native photographs.
+- Photographed shadows, seams and real seasonal differences remain. The composite
+  spans a perihelion passage; it cannot measure surface change.
+- Phase correction extends the published 1.3–54° fit to observations at 47–64°.
+  It omits roughness and multiple scattering.
+- The matched browser crops compare atlas versions; they do not establish pixel
+  matching with native photographs.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
@@ -94,98 +97,131 @@ input is omitted from the surface-map panel.
 
 #### OSIRIS mosaic
 
-Six calibrated exposures span 2014-08-05T19:44:22.918 UTC to 2014-09-20T13:40:25.993 UTC. The
-single orange filter supplies grayscale only. Each exposure retains its original attached label
-and matching quality companion.
+Eight calibrated exposures span 2014-08-05T19:44:22.918 UTC to
+2015-11-15T05:08:11.274 UTC. Four August 2014 photographs remain; four
+October–November 2015 photographs replace the earlier September close-ups.
+The single orange filter supplies grayscale only.
 
-The September labels identify the GEO inputs as level 5 DDR and their companions as level 4
-RDR. The companion L4 image must match every GEO radiance pixel and its observation identity
-before its quality flags are used. Positive VALID is required, LOSSY is explicitly permitted
-for visual use, and every other quality flag is rejected before bilinear interpolation.
+The new inputs come from the [MTP022 GEO archive](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/)
+and its [L4 radiance and quality archive](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/).
+The southern GEO inputs are level 5 DDR, with level 4 RDR companions. Each exposure
+retains its original attached label. The companion L4 image must match every GEO
+radiance pixel and its observation identity
+before its quality flags are used. Positive VALID is required, LOSSY is explicitly
+permitted for visual use, and every other quality flag is rejected before bilinear
+interpolation. Finite positive, zero and negative radiance remain eligible when
+quality, geometry and photometry permit.
 
 #### OSIRIS transfer
 
-The corrected GEO shape identifier is required by the archive errata. A projective camera
-fitted from archived XYZ/pixel correspondences must predict the remaining pixels within 0.01
-source pixel. Retained triangle texels match the closest original RMOC source triangle within
-50 m; every source pixel contributor must lie within 20 m of that matched point, with emission
-≤80° and an independent full-RMOC visibility ray.
+The corrected GEO shape identifier is required by the archive errata. A projective
+camera fitted from archived XYZ/pixel correspondences must predict the remaining
+pixels within 0.01 source pixel. Retained triangle texels match the closest original
+RMOC source triangle within 50 m; every source pixel contributor must lie within
+20 m of that point, with emission ≤80° and an independent full-RMOC visibility ray
+agreeing within 0.5 m. The largest recorded camera holdout residual is below 0.0025
+source pixel. No geometry limit was relaxed for the southern images.
 
-Atlas bleed stays on its own retained face. Grid denotes rejected or absent photography, not
-uncertainty in the underlying shape.
+Atlas bleed stays on its own retained face. Grid denotes rejected or absent
+photography, not uncertainty in the underlying shape.
 
 #### OSIRIS compositing
 
-At every accepted point, select the observation with the lowest maximum source emission angle.
-A robust fit of brightness ratios at matching surface points determines one adjustment per
-image, within the recipe’s limits, using the first image as the reference. This is a display
-adjustment, not phase correction.
+At every accepted point, select the observation with the lowest maximum source
+emission angle. Residual brightness gains use only co-located positive samples
+with incidence and emission ≤65°. This restriction applies to the brightness fit;
+display pixels retain the 80° limits. The fit requires at least 128 overlap samples,
+a median absolute deviation of log ratios ≤0.25 and gains within a 1.35× budget.
+The first image is the reference; final gains range from 0.908 to 1.157.
 
-The lossless source-index raster identified by `prepared/osiris-source-index.json` binds every
-atlas texel to its exposure, with zero for no accepted observation. It is an inspection output,
-not a browser asset. See [coverage and source
-survey](../../../docs/comets/67P-OSIRIS-COVERAGE.md).
+The fit uses 64 samples per triangle. An independent set of 63 disjoint samples
+produces gains within 0.8% of those values. [Calibration check](../../../docs/comets/evidence/67p-southern/calibration.json).
+These residual adjustments follow the disk and phase corrections below.
+
+The lossless source-index raster identified by `prepared/osiris-source-index.json`
+binds every atlas texel to its exposure, with zero for no accepted observation.
+It is an inspection output, not a browser asset.
 
 #### OSIRIS illumination
 
-[Fornasier et al. (2015)](https://doi.org/10.1051/0004-6361/201525901) provides the
-comet-specific Lommel–Seeliger disk-law basis. Radiance is divided by `2
-cos(i)/(cos(i)+cos(e))` before interpolation, referenced to zero incidence/emission, with both
-angles ≤80° and gain ≤3. The first observation supplies one common 1–99% linear grayscale
-stretch after those brightness adjustments.
+The [OSIRIS calibration pipeline, §3.13](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/calib/osiris_cal_pipeline_v06.pdf)
+defines `I/F = π d² radiance / solarFlux`. Solar distance, flux and their units come
+from each original calibration HISTORY. Already-normalized inputs are rejected.
+This conversion accounts for the different solar distances of the 2014 and 2015
+observations.
 
-There is no phase, roughness or cast-shadow recovery; this is relative observed appearance, not
-measured albedo. Shadows off displays the corrected image uniformly lit; Shadows on adds the
-prepared Sun lighting. Residual photographed shadows are disclosed beside the lens.
+[Fornasier et al. (2015)](https://doi.org/10.1051/0004-6361/201525901) provides the
+Lommel–Seeliger disk law. Divide by `2 cos(i)/(cos(i)+cos(e))`, referenced to zero
+incidence/emission, with both angles ≤80° and gain ≤3. The single-particle
+Henyey–Greenstein and shadow-hiding terms in [equations 6 and 8 and Table 4](https://arxiv.org/abs/1505.06888)
+use `g = −0.37`, `B0 = 2.5` and `h = 0.079`, normalized to 50°. The phase correction
+accepts only 40–70° and at most a 1.5× adjustment in either direction. Corrections
+operate on linear source pixels before interpolation.
+
+This single-scattering approximation omits roughness and multiple scattering;
+it is not the full Hapke model or measured albedo. Photographed cast shadows and
+surface changes remain. The first observation supplies one common 1–99% linear
+grayscale stretch after the residual brightness adjustments.
+
+Shadows off displays the corrected image uniformly lit and remains the default.
+Shadows on adds the prepared Sun lighting. Residual photographed shadows are
+disclosed beside the lens.
 
 #### Relief and lighting
 
-Per-texel rays project nearby simplified surface positions onto the original mesh along the
-local interpolated normal. Original vertex normals and original-mesh shadow rays prepare the
-modeled lighting. The 150 m search limit is a projection cutoff; fallback texels retain the
-coarse normal.
+Per-texel rays project nearby simplified surface positions onto the original mesh
+along the local interpolated normal. Original vertex normals and original-mesh
+shadow rays prepare the modeled lighting. The 150 m search limit is a projection
+cutoff; fallback texels retain the coarse normal.
 
-Reported lighting raster counts include triangle padding, not only visible surface samples.
-Shadows use the shared epoch and arbitrary rotation phase. In Shape model, Shadows off uses
-three authored fill lights to inspect the shape.
+Reported lighting raster counts include triangle padding, not only visible surface
+samples. Shadows use the shared epoch and arbitrary rotation phase. In Shape
+model, Shadows off uses three authored fill lights to inspect the shape.
 
 #### Runtime
 
-1,000 native `u` triangles. Geometry, atlas pixels, light/shadow computation and transforms are
-prepared. Runtime switches prepared resources through the existing object contract.
+1,000 native `u` triangles. Geometry, atlas pixels, light/shadow computation and
+transforms are prepared. Runtime switches prepared resources through the existing
+object contract. No tails or dust simulation are included.
 
-No tails or dust simulation are included.
+The checked context thumbnail is reproducible with the manifest's
+`radial-snapshot.mjs` recipe and the same prepared faces. Preparation checks its
+exact bytes. Original photographs and browser images can be compared visually,
+but their camera poses, dates and optical models differ.
 
-The checked context thumbnail is reproducible with the manifest's `radial-snapshot.mjs` recipe
-and the same prepared faces. Preparation checks its exact bytes. Original photographs and
-browser images can be compared visually, but their camera poses, dates and optical models
-differ.
-
-They cannot establish a pixel-by-pixel match.
-
-The OSIRIS thumbnail samples the same normalized observation on the same retained mesh, viewed
-toward its acquisition camera. Its dedicated flat minimap withholds ambiguous radial
-intersections; runtime never uses that map to choose a surface sheet. [OSIRIS
-provenance](source/reference/osiris-georeference.json) records the manual hashes, quality-bit
-interpretation and correction limits.
-
-The [initial photographic trial](../../../docs/comets/67P-OSIRIS-TRIAL.md) retains its original
-unnormalized camera comparison and distinct scope.
+The OSIRIS thumbnail samples the same normalized observation on the same retained
+mesh, viewed toward its acquisition camera. Its dedicated flat minimap withholds
+ambiguous radial intersections; runtime never uses that map to choose a surface
+sheet. [OSIRIS provenance](source/reference/osiris-georeference.json) records the
+manual hashes, quality-bit interpretation and correction limits.
 
 #### September registration results
 
-Maximum errors on source pixels withheld from camera fitting were 0.00190 and 0.00161 pixels.
+The retired six-image mosaic included September 13 and 20, 2014 exposures. Maximum
+errors on source pixels withheld from camera fitting were 0.00190 and 0.00161
+pixels. Their original [September 13](source/reference/n20140913-200612-geo.lbl)
+and [September 20](source/reference/n20140920-133916-geo.lbl) labels remain available.
 [Numerical results](../../../docs/comets/evidence/surface-imagery-qualification.json).
-
-The [September 13](source/reference/n20140913-200612-geo.lbl) and [September
-20](source/reference/n20140920-133916-geo.lbl) labels contain the observation dates used to
-identify the manifest disagreement above.
 
 #### Earlier runs
 
-[First integration](../../../docs/comets/67P-OSIRIS-INTEGRATION.md), [four-image
-mosaic](../../../docs/comets/67P-OSIRIS-COVERAGE.md) and [original
-tests](../../../docs/comets/QUALIFICATION.md) retain their earlier versions and results.
+The [six-image report](../../../docs/comets/SURFACE-IMAGERY.md) recorded coverage
+rising from 56.04% to 56.25%; the September pair supplied an estimated 1.76% of the
+displayed area. At application commit [87ddd9680f](https://github.com/layoutit/cssEarth/commit/87ddd9680f76082eedd9915e86bda3253311b0f3),
+60 comet browser cases passed; the renderer suite had 367 passes and nine failures.
+[Browser results](../../../docs/comets/evidence/surface-imagery-browser.json) · [Conformance](../../../docs/comets/evidence/surface-imagery-conformance.json) · [Suite results](../../../docs/comets/evidence/surface-imagery-validation.json).
+
+That four-comet run downloaded 16 new source files and installed 167 runtime files;
+sizes and hashes matched, while older inputs were copied.
+[Restoration](../../../docs/comets/evidence/surface-imagery-source-restore.json) · [Installation](../../../docs/comets/evidence/surface-imagery-delivery.json).
+Its [matched comparisons](../../../docs/comets/SURFACE-IMAGERY.md#matched-visual-comparisons)
+include local-only screenshot links. Its Shadows test used a hidden input, so it
+did not prove a user could open Settings.
+
+The [initial photographic trial](../../../docs/comets/67P-OSIRIS-TRIAL.md) retains
+its original unnormalized camera comparison. [First integration](../../../docs/comets/67P-OSIRIS-INTEGRATION.md),
+[four-image mosaic](../../../docs/comets/67P-OSIRIS-COVERAGE.md) and [original tests](../../../docs/comets/QUALIFICATION.md)
+retain their earlier versions and results.
 
 </details>
 
@@ -232,6 +268,6 @@ registration method.
 | [MiARD albedo](https://www.miard.eu/homepage/publications/) | Catalog lists a 144 MB release; CORDIS specifies 625 nm. Direct HTTPS timed out, HTTP returned 503, and the Commission report mirror returned HDS-010 on 8 September 2026. | Unresolved: data, registration, coverage and reuse terms could not be inspected. |
 | MiARD SHAP8 | Publication route was not successfully retrieved during this survey. | Unresolved, not evidence that a product is unavailable. |
 | [NAVCAM, 20 July 2015](https://blogs.esa.int/rosetta/2015/07/28/cometwatch-20-july/) | Dated 1024×1024 display image, range 171 km, scale 14.5 m/pixel, visibly active nucleus. | Retained original observational reference, not a registered texture. |
-| [OSIRIS GEO, 5–6 August 2014](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/) | Public calibrated orange-filter radiance with corrected SHAP7 XYZ, angles and a separately matched L4 quality map. | Selected for the grayscale mosaic, later expanded with two September observations. Full source camera/quality checks and conservative surface correspondence precede texture transfer. |
+| [OSIRIS GEO, 5–6 August 2014](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/) | Public calibrated orange-filter radiance with corrected SHAP7 XYZ, angles and a separately matched L4 quality map. | Selected for the grayscale mosaic. The August images remain in the current eight-image selection; October–November 2015 images replaced the later September close-ups. Full source camera/quality checks and conservative surface correspondence precede texture transfer. |
 
 </details>

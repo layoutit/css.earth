@@ -26,20 +26,18 @@ test('the published package and explicit grouped carriers validate before DOM co
   expect(plan.facing?.length).toBe(2);
 });
 
-test('transport rejects missing or duplicated depth ownership and invalid separating planes', () => {
-  for (const mutate of [
-    (plan: typeof prepared) => { plan.depthPartitions.groups[0].root = plan.tree.scene; },
-    (plan: typeof prepared) => { plan.depthPartitions.groups[1] = plan.depthPartitions.groups[0]; },
-    (plan: typeof prepared) => { plan.depthPartitions.order = { group: 0 }; },
-    (plan: typeof prepared) => { plan.depthPartitions.order = { sequence: [] }; },
-    (plan: typeof prepared) => { plan.depthPartitions.order = { sequence: [{ group: 0 }, { group: 0 }] }; },
-    (plan: typeof prepared) => { plan.depthPartitions.order = { plane: [0,0,1,0], back: { group: 0 }, front: { group: 0 } }; },
-    (plan: typeof prepared) => { plan.depthPartitions.order.plane = [0,0,2,0]; },
-    (plan: typeof prepared) => { delete plan.depthPartitions; },
-  ]) {
-    const plan = structuredClone(prepared); mutate(plan);
-    expect(() => parsePreparedObjectRuntime(plan)).toThrow(/depth|facing/);
-  }
+test.each([
+  { name: 'scene root used as depth owner', mutate: (plan: typeof prepared) => { plan.depthPartitions.groups[0].root = plan.tree.scene; } },
+  { name: 'duplicated depth owner', mutate: (plan: typeof prepared) => { plan.depthPartitions.groups[1] = plan.depthPartitions.groups[0]; } },
+  { name: 'group omitted from depth order', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { group: 0 }; } },
+  { name: 'empty depth sequence', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { sequence: [] }; } },
+  { name: 'duplicated group in depth sequence', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { sequence: [{ group: 0 }, { group: 0 }] }; } },
+  { name: 'same group on both sides of separating plane', mutate: (plan: typeof prepared) => { plan.depthPartitions.order = { plane: [0,0,1,0], back: { group: 0 }, front: { group: 0 } }; } },
+  { name: 'non-unit separating plane', mutate: (plan: typeof prepared) => { plan.depthPartitions.order.plane = [0,0,2,0]; } },
+  { name: 'missing depth partitions', mutate: (plan: typeof prepared) => { delete plan.depthPartitions; } },
+])('transport rejects $name', ({ mutate }) => {
+  const plan = structuredClone(prepared); mutate(plan);
+  expect(() => parsePreparedObjectRuntime(plan)).toThrow(/depth|facing/);
 });
 
 test('fixed visibility sequences cover every retained carrier', () => {

@@ -245,7 +245,8 @@ The [missing-source receipt](missing-source-restoration.json) records the nine
 successful downloads and the changed Mars image. These checks used the recorded
 revision's existing restoration code and pins.
 
-The final index has **zero tracked files matching ignore rules**. All recovered
+At source-cleanup commit `89d1cb974`, the index had **zero tracked files matching
+ignore rules**. All recovered
 files were checked against their pins again after staging. An independent check
 covered all 10,780 required entries in 408 manifests: 9,162 have tracked files,
 1,617 have acquisition operations and one uses Earth's offline mosaic restore.
@@ -257,3 +258,33 @@ wrong hashes. Regenerated provenance for the four changed bodies retains
 
 These checks do not establish availability of every upstream service or rerun
 full body preparation, scientific qualification or browser comparisons.
+
+## Integration with the latest body sources
+
+The PR then integrated main at `e54f2aa4f696ec226793510276a7716448057c37`, which
+added Chariklo, Bienor and 67P's southern OSIRIS observations. The two new bodies
+use the same README layout. The shared source-authoring script now preserves
+those reviewed READMEs instead of recreating SOURCE files.
+
+The complete source check now covers **410 manifests and 10,825 required entries**:
+9,199 have tracked files, 1,625 have acquisition operations and one uses Earth's
+offline mosaic restore. Zero tracked paths match ignore rules; no source entry
+lacks both committed bytes and a restoration definition. These are availability
+checks of the repository structure, not fresh downloads of every input.
+
+The existing generators resolved Sun's merged metadata and rebuilt the minimap
+for all 410 registered bodies. Twelve focused provenance tests and five minimap
+tests passed against the integrated files.
+
+For 67P, all 16 active GEO/quality observation dates were checked against their
+own native labels. Eight October–November 2015 fields incorrectly repeated an
+August 2014 timestamp and were corrected. The source files and their byte/hash
+pins are unchanged. The regenerated provenance is marked `recovered` because
+this edit did not rerun preparation. Recipe and product identities and coverage
+are unchanged; the earlier prepared record and qualification reports remain in
+the integrated main revision.
+
+Final documentation checks: all 414 body accounts use README, and no body SOURCE,
+USAGE or EVIDENCE account remains. All 410 required-package checks and 3,432 local
+links in 483 changed Markdown files passed. The package check also rejected a
+missing README.

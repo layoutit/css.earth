@@ -1,0 +1,1568 @@
+{
+  "base": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
+  "integrationBase": "7ae81ba2d366ef20d1687a6eec51c2106be1e1b4",
+  "terrainSha256": "8aba261c2cd7e48af0461b79c36208d20d5155aa3de821bc46e3bd6c1a6660f8",
+  "triangles": 1000,
+  "geometryAndCameraUnchanged": true,
+  "transferLimitsUnchanged": true,
+  "diskGainLimitsUnchanged": true,
+  "sceneAndRendererCodeUnchanged": true,
+  "shadows": false,
+  "datasets": [
+    "model",
+    "osiris",
+    "albedo",
+    "slope",
+    "absorption",
+    "ice",
+    "regions",
+    "geology"
+  ],
+  "sourceManifestVerified": true,
+  "changedRuntimeAssets": [
+    {
+      "filename": "comet-67p-osiris-shadow@2x.webp",
+      "bytes": 1017980,
+      "sha256": "cc364c3f6c4b115283d4a0514e838a338a930d8f6d18df7bb73b7186c7469cac"
+    },
+    {
+      "filename": "comet-67p-osiris-surface@2x.webp",
+      "bytes": 1576412,
+      "sha256": "b7872713ac183adf5c6314ef3df6de6156c4cfe1d81bcef1c40afc982f3d02ab"
+    },
+    {
+      "filename": "comet-67p-osiris-thumbnail.webp",
+      "bytes": 1806,
+      "sha256": "594555977560fec0eb414cec884b8720ae8abb1d57e1abacacb565616a6394f5"
+    }
+  ],
+  "byteIdenticalRuntimeAssets": [
+    {
+      "filename": "comet-67p-absorption-legend.webp",
+      "bytes": 220,
+      "sha256": "7f6869cf781947a3360039e40e25b3a8d3f6f14460709001bfd814b183b02af3"
+    },
+    {
+      "filename": "comet-67p-absorption-shadow@2x.webp",
+      "bytes": 1947742,
+      "sha256": "cc6033875bd13cf594a7360fc8eef72f0c3a0ecae91dd83b3dcd95fe06f8bcab"
+    },
+    {
+      "filename": "comet-67p-absorption-surface@2x.webp",
+      "bytes": 1090616,
+      "sha256": "24948ea8f2c2e281b87fa355b57ac352dc9badbb779829a586b9fa680b82fa29"
+    },
+    {
+      "filename": "comet-67p-absorption-thumbnail.webp",
+      "bytes": 2518,
+      "sha256": "7f633b3cb3f67a65dce60aa82e8e1eec4c120ff867957df737c97fc12205b7cf"
+    },
+    {
+      "filename": "comet-67p-albedo-legend.webp",
+      "bytes": 208,
+      "sha256": "bf57462a321e2ca29ef669f03d2ef450673aaeeda32c6a7c0db2694eccab12f8"
+    },
+    {
+      "filename": "comet-67p-albedo-shadow@2x.webp",
+      "bytes": 1901474,
+      "sha256": "ccca3996ac7a0fbc4bbfa5f55e98c5996b6228c2c6c534fc3a8f474c9b8f4e45"
+    },
+    {
+      "filename": "comet-67p-albedo-surface@2x.webp",
+      "bytes": 1091110,
+      "sha256": "5b5a6210faab9ad3dc83cc4c763346731d358efd548e58950cfa20375664ef79"
+    },
+    {
+      "filename": "comet-67p-albedo-thumbnail.webp",
+      "bytes": 2504,
+      "sha256": "d9f3f88596e21e56f42703b55d60a787f8e906c57fe5b9e005e0f979bd5d2faf"
+    },
+    {
+      "filename": "comet-67p-directional-sun.webp",
+      "bytes": 4798,
+      "sha256": "b9883bdf6d7f74ca62b16180697f9bf96478c0b822ba7fc283bb5e1110baacce"
+    },
+    {
+      "filename": "comet-67p-directional-sun@2x.webp",
+      "bytes": 12530,
+      "sha256": "3216700a05a1b3cff0d902aacb63eb3a50991a413ba017439eed9d6211ffc940"
+    },
+    {
+      "filename": "comet-67p-geology-shadow@2x.webp",
+      "bytes": 927194,
+      "sha256": "11938d6063f9afda19e6e1b5cffaa38aef2af1e9a1a6e3613ff55dff27ea9f4c"
+    },
+    {
+      "filename": "comet-67p-geology-surface@2x.webp",
+      "bytes": 259986,
+      "sha256": "96e9aecc6881d76a13ef82869879409a6581ccb036c27ee892799a00e31e854b"
+    },
+    {
+      "filename": "comet-67p-geology-thumbnail.webp",
+      "bytes": 354,
+      "sha256": "7f6da551b6c08eb9b8ff71a5e9e232de366becde763a368a2e62f109fb8d004a"
+    },
+    {
+      "filename": "comet-67p-ice-legend.webp",
+      "bytes": 200,
+      "sha256": "4294d8248b9469a1d72002cc9ceed96741f206863c0b7166e82884741671f1b0"
+    },
+    {
+      "filename": "comet-67p-ice-shadow@2x.webp",
+      "bytes": 1367902,
+      "sha256": "c014cb6bbdbd403fe6f86d25e3a45bb41f5e7228ef921109bbe1ae6daa7f28f7"
+    },
+    {
+      "filename": "comet-67p-ice-surface@2x.webp",
+      "bytes": 437456,
+      "sha256": "51a5bccd098bcc3130476ae1f5f812ee0dd5e3a4f2a9f375888e0ffa34efb443"
+    },
+    {
+      "filename": "comet-67p-ice-thumbnail.webp",
+      "bytes": 2074,
+      "sha256": "98d19234952878261370c9d29cd8a9f764ca3c15ac4c6741448f20b8f79495ff"
+    },
+    {
+      "filename": "comet-67p-lighting.webp",
+      "bytes": 1050836,
+      "sha256": "20911cdc7b74629e1fc6b68a045aeae4a8435c2a7607d1ffaab94b73829f1e76"
+    },
+    {
+      "filename": "comet-67p-model-shadow@2x.webp",
+      "bytes": 171544,
+      "sha256": "9368010d005380bc36683db7082cde86cea18d8b6237218c3bbee20a24c94787"
+    },
+    {
+      "filename": "comet-67p-model-surface@2x.webp",
+      "bytes": 175838,
+      "sha256": "c3edf6545e061e2443564d1350869a3dee20435591ead1138cbcd2bfb3c332e0"
+    },
+    {
+      "filename": "comet-67p-model-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "72f6226f692921f3f9dd3a49250631234f64ef64995d7688732ee6b797b0e192"
+    },
+    {
+      "filename": "comet-67p-regions-shadow@2x.webp",
+      "bytes": 676690,
+      "sha256": "5987a7b302104a7b64c5f3eaab3829d3e2d8e1300bb6b35e5658f6a557ecc425"
+    },
+    {
+      "filename": "comet-67p-regions-surface@2x.webp",
+      "bytes": 49548,
+      "sha256": "94aa45d4d0bae7a63d59a3cc6a0020b7eead3fd84ef846f06a5ee397f1b7c6c8"
+    },
+    {
+      "filename": "comet-67p-regions-thumbnail.webp",
+      "bytes": 318,
+      "sha256": "38ce6e71ea970288a2bb8f933e58f6aec5d5cd01789f6874e8041b6e6d9a1303"
+    },
+    {
+      "filename": "comet-67p-slope-legend.webp",
+      "bytes": 240,
+      "sha256": "09eb8e6b705d3e829685e2bd68d7e2c3845c7da879e3710bc289ba0d138cf262"
+    },
+    {
+      "filename": "comet-67p-slope-shadow@2x.webp",
+      "bytes": 1821822,
+      "sha256": "719ee38a4cf8fc24c280e6423e4506b913cdabafe878d2dc84753f97a567bb2d"
+    },
+    {
+      "filename": "comet-67p-slope-surface@2x.webp",
+      "bytes": 482840,
+      "sha256": "d50d96248cdb0c39d41f10f26645a69839c248b0300164c236642facd1fb2b24"
+    },
+    {
+      "filename": "comet-67p-slope-thumbnail.webp",
+      "bytes": 2528,
+      "sha256": "201268133eaad0249a2ea4ba60cc9f4fe893aad1ddd4c96b2b7544e64a61199f"
+    },
+    {
+      "filename": "comet-67p-starfield-back-standard.webp",
+      "bytes": 53856,
+      "sha256": "187879b52542af07701f1283bf28534cafefd9e277fdb5cf4353921a78de5ea9"
+    },
+    {
+      "filename": "comet-67p-starfield-back-standard@2x.webp",
+      "bytes": 171294,
+      "sha256": "d8098f2a463c947205f3c4f0e687899c7cae869c87147a3ea595670d16933ba0"
+    },
+    {
+      "filename": "comet-67p-starfield-back.webp",
+      "bytes": 210188,
+      "sha256": "3363aba5dfa1cd3c84c349c3fbe845861063edf0cca1ebcaf39bf97d0d3000c7"
+    },
+    {
+      "filename": "comet-67p-starfield-back@2x.webp",
+      "bytes": 598648,
+      "sha256": "4250e6623da19fb2d4c0ee38eda7f5e15f4f661c540ea28dec3276c37bd4b6bf"
+    },
+    {
+      "filename": "comet-67p-starfield-bottom-standard.webp",
+      "bytes": 63946,
+      "sha256": "9eab065fa3613054320b15551e001e44db72fc715c2ad6b56da8095166163f90"
+    },
+    {
+      "filename": "comet-67p-starfield-bottom-standard@2x.webp",
+      "bytes": 200212,
+      "sha256": "9831a0aa8c1fc6cbca18dbe2029f23434d26112bff08bbec7b5b1ba1d3cb3687"
+    },
+    {
+      "filename": "comet-67p-starfield-bottom.webp",
+      "bytes": 232844,
+      "sha256": "26c0b09dcf44378fe19fc76d62bf38c02996bc965320a309b08b52ae031236b8"
+    },
+    {
+      "filename": "comet-67p-starfield-bottom@2x.webp",
+      "bytes": 690706,
+      "sha256": "3981d337b544fedd9085941c8eef02c81ae4ca1593ca4ff418ce7d28d6f14d6a"
+    },
+    {
+      "filename": "comet-67p-starfield-front-standard.webp",
+      "bytes": 67226,
+      "sha256": "9386def2bbf647db8bcdcffb672c48ee8d8b482dca562ef516f60bfd4658929d"
+    },
+    {
+      "filename": "comet-67p-starfield-front-standard@2x.webp",
+      "bytes": 208208,
+      "sha256": "c05cda22756a1d04e3b068a14516184d6195c23e0b827fdc66c073ec1089c55d"
+    },
+    {
+      "filename": "comet-67p-starfield-front.webp",
+      "bytes": 251588,
+      "sha256": "908841560569b76b7181c864f46dc734b326100378fc13c2dd5cd132d82bae28"
+    },
+    {
+      "filename": "comet-67p-starfield-front@2x.webp",
+      "bytes": 687190,
+      "sha256": "efaa33980a61dfd04b248f395bd16d49b555585dfaf214cb296937c72458716d"
+    },
+    {
+      "filename": "comet-67p-starfield-left-standard.webp",
+      "bytes": 31200,
+      "sha256": "992c60b7e433c0e4ca09733c5cda4192632b92cf64e3f7d545755f4f014b6828"
+    },
+    {
+      "filename": "comet-67p-starfield-left-standard@2x.webp",
+      "bytes": 112118,
+      "sha256": "b27a1b56fbce33c80d3e70293d037408d24e14ac92ce56c578301e3ae72bf2aa"
+    },
+    {
+      "filename": "comet-67p-starfield-left.webp",
+      "bytes": 142736,
+      "sha256": "a65a3136c63eb75f28fe89476714d73d8dc2ab8c78ffc0cbc7b6849ed0ab7650"
+    },
+    {
+      "filename": "comet-67p-starfield-left@2x.webp",
+      "bytes": 413462,
+      "sha256": "3d423c4b1a65597e496c57af998eedf6550991499e496dee1414858157d7efe9"
+    },
+    {
+      "filename": "comet-67p-starfield-right-standard.webp",
+      "bytes": 23676,
+      "sha256": "67a22e4ac03e7ae6e927a58878bb203af687fbf2e4274db2de17178778b4d8c8"
+    },
+    {
+      "filename": "comet-67p-starfield-right-standard@2x.webp",
+      "bytes": 83896,
+      "sha256": "62501b1bfe6f043e8a51e340ecb70e523e336c79bac38e758deeb1059fe6bd79"
+    },
+    {
+      "filename": "comet-67p-starfield-right.webp",
+      "bytes": 116010,
+      "sha256": "db2db20d0959c2103c31052c0bd89bb813027037582cb68a5131b41408a987fa"
+    },
+    {
+      "filename": "comet-67p-starfield-right@2x.webp",
+      "bytes": 312496,
+      "sha256": "2d4a71689e4504d4cee52633957eb493f317e9e5be28ae586145dabb75d02a85"
+    },
+    {
+      "filename": "comet-67p-starfield-top-standard.webp",
+      "bytes": 64674,
+      "sha256": "05328472991a7f3f7730d2d531c757382b515e0cffdc5106ba82f89486430738"
+    },
+    {
+      "filename": "comet-67p-starfield-top-standard@2x.webp",
+      "bytes": 202204,
+      "sha256": "f8fcfab8aee2019a86757bff1566cdf411213a8236e021d3c20820cf49a858f3"
+    },
+    {
+      "filename": "comet-67p-starfield-top.webp",
+      "bytes": 235140,
+      "sha256": "f12fa3ce40eaf0fcbc3d14196716f681ee1a628e495accb6e2568e0451a3e310"
+    },
+    {
+      "filename": "comet-67p-starfield-top@2x.webp",
+      "bytes": 682934,
+      "sha256": "1126c92674e41a79262723d53eb9aad14d61867173ade406f16339989198c4e4"
+    },
+    {
+      "filename": "comet-67p-system-point.webp",
+      "bytes": 96,
+      "sha256": "dd7c504b5a406ac058922c6731b63a25dd7ed58e30b84a3c6c8deb68ba2ffa05"
+    }
+  ],
+  "observation": {
+    "camera": {
+      "matrix": [
+        [
+          -20043.057234297517,
+          -34913.59401025235,
+          34695.077614408554,
+          112849.72381339788
+        ],
+        [
+          34207.74779415046,
+          17034.561414009273,
+          36933.86910879046,
+          122193.6825278224
+        ],
+        [
+          0.6708231915249825,
+          -0.6884357255736134,
+          -0.27577617276728117,
+          131.6424027031901
+        ]
+      ],
+      "positionKm": [
+        -88.30201324307367,
+        90.45207181442312,
+        36.7578046009994
+      ],
+      "fitPixels": 10011,
+      "holdoutPixels": 1781834,
+      "maximumResidualPixels": 0.0023821706176153905,
+      "rmsResidualPixels": 0.0010468804589234282
+    },
+    "frames": [
+      {
+        "id": "aug05-1944",
+        "startTime": "2014-08-05T19:44:22.918",
+        "filter": "FFP-Vis_Orange",
+        "camera": {
+          "matrix": [
+            [
+              -20043.057234297517,
+              -34913.59401025235,
+              34695.077614408554,
+              112849.72381339788
+            ],
+            [
+              34207.74779415046,
+              17034.561414009273,
+              36933.86910879046,
+              122193.6825278224
+            ],
+            [
+              0.6708231915249825,
+              -0.6884357255736134,
+              -0.27577617276728117,
+              131.6424027031901
+            ]
+          ],
+          "positionKm": [
+            -88.30201324307367,
+            90.45207181442312,
+            36.7578046009994
+          ],
+          "fitPixels": 10011,
+          "holdoutPixels": 1781834,
+          "maximumResidualPixels": 0.0023821706176153905,
+          "rmsResidualPixels": 0.0010468804589234282
+        },
+        "sourceCoverage": {
+          "geometryPixels": 1791845,
+          "qualityRejectedPixels": 5285,
+          "photometryRejectedPixels": 460833,
+          "acceptedPixels": 1325727,
+          "acceptedLossyPixels": 1246823
+        },
+        "quality": {
+          "matchedRadiancePixels": 4194304,
+          "finiteSigmaPixels": 4194304,
+          "histogram": {
+            "0": 26917,
+            "1": 1712095,
+            "9": 2448398,
+            "129": 1668,
+            "137": 5226
+          },
+          "definition": "Bit 0 VALID required; bit 3 LOSSY explicitly permitted for visual use; all other flags rejected."
+        },
+        "radiometry": {
+          "solarDistanceAu": 3.6018238,
+          "solarFlux": 1.565,
+          "factor": 26.042367172103994,
+          "formula": "I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          },
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.000029844450073698045,
+          "high": 0.01740600341745181,
+          "units": "relative disk- and phase-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "osiris-20140805-geo",
+            "sha256": "de0884a0d83f972bb7f7025dfa784d2b153763dda035b43afa918c8023fe511b"
+          },
+          {
+            "id": "osiris-20140805-quality",
+            "sha256": "e7d60cefabbc04c08c90caf0d281a3c65746f8f08c016e73e93287b0087102b8"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "aug05-2344",
+        "startTime": "2014-08-05T23:44:24.891",
+        "filter": "FFP-Vis_Orange",
+        "camera": {
+          "matrix": [
+            [
+              -25476.64521275315,
+              29851.870215629624,
+              35836.147898204596,
+              103806.81059573147
+            ],
+            [
+              3413.6410902926877,
+              -39515.94094969268,
+              35373.52124619357,
+              113780.93229596267
+            ],
+            [
+              -0.8828829493768556,
+              -0.36591799684284426,
+              -0.2943156762494053,
+              122.78327064950393
+            ]
+          ],
+          "positionKm": [
+            108.23447096516331,
+            44.977269965739715,
+            36.582859966621825
+          ],
+          "fitPixels": 10265,
+          "holdoutPixels": 1828725,
+          "maximumResidualPixels": 0.0017366666179933151,
+          "rmsResidualPixels": 0.0007474481763906565
+        },
+        "sourceCoverage": {
+          "geometryPixels": 1838990,
+          "qualityRejectedPixels": 5556,
+          "photometryRejectedPixels": 314443,
+          "acceptedPixels": 1518991,
+          "acceptedLossyPixels": 1459581
+        },
+        "quality": {
+          "matchedRadiancePixels": 4194304,
+          "finiteSigmaPixels": 4194304,
+          "histogram": {
+            "0": 26917,
+            "1": 1464761,
+            "9": 2695732,
+            "129": 1668,
+            "137": 5226
+          },
+          "definition": "Bit 0 VALID required; bit 3 LOSSY explicitly permitted for visual use; all other flags rejected."
+        },
+        "radiometry": {
+          "solarDistanceAu": 3.6008759,
+          "solarFlux": 1.565,
+          "factor": 26.028661720124067,
+          "formula": "I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          },
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.0000014746074043937627,
+          "high": 0.014797261145588075,
+          "units": "relative disk- and phase-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "osiris-20140805-2344-geo",
+            "sha256": "2cbe1a4cef9576331eb52f387e1d2b72897f2605b41f35b579481e41fc557ed1"
+          },
+          {
+            "id": "osiris-20140805-2344-quality",
+            "sha256": "92f13a95c7d56f0ee5a4eb62bdb8d8e8a60a5435e5d5cbae9a6c4726318cd239"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "aug06-0244",
+        "startTime": "2014-08-06T02:44:24.890",
+        "filter": "FFP-Vis_Orange",
+        "camera": {
+          "matrix": [
+            [
+              25500.0553185094,
+              29027.396403679155,
+              36490.81439731708,
+              97572.7031438084
+            ],
+            [
+              -39742.36050516145,
+              -8194.460089746277,
+              34319.71491932822,
+              107920.42160238147
+            ],
+            [
+              -0.4637369560652445,
+              0.8305056188535442,
+              -0.30855866967569245,
+              116.63154318872299
+            ]
+          ],
+          "positionKm": [
+            54.10828008982236,
+            -96.68765499800313,
+            36.42708644077996
+          ],
+          "fitPixels": 13974,
+          "holdoutPixels": 2487843,
+          "maximumResidualPixels": 0.0018206471521182129,
+          "rmsResidualPixels": 0.0007848228350269586
+        },
+        "sourceCoverage": {
+          "geometryPixels": 2501817,
+          "qualityRejectedPixels": 12032,
+          "photometryRejectedPixels": 536074,
+          "acceptedPixels": 1953711,
+          "acceptedLossyPixels": 1944794
+        },
+        "quality": {
+          "matchedRadiancePixels": 4194304,
+          "finiteSigmaPixels": 4194304,
+          "histogram": {
+            "0": 26917,
+            "1": 978465,
+            "9": 3182028,
+            "129": 171,
+            "137": 6723
+          },
+          "definition": "Bit 0 VALID required; bit 3 LOSSY explicitly permitted for visual use; all other flags rejected."
+        },
+        "radiometry": {
+          "solarDistanceAu": 3.6001648,
+          "solarFlux": 1.565,
+          "factor": 26.018382469025816,
+          "formula": "I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          },
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.00004385964207625242,
+          "high": 0.01562461947783214,
+          "units": "relative disk- and phase-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "osiris-20140806-0244-geo",
+            "sha256": "c431756b48ec0e00392be8a88d9847a33ec35121c4ca5139edc72ac5a2223d39"
+          },
+          {
+            "id": "osiris-20140806-0244-quality",
+            "sha256": "9835bd612a76017a15bcaa815fda197126bf72b3f3918ccd2af0981572b1868a"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "aug06-0520",
+        "startTime": "2014-08-06T05:20:22.894",
+        "filter": "FFP-Vis_Orange",
+        "camera": {
+          "matrix": [
+            [
+              35458.75946770669,
+              -14026.674437148988,
+              37018.30013930533,
+              102926.40420964774
+            ],
+            [
+              -20576.657106496037,
+              35906.17599536841,
+              33343.63874472072,
+              108620.0046924755
+            ],
+            [
+              0.6412532101001902,
+              0.696105453600478,
+              -0.32284906381136413,
+              111.7763492577033
+            ]
+          ],
+          "positionKm": [
+            -71.58951221291929,
+            -77.7799179738202,
+            36.321368013442495
+          ],
+          "fitPixels": 11808,
+          "holdoutPixels": 2100805,
+          "maximumResidualPixels": 0.002413140803031524,
+          "rmsResidualPixels": 0.0010547486301268434
+        },
+        "sourceCoverage": {
+          "geometryPixels": 2112613,
+          "qualityRejectedPixels": 5230,
+          "photometryRejectedPixels": 684013,
+          "acceptedPixels": 1423370,
+          "acceptedLossyPixels": 1407723
+        },
+        "quality": {
+          "matchedRadiancePixels": 4194304,
+          "finiteSigmaPixels": 4194304,
+          "histogram": {
+            "0": 26917,
+            "1": 1217245,
+            "9": 2943248,
+            "129": 171,
+            "137": 6723
+          },
+          "definition": "Bit 0 VALID required; bit 3 LOSSY explicitly permitted for visual use; all other flags rejected."
+        },
+        "radiometry": {
+          "solarDistanceAu": 3.5995486,
+          "solarFlux": 1.565,
+          "factor": 26.009476679366912,
+          "formula": "I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          },
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.0000049210545096054425,
+          "high": 0.015709430514322657,
+          "units": "relative disk- and phase-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "osiris-20140806-0520-geo",
+            "sha256": "0552334b0799c77a0bd9d79a953459e1c28211ef7ff2bb333ef0d6be29d30326"
+          },
+          {
+            "id": "osiris-20140806-0520-quality",
+            "sha256": "64fb11ae63cb2e3d7f96e2be63cd9ceae315ae71e4d94bc40c85df3d3fe3d4ce"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "n20151026-125938",
+        "startTime": "2015-10-26T13:00:58.813",
+        "filter": "FFP-Vis_Orange",
+        "camera": {
+          "matrix": [
+            [
+              32262.147951666146,
+              12636.344688209869,
+              40298.752260274574,
+              365238.9803078716
+            ],
+            [
+              40559.514558558716,
+              4923.710508626278,
+              -33988.544204109145,
+              208398.16543262074
+            ],
+            [
+              0.2487613472108013,
+              -0.9601622658371259,
+              0.12730363465503808,
+              312.7443557983423
+            ]
+          ],
+          "positionKm": [
+            -76.66630069323682,
+            300.30832268036033,
+            -41.85288198675944
+          ],
+          "fitPixels": 1938,
+          "holdoutPixels": 346108,
+          "maximumResidualPixels": 0.0013115601365158238,
+          "rmsResidualPixels": 0.00042893457184924126
+        },
+        "sourceCoverage": {
+          "geometryPixels": 348046,
+          "qualityRejectedPixels": 1782,
+          "photometryRejectedPixels": 130177,
+          "acceptedPixels": 216087,
+          "acceptedLossyPixels": 0
+        },
+        "quality": {
+          "matchedRadiancePixels": 4194304,
+          "finiteSigmaPixels": 4194304,
+          "histogram": {
+            "0": 26917,
+            "1": 4160493,
+            "129": 6894
+          },
+          "definition": "Bit 0 VALID required; bit 3 LOSSY explicitly permitted for visual use; all other flags rejected."
+        },
+        "radiometry": {
+          "solarDistanceAu": 1.5297966,
+          "solarFlux": 1.565,
+          "factor": 4.69789075586388,
+          "formula": "I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          },
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.00007787211488938506,
+          "high": 0.01699064123151956,
+          "units": "relative disk- and phase-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "n20151026-125938-path",
+            "sha256": "86e92509e8413eb74ab39fd5d557dad8c9f4e8a5b5c982dc13c194a79a69749e"
+          },
+          {
+            "id": "n20151026-125938-qualityPath",
+            "sha256": "81a4d0d4cb6240d7a065e0c1f55eb7233412c56c77951f9ea4186eb4f426fc3c"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "n20151031-234514",
+        "startTime": "2015-10-31T23:46:34.951",
+        "filter": "FFP-Vis_Orange",
+        "camera": {
+          "matrix": [
+            [
+              -45610.40995778721,
+              -26308.36968724575,
+              7203.785930211699,
+              260641.54205175012
+            ],
+            [
+              -27129.398668147238,
+              45255.59991422952,
+              -6347.195327604269,
+              291214.2136111615
+            ],
+            [
+              0.029842685632247845,
+              0.17869254456551278,
+              0.9834522808102877,
+              288.8513187415647
+            ]
+          ],
+          "positionKm": [
+            -9.2551134349522,
+            -51.816850762391326,
+            -284.015647568174
+          ],
+          "fitPixels": 2186,
+          "holdoutPixels": 389106,
+          "maximumResidualPixels": 0.0006956584578673325,
+          "rmsResidualPixels": 0.00028410833662723437
+        },
+        "sourceCoverage": {
+          "geometryPixels": 391292,
+          "qualityRejectedPixels": 1631,
+          "photometryRejectedPixels": 131395,
+          "acceptedPixels": 258266,
+          "acceptedLossyPixels": 258266
+        },
+        "quality": {
+          "matchedRadiancePixels": 4194304,
+          "finiteSigmaPixels": 4194304,
+          "histogram": {
+            "0": 26917,
+            "9": 4160493,
+            "137": 6894
+          },
+          "definition": "Bit 0 VALID required; bit 3 LOSSY explicitly permitted for visual use; all other flags rejected."
+        },
+        "radiometry": {
+          "solarDistanceAu": 1.5663041,
+          "solarFlux": 1.565,
+          "factor": 4.924789818778412,
+          "formula": "I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          },
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.00015816996787166982,
+          "high": 0.017766929744792374,
+          "units": "relative disk- and phase-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "n20151031-234514-path",
+            "sha256": "bd37d73e5f2b5f0ad5064a6975fe0bb8c7fb7b05b1b8cb8c0bd9528ba573a7ef"
+          },
+          {
+            "id": "n20151031-234514-qualityPath",
+            "sha256": "ea5e6339128039ecf5af0665e10ac03ac89a1724a173748ac5a0b186d2fde000"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "n20151104-112633",
+        "startTime": "2015-11-04T11:27:53.983",
+        "filter": "FFP-Vis_Orange",
+        "camera": {
+          "matrix": [
+            [
+              7915.065517617477,
+              -42235.45231960948,
+              -31273.506267723093,
+              272030.55793749256
+            ],
+            [
+              -51561.97300401343,
+              -151.35851705636676,
+              -12879.43347424855,
+              50614.07096719771
+            ],
+            [
+              -0.20690476576271388,
+              -0.6221069905127559,
+              0.7550982123272696,
+              255.87436787241484
+            ]
+          ],
+          "positionKm": [
+            49.00525390541657,
+            159.37113670922218,
+            -194.13242763137075
+          ],
+          "fitPixels": 2089,
+          "holdoutPixels": 372059,
+          "maximumResidualPixels": 0.0023264652118532153,
+          "rmsResidualPixels": 0.0009606767788416159
+        },
+        "sourceCoverage": {
+          "geometryPixels": 374148,
+          "qualityRejectedPixels": 1960,
+          "photometryRejectedPixels": 77387,
+          "acceptedPixels": 294801,
+          "acceptedLossyPixels": 294801
+        },
+        "quality": {
+          "matchedRadiancePixels": 4194304,
+          "finiteSigmaPixels": 4194304,
+          "histogram": {
+            "0": 26917,
+            "9": 4160492,
+            "77": 1,
+            "137": 6894
+          },
+          "definition": "Bit 0 VALID required; bit 3 LOSSY explicitly permitted for visual use; all other flags rejected."
+        },
+        "radiometry": {
+          "solarDistanceAu": 1.5902487,
+          "solarFlux": 1.565,
+          "factor": 5.07651447966054,
+          "formula": "I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          },
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.00008746988296431176,
+          "high": 0.017423532811103055,
+          "units": "relative disk- and phase-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "n20151104-112633-path",
+            "sha256": "c52efdf3d8ac954f2eee09eef415fd216b715ef3fd6ef327ae965fcccf72b0ff"
+          },
+          {
+            "id": "n20151104-112633-qualityPath",
+            "sha256": "1dc00a7acb5efafb93e822670794c75a77738dd007f1936e87f0cc705e4855cb"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      },
+      {
+        "id": "n20151115-050650",
+        "startTime": "2015-11-15T05:08:11.274",
+        "filter": "FFP-Vis_Orange",
+        "camera": {
+          "matrix": [
+            [
+              38377.09213468614,
+              3680.293373478808,
+              36578.614081752356,
+              163590.68619958035
+            ],
+            [
+              34119.37522663913,
+              16179.665853858307,
+              -37395.89380445639,
+              319013.5556882325
+            ],
+            [
+              0.2845676817561179,
+              -0.9424018646791775,
+              -0.17578384439179207,
+              157.54198847684776
+            ]
+          ],
+          "positionKm": [
+            -46.733094849740105,
+            147.51624922197306,
+            29.716449170721905
+          ],
+          "fitPixels": 3873,
+          "holdoutPixels": 690161,
+          "maximumResidualPixels": 0.001389060936477135,
+          "rmsResidualPixels": 0.0005857792264430534
+        },
+        "sourceCoverage": {
+          "geometryPixels": 694034,
+          "qualityRejectedPixels": 2139,
+          "photometryRejectedPixels": 270546,
+          "acceptedPixels": 421349,
+          "acceptedLossyPixels": 421349
+        },
+        "quality": {
+          "matchedRadiancePixels": 4194304,
+          "finiteSigmaPixels": 4194304,
+          "histogram": {
+            "0": 26917,
+            "9": 4160492,
+            "77": 1,
+            "137": 6894
+          },
+          "definition": "Bit 0 VALID required; bit 3 LOSSY explicitly permitted for visual use; all other flags rejected."
+        },
+        "radiometry": {
+          "solarDistanceAu": 1.6663355,
+          "solarFlux": 1.565,
+          "factor": 5.573916060888611,
+          "formula": "I/F = pi * solarDistanceAu^2 * radiance / solarFlux; OSIRIS calibration HISTORY."
+        },
+        "photometry": {
+          "model": "lommel-seeliger",
+          "referenceIncidenceDegrees": 0,
+          "referenceEmissionDegrees": 0,
+          "maximumIncidenceDegrees": 80,
+          "maximumEmissionDegrees": 80,
+          "maximumGain": 3,
+          "phaseCorrection": {
+            "model": "hg-shadow-hiding",
+            "asymmetry": -0.37,
+            "amplitude": 2.5,
+            "width": 0.079,
+            "referenceDegrees": 50,
+            "minimumDegrees": 40,
+            "maximumDegrees": 70,
+            "maximumGain": 1.5
+          },
+          "formula": "D=2*cos(i)/(cos(i)+cos(e)); linear radiance divided by D before interpolation; reference D(0,0)=1.",
+          "applicationLighting": "Uniform flood displays normalized imagery; Shadows applies the existing fixed-epoch Sun bank.",
+          "limitations": "Approximate single-scattering phase normalization; no Hapke roughness, multiple-scattering correction or cast-shadow recovery. Relative display brightness, not measured albedo."
+        },
+        "display": {
+          "percentiles": [
+            1,
+            99
+          ],
+          "low": 0.00006621334601804027,
+          "high": 0.017823117094911183,
+          "units": "relative disk- and phase-normalized I/F; linear grayscale display"
+        },
+        "sourceIds": [
+          {
+            "id": "n20151115-050650-path",
+            "sha256": "a552e2d9e692b68398bb5c18cc18fab8ff7172ac03b52cdd79fd15e0e2ce95a8"
+          },
+          {
+            "id": "n20151115-050650-qualityPath",
+            "sha256": "187e591b1898727928166a180f62e1df7af26770d641221703123604cf628a7f"
+          }
+        ],
+        "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D."
+      }
+    ],
+    "sourceIds": [
+      {
+        "id": "osiris-20140805-geo",
+        "sha256": "de0884a0d83f972bb7f7025dfa784d2b153763dda035b43afa918c8023fe511b"
+      },
+      {
+        "id": "osiris-20140805-quality",
+        "sha256": "e7d60cefabbc04c08c90caf0d281a3c65746f8f08c016e73e93287b0087102b8"
+      },
+      {
+        "id": "osiris-20140805-2344-geo",
+        "sha256": "2cbe1a4cef9576331eb52f387e1d2b72897f2605b41f35b579481e41fc557ed1"
+      },
+      {
+        "id": "osiris-20140805-2344-quality",
+        "sha256": "92f13a95c7d56f0ee5a4eb62bdb8d8e8a60a5435e5d5cbae9a6c4726318cd239"
+      },
+      {
+        "id": "osiris-20140806-0244-geo",
+        "sha256": "c431756b48ec0e00392be8a88d9847a33ec35121c4ca5139edc72ac5a2223d39"
+      },
+      {
+        "id": "osiris-20140806-0244-quality",
+        "sha256": "9835bd612a76017a15bcaa815fda197126bf72b3f3918ccd2af0981572b1868a"
+      },
+      {
+        "id": "osiris-20140806-0520-geo",
+        "sha256": "0552334b0799c77a0bd9d79a953459e1c28211ef7ff2bb333ef0d6be29d30326"
+      },
+      {
+        "id": "osiris-20140806-0520-quality",
+        "sha256": "64fb11ae63cb2e3d7f96e2be63cd9ceae315ae71e4d94bc40c85df3d3fe3d4ce"
+      },
+      {
+        "id": "n20151026-125938-path",
+        "sha256": "86e92509e8413eb74ab39fd5d557dad8c9f4e8a5b5c982dc13c194a79a69749e"
+      },
+      {
+        "id": "n20151026-125938-qualityPath",
+        "sha256": "81a4d0d4cb6240d7a065e0c1f55eb7233412c56c77951f9ea4186eb4f426fc3c"
+      },
+      {
+        "id": "n20151031-234514-path",
+        "sha256": "bd37d73e5f2b5f0ad5064a6975fe0bb8c7fb7b05b1b8cb8c0bd9528ba573a7ef"
+      },
+      {
+        "id": "n20151031-234514-qualityPath",
+        "sha256": "ea5e6339128039ecf5af0665e10ac03ac89a1724a173748ac5a0b186d2fde000"
+      },
+      {
+        "id": "n20151104-112633-path",
+        "sha256": "c52efdf3d8ac954f2eee09eef415fd216b715ef3fd6ef327ae965fcccf72b0ff"
+      },
+      {
+        "id": "n20151104-112633-qualityPath",
+        "sha256": "1dc00a7acb5efafb93e822670794c75a77738dd007f1936e87f0cc705e4855cb"
+      },
+      {
+        "id": "n20151115-050650-path",
+        "sha256": "a552e2d9e692b68398bb5c18cc18fab8ff7172ac03b52cdd79fd15e0e2ce95a8"
+      },
+      {
+        "id": "n20151115-050650-qualityPath",
+        "sha256": "187e591b1898727928166a180f62e1df7af26770d641221703123604cf628a7f"
+      }
+    ],
+    "selection": "lowest-emission",
+    "levelMatching": {
+      "samplesPerTriangle": 64,
+      "minimumPairs": 128,
+      "maximumLogMad": 0.25,
+      "maximumGain": 1.35,
+      "maximumAngleDegrees": 65,
+      "gains": [
+        1,
+        0.9077700946100148,
+        0.9337843408458084,
+        0.9696035834404976,
+        1.1569169883221921,
+        1.0384813789493856,
+        1.0589859373425863,
+        1.036585847234201
+      ],
+      "pairs": [
+        {
+          "a": 0,
+          "b": 1,
+          "samples": 217,
+          "medianLogRatio": 0.03603789435146452,
+          "logMad": 0.11304663783383365,
+          "accepted": true,
+          "residualLogRatio": 0.13280202656148782
+        },
+        {
+          "a": 0,
+          "b": 2,
+          "samples": 14,
+          "medianLogRatio": -0.008481502136985966,
+          "logMad": 0.15510690746421535,
+          "accepted": false
+        },
+        {
+          "a": 0,
+          "b": 3,
+          "samples": 295,
+          "medianLogRatio": -0.09469410574784867,
+          "logMad": 0.09137675331481135,
+          "accepted": true,
+          "residualLogRatio": -0.06382613786652461
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "samples": 421,
+          "medianLogRatio": 0.09155944028625994,
+          "logMad": 0.219562242578547,
+          "accepted": true,
+          "residualLogRatio": -0.05419925800662441
+        },
+        {
+          "a": 0,
+          "b": 5,
+          "samples": 5,
+          "medianLogRatio": -5.513516939326927,
+          "logMad": 0.4545033420492768,
+          "accepted": false
+        },
+        {
+          "a": 0,
+          "b": 6,
+          "samples": 252,
+          "medianLogRatio": 0.048796654297827285,
+          "logMad": 0.2464165242102879,
+          "accepted": true,
+          "residualLogRatio": -0.008515133047802013
+        },
+        {
+          "a": 0,
+          "b": 7,
+          "samples": 518,
+          "medianLogRatio": 0.09593709596918563,
+          "logMad": 0.2471960257321658,
+          "accepted": true,
+          "residualLogRatio": 0.06000462235258899
+        },
+        {
+          "a": 1,
+          "b": 2,
+          "samples": 1254,
+          "medianLogRatio": 0.04949479777356386,
+          "logMad": 0.0970525831591604,
+          "accepted": true,
+          "residualLogRatio": 0.02124043143001192
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "samples": 32,
+          "medianLogRatio": 0.3433982868028973,
+          "logMad": 0.3205701931002546,
+          "accepted": false
+        },
+        {
+          "a": 1,
+          "b": 4,
+          "samples": 23,
+          "medianLogRatio": -0.3155770865207253,
+          "logMad": 1.4991765453266386,
+          "accepted": false
+        },
+        {
+          "a": 1,
+          "b": 5,
+          "samples": 0,
+          "medianLogRatio": null,
+          "logMad": null,
+          "accepted": false
+        },
+        {
+          "a": 1,
+          "b": 6,
+          "samples": 3,
+          "medianLogRatio": -5.22914198122531,
+          "logMad": 0.003158445113806252,
+          "accepted": false
+        },
+        {
+          "a": 1,
+          "b": 7,
+          "samples": 25,
+          "medianLogRatio": 0.4528521570507862,
+          "logMad": 0.7313030311020899,
+          "accepted": false
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "samples": 1549,
+          "medianLogRatio": 0.05836820802515393,
+          "logMad": 0.09587104805731357,
+          "accepted": true,
+          "residualLogRatio": 0.02072641004000663
+        },
+        {
+          "a": 2,
+          "b": 4,
+          "samples": 0,
+          "medianLogRatio": null,
+          "logMad": null,
+          "accepted": false
+        },
+        {
+          "a": 2,
+          "b": 5,
+          "samples": 2,
+          "medianLogRatio": 4.92612762750035,
+          "logMad": 0.324539583300532,
+          "accepted": false
+        },
+        {
+          "a": 2,
+          "b": 6,
+          "samples": 0,
+          "medianLogRatio": null,
+          "logMad": null,
+          "accepted": false
+        },
+        {
+          "a": 2,
+          "b": 7,
+          "samples": 0,
+          "medianLogRatio": null,
+          "logMad": null,
+          "accepted": false
+        },
+        {
+          "a": 3,
+          "b": 4,
+          "samples": 0,
+          "medianLogRatio": null,
+          "logMad": null,
+          "accepted": false
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "samples": 3,
+          "medianLogRatio": -5.655138788411538,
+          "logMad": 2.210187869578488,
+          "accepted": false
+        },
+        {
+          "a": 3,
+          "b": 6,
+          "samples": 1,
+          "medianLogRatio": 0.13586462401016508,
+          "logMad": 0,
+          "accepted": false
+        },
+        {
+          "a": 3,
+          "b": 7,
+          "samples": 0,
+          "medianLogRatio": null,
+          "logMad": null,
+          "accepted": false
+        },
+        {
+          "a": 4,
+          "b": 5,
+          "samples": 411,
+          "medianLogRatio": -0.10969270607172531,
+          "logMad": 0.11794805431138423,
+          "accepted": true,
+          "residualLogRatio": -0.0016934412341413005
+        },
+        {
+          "a": 4,
+          "b": 6,
+          "samples": 965,
+          "medianLogRatio": -0.0856559496837483,
+          "logMad": 0.18504922321531464,
+          "accepted": true,
+          "residualLogRatio": 0.0027909612635067457
+        },
+        {
+          "a": 4,
+          "b": 7,
+          "samples": 566,
+          "medianLogRatio": -0.1300773503154422,
+          "logMad": 0.15111368365731778,
+          "accepted": true,
+          "residualLogRatio": -0.020251125639154502
+        },
+        {
+          "a": 5,
+          "b": 6,
+          "samples": 1302,
+          "medianLogRatio": 0.019002846525154823,
+          "logMad": 0.10480248099828782,
+          "accepted": true,
+          "residualLogRatio": -0.0005495073651741386
+        },
+        {
+          "a": 5,
+          "b": 7,
+          "samples": 39,
+          "medianLogRatio": -0.028629703897228465,
+          "logMad": 0.15101391516090962,
+          "accepted": false
+        },
+        {
+          "a": 6,
+          "b": 7,
+          "samples": 765,
+          "medianLogRatio": -0.021756018892793338,
+          "logMad": 0.20712413521401377,
+          "accepted": true,
+          "residualLogRatio": -0.00037670516376067664
+        }
+      ],
+      "referenceIndex": 0,
+      "interpretation": "Bounded relative display-level adjustment from robust overlaps; not a phase correction or recovered albedo.",
+      "sampledPoints": 64000
+    },
+    "display": {
+      "percentiles": [
+        1,
+        99
+      ],
+      "low": 0.000029844450073698045,
+      "high": 0.01740600341745181,
+      "units": "relative disk- and phase-normalized I/F; linear grayscale display",
+      "referenceFrame": "aug05-1944"
+    },
+    "previewPolicy": "Radial preview with ambiguous intersections withheld; retained triangle atlas uses closest original source point in 3D.",
+    "transfer": {
+      "interiorTexels": 1782240,
+      "counts": {
+        "no-qualified-observation": 543074,
+        "accepted": 1239166
+      },
+      "maximumSourceDistanceMeters": 49.99402446364085,
+      "maximumPixelSeparationMeters": 19.999951076165814,
+      "maximumPhotometricGain": 4.2129117590219165,
+      "method": "Closest full-source triangle point; all bilinear observation contributors checked before interpolation; atlas bleed clamped to retained face.",
+      "sources": {
+        "n20151031-234514": 86995,
+        "aug06-0520": 190555,
+        "n20151104-112633": 55806,
+        "aug06-0244": 308389,
+        "aug05-1944": 169116,
+        "n20151026-125938": 127390,
+        "n20151115-050650": 36410,
+        "aug05-2344": 264505
+      }
+    },
+    "sampleSources": {
+      "file": "osiris-source-index.json",
+      "bytes": 523045,
+      "sha256": "26b74a4a1169b3ef84764d2a3c50fcf78512d1bdd5c022d05312e04a9e4254d8",
+      "width": 1024,
+      "height": 4032,
+      "includesAtlasBleed": true,
+      "codes": {
+        "0": "no-qualified-observation",
+        "1": "aug05-1944",
+        "2": "aug05-2344",
+        "3": "aug06-0244",
+        "4": "aug06-0520",
+        "5": "n20151026-125938",
+        "6": "n20151031-234514",
+        "7": "n20151104-112633",
+        "8": "n20151115-050650"
+      }
+    }
+  },
+  "lighting": {
+    "model": "source-mesh-normal-and-cast-shadow",
+    "samples": 4096000,
+    "projected": 4079940,
+    "fallback": 16060,
+    "castShadow": 271723,
+    "maximumProjectionMeters": 149.99688017636439,
+    "reusedLightingSamples": 28672000,
+    "recipe": {
+      "maximumDistanceMeters": 150,
+      "rayOffsetMeters": 0.25,
+      "ambient": 0.16,
+      "diffuse": 0.84,
+      "floodLights": [
+        {
+          "direction": [
+            0,
+            0,
+            1
+          ],
+          "weight": 0.36
+        },
+        {
+          "direction": [
+            0,
+            1,
+            0
+          ],
+          "weight": 0.24
+        },
+        {
+          "direction": [
+            1,
+            0,
+            0
+          ],
+          "weight": 0.24
+        }
+      ]
+    }
+  }
+}
