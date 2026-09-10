@@ -16,6 +16,8 @@ const geometry: Guard<PagedGeometryParameters> = object({BODY_LATITUDE_SEGMENTS:
 const relief = object({referenceRadiusMeters: number, heightToMeters: optional(number), lightDirection: array(number), ambient: number});
 const advisory = object({status: string, date: string});
 const enso = {date: string, baseline: string, checked: string, advisory};
+const colorByte: Guard<number> = (value): value is number => number(value) && Number.isInteger(value) && value >= 0 && value <= 255;
+const opacity: Guard<number> = (value): value is number => number(value) && value >= 0 && value <= 1;
 const scientific = union(
   object({kind: literal('gibs-mur-imagery'), ...enso}),
   object({kind: literal('coraltemp-anomaly'), ...enso, filename: string, minimum: number, maximum: number, palette: array(array(number)), missingColor: array(number)}),
@@ -29,6 +31,7 @@ const assetConfiguration: Guard<PagedAssetConfiguration & PagedRasterConfigurati
   interiorRadiusKey: string, interiorSchema: string, interiorPath: string, equatorialRadiusKm: number, polarRadiusKm: number, geometry, camera,
   atlas: object({pageSize: number, density: number, gutter: number, sourceWidth: number}),
   material: object({tileSize: number, presentationSize: number, framesPerShard: number, frameCount: number, discRadius: number, worldLight: tuple(number, number, number), solarTint: string,
+    shadowlessOverlay: optional(object({color: tuple(colorByte, colorByte, colorByte), opacity})),
     illumination: object({frameCount: number, minimumLightViewZ: number, maximumLightViewZ: number, baseLightAzimuthDegrees: number})}),
   atmosphere: object({sourcePath: string, responsePath: string, sourceId: string, maximumOpacityKey: string}),
   surface: object({width: number, height: number, quality: number, clouds: object({path: string, maximumAlpha: number, threshold: number, scale: number, color: tuple(number, number, number)}),

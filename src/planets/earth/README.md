@@ -22,6 +22,14 @@ geographic paging, city search or the noise lens.
 
 The linked reports identify their tested sources, prepared files and limitations.
 
+- **Softer lighting, 10 September 2026:** the applied Shadows-off view matches
+  the selected 25% white-overlay preview exactly. Checked in Chrome at DPR 1/2,
+  with directional lighting and the surface, clouds, elevation, night-light and
+  ENSO views. TypeScript, preparation build and 35 focused checks passed.
+  [Verification and limits](evidence/soft-light-overlay.json) ·
+  [Before](evidence/soft-light-before.png) · [After](evidence/soft-light-after.png) ·
+  [Absolute difference](evidence/soft-light-diff.png).
+
 - **Surface:** source restoration, 179-file image installation and browser checks.
   The report records an ownership-test failure and excludes full-suite success.
   [Surface verification results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md).
@@ -70,6 +78,11 @@ archival NASA cloud TIFF using the existing alpha recipe. The sources are not si
 observations or live weather.
 
 One retained surface displays the selected image bank.
+
+With Shadows off, Earth uses a white limb overlay at one quarter of the original
+shading alpha. This display adjustment brightens the edge without modifying the
+source imagery. The directional Shadows bank and atmosphere are unchanged.
+Other bodies retain their existing lighting.
 
 The [cloud-free comparison](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/earth/cloud-free-default/README.md) considered
 December with clouds, cloud-free December and cloud-free July; July was selected for clearer

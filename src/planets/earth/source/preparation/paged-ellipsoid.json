@@ -75,7 +75,11 @@
       -0.385595,
       0.264864
     ],
-    "solarTint": "#fff1ea"
+    "solarTint": "#fff1ea",
+    "shadowlessOverlay": {
+      "color": [255, 255, 255],
+      "opacity": 0.25
+    }
   },
   "atmosphere": {
     "sourcePath": "openspace/earth-atmosphere.asset",
