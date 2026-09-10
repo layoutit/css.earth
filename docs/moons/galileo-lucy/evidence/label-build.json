@@ -1,0 +1,79 @@
+{
+  "rendererRevision": "97c30ed44",
+  "browserReviewRevision": "ddb4c6cca",
+  "focusedRendererTests": {
+    "tests": 88,
+    "passed": 88,
+    "command": "pnpm --filter @cssearth/engine exec vitest run --root ../../src/renderers/css universe/prepared-world-context.test.ts --maxWorkers 1 --minWorkers 1"
+  },
+  "checks": [
+    {
+      "name": "label-renderer-build",
+      "command": [
+        "pnpm",
+        "build:renderer"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "label-static-build",
+      "command": [
+        "pnpm",
+        "exec",
+        "astro",
+        "build"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "label-assemble-dactyl",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "dactyl"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "label-assemble-dinkinesh",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "dinkinesh"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "label-assemble-selam",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "selam"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "label-assemble-ida",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "ida"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "label-assemble-sun",
+      "command": [
+        "node",
+        "tools/objects/dist/operations.js",
+        "assemble",
+        "sun"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "revision": "ddb4c6ccaf424a7396bfd378f72e50352d7de1ca",
+  "browser": "152.0.7977.84",
+  "origin": "http://127.0.0.1:4259",
+  "mode": "production static build",
+  "reports": [
+    {
+      "id": "dactyl",
+      "selector": "Shape\nGalileo",
+      "ready": true,
+      "scenes": 1,
+      "shadows": [
+        false,
+        true
+      ]
+    },
+    {
+      "id": "dactyl",
+      "orbitCue": {
+        "placement": "approximate",
+        "label": "Dactyl (approx)",
+        "labelOpacity": "0.190764",
+        "indicatorRadius": "50%",
+        "gapColors": [
+          "rgba(0, 0, 0, 0)"
+        ],
+        "dashColors": [
+          "rgb(223, 223, 223)"
+        ]
+      },
+      "url": "http://127.0.0.1:4259/dactyl/?v=MMZAiJDkp0XbR0FCxzNAAAAAP8SI-FulKKq_2B6ht62qbL-xAwREJsSjAAA"
+    },
+    {
+      "navigation": "dactyl → ida",
+      "ready": true,
+      "scenes": 1
+    },
+    {
+      "id": "dinkinesh",
+      "selector": "Shape\nModel",
+      "ready": true,
+      "scenes": 1,
+      "shadows": [
+        false,
+        true
+      ]
+    },
+    {
+      "id": "selam",
+      "selector": "Shape\nLucy",
+      "ready": true,
+      "scenes": 1,
+      "shadows": [
+        false,
+        true
+      ]
+    },
+    {
+      "id": "selam",
+      "orbitCue": {
+        "placement": "approximate",
+        "label": "Selam (approx)",
+        "labelOpacity": "0.195067",
+        "indicatorRadius": "50%",
+        "gapColors": [
+          "rgba(0, 0, 0, 0)"
+        ],
+        "dashColors": [
+          "rgb(223, 223, 223)"
+        ]
+      },
+      "url": "http://127.0.0.1:4259/selam/?v=MMZAUvhPR99dj0FCxzNAAAAAP8SI-FulKKq_2B6ht62qbL-xAwREJsSjAAA"
+    },
+    {
+      "navigation": "selam → dinkinesh",
+      "ready": true,
+      "scenes": 1
+    }
+  ],
+  "errors": []
+}
