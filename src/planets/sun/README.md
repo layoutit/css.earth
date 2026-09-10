@@ -17,7 +17,7 @@ They combine observations across one rotation, not one simultaneous view.
 
 No dated scientific, installation or browser run is cited here.
 [Unit tests](../../../tests/objects/unit/sun) and the
-[browser profile](../../../tests/objects/browser/sun/browser-profile.mjs) define checks;
+[browser profile](../../../tests/objects/browser/sun/browser-profile.mts) define checks;
 they are not passing results. No body tests were rerun for this documentation edit.
 
 The SN263 integration refreshes the prepared universe to 464 selectable bodies. The [integration receipt](https://github.com/layoutit/cssEarth/blob/bbfbf86b5c9b71fc56ef5e6b4759fd00af11d8ec/src/planets/asteroid-2001-sn263/evidence/main-integration.json) binds its registry, marker, minimap and world-context checks. Solar surface data is unchanged; these navigation checks do not establish new scientific or browser qualification of the Sun.

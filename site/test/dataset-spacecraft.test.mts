@@ -30,7 +30,7 @@ const positiveInteger = (value: unknown, label: string): number => {
 };
 const artworkLibrary = (value: unknown, emblem: boolean): readonly ArtworkEntry[] => {
   const library = explorationRecord(value);
-  const schema = emblem ? 'cssearth-spacecraft-emblems@1' : 'cssearth-spacecraft-render-library@1';
+  const schema = emblem ? 'cssearth-spacecraft-emblems@2' : 'cssearth-spacecraft-render-library@2';
   if (library.schema !== schema) throw new TypeError('Unsupported artwork library.');
   return explorationArray(library.entries, raw => {
     const image = explorationRecord(raw), source = explorationRecord(image.source);

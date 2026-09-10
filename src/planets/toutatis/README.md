@@ -10,7 +10,7 @@ Shape uses the shared no-imagery grid with Shadows disabled by default. Optional
 
 Meshoptimizer 1.2.0 simplifies the original connectivity to 800 triangles before texture preparation, with `ErrorAbsolute` and `RegularizeLight`, a 50 m error setting, no radial geometry replacement, and no removed opposite faces. The result is closed and consistently wound. The library estimate is 27.55 m, distinct from a geometric bound. Two-way area-stratified surface samples (8,192 per direction) give source-to-display mean 6.12 m, p95 16.57 m, maximum 33.31 m, and display-to-source mean 6.10 m, p95 16.55 m, maximum 40.50 m. These are sampled nearest-triangle distances, not exhaustive Hausdorff bounds or source measurement uncertainties. Native PolyCSS `u` triangles use 128 px raster cells and the established prepared lighting path.
 
-[Source test definitions](../../../tests/objects/unit/toutatis/source.test.mjs).
+[Source test definitions](../../../tests/objects/unit/toutatis/source.test.mts).
 
 ## Known problems
 
