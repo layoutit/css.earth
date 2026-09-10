@@ -112,3 +112,30 @@ prepared textures, rendering and artwork bytes are unchanged by this feature.
 Historical source records remain historical evidence at that revision; current
 preparation and browser results must be assessed at the feature revision that ran
 them.
+
+## Browser evidence
+
+At `c4c1523dedf63d2a3e635c829261d34413fcc3a9`, the
+[production browser report](../tests/evidence/sources-catalogue/browser.json)
+passes 13 mission and source navigation scenarios in Chromium 152.0.7977.84,
+including keyboard disclosure, camera retention, same-body and cross-body links,
+reload, history and a 390 × 844 mobile viewport. It records the served HTML, CSS
+and JavaScript hashes; DPR is 1. The [payload measurements](../tests/evidence/sources-catalogue/payload.json)
+find no source cards in the 473 inert preview templates on each sampled page.
+These reports test the application revision above; the following commit adds only
+this explanation and its evidence.
+
+The broader [shell test output](../tests/evidence/sources-catalogue/shell.log)
+records 319 passes and seven failures: one audit finds 141 stale frame receipts,
+and six navigation preparation checks lack original solar imagery in this checkout.
+The [baseline comparison](../tests/evidence/sources-catalogue/inherited-frame-failures.json)
+identifies the affected objects and the unchanged documentation baseline. The
+complete platform suite was not run for this feature.
+
+Mercury's Sources disclosure identifies the enhanced-colour product and links to
+its dataset while the monochrome map remains selected. The screenshots show the
+desktop and mobile layouts from the browser run above.
+
+![Mercury Sources disclosure on desktop](images/catalogue-sources-desktop.png)
+
+![Mercury Sources disclosure on mobile](images/catalogue-sources-mobile.png)
