@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2e2a255d1b3d6e05976d35feb3d6d7518a812428ab4cd678cb947e54c65b81dd"
+        "sha256": "860dadc221246a36ce6c923a2c267483e20b1fa653af0781dd8633f24f9e29b2"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 901.5226628633916,
       "bodyRadiusM": 207350.21245858006
+    },
+    "catalog": {
+      "name": "Huya",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 29.392166722642536,
+      "description": "Huya is a trans-Neptunian world with a moon. Occultations and the satellite orbit constrain this oblate model of Huya itself; the grid marks its unmapped surface.",
+      "systemName": "Solar System",
+      "order": 4,
+      "context": {
+        "order": 464
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a91b7503fe69ab983b4c788e34f096a6d835ae2ebff5cdd0d37deac3897592cc"
+    "sha256": "2d4ba855d3d2f07b79d912af9afa477b378a7245decc1e90424dbaf4e8209a4c"
   }
 }

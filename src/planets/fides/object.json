@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f361487881c8c64173480d05602ec1923fa9487e717f22271143fa7ca01549bc"
+        "sha256": "adc0799eaf6fe29014b98082677c7f9a196b2755dd56533ad26221c9445e2922"
+      }
+    },
+    "catalog": {
+      "name": "Fides",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.643462034651073,
+      "description": "Explore Fides in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 185,
+      "context": {
+        "order": 116
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4007c4a1373e90b0279de80a2be3de94db2b04b15706794c5ff64ab32000fe25"
+    "sha256": "4d11cb3bc2acd05425b468a3143e8947c3349ceed26b74415c2ea0c851415c23"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "03be4296f0d3fabed3204dd707fe666b03a04883a68ab1b8591d76e7e21fba96"
+        "sha256": "42d56db2570901e65e809906ddb32add685176e27fe24eb3893e3b019cc175f3"
+      }
+    },
+    "catalog": {
+      "name": "2002 CE26 Primary",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.232934797602879,
+      "description": "Explore 2002 CE26 Primary in 3D with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 215,
+      "context": {
+        "order": 175
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3bfbba2b1d05b8f7ca2325aa61c595f48c8649e8beffb9263085fad81a8e83be"
+    "sha256": "2bf5036517d536afd29ab0366d39596275c79573a0daba69df54af84928b067b"
   }
 }

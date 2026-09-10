@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7fcae8dab32e37257c3f3d122dd740d5cacff0c39ba6de2eef79a3e036eb55e2"
+        "sha256": "7530c5ecb65746f6e1998d33153401454197f2efafd292b1e317eeac71bce3fd"
+      }
+    },
+    "catalog": {
+      "name": "Caliban",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Caliban, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 27,
+      "context": {
+        "order": 245
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b66d7d80af52927623cb8061a7cf339ffdb21590938f171caed8761c526eff22"
+    "sha256": "fc70fba1c2154dfe56e8edd80ae876a90345e247052afdb059cccded165b71fd"
   }
 }

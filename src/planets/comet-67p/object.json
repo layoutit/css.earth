@@ -145,13 +145,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "609305f3df12c4d409651d0be9ce73ff55234239eb94fd2f91537b77544b250e"
+        "sha256": "8fbbf83ff8f0e6b0c577fa0a133315121ae2a4359d908ab3bab53c2272668cc3"
+      }
+    },
+    "catalog": {
+      "name": "67P",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 3.46,
+      "description": "Explore the measured nucleus of comet 67P/Churyumov–Gerasimenko from Rosetta.",
+      "systemName": "Solar System",
+      "order": 82,
+      "context": {
+        "order": 164
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "490aae046fdf1cd4d0518079bf10af6b14f6c6c8638e574b14e9c122b6a254a8"
+    "sha256": "eb6fa3fdd5bdb1b7147b61d41e0817c1c42492e71c150ad8c879a948f807ce08"
   }
 }

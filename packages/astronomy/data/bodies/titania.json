@@ -1,0 +1,51 @@
+{
+  "id": "titania",
+  "classification": "satellite",
+  "order": 255,
+  "physical": {
+    "name": "Titania",
+    "horizonsCode": "703",
+    "meanRadiusKm": 788.9,
+    "gravitationalParameterKm3PerS2": 222.8,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "703",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 1.350286637637,
+    "poleDeclinationRad": 0.26307653798,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 436297.956,
+      "eccentricity": 0.001155253314,
+      "inclinationRad": 0.001144860942,
+      "ascendingNodeRad": -1.61228881062,
+      "argumentOfPeriapsisRad": -0.696152612791,
+      "meanAnomalyAtEpochRad": 26371.467964713745,
+      "meanMotionRadPerDay": 0.721669712520299,
+      "ascendingNodeRateRadPerDay": -9.4604129755784e-05,
+      "argumentOfPeriapsisRateRadPerDay": 0.000143231709953439
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "703",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "703",
+      "center": "500@799"
+    }
+  }
+}

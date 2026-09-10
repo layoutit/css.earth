@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
-import { BODIES, M_PER_KM } from '@cssearth/astronomy';
+import { BODIES, M_PER_KM, isSceneSatellite, sceneSatelliteStateKm } from '@cssearth/astronomy';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { parseWorldContextSource, prepareWorldContext } from '../../src/preparation/spatial-context.js';
 import type { OrbitalState, Vector3, WorldContextBodyFact, WorldContextOrbitCenter } from '../../src/preparation/spatial-context.js';
@@ -27,7 +27,17 @@ export interface SpatialContextPreparationOptions {
 
 /** Prepares a renderer-neutral solar context from a pinned source document and epoch geometry adapter. */
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
-  const source = parseWorldContextSource(JSON.parse(await readFile(options.sourcePath, 'utf8')));
+  const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
+  if (input.bodies === 'catalog') {
+    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string } }[]> };
+    const objects = await readCatalog(options.objectsDirectory);
+    input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
+      .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
+      .map(body => ({ id: body.id, name: body.context!.name ?? body.name, color: body.context!.color ?? body.color,
+        ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
+          ? { placement: 'approximate' as const } : {}) }));
+  }
+  const source = parseWorldContextSource(input);
   const geometry = await loadSolarGeometry(options.solarGeometryPath);
   // The application registry owns classification; preparation bakes its orbit presentation.
   const { OBJECTS } = await import(pathToFileURL(resolve(process.cwd(), 'site/objects.mts')).href) as {

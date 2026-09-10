@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "30d768d82fccc9a3f50c4a9f9fffc2eec8e565a3bb0a276868657ad1fd8834ff"
+        "sha256": "1af5585b4ef0eea281fc7c655cc9c3a80192954d3b7b9a5a6783560aabf65247"
       }
     },
     "worldFrame": {
@@ -112,11 +112,20 @@
       ],
       "metersPerUnit": 0.6140462917358515,
       "bodyRadiusM": 141.23064709924583
+    },
+    "catalog": {
+      "name": "Selam",
+      "systemName": "Solar System",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 2.073581431805674,
+      "description": "Selam is the first contact-binary moon discovered around an asteroid. Lucy revealed its two touching lobes while passing Dinkinesh in November 2023.",
+      "context": {}
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bc7163d3b5a7171dfe4b059de20c110c66d033bbd4f4bcf4dfeb8e13e33b2145"
+    "sha256": "6c1da22a02f96609cc1007738e7181c480019a221cf0d376e1ffe50aa26b04e1"
   }
 }

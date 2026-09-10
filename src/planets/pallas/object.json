@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e1acafb0d505498ce192cc01a9985195faea6484989122669ccdb1f80947e552"
+        "sha256": "2e5d49d62504de8d4996617d295ba7af5470c6779a62641f778d5b4505452a7f"
+      }
+    },
+    "catalog": {
+      "name": "Pallas",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.769411416140799,
+      "description": "Explore Pallas in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 139,
+      "context": {
+        "order": 70
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e9d0b4a96f604040b1c0116209ac7b833983c79ecc7ce2a7f456abf1fb951204"
+    "sha256": "71ce18700e02a7d8f52e7aaed93e7030794a766a08685fd2bce8d912a1ab88ca"
   }
 }

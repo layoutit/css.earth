@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ca48af851d03ef9d7a146fe39ad51979cae20c8f68d1cd0ddcd6bd36ea05a26e"
+        "sha256": "6aedc2631a32e985e8a437db35cab44ee473767b44abc61c8ed694e43af15b56"
+      }
+    },
+    "catalog": {
+      "name": "Leucus",
+      "classification": "asteroid",
+      "color": "#a0a0a0",
+      "distanceAu": 5.312733245360807,
+      "description": "Explore Leucus, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "systemName": "Solar System",
+      "order": 19,
+      "context": {
+        "order": 254
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4d0393c60bf5e3044ac2dc7f0a158a486196abc38bbf2ef6db23c47f6eef53bc"
+    "sha256": "f87a068a2bdf5738e3518c06fd8ea7b231a39cbdec8c2183bc90af12dd9c3aeb"
   }
 }

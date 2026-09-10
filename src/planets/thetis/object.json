@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "48ad980fae89ede96a8e430fa300c4f8b68a69ce6a5ebd462962a178af052b9c"
+        "sha256": "29032cf9d2f0d6b7d2acd23614d4aa9d2bd27019561a87d0707fbd51950f54fb"
+      }
+    },
+    "catalog": {
+      "name": "Thetis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.472287077212926,
+      "description": "Explore Thetis in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 216,
+      "context": {
+        "order": 258
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "bc429ca1fa099b2a95460e5b0762b979d31bfeae74d86783e3ae9ff03b9ab240"
+    "sha256": "5d736c687af4bca5295730f5573abc1291eeea2866a15d282c8c8d46b5752855"
   }
 }

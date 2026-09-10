@@ -88,7 +88,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d8d67621c0f5c487d1d6085ed85472a38892744e3a0b149d5b822c7614de1c51"
+        "sha256": "a50e95e08b334566de6cc45b5ea1a60aaa4d08077100434ddb53c89461b3ffc5"
       }
     },
     "worldFrame": {
@@ -117,11 +117,24 @@
       ],
       "metersPerUnit": 43.25217391304348,
       "bodyRadiusM": 9948
+    },
+    "catalog": {
+      "name": "Arrokoth",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 44.05655144131418,
+      "description": "Explore its published shape and source constraints.",
+      "systemName": "Solar System",
+      "order": 357,
+      "context": {
+        "order": 423,
+        "color": "#9d9388"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d1d03ee1ef860d14db6b6c61b5a9d9f15c324262c0345d76ec0a5f520a7e9d70"
+    "sha256": "31951bac7eda8cced5a0ecd59a412cba117fab46e88ed1dd30474ecfecea583b"
   }
 }

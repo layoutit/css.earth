@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e3c2baf193a529f704f6dfc411e4d77bf90e9250c5a722f25783d0dc039dd50b"
+        "sha256": "cad1596d1d115ff3f057fa5087903d7b23edb7e14c076642f76fe4ecc0d8d2c7"
+      }
+    },
+    "catalog": {
+      "name": "Hygiea",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1509104848150167,
+      "description": "Explore Hygiea in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 140,
+      "context": {
+        "order": 71
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "87656b9b2e8aab596dd63acba9fffa3a93ea672484b9fcc1fa6f1670df3b63c4"
+    "sha256": "8f03a40e49333ebbf017f8ea3a58a2233ca762dc3955093e7927032ec9478b63"
   }
 }

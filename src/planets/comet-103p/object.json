@@ -117,7 +117,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fbb4d49aa2a6404de1c1431bccd4de2ac061e791c5c29f175ac9f9b64878eb5a"
+        "sha256": "be9e44eb8639e2a8b53c7bd48316a7a8b2acf189c00ee165b960ac4be1769496"
+      }
+    },
+    "catalog": {
+      "name": "Hartley 2",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 3.477,
+      "description": "Explore Hartley 2's published EPOXI nucleus model and its source constraints.",
+      "systemName": "Solar System",
+      "order": 80,
+      "context": {
+        "order": 165
       }
     }
   },
@@ -125,7 +137,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a948b84057ffb7082aa39af04876dfd502fa2a7923015548da90fc8b52db026d"
+    "sha256": "be642b04af50267ca165dd3e1ada41a6ad2d1fce9eba28467d4ee9ff91da5a41"
   },
   "type": "layered-body",
   "id": "comet-103p"

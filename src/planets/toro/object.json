@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f8ec586f358a9ff2bab95423a83f6144c85a687e154d043355bbb5c95846f028"
+        "sha256": "061dd76101d8c758f1b5d3156fefe400dfef2a9f7eb654aff7978d9453d9edc5"
+      }
+    },
+    "catalog": {
+      "name": "Toro",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.3678992132175503,
+      "description": "Explore Toro, a near-Earth asteroid, through its published shape model.",
+      "systemName": "Solar System",
+      "order": 126,
+      "context": {
+        "order": 420
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fa386f04701e1036505e0148c15837f4ea59e02b62d72fd1ff5e1c66acebba18"
+    "sha256": "7ae6a75ff82b9252cbe6dd205ac6cf5f29f93bd30242d92eeaf4c5702990d863"
   }
 }

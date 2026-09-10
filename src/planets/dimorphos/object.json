@@ -123,7 +123,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b5a7ec26ce36205bd0490d8d357934099d5775230551e94ceeffb978eff437c0"
+        "sha256": "764d57889ad43bdd3d7e2dcfbb655cb0705d0a4de74ad31f1ab6cdb0f8041948"
+      }
+    },
+    "catalog": {
+      "name": "Dimorphos",
+      "classification": "satellite",
+      "color": "#aaaaaa",
+      "distanceAu": 1.6427722213006,
+      "description": "Explore Dimorphos, the moon of Didymos, with its DART encounter shape.",
+      "systemName": "Solar System",
+      "order": 136,
+      "context": {
+        "order": 57
       }
     }
   },
@@ -132,6 +144,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "52d60c1e6f06e0dc9bef247a0aaa8f96e19b6fd16b8d7ab2e3d6f1f832e0a26a"
+    "sha256": "7396d2603d19ff4922bf212a1b9eeb0a083d32f97704ec8fbfa19e515c8eec7e"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "11492c8d8ee0a04d4c5238b99572e7e8dcf2e3f10ac8cc95626c3d171d599b78"
+        "sha256": "4fe28cd1b82081aeb54b1a6f620f8a88c6948d72f7c51e9dac507787fdad5307"
+      }
+    },
+    "catalog": {
+      "name": "Alkmene",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.762763911317985,
+      "description": "Explore Alkmene in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 247,
+      "context": {
+        "order": 289
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "72ffa07412719416ead45229f4baf80697fa8efad0178847dd4e639c9b1b161f"
+    "sha256": "1271a1cb57171879f417dda3ed8d4d07e03a193d4a61668be48c0935f5ec1ac0"
   }
 }

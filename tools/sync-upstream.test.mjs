@@ -411,13 +411,13 @@ test('local fixed-epoch science inputs survive upstream refresh without being at
 });
 
 
-test('scene companion integration is preserved locally while shared ephemeris math stays mirrored', async () => {
+test('local companion and open-conic code stay separate from mirrored frame and VSOP math', async () => {
   const astronomy = targetFor('astronomy');
   const provenance = await readProvenance(astronomy);
   const mirrored = await buildManifest(astronomy);
   for (const file of ['tools/body-epoch-ephemeris.mts', 'tools/generate-scene-satellites.mts',
     'src/sceneSatellites.ts', 'src/sceneSatellites.test.ts', 'src/data/sceneSatelliteStates.data.ts',
-    'src/solarSystem.ts']) {
+    'src/solarSystem.ts', 'src/kepler.ts', 'src/kepler.test.ts', 'src/kepler-hyperbolic.test.ts']) {
     assert.ok(existsSync(join(astronomy.dest, file)), file);
     assert.ok(isOwnedFile(astronomy, file), `${file} survives clearVendored and upstream copy`);
     assert.ok(provenance.locallyMaintainedFiles.includes(file), `${file} has explicit local provenance`);

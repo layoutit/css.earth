@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7c0369b9486eb6c4e47421fe02b1d7c31db972feb834f95b332146a18684dc31"
+        "sha256": "996cf47ce29ed8c71add59292863551cf2053e48d615368c6a66c7065a25720b"
+      }
+    },
+    "catalog": {
+      "name": "Vanadis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.662913987797179,
+      "description": "Explore Vanadis in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 331,
+      "context": {
+        "order": 377
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cca3c04c038d90b7cb79973317e18d4d8402b2714359b3540b46e05a4552bc84"
+    "sha256": "d0d2d75f8d9f6ec4a2ba7ce18f7e8882bf3712e45e8af0811cf2350cab63cba3"
   }
 }

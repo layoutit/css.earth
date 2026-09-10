@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "82f400d2c4232d8597aaca6ef052c601b04e8b33b168f51bcf4bde707a60df95"
+        "sha256": "d2aea38aafa5b2a8151b7ce4379ff704dc5a2190430b69f3e25d2559f665bd7b"
+      }
+    },
+    "catalog": {
+      "name": "Flora",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.2016255700392366,
+      "description": "Explore Flora in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 167,
+      "context": {
+        "order": 98
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "dec8f4592c7ce6728443feb2f6d1557eff664ab5d52f405d140215d125a3a352"
+    "sha256": "95d98bc2031f125030cd1b52dcaf028e2f276948c6cd1356e774681b0ef4c691"
   }
 }

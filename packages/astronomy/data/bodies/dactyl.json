@@ -1,0 +1,54 @@
+{
+  "id": "dactyl",
+  "classification": "satellite",
+  "physical": {
+    "name": "Dactyl",
+    "horizonsCode": null,
+    "meanRadiusKm": 0.6952053289772899,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "ida"
+  },
+  "sceneSatellite": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      -13.63556841922599,
+      -68.61321519127789,
+      0
+    ],
+    "velocityKmPerDay": [
+      -610.3393011041204,
+      121.29330007269124,
+      31.52308963248956
+    ],
+    "centerBodyId": "ida",
+    "gravitationalParametersKm3PerS2": {
+      "combined": 0.003163524143427717,
+      "body": 0,
+      "parent": 0.003163524143427717
+    },
+    "systemGmKm3PerS2": 0.003163524143427717,
+    "provenance": {
+      "model": "Illustrative phase at prepared epoch using published orbital constraints",
+      "epochJdTt": 2461286.5,
+      "placement": "approximate",
+      "referenceFrame": "ICRF",
+      "source": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/asteroids.ssc",
+      "sourcePath": "src/planets/dactyl/source/orbit/published-parameters.json",
+      "sha256": "64e0bceb305b89bbc469edef488afba4c9c82c1e6e8e1a0fd1a5d11ea53afd0e",
+      "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
+      "limitations": [
+        "Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured.",
+        "Plane taken opposite the existing Ida pole (RA 348.76, Dec 87.1 degrees). This neglects the roughly 8-degree mutual inclination and does not select a unique stable solution. Periapsis and phase are illustrative.",
+        "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+      ]
+    }
+  },
+  "physicalNotes": "Galileo/Lucy source dimensions and declared display assumptions. Source records and limits: src/planets/dactyl/README.md",
+  "acquisition": {
+    "sceneSatellite": {
+      "parent": "ida",
+      "target": null,
+      "center": null
+    }
+  }
+}

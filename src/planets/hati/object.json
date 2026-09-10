@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9985c05cd131680a4aa1a76103e86e8bd57a11604422b156037e9286d12f8e00"
+        "sha256": "d933b89a451d09b8f7fd8f869c500d6dfca4acb9e2098636075b26088761f0ea"
+      }
+    },
+    "catalog": {
+      "name": "Hati",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Hati, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 43,
+      "context": {
+        "order": 239
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2f53b7c8d9f56aee3b9b02aa2040abd44b022a592798b126a23df65ae3d1f4fc"
+    "sha256": "06f21430882ce702092c531b3e4d156a92296f47fba887dd066ab4a1da406b7e"
   }
 }

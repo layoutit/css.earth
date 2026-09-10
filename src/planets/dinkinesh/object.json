@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fe01a5c44fbac89c6d80bfe242582b623408c567754b90e8457f23b5162c8cf1"
+        "sha256": "a0823c6815d4e58775e79742a932c931c76a03740eaa816cae15429c0a54fe6f"
       }
     },
     "worldFrame": {
@@ -112,11 +112,20 @@
       ],
       "metersPerUnit": 1.6043478260869566,
       "bodyRadiusM": 369
+    },
+    "catalog": {
+      "name": "Dinkinesh",
+      "systemName": "Solar System",
+      "classification": "asteroid",
+      "color": "#a0a0a0",
+      "distanceAu": 2.073581431805674,
+      "description": "Dinkinesh was Lucy’s first asteroid encounter. Its equatorial ridge and trough accompany a remarkable moon: the contact binary Selam.",
+      "context": {}
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "837d9526b8702fc65c0ca4634996cb18b823d9dfa757d5d4455ff6756085071a"
+    "sha256": "ffd377a5bf8cb2712f73be5ec4bb94f5adbb56a39556d92c69c82924b0ffa80c"
   }
 }

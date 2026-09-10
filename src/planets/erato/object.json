@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0bdb7c08d641487c17a36783f02a2dc136cd74f355a2c8b8676dc73366d57821"
+        "sha256": "23334fe4b89075d229a32024e25258b064b9c2f674c17be8ae2ee6f4ef3218ec"
+      }
+    },
+    "catalog": {
+      "name": "Erato",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.128605699285775,
+      "description": "Explore Erato in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 236,
+      "context": {
+        "order": 278
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "53941a6702e1dbc7a2f9b7d706f6c3239f3c62a96d02f04580ed2397ebe3ef5e"
+    "sha256": "6df5d7cf06746ef1dbb1e30f930af6afada51c2a33c36df0364aa862987c545e"
   }
 }

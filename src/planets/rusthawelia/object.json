@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "63656f01232d3997fd431b62b83467e94b23e17782697e26686e15c67baea93f"
+        "sha256": "69cc659d042c5e976df6d1ddc608f349a816a20068f523a2c602d302539917a8"
+      }
+    },
+    "catalog": {
+      "name": "Rusthawelia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.173103931458051,
+      "description": "Explore Rusthawelia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 407,
+      "context": {
+        "order": 211
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3ec0afb0833791ea90545a162b373a869fc964a98b984276b6e612c10b432d12"
+    "sha256": "06ce7cc7d846e0bb8d5fd2fc6ee762995c52e8a356d4ee9bf11c26c840d13475"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "add10171b88b781b6a159b157c28b262a6603be695f00f49c269eb020b0d2aaa"
+        "sha256": "863733d42d04663977f42885b9d4916cd0d0dc1b9ef9c95b8914b29d5f449515"
+      }
+    },
+    "catalog": {
+      "name": "Raup",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.9862246368080674,
+      "description": "Explore Raup in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 418,
+      "context": {
+        "order": 222
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "958bc487f9f76c1cd15532073f6401c0e32bc72c4a2717b98ca4d661eb1d2d3b"
+    "sha256": "b3a9acb763d22f15ace538e850238985946ede7ec2e02942e7495e3089998f11"
   }
 }

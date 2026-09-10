@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0dbde8e7b8172fe7f0dbe63cbff55164138ee6f219446791e2d749c06208eb65"
+        "sha256": "9a4f41b259380e727721b70b1e0425b53d72a28dbdcc0fca52afbaccfd493cf2"
+      }
+    },
+    "catalog": {
+      "name": "Phocaea",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4015197093590164,
+      "description": "Explore Phocaea in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 218,
+      "context": {
+        "order": 260
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a7c76d63e58d18c63ab6b2d27c50378c2faf303236d276739a56ba4d1a004056"
+    "sha256": "8171cb3d1e3acb2664c2d942510bc261ef4d9e687b095a172bd40d89cd461659"
   }
 }

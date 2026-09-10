@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "597bdedeaeb71691b6c1d23e497547fcbac8a787a832213aa333005ebd14e623"
+        "sha256": "7bd8639d730ec2cb1222a74a5804927dda2cc2953618225681fc6260d5ef24c8"
+      }
+    },
+    "catalog": {
+      "name": "Fornjot",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Fornjot, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 42,
+      "context": {
+        "order": 238
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5c233017a595bf1495d6455ef191266ee35c64bdcf10b8b67ee679f647722e2c"
+    "sha256": "90f83a10abf17c72f763859b57134100681ba2989863ad09bfed3f5859b1a689"
   }
 }

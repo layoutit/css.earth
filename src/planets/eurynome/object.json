@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5b0bb02523f11eaa05381f26c9eed77130363b6d8332b8576fab23f505945093"
+        "sha256": "cc57164e2842d16bfe5f9156ab6eeb0b13334439823fdba7e494ade9b9f1414b"
+      }
+    },
+    "catalog": {
+      "name": "Eurynome",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4443553139909806,
+      "description": "Explore Eurynome in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 246,
+      "context": {
+        "order": 288
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "330321b1214fefae3a865d206623a5f346c77267fc56dc085eedf292d9c26f44"
+    "sha256": "c7ce3917316389e6311305e818114993827486798cbecff750f561c3c3bae654"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "de757d200d6ea860bf60326b6f67419209b911b9527d46f8c4a0af2113a7d15d"
+        "sha256": "7ac44356d4f6292a7070a2ebf3ce2e202d3281cd8884086a021621fdd3649c72"
+      }
+    },
+    "catalog": {
+      "name": "Sophrosyne",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.564014163529194,
+      "description": "Explore Sophrosyne in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 278,
+      "context": {
+        "order": 323
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a0f19f2f066a52a1e15191c4a8c061400de4d0de9ed3fd913ae943176674ce63"
+    "sha256": "31ef1c18f61b866f1398b18394f385508efec78766bede5cf39bda9db7aaeb7c"
   }
 }

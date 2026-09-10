@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2df728b9d25c54eeaef69df5622cc551adb0b51d0c04c20b9b167abe10d36748"
+        "sha256": "7fb5f1943bddcb0703fcd4a27afd171e54421bd31278afe5e4804efbe356b3d2"
+      }
+    },
+    "catalog": {
+      "name": "Bavaria",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7267724486531284,
+      "description": "Explore Bavaria in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 354,
+      "context": {
+        "order": 400
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "05a29e2d5703b1af736b8d69ed51cce7a4c3919810cf816e3eb9d8a13b9b128f"
+    "sha256": "359ab8679da882656289d8c10fb62e1dc73a2892861f775855be3c6487430144"
   }
 }

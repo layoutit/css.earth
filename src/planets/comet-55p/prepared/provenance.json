@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "comet-55p",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "f696b1e3222ca90c27f0b1f2df37c9dd7fa41fa7eec7762b5728e344652d39e0"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -276,7 +276,7 @@
       "sha256": "98b1b31a2d4ff93af8f841bdeb25e159b6e66e8d3807161fe3e05c0c49eb52a3",
       "bytes": 437080,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -293,7 +293,7 @@
       "sha256": "b27277a21a7e18ba2a20abcadf68da01c4f8dbc2a9863b6a06dbb44a4414c3cf",
       "bytes": 3303,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -326,13 +326,13 @@
           "url": "/scenes/comet-55p/comet-55p-model-thumbnail.webp",
           "bytes": 1428,
           "sha256": "28312f0c6e47ed28725a36c3ef2e37fee09e9270f63545d559d3dbbaaf8c42c7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-55p/comet-55p-model-surface@2x.webp",
           "bytes": 122050,
           "sha256": "b0725a6002ddaafff659bad73a0f267cf83b092919dae777a749504c89ef81ae",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

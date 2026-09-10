@@ -175,6 +175,18 @@
         "url": "prepared/page.json",
         "sha256": "e27b84b2e9c5dcb68452848710c7454fdbfadddce9ef99601f3e5ac603c84ee0"
       }
+    },
+    "catalog": {
+      "name": "Earth",
+      "classification": "planet",
+      "color": "#5b82a7",
+      "distanceAu": 1,
+      "description": "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.",
+      "systemName": "Solar System",
+      "order": 119,
+      "context": {
+        "order": 2
+      }
     }
   },
   "schema": "cssearth-object@1",

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a4fbf2978d97a0e4cb20c9a62b84e6635cc8849b4204609b1a113247dd99de61"
+    "sha256": "57538f69ab9e3761f04dfae6312cb616fb0eafd05644429670a6d304fe9ad35c"
   },
   "id": "venus",
   "properties": {
@@ -153,7 +153,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e02e4e1b45b4f0b7e330f5ad208523a60bbf90779eda37d7427ae6525465b862"
+        "sha256": "be86d635b5a27dd9270a7a5e683904158e3c68d95398de9070e59e26c40b02c9"
+      }
+    },
+    "catalog": {
+      "name": "Venus",
+      "classification": "planet",
+      "color": "#d6aa69",
+      "distanceAu": 0.72,
+      "description": "Explore Venus in 3D with cssEarth. Look beneath its clouds, discover its volcanic surface, and learn about the hottest planet in our solar system.",
+      "systemName": "Solar System",
+      "order": 118,
+      "context": {
+        "order": 1
       }
     }
   },

@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fefba1c36104269da00eb5e1d33343175333e324febfe027cb2f0df38b4b76b8"
+        "sha256": "1063c1827573ed533d6fb30335ac7ea83ef35a68d4736b1362e239f033b7097a"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 1380.4347826086957,
       "bodyRadiusM": 317500
+    },
+    "catalog": {
+      "name": "DeeDee (2014 UZ224)",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 87.06785037265145,
+      "description": "DeeDee, the informal nickname of 2014 UZ224, is a distant world discovered by the Dark Energy Survey. ALMA measured its faint thermal emission; the displayed sphere illustrates its inferred size, while its actual shape and surface remain unresolved.",
+      "systemName": "Solar System",
+      "order": 0,
+      "context": {
+        "order": 468
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "48569da57e38d3bec4540cdc41ee8edb3ea3a65140ea7c498262e0a6b93404c2"
+    "sha256": "82301af89e900853620c24cac25b9f5d43074f0cdcb9d58602690b62c66b3ad2"
   }
 }

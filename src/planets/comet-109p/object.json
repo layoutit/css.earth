@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "deb7e46f199eaf2aa84c2c6b2649d4f8279d5b4044875680b80602013bd7da8c"
+        "sha256": "2bce82928f64d758902c85da349cd94040b661876d43e0f9d89ccec30690c938"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 37.834496327701856,
       "bodyRadiusM": 8701.934155371428
+    },
+    "catalog": {
+      "name": "Swift–Tuttle",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 42.97520994740105,
+      "description": "109P: Swift–Tuttle leaves the dust behind the Perseid meteor shower. Its long orbit carries it far beyond the planets before it returns to the inner Solar System. Illustrative nucleus at Celestia’s catalog scale.",
+      "systemName": "Solar System",
+      "order": 58,
+      "context": {
+        "order": 447
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d1edeed9ca4fb94671bf996cf5fccfaeea370eeb3d5596a4f63dfdefc7d51e32"
+    "sha256": "1fa1f717ed5765cf27b370e8f1495562f219cb5aa1146f4ce511b0ea02397422"
   }
 }

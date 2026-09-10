@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a5c937e2715395d586c907a6203f4ba1af34683d98b78fdc89fdd4b233d9dc67"
+        "sha256": "65ddeee29b4962311f4b417ad89260498841770d6612b11106e044604f341f5b"
+      }
+    },
+    "catalog": {
+      "name": "Achilles",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.216209884720479,
+      "description": "Explore Achilles in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 391,
+      "context": {
+        "order": 195
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "987c5b71aeb27fc9d3d1ef9bffde69e6f411d3734a82b183b8fbc36f723ea55b"
+    "sha256": "3e0b2db2df9a4d3d7e756b889b495fce2c5f0cc373af9551a5fa98c331730e66"
   }
 }

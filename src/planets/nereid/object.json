@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d82fbc83d1e4fedc636ad3d8ac120646e0f3b9567687f9f233c0043527e84026"
+        "sha256": "18fa7851c234253a4d2f24c23aae6b503b51a729078dbbc8888e28bb608c230b"
+      }
+    },
+    "catalog": {
+      "name": "Nereid",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 30.07,
+      "description": "Explore Nereid, a moon of Neptune, through its source-backed size model.",
+      "systemName": "Solar System",
+      "order": 86,
+      "context": {
+        "order": 160
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9765b07cb27dba2396f80636f9ee07c7b4585000114b7646d074ecbc9f3251f5"
+    "sha256": "b7ea101f68df8153d213b0b2aaee59e3d3891d23bf04bd687a933cdf148d98ba"
   }
 }

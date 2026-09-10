@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a684c80c133b2dedcbd9a8da6786997911cec41f38411bc1d0b379c2e1db5464"
+        "sha256": "4a45895ea16cb471db56a9db14022b212d5a2ea7114706cc214de86cf72c89fc"
+      }
+    },
+    "catalog": {
+      "name": "Dejopeja",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1906659584251518,
+      "description": "Explore Dejopeja in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 304,
+      "context": {
+        "order": 350
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c33af055d39841a631a2136110be8a14412ee4b8498006f4d31a0d1271d6bae6"
+    "sha256": "96febd18b74ecf0eddf4b5d190b3bf5cf8f13c5069980e03f798e3e2313f4668"
   }
 }

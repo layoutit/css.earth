@@ -105,13 +105,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "35f7ff4b9821029b9e742e6e921e4448f056bf8267ccdfbc89627828e7a7f0b2"
+        "sha256": "1510dd2bb42d2f40a0446708b3203d394d7a75cf7d75eb8a65dd55bf54ebd787"
+      }
+    },
+    "catalog": {
+      "name": "Despina",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 30.07,
+      "description": "Explore Despina through its Voyager-derived shape model.",
+      "systemName": "Solar System",
+      "order": 108,
+      "context": {
+        "order": 68
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f18227ac6c0b4d74096023293fafa13f2732e7e49e49cc660604d57a1861633d"
+    "sha256": "095426586b71008be8054b530fa05e4516d10028754aa0afd36f7063cb375b78"
   }
 }

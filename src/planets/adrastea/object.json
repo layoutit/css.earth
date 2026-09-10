@@ -105,13 +105,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "aaef1298d6977a2bf3d07c1c6d69e934c14cf6f83b05817c9f3a1b37506064da"
+        "sha256": "d3cc0314e9ef0c8425eb94940641e45447ef2cfc61f86a2bf2773e5717f4bd3c"
+      }
+    },
+    "catalog": {
+      "name": "Adrastea",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 5.2,
+      "description": "Explore Adrastea through a model based on its measured dimensions.",
+      "systemName": "Solar System",
+      "order": 105,
+      "context": {
+        "order": 65
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4f9feb0a6ddcb76017039457cfdcd0ece4b84d3efce14b57cf4349893d88d9a0"
+    "sha256": "4c00cd389ea1b1d7372f0699b65d89a158eb9b455c8cadcab054d9dc236fca01"
   }
 }

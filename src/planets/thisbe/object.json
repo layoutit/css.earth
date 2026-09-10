@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1348b091c0d18a5c0a1f2e1b6d8d3b855c1d1d2b3055205184c7b3db38141bd0"
+        "sha256": "7dee87fe10b5ec45e5b1c0b83f83adc0c7629d7256240c43ef5bc18ee3539c30"
+      }
+    },
+    "catalog": {
+      "name": "Thisbe",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7660737949851626,
+      "description": "Explore Thisbe in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 171,
+      "context": {
+        "order": 102
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5f7869d2879d5a6832fb263c221cdece2c98fb91fcdbde8b595f228c63957ec3"
+    "sha256": "32182b0f7c92f1dbb101707469158627b0f72df732460e72c587ff903b4d2235"
   }
 }

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9f82b927c27383332d932e8dd43cd2d3fd3ecff7a03002ec4a60120828d18bc2"
+        "sha256": "fc5313115c0b8743eaa97a5f5e7d58a1a9a756021de3810c0eb7e8a710dc2569"
+      }
+    },
+    "catalog": {
+      "name": "Johanna",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7565883306989893,
+      "description": "Explore Johanna in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 275,
+      "context": {
+        "order": 320
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b0b63653a1c0522efa2f65458ffea07011b0c7b0319729331246874cbdb7d4c7"
+    "sha256": "c4c9b004c7d35984193a6693f2fd9a79a2fe6c271ce8a651f6c20d4c5563f7c5"
   }
 }

@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b90082e7183934b339f8493f96b16147d50307ecfa62ec736d5216fa66df78b7"
+        "sha256": "e753de39108c348a7e48a0d4d47b3e65f40d8a65a32778e0491a3488b789ad03"
+      }
+    },
+    "catalog": {
+      "name": "Hyrrokkin",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Hyrrokkin, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 44,
+      "context": {
+        "order": 240
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e317e98596d0eff2676a18ddfb0063ccc3cd7d86875dbd171cd459ea87b6d448"
+    "sha256": "bb311f0e95928672e7780da243bc61fdab36820d11466eb9ac87fcce9d74f28b"
   }
 }

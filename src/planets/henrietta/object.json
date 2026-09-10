@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5b8e3e413148a7e180e59e57e3e87f6ac62e13817713f307024c32fcb2f7be6b"
+        "sha256": "8aa2770076719eacbf4fe06202ce402fa0409b9a0ab43d6f0f2c50bf23aa0cf3"
+      }
+    },
+    "catalog": {
+      "name": "Henrietta",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.397844277767737,
+      "description": "Explore Henrietta in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 323,
+      "context": {
+        "order": 369
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fb64c9f76a703d0f48474c11a89807c96873bedce5c800925aa2d8f5df4e6567"
+    "sha256": "e4879c71614770e90592f0e889ac21d7ddd4301f3e59f0fd167339a7d1bca1c7"
   }
 }

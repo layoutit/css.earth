@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c8f658ec95a2db9416889230d675aefa8a8807a9ac5f55263abb92f0c1886f81"
+        "sha256": "e99c44ad832998be6d5a21cc1dbe533bc7daa8b4bbe53a7f8973ab3a68d4cb01"
+      }
+    },
+    "catalog": {
+      "name": "2008 EV5",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 0.9597570834058771,
+      "description": "Explore 2008 EV5 in 3D with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 211,
+      "context": {
+        "order": 171
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6464cad6b430c05aea52ea18527b274538df5ad73b65f83989aec61aa39e554e"
+    "sha256": "c41d57d3515fb2f003d2ae74aa53f38d0c14a26534b107629228cbafbe72d85f"
   }
 }

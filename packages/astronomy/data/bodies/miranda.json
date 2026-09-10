@@ -1,0 +1,51 @@
+{
+  "id": "miranda",
+  "classification": "satellite",
+  "order": 252,
+  "physical": {
+    "name": "Miranda",
+    "horizonsCode": "705",
+    "meanRadiusKm": 235.7,
+    "gravitationalParameterKm3PerS2": 4.3,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "705",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 1.347803801721,
+    "poleDeclinationRad": 0.26446554695,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 129873.507,
+      "eccentricity": 0.00136019724,
+      "inclinationRad": 0.077242781272,
+      "ascendingNodeRad": 1.760701075703,
+      "argumentOfPeriapsisRad": -3.582086533582,
+      "meanAnomalyAtEpochRad": 162365.0654847093,
+      "meanMotionRadPerDay": 4.44423335394157,
+      "ascendingNodeRateRadPerDay": -0.00096711094469689,
+      "argumentOfPeriapsisRateRadPerDay": 0.001924353203779812
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "705",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "705",
+      "center": "500@799"
+    }
+  }
+}

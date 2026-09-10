@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1878fe848eaad4da250b33a353968fac06b6f98cebed092710a87b75e9569990"
+        "sha256": "7da85a975ccf697feb6f4422508993dca865ecb5824db4f111f2cf68e479c370"
+      }
+    },
+    "catalog": {
+      "name": "Nuwa",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.9879264955692397,
+      "description": "Explore Nuwa in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 286,
+      "context": {
+        "order": 332
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "902098a13f278a5c0cbf7c692039975c09ce0e0312ef728e8dc5553f2af8ec44"
+    "sha256": "e08a2c72f0823383f0235bafe1f9553ff171e6dad00bac090e35d07fc181279a"
   }
 }

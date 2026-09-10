@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "224fc6e5b67721bb141b21fcc8e972dd35f4771b02b6cc6648ddca47befa4006"
+        "sha256": "75b3074d972f6699e25a03d3a8e1eae2b073bce49b4bf674d5c56449fee3462f"
+      }
+    },
+    "catalog": {
+      "name": "Adelheid",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.118003623819272,
+      "description": "Explore Adelheid in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 351,
+      "context": {
+        "order": 397
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fac6f488cb1869b1d1b47331289552b550f6dd5f7f9fe6c9dc8a17650ed534f4"
+    "sha256": "557697401ac167d2cb62d22dc8007c76fc28df68ff5a7a14dc6d876c19803db6"
   }
 }

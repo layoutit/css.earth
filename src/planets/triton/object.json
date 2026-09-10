@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "dc2872d4fc186dc9e624034e6dce91d0b9d88661c6baebf8e34ae384f2c0d88d"
+        "sha256": "784b6b36bf552643ea784b5ca5bbfc0ab8d6a489578394490420582f2b6ed8ac"
+      }
+    },
+    "catalog": {
+      "name": "Triton",
+      "classification": "satellite",
+      "color": "#b8afa5",
+      "distanceAu": 30.07,
+      "description": "Explore Neptune’s retrograde moon through Voyager monochrome and enhanced-color imagery.",
+      "systemName": "Solar System",
+      "order": 453,
+      "context": {
+        "order": 34
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1400e007a66169cd5e6f9cd8ff763486db9bb2bf75a3a63485baceb8a92ee326"
+    "sha256": "a561b9549008e5e54df6578c7b3ef00a4e52277ccd99bb9b90ff172cfdb07990"
   }
 }

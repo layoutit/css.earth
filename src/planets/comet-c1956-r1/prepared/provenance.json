@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "comet-c1956-r1",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "1f0bf961e90431aa04e795ea4e91f8f505910190c6f9fa94dd032653a3144843"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -276,7 +276,7 @@
       "sha256": "0e26203a07faff85bb4cf0cdf53ed5261f91492f054dd7132a6de3f094be8310",
       "bytes": 436012,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -293,7 +293,7 @@
       "sha256": "09763fcccc777cc0cc451e94347acc1f8cfdbb4ba2af745b06317e66a0e15040",
       "bytes": 3262,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -326,13 +326,13 @@
           "url": "/scenes/comet-c1956-r1/comet-c1956-r1-model-thumbnail.webp",
           "bytes": 1398,
           "sha256": "da4d8c2350c4e553bd86d72916ea55bece602b60c5c22a632ede1bc23744d980",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-c1956-r1/comet-c1956-r1-model-surface@2x.webp",
           "bytes": 121602,
           "sha256": "c9463c496eaa3e05914b0a9dbb6c97c691b9feef1c9c161f5d9626443fb64111",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

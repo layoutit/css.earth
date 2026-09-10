@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a7ca6f6af4bcd9e042c9e475fdeac3720e3931304830f8cb5a8f2031dd72e3c4"
+    "sha256": "e977ae015a067c8b2f2d53b8d3e8c42d2dcd9c9ceb972527163abc2e8114ee6a"
   },
   "id": "ida",
   "properties": {
@@ -123,7 +123,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "36bf77d4ef994ff68528639b293d3dd0976fca918484bce86444d5a24a34ffe7"
+        "sha256": "289710cec5b8bd48592567643971eecfbfc941606ceed376a61bd405eb90a055"
+      }
+    },
+    "catalog": {
+      "name": "Ida",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 2.861,
+      "description": "Explore Ida in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
+      "systemName": "Solar System",
+      "order": 130,
+      "context": {
+        "order": 47
       }
     }
   },

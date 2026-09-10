@@ -59,7 +59,7 @@ describe('asteroid positions against JPL Horizons', () => {
       // SN263: ceil(maximum independently measured 30-day endpoint error * 1.05).
       'asteroid-2001-sn263': 250,
       // Dinkinesh: ceil(991.491 km independent endpoint maximum * 1.05).
-      // Retained samples and measured errors: docs/moons/galileo-lucy/evidence/orbit-errors.json.
+      // Retained samples and measured errors: src/planets/dinkinesh/evidence/galileo-lucy/orbit-errors.json.
       dinkinesh: 1042 }
     for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)

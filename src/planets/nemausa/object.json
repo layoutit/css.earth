@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "87a8abf2e9686ce10cefbce6f76abf84ebc00ba239d4d585dc3911d6ae977c05"
+        "sha256": "3e1599cec5804fe5501621b02b321c5fb3c052b3becd9e17a937258659d97b9b"
+      }
+    },
+    "catalog": {
+      "name": "Nemausa",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3660524397358516,
+      "description": "Explore Nemausa in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 161,
+      "context": {
+        "order": 92
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ca66e1e828f4de406c86467573fed673f2edc58049dd6463c86f6b306ada209d"
+    "sha256": "b8519ebd1061bd571b28b070d6dfce40921268132832702375f91c8de4facb62"
   }
 }

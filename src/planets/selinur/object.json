@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c97735a6ae39f1fb68e8a9067d62b245ea70abd1295a34e1e80da22af0dd8039"
+        "sha256": "13783a2c22f97ee4b88333898e9ca48a951d030d0a6ec575f7043055a4e16621"
+      }
+    },
+    "catalog": {
+      "name": "Selinur",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6116658234603194,
+      "description": "Explore Selinur in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 390,
+      "context": {
+        "order": 194
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b11c8a82f346e04508ad8da1334037003119e81cafa54141fd25b5b5976723df"
+    "sha256": "caa0b2420cc6e7de661216813bbadab286cd67e633dd92832daa4526ea45ac41"
   }
 }

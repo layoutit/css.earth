@@ -1,12 +1,16 @@
 import {requireRecord,requireFiniteNumber,requireString} from '../../source-values.mts';
 // Reconcile reviewed marker tiles without decoding full-resolution body sources.
-// Run from the repository root. No source imagery or body geometry is rebuilt.
+// Historical reconstruction only. Current navigation uses prepare:navigation.
+// Run from the repository root; output stays under output/companion-catalog.
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { loadMarkerDescriptors } from '../../prepare-navigation.mts';
+
+const outputRoot = 'output/companion-catalog/historical-navigation';
+await mkdir(outputRoot, {recursive: true});
 
 const refs = { main: 'a1471af189b25c1bed46683f06bc345025a7cf67', companions: 'ea88f6feab538342257bda3b8bd7383126474017' };
 const additions = new Set(['asteroid-2001-sn263', 'sn263-beta', 'sn263-gamma']);
@@ -36,7 +40,7 @@ for (const [index, descriptor] of descriptors.entries()) {
   markers[descriptor.planetId] = { ...previous, index, count: descriptors.length };
   if (previous.context) {
     const path = 'public' + previous.context.url, bytes = original(refs[name], path);
-    await writeFile(path, bytes);
+    await writeFile(`${outputRoot}/${path.split('/').at(-1)}`, bytes);
     report.contexts.push({ path, bytes: bytes.length, sha256: hash(bytes), ref: refs[name] });
   }
 }
@@ -66,10 +70,10 @@ for (const density of [1, 2]) {
     assert.equal(check[i + 3], pixels[i + 3], 'alpha changed');
     if (pixels[i + 3]) assert.deepEqual(check.subarray(i, i + 3), pixels.subarray(i, i + 3), 'visible RGB changed');
   }
-  await writeFile(`public/navigation/${filename}`, output);
+  await writeFile(`${outputRoot}/${filename}`, output);
   report.densities.push({ density, width, height: tile, inputs, output: { bytes: output.length, sha256: hash(output) }, changedVisiblePixels: 0 });
 }
-await writeFile('site/prepared-navigation-markers.mjs', '// Generated from object-owned marker recipes. Do not edit.\nexport const PREPARED_NAVIGATION_MARKERS = Object.freeze(' + JSON.stringify(markers) + ');\n');
+await writeFile(`${outputRoot}/prepared-navigation-markers.mjs`, '// Generated from object-owned marker recipes. Do not edit.\nexport const PREPARED_NAVIGATION_MARKERS = Object.freeze(' + JSON.stringify(markers) + ');\n');
 await mkdir('output/companion-catalog', { recursive: true });
 await writeFile('output/companion-catalog/merge-navigation.json', JSON.stringify(report, null, 2) + '\n');
 console.log({ objects: report.objects, contexts: report.contexts.length, densities: report.densities });

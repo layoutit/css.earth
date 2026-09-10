@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f306c2bb46a136397aa696e638f69efaccf3324180052d038c66bdd2641eea2d"
+        "sha256": "99eb649efadb98905a6ffd9320f0cfbc556cb07adc24fd7afa5abd191800bf77"
+      }
+    },
+    "catalog": {
+      "name": "Virtanen",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.221835773585211,
+      "description": "Explore Virtanen in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 410,
+      "context": {
+        "order": 214
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3ace9d1432ad4e62111ecaaca135b349c9536b85d916492d702c4dcd39e83ca0"
+    "sha256": "fcae0aaa3a21cf1e31c2c48010c87df5d4a451785b0b4e5103c67f31b48c6a4d"
   }
 }

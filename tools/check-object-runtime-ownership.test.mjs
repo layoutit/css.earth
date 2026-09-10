@@ -24,13 +24,21 @@ export const runtimeDefinition = Object.freeze({ ...PREPARED_PRESENTATION, schem
 const { id: _id, controls: _controls, ...moonPresentation } = await loadObjectTestDefinition('moon');
 moonPresentation.schema = 'cssearth-prepared-presentation@3';
 const prepared = `export const PREPARED_PRESENTATION = Object.freeze(${JSON.stringify(moonPresentation)});`;
-const registrySource = (await readFile(new URL("../site/objects.mts", import.meta.url), "utf8"))
-  .replace(/defineObjects\(\[[\s\S]*?\]\);/, `defineObjects([
+const registrySource = `import { defineObject, defineObjects } from './object-schema.mts';
+export const OBJECTS = defineObjects([
   object("moon", "Moon", "satellite", "#aaa7a0", 1, "Moon fixture", async () => {
     const { mountMoonClient } = await import("../src/planets/moon/runtime/client.mjs");
     return mountMoonClient;
   }),
-]);`).replace(/^import \w+Descriptor from[^\n]+\n/gm, '').replace(/\nfunction packaged\([\s\S]*$/u, '\n');
+]);
+function object(id, name, classification, color, distanceAu, description, loadScene, worldFrame = null, systemName = "Solar System") {
+  return defineObject({ id, name, classification, color, distanceAu, description, systemName,
+    route: \`/\${id}/\`,
+    loadScene,
+    worldFrame,
+  });
+}
+`;
 const sunContext = await readFile(new URL("../src/planets/sun/prepared/world-context.json", import.meta.url), "utf8");
 const objectSchema = await readFile(new URL("../site/object-schema.mts", import.meta.url), "utf8");
 const isArray = await readFile(new URL("../src/platform/is-array.mts", import.meta.url), "utf8");
@@ -327,15 +335,16 @@ test('descriptor binding cannot bypass the shared factory or redirect the prepar
     assert.notEqual(changed, source, 'Mutation must change the actual loader');
     await assert.rejects(descriptorOverlay({ [file]: changed }), /forward its prepared transport|Contextual binding/);
   }
-  const registry = await readFile('site/objects.mts', 'utf8');
-  const wrongDescriptor = registry.replace('packaged(mercuryDescriptor)', 'packaged(venusDescriptor)');
-  assert.notEqual(wrongDescriptor, registry, 'Descriptor mutation must change the actual loader factory call');
-  await assert.rejects(descriptorOverlay({ 'site/objects.mts': wrongDescriptor }), /own actual JSON descriptor/);
-  for (const source of [registry.replace('mercuryDescriptor.properties.worldFrame', 'venusDescriptor.properties.worldFrame'),
-    registry.replace(', mercuryDescriptor.properties.worldFrame', ''),
-    registry.replace('    worldFrame,', '    worldFrame: null,')]) {
-    assert.notEqual(source, registry, 'World-frame mutation must change the actual binding');
-    await assert.rejects(descriptorOverlay({ 'site/objects.mts': source }), /world frame/);
+  const catalogPath = 'site/prepared-object-catalog.mts', catalog = await readFile(catalogPath, 'utf8');
+  const wrongDescriptor = catalog.replace('../src/planets/mercury/object.json', '../src/planets/venus/object.json');
+  assert.notEqual(wrongDescriptor, catalog, 'Descriptor mutation must change the actual import');
+  await assert.rejects(descriptorOverlay({ [catalogPath]: wrongDescriptor }), /unique JSON descriptor imports/);
+  const helperPath = 'site/object-catalog.mts', helper = await readFile(helperPath, 'utf8');
+  for (const source of [helper.replace('input.properties.worldFrame', 'other.properties.worldFrame'),
+    helper.replace('worldFrame: input.properties.worldFrame, ', ''),
+    helper.replace('worldFrame: input.properties.worldFrame', 'worldFrame: null')]) {
+    assert.notEqual(source, helper, 'World-frame mutation must change the actual binding');
+    await assert.rejects(descriptorOverlay({ [helperPath]: source }), /world frame/);
   }
 });
 
@@ -410,10 +419,10 @@ test('a shared registry loader factory must forward one unchanged descriptor wit
   const accepted = await auditObjectRuntimeOwnership(options(original));
   assert.equal(accepted.entries[0].factoryCalls, 1);
   for (const [before, after, reason] of [
-    ['function packaged(descriptor: unknown) {', 'function packaged(descriptor: unknown) { console.log(descriptor);', /loader factory/],
+    ['async () => {', 'async () => { console.log(descriptor);', /loader factory/],
     ['return loadPackagedObject(descriptor);', 'return loadPackagedObject({ ...descriptor });', /bound descriptor unchanged/],
     ['return loadPackagedObject(descriptor);', 'return loadPackagedObject(venusDescriptor);', /bound descriptor unchanged/],
-    ['packaged(polymeleDescriptor)', 'packaged(venusDescriptor)', /own actual JSON descriptor/],
+    ['catalogEntry(descriptor,', 'catalogEntry(otherDescriptor,', /bound descriptor unchanged/],
   ]) {
     const changed = original.replace(before, after);
     assert.notEqual(changed, original, 'The mutation must alter the actual shared loader');
@@ -427,6 +436,21 @@ test('every independently selected registry object closes over exactly its own n
     assert.equal(report.complete, true, object.id);
     assert.equal(report.cameraFactorySites.length, 1, object.id);
   }
+});
+
+test('the generated catalogue is checked as data without executing source overlays', async () => {
+  const file = 'site/prepared-object-catalog.mts', source = await readFile(file, 'utf8');
+  const payload = '__cataloguePayloadExecuted';
+  delete globalThis[payload];
+  for (const changed of [source + `\nglobalThis.${payload} = true;`,
+    source.replace('= [', '= [unknownDescriptor,')]) {
+    assert.notEqual(changed, source);
+    await assert.rejects(descriptorOverlay({ [file]: changed }), /prepared catalogue/);
+  }
+  assert.equal(globalThis[payload], undefined);
+  const descriptor = 'src/planets/mercury/object.json';
+  const value = JSON.parse(await readFile(descriptor, 'utf8'));
+  await assert.rejects(descriptorOverlay({ [descriptor]: JSON.stringify({ ...value, id: 'other-body' }) }), /own actual JSON descriptor/);
 });
 
 test('descriptor context binding pins both prepared contexts to the shared factories and physical references', async () => {

@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8561c66ad60c6790162059a93b62401a1261956f87c9d97fce525234e4f617da"
+        "sha256": "ba9a973a1884472ac11e963011c7656bc43eab80882de56641bde4412cf37ead"
+      }
+    },
+    "catalog": {
+      "name": "Greip",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Greip, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 47,
+      "context": {
+        "order": 243
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b9e756719e16a626cdc5d2bf52645443f4761571a3935f6d5ef8707d58856e34"
+    "sha256": "1d2eba2d7b0dfe7053abae97a3cb729a111d8583c50d32e26508d0a867ded8f7"
   }
 }

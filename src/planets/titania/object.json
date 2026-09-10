@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "970baeacd0fbe7a7d37ae13b66678fa7c362cc0023dd8faf5865770c1a85f9ed"
+        "sha256": "f91843cf1c56600766bd5f2c5ddd3fbea20aba998cc1f3dfa4accd000875ca28"
+      }
+    },
+    "catalog": {
+      "name": "Titania",
+      "classification": "satellite",
+      "color": "#a8a59e",
+      "distanceAu": 19.2,
+      "description": "Explore Titania in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
+      "systemName": "Solar System",
+      "order": 450,
+      "context": {
+        "order": 31
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "982438280e09a1d3ada2cefde8ea1a5cdf2176bcdd6b9a8329b1afe3a048df0b"
+    "sha256": "cdcd20cbc404978715117536b71814cb3e07d1aae50c290b5b0ad80ae9602df9"
   }
 }

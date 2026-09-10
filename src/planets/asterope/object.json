@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9419b515baaf03abc2479352a94017eccaaab543fc1f9d846580b140c80bfa90"
+        "sha256": "f3e74c10be78400bd051ce967d9d7440f7291247b1fada33f0f245a8ecbc327e"
+      }
+    },
+    "catalog": {
+      "name": "Asterope",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.659113942812149,
+      "description": "Explore Asterope in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 328,
+      "context": {
+        "order": 374
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "af6339ae850b12dcf5a737def81fe81b695bda117bec0508f6540ce4e8d0e71d"
+    "sha256": "a8b65c682763966b2fa8f29ad412fba8c6318db49affe933c1a358d3fb87d982"
   }
 }

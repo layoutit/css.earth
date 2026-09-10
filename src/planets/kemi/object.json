@@ -86,7 +86,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "47e6b0e07c5415c51ca335b50d7ce5edc4505fac208bf308ed38c7c3cd7ee0b6"
+        "sha256": "6436a113ac9e83775fa47a2c8e45f08fbae367f35f61dcc7378f84468a2dfed6"
       }
     },
     "worldFrame": {
@@ -115,6 +115,18 @@
       ],
       "metersPerUnit": 39.08695652173913,
       "bodyRadiusM": 8990
+    },
+    "catalog": {
+      "name": "Kemi",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.766954866279291,
+      "description": "Explore Kemi, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+      "systemName": "Solar System",
+      "order": 468,
+      "context": {
+        "order": 429
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "93e8b2c047df57468f5396b89263c199aa9c77d69ab5faad1d8eaf73db479532"
+    "sha256": "66e7f83268a86b79c267f476e2bcde1800d0be9db28db9667e1df8837d4b8398"
   }
 }

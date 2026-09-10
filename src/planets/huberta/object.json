@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9c09ea5a7cfeb58d2f4b8653eb8419bcca64e02ee5ed82ac2bd877cd9967509d"
+        "sha256": "9e6302ac5612e285f511ce96a8c375ae8ca96e9b964eac25abf9cdeec5b27741"
+      }
+    },
+    "catalog": {
+      "name": "Huberta",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.453696095317234,
+      "description": "Explore Huberta in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 342,
+      "context": {
+        "order": 388
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9e8c22105d95f98c65c733195797a949b209d5f577e298b37fcfaff4b8e70aee"
+    "sha256": "f10452605f686f25554076f743a9d0f113cc5c4cfede1782e6d1be40b691bef9"
   }
 }

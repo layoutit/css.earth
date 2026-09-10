@@ -243,7 +243,7 @@ const IGNORED_DIRECTORIES = new Set(["node_modules", "dist", ".cache", "coverage
 export function locallyMaintainedFile(target:Pick<SyncTarget,'id'>, rel:string) {
   rel=rel.replace(/\.mts$/,'.mjs');
   if (target.id !== "astronomy") return false;
-  return ["README.md", "AGENTS.md", "CLAUDE.md", "package.json", "tools/tsconfig.json",
+  return ["tools/verify-sn263-orbits.py", "tools/body-records.mjs", "tools/generate-heliocentric.mjs", "src/data/dwarfPlanetElements.data.ts", "README.md", "AGENTS.md", "CLAUDE.md", "package.json", "tools/tsconfig.json",
     // Typed generator owners retain their last mirrored identities in upstream.json.
     "tools/generate-dwarf-planets.mjs", "tools/generate-series.mjs",
     "tools/lib/elp2000.mjs", "tools/lib/horizons.mjs", "tools/lib/sources.mjs", "tools/lib/vsop87.mjs",
@@ -264,7 +264,7 @@ export function locallyMaintainedFile(target:Pick<SyncTarget,'id'>, rel:string) 
     "src/kepler.ts", "src/kepler.test.ts", "src/kepler-hyperbolic.test.ts",
     "src/bodies.ts", "src/body-types.ts", "src/body-data.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
     "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/satellites.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
-    /^src\/data\/asteroidElements-[1-4]\.data\.ts$/.test(rel) ||
+    rel.startsWith("data/") || rel.startsWith("src/data/generated/") ||
     rel.startsWith("source/scene-epoch/") ||
     /^src\/(?:data\/satelliteElements\.data|__fixtures__\/horizons)(?:\.[a-z0-9-]+)?\.ts$/.test(rel);
 }
@@ -535,7 +535,8 @@ async function syncPackage(pkg:SyncPackage, { root, upstream, license, allowDirt
     ),
     localMaintenance: "Body models, their checks, guides and scientific records are maintained locally and preserved by sync.",
     ...(previous?.locallyMaintainedOrigins ? {locallyMaintainedOrigins:previous.locallyMaintainedOrigins} : {}),
-    locallyMaintainedFiles: (await listFiles(target.dest)).map(file => toPosix(relative(target.dest, file))).filter(rel => locallyMaintainedFile(target, rel)),
+    locallyMaintainedDirectories: ["data/", "src/data/generated/"],
+    locallyMaintainedFiles: (await listFiles(target.dest)).map(file => toPosix(relative(target.dest, file))).filter(rel => locallyMaintainedFile(target, rel) && !rel.startsWith("data/") && !rel.startsWith("src/data/generated/")),
     rewrittenFiles: rewritten,
     excludedFiles: excluded,
     importNote: IMPORT_NOTE,

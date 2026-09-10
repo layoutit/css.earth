@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0578631322b4a8a5faf06c12ef211f9ba57371d7bbfbb13e266a23566eb17ca9"
+        "sha256": "2de7a0c6826240b212a5fa8a68cfa476302043e28ed81185212bb44ea25468a2"
+      }
+    },
+    "catalog": {
+      "name": "Gerda",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.2256949669977946,
+      "description": "Explore Gerda in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 270,
+      "context": {
+        "order": 315
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3060958375a6d9e25b5c90f026cd94b31a3ac71905b4f4e68e44cc06e7de8bde"
+    "sha256": "71064f2e22419108f8194da9c84223fb16993608ad6bf1207b6c77a8780a5695"
   }
 }

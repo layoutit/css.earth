@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fb52e7a8079503bd969b31e8d90dbc10c068a62db81ae4e7acf5605ee4b17453"
+        "sha256": "288d76fdc749f395a7b0c1bb45113ff3f4070f2c7fad1220a53f68c76fb32505"
       }
     },
     "worldFrame": {
@@ -112,11 +112,24 @@
       ],
       "metersPerUnit": 1751.286572441971,
       "bodyRadiusM": 402795.9116616533
+    },
+    "catalog": {
+      "name": "Máni (2002 MS4)",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 45.97552197787258,
+      "description": "Formerly 2002 MS4, Máni has an outline measured through many stellar occultations. One event revealed a large depression along its edge, but its global terrain and three-dimensional shape remain unresolved.",
+      "systemName": "Solar System",
+      "order": 7,
+      "context": {
+        "order": 438,
+        "name": "Máni"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "25ca2a6023ca6a15cabfdeda298e3471af67eb3dea0be5bb7f0157a35900d25f"
+    "sha256": "398774380f45d32bbf656746d9e3f7064ebb6e79123cf1bc11428eefe61bd564"
   }
 }

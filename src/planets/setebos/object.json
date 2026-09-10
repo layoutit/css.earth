@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1a056bdeeb2a0306323beace6f277c977d3e7ec09fb576f18f6cd830d0e2fecb"
+        "sha256": "c3af2a91b32bd4b63ec466a73c0f50e31953d31a3adb91e802686688a79bae36"
+      }
+    },
+    "catalog": {
+      "name": "Setebos",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Setebos, a moon of Uranus, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 30,
+      "context": {
+        "order": 248
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f05bcb3b275c74cdb73b5fefbfb90859ea2d157239b3f041fefb94b0af1f0edd"
+    "sha256": "e14b5990ab38c8db190119b9b52c8301339c2a7965c1de9fc2aba0d33f6d94ee"
   }
 }

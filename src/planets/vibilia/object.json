@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "79093b5390a6d7bc8aafa20b805e43a216c53d5aa23b6ce7116ff6f37cc13a05"
+        "sha256": "0889c2ca16bd8e5ba5cf082860d6ec3873ea4e47e78a569a81322b1e76d25bac"
+      }
+    },
+    "catalog": {
+      "name": "Vibilia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.654067519715369,
+      "description": "Explore Vibilia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 281,
+      "context": {
+        "order": 327
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8663252a4e256f09c4f0cd770a64e3b7c05434060a75213b7e4542a4a5dcd37f"
+    "sha256": "db63f0f417d25afde2e28c385a061e79b28a7a077c82b93d5e23cd3fe0f20126"
   }
 }

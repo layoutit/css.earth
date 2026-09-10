@@ -105,13 +105,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c6b35b95e602bb3e3ecda1c2fc2d31036f30f69ee77fc3c0c94b0d5d74d63442"
+        "sha256": "1e00fb9267ddb0ec669a09d7c19474d0037c67562919eb0c7a7a58a32b3b220f"
+      }
+    },
+    "catalog": {
+      "name": "Naiad",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 30.07,
+      "description": "Explore Naiad through its Voyager-derived shape model.",
+      "systemName": "Solar System",
+      "order": 106,
+      "context": {
+        "order": 66
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d5f676f1c6f1aa22f53ca81c8611762acca80ac3ed737eeefeb0dd9f0a2600ed"
+    "sha256": "e791980cb183dbc33bc191a2443f4e39d912df81a66f97d0c4c929bba77edd95"
   }
 }

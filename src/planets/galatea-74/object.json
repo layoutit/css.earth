@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "68b696b521105d4a6b2a6154091822357b42c21b860d8ca1cd0c60966cefb279"
+        "sha256": "0576b3d52a24e98dee96004ae9a93beb48981ff1b90e60fd14e25bbcb614d7b9"
+      }
+    },
+    "catalog": {
+      "name": "74 Galatea",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.780620996918218,
+      "description": "Explore 74 Galatea in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 244,
+      "context": {
+        "order": 286
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6e9081943c6d34bc83f728d950fae3c3f0e6793131c16472c0e708a9feb2b098"
+    "sha256": "017fcf4fbc1f3efd635ec5c18bdcf306914a4bbe02cefc6590aff8aad4439803"
   }
 }

@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "41de7558e33b2bf9c9fabefc9391778c32b10e01f863ac2eb457056ba5e0a25c"
+        "sha256": "11ee6757620fa10ad596e268324ff3947cc39c3dddf6f049285cacaf17633d24"
+      }
+    },
+    "catalog": {
+      "name": "Siarnaq",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Siarnaq, a moon of Saturn, through its source-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 84,
+      "context": {
+        "order": 162
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3c0b5b754777413044930f3243906ea0cb018d8f9118da5d984505f64ff9f6ff"
+    "sha256": "f0157bcf2937d2c338ca0b443058d7d7f893f072e3dfad4f398626daac0e9a1e"
   }
 }

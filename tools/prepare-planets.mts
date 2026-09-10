@@ -266,7 +266,7 @@ export async function preparePlanets({ projectRoot = process.cwd(), force = fals
     }
     const report = await runCachedPreparationObjects({ projectRoot: root, force, objectIds, concurrency });
     const navigation = await runObjectCommand({ command: process.execPath,
-      argumentsList: [resolve(root, "tools/prepare-navigation.mts")], cwd: root });
+      argumentsList: [resolve(root, "tools/prepare-navigation.mts"), ...objectIds], cwd: root });
     assert.equal(navigation.exitCode, 0, "Navigation preparation failed"); assert.equal(navigation.signal, null);
     const totalReport = { ...report, totalElapsedMilliseconds: performance.now() - start };
     await writeFile(resolve(root, cacheRoot, "latest-run.json"), JSON.stringify(totalReport, null, 2) + "\n");

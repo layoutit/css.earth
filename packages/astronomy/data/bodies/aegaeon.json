@@ -1,0 +1,72 @@
+{
+  "id": "aegaeon",
+  "classification": "satellite",
+  "order": 72,
+  "physical": {
+    "name": "Aegaeon",
+    "horizonsCode": "653",
+    "meanRadiusKm": 0.327106631018859,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "saturn"
+  },
+  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "653",
+    "longitudeHarmonics": [
+      {
+        "rateRadPerDay": 0.0014335353841225256,
+        "cosineRad": -1964.050902840959,
+        "sineRad": 292.9524119027064,
+        "epochJdTt": 2461041
+      },
+      {
+        "rateRadPerDay": 0.0049587295849034835,
+        "cosineRad": 0.025426487538322412,
+        "sineRad": -0.02673349986357186,
+        "epochJdTt": 2461041
+      },
+      {
+        "rateRadPerDay": 0.0014335474838978377,
+        "cosineRad": 1963.9985067014582,
+        "sineRad": -292.9472914293944,
+        "epochJdTt": 2461041
+      }
+    ],
+    "fitFromJdTdb": 2458849.5,
+    "fitToJdTdb": 2463232.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 0.708143214651,
+    "poleDeclinationRad": 1.457985941705,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 167490.635,
+      "eccentricity": 0.000207462266,
+      "inclinationRad": 1.5261785e-05,
+      "ascendingNodeRad": 3.113525946323,
+      "argumentOfPeriapsisRad": -3.99922087708,
+      "meanAnomalyAtEpochRad": -56786.14074204666,
+      "meanMotionRadPerDay": 7.757828789029571,
+      "ascendingNodeRateRadPerDay": -0.017452478840061514,
+      "argumentOfPeriapsisRateRadPerDay": 0.034956023111215276
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "653",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2458849.5,
+      "toJd": 2463232.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": true,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "653",
+      "center": "500@699",
+      "range": "daily"
+    }
+  }
+}

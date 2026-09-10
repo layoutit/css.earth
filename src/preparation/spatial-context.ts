@@ -49,6 +49,8 @@ export interface WorldContextSource {
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus;
   readonly bodies: readonly { readonly id: string; readonly name: string; readonly color: string; readonly placement?: 'approximate' }[];
+  /** Preparation resolves catalogue membership before computing the context. */
+  readonly bodySelection?: "catalog";
   readonly orbit: { readonly segments: number; readonly trail: { readonly solidTurns: number; readonly fadeTurns: number } };
   readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number; readonly presentation: WorldContextCameraPresentation };
   readonly system: { readonly fadeOutStartDistanceM: number; readonly hiddenDistanceM: number };
@@ -100,8 +102,9 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const focusInput = record(input.focus, 'world context focus'); keys(focusInput, ['id', 'name', 'color', 'pointSource'], 'world context focus');
   const focus = freeze({ id: identifier(focusInput.id, 'World context focus id'), name: text(focusInput.name, 'World context focus name'), color: color(focusInput.color),
     ...(focusInput.pointSource === undefined ? {} : { pointSource: parsePointSource(focusInput.pointSource) }) });
-  if (!Array.isArray(input.bodies) || input.bodies.length === 0) throw new TypeError('World context bodies must be nonempty.');
-  const bodies = input.bodies.map((value, index) => {
+  const fromCatalog = input.bodies === 'catalog';
+  if (!fromCatalog && (!Array.isArray(input.bodies) || input.bodies.length === 0)) throw new TypeError('World context bodies must be nonempty.');
+  const bodies = (fromCatalog ? [] : input.bodies as unknown[]).map((value, index) => {
     const body = record(value, `world context body ${index}`); keys(body, ['id', 'name', 'color', 'placement'], `world context body ${index}`);
     if (body.placement !== undefined && body.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
     return freeze({ ...(body.placement === 'approximate' ? { placement: 'approximate' as const } : {}), id: identifier(body.id, `world context body ${index} id`), name: text(body.name, `world context body ${index} name`), color: color(body.color) });
@@ -118,7 +121,7 @@ export function parseWorldContextSource(value: unknown): WorldContextSource {
   const fadeStartDistanceM = positive(volume.fadeStartDistanceM, 'Volume fade start'), fullDistanceM = positive(volume.fullDistanceM, 'Volume full distance');
   if (!(fadeStartDistanceM < fullDistanceM && fullDistanceM <= camera.maximumDistanceM)) throw new TypeError('Volume distance range is invalid.');
   const stars = parseStars(input.stars, fadeStartDistanceM);
-  return freeze({ schema: input.schema, sky: parseSkyBaseline(input.sky), frame, focus, bodies: freeze(bodies), orbit: freeze({ segments, trail: freeze({ solidTurns, fadeTurns }) }), camera, system, stars,
+  return freeze({ schema: input.schema, sky: parseSkyBaseline(input.sky), frame, focus, bodies: freeze(bodies), ...(fromCatalog ? { bodySelection: 'catalog' as const } : {}), orbit: freeze({ segments, trail: freeze({ solidTurns, fadeTurns }) }), camera, system, stars,
     volume: freeze({ objectId: identifier(volume.objectId, 'Volume object id'), fadeStartDistanceM, fullDistanceM,
       ...(volume.opacityProfile === undefined ? {} : { opacityProfile: parseVolumeOpacityProfile(volume.opacityProfile) }),
       ...(volume.brightnessProfile === undefined ? {} : { brightnessProfile: parseVolumeOpacityProfile(volume.brightnessProfile) }) }) });
@@ -146,6 +149,7 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     }
     if (states[id] || id === source.focus.id) throw new TypeError(`${id} orbit center duplicates a prepared body.`);
   }
+  if (source.bodySelection) throw new TypeError('Resolve catalogue membership before preparing the context.');
   const visibleIds = new Set(source.bodies.map(body => body.id));
   const centerState = (id: string) => visibleIds.has(id) ? states[id] : orbitCenters[id];
   for (const id of Object.keys(orbitCenters)) {

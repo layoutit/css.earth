@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7bbc41b1bbdc3d4740d8136b2a28bffdf9a69d2af934403ba198ec07746c9e0c"
+        "sha256": "b440b52b53fd8382e5e4148ef1a1ecdb0fb81d7df165f580aef6ec4c105ac73c"
+      }
+    },
+    "catalog": {
+      "name": "2001 SN263 Alpha",
+      "classification": "asteroid",
+      "color": "#a0a0a0",
+      "distanceAu": 1.9869,
+      "description": "Explore the primary of 2001 SN263 through its archived radar shape.",
+      "systemName": "Solar System",
+      "order": 15,
+      "context": {
+        "order": 460
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "eef9796ff7930c5e34c4aa7254ed949d5ff7d997f52124609838e2d5549007db"
+    "sha256": "b1b65dcf801e5e8e48265c5021ddc03d9de3498b336774c86e345446ed16c43d"
   }
 }

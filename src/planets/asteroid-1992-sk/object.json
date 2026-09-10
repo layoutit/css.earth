@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5aa2d9c95000d337bb0f896e176599ee9b7632d1421c57ad7deb53ef0271bb50"
+        "sha256": "f02021893622ae594d74bf6dde1f8225e05e02463c49a5a6378e0338c16aca71"
+      }
+    },
+    "catalog": {
+      "name": "1992 SK",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.2485450870597032,
+      "description": "Explore 1992 SK in 3D with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 213,
+      "context": {
+        "order": 173
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "d4d28a955f65f4eccc50f9e4b1045e0a32575a04fb23d046469be9abd8d2bab8"
+    "sha256": "d9fb0a45f997ba0c3c83418898e683f60fa61f05596586be1f5d48c5186cebc2"
   }
 }

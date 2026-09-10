@@ -3,11 +3,13 @@ import {writeFile,mkdir} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {chromium} from 'playwright';
 const origin=process.argv[2] ?? 'http://127.0.0.1:4259',output=process.env.CSSEARTH_REVIEW_OUTPUT ?? 'output/playwright/galileo-lucy/review';
+const dpr=Number(process.env.CSSEARTH_REVIEW_DPR ?? 1);
+assert.ok([1,2].includes(dpr),'Review DPR must be 1 or 2.');
 await mkdir(output,{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const errors=[],reports=[];
 try {
- const page=await browser.newPage({viewport:{width:1440,height:1000}});
+ const page=await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:dpr});
  page.on('pageerror',error=>errors.push(error.message));
  page.on('response',response=>{if(response.status()>=400)errors.push(`${response.status()} ${response.url()}`);});
  const ready=async id=>{
@@ -46,6 +48,6 @@ try {
   reports.push({navigation:`${id} → ${parent}`,ready:true,scenes:1});
  }
  assert.deepEqual(errors,[]);
- await writeFile(`${output}/report.json`,JSON.stringify({revision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),browser:browser.version(),origin,mode:process.env.CSSEARTH_REVIEW_MODE ?? 'browser review',reports,errors},null,2)+'\n');
+ await writeFile(`${output}/report.json`,JSON.stringify({revision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),browser:browser.version(),viewport:{width:1440,height:1000},dpr,origin,mode:process.env.CSSEARTH_REVIEW_MODE ?? 'browser review',reports,errors},null,2)+'\n');
  process.stdout.write('PASS production views, lighting, dashed orbits and parent navigation\n');
 } finally {await browser.close();}

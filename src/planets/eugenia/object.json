@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c18122dc7d5e5fa5f3685f387632a7c250b1293f634d5c99730d3dcade8adff6"
+        "sha256": "813248cace7c40a0f762a081e2b9f60f6eb06d655bf141d04959dd7880cf3b4c"
+      }
+    },
+    "catalog": {
+      "name": "Eugenia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.723129080316478,
+      "description": "Explore Eugenia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 156,
+      "context": {
+        "order": 87
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "12c239d374edddec75be0900113bba533d16ac3b37379b1aaa545f52fc270e66"
+    "sha256": "7f29afa5dd6c5c9f45e93faceb1e345597fc120d0868731d87a19cd97234d6de"
   }
 }

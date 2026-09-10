@@ -5,7 +5,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0914b3dfb42c1c2d66c7fa181b71f3c3d69448212c93002b8227cdd45173d2ac"
+    "sha256": "1ca7b9047c7cd9ae42497ca82c01bdddd6e9a420053ab76605542a8d560793e5"
   },
   "properties": {
     "preparation": {
@@ -115,7 +115,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "45eb3179d3fb67854a3706aa4dd6d0e3fb04fad1bbd649e76a535dcaa5739eff"
+        "sha256": "c2b4d8cb1e67eb84cb9593e5c32d8ef5d0430caa964ac213f705975be233924b"
+      }
+    },
+    "catalog": {
+      "name": "Eris",
+      "classification": "dwarf-planet",
+      "color": "#ddd6cf",
+      "distanceAu": 67.78,
+      "description": "Explore Eris with an illustrative NASA texture on its occultation-constrained spherical shape.",
+      "systemName": "Solar System",
+      "order": 462,
+      "context": {
+        "order": 39
       }
     }
   }

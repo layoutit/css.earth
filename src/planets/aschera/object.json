@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f5aa1aea34690f71ade1e146e28e86fae7b1fdb0799934d22296834d1b80c6ae"
+        "sha256": "5ee32b99a8f00800c64bf62abef47ceab29368b83742cff3eac93d85c48e0ecd"
+      }
+    },
+    "catalog": {
+      "name": "Aschera",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.610464215816688,
+      "description": "Explore Aschera in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 318,
+      "context": {
+        "order": 364
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "53a7a50cb7407df7fb1325e3c977178232b995bf2fa486ca30bcbbbc0a3b9aec"
+    "sha256": "101afa6bfc5cb616ff30a8727881927af1f14c01ee5f66e5c37b3331bdea5c5e"
   }
 }

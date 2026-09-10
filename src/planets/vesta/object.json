@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "22fc14771a526cb545c0e056daf132bc667fbfaaed8046804df8c27e6c45a6e2"
+    "sha256": "72c9fe2627ef566ef5b70421c50bc7fdec8a1f0e8ac0a12641646c86395b04c7"
   },
   "id": "vesta",
   "properties": {
@@ -123,7 +123,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "41bc0898e9561466952c05d07b0155b69a2cb9a7d752dbda8b2fd19584150248"
+        "sha256": "cea5bcd7ea22493902dc033d1e24e0fe1d6e9a918de0b3907cb7ef41ee22d04f"
+      }
+    },
+    "catalog": {
+      "name": "Vesta",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 2.36,
+      "description": "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.",
+      "systemName": "Solar System",
+      "order": 421,
+      "context": {
+        "order": 11
       }
     }
   },

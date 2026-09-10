@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "da1c16e2930469fbf2b8bda66ed879a2e21bc061d0260ba1bb63a946a94237e1"
+        "sha256": "6dea67b4eaf428a9b05d68220560b04cde53494f9a466b2eb1cc459080838115"
+      }
+    },
+    "catalog": {
+      "name": "1998 WT24",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 0.7186940115527254,
+      "description": "Explore 1998 WT24 in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 183,
+      "context": {
+        "order": 114
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "94118566c3e0993bd7ab7716ca72b9b2b9257f5d1ba3b5a20709b1dc7feffd54"
+    "sha256": "f16b771374bde9b038ba00c4240e38f64991e69789f7a1c5f41875e0d81b33cf"
   }
 }

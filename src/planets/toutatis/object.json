@@ -108,7 +108,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "673d1d5229f2e43abdf76bd778f414a82bfd73752b3627c2a7463fba32cd26de"
+        "sha256": "a9ca86de177ccd47eabf84bd20401945c622152db6935187b87f1a63ecda4f3c"
+      }
+    },
+    "catalog": {
+      "name": "Toutatis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.543055738919472,
+      "description": "Explore Toutatis with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 138,
+      "context": {
+        "order": 59
       }
     }
   },
@@ -117,6 +129,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "742833e9051224b26851b52d3a69a1deaeacef11b64be2fe0b283ceb42b617d2"
+    "sha256": "0f56eb01c17a6ed694f8a88b86a49a6e61f3fe9968af20c5732ca015545a43ab"
   }
 }

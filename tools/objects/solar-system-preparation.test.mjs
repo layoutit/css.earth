@@ -31,7 +31,7 @@ const phaseAtlas = { ...mercuryAssets.lighting.banks["2"].billboard,
   maximumLightViewZ: mercuryAssets.lighting.maximumLightViewZ,
   baseLightAzimuthDegrees: mercuryAssets.lighting.baseLightAzimuthDegrees };
 const presentationConfig = { bodyId: "mercury", plan: mercuryPrepared.heliocentricView,
-  navigationMarkers: PREPARED_NAVIGATION_MARKERS, markerAtlasUrl: "/navigation/planet-markers@2x.webp",
+  navigationMarkers: PREPARED_NAVIGATION_MARKERS, markerAtlasUrl: "/navigation/body-sun@2x.webp",
   systemMarkerStrip: mercuryStrip, phaseAtlas, captionNames: mercuryPresentation.heliocentricView.labels.names, catalogue };
 const tiles = [
   { id: "ceres", color: [110, 106, 102], size: 5 },
@@ -46,8 +46,8 @@ test("Mercury retained leaf mapping and shared delivery remain source-bound and 
   const view = presentation.heliocentricView;
   for (const [id, marker] of [['mercury', view.bodyMarker], ['sun', view.systemMarkers.sun], ...Object.entries(view.systemMarkers.bodies)]) {
     if (!marker.url?.startsWith('/scenes/')) {
-      assert.equal(marker.count, PREPARED_NAVIGATION_MARKERS[id].count, `${id}: current shared strip count`);
-      assert.equal(marker.index, PREPARED_NAVIGATION_MARKERS[id].index, `${id}: current shared strip index`);
+      assert.equal(marker.count, PREPARED_NAVIGATION_MARKERS[id].count, `${id}: body sprite count`);
+      assert.equal(marker.index, PREPARED_NAVIGATION_MARKERS[id].index, `${id}: body sprite index`);
     }
   }
   assert.ok(presentation.assets.startup.every(key => !key.startsWith("sky:") && !key.startsWith("interior:")));
@@ -132,9 +132,14 @@ test("shared physical scene reproduces every existing Mercury subplan byte for b
   }
 });
 
-test("shared marker, phase, and catalogue assembly reproduces Mercury bytes", () => {
+test("shared marker and phase assembly preserves Mercury with only its referenced captions", () => {
   const prepared = prepareSolarSystemPresentation(presentationConfig);
-  assert.equal(JSON.stringify(prepared), JSON.stringify(mercuryPresentation.heliocentricView));
+  const expected = structuredClone(mercuryPresentation.heliocentricView);
+  const ids = ['mercury', 'sun', ...expected.plan.system.bodies.map(body => body.id)];
+  expected.labels.names = Object.fromEntries([...new Set(ids)].map(id => [id, expected.labels.names[id]]));
+  // The common fallback now names Sun's own sprite; explicit body addresses remain pinned.
+  expected.systemMarkers.url = "/navigation/body-sun@2x.webp";
+  assert.deepEqual(JSON.parse(JSON.stringify(prepared)), expected);
   assert.equal(prepared.bodyMarker.size, 1.2);
   assert.equal(prepared.labels.stars.records.length, 450);
 });

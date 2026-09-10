@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a234cc87e159d45691c9799288a3e8ca714e1d99fd5d90e24381ef332b933b00"
+        "sha256": "9d428e51776582330038874d7b0ab3b2649d5efcdefb3489371c936f9717189a"
+      }
+    },
+    "catalog": {
+      "name": "Moshup",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 0.642389793312345,
+      "description": "Explore Moshup in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 190,
+      "context": {
+        "order": 121
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a0040ca140ee5a8624d15185a90e8bff9a38e7b1bbc92312b69eb186630b90fe"
+    "sha256": "41c8386eb53d40cea3d933bc09fab0ecb0981c05d4e7e3acaa9d43fb2cdc0efe"
   }
 }

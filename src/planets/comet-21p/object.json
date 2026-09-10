@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4bad6bab3425e3b629cb8728d22ac55c304e5802e79553acf28a2f640b2d055d"
+        "sha256": "1fcd57b47a851bb1ec26347c3a93666f6a57c692c3fa843312a0a12439b41ddb"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 3.2063132481103267,
       "bodyRadiusM": 737.4520470653752
+    },
+    "catalog": {
+      "name": "Giacobini–Zinner",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 4.58488201074323,
+      "description": "21P: Giacobini–Zinner was the first comet visited by a spacecraft, when ICE passed through its tail in 1985. Its dust also feeds the Draconid meteor shower. Illustrative nucleus at Celestia’s catalog scale.",
+      "systemName": "Solar System",
+      "order": 52,
+      "context": {
+        "order": 441
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "94c252d0da229621e5e69d813c63e1a3f788c59af2346ca4494041d77d1ff51d"
+    "sha256": "c0cc0a8e702525c9201c1490e362dadcb4680b91372a3eaea2263dca197e024c"
   }
 }

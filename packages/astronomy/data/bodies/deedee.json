@@ -1,0 +1,76 @@
+{
+  "id": "deedee",
+  "classification": "trans-neptunian",
+  "order": 0,
+  "classificationOrder": 16,
+  "physical": {
+    "name": "DeeDee (2014 UZ224)",
+    "horizonsCode": "2014 UZ224;",
+    "meanRadiusKm": 317.5,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272014+UZ224%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 16403330408.75162,
+      "eccentricity": 0.6491581096539483,
+      "inclinationRad": 0.35636437344928973,
+      "ascendingNodeRad": 1.3311861561611606,
+      "argumentOfPeriapsisRad": 1.5333569541984338,
+      "meanAnomalyAtEpochRad": 5.6508391362031265,
+      "meanMotionRadPerDay": 1.4982059249137538e-05
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%272014+UZ224%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          8122737889.963281,
+          9979936957.168745,
+          -2055681167.740024
+        ],
+        "velocity": [
+          -284579.549676521,
+          4188.813748118808,
+          103283.5266210701
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          8114199144.355873,
+          9980060193.588516,
+          -2052582430.250174
+        ],
+        "velocity": [
+          -284670.1870928758,
+          4026.842358463966,
+          103298.925095149
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          8105657647.540535,
+          9980178554.583609,
+          -2049483233.338351
+        ],
+        "velocity": [
+          -284763.3809659138,
+          3863.185314275079,
+          103313.9530978897
+        ]
+      }
+    ]
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "2014 UZ224;",
+      "model": "asteroid"
+    }
+  }
+}

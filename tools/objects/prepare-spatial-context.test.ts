@@ -4,14 +4,18 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import test from 'node:test';
-import { SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
-  systemBarycentreHeliocentricAu, M_PER_AU, SCENE_SATELLITE_IDS } from '@cssearth/astronomy';
+import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
+  systemBarycentreHeliocentricAu, M_PER_AU } from '@cssearth/astronomy';
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey } from '@cssearth/astronomy';
+import { readCatalog } from '../prepare-catalog.mts';
 import { prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/planets/sun/source/navigation/universe.json');
 const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
+const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
+  .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
+
 
 test('migrated world-frame radii override astronomy only at the same position and epoch', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-spatial-context-'));
@@ -72,7 +76,9 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     await prepareSpatialContext({ sourcePath, solarGeometryPath, outputPath });
     const result = JSON.parse(await readFile(outputPath, 'utf8'));
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
-    assert.deepEqual(result.bodies.map((body: { id: string }) => body.id), source.bodies.map((body: { id: string }) => body.id));
+    assert.deepEqual(result.bodies.map((body: { id: string }) => body.id), contextEntries.map(body => body.id));
+    assert.deepEqual(result.bodies.filter((body: { placement?: string }) => body.placement === 'approximate')
+      .map((body: { id: string }) => body.id).sort(), ['dactyl', 'selam'], 'Catalogue preparation must preserve the source records’ phase qualification.');
     // Independently parse the retained Horizons output, bypassing the snapshot
     // loader, solar-geometry.mts and descriptor frames. Other bodies retain
     // their compact astronomy models; Earth adds its source-owned EMB offset.
@@ -128,7 +134,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
         assert(distance < initialDistance * 1.2 && distance > initialDistance * .8, `${id} ellipse left its parent centre`);
       }
     }
-    const authoredIds = new Set(source.bodies.map((body: { id: string }) => body.id));
+    const authoredIds = new Set(contextEntries.map(body => body.id));
     for (const [id, positionKm] of sourcePrimaries) {
       if (authoredIds.has(id)) {
         assert.equal(result.orbitCenters?.[id], undefined, 'an authored primary owns its body frame, without a duplicate coordinate-only entry');
@@ -151,7 +157,7 @@ test('a non-visible primary must come from matching canonical geometry, without 
   const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-hidden-primary-'));
   try {
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
-    source.bodies = source.bodies.filter((body: { id: string }) => body.id === 'menoetius');
+    source.bodies = [{ id: 'menoetius', name: 'Menoetius', color: '#aaaaaa' }];
     const authored = resolve(directory, 'source.json');
     await writeFile(authored, JSON.stringify(source));
     const outputPath = resolve(directory, 'context.json');

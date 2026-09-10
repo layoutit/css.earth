@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "06ca76d3197a0119bfbe02260fd7dc5914f874c3aeafde85aa316418adff3ab4"
+        "sha256": "fd3eebf022c264fa8ab33494b7108f3fb8475234611033d415ab7a51afb0f6cf"
+      }
+    },
+    "catalog": {
+      "name": "Siding Spring",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 3.091276774723207,
+      "description": "Explore 162P/Siding Spring through a shape approximation based on published lightcurve models.",
+      "systemName": "Solar System",
+      "order": 75,
+      "context": {
+        "order": 302
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6b5f8276ae6a5bae4798c01657067b811a7c5ed21c6e25b5454f52774f297b24"
+    "sha256": "1e99ff4a9c032b74da5c4515328f14bc6c267e9c165936dd5ae63059f9f2a1b7"
   }
 }

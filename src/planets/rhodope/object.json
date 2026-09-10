@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2f2b3f8b2b0ba719cdf2abb8d1f71d15fd50047afa4565bd412855ce862421bf"
+        "sha256": "33d844bb08bc8ae3f292332e3c111f8d07f779c6787826f2b8fa8935ada6a4cf"
+      }
+    },
+    "catalog": {
+      "name": "Rhodope",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6866911021546116,
+      "description": "Explore Rhodope in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 298,
+      "context": {
+        "order": 344
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0f9abc373424e9b3fb3d72a1039f47258ddcc3ac0df4852572193666fe3e201c"
+    "sha256": "86d08c9b5bf0921a7a9d10653db1e65e29b79b2e9c812dec086a04f553ce276b"
   }
 }

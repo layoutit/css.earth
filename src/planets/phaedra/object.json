@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "49f433375a04be26aac8bca751082dc110c825a9cbc1c7b909ae67cb40cb15fc"
+        "sha256": "f0d8d0f2de4ae1c3b511dcbe6a5cb0c8dd1a91771e3522b8e1086eea89c5b151"
+      }
+    },
+    "catalog": {
+      "name": "Phaedra",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.8588859462315144,
+      "description": "Explore Phaedra in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 303,
+      "context": {
+        "order": 349
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "cdd893f46d4b354b2b307a53ad6b3de738d27b39203ee523d801ee835ae70802"
+    "sha256": "d817b5a818ec0a3dcbaf75e46430be56057c7fee65fdfdfed910cc12232b5d9a"
   }
 }

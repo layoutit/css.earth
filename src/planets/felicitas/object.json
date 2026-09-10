@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2bd7964acf64a3f67083c4d8ebd06169aeba7d5adf1219fac11d1e51aa2bc8a3"
+        "sha256": "105fc7d59e731648624b41a198da5941127f6ddfb25ea12fa8be25e6fd8807d4"
+      }
+    },
+    "catalog": {
+      "name": "Felicitas",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6925655976731475,
+      "description": "Explore Felicitas in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 262,
+      "context": {
+        "order": 307
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b8c13715152cc1635e4d44cd0a8d04ad0e9d3020d5351b039a715e5c0bef81b8"
+    "sha256": "a019f0db44f1eb85bfdbe08355795299d9b608e3613d47a5bd8a7ac642bb75bb"
   }
 }

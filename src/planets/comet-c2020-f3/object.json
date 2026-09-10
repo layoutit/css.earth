@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "898ca21ea4667351e672341e9ba87a5534ead3d5ccc22bd3ee2fdb4f1f0b2597"
+        "sha256": "5879b5592fc2247eef8e6b9cb3f29ddb4ce5872fd3ee573497b6446f86cf4980"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 8.015783120275817,
       "bodyRadiusM": 1843.6301176634377
+    },
+    "catalog": {
+      "name": "NEOWISE",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 18.5185079289819,
+      "description": "C/2020 F3: NEOWISE was discovered by NASA’s infrared survey telescope in March 2020. Within months it became a bright comet visible to observers on Earth. Illustrative nucleus at Celestia’s catalog scale.",
+      "systemName": "Solar System",
+      "order": 69,
+      "context": {
+        "order": 458
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fc571343ff4858ce741c190fa83a7c4942e5cc0c3fa913cd0a464b0f352606cd"
+    "sha256": "e591658c933d67d6cf8c77b132cc12599574cdc0b188b987817124eb6bf709a6"
   }
 }

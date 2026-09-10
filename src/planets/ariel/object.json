@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8d716fa7b37d53bbcdb46bc4229bcf90bca879f824bab133f9be5628be347a0d"
+        "sha256": "a33978fec83af2138bd4e7acd7ff92f8d00efd9b6a90e301c48fc1c78b0fe9bb"
+      }
+    },
+    "catalog": {
+      "name": "Ariel",
+      "classification": "satellite",
+      "color": "#b0afa9",
+      "distanceAu": 19.2,
+      "description": "Explore Ariel in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
+      "systemName": "Solar System",
+      "order": 448,
+      "context": {
+        "order": 29
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "be47eea8535864bcab8197a8986cc42364c136653a90831c4e29257820b6710d"
+    "sha256": "48dfa4e30e7937cbddb869c799cf7136582927b12db59d3e3e6b919ffa018203"
   }
 }

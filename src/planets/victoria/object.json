@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1ae5d1ff321f3dd929b957d951453569ac86fc734fa47fafe2946c1157291e81"
+        "sha256": "c70ae4a31aef278ed52bb33535fe52cb32b13d677be0fc92e3a7e89280054dbf"
+      }
+    },
+    "catalog": {
+      "name": "Victoria",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3351679097411595,
+      "description": "Explore Victoria in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 165,
+      "context": {
+        "order": 96
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "2015a5a3ea84b28a854af56abb9ac728c9655252054e2cff4f76a370177c1768"
+    "sha256": "d704a10992dddb12e394b2064252fb2cce3791456af5ea85dc5ebb278b4084e2"
   }
 }

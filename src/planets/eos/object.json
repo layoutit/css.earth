@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "87334a55ac6204c58264379ee261562a7249ad2794ede2054d3443dff13de526"
+        "sha256": "88b170577f095a9460f792d1b640c7aa66e1019631bf6f7af9956b70e0f612ae"
+      }
+    },
+    "catalog": {
+      "name": "Eos",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.011699855683851,
+      "description": "Explore Eos in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 322,
+      "context": {
+        "order": 368
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4c9f16f69afcbe56b7ffff8b08cc211f841cf54ac0146e078bea81c4b937b0c0"
+    "sha256": "3d97fa124f0b823bf0c423fed42ec7a1a1a941359d2eddaf7225a45a14b61b85"
   }
 }

@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0aea00365516b31223a58b606d2651c477b5b307155a82f51c94dcd7087b700a"
+        "sha256": "b2e1dcd92db6bbc8a1051b7357db233df57590d84003d5f0f884d2a4d1bd4844"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 5.065974932014316,
       "bodyRadiusM": 1165.1742343632927
+    },
+    "catalog": {
+      "name": "Arend–Roland",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 95.24827628303814,
+      "description": "C/1956 R1: Arend–Roland is remembered as the Great Comet of 1957. Its bright appearance came during a close passage around the Sun. Illustrative nucleus at Celestia’s catalog scale.",
+      "systemName": "Solar System",
+      "order": 62,
+      "context": {
+        "order": 451
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ca913e2108515f0e1ec5bc4f2d94fa10145b0b7368e7bd8716b6678c2f301774"
+    "sha256": "b6c4eef5a719a0432f65457072dd90a5c4346e40c5b0d71bd9f6eed08ef7e141"
   }
 }

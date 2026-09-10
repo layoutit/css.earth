@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "af6e1db3986b8cc4ff4717750c1431aeedb03d1492666600251dc1fa54f30156"
+        "sha256": "41edd0e84ecd5c3ab00836e8031d4c055cf0297c699d30d145a284aed1e67682"
+      }
+    },
+    "catalog": {
+      "name": "Artemis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3721668452445526,
+      "description": "Explore Artemis in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 260,
+      "context": {
+        "order": 305
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "021d227c1d84919a58d97f8f700fd7d17c073016b6b2b5b63b3ec64e067ebb59"
+    "sha256": "7d11d09298a34244faa1ade1b68b8b0d459d52e6286585027b483d8d50f00988"
   }
 }

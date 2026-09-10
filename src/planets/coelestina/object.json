@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bd1835b5b6b1a8825eebc74f7fad5f1b7b2c8c3724520f00694cd8963a72c7ef"
+        "sha256": "8722dc601beea3ce2101eeac0564f114d8e68103bca08dcdc4e2b1d023732ca7"
+      }
+    },
+    "catalog": {
+      "name": "Coelestina",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7617393088127553,
+      "description": "Explore Coelestina in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 329,
+      "context": {
+        "order": 375
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "126afe7bfd3d035b9209bf80d47b0db93679b791aea4e07de8f38b193b1b3c74"
+    "sha256": "f2f9f5e4aa8ed9876a6e7982704b7d426ed92259f5e68bd8221537c0e3458997"
   }
 }

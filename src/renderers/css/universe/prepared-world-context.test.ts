@@ -400,11 +400,10 @@ test('camera publication consumes interaction changes without polling retained D
 
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../planets/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
-  expect(parsePreparedWorldContext(source).bodies.map(body => body.id).sort())
-    .toEqual(OBJECTS.filter(object => object.id !== 'sun' && object.worldFrame).map(object => object.id).sort());
-  const authored = JSON.parse(await readFile(new URL('../../../planets/sun/source/navigation/universe.json', import.meta.url), 'utf8')) as { bodies: { id: string }[] };
-  expect(parsePreparedWorldContext(source).bodies.map(body => body.id))
-    .toEqual(authored.bodies.map(body => body.id));
+  const { readCatalog } = await import('../../../../tools/prepare-catalog.mts');
+  const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
+    .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
+  expect(parsePreparedWorldContext(source).bodies.map(body => body.id)).toEqual(contextEntries.map(body => body.id));
   for (const body of parsePreparedWorldContext(source).bodies) {
     const frame = OBJECTS.find(object => object.id === body.id)!.worldFrame!;
     expect(body.radiusM, `${body.id} context must match the selectable detail radius`).toBe(frame.bodyRadiusM);

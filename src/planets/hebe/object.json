@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "170a96cb87032ebd64c96850d49f9e2a81d1a2be1dc5c2f1b85edb09922fe45d"
+        "sha256": "3d233bc63bdae4c2e275f181929b7a591a32e11ef5dcf3b2980424a422cc14ad"
+      }
+    },
+    "catalog": {
+      "name": "Hebe",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.426170909674805,
+      "description": "Explore Hebe in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 155,
+      "context": {
+        "order": 86
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "81fa89a1d93cbc2a2bc239d3a6e3089152ed4a6dce56cf3c84a3ede2b6c75402"
+    "sha256": "7b7b65662f981adc76c9c0e673b58cfae041d44cb889125c688c6cc4fe0261e2"
   }
 }

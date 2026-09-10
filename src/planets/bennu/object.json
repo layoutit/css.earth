@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a509d4306db3db937b484ab6632a37f79a50079187ab663baa9be70819d37c82"
+    "sha256": "4f3ab61c866b6e4d48802c3dc549f63152d1539e9279d48e381c7b1a5413f0d2"
   },
   "id": "bennu",
   "properties": {
@@ -128,7 +128,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "730b684118c15e219a04f133d4a54f78275264fc49f5dcee6e18b1ab6f232744"
+        "sha256": "19d141edc2060034ff7be0a5533aca19e7e1295bfef79c81ea3e9f169a85bc98"
+      }
+    },
+    "catalog": {
+      "name": "Bennu",
+      "classification": "asteroid",
+      "color": "#a49c8d",
+      "distanceAu": 1.126,
+      "description": "Explore Bennu in 3D with cssEarth using mission-derived shape and surface data.",
+      "systemName": "Solar System",
+      "order": 123,
+      "context": {
+        "order": 9
       }
     }
   },

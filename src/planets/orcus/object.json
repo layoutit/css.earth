@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1c41d4bb346ececdaaa2265dbd5576801794c1c820d80e32b2f6e7ed23c8295f"
+        "sha256": "34ba037ee5b5a822d23fcf1eeabb056b8e81a637c0a4d8ce47632f851e73a56a"
       }
     },
     "worldFrame": {
@@ -112,11 +112,23 @@
       ],
       "metersPerUnit": 1978.2608695652166,
       "bodyRadiusM": 454999.9999999998
+    },
+    "catalog": {
+      "name": "Orcus",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 47.98129781525766,
+      "description": "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.",
+      "systemName": "Solar System",
+      "order": 11,
+      "context": {
+        "order": 434
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c35ce7361c0da6d75ccfc1514640726d5c8e8526c4370d8dd152eb8c622a449c"
+    "sha256": "e513e2bebdf67e1db57e18837b690d9dd72b6c1fa2ccece6564d5cdd430d58a6"
   }
 }

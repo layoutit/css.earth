@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a3e3f505c26657e366bf8f3e7c36e2176ca689c0877c14ba5f4bd0a65068e242"
+        "sha256": "adc80225291b9ab6c05078bd97c18a8c16303553ee2d3a01affdc347788b15e9"
+      }
+    },
+    "catalog": {
+      "name": "1999 FR33",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.9765894346509167,
+      "description": "Explore 1999 FR33 in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 420,
+      "context": {
+        "order": 224
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b0e22cf7ec371ce791f3e51adb1a307bfed4c9f808d26b476fd3c54d6e26a056"
+    "sha256": "b9c48a4e5bed220bc25a155cff52711ab7e6683b5b2e2a732d6132ea219f9732"
   }
 }

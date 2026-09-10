@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0beeb295146958768d13fd7ca961e6b15c63a2ddd3e93ed573448f542ef52f7b"
+        "sha256": "4de7bcbb10d170fd465c6c334c7660a762949dee879c0d2c5e7bb99d8fe679f4"
+      }
+    },
+    "catalog": {
+      "name": "Nix",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 39.482,
+      "description": "Explore Nix through the measured New Horizons shape model.",
+      "systemName": "Solar System",
+      "order": 457,
+      "context": {
+        "order": 123
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0c384e732658975ee846a8c7b40239e6af42b1a907fb00b427c959e6d0dd1a32"
+    "sha256": "a03ae1f690df949428f5df2e8cf3dcc77a8d07f29892972aee85384b80e8165d"
   }
 }

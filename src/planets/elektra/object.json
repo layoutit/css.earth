@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9640cbc7a8593d5d803e2c8b7a27b6024d65000c71b88357a5e7b36172147048"
+        "sha256": "eee68375cda94d87128510b97845f8bd4a75b5117d3e4b85dd3848403c679032"
+      }
+    },
+    "catalog": {
+      "name": "Elektra",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.126562817910036,
+      "description": "Explore Elektra in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 153,
+      "context": {
+        "order": 84
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3819f9cf0b1e1d2e1b209a16cf5ffefba635a33398e09d4b889384ab41c60aca"
+    "sha256": "50a265c5b1a7e6927e3a128278c3df9356061475a7a1eff749139edcb297f1dc"
   }
 }

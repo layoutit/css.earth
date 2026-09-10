@@ -83,7 +83,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4091832ec5fd3a441ca73d603a1179cfe61a5b3be5d6cf160e79adfd2ea3d95b"
+        "sha256": "664db18dc1cadd3da6233f209703f2a5aaabe88ca3ceb842603c477b92eb05fd"
       }
     },
     "worldFrame": {
@@ -112,11 +112,24 @@
       ],
       "metersPerUnit": 1377.7969089408398,
       "bodyRadiusM": 316893.28905639314
+    },
+    "catalog": {
+      "name": "Gǃkúnǁʼhòmdímà",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 74.45925441086162,
+      "description": "Explore its published shape and source constraints.",
+      "systemName": "Solar System",
+      "order": 359,
+      "context": {
+        "order": 425,
+        "color": "#9d9388"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9a3105b87534e78fc1d804566ea713ea43a9830d3f7d7d131b52b2b463719c68"
+    "sha256": "f4b03dd7ed0d1ca15bd8e8c5260e86c1318a49d18746b7755001a36c5de966fc"
   }
 }

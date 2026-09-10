@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2f27c105eb93efb1f42c85d799e19e4c85b82ddf6b8a880fa86544d5e87ff966"
+        "sha256": "bc84f0eb436be2b5266b26deaca502d557d1510a74b5ca722430459af1e2de4b"
+      }
+    },
+    "catalog": {
+      "name": "YORP",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 1.0059143954320515,
+      "description": "Explore YORP in 3D with its published radar shape model.",
+      "systemName": "Solar System",
+      "order": 209,
+      "context": {
+        "order": 159
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fd61ad69468a12c23481642909270efa97e9838238ec15fa78d82dda190441c4"
+    "sha256": "48f28025b6611a9ac8c8e092329142c392aebc66549f88c6f4199015be45621b"
   }
 }

@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ca5d7c2836267da722060026063a82dfe02c8c678ee5b7e3697bfeafa8e27804"
+        "sha256": "ff91ff5ad15ef7f9648a7e2479b79d2b793ad1bf81bc46bb2345886be0958169"
+      }
+    },
+    "catalog": {
+      "name": "Cordelia",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Cordelia, the inner shepherd of Uranus's epsilon ring.",
+      "systemName": "Solar System",
+      "order": 95,
+      "context": {
+        "order": 132
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "62b05c8a83beef0ecd6bb1f434fbe3f42aeccba37f0b25027bf412b89f16cdaa"
+    "sha256": "ef12cbf4ea94d138666f6b60fa88bcc2584ad785cb0d9e1c1a6782a88d6ee52f"
   }
 }

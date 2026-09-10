@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "70656cea6f65e664cfb795318300cad650fbfc307b27e90088e6b46ba7c8e300"
+        "sha256": "25addc002f6bc80fb47f06b12a606a6caa8f2633612d8bb2aea0bdfc25ca1f65"
+      }
+    },
+    "catalog": {
+      "name": "Sylvia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.4930585312343174,
+      "description": "Explore Sylvia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 145,
+      "context": {
+        "order": 76
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7ad6f8e89e57b6149c9bd133a4d9c0867aeda2f00d20e66f7e05891d9950aa31"
+    "sha256": "0d78503993db486e2e32273247e2483f334d9bdc50a8144ee7231e9d778b8e81"
   }
 }

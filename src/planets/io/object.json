@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "891bc3f9188de659845069babb60cc6615cd42cc69c64c228fffa415739ce1c8"
+    "sha256": "f8d5fc944bc3ec11eed89c9ccc3a0743ef8d8845973792f330d3ea76b2a677b1"
   },
   "id": "io",
   "properties": {
@@ -128,7 +128,20 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1d5842b520d3688bc0a27442363196e27ef60f944a04c9c049b614b1d5567024"
+        "sha256": "43e8540fdd99ce0a73cd3a727233b2fded67987c8ecfbfd98ec0cab98ca0ec9f"
+      }
+    },
+    "catalog": {
+      "name": "Io",
+      "classification": "satellite",
+      "color": "#c6ac65",
+      "distanceAu": 5.2,
+      "description": "Explore Io in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s volcanic moon and its orbit around Jupiter.",
+      "systemName": "Solar System",
+      "order": 426,
+      "context": {
+        "order": 14,
+        "color": "#ddc584"
       }
     }
   },

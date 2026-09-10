@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1600f3931a9a69fae4a2ff1cdf793ff0801a7bf87af45e72a35b26f410be2ebd"
+        "sha256": "d388bb5aa74b462101829d34ed0529ea7fa20905663c9309d68d9f84e07fc8df"
+      }
+    },
+    "catalog": {
+      "name": "Polyhymnia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.8701879510937207,
+      "description": "Explore Polyhymnia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 375,
+      "context": {
+        "order": 179
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ecbb0d74d2a2cb40cf38c091022c92b04dddbb374eb32063ac1fd6681a7890ec"
+    "sha256": "a5afa9d5cf54641a88a76e0f3bd7518727fbaaf794599e01523d0a3fd8fee35b"
   }
 }

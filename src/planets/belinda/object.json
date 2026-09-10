@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3d257a427a6bda54d9d0fe506fc0e458676688a8ac983e2e8a4cb49eecadd85c"
+        "sha256": "bd707c4c2431ae708ce9237f88e6093d43bb1f749b405b14db4b3370e09e9b9f"
+      }
+    },
+    "catalog": {
+      "name": "Belinda",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Belinda through its published prolate shape model.",
+      "systemName": "Solar System",
+      "order": 96,
+      "context": {
+        "order": 131
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "03c52aeedd80f8cf8d9ed8c02648c4163a32a0aac4669a17c0b0ab40ffcb8343"
+    "sha256": "5dd8296f961f35ec5bd3d81d18b05ad067db0074221236fffff346d4f5d547e4"
   }
 }
