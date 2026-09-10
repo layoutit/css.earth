@@ -27,6 +27,7 @@ same workflow and implementation.
 
 ## Proposals under discussion
 
+- [SOURCES catalogue](architecture/sources-catalogue-proposal.md) — canonical source identity, local evidence, derived usage and migration.
 - [Missions, spacecraft and dataset attribution](architecture/exploration-catalog.md) — catalogue ownership, capture migration, preparation and dataset navigation.
 - [Spacecraft and individual mission catalogues](architecture/spacecraft-missions-proposal.md)
 
