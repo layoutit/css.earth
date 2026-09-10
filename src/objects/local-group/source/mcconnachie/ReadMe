@@ -1,0 +1,440 @@
+J/AJ/144/4  Properties of dwarf galaxies in the Local Group (McConnachie+, 2012)
+================================================================================
+The observed properties of dwarf galaxies in and around the Local Group.
+    McConnachie A.W.
+   <Astron. J., 144, 4 (2012)>
+   =2012AJ....144....4M
+================================================================================
+ADC_Keywords: Galaxies, nearby ; Positional data ; Radial velocities ;
+              Rotational velocities ; Abundances, [Fe/H] ; Extinction ;
+              Velocity dispersion ; Photometry, UBV
+Keywords: catalogs - galaxies: dwarf - galaxies: fundamental parameters -
+          galaxies: general - galaxies: structure - Local Group
+
+Abstract:
+    Positional, structural, and dynamical parameters for all dwarf
+    galaxies in and around the Local Group are presented, and various
+    aspects of our observational understanding of this volume-limited
+    sample are discussed. Over 100 nearby galaxies that have distance
+    estimates reliably placing them within 3Mpc of the Sun are
+    identified. This distance threshold samples dwarfs in a large range of
+    environments, from the satellite systems of the MW and M31, to the
+    quasi-isolated dwarfs in the outer regions of the Local Group, to the
+    numerous isolated galaxies that are found in its surroundings. It
+    extends to, but does not include, the galaxies associated with the
+    next nearest groups, such as Maffei, Sculptor, and IC 342. Our basic
+    knowledge of this important galactic subset and their resolved stellar
+    populations will continue to improve dramatically over the coming
+    years with existing and future observational capabilities, and they
+    will continue to provide the most detailed information available on
+    numerous aspects of dwarf galaxy formation and evolution. Basic
+    observational parameters, such as distances, velocities, magnitudes,
+    mean metallicities, as well as structural and dynamical
+    characteristics, are collated, homogenized (as far as possible), and
+    presented in tables that will be continually updated to provide a
+    convenient and current online resource. As well as discussing the
+    provenance of the tabulated values and possible uncertainties
+    affecting their usage, the membership and spatial extent of the MW
+    sub-group, M31 sub-group, and the Local Group are explored. The
+    morphological diversity of the entire sample and notable sub-groups is
+    discussed, and timescales are derived for the Local Group members in
+    the context of their orbital/interaction histories. The scaling
+    relations and mean stellar metallicity trends defined by the dwarfs
+    are presented, and the origin of a possible "floor" in central surface
+    brightness (and, more speculatively, stellar mean metallicity) at
+    faint magnitudes is considered.
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName   Lrecl  Records   Explanations
+--------------------------------------------------------------------------------
+ReadMe         80        .   This file
+table1.dat    167      102   Basic information
+table2.dat    136      102   Positions and velocities
+table3.dat    199      102   Luminosity and structural parameters
+table4.dat    304      102   Masses and kinematics
+table5.dat    139      102   Mean stellar metallicities
+refs.dat      320      319   References
+--------------------------------------------------------------------------------
+
+See also:
+ VII/34 : ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts 1982)
+ J/MNRAS/411/1013 : CaII triplet in Sextans dSph galaxy (Battaglia+, 2011)
+ J/ApJ/733/46     : Velocity measurements in Segue 1 (Simon+, 2011)
+ J/AJ/139/1168    : CaII spectroscopy of SMC fields stars (Parisi+, 2010)
+ J/ApJ/710/1664   : BV photometry in Leo IV and Leo V dSphs (de Jong+, 2010)
+ J/ApJ/711/361    : Local Group dE galaxies. II. (Geha+, 2010)
+ J/ApJ/723/1632   : Abundance spreads in Bootes I and Segue 1 (Norris+, 2010)
+ J/PAZh/35/829    : Star clusters in IC 10 (Tikhonov+, 2009)
+ J/ApJ/705/328    : Abundance measurements in Sculptor dSph (Kirby+, 2009)
+ J/MNRAS/397/1748 : Spectroscopic study of Segue 2 (Belokurov+, 2009)
+ J/A+A/485/41     : VLT spectroscopy of blue massive stars in NGC55
+                    (Castro+, 2008)
+ J/MNRAS/384/1544 : Surface photometry of local dwarf galaxies (Sharina+, 2008)
+ J/AJ/135/836     : Calcium triplet index in LMC stars (Carrera+, 2008)
+ J/AJ/133/715     : Dwarf galaxies of the Local Group (Whiting+, 2007)
+ J/AJ/133/270     : Metallicities and ages in Leo II dSph (Koch+, 2007)
+ J/ApJ/670/346    : M giant stars in Sagittarius dwarf galaxy. V. (Chou+, 2007)
+ J/A+A/459/423    : VI and [Fe/H] of Fornax dSph RGB stars (Battaglia+, 2006)
+ J/AJ/131/332     : Velocities of individual stars in NGC 205 (Geha+, 2006)
+ J/AJ/131/895     : Stars in the Carina dwarf spheroidal galaxy (Koch+, 2006)
+ J/AJ/129/1465    : Spectroscopy of red giants in the LMC bar (Cole+, 2005)
+ J/AJ/128/16      : HIPASS Bright Galaxy Catalog (Koribalski+, 2004)
+ J/AJ/124/3222    : VI photometry of Draco and UMi galaxies (Bellazzini+, 2002)
+ J/MNRAS/327/918  : CaII in extragalactic red giants (Tolstoy+, 2001)
+ J/A+A/366/428    : HI observations of nearby dwarf galaxies
+                    (Karachentsev+, 2001)
+ J/A+AS/147/187   : Second list of the Karachentsev catalog (Huchtmeier+, 2000)
+ J/A+AS/127/409   : New nearby dwarf galaxy candidates list
+                    (Karachentseva+ 1998)
+
+Byte-by-byte Description of file: table1.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  4  A4    ---     SubG      The galactic subgroup (MW, M31 or Rest) (1)
+   6- 34  A29   ---     Name      Galaxy name
+  36- 67  A32   ---     OName     Common alternative name
+      69  A1    ---   f_OName     [*] Flag for NGC 4167 (2)
+  71- 73  A3    ---   n_Name      Indicates whether the galaxy is associated
+                                  with Milky Way (G), M31 (A), the Local Group
+                                  (L), or is nearby neighbors (N)
+  75- 83  A9    ---     MType     Morphological (Hubble) type (3)
+  85- 86  I2    h       RAh       ? Hour of Right Ascension (J2000)
+  88- 89  I2    min     RAm       ? Minute of Right Ascension (J2000)
+  91- 94  F4.1  s       RAs       ? Second of Right Ascension (J2000)
+      96  A1    ---     DE-       Sign of the Declination
+  98- 99  I2    deg     DEd       ? Degree of Declination (J2000)
+ 101-102  I2    arcmin  DEm       ? Arcminute of Declination (J2000)
+ 104-105  I2    arcsec  DEs       ? Arcsecond of Declination (J2000)
+ 107-113  A7    ---     Ref1      Original publication, in refs.dat file
+     115  A1    ---   f_Ref1      [abe] Notes about discovery (4)
+ 117-167  A51   ---     Com1      Comments about basic information
+--------------------------------------------------------------------------------
+Note (1): Galactic subgroup as follows:
+   MW = The Milky Way sub-group (in order of distance from the Milky Way);
+  M31 = The M31 sub-group (in order of distance from M31);
+ Rest = The rest of the Local Group and its neighbors (in order of distance from
+        the barycenter of the Local Group).
+Note (2): * = The original coordinates of NGC 4167 are coincident with the
+              coordinates of NGC 4163, but Sulentic & Tifft
+              (1973rncn.book.....S) note that NGC 4167 is "non-existent".
+Note (3): The distinction between dwarf elliptical (dE) and dwarf spheroidal
+          (dSph) is based solely on luminosity and is therefore somewhat
+          arbitrary. Objects fainter than M_V_~18 are given a "d" (dwarf) prefix
+          and are again somewhat arbitrary.
+Note (4): For more details relating to the discoveries of the NGC/IC galaxies,
+          the reader is referred to Steinicke (2010ocns.book.....S).
+          (see also http://www.klima-luft.de/steinicke/index_e.htm)
+   The flag has the following meaning:
+   a = Discovery credited to G.B. Hodierna (see Steinicke, 2010ocns.book.....S)
+   b = A.G. Wilson. Reported in Holmberg (1950MeLu2.128....1H);
+   e = Holmberg (1950MeLu2.128....1H) credits Wilson (1955PASP...67...27W)
+       with discovery, but this object is not listed in this manuscript.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: table2.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label   Explanations
+--------------------------------------------------------------------------------
+   1- 29  A29   ---     Name    Galaxy name
+      31  A1    ---   f_Name    [bk] Flag on Name (5)
+  33- 37  F5.1  deg     GLON    ? Galactic longitude l
+  39- 43  F5.1  deg     GLAT    ? Galactic latitude b
+  45- 49  F5.3  mag     E(B-V)  ? Foreground extinction (6)
+  51- 55  F5.2  mag     (m-M)   ? Distance modulus (m-M)_0_ (7)
+  57- 58  A2    ---   u_(m-M)   [:lbk ] Uncertain or fixed distance (5)
+  61- 64  F4.2  mag   E_(m-M)   ? Positive error in (m-M)
+  66- 69  F4.2  mag   e_(m-M)   ? Negative error in (m-M)
+  71- 74  I4    kpc     D       ? Heliocentric distance (7)
+      76  A1    ---   u_D       [:] Uncertainty flag on D
+  78- 80  I3    kpc   E_D       ? Positive error in D
+  82- 84  I3    kpc   e_D       ? Negative error in D
+  86- 91  F6.1  km/s    HRV     ? Heliocentric radial velocity (9)
+      93  A1    ---   f_HRV     [cdfmpr] Flag on HRV (10)
+  95- 98  F4.1  km/s  e_HRV     ? Error in HRV
+ 100-103  I4    kpc     D(MW)   ? Distance for the Galactocentric (MW) frame
+                                  of reference (10)
+ 105-108  I4    km/s    V(MW)   ? Velocity for the Galactocentric (MW) frame
+                                  of reference (10)
+ 110-113  I4    kpc     D(M31)  ? Distance for the M31 frame of reference (10)
+ 115-118  I4    km/s    V(M31)  ? Velocity for the M31 frame of reference (10)
+ 120-123  I4    kpc     D(LG)   ? Distance for the Local Group frame of
+                                  reference (10)
+ 125-128  I4    km/s    V(LG)   ? Velocity for the Local Group frame of
+                                  reference (10)
+ 130-134  A5    ---     Ref2    Reference, in refs.dat file
+     136  A1    ---   f_Ref2    Details on Ref2 (8)
+--------------------------------------------------------------------------------
+Note (5): Peculiarities on distance/velocity, as follows:
+   : = uncertainty flag:
+   b = Significant distance/velocity gradients;
+   c = Corresponding to RC stars at 6<D<7kpc;
+   d = Carbon stars;
+   f = Red giant branch stars;
+   k = Range in distance estimates from 750<~D<~950.
+   l = Assumed to be at M31-M33 distance.
+   m = Alternative value in Gallart et al. (2001AJ....121.2572G);
+   p = Optical velocity suggests that Tucana is not associated with
+       nearby HI cloud;
+   r = Optical spectroscopy suggests that HRV~-70km/s; however, HI analysis
+       by Bellazzini et al. (2011A&A...527A..58B) gives HRV~-25km/s.
+       No clear reason for the discrepancy currently exists.
+Note (6): These correspond to values derived by
+     Schlegel et al. (1998ApJ...500..525S) from an all-sky COBE/DIRBE and
+     IRAS/ISSA 100{mu}m map, at the coordinates of the centroid of each
+     galaxy (see Section 3 for further explanations).
+Note (7): All distance moduli are based on resolved stellar population
+     analysis (generally Cepheid, RR Lyrae, or TRGB (tip of the red giant
+     branch) measurements, but also horizontal branch level and
+     main-sequence fitting). Note that many TRGB estimates do not include
+     the formal uncertainty in the absolute magnitude of the TRGB
+     (Bellazzini et al., 2001ApJ...556..635B, 2004A&A...424..199B; 
+     Rizzi et al., 2007ApJ...661..815R).
+Note (8): Flag on reference as follows:
+   e = For reference (16), see their Figure 8 for an excellent summary;
+   g = For reference (18), distance calculated using their LMC-SMC offset of
+       0.51+/-0.03 for the adopted LMC distance modulus;
+   h = For reference (23), also Bellazzini et al. (2002, Cat. J/AJ/124/3222),
+       but note that these estimates are ~0.2 mag larger than some previous
+       values;
+   i = For reference (27), cf. Dolphin (2002MNRAS.332...91D), which also
+       estimates distances by comparing real and model CMDs;
+   j = For reference (37), note this estimate is ~0.2mag larger than some
+       previous values;
+   n = For reference (67), see Demers et al. (2006ApJ...636L..85D) for
+       velocities of 110 C-stars;
+   o = For reference (69), uncertainty due to intrinsic asymmetries is gas
+       distribution, L. Young (2010, private communication);
+   q = For reference (60), see also Begum et al. (2006MNRAS.365.1220B);
+   s = For reference (81), distance calculated prior to realization that 
+       HIZSS 3 was two systems, and will most likely correspond more closely
+       to the more massive A system.
+Note (9): For most Local Group galaxies, the velocity corresponds to the
+     optical velocity of the galaxy. For some of the more distant galaxies,
+     velocities are measured from HI.
+Note (10): These are calculated by first assuming that the barycenter of
+     the Local Group is located at the mid point of the vector connecting
+     the MW and M31 (for an adopted M31 distance modulus of (m-M)_0_=24.47;
+     McConnachie et al., 2005MNRAS.356..979M). See Section 3 for further
+     explanations.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: table3.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units         Label Explanations
+--------------------------------------------------------------------------------
+   1- 29  A29   ---           Name  Galaxy name
+      31  A1    ---           S     [h] Presence of surrounding stream (11)
+  33- 36  F4.1  mag           Vmag  ? Apparent magnitude in V; VEGA system (12)
+  38- 39  A2    ---         u_Vmag  [:kl ] Uncertain or derived Vmag (13)
+  42- 44  F3.1  mag         E_Vmag  ? Positive error in Vmag
+  46- 48  F3.1  mag         e_Vmag  ? Negative error in Vmag
+  50- 55  F6.2  arcmin        R1    ? Radius containing half the light of the
+                                      galaxy, measured on the semimajor axis
+                                      (see Section 4 for further details)
+      57  A1    ---         u_R1    [:] Uncertainty flag on R1
+  59- 63  F5.2  arcmin      E_R1    ? Positive error in R1
+  65- 69  F5.2  arcmin      e_R1    ? Negative error in R1
+  71- 74  F4.1  mag/arcsec2   muV   ? Central surface brightness {mu}_V_ (14)
+  76- 77  A2    ---         f_muV   [:befg ] Note on muV (13)
+  80- 82  F3.1 mag/arcsec2  E_muV   ? Positive error in muV
+  84- 86  F3.1 mag/arcsec2  e_muV   ? Negative error in muV
+  88- 90  I3    deg           PA    [-69-330]? Position angle of major axis,
+                                     measured  in degrees east from north (16)
+  92- 93  A2    ---         f_PA    [:ci ] Note on PA (13)
+  96- 97  I2    deg         e_PA    ? Error in PA
+  99-102  F4.2  ---           Ell   ? Ellipticity {epsilon}=1-b/a, where a and b
+                                      are the semimajor and semiminor axes (16)
+     104  A1    ---         f_Ell   [:j] Note on Ell (13)
+ 106-109  F4.2  ---         e_Ell   ? Uncertainty in Ell
+ 111-115  F5.1  mag           VMag  ? Absolute visual magnitude M_V_ (15)
+     117  A1    ---         f_VMag  [:d] Flag on VMag (13)
+ 119-121  F3.1  mag         E_VMag  ? Positive error in VMag
+ 123-125  F3.1  mag         e_VMag  ? Negative error in VMag
+ 127-130  I4    pc            R2    ? Half-light radius (17)
+     132  A1    ---         u_R2    [:] Uncertainty flag on R2
+ 134-136  I3    pc          E_R2    ? Positive error on R2
+ 138-140  I3    pc          e_R2    ? Negative error on R2
+ 142-145  F4.1  mag/arcsec2   muEff ? The mean surface brightness within the
+                                      isophote defined by the half-light
+                                      radius (18)
+ 147-153  A7    ---           Ref3  Reference, in refs.dat file
+ 155-199  A45   ---           Com3  Comments about luminosity ans structure
+--------------------------------------------------------------------------------
+Note (11):
+   h = Measurement of structural parameters complicated by presence of
+       surrounding stream.
+Note (12): In general, these have been corrected for foreground extinction
+     (1but not internal extinction). See Section 4 for further explanations.
+Note (13): Flags on magnitudes, ellipticities, as follows:
+   : = Uncertainty flag;
+   b = surface brightness measured within central 2*2deg;
+   c = PA broadly aligned with the Galactic Plane;
+   d = Distance-independent absolute magnitude estimate.
+   e = surface brightness measured within projected radius of 0.8deg;
+   f = B magnitude, corresponding to "standard fit" in Table 1 of
+       Choi et al. (2002AJ....124..310C);
+   g = B magnitude; see Table 1 of Geha et al. (2006, Cat. J/AJ/131/332).
+   i = PA corresponds to "outer component"; {theta}_inner_=95{deg}.
+   j = ellipticity corresponds to "outer component"; {epsilon}_inner_=0.4.
+   k = magnitude converted from g, r;
+   l = B magnitude.
+Note (14): Where possible, I cite directly measured values, although in many
+     cases (including in the original papers) this parameter is derived by
+     normalizing the measured profile to the apparent magnitude.
+Note (15): Derived from Column Vmag of this table by subtraction of the 
+     distance modulus given in Table 2 (Column (m-M)).
+Note (16): For systems that show a change in this quantity as a function of
+     radius, a mean value has been estimated.
+Note (17): Derived from Column Rad1 of this table assuming the distance
+     modulus given in Table 2 (Column (m-M)).
+Note (18): Derived using values from columns Vmag, Rad1, and Ell. In cases
+     where no ellipticity is measured, I have assumed circular isophotes.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: table4.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1- 29  A29   ---       Name    Galaxy name
+  31- 40  F10.5 10+6Msun  Mass    ? Mass of the galaxy in stellar masses (19)
+  42- 43  A2    ---     l_sigma*  [<=] Upper limit on sigma
+  45- 48  F4.1  km/s      sigma*  ? The observed velocity dispersion of the
+                                    stellar component {sigma}* (20)
+      50  A1    ---     f_sigma*  [cj] Flag on sigma* (21)
+  52- 54  F3.1  km/s    E_sigma*  ? Positive error in sigma*
+  56- 58  F3.1  km/s    e_sigma*  ? Negative error in sigma*
+  60- 63  F4.1  km/s      vsini*  ? The observed rotational velocity of the
+                                    stellar component (22)
+      64  A1    ---     f_vsini*  [N] No rotational signature observed (22)
+  65- 68  F4.1  km/s    e_vsini*  ? Error in vsini*
+  70- 73  E4.2 10+6Msun   M.HI    ? Mass of HI in each galaxy (23)
+      75  A1    ---     f_M.HI    [:befk] Ambiguous HI detection (24)
+      77  A1    ---     l_sigHI   Upper limit on sigmaHI
+  79- 82  F4.1  km/s      sigHI   ? The observed velocity dispersion of the HI
+                                    component (25)
+      84  A1    ---     u_sigHI   [:dg] Uncertainty flag on sigHI (26)
+  86- 88  F3.1  km/s    e_sigHI   ? Error in sigHI
+  90- 91  A2    ---     l_v.HI    [<=] Upper limit on v.HI
+  93- 97  F5.1  km/s      v.HI    ? The observed rotational velocity of the HI
+                                    component (22)
+      99  A1    ---     u_v.HI    [:iN] Uncertainty flag on v.HI (26)
+ 101-103  F3.1  km/s    e_v.HI    ? Error in v.HI
+ 105-110  F6.2 10+6Msun   Mdyn    ? Dynamical mass within the observed
+                                    half-light radius M_dyn_(<=r_h_)
+                                    (see Section 5 for further explanations)
+ 112-126  A15   ---       Ref4    Reference, in refs.dat file
+     128  A1    ---     f_Ref4    [h] Flag on Ref (h = In the reference (234),
+                                   see their Note added in proof.
+ 130-304  A175  ---       Com4    Comments about masses and kinematics
+--------------------------------------------------------------------------------
+Note (19): Assuming a stellar mass-to-light ratio of 1.
+Note (20): Generally based on multiple velocity measurements of individual
+     (giant) stars, otherwise commented on in Column Com (last Column of
+     this table). Note that a single value for the velocity dispersion is
+     often insufficient to describe the dynamics of the galaxy (e.g.,
+     multiple components and/or radial trends).
+Note (21): Flag on sigma* as follows:
+   c = Upper limit (uncorrected for binaries) and with a possible member star
+       removed that otherwise boosts the dispersion to ~5.5km/s;
+   j = Uncorrected for possible rotational signature.
+Note (22): Where available, I quote the peak (observed) rotational velocity,
+     otherwise the maximum observed rotational velocity. In general, I try
+     to give the rotational velocity uncorrected for inclination or
+     asymmetric drift, although it is sometimes unclear in the original
+     papers whether these corrections have been applied. "N" ("N/A" in the
+     original paper) indicates that a rotational signature has been looked
+     for and none has been observed. Where only weak gradients in velocity
+     are detected and/or the rotational signature is ambiguous, I comment
+     on this in Column Com (last Column of the table). In most cases, it is
+     probably safest to interpret the absence of a rotational signature as
+     the absence of any rotation with a magnitude equal to or greater than
+     the magnitude of the velocity dispersion.
+Note (23): Here, I have scaled the values cited in the relevant papers to
+     the distance given in Column Dist of Table 2. Where only an upper
+     limit from a non-detection is available and that upper limit is small
+     in comparison to the stellar mass, I give the HI mass as zero.
+Note (24): Flag on Mass as follows:
+   b = See Putman et al. (2004ApJ...603L..77P) for possible detection of gas
+       in the Sagittarius stream;
+   e = Ambiguous detection of two HI clouds offset from optical center that
+       could belong to the Magellanic Stream or Sculptor Group;
+   f = Ambiguous HI detection of cloud offset from optical center that could be
+       Galactic HI emission.
+   k = Calculated following Huchtmeier & Richter (1988A&A...203..237H)
+Note (25): Note that the HI velocity dispersion is affected by local
+     processes, such as heating due to star formation, and so caution is
+     urged in interpreting these numbers. Note also that many galaxies are
+     observed to contain multiple HI components.
+Note (26): Flag on velocities as follows:
+   : = uncertainty flag;
+   d = sig.HI aries from 5 to 40km/s across face of SMC.
+   g = Estimated from mean velocities of seven prominent HI clumps.
+   i = v.HI shows an apparent north-south gradient of 20km/s
+       due to two distinct HI clumps.
+   N = a rotational signature has been looked for and none has been observed
+       (value is "N/A" in the published table)
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: table5.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label    Explanations
+--------------------------------------------------------------------------------
+   1- 29  A29   ---     Name     Galaxy name
+      31  A1    ---   u_[Fe/H]   [:] Uncertainty flag on [Fe/H]
+  33- 37  F5.2  [Sun]   [Fe/H]   ? Mean stellar metallicity (27)
+  39- 42  F4.2  [Sun] e_[Fe/H]   ? Error in [Fe/H]
+  44- 63  A20   ---     Meth     Technique used to estimate stellar
+                                  metallicity (28)
+  65- 71  A7    ---     Ref5     Reference, in refs.dat file
+  73-139  A67   ---     Com5     Comment on metallicity estimations
+--------------------------------------------------------------------------------
+Note (27): Generally derived from observations of mostly evolved giants,
+          otherwise commented on in Column Com (last Column of this table).
+          See Section 6 for more details.
+Note (28): Technique as follows:
+         HRS = Direct high-resolution spectroscopy. This is the most
+               well-accepted method of determining [Fe/H] for a given
+               star (the strengths of iron lines can be measured directly).
+   RGB color = Red giant branch color.
+               Da Costa & Armandroff (1990AJ....100..162D) derive a
+               relation between the mean color of RGB stars in globular
+               clusters measured at MV=-3 and the mean stellar
+               metallicity of the cluster.
+               See Section 6 for more details.
+  Isochrones = See Section 6 for more details.
+ CMD fitting = The reader is referred to the many excellent papers on SFH
+               analysis using resolved stellar populations for more
+               details (e.g., Gallart et al., 2005ARA&A..43..387G;
+               Tolstoy et al., 2009ARA&A..47..371T, and references
+               therein). Here, age degeneracies will likely be much
+               reduced since age information is available from elsewhere
+               in the CMD (in particular the main-sequence turnoff region).
+ Co-added LRS (CaT) = Calcium II triplet equivalent widths (low resolution
+                      spectroscopy). See Section 6 for more details.
+          LRS (CaT) = Calcium II triplet equivalent widths (low resolution
+                      spectroscopy). See Section 6 for more details.
+ Co-added MRS (CaT) = Calcium II triplet equivalent widths (moderate resolution
+                      spectroscopy). See Section 6 for more details.
+          MRS (CaT) = Calcium II triplet equivalent widths (moderate resolution
+                      spectroscopy). See Section 6 for more details.
+                MRS = Spectral synthesis (moderate resolution spectroscopy).
+                      See Section 6 for more details.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: refs.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  3  A3    ---     Ref       Reference code
+   5- 23  A19   ---     BibCode   Bibliographic code
+  25- 62  A38   ---     Aut       Author's name
+  64-320  A257  ---     Com       Comments
+--------------------------------------------------------------------------------
+
+History:
+    From electronic version of the journal
+
+================================================================================
+(End)                                    Sylvain Guehenneux [CDS]    24-Jul-2013

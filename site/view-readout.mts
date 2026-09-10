@@ -1,3 +1,5 @@
+import type { PreparedCatalogObject } from '@cssearth/catalog';
+import type { WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser-types.mts';
 import { requiredElement } from './browser-types.mts';
@@ -6,7 +8,8 @@ import type { MapViewport, SurfaceMapReader } from './surface-map-context.mts';
 import { parseSurfaceMapConfig } from './surface-map-context.mts';
 import type { WorldRotation } from '../src/renderers/css/navigation/world-camera-math.js';
 import type { OverviewScope } from './overview-context.mts';
-interface ViewReadout { setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; destroy(): void; }
+type PreparedFocus = Pick<PreparedCatalogObject, 'name' | 'positionM'>;
+interface ViewReadout { setPreparedFocus(record: PreparedFocus | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; destroy(): void; }
 import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../src/renderers/css/dist/navigation.js';
 import { minimapCamera } from './surface-minimap-rectangle.mts';
@@ -81,9 +84,16 @@ export function measureView({ eyeM, radiusM, rotation, view, focalPixels, axes }
   };
 }
 
+export function measurePreparedFocusView(world: WorldCameraPose, focus: PreparedFocus, focalPixels: number) {
+  const forward = rotateWorldPosition(worldRotationFromQuaternion(world.pose.orientationXyzw), [0, 0, -1]);
+  const relative: PositionM = [focus.positionM[0] - world.pose.positionM[0], focus.positionM[1] - world.pose.positionM[1], focus.positionM[2] - world.pose.positionM[2]];
+  return { coordinates: null, scale: viewScale(dot(relative, forward) / focalPixels),
+    scaleTitle: `Scale at the distance of ${focus.name}` };
+}
+
 export function createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }: { drawer: HTMLElement; documentTarget: Document; windowTarget: BrowserWindow; surfaceReader?: SurfaceMapReader }): ViewReadout {
   const root = documentTarget.querySelector<HTMLElement>('.planet-view-readout');
-  if (!root) return { setCamera() {}, setOverviewScope() {}, setPlaybackState() {}, destroy() {} };
+  if (!root) return { setCamera() {}, setPreparedFocus() {}, setOverviewScope() {}, setPlaybackState() {}, destroy() {} };
   const dateGroup = requiredElement(root, '.planet-view-date'), date = requiredElement(root, '[data-view-date]');
   const coordinates = requiredElement(root, '.planet-view-coordinates');
   const latitude = requiredElement(root, '[data-view-latitude]'), longitude = requiredElement(root, '[data-view-longitude]');
@@ -99,6 +109,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, disposed = false;
   let timer: number | null = null, dateDay: number | null = null, playbackReason: string | null = null; let lastRender = -Infinity;
   let overviewScope: OverviewScope = 'solar-system';
+  let preparedFocus: PreparedFocus | null = null;
   const write = (element: HTMLElement, value: string) => { if (element.textContent !== value) element.textContent = value; };
   function render() {
     frame = null;
@@ -108,18 +119,18 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     const scene = documentTarget.querySelector<HTMLElement>('.polycss-scene');
     if (!navigation || !scene) { dateGroup.hidden = true; coordinates.hidden = true; scale.hidden = true; write(altitude, '—'); return; }
     const map = maps.find(map => !map.closest<HTMLElement>('[data-lens-details]')?.hidden) ?? maps[0];
-    const surface = surfaceReader ? surfaceReader.read(map, camera)
+    const surface = preparedFocus ? null : surfaceReader ? surfaceReader.read(map, camera)
       : surfaceMapContext(map ? configs.get(map) : undefined, camera, documentTarget, windowTarget);
     const world = navigation.capture(), optics = navigation.optics();
     dateGroup.hidden = !Number.isFinite(world.epochJdTt);
     const day = Number.isFinite(world.epochJdTt) ? Math.floor(world.epochJdTt + .5) : null;
     if (day !== dateDay) { dateDay = day; write(date, formatViewDate(world.epochJdTt)); }
-    const value = measureView({
+    const value = preparedFocus ? measurePreparedFocusView(world, preparedFocus, optics.focalPixels) : measureView({
       eyeM: [world.pose.positionM[0] - navigation.frame.originM[0], world.pose.positionM[1] - navigation.frame.originM[1], world.pose.positionM[2] - navigation.frame.originM[2]],
       radiusM: navigation.frame.bodyRadiusM, rotation: worldRotationFromQuaternion(world.pose.orientationXyzw),
       view: surfaceMapViewport(scene, optics), focalPixels: optics.focalPixels, axes: surface?.axes,
     });
-    const distance = viewDistance(world, navigation.frame, overviewScope);
+    const distance = viewDistance(world, navigation.frame, overviewScope, undefined, preparedFocus);
     write(altitude, formatViewDistance(distance.meters));
     if (distanceLabel) write(distanceLabel, distance.label);
     if (distanceGroup) distanceGroup.title = distance.title;
@@ -157,6 +168,7 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
     } else refresh();
   }, { signal: events.signal });
   return {
+    setPreparedFocus(record) { preparedFocus = record; refresh(); },
     setOverviewScope(scope) { overviewScope = scope; refresh(); },
     setCamera(next) { unsubscribe?.(); camera = next; unsubscribe = next?.navigation?.subscribe(() => schedule()) ?? null; refresh(); },
     setPlaybackState(state) {

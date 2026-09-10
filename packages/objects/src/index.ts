@@ -1,5 +1,7 @@
 export type { JsonValue, JsonRecord, ObjectDescriptor, PreparedAssetReference, PreparedObject } from './descriptor.js';
 export { parseObjectDescriptor } from './parse.js';
+export { parseImageLayerBankDescriptor } from './image-layer-bank.js';
+export type { ImageLayerBankDescriptor } from './image-layer-bank.js';
 export { parseDensityVolumeFrame, parseDensityVolumeObjectDescriptor } from './density-volume.js';
 export type { DensityVolumeFrame, DensityVolumeObjectDescriptor, DensityVolumePreparationReference, VolumeQuaternion, VolumeVector } from './density-volume.js';
 export { parseAuthoredObjectDescriptor, parseAuthoredRecipe } from './authored.js';

@@ -4,4 +4,10 @@ export { createWorldFrameQueue } from '../navigation/world-frame-queue.js';
 export { loadPreparedCssVolume } from '../volume/loader.js';
 export { loadPreparedCssPointField } from '../stars/loader.js';
 export { loadPreparedCssSurfaceShell } from '../shell/loader.js';
+export { loadPreparedCssImageLayers } from '../image-layers/loader.js';
+export { createPreparedVolumeLenses, loadPreparedVolumeLenses, validatePreparedVolumeLenses } from '../volume/prepared-volume-lenses.js';
+export type { PreparedVolumeLenses, PreparedVolumeLensBank, PreparedVolumeLens, PreparedVolumeLensBrightness,
+  PreparedVolumeLensState, PreparedPointVisibility } from '../volume/prepared-volume-lenses.js';
+export { mountPreparedCataloguePoints, validatePreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
+export type { PreparedCataloguePoints, PreparedCataloguePoint } from '../stars/prepared-catalogue-points.js';
 export { prepareObjectResources } from '../runtime/prepared-resource-lease.js';

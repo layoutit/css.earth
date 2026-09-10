@@ -1,3 +1,6 @@
+import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
+import { createPreparedFocusCard } from './prepared-focus-card.mts';
+import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame, WorldCameraPose } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
@@ -49,6 +52,9 @@ export function mountPlanetShell({
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
   let cardObjectId = objectId;
   let overview = false, overviewScope: OverviewScope = 'solar-system', camera: ShellCamera | null = null, unsubscribeOverview: (() => void) | null = null;
+  let preparedFocus: PreparedCatalogObject | null = null;
+  const focusCard = createPreparedFocusCard(drawer.querySelector<HTMLElement>('[data-prepared-focus-card]'));
+  lifetime.onDispose(() => focusCard.destroy());
   lifetime.onDispose(() => unsubscribeOverview?.());
   function updateBodyCard(world = camera?.navigation?.capture()) {
     const information = drawer.querySelector<HTMLElement>('.planet-information-panel');
@@ -178,10 +184,16 @@ export function mountPlanetShell({
       content.apply({ preserveSidebar });
       cardObjectId = content.id;
       overview = false; overviewScope = 'solar-system';
+      preparedFocus = null; focusCard.set(null);
       objectBrowser.setObject(content.name);
       mountContent(content.id, motion, contrast);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    setPreparedFocus(record: PreparedCatalogObject | null, sources: readonly SpatialCatalogSource[] = [], presentation: PreparedFocusPresentation | null = null) {
+      if (lifetime.disposed) return;
+      preparedFocus = record; focusCard.set(record, sources, presentation);
+      objectBrowser.setPreparedFocus(record); viewReadout.setPreparedFocus(record);
+    },
     setOverview(enabled: boolean) {
       if (!lifetime.disposed) {
         if (enabled && selectionPreview?.id === null) selectionPreview = null;
@@ -235,6 +247,7 @@ export function mountPlanetShell({
       onInteraction() { settingsController.setMotionEnabled(false); },
     }));
     viewReadout = retain(createViewReadout({ drawer, documentTarget, windowTarget, surfaceReader }));
+    viewReadout.setPreparedFocus(preparedFocus);
     retain(createPanelController(drawer, id, windowTarget, owner));
   }
 }
@@ -308,8 +321,9 @@ function createMissionAgencyController(drawer: HTMLElement, lifetime: SceneLifet
 }
 
 function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserWindow, lifetime: SceneLifetime) {
-  const root = drawer.querySelector<HTMLElement>(".planet-lenses");
-  if (!root) {
+  const information = drawer.querySelector<HTMLElement>(".planet-information-panel");
+  const root = information?.querySelector<HTMLElement>(".planet-lenses");
+  if (!root || !information) {
     return Object.freeze({ destroy() {} });
   }
 
@@ -322,7 +336,7 @@ function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserW
     throw new Error("Planet shell surface lens browser has no valid lenses.");
   }
 
-  const details = [...drawer.querySelectorAll<HTMLElement>("[data-lens-details]")];
+  const details = [...information.querySelectorAll<HTMLElement>("[data-lens-details]")];
   const lensIds = new Set(buttons.map((button) => button.value));
   if (details.some((detail) => !lensIds.has(detail.dataset.lensDetails ?? ""))) {
     throw new Error("Planet shell surface lens details have no matching lens.");
@@ -471,6 +485,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const browser = documentTarget.querySelector(".planet-object-browser");
   const empty = documentTarget.querySelector(".planet-object-empty");
   const galaxy = browser?.querySelector<HTMLElement>('[data-galactic-overview]');
+  const focusCard = browser?.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const system = browser?.querySelector<HTMLElement>('[data-solar-system-results]');
   if (!(search instanceof windowTarget.HTMLInputElement) ||
       !(searchCard instanceof windowTarget.HTMLElement) ||
@@ -548,6 +563,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   let selectedObjectName = "";
   let overview = false;
   let overviewScope: OverviewScope = 'solar-system';
+  let preparedFocus: PreparedCatalogObject | null = null;
   const overviewName = () => overviewScope === 'milky-way' ? 'Milky Way' : 'Solar System';
   let visibleObjects = 0;
   const destinations = createDestinationBrowser({
@@ -570,12 +586,21 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     markCategory();
     // Search text belongs to the user; the card context is only a fallback.
     const query = (browsing ? search.value.trim().toLocaleLowerCase("en") : "")
-      || (overview ? overviewName().toLocaleLowerCase("en") : "");
+      || (preparedFocus ? preparedFocus.name.toLocaleLowerCase('en')
+        : overview ? overviewName().toLocaleLowerCase("en") : "");
     setPanelHidden(information, query.length > 0);
     destinations?.setOpen(query.length > 0);
-    const galactic = query === 'milky way';
+    const focused = preparedFocus && query === preparedFocus.name.toLocaleLowerCase('en');
+    const galactic = !focused && query === 'milky way';
+    if (focusCard) setPanelHidden(focusCard, !focused);
     if (galaxy) setPanelHidden(galaxy, !galactic);
-    if (system) setPanelHidden(system, galactic);
+    if (system) setPanelHidden(system, galactic || Boolean(focused));
+    if (focused && preparedFocus) {
+      browser.ariaLabel = preparedFocus.name;
+      setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
+      void destinations?.search('');
+      return;
+    }
     browser.ariaLabel = galactic ? 'Milky Way' : 'Solar System objects';
     if (galactic) {
       setPanelHidden(browser, false); empty.hidden = true; visibleObjects = 1;
@@ -620,7 +645,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const render = (next: boolean, { resetQuery = false } = {}) => {
     resetResultsScroll();
     if (!next) browsing = false;
-    if (overview && !next) next = true;
+    if ((preparedFocus || overview) && !next) next = true;
     open = next;
     if (next && resetQuery) search.value = "";
     destinations?.setOpen(next);
@@ -708,9 +733,9 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   render(false);
 
   const markSelection = () => {
-    documentTarget.documentElement.dataset.selection = overview ? overviewScope : 'object';
+    documentTarget.documentElement.dataset.selection = preparedFocus ? 'prepared-focus' : overview ? overviewScope : 'object';
     for (const anchor of browser.querySelectorAll<HTMLElement>('.planet-object-link')) {
-      const selected = !overview && anchor.querySelector('.planet-object-name')?.textContent === selectedObjectName;
+      const selected = !preparedFocus && !overview && anchor.querySelector('.planet-object-name')?.textContent === selectedObjectName;
       anchor.classList.toggle('is-active', selected);
       if (selected) anchor.setAttribute('aria-current', 'page');
       else anchor.removeAttribute('aria-current');
@@ -718,23 +743,25 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   };
   return Object.freeze({
     previewOverview(scope: OverviewScope = 'solar-system') {
-      const previous = { selectedObjectName, overview, overviewScope, browsing };
+      const previous = { selectedObjectName, overview, overviewScope, preparedFocus, browsing };
+      preparedFocus = null;
       overview = true; overviewScope = scope; browsing = false;
       markSelection(); render(false);
       return () => {
         const editing = browsing;
-        ({ selectedObjectName, overview, overviewScope } = previous);
+        ({ selectedObjectName, overview, overviewScope, preparedFocus } = previous);
         browsing = editing || previous.browsing;
         markSelection(); render(browsing);
       };
     },
     previewObject(name: string) {
-      const previous = { selectedObjectName, overview, overviewScope, browsing };
+      const previous = { selectedObjectName, overview, overviewScope, preparedFocus, browsing };
+      preparedFocus = null;
       overview = false; selectedObjectName = name;
       markSelection(); render(false);
       return () => {
         const editing = browsing;
-        ({ selectedObjectName, overview, overviewScope } = previous);
+        ({ selectedObjectName, overview, overviewScope, preparedFocus } = previous);
         browsing = editing || previous.browsing;
         markSelection(); render(browsing);
       };
@@ -756,12 +783,18 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       // its query and results until the user chooses or dismisses them.
       const editing = browsing;
       overview = false;
+      preparedFocus = null;
       selectedObjectName = name;
       markSelection();
       destinations?.bind(null);
       render(editing);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { destinations?.bind(provider); },
+    setPreparedFocus(record: PreparedCatalogObject | null) {
+      if (preparedFocus === record) return;
+      const editing = browsing;
+      preparedFocus = record; markSelection(); render(editing);
+    },
     destroy() {
       events.abort();
       destinations?.destroy();

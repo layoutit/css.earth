@@ -1,0 +1,184 @@
+{
+  "schema": "cssearth-full-particle-density-provenance@1",
+  "config": {
+    "path": "labs/nebula/models/full-density.json",
+    "sha256": "21bf67a50a0e8e470fa53a476c5c952ccfdb07dfb203631235174fa962c0ec25"
+  },
+  "source": {
+    "centeredParticles": {
+      "path": ".local/nebula-lab/particles/lmc-particles-centered.f32",
+      "sha256": "931b30fe369f07c4d03f5131075bb2d1efe5e5c99cb2193a6d7135ab9ed4f4f4",
+      "bytes": 25920000
+    },
+    "importReceipt": {
+      "path": "labs/nebula/models/lmc-particles/source/import.json",
+      "sha256": "03a4311aa78243e1f50f772c283fb2924e6f5343c1a22b8cab23eb5fca027715"
+    },
+    "regeneration": "pnpm lab:nebula:particles labs/nebula/models/magellanic-particles.json <pinned-archive.zip> lmc-particles",
+    "particleSelection": {
+      "family": "stars",
+      "start": 240000,
+      "count": 1620000,
+      "endExclusive": 1860000,
+      "firstSourceByte": 115680032,
+      "sourceRecordBytes": 44
+    },
+    "sourceSnapshot": {
+      "path": ".local/nebula-lab/particles/run34681lsmcgabestModelA_HR.00440",
+      "sha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
+      "bytes": 196860032,
+      "header": {
+        "totalCount": 5005000,
+        "gasCount": 0,
+        "darkCount": 2920000,
+        "starCount": 2085000,
+        "endian": "big",
+        "timeRaw": 3.199999999999953,
+        "dimensions": 3,
+        "headerBytes": 32,
+        "layout": "float32",
+        "expectedBytes": 196860032,
+        "starByteOffset": 105120032
+      }
+    },
+    "interpretation": "Simulation star-family particles, not observed individual stars. Source masses are unchanged; no ages, populations, luminosities or dust are inferred."
+  },
+  "transform": {
+    "mwCenterKpc": [
+      7.501954079,
+      64.324386597,
+      2.888671398
+    ],
+    "simulationToGalactic": [
+      0.99766431534,
+      -0.068307495179,
+      0,
+      0.068307495179,
+      0.99766431534,
+      0,
+      0,
+      0,
+      1
+    ],
+    "sunGalactocentricKpc": [
+      -8,
+      0,
+      0
+    ],
+    "galacticToIcrs": [
+      -0.054875560416,
+      0.494109427876,
+      -0.867666149019,
+      -0.873437090235,
+      -0.44482962996,
+      -0.198076373431,
+      -0.483835015549,
+      0.746982244497,
+      0.455983776175
+    ],
+    "method": "Recover raw simulation coordinates; subtract the measured MW star median; apply an active +3.916781113 degree Z rotation derived to reproduce the paper's rounded Table 2 LMC position; subtract the paper's Sun position; convert Galactic Cartesian to ICRS; transform into the existing object-local frame.",
+    "limitation": "The paper specifies MW centering and rotation to the observed LMC angle but does not publish the exact angle or center estimator. The MW star median and +3.916781113 degree rotation are a derived diagnostic that reproduces its rounded Table 2 positions; this is not observational astrometry.",
+    "centeringOffsetKpc": [
+      3.6076940298080444,
+      22.08785057067871,
+      -22.46514129638672
+    ],
+    "centeredToLocal": {
+      "matrix": [
+        -0.15518132027283374,
+        -0.5620506051433191,
+        0.8124148417508039,
+        -0.9839735481974685,
+        0.014821186510361017,
+        -0.17769746446807044,
+        0.08783401554363529,
+        -0.8269700415907021,
+        -0.5553428994994767
+      ],
+      "offsetKpc": [
+        2.814160547629932,
+        -0.150340024608683,
+        0.22862548208158984
+      ]
+    },
+    "targetFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        105965308676973530000,
+        533209933280955330000,
+        -1.4303831216834226e+21
+      ],
+      "localToReferenceXyzw": [
+        0.09631989992847079,
+        0.9788280334299664,
+        0.17973685917567428,
+        0.01768669847817273
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -34.2494860589516,
+          -39.659852117301206,
+          -14.063476651908141
+        ],
+        "max": [
+          28.24754056340629,
+          21.19251590973147,
+          13.190865784909581
+        ]
+      }
+    },
+    "interpretation": "One observer-relative affine maps raw simulation Cartesian positions into the existing Sun-ICRF object frame."
+  },
+  "grid": {
+    "dimensions": [
+      266,
+      259,
+      116
+    ],
+    "boundsKpc": {
+      "min": [
+        -34.2494860589516,
+        -39.659852117301206,
+        -14.063476651908141
+      ],
+      "max": [
+        28.24754056340629,
+        21.19251590973147,
+        13.190865784909581
+      ]
+    },
+    "cellWidthKpc": 0.23495122790360107,
+    "paddingCells": 5,
+    "paddingKpc": {
+      "min": [
+        1.1747561395180028,
+        1.1747561395180028,
+        1.1747561395180046
+      ],
+      "max": [
+        1.1747561395781645,
+        1.3610110879541253,
+        1.315087586667394
+      ]
+    },
+    "smoothingSigmaVoxels": 0.8,
+    "normalizationQuantile": 0.999,
+    "particleCount": 1620000,
+    "acceptedCount": 1620000,
+    "inputMass": 31370.560079813004,
+    "acceptedMass": 31370.560079813004,
+    "depositedMass": 31370.560079812738,
+    "massError": 2.6557245291769505e-10,
+    "boundary": {
+      "nonzeroAlpha": 0,
+      "nonzeroRgb": 0
+    }
+  },
+  "limitations": [
+    "The paper specifies MW centering and rotation to the observed LMC angle but does not publish the exact angle or center estimator. The MW star median and +3.916781113 degree rotation are a derived diagnostic that reproduces its rounded Table 2 positions; this is not observational astrometry.",
+    "This is a bounded-resolution overview of simulated stellar mass, not a new high-resolution depth measurement.",
+    "It contains no observational photograph, gas, dust, extinction, calibrated photometry or morphology fit."
+  ]
+}

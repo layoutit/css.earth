@@ -23,6 +23,7 @@
     "../packages/**/*.spec.ts",
     "../packages/**/*.spec.mts",
     "../site/env.d.ts",
+    "../site/cesium-module-types.d.ts",
     "../tools/external-modules.d.mts"
   ],
   "exclude": [

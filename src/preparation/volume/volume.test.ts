@@ -170,3 +170,65 @@ test('OpenSpace shader transfer keeps independent RGB emission and alpha extinct
   const alphaOnly=bakeSlab({...source,encodedRgba:Buffer.from([0,0,0,128])},'z',0,width,1,1,undefined).rgba;
   assert.deepEqual([...alphaOnly.subarray(0,3)],[0,0,0]);assert(alphaOnly[3]!>0,'alpha is extinction, not an extra light channel');
 });
+
+test('emission transfer defaults retain legacy bytes, with explicit opt-in and unsupported extinction rejected', async () => {
+  const base = await readRecipe();
+  const recipe = parseVolumeRecipe({ ...base,
+    grid: { ...base.grid, dimensions: [1,1,1], bounds: { min: [-1,-1,-1], max: [1,1,1] } },
+    material: { emission: [{ channel: 0, color: [1,.5,.25], strength: 2 }, { channel: 1, color: [.25,.5,1], strength: .75 }],
+      absorption: [{ channel: 3, color: [.2,.4,.8], strength: 1.3 }], intensityScale: 1.2, stepScale: .8, exposureGain: 1.7, stepMetric: 'source' },
+  });
+  const source = { width: 1, height: 1, depth: 1, encodedRgba: Buffer.from([101,56,199,89]), recipe, provenance: {} };
+  const legacy = bakeSlab(source, 'z', 0, .3, 1, 1, undefined).rgba;
+  assert.equal(recipe.material.emissionTransfer, undefined);
+  assert.deepEqual([...legacy], [255,143,94,37], 'pre-change independent-channel RGB/extinction reference bytes');
+  const explicit = parseVolumeRecipe({ ...recipe, material: { ...recipe.material, emissionTransfer: 'independent-channels' } });
+  assert.deepEqual(bakeSlab({ ...source, recipe: explicit }, 'z', 0, .3, 1, 1, undefined).rgba, legacy);
+  assert.throws(() => parseVolumeRecipe({ ...recipe, material: { ...recipe.material, emissionTransfer: 'unknown' } }), /emissionTransfer/);
+  assert.throws(() => parseVolumeRecipe({ ...recipe, material: { ...recipe.material, emissionTransfer: 'shared-opacity' } }), /does not support absorption/);
+  assert.throws(() => bakeSlab({ ...source, recipe: { ...recipe, material: { ...recipe.material, emissionTransfer: 'shared-opacity' } } }, 'z', 0, .3, 1, 1, undefined), /does not support absorption/);
+});
+
+test('shared-opacity actual 64-slab source-over preserves photo RGB through nonuniform depth and a finite spatial gradient', async () => {
+  const base = await readRecipe(), depth = 64, width = 3, dz = 6 / depth;
+  // Every sightline has one chromaticity, a finite transverse intensity gradient,
+  // and unequal optical depths including two dense central cells. Two samples per
+  // slab interpolate neighbouring cells; this is not the thin equal-slab limit.
+  const densities = Array.from({ length: depth }, (_, z) => z === 31 ? 168 : z === 32 ? 144 : 6 + 2 * (z % 3));
+  const factors = [.5, 1, 1.5], rgba = Buffer.alloc(width * depth * 4);
+  for (let z = 0; z < depth; z++) for (let x = 0; x < width; x++) rgba[4 * (z * width + x)] = densities[z]! * factors[x]!;
+  const integral = densities.reduce((sum, value) => sum + value / 255 * dz, 0), gain = 2.3;
+  const recipe = parseVolumeRecipe({ ...base,
+    grid: { ...base.grid, dimensions: [width,1,depth], encoding: 'linear-density-unorm8', bounds: { min: [0,0,0], max: [3,1,6] } },
+    material: { emission: [{ channel: 0, color: [1,.5,.25], strength: -Math.log(.2) / (gain * integral) }],
+      absorption: [], intensityScale: 1, stepScale: 1, stepMetric: 'source', exposureGain: gain, emissionTransfer: 'shared-opacity' },
+    bake: { ...base.bake, sliceCounts: { x: 64, y: 64, z: 64 }, samplesPerSlab: 2, opticalWeight: 1 },
+  });
+  assert.equal(recipe.material.emissionTransfer, 'shared-opacity');
+  const source = { width, height: 1, depth, encodedRgba: rgba, recipe, provenance: {} };
+  const slabs = Array.from({ length: depth }, (_, z) => bakeSlab(source, 'z', (z + .5) * dz, dz, width, 1, undefined).rgba);
+  function over(layers: Buffer[]) {
+    const result = Array.from({ length: width }, () => [0,0,0]);
+    for (const slab of layers) for (let x = 0; x < width; x++) {
+      const alpha = slab[x * 4 + 3]! / 255;
+      for (let channel = 0; channel < 3; channel++) result[x]![channel] = slab[x * 4 + channel]! / 255 * alpha + result[x]![channel]! * (1 - alpha);
+    }
+    return result;
+  }
+  const forward = over(slabs), backward = over([...slabs].reverse());
+  for (let x = 0; x < width; x++) {
+    const peak = 1 - .2 ** factors[x]!;
+    for (let channel = 0; channel < 3; channel++) {
+      // RGBA8 slab alpha and straight-colour rounding limit numerical recovery.
+      assert.ok(Math.abs(forward[x]![channel]! - peak * [1,.5,.25][channel]!) < .006,
+        `column ${x}, channel ${channel}: ${forward[x]![channel]} versus ${peak * [1,.5,.25][channel]!}`);
+    }
+  }
+  assert.ok(Math.abs(forward[1]![0]! - .8) < .006);
+  assert.ok(Math.abs(forward[1]![1]! - .4) < .006);
+  assert.ok(Math.abs(forward[1]![2]! - .2) < .006);
+  for (let x = 0; x < width; x++) for (let channel = 0; channel < 3; channel++)
+    assert.ok(Math.abs(forward[x]![channel]! - backward[x]![channel]!) < 1e-12, 'constant chromaticity must compose independently of depth order');
+  const black = bakeSlab({ ...source, encodedRgba: Buffer.alloc(rgba.length) }, 'z', dz / 2, dz, width, 1, undefined).rgba;
+  assert.ok(black.every(byte => byte === 0), 'empty emission remains transparent black without dividing by zero');
+});

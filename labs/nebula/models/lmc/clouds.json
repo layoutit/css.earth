@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-filled-observation@1",
+  "id": "lmc-clouds-observation",
+  "directory": "labs/nebula/models/lmc-clouds-observation",
+  "photo": {
+    "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
+    "id": "noirlab2030a",
+    "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
+    "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
+    "bytes": 264225774,
+    "width": 6737,
+    "height": 6536,
+    "publisherUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+    "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+    "license": "CC-BY-4.0"
+  },
+  "wcs": {
+    "projection": "TAN",
+    "coordinateFrame": "ICRS",
+    "referenceDimension": [
+      6737,
+      6536
+    ],
+    "referencePixel": [
+      3368.5,
+      3268
+    ],
+    "referenceValueDeg": [
+      78.7957840796,
+      -71.566506171
+    ],
+    "scaleDeg": [
+      -0.00138784675876,
+      0.00138784675876
+    ],
+    "rotationDeg": -16.920000000000027
+  },
+  "frame": {
+    "path": "labs/nebula/models/lmc-particles/object.json",
+    "sha256": "423c2444c51f62f69870f77c698ea68c487724688b6654877f0f683f7f35175a"
+  },
+  "stellarPrior": {
+    "path": "labs/nebula/models/lmc-full-density/source/volume.json",
+    "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+  },
+  "analysis": {
+    "width": 1024,
+    "decomposition": {
+      "compactRadius": 4,
+      "extendedRadii": [
+        12,
+        36,
+        108,
+        216
+      ],
+      "connectivity": 8,
+      "maxPixels": 4194304,
+      "maxWork": 4000000000
+    },
+    "priorDimensions": [
+      96,
+      96,
+      116
+    ]
+  },
+  "depth": {
+    "broadHalfThicknessKpc": 12,
+    "diffuseHalfThicknessKpc": 0.65,
+    "extendedMinimumHalfThicknessKpc": 0.1,
+    "extendedDepthAspectRatio": 0.8,
+    "compactMinimumHalfThicknessKpc": 0.08,
+    "compactDepthAspectRatio": 0.5,
+    "maxHalfThicknessKpc": 2.5
+  },
+  "diffusePriorWeight": 0.05,
+  "channels": {
+    "compact": false,
+    "diffuse": false,
+    "extended": true
+  },
+  "exposureGain": 1,
+  "maxDisplaySignal": 0.98,
+  "master": {
+    "width": 1024,
+    "sliceCounts": {
+      "x": 128,
+      "y": 96,
+      "z": 192
+    },
+    "samplesPerSlab": 8
+  },
+  "delivery": {
+    "width": 512,
+    "quality": 92
+  },
+  "variants": [
+    {
+      "id": "lmc-clouds-broad",
+      "name": "LMC clouds \u00b7 broad depth control",
+      "directory": "labs/nebula/models/lmc-clouds-broad",
+      "mode": "broad"
+    },
+    {
+      "id": "lmc-clouds",
+      "name": "LMC clouds \u00b7 reconstructed",
+      "directory": "labs/nebula/models/lmc-clouds",
+      "mode": "coherent"
+    }
+  ],
+  "limitations": [
+    "The native display composite determines angular positions and color; it is not calibrated flux.",
+    "The full photograph footprint is retained. This footprint does not cover the full stellar simulation or establish where gas lies outside the photograph.",
+    "Compact candidates are a morphological top-hat channel, not identified foreground stars. Their light is excluded from both compared cloud targets and shown separately.",
+    "The simulation provides approximate stellar depth support; fitted emission shapes and thickness are hypotheses, not measured gas or dust.",
+    "No arbitrary 3x photo fit or authored rotation is applied. The source density is unchanged.",
+    "Display emission only: no dust extinction or radiative transfer is recovered.",
+    "This pair renders only the extended morphological channel. The omitted compact candidates and diffuse remainder are shown separately; neither is asserted to be measured foreground light."
+  ]
+}

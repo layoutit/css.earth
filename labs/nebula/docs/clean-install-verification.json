@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-nebula-clean-install@1",
+  "passed": true,
+  "date": "2026-09-10",
+  "bakeCommit": "4f3cdee28380f4a30cfa0f455d2f091d629b50c9",
+  "verificationCommit": "5fbe0d832ca7333a15bc538c83f7910f6c4e5ebd",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "architecture": "arm64",
+  "node": "22.23.2",
+  "pnpm": "10.33.0",
+  "python": "3.9.6",
+  "corePythonPackages": {
+    "tensorflow": "2.16.2",
+    "numpy": "1.26.4",
+    "opencv-python-headless": "4.11.0.86",
+    "scipy": "1.13.1"
+  },
+  "isolation": {
+    "freshGitHubClone": true,
+    "emptyNodeModules": true,
+    "emptyProcessingCache": true,
+    "separateDependencyDownloadCaches": true,
+    "generatedNebulaImagesAbsentBeforeBake": true,
+    "copiedSourceOrProcessingAssets": false,
+    "trackedChangesAfterBake": false,
+    "otherEnvironmentImagesStillAbsent": true
+  },
+  "coldBakeSeconds": 899.053108215332,
+  "verification": {
+    "passed": true,
+    "summary": {
+      "schema": "cssearth-nebula-verification@1",
+      "recipe": {
+        "path": "labs/nebula/models/lmc/bake.json",
+        "sha256": "6946cf57f16e33531ceb50ef34aac765ff4031260221671808f9ea0ae1e08b35"
+      },
+      "images": 3,
+      "densitySlices": 288,
+      "previews": 3,
+      "separationPreviews": 6,
+      "cloudSlices": 432,
+      "sharedStars": 943
+    },
+    "cachedBakeSeconds": 4.222202167,
+    "verificationSeconds": 0.6919772080000003,
+    "mutations": [
+      {
+        "case": "missing-density",
+        "path": "labs/nebula/models/lmc/full-density/prepared/slices/x/16.webp",
+        "rejected": true,
+        "notRepaired": true
+      },
+      {
+        "case": "corrupt-delivery",
+        "path": "src/objects/lmc/prepared/vista-infrared/slices/z/24.webp",
+        "rejected": true,
+        "notRepaired": true
+      }
+    ],
+    "restoredVerification": true
+  },
+  "prepareNebulae": {
+    "passed": true,
+    "missingDeliveryRestored": true,
+    "noNativeReprocessing": true,
+    "cachedDeliveryVerified": true,
+    "seconds": 4.874090499999999
+  },
+  "browser": {
+    "sources": 3,
+    "crossTabChecks": 6,
+    "maximumStarErrorPx": 0.0005668054157164378,
+    "maximumCrossTabErrorPx": 0.012098774971146605,
+    "errors": [],
+    "failedRequests": [],
+    "processingWrites": []
+  },
+  "tests": {
+    "existingLabTestsPassed": 159,
+    "newVerifierTestPassed": 1,
+    "labTypecheckPassed": true,
+    "labBuildPassed": true
+  },
+  "logs": {
+    "clone": {
+      "bytes": 3800,
+      "sha256": "35eed67916c7a37e075cec30b4b6a9c0d593d15dcf4258469737ad7bc53e6f9e"
+    },
+    "install": {
+      "bytes": 1222,
+      "sha256": "37c78e37799b9d66d84bb38b529abda1f59e8efe48b154a1a8c798396e7aa5a7"
+    },
+    "packages": {
+      "bytes": 3889,
+      "sha256": "c5bdc7c302e2c6d3919787101d01d94f4f313725e76876ea57867a8467c8420a"
+    },
+    "bake": {
+      "bytes": 23542,
+      "sha256": "f13cbc9d7120856c848000f2d429af35f2d81196e9828445ecfd728460b9056d"
+    },
+    "tests": {
+      "bytes": 38353,
+      "sha256": "0bedf50ef0e99cb967c19c0f0335be9daeae2a6dd51e6e91fdf334100acf03df"
+    },
+    "types": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build": {
+      "bytes": 481,
+      "sha256": "df9519d225b55c81538c9b2a622a6898118c9185e0349bc0825f518d00f9d679"
+    },
+    "verification": {
+      "bytes": 701,
+      "sha256": "da8444963d4a01c7aa94fff904d3f071483ad9fb6dbfa5811dd01da9d915610d"
+    },
+    "browser": {
+      "bytes": 353,
+      "sha256": "8b7b1d0ef579bf082c2c21e5bdf98c8c7716586928c1e2c0f2a2ab20bd99b524"
+    },
+    "tabs": {
+      "bytes": 284,
+      "sha256": "a09f5a49c8c0f78e088428b62032933b9b36f6a7a20ccc56a976cc5c2c60e554"
+    }
+  },
+  "limitations": [
+    "macOS arm64 verified; other OS/CPU combinations were not executed.",
+    "Remote source/model availability and Python wheel availability remain required.",
+    "Successful reproduction does not resolve the documented visual/model limitations."
+  ]
+}

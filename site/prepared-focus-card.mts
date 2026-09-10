@@ -1,0 +1,78 @@
+import { isPreparedCluster } from '@cssearth/catalog';
+import type { PreparedCatalogObject, SpatialCatalogSource } from '@cssearth/catalog';
+import type { PreparedFocusPresentation } from './prepared-context-navigation.mts';
+import { requiredElement } from './browser-types.mts';
+
+interface PreparedFocusCard {
+  set(record: PreparedCatalogObject | null, sources?: readonly SpatialCatalogSource[], presentation?: PreparedFocusPresentation | null): void;
+  destroy(): void;
+}
+
+const number = new Intl.NumberFormat('en-US', { maximumSignificantDigits: 4 });
+const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, letter => letter.toUpperCase());
+
+/** One retained card transports the selected prepared record; no catalogue is imported here. */
+export function createPreparedFocusCard(root: HTMLElement | null): PreparedFocusCard {
+  if (!root) return { set() {}, destroy() {} };
+  const fields = Object.fromEntries(['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
+    .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
+  const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
+  const events = new AbortController();
+  let currentPresentation: PreparedFocusPresentation | null = null;
+  const banks = [...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank]')].map(bank => ({ root: bank,
+    buttons: [...bank.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
+    details: [...bank.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
+    stars: bank.querySelector<HTMLInputElement>('[data-focus-stars]'),
+  }));
+  for (const bank of banks) {
+    for (const button of bank.buttons) button.addEventListener('click', () => {
+      if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) currentPresentation.selectLens(button.value);
+    }, { signal: events.signal });
+    bank.stars?.addEventListener('change', () => {
+      if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) currentPresentation.setStarsVisible?.(bank.stars!.checked);
+    }, { signal: events.signal });
+  }
+  const setPresentation = (record: PreparedCatalogObject | null, presentation: PreparedFocusPresentation | null) => {
+    currentPresentation = record && !isPreparedCluster(record) && record.detailedObjectId === presentation?.objectId ? presentation : null;
+    for (const bank of banks) {
+      const active = currentPresentation?.objectId === bank.root.dataset.focusLensBank;
+      bank.root.hidden = !active;
+      if (!active || !currentPresentation) continue;
+      const available = new Set(currentPresentation.lenses.map(lens => lens.id));
+      for (const button of bank.buttons) {
+        button.disabled = !available.has(button.value);
+        button.setAttribute('aria-pressed', String(button.value === currentPresentation.selectedLens));
+      }
+      for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
+      if (bank.stars) {
+        bank.stars.disabled = typeof currentPresentation.setStarsVisible !== 'function';
+        bank.stars.checked = currentPresentation.starsVisible;
+      }
+    }
+  };
+  const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
+  return { set(record, sources = [], presentation = null) {
+    setPresentation(record, presentation);
+    if (!record) { root.hidden = true; return; }
+    root.dataset.preparedFocusId = record.id;
+    write('name', record.name);
+    write('aliases', record.aliases.length ? `Also known as ${record.aliases.join(', ')}` : '');
+    fields.aliases.hidden = record.aliases.length === 0;
+    const cluster = isPreparedCluster(record);
+    write('status', cluster ? record.classification.name : `${words(record.status)} galaxy`);
+    write('distance', `${number.format(record.distance.valuePc)} pc${cluster ? ' (comoving, redshift-derived)' : ''}`);
+    const { minusPc, plusPc, uncertainty } = record.distance;
+    write('uncertainty', uncertainty ? `${number.format(uncertainty.statisticalPc)} pc statistical; ${number.format(uncertainty.systematicPc)} pc systematic`
+      : minusPc !== undefined && plusPc !== undefined ? `−${number.format(minusPc)} / +${number.format(plusPc)} pc` : 'Not supplied');
+    write('membership', cluster ? 'Galaxy cluster' : words(record.membership.group));
+    write('association', cluster ? `Spectroscopic redshift ${record.redshift.value}` : words(record.membership.subgroup));
+    write('basis', cluster ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
+    write('reference', `Distance reference: ${record.distance.sourceRef}`);
+    for (const [index, link] of links.entries()) {
+      const source = sources[index];
+      link.hidden = !source;
+      if (source) { link.href = source.url; link.textContent = source.citation; }
+      else { link.removeAttribute('href'); link.textContent = ''; }
+    }
+  }, destroy() { events.abort(); currentPresentation = null; } };
+}

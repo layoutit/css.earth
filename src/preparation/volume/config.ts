@@ -17,6 +17,8 @@ export interface VolumeRecipe {
     acquisition?: { path: string; sha256: string }; };
   material: { emission: DensityChannel[]; absorption: DensityChannel[]; radialEmission?: RadialEmission;
     intensityScale: number; stepScale: number; exposureGain: number;
+    /** Shared opacity preserves constant RGB ratios through ordinary source-over; no extinction. */
+    emissionTransfer?: 'independent-channels' | 'shared-opacity';
     displayColorMatrix?: DisplayColorMatrix; stepMetric?: 'source' | 'texture'; cylinderSupport?: { axis: Axis; radiusSquared: number }; };
   bake: { sliceCounts: Record<Axis, number>; unitsPerSourceUnit: number; imageWidth: number;
     samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; imageEncoding?: VolumeImageEncoding; };
@@ -110,6 +112,9 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
     cylinderSupport = { axis: support.axis, radiusSquared: positive(support.radiusSquared, 'radiusSquared') };
   }
   if (m.stepMetric !== undefined && m.stepMetric !== 'source' && m.stepMetric !== 'texture') throw new TypeError('Invalid stepMetric.');
+  if (m.emissionTransfer !== undefined && m.emissionTransfer !== 'independent-channels' && m.emissionTransfer !== 'shared-opacity') throw new TypeError('Invalid emissionTransfer.');
+  const emission = channels(m.emission, 'emission'), absorption = channels(m.absorption, 'absorption');
+  if (m.emissionTransfer === 'shared-opacity' && absorption.length > 0) throw new TypeError('Shared-opacity emission does not support absorption.');
   const acquisition = g.acquisition === undefined ? undefined : record(g.acquisition, 'acquisition');
   let imageEncoding: VolumeImageEncoding | undefined;
   if (b.imageEncoding !== undefined) {
@@ -130,9 +135,10 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
   return { schema: r.schema, grid: { path: sourcePath(g.path), sha256: digest(g.sha256, 'grid digest'),
     decodedSha256: digest(g.decodedSha256, 'decoded digest'), dimensions, encoding: g.encoding, bounds: { min, max },
     ...(acquisition ? { acquisition: { path: sourcePath(acquisition.path), sha256: digest(acquisition.sha256, 'acquisition digest') } } : {}) },
-    material: { emission: channels(m.emission, 'emission'), absorption: channels(m.absorption, 'absorption'),
+    material: { emission, absorption,
       ...(radialEmission ? { radialEmission } : {}), ...(cylinderSupport ? { cylinderSupport } : {}),
       ...(m.displayColorMatrix === undefined ? {} : { displayColorMatrix: displayColorMatrix(m.displayColorMatrix) }),
+      ...(m.emissionTransfer === undefined ? {} : { emissionTransfer: m.emissionTransfer }),
       ...(m.stepMetric ? { stepMetric: m.stepMetric } : {}), intensityScale: positive(m.intensityScale, 'intensityScale'),
       stepScale: positive(m.stepScale, 'stepScale'), exposureGain: positive(m.exposureGain, 'exposureGain') },
     bake: { sliceCounts: { x: positive(counts.x, 'x count', true), y: positive(counts.y, 'y count', true), z: positive(counts.z, 'z count', true) },

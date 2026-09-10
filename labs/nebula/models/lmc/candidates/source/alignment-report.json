@@ -1,0 +1,233 @@
+{
+  "schema": "cssearth-selected-image-alignment-report@1",
+  "status": "passed",
+  "pass": true,
+  "selectedIds": [
+    "vista-infrared",
+    "horalek-widefield",
+    "wise-wide-infrared"
+  ],
+  "sources": [
+    {
+      "id": "vista-infrared",
+      "status": "passed",
+      "pass": true,
+      "sourcePath": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
+      "sourceSha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
+      "sourceDimensions": [
+        8954,
+        10000
+      ],
+      "gate": {
+        "path": "labs/nebula/models/lmc-candidates/source/vista-direction-gate.json",
+        "sha256": "2c17b7259fe98410e27cf14d5858add5cb27b75c7f3771169d5c50d7211f9ec2"
+      },
+      "geometry": {
+        "kind": "matched-star-homography",
+        "registration": {
+          "referenceWcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6737,
+              6536
+            ],
+            "referencePixel": [
+              3368.5,
+              3268
+            ],
+            "referenceValueDeg": [
+              78.7957840796,
+              -71.566506171
+            ],
+            "scaleDeg": [
+              -0.00138784675876,
+              0.00138784675876
+            ],
+            "rotationDeg": -16.920000000000027
+          },
+          "referenceWidthPx": 6737,
+          "referenceHeightPx": 6536,
+          "imageToReferenceMatrix": [
+            0.5859532996728816,
+            -0.13863489191508335,
+            1101.6859248359813,
+            0.1190037618003177,
+            0.596664958469161,
+            -1479.567248000351,
+            -2.639112449735194e-06,
+            -1.2871658418376004e-06,
+            1
+          ]
+        }
+      },
+      "verification": {
+        "id": "vista-infrared",
+        "sourcePath": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
+        "sourceSha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
+        "sourceHashMatchesRecipe": true,
+        "matrixMatchesEvidence": true,
+        "sourceNativeDimensions": [
+          8954,
+          10000
+        ],
+        "matchedStars": 16020,
+        "heldOutStars": 5340,
+        "heldOutResidualSmashPixels": {
+          "median": 0.27590838580429666,
+          "p90": 0.6670585845884129,
+          "max": 2.036686899184936
+        },
+        "matchedSourceHullFraction": 0.8309633790146702,
+        "preparedCssGeometryClosureMaxPixels": 4.0419827920822775e-13,
+        "evidencePath": ".local/nebula-lab/image-candidates/vista-registration/10k/direction-gate.json",
+        "evidenceSha256": "2c17b7259fe98410e27cf14d5858add5cb27b75c7f3771169d5c50d7211f9ec2",
+        "pass": true
+      },
+      "limitations": [
+        "Image-to-SMASH registration is verified within the matched hull; outer source regions are extrapolated.",
+        "The shared image-to-density inspection fit is user-authored, not a scientific particle-to-star correspondence."
+      ]
+    },
+    {
+      "id": "horalek-widefield",
+      "status": "passed",
+      "pass": true,
+      "sourcePath": ".local/nebula-lab/new-references/iotw2547a.jpg",
+      "sourceSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+      "sourceDimensions": [
+        6582,
+        4388
+      ],
+      "gate": {
+        "path": "labs/nebula/models/lmc-candidates/source/horalek-registration.json",
+        "sha256": "28bd2b914cc66585ac9a83d05b6f20c718927e5642593452c6020915cf50b447"
+      },
+      "geometry": {
+        "kind": "matched-star-homography",
+        "registration": {
+          "referenceWcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6737,
+              6536
+            ],
+            "referencePixel": [
+              3368.5,
+              3268
+            ],
+            "referenceValueDeg": [
+              78.7957840796,
+              -71.566506171
+            ],
+            "scaleDeg": [
+              -0.00138784675876,
+              0.00138784675876
+            ],
+            "rotationDeg": -16.920000000000027
+          },
+          "referenceWidthPx": 6737,
+          "referenceHeightPx": 6536,
+          "imageToReferenceMatrix": [
+            -0.9925301807308614,
+            0.47532659519967235,
+            5752.612114776925,
+            -0.4729033967977122,
+            -0.9970462494720148,
+            5409.185308143818,
+            2.3045914082800085e-07,
+            -4.331845136939875e-07,
+            1
+          ]
+        }
+      },
+      "verification": {
+        "id": "horalek-widefield",
+        "sourcePath": ".local/nebula-lab/new-references/iotw2547a.jpg",
+        "sourceSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
+        "sourceHashMatchesRecipe": true,
+        "matrixMatchesEvidence": true,
+        "sourceNativeDimensions": [
+          6582,
+          4388
+        ],
+        "matchedStars": 592,
+        "heldOutStars": 198,
+        "heldOutResidualSmashPixels": {
+          "median": 0.5851278302961975,
+          "p90": 1.1205233806107902,
+          "max": 1.6751460612137303
+        },
+        "matchedSourceHullFraction": 0.6022772060465406,
+        "preparedCssGeometryClosureMaxPixels": 2.0495186137532011e-13,
+        "evidencePath": ".local/nebula-lab/new-references/registration-receipts.json",
+        "evidenceSha256": "ae25c37f38a3d6a32c0b3436a1c93d9cfc4d42a53d14fcaa7123e3ae14b3e633",
+        "pass": true
+      },
+      "limitations": [
+        "Image-to-SMASH registration is verified within the matched hull; outer source regions are extrapolated.",
+        "The shared image-to-density inspection fit is user-authored, not a scientific particle-to-star correspondence."
+      ]
+    },
+    {
+      "id": "wise-wide-infrared",
+      "status": "passed",
+      "pass": true,
+      "sourcePath": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+      "sourceSha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
+      "sourceDimensions": [
+        6000,
+        6000
+      ],
+      "gate": {
+        "path": "labs/nebula/models/lmc-candidates/source/wise-direction-gate.json",
+        "sha256": "d826bb79d445368042d3f3bd9114bc1003072afe858f5f1519d3071a9da08117"
+      },
+      "geometry": {
+        "kind": "fixed-publisher-wcs",
+        "wcs": {
+          "projection": "TAN",
+          "coordinateFrame": "ICRS",
+          "referenceDimension": [
+            6000,
+            6000
+          ],
+          "referencePixel": [
+            3000,
+            3000
+          ],
+          "referenceValueDeg": [
+            78.76,
+            -69.19
+          ],
+          "scaleDeg": [
+            -0.0040595312971682,
+            0.0040595312971682
+          ],
+          "rotationDeg": 0
+        }
+      },
+      "verification": {
+        "matchedStars": 34811,
+        "reservedCheckStars": 11604,
+        "reservedCheckResidualNativeWisePixels": {
+          "median": 0.31571389137939676,
+          "p90": 0.6322795262452354,
+          "max": 2.496394098627247
+        },
+        "matchedSourceHullFraction": 0.9929390230930758,
+        "parametersFitted": 0
+      },
+      "limitations": [
+        "Catalogue and image originate from the same infrared survey but coordinates are checked independently against the published image WCS.",
+        "The JPEG is a 14.6arcsec/pixel display composite; residuals are not native detector astrometric precision.",
+        "Blue W1 centroids verify common image geometry, not diffuse W3/W4 photometry, seams, or cloud quality.",
+        "Identities are associated within a predeclared 2.5 pixel window; shifted controls measure chance associations.",
+        "Fixed publisher WCS is verified without fitting an offset, scale, reflection or homography."
+      ]
+    }
+  ],
+  "processingPerformedByThisAudit": false,
+  "scope": "Source image registration gates only; selected source hashes and exact geometry must match these entries before any authorized downstream processing."
+}

@@ -19,6 +19,9 @@ function fixture() {
   const windowTarget = { requestAnimationFrame(fn) { callbacks.set(++next, fn); return next; },
     cancelAnimationFrame(id) { callbacks.delete(id); } };
   const navigation = { frame: frames[0], capture: () => current,
+    activePreparedFocus: null,
+    preparedFocus() { return this.activePreparedFocus; },
+    setPreparedFocus(focus) { this.activePreparedFocus = focus; },
     optics: () => ({ focalPixels: 1000, principalOffsetPixels: [0,0], widthPixels: 2000, heightPixels: 2000,
       framingRadiusPixels: 200, detailHandoffDiameterPixels: 14 }),
     apply(value) { current = value; paints.push(value); } };
@@ -171,6 +174,22 @@ test('the same object can recenter at overview distance without resetting to its
   await drainFrames(f, { task: f.service.focus({ objectId: '0', mount: { navigation: f.navigation },
     signal: f.controller.signal, targetWorldCamera }) });
   closePose(f.navigation.capture().pose, targetWorldCamera.pose);
+});
+
+test('ordinary planet selection clears a prepared catalogue pivot for both same-owner focus and detail handoff', async () => {
+  for (const sameOwner of [true, false]) {
+    const f = fixture();
+    f.navigation.setPreparedFocus({ id: 'catalogue:7' });
+    const before = f.navigation.capture();
+    const task = sameOwner
+      ? f.service.focus({ objectId: '0', mount: { navigation: f.navigation }, signal: f.controller.signal, reducedMotion: true })
+      : f.start({ preserveView: true });
+    assert.equal(f.navigation.preparedFocus(), null);
+    assert.equal(f.navigation.capture(), before, 'Clearing the input pivot cannot move the existing observer');
+    const result = await drainFrames(f, { task });
+    if (!sameOwner) await result.afterMount(f.mounted());
+    f.controller.abort();
+  }
 });
 // The synthetic optics use a 2000px square viewport. A sphere beside the
 // eye plane can have a huge projected ellipse entirely outside that viewport.

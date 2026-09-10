@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m31",
+  "source": {
+    "path": "source.jpg",
+    "sha256": "f0a9a514317745945591c7677e2d76c358357cf4e4ef00b95928e6d350835137",
+    "dimensions": [
+      4783,
+      5000
+    ],
+    "originalDimensions": [
+      21299,
+      13775
+    ],
+    "publisherUrl": "https://esahubble.org/images/heic1112f/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/heic1112f.jpg",
+    "credit": "ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble)",
+    "license": "CC-BY-4.0",
+    "parentPixelWindow": [
+      6000,
+      1000,
+      11000,
+      11500
+    ]
+  },
+  "observation": {
+    "centerRaDeg": 10.7523331482,
+    "centerDecDeg": 41.2596417071,
+    "fieldOfViewDeg": [
+      6.032166666666667,
+      3.9013333333333335
+    ],
+    "northClockwiseDeg": -1.92
+  },
+  "target": {
+    "centerRaDeg": 10.683916666666665,
+    "centerDecDeg": 41.26566666666666,
+    "distancePc": 776247.1166286912
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 77.5,
+    "lineOfNodesPaDeg": 37.7,
+    "thicknessKpc": 1,
+    "depthWeights": [
+      0.004505775865647428,
+      0.006220527722822393,
+      0.008405193171577847,
+      0.011115550900766309,
+      0.014387227404528809,
+      0.018225776828952187,
+      0.022597365584021843,
+      0.027421575220713538,
+      0.03256790405498035,
+      0.03785733555111008,
+      0.04306982455543612,
+      0.04795777043713778,
+      0.05226460710202956,
+      0.055746707084891246,
+      0.05819605849938327,
+      0.05946080001600135,
+      0.05946080001600135,
+      0.05819605849938328,
+      0.05574670708489124,
+      0.05226460710202956,
+      0.04795777043713778,
+      0.04306982455543613,
+      0.037857335551110066,
+      0.03256790405498035,
+      0.027421575220713538,
+      0.02259736558402185,
+      0.018225776828952187,
+      0.014387227404528809,
+      0.011115550900766309,
+      0.008405193171577851,
+      0.006220527722822393,
+      0.004505775865647428
+    ],
+    "supportRadiusKpc": 35,
+    "supportTaperFraction": 0.9,
+    "depthScales": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 3000,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.006,
+    "encoding": {
+      "format": "webp",
+      "quality": 82
+    },
+    "diffuseFacePixels": 320,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.08,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2
+  },
+  "provenance": {
+    "path": "provenance.json",
+    "sha256": "52bf488f3fe4d713b23091c6b523d1269bfac2b3d1cae1c098e305029bfa1c66"
+  }
+}

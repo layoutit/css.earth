@@ -1,0 +1,179 @@
+{
+  "schema": "cssearth-nebula-reference-source@1",
+  "id": "orion-llori-hst-2006",
+  "subject": {
+    "id": "orion",
+    "name": "Orion Nebula (M42 / NGC 1976)",
+    "region": "LL Orionis bow-shock field"
+  },
+  "source": {
+    "publisher": "NASA Science / Space Telescope Science Institute",
+    "sourcePageUrl": "https://science.nasa.gov/asset/hubble/abstract-art-found-in-the-orion-nebula/",
+    "downloadUrl": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2006/01/STScI-01EVT7Y95A2C07EEX772ZV79V3.tif",
+    "archiveCatalogUrl": "https://www.astropix.org/image/stsci/2006-01i",
+    "archiveResourceId": "STSCI-H-p0601i-f-4806x3364.tif",
+    "releaseDate": "2006-01-11",
+    "acquiredAt": "2026-09-08",
+    "localCachePath": ".local/nebula-lab/orion-source/STScI-01EVT7Y95A2C07EEX772ZV79V3.tif",
+    "sha256": "dd5b957da63a9b74bc28aab639d025044338e60047264ccb2eb0554fadde881b",
+    "bytes": 28894870,
+    "widthPx": 4806,
+    "heightPx": 3364,
+    "format": "tiff",
+    "bitsPerSample": 8,
+    "samplesPerPixel": 3,
+    "colorProfile": "Adobe RGB (1998)",
+    "imageNature": "Display-graded optical color composite; not calibrated photometry or a scientific flux product.",
+    "credit": "NASA, ESA, and The Hubble Heritage Team (STScI/AURA), Acknowledgment: NASA, ESA, M. Robberto (STScI) and the Hubble Space Telescope Orion Treasury Project Team",
+    "license": {
+      "name": "NASA/STScI image-use policy; attribution required and no endorsement implied",
+      "nasaMediaGuidelinesUrl": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "publisherImageUsePolicyUrl": "https://hubblesite.org/copyright/",
+      "note": "Preserve the complete publisher credit. NASA's general media guidance does not override any separately identified third-party rights."
+    },
+    "bands": [
+      {
+        "facility": "Hubble Space Telescope",
+        "instrument": "ACS",
+        "filter": "F435W (B)",
+        "wavelengthNm": 435,
+        "displayColor": "Blue"
+      },
+      {
+        "facility": "Hubble Space Telescope",
+        "instrument": "ACS",
+        "filter": "F555W (V)",
+        "wavelengthNm": 555,
+        "displayColor": "Green"
+      },
+      {
+        "facility": "Hubble Space Telescope",
+        "instrument": "ACS",
+        "filter": "F658N (H-alpha)",
+        "wavelengthNm": 658,
+        "displayColor": "Red-orange"
+      },
+      {
+        "facility": "Hubble Space Telescope",
+        "instrument": "ACS",
+        "filter": "F775W (i)",
+        "wavelengthNm": 775,
+        "displayColor": "Red"
+      },
+      {
+        "facility": "Hubble Space Telescope",
+        "instrument": "ACS",
+        "filter": "F850LP (z)",
+        "wavelengthNm": 850,
+        "displayColor": "Red"
+      },
+      {
+        "facility": "ESO La Silla 2.2 m",
+        "instrument": "WFI",
+        "filter": "BB#B/99_ESO842 (B)",
+        "displayColor": "Blue"
+      },
+      {
+        "facility": "ESO La Silla 2.2 m",
+        "instrument": "WFI",
+        "filter": "NB#OIII/8_ESO859 ([O III])",
+        "displayColor": "Green"
+      },
+      {
+        "facility": "ESO La Silla 2.2 m",
+        "instrument": "WFI",
+        "filter": "NB#Halpha/7_ESO856 (H-alpha)",
+        "displayColor": "Red"
+      },
+      {
+        "facility": "ESO La Silla 2.2 m",
+        "instrument": "WFI",
+        "filter": "NB#SIIr/8_ESO857 ([S II])",
+        "displayColor": "Red"
+      }
+    ]
+  },
+  "publisherWcs": {
+    "metadataUrl": "https://www.astropix.org/image/stsci/2006-01i",
+    "coordinateFrame": "ICRS",
+    "equinox": "J2000",
+    "projection": "TAN",
+    "referenceDimensions": [
+      4806,
+      3364
+    ],
+    "referencePixel": [
+      4091.54884289296,
+      6464.6473071896
+    ],
+    "referenceValueDeg": [
+      83.7353207787,
+      -5.52670553949
+    ],
+    "scaleDegPerPixel": [
+      -0.00002777675,
+      0.00002777675
+    ],
+    "rotationDeg": -10.07484645799,
+    "angularScaleArcsecPerPixel": 0.0999963,
+    "reportedFieldOfViewArcmin": [
+      8,
+      5.6
+    ],
+    "pixelConvention": "Publisher AVM/TAN registration. Image pixels are addressed here with zero-based x-right, y-down coordinates; the AVM reference pixel may lie outside this released detail crop.",
+    "quality": "Publisher registration copied from the STScI Astropix catalogue; not independently fitted or checked against matched stars. The TIFF also contains legacy virtual-observatory metadata referring to a larger source canvas, so use this catalogue registration for the released 4806 x 3364 derivative."
+  },
+  "crop": {
+    "outputPath": "labs/nebula/models/orion-structure-benchmark/source.png",
+    "sha256": "467b33eed47995f19a46cd379ecede7ba081e27d6a3088af0a0d96cb5e6d56b7",
+    "bytes": 388431,
+    "widthPx": 512,
+    "heightPx": 512,
+    "format": "png",
+    "bitsPerSample": 8,
+    "samplesPerPixel": 3,
+    "colorProfile": "sRGB IEC61966-2.1",
+    "originalPixelCoordinates": {
+      "convention": "Zero-based top-left origin; left/top inclusive and right/bottom exclusive.",
+      "left": 1700,
+      "top": 650,
+      "rightExclusive": 2212,
+      "bottomExclusive": 1162
+    },
+    "pixelMapping": "crop(x, y) = source(x + 1700, y + 650)",
+    "angularExtentArcsec": [
+      51.1981056,
+      51.1981056
+    ],
+    "transformation": "Native 512 x 512 pixel crop with no resize or structure mask; Adobe RGB (1998) converted to sRGB IEC61966-2.1 for deterministic display RGB.",
+    "reproduction": {
+      "tool": "macOS sips-316",
+      "colorProfilePath": "/System/Library/ColorSync/Profiles/sRGB Profile.icc",
+      "command": "mkdir -p .local/nebula-lab/orion-source labs/nebula/models/orion-structure-benchmark && curl --fail --location --output .local/nebula-lab/orion-source/STScI-01EVT7Y95A2C07EEX772ZV79V3.tif https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2006/01/STScI-01EVT7Y95A2C07EEX772ZV79V3.tif && sips -c 512 512 --cropOffset 650 1700 -m '/System/Library/ColorSync/Profiles/sRGB Profile.icc' -s format png .local/nebula-lab/orion-source/STScI-01EVT7Y95A2C07EEX772ZV79V3.tif --out labs/nebula/models/orion-structure-benchmark/source.png"
+    },
+    "selection": "The fixed field contains the resolved LL Orionis bow shock and secondary shock filaments, diffuse emission gradients, dark gaps, and several point sources. Selection is the only authored spatial input."
+  },
+  "physicalScale": {
+    "distanceEvidence": {
+      "paper": "The distance to the Orion Nebula",
+      "authors": "Menten, Reid, Forbrich, and Brunthaler",
+      "journal": "Astronomy & Astrophysics 474, 515-520 (2007)",
+      "doi": "10.1051/0004-6361:20078247",
+      "url": "https://www.aanda.org/articles/aa/full/2007/41/aa8247-07/aa8247-07.right.html",
+      "method": "VLBA trigonometric parallax of Orion Nebula Cluster radio stars",
+      "distancePc": 414,
+      "uncertaintyPc": 7
+    },
+    "nominalProjectedAuPerPixel": 41.3984682,
+    "nominalProjectedCropWidthPc": 0.1027610875,
+    "projectedCropWidthUncertaintyPcFromDistanceOnly": 0.0017375063,
+    "interpretation": "These values convert angular separation into projected XY scale at the cluster distance. They do not measure the line-of-sight positions, thicknesses, or gas depth of structures in the crop."
+  },
+  "constraints": [
+    "A single display composite constrains projected morphology only; it cannot recover true 3D depth.",
+    "The color channels mix broad optical bands and narrow emission lines from HST and ESO data; pixel values are display RGB, not calibrated fluxes.",
+    "Do not infer geometric depth from brightness, color, apparent overlap, bow-shock shape, or the cluster distance alone.",
+    "Any later 3D reconstruction must label depth placement and thickness as authored priors or hypotheses, not observations.",
+    "Run the same generic extraction settings as the first native 512 px case; do not encode Orion or LL Orionis feature names into reusable algorithms."
+  ]
+}

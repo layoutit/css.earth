@@ -29,6 +29,7 @@
   ],
   "exclude": [
     "test",
-    "**/*.test.mts"
+    "**/*.test.mts",
+    "../navigation/**/*.test.mts"
   ]
 }

@@ -21,6 +21,19 @@ stars.strings('name')[42]   // decoded lazily
 
 The byte-level spec is in [FORMAT.md](./FORMAT.md). The Python writer lives in the external catalogue pipeline (not part of this repository); `pnpm check:parity` proves the two implementations agree.
 
+`parsePreparedGalaxyCatalog` validates the separate `cssearth-galaxy-catalog@1`
+scientific JSON interchange in place. It retains measured distances and errors,
+ICRF positions, membership evidence, and source references without producing a
+second row bank. It does not change GXCT or infer membership from proximity.
+Prepared navigation framing remains distinct from measured half-light radii.
+
+`parsePreparedClusterCatalog` validates the separate `cssearth-cluster-catalog@1`
+interchange. Cluster centres carry redshift references and explicit distance
+cosmology; R500 proper and comoving apertures remain distinct from cluster edges.
+`PreparedCatalogObject` composes galaxy and cluster records without assigning
+galaxy membership to clusters. Source tables and coordinate preparation remain
+outside this package.
+
 ## Source size
 
 All source files, tests, tools, and generated code are limited to 600 physical

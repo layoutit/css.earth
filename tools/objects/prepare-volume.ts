@@ -1,54 +1,9 @@
-/** Generic, self-contained density-volume object preparation entry point. */
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { dirname, relative, resolve } from 'node:path';
+/** Offline volume preparation CLI; implementation is shared with image restoration. */
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
-import { parseVolumeRecipe } from '../../src/preparation/volume/config.js';
-import { verifiedBytes, sha256, containedPath } from '../../src/preparation/volume/source.js';
-import { prepareVolumeSlices } from '../../src/preparation/volume/slices.js';
-import { compileCssVolume } from '../../src/renderers/css/preparation/volume.js';
-import { acquireVolumeSource } from '../../src/preparation/volume/acquisition.js';
-import { readPreviousVolumeTextures, retireVolumeTextures } from '../../src/preparation/volume/retirement.js';
-import { parseSkyRecipe } from '../../src/preparation/sky/config.js';
-import { acquireSkySource } from '../../src/preparation/sky/source.js';
-import { prepareSkyFaces } from '../../src/preparation/sky/bake.js';
-import { compileCssSky } from '../../src/renderers/css/preparation/sky.js';
+import { prepareDensityVolumeObject } from '../../src/preparation/volume/prepare.js';
+export { prepareDensityVolumeObject };
 
-export async function prepareDensityVolumeObject(options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string }) {
-  const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared'));
-  const descriptorPath = resolve(objectDirectory, 'object.json');
-  const authored: unknown = JSON.parse(await readFile(descriptorPath, 'utf8'));
-  const descriptor = parseDensityVolumeObjectDescriptor(authored);
-  const configBytes = await verifiedBytes(objectDirectory, { path: descriptor.preparation.source, sha256: descriptor.preparation.sha256 });
-  const recipe = parseVolumeRecipe(JSON.parse(configBytes.toString('utf8')) as unknown);
-  const sourceDirectory = dirname(containedPath(objectDirectory, descriptor.preparation.source));
-  if (options.acquisitionCache) await acquireVolumeSource(sourceDirectory, recipe, resolve(options.acquisitionCache));
-  const previousTextures = await readPreviousVolumeTextures(outputDirectory);
-  await mkdir(outputDirectory, { recursive: true });
-  const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory, recipe });
-  let data = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, slices, recipe });
-  if (recipe.sky) {
-    const skyRecipe = parseSkyRecipe(JSON.parse((await verifiedBytes(sourceDirectory, recipe.sky)).toString('utf8')));
-    const skyDirectory = dirname(containedPath(sourceDirectory, recipe.sky.path));
-    if (options.acquisitionCache) await acquireSkySource(skyDirectory, skyRecipe, resolve(options.acquisitionCache));
-    const compiled = compileCssSky(await prepareSkyFaces({ sourceDirectory: skyDirectory, outputDirectory, recipe: skyRecipe }), descriptor.volume);
-    data = { ...data, sky: compiled.sky, resources: [...data.resources, ...compiled.resources] };
-  }
-  const envelope = { schema: 'cssearth-prepared-object@1' as const, id: descriptor.id, type: 'density-volume' as const,
-    format: 'cssearth-density-volume@1' as const, data };
-  const bytes = Buffer.from(JSON.stringify(envelope) + '\n'), outputPath = resolve(outputDirectory, 'volume.json');
-  await writeFile(outputPath, bytes);
-  if (outputDirectory === resolve(objectDirectory, 'prepared')) {
-    // The preparation reference is output metadata; authored physical/model facts remain untouched.
-    const { volume: _volume, preparation: _preparation, ...baseDescriptor } = descriptor;
-    await writeFile(descriptorPath, JSON.stringify({ ...baseDescriptor, prepared: { format: envelope.format,
-      url: relative(objectDirectory, outputPath).split('\\').join('/'), sha256: sha256(bytes) } }, null, 2) + '\n');
-  }
-  await retireVolumeTextures(outputDirectory, previousTextures, slices.quads.map(quad => quad.texturePath));
-  const decodedBytes = data.resources.reduce((sum, resource) => sum + resource.width * resource.height * 4, 0);
-  console.log(`PREPARED ${descriptor.id}: ${slices.quads.length} PolyCSS leaves; ${decodedBytes} decoded RGBA bytes; ${outputPath}`);
-  return envelope;
-}
 const direct = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (direct) {
   const directory = process.argv[2];

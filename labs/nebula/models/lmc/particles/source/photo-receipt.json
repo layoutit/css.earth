@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-nebula-extraction-lab@1",
+  "id": "photo",
+  "width": 2400,
+  "height": 2328,
+  "skyRgb": [
+    13,
+    12,
+    12
+  ],
+  "threshold": 61.477404560000004,
+  "supportFraction": 0.23315111220644877,
+  "outputs": {
+    "cutout": "photo-cutout.png",
+    "diffuse": "photo-diffuse.png",
+    "residual": "photo-residual.png",
+    "mask": "photo-mask.png",
+    "comparison": "photo-comparison.png"
+  },
+  "method": "Border-robust sky subtraction; median-filtered extended-emission seed; morphology-connected, softly feathered support; compact residual retained only inside that support.",
+  "limitations": [
+    "The compact residual is a frequency separation, not a star catalogue.",
+    "Foreground stars projected inside the galaxy support cannot be distinguished reliably from intrinsic compact sources in broadband JPEG imagery.",
+    "Disconnected emission outside the morphology-connected support may be omitted."
+  ]
+}

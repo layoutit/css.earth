@@ -1,0 +1,14 @@
+{
+  "minUniqueMatches": 100,
+  "minQuadrants": 4,
+  "minHullFraction": 0.5,
+  "maxMedianNativeWisePixels": 0.75,
+  "maxP90NativeWisePixels": 1.5,
+  "maxEachShiftedControlFraction": 0.1,
+  "correspondenceWindowNativeWisePixels": 2.5,
+  "catalogueIsolationPixels": 5,
+  "catalogueMagnitudeRangeW1": [
+    8,
+    11
+  ]
+}

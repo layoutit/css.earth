@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-particle-volume-lab@1",
+  "input": {
+    "path": ".local/nebula-lab/particles/smc-particles.f32",
+    "sha256": "2a13f21bddc8d082ef6e8cb72556db76f5287c94808f860abced752b5c7acb24",
+    "bytes": 3600000,
+    "layout": "float32-le-xyzmass-kpc"
+  },
+  "options": {
+    "dimensions": [
+      128,
+      128,
+      128
+    ],
+    "boundsKpc": {
+      "min": [
+        -13,
+        -13,
+        -10
+      ],
+      "max": [
+        10,
+        9,
+        16
+      ]
+    },
+    "smoothingSigmaVoxels": 0.8,
+    "normalizationQuantile": 0.999,
+    "encoding": "sqrt-density-unorm8",
+    "fallbackColor": [
+      0.68,
+      0.73,
+      0.8
+    ],
+    "zstdLevel": 9,
+    "colorConstraint": {
+      "imagePath": "labs/nebula/models/smc-particles/source/photo-diffuse.png",
+      "centerKpc": [
+        0,
+        0,
+        0
+      ],
+      "rightDirection": [
+        1,
+        0,
+        0
+      ],
+      "upDirection": [
+        0,
+        1,
+        0
+      ],
+      "spanKpc": [
+        18,
+        18
+      ],
+      "imageSha256": "6713942f236490691c7d6dc2a84e39365727560ff397f641ee832901204baa3a"
+    }
+  },
+  "particles": {
+    "count": 225000,
+    "accepted": 223985,
+    "inputMass": 4575.945809483528,
+    "acceptedMass": 4555.303209498525,
+    "depositedMass": 4555.303209498384
+  },
+  "normalization": {
+    "quantile": 0.999,
+    "densityAtUnit": 0.42499884565728946,
+    "encoding": "sqrt-density-unorm8"
+  },
+  "diagnostics": {
+    "occupiedVoxels": 582572,
+    "axisVariation": [
+      1.056002782114143,
+      1.135673904336602,
+      1.4661485767315803
+    ]
+  },
+  "outputs": {
+    "gridPath": "density.ktx2",
+    "gridSha256": "18dfee0277ef35a1618f3c29aded4ddd25810def069109243d8a71394465cfb7",
+    "decodedSha256": "d6ccb207d3ec280034af02c087e93d486cfd4b1c2a64db9b19328415aeb4ccdc",
+    "bytes": 761231
+  },
+  "interpretation": {
+    "density": "Mass-weighted CIC deposition of simulation stellar particles with authored offline Gaussian smoothing.",
+    "color": "Fixed orthographic RGB constraint from an authored observational image; color is not simulated stellar population synthesis.",
+    "dust": "No dust or extinction is encoded; alpha is stellar-density support."
+  }
+}

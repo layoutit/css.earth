@@ -222,9 +222,13 @@ export async function preparedSelectionFixture(value: unknown, { silhouetteDiame
     for (const control of definition.controls.settings?.controls ?? [])
         inputs.set(control.name, input({ name: control.name, type: control.kind === "toggle" ? "checkbox" : "range", min: "0", max: "4", step: "1" }));
     const lensRoot = f.document.createElement("div"), settingsRoot = f.document.createElement("div");
-    lensRoot.querySelectorAll = () => buttons;
-    settingsRoot.querySelectorAll = () => [...inputs.values()];
-    f.document.querySelector = selector => selector === ".planet-lenses" ? lensRoot : settingsRoot;
+    const information = Object.assign(f.document.createElement("section"), {
+        querySelector: (selector: string): FixtureElement | null => selector === ".planet-lenses" ? lensRoot : null,
+    });
+    lensRoot.querySelectorAll = selector => selector === 'button[name="lens"]' ? buttons : [];
+    settingsRoot.querySelectorAll = selector => selector === 'input[name], button[name]' ? [...inputs.values()] : [];
+    f.document.querySelector = selector => selector === ".planet-information-panel" ? information
+        : selector === ".planet-settings" ? settingsRoot : null;
     let binding: ReturnType<typeof createObjectControlBinding> | null = null;
     const selection = createObjectSelectionRuntime({ definition, presentation, residency, lifetime: f.lifetime, onCommit: state => f.playback.setSelection(state), onChange: state => binding?.publish(state), onFatalError(error) { errors.push(error); f.lifetime.destroy(); }, onMaterialError: error => materialErrors.push(error) });
     f.lifetime.onDispose(() => selection.destroy());

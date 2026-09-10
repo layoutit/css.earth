@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-magellanic-particle-experiment@1",
+  "source": {
+    "url": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "paper": "https://doi.org/10.1093/mnras/stag1287",
+    "license": "CC0-1.0",
+    "archiveSha256": "21562a5b32c27f39ee67215e9e2c3b1cd2fcfb4a115d2f2c8e0307fc8a51eb54",
+    "archiveBytes": 3547448578,
+    "entry": "run34681lsmcgabestModelA_HR.00440.gz",
+    "snapshotSha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
+    "snapshotAgeGyr": 2.2,
+    "massUnitSolarMass": 232000,
+    "totalCount": 5005000,
+    "gasCount": 0,
+    "darkCount": 2920000,
+    "starCount": 2085000
+  },
+  "targets": [
+    {
+      "id": "lmc-particles",
+      "directory": "labs/nebula/models/lmc-particles",
+      "referenceObject": "src/objects/lmc/object.json",
+      "photo": "labs/nebula/sources/lmc-smash-full.webp",
+      "photoSha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
+      "photoUrl": "https://noirlab.edu/public/images/noirlab2030a/",
+      "photoCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "starRange": {
+        "start": 240000,
+        "count": 1620000
+      },
+      "rotation": [
+        0.8290375725550416,
+        0,
+        0.5591929034707469,
+        -0.5591929034707469,
+        0,
+        0.8290375725550416,
+        0,
+        -1,
+        0
+      ],
+      "boundsKpc": {
+        "min": [
+          -6,
+          -6,
+          -5
+        ],
+        "max": [
+          6,
+          6,
+          5
+        ]
+      },
+      "dimensions": [
+        384,
+        384,
+        48
+      ],
+      "colorSpanKpc": [
+        8.092550727,
+        7.851107548
+      ],
+      "colorCenterKpc": [
+        0.138536068,
+        -1.648790306,
+        0
+      ],
+      "smoothingSigmaVoxels": 0.8,
+      "normalizationQuantile": 0.999,
+      "exposureGain": 1,
+      "extraction": {
+        "maxPixels": 2400,
+        "medianSize": 7
+      },
+      "alignment": {
+        "method": "Authored central-bar alignment in the XZ simulation projection; a rigid −34° rotation, with no scaling or coordinate warp.",
+        "photoScale": "Angular WCS extent at the reference 49.59 kpc distance, evaluated on the tangent plane.",
+        "displayScope": "Photographed central region. The finite core grid excludes outer simulation tidal tails; full imported particles are preserved.",
+        "registration": "Photo center is matched to the simulated central bar, not an astrometric identity between simulation and observed stars."
+      },
+      "photoEmission": {
+        "edgeFeatherFraction": 0.08,
+        "columnDensityFloorFraction": 0.001,
+        "columnDensityFullSignalFraction": 0.01,
+        "maxDisplaySignal": 0.98,
+        "detail": {
+          "spatialSigmaKpc": 0.2,
+          "depthSigmaKpc": 0.2,
+          "contrastStrength": 2
+        }
+      },
+      "photoReceipt": "labs/nebula/sources/lmc-smash-full.webp.json"
+    },
+    {
+      "id": "smc-particles",
+      "directory": "labs/nebula/models/smc-particles",
+      "referenceObject": "src/objects/smc/object.json",
+      "photo": "src/objects/smc/source/source.jpg",
+      "photoSha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
+      "photoUrl": "https://noirlab.edu/public/images/noirlab2030b/",
+      "photoCredit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin",
+      "starRange": {
+        "start": 1860000,
+        "count": 225000
+      },
+      "rotation": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "boundsKpc": {
+        "min": [
+          -13,
+          -13,
+          -10
+        ],
+        "max": [
+          10,
+          9,
+          16
+        ]
+      },
+      "dimensions": [
+        128,
+        128,
+        128
+      ],
+      "colorSpanKpc": [
+        18,
+        18
+      ],
+      "colorCenterKpc": [
+        0,
+        0,
+        0
+      ],
+      "smoothingSigmaVoxels": 0.8,
+      "normalizationQuantile": 0.999,
+      "exposureGain": 0.6
+    }
+  ]
+}

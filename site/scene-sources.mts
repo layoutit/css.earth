@@ -5,10 +5,88 @@ export interface SceneSource { label: string; role: string; href: string; descri
 import { SOURCE_CATALOGUE, sourceHref } from './sources-catalog.mts';
 // Shared context is indexed once by its owner. Footer placement does not create
 // an observation edge for every body on which that context can appear.
-const sharedSources = Object.freeze(SOURCE_CATALOGUE.usage.edges.filter(use => use.kind === 'shared-context').map(use => Object.freeze({
-  label: use.consumerLabel, role: use.consumerId, credit: use.credit,
-  href: sourceHref(use.catalogueId), description: use.limitations.join(' '),
-})));
+const sharedSources = Object.freeze([
+  ...SOURCE_CATALOGUE.usage.edges.filter(use => use.kind === 'shared-context').map(use => Object.freeze({
+    label: use.consumerLabel, role: use.consumerId, credit: use.credit,
+    href: sourceHref(use.catalogueId), description: use.limitations.join(' '),
+  })),
+  // Additional prepared environments retain their object-owned scientific credits.
+  // scene-sources.test.mjs checks these against the active banks and source receipts.
+  ...[
+  {
+    "label": "LVDB",
+    "role": "galaxies",
+    "href": "https://doi.org/10.33232/001c.144859",
+    "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1. Catalogue compilation: CC0 1.0; original measurement papers retain their separate rights."
+  },
+  {
+    "label": "McConnachie",
+    "role": "membership",
+    "href": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
+    "description": "McConnachie (2012), AJ 144, 4, DOI 10.1088/0004-6256/144/1/4; author October 2019 Table 1 membership classifications. LVDB host associations supplement this historical table."
+  },
+  {
+    "label": "ESA/Hubble",
+    "role": "M31 image",
+    "href": "https://esahubble.org/images/heic1112f/",
+    "description": "Wide-field view of the Andromeda Galaxy. ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble). CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
+  },
+  {
+    "label": "ESO",
+    "role": "M33 image",
+    "href": "https://www.eso.org/public/images/eso1424a/",
+    "description": "VST snaps a very detailed view of the Triangulum Galaxy. ESO. CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
+  },
+  {
+    "label": "NOIRLab",
+    "role": "LMC registration",
+    "href": "https://noirlab.edu/public/images/noirlab2030a/",
+    "description": "SMASH reference image and sky registration for the LMC model. CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin. CC-BY-4.0. The active color lenses are VISTA, Horálek optical and WISE."
+  },
+  {
+    "label": "ESO VISTA",
+    "role": "LMC VISTA image",
+    "href": "https://www.eso.org/public/images/eso1914a/",
+    "description": "Near-infrared colors from ESO’s VISTA survey, painted onto the shared simulated LMC density cloud. ESO/VMC Survey."
+  },
+  {
+    "label": "NOIRLab Horálek",
+    "role": "LMC Horálek image",
+    "href": "https://noirlab.edu/public/images/iotw2547a/",
+    "description": "Visible-light colors from Petr Horálek’s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud. NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)."
+  },
+  {
+    "label": "NASA/IPAC WISE",
+    "role": "LMC WISE image",
+    "href": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+    "description": "Infrared colors from NASA/IPAC WISE survey data, painted onto the shared simulated LMC density cloud. IPAC/NASA; color HiPS by CDS (CNRS/Unistra)."
+  },
+  {
+    "label": "Dryad",
+    "role": "LMC density model",
+    "href": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "description": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure. All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred."
+  },
+  {
+    "label": "Bonanos",
+    "role": "LMC stars",
+    "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003",
+    "description": "Bonanos et al. (2009), AJ 138, 1003; CDS/VizieR J/AJ/138/1003. Original observed RA/DEC and photometry are retained as catalogue data. Rays are registered through the fixed reference-image WCS and its accepted Alignment fit to the simulation cloud. Depths are a deterministic density-conditioned display realization, not measured stellar distances or new astrometry. Candidate image material never selects or moves stars."
+  },
+  {
+    "label": "NOIRLab",
+    "role": "SMC image",
+    "href": "https://noirlab.edu/public/images/noirlab2030b/",
+    "description": "Deepest, widest view of the Small Magellanic Cloud from SMASH. CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University) Acknowledgment: Image processing: Travis Rector (University of Alaska Anchorage), Mahdi Zamani & Davide de Martin. CC-BY-4.0. The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth."
+  },
+  {
+    "label": "MCXC-II",
+    "role": "clusters",
+    "href": "https://www.aanda.org/articles/aa/full_html/2024/08/aa49427-24/aa49427-24.html",
+    "description": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187. Seven cluster centres with redshift-derived comoving distances in the publication cosmology; peculiar velocities are not corrected. Outlines show the published R500 overdensity aperture, not a cluster boundary or member distribution."
+  }
+].map(source => Object.freeze(source)),
+]);
 // Explicit presentation aliases live beside the context that replaces them.
 // They never contribute an identity or observation edge to the source graph.
 const footerAliases = new Map<string,string>();
