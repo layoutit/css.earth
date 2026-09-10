@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "pyrrhus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "61e3ec64559834730d1655e7d88384d47fe98095ae4195e16e511414508df88a"
+    "sha256": "964d6709656c374313edb1e828372907539092977212ba309ed84d60c3bd42a7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -352,6 +352,16 @@
         "referenceRadiusMeters": 24178
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 48.356 km effective diameter (fit ±0.423 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; grid marks unavailable imagery. Disk-integrated NEOWISE thermal flux constrains an effective spherical diameter, not this mesh volume or a surface map. Transferring that diameter uniformly to mesh volume is approximate. The quoted fit error is not a total uncertainty and does not measure local shape accuracy. Absolute rotational phase is illustrative.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-13633",
+            "role": "material",
+            "evidence": "src/planets/pyrrhus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
       "bytes": 46419,
       "dependencies": [],
@@ -370,6 +380,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

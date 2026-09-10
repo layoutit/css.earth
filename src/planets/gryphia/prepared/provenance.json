@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "gryphia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "71c9b61bf6a3fb10faedfe6cb08e801c162f2d19bdaef192995186a14ce674fb"
+    "sha256": "633472f18cd002a7a3b7795b3085efb5acf4d53a7214905699ceff082fb64ec8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 7201.5
       },
       "coverage": "Published convex light-curve model 6121. Approximate scale from a thermal diameter of 14.403 ± 0.394 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-66066",
+            "role": "material",
+            "evidence": "src/planets/gryphia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "05dc8e3b5778e2b2ae9b724299774be438553eb90b49329958fae9e42660f16b",
       "bytes": 82708,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "c6935b2d6c3ca294946425f23b4136b6b5aa94d83763e375e39600c9a647d1d7",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

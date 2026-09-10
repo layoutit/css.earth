@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "nemesis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "65f45ff0cb3143b0f944910701cf9ba3aa6b66fe978bf5a21486102baabe2f98"
+    "sha256": "0e9940f5d413a18e8e5371b1f289502814c101ee3852262d215579d0f03e9c5b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -322,6 +322,16 @@
         "referenceRadiusMeters": 81500
       },
       "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-nemesis-nemesis-shape",
+            "role": "material",
+            "evidence": "src/planets/nemesis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "901457d4b545e16eb6fa7c3094c9ba54961fbc3554628df147d836d0500cac7c",
       "bytes": 328699,
       "dependencies": [],
@@ -343,6 +353,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

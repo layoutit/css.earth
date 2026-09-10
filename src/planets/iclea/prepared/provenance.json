@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "iclea",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b263d1b4196fe653fcb989b242d1158a4cf5d2dce05711d24656e08a5e2ca124"
+    "sha256": "bf70d2ca2b91bb8e49124f0c1dab911114d6300b8b78fe2fab09cb3af06eb0a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 43000
       },
       "coverage": "Convex light-curve reconstruction scaled by stellar occultations: 86 km volume-equivalent diameter (model range79–99 km). The grid marks unavailable imagery; rotational phase is illustrative. Marciniak2023 §5.3 prefers pole1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole2. Table1 gives volume-equivalent86 km with asymmetric interval79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error. The archive keeps the larger13 km side as a symmetric error field; the actual asymmetric range is preserved here.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-127591",
+            "role": "material",
+            "evidence": "src/planets/iclea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "3212a810d5ca2f09b46bdac82d0817c197955b84313426df41f473fc6f7945fe",
       "bytes": 80439,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

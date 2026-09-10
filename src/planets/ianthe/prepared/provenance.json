@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "ianthe",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3832194e87b7cd8c8146efd68003bf9005edd3bf1e653b3f88973018b19ed9a3"
+    "sha256": "d96cad4d79c7f05870803ecae606982bfc7ca3945114eae986cb8f567d650f95"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 52120
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 104.24 km effective diameter (catalog ±1.29 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-3999",
+            "role": "material",
+            "evidence": "src/planets/ianthe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "0b7c71c3ad49bdc31f45d662a68f4f4a29a637c6399b280eeb74a8eee9377d94",
       "bytes": 82708,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssecho-authoritative-sources@1",
+  "schema": "cssecho-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/echo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "echo-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 1695. Convex light-curve reconstruction with approximate thermal size: 58.95 km effective diameter (catalog ±1.24 km; additional shape and thermal-model uncertainty). The thermal size is used as a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. The convex inversion resolves the broad shape; craters and concavities are unresolved. Other published pole solutions remain possible.",
       "expectedBytes": 82708,
-      "expectedSha256": "ddc352f155debfd2b7982465401013ccfa65ab66e907975442f94c79fa937b72"
+      "expectedSha256": "ddc352f155debfd2b7982465401013ccfa65ab66e907975442f94c79fa937b72",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-5839",
+            "role": "material",
+            "evidence": "src/planets/echo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/echo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 7270,
       "expectedSha256": "c01eecdaeb1c542b719bbc2dad89b127d3727be9bfd0f8311085ffadfef33139",
-      "sha256": "f4d5d509ebc47cbd051909ce34a48427949db92004ce029f93d7d24fd5234655"
+      "sha256": "f4d5d509ebc47cbd051909ce34a48427949db92004ce029f93d7d24fd5234655",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

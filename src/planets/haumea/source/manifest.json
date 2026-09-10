@@ -1,5 +1,5 @@
 {
-  "schema": "csshaumea-authoritative-sources@1",
+  "schema": "csshaumea-authoritative-sources@2",
   "inputs": [
     {
       "path": "measurements.json",
@@ -13,7 +13,17 @@
       "redistribution": "Factual parameter transcription only; no article figures",
       "consumers": [
         "shape-model"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1038-nature24051",
+            "role": "method",
+            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -30,7 +40,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-vtad-haumea-model",
@@ -44,7 +64,17 @@
         "shape-model"
       ],
       "expectedBytes": 11335060,
-      "expectedSha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8"
+      "expectedSha256": "7b31737593054bd4ef8f61138a6ad1a2577bec03b84d1c3e76e8ac78632a87f8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-haumea-nasa-vtad-haumea-model",
+            "role": "material",
+            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -52,7 +82,11 @@
       "path": "content/object.json",
       "expectedBytes": 3798,
       "expectedSha256": "a3e1fd7c30b7e985569744f05db8fd6bf355817f972965023a1aa4ec9468a1af",
-      "purpose": "Object preparation, content, or attribution"
+      "purpose": "Object preparation, content, or attribution",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

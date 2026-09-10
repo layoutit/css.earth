@@ -1,5 +1,5 @@
 {
-  "schema": "csstelesto-authoritative-sources@1",
+  "schema": "csstelesto-authoritative-sources@2",
   "inputs": [
     {
       "id": "n1514156123_1",
@@ -34,6 +34,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1514080471_1514218017/N1514156123_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1514080471-1514218017-n1514156123-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -60,6 +70,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1514080471_1514218017/N1514156123_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1514080471-1514218017-n1514156123-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -97,6 +117,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1514080471_1514218017/N1514165739_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1514080471-1514218017-n1514165739-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -123,6 +153,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2017/data/1514080471_1514218017/N1514165739_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2017-data-1514080471-1514218017-n1514165739-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -160,6 +200,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2057/data/1630072248_1630189617/N1630076968_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2057-data-1630072248-1630189617-n1630076968-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
       }
     },
     {
@@ -186,6 +236,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2057/data/1630072248_1630189617/N1630076968_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2057-data-1630072248-1630189617-n1630076968-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
         ]
       }
@@ -223,6 +283,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831466361_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2102-data-1831460120-1831497435-n1831466361-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
       }
     },
     {
@@ -249,6 +319,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831466361_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2102-data-1831460120-1831497435-n1831466361-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
           }
         ]
       }
@@ -286,6 +366,16 @@
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831467723_1_CALIB.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2102-data-1831460120-1831497435-n1831467723-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
       }
     },
     {
@@ -312,6 +402,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2102/data/1831460120_1831497435/N1831467723_1_CALIB.LBL"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2102-data-1831460120-1831497435-n1831467723-1-calib",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
           }
         ]
       }
@@ -352,6 +452,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/telesto_30k_plt.tab"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-telesto-thomas-2018-shape",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
       }
     },
     {
@@ -369,7 +479,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -386,7 +506,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/telesto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -426,7 +556,11 @@
       "path": "content/object.json",
       "expectedBytes": 5043,
       "expectedSha256": "a2d1e5759ad2eb0f4629fdde665b63806648abd8d2f9fed457eae4091d85c7cd",
-      "purpose": "Authored source interpretation or preparation metadata."
+      "purpose": "Authored source interpretation or preparation metadata.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssphaethon-authoritative-sources@1",
+  "schema": "cssphaethon-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/phaethon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "phaethon-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "Calibrated convex ground-based reconstruction. The grid is an explicit no-imagery treatment; no small-scale surface detail is inferred.",
       "expectedBytes": 82708,
-      "expectedSha256": "c800be46f47775bd0d1d777265503c2dd20db422a3a41b5c29aa5ae179ffb948"
+      "expectedSha256": "c800be46f47775bd0d1d777265503c2dd20db422a3a41b5c29aa5ae179ffb948",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-51146",
+            "role": "material",
+            "evidence": "src/planets/phaethon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/phaethon/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -93,7 +123,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original model record, source documentation, or authored preparation input.",
       "expectedBytes": 8959,
-      "expectedSha256": "634e10a736af743818dfe783529407f35db7b8b5595d8171e2e2e19137601101"
+      "expectedSha256": "634e10a736af743818dfe783529407f35db7b8b5595d8171e2e2e19137601101",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

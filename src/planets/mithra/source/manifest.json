@@ -1,5 +1,5 @@
 {
-  "schema": "cssmithra-authoritative-sources@1",
+  "schema": "cssmithra-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/mithra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "mithra-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "This is the archived prograde principal-axis model. The source research also permits a nearly mirrored retrograde solution; the pole and rotational sense are not unique. Near-pole-on observations constrain its unobserved southern shape less strongly. The period is 67.5 ± 6.0 h; a small non-principal-axis component was not excluded. No resolved optical surface map is supplied.",
       "expectedBytes": 186529,
-      "expectedSha256": "b38955afe05b2e941d5d8306fc5b644e09f3b125fbb493c8d25326f5d5b81b7e"
+      "expectedSha256": "b38955afe05b2e941d5d8306fc5b644e09f3b125fbb493c8d25326f5d5b81b7e",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mithra-mithra-shape",
+            "role": "material",
+            "evidence": "src/planets/mithra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/mithra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "mithra-research-mithra",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 2758066,
-      "expectedSha256": "b63153cc1414bc21f1707d9d79094aba1d0f6ef0be1a7d607220d65f1c8b96d4"
+      "expectedSha256": "b63153cc1414bc21f1707d9d79094aba1d0f6ef0be1a7d607220d65f1c8b96d4",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mithra-mithra-research-mithra",
+            "role": "method",
+            "evidence": "src/planets/mithra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 8245,
-      "expectedSha256": "94caf2c76cb115715ae367901b19de758f5b326c70ab28d6cc5f29b832f445fb"
+      "expectedSha256": "94caf2c76cb115715ae367901b19de758f5b326c70ab28d6cc5f29b832f445fb",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

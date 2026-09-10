@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-tempel-closeup-registration@1",
+  "shapeSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
+  "margin": 80,
+  "matching": {
+    "patchRadius": 8,
+    "searchRadius": 40,
+    "gridStride": 22,
+    "gridOrigin": 22,
+    "targetSmoothingSigma": 0.85,
+    "minimumCorrelation": 0.86,
+    "minimumPeakMargin": 0.03,
+    "minimumJointValidFraction": 0.85
+  },
+  "maximumRmsPixels": 1,
+  "maximumResidualPixels": 2,
+  "frames": [
+    {
+      "id": "iv05070405_9000675_001_r",
+      "referenceId": "iv05070405_9000673_001_r",
+      "observation": {
+        "instrument": "deep-impact-its",
+        "width": 256,
+        "height": 256,
+        "startTime": "2005-07-04T05:43:06.026",
+        "filter": "N/A",
+        "target": "9P/TEMPEL 1",
+        "detectorBorderPixels": 8
+      }
+    },
+    {
+      "id": "iv05070405_9000680_001_r",
+      "referenceId": "iv05070405_9000673_001_r",
+      "observation": {
+        "instrument": "deep-impact-its",
+        "width": 128,
+        "height": 128,
+        "startTime": "2005-07-04T05:43:37.024",
+        "filter": "N/A",
+        "target": "9P/TEMPEL 1",
+        "detectorBorderPixels": 8
+      }
+    },
+    {
+      "id": "iv05070405_9000688_001_r",
+      "referenceId": "iv05070405_9000680_001_r",
+      "observation": {
+        "instrument": "deep-impact-its",
+        "width": 128,
+        "height": 128,
+        "startTime": "2005-07-04T05:44:03.923",
+        "filter": "N/A",
+        "target": "9P/TEMPEL 1",
+        "detectorBorderPixels": 8
+      }
+    }
+  ]
+}

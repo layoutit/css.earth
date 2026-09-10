@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "ra-shalom",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a4e8cb7c1f7bed129b964ba5da9bb4ded100c9b40e6272d7cb1562cbe3a63c67"
+    "sha256": "17099624bb34de528e9ea7489a1cbf082fe4f920c5fb23baff655fbea8182bcc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -324,6 +324,16 @@
         "referenceRadiusMeters": 1150
       },
       "coverage": "This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ra-shalom-ra-shalom-shape",
+            "role": "material",
+            "evidence": "src/planets/ra-shalom/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d",
       "bytes": 67284,
       "dependencies": [],
@@ -342,6 +352,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "kleopatra",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7b212cd2f444911ef66927be16dc73eff47b76918d34f920d4849ac6cc3259e7"
+    "sha256": "c01b0c2d405ab8c0a5870908da613567eda6630d3b7013a71f17dac84e110ec1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -251,6 +251,16 @@
         "referenceRadiusMeters": 59100
       },
       "coverage": "Closed MPCD model constrained by VLT/SPHERE images; source connectivity retains concave neck geometry. Neutral material, not an observed surface map.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kleopatra-kleopatra-shape",
+            "role": "material",
+            "evidence": "src/planets/kleopatra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "a0a22f4a3bdae76cc5235d7cb90c1b75198eebbce5995d661c19d392b4278fc7",
       "bytes": 190459,
       "dependencies": [],
@@ -272,6 +282,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

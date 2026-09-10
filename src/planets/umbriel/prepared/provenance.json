@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "umbriel",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8204f5cc898e09a0ff6b9df211d782bb075a4a871c71025aa11f3d9f945e1261"
+    "sha256": "b1d1c82dbe016275943b4c698971634be1a1732d9977881b8427da189625f19f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -312,6 +312,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-umbriel-schenk-2020-umbriel-normal",
+            "role": "material",
+            "evidence": "src/planets/umbriel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "d20a2962f9343736a2cb82f7b18b746fdc606bbe301bbde9c99fe8cef8da84ad",
       "bytes": 629366,
       "dependencies": [],
@@ -329,6 +339,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

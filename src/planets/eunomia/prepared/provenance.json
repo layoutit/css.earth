@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "eunomia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a3ed950a7120a79941779aa56b100cba59ef810d650b96066eb895d0aa7bbe8f"
+    "sha256": "1d1894c3b3fd766c1a146e2605321228b01e70d3581899a7ba957c7a7211d249"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -322,6 +322,16 @@
         "referenceRadiusMeters": 135000
       },
       "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eunomia-eunomia-shape",
+            "role": "material",
+            "evidence": "src/planets/eunomia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "cccea9c27b0bdb573f79573281e196b6148e12dd280f324e92ddd37ee1ca5411",
       "bytes": 699259,
       "dependencies": [],
@@ -343,6 +353,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

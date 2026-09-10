@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "comet-1p",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3f832fd5452814d8b696a257fe24c5826132646e1afc8ffedd021d8efb35ab9e"
+    "sha256": "75cf2f51024e2aca7fd540f70b0b4e8ec57ed51c617cefa94b68e8d59038f4e7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -312,6 +312,16 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 4579.06433330178
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-1p-encounter-projection",
+            "role": "material",
+            "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      },
       "sha256": "8b3877838dfe861e7a9ba0878e38b1aab9bfbb01ab2809fd670a41fbe8b0adfe",
       "bytes": 26573,
       "dependencies": [],
@@ -331,6 +341,16 @@
       ],
       "acquisition": "Original PDS4 radius table; restore exact bytes and SHA-256.",
       "redistribution": "Preserve the PDS product identifier and the label request to credit both Abergel and Stooke.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-1p-stooke-halley",
+            "role": "material",
+            "evidence": "src/planets/comet-1p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
       "bytes": 70226,
       "dependencies": [],
@@ -348,6 +368,10 @@
     {
       "path": "content/object.json",
       "purpose": "Halley source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "csscomet-67p-authoritative-sources@1",
+  "schema": "csscomet-67p-authoritative-sources@2",
   "inputs": [
     {
       "id": "mtp019",
@@ -16,7 +16,17 @@
       "redistribution": "Retain ESA/Rosetta/NAVCAM credits and the CC BY-SA 3.0 IGO notice.",
       "consumers": [
         "shape"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-mtp019",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "model-surface",
@@ -44,7 +54,11 @@
       "height": 32,
       "lensId": "model",
       "label": "Shape model",
-      "falseColor": false
+      "falseColor": false,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -61,7 +75,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -78,7 +102,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "navcam-20150720",
@@ -97,7 +131,17 @@
       "acquisition": "Download the original 1024 by 1024 NAVCAM JPEG linked by CometWatch.",
       "redistribution": "Retain ESA/Rosetta/NAVCAM attribution and share-alike notice.",
       "observationDate": "2015-07-20",
-      "interpretation": "Original display image; observer range 171 km and image scale 14.5 m/pixel. Qualitative observational reference, not a registered surface texture."
+      "interpretation": "Original display image; observer range 171 km and image scale 14.5 m/pixel. Qualitative observational reference, not a registered surface texture.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-navcam-20150720",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "osiris-20140805-geo",
@@ -118,7 +162,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2014-08-05T19:44:22.918",
-      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-osiris-20140805-geo",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "osiris-20140805-quality",
@@ -139,7 +193,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2014-08-05T19:44:22.918",
-      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-osiris-20140805-quality",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "osiris-20140805-2344-geo",
@@ -160,7 +224,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2014-08-05T23:44:24.891",
-      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-osiris-20140805-2344-geo",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "osiris-20140805-2344-quality",
@@ -181,7 +255,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2014-08-05T23:44:24.891",
-      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-osiris-20140805-2344-quality",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "osiris-20140806-0244-geo",
@@ -202,7 +286,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2014-08-06T02:44:24.890",
-      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-osiris-20140806-0244-geo",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "osiris-20140806-0244-quality",
@@ -223,7 +317,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2014-08-06T02:44:24.890",
-      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-osiris-20140806-0244-quality",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "osiris-20140806-0520-geo",
@@ -244,7 +348,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2014-08-06T05:20:22.894",
-      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-osiris-20140806-0520-geo",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "osiris-20140806-0520-quality",
@@ -265,7 +379,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2014-08-06T05:20:22.894",
-      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-osiris-20140806-0520-quality",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-format",
@@ -282,7 +406,17 @@
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-format",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-bibliography",
@@ -299,7 +433,17 @@
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-bibliography",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-shap5-info-asc",
@@ -316,7 +460,17 @@
       "redistribution": "Published ESA PSA reference mesh used only for ambiguity masking; retain shape archive and team attribution.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-shap5-info-asc",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-cg_spc_shap5_097k_cart-lbl",
@@ -333,7 +487,17 @@
       "redistribution": "Published ESA PSA reference mesh used only for ambiguity masking; retain shape archive and team attribution.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-cg-spc-shap5-097k-cart-lbl",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-cg_spc_shap5_097k_cart-wrl",
@@ -350,7 +514,17 @@
       "redistribution": "Published ESA PSA reference mesh used only for ambiguity masking; retain shape archive and team attribution.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-cg-spc-shap5-097k-cart-wrl",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-albedo",
@@ -380,7 +554,17 @@
         "coordinateType": "planetocentric",
         "stepDegrees": 0.5
       },
-      "coverage": "Single-scattering albedo describes particle scattering at 550 nm; it is not geometric albedo or a photograph. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors."
+      "coverage": "Single-scattering albedo describes particle scattering at 550 nm; it is not geometric albedo or a photograph. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-albedo",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-albedo-label",
@@ -397,7 +581,17 @@
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-albedo-label",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-slope",
@@ -427,7 +621,17 @@
         "coordinateType": "planetocentric",
         "stepDegrees": 0.5
       },
-      "coverage": "Visible reflectance slope, normalized at 550 nm. Redder colors indicate a steeper red spectrum, not a mineral abundance. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors."
+      "coverage": "Visible reflectance slope, normalized at 550 nm. Redder colors indicate a steeper red spectrum, not a mineral abundance. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-slope",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-slope-label",
@@ -444,7 +648,17 @@
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-slope-label",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-absorption",
@@ -474,7 +688,17 @@
         "coordinateType": "planetocentric",
         "stepDegrees": 0.5
       },
-      "coverage": "Depth of the broad 3.2 µm absorption feature relative to its continuum. This is not a direct organic-abundance map. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors."
+      "coverage": "Depth of the broad 3.2 µm absorption feature relative to its continuum. This is not a direct organic-abundance map. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-absorption",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-absorption-label",
@@ -491,7 +715,17 @@
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-absorption-label",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-ice",
@@ -521,7 +755,17 @@
         "coordinateType": "planetocentric",
         "stepDegrees": 0.5
       },
-      "coverage": "Water-ice optical cross-section fraction from an intimate-mixture model with dark terrain and fitted micrometer grains. Zero is valid. This is not bulk ice content; localized ice patches can violate the mixture model. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors."
+      "coverage": "Water-ice optical cross-section fraction from an intimate-mixture model with dark terrain and fitted micrometer grains. Zero is valid. This is not bulk ice content; localized ice patches can violate the mixture model. VIRTIS MTP006 · Aug–Sep 2014. False color on the RMOC shape; angular registration is approximate. Gray grid marks missing, rejected or ambiguous coverage. Shadows off preserves the numeric colors; Shadows on adds modeled lighting at the shared 2026 epoch. Values beyond the displayed scale use its end colors.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-ice",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
+      }
     },
     {
       "id": "virtis-ice-label",
@@ -538,7 +782,17 @@
       "redistribution": "Scientific data released for public use; cite the VIRTIS archive and the interpreting publications. No blanket CC license is asserted.",
       "consumers": [
         "virtis-science"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-virtis-ice-label",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+          }
+        ]
+      }
     },
     {
       "id": "shap7-region-cells",
@@ -561,7 +815,17 @@
         "frame": "Cheops",
         "units": "km"
       },
-      "coverage": "Regional definitions on SHAP7, registered to RMOC MTP019 with a 50 m surface-to-surface acceptance bound. Categories preserve original source cell identity."
+      "coverage": "Regional definitions on SHAP7, registered to RMOC MTP019 with a 50 m surface-to-surface acceptance bound. Categories preserve original source cell identity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-shap7-region-cells",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+          }
+        ]
+      }
     },
     {
       "id": "sbmt-geological-paths",
@@ -578,7 +842,17 @@
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-sbmt-geological-paths",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+          }
+        ]
+      }
     },
     {
       "id": "sbmt-geological-locations",
@@ -595,7 +869,17 @@
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-sbmt-geological-locations",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
+          }
+        ]
+      }
     },
     {
       "id": "sbmt-regional-boundaries",
@@ -612,7 +896,17 @@
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-sbmt-regional-boundaries",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+          }
+        ]
+      }
     },
     {
       "id": "sbmt-region-order",
@@ -629,7 +923,17 @@
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-sbmt-region-order",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+          }
+        ]
+      }
     },
     {
       "id": "geomap-guide",
@@ -646,7 +950,17 @@
       "redistribution": "Acknowledge European Space Agency (2021), DOI 10.5270/esa-kokoti7, and cite Leon-Dasi et al. (2021), as requested in the published guide. No additional Creative Commons license asserted.",
       "consumers": [
         "surface-geology"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-geomap-guide",
+            "role": "method",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+          }
+        ]
+      }
     },
     {
       "id": "n20151026-125938-path",
@@ -667,7 +981,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2015-10-26T13:00:58.813",
-      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20151026-125938-path",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
+      }
     },
     {
       "id": "n20151026-125938-qualityPath",
@@ -688,7 +1012,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2015-10-26T13:00:58.813",
-      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20151026-125938-qualitypath",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      }
     },
     {
       "id": "n20151031-234514-path",
@@ -709,7 +1043,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2015-10-31T23:46:34.951",
-      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20151031-234514-path",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+          }
+        ]
+      }
     },
     {
       "id": "n20151031-234514-qualityPath",
@@ -730,7 +1074,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2015-10-31T23:46:34.951",
-      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20151031-234514-qualitypath",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      }
     },
     {
       "id": "n20151104-112633-path",
@@ -751,7 +1105,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2015-11-04T11:27:53.983",
-      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20151104-112633-path",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+          }
+        ]
+      }
     },
     {
       "id": "n20151104-112633-qualityPath",
@@ -772,7 +1136,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2015-11-04T11:27:53.983",
-      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20151104-112633-qualitypath",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+          }
+        ]
+      }
     },
     {
       "id": "n20151115-050650-path",
@@ -793,7 +1167,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2015-11-15T05:08:11.274",
-      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes."
+      "interpretation": "Calibrated grayscale radiance and corrected SHAP7 geometric planes.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20151115-050650-path",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+          }
+        ]
+      }
     },
     {
       "id": "n20151115-050650-qualityPath",
@@ -814,7 +1198,17 @@
       "width": 2048,
       "height": 2048,
       "observationDate": "2015-11-15T05:08:11.274",
-      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly."
+      "interpretation": "Companion calibrated radiance, sigma and detector-quality flags; radiance must match the GEO plane exactly.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-67p-n20151115-050650-qualitypath",
+            "role": "material",
+            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -855,7 +1249,11 @@
       "path": "content/object.json",
       "expectedBytes": 19123,
       "expectedSha256": "cec87f0cdf5f6c74979f26072032ac6dc79abfb59d5bb856cf6f8d0e4eed00a1",
-      "purpose": "67P source evidence or authored preparation input."
+      "purpose": "67P source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

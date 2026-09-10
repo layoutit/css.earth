@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "thyra",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "31ed88bf865f2421a65e2bd7e776160b4dc842d595c76a99303e8fa6bf8944ec"
+    "sha256": "f4234da4652ac9e005b875488cf8a44d2d31069904430a9945769cb964d41d4f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 46000
       },
       "coverage": "Convex light-curve reconstruction with a published 90–94 km diameter fit range; the archive mesh uses 92 km. Unusual scattering parameters make its vertical shape uncertain. The grid marks unavailable imagery; rotational phase is illustrative. The archive warns that unusual Hapke parameters were needed to keep the shape from becoming too high. This limits confidence in the vertical dimension. Delbo and Tanga2009 give a90–94 km thermophysical size range for this pole family, represented in DAMIT as92±2 km. The material roughness is not constrained; no Hapke-derived texture is synthesized.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-369",
+            "role": "material",
+            "evidence": "src/planets/thyra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "d3e017daf4e6a4b91d1854af583a2e128397c945dc62d2c384b8420bf8094a2f",
       "bytes": 82627,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

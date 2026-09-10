@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "desdemona",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ad3d13a7d74388d2b075510f219d6b7e0cf3c9518bd6541f5ff1385751db96d6"
+    "sha256": "0e152de6cb43f29a501f548563e0d71a16f44adfcbee7e2613228d2bd62b1233"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -255,6 +255,16 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2401-04634",
+            "role": "method",
+            "evidence": "src/planets/desdemona/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
@@ -280,6 +290,16 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 32012.039740410557
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2401-04634",
+            "role": "method",
+            "evidence": "src/planets/desdemona/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "11129d8df0c5a62592e2f3a5ce65950352607cc0d4d7fd34d58c88c7de401b80",
       "bytes": 62404,
       "dependencies": [],
@@ -290,6 +310,10 @@
     {
       "path": "content/object.json",
       "purpose": "Scientific source and authored preparation evidence.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

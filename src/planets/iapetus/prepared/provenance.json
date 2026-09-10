@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "iapetus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a1d9372621940a56439908fd51f5a33db40d6ce2621e6dbdd95caa34e23b3da1"
+    "sha256": "2eeb3c95dbdc0b869c79fb506254f3499532dc24e215ed4a1deca79ef2f4d9ef"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -459,6 +459,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-cassini-voyager-2008-iapetus",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
       "bytes": 16612487,
       "dependencies": [],
@@ -505,6 +515,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-cassini-iss-2014-iapetus-color",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       },
@@ -559,6 +579,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-infrared",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      },
       "sha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f",
       "bytes": 144017,
       "dependencies": [],
@@ -603,6 +633,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      },
       "sha256": "399a434937605b2d3215a3691fb630435b4957ff8b5eb23334b42bf42f440fdc",
       "bytes": 109434,
       "dependencies": [],
@@ -613,6 +653,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

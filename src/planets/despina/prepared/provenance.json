@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "despina",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "24a784af001e7225087cf7100852ee56b465ba58f82782cd6a50c304237b0fb5"
+    "sha256": "2626913a7bf2df0f9a31caa4a2ee64dbbc65881c7a76fa86193adf8d46577ad5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -260,6 +260,16 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+            "role": "method",
+            "evidence": "src/planets/despina/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
@@ -285,6 +295,16 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 74000
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+            "role": "method",
+            "evidence": "src/planets/despina/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "33433bfde43462cb04ed29e2dce75928e249c8976d307a76bb65f7f15adf2560",
       "bytes": 14147,
       "dependencies": [],
@@ -295,6 +315,10 @@
     {
       "path": "content/object.json",
       "purpose": "Despina scientific source or authored interpretation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

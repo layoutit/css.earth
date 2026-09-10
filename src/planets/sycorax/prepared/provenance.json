@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "sycorax",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca7cd73bcf6cb21286818a442e2aa531e6d39c4d23bcccb8e690636f09afb141"
+    "sha256": "edab76161478fc47c3049308f6e21c478109b34bbe5a106eac18b4e7342fcd90"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -249,6 +249,16 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1706-06837",
+            "role": "method",
+            "evidence": "src/planets/sycorax/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
@@ -274,6 +284,16 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 78500
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-1706-06837",
+            "role": "method",
+            "evidence": "src/planets/sycorax/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "be764e8107e368f4ff439caa85f46fd0c313453ae851ff4ba9681ebf681f0dbf",
       "bytes": 62404,
       "dependencies": [],
@@ -284,6 +304,10 @@
     {
       "path": "content/object.json",
       "purpose": "Scientific source interpretation and reproducible authored input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

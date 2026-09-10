@@ -6,6 +6,8 @@ import { orderScientificCharts } from "../scientific-chart-order.mts";
 import PlanetCard from "./PlanetCard.astro";
 import PlanetCardHeader from "./PlanetCardHeader.astro";
 import PlanetFactsheet from "./PlanetFactsheet.astro";
+import SourceDetails from './SourceDetails.astro';
+import { objectSourceRecords } from '../sources-catalog.mts';
 import { objectSources } from "../object-sources.mts";
 import PlanetMissions from "./PlanetMissions.astro";
 import { objectExploration } from "../exploration-catalog.mts";
@@ -13,8 +15,10 @@ import DatasetLegend from "./DatasetLegend.astro";
 import DatasetDescription from "./DatasetDescription.astro";
 const { objectId, title, introduction = "", facts = [], moreFacts = [], galleries = [], charts = [], provenance, lenses, destinations } = Astro.props;
 const hasLenses = Boolean(lenses && lenses.controls.length > 0);
-const sources = objectSources(provenance);
+const sources = Astro.props.deferMissionContent ? [] : objectSources(provenance).map(group => ({...group,links:group.links.filter(link => provenance?.sources.find(source => source.id === link.id)?.sourceBinding?.kind !== 'catalogued')})).filter(group => group.links.length);
 const exploration = Astro.props.deferMissionContent ? null : objectExploration(objectId);
+const catalogueSources = Astro.props.deferMissionContent ? [] : objectSourceRecords(objectId, exploration?.missions.map(mission => mission.id), exploration?.missions.flatMap(mission => mission.participants.map(member => member.spacecraftId)));
+const localBindings = new Map(provenance?.sources.map(source => [source.id, source.sourceBinding]));
 const orderedCharts = orderScientificCharts(charts);
 const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?? orderedCharts[0];
 ---
@@ -216,12 +220,16 @@ const defaultChart = orderedCharts.find((chart) => chart.id === "reflectance") ?
         <PlanetFactsheet id={objectId} {facts} {moreFacts} embedded />
       </div>
       <div class="planet-card-tabpanel" id={`${objectId}-sources-content`} data-information-panel="sources"
+        data-prepared-detail="sources" data-deferred-detail={Astro.props.deferMissionContent ? 'true' : undefined}
         role="tabpanel" aria-labelledby={`${objectId}-sources-tab`} tabindex="0" hidden>
+        {catalogueSources.map(source => <SourceDetails {source} {objectId} />)}
+        {sources.length > 0 && <h4>Additional source records</h4>}
         <ul class="planet-resources-links" role="list">
           {sources.map((resource) => (
             <li>
               <div class="planet-resource-row">
                 {resource.links.map(link => <a class="planet-resource-label" href={link.href} target="_blank" rel="noreferrer">{link.label}</a>)}
+                <small>{resource.sourceIds.some(id => localBindings.get(id)?.kind === 'unresolved') ? 'Identity unresolved' : 'Local preparation'}</small>
                 <span class="planet-resource-description">{resource.description}</span>
               </div>
             </li>

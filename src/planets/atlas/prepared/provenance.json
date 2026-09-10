@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "atlas",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "43d113113ec6fbc7798376168996c95ad29dc35ca9479334518b1cd7e47196b9"
+    "sha256": "bc679e95846b3330fe58badb7012db47211247b1d13f9859174dd29d3973e1ad"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -442,6 +442,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-atlas-thomas-2018-shape",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      },
       "sha256": "2f0a73490aabcd2269082228100812ea8b4deea087816815d71acc9f8efde2ee",
       "bytes": 2024400,
       "dependencies": [],
@@ -481,6 +491,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2112-data-1870675158-1870722394-n1870699307-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "6f353d4b6892e4c948b98261d810f6434cda7b697ece1889ab7b9be2b780b596",
       "bytes": 4202496,
       "dependencies": [],
@@ -515,6 +535,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870699307_1_CALIB.LBL",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2112-data-1870675158-1870722394-n1870699307-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
           }
         ]
       },
@@ -557,6 +587,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2112-data-1870675158-1870722394-n1870698933-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "61f4c7f2d689aaac393c6f9c027a56b3ec678856d50dd18784ff4539a3fbd330",
       "bytes": 4202496,
       "dependencies": [],
@@ -591,6 +631,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870698933_1_CALIB.LBL",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2112-data-1870675158-1870722394-n1870698933-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
           }
         ]
       },
@@ -633,6 +683,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2112-data-1870675158-1870722394-n1870697721-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "eaf0b0652f77e6288e0b7dadd892f240fed886378fe94ed0d559b697c4c7988b",
       "bytes": 4202496,
       "dependencies": [],
@@ -667,6 +727,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870697721_1_CALIB.LBL",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2112-data-1870675158-1870722394-n1870697721-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
           }
         ]
       },
@@ -709,6 +779,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2032-data-1560158734-1560303787-n1560303787-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "44ec45e7383bd500d4e1c5e34ef8ade54272754db2e1c41fff7a4495936b7d3b",
       "bytes": 4202496,
       "dependencies": [],
@@ -743,6 +823,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2032/data/1560158734_1560303787/N1560303787_1_CALIB.LBL",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2032-data-1560158734-1560303787-n1560303787-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
           }
         ]
       },
@@ -785,6 +875,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2100-data-1828129458-1828242442-n1828131657-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "14f7dea18dea0bd82de717cf5cd6873ed19253037ad649ccd785deff31214b02",
       "bytes": 4202496,
       "dependencies": [],
@@ -822,6 +922,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2100-data-1828129458-1828242442-n1828131657-1-calib",
+            "role": "material",
+            "evidence": "src/planets/atlas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      },
       "sha256": "ee08b0ce415bc784be0d442a0e740ee52353e1c52227a6c22b9b708da698506a",
       "bytes": 3821,
       "dependencies": [],
@@ -839,6 +949,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored source interpretation, original metadata, or shared preparation configuration.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "comet-162p",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9533485bad5ac0f1bd2752968d3d1232ede1cab14ab805182b38c0dde5d2799c"
+    "sha256": "6402b1e428beb4973f08661d20c472ee3b26796d32597fb4f7f8df617ed83bcd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -267,6 +267,16 @@
       ],
       "acquisition": "Checked-in numeric constraints transcribed from the cited tables and sections. The thesis is not redistributed.",
       "redistribution": "Preserve attribution and the distinction from the original convex mesh.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-162p-shape-parameters",
+            "role": "material",
+            "evidence": "src/planets/comet-162p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "67de482ce30f232038f9c589720c818014aa31422e1c8d73ce3f53559c3b1b9a",
       "bytes": 1334,
       "dependencies": [],
@@ -277,6 +287,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

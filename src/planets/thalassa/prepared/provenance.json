@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "thalassa",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c57c790e161496f88c2d42fc01fd28571b9992c43d0804f1920ef204f97aebd7"
+    "sha256": "9400897ab271956cd4a5ec46444031432cf074bcdcd240cf0b98a19cff84998d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -260,6 +260,16 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+            "role": "method",
+            "evidence": "src/planets/thalassa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
@@ -285,6 +295,16 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 40000
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+            "role": "method",
+            "evidence": "src/planets/thalassa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "f22264ce2d158afd700f19ef0e7dcb56df5cdedac9629d428f069eca2e20101e",
       "bytes": 14147,
       "dependencies": [],
@@ -295,6 +315,10 @@
     {
       "path": "content/object.json",
       "purpose": "Thalassa source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

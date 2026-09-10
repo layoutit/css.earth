@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "dione",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d09b444f79ad0bfac08879efc0376c8b7314d3cd23bd81e5b59ee5dad8555d06"
+    "sha256": "7231998358a4e7db2ebf95aabecabf13d281c368f0bb28120a62595cfdb37b4b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -762,6 +762,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-voyager-2010-dione",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "5c5d796c02e3c99fde5dd034e01dd1f25905699a4885843aed445ded955e08b5",
       "bytes": 265490551,
       "dependencies": [],
@@ -791,6 +801,16 @@
       "id": "cassini-spc-2025-dione-q128-shape",
       "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-q128-shape",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      },
       "sha256": "6fa66be6d8065fccb55bda4f9b272aefddbd2ddb1402ff284c00ca21e15df9ad",
       "bytes": 17694840,
       "dependencies": [],
@@ -843,6 +863,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-iss-2014-dione-color",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "5e885d0e3bac1e1ee36934063d5c9cdf609dc10ad44677cba31bc9e703b674ff",
       "bytes": 10255303,
       "dependencies": [],
@@ -889,6 +919,16 @@
       "lensId": "infrared",
       "label": "Infrared",
       "falseColor": true,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-infrared",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      },
       "sha256": "d92f949b03e5446f10f0270ec3d71bfcb9df97d24db3767fa8e54cbbe4226698",
       "bytes": 67254,
       "dependencies": [],
@@ -930,6 +970,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqradius_g.tif",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-eq",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }
         ]
       },
@@ -985,6 +1035,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-np",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "f2a0bf4a4eba63ddfd566231fc02fc7f1f8aeaba0687e437d8669d8844f436ee",
       "bytes": 790785,
       "dependencies": [],
@@ -1037,6 +1097,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-sp",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "416107461ff452d07944f5391d3e9e5bdda8c6d7544379444778e6ec52c72970",
       "bytes": 790785,
       "dependencies": [],
@@ -1074,6 +1144,16 @@
       "height": 679,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-dione-eqalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      },
       "sha256": "e08ad608fd0786dd507f290a6df8d29fbad9f24631d21aafd91c2dc4732fdfb6",
       "bytes": 6044025,
       "dependencies": [],
@@ -1111,6 +1191,16 @@
       "height": 444,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-dione-npalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      },
       "sha256": "3b809800678f9a21574bd4ea45dda127ce8f122e35d13d9881c823ab4c4b2a4d",
       "bytes": 790785,
       "dependencies": [],
@@ -1148,6 +1238,16 @@
       "height": 444,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-cassini-spc-2025-dione-dione-spalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      },
       "sha256": "10c4f91d0686b03e554e8da9f9bc44acf60dccefae2406c8351e6bf01852a3b8",
       "bytes": 790785,
       "dependencies": [],
@@ -1194,6 +1294,16 @@
         "referenceRadiusMeters": 561400
       },
       "coverage": "Guide-based one-degree global bins; original missing spectra retained. Absolute subpixel registration unresolved.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dione-dione-vims-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      },
       "sha256": "e58c7acfa469ac606b8cf4db2133dc2d9ad0b29edb37030beafb89f8480abf54",
       "bytes": 142499,
       "dependencies": [],
@@ -1204,6 +1314,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

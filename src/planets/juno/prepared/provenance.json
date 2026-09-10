@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "juno",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "96563ec96ac51a4b61c7a4dac4bb3dea3eeb384bacaad3220a500cb1619b884d"
+    "sha256": "8ac3b02ad96774e8fbc38bdb60ef69af4be49253929f4d219adb97c853847967"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -322,6 +322,16 @@
         "referenceRadiusMeters": 127000
       },
       "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-juno-juno-shape",
+            "role": "material",
+            "evidence": "src/planets/juno/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "447ce4f05c48460e381bfcb1d9e132cd190c8d40d3bda9bbf5eee9a3231b3764",
       "bytes": 1620859,
       "dependencies": [],
@@ -343,6 +353,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

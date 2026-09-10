@@ -1,5 +1,5 @@
 {
-  "schema": "csseos-authoritative-sources@1",
+  "schema": "csseos-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/eos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "eos-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 107.74 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2018 Eos-family study TableB.1 reports27 dense lightcurves across six apparitions and304 sparse measurements, model quality3. Both poles remain; model1743 is selected without rejecting1744. That paper’s91.2±2.2 km column is WISE radiometry rather than a shape calibration; it is retained as a competing thermal estimate against AKARI107.74±1.51 km. The disagreement is an additional systematic limit, not grounds for averaging the catalogs. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
       "expectedBytes": 82708,
-      "expectedSha256": "83fdebb219ce6f345437cd87e7009a4f15a93682e9e825ebe135f7579ba3c9d4"
+      "expectedSha256": "83fdebb219ce6f345437cd87e7009a4f15a93682e9e825ebe135f7579ba3c9d4",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-5968",
+            "role": "material",
+            "evidence": "src/planets/eos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/eos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 7832,
-      "expectedSha256": "be97a4224f59016c10759585a01459564ef2761d291968f1c4fdc03348142209"
+      "expectedSha256": "be97a4224f59016c10759585a01459564ef2761d291968f1c4fdc03348142209",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

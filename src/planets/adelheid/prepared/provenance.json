@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "adelheid",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c8e48054da1c3a348e25ddc8ff555cc398174ca49c13d2b6f990fc26dfe09f09"
+    "sha256": "868f9ee466c6a76f0ffd5757101b4d33bd2bf780f42e85ee8d56bcb30d2c6f85"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 52000
       },
       "coverage": "Convex light-curve reconstruction, 104 ± 11 km volume-equivalent diameter. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative. The selected convex pole(9,−4) remains one of two possible orientations. Ďurech2011 fits three occultation chords (two close together) at125±15 km and cannot distinguish the poles. Hanuš2013 Table3 obtains volume-equivalent104±11 km for this pole from one Keck AO observation, matching the later archive comment. This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-540",
+            "role": "material",
+            "evidence": "src/planets/adelheid/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "10aace4ab515e08cf5ecbfe77fd3a7fc9f559519d9202ef6a2edd7b106ffe187",
       "bytes": 129364,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

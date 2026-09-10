@@ -1,5 +1,6 @@
 import {requireArray, requireRecord, requireString, requireFiniteNumber} from '../source-values.mts';
 import { parseCapture } from '../../src/platform/exploration-catalog.mts';
+import { parseSourceBinding } from '../../src/platform/source-catalog.mts';
 
 export {requireRecord as record, requireString as text};
 export const records = (value: unknown) => requireArray(value).map(item => requireRecord(item));
@@ -17,13 +18,15 @@ export function identity(value: unknown) {
 export function sourceEntry(value: unknown) {
   const input = requireRecord(value);
   return Object.assign({}, input, {path: requireString(input.path), expectedBytes: requireFiniteNumber(input.expectedBytes), expectedSha256: requireString(input.expectedSha256)},
-    input.capture === undefined ? {} : { capture: parseCapture(input.capture) });
+    input.capture === undefined ? {} : { capture: parseCapture(input.capture) },
+    input.sourceBinding === undefined ? {} : { sourceBinding: parseSourceBinding(input.sourceBinding) });
 }
 export function provenanceManifest(value: unknown) {
   const input = requireRecord(value);
+  if (!/^css[a-z][a-z0-9-]*-authoritative-sources@2$/.test(requireString(input.schema))) throw new TypeError('Unsupported source manifest schema.');
   return {...input, inputs: requireArray(input.inputs).map(value => {
     const entry = sourceEntry(value);
-    return Object.assign({}, entry, {id: requireString(entry.id), consumers: texts(entry.consumers)});
+    return Object.assign({}, entry, {id: requireString(entry.id), consumers: texts(entry.consumers), sourceBinding: parseSourceBinding(entry.sourceBinding)});
   }), documents: requireArray(input.documents ?? []).map(sourceEntry), generatedIntermediates: requireArray(input.generatedIntermediates ?? []).map(sourceEntry)};
 }
 export interface ProvenanceRecipeSource {id: string; path: string; sha256: string; parameters: Record<string, unknown>;}

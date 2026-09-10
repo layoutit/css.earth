@@ -1,5 +1,5 @@
 {
-  "schema": "cssmiranda-authoritative-sources@1",
+  "schema": "cssmiranda-authoritative-sources@2",
   "inputs": [
     {
       "id": "schenk-2020-miranda-normal",
@@ -50,6 +50,16 @@
             "spacecraftId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://repository.hou.usra.edu/bitstreams/bc39b4c9-3f85-403b-a2d6-1f0d7206eaf6/download"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-schenk-2020-miranda-normal",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
         ]
       }
@@ -104,6 +114,16 @@
             "evidence": "https://repository.hou.usra.edu/bitstreams/9181435b-9c9c-4645-ba6d-673d4a959e72/download"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-schenk-2020-miranda-elevation",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
       }
     },
     {
@@ -121,7 +141,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -138,7 +168,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-1",
@@ -156,7 +196,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-1",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-2",
@@ -174,7 +224,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-2",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-3",
@@ -192,7 +252,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-3",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-4",
@@ -210,7 +280,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-4",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-5",
@@ -228,7 +308,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-5",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-6",
@@ -246,7 +336,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-6",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-7",
@@ -264,7 +364,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-7",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-8",
@@ -282,7 +392,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-8",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-9",
@@ -300,7 +420,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-9",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-10",
@@ -318,7 +448,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-10",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-11",
@@ -336,7 +476,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-11",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-12",
@@ -354,7 +504,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-12",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-13",
@@ -372,7 +532,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-13",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-14",
@@ -390,7 +560,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-14",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-15",
@@ -408,7 +588,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-15",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-16",
@@ -426,7 +616,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-16",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-17",
@@ -444,7 +644,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-17",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-18",
@@ -462,7 +672,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-18",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-19",
@@ -480,7 +700,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-19",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-20",
@@ -498,7 +728,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-20",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-21",
@@ -516,7 +756,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-21",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-22",
@@ -534,7 +784,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-22",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-23",
@@ -552,7 +812,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-23",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-24",
@@ -570,7 +840,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-24",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-25",
@@ -588,7 +868,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-25",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-26",
@@ -606,7 +896,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-26",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-27",
@@ -624,7 +924,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-27",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-28",
@@ -642,7 +952,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-28",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-29",
@@ -660,7 +980,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-29",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-30",
@@ -678,7 +1008,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-30",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-31",
@@ -696,7 +1036,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-31",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-32",
@@ -714,7 +1064,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-32",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-33",
@@ -732,7 +1092,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-33",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-34",
@@ -750,7 +1120,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-34",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-35",
@@ -768,7 +1148,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-35",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-36",
@@ -786,7 +1176,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-36",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-37",
@@ -804,7 +1204,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-37",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/40"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-38",
@@ -822,7 +1232,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-38",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/41"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-39",
@@ -840,7 +1260,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-39",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/42"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-40",
@@ -858,7 +1288,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-40",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/43"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-41",
@@ -876,7 +1316,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-41",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/44"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-42",
@@ -894,7 +1344,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-42",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/45"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-source-43",
@@ -912,7 +1372,17 @@
       "redistribution": "CC BY 4.0 release retained with author credit; original inputs are unchanged and derived products identify their transformations.",
       "licenseEvidence": [
         "science/geology-2026/release-metadata.json"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-source-43",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/46"
+          }
+        ]
+      }
     },
     {
       "id": "geology-2026-categories",
@@ -932,7 +1402,17 @@
         "geology-surfaces"
       ],
       "acquisition": "Checked-in derived categorical grid. Reproduce with tools/objects/prepare-geologic-categories.py source/preparation/geology-conversion.json using the pinned original GIS and registration.",
-      "coverage": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown."
+      "coverage": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-miranda-geology-2026-categories",
+            "role": "material",
+            "evidence": "src/planets/miranda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -959,7 +1439,11 @@
       "path": "content/object.json",
       "expectedBytes": 14761,
       "expectedSha256": "a42739d91f1bf6decd2846a771ae8d11175cef5cdf0016566da14466b180398d",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "presentation/title-mark.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssschorria-authoritative-sources@1",
+  "schema": "cssschorria-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/schorria/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "schorria-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 5955. Approximate scale from a single-band thermal diameter of 5.55 km, with at least 20% uncertainty (1.11 km). The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
       "expectedBytes": 82546,
-      "expectedSha256": "4a415264ae5f3a3d9feb32668b739e2a6b0750b285553425be2a5243f86760ea"
+      "expectedSha256": "4a415264ae5f3a3d9feb32668b739e2a6b0750b285553425be2a5243f86760ea",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-65142",
+            "role": "material",
+            "evidence": "src/planets/schorria/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/schorria/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 9765,
       "expectedSha256": "5594d1db2cf4d9f2b327034801efd165ce41d4f8663ccf2dcfa57bdabbd04cf3",
-      "sha256": "ad5151b43540333b3c05d2e2c696d00bb09d7645f703b9451aaf3be06f48992f"
+      "sha256": "ad5151b43540333b3c05d2e2c696d00bb09d7645f703b9451aaf3be06f48992f",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

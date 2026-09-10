@@ -1,3 +1,9 @@
+import { parseSourceCatalog, sourceResolver, parseSourceBinding } from '../src/platform/source-catalog.mts';
+import { compileSourceUsage } from '../src/platform/source-usage.mts';
+import type { SourceUse } from '../src/platform/source-usage.mts';
+import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
+import { sourceInventory, metadataCitations } from './source-catalogue-inputs.mts';
+import type { SourceInventoryEntry } from './source-catalogue-inputs.mts';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -17,7 +23,11 @@ export const explorationCompilerClosure = [
   'src/platform/prepared-exploration.mts', 'src/platform/object-provenance.mts', 'site/objects.mts', 'site/object-schema.mts',
   'site/object-catalog.mts', 'site/prepared-object-catalog.mts', 'tools/prepare-catalog.mts',
   'site/source/spacecraft/catalog.json', 'site/source/spacecraft/render-library.json', 'site/source/spacecraft/emblem-library.json',
-  'site/source/agency-logos.json',
+  'site/source/agency-logos.json', 'src/sources/catalog.json', 'tests/fixtures/sources/migration.json',
+  'src/platform/source-catalog.mts', 'src/platform/source-usage.mts', 'src/platform/source-manifest.mts',
+  'src/platform/prepared-sources.mts', 'tools/source-catalogue-inputs.mts',
+  'src/objects/milky-way/source/sky/provenance.json', 'src/objects/milky-way/source/provenance.json',
+  'src/objects/stellar-neighbourhood/source/provenance.json', 'src/objects/heliosphere/source/provenance.json',
   'tools/objects/provenance.mts', 'tools/objects/provenance-records.mts', 'tools/objects/provenance-recipes.mts', 'tools/prepare-provenance.mts',
 ] as const;
 const digest = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
@@ -31,12 +41,30 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
   const json = async (path: string): Promise<unknown> => JSON.parse((await input(path)).toString('utf8'));
   for (const path of explorationCompilerClosure) await input(path);
   const agencies = parseAgencies(await json('site/source/agency-logos.json'));
-  const catalog = parseExplorationCatalog(await json('site/source/spacecraft/catalog.json'), agencies);
+  const sourceCatalog = parseSourceCatalog(await json('src/sources/catalog.json')), sources = sourceResolver(sourceCatalog);
+  const migration = await json('tests/fixtures/sources/migration.json');
+  const catalog = parseExplorationCatalog(await json('site/source/spacecraft/catalog.json'), agencies, sources);
+  const metadata: SourceUse[] = metadataCitations(catalog, 'site/source/spacecraft/catalog.json', sources);
+  const inventory: SourceInventoryEntry[] = [];
+  for (const path of explorationCompilerClosure.filter(path => path.startsWith('src/objects/'))) {
+    const owner = explorationRecord(await json(path)), display = explorationRecord(owner.catalogueDisplay);
+    const binding = parseSourceBinding(owner.sourceBinding, sources);
+    inventory.push({ownerPath:path,localId:explorationText(display.feature),binding,used:true});
+    if (binding.kind !== 'catalogued') throw new TypeError('Shared context needs a canonical source.');
+    for (const ref of binding.references) metadata.push({catalogueId:sources[ref.catalogueId].id,kind:'shared-context',consumerKind:'shared-context',
+      consumerId:explorationText(display.feature),consumerLabel:explorationText(display.label),ownerPath:path,locator:'/sourceBinding',evidence:ref.evidence,
+      lensIds:[],limitations:[explorationText(display.description)],credit:explorationText(display.credit)});
+  }
   async function artwork(file: string, emblem: boolean) {
     const library = explorationRecord(await json(file));
-    if (library.schema !== (emblem ? 'cssearth-spacecraft-emblems@1' : 'cssearth-spacecraft-render-library@1')) throw new TypeError('Unsupported artwork library.');
-    const entries = explorationArray(library.entries, raw => {
-      const image = explorationRecord(raw), source = explorationRecord(image.source);
+    if (library.schema !== (emblem ? 'cssearth-spacecraft-emblems@2' : 'cssearth-spacecraft-render-library@2')) throw new TypeError('Unsupported artwork library.');
+    const entries = explorationArray(library.entries, explorationRecord).map((image, index) => {
+      const source = explorationRecord(image.source);
+      const binding = parseSourceBinding(image.sourceBinding, sources), id = explorationText(image.id);
+      inventory.push({ownerPath:file,localId:id,binding,used:true});
+      if (binding.kind !== 'catalogued') throw new TypeError('Artwork needs a canonical source.');
+      for (const ref of binding.references) metadata.push({catalogueId:sources[ref.catalogueId].id,kind:'artwork',consumerKind:'artwork',consumerId:`${emblem ? 'emblem' : 'render'}/${id}`,
+        consumerLabel:`${id} ${emblem ? 'emblem' : 'artwork'}`,ownerPath:file,locator:`/entries/${index}/sourceBinding`,evidence:ref.evidence,lensIds:[],limitations:[],credit:explorationText(source.credit)});
       return parseExplorationImage({ id: image.id, src: emblem ? image.src : image.url,
         width: image.width, height: image.height, bytes: image.bytes, sha256: image.sha256,
         kind: emblem ? 'emblem' : source.kind, sourceUrl: emblem ? source.sourceUrl : source.sourcePage, credit: source.credit });
@@ -72,14 +100,21 @@ export async function prepareSpacecraft({ root = resolve(import.meta.dirname, '.
     if (document) closure[path] = digest(JSON.stringify(document, null, 2) + '\n');
     else document = validateObjectProvenance(await json(path), object.id);
     if (document.manifest.sha256 !== closure[`${base}/source/manifest.json`]) throw new Error(`Stale provenance for ${object.id}; run pnpm prepare:provenance.`);
+    inventory.push(...sourceInventory(manifest, `${base}/source/manifest.json`, sources, new Set(document.sources.map(source => source.path)), migration));
     objects.push({ id: object.id, name: object.name, route: object.route, controls: lenses, provenance: document });
   }
-  const payload = { schema: 'cssearth-prepared-exploration@1', catalog, agencies, images, emblems,
-    graph: compileContributions(objects, catalog), closure };
-  const prepared = parsePreparedExploration(payload);
+  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:closure['src/sources/catalog.json'],
+    usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
+  const preparedSources = parsePreparedSources(sourcePayload);
+  const payload = { schema: 'cssearth-prepared-exploration@2', catalog, agencies, images, emblems,
+    sourceCatalogSha256:preparedSources.catalogSha256,graph: compileContributions(objects, catalog), closure };
+  const prepared = parsePreparedExploration(payload,sources);
   const output = { path: resolve(root, 'site/prepared-spacecraft.json'), text: JSON.stringify(payload, null, 2) + '\n' };
-  if (publish) await writePreparedSet([output]);
-  return { prepared, output };
+  const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
+  const outputs = [sourcesOutput,output];
+  if (publish) await writePreparedSet(outputs);
+  return { prepared, preparedSources, output, outputs };
+
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const { prepared } = await prepareSpacecraft();

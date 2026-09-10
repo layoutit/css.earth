@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "venus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91"
+    "sha256": "a199cbf5edbb9f77570cbf21cc75bfb11e46bfc67ae84bcc1baedb4b2daa57bc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -696,6 +696,16 @@
       ],
       "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-openspace-venus-clouds",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      },
       "sha256": "da7f68195e552020a888db1758bb7a87506718971c6c9a455189d7b17ceda321",
       "bytes": 66303,
       "dependencies": [],
@@ -732,6 +742,12 @@
             "missionId": "magellan"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "usgs-nasa-magellan-synthetic-color-wms",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
       },
       "sha256": "7c818deccd69e99f3e0ebc5030979bbeb50f8b19afbd8f31c97d968a9f591588",
       "bytes": 5399293,
@@ -770,6 +786,12 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "usgs-nasa-magellan-colorized-topography-wms",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "3b25ddd02af9214a64aed694ececd44754c2c3174900d78bbae3856042117974",
       "bytes": 5477203,
       "dependencies": [],
@@ -793,6 +815,16 @@
       "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
       "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh",
       "redistribution": "permitted with the OpenSpace MIT notice",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-openspace-venus-atmosphere-specification",
+            "role": "method",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      },
       "sha256": "85d202bbf1d029256ec388da9ea25be45420ba3e5294f401ff1e22268f598b20",
       "bytes": 2142,
       "dependencies": [],
@@ -816,6 +848,10 @@
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside Venus inputs.",
       "redistribution": "Prepared shell content with source provenance.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "4c01d5f9dce6f3e557f18d69b7933a403f464902625107f519170addc9dbbdab",
       "bytes": 16667,
       "dependencies": [],
@@ -832,6 +868,12 @@
       "license": "U.S. government scientific model response",
       "acquisition": "checked raw ASCII response acquired 2026-08-30; refresh compares all 253 numeric samples",
       "redistribution": "checked model response with NASA attribution",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-venus-r240-rif-response",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "6856c59ec48619829305d4896e06c60450e075c37981da2a98890fbcf1fe6a3c",
       "bytes": 12089,
       "dependencies": [],
@@ -865,6 +907,12 @@
       "license": "U.S. government scientific model response",
       "acquisition": "checked expanded configuration from the declared seed and generator parameters",
       "redistribution": "checked text configuration with NASA attribution",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-venus-expanded-configuration",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "9860b648a57508cf16c14936ffe8926dc380d3bedc234abc80e6d0ffad582ec8",
       "bytes": 26685,
       "dependencies": [],

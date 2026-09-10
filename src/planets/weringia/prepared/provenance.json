@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "weringia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b84bbcfc6fd9be7328bf731590886343c9d9feb207bc815375dd5dd7af250fa"
+    "sha256": "6613b037bfe5c735918f92bc9cd6756f34a8fcca80cae89842f883d6bf575c53"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 16129.999999999998
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 32.26 km effective diameter (catalog ±0.36 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2016 Table2 reports24 dense lightcurves across four apparitions plus485 sparse points and one pole. This published shape is selected; no independent physical-volume calibration is in its archive record. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-3957",
+            "role": "material",
+            "evidence": "src/planets/weringia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "b5ea3c7a8dacc9eb8d62f5ea85376eeeec1d1d521461ea669a201a5f7d97646b",
       "bytes": 82708,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "schorria",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "14f9c2d437cf43fbbc91daa75218d174003331ca734d78b9e463f422c7bd9981"
+    "sha256": "d0d3e2072fecc7549dc859ae0671dbeeaa33b60df3c621416dad076a4de05cda"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 2775
       },
       "coverage": "Published convex light-curve model 5955. Approximate scale from a single-band thermal diameter of 5.55 km, with at least 20% uncertainty (1.11 km). The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-65142",
+            "role": "material",
+            "evidence": "src/planets/schorria/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "4a415264ae5f3a3d9feb32668b739e2a6b0750b285553425be2a5243f86760ea",
       "bytes": 82546,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "5594d1db2cf4d9f2b327034801efd165ce41d4f8663ccf2dcfa57bdabbd04cf3",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "athamantis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca2d6ec64990eda0358c4468af5c0c569d5bd494e0df8b3f5ccf293a03a90d8d"
+    "sha256": "200f59bca8bb389c05ae41390a821fd2efecbdbad84ffcd76717fd4b4d572905"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 57500
       },
       "coverage": "Convex light-curve reconstruction; 115 km volume-equivalent diameter (±12 km). The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2013 Keck study Table3 independently confirms115±12 km for the first pole and116±12 km for the mirror, based on one adaptive-optics image. DAMIT comment slightly prefers pole(74,+27), selected here. The geometry remains a convex lightcurve model; AO constrains scale and silhouette, not a global photographic surface.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-519",
+            "role": "material",
+            "evidence": "src/planets/athamantis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "ca781392c88cb7da8f861e4f7a98da4c5d7677394a5bc8a3e79d6c7e766707d3",
       "bytes": 82708,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

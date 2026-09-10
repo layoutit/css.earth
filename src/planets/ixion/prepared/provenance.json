@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "ixion",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "01bf2f518b72f3e1158fc001697415187ef9c293a3c5a7d53d91f42cce371c28"
+    "sha256": "ba6971739774e97556a73e5321a7eff5adab3b43b9790d34eb19c4786857e4fe"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -247,6 +247,10 @@
       },
       "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
@@ -272,6 +276,16 @@
       },
       "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2601-09639",
+            "role": "method",
+            "evidence": "src/planets/ixion/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "867ec83e5c4d45ad3a2ac84d058a839e3b0b7e05a8be7eb996c2f814b91618d7",
       "bytes": 65105,
       "dependencies": [],
@@ -282,6 +296,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source observation, interpretation or preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

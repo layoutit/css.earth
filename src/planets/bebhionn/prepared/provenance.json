@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "bebhionn",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "da024c7cb9f6fe784b8b3d9406ddfcb4df64b736dbabf8e947d3eb21db65a6d9"
+    "sha256": "1f5e2ebc4748f0d8f747b6c7339976f948fb8832393816d2af83e90ee0193020"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -267,6 +267,16 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "denk-2018-irregular-moons",
+            "role": "method",
+            "evidence": "src/planets/bebhionn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
@@ -293,6 +303,16 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 2800
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "denk-2018-irregular-moons",
+            "role": "method",
+            "evidence": "src/planets/bebhionn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "827c9f265f08b7ef35f357a7ee9217203a727b7478da3a1c8d2b9aa8c76b6151",
       "bytes": 59703,
       "dependencies": [],
@@ -303,6 +323,10 @@
     {
       "path": "content/object.json",
       "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "vesta",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c1bb5ee979ac270e9d816ef5036fe1a1b66b1e8816a8698366bdc2aeea3434c1"
+    "sha256": "2663191bfb4da85b38d6da47a484c3ca02b47967ca6d77070dd5912f2ab59df7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -403,6 +403,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dlr-hamo-natural-color",
+            "role": "material",
+            "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca",
       "bytes": 374574072,
       "dependencies": [],
@@ -445,6 +455,16 @@
             "spacecraftId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip",
             "missionId": "dawn"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dlr-hamo-radius-model",
+            "role": "material",
+            "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }
         ]
       },
@@ -494,6 +514,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-ratios",
+            "role": "material",
+            "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0",
       "bytes": 446346023,
       "dependencies": [],
@@ -512,6 +542,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored preparation or presentation data.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

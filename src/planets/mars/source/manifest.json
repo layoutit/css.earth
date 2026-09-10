@@ -1,5 +1,5 @@
 {
-  "schema": "cssmars-authoritative-sources@1",
+  "schema": "cssmars-authoritative-sources@2",
   "inputs": [
     {
       "id": "inter-mars-title-vector",
@@ -13,7 +13,13 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 3264
+      "expectedBytes": 3264,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "inter-mars-title-vector",
+        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-hubble-mars-navigation-marker",
@@ -35,7 +41,17 @@
         "atmosphere",
         "lighting"
       ],
-      "expectedBytes": 139134
+      "expectedBytes": 139134,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-nasa-hubble-mars-navigation-marker",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-mars-globe",
@@ -53,7 +69,17 @@
         "body",
         "scene"
       ],
-      "expectedBytes": 1753
+      "expectedBytes": 1753,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-openspace-mars-globe",
+            "role": "method",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-mars-atmosphere",
@@ -71,7 +97,17 @@
         "atmosphere",
         "lighting"
       ],
-      "expectedBytes": 2044
+      "expectedBytes": 2044,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-openspace-mars-atmosphere",
+            "role": "method",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-mars-kernels",
@@ -86,7 +122,17 @@
         "scene",
         "moons"
       ],
-      "expectedBytes": 600
+      "expectedBytes": 600,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-openspace-mars-kernels",
+            "role": "method",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-phobos-globe",
@@ -100,7 +146,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 912
+      "expectedBytes": 912,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-openspace-phobos-globe",
+            "role": "method",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-deimos-globe",
@@ -114,7 +170,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 912
+      "expectedBytes": 912,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-openspace-deimos-globe",
+            "role": "method",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "usgs-viking-mdim21-color",
@@ -137,6 +203,16 @@
             "label": "Viking orbiters",
             "evidence": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg",
             "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-usgs-viking-mdim21-color",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
           }
         ]
       }
@@ -165,6 +241,16 @@
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-usgs-mola-pseudocolor",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
       }
     },
     {
@@ -191,6 +277,16 @@
             "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-usgs-themis-ir-day",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
       }
     },
     {
@@ -208,7 +304,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 3855016
+      "expectedBytes": 3855016,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-openspace-phobos-model",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-deimos-model",
@@ -225,7 +331,17 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 1600012
+      "expectedBytes": 1600012,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-openspace-deimos-model",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-psg-mars-configuration",
@@ -240,7 +356,13 @@
         "atmosphere",
         "spectrum"
       ],
-      "expectedBytes": 11093
+      "expectedBytes": 11093,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-mars-configuration",
+        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-psg-mars-reflectance",
@@ -254,7 +376,13 @@
       "consumers": [
         "spectrum"
       ],
-      "expectedBytes": 11908
+      "expectedBytes": 11908,
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-mars-reflectance",
+        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "hyg-v41-cubic-sky-registration",
@@ -271,7 +399,13 @@
       "redistribution": "Share-alike prepared subset with attribution and license evidence.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "hyg-v41-cubic-sky-registration",
+        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -289,7 +423,17 @@
       "consumers": [
         "starfield",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "google-earth-pro-mars-sky-behavior-contract",
@@ -307,7 +451,13 @@
         "lighting",
         "camera",
         "sky-sun"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "google-earth-pro-mars-sky-behavior-contract",
+        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "google-maps-cubic-sky-sun-oracle-asset",
@@ -321,7 +471,17 @@
       "redistribution": "Retained for local visual-oracle preparation; redistribution clearance is unverified.",
       "consumers": [
         "sun-oracle"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mars-google-maps-cubic-sky-sun-oracle-asset",
+            "role": "material",
+            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-cubic-sky-sun-oracle-measurements",
@@ -335,7 +495,13 @@
       "redistribution": "Measurements plus a local source-derived prepared reconstruction.",
       "consumers": [
         "sun-oracle"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "google-maps-cubic-sky-sun-oracle-measurements",
+        "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -345,7 +511,11 @@
       "expectedBytes": 622,
       "expectedSha256": "a21e86fe560a46396cea1568b44a757be8b258b9ef40277b5261ef11c380d768",
       "purpose": "Authored source-informed capability preparation recipe.",
-      "kind": "authored-document"
+      "kind": "authored-document",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "stars/LICENSE.md",
@@ -370,13 +540,21 @@
       "expectedBytes": 918,
       "expectedSha256": "672ce4a68c97c9d005f3721aad971b8e0b2bdb24eca1d6d863e14ed08bf41acb",
       "purpose": "Authored source-informed capability preparation recipe.",
-      "kind": "authored-document"
+      "kind": "authored-document",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "content/object.json",
       "expectedBytes": 13163,
       "expectedSha256": "8b3b389c493308dd22d6f94001e85706903ca9d4e33bc3934b510ad0b7d42e76",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "purpose": "Authored source-informed capability preparation recipe.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "content/charts.json",

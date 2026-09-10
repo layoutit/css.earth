@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "vindobona",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d6bc60fd2395424b6745cdf042a47e35ee3d78031b871ca019333d59344ebc14"
+    "sha256": "7e003326ca7c75f0e5afdd4c5ece96591d3e16815e3e05b1f1b2b2d7d9d35c64"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 40035
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 80.07 km effective diameter (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. Gaia DR2 plus Lowell inversion; publication table gives335 Lowell and15 Gaia points. One pole is released. The low-resolution convex mesh plus explicit AKARI scale replaces superseded Lacrimosa intake. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-12958",
+            "role": "material",
+            "evidence": "src/planets/vindobona/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "b350d98f2dc934419375ae342ce7c825dc290eebe41efc3e943ca51ed62dc85b",
       "bytes": 46419,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

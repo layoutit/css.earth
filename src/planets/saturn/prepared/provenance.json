@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "saturn",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "769d516be08271c9d2e91af225e515b1200803f25c389998dbfdaef9f40fc7b5"
+    "sha256": "b4d1fba87504965eafbb2402c1a72c4530ecaeb5744683e5f24d2205aed46475"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1895,6 +1895,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hubble-opal-2025a-f225w",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      },
       "sha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314",
       "bytes": 6482880,
       "dependencies": [],
@@ -1928,6 +1938,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hubble-opal-2025b-f225w",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      },
       "sha256": "0a1e41e4f4de7bb0a026d29b303dfbcf55f902382c2e621dfd522d95881c75d3",
       "bytes": 6482880,
       "dependencies": [],
@@ -1955,6 +1975,16 @@
       ],
       "acquisition": "checked snapshot from OpenSpace saturn_textures",
       "redistribution": "permitted with the OpenSpace MIT notice",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-saturn-surface",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "5976d520c16f7c91a7415bdaeb1a050373a706c07adae29b38b8b5110d88acc0",
       "bytes": 1036492,
       "dependencies": [],
@@ -1993,6 +2023,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-cassini-pia21611-polar-map",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "2e9765b2ffada33d74bfbe0443ea0bbf59bb15f27a128b7ba99160fdeb78f177",
       "bytes": 105281,
       "dependencies": [],
@@ -2009,6 +2049,10 @@
       "license": "project-authored prepared presentation",
       "acquisition": "checked accepted preparation snapshot; decoded RGBA is validated before derivative generation",
       "redistribution": "project runtime asset",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
+      },
       "sha256": "e25f97df1892978a1140e9c6a27a4b9976c047f8b92162d0a8d898ba13a85007",
       "bytes": 154240,
       "dependencies": [],
@@ -2025,6 +2069,10 @@
       "license": "project-authored prepared presentation over the OpenSpace MIT source",
       "acquisition": "checked accepted static snapshot; shared material-composition preparation validates and copies it without re-encoding",
       "redistribution": "project runtime asset with OpenSpace attribution",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
+      },
       "sha256": "04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3",
       "bytes": 1692,
       "dependencies": [],
@@ -2041,6 +2089,10 @@
       "license": "project-authored specification; external references retain their own terms",
       "acquisition": "checked repository source",
       "redistribution": "project specification may be redistributed with its embedded source qualifications",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
+      },
       "sha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
       "bytes": 5097,
       "dependencies": [],
@@ -2060,6 +2112,16 @@
       ],
       "acquisition": "checked snapshot from OpenSpace saturn_textures version 4",
       "redistribution": "permitted with the OpenSpace MIT notice",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-saturn-ring-color",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "952b8de4343127e2188a6fb293d499e3e8b7c19147f5a2d727c525f8e9bcebda",
       "bytes": 2059,
       "dependencies": [],
@@ -2086,6 +2148,16 @@
       ],
       "acquisition": "checked snapshot from OpenSpace saturn_textures version 4",
       "redistribution": "permitted with the OpenSpace MIT notice",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-openspace-saturn-ring-transparency",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "37a40a8217961cda634a3fe48775072f5097b40d8945cfaf82bdfb58b98caf2a",
       "bytes": 2303,
       "dependencies": [],
@@ -2116,6 +2188,16 @@
             "spacecraftId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
             "missionId": "hubble"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hubble-opal-2025a-fq889n",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
           }
         ]
       },
@@ -2152,6 +2234,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-saturn-hubble-opal-2025b-fq889n",
+            "role": "material",
+            "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      },
       "sha256": "709166ace6d89028ef8ab884323f0d886281054dac2378584f82ce2c5f90e459",
       "bytes": 6482880,
       "dependencies": [],
@@ -2175,6 +2267,10 @@
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "35d71bad2dba37f7c4fb26a62f0c197103a2dcc22f748ee2a487e2a477c77d52",
       "bytes": 18171,
       "dependencies": [],
@@ -2191,6 +2287,12 @@
       "license": "U.S. government scientific model response",
       "acquisition": "checked raw ASCII response acquired on 2026-08-29; preparation reads this local snapshot only",
       "redistribution": "checked model response with NASA attribution",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-saturn-r240-rif-response",
+        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "7908cd301b19cbeba2e08a29457f621296860b29ea5f021dea4dea2041fbf1b6",
       "bytes": 11913,
       "dependencies": [],
@@ -2227,6 +2329,12 @@
       "license": "U.S. government scientific model response",
       "acquisition": "shared verify-request operations in preparation/acquisition.json, with the checked seed and generator parameters documented in README.md",
       "redistribution": "checked text configuration with NASA attribution",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-saturn-expanded-configuration",
+        "evidence": "src/planets/saturn/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "93165938d49f7682b5b9bf9b23537a1ed3a0c3f91fc6cec4f4af9e2274d9682e",
       "bytes": 8260,
       "dependencies": [],

@@ -1,6 +1,8 @@
 import { isArray } from './is-array.mts';
 import { parseCapture } from './exploration-catalog.mts';
 import type { Capture } from './exploration-catalog.mts';
+import { parseSourceBinding } from './source-catalog.mts';
+import type { SourceBinding } from './source-catalog.mts';
 export type ProvenanceJson = null | boolean | number | string | readonly ProvenanceJson[] | { readonly [key: string]: ProvenanceJson };
 export interface ProvenanceOperation { readonly url?: string; readonly [key: string]: ProvenanceJson | undefined; }
 export interface ProvenanceSource {
@@ -10,6 +12,7 @@ export interface ProvenanceSource {
   readonly redistribution?: string; readonly sourceUrl?: string;
   readonly displayCredit?: string; readonly title?: string; readonly label?: string; readonly attributionGroup?: { readonly id: string };
   readonly capture?: Capture;
+  readonly sourceBinding?: SourceBinding;
   readonly acquisitionOperation?: ProvenanceOperation | null;
   readonly verificationOperations?: readonly ProvenanceOperation[];
 }
@@ -29,7 +32,7 @@ export interface ProvenanceDocument {
   readonly coverage: { readonly scope: string; readonly unresolved: readonly ProvenanceJson[] };
 }
 /** Portable, prepared source-to-product lineage. No file access or UI inference. */
-export const OBJECT_PROVENANCE_SCHEMA = 'cssearth-object-provenance@2';
+export const OBJECT_PROVENANCE_SCHEMA = 'cssearth-object-provenance@3';
 const digest = (value: unknown) => typeof value === 'string' && /^[a-f0-9]{64}$/u.test(value);
 const nonempty = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
 const unique = (values: readonly unknown[], label: string) => {
@@ -68,11 +71,15 @@ function sourceShape(value: unknown): value is ProvenanceSource {
     && ['kind','license','redistribution','sourceUrl','displayCredit','title','label'].every(key => optionalString(value[key]))
     && (value.attributionGroup === undefined || record(value.attributionGroup) && typeof value.attributionGroup.id === 'string')
     && (value.capture === undefined || validCapture(value.capture))
+    && (value.sourceBinding === undefined || validSourceBinding(value.sourceBinding))
     && (value.acquisitionOperation == null || operation(value.acquisitionOperation))
     && (value.verificationOperations === undefined || isArray(value.verificationOperations) && value.verificationOperations.every(operation));
 }
 function validCapture(value: unknown): value is Capture {
   try { parseCapture(value); return true; } catch { return false; }
+}
+function validSourceBinding(value: unknown): value is SourceBinding {
+  try { parseSourceBinding(value); return true; } catch { return false; }
 }
 function recipeShape(value: unknown): value is ProvenanceRecipe {
   return record(value) && ['id','path','sha256'].every(key => typeof value[key] === 'string') && json(value.parameters);
@@ -112,6 +119,7 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
   unique(value.recipes.map(recipe => recipe.id), 'recipe');
   unique(value.products.map(product => product.id), 'product');
   for (const source of value.sources) {
+    if (source.kind === 'source-input' && source.sourceBinding === undefined) throw new TypeError(`Unbound canonical source input: ${source.id}.`);
     if (![source.id, source.path, source.origin, source.credit, source.acquisition].every(nonempty)
         || !digest(source.sha256) || !Number.isSafeInteger(source.bytes) || source.bytes < 0)
       throw new TypeError(`Invalid provenance source: ${source.id}.`);

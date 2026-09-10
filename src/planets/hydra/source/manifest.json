@@ -1,5 +1,5 @@
 {
-  "schema": "csshydra-authoritative-sources@1",
+  "schema": "csshydra-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/hydra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -33,7 +43,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/hydra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "porter-hydra-shape",
@@ -69,6 +89,16 @@
             "evidence": "https://ndownloader.figshare.com/files/24176603"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hydra-porter-hydra-shape",
+            "role": "material",
+            "evidence": "src/planets/hydra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -97,7 +127,17 @@
       "height": 32,
       "lensId": "model",
       "label": "Shape model",
-      "falseColor": false
+      "falseColor": false,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hydra-model-surface",
+            "role": "material",
+            "evidence": "src/planets/hydra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -105,7 +145,11 @@
       "path": "content/object.json",
       "expectedBytes": 3883,
       "expectedSha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "purpose": "Hydra source identity, survey evidence or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "measurements.json",

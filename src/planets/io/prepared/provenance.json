@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "io",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dce758afabfcc911072bab5ac04de6408ae909c0b79e19de9432181fba0dad4f"
+    "sha256": "fd16001ef572b1d627cef65fb41d97de884dfde59d00551fcb6304569a7b6ab9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -881,6 +881,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-usgs-normal-global-1km",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "cf65a0323aac9c4c9eb582aa7b7ce0d36be8e445316fa6dba49ab5647b63584c",
       "bytes": 65546342,
       "dependencies": [],
@@ -949,6 +959,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-usgs-enhanced-global-1km",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "337778617ffa6a3cdb5d36375265222ef37410db9495ca5ddbe7bc6786276d14",
       "bytes": 196637696,
       "dependencies": [],
@@ -994,6 +1014,16 @@
         "referenceRadiusMeters": 1821460
       },
       "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-usgs-sim3168-geologic-units",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      },
       "sha256": "6a02334eee7af7518f90c5f97b1468552499de89b05d17656d627556e71aa64f",
       "bytes": 2798948,
       "dependencies": [],
@@ -1014,6 +1044,16 @@
       "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 4029951286 and SHA-256 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.dbf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-usgs-sim3168-io-geounits-dbf",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      },
       "sha256": "ac09efc6635cf3d9d81fb5596a050393bf358ea5f204b79d4039952b369c53a3",
       "bytes": 178964,
       "dependencies": [],
@@ -1034,6 +1074,16 @@
       "acquisition": "Exact member Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj from the official USGS ZIP; raw small GIS member is retained in Git. CRC32 2652932458 and SHA-256 verified.",
       "redistribution": "Small source GIS layers and metadata retained with attribution; basemap archive is not vendored.",
       "archiveMember": "Io_SIM3168_Database/Io_Geology_SIM3168_shapefiles/Io_GeoUnits.prj",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-usgs-sim3168-io-geounits-prj",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      },
       "sha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
       "bytes": 149,
       "dependencies": [],
@@ -1074,6 +1124,16 @@
         "referenceRadiusMeters": 1821490
       },
       "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-io-muse-spectral-slope-night-1",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      },
       "sha256": "d8b3ce837b7db28a255eae9aaf9eda61717121ab1241f392f765014641ade58a",
       "bytes": 12012,
       "dependencies": [],
@@ -1114,6 +1174,16 @@
         "referenceRadiusMeters": 1821490
       },
       "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-io-muse-spectral-slope-night-2",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      },
       "sha256": "41e87a8222840afce00a1427fbcff3491bfb13fe6e599dbb6336a96551196ba9",
       "bytes": 12028,
       "dependencies": [],
@@ -1154,6 +1224,16 @@
         "referenceRadiusMeters": 1821490
       },
       "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-io-muse-spectral-slope-night-3",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      },
       "sha256": "b8667cc9de8bc46184aea14932bc950a6c66793bd99ce2f5dac9ee9aa230a99f",
       "bytes": 12297,
       "dependencies": [],
@@ -1194,6 +1274,16 @@
         "referenceRadiusMeters": 1821490
       },
       "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-io-muse-visible-absorption-night-1",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      },
       "sha256": "5a884deb172fbec39a1192b2149e5e2452644d0ac4402d4e948b7d5a204f3e02",
       "bytes": 12689,
       "dependencies": [],
@@ -1234,6 +1324,16 @@
         "referenceRadiusMeters": 1821490
       },
       "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-io-muse-visible-absorption-night-2",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      },
       "sha256": "eff9a10c9b342c06f9426d01c6a884e291dd9eb681bbb47804a5a3044c7e8a29",
       "bytes": 12790,
       "dependencies": [],
@@ -1274,6 +1374,16 @@
         "referenceRadiusMeters": 1821490
       },
       "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-io-muse-visible-absorption-night-3",
+            "role": "material",
+            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      },
       "sha256": "cd8fd566af1e3024c389b2c8d6816474aee9db56d0288e51c3993f063e9aca21",
       "bytes": 12820,
       "dependencies": [],
@@ -1284,6 +1394,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

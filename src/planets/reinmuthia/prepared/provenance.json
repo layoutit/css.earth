@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "reinmuthia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7103a3350ff20782ee7a000152777a08d2fdb44c3369ceabd6d62b0d839edb1b"
+    "sha256": "22cbefc04fc76b3d549d6697b102c20e6e1a9b1bfff20ca13e40b4afe70d453c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 12190
       },
       "coverage": "Published convex light-curve model 678. Approximate scale from a thermal diameter of 24.38 ± 0.48 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-2681",
+            "role": "material",
+            "evidence": "src/planets/reinmuthia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "50276c546e6204efae333bb272a73d20881e5c435aa9d864ea4e348138a545bf",
       "bytes": 82384,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "916609fc90bce866143f9cd2c35c2ce34d88aadcaa59b741d0086dd4da029fff",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

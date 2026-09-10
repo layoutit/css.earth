@@ -1,6 +1,8 @@
 ---
+import { uniqueCitations } from '../sources-catalog.mts';
+import SourceCitations from './SourceCitations.astro';
 import type { MissionRecord } from '../../src/platform/exploration-catalog.mts';
-import { EXPLORATION, referenceUrl, missionDatasets, REFERENCES } from '../exploration-catalog.mts';
+import { EXPLORATION, referenceUrl, missionDatasets } from '../exploration-catalog.mts';
 import SelectedContent from './SelectedContent.astro';
 import SpacecraftDetails from './SpacecraftDetails.astro';
 interface Props { objectId: string; missions: readonly MissionRecord[]; visibleMissionIds?: readonly string[]; }
@@ -14,7 +16,7 @@ const contributors = (missionId: string) => new Set((EXPLORATION.graph.byMission
     const image = mission.imageId ? EXPLORATION.images[mission.imageId] : null;
     const emblem = mission.emblemId ? EXPLORATION.emblems[mission.emblemId] : null;
     const vehicles = contributors(mission.id);
-    const references = [...new Set([mission.name, mission.description, mission.agencyIds, ...(mission.started ? [mission.started] : []), ...(mission.ended ? [mission.ended] : []), ...(mission.status ? [mission.status] : [])].flatMap(field => field.referenceIds).concat(mission.participants.flatMap(member => member.referenceIds)))];
+    const references = uniqueCitations([mission.name, mission.description, mission.agencyIds, ...(mission.started ? [mission.started] : []), ...(mission.ended ? [mission.ended] : []), ...(mission.status ? [mission.status] : [])].flatMap(field => field.citations).concat(mission.participants.flatMap(member => member.citations)));
     return <article class="planet-spacecraft" data-mission={mission.id} hidden={visibleMissionIds && !visibleMissionIds.includes(mission.id)}>
       <SelectedContent title={mission.name.value} metadata={dateRange(mission)} description={mission.description.value} href={referenceUrl(mission.description)}>
         {(image || emblem) && <div class="planet-spacecraft-preview">
@@ -31,7 +33,7 @@ const contributors = (missionId: string) => new Set((EXPLORATION.graph.byMission
       <ul class="planet-mission-datasets">{missionDatasets(mission.id, objectId).map(view => <li><a href={view.href} data-dataset-link data-dataset-object={view.objectId} data-dataset-id={view.lensId}>{view.label}</a></li>)}</ul>
       <h4>Spacecraft</h4>
       {mission.participants.map(member => <SpacecraftDetails spacecraftId={member.spacecraftId} {objectId} contributed={vehicles.has(member.spacecraftId)} />)}
-      <details class="planet-mission-references"><summary>Mission references</summary><ul>{references.map(id => <li><a href={REFERENCES[id].url} target="_blank" rel="noreferrer">{REFERENCES[id].title}</a></li>)}</ul></details>
+      <details class="planet-mission-references"><summary>Mission references</summary><SourceCitations citations={references} /></details>
     </article>;
   })}
 </div>}

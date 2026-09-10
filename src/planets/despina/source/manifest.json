@@ -1,5 +1,5 @@
 {
-  "schema": "cssdespina-authoritative-sources@1",
+  "schema": "cssdespina-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
         "starfield"
       ],
       "expectedBytes": 29082084,
-      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035"
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/despina/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -33,7 +43,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/despina/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "measured-shape",
@@ -56,7 +76,17 @@
         "referenceRadiusMeters": 74000
       },
       "expectedBytes": 14147,
-      "expectedSha256": "33433bfde43462cb04ed29e2dce75928e249c8976d307a76bb65f7f15adf2560"
+      "expectedSha256": "33433bfde43462cb04ed29e2dce75928e249c8976d307a76bb65f7f15adf2560",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+            "role": "method",
+            "evidence": "src/planets/despina/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "model-surface",
@@ -84,7 +114,17 @@
       "label": "Shape model",
       "falseColor": false,
       "expectedBytes": 135,
-      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73"
+      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-s0019-1035-03-00002-2",
+            "role": "method",
+            "evidence": "src/planets/despina/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -92,7 +132,11 @@
       "path": "content/object.json",
       "expectedBytes": 3712,
       "expectedSha256": "1cc04de92923d2d05d5844d2f62d01affc90f29501fbd2be282fc8b2d1b63431",
-      "purpose": "Despina scientific source or authored interpretation."
+      "purpose": "Despina scientific source or authored interpretation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "measurements.json",

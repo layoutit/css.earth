@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "dactyl",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "487b18f16050765fd4d562e965a7af43ebd94c37222b80b8e04d9f1814815506"
+    "sha256": "1a19b4e2b83c7524cf15cd39e3caf92b18847cefafc16cda17e31e40a039efe0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -228,6 +228,16 @@
       "acquisition": "The checked-in shape/model.json transcribes the cited numerical dimensions; the shared ellipsoid preparer tessellates these parameters.",
       "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
       "coverage": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1006-icar-1996-0045",
+            "role": "method",
+            "evidence": "src/planets/dactyl/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4",
       "bytes": 163,
       "dependencies": [],
@@ -238,6 +248,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

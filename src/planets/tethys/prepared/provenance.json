@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "tethys",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "606a7b66b8a624781983e1ca55bc94abe8849d7905ab500cfdfe7ffd4f3591d2"
+    "sha256": "66d6043f6679c7c85d651c58a51ca87e6df38859ec1969a4e924175b4debf80d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -766,6 +766,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-iss-2012-tethys",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640",
       "bytes": 66401923,
       "dependencies": [],
@@ -795,6 +805,16 @@
       "id": "cassini-spc-2025-tethys-q128-shape",
       "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-q128-shape",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      },
       "sha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759",
       "bytes": 17694840,
       "dependencies": [],
@@ -845,6 +865,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-iss-2014-tethys-color",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       },
@@ -899,6 +929,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-infrared",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+          }
+        ]
+      },
       "sha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
       "bytes": 117380,
       "dependencies": [],
@@ -940,6 +980,16 @@
             "spacecraftId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqradius_g.tif",
             "missionId": "cassini"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-eq",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }
         ]
       },
@@ -995,6 +1045,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-np",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453",
       "bytes": 790789,
       "dependencies": [],
@@ -1047,6 +1107,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-sp",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74",
       "bytes": 790789,
       "dependencies": [],
@@ -1084,6 +1154,16 @@
       "height": 679,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-eqalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      },
       "sha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
       "bytes": 6044029,
       "dependencies": [],
@@ -1121,6 +1201,16 @@
       "height": 444,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-npalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      },
       "sha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
       "bytes": 790789,
       "dependencies": [],
@@ -1158,6 +1248,16 @@
       "height": 444,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-spalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      },
       "sha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
       "bytes": 790789,
       "dependencies": [],
@@ -1212,6 +1312,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+          }
+        ]
+      },
       "sha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
       "bytes": 126710,
       "dependencies": [],
@@ -1222,6 +1332,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

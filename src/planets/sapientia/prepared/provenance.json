@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "sapientia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0fae2783639d50f540976a0ab64629e6f71b5c801dbafbd6c669359d14fc8a5d"
+    "sha256": "9971d1e36c571ed0001a7b9dae7889f754ac28dce020c465745e3a6f38c07b02"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 51500
       },
       "coverage": "Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). The grid marks unavailable imagery; rotational phase is illustrative. The selected convex pole2 is preferred by nine occultation epochs in Marciniak2023 §5.2. Table1 gives103 km with asymmetric size interval96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established. The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole2 shape at100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved. It is not substituted by an invented shape.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-126589",
+            "role": "material",
+            "evidence": "src/planets/sapientia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "420f22693cd4653eaae4ff9229b13793ead35898a874f4ab8738a779e91bc0c4",
       "bytes": 82546,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
