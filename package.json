@@ -107,7 +107,8 @@
     "test:browser:navigation-stress:matrix": "node site/test/navigation-stress-matrix.mjs",
     "build:performance": "pnpm prebuild && astro build --mode performance && pnpm assemble:planets",
     "prepare:minimap": "node site/minimap/prepare.mjs",
-    "prepare:environment-images": "node tools/objects/dist/restore-environment-images.js"
+    "prepare:environment-images": "node tools/objects/dist/restore-environment-images.js",
+    "lab:nebula:verify": "node --experimental-strip-types labs/nebula/src/run.ts verify-nebula"
   },
   "dependencies": {
     "@cesium/engine": "26.3.0",
