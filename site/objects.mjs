@@ -13,6 +13,9 @@ import orcusDescriptor from "../src/planets/orcus/object.json" with { type: "jso
 import gonggongDescriptor from "../src/planets/gonggong/object.json" with { type: "json" };
 import sednaDescriptor from "../src/planets/sedna/object.json" with { type: "json" };
 import oumuamuaDescriptor from "../src/planets/oumuamua/object.json" with { type: "json" };
+import sn263AlphaDescriptor from "../src/planets/asteroid-2001-sn263/object.json" with { type: "json" };
+import sn263BetaDescriptor from "../src/planets/sn263-beta/object.json" with { type: "json" };
+import sn263GammaDescriptor from "../src/planets/sn263-gamma/object.json" with { type: "json" };
 import diomedesDescriptor from "../src/planets/diomedes/object.json" with { type: "json" };
 import ajaxDescriptor from "../src/planets/ajax/object.json" with { type: "json" };
 import ilioneusDescriptor from "../src/planets/ilioneus/object.json" with { type: "json" };
@@ -500,6 +503,12 @@ export const OBJECTS = defineObjects([
     "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.", packaged(sednaDescriptor), sednaDescriptor.properties.worldFrame),
   object("oumuamua", "ʻOumuamua", "interstellar", "#aaaaaa", 54.22423400905037,
     "The first confirmed interstellar visitor crossed the Solar System in 2017. Its changing brightness supports competing shape interpretations; this view shows one published disc-like fit, with size set by an assumed reflectivity.", packaged(oumuamuaDescriptor), oumuamuaDescriptor.properties.worldFrame),
+  object("asteroid-2001-sn263", "2001 SN263 Alpha", "asteroid", "#a0a0a0", 1.9869,
+    "Explore the primary of 2001 SN263 through its archived radar shape.", packaged(sn263AlphaDescriptor), sn263AlphaDescriptor.properties.worldFrame),
+  object("sn263-beta", "2001 SN263 Beta", "satellite", "#a0a0a0", 1.9869,
+    "Explore the larger outer moon of 2001 SN263 through its archived radar shape.", packaged(sn263BetaDescriptor), sn263BetaDescriptor.properties.worldFrame),
+  object("sn263-gamma", "2001 SN263 Gamma", "satellite", "#a0a0a0", 1.9869,
+    "Explore the smaller inner moon of 2001 SN263 through its archived radar shape.", packaged(sn263GammaDescriptor), sn263GammaDescriptor.properties.worldFrame),
   object("polymele", "Polymele", "asteroid", "#a0a0a0", 5.191974805775306,
     "Explore Polymele, a Lucy target, through its observation-constrained approximate ellipsoid.", packaged(polymeleDescriptor), polymeleDescriptor.properties.worldFrame),
   object("leucus", "Leucus", "asteroid", "#a0a0a0", 5.312733245360807,

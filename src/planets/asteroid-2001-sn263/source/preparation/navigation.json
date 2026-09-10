@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-navigation-marker@1",
+  "planetId": "asteroid-2001-sn263",
+  "owner": "object",
+  "presentation": {
+    "size": 5
+  },
+  "source": {
+    "id": "prepared-radial-context",
+    "path": "presentation/context.png",
+    "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab",
+    "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
+    "license": "NASA PDS archived scientific data; retain citation and attribution. See NOTICE.md.",
+    "consumers": [
+      "navigation"
+    ],
+    "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+    "recipe": {
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "inputs": [
+        "radar-shape"
+      ],
+      "size": 512,
+      "longitudeDegrees": 55,
+      "latitudeDegrees": 20,
+      "ambient": 0.45,
+      "diffuse": 0.55,
+      "lensId": "shape"
+    },
+    "expectedBytes": 83881,
+    "expectedSha256": "9c70f9975b5b6823035699b97e3ac72625683a69e2547a7f0fc62dbfd9b0d431"
+  },
+  "operations": [
+    {
+      "type": "resize",
+      "width": "tile",
+      "height": "tile",
+      "fit": "cover",
+      "position": "centre",
+      "kernel": "lanczos3"
+    },
+    {
+      "type": "png"
+    }
+  ],
+  "context": {
+    "pixels": 512
+  }
+}
