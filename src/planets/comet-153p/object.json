@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Ikeya–Zhang",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 42.26044339943092,
       "description": "153P: Ikeya–Zhang brightened the skies in 2002. Its journey around the Sun takes centuries, unlike the frequent returns of comets such as Encke. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 54,
+      "systemName": "Solar System",
+      "order": 60,
       "context": {
-        "name": "Ikeya–Zhang",
-        "color": "#b8b6b2",
         "order": 449
       }
     }

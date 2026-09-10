@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Leucus",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 5.312733245360807,
       "description": "Explore Leucus, a Lucy target, through its observation-constrained approximate ellipsoid.",
-      "order": 13,
+      "systemName": "Solar System",
+      "order": 19,
       "context": {
-        "name": "Leucus",
-        "color": "#a0a0a0",
         "order": 254
       }
     }

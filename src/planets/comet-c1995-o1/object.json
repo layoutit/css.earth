@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Hale–Bopp",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 51.070270471508714,
       "description": "C/1995 O1: Hale–Bopp remained visible to the naked eye for about 18 months in 1996 and 1997. Its unusually large nucleus helped make it one of the most memorable comets of the twentieth century. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 58,
+      "systemName": "Solar System",
+      "order": 64,
       "context": {
-        "name": "Hale–Bopp",
-        "color": "#b8b6b2",
         "order": 453
       }
     }

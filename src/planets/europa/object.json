@@ -133,16 +133,15 @@
     },
     "catalog": {
       "name": "Europa",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#b5b3a9",
       "distanceAu": 5.2,
       "description": "Explore Europa in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s fractured icy moon and its orbit around Jupiter.",
-      "order": 421,
+      "systemName": "Solar System",
+      "order": 427,
       "context": {
-        "name": "Europa",
-        "color": "#c6b49c",
-        "order": 15
+        "order": 15,
+        "color": "#c6b49c"
       }
     }
   },

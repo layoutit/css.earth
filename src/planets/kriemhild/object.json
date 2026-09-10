@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Kriemhild",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.8618233448142756,
       "description": "Explore Kriemhild in 3D with its published shape model and radial elevation.",
-      "order": 326,
+      "systemName": "Solar System",
+      "order": 332,
       "context": {
-        "name": "Kriemhild",
-        "color": "#aaaaaa",
         "order": 378
       }
     }

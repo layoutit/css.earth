@@ -118,16 +118,15 @@
     },
     "catalog": {
       "name": "Quaoar",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 43.16573948799057,
       "description": "Explore its published shape and source constraints.",
-      "order": 352,
+      "systemName": "Solar System",
+      "order": 358,
       "context": {
-        "name": "Quaoar",
-        "color": "#9d9388",
-        "order": 424
+        "order": 424,
+        "color": "#9d9388"
       }
     }
   },

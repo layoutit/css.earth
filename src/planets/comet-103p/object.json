@@ -122,15 +122,13 @@
     },
     "catalog": {
       "name": "Hartley 2",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.477,
       "description": "Explore Hartley 2's published EPOXI nucleus model and its source constraints.",
-      "order": 74,
+      "systemName": "Solar System",
+      "order": 80,
       "context": {
-        "name": "Hartley 2",
-        "color": "#b8b6b2",
         "order": 165
       }
     }

@@ -128,16 +128,15 @@
     },
     "catalog": {
       "name": "Ganymede",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a49a83",
       "distanceAu": 5.2,
       "description": "Explore Ganymede in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s largest moon and its grooved icy surface.",
-      "order": 422,
+      "systemName": "Solar System",
+      "order": 428,
       "context": {
-        "name": "Ganymede",
-        "color": "#a79b89",
-        "order": 16
+        "order": 16,
+        "color": "#a79b89"
       }
     }
   },

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "ʻOumuamua",
-      "systemName": "Solar System",
       "classification": "interstellar",
       "color": "#aaaaaa",
       "distanceAu": 54.22423400905037,
       "description": "The first confirmed interstellar visitor crossed the Solar System in 2017. Its changing brightness supports competing shape interpretations; this view shows one published disc-like fit, with size set by an assumed reflectivity.",
-      "order": 8,
+      "systemName": "Solar System",
+      "order": 14,
       "context": {
-        "name": "ʻOumuamua",
-        "color": "#aaaaaa",
         "order": 431
       }
     }

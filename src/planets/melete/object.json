@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Melete",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5988578205374266,
       "description": "Explore Melete in 3D with its published shape model and radial elevation.",
-      "order": 228,
+      "systemName": "Solar System",
+      "order": 234,
       "context": {
-        "name": "Melete",
-        "color": "#aaaaaa",
         "order": 276
       }
     }

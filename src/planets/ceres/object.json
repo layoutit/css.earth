@@ -123,16 +123,15 @@
     },
     "catalog": {
       "name": "Ceres",
-      "systemName": "Solar System",
       "classification": "dwarf-planet",
       "color": "#8e8b86",
       "distanceAu": 2.77,
       "description": "NASA Dawn, USGS, JPL, ESO, and HYG",
-      "order": 418,
+      "systemName": "Solar System",
+      "order": 424,
       "context": {
-        "name": "Ceres",
-        "color": "#9c9991",
-        "order": 12
+        "order": 12,
+        "color": "#9c9991"
       }
     }
   },

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Polymele",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 5.191974805775306,
       "description": "Explore Polymele, a Lucy target, through its observation-constrained approximate ellipsoid.",
-      "order": 12,
+      "systemName": "Solar System",
+      "order": 18,
       "context": {
-        "name": "Polymele",
-        "color": "#a0a0a0",
         "order": 253
       }
     }

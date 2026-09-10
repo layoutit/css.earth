@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Zachia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.61497834334827,
       "description": "Explore Zachia in 3D with its published shape model and documented physical size scale.",
-      "order": 395,
+      "systemName": "Solar System",
+      "order": 401,
       "context": {
-        "name": "Zachia",
-        "color": "#aaaaaa",
         "order": 205
       }
     }

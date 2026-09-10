@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Penthesilea",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0044325414876942,
       "description": "Explore Penthesilea in 3D with its published shape model and radial elevation.",
-      "order": 341,
+      "systemName": "Solar System",
+      "order": 347,
       "context": {
-        "name": "Penthesilea",
-        "color": "#aaaaaa",
         "order": 393
       }
     }

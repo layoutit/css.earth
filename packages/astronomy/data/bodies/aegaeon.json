@@ -1,7 +1,7 @@
 {
   "id": "aegaeon",
   "classification": "satellite",
-  "order": 66,
+  "order": 72,
   "physical": {
     "name": "Aegaeon",
     "horizonsCode": "653",
@@ -42,7 +42,7 @@
       "epochJdTt": 2451545,
       "semiMajorAxisKm": 167490.635,
       "eccentricity": 0.000207462266,
-      "inclinationRad": 0.000015261785,
+      "inclinationRad": 1.5261785e-05,
       "ascendingNodeRad": 3.113525946323,
       "argumentOfPeriapsisRad": -3.99922087708,
       "meanAnomalyAtEpochRad": -56786.14074204666,

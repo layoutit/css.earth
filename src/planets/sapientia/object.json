@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Sapientia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.771802925757048,
       "description": "Explore Sapientia in 3D with its published shape model and radial elevation.",
-      "order": 344,
+      "systemName": "Solar System",
+      "order": 350,
       "context": {
-        "name": "Sapientia",
-        "color": "#aaaaaa",
         "order": 396
       }
     }

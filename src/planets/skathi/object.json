@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Skathi",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Skathi, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 30,
+      "systemName": "Solar System",
+      "order": 36,
       "context": {
-        "name": "Skathi",
-        "color": "#a0a0a0",
         "order": 232
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Apophis",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.9223337821550773,
       "description": "Explore Apophis in 3D with its published shape model and radial elevation.",
-      "order": 196,
+      "systemName": "Solar System",
+      "order": 202,
       "context": {
-        "name": "Apophis",
-        "color": "#aaaaaa",
         "order": 145
       }
     }

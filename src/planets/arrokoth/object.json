@@ -120,16 +120,15 @@
     },
     "catalog": {
       "name": "Arrokoth",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 44.05655144131418,
       "description": "Explore its published shape and source constraints.",
-      "order": 351,
+      "systemName": "Solar System",
+      "order": 357,
       "context": {
-        "name": "Arrokoth",
-        "color": "#9d9388",
-        "order": 423
+        "order": 423,
+        "color": "#9d9388"
       }
     }
   },

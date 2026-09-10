@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Aegaeon",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Aegaeon, a small moon of Saturn, through its measured shape.",
-      "order": 81,
+      "systemName": "Solar System",
+      "order": 87,
       "context": {
-        "name": "Aegaeon",
-        "color": "#a0a0a0",
         "order": 153
       }
     }

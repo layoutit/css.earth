@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Prometheus",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
       "description": "Explore Prometheus with Cassini imagery, mapped radial height and its measured irregular shape.",
-      "order": 427,
+      "systemName": "Solar System",
+      "order": 433,
       "context": {
-        "name": "Prometheus",
-        "color": "#a6a29a",
         "order": 42
       }
     }

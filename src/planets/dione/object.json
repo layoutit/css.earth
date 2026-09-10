@@ -140,15 +140,13 @@
     },
     "catalog": {
       "name": "Dione",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#bab9b1",
       "distanceAu": 9.58,
       "description": "Explore Dione in 3D with cssEarth. Inspect Cassini and Voyager imagery and elevation maps of Saturn’s icy moon, its bright cliffs and fractured terrain.",
-      "order": 435,
+      "systemName": "Solar System",
+      "order": 441,
       "context": {
-        "name": "Dione",
-        "color": "#bab9b1",
         "order": 22
       }
     }

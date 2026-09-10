@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "IAU",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.535679875280375,
       "description": "Explore IAU in 3D with its published shape model and documented physical size scale.",
-      "order": 409,
+      "systemName": "Solar System",
+      "order": 415,
       "context": {
-        "name": "IAU",
-        "color": "#aaaaaa",
         "order": 219
       }
     }

@@ -110,15 +110,13 @@
     },
     "catalog": {
       "name": "Thalassa",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
       "description": "Explore Thalassa through its Voyager-derived shape model.",
-      "order": 101,
+      "systemName": "Solar System",
+      "order": 107,
       "context": {
-        "name": "Thalassa",
-        "color": "#a0a0a0",
         "order": 67
       }
     }

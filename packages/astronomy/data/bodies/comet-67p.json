@@ -1,13 +1,13 @@
 {
   "id": "comet-67p",
   "classification": "comet",
-  "order": 100,
+  "order": 106,
   "classificationOrder": 0,
   "physical": {
     "name": "67P/Churyumov–Gerasimenko",
     "horizonsCode": "DES=67P;CAP;",
     "meanRadiusKm": 1.65,
-    "gravitationalParameterKm3PerS2": 6.66228626e-7,
+    "gravitationalParameterKm3PerS2": 6.66228626e-07,
     "parent": "sun"
   },
   "physicalNotes": "ESA/RMOC MTP019 equivalent-volume radius (ESA_MODEL_INFO.ASC); mass 9.982e12 kg\n(Pätzold et al. 2016, doi:10.1038/nature16535) times CODATA G. Shape remains object-owned.",

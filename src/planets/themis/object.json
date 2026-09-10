@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Themis",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1442518680771308,
       "description": "Explore Themis in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 144,
+      "systemName": "Solar System",
+      "order": 150,
       "context": {
-        "name": "Themis",
-        "color": "#aaaaaa",
         "order": 81
       }
     }

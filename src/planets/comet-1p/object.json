@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Halley",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 17.859,
       "description": "Explore Halley's historical Giotto/Vega shape model, with its uncertainty made explicit.",
-      "order": 72,
+      "systemName": "Solar System",
+      "order": 78,
       "context": {
-        "name": "Halley",
-        "color": "#b8b6b2",
         "order": 168
       }
     }

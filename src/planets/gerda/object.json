@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Gerda",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.2256949669977946,
       "description": "Explore Gerda in 3D with its published shape model and radial elevation.",
-      "order": 264,
+      "systemName": "Solar System",
+      "order": 270,
       "context": {
-        "name": "Gerda",
-        "color": "#aaaaaa",
         "order": 315
       }
     }

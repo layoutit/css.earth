@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Phaethon",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.2714545674912625,
       "description": "Explore Phaethon in 3D with its published shape model and radial elevation.",
-      "order": 191,
+      "systemName": "Solar System",
+      "order": 197,
       "context": {
-        "name": "Phaethon",
-        "color": "#aaaaaa",
         "order": 140
       }
     }

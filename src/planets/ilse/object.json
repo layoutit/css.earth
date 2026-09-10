@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Ilse",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.377447027685721,
       "description": "Explore Ilse in 3D with its published shape model and radial elevation.",
-      "order": 330,
+      "systemName": "Solar System",
+      "order": 336,
       "context": {
-        "name": "Ilse",
-        "color": "#aaaaaa",
         "order": 382
       }
     }

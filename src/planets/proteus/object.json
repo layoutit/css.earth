@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Proteus",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a39e96",
       "distanceAu": 30.07,
       "description": "Explore Proteus with Voyager 2 imagery and its source-backed irregular shape.",
-      "order": 104,
+      "systemName": "Solar System",
+      "order": 110,
       "context": {
-        "name": "Proteus",
-        "color": "#a39e96",
         "order": 60
       }
     }

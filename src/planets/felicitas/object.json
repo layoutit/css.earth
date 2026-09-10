@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Felicitas",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6925655976731475,
       "description": "Explore Felicitas in 3D with its published shape model and radial elevation.",
-      "order": 256,
+      "systemName": "Solar System",
+      "order": 262,
       "context": {
-        "name": "Felicitas",
-        "color": "#aaaaaa",
         "order": 307
       }
     }

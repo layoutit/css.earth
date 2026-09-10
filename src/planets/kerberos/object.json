@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Kerberos",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 39.482,
       "description": "Explore Kerberos through a clearly labeled approximate shape fit.",
-      "order": 452,
+      "systemName": "Solar System",
+      "order": 458,
       "context": {
-        "name": "Kerberos",
-        "color": "#a0a0a0",
         "order": 124
       }
     }

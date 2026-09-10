@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Klymene",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1462660059874397,
       "description": "Explore Klymene in 3D with its published shape model and radial elevation.",
-      "order": 253,
+      "systemName": "Solar System",
+      "order": 259,
       "context": {
-        "name": "Klymene",
-        "color": "#aaaaaa",
         "order": 304
       }
     }

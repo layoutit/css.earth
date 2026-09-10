@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Eos",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.011699855683851,
       "description": "Explore Eos in 3D with its published shape model and radial elevation.",
-      "order": 316,
+      "systemName": "Solar System",
+      "order": 322,
       "context": {
-        "name": "Eos",
-        "color": "#aaaaaa",
         "order": 368
       }
     }

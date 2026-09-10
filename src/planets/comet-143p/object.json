@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Kowal–Mrkos",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 4.744148140394379,
       "description": "Explore 143P/Kowal–Mrkos through a shape approximation based on published lightcurve models.",
-      "order": 68,
+      "systemName": "Solar System",
+      "order": 74,
       "context": {
-        "name": "Kowal–Mrkos",
-        "color": "#b8b6b2",
         "order": 301
       }
     }

@@ -133,16 +133,15 @@
     },
     "catalog": {
       "name": "Io",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#c6ac65",
       "distanceAu": 5.2,
       "description": "Explore Io in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s volcanic moon and its orbit around Jupiter.",
-      "order": 420,
+      "systemName": "Solar System",
+      "order": 426,
       "context": {
-        "name": "Io",
-        "color": "#ddc584",
-        "order": 14
+        "order": 14,
+        "color": "#ddc584"
       }
     }
   },

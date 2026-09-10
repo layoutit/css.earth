@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Hyakutake",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 54.30204219906463,
       "description": "C/1996 B2: Hyakutake passed just 0.10 AU from Earth in March 1996. Its close approach made it a striking sight despite its much smaller nucleus than Hale–Bopp’s. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 59,
+      "systemName": "Solar System",
+      "order": 65,
       "context": {
-        "name": "Hyakutake",
-        "color": "#b8b6b2",
         "order": 454
       }
     }

@@ -1,7 +1,7 @@
 {
   "id": "varuna",
   "classification": "trans-neptunian",
-  "order": 3,
+  "order": 9,
   "classificationOrder": 7,
   "physical": {
     "name": "Varuna",
@@ -20,7 +20,7 @@
       "ascendingNodeRad": 0.7014817162905432,
       "argumentOfPeriapsisRad": 5.826229574635105,
       "meanAnomalyAtEpochRad": 2.026386912047458,
-      "meanMotionRadPerDay": 0.00006058069515456977
+      "meanMotionRadPerDay": 6.058069515456977e-05
     }
   },
   "asteroidFixture": {

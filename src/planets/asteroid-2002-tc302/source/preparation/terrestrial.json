@@ -1,0 +1,90 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "asteroid-2002-tc302",
+  "displayName": "2002 TC302",
+  "publicBase": "/scenes/asteroid-2002-tc302/",
+  "distanceAu": 42.69638663728584,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [
+      {
+        "id": "model",
+        "consumer": "model-surface",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        },
+        "metadata": {
+          "label": "Shape model",
+          "modeled": true,
+          "coverage": "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain."
+        }
+      }
+    ],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": []
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 256.86505029826975,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": -45,
+      "framingScale": 0.9457476078728635
+    },
+    "mapUrl": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-surface@2x.webp",
+    "polesUrl": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ellipsoid.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 2000,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "simplification": {
+        "targetFaces": 480,
+        "maximumErrorMeters": 6421.626257456744,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement."
+  },
+  "presentation": {
+    "defaultLens": "model",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

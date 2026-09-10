@@ -178,15 +178,13 @@
     },
     "catalog": {
       "name": "Earth",
-      "systemName": "Solar System",
       "classification": "planet",
       "color": "#5b82a7",
       "distanceAu": 1,
       "description": "Explore Earth in 3D with cssEarth. Orbit our home planet, discover its surface and atmosphere, and browse scientific facts in your browser.",
-      "order": 113,
+      "systemName": "Solar System",
+      "order": 119,
       "context": {
-        "name": "Earth",
-        "color": "#5b82a7",
         "order": 2
       }
     }

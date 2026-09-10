@@ -110,15 +110,13 @@
     },
     "catalog": {
       "name": "Adrastea",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 5.2,
       "description": "Explore Adrastea through a model based on its measured dimensions.",
-      "order": 99,
+      "systemName": "Solar System",
+      "order": 105,
       "context": {
-        "name": "Adrastea",
-        "color": "#a0a0a0",
         "order": 65
       }
     }

@@ -133,15 +133,13 @@
     },
     "catalog": {
       "name": "Bennu",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.126,
       "description": "Explore Bennu in 3D with cssEarth using mission-derived shape and surface data.",
-      "order": 117,
+      "systemName": "Solar System",
+      "order": 123,
       "context": {
-        "name": "Bennu",
-        "color": "#a49c8d",
         "order": 9
       }
     }

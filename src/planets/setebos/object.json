@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Setebos",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
       "description": "Explore Setebos, a moon of Uranus, through its lightcurve-constrained shape approximation.",
-      "order": 24,
+      "systemName": "Solar System",
+      "order": 30,
       "context": {
-        "name": "Setebos",
-        "color": "#a0a0a0",
         "order": 248
       }
     }

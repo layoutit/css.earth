@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Aurora",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1591870349744293,
       "description": "Explore Aurora in 3D with its published shape model and radial elevation.",
-      "order": 186,
+      "systemName": "Solar System",
+      "order": 192,
       "context": {
-        "name": "Aurora",
-        "color": "#aaaaaa",
         "order": 135
       }
     }

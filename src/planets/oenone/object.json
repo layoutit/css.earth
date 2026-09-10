@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Oenone",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.76856663571234,
       "description": "Explore Oenone in 3D with its published shape model and radial elevation.",
-      "order": 313,
+      "systemName": "Solar System",
+      "order": 319,
       "context": {
-        "name": "Oenone",
-        "color": "#aaaaaa",
         "order": 365
       }
     }

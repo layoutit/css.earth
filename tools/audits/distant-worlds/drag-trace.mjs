@@ -126,7 +126,7 @@ try {
     codeRevision: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     worktreeDiffSha256: hash(execFileSync('git', ['diff', 'HEAD', '--', 'tools', 'site', 'packages',
       'src/platform', 'src/renderers', `src/planets/${id}/source`, `tests/objects/browser/${id}`], { maxBuffer: 32 * 1024 * 1024 })),
-    build: 'production', diagnosticsAvailable: initial.diagnosticsAvailable, route: page.url(), browser: browser.version(), headless: true,
+    build: process.env.CSSEARTH_AUDIT_BUILD ?? 'production', diagnosticsAvailable: initial.diagnosticsAvailable, route: page.url(), browser: browser.version(), headless: true,
     viewport, dpr, hardware: process.platform === 'darwin' ? execFileSync('sysctl', ['-n', 'hw.model', 'hw.memsize', 'machdep.cpu.brand_string'], { encoding: 'utf8' }).trim().split('\n') : process.arch,
     gpu, workload: { cycles: 3, stepsPerLeg: 60, x: .6, startY: .485, upperY: .283, lowerY: .582, shadows: false, wheels: 0, ...(lensId ? { lensId } : {}) },
     initial, final, errors, interactionRequests: requests.slice(requestOffset), prepared, loaded: loaded.sort((a,b) => a.url.localeCompare(b.url)),

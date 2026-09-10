@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Kallisto",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.66979749127311,
       "description": "Explore Kallisto in 3D with its published shape model and radial elevation.",
-      "order": 305,
+      "systemName": "Solar System",
+      "order": 311,
       "context": {
-        "name": "Kallisto",
-        "color": "#aaaaaa",
         "order": 357
       }
     }

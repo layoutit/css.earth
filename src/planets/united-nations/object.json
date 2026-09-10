@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "United Nations",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.603483726490706,
       "description": "Explore United Nations in 3D with its published shape model and documented physical size scale.",
-      "order": 410,
+      "systemName": "Solar System",
+      "order": 416,
       "context": {
-        "name": "United Nations",
-        "color": "#aaaaaa",
         "order": 220
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Loreley",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.126208058670846,
       "description": "Explore Loreley in 3D with its published shape model and radial elevation.",
-      "order": 291,
+      "systemName": "Solar System",
+      "order": 297,
       "context": {
-        "name": "Loreley",
-        "color": "#aaaaaa",
         "order": 343
       }
     }

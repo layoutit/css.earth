@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Reinmuthia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.991273442215631,
       "description": "Explore Reinmuthia in 3D with its published shape model and documented physical size scale.",
-      "order": 398,
+      "systemName": "Solar System",
+      "order": 404,
       "context": {
-        "name": "Reinmuthia",
-        "color": "#aaaaaa",
         "order": 208
       }
     }

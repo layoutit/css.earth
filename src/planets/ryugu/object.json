@@ -128,15 +128,13 @@
     },
     "catalog": {
       "name": "Ryugu",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.19,
       "description": "Explore Ryugu in 3D with cssEarth using mission-derived shape and surface data.",
-      "order": 116,
+      "systemName": "Solar System",
+      "order": 122,
       "context": {
-        "name": "Ryugu",
-        "color": "#a49c8d",
         "order": 10
       }
     }

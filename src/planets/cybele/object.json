@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Cybele",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.407076943888485,
       "description": "Explore Cybele in 3D with its published shape model and radial elevation.",
-      "order": 185,
+      "systemName": "Solar System",
+      "order": 191,
       "context": {
-        "name": "Cybele",
-        "color": "#aaaaaa",
         "order": 134
       }
     }

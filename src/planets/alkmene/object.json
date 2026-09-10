@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Alkmene",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.762763911317985,
       "description": "Explore Alkmene in 3D with its published shape model and radial elevation.",
-      "order": 241,
+      "systemName": "Solar System",
+      "order": 247,
       "context": {
-        "name": "Alkmene",
-        "color": "#aaaaaa",
         "order": 289
       }
     }

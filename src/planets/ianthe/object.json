@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Ianthe",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.687221327524466,
       "description": "Explore Ianthe in 3D with its published shape model and radial elevation.",
-      "order": 250,
+      "systemName": "Solar System",
+      "order": 256,
       "context": {
-        "name": "Ianthe",
-        "color": "#aaaaaa",
         "order": 298
       }
     }

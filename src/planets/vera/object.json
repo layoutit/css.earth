@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Vera",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.098448648035085,
       "description": "Explore Vera in 3D with its published shape model and radial elevation.",
-      "order": 327,
+      "systemName": "Solar System",
+      "order": 333,
       "context": {
-        "name": "Vera",
-        "color": "#aaaaaa",
         "order": 379
       }
     }

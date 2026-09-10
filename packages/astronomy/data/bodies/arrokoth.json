@@ -1,7 +1,7 @@
 {
   "id": "arrokoth",
   "classification": "trans-neptunian",
-  "order": 104,
+  "order": 110,
   "classificationOrder": 0,
   "physical": {
     "name": "Arrokoth",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 0.042396297152961275,
       "argumentOfPeriapsisRad": 6.025621949408587,
       "meanAnomalyAtEpochRad": 5.439165924533917,
-      "meanMotionRadPerDay": 0.000058825508818118335
+      "meanMotionRadPerDay": 5.8825508818118335e-05
     }
   },
   "asteroidFixture": {

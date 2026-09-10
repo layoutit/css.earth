@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Ra-Shalom",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.8320332524916527,
       "description": "Explore Ra-Shalom in 3D with its published radar shape model.",
-      "order": 206,
+      "systemName": "Solar System",
+      "order": 212,
       "context": {
-        "name": "Ra-Shalom",
-        "color": "#aaaaaa",
         "order": 172
       }
     }

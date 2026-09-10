@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Paaliaq",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Paaliaq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 25,
+      "systemName": "Solar System",
+      "order": 31,
       "context": {
-        "name": "Paaliaq",
-        "color": "#a0a0a0",
         "order": 227
       }
     }

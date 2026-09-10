@@ -1,7 +1,7 @@
 {
   "id": "comet-c2023-a3",
   "classification": "comet",
-  "order": 91,
+  "order": 97,
   "classificationOrder": 31,
   "physical": {
     "name": "C/2023 A3 Tsuchinshan–ATLAS",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 0.7536044610506946,
       "argumentOfPeriapsisRad": 5.814405177432266,
       "meanAnomalyAtEpochRad": 0.00012160601315798492,
-      "meanMotionRadPerDay": 1.7244745724628333e-7
+      "meanMotionRadPerDay": 1.7244745724628333e-07
     }
   },
   "cometFixture": {

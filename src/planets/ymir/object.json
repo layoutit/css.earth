@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Ymir",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Ymir, a moon of Saturn, through its source-constrained shape approximation.",
-      "order": 77,
+      "systemName": "Solar System",
+      "order": 83,
       "context": {
-        "name": "Ymir",
-        "color": "#a0a0a0",
         "order": 163
       }
     }

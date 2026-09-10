@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Athor",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3789454823297382,
       "description": "Explore Athor in 3D with its published shape model and radial elevation.",
-      "order": 287,
+      "systemName": "Solar System",
+      "order": 293,
       "context": {
-        "name": "Athor",
-        "color": "#aaaaaa",
         "order": 339
       }
     }

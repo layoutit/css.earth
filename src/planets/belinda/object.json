@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Belinda",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
       "description": "Explore Belinda through its published prolate shape model.",
-      "order": 90,
+      "systemName": "Solar System",
+      "order": 96,
       "context": {
-        "name": "Belinda",
-        "color": "#a0a0a0",
         "order": 131
       }
     }

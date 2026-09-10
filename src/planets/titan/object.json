@@ -135,16 +135,15 @@
     },
     "catalog": {
       "name": "Titan",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#bca06b",
       "distanceAu": 9.58,
       "description": "Explore Titan in 3D with cssEarth. See through Saturn’s largest moon’s haze with Cassini near-infrared imagery.",
-      "order": 437,
+      "systemName": "Solar System",
+      "order": 443,
       "context": {
-        "name": "Titan",
-        "color": "#bea065",
-        "order": 24
+        "order": 24,
+        "color": "#bea065"
       }
     }
   },

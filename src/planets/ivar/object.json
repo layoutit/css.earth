@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Ivar",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.8630871303717667,
       "description": "Explore Ivar, a near-Earth asteroid, through its published shape model.",
-      "order": 119,
+      "systemName": "Solar System",
+      "order": 125,
       "context": {
-        "name": "Ivar",
-        "color": "#aaaaaa",
         "order": 419
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Nemausa",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3660524397358516,
       "description": "Explore Nemausa in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 155,
+      "systemName": "Solar System",
+      "order": 161,
       "context": {
-        "name": "Nemausa",
-        "color": "#aaaaaa",
         "order": 92
       }
     }

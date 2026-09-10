@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Philosophia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.152308355019594,
       "description": "Explore Philosophia in 3D with its published shape model and radial elevation.",
-      "order": 319,
+      "systemName": "Solar System",
+      "order": 325,
       "context": {
-        "name": "Philosophia",
-        "color": "#aaaaaa",
         "order": 371
       }
     }

@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Telesto",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#c3bfb7",
       "distanceAu": 9.58,
       "description": "Explore Telesto in 3D with Cassini imagery and its measured irregular shape.",
-      "order": 108,
+      "systemName": "Solar System",
+      "order": 114,
       "context": {
-        "name": "Telesto",
-        "color": "#c3bfb7",
         "order": 53
       }
     }

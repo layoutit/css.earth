@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Pandora",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
       "description": "Explore Pandora with Cassini imagery, mapped radial height and its measured irregular shape.",
-      "order": 428,
+      "systemName": "Solar System",
+      "order": 434,
       "context": {
-        "name": "Pandora",
-        "color": "#a6a29a",
         "order": 43
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Nysa",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.422203726127018,
       "description": "Explore Nysa in 3D with its published shape model and radial elevation.",
-      "order": 173,
+      "systemName": "Solar System",
+      "order": 179,
       "context": {
-        "name": "Nysa",
-        "color": "#aaaaaa",
         "order": 110
       }
     }

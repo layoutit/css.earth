@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Medea",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1164528663194453,
       "description": "Explore Medea in 3D with its published shape model and radial elevation.",
-      "order": 310,
+      "systemName": "Solar System",
+      "order": 316,
       "context": {
-        "name": "Medea",
-        "color": "#aaaaaa",
         "order": 362
       }
     }

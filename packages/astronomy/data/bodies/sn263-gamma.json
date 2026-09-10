@@ -1,7 +1,7 @@
 {
   "id": "sn263-gamma",
   "classification": "satellite",
-  "order": 11,
+  "order": 17,
   "physical": {
     "name": "2001 SN263 Gamma",
     "horizonsCode": null,
@@ -24,11 +24,11 @@
     ],
     "centerBodyId": "asteroid-2001-sn263",
     "gravitationalParametersKm3PerS2": {
-      "body": 6.519912299400917e-9,
-      "parent": 6.120738624457343e-7,
-      "combined": 6.185937747451353e-7
+      "body": 6.519912299400917e-09,
+      "parent": 6.120738624457343e-07,
+      "combined": 6.185937747451353e-07
     },
-    "systemGmKm3PerS2": 6.185937747451353e-7,
+    "systemGmKm3PerS2": 6.185937747451353e-07,
     "parentHeliocentricState": {
       "positionKm": [
         387073626.3866632,

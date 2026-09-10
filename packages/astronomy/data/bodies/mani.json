@@ -1,7 +1,7 @@
 {
   "id": "mani",
   "classification": "trans-neptunian",
-  "order": 1,
+  "order": 7,
   "classificationOrder": 9,
   "physical": {
     "name": "Máni",
@@ -20,7 +20,7 @@
       "ascendingNodeRad": 5.421127592445432,
       "argumentOfPeriapsisRad": 2.0756566337039835,
       "meanAnomalyAtEpochRad": 4.023867717328706,
-      "meanMotionRadPerDay": 0.00006413077547833668
+      "meanMotionRadPerDay": 6.413077547833668e-05
     }
   },
   "asteroidFixture": {

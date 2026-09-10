@@ -110,15 +110,13 @@
     },
     "catalog": {
       "name": "Metis",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#9a8f85",
       "distanceAu": 5.2,
       "description": "Explore Metis with Galileo imagery on a dimension-constrained shape.",
-      "order": 98,
+      "systemName": "Solar System",
+      "order": 104,
       "context": {
-        "name": "Metis",
-        "color": "#9a8f85",
         "order": 64
       }
     }

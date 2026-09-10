@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Coelestina",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7617393088127553,
       "description": "Explore Coelestina in 3D with its published shape model and radial elevation.",
-      "order": 323,
+      "systemName": "Solar System",
+      "order": 329,
       "context": {
-        "name": "Coelestina",
-        "color": "#aaaaaa",
         "order": 375
       }
     }

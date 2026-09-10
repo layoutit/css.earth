@@ -123,15 +123,13 @@
     },
     "catalog": {
       "name": "Mathilde",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.647,
       "description": "Explore Mathilde with NEAR imagery, measured partial elevation, and a published visualization shape.",
-      "order": 126,
+      "systemName": "Solar System",
+      "order": 132,
       "context": {
-        "name": "Mathilde",
-        "color": "#a49c8d",
         "order": 49
       }
     }

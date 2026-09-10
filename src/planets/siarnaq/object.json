@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Siarnaq",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Siarnaq, a moon of Saturn, through its source-constrained shape approximation.",
-      "order": 78,
+      "systemName": "Solar System",
+      "order": 84,
       "context": {
-        "name": "Siarnaq",
-        "color": "#a0a0a0",
         "order": 162
       }
     }

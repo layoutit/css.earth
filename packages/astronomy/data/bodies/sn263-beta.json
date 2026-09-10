@@ -1,7 +1,7 @@
 {
   "id": "sn263-beta",
   "classification": "satellite",
-  "order": 10,
+  "order": 16,
   "physical": {
     "name": "2001 SN263 Beta",
     "horizonsCode": null,
@@ -24,11 +24,11 @@
     ],
     "centerBodyId": "asteroid-2001-sn263",
     "gravitationalParametersKm3PerS2": {
-      "body": 1.603463467019124e-8,
-      "parent": 6.119735484970955e-7,
-      "combined": 6.280081831672867e-7
+      "body": 1.603463467019124e-08,
+      "parent": 6.119735484970955e-07,
+      "combined": 6.280081831672867e-07
     },
-    "systemGmKm3PerS2": 6.280081831672867e-7,
+    "systemGmKm3PerS2": 6.280081831672867e-07,
     "parentHeliocentricState": {
       "positionKm": [
         387073626.3866632,

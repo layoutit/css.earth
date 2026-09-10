@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Asia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4209257475173156,
       "description": "Explore Asia in 3D with its published shape model and radial elevation.",
-      "order": 232,
+      "systemName": "Solar System",
+      "order": 238,
       "context": {
-        "name": "Asia",
-        "color": "#aaaaaa",
         "order": 280
       }
     }

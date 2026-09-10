@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Methone",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Methone with Cassini imagery on its measured ellipsoid.",
-      "order": 94,
+      "systemName": "Solar System",
+      "order": 100,
       "context": {
-        "name": "Methone",
-        "color": "#a0a0a0",
         "order": 127
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "1992 SK",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.2485450870597032,
       "description": "Explore 1992 SK in 3D with its published radar shape model.",
-      "order": 207,
+      "systemName": "Solar System",
+      "order": 213,
       "context": {
-        "name": "1992 SK",
-        "color": "#aaaaaa",
         "order": 173
       }
     }

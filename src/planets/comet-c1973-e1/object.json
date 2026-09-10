@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Kohoutek",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 78.55468108744893,
       "description": "C/1973 E1: Kohoutek passed close to the Sun in late 1973. It is now travelling outward into the distant Solar System. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 57,
+      "systemName": "Solar System",
+      "order": 63,
       "context": {
-        "name": "Kohoutek",
-        "color": "#b8b6b2",
         "order": 452
       }
     }

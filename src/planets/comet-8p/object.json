@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Tuttle",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 5.706764532787596,
       "description": "Explore Tuttle's inferred contact-body model from Hubble and Spitzer observations.",
-      "order": 71,
+      "systemName": "Solar System",
+      "order": 77,
       "context": {
-        "name": "Tuttle",
-        "color": "#b8b6b2",
         "order": 169
       }
     }

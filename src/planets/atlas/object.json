@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Atlas",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
       "description": "Explore Atlas with Cassini imagery, mapped radial height and its measured irregular shape.",
-      "order": 426,
+      "systemName": "Solar System",
+      "order": 432,
       "context": {
-        "name": "Atlas",
-        "color": "#a6a29a",
         "order": 41
       }
     }

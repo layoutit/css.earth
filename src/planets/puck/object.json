@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Puck",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
       "description": "Explore Puck with Voyager 2 imagery on its measured-size shape.",
-      "order": 95,
+      "systemName": "Solar System",
+      "order": 101,
       "context": {
-        "name": "Puck",
-        "color": "#a0a0a0",
         "order": 126
       }
     }

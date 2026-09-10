@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Varda",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 45.619915704968584,
       "description": "Varda is a distant binary-system primary whose outline was measured as it eclipsed a star. Its companion’s orbit helps orient this model, but Varda’s depth remains uncertain.",
-      "order": 2,
+      "systemName": "Solar System",
+      "order": 8,
       "context": {
-        "name": "Varda",
-        "color": "#aaaaaa",
         "order": 437
       }
     }

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "2001 SN263 Gamma",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 1.9869,
       "description": "Explore the smaller inner moon of 2001 SN263 through its archived radar shape.",
-      "order": 11,
+      "systemName": "Solar System",
+      "order": 17,
       "context": {
-        "name": "2001 SN263 Gamma",
-        "color": "#a0a0a0",
         "order": 462
       }
     }

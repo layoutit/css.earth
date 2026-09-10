@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Romulus",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 3.491,
       "description": "Explore Romulus, a moon of Sylvia, through its explicitly approximate occultation shape.",
-      "order": 19,
+      "systemName": "Solar System",
+      "order": 25,
       "context": {
-        "name": "Romulus",
-        "color": "#a0a0a0",
         "order": 251
       }
     }

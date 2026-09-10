@@ -1,7 +1,7 @@
 {
   "id": "comet-c1995-o1",
   "classification": "comet",
-  "order": 85,
+  "order": 91,
   "classificationOrder": 25,
   "physical": {
     "name": "C/1995 O1 Hale–Bopp",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 4.903552202116831,
       "argumentOfPeriapsisRad": 1.880289081856524,
       "meanAnomalyAtEpochRad": 0.07591153932329675,
-      "meanMotionRadPerDay": 0.000007061558518563112
+      "meanMotionRadPerDay": 7.061558518563112e-06
     }
   },
   "cometFixture": {

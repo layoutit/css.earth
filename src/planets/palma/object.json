@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Palma",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.163095282258092,
       "description": "Explore Palma in 3D with its published shape model and radial elevation.",
-      "order": 187,
+      "systemName": "Solar System",
+      "order": 193,
       "context": {
-        "name": "Palma",
-        "color": "#aaaaaa",
         "order": 136
       }
     }

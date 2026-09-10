@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Protogeneia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.13636157165271,
       "description": "Explore Protogeneia in 3D with its published shape model and radial elevation.",
-      "order": 277,
+      "systemName": "Solar System",
+      "order": 283,
       "context": {
-        "name": "Protogeneia",
-        "color": "#aaaaaa",
         "order": 329
       }
     }

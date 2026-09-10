@@ -1,13 +1,13 @@
 {
   "id": "itokawa",
   "classification": "asteroid",
-  "order": 109,
+  "order": 115,
   "classificationOrder": 2,
   "physical": {
     "name": "Itokawa",
     "horizonsCode": "25143;",
     "meanRadiusKm": 0.165,
-    "gravitationalParameterKm3PerS2": 2.1e-9,
+    "gravitationalParameterKm3PerS2": 2.1e-09,
     "parent": "sun"
   },
   "physicalNotes": "Body-owned Horizons physical blocks, retrieved 2026-09-07.",

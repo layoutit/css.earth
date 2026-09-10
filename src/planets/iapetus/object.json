@@ -125,15 +125,13 @@
     },
     "catalog": {
       "name": "Iapetus",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#9a8f7a",
       "distanceAu": 9.58,
       "description": "Explore Iapetus in 3D with cssEarth. Inspect Cassini imagery of Saturn’s two-toned moon and its equatorial ridge.",
-      "order": 438,
+      "systemName": "Solar System",
+      "order": 444,
       "context": {
-        "name": "Iapetus",
-        "color": "#9a8f7a",
         "order": 25
       }
     }

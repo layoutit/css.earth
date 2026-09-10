@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Machholz 1",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 5.448413475057264,
       "description": "96P: Machholz 1 repeatedly sweeps close to the Sun. SOHO and STEREO have watched its passages from different sides of Earth’s orbit. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 51,
+      "systemName": "Solar System",
+      "order": 57,
       "context": {
-        "name": "Machholz 1",
-        "color": "#b8b6b2",
         "order": 446
       }
     }

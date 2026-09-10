@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Varuna",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 44.266134719069306,
       "description": "Varuna’s rapid rotation and changing brightness reveal an elongated world beyond Neptune. This smooth model follows a published light-curve fit; its absolute size remains approximate.",
-      "order": 3,
+      "systemName": "Solar System",
+      "order": 9,
       "context": {
-        "name": "Varuna",
-        "color": "#aaaaaa",
         "order": 436
       }
     }

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "IRAS–Araki–Alcock",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 62.962581525461886,
       "description": "C/1983 H1: IRAS–Araki–Alcock was discovered in 1983 by the IRAS satellite and two independent observers. Its name records all three discoveries. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 55,
+      "systemName": "Solar System",
+      "order": 61,
       "context": {
-        "name": "IRAS–Araki–Alcock",
-        "color": "#b8b6b2",
         "order": 450
       }
     }

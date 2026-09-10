@@ -1,7 +1,7 @@
 {
   "id": "achlys",
   "classification": "trans-neptunian",
-  "order": 0,
+  "order": 6,
   "classificationOrder": 10,
   "physical": {
     "name": "Achlys",
@@ -20,7 +20,7 @@
       "ascendingNodeRad": 5.675100659501322,
       "argumentOfPeriapsisRad": 5.202259955884261,
       "meanAnomalyAtEpochRad": 4.266289680258179,
-      "meanMotionRadPerDay": 0.00006886779589563429
+      "meanMotionRadPerDay": 6.886779589563429e-05
     }
   },
   "asteroidFixture": {

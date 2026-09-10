@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Ijiraq",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Ijiraq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 27,
+      "systemName": "Solar System",
+      "order": 33,
       "context": {
-        "name": "Ijiraq",
-        "color": "#a0a0a0",
         "order": 229
       }
     }

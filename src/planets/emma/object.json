@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Emma",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0505638561088526,
       "description": "Explore Emma in 3D with its published shape model and radial elevation.",
-      "order": 346,
+      "systemName": "Solar System",
+      "order": 352,
       "context": {
-        "name": "Emma",
-        "color": "#aaaaaa",
         "order": 398
       }
     }

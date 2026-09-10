@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Lyyli",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5890833040625667,
       "description": "Explore Lyyli, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
-      "order": 460,
+      "systemName": "Solar System",
+      "order": 466,
       "context": {
-        "name": "Lyyli",
-        "color": "#aaaaaa",
         "order": 427
       }
     }

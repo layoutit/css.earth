@@ -1,7 +1,7 @@
 {
   "id": "comet-c2014-un271",
   "classification": "comet",
-  "order": 89,
+  "order": 95,
   "classificationOrder": 29,
   "physical": {
     "name": "C/2014 UN271 Bernardinelli–Bernstein",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 3.3240615496878956,
       "argumentOfPeriapsisRad": 5.61881950203183,
       "meanAnomalyAtEpochRad": -0.00019687067057481267,
-      "meanMotionRadPerDay": 1.233046828042875e-7
+      "meanMotionRadPerDay": 1.233046828042875e-07
     }
   },
   "cometFixture": {

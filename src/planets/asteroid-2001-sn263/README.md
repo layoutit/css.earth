@@ -14,6 +14,8 @@ The source mesh has 1,148 vertices and 2,292 faces, in kilometres. Its computed 
 
 ## Evidence
 
+The navigation marker now uses a lossless render of the [retained recipe](source/preparation/navigation.json). Its earlier tile had shared-atlas compression. The body mesh and surface images are unchanged.
+
 Source inputs and generated records are pinned in [the manifest](source/manifest.json). At revision `ea88f6feab53`, source/runtime closure, fresh runtime installation, all 11 shared browser conformance cases and DPR 1/2 DOM cleanliness passed for this body. The original [qualification](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/README.md#qualification), [visual review](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/VISUAL-REVIEW.md), [browser receipt](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/evidence/browser.json) and [source restoration receipt](https://github.com/layoutit/cssEarth/blob/ea88f6feab538342257bda3b8bd7383126474017/docs/moons/b11-companion-catalog/evidence/source-restoration.json) remain at that revision.
 
 The integration brings in main at `a1471af18`, including [PR #99](https://github.com/layoutit/cssEarth/pull/99) and [PR #101](https://github.com/layoutit/cssEarth/pull/101). This body's native inputs, prepared mesh and surface textures remain unchanged. Shared renderer and navigation code changed upstream, so the browser results and screenshots at `ea88f6feab53` do not qualify this integration. Historical reports and one-off scripts remain linked at their tested revision.

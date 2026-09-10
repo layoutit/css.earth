@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Petrina",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0015196284082286,
       "description": "Explore Petrina in 3D with its published shape model and documented physical size scale.",
-      "order": 381,
+      "systemName": "Solar System",
+      "order": 387,
       "context": {
-        "name": "Petrina",
-        "color": "#aaaaaa",
         "order": 191
       }
     }

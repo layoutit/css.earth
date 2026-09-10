@@ -1,7 +1,7 @@
 {
   "id": "quaoar",
   "classification": "trans-neptunian",
-  "order": 105,
+  "order": 111,
   "classificationOrder": 1,
   "physical": {
     "name": "Quaoar",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 6.203029624333428,
       "argumentOfPeriapsisRad": 6.212961906349052,
       "meanAnomalyAtEpochRad": 5.124472001810726,
-      "meanMotionRadPerDay": 0.00006065584585870324
+      "meanMotionRadPerDay": 6.065584585870324e-05
     }
   },
   "asteroidFixture": {

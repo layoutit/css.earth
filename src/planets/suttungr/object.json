@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Suttungr",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Suttungr, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 28,
+      "systemName": "Solar System",
+      "order": 34,
       "context": {
-        "name": "Suttungr",
-        "color": "#a0a0a0",
         "order": 230
       }
     }

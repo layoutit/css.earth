@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Bacchus",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.0774720987446262,
       "description": "Explore Bacchus in 3D with its published radar shape model.",
-      "order": 199,
+      "systemName": "Solar System",
+      "order": 205,
       "context": {
-        "name": "Bacchus",
-        "color": "#aaaaaa",
         "order": 155
       }
     }

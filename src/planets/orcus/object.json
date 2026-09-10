@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Orcus",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 47.98129781525766,
       "description": "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.",
-      "order": 5,
+      "systemName": "Solar System",
+      "order": 11,
       "context": {
-        "name": "Orcus",
-        "color": "#aaaaaa",
         "order": 434
       }
     }

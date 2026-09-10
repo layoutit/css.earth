@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Hyrrokkin",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Hyrrokkin, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 38,
+      "systemName": "Solar System",
+      "order": 44,
       "context": {
-        "name": "Hyrrokkin",
-        "color": "#a0a0a0",
         "order": 240
       }
     }

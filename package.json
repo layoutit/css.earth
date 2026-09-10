@@ -31,7 +31,7 @@
     "prepare:shell": "pnpm prepare:titles && pnpm prepare:icons && pnpm prepare:wordmark",
     "prepare:solar-geometry": "pnpm build:astronomy && node tools/prepare-solar-geometry.mts",
     "prepare:planets": "pnpm prepare:catalog && pnpm build:astronomy && node tools/prepare-solar-geometry.mts && pnpm build:catalog && node tools/prepare-planets.mts",
-    "prepare:planets:full": "pnpm build:astronomy && pnpm build:catalog && node tools/prepare-planets.mts --force",
+    "prepare:planets:full": "pnpm prepare:planets --force",
     "publish:earth-city": "node tools/objects/geographic-pages/operations/publish-city-pages.mts --object=earth",
     "publish:earth-global": "node tools/objects/geographic-pages/operations/publish-global-wmts.mts --object=earth",
     "verify:earth-delivery": "node tools/objects/geographic-pages/operations/verify-global-wmts-delivery.mts --object=earth",

@@ -140,15 +140,13 @@
     },
     "catalog": {
       "name": "Phoebe",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#9b9792",
       "distanceAu": 9.58,
       "description": "Explore Phoebe in 3D with cssEarth. Inspect Cassini imagery and shape-derived elevation on Saturn’s irregular outer moon.",
-      "order": 439,
+      "systemName": "Solar System",
+      "order": 445,
       "context": {
-        "name": "Phoebe",
-        "color": "#9b9792",
         "order": 26
       }
     }

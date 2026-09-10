@@ -1,7 +1,7 @@
 {
   "id": "comet-153p",
   "classification": "comet",
-  "order": 81,
+  "order": 87,
   "classificationOrder": 21,
   "physical": {
     "name": "153P Ikeya–Zhang",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 0.9765794471580711,
       "argumentOfPeriapsisRad": 1.3619923449367157,
       "meanAnomalyAtEpochRad": 0.42527725178128956,
-      "meanMotionRadPerDay": 0.00004760559619956678
+      "meanMotionRadPerDay": 4.760559619956678e-05
     }
   },
   "cometFixture": {

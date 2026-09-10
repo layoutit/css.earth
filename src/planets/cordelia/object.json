@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Cordelia",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
       "description": "Explore Cordelia, the inner shepherd of Uranus's epsilon ring.",
-      "order": 89,
+      "systemName": "Solar System",
+      "order": 95,
       "context": {
-        "name": "Cordelia",
-        "color": "#a0a0a0",
         "order": 132
       }
     }

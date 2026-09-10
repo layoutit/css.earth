@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Thetis",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.472287077212926,
       "description": "Explore Thetis in 3D with its published shape model and radial elevation.",
-      "order": 210,
+      "systemName": "Solar System",
+      "order": 216,
       "context": {
-        "name": "Thetis",
-        "color": "#aaaaaa",
         "order": 258
       }
     }

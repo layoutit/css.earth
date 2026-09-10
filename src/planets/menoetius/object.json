@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Menoetius",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 5.226,
       "description": "Explore Menoetius, the companion of Patroclus, through its occultation-constrained shape approximation.",
-      "order": 20,
+      "systemName": "Solar System",
+      "order": 26,
       "context": {
-        "name": "Menoetius",
-        "color": "#a0a0a0",
         "order": 252
       }
     }

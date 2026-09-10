@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Tulipa",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0255703303423154,
       "description": "Explore Tulipa in 3D with its published shape model and documented physical size scale.",
-      "order": 397,
+      "systemName": "Solar System",
+      "order": 403,
       "context": {
-        "name": "Tulipa",
-        "color": "#aaaaaa",
         "order": 207
       }
     }

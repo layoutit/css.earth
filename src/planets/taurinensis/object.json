@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Taurinensis",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.1894142356630333,
       "description": "Explore Taurinensis, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
-      "order": 463,
+      "systemName": "Solar System",
+      "order": 469,
       "context": {
-        "name": "Taurinensis",
-        "color": "#aaaaaa",
         "order": 430
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Lucia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1448952145576423,
       "description": "Explore Lucia in 3D with its published shape model and documented physical size scale.",
-      "order": 376,
+      "systemName": "Solar System",
+      "order": 382,
       "context": {
-        "name": "Lucia",
-        "color": "#aaaaaa",
         "order": 186
       }
     }

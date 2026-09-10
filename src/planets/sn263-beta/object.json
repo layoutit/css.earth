@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "2001 SN263 Beta",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 1.9869,
       "description": "Explore the larger outer moon of 2001 SN263 through its archived radar shape.",
-      "order": 10,
+      "systemName": "Solar System",
+      "order": 16,
       "context": {
-        "name": "2001 SN263 Beta",
-        "color": "#a0a0a0",
         "order": 461
       }
     }

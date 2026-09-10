@@ -135,15 +135,13 @@
     },
     "catalog": {
       "name": "Borrelly",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.608969333559339,
       "description": "Explore Borrelly's MICAS photograph and independent USGS and DLR terrain reconstructions.",
-      "order": 70,
+      "systemName": "Solar System",
+      "order": 76,
       "context": {
-        "name": "Borrelly",
-        "color": "#b8b6b2",
         "order": 299
       }
     }

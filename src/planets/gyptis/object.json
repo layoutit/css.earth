@@ -89,15 +89,15 @@
         96976475872.63539
       ],
       "presentationToReference": [
-        0.00004274878420368333,
+        4.274878420368333e-05,
         2.7755575615628914e-17,
         -0.9999999990862705,
         0.9174820612308517,
         0.39777715593191365,
-        0.00003922124268213034,
+        3.922124268213034e-05,
         0.39777715556845306,
         -0.9174820620691817,
-        0.000017004489800021005
+        1.7004489800021005e-05
       ],
       "orbitUpReference": [
         -2.7755575615628914e-17,
@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Gyptis",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7713762475315957,
       "description": "Explore Gyptis in 3D with its published shape model and documented physical size scale.",
-      "order": 380,
+      "systemName": "Solar System",
+      "order": 386,
       "context": {
-        "name": "Gyptis",
-        "color": "#aaaaaa",
         "order": 190
       }
     }

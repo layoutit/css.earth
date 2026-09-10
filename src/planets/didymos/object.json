@@ -123,15 +123,13 @@
     },
     "catalog": {
       "name": "Didymos",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.6427722213006,
       "description": "Explore the DART encounter shape of Didymos and its radial heights.",
-      "order": 129,
+      "systemName": "Solar System",
+      "order": 135,
       "context": {
-        "name": "Didymos",
-        "color": "#aaaaaa",
         "order": 56
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Semele",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.102547858991143,
       "description": "Explore Semele in 3D with its published shape model and radial elevation.",
-      "order": 245,
+      "systemName": "Solar System",
+      "order": 251,
       "context": {
-        "name": "Semele",
-        "color": "#aaaaaa",
         "order": 293
       }
     }

@@ -215,15 +215,13 @@
     },
     "catalog": {
       "name": "Uranus",
-      "systemName": "Solar System",
       "classification": "planet",
       "color": "#8ec7c9",
       "distanceAu": 19.2,
       "description": "Explore Uranus in 3D with cssEarth. Discover the ice giant that spins on its side, its faint rings, and its system of moons.",
-      "order": 440,
+      "systemName": "Solar System",
+      "order": 446,
       "context": {
-        "name": "Uranus",
-        "color": "#8ec7c9",
         "order": 27
       }
     }

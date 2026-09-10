@@ -110,15 +110,13 @@
     },
     "catalog": {
       "name": "Despina",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
       "description": "Explore Despina through its Voyager-derived shape model.",
-      "order": 102,
+      "systemName": "Solar System",
+      "order": 108,
       "context": {
-        "name": "Despina",
-        "color": "#a0a0a0",
         "order": 68
       }
     }

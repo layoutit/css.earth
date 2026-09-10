@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Hiʻiaka",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 43.1,
       "description": "Explore Hiʻiaka, a moon of Haumea, through its occultation-constrained ellipsoid.",
-      "order": 17,
+      "systemName": "Solar System",
+      "order": 23,
       "context": {
-        "name": "Hiʻiaka",
-        "color": "#a0a0a0",
         "order": 249
       }
     }

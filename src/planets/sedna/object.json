@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Sedna",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 82.85697523892613,
       "description": "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.",
-      "order": 7,
+      "systemName": "Solar System",
+      "order": 13,
       "context": {
-        "name": "Sedna",
-        "color": "#aaaaaa",
         "order": 432
       }
     }

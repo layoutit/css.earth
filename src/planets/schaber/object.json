@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Schaber",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1389418599378245,
       "description": "Explore Schaber in 3D with its published shape model and documented physical size scale.",
-      "order": 408,
+      "systemName": "Solar System",
+      "order": 414,
       "context": {
-        "name": "Schaber",
-        "color": "#aaaaaa",
         "order": 218
       }
     }

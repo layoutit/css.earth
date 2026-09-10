@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Beatrix",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4311351389602276,
       "description": "Explore Beatrix in 3D with its published shape model and radial elevation.",
-      "order": 242,
+      "systemName": "Solar System",
+      "order": 248,
       "context": {
-        "name": "Beatrix",
-        "color": "#aaaaaa",
         "order": 290
       }
     }

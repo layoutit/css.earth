@@ -1,11 +1,11 @@
-# cssEarth 🪐
+# css.earth 🌎
 
-A 3D CSS astrovisualization platform. cssEarth renders celestial bodies as real HTML and CSS 3D
+A 3D CSS astrovisualization platform. [css.earth](https://css.earth) renders celestial bodies as real HTML and CSS 3D
 geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without
 a WebGL or canvas scene renderer. It preprocesses planetary data into
 browser-ready textures, charts, and retained scene plans, then lets you explore the universe.
 
-Available at [css.earth](https://css.earth) 🌎
+Available at [css.earth](https://css.earth) 🪐
 
 <img src="https://raw.githubusercontent.com/layoutit/cssEarth/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/css-earth.webp" alt="Saturn, Jupiter, and Mars rendered as retained HTML and CSS geometry in cssEarth" width="960">
 

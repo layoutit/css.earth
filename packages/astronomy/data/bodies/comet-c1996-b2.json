@@ -1,7 +1,7 @@
 {
   "id": "comet-c1996-b2",
   "classification": "comet",
-  "order": 86,
+  "order": 92,
   "classificationOrder": 26,
   "physical": {
     "name": "C/1996 B2 Hyakutake",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 3.271056661069849,
       "argumentOfPeriapsisRad": 2.220717222969337,
       "meanAnomalyAtEpochRad": 0.0017158651717386064,
-      "meanMotionRadPerDay": 1.5489533362684382e-7
+      "meanMotionRadPerDay": 1.5489533362684382e-07
     }
   },
   "cometFixture": {

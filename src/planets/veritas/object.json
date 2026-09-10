@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Veritas",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1755270453241122,
       "description": "Explore Veritas in 3D with its published shape model and documented physical size scale.",
-      "order": 382,
+      "systemName": "Solar System",
+      "order": 388,
       "context": {
-        "name": "Veritas",
-        "color": "#aaaaaa",
         "order": 192
       }
     }

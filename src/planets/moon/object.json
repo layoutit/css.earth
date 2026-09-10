@@ -163,16 +163,15 @@
     },
     "catalog": {
       "name": "Moon",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#aaa7a0",
       "distanceAu": 1,
       "description": "Explore the Moon in 3D with cssEarth. Discover impact craters, ancient lava plains, and the history of Earth’s natural satellite.",
-      "order": 114,
+      "systemName": "Solar System",
+      "order": 120,
       "context": {
-        "name": "Moon",
-        "color": "#a9a6a0",
-        "order": 3
+        "order": 3,
+        "color": "#a9a6a0"
       }
     }
   },

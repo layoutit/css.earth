@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Iclea",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1954918103121694,
       "description": "Explore Iclea in 3D with its published shape model and radial elevation.",
-      "order": 347,
+      "systemName": "Solar System",
+      "order": 353,
       "context": {
-        "name": "Iclea",
-        "color": "#aaaaaa",
         "order": 399
       }
     }

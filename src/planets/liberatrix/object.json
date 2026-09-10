@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Liberatrix",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.742985442216405,
       "description": "Explore Liberatrix in 3D with its published shape model and radial elevation.",
-      "order": 267,
+      "systemName": "Solar System",
+      "order": 273,
       "context": {
-        "name": "Liberatrix",
-        "color": "#aaaaaa",
         "order": 318
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "1998 ML14",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.407527644248636,
       "description": "Explore 1998 ML14 in 3D with its published radar shape model.",
-      "order": 208,
+      "systemName": "Solar System",
+      "order": 214,
       "context": {
-        "name": "1998 ML14",
-        "color": "#aaaaaa",
         "order": 174
       }
     }

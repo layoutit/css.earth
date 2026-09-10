@@ -125,15 +125,13 @@
     },
     "catalog": {
       "name": "Charon",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#aaa9a3",
       "distanceAu": 39.48,
       "description": "Explore Charon with New Horizons imagery, deep canyons and measured elevation.",
-      "order": 449,
+      "systemName": "Solar System",
+      "order": 455,
       "context": {
-        "name": "Charon",
-        "color": "#aaa9a3",
         "order": 36
       }
     }

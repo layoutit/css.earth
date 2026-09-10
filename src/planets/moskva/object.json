@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Moskva",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5406685045126993,
       "description": "Explore Moskva in 3D with its published shape model and documented physical size scale.",
-      "order": 389,
+      "systemName": "Solar System",
+      "order": 395,
       "context": {
-        "name": "Moskva",
-        "color": "#aaaaaa",
         "order": 199
       }
     }

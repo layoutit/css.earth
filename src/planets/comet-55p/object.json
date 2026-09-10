@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Tempel–Tuttle",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 12.265992818638155,
       "description": "55P: Tempel–Tuttle supplies the dust that makes the Leonid meteor shower. Earth encounters these particles as it crosses the comet’s trail each November. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 50,
+      "systemName": "Solar System",
+      "order": 56,
       "context": {
-        "name": "Tempel–Tuttle",
-        "color": "#b8b6b2",
         "order": 445
       }
     }

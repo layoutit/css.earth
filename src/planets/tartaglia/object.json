@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Tartaglia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.708012033150063,
       "description": "Explore Tartaglia in 3D with its published shape model and documented physical size scale.",
-      "order": 411,
+      "systemName": "Solar System",
+      "order": 417,
       "context": {
-        "name": "Tartaglia",
-        "color": "#aaaaaa",
         "order": 221
       }
     }

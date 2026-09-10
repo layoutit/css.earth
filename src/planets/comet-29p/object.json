@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Schwassmann–Wachmann 1",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 6.3177563009608955,
       "description": "29P: Schwassmann–Wachmann 1 releases gas and dust far from the Sun. Webb detected several jets with different mixtures of carbon monoxide and carbon dioxide. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 48,
+      "systemName": "Solar System",
+      "order": 54,
       "context": {
-        "name": "Schwassmann–Wachmann 1",
-        "color": "#b8b6b2",
         "order": 443
       }
     }

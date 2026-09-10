@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Flora",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.2016255700392366,
       "description": "Explore Flora in 3D with its published shape model and radial elevation.",
-      "order": 161,
+      "systemName": "Solar System",
+      "order": 167,
       "context": {
-        "name": "Flora",
-        "color": "#aaaaaa",
         "order": 98
       }
     }

@@ -1,7 +1,7 @@
 {
   "id": "comet-c1983-h1",
   "classification": "comet",
-  "order": 82,
+  "order": 88,
   "classificationOrder": 22,
   "physical": {
     "name": "C/1983 H1 IRAS–Araki–Alcock",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 0.8078934233213592,
       "argumentOfPeriapsisRad": 3.6704685208673484,
       "meanAnomalyAtEpochRad": 0.3109529251499881,
-      "meanMotionRadPerDay": 0.00001963097010501968
+      "meanMotionRadPerDay": 1.963097010501968e-05
     }
   },
   "cometFixture": {

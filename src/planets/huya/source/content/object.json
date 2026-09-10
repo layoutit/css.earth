@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "huya",
+  "displayName": "Huya",
+  "panel": {
+    "introduction": "Huya is a trans-Neptunian world with a moon. Occultations and the satellite orbit constrain this oblate model of Huya itself; the grid marks its unmapped surface.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Occultation-constrained oblate model"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "436 × 436 × 375 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "6.725 hours; no qualified phase"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Plutino (3:2 resonance with Neptune)"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions. Uses the paper’s J2000-equatorial satellite-orbit pole RA 20.8° ±1.9°, Dec 34.9° ±1.9° as a body-pole prior under the explicit equatorial-orbit assumption. Arbitrary prime meridian and rotational phase. The grid marks unmapped terrain.",
+        "title": "Occultation-constrained oblate model",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/huya/huya-model-thumbnail.webp",
+        "surface": "huya-model-surface@2x.webp",
+        "poles": "huya-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2501.09739"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Rommel et al. (2025), PSJ 6, 48; Table 6 and Appendix C.",
+      "href": "https://arxiv.org/abs/2501.09739"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2501.09739"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2501.09739",
+      "credit": "Rommel et al. (2025), PSJ 6, 48; Table 6 and Appendix C."
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Rommel et al. (2025), PSJ 6, 48; Table 6 and Appendix C."
+    }
+  }
+}

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Alkeste",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.629388047968044,
       "description": "Explore Alkeste in 3D with its published shape model and radial elevation.",
-      "order": 266,
+      "systemName": "Solar System",
+      "order": 272,
       "context": {
-        "name": "Alkeste",
-        "color": "#aaaaaa",
         "order": 317
       }
     }

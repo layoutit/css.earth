@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Hidalgo",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.728989790748572,
       "description": "Explore Hidalgo in 3D with its published shape model and documented physical size scale.",
-      "order": 394,
+      "systemName": "Solar System",
+      "order": 400,
       "context": {
-        "name": "Hidalgo",
-        "color": "#aaaaaa",
         "order": 204
       }
     }

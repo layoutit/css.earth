@@ -110,15 +110,13 @@
     },
     "catalog": {
       "name": "Oberon",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#9f978e",
       "distanceAu": 19.2,
       "description": "Explore Oberon in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
-      "order": 445,
+      "systemName": "Solar System",
+      "order": 451,
       "context": {
-        "name": "Oberon",
-        "color": "#9f978e",
         "order": 32
       }
     }

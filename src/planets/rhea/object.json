@@ -140,15 +140,13 @@
     },
     "catalog": {
       "name": "Rhea",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#bebbb0",
       "distanceAu": 9.58,
       "description": "Explore Rhea in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, its impact basins and bright fractures.",
-      "order": 436,
+      "systemName": "Solar System",
+      "order": 442,
       "context": {
-        "name": "Rhea",
-        "color": "#bebbb0",
         "order": 23
       }
     }

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Himalia",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 5.2,
       "description": "Explore Himalia, a moon of Jupiter, through its source-backed size model.",
-      "order": 79,
+      "systemName": "Solar System",
+      "order": 85,
       "context": {
-        "name": "Himalia",
-        "color": "#a0a0a0",
         "order": 161
       }
     }

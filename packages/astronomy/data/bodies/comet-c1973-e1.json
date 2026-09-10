@@ -1,7 +1,7 @@
 {
   "id": "comet-c1973-e1",
   "classification": "comet",
-  "order": 84,
+  "order": 90,
   "classificationOrder": 24,
   "physical": {
     "name": "C/1973 E1 Kohoutek",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 5.685403788646142,
       "argumentOfPeriapsisRad": 5.7252208469699575,
       "meanAnomalyAtEpochRad": 0.0037681383580450145,
-      "meanMotionRadPerDay": 1.9571575638669502e-7
+      "meanMotionRadPerDay": 1.9571575638669502e-07
     }
   },
   "cometFixture": {

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Bettina",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1419813494769286,
       "description": "Explore Bettina in 3D with its published shape model and radial elevation.",
-      "order": 331,
+      "systemName": "Solar System",
+      "order": 337,
       "context": {
-        "name": "Bettina",
-        "color": "#aaaaaa",
         "order": 383
       }
     }

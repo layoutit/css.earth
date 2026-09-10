@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Kalliope",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.909387673184708,
       "description": "Explore Kalliope in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 154,
+      "systemName": "Solar System",
+      "order": 160,
       "context": {
-        "name": "Kalliope",
-        "color": "#aaaaaa",
         "order": 91
       }
     }

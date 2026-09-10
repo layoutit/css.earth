@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Hektor",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.27706210284509,
       "description": "Explore Hektor in 3D with its published shape model and radial elevation.",
-      "order": 189,
+      "systemName": "Solar System",
+      "order": 195,
       "context": {
-        "name": "Hektor",
-        "color": "#aaaaaa",
         "order": 138
       }
     }

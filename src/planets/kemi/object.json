@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Kemi",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.766954866279291,
       "description": "Explore Kemi, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
-      "order": 462,
+      "systemName": "Solar System",
+      "order": 468,
       "context": {
-        "name": "Kemi",
-        "color": "#aaaaaa",
         "order": 429
       }
     }

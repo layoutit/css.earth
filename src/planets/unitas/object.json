@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Unitas",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.357778522320458,
       "description": "Explore Unitas in 3D with its published shape model and radial elevation.",
-      "order": 350,
+      "systemName": "Solar System",
+      "order": 356,
       "context": {
-        "name": "Unitas",
-        "color": "#aaaaaa",
         "order": 402
       }
     }

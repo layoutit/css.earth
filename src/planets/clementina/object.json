@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Clementina",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.159622955651379,
       "description": "Explore Clementina in 3D with its published shape model and radial elevation.",
-      "order": 332,
+      "systemName": "Solar System",
+      "order": 338,
       "context": {
-        "name": "Clementina",
-        "color": "#aaaaaa",
         "order": 384
       }
     }

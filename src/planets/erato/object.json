@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Erato",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.128605699285775,
       "description": "Explore Erato in 3D with its published shape model and radial elevation.",
-      "order": 230,
+      "systemName": "Solar System",
+      "order": 236,
       "context": {
-        "name": "Erato",
-        "color": "#aaaaaa",
         "order": 278
       }
     }

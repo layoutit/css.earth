@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Euphrosyne",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.162046843719569,
       "description": "Explore Euphrosyne in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 141,
+      "systemName": "Solar System",
+      "order": 147,
       "context": {
-        "name": "Euphrosyne",
-        "color": "#aaaaaa",
         "order": 78
       }
     }

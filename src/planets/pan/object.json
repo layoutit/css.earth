@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Pan",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
       "description": "Explore Pan with Cassini imagery, mapped radial height and its measured irregular shape.",
-      "order": 425,
+      "systemName": "Solar System",
+      "order": 431,
       "context": {
-        "name": "Pan",
-        "color": "#a6a29a",
         "order": 40
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Demodokus",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.199474785432278,
       "description": "Explore Demodokus in 3D with its published shape model and radial elevation.",
-      "order": 362,
+      "systemName": "Solar System",
+      "order": 368,
       "context": {
-        "name": "Demodokus",
-        "color": "#aaaaaa",
         "order": 413
       }
     }

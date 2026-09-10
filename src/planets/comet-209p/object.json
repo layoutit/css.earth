@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "LINEAR",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 2.9567815032538625,
       "description": "Explore 209P/LINEAR through a shape approximation constrained by radar observations.",
-      "order": 66,
+      "systemName": "Solar System",
+      "order": 72,
       "context": {
-        "name": "LINEAR",
-        "color": "#b8b6b2",
         "order": 406
       }
     }

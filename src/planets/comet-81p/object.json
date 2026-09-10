@@ -117,15 +117,13 @@
     },
     "catalog": {
       "name": "Wild 2",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.45,
       "description": "Explore Wild 2's observed Stardust terrain, preserving its real coverage gaps.",
-      "order": 73,
+      "systemName": "Solar System",
+      "order": 79,
       "context": {
-        "name": "Wild 2",
-        "color": "#b8b6b2",
         "order": 167
       }
     }

@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Janus",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
       "description": "Explore Janus with Cassini imagery, mapped radial height and its measured irregular shape.",
-      "order": 429,
+      "systemName": "Solar System",
+      "order": 435,
       "context": {
-        "name": "Janus",
-        "color": "#a6a29a",
         "order": 44
       }
     }

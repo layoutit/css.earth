@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Minerva",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.753464096843689,
       "description": "Explore Minerva in 3D with its published shape model and radial elevation.",
-      "order": 247,
+      "systemName": "Solar System",
+      "order": 253,
       "context": {
-        "name": "Minerva",
-        "color": "#aaaaaa",
         "order": 295
       }
     }

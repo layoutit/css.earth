@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Camilla",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.4965722547199647,
       "description": "Explore Camilla in 3D with its published shape model and radial elevation.",
-      "order": 164,
+      "systemName": "Solar System",
+      "order": 170,
       "context": {
-        "name": "Camilla",
-        "color": "#aaaaaa",
         "order": 101
       }
     }

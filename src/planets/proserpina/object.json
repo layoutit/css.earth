@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Proserpina",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6551885129968467,
       "description": "Explore Proserpina in 3D with its published shape model and documented physical size scale.",
-      "order": 368,
+      "systemName": "Solar System",
+      "order": 374,
       "context": {
-        "name": "Proserpina",
-        "color": "#aaaaaa",
         "order": 178
       }
     }

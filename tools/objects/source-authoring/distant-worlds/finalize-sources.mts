@@ -18,7 +18,7 @@ const root = resolve(import.meta.dirname, '../../../..');
 if (process.cwd() !== root) throw new Error('Run from the repository root.');
 const read = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(entry => requireRecord(entry));
-const bodies = records((await read('tools/objects/source-authoring/distant-worlds/inputs.json')).bodies).map(b => ({...b,id:requireString(b.id),name:requireString(b.name),source:requireString(b.source),credit:requireString(b.credit),titleLabel:b.titleLabel===undefined?undefined:requireString(b.titleLabel)}));
+const bodies = records((await read(process.argv.find(arg => arg.startsWith('--inputs='))?.slice('--inputs='.length) ?? 'tools/objects/source-authoring/distant-worlds/inputs.json')).bodies).map(b => ({...b,id:requireString(b.id),name:requireString(b.name),source:requireString(b.source),credit:requireString(b.credit),titleLabel:b.titleLabel===undefined?undefined:requireString(b.titleLabel)}));
 const hash = (data: Uint8Array | string) => createHash('sha256').update(data).digest('hex');
 const write = (path: string, value: unknown) => writeFile(path, Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n');
 const files = async (path: string): Promise<string[]> => (await Promise.all((await readdir(path, {withFileTypes:true})).map(e => e.isDirectory() ? files(resolve(path,e.name)) : [resolve(path,e.name)]))).flat();

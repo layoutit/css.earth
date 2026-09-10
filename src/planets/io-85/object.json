@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "85 Io",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6540732054067564,
       "description": "Explore 85 Io in 3D with its published shape model and radial elevation.",
-      "order": 244,
+      "systemName": "Solar System",
+      "order": 250,
       "context": {
-        "name": "85 Io",
-        "color": "#aaaaaa",
         "order": 292
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Sappho",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.2965637786549675,
       "description": "Explore Sappho in 3D with its published shape model and radial elevation.",
-      "order": 174,
+      "systemName": "Solar System",
+      "order": 180,
       "context": {
-        "name": "Sappho",
-        "color": "#aaaaaa",
         "order": 111
       }
     }

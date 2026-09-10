@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Loge",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Loge, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 39,
+      "systemName": "Solar System",
+      "order": 45,
       "context": {
-        "name": "Loge",
-        "color": "#a0a0a0",
         "order": 241
       }
     }

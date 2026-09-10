@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "106 Dione",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1819345699171295,
       "description": "Explore 106 Dione in 3D with its published shape model and radial elevation.",
-      "order": 255,
+      "systemName": "Solar System",
+      "order": 261,
       "context": {
-        "name": "106 Dione",
-        "color": "#aaaaaa",
         "order": 306
       }
     }

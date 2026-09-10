@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Vindobona",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.918785954300875,
       "description": "Explore Vindobona in 3D with its published shape model and radial elevation.",
-      "order": 321,
+      "systemName": "Solar System",
+      "order": 327,
       "context": {
-        "name": "Vindobona",
-        "color": "#aaaaaa",
         "order": 373
       }
     }

@@ -115,16 +115,15 @@
     },
     "catalog": {
       "name": "Gǃkúnǁʼhòmdímà",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 74.45925441086162,
       "description": "Explore its published shape and source constraints.",
-      "order": 353,
+      "systemName": "Solar System",
+      "order": 359,
       "context": {
-        "name": "Gǃkúnǁʼhòmdímà",
-        "color": "#9d9388",
-        "order": 425
+        "order": 425,
+        "color": "#9d9388"
       }
     }
   },

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Chariklo",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 15.733429335695405,
       "description": "Explore Chariklo, a Centaur, with its observation-constrained shape and two narrow rings.",
-      "order": 457,
+      "systemName": "Solar System",
+      "order": 463,
       "context": {
-        "name": "Chariklo",
-        "color": "#aaaaaa",
         "order": 417
       }
     }

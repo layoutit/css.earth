@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Hygiea",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1509104848150167,
       "description": "Explore Hygiea in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 134,
+      "systemName": "Solar System",
+      "order": 140,
       "context": {
-        "name": "Hygiea",
-        "color": "#aaaaaa",
         "order": 71
       }
     }

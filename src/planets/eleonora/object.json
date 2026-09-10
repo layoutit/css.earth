@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Eleonora",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.800786090344624,
       "description": "Explore Eleonora in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 152,
+      "systemName": "Solar System",
+      "order": 158,
       "context": {
-        "name": "Eleonora",
-        "color": "#aaaaaa",
         "order": 89
       }
     }

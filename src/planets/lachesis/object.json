@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Lachesis",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.119472040064257,
       "description": "Explore Lachesis in 3D with its published shape model and radial elevation.",
-      "order": 263,
+      "systemName": "Solar System",
+      "order": 269,
       "context": {
-        "name": "Lachesis",
-        "color": "#aaaaaa",
         "order": 314
       }
     }

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Juliet",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
       "description": "Explore Juliet through its published prolate shape model.",
-      "order": 91,
+      "systemName": "Solar System",
+      "order": 97,
       "context": {
-        "name": "Juliet",
-        "color": "#a0a0a0",
         "order": 130
       }
     }

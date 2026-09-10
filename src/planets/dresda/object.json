@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Dresda",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.884592869415074,
       "description": "Explore Dresda in 3D with its published shape model and radial elevation.",
-      "order": 337,
+      "systemName": "Solar System",
+      "order": 343,
       "context": {
-        "name": "Dresda",
-        "color": "#aaaaaa",
         "order": 389
       }
     }

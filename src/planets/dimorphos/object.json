@@ -128,15 +128,13 @@
     },
     "catalog": {
       "name": "Dimorphos",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#aaaaaa",
       "distanceAu": 1.6427722213006,
       "description": "Explore Dimorphos, the moon of Didymos, with its DART encounter shape.",
-      "order": 130,
+      "systemName": "Solar System",
+      "order": 136,
       "context": {
-        "name": "Dimorphos",
-        "color": "#aaaaaa",
         "order": 57
       }
     }

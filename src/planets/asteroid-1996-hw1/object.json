@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "1996 HW1",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.0457349024000404,
       "description": "Explore 1996 HW1 in 3D with its published radar shape model.",
-      "order": 204,
+      "systemName": "Solar System",
+      "order": 210,
       "context": {
-        "name": "1996 HW1",
-        "color": "#aaaaaa",
         "order": 170
       }
     }

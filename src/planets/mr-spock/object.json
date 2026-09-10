@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Mr. Spock",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0107561956481725,
       "description": "Explore Mr. Spock in 3D with its published shape model and documented physical size scale.",
-      "order": 405,
+      "systemName": "Solar System",
+      "order": 411,
       "context": {
-        "name": "Mr. Spock",
-        "color": "#aaaaaa",
         "order": 215
       }
     }

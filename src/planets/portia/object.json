@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Portia",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
       "description": "Explore Portia through its published prolate shape model.",
-      "order": 92,
+      "systemName": "Solar System",
+      "order": 98,
       "context": {
-        "name": "Portia",
-        "color": "#a0a0a0",
         "order": 129
       }
     }

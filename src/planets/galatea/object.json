@@ -110,15 +110,13 @@
     },
     "catalog": {
       "name": "Galatea",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
       "description": "Explore Galatea through its Voyager-derived shape model.",
-      "order": 103,
+      "systemName": "Solar System",
+      "order": 109,
       "context": {
-        "name": "Galatea",
-        "color": "#a0a0a0",
         "order": 69
       }
     }

@@ -127,15 +127,13 @@
     },
     "catalog": {
       "name": "Tempel 1",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.305,
       "description": "Explore Tempel 1's published nucleus model from Deep Impact and Stardust-NExT.",
-      "order": 75,
+      "systemName": "Solar System",
+      "order": 81,
       "context": {
-        "name": "Tempel 1",
-        "color": "#b8b6b2",
         "order": 166
       }
     }

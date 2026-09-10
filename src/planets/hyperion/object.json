@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Hyperion",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a6a29a",
       "distanceAu": 9.58,
       "description": "Explore Hyperion with Cassini imagery, mapped radial height and its measured irregular shape.",
-      "order": 431,
+      "systemName": "Solar System",
+      "order": 437,
       "context": {
-        "name": "Hyperion",
-        "color": "#a6a29a",
         "order": 46
       }
     }

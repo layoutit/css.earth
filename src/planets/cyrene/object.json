@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Cyrene",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.07124717724166,
       "description": "Explore Cyrene in 3D with its published shape model and radial elevation.",
-      "order": 271,
+      "systemName": "Solar System",
+      "order": 277,
       "context": {
-        "name": "Cyrene",
-        "color": "#aaaaaa",
         "order": 322
       }
     }

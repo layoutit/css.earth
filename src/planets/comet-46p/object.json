@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Wirtanen",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 5.038736344622292,
       "description": "46P: Wirtanen was Rosetta’s planned destination before a launch delay changed the mission’s target to 67P. Its small nucleus returns to the inner Solar System roughly every five years. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 49,
+      "systemName": "Solar System",
+      "order": 55,
       "context": {
-        "name": "Wirtanen",
-        "color": "#b8b6b2",
         "order": 444
       }
     }

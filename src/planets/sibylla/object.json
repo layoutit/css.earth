@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Sibylla",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.3713315960899832,
       "description": "Explore Sibylla in 3D with its published shape model and radial elevation.",
-      "order": 294,
+      "systemName": "Solar System",
+      "order": 300,
       "context": {
-        "name": "Sibylla",
-        "color": "#aaaaaa",
         "order": 346
       }
     }

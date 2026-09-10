@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Pales",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.097178213859086,
       "description": "Explore Pales in 3D with its published shape model and radial elevation.",
-      "order": 224,
+      "systemName": "Solar System",
+      "order": 230,
       "context": {
-        "name": "Pales",
-        "color": "#aaaaaa",
         "order": 272
       }
     }

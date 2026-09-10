@@ -115,16 +115,15 @@
     },
     "catalog": {
       "name": "Achlys (2003 AZ84)",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 43.53477215772988,
       "description": "Formerly 2003 AZ84, Achlys is a plutino in Neptune’s 3: 2 orbital resonance. Its changing occultation silhouette supports a flattened, elongated model, while a grazing event hints at a local depression.",
-      "order": 0,
+      "systemName": "Solar System",
+      "order": 6,
       "context": {
-        "name": "Achlys",
-        "color": "#aaaaaa",
-        "order": 439
+        "order": 439,
+        "name": "Achlys"
       }
     }
   },

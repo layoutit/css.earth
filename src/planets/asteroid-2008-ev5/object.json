@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "2008 EV5",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.9597570834058771,
       "description": "Explore 2008 EV5 in 3D with its published radar shape model.",
-      "order": 205,
+      "systemName": "Solar System",
+      "order": 211,
       "context": {
-        "name": "2008 EV5",
-        "color": "#aaaaaa",
         "order": 171
       }
     }

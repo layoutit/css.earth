@@ -1,7 +1,7 @@
 {
   "id": "squannit",
   "classification": "satellite",
-  "order": 55,
+  "order": 61,
   "physical": {
     "name": "Squannit",
     "horizonsCode": null,
@@ -24,11 +24,11 @@
     ],
     "centerBodyId": "moshup",
     "gravitationalParametersKm3PerS2": {
-      "body": 8.971515858775238e-9,
-      "parent": 1.5637019863480103e-7,
-      "combined": 1.6534171449357626e-7
+      "body": 8.971515858775238e-09,
+      "parent": 1.5637019863480103e-07,
+      "combined": 1.6534171449357626e-07
     },
-    "systemGmKm3PerS2": 1.6534171449357626e-7,
+    "systemGmKm3PerS2": 1.6534171449357626e-07,
     "provenance": {
       "model": "Published mutual-orbit model evaluated once at prepared epoch",
       "epochJdTt": 2461286.5,

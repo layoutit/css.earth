@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Ilioneus",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.182702514637422,
       "description": "Explore Ilioneus in 3D with its published shape model and radial elevation.",
-      "order": 358,
+      "systemName": "Solar System",
+      "order": 364,
       "context": {
-        "name": "Ilioneus",
-        "color": "#aaaaaa",
         "order": 409
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Athamantis",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3819120669248703,
       "description": "Explore Athamantis in 3D with its published shape model and radial elevation.",
-      "order": 320,
+      "systemName": "Solar System",
+      "order": 326,
       "context": {
-        "name": "Athamantis",
-        "color": "#aaaaaa",
         "order": 372
       }
     }

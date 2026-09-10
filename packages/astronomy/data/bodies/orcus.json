@@ -1,7 +1,7 @@
 {
   "id": "orcus",
   "classification": "trans-neptunian",
-  "order": 5,
+  "order": 11,
   "classificationOrder": 5,
   "physical": {
     "name": "Orcus",
@@ -20,7 +20,7 @@
       "ascendingNodeRad": 5.515325396053398,
       "argumentOfPeriapsisRad": 0.37712168596016277,
       "meanAnomalyAtEpochRad": 3.3078360573983066,
-      "meanMotionRadPerDay": 0.00006958698545746642
+      "meanMotionRadPerDay": 6.958698545746642e-05
     }
   },
   "asteroidFixture": {

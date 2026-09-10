@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Nereus",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.485139038607293,
       "description": "Explore Nereus in 3D with its published radar shape model.",
-      "order": 201,
+      "systemName": "Solar System",
+      "order": 207,
       "context": {
-        "name": "Nereus",
-        "color": "#aaaaaa",
         "order": 157
       }
     }

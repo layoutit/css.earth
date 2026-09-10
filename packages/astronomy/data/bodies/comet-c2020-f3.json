@@ -1,7 +1,7 @@
 {
   "id": "comet-c2020-f3",
   "classification": "comet",
-  "order": 90,
+  "order": 96,
   "classificationOrder": 30,
   "physical": {
     "name": "C/2020 F3 NEOWISE",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 1.4312552845839293,
       "argumentOfPeriapsisRad": 1.1813347246963648,
       "meanAnomalyAtEpochRad": 0.004691374035149743,
-      "meanMotionRadPerDay": 0.0000020845689546801697
+      "meanMotionRadPerDay": 2.0845689546801697e-06
     }
   },
   "cometFixture": {

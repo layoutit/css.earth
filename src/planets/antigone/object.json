@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Antigone",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.8676091430240436,
       "description": "Explore Antigone in 3D with its published shape model and radial elevation.",
-      "order": 270,
+      "systemName": "Solar System",
+      "order": 276,
       "context": {
-        "name": "Antigone",
-        "color": "#aaaaaa",
         "order": 321
       }
     }

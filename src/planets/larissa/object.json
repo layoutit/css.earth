@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Larissa",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a39e96",
       "distanceAu": 30.07,
       "description": "Explore Larissa with Voyager 2 imagery and its source-backed irregular shape.",
-      "order": 105,
+      "systemName": "Solar System",
+      "order": 111,
       "context": {
-        "name": "Larissa",
-        "color": "#a39e96",
         "order": 61
       }
     }

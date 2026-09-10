@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "2001 QW16",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.177455279524888,
       "description": "Explore 2001 QW16 in 3D with its published shape model and documented physical size scale.",
-      "order": 413,
+      "systemName": "Solar System",
+      "order": 419,
       "context": {
-        "name": "2001 QW16",
-        "color": "#aaaaaa",
         "order": 223
       }
     }

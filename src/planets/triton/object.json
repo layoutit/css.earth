@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Triton",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#b8afa5",
       "distanceAu": 30.07,
       "description": "Explore Neptune’s retrograde moon through Voyager monochrome and enhanced-color imagery.",
-      "order": 447,
+      "systemName": "Solar System",
+      "order": 453,
       "context": {
-        "name": "Triton",
-        "color": "#b8afa5",
         "order": 34
       }
     }

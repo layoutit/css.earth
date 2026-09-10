@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "1950 DA",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.6984168410443714,
       "description": "Explore 1950 DA in 3D with its published shape model and radial elevation.",
-      "order": 195,
+      "systemName": "Solar System",
+      "order": 201,
       "context": {
-        "name": "1950 DA",
-        "color": "#aaaaaa",
         "order": 144
       }
     }

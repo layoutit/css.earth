@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Lamberta",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.7320569169080615,
       "description": "Explore Lamberta in 3D with its published shape model and radial elevation.",
-      "order": 299,
+      "systemName": "Solar System",
+      "order": 305,
       "context": {
-        "name": "Lamberta",
-        "color": "#aaaaaa",
         "order": 351
       }
     }

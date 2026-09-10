@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Gonggong",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 89.84583026441713,
       "description": "Gonggong is a large, distant trans-Neptunian world with the moon Xiangliu. Its smooth model follows a published thermal size interpretation; the viewing pole and surface detail are illustrative.",
-      "order": 6,
+      "systemName": "Solar System",
+      "order": 12,
       "context": {
-        "name": "Gonggong",
-        "color": "#aaaaaa",
         "order": 433
       }
     }

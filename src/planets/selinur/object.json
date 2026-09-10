@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Selinur",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6116658234603194,
       "description": "Explore Selinur in 3D with its published shape model and documented physical size scale.",
-      "order": 384,
+      "systemName": "Solar System",
+      "order": 390,
       "context": {
-        "name": "Selinur",
-        "color": "#aaaaaa",
         "order": 194
       }
     }

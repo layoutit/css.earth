@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Bienor",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 16.60224445563277,
       "description": "Explore Bienor, a Centaur, with its observation-constrained shape.",
-      "order": 458,
+      "systemName": "Solar System",
+      "order": 464,
       "context": {
-        "name": "Bienor",
-        "color": "#aaaaaa",
         "order": 418
       }
     }

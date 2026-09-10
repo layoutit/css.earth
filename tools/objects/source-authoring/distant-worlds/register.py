@@ -1,9 +1,9 @@
 """Register the batch in individual object and astronomy records."""
 from pathlib import Path
-import json
+import json, sys
 
 ROOT = Path(__file__).resolve().parents[4]
-bodies = json.loads((ROOT / 'tools/objects/source-authoring/distant-worlds/inputs.json').read_text())['bodies']
+bodies = json.loads((ROOT / (sys.argv[1] if len(sys.argv) > 1 else 'tools/objects/source-authoring/distant-worlds/inputs.json')).read_text())['bodies']
 
 def write(path, data):
     text = json.dumps(data, indent=2, ensure_ascii=False) + '\n'

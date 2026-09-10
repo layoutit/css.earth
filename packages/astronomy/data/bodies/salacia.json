@@ -1,7 +1,7 @@
 {
   "id": "salacia",
   "classification": "trans-neptunian",
-  "order": 4,
+  "order": 10,
   "classificationOrder": 6,
   "physical": {
     "name": "Salacia",
@@ -20,7 +20,7 @@
       "ascendingNodeRad": 5.534778119023108,
       "argumentOfPeriapsisRad": 4.659829373387656,
       "meanAnomalyAtEpochRad": 2.3580568295749242,
-      "meanMotionRadPerDay": 0.00006311641453171979
+      "meanMotionRadPerDay": 6.311641453171979e-05
     }
   },
   "asteroidFixture": {

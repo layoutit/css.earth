@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Tantalus",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.2900615327857758,
       "description": "Explore Tantalus, a near-Earth asteroid, through its published shape model.",
-      "order": 122,
+      "systemName": "Solar System",
+      "order": 128,
       "context": {
-        "name": "Tantalus",
-        "color": "#aaaaaa",
         "order": 422
       }
     }

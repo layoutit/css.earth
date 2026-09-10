@@ -128,15 +128,13 @@
     },
     "catalog": {
       "name": "Gaspra",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.21,
       "description": "Explore Gaspra in 3D with cssEarth using archived spacecraft imagery and source-backed shape data.",
-      "order": 125,
+      "systemName": "Solar System",
+      "order": 131,
       "context": {
-        "name": "Gaspra",
-        "color": "#a49c8d",
         "order": 48
       }
     }

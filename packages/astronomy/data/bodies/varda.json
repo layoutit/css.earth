@@ -1,7 +1,7 @@
 {
   "id": "varda",
   "classification": "trans-neptunian",
-  "order": 2,
+  "order": 8,
   "classificationOrder": 8,
   "physical": {
     "name": "Varda",
@@ -20,7 +20,7 @@
       "ascendingNodeRad": 5.6374169650743085,
       "argumentOfPeriapsisRad": 0.7939459475711669,
       "meanAnomalyAtEpochRad": 4.8461340932276835,
-      "meanMotionRadPerDay": 0.000055926452362881894
+      "meanMotionRadPerDay": 5.5926452362881894e-05
     }
   },
   "asteroidFixture": {

@@ -1,7 +1,7 @@
 {
   "id": "gonggong",
   "classification": "trans-neptunian",
-  "order": 6,
+  "order": 12,
   "classificationOrder": 4,
   "physical": {
     "name": "Gonggong",
@@ -20,7 +20,7 @@
       "ascendingNodeRad": 6.028036560563055,
       "argumentOfPeriapsisRad": 3.409665847693465,
       "meanAnomalyAtEpochRad": 1.9507074248787315,
-      "meanMotionRadPerDay": 0.000031461587037553865
+      "meanMotionRadPerDay": 3.1461587037553865e-05
     }
   },
   "asteroidFixture": {

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Siding Spring",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 3.091276774723207,
       "description": "Explore 162P/Siding Spring through a shape approximation based on published lightcurve models.",
-      "order": 69,
+      "systemName": "Solar System",
+      "order": 75,
       "context": {
-        "name": "Siding Spring",
-        "color": "#b8b6b2",
         "order": 302
       }
     }

@@ -123,16 +123,15 @@
     },
     "catalog": {
       "name": "Callisto",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#8b8177",
       "distanceAu": 5.2,
       "description": "Explore Callisto in 3D with cssEarth. Inspect Voyager and Galileo imagery of Jupiter’s heavily cratered moon and its ancient surface.",
-      "order": 423,
+      "systemName": "Solar System",
+      "order": 429,
       "context": {
-        "name": "Callisto",
-        "color": "#918a7c",
-        "order": 17
+        "order": 17,
+        "color": "#918a7c"
       }
     }
   },

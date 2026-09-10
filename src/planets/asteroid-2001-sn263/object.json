@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "2001 SN263 Alpha",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a0a0a0",
       "distanceAu": 1.9869,
       "description": "Explore the primary of 2001 SN263 through its archived radar shape.",
-      "order": 9,
+      "systemName": "Solar System",
+      "order": 15,
       "context": {
-        "name": "2001 SN263 Alpha",
-        "color": "#a0a0a0",
         "order": 460
       }
     }

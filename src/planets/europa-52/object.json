@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "52 Europa",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0951664844463056,
       "description": "Explore 52 Europa in 3D with its published shape model and radial elevation.",
-      "order": 162,
+      "systemName": "Solar System",
+      "order": 168,
       "context": {
-        "name": "52 Europa",
-        "color": "#aaaaaa",
         "order": 99
       }
     }

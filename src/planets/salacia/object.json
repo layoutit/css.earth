@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Salacia",
-      "systemName": "Solar System",
       "classification": "trans-neptunian",
       "color": "#aaaaaa",
       "distanceAu": 45.37159590675732,
       "description": "Salacia is a large, dark Kuiper-belt world with the moon Actaea. Long-term photometry supports a synchronized binary. This grid-covered illustration uses a separately estimated primary size, not a resolved surface.",
-      "order": 4,
+      "systemName": "Solar System",
+      "order": 10,
       "context": {
-        "name": "Salacia",
-        "color": "#aaaaaa",
         "order": 435
       }
     }

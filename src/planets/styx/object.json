@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Styx",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 39.482,
       "description": "Explore Styx through a clearly labeled approximate shape fit.",
-      "order": 450,
+      "systemName": "Solar System",
+      "order": 456,
       "context": {
-        "name": "Styx",
-        "color": "#a0a0a0",
         "order": 122
       }
     }

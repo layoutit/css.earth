@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Hydra",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 39.482,
       "description": "Explore Hydra’s irregular New Horizons shape and northern depression.",
-      "order": 453,
+      "systemName": "Solar System",
+      "order": 459,
       "context": {
-        "name": "Hydra",
-        "color": "#a0a0a0",
         "order": 125
       }
     }

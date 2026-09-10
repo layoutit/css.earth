@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Nereid",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 30.07,
       "description": "Explore Nereid, a moon of Neptune, through its source-backed size model.",
-      "order": 80,
+      "systemName": "Solar System",
+      "order": 86,
       "context": {
-        "name": "Nereid",
-        "color": "#a0a0a0",
         "order": 160
       }
     }

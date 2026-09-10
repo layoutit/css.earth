@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Erigone",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.367053015804557,
       "description": "Explore Erigone in 3D with its published shape model and radial elevation.",
-      "order": 289,
+      "systemName": "Solar System",
+      "order": 295,
       "context": {
-        "name": "Erigone",
-        "color": "#aaaaaa",
         "order": 341
       }
     }

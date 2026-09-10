@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Amalthea",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#b39a85",
       "distanceAu": 5.2,
       "description": "Explore Amalthea with Galileo imagery and its source-backed irregular shape.",
-      "order": 96,
+      "systemName": "Solar System",
+      "order": 102,
       "context": {
-        "name": "Amalthea",
-        "color": "#b39a85",
         "order": 62
       }
     }

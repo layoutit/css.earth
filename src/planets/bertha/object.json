@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Bertha",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1939101574420405,
       "description": "Explore Bertha in 3D with its published shape model and documented physical size scale.",
-      "order": 375,
+      "systemName": "Solar System",
+      "order": 381,
       "context": {
-        "name": "Bertha",
-        "color": "#aaaaaa",
         "order": 185
       }
     }

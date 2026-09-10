@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Hestia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5255592116593393,
       "description": "Explore Hestia in 3D with its published shape model and radial elevation.",
-      "order": 222,
+      "systemName": "Solar System",
+      "order": 228,
       "context": {
-        "name": "Hestia",
-        "color": "#aaaaaa",
         "order": 270
       }
     }

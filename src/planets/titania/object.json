@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Titania",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a8a59e",
       "distanceAu": 19.2,
       "description": "Explore Titania in 3D with cssEarth. Inspect source-backed Voyager imagery of Uranus’s moon and its orbit.",
-      "order": 444,
+      "systemName": "Solar System",
+      "order": 450,
       "context": {
-        "name": "Titania",
-        "color": "#a8a59e",
         "order": 31
       }
     }

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Nix",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 39.482,
       "description": "Explore Nix through the measured New Horizons shape model.",
-      "order": 451,
+      "systemName": "Solar System",
+      "order": 457,
       "context": {
-        "name": "Nix",
-        "color": "#a0a0a0",
         "order": 123
       }
     }

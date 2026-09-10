@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Nemesis",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.750433032034634,
       "description": "Explore Nemesis in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 153,
+      "systemName": "Solar System",
+      "order": 159,
       "context": {
-        "name": "Nemesis",
-        "color": "#aaaaaa",
         "order": 90
       }
     }

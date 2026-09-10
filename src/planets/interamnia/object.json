@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Interamnia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.057028354640983,
       "description": "Explore Interamnia in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 137,
+      "systemName": "Solar System",
+      "order": 143,
       "context": {
-        "name": "Interamnia",
-        "color": "#aaaaaa",
         "order": 74
       }
     }

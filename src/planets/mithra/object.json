@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Mithra",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.2052023543749892,
       "description": "Explore Mithra in 3D with its published radar shape model.",
-      "order": 200,
+      "systemName": "Solar System",
+      "order": 206,
       "context": {
-        "name": "Mithra",
-        "color": "#aaaaaa",
         "order": 156
       }
     }

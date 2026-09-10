@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Urania",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.365562509475688,
       "description": "Explore Urania in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 160,
+      "systemName": "Solar System",
+      "order": 166,
       "context": {
-        "name": "Urania",
-        "color": "#aaaaaa",
         "order": 97
       }
     }

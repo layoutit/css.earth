@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Geographos",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.245645513766084,
       "description": "Explore Geographos in 3D with its published radar shape model.",
-      "order": 198,
+      "systemName": "Solar System",
+      "order": 204,
       "context": {
-        "name": "Geographos",
-        "color": "#aaaaaa",
         "order": 154
       }
     }

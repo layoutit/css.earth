@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Ducrosa",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1255060299245687,
       "description": "Explore Ducrosa in 3D with its published shape model and documented physical size scale.",
-      "order": 379,
+      "systemName": "Solar System",
+      "order": 385,
       "context": {
-        "name": "Ducrosa",
-        "color": "#aaaaaa",
         "order": 189
       }
     }

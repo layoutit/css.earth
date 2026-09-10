@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Toro",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.3678992132175503,
       "description": "Explore Toro, a near-Earth asteroid, through its published shape model.",
-      "order": 120,
+      "systemName": "Solar System",
+      "order": 126,
       "context": {
-        "name": "Toro",
-        "color": "#aaaaaa",
         "order": 420
       }
     }

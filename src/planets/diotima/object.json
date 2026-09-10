@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Diotima",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0693983225273733,
       "description": "Explore Diotima in 3D with its published shape model and radial elevation.",
-      "order": 168,
+      "systemName": "Solar System",
+      "order": 174,
       "context": {
-        "name": "Diotima",
-        "color": "#aaaaaa",
         "order": 105
       }
     }

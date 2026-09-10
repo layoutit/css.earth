@@ -125,15 +125,13 @@
     },
     "catalog": {
       "name": "Haumea",
-      "systemName": "Solar System",
       "classification": "dwarf-planet",
       "color": "#cccccc",
       "distanceAu": 43.1,
       "description": "Explore Haumea’s measured elongated shape and narrow ring, with an illustrative NASA surface texture.",
-      "order": 454,
+      "systemName": "Solar System",
+      "order": 460,
       "context": {
-        "name": "Haumea",
-        "color": "#cccccc",
         "order": 37
       }
     }

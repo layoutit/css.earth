@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "1999 FR33",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.9765894346509167,
       "description": "Explore 1999 FR33 in 3D with its published shape model and documented physical size scale.",
-      "order": 414,
+      "systemName": "Solar System",
+      "order": 420,
       "context": {
-        "name": "1999 FR33",
-        "color": "#aaaaaa",
         "order": 224
       }
     }

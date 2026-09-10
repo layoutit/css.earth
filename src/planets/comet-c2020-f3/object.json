@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "NEOWISE",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 18.5185079289819,
       "description": "C/2020 F3: NEOWISE was discovered by NASA’s infrared survey telescope in March 2020. Within months it became a bright comet visible to observers on Earth. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 63,
+      "systemName": "Solar System",
+      "order": 69,
       "context": {
-        "name": "NEOWISE",
-        "color": "#b8b6b2",
         "order": 458
       }
     }

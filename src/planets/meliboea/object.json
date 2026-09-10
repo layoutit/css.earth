@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Meliboea",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1311603864437165,
       "description": "Explore Meliboea in 3D with its published shape model and radial elevation.",
-      "order": 273,
+      "systemName": "Solar System",
+      "order": 279,
       "context": {
-        "name": "Meliboea",
-        "color": "#aaaaaa",
         "order": 325
       }
     }

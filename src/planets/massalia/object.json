@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Massalia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4079553806420346,
       "description": "Explore Massalia in 3D with its published shape model and documented physical size scale.",
-      "order": 367,
+      "systemName": "Solar System",
+      "order": 373,
       "context": {
-        "name": "Massalia",
-        "color": "#aaaaaa",
         "order": 177
       }
     }

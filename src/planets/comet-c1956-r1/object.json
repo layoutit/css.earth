@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Arend–Roland",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 95.24827628303814,
       "description": "C/1956 R1: Arend–Roland is remembered as the Great Comet of 1957. Its bright appearance came during a close passage around the Sun. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 56,
+      "systemName": "Solar System",
+      "order": 62,
       "context": {
-        "name": "Arend–Roland",
-        "color": "#b8b6b2",
         "order": 451
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Henrietta",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.397844277767737,
       "description": "Explore Henrietta in 3D with its published shape model and radial elevation.",
-      "order": 317,
+      "systemName": "Solar System",
+      "order": 323,
       "context": {
-        "name": "Henrietta",
-        "color": "#aaaaaa",
         "order": 369
       }
     }

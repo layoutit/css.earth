@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Ophelia",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
       "description": "Explore Ophelia, the outer shepherd of Uranus's epsilon ring.",
-      "order": 88,
+      "systemName": "Solar System",
+      "order": 94,
       "context": {
-        "name": "Ophelia",
-        "color": "#a0a0a0",
         "order": 133
       }
     }

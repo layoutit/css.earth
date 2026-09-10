@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Eudora",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.868342551130494,
       "description": "Explore Eudora in 3D with its published shape model and radial elevation.",
-      "order": 314,
+      "systemName": "Solar System",
+      "order": 320,
       "context": {
-        "name": "Eudora",
-        "color": "#aaaaaa",
         "order": 366
       }
     }

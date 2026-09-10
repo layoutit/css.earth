@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Prospero",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 19.2,
       "description": "Explore Prospero, a moon of Uranus, through its lightcurve-constrained shape approximation.",
-      "order": 23,
+      "systemName": "Solar System",
+      "order": 29,
       "context": {
-        "name": "Prospero",
-        "color": "#a0a0a0",
         "order": 247
       }
     }

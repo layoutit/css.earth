@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Schorria",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.9102898161034227,
       "description": "Explore Schorria in 3D with its published shape model and documented physical size scale.",
-      "order": 402,
+      "systemName": "Solar System",
+      "order": 408,
       "context": {
-        "name": "Schorria",
-        "color": "#aaaaaa",
         "order": 212
       }
     }

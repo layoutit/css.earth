@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Tarqeq",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Tarqeq, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 42,
+      "systemName": "Solar System",
+      "order": 48,
       "context": {
-        "name": "Tarqeq",
-        "color": "#a0a0a0",
         "order": 244
       }
     }

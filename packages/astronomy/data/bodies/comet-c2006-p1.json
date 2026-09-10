@@ -1,7 +1,7 @@
 {
   "id": "comet-c2006-p1",
   "classification": "comet",
-  "order": 87,
+  "order": 93,
   "classificationOrder": 27,
   "physical": {
     "name": "C/2006 P1 McNaught",
@@ -21,7 +21,7 @@
       "ascendingNodeRad": 4.7328297002024255,
       "argumentOfPeriapsisRad": 2.309734157185238,
       "meanAnomalyAtEpochRad": 0.0008305464476450197,
-      "meanMotionRadPerDay": 1.1582364971510839e-7
+      "meanMotionRadPerDay": 1.1582364971510839e-07
     }
   },
   "cometFixture": {

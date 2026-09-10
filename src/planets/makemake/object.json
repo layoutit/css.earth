@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Makemake",
-      "systemName": "Solar System",
       "classification": "dwarf-planet",
       "color": "#bfa48b",
       "distanceAu": 45.8,
       "description": "Explore Makemake with an illustrative NASA surface texture and its distant orbit around the Sun.",
-      "order": 455,
+      "systemName": "Solar System",
+      "order": 461,
       "context": {
-        "name": "Makemake",
-        "color": "#bfa48b",
         "order": 38
       }
     }

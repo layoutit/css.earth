@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Niobe",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.754299168249887,
       "description": "Explore Niobe in 3D with its published shape model and radial elevation.",
-      "order": 235,
+      "systemName": "Solar System",
+      "order": 241,
       "context": {
-        "name": "Niobe",
-        "color": "#aaaaaa",
         "order": 283
       }
     }

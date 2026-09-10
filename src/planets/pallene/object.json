@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Pallene",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Pallene with Cassini imagery and its measured shape.",
-      "order": 93,
+      "systemName": "Solar System",
+      "order": 99,
       "context": {
-        "name": "Pallene",
-        "color": "#a0a0a0",
         "order": 128
       }
     }

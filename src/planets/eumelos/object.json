@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Eumelos",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.201650929201143,
       "description": "Explore Eumelos in 3D with its published shape model and radial elevation.",
-      "order": 360,
+      "systemName": "Solar System",
+      "order": 366,
       "context": {
-        "name": "Eumelos",
-        "color": "#aaaaaa",
         "order": 411
       }
     }

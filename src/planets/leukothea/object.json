@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Leukothea",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.0042313558099742,
       "description": "Explore Leukothea in 3D with its published shape model and documented physical size scale.",
-      "order": 370,
+      "systemName": "Solar System",
+      "order": 376,
       "context": {
-        "name": "Leukothea",
-        "color": "#aaaaaa",
         "order": 180
       }
     }

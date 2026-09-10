@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Mundilfari",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Mundilfari, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 29,
+      "systemName": "Solar System",
+      "order": 35,
       "context": {
-        "name": "Mundilfari",
-        "color": "#a0a0a0",
         "order": 231
       }
     }

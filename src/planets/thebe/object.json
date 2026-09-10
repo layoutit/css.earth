@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Thebe",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#9f9287",
       "distanceAu": 5.2,
       "description": "Explore Thebe with Galileo imagery and its source-backed irregular shape.",
-      "order": 97,
+      "systemName": "Solar System",
+      "order": 103,
       "context": {
-        "name": "Thebe",
-        "color": "#9f9287",
         "order": 63
       }
     }

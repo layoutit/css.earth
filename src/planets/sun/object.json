@@ -147,12 +147,12 @@
     },
     "catalog": {
       "name": "Sun",
-      "systemName": "Solar System",
       "classification": "star",
       "color": "#f5a623",
       "distanceAu": 0,
       "description": "Explore the Sun in 3D with cssEarth. Discover our nearest star, its glowing atmosphere, and the science behind the center of the solar system.",
-      "order": 110
+      "systemName": "Solar System",
+      "order": 116
     }
   },
   "schema": "cssearth-object@1",

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Fornjot",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Fornjot, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 36,
+      "systemName": "Solar System",
+      "order": 42,
       "context": {
-        "name": "Fornjot",
-        "color": "#a0a0a0",
         "order": 238
       }
     }

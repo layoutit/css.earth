@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Hopi",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.153358490702003,
       "description": "Explore Hopi in 3D with its published shape model and documented physical size scale.",
-      "order": 407,
+      "systemName": "Solar System",
+      "order": 413,
       "context": {
-        "name": "Hopi",
-        "color": "#aaaaaa",
         "order": 217
       }
     }

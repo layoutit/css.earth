@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Augusta",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.194929996448645,
       "description": "Explore Augusta in 3D with its published shape model and radial elevation.",
-      "order": 333,
+      "systemName": "Solar System",
+      "order": 339,
       "context": {
-        "name": "Augusta",
-        "color": "#aaaaaa",
         "order": 385
       }
     }

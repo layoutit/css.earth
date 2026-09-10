@@ -128,15 +128,13 @@
     },
     "catalog": {
       "name": "Eros",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.458,
       "description": "Explore Eros in 3D with cssEarth using mission-derived shape and surface data.",
-      "order": 123,
+      "systemName": "Solar System",
+      "order": 129,
       "context": {
-        "name": "Eros",
-        "color": "#a49c8d",
         "order": 7
       }
     }

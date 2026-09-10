@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Brunhild",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.6955168441339983,
       "description": "Explore Brunhild in 3D with its published shape model and radial elevation.",
-      "order": 265,
+      "systemName": "Solar System",
+      "order": 271,
       "context": {
-        "name": "Brunhild",
-        "color": "#aaaaaa",
         "order": 316
       }
     }

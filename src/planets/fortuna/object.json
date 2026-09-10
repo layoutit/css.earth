@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Fortuna",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4414298428674326,
       "description": "Explore Fortuna in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 143,
+      "systemName": "Solar System",
+      "order": 149,
       "context": {
-        "name": "Fortuna",
-        "color": "#aaaaaa",
         "order": 80
       }
     }

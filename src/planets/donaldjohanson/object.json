@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Donaldjohanson",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.3839407716914627,
       "description": "Explore Donaldjohanson in 3D with its published Lucy shape model.",
-      "order": 197,
+      "systemName": "Solar System",
+      "order": 203,
       "context": {
-        "name": "Donaldjohanson",
-        "color": "#aaaaaa",
         "order": 146
       }
     }

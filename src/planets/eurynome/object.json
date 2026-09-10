@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Eurynome",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.4443553139909806,
       "description": "Explore Eurynome in 3D with its published shape model and radial elevation.",
-      "order": 240,
+      "systemName": "Solar System",
+      "order": 246,
       "context": {
-        "name": "Eurynome",
-        "color": "#aaaaaa",
         "order": 288
       }
     }

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Shoemaker–Levy 2",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 4.525635799109316,
       "description": "Explore 137P/Shoemaker–Levy 2 through a shape approximation based on published lightcurve models.",
-      "order": 67,
+      "systemName": "Solar System",
+      "order": 73,
       "context": {
-        "name": "Shoemaker–Levy 2",
-        "color": "#b8b6b2",
         "order": 300
       }
     }

@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Tarvos",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Tarvos, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 26,
+      "systemName": "Solar System",
+      "order": 32,
       "context": {
-        "name": "Tarvos",
-        "color": "#a0a0a0",
         "order": 228
       }
     }

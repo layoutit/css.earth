@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Diomedes",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.229240298100407,
       "description": "Explore Diomedes in 3D with its published shape model and radial elevation.",
-      "order": 356,
+      "systemName": "Solar System",
+      "order": 362,
       "context": {
-        "name": "Diomedes",
-        "color": "#aaaaaa",
         "order": 407
       }
     }

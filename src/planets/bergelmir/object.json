@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Bergelmir",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 9.58,
       "description": "Explore Bergelmir, a moon of Saturn, through its lightcurve-constrained shape approximation.",
-      "order": 34,
+      "systemName": "Solar System",
+      "order": 40,
       "context": {
-        "name": "Bergelmir",
-        "color": "#a0a0a0",
         "order": 236
       }
     }

@@ -140,15 +140,13 @@
     },
     "catalog": {
       "name": "Tethys",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#bcbbae",
       "distanceAu": 9.58,
       "description": "Explore Tethys in 3D with cssEarth. Inspect Cassini imagery and elevation maps of Saturn’s icy moon, Odysseus crater, and Ithaca Chasma.",
-      "order": 434,
+      "systemName": "Solar System",
+      "order": 440,
       "context": {
-        "name": "Tethys",
-        "color": "#bcbbae",
         "order": 21
       }
     }

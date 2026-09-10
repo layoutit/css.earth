@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Lycomedes",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.0677482891717345,
       "description": "Explore Lycomedes in 3D with its published shape model and radial elevation.",
-      "order": 361,
+      "systemName": "Solar System",
+      "order": 367,
       "context": {
-        "name": "Lycomedes",
-        "color": "#aaaaaa",
         "order": 412
       }
     }

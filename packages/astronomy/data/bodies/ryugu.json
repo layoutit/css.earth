@@ -1,13 +1,13 @@
 {
   "id": "ryugu",
   "classification": "asteroid",
-  "order": 111,
+  "order": 117,
   "classificationOrder": 4,
   "physical": {
     "name": "Ryugu",
     "horizonsCode": "162173;",
     "meanRadiusKm": 0.448,
-    "gravitationalParameterKm3PerS2": 3e-8,
+    "gravitationalParameterKm3PerS2": 3e-08,
     "parent": "sun"
   },
   "physicalNotes": "Body-owned Horizons physical blocks, retrieved 2026-09-07.",

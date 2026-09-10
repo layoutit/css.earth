@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Rusthawelia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.173103931458051,
       "description": "Explore Rusthawelia in 3D with its published shape model and documented physical size scale.",
-      "order": 401,
+      "systemName": "Solar System",
+      "order": 407,
       "context": {
-        "name": "Rusthawelia",
-        "color": "#aaaaaa",
         "order": 211
       }
     }

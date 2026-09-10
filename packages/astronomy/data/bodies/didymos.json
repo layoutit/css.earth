@@ -1,13 +1,13 @@
 {
   "id": "didymos",
   "classification": "asteroid",
-  "order": 117,
+  "order": 123,
   "classificationOrder": 10,
   "physical": {
     "name": "Didymos",
     "horizonsCode": "65803;",
     "meanRadiusKm": 0.365,
-    "gravitationalParameterKm3PerS2": 3.51278e-8,
+    "gravitationalParameterKm3PerS2": 3.51278e-08,
     "parent": "sun"
   },
   "physicalNotes": "DART s547 GM and released encounter-mesh reference radii; body source records.",

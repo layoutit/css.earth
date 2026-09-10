@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Bernardinelli–Bernstein",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 13.653451901646743,
       "description": "C/2014 UN271: Bernardinelli–Bernstein has an exceptionally large nucleus. ALMA detected carbon monoxide escaping while the comet was still more than 16 AU from the Sun. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 62,
+      "systemName": "Solar System",
+      "order": 68,
       "context": {
-        "name": "Bernardinelli–Bernstein",
-        "color": "#b8b6b2",
         "order": 457
       }
     }

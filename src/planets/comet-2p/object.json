@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Encke",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 2.217736510492418,
       "description": "Explore 2P/Encke through a shape approximation constrained by radar observations.",
-      "order": 65,
+      "systemName": "Solar System",
+      "order": 71,
       "context": {
-        "name": "Encke",
-        "color": "#b8b6b2",
         "order": 405
       }
     }

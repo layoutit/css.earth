@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Grigg–Skjellerup",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 4.942382761297321,
       "description": "26P: Grigg–Skjellerup was Giotto’s second comet encounter. The spacecraft passed about 200 km from its nucleus in July 1992, six years after visiting Halley. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 47,
+      "systemName": "Solar System",
+      "order": 53,
       "context": {
-        "name": "Grigg–Skjellerup",
-        "color": "#b8b6b2",
         "order": 442
       }
     }

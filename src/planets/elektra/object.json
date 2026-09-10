@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Elektra",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.126562817910036,
       "description": "Explore Elektra in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 147,
+      "systemName": "Solar System",
+      "order": 153,
       "context": {
-        "name": "Elektra",
-        "color": "#aaaaaa",
         "order": 84
       }
     }

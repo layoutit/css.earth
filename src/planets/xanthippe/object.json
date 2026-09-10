@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Xanthippe",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.732385125710907,
       "description": "Explore Xanthippe in 3D with its published shape model and radial elevation.",
-      "order": 283,
+      "systemName": "Solar System",
+      "order": 289,
       "context": {
-        "name": "Xanthippe",
-        "color": "#aaaaaa",
         "order": 335
       }
     }

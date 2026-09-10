@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "2002 CE26 Primary",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.232934797602879,
       "description": "Explore 2002 CE26 Primary in 3D with its published radar shape model.",
-      "order": 209,
+      "systemName": "Solar System",
+      "order": 215,
       "context": {
-        "name": "2002 CE26 Primary",
-        "color": "#aaaaaa",
         "order": 175
       }
     }

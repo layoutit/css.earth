@@ -128,15 +128,13 @@
     },
     "catalog": {
       "name": "Vesta",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 2.36,
       "description": "Explore Vesta with Dawn imagery and its measured terrain, giant impact basins, and rocky surface.",
-      "order": 415,
+      "systemName": "Solar System",
+      "order": 421,
       "context": {
-        "name": "Vesta",
-        "color": "#a49c8d",
         "order": 11
       }
     }

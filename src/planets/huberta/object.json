@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Huberta",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.453696095317234,
       "description": "Explore Huberta in 3D with its published shape model and radial elevation.",
-      "order": 336,
+      "systemName": "Solar System",
+      "order": 342,
       "context": {
-        "name": "Huberta",
-        "color": "#aaaaaa",
         "order": 388
       }
     }

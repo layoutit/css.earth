@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Sylvia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.4930585312343174,
       "description": "Explore Sylvia in 3D with its published VLT/SPHERE shape model and radial elevation.",
-      "order": 139,
+      "systemName": "Solar System",
+      "order": 145,
       "context": {
-        "name": "Sylvia",
-        "color": "#aaaaaa",
         "order": 76
       }
     }

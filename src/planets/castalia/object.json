@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Castalia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.0631100842717316,
       "description": "Explore Castalia in 3D with its published shape model and radial elevation.",
-      "order": 176,
+      "systemName": "Solar System",
+      "order": 182,
       "context": {
-        "name": "Castalia",
-        "color": "#aaaaaa",
         "order": 113
       }
     }

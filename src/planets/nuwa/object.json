@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Nuwa",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.9879264955692397,
       "description": "Explore Nuwa in 3D with its published shape model and radial elevation.",
-      "order": 280,
+      "systemName": "Solar System",
+      "order": 286,
       "context": {
-        "name": "Nuwa",
-        "color": "#aaaaaa",
         "order": 332
       }
     }

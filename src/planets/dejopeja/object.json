@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Dejopeja",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1906659584251518,
       "description": "Explore Dejopeja in 3D with its published shape model and radial elevation.",
-      "order": 298,
+      "systemName": "Solar System",
+      "order": 304,
       "context": {
-        "name": "Dejopeja",
-        "color": "#aaaaaa",
         "order": 350
       }
     }

@@ -1,13 +1,13 @@
 {
   "id": "asteroid-2002-ce26",
   "classification": "asteroid",
-  "order": 197,
+  "order": 203,
   "classificationOrder": 89,
   "physical": {
     "name": "2002 CE26 Primary",
     "horizonsCode": "276049;",
     "meanRadiusKm": 1.73,
-    "gravitationalParameterKm3PerS2": 0.0000013014885,
+    "gravitationalParameterKm3PerS2": 1.3014885e-06,
     "parent": "sun"
   },
   "physicalNotes": "Published radar-model scales; use a documented primary mass where available.",

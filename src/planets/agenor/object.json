@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Agenor",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.217218141628041,
       "description": "Explore Agenor in 3D with its published shape model and radial elevation.",
-      "order": 364,
+      "systemName": "Solar System",
+      "order": 370,
       "context": {
-        "name": "Agenor",
-        "color": "#aaaaaa",
         "order": 415
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "YORP",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.0059143954320515,
       "description": "Explore YORP in 3D with its published radar shape model.",
-      "order": 203,
+      "systemName": "Solar System",
+      "order": 209,
       "context": {
-        "name": "YORP",
-        "color": "#aaaaaa",
         "order": 159
       }
     }

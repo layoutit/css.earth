@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Eurykleia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.878679745406444,
       "description": "Explore Eurykleia in 3D with its published shape model and radial elevation.",
-      "order": 303,
+      "systemName": "Solar System",
+      "order": 309,
       "context": {
-        "name": "Eurykleia",
-        "color": "#aaaaaa",
         "order": 355
       }
     }

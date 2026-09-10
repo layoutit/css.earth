@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Badenia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.13175476216037,
       "description": "Explore Badenia in 3D with its published shape model and documented physical size scale.",
-      "order": 378,
+      "systemName": "Solar System",
+      "order": 384,
       "context": {
-        "name": "Badenia",
-        "color": "#aaaaaa",
         "order": 188
       }
     }

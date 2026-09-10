@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Adelheid",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.118003623819272,
       "description": "Explore Adelheid in 3D with its published shape model and radial elevation.",
-      "order": 345,
+      "systemName": "Solar System",
+      "order": 351,
       "context": {
-        "name": "Adelheid",
-        "color": "#aaaaaa",
         "order": 397
       }
     }

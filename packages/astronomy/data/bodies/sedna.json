@@ -1,7 +1,7 @@
 {
   "id": "sedna",
   "classification": "trans-neptunian",
-  "order": 7,
+  "order": 13,
   "classificationOrder": 3,
   "physical": {
     "name": "Sedna",
@@ -20,7 +20,7 @@
       "ascendingNodeRad": 0.4722750345171308,
       "argumentOfPeriapsisRad": 1.2217455166886813,
       "meanAnomalyAtEpochRad": 6.258572312121306,
-      "meanMotionRadPerDay": 0.0000013674037370357132
+      "meanMotionRadPerDay": 1.3674037370357132e-06
     }
   },
   "asteroidFixture": {

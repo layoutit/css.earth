@@ -120,15 +120,13 @@
     },
     "catalog": {
       "name": "Eris",
-      "systemName": "Solar System",
       "classification": "dwarf-planet",
       "color": "#ddd6cf",
       "distanceAu": 67.78,
       "description": "Explore Eris with an illustrative NASA texture on its occultation-constrained spherical shape.",
-      "order": 456,
+      "systemName": "Solar System",
+      "order": 462,
       "context": {
-        "name": "Eris",
-        "color": "#ddd6cf",
         "order": 39
       }
     }

@@ -123,15 +123,13 @@
     },
     "catalog": {
       "name": "Lutetia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.435,
       "description": "Explore Lutetia with its Rosetta shape model and source-derived elevation.",
-      "order": 127,
+      "systemName": "Solar System",
+      "order": 133,
       "context": {
-        "name": "Lutetia",
-        "color": "#aaaaaa",
         "order": 50
       }
     }

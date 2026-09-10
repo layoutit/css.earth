@@ -164,15 +164,13 @@
     },
     "catalog": {
       "name": "Mercury",
-      "systemName": "Solar System",
       "classification": "planet",
       "color": "#9d9388",
       "distanceAu": 0.39,
       "description": "Explore Mercury in 3D with cssEarth. Inspect the smallest planet, its cratered surface, and the extreme conditions closest to the Sun.",
-      "order": 111,
+      "systemName": "Solar System",
+      "order": 117,
       "context": {
-        "name": "Mercury",
-        "color": "#9d9388",
         "order": 0
       }
     }

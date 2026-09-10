@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Hermione",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.458050151729624,
       "description": "Explore Hermione in 3D with its published shape model and radial elevation.",
-      "order": 167,
+      "systemName": "Solar System",
+      "order": 173,
       "context": {
-        "name": "Hermione",
-        "color": "#aaaaaa",
         "order": 104
       }
     }

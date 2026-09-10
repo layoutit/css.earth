@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Althaea",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.5814366871947056,
       "description": "Explore Althaea in 3D with its published shape model and radial elevation.",
-      "order": 262,
+      "systemName": "Solar System",
+      "order": 268,
       "context": {
-        "name": "Althaea",
-        "color": "#aaaaaa",
         "order": 313
       }
     }

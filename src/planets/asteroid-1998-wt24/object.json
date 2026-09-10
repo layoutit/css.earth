@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "1998 WT24",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 0.7186940115527254,
       "description": "Explore 1998 WT24 in 3D with its published shape model and radial elevation.",
-      "order": 177,
+      "systemName": "Solar System",
+      "order": 183,
       "context": {
-        "name": "1998 WT24",
-        "color": "#aaaaaa",
         "order": 114
       }
     }

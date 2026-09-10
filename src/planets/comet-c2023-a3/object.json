@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Tsuchinshan–ATLAS",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 8.346468275204865,
       "description": "C/2023 A3: Tsuchinshan–ATLAS became a bright evening comet in October 2024. Its tail stretched across SOHO’s field of view as it passed near the Sun. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 64,
+      "systemName": "Solar System",
+      "order": 70,
       "context": {
-        "name": "Tsuchinshan–ATLAS",
-        "color": "#b8b6b2",
         "order": 459
       }
     }

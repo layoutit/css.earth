@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "Squannit",
-      "systemName": "Solar System",
       "classification": "satellite",
       "color": "#a0a0a0",
       "distanceAu": 0.642,
       "description": "Explore Squannit, the companion of Moshup, through its radar-derived shape model.",
-      "order": 18,
+      "systemName": "Solar System",
+      "order": 24,
       "context": {
-        "name": "Squannit",
-        "color": "#a0a0a0",
         "order": 250
       }
     }

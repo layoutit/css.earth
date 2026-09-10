@@ -115,15 +115,13 @@
     },
     "catalog": {
       "name": "McNaught",
-      "systemName": "Solar System",
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 40.6783719290027,
       "description": "C/2006 P1: McNaught became exceptionally bright during its January 2007 passage around the Sun. JPL lists it among history’s great comets. Illustrative nucleus at Celestia’s catalog scale.",
-      "order": 60,
+      "systemName": "Solar System",
+      "order": 66,
       "context": {
-        "name": "McNaught",
-        "color": "#b8b6b2",
         "order": 455
       }
     }

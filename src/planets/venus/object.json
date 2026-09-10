@@ -158,15 +158,13 @@
     },
     "catalog": {
       "name": "Venus",
-      "systemName": "Solar System",
       "classification": "planet",
       "color": "#d6aa69",
       "distanceAu": 0.72,
       "description": "Explore Venus in 3D with cssEarth. Look beneath its clouds, discover its volcanic surface, and learn about the hottest planet in our solar system.",
-      "order": 112,
+      "systemName": "Solar System",
+      "order": 118,
       "context": {
-        "name": "Venus",
-        "color": "#d6aa69",
         "order": 1
       }
     }

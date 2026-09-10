@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Mentor",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 5.197909787831412,
       "description": "Explore Mentor in 3D with its published shape model and radial elevation.",
-      "order": 365,
+      "systemName": "Solar System",
+      "order": 371,
       "context": {
-        "name": "Mentor",
-        "color": "#aaaaaa",
         "order": 416
       }
     }

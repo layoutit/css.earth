@@ -123,15 +123,13 @@
     },
     "catalog": {
       "name": "Itokawa",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#a49c8d",
       "distanceAu": 1.323,
       "description": "Explore Itokawa in 3D with cssEarth using mission-derived shape and surface data.",
-      "order": 118,
+      "systemName": "Solar System",
+      "order": 124,
       "context": {
-        "name": "Itokawa",
-        "color": "#a49c8d",
         "order": 8
       }
     }

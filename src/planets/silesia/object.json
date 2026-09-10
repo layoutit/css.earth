@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Silesia",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 3.1183254802109865,
       "description": "Explore Silesia in 3D with its published shape model and radial elevation.",
-      "order": 334,
+      "systemName": "Solar System",
+      "order": 340,
       "context": {
-        "name": "Silesia",
-        "color": "#aaaaaa",
         "order": 386
       }
     }

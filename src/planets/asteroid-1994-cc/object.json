@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "1994 CC Alpha",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.637667637945242,
       "description": "Explore 1994 CC Alpha in 3D with its published shape model and radial elevation.",
-      "order": 178,
+      "systemName": "Solar System",
+      "order": 184,
       "context": {
-        "name": "1994 CC Alpha",
-        "color": "#aaaaaa",
         "order": 115
       }
     }

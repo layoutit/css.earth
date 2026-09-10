@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Dike",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.662672838262387,
       "description": "Explore Dike in 3D with its published shape model and documented physical size scale.",
-      "order": 366,
+      "systemName": "Solar System",
+      "order": 372,
       "context": {
-        "name": "Dike",
-        "color": "#aaaaaa",
         "order": 176
       }
     }

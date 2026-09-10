@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Raup",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 1.9862246368080674,
       "description": "Explore Raup in 3D with its published shape model and documented physical size scale.",
-      "order": 412,
+      "systemName": "Solar System",
+      "order": 418,
       "context": {
-        "name": "Raup",
-        "color": "#aaaaaa",
         "order": 222
       }
     }

@@ -118,15 +118,13 @@
     },
     "catalog": {
       "name": "Alphonsina",
-      "systemName": "Solar System",
       "classification": "asteroid",
       "color": "#aaaaaa",
       "distanceAu": 2.700987827703556,
       "description": "Explore Alphonsina in 3D with its published shape model and radial elevation.",
-      "order": 181,
+      "systemName": "Solar System",
+      "order": 187,
       "context": {
-        "name": "Alphonsina",
-        "color": "#aaaaaa",
         "order": 118
       }
     }
