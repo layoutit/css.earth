@@ -8,7 +8,7 @@ both Abergel and Stooke. Retain the product identity and those credits with
 derived geometry. This is publicly distributed scientific archive data; no
 blanket ESA image licence is asserted for the numerical table.
 
-Neutral gray material and display orientation are cssEarth visualization choices
+The gray surface grid and display orientation are cssEarth visualization choices
 under the repository MIT licence. The material is not measured albedo.
 
 Ephemeris: NASA/JPL Horizons; exact queries and raw responses accompany the
@@ -21,6 +21,7 @@ Giotto photography: © Max Planck Institute for Solar System Research (MPS),
 permits educational use with MPS attribution. Commercial use requires permission.
 This credit and these terms also apply to the cropped/projected photography,
 its thumbnails and prepared atlases; those image portions are not relicensed MIT.
+The source-outline comparison and browser evidence images retain these credits.
 The original composite retains dust contamination and illumination.
 
 Encounter geometry: Giotto HMC and Vega TVS teams, International Halley Watch,

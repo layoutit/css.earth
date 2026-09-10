@@ -1,0 +1,17 @@
+✔ every actual profile reads its recorded coordinates from the shared camera endpoint (455.081833ms)
+✔ coordinate field selection is immutable reporting data, with no private camera implementation (0.354708ms)
+✔ restoring a complete camera observation preserves yaw and the pitch alias (0.656167ms)
+✔ camera reporting rejects missing, repeated and unsupported coordinates (0.221458ms)
+✔ an already ready object does not depend on a redundant browser waiter (169.394958ms)
+✔ a missing or loading object still requires successful readiness before returning (1.290833ms)
+✔ the actual Saturn profile observes one exclusive lens and rejects the former dual selection (3.188708ms)
+✔ derives every root planet lane from the validated catalog (260.687834ms)
+✔ loads object-owned browser and audit expectations for every implementation (205.755542ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 752.518125

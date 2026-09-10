@@ -20,11 +20,17 @@
 - Camera orientation is derived before fitting image scale and centre. Of 64 manually transcribed catalogue outline points, 42 fit those three image-plane parameters and 22 are held out. Held-out distance to the projected full-mesh silhouette is **0.211 km RMS, 0.456 km maximum**, within the source's stated 0.5–1 km absolute shape uncertainty. This checks silhouette consistency; it does not independently establish individual feature coordinates.
 - The source projection tests reproduce the checked-in PNG and validity bytes, preserve valid dark pixels, and check the concave footprint boundary. Object preparation retains the same 1,000-face shape.
 
+- At `a575940f1`, [18 focused checks](evidence/focused-tests.log), [strict TypeScript checks](evidence/typecheck.log), [nine selected Chrome conformance cases](evidence/conformance-final.log), and [retained DOM checks at DPR 1 and 2](evidence/dom-cleanliness.log) passed. The conformance selection covers desktop/mobile, both datasets, density, and competing/reacquired dataset loads. Unselected cases are not claimed as passes. Halley's final runtime ownership audit also passed.
+- A separate checkout [installed all 34 published files with no reused assets](evidence/delivery-assets.log), totaling 7,342,374 bytes. All nine new raw photographic/geometry inputs were separately restored into an empty temporary source directory and matched their pinned hashes. Installation size is not a cold-page transfer estimate.
+- [Production captures and request records](evidence/production-browser.json) use those independently downloaded Halley assets with the built shared shell. [Giotto at DPR 1](evidence/giotto-dpr-1.webp), [DPR 2](evidence/giotto-dpr-2.webp), and the [historical grid view](evidence/model-dpr-1.webp) show actual browser output with Shadows off. [The source-outline comparison](evidence/source-outline.webp) shows the fixed model silhouette in blue and held-out outline controls in red on MPS figure 67. Its yellow historical axis annotation was not used. The source and browser views have different cameras; this is not a pixel-parity comparison.
+
 - The [pinned candidate manifest](source/reference/giotto-hmc-intake.json) and [intake report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/HALLEY-GIOTTO.md) retain a reproducible seven-frame survey from the original PDS SBN release, including its separate FITS geometry headers.
 
 - Qualification is recorded in [HALLEY.md](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/HALLEY.md).
 
 ## Known problems
+
+- Aggregate repository tests are not green. [A check against main's own Git blobs](evidence/main-baseline.log) reproduces the Sun's mismatched physical-frame source receipt and confirms that the tracked SN263 orbit verification script is absent from its upstream manifest. The full shell navigation regeneration was stopped after about 12 minutes; that aggregate check is incomplete. Earlier profile failures occurred during an intermediate edit; [profile validation](evidence/browser-profile-contract.log) and [the affected profile/orchestration checks](evidence/profile-recheck.log) passed after the final edit. These limits do not replace the passing Halley checks above.
 
 - This is a highly uncertain historical inverse shape model. The label estimates absolute uncertainty of about 500–1,000 m, relative point-to-point uncertainty around 100 m, and warns that facets and depressions may be exaggerated.
 

@@ -1,0 +1,75 @@
+{
+  "revision": "a575940f168d71201cb0d54b0ec3c1a5b797fadd",
+  "browser": "Installed Google Chrome, headless",
+  "runtimeInventorySha256": "33de57cd5dbdcc1668a703ed16f2ea568197b3354c519046979b73c0b67f6408",
+  "delivery": "Production build with Halley runtime files copied from an independent 34-file R2 installation; shared shell from the production build.",
+  "reports": [
+    {
+      "dpr": 1,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": {
+        "url": "http://127.0.0.1:53137/comet-1p/?v=MEZAN0hiu_YEyUFCxzNAAAAAP5-IzRO5zBM_rdenegGHRD_d1TELiShKAAA",
+        "shadows": false,
+        "lens": "giotto",
+        "sceneCount": 1,
+        "leaves": 124436,
+        "unloadedImages": 0
+      },
+      "errors": [],
+      "coldRequests": 894,
+      "observedHttpResponses": {
+        "cold": 894,
+        "incrementalGiotto": 1,
+        "coldResponseBodyBytes": 74979752,
+        "incrementalGiottoResponseBodyBytes": 103826,
+        "scope": "Browser-context response events, including shared shell and object JSON; local HTTP server without compression. Not a production-CDN performance estimate."
+      },
+      "giottoRequests": [
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "requestBodySize": 0,
+          "requestHeadersSize": 709,
+          "responseBodySize": 103826,
+          "responseHeadersSize": 190
+        }
+      ]
+    },
+    {
+      "dpr": 2,
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "state": {
+        "url": "http://127.0.0.1:53137/comet-1p/?v=MEZAN0hiu_YEyUFCxzNAAAAAP5-IzRO5zBM_rdenegGHRD_d1TELiShKAAA",
+        "shadows": false,
+        "lens": "giotto",
+        "sceneCount": 1,
+        "leaves": 124436,
+        "unloadedImages": 0
+      },
+      "errors": [],
+      "coldRequests": 894,
+      "observedHttpResponses": {
+        "cold": 894,
+        "incrementalGiotto": 1,
+        "coldResponseBodyBytes": 74979752,
+        "incrementalGiottoResponseBodyBytes": 103826,
+        "scope": "Browser-context response events, including shared shell and object JSON; local HTTP server without compression. Not a production-CDN performance estimate."
+      },
+      "giottoRequests": [
+        {
+          "url": "http://127.0.0.1:53137/scenes/comet-1p/comet-1p-giotto-surface@2x.webp",
+          "requestBodySize": 0,
+          "requestHeadersSize": 709,
+          "responseBodySize": 103826,
+          "responseHeadersSize": 190
+        }
+      ]
+    }
+  ],
+  "originalNetworkReport": "production-network.json.gz"
+}
