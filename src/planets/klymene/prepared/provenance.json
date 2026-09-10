@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "klymene",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "298fb33cfe8c6a0aef0141be406b0b90f4ab8c5925c4ec95902a3cc7818e2716"
+    "sha256": "c963da5ece76337645a64a34d4a61c54ea44597ec0021c0a57377397ec2952a8"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "f1d26036f42cd12a1a45edb1d953d4b064b85c83474b898368bfde1a6b5ac7cc",
       "bytes": 80439,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "92f23d55111a7a338be3d5997e265121d04a98bbbaad97e87d5daf670281a4ec",
       "bytes": 9635,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/klymene/klymene-elevation-thumbnail.webp",
           "bytes": 5118,
           "sha256": "c51fd9b51eefccbfa80447471c0243b5af612d0b1f4192f134b55a77fa4748e9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klymene/klymene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klymene/klymene-elevation-surface@2x.webp",
           "bytes": 311888,
           "sha256": "65cc043cb01939801b5a15f4040654fd78d54003456d78acf663ec0945d8739c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/klymene/klymene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klymene/klymene-shape-surface@2x.webp",
           "bytes": 267436,
           "sha256": "f7213f81388c19a5561f74aa46d62555489b7678aa4517bfbd1e9828e18dec38",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

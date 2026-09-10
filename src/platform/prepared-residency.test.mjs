@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createPreparedResidency } from '../renderers/css/dist/testing.js';
-import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mts';
 const definitions=Object.fromEntries(await Promise.all(['mercury','mars','jupiter','earth','uranus','saturn'].map(async id=>[id,await loadObjectTestDefinition(id)])));
 const assetUrl=(definition,key)=>{const asset=definition.assets.entries.find(entry=>entry.key===key);assert.ok(asset,`Actual prepared resource ${key} is missing`);return asset.url;};
 

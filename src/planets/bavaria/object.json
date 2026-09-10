@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ba68655328f0e7b5974125c025608a0a0d2acbe6d95073a2191140b55a24cac8"
+          "sha256": "b7006a5479bd56e465ee0c90e08037fb86fb3c88a9bd33c01e3fda82813e79cf"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9837bd7517320b7ec565d974c5fbdd2658ef382fefb72a65a9c982179c17a95d"
+        "sha256": "7fb5f1943bddcb0703fcd4a27afd171e54421bd31278afe5e4804efbe356b3d2"
+      }
+    },
+    "catalog": {
+      "name": "Bavaria",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7267724486531284,
+      "description": "Explore Bavaria in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 354,
+      "context": {
+        "order": 400
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "99d699188775e0ffec52537f75be6bd76ea4a05234815ace4eb19f3de7e059ff"
+    "sha256": "359ab8679da882656289d8c10fb62e1dc73a2892861f775855be3c6487430144"
   }
 }

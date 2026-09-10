@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "susi",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "70fe3e2d52565f51a31b68e50391274777e81a07eb1dbed3d5e010268cb5545a"
+    "sha256": "5153c00e1d2abb3c7aed1e85725451d53756ea2181f632a594291227eb93e0b9"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {

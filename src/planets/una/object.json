@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "4460c9a955a126649e1677098a3eb92f8c8b1da311a17aac9f3046cfb49dc9c2"
+          "sha256": "53cfbfe1f3975a7e56187c21a8c51fcad67b46322913a2b6f6a162fd979b0507"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fbb96288dbe250337f2fe59aa1967dd442835d41a2476ec7b0fd63b9d21e0761"
+        "sha256": "3462313b24f66c31bc5d9352079b52bc0216eced6fff036a29d074ae28bdb8fe"
+      }
+    },
+    "catalog": {
+      "name": "Una",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.728272185210906,
+      "description": "Explore Una in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 292,
+      "context": {
+        "order": 338
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c2b1f66a6a51709b435958480a198a752987aaaa90e9f86874cacb2b5e6db3a7"
+    "sha256": "4780201a9e76b9f58d1a6ab6fa84649234c4d095595c712afcc619e6b08e89b6"
   }
 }

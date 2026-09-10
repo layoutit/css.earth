@@ -39,10 +39,14 @@
       "expectedBytes": 80613890,
       "expectedSha256": "4a874809e0a33a851cd026b8e4647f5875ed15807e677d413812367509564b00",
       "capture": {
-        "spacecraftIds": [
-          "new-horizons"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
+          }
+        ]
       }
     },
     {
@@ -120,10 +124,14 @@
       "expectedBytes": 161176369,
       "expectedSha256": "4496de98a9b682fd3440da616ef7f5adfbc315b438e4d18833ae3a843eb41bcc",
       "capture": {
-        "spacecraftIds": [
-          "new-horizons"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Charon_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
+          }
+        ]
       }
     },
     {

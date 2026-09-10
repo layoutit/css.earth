@@ -1,0 +1,13 @@
+{
+  "main": "6cf08ae06e28624ec548cdf54b2a33c0d5d5c27e",
+  "arrokoth": {
+    "sha256": "d1d03ee1ef860d14db6b6c61b5a9d9f15c324262c0345d76ec0a5f520a7e9d70",
+    "scope": "Main default lens and all non-marker runtime fields retained; only marker bindings and serialized transport hashes refreshed."
+  },
+  "moonFilesCompared": 147,
+  "moonsUnchanged": [
+    "dactyl",
+    "dinkinesh",
+    "selam"
+  ]
+}

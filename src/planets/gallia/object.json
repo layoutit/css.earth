@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "884078718654bfc94f53e186bf8c74c59a6ec52d0e6e886dc75ac40561a88897"
+          "sha256": "70583e34644c355c6daaf2fa0912479e799a91bfd290ebc182e788561a77f543"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7677ea4a8cf159b9132f8f7726f6234b05550163e7e6f9fe7e3cb2e071e53dee"
+        "sha256": "60e88740c5488d433f4611f010d077e61ed8add0f320d582bacfcf7bf5c1b3ac"
+      }
+    },
+    "catalog": {
+      "name": "Gallia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7707071057503048,
+      "description": "Explore Gallia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 284,
+      "context": {
+        "order": 330
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7c17c59c37bd4fde76237ffdb6701d32ac44f553b37e7831e9a37e99a28762ef"
+    "sha256": "e25ad91868d8a86a1be4f25583550edce0190e400d04778f5589d5d4b01c35ba"
   }
 }

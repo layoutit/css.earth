@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e4059dabb817bb71f8f60a5096a97531a452309c6de3b9de4dd413b9f10e94ac"
+        "sha256": "4a8865634dc965fd20bf5e4062f6c129b4c5bd007b2cdfe9fd09274b1dabd4f8"
+      }
+    },
+    "catalog": {
+      "name": "Klytia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6653201228884313,
+      "description": "Explore Klytia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 243,
+      "context": {
+        "order": 285
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "1654af399b67036b9234457fe5d29d1e50987f29d1586e951827d897fcfd263c"
+    "sha256": "f5e8b84856f69306795604331e9630a84adb4f0edbc961318ee7705657cead3e"
   }
 }

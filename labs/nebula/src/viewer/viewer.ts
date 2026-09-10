@@ -12,7 +12,7 @@ import { mountPreparedLmcStars, parsePreparedLmcStars } from '../stars/lmc-stars
 import type { CloudStarOptions, CloudStarContext } from '../components/cloud-star-controls';
 import { mountReconstructionOverlay } from './reconstruction-overlay';
 import { validateCloudDensityFilter, type CloudDensityFilter } from '../density/cloud-density';
-import * as runtimePolicy from '../../../../site/runtime-policy.mjs';
+import * as runtimePolicy from '../../../../site/runtime-policy.mts';
 import { createObjectInteractionControls } from '../../../../src/renderers/css/navigation/object-interaction-controls';
 import { worldCameraFromCenteredPresentation } from '../../../../src/renderers/css/navigation/world-camera';
 import { worldRotationFromQuaternion } from '../../../../src/renderers/css/navigation/world-camera-math';

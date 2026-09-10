@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "fd2d959e5b2c091e92906c563fbc030eaaa3453ce38fa4a83ea9a204ff217bba"
+        "sha256": "f93672f27ed1b38b0515c9b3f53c4efcd714019797d202d6642fd5c2da82cd76"
+      }
+    },
+    "catalog": {
+      "name": "Hekate",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0905910748647547,
+      "description": "Explore Hekate in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 196,
+      "context": {
+        "order": 139
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "904dbaf660e636658eae072b5e76b2c6094aa0c2c8a27246f4f54ed0c59c2ea8"
+    "sha256": "9c0ea27cf8b83d984b8ad68851bc1a8018199a1057746c78dcff15e31f6773b7"
   }
 }

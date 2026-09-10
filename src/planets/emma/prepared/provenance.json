@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "emma",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fae0d6a0c5c5df54782c0098a7aa85f260e68220b671b98b47049b4fd86a8822"
+    "sha256": "d4dc62faa4af08cd9f32ec9ce5b3259c2360d10e5b0b5604b8e8e7530548cef1"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "69317058f905f986f877add7e2e51a6ff8c3870852a334e4551d8cfd0311a5a2",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "55a10d9c145c92fb744dd6d7595f8704ac116567e197e815362e72a8be5449ca",
       "bytes": 8658,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/emma/emma-elevation-thumbnail.webp",
           "bytes": 4958,
           "sha256": "6acd763292c13a385f51b9d694a65f8525621a413a897ea3f5fc553e47cc0e8e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/emma/emma-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/emma/emma-elevation-surface@2x.webp",
           "bytes": 267976,
           "sha256": "12576a515de674f6699eecb91faddda8e0eb9ce49334142365b795d96bc6e872",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/emma/emma-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/emma/emma-shape-surface@2x.webp",
           "bytes": 198414,
           "sha256": "e3b2fc83f341278ce287cab295c292ca00b2cbabccadf83e91e6c15666f7b306",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

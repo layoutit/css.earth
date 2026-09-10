@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-10",
+  "id": "asteroid-2002-tx300",
+  "name": "2002 TX300",
+  "horizons": "55636;",
+  "distanceAu": 43.528810315844204,
+  "fullAxesKm": [
+    363,
+    363,
+    289
+  ],
+  "radiusKm": 168.21847903786332,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "About 8.15 hours; arbitrary phase",
+  "population": "Haumea-family trans-Neptunian object",
+  "classification": "trans-neptunian",
+  "shapeLabel": "Conditional occultation-shape illustration",
+  "source": "https://doi.org/10.1051/0004-6361/201732564",
+  "credit": "Vilenius et al. (2018), A&A 618, A136, §3.3 and Table 6.",
+  "papers": [
+    "https://doi.org/10.1051/0004-6361/201732564"
+  ],
+  "shapeMeaning": "The adopted example projected ellipse is 363 × 289 km from the published timing-error reanalysis, with effective diameter 323 (+95/−37) km. This axisymmetric illustration assumes 363 km equatorial depth. The original two chords do not uniquely determine the shape; an old 286 km circular fit is not treated as definitive.",
+  "orientationMeaning": "Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement.",
+  "introduction": "2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.",
+  "survey": [
+    "Selected: Vilenius (2018) reanalysis and its conditional a/c≈1.3 ellipsoidal example.",
+    "The old 2010 circular fit was affected by a timing offset; the selected publication retains broad size uncertainty.",
+    "Water-ice spectral evidence and high albedo describe unresolved surface composition, not a spatially resolved ice map. The standard grid remains."
+  ],
+  "references": [
+    {
+      "file": "tx300-vilenius-2018.pdf",
+      "url": "https://arxiv.org/pdf/1904.06333",
+      "sha256": "294601d107c3dcb9bbe8d8f193e63d2ae12eed4ae4349590a7c35099a8c3a130",
+      "bytes": 535526,
+      "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+      "licenseEvidence": [
+        "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "extraction": "§3.3 PDF p. 9: example major 363, minor 289 km; effective 323(+95,-37) km. Table 3 period 8.152 h."
+    }
+  ]
+}

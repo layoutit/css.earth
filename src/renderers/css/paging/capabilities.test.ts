@@ -1,6 +1,6 @@
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { preparedPagingFixture as runtime } from './prepared-page-fixture.mjs';
+import { preparedPagingFixture as runtime } from './__fixtures__/prepared-page.mts';
 import { parsePreparedPagePlan } from './capabilities';
 
 test('source-backed paged surface and noise plans retain every prepared field, including metadata stubs', () => {

@@ -1,12 +1,14 @@
 ---
+import type { PlanetTitle, Fact } from '../planet-shell-types';
+interface Props { objectId: string; title: PlanetTitle; introduction?: string; facts?: Fact[]; moreFacts?: Fact[]; }
 import '../body-overview.css';
 import PlanetCardHeader from './PlanetCardHeader.astro';
 import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
 import PlanetObjectResult from './PlanetObjectResult.astro';
 import PlanetFactsheet from './PlanetFactsheet.astro';
-import { PLANET_SEARCH_OBJECTS } from '../planet-search-objects.mjs';
+import { PLANET_SEARCH_OBJECTS } from '../planet-search-objects.mts';
 import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
-import { prepareBodyOverview } from '../prepare-body-overview.mjs';
+import { prepareBodyOverview } from '../prepare-body-overview.mts';
 
 const { objectId, title, introduction, facts = [], moreFacts = [] } = Astro.props;
 const overview = await prepareBodyOverview(objectId);

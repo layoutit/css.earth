@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "sophrosyne",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9b2c653e0e03a3a377c971c5a84fac2774a109fda521aec622a422f5c030b5f5"
+    "sha256": "c8282d3d16a15e869c4ba8e2d4f1791ceec0b356e36aa47e4a38666e57813952"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "3878aec42eda2f64254bc260a3c0497632f037da3e447fd65082822521883492",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "26ce99f8768cf9b629e273114c2123acb2ae0353a616e250445d1e34e5f11883",
       "bytes": 12200,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/sophrosyne/sophrosyne-elevation-thumbnail.webp",
           "bytes": 5058,
           "sha256": "7514119a5aadb2c01295ef17dee2c5393b25b81857e40b6213b97d5d663ddf5d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sophrosyne/sophrosyne-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sophrosyne/sophrosyne-elevation-surface@2x.webp",
           "bytes": 273182,
           "sha256": "fa90acbc368c2d375763b3aa581212f057bf1333435e26061df3eae1bfb2c112",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/sophrosyne/sophrosyne-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sophrosyne/sophrosyne-shape-surface@2x.webp",
           "bytes": 216470,
           "sha256": "d2e39365124b2011839a19776e0e6378be3e048c156aca012a915e1ed83e62b2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -22,6 +22,15 @@ const circularish: KeplerianElements = {
 }
 
 describe("Kepler's equation", () => {
+  it('brackets the near-parabolic NEOWISE input if Newton does not converge', () => {
+    // A real comet intake regression. The monotonic residual proves the
+    // returned anomaly solves this input rather than returning a stalled step.
+    const m = 0.004628836966509339, eccentricity = 0.9992850366164265
+    for (const meanAnomaly of [m, -m]) {
+      const anomaly = solveKeplerEccentricAnomalyRad(meanAnomaly, eccentricity)
+      expect(Math.abs(anomaly - eccentricity * Math.sin(anomaly) - normalizeAngleRad(meanAnomaly))).toBeLessThanOrEqual(1e-14)
+    }
+  })
   it('satisfies M = E - e sin E across the whole elliptic range', () => {
     // The invariant, not a table of answers: for every (M, e) the solver claims
     // to handle, put its answer back into the equation. 2320 cases, including

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "xanthippe",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "645f29c1104a9ebb080acde596e24f9241f7b33d3991b88ff855d5adfbeff8f8"
+    "sha256": "b8243c8055e7d7d82e83eed463ef94a3345d04c3c3a9c7fd9af24745a2eaa72e"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "422ea5874855df00a405ee696a57cf05421b5b30f4118f016eed543675e3855a",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "028ab222647e5a0f870ced06324967b86805398df0866bfe4338cb26081a97b4",
       "bytes": 11314,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/xanthippe/xanthippe-elevation-thumbnail.webp",
           "bytes": 5262,
           "sha256": "2da4bb12912a651e0cecac1df968c884bb363cef2370aa85612c219d3c935bb0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/xanthippe/xanthippe-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/xanthippe/xanthippe-elevation-surface@2x.webp",
           "bytes": 263372,
           "sha256": "a233bc87136e8bf331088d1882b7015420b003acb06cfd9e1375d39a5589f6d6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/xanthippe/xanthippe-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/xanthippe/xanthippe-shape-surface@2x.webp",
           "bytes": 232462,
           "sha256": "85f04fdb239696039493045ed10711f1725a21b92c29dd4798a10cf00e381289",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

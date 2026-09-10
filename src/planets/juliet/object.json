@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6f035255997e4c96d1f47600991be8a41a358947e22b1d00436af94c306d88d9"
+        "sha256": "b8babade9ea92fa0c831a5ea895a8d8d4dced51c174188c3b322eb75f745ea49"
+      }
+    },
+    "catalog": {
+      "name": "Juliet",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 19.2,
+      "description": "Explore Juliet through its published prolate shape model.",
+      "systemName": "Solar System",
+      "order": 97,
+      "context": {
+        "order": 130
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "86bab423d6497a7db09d1046a7e053e8baa284ff897a607935c0c244f82b982f"
+    "sha256": "ae3deea4184b56d2ecbc6e3144b32d460248151c33e0dca3201663e9d5277f00"
   }
 }

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "neptune",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aa7ea97ce3cce09d895689531697de68358130c11afa5f8bbe41c418d49a3cb8"
+    "sha256": "fa485562067c99697c0286565297df4c9c55ca3ad9e6b6c9e86b601948f565e6"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -1033,10 +1033,14 @@
       "redistribution": "prepared derivative with OPAL and STScI credit",
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8",
       "bytes": 789926,
@@ -1093,10 +1097,14 @@
       "redistribution": "prepared false-colour derivative with source credit",
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "b1ad52870f9fdcf36cde019705209005d07f927ab99ea00305f36ebe36967a1b",
       "bytes": 1045440,
@@ -1126,10 +1134,14 @@
       "redistribution": "prepared false-colour derivative with source credit",
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "7373c6c3daf3ace7cf1576596ed0480659cb03c255893b71629d282fe7291b4c",
       "bytes": 1045440,

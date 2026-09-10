@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "7a05d1f3799ab6bcc918c5414baa7e49944767c2be3ce22d884c842ec0617220"
+          "sha256": "9d5a1b93583f30ac2384bde0c234e7beebf2a55a95a3fd2b8238e467801bc4e4"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "e67c96c34f4bfd9f028373128ff05a3350e751c4bdb76932e35572e44207f6ef"
+          "sha256": "ab8dcf2f950402c597b09a937a84ace1057dce7ced99726e1035f473eac81fca"
         },
         {
           "id": "title",
@@ -88,7 +88,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ddbcd7f51e1c91c669ac8289fd0aa6f3e2e20827779ecd3ebbfa9d163646e6c6"
+        "sha256": "a50e95e08b334566de6cc45b5ea1a60aaa4d08077100434ddb53c89461b3ffc5"
       }
     },
     "worldFrame": {
@@ -117,11 +117,24 @@
       ],
       "metersPerUnit": 43.25217391304348,
       "bodyRadiusM": 9948
+    },
+    "catalog": {
+      "name": "Arrokoth",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 44.05655144131418,
+      "description": "Explore its published shape and source constraints.",
+      "systemName": "Solar System",
+      "order": 357,
+      "context": {
+        "order": 423,
+        "color": "#9d9388"
+      }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "30c5a7b3770f0cf052ee8486b371b3d06b8e0297525fde50757a65118ad3e940"
+    "sha256": "31951bac7eda8cced5a0ecd59a412cba117fab46e88ed1dd30474ecfecea583b"
   }
 }

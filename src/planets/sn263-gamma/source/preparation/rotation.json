@@ -1,0 +1,12 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 67.81021605848582,
+  "declinationDegrees": -73.18097403705876,
+  "periodHours": 16.4,
+  "phase": "arbitrary-display-phase",
+  "displayMeridianDegrees": 0,
+  "source": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591pole.tab",
+  "coordinateSystem": "ICRF/J2000; converted from published ecliptic J2000 pole",
+  "qualification": "Archive assumes the primary pole for this moon; it is not an independent pole measurement. Display meridian is arbitrary.",
+  "periodQualification": "The archive assumes the rotation period equals the orbital period; it is not an independent spin measurement."
+}

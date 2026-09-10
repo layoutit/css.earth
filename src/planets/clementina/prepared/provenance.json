@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "clementina",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "bb77762728894fd9cfc28732b51fb826faf05001c59b8dac06797e53aa775b0f"
+    "sha256": "db620df3fef52422888065162d6983b506696d498f7794f90da9f7531d49e313"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "15e30ddcead93addfefb8473a689b601d549eab3710abf227abce3b7761d2be4",
       "bytes": 44799,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "d1fdb173614699215b5f568416e86db1639b96fa0f2c1b813e56f3c3ac4ade76",
       "bytes": 11701,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/clementina/clementina-elevation-thumbnail.webp",
           "bytes": 5846,
           "sha256": "9ae3229f5e4f62e143af4dd6ad22344e1436d32cd5924d083626186606122ddf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/clementina/clementina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/clementina/clementina-elevation-surface@2x.webp",
           "bytes": 335526,
           "sha256": "d4ff784419c5e098dfdaeab8fb0a06c69900c155f2ef91d3b8b00f1788bca1c6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/clementina/clementina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/clementina/clementina-shape-surface@2x.webp",
           "bytes": 241738,
           "sha256": "3aec4aad0c81a91a362ed2ea2044c191b3d41253eb9f19dcaecc5c0653c619f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "laurentia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cfeb7488fad04f240b4b11be5da299dd4b760e606f1eb97207232ed91c92c963"
+    "sha256": "1f54dee2d6c4eca6de0de72227191abf9024d73556354f5094b54e497ebade97"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "cf67b568322176e7a97e90964912e0100a8e9a552dfd757c9eac2686078cb864",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "0b65e66665945d4cb89ad1e0ba150b69cc5f60e9323710883436bbb785e9666b",
       "bytes": 10912,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/laurentia/laurentia-elevation-thumbnail.webp",
           "bytes": 5684,
           "sha256": "015fffab99f8c8596b34addad9e50d42c7ff68d0c38b31f4839ff27d78d2b842",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/laurentia/laurentia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/laurentia/laurentia-elevation-surface@2x.webp",
           "bytes": 283012,
           "sha256": "21c4583a5cbf24c4d65b352dd9210f0951e72633ff770f70eeba6e65e49a9662",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/laurentia/laurentia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/laurentia/laurentia-shape-surface@2x.webp",
           "bytes": 231756,
           "sha256": "6637c6b79f3f1480cbe9151bf0ba832aad5c5547990dfe4b75f5fbdd15354aed",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

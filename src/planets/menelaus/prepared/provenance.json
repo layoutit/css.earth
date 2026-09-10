@@ -1,21 +1,21 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "menelaus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6b80368b6f7bea6fc668b85f07c9856c5ad405791c4501b16f0f658751f8b938"
+    "sha256": "bbccd3f17780f67b9cc0537724217ebc64e595ba976ed88b94008fa7a9211572"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "85004536ecf5f4ab80e74b421ed4f709872e8499048d782f54f419247863e0cb",
+      "sha256": "d2d8f70a3df90838e1798d2dcb939658a174e54f5435c5a395073c1cee4f908d",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 21.358,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.5451141704821482
           },
           "mapUrl": "/scenes/menelaus/menelaus-shape-surface@2x.webp",
           "polesUrl": "/scenes/menelaus/menelaus-shape-surface@2x.webp",
@@ -149,7 +150,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "476d60e5dcc6a2e922a9a8790ca34415d27361c41eb5ba35d2290cd3c669fbae",
+      "sha256": "5cef419c68954f6ac897c1137fdcf24a6a573dccb3a54174469009e62520a63c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,7 +223,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "DAMIT model"
             },
             {
               "id": "elevation",
@@ -354,7 +355,7 @@
       "sha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -376,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "476d60e5dcc6a2e922a9a8790ca34415d27361c41eb5ba35d2290cd3c669fbae",
-      "bytes": 11198,
+      "sha256": "5cef419c68954f6ac897c1137fdcf24a6a573dccb3a54174469009e62520a63c",
+      "bytes": 11164,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +413,19 @@
           "url": "/scenes/menelaus/menelaus-elevation-thumbnail.webp",
           "bytes": 4688,
           "sha256": "02aa7c63fe588bf751d6cd7aec666c5a9c1cf765f77848b0e0f0d1bb117731df",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-surface@2x.webp",
           "bytes": 258420,
           "sha256": "d7643837e56267dfbd453439e34ccb3ce79670e6825ddc2cdbf6454819341cef",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +457,13 @@
           "url": "/scenes/menelaus/menelaus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/menelaus/menelaus-shape-surface@2x.webp",
           "bytes": 189398,
           "sha256": "56e5c7670b0579a22743dd0912f0fbb7eec5176e436470ed0970c2180cf48f42",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

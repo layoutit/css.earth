@@ -1,0 +1,386 @@
+{
+  "schema": "cssearth-object-provenance@2",
+  "objectId": "sn263-gamma",
+  "basis": "recovered",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "d42f63f999820d5af344d2e7b2128275e1acda095fcaaf6882fac7949aacf75f"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "2d26521525bf9814004c434d411e9ad75f73b527e416ef0b11581ff6a7f5309b",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "sn263-gamma",
+        "displayName": "2001 SN263 Gamma",
+        "publicBase": "/scenes/sn263-gamma/",
+        "distanceAu": 1.9869,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "shapeViews": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "consumer": "shape"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 0.2242032362372403,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": -45,
+            "framingScale": 0.8026401586924221
+          },
+          "mapUrl": "/scenes/sn263-gamma/sn263-gamma-shape-surface@2x.webp",
+          "polesUrl": "/scenes/sn263-gamma/sn263-gamma-shape-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/a153591gamma.tab",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 1148,
+              "expectedFaces": 2292
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "primitive": "u",
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 10,
+              "regularize": false
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured. Published radar and light-curve shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative."
+        },
+        "presentation": {
+          "defaultLens": "shape",
+          "pointColor": [
+            160,
+            160,
+            160
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "03dce908df25238e7dfd73bcae5ba829233366bc63cce6cca2e88d7ace02f45e",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "sn263-gamma",
+        "displayName": "2001 SN263 Gamma",
+        "panel": {
+          "introduction": "2001 SN263 Gamma is the smaller, inner moon of the triple asteroid system 2001 SN263. Published radar shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative. Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured.",
+          "facts": [
+            {
+              "id": "parent",
+              "label": "Orbits",
+              "value": "2001 SN263 Alpha"
+            },
+            {
+              "id": "diameter",
+              "label": "Estimated diameter",
+              "value": "0.43 ± 0.14 km"
+            },
+            {
+              "id": "shape",
+              "label": "Shape evidence",
+              "value": "Radar"
+            },
+            {
+              "id": "rotation",
+              "label": "Rotation period",
+              "value": "16.4 hours (assumed synchronous)"
+            }
+          ],
+          "moreFacts": [
+            {
+              "id": "shape-epoch",
+              "label": "Observations",
+              "value": "January–March 2008"
+            },
+            {
+              "id": "shape-scale",
+              "label": "Model extents",
+              "value": "0.555 × 0.431 × 0.422 km"
+            },
+            {
+              "id": "phase",
+              "label": "Orientation",
+              "value": "Assumed pole · illustrative spin phase"
+            },
+            {
+              "id": "orbit-limit",
+              "label": "Position",
+              "value": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured."
+            }
+          ]
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "labels": {
+            "shape": "Shape"
+          },
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "detail": "Radar",
+              "title": "Radar shape",
+              "description": "Published radar shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative.",
+              "thumbnail": "/scenes/sn263-gamma/sn263-gamma-shape-thumbnail.webp",
+              "surface": "sn263-gamma-shape-surface@2x.webp",
+              "poles": "sn263-gamma-shape-poles@2x.webp",
+              "source": {
+                "id": "radar-shape",
+                "path": "../manifest.json",
+                "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab"
+              }
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": true
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "PDS shape archive",
+            "role": "surface",
+            "description": "Original component mesh, pole and rotation tables",
+            "href": "https://sbn.psi.edu/pds/resource/shape153591.html"
+          },
+          {
+            "label": "Becker et al. (2015)",
+            "role": "facts",
+            "description": "Shape reconstruction and physical measurements",
+            "href": "https://doi.org/10.1016/j.icarus.2014.10.048"
+          },
+          {
+            "label": "Fang et al. (2011)",
+            "role": "facts",
+            "description": "Mutual orbits and dynamical limits",
+            "href": "https://arxiv.org/abs/1012.2154"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab",
+            "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "radar-shape",
+      "path": "shape/a153591gamma.tab",
+      "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab",
+      "release": "urn:nasa:pds:gbo.ast-153591.radar.shape-model::1.0",
+      "product": "urn:nasa:pds:gbo.ast-153591.radar.shape-model:data:a153591gamma_tab::1.0",
+      "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams",
+      "license": "NASA PDS archived scientific data; retain citation and attribution. See NOTICE.md.",
+      "acquisition": "Restore the unmodified PDS file through source/preparation/acquisition.json.",
+      "redistribution": "Attributed NASA PDS scientific data; retain archive citation and model limits.",
+      "coverage": "Published radar and light-curve shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative.",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "units": "kilometers",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "referenceRadiusMeters": 224.2032362372403
+      },
+      "sha256": "d792dca903b3b557e97b22c00f788a5000847a0cfe251b43250b275859429f31",
+      "bytes": 144480,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "shape/a153591gamma.tab",
+        "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591gamma.tab"
+      },
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source metadata, numerical interpretation or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source metadata, numerical interpretation or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "03dce908df25238e7dfd73bcae5ba829233366bc63cce6cca2e88d7ace02f45e",
+      "bytes": 4412,
+      "dependencies": [],
+      "verification": "manifest-pin",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Published radar shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "radar-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/sn263-gamma/sn263-gamma-shape-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "asset-manifest-pin"
+        },
+        {
+          "url": "/scenes/sn263-gamma/sn263-gamma-shape-surface@2x.webp",
+          "bytes": 72864,
+          "sha256": "e96c493d54ee79d62d4410cdb2bc66e5820802515ded5cf8c34b5ab9b41ab9cf",
+          "verification": "asset-manifest-pin"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 12917,
+          "sha256": "bb47acd5d62dd26d6a54bad4575b41078c8e58cc8e746dff3e7cee2d1e5674e3",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

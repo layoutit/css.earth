@@ -12,9 +12,11 @@
 
 The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-The [asteroid validation report](../../../docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 64.137 m, maximum 145.139 m. These are sampled distances, not exhaustive geometric bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
 
@@ -42,6 +44,8 @@ Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z
 The record gives diameter 52 km, period 8.75033 h and ecliptic J2000 pole (138°, 14°). The original mesh has measured volume-equivalent radius 26.000000 km and Cartesian extents 56.455 × 65.095 × 46.709 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
 
 The selected model is explicitly marked preferred by DAMIT. Its alternative pole is preserved in the catalog survey but is not mixed with the chosen mesh and spin record.
+
+- [Ďurech et al. (2011), Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes](https://ui.adsabs.harvard.edu/abs/2011Icar..214..652D) — selected model publication.
 
 </details>
 

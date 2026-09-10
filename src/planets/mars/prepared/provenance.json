@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "mars",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5c8d96dfe69d773de8d51bea9e9562def1301bead241471c458a09d1299296aa"
+    "sha256": "c8ac2a146613a1322fa1e2205fc30c2b881b88e5ef5bed82903e8e1a0acb8745"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -627,10 +627,14 @@
       "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
       "redistribution": "checked government data product without logos",
       "capture": {
-        "spacecraftIds": [
-          "viking"
-        ],
-        "evidence": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Viking orbiters",
+            "evidence": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg",
+            "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
+          }
+        ]
       },
       "sha256": "fdfcd335559c3dc67052b7e8a9565d850e336ac0d1f3ea7f5eb7826ffb44ecb2",
       "bytes": 36708552,
@@ -658,10 +662,14 @@
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
       "capture": {
-        "spacecraftIds": [
-          "mars-global-surveyor"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "mars-global-surveyor",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}",
+            "missionId": "mars-global-surveyor"
+          }
+        ]
       },
       "sha256": "25a0b3ade0d01fc28bb04e452ed8780f023d9ac76092d60d47be81b7f6af9e2d",
       "bytes": 18716720,
@@ -689,8 +697,8 @@
     {
       "path": "preparation/ellipsoid.json",
       "purpose": "Authored source-informed capability preparation recipe.",
-      "id": "authored-document:preparation/ellipsoid.json",
       "kind": "authored-document",
+      "id": "authored-document:preparation/ellipsoid.json",
       "origin": "object:source/preparation/ellipsoid.json",
       "title": "Authored source-informed capability preparation recipe.",
       "credit": "cssEarth contributors",
@@ -706,8 +714,8 @@
     {
       "path": "preparation/atmosphere.json",
       "purpose": "Authored source-informed capability preparation recipe.",
-      "id": "authored-document:preparation/atmosphere.json",
       "kind": "authored-document",
+      "id": "authored-document:preparation/atmosphere.json",
       "origin": "object:source/preparation/atmosphere.json",
       "title": "Authored source-informed capability preparation recipe.",
       "credit": "cssEarth contributors",
@@ -732,10 +740,14 @@
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
       "capture": {
-        "spacecraftIds": [
-          "odyssey"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "odyssey",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}",
+            "missionId": "odyssey"
+          }
+        ]
       },
       "sha256": "e31b41a6e44547f882b86ca1c8c12efe80a1c4b320d06a7aee41304eb74387d1",
       "bytes": 7267744,

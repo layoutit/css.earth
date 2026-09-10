@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from './observed-pds4.mjs';
+import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from './observed-pds4.mts';
 
 // This test reads only the small pinned label, never an ignored image.
 const label = readFileSync(new URL('../../../src/planets/charon/source/observations/nh_charon_color_mosaic.lblx', import.meta.url), 'utf8');

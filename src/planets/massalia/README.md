@@ -15,9 +15,11 @@ Alí-Lagoa et al. (2020), Table 2, fit Herschel/PACS measurements to a SAGE mode
 
 The transfer is an **approximation**: ±2 km is the uncertainty of the published SAGE fit, not a complete uncertainty on this mesh. Additional model-transfer error has not been quantified.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-The [massalia validation record](../../../docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
+The [massalia validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
 
 An independent sum using triangle normals reproduces the intake volume and calibrated diameter. All source edges have two opposite incidents, the Euler characteristic is two, and no source triangle has zero area. These intake checks establish file and scale consistency; they are not visual or runtime qualification.
 

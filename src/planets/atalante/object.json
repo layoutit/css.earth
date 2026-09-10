@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "f2006826b46f348796bb7982da4673d479f9061e259547eeb61cf4c827f88fa9"
+        "sha256": "38aac3b678faa571ecf9f2f25d4ecfcf19eeba72621b89e9387d0a9484c005f1"
+      }
+    },
+    "catalog": {
+      "name": "Atalante",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.74471241247624,
+      "description": "Explore Atalante in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 223,
+      "context": {
+        "order": 265
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "41167fcd16e01262c62ed0891df0af2de92d2b759e9f9b2c74fd4b61bf8d977e"
+    "sha256": "3726b9f3ef0fa3388fb06c5c66ecce7002cc1e8b7ad3904c092b1f4c5558a014"
   }
 }

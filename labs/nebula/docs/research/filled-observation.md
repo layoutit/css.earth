@@ -4,7 +4,7 @@
 
 This laboratory experiment keeps the photograph's calibrated angular placement and uses the stellar simulation as a depth prior. It is a visual reconstruction, not a measurement of gas geometry. The native SMASH image is the first input; the algorithms contain no LMC-specific branches.
 
-- [Cloud reconstruction](http://127.0.0.1:4331/?subject=lmc-clouds&tab=reconstruction) and [broad-depth cloud control](http://127.0.0.1:4331/?subject=lmc-clouds-broad&tab=reconstruction) use the same extended-light target and observer. Compact candidates and the diffuse remainder are excluded from this pair and remain available as [compact](../../models/lmc/clouds-observation/source/compact.png) and [diffuse](../../models/lmc/clouds-observation/source/diffuse.png) preparation panels.
+- [Cloud reconstruction](http://127.0.0.1:4331/?subject=lmc-clouds&tab=reconstruction) and [broad-depth cloud control](http://127.0.0.1:4331/?subject=lmc-clouds-broad&tab=reconstruction) use the same extended-light target and observer. Compact candidates and the diffuse remainder are excluded from this pair and remain available as [compact](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/clouds-observation/source/compact.png) and [diffuse](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/clouds-observation/source/diffuse.png) preparation panels.
 - [Full-photo diagnostic](http://127.0.0.1:4331/?subject=lmc-filled&tab=reconstruction) retains the earlier diffuse-plus-extended target. Its rectangular photographic background and side-view aliasing failed the visual gate; it is preserved as evidence, not presented as an accepted cloud.
 
 ## Evidence and method
@@ -33,7 +33,7 @@ The limit is three fix/review rounds and two final cleanup rounds. A persistent 
 
 **The reusable pipeline is implemented; this SMASH candidate is rejected for production morphology.** The three-round experiment stops here. The photographed edge remains visible and some oblique views still resemble a thick sheet, with sampling streaks. Finer baking and a prior-derived inclination did not resolve those structural limitations.
 
-Inspect the frozen [front](../../models/lmc/clouds/review/front.png), [oblique](../../models/lmc/clouds/review/y-plus-60.png), and [edge](../../models/lmc/clouds/review/edge-y.png) captures. The [assessment](../../models/lmc/clouds/review/assessment.json) separates established registration/projection properties from unverified gas geometry.
+Inspect the frozen [front](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/clouds/review/front.png), [oblique](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/clouds/review/y-plus-60.png), and [edge](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/clouds/review/edge-y.png) captures. The [assessment](../../models/lmc/clouds/review/assessment.json) separates established registration/projection properties from unverified gas geometry.
 
 The extended target retains 68.0% of the decomposition's display signal, not a measured gas-light fraction. Its finite and broad-depth controls each use 416 prepared textures, totaling 2.41 MB and 2.01 MB. Maximum tested observer-ray channel error before texture encoding is below 0.00009 for both. These numerical checks do not override the failed visual gate.
 

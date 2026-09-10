@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ebebfae8671d7f684806253669c1a4ced25c0feb3cea29ee73a60d2c342dae43"
+        "sha256": "7cc642b43b6da3de035f5dc016cd9b73a0802fe432736ce6de81ac624abaa3b6"
+      }
+    },
+    "catalog": {
+      "name": "Calypso",
+      "classification": "satellite",
+      "color": "#c3bfb7",
+      "distanceAu": 9.58,
+      "description": "Explore Calypso in 3D with Cassini imagery and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 113,
+      "context": {
+        "order": 54
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5a2ec8aefdffe1b10abe729dbd51d8e932cf90e6bbfcf92e1300a9ad8a7b24b0"
+    "sha256": "c6d0671d7bb75c84973700a22957c06c4b0b5ced0eea10c5d60daf9d734651d0"
   }
 }

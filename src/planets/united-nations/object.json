@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "39c0daad55e5c54bc82eb7d2f89d685b3e3207ce395f291863ebee1446fc1336"
+        "sha256": "a2f1f0b42d6a6fa80f651583471ce82ae3f3722dfeb0aecd0ea540225586185e"
+      }
+    },
+    "catalog": {
+      "name": "United Nations",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.603483726490706,
+      "description": "Explore United Nations in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 416,
+      "context": {
+        "order": 220
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "207e1418f405fc146c700fb2e0e4e32f6c765d99c285cdd7a2a2a0b01fde92af"
+    "sha256": "59fe0209911a928b0b8763c004e99345c538c45729a8b77095604c4bd5dbaac3"
   }
 }

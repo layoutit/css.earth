@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { mkdtemp, readFile, rm, stat, utimes } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { writePreparedText } from './write-prepared-text.mjs';
+import { writePreparedText } from './write-prepared-text.mts';
 
 test('unchanged prepared publication preserves mtime and only changed bytes are written', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-write-'));

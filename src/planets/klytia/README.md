@@ -15,7 +15,7 @@ Convex light-curve shape with thermophysical volume-equivalent diameter 45.4 ± 
 
 ## Evidence
 
-The [klytia results](../../../docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **135.35 m**. This is a sampled comparison, not an exhaustive error bound.
+The [klytia results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/main-belt-asteroids/summary.json) record a maximum sampled source-to-display distance of **135.35 m**. This is a sampled comparison, not an exhaustive error bound.
 
 The report includes 2 browser cases tied to recorded body assets. It does not identify the tested code revision.
 
@@ -43,10 +43,12 @@ No unit-volume assumption or independent topography claim is made. The original 
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/142) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/299/shape.txt) — included unchanged. Convex light-curve inversion; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
-- [A. Marciniak (2008)](https://damit.cuni.cz/projects/damit/references/view/115) — original model publication record.
-- [Hanuš (2011)](https://damit.cuni.cz/projects/damit/references/view/141) — original model publication record.
+- [A. Marciniak (2008), Photometry and models of selected main belt asteroids. V. 73 Klytia, 377 Campania, and 378 Holmia](https://ui.adsabs.harvard.edu/abs/2008A%26A...478..559M) — original model publication record.
+- [Hanuš (2011), A study of asteroid pole-latitude distribution based on an extended set of shape models derived by the lightcurve inversion method](https://ui.adsabs.harvard.edu/abs/2011A%26A...530A.134H) — original model publication record.
 - [AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — excluded from physical scaling because the shape-aware VS-TPM fit is available. Its fitted nonrotating-sphere diameter is 45.51 ± 0.52 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented.
 - [Hanuš et al. 2017](https://arxiv.org/abs/1702.01996), [Viikinkoski et al. 2017](https://arxiv.org/abs/1708.05191), and [Vernazza et al. 2021](https://damit.cuni.cz/projects/damit/references/view/660) — resolved-model releases surveyed; when present in this target’s archive they are preferred over an older convex model. Their disk images constrain geometry but are not registered global reflectance mosaics.
 - [Hanuš et al. 2018](https://arxiv.org/abs/1803.06116) and [occultation dimensions](https://www.asteroidoccultation.com/observations/Asteroid_Dimensions_from_Occultations.html) — VS-TPM selected for this pole family; occultation ellipsoids are not silently substituted for mesh volume.

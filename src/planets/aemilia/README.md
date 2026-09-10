@@ -4,6 +4,8 @@
 
 Checked 2026-09-09. Selected **ISAM/SAGE model 102**, [original OBJ](http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102), pinned in the [input manifest](source/manifest.json). The archive does not declare a source release date; 2026-09-09 is the retrieval date. ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model 102; Marciniak et al. (2018), A&A 610, A7; Bartczak and collaborators.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The shared recipe targets at most 800 native PolyCSS `u` raster triangles with 128 px cells and 1350 m simplification allowance. The independent source test preserves OBJ hashes, coordinates, connectivity, physical scale and pole. Actual simplification, scalar correspondence and browser evidence belong to the separate qualification records; source topology alone does not prove visual fidelity.
@@ -48,5 +50,7 @@ The source header declares +Z-axis pole (138.85848,65.93886)° and 24.478724 h, 
 - [Marciniak et al. (2018), published paper](https://hebe.astro.amu.edu.pl/docs/5_models.pdf): included. Table 3 binds the SAGE pole families; Table 4 is 135±7 km volume-equivalent occultation calibration for pole 1; Table 7 TPM 137±8 km is consistent. Section 5.1 notes the SAGE pole 1 fit is marginally preferred, but other poles/shapes remain viable. Concavities are photometric inverse-model features, not observed image pixels.
 - [DAMIT convex 1869](https://damit.cuni.cz/projects/damit/asteroid_models/view/1869): excluded from the displayed source, retained as comparison. Its archive 140±7 km and the paper's convex 130±7 km refer to different reported scales; neither is substituted into SAGE geometry.
 - AKARI AcuA v1.0 is retained only for comparison. A thermal effective-sphere diameter is not used when the source-supported occultation calibration exists.
+
+- [Marciniak et al. (2018), Photometric survey, modelling, and scaling of long-period and low-amplitude asteroids](https://ui.adsabs.harvard.edu/abs/2018A%26A...610A...7M) — selected model publication.
 
 </details>

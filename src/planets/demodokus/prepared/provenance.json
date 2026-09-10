@@ -1,21 +1,21 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "demodokus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "92766b568e0f8db9167ac3977e083779de1d786937cd1aaf4523ed984d8e1d88"
+    "sha256": "d1eae53ea513eb4ac0f703f6d31baab25ea90e3bf5ea5bea7faffe142000cdcc"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "a68f44676f3634c01e1e4cd8eeed862416ef24a68a83fa3055bf2d5565fd9a18",
+      "sha256": "69d3975061e8371226df8da238c956f6269f08e802a3e236bab78fd95497aff0",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 18.815,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.7636087336472297
           },
           "mapUrl": "/scenes/demodokus/demodokus-shape-surface@2x.webp",
           "polesUrl": "/scenes/demodokus/demodokus-shape-surface@2x.webp",
@@ -149,7 +150,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7b6ef9a53e612db599481571717ca6187a8df395b78e463583d808be0498373e",
+      "sha256": "e2b28d15db8c5096ab2eaf8e5f76ca720b56c27f076df983fa05abebaac40704",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,7 +223,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "DAMIT model"
             },
             {
               "id": "elevation",
@@ -354,7 +355,7 @@
       "sha256": "8bccce94993f84b19d6d0944ae3aff994cf00cd0a75b4b8599bad18b7d706855",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -376,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7b6ef9a53e612db599481571717ca6187a8df395b78e463583d808be0498373e",
-      "bytes": 11493,
+      "sha256": "e2b28d15db8c5096ab2eaf8e5f76ca720b56c27f076df983fa05abebaac40704",
+      "bytes": 11459,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +413,19 @@
           "url": "/scenes/demodokus/demodokus-elevation-thumbnail.webp",
           "bytes": 6080,
           "sha256": "52fbb7464ea42643bc000d36a12118af3cd542341da67358d7070b49a9505540",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/demodokus/demodokus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/demodokus/demodokus-elevation-surface@2x.webp",
           "bytes": 316256,
           "sha256": "689dea27871052cda0dde5324070f97b45c2ae4ef4db943cc0af574e117b64ee",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +457,13 @@
           "url": "/scenes/demodokus/demodokus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/demodokus/demodokus-shape-surface@2x.webp",
           "bytes": 235994,
           "sha256": "7e3685e6cacb382f1d06792820143f28a797c6455e0ecda527156bee36e2a079",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

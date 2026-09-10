@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {test} from 'node:test';
-import {loadShapeCameraImage,applySsiQuality,resolveCatalogCamera,controlledShapeCamera,loadCameraShape} from '../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mjs';
+import {loadShapeCameraImage,applySsiQuality,resolveCatalogCamera,controlledShapeCamera,loadCameraShape} from '../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 export function checkGalileo(body,anchors,expectedQuality){
  const root=resolve('src/planets',body,'source');
  test(`${body}: calibrated pixels and archived bad-data blocks preserve source identity`,async()=>{

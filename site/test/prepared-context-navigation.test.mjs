@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createPreparedContextNavigation } from '../prepared-context-navigation.mjs';
+import { createPreparedContextNavigation } from '../prepared-context-navigation.mts';
 
 function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, volumeBank = null } = {}) {
   let current = null, signal;

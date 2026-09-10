@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "fb4ce6753186136fab5c45dc534cf5d33dc314deef44b2ddbe02fc1332fe8a7d"
+          "sha256": "ae7112a88409966266b9eab8a36e680bb188e5f8e97994ff41356dd26922d571"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4c16c507e22a83940ea5a56427730b397a34537e9dca0ad5c8343c82c3685638"
+        "sha256": "a520e6c09e2836d5349b134713b2ab1d10d01f5503a0e6b3d2a162a599d5697f"
+      }
+    },
+    "catalog": {
+      "name": "Penthesilea",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0044325414876942,
+      "description": "Explore Penthesilea in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 347,
+      "context": {
+        "order": 393
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "16b97095fbbb3e20f5c0a569de3c2057288a27d55f2362a1097ecb0b52cec944"
+    "sha256": "b1642e9474e854d576b83f3588f82a29ee7d5d9beb1453f831f256247687a752"
   }
 }

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "calypso",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7c3ce96989db51c77b4574f2988d3f62d5a00b1bcaec41414d4d072a50875497"
+    "sha256": "a58f3a2ed4d840013655c47a642a99e243ea13479720a9244a645e6958ec0d73"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -409,10 +409,14 @@
       },
       "coverage": "Radial height above a 10.7 km reference sphere from the Cassini shape model. Includes the moon’s broad irregular shape; it is not local height above a geoid. Fixed relief lighting reveals model slopes. Small craters are not reliably resolved.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/calypso_30k_plt.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/calypso_30k_plt.tab",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "840fc381659291b29fbaa51bdaf09c870da6bcc96b4ae791709e2a354048fb63",
       "bytes": 2120850,
@@ -449,10 +453,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "0ee9c5e4d7a3a99c41698b975da561991932d5809d2c053a5321d5ea2344b4bd",
       "bytes": 4202496,
@@ -482,10 +490,14 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2015/data/1506110127_1506288646/N1506184171_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "1cf87f1821323ab7c78e22303c99a0999ea9f73f422936722d2d8e7adc230801",
       "bytes": 3821,
@@ -522,10 +534,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644755203_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644755203_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "b3a3f70a3ff562937099c36fd7f2638341fbfe80ba4d18d9d5598f7f4a682237",
       "bytes": 4202496,
@@ -555,10 +571,14 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644755203_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644755203_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "bb3cf286532af151da58864d86a5b749d25e5d4af9dc2ee496c2ba09fbbce593",
       "bytes": 3845,
@@ -595,10 +615,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756472_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756472_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "892d48c10a42f6144408bc94c6010cb1cda689146c91e13106e072ba2146fcc8",
       "bytes": 4202496,
@@ -628,10 +652,14 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756472_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756472_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "f1be56d59aa8b847a8ffe26eb419668ebfd2b017c071064f8cb8d07de1c3d7a3",
       "bytes": 3846,
@@ -668,10 +696,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756964_1_CALIB.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756964_1_CALIB.IMG",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "cb02955542d85f16c96d6f8ee31392185417876c2e913c69c53bfba7f0a43f56",
       "bytes": 4202496,
@@ -701,10 +733,14 @@
       "acquisition": "Download the pinned CISSCAL calibrated product.",
       "redistribution": "Retain NASA/JPL/SSI and PDS attribution.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756964_1_CALIB.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2060/data/1644743986_1644781734/N1644756964_1_CALIB.LBL",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "78bd0afb7754a4e3cb4b2a2cece76aa548f0df8c80aa8a7c585837b4928aa630",
       "bytes": 3846,

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "iclea",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ae3854e5a261e28a81ff92a74f850a390ef2dabc4a3a6b5fec51602f5d95be02"
+    "sha256": "b263d1b4196fe653fcb989b242d1158a4cf5d2dce05711d24656e08a5e2ca124"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "3212a810d5ca2f09b46bdac82d0817c197955b84313426df41f473fc6f7945fe",
       "bytes": 80439,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "497ab8a25e52517c65dba23b9ad2d0cb6d1d52d23d9a8ae959404c543178a7fe",
       "bytes": 8683,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/iclea/iclea-elevation-thumbnail.webp",
           "bytes": 6216,
           "sha256": "27ac9e5d66ca23bb275a2a3271e9e30f1913173b85423fde8241ab73a2e7af17",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iclea/iclea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iclea/iclea-elevation-surface@2x.webp",
           "bytes": 304738,
           "sha256": "1876870c4ac7f0682f4c3b73e6e1d39eeb58b25258a78375a1a0619ba78a095d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/iclea/iclea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iclea/iclea-shape-surface@2x.webp",
           "bytes": 220982,
           "sha256": "3a22d2295af3abd3604aa0c873cac7606a21b0c11a5e219e5735c2c3c1cc2a14",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

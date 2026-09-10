@@ -33,12 +33,26 @@
       "expectedBytes": 16612487,
       "expectedSha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
       "capture": {
-        "spacecraftIds": [
-          "cassini",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "missionId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "missionId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
+          }
+        ]
       }
     },
     {
@@ -72,10 +86,14 @@
       "expectedBytes": 4989080,
       "expectedSha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg"
+          }
+        ]
       }
     },
     {
@@ -315,10 +333,14 @@
       },
       "coverage": "Supported detector apertures cover approximately 23.35% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+          }
+        ]
       }
     },
     {
@@ -353,10 +375,14 @@
       },
       "coverage": "Supported detector apertures cover approximately 23.35% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+          }
+        ]
       }
     }
   ],
@@ -427,12 +453,6 @@
       "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
       "expectedBytes": 2833,
       "expectedSha256": "db4b3366691ddc46df557bdea79a31f86a384652db8809b2216e9029c17ad266"
-    },
-    {
-      "path": "cassini-ice/evidence/license-about.html",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 22564,
-      "expectedSha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9"
     },
     {
       "path": "cassini-ice/evidence/registration.md",

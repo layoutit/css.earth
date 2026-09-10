@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "puck",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "32db4df9653a1eb3dad67d146d6bbcdc8cc443b584acd5f9df1a8fb64d7586ea"
+    "sha256": "0caa64a409028d15056be645a52b6f13eefe4190c438ad630ddee188b84be4ae"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -279,10 +279,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "b13a0124dc199090c2047ef316df5bee68c12cb6b008ff2a49beb238a6c38832",
       "bytes": 2002000,
@@ -312,10 +316,14 @@
       "acquisition": "Download the original calibrated, geometrically corrected PDS GEOMED product.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "084f2e10d36a1145501a2545a936ed106e52fdd63c33064395d54f02976dda88",
       "bytes": 3294,

@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ixion",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ixion",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "523730b010dd8c6f4c71390facda406149a63716967880a05282b5edf1ca3de9"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "08a5dac2852a7476e852b513199f2ccabfb46ba86f5867acad92093ac5d03ae8"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "7b876c796c899b07bb004f0b64f471543b47bce1192291fdd3d6ec464a1210a8"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "bbc31057e57ec4a391ef25944faf8f400d1c51e18fb57cb3d0d845979b96fc21"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "faa1557239b00a3ff182b585faf3f3b72bf069601def22e08c012f2406e873a4"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "97473366f7d5c7ae4851ab9bde80e58bbf0c330937179677009180efa81edc88"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 353.3290693408871
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ixion-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "811229bc746820260a7e2245f6eb1d7abb98c85a5349ec2eda18f439cea3da4d"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        748130913662.6458,
+        -4670473581727.363,
+        -2991884309626.822
+      ],
+      "presentationToReference": [
+        0.13538245732326445,
+        0,
+        0.990793414516424,
+        -0.9090351850350944,
+        0.3977771559319137,
+        0.12421097611294168,
+        -0.39411498654241284,
+        -0.9174820620691818,
+        0.053852048837121816
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1536.2133449603787,
+      "bodyRadiusM": 353329.0693408871
+    },
+    "catalog": {
+      "name": "Ixion",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 37.41243146579822,
+      "description": "Ixion is a large world beyond Neptune. Several stellar occultations constrain its flattened outline; the displayed depth is assumed and its surface is unmapped.",
+      "systemName": "Solar System",
+      "order": 5,
+      "context": {
+        "order": 463
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "c53917b195b4a6eb1ccdba23990dd2440e30e953eab4caf099b51278c344459f"
+  }
+}

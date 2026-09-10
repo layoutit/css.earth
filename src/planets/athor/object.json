@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "d8ef16ecff3519d20fde3aeb4748aa8d953d8eee0b655c558ebfcec320015da3"
+          "sha256": "89708a4c52e9558add7cbcda2cc0aa7f7a07f4ef9fd8a5da8079fadd146eddaa"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "51d8c145becaea12c3be9b51ffc7fcb8283c344f144383e3e5cad6240d221f67"
+        "sha256": "5a9710a570cb99228f5ac9d2bb434e3844fa60f1d80e190cb479111ba6852f47"
+      }
+    },
+    "catalog": {
+      "name": "Athor",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.3789454823297382,
+      "description": "Explore Athor in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 293,
+      "context": {
+        "order": 339
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ac3da31ecad7c47dd1f0fe0dde11995c0c5c9e52fb2533730d18a52f9f2a4472"
+    "sha256": "8a8eef52e3076c7f75517dfe3f5e84cd5bed0fb14d97baeadb6405d1a1146892"
   }
 }

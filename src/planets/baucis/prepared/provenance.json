@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "baucis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c00560a9e757a5a49e9f1aa2a48d4b2389c3e7ec49c2e2a93c60383e2291891c"
+    "sha256": "25b46cced80d9a381bca2a47e67ba858172a8506d8c046176c3cedfd14b9d13d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "f5b9e2aa2266ce412b20de2bddc7242224f042d7aa0aecbb1a579d00ab6d18ba",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "3eb19d0db94e04b03c8041ad19e636be9057c62c92242e459ac44e2c66a3cf8e",
       "bytes": 10127,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/baucis/baucis-elevation-thumbnail.webp",
           "bytes": 5182,
           "sha256": "143f542f8c172165d0a30edad849fc13bb2fc9a8115065364fff986b2675053e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/baucis/baucis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/baucis/baucis-elevation-surface@2x.webp",
           "bytes": 278790,
           "sha256": "23366949ad508ae3494f57cd41bee233227d70366ff44888c85ccc07ff214549",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/baucis/baucis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/baucis/baucis-shape-surface@2x.webp",
           "bytes": 244170,
           "sha256": "10cfa508ebae2c37e4dc9a8db4c3de6c7717e553b0e24e75d33b83c327018787",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

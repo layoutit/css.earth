@@ -46,12 +46,15 @@ export interface PreparedContextFocus extends PreparedContextPoint {
   readonly systemView?: PreparedContextBody['systemView'];
 }
 export interface PreparedContextBody extends PreparedContextPoint {
+  readonly placement?: 'approximate';
   readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
     readonly candidates: readonly { readonly cameraToReference: readonly number[];
       readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }[] };
   readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: PositionM; readonly verticesM: readonly PositionM[]; readonly trail: readonly number[];
     readonly bounds?: { readonly centerM: PositionM; readonly radiusM: number }; readonly activeChords?: readonly number[];
-    readonly extentChords?: readonly number[] };
+    readonly extentChords?: readonly number[];
+    readonly closed?: false; readonly bodyVertexIndex?: number; readonly displayExtentAu?: number;
+    readonly trailModel?: 'finite-open-trajectory-constant-weight' };
 }
 export interface PreparedContextCameraPresentation {
   readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
@@ -183,16 +186,34 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
   const focus = focusPoint(input.focus);
   if (!equalPosition(focus.positionM, frame.originM)) throw new TypeError('World context focus must be at its frame origin.');
   const bodies = array(input.bodies, 'context bodies').map<PreparedContextBody>(value => {
-    const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView']);
-    const rawBody = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView']);
+    const input = record(value, 'context body', ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement']);
+    const rawBody = point(input, ['id', 'name', 'color', 'positionM', 'radiusM', 'orbit', 'systemView', 'placement']);
     const systemView = parseSystemView(input.systemView);
-    const body = systemView ? { ...rawBody, systemView } : rawBody;
+    if (input.placement !== undefined && input.placement !== 'approximate') throw new TypeError('Unsupported orbital placement qualification.');
+    const body = { ...rawBody, ...(systemView ? { systemView } : {}),
+      ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}) };
     if (input.orbit === undefined) return body;
-    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords']);
+    const orbit = record(input.orbit, 'body orbit', ['centerBodyId', 'centerPositionM', 'verticesM', 'trail', 'bounds', 'activeChords', 'extentChords',
+      'closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel']);
     const centerBodyId = text(orbit.centerBodyId, 'orbit parent identity'), centerPositionM = vector(orbit.centerPositionM, 'orbit centre position');
     const verticesM = array(orbit.verticesM, 'orbit vertices').map(value => vector(value, 'orbit vertex'));
     const trail = numbers(orbit.trail, 'orbit trail');
-    if (verticesM.length < 8 || trail.length !== verticesM.length || trail.some(value => value < 0 || value > 1) || !equalPosition(body.positionM, verticesM[0]!)) {
+    const open = orbit.closed === false;
+    let openMetadata: { readonly closed: false; readonly bodyVertexIndex: number; readonly displayExtentAu: number;
+      readonly trailModel: 'finite-open-trajectory-constant-weight' } | undefined;
+    if (open) {
+      const bodyVertexIndex = orbit.bodyVertexIndex;
+      if (typeof bodyVertexIndex !== 'number' || !Number.isSafeInteger(bodyVertexIndex) || bodyVertexIndex < 0 || bodyVertexIndex >= verticesM.length ||
+          orbit.trailModel !== 'finite-open-trajectory-constant-weight' || trail.some(weight => weight !== 1)) {
+        throw new TypeError('Open context trajectory must identify its epoch vertex and constant finite-path weights.');
+      }
+      openMetadata = { closed: false, bodyVertexIndex, displayExtentAu: positive(orbit.displayExtentAu, 'Open trajectory display extent'),
+        trailModel: orbit.trailModel };
+    } else if (['closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel'].some(key => orbit[key] !== undefined)) {
+      throw new TypeError('Open trajectory metadata requires closed: false.');
+    }
+    if (verticesM.length < 8 || trail.length !== verticesM.length - (open ? 1 : 0) || trail.some(value => value < 0 || value > 1) ||
+        !equalPosition(body.positionM, verticesM[openMetadata?.bodyVertexIndex ?? 0]!)) {
       throw new TypeError('Context orbit must align with its body and carry matching prepared trail weights.');
     }
     const activeChords = orbit.activeChords === undefined ? undefined : numbers(orbit.activeChords, 'active orbit chords');
@@ -212,7 +233,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     if (orbit.bounds !== undefined) {
       const input = record(orbit.bounds, 'orbit bounds', ['centerM', 'radiusM']);
       const centerM = vector(input.centerM, 'orbit bounds centre'), radiusM = positive(input.radiusM, 'orbit bounds radius');
-      if (verticesM.some((vertex, index) => (trail[index] > 0 || trail[(index + trail.length - 1) % trail.length] > 0) &&
+      if (verticesM.some((vertex, index) => (trail[index] > 0 || (index > 0 ? trail[index - 1] : open ? 0 : trail[trail.length - 1]) > 0) &&
         Math.hypot(...vertex.map((value, axis) => value - centerM[axis])) > radiusM)) {
         throw new TypeError('Prepared orbit bounds must contain every active chord endpoint.');
       }
@@ -220,7 +241,7 @@ export function parsePreparedWorldContext(value: unknown): PreparedWorldContext 
     }
     // Older prepared banks retain the exact projection path; no runtime bounds bake.
     return Object.freeze({ ...body, orbit: Object.freeze({ centerBodyId, centerPositionM, verticesM: Object.freeze(verticesM), trail: Object.freeze(trail),
-      ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}),
+      ...openMetadata, ...(bounds ? { bounds } : {}), ...(activeChords ? { activeChords: Object.freeze(activeChords) } : {}),
       ...(extentChords ? { extentChords: Object.freeze(extentChords) } : {}) }) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
@@ -303,6 +324,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
     if (!sprite) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
     const group = host.ownerDocument.createElement('div');
     group.dataset.contextGroup = body.id;
+    const approximate = 'placement' in body && body.placement === 'approximate';
+    if (approximate) group.dataset.contextPlacement = 'approximate';
     group.style.cssText = 'position:absolute;inset:0;pointer-events:none';
     root.appendChild(group);
     const marker = host.ownerDocument.createElement('s');
@@ -320,7 +343,8 @@ export function mountPreparedWorldContext({ host, before, plan, sprites, request
     indicator.appendChild(anchorCorners);
     const label = host.ownerDocument.createElement('span');
     label.dataset.contextLabel = body.id;
-    label.textContent = body.name;
+    label.textContent = approximate ? `${body.name} (approx)` : body.name;
+    if (approximate) label.title = `${body.name} · Approximate orbital placement`;
     label.style.cssText = 'position:absolute;left:50%;top:50%;white-space:nowrap;visibility:hidden';
     label.style.opacity = '0';
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;

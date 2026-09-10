@@ -4,7 +4,7 @@ import { copyFile, mkdir, mkdtemp, readFile, rm, stat, utimes, writeFile } from 
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { restoreObjectJson } from './restore-object-json.mjs';
+import { restoreObjectJson } from './restore-object-json.mts';
 
 test('restores a missing transport from its pinned runtime without rebaking or repinning', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-json-restore-'));

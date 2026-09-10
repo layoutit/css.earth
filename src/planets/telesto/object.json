@@ -115,13 +115,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "192f09ca37a187159b0e79d6837fd071b1815018b1d4bb8b799b535189d7897d"
+        "sha256": "85cf7876868afd4f39eb7bd8b6cf4d74c18e5d04335bd84f38d0897d053b8588"
+      }
+    },
+    "catalog": {
+      "name": "Telesto",
+      "classification": "satellite",
+      "color": "#c3bfb7",
+      "distanceAu": 9.58,
+      "description": "Explore Telesto in 3D with Cassini imagery and its measured irregular shape.",
+      "systemName": "Solar System",
+      "order": 114,
+      "context": {
+        "order": 53
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7dc48f7530e30a130aee625a3f61f3eeb056822698b39cb94bca8a7a2ec67e24"
+    "sha256": "37b6903657eb5594eafdf60fc235110d5a2974a37309b787f2a56a503f8a9473"
   }
 }

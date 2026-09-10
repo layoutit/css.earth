@@ -131,10 +131,14 @@
       ],
       "expectedBytes": 36708552,
       "capture": {
-        "spacecraftIds": [
-          "viking"
-        ],
-        "evidence": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg"
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Viking orbiters",
+            "evidence": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg",
+            "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
+          }
+        ]
       }
     },
     {
@@ -153,10 +157,14 @@
       "title": "MOLA global color shaded relief",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_mgs_mola_global_color_shaded_relief_463m",
       "capture": {
-        "spacecraftIds": [
-          "mars-global-surveyor"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "mars-global-surveyor",
+            "missionId": "mars-global-surveyor",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Mola_PseudoColor/tile/3/{y}/{x}"
+          }
+        ]
       }
     },
     {
@@ -175,10 +183,14 @@
       "title": "THEMIS daytime infrared mosaic",
       "sourceUrl": "https://astrogeology.usgs.gov/search/map/mars_odyssey_themis_ir_day_global_mosaic_100m_v12",
       "capture": {
-        "spacecraftIds": [
-          "odyssey"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "odyssey",
+            "missionId": "odyssey",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mars/Themis_IR_Day/tile/3/{y}/{x}"
+          }
+        ]
       }
     },
     {
@@ -214,34 +226,6 @@
         "moons"
       ],
       "expectedBytes": 1600012
-    },
-    {
-      "id": "jpl-mars-satellite-physical-parameters",
-      "path": "moons/jpl-physical-parameters.html",
-      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
-      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
-      "license": "United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked source snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 84633
-    },
-    {
-      "id": "jpl-mars-satellite-mean-elements",
-      "path": "moons/jpl-mean-elements.html",
-      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
-      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
-      "license": "United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked source snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 418952
     },
     {
       "id": "nasa-psg-mars-configuration",
@@ -360,7 +344,8 @@
       "path": "preparation/ellipsoid.json",
       "expectedBytes": 622,
       "expectedSha256": "a21e86fe560a46396cea1568b44a757be8b258b9ef40277b5261ef11c380d768",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "purpose": "Authored source-informed capability preparation recipe.",
+      "kind": "authored-document"
     },
     {
       "path": "stars/LICENSE.md",
@@ -384,7 +369,8 @@
       "path": "preparation/atmosphere.json",
       "expectedBytes": 918,
       "expectedSha256": "672ce4a68c97c9d005f3721aad971b8e0b2bdb24eca1d6d863e14ed08bf41acb",
-      "purpose": "Authored source-informed capability preparation recipe."
+      "purpose": "Authored source-informed capability preparation recipe.",
+      "kind": "authored-document"
     },
     {
       "path": "content/object.json",
@@ -406,8 +392,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 5145,
-      "expectedSha256": "0bcae0e1294215bef84987bf076bfeec53bcdfb1b205bdef592b3ccab0f028cc",
+      "expectedBytes": 4757,
+      "expectedSha256": "a84ca43388d33a4db02ef6bc983deb6d60b48e9aab83f69420e723b05e7a3790",
       "purpose": "Authored source-informed capability preparation recipe."
     },
     {

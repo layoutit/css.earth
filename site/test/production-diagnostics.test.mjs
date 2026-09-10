@@ -9,7 +9,7 @@ test('production runtime removes development observations from the executable cl
   async function bundle(dev) {
     const result = await build({ configFile: false, logLevel: 'silent',
       define: { 'import.meta.env.DEV': JSON.stringify(dev) },
-      build: { write: false, minify: 'esbuild', lib: { entry: resolve('src/platform/object-runtime.mjs'), formats: ['es'] },
+      build: { write: false, minify: 'esbuild', lib: { entry: resolve('src/platform/object-runtime.mts'), formats: ['es'] },
         rollupOptions: { external: ['@layoutit/polycss'] } } });
     return (Array.isArray(result) ? result : [result]).flatMap(bundle => bundle.output)
       .filter(item => item.type === 'chunk').map(item => item.code).join('\n');

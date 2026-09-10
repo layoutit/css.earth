@@ -1,0 +1,45 @@
+import {chromium} from 'playwright';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {resolve} from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {conformanceBrowserLaunch} from '../../../site/test/conformance-browser-launch.mjs';
+import {parseSharedView} from '../../../src/platform/view-url.mts';
+import assert from 'node:assert/strict';
+const [phase,base]=process.argv.slice(2);if(!phase||!base)throw Error('phase and base URL required');
+const root=resolve(`output/playwright/halley-mosaic/${phase}`);await mkdir(root,{recursive:true});
+const launch=await conformanceBrowserLaunch({evidenceDirectory:root});const browser=await chromium.launch(launch.options);const reports=[];
+const hash=b=>createHash('sha256').update(b).digest('hex');
+const inventory=phase==='before'?execFileSync('git',['show','1991273ff:src/planets/comet-1p/runtime-assets.json']):await readFile('src/planets/comet-1p/runtime-assets.json');
+await writeFile(resolve(root,'runtime-assets.json'),inventory);
+try{for(const dpr of (process.env.CAPTURE_DPRS??'1,2').split(',').map(Number)){
+ const context=await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:dpr});const page=await context.newPage();const errors=[],network=[],pending=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('response',response=>{pending.push((async()=>{if(response.status()>=400)errors.push(`${response.status()} ${response.url()}`);if(/\/scenes\/comet-1p\/|comet-1p.*\.json/.test(response.url())){try{if(response.status()>=300 && response.status()<400){network.push({url:response.url(),status:response.status(),location:response.headers().location});return;}const body=await response.body();network.push({url:response.url(),status:response.status(),bytes:body.length,sha256:hash(body)});}catch(e){errors.push(String(e));}}})());});
+ const views=[];
+ const targets=JSON.parse(await readFile('output/playwright/halley-mosaic/saved-views.json','utf8'));
+ for(const {view,query} of targets){
+  await page.goto(`${base}/comet-1p/?${query}`,{waitUntil:'networkidle'});await page.locator('.planet-stage[aria-busy="false"]').waitFor();
+  await page.locator('button[name="lens"][value="giotto"]').click();await page.locator('.planet-stage[data-lens="giotto"][aria-busy="false"]').waitFor();await page.waitForLoadState('networkidle');await page.waitForTimeout(600);
+  // Selecting a dataset applies its prepared focus. Restore the shared view through
+  // the public history listener afterwards; never write private camera state.
+  await page.evaluate(query=>{history.pushState(null,'',`?${query}`);dispatchEvent(new PopStateEvent('popstate'));},query);
+  await page.waitForTimeout(800);
+  const state=await page.evaluate(()=>({url:location.href,shadows:document.querySelector('input[name="shadows"]')?.checked,lens:document.querySelector('.planet-stage')?.dataset.lens,sceneCount:document.querySelectorAll('.polycss-scene').length,unloadedImages:[...document.querySelectorAll('img')].filter(i=>!i.complete||!i.naturalWidth).length}));
+  const expected=parseSharedView(query),actual=parseSharedView(new URL(state.url).search.slice(1));
+  assert.ok(Math.abs(expected.camera.distanceKilometers-actual.camera.distanceKilometers)<1e-9);
+  assert.equal(actual.camera.pose.scene,expected.camera.pose.scene);
+  assert.equal(actual.preparedEpochJdTt,expected.preparedEpochJdTt);assert.deepEqual(actual.playback,expected.playback);
+  if(state.shadows!==false||state.lens!=='giotto'||state.sceneCount!==1||state.unloadedImages||errors.length)throw Error(JSON.stringify({state,errors}));
+  await page.screenshot({path:resolve(root,`${view}-dpr-${dpr}.png`)});views.push({view,state});
+ }
+ console.error(`DPR ${dpr}: checking ${pending.length} response records`);await Promise.all(pending);assert.deepEqual(errors,[]);
+ const expectedAssets=new Map(JSON.parse(inventory).assets.map(asset=>[asset.filename,asset]));
+ for(const response of network.filter(r=>r.status===200)){
+  const asset=expectedAssets.get(new URL(response.url).pathname.split('/').at(-1));
+  if(asset){assert.equal(response.bytes,asset.bytes);assert.equal(response.sha256,asset.sha256);}
+ }
+ reports.push({dpr,viewport:{width:1440,height:1000},views,errors,network});console.error(`DPR ${dpr}: closing context`);await context.close();console.error(`DPR ${dpr}: complete`);
+}
+await writeFile(resolve(root,'browser.json'),JSON.stringify({phase,base,browser:'Installed Google Chrome, headless',runtimeInventorySha256:hash(inventory),reports},null,2)+'\n');
+}finally{console.error('Closing browser');await browser.close();console.error('Browser closed');}
+await writeFile(resolve(root,'browser.json'),JSON.stringify({phase,base,browser:'Installed Google Chrome, headless',runtimeInventorySha256:hash(inventory),reports},null,2)+'\n');console.log(JSON.stringify(reports.map(({dpr,views,errors,network})=>({dpr,views,errors,assetRequests:network.length})),null,2));

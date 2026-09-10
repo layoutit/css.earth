@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7e48106cea596e442ace858a019236986cf5a8ed05fd47a3658295c46fb3e9ea"
+        "sha256": "8c0f5bd7519a2f817122a466c70c4879ce588f43a081e41c7887c900c4c31b58"
+      }
+    },
+    "catalog": {
+      "name": "Squannit",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 0.642,
+      "description": "Explore Squannit, the companion of Moshup, through its radar-derived shape model.",
+      "systemName": "Solar System",
+      "order": 24,
+      "context": {
+        "order": 250
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f841f091637e4e067bb9a217e124e3449ffd2d4daf290efc5c2509e7e977002a"
+    "sha256": "971a4a6fb279e635d9e75df698e2b73af04f92f6c18e7f114b0f9cb920b3d5dc"
   }
 }

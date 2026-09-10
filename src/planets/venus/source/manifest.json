@@ -180,10 +180,14 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "magellan"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
+          }
+        ]
       }
     },
     {
@@ -205,10 +209,14 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "magellan"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "magellan",
+            "missionId": "magellan",
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
+          }
+        ]
       }
     },
     {

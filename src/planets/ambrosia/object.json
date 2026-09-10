@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "ea8ea02932db2be0176f298898a0fd9e2337f3645b2ded6f7b0e6162de7823c9"
+          "sha256": "b4eb004e98c33b694d5d89090103e160a3874e617f16239a376bcd837a709869"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1dfb9928f06ea4c5df13b13b9931f7a751688dfd7160c148502ad1205d879168"
+        "sha256": "a2d7d440ea6b5e7bb10e1e7c81a08e1e488298e7c813831ed12480796d8c591e"
+      }
+    },
+    "catalog": {
+      "name": "Ambrosia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.59809056583152,
+      "description": "Explore Ambrosia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 308,
+      "context": {
+        "order": 354
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8b238ed531d715f6ad424a9f3853f9257eb8cb102fa8ad01842686ee585519a7"
+    "sha256": "4a1522dff2fe766baf8f1374d6171c3acb1763ae560b21962fe11b514a77a985"
   }
 }

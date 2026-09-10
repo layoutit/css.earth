@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "gallia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ef56e7890012109b8f1fddfa21916a0abf88c0edc5b7b38de0c9c65623223d32"
+    "sha256": "7ddaaed3efc5a05fcd4afa085af2416ae6d57c0929c79ddf857594fe55affef1"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "dfae149a3e1dd7938f6bb711488c8d230804ca7efe942f776479be14f138ab0a",
       "bytes": 46257,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "289ccf5cdb4cd332a216f5bfcf61cdc63c25f02db41ae3db98700dbfb47bdba5",
       "bytes": 9493,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/gallia/gallia-elevation-thumbnail.webp",
           "bytes": 5432,
           "sha256": "d44c359f62a8735e00e213d22d141538013048570e77770ed23cf12c2a0c2938",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gallia/gallia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gallia/gallia-elevation-surface@2x.webp",
           "bytes": 283780,
           "sha256": "b5e86d0ddd69ad159989db1f2af8bdd231e3e1c3a297b58260429c3c5a5f8890",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/gallia/gallia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gallia/gallia-shape-surface@2x.webp",
           "bytes": 238000,
           "sha256": "4f124055493682b6ebd98501b8f6ca0471228b00924ef995175d3ac4e15046b2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

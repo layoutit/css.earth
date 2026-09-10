@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "coelestina",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "299a7c0718ab34142c9015e4d74fb924a8bfab545d5026bf62052d17abd16c46"
+    "sha256": "c6f07c7a7c1ff6162362e3a8a64a9a601f40029fe6e747b65e1d5f92d57edad3"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "427b7e385d125ecccedc0cbf7129a960bf32bcb5f793e1fb0c8464d464d6a784",
       "bytes": 80926,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "d2cc6c399fa0a846a91d3f98fb05b30ead080d5b6b4e0a5a90ef8aa5ccb576ae",
       "bytes": 11890,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/coelestina/coelestina-elevation-thumbnail.webp",
           "bytes": 5754,
           "sha256": "c421f25af4291c2f194e7ed9f7216d6a312a45d231d897327d2c45c4826b36f9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/coelestina/coelestina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/coelestina/coelestina-elevation-surface@2x.webp",
           "bytes": 301416,
           "sha256": "739731b4830613adaaa8893f90afcfa127208a6394a3a7eda4a6aeaf7e4277ad",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/coelestina/coelestina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/coelestina/coelestina-shape-surface@2x.webp",
           "bytes": 233998,
           "sha256": "8df62409b138858d8ee4f11631ad69d8f02b48e4bb0d137841937974581d1333",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

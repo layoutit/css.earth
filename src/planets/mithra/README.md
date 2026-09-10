@@ -4,7 +4,7 @@ Mithra is a strongly bifurcated near-Earth asteroid reconstructed from Arecibo a
 
 ## Sources
 
-The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original Mithra.v1.PA.prograde.mod.obj](https://echo.jpl.nasa.gov/asteroids/shapes/Mithra.v1.PA.prograde.mod.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf): Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper, original OBJ and public index are pinned beside the recipe.
+The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original Mithra.v1.PA.prograde.mod.obj](https://echo.jpl.nasa.gov/asteroids/shapes/Mithra.v1.PA.prograde.mod.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/4486_Mithra/brozovic.etal.2010.mithra.pdf): Brozović et al. (2010), Icarus 208, 207–220; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe.
 
 Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.845 km sphere, from -0.51 to 0.55 km. The scalar is evaluated at the closest source triangle point, not the first center-ray intersection. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.
 

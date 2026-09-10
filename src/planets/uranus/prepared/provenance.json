@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "uranus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f2ac9e7329b121e2200e87a6df23d0c6f04cdafbdc72168dc5ea8028826c55d5"
+    "sha256": "75d2dc8312a10ac087b17086d8a728769ceeca4b46d7e860d3225b82b5bedf0e"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -1013,10 +1013,14 @@
       "acquisition": "pinned Hubble OPAL Cycle 33 rotation-A global-map product",
       "redistribution": "checked scientific archive product with full credit",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b",
       "bytes": 787756,
@@ -1042,10 +1046,14 @@
       "acquisition": "pinned Hubble OPAL Cycle 33 FQ727N global-map product",
       "redistribution": "checked scientific archive product with full credit",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "36ff34743fff69c09ec03b90b3d3e193d9b17e5dfdc41a3cacb2fae878d37c79",
       "bytes": 1045440,
@@ -1071,10 +1079,14 @@
       "acquisition": "pinned Hubble OPAL Cycle 33 F845M global-map product",
       "redistribution": "checked scientific archive product with full credit",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "96afebec48e8da3b5b72a80909a0041ddd50255ce5101f51cab3ffda1e151ac8",
       "bytes": 1045440,

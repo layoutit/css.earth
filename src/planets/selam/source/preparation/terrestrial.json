@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "selam",
+  "displayName": "Selam",
+  "publicBase": "/scenes/selam/",
+  "distanceAu": 2.073581431805674,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.14123064709924582,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": -45,
+      "framingScale": 0.68
+    },
+    "mapUrl": "/scenes/selam/selam-shape-surface@2x.webp",
+    "polesUrl": "/scenes/selam/selam-shape-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/model.json",
+      "format": "contact-ellipsoids",
+      "grid": {
+        "metersPerUnit": 1,
+        "expectedVertices": 516,
+        "expectedFaces": 1024
+      },
+      "faceBudget": 1024,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 1024,
+        "maximumErrorMeters": 3,
+        "regularize": false
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation. Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative."
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

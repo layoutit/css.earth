@@ -105,10 +105,14 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "terra"
-        ],
-        "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "terra",
+            "missionId": "terra",
+            "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg"
+          }
+        ]
       }
     },
     {
@@ -130,10 +134,14 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "terra"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "terra",
+            "missionId": "terra",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
+          }
+        ]
       }
     },
     {
@@ -170,45 +178,15 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "suomi-npp"
-        ],
-        "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "suomi-npp",
+            "missionId": "suomi-npp",
+            "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg"
+          }
+        ]
       }
-    },
-    {
-      "id": "jpl-satellite-physical",
-      "path": "moon/jpl-satellite-physical.html",
-      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
-      "expectedBytes": 84633,
-      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "credit": "NASA JPL Solar System Dynamics",
-      "license": "United States government factual data",
-      "licenseEvidence": [
-        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-      ],
-      "acquisition": "checked satellite physical-parameter authority page",
-      "redistribution": "checked authority page with JPL attribution",
-      "consumers": [
-        "moon"
-      ]
-    },
-    {
-      "id": "jpl-satellite-elements",
-      "path": "moon/jpl-satellite-elements.html",
-      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
-      "expectedBytes": 418952,
-      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "credit": "NASA JPL Solar System Dynamics",
-      "license": "United States government factual data",
-      "licenseEvidence": [
-        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-      ],
-      "acquisition": "checked satellite mean-elements authority page",
-      "redistribution": "checked authority page with JPL attribution",
-      "consumers": [
-        "moon"
-      ]
     },
     {
       "id": "nasa-earth-editorial-record",
@@ -472,23 +450,6 @@
       ]
     },
     {
-      "id": "noaa-enso-advisory",
-      "path": "science/enso-advisory.html",
-      "origin": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml",
-      "expectedSha256": "8647a3804260856f979bba518475d63ffb69c2716d10e4f730658df530c3cc2d",
-      "expectedBytes": 13382,
-      "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
-      "license": "US government public domain",
-      "licenseEvidence": [
-        "https://www.ncei.noaa.gov/archive"
-      ],
-      "acquisition": "Snapshot checked 2026-09-09; raw analysis, publisher checksum, product description and advisory retained for reproducible preparation.",
-      "redistribution": "Retained NOAA data with attribution",
-      "consumers": [
-        "enso"
-      ]
-    },
-    {
       "id": "noaa-coraltemp-anomaly",
       "path": "science/coraltemp-latest.nc",
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc",
@@ -511,23 +472,6 @@
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc.md5",
       "expectedSha256": "4d1c024c5f28f4680f745f1302ec5f45e10011f3e7bdde4df58bde2ffa88f86c",
       "expectedBytes": 78,
-      "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
-      "license": "US government public domain",
-      "licenseEvidence": [
-        "https://www.ncei.noaa.gov/archive"
-      ],
-      "acquisition": "Snapshot checked 2026-09-09; raw analysis, publisher checksum, product description and advisory retained for reproducible preparation.",
-      "redistribution": "Retained NOAA data with attribution",
-      "consumers": [
-        "enso"
-      ]
-    },
-    {
-      "id": "noaa-coraltemp-product",
-      "path": "science/coraltemp-product.html",
-      "origin": "https://www.coralreefwatch.noaa.gov/product/5km/index_5km_ssta_clim19912020.php",
-      "expectedSha256": "114a52e9e07a40d9501dde9181153c30178b1185250c68df84b3c8c3f0930806",
-      "expectedBytes": 47868,
       "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
       "license": "US government public domain",
       "licenseEvidence": [
@@ -1035,7 +979,8 @@
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "consumers": [
         "enso"
-      ]
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors"
     }
   ],
   "documents": [
@@ -1079,7 +1024,8 @@
       "path": "interior/earth-interior.json",
       "expectedSha256": "26c32ab22618b14d98c582dcf2e924e5a52d20f8715447a6bd1a60475d7d1c4a",
       "expectedBytes": 1106,
-      "purpose": "Source-qualified schematic Earth interior presentation specification"
+      "purpose": "Source-qualified schematic Earth interior presentation specification",
+      "kind": "authored-document"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -1113,8 +1059,8 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 13683,
-      "expectedSha256": "a40ce5743610ca243b4f70e9de7c4e86b2bc6832adea8bdb1fd898d6d9f2d5d0",
+      "expectedBytes": 13886,
+      "expectedSha256": "3644c336b0dab1d58934826b3195bf01858c537463f0b3d477ed7606869a0e7f",
       "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
     },
     {
@@ -1161,8 +1107,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 32091,
-      "expectedSha256": "249bb925d410e70c18e4cf267eeba6564ec6acc01ea808d7e39b44936bd3941d",
+      "expectedBytes": 31479,
+      "expectedSha256": "fa50032aeddf5cc08467deab029c40cab14ce15bbd04d297cb6f0bb40239fc3a",
       "purpose": "Authored source acquisition and exact pinned derived-record restoration."
     },
     {
@@ -1194,7 +1140,8 @@
       "path": "science/night-lights-2025/provenance.json",
       "expectedSha256": "e6a1704233f77c3721264de924a5b6e14a291ef78fd4d52db034a89ad32fc5a0",
       "expectedBytes": 3060,
-      "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations."
+      "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
+      "kind": "authored-document"
     }
   ]
 }

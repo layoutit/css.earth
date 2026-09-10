@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {prepareControlledOrthographicMosaic} from '../../../../tools/objects/terrestrial-layers/controlled-orthographic-mosaic.mjs';
+import {prepareControlledOrthographicMosaic} from '../../../../tools/objects/terrestrial-layers/controlled-orthographic-mosaic.mts';
 
 const sourceRoot = new URL('../../../../src/planets/triton/source/', import.meta.url).pathname;
 test('Triton corrects pinned clear-filter frames while withholding unobserved and unstable geometry', async () => {

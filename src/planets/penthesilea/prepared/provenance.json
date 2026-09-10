@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "penthesilea",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "515f0cd309d54a3bdc630241d16815e74cf866480c25c51ea3d42e470a1af952"
+    "sha256": "63403807eb3e3b08b36ce64dcbff378fefc8b784225a95a336206d9103e45e9d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "e5e8054c9480dc77f4e07acaea828896f97a84bef3e60faad569047bb184efed",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "9ec46215683069fd7bf83203476664c36ca439048cf840c1f6e8dbac4422922c",
       "bytes": 12155,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/penthesilea/penthesilea-elevation-thumbnail.webp",
           "bytes": 4958,
           "sha256": "90b59b4bd44713d9c63f5555f06ba5a64688d4485f58d48893aed8c04bf6f91c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/penthesilea/penthesilea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/penthesilea/penthesilea-elevation-surface@2x.webp",
           "bytes": 255062,
           "sha256": "497c5a6caf4098573508b946589f89b4cec1885535db17ca7042600b514868e3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/penthesilea/penthesilea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/penthesilea/penthesilea-shape-surface@2x.webp",
           "bytes": 219962,
           "sha256": "71f3d084ab28a0e6a96b5e09d231528e4de8962c93a08031f2fa3f465cce7b74",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

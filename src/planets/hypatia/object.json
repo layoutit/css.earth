@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "1bfc8973eaa08d6f961b061756103fcff54a9b740dc9cf3ad6989778fa6724f8"
+          "sha256": "fa5d3ff4cba99f28c39b1e787c0b6b8c6fe3da0bd380dbcc6ff4f733f51ea273"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d66f9fedf2d5127668d3d2f2c8e9f72017640f1738f4ed1927ef72733e1b4e06"
+        "sha256": "1f898125383f79aaac539fb42141d164032300f490c2d61ca0a1715e8ce30f75"
+      }
+    },
+    "catalog": {
+      "name": "Hypatia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.905035805480087,
+      "description": "Explore Hypatia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 330,
+      "context": {
+        "order": 376
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b65baec7f0e6e2666e686d8d56e6f7a0714b1687a2edb3b266410f3cc09aa7dc"
+    "sha256": "5ad734daeaf3dcf8c231d86633e5db8a2e9bf93acc3727c47ab1e3ac21068b93"
   }
 }

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ryugu",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ec2ddddead390e5f700eb7d3e5989ecc2005e5f560e1f291c774ba93c836fd2d"
+    "sha256": "84fff7de794cd26d8812d5f2d1e3afd1a08c5da7783b75bb22040b06aeb922d1"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -380,10 +380,14 @@
       },
       "coverage": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif",
+            "missionId": "hayabusa2"
+          }
+        ]
       },
       "sha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969",
       "bytes": 12965947,
@@ -419,10 +423,14 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds",
+            "missionId": "hayabusa2"
+          }
+        ]
       },
       "sha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "bytes": 3150352,
@@ -453,10 +461,14 @@
       },
       "coverage": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
       "capture": {
-        "spacecraftIds": [
-          "hayabusa2"
-        ],
-        "evidence": "https://doi.org/10.7910/DVN/WW3IH0"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hayabusa2",
+            "evidence": "https://doi.org/10.7910/DVN/WW3IH0",
+            "missionId": "hayabusa2"
+          }
+        ]
       },
       "sha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974",
       "bytes": 9557231,

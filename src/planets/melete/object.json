@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "45ac46a91219771a45a6fb6c40d15c0abcb1c2b57a5c2ad8c7c2b8abd0884c2d"
+        "sha256": "5e4d7b7b00e7c2f34b71881e5ce80b05fa01e33d44a74d834e5a2432fd0d43f1"
+      }
+    },
+    "catalog": {
+      "name": "Melete",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5988578205374266,
+      "description": "Explore Melete in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 234,
+      "context": {
+        "order": 276
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "352a7057d4356d5448d5203cb3cb24a31141bab901d98c5c396e35d6a27236ed"
+    "sha256": "41263c60be2c410b297555ba7622fd74fdc4c86f148d81a0f09d955f27ee9a21"
   }
 }

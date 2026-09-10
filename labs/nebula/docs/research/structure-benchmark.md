@@ -39,8 +39,8 @@ The optional official comparator has a separate [getsf workflow](getsf.md). Its 
 | Intensity | Rec.709 coefficients applied to 8-bit display sRGB, divided by 255; not calibrated photometry |
 | Masks | None authored; source crop only selects the benchmark area |
 | Coordinates | All output pixels match the original crop; FITS comparator rows are converted back to image Y-down |
-| Recipe | [structure-benchmark.json](../../models/lmc/research/structure-benchmark.json) |
-| Output | [benchmark manifest](../../models/lmc/research/structure-benchmark/benchmark.json), panels, product receipts and compressed region catalogues |
+| Recipe | [structure-benchmark.json](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/research/structure-benchmark.json) |
+| Output | [benchmark manifest](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/research/structure-benchmark/benchmark.json), panels, product receipts and compressed region catalogues |
 
 Original source: [NOIRLab](https://noirlab.edu/public/images/noirlab2030a/), CC BY 4.0; CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever, image processing by Travis Rector, Mahdi Zamani and Davide de Martin. The conversion and crop are our modifications. Preserve the source/recipe hashes before comparing candidates.
 
@@ -72,7 +72,7 @@ Component previews share unit gain and inherit source hue; positive signal over 
 
 Retain both wavelet candidates. Do not keep lowering thresholds or promote them merely because reconstruction is exact.
 
-**The full-crop getsf comparison hit the experiment's 30-minute runtime bound.** The final uninterrupted run lasted 1,616 seconds and completed 11 source-background iterations. Its last relative correction was 0.0094, above that phase's 0.005 convergence target. Filament separation, detection and final observed component maps were not completed. The stopped subprocess tree was checked; no partial maps are presented as results. The exact configuration, software/input hashes and convergence history are retained in [getsf status](../../models/lmc/research/structure-benchmark/getsf/status.json).
+**The full-crop getsf comparison hit the experiment's 30-minute runtime bound.** The final uninterrupted run lasted 1,616 seconds and completed 11 source-background iterations. Its last relative correction was 0.0094, above that phase's 0.005 convergence target. Filament separation, detection and final observed component maps were not completed. The stopped subprocess tree was checked; no partial maps are presented as results. The exact configuration, software/input hashes and convergence history are retained in [getsf status](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/research/structure-benchmark/getsf/status.json).
 
 This is a runtime impasse for the declared full-crop experiment, not proof that getsf cannot separate these structures. The next practical experiment is a separately frozen 512×512 **native** subcrop, with both methods rerun on exactly that smaller input. Keep the pixel scale and morphology settings explicit; do not downsample or compare its scores directly to the different 1024×1024 field.
 

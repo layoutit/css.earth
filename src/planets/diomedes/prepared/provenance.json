@@ -1,21 +1,21 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "diomedes",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fd6dd6ece1c94bb1b4e223a9354d38a034718ccda8dcced70cc3c693081c4a94"
+    "sha256": "c32faefd970d7690224bc65d3f19be35dada81eee93d5dde39a190a32df58efd"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "48d5e26968de0c0ddb785a512889117b0a40798f1139e3e50c7c33a9ea8009a6",
+      "sha256": "c24b0b979ae7c74bb8b7e2f7005985df6321f8c85cf31e1e2637c44e151f7d5a",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 59.4,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.5886314414582466
           },
           "mapUrl": "/scenes/diomedes/diomedes-shape-surface@2x.webp",
           "polesUrl": "/scenes/diomedes/diomedes-shape-surface@2x.webp",
@@ -149,7 +150,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c5dfa3b4a8b4fb8c4bff88b6bb46618701257060804303067cd270d4af85b934",
+      "sha256": "dcbf53cc83b294e8111cf242e58a88a3c2269f0a16761ca6f4f85898add15395",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,7 +223,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "DAMIT model"
             },
             {
               "id": "elevation",
@@ -354,7 +355,7 @@
       "sha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -376,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c5dfa3b4a8b4fb8c4bff88b6bb46618701257060804303067cd270d4af85b934",
-      "bytes": 11014,
+      "sha256": "dcbf53cc83b294e8111cf242e58a88a3c2269f0a16761ca6f4f85898add15395",
+      "bytes": 10980,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +413,19 @@
           "url": "/scenes/diomedes/diomedes-elevation-thumbnail.webp",
           "bytes": 5036,
           "sha256": "3a10c3a0eb100c166791ff56ef06f91a2977908e58ec82b85757d64e2a9e0a38",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/diomedes/diomedes-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/diomedes/diomedes-elevation-surface@2x.webp",
           "bytes": 265446,
           "sha256": "6cf156a55b0921b53cfee8bdc7faf70a1f0750879d9703bd60ca14a7bde26df3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +457,13 @@
           "url": "/scenes/diomedes/diomedes-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/diomedes/diomedes-shape-surface@2x.webp",
           "bytes": 218474,
           "sha256": "85119ccacb2be2f70294934db274770074d6ce8501ff82dd8b61242a3c709d94",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

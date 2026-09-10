@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
-import { prepareBandSurfaceScene } from "../../../../tools/objects/static-surface/band-scene.mjs";
+import { prepareBandSurfaceScene } from "../../../../tools/objects/static-surface/band-scene.mts";
 import { bakeSurfaceRaster, prepareSurfaceRasterCell, PLUTO_SURFACE_ATLAS } from "./preparation-fixture.mjs";
 
 const geometry = {

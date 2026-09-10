@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "augusta",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "45afa0230f1e21fbc18f284563d924b6505a31883d5c3c56584085bea5909d5c"
+    "sha256": "0db62f96704ff308ee2ba85876fc5d0c64aa586f96ff1788f49d986e09ad8c25"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "e0158056d0fcd78655afea95b3e0bff52c8430f45bd2c6c6b5efc1fdff30d188",
       "bytes": 82060,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "031bf4a5030e1e4f443ccc38f0c2315e37d1b2742676b593c13d89614f4ed3c6",
       "bytes": 10450,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/augusta/augusta-elevation-thumbnail.webp",
           "bytes": 5376,
           "sha256": "c85d48b3f7edcf5706e5288c0a344fa50209de64b4155c464ad96ddf59463143",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/augusta/augusta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/augusta/augusta-elevation-surface@2x.webp",
           "bytes": 282346,
           "sha256": "7c64444c6977a000a958786b9d0ddb855c3841b1ff1b9269279e8314c4611a16",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/augusta/augusta-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/augusta/augusta-shape-surface@2x.webp",
           "bytes": 230450,
           "sha256": "024dafb58e1a669b74d2076412c000ce40273136b6e7c6e6c7da6cbd03f71fa9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

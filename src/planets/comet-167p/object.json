@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "comet-167p",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CINEOS",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "784a48ed7537866ac2154753283e9774ae6e2df0ac32422d3706b2014eb854c7"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "1a34083446c311415f6b0d2581f0c23d78b38750c82547f3e69e52255bf720a2"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "410fe8b44e1bbba5aea99e715739e33b05d4f2f6d0d01d6a5dd24fdbf2c5c267"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "93c7c2ab5e9550da73ebb16a6f80626a5301cad8567954e9817c68e656b45e74"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 24.398600977157937
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/styles/comet-167p-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5dcc3857887dd0b48cb08510e9e5a79d8f1c99b4562b8d92cb737ae71369973b"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        644752536082.3907,
+        2358573885013.678,
+        1708340220290.0798
+      ],
+      "presentationToReference": [
+        0.22113360312567049,
+        0,
+        -0.9752435232128733,
+        0.894768438696961,
+        0.3977771559319137,
+        0.20288611418852823,
+        0.3879295950046361,
+        -0.9174820620691818,
+        0.08796189573230576
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 106.08087381373016,
+      "bodyRadiusM": 24398.600977157937
+    },
+    "catalog": {
+      "name": "CINEOS",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 19.938682340272877,
+      "description": "167P: CINEOS follows a distant orbit that stays beyond Saturn at its closest approach to the Sun. Its nucleus is represented here by a size illustration from Celestia’s catalog. Illustrative nucleus at Celestia’s catalog scale.",
+      "systemName": "Solar System",
+      "order": 59,
+      "context": {
+        "order": 448
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "6c5bf5927aef929a48323e467855bd2b338bf358952120bc80b36ab432d3aea2"
+  }
+}

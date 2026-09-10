@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "09d789229e593eb23a601c2b176b558f8ffcfa44b378539cd64528fc2f6da86c"
+    "sha256": "b9d9f10b08cdba04fc21a2f16e97d046059766555730ac75271ba1cddf7596f5"
   },
   "id": "steins",
   "properties": {
@@ -123,7 +123,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b226dd5e8bebe1dd86721da2bc17664d145e9a539c98b09e092253443eae452f"
+        "sha256": "26e3e81976f94490234848203ec4092b76653d5f9002936550a8016225fd6e03"
+      }
+    },
+    "catalog": {
+      "name": "Steins",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.363,
+      "description": "Explore Steins with a Rosetta photomosaic, its irregular shape and mapped elevation.",
+      "systemName": "Solar System",
+      "order": 134,
+      "context": {
+        "order": 51
       }
     }
   },

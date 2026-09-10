@@ -67,7 +67,7 @@
         {
           "id": "rings",
           "path": "source/preparation/rings.json",
-          "sha256": "5d75b7dec573d5be29af90ef161d3880f9600515ca6220ed51bfad6bbf75b211"
+          "sha256": "b5ea81c832e4c4c6fa6656453a535d3b5bbc1fe3019e6d1d8d3cebb32ec2adb5"
         },
         {
           "id": "navigation",
@@ -117,7 +117,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "133ffeb5c124f320247307b58e7f388291e5cbdc6724b67ca5f73373d12a3377"
+          "sha256": "715fcbed1bb72bb7d18a2b53f320bbc5e6bb7953648b37c498535b2d0915f32e"
         }
       ],
       "shape": {
@@ -211,6 +211,18 @@
       "metadata": {
         "url": "prepared/page.json",
         "sha256": "a789bb9decfa530729a07f4d11ee939676f9f406bbbd3187047e8d27f51eacd9"
+      }
+    },
+    "catalog": {
+      "name": "Jupiter",
+      "classification": "planet",
+      "color": "#b48b67",
+      "distanceAu": 5.2,
+      "description": "Explore Jupiter in 3D with cssEarth. Discover the solar system’s largest planet, its colorful cloud bands, giant storms, and orbiting moons.",
+      "systemName": "Solar System",
+      "order": 425,
+      "context": {
+        "order": 13
       }
     }
   },

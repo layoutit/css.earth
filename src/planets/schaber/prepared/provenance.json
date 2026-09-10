@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "schaber",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0018550a6b8b4f38190dbc6f7eda389c9ca8ad04dd567587151e7e503ae259a4"
+    "sha256": "1dbb118ec7cf4089d21e9ca604b9c6c7fe1a55fe7d9d900ae9318d06af4f6098"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {

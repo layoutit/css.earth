@@ -43,7 +43,8 @@ archive submission or second provenance format.
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
-| Reports and images under `docs/` | Original reports, screenshots and logs tied to the version tested |
+| Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
+| Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |
 
 Every file under `source/` needs a manifest entry. Body packages contain data,
@@ -93,6 +94,30 @@ or assembled a mosaic before pinning it, explain that step. Disclose an unknown
 original download identity.
 Keeping every temporary response is unnecessary.
 
+### References and retained files
+
+Use citations for papers, catalogue pages, search results and explanatory webpages.
+In the body README, record the values that support a claim, their units and
+uncertainty, the source title and authors/year, DOI or versioned URL, and the
+specific table, field or section. Explain any transcription, selection or conversion.
+Keep exact values consumed by preparation in its existing data records and recipes;
+link them instead of copying long tables into Markdown.
+
+Keep original scientific inputs and native labels needed to decode them, either
+in Git or through a tested restoration recipe with byte counts and hashes.
+An acquisition parser may read HTML temporarily. Save its selected data and source
+identity; the downloaded webpage does not become a permanent evidence file.
+“Reference evidence” and “the website might change” are not reasons to commit a page.
+
+Before removing a page, check code, acquisition recipes, manifests, tests and
+provenance references. Preserve used numerical extracts, source identity and
+extraction method. Update active references and generated pins together. Original
+reports remain unchanged at their recorded Git revision. Do not replace duplicated
+pages with a shared webpage archive or a blanket ignore rule.
+GitHub language classification does not determine what belongs in Git.
+
+### Interpretation
+
 Explain the following where relevant:
 
 - Observations, derived measurements, models or illustrations; the provider's
@@ -112,9 +137,12 @@ license alone does not establish an input's terms.
 
 ## Save enough evidence to check the result
 
-Keep reports in their existing locations; new independent runs may use descriptive
-dated folders under `docs/evidence/`. No extra JSON format or fixed file set is required.
-Record:
+Store new original evidence with the body or shared test/tool that owns the claim,
+and link it from the existing body README or shared guide. Keep an artifact in the
+current tree when a maintained explanation or test needs it. Link historical
+reports at their exact Git revision; preserve their original contents there.
+Keep scratch captures and repetitive logs out of `docs/`. No extra JSON format
+or fixed file set is required. Record:
 
 - **What was tested:** bodies and views, code revision, and relevant source,
   prepared and runtime records. Link manifests. Save uncommitted changes, identify
@@ -159,18 +187,53 @@ A passing body test is not a full-suite pass. Runtime image installation does
 not prove source restoration, complete Earth paging or every remote file's
 availability. State what remains unknown.
 
-## Update the docs with the change
+## Pull requests
+
+Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
+for PR titles: `<type>[optional scope][!]: <summary>`. For example,
+`feat(universe): add prepared galaxy layers` or `docs: clarify source credits`.
+Use `feat` for features, `fix` for fixes and an appropriate type for other work.
+Scope is optional; name the affected area when useful. Mark breaking changes with `!`.
+
+Apply **ISO 24495-1:2023** to every PR title and description through the
+[plain-language rules](#plain-language). Lead with the problem and resulting
+behavior; give reviewers concrete changes, short explanations and visible limits.
+For claims about sources, processing or scientific views, apply the **PDS4 1.26.0**
+[content requirements adapted above](#standards-basis): identify changed products
+and versions, explain processing and interpretation changes, and link the records
+and evidence for the tested revision. Keep detailed provenance in its maintained
+account and link it from the PR.
 
 Update affected records, NOTICE credits/terms and the body README's explanation,
-results and known problems. Run relevant checks. For small corrections, append
-a dated result to the existing report; never overwrite failures or present old
-screenshots as new. Extend existing sections when adding a dataset.
+results and known problems. Extend existing sections when adding a dataset.
+Run relevant checks and summarize their results in the PR. GitHub already records
+CI revisions; identify the revision and relevant differences for local or reused
+evidence. Link the maintained account instead of adding a PR completion report to `docs/`.
 
-Commit the docs, source records and original evidence needed for review, including
-relevant failures and partial runs. Keep scratch output and repetitive logs ignored;
-explain unusually large additions once in the PR and use agreed storage. Historical
-evidence may be removed only after its replacement is authorized and verified.
-This contract authorizes neither uploads nor moving stored evidence.
+Use the [template](../../.github/pull_request_template.md) as a starting point.
+Headings are optional: a small change can be one paragraph explaining the problem,
+result and relevant check. Omit unused prompts. Do not add standards declarations,
+N/A entries or screenshots just to fill the template.
+
+Commit source records and the evidence needed to review the change, including
+relevant failures. Each added artifact needs a named claim, explanation or test
+that uses it. Explain unusually large additions in the PR. Before removing an
+old report from the current tree, replace citations that still need it with
+verified links to its exact Git revision. Never rewrite its failures or present
+old screenshots as new.
+
+**Check images on GitHub (cssEarth rule).** Use a
+[GitHub attachment](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
+or an image committed at a fixed revision:
+`https://github.com/layoutit/cssEarth/blob/<commit>/<path>?raw=true`.
+Use the original attachment URL, not a temporary signed download URL.
+Local paths and localhost URLs are not reviewable evidence.
+
+After creating or editing a PR, reload its GitHub page and inspect every embedded
+image with normal repository access. Confirm it loads, is readable and matches the
+cited view and revision. File existence and HTTP success alone are insufficient.
+Fix broken embeds before handoff; if required visual evidence is unavailable,
+keep the PR in draft and say what is missing.
 
 **PROVENANCE DOCUMENTATION** maintains shared guidance and resolves contradictions;
 contributors update instructions affected by their change without an extra approval

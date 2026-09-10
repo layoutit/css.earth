@@ -134,12 +134,6 @@
       "expectedSha256": "e39a8a4ed070b4b8bf3e4b122f294b2c6c55993ce887e5f5c759b90ac22161ba"
     },
     {
-      "path": "reference/161.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 34300,
-      "expectedSha256": "ea9f5b2214371c39528dfc27918a8fff3aa16fd07d8e642925888b7a5e3c4a4e"
-    },
-    {
       "path": "reference/calibration.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3214,
@@ -147,15 +141,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 1504,
-      "expectedSha256": "938f0677d1b7f92183641dbfff2f6384d5c92dbc4dcc494c161e48a8bd90bac2"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "b057eb24b9cc831043904a10c596e9f28d554a79748baecd32ef76b245e873af"
+      "expectedSha256": "938f0677d1b7f92183641dbfff2f6384d5c92dbc4dcc494c161e48a8bd90bac2",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1154",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -182,22 +173,10 @@
       "expectedSha256": "cdcbc1bf321e943d01cfe8b46dcf6729a2c100bf67104e85d6aec8d8efbb8f7f"
     },
     {
-      "path": "reference/model-1154.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 90614,
-      "expectedSha256": "8ad01d700d437811bca55b37eb613737be909dab805b71dceb89db4a2b7e1981"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 5197,
       "expectedSha256": "84f36c942ce85e06cf783c9ec02e798a3371a6c819ccdc7ff0e39faa5d661e2b"
-    },
-    {
-      "path": "reference/neowise-definition.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 18419,
-      "expectedSha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac"
     },
     {
       "path": "reference/neowise.csv",
@@ -210,12 +189,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3166,
       "expectedSha256": "0d1931422549a468c6ed29b362275d20a2b0a0cf5869fc01134b796fba047155"
-    },
-    {
-      "path": "reference/search.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 8925,
-      "expectedSha256": "915f6516cd386f98a31915493120485fd5de8f33f19c25d7af7a684de67b9a92"
     },
     {
       "path": "reference/spin.txt",

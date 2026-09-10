@@ -1,0 +1,51 @@
+{
+  "id": "dione",
+  "classification": "satellite",
+  "order": 228,
+  "physical": {
+    "name": "Dione",
+    "horizonsCode": "604",
+    "meanRadiusKm": 562.5,
+    "gravitationalParameterKm3PerS2": 73.116,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "604",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 0.70760484777,
+    "poleDeclinationRad": 1.45805857033,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 377650.429,
+      "eccentricity": 0.002196145785,
+      "inclinationRad": 0.000485672587,
+      "ascendingNodeRad": -1.209807479578,
+      "argumentOfPeriapsisRad": -1.324639802988,
+      "meanAnomalyAtEpochRad": 83854.73086112856,
+      "meanMotionRadPerDay": 2.294247244216691,
+      "ascendingNodeRateRadPerDay": -0.001469116674095798,
+      "argumentOfPeriapsisRateRadPerDay": 0.002939492565279055
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "604",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "604",
+      "center": "500@699"
+    }
+  }
+}

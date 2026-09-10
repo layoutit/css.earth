@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { formatViewCoordinate, formatViewDate, formatViewDistance, measureView, viewScale, measurePreparedFocusView } from '../view-readout.mjs';
+import { formatViewCoordinate, formatViewDate, formatViewDistance, measureView, viewScale, measurePreparedFocusView } from '../view-readout.mts';
 
 const identity = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const state = { eyeM: [0, 0, 3e6], radiusM: 1e6, rotation: identity,

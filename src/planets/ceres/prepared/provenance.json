@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ceres",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e0bb32876fc9782713e67e455adf1bb6b0404b5a5f3b5aac38c44b30f02a18a6"
+    "sha256": "b23b085f66aaa99965db239f381bb1bc49c15021d4afb43fb419be7263116e0c"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -376,10 +376,14 @@
       },
       "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
       "bytes": 9750062,
@@ -427,10 +431,14 @@
       },
       "coverage": "Observed pixels, shadows, and mosaic seams are preserved. Exactly black pixels connected to the southern source border are marked with the shared neutral gray cartographic grid before reprojection. No inferred terrain or inpainting.",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
       "bytes": 1033656,
@@ -462,10 +470,14 @@
       "format": "geotiff",
       "coverage": "Height above the source's 470 km reference sphere. Polar caps beyond 60° latitude are withheld because the published model interpolates polar gaps without a validity mask. Gray grid marks withheld or missing data.",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
       "bytes": 466647217,

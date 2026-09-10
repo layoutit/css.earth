@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "alkeste",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "8f5b3da2a9fa79ad2ad067ca634e5b4df17aad828b1a3b2c06a1d7c889fd6310"
+    "sha256": "8d5dcf942d24af29a6ecbede42bda67ee76a87b55fdec8ddf338973e5701cbbf"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "6b1581ba2bde44e3dbd3c799e1e2bea6562f10dcfd5b83ee8d07481ae37f1ed6",
       "bytes": 45447,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "445dfa59c6a07bf5dcc313b91dedb9123ab8a91a7606404b8f909541b9a94a03",
       "bytes": 9354,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/alkeste/alkeste-elevation-thumbnail.webp",
           "bytes": 5504,
           "sha256": "64621b0b45d85d24c9c3900fdefbf87550f225a2e3c19a67c465bc1044d82a4c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alkeste/alkeste-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alkeste/alkeste-elevation-surface@2x.webp",
           "bytes": 290004,
           "sha256": "9a743795d0c3dcb33d1d72260d49771cad0a2d76b4b7a6c93c23b4596af7e18a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/alkeste/alkeste-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alkeste/alkeste-shape-surface@2x.webp",
           "bytes": 237740,
           "sha256": "b20a3f261ae301038735259e8fbaeb5cdb49dcce2f1a4d55f6380620979a179e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

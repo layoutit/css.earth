@@ -4,7 +4,7 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { parsePdsRgbLabel, preparePdsRgbObservation } from './observed-pds-rgb.mjs';
+import { parsePdsRgbLabel, preparePdsRgbObservation } from './observed-pds-rgb.mts';
 
 test('PDS RGB planes retain channel order, projected crop and valid single-channel black', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'cssearth-pds-rgb-'));

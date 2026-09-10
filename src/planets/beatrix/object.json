@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2417619d6e44aedc4120834ac87cac650cceb80d7f42585edeaeed01dce3c52e"
+        "sha256": "aba76302ee36a0073e1a610ad98ffe454795d237bafb23bfdde5e3d93eee50a2"
+      }
+    },
+    "catalog": {
+      "name": "Beatrix",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4311351389602276,
+      "description": "Explore Beatrix in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 248,
+      "context": {
+        "order": 290
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "35550171b6c303f76be45c8d56513b9a1a47003b0ae2d0854cf5becb047fea09"
+    "sha256": "d739c33dcc735d64129865fa4e36c471137b410fe43cd6de6c263212b66dbfd6"
   }
 }

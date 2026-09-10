@@ -5,17 +5,17 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { readPlutoFacts, parsePlutoFacts } from "./preparation-fixture.mjs";
 import { decodeElevationGrid, elevationColor, elevationRaster } from "./preparation-fixture.mjs";
-import { requireObject } from "../../../../site/objects.mjs";
+import { requireObject } from "../../../../site/objects.mts";
 
 
-test("binds Pluto facts and registry classification to owned source snapshots", async () => {
+test("binds Pluto facts and registry classification to owned source records", async () => {
   const facts = await readPlutoFacts();
   assert.equal(requireObject("pluto").classification, "dwarf-planet");
   assert.equal(requireObject("pluto").distanceAu, facts.meanHeliocentricDistanceAu);
   assert.equal(PREPARED_PLUTO_SCENE.body.meanRadiusKm, facts.meanRadiusKm);
   assert.equal(PREPARED_PLUTO_SCENE.body.orbitalPeriodYears, facts.orbitalPeriodYears);
   const nasa = JSON.parse(await readFile(new URL("../../../../src/planets/pluto/source/editorial/nasa-pluto.json", import.meta.url)));
-  const jpl = await readFile(new URL("../../../../src/planets/pluto/source/orbit/jpl-physical.html", import.meta.url), "utf8");
+  const jpl = await readFile(new URL("../../../../src/planets/pluto/source/orbit/jpl-physical.json", import.meta.url), "utf8");
   assert.throws(() => parsePlutoFacts(jpl.replaceAll("1188.3", "1000.0"), nasa));
   assert.throws(() => parsePlutoFacts(jpl, { ...nasa, id: 1 }));
   const styles = await readFile(new URL("../../../../src/renderers/css/styles/pluto-surfaces.css", import.meta.url), "utf8");

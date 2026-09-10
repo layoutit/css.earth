@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "taurinensis",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "11b0b0d1acb30ce5999c346716a278d9e02fe3e9380c62b75124a6e8be539549"
+    "sha256": "995bab76cdb91790a9ae0138c62d8b54b8e3d8923e41771b28fbc7af99c109e9"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -355,7 +355,7 @@
       "sha256": "23d5892b451e70763b68e7edc06b731de621fd79a98820621f63c11de034580e",
       "bytes": 82222,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,7 +380,7 @@
       "sha256": "6840157bd46d6f6b945e033eeb443be09226599abcc824aa5545495e1314e189",
       "bytes": 11697,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/taurinensis/taurinensis-elevation-thumbnail.webp",
           "bytes": 4742,
           "sha256": "1950ff31dc0f938266c6d526e2d1261d907bc8256d9ad21832213524185a5eea",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/taurinensis/taurinensis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/taurinensis/taurinensis-elevation-surface@2x.webp",
           "bytes": 292392,
           "sha256": "8e50fdc60563ff1d2e512f151c78a9102be9399d4836dc3a76dd473356423616",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -457,13 +457,13 @@
           "url": "/scenes/taurinensis/taurinensis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/taurinensis/taurinensis-shape-surface@2x.webp",
           "bytes": 198434,
           "sha256": "5f2092f9fbe1090ddd0f1f515cc39493a8ef3ab9e65d5760092c4895ec808563",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

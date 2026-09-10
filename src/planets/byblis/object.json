@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "75bd77810894fc80221bed492576ebfe76404128a0c9f528b759206a1518b8e7"
+          "sha256": "79bea850730ddf689516ef2a085c2d16acc7da4a6ecb776a995ad4426008f4dc"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8c843812289644c389025942999eef500840618cde7b598e5ce75180b334d9ba"
+        "sha256": "43f2330ce25123e26922aeda49b69f499d0b9a6dfacffb0371b47ef5e2a66ce1"
+      }
+    },
+    "catalog": {
+      "name": "Byblis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1628105645290394,
+      "description": "Explore Byblis in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 310,
+      "context": {
+        "order": 356
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "52e19c4a84bbb449f74c3949c682e10ea59e38a2ceac834ed6d6e121259f2c76"
+    "sha256": "7d63c7c2a1903bbbce1107fc965db8519c3254b676958984075487a2ca1b101a"
   }
 }

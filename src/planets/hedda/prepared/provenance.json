@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hedda",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cf9371399c1e50b967d71a8c586a09a4e0b9232b2b82ee2fd4cb42396282889d"
+    "sha256": "807cce20900b9deea97cd81adb2ee49408e862aa93e7b57a1cb0568b4c6929a0"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "2960870d9b24a38294260667c205abc1a2d88ca5b62af00ff47a50747cf67838",
       "bytes": 44637,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "febe093ef9337ab990cb85a27f91f531826a4693c56f24209134146dfd6f4d27",
       "bytes": 9573,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/hedda/hedda-elevation-thumbnail.webp",
           "bytes": 6274,
           "sha256": "bde4e7a3ed00a011498e43fbcc54bf6faf832867c1085b24e064aeb2f78247ba",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hedda/hedda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hedda/hedda-elevation-surface@2x.webp",
           "bytes": 318628,
           "sha256": "e1e836525802114b9db59635803fd36a34a1aebc66754a64fea683bf86fa91d8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/hedda/hedda-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hedda/hedda-shape-surface@2x.webp",
           "bytes": 265212,
           "sha256": "ecc399fb7341404f7c426aba897cb02190c35f9d0cdc2d8482284ae3606fa81d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

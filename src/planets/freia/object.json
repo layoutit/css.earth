@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "cc484cb5306f1c55f51fded3840572f0581c6fbf10163190b3063a5d83fd1f32"
+        "sha256": "6887f8b4cf02384f52d7724b03b95524a3d7fcd4d50c7364150edd332d5ffe95"
+      }
+    },
+    "catalog": {
+      "name": "Freia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.4087870327567744,
+      "description": "Explore Freia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 245,
+      "context": {
+        "order": 287
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "73a449ddb2ac03320114d34c8e0b9060aa3f194e1a265accf22216e064aaa5e2"
+    "sha256": "328185e97c5baf542240f75440ff6696f28bcf274a6759c22037ebeefeba0c8a"
   }
 }

@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 import context from '../../src/planets/sun/prepared/world-context.json' with { type: 'json' };
-import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mjs';
-import { bodyCardViewAtCamera } from '../overview-context.mjs';
-import { createPreparedWorldNavigation } from '../prepared-world-navigation.mjs';
+import { SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
+import { bodyCardViewAtCamera } from '../overview-context.mts';
+import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera } from '../../src/renderers/css/dist/navigation.js';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
@@ -145,7 +145,7 @@ test('clicking the already selected body in close-up does not zoom back out to i
 });
 
 test('galactic breadcrumbs zoom straight out from the current view without panning or turning', async () => {
-  const { GALACTIC_VOLUME, volumeZoomTarget } = await import('../system-framing.mjs');
+  const { GALACTIC_VOLUME, volumeZoomTarget } = await import('../system-framing.mts');
   const { rotateWorldPosition, worldRotationFromQuaternion } = await import('../../src/renderers/css/dist/navigation.js');
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5]]) {
     const from = { ...world, pose: { positionM: [2e12, -3e12, 1e13], orientationXyzw } };

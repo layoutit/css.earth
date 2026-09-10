@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2b73d6f2176d6310aec0808d8321b61d52ceb6e8826355dd37eb12d98efd05d7"
+          "sha256": "f542219ecf3affff26850aa6a492bf34d09b10b7b2ae31ba48f692927dafa76d"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b14df8cf17facef25c29e5ebd1b6fd5b35c3a20de01ed6677da056d78d85811a"
+        "sha256": "ae4e0402fd06bfd3bab817a8f238e3a03d72bd873223aa6ed79b84bbf8bbe821"
+      }
+    },
+    "catalog": {
+      "name": "Clementina",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.159622955651379,
+      "description": "Explore Clementina in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 338,
+      "context": {
+        "order": 384
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "f3ced540191c5b4f3e2ca0e2225ff2b193a873fcb1818a7fd4ffae2894774b46"
+    "sha256": "26961a11774488cf85c9f3eb359098374b00832bd778e3512bb5ddc066290386"
   }
 }

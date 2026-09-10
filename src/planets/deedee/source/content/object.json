@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "deedee",
+  "displayName": "DeeDee",
+  "panel": {
+    "introduction": "DeeDee, the informal nickname of 2014 UZ224, is a distant world discovered by the Dark Energy Survey. ALMA measured its faint thermal emission; the displayed sphere illustrates its inferred size, while its actual shape and surface remain unresolved.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Thermal-size illustration"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "635 × 635 × 635 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "Rotation period and pole unresolved"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Detached trans-Neptunian object"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification. Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole, rotation period or surface attitude is claimed. The grid marks unmapped terrain.",
+        "title": "Thermal-size illustration",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/deedee/deedee-model-thumbnail.webp",
+        "surface": "deedee-model-surface@2x.webp",
+        "poles": "deedee-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.3847/2041-8213/aa64d8"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Gerdes et al. (2017), ApJ Letters 839, L15, Table 1 and §4 (arXiv:1702.00731v2 pp.6,9–10).",
+      "href": "https://doi.org/10.3847/2041-8213/aa64d8"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/1702.00731v2"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://www.almaobservatory.org/en/press-releases/alma-investigates-deedee-a-distant-dim-member-of-our-solar-system/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.3847/2041-8213/aa64d8",
+      "credit": "Gerdes et al. (2017), ApJ Letters 839, L15, Table 1 and §4 (arXiv:1702.00731v2 pp.6,9–10)."
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Gerdes et al. (2017), ApJ Letters 839, L15, Table 1 and §4 (arXiv:1702.00731v2 pp.6,9–10)."
+    }
+  }
+}

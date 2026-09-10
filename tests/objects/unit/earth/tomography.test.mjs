@@ -3,8 +3,8 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
-import { readMantleTomography, tomographyColor, tomographyLegend } from '../../../../tools/objects/paged-ellipsoid/tomography.mjs';
-import { prepareLocationPoint } from '../../../../tools/objects/geographic-pages/prepare-location.mjs';
+import { readMantleTomography, tomographyColor, tomographyLegend } from '../../../../tools/objects/paged-ellipsoid/tomography.mts';
+import { prepareLocationPoint } from '../../../../tools/objects/geographic-pages/prepare-location.mts';
 
 const source = fileURLToPath(new URL('../../../../src/planets/earth/source/', import.meta.url));
 const json = async path => JSON.parse(await readFile(new URL(path, import.meta.url)));

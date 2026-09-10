@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';
-import { murEnsoContent, parseMurCapabilities, parseMurColors, verifyMurTile, sha256 } from '../../../../tools/objects/paged-ellipsoid/mur-imagery.mjs';
+import { murEnsoContent, parseMurCapabilities, parseMurColors, verifyMurTile, sha256 } from '../../../../tools/objects/paged-ellipsoid/mur-imagery.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readCoraltempAnomaly, anomalyColor } from '../../../../tools/objects/paged-ellipsoid/sst-anomaly.mjs';
-import { newestCoraltemp, parseEnsoAdvisory } from '../../../../tools/objects/paged-ellipsoid/refresh-earth-enso.mjs';
+import { readCoraltempAnomaly, anomalyColor } from '../../../../tools/objects/paged-ellipsoid/sst-anomaly.mts';
+import { newestCoraltemp, parseEnsoAdvisory } from '../../../../tools/objects/paged-ellipsoid/refresh-earth-enso.mts';
 
 const source = resolve('src/planets/earth/source');
 const config = JSON.parse(await readFile(resolve(source, 'preparation/paged-ellipsoid.json')));
@@ -23,8 +23,14 @@ test('latest acquisition crosses years and excludes checksum-only placeholders a
   assert.throws(() => newestCoraltemp([listings.at(-1)], '2026-01-02'), /No published NOAA/);
 });
 
-test('status and issue date come from the saved NOAA advisory, not from SST pixels', async () => {
-  assert.deepEqual(parseEnsoAdvisory(await readFile(resolve(source, 'science/enso-advisory.html'), 'utf8')), map.scientific.advisory);
+test('extracts the NOAA issue date and status and preserves their separate source record', async () => {
+  // Selected headline fields from the 13 August 2026 NOAA CPC advisory.
+  const headline = '<p>issued by CLIMATE PREDICTION CENTER 13 August 2026</p>'
+    + '<p>ENSO Alert System Status: El Ni&ntilde;o Advisory</p><p>Synopsis:</p>';
+  const expected = { date: '13 August 2026', status: 'El Niño Advisory',
+    url: 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml' };
+  assert.deepEqual(parseEnsoAdvisory(headline), expected);
+  assert.deepEqual(map.scientific.advisory, expected);
   assert.throws(() => parseEnsoAdvisory('new format'), /format changed/);
   const content = JSON.parse(await readFile(resolve(source, 'content/object.json')));
   assert.deepEqual(content.lenses.controls.find(lens => lens.id === 'enso'), murEnsoContent(map.scientific));
@@ -85,7 +91,7 @@ test('NASA full coverage, published bins, and independently decoded pixels survi
   assert.equal(sha256(bytes), receipt.mosaic.sha256);
   const { data, info } = await sharp(bytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   assert.equal(info.width, 16384); assert.equal(info.height, 8192);
-  const witnesses = JSON.parse(await readFile('docs/evidence/earth-enso/mur-native-witnesses.json'));
+  const witnesses = JSON.parse(await readFile('tests/objects/fixtures/earth-enso/mur-native-witnesses.json'));
   for (const witness of witnesses.records) {
     const [x, y] = witness.outputPixel, offset = (y * info.width + x) * 3;
     assert.deepEqual([...data.subarray(offset, offset + 3)], witness.expectedMosaicRgb, witness.name);

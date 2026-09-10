@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "97a84a6875f9cced9180bd8744055d3bc159bafbfe28bac83e83dfb467c82de9"
+        "sha256": "af90cb9c88f8f56fa01a0bc95dbee710b9d0fa016b25351930898b4ff01339eb"
+      }
+    },
+    "catalog": {
+      "name": "Themis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1442518680771308,
+      "description": "Explore Themis in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 150,
+      "context": {
+        "order": 81
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "7a5251e9da842839936a7d660f388fda38cf55eb8b7fbde976d9ff2bb4e042b5"
+    "sha256": "73e99b5ecdb891da898f602e0909059c1e17f4a4571fdd9edc74337fa629fe38"
   }
 }

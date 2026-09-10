@@ -74,10 +74,14 @@
       ],
       "expectedBytes": 105281,
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
+          }
+        ]
       }
     },
     {
@@ -318,10 +322,14 @@
       ],
       "expectedBytes": 6482880,
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits"
+          }
+        ]
       }
     },
     {
@@ -338,10 +346,14 @@
       ],
       "expectedBytes": 6482880,
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits"
+          }
+        ]
       }
     },
     {
@@ -358,10 +370,14 @@
       ],
       "expectedBytes": 6482880,
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits"
+          }
+        ]
       }
     },
     {
@@ -378,10 +394,14 @@
       ],
       "expectedBytes": 6482880,
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits"
+          }
+        ]
       }
     },
     {
@@ -659,6 +679,12 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1335,
       "expectedSha256": "072e1ad9dd392f84fd8fd08676761a2bae5588ce4af076d3138913066bc51759"
+    },
+    {
+      "path": "presentation/overview.json",
+      "expectedBytes": 39,
+      "expectedSha256": "0abc410dea696938b08a69e03dc325d7fb484e190148ced3e6b65e8c94ad945a",
+      "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
     }
   ]
 }

@@ -6,14 +6,16 @@ Checked 2026-09-09. Original [DAMIT model 456](https://damit.cuni.cz/projects/da
 
 Convex lightcurve model at the uncertain 1.2 km archive diameter.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-Recorded four-body results retain their [original build identities](../../../docs/non-belt-populations/README.md#evidence-identity).
+Recorded four-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).
 
-- Original mesh, scalar and sampled distance checks are in the [qualification record](../../../docs/near-earth-population/qualification.json). These are sampled distances, not an exhaustive Hausdorff bound or source-model accuracy.
+- Original mesh, scalar and sampled distance checks are in the [qualification record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/qualification.json). These are sampled distances, not an exhaustive Hausdorff bound or source-model accuracy.
 - Production browser checks passed at DPR 1 and 2. Settings was hidden, so optional
   Shadows was exercised through a bound control event.
-  [Browser record](../../../docs/near-earth-population/browser-validation.json) · [Source restoration](../../../docs/near-earth-population/source-restoration.json) · [Fresh asset installation](../../../docs/near-earth-population/fresh-install.json).
+  [Browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/browser-validation.json) · [Source restoration](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/source-restoration.json) · [Fresh asset installation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/fresh-install.json).
 
 ## Known problems
 
@@ -45,8 +47,8 @@ Source pole: ecliptic J2000 (311°,-78°). Reference sidereal period: 6.80329 h.
 
 - [Original numerical mesh](https://damit.cuni.cz/projects/damit/stored_files/open/1783/shape.txt) — selected, pinned unchanged.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — pole, period, units and archive diameter definitions; CC BY 4.0.
-- [Ďurech et al. (2012)](https://damit.cuni.cz/projects/damit/references/view/144)
-- [Hanuš et al. (2015)](https://damit.cuni.cz/projects/damit/references/view/163)
+- [Ďurech et al. (2012), Analysis of the rotation period of asteroids (1865) Cerberus, (2100) Ra-Shalom, and (3103) Eger - search for the YORP effect](https://ui.adsabs.harvard.edu/abs/2012A%26A...547A..10D)
+- [Hanuš et al. (2015), Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties](https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H)
 - [Hanuš et al. (2015), thermophysical fits with shape and pole uncertainty](https://arxiv.org/html/1504.04199)
 
 Alternative shapes/poles: None in the checked target listing.

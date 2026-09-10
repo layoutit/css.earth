@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c14440dcfdc51bbebf8df3ab21b41c4be9133850b7be309c091c9ede491f1f0e"
+        "sha256": "f23c1d12c397272a33f994e925218ccfcee1a0ac6985c7d87f863b72724cd984"
+      }
+    },
+    "catalog": {
+      "name": "Hektor",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.27706210284509,
+      "description": "Explore Hektor in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 195,
+      "context": {
+        "order": 138
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "620f67bcc8fd86506f1bff0e778e25cfbcb7d89083268e19d82bc89bf33413db"
+    "sha256": "6d4d6b0b3f4df57a33ec06356eaa6619abfec892a28bf2c3e992bfb514cd0146"
   }
 }

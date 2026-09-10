@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "e58c477fcd87dbf22fc5c0704e8f3a10bc8124a4c301677c40380a466ea8fed0"
+          "sha256": "ff911e5c06516ed083145b3181f4e1e2855b90fa5c58ab9198b5498483a9942c"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "aa8eb5efc5f20b6f958a5a376c4de37f727daaf29178159a23fb69d9c04c7b9f"
+        "sha256": "e9266dd8a45f4a5e3117b44a51d1cabe1933484a58b9852a30cf2f4026ab9071"
+      }
+    },
+    "catalog": {
+      "name": "Dresda",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.884592869415074,
+      "description": "Explore Dresda in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 343,
+      "context": {
+        "order": 389
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9927e9c96a933ece872202b18fd15bf43263e806d747f895979144952b91a7cd"
+    "sha256": "80d20bb0f50a854f26558e8f456e303e595e06586d2e41929f2b475773a5b9c4"
   }
 }

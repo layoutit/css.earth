@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "../../packages/engine/node_modules/@types"
+    ]
+  },
+  "include": [
+    "dataset-navigation-browser.mts",
+    "typescript-owners-browser.mts",
+    "../../src/renderers/css/paging/__fixtures__/prepared-page.mts"
+  ],
+  "exclude": []
+}

@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "53de6d6d14397909a5a7922bbaea5c32ea59c08618bf629ec731f59817d29ae3"
+        "sha256": "034ee214b56622a02978b5175e4be09131a07d504b93dd3ab6e4f0f22987c27d"
+      }
+    },
+    "catalog": {
+      "name": "Herculina",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.769403168493778,
+      "description": "Explore Herculina in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 175,
+      "context": {
+        "order": 106
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3982558622fedf5188cd3643497738bef22b53f7e4f6e321df16dd5359bb3054"
+    "sha256": "1a7b58449db7cd3d78d04e11346677cfe209241894c76999966ada64ab7fd24b"
   }
 }

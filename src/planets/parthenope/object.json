@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3a0694679b0bdfc8ad0eac26b455003e95360d5d12d37f6ffb8106df62990f64"
+        "sha256": "867121be0fd1e71c8b88128afb96407d87f4267bc3c04463ff0a73f900423698"
+      }
+    },
+    "catalog": {
+      "name": "Parthenope",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4520884704604438,
+      "description": "Explore Parthenope in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 162,
+      "context": {
+        "order": 93
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "06e26b0d25a382ceb4295b69adae1474a75e6c20881cc84ae9231a06ab291214"
+    "sha256": "c852958c23728bcf8a8ae8969024058bc284ee1e737a389a8019de9572bf848c"
   }
 }

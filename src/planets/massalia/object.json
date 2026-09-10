@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "7b3389df5f3b2d17421a449e127c97d1110f7ef638da9ebb67df270fb1dcb831"
+          "sha256": "34bd9e2b517ffc398e2c52b59a905a97f1e10b9d0134fec5e5ada7e88aaaa392"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "a24ee09daf54850cf318142f9f5f46f0d69051124a7767b3ac78fb5f8182b484"
+        "sha256": "4e90560ffb9db9c3b8c8eec876c5b18809c560a41021372a4f92e15930864b22"
+      }
+    },
+    "catalog": {
+      "name": "Massalia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.4079553806420346,
+      "description": "Explore Massalia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 373,
+      "context": {
+        "order": 177
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "9e6c095bd2770782db9b3397ef575b5da4f5852bce0aac3a4aa89ddd48d7363b"
+    "sha256": "37a76da148ee18190293d0a2051fc1e6eb0347027526161d0e2d6fb1ddde0bf4"
   }
 }

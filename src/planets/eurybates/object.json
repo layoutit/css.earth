@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "880a073e7b515200466667dc55883d607ab11decf99e0c5641b00b1e1f5a59ba"
+        "sha256": "4b84221778f2160a1730248de020d9a889b540d7e5edae8de115ba10d54079b2"
+      }
+    },
+    "catalog": {
+      "name": "Eurybates",
+      "classification": "asteroid",
+      "color": "#a0a0a0",
+      "distanceAu": 5.21783282489895,
+      "description": "Explore Eurybates, a Lucy target, through its observation-constrained approximate ellipsoid.",
+      "systemName": "Solar System",
+      "order": 21,
+      "context": {
+        "order": 256
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "720e1625ecb108e937501d779a541fe396cefaa7640940cacc9d3c0ff8a65512"
+    "sha256": "808943ff4553b44a063ef7477179c5a656efa3b3fdcecd2ed9f0ae43cc7650f0"
   }
 }

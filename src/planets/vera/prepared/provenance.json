@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "vera",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "644b9ffc6f33fa61913bee15ff27ae26dac11a1232ee70b7eec19ee1ce66fe9b"
+    "sha256": "27edfcae331d12640a9a7d4eaab3687811aa04605f246c39563edd68887dd997"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "2d0eb67cc470d629766b5c5f396820808162acbb1bd994548ffc9b38329268dc",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "4150a81d87758d62c3d7a91fc2e5010a28a95a1250b330fda5f232b222b7fa81",
       "bytes": 8687,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/vera/vera-elevation-thumbnail.webp",
           "bytes": 5076,
           "sha256": "bd2aa2c6b146358eb246c0a3325a110baf717acd19ae33edb1698a6177f2d49c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vera/vera-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vera/vera-elevation-surface@2x.webp",
           "bytes": 258794,
           "sha256": "5972637dbf7cb6d7d07b099acead481c22b4efd93301bd136289f827f769aac3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/vera/vera-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vera/vera-shape-surface@2x.webp",
           "bytes": 214978,
           "sha256": "45e939b60cfe6b431e0f3519a11d9fbe346b8e3c9d5bb680548cb3fab3d64be7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

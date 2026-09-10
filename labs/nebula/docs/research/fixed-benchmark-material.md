@@ -34,7 +34,7 @@ At the same camera pose, isolate each active bank with its existing optical-path
 
 **All three still fail the strict bank-handoff gate.** Fixing cloud ownership and registration does not calibrate the benchmark’s axis-dependent compositing. Preserving exact alpha deliberately prevents hiding the defect by reshaping each material. No per-image or per-axis gain has been fitted to force these checks to pass.
 
-The remaining calibration belongs to the common prepared-bank encoding/compositing layer. Earlier sampling changes reached an impasse; see the [historical raw-density experiment](research/raw-density-slice-calibration.md). A future correction must improve identical-camera comparisons while retaining the accepted cloud, all stellar positions and local texture continuity. Do not declare rotation stability from passing unit tests, average color matching or successful bakes.
+The remaining calibration belongs to the common prepared-bank encoding/compositing layer. Earlier sampling changes reached an impasse; see the [historical raw-density experiment](raw-density-slice-calibration.md). A future correction must improve identical-camera comparisons while retaining the accepted cloud, all stellar positions and local texture continuity. Do not declare rotation stability from passing unit tests, average color matching or successful bakes.
 
 ## Repeat the saved-output checks
 

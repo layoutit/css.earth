@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ivar",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7731f856667648a6151bfb7bebf5a0b3d9cc8909b3613cc4df010221ca7a76b7"
+    "sha256": "abdaed7e9dd6ff3e6eefa174979905b6bcbe9bf01158666c8c113bafee32d8b2"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -355,7 +355,7 @@
       "sha256": "6838a5ad71d37ea2d341cb2b4aa37a66d698bf84202b49cbb7084c4dc4095c24",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,7 +380,7 @@
       "sha256": "e09a9e925b94e1623dc0b6108b5370953fb1295a8cadfc575ecf6271fc14427a",
       "bytes": 7789,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/ivar/ivar-elevation-thumbnail.webp",
           "bytes": 4518,
           "sha256": "01784c6d0a8102e1d0502f88bbbb88e12d72a34dfaa30bd2700639851f3d061d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ivar/ivar-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ivar/ivar-elevation-surface@2x.webp",
           "bytes": 264666,
           "sha256": "126644c33c4ae41f120c44a44409d4efef2e5c0e1341016bb9be7b107e69efe8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -457,13 +457,13 @@
           "url": "/scenes/ivar/ivar-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ivar/ivar-shape-surface@2x.webp",
           "bytes": 195828,
           "sha256": "501cde56e1cb4ca06ce9f5414e7f25b646863bd635f3586cfb20fd8132a26e63",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

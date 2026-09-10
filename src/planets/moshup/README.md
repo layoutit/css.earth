@@ -4,7 +4,7 @@ Moshup is the primary of the near-Earth binary asteroid formerly designated 1999
 
 ## Sources
 
-The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original kw4a.obj](https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html): Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL. The paper, original OBJ and public index are pinned beside the recipe.
+The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original kw4a.obj](https://echo.jpl.nasa.gov/asteroids/shapes/kw4a.obj). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/1999KW4/1999kw4.html): Ostro et al. (2006), Radar imaging of binary near-Earth asteroid (66391) 1999 KW4, Science 314, 1276–1280, DOI 10.1126/science.1133622; Arecibo, Goldstone and NASA/JPL. The paper and original geometry are pinned beside the recipe.
 
 Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.6585 km sphere, from -0.1 to 0.13 km. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.
 

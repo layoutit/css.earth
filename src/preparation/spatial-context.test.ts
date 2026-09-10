@@ -1,13 +1,39 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { M_PER_AU } from '@cssearth/astronomy';
 import { parseWorldContextSource, prepareWorldContext } from './spatial-context.js';
 import type { OrbitalState } from './spatial-context.js';
 
 const sourcePath = 'src/planets/sun/source/navigation/universe.json';
+// Unit cases supply their own body inventory; the application resolves catalogue membership.
+async function readSource() {
+  return { ...JSON.parse(await readFile(sourcePath, 'utf8')), bodies: [{id: 'test-body', name: 'Test body', color: '#aaaaaa'}] };
+}
+
+test('catalogue selection must be resolved before preparing a physical context', async () => {
+  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  assert.equal(source.bodySelection, 'catalog');
+  assert.throws(() => prepareWorldContext(source, {}, {}), /Resolve catalogue membership/);
+});
+
+test('approximate placement survives preparation without changing the orbit geometry', async () => {
+  const raw = await readSource();
+  const body = { ...raw.bodies[0], placement: 'approximate' };
+  const source = parseWorldContextSource({ ...raw, bodies: [body] });
+  const facts = { [body.id]: { radiusM: 1 } };
+  const states = { [body.id]: { positionM: [7, 0, 0], centerBodyId: source.focus.id,
+    centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0],
+    semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 } } as Record<string, OrbitalState>;
+  const prepared = prepareWorldContext(source, facts, states);
+  const original = prepareWorldContext({ ...source, bodies: [{ id: body.id, name: body.name, color: body.color }] }, facts, states);
+  assert.equal(prepared.bodies[0]!.placement, 'approximate');
+  assert.deepEqual(prepared.bodies[0]!.orbit, original.bodies[0]!.orbit);
+  assert.throws(() => parseWorldContextSource({ ...raw, bodies: [{ ...body, placement: 'exact-ish' }] }), /placement/);
+});
 
 test('prepared volume opacity preserves authored grading and validates bounded levels and ordered distances', async () => {
-  const raw = JSON.parse(await readFile(sourcePath, 'utf8'));
+  const raw = await readSource();
   const source = parseWorldContextSource(raw), profile = source.volume.opacityProfile!;
   assert.deepEqual(profile, raw.volume.opacityProfile);
   assert.equal(profile.nearOpacity, 0); assert.equal(profile.fullOpacity, 1);
@@ -31,7 +57,7 @@ test('prepared volume opacity preserves authored grading and validates bounded l
 });
 
 test('stellar handoff survives preparation and rejects missing or out-of-order ranges', async () => {
-  const raw = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
+  const raw = await readSource() as Record<string, unknown>;
   const expected = { objectId:'stellar-neighbourhood',fadeStartDistanceM:1.495978707e13,fullDistanceM:3.085677581491367e15 };
   const source = parseWorldContextSource(raw);
   const prepared = prepareWorldContext({...source,bodies:[]},{},{}) as unknown as Record<string,unknown>;
@@ -42,7 +68,7 @@ test('stellar handoff survives preparation and rejects missing or out-of-order r
 });
 
 test('Sun context source derives its physical scale from the prepared visible radius', async () => {
-  const raw = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
+  const raw = await readSource() as Record<string, unknown>;
   const source = parseWorldContextSource(raw);
   assert.equal(source.frame.bodyRadiusM / source.frame.metersPerUnit, 310);
   assert.equal(source.system.fadeOutStartDistanceM, 1e14);
@@ -66,7 +92,7 @@ test('Sun context source derives its physical scale from the prepared visible ra
 });
 
 test('prepared ellipses start at their same-epoch ephemeris position', async () => {
-  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')) as unknown);
+  const source = parseWorldContextSource(await readSource() as unknown);
   const body = source.bodies[0]!;
   const result = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments: 16 } },
     { [body.id]: { radiusM: 1 } }, {
@@ -78,8 +104,55 @@ test('prepared ellipses start at their same-epoch ephemeris position', async () 
   assert.deepEqual(result.focus.positionM, [0, 0, 0]);
 });
 
+test('a hyperbolic world trajectory retains its epoch marker on a finite open conic', async () => {
+  const source = parseWorldContextSource(await readSource());
+  const body = { id: 'interstellar-visitor', name: 'Interstellar visitor', color: '#aaaaaa' };
+  const eccentricity = 1.5, trueAnomalyRadians = Math.PI / 3;
+  const distance = M_PER_AU * (eccentricity ** 2 - 1) / (1 + eccentricity * Math.cos(trueAnomalyRadians));
+  const state: OrbitalState = { positionM: [distance * Math.cos(trueAnomalyRadians), distance * Math.sin(trueAnomalyRadians), 0],
+    centerBodyId: source.focus.id, centerPositionM: source.frame.originM, normal: [0, 0, 1], perihelionDirection: [1, 0, 0],
+    semiMajorAxisM: -M_PER_AU, eccentricity, trueAnomalyRadians };
+  const prepared = prepareWorldContext({ ...source, bodies: [body], orbit: { ...source.orbit, segments: 16 } },
+    { [body.id]: { radiusM: 100, orbitStyle: 'closed' } }, { [body.id]: state });
+  const orbit = prepared.bodies[0]!.orbit;
+  assert.equal(orbit.closed, false, 'a bound-orbit styling preference cannot close a hyperbola');
+  assert.equal(orbit.displayExtentAu, 600, 'the radius cap is a display window, not an apoapsis');
+  assert.equal(orbit.trailModel, 'finite-open-trajectory-constant-weight');
+  assert(orbit.bodyVertexIndex! > 0 && orbit.bodyVertexIndex! < orbit.verticesM.length - 1);
+  assert.deepEqual(orbit.verticesM[orbit.bodyVertexIndex!], state.positionM);
+  assert.equal(orbit.trail.length, orbit.verticesM.length - 1);
+  assert(orbit.trail.every(weight => weight === 1));
+  assert.deepEqual(orbit.activeChords, Array.from({ length: orbit.verticesM.length - 1 }, (_, index) => index));
+  assert.deepEqual([...orbit.extentChords].sort((a, b) => a - b), orbit.activeChords);
+  assert(orbit.verticesM[0]![1] < 0 && orbit.verticesM.at(-1)![1] > 0, 'both unbound branches remain in chronological order');
+  for (const vertex of orbit.verticesM) {
+    const radius = Math.hypot(...vertex);
+    // The independent polar equation r(1 + e cos(nu)) = a(1-e²).
+    assert(Math.abs(radius + eccentricity * vertex[0] - M_PER_AU * (eccentricity ** 2 - 1)) < M_PER_AU * 1e-10);
+    assert.equal(vertex[2], 0);
+    assert(radius <= 600 * M_PER_AU * (1 + 8 * Number.EPSILON));
+    assert(Math.hypot(...vertex.map((value, axis) => value - orbit.bounds.centerM[axis]!)) <= orbit.bounds.radiusM);
+  }
+  for (const endpoint of [orbit.verticesM[0]!, orbit.verticesM.at(-1)!]) {
+    assert(Math.abs(Math.hypot(...endpoint) / M_PER_AU - 600) < 1e-10);
+  }
+  assert(!('period' in orbit) && !('chordBehindTurns' in orbit), 'an unbound passage has no period or share-of-a-turn trail');
+});
+
+test('world context rejects inconsistent conic signs and parabolic or unreachable states', async () => {
+  const source = parseWorldContextSource(await readSource());
+  const body = source.bodies[0]!;
+  const state: OrbitalState = { positionM: [M_PER_AU / 2, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM,
+    normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: -M_PER_AU, eccentricity: 1.5, trueAnomalyRadians: 0 };
+  for (const invalid of [{ semiMajorAxisM: M_PER_AU }, { semiMajorAxisM: 0 }, { semiMajorAxisM: Infinity },
+    { eccentricity: .5 }, { eccentricity: 1 }, { eccentricity: NaN }, { eccentricity: Infinity }, { trueAnomalyRadians: Math.PI }]) {
+    assert.throws(() => prepareWorldContext({ ...source, bodies: [body] }, { [body.id]: { radiusM: 100 } },
+      { [body.id]: { ...state, ...invalid } }), /orbit|finite/);
+  }
+});
+
 test('satellite ellipses are translated to their parent with exact prepared centres', async () => {
-  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')) as unknown);
+  const source = parseWorldContextSource(await readSource() as unknown);
   const bodies = [{ id: 'parent', name: 'Parent', color: '#888888' }, { id: 'satellite', name: 'Satellite', color: '#999999' }];
   const states: Record<string, OrbitalState> = {
     parent: { positionM: [1000, 0, 0], centerBodyId: source.focus.id, centerPositionM: [0, 0, 0],
@@ -163,7 +236,7 @@ test('satellite ellipses are translated to their parent with exact prepared cent
 });
 
 test('extent traversal covers each active chord once for sparse trails and uneven bank sizes', async () => {
-  const source = parseWorldContextSource(JSON.parse(await readFile(sourcePath, 'utf8')));
+  const source = parseWorldContextSource(await readSource());
   const body = source.bodies[0]!;
   const state: OrbitalState = { positionM: [7, 0, 0], centerBodyId: source.focus.id, centerPositionM: source.frame.originM,
     normal: [0, 0, 1], perihelionDirection: [1, 0, 0], semiMajorAxisM: 10, eccentricity: .3, trueAnomalyRadians: 0 };
@@ -181,7 +254,7 @@ test('extent traversal covers each active chord once for sparse trails and uneve
 });
 
 test('prepared sky registration preserves the legacy default sky and rejects a missing baseline', async () => {
-  const raw = JSON.parse(await readFile(sourcePath, 'utf8')) as Record<string, unknown>;
+  const raw = await readSource() as Record<string, unknown>;
   const source = parseWorldContextSource(raw);
   const result = prepareWorldContext({ ...source, bodies: [] }, {}, {}) as unknown as Record<string, unknown>;
   const sky = result.sky as { sceneRegistration: string };

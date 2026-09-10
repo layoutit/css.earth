@@ -12,9 +12,11 @@
 
 The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-The [asteroid validation report](../../../docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 115.636 m, maximum 353.978 m. These are sampled distances, not exhaustive geometric bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
 
@@ -40,6 +42,10 @@ Prime-meridian display phase is explicitly arbitrary; the available IAUspin file
 Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z is the spin pole and positive X defines the meridian.
 
 The record gives diameter 85 km, period 3.747455 h and ecliptic J2000 pole (84°, -15°). The original mesh has measured volume-equivalent radius 42.499998 km and Cartesian extents 102.397 × 93.093 × 72.134 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
+
+- [Torppa et al. (2003), Shapes and rotational properties of thirty asteroids from photometric data](https://ui.adsabs.harvard.edu/abs/2003Icar..164..346T) — selected model publication.
+
+- [Hanuš et al. (2013), Sizes of main-belt asteroids by combining shape models and Keck Adaptive Optics observations](https://ui.adsabs.harvard.edu/abs/2013Icar..226.1045H) — selected model publication.
 
 </details>
 

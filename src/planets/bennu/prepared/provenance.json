@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "bennu",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "20f0cb58cbee8f776801373cd9a6300bf57d5778fd943a13ea14a8555045b9da"
+    "sha256": "9d749f88598837e0214a46133d868a7ce9e347d15c1742684d8a3a1bdd070406"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -434,10 +434,14 @@
       },
       "coverage": "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps.",
       "capture": {
-        "spacecraftIds": [
-          "osiris-rex"
-        ],
-        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "osiris-rex",
+            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
+            "missionId": "osiris-rex"
+          }
+        ]
       },
       "sha256": "71bfeecce5615a5602d16d176c4cc17cc2550b2dc8c7cdac1332dea8d9f3da36",
       "bytes": 315960161,
@@ -473,10 +477,14 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "capture": {
-        "spacecraftIds": [
-          "osiris-rex"
-        ],
-        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "osiris-rex",
+            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj",
+            "missionId": "osiris-rex"
+          }
+        ]
       },
       "sha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d",
       "bytes": 195300487,
@@ -515,10 +523,14 @@
       },
       "coverage": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles.",
       "capture": {
-        "spacecraftIds": [
-          "osiris-rex"
-        ],
-        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "osiris-rex",
+            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif",
+            "missionId": "osiris-rex"
+          }
+        ]
       },
       "sha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd",
       "bytes": 493624548,
@@ -557,10 +569,14 @@
       },
       "coverage": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
       "capture": {
-        "spacecraftIds": [
-          "osiris-rex"
-        ],
-        "evidence": "OSIRIS-REx OCAMS MapCam composite; pinned USGS ISIS label and DellaGiustina et al. (2020), Figure 1A."
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "osiris-rex",
+            "evidence": "OSIRIS-REx OCAMS MapCam composite; pinned USGS ISIS label and DellaGiustina et al. (2020), Figure 1A.",
+            "missionId": "osiris-rex"
+          }
+        ]
       },
       "sha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c",
       "bytes": 114072003,

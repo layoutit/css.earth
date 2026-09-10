@@ -1,21 +1,21 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "lycomedes",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "239487e3f196fccbdd8bb73402ab2e6d4eb9e10c91dfe385830a54b562b00fd0"
+    "sha256": "1cc05a8790335c20d1e0b69dc35ae0cbc2e68f9c4b93ca4a85116d02518d5de8"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "68d0e6031a389c4ebc47c238ef38929d04dba7aac3e9f310a078015db0191260",
+      "sha256": "99a4ed4a9141261672570722dd811e2ca6a2e284234637d01eb2865783d29b38",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 15.868,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.7947237720829105
           },
           "mapUrl": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",
           "polesUrl": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",
@@ -149,7 +150,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1286e3e8cf15ae9e037f37825b66b0da6d860a9d850313cf68f4ad41cd495e09",
+      "sha256": "283aad554ca957313806fe2089dc91f3ed6079e83ed44a94d8553991d0cd4879",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,7 +223,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "DAMIT model"
             },
             {
               "id": "elevation",
@@ -354,7 +355,7 @@
       "sha256": "7499d76e5c762b07f8c6fa687c6028f9e0b577068ffb7f951e4154cf0c140455",
       "bytes": 46095,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -376,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "1286e3e8cf15ae9e037f37825b66b0da6d860a9d850313cf68f4ad41cd495e09",
-      "bytes": 11889,
+      "sha256": "283aad554ca957313806fe2089dc91f3ed6079e83ed44a94d8553991d0cd4879",
+      "bytes": 11855,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +413,19 @@
           "url": "/scenes/lycomedes/lycomedes-elevation-thumbnail.webp",
           "bytes": 6046,
           "sha256": "2c056ef24b92a5b6b7d5ef1bdb4eed2c26fb86777c729938df73e083fcb9f0fe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-elevation-surface@2x.webp",
           "bytes": 299856,
           "sha256": "19eb34d02aad84949069c338d22269823970eb9efa31f39f8b6ef1e958bdaa14",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +457,13 @@
           "url": "/scenes/lycomedes/lycomedes-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lycomedes/lycomedes-shape-surface@2x.webp",
           "bytes": 239942,
           "sha256": "b14b5d375872437a33801dd316945d4fed2cd992192de9d33aa7c814e0e0fcab",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

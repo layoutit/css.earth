@@ -9,8 +9,8 @@ import {
   planetarySystemOpacity,
   sunMarkerOpacity,
   validatePerspectiveCameraPlan,
-} from "./perspective-dolly.mjs";
-import { projectHeliocentricView } from "./heliocentric-view.mjs";
+} from "./perspective-dolly.mts";
+import { projectHeliocentricView } from "./heliocentric-view.mts";
 import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
 
 const levelOfDetail = Object.freeze({

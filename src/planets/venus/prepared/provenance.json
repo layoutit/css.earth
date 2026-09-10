@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "venus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "979286f9797dba4d70517e4511b4cfb2830aafbb8e83fed493a3125a5cc7f03d"
+    "sha256": "380fd3c49e698d4028d1dc6472507d98b037445472b1815c978f57ed7e225d91"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -724,10 +724,14 @@
       "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh requests the declared complete USGS WMS extent",
       "redistribution": "public-domain USGS/NASA prepared scientific product with attribution",
       "capture": {
-        "spacecraftIds": [
-          "magellan"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "magellan",
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
+            "missionId": "magellan"
+          }
+        ]
       },
       "sha256": "7c818deccd69e99f3e0ebc5030979bbeb50f8b19afbd8f31c97d968a9f591588",
       "bytes": 5399293,
@@ -757,10 +761,14 @@
       "acquisition": "node tools/objects/dist/operations.js acquire venus --refresh requests the declared complete USGS WMS extent",
       "redistribution": "public-domain USGS/NASA prepared scientific product with attribution",
       "capture": {
-        "spacecraftIds": [
-          "magellan"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "magellan",
+            "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
+            "missionId": "magellan"
+          }
+        ]
       },
       "sha256": "3b25ddd02af9214a64aed694ececd44754c2c3174900d78bbae3856042117974",
       "bytes": 5477203,

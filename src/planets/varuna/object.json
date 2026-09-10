@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "varuna",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Varuna",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "b6331712db101685dad3582c099c4bee1827a1abeaf953712f8af9e84686fc65"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "394fbb52e62703f2f9a24065cfc5b9dccff9b4ecc4ba3c39f43f6fbfe46f90fa"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "8aa2020a6ca6ab187ff3444e03b6e941f09132689639907dad1e6b3b55b80240"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "39bf446e75ae45fda6c0e6b4fa8457c93459b97d507fc85c80a61aa1caaa7313"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "eaab61aca72572870fd90a315699a9b015a76a259b6a2285ef6bd24d4e468b60"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 350.00000006786365
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/varuna-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "10c3a0d75771ea14898cf44ec4a75f524b1c7fd4553f1427686acae81472d454"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4240489343130.602,
+        4115528695026.4326,
+        2988835950369.559
+      ],
+      "presentationToReference": [
+        -0.6494602021390623,
+        2.7755575615628914e-17,
+        -0.7603955850986304,
+        0.6976493094045934,
+        0.39777715593191376,
+        -0.5958680854904145,
+        0.30246799322371665,
+        -0.9174820620691817,
+        -0.25834043209784185
+      ],
+      "orbitUpReference": [
+        -2.7755575615628914e-17,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 1521.7391307298421,
+      "bodyRadiusM": 350000.0000678637
+    },
+    "catalog": {
+      "name": "Varuna",
+      "classification": "trans-neptunian",
+      "color": "#aaaaaa",
+      "distanceAu": 44.266134719069306,
+      "description": "Varuna’s rapid rotation and changing brightness reveal an elongated world beyond Neptune. This smooth model follows a published light-curve fit; its absolute size remains approximate.",
+      "systemName": "Solar System",
+      "order": 9,
+      "context": {
+        "order": 436
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "92a4196e7bcea54c5287a50ceb75402bdc4f6e90b620c593a01a7427f85326f2"
+  }
+}

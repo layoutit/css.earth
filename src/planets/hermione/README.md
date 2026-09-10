@@ -12,9 +12,11 @@
 
 The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-The [asteroid validation report](../../../docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 0.000 m, maximum 0.000 m. These are sampled distances, not exhaustive geometric bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
 
@@ -40,6 +42,10 @@ Prime-meridian display phase is explicitly arbitrary; the available IAUspin file
 Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z is the spin pole and positive X defines the meridian.
 
 The record gives diameter 200 km, period 5.550877 h and ecliptic J2000 pole (3°, 15°). The original mesh has measured volume-equivalent radius 100.135902 km and Cartesian extents 271.486 × 224.438 × 148.524 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
+
+- [P. Descamps et al. (2009), New insights on the binary asteroid 121 Hermione](https://ui.adsabs.harvard.edu/abs/2009Icar..203...88D) — selected model publication.
+
+- [Viikinkoski et al. (2017), Adaptive optics and lightcurve data of asteroids: twenty shape models and information content analysis](https://ui.adsabs.harvard.edu/abs/2017A%26A...607A.117V) — selected model publication.
 
 </details>
 

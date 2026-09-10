@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "4d336c3130d6468ec58bf4e8a97225a17c06db902f15acb981ee7b5afd21a739"
+        "sha256": "6b5b37f6b67d3a0612732f03b56bfc674556797e360b9419a3c953a40e42caaa"
+      }
+    },
+    "catalog": {
+      "name": "Skathi",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Skathi, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 36,
+      "context": {
+        "order": 232
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "e9ce2dcc296186a0c79c9973d862c93643d1d9148ffca576d23b2e60efe53786"
+    "sha256": "da30e9bb3fb25156eaa3db8b180072d7f3a20797cec6b12855f0c42497295a17"
   }
 }

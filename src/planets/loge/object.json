@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e96037ac8c2ecf86345d39f8606c724fa460db900f80497f0b51a67883787df9"
+        "sha256": "dcd5805608e3ceec8980c9673dc7c76fd158b81e77278889283452552c829b47"
+      }
+    },
+    "catalog": {
+      "name": "Loge",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Loge, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 45,
+      "context": {
+        "order": 241
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a31be72f5f81556975a1950803b655583cb847bc91598132f5e4a6d467244e9d"
+    "sha256": "1b0213bd78b72312d01c4a98e5345d3e251a14605ed3f44f6a1f86115ddecdb6"
   }
 }

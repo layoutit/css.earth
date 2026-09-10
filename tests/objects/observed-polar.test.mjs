@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '../../tools/objects/giant-observations/index.mjs';
-import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../../tools/objects/giant-observations/scalar-coverage.mjs';
-import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from '../../tools/objects/giant-observations/polar-continuation.mjs';
+import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '../../tools/objects/giant-observations/index.mts';
+import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../../tools/objects/giant-observations/scalar-coverage.mts';
+import {preparePolarContinuationAtlas,preparePolarSurfaceTransition} from '../../tools/objects/giant-observations/polar-continuation.mts';
 const sourceDirectory=new URL('../../src/planets/jupiter/source/',import.meta.url).pathname;
 const recipe=JSON.parse(await readFile(sourceDirectory+'/preparation/observations.json','utf8'));
 

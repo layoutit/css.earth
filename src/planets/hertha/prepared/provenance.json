@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "hertha",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "626b87b98fd42602bd2e395bd7f0931582b89cba0a3a05e31be821065334fc6d"
+    "sha256": "10806c2e90f049199672e9f729da405f9f102f05ef51f55c66a4c0d3e3ef6e8b"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "78a7b01400fb50944ee01a4cfcd1a7c3b4b12ecbc7b83861081a49aebb565a6c",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "4cc60562e47f9d2186e20adf18fb86c272f2bc578fbd26784327aa35b87cefc3",
       "bytes": 9040,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/hertha/hertha-elevation-thumbnail.webp",
           "bytes": 4500,
           "sha256": "8badedaec8c37b774084f179957f6cc4307d60366bede9c112b8c36357e925bb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hertha/hertha-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hertha/hertha-elevation-surface@2x.webp",
           "bytes": 240742,
           "sha256": "c5b698988e3572fd8f0223186b253fe1aeb953e674a34672dc7ebe46584019f4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/hertha/hertha-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/hertha/hertha-shape-surface@2x.webp",
           "bytes": 183394,
           "sha256": "3d221c5599a6c8e2ef4d9f15138e5abca56a8b2b7fb9bef4cd2d7b56ccbdda96",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

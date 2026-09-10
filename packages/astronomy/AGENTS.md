@@ -120,11 +120,13 @@ needs a DOM belongs with the application renderer.
 
 ## The ephemeris layer (M2)
 
-`src/data/*.data.ts` and `src/__fixtures__/*.ts` are **generated**. Never edit
-them by hand — every one carries a header naming the generator that made it.
-Change the generator in `tools/` and re-run it. The generators re-download their
-sources into `tools/.cache`, which is gitignored, so a clean checkout costs one
-fetch and nothing else.
+Physical values, retained orbit records and acquisition choices live in
+`data/bodies/<id>.json`; independent shared vector fixtures live in
+`data/fixtures/<sample-id>.json`. Preserve source URLs, units, epochs and fit
+limits. Acquisition tools update selected records; they cache downloads in
+`tools/.cache`. Builds assemble ignored TypeScript exports under
+`src/data/generated/` without a network request or an application checkout.
+The existing data modules expose these exports and document their interfaces.
 
 | Rule | Why |
 |---|---|
@@ -137,7 +139,7 @@ fetch and nothing else.
 ### Frame units come from a rule, not a table
 
 `chooseFrameUnitM` in `solarSystem.ts` is the only place a `unitM` is decided.
-Adding a body means adding it to `bodies.ts` and letting the rule run; it does
+Adding a body means adding its record under `data/bodies/` and letting the rule run; it does
 not mean picking a unit. If the rule cannot serve a new body, change the rule
 and re-run `solarSystem.test.ts`, which pins each output unit explicitly so the
 change is visible in the diff.
@@ -158,7 +160,7 @@ periodic term would live inside it forever. A guard alone is just a snapshot of
 whatever the code happens to do. Both, and the assertion that the guard is
 inside the budget, is what makes the claim real.
 
-Fixtures come from `tools/fetch-fixtures.mjs` and each records the Horizons URL
+Fixtures come from `tools/fetch-fixtures.mts` and each records the Horizons URL
 that produced it. Never assert against a value this package computed. Never widen
 a tolerance to make a test pass without changing the sentence in the README that
 the number is quoted in.
@@ -168,7 +170,7 @@ the number is quoted in.
 **1900-01-01 to 2100-01-01** (JD 2415020.5 to 2488069.5). Both series were
 truncated against this window and the moons' elements fitted over it. Evaluation
 outside still works and is still continuous; it is simply not bounded by
-anything this package has measured. If the window moves, `generate-series.mjs`
+anything this package has measured. If the window moves, `generate-series.mts`
 has to run again — the truncation thresholds depend on it.
 
 ### The moons are a fit, and the README says so

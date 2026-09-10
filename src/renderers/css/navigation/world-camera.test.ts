@@ -4,9 +4,9 @@ import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import mercuryDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
 import venusDefinition from "../../../../src/planets/venus/prepared/runtime.json" with {type: "json"};
-import { prepareEclipticPresentationFrame } from '../../../platform/solar-presentation-frame.mjs';
+import { prepareEclipticPresentationFrame } from '../../../platform/solar-presentation-frame.mts';
 import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
-  BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../platform/solar-geometry.mjs';
+  BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../platform/solar-geometry.mts';
 import { projectHeliocentricView } from '../solar-system/heliocentric-view.js';
 import { worldCameraFromCenteredPresentation, worldCameraFromPresentation, presentWorldCamera } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraViewport } from './world-camera.js';

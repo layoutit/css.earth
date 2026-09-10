@@ -15,11 +15,13 @@ Concavities, craters, surface texture and exact current rotation phase are not r
 
 Adopted diameter: **15.429 ± 0.325 km**, meaning **effective body diameter**, from [Masiero et al. (2014), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas14](https://doi.org/10.1088/0004-637X/791/2/121). The reference-sphere radius is 7.7145 km. The quoted statistical error excludes the approximately 10% survey systematic floor (about 1.5429 km), shape/orientation effects and rotational sampling limitations.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 <a id="provenance"></a>
 
-The [kressmannia validation record](../../../docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
+The [kressmannia validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
 
 Checked 2026-09-08. Original shape, IAUspin, model metadata, citations, sizing inputs and format documentation are pinned by exact bytes and SHA-256 in the [input manifest](source/manifest.json). Derived source notes retain the physical sizing assumption and pole alternatives.
 

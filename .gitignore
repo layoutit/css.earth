@@ -1,4 +1,5 @@
 node_modules/
+__pycache__/
 .local/
 .env
 .env.*
@@ -87,6 +88,9 @@ src/planets/*/source/**/*.bpc
 !src/planets/*/source/shape/*ellipsoid.tab
 !src/planets/*/source/shape/model.tab
 
+# Retained, physically scaled meshes used as preparation inputs.
+!src/planets/*/source/shape/model.obj
+
 # Native metadata, extracted reference rows and inspected source evidence.
 !src/planets/*/source/reference/*.csv
 !src/planets/*/source/reference/*-row.tab
@@ -114,6 +118,7 @@ src/planets/*/source/**/*.bpc
 !src/planets/*/source/cassini-ice/*.tif
 !src/planets/*/source/geology/*-geologic-units.tif
 !src/planets/*/source/science/*-georeferenced.tif
+!src/planets/moon/source/science/diviner-ghrm/*-compact.tif
 !src/planets/*/source/science/geology-*/categories.tif
 !src/planets/*/source/science/geology-*/nomenclature.zip
 !src/planets/*/source/observations/*-registered-rgba.tif
@@ -147,3 +152,29 @@ src/planets/*/source/**/*.bpc
 /src/objects/*/prepared/**/*.avif
 /labs/nebula/models/*/candidates/prepared/*.webp
 /labs/nebula/models/*/clouds-observation/source/target.png
+# Reacquirable distant-world paper originals; acquisition recipes pin exact bytes.
+/src/planets/oumuamua/source/reference/*.html
+/src/planets/sedna/source/reference/*.html
+/src/planets/gonggong/source/reference/*.html
+/src/planets/orcus/source/reference/*.html
+/src/planets/salacia/source/reference/*.html
+/src/planets/varuna/source/reference/*.html
+/src/planets/mani/source/reference/*.html
+/src/planets/achlys/source/reference/*.html
+!src/planets/salacia/source/reference/salacia-kiss-2025.html
+
+# Already tracked lunar science extracts retained by the merged Moon package.
+!src/planets/moon/source/science/diviner-ghrm/ra_sam-compact.tif
+!src/planets/moon/source/science/diviner-ghrm/tbol_anom-compact.tif
+!src/planets/moon/source/science/diviner-ghrm/tbol_m-compact.tif
+
+# Combined catalogues and navigation are rebuilt from individual body records.
+/site/prepared-object-catalog.mts
+/packages/astronomy/src/data/generated/
+/site/prepared-navigation-markers.mjs
+/src/platform/solar-geometry.mts
+/src/planets/sun/prepared/world-context.json
+/site/minimap/prepared.json
+
+# AKARI AcuA v1: restored and verified from each body source manifest.
+/src/planets/*/source/reference/AcuA_V1.txt.gz

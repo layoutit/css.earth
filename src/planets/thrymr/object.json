@@ -110,13 +110,25 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9ac4603b6122b7d66b9d2b11b9ae92738c96cb1f37dd0d25cb05c587fa7f7ee2"
+        "sha256": "c9754987296db074f638cca0af4235883eeba66c1c56e06db323ef0eb34b1036"
+      }
+    },
+    "catalog": {
+      "name": "Thrymr",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 9.58,
+      "description": "Explore Thrymr, a moon of Saturn, through its lightcurve-constrained shape approximation.",
+      "systemName": "Solar System",
+      "order": 38,
+      "context": {
+        "order": 234
       }
     }
   },
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "c0415d78a1268b97abe54f29742eaa6ddd9078fde9947bf8dbb530c432ef9d3d"
+    "sha256": "9816c5a8f682301e5e22dd2f639f4420d249522697f91cf839a3ee87f1d5e356"
   }
 }

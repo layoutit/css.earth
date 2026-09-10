@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "b09a4dd9e2d8bf8e2da63529b3faa99dc965a1230101aaf9042da66f1d4d42f3"
+          "sha256": "521d9e5a786281e00f3fa62c391254e9c163786fc56e42008ca39e4ea99916bd"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "dc3953edd5b68637aabddd2080efb8e851153776faaede3a4e04a026456b217b"
+        "sha256": "adb1df730f65f78b8249828b1cb8f8e163c7333780eee813c9501ca95cf5de4d"
+      }
+    },
+    "catalog": {
+      "name": "Kriemhild",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.8618233448142756,
+      "description": "Explore Kriemhild in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 332,
+      "context": {
+        "order": 378
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "b15968e39a5246c18319637c160c195e2a77a684b1453a4e80daa9ec828752d0"
+    "sha256": "ae6fbe2cc39e5247ef4b7fb1a868ecf702b8e2c57fd6d73b75ed6d4e3ee8effb"
   }
 }

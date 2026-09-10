@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "16ba1f16ba76f7028b5559bb28e6fc96f80e4f619fd7ab4e4b523d0c03198e05"
+          "sha256": "d64cba7e7be0840f49f579362b09781a91ca3dcf5b1214d66d2e6634421ef5b3"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "7684ee6e2ea72c8abbaefac448b90fa6807a8491e4fcdcc578b6156aac64fb48"
+        "sha256": "4030bba0b34908eff6fa0ddd0e10962f1e0339f56b93e8be711645c3f1bb0da1"
+      }
+    },
+    "catalog": {
+      "name": "Emma",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.0505638561088526,
+      "description": "Explore Emma in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 352,
+      "context": {
+        "order": 398
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6af15ea2228562e7f12fdefcca33c12af88c9aea2ab73b0195e3ceb4124a4b2c"
+    "sha256": "f02d1860d7f199119665231e8d1982f223b4fd4fe15baf70e7678224d9752a45"
   }
 }

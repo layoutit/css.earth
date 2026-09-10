@@ -1,21 +1,21 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "earth",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "96158c2671acef961b2cac6b4fc799838d3012993ee0c1811514eb0ca4d88a74"
+    "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "paged-ellipsoid",
       "path": "source/preparation/paged-ellipsoid.json",
-      "sha256": "7c7de1182eb70fc8bcaa3532fe8916763cd48de23aaf297d0b20abeff67db2fd",
+      "sha256": "3644c336b0dab1d58934826b3195bf01858c537463f0b3d477ed7606869a0e7f",
       "parameters": {
         "schema": "cssearth-paged-ellipsoid@1",
         "namespace": "earth",
@@ -98,7 +98,15 @@
             -0.385595,
             0.264864
           ],
-          "solarTint": "#fff1ea"
+          "solarTint": "#fff1ea",
+          "shadowlessOverlay": {
+            "color": [
+              255,
+              255,
+              255
+            ],
+            "opacity": 0.25
+          }
         },
         "atmosphere": {
           "sourcePath": "openspace/earth-atmosphere.asset",
@@ -1191,10 +1199,14 @@
       "acquisition": "NASA Blue Marble Next Generation July 2004 cloud-free monthly composite; 21600 x 10800 equirectangular RGB JPEG downloaded 2026-09-09",
       "redistribution": "NASA image with credit and no endorsement claim",
       "capture": {
-        "spacecraftIds": [
-          "terra"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "terra",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
+            "missionId": "terra"
+          }
+        ]
       },
       "sha256": "dea8b4dc8a4f93f5f8bce0c8c85a508a178e7901e9ed8e6bf86e6ce7ef6d61e2",
       "bytes": 21125326,
@@ -1861,8 +1873,8 @@
     {
       "path": "science/night-lights-2025/provenance.json",
       "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
-      "id": "authored-document:science/night-lights-2025/provenance.json",
       "kind": "authored-document",
+      "id": "authored-document:science/night-lights-2025/provenance.json",
       "origin": "object:source/science/night-lights-2025/provenance.json",
       "title": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
       "credit": "cssEarth contributors",
@@ -1998,9 +2010,9 @@
       "origin": "tools/objects/paged-ellipsoid/mur-imagery.mjs",
       "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
       "kind": "generated-intermediate",
       "title": "science/mur-gibs.png",
-      "credit": "cssEarth contributors",
       "acquisition": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
       "upstreamLineage": "not-recorded",
       "sha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0",
@@ -2013,8 +2025,8 @@
     {
       "path": "interior/earth-interior.json",
       "purpose": "Source-qualified schematic Earth interior presentation specification",
-      "id": "authored-document:interior/earth-interior.json",
       "kind": "authored-document",
+      "id": "authored-document:interior/earth-interior.json",
       "origin": "object:source/interior/earth-interior.json",
       "title": "Source-qualified schematic Earth interior presentation specification",
       "credit": "cssEarth contributors",

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "jupiter",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b6e4143c9244f2e9b2bd6c51784d9624f8a413a73b84426abca8c2857f7496ba"
+    "sha256": "2ffa5896b236cbe154361b47f7344ab3a3c21d31cc3689973284597326e15341"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -882,10 +882,14 @@
       "redistribution": "checked Hubble WFC3 global-map snapshot",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "e79f89b68b4f1c73387b9871e82a31fb4f53e3885fb2f53dd074d8ac78cb38e3",
       "bytes": 6720450,
@@ -915,10 +919,14 @@
       "redistribution": "checked NASA Photojournal north-polar projection; color is explicitly extreme false color and is not transported into the runtime asset",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
       "capture": {
-        "spacecraftIds": [
-          "juno"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "juno",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
+            "missionId": "juno"
+          }
+        ]
       },
       "sha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8",
       "bytes": 633958,
@@ -949,10 +957,14 @@
       "redistribution": "checked NASA Photojournal PIA24239 north-polar-region image product",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
       "capture": {
-        "spacecraftIds": [
-          "juno"
-        ],
-        "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "juno",
+            "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
+            "missionId": "juno"
+          }
+        ]
       },
       "sha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be",
       "bytes": 193959,
@@ -983,10 +995,14 @@
       "redistribution": "checked NASA Photojournal 5-micron south-polar cyclone image; infrared palette is not transported into the runtime asset",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
       "capture": {
-        "spacecraftIds": [
-          "juno"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "juno",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg",
+            "missionId": "juno"
+          }
+        ]
       },
       "sha256": "92de7d816bbff6e220c893ded36d0811a21a4f74b13ebc337f9c1a3fc8d1e817",
       "bytes": 909084,
@@ -1017,10 +1033,14 @@
       "redistribution": "checked NASA Photojournal visible-light south-polar image used only for prepared palette chroma",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
       "capture": {
-        "spacecraftIds": [
-          "juno"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "juno",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg",
+            "missionId": "juno"
+          }
+        ]
       },
       "sha256": "c419932d9d5b0d3b01691779f6ff65869d82d5f768908174fc13715170fdb77e",
       "bytes": 154800,
@@ -1048,10 +1068,14 @@
       "redistribution": "checked Hubble OPAL high-level science product",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "ab7fe8bc644233c22bc6d86af42d54c60d49e24a6699ff116e797a80e4ff1796",
       "bytes": 25925760,
@@ -1078,10 +1102,14 @@
       "redistribution": "checked Hubble OPAL high-level science product",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
+            "missionId": "hubble"
+          }
+        ]
       },
       "sha256": "4bdbeb4a4f9fbfe0daa737c4ba29de31b0626fb6e58c54e0142ef6d3aa6ef5ea",
       "bytes": 25925760,

@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "5a71df427f1c50d83d3e1e73190ab8d8df57472740527d36822a89d4fdb40617"
+          "sha256": "4b922544465aab53449845877c94b4e4dc82286743923a7d71255cf93c8ce4cb"
         }
       ]
     },
@@ -86,7 +86,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b9c381ec3e3326b6b10a626dd89a1ff9f4c3f3ef89c30f2feb9ae2f2b201cd76"
+        "sha256": "08d90f9851a7ce7483ecb36437aaa960b1b0e14dcd01d0fecd93de0f66a9ac1d"
       }
     },
     "worldFrame": {
@@ -115,6 +115,18 @@
       ],
       "metersPerUnit": 58.95652173913044,
       "bodyRadiusM": 13560
+    },
+    "catalog": {
+      "name": "Lyyli",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5890833040625667,
+      "description": "Explore Lyyli, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.",
+      "systemName": "Solar System",
+      "order": 466,
+      "context": {
+        "order": 427
+      }
     }
   },
   "schema": "cssearth-object@1",
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "474dd3e55cc557057857416d3fd155bea47ca2dc26af6cfb61ac01bc4b737105"
+    "sha256": "3c538633511c713c2effce736337ee663d7e7672440419f03ec424995a8b0cfe"
   }
 }

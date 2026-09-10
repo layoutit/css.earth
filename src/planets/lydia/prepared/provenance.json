@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "lydia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d9b1d24564098c790d0cb058227de1369c4f77fc06f7870296dc7b0a90e94666"
+    "sha256": "fa71d5837425d5695321570dc19386a55a5b3988a1d89d7e51f88dbda3c255ab"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "ce4560318a58f130ddd60a01038a7fdb3bcc30554d3507ade899cda740975004",
       "bytes": 129283,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "60a2d94df925bad20f6750b8cd66ec3eab94ee8c93df62aafc6e04554e4ef49e",
       "bytes": 8682,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/lydia/lydia-elevation-thumbnail.webp",
           "bytes": 4916,
           "sha256": "0f3cc379838439fdc2f204369d51e6becd80ad38ece70a25ba6a3214c12d814e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lydia/lydia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lydia/lydia-elevation-surface@2x.webp",
           "bytes": 265110,
           "sha256": "e7c9c67bbd8c6d1e7fafe570936f7ed3610f66b4c9ef7ecb88bb3f9aeeddbb76",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/lydia/lydia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lydia/lydia-shape-surface@2x.webp",
           "bytes": 212108,
           "sha256": "9d0f14e4acc9c8aace2ec279dfba25f6d7aeeff63a12a847e78ae6383a787f53",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

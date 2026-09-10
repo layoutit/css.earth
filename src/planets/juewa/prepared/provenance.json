@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "juewa",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f8b2acced74a42656dc35ba99532a42fdaed183ba4ce96d5fb2f18b56d7dbd65"
+    "sha256": "d3d303607dcb832bc552a684aaa77c87c93f4aa3a0e7b6bfbd75983a2b4b523d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {

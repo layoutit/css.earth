@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "cyrene",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "aab5189024540e1034fe1c5f5a80e898b93f6e449420df9b6ff1a357cf60ac47"
+    "sha256": "99a33a930caee6d1bce6409473341dadead6019eef7b66c6f94e33135f45f84d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "dc5fd920f10ed35377a2bbca5487dd096bd62756b3d78b4fa9007b127dc80d87",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "0f27831a5641c0a0eb88107d2d259494ad405412d7a667d4ecb74e66813a274e",
       "bytes": 9626,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/cyrene/cyrene-elevation-thumbnail.webp",
           "bytes": 6222,
           "sha256": "1d761ea76809e7b40125cdbeb5601114b87a767aac8145a48685366e0ece3fea",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/cyrene/cyrene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/cyrene/cyrene-elevation-surface@2x.webp",
           "bytes": 302730,
           "sha256": "eee346bbef3f0b40c757dfc65812847c5dc274d0fb838fbfa628ac0c0db13c94",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/cyrene/cyrene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/cyrene/cyrene-shape-surface@2x.webp",
           "bytes": 227070,
           "sha256": "4c8aa55a1d1915d63a3e27252b0658d3f144b3521fffeef7288e9fa91977c795",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

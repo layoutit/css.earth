@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "bb6f92c883ddb6a3d750a4f789acf01fb930ea50c4b9a89bf942ba9e84bb9532"
+        "sha256": "d75052f5e29ee689c602a347b6dbed8fea054133b1e526eb2f94e97fea8d6062"
+      }
+    },
+    "catalog": {
+      "name": "Doris",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.11379567922407,
+      "description": "Explore Doris in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 172,
+      "context": {
+        "order": 103
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "352893d1d35e5ec54f97c235ecab1f5bdaf2c8befbc7ca41a48ff7fb9cb8cdf4"
+    "sha256": "10a6fd3e9f488ef7dbf6e568f578e4e08bd39a8e2e7eb6dae812070658b46fc7"
   }
 }

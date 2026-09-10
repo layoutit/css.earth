@@ -1,4 +1,16 @@
 # Preserve hash-pinned upstream snapshots byte-for-byte, including whitespace.
+# Celestia catalog, native generator and original JPL responses.
+tools/objects/celestia-comets/source/** -text -whitespace
+tools/objects/celestia-comets/native/celengine/** -text -whitespace
+tools/objects/celestia-comets/native/celmath/** -text -whitespace
+tools/objects/celestia-comets/native/celcompat/** -text -whitespace
+tools/objects/celestia-comets/native/meshmanager.cpp -text -whitespace
+tools/objects/celestia-comets/native/model.cpp -text -whitespace
+src/planets/comet-*/source/shape/*.cms -text -whitespace
+src/planets/comet-*/source/reference/celestia.ssc -text -whitespace
+src/planets/comet-*/source/reference/GPL-2.0-or-later.txt -text -whitespace
+src/planets/comet-*/source/reference/horizons-elements.txt -text -whitespace
+src/planets/comet-*/source/reference/horizons-vectors.txt -text -whitespace
 src/planets/pluto/source/lenses/pluto-dem.lbl -whitespace
 src/planets/pluto/source/lenses/usgs-dem-metadata.html -whitespace
 src/planets/pluto/source/lenses/usgs-mosaic-metadata.html -whitespace
@@ -37,10 +49,6 @@ src/planets/proteus/source/observations/C1137339_GEOMED.LBL -text -whitespace
 src/planets/proteus/source/observations/C1137350_GEOMED.LBL -text -whitespace
 src/planets/proteus/source/observations/PROCESSING.TXT -text -whitespace
 
-# Preserve raw execution transcripts; collapse generated capture records in reviews.
-docs/moons/b3-preparation/callisto-color-tests-initial.log -whitespace
-docs/moons/b3-preparation/final/renderer-tests.log -whitespace
-docs/moons/b3-preparation/final/browser/*.json linguist-generated=true
 src/planets/comet-19p/source/reference/*.cat -text -whitespace
 src/planets/comet-19p/source/reference/*.lbl -text -whitespace
 src/planets/comet-19p/source/reference/*.txt -text -whitespace
@@ -59,21 +67,37 @@ src/planets/comet-103p/source/photography/**/*.lbl -text -whitespace
 # Preserve the pinned Apophis spin-state row, including its CRLF ending.
 src/planets/apophis/source/reference/apophis_v233s7_spin_state.csv -text -whitespace
 
-# B9 preserves pinned binary cubes, archive text and captured CSS byte-for-byte.
+# Preserve pinned Cassini cubes and archive text byte-for-byte.
 src/planets/*/source/cassini-ice/**/*.cub binary
 src/planets/*/source/cassini-ice/**/*.qub binary
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.qub binary
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.lbl -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.html -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.cpp -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/source-review/**/*.c -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/evidence/styles/*.css -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/source-review/tethys-corrected/*.txt -text -whitespace
 src/planets/*/source/cassini-ice/evidence/*.html -text -whitespace
-docs/moons/b9-cassini-ice-surfaces/evidence/checks/*.log -text -whitespace
 
-# B10 archive labels, metadata and browser evidence retain their exact bytes.
+# Preserve original Diviner GHRM product labels byte-for-byte.
 src/planets/moon/source/science/diviner-ghrm/*.xml -text -whitespace
-docs/moons/b10-lunar-thermal/source-review/*.txt -text -whitespace
-docs/moons/b10-lunar-thermal/evidence/styles/*.css -text -whitespace
-docs/moons/b10-lunar-thermal/evidence/checks/*.log -text -whitespace
+
+# Retain native Horizons text for current and future body packages.
+src/planets/*/source/reference/horizons-*.txt -text -whitespace
+
+# Preserve SN263 archive bytes without adding non-data files to body packages.
+src/planets/asteroid-2001-sn263/source/orbit/*.txt -text -whitespace
+src/planets/asteroid-2001-sn263/source/reference/* -text -whitespace
+src/planets/asteroid-2001-sn263/source/shape/*.tab -text -whitespace
+src/planets/sn263-beta/source/orbit/*.txt -text -whitespace
+src/planets/sn263-beta/source/reference/* -text -whitespace
+src/planets/sn263-beta/source/shape/*.tab -text -whitespace
+src/planets/sn263-gamma/source/orbit/*.txt -text -whitespace
+src/planets/sn263-gamma/source/reference/* -text -whitespace
+src/planets/sn263-gamma/source/shape/*.tab -text -whitespace
+
+# Preserve the pinned Galileo candidate-orbit catalog bytes.
+src/planets/dactyl/source/reference/asteroids.ssc -text -whitespace
+
+# Preserve the Halley archives' fixed-width records and original tool reports.
+src/planets/comet-1p/source/giotto/*.hdr -text -whitespace
+src/planets/comet-1p/source/giotto/*.lbl -text -whitespace
+src/planets/comet-1p/source/giotto/*.txt -text -whitespace
+src/planets/comet-1p/evidence/*.log -whitespace
+src/planets/comet-1p/source/vega/*.hdr -text -whitespace
+src/planets/comet-1p/source/vega/*.lbl -text -whitespace
+src/planets/comet-1p/source/vega/*.doc -text -whitespace
+src/planets/comet-1p/evidence/encounters/*.log -whitespace

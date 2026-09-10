@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "asporina",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "589af8a495416174b2dcb744b47fdc82c22cd694c61028a9d264eaed07180481"
+    "sha256": "e49a1077e992ab5e4c8b8da2bf3a4455b26f5599586558a3631dddbfa383a2e1"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "e6bad1a6ce84bdc4c206b59b166082c2c28e56dff40f22e1febc5df90f122f55",
       "bytes": 82384,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "3b8f7127b8c8a4496d475eb7ec7b8119adacbe1aa3178728215c091ef7243bf4",
       "bytes": 10741,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/asporina/asporina-elevation-thumbnail.webp",
           "bytes": 5098,
           "sha256": "d60c9b10a56811006464a1d2806c2bd80c9e248c529b1981c1b524c33663af8f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asporina/asporina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asporina/asporina-elevation-surface@2x.webp",
           "bytes": 269458,
           "sha256": "2fdd52693659beb1216b6e59e61fcced34bed1ff6d490c1a2757749861cfa982",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/asporina/asporina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/asporina/asporina-shape-surface@2x.webp",
           "bytes": 230986,
           "sha256": "9ad27747334f183e187cc9cd2739338afa444fae7444f3f0bf051c5923a2785d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

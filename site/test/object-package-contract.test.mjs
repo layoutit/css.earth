@@ -5,15 +5,15 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mjs";
-import { planetInformationSource, validatePlanetEditorial } from "../../tools/planet-information-sources.mjs";
+import { planetInformationSource, validatePlanetEditorial } from "../../tools/planet-information-sources.mts";
 import {
   objectPackagePaths,
   validateObjectPackageFiles,
   validatePlanetData,
   validateRuntimeAssetManifest,
-} from "../../tools/object-package-contract.mjs";
+} from "../../tools/object-package-contract.mts";
 
 const implemented = OBJECTS;
 

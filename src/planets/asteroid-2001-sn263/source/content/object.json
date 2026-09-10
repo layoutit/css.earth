@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "asteroid-2001-sn263",
+  "displayName": "2001 SN263 Alpha",
+  "panel": {
+    "introduction": "2001 SN263 Alpha is the primary of the triple asteroid system 2001 SN263. Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative. Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations.",
+    "facts": [
+      {
+        "id": "parent",
+        "label": "Orbits",
+        "value": "Sun"
+      },
+      {
+        "id": "diameter",
+        "label": "Estimated diameter",
+        "value": "2.5 ± 0.3 km"
+      },
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Radar and light curves"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation period",
+        "value": "3.4256 hours"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "shape-epoch",
+        "label": "Observations",
+        "value": "January–March 2008"
+      },
+      {
+        "id": "shape-scale",
+        "label": "Model extents",
+        "value": "2.754 × 2.720 × 2.857 km"
+      },
+      {
+        "id": "phase",
+        "label": "Orientation",
+        "value": "Measured pole · illustrative spin phase"
+      },
+      {
+        "id": "orbit-limit",
+        "label": "Position",
+        "value": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "labels": {
+      "shape": "Shape"
+    },
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "detail": "Radar",
+        "title": "Radar shape",
+        "description": "Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative.",
+        "thumbnail": "/scenes/asteroid-2001-sn263/asteroid-2001-sn263-shape-thumbnail.webp",
+        "surface": "asteroid-2001-sn263-shape-surface@2x.webp",
+        "poles": "asteroid-2001-sn263-shape-poles@2x.webp",
+        "source": {
+          "id": "radar-shape",
+          "path": "../manifest.json",
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": true
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "PDS shape archive",
+      "role": "surface",
+      "description": "Original component mesh, pole and rotation tables",
+      "href": "https://sbn.psi.edu/pds/resource/shape153591.html"
+    },
+    {
+      "label": "Becker et al. (2015)",
+      "role": "facts",
+      "description": "Shape reconstruction and physical measurements",
+      "href": "https://doi.org/10.1016/j.icarus.2014.10.048"
+    },
+    {
+      "label": "Fang et al. (2011)",
+      "role": "facts",
+      "description": "Mutual orbits and dynamical limits",
+      "href": "https://arxiv.org/abs/1012.2154"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab",
+      "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Becker et al. (2015, PDS release 2020); Arecibo radar and optical light-curve teams"
+    }
+  }
+}

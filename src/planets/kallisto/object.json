@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "5ae8c6c9a55a8201a45929d27f8e0ef1ce65733259f3f6bee93889b2f54e54c7"
+          "sha256": "336913cb607e905c48a4a00adcc627857883ee3d465018b8cc496c17ac15cb35"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "3dfe3df6cae93ae4e12c746dd28d06c7abb5c0e0011948e8def901132c80595d"
+        "sha256": "7fff157b9638019ba23ac0959c8bc322cb4e9a76b3e5653ae83644dcf3755f9f"
+      }
+    },
+    "catalog": {
+      "name": "Kallisto",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.66979749127311,
+      "description": "Explore Kallisto in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 311,
+      "context": {
+        "order": 357
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "a0eab87c0a620f1acf481c611bc453700a684c156cdabc5b0effa4de893d38be"
+    "sha256": "4455f8ace9f2bf5ae4ca1d855b9872691d8e9adadd593bd9dc2f439e4ca93d44"
   }
 }

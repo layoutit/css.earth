@@ -1,21 +1,21 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ilioneus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "eed565d8126a0b4ea78b22db9a2d0cc53486e9adbfb786be8b1ccad0c4f7d226"
+    "sha256": "cefbbed0b286f4b0a27f6a523131a93dc87913709d79f86486061ab19133ebb8"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f248a394de59156006fa0abd28217d31e62fb74573990d4760cfba4170057555",
+      "sha256": "74869ac20b4acfd9a27334bbd71362751708afc5ab722a6a032510bd6a500586",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 30.3555,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.7674319210533601
           },
           "mapUrl": "/scenes/ilioneus/ilioneus-shape-surface@2x.webp",
           "polesUrl": "/scenes/ilioneus/ilioneus-shape-surface@2x.webp",
@@ -149,7 +150,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d610f519b498bbdccdd6f47251c3cfa14595f59d4ed09ea07c99cc34ad835c2c",
+      "sha256": "2dd8db713fc3f18305c82e20b7c35af74d60889a2871ffe55190cc2ac2a48696",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,7 +223,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "DAMIT model"
             },
             {
               "id": "elevation",
@@ -354,7 +355,7 @@
       "sha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -376,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d610f519b498bbdccdd6f47251c3cfa14595f59d4ed09ea07c99cc34ad835c2c",
-      "bytes": 9519,
+      "sha256": "2dd8db713fc3f18305c82e20b7c35af74d60889a2871ffe55190cc2ac2a48696",
+      "bytes": 9485,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +413,19 @@
           "url": "/scenes/ilioneus/ilioneus-elevation-thumbnail.webp",
           "bytes": 5726,
           "sha256": "29245acb2921dfe6de01e4b1933416e091c78ffc58544425b762c57b50e500a5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-elevation-surface@2x.webp",
           "bytes": 303480,
           "sha256": "68af0936b174ea58aee62eae54a26620d23aef8882a5828a7d2a7bba2e7329f9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +457,13 @@
           "url": "/scenes/ilioneus/ilioneus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ilioneus/ilioneus-shape-surface@2x.webp",
           "bytes": 226680,
           "sha256": "0dc86070ed02211765705665ba7b55dcbeb85a3ee055083d538a8dc45598a7ea",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

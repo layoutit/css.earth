@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import sharp from 'sharp';
-import { cutInteriorPoles } from '../../../../tools/objects/paged-ellipsoid/interior-poles.mjs';
+import { cutInteriorPoles } from '../../../../tools/objects/paged-ellipsoid/interior-poles.mts';
 import { runtimeDefinition, PREPARED_EARTH_SCENE } from './prepared-fixture.mjs';
 import { preparedSelectionFixture } from '../../../../src/platform/test/object-runtime-package.mjs';
 

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "vindobona",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4569495b1958472756753098327dba510cab3a222dc55e23ab05456c8a17b2cb"
+    "sha256": "d6bc60fd2395424b6745cdf042a47e35ee3d78031b871ca019333d59344ebc14"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "b350d98f2dc934419375ae342ce7c825dc290eebe41efc3e943ca51ed62dc85b",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "89a8336e605a4a7cb57ef357b39958c10dd45945bbd7ffe12dcae51e9b8a4422",
       "bytes": 11242,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/vindobona/vindobona-elevation-thumbnail.webp",
           "bytes": 5446,
           "sha256": "31899f62eb425ddebc42f30fd87cf914544862a1e3e7a59a7517c1473b936569",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vindobona/vindobona-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vindobona/vindobona-elevation-surface@2x.webp",
           "bytes": 288632,
           "sha256": "84646763f60b2d479f9dfe937c8194b89460af25a2e808f9ddd474cac68b3aa4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/vindobona/vindobona-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/vindobona/vindobona-shape-surface@2x.webp",
           "bytes": 242908,
           "sha256": "e9f737375c784f1362a72c419040c507b3d02ec1030f438656ce2007cc6529db",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "tyche",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "77844b36290b53ffea05cdec70778a7b3a5de39bc02b16883b7935e07f1c8eb0"
+    "sha256": "4386d946cb917a08426d52ec1adfa9aeaa2595adb7a0b2210966e6f2df99b63e"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "0490bad5885c440c58b587c2bf6d2dd5b342afc976fb35ffbbe3dc0eac00f090",
       "bytes": 82222,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "d33956ca60e50db351ca01ac88119dcfa1086e80c4a1357936c83a1e626d4f7d",
       "bytes": 8739,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/tyche/tyche-elevation-thumbnail.webp",
           "bytes": 5538,
           "sha256": "f52ef11936506e7abfde04591a2ea06de4330f1f68d0adebfc515a40a64cddd4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tyche/tyche-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tyche/tyche-elevation-surface@2x.webp",
           "bytes": 312070,
           "sha256": "3816334251db8a5be47755e3a433e5bcbd35102cd6b9bb9683c453533f657018",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/tyche/tyche-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/tyche/tyche-shape-surface@2x.webp",
           "bytes": 228810,
           "sha256": "9e485503884a0718bb81d93ce3d7d0e90343fc9d0e07a283be18734eadc2b4c1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

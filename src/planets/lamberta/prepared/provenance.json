@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "lamberta",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0afbe33050003379f8f006b55b7142a334c7c204f6183f45f2f3a053cc66f70a"
+    "sha256": "85dc01001857f84df72a5b11aecd8b136e442692da5e255545a201c5bc293b40"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "2e81472c1dd7a834d7ab49f42b4d545f3a1a7e506194ef887534d3499bde492e",
       "bytes": 72987,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "f726b160810220f53ad3c18bdfdfa20fe3eddffab0ba9c9447eada48ecf9bfe6",
       "bytes": 11047,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/lamberta/lamberta-elevation-thumbnail.webp",
           "bytes": 5000,
           "sha256": "729c6ffe0250a33df1bea51b8cfd659426e89a5bf7645d9b1663c3d8828c3651",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lamberta/lamberta-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lamberta/lamberta-elevation-surface@2x.webp",
           "bytes": 255818,
           "sha256": "01d10b2c9fedd82934d21fa9d29233c81b41da1f875bd5c5bfb9a0591f5f1a61",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/lamberta/lamberta-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/lamberta/lamberta-shape-surface@2x.webp",
           "bytes": 229076,
           "sha256": "e7e5384b8ba589add1f240dfec4996ab2cd77d603d89dabe18b03910fcb89f0b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

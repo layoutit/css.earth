@@ -1,0 +1,98 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.84",
+  "baseUrl": "http://127.0.0.1:53136",
+  "capturedAt": "2026-09-10T16:03:57.074Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "comet-1p",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "desktop",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "mobile",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "dataset-interactions",
+      "deviceScaleFactor": 1,
+      "datasets": [
+        {
+          "id": "model",
+          "interior": false,
+          "geometryDisplacement": 145.02841124714678,
+          "shadowPixels": null
+        },
+        {
+          "id": "giotto",
+          "interior": false,
+          "geometryDisplacement": 114.17969364392346,
+          "shadowPixels": null
+        }
+      ]
+    },
+    {
+      "id": "comet-1p",
+      "case": "dataset-interactions-dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "lens-race",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "lens-reacquire",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "lens-rejection",
+      "skipped": true
+    },
+    {
+      "id": "comet-1p",
+      "case": "lens-destroy",
+      "skipped": true
+    }
+  ]
+}

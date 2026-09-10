@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
-import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
+import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/planets/parthenope/source');
 const read=async path=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Parthenope retains original source pins and acquisition closure',async()=>{

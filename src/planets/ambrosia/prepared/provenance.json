@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ambrosia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2cee09e6782e7c368a92ccc05539e73d9d9574fd67c91168b597096cb0eed731"
+    "sha256": "b8779d830eb087d674f1e39550d57ea91a0547c1faf533a08343062f40e6a182"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "f448756b26da376283009caf5049d40dc1054ed2370c003ee80fe2cf831ecf49",
       "bytes": 81088,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "858f21e207113fcc309d1e5b5203d9c075dbff2951c69a22316b3297678f55d5",
       "bytes": 10931,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/ambrosia/ambrosia-elevation-thumbnail.webp",
           "bytes": 4370,
           "sha256": "b3d544ee11390b9075a9a65dc7617805665287a4b6c94ddf85b697dde38cd4b0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-elevation-surface@2x.webp",
           "bytes": 254676,
           "sha256": "a08f34cdf29cd5b28c6f4ddb5602a2538fa8ea08d093ac409ff6e2a17fd6a8f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/ambrosia/ambrosia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ambrosia/ambrosia-shape-surface@2x.webp",
           "bytes": 187612,
           "sha256": "b09a8f9eb7e4bf7d59d635f04b1b6934eea4bd8b5f7878cc27e743f6b51af588",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

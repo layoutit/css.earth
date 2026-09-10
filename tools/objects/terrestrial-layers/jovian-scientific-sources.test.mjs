@@ -3,8 +3,8 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {loadScienceSurface} from './scientific-raster.mjs';
-import {loadGeologySurface} from './categorical-geology.mjs';
+import {loadScienceSurface} from './scientific-raster.mts';
+import {loadGeologySurface} from './categorical-geology.mts';
 
 const planets = fileURLToPath(new URL('../../../src/planets/', import.meta.url));
 const json = async path => JSON.parse(await readFile(path, 'utf8'));

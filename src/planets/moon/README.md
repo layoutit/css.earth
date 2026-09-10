@@ -15,7 +15,7 @@ The Moon combines LRO imagery and numeric science products with interpreted geol
 
 ## Evidence
 
-[B10 visual review and checks](../../../docs/moons/b10-lunar-thermal/VISUAL-REVIEW.md) records the September 2026 source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree are unchanged. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
+[The September 2026 lunar thermal review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/VISUAL-REVIEW.md) records source, reproduction, Chrome, installation and test results. All three numeric grids reproduce exactly; 507 independent original-to-atlas probes and eight separately fetched byte anchors pass. Browser captures cover DPR 1 and 2, close zoom and the narrow selector. The scene geometry and retained tree are unchanged. Aggregate readiness remains limited by the shared audit and missing unrelated build inputs.
 
 [Earlier independent source anchors](source/validation/scientific-source-anchors.json) preserve LOLA and the superseded Diviner GDR L3 decoder evidence; they do not validate the new GHRM values.
 
@@ -96,7 +96,12 @@ The three nighttime lenses use the [LRO Diviner GHRM v1.0 float32 mosaics](https
 produced by Powell and the UCLA Diviner team from 2009–2022 observations.
 The exact product labels, original hash pins, compact numeric grids and conversion
 receipts live in `source/science/diviner-ghrm/`; candidate selection and independent
-checks are recorded in [B10](../../../docs/moons/b10-lunar-thermal/README.md).
+checks are recorded in the [lunar thermal source review](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b10-lunar-thermal/source-review/INDEPENDENT-SCIENCE-REVIEW.md).
+
+The [shared converter](../../../tools/objects/acquisition/diviner-ghrm.py) runs
+each `prepare-*.json` in that source directory. Use its `--source-directory` and
+`--output-directory` options to reproduce the compact grid separately and compare
+it with the pinned output.
 
 - **Midnight temperature**: fitted bolometric temperature at local midnight,
   shown from 80 to 140 K. This combines many nights, not current temperatures.
@@ -195,3 +200,7 @@ Exact bytes, coordinates and validity rules are in the intake plans and receipts
 See the [mapped-science conversion method](../../../tools/objects/acquisition/MAPPED-SCIENCE.md).
 
 </details>
+
+## Catalogue attribution
+
+The GRAIL crustal-thickness print is attributed to the GRAIL mission. GRAIL-A (Ebb) and GRAIL-B (Flow) have separate vehicle records and are mission participants. The preserved print credit does not itself establish separate vehicle-level contribution edges. LRO-derived datasets retain their explicit LRO spacecraft/mission attribution. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.

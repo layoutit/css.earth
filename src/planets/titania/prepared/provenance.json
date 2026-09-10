@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "titania",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "17938bf0bfbd76fcfe28f0098ed3f313749f425334998ae2af873c345a0a4e89"
+    "sha256": "06e8b722199c43a315483aa550faa9d913efe2ee296e23e2b6c1572264dd1c11"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -567,10 +567,14 @@
       "falseColor": false,
       "coverage": "Voyager 2 monochrome mosaic with source photometric correction. Native detail is about 2.9 km per pixel at best; photographed shadows and image seams remain. Gray grid marks missing observations.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://repository.hou.usra.edu/bitstreams/1fe08644-1988-43d4-9f32-1267246f99a4/download"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/bitstreams/1fe08644-1988-43d4-9f32-1267246f99a4/download",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "9bafb22e1b0be35212c078d77e9f1364e3ff6b6873d0e98c4073055f29ed91ae",
       "bytes": 2336639,
@@ -624,10 +628,14 @@
       "falseColor": true,
       "coverage": "Voyager stereo elevations with published limb-profile data, in kilometres relative to the source reference ellipsoid. Fixed relief lighting reveals slopes; gray grid marks missing measurements. 2.88 km grid spacing is not uniform effective elevation resolution.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://repository.hou.usra.edu/bitstreams/e17f88cd-db20-4208-912b-7f30074054cc/download"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/bitstreams/e17f88cd-db20-4208-912b-7f30074054cc/download",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "3d25b4baaf49050fe2ad37b669c34afa6de607692611d927ecbd9eba90dec25d",
       "bytes": 1807867,

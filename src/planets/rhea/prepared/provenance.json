@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "rhea",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcffcbe51f59bce1cc8f272b569768298fcba7e3b7e9a2227f5b476f544deea0"
+    "sha256": "ee9ee1e0bc76f9e344ed1f23e0041c748ebf64bd2d1b2dd9b8f522ad4016cb4c"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -629,17 +629,31 @@
       },
       "coverage": "USGS 2012 Cassini/Voyager mosaic. Its download-link label is wrong; this pinned 11520 by 5760 file matches the 417 m metadata. Preserve nonzero pixels; zero is GeoTIFF no-data. Origin easting zero means left edge 180 E despite projection center 180 E.",
       "capture": {
-        "spacecraftIds": [
-          "cassini",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
+            "missionId": "cassini"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
+            "missionId": "voyager-1"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Rhea_Cassini_Voyager_mosaic_global_417m.tif",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7",
       "bytes": 66401915,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -668,7 +682,7 @@
       "sha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -708,15 +722,19 @@
       },
       "coverage": "Published global rectangular display mosaic without a separate validity mask. Preserve supplied pixels, including real dark terrain, residual photographed shadows and coarse inserts. The one-pixel departure from 2:1 aspect is retained in source and resampled at preparation.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18438.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18438.jpg",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4",
       "bytes": 10389170,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -762,7 +780,7 @@
       "sha256": "6363e6ba38ca29df67a8dba301ef8db2a45daba0cd29896c2397e4e13b1b46d1",
       "bytes": 48826,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -794,15 +812,19 @@
       "coverage": "Global SPC radius model. Sample original geotransform within actual raster bounds. Narrow uncovered east/south edges are not extrapolated.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 763.5 km.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_radius_g.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/data/rhea_radius_g.tif",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -839,7 +861,7 @@
       "sha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123",
       "bytes": 9881887,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -885,7 +907,7 @@
       "sha256": "559e109a8bd3891ed2d7ddbfc9e505694574c6af80547f3c63e0f401aa1ded19",
       "bytes": 133351,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -902,7 +924,7 @@
       "sha256": "6c12a4d0db5673c3e19296f78675617625d26d0cf1808e60b37a6d1927916c80",
       "bytes": 14797,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -943,13 +965,13 @@
           "url": "/scenes/rhea/rhea-normal-thumbnail.webp",
           "bytes": 2772,
           "sha256": "d629d4430b5fcfae757870c697e17b2e6b054b50b984ee52ec706dc0984c8ce9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-normal-surface@2x.webp",
           "bytes": 4933780,
           "sha256": "c1cc0f7903fd00bc594395360d93c61911dcf39e5cb3ef99dda6486afd67c04b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -986,13 +1008,13 @@
           "url": "/scenes/rhea/rhea-enhanced-thumbnail.webp",
           "bytes": 5438,
           "sha256": "b6adc3b37aa5421f9c4cda8d4ed5ea0bf1650cbfa4557e4ef3a103e0734f5aec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-enhanced-surface@2x.webp",
           "bytes": 11123304,
           "sha256": "4cdc64493a3659fab0412cafe3fc46627792b49b9b1225f5a8be8b12972144f1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1032,13 +1054,13 @@
           "url": "/scenes/rhea/rhea-infrared-thumbnail.webp",
           "bytes": 4220,
           "sha256": "909de69ac8d2b6a13f4999c523a509c4ad13340b2a002013babb9adb69d05d81",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-infrared-surface@2x.webp",
           "bytes": 240274,
           "sha256": "5254a1199767b509f94d44bbffea58b0b234662ee73a3b0bd4572486bb95ac55",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1073,19 +1095,19 @@
           "url": "/scenes/rhea/rhea-elevation-thumbnail.webp",
           "bytes": 7446,
           "sha256": "684b40b3773bfca89f66f1d3cd691991a995372bafc2ba6bbc89427e75d169f4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-elevation-surface@2x.webp",
           "bytes": 3131398,
           "sha256": "bbd7aba7459e9dcd93f5740c8fb873207f9cd89b1464211408361e37d025f921",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1120,19 +1142,19 @@
           "url": "/scenes/rhea/rhea-relative-albedo-thumbnail.webp",
           "bytes": 3668,
           "sha256": "97457e6cd6c860756fafb6b48b372a01a178bd7a28dcb7cb86110ea51cd43dab",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-legend.webp",
           "bytes": 276,
           "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-surface@2x.webp",
           "bytes": 1744154,
           "sha256": "07537c6c45c6810003746dc5e09f3b95194d3fbc571e0f17724ab83cea094f8c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1166,19 +1188,19 @@
           "url": "/scenes/rhea/rhea-ice-absorption-thumbnail.webp",
           "bytes": 3478,
           "sha256": "cb3139d6bf2483ab296243498ed7b56de563ac7713704398b73949d44e329cc8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-legend.webp",
           "bytes": 162,
           "sha256": "989724748ca27ff3f9100c05b4eeb7b936f787550b41223655a1fbee8c888477",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-surface@2x.webp",
           "bytes": 180602,
           "sha256": "4715f0187b7834a3738fa5af7ed8038b51c24ea036e1a44fbeacaddb3013fb72",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1210,13 +1232,13 @@
           "url": "/scenes/rhea/rhea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/rhea/rhea-shape-surface@2x.webp",
           "bytes": 458908,
           "sha256": "130fef512cc41d7778390a2718fb733b6d3de80b32b5208ce049c65224e667b7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

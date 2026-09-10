@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2071e854b8d50f52d18ddc45862e35baa8d8474b224952bab733eac1286d8520"
+        "sha256": "792a342030727f3512216b135582c0b9339af323c83f3d1f19b2fd87a4be26b6"
+      }
+    },
+    "catalog": {
+      "name": "Hidalgo",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 5.728989790748572,
+      "description": "Explore Hidalgo in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 400,
+      "context": {
+        "order": 204
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "02cb15d9813d9c6c4108f43c0a1a4173dd6cf5534cce9bf4951bc50bd2551c69"
+    "sha256": "49caf3f650d8714d970c41fbbd9005ecb617974524a2b80aa46de4c91ebee302"
   }
 }

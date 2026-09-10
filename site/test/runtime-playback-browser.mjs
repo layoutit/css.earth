@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "playwright";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { assertRenderedObjectControls, loadPlanetBrowserProfile } from "./load-browser-profile.mjs";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";

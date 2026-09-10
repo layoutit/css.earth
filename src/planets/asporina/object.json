@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "8c791b5cbaa4d41e3bdb7a858ad1c6ff7496a495afff7229adecf60b9c8d9479"
+          "sha256": "1a48768c5fd9c9ef76364e8cd07cb4099d0e2f6204713df77fa7f3314210fb65"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "344dc2044dcafc82934bd0fbf39caac2f07079e76d281b943f1883c8546df32f"
+        "sha256": "5fb39ee18c6c5d69b9cf39e444cb9f57362b96444d14da4c662dc0fa8f18c21c"
+      }
+    },
+    "catalog": {
+      "name": "Asporina",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.6955752258853334,
+      "description": "Explore Asporina in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 334,
+      "context": {
+        "order": 380
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "ce2ea342a8bbd98cf85d780b313a6ba3d241d8d5153af7cfad2f3b1d20714ec3"
+    "sha256": "a0b5d9827f8aac5e7e95b43b1d4f13f8bd430262cd78bae6b34ca1c8124eff51"
   }
 }

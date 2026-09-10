@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-c2014-un271",
+  "displayName": "Bernardinelli–Bernstein",
+  "panel": {
+    "introduction": "Bernardinelli–Bernstein has an exceptionally large nucleus. ALMA detected carbon monoxide escaping while the comet was still more than 16 AU from the Sun.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Catalog diameter",
+        "value": "≈140 km"
+      },
+      {
+        "id": "perihelion",
+        "label": "Closest to Sun",
+        "value": "11 AU"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Illustrative nucleus"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Illustrative nucleus",
+        "detail": "Celestia",
+        "title": "C/2014 UN271 Bernardinelli–Bernstein",
+        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "thumbnail": "/scenes/comet-c2014-un271/comet-c2014-un271-model-thumbnail.webp",
+        "surface": "comet-c2014-un271-model-surface@2x.webp",
+        "poles": "comet-c2014-un271-model-poles@2x.webp",
+        "source": {
+          "id": "celestia-mesh",
+          "path": "../manifest.json",
+          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+        },
+        "facts": [
+          {
+            "id": "diameter",
+            "label": "Catalog diameter",
+            "value": "≈140 km"
+          },
+          {
+            "id": "perihelion",
+            "label": "Closest to Sun",
+            "value": "11 AU"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Celestia",
+      "role": "surface",
+      "description": "Catalog entry and estimated scale",
+      "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+    },
+    {
+      "label": "JPL Horizons",
+      "role": "observations",
+      "description": "Position at 3 September 2026",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "About this comet",
+      "role": "observations",
+      "description": "Observations and history",
+      "href": "https://ntrs.nasa.gov/api/citations/20250006397/downloads/UN271_ALMA_ApJL_aasv7_Accepted.pdf"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ntrs.nasa.gov/api/citations/20250006397/downloads/UN271_ALMA_ApJL_aasv7_Accepted.pdf",
+      "credit": "Sources listed in reference/source-record.json"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+    }
+  }
+}

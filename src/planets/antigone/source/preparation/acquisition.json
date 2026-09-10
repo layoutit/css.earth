@@ -34,26 +34,8 @@
         "restore",
         "refresh"
       ],
-      "path": "reference/model-1810.html",
-      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1810"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
       "path": "reference/AcuA_V1.txt.gz",
       "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/documentation.html",
-      "url": "https://damit.cuni.cz/projects/damit/pages/documentation"
     },
     {
       "kind": "download",
@@ -72,15 +54,6 @@
       ],
       "path": "reference/1810-IAUspin.txt",
       "url": "https://damit.cuni.cz/projects/damit/stored_files/open/399/IAUspin.txt"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "reference/reference-169.html",
-      "url": "https://damit.cuni.cz/projects/damit/references/view/169"
     },
     {
       "kind": "download",

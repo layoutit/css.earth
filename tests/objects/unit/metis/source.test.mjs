@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 const source=new URL('../../../../src/planets/metis/source/',import.meta.url);
 test('Metis reference shape reproduces the PCK dimensions without invented terrain',async()=>{
  const pck=await readFile(new URL('shape/pck00011.tpc',source),'utf8');

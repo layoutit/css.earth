@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2ada17e165085be94a3c270a0b46425d332874b38b9b83dd93984e2dc54b7a8b"
+          "sha256": "b09977f38253b55f14833fbeb49b185555dda22a20b4150a858343c66a0c44a5"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "527a36a44a8545b391f03cdefabbb2d3c73ea7c79bc1b467cb868a54fac626d7"
+        "sha256": "a77384276dafd3669e45b269fcd8effa500a21ddbca336f60638372b5969cc66"
+      }
+    },
+    "catalog": {
+      "name": "Klymene",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.1462660059874397,
+      "description": "Explore Klymene in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 259,
+      "context": {
+        "order": 304
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8b87d52485f4df1cac07935938470d56fb361af100c791f1529596a737b9ad34"
+    "sha256": "667b1f63073ec5c28cc8e112604a85bb60ab42dbb9b9dc26c1d30fdc4675a19c"
   }
 }

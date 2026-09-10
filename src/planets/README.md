@@ -2,7 +2,7 @@
 
 Every detailed body is an authored data package under `src/planets/<id>/`.
 The directory name also covers the Sun, moons, dwarf planets, asteroids and
-comets. `OBJECTS` in `site/objects.mjs` remains the only rendered-body registry.
+comets. `OBJECTS` in `site/objects.mts` remains the only rendered-body registry.
 Navigation selects one active scene; it does not embed child scenes.
 
 Read [AGENTS.md](../../AGENTS.md), the
@@ -22,7 +22,7 @@ using the existing files.
 src/planets/<id>/
   README.md                    sources, processing, evidence and known problems
   NOTICE.md, LICENSE*          attribution and applicable terms
-  object.json                  authored recipe and prepared transport reference
+  object.json                  catalogue entry, recipe and prepared transport reference
   source/manifest.json         exact inputs, documents and intermediate pins
   source/preparation/          acquisition and capability configuration
   source/content/              body-owned editorial content and controls
@@ -32,12 +32,15 @@ src/planets/<id>/
   runtime-assets.json          generated runtime image inventory
 
 public/scenes/<id>/             installed/generated serving assets
+public/navigation/body-<id>*.webp   prepared navigation images
+public/navigation/<id>-context.webp  optional resolved context image
+packages/astronomy/data/bodies/<id>.json  physical data and orbit records
 tests/objects/unit/<id>/        body-specific scientific and package checks
 tests/objects/browser/<id>/     profiles for the shared browser harness
 site/pages/[id].astro           one shared route for all body ids
 ```
 
-Use the current authored branch of `tools/object-package-contract.mjs` for
+Use the current authored branch of `tools/object-package-contract.mts` for
 required files and `tests/objects/source-closure.test.mjs` for source ownership.
 The latter requires data-only body packages. Acquisition/preparation code lives
 in shared `tools/objects/` families; runtime and presentation behavior live in
@@ -49,6 +52,35 @@ facts. Reuse existing preparation code with the new body's own source parameters
 A new recipe operation needs shared code, records of its inputs and outputs,
 and tests of its behavior. Keep source interpretation and static processing out of
 runtime. Preserve pinned original bytes and reproducible preparation.
+
+## Register a body without editing shared lists
+
+Put the search name, classification, color, distance in AU, description and
+system name in `object.json` under `properties.catalog`. A folder without this
+entry stays unpublished. Add `context: {}` there to include a Solar System body
+in the shared Sun view; an optional context name or color overrides its search
+presentation. Existing `order` values preserve earlier catalogue ordering.
+New entries can omit them; equal priorities sort by ID. Do not renumber other bodies.
+
+The astronomy package keeps each body's physical values, retained orbit records,
+independent vector samples and acquisition choices in `data/bodies/<id>.json`.
+Those are scientific library inputs, separate from the application's catalogue
+entry. Keep provider URLs, epochs, units and limitations with the values.
+Acquisition tools accept `--object=<id>` for asteroid, comet and moon updates.
+They update that body's records; building the library needs no downloads.
+
+After authoring the sources and records, run `pnpm prepare:catalog` and
+`pnpm build:astronomy`, then `pnpm prepare:navigation <id>` and the selected-body
+preparation command below. If this is a parent's first moon, also prepare the
+parent's navigation image. Commit the new body's files and navigation images.
+Adding a capability or changing a parent's physical data can still require
+shared code or related-body changes; explain that dependency in the PR.
+
+Builds assemble `OBJECTS`, astronomy exports, solar geometry, Sun context,
+navigation metadata and the minimap. These combined outputs are ignored. Do not
+edit or force-add them, or append entries to shared TypeScript tables or the
+Sun's source list. Marker images use body URLs with one tile, so adding a marker
+cannot shift another body's sprite coordinates.
 
 ## Sources and delivery
 

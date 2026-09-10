@@ -12,7 +12,7 @@ import {
   projectGoogleEarthTrackballDelta,
   recordGoogleEarthDragSample,
   resetGoogleEarthDragHistory,
-} from "./google-earth-drag-inertia.mjs";
+} from "./google-earth-drag-inertia.mts";
 
 const trackball = {centerX:346.5,centerY:300,surfaceRadius:144.65263161811257,
   focalLength:598.73636504};

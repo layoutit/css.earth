@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "europa",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ddcbe8785d6ddbbc6fedc8630fbe87580e43eb2ffe92f5c6cc8cd5ae1f1d6e52"
+    "sha256": "0686fe673474b00624a9aa620b81b2b0dd1da8df0d76b306ecb0dbcb4408a90d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -731,12 +731,26 @@
       },
       "coverage": "GeoTIFF GDAL_NODATA=0. Missing pixels receive the shared gray cartographic grid. Published observed shading and resolution differences are preserved.",
       "capture": {
-        "spacecraftIds": [
-          "galileo",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
+            "missionId": "galileo"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
+            "missionId": "voyager-1"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Europa_Voyager_GalileoSSI_global_mosaic_500m.tif",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "a323f0c9ccb47d5af9902ea8297fe81f9a9708795645b80801f103c3f7c9a624",
       "bytes": 192777263,
@@ -786,10 +800,14 @@
       "coverage": "Intersection of valid samples in all three selected bands; no-data and ISIS special values remain missing. Earlier listed observation has priority; no blending or gap fill.",
       "photometry": "Archive Minnaert-corrected I/F; fixed RGB display ranges, no independent frame normalization.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://doi.org/10.17189/4sz4-5024"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://doi.org/10.17189/4sz4-5024",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "01f3ec428dae8907f29701e4bac1aecab8bb800fea488991332e60d65b9d5287",
       "bytes": 351656,
@@ -876,12 +894,12 @@
     {
       "path": "photometry/horizons-sun.json",
       "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
-      "id": "authored-document:photometry/horizons-sun.json",
-      "kind": "authored-document",
-      "origin": "object:source/photometry/horizons-sun.json",
-      "title": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
+      "kind": "source-document",
+      "title": "JPL Horizons Sun vectors relative to Europa",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
+      "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
+      "id": "source-document:photometry/horizons-sun.json",
       "upstreamLineage": "not-recorded",
       "sha256": "0af0a446aa73341e382d3d006a8c9c1a0e6de8c1b2f0f81d33c2dd69bbac7cf1",
       "bytes": 9158,
@@ -893,12 +911,12 @@
     {
       "path": "photometry/horizons-galileo.json",
       "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
-      "id": "authored-document:photometry/horizons-galileo.json",
-      "kind": "authored-document",
-      "origin": "object:source/photometry/horizons-galileo.json",
-      "title": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
+      "kind": "source-document",
+      "title": "JPL Horizons Galileo vectors relative to Europa",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-77%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics — Horizons",
+      "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
+      "id": "source-document:photometry/horizons-galileo.json",
       "upstreamLineage": "not-recorded",
       "sha256": "0a4ca5c56c9a50be0a206701773b2b35715d4aad3120f587b3dffabf5d710113",
       "bytes": 9721,
@@ -926,10 +944,14 @@
       "width": 3248,
       "height": 1317,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "3b44296107ab39a8ba575fc83248ae127d39693f4ce2e6889aff29e8eddcb88a",
       "bytes": 7287787,
@@ -964,10 +986,14 @@
       "width": 3196,
       "height": 1321,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875178/s0349875178.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875178/s0349875178.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "b03385ff0a4eb81bb5ab6755b3c3aa2054a7c85570db78cc7ff6818e1f6a84f9",
       "bytes": 7406122,
@@ -1002,10 +1028,14 @@
       "width": 3356,
       "height": 1320,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "8f0799310d32a88c91aca062f21591435717044ba44c267bb79361962136feee",
       "bytes": 7169272,
@@ -1040,10 +1070,14 @@
       "width": 1766,
       "height": 1419,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234600/s0426234600.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234600/s0426234600.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "0d8988fa285cc918da5d896b4606bd2da5e5deb3fe23921656552bef14943a71",
       "bytes": 3657909,
@@ -1078,10 +1112,14 @@
       "width": 1760,
       "height": 1421,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "4d687142eefa0d10f95c1ff4559df295f4e0051fc6ee8d17f1bc0e30bde6c806",
       "bytes": 3664881,
@@ -1116,10 +1154,14 @@
       "width": 1772,
       "height": 1449,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234639/s0426234639.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234639/s0426234639.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "b7e528a4269e9fc8a9b633f5620dbf96cd899c2395c0e8a8cdf787ae3c06230a",
       "bytes": 3534165,
@@ -1154,10 +1196,14 @@
       "width": 1010,
       "height": 844,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "a6872d1ae78f572cf64050ec6b74c1092e9eb5c70c25bca322252535c0a77006",
       "bytes": 1390887,
@@ -1192,10 +1238,14 @@
       "width": 3289,
       "height": 1332,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984852/s0440984852.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "f6d2610583d7ee0895f67cea72c8ef8e8ba44e4db215e389dde7bc1b0b13077a",
       "bytes": 7107148,
@@ -1230,10 +1280,14 @@
       "width": 900,
       "height": 833,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "c0744bed1cb9c059dc4033634109bb9c47904a59f0b60eda03c3f176a823da30",
       "bytes": 3324947,
@@ -1268,10 +1322,14 @@
       "width": 3324,
       "height": 1325,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984878/s0440984878.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "7897b822a9be1c518341eb6e6eafc40d19f51eb05041764fae5270c845b91d07",
       "bytes": 7607954,
@@ -1306,10 +1364,14 @@
       "width": 1186,
       "height": 994,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "435576dcf72b93380df88d2e09e528cc3a640228c53ddfcb18a16804244df933",
       "bytes": 4278616,
@@ -1344,10 +1406,14 @@
       "width": 1247,
       "height": 847,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984914_13/s0440984914_13.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "9b5b2069c177f81792ee7b46c88f82546475eb85d9d157245f8af88a000a3b93",
       "bytes": 5048470,
@@ -1382,10 +1448,14 @@
       "width": 3305,
       "height": 1337,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "0d2442d2ccc906e6790e64291b602dff0e983b0f9eec23f827b594926347bc98",
       "bytes": 5870772,
@@ -1420,10 +1490,14 @@
       "width": 903,
       "height": 834,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984939/s0440984939.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "4c48daf581fbab988311b3258209fd143fec5fa1d09951d7bd121aedeb4e4003",
       "bytes": 2571253,
@@ -1458,10 +1532,14 @@
       "width": 3314,
       "height": 1324,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "5623a2fce8ff8eec29b9b1ec522b186871256fd55cda8c23a272e2c593504181",
       "bytes": 5551570,
@@ -1496,10 +1574,14 @@
       "width": 1153,
       "height": 977,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984965/s0440984965.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "03bbda32b885b93bf860f6de9c748668fd0e1da7c5f30ff6ff51f03d17f1cf61",
       "bytes": 4115365,
@@ -1534,10 +1616,14 @@
       "width": 1264,
       "height": 847,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "6e92d6d3e0d281fddef59f7b15be45da38d95192087b5f7d2777bef3cbe58027",
       "bytes": 5191247,
@@ -1572,10 +1658,14 @@
       "width": 1287,
       "height": 1082,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985113/s0440985113.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "e92576a0b9e6196bd97b000f1ffa0e0fb73c27d8ec35feb464127d4341718bd3",
       "bytes": 5017172,
@@ -1610,10 +1700,14 @@
       "width": 910,
       "height": 839,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "78c8a8af4cea5a266dde8cee21f728799c2af6f65268b49692b04476777eff59",
       "bytes": 2764409,
@@ -1648,10 +1742,14 @@
       "width": 3316,
       "height": 1322,
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.photr.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985139/s0440985139.equi.photr.tif",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "95eb88fc84a49a91d2bd54faf1d6e5d964b5651a3c065a2e92fe87be03b4de67",
       "bytes": 6152531,
@@ -1904,8 +2002,8 @@
         "kind": "observedColors"
       },
       "inputs": [
-        "authored-document:photometry/horizons-sun.json",
-        "authored-document:photometry/horizons-galileo.json",
+        "source-document:photometry/horizons-sun.json",
+        "source-document:photometry/horizons-galileo.json",
         "usgs-s0349875152.equi",
         "usgs-s0349875178.equi",
         "usgs-s0349875200.equi",

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "mercury",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2a31b09c6357037a002506f0cd36be42e93c6d2eaa958ea3517b682178ea9ce9"
+    "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -685,10 +685,14 @@
         "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
       },
       "capture": {
-        "spacecraftIds": [
-          "messenger"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "messenger",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}",
+            "missionId": "messenger"
+          }
+        ]
       },
       "sha256": "4b72646d9405f85e0c158cc321088229d6c47deea09ffa6e1d24a81e3ba36f37",
       "bytes": 9385021,
@@ -734,10 +738,14 @@
         "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
       },
       "capture": {
-        "spacecraftIds": [
-          "messenger"
-        ],
-        "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "messenger",
+            "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
+            "missionId": "messenger"
+          }
+        ]
       },
       "sha256": "63a6d2baa29eec230417837f6fc9d30739b210f8c3d2d43bc2db77b90ff6b3ec",
       "bytes": 17037150,
@@ -784,10 +792,14 @@
         "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
       },
       "capture": {
-        "spacecraftIds": [
-          "messenger"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "messenger",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}",
+            "missionId": "messenger"
+          }
+        ]
       },
       "sha256": "237521324ce260491eeb5d9215a2a3c72b1f018ae12450513bb82e78f5cffab9",
       "bytes": 15262047,

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "quaoar",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5418a8e16c31445cfc9e4408d2aba64f2b14708c7016389b8c4c696f6f68e0c7"
+    "sha256": "657465112fec842b0f3e320cf0688eb746f0b258e313ec0323c5809ab1883c19"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -279,12 +279,12 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 547174.3344090937
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Authored neutral image retained in Git.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -304,12 +304,12 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 547174.3344090937
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Numerical ellipsoid table reproduced from measurements.json by tools/objects/source-authoring/trans-neptunian/author.py.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "2a7847815cf9b61e921c7264dd5a3caba5a576b46aadb115207f1c6a1f1c2123",
       "bytes": 65105,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -326,7 +326,7 @@
       "sha256": "ccb4984a3f9c4abf41b9b7b02d50e3c1bb30ec8641b9ea3b59b41427bb83c651",
       "bytes": 4140,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -364,13 +364,13 @@
           "url": "/scenes/quaoar/quaoar-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/quaoar/quaoar-model-surface@2x.webp",
           "bytes": 56378,
           "sha256": "4d90c300b08a3aa367f9ce4231055c69e62a8831a55f26b22721ed34d955f73b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

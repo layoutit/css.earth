@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "c41868922d484c31c9ccc0ba7f7c4fdc911178234b459563a5a09df9fdf396e3"
+          "sha256": "2037511eb7c62b0d6275cbd2d8fee000e45f347514da21b416fdad65932debca"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b51c839d499baf8b9d34c5c6e0fb36569c33983bbd97749ab5373809f274cf67"
+        "sha256": "d88ade758ae5ec5d3b2e43e6c42825b53cb4bdf5235cdb38c788052133fd3313"
+      }
+    },
+    "catalog": {
+      "name": "Unitas",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.357778522320458,
+      "description": "Explore Unitas in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 356,
+      "context": {
+        "order": 402
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "6f4070873daa8d180270279c5b4959d614fa9e74e5a57417ca18b4ee676ce5be"
+    "sha256": "e0f862b4aa3fb1058c5a3d6703a6ff8feb6eb9a76091edfb6e6342eb4b465f27"
   }
 }

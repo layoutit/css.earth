@@ -12,9 +12,11 @@
 
 The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-The [asteroid validation report](../../../docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 170.994 m, maximum 585.459 m. These are sampled distances, not exhaustive error bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
 
@@ -48,6 +50,10 @@ Disk-integrated light curves, thermal spectra and DAMIT preview renders supply n
 Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z is the spin pole and positive X defines the meridian.
 
 The record gives diameter 175 km, period 6.920509 h and ecliptic J2000 pole (333°, -31°). The original mesh has measured volume-equivalent radius 87.500004 km and Cartesian extents 252.408 × 213.322 × 126.786 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
+
+- [Kaasalainen et al. (2002), Binary structures among large asteroids](https://ui.adsabs.harvard.edu/abs/2002A%26A...383L..19K) — selected model publication.
+
+- [Hanuš et al. (2015), Thermophysical modeling of asteroids from WISE thermal infrared data - Significance of the shape model and the pole orientation uncertainties](https://ui.adsabs.harvard.edu/abs/2015Icar..256..101H) — selected model publication.
 
 </details>
 

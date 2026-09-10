@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "00df603e17f0836b3d58cded70af0a74dca81b7478889385a130cf3550d88bc0"
+          "sha256": "c588783dd87212f18a2443b83094632989bf6e92a49a3adb06907f387fd1428b"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "0edea79d0de1ff37a27b9a4232b1cfbdc4154dd968ae2a40db87c09bcdbb4ef3"
+        "sha256": "7773ff351f50b65d27376bc9003573141115e653c99fa6dce051358bcac2cd9f"
+      }
+    },
+    "catalog": {
+      "name": "Lilaea",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.752207905556241,
+      "description": "Explore Lilaea in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 317,
+      "context": {
+        "order": 363
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "5ca809a159a4d8b106b19d10101138309407306f80eda0636a70c6ecce556767"
+    "sha256": "e8ff808209f005caaf64b78ae03c6a4d67984e9321b4e74dd7cdb4fb18f96474"
   }
 }

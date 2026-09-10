@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "erigone",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ab779976ea9d80e033982f49271d3e110f5f6ac77f8d6701194945401f2068c1"
+    "sha256": "6cb5a33374ec3ef18f361bffeb3f77546ef385b3a4901fc36cc2218c93cc0c9d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "6aad46d87b3e7994de886e34871bc6c1d2979208ffaeeb345945cae43f2f778a",
       "bytes": 81331,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "49a5d830f4c552a9bc8a96a9bd753fdbffec8348266efd748abaafc10e1db9d4",
       "bytes": 9754,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/erigone/erigone-elevation-thumbnail.webp",
           "bytes": 4748,
           "sha256": "4e90d9dbc86e24e5ccc24b6852e94108f00f0ea77473ab4be48ab995fec0aa8b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/erigone/erigone-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/erigone/erigone-elevation-surface@2x.webp",
           "bytes": 268486,
           "sha256": "76d434691992dc643ddadccfa9c85b627f4b90b3eced1a2c5a8150b60b374b2a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/erigone/erigone-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/erigone/erigone-shape-surface@2x.webp",
           "bytes": 200792,
           "sha256": "e0616e606dbf437bf37e50c0149439775347bf8f4e8501b510566aa90af4a065",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

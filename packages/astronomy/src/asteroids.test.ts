@@ -28,7 +28,10 @@ describe('asteroid positions against JPL Horizons', () => {
     // a 5% regression margin plus less than 1 km upward rounding. These two
     // dates do not establish intervening-date accuracy. Exact errors and fixture
     // hashes are recorded in output/asteroids-wikipedia/orbit-errors.json.
-    const maximumErrorKm = {vesta: 300, eros: 200, itokawa: 400, bennu: 200, ryugu: 200, ida: 2000, gaspra: 850, mathilde: 230, lutetia: 200, steins: 220, didymos: 140, kleopatra: 250, toutatis: 340, pallas: 285, hygiea: 4000, juno: 240, psyche: 3300,
+    // The distant-world batch measures 519–549 km at epoch ±30 days;
+    // Independent vectors: https://github.com/layoutit/cssEarth/blob/5ccf1eafa396d7cbe91e62b28fe81db8c0626a35/docs/distant-worlds/orbit-errors.json
+    const maximumErrorKm = {"ixion": 547, "huya": 542, "asteroid-2003-vs2": 583, "asteroid-2002-tc302": 567, "asteroid-2002-tx300": 564, "deedee": 562, oumuamua: 600, sedna: 600, gonggong: 600, orcus: 600, salacia: 600, varuna: 600, varda: 600, mani: 600, achlys: 600,
+      vesta: 300, eros: 200, itokawa: 400, bennu: 200, ryugu: 200, ida: 2000, gaspra: 850, mathilde: 230, lutetia: 200, steins: 220, didymos: 140, kleopatra: 250, toutatis: 340, pallas: 285, hygiea: 4000, juno: 240, psyche: 3300,
       interamnia: 300, davida: 550, sylvia: 6300, eunomia: 350, euphrosyne: 350, bamberga: 150, fortuna: 350, themis: 300, amphitrite: 250, egeria: 250, elektra: 2350, iris: 450, hebe: 1450, eugenia: 2450, daphne: 350, eleonora: 300, nemesis: 250, kalliope: 700, nemausa: 250, parthenope: 400, melpomene: 200, julia: 900, victoria: 2000, urania: 750,
       'flora': 200, 'europa-52': 2300, 'metis-9': 250, 'camilla': 3900, 'thisbe': 450, 'doris': 300, 'hermione': 300, 'diotima': 2000, 'herculina': 350, 'nausikaa': 250, 'astraea': 300, 'irene': 250, 'nysa': 450, 'sappho': 1700,
       'betulia': 390, 'castalia': 160, 'asteroid-1998-wt24': 530, 'asteroid-1994-cc': 330,
@@ -49,10 +52,15 @@ describe('asteroid positions against JPL Horizons', () => {
       'hera': 616, 'klymene': 2579, 'artemis': 481, 'dione-106': 279, 'felicitas': 357, 'lydia': 550, 'iphigenia': 338, 'thyra': 610, 'lomia': 287, 'peitho': 240, 'althaea': 251, 'lachesis': 371, 'gerda': 346, 'brunhild': 282, 'alkeste': 302, 'liberatrix': 235, 'velleda': 1156, 'johanna': 274, 'antigone': 370, 'cyrene': 2973, 'sophrosyne': 1667, 'hertha': 214, 'meliboea': 4307, 'siwa': 401, 'vibilia': 268, 'lucina': 1744, 'protogeneia': 332, 'gallia': 293, 'medusa': 288, 'nuwa': 4248, 'abundantia': 1433, 'scylla': 272, 'xanthippe': 383, 'dejanira': 262, 'aemilia': 309, 'una': 271, 'athor': 453, 'laurentia': 407, 'erigone': 268, 'eva': 223, 'loreley': 315, 'rhodope': 262, 'urda': 312, 'sibylla': 597, 'baucis': 625, 'ino': 276, 'phaedra': 237, 'dejopeja': 300, 'lamberta': 2033, 'menippe': 323, 'kolga': 289, 'ambrosia': 333, 'eurykleia': 278, 'byblis': 249, 'kallisto': 231, 'hersilia': 1567, 'hedda': 236, 'dido': 4336, 'isabella': 276, 'medea': 314, 'lilaea': 763, 'aschera': 497, 'oenone': 2639, 'eudora': 232, 'stephania': 541, 'eos': 327, 'henrietta': 256, 'weringia': 510, 'philosophia': 262, 'athamantis': 377, 'vindobona': 238, 'asterope': 263, 'coelestina': 247, 'hypatia': 325, 'vanadis': 291, 'kriemhild': 1514, 'vera': 3131, 'asporina': 1497, 'eukrate': 331, 'ilse': 1261, 'bettina': 1031, 'clementina': 561, 'augusta': 183, 'silesia': 324, 'tyche': 243, 'huberta': 300, 'dresda': 328, 'libussa': 245, 'anna': 711, 'anahita': 303, 'penthesilea': 292, 'antonia': 2286, 'philagoria': 283, 'sapientia': 600, 'adelheid': 300, 'emma': 2307, 'iclea': 298, 'bavaria': 2321, 'clarissa': 725, 'unitas': 150,
       // Expansion: ceil(measured independent endpoint maximum * 1.15) km.
       'annefrank': 394, 'braille': 668,
-      // TNO additions: ceil(measured independent endpoint maximum * 1.15) km; docs/trans-neptunian/orbit-errors.json.
+      // TNO additions: ceil(measured independent endpoint maximum * 1.15) km; https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trans-neptunian/orbit-errors.json.
       arrokoth: 600, quaoar: 602, gkunhomdima: 631,
       // Bounds retained from the merged Centaur and original population checks.
-      'chariklo': 538, 'bienor': 944, 'diomedes': 426, 'ajax': 973, 'ilioneus': 561, 'pyrrhus': 530, 'eumelos': 573, 'lycomedes': 958, 'demodokus': 1682, 'menelaus': 1054, 'agenor': 607, 'mentor': 1444, 'ivar': 375, 'toro': 194, 'cerberus': 341, 'tantalus': 217, 'aethra': 343, 'lyyli': 764, 'hela': 4172, 'kemi': 353, 'taurinensis': 189 }
+      'chariklo': 538, 'bienor': 944, 'diomedes': 426, 'ajax': 973, 'ilioneus': 561, 'pyrrhus': 530, 'eumelos': 573, 'lycomedes': 958, 'demodokus': 1682, 'menelaus': 1054, 'agenor': 607, 'mentor': 1444, 'ivar': 375, 'toro': 194, 'cerberus': 341, 'tantalus': 217, 'aethra': 343, 'lyyli': 764, 'hela': 4172, 'kemi': 353, 'taurinensis': 189,
+      // SN263: ceil(maximum independently measured 30-day endpoint error * 1.05).
+      'asteroid-2001-sn263': 250,
+      // Dinkinesh: ceil(991.491 km independent endpoint maximum * 1.05).
+      // Retained samples and measured errors: src/planets/dinkinesh/evidence/galileo-lucy/orbit-errors.json.
+      dinkinesh: 1042 }
     for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])

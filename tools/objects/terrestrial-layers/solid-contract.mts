@@ -1,0 +1,22 @@
+import type {createRasterEmitter} from './solid-raster.mts';
+import type {loadRadialTerrain} from './radial-terrain.mts';
+import type {loadScienceSurface} from './scientific-raster.mts';
+import type {loadGeoObservationSurface} from './observed-geo-surface.mts';
+import type {SciencePalette} from './contracts.mts';
+
+export type RasterAsset = Awaited<ReturnType<ReturnType<typeof createRasterEmitter>>>;
+export interface SolidSurface extends Record<string, unknown> {
+  id: string; textureScale?: number; displaySampling?: string; map: RasterAsset; surface: RasterAsset; thumbnail: RasterAsset;
+  shadowSurface?: RasterAsset; polesUrl?: string; layout: unknown;
+}
+export type ScientificLens = SciencePalette & {id: string; format: string; displaySampling?: string; symbols?: unknown;
+  surfaceSampling?: {maximumDistanceMeters: number}};
+export type RadialState = NonNullable<Awaited<ReturnType<typeof loadRadialTerrain>>> & {
+  scientificSurfaces?: Map<string, Awaited<ReturnType<typeof loadScienceSurface>>>;
+  observationSurfaces?: Map<string, Awaited<ReturnType<typeof loadGeoObservationSurface>>>;
+};
+export interface RadialMaterialConfig {
+  namespace: string; publicBase: string;
+  geometry: {radius: number; radiusKm: number; radialTerrain: {sourceLighting?: unknown; thumbnail?: unknown}};
+  raster: {width: number; surfaceQuality?: number; scientific?: ScientificLens[]};
+}

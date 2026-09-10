@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "68c979b90fa0c71672db2e36cc83b440095e452408012b8ddff7a1a58d371177"
+        "sha256": "9d96979b115f58dfe27ab748210b65a29572b115b28aa351bfea74829cda3947"
+      }
+    },
+    "catalog": {
+      "name": "Interamnia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.057028354640983,
+      "description": "Explore Interamnia in 3D with its published VLT/SPHERE shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 143,
+      "context": {
+        "order": 74
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "699502c82d7a373171db7f2868040a3a6dbc16a1216c0074e87877777edc481b"
+    "sha256": "f47083982587fc59b72af318ed30102def207a6c28702f503519e14a3fb4969d"
   }
 }

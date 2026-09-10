@@ -6,15 +6,15 @@ import { resolve } from "node:path";
 import test from "node:test";
 import sharp from "sharp";
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
-import { contextMarkerSprite } from "./marker-presentation.mjs";
+import { contextMarkerSprite } from "./marker-presentation.mts";
 
 import marsMarker from "../planets/mars/source/preparation/navigation.json" with { type: "json" };
-import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mjs";
+import { loadMarkerDescriptors } from "../../tools/prepare-navigation.mts";
 import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,
   renderMarker,
-} from "./marker-recipe.mjs";
+} from "./marker-recipe.mts";
 
 test("accepts every object-owned marker recipe", async () => {
   for (const descriptor of await loadMarkerDescriptors()) {
@@ -84,7 +84,7 @@ test("resolved parent sprites retain native source density and the existing phys
     assert.ok(metadata.width >= 512, "Resolved imagery must not come from the 32px UI atlas");
   }
   const moon = PREPARED_NAVIGATION_MARKERS.enceladus;
-  assert.deepEqual(contextMarkerSprite(moon), {url:"/navigation/planet-markers@2x.webp",index:moon.index,count:moon.count,size:moon.presentation.size});
+  assert.deepEqual(contextMarkerSprite(moon), {url:moon.url2x,index:moon.index,count:moon.count,size:moon.presentation.size});
 });
 
 test("prepared flood shading has a bright centre, a darker limb and no terminator", async (context) => {

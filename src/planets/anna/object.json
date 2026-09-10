@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "07c6aa0c695c65aef65614c294725354a7be4c5d607f5545da6606858f014d0c"
+          "sha256": "983b184198514ff59ccb71c0ffed2849bf27d0ad14f602f6b3c13ded4a5e23db"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "6ab8c3ab399eee42ef8af195844958992ba179776cfd140db746010cd33a34ad"
+        "sha256": "b173a5b8c2a32fa3d365de9fd160879b7536d937c5a1f2a5c9c02694f442b6cb"
+      }
+    },
+    "catalog": {
+      "name": "Anna",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.420854512785924,
+      "description": "Explore Anna in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 345,
+      "context": {
+        "order": 391
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "575753f0b356b128fa509d220839e89903da73013b45fc41600043dbb2d46d06"
+    "sha256": "f1ab17596877741fa2b41cac924e4a935f3b93f49fc40d40c23787467d344a76"
   }
 }

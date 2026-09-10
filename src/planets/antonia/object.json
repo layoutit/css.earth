@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "dbe97aeab7fbf6ab2d80aa8ba8ceb4b249505dc2e14934cdeb8f362d577d71d8"
+          "sha256": "9d64e9b4c61ee27a64215112efab2095bf05d7761f3576c8f71e728839b0cc37"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "41dd7a6b4ada6d0cc8fa0c6b05245252744080cecd48d0519eacb02ffaac670c"
+        "sha256": "ee245b73a6305dec7745e2c25137d68dc93c2ae5717a8c6241036de6df3718d4"
+      }
+    },
+    "catalog": {
+      "name": "Antonia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7790127024022557,
+      "description": "Explore Antonia in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 348,
+      "context": {
+        "order": 394
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "12b4371698ebdcbe0e172313ed379cce80018897304e2551a6ddfe5e86a6d6ec"
+    "sha256": "b71cf05f1c967a128dd4e44dbc6873292673610362c54f7debb3084904375dcb"
   }
 }

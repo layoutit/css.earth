@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "553320fbc55db632607ac3756f91e9f3d6d9cb91ca05f6e771d0f581f734af1f"
+        "sha256": "051745c40d831cb8791dddab10b484fc4e9779bec9db94c1547bc0cccdecb9ce"
+      }
+    },
+    "catalog": {
+      "name": "Zachia",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.61497834334827,
+      "description": "Explore Zachia in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 401,
+      "context": {
+        "order": 205
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "fc7728781bc997cbb27c69b7dc85d60111d7ee855623bde7633f0cac841221ac"
+    "sha256": "8cc6d2a634ae75e0fe3fe2ea5287e8c26df893d9a475caa8570259e494891e89"
   }
 }

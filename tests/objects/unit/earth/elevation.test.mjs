@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { gzipSync } from 'node:zlib';
 import sharp from 'sharp';
-import { decodeElevationDods, readElevationGrid, elevationColor, prepareElevationMap } from '../../../../tools/objects/paged-ellipsoid/elevation.mjs';
+import { decodeElevationDods, readElevationGrid, elevationColor, prepareElevationMap } from '../../../../tools/objects/paged-ellipsoid/elevation.mts';
 
 const sourceDirectory = resolve('src/planets/earth/source');
 const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/paged-ellipsoid.json')));
@@ -74,7 +74,7 @@ test('latitude blocks assemble exactly once and partial or overlapping globes fa
 
 test('pinned GEBCO numerical anchors agree with independently requested source cells', async () => {
   const grid = await readElevationGrid(sourceDirectory, map);
-  const witnesses = JSON.parse(await readFile('docs/evidence/earth-elevation/source-witnesses.json'));
+  const witnesses = JSON.parse(await readFile('tests/objects/fixtures/earth-elevation/source-witnesses.json'));
   for (const witness of witnesses.records) {
     const [row, col] = witness.sampleIndex;
     assert.equal(grid.values[row * map.scientific.grid.width + col], witness.meters, witness.name);

@@ -1,0 +1,137 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.84",
+  "baseUrl": "http://127.0.0.1:53135",
+  "capturedAt": "2026-09-10T04:28:17.506Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "comet-109p",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "comet-109p",
+      "viewport": "desktop",
+      "motionActivation": "retained-input",
+      "surfaceFlyTo": {
+        "pitchDelta": -20.548700790435014,
+        "zoomRatio": 2.8110312479025614
+      },
+      "zoomPublication": {
+        "skyCube": 0,
+        "skyOrientation": 0
+      },
+      "projectiveTextureReport": {
+        "texturedLeafCount": 800,
+        "nestedProjectiveTextureCount": 0,
+        "finiteTextureBounds": true
+      },
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 123486,
+      "stable": true,
+      "retainedProof": {
+        "initialNodeCount": 123486,
+        "currentNodeCount": 123486,
+        "maximumNodeCount": 123486,
+        "initialNodesIntact": true,
+        "shellTextNodesIntact": true,
+        "undeclaredAddedRoots": [],
+        "undeclaredRemovedRoots": [],
+        "allowedMounts": []
+      }
+    },
+    {
+      "id": "comet-109p",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 123486,
+      "stable": true
+    },
+    {
+      "id": "comet-109p",
+      "case": "dataset-interactions",
+      "skipped": true
+    },
+    {
+      "id": "comet-109p",
+      "case": "dataset-interactions-dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "comet-109p",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "comet-109p",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "comet-109p",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "comet-109p",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "comet-109p",
+      "case": "dpr-1",
+      "skipped": true
+    },
+    {
+      "id": "comet-109p",
+      "case": "dpr-2",
+      "skipped": true
+    }
+  ],
+  "testedPreparedSha256": "0329ed92d32270d957656511a7af7579015b7b70f2f155fa07ada9394865067a",
+  "stylesheetSha256": "5fa13a8cb2ce2bdc0bb84b5686842700e0babd61282416366c8ef1b6f0c2da2d",
+  "solarSystemHandoffs": [
+    {
+      "id": "comet-109p",
+      "dpr": 1,
+      "scenes": 1,
+      "error": null,
+      "shadows": false,
+      "orbit": false,
+      "datasets": [
+        "Illustrative nucleusCelestia"
+      ]
+    },
+    {
+      "id": "comet-109p",
+      "dpr": 2,
+      "scenes": 1,
+      "error": null,
+      "shadows": false,
+      "orbit": false,
+      "datasets": [
+        "Illustrative nucleusCelestia"
+      ]
+    }
+  ],
+  "reuse": {
+    "base": "d8d266542",
+    "currentPreparedSha256": "0329ed92d32270d957656511a7af7579015b7b70f2f155fa07ada9394865067a",
+    "stylesheetBytesUnchanged": true,
+    "preparedRuntimeBytesUnchanged": true,
+    "reason": "Only stylesheet ownership/path and documentation placement changed after capture. Native sources, prepared geometry, materials, cameras, atlas bindings and controls are byte-identical.",
+    "emittedCssSha256": "a99f9d2b698678d98714b260a929ec693f5af96b7e40af2bf2528b532d0462db",
+    "emittedCssUnchanged": true
+  }
+}

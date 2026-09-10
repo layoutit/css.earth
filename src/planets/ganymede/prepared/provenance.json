@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "ganymede",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4b1a55dc054828c9d764c093e35aad58d41bdebb166c0a7f49282e7defba0bb5"
+    "sha256": "de978afebd399e1bf1403c1cfd18ec2ff398cddf6e1941130d634e2e6c02408e"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -810,17 +810,31 @@
       },
       "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome.",
       "capture": {
-        "spacecraftIds": [
-          "galileo",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "galileo"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "voyager-1"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
       "bytes": 136844537,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -863,17 +877,31 @@
       },
       "coverage": "GDAL_NODATA=0. Explicit gaps retain the shared gray grid. Missing color and the documented synthesized-red sector retain observed monochrome.",
       "capture": {
-        "spacecraftIds": [
-          "galileo",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif",
+            "missionId": "galileo"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif",
+            "missionId": "voyager-1"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
       "bytes": 199204541,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -918,7 +946,7 @@
       "sha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
       "bytes": 2282348,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -938,7 +966,7 @@
       "sha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
       "bytes": 387036,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -958,7 +986,7 @@
       "sha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
       "bytes": 167,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -998,7 +1026,7 @@
       "sha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f",
       "bytes": 10416,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1038,7 +1066,7 @@
       "sha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa",
       "bytes": 10400,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1078,7 +1106,7 @@
       "sha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a",
       "bytes": 10304,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1095,7 +1123,7 @@
       "sha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a",
       "bytes": 18331,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1135,19 +1163,19 @@
           "url": "/scenes/ganymede/ganymede-normal-thumbnail.webp",
           "bytes": 3172,
           "sha256": "639999164186b8fe56726b0a0c2d71494212f1f9a9ab0b018987c80e7170b53e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-surface@2x.webp",
           "bytes": 6411262,
           "sha256": "eee2ba73dd90d85f32681f6da6d151a60bbfe6dfb7ff2edd373e93d5a2894005",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-normal-poles@2x.webp",
           "bytes": 176358,
           "sha256": "2318592ae6bb16349c87e22c8a0910403e9641d2118b8086783d41f9be28e820",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1192,19 +1220,19 @@
           "url": "/scenes/ganymede/ganymede-enhanced-thumbnail.webp",
           "bytes": 5628,
           "sha256": "bb1d5515bc0a443f9208479c9a0e4db9404eb1267edc77490138b8d06959bc4c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-surface@2x.webp",
           "bytes": 7029694,
           "sha256": "90553d4fd9a4bd0140b4054c5bf002862fa102439617c76a413c9900cfa3dc8c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-enhanced-poles@2x.webp",
           "bytes": 208766,
           "sha256": "88bfbe684db157327e55611e9b3764e67714a13a9c391cd3088e3723a576997d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1239,19 +1267,19 @@
           "url": "/scenes/ganymede/ganymede-geology-thumbnail.webp",
           "bytes": 1662,
           "sha256": "beb8f0d50137dd11ad57ba5fab690c57467dd40fa711933616bb0c43a09b7c29",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology-surface@2x.webp",
           "bytes": 522684,
           "sha256": "4d8ca3b202ba6ba3ca28c3dc80d69bac45851895ae5bafa4dc2b6220552b8742",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-geology-poles@2x.webp",
           "bytes": 24730,
           "sha256": "e602a37e250e60775046ac77bb668649d1edf5c7b700929601faa1b1955af546",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1286,25 +1314,25 @@
           "url": "/scenes/ganymede/ganymede-oxygen-signature-thumbnail.webp",
           "bytes": 4908,
           "sha256": "a03346786873c42aa08e03bb4598e1e12d6d08909b0cff103d000c62a4ed6bfd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-oxygen-signature-legend.webp",
           "bytes": 246,
           "sha256": "44c343edd4c6e8fa80bec50e998d4b0369ed7224017adc103a7d09a95ec02166",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-oxygen-signature-surface@2x.webp",
           "bytes": 46646,
           "sha256": "d6ac93704969b11c0bea1a541275f2d6d1c2a7ca5d11002d26bfbc5c3d5bf7e2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/ganymede/ganymede-oxygen-signature-poles@2x.webp",
           "bytes": 1728,
           "sha256": "070a63e7aa4182c1403f153aa9aeca56c1a91e843f65f5d82f62f3850fa7c709",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

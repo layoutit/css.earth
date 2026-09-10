@@ -1,0 +1,51 @@
+{
+  "id": "ariel",
+  "classification": "satellite",
+  "order": 253,
+  "physical": {
+    "name": "Ariel",
+    "horizonsCode": "701",
+    "meanRadiusKm": 578.9,
+    "gravitationalParameterKm3PerS2": 83.43,
+    "parent": "uranus"
+  },
+  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "satellite": {
+    "parent": "uranus",
+    "horizonsCode": "701",
+    "fitFromJdTdb": 2415020.5,
+    "fitToJdTdb": 2488069.5,
+    "fitStepDays": 30,
+    "poleRightAscensionRad": 1.349399044248,
+    "poleDeclinationRad": 0.264585667823,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 190945.918,
+      "eccentricity": 0.001248512894,
+      "inclinationRad": 0.000362753833,
+      "ascendingNodeRad": -2.946831684234,
+      "argumentOfPeriapsisRad": 4.4418169781,
+      "meanAnomalyAtEpochRad": 91057.96982771791,
+      "meanMotionRadPerDay": 2.492655142605988,
+      "ascendingNodeRateRadPerDay": -0.000132075578509618,
+      "argumentOfPeriapsisRateRadPerDay": 0.000429356372661364
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "701",
+      "center": "500@799",
+      "parent": "uranus",
+      "fromJd": 2415020.5,
+      "toJd": 2488069.5,
+      "stepDays": 30,
+      "radial": false,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "701",
+      "center": "500@799"
+    }
+  }
+}

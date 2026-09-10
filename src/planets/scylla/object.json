@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "572ef28ccf9f14fcd1d1cccd274e7c55753bd5bcf7fb7cca9dbaa51f9e9cc991"
+          "sha256": "d0b6053dfc67f3ec6cbec685a18bb313db8777fe9bf4a5426b8196c4641d360f"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "778414f595e1cf01c4cfcec25a5f091b0e938e1b6ad6814fe48b621abdfa0a9d"
+        "sha256": "163837d93842311c09c57d9c764e957e694a101dc5798a12a3cc4111ed415e8e"
+      }
+    },
+    "catalog": {
+      "name": "Scylla",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.7604931019999346,
+      "description": "Explore Scylla in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 288,
+      "context": {
+        "order": 334
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "4c39b0fbdd2e0624e87bdcf852a32cc78977e9a4facbfbb1b55136fa9b0c078f"
+    "sha256": "044732edd783927f4b26d24d982b7c3d2dc1dda9b7b9e5ebd398a9d58b6d21bb"
   }
 }

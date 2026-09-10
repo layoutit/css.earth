@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "comet-c1973-e1",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kohoutek",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "b313a9f47f817313abd42a317f957be613974e2d092ff46e359c873113affad3"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "a66758d210c8e66cf28b15a2739c0c0cd7040820fbd86e02202f54f6a4ea9e13"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "3abf433dcfe68fb526a8d4e5b7ed5465889a960e440cd1b7703202fafa2506cf"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "36e873bb23e9b5354f27d1e508b39f75f559b5b1c1f2fcaa87b65508d98306bb"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 1.548649298837288
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/styles/comet-c1973-e1-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "88bf1dc5f470306145c9e096b0e69fcc0f098fbcccc667779d274ace92056ab0"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4108452515437.365,
+        10624463324512.762,
+        2888218424067.919
+      ],
+      "presentationToReference": [
+        -0.352795638798669,
+        0,
+        -0.9357003992970393,
+        0.8584883318260045,
+        0.3977771559319137,
+        -0.32368367017401706,
+        0.3722002436367324,
+        -0.9174820620691818,
+        -0.14033404582651726
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 6.733257821031686,
+      "bodyRadiusM": 1548.649298837288
+    },
+    "catalog": {
+      "name": "Kohoutek",
+      "classification": "comet",
+      "color": "#b8b6b2",
+      "distanceAu": 78.55468108744893,
+      "description": "C/1973 E1: Kohoutek passed close to the Sun in late 1973. It is now travelling outward into the distant Solar System. Illustrative nucleus at Celestia’s catalog scale.",
+      "systemName": "Solar System",
+      "order": 63,
+      "context": {
+        "order": 452
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "06895802775fd6b72f1819b9fc9ac27c45157fbeb3a822e74a04a2fc6aff3eb4"
+  }
+}

@@ -12,9 +12,11 @@
 
 The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-The [asteroid validation report](../../../docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 60.746 m, maximum 181.237 m. These are sampled distances, not exhaustive error bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
 
@@ -48,6 +50,8 @@ Disk-integrated light curves, thermal spectra and DAMIT preview renders supply n
 Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z is the spin pole and positive X defines the meridian.
 
 The record gives diameter 116 km, period 23.8964 h and ecliptic J2000 pole (58°, 2°). The original mesh has measured volume-equivalent radius 58.000000 km and Cartesian extents 117.334 × 121.877 × 116.858 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
+
+- [Choukroun et al. (2025), Asteroid sizes determined with thermophysical model and stellar occultations](https://ui.adsabs.harvard.edu/abs/2025A&A...698A.298C) — selected model publication.
 
 </details>
 

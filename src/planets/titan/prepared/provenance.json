@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "titan",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d7f1713545bc724f00955d4d5df50e69409f2c3a6558509b3f57c4da2a4e044e"
+    "sha256": "0769f339817ad3841ca5401de4d4b04b430356edb0074324e6eb42017a93f35e"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -761,15 +761,19 @@
       "coverage": "USGS ISIS display export: exact zero indicates Null and is masked; valid values starting at one remain, including dark lakes and dunes. A small southern gap receives a gray grid. Grid edges extend by less than half a source pixel beyond the poles/meridian.",
       "photometry": "Published weighted, high-pass-sharpened ISS mosaic at 938 nm. Haze and cloud residuals, variable native resolution and image boundaries remain. This is a display-stretched infrared observation, not visible color or calibrated albedo.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://www.sciencebase.gov/catalog/file/get/68a5107ad4be02198e361c35?f=__disk__40%2Ffc%2F6b%2F40fc6b3d12f9356149245c46522fc4aca6cb9d5f",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "5b17af4c230f5f2434497d77621dbe6503458ac15d54557a946c1e1ca9562cb2",
       "bytes": 73480116,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -809,7 +813,7 @@
       "sha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad",
       "bytes": 550734,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -852,7 +856,7 @@
       "sha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af",
       "bytes": 532494,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -895,7 +899,7 @@
       "sha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546",
       "bytes": 7422253,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -938,7 +942,7 @@
       "sha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034",
       "bytes": 7393466,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -981,7 +985,7 @@
       "sha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34",
       "bytes": 6386495,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1024,7 +1028,7 @@
       "sha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b",
       "bytes": 6529382,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1070,7 +1074,7 @@
       "sha256": "815d7afab1d8e401714a3a141595d161e962ef98421632c77b8fe6002945fb9b",
       "bytes": 192457,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1097,15 +1101,19 @@
       "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
       "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N090_T126S00_V01.IMG.gz",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "23adb939bf8076fae0fcdf98a7c910fcebe36ffd066cfb3c48cdb0324a8bd770",
       "bytes": 21088532,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1139,15 +1147,19 @@
       "coverage": "SAR and HiSAR through T126. MISSING_CONSTANT=0 in the attached PDS3 label; valid dark observations start at 1.",
       "units": "Incidence-normalized radar backscatter, display byte DN; dB = DN * 0.10000012 - 20.10001.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://data.astro.cornell.edu/RADAR/DATA/MIDR/S00/MIBEF00N270_T126S00_V01.IMG.gz",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "d10b9a8b48a7a7c9045b54986412caf03d84319649a436aaefb46c71f8ca2cc6",
       "bytes": 21369517,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -1171,7 +1183,7 @@
       "sha256": "f37f24e3d98d94c6fd18496b7bbd168a13a4ae5ca8344a607180c24b3dfad287",
       "bytes": 14398,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1208,19 +1220,19 @@
           "url": "/scenes/titan/titan-normal-thumbnail.webp",
           "bytes": 3350,
           "sha256": "b5ca1c63585418f45d7c2885cf8403bb378af9f1a957f8e325cbca06d4670a4d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-normal-surface@2x.webp",
           "bytes": 3697816,
           "sha256": "48ee934a5939311625fb8c6823d2ca0a51968a3f32fcceaa0570b5cac7f9a8e7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-normal-poles@2x.webp",
           "bytes": 131418,
           "sha256": "58bde3bf90508c1101990cc7a01316c6b4eedb63faf75e7d776fefd7c8bcaf39",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1258,25 +1270,25 @@
           "url": "/scenes/titan/titan-topography-thumbnail.webp",
           "bytes": 976,
           "sha256": "d9ec8bcb3d8b4e03fec330baa7b1a4ef86e82214397e2636de5a560c5584f8e3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-topography-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-topography-surface@2x.webp",
           "bytes": 1026758,
           "sha256": "bd4593a4e39fd462e87bb62800895bd43c7dd124c0931945d6c5f3ddf42944f8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-topography-poles@2x.webp",
           "bytes": 146774,
           "sha256": "bc4dc60eb638fa675050cd554a0defc11f3f184bbef3bebd5c61ecd034cc9658",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1314,25 +1326,25 @@
           "url": "/scenes/titan/titan-interpolated-thumbnail.webp",
           "bytes": 4142,
           "sha256": "b0d2ac9fc90349eb08ec41e08694c61143a55e7944a8ce958fad962d8dd5b44e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-interpolated-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-interpolated-surface@2x.webp",
           "bytes": 3126600,
           "sha256": "0f82f3c5bd1a75c7237b919e66fc35e0433f441539f31958b6400c83eebe1860",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-interpolated-poles@2x.webp",
           "bytes": 348004,
           "sha256": "7c5454efbf874194a81f27e4c4452f537893df64878149e9da84a14cdf3e4e9e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1370,25 +1382,25 @@
           "url": "/scenes/titan/titan-coverage-distance-thumbnail.webp",
           "bytes": 6046,
           "sha256": "03b8f86dce22c5c3f9c35b48c6ed30b9b59532db07b0ca6b6c037cd1bf90bffe",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-legend.webp",
           "bytes": 210,
           "sha256": "b2cc45c008b3baecb631091dc59b6f57df3e0c5d6852754337ff1cb0aba6a5ee",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-surface@2x.webp",
           "bytes": 3707608,
           "sha256": "d33c99869f88bc7bd40b84114f286ea75f3bb1a2c393db48c56dd0bf479b3682",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-coverage-distance-poles@2x.webp",
           "bytes": 232152,
           "sha256": "6a3f9d35e9fba589141de8a1e3e890994b9bfbd80c95091292a857299715b455",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1421,19 +1433,19 @@
           "url": "/scenes/titan/titan-geology-thumbnail.webp",
           "bytes": 790,
           "sha256": "6572f71554e0b7acbc4fc52d3210acc6ccff400af619178926ef436e1cbed7f5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-geology-surface@2x.webp",
           "bytes": 107002,
           "sha256": "ddd22fd59853e2694d28d248578d9e5943882f0e1265957b251abdb33bae1dae",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-geology-poles@2x.webp",
           "bytes": 7042,
           "sha256": "bd1eda644cb6ca4017b3a078458247c0864f79a75bf7c39f3184507357b82bfa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1466,19 +1478,19 @@
           "url": "/scenes/titan/titan-radar-thumbnail.webp",
           "bytes": 4840,
           "sha256": "1724a27e59d4503297fb48fc081d249518d1bffdc93c3c1c84e993be15b48f0f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-radar-surface@2x.webp",
           "bytes": 12715084,
           "sha256": "4f3c472ed60fb71a7da3e28ebf59b694ca32a9966d3198cb8ae266d20b45ef4d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/titan/titan-radar-poles@2x.webp",
           "bytes": 533952,
           "sha256": "2a2b28c423272d1436f49d445e0e0c39209fbd4c31f925f3da6bb8809ddbb5f3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

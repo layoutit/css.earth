@@ -63,6 +63,6 @@ Compact peaks can be foreground stars, LMC stars, blends or bright nebular knots
 
 ## Recorded full-crop result
 
-The first 1024×1024 experiment stopped at its 30-minute cumulative runtime bound. The uninterrupted final run took 1,616 seconds, completing 11 source-background iterations; its final relative correction was 0.0094 against that phase's 0.005 target. Final component maps and detection catalogues were not produced. See the [pinned status and convergence record](../../models/lmc/research/structure-benchmark/getsf/status.json). This incomplete attempt appears as unavailable in the comparison UI, with its actual reason and measurements.
+The first 1024×1024 experiment stopped at its 30-minute cumulative runtime bound. The uninterrupted final run took 1,616 seconds, completing 11 source-background iterations; its final relative correction was 0.0094 against that phase's 0.005 target. Final component maps and detection catalogues were not produced. See the [pinned status and convergence record](https://github.com/layoutit/cssEarth/blob/59ae463d366e09b1cd6d09fffe251ef15442b1ce/labs/nebula/models/lmc/research/structure-benchmark/getsf/status.json). This incomplete attempt appears as unavailable in the comparison UI, with its actual reason and measurements.
 
 The independent adapter and compiler installation are verified. The scientific comparison remains incomplete; a smaller native subcrop is the recommended next experiment. Rerun both methods on the same new crop rather than comparing different fields.

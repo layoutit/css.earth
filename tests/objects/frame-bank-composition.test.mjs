@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
-import {assertLayeredGiantFrameBank} from '../../tools/objects/giant-layers/object.mjs';
+import {assertLayeredGiantFrameBank} from '../../tools/objects/giant-layers/object.mts';
 
 const readJson=async path=>JSON.parse(await readFile(new URL(path,import.meta.url),'utf8'));
 const input=async id=>{

@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "vesta",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a6622f98d91694748ccb0ccc7876d8fdfebb65ed8962b7db5f36b88f4447258a"
+    "sha256": "c1bb5ee979ac270e9d816ef5036fe1a1b66b1e8816a8698366bdc2aeea3434c1"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -394,10 +394,14 @@
       },
       "coverage": "Published crop and exactly black RGB fill; no authoritative per-pixel validity mask. Channel fringes and uncertain dark terrain are retained.",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "16a35c90f23b8b33eb5d268d3ea0e95a133cc6c911ec5f645ee4e1f73a9784ca",
       "bytes": 374574072,
@@ -435,10 +439,14 @@
       "coverage": "Stereo-derived model with publisher-interpolated polar regions. No mask separates interpolated areas.",
       "lensId": "elevation",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "83b68b39c1485e179a58926dcb6b88960e598895cfce64f54e87204b7dbde533",
       "bytes": 457291404,
@@ -477,10 +485,14 @@
       },
       "coverage": "DLR’s published Clementine-style composite of photometrically corrected Dawn images: red is 749/438 nm, green is 749/917 nm, and blue is 438/749 nm. Colors emphasize spectral differences; they are not natural color or a mineral-abundance measurement. Original seams and color fringes remain. Exact black is treated as likely fill, so some dark observations may also be withheld; gaps use the gray grid.",
       "capture": {
-        "spacecraftIds": [
-          "dawn"
-        ],
-        "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive."
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "dawn",
+            "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive.",
+            "missionId": "dawn"
+          }
+        ]
       },
       "sha256": "5c7bb9a5dcd87b16a969c40a0b4c931f9582038d04ca7066d72315ab2ac1e5e0",
       "bytes": 446346023,

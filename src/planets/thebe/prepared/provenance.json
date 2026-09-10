@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "thebe",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e9fee700b78fcaef48adc77306deff40ef95b66574310a92c87e13b3b7ef79aa"
+    "sha256": "67a2c82ac843e7ac56ac0536350c96c6eedee7b83423e8b6487cb4dd8a517d54"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -482,10 +482,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "16802209e6eb0bf3bb5fc028e613d527ce42e12227e7bce5c6b0665b086eb64e",
       "bytes": 831488,
@@ -515,10 +519,14 @@
       "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0017/C3/SML_SATS/C0368591600R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "b482751e27d82f27662eeb5d4aa6860698279733690ef1f8373d35999d754569",
       "bytes": 4755,
@@ -555,10 +563,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401759200R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401759200R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "e575aa7f3978b97278c06b632ff6a55c5c0479859b142b81904e92cc508e8311",
       "bytes": 808000,
@@ -588,10 +600,14 @@
       "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401759200R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401759200R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "1f7acc910ad56a93f93793058469f45f187ba3a58d60523cedd9bab8bef2260c",
       "bytes": 4728,
@@ -628,10 +644,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401787200R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401787200R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "7fde48e5466852592f1b601b5b1d8a2892f8d210740b4f1c244c0df06a8fc662",
       "bytes": 808000,
@@ -661,10 +681,14 @@
       "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401787200R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401787200R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "bc2c3a5bff07671c02a78b02ef0eb3357fb419b0af053847a7e338bca15b4aff",
       "bytes": 4726,
@@ -701,10 +725,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420691700R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420691700R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "2f24ba6e76e79d0918df85bba62ef6c1b82dfc07f2475b0fc4682f588fa337a9",
       "bytes": 831488,
@@ -734,10 +762,14 @@
       "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420691700R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420691700R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "87433c93a50af1a69e93ca78c69384dfbc162abf53cebb3f9fa92bf2a7a95a2f",
       "bytes": 5008,
@@ -774,10 +806,14 @@
         "longitudeDirection": "west-positive"
       },
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R.IMG"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R.IMG",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "5c991ac251900b3a731b01a1b48b2ca2e9fec43b4dc68b828b3210b78f056bd6",
       "bytes": 839168,
@@ -807,10 +843,14 @@
       "acquisition": "Download the original Galileo SSI reconstructed experiment data record; byte digital numbers, not calibrated I/F.",
       "redistribution": "Retain NASA/JPL and PDS credits.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R.LBL"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R.LBL",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "98ff130c32ced368c35dd93c2ccf00469d0203b34d7cd1ff7b319fc465e521b0",
       "bytes": 5035,

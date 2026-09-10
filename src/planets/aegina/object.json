@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e19d26b8e0cf66a2e5a703df10b6df6889a389b5a0fa75bf57df60a5629a853c"
+        "sha256": "eede05b7d3d3a2106aec8da32548f14d5e58811706a4c6ca1931b6963d066513"
+      }
+    },
+    "catalog": {
+      "name": "Aegina",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.5889074402927057,
+      "description": "Explore Aegina in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 252,
+      "context": {
+        "order": 294
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "85e3e2e1a50dab19d7f1ac3b52e8723e50074cdbc50993535908081cfa8a13ba"
+    "sha256": "c0b674b5e0eb6d96e8cf9e39e51cefcfd705acfc4e96344b22b5f963362ae45f"
   }
 }

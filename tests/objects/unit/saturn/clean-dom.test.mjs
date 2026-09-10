@@ -6,7 +6,7 @@ const [presentation,scene]=await Promise.all(['runtime','scene'].map(name=>readP
 test('mounts prepared PolyCSS texture leaves under retained planet groups',async()=>{
  const [css,preparer]=await Promise.all([
   readFile(new URL('../../../../src/renderers/css/styles/saturn-surfaces.css',import.meta.url),'utf8'),
-  readFile(new URL('../../../../tools/objects/material-composition/layered-oblate.mjs',import.meta.url),'utf8'),
+  readFile(new URL('../../../../tools/objects/material-composition/layered-oblate.mts',import.meta.url),'utf8'),
  ]);
  assert.equal(scene.schema,'csssaturn-prepared-runtime-scene@1');
  assert.equal(scene.transport.sourceSchema,'csssaturn-prepared-retained-scene@30');

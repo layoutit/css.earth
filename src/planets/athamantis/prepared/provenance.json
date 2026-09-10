@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "athamantis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "53df149d2f36acea19cbb838369d8f5840b8d041329cfad5d7acef6349b5a717"
+    "sha256": "ca2d6ec64990eda0358c4468af5c0c569d5bd494e0df8b3f5ccf293a03a90d8d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "ca781392c88cb7da8f861e4f7a98da4c5d7677394a5bc8a3e79d6c7e766707d3",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "f2c1d3934bd746f6f95d3e394d8a2ecf4225f36c6c2f3433d5438f0e0f006b93",
       "bytes": 11498,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/athamantis/athamantis-elevation-thumbnail.webp",
           "bytes": 5720,
           "sha256": "3d753b63d441851ecc0ede6bf4d3964b74b6b3c9a4c92aa16e14c53fa2ae5b0c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/athamantis/athamantis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/athamantis/athamantis-elevation-surface@2x.webp",
           "bytes": 272194,
           "sha256": "60499a517d83c4e683d33a1c12af308fed3e8af01cfa86d53e825a71ce68fbbc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/athamantis/athamantis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/athamantis/athamantis-shape-surface@2x.webp",
           "bytes": 244014,
           "sha256": "e49c42ede326763c7c494aa4d03e2aa679ff905dd5024bb1c83f397e3bd4bdd6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

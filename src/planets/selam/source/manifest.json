@@ -1,0 +1,162 @@
+{
+  "schema": "cssselam-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore and hash-verify the pinned original with source/preparation/acquisition.json through pnpm prepare:checkout.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+    },
+    {
+      "id": "shape-model",
+      "path": "shape/model.json",
+      "origin": "https://doi.org/10.1038/s41586-024-07378-0",
+      "credit": "Levison et al. (2024), Lucy science team",
+      "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "acquisition": "The checked-in shape/model.json transcribes the cited numerical dimensions; the shared ellipsoid preparer tessellates these parameters.",
+      "redistribution": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "consumers": [
+        "terrain",
+        "shape"
+      ],
+      "coverage": "Two touching ellipsoids reproduce the lobe dimensions inferred from Lucy images: 240 × 200 × 200 m and 280 × 220 × 210 m, each uncertain by about 10%. This is a smooth shape envelope; the neck, craters and surface imagery are unresolved in this representation.",
+      "expectedBytes": 316,
+      "expectedSha256": "7b5a16b99d453beddac8a2c98113f020732b1a9fbfd7299855a4a7ac4f920409"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.1038/s41586-024-07378-0",
+      "credit": "Levison et al. (2024), Lucy science team",
+      "license": "Numerical scientific facts; independent cssEarth tessellation MIT. Cite the original paper.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "shape-model"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "expectedBytes": 51880,
+      "expectedSha256": "ff574d28a1210834a950cab72f75d5afd59e97001cd37caf787fd2b87c9c4699"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3229,
+      "expectedSha256": "8ed02b573b2a405fa64a0db58dc7ccaae1a630caae4f847a29903837892c4354",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 1735,
+      "expectedSha256": "05ee06c4b64450ea94b97c7a2474938dc82860eff39d8f5a2a56743124ffa5ff",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "orbit/published-parameters.json",
+      "expectedBytes": 1555,
+      "expectedSha256": "b0320fd5cf6ae56cffed5d03920b522e2c574c8630be0d2e61a53a163cc25324",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 526,
+      "expectedSha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1238,
+      "expectedSha256": "6fe929e237bb3122e122cb1da842f0f7a8389f2c284f185ab0aeceb509a91fc7",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 502,
+      "expectedSha256": "cc6985c61057edd58f6137ed722b15f52f5d20a2824035e44666b666010420fc",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2317,
+      "expectedSha256": "d29c4c1843ac014a1c90495873a6c2308d821f66c6c45f3d3926254f185e4c29",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3791,
+      "expectedSha256": "7e53af889fbe6ce70045348dc111e8693447fd08da2ef896bf28f623b430eaa5",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2177,
+      "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 144974,
+      "expectedSha256": "b2c162e7bfab4c9236c5f5d054a5629eb5b1da56f1a1652d427bb62360610279",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 595,
+      "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "validation/epoch-state.json",
+      "expectedBytes": 1720,
+      "expectedSha256": "3577172441a9fb2dd79e9f80fcb444dcfce2cf23b22729d51121918e78cf5572",
+      "purpose": "Source evidence or authored preparation input."
+    }
+  ]
+}

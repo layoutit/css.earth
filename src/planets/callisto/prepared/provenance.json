@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "callisto",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "440058bf9a72d062985e9b07afd3178057cd2fd9deb50fe6b427de5074ace1b4"
+    "sha256": "4ebe4dae350c76f1c482b5d7c422caf840d09eb73c4e446e3a76e6f98c3ba215"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -417,12 +417,26 @@
       "coverage": "GeoTIFF GDAL_NODATA=0. Missing pixels and resampled boundaries receive the shared gray cartographic grid. USGS source resolution ranges from 400 m to 60 km per pixel; low-resolution observed fill remains observed data.",
       "photometry": "USGS Lunar-Lambert normalization with empirical parameters and linear overlap matching; photographed relief and residual seams remain.",
       "capture": {
-        "spacecraftIds": [
-          "galileo",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "galileo"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "voyager-1"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Callisto_Voyager_GalileoSSI_global_mosaic_1km.tif",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
       "bytes": 114640717,
@@ -476,10 +490,14 @@
       "coverage": "28.735% spherical coverage: fixed perspective projection, emission <=65 degrees and fully opaque original contributors. Gray grid elsewhere; no globally filled color. GDAL_NODATA=0 is reserved for all-zero RGBA, with explicit all-channels RGB validity.",
       "photometry": "Published processed display colors, not calibrated I/F or albedo. Source photographed shading and color fringing remain. No new radiometric correction.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://science.nasa.gov/photojournal/global-callisto-in-color/",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32",
       "bytes": 771611,
@@ -522,10 +540,14 @@
       "coverage": "Intersection of valid samples in all three selected bands; no-data and ISIS special values remain missing. Earlier listed observation has priority; no blending or gap fill.",
       "photometry": "Archive Minnaert-corrected I/F; fixed RGB display ranges, no independent frame normalization.",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://doi.org/10.17189/4sq6-x165"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "evidence": "https://doi.org/10.17189/4sq6-x165",
+            "missionId": "galileo"
+          }
+        ]
       },
       "sha256": "23021089312fecb6c42df4502f93f57db52efe7fb4fa452c194fe5f1fcd17588",
       "bytes": 193313,

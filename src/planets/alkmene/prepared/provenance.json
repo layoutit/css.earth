@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "alkmene",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e5a6754f6e4cb38afa3774dc2bd0099daed0837250506d2ee07c333e5fc4dc01"
+    "sha256": "bbcaa43a951d377ba9ca95de42df1070b95e5aca89b0f3e44bb82a3aaa7980b4"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {

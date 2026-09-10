@@ -1,0 +1,52 @@
+{
+  "id": "methone",
+  "classification": "satellite",
+  "order": 223,
+  "physical": {
+    "name": "Methone",
+    "horizonsCode": "632",
+    "meanRadiusKm": 1.45,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "saturn"
+  },
+  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "satellite": {
+    "parent": "saturn",
+    "horizonsCode": "632",
+    "fitFromJdTdb": 2453371.5,
+    "fitToJdTdb": 2458119.5,
+    "fitStepDays": 1,
+    "poleRightAscensionRad": 0.708219794215,
+    "poleDeclinationRad": 1.458000955166,
+    "elements": {
+      "epochJdTt": 2451545,
+      "semiMajorAxisKm": 194232.783,
+      "eccentricity": 0.000837373484,
+      "inclinationRad": 0.00022031913,
+      "ascendingNodeRad": -0.55770428763,
+      "argumentOfPeriapsisRad": 2.940782899195,
+      "meanAnomalyAtEpochRad": -11371.711806966076,
+      "meanMotionRadPerDay": 6.206083883799187,
+      "ascendingNodeRateRadPerDay": -0.014974072511188534,
+      "argumentOfPeriapsisRateRadPerDay": 0.03248319684278547
+    }
+  },
+  "acquisition": {
+    "satellite": {
+      "target": "632",
+      "center": "500@699",
+      "parent": "saturn",
+      "fromJd": 2453371.5,
+      "toJd": 2458119.5,
+      "stepDays": 1,
+      "radial": true,
+      "libration": false,
+      "positionCorrection": false
+    },
+    "fixture": {
+      "target": "632",
+      "center": "500@699",
+      "range": "cassini-era"
+    }
+  }
+}

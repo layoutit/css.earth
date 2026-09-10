@@ -174,8 +174,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
             // Hidden paths have no geometry consumer. Their proxies still need
             // the exact existing fade, which saturates at 48 CSS pixels.
             measuredExtent = projector.measureExtent(entry.orbit.verticesM, entry.orbit.trail,
-              48, entry.orbit.extentChords ?? entry.orbit.activeChords);
-          } else segments = projector(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords, fullOrbit, entry.orbitProjection);
+              48, entry.orbit.extentChords ?? entry.orbit.activeChords, entry.orbit.closed !== false);
+          } else segments = projector(entry.orbit.verticesM, entry.orbit.trail, entry.orbit.activeChords, fullOrbit, entry.orbitProjection, entry.orbit.closed !== false);
         }
         if (entry.orbit) entry.orbitAppearance = orbitPresentation(measuredExtent ?? segments);
         const appearance = entry.orbitAppearance;

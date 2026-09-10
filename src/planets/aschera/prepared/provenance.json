@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "aschera",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "cb7db40ff94bdbe71dbcf2959fbe670967d7015472e379cfb4204715cf8eaf99"
+    "sha256": "2f5813dd9ff3686d17d0e2c6c282a896c7cb4c3a8d4730be59ad2ce02501cd66"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "425c5eaa458c41fc0ecd53191819cd902e7f242a38b77aa0d4860b788d403674",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "d8172d69e1dd1cfe609daef3746bafdcd19eeb4ec62ff1ba2d7472ca4073fb7a",
       "bytes": 10441,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/aschera/aschera-elevation-thumbnail.webp",
           "bytes": 5462,
           "sha256": "0536692ee9bea8b89bcdc7afb647f576582e645c3d676642db215545ae5fc0a5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aschera/aschera-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aschera/aschera-elevation-surface@2x.webp",
           "bytes": 276500,
           "sha256": "250d5e4de5c3b314ea6e5875577924c41e92b2953a6af3f6037852e217309fb0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/aschera/aschera-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/aschera/aschera-shape-surface@2x.webp",
           "bytes": 216656,
           "sha256": "0cb6dd10e9f2e5e300dfb75ea95f9269c89a91fab93b4ce56f2df6d6ebeef77a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

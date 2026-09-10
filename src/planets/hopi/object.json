@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "13857e6c32246553a4f97050a8b13855786243c789d36a96af0e5241d9a73455"
+        "sha256": "46f9492437471baa10755155c51cf520644d58069400fb98f1218df66333832f"
+      }
+    },
+    "catalog": {
+      "name": "Hopi",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 3.153358490702003,
+      "description": "Explore Hopi in 3D with its published shape model and documented physical size scale.",
+      "systemName": "Solar System",
+      "order": 413,
+      "context": {
+        "order": 217
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "3ca2f304003023b85bb14f333dfc5546e970e2a8548dc3c9b065411a49fd8305"
+    "sha256": "74a3affd108ef4fa76ab7ab8ae3f022161a526b47c2bf0cb58c09f378084305d"
   }
 }

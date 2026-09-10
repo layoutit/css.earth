@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "eros",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b690eae6744901254579bddab569b89bb7de4d4608d690da5e76664227da86df"
+    "sha256": "420569ab7d650d6e713e752fa33220c125e56e5e111356428128b00c9187d862"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -386,10 +386,14 @@
       },
       "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "evidence": "https://astrogeology.usgs.gov/search/map/near_msi_albedo_mosaics",
+            "missionId": "near-shoemaker"
+          }
+        ]
       },
       "sha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "bytes": 228242957,
@@ -428,10 +432,14 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-eros.shape-model/data/vertex/ver128q.tab",
+            "missionId": "near-shoemaker"
+          }
+        ]
       },
       "sha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
       "bytes": 16897935,
@@ -470,10 +478,14 @@
       },
       "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive."
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "evidence": "NEAR MSI filter 4 (950 nm); pinned eros_nearmsi_filter4.lbl and PDS4 XML in the Golish 2023 archive.",
+            "missionId": "near-shoemaker"
+          }
+        ]
       },
       "sha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
       "bytes": 228242957,

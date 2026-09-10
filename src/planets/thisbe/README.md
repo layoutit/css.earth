@@ -12,9 +12,11 @@
 
 The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
-The [asteroid validation report](../../../docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
+The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
 Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 863.932 m, maximum 1920.115 m. These are sampled distances, not exhaustive geometric bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
 
@@ -42,6 +44,8 @@ Its vertices, outward winding and co-rotating frame remain unchanged. Positive Z
 The record gives diameter 218 km, period 6.041319 h and ecliptic J2000 pole (74°, 63°). The original mesh has measured volume-equivalent radius 108.972342 km and Cartesian extents 250.704 × 231.328 × 197.684 km. The rounded catalog diameter is used as the reference-sphere scale; the original coordinates are not rescaled.
 
 The selected paired DAMIT model record provides a valid pole. The separate MPCD survey table reports an impossible latitude for Thisbe, so that table is not used to orient this mesh. No value is wrapped or reinterpreted to repair that source.
+
+- [Vernazza et al. (2021), VLT/SPHERE imaging survey of the largest main-belt asteroids: Final results and synthesis](https://ui.adsabs.harvard.edu/abs/2021A&A...654A..56V) — selected model publication.
 
 </details>
 

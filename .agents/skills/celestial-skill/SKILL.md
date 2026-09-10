@@ -19,6 +19,20 @@ comes from cssEarth's shared application. Follow this workflow for a new body;
 for a repair, enter at the affected stage and reuse valid work already done.
 Research and review requests do not imply implementation or publication.
 
+## Shapes belong to datasets
+
+Different datasets of the same body may use different source-backed shape
+models. Pair each dataset with the mesh and coordinate system that support its
+observations; sharing a body does not require sharing one mesh. Prefer the
+matching published model over forcing imagery onto an incompatible shape.
+Use existing prepared-model selection while keeping one active object scene,
+only the selected model visible, and the shared renderer, camera and shell.
+A restriction on renderer changes does not by itself freeze prepared geometry;
+respect any explicit geometry or topology restriction in the task's scope.
+Explain meaningful model differences beside the dataset and qualify registration,
+coverage and picking against the selected mesh. The [implementation map](references/implementation-map.md)
+locates the existing support for alternative models.
+
 ## Scope for existing moon upgrades
 
 For Moons-owner follow-up proposals and PRs, keep existing body geometry,
@@ -55,6 +69,16 @@ and useful complementary products, such as elevation, geology or composition.
 Follow promising citations to the actual release; a display-texture catalog or
 press-image search alone does not establish what datasets exist.
 
+Search the relevant papers explicitly as well as the data archives. Inspect
+full text, tables, appendices and supplementary files: a usable radius table,
+mesh, camera solution or registration controls may be published there without
+a separate dataset download. Follow authoritative open-access or author-repository
+copies when available. Match the paper's model version, coordinates, units and
+observation identifiers to the selected inputs before using its numbers.
+Record any transcription or digitization and check it against the published
+table or figure. A paper's availability does not establish image or data reuse
+rights; unresolved access remains unresolved evidence, not proof of absence.
+
 Explain the selected sources and useful alternatives once in the body's README
 or a linked detailed method: source link,
 what it adds, and whether it is included, excluded or unresolved, with a reason.
@@ -64,6 +88,11 @@ metadata or a failed download leaves a candidate unresolved; it is not evidence
 that the dataset does not exist. Respect explicit user exclusions and scope.
 Stop once the promising candidates have a disposition; do not build an exhaustive
 catalog or repeat this survey for an unrelated repair.
+
+Use the contract's [reference retention rules](../../../docs/provenance/CONTRACT.md#references-and-retained-files)
+to distinguish citations from scientific inputs. Record cited values and their
+meaning in the body README; keep preparation data in the existing source records.
+Do not commit downloaded webpages as evidence.
 
 Record the following for selected inputs in the existing source record and
 manifest:
@@ -103,6 +132,10 @@ examples of capabilities, not templates for a new controller or a whole planet.
 - Use the open-ended `OBJECTS` registry, generic adapter, shared shell and camera.
   Body selection navigates one active scene; standalone moons have their own
   routes, not embedded moon scenes in the parent's package.
+- Register additions in the body's descriptor and individual astronomy record,
+  following the [contributor guide](../../../src/planets/README.md#register-a-body-without-editing-shared-lists).
+  Keep combined catalogues and navigation outputs generated. Do not edit shared
+  body lists or force-add ignored build files to register a destination.
 - Put source interpretation, geometry, materials, scientific content and
   supported controls in authored package data and shared preparation recipes.
   Keep input, lifecycle, typography and navigation behavior shared.

@@ -1,21 +1,21 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "eumelos",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "70703afebfbd0ede9bdf730c84f50de3ff940c39ce69d0755949829ed9d920b7"
+    "sha256": "19be585960c16f71c7f14c573a79e6e6603fa23a07e3fd6eb4d15716237026b7"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "5e0c6271ddbe3c895275b6fc59dc0dbdc3d5f59daad74ae0ec71ab31187d7ce2",
+      "sha256": "4159c79b64c56e915e9db27dcf7ce68c68d70c7f671ae4eded5fa70516fad295",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 18.848,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.6910527530147513
           },
           "mapUrl": "/scenes/eumelos/eumelos-shape-surface@2x.webp",
           "polesUrl": "/scenes/eumelos/eumelos-shape-surface@2x.webp",
@@ -149,7 +150,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c2fe015543563746d2a1e45099662ae23596ff03ec7b306f8ecda7813cd599aa",
+      "sha256": "0a39eac7089c03b3206f4e80e81ffd82a4b5ac1ac77d3dbb19b6aee734d591b0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,7 +223,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "DAMIT model"
             },
             {
               "id": "elevation",
@@ -354,7 +355,7 @@
       "sha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -376,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "c2fe015543563746d2a1e45099662ae23596ff03ec7b306f8ecda7813cd599aa",
-      "bytes": 9702,
+      "sha256": "0a39eac7089c03b3206f4e80e81ffd82a4b5ac1ac77d3dbb19b6aee734d591b0",
+      "bytes": 9668,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +413,19 @@
           "url": "/scenes/eumelos/eumelos-elevation-thumbnail.webp",
           "bytes": 5514,
           "sha256": "32feee1b79eef7b1a315a967e714036e132246c581a3829c3c4c448133f8a673",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eumelos/eumelos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eumelos/eumelos-elevation-surface@2x.webp",
           "bytes": 300618,
           "sha256": "b604313e835cbcecfe3bb73358c29876061f200ac424fda91c22130667d76d58",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +457,13 @@
           "url": "/scenes/eumelos/eumelos-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eumelos/eumelos-shape-surface@2x.webp",
           "bytes": 227744,
           "sha256": "07a0c2b860dc2941e0445ebb153c8b379288819bbec20f713d36d2f8b5ebed3c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

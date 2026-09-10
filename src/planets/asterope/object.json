@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "06ef807c5b2da3a3be82e4acab429644089aa9640f442a7dd76bc35e95147f8d"
+          "sha256": "6e4bc95293a620bbac76ef10ef7502dc5c77bb623d468a51c7005b7fb63382d9"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "1c1cf9dcc14b2c1a7a19c64ad6a5c6d42ecd2c9d69d1de919224f3d6abd665a9"
+        "sha256": "f3e74c10be78400bd051ce967d9d7440f7291247b1fada33f0f245a8ecbc327e"
+      }
+    },
+    "catalog": {
+      "name": "Asterope",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.659113942812149,
+      "description": "Explore Asterope in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 328,
+      "context": {
+        "order": 374
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "8f8eaaed86eb1891aef00779e3a973a7bc5b2621bb28c80d51149d8f0c82f487"
+    "sha256": "a8b65c682763966b2fa8f29ad412fba8c6318db49affe933c1a358d3fb87d982"
   }
 }

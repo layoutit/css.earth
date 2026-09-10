@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "nuwa",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "681d4a6ef9a5d7d6566ad97ea514eb721ae312da4db042cfe3bf4313f3d8303c"
+    "sha256": "9dfa5d1660a8f42f6df8995d56343fda76d70e341da8a7fb93ad9605d491c6c2"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "b576ef6ed10c1950eb578412561c1829d8d537c14ad28ac7ff30cb5ceb14135a",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "5876b0b37fc7478972339a2b200f218201607d583fbc129375519cefca0c2e26",
       "bytes": 8747,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/nuwa/nuwa-elevation-thumbnail.webp",
           "bytes": 5728,
           "sha256": "ab9c7c1b75a6c1815e246ad3b40ba1614d1b6b705736ce091983d0d0d031591f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nuwa/nuwa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nuwa/nuwa-elevation-surface@2x.webp",
           "bytes": 297794,
           "sha256": "9134e9d7306c2b2c85970457d9cacaa6e9055f9faa8db1ba77d59ef00ed04b59",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/nuwa/nuwa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nuwa/nuwa-shape-surface@2x.webp",
           "bytes": 227588,
           "sha256": "52adb1d481e948e6358205c3c4a8090430074f52241e52a91b64bb7c90302229",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

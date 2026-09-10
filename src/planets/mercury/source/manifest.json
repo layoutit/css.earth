@@ -46,10 +46,14 @@
         "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
       },
       "capture": {
-        "spacecraftIds": [
-          "messenger"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "messenger",
+            "missionId": "messenger",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_BDR/tile/3/${y}/${x}"
+          }
+        ]
       }
     },
     {
@@ -79,10 +83,14 @@
         "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
       },
       "capture": {
-        "spacecraftIds": [
-          "messenger"
-        ],
-        "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "messenger",
+            "missionId": "messenger",
+            "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg"
+          }
+        ]
       }
     },
     {
@@ -113,10 +121,14 @@
         "href": "https://astrogeology.usgs.gov/search/map/mercury-messenger-global-products"
       },
       "capture": {
-        "spacecraftIds": [
-          "messenger"
-        ],
-        "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "messenger",
+            "missionId": "messenger",
+            "evidence": "http://amnh-us.wms.openspaceproject.com/Mercury/Messenger_Shade/tile/3/${y}/${x}"
+          }
+        ]
       }
     },
     {

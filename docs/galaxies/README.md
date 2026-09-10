@@ -8,7 +8,7 @@ Actual app captures at the **same camera**, with catalogue stars enabled and eac
 
 | ESO VISTA · near infrared | Horálek · optical | NASA WISE · infrared |
 | --- | --- | --- |
-| [![LMC rendered with the ESO VISTA lens](images/lmc-vista-infrared.webp)](images/lmc-vista-infrared.webp) | [![LMC rendered with the Horálek optical lens](images/lmc-horalek-widefield.webp)](images/lmc-horalek-widefield.webp) | [![LMC rendered with the NASA WISE lens](images/lmc-wise-wide-infrared.webp)](images/lmc-wise-wide-infrared.webp) |
+| [![LMC rendered with the ESO VISTA lens](../images/galaxies/lmc-vista-infrared.webp)](../images/galaxies/lmc-vista-infrared.webp) | [![LMC rendered with the Horálek optical lens](../images/galaxies/lmc-horalek-widefield.webp)](../images/galaxies/lmc-horalek-widefield.webp) | [![LMC rendered with the NASA WISE lens](../images/galaxies/lmc-wise-wide-infrared.webp)](../images/galaxies/lmc-wise-wide-infrared.webp) |
 | [ESO original](https://www.eso.org/public/images/eso1914a/) · ESO/VMC Survey | [NOIRLab original](https://noirlab.edu/public/images/iotw2547a/) · NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava) | [WISE data](https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html) · IPAC/NASA; color HiPS by CDS (CNRS/Unistra) |
 
 | Color input actually used | Resolution and field | Registration and interpretation |
@@ -62,11 +62,11 @@ pnpm setup:assets --object=sun
 pnpm lab:nebula:bake
 pnpm dev
 # In another terminal, from the same repository root:
-node docs/galaxies/capture.mjs http://127.0.0.1:4210
+node tools/capture-galaxies.mts http://127.0.0.1:4210
 ```
 
 The [bake guide](../../labs/nebula/docs/baking.md) explains acquisition and stage/cache behavior. First use needs the pinned native images, NOX model and Python packages; the command acquires them. It consumes the tracked density grid, so it does not rerun the N-body simulation. All runtime environment images and derived lab previews are generated and Git-ignored; inputs, settings and expected hashes stay versioned. The three small documentation screenshots are retained review evidence. `pnpm prepare:environment-images` restores M31/M33/SMC, the Milky Way, heliosphere and stellar atlas from pinned inputs; normal app startup also runs it.
 
-[captures.json](captures.json) records the rendering commit, camera URLs, viewport, selected lenses, image hashes and successful checks. [capture.mjs](capture.mjs) uses an isolated browser context and the real app, verifies all 943 stars and unchanged camera, and reports script/HTTP errors. No image processing jobs or user browser settings are changed. The screenshots are compressed WebPs with no cropping, resizing or color adjustment.
+[captures.json](../../tests/galaxies/captures.json) preserves historical image paths at its recorded revision, together with the rendering commit, camera URLs, viewport, selected lenses, image hashes and successful checks. [capture-galaxies.mts](../../tools/capture-galaxies.mts) uses an isolated browser context and the real app, verifies all 943 stars and unchanged camera, and reports script/HTTP errors. No image processing jobs or user browser settings are changed. The screenshots are compressed WebPs with no cropping, resizing or color adjustment.
 
 **Open visual limits:** simulation/observation registration still has an approximately 2.8 kpc model offset; oblique whitening, slice banding and the transition from the interior panorama remain research work. These captures document the current implementation, not a claim that those issues are solved. Continue with the lab's [method](../../labs/nebula/METHOD.md), [research](../../labs/nebula/RESEARCH.md), [next steps](../../labs/nebula/NEXTSTEPS.md) and [slice-stability evidence](../../labs/nebula/docs/slice-stability.md).

@@ -76,7 +76,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "078626695f0e71deb965663ef899f958ad90bbf635050e8cb5cc8b718a1e5608"
+          "sha256": "071efc50df2a0c30639c0fa57f69a28b1d7b9ef41fd326bb36f7f1099df46b11"
         }
       ]
     },
@@ -113,7 +113,19 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "15c32a8b78fa7f70894bed130e07722fa0cbc22eda583104e6fefb3edcd1772e"
+        "sha256": "6fdd76d00ab4ae97f70b2313e8b306dcb9e223373ec6c1b0aa14b96713b67b58"
+      }
+    },
+    "catalog": {
+      "name": "Siwa",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.72994935329283,
+      "description": "Explore Siwa in 3D with its published shape model and radial elevation.",
+      "systemName": "Solar System",
+      "order": 280,
+      "context": {
+        "order": 326
       }
     }
   },
@@ -122,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "498c15e4cd4e1c11f4e03e78c6493f135f211f1569209d9218322b60fe5f0ee0"
+    "sha256": "de9eac8151a62e090d99c660c4c5ceb2222cdd6d67db0ee12ad1c7423b090498"
   }
 }

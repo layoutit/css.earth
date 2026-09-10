@@ -1,15 +1,15 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "nix",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e55c8afa68da943e6ae4cf2051437392ec7692f3738a5effffe66b84b01e9da2"
+    "sha256": "a08f720d7fd79b4413cbca0ab99104c7ec1028c56cb222daa7c8f429c9658798"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -294,10 +294,14 @@
         "referenceRadiusMeters": 18265.603887767425
       },
       "capture": {
-        "spacecraftIds": [
-          "new-horizons"
-        ],
-        "evidence": "https://ndownloader.figshare.com/files/24176543"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "new-horizons",
+            "evidence": "https://ndownloader.figshare.com/files/24176543",
+            "missionId": "new-horizons"
+          }
+        ]
       },
       "sha256": "331a11972b5d1f55fd901d0cfd358aee49e77070d7bf606729a51ba95be20428",
       "bytes": 4586869,

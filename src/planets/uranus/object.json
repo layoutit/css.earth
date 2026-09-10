@@ -67,7 +67,7 @@
         {
           "id": "rings",
           "path": "source/preparation/rings.json",
-          "sha256": "0187ce35b4db1570a676b7b360a8066a22412cbc02a30c990bccf8c17a478fb1"
+          "sha256": "4c25382df279a628ca23b6c16f78ad5410cad74f191fab9098a1b04b17e55145"
         },
         {
           "id": "navigation",
@@ -117,7 +117,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "2ea5f5085e8a1044d544e3782fcd72a9a54c15e6114bb808ca80a268b01293a9"
+          "sha256": "1254fcbcd5b3fdaeba73e40d7d59498a34a00b74aebc21a2525e69db9efa5353"
         }
       ],
       "shape": {
@@ -211,6 +211,18 @@
       "metadata": {
         "url": "prepared/page.json",
         "sha256": "925d089b2368f2385e79bcf4dddd5ec9b244c9d1b452974b902580f10f965d19"
+      }
+    },
+    "catalog": {
+      "name": "Uranus",
+      "classification": "planet",
+      "color": "#8ec7c9",
+      "distanceAu": 19.2,
+      "description": "Explore Uranus in 3D with cssEarth. Discover the ice giant that spins on its side, its faint rings, and its system of moons.",
+      "systemName": "Solar System",
+      "order": 446,
+      "context": {
+        "order": 27
       }
     }
   },

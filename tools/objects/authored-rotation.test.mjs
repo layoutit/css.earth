@@ -4,7 +4,7 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { readAuthoredRotation } from './authored-rotation.mjs';
+import { readAuthoredRotation } from './authored-rotation.mts';
 
 test('a measured meridian advances from its source epoch, including retrograde spin', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-rotation-'));
