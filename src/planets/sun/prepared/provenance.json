@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2de2e6d12a12659a08fc5a76daee02d7a91cc020fbc3535714e896a88a25f992"
+    "sha256": "4d90e73192124390022066eda3f87d7e35c56a642970673b56416b91fef8ec17"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -214,7 +214,7 @@
     {
       "id": "content",
       "path": "source/content/static.json",
-      "sha256": "e3f9d69ee9d1ab6752ba3c6af7a2aa0a7d06cce1f130a8b9484b4b3056cc990e",
+      "sha256": "f5b6ecd76597ff594505f40a946840645add4d749887ff8e922aaf18dbbe8cf0",
       "parameters": {
         "schema": "cssearth-static-surface-content@1",
         "id": "sun",
@@ -714,7 +714,7 @@
           }
         ],
         "provenance": {
-          "sourceRecord": "../SOURCE.md",
+          "sourceRecord": "../README.md",
           "editorial": "source/editorial/sun.json",
           "qualification": "Accepted source-backed facts, labels and observation interpretation; no scientific values changed during JSON migration."
         }
@@ -1788,7 +1788,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e3f9d69ee9d1ab6752ba3c6af7a2aa0a7d06cce1f130a8b9484b4b3056cc990e",
+      "sha256": "f5b6ecd76597ff594505f40a946840645add4d749887ff8e922aaf18dbbe8cf0",
       "bytes": 18248,
       "dependencies": [],
       "verification": "manifest-pin",
@@ -2274,7 +2274,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 4533,
-          "sha256": "5b5139eb209cb4aec44eadd478542dfa331e7f75c9a7db06c36a9e47522c0496",
+          "sha256": "dec23820c8dacdb708c7f05c6959a53ed8b2e4ac53d0c41f22c51b0b6fc95178",
           "verification": "bytes-verified"
         }
       ],

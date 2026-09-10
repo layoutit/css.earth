@@ -17,7 +17,7 @@ export function objectPackagePaths(objectRecord, projectRoot = process.cwd(), au
   return Object.freeze({
     root,
     requiredFiles: Object.freeze([
-      resolve(root, "SOURCE.md"),
+      resolve(root, "README.md"),
       resolve(root, "NOTICE.md"),
       resolve(root, "source", "manifest.json"),
       resolve(root, "runtime-assets.json"),

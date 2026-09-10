@@ -10,47 +10,47 @@ The diameter uncertainty is the source's reported fit/catalog error; it is **not
 
 | Number | Body | DAMIT model | Shape evidence | Diameter (km) | Size interpretation |
 | --- | --- | --- | --- | ---: | --- |
-| 17 | [Thetis](../src/planets/thetis/SOURCE.md) | [116](https://damit.cuni.cz/projects/damit/asteroid_models/view/116) | Convex light-curve model | 77 ± 8 | Archive calibrated size |
-| 23 | [Thalia](../src/planets/thalia/SOURCE.md) | [1858](https://damit.cuni.cz/projects/damit/asteroid_models/view/1858) | Resolved-imaging, nonconvex | 114 ± 8 | Archive calibrated size |
-| 25 | [Phocaea](../src/planets/phocaea/SOURCE.md) | [697](https://damit.cuni.cz/projects/damit/asteroid_models/view/697) | Convex light-curve model | 83.21 ± 0.96 | AKARI approximate scale |
-| 27 | [Euterpe](../src/planets/euterpe/SOURCE.md) | [441](https://damit.cuni.cz/projects/damit/asteroid_models/view/441) | Convex light-curve model | 109.79 ± 1.54 | AKARI approximate scale |
-| 28 | [Bellona](../src/planets/bellona/SOURCE.md) | [1839](https://damit.cuni.cz/projects/damit/asteroid_models/view/1839) | Resolved-imaging, nonconvex | 133 ± 7 | Archive calibrated size |
-| 32 | [Pomona](../src/planets/pomona/SOURCE.md) | [16306](https://damit.cuni.cz/projects/damit/asteroid_models/view/16306) | Convex light-curve model | 89 ± 7 | Archive calibrated size |
-| 34 | [Circe](../src/planets/circe/SOURCE.md) | [129](https://damit.cuni.cz/projects/damit/asteroid_models/view/129) | Convex light-curve model | 107 ± 10 | Archive calibrated size |
-| 36 | [Atalante](../src/planets/atalante/SOURCE.md) | [823](https://damit.cuni.cz/projects/damit/asteroid_models/view/823) | Convex light-curve model | 110.54 ± 1.57 | AKARI approximate scale |
-| 38 | [38 Leda](../src/planets/leda-38/SOURCE.md) | [720](https://damit.cuni.cz/projects/damit/asteroid_models/view/720) | Convex light-curve model | 114.22 ± 1.52 | AKARI approximate scale |
-| 39 | [Laetitia](../src/planets/laetitia/SOURCE.md) | [1835](https://damit.cuni.cz/projects/damit/asteroid_models/view/1835) | Resolved-imaging, nonconvex | 164 ± 3 | Archive calibrated size |
-| 42 | [Isis](../src/planets/isis/SOURCE.md) | [1841](https://damit.cuni.cz/projects/damit/asteroid_models/view/1841) | Resolved-imaging, nonconvex | 104 ± 4 | Archive calibrated size |
-| 43 | [Ariadne](../src/planets/ariadne/SOURCE.md) | [1825](https://damit.cuni.cz/projects/damit/asteroid_models/view/1825) | Resolved-imaging, nonconvex | 60 ± 4 | Archive calibrated size |
-| 46 | [Hestia](../src/planets/hestia/SOURCE.md) | [4383](https://damit.cuni.cz/projects/damit/asteroid_models/view/4383) | Convex light-curve model | 120.62 ± 1.53 | AKARI approximate scale |
-| 47 | [Aglaja](../src/planets/aglaja/SOURCE.md) | [3233](https://damit.cuni.cz/projects/damit/asteroid_models/view/3233) | Convex light-curve model | 147.05 ± 3.58 | AKARI approximate scale |
-| 49 | [Pales](../src/planets/pales/SOURCE.md) | [16309](https://damit.cuni.cz/projects/damit/asteroid_models/view/16309) | Convex light-curve model | 148.02 ± 2.56 | AKARI approximate scale |
-| 53 | [Kalypso](../src/planets/kalypso/SOURCE.md) | [1732](https://damit.cuni.cz/projects/damit/asteroid_models/view/1732) | Convex light-curve model | 101.9 ± 1.03 | AKARI approximate scale |
-| 54 | [Alexandra](../src/planets/alexandra/SOURCE.md) | [1817](https://damit.cuni.cz/projects/damit/asteroid_models/view/1817) | Resolved-imaging, nonconvex | 143 ± 5 | Archive calibrated size |
-| 55 | [55 Pandora](../src/planets/pandora-55/SOURCE.md) | [139](https://damit.cuni.cz/projects/damit/asteroid_models/view/139) | Convex light-curve model | 70 ± 7 | Archive calibrated size |
-| 56 | [Melete](../src/planets/melete/SOURCE.md) | [1851](https://damit.cuni.cz/projects/damit/asteroid_models/view/1851) | Resolved-imaging, nonconvex | 116 ± 5 | Archive calibrated size |
-| 59 | [Elpis](../src/planets/elpis/SOURCE.md) | [6156](https://damit.cuni.cz/projects/damit/asteroid_models/view/6156) | Convex light-curve model | 156.18 ± 2.31 | AKARI approximate scale |
-| 62 | [Erato](../src/planets/erato/SOURCE.md) | [317](https://damit.cuni.cz/projects/damit/asteroid_models/view/317) | Convex light-curve model | 78.62 ± 0.9 | AKARI approximate scale |
-| 63 | [Ausonia](../src/planets/ausonia/SOURCE.md) | [5924](https://damit.cuni.cz/projects/damit/asteroid_models/view/5924) | Resolved-imaging, nonconvex | 93 ± 3 | Archive calibrated size |
-| 67 | [Asia](../src/planets/asia/SOURCE.md) | [5668](https://damit.cuni.cz/projects/damit/asteroid_models/view/5668) | Convex light-curve model | 61.63 ± 0.65 | AKARI approximate scale |
-| 68 | [Leto](../src/planets/leto/SOURCE.md) | [290](https://damit.cuni.cz/projects/damit/asteroid_models/view/290) | Convex light-curve model | 148 ± 25 | Archive calibrated size |
-| 69 | [Hesperia](../src/planets/hesperia/SOURCE.md) | [319](https://damit.cuni.cz/projects/damit/asteroid_models/view/319) | Convex light-curve model | 109 ± 11 | Archive calibrated size |
-| 71 | [Niobe](../src/planets/niobe/SOURCE.md) | [1014](https://damit.cuni.cz/projects/damit/asteroid_models/view/1014) | Convex light-curve model | 80.86 ± 0.8 | AKARI approximate scale |
-| 72 | [Feronia](../src/planets/feronia/SOURCE.md) | [1853](https://damit.cuni.cz/projects/damit/asteroid_models/view/1853) | Resolved-imaging, nonconvex | 93 ± 10 | Archive calibrated size |
-| 73 | [Klytia](../src/planets/klytia/SOURCE.md) | [142](https://damit.cuni.cz/projects/damit/asteroid_models/view/142) | Convex light-curve model | 45.4 ± 1.3 | VS-TPM fit |
-| 74 | [74 Galatea](../src/planets/galatea-74/SOURCE.md) | [6181](https://damit.cuni.cz/projects/damit/asteroid_models/view/6181) | Convex light-curve model | 113.09 ± 2.15 | AKARI approximate scale |
-| 76 | [Freia](../src/planets/freia/SOURCE.md) | [442](https://damit.cuni.cz/projects/damit/asteroid_models/view/442) | Convex light-curve model | 168.36 ± 1.95 | AKARI approximate scale |
-| 79 | [Eurynome](../src/planets/eurynome/SOURCE.md) | [496](https://damit.cuni.cz/projects/damit/asteroid_models/view/496) | Convex light-curve model | 74.75 ± 0.94 | AKARI approximate scale |
-| 82 | [Alkmene](../src/planets/alkmene/SOURCE.md) | [146](https://damit.cuni.cz/projects/damit/asteroid_models/view/146) | Convex light-curve model | 58.6 ± 1.2 | VS-TPM fit |
-| 83 | [Beatrix](../src/planets/beatrix/SOURCE.md) | [6195](https://damit.cuni.cz/projects/damit/asteroid_models/view/6195) | Convex light-curve model | 87.42 ± 0.84 | AKARI approximate scale |
-| 84 | [Klio](../src/planets/klio/SOURCE.md) | [5792](https://damit.cuni.cz/projects/damit/asteroid_models/view/5792) | Convex light-curve model | 78.32 ± 0.96 | AKARI approximate scale |
-| 85 | [85 Io](../src/planets/io-85/SOURCE.md) | [1822](https://damit.cuni.cz/projects/damit/asteroid_models/view/1822) | Resolved-imaging, nonconvex | 167 ± 3 | Archive calibrated size |
-| 86 | [Semele](../src/planets/semele/SOURCE.md) | [5799](https://damit.cuni.cz/projects/damit/asteroid_models/view/5799) | Convex light-curve model | 117.32 ± 1.51 | AKARI approximate scale |
-| 91 | [Aegina](../src/planets/aegina/SOURCE.md) | [5831](https://damit.cuni.cz/projects/damit/asteroid_models/view/5831) | Convex light-curve model | 100.17 ± 1.23 | AKARI approximate scale |
-| 93 | [Minerva](../src/planets/minerva/SOURCE.md) | [1797](https://damit.cuni.cz/projects/damit/asteroid_models/view/1797) | Resolved-imaging, nonconvex | 160 ± 3 | Archive calibrated size |
-| 95 | [Arethusa](../src/planets/arethusa/SOURCE.md) | [294](https://damit.cuni.cz/projects/damit/asteroid_models/view/294) | Convex light-curve model | 147 ± 32 | Archive calibrated size |
-| 97 | [Klotho](../src/planets/klotho/SOURCE.md) | [321](https://damit.cuni.cz/projects/damit/asteroid_models/view/321) | Convex light-curve model | 85 ± 9 | Archive calibrated size |
-| 98 | [Ianthe](../src/planets/ianthe/SOURCE.md) | [1088](https://damit.cuni.cz/projects/damit/asteroid_models/view/1088) | Convex light-curve model | 104.24 ± 1.29 | AKARI approximate scale |
+| 17 | [Thetis](../src/planets/thetis/README.md) | [116](https://damit.cuni.cz/projects/damit/asteroid_models/view/116) | Convex light-curve model | 77 ± 8 | Archive calibrated size |
+| 23 | [Thalia](../src/planets/thalia/README.md) | [1858](https://damit.cuni.cz/projects/damit/asteroid_models/view/1858) | Resolved-imaging, nonconvex | 114 ± 8 | Archive calibrated size |
+| 25 | [Phocaea](../src/planets/phocaea/README.md) | [697](https://damit.cuni.cz/projects/damit/asteroid_models/view/697) | Convex light-curve model | 83.21 ± 0.96 | AKARI approximate scale |
+| 27 | [Euterpe](../src/planets/euterpe/README.md) | [441](https://damit.cuni.cz/projects/damit/asteroid_models/view/441) | Convex light-curve model | 109.79 ± 1.54 | AKARI approximate scale |
+| 28 | [Bellona](../src/planets/bellona/README.md) | [1839](https://damit.cuni.cz/projects/damit/asteroid_models/view/1839) | Resolved-imaging, nonconvex | 133 ± 7 | Archive calibrated size |
+| 32 | [Pomona](../src/planets/pomona/README.md) | [16306](https://damit.cuni.cz/projects/damit/asteroid_models/view/16306) | Convex light-curve model | 89 ± 7 | Archive calibrated size |
+| 34 | [Circe](../src/planets/circe/README.md) | [129](https://damit.cuni.cz/projects/damit/asteroid_models/view/129) | Convex light-curve model | 107 ± 10 | Archive calibrated size |
+| 36 | [Atalante](../src/planets/atalante/README.md) | [823](https://damit.cuni.cz/projects/damit/asteroid_models/view/823) | Convex light-curve model | 110.54 ± 1.57 | AKARI approximate scale |
+| 38 | [38 Leda](../src/planets/leda-38/README.md) | [720](https://damit.cuni.cz/projects/damit/asteroid_models/view/720) | Convex light-curve model | 114.22 ± 1.52 | AKARI approximate scale |
+| 39 | [Laetitia](../src/planets/laetitia/README.md) | [1835](https://damit.cuni.cz/projects/damit/asteroid_models/view/1835) | Resolved-imaging, nonconvex | 164 ± 3 | Archive calibrated size |
+| 42 | [Isis](../src/planets/isis/README.md) | [1841](https://damit.cuni.cz/projects/damit/asteroid_models/view/1841) | Resolved-imaging, nonconvex | 104 ± 4 | Archive calibrated size |
+| 43 | [Ariadne](../src/planets/ariadne/README.md) | [1825](https://damit.cuni.cz/projects/damit/asteroid_models/view/1825) | Resolved-imaging, nonconvex | 60 ± 4 | Archive calibrated size |
+| 46 | [Hestia](../src/planets/hestia/README.md) | [4383](https://damit.cuni.cz/projects/damit/asteroid_models/view/4383) | Convex light-curve model | 120.62 ± 1.53 | AKARI approximate scale |
+| 47 | [Aglaja](../src/planets/aglaja/README.md) | [3233](https://damit.cuni.cz/projects/damit/asteroid_models/view/3233) | Convex light-curve model | 147.05 ± 3.58 | AKARI approximate scale |
+| 49 | [Pales](../src/planets/pales/README.md) | [16309](https://damit.cuni.cz/projects/damit/asteroid_models/view/16309) | Convex light-curve model | 148.02 ± 2.56 | AKARI approximate scale |
+| 53 | [Kalypso](../src/planets/kalypso/README.md) | [1732](https://damit.cuni.cz/projects/damit/asteroid_models/view/1732) | Convex light-curve model | 101.9 ± 1.03 | AKARI approximate scale |
+| 54 | [Alexandra](../src/planets/alexandra/README.md) | [1817](https://damit.cuni.cz/projects/damit/asteroid_models/view/1817) | Resolved-imaging, nonconvex | 143 ± 5 | Archive calibrated size |
+| 55 | [55 Pandora](../src/planets/pandora-55/README.md) | [139](https://damit.cuni.cz/projects/damit/asteroid_models/view/139) | Convex light-curve model | 70 ± 7 | Archive calibrated size |
+| 56 | [Melete](../src/planets/melete/README.md) | [1851](https://damit.cuni.cz/projects/damit/asteroid_models/view/1851) | Resolved-imaging, nonconvex | 116 ± 5 | Archive calibrated size |
+| 59 | [Elpis](../src/planets/elpis/README.md) | [6156](https://damit.cuni.cz/projects/damit/asteroid_models/view/6156) | Convex light-curve model | 156.18 ± 2.31 | AKARI approximate scale |
+| 62 | [Erato](../src/planets/erato/README.md) | [317](https://damit.cuni.cz/projects/damit/asteroid_models/view/317) | Convex light-curve model | 78.62 ± 0.9 | AKARI approximate scale |
+| 63 | [Ausonia](../src/planets/ausonia/README.md) | [5924](https://damit.cuni.cz/projects/damit/asteroid_models/view/5924) | Resolved-imaging, nonconvex | 93 ± 3 | Archive calibrated size |
+| 67 | [Asia](../src/planets/asia/README.md) | [5668](https://damit.cuni.cz/projects/damit/asteroid_models/view/5668) | Convex light-curve model | 61.63 ± 0.65 | AKARI approximate scale |
+| 68 | [Leto](../src/planets/leto/README.md) | [290](https://damit.cuni.cz/projects/damit/asteroid_models/view/290) | Convex light-curve model | 148 ± 25 | Archive calibrated size |
+| 69 | [Hesperia](../src/planets/hesperia/README.md) | [319](https://damit.cuni.cz/projects/damit/asteroid_models/view/319) | Convex light-curve model | 109 ± 11 | Archive calibrated size |
+| 71 | [Niobe](../src/planets/niobe/README.md) | [1014](https://damit.cuni.cz/projects/damit/asteroid_models/view/1014) | Convex light-curve model | 80.86 ± 0.8 | AKARI approximate scale |
+| 72 | [Feronia](../src/planets/feronia/README.md) | [1853](https://damit.cuni.cz/projects/damit/asteroid_models/view/1853) | Resolved-imaging, nonconvex | 93 ± 10 | Archive calibrated size |
+| 73 | [Klytia](../src/planets/klytia/README.md) | [142](https://damit.cuni.cz/projects/damit/asteroid_models/view/142) | Convex light-curve model | 45.4 ± 1.3 | VS-TPM fit |
+| 74 | [74 Galatea](../src/planets/galatea-74/README.md) | [6181](https://damit.cuni.cz/projects/damit/asteroid_models/view/6181) | Convex light-curve model | 113.09 ± 2.15 | AKARI approximate scale |
+| 76 | [Freia](../src/planets/freia/README.md) | [442](https://damit.cuni.cz/projects/damit/asteroid_models/view/442) | Convex light-curve model | 168.36 ± 1.95 | AKARI approximate scale |
+| 79 | [Eurynome](../src/planets/eurynome/README.md) | [496](https://damit.cuni.cz/projects/damit/asteroid_models/view/496) | Convex light-curve model | 74.75 ± 0.94 | AKARI approximate scale |
+| 82 | [Alkmene](../src/planets/alkmene/README.md) | [146](https://damit.cuni.cz/projects/damit/asteroid_models/view/146) | Convex light-curve model | 58.6 ± 1.2 | VS-TPM fit |
+| 83 | [Beatrix](../src/planets/beatrix/README.md) | [6195](https://damit.cuni.cz/projects/damit/asteroid_models/view/6195) | Convex light-curve model | 87.42 ± 0.84 | AKARI approximate scale |
+| 84 | [Klio](../src/planets/klio/README.md) | [5792](https://damit.cuni.cz/projects/damit/asteroid_models/view/5792) | Convex light-curve model | 78.32 ± 0.96 | AKARI approximate scale |
+| 85 | [85 Io](../src/planets/io-85/README.md) | [1822](https://damit.cuni.cz/projects/damit/asteroid_models/view/1822) | Resolved-imaging, nonconvex | 167 ± 3 | Archive calibrated size |
+| 86 | [Semele](../src/planets/semele/README.md) | [5799](https://damit.cuni.cz/projects/damit/asteroid_models/view/5799) | Convex light-curve model | 117.32 ± 1.51 | AKARI approximate scale |
+| 91 | [Aegina](../src/planets/aegina/README.md) | [5831](https://damit.cuni.cz/projects/damit/asteroid_models/view/5831) | Convex light-curve model | 100.17 ± 1.23 | AKARI approximate scale |
+| 93 | [Minerva](../src/planets/minerva/README.md) | [1797](https://damit.cuni.cz/projects/damit/asteroid_models/view/1797) | Resolved-imaging, nonconvex | 160 ± 3 | Archive calibrated size |
+| 95 | [Arethusa](../src/planets/arethusa/README.md) | [294](https://damit.cuni.cz/projects/damit/asteroid_models/view/294) | Convex light-curve model | 147 ± 32 | Archive calibrated size |
+| 97 | [Klotho](../src/planets/klotho/README.md) | [321](https://damit.cuni.cz/projects/damit/asteroid_models/view/321) | Convex light-curve model | 85 ± 9 | Archive calibrated size |
+| 98 | [Ianthe](../src/planets/ianthe/README.md) | [1088](https://damit.cuni.cz/projects/damit/asteroid_models/view/1088) | Convex light-curve model | 104.24 ± 1.29 | AKARI approximate scale |
 
 Numbered names distinguish **38 Leda**, **55 Pandora**, **74 Galatea** and **85 Io** from the existing moons. Their routes are `/leda-38/`, `/pandora-55/`, `/galatea-74/` and `/io-85/`.
 

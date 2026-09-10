@@ -1,0 +1,34 @@
+{
+  "base": "eccb0e1b20b6d4da42b504e48ecec751f7d64786",
+  "body": "moon",
+  "files": {
+    "prepared/scene.json": {
+      "sha256": "481c9a8a8890622aad619460bfa108ea01698ae4836369ad3ec701c52b591277",
+      "bytes": 361658
+    },
+    "prepared/runtime.json": {
+      "sha256": "b51922f4b78b9c26577d3148dd887342ba97d2dc40e5b22d73c555d49d0fd513",
+      "bytes": 365698
+    },
+    "object.json": {
+      "sha256": "d444163748749063a52af73e38ced2d95759e6f51ec89628297d60b005c1f058",
+      "bytes": 4353
+    },
+    "runtime-assets.json": {
+      "sha256": "dde0c0e4ba842176e8ca804b64e23d5e6540a9b0947fa119f7a152f554887020",
+      "bytes": 10365
+    },
+    "source/preparation/geometry.json": {
+      "sha256": "d4d8b436629b9942f82d9330ca4782377afa8fafa0929894e47e1e80bc275238",
+      "bytes": 3171
+    },
+    "source/preparation/raster.json": {
+      "sha256": "ccb8c30e7840c19bc3d6e6958b40bea14e5fbf2049306b19cce02438c9af8bde",
+      "bytes": 13969
+    },
+    "source/content/static.json": {
+      "sha256": "8013c65f1a2d60fb0a28458e3e8175b5fa02372bb4d550cb0895c78c2e78c9a2",
+      "bytes": 26173
+    }
+  }
+}

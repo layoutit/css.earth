@@ -1,0 +1,50 @@
+{
+  "command": [
+    "pnpm",
+    "typecheck:preparation"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 701825024,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 229376,
+      "freePercent": 59
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 219709440,
+      "freePercent": 59
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 378028032,
+      "freePercent": 59
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 542015488,
+      "freePercent": 59
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 654262272,
+      "freePercent": 59
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 676675584,
+      "freePercent": 59
+    },
+    {
+      "seconds": 1.6,
+      "rssBytes": 701825024,
+      "freePercent": 59
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 1.9
+}

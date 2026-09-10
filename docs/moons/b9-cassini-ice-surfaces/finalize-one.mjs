@@ -1,0 +1,7 @@
+// Run after prepare-selected.mjs, in a fresh process to bound peak memory.
+import {readFile} from 'node:fs/promises';
+import {writeObjectJson} from '../../../tools/prepare-object-json.mjs';
+const id=process.argv[2];
+if(!['tethys','iapetus','phoebe'].includes(id))throw new Error('Select one B9 body.');
+const definition=JSON.parse(await readFile(`src/planets/${id}/prepared/runtime.json`,'utf8'));
+console.log(JSON.stringify(await writeObjectJson(id,definition)));

@@ -1,0 +1,50 @@
+[
+  {
+    "label": "shape/phoebe_ver128q.xml",
+    "labelSha256": "502d5119f3de1e7770594683e672e49c586ac9e0ad5b9cab85a109ee1537038e",
+    "blocks": [
+      {
+        "local_identifier": "PLATECOUNT_TABLE",
+        "offset": "5691279",
+        "records": "1",
+        "record_length": "57"
+      },
+      {
+        "local_identifier": "PLATE_TABLE",
+        "offset": "5691336",
+        "records": "196608",
+        "record_length": "57"
+      },
+      {
+        "local_identifier": "VERTEXCOUNT_TABLE",
+        "offset": "0",
+        "records": "1",
+        "record_length": "57"
+      },
+      {
+        "local_identifier": "VERTEX_TABLE",
+        "offset": "57",
+        "records": "99846",
+        "record_length": "57"
+      }
+    ]
+  },
+  {
+    "label": "shape/2023/phoebe_128_o.xml",
+    "labelSha256": "ba1b4e2b48c1ddf3e4ba0f02d9a8f70f24fb0dfbd1ce29b41329cd3df3da08b7",
+    "blocks": [
+      {
+        "local_identifier": "V",
+        "offset": "0",
+        "records": "99846",
+        "record_length": "60"
+      },
+      {
+        "local_identifier": "F",
+        "offset": "5990760",
+        "records": "196608",
+        "record_length": "60"
+      }
+    ]
+  }
+]

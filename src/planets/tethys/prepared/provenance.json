@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "tethys",
-  "basis": "recovered",
+  "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ecedd96b22c50862fddefd263f697671300524ce26060f3ca8d26bd3c414c68c"
+    "sha256": "66bc2781f6fdec5f5eddfc2f2c4aeccb813c7b3c70bd3f558e18010a45e72fc5"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "2017e62d3c0886001a529d72cfd2f39775ef32dde2e66c134a0430be6370165e",
+      "sha256": "3360f3d907f96d0acfd84eec99f81a9d58846752ab5cb257c57496b081ea30ab",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -49,6 +49,37 @@
                 "kind": "image-rgb-no-data",
                 "noData": null,
                 "centerLongitude": 180
+              }
+            },
+            {
+              "id": "infrared",
+              "textureScale": 0.125,
+              "validity": {
+                "kind": "geotiff-rgb-bands",
+                "samples": [
+                  0,
+                  1,
+                  2
+                ],
+                "alphaBand": 3,
+                "sampleBytes": 2,
+                "noData": 0,
+                "centerLongitude": 180,
+                "resolutionMeters": 3258.175193469102,
+                "origin": [
+                  -1668185.6990561802,
+                  834092.8495280901
+                ],
+                "grid": {
+                  "pixelsPerDegree": 2.8444444444444446,
+                  "sampleOffset": 511.5,
+                  "lineOffset": 255.5
+                }
+              },
+              "focus": {
+                "longitudeDegrees": 281.77734,
+                "latitudeDegrees": -7.55859,
+                "zoom": 1.15
               }
             }
           ],
@@ -263,6 +294,54 @@
                 }
               ],
               "displaySampling": "nearest"
+            },
+            {
+              "id": "ice-absorption",
+              "label": "Ice absorption",
+              "format": "geotiff",
+              "path": "cassini-ice/tethys-ice-absorption.tif",
+              "consumer": "ice-absorption",
+              "title": "Partial Cassini VIMS water-ice signature",
+              "description": "Near-2.02 µm water-ice absorption in selected Cassini observations; not ice abundance.",
+              "minimum": 0.55,
+              "maximum": 0.75,
+              "colors": [
+                "#312b66",
+                "#327caf",
+                "#7fcdbb",
+                "#edf8b1"
+              ],
+              "labels": [
+                "0.55",
+                "0.65",
+                "0.75"
+              ],
+              "units": "band-depth fraction",
+              "sourceUrl": "https://vims.univ-nantes.fr/cube/1807469104_1",
+              "sampling": "nearest",
+              "displaySampling": "nearest",
+              "textureScale": 0.125,
+              "grid": {
+                "width": 1024,
+                "height": 512,
+                "centerLongitude": 0,
+                "referenceRadiusMeters": 531000,
+                "noData": -9999,
+                "origin": [
+                  -1668185.6990561802,
+                  834092.8495280901
+                ],
+                "resolution": [
+                  3258.175193469102,
+                  -3258.175193469102
+                ],
+                "wrapLongitude": true
+              },
+              "focus": {
+                "longitudeDegrees": 247.67578,
+                "latitudeDegrees": 5.44922,
+                "zoom": 1.15
+              }
             }
           ],
           "observedColors": [],
@@ -331,7 +410,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "258ab92828040f5f83eeb93c6e82d3e1b2424661a15434f4e2007e31b614ad20",
+      "sha256": "938ecf6097f442c49fd704f02ffc3be7f2350bb1920e9eba0be1ce263967a390",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -422,7 +501,9 @@
             "enhanced": "Enhanced color",
             "elevation": "Elevation",
             "relative-albedo": "Relative albedo",
-            "shape": "Shape"
+            "shape": "Shape",
+            "infrared": "Infrared",
+            "ice-absorption": "Ice absorption"
           },
           "controls": [
             {
@@ -519,6 +600,54 @@
                 "id": "cassini-spc-2025-tethys-q128-shape",
                 "path": "../manifest.json"
               }
+            },
+            {
+              "id": "infrared",
+              "label": "Infrared",
+              "description": "Seven Cassini VIMS observations from 2007–2015. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.65 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
+              "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements.",
+              "title": "Cassini VIMS regional spectra · 2007–2015",
+              "thumbnail": "/scenes/tethys/tethys-infrared-thumbnail.webp",
+              "surface": "tethys-infrared-surface@2x.webp",
+              "poles": "tethys-infrared-poles@2x.webp",
+              "source": {
+                "id": "tethys-cassini-infrared",
+                "path": "../manifest.json",
+                "url": "https://vims.univ-nantes.fr/cube/1719616836_1"
+              },
+              "detail": "Partial VIMS",
+              "falseColor": true
+            },
+            {
+              "id": "ice-absorption",
+              "label": "Ice absorption",
+              "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using nine Cassini VIMS observations from 2007–2015. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.55–0.75; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
+              "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance.",
+              "title": "Cassini VIMS regional water-ice absorption · 2007–2015",
+              "thumbnail": "/scenes/tethys/tethys-ice-absorption-thumbnail.webp",
+              "surface": "tethys-ice-absorption-surface@2x.webp",
+              "poles": "tethys-ice-absorption-poles@2x.webp",
+              "source": {
+                "id": "tethys-cassini-ice-absorption",
+                "path": "../manifest.json",
+                "url": "https://vims.univ-nantes.fr/cube/1719616836_1"
+              },
+              "detail": "Partial VIMS",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Ice absorption",
+                "width": 256,
+                "height": 16,
+                "labels": [
+                  "0.55",
+                  "0.65",
+                  "0.75"
+                ],
+                "meta": "band-depth fraction",
+                "sourceUrl": "https://vims.univ-nantes.fr/cube/1719616836_1",
+                "image": "/scenes/tethys/tethys-ice-absorption-legend.webp"
+              }
             }
           ]
         },
@@ -576,6 +705,12 @@
             "role": "shape",
             "description": "2025 SPC shape and relative albedo products",
             "href": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+          },
+          {
+            "label": "Cassini VIMS",
+            "role": "surface",
+            "description": "Nantes calibrated spectra and navigation; archive filtering retained, CC BY 4.0",
+            "href": "https://vims.univ-nantes.fr/cube/1719616836_1"
           }
         ],
         "provenance": {
@@ -630,7 +765,7 @@
       "sha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640",
       "bytes": 66401923,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -659,7 +794,7 @@
       "sha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759",
       "bytes": 17694840,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -708,7 +843,7 @@
       "sha256": "aa3c249de2432699157638dae11c6f5c5e22c3dda94dd803af8666269f1a3da4",
       "bytes": 10809057,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -717,6 +852,46 @@
         "path": "observations/PIA18439.jpg",
         "url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg"
       },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "tethys-cassini-infrared",
+      "path": "cassini-ice/tethys-infrared-display.tif",
+      "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-ice-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "lensId": "infrared",
+      "label": "Infrared",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 180,
+        "referenceRadiusMeters": 531000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 14.76% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
+      },
+      "sha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
+      "bytes": 117380,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -755,7 +930,7 @@
       "sha256": "02b967b03598630765ec61545a7886ee8f4abda45fdae500f5af03358ebf5546",
       "bytes": 6044029,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -803,7 +978,7 @@
       "sha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -851,7 +1026,7 @@
       "sha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -888,7 +1063,7 @@
       "sha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
       "bytes": 6044029,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -925,7 +1100,7 @@
       "sha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -962,7 +1137,7 @@
       "sha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
       "bytes": 790789,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -977,6 +1152,46 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "tethys-cassini-ice-absorption",
+      "path": "cassini-ice/tethys-ice-absorption.tif",
+      "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
+      "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "https://vims.univ-nantes.fr/about",
+        "cassini-ice/evidence/license-about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Reproduce from pinned original C/N and raw QUB inputs with tools/objects/acquisition/cassini-ice-surfaces.py and cassini-ice/prepare.json.",
+      "redistribution": "Derived source map under CC BY 4.0 with full archive attribution; original observations and lossless values retained.",
+      "lensId": "ice-absorption",
+      "label": "Ice absorption",
+      "falseColor": true,
+      "width": 1024,
+      "height": 512,
+      "projection": {
+        "type": "equirectangular",
+        "centerLongitude": 0,
+        "referenceRadiusMeters": 531000,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric"
+      },
+      "coverage": "Supported detector apertures cover approximately 22.59% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
+      "capture": {
+        "spacecraftIds": [
+          "cassini"
+        ],
+        "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
+      },
+      "sha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
+      "bytes": 126710,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "purpose": "Source metadata, license evidence, or authored preparation and content.",
       "id": "authored-document:content/object.json",
@@ -986,10 +1201,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "258ab92828040f5f83eeb93c6e82d3e1b2424661a15434f4e2007e31b614ad20",
-      "bytes": 12105,
+      "sha256": "938ecf6097f442c49fd704f02ffc3be7f2350bb1920e9eba0be1ce263967a390",
+      "bytes": 15503,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -1030,13 +1245,13 @@
           "url": "/scenes/tethys/tethys-normal-thumbnail.webp",
           "bytes": 3346,
           "sha256": "88d6c15ac8f7f5fc8a32a9e36ab91f5434b9d10e4401f06c1d6faa7c5a294444",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-normal-surface@2x.webp",
           "bytes": 7399756,
           "sha256": "b21714368e32da7f99379635334762c1e02f381169f4e9ddccafd98b660c4ea7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1073,13 +1288,73 @@
           "url": "/scenes/tethys/tethys-enhanced-thumbnail.webp",
           "bytes": 5928,
           "sha256": "2d561a1f874e82ce11a81f420051e4f0194d4ef23326b6697c66d39c8cbe3ebf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-enhanced-surface@2x.webp",
           "bytes": 9546302,
           "sha256": "b4e5386fecaeebd62c6ecd8e20887f9b012963e8e05598065cc5043633743bfc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "infrared",
+      "label": "Infrared",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [
+        "Seven Cassini VIMS observations from 2007–2015. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.65 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps."
+      ],
+      "lensIds": [
+        "infrared"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "geotiff-rgb-bands",
+          "samples": [
+            0,
+            1,
+            2
+          ],
+          "alphaBand": 3,
+          "sampleBytes": 2,
+          "noData": 0,
+          "centerLongitude": 180,
+          "resolutionMeters": 3258.175193469102,
+          "origin": [
+            -1668185.6990561802,
+            834092.8495280901
+          ],
+          "grid": {
+            "pixelsPerDegree": 2.8444444444444446,
+            "sampleOffset": 511.5,
+            "lineOffset": 255.5
+          }
+        }
+      },
+      "inputs": [
+        "tethys-cassini-infrared",
+        "cassini-spc-2025-tethys-q128-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/tethys/tethys-infrared-thumbnail.webp",
+          "bytes": 3104,
+          "sha256": "9c52a691651e90f2195e6fd5c0722c7420aa87951bc2bc7ecd3b48501a0e52e3",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/tethys/tethys-infrared-surface@2x.webp",
+          "bytes": 58586,
+          "sha256": "01d161f1def6fca518f4a37db8f18b5891816de11f38c6f517f60ca3aeafeca0",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1118,19 +1393,19 @@
           "url": "/scenes/tethys/tethys-elevation-thumbnail.webp",
           "bytes": 7234,
           "sha256": "8521ccff8607bb1fc3c363cfbfb52ec18652c05c44223b75715b67a286b03eca",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-elevation-legend.webp",
           "bytes": 240,
           "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-elevation-surface@2x.webp",
           "bytes": 3480644,
           "sha256": "708bf83ed3773a589e2f91fa7f80261f29ae686b1b2d5e53bc40b7975e7b3861",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1169,19 +1444,65 @@
           "url": "/scenes/tethys/tethys-relative-albedo-thumbnail.webp",
           "bytes": 3410,
           "sha256": "293a567b012557e16ed3d24425f3cc28c09369218b8a36805ecf057f66a13d0c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-relative-albedo-legend.webp",
           "bytes": 276,
           "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-relative-albedo-surface@2x.webp",
           "bytes": 1604256,
           "sha256": "95f9495fcdb9f271e52f1c8f4204abd39d8ac588571d3577e3fb105b4c313bad",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "ice-absorption",
+      "label": "Ice absorption",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "parents": [],
+      "process": "Prepare the scientific recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using nine Cassini VIMS observations from 2007–2015. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.55–0.75; original numerical values are retained. Gray grid marks unsupported areas and scan gaps."
+      ],
+      "lensIds": [
+        "ice-absorption"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "scientific",
+        "qualification": "Partial Cassini VIMS water-ice signature"
+      },
+      "inputs": [
+        "tethys-cassini-ice-absorption",
+        "cassini-spc-2025-tethys-q128-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/tethys/tethys-ice-absorption-thumbnail.webp",
+          "bytes": 1572,
+          "sha256": "bf86ebcd9abad0f0a7a668ea0620f76b72108ecdffd5f7ee903c09c90b0564c1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/tethys/tethys-ice-absorption-legend.webp",
+          "bytes": 146,
+          "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/tethys/tethys-ice-absorption-surface@2x.webp",
+          "bytes": 67856,
+          "sha256": "34597960ea92a99a696e95558b82ffd7fd38d6db40bbe95b7f232ac3436e309b",
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1213,13 +1534,13 @@
           "url": "/scenes/tethys/tethys-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "7cbf01ce5434f5fcede86cd13c94e775de945744f9c116cb76c3a3ba97f3761d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/tethys/tethys-shape-surface@2x.webp",
           "bytes": 464516,
           "sha256": "dcaecb1a58a830b5900dd46f9ac1d3529f3fb78ef623e48e2ff65e402b024d67",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1242,8 +1563,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5679,
-          "sha256": "a535a723548259b6ea78ea51388e727453373df43309afd0a76c7ea38a25fb18",
+          "bytes": 5872,
+          "sha256": "45ac7edb12ba4c4225d7660ac2d7929ddcb332e9877854534d4cb02d4755fdd7",
           "verification": "bytes-verified"
         }
       ],
@@ -1293,6 +1614,30 @@
           "url": "object:prepared/minimaps/enhanced.webp",
           "bytes": 93628,
           "sha256": "83738f6d749d22beb1710ce55f8bd9bb3111ee542dcc2f7b2baea7b83ceddc27",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:infrared",
+      "label": "Infrared preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "infrared"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/infrared.webp",
+          "bytes": 11062,
+          "sha256": "778bd091712150e6e7db421fc5835eac1e9c673c64150b50a6a1bc5290c16fbf",
           "verification": "bytes-verified"
         }
       ]
@@ -1365,6 +1710,30 @@
           "url": "object:prepared/minimaps/relative-albedo.webp",
           "bytes": 194014,
           "sha256": "ea38e14c079f3e7eb28d111f499385ba6fe41c18bd11cf7564e2f78761a63c36",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:ice-absorption",
+      "label": "Ice absorption preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/scientific/2",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "inputs": [],
+      "parents": [
+        "ice-absorption"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/ice-absorption.webp",
+          "bytes": 40752,
+          "sha256": "23564d57d6c0715f090ca0cc53b307adb4a9dd96fcd226d948b4b9327d6335a3",
           "verification": "bytes-verified"
         }
       ]

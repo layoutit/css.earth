@@ -55,4 +55,4 @@ The prepared image release is available through the standard installer:
 pnpm setup:assets --object=annefrank --object=braille
 ```
 
-[Validation](VALIDATION.md) records source, topology, orbital, production, browser and clean-install results. The source constraint file and each body's `SOURCE.md` distinguish approximate dimensions, arbitrary display attitude and missing imagery.
+[Validation](VALIDATION.md) records source, topology, orbital, production, browser and clean-install results. The source constraint file and each body's `README.md` distinguish approximate dimensions, arbitrary display attitude and missing imagery.

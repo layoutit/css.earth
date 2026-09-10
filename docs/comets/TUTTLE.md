@@ -13,7 +13,7 @@ the HST model's 7:3 radius ratio and applies the square root of the published
 thermal flux scale. The displayed radii are 2.6563 and 1.1384 km; the factsheet
 shows approximately 2.7 and 1.1 km. The paper reports ±0.1 km for each rounded value. The independent radar
 family remains documented separately, rather than being blended into this
-geometry. [The package source notes](../../src/planets/comet-8p/SOURCE.md)
+geometry. [The package source notes](../../src/planets/comet-8p/README.md)
 record candidate dispositions, coordinates, uncertainties and credits.
 
 ## Geometry and source checks

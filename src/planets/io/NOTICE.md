@@ -16,7 +16,7 @@ HYG v4.1, CC BY-SA 4.0. Source license records are in `source/stars/`.
 Title font: Inter, Rasmus Andersson, SIL Open Font License 1.1.
 
 Scientific geometry uses the repository's vendored astronomy/JPL/IAU source
-closure. See `SOURCE.md` for map projection, source processing and limitations.
+closure. See `README.md` for map projection, source processing and limitations.
 
 VLT/MUSE numerical spectral maps: Oliver King (2024), [data v0.1.0](https://doi.org/10.5281/zenodo.11402374),
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Scientific interpretation:

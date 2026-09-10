@@ -1,0 +1,65 @@
+{
+  "scope": "Native C-band byte display only; no reprojection, image classification, fitting, thresholded silhouette or registration claim.",
+  "images": [
+    {
+      "observationId": "1465670650_1",
+      "channel": "vis",
+      "path": "output/b9-source-intake/phoebe/native/C1465670650_1_vis.cub",
+      "sourceBytes": 632103,
+      "sourceSha256": "64df4a766f2fe4daa4c571311606b318f4e44f6245e552671d98aa8ad085e06d",
+      "width": 48,
+      "height": 24,
+      "bandOneBased": 49,
+      "wavelengthMicrometers": 0.70288,
+      "bandStartByteZeroBased": 286720,
+      "finiteCount": 1152,
+      "minimumIf": -0.0004993594484403729,
+      "maximumIf": 0.016984635964035988
+    },
+    {
+      "observationId": "1465670650_1",
+      "channel": "ir",
+      "path": "output/b9-source-intake/phoebe/native/C1465670650_1_ir.cub",
+      "sourceBytes": 1384521,
+      "sourceSha256": "9b4645d37dcf102e4e4ec9a7b79c4d7b3c1953e88e9cc7cec7006c133ced67a4",
+      "width": 48,
+      "height": 24,
+      "bandOneBased": 57,
+      "wavelengthMicrometers": 1.80374,
+      "bandStartByteZeroBased": 323584,
+      "finiteCount": 1152,
+      "minimumIf": -0.0006664402899332345,
+      "maximumIf": 0.019025687128305435
+    },
+    {
+      "observationId": "1465671822_1",
+      "channel": "vis",
+      "path": "output/b9-source-intake/phoebe/native/C1465671822_1_vis.cub",
+      "sourceBytes": 522279,
+      "sourceSha256": "5085dd9ff0f4dff48b04da8b2b56f26dd20eab913856fa649c05a03423110595",
+      "width": 36,
+      "height": 24,
+      "bandOneBased": 49,
+      "wavelengthMicrometers": 0.70288,
+      "bandStartByteZeroBased": 231424,
+      "finiteCount": 864,
+      "minimumIf": -0.00055461295414716,
+      "maximumIf": 0.019043706357479095
+    },
+    {
+      "observationId": "1465671822_1",
+      "channel": "ir",
+      "path": "output/b9-source-intake/phoebe/native/C1465671822_1_ir.cub",
+      "sourceBytes": 1090377,
+      "sourceSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
+      "width": 36,
+      "height": 24,
+      "bandOneBased": 57,
+      "wavelengthMicrometers": 1.80374,
+      "bandStartByteZeroBased": 259072,
+      "finiteCount": 864,
+      "minimumIf": -0.0003841134603135288,
+      "maximumIf": 0.02150096371769905
+    }
+  ]
+}

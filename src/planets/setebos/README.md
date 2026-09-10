@@ -1,0 +1,46 @@
+# Setebos
+
+Setebos is an outer moon of Uranus.
+
+## Sources
+
+Approximate ellipsoid from brightness variability, using an assumed-albedo 47 km size. Equal short axes and orientation are assumed; the rotation period adopts a doubled shape interpretation. The grid marks unmapped terrain.
+
+- [Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer](https://arxiv.org/pdf/1706.06837)
+- [Uranian irregular satellites physical summary and occultation prospects](https://www.hou.usra.edu/meetings/uranusflagship2023/eposter/8187.pdf)
+
+## Evidence
+
+No dated test report is cited in the existing source notes.
+
+## Known problems
+
+The minimum elongation assumes uniform reflectivity and an equator-on view. Equal short axes (b=c), volume normalization, pole, spin sense and meridian are display assumptions; polar compression and current attitude are not measured.
+
+- K2 paper reports single-peaked photometric period 4.255 h; selected shape-driven full rotation doubles it, consistent with 2023 table. Not a uniquely established rotation period.
+
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+<a id="setebos-source-model"></a>
+<a id="selected-geometry"></a>
+<a id="assumptions"></a>
+<a id="source-interpretation-limits"></a>
+<a id="orbit-and-orientation"></a>
+<a id="survey-and-sources"></a>
+
+<details>
+<summary>Methods and source notes</summary>
+
+**Selected geometry**
+
+D=47 km adopted from 2023 author table; assumed-albedo brightness scale, no quoted formal size uncertainty.
+
+**Orbit and orientation**
+
+The [validation records](source/validation) identify the parent-relative state and any fit interval. The display uses meridian zero.
+
+**Survey and sources**
+
+Other candidates and rejected sources are recorded in [the source review](../../../docs/moons/review-2026-09-08/outer_companions-review.json) and [preparation inputs](../../../docs/moons/b1-preparation/outer-inputs.json).
+
+</details>

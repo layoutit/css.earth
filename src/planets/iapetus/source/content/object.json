@@ -85,7 +85,9 @@
     "defaultLens": "normal",
     "labels": {
       "normal": "Monochrome",
-      "enhanced": "Enhanced color"
+      "enhanced": "Enhanced color",
+      "infrared": "Infrared",
+      "ice-absorption": "Ice absorption"
     },
     "controls": [
       {
@@ -115,6 +117,54 @@
           "path": "../manifest.json"
         },
         "summary": "Colors extend into infrared and ultraviolet. The dark leading hemisphere is real surface material, not missing imagery."
+      },
+      {
+        "id": "infrared",
+        "label": "Infrared",
+        "description": "Three Cassini VIMS observations from 10 September 2007. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.45 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
+        "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements.",
+        "title": "Cassini VIMS flyby spectra · 10 September 2007",
+        "thumbnail": "/scenes/iapetus/iapetus-infrared-thumbnail.webp",
+        "surface": "iapetus-infrared-surface@2x.webp",
+        "poles": "iapetus-infrared-poles@2x.webp",
+        "source": {
+          "id": "iapetus-cassini-infrared",
+          "path": "../manifest.json",
+          "url": "https://vims.univ-nantes.fr/cube/1568157352_4"
+        },
+        "detail": "Partial VIMS",
+        "falseColor": true
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using three Cassini VIMS observations from 10 September 2007. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0–0.8; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
+        "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance.",
+        "title": "Cassini VIMS flyby water-ice absorption · 10 September 2007",
+        "thumbnail": "/scenes/iapetus/iapetus-ice-absorption-thumbnail.webp",
+        "surface": "iapetus-ice-absorption-surface@2x.webp",
+        "poles": "iapetus-ice-absorption-poles@2x.webp",
+        "source": {
+          "id": "iapetus-cassini-ice-absorption",
+          "path": "../manifest.json",
+          "url": "https://vims.univ-nantes.fr/cube/1568157352_4"
+        },
+        "detail": "Partial VIMS",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Ice absorption",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0",
+            "0.4",
+            "0.8"
+          ],
+          "meta": "band-depth fraction",
+          "sourceUrl": "https://vims.univ-nantes.fr/cube/1568157352_4",
+          "image": "/scenes/iapetus/iapetus-ice-absorption-legend.webp"
+        }
       }
     ]
   },
@@ -160,6 +210,12 @@
       "role": "stars",
       "description": "Milky Way panorama",
       "href": "https://www.eso.org/public/images/eso0932a/"
+    },
+    {
+      "label": "Cassini VIMS",
+      "role": "surface",
+      "description": "Nantes calibrated spectra and navigation; archive filtering retained, CC BY 4.0",
+      "href": "https://vims.univ-nantes.fr/cube/1568157352_4"
     }
   ],
   "provenance": {

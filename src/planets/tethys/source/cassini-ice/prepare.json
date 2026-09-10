@@ -1,0 +1,212 @@
+{
+  "schema": "cssearth-cassini-ice-surfaces@1",
+  "target": "TETHYS",
+  "status": "Qualified regional source mapping under the recorded registration and detector limits; mounted-view qualification is separate.",
+  "observations": [
+    {
+      "id": "1807469104_1",
+      "calibrated": "native/C1807469104_1_ir.cub",
+      "navigation": "native/N1807469104_1_ir.cub",
+      "rawOriginal": "raw/v1807469104_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28772,
+        "44": 1.59935,
+        "58": 1.82992,
+        "70": 2.02759,
+        "81": 2.2094
+      }
+    },
+    {
+      "id": "1807456038_1",
+      "calibrated": "native/C1807456038_1_ir.cub",
+      "navigation": "native/N1807456038_1_ir.cub",
+      "rawOriginal": "raw/v1807456038_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28772,
+        "44": 1.59935,
+        "58": 1.82992,
+        "70": 2.02759,
+        "81": 2.2094
+      }
+    },
+    {
+      "id": "1807473499_1",
+      "calibrated": "native/C1807473499_1_ir.cub",
+      "navigation": "native/N1807473499_1_ir.cub",
+      "rawOriginal": "raw/v1807473499_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28772,
+        "44": 1.59935,
+        "58": 1.82992,
+        "70": 2.02759,
+        "81": 2.2094
+      }
+    },
+    {
+      "id": "1818547570_1",
+      "calibrated": "native/C1818547570_1_ir.cub",
+      "navigation": "native/N1818547570_1_ir.cub",
+      "rawOriginal": "raw/v1818547570_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28772,
+        "44": 1.59935,
+        "58": 1.82992,
+        "70": 2.02759,
+        "81": 2.2094
+      }
+    },
+    {
+      "id": "1561668191_1",
+      "calibrated": "native/C1561668191_1_ir.cub",
+      "navigation": "native/N1561668191_1_ir.cub",
+      "rawOriginal": "raw/v1561668191_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28142,
+        "44": 1.59305,
+        "58": 1.82362,
+        "70": 2.02129,
+        "81": 2.2031
+      }
+    },
+    {
+      "id": "1660463972_1",
+      "calibrated": "native/C1660463972_1_ir.cub",
+      "navigation": "native/N1660463972_1_ir.cub",
+      "rawOriginal": "raw/v1660463972_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28402,
+        "44": 1.59565,
+        "58": 1.82622,
+        "70": 2.02389,
+        "81": 2.2057
+      }
+    },
+    {
+      "id": "1719613772_1",
+      "calibrated": "native/C1719613772_1_ir.cub",
+      "navigation": "native/N1719613772_1_ir.cub",
+      "rawOriginal": "raw/v1719613772_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28572,
+        "44": 1.59735,
+        "58": 1.82792,
+        "70": 2.02558,
+        "81": 2.20741
+      }
+    },
+    {
+      "id": "1719616836_1",
+      "calibrated": "native/C1719616836_1_ir.cub",
+      "navigation": "native/N1719616836_1_ir.cub",
+      "rawOriginal": "raw/v1719616836_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28572,
+        "44": 1.59735,
+        "58": 1.82792,
+        "70": 2.02558,
+        "81": 2.20741
+      }
+    },
+    {
+      "id": "1606213356_1",
+      "calibrated": "native/C1606213356_1_ir.cub",
+      "navigation": "native/N1606213356_1_ir.cub",
+      "rawOriginal": "raw/v1606213356_1.qub",
+      "wavelengthsMicrometers": {
+        "25": 1.28293,
+        "44": 1.59455,
+        "58": 1.82512,
+        "70": 2.02278,
+        "81": 2.20461
+      }
+    }
+  ],
+  "channels": {
+    "rgb": [
+      70,
+      44,
+      25
+    ],
+    "depth": [
+      58,
+      70,
+      81
+    ]
+  },
+  "pins": {
+    "native/C1807469104_1_ir.cub": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae",
+    "native/N1807469104_1_ir.cub": "55355c71d5b6c921ff7c5f4564e14ce28a0d787fb3d8963b28736a66cd6146f0",
+    "raw/v1807469104_1.qub": "be1e54ea809e092370dd8a09f2ed96ee5aa350671241b0e46310c2adf3f4ebdc",
+    "native/C1807456038_1_ir.cub": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6",
+    "native/N1807456038_1_ir.cub": "0dcf493ccef3b5e016d69d636053bb9934960262e3ded3512425895aea5b065c",
+    "raw/v1807456038_1.qub": "dc8f4b201a002c900c11314e7c2ad65fdcfab344469f5e14d2f42d0a74d0b732",
+    "native/C1807473499_1_ir.cub": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f",
+    "native/N1807473499_1_ir.cub": "4b2b82f80a99bf4488e301203d62bbf9b7c7c29aed549526bf2952927398d76b",
+    "raw/v1807473499_1.qub": "c0e1697c5cc5f72b6fede8ef71a20fb460fe80f083f4587acf2c1f5bd98f62ef",
+    "native/C1818547570_1_ir.cub": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795",
+    "native/N1818547570_1_ir.cub": "2b45033ab5cf0450c13bc05b019dcd0dba34ba7f2f39deb7c9aad012052c4aa6",
+    "raw/v1818547570_1.qub": "5077a518b0af23d1321cf2d196200793d6d826bade577afe575888d626c72957",
+    "native/C1561668191_1_ir.cub": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb",
+    "native/N1561668191_1_ir.cub": "be6f1d27fbd977f750fb79ed0d9a0758d279435aedbd57cd6020e4348b2e61e5",
+    "raw/v1561668191_1.qub": "373d8b8f871879f760a48ba4ca1b3fe405bd93776ac4a6c48383cca952a3599c",
+    "native/C1660463972_1_ir.cub": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9",
+    "native/N1660463972_1_ir.cub": "2cbf9230387dd49ceb4cf142a72cabb50eb49d9e4cda26479c17335cb62df875",
+    "raw/v1660463972_1.qub": "8e82a329b1fd42fc243c3f89515466cda86a2f7bd188a61ae74305a207d645a9",
+    "native/C1719613772_1_ir.cub": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042",
+    "native/N1719613772_1_ir.cub": "0b780aa84669bb56b24ebfa9f79fc583e3f3b853c6bbe45c050e7787024411f6",
+    "raw/v1719613772_1.qub": "d599c14f6f0ecbcbe253726b04e9b4a0a03e913b69a554fe050f972fa848d032",
+    "native/C1719616836_1_ir.cub": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43",
+    "native/N1719616836_1_ir.cub": "94cded98862d5d1ff665d627bae87ae5a97d8a9ff2993e23fd4831cefdf7b002",
+    "raw/v1719616836_1.qub": "137bcba59f43f125cc03f8b5a692b8b531ca9915bf67817e4bb68a65ce9d3766",
+    "native/C1606213356_1_ir.cub": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91",
+    "native/N1606213356_1_ir.cub": "8af91d04b7a71f66c1fb7053fbad38203255a8f09b0da12271210acaa97cf744",
+    "raw/v1606213356_1.qub": "3aceb080e213415421a130236188f80b02a8bd4e03c1eeea2cca8eb8037c91af"
+  },
+  "photometricCorrection": "none",
+  "absolutePointingAccuracy": "unresolved",
+  "aperturePolicy": "rc19-nominal-aperture-unknown-step-order@1",
+  "apertureInsetRadians": [
+    1e-06,
+    1e-06
+  ],
+  "detectorQualityPolicy": "pds3-ir-adc-background-and-filter-dependencies@1",
+  "detectorQualityPreparerSha256": "e02acd15b1af115d3482a6272ba78d79071db2757d45854fb0d0527681dc314e",
+  "registrationEvidence": {
+    "file": "evidence/registration.md",
+    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Selected Cassini regions use released native navigation. Independent registration to the separate fixed normal-map control is not established; there is no resolved Odysseus-center claim.",
+    "sha256": "942fdb6592821e810983962c922ee447ba3d9effcc1b4e2c7357c6efa837bd74"
+  },
+  "width": 1024,
+  "height": 512,
+  "radiusMeters": 531000,
+  "outputs": {
+    "depth": "tethys-ice-absorption.tif",
+    "rgb": "tethys-infrared-if.tif",
+    "rgbDisplay": "tethys-infrared-display.tif"
+  },
+  "rgbDisplay": {
+    "ranges": [
+      [
+        0,
+        0.65
+      ],
+      [
+        0,
+        0.65
+      ],
+      [
+        0,
+        0.65
+      ]
+    ],
+    "gamma": 2.2
+  },
+  "receipt": "preparation-receipt.json",
+  "policy": {
+    "minimumPhaseDegrees": 10,
+    "maximumPhaseDegrees": 120,
+    "maximumIncidenceEmissionDegrees": 70,
+    "maximumResolutionMeters": 40000,
+    "maximumCenterErrorPixels": 0.01
+  }
+}

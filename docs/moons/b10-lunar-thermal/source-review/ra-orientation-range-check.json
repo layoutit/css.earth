@@ -1,0 +1,110 @@
+{
+  "source": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img",
+  "method": "4-byte HTTP206 reads, containing bin floor indexing at supplied paper coordinates; -180 is deliberately incorrect alternate interpretation. Not complete-file verification.",
+  "samples": [
+    {
+      "name": "Steno-Apollo",
+      "lonEast": 30.794,
+      "latNorth": 20.145,
+      "testedOrigin": 0,
+      "row": 6381,
+      "column": 3941,
+      "offset": 1176161684,
+      "httpStatus": 206,
+      "contentRange": "bytes 1176161684-1176161687/3303014400",
+      "bytesHex": "51f1bc3d",
+      "float32LE": 0.09225714951753616
+    },
+    {
+      "name": "Steno-Apollo",
+      "lonEast": 30.794,
+      "latNorth": 20.145,
+      "testedOrigin": -180,
+      "row": 6381,
+      "column": 26981,
+      "offset": 1176253844,
+      "httpStatus": 206,
+      "contentRange": "bytes 1176253844-1176253847/3303014400",
+      "bytesHex": "84b84f3b",
+      "float32LE": 0.003169567324221134
+    },
+    {
+      "name": "Powell",
+      "lonEast": 30.763,
+      "latNorth": 20.16,
+      "testedOrigin": 0,
+      "row": 6379,
+      "column": 3937,
+      "offset": 1175793028,
+      "httpStatus": 206,
+      "contentRange": "bytes 1175793028-1175793031/3303014400",
+      "bytesHex": "a384093d",
+      "float32LE": 0.033573757857084274
+    },
+    {
+      "name": "Powell",
+      "lonEast": 30.763,
+      "latNorth": 20.16,
+      "testedOrigin": -180,
+      "row": 6379,
+      "column": 26977,
+      "offset": 1175885188,
+      "httpStatus": 206,
+      "contentRange": "bytes 1175885188-1175885191/3303014400",
+      "bytesHex": "77820a3b",
+      "float32LE": 0.0021134892012923956
+    },
+    {
+      "name": "Camelot",
+      "lonEast": 30.731,
+      "latNorth": 20.195,
+      "testedOrigin": 0,
+      "row": 6375,
+      "column": 3933,
+      "offset": 1175055732,
+      "httpStatus": 206,
+      "contentRange": "bytes 1175055732-1175055735/3303014400",
+      "bytesHex": "6a612a3c",
+      "float32LE": 0.01039920188486576
+    },
+    {
+      "name": "Camelot",
+      "lonEast": 30.731,
+      "latNorth": 20.195,
+      "testedOrigin": -180,
+      "row": 6375,
+      "column": 26973,
+      "offset": 1175147892,
+      "httpStatus": 206,
+      "contentRange": "bytes 1175147892-1175147895/3303014400",
+      "bytesHex": "e434313b",
+      "float32LE": 0.0027039581909775734
+    },
+    {
+      "name": "Sherlock",
+      "lonEast": 30.813,
+      "latNorth": 20.184,
+      "testedOrigin": 0,
+      "row": 6376,
+      "column": 3944,
+      "offset": 1175240096,
+      "httpStatus": 206,
+      "contentRange": "bytes 1175240096-1175240099/3303014400",
+      "bytesHex": "c6e1e63c",
+      "float32LE": 0.02818382903933525
+    },
+    {
+      "name": "Sherlock",
+      "lonEast": 30.813,
+      "latNorth": 20.184,
+      "testedOrigin": -180,
+      "row": 6376,
+      "column": 26984,
+      "offset": 1175332256,
+      "httpStatus": 206,
+      "contentRange": "bytes 1175332256-1175332259/3303014400",
+      "bytesHex": "2dd91c3b",
+      "float32LE": 0.002393315779045224
+    }
+  ]
+}

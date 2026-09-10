@@ -1,0 +1,2103 @@
+{
+  "schema": "cssearth-phoebe-source-model-comparison@1",
+  "scope": "Source-coordinate registration assessment only. Neither source model nor mounted geometry is changed. Does not qualify VIMS pointing or native detector coverage.",
+  "sourcePins": [
+    {
+      "path": "shape/phoebe_ver128q.tab",
+      "bytes": 16897992,
+      "sha256": "92550ba0625255a2f91cd5d9a7b52e020fc4ba76c7ef3fd76a9728a66df697c2"
+    },
+    {
+      "path": "shape/2023/phoebe_128_o.obj",
+      "bytes": 17787240,
+      "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9"
+    },
+    {
+      "path": "science/2023/phoebe_bestmap_c.cub",
+      "bytes": 326427,
+      "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15"
+    },
+    {
+      "path": "science/2023/phoebe_numimg_c.cub",
+      "bytes": 326413,
+      "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d"
+    }
+  ],
+  "numpyVersion": "2.3.5",
+  "method": {
+    "qualityMask": "2023 source numimg>=5, numimg<9999, 0<bestmap<=1500m; abs(lat)<60; interior ICQ records only",
+    "partition": "30-degree longitude by 20-degree latitude patches; 2-degree guard strips; (lonBin+2*latBin)%3; train=0, disjoint holdouts=1,2",
+    "sampling": "At most 200 deterministic original vertex records per patch; at most1200 nearest-triangle queries per partition",
+    "fit": "Robust translation from training candidate record displacements; independent KD-tree nearest-vertex, local-neighborhood and exact-triangle distance checks afterward",
+    "surfaceDistance": "Closest points on original 2023 source triangles; KD-tree centroid candidates; certify nearest using global triangle bounding radius, enlarge neighborhood from64 to512 when needed",
+    "limits": "Same-record candidates are not assumed identical physical points. Shape changes remain residuals. Geographic heldouts measure registration transferability, not source-author exact displacement or spacecraft pointing."
+  },
+  "qualityEligibleVertexCount": 84907,
+  "guardedSelectedCount": 14400,
+  "estimatedOldTo2023TranslationKm": [
+    0.20862199274057794,
+    -0.47678661658222266,
+    -0.8586701344977113
+  ],
+  "estimatedTranslationNormKm": 1.0040732112178328,
+  "differenceFromDocumented1_03Km": -0.025926788782167254,
+  "rawAllInteriorDisplacementKm": {
+    "count": 96774,
+    "min": 0.1470101650690224,
+    "median": 1.0659965426972136,
+    "p90": 1.5152619846346254,
+    "p95": 1.8162401542412674,
+    "p99": 3.552473467270542,
+    "max": 5.427253424857863,
+    "mean": 1.168157340966641,
+    "rms": 1.2632921307696254
+  },
+  "translatedAllInteriorResidualKm": {
+    "count": 96774,
+    "min": 0.006086898137217063,
+    "median": 0.31389948017074765,
+    "p90": 0.893382387735119,
+    "p95": 1.5113687850218067,
+    "p99": 4.236144336187178,
+    "max": 6.26380957975619,
+    "mean": 0.5061165149650538,
+    "rms": 0.8713297966594169
+  },
+  "rotationSensitivity": {
+    "fitUsesTrainingOnly": true,
+    "rotationAngleDegrees": 0.06022471962953134,
+    "matrix": [
+      [
+        0.9999996012450485,
+        -0.00017813737516352918,
+        -0.0008750867494005121
+      ],
+      [
+        0.00017765221296307536,
+        0.9999998305054609,
+        -0.0005544625686562081
+      ],
+      [
+        0.0008751853715847913,
+        0.0005543068864635849,
+        0.9999994633970765
+      ]
+    ],
+    "translationKm": [
+      0.20584163069703348,
+      -0.4749862297993889,
+      -0.8568132567171338
+    ],
+    "translationDifferenceKm": 0.0037973412742322225,
+    "spatialSingularValues": [
+      20069519.916502643,
+      19458692.542950705,
+      14917459.770843836
+    ]
+  },
+  "training": {
+    "count": 4800,
+    "patchCount": 24,
+    "longitudeDegrees": [
+      2.0742049195367365,
+      357.8725200970559
+    ],
+    "latitudeDegrees": [
+      -57.993176454289,
+      57.97585405293973
+    ],
+    "rawEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.2162985857869351,
+      "median": 1.0571652511749083,
+      "p90": 1.3697493512159875,
+      "p95": 1.4922180580546818,
+      "p99": 1.6899337919818203,
+      "max": 2.1220747765447396,
+      "mean": 1.0806439477459313,
+      "rms": 1.1031511299246415
+    },
+    "translatedEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.016020745771685465,
+      "median": 0.31697015936404105,
+      "p90": 0.7315692686101188,
+      "p95": 0.8977479124279352,
+      "p99": 1.3159452281629545,
+      "max": 1.7118605842917392,
+      "mean": 0.3806301300209864,
+      "rms": 0.4627588423552819
+    },
+    "directionDifferenceDegreesAfterTranslation": {
+      "count": 4800,
+      "min": 0.004188038660711031,
+      "median": 0.1258125108317938,
+      "p90": 0.3622796796567705,
+      "p95": 0.4580298988467839,
+      "p99": 0.7273034053394114,
+      "max": 0.8444187175672646,
+      "mean": 0.16963840981377287,
+      "rms": 0.22345540811863226
+    },
+    "nearestVertexIsSameRecord": 4284,
+    "nearestVertexDistanceKm": {
+      "count": 4800,
+      "min": 0.016020745771685465,
+      "median": 0.3165474372598701,
+      "p90": 0.6252200497376296,
+      "p95": 0.685431183226899,
+      "p99": 0.7936098074357276,
+      "max": 1.3767680777195004,
+      "mean": 0.3447127580443595,
+      "rms": 0.3945598355678258
+    },
+    "secondNeighborSeparationKm": {
+      "count": 4800,
+      "min": 0.0,
+      "median": 0.6951028301114388,
+      "p90": 1.0043705287410094,
+      "p95": 1.0684395426165538,
+      "p99": 1.1463851483358758,
+      "max": 1.2335774842887728,
+      "mean": 0.6393855472926174,
+      "rms": 0.7071840465017176
+    },
+    "localINeighborhoodAngleDegrees": {
+      "count": 4800,
+      "min": 0.005225775598842755,
+      "median": 1.1982991001907737,
+      "p90": 2.8350899900532345,
+      "p95": 3.504340118669827,
+      "p99": 5.053425168229189,
+      "max": 12.446106624298496,
+      "mean": 1.4615805328541434,
+      "rms": 1.8110530775269453
+    },
+    "localJNeighborhoodAngleDegrees": {
+      "count": 4800,
+      "min": 0.006642840655817736,
+      "median": 1.258365931591222,
+      "p90": 3.0853850277298083,
+      "p95": 3.7291650181224094,
+      "p99": 5.214419456295726,
+      "max": 8.965893453948391,
+      "mean": 1.5430981477192824,
+      "rms": 1.9084705521838725
+    },
+    "localNormalDifferenceDegrees": {
+      "count": 4800,
+      "min": 0.008783432491294462,
+      "median": 1.483510990357888,
+      "p90": 3.301277927961279,
+      "p95": 3.948730567116031,
+      "p99": 5.983394208048654,
+      "max": 14.030666014809752,
+      "mean": 1.7663607134735477,
+      "rms": 2.1519696951952283
+    },
+    "tangentialResidualKm": {
+      "count": 4800,
+      "min": 0.004403582802319398,
+      "median": 0.24128054282021047,
+      "p90": 0.6773211853779418,
+      "p95": 0.8378805128515996,
+      "p99": 1.25525594639859,
+      "max": 1.5795516541659527,
+      "mean": 0.3167005412587136,
+      "rms": 0.40957289623797777
+    },
+    "rigidFitEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.009792207283339023,
+      "median": 0.31174785092165,
+      "p90": 0.7389268861652553,
+      "p95": 0.9014245551465891,
+      "p99": 1.2363323903944554,
+      "max": 1.644749869840954,
+      "mean": 0.3759133484322855,
+      "rms": 0.45406006890613376
+    },
+    "sourceSurfaceIdentity": {
+      "distanceKm": {
+        "count": 1200,
+        "min": 0.00019648782187452085,
+        "median": 0.4333636785912302,
+        "p90": 0.9118076195165677,
+        "p95": 0.9877866736004782,
+        "p99": 1.339444026525239,
+        "max": 1.8078182545440982,
+        "mean": 0.4824482164692694,
+        "rms": 0.5764685555796155
+      },
+      "certifiedExactNearestTriangle": 1200,
+      "queryCount": 1200,
+      "uncertifiedAreUpperBounds": 0
+    },
+    "sourceSurfaceTranslated": {
+      "distanceKm": {
+        "count": 1200,
+        "min": 8.440686777484744e-05,
+        "median": 0.1147756800817743,
+        "p90": 0.3661364865828012,
+        "p95": 0.47968476926907144,
+        "p99": 0.6969987873255616,
+        "max": 1.0833317422893292,
+        "mean": 0.16046007072313934,
+        "rms": 0.2188068027643805
+      },
+      "certifiedExactNearestTriangle": 1200,
+      "queryCount": 1200,
+      "uncertifiedAreUpperBounds": 0
+    }
+  },
+  "holdout1": {
+    "count": 4800,
+    "patchCount": 24,
+    "longitudeDegrees": [
+      2.2454388877065834,
+      357.6386945346017
+    ],
+    "latitudeDegrees": [
+      -57.99294412461251,
+      57.99421896280874
+    ],
+    "rawEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.5393482910621537,
+      "median": 1.055970852979771,
+      "p90": 1.5799103230101494,
+      "p95": 1.8199149538606285,
+      "p99": 2.508596529805744,
+      "max": 2.951320593157156,
+      "mean": 1.1445495773407792,
+      "rms": 1.1957006856715713
+    },
+    "translatedEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.019348134127692,
+      "median": 0.2967956434282025,
+      "p90": 0.8235407582313388,
+      "p95": 1.1350806637510074,
+      "p99": 2.3148393838581276,
+      "max": 3.1796922335431104,
+      "mean": 0.42543381129336333,
+      "rms": 0.5962507196855413
+    },
+    "directionDifferenceDegreesAfterTranslation": {
+      "count": 4800,
+      "min": 0.0018457800365170112,
+      "median": 0.12349856546506324,
+      "p90": 0.373278850102882,
+      "p95": 0.4432060113828235,
+      "p99": 0.8632449674038685,
+      "max": 1.024926162403799,
+      "mean": 0.16893146043352245,
+      "rms": 0.2319517329062762
+    },
+    "nearestVertexIsSameRecord": 4188,
+    "nearestVertexDistanceKm": {
+      "count": 4800,
+      "min": 0.019348134127692,
+      "median": 0.2963757478106481,
+      "p90": 0.6908327716685667,
+      "p95": 0.8503667831094266,
+      "p99": 1.9216818599480434,
+      "max": 3.032483371671928,
+      "mean": 0.3828723660142824,
+      "rms": 0.5078616300436729
+    },
+    "secondNeighborSeparationKm": {
+      "count": 4800,
+      "min": 0.0,
+      "median": 0.7204596301564822,
+      "p90": 1.0192062464450524,
+      "p95": 1.0749139110254164,
+      "p99": 1.147583831002544,
+      "max": 1.2809668616865115,
+      "mean": 0.6512386333820677,
+      "rms": 0.7251827547841996
+    },
+    "localINeighborhoodAngleDegrees": {
+      "count": 4800,
+      "min": 0.007726434378723481,
+      "median": 1.2978994961133352,
+      "p90": 3.1475258117561133,
+      "p95": 4.119662581702061,
+      "p99": 7.263565747071277,
+      "max": 9.809489490055034,
+      "mean": 1.630501324379277,
+      "rms": 2.085423038101331
+    },
+    "localJNeighborhoodAngleDegrees": {
+      "count": 4800,
+      "min": 0.007025432593839943,
+      "median": 1.3497806705181277,
+      "p90": 3.116343704665814,
+      "p95": 3.8376146574542638,
+      "p99": 6.260956393664201,
+      "max": 18.406142212303212,
+      "mean": 1.6536076977905725,
+      "rms": 2.1649094440693437
+    },
+    "localNormalDifferenceDegrees": {
+      "count": 4800,
+      "min": 0.028281678519793903,
+      "median": 1.512674875316091,
+      "p90": 3.711263405092797,
+      "p95": 4.969908993629196,
+      "p99": 8.264667127068135,
+      "max": 18.600539835074258,
+      "mean": 1.9486147629400887,
+      "rms": 2.5871658964461903
+    },
+    "tangentialResidualKm": {
+      "count": 4800,
+      "min": 0.0019551164356612916,
+      "median": 0.22758067496269913,
+      "p90": 0.7275164295002392,
+      "p95": 0.8876486808638722,
+      "p99": 1.6643271614933108,
+      "max": 2.2422151386584415,
+      "mean": 0.3266245378583455,
+      "rms": 0.45409239279122743
+    },
+    "rigidFitEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.0023456306861072856,
+      "median": 0.3140228740547568,
+      "p90": 0.8672832845206313,
+      "p95": 1.1728050764695124,
+      "p99": 2.2889398675900137,
+      "max": 3.1685830116799156,
+      "mean": 0.44828568173540245,
+      "rms": 0.6160330977973586
+    },
+    "sourceSurfaceIdentity": {
+      "distanceKm": {
+        "count": 1200,
+        "min": 0.0013440904342614656,
+        "median": 0.5422503239994398,
+        "p90": 1.034935589050962,
+        "p95": 1.1989447010293772,
+        "p99": 1.4544347168717562,
+        "max": 2.2208568280454877,
+        "mean": 0.5534437186261612,
+        "rms": 0.6579166812033869
+      },
+      "certifiedExactNearestTriangle": 1200,
+      "queryCount": 1200,
+      "uncertifiedAreUpperBounds": 0
+    },
+    "sourceSurfaceTranslated": {
+      "distanceKm": {
+        "count": 1200,
+        "min": 7.971568730041868e-05,
+        "median": 0.13736741999335367,
+        "p90": 0.3924184537271797,
+        "p95": 0.6802003425854926,
+        "p99": 1.8415289384387339,
+        "max": 2.7745622692541922,
+        "mean": 0.2157803614270253,
+        "rms": 0.38221995367348927
+      },
+      "certifiedExactNearestTriangle": 1200,
+      "queryCount": 1200,
+      "uncertifiedAreUpperBounds": 0
+    }
+  },
+  "holdout2": {
+    "count": 4800,
+    "patchCount": 24,
+    "longitudeDegrees": [
+      2.318885411818718,
+      357.6618820010532
+    ],
+    "latitudeDegrees": [
+      -57.99964462753079,
+      57.96354407162328
+    ],
+    "rawEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.16581795886757944,
+      "median": 1.0754545400255777,
+      "p90": 1.4495572314074479,
+      "p95": 1.6675159179985055,
+      "p99": 2.080528557249751,
+      "max": 2.5623131647360955,
+      "mean": 1.1227623839145475,
+      "rms": 1.1572416831253778
+    },
+    "translatedEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.013772539940994703,
+      "median": 0.3155388588087832,
+      "p90": 0.8864290363705013,
+      "p95": 1.166006297039732,
+      "p99": 1.7687676092329996,
+      "max": 2.6423465213847876,
+      "mean": 0.423386279302367,
+      "rms": 0.5561213234472272
+    },
+    "directionDifferenceDegreesAfterTranslation": {
+      "count": 4800,
+      "min": 0.0009328820168068467,
+      "median": 0.1360743759340154,
+      "p90": 0.3839603619896328,
+      "p95": 0.47357137222477474,
+      "p99": 0.6930899208608909,
+      "max": 1.1008776162708651,
+      "mean": 0.17362528904919422,
+      "rms": 0.22801215294656826
+    },
+    "nearestVertexIsSameRecord": 4190,
+    "nearestVertexDistanceKm": {
+      "count": 4800,
+      "min": 0.013772539940994703,
+      "median": 0.31175221782094986,
+      "p90": 0.6810180402037839,
+      "p95": 0.8612239679107645,
+      "p99": 1.3768073050467184,
+      "max": 1.8115943980116023,
+      "mean": 0.37154138704462186,
+      "rms": 0.45459848408561626
+    },
+    "secondNeighborSeparationKm": {
+      "count": 4800,
+      "min": 0.0,
+      "median": 0.704585614479563,
+      "p90": 1.0239096392822857,
+      "p95": 1.0764573750846602,
+      "p99": 1.168895437320129,
+      "max": 1.3023705043808866,
+      "mean": 0.646406326262158,
+      "rms": 0.7173988626125418
+    },
+    "localINeighborhoodAngleDegrees": {
+      "count": 4800,
+      "min": 0.037605421327265985,
+      "median": 1.346955778974508,
+      "p90": 3.606439275043808,
+      "p95": 4.419196028515691,
+      "p99": 6.394468311359215,
+      "max": 10.021413811125539,
+      "mean": 1.7267639422332188,
+      "rms": 2.1977914032210477
+    },
+    "localJNeighborhoodAngleDegrees": {
+      "count": 4800,
+      "min": 0.022610198148553542,
+      "median": 1.4445285598022304,
+      "p90": 3.353541480426435,
+      "p95": 4.084423173048842,
+      "p99": 5.8625444327027765,
+      "max": 9.722759056370888,
+      "mean": 1.729858406264916,
+      "rms": 2.127712037738761
+    },
+    "localNormalDifferenceDegrees": {
+      "count": 4800,
+      "min": 0.010226422092269455,
+      "median": 1.6244232977141495,
+      "p90": 3.9891168800676935,
+      "p95": 4.857292039053791,
+      "p99": 7.081035628344856,
+      "max": 10.756869378290855,
+      "mean": 2.009799110199989,
+      "rms": 2.4977918834771717
+    },
+    "tangentialResidualKm": {
+      "count": 4800,
+      "min": 0.0042771392986171025,
+      "median": 0.25415858171982864,
+      "p90": 0.7180989766715529,
+      "p95": 0.9496875718093343,
+      "p99": 1.5213793897287005,
+      "max": 2.5102271270251006,
+      "mean": 0.33784281950279166,
+      "rms": 0.4572387011580454
+    },
+    "rigidFitEqualIndexDistanceKm": {
+      "count": 4800,
+      "min": 0.008429834778077563,
+      "median": 0.33308202681259613,
+      "p90": 0.8881691799496896,
+      "p95": 1.1722180362342822,
+      "p99": 1.7750444150777283,
+      "max": 2.584470038061937,
+      "mean": 0.4352597353507375,
+      "rms": 0.5631105998822047
+    },
+    "sourceSurfaceIdentity": {
+      "distanceKm": {
+        "count": 1200,
+        "min": 0.0008320824381597797,
+        "median": 0.5179640503850975,
+        "p90": 0.936641862657876,
+        "p95": 1.0073628169692772,
+        "p99": 1.1912712271269421,
+        "max": 1.5729961036303157,
+        "mean": 0.5201613480990251,
+        "rms": 0.6051685263853899
+      },
+      "certifiedExactNearestTriangle": 1200,
+      "queryCount": 1200,
+      "uncertifiedAreUpperBounds": 0
+    },
+    "sourceSurfaceTranslated": {
+      "distanceKm": {
+        "count": 1200,
+        "min": 0.0001566604682537304,
+        "median": 0.1076849799261962,
+        "p90": 0.4495561137801381,
+        "p95": 0.6834730769410163,
+        "p99": 1.2631407228724765,
+        "max": 1.752883414724733,
+        "mean": 0.19138641898669054,
+        "rms": 0.30878739672409894
+      },
+      "certifiedExactNearestTriangle": 1200,
+      "queryCount": 1200,
+      "uncertifiedAreUpperBounds": 0
+    }
+  },
+  "perPatchIndependentFits": [
+    {
+      "patch": 0,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.01656368534500018,
+        -0.5393669156649998,
+        -0.9086393432949998
+      ],
+      "normKm": 1.0567953830187524,
+      "departureFromTrainingTranslationKm": 0.20808558119382295
+    },
+    {
+      "patch": 1,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.1577648749800002,
+        -0.5691676297350001,
+        -0.7910249562749996
+      ],
+      "normKm": 0.987199082234925,
+      "departureFromTrainingTranslationKm": 0.1252859455598646
+    },
+    {
+      "patch": 2,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.1862597744104655,
+        -0.5560863919002176,
+        -0.7757725330342264
+      ],
+      "normKm": 0.9724956564583617,
+      "departureFromTrainingTranslationKm": 0.11687829354729161
+    },
+    {
+      "patch": 3,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.20730689928000007,
+        -0.49405831642000037,
+        -0.7112880636249997
+      ],
+      "normKm": 0.890505743927716,
+      "departureFromTrainingTranslationKm": 0.14839648210394119
+    },
+    {
+      "patch": 4,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.1750180149500001,
+        -0.48047493110999995,
+        -0.721826496635
+      ],
+      "normKm": 0.884602145727985,
+      "departureFromTrainingTranslationKm": 0.14095748369954095
+    },
+    {
+      "patch": 5,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.20620128438473107,
+        -0.25716130759224076,
+        -0.9753970690636606
+      ],
+      "normKm": 1.0295874659990978,
+      "departureFromTrainingTranslationKm": 0.24872939800323665
+    },
+    {
+      "patch": 6,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.46552362047499946,
+        0.2677984613249999,
+        -1.1094447149850004
+      ],
+      "normKm": 1.2325971899677273,
+      "departureFromTrainingTranslationKm": 0.826615554410438
+    },
+    {
+      "patch": 7,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.11385856702879493,
+        -0.2967236524197765,
+        -0.7790371219356663
+      ],
+      "normKm": 0.8413724125171856,
+      "departureFromTrainingTranslationKm": 0.21850444985241332
+    },
+    {
+      "patch": 8,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        -0.012604364294999955,
+        -0.49983409492500075,
+        -0.7691694039499997
+      ],
+      "normKm": 0.9173955332470142,
+      "departureFromTrainingTranslationKm": 0.2397554338774575
+    },
+    {
+      "patch": 9,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.1905887496049999,
+        -0.6236411397949992,
+        -0.721995203365
+      ],
+      "normKm": 0.9728974336500589,
+      "departureFromTrainingTranslationKm": 0.20142364718714184
+    },
+    {
+      "patch": 10,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.295583163465,
+        -0.30186017514499985,
+        -0.9486325403699997
+      ],
+      "normKm": 1.0384568688739009,
+      "departureFromTrainingTranslationKm": 0.215069150735252
+    },
+    {
+      "patch": 11,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        -0.2586321081150001,
+        -0.4057005070999999,
+        -0.9363054777650004
+      ],
+      "normKm": 1.0526877108154877,
+      "departureFromTrainingTranslationKm": 0.47896437889670157
+    },
+    {
+      "patch": 12,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.25244536594413236,
+        -0.4472660188014531,
+        -0.7191628352487041
+      ],
+      "normKm": 0.8837254879000171,
+      "departureFromTrainingTranslationKm": 0.14917855166217447
+    },
+    {
+      "patch": 13,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.27676430897499943,
+        -0.4392879925599994,
+        -0.8586911066349997
+      ],
+      "normKm": 1.0034554498052435,
+      "departureFromTrainingTranslationKm": 0.07777867641701358
+    },
+    {
+      "patch": 14,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.2840159258559046,
+        -0.4632315341591237,
+        -0.9238736073643632
+      ],
+      "normKm": 1.0718166553863788,
+      "departureFromTrainingTranslationKm": 0.10059561761810284
+    },
+    {
+      "patch": 15,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.2208814246150003,
+        -0.565282119559999,
+        -0.9457825854450012
+      ],
+      "normKm": 1.123760284653817,
+      "departureFromTrainingTranslationKm": 0.12478111566746465
+    },
+    {
+      "patch": 16,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.26656831734500014,
+        -0.3827156441450002,
+        -0.8336589843500002
+      ],
+      "normKm": 0.9552576795152923,
+      "departureFromTrainingTranslationKm": 0.11328142840800112
+    },
+    {
+      "patch": 17,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.19242829662873326,
+        -0.37360826731872576,
+        -0.8978347646257612
+      ],
+      "normKm": 0.9913218706973695,
+      "departureFromTrainingTranslationKm": 0.11154315668641386
+    },
+    {
+      "patch": 18,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.12004797299164356,
+        0.1804958515531128,
+        -0.987442251980102
+      ],
+      "normKm": 1.0109562152946194,
+      "departureFromTrainingTranslationKm": 0.6756092495914051
+    },
+    {
+      "patch": 19,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.5977939041557385,
+        -0.6989311319240071,
+        -1.1573487805629614
+      ],
+      "normKm": 1.4782822730753784,
+      "departureFromTrainingTranslationKm": 0.5385275257090736
+    },
+    {
+      "patch": 20,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.15005980638000008,
+        -0.5256214468799993,
+        -0.797022619925
+      ],
+      "normKm": 0.9664579181646442,
+      "departureFromTrainingTranslationKm": 0.09805501707988407
+    },
+    {
+      "patch": 21,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.17803620998999972,
+        -0.5996650547450002,
+        -0.6886161801749998
+      ],
+      "normKm": 0.9303157063861359,
+      "departureFromTrainingTranslationKm": 0.21202110284728728
+    },
+    {
+      "patch": 22,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.07819601337500014,
+        -0.38247815331999974,
+        -1.1345288351899996
+      ],
+      "normKm": 1.1998165827127067,
+      "departureFromTrainingTranslationKm": 0.31937915568175335
+    },
+    {
+      "patch": 23,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.04683449951000029,
+        -0.2642431545000002,
+        -0.9070803611650001
+      ],
+      "normKm": 0.9459453983479651,
+      "departureFromTrainingTranslationKm": 0.2714654053202905
+    },
+    {
+      "patch": 24,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.16577657284762456,
+        -0.5141018032526994,
+        -0.8562727044078854
+      ],
+      "normKm": 1.0124156658837193,
+      "departureFromTrainingTranslationKm": 0.056867396925581286
+    },
+    {
+      "patch": 25,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.1798454187850007,
+        -0.6063508211749994,
+        -0.8087577873650005
+      ],
+      "normKm": 1.026691215322835,
+      "departureFromTrainingTranslationKm": 0.14179639176183553
+    },
+    {
+      "patch": 26,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.2698172476149999,
+        -0.40553328757000046,
+        -0.7286768369200004
+      ],
+      "normKm": 0.876486467152576,
+      "departureFromTrainingTranslationKm": 0.16037504023256477
+    },
+    {
+      "patch": 27,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.1515327116200001,
+        -0.5742351270649992,
+        -1.002864614895
+      ],
+      "normKm": 1.1655237362039275,
+      "departureFromTrainingTranslationKm": 0.1831596199800061
+    },
+    {
+      "patch": 28,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.11812365882000034,
+        -0.5687013264750002,
+        -0.9619348508849999
+      ],
+      "normKm": 1.1236961577110582,
+      "departureFromTrainingTranslationKm": 0.16523275700544657
+    },
+    {
+      "patch": 29,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.24808260264500048,
+        -0.42215776850500025,
+        -1.0428161344150002
+      ],
+      "normKm": 1.152053666041857,
+      "departureFromTrainingTranslationKm": 0.19608977551573517
+    },
+    {
+      "patch": 30,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.3181432150228725,
+        -0.6630183984669944,
+        -1.1053451160627856
+      ],
+      "normKm": 1.3276280833029561,
+      "departureFromTrainingTranslationKm": 0.32791114839894464
+    },
+    {
+      "patch": 31,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.19492020849499922,
+        -0.37085920232500075,
+        -1.0463794040549996
+      ],
+      "normKm": 1.1271380983976036,
+      "departureFromTrainingTranslationKm": 0.2159701966949704
+    },
+    {
+      "patch": 32,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.25194488905999995,
+        -0.4841851054149995,
+        -0.9091702554850003
+      ],
+      "normKm": 1.0604253848752634,
+      "departureFromTrainingTranslationKm": 0.06694679381600686
+    },
+    {
+      "patch": 33,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.22292931050999998,
+        -0.4156068830449998,
+        -0.8900459446849993
+      ],
+      "normKm": 1.0072776888073403,
+      "departureFromTrainingTranslationKm": 0.07022891571389617
+    },
+    {
+      "patch": 34,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.1243925702450003,
+        -0.5262650939399994,
+        -1.0141553548299997
+      ],
+      "normKm": 1.1493213407755885,
+      "departureFromTrainingTranslationKm": 0.18362562206120045
+    },
+    {
+      "patch": 35,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.3379541666800003,
+        -0.4108751281599999,
+        -0.852150063900001
+      ],
+      "normKm": 1.0045850492226358,
+      "departureFromTrainingTranslationKm": 0.14530535723960397
+    },
+    {
+      "patch": 36,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.22521257030946704,
+        -0.5507494617966728,
+        -0.9217564604746622
+      ],
+      "normKm": 1.097123805193151,
+      "departureFromTrainingTranslationKm": 0.09861863039789259
+    },
+    {
+      "patch": 37,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.29712061878854834,
+        -0.3754105376019999,
+        -0.8345926596406904
+      ],
+      "normKm": 0.9621635211220771,
+      "departureFromTrainingTranslationKm": 0.13670713586815192
+    },
+    {
+      "patch": 38,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.18083851698110998,
+        -0.6276510475188982,
+        -0.9256344855677104
+      ],
+      "normKm": 1.1328934669895918,
+      "departureFromTrainingTranslationKm": 0.1673804718638049
+    },
+    {
+      "patch": 39,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.3111403037550001,
+        -0.3878992738799995,
+        -0.8076624993349999
+      ],
+      "normKm": 0.948468685898192,
+      "departureFromTrainingTranslationKm": 0.14495772704759322
+    },
+    {
+      "patch": 40,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        -0.03724985508501421,
+        -0.5294363155409129,
+        -0.9433898298105338
+      ],
+      "normKm": 1.082439252294252,
+      "departureFromTrainingTranslationKm": 0.2653344740652999
+    },
+    {
+      "patch": 41,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.19170552977999997,
+        -0.3899102007849999,
+        -0.9589119405449997
+      ],
+      "normKm": 1.0527549973969283,
+      "departureFromTrainingTranslationKm": 0.1337239620280925
+    },
+    {
+      "patch": 42,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.14034987961982268,
+        -0.7239585550230927,
+        -0.9514655728973593
+      ],
+      "normKm": 1.20378603352478,
+      "departureFromTrainingTranslationKm": 0.2727013787467407
+    },
+    {
+      "patch": 43,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.06434449216499939,
+        -0.5517316012150002,
+        -0.694779736945
+      ],
+      "normKm": 0.8895318186105559,
+      "departureFromTrainingTranslationKm": 0.2308523560718606
+    },
+    {
+      "patch": 44,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.27639409707848706,
+        -0.43415726162097834,
+        -0.9295495694142527
+      ],
+      "normKm": 1.062519941796991,
+      "departureFromTrainingTranslationKm": 0.10693088573881929
+    },
+    {
+      "patch": 45,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.26483618503185147,
+        -0.3649997524919389,
+        -0.8851606663057356
+      ],
+      "normKm": 0.9934145304937992,
+      "departureFromTrainingTranslationKm": 0.12789873601240864
+    },
+    {
+      "patch": 46,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.6060630812215572,
+        -0.5807885806992904,
+        -0.41191349737346244
+      ],
+      "normKm": 0.9350404072599758,
+      "departureFromTrainingTranslationKm": 0.6069327146955593
+    },
+    {
+      "patch": 47,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.25290476159225384,
+        -0.5460847368559965,
+        -1.1406360349420734
+      ],
+      "normKm": 1.289658839566299,
+      "departureFromTrainingTranslationKm": 0.2937140822365337
+    },
+    {
+      "patch": 48,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.07787773507999979,
+        -0.44153651196,
+        -1.013079618819999
+      ],
+      "normKm": 1.10785818004087,
+      "departureFromTrainingTranslationKm": 0.2053750706287599
+    },
+    {
+      "patch": 49,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.3005926552788092,
+        -0.44832803094475676,
+        -0.516031101473421
+      ],
+      "normKm": 0.7467543541394586,
+      "departureFromTrainingTranslationKm": 0.355907292445697
+    },
+    {
+      "patch": 50,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.18050461944500015,
+        -0.047746514189998875,
+        -1.3188098936099992
+      ],
+      "normKm": 1.3319614043739771,
+      "departureFromTrainingTranslationKm": 0.6297575676859207
+    },
+    {
+      "patch": 51,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.4273758637750004,
+        -0.3543082533100012,
+        -1.014358135645
+      ],
+      "normKm": 1.156333383869121,
+      "departureFromTrainingTranslationKm": 0.2951151627138551
+    },
+    {
+      "patch": 52,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        -0.040465461045000345,
+        -0.7925135076149998,
+        -0.904217430299999
+      ],
+      "normKm": 1.2030479103294882,
+      "departureFromTrainingTranslationKm": 0.4047253210629486
+    },
+    {
+      "patch": 53,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.30241522482775285,
+        -0.5269520426395227,
+        -0.850936086413759
+      ],
+      "normKm": 1.0455743142458838,
+      "departureFromTrainingTranslationKm": 0.10664687457508532
+    },
+    {
+      "patch": 54,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.034962452800000036,
+        -0.5637327749849996,
+        -0.8348934436850007
+      ],
+      "normKm": 1.0080000381975587,
+      "departureFromTrainingTranslationKm": 0.19565940125477538
+    },
+    {
+      "patch": 55,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.050805568893382794,
+        -0.5663316000985444,
+        -0.811227137790231
+      ],
+      "normKm": 0.9906574363462318,
+      "departureFromTrainingTranslationKm": 0.18755043493802373
+    },
+    {
+      "patch": 56,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.2230206846201606,
+        -0.43556906175692656,
+        -0.9030948006751176
+      ],
+      "normKm": 1.0271508420551894,
+      "departureFromTrainingTranslationKm": 0.06228772044788148
+    },
+    {
+      "patch": 57,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.3590097457740898,
+        -0.7074417888940719,
+        -1.243460424979216
+      ],
+      "normKm": 1.4749765119227878,
+      "departureFromTrainingTranslationKm": 0.47316155002865373
+    },
+    {
+      "patch": 58,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.26873149855499956,
+        -0.6707348946050005,
+        -0.8161843883400004
+      ],
+      "normKm": 1.090072875053011,
+      "departureFromTrainingTranslationKm": 0.2074466819783632
+    },
+    {
+      "patch": 59,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.3555365206449998,
+        -0.7275301125900003,
+        -1.4039003993250008
+      ],
+      "normKm": 1.6206920168441836,
+      "departureFromTrainingTranslationKm": 0.6178448195001862
+    },
+    {
+      "patch": 60,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.5348433842800001,
+        0.0679645320599999,
+        -1.5734710590600018
+      ],
+      "normKm": 1.663276223910395,
+      "departureFromTrainingTranslationKm": 0.956093390835876
+    },
+    {
+      "patch": 61,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.7152585097550005,
+        0.29254617947500017,
+        -0.3965130930349999
+      ],
+      "normKm": 0.8685623960606087,
+      "departureFromTrainingTranslationKm": 1.0306030479458599
+    },
+    {
+      "patch": 62,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.0566955815399999,
+        -0.010563681810000176,
+        -1.1304856919800002
+      ],
+      "normKm": 1.1319557765703754,
+      "departureFromTrainingTranslationKm": 0.5606506547015874
+    },
+    {
+      "patch": 63,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.7143733821599999,
+        -0.21587403599000018,
+        -0.9217859637849997
+      ],
+      "normKm": 1.1860102409272737,
+      "departureFromTrainingTranslationKm": 0.5725761525924661
+    },
+    {
+      "patch": 64,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        -0.04251742464999975,
+        -0.6383521229950001,
+        -0.7295257240600006
+      ],
+      "normKm": 0.9703138391244145,
+      "departureFromTrainingTranslationKm": 0.32535011691560817
+    },
+    {
+      "patch": 65,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        -0.0691782279850008,
+        -0.6208612305350002,
+        -0.860829846935
+      ],
+      "normKm": 1.0636175629344953,
+      "departureFromTrainingTranslationKm": 0.31294587611699554
+    },
+    {
+      "patch": 66,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.17978974177500015,
+        -0.38780657274499986,
+        -0.8092771652199997
+      ],
+      "normKm": 0.9152310196110394,
+      "departureFromTrainingTranslationKm": 0.10577529159064095
+    },
+    {
+      "patch": 67,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        0.2595395297251787,
+        -0.5219593980347726,
+        -0.7277910013252264
+      ],
+      "normKm": 0.9324602523951168,
+      "departureFromTrainingTranslationKm": 0.14752126374431268
+    },
+    {
+      "patch": 68,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        0.56420911785,
+        -0.48210698331999974,
+        -0.43904126045000025
+      ],
+      "normKm": 0.862273912633631,
+      "departureFromTrainingTranslationKm": 0.5500535444666801
+    },
+    {
+      "patch": 69,
+      "partition": 1,
+      "count": 200,
+      "translationKm": [
+        0.4578260472649998,
+        -1.7655748351199998,
+        0.08148886915500078
+      ],
+      "normKm": 1.8257873982913424,
+      "departureFromTrainingTranslationKm": 1.6146134785707842
+    },
+    {
+      "patch": 70,
+      "partition": 2,
+      "count": 200,
+      "translationKm": [
+        -0.13038338557499993,
+        -1.512309974359999,
+        -0.4577388451299999
+      ],
+      "normKm": 1.5854356297635317,
+      "departureFromTrainingTranslationKm": 1.1610250513336497
+    },
+    {
+      "patch": 71,
+      "partition": 0,
+      "count": 200,
+      "translationKm": [
+        -0.34020999452,
+        -0.7704464615449997,
+        -0.55296130283
+      ],
+      "normKm": 1.0075201203479562,
+      "departureFromTrainingTranslationKm": 0.6934771406063753
+    }
+  ],
+  "timingSeconds": 1.9697936669981573,
+  "peakRssBytesMacOS": 145309696,
+  "surfaceRefinement": {
+    "method": "Training-only robust point-to-plane translation with updated certified nearest original triangles, at most12 iterations. No rotation or scale fitted. Geographic holdouts unchanged.",
+    "translationKm": [
+      0.1960378706536209,
+      -0.4891583620809242,
+      -0.7886686239183882
+    ],
+    "normKm": 0.9485277793915275,
+    "differenceFromDocumented1_03Km": -0.08147222060847248,
+    "differenceFromCandidateRecordFitKm": 0.07219163177800576,
+    "iterations": [
+      {
+        "iteration": 0,
+        "translationKm": [
+          0.19591332880294235,
+          -0.48770139459748285,
+          -0.7953856733464866
+        ],
+        "stepKm": [
+          -0.012708663937635586,
+          -0.010914778015260196,
+          0.06328446115122473
+        ],
+        "stepNormKm": 0.0654642310074978,
+        "huberThresholdKm": 0.34547811331965667,
+        "normalSystemCondition": 1.1037914263549042,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 1.904956617742164e-06,
+          "median": 0.11515937110655222,
+          "p90": 0.360119918945875,
+          "p95": 0.4544360722706408,
+          "p99": 0.6698686145822834,
+          "max": 1.3294429368019887,
+          "mean": 0.15871102592333688,
+          "rms": 0.216878985311468
+        }
+      },
+      {
+        "iteration": 1,
+        "translationKm": [
+          0.19590930301045087,
+          -0.4889869457745994,
+          -0.7892788985800337
+        ],
+        "stepKm": [
+          -4.025792491480597e-06,
+          -0.0012855511771165302,
+          0.0061067747664528315
+        ],
+        "stepNormKm": 0.006240621450158302,
+        "huberThresholdKm": 0.35662872405659357,
+        "normalSystemCondition": 1.10626484370685,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 9.778753937620503e-05,
+          "median": 0.11887624135219786,
+          "p90": 0.34292579766598247,
+          "p95": 0.4430349869212175,
+          "p99": 0.6328462993801536,
+          "max": 1.350363540097486,
+          "mean": 0.15784736887424158,
+          "rms": 0.21269368786113171
+        }
+      },
+      {
+        "iteration": 2,
+        "translationKm": [
+          0.19595834958390426,
+          -0.4891524445064845,
+          -0.788730577210393
+        ],
+        "stepKm": [
+          4.9046573453397247e-05,
+          -0.0001654987318850951,
+          0.0005483213696408071
+        ],
+        "stepNormKm": 0.0005748493028854298,
+        "huberThresholdKm": 0.35892596354492295,
+        "normalSystemCondition": 1.1065038868460382,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 5.893258274000078e-05,
+          "median": 0.11964198784830765,
+          "p90": 0.3427341656491887,
+          "p95": 0.4404944774206798,
+          "p99": 0.631275284294907,
+          "max": 1.3533677637398451,
+          "mean": 0.15812025638203042,
+          "rms": 0.2126515496243548
+        }
+      },
+      {
+        "iteration": 3,
+        "translationKm": [
+          0.19602965127320257,
+          -0.4891317943287944,
+          -0.7886613883003597
+        ],
+        "stepKm": [
+          7.130168929829937e-05,
+          2.065017769010497e-05,
+          6.91889100332361e-05
+        ],
+        "stepNormKm": 0.00010147643079558607,
+        "huberThresholdKm": 0.3583999613199961,
+        "normalSystemCondition": 1.1066126060222818,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 1.898827930151375e-06,
+          "median": 0.11946665377333203,
+          "p90": 0.3424512727665415,
+          "p95": 0.44017502137245584,
+          "p99": 0.6315910375591891,
+          "max": 1.3536709476346975,
+          "mean": 0.1581484369696033,
+          "rms": 0.21265191386713586
+        }
+      },
+      {
+        "iteration": 4,
+        "translationKm": [
+          0.1960169970188648,
+          -0.48915049725741877,
+          -0.7886691975208034
+        ],
+        "stepKm": [
+          -1.2654254337779092e-05,
+          -1.8702928624390954e-05,
+          -7.809220443742105e-06
+        ],
+        "stepNormKm": 2.3893798691568973e-05,
+        "huberThresholdKm": 0.3583665881308825,
+        "normalSystemCondition": 1.1067002410014148,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 2.126817366435758e-05,
+          "median": 0.11945552937696084,
+          "p90": 0.34244331010707535,
+          "p95": 0.44019145859814884,
+          "p99": 0.6316811573865144,
+          "max": 1.3537701735507393,
+          "mean": 0.15814741894483447,
+          "rms": 0.2126519243971023
+        }
+      },
+      {
+        "iteration": 5,
+        "translationKm": [
+          0.19601422131051607,
+          -0.48915099520405814,
+          -0.7886683016268461
+        ],
+        "stepKm": [
+          -2.7757083487237644e-06,
+          -4.979466393598114e-07,
+          8.958939573338434e-07
+        ],
+        "stepNormKm": 2.9589075138658576e-06,
+        "huberThresholdKm": 0.3583991632539508,
+        "normalSystemCondition": 1.106696238509377,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 2.6177604271855593e-05,
+          "median": 0.11946638775131693,
+          "p90": 0.342440301955679,
+          "p95": 0.44017919678789796,
+          "p99": 0.6316602263649916,
+          "max": 1.3537525487449908,
+          "mean": 0.15814806532462763,
+          "rms": 0.2126515722759848
+        }
+      },
+      {
+        "iteration": 6,
+        "translationKm": [
+          0.19601429889011296,
+          -0.48915284262476694,
+          -0.7886692876305103
+        ],
+        "stepKm": [
+          7.757959687781423e-08,
+          -1.8474207088125522e-06,
+          -9.860036641893044e-07
+        ],
+        "stepNormKm": 2.095515472382853e-06,
+        "huberThresholdKm": 0.3584013079944877,
+        "normalSystemCondition": 1.1066987924610405,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 2.6398687444442893e-05,
+          "median": 0.11946710266482924,
+          "p90": 0.3424380685859025,
+          "p95": 0.4401768370757571,
+          "p99": 0.6316593917837484,
+          "max": 1.353750620618574,
+          "mean": 0.15814822530692418,
+          "rms": 0.2126515372628039
+        }
+      },
+      {
+        "iteration": 7,
+        "translationKm": [
+          0.1960118786894931,
+          -0.48915710603688245,
+          -0.7886567345740582
+        ],
+        "stepKm": [
+          -2.420200619843689e-06,
+          -4.26341211549235e-06,
+          1.2553056452109663e-05
+        ],
+        "stepNormKm": 1.347639715193459e-05,
+        "huberThresholdKm": 0.35840427675529507,
+        "normalSystemCondition": 1.1066594555864786,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 2.4787415429069246e-05,
+          "median": 0.11946809225176502,
+          "p90": 0.3424386672208365,
+          "p95": 0.4401765322356179,
+          "p99": 0.6316577452688867,
+          "max": 1.353749876806872,
+          "mean": 0.15814812246634016,
+          "rms": 0.21265143420209506
+        }
+      },
+      {
+        "iteration": 8,
+        "translationKm": [
+          0.19603114173936334,
+          -0.4891276641888929,
+          -0.7886564906670571
+        ],
+        "stepKm": [
+          1.9263049870238898e-05,
+          2.9441847989509735e-05,
+          2.439070010455448e-07
+        ],
+        "stepNormKm": 3.51844709206472e-05,
+        "huberThresholdKm": 0.35842827108136394,
+        "normalSystemCondition": 1.1066605977132733,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 1.9558703776001772e-05,
+          "median": 0.11947609036045465,
+          "p90": 0.34242798554226067,
+          "p95": 0.4401665767810838,
+          "p99": 0.6316631954701305,
+          "max": 1.353753780891289,
+          "mean": 0.1581486836394716,
+          "rms": 0.2126510231107636
+        }
+      },
+      {
+        "iteration": 9,
+        "translationKm": [
+          0.1960082848317454,
+          -0.4891348878128666,
+          -0.7886806528816215
+        ],
+        "stepKm": [
+          -2.2856907617944417e-05,
+          -7.223623973723315e-06,
+          -2.4162214564415124e-05
+        ],
+        "stepNormKm": 3.403573977197837e-05,
+        "huberThresholdKm": 0.3583630635013673,
+        "normalSystemCondition": 1.1067692739776587,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 2.0383092776498795e-05,
+          "median": 0.11945435450045577,
+          "p90": 0.3424409749550688,
+          "p95": 0.44019173877178114,
+          "p99": 0.6316874372845869,
+          "max": 1.3537746431823212,
+          "mean": 0.1581475148655753,
+          "rms": 0.21265193340553998
+        }
+      },
+      {
+        "iteration": 10,
+        "translationKm": [
+          0.19600722249805042,
+          -0.48912150357341716,
+          -0.788669826355535
+        ],
+        "stepKm": [
+          -1.062333694984975e-06,
+          1.3384239449479692e-05,
+          1.0826526086529364e-05
+        ],
+        "stepNormKm": 1.724761101204482e-05,
+        "huberThresholdKm": 0.3583665488273249,
+        "normalSystemCondition": 1.1067487825515687,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 1.362824290246832e-05,
+          "median": 0.11945551627577496,
+          "p90": 0.34244489697587965,
+          "p95": 0.44018721635494934,
+          "p99": 0.6316568379318858,
+          "max": 1.3537416977352443,
+          "mean": 0.15814718672646208,
+          "rms": 0.21265161876021674
+        }
+      },
+      {
+        "iteration": 11,
+        "translationKm": [
+          0.1960378706536209,
+          -0.4891583620809242,
+          -0.7886686239183882
+        ],
+        "stepKm": [
+          3.064815557048844e-05,
+          -3.685850750704064e-05,
+          1.202437146689052e-06
+        ],
+        "stepNormKm": 4.7951067460601655e-05,
+        "huberThresholdKm": 0.35834448131255114,
+        "normalSystemCondition": 1.1067661950264451,
+        "preStepAbsoluteNormalResidualKm": {
+          "count": 4800,
+          "min": 8.0740187546619e-06,
+          "median": 0.11944816043751705,
+          "p90": 0.34243764496361995,
+          "p95": 0.44018721388920046,
+          "p99": 0.6316711266570532,
+          "max": 1.3537486040645157,
+          "mean": 0.15814695887659777,
+          "rms": 0.21265129636463853
+        }
+      }
+    ],
+    "linearizedLeaveOneTrainingPatchOut": [
+      {
+        "omittedTrainingPatch": 0,
+        "linearizedShiftKm": [
+          0.0019234658930693872,
+          0.00022634088556310134,
+          -0.0015428522907664324
+        ],
+        "linearizedShiftNormKm": 0.002476155170703551,
+        "normalSystemCondition": 1.1011790063191131
+      },
+      {
+        "omittedTrainingPatch": 3,
+        "linearizedShiftKm": [
+          -0.0009224179670860597,
+          0.006295092685040391,
+          -0.009942259742723659
+        ],
+        "linearizedShiftNormKm": 0.011803710247673642,
+        "normalSystemCondition": 1.1314244703501537
+      },
+      {
+        "omittedTrainingPatch": 6,
+        "linearizedShiftKm": [
+          -0.0010479940904874598,
+          3.036095665261841e-05,
+          0.00044848243124061537
+        ],
+        "linearizedShiftNormKm": 0.001140328852795102,
+        "normalSystemCondition": 1.1684778356021184
+      },
+      {
+        "omittedTrainingPatch": 9,
+        "linearizedShiftKm": [
+          -0.000402113208218244,
+          -0.0020563318856895957,
+          -0.0049955927500422385
+        ],
+        "linearizedShiftNormKm": 0.005417208024490279,
+        "normalSystemCondition": 1.1584911255489645
+      },
+      {
+        "omittedTrainingPatch": 13,
+        "linearizedShiftKm": [
+          -0.006958654416996864,
+          -0.009250126434579113,
+          0.010277284097038826
+        ],
+        "linearizedShiftNormKm": 0.015479350075572825,
+        "normalSystemCondition": 1.0940160038570048
+      },
+      {
+        "omittedTrainingPatch": 16,
+        "linearizedShiftKm": [
+          0.00167732074768678,
+          -0.0024401947436950493,
+          0.0011663009108092586
+        ],
+        "linearizedShiftNormKm": 0.0031824853640404997,
+        "normalSystemCondition": 1.1239520322882273
+      },
+      {
+        "omittedTrainingPatch": 19,
+        "linearizedShiftKm": [
+          0.01146844925323897,
+          0.015643594379137437,
+          0.014002787015045719
+        ],
+        "linearizedShiftNormKm": 0.023923323714773223,
+        "normalSystemCondition": 1.179723549632529
+      },
+      {
+        "omittedTrainingPatch": 22,
+        "linearizedShiftKm": [
+          -0.005101437045211798,
+          0.005120473836987143,
+          0.005266254608056119
+        ],
+        "linearizedShiftNormKm": 0.008943005637837955,
+        "normalSystemCondition": 1.1197939182531638
+      },
+      {
+        "omittedTrainingPatch": 26,
+        "linearizedShiftKm": [
+          -0.0009537240193014976,
+          -0.008598955880323115,
+          0.002808008054872196
+        ],
+        "linearizedShiftNormKm": 0.009095962894216488,
+        "normalSystemCondition": 1.1156324632975496
+      },
+      {
+        "omittedTrainingPatch": 29,
+        "linearizedShiftKm": [
+          -0.0008678985753103082,
+          0.0048448679169107636,
+          -0.001194698549791814
+        ],
+        "linearizedShiftNormKm": 0.0050649084586211,
+        "normalSystemCondition": 1.101588287766575
+      },
+      {
+        "omittedTrainingPatch": 32,
+        "linearizedShiftKm": [
+          -0.0009070285973319696,
+          -0.0024560959138076616,
+          0.0004144562393252602
+        ],
+        "linearizedShiftNormKm": 0.0026508266613485556,
+        "normalSystemCondition": 1.1524572409813942
+      },
+      {
+        "omittedTrainingPatch": 35,
+        "linearizedShiftKm": [
+          -0.010524316777406362,
+          0.005179085558297128,
+          0.006029510153067686
+        ],
+        "linearizedShiftNormKm": 0.013188599756505815,
+        "normalSystemCondition": 1.0836217925962384
+      },
+      {
+        "omittedTrainingPatch": 36,
+        "linearizedShiftKm": [
+          0.002521253486706239,
+          -0.002266368408423744,
+          0.001198358259578186
+        ],
+        "linearizedShiftNormKm": 0.0035957207101259686,
+        "normalSystemCondition": 1.13933231307482
+      },
+      {
+        "omittedTrainingPatch": 39,
+        "linearizedShiftKm": [
+          0.0027735579712649277,
+          -0.007395966247240667,
+          -0.001382926031249602
+        ],
+        "linearizedShiftNormKm": 0.008019066339555883,
+        "normalSystemCondition": 1.1306633551390097
+      },
+      {
+        "omittedTrainingPatch": 42,
+        "linearizedShiftKm": [
+          -0.002080364420931326,
+          0.00264831976913338,
+          -0.002634410802027926
+        ],
+        "linearizedShiftNormKm": 0.004275702748940931,
+        "normalSystemCondition": 1.0750111386073886
+      },
+      {
+        "omittedTrainingPatch": 45,
+        "linearizedShiftKm": [
+          0.0037331455772871038,
+          -0.015419108442490675,
+          0.0009224675545747807
+        ],
+        "linearizedShiftNormKm": 0.01589138846834186,
+        "normalSystemCondition": 1.1239554344887666
+      },
+      {
+        "omittedTrainingPatch": 49,
+        "linearizedShiftKm": [
+          -0.017161493550257444,
+          -0.01483883539649293,
+          -0.010333060179368577
+        ],
+        "linearizedShiftNormKm": 0.024929501187753274,
+        "normalSystemCondition": 1.1501373199661626
+      },
+      {
+        "omittedTrainingPatch": 52,
+        "linearizedShiftKm": [
+          -0.0036004615490873226,
+          0.003427230627324416,
+          0.0038230235799803416
+        ],
+        "linearizedShiftNormKm": 0.006270944301491802,
+        "normalSystemCondition": 1.1126476998560755
+      },
+      {
+        "omittedTrainingPatch": 55,
+        "linearizedShiftKm": [
+          0.012435413466294759,
+          0.005444628273362773,
+          -0.005677376897014075
+        ],
+        "linearizedShiftNormKm": 0.014714485840271671,
+        "normalSystemCondition": 1.0849749195520868
+      },
+      {
+        "omittedTrainingPatch": 58,
+        "linearizedShiftKm": [
+          -0.006387412729758079,
+          0.006048041158113827,
+          -0.006006223052418024
+        ],
+        "linearizedShiftNormKm": 0.010651411107731787,
+        "normalSystemCondition": 1.1444801903102684
+      },
+      {
+        "omittedTrainingPatch": 62,
+        "linearizedShiftKm": [
+          -0.0004868443897434028,
+          0.006904627526660927,
+          0.010735541116721033
+        ],
+        "linearizedShiftNormKm": 0.012773517205944348,
+        "normalSystemCondition": 1.1749455837765115
+      },
+      {
+        "omittedTrainingPatch": 65,
+        "linearizedShiftKm": [
+          0.01103363551466926,
+          -7.451822373648872e-05,
+          -0.01267041297356179
+        ],
+        "linearizedShiftNormKm": 0.016801369901196822,
+        "normalSystemCondition": 1.0958351830264532
+      },
+      {
+        "omittedTrainingPatch": 68,
+        "linearizedShiftKm": [
+          0.0015802266467443646,
+          0.005915607430137482,
+          -0.010265813843722398
+        ],
+        "linearizedShiftNormKm": 0.011953177878561884,
+        "normalSystemCondition": 1.1087115227239783
+      },
+      {
+        "omittedTrainingPatch": 71,
+        "linearizedShiftKm": [
+          0.007349435214895882,
+          -0.0028756099536254394,
+          0.009249795028287829
+        ],
+        "linearizedShiftNormKm": 0.012159031155839663,
+        "normalSystemCondition": 1.1557297607822945
+      }
+    ],
+    "linearizedPatchSensitivityIsNotPhysicalErrorBound": true,
+    "checks": {
+      "training": {
+        "count": 4800,
+        "sameRecordResidualKm": {
+          "count": 4800,
+          "min": 0.00828296324627095,
+          "median": 0.3201221581534179,
+          "p90": 0.7495216044604267,
+          "p95": 0.901402113378952,
+          "p99": 1.2796561441969552,
+          "max": 1.6410047956430274,
+          "mean": 0.38941237071689616,
+          "rms": 0.46808363426158595
+        },
+        "sourceSurface": {
+          "distanceKm": {
+            "count": 1200,
+            "min": 1.2452935126033193e-05,
+            "median": 0.1190842086796263,
+            "p90": 0.33803576618018266,
+            "p95": 0.453915635988018,
+            "p99": 0.6437233482421173,
+            "max": 1.109180855664238,
+            "mean": 0.15939184726590686,
+            "rms": 0.21418484431015103
+          },
+          "certifiedExactNearestTriangle": 1200,
+          "queryCount": 1200,
+          "uncertifiedAreUpperBounds": 0
+        }
+      },
+      "holdout1": {
+        "count": 4800,
+        "sameRecordResidualKm": {
+          "count": 4800,
+          "min": 0.008069855850439978,
+          "median": 0.30945751358382767,
+          "p90": 0.8535687750094743,
+          "p95": 1.1373269672395159,
+          "p99": 2.268411121540382,
+          "max": 3.1174833192849483,
+          "mean": 0.4381952862247677,
+          "rms": 0.6044540059694774
+        },
+        "sourceSurface": {
+          "distanceKm": {
+            "count": 1200,
+            "min": 7.64352870875526e-06,
+            "median": 0.1325808582646426,
+            "p90": 0.40932406820612494,
+            "p95": 0.6940705220639234,
+            "p99": 1.7814460190194856,
+            "max": 2.7114498968845804,
+            "mean": 0.21415211633221726,
+            "rms": 0.37581221207583826
+          },
+          "certifiedExactNearestTriangle": 1200,
+          "queryCount": 1200,
+          "uncertifiedAreUpperBounds": 0
+        }
+      },
+      "holdout2": {
+        "count": 4800,
+        "sameRecordResidualKm": {
+          "count": 4800,
+          "min": 0.005503663250558172,
+          "median": 0.32308131721289846,
+          "p90": 0.9099585868656632,
+          "p95": 1.1902501435895405,
+          "p99": 1.7326446813577945,
+          "max": 2.5873000377126245,
+          "mean": 0.4326712676822331,
+          "rms": 0.5617990609971785
+        },
+        "sourceSurface": {
+          "distanceKm": {
+            "count": 1200,
+            "min": 4.897532400190366e-07,
+            "median": 0.10516533641232698,
+            "p90": 0.44764151226280485,
+            "p95": 0.6500408473657544,
+            "p99": 1.3038768600351645,
+            "max": 1.6998172110089913,
+            "mean": 0.1857049467259445,
+            "rms": 0.2993416269704897
+          },
+          "certifiedExactNearestTriangle": 1200,
+          "queryCount": 1200,
+          "uncertifiedAreUpperBounds": 0
+        }
+      }
+    }
+  }
+}

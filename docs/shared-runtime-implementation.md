@@ -1,5 +1,9 @@
 # Shared object runtime implementation
 
+Historical implementation record for PR #2's eleven-object version. Use the
+[implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
+for current code ownership; the following results describe the recorded version.
+
 PR #2 now uses data-only prepared presentations for all eleven registered objects.
 The shared runtime builds each retained scene, resolves selection and material
 demand, publishes materials, and owns camera, resources, playback and cleanup.

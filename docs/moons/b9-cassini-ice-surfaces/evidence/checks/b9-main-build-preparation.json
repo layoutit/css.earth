@@ -1,0 +1,30 @@
+{
+  "command": [
+    "pnpm",
+    "build:preparation"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 406994944,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 1064960,
+      "freePercent": 61
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 219398144,
+      "freePercent": 61
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 406994944,
+      "freePercent": 61
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 0.8
+}

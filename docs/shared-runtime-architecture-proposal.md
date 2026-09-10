@@ -1,5 +1,9 @@
 # Shared prepared presentation architecture
 
+Historical design for the eleven-object runtime described below. Use the
+[implementation map](../.agents/skills/celestial-skill/references/implementation-map.md)
+for current code ownership; the following paths and examples describe that earlier version.
+
 All eleven entries in [`OBJECTS`](../site/objects.mjs) now use
 `cssearth-object-runtime@2`. Each package supplies prepared presentation data and
 control content to the same runtime. There are no package presentation callbacks,
