@@ -44,12 +44,13 @@
   border-radius: 50%;
 }
 
-[data-context-group][data-context-selected="true"] {
+[data-context-group][data-context-selected="true"]:not([data-context-placement="approximate"]) {
   --context-active-stroke: .5px;
 }
 
-/* The selected body uses four open corners at the standard 16px size. */
-.prepared-world-context [data-context-selected="true"] > [data-context-indicator] {
+/* Other selected bodies use four open corners. Approximate placements
+   retain the standard one-pixel circle and orbit stroke. */
+.prepared-world-context [data-context-selected="true"]:not([data-context-placement="approximate"]) > [data-context-indicator] {
   box-shadow: none;
   border-radius: 0;
 }
@@ -59,11 +60,11 @@
   inset: 0;
   pointer-events: none;
 }
-[data-context-selected="true"] .context-anchor-corners {
+[data-context-selected="true"]:not([data-context-placement="approximate"]) .context-anchor-corners {
   display: block;
 }
-.prepared-world-context [data-context-selected="true"] > [data-context-indicator]::before,
-.prepared-world-context [data-context-selected="true"] > [data-context-indicator]::after,
+.prepared-world-context [data-context-selected="true"]:not([data-context-placement="approximate"]) > [data-context-indicator]::before,
+.prepared-world-context [data-context-selected="true"]:not([data-context-placement="approximate"]) > [data-context-indicator]::after,
 .context-anchor-corners::before,
 .context-anchor-corners::after {
   content: '';
@@ -77,10 +78,10 @@
   border-radius: 0;
   pointer-events: none;
 }
-.prepared-world-context [data-context-selected="true"] > [data-context-indicator]::before {
+.prepared-world-context [data-context-selected="true"]:not([data-context-placement="approximate"]) > [data-context-indicator]::before {
   inset: 0 auto auto 0;
 }
-.prepared-world-context [data-context-selected="true"] > [data-context-indicator]::after {
+.prepared-world-context [data-context-selected="true"]:not([data-context-placement="approximate"]) > [data-context-indicator]::after {
   inset: 0 0 auto auto;
   transform: rotate(90deg);
 }
@@ -129,13 +130,4 @@
    round back to solid strokes before the browser scales their projection. */
 .prepared-world-context [data-context-placement="approximate"] .context-orbit s:nth-child(even) {
   background: transparent;
-}
-.prepared-world-context [data-context-placement="approximate"][data-context-selected="true"] > [data-context-indicator] {
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 calc(var(--context-line-width, 1px) + var(--context-active-stroke, 0px)) var(--shell-text, #dfdfdf);
-}
-.prepared-world-context [data-context-placement="approximate"][data-context-selected="true"] > [data-context-indicator]::before,
-.prepared-world-context [data-context-placement="approximate"][data-context-selected="true"] > [data-context-indicator]::after,
-.prepared-world-context [data-context-placement="approximate"] .context-anchor-corners {
-  display: none;
 }

@@ -32,9 +32,13 @@ try {
   const cue=await group.evaluate(group=>({placement:group.dataset.contextPlacement,label:group.querySelector('[data-context-label]').textContent,
    labelOpacity:getComputedStyle(group.querySelector('[data-context-label]')).opacity,
    indicatorRadius:getComputedStyle(group.querySelector('[data-context-indicator]')).borderRadius,
+   circleStroke:getComputedStyle(group.querySelector('[data-context-indicator]')).boxShadow,
+   standardCircleStroke:getComputedStyle(group.parentElement.querySelector('[data-context-group]:not([data-context-placement]):not([data-context-selected="true"]) > [data-context-indicator]')).boxShadow,
+   orbitStroke:getComputedStyle(group.querySelector('.context-orbit s:nth-child(odd)')).height,
    gapColors:[...new Set([...group.querySelectorAll('.context-orbit s:nth-child(even)')].map(s=>getComputedStyle(s).backgroundColor))],
    dashColors:[...new Set([...group.querySelectorAll('.context-orbit s:nth-child(odd)')].map(s=>getComputedStyle(s).backgroundColor))]}));
   assert.equal(cue.placement,'approximate');assert.match(cue.label,/\(approx\)/);assert.equal(cue.indicatorRadius,'50%');
+  assert.equal(cue.circleStroke,cue.standardCircleStroke);assert.equal(cue.orbitStroke,'1px');assert.match(cue.circleStroke,/ 0px 0px 0px 1px inset$/);
   assert.deepEqual(cue.gapColors,['rgba(0, 0, 0, 0)']);assert(cue.dashColors.length&&cue.dashColors.every(color=>color!=='rgba(0, 0, 0, 0)'));
   await page.screenshot({path:`${output}/${id}-approximate-orbit.png`});reports.push({id,orbitCue:cue,url:page.url()});
   const parent=id==='dactyl'?'ida':'dinkinesh';await page.locator(`.planet-breadcrumbs a[href="/${parent}/"]:visible`).first().click();await ready(parent);
