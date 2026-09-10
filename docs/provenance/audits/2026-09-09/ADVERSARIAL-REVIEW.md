@@ -179,3 +179,13 @@ changed by this documentation revision. No full build or body browser suite was
 rerun. Existing scientific and application reports retain their original scope;
 agent review and document-layout checks are not reader testing or an ISO
 conformity assessment.
+
+## Final integration check
+
+CI at `1f25d9e62` failed the minimap index check: the latest main merge added
+Encke and LINEAR, but the committed index still listed 406 bodies. The existing
+minimap generator added those two entries, bringing it to 408 bodies and 2,456
+points. All previous points, values and relative order are unchanged, and both
+new positions match the prepared world context. The five minimap tests pass;
+the workflow and tests are unchanged. The subsequent committed-file cleanup
+passes 3,382 local links across 481 changed Markdown files.
