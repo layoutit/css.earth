@@ -164,6 +164,19 @@ The router owns both the fragment and history:
 - The Datasets tab opens after a requested dataset succeeds. No router simulates
   a click on a lens button or changes the object scene registry.
 
+## Interface examples
+
+The Moon illustrates the distinction between a mission contribution and vehicle
+participation. GRAIL links to the Crust dataset, while GRAIL-A and GRAIL-B are
+labelled as mission participants. These desktop and phone examples were captured
+from the production build with application sources at `9f0ac8797a98fc2d9fa4b9c760fb07200333396f`.
+The [browser evidence](../../site/test/evidence/dataset-navigation-2026-09-10.json)
+records the cases, viewports, settings, build-file hashes and image hashes.
+
+![GRAIL mission, Crust dataset link and individual spacecraft on desktop](../images/catalogue-moon-missions-desktop.png)
+
+![GRAIL mission and individual spacecraft on a phone](../images/catalogue-moon-missions-mobile.png)
+
 ## Preparing and checking a change
 
 Run `pnpm prepare:provenance` after changing capture records. It stages provenance
