@@ -31,7 +31,9 @@
           "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
           "label": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "akari-acua-v1",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12738",
           "label": "DAMIT model 12738",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 12738; version 2024-04-09; /periodHours"
         }
       }
     ],

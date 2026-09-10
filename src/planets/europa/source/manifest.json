@@ -1588,7 +1588,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored texture axes and CSS surface selector."
       }
     },
     {
@@ -1919,36 +1919,31 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 8710,
-      "expectedSha256": "8e8e832aefcefcab28c76a8c9c4eadb7eb31d5c8ff234a834d31967f83f73184",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "expectedSha256": "8e8e832aefcefcab28c76a8c9c4eadb7eb31d5c8ff234a834d31967f83f73184"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 15322,
-      "expectedSha256": "b7cd3a7d52d8b7ae1fe55fbc71eb313827b966d250e5edf80c644b26d05b8d6a",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "expectedBytes": 15905,
+      "expectedSha256": "c07b3a4a304f992e6b46500b051a3838d80967e131556f0fcabf96c103ff18ee",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3620,
-      "expectedSha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "expectedSha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1715,
-      "expectedSha256": "0a9bedffcafea2db8cdc0f407c1abc300cf91e553a676c5da5b8f46de6505836",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "expectedSha256": "0a9bedffcafea2db8cdc0f407c1abc300cf91e553a676c5da5b8f46de6505836"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 18556,
-      "expectedSha256": "b0154c84662fa90ce2fcc10046dba1a5b6f09b1527682d7f81ee3344ccfcb3c0",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "expectedSha256": "b0154c84662fa90ce2fcc10046dba1a5b6f09b1527682d7f81ee3344ccfcb3c0"
     },
     {
       "path": "editorial/factsheet-review.json",
@@ -2095,8 +2090,7 @@
       "redistribution": "Source documentation and numeric anchors retained with attribution.",
       "consumers": [
         "controlled-dtm-audit"
-      ],
-      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+      ]
     },
     {
       "id": "europa-dtm-controlled-dtms-intake-downloads-json",
@@ -2110,8 +2104,7 @@
       "redistribution": "Source documentation and numeric anchors retained with attribution.",
       "consumers": [
         "controlled-dtm-audit"
-      ],
-      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+      ]
     },
     {
       "id": "europa-dtm-Agenor-stac-item-json",
@@ -2125,8 +2118,7 @@
       "redistribution": "Source documentation and numeric anchors retained with attribution.",
       "consumers": [
         "controlled-dtm-audit"
-      ],
-      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+      ]
     },
     {
       "id": "europa-dtm-Yelland_Ridges-stac-item-json",
@@ -2140,8 +2132,7 @@
       "redistribution": "Source documentation and numeric anchors retained with attribution.",
       "consumers": [
         "controlled-dtm-audit"
-      ],
-      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+      ]
     },
     {
       "id": "europa-dtm-Agenor-value-anchors-json",
@@ -2155,62 +2146,52 @@
       "redistribution": "Source documentation and numeric anchors retained with attribution.",
       "consumers": [
         "controlled-dtm-audit"
-      ],
-      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
+      ]
     },
     {
       "path": "geology/GeoUnits_FINAL.prj",
       "expectedBytes": 161,
-      "expectedSha256": "3c8d7ec5c02a28ab92adaf06f259155557da66af5fb4b367f878b73d0828afb5",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "3c8d7ec5c02a28ab92adaf06f259155557da66af5fb4b367f878b73d0828afb5"
     },
     {
       "path": "nims/17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.xml",
       "expectedBytes": 11855,
-      "expectedSha256": "a7d073d0d2d16bdb6fc7a293444b2906d6a38f745e237f80e0667f196c2e8d3f",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "a7d073d0d2d16bdb6fc7a293444b2906d6a38f745e237f80e0667f196c2e8d3f"
     },
     {
       "path": "nims/17ENGLOBAL01A_MV01_wavelengths.csv",
       "expectedBytes": 2054,
-      "expectedSha256": "b4aeb8d25c0b43b7c5eb78a9a5e84c3333bbeade56f568af09f7247867595453",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "b4aeb8d25c0b43b7c5eb78a9a5e84c3333bbeade56f568af09f7247867595453"
     },
     {
       "path": "nims/17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.xml",
       "expectedBytes": 11853,
-      "expectedSha256": "9ddbbb4e9329da7ed35352f257b8f4f0da10eedf32b07fcb778dc7195e6897f8",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "9ddbbb4e9329da7ed35352f257b8f4f0da10eedf32b07fcb778dc7195e6897f8"
     },
     {
       "path": "nims/17ENGLOBAL02A_MV01_wavelengths.csv",
       "expectedBytes": 3238,
-      "expectedSha256": "2b6f1a8884cb805c142e45731788b7bfe13629169bc8bfff832f09d619269be8",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "2b6f1a8884cb805c142e45731788b7bfe13629169bc8bfff832f09d619269be8"
     },
     {
       "path": "geology/prepare-grid.json",
       "expectedBytes": 1900,
-      "expectedSha256": "3eebb49ba3b25c1875dbc0c24c283c52216cb22e7245cd19feceb64fdac4dd1a",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "3eebb49ba3b25c1875dbc0c24c283c52216cb22e7245cd19feceb64fdac4dd1a"
     },
     {
       "path": "geology/europa-geologic-units.json",
       "expectedBytes": 1694,
-      "expectedSha256": "b7bb810a05ffc19300285566ebfdd864cbfeba8880d34aecfe1ce9a3bbfd250f",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "b7bb810a05ffc19300285566ebfdd864cbfeba8880d34aecfe1ce9a3bbfd250f"
     },
     {
       "path": "nims/europa-nims-composite.json",
       "expectedBytes": 1271,
-      "expectedSha256": "9e434736752ce6f3ca081350fd3c6c0fde65dd044c1f28f987f7af86aa14f3ab",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "9e434736752ce6f3ca081350fd3c6c0fde65dd044c1f28f987f7af86aa14f3ab"
     },
     {
       "path": "nims/prepare-composite.json",
       "expectedBytes": 3480,
-      "expectedSha256": "ba7361a82e896d038f287b19ece6ec805bf5d931437466aea63a37d6d0f6eecd",
-      "purpose": "B6 original scientific metadata or reproducible source preparation receipt."
+      "expectedSha256": "ba7361a82e896d038f287b19ece6ec805bf5d931437466aea63a37d6d0f6eecd"
     },
     {
       "path": "geology/GeoUnits_FINAL.shp.xml",

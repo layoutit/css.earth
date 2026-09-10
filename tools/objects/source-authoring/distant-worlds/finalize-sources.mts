@@ -66,7 +66,7 @@ for (const b of bodies) {
     const rel=relative(src,path);
     if(rel==='manifest.json'||declared.has(rel))continue;
     const bytes=await readFile(path);
-    documents.push(refreshSourceRecord(previousDocuments,{path:rel,expectedBytes:bytes.length,expectedSha256:hash(bytes),purpose:'Pinned source observation, interpretation or preparation input.'}));
+    documents.push(refreshSourceRecord(previousDocuments,{path:rel,expectedBytes:bytes.length,expectedSha256:hash(bytes)}));
   }
   await write(resolve(src,'manifest.json'),manifest);
   const descriptor=await read(resolve(pkg,'object.json'));

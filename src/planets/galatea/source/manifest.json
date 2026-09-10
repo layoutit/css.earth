@@ -130,103 +130,87 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3835,
-      "expectedSha256": "e6ef85b0c4e456f30a73460be427de606aefed7bd515b727a2f7cd99ad3683b6",
-      "purpose": "Galatea scientific source or authored preparation evidence.",
+      "expectedBytes": 3943,
+      "expectedSha256": "e48f2a6442ababce7b50883023d86c7170c58b99cffb232445b2617a9599b8ad",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 984,
-      "expectedSha256": "b3971ff689e617e414c1240ae09a1b3855b663c524f139ef0e7bfc6aa224ccd6",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "b3971ff689e617e414c1240ae09a1b3855b663c524f139ef0e7bfc6aa224ccd6"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1307,
-      "expectedSha256": "ab45f7882d99c0f56a24513e8cd03d6432e31c703dde41c872d7f60e0cb133db",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "ab45f7882d99c0f56a24513e8cd03d6432e31c703dde41c872d7f60e0cb133db"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2570,
-      "expectedSha256": "05a46791c4e44882cccc44dc127ececc6adb02a110f22bb76df79315dec0f9e3",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "05a46791c4e44882cccc44dc127ececc6adb02a110f22bb76df79315dec0f9e3"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 5314,
-      "expectedSha256": "9d1fc2d22e26c33d29bb25b689dd91d0854f940074600fd74970669e68ecf2e7",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "9d1fc2d22e26c33d29bb25b689dd91d0854f940074600fd74970669e68ecf2e7"
     },
     {
       "path": "shape/pck00011.tpc",
       "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 850,
-      "expectedSha256": "90088867a210faeebed17ef9dcdb93227124e0ea6f92ea946c4d6cdcddffa5f3",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "90088867a210faeebed17ef9dcdb93227124e0ea6f92ea946c4d6cdcddffa5f3"
     },
     {
       "path": "survey/1135055-metadata.json",
       "expectedBytes": 11785,
-      "expectedSha256": "69a53d1e9bc3716a81f09b09e7158a4eb6b1f2398b09572c074b6f7fa94af52e",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "69a53d1e9bc3716a81f09b09e7158a4eb6b1f2398b09572c074b6f7fa94af52e"
     },
     {
       "path": "survey/1144523-metadata.json",
       "expectedBytes": 11718,
-      "expectedSha256": "b3e9664c03eab5d5961e1ec1d5b1d87f9989e0e1cee9eb5bc1f4241aa0e0e7f6",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "b3e9664c03eab5d5961e1ec1d5b1d87f9989e0e1cee9eb5bc1f4241aa0e0e7f6"
     },
     {
       "path": "survey/1144537-metadata.json",
       "expectedBytes": 11783,
-      "expectedSha256": "26b03ac6762edd4705dcba2877d7132b7a615b654f67f7afb553bf96e077aa8f",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "26b03ac6762edd4705dcba2877d7132b7a615b654f67f7afb553bf96e077aa8f"
     },
     {
       "path": "survey/1145807-metadata.json",
       "expectedBytes": 11658,
-      "expectedSha256": "b75568bbe9f23f00c6e8d8a199bb005c680ca8e65660eaacd775dddc9e3ceb62",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "b75568bbe9f23f00c6e8d8a199bb005c680ca8e65660eaacd775dddc9e3ceb62"
     },
     {
       "path": "survey/opus-finest.json",
       "expectedBytes": 2405,
-      "expectedSha256": "5d1854cb159c086e91e8c541be77e4f5cf6b481ae99c9b621e73476bc7c66d27",
-      "purpose": "Galatea scientific source or authored preparation evidence."
+      "expectedSha256": "5d1854cb159c086e91e8c541be77e4f5cf6b481ae99c9b621e73476bc7c66d27"
     },
     {
       "path": "editorial/factsheet-review.json",

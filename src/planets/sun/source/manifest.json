@@ -1433,42 +1433,36 @@
     {
       "path": "preparation/raster.json",
       "expectedBytes": 5277,
-      "expectedSha256": "0a760fe0c4566b1e8f944849b2282edaab99020f62af6facb95472f83fd8761e",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "0a760fe0c4566b1e8f944849b2282edaab99020f62af6facb95472f83fd8761e"
     },
     {
       "path": "preparation/geometry.json",
       "expectedBytes": 3919,
-      "expectedSha256": "2779b13352f8804830f9f437a5334933582672a748330472ba80769d281f4ef2",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "2779b13352f8804830f9f437a5334933582672a748330472ba80769d281f4ef2"
     },
     {
       "path": "preparation/celestial.json",
       "expectedBytes": 84,
-      "expectedSha256": "38e2fe700b658e9ca7e739d8bb4de649a1f26ea8c6c68f32211f2d503bfa69b4",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "38e2fe700b658e9ca7e739d8bb4de649a1f26ea8c6c68f32211f2d503bfa69b4"
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 18248,
-      "expectedSha256": "f5b6ecd76597ff594505f40a946840645add4d749887ff8e922aaf18dbbe8cf0",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "expectedBytes": 18548,
+      "expectedSha256": "eff4d5a3ee2f3a1e4fa77638774944588271838379db85ed8c6675e26597c864",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicit authored content document in the retained provenance record."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 830,
-      "expectedSha256": "52d121bd54a171a4aeaa0de8fbd812d2018bd1089143803c76b1786890bcde6c",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "52d121bd54a171a4aeaa0de8fbd812d2018bd1089143803c76b1786890bcde6c"
     },
     {
       "path": "preparation/physical.json",
       "expectedBytes": 480,
-      "expectedSha256": "84fc8f676449f2090b33495ecf5d093ce3074704b67add334efc8e25f4ab54ce",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "expectedSha256": "84fc8f676449f2090b33495ecf5d093ce3074704b67add334efc8e25f4ab54ce"
     },
     {
       "path": "editorial/factsheet-review.json",

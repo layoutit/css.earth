@@ -1,0 +1,29 @@
+{
+  "id": "masiero-2014-neowise",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Masiero et al. (2014), ApJ 791, 121",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/791/2/121"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/791/2/121",
+      "label": "Masiero et al. (2014), ApJ 791, 121"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/auravictrix/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "8f6e40b15a415a6ca474c0f602fb540793753cea8219fa869588f5abea99958f",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -3,7 +3,6 @@ import {shape,text,number,optional,array,dictionary} from './objects/terrestrial
 const parseSourceRef=shape({id:text,path:text,sha256:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});
 const parseManifest=shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text})),documents:array(shape({path:text,expectedBytes:number,expectedSha256:text})),generatedIntermediates:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
-const parseFact=shape({id:text,label:text,value:text,source:optional(shape({url:text,label:text,checked:text,path:optional(text)}))});
 const parseLens=(value:unknown)=>Object.assign({},requireRecord(value),shape({id:text,label:text})(value));
 const parseLenses=(value:unknown)=>Object.assign({},requireRecord(value),shape({labels:optional(dictionary(text)),controls:array(parseLens)})(value));
 import assert from 'node:assert/strict';
@@ -15,6 +14,7 @@ import { OBJECTS } from '../site/objects.mts';
 import { orderFacts } from '../site/fact-order.mts';
 import { prepareLensLabels } from '../site/prepare-lens-labels.mts';
 import { writePreparedText } from './write-prepared-text.mts';
+import { verifyFactsheetSources } from './factsheet-sources.mts';
 
 const hash = (bytes:Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
@@ -32,30 +32,13 @@ export async function prepareFactsheet(objectDirectory:string, { check = false, 
   assert.ok(entry, `${descriptor.id}: content source missing from manifest`);
   assert.equal(entry.expectedSha256, reference.sha256);
   assert.equal(entry.expectedBytes, bytes.length);
-  const source=Object.assign({},requireRecord(JSON.parse(bytes.toString("utf8"))),shape({panel:shape({introduction:text,facts:array(parseFact),moreFacts:optional(array(parseFact))})})(JSON.parse(bytes.toString("utf8"))));
-  const facts = source.panel.facts, moreFacts = source.panel.moreFacts ?? [];
+  const source = requireRecord(JSON.parse(bytes.toString('utf8')));
+  const panel = requireRecord(source.panel);
+  const { facts, moreFacts } = await verifyFactsheetSources(panel, { objectDirectory, manifest });
   const ordered = orderFacts(facts, moreFacts);
-  for (const fact of ordered) {
-    assert.ok(fact.label?.trim() && fact.value?.trim(), `${descriptor.id}: empty fact`);
-    if (fact.source) {
-      assert.ok(['https:', 'http:'].includes(new URL(fact.source.url).protocol),
-        `${descriptor.id}: fact sources must use a public web URL`);
-      assert.ok(fact.source.label?.trim());
-      assert.match(fact.source.checked, /^\d{4}-\d{2}-\d{2}$/);
-      if (fact.source.path) {
-        const evidencePath=fact.source.path;
-        const evidence = [...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates]
-          .find(entry => `source/${entry.path}` === evidencePath);
-        assert.ok(evidence, `${descriptor.id}: fact evidence missing from manifest`);
-        const bytes = await readFile(resolve(objectDirectory, fact.source.path));
-        assert.equal(bytes.length, evidence.expectedBytes);
-        assert.equal(hash(bytes), evidence.expectedSha256, `${descriptor.id}: fact evidence pin differs`);
-      }
-    }
-  }
   const content = await read('prepared/content.json');
   assert.equal(content.objectId, descriptor.id);
-  if (!editorial) assert.equal(content.introduction, source.panel.introduction,
+  if (!editorial) assert.equal(content.introduction, panel.introduction,
     `${descriptor.id}: introduction changed; use --editorial or full content preparation`);
   const publish = async (path:string, value:unknown) => {
     if (check) assert.deepEqual(await read(path), value, `${descriptor.id}: stale ${path}`);
@@ -64,7 +47,7 @@ export async function prepareFactsheet(objectDirectory:string, { check = false, 
       await writePreparedText(resolve(objectDirectory, path), `${JSON.stringify(value, null, original.startsWith('{\n') ? 2 : 0)}\n`);
     }
   };
-  const introduction = editorial ? source.panel.introduction : content.introduction;
+  const introduction = editorial ? text(panel.introduction) : content.introduction;
   await publish('prepared/content.json', { ...content, introduction, facts, moreFacts,
     ...(source.provenance ? { provenance: source.provenance } : {}) });
   try {

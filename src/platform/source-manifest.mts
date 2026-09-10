@@ -3,7 +3,7 @@ import { parseSourceBinding } from './source-catalog.mts';
 import type { SourceBinding } from './source-catalog.mts';
 export interface SourceEntry { path: string; expectedBytes: number; expectedSha256: string; sourceBinding?: SourceBinding; }
 export interface SourceInput extends SourceEntry { id: string; origin: string; credit: string; license: string; acquisition: string; redistribution: string; consumers: readonly string[]; licenseEvidence?: readonly string[]; sourceBinding: SourceBinding; }
-export interface SourceManifest { schema: string; inputs: readonly SourceInput[]; generatedIntermediates: readonly (SourceEntry & { generator: string })[]; documents: readonly (SourceEntry & { purpose: string })[]; }
+export interface SourceManifest { schema: string; inputs: readonly SourceInput[]; generatedIntermediates: readonly (SourceEntry & { generator: string })[]; documents: readonly (SourceEntry & { purpose?: string })[]; }
 export interface SourceManifestLocation { planetId: string; planetName: string; sourceRoot: string; }
 export interface SourceVerification { entry: SourceEntry; planetName: string; sourceRoot: string; }
 import { createHash } from "node:crypto";
@@ -122,8 +122,8 @@ export function validateSourceManifest(planetId: string, input: unknown): Readon
   for (const document of value.documents) {
     if (document.sourceBinding) parseSourceBinding(document.sourceBinding);
     validateEntryBase(planetId, document, "document", paths);
-    if (!nonEmpty(document.purpose)) {
-      throw new TypeError(`Planet ${planetId} document ${document.path} has no purpose.`);
+    if (document.purpose !== undefined && !nonEmpty(document.purpose)) {
+      throw new TypeError(`Planet ${planetId} document ${document.path} has an empty purpose.`);
     }
   }
   return Object.freeze(value);

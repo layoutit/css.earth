@@ -1,0 +1,29 @@
+{
+  "id": "hanus-2013-asteroid-sizes",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hanuš et al. (2013): Sizes of main-belt asteroids by combining shape models and Keck adaptive optics observations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1308.0446"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/pdf/1308.0446",
+      "label": "Hanuš et al. (2013): Sizes of main-belt asteroids by combining shape models and Keck adaptive optics observations"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/adelheid/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "5fba2621395a962d74c7cbe2a76a9ce0dca954f94158b6bbf73ec79a6837a039",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

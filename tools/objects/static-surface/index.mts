@@ -5,6 +5,7 @@ import type { PreparedWorldContext } from '../../../src/renderers/css/dist/index
 import { validatePreparedCubicSky } from '../../../src/platform/cubic-sky-contract.mts';
 import { validateDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
 import { parseSurfaceGeometry, parseSurfaceRaster, parseCelestialRecipe, parsePhysicalRecipe, parseSurfaceContent, parseTitleRecipe, parseBandLenses, parseEmissiveLenses } from './source-contract.mts';
+import { verifyFactsheetSources } from '../../factsheet-sources.mts';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -59,6 +60,7 @@ export async function prepareStaticSurfaceObject({ objectDirectory, publicDirect
   if (JSON.stringify(declaredLenses) !== JSON.stringify(contentSource.lenses.controls.map(lens => lens.id))) throw new TypeError('Authored lens declarations differ from their source.');
   const sourceDirectory = resolve(objectDirectory, 'source');
   const sourceManifest = validateSourceManifest(descriptor.id, await readJson(resolve(sourceDirectory, 'manifest.json')));
+  const factsheet = await verifyFactsheetSources(contentSource.panel, { objectDirectory });
   await verifySourceManifest({ manifest: sourceManifest, planetName: contentSource.displayName, sourceRoot: sourceDirectory });
   const physical = await readPhysicalFacts({ sourceDirectory, config: parsePhysicalRecipe(required('physical')) });
   if (physical.meanRadiusKm !== descriptor.recipe.shape.radiusKm) throw new TypeError('Authored radius differs from its physical source.');
@@ -87,7 +89,8 @@ export async function prepareStaticSurfaceObject({ objectDirectory, publicDirect
   const titleReference = sources.get('title');
   if (!titleReference) throw new TypeError('Static surface recipe requires title.');
   const title = createPreparedTitle(parseTitleRecipe(required('title')), { inputSha256: titleReference.reference.sha256, generator: 'tools/objects/static-surface/index.mts' });
-  const { panel, controls, lenses, resources } = contentSource;
+  const { controls, lenses, resources } = contentSource;
+  const panel = { ...contentSource.panel, ...factsheet };
   const content = { schema: 'cssearth-prepared-content@1', objectId: descriptor.id, title, introduction: panel.introduction, facts: panel.facts, moreFacts: panel.moreFacts, charts: [], galleries: [], resources, provenance: contentSource.provenance };
   const preparePresentation = async () => {
     if (geometry.kind === 'disc-poles') {

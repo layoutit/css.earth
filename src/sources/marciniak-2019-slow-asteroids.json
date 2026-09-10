@@ -1,0 +1,29 @@
+{
+  "id": "marciniak-2019-slow-asteroids",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Marciniak et al. (2019): Thermal properties of slowly rotating asteroids: Results from a targeted survey",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1905.06056"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/pdf/1905.06056",
+      "label": "Marciniak et al. (2019): Thermal properties of slowly rotating asteroids: Results from a targeted survey"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/eurykleia/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "ee4438d7793003c936fca7951c68b3e58c620f21ac26956b6fc26b8086b375a6",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

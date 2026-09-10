@@ -132,71 +132,60 @@
       "path": "content/object.json",
       "expectedBytes": 3684,
       "expectedSha256": "b701c422af28edc5146da02138cfaccc89f061f4a39618954385a9c21af65083",
-      "purpose": "Pinned body-specific source interpretation or preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 2957,
-      "expectedSha256": "d8e2a1ff5da708ce019d769bfaeb01a3acfd61aa59ab37361fab87705d5cdcb6",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "d8e2a1ff5da708ce019d769bfaeb01a3acfd61aa59ab37361fab87705d5cdcb6"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1309,
-      "expectedSha256": "de729dd112c8a90e9e3c949c109e2092c5a16734aac9d26b7f3535cb5adfd76c",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "de729dd112c8a90e9e3c949c109e2092c5a16734aac9d26b7f3535cb5adfd76c"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 504,
-      "expectedSha256": "36272de6771a9f5e9de8398ff4821f4fc37628bf1fd5406e0518986d203620cb",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "36272de6771a9f5e9de8398ff4821f4fc37628bf1fd5406e0518986d203620cb"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2826,
-      "expectedSha256": "9d13f207219be25fddd459faa6c190d04aa75ef54e66dabebd0f54ce26476992",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "9d13f207219be25fddd459faa6c190d04aa75ef54e66dabebd0f54ce26476992"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3490,
-      "expectedSha256": "fe25015266871d9c8900a4408d20e5c4ce52f89d7ad3a0ae415fb7fb2a33cf3f",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "fe25015266871d9c8900a4408d20e5c4ce52f89d7ad3a0ae415fb7fb2a33cf3f"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 850,
-      "expectedSha256": "f7afa4daf47cbb4130dd3ba851ac16c466dd09db2e1c5a815d90e3d5e86a3c03",
-      "purpose": "Pinned body-specific source interpretation or preparation input."
+      "expectedSha256": "f7afa4daf47cbb4130dd3ba851ac16c466dd09db2e1c5a815d90e3d5e86a3c03"
     }
   ],
   "generatedIntermediates": [

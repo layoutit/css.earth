@@ -53,7 +53,9 @@
           "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
           "label": "JPL Horizons pinned physical record",
           "checked": "2026-09-08",
-          "path": "source/reference/horizons-elements.txt"
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "JPL Horizons pinned physical record"
         }
       }
     ]

@@ -1,6 +1,20 @@
 import { sourceArray, sourceObject, sourceText, parseSourceBinding } from '../src/platform/source-catalog.mts';
 import type { SourceBinding, SourceResolver } from '../src/platform/source-catalog.mts';
 import type { SourceUse } from '../src/platform/source-usage.mts';
+import type { Fact } from './objects/content/types.js';
+
+export function factsheetCitations(panel: { facts: readonly Fact[]; moreFacts: readonly Fact[] }, ownerPath: string, object: { id: string }): SourceUse[] {
+  return (['facts', 'moreFacts'] as const).flatMap(group => panel[group].flatMap((fact, index): SourceUse[] => {
+    if (!fact.source) return [];
+    const citation = fact.source;
+    return [{ catalogueId: citation.catalogueId, kind: 'citation', consumerKind: 'object-fact',
+      consumerId: `${object.id}/${fact.id}`, consumerLabel: `${fact.label}: ${fact.value}`,
+      objectId: object.id, ownerPath, locator: `/panel/${group}/${index}/source`, citationUrl: citation.url,
+      evidence: `Checked ${citation.checked}${citation.path ? ` · ${citation.path}` : ''}${citation.locator ? ` · ${citation.locator}` : ''}`,
+      lensIds: [], limitations: [],
+    }];
+  }));
+}
 
 export interface SourceInventoryEntry { readonly ownerPath: string; readonly localId: string; readonly binding: SourceBinding; readonly used: boolean; }
 export function sourceInventory(manifest: unknown, ownerPath: string, sources: SourceResolver, usedPaths: ReadonlySet<string>): SourceInventoryEntry[] {

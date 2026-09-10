@@ -1,0 +1,25 @@
+{
+  "id": "nasa-haumea",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Science · Haumea",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/dwarf-planets/haumea/",
+      "label": "NASA Science · Haumea"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/haumea/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "a3e1fd7c30b7e985569744f05db8fd6bf355817f972965023a1aa4ec9468a1af",
+      "locator": "/panel/moreFacts/4/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Science"
+}

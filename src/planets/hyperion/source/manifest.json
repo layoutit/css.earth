@@ -1130,85 +1130,72 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5858,
-      "expectedSha256": "e8feec52261253013e54e285b48d1d8fe3a19944d6f0ea0886f9d72aba835191",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation.",
+      "expectedBytes": 6196,
+      "expectedSha256": "70f7fe8bbcfbde8c9e9e76396bf998a216a52eb4ac5f092d4cf4fb91c1fad360",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "observations/cas_iss_v10.ti",
       "expectedBytes": 31060,
-      "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 7404,
-      "expectedSha256": "afd401f45af495c77008a72c65f95c06b7d9ab0a4bcf102969d080c7f875d0e2",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "afd401f45af495c77008a72c65f95c06b7d9ab0a4bcf102969d080c7f875d0e2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1656,
-      "expectedSha256": "bf4c90df3751f7c04e6a5ebf22a0893d2a6dc3aac14f884df65efafc77b9d924",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "bf4c90df3751f7c04e6a5ebf22a0893d2a6dc3aac14f884df65efafc77b9d924"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 545,
-      "expectedSha256": "295eb4fa65594a9cb51080231e3bb026cc34a573eb9919f4500fc5cddfb4f238",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "295eb4fa65594a9cb51080231e3bb026cc34a573eb9919f4500fc5cddfb4f238"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 11157,
-      "expectedSha256": "53d1c8bbe2de7591f5ab025f349a06f017dca02f27aef88a2807e5f401ce1b3c",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "53d1c8bbe2de7591f5ab025f349a06f017dca02f27aef88a2807e5f401ce1b3c"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3930,
-      "expectedSha256": "b61f1d4b7244be20c3806cc02d1fe18762460deb5573d51a3c59ae936f23bb83",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "b61f1d4b7244be20c3806cc02d1fe18762460deb5573d51a3c59ae936f23bb83"
     },
     {
       "path": "shape/hyperion_30k_plt.xml",
       "expectedBytes": 12766,
-      "expectedSha256": "78c04481a0e7350d1f882f89279d92851084f045096198f5eed63b34976c9864",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "78c04481a0e7350d1f882f89279d92851084f045096198f5eed63b34976c9864"
     },
     {
       "path": "shape/hyperion_document.pdf",
       "expectedBytes": 79311,
-      "expectedSha256": "8d1a549688360a8bee5971b2b4bfe11660a010d2225d910070a3c94be9477942",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "8d1a549688360a8bee5971b2b4bfe11660a010d2225d910070a3c94be9477942"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 851,
-      "expectedSha256": "dca0ab4c3926df203d8529da3643b838c2f1a61e64334fcd3d8336b158a5bb9b",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation."
+      "expectedSha256": "dca0ab4c3926df203d8529da3643b838c2f1a61e64334fcd3d8336b158a5bb9b"
     },
     {
       "path": "editorial/factsheet-review.json",

@@ -132,77 +132,65 @@
       "path": "content/object.json",
       "expectedBytes": 3365,
       "expectedSha256": "0573bdfabe763fbfb4e9f8238071ae23cbfa543629141860169a6e655350206a",
-      "purpose": "Scientific source interpretation and reproducible authored input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 2529,
-      "expectedSha256": "ed75c4dd42f8850ccea70fca4407c6f60d9a5b1606e503558a77362ff7486ea8",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "ed75c4dd42f8850ccea70fca4407c6f60d9a5b1606e503558a77362ff7486ea8"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1280,
-      "expectedSha256": "ce9bd4ee0e161de80398070e38047014d97d463f82fb9e7f048b09313a10f01c",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "ce9bd4ee0e161de80398070e38047014d97d463f82fb9e7f048b09313a10f01c"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 356,
-      "expectedSha256": "197e6833bf34e78148fe712019e01f68dc80b09b79a399497983d6cb7343f60c",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "197e6833bf34e78148fe712019e01f68dc80b09b79a399497983d6cb7343f60c"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2455,
-      "expectedSha256": "18e538554c1310f208e40bc04265cad81a4d24fb68a7a67ae962bee14179e2dd",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "18e538554c1310f208e40bc04265cad81a4d24fb68a7a67ae962bee14179e2dd"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 5030,
-      "expectedSha256": "8cea7878af3dce84becad5e5c11550da25bb81847e2b884a875ade2f79d1f03f",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "8cea7878af3dce84becad5e5c11550da25bb81847e2b884a875ade2f79d1f03f"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 850,
-      "expectedSha256": "5bda5a3153b93ef8909159963c61593b8f7ab265871d4941adf3dae2c6a6e3c2",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "5bda5a3153b93ef8909159963c61593b8f7ab265871d4941adf3dae2c6a6e3c2"
     },
     {
       "path": "validation/orbit-checks.json",
       "expectedBytes": 25835,
-      "expectedSha256": "5e823c5032a85967cb7a188f460c0726dcf85dded7f9a79ad912d3105a98e0a7",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "5e823c5032a85967cb7a188f460c0726dcf85dded7f9a79ad912d3105a98e0a7"
     }
   ],
   "generatedIntermediates": [

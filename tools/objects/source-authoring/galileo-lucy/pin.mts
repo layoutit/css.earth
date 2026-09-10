@@ -10,12 +10,12 @@ const pin = (bytes: Uint8Array) => ({ expectedBytes: bytes.length, expectedSha25
 for (const { id } of bodies) {
   const p = resolve('src/planets', id), s = resolve(p, 'source'), manifest = parseAuthoringManifest(await read(resolve(s, 'manifest.json')));
   const exclude = new Set(['manifest.json', ...manifest.inputs.map(x => x.path), ...manifest.generatedIntermediates.map(x => x.path)]);
-  const documents: { path: string; expectedBytes: number; expectedSha256: string; purpose: string }[] = [];
+  const documents: { path: string; expectedBytes: number; expectedSha256: string }[] = [];
   async function walk(dir: string, prefix = '') {
     for (const entry of await readdir(dir, { withFileTypes: true })) {
       const path = prefix + entry.name;
       if (entry.isDirectory()) await walk(resolve(dir, entry.name), path + '/');
-      else if (!exclude.has(path)) documents.push(refreshSourceRecord(manifest.documents,{path, ...pin(await readFile(resolve(dir, entry.name))), purpose: 'Source evidence or authored preparation input.'}));
+      else if (!exclude.has(path)) documents.push(refreshSourceRecord(manifest.documents,{path, ...pin(await readFile(resolve(dir, entry.name)))}));
     }
   }
   await walk(s); manifest.documents = documents.sort((a, b) => a.path.localeCompare(b.path)); await write(resolve(s, 'manifest.json'), manifest);

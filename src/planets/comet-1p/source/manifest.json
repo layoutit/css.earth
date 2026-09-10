@@ -636,89 +636,75 @@
       "path": "content/object.json",
       "expectedBytes": 4293,
       "expectedSha256": "bf88b81e1a75015c01dd98ad266f47bd029df8579738aa239cd8e4894b2812fd",
-      "purpose": "Halley source evidence or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 4304,
-      "expectedSha256": "42e44c6cad46a27c63fd3e48c82d165e81f773c376015ecfc3fabc43ce5c5851",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "42e44c6cad46a27c63fd3e48c82d165e81f773c376015ecfc3fabc43ce5c5851"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1655,
-      "expectedSha256": "5a3880d937ea8462f398ab14892c3b1527e768e65fcfa70d1dd4e796c6582d33",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "5a3880d937ea8462f398ab14892c3b1527e768e65fcfa70d1dd4e796c6582d33"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 510,
-      "expectedSha256": "ad4337fd3508766b58ea05e6463979c6b065cff03b0bea015e53fbdca8afab25",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "ad4337fd3508766b58ea05e6463979c6b065cff03b0bea015e53fbdca8afab25"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3638,
-      "expectedSha256": "5494e1f6ddce35dde8a998547dbe984691495bbe99dc42f13fc21bab4ed96c67",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "5494e1f6ddce35dde8a998547dbe984691495bbe99dc42f13fc21bab4ed96c67"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 2905,
-      "expectedSha256": "3d4d26b465fa2c05130181729b11e9b10c7838883df409b5f16be702dd7cec6d",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "3d4d26b465fa2c05130181729b11e9b10c7838883df409b5f16be702dd7cec6d"
     },
     {
       "path": "reference/bundle_description.txt",
       "expectedBytes": 5105,
-      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
     },
     {
       "path": "reference/horizons-elements.txt",
       "expectedBytes": 7684,
-      "expectedSha256": "30defa966ef82dc8323b6940a27ec03c629a995fe0d85e7a89d557a0ac05b348",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "30defa966ef82dc8323b6940a27ec03c629a995fe0d85e7a89d557a0ac05b348"
     },
     {
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6974,
-      "expectedSha256": "c1a497618a2dced30ee92508e95ba0264426005c98a0529251aefdb84c861c49",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "c1a497618a2dced30ee92508e95ba0264426005c98a0529251aefdb84c861c49"
     },
     {
       "path": "shape/1682q1halley.xml",
       "expectedBytes": 9520,
-      "expectedSha256": "3f8d349a7328bb6683d94ddc6d0df80c798bae89b8d009797c1fb83c60bca9a7",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "3f8d349a7328bb6683d94ddc6d0df80c798bae89b8d009797c1fb83c60bca9a7"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 851,
-      "expectedSha256": "cccea4cd70e7d73b7585417f652f4cabd0892df85174ab43a993993675faa1f2",
-      "purpose": "Halley source evidence or authored preparation input."
+      "expectedSha256": "cccea4cd70e7d73b7585417f652f4cabd0892df85174ab43a993993675faa1f2"
     },
     {
       "path": "reference/giotto-hmc-intake.json",

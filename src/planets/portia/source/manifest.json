@@ -132,95 +132,80 @@
       "path": "content/object.json",
       "expectedBytes": 3549,
       "expectedSha256": "0c483972a6c46c05cbd8bddf81b4a15a07d36a03dee84a0f93965dcb7b46e3ba",
-      "purpose": "Portia scientific source or authored preparation evidence.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 1325,
-      "expectedSha256": "92dcee534516627f6e5d5e26374be149209278423483cd45cbb1199bbb94978e",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "92dcee534516627f6e5d5e26374be149209278423483cd45cbb1199bbb94978e"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 691,
-      "expectedSha256": "230c4e7824a868cb61539fd09656ad99c2d5bc20e31d63635b0c0fa0bcf9ba47",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "230c4e7824a868cb61539fd09656ad99c2d5bc20e31d63635b0c0fa0bcf9ba47"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1298,
-      "expectedSha256": "f150842fdc8d6eb0e2ac372055febae5a820bc846c6697c34085158e6f3d0bd4",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "f150842fdc8d6eb0e2ac372055febae5a820bc846c6697c34085158e6f3d0bd4"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 1007,
-      "expectedSha256": "b4905d96560c5d9adeb15d0924b6e50a16eed87db23019ba598f63197b75ad1d",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "b4905d96560c5d9adeb15d0924b6e50a16eed87db23019ba598f63197b75ad1d"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2500,
-      "expectedSha256": "91c675759b4e5af412dd4315592be1a94460e0da2fe703f685df902c26f5cc29",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "91c675759b4e5af412dd4315592be1a94460e0da2fe703f685df902c26f5cc29"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3345,
-      "expectedSha256": "5c11f93e1792a4316cc06e413ea066aadcb022709c994677c3f301cffe046a48",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "5c11f93e1792a4316cc06e413ea066aadcb022709c994677c3f301cffe046a48"
     },
     {
       "path": "shape/pck00011.tpc",
       "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 849,
-      "expectedSha256": "ef1e544cdb25d939e781996b5c3a4779ffa193c9714039978aae3572746020f0",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "ef1e544cdb25d939e781996b5c3a4779ffa193c9714039978aae3572746020f0"
     },
     {
       "path": "survey/best-observation.json",
       "expectedBytes": 12819,
-      "expectedSha256": "0ae1bed95b84f9d1192a41367f95139c8e4e48d941e74f7ba19d0d4586a78c63",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "0ae1bed95b84f9d1192a41367f95139c8e4e48d941e74f7ba19d0d4586a78c63"
     },
     {
       "path": "survey/opus-finest.json",
       "expectedBytes": 646,
-      "expectedSha256": "42da2486e25e84609bc65da1fd5e10cdeac02e3e8812e42093adf2eae33fd34c",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "42da2486e25e84609bc65da1fd5e10cdeac02e3e8812e42093adf2eae33fd34c"
     },
     {
       "path": "survey/published-shape.json",
       "expectedBytes": 1752,
-      "expectedSha256": "b5ec7812b60ae562165800a2b82b04abfef7c23d0a8226012cfe4e011a0eafec",
-      "purpose": "Portia scientific source or authored preparation evidence."
+      "expectedSha256": "b5ec7812b60ae562165800a2b82b04abfef7c23d0a8226012cfe4e011a0eafec"
     }
   ],
   "generatedIntermediates": [

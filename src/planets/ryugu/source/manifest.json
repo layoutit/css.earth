@@ -292,113 +292,95 @@
   "documents": [
     {
       "path": "content/object.json",
-      "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 9289,
-      "expectedSha256": "876031d92196120e35c87565e50d927027c02960840bad06681bc7a6ccfa1ce1",
+      "expectedBytes": 9404,
+      "expectedSha256": "c1cb474f7b85860defdf548e47326188ec2a48efa25bed3c1685c4a236ccb7ed",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 2278,
       "expectedSha256": "47f3950584d598f6c40a56454e0b2d7eec685c58619389080ee9082cf45dc6f0"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 1349,
       "expectedSha256": "e23619793ecaf2a309825a3e3ab086844806d4d9176a508b51f923438d744ee1"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 338,
       "expectedSha256": "556d6f72a71cff1c5303fa10ed0034be9023703d72078e6df250713124ee02a1"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 3580,
       "expectedSha256": "eea10abc78d58897604f11365abfec6a05e637ca3a1c79702f3fe0096dc0c8fc"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 3007,
       "expectedSha256": "f8459547fa630651abcddddf187d276eda8d348567bdda9d73d7a498544def16"
     },
     {
       "path": "reference/ReadMeSecond.txt",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 69620,
       "expectedSha256": "832a58efd9fe25e62325f333d28264e632c2d24ee47de683081b603a85d19622"
     },
     {
       "path": "reference/horizons-physical.txt",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 1652,
       "expectedSha256": "2a0abdb0ed2eeb9434aea81c59763df94e2213f990016829b05bf866a1d99492"
     },
     {
       "path": "reference/hyb2_onc_20180703_BOX-A_l3erm_v06.lblx",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 24429,
       "expectedSha256": "aeff2bb61ba8fe981bb823c4eafe6fd5c70025d7df8eebb6e5a5d1f07e4c6fa9"
     },
     {
       "path": "reference/hyb2_onc_20180710_BOX-A_l3em_v06.lblx",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 25515,
       "expectedSha256": "278aa5d446a7661d3513b7ec5f22e194c949e4b0e738635dbc9020cad4e21dce"
     },
     {
       "path": "reference/mosaic_info.xlsx",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 16859,
       "expectedSha256": "9b9bf04b3c375732414d64e9aa2a71ae42ccc6fbf8d879c15b356b53417addef"
     },
     {
       "path": "reference/paper.pdf",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 1000264,
       "expectedSha256": "d81f6379ea16479ca3cc15e31ff1632ba050c4cdf03733eebad0bc6819f360d1"
     },
     {
       "path": "reference/ryugu_global.lis",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 15631,
       "expectedSha256": "5338a995e8ee3c2c76db1c7ce408143fba4fd6f9b642e9104626be6d969b76ac"
     },
     {
       "path": "reference/ryugu_shape_spc_200k_v20200323.xml",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 4083,
       "expectedSha256": "edaa06f9eb442a375b0bad4b56ee4afb3ebadd79e72ce092e1940cea3df76c70"
     },
     {
       "path": "reference/ryugu_v10.tpc",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 11410,
       "expectedSha256": "5c06e668bbc96fdd1c7a5e027543a5b8f8b70d75bc2dbb5e171b24389d0db10c"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 2177,
       "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/LICENSE.md",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 89771,
       "expectedSha256": "11d325c515fecc6566d5564f78dda3b4e6ac7aeda786fdde8c1059307c6ba8ae"
     }

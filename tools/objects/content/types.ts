@@ -130,7 +130,7 @@ export interface Fact {
   id: string;
   label: string;
   value: string;
-  source?: { url: string; label: string; checked: string; path?: string };
+  source?: { catalogueId: string; url: string; label: string; checked: string; path?: string; locator?: string };
 }
 
 export interface PreparedObjectContent {

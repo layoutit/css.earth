@@ -1,0 +1,25 @@
+{
+  "id": "nasa-moon-facts",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Science · Moon facts",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/moon/facts/",
+      "label": "NASA Science · Moon facts"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/moon/source/content/static.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "6f893fad567f43ae9bfb9232762bec8c2a8f7417b34543f22cd6994d59909d05",
+      "locator": "/panel/facts/3/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Science"
+}

@@ -130,109 +130,92 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3932,
-      "expectedSha256": "a35f062da2dbcbbc6bc9f939c03bcc3fe393d6d427f34dbe690cdbf8f7f8cb94",
-      "purpose": "Adrastea scientific source or authored preparation evidence.",
+      "expectedBytes": 4040,
+      "expectedSha256": "5ea563039827a4a2d65d74627b9e13992183eee756f22e76af17dbe075cf4bf5",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 786,
-      "expectedSha256": "201c306457328fb99682a10be10648b8b74f13987713b70884ebe7921780492f",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "201c306457328fb99682a10be10648b8b74f13987713b70884ebe7921780492f"
     },
     {
       "path": "physical.txt",
       "expectedBytes": 727,
-      "expectedSha256": "4ef65b8d3c2c3ef6f6ddd5dd98e681e41734ed62f6681f1cec56bbaf7e04a96a",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "4ef65b8d3c2c3ef6f6ddd5dd98e681e41734ed62f6681f1cec56bbaf7e04a96a"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1285,
-      "expectedSha256": "dd5b10b7390e142c022b0b3b507f82549966f2f7c195838f13be08005bfff427",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "dd5b10b7390e142c022b0b3b507f82549966f2f7c195838f13be08005bfff427"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2337,
-      "expectedSha256": "d83f67138ddfba3dfa614b41cba2031f0a95219c48810fee8ed7395e127458f9",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "d83f67138ddfba3dfa614b41cba2031f0a95219c48810fee8ed7395e127458f9"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 5549,
-      "expectedSha256": "d13ff84d19d6e34b6c91e430866f4e923a1848f0ab7381261f8ac1fe8494fd60",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "d13ff84d19d6e34b6c91e430866f4e923a1848f0ab7381261f8ac1fe8494fd60"
     },
     {
       "path": "shape/pck00011.tpc",
       "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 851,
-      "expectedSha256": "8b36040b91d3839186890894b56b4e58189476c29a0415dc4d8b980ce4891800",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "8b36040b91d3839186890894b56b4e58189476c29a0415dc4d8b980ce4891800"
     },
     {
       "path": "survey/0374674100-metadata.json",
       "expectedBytes": 11739,
-      "expectedSha256": "961d0687ea1bbf043e969744658b45d68b6e913b727d50cd71b868a249f5f77b",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "961d0687ea1bbf043e969744658b45d68b6e913b727d50cd71b868a249f5f77b"
     },
     {
       "path": "survey/0401718000-metadata.json",
       "expectedBytes": 11743,
-      "expectedSha256": "30c5e62efcd9775d1621102e5b361c8ceb722812634121524ae412e85730e23b",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "30c5e62efcd9775d1621102e5b361c8ceb722812634121524ae412e85730e23b"
     },
     {
       "path": "survey/0401749000-metadata.json",
       "expectedBytes": 11725,
-      "expectedSha256": "d27ad0c489dc403c77ddfe33b7df3ee530eb57fa333e3164f90f08241c9e7028",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "d27ad0c489dc403c77ddfe33b7df3ee530eb57fa333e3164f90f08241c9e7028"
     },
     {
       "path": "survey/0401764300-metadata.json",
       "expectedBytes": 11730,
-      "expectedSha256": "815939c2f02e5cdb93be51e53c93f4ce5fb156ccbb17ade17975a5c4366ad843",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "815939c2f02e5cdb93be51e53c93f4ce5fb156ccbb17ade17975a5c4366ad843"
     },
     {
       "path": "survey/0401776900-metadata.json",
       "expectedBytes": 11743,
-      "expectedSha256": "01c9a260b546d78b4fbe0ff1d02aad2c8437584ceaa06ef49d0627499fd5e6c8",
-      "purpose": "Adrastea scientific source or authored preparation evidence."
+      "expectedSha256": "01c9a260b546d78b4fbe0ff1d02aad2c8437584ceaa06ef49d0627499fd5e6c8"
     },
     {
       "path": "editorial/factsheet-review.json",

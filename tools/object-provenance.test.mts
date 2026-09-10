@@ -50,8 +50,16 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
     writeFile(resolve(root, 'runtime-assets.json'), JSON.stringify({ assets: [{ filename: 'surface.webp', sha256: hash(output), bytes: output.length }] })),
     writeFile(resolve(outputDirectory, 'lenses.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface.webp' }] })),
   ]);
-  return { objectDirectory: root, source, outputDirectory, publicDirectory, write: false };
+  return { objectDirectory: root, source, outputDirectory, publicDirectory, basis: 'prepared', write: false };
 }
+
+test('standalone lineage recovery never claims a fresh preparation, including with byte verification', async t => {
+  const { basis, ...context } = await fixture(t);
+  assert.equal((await prepareObjectProvenance(context)).basis, 'recovered');
+  const verified = await prepareObjectProvenance({ ...context, verify: true });
+  assert.equal(verified.basis, 'recovered');
+  assert.ok(verified.sources.every(source => source.verification === 'bytes-verified'));
+});
 
 test('preparation binds exact input and output bytes and excludes unused archive entries', async t => {
   const context = await fixture(t), document = await prepareObjectProvenance(context);

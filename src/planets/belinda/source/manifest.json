@@ -134,113 +134,95 @@
       "path": "content/object.json",
       "expectedBytes": 3821,
       "expectedSha256": "3907c8c5b61134e66686ab988fd8e6f4753c1714eb65e42ff91047727f41f58d",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "kernels/naif0012.tls",
       "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
     },
     {
       "path": "kernels/pck00011.tpc",
       "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
       "path": "measurements.json",
       "expectedBytes": 2333,
-      "expectedSha256": "f7b279721ca64e755bbcef6d91f9dad6b3033e5cb44a440eb728c09f7cf9ca99",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "f7b279721ca64e755bbcef6d91f9dad6b3033e5cb44a440eb728c09f7cf9ca99"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 898,
-      "expectedSha256": "241d1a0c5c5438814a4617160772a1d0aee6b822f15eb48d39143ae2888dac2b",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "241d1a0c5c5438814a4617160772a1d0aee6b822f15eb48d39143ae2888dac2b"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1248,
-      "expectedSha256": "242318af8f4433d38e1835c580296473e0d8860bec30c842024ad53e18bd715a",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "242318af8f4433d38e1835c580296473e0d8860bec30c842024ad53e18bd715a"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 1527,
-      "expectedSha256": "084c12fb420812c280c7cde1096192b15bb7c2c033f0d02b074c355a8d296c95",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "084c12fb420812c280c7cde1096192b15bb7c2c033f0d02b074c355a8d296c95"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2494,
-      "expectedSha256": "babb61c0c53d7c73adec193fb7981eb2c7989e59f1be1a65a217a7279432c052",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "babb61c0c53d7c73adec193fb7981eb2c7989e59f1be1a65a217a7279432c052"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 4170,
-      "expectedSha256": "446cb45a014feb7a2eb2eba6dba993aa665f2de39a60b7dcce4d6a34848ef884",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "446cb45a014feb7a2eb2eba6dba993aa665f2de39a60b7dcce4d6a34848ef884"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 850,
-      "expectedSha256": "6fc36c893b36de9166c92f44c8fb1cb477017788e0f428267764e4d79efa1c4d",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "6fc36c893b36de9166c92f44c8fb1cb477017788e0f428267764e4d79efa1c4d"
     },
     {
       "path": "survey/C2673019_GEOMED.LBL",
       "expectedBytes": 3334,
-      "expectedSha256": "7951ce6a484718d8ca628592ecc073026e59bad64eb8986c9746ac46604e443b",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "7951ce6a484718d8ca628592ecc073026e59bad64eb8986c9746ac46604e443b"
     },
     {
       "path": "survey/opus-files.json",
       "expectedBytes": 13409,
-      "expectedSha256": "1ae996f3f0226db970e36a640d1caa0de6128646faea92c18cd0bbe551bb93e9",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "1ae996f3f0226db970e36a640d1caa0de6128646faea92c18cd0bbe551bb93e9"
     },
     {
       "path": "survey/opus-finest.json",
       "expectedBytes": 646,
-      "expectedSha256": "03dd32bb7e4f7bee70d03c97115874f0221b9fe735002830c9212dd67c5e1e1b",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "03dd32bb7e4f7bee70d03c97115874f0221b9fe735002830c9212dd67c5e1e1b"
     },
     {
       "path": "survey/opus-metadata.json",
       "expectedBytes": 11607,
-      "expectedSha256": "050302afaccfb92b2f1b1a8c42e950825ddf418c582d7dfd8542fe0ed38655c6",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "050302afaccfb92b2f1b1a8c42e950825ddf418c582d7dfd8542fe0ed38655c6"
     },
     {
       "path": "survey/simplification.json",
       "expectedBytes": 498,
-      "expectedSha256": "708e9805693defcc8bb81dd53f44e882889b5cf8bef776c19c9ff27b573e3a2a",
-      "purpose": "Belinda source evidence, authored interpretation, presentation or reproducibility."
+      "expectedSha256": "708e9805693defcc8bb81dd53f44e882889b5cf8bef776c19c9ff27b573e3a2a"
     }
   ],
   "generatedIntermediates": [

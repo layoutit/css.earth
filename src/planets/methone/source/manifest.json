@@ -177,107 +177,90 @@
       "path": "content/object.json",
       "expectedBytes": 3486,
       "expectedSha256": "327c9bf6bad91a83fdf0f4990a277da0658416e0a3f43ab16f83e0a8e60ce756",
-      "purpose": "Methone source evidence or authored preparation data.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 1314,
-      "expectedSha256": "eb7bc824be6dd19021cd61b036a66761a5b72bcc49de5aaa2127101127bce0b3",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "eb7bc824be6dd19021cd61b036a66761a5b72bcc49de5aaa2127101127bce0b3"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 1044,
-      "expectedSha256": "75e89694f7a99f2fd0663f367d7511fc9a04e542c6fcea98dedbea4c67d80505",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "75e89694f7a99f2fd0663f367d7511fc9a04e542c6fcea98dedbea4c67d80505"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1247,
-      "expectedSha256": "113185ab2ff90b5283a5f06c519b44f2ee891fab5da27fc60d36deab0c33ca19",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "113185ab2ff90b5283a5f06c519b44f2ee891fab5da27fc60d36deab0c33ca19"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 3569,
-      "expectedSha256": "ce47ac830f221102a1d79dc79a3594fdc4ca4c6d259a179d5326061b4a0bca98",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "ce47ac830f221102a1d79dc79a3594fdc4ca4c6d259a179d5326061b4a0bca98"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 4241,
-      "expectedSha256": "3c2591dafad328b9576d0738abd01f4f3ec80af5fd246ecf6b41a7674ad558c2",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "3c2591dafad328b9576d0738abd01f4f3ec80af5fd246ecf6b41a7674ad558c2"
     },
     {
       "path": "shape/pck00011.tpc",
       "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
       "path": "shape/rotation.json",
       "expectedBytes": 1477,
-      "expectedSha256": "8c290566205f0c14c337f4903927b1257c828e2cafcfb0642dbae8904a8c2b4d",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "8c290566205f0c14c337f4903927b1257c828e2cafcfb0642dbae8904a8c2b4d"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 850,
-      "expectedSha256": "9ae3de9105a227281aa216d7eda2d0a159a93367947d0844285ec3245ac661e7",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "9ae3de9105a227281aa216d7eda2d0a159a93367947d0844285ec3245ac661e7"
     },
     {
       "path": "survey/camera-fit.json",
       "expectedBytes": 378,
-      "expectedSha256": "5d654e0e1b32ad7a2acbc95f33393f8595b418eb8e5af2eb5c0b6865acb1a375",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "5d654e0e1b32ad7a2acbc95f33393f8595b418eb8e5af2eb5c0b6865acb1a375"
     },
     {
       "path": "survey/candidate-observations.json",
       "expectedBytes": 4235,
-      "expectedSha256": "8b875545d8ebd1a0c3c3404e92c03f276b7bb33b0de35d4ea64ceb0aff0dadb2",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "8b875545d8ebd1a0c3c3404e92c03f276b7bb33b0de35d4ea64ceb0aff0dadb2"
     },
     {
       "path": "survey/clear-filter-survey.json",
       "expectedBytes": 2463,
-      "expectedSha256": "5be129d9cb3838cecab17ea2c644c79431afdc77fc78d27fe9d8f21dd288073e",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "5be129d9cb3838cecab17ea2c644c79431afdc77fc78d27fe9d8f21dd288073e"
     },
     {
       "path": "survey/observation-metadata.json",
       "expectedBytes": 12093,
-      "expectedSha256": "ca9ef788579129d4235ea34562c36913659d117b47942d4b72092a33e0ba30bd",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "ca9ef788579129d4235ea34562c36913659d117b47942d4b72092a33e0ba30bd"
     },
     {
       "path": "survey/source-camera.json",
       "expectedBytes": 3256,
-      "expectedSha256": "bfd9c8f5c2436813c3487e4c148e4be1618b18a8866b34d294d30e260a011cd8",
-      "purpose": "Methone source evidence or authored preparation data."
+      "expectedSha256": "bfd9c8f5c2436813c3487e4c148e4be1618b18a8866b34d294d30e260a011cd8"
     }
   ],
   "generatedIntermediates": [

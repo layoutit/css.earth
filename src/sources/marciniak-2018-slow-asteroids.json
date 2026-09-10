@@ -1,0 +1,29 @@
+{
+  "id": "marciniak-2018-slow-asteroids",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Marciniak et al. (2018): Photometric survey, modelling, and scaling of long-period and low-amplitude asteroids",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1711.01893"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/pdf/1711.01893",
+      "label": "Marciniak et al. (2018): Photometric survey, modelling, and scaling of long-period and low-amplitude asteroids"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/aemilia/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "4f658c937daf3edb14ba6fe786f0ed2ed7a244160db5f2fa724d986ecde8057e",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
