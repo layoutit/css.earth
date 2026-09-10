@@ -1,9 +1,9 @@
 .space-minimap {
   position: absolute;
-  top: calc(var(--explorer-readout-top, 0px) + var(--explorer-status-height, 18px) + 8px);
+  bottom: calc(var(--explorer-footer-height, 18px) + 8px);
   right: 10px;
-  width: 190px;
-  height: 190px;
+  width: var(--explorer-minimap-size, 190px);
+  height: var(--explorer-minimap-size, 190px);
   z-index: 105;
   --map-scale: 1;
   padding: 0;
@@ -85,5 +85,5 @@
 }
 .space-minimap-dot[data-classification="catalog-star"] { width: 1.5px; height: 1.5px; margin: -.75px; }
 @media (max-width: 640px) {
-  .space-minimap { width: 140px; height: 140px; right: 8px; --map-scale: .7368421; }
+  .space-minimap { --explorer-minimap-size: 140px; right: 8px; --map-scale: .7368421; }
 }

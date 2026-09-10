@@ -2,7 +2,9 @@
 interface Props { title: string; metadata?: string | null; description?: string; descriptionDetail?: string; href?: string; }
 const { title, metadata, description, descriptionDetail, href } = Astro.props;
 ---
-<h3 class="planet-lens-details-title">{title}{metadata && <span class="planet-selected-content-meta"> ({metadata})</span>}</h3>
+<slot name="header">
+  <h3 class="planet-lens-details-title">{title}{metadata && <span class="planet-selected-content-meta"> ({metadata})</span>}</h3>
+</slot>
 <slot />
 <p class="planet-lens-details-copy" title={descriptionDetail}>{description}</p>
 {href && <a class="planet-dataset-caption planet-dataset-source" href={href} target="_blank" rel="noreferrer" aria-label={`View source for ${title} (opens in a new tab)`}>

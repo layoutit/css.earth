@@ -1,0 +1,64 @@
+---
+import type { Props } from '../planet-shell-types';
+import { datasetContext } from '../dataset-context.mts';
+import { EXPLORATION, referenceUrl } from '../exploration-catalog.mts';
+import { SOURCE_CATALOGUE, SOURCES } from '../sources-catalog.mts';
+import PlanetCard from './PlanetCard.astro';
+import SelectedContent from './SelectedContent.astro';
+const { objectId, lenses, provenance, deferMissionContent } = Astro.props;
+const contexts = deferMissionContent ? [] : (lenses?.controls ?? []).map(lens => ({ lens,
+  ...datasetContext(objectId, lens.id, provenance, EXPLORATION.graph, EXPLORATION.catalog, SOURCE_CATALOGUE.usage, SOURCES),
+}));
+---
+<template data-prepared-detail="dataset-context" data-deferred-detail={deferMissionContent ? 'true' : undefined}>
+  {contexts.map(context => <div data-dataset-context={context.lens.id} hidden={context.lens.id !== lenses?.defaultLens}>
+    {context.missions.map(mission => {
+      const image = mission.imageId ? EXPLORATION.images[mission.imageId] : undefined;
+      const emblem = mission.emblemId ? EXPLORATION.emblems[mission.emblemId] : undefined;
+      const dates = mission.started ? `${mission.started.value}${mission.ended ? `–${mission.ended.value}` : ''}` : null;
+      return <PlanetCard class="planet-dataset-context-card" role="region" aria-label={mission.name.value}>
+        <div class="planet-card-tabpanel">
+          <article class="planet-spacecraft" data-mission={mission.id}>
+            <SelectedContent title={mission.name.value} description={mission.description.value} href={referenceUrl(mission.description)}>
+              <div slot="header" class:list={{ 'planet-spacecraft-preview': Boolean(image || emblem) }}>
+                <div class="planet-spacecraft-heading">
+                  <h3 class="planet-lens-details-title">{mission.name.value}</h3>
+                  {dates && <span class="planet-selected-content-meta">{dates}</span>}
+                </div>
+                {image && <a class="planet-spacecraft-image-link" href={image.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${mission.name.value} mission artwork — ${image.credit}`}>
+                  <img class="planet-spacecraft-image" src={image.src} width={image.width} height={image.height} alt={`${mission.name.value} mission illustration`} loading="lazy" decoding="async" />
+                </a>}
+                {emblem && <a class={image ? 'planet-spacecraft-emblem' : 'planet-spacecraft-image-link'} href={emblem.sourceUrl} target="_blank" rel="noreferrer" aria-label={`${mission.name.value} mission emblem — ${emblem.credit}`}>
+                  <img class="planet-spacecraft-image" src={emblem.src} width={emblem.width} height={emblem.height} alt={`${mission.name.value} mission emblem`} loading="lazy" decoding="async" />
+                </a>}
+              </div>
+            </SelectedContent>
+          </article>
+        </div>
+      </PlanetCard>;
+    })}
+    {context.spacecraft.map(vehicle => <PlanetCard class="planet-dataset-context-card" role="region" aria-label={vehicle.name.value}>
+      <div class="planet-card-tabpanel">
+        <article class="planet-spacecraft" data-spacecraft={vehicle.id}>
+          <SelectedContent title={vehicle.name.value} description={vehicle.description.value} href={referenceUrl(vehicle.description)} />
+        </article>
+      </div>
+    </PlanetCard>)}
+    {context.notes.length > 0 && <PlanetCard class="planet-dataset-context-card">
+      <div class="planet-card-tabpanel">
+        {context.notes.map(note => <p class="planet-resource-description">{note}</p>)}
+      </div>
+    </PlanetCard>}
+    {context.sources.length > 0 && <PlanetCard class="planet-dataset-context-card" role="region" aria-label="Sources">
+      <div class="planet-card-tabpanel">
+        <h2 class="planet-lens-details-title">Sources</h2>
+        <ul class="planet-resources-links">
+          {context.sources.map(group => <li class="planet-resource-row">
+            {group.links.map(link => <a class="planet-resource-label" data-source={link.id} href={link.href} target="_blank" rel="noreferrer">{link.title}</a>)}
+            {group.credit && <span class="planet-resource-description">{group.credit}</span>}
+          </li>)}
+        </ul>
+      </div>
+    </PlanetCard>}
+  </div>)}
+</template>

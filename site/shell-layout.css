@@ -10,7 +10,8 @@ body[data-object-shell] {
   --explorer-categories-sidebar-gap: 12px;
   --explorer-panel-padding: 0px;
   --explorer-status-height: 18px;
-  --explorer-readout-top: 0px;
+  --explorer-footer-height: var(--explorer-status-height);
+  --explorer-minimap-size: 190px;
   --explorer-header-top: 8px;
   --explorer-panel-block-padding: 0px;
   --explorer-search-height: 44px;
@@ -132,11 +133,28 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 
 .explorer-shell-header .planet-sidebar-search-card {
+  display: grid;
+  grid-template-columns: 20px minmax(0, max-content);
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
   flex: 1 1 auto;
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  background: var(--explorer-panel-background);
+  background: transparent;
+  font: 400 18px/20px var(--shell-ui-font);
+  letter-spacing: 0.1px;
+}
+
+/* Size the centered group from its prompt, keeping it steady while typing. */
+.explorer-shell-header .planet-sidebar-search-card::before {
+  content: attr(data-search-prompt);
+  grid-area: 1 / 2;
+  min-width: 0;
+  visibility: hidden;
+  white-space: pre;
+  pointer-events: none;
 }
 
 .explorer-shell-header .planet-sidebar-search-icon {
@@ -146,12 +164,13 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 
 .explorer-shell-header .planet-sidebar-search {
-  padding-block: 12px;
-  padding-inline: var(--explorer-content-inset) 40px;
-  line-height: 20px;
-  font-weight: 400;
+  grid-area: 1 / 2;
+  min-width: 0;
+  padding-block: 11px;
+  padding-inline: 0;
+  font: inherit;
   border: 0;
-  border-radius: 0;
+  border-radius: 4px;
   background: transparent;
   box-shadow: none;
   color: var(--explorer-control-text);
@@ -167,10 +186,9 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 }
 
 .explorer-shell-header .planet-sidebar-view-all {
-  top: 0;
-  left: auto;
-  right: 8px;
-  width: 32px;
+  position: static;
+  grid-area: 1 / 1;
+  width: 20px;
   height: var(--explorer-search-height);
   border-radius: 0;
 }
@@ -256,7 +274,6 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   border-bottom-color: var(--shell-focus);
 }
 
-.explorer-shell-header .planet-sidebar-search,
 .explorer-shell-header .planet-toolbar-action,
 .planet-search-category,
 .planet-sidebar-collapse {
@@ -354,9 +371,38 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
 
 .planet-sidebar::-webkit-scrollbar { display: none; }
 
+/* Dataset context uses the same cards as the left sidebar, above the minimap. */
+.planet-dataset-context-dock { display: contents; }
+.planet-dataset-context-rail {
+  --explorer-card-padding-left: var(--explorer-content-inset);
+  width: 100%;
+  pointer-events: auto;
+}
+.planet-dataset-context-rail[hidden],
+.planet-dataset-context-rail [data-dataset-context][hidden] { display: none; }
+.planet-dataset-context-rail [data-dataset-context] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--explorer-panel-gap);
+}
+.planet-dataset-context-card .planet-card-tabpanel { padding-top: 0; }
+
+@media (min-width: 821px) and (orientation: landscape) {
+  .planet-dataset-context-rail {
+    --dataset-context-top: var(--explorer-controls-top);
+    position: fixed;
+    width: var(--explorer-panel-width);
+    top: var(--dataset-context-top);
+    right: var(--explorer-panel-left);
+    max-height: calc(100dvh - var(--dataset-context-top) - var(--explorer-minimap-size) - var(--explorer-footer-height) - 2 * var(--explorer-panel-gap));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
 @media (min-width: 821px) and (orientation: landscape) {
   body[data-object-shell] {
-    --explorer-readout-top: var(--explorer-header-top);
+    --explorer-header-height: var(--explorer-search-height);
   }
 
   .planet-ui-layer {
@@ -392,14 +438,19 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     position: relative;
     inset: auto;
     margin: var(--explorer-header-top) 0 var(--explorer-header-panel-gap);
-    pointer-events: auto;
+    pointer-events: none;
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) max(440px, 33.333vw) minmax(0, 1fr);
+    grid-template-rows: var(--explorer-search-height);
+    column-gap: 0;
     box-sizing: border-box;
     padding-inline-end: 0;
-    width: var(--explorer-header-width);
-    max-width: calc(100vw - var(--explorer-rail-left) - 12px);
+    width: calc(100vw - 2 * var(--explorer-panel-left));
+    max-width: none;
   }
+
+  .explorer-brand-row { justify-self: start; pointer-events: auto; }
+  .planet-search-toolbar { grid-column: 2; pointer-events: auto; }
 
   .planet-sidebar {
     --explorer-card-padding-left: calc(var(--explorer-content-inset) - var(--explorer-panel-padding));
@@ -410,7 +461,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     width: 100%;
     min-width: 0;
     min-height: 0;
-    max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-status-height) - var(--explorer-panel-bottom-gap));
+    max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-footer-height) - var(--explorer-panel-bottom-gap));
     padding-top: 0;
     pointer-events: auto;
     contain: layout paint;
@@ -421,17 +472,21 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     inset: 0;
   }
 
-  body[data-object-shell] .planet-view-readout {
-    left: calc(var(--explorer-dock-width) + 12px);
+}
+
+@media (min-width: 821px) and (max-width: 900px) and (orientation: landscape) {
+  body[data-object-shell] {
+    --explorer-header-height: calc(2 * var(--explorer-search-height) + var(--explorer-header-row-gap));
   }
+  .explorer-shell-header { grid-template-rows: repeat(2, var(--explorer-search-height)); }
+  .explorer-brand-row { grid-column: 1 / -1; }
+  .planet-search-toolbar { grid-row: 2; }
 }
 
 @media (min-width: 821px) and (orientation: landscape) {
   body[data-sidebar-collapsed="true"] .planet-sidebar-frame { display: none; }
   body[data-sidebar-collapsed="true"] .explorer-shell-header { pointer-events: auto; }
-  body[data-sidebar-collapsed="true"] .planet-viewport,
-  body[data-sidebar-collapsed="true"] .planet-view-readout,
-  body[data-sidebar-collapsed="true"] .planet-attribution-footer { left: 0; }
+  body[data-sidebar-collapsed="true"] .planet-viewport { left: 0; }
 }
 
 /* Preserve the scene-above-information flow on phones and portrait tablets. */
@@ -458,6 +513,7 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   }
 
   body[data-object-shell] {
+    --explorer-footer-height: calc(2 * var(--explorer-status-height));
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
