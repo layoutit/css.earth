@@ -352,6 +352,129 @@
       "consumers": [
         "mapped-science-inputs"
       ]
+    },
+    {
+      "id": "diviner-ghrm-tbol_m-original",
+      "path": "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.img",
+      "expectedSha256": "c92932e837bdfca4b78605c52abe6b8e1f91f31508a315ce3321cb589ea1e12e",
+      "expectedBytes": 3303014400,
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img",
+      "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
+      "license": "CC0 1.0 author dataset; NASA PDS scientific data",
+      "licenseEvidence": [
+        "https://doi.org/10.25346/S6/LFAVXU"
+      ],
+      "acquisition": "Exact PDS float32 IMG; streamed and SHA-256 pinned",
+      "redistribution": "Scientific data with source attribution; original restored from its pin",
+      "consumers": [
+        "ghrm-source"
+      ],
+      "lensId": "midnight-temperature"
+    },
+    {
+      "id": "diviner-ghrm-tbol_m-compact",
+      "path": "science/diviner-ghrm/tbol_m-compact.tif",
+      "expectedSha256": "63bd05458e3b24d02bebe14dce7345b3b88f07db6233601eccc0f7afecfd6e57",
+      "expectedBytes": 9832777,
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img",
+      "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
+      "license": "CC0 1.0 author dataset; NASA PDS scientific data",
+      "licenseEvidence": [
+        "https://doi.org/10.25346/S6/LFAVXU"
+      ],
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_m.json",
+      "redistribution": "Scientific data with source attribution; original restored from its pin",
+      "consumers": [
+        "lenses"
+      ],
+      "lensId": "midnight-temperature",
+      "sourcePins": [
+        "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.img",
+        "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.xml",
+        "science/diviner-ghrm/prepare-tbol_m.json"
+      ]
+    },
+    {
+      "id": "diviner-ghrm-tbol_anom-original",
+      "path": "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.img",
+      "expectedSha256": "37818f875e8455301789df3484356a907c6140b8fe864ef15d70f812f8319bfd",
+      "expectedBytes": 3303014400,
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img",
+      "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
+      "license": "CC0 1.0 author dataset; NASA PDS scientific data",
+      "licenseEvidence": [
+        "https://doi.org/10.25346/S6/LFAVXU"
+      ],
+      "acquisition": "Exact PDS float32 IMG; streamed and SHA-256 pinned",
+      "redistribution": "Scientific data with source attribution; original restored from its pin",
+      "consumers": [
+        "ghrm-source"
+      ],
+      "lensId": "heat-anomalies"
+    },
+    {
+      "id": "diviner-ghrm-tbol_anom-compact",
+      "path": "science/diviner-ghrm/tbol_anom-compact.tif",
+      "expectedSha256": "009a700af3d4b25d3ee7454ea6d97b96eb2e7f513f00081f96f4001b7a50c1c6",
+      "expectedBytes": 9522044,
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img",
+      "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
+      "license": "CC0 1.0 author dataset; NASA PDS scientific data",
+      "licenseEvidence": [
+        "https://doi.org/10.25346/S6/LFAVXU"
+      ],
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-tbol_anom.json",
+      "redistribution": "Scientific data with source attribution; original restored from its pin",
+      "consumers": [
+        "lenses"
+      ],
+      "lensId": "heat-anomalies",
+      "sourcePins": [
+        "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.img",
+        "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.xml",
+        "science/diviner-ghrm/prepare-tbol_anom.json"
+      ]
+    },
+    {
+      "id": "diviner-ghrm-ra_sam-original",
+      "path": "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.img",
+      "expectedSha256": "4a4128ecc652850af367bfc8bc553ba9064dd40ca4df9521731024da05b8a123",
+      "expectedBytes": 3303014400,
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img",
+      "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
+      "license": "CC0 1.0 author dataset; NASA PDS scientific data",
+      "licenseEvidence": [
+        "https://doi.org/10.25346/S6/LFAVXU"
+      ],
+      "acquisition": "Exact PDS float32 IMG; streamed and SHA-256 pinned",
+      "redistribution": "Scientific data with source attribution; original restored from its pin",
+      "consumers": [
+        "ghrm-source"
+      ],
+      "lensId": "rock-abundance"
+    },
+    {
+      "id": "diviner-ghrm-ra_sam-compact",
+      "path": "science/diviner-ghrm/ra_sam-compact.tif",
+      "expectedSha256": "2d87312b2b5cf7caa6a949f2d63e7fe1b0db8d5a7cb57822ba1af89281757ca3",
+      "expectedBytes": 9311218,
+      "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img",
+      "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
+      "license": "CC0 1.0 author dataset; NASA PDS scientific data",
+      "licenseEvidence": [
+        "https://doi.org/10.25346/S6/LFAVXU"
+      ],
+      "acquisition": "Windowed nearest-native sampling with explicit quantization; tools/objects/acquisition/diviner-ghrm.py science/diviner-ghrm/prepare-ra_sam.json",
+      "redistribution": "Scientific data with source attribution; original restored from its pin",
+      "consumers": [
+        "lenses"
+      ],
+      "lensId": "rock-abundance",
+      "sourcePins": [
+        "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.img",
+        "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.xml",
+        "science/diviner-ghrm/prepare-ra_sam.json"
+      ]
     }
   ],
   "generatedIntermediates": [],
@@ -370,8 +493,8 @@
     },
     {
       "path": "preparation/raster.json",
-      "expectedBytes": 13969,
-      "expectedSha256": "ccb8c30e7840c19bc3d6e6958b40bea14e5fbf2049306b19cce02438c9af8bde",
+      "expectedBytes": 16784,
+      "expectedSha256": "eb9a4f0565bb48499d42a7c22ff78cd43a0767191200c934fdb98cfea92238eb",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
@@ -388,8 +511,8 @@
     },
     {
       "path": "content/static.json",
-      "expectedBytes": 26173,
-      "expectedSha256": "5612eae00f6877ab3441a07353524a179afa537a6b246950938855624d09e7e0",
+      "expectedBytes": 31326,
+      "expectedSha256": "6f893fad567f43ae9bfb9232762bec8c2a8f7417b34543f22cd6994d59909d05",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
@@ -400,8 +523,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3387,
-      "expectedSha256": "527c814f547494492a0921ceff6fc842a7fdf6ec87b08e1e08df8f0deaa75c0e",
+      "expectedBytes": 5151,
+      "expectedSha256": "6b5ca65f263838194f6c28b2f5096dabf34b2aa93ccbb39d637d3babf2094c45",
       "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
     },
     {
@@ -486,6 +609,60 @@
       "purpose": "Published B6 GIS metadata or original map symbols.",
       "expectedBytes": 5054,
       "expectedSha256": "d47f7d22481833224005b269b1d61e748875f49580d3396b54029a797f9b875b"
+    },
+    {
+      "path": "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.xml",
+      "expectedSha256": "15ca35c0a6c3c82114683b2465c5387524a79c3ff90fd662506bbd8284fb6579",
+      "expectedBytes": 7992,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "path": "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.xml",
+      "expectedSha256": "eb7dc4cd2d81833def81c61fe51a54870724d7ac88b0d2845b53653cc60a0b10",
+      "expectedBytes": 8014,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "path": "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.xml",
+      "expectedSha256": "1d221419b090c0deeb1541e9707b6427ae1401bcdb726c9598ac328421083fe7",
+      "expectedBytes": 7985,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "path": "science/diviner-ghrm/prepare-tbol_m.json",
+      "expectedSha256": "b09f2c2b32319c00ff2d8e6cdd8ffd7f81d05e6930893aad28b3d855b0a0f133",
+      "expectedBytes": 1040,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "path": "science/diviner-ghrm/tbol_m-receipt.json",
+      "expectedSha256": "bf329009d025e19d21a6d3244e9cabd67b5c697badd84039f7f0585e50d9274f",
+      "expectedBytes": 15207,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "path": "science/diviner-ghrm/prepare-ra_sam.json",
+      "expectedSha256": "260fcc90758033c62d6ade809c983847ff597eac110bbe5374bc52736466e235",
+      "expectedBytes": 1059,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "path": "science/diviner-ghrm/prepare-tbol_anom.json",
+      "expectedSha256": "cc9b79fb3e6e62050f52b40ce683a69207183264ba50db923d6e7b0e2ee7310d",
+      "expectedBytes": 1074,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "path": "science/diviner-ghrm/ra_sam-receipt.json",
+      "expectedSha256": "295292975706c2e3b1d388c6c1d1f5d5195a42e7aab1d23d7577c2a20dfe0e18",
+      "expectedBytes": 16444,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
+    },
+    {
+      "path": "science/diviner-ghrm/tbol_anom-receipt.json",
+      "expectedSha256": "aec2287b52f7d4ba9e773e46bd12ef0332f5cb872403040ad9fc11c741a78ef0",
+      "expectedBytes": 16526,
+      "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     }
   ]
 }
