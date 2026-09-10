@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6c1231279fd42e122e113b760ff7e49bf99f9521d6cdf0d2d1d9e8e49ed59316"
+    "sha256": "464e773765bc05c0f483f2bedfd2fb317f8ce04393a84143382f1d4464895c2c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -392,13 +392,14 @@
     },
     {
       "path": "science/albedo_arrokoth4_fp36h2_masked1.lblx",
-      "purpose": "Pinned source observation, interpretation or preparation input.",
-      "id": "authored-document:science/albedo_arrokoth4_fp36h2_masked1.lblx",
-      "kind": "authored-document",
-      "origin": "object:source/science/albedo_arrokoth4_fp36h2_masked1.lblx",
-      "title": "Pinned source observation, interpretation or preparation input.",
-      "credit": "cssEarth contributors",
-      "acquisition": "Authored, pinned object-package document.",
+      "purpose": "Native label identifying the albedo map, its FITS array and released UV projection.",
+      "kind": "source-document",
+      "title": "Arrokoth Albedo Map — PDS4 label",
+      "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/albedo_arrokoth4_fp36h2_masked1.lblx",
+      "credit": "Porter, S. (2024); NASA PDS / New Horizons",
+      "acquisition": "Unmodified PDS4 product label; restored through source/preparation/acquisition.json.",
+      "productId": "urn:nasa:pds:nh_derived:arrokoth_shapemodel_porter2024:albedo_arrokoth4_fp36h2_masked1::1.0",
+      "id": "source-document:science/albedo_arrokoth4_fp36h2_masked1.lblx",
       "upstreamLineage": "not-recorded",
       "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "bytes": 9529,
@@ -498,7 +499,7 @@
       },
       "inputs": [
         "lorri-albedo-model",
-        "authored-document:science/albedo_arrokoth4_fp36h2_masked1.lblx",
+        "source-document:science/albedo_arrokoth4_fp36h2_masked1.lblx",
         "published-shape"
       ],
       "outputs": [

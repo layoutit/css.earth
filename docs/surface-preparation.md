@@ -32,6 +32,23 @@ current datasets and retained source history.
 
 ## Decode the source before choosing its display
 
+### Format and field references
+
+- [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation)
+  defines mesh units, spin and coordinate frames. The body’s model record identifies
+  the selected model, version and published fields. `Lambda` and `Beta` are the
+  ecliptic pole in degrees; `Period` is in hours. Mesh volume and extents in our
+  record are calculated from the original geometry, not copied from the webpage.
+- [NEOWISE v2 column definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html)
+  define thermal-fit fields, units and flags. Keep the selected catalogue rows and
+  their interpretation with the body.
+- [JAXA/ISAS data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/)
+  describes reuse terms for AKARI data; the body NOTICE retains the attribution.
+  AcuA v1 is restored through each body’s acquisition plan and checked against its
+  manifest. Its selected measurements remain in the calibration record.
+
+### Image and numeric readers
+
 [readObservation](../tools/objects/terrestrial-layers/solid-raster.mts) selects
 the decoder named by the recipe. Ordinary images use Sharp; PDS, FITS, ISIS and
 GeoTIFF observations use format-specific readers that check the expected grid

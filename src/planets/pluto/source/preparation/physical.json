@@ -3,17 +3,15 @@
   "inputs": [
     {
       "id": "jpl",
-      "path": "orbit/jpl-physical.html",
-      "format": "text",
-      "tableRow": "Pluto",
-      "expectedColumns": [
-        1188.3,
-        1188.3,
-        13024.6,
-        1.853,
-        -6.3872,
-        247.92065
-      ]
+      "path": "orbit/jpl-physical.json",
+      "format": "json",
+      "identity": {
+        "body": "Pluto",
+        "meanRadiusKm": 1188.3,
+        "meanDensityGPerCm3": 1.853,
+        "rotationDays": -6.3872,
+        "orbitalPeriodYears": 247.92065
+      }
     },
     {
       "id": "nasa",
@@ -43,19 +41,19 @@
   "fields": {
     "meanRadiusKm": {
       "source": "jpl",
-      "path": "1"
+      "path": "meanRadiusKm"
     },
     "meanDensityGPerCm3": {
       "source": "jpl",
-      "path": "3"
+      "path": "meanDensityGPerCm3"
     },
     "rotationDays": {
       "source": "jpl",
-      "path": "4"
+      "path": "rotationDays"
     },
     "orbitalPeriodYears": {
       "source": "jpl",
-      "path": "5"
+      "path": "orbitalPeriodYears"
     },
     "sourceUrl": {
       "source": "nasa",

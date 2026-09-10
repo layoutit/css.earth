@@ -271,36 +271,6 @@
       }
     },
     {
-      "id": "jpl-satellite-physical-parameters",
-      "path": "moons/jpl-physical-parameters.html",
-      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
-      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
-      "license": "United States government data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked source snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 84633,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
-    },
-    {
-      "id": "jpl-satellite-mean-elements",
-      "path": "moons/jpl-mean-elements.html",
-      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
-      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
-      "license": "United States government data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked source snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 418952,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
-    },
-    {
       "id": "jupiter-moon-catalog",
       "path": "moons/jupiter-moons.json",
       "expectedSha256": "2b2b221a145f841c0c00924e6f963786d34304510b400765cd636b4d2d8a8d79",
@@ -332,51 +302,6 @@
         "moons"
       ],
       "expectedBytes": 161334,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
-    },
-    {
-      "id": "pds-jupiter-ring-statistics",
-      "path": "rings/pds-jupiter-rings-table.html",
-      "expectedSha256": "61c744fe0610a60306c45cc7d2a587fb7582a0f4738db47a7421daaec7603597",
-      "origin": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
-      "credit": "NASA Planetary Data System Ring-Moon Systems Node",
-      "license": "United States government scientific data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked PDS factual table snapshot",
-      "consumers": [
-        "rings"
-      ],
-      "expectedBytes": 20293,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
-    },
-    {
-      "id": "pds-jupiter-main-ring-halo-caption",
-      "path": "rings/pds-pia00701.html",
-      "expectedSha256": "938d301980cc9bd764b3e1ef84880d0d8cdd542e60271ed8569cb59272447fec",
-      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701.html",
-      "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
-      "license": "United States government scientific data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked PDS observation caption snapshot",
-      "consumers": [
-        "rings"
-      ],
-      "expectedBytes": 16498,
-      "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
-    },
-    {
-      "id": "pds-jupiter-gossamer-caption",
-      "path": "rings/pds-pia01623.html",
-      "expectedSha256": "5cdad6f5b3544111beee0a97e78acc1f0ebf17d24fc6288221c461562cd56a65",
-      "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA01623.html",
-      "credit": "NASA/JPL Galileo and NASA Planetary Data System Ring-Moon Systems Node",
-      "license": "United States government scientific data",
-      "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
-      "redistribution": "checked PDS observation caption snapshot",
-      "consumers": [
-        "rings"
-      ],
-      "expectedBytes": 17061,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh"
     },
     {
@@ -498,8 +423,8 @@
     {
       "id": "jupiter-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 9174,
-      "expectedSha256": "5d75b7dec573d5be29af90ef161d3880f9600515ca6220ed51bfad6bbf75b211",
+      "expectedBytes": 7835,
+      "expectedSha256": "b5ea81c832e4c4c6fa6656453a535d3b5bbc1fe3019e6d1d8d3cebb32ec2adb5",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -666,8 +591,8 @@
     {
       "id": "jupiter-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 6280,
-      "expectedSha256": "133ffeb5c124f320247307b58e7f388291e5cbdc6724b67ca5f73373d12a3377",
+      "expectedBytes": 5212,
+      "expectedSha256": "715fcbed1bb72bb7d18a2b53f320bbc5e6bb7953648b37c498535b2d0915f32e",
       "origin": "Checked source restoration and verification operations",
       "credit": "cssEarth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",

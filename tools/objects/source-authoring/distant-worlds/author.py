@@ -78,8 +78,9 @@ for body in INPUTS['bodies']:
         record = ROOT / 'packages/astronomy/tools/.cache/horizons' / f'asteroid-{kind}-{ident}.txt'
         if record.exists():
             write(source/'reference'/f'horizons-{kind}.txt',record.read_text())
-    # Upstream papers stay ignored, reacquirable and hashed in the manifest.
+    # Citations do not need downloaded pages. Only explicit file inputs are restored.
     for ref in body.get('references',[]):
+        if not ref.get('file'): continue
         target = source / 'reference' / ref['file']
         cached = REFERENCE_ROOT / ref['file']
         if cached.exists():

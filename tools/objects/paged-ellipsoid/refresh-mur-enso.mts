@@ -1,4 +1,4 @@
-import {readJsonSource, hasErrorCode} from '../../source-values.mts';
+import {readJsonSource, hasErrorCode, requireRecord, requireString} from '../../source-values.mts';
 import {parseMurReceipt} from './source-contract.mts';
 import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest, readRefreshDescriptor, requireUpdateBytes} from './refresh-source.mts';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
@@ -23,11 +23,12 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   for (const name of files) updates.set(`science/${name}`, await readFile(join(acquiredDirectory, name)));
   if (sha256(requireUpdateBytes(updates, 'science/mur-gibs-tiles.tar.gz')) !== receipt.archiveSha256 ||
       sha256(requireUpdateBytes(updates, 'science/mur-gibs.png')) !== receipt.mosaic.sha256) throw new Error('MUR acquisition hashes differ.');
-  let advisoryBytes;
-  try { advisoryBytes = await readFile(join(acquiredDirectory, 'enso-advisory.html')); }
-  catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; advisoryBytes = await readFile(join(source, 'science/enso-advisory.html')); }
-  updates.set('science/enso-advisory.html', advisoryBytes);
-  const advisory = parseEnsoAdvisory(advisoryBytes.toString());
+  const savedAdvisory = requireRecord(map.scientific.advisory);
+  let advisory = { date: requireString(savedAdvisory.date), status: requireString(savedAdvisory.status), url: requireString(savedAdvisory.url) };
+  try { advisory = parseEnsoAdvisory(await readFile(join(acquiredDirectory, 'enso-advisory.html'), 'utf8')); }
+  catch (error) { if (!hasErrorCode(error, 'ENOENT')) throw error; }
+  // Keep the extracted status, issue date and source URL in the existing recipe.
+  // An offline imagery install preserves the separately dated advisory.
   map.path = 'science/mur-gibs.png';
   const recipe = { kind: 'gibs-mur-imagery', date: receipt.date, baseline: receipt.baseline, checked: receipt.checked, advisory };
   map.scientific = recipe;

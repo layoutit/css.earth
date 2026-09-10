@@ -48,8 +48,9 @@ original C++ code, follow the [native exporter instructions](native/README.md).
    intake operation, not a command for rebuilding existing packages.
 3. `node tools/objects/celestia-comets/initialize.mts` prepares title outlines,
    grid-backed context images and source hashes through shared preparers.
-4. `node tools/objects/celestia-comets/integrate.mts` adds the entries to the
-   single application registry, astronomy records and Sun destination source.
+4. `node tools/objects/celestia-comets/integrate.mts` registers each body's
+   descriptor and individual astronomy record, then regenerates the combined
+   astronomy exports and object catalogue.
 5. Follow the [body contributor guide](../../../src/planets/README.md) to prepare
    and assemble the packages, publish pinned runtime assets, and verify delivery.
 

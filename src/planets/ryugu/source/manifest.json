@@ -253,12 +253,6 @@
       "expectedSha256": "832a58efd9fe25e62325f333d28264e632c2d24ee47de683081b603a85d19622"
     },
     {
-      "path": "reference/dsk-index.html",
-      "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 23485,
-      "expectedSha256": "059460304a11166b18a6fb7755f85c99a69a44d75f5a2c767ac7debb0a597f3a"
-    },
-    {
       "path": "reference/horizons-physical.txt",
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 1652,
@@ -287,12 +281,6 @@
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 1000264,
       "expectedSha256": "d81f6379ea16479ca3cc15e31ff1632ba050c4cdf03733eebad0bc6819f360d1"
-    },
-    {
-      "path": "reference/pck-index.html",
-      "purpose": "Pinned source documentation or authored package input.",
-      "expectedBytes": 4609,
-      "expectedSha256": "ca40cd9382048496fdbe5d1a9211ecd70090a9c61ca0a158866643c846cfb8b5"
     },
     {
       "path": "reference/ryugu_global.lis",

@@ -15,6 +15,8 @@ Usui et al. (2011), the original ISAS/JAXA AcuA v1.0 catalog, report an effectiv
 
 The quoted ± value is the formal catalog error. The paper excludes additional shape, spin and thermal-model systematics, and describes rotational contributions of a few to about 10%, particularly with few detections. No invented total error bar is assigned.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The [gyptis validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
@@ -78,7 +80,7 @@ The original co-rotating Cartesian frame is kept: positive Z is the rotation axi
 - [AcuA primary catalog](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) and [Usui et al. (2011)](https://arxiv.org/abs/1106.1948) — thermal diameter, field meanings and limitations.
 - [Hanuš et al. (2018)](https://arxiv.org/abs/1803.06116) — survey of accepted shape-aware size fits; included for Dike, Ducrosa and Petrina.
 - [Magri et al. (2007)](https://echo.jpl.nasa.gov/asteroids/MBAs/magri.etal.2007.mbas.pdf) — independent radar and size synthesis; no mesh substitution.
-- [Ďurech et al. (2020) ](https://damit.cuni.cz/projects/damit/references/view/658)
+- [Ďurech et al. (2020), Asteroid models reconstructed from ATLAS photometry](https://ui.adsabs.harvard.edu/abs/2020A&A...643A..59D)
 
 The [source manifest](source/manifest.json) records input bytes and the calibration record. Source preparation keeps the established native PolyCSS `u` raster triangles, meshoptimizer reduction and prepared atlas path.
 

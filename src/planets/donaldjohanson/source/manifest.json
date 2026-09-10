@@ -259,12 +259,6 @@
       "expectedSha256": "b1d4b3007fe7d1c1b550a08c4b59ca77d3fa4dd66e5c714f29b5dc63ce974cfb"
     },
     {
-      "path": "reference/dsk-index.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 12307,
-      "expectedSha256": "239c7e8224ea7d7da31afa826c9b4f45e936bbf85a684b53ad179160dcea01f5"
-    },
-    {
       "path": "reference/dsk-inspection.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 4312,

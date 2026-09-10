@@ -4,7 +4,7 @@ Nereus is an elongated near-Earth asteroid reconstructed from Arecibo and Goldst
 
 ## Sources
 
-The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original Nereus_alt1.mod.wf](https://echo.jpl.nasa.gov/asteroids/shapes/Nereus_alt1.mod.wf). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf): Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper, original OBJ and public index are pinned beside the recipe.
+The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original Nereus_alt1.mod.wf](https://echo.jpl.nasa.gov/asteroids/shapes/Nereus_alt1.mod.wf). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/4660_Nereus/brozovic.etal.2009.nereus.pdf): Brozović et al. (2009), Icarus 201, 153–166; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe.
 
 Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.165 km sphere, from -0.05 to 0.1 km. The scalar is evaluated at the closest source triangle point, not the first center-ray intersection. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.
 

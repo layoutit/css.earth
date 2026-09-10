@@ -4,7 +4,7 @@
 
 ## Sources
 
-The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original 1950DA_RetrogradeModel.wf](https://echo.jpl.nasa.gov/asteroids/shapes/1950DA_RetrogradeModel.wf). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/29075_1950DA/busch.etal.2007.1950da.pdf): Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper, original OBJ and public index are pinned beside the recipe.
+The [NASA/JPL model index](https://echo.jpl.nasa.gov/asteroids/shapes/shapes.html) identifies the [original 1950DA_RetrogradeModel.wf](https://echo.jpl.nasa.gov/asteroids/shapes/1950DA_RetrogradeModel.wf). Geometry and scientific interpretation come from [the source research](https://echo.jpl.nasa.gov/asteroids/29075_1950DA/busch.etal.2007.1950da.pdf): Busch et al. (2007), Icarus 190, 608–621; Arecibo, Goldstone and NASA/JPL radar astronomy. The paper and original geometry are pinned beside the recipe.
 
 Shape uses the shared missing-imagery grid. Elevation shows original model radius minus the 0.65 km sphere, from -0.13 to 0.18 km. This is another view of the same radar reconstruction, not independent topography or height above a gravitational equipotential. Cartographic relief and lighting are display treatments.
 

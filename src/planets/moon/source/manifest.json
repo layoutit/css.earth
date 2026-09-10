@@ -58,42 +58,6 @@
       }
     },
     {
-      "id": "jpl-satellite-physical",
-      "path": "orbit/jpl-satellite-physical.html",
-      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
-      "expectedBytes": 84633,
-      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "credit": "NASA JPL Solar System Dynamics",
-      "license": "United States government factual data",
-      "licenseEvidence": [
-        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-      ],
-      "acquisition": "checked satellite physical-parameter authority page",
-      "redistribution": "checked authority page with JPL attribution",
-      "consumers": [
-        "scene",
-        "panel"
-      ]
-    },
-    {
-      "id": "jpl-satellite-elements",
-      "path": "orbit/jpl-satellite-elements.html",
-      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
-      "expectedBytes": 418952,
-      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "credit": "NASA JPL Solar System Dynamics",
-      "license": "United States government factual data",
-      "licenseEvidence": [
-        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-      ],
-      "acquisition": "checked satellite mean-elements authority page",
-      "redistribution": "checked authority page with JPL attribution",
-      "consumers": [
-        "scene",
-        "panel"
-      ]
-    },
-    {
       "id": "prepared-moon-facts",
       "path": "orbit/moon.json",
       "expectedSha256": "3c0097bcf6b166cb0ba2d03c3cc290902983e448baf82eb64e60d25257cd6d4f",

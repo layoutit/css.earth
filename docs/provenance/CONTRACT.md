@@ -94,6 +94,30 @@ or assembled a mosaic before pinning it, explain that step. Disclose an unknown
 original download identity.
 Keeping every temporary response is unnecessary.
 
+### References and retained files
+
+Use citations for papers, catalogue pages, search results and explanatory webpages.
+In the body README, record the values that support a claim, their units and
+uncertainty, the source title and authors/year, DOI or versioned URL, and the
+specific table, field or section. Explain any transcription, selection or conversion.
+Keep exact values consumed by preparation in its existing data records and recipes;
+link them instead of copying long tables into Markdown.
+
+Keep original scientific inputs and native labels needed to decode them, either
+in Git or through a tested restoration recipe with byte counts and hashes.
+An acquisition parser may read HTML temporarily. Save its selected data and source
+identity; the downloaded webpage does not become a permanent evidence file.
+“Reference evidence” and “the website might change” are not reasons to commit a page.
+
+Before removing a page, check code, acquisition recipes, manifests, tests and
+provenance references. Preserve used numerical extracts, source identity and
+extraction method. Update active references and generated pins together. Original
+reports remain unchanged at their recorded Git revision. Do not replace duplicated
+pages with a shared webpage archive or a blanket ignore rule.
+GitHub language classification does not determine what belongs in Git.
+
+### Interpretation
+
 Explain the following where relevant:
 
 - Observations, derived measurements, models or illustrations; the provider's

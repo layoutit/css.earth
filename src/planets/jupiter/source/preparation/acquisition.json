@@ -87,53 +87,10 @@
     },
     {
       "kind": "download",
-      "path": "moons/jpl-physical-parameters.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "moons/jpl-mean-elements.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
       "path": "moons/galilean-satellites-pia01299.jpg",
       "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01299/PIA01299.jpg?crop=faces%2Cfocalpoint&fit=clip&h=635&w=1870",
       "groups": [
         "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "rings/pds-jupiter-rings-table.html",
-      "url": "https://pds-rings.seti.org/jupiter/jupiter_rings_table.html",
-      "groups": [
-        "refresh",
-        "refresh-rings"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "rings/pds-pia00701.html",
-      "url": "https://pds-rings.seti.org/jupiter/galileo/PIA00701.html",
-      "groups": [
-        "refresh",
-        "refresh-rings"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "rings/pds-pia01623.html",
-      "url": "https://pds-rings.seti.org/jupiter/galileo/PIA01623.html",
-      "groups": [
-        "refresh",
-        "refresh-rings"
       ]
     },
     {

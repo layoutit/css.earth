@@ -165,12 +165,6 @@
       "expectedSha256": "8cbdf52d86cb25e44fc7a224bf435bebd63ecddde5632bc4745bf4969dcbd9bc"
     },
     {
-      "path": "reference/jpl-shape-index.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 2608,
-      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 2006,
@@ -199,12 +193,6 @@
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 7530,
       "expectedSha256": "e60fe2bc0a6364689d1cf4e8b467e808dec7177a23d2f0bb26e62dada8f052ef"
-    },
-    {
-      "path": "reference/rashalom-2016.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 34167,
-      "expectedSha256": "47d489d140353f1f005580d03067d2177223f9b3d26057fc72d51753c28e42ce"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

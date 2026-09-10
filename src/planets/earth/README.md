@@ -420,10 +420,10 @@ notes cite ignored screenshots without a retrievable run report.
 <details>
 <summary>Moon facts, sky image and typography</summary>
 
-The checked JPL Solar System Dynamics physical-parameter and mean-element pages provide the
-Moon's radius, density, mean orbital distance, inclination, period, and Earth GM.
-`source/moon/earth-moon.json` is a generated normalization that records those values and both
-authority hashes.
+The [Moon record](source/moon/earth-moon.json) keeps the selected JPL physical and
+mean-element values: radius 1,737.4 km, density 3.344 g/cm³, mean orbital distance
+384,400 km, inclination 5.16°, period 27.322 days and Earth GM 398,600.436 km³/s².
+It identifies the source URLs and hashes of the responses used for extraction.
 
 The Moon is a separate object package and route. Earth keeps only the checked relationship
 facts used by its information panel; the Earth scene does not prepare, mount, animate, toggle,

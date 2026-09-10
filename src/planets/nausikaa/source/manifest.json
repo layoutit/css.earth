@@ -138,34 +138,13 @@
       "expectedSha256": "616a22dc282c838d7f7f832eca186a80348cb1a034244bfad083e481ec367a00"
     },
     {
-      "path": "reference/damit-documentation.html",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "db492ddc44b5d537ace468dd7937dd4f430d9d54a7ebd9fcd3ff615053c99237"
-    },
-    {
-      "path": "reference/damit-model.html",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 126000,
-      "expectedSha256": "fc94f42739693d2beb106f62de486614539c3d9aabd5e2f244d2950b5963754c"
-    },
-    {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 1450,
-      "expectedSha256": "4c76475109369384193be924d3c44a147c617a74af0051deb017752832ac2f81"
-    },
-    {
-      "path": "reference/damit-reference-103.html",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 13275,
-      "expectedSha256": "d0e57cd55e568d83e60e45a875c45de75dbdbb1b5746607abf01914efd58830b"
-    },
-    {
-      "path": "reference/damit-reference-112.html",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 13373,
-      "expectedSha256": "4ee75958b0183eeb1ca85b6c2e9a288ab0daa6706db93c689f9b3d00e8a983ee"
+      "expectedSha256": "4c76475109369384193be924d3c44a147c617a74af0051deb017752832ac2f81",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1864",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",

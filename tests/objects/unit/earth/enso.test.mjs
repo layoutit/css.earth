@@ -23,8 +23,14 @@ test('latest acquisition crosses years and excludes checksum-only placeholders a
   assert.throws(() => newestCoraltemp([listings.at(-1)], '2026-01-02'), /No published NOAA/);
 });
 
-test('status and issue date come from the saved NOAA advisory, not from SST pixels', async () => {
-  assert.deepEqual(parseEnsoAdvisory(await readFile(resolve(source, 'science/enso-advisory.html'), 'utf8')), map.scientific.advisory);
+test('extracts the NOAA issue date and status and preserves their separate source record', async () => {
+  // Selected headline fields from the 13 August 2026 NOAA CPC advisory.
+  const headline = '<p>issued by CLIMATE PREDICTION CENTER 13 August 2026</p>'
+    + '<p>ENSO Alert System Status: El Ni&ntilde;o Advisory</p><p>Synopsis:</p>';
+  const expected = { date: '13 August 2026', status: 'El Niño Advisory',
+    url: 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml' };
+  assert.deepEqual(parseEnsoAdvisory(headline), expected);
+  assert.deepEqual(map.scientific.advisory, expected);
   assert.throws(() => parseEnsoAdvisory('new format'), /format changed/);
   const content = JSON.parse(await readFile(resolve(source, 'content/object.json')));
   assert.deepEqual(content.lenses.controls.find(lens => lens.id === 'enso'), murEnsoContent(map.scientific));

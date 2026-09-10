@@ -1,47 +1,5 @@
 # Prepared object provenance
 
-## Missions and spacecraft behind a dataset
-
-Captured inputs declare an explicit `capture.attributions` list in their source
-manifest. Each attribution names an individual spacecraft, an individual mission,
-or an unresolved source credit, and retains its evidence text. A spacecraft claim
-may name its mission when the source establishes that pair. Mission participation
-alone never establishes a dataset contribution.
-
-The shared [exploration catalogue guide](architecture/exploration-catalog.md)
-defines the catalogue fields, migration inventory and authoring workflow.
-`src/platform/exploration-contributions.mts` follows product parents and source
-dependencies at preparation time. It emits one contribution graph with object,
-mission and spacecraft indexes, and deduplicated dataset destinations. Schematic
-interiors and synthetic spectral models do not inherit observing missions from an
-outer reference texture. Observation-derived elevation and shape products retain
-their evidenced attributions.
-
-The Missions tab presents individual missions and their datasets on the current
-body. Expandable spacecraft details distinguish mission participation from
-observation contribution and link to other evidenced dataset views. Agency counts
-use individual mission IDs. Status is a sourced claim with an explicit date;
-absence of an end date does not imply current activity.
-
-`pnpm prepare:spacecraft` validates the catalogue, contribution graph and approved
-artwork. It does not download or render images. The render and emblem libraries
-retain their existing source URLs, credits, hashes and dimensions. Vehicles and
-missions refer to those assets explicitly; suitable artwork is optional. A joint
-illustration is not assigned as a portrait to each participating vehicle.
-
-Dataset summaries are authored beside each object's full description. The card
-uses a three-line summary area; the original description remains available in
-the text's tooltip and source content. Legends use only declared scales and
-category meanings. Every dataset reserves the same 28px band and single-line
-label area after its preview. When no legend is supplied, that slot says so;
-image palettes and brightness placeholders are not substituted for data legends.
-
-After changing capture metadata, run `pnpm prepare:provenance`. This validates all
-new provenance and the exploration catalogue before replacing the prepared set.
-The preparation-only `tools/objects/migrate-provenance-v1.mts` validates the old
-format during migration; browser consumers accept only the current format. Validate with
-`node --test site/test/dataset-spacecraft.test.mjs site/test/object-sources.test.mjs tools/object-provenance.test.mjs`.
-
 ## Lineage contract
 
 Every registered object uses the same `prepared/provenance.json` contract,
@@ -70,6 +28,14 @@ their inputs are checked as well as the final acquired product.
 Preview products inherit their original dataset's input lineage. A recipe may
 describe a scientific model or an illustration; recording lineage does not
 turn either into an observation.
+
+The manifest's `documents` collection includes provider labels and authored
+records. It does not establish authorship. Preserve each document's origin,
+credit and acquisition description; use `kind: authored-document` only for
+project-authored records. The content recipe identifies authored page content.
+Other documents default to `source-document`; missing credits or acquisition
+details remain explicitly unrecorded. Generated intermediates retain their own
+generator and source credits.
 
 The validator rejects missing inputs, missing recipe operations, unpinned
 outputs and dependency cycles. Unknown dataset operations remain explicit
@@ -125,12 +91,54 @@ acquisition or verification URLs provide the external link; malformed URL
 templates are never turned into clickable citations.
 No body-specific markup is needed for new objects.
 
+## Missions and spacecraft behind a dataset
+
+Captured inputs declare an explicit `capture.attributions` list in their source
+manifest. Each attribution names an individual spacecraft, an individual mission,
+or an unresolved source credit, and retains its evidence text. A spacecraft claim
+may name its mission when the source establishes that pair. Mission participation
+alone never establishes a dataset contribution.
+
+The shared [exploration catalogue guide](architecture/exploration-catalog.md)
+defines the catalogue fields, migration inventory and authoring workflow.
+`src/platform/exploration-contributions.mts` follows product parents and source
+dependencies at preparation time. It emits one contribution graph with object,
+mission and spacecraft indexes, and deduplicated dataset destinations. Schematic
+interiors and synthetic spectral models do not inherit observing missions from an
+outer reference texture. Observation-derived elevation and shape products retain
+their evidenced attributions.
+
+The Missions tab presents individual missions and their datasets on the current
+body. Expandable spacecraft details distinguish mission participation from
+observation contribution and link to other evidenced dataset views. Agency counts
+use individual mission IDs. Status is a sourced claim with an explicit date;
+absence of an end date does not imply current activity.
+
+`pnpm prepare:spacecraft` validates the catalogue, contribution graph and approved
+artwork. It does not download or render images. The render and emblem libraries
+retain their existing source URLs, credits, hashes and dimensions. Vehicles and
+missions refer to those assets explicitly; suitable artwork is optional. A joint
+illustration is not assigned as a portrait to each participating vehicle.
+
+Dataset summaries are authored beside each object's full description. The card
+uses a three-line summary area; the original description remains available in
+the text's tooltip and source content. Legends use only declared scales and
+category meanings. Every dataset reserves the same 28px band and single-line
+label area after its preview. When no legend is supplied, that slot says so;
+image palettes and brightness placeholders are not substituted for data legends.
+
+After changing capture metadata, run `pnpm prepare:provenance`. This validates all
+new provenance and the exploration catalogue before replacing the prepared set.
+The preparation-only `tools/objects/migrate-provenance-v1.mts` validates the old
+format during migration; browser consumers accept only the current format. Validate with
+`node --test site/test/dataset-spacecraft.test.mjs site/test/object-sources.test.mjs tools/object-provenance.test.mjs`.
+
 ## Validation
 
 Run:
 
 ```sh
-node --test tools/object-provenance.test.mjs site/test/object-sources.test.mjs site/test/scene-sources.test.mjs
+node --test tools/object-provenance.test.mjs site/test/object-sources.test.mjs site/test/scene-sources.test.mjs site/test/dataset-spacecraft.test.mjs
 pnpm typecheck:preparation
 ```
 The suite checks tampered inputs/outputs/recipes, recovery semantics, compound

@@ -64,6 +64,15 @@ def stats(entries):
 
 def summarize(label, entries):
     docs = {p:v for p,v in entries.items() if p.startswith('docs/')}
+    source_html = {p:v for p,v in entries.items() if re.match(r'src/planets/[^/]+/source/', p)
+                   and Path(p).suffix.lower() in ('.html', '.htm')}
+    html_blobs = collections.defaultdict(list)
+    for path, entry in source_html.items():
+        html_blobs[entry['oid']].append(path)
+    duplicate_html = sorted(
+        ({'oid':oid, 'bytesEach':entries[paths[0]]['bytes'], 'paths':paths}
+         for oid, paths in html_blobs.items() if len(paths) > 1),
+        key=lambda group: group['bytesEach'] * (len(group['paths']) - 1), reverse=True)
     groups = collections.defaultdict(dict)
     extensions = collections.defaultdict(dict)
     duplicates = collections.defaultdict(list)
@@ -73,15 +82,35 @@ def summarize(label, entries):
         ext = '.tar.gz' if p.endswith('.tar.gz') else Path(p).suffix.lower()
         extensions[ext][p] = v
         duplicates[v['oid']].append(p)
-    selected = {p for p in entries if re.fullmatch(r'src/planets/[^/]+/(source/manifest|prepared/provenance)\.json', p)}
+    selected = {p for p in entries if re.fullmatch(r'src/planets/[^/]+/(object|source/manifest|prepared/provenance)\.json', p)}
     selected.update(p for p,v in docs.items() if Path(p).suffix in ('.md','.json') and v['bytes'] < 6_000_000)
     registry = next((path for path in ('site/objects.mts', 'site/objects.mjs') if path in entries), None)
     if registry is None:
         raise RuntimeError('The selected revision has no object registry')
     selected.add(registry)
     content = blobs(entries, selected)
-    registry_ids = sorted(set(re.findall(r'\.\./src/planets/([^/]+)/object\.json', content[registry].decode())))
-    # The inventory reports imports as static registry candidates, without executing JS.
+    registry_source = content[registry].decode()
+    if re.search(r"from ['\"]\./prepared-object-catalog\.m[jt]s['\"]", registry_source):
+        registry_basis = 'descriptor properties.catalog'
+        registry_ids = []
+        for path, raw in content.items():
+            match = re.fullmatch(r'src/planets/([^/]+)/object\.json', path)
+            if not match:
+                continue
+            descriptor = json.loads(raw)
+            properties = descriptor.get('properties', {})
+            if 'catalog' not in properties:
+                continue
+            if descriptor.get('id') != match[1] or not isinstance(properties['catalog'], dict):
+                raise RuntimeError(f'Invalid catalogue identity or entry: {path}')
+            registry_ids.append(match[1])
+        registry_ids.sort()
+    else:
+        registry_basis = 'legacy static descriptor imports'
+        registry_ids = sorted(set(re.findall(r'\.\./src/planets/([^/]+)/object\.json', registry_source)))
+    if not registry_ids:
+        raise RuntimeError(f'No registered bodies found in {label}; update registry discovery before using this inventory')
+    # Read the selected Git snapshot, never execute its JavaScript or use local assets.
     manifests = [p for p in content if p.endswith('/source/manifest.json')]
     required = ['README.md','NOTICE.md','source/manifest.json','object.json','prepared/provenance.json','runtime-assets.json']
     missing = {suffix:[i for i in registry_ids if f'src/planets/{i}/{suffix}' not in entries] for suffix in required}
@@ -126,8 +155,12 @@ def summarize(label, entries):
         'duplicateDocBlobGroups':len(duplicate_groups),
         'duplicateDocWorkingBytes':sum(g['bytesEach']*(len(g['paths'])-1) for g in duplicate_groups),
         'largestDuplicateDocGroups':duplicate_groups[:8],
-        'registryDescriptorImports':len(registry_ids), 'sourceManifests':len(manifests),
-        'missingRequiredFilesByRegistryImport':missing,
+        'sourceHtml': {**stats(source_html), 'uniqueBlobs':len(html_blobs),
+                       'uniqueBlobBytes':sum(entries[paths[0]]['bytes'] for paths in html_blobs.values()),
+                       'duplicateWorkingBytes':sum(group['bytesEach'] * (len(group['paths']) - 1) for group in duplicate_html),
+                       'largestDuplicateGroups':duplicate_html[:8]},
+        'registeredBodies':len(registry_ids), 'registryBasis':registry_basis, 'sourceManifests':len(manifests),
+        'missingRequiredFilesByRegisteredBody':missing,
         'sourceEntries':dict(source_counts), 'sourceLicenseEvidenceField':dict(rights_counts),
         'preparedProvenanceBasis':dict(bases),
         'provenanceCoverageMeasurement':'Not measured in this snapshot; no all-body coverage-gap claim.',
@@ -155,9 +188,9 @@ report = {
     'startedAt':started, 'finishedAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),
     'headAtStart':initial_head, 'headAtEnd':git('rev-parse','HEAD').decode().strip(),
     'indexUnchangedDuringRead': initial_index == git('ls-files','--stage','-z') if args.index else None,
-    'method': 'Git blob logical bytes; no history/pack size, LFS payload, source acquisition, license verification, or browser qualification. Registry counts are static descriptor imports. Missing source bytes in Git are expected for restorable inputs. Local-path matches are triage, not broken-link verdicts. Identical Git blobs are stored once in the object database.',
+    'method': 'Git blob logical bytes; no history/pack size, LFS payload, source acquisition, license verification, or browser qualification. Registry membership comes from descriptor catalogue entries or legacy static imports in the selected snapshot; no JavaScript is executed. Missing source bytes in Git are expected for restorable inputs. Local-path matches are triage, not broken-link verdicts. Identical Git blobs are stored once in the object database.',
     'snapshots':snapshots,
 }
 Path(args.output).write_text(json.dumps(report,indent=2)+'\n')
 for s in snapshots:
-    print(json.dumps({k:s[k] for k in ('label','gitBlobTotals','docs','registryDescriptorImports','sourceManifests','sourceEntries','preparedProvenanceBasis','bodyEntryPoints','docsWithLocalReferences','duplicateDocWorkingBytes')}))
+    print(json.dumps({k:s[k] for k in ('label','gitBlobTotals','docs','registeredBodies','registryBasis','sourceManifests','sourceEntries','preparedProvenanceBasis','bodyEntryPoints','docsWithLocalReferences','duplicateDocWorkingBytes')}))

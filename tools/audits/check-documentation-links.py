@@ -9,7 +9,7 @@ import json
 import posixpath
 import re
 import subprocess
-from html import unescape
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -67,23 +67,34 @@ def anchors(text):
         result.add(heading + (f'-{occurrence}' if occurrence else ''))
     return result
 
-def local_links(file, include_other_syntax=False):
+class HtmlLinks(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.targets = []
+
+    def handle_starttag(self, tag, attrs):
+        attribute = {'a': 'href', 'img': 'src'}.get(tag)
+        target = dict(attrs).get(attribute) if attribute else None
+        if target:
+            self.targets.append(target)
+
+def local_links(file):
     source = without_fences(contents(file))
     targets = re.findall(r'!?\[[^\]]*\]\(([^)\n]+)\)', source)
-    if include_other_syntax:
-        # The docs index walk also accepts reference links and sized HTML images.
-        key = lambda label: ' '.join(label.split()).casefold()
-        references = {key(label): target for label, target in re.findall(
-            r'^ {0,3}\[([^\]\n]+)\]:\s*(<[^>\n]+>|\S+)', source, re.M)}
-        for label, reference in re.findall(r'!?\[([^\]\n]+)\](?:\[([^\]\n]*)\])?(?![(:])', source):
-            target = references.get(key(reference or label))
-            if target:
-                targets.append(target)
-        targets.extend(unescape(target) for target in re.findall(
-            r'<(?:a|img)\b[^>]*?\b(?:href|src)\s*=\s*["\x27]([^"\x27]+)["\x27]', source, re.I))
+    key = lambda label: ' '.join(label.split()).casefold()
+    references = {key(label): target for label, target in re.findall(
+        r'^ {0,3}\[([^\]\n]+)\]:\s*(<[^>\n]+>|\S+)', source, re.M)}
+    for label, reference in re.findall(r'!?\[([^\]\n]+)\](?:\[([^\]\n]*)\])?(?![(:])', source):
+        target = references.get(key(reference or label))
+        if target:
+            targets.append(target)
+    html = HtmlLinks()
+    html.feed(source)
+    targets.extend(html.targets)
     for target in targets:
-        target = target.strip().strip('<>').split(' "')[0]
-        if re.match(r'^[a-z][a-z0-9+.-]*:', target, re.I):
+        target = target.strip()
+        target = target[1:target.index('>')] if target.startswith('<') else re.split(r'\s+["\x27(]', target, maxsplit=1)[0]
+        if re.match(r'^[a-z][a-z0-9+.-]*:|^//', target, re.I):
             continue
         parsed = urlsplit(target)
         path = unquote(parsed.path)
@@ -121,7 +132,7 @@ while pending:
     if file in reachable:
         continue
     reachable.add(file)
-    for _, target, _ in local_links(file, include_other_syntax=True):
+    for _, target, _ in local_links(file):
         if target in guides:
             pending.append(target)
         elif target in illustrations:
@@ -135,8 +146,8 @@ for file in sorted(known):
         errors.append({'file': file, 'reason': 'use the body README for sources and evidence; shared guides cover usage'})
 
 print(json.dumps({'base': base, 'markdownFiles': len(markdown),
-                  'localInlineLinksChecked': checked, 'errors': errors,
+                  'localLinksChecked': checked, 'errors': errors,
                   'documentation': {'guides': len(guides), 'reachableGuides': len(reachable),
                                     'illustrations': len(illustrations), 'usedIllustrations': len(used_illustrations)},
-                  'scope': 'Checks inline link targets and heading anchors, docs placement and duplicate body accounts. The docs index walk also accepts reference links and HTML a/img links. Excludes fenced examples, external URL availability and content quality.'}, indent=2))
+                  'scope': 'Checks inline Markdown, used reference links and HTML a/img targets and Markdown heading anchors, docs placement and duplicate body accounts. Excludes fenced examples, external URL availability and content quality.'}, indent=2))
 raise SystemExit(bool(errors))

@@ -180,18 +180,6 @@
       "expectedSha256": "c02628962436e4562ab0abcbd89eea64a490ddf40ac765a50a89802ad4f3b089"
     },
     {
-      "path": "reference/jpl-shape-index.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 2608,
-      "expectedSha256": "e362c1ae825bc8adac5245f9d9964b2858687004f63752ef9cb39fab67372fb3"
-    },
-    {
-      "path": "reference/ml14-2013.html",
-      "purpose": "Pinned original scientific reference or authored preparation input.",
-      "expectedBytes": 42049,
-      "expectedSha256": "dfb8eec63d622ca3ce6126bf1727b48e06846e7145f3e970df08d0bf5fc0a9d9"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 2872,

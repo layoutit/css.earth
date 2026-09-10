@@ -1123,12 +1123,6 @@
       "expectedSha256": "f2af477511b404a8c3448fe068979fffe5146cc51fee39d7eb3a2307469d7449"
     },
     {
-      "path": "cassini-ice/evidence/license-about.html",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 22564,
-      "expectedSha256": "02f560a51d6e075f91264a56b6aad8c23cfca448a4c17f0b3f0408568bf175a9"
-    },
-    {
       "path": "cassini-ice/evidence/registration.md",
       "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
       "expectedBytes": 971,

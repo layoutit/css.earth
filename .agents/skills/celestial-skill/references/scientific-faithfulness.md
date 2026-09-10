@@ -13,7 +13,7 @@ README. Check that legends, thumbnails, minimaps, pole tiles and world markers
 describe the same interpretation as the globe.
 
 When a derived image changes, follow its other consumers too: navigation recipes,
-shared marker atlases and cached information panels can carry separate source
+per-body marker images and cached information panels can carry separate source
 pins. Regenerate those through their owners and verify their bytes; updating only
 the body's runtime inventory does not close the source-to-screen chain.
 

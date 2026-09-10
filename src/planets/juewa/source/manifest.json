@@ -100,8 +100,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 944,
-      "expectedSha256": "29116b2057b10408b9e075455194777791e37643824bfee7c5e31428a37e516c"
+      "expectedBytes": 1197,
+      "expectedSha256": "52b867437a7f4c03e0e4c13103a8e8813515ff936bcb166fe9b38556dd3d8a67"
     },
     {
       "path": "preparation/navigation.json",
@@ -134,12 +134,6 @@
       "expectedSha256": "48d29ec9302e418b25a709c0917edc6b5ae3fd4bd28c726ee2cf9f4e25494607"
     },
     {
-      "path": "reference/662.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 28594,
-      "expectedSha256": "819c1405cd3ad11c81255156102ef69865477f331543ac8ed8313bb05f86f766"
-    },
-    {
       "path": "reference/AcuA_V1.txt.gz",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 120256,
@@ -153,15 +147,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 2399,
-      "expectedSha256": "39e852c0996647df6b719fcd86bea7c0da6c2a47c71c1f7678c29948ffff38e6"
-    },
-    {
-      "path": "reference/documentation.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "d70fe161d8ed5e5079301c51a7c5ad9b14c8b0f15930e2f44e3ee3c7139581c9"
+      "expectedSha256": "39e852c0996647df6b719fcd86bea7c0da6c2a47c71c1f7678c29948ffff38e6",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5985",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -180,18 +171,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 6644,
       "expectedSha256": "867557341c630e1d37f497c6e95716cb3768c5e7cf501eedb5c47aa93ac19488"
-    },
-    {
-      "path": "reference/jaxa-data-policy.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 15999,
-      "expectedSha256": "bd4096c907073e9d524ecac5b8d0882d5f9ecbf4de1a53c957f7145886c35bfd"
-    },
-    {
-      "path": "reference/model-5985.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 121658,
-      "expectedSha256": "4a7ffc98d50bad3cf28b1d0e4e36b5354846b81ecb49795022d39415f58dfc91"
     },
     {
       "path": "reference/model-properties.json",

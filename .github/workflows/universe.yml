@@ -22,6 +22,8 @@ jobs:
       - name: Check documentation links and organization
         run: |
           python3 tools/audits/test_documentation_links.py
+          python3 tools/audits/test_provenance_documentation_inventory.py
+          python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output "$RUNNER_TEMP/provenance-inventory.json"
           python3 tools/audits/check-documentation-links.py --all
       - name: Check tracked files against ignore rules
         run: |
@@ -60,8 +62,11 @@ jobs:
         run: |
           pnpm test:preparation --universe
           node --test tools/objects/material-composition/coplanar-raster.test.mjs
-      - name: Test shared scientific source credits
-        run: node --test site/test/scene-sources.test.mjs
+      - name: Test provenance and scientific source credits
+        run: >-
+          node --test tools/object-provenance.test.mjs
+          site/test/object-sources.test.mjs site/test/dataset-spacecraft.test.mjs
+          site/test/scene-sources.test.mjs
       - name: Restore pinned JSON transports for runtime and shell tests
         run: |
           node --test tools/restore-object-json.test.mjs

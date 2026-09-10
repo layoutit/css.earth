@@ -93,14 +93,14 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 2429,
-      "expectedSha256": "6714ee8a35e7e5d01236e19f6d3a82016caf162bf311c4ef47e80f2f25dda274",
+      "expectedBytes": 2275,
+      "expectedSha256": "48501fe95a36379c3cc3fed7196e4b867b7fe9d653839bf8d845a4028c9e0d00",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 757,
-      "expectedSha256": "47d19431be381f3365b4a0a43d511a0fbc369b7280f5ca3f2a929fcec7e2fedc",
+      "expectedBytes": 526,
+      "expectedSha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -143,12 +143,6 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 7042,
       "expectedSha256": "58a0a35bb7e699885be81b80afb31ad0def8abec21282a994036d740c2e88e28",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/oumuamua-mashchenko-2019.html",
-      "expectedBytes": 328389,
-      "expectedSha256": "dd96985ca9758c75f9e4d51b1d6f63c15367ed8a92e89a4251df5aa66908ce01",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

@@ -177,30 +177,6 @@
       "groups": [
         "refresh"
       ],
-      "path": "moon/jpl-satellite-physical.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "headers": {
-        "accept": "*/*",
-        "user-agent": "cssEarth Earth source acquisition"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
-      "path": "moon/jpl-satellite-elements.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "headers": {
-        "accept": "*/*",
-        "user-agent": "cssEarth Earth source acquisition"
-      }
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "refresh"
-      ],
       "path": "editorial/nasa-earth-record.json",
       "url": "https://science.nasa.gov/wp-json/wp/v2/topic/48583",
       "headers": {

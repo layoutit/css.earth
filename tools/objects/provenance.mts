@@ -45,14 +45,6 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid provenance object identity.');
   const manifestBytes = await readFile(resolve(sourceDirectory, 'manifest.json'));
   const manifest = provenanceManifest(JSON.parse(manifestBytes.toString('utf8')));
-  const byPath = new Map<string, BoundSource>(manifest.inputs.map(input => [input.path, Object.assign({kind: 'source-input'}, input)]));
-  for (const [kind, entries] of [['authored-document', manifest.documents], ['generated-intermediate', manifest.generatedIntermediates]] as const) {
-    for (const entry of entries ?? []) byPath.set(entry.path, Object.assign({}, entry, {id: text(entry.id ?? `${kind}:${entry.path}`), kind,
-      origin: entry.origin ?? `object:source/${entry.path}`, title: entry.title ?? entry.purpose ?? entry.path,
-      credit: entry.credit ?? 'cssEarth contributors', acquisition: entry.acquisition ?? entry.generator ?? 'Authored, pinned object-package document.',
-      upstreamLineage: 'not-recorded',
-    }));
-  }
   const recipes = new Map<string, ProvenanceRecipeSource>();
   for (const input of records(record(record(descriptor.properties).recipe).sources)) {
     const reference = Object.assign({}, input, {id: text(input.id), path: text(input.path), sha256: text(input.sha256)});
@@ -61,6 +53,22 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     recipes.set(reference.id, { ...reference, parameters: record(JSON.parse(bytes.toString('utf8'))) });
   }
   const contentPath = recipes.get('content')?.path.replace(/^source\//u, '');
+  const byPath = new Map<string, BoundSource>(manifest.inputs.map(input => [input.path, Object.assign({kind: 'source-input'}, input)]));
+  for (const [defaultKind, entries] of [['source-document', manifest.documents], ['generated-intermediate', manifest.generatedIntermediates]] as const) {
+    for (const entry of entries) {
+      const content = entry.path === contentPath;
+      const kind = content ? 'authored-content' : text(entry.kind ?? defaultKind);
+      const authored = kind === 'authored-content' || kind === 'authored-document';
+      // Keep existing content IDs; a manifest collection alone is not authorship.
+      const id = text(entry.id ?? `${content ? 'authored-document' : kind}:${entry.path}`);
+      byPath.set(entry.path, Object.assign({}, entry, {id, kind,
+        origin: entry.origin ?? `object:source/${entry.path}`, title: entry.title ?? entry.purpose ?? entry.path,
+        credit: entry.credit ?? (authored ? 'cssEarth contributors' : 'Credit not recorded in source manifest.'),
+        acquisition: entry.acquisition ?? entry.generator ?? (authored ? 'Authored, pinned object-package document.' : 'Acquisition not recorded in source manifest.'),
+        upstreamLineage: entry.upstreamLineage ?? 'not-recorded',
+      }));
+    }
+  }
   const contentEntry = contentPath === undefined ? undefined : byPath.get(contentPath);
   if (contentEntry) contentEntry.kind = 'authored-content';
   const [lenses, assets, stagedInventory, acquisition, minimaps] = await Promise.all([

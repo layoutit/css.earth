@@ -145,34 +145,13 @@
       "expectedSha256": "d0fd01f90ad2fb824f7460cbbfa16c715548e2a9ba95d66688c6d422bc0fd278"
     },
     {
-      "path": "reference/damit-documentation.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 40661,
-      "expectedSha256": "5c8d55ba62067a57acd7388fbfd439940778caadf4e63f900b89f1b907ffd11d"
-    },
-    {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 5783,
-      "expectedSha256": "5869beb3712ca6596cb04c663dd8c861e2549fde55cde092521f61a420ea8de0"
-    },
-    {
-      "path": "reference/dutra2025-paper.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 183864,
-      "expectedSha256": "1af7cb5088a61385683eb76d1ed50777e826c23f9904f97aa4a34be35d69bc39"
-    },
-    {
-      "path": "reference/grav2012-paper.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 143865,
-      "expectedSha256": "2f4ea563019532c52ab40488a5ecf44e5c664b5265baba897456efe1005f49fd"
-    },
-    {
-      "path": "reference/hanus2023-paper.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 1214248,
-      "expectedSha256": "599d94e808bc4dafa3988fa455b63668f4a661b1fa6c5b8c32d9defbf7d6b4ca"
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
+      "expectedBytes": 5829,
+      "expectedSha256": "f0de5f030663919530931e50996972719bd0a97210e0f3e991de389bfa250913",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/8131",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -187,22 +166,10 @@
       "expectedSha256": "df8cd84a7620ea0aa181ff4fd02195f12c6c2f57b42a176456f629af9897bc2d"
     },
     {
-      "path": "reference/model-8131.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 91358,
-      "expectedSha256": "3d6ebe820f3cda5c2e6c536f596d3b51c0bc1dc2817288aa95880737fc358a57"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 4440,
       "expectedSha256": "1a5ff366c23b12950e4e0c1cb07d0eb26b7e51e9f96642952731aba232db73f8"
-    },
-    {
-      "path": "reference/neowise-definitions.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 18419,
-      "expectedSha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac"
     },
     {
       "path": "reference/neowise-query.txt",
@@ -215,12 +182,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 1863,
       "expectedSha256": "b00d8dbb43af567677bfcf6030d45fcebd21322b4352b35ca6a6e741ea101169"
-    },
-    {
-      "path": "reference/reference-665.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 762402,
-      "expectedSha256": "2322f1c6460894b3f1b257a90786be65ab546a8275ce1dd4786c13334f44c68b"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
