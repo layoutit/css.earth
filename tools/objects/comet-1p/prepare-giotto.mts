@@ -41,7 +41,7 @@ export function polygonInteriorDistance(point: readonly number[], polygon: reado
   return inside ? distance : -distance;
 }
 
-function interpolatedNormals(mesh: SourceMesh) {
+export function interpolatedNormals(mesh: SourceMesh) {
   const sums = mesh.positions.map(() => [0, 0, 0]);
   for (const f of mesh.indices) {
     const n = cross(sub(mesh.positions[f[1]], mesh.positions[f[0]]), sub(mesh.positions[f[2]], mesh.positions[f[0]]));

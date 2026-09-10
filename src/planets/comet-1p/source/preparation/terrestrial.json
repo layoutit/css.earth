@@ -22,8 +22,8 @@
           "centerLongitude": 180
         },
         "metadata": {
-          "label": "Giotto",
-          "coverage": "Giotto photographed Halley through its dusty coma. This view places a small illuminated patch on the historical nucleus model; the grid marks unmapped terrain. Placement is approximate; the shape alone is uncertain by about 0.5\u20131 km."
+          "label": "Giotto + Vega",
+          "coverage": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid."
         },
         "focus": {
           "longitudeDegrees": 196,
@@ -120,7 +120,7 @@
   },
   "celestial": {
     "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; illustrative model orientation.",
-    "qualification": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5\u20131 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
+    "qualification": "Historical Giotto/Vega shape model by Stooke, with pointing by Abergel. Absolute uncertainty is about 0.5–1 km; depressions may be exaggerated. Neutral gray is a model material. The source long axis and original origin are preserved. Orientation in space is illustrative and held fixed; no spin pole, tumble or current attitude reconstruction is claimed."
   },
   "presentation": {
     "defaultLens": "model",

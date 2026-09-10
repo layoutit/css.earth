@@ -1,0 +1,29 @@
+import assert from 'node:assert/strict';import {readFile,writeFile,copyFile} from 'node:fs/promises';import {createHash} from 'node:crypto';import {execFileSync} from 'node:child_process';import sharp from 'sharp';
+const out='src/planets/comet-1p/evidence/encounters',hash=b=>createHash('sha256').update(b).digest('hex'),reports={};
+for(const phase of ['before','after']){
+ const root=`output/playwright/halley-mosaic/${phase}`;reports[phase]=JSON.parse(await readFile(`${root}/browser.json`,'utf8'));
+ await copyFile(`${root}/browser.json`,`${out}/${phase}-browser.json`);await copyFile(`${root}/runtime-assets.json`,`${out}/${phase}-runtime-assets.json`);
+}
+const manifest={schema:'cssearth-halley-encounter-browser-evidence@1',testedRuntimeRevision:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),baselineRevision:'1991273ff91753ad901f199b6187be5a240c5500',scope:'Production before/after at the same 30 km camera distance and exact saved pose matrices. Same viewport and DPR. Baseline shared shell predates the independently merged moon-system PR106; no renderer or Halley geometry is changed by this PR. Different photography is expected; this is a coverage comparison, not an image-parity claim.',images:[]};
+for(const phase of ['before','after'])for(const report of reports[phase].reports){
+ assert.deepEqual(report.errors,[]);assert.equal(report.views.length,3);
+ const other=reports[phase==='before'?'after':'before'].reports.find(r=>r.dpr===report.dpr);assert.deepEqual(report.viewport,other.viewport);
+ const assets=new Map(JSON.parse(await readFile(`${out}/${phase}-runtime-assets.json`,'utf8')).assets.map(a=>[a.filename,a]));
+ for(const response of report.network.filter(r=>r.status===200)){
+  const asset=assets.get(new URL(response.url).pathname.split('/').at(-1));if(asset){assert.equal(response.bytes,asset.bytes);assert.equal(response.sha256,asset.sha256);}
+ }
+ for(const view of report.views){
+  const paired=other.views.find(v=>v.view===view.view);assert.equal(new URL(view.state.url).search,new URL(paired.state.url).search);
+  assert.equal(view.state.shadows,false);assert.equal(view.state.lens,'giotto');assert.equal(view.state.sceneCount,1);assert.equal(view.state.unloadedImages,0);
+  const name=`${phase}-${view.view}-dpr-${report.dpr}.webp`,png=await readFile(`output/playwright/halley-mosaic/${phase}/${view.view}-dpr-${report.dpr}.png`),webp=await sharp(png).webp({lossless:true}).toBuffer();
+  const raw=await sharp(png).removeAlpha().raw().toBuffer(),decoded=await sharp(webp).removeAlpha().raw().toBuffer();assert.deepEqual(raw,decoded);
+  await writeFile(`${out}/${name}`,webp);manifest.images.push({name,view:view.view,phase,dpr:report.dpr,viewport:report.viewport,query:new URL(view.state.url).search,pngSha256:hash(png),webpSha256:hash(webp),rgbSha256:hash(raw),conversion:'Lossless WebP; decoded RGB checked equal to the browser PNG.'});
+ }
+}
+for(const file of ['terrain.json','scene.json']){
+ const path=`src/planets/comet-1p/prepared/${file}`,current=await readFile(path),baseline=execFileSync('git',['show',`${manifest.baselineRevision}:${path}`],{maxBuffer:20*1024*1024});assert.deepEqual(current,baseline);manifest[file]={sha256:hash(current),unchanged:true};
+}
+await writeFile(`${out}/capture-manifest.json`,JSON.stringify(manifest,null,2)+'\n');
+await copyFile('output/playwright/halley-mosaic/capture.mjs',`${out}/capture.mjs.txt`);await copyFile('output/playwright/halley-mosaic/saved-views.json',`${out}/saved-views.json`);
+for(const id of ['t11190','t11194'])await sharp(`output/comet-intake/halley-mosaic/${id}-fitted-outline.png`).webp({lossless:true}).toFile(`${out}/${id}-outline.webp`);
+console.log({images:manifest.images.length,matchedCameras:true,unchangedGeometry:true});

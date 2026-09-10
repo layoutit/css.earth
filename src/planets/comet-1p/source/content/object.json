@@ -4,17 +4,17 @@
   "id": "comet-1p",
   "displayName": "Halley",
   "panel": {
-    "introduction": "Halley’s dark nucleus was photographed during the Giotto and Vega flybys in 1986. Compare the historical shape with a small patch of Giotto photography. Dust and uncertain terrain limit the detail we can place on the surface.",
+    "introduction": "Giotto and Vega 2 photographed Halley in 1986. Their images cover about 28% of this nucleus model; the grid shows where the surface is not mapped.",
     "facts": [
       {
-        "id": "encounter",
-        "label": "Giotto flyby",
-        "value": "14 March 1986"
+        "id": "giotto-approach",
+        "label": "Giotto closest approach",
+        "value": "596 km"
       },
       {
-        "id": "approach",
-        "label": "Closest approach",
-        "value": "596 km"
+        "id": "vega-approach",
+        "label": "Vega 2 closest approach",
+        "value": "8,032 km"
       },
       {
         "id": "uncertainty",
@@ -29,7 +29,7 @@
     "defaultLens": "model",
     "labels": {
       "model": "Historical model",
-      "giotto": "Giotto"
+      "giotto": "Giotto + Vega"
     },
     "controls": [
       {
@@ -49,15 +49,15 @@
       },
       {
         "id": "giotto",
-        "label": "Giotto",
-        "description": "Giotto photographed Halley through its dusty coma. This view places a small illuminated patch on the historical nucleus model; the grid marks unmapped terrain. Placement is approximate; the shape alone is uncertain by about 0.5–1 km.",
-        "title": "Giotto illuminated nucleus composite",
-        "detail": "Approximate surface projection",
+        "label": "Giotto + Vega",
+        "description": "Giotto’s close-up joins two Vega 2 views. Visible and near-infrared photographs retain their original lighting and dust haze. Placement is approximate; uncertain or missing areas remain grid.",
+        "title": "Halley spacecraft photographic mosaic",
+        "detail": "Partial coverage",
         "thumbnail": "/scenes/comet-1p/comet-1p-giotto-thumbnail.webp",
         "surface": "comet-1p-giotto-surface@2x.webp",
         "poles": "comet-1p-giotto-poles@2x.webp",
         "source": {
-          "id": "giotto-projection",
+          "id": "encounter-projection",
           "path": "../manifest.json",
           "url": "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
         }
@@ -94,6 +94,12 @@
       "role": "observations",
       "description": "Nucleus composite and mission image catalogue",
       "href": "https://www2.mps.mpg.de/de/projekte/giotto/hmc/"
+    },
+    {
+      "label": "NASA PDS · Vega 2 TVS",
+      "role": "observations",
+      "description": "Original and processed visible and near-infrared flyby images",
+      "href": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/dataset.shtml"
     },
     {
       "label": "ESA · Giotto HMC",

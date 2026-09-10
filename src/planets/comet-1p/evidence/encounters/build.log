@@ -1,0 +1,8 @@
+pnpm prebuild: passed
+pnpm exec astro build: passed
+12:20:46 [build] ✓ Completed in 143ms.
+12:23:39 [build] ✓ Completed in 2m 49s.
+12:23:39 [build] 948 page(s) built in 2m 53s
+12:23:39 [build] Complete!
+pnpm assemble:planets: passed; 473 object asset manifests verified.
+The first assembly attempt found 280 missing local assets (63,310,822 bytes) for existing bodies. The normal public asset installer restored those exact pins; assembly then passed. Halley production captures use all 34 independently downloaded body files.

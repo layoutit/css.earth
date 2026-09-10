@@ -1,0 +1,424 @@
+{
+  "schema": "cssearth-halley-encounter-registration@1",
+  "interpretation": "Approximate placement of original illuminated photographs from different dates and filters. Not albedo or simultaneous coverage.",
+  "shapeSha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
+  "sourcePins": [
+    {
+      "path": "vega/t11190.hdr",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.hdr",
+      "bytes": 5760,
+      "sha256": "e6e43ac52b037d69cf5f12cb6a1e5a0f0ad79e30e11a96353dd2e73dfa1a5904"
+    },
+    {
+      "path": "vega/t11190.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.lbl",
+      "bytes": 1920,
+      "sha256": "ea1f4083f2030845cff45f988800b935af6bd69f87759211ab5793a923b920ee"
+    },
+    {
+      "path": "vega/t11190.img",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.img",
+      "bytes": 264960,
+      "sha256": "17b1aa86cdb268f4ae6e9aff3dda6c2059a015885cf0ce6eb7e2c60fcb2a9e9d"
+    },
+    {
+      "path": "vega/t11194.hdr",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.hdr",
+      "bytes": 5760,
+      "sha256": "d8756d103854206ff497dc2d4ba2c582bd839a08c647177a6a488a3828310021"
+    },
+    {
+      "path": "vega/t11194.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.lbl",
+      "bytes": 1920,
+      "sha256": "55a0ae640f1c47743720cc2bee2ccc7ca1871768873f164121e01b982f7e066d"
+    },
+    {
+      "path": "vega/t11194.img",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.img",
+      "bytes": 264960,
+      "sha256": "627a11052348a8e5ab01f69fadd7d81d59f6b9dbd4ec79b25f9ee72bedc1130e"
+    },
+    {
+      "path": "vega/tvs_proc.doc",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/document/tvs_proc.doc",
+      "bytes": 10160,
+      "sha256": "e0b5281528b3b2266b43a84b2ba230b38966b5cb3410e6622b849f5e5ebcf7fd"
+    }
+  ],
+  "geometrySources": [
+    "giotto/rotation-2004.tab",
+    "giotto/vega2-flyby.txt",
+    "giotto/vega2-trajectory.txt",
+    "giotto/vega-readme.txt"
+  ],
+  "frame": "Existing east-positive long-axis PDS Stooke mesh. Long-axis rotation state propagated from the published 2004 compilation; Vega 2 T11190/2:00:30 anchors longitude 270 degrees.",
+  "mask": {
+    "physicalInsetKm": 1,
+    "maximumEmissionDegrees": 75,
+    "maximumIncidenceDegrees": 80,
+    "reason": "One-kilometre image-plane guard for the 0.5-1 km historical shape uncertainty, blurred limbs and surrounding coma. Full source-mesh visibility is also required."
+  },
+  "observations": [
+    {
+      "id": "t11190",
+      "utc": "1986-03-09T07:19:58+00:00",
+      "bodyRight": [
+        0.3702765304237541,
+        0.5492445208007515,
+        -0.7491500166106252
+      ],
+      "bodyUp": [
+        0.9289215742016907,
+        -0.21893382731597827,
+        0.2986179636917891
+      ],
+      "bodyEye": [
+        5.551115123125783e-17,
+        -0.8064728362611665,
+        -0.5912711428548408
+      ],
+      "bodySun": [
+        -0.3337913158774849,
+        -0.9118383833687498,
+        -0.23902744624883993
+      ],
+      "kmPerPixel": [
+        0.12,
+        0.16
+      ],
+      "scaleMultiplier": 0.9383138640984825,
+      "center": [
+        333.62748982071105,
+        236.5813629145257
+      ],
+      "footprintPolygon": [
+        [
+          302,
+          211
+        ],
+        [
+          310,
+          211
+        ],
+        [
+          319,
+          212
+        ],
+        [
+          328,
+          214
+        ],
+        [
+          338,
+          217
+        ],
+        [
+          347,
+          220
+        ],
+        [
+          357,
+          224
+        ],
+        [
+          365,
+          228
+        ],
+        [
+          373,
+          232
+        ],
+        [
+          381,
+          235
+        ],
+        [
+          387,
+          238
+        ],
+        [
+          389,
+          243
+        ],
+        [
+          390,
+          248
+        ],
+        [
+          387,
+          253
+        ],
+        [
+          384,
+          258
+        ],
+        [
+          377,
+          260
+        ],
+        [
+          369,
+          260
+        ],
+        [
+          361,
+          258
+        ],
+        [
+          353,
+          256
+        ],
+        [
+          347,
+          254
+        ],
+        [
+          342,
+          255
+        ],
+        [
+          337,
+          257
+        ],
+        [
+          331,
+          259
+        ],
+        [
+          324,
+          260
+        ],
+        [
+          316,
+          260
+        ],
+        [
+          309,
+          257
+        ],
+        [
+          303,
+          254
+        ],
+        [
+          298,
+          250
+        ],
+        [
+          296,
+          244
+        ],
+        [
+          297,
+          237
+        ],
+        [
+          297,
+          230
+        ],
+        [
+          298,
+          224
+        ],
+        [
+          299,
+          216
+        ]
+      ],
+      "controls": {
+        "kind": "Manually traced illuminated outline, including uncertain limb and terminator.",
+        "fitParameters": [
+          "scaleMultiplier",
+          "center[0]",
+          "center[1]"
+        ],
+        "scaleBounds": [
+          0.9,
+          1.1
+        ],
+        "heldOutControlIndices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21,
+          24,
+          27,
+          30
+        ],
+        "cameraPoseWasFitted": false,
+        "shapeWasDeformed": false,
+        "validation": "Recomputed from the fixed camera and full source silhouette by encounter-outline.mts; results are in encounter-projection-report.json. Silhouette consistency does not independently establish feature accuracy."
+      }
+    },
+    {
+      "id": "t11194",
+      "utc": "1986-03-09T07:21:38+00:00",
+      "bodyRight": [
+        0.12534765928420905,
+        -0.1445475117656216,
+        -0.9815263527559194
+      ],
+      "bodyUp": [
+        0.9774245806439712,
+        -0.1516161636015998,
+        0.14715205770796966
+      ],
+      "bodyEye": [
+        -0.17008572387160126,
+        -0.9778131497260097,
+        0.12227955985353012
+      ],
+      "bodySun": [
+        -0.33534660785252524,
+        -0.910803619844917,
+        -0.24078915814297047
+      ],
+      "kmPerPixel": [
+        0.17,
+        0.22
+      ],
+      "scaleMultiplier": 0.9232718838050276,
+      "center": [
+        182.82401388929878,
+        250.4527614554845
+      ],
+      "footprintPolygon": [
+        [
+          152,
+          234
+        ],
+        [
+          159,
+          232
+        ],
+        [
+          166,
+          233
+        ],
+        [
+          174,
+          234
+        ],
+        [
+          182,
+          236
+        ],
+        [
+          190,
+          238
+        ],
+        [
+          198,
+          241
+        ],
+        [
+          206,
+          243
+        ],
+        [
+          215,
+          246
+        ],
+        [
+          223,
+          249
+        ],
+        [
+          228,
+          252
+        ],
+        [
+          229,
+          256
+        ],
+        [
+          226,
+          260
+        ],
+        [
+          221,
+          264
+        ],
+        [
+          214,
+          266
+        ],
+        [
+          207,
+          267
+        ],
+        [
+          198,
+          267
+        ],
+        [
+          191,
+          267
+        ],
+        [
+          183,
+          266
+        ],
+        [
+          175,
+          264
+        ],
+        [
+          168,
+          262
+        ],
+        [
+          161,
+          259
+        ],
+        [
+          155,
+          255
+        ],
+        [
+          151,
+          251
+        ],
+        [
+          150,
+          245
+        ],
+        [
+          150,
+          239
+        ]
+      ],
+      "controls": {
+        "kind": "Manually traced illuminated outline, including uncertain limb and terminator.",
+        "fitParameters": [
+          "scaleMultiplier",
+          "center[0]",
+          "center[1]"
+        ],
+        "scaleBounds": [
+          0.9,
+          1.1
+        ],
+        "heldOutControlIndices": [
+          0,
+          3,
+          6,
+          9,
+          12,
+          15,
+          18,
+          21,
+          24
+        ],
+        "cameraPoseWasFitted": false,
+        "shapeWasDeformed": false,
+        "validation": "Recomputed from the fixed camera and full source silhouette by encounter-outline.mts; results are in encounter-projection-report.json. Silhouette consistency does not independently establish feature accuracy."
+      }
+    }
+  ]
+}

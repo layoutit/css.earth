@@ -23,12 +23,12 @@
         {
           "id": "terrestrial",
           "path": "source/preparation/terrestrial.json",
-          "sha256": "b60fbf7331a5045a0a1ec54d99b43cd83e5d1fdd9d55e68d840ab54026155eb6"
+          "sha256": "5494e1f6ddce35dde8a998547dbe984691495bbe99dc42f13fc21bab4ed96c67"
         },
         {
           "id": "content",
           "path": "source/content/object.json",
-          "sha256": "d26b02d9f0e0a792f074078568b0cf251d5121a5da5ba8ee9958b4494608611d"
+          "sha256": "bf88b81e1a75015c01dd98ad266f47bd029df8579738aa239cd8e4894b2812fd"
         },
         {
           "id": "title",
@@ -43,7 +43,7 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json",
-          "sha256": "6ab242f75421f9445a70f56e425b74c4389b946128f0eab640827830cdbd0c1a"
+          "sha256": "42e44c6cad46a27c63fd3e48c82d165e81f773c376015ecfc3fabc43ce5c5851"
         },
         {
           "id": "rotation",
@@ -115,7 +115,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "02d8cb9938c9cbeb915141d3a6cc77cc284511c558b6c227ba9c0ebf67d12985"
+        "sha256": "a7b158c8c2f9b975ef351bbb963844be812af2f13de8999d9d1cda663b3eefc2"
       }
     },
     "catalog": {
@@ -123,7 +123,7 @@
       "classification": "comet",
       "color": "#b8b6b2",
       "distanceAu": 17.859,
-      "description": "Explore Halley's historical Giotto/Vega nucleus model and a small, approximate patch of Giotto photography.",
+      "description": "Explore Halley’s historical nucleus shape and Giotto–Vega photographic mosaic.",
       "systemName": "Solar System",
       "order": 78,
       "context": {
@@ -134,6 +134,6 @@
   "prepared": {
     "format": "cssearth-css-object@4",
     "url": "prepared/object.json",
-    "sha256": "0be8a58502d34fdbd471c981ccf443ffa5c36bfb2644449f455452b464b822df"
+    "sha256": "5fa1766a37c221cd9d1f324abc0e3767918682cc6429d2417ca810c301e9d6d7"
   }
 }

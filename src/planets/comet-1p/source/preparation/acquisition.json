@@ -96,6 +96,62 @@
       ],
       "path": "giotto/hmc01814.hdr",
       "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.hdr"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "vega/t11190.hdr",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.hdr"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "vega/t11190.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "vega/t11190.img",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "vega/t11194.hdr",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.hdr"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "vega/t11194.lbl",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.lbl"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "vega/t11194.img",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.img"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "vega/tvs_proc.doc",
+      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/document/tvs_proc.doc"
     }
   ]
 }
