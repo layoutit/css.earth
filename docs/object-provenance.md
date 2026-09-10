@@ -8,7 +8,7 @@ the pinned observation that establishes the association. The provenance compiler
 preserves it alongside the input hash; neither the UI nor preparation guesses a
 spacecraft from a body name or a publisher credit.
 
-`site/dataset-spacecraft.mjs` follows the selected lens's product dependencies,
+`site/dataset-spacecraft.mts` follows the selected lens's product dependencies,
 including parent products and acquired-source dependencies, and deduplicates
 the contributing spacecraft. Schematic interiors and synthetic spectral models
 do not inherit an observing spacecraft from their outer reference texture.
@@ -51,11 +51,11 @@ infer inputs from factsheet citations, lens labels, URLs or publisher names.
 1. The object source manifest owns input identity, acquisition information,
    credits, rights and optional human-readable source titles and product URLs.
 2. The authored recipe owns the transformation and its parameters. The shared
-   preparation-family bindings in `tools/objects/provenance-recipes.mjs` identify
+   preparation-family bindings in `tools/objects/provenance-recipes.mts` identify
    consumed inputs and outputs for each operation.
 3. `prepareAuthoredObject` finalizes provenance after preparing assets, content
    and previews. The record travels with the other prepared JSON outputs.
-4. `site/object-sources.mjs` projects those records into attribution groups.
+4. `site/object-sources.mts` projects those records into attribution groups.
    The common information panel renders each product link on its own line and
    the shared credit once underneath. Grouping never combines input identities
    or replaces their links with one publisher homepage.

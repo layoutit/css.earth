@@ -14,7 +14,7 @@ try {
     const lod = definition.camera.levelOfDetail;
     const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
     const errors = []; page.on('pageerror', error => errors.push(error.message));
-    if (unlimitedDeparture) await page.route('**/site/prepared-world-navigation.mjs*', async route => {
+    if (unlimitedDeparture) await page.route('**/site/prepared-world-navigation.mts*', async route => {
       const response = await route.fetch(), source = await response.text();
       const guarded = 'advanceSelectionFlightInto(flight, anchors, elapsedS, requestedElapsedS, sample)';
       assert.equal(source.split(guarded).length, 2, 'Mutation must bypass the actual per-paint curve-time guard');

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
-import { previewSite } from '../../tools/preview.mjs';
+import { previewSite } from '../../tools/preview.mts';
 
 const server = await previewSite({ port: 0 });
 let browser;

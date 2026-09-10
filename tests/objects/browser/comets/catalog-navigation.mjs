@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {chromium} from 'playwright';
-import {OBJECTS} from '../../../../site/objects.mjs';
-import {candidates} from '../../../../tools/objects/celestia-comets/catalog.mjs';
+import {OBJECTS} from '../../../../site/objects.mts';
+import {candidates} from '../../../../tools/objects/celestia-comets/catalog.mts';
 
 const origin=process.argv[2]??'http://127.0.0.1:53135';
 const output=resolve('output/playwright/celestia-catalog-navigation');

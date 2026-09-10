@@ -1,7 +1,7 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { preparePerspectiveCamera } from "./prepare-perspective-camera.mjs";
+import { preparePerspectiveCamera } from "./prepare-perspective-camera.mts";
 import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with { type: "json" };
 import mercury from "../../src/planets/mercury/prepared/runtime.json" with { type: "json" };
 const ceres = await loadObjectTestDefinition('ceres');

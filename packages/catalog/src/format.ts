@@ -28,11 +28,11 @@ export type ColumnType = NumericType | 'str'
  * the concrete constructors is not callable in TypeScript, and every call site
  * here uses only these three overloads.
  */
+export type NumericArray = Float64Array | Float32Array | Int32Array | Uint32Array | Int16Array | Uint16Array | Int8Array | Uint8Array
+
 export interface TypedArrayCtor {
-  new (values: ArrayLike<number>): ArrayBufferView & { length: number }
-  new (buffer: ArrayBufferLike, byteOffset: number, length: number): ArrayBufferView & {
-    length: number
-  }
+  new (values: ArrayLike<number>): NumericArray
+  new (buffer: ArrayBufferLike, byteOffset: number, length: number): NumericArray
   readonly BYTES_PER_ELEMENT: number
 }
 

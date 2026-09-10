@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.mjs';
-import { createIndexedShape } from './obj-shape.mjs';
-import { validateObservedReduction } from './open-surface.mjs';
+import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.mts';
+import { createIndexedShape } from './obj-shape.mts';
+import { validateObservedReduction } from './open-surface.mts';
 
 test('a vertical boundary triangle is retriangulated without moving points or filling gaps', () => {
   const positions = [[0, 0, 0], [1, 0, 0.1], [2, 0, 0], [1, 1, 0]];

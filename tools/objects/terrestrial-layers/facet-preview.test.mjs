@@ -8,10 +8,10 @@ import {promisify} from 'node:util';
 import {gunzipSync} from 'node:zlib';
 import sharp from 'sharp';
 import {BASE_TILE} from '@layoutit/polycss';
-import {scientificPreviewGrid, prepareSolidRasters} from './solid-raster.mjs';
-import {prepareRadialMaterials} from './radial-terrain.mjs';
-import {parseObjShape} from './obj-shape.mjs';
-import {parseTerrestrialProfile} from './index.mjs';
+import {scientificPreviewGrid, prepareSolidRasters} from './solid-raster.mts';
+import {prepareRadialMaterials} from './radial-terrain.mts';
+import {parseObjShape} from './obj-shape.mts';
+import {parseTerrestrialProfile} from './index.mts';
 const exec = promisify(execFile);
 
 test('facet previews alone can opt into smaller band-compatible dimensions; defaults remain global',async()=>{

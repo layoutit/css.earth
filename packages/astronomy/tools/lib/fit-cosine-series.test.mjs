@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { fitCosineSeries } from './fit-cosine-series.mjs'
+import { fitCosineSeries } from './fit-cosine-series.mts'
 
 describe('prepared cosine residual series', () => {
   it('recovers independent low-frequency modes with the correct midpoint phase', () => {

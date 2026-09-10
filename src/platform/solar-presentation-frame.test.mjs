@@ -4,12 +4,12 @@ import test from "node:test";
 import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
-} from "./solar-geometry.mjs";
+} from "./solar-geometry.mts";
 import { prepareEclipticPresentationFrame } from
-  "./solar-presentation-frame.mjs";
+  "./solar-presentation-frame.mts";
 import { prepareSunReferenceViewDirection } from
-  "./prepare-sun-view-direction.mjs";
-import { cssDirectionToViewDirection } from "./solar-view-direction.mjs";
+  "./prepare-sun-view-direction.mts";
+import { cssDirectionToViewDirection } from "./solar-view-direction.mts";
 
 const BODIES = [
   "mercury",

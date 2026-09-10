@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { OBJECTS } from '../site/objects.mjs';
-import { prepareActivationGroups } from './prepared-activation-groups.mjs';
+import { OBJECTS } from '../site/objects.mts';
+import { prepareActivationGroups } from './prepared-activation-groups.mts';
 
 // The same registry that ships the application owns this gate. A new object
 // cannot opt out by omitting a browser profile or a hand-maintained test list.

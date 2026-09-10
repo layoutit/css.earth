@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { cesiumMinimapExcerpts } from '../../tools/prepare-cesium-minimap.mjs';
-import { directionOnMap, mapDirection, orbitMapCamera } from '../surface-minimap-math.mjs';
+import { cesiumMinimapExcerpts } from '../../tools/prepare-cesium-minimap.mts';
+import { directionOnMap, mapDirection, orbitMapCamera } from '../surface-minimap-math.mts';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
 import Camera from '@cesium/engine/Source/Scene/Camera.js';
 import Ellipsoid from '@cesium/engine/Source/Core/Ellipsoid.js';
 import Rectangle from '@cesium/engine/Source/Core/Rectangle.js';
-import { minimapCamera, rectangleOnMap, surfaceViewRectangle } from '../surface-minimap-rectangle.mjs';
-import { surfaceMapViewport } from '../surface-map-context.mjs';
+import { minimapCamera, rectangleOnMap, surfaceViewRectangle } from '../surface-minimap-rectangle.mts';
+import { surfaceMapViewport } from '../surface-map-context.mts';
 
 test('surface consumers use the published clipped viewport without measuring the scene', () => {
   const scene = { closest() { throw new Error('Unexpected layout read'); } };

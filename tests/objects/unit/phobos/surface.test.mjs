@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 const root=resolve(import.meta.dirname,'../../../../src/planets/phobos/source');
 test('phobos published mesh preserves axes, units, seam and polar samples',async()=>{
  const config=JSON.parse(await readFile(resolve(root,'preparation/terrestrial.json'))),p=config.geometry.radialTerrain;

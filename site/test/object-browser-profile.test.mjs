@@ -1,8 +1,8 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { runInNewContext } from 'node:vm';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 import { createObjectBrowserProfile } from './object-browser-profile.mjs';
 import { loadPlanetBrowserProfile } from './load-browser-profile.mjs';
 const { controls: objectControls } = await loadObjectTestDefinition('moon');

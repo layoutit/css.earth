@@ -11,9 +11,9 @@ Available at [css.earth](https://css.earth) 🌎
 
 ## How to Build
 
-Use Node.js 24 or Node.js 22.15+ and pnpm 10. Source preparation uses Node's
-[native Zstandard support](https://nodejs.org/api/zlib.html#zlibzstddecompresssyncbuffer-options),
-which is unavailable in earlier Node 22 releases.
+Use Node.js 24 or Node.js 22.18+ and pnpm 10. Shared TypeScript entrypoints use
+[native type stripping](https://nodejs.org/download/release/v22.18.0/docs/api/typescript.html#type-stripping),
+and source preparation uses Node's native Zstandard support.
 
 Install dependencies and download the prepared browser assets, then start the site:
 
@@ -34,6 +34,12 @@ To build all routes for production, run `pnpm setup:assets`, `pnpm build`, then
 `pnpm prepare:checkout`; that is the full preparation workflow described below.
 
 ## Checks
+
+`pnpm typecheck` checks the shared packages, renderer, preparation, and migrated
+shell and ownership-tool TypeScript. `pnpm check:typescript-ownership` rejects new
+authored JavaScript and stale migration entries. See the
+[TypeScript ownership policy](docs/architecture/typescript-ownership.md) for the
+remaining backlog and justified JavaScript exceptions.
 
 `pnpm test` runs package, renderer, platform, and shell behavior tests. It does
 not reconstruct bodies or verify the full archive of scientific source files.
@@ -132,7 +138,7 @@ The vendored astronomy package (`packages/astronomy`, see its `SOURCE.md`) is
 a preparation dependency only. It is consumed through its own build, which
 `pnpm install` runs as `postinstall` (`pnpm build:astronomy` repeats it);
 `pnpm prepare:planets` builds it first, and `pnpm prepare:solar-geometry`
-regenerates the checked-in `src/platform/solar-geometry.mjs` from it
+regenerates the checked-in `src/platform/solar-geometry.mts` from it
 bit-for-bit. The browser runtime never loads it.
 
 Surface minimaps are separate prepared WebP images, at most 640 pixels wide

@@ -10,7 +10,7 @@ import {
   normalizeRuntimeAssetUrls,
   prepareRuntimeAssetManifest,
   verifyRuntimeAssetClosure,
-} from "./runtime-asset-closure.mjs";
+} from "./runtime-asset-closure.mts";
 
 test("normalizes only explicit safe local runtime URLs", () => {
   assert.deepEqual(normalizeRuntimeAssetUrls({

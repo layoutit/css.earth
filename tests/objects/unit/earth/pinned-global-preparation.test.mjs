@@ -5,11 +5,11 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { gzipSync } from "node:zlib";
 import { PREPARED_EARTH_SCENE as scene } from "./prepared-fixture.mjs";
-import { preparePinnedGlobalWmts } from "../../../../tools/objects/geographic-pages/operations/prepare-pinned-global-wmts.mjs";
-import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mjs";
-import { cityGeographicFrame } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
-import { readWorldCoverCatalog, WORLDCOVER_BUCKET, WORLDCOVER_PREFIX } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mjs";
-import { coverageLookup, hashBytes, prepareRegionPack, prepareTreeSection, tileKey } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mjs";
+import { preparePinnedGlobalWmts } from "../../../../tools/objects/geographic-pages/operations/prepare-pinned-global-wmts.mts";
+import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mts";
+import { cityGeographicFrame } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
+import { readWorldCoverCatalog, WORLDCOVER_BUCKET, WORLDCOVER_PREFIX } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mts";
+import { coverageLookup, hashBytes, prepareRegionPack, prepareTreeSection, tileKey } from "../../../../tools/objects/geographic-pages/prepare-wmts-tree.mts";
 
 const version = "1111111111111111", dataset = "esa-worldcover-rgbnir-2021-v200";
 const sourcePath = "src/planets/earth/source/", outputPath = "src/planets/earth/prepared/pages.json";
@@ -137,14 +137,14 @@ test("changed prepared face geometry cannot acquire the identity of the pinned r
 });
 
 test("ordinary preparation binds the acquired release while explicit authoring retains the full generator", async () => {
-  const prepare = await readFile(new URL("../../../../tools/objects/paged-ellipsoid/index.mjs", import.meta.url), "utf8");
+  const prepare = await readFile(new URL("../../../../tools/objects/paged-ellipsoid/index.mts", import.meta.url), "utf8");
   assert.ok(prepare.includes("preparePinnedGlobalWmts"));
   assert.ok(!prepare.includes("operations/prepare-global-wmts.mjs"));
-  const {geographicPreparationInputs}=await import("../../../../tools/objects/geographic-pages/operations/preparation-inputs.mjs");
-  const {createOperationContext}=await import("../../../../tools/objects/geographic-pages/operations/context.mjs");
+  const {geographicPreparationInputs}=await import("../../../../tools/objects/geographic-pages/operations/preparation-inputs.mts");
+  const {createOperationContext}=await import("../../../../tools/objects/geographic-pages/operations/context.mts");
   const context=createOperationContext({objectId:"earth"}),inputs=geographicPreparationInputs(context);
   for (const path of inputs) await readFile(context.projectUrl(path));
-  assert.ok(inputs.includes("src/platform/prepared-map/prepared-block.mjs"));
+  assert.ok(inputs.includes("src/platform/prepared-map/prepared-block.mts"));
   const pkg = JSON.parse(await readFile(new URL("../../../../package.json", import.meta.url)));
-  assert.equal(pkg.scripts["prepare:earth-global"], "node tools/objects/geographic-pages/operations/prepare-global-wmts.mjs --object=earth && node tools/objects/geographic-pages/operations/integrate-global-wmts.mjs --object=earth --latest");
+  assert.equal(pkg.scripts["prepare:earth-global"], "node tools/objects/geographic-pages/operations/prepare-global-wmts.mts --object=earth && node tools/objects/geographic-pages/operations/integrate-global-wmts.mts --object=earth --latest");
 });

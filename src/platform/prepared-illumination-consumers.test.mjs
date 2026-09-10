@@ -1,10 +1,10 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 const mars = await loadObjectTestDefinition('mars');
 const earth = await loadObjectTestDefinition('earth');
 import { preparedSelectionFixture } from "./test/object-runtime-package.mjs";
-import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
+import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mts";
 
 test("Earth starts directional atmosphere decoding without a stability wait", async () => {
   const f = await preparedSelectionFixture(earth);

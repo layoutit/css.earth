@@ -1,9 +1,9 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../../site/objects.mjs";
-import { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA, requirePreparedData, requirePreparedPresentation } from "./prepared-presentation-contract.mjs";
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
+import { OBJECTS } from "../../site/objects.mts";
+import { PREPARED_PRESENTATION_SCHEMA, PREPARED_OBJECT_RUNTIME_SCHEMA, requirePreparedData, requirePreparedPresentation } from "./prepared-presentation-contract.mts";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
 
 export function presentationFixture(definition) {
   const { camera, sky, sun, assets, controls } = definition;
@@ -74,6 +74,16 @@ test("preparation rejects malformed phase tables and undeclared neighbors", asyn
     const plan = structuredClone(PREPARED_PRESENTATION); change(plan);
     assert.throws(() => requirePreparedPresentation(plan, { controls: objectControls }));
   }
+});
+
+test("ellipsoid material rotation requires its immutable prepared system transform", async () => {
+  const { id, controls, ...runtime } = await loadObjectTestDefinition('jupiter');
+  const plan = { ...runtime, schema: PREPARED_PRESENTATION_SCHEMA };
+  requirePreparedPresentation(plan, { controls });
+  const rotation = plan.materials.find(track => track.rotation?.kind === 'ellipsoid')?.rotation;
+  assert.ok(rotation, 'The actual Jupiter material uses ellipsoid rotation');
+  delete rotation.systemTransform;
+  assert.throws(() => requirePreparedPresentation(plan, { controls }), /ellipsoid system transform/);
 });
 
 for (const target of ["camera", "scene"]) test(`an existing prepared native animation cannot target the ${target}`, async () => {

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { auditPreparedActivityReady } from "./audit-prepared-readiness.mjs";
+import { auditPreparedActivityReady } from "./audit-prepared-readiness.mts";
 
 const activity = () => ({ selection: { ready: true, pending: false, loadingMaterial: false, error: null },
   camera: { pitch: 20, zoom: 1024 }, destinationActive: false,

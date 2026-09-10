@@ -1,4 +1,4 @@
-import { preparedPagingFixture as original } from '../paging/prepared-page-fixture.mjs';
+import { preparedPagingFixture as original } from '../paging/__fixtures__/prepared-page.mts';
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';

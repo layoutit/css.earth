@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {prepareBandedEllipsoid,prepareFixedSpanMaterialPlane} from '../../../../tools/objects/giant-layers/geometry.mjs';
+import {prepareBandedEllipsoid,prepareFixedSpanMaterialPlane} from '../../../../tools/objects/giant-layers/geometry.mts';
 test('authored ellipsoid geometry reproduces accepted retained leaves and radial planes',async()=>{
   const json=async path=>JSON.parse(await readFile(new URL(`../../../../src/planets/uranus/${path}`,import.meta.url),'utf8'));
   const config=await json('source/preparation/geometry.json'),actual=prepareBandedEllipsoid(config),accepted=await json('prepared/scene.json');

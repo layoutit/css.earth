@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {parsePdsImage} from './pds-image.mjs';
+import {parsePdsImage} from './pds-image.mts';
 
 function fixture({rock=false, values}={}) {
   const width=rock?6:4, height=2, ppd=rock?1/60:1/90, latitude=rock?60:90;

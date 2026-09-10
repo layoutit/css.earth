@@ -4,12 +4,12 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b6e4143c9244f2e9b2bd6c51784d9624f8a413a73b84426abca8c2857f7496ba"
+    "sha256": "1e1f59c4ab12ef37cc66f555e0f2884302357b9a395537015775ecddd0423690"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -890,7 +890,7 @@
       "sha256": "e79f89b68b4f1c73387b9871e82a31fb4f53e3885fb2f53dd074d8ac78cb38e3",
       "bytes": 6720450,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "surface/hubble-jupiter-global-map-2019.png",
@@ -923,7 +923,7 @@
       "sha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8",
       "bytes": 633958,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "surface/juno-pia23808-north-polar-projection.jpg",
@@ -957,7 +957,7 @@
       "sha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be",
       "bytes": 193959,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "surface/juno-pia24239-north-pole-detail.tif",
@@ -991,7 +991,7 @@
       "sha256": "92de7d816bbff6e220c893ded36d0811a21a4f74b13ebc337f9c1a3fc8d1e817",
       "bytes": 909084,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
@@ -1025,7 +1025,7 @@
       "sha256": "c419932d9d5b0d3b01691779f6ff65869d82d5f768908174fc13715170fdb77e",
       "bytes": 154800,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "surface/juno-pia21382-south-pole-visible.jpg",
@@ -1056,7 +1056,7 @@
       "sha256": "ab7fe8bc644233c22bc6d86af42d54c60d49e24a6699ff116e797a80e4ff1796",
       "bytes": 25925760,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
@@ -1086,7 +1086,7 @@
       "sha256": "4bdbeb4a4f9fbfe0daa737c4ba29de31b0626fb6e58c54e0142ef6d3aa6ef5ea",
       "bytes": 25925760,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
@@ -1109,7 +1109,7 @@
       "sha256": "167cd1b7d0031ca5b1199ad63da3722be04bf27cd65bdb65b907f1f8e602433e",
       "bytes": 15136,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -1126,7 +1126,7 @@
       "sha256": "b2da904d4a929b7e84b355de383394d0bf50ee6c720db2c5f9f95b32355e71bb",
       "bytes": 11912,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "atmosphere/psg-jupiter-r240-rif.txt",
@@ -1168,7 +1168,7 @@
       "sha256": "8878d1d05c0973a4c4d501542810b20242d9cee0f2964cd01cb48c19ec785d33",
       "bytes": 8813,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "path": "atmosphere/psg-jupiter-20260830.cfg",
@@ -1231,31 +1231,31 @@
           "url": "/scenes/jupiter/jupiter-lens-normal.webp",
           "bytes": 1892,
           "sha256": "7644cad9b7ca876bf4689a8ac54ee9308431bcb3d8f46b8815c29c4580edc2e0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-surface.webp",
           "bytes": 438634,
           "sha256": "348a1e106bed9c842776b2e99b4c884d4294d5b043787697e3e0f94013843130",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-surface@2x.webp",
           "bytes": 1152216,
           "sha256": "af40915f0201552826264e6608599e0d72bb732a8cbb5a4ae70ef8101165e02b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-poles.webp",
           "bytes": 40468,
           "sha256": "880f40ba2e590f2549521911642e440519130f995107428c296f9bdff313875e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-poles@2x.webp",
           "bytes": 65022,
           "sha256": "9289200493bffc8bf2468e11bc1d2ee0836015310f34a40b0199d26c085f90f3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1288,31 +1288,31 @@
           "url": "/scenes/jupiter/jupiter-lens-ultraviolet-thumbnail.webp",
           "bytes": 762,
           "sha256": "988f76527c545daf481dde86d10502b7fb6c9ed2f32a86620be726edae3f07de",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-lens-ultraviolet.webp",
           "bytes": 102970,
           "sha256": "f37ed73151e3c8ae5582c3a2decd9acd863e2e9a9d651e699243d900ddac8804",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-lens-ultraviolet@2x.webp",
           "bytes": 319756,
           "sha256": "42356ee2f74b739cd105b76304a55433bcfd9c3a99e808e94a05a3e0307f4fe8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-lens-ultraviolet-poles.webp",
           "bytes": 20342,
           "sha256": "24e2fb16aa2ce4d2e4c9eb34ea209c1ffabf8fa06e6314d2148e25393e19bb0d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-lens-ultraviolet-poles@2x.webp",
           "bytes": 22574,
           "sha256": "4ac9e4328290de6502d7ba23bf9760df138a20def1ddbf3d776f1ea67356990a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1345,31 +1345,31 @@
           "url": "/scenes/jupiter/jupiter-lens-methane-thumbnail.webp",
           "bytes": 476,
           "sha256": "c456babea13e9d7b6d0fe32af64f4ba66394409b333031ddc6c1b4dbae16deee",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-lens-methane.webp",
           "bytes": 106616,
           "sha256": "c5851377211c703489ae0b076b82843025902fdb613ee07f02c89d955c9b7576",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-lens-methane@2x.webp",
           "bytes": 284824,
           "sha256": "2a80f9f95baaae57f526182413655ac8da988e3eaafee9b8e1d6eea239bc10db",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-lens-methane-poles.webp",
           "bytes": 21864,
           "sha256": "0564d95ef576f6726918b56c80a806ceeeccddb0d9b1ca4030ef3ffed1de5f78",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/jupiter/jupiter-lens-methane-poles@2x.webp",
           "bytes": 31928,
           "sha256": "092b6bacab59168070ff14858488837ccc6d3c282f43341ccc820bb1cde528c7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1422,7 +1422,7 @@
           "url": "/scenes/jupiter/jupiter-reflectance-spectrum.svg",
           "bytes": 5872,
           "sha256": "c9f142878f3b5864846f669b42e26446df71a1a4f8f230b284768ace1eaf116e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1450,7 +1450,7 @@
           "url": "/scenes/jupiter/jupiter-temperature-pressure-profile.svg",
           "bytes": 2341,
           "sha256": "20a5fe8cad7a2fb189d93bc232dba8e3e7fed4a0a516cf9686ef80c0c63cfab3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1477,7 +1477,7 @@
           "url": "/scenes/jupiter/jupiter-photometric-phase-curve.svg",
           "bytes": 4528,
           "sha256": "e270b0df9cba0f4043ac51fa35ab15638592c8e4bc2274811bb01b433d5b4c4b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "authored-recipe"

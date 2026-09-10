@@ -7,9 +7,9 @@
     "sha256": "20f0cb58cbee8f776801373cd9a6300bf57d5778fd943a13ea14a8555045b9da"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -442,7 +442,7 @@
       "sha256": "71bfeecce5615a5602d16d176c4cc17cc2550b2dc8c7cdac1332dea8d9f3da36",
       "bytes": 315960161,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -481,7 +481,7 @@
       "sha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d",
       "bytes": 195300487,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -523,7 +523,7 @@
       "sha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd",
       "bytes": 493624548,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -565,7 +565,7 @@
       "sha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c",
       "bytes": 114072003,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -590,7 +590,7 @@
       "sha256": "1f05f0f7dab37f7fa2398956477c053103a3c395ba4c975b13230bf6b726da96",
       "bytes": 10463,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -638,13 +638,13 @@
           "url": "/scenes/bennu/bennu-normal-thumbnail.webp",
           "bytes": 3050,
           "sha256": "d109e039408b99c5100b7d51c3d1359df84a6d4239b3bf8028879873965f152d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "bytes": 4836700,
           "sha256": "f48e56950870b2f67ea5a0f21fefbf9e28a9f3529e1c5536a7d60518ee1e8e1c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -691,13 +691,13 @@
           "url": "/scenes/bennu/bennu-surface-thumbnail.webp",
           "bytes": 3486,
           "sha256": "db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-surface-surface@2x.webp",
           "bytes": 7419092,
           "sha256": "e22c354a68e7e15677967a7c1fbd1287b66d503e12e2180f45a251dbf88f71f8",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -751,13 +751,13 @@
           "url": "/scenes/bennu/bennu-spectral-thumbnail.webp",
           "bytes": 7048,
           "sha256": "d99a8add79833c48f8490e193df1a142ebc4d1456c68f8d0df4241233316858d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-spectral-surface@2x.webp",
           "bytes": 5680926,
           "sha256": "70792870462b06dc89af0e468f1dabd0b0487e282f2c1c4ad0225827d0d05d8b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -789,19 +789,19 @@
           "url": "/scenes/bennu/bennu-elevation-thumbnail.webp",
           "bytes": 7640,
           "sha256": "b5645f84329eabb9394de28aa23e38dfa73f32784a0bbd20261bf502548354a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-surface@2x.webp",
           "bytes": 2846108,
           "sha256": "f9c0122c83a6bda3f7d35f86dbe6e1c3f029e9625bf557ee42835d545639de36",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

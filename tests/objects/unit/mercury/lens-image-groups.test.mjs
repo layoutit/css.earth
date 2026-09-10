@@ -1,4 +1,4 @@
-import { mountPreparedPresentation } from "../../../../src/platform/prepared-presentation.mjs";
+import { mountPreparedPresentation } from "../../../../src/platform/prepared-presentation.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};

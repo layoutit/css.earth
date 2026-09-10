@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const browser = await chromium.launch({ channel: "chrome", headless: true });

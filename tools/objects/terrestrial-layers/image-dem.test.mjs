@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseImageDem } from './image-dem.mjs';
-import { inspectOpenSurface } from './open-surface.mjs';
+import { parseImageDem } from './image-dem.mts';
+import { inspectOpenSurface } from './open-surface.mts';
 
 const profile = { columns: 3, step: 1, xyTransform: [2, 0, 10, 0, -2, 20],
   zOffsetMeters: -5, expectedVertices: 8, expectedFaces: 4 };

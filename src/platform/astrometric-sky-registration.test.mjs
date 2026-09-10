@@ -5,21 +5,21 @@ import {
   ASTROMETRIC_CUBE_FRAME,
   prepareAstrometricCubeSampling,
   prepareAstrometricSkySceneRegistration,
-} from "./astrometric-sky-registration.mjs";
-import { ESO_PANORAMA_REGISTRATION } from "./eso-panorama-registration.mjs";
+} from "./astrometric-sky-registration.mts";
+import { ESO_PANORAMA_REGISTRATION } from "./eso-panorama-registration.mts";
 import {
   ICRS_TO_GALACTIC,
   multiplyMatrices,
   transformDirection,
   transposeMatrix,
-} from "./galactic-frame.mjs";
+} from "./galactic-frame.mts";
 import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
   requireBodyFixedToIcrf,
-} from "./solar-geometry.mjs";
+} from "./solar-geometry.mts";
 import { prepareEclipticPresentationFrame } from
-  "./solar-presentation-frame.mjs";
+  "./solar-presentation-frame.mts";
 
 // IAU 1976 obliquity at J2000 (84381.448 arcseconds): the J2000 ecliptic north
 // pole in ICRF is +z tilted about +x by it. Independent of the prepared

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 const source=new URL('../../../../src/planets/miranda/source/',import.meta.url).pathname;
 test('Miranda historical units preserve independently identified craters and unmapped north',async()=>{
   const recipe=JSON.parse(await readFile(source+'preparation/terrestrial.json'));

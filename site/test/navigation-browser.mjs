@@ -10,7 +10,7 @@ try {
   await page.goto(`${origin}/mercury/?campaign=navigation#vault`);
   await page.waitForFunction(() => window.__cssEarth?.ready === true);
   await page.evaluate(async () => {
-    const { OBJECTS } = await import('/site/objects.mjs');
+    const { OBJECTS } = await import('/site/objects.mts');
     const selectors = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content', '.planet-input-surface', '.planet-stage'];
     const proof = window.__navigationProof = {
       selectors, nodes: selectors.map(selector => document.querySelector(selector)), timeOrigin: performance.timeOrigin,

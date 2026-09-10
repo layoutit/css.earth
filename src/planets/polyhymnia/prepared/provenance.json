@@ -7,9 +7,9 @@
     "sha256": "659c0f804b3210da355b9b2ab500338e85738c2c5f4e957d5b0949f9c2d2caec"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -342,7 +342,7 @@
       "sha256": "ad4eef6efbc7473338d3a427724875eec7f1bf08e61afddb552a0668c44d4ee9",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 10145,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/polyhymnia/polyhymnia-elevation-thumbnail.webp",
           "bytes": 5980,
           "sha256": "549e549507df7658120be54b529cc69ec2a1180c62197d8701462f854c1ef31d",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-elevation-surface@2x.webp",
           "bytes": 312352,
           "sha256": "e0531372817e761b18a24b4830a8464c3ba1648aa6d3893fad4881252de2f66a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/polyhymnia/polyhymnia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/polyhymnia/polyhymnia-shape-surface@2x.webp",
           "bytes": 219058,
           "sha256": "a52c745b0f3ba5a1f3497d420a6ad58c33f6e5fe283b5ea8fbd6ab3a9999eeb1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

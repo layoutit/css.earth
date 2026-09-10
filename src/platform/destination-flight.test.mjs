@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { rotationAxisAngle, sampleDestinationFlight } from "./destination-flight.mjs";
+import { rotationAxisAngle, sampleDestinationFlight } from "./destination-flight.mts";
 
 
 const plan = { startZoom: 512, targetZoom: 256, overviewZoom: 1.1, angularDistance: 160 };

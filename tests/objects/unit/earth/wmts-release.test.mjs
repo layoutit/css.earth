@@ -4,8 +4,8 @@ import { createHash } from "node:crypto";
 import { mkdtemp, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { releaseFiles, verifyLocalPack, publishedPackMatches, WMTS_CACHE_CONTROL } from "../../../../tools/objects/geographic-pages/wmts-release.mjs";
-import { verifyWmtsListing } from "../../../../tools/objects/geographic-pages/operations/wmts-s3-publish.mjs";
+import { releaseFiles, verifyLocalPack, publishedPackMatches, WMTS_CACHE_CONTROL } from "../../../../tools/objects/geographic-pages/wmts-release.mts";
+import { verifyWmtsListing } from "../../../../tools/objects/geographic-pages/operations/wmts-s3-publish.mts";
 
 const bytes = Buffer.from("verified prepared pack");
 const file = { filename: "8-86-154.pack", bytes: bytes.length,

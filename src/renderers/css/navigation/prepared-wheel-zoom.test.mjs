@@ -1,5 +1,5 @@
 import { afterEach, expect, test, vi } from 'vitest';
-import * as runtimePolicy from '../../../../site/runtime-policy.mjs';
+import * as runtimePolicy from '../../../../site/runtime-policy.mts';
 import { Surface } from '../../../platform/test/orbit-fixture.mjs';
 import { createPreparedWheelZoomControls } from './prepared-wheel-zoom.js';
 

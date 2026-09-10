@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import {
   discoverPlanetTests,
   resolvePlanetCommand,
-} from "../../tools/run-implemented-planets.mjs";
+} from "../../tools/run-implemented-planets.mts";
 import { loadPlanetBrowserProfile } from "./load-browser-profile.mjs";
 
 const root = new URL("../../", import.meta.url);

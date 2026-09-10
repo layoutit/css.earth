@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import runtimeDefinition from "../../../../src/planets/ceres/prepared/runtime.json" with {type:"json"};
-import { requirePreparedPresentation } from "../../../../src/platform/prepared-presentation-contract.mjs";
-import { preparePlanetarySystem } from "../../../../src/platform/prepare-planetary-system.mjs";
-import { prepareEclipticPresentationFrame } from "../../../../src/platform/solar-presentation-frame.mjs";
-import { prepareHeliocentricView } from "../../../../src/platform/prepare-heliocentric-view.mjs";
+import { requirePreparedPresentation } from "../../../../src/platform/prepared-presentation-contract.mts";
+import { preparePlanetarySystem } from "../../../../src/platform/prepare-planetary-system.mts";
+import { prepareEclipticPresentationFrame } from "../../../../src/platform/solar-presentation-frame.mts";
+import { prepareHeliocentricView } from "../../../../src/platform/prepare-heliocentric-view.mts";
 const { id: _id, controls: _controls, ...presentation } = runtimeDefinition;
 const PREPARED_PRESENTATION = {...presentation, schema:"cssearth-prepared-presentation@3"};
 

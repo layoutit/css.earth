@@ -1,11 +1,13 @@
 ---
-import { OBJECTS } from '../objects.mjs';
+import type { OverviewScope } from '../overview-context.mts';
+interface Props { objectId?: string; scope?: OverviewScope; }
+import { OBJECTS } from '../objects.mts';
 import preparedWorld from '../../src/planets/sun/prepared/world-context.json';
-import { solarSystemFocus } from '../overview-selection.mjs';
+import { solarSystemFocus } from '../overview-selection.mts';
 
 const { objectId, scope } = Astro.props;
 const object = OBJECTS.find(object => object.id === objectId);
-const systemRoute = solarSystemFocus(OBJECTS).route;
+const systemRoute = solarSystemFocus(OBJECTS)!.route;
 const crumbs: { label: string; href: string }[] = [
   { label: 'Milky Way', href: `${systemRoute}?overview=milky-way` },
 ];

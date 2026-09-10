@@ -1,8 +1,11 @@
 ---
+import type { Mission } from '../spacecraft-types.mts';
+interface Props { objectId: string; missions: readonly Mission[]; }
 import DatasetSpacecraft from './DatasetSpacecraft.astro';
-import { spacecraftAgencies } from '../dataset-spacecraft.mjs';
-import agencyLogos from '../source/agency-logos.json';
+import { spacecraftAgencies } from '../dataset-spacecraft.mts';
+import agencyLogosInput from '../source/agency-logos.json';
 const { objectId, missions } = Astro.props;
+const agencyLogos: Readonly<Record<string, { src: string }>> = agencyLogosInput;
 const agencies = spacecraftAgencies(missions);
 const initialMissionIds = agencies[0]?.missions.map(mission => mission.id);
 const resultsId = `${objectId}-mission-results`;

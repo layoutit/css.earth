@@ -74,7 +74,7 @@ python3 src/objects/heliosphere/source/ibex/extract.py --check
 pnpm build:packages
 pnpm build:preparation
 pnpm prepare:surface-shell src/objects/heliosphere
-node tools/test-preparation.mjs --universe
+node tools/test-preparation.mts --universe
 ```
 
 Both original scientific inputs are checked in. To regenerate their numerical

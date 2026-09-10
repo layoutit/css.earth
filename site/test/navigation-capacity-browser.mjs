@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { OBJECTS } from '../objects.mjs';
+import { OBJECTS } from '../objects.mts';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4210';
 const sourcePath = '/sun/?overview=solar-system&v=QMa8GhQkxq0kCjwwjGyvKEVkwdEH0KlHMa5BQsczQAAAAD_NAzq-TAs4v9ZvIAwo9nM_43yA9Ilr5wABAAAAAAAAAAA';
 const output = 'output/playwright/navigation-capacity';
@@ -18,7 +18,7 @@ try {
     await ready(page, 'sun');
     for (const object of OBJECTS) {
       const bank = await page.evaluate(async ({ id, sourceFrame }) => {
-        const { loadPackagedObject } = await import('/site/packaged-object-runtime.mjs');
+        const { loadPackagedObject } = await import('/site/packaged-object-runtime.mts');
         const descriptor = await (await fetch(`/src/planets/${id}/object.json`)).json();
         const factory = await loadPackagedObject(descriptor);
         const source = window.__sun.camera;

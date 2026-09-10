@@ -7,9 +7,9 @@
     "sha256": "f2622c006ab5db4d0081012ddcc3a65a2f449264094f9d145647c95907233369"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -327,7 +327,7 @@
       "sha256": "982fb3441909f80413120b9a2caf82a2e0ffd81c9198b95c41d6ed7951546e17",
       "bytes": 79467,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "484f8afe4b81a4f0a0f2d3c6f75d26e4c82c39440e0e69cdd2e8a722592e4955",
       "bytes": 7844,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/hekate/hekate-elevation-thumbnail.webp",
           "bytes": 5576,
           "sha256": "f9eade59c1f65d7d99aefabd8fba942eff467b082d9a7d61de823ec82569fb5b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hekate/hekate-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hekate/hekate-elevation-surface@2x.webp",
           "bytes": 344402,
           "sha256": "10afa919ef057968c1e88b53568bcf2766ce8697cc02703c35cd46e1686a05a5",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/hekate/hekate-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/hekate/hekate-shape-surface@2x.webp",
           "bytes": 214976,
           "sha256": "74a4d95c9babe9a2b091e12f1a0a8648bb4681478bd3876ef8a562d19cac644e",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

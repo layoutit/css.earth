@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { orderFacts } from "../fact-order.mjs";
+import { orderFacts } from "../fact-order.mts";
 
 import PREPARED_EARTH_PANEL from "../../src/planets/earth/prepared/content.json" with { type: "json" };
 import PREPARED_CERES_PANEL from "../../src/planets/ceres/prepared/content.json" with { type: "json" };

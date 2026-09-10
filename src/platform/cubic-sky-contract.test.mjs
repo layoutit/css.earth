@@ -1,4 +1,4 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -22,7 +22,7 @@ import {
   createCubicSkySunPresentation,
   projectDirectionToCubemapFace,
   validatePreparedCubicSky,
-} from "./cubic-sky-contract.mjs";
+} from "./cubic-sky-contract.mts";
 
 const OBJECT_SKIES = Object.freeze({
   sun: PREPARED_SUN_STARFIELD,

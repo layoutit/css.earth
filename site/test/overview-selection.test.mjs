@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { overviewExitDistance, selectionAtCamera, watchOverviewSelection } from '../overview-selection.mjs';
+import { overviewExitDistance, selectionAtCamera, watchOverviewSelection } from '../overview-selection.mts';
 import { worldCameraFromCenteredPresentation } from '../../src/renderers/css/dist/navigation.js';
 
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];

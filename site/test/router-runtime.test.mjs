@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createSceneRouter } from "../scene-router.mjs";
+import { createSceneRouter } from "../scene-router.mts";
 
 function deferred() {
   let resolve, reject;

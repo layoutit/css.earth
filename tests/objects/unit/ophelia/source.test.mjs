@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import { readObservation } from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
+import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import { readObservation } from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 const root = new URL('../../../../src/planets/ophelia/source/', import.meta.url);
 
 test('Ophelia source preserves the published prolate semiaxes in metres', async () => {

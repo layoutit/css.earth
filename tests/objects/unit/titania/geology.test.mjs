@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
-import {parseTerrestrialProfile} from '../../../../tools/objects/terrestrial-layers/index.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
+import {parseTerrestrialProfile} from '../../../../tools/objects/terrestrial-layers/index.mts';
 
 const source = new URL('../../../../src/planets/titania/source/', import.meta.url).pathname;
 const profile = async () => JSON.parse(await readFile(source + 'preparation/terrestrial.json'));
