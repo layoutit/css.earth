@@ -18,4 +18,10 @@ Both focused Horizons tests pass, including measured endpoint guards for the fiv
 
 Delivery: 175 selected assets were published and installed into an empty destination with one transfer at a time. All 38,803,094 downloaded bytes match their expected sizes and SHA-256 values; zero files were reused.
 
-The final production build, actual DPR 1/2 browser views, shared navigation checks and one retained drag remain pending. No all-body browser sweep or physical-device performance claim is made.
+The ordinary production build passes with 828 outputs and the 413-object registry. Selected five-body asset assembly passes. Every emitted object transport matches its descriptor SHA-256, and all 413 object pages retain the exact prepared startup preloads (`built-transports.json`).
+
+The focused headless browser pass passes for all five bodies at DPR 1 and 2: default settings, visible source limitations, 800 native raster `u` leaves each, fixed leaf identity through dataset changes, optional lighting, close-wheel views, asteroid category membership, search and single-scene navigation. The actual default screenshots at both DPRs and the false-color views were visually inspected. Default silhouettes remain fully framed, with no injected zoom. All new scene image loads are fulfilled from the independently downloaded installation. Main currently hides the Settings action; optional shadows were exercised through its existing bound control event, not a visible settings-button flow.
+
+One 24-step ordinary Aethra pointer drag retained every scene node and issued no additional scene image requests. This is a retained-DOM check, not a timing or dropped-frame measurement. No separate trace, all-body browser sweep or physical-device performance claim is made. Browser errors were empty and the owned browser closed after the pass.
+
+The shared malformed-depth-transport test now preserves the same eight mutations and assertions as separate named cases, avoiding the previous aggregate five-second timeout. Its focused verification is shared with the other population PRs; it is not an application rendering change.

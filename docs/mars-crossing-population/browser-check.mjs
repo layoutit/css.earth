@@ -50,6 +50,15 @@ try{
    await page.screenshot({path:`${output}/${id}-elevation-dpr${dpr}.png`});
    assert.equal(await leaves.evaluateAll(nodes=>nodes.every((n,i)=>n===globalThis.__marsLeaves[i])),true);
    await page.locator('button[name="lens"][value="shape"]').click();
+   if(id==='aethra'&&dpr===2){
+    const before=await page.evaluate(()=>{const root=document.querySelector('.planet-stage');globalThis.__marsDragNodes=[root,...root.querySelectorAll('*')];return getComputedStyle(document.querySelector('.polycss-scene')).transform;});
+    const requestStart=loads.length;
+    await page.mouse.move(864,436);await page.mouse.down();await page.mouse.move(864,340,{steps:24});await page.mouse.up();
+    await page.waitForTimeout(200);
+    const after=await page.evaluate(()=>{const root=document.querySelector('.planet-stage'),nodes=[root,...root.querySelectorAll('*')];return {transform:getComputedStyle(document.querySelector('.polycss-scene')).transform,nodes:nodes.length,retained:nodes.length===globalThis.__marsDragNodes.length&&nodes.every((n,i)=>n===globalThis.__marsDragNodes[i])};});
+    assert.notEqual(after.transform,before);assert.equal(after.retained,true);assert.equal(loads.length,requestStart);
+    results.push({drag:{id,dpr,steps:24,retainedNodes:after.nodes,retainedIdentity:after.retained,newSceneImageRequests:loads.length-requestStart,scope:'One ordinary pointer drag in the existing browser pass; no timing or dropped-frame claim.'}});
+   }
    // The supported close view uses the established wheel contract.
    await page.mouse.move(800,450);await page.mouse.wheel(0,-400);await page.waitForTimeout(500);
    await page.screenshot({path:`${output}/${id}-close-dpr${dpr}.png`});
