@@ -1,13 +1,12 @@
 """Extract the selected published numeric models; shared preparers own rendering.
 
 Run from the repository root after restoring pinned source inputs. This is the
-same radial ellipsoid extraction used by tools/objects/source-authoring/trans-neptunian/author.py.
+radial ellipsoid extraction updates existing packages and their current bindings.
 """
 from pathlib import Path
-import hashlib, json, math, shutil, subprocess, sys
+import hashlib, json, math, shutil, sys
 
 ROOT = Path(__file__).resolve().parents[4]
-BASE = '8666462797772dc50bbebecd8618014f5e7bd16c'
 INPUT_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else Path('tools/objects/source-authoring/distant-worlds/inputs.json')
 INPUTS = json.loads((ROOT / INPUT_PATH).read_text())
 REFERENCE_ROOT = ROOT / INPUTS.get('referenceDirectory', 'output/distant-worlds/references')
@@ -20,18 +19,32 @@ def pin(path):
     data = path.read_bytes()
     return dict(expectedBytes=len(data), expectedSha256=hashlib.sha256(data).hexdigest())
 
-def original(path):
-    return subprocess.check_output(['git', 'show', f'{BASE}:{path}'], cwd=ROOT).decode()
+def current(path, body):
+    return json.loads((ROOT / 'src/planets' / body['id'] / path).read_text())
 
-def template(path, body):
-    return json.loads(original('src/planets/gkunhomdima/' + path).replace('gkunhomdima', body['id']).replace('Gǃkúnǁʼhòmdímà', body['name']))
+# Source identities are authored in the current package before extraction.
+reviewed = {}
+for body in INPUTS['bodies']:
+    path = ROOT / 'src/planets' / body['id'] / 'source/manifest.json'
+    if not path.exists():
+        raise ValueError(f'Author source identities and bindings in {path} before extracting a new body.')
+    manifest = json.loads(path.read_text())
+    if manifest.get('schema') != f"css{body['id']}-authoritative-sources@2":
+        raise ValueError(f'Update {path} to the current Sources contract before extraction.')
+    expected_ids = [entry['id'] for entry in manifest['inputs']]
+    expected_ids += ['published-shape', 'model-surface']
+    existing_inputs = {entry['id']: entry for entry in manifest['inputs']}
+    for local_id in expected_ids:
+        if not existing_inputs.get(local_id, {}).get('sourceBinding'):
+            raise ValueError(f'Author the source binding for {body["id"]}/{local_id} before extraction.')
+    reviewed[body['id']] = manifest
 
 for body in INPUTS['bodies']:
     ident, name, radius = body['id'], body['name'], body['radiusKm']
     package = ROOT / 'src/planets' / ident
     source = package / 'source'
     description = body['shapeMeaning'] + ' ' + body['orientationMeaning'] + ' The grid marks unmapped terrain.'
-    config = template('source/preparation/terrestrial.json', body)
+    config = current('source/preparation/terrestrial.json', body)
     config['distanceAu'] = body['distanceAu']
     config['geometry']['radiusKm'] = radius
     config['geometry']['camera']['framingScale'] = min(1, 2 * radius / max(body['fullAxesKm']))
@@ -39,12 +52,12 @@ for body in INPUTS['bodies']:
     terrain['simplification']['maximumErrorMeters'] = radius * 25
     config['raster']['observations'][0]['metadata']['coverage'] = description
     config['celestial']['sunSource'] = 'JPL Horizons fixed 2026-09-03 epoch. ' + body['orientationMeaning']
-    manifest = template('source/manifest.json', body)
-    manifest['schema'] = f'css{ident}-authoritative-sources@1'
-    manifest['documents'], manifest['generatedIntermediates'] = [], []
-    manifest['inputs'] = manifest['inputs'][:2]
-    acquisition = template('source/preparation/acquisition.json', body)
-    acquisition['operations'] = acquisition['operations'][:2]
+    manifest = current('source/manifest.json', body)
+    manifest['schema'] = f'css{ident}-authoritative-sources@2'
+    manifest['documents'] = reviewed[ident]['documents']
+    manifest['generatedIntermediates'] = reviewed[ident]['generatedIntermediates']
+    manifest['inputs'] = [entry for entry in manifest['inputs'] if entry['id'] not in ['published-shape', 'model-surface']]
+    acquisition = current('source/preparation/acquisition.json', body)
     for op in acquisition['operations']: op['groups'] = ['restore', 'refresh']
     axes = [value / 2 for value in body['fullAxesKm']]
     assert abs(math.prod(axes) ** (1/3) - radius) < max(radius * 1e-8, 1e-9)
@@ -56,7 +69,7 @@ for body in INPUTS['bodies']:
             lines.append(f'{lon} {lat} {r:.12f}')
     write(source / 'shape/ellipsoid.tab', '\n'.join(lines) + '\n')
     manifest['inputs'].append(dict(id='published-shape', path='shape/ellipsoid.tab', **pin(source/'shape/ellipsoid.tab'), origin=body['source'], credit=body['credit'], license='MIT numeric extraction of published scientific facts', licenseEvidence=[body['source']], consumers=['shape'], coverage=description, projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
-    content = template('source/content/object.json', body)
+    content = current('source/content/object.json', body)
     content['panel']['introduction'] = body['introduction']
     dimension_text = ' × '.join(f'{x*1000:g}' for x in body['fullAxesKm'])+' m' if radius < 1 else ' × '.join(f'{x:.0f}' for x in body['fullAxesKm'])+' km'
     content['panel']['facts'] = [dict(id='shape',label='Shape evidence',value=body['shapeLabel']), dict(id='dimensions',label='Display model extents',value=dimension_text), dict(id='rotation',label='Rotation',value=body['periodText']), dict(id='class',label='Population',value=body['population'])]
@@ -90,10 +103,9 @@ for body in INPUTS['bodies']:
         actual=pin(target)
         if ref.get('sha256') and actual['expectedSha256'] != ref['sha256']: raise ValueError(f'Changed reference: {target}')
         if not ref.get('retainOriginal'):
-            acquisition['operations'].append(dict(kind='download',groups=['restore','refresh'],path='reference/'+ref['file'],url=ref['url']))
+            operation = dict(kind='download',groups=['restore','refresh'],path='reference/'+ref['file'],url=ref['url'])
+            acquisition['operations'] = [op for op in acquisition['operations'] if op.get('path') != operation['path']] + [operation]
     write(source/'preparation/acquisition.json',acquisition)
-    for file in ['stars/ESO-IMAGE-LICENSE.md','stars/LICENSE.md','stars/hyg-v41-field.json','presentation/minimap.json']:
-        write(source/file, original('src/planets/gkunhomdima/source/'+file).replace('gkunhomdima',ident))
     for file in ['material/neutral.png','stars/eso0932a.tif','presentation/InterVariable.ttf']:
         target=source/file
         if not target.exists():
@@ -103,17 +115,17 @@ for body in INPUTS['bodies']:
             shutil.copyfile(available,target)
     manifest['inputs'].append(dict(id='model-surface',path='material/neutral.png',**pin(source/'material/neutral.png'),origin='https://github.com/layoutit/cssEarth',credit='cssEarth missing-coverage grid',license='MIT',consumers=['surfaces'],width=64,height=32,lensId='model',label='Shape model',falseColor=False,coverage='Authored neutral material; no observed imagery.',projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
     for entry in manifest['inputs']:
-        # Preserve the historical recipe text when reproducing its pinned bytes.
-        # The maintained helper location is documented in this directory's README.
-        entry.setdefault('acquisition',INPUTS.get('acquisitionNote','Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.'))
+        entry.setdefault('acquisition',INPUTS.get('acquisitionNote','Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py.'))
         entry.setdefault('redistribution','Retain source attribution and model qualifications; upstream papers are not relicensed.')
+    previous = {entry['id']: entry for entry in reviewed[ident]['inputs']}
+    for entry in manifest['inputs']:
+        if entry['id'] not in previous or 'sourceBinding' not in previous[entry['id']]:
+            raise ValueError(f"Author the source binding for {ident}/{entry['id']} before extraction.")
+    manifest['inputs'] = [{**previous[entry['id']], **entry,
+        'sourceBinding': previous[entry['id']]['sourceBinding']} for entry in manifest['inputs']]
     write(source/'manifest.json',manifest)
-    descriptor=template('object.json',body)
-    descriptor['properties'].pop('worldFrame',None)
-    descriptor['properties']['page']=dict(stylesheets=[f'src/renderers/css/styles/{ident}-surfaces.css'])
+    descriptor=current('object.json',body)
     descriptor['properties']['recipe']['shape']['radiusKm']=radius
     descriptor['prepared']['sha256']='0'*64
     write(package/'object.json',descriptor)
-    for file in ['src/renderers/css/styles/gkunhomdima-surfaces.css','tests/objects/browser/gkunhomdima/browser-profile.mjs']:
-        write(ROOT/file.replace('gkunhomdima',ident), original(file).replace('gkunhomdima',ident).replace('Gǃkúnǁʼhòmdímà',name))
     print(ident,'source-authored')

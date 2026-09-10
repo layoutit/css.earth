@@ -65,7 +65,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ryugu-ryugu-shape",
+            "catalogueId": "hayabusa2-ryugu-spc-200k-20200323",
             "role": "material",
             "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
@@ -181,7 +181,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ryugu-ryugu-ryugu-global-color-enhanced-png",
+            "catalogueId": "harvard-datafile-13452500",
             "role": "material",
             "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
           }
@@ -205,7 +205,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ryugu-ryugu-ryugu-global-tif",
+            "catalogueId": "harvard-datafile-13452500",
             "role": "material",
             "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
@@ -229,7 +229,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ryugu-ryugu-ryugu-shape-spc-200k-v20200323-bds",
+            "catalogueId": "hayabusa2-ryugu-spc-200k-20200323",
             "role": "material",
             "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
           }

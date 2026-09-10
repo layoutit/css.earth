@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b998e611cd6f52d03d4cf8f92aa136d95b4646abad4a3e42c4ecc37bf254f96a"
+    "sha256": "ad1c50ab9dff0a5465bfcfa0c4326e56838a108a769937a49831b13ab051c999"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1226,10 +1226,14 @@
       "redistribution": "checked generated source snapshot",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh requests I/F at R 240 from the pinned configuration",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-jupiter-reflectance",
-        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "b2da904d4a929b7e84b355de383394d0bf50ee6c720db2c5f9f95b32355e71bb",
       "bytes": 11912,
@@ -1274,10 +1278,14 @@
       "redistribution": "checked generated source snapshot",
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh expands a pinned Jupiter ephemeris seed",
       "sourceBinding": {
-        "kind": "unresolved",
-        "label": "nasa-psg-jupiter-configuration",
-        "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16",
-        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-psg",
+            "role": "material",
+            "evidence": "PSG configuration or model response; the pinned file and acquisition recipe retain the target, epoch, settings and units. No server release was recorded."
+          }
+        ]
       },
       "sha256": "8878d1d05c0973a4c4d501542810b20242d9cee0f2964cd01cb48c19ec785d33",
       "bytes": 8813,

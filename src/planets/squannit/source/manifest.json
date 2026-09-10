@@ -81,7 +81,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-squannit-radar-shape",
+            "catalogueId": "jpl-squannit-kw4b",
             "role": "material",
             "evidence": "src/planets/squannit/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }
@@ -119,7 +119,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-squannit-model-surface",
+            "catalogueId": "jpl-squannit-kw4b",
             "role": "material",
             "evidence": "src/planets/squannit/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }

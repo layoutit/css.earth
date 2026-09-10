@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "756bb3aa247da29d3c9254f4bbc21290c3b6e6305c14288db7f3493f007a0e36"
+    "sha256": "862188055d65234f9ee01c00c89ed9a9aede820d0297bc58e41716f034c20810"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -634,7 +634,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-enceladus-jpl-spc-enceladus-v2-q256",
+            "catalogueId": "cassini-enceladus-spc-v2",
             "role": "material",
             "evidence": "src/planets/enceladus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }

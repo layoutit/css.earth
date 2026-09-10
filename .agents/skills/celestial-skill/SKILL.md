@@ -94,6 +94,11 @@ to distinguish citations from scientific inputs. Record cited values and their
 meaning in the body README; keep preparation data in the existing source records.
 Do not commit downloaded webpages as evidence.
 
+Follow [Sources authoring](../../../docs/sources-catalogue.md#add-or-update-a-source)
+when adding or changing inputs: reuse the published identity, preserve each local
+file and bind its actual role. Refreshing sources must preserve existing bindings.
+Run `pnpm prepare:sources` after source or attribution changes.
+
 Record the following for selected inputs in the existing source record and
 manifest:
 

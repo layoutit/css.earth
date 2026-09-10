@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "253c99e83e608f24a5711c09063550918075178dc97d3a11fd9e44884b93ada7"
+    "sha256": "03e661b802e8bd10233d2e69483f9dd5975c375a173875b81278b8c199f7c663"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -576,7 +576,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-comet-9p-pds-shape",
+            "catalogueId": "pds-tempel1-shape-2012",
             "role": "material",
             "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
@@ -637,7 +637,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-comet-9p-constraint-surface",
+            "catalogueId": "pds-tempel1-shape-2012",
             "role": "material",
             "evidence": "src/planets/comet-9p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }

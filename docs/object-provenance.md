@@ -3,8 +3,9 @@
 ## Lineage contract
 
 Every registered object uses the same `prepared/provenance.json` contract,
-`cssearth-object-provenance@3`. The Sources card reads this record. It does not
-infer inputs from factsheet citations, lens labels, URLs or publisher names.
+`cssearth-object-provenance@3`. It connects local inputs to prepared outputs.
+The [Sources catalogue](sources-catalogue.md) supplies the published identities
+and combines usage across bodies. Neither infers dependencies from labels or URLs.
 
 ## Ownership and data flow
 
@@ -15,10 +16,9 @@ infer inputs from factsheet citations, lens labels, URLs or publisher names.
    consumed inputs and outputs for each operation.
 3. `prepareAuthoredObject` finalizes provenance after preparing assets, content
    and previews. The record travels with the other prepared JSON outputs.
-4. `site/object-sources.mts` projects those records into attribution groups.
-   The common information panel renders each product link on its own line and
-   the shared credit once underneath. Grouping never combines input identities
-   or replaces their links with one publisher homepage.
+4. The Sources compiler follows this lineage and each input's `sourceBinding`.
+   It derives usage links to published works. `site/object-sources.mts` retains
+   local and unresolved source disclosures in the common panel.
 
 Each source has its exact path, byte count and SHA-256. Each product records its
 recipe, a JSON Pointer to the operation, any additional contributing recipes,
@@ -46,7 +46,7 @@ dependency binding and a behavioral test, not a body-specific UI condition.
 
 `pnpm prepare:provenance` recovers records for `OBJECTS` from checked recipes,
 source manifests and prepared asset receipts. Development/build preparation
-also runs this small migration. It does not download or rebuild body assets.
+also runs this recovery. It does not download or rebuild body assets.
 
 - `basis: recovered` means existing declared pins were bound. It does not prove
   that source bytes are present, that an acquisition happened in this run, or
@@ -75,63 +75,20 @@ separate owner. The compiler also supports Earth noise page records, but those
 geographic views are absent from Earth's current descriptor. That binding does
 not certify worldwide imagery coverage or remote availability.
 
-## Sources presentation metadata
+## Source and mission presentation
 
-An input may declare `title`, `sourceUrl`, `displayCredit`, and an optional
-`attributionGroup.id` in its source manifest. These fields describe that input;
-they never determine whether it was consumed. The underlying source record
-retains the original origin, full credit, license and acquisition details.
+The [Sources guide](sources-catalogue.md) owns published titles, citation links,
+canonical bindings, credits and usage presentation. Local source records may
+supply `title`, `sourceUrl`, `displayCredit` and `attributionGroup.id` for records
+that remain local or unresolved. These fields never establish consumption.
 
-The card uses regular underlined links and muted shared credits. License codes
-are retained in the provenance record and omitted from the card. Authored
-content files and a direct link to the project's provenance JSON are omitted.
-Other internal files without external source links also remain in the record
-rather than appearing as links in the card. Product-page metadata and explicit
-acquisition or verification URLs provide the external link; malformed URL
-templates are never turned into clickable citations.
-No body-specific markup is needed for new objects.
+Captured inputs also carry `capture.attributions`. A spacecraft or mission claim
+needs evidence from the input; participation alone does not establish a dataset
+contribution. The [exploration guide](architecture/exploration-catalog.md) owns
+these fields, artwork, contribution graphs and dataset navigation.
 
-## Missions and spacecraft behind a dataset
-
-Captured inputs declare an explicit `capture.attributions` list in their source
-manifest. Each attribution names an individual spacecraft, an individual mission,
-or an unresolved source credit, and retains its evidence text. A spacecraft claim
-may name its mission when the source establishes that pair. Mission participation
-alone never establishes a dataset contribution.
-
-The shared [exploration catalogue guide](architecture/exploration-catalog.md)
-defines the catalogue fields, migration inventory and authoring workflow.
-`src/platform/exploration-contributions.mts` follows product parents and source
-dependencies at preparation time. It emits one contribution graph with object,
-mission and spacecraft indexes, and deduplicated dataset destinations. Schematic
-interiors and synthetic spectral models do not inherit observing missions from an
-outer reference texture. Observation-derived elevation and shape products retain
-their evidenced attributions.
-
-The Missions tab presents individual missions and their datasets on the current
-body. Expandable spacecraft details distinguish mission participation from
-observation contribution and link to other evidenced dataset views. Agency counts
-use individual mission IDs. Status is a sourced claim with an explicit date;
-absence of an end date does not imply current activity.
-
-`pnpm prepare:spacecraft` validates the catalogue, contribution graph and approved
-artwork. It does not download or render images. The render and emblem libraries
-retain their existing source URLs, credits, hashes and dimensions. Vehicles and
-missions refer to those assets explicitly; suitable artwork is optional. A joint
-illustration is not assigned as a portrait to each participating vehicle.
-
-Dataset summaries are authored beside each object's full description. The card
-uses a three-line summary area; the original description remains available in
-the text's tooltip and source content. Legends use only declared scales and
-category meanings. Every dataset reserves the same 28px band and single-line
-label area after its preview. When no legend is supplied, that slot says so;
-image palettes and brightness placeholders are not substituted for data legends.
-
-After changing capture metadata, run `pnpm prepare:provenance`. This validates all
-new provenance and the exploration catalogue before replacing the prepared set.
-The preparation-only `tools/objects/migrate-provenance-v1.mts` validates the old
-format during migration; browser consumers accept only the current format. Validate with
-`node --test site/test/dataset-spacecraft.test.mjs site/test/object-sources.test.mjs tools/object-provenance.test.mjs`.
+After changing either kind of attribution, use the
+[coordinated preparation command](sources-catalogue.md#prepare-and-check).
 
 ## Validation
 
@@ -146,5 +103,3 @@ Mercury coverage, Saturn material dependencies, Earth noise identity, preview
 inheritance, and preservation of source entries across the full registry.
 Those checks qualify this contract; they do not replace complete object or
 scientific qualification.
-
-Published identities and input bindings are maintained through the [Sources catalogue](sources-catalogue.md). Local input IDs, file pins and product lineage remain here.

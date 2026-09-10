@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0e4d828226f8fc3e1b4ae49c2f8a70dbb0754338c93a8f9130b01f5ea03e7ac1"
+    "sha256": "c8c6457eba46706ff673a0967745e97d1a594cf789d12354e7e0edf370f09f2d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -269,7 +269,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-nix-model-surface",
+            "catalogueId": "doi-10-6084-m9-figshare-12779948-v1",
             "role": "material",
             "evidence": "src/planets/nix/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }

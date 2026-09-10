@@ -1,16 +1,20 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { readFile } from 'node:fs/promises';
+import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import { OBJECTS } from '../site/objects.mts';
-import { canonicalSourceJson, sourceSha256, sourceInventory } from './source-catalogue-inputs.mts';
+import { sourceInventory } from './source-catalogue-inputs.mts';
 import { sourceObject, sourceArray, sourceText, parseSourceCatalog, sourceResolver } from '../src/platform/source-catalog.mts';
 import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
 import { parsePreparedExploration } from '../src/platform/prepared-exploration.mts';
 import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src/platform/source-usage.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import { prepareSpacecraft } from './prepare-spacecraft.mts';
+import { refreshSourceRecord } from './source-authoring-templates.mts';
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
-const fixture = sourceObject(await read('tests/fixtures/sources/migration.json'));
 const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
 const exploration = parsePreparedExploration(await read('site/prepared-spacecraft.json'),prepared.sources);
 const objectInput = async (id: string) => {
@@ -30,19 +34,19 @@ test('source uses conserve all product dependencies, include models, and never c
   assert.equal(metadata.filter(edge=>edge.kind==='artwork').length,artworkCount);
   assert.ok(metadata.every(edge=>!edge.objectId && !edge.lensIds.length));
   assert.equal(prepared.usage.bySource['eso-eso0932a'],undefined,'unused retained panorama creates no active use');
-  assert.equal(prepared.usage.bySource['hyg-v41'],undefined,'retired HYG release is not current sky');
+  assert.ok(prepared.usage.edges.filter(edge => edge.kind === 'shared-context').every(edge => edge.catalogueId !== 'hyg-v41'), 'the current shared sky uses HYG v4.4');
   assert.ok(prepared.usage.bySource['hyg-v44'].length===1);
   assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='adrastea' && edge.kind==='method' && edge.lensIds.length));
   assert.ok(prepared.usage.edges.some(edge=>edge.objectId==='mercury' && edge.lensIds.includes('interior')));
   const sourceIds=['bdr','enhanced','topography'].map(term => prepared.inventory.find(row=>row.ownerPath==='src/planets/mercury/source/manifest.json' && row.localId.includes(term) && row.binding.kind==='catalogued')!.binding);
-  assert.equal(new Set(sourceIds.map(binding=>canonicalSourceJson(binding))).size,3);
+  assert.equal(new Set(sourceIds.map(binding=>JSON.stringify(binding))).size,3);
   for (const source of prepared.catalog.records) assert.equal(new Set(sourceDatasetViews(prepared.usage,source.id).map(view=>view.href)).size,sourceDatasetViews(prepared.usage,source.id).length);
 });
 test('new unresolved inputs, unknown bindings, stale lenses and inconsistent usage indexes fail', async () => {
   const path='src/planets/earth/source/manifest.json', manifest=sourceObject(await read(path));
-  const input=sourceArray(manifest.inputs,sourceObject).find(row=>sourceObject(row.sourceBinding).kind==='unresolved')!;
-  input.expectedSha256='a'.repeat(64);
-  assert.throws(()=>sourceInventory(manifest,path,prepared.sources,new Set(),fixture),/Unreviewed unresolved/);
+  const input=sourceArray(manifest.inputs,sourceObject)[0];
+  input.sourceBinding={kind:'unresolved',label:'Unknown input',evidence:'No provider record',reason:'Identity has not been established'};
+  assert.throws(()=>sourceInventory(manifest,path,prepared.sources,new Set()),/Unresolved source/);
   const mercury=await objectInput('mercury');
   assert.throws(()=>compileSourceUsage([{...mercury,controls:[]}],prepared.sources),/Unknown source dataset/);
   assert.throws(()=>compileSourceUsage([mercury],{}),/Unknown canonical source/);
@@ -50,6 +54,36 @@ test('new unresolved inputs, unknown bindings, stale lenses and inconsistent usa
   assert.throws(()=>parseSourceUsage(graph,prepared.sources),/Inconsistent/);
   const invalid=structuredClone(prepared.usage);Object.assign(invalid.edges.find(edge=>edge.kind==='shared-context')!,{objectId:'earth'});
   assert.throws(()=>parseSourceUsage(invalid,prepared.sources),/Metadata citation/);
+});
+test('shared published identities combine usage without combining local input records', () => {
+  const gaspra = prepared.sources['galileo-ssi-gll36001'];
+  assert.equal(gaspra.version, '1.0');
+  assert.deepEqual(sourceDatasetViews(prepared.usage, gaspra.id).map(view => view.objectId).sort(), ['gaspra', 'ida']);
+  const localIds = prepared.usage.edges.filter(edge => edge.catalogueId === gaspra.id).map(edge => edge.localSourceId);
+  assert.ok(localIds.includes('gaspra-gll36001-ti') && localIds.includes('ida-gll36001-ti'));
+  const paper = prepared.sources['doi-10-3847-psj-acaf79'];
+  assert.deepEqual(sourceDatasetViews(prepared.usage, paper.id).map(view => view.objectId).sort(), ['eurybates','orus']);
+  assert.notEqual(prepared.sources.hyg.id, prepared.sources['hyg-v44'].id, 'a work and its release remain distinct');
+});
+test('refreshing document pins retains bindings and native source metadata', async () => {
+  const path = 'src/planets/salacia/source/manifest.json', manifest = sourceObject(await read(path));
+  const document = sourceObject(await read('src/planets/salacia/prepared/provenance.json'));
+  const used = new Set(sourceArray(document.sources, sourceObject).map(source => sourceText(source.path)));
+  const before = sourceInventory(manifest, path, prepared.sources, used);
+  const documents = sourceArray(manifest.documents, sourceObject);
+  const refreshed = documents.map(row => refreshSourceRecord(documents, {
+    path: sourceText(row.path), expectedBytes: row.expectedBytes, expectedSha256: row.expectedSha256,
+    purpose: 'Fallback for a newly authored record.',
+  }));
+  assert.deepEqual(sourceInventory({...manifest, documents: refreshed}, path, prepared.sources, used), before);
+  const native = {path:'native.xml',kind:'source-document',origin:'https://example.org/native.xml',credit:'Provider',
+    sourceBinding:{kind:'catalogued',references:[{catalogueId:'native',role:'material',evidence:'Original label'}]},
+    capture:{attributions:[{kind:'mission',missionId:'test-mission',evidence:'Native label'}]},
+    purpose:'Original product label.',expectedBytes:10,expectedSha256:'a'.repeat(64)};
+  const result = refreshSourceRecord([native],{path:'native.xml',expectedBytes:20,expectedSha256:'b'.repeat(64),purpose:'Fallback.'});
+  assert.deepEqual(result,{...native,expectedBytes:20,expectedSha256:'b'.repeat(64)});
+  assert.equal(native.expectedBytes,10);
+  assert.equal(refreshSourceRecord([],{path:'new.json',expectedBytes:1}).sourceBinding,undefined,'refresh must not invent a binding');
 });
 test('both catalogues prepare deterministically from the same input closure before publication', async () => {
   const result=await prepareSpacecraft({publish:false});
@@ -63,4 +97,42 @@ test('both catalogues prepare deterministically from the same input closure befo
   const before=await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8')));
   await assert.rejects(prepareSpacecraft({provenance:new Map([['mercury',corrupted]])}),/Unknown canonical source/);
   assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8'))),before);
+});
+
+test('numerical extraction uses current package records and preserves reviewed source bindings', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-source-authoring-'));
+  try {
+    const script = 'tools/objects/source-authoring/distant-worlds/author.py';
+    const source = 'src/planets/salacia/source';
+    const files = [script, 'src/planets/salacia/object.json', ...[
+      'manifest.json','content/object.json','preparation/terrestrial.json','preparation/acquisition.json','material/neutral.png',
+    ].map(path => `${source}/${path}`)];
+    for (const path of files) {
+      const target = join(root,path);
+      await mkdir(join(target,'..'),{recursive:true});
+      await copyFile(path,target);
+    }
+    // The extractor does not read these retained common assets or change their pins.
+    for (const path of ['stars/eso0932a.tif','presentation/InterVariable.ttf']) {
+      const target = join(root,source,path);
+      await mkdir(join(target,'..'),{recursive:true}); await writeFile(target,'');
+    }
+    const inputs = sourceObject(await read('tools/objects/source-authoring/distant-worlds/inputs.json'));
+    inputs.bodies = sourceArray(inputs.bodies,sourceObject).filter(body => body.id === 'salacia');
+    await writeFile(join(root,'inputs.json'),JSON.stringify(inputs));
+    const before = sourceObject(await read(`${source}/manifest.json`));
+    await promisify(execFile)('python3',[join(root,script),'inputs.json'],{cwd:root});
+    const after = sourceObject(await read(join(root,source,'manifest.json')));
+    assert.equal(after.schema,before.schema);
+    const previousInputs = sourceArray(before.inputs,sourceObject), nextInputs = sourceArray(after.inputs,sourceObject);
+    for (const previous of previousInputs) {
+      const next = nextInputs.find(row => row.id === previous.id)!;
+      assert.deepEqual(next.sourceBinding,previous.sourceBinding);
+      assert.equal(next.expectedSha256,previous.expectedSha256);
+    }
+    assert.deepEqual(after.documents,before.documents);
+    assert.deepEqual(after.generatedIntermediates,before.generatedIntermediates);
+    const descriptor = sourceObject(await read(join(root,'src/planets/salacia/object.json')));
+    assert.deepEqual(sourceObject(descriptor.properties).catalog,sourceObject(sourceObject(await read('src/planets/salacia/object.json')).properties).catalog);
+  } finally { await rm(root,{recursive:true,force:true}); }
 });

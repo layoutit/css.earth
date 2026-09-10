@@ -14,7 +14,7 @@ The source mesh is reduced from 2292 to 800 faces. The final stopping and closes
 
 Source-scalar and decoded-atlas measurements are retained below. They are sampled preparation checks, not browser pixel-parity evidence.
 
-[Source test definitions](../../../tests/objects/unit/asteroid-2002-ce26/source.test.mjs).
+[Source test definitions](../../../tests/objects/unit/asteroid-2002-ce26/source.test.mts).
 
 ## Known problems
 

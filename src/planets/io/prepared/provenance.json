@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fd16001ef572b1d627cef65fb41d97de884dfde59d00551fcb6304569a7b6ab9"
+    "sha256": "53bcfe2f4968a5229429e7d432fcb17e5b25c75fbb305c7c35affe5078248478"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1128,7 +1128,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-io-io-muse-spectral-slope-night-1",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
           }
@@ -1178,7 +1178,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-io-io-muse-spectral-slope-night-2",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
           }
@@ -1228,7 +1228,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-io-io-muse-spectral-slope-night-3",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
           }
@@ -1278,7 +1278,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-io-io-muse-visible-absorption-night-1",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
           }
@@ -1328,7 +1328,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-io-io-muse-visible-absorption-night-2",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
           }
@@ -1378,7 +1378,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-io-io-muse-visible-absorption-night-3",
+            "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
             "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
           }

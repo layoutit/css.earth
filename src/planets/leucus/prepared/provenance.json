@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "29352bb1899a8825731e5e07ea5e7124e755893fda4095ee3be3729ddfd49772"
+    "sha256": "5f1cb05ff88b563296c5549676c76410bd99f919b797e28f48fb3dc1ba53eff5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -254,7 +254,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-leucus-model-surface",
+            "catalogueId": "doi-10-3847-psj-abb942",
             "role": "method",
             "evidence": "src/planets/leucus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
@@ -289,7 +289,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-leucus-occultation-approximation",
+            "catalogueId": "doi-10-3847-psj-abb942",
             "role": "method",
             "evidence": "src/planets/leucus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }

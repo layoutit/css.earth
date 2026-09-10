@@ -85,6 +85,9 @@ cannot shift another body's sprite coordinates.
 ## Sources and delivery
 
 The source manifest owns exact input IDs, sizes, hashes, credits and terms.
+Follow [Sources authoring](../../docs/sources-catalogue.md#add-or-update-a-source)
+for canonical identities and `sourceBinding` on each input. Reuse an existing
+published source across bodies; local files keep their own identities.
 Necessary source files must be checked in or restored by the existing acquisition
 recipe. The manifest also lists documents and generated intermediate files.
 Every new source note inside `source/` needs its own manifest entry.
@@ -103,6 +106,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Start the shared development site | `pnpm dev` |
 | Acquire missing pins / verify present sources | `node tools/objects/dist/operations.js acquire <id>` / add `--verify-only` |
 | Prepare one authored package | `pnpm prepare:planets -- --object=<id>` |
+| Update source and mission catalogues | `pnpm prepare:sources` |
 | Run body tests | `node --test tests/objects/unit/<id>/*.test.mjs` |
 | Run shared package, renderer, platform and shell tests | `pnpm test` |
 | Run relevant preparation tests | `pnpm test:preparation` with the supported selection |

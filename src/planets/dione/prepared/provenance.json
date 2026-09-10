@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "7231998358a4e7db2ebf95aabecabf13d281c368f0bb28120a62595cfdb37b4b"
+    "sha256": "6eb632cb59cafbc4148aa78a9fe8764fc53c6b1ccff2068cdec2b37ff887bf0f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -923,7 +923,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-dione-dione-vims-infrared",
+            "catalogueId": "doi-10-17189-ctqe-ta30",
             "role": "material",
             "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
           }
@@ -1298,7 +1298,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-dione-dione-vims-ice-absorption",
+            "catalogueId": "doi-10-17189-ctqe-ta30",
             "role": "material",
             "evidence": "src/planets/dione/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
           }

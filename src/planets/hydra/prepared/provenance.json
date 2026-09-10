@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "720c8fd4c0d269fe922e0a9f294ee2200f977e1e1f769bb5345f077015f6e29e"
+    "sha256": "7eccbaefedb4742d414dff89c1c7ded5f10ac5c822a3ae9718cc4b8d205b3f5a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -269,7 +269,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-hydra-model-surface",
+            "catalogueId": "doi-10-6084-m9-figshare-12779975-v1",
             "role": "material",
             "evidence": "src/planets/hydra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }

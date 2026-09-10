@@ -13,7 +13,7 @@
 
 - [source/manifest.json](source/manifest.json) pins acquisition URLs, byte counts, checksums, credits, and consumers.
 
-- Focused checks are defined in the [unit tests](../../../tests/objects/unit/ceres) and [browser profile](../../../tests/objects/browser/ceres/browser-profile.mjs).
+- Focused checks are defined in the [unit tests](../../../tests/objects/unit/ceres) and [browser profile](../../../tests/objects/browser/ceres/browser-profile.mts).
 
 ## Known problems
 
