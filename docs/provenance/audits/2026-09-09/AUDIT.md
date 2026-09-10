@@ -288,3 +288,29 @@ Final documentation checks: all 414 body accounts use README, and no body SOURCE
 USAGE or EVIDENCE account remains. All 410 required-package checks and 3,432 local
 links in 483 changed Markdown files passed. The package check also rejected a
 missing README.
+
+## Integration of the remaining population packages
+
+Main then advanced to `80e19c51349f713c9a9a64b8ef1cbb78917f0fc7`, adding 22 body
+packages. Their source accounts were merged into the same README layout. Three
+active Python authors now preserve reviewed READMEs instead of creating SOURCE
+files; their scientific output code is unchanged.
+
+This integration omitted 17 required context images. Existing local copies of
+all 17 matched the committed manifest pins and were added: **1,162,889 bytes**.
+Together with the earlier recovery, this PR restores **142 missing files
+(7,916,569 bytes)**. The checkout tests now check every registered manifest for
+committed inputs or an acquisition path, with Earth's tested offline restore as
+the sole separate path. CI runs those tests, including a missing-context failure
+case, and rejects ignored tracked files.
+
+The complete index covers **432 manifests and 11,413 required entries**: 9,723
+have committed files, 1,689 have acquisition operations and one uses Earth's
+offline restore. No entries lack both paths, and zero tracked files match ignore
+rules. All four checkout tests and five minimap tests pass. Sun's regenerated
+provenance matches its merged manifest, and the minimap contains all 432 bodies.
+
+All 436 body accounts use README. Package presence checks for all 432 registered
+bodies and 3,699 local links in 506 changed Markdown files passed. The 22 added
+READMEs passed layout checks at 1,200 and 390 pixels: source, evidence and known
+problems appear first, methods start collapsed and no page overflows.

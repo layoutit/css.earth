@@ -40,11 +40,11 @@ const sourceKey = id => /^[a-z][a-z0-9]*$/.test(id) ? id : JSON.stringify(id);
 const VSOP87A_KEY = Object.freeze({ earth: "emb" });
 
 const BODIES = OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite", "asteroid", "comet"].includes(body.classification)).map(body => body.id);
+  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet"].includes(body.classification)).map(body => body.id);
 
 const {
   DWARF_PLANET_IDS, dwarfPlanetElements, keplerStateKm,
-  ASTEROID_IDS, asteroidElements,
+  SMALL_BODY_IDS, asteroidElements,
   COMET_IDS, cometElements,
   SATELLITE_IDS, satelliteStateKm, moonPositionRelativeToPlanetKm,
   SCENE_SATELLITE_IDS, sceneSatelliteStateKm,
@@ -144,7 +144,7 @@ const entries = BODIES.map((body) => {
       ? primaryStates.get(parent).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : DWARF_PLANET_IDS.includes(parent)
       ? keplerStateKm(dwarfPlanetElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
-      : ASTEROID_IDS.includes(parent)
+      : SMALL_BODY_IDS.includes(parent)
       ? keplerStateKm(asteroidElements(parent), EPOCH_JD_TT).positionKm.map(value => value / ASTRONOMICAL_UNIT_KILOMETERS)
       : planetPosition(parent) : null;
   const mu = isSatellite
@@ -153,7 +153,7 @@ const entries = BODIES.map((body) => {
     : GM_SUN_AU3_PER_DAY2;
   const kepler = DWARF_PLANET_IDS.includes(body)
     ? keplerStateKm(dwarfPlanetElements(body), EPOCH_JD_TT)
-    : ASTEROID_IDS.includes(body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
+    : SMALL_BODY_IDS.includes(body) ? keplerStateKm(asteroidElements(body), EPOCH_JD_TT)
     : COMET_IDS.includes(body) ? keplerStateKm(cometElements(body), EPOCH_JD_TT) : null;
   const heliocentricAu = isSatellite
     ? parentPosition.map((value, index) => value + moonPosition[index] / ASTRONOMICAL_UNIT_KILOMETERS) : kepler

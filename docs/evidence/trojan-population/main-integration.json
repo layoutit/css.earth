@@ -1,0 +1,101 @@
+{
+  "main": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
+  "capturedRevision": "c09191cb2d8dd20b2a0ff218cfdb20251677730d",
+  "objects": 418,
+  "asteroids": 297,
+  "sunDestinations": 417,
+  "results": [
+    {
+      "id": "diomedes",
+      "unchanged": {
+        "prepared/scene.json": "f10d056c7604b6799e68310f193bb4cd4777699555fba9f4f1a689e93ce85a15",
+        "prepared/terrain.json": "a2dd04c47600543d543a6e41934e8ad4b03c54986f64977986dec658a189ad0a",
+        "runtime-assets.json": "748c747e1df8bcdafed1cc5abdfd287e425fd30161661b9b290fa8f6fb3e84a6"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "ajax",
+      "unchanged": {
+        "prepared/scene.json": "8bdbb96e80678ba952dce2021e00f981812bb2effde88dfce5c242e9424a1b5b",
+        "prepared/terrain.json": "362d84328ea1c2e1c7e4f8b43ffb5e58567aa8951cf51fc7283bdb894082b209",
+        "runtime-assets.json": "9fef426fd2f184611f68f59a83c3f867b37cde4ad74766151f94bc3f62547514"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "ilioneus",
+      "unchanged": {
+        "prepared/scene.json": "2471254880758709af6867e9f0dc037a837ac6acbb3cac58dab69b8864bce9f8",
+        "prepared/terrain.json": "9078639982014ec618f200767e2534fada48b02c150bf007f8373a61e2712f08",
+        "runtime-assets.json": "e86371ebffcbf9c1a168765aa457b013a70d77bf25e046fd78b08917b8d814ec"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "pyrrhus",
+      "unchanged": {
+        "prepared/scene.json": "c9254ff67e6f65a99455634ec99a4d4f31fc5fdc1fe64e571ec163121c15a36b",
+        "prepared/terrain.json": "3005c5408f7031f391cd74d847aff222cccc8343c6b5991762e86dd41368cc73",
+        "runtime-assets.json": "3ea5ff75c82dbf84a768e50beb55517037841e327ef25acef055bfc02ad2bb10"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "eumelos",
+      "unchanged": {
+        "prepared/scene.json": "612b0d52439dbf922d3e6d0820891ec95ccd07c8e9a6a43ef6d2f38a19fb2669",
+        "prepared/terrain.json": "82572bd22c6c0773d1bf85d281be385d97a77628ca782945b85a1a5982b1b3da",
+        "runtime-assets.json": "449f82b2784abdbf0d411f435a19aef55229274cc4937b07e567774dd178f7b9"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "lycomedes",
+      "unchanged": {
+        "prepared/scene.json": "9bfe4d43ed99f78e890b9e75bada34fa0a2a3bbf01037b6fcedc1a61ec2e31cb",
+        "prepared/terrain.json": "fa73020f8382de6f529daec00142f93fa94819ea528807795b48e8a160637f25",
+        "runtime-assets.json": "9198d83dacadd5a622fc722462e10db888ae163df846f012a9bb1135f68a5aa0"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "demodokus",
+      "unchanged": {
+        "prepared/scene.json": "320f649ceef4c6405ea005a27cef8a4b77e04fbdd9c78158908560162b0bb358",
+        "prepared/terrain.json": "10d360695f62addd1fdccebdaee57f06b281ad33145da14c4eeef9ac72aee31e",
+        "runtime-assets.json": "d3d4c878d5f024187cf025c90d8525a2c6a791b3e2fef63fa2efcfc0fb421249"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "menelaus",
+      "unchanged": {
+        "prepared/scene.json": "71313e5e6d8d0f7a386a546386ada21c8a24fe88abc61bc4b3ce0414e51687ef",
+        "prepared/terrain.json": "eaa52a694e69328a5fef9c1e2b5d0273ca0e4eabe8297f7dfbcb0c2fc6aa6f38",
+        "runtime-assets.json": "4217eb740dbdd3d30f773533604e7c6f6f17b8dcb4e9169cae6841f7e6992cfb"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "agenor",
+      "unchanged": {
+        "prepared/scene.json": "cf73e3905e39515989e34db7180c48ed3564e74771e594257ded4edc4ac641f9",
+        "prepared/terrain.json": "cba01a20796b931ffa088d91adfb339acafdca88c494e8b33a88f180268f6711",
+        "runtime-assets.json": "6936edd62a116308bf8a866490460457b1c96c63c10baef34eefaefe4e13c794"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    },
+    {
+      "id": "mentor",
+      "unchanged": {
+        "prepared/scene.json": "e03d199a89ec305257208372a3d2d64f84a5ef3c4ff46a11f9ad05b6d4183afa",
+        "prepared/terrain.json": "755c60aca6d39abf767fc43380890d9e2751267f3af81e703d7a0673006bd9b6",
+        "runtime-assets.json": "293254fd2a06f812a34ef2a358393d9a2e3e47a9ebed849b210adb5f6174bd76"
+      },
+      "nonMarkerRuntimeUnchanged": true
+    }
+  ],
+  "incomingCometSciencePreserved": true,
+  "browserMatrixRepeated": false
+}

@@ -1,0 +1,155 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "arrokoth",
+  "displayName": "Arrokoth",
+  "panel": {
+    "introduction": "New Horizons explored this cold-classical Kuiper-belt contact binary in 2019. The released shape preserves both lobes; the unseen northern surface is modeled.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "New Horizons model"
+      },
+      {
+        "id": "dimensions",
+        "label": "Model extents",
+        "value": "34.5456 × 19.8382 × 13.8223 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "About 15.9 hours; display phase is illustrative"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Trans-Neptunian object"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate."
+      },
+      {
+        "id": "albedo-coverage",
+        "label": "Albedo coverage",
+        "value": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model",
+      "albedo": "Modeled albedo"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Released New Horizons contact-binary shape: two overlapping closed lobe meshes. Southern surface detail is constrained by flyby imagery; the unseen side is a source model estimate. Revised pole from the bundled Porter paper Table 2. Its PDS XML gives an inconsistent earlier pole; the paper pole is used with arbitrary meridian and no precision spin-phase claim. The grid marks unmapped terrain.",
+        "title": "Published New Horizons shape",
+        "detail": "Source shape · unmapped surface grid",
+        "thumbnail": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
+        "surface": "arrokoth-model-surface@2x.webp",
+        "poles": "arrokoth-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.26007/97r3-1e19"
+        }
+      },
+      {
+        "id": "albedo",
+        "label": "Modeled albedo",
+        "description": "Published LORRI albedo fit in the released per-lobe OBJ UV mapping, shown with a grayscale stretch. The source retains a uniform baseline where imagery is unconstrained and supplies no observation-coverage mask; uniform areas must not be interpreted as measured albedo. This is a model map, not a global photograph.",
+        "title": "New Horizons fitted albedo with uniform unconstrained-source fill",
+        "detail": "Fitted scalar · includes source fill",
+        "thumbnail": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
+        "surface": "arrokoth-albedo-surface@2x.webp",
+        "poles": "arrokoth-albedo-poles@2x.webp",
+        "source": {
+          "id": "lorri-albedo-model",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.26007/97r3-1e19"
+        },
+        "legend": {
+          "kind": "scale",
+          "image": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
+          "labels": [
+            "0.03",
+            "0.055",
+            "0.08"
+          ],
+          "meta": "Fitted albedo fraction · includes unconstrained source fill",
+          "sourceUrl": "https://doi.org/10.26007/97r3-1e19",
+          "title": "Modeled albedo",
+          "width": 256,
+          "height": 16
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS",
+      "href": "https://doi.org/10.26007/97r3-1e19"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published data and interpretation",
+      "href": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/porteretal2024b.pdf"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published data and interpretation",
+      "href": "https://arxiv.org/abs/2001.00125"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.26007/97r3-1e19",
+      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS"
+    }
+  }
+}

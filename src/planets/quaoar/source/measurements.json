@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-trans-neptunian-source@1",
+  "periodHours": null,
+  "periodText": "Unresolved; display orientation is illustrative",
+  "population": "Trans-Neptunian object",
+  "surfaceMeaning": "No resolved global surface imagery; the standard grid marks unmapped terrain.",
+  "unresolved": [
+    "Oblate versus triaxial shape and 8.8394 h versus 17.6788 h spin interpretations remain model-dependent.",
+    "The 572.5 MB supplementary archive contains lightcurves/model profiles, not a resolved surface texture; downloading it is unnecessary for the published numeric fit."
+  ],
+  "id": "quaoar",
+  "name": "Quaoar",
+  "horizons": "50000;",
+  "distanceAu": 43.16573948799057,
+  "fullAxesKm": [
+    1132.2,
+    1132.2,
+    1022.4
+  ],
+  "axisUncertaintyKm": [
+    [
+      4.4,
+      5.0
+    ],
+    [
+      4.4,
+      5.0
+    ],
+    [
+      7.4,
+      7.2
+    ]
+  ],
+  "poleIcrfDegrees": [
+    259.7,
+    53.4
+  ],
+  "source": "https://arxiv.org/abs/2607.06450",
+  "credit": "Margoti et al. (2026), accepted ApJ; 36 stellar-occultation campaigns",
+  "shapeMeaning": "Published 3D oblate fit: equatorial semiaxes 566.1 km and polar semiaxis 511.2 km. The fit assumes the body pole aligns with the rings. A competing triaxial interpretation is unresolved.",
+  "orientationMeaning": "Pole RA 259.7°, DEC 53.4° inherits the measured ring-plane prior; arbitrary meridian. The 8.8394 h and 17.6788 h period interpretations remain model-dependent and no sidereal spin is installed.",
+  "introduction": "This large Kuiper-belt object has two known rings. Its oblate shape is fitted to stellar occultations with the ring plane as a pole constraint; surface detail is unresolved.",
+  "papers": [
+    "https://zenodo.org/records/21185812",
+    "https://doi.org/10.1051/0004-6361/202346365"
+  ],
+  "radiusKm": 547.1743344090937,
+  "checkedOn": "2026-09-09"
+}

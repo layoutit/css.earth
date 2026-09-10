@@ -39,6 +39,8 @@ jobs:
           pnpm build:packages
           pnpm build:renderer
           pnpm build:preparation
+      - name: Check source restoration and tracked inputs
+        run: node --test tools/restore-source-inputs.test.mjs
       - name: Typecheck renderer and preparation
         run: |
           pnpm typecheck:renderer

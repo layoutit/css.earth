@@ -151,21 +151,22 @@ export async function preparePlanetarySystem({
     DWARF_PLANET_IDS,
     dwarfPlanetElements,
     dwarfPlanetPositionKm,
-    ASTEROID_IDS,
+    SMALL_BODY_IDS,
+    TRANS_NEPTUNIAN_IDS = [],
     asteroidElements,
     asteroidPositionKm,
     COMET_IDS = [],
     cometElements,
     cometPositionKm,
   } = astronomy ?? await loadAstronomyPackage();
-  if (!Array.isArray(asteroids) || asteroids.some(id => !ASTEROID_IDS.includes(id)) ||
+  if (!Array.isArray(asteroids) || asteroids.some(id => !SMALL_BODY_IDS.includes(id)) ||
       new Set([...bodies, ...dwarfPlanets, ...asteroids]).size !== bodies.length + dwarfPlanets.length + asteroids.length) {
     throw new TypeError('Unknown or duplicate asteroid in planetary system.');
   }
   // A selected heliocentric small body participates in the same system even
   // when it is not one of the context objects requested by a different scene.
   const smallBodies = [...asteroids];
-  if ([...ASTEROID_IDS, ...COMET_IDS].includes(bodyId) && !smallBodies.includes(bodyId)) smallBodies.push(bodyId);
+  if ([...SMALL_BODY_IDS, ...COMET_IDS].includes(bodyId) && !smallBodies.includes(bodyId)) smallBodies.push(bodyId);
   const smallBodyPosition = (id, epoch) => (COMET_IDS.includes(id) ? cometPositionKm : asteroidPositionKm)(id, epoch);
   const smallBodyElements = id => (COMET_IDS.includes(id) ? cometElements : asteroidElements)(id);
   if (dwarfPlanets.some((id) => !DWARF_PLANET_IDS.includes(id))) {
@@ -185,7 +186,7 @@ export async function preparePlanetarySystem({
   // A satellite's heliocentric asteroid parent is required even when the
   // caller did not request additional context asteroids.
   const centerBodyId = BODY_ORBITS[bodyId].centerBodyId;
-  if (ASTEROID_IDS.includes(centerBodyId) && !smallBodies.includes(centerBodyId)) smallBodies.push(centerBodyId);
+  if (SMALL_BODY_IDS.includes(centerBodyId) && !smallBodies.includes(centerBodyId)) smallBodies.push(centerBodyId);
   const satelliteObserver = ![...bodies, ...dwarfPlanets, ...smallBodies].includes(bodyId);
   const observerUnitMeters = satelliteObserver ? M_PER_KM / 10 : M_PER_KM;
   const parent = satelliteObserver ? BODY_ORBITS[bodyId].centerBodyId : null;
@@ -303,7 +304,7 @@ export async function preparePlanetarySystem({
       const { semiMajorAxisKm, eccentricity, normalIcrf, perihelionIcrf } =
         heliocentricOrbitFromState(BODY_HELIOCENTRIC_STATES[id], BODIES.sun.gravitationalParameterKm3PerS2);
       return {
-        kind: COMET_IDS.includes(id) ? 'comet' : smallBodies.includes(id) ? 'asteroid' : dwarfPlanets.includes(id) ? 'dwarf-planet' : 'planet',
+        kind: COMET_IDS.includes(id) ? 'comet' : TRANS_NEPTUNIAN_IDS.includes(id) ? 'trans-neptunian' : smallBodies.includes(id) ? 'asteroid' : dwarfPlanets.includes(id) ? 'dwarf-planet' : 'planet',
         semiMajorAxisAu: semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity,
         inclinationDegrees: Math.acos(Math.max(-1, Math.min(1, normalIcrf[2]))) * 180 / Math.PI,
@@ -318,7 +319,7 @@ export async function preparePlanetarySystem({
       const elements = (smallBodies.includes(id) ? smallBodyElements : dwarfPlanetElements)(id);
       const { normalIcrf, perihelionIcrf } = keplerOrientation(elements);
       return {
-        kind: COMET_IDS.includes(id) ? 'comet' : smallBodies.includes(id) ? 'asteroid' : 'dwarf-planet',
+        kind: COMET_IDS.includes(id) ? 'comet' : TRANS_NEPTUNIAN_IDS.includes(id) ? 'trans-neptunian' : smallBodies.includes(id) ? 'asteroid' : 'dwarf-planet',
         semiMajorAxisAu: elements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity: elements.eccentricity,
         inclinationDegrees: elements.inclinationRad * 180 / Math.PI,

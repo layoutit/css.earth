@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { createServer } from 'node:http';
 import { copyFile, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 import test from 'node:test';
+import { setupObjectIds } from './runtime-assets.mjs';
+import { validateObjectPackageFiles } from './object-package-contract.mjs';
 
 const project = resolve(import.meta.dirname, '..');
 const pin = (path, bytes) => ({ path, expectedBytes: bytes.length,
@@ -37,6 +39,28 @@ async function run(root, args) {
   });
 }
 
+test('every registered body has its package files and tracked or restorable sources', async () => {
+  const tracked = new Set(execFileSync('git', ['ls-files', '--cached', '-z'], {
+    cwd: project, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
+  }).split('\0'));
+  const missing = [];
+  for (const id of setupObjectIds([])) {
+    await validateObjectPackageFiles({ id }, { projectRoot: project,
+      accessFile: async path => assert.ok(tracked.has(relative(project, path)), path) });
+    const source = `src/planets/${id}/source`;
+    const [manifest, plan] = await Promise.all(['manifest.json', 'preparation/acquisition.json']
+      .map(async path => JSON.parse(await readFile(resolve(project, source, path), 'utf8'))));
+    const restored = new Set(plan.operations.map(operation => operation.path));
+    for (const entry of [...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates]) {
+      // The archive-backed Earth restore runs before acquisition; exercised below.
+      if (id === 'earth' && entry.path === 'science/mur-gibs.png') continue;
+      const path = `${source}/${entry.path}`;
+      if (!tracked.has(path) && !restored.has(entry.path)) missing.push(path);
+    }
+  }
+  assert.deepEqual(missing, [], 'Required source files must be tracked or have an acquisition operation.');
+});
+
 test('checkout restores a missing compressed observation without refreshing existing inputs', async t => {
   const root = await fixture(t), source = resolve(root, 'src/planets/titan/source');
   const existing = Buffer.from('existing infrared'), radar = Buffer.from('pinned compressed radar');
@@ -59,6 +83,14 @@ test('checkout restores a missing compressed observation without refreshing exis
   assert.deepEqual(requests, ['/observation.IMG.gz']);
   assert.deepEqual(await readFile(resolve(source, 'observation.IMG.gz')), radar);
   assert.deepEqual(await readFile(resolve(source, 'existing.png')), existing);
+
+  const manifestPath = resolve(source, 'manifest.json');
+  const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+  manifest.generatedIntermediates.push({ ...pin('presentation/context.png', Buffer.from('reviewed context')),
+    generator: 'fixture-renderer' });
+  await json(manifestPath, manifest);
+  await assert.rejects(run(root, ['tools/restore-source-inputs.mjs', '--object=titan']),
+    /No authored acquisition restores: presentation\/context\.png/);
 });
 
 test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {

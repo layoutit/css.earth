@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "gkunhomdima",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gǃkúnǁʼhòmdímà",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "8fc7d959513ff8a0933f259176b12bb19e907a2ea5a648023009a0b682cc1485"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "0587e85919d415a69ee81b9e4430729d9d5a666ec96030814b85b2a7729b246b"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "a317a40e84d84fea8b5fbc05ad63413a838d900c3ad303fc8a3496ab21f49770"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "bb0598a38dd67832e3045696437ddd136d3c8b648a766146b6bf293263fa5f3d"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "d929c7671ee9946eeb222d7efbe41341d88656e943ee54df2251df7b1f6a3115"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "61b23e02395a9b6ea2d9f65be44b64f8b254f49c4b7d4c596f17484e74568537"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 316.89328905639314
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/gkunhomdima-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "0b6a5fd016a65279feea202ea5060e0f60f3cc955f824973e10ffd2dc7f2333f"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        579291211626.7227,
+        5931437384936.034,
+        605514914765.7139
+      ],
+      "presentationToReference": [
+        0.10141126205085166,
+        0,
+        -0.9948445888324735,
+        0.9127520648003854,
+        0.39777715593191365,
+        0.09304301382345356,
+        0.3957264511400353,
+        -0.9174820620691818,
+        0.04033908339805381
+      ],
+      "orbitUpReference": [
+        0,
+        -0.39777715593191365,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1377.7969089408398,
+      "bodyRadiusM": 316893.28905639314
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "ed8808be3b8a1220c2aa9fa0d152da4af19c5af25b77b71ff939676562104d61"
+  }
+}

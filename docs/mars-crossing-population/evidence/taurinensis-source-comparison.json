@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-asteroid-source-comparison@1",
+  "id": "taurinensis",
+  "comparison": "Left: original source; right: actual prepared terrain. Each is normalized to its own maximum radius by the established orthographic renderer; these are shape-inspection views, not pixel parity with the browser or a matched physical framing.",
+  "geometrySource": "Original pinned counted triangle mesh versus prepared/terrain.json; no simplification or geometry preparation is run by this helper",
+  "sourceIdentity": {
+    "path": "shape/model-490.txt",
+    "sha256": "23d5892b451e70763b68e7edc06b731de621fd79a98820621f63c11de034580e",
+    "bytes": 82222,
+    "vertices": 1016,
+    "faces": 2028,
+    "metersPerUnit": 16821.136990424864
+  },
+  "preparedIdentity": {
+    "path": "src/planets/taurinensis/prepared/terrain.json",
+    "sha256": "ebf402cfe9ca96c6b3a747fd9060de1658a06190f983d5f0dcf20a5b43493070",
+    "bytes": 371841,
+    "faces": 800,
+    "metersToLogicalUnits": 0.022041207474844275
+  },
+  "mapIdentity": {
+    "role": "Preparation intermediate pinned by prepared/surfaces.json; not a runtime request",
+    "path": "output/mars-crossing-population/context/taurinensis/taurinensis-shape-map.webp",
+    "sha256": "01b64e009e6b06778a9b841c95bf806bf8f0d983b54b89dde0f80a887a05532b",
+    "bytes": 23736
+  },
+  "configurationSha256": "c3ff27ae14cd4c4ca06aab0cbdcde06061ca4e04eaeddd3b0d7935b8a481e19a",
+  "sourceFirstVertexMeters": [
+    413.7158642794995,
+    1772.4768469550486,
+    8722.196879097044
+  ],
+  "sourceFirstTriangle": [
+    0,
+    1,
+    2
+  ],
+  "equatorialSamples": [
+    [
+      0,
+      12406.721991838675
+    ],
+    [
+      90,
+      15154.321812148712
+    ],
+    [
+      180,
+      12269.035614845283
+    ],
+    [
+      270,
+      15355.805724934195
+    ]
+  ],
+  "poleSamples": [
+    8319.596223608542,
+    5836.159469990006
+  ],
+  "images": [
+    {
+      "filename": "source-result-0-35.png",
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 35,
+      "sha256": "c9a9af3648a677c4681cd44b6034e09366941a6628675006398c4e5e3b9eb49f",
+      "bytes": 104727
+    },
+    {
+      "filename": "source-result-180-0.png",
+      "longitudeDegrees": 180,
+      "latitudeDegrees": 0,
+      "sha256": "8cec177394edc5633aab45c172b2d0fe91ecaf1223cb38bf997d2a9c3fa628b6",
+      "bytes": 80046
+    },
+    {
+      "filename": "source-result-0-90.png",
+      "longitudeDegrees": 0,
+      "latitudeDegrees": 90,
+      "sha256": "8cef8186dacfacd396fbb6b34ceeda2afefa4193e2ca7e5643ff3b716355db88",
+      "bytes": 137689
+    },
+    {
+      "filename": "source-result-0--90.png",
+      "longitudeDegrees": 0,
+      "latitudeDegrees": -90,
+      "sha256": "6fe7a9d41353586ec4f3cb8c946bb50fe9c1d9200c38ba280d8a8eaa57655cc8",
+      "bytes": 125925
+    }
+  ],
+  "elapsedSeconds": 2.134704083
+}

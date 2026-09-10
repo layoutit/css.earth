@@ -1,5 +1,23 @@
+import diomedesDescriptor from "../src/planets/diomedes/object.json" with { type: "json" };
+import ajaxDescriptor from "../src/planets/ajax/object.json" with { type: "json" };
+import ilioneusDescriptor from "../src/planets/ilioneus/object.json" with { type: "json" };
+import pyrrhusDescriptor from "../src/planets/pyrrhus/object.json" with { type: "json" };
+import eumelosDescriptor from "../src/planets/eumelos/object.json" with { type: "json" };
+import lycomedesDescriptor from "../src/planets/lycomedes/object.json" with { type: "json" };
+import demodokusDescriptor from "../src/planets/demodokus/object.json" with { type: "json" };
+import menelausDescriptor from "../src/planets/menelaus/object.json" with { type: "json" };
+import agenorDescriptor from "../src/planets/agenor/object.json" with { type: "json" };
+import mentorDescriptor from "../src/planets/mentor/object.json" with { type: "json" };
 import bienorDescriptor from "../src/planets/bienor/object.json" with { type: "json" };
 import charikloDescriptor from "../src/planets/chariklo/object.json" with { type: "json" };
+import arrokothDescriptor from "../src/planets/arrokoth/object.json" with { type: "json" };
+import quaoarDescriptor from "../src/planets/quaoar/object.json" with { type: "json" };
+import gkunhomdimaDescriptor from "../src/planets/gkunhomdima/object.json" with { type: "json" };
+import taurinensisDescriptor from "../src/planets/taurinensis/object.json" with { type: "json" };
+import kemiDescriptor from "../src/planets/kemi/object.json" with { type: "json" };
+import helaDescriptor from "../src/planets/hela/object.json" with { type: "json" };
+import lyyliDescriptor from "../src/planets/lyyli/object.json" with { type: "json" };
+import aethraDescriptor from "../src/planets/aethra/object.json" with { type: "json" };
 import annefrankDescriptor from "../src/planets/annefrank/object.json" with { type: "json" };
 import brailleDescriptor from "../src/planets/braille/object.json" with { type: "json" };
 import heraDescriptor from "../src/planets/hera/object.json" with { type: "json" };
@@ -359,6 +377,10 @@ import hyperionDescriptor from "../src/planets/hyperion/object.json" with { type
 import ryuguDescriptor from "../src/planets/ryugu/object.json" with { type: "json" };
 import bennuDescriptor from "../src/planets/bennu/object.json" with { type: "json" };
 import itokawaDescriptor from "../src/planets/itokawa/object.json" with { type: "json" };
+import ivarDescriptor from "../src/planets/ivar/object.json" with { type: "json" };
+import toroDescriptor from "../src/planets/toro/object.json" with { type: "json" };
+import cerberusDescriptor from "../src/planets/cerberus/object.json" with { type: "json" };
+import tantalusDescriptor from "../src/planets/tantalus/object.json" with { type: "json" };
 import erosDescriptor from "../src/planets/eros/object.json" with { type: "json" };
 import phoebeDescriptor from "../src/planets/phoebe/object.json" with { type: "json" };
 import deimosDescriptor from "../src/planets/deimos/object.json" with { type: "json" };
@@ -602,6 +624,18 @@ export const OBJECTS = defineObjects([
     "Explore Bennu in 3D with cssEarth using mission-derived shape and surface data.", packaged(bennuDescriptor), bennuDescriptor.properties.worldFrame),
   object("itokawa", "Itokawa", "asteroid", "#a49c8d", 1.323,
     "Explore Itokawa in 3D with cssEarth using mission-derived shape and surface data.", packaged(itokawaDescriptor), itokawaDescriptor.properties.worldFrame),
+  object("ivar", "Ivar", "asteroid", "#aaaaaa", 1.8630871303717667,
+    "Explore Ivar, a near-Earth asteroid, through its published shape model.", packaged(ivarDescriptor), ivarDescriptor.properties.worldFrame),
+
+  object("toro", "Toro", "asteroid", "#aaaaaa", 1.3678992132175503,
+    "Explore Toro, a near-Earth asteroid, through its published shape model.", packaged(toroDescriptor), toroDescriptor.properties.worldFrame),
+
+  object("cerberus", "Cerberus", "asteroid", "#aaaaaa", 1.0799439098043286,
+    "Explore Cerberus, a near-Earth asteroid, through its published shape model.", packaged(cerberusDescriptor), cerberusDescriptor.properties.worldFrame),
+
+  object("tantalus", "Tantalus", "asteroid", "#aaaaaa", 1.2900615327857758,
+    "Explore Tantalus, a near-Earth asteroid, through its published shape model.", packaged(tantalusDescriptor), tantalusDescriptor.properties.worldFrame),
+
   object("eros", "Eros", "asteroid", "#a49c8d", 1.458,
     "Explore Eros in 3D with cssEarth using mission-derived shape and surface data.", packaged(erosDescriptor), erosDescriptor.properties.worldFrame),
   object("ida", "Ida", "asteroid", "#a49c8d", 2.861,
@@ -1276,6 +1310,24 @@ export const OBJECTS = defineObjects([
   object("unitas", "Unitas", "asteroid", "#aaaaaa", 2.357778522320458,
     "Explore Unitas in 3D with its published shape model and radial elevation.", packaged(unitasDescriptor), unitasDescriptor.properties.worldFrame),
 
+  object("arrokoth", "Arrokoth", "trans-neptunian", "#aaaaaa", 44.05655144131418,
+    "Explore its published shape and source constraints.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(arrokothDescriptor);
+    }, arrokothDescriptor.properties.worldFrame),
+
+  object("quaoar", "Quaoar", "trans-neptunian", "#aaaaaa", 43.16573948799057,
+    "Explore its published shape and source constraints.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(quaoarDescriptor);
+    }, quaoarDescriptor.properties.worldFrame),
+
+  object("gkunhomdima", "Gǃkúnǁʼhòmdímà", "trans-neptunian", "#aaaaaa", 74.45925441086162,
+    "Explore its published shape and source constraints.", async () => {
+      const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
+      return loadPackagedObject(gkunhomdimaDescriptor);
+    }, gkunhomdimaDescriptor.properties.worldFrame),
+
   object("annefrank", "Annefrank", "asteroid", "#aaaaaa", 2.2123334934520815,
     "Explore Annefrank with a clearly labelled approximation of its published flyby dimensions.", async () => {
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
@@ -1287,6 +1339,36 @@ export const OBJECTS = defineObjects([
       const { loadPackagedObject } = await import("./packaged-object-runtime.mjs");
       return loadPackagedObject(brailleDescriptor);
     }, brailleDescriptor.properties.worldFrame),
+
+  object("diomedes", "Diomedes", "asteroid", "#aaaaaa", 5.229240298100407,
+    "Explore Diomedes in 3D with its published shape model and radial elevation.", packaged(diomedesDescriptor), diomedesDescriptor.properties.worldFrame),
+
+  object("ajax", "Ajax", "asteroid", "#aaaaaa", 5.281571123923134,
+    "Explore Ajax in 3D with its published shape model and radial elevation.", packaged(ajaxDescriptor), ajaxDescriptor.properties.worldFrame),
+
+  object("ilioneus", "Ilioneus", "asteroid", "#aaaaaa", 5.182702514637422,
+    "Explore Ilioneus in 3D with its published shape model and radial elevation.", packaged(ilioneusDescriptor), ilioneusDescriptor.properties.worldFrame),
+
+  object("pyrrhus", "Pyrrhus", "asteroid", "#aaaaaa", 5.198966960927357,
+    "Explore Pyrrhus in 3D with its published shape model and radial elevation.", packaged(pyrrhusDescriptor), pyrrhusDescriptor.properties.worldFrame),
+
+  object("eumelos", "Eumelos", "asteroid", "#aaaaaa", 5.201650929201143,
+    "Explore Eumelos in 3D with its published shape model and radial elevation.", packaged(eumelosDescriptor), eumelosDescriptor.properties.worldFrame),
+
+  object("lycomedes", "Lycomedes", "asteroid", "#aaaaaa", 5.0677482891717345,
+    "Explore Lycomedes in 3D with its published shape model and radial elevation.", packaged(lycomedesDescriptor), lycomedesDescriptor.properties.worldFrame),
+
+  object("demodokus", "Demodokus", "asteroid", "#aaaaaa", 5.199474785432278,
+    "Explore Demodokus in 3D with its published shape model and radial elevation.", packaged(demodokusDescriptor), demodokusDescriptor.properties.worldFrame),
+
+  object("menelaus", "Menelaus", "asteroid", "#aaaaaa", 5.197053008241417,
+    "Explore Menelaus in 3D with its published shape model and radial elevation.", packaged(menelausDescriptor), menelausDescriptor.properties.worldFrame),
+
+  object("agenor", "Agenor", "asteroid", "#aaaaaa", 5.217218141628041,
+    "Explore Agenor in 3D with its published shape model and radial elevation.", packaged(agenorDescriptor), agenorDescriptor.properties.worldFrame),
+
+  object("mentor", "Mentor", "asteroid", "#aaaaaa", 5.197909787831412,
+    "Explore Mentor in 3D with its published shape model and radial elevation.", packaged(mentorDescriptor), mentorDescriptor.properties.worldFrame),
 
   object("dike", "Dike", "asteroid", "#aaaaaa", 2.662672838262387,
     "Explore Dike in 3D with its published shape model and documented physical size scale.", packaged(dikeDescriptor), dikeDescriptor.properties.worldFrame),
@@ -1523,6 +1605,16 @@ export const OBJECTS = defineObjects([
     "Explore Chariklo, a Centaur, with its observation-constrained shape and two narrow rings.", packaged(charikloDescriptor), charikloDescriptor.properties.worldFrame),
   object("bienor", "Bienor", "asteroid", "#aaaaaa", 16.60224445563277,
     "Explore Bienor, a Centaur, with its observation-constrained shape.", packaged(bienorDescriptor), bienorDescriptor.properties.worldFrame),
+  object("aethra", "Aethra", "asteroid", "#aaaaaa", 2.611974207733697,
+    "Explore Aethra, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", packaged(aethraDescriptor), aethraDescriptor.properties.worldFrame),
+  object("lyyli", "Lyyli", "asteroid", "#aaaaaa", 2.5890833040625667,
+    "Explore Lyyli, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", packaged(lyyliDescriptor), lyyliDescriptor.properties.worldFrame),
+  object("hela", "Hela", "asteroid", "#aaaaaa", 2.615426166061675,
+    "Explore Hela, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", packaged(helaDescriptor), helaDescriptor.properties.worldFrame),
+  object("kemi", "Kemi", "asteroid", "#aaaaaa", 2.766954866279291,
+    "Explore Kemi, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", packaged(kemiDescriptor), kemiDescriptor.properties.worldFrame),
+  object("taurinensis", "Taurinensis", "asteroid", "#aaaaaa", 2.1894142356630333,
+    "Explore Taurinensis, a Mars-crossing asteroid, with its published shape model at an approximate thermal scale.", packaged(taurinensisDescriptor), taurinensisDescriptor.properties.worldFrame),
 ]);
 
 export function requireObject(id) {

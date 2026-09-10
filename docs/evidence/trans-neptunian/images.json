@@ -1,0 +1,50 @@
+{
+  "scope": "Actual headless Chromium production screenshots, viewport 1440x900, DPR 1. Body defaults retain default zoom and orientation. Albedo screenshot selects the optional lens then uses ordinary mouse drag; population screenshot selects the shared navigation tab. No image edits.",
+  "images": [
+    {
+      "file": "arrokoth-default.png",
+      "bytes": 300545,
+      "sha256": "507ea993bf8c266616333936f8df22a65fe036329c948ed9fe62d72a84bf2c2f",
+      "width": 1440,
+      "height": 900,
+      "sourceCapture": "output/playwright/trans-neptunian/arrokoth-dpr1.png",
+      "inspected": true
+    },
+    {
+      "file": "arrokoth-albedo.png",
+      "bytes": 440979,
+      "sha256": "82ff4a05a9c164a11e391fa0eb62e8e4c1a837b066acdfade3e722ca055f3f7f",
+      "width": 1440,
+      "height": 900,
+      "sourceCapture": "output/playwright/trans-neptunian/arrokoth-albedo-rotated-1.png",
+      "inspected": true
+    },
+    {
+      "file": "quaoar-default.png",
+      "bytes": 328247,
+      "sha256": "99a1c8a1df6985e30fad6916e609a61468be461d4712b4fcd54a89a76b9a9743",
+      "width": 1440,
+      "height": 900,
+      "sourceCapture": "output/playwright/trans-neptunian/quaoar-dpr1.png",
+      "inspected": true
+    },
+    {
+      "file": "gkunhomdima-default.png",
+      "bytes": 428606,
+      "sha256": "2bbee63f57658a5df11379b44e2c05176348b389db46bd1e70a871f8d86d24c3",
+      "width": 1440,
+      "height": 900,
+      "sourceCapture": "output/playwright/trans-neptunian/gkunhomdima-dpr1.png",
+      "inspected": true
+    },
+    {
+      "file": "population-navigation.png",
+      "bytes": 393858,
+      "sha256": "2b9f17bb72b2077198874a67b182544ad7bd8bacb36ab1ec98ab60a4e6f9a5b9",
+      "width": 1440,
+      "height": 900,
+      "sourceCapture": "output/playwright/trans-neptunian/trans-neptunian-category.png",
+      "inspected": true
+    }
+  ]
+}
