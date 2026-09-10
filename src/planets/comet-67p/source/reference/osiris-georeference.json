@@ -9,10 +9,14 @@
     "osiris-20140806-0244-quality",
     "osiris-20140806-0520-geo",
     "osiris-20140806-0520-quality",
-    "n20140913-200612-path",
-    "n20140913-200612-qualityPath",
-    "n20140920-133916-path",
-    "n20140920-133916-qualityPath"
+    "n20151026-125938-path",
+    "n20151026-125938-qualityPath",
+    "n20151031-234514-path",
+    "n20151031-234514-qualityPath",
+    "n20151104-112633-path",
+    "n20151104-112633-qualityPath",
+    "n20151115-050650-path",
+    "n20151115-050650-qualityPath"
   ],
   "frame": "Corrected GEO XYZ are in the 67P body frame used by the SHAP7 product; projective camera fitted from their pixel correspondences, checked against held-out pixels and the RMOC shape.",
   "quality": {
@@ -27,8 +31,9 @@
   },
   "photometry": {
     "source": "https://doi.org/10.1051/0004-6361/201525901",
-    "description": "Lommel-Seeliger disk normalization, D=2 cos(i)/(cos(i)+cos(e)); calibrated radiance divided by D before interpolation, normalized to D(0,0)=1. No phase, roughness or cast-shadow recovery. Not measured albedo.",
-    "applicationLighting": "Uniform flood displays normalized imagery without directional model lights. Shadows applies the existing source-mesh fixed-epoch Sun recipe. Both banks are prepared."
+    "description": "Convert calibrated radiance to I/F using solar distance and solar flux from the original OSIRIS calibration HISTORY (pipeline section 3.13). Divide by the Lommel–Seeliger disk function and normalize the HG plus shadow-hiding phase terms to 50 degrees before interpolation. Phase parameters g=-0.37, B0=2.5 and h=0.079 are from Fornasier et al. (2015), Table 4, Hapke 2002 fit at 649 nm. This is a single-scattering approximation, not the full Hapke model or a measured albedo map.",
+    "applicationLighting": "Uniform flood displays normalized imagery without directional model lights. Shadows applies the existing source-mesh fixed-epoch Sun recipe. Both banks are prepared.",
+    "phaseSource": "https://arxiv.org/abs/1505.06888"
   },
   "manuals": [
     {
@@ -48,9 +53,9 @@
     }
   ],
   "limits": [
-    "Six orange-filter observations from August and September 2014; a visual composite across changing illumination, not simultaneous color or albedo. No extrapolation or backside fill.",
+    "Eight orange-filter observations from August 2014 and October–November 2015; this is a visual composite across changing illumination and a perihelion passage, not simultaneous color or albedo. No extrapolation or backside fill.",
     "RMOC and SHAP7 are distinct models; all sample correspondences are explicitly bounded.",
-    "Residual photographed cast shadows and scattering effects remain after disk normalization.",
+    "Photographed cast shadows, real seasonal surface changes and unmodeled scattering effects remain. The published phase terms are a modest extrapolation beyond the original 1.3–54 degree fit to the selected frames at 47–64 degrees; accepted overlap gains provide an additional empirical check.",
     "Positive, zero and negative finite radiance are retained when validity/geometry/photometry permit."
   ],
   "observations": [
@@ -75,19 +80,29 @@
       "filter": "FFP-Vis_Orange"
     },
     {
-      "id": "n20140913-200612",
-      "startTime": "2014-09-13T20:07:21.805",
+      "id": "n20151026-125938",
+      "startTime": "2015-10-26T13:00:58.813",
       "filter": "FFP-Vis_Orange"
     },
     {
-      "id": "n20140920-133916",
-      "startTime": "2014-09-20T13:40:25.993",
+      "id": "n20151031-234514",
+      "startTime": "2015-10-31T23:46:34.951",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "n20151104-112633",
+      "startTime": "2015-11-04T11:27:53.983",
+      "filter": "FFP-Vis_Orange"
+    },
+    {
+      "id": "n20151115-050650",
+      "startTime": "2015-11-15T05:08:11.274",
       "filter": "FFP-Vis_Orange"
     }
   ],
   "mosaic": {
     "selection": "Lowest maximum source emission angle among qualified observations; source order breaks exact ties. No brightness-based coverage rejection.",
-    "levels": "One bounded gain per observation, fitted from robust log-ratios of co-located valid surface samples; first observation anchors the display. This is empirical level matching, not a phase correction.",
+    "levels": "One bounded gain per observation, fitted from co-located positive samples with incidence and emission at most 65 degrees. The stricter angle limit applies only to the brightness fit. All accepted display pixels retain the original 80-degree geometric/photometric limits. The first observation anchors the display; the 1.35 residual-gain budget is unchanged. Use 64 deterministic surface samples per triangle; independently check the fitted gains with 63 disjoint samples per triangle.",
     "display": "The first observation owns the common grayscale stretch.",
     "sourceIndex": "The prepared lossless source-index raster records the winning observation at every atlas texel; zero marks no qualified observation."
   }

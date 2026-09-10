@@ -78,7 +78,7 @@
       {
         "id": "osiris",
         "label": "OSIRIS mosaic",
-        "description": "Rosetta photographs fitted to the nucleus. Their brightness has been adjusted, but the original shadows and some seams remain.",
+        "description": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain.",
         "title": "OSIRIS image mosaic",
         "detail": "OSIRIS",
         "thumbnail": "/scenes/comet-67p/comet-67p-osiris-thumbnail.webp",
@@ -93,15 +93,20 @@
           {
             "id": "observed",
             "label": "Observed",
-            "value": "Aug–Sep 2014"
+            "value": "2014–2015"
+          },
+          {
+            "id": "coverage",
+            "label": "Surface photographed",
+            "value": "About 71%"
           },
           {
             "id": "filter",
             "label": "Camera filter",
-            "value": "Orange"
+            "value": "Orange · 649 nm"
           }
         ],
-        "summary": "Photographs cover parts of the nucleus. Brightness is adjusted to match images; original shadows and some seams remain."
+        "summary": "Eight Rosetta photographs show cliffs, pits and smoother plains across both hemispheres. Grid marks gaps in the photography; original shadows and some seams remain."
       },
       {
         "id": "albedo",
