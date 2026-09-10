@@ -86,7 +86,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
       sourcePositions.set(record.id, row.slice(2, 5).map(Number));
     }
     const sourcePrimaries = new Map<string, number[]>();
-    for (const id of ['hiiaka', 'menoetius', 'squannit', 'romulus']) {
+    for (const id of ['hiiaka', 'menoetius', 'squannit', 'romulus', 'sn263-beta', 'sn263-gamma']) {
       const record = JSON.parse(await readFile(resolve(root, `src/planets/${id}/source/validation/epoch-state.json`), 'utf8'));
       sourcePositions.set(id, record.positionKm);
       if (record.parentHeliocentricState) sourcePrimaries.set(record.centerBodyId, record.parentHeliocentricState.positionKm);

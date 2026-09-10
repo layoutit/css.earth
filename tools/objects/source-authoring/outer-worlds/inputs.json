@@ -1,0 +1,318 @@
+{
+  "checkedOn": "2026-09-10",
+  "base": "085a404c16626ee90a8150f018229609e2c3828e",
+  "referenceDirectory": "output/outer-worlds/references",
+  "bodies": [
+    {
+      "id": "ixion",
+      "name": "Ixion",
+      "horizons": "28978;",
+      "distanceAu": 37.41243146579822,
+      "fullAxesKm": [
+        726.84,
+        726.84,
+        667.96
+      ],
+      "radiusKm": 353.3290693408871,
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "periodHours": null,
+      "periodText": "No secure rotation period",
+      "population": "Plutino (3:2 resonance with Neptune)",
+      "classification": "trans-neptunian",
+      "shapeLabel": "Occultation-outline illustration",
+      "source": "https://arxiv.org/abs/2601.09639",
+      "credit": "Kilic et al. (2026), multi-chord occultations of Ixion, global limb fit (Fig. 2).",
+      "papers": [
+        "https://arxiv.org/abs/2601.09639"
+      ],
+      "shapeMeaning": "The 2020–2023 global projected ellipse has semiaxes 363.42 (+3.53/−3.85) and 333.98 (+7.07/−4.96) km. This axisymmetric edge-on illustration assumes equatorial depth equal to the long projected diameter; the 726.84 × 726.84 × 667.96 km full axes are not a measured 3D shape. True flattening and depth remain unresolved.",
+      "orientationMeaning": "Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement.",
+      "introduction": "Ixion is a large world beyond Neptune. Several stellar occultations constrain its flattened outline; the displayed depth is assumed and its surface is unmapped.",
+      "survey": [
+        "Selected: the 2026 combined multi-chord fit supersedes older thermal-size-only illustrations.",
+        "The 12.4-hour period estimate is not secure in the 2026 analysis. No measured pole or current rotational phase is installed.",
+        "No resolved global imagery or topographic mesh was supplied by the selected occultation study; its ellipse constrains only the projected limb."
+      ],
+      "references": [
+        {
+          "file": "ixion-kilic-2026.pdf",
+          "url": "https://arxiv.org/pdf/2601.09639",
+          "sha256": "7169924fc5b849b6d6009e4bb712b0b44820631d8eecbd29a1c3162ba1acbee4",
+          "bytes": 6578792,
+          "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+          "licenseEvidence": [
+            "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+          ],
+          "extraction": "Global limb fit Fig.2, PDF p.7; §discussion: projected ellipse, no determined 3D depth or secure spin."
+        }
+      ]
+    },
+    {
+      "id": "huya",
+      "name": "Huya",
+      "horizons": "38628;",
+      "distanceAu": 29.392166722642536,
+      "fullAxesKm": [
+        436.1,
+        436.1,
+        375.0
+      ],
+      "radiusKm": 207.35021245858007,
+      "poleIcrfDegrees": [
+        20.8,
+        34.9
+      ],
+      "periodHours": null,
+      "periodText": "6.725 hours; no qualified phase",
+      "population": "Plutino (3:2 resonance with Neptune)",
+      "classification": "trans-neptunian",
+      "shapeLabel": "Occultation-constrained oblate model",
+      "source": "https://arxiv.org/abs/2501.09739",
+      "credit": "Rommel et al. (2025), PSJ 6, 48; Table 6 and Appendix C.",
+      "papers": [
+        "https://arxiv.org/abs/2501.09739"
+      ],
+      "shapeMeaning": "Published primary-body oblate model with semiaxes a=b=218.05 ±0.11 km and c=187.5 ±2.4 km. The depth and inferred flattening depend on an equatorial satellite-orbit assumption. The paper disfavors hydrostatic Maclaurin equilibrium; this view does not assert it. The satellite is excluded from the displayed primary dimensions.",
+      "orientationMeaning": "Uses the paper’s J2000-equatorial satellite-orbit pole RA 20.8° ±1.9°, Dec 34.9° ±1.9° as a body-pole prior under the explicit equatorial-orbit assumption. Arbitrary prime meridian and rotational phase.",
+      "introduction": "Huya is a trans-Neptunian world with a moon. Occultations and the satellite orbit constrain this oblate model of Huya itself; the grid marks its unmapped surface.",
+      "survey": [
+        "Selected: the 2025 multi-event analysis and equatorial-orbit oblate interpretation.",
+        "Earlier 2019 occultation-only fits remain supporting data; the new paper reports timing/profile disagreements and poor Keplerian satellite-orbit fit quality.",
+        "The primary is not asserted to be in hydrostatic equilibrium. No satellite is fabricated or embedded in this body scene."
+      ],
+      "references": [
+        {
+          "file": "huya-rommel-2025.pdf",
+          "url": "https://arxiv.org/pdf/2501.09739",
+          "sha256": "5f9dc9b853085da6b17c2bf3855dbf74e0839803d44e9475f4b753b30477bffe",
+          "bytes": 5003145,
+          "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+          "licenseEvidence": [
+            "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+          ],
+          "extraction": "Appendix C PDFp22: a=b218.05km,c187.5km; Table 6 p13: J2000-equatorial orbital pole20.8°,34.9°; equatorial-orbit assumption."
+        }
+      ]
+    },
+    {
+      "id": "asteroid-2003-vs2",
+      "name": "2003 VS2",
+      "horizons": "84922;",
+      "distanceAu": 36.97977310285473,
+      "fullAxesKm": [
+        678,
+        470,
+        452
+      ],
+      "radiusKm": 262.0949581014582,
+      "poleIcrfDegrees": [
+        236.316247476407,
+        20.344326162113052
+      ],
+      "periodHours": null,
+      "periodText": "7.41753 ±0.00001 hours; arbitrary phase",
+      "population": "Plutino (3:2 resonance with Neptune)",
+      "classification": "trans-neptunian",
+      "shapeLabel": "Occultation and light-curve shape",
+      "source": "https://doi.org/10.1051/0004-6361/202141842",
+      "credit": "Vara-Lubiano et al. (2022), A&A, Table 7 and §4.3 (2019 occultation).",
+      "papers": [
+        "https://doi.org/10.1051/0004-6361/202141842"
+      ],
+      "shapeMeaning": "Published triaxial interpretation with semiaxes 339 ±5, 235 ±6 and 226 ±8 km, using the observed light-curve amplitude and original occultation chords. It is not a homogeneous Jacobi-equilibrium figure. The smooth model does not reproduce local terrain.",
+      "orientationMeaning": "Uses the published model-derived ecliptic pole (longitude 228°, latitude 39°), converted using J2000 mean obliquity 23.439291111°; J2000 is assumed because the paper does not specify equinox. The 59°/121° aspect ambiguity and unquoted pole uncertainty remain; prime meridian and rotational phase are arbitrary.",
+      "introduction": "2003 VS2 is an elongated world beyond Neptune. A multi-site occultation and rotational brightness measurements support this smooth triaxial shape.",
+      "survey": [
+        "Selected: the 2022 observed-amplitude/original-chords solution, not the alternative aligned-chord scenarios.",
+        "The older 2019 shape fit used a lower light-curve amplitude; the 2022 work explains why it is superseded.",
+        "The 2026 combined thermal/occultation preprint does not require a sizable satellite for this body. No resolved global imagery is available in these source products."
+      ],
+      "references": [
+        {
+          "file": "vs2-vara-lubiano-2022-publisher.pdf",
+          "url": "https://openaccess.inaf.it/bitstreams/4baff601-4106-46cd-99b6-82bae843593a/download",
+          "sha256": "8cc2589921d078f7d88fd6c38b2fddedcd91e1e98e630070b84cc5c1a327b810",
+          "bytes": 2151178,
+          "license": "© Authors2022; published by EDP Sciences under Creative Commons Attribution4.0.",
+          "licenseEvidence": [
+            "https://creativecommons.org/licenses/by/4.0/"
+          ],
+          "extraction": "Table 7 PDF p. 10 column observed amplitude/original chords; §4.3 inferred ecliptic pole 228°,39°."
+        },
+        {
+          "file": "outer-worlds-gomez-limon-2026.pdf",
+          "url": "https://arxiv.org/pdf/2605.22296",
+          "sha256": "7cfae421b8edec8742552721a4d559d4e9dc83209dc426f40a9c56830355f7d9",
+          "bytes": 6130177,
+          "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+          "licenseEvidence": [
+            "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+          ],
+          "extraction": "Current thermal/occultation comparison; VS2 does not require a sizable satellite."
+        }
+      ]
+    },
+    {
+      "id": "asteroid-2002-tc302",
+      "name": "2002 TC302",
+      "horizons": "84522;",
+      "distanceAu": 42.69638663728584,
+      "fullAxesKm": [
+        543.2,
+        543.2,
+        459.5
+      ],
+      "radiusKm": 256.86505029826975,
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "periodHours": null,
+      "periodText": "About 56.1 hours suggested; no qualified phase",
+      "population": "Resonant trans-Neptunian object",
+      "classification": "trans-neptunian",
+      "shapeLabel": "Occultation-outline illustration",
+      "source": "https://arxiv.org/abs/2005.08881",
+      "credit": "Ortiz et al. (2020), combined occultation, photometry and astrometry, §3.",
+      "papers": [
+        "https://arxiv.org/abs/2005.08881"
+      ],
+      "shapeMeaning": "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate.",
+      "orientationMeaning": "Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement.",
+      "introduction": "2002 TC302 has a flattened outline measured during a stellar occultation. Its displayed depth is assumed; newer thermal analysis suggests a possible companion, which is not part of this primary-body model.",
+      "survey": [
+        "Selected: peer-reviewed 2018 occultation ellipse with explicit assumed depth.",
+        "The 2021 event reported a preliminary equivalent diameter 500.3 ±2.5km at EPSC 2022; it supports the size scale but does not replace the published complete ellipse.",
+        "A May 2026 thermal/occultation preprint supports a putative satellite; no confirmed companion shape or primary terrain is inferred from it."
+      ],
+      "references": [
+        {
+          "file": "tc302-ortiz-2020.pdf",
+          "url": "https://arxiv.org/pdf/2005.08881",
+          "sha256": "484354879d338114c09e1a2cd7911e2f71ecc2a37578754f48d36066d251c1ee",
+          "bytes": 1638671,
+          "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+          "licenseEvidence": [
+            "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+          ],
+          "extraction": "§3 PDF p. 5 full ellipse 543.2 ±18 ×  459.5 ±11 km; photometry suggests 56.1 h."
+        },
+        {
+          "file": "outer-worlds-gomez-limon-2026.pdf",
+          "url": "https://arxiv.org/pdf/2605.22296",
+          "sha256": "7cfae421b8edec8742552721a4d559d4e9dc83209dc426f40a9c56830355f7d9",
+          "bytes": 6130177,
+          "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+          "licenseEvidence": [
+            "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+          ],
+          "extraction": "May 2026 preprint: thermal/occultation discrepancy supports putative binary, not measured companion terrain."
+        }
+      ]
+    },
+    {
+      "id": "asteroid-2002-tx300",
+      "name": "2002 TX300",
+      "horizons": "55636;",
+      "distanceAu": 43.528810315844204,
+      "fullAxesKm": [
+        363,
+        363,
+        289
+      ],
+      "radiusKm": 168.21847903786332,
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "periodHours": null,
+      "periodText": "About 8.15 hours; arbitrary phase",
+      "population": "Haumea-family trans-Neptunian object",
+      "classification": "trans-neptunian",
+      "shapeLabel": "Conditional occultation-shape illustration",
+      "source": "https://doi.org/10.1051/0004-6361/201732564",
+      "credit": "Vilenius et al. (2018), A&A 618, A136, §3.3 and Table 6.",
+      "papers": [
+        "https://doi.org/10.1051/0004-6361/201732564"
+      ],
+      "shapeMeaning": "The adopted example projected ellipse is 363 × 289 km from the published timing-error reanalysis, with effective diameter 323 (+95/−37) km. This axisymmetric illustration assumes 363 km equatorial depth. The original two chords do not uniquely determine the shape; an old 286 km circular fit is not treated as definitive.",
+      "orientationMeaning": "Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement.",
+      "introduction": "2002 TX300 is an icy member of the Haumea family. Reanalysis of a two-chord occultation supports a range of sizes and shapes; this view illustrates one published flattened solution.",
+      "survey": [
+        "Selected: Vilenius (2018) reanalysis and its conditional a/c≈1.3 ellipsoidal example.",
+        "The old 2010 circular fit was affected by a timing offset; the selected publication retains broad size uncertainty.",
+        "Water-ice spectral evidence and high albedo describe unresolved surface composition, not a spatially resolved ice map. The standard grid remains."
+      ],
+      "references": [
+        {
+          "file": "tx300-vilenius-2018.pdf",
+          "url": "https://arxiv.org/pdf/1904.06333",
+          "sha256": "294601d107c3dcb9bbe8d8f193e63d2ae12eed4ae4349590a7c35099a8c3a130",
+          "bytes": 535526,
+          "license": "Original paper remains author/publisher copyright and is restored from its pinned public URL; numerical scientific facts are credited. No source figures are used as terrain.",
+          "licenseEvidence": [
+            "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+          ],
+          "extraction": "§3.3 PDF p. 9: example major 363, minor 289 km; effective 323(+95,-37) km. Table 3 period 8.152 h."
+        }
+      ]
+    },
+    {
+      "id": "deedee",
+      "name": "DeeDee (2014 UZ224)",
+      "titleLabel": "DeeDee",
+      "horizons": "2014 UZ224;",
+      "aliases": [
+        "2014 UZ224",
+        "DeeDee"
+      ],
+      "fullAxesKm": [
+        635,
+        635,
+        635
+      ],
+      "radiusKm": 317.5,
+      "poleIcrfDegrees": [
+        0,
+        90
+      ],
+      "periodHours": null,
+      "periodText": "Rotation period and pole unresolved",
+      "population": "Detached trans-Neptunian object",
+      "classification": "trans-neptunian",
+      "shapeLabel": "Thermal-size illustration",
+      "source": "https://doi.org/10.3847/2041-8213/aa64d8",
+      "credit": "Gerdes et al. (2017), ApJ Letters 839, L15, Table 1 and §4 (arXiv:1702.00731v2 pp.6,9–10).",
+      "papers": [
+        "https://arxiv.org/abs/1702.00731v2",
+        "https://www.almaobservatory.org/en/press-releases/alma-investigates-deedee-a-distant-dim-member-of-our-solar-system/"
+      ],
+      "introduction": "DeeDee, the informal nickname of 2014 UZ224, is a distant world discovered by the Dark Energy Survey. ALMA measured its faint thermal emission; the displayed sphere illustrates its inferred size, while its actual shape and surface remain unresolved.",
+      "shapeMeaning": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification.",
+      "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole, rotation period or surface attitude is claimed.",
+      "survey": [
+        "Selected: ALMA 1.3 mm thermal flux and Dark Energy Survey optical photometry constrain effective size under the published thermal assumptions; retain statistical and systematic uncertainties separately.",
+        "Excluded as surface maps: discovery images and ALMA detection are unresolved points, not global textures or observed limb geometry.",
+        "Useful follow-up: resolved companion constraints from subsequent Hubble imaging could change system interpretation; no detected satellite or later resolved shape product was verified in this source survey."
+      ],
+      "references": [
+        {
+          "file": "gerdes-2017-deedee.pdf",
+          "url": "https://arxiv.org/pdf/1702.00731v2",
+          "sha256": "710ee3ed6c9c8fcfe2ffa09d0a3a25214ad652e55b8d6749f15ecb311844b1db",
+          "bytes": 2269638,
+          "license": "Author/publisher copyright; arXiv non-exclusive distribution license. Restore original from pinned URL; no source figure used as texture.",
+          "licenseEvidence": [
+            "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+          ],
+          "extraction": "Abstract (PDF p.2), Table 1 (p.6), thermal modeling §4 (pp.9–10): D=635(+57,-61)stat(+32,-39)sys km; spherical uniform-surface assumption."
+        }
+      ],
+      "distanceAu": 87.06785037265145
+    }
+  ],
+  "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with python3 tools/objects/source-authoring/distant-worlds/author.py tools/objects/source-authoring/outer-worlds/inputs.json."
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-10",
+  "id": "deedee",
+  "name": "DeeDee (2014 UZ224)",
+  "titleLabel": "DeeDee",
+  "horizons": "2014 UZ224;",
+  "aliases": [
+    "2014 UZ224",
+    "DeeDee"
+  ],
+  "fullAxesKm": [
+    635,
+    635,
+    635
+  ],
+  "radiusKm": 317.5,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Rotation period and pole unresolved",
+  "population": "Detached trans-Neptunian object",
+  "classification": "trans-neptunian",
+  "shapeLabel": "Thermal-size illustration",
+  "source": "https://doi.org/10.3847/2041-8213/aa64d8",
+  "credit": "Gerdes et al. (2017), ApJ Letters 839, L15, Table 1 and §4 (arXiv:1702.00731v2 pp.6,9–10).",
+  "papers": [
+    "https://arxiv.org/abs/1702.00731v2",
+    "https://www.almaobservatory.org/en/press-releases/alma-investigates-deedee-a-distant-dim-member-of-our-solar-system/"
+  ],
+  "introduction": "DeeDee, the informal nickname of 2014 UZ224, is a distant world discovered by the Dark Energy Survey. ALMA measured its faint thermal emission; the displayed sphere illustrates its inferred size, while its actual shape and surface remain unresolved.",
+  "shapeMeaning": "Equal-axis size illustration at the Gerdes et al. (2017) thermal-model diameter of 635 km, with +57/−61 km statistical and +32/−39 km systematic uncertainties. The thermal fit assumes a spherical body with uniform surface properties; it does not measure three axes or resolved terrain. DeeDee is an informal nickname, and this view does not assert an official dwarf-planet classification.",
+  "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole, rotation period or surface attitude is claimed.",
+  "survey": [
+    "Selected: ALMA 1.3 mm thermal flux and Dark Energy Survey optical photometry constrain effective size under the published thermal assumptions; retain statistical and systematic uncertainties separately.",
+    "Excluded as surface maps: discovery images and ALMA detection are unresolved points, not global textures or observed limb geometry.",
+    "Useful follow-up: resolved companion constraints from subsequent Hubble imaging could change system interpretation; no detected satellite or later resolved shape product was verified in this source survey."
+  ],
+  "references": [
+    {
+      "file": "gerdes-2017-deedee.pdf",
+      "url": "https://arxiv.org/pdf/1702.00731v2",
+      "sha256": "710ee3ed6c9c8fcfe2ffa09d0a3a25214ad652e55b8d6749f15ecb311844b1db",
+      "bytes": 2269638,
+      "license": "Author/publisher copyright; arXiv non-exclusive distribution license. Restore original from pinned URL; no source figure used as texture.",
+      "licenseEvidence": [
+        "https://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      ],
+      "extraction": "Abstract (PDF p.2), Table 1 (p.6), thermal modeling §4 (pp.9–10): D=635(+57,-61)stat(+32,-39)sys km; spherical uniform-surface assumption."
+    }
+  ],
+  "distanceAu": 87.06785037265145
+}

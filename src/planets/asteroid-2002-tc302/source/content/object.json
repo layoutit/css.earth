@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "asteroid-2002-tc302",
+  "displayName": "2002 TC302",
+  "panel": {
+    "introduction": "2002 TC302 has a flattened outline measured during a stellar occultation. Its displayed depth is assumed; newer thermal analysis suggests a possible companion, which is not part of this primary-body model.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Occultation-outline illustration"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "543 × 543 × 460 km"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "About 56.1 hours suggested; no qualified phase"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Resonant trans-Neptunian object"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "The 2018 occultation gives projected full axes 543.2 ±18 × 459.5 ±11 km. This smooth axisymmetric illustration assumes an unseen equatorial depth of 543.2 km and equator-on presentation; true 3D flattening is unresolved. It represents the primary outline, not the larger thermal system-size estimate. Illustrative ICRF pole (RA 0°, Dec +90°), arbitrary prime meridian and rotational phase. A projected limb position angle is not an inertial pole measurement. The grid marks unmapped terrain.",
+        "title": "Occultation-outline illustration",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/asteroid-2002-tc302/asteroid-2002-tc302-model-thumbnail.webp",
+        "surface": "asteroid-2002-tc302-model-surface@2x.webp",
+        "poles": "asteroid-2002-tc302-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2005.08881"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Ortiz et al. (2020), combined occultation, photometry and astrometry, §3.",
+      "href": "https://arxiv.org/abs/2005.08881"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://arxiv.org/abs/2005.08881"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2005.08881",
+      "credit": "Ortiz et al. (2020), combined occultation, photometry and astrometry, §3."
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Ortiz et al. (2020), combined occultation, photometry and astrometry, §3."
+    }
+  }
+}
