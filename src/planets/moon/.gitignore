@@ -5,3 +5,6 @@ source/geology/*.shx
 source/geology/*.sbn
 source/geology/*.sbx
 source/geology/*.cpg
+
+# Original GHRM archives are restored from pinned PDS URLs.
+source/science/diviner-ghrm/*.img

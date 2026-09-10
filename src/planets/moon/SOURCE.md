@@ -33,22 +33,42 @@ There is no per-cell uncertainty or no-data constant in the selected product.
 The full array spans −8,981.5 to +10,685.5 m; the authored color scale spans
 −12 to +12 km. Numeric color does not displace the retained spherical geometry.
 
-The rock-abundance lens consumes `source/science/dgdr_ra_avg_cyl_032_img.img`,
-the 11,520 × 3,840 [LRO Diviner V4.0 product](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.xml).
-Joshua Bandfield and the UCLA Diviner team estimated the surface areal fraction
-covered by rocks using nighttime thermal measurements from July 2009 to
-November 2010; see [Bandfield et al. (2011)](https://doi.org/10.1029/2011JE003866).
-It combines channels 6–8 and ten local-time bins under the label's quality,
-viewing-angle and temperature filters. Source DN × 0.001 is an areal fraction;
-display DN × 0.1 is **percent surface area**. The −32768 missing sentinel is
-excluded first, zero is valid, and values outside 0–100% are rejected. Exactly
-one source cell (sample 4060, line 3821, zero-based) reports DN 1062 = 106.2%
-and is excluded. There are 4,119,083 missing cells and 40,117,716 retained valid
-cells; their maximum is 61.3%. The display scale spans 0–2%, with larger valid
-values saturated at the top color. The 99th source percentile is 1.6%; this
-contrast choice is distinct from the validity range. The source supplies no
-per-cell uncertainty array; model assumptions and sampling limit interpretation.
-This is not an image, composition map or count of individual boulders.
+The three nighttime lenses use the [LRO Diviner GHRM v1.0 float32 mosaics](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/),
+produced by Powell and the UCLA Diviner team from 2009–2022 observations.
+The exact product labels, original hash pins, compact numeric grids and conversion
+receipts live in `source/science/diviner-ghrm/`; candidate selection and independent
+checks are recorded in [B10](../../../docs/moons/b10-lunar-thermal/README.md).
+
+- **Midnight temperature**: fitted bolometric temperature at local midnight,
+  shown from 80 to 140 K. This combines many nights, not current temperatures.
+- **Heat anomalies**: observed minus typical-regolith modeled bolometric
+  temperature at slope-adjusted midnight, shown from −10 to +10 K. Negative
+  anomalies remain valid. Terrain correction residuals remain; warm colors
+  do not establish geothermal activity.
+- **Rock abundance**: inferred rock-area fraction at slope-adjusted midnight,
+  displayed in percent surface area from 0 to 2%. Values above 2% share the
+  top color. This is a thermal-model estimate, not individual boulder counts.
+
+Each original is 46,080 × 17,920 little-endian float32 cells with NaN gaps,
+0–360° east-positive longitude and north-down rows between ±70°, on the
+Moon_2000 reference sphere (radius 1,737.4 km), mean-Earth/polar-axis frame.
+There is no DN scaling in the originals. The 128-pixel/degree spacing is about
+237 m at the equator; the paper estimates effective resolving power around
+330 m longitudinally and 700 m latitudinally there. Grid spacing is not accuracy.
+
+Windowed preparation retains nearest native samples on a global 4096 × 2048
+grid, packs temperature to 0.01 K and rock fraction to 0.00002, and never fills
+missing cells. Maximum quantization error is 0.005 K or 0.001 percentage point.
+Physically invalid rock fractions outside [0,1] are rejected before sampling;
+none occurred in this selected product. Native valid area covers 93.9687% of
+the sphere for midnight temperature, 93.8869% for anomalies and 93.8867% for
+rock abundance. The two unobserved polar caps and internal gaps retain the
+neutral coverage pattern. The original ranges exceed the selected display
+scales; endpoint colors are saturation, not rejection or a scientific limit.
+
+The older Bandfield GDR L3 32-pixel/degree rock map (2009–2010, ±60°) and its
+independent raw-DN anchors remain archived for provenance but no longer drive
+the rock-abundance lens. The expanded record and GHRM thermal model replace it.
 
 The [SVS color-map description](https://svs.gsfc.nasa.gov/4720/) independently
 confirms that the retained visible texture is centered on 0° longitude. Numeric
@@ -58,28 +78,24 @@ output-cell checks at USGS/IAU Copernicus, Tycho and Tsiolkovskiy coordinates
 verify the corresponding source values through the numeric painter. These are
 landform alignment anchors, not a claim of subpixel survey accuracy.
 
-Both products use east-positive 0–360° longitude, north-down rows, a 1,737.4 km
-sphere and the mean-Earth/polar-axis DE421 frame. Diviner covers only 60°N–60°S
-at 32 pixels/degree (about 948 m at the equator); the remainder, missing cells
-and rejected values retain the shared missing-coverage pattern. Nearest source
-cell sampling preserves source values and gaps. The numeric lenses also opt into
-nearest display sampling: latitude-band packing copies pixels, polar tiles use
-one nearest pixel-center sample, and thumbnails use nearest resizing. Their
-surface, pole and thumbnail WebPs are lossless. This preserves the selected
-palette colors and missing-data style through prepared assets; it is not a
-claim that browser-transformed screen pixels are quantitative samples. The
-visible-color and GRAIL image lenses retain their existing image processing. The original labels and PDS4
-identity records are pinned alongside the binaries. Independent NumPy raw-DN,
-unit, meridian, latitude and missing-value anchors live in
-`source/validation/scientific-source-anchors.json`; these check the decoder
-without treating its own output as the reference.
+Nearest display sampling preserves selected numeric values and gaps: latitude-band
+packing copies pixels, polar tiles use nearest pixel-center samples, and
+thumbnails use nearest resizing. Surface, pole and thumbnail WebPs are lossless.
+This preserves prepared palette colors, not a claim that browser-transformed
+screen pixels are quantitative samples. The three GHRM atlases use 4096 × 2048
+canonical materials; existing visible-color, topography, GRAIL, silicate and
+geology materials keep their previous sizes and image bytes.
+Independent B10 checks bind all original, compact and runtime hashes and verify
+507 original-to-texture probes plus eight separately fetched raw-byte anchors.
+The earlier LOLA numerical anchors remain in
+`source/validation/scientific-source-anchors.json`.
 
 The GRAIL crustal-thickness print remains unchanged at
 `source/lenses/grail-crustal-thickness-print.jpg` from
 [NASA SVS](https://svs.gsfc.nasa.gov/4014/). It is a gravity/topography-derived
 interior model with assumed densities, shown with shaded relief. It has not
 become a new numeric crust grid. The old LOLA press JPEG is no longer an active
-input; its existing local file is not removed. All four lenses use the same
+input; its existing local file is not removed. All lenses use the same
 retained projective-band and polar-atlas topology.
 
 PDS publicly archives these NASA mission scientific products. Preserve the

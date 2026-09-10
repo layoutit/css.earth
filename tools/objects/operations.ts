@@ -4,6 +4,9 @@ import { isPreparedBlockReference, PREPARED_BLOCK_ENCODING } from '../../src/ren
 import type { PreparedReference } from '../../src/renderers/css/paging/types.js';
 import { createHash, randomUUID } from 'node:crypto';
 import { mkdir, readFile, readdir, rename, rm, writeFile, unlink, lstat } from 'node:fs/promises';
+import { createReadStream, createWriteStream } from 'node:fs';
+import { Readable, Transform } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 import { dirname, posix, resolve, relative, win32, basename } from 'node:path';
 export interface SourceEntry { path:string;expectedBytes:number;expectedSha256:string;id?:string;origin?:string;consumers?:string[]; }
 export interface SourceManifest { schema:string;inputs:SourceEntry[];generatedIntermediates:SourceEntry[];documents:SourceEntry[]; }
@@ -35,9 +38,20 @@ export function parseSourceManifest(value:unknown,id?:string):SourceManifest {
  }
  return manifest as unknown as SourceManifest;
 }
+function assertSourceSize(entry:SourceEntry,size:number):void {
+ if(size!==entry.expectedBytes)throw new Error(`Source size drifted for ${entry.path}: expected ${entry.expectedBytes}, received ${size}.`);
+}
+function assertSourceHash(entry:SourceEntry,hash:string):string {
+ if(hash!==entry.expectedSha256)throw new Error(`Source hash drifted for ${entry.path}: expected ${entry.expectedSha256}, received ${hash}.`);return hash;
+}
 export function assertSourceBytes(entry:SourceEntry,bytes:Uint8Array):string {
- if(bytes.byteLength!==entry.expectedBytes)throw new Error(`Source size drifted for ${entry.path}: expected ${entry.expectedBytes}, received ${bytes.byteLength}.`);
- const hash=sha256(bytes);if(hash!==entry.expectedSha256)throw new Error(`Source hash drifted for ${entry.path}: expected ${entry.expectedSha256}, received ${hash}.`);return hash;
+ assertSourceSize(entry,bytes.byteLength);return assertSourceHash(entry,sha256(bytes));
+}
+export async function assertSourceFile(entry:SourceEntry,path:string):Promise<string> {
+ const info=await lstat(path);if(!info.isFile())throw new Error(`Source is not a regular file: ${entry.path}.`);assertSourceSize(entry,info.size);
+ const hash=createHash('sha256');let size=0;
+ for await(const chunk of createReadStream(path)){size+=chunk.length;if(size>entry.expectedBytes)assertSourceSize(entry,size);hash.update(chunk);}
+ assertSourceSize(entry,size);return assertSourceHash(entry,hash.digest('hex'));
 }
 async function walk(root:string):Promise<string[]>{const files:string[]=[];for(const entry of await readdir(root,{withFileTypes:true})){const path=resolve(root,entry.name);if(entry.isDirectory())files.push(...await walk(path));else if(entry.isFile())files.push(path);else throw new Error(`Unsupported filesystem entry: ${path}.`);}return files;}
 export async function verifySources({sourceRoot,manifest,consumer}:{sourceRoot:string;manifest:SourceManifest;consumer?:string}) {
@@ -48,7 +62,7 @@ export async function verifySources({sourceRoot,manifest,consumer}:{sourceRoot:s
   const undeclared=[...actual].filter(path=>!declared.has(path)),missing=[...declared].filter(path=>!actual.has(path));
   if(undeclared.length||missing.length)throw new Error(`Source coverage failed. Undeclared: ${undeclared.join(', ')||'none'}. Missing: ${missing.join(', ')||'none'}.`);
  }
- for(const entry of entries)assertSourceBytes(entry,await readFile(containedPath(sourceRoot,entry.path)));
+ for(const entry of entries)await assertSourceFile(entry,containedPath(sourceRoot,entry.path));
  return {inputCount:manifest.inputs.length,generatedIntermediateCount:manifest.generatedIntermediates.length,documentCount:manifest.documents.length,verifiedCount:entries.length};
 }
 export async function publishPinnedSource({sourceRoot,entry,bytes}:{sourceRoot:string;entry:SourceEntry;bytes:Uint8Array}) {
@@ -57,11 +71,32 @@ export async function publishPinnedSource({sourceRoot,entry,bytes}:{sourceRoot:s
  try{await writeFile(temporary,bytes,{flag:'wx'});await rename(temporary,path);}finally{await rm(temporary,{force:true});}
  return entry;
 }
+/** Stream a raw source into a sibling temporary file; only verified pins replace the destination. */
+export async function publishPinnedSourceStream({sourceRoot,entry,stream}:{sourceRoot:string;entry:SourceEntry;stream:Readable}) {
+ const path=containedPath(sourceRoot,entry.path),temporary=`${path}.partial-${process.pid}-${randomUUID()}`;
+ const hash=createHash('sha256');let size=0;
+ const verify=new Transform({transform(chunk:Buffer,_encoding,callback){
+  size+=chunk.length;
+  if(size>entry.expectedBytes){try{assertSourceSize(entry,size);}catch(error){callback(error as Error);return;}}
+  hash.update(chunk);callback(null,chunk);
+ }});
+ try{
+  await mkdir(dirname(path),{recursive:true});
+  await pipeline(stream,verify,createWriteStream(temporary,{flags:'wx'}));
+  assertSourceSize(entry,size);assertSourceHash(entry,hash.digest('hex'));
+  await rename(temporary,path);
+ }finally{stream.destroy();await rm(temporary,{force:true});}
+ return entry;
+}
 export async function acquirePinnedDownloads({sourceRoot,manifest,paths,fetchBytes}:{sourceRoot:string;manifest:SourceManifest;paths:readonly string[];fetchBytes?:(url:string)=>Promise<Uint8Array>}) {
- const download=fetchBytes??(async(url:string)=>{const response=await fetch(url);if(!response.ok)throw new Error(`Acquisition failed ${response.status}: ${url}.`);return new Uint8Array(await response.arrayBuffer());});
  const entries=[...manifest.inputs,...manifest.documents];
  for(const path of paths){const entry=entries.find(entry=>entry.path===path);if(!entry||!entry.origin||!/^https?:\/\//.test(entry.origin))throw new TypeError(`No declared direct acquisition URL for ${path}.`);
-  await publishPinnedSource({sourceRoot,entry,bytes:await download(entry.origin)});
+  if(fetchBytes)await publishPinnedSource({sourceRoot,entry,bytes:await fetchBytes(entry.origin)});
+  else{
+   const response=await fetch(entry.origin);if(!response.ok)throw new Error(`Acquisition failed ${response.status}: ${entry.origin}.`);
+   if(!response.body)throw new Error(`Source download has no body: ${entry.origin}.`);
+   await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.fromWeb(response.body as never)});
+  }
  }
  return {acquiredCount:paths.length};
 }
@@ -149,6 +184,7 @@ export async function restoreMissingSources({sourceRoot,manifest,plan,missing,tr
  const operations=plan.operations.filter(step=>'path' in step&&wanted.has(step.path));
  const covered=new Set(operations.map(step=>'path' in step?step.path:''));
  if([...wanted].some(path=>!covered.has(path)))throw new Error(`No authored acquisition restores: ${[...wanted].filter(path=>!covered.has(path)).join(', ')}.`);
+ for(const entry of [...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents])if(!wanted.has(entry.path))await assertSourceFile(entry,containedPath(sourceRoot,entry.path));
  if(!operations.length)return {operationCount:0};
  return executeAcquisition({sourceRoot,manifest,plan:{...plan,operations:operations.map(step=>({...step,groups:['restore-missing']}))},group:'restore-missing',transport});
 }

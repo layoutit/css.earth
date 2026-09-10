@@ -1,0 +1,128 @@
+{
+  "command": [
+    "node",
+    "tools/objects/dist/operations.js",
+    "acquire",
+    "moon",
+    "--verify-only"
+  ],
+  "limitRSSBytes": 6442450944,
+  "minimumFreePercent": 30,
+  "timeoutSeconds": 900,
+  "peakRSSBytes": 420544512,
+  "samples": [
+    {
+      "seconds": 0.0,
+      "rssBytes": 425984,
+      "freePercent": 50
+    },
+    {
+      "seconds": 0.3,
+      "rssBytes": 193921024,
+      "freePercent": 50
+    },
+    {
+      "seconds": 0.6,
+      "rssBytes": 243089408,
+      "freePercent": 50
+    },
+    {
+      "seconds": 0.8,
+      "rssBytes": 275890176,
+      "freePercent": 50
+    },
+    {
+      "seconds": 1.1,
+      "rssBytes": 297484288,
+      "freePercent": 50
+    },
+    {
+      "seconds": 1.4,
+      "rssBytes": 286932992,
+      "freePercent": 50
+    },
+    {
+      "seconds": 1.7,
+      "rssBytes": 249495552,
+      "freePercent": 50
+    },
+    {
+      "seconds": 1.9,
+      "rssBytes": 256999424,
+      "freePercent": 50
+    },
+    {
+      "seconds": 2.2,
+      "rssBytes": 265060352,
+      "freePercent": 50
+    },
+    {
+      "seconds": 2.5,
+      "rssBytes": 293781504,
+      "freePercent": 50
+    },
+    {
+      "seconds": 2.8,
+      "rssBytes": 318996480,
+      "freePercent": 50
+    },
+    {
+      "seconds": 3.0,
+      "rssBytes": 329711616,
+      "freePercent": 50
+    },
+    {
+      "seconds": 3.3,
+      "rssBytes": 345849856,
+      "freePercent": 50
+    },
+    {
+      "seconds": 3.6,
+      "rssBytes": 362348544,
+      "freePercent": 50
+    },
+    {
+      "seconds": 3.8,
+      "rssBytes": 363413504,
+      "freePercent": 50
+    },
+    {
+      "seconds": 4.1,
+      "rssBytes": 372834304,
+      "freePercent": 50
+    },
+    {
+      "seconds": 4.4,
+      "rssBytes": 373211136,
+      "freePercent": 50
+    },
+    {
+      "seconds": 4.7,
+      "rssBytes": 378929152,
+      "freePercent": 50
+    },
+    {
+      "seconds": 4.9,
+      "rssBytes": 382992384,
+      "freePercent": 50
+    },
+    {
+      "seconds": 5.2,
+      "rssBytes": 420265984,
+      "freePercent": 50
+    },
+    {
+      "seconds": 5.5,
+      "rssBytes": 420413440,
+      "freePercent": 50
+    },
+    {
+      "seconds": 5.7,
+      "rssBytes": 420544512,
+      "freePercent": 50
+    }
+  ],
+  "status": "PASS",
+  "exitCode": 0,
+  "seconds": 6.0
+}
