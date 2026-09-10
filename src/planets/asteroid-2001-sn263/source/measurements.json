@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-source-shape-measurements@1",
+  "id": "asteroid-2001-sn263",
+  "component": "alpha",
+  "release": "urn:nasa:pds:gbo.ast-153591.radar.shape-model::1.0",
+  "source": "https://sbnarchive.psi.edu/pds4/non_mission/gbo.ast-153591.radar.shape-model/data/a153591alpha.tab",
+  "sourceUnits": "km",
+  "radiusKm": 1.2482944893607866,
+  "volumeKm3": 8.147788915648762,
+  "extentsKm": [
+    2.753814,
+    2.719734,
+    2.8567039999999997
+  ],
+  "vertices": 1148,
+  "faces": 2292,
+  "maxRadiusKm": 1.504820908744293,
+  "publishedDiameter": "2.5 ± 0.3 km",
+  "referenceRadiusMeaning": "Equivalent-volume radius computed from the original closed triangular mesh; not an independent measurement.",
+  "shapeLimit": "Published radar and light-curve shape of the primary. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. Rotational phase is illustrative.",
+  "orbitLimit": "Heliocentric placement uses a retained JPL state. The shape is a radar reconstruction from 2008 observations.",
+  "physicalSource": "Becker et al. (2015), Table 4; physical API row order is not used."
+}

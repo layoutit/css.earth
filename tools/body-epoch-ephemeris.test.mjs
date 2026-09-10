@@ -117,3 +117,23 @@ test('Romulus retains its actual source projection disagreements and numbered-pa
     await assert.rejects(loadBodyEpochEphemeris({ ...options, bodyRoot }), error);
   }
 });
+
+test('SN263 source snapshots retain the outer/inner identities and the independent epoch anchors', async () => {
+  const roots = ['sn263-beta', 'sn263-gamma'].map(bodyId => ({
+    bodyId, centerBodyId: 'asteroid-2001-sn263', bodyRoot: resolve(projectRoot, 'src/planets', bodyId), epochJdTt,
+  }));
+  const states = [];
+  for (const options of roots) {
+    // The loader compares JavaScript rotations with the Python plane-basis anchors
+    // in each source receipt, at both the original and prepared epochs.
+    const state = await loadBodyEpochEphemeris(options);
+    states.push(state);
+    assert.equal(state.parentHeliocentricState.provenance.target, 153591);
+    assert.equal(state.provenance.validation.scientificPrecisionQualified, false);
+    assert.ok(state.provenance.validation.periodUncertaintyLinearPhaseScaleDegrees > 360,
+      'the source period ranges do not preserve a known current phase');
+    await assert.rejects(loadBodyEpochEphemeris({ ...options, epochJdTt: epochJdTt + 1 }), /epoch or convention/u);
+  }
+  assert.ok(Math.hypot(...states[0].positionKm) > Math.hypot(...states[1].positionKm),
+    'Beta is the outer satellite; unnamed JPL physical fields cannot swap the two');
+});

@@ -1,0 +1,69 @@
+{
+  "id": "asteroid-2001-sn263",
+  "epochJdTt": 2461286.5,
+  "referenceFrame": "ICRF",
+  "units": "KM-D",
+  "correction": "NONE",
+  "numberedAsteroidHeliocentricSource": {
+    "path": "source/orbit/parent-heliocentric.txt",
+    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "bytes": 8527,
+    "sha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8",
+    "target": 153591,
+    "targetKind": "numbered-asteroid",
+    "center": 10,
+    "requestEpochJdUtc": 2461286.499199259,
+    "ttMinusUtcSeconds": 69.184
+  },
+  "numberedAsteroidHeliocentricState": {
+    "positionKm": [
+      387073626.3866632,
+      -153612111.7567281,
+      -55949815.9445668
+    ],
+    "velocityKmPerDay": [
+      143605.7135081395,
+      1016802.933761815,
+      573888.0015445706
+    ]
+  },
+  "sources": {
+    "elements": {
+      "path": "source/orbit/heliocentric-elements.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27153591%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+      "bytes": 7056,
+      "sha256": "19173391b55d7fd244e4bf59648a2f51f4e3c24926f8e6d8bc66dd1022de1edc"
+    },
+    "vectors": {
+      "path": "source/orbit/heliocentric-vectors.txt",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27153591%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+      "bytes": 6343,
+      "sha256": "2557db5240bd35609e006a78c8236dc0956972b6717260582466df30b15de837"
+    }
+  },
+  "limitations": [
+    "The heliocentric solution is for numbered asteroid 153591, used as a coarse Alpha anchor; a separately resolved Alpha-center versus system-barycenter correction is unavailable.",
+    "The general asteroid element generator treats TDB as TT to under 2 ms, while the companion parent-state request converts UTC to the exact TT scene epoch. This clock difference is negligible beside the moon location approximation."
+  ],
+  "runtimeExtrapolation": false,
+  "heliocentricKeplerComparison": {
+    "method": "Independent Python bisection/plane-basis evaluation of generated heliocentric elements against three Horizons vector rows.",
+    "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27153591%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jdTdb": 2461256.5,
+        "positionErrorKm": 237.66137606261802
+      },
+      {
+        "jdTdb": 2461286.5,
+        "positionErrorKm": 4.308471767545033e-07
+      },
+      {
+        "jdTdb": 2461316.5,
+        "positionErrorKm": 229.28851379249636
+      }
+    ],
+    "endpointRegressionBoundKm": 250,
+    "boundRule": "ceil(maximum measured 30-day endpoint error * 1.05); not a continuous-time or long-term accuracy claim."
+  }
+}
