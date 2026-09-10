@@ -463,6 +463,12 @@
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
       "expectedBytes": 1334,
       "expectedSha256": "18f2299be544ea2387c5e3c6c45575e9f486c2d44c1e377d251ded6aad778c07"
+    },
+    {
+      "path": "presentation/overview.json",
+      "expectedBytes": 39,
+      "expectedSha256": "7f08503fc83aac60a0584ca706b5b6cb4868c9f20d2743cca87426f6772163d2",
+      "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
     }
   ]
 }

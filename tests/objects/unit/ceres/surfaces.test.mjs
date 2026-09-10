@@ -4,10 +4,10 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { test } from "node:test";
 import sharp from "sharp";
-import { createSourceManifest } from "../../../../src/platform/source-manifest.mjs";
+import { createSourceManifest } from "../../../../src/platform/source-manifest.mts";
 
-import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "../../../../src/platform/prepare-missing-coverage.mjs";
-import { reprojectSolidBodySurfaceRaster } from "../../../../src/platform/prepare-solid-body-surface.mjs";
+import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from "../../../../src/platform/prepare-missing-coverage.mts";
+import { reprojectSolidBodySurfaceRaster } from "../../../../src/platform/prepare-solid-body-surface.mts";
 
 const sourceRoot = resolve(import.meta.dirname, "../../../../src/planets/ceres/source");
 const root = resolve(import.meta.dirname, "../../../..");

@@ -70,7 +70,7 @@ Projection uses the source mesh's visibility and terrain-shadow rays, incidence/
 
 **Spacecraft mosaic update (2026-09-09)**
 
-Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/planets/gaspra/source OUTPUT --frame 107318313 --profile reference/registration-107318313.json`. The existing contribution audit is `node tools/objects/terrestrial-layers/audit-camera-mosaic.mjs src/planets/gaspra/source OUTPUT`; it records matched area-weighted before/after sampling and lossless Float32 contribution planes. The audit grids use the authored 4096×2048 cylindrical sampling, not atlas texel counts as surface area.
+Reproduce the added registration check with `python tools/objects/terrestrial-layers/verify-catalog-camera.py src/planets/gaspra/source OUTPUT --frame 107318313 --profile reference/registration-107318313.json`. The existing contribution audit is `node tools/objects/terrestrial-layers/audit-camera-mosaic.mts src/planets/gaspra/source OUTPUT`; it records matched area-weighted before/after sampling and lossless Float32 contribution planes. The audit grids use the authored 4096×2048 cylindrical sampling, not atlas texel counts as surface area.
 
 The original calibrated FITS/XML and raw detector FITS/label are pinned separately. Target, exact time, filter and spacecraft clock bind them to the archived `gaspbad.tab` block mask. The original four-pixel registration limit and five-pixel boundary inset remain. Four separated 16×16 patches on image 107318313 give 2.646 px RMS and 3.162 px maximum error with no local camera fitting. They check registration against the Thomas mosaic on the full original shape; that mosaic shares these photographs and is not independent absolute cartography.
 

@@ -7,9 +7,9 @@
     "sha256": "43f7f3b5ad148c0cb2359ed13bafceeb476cf7e00aede2d6059e30e59a2b47eb"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "36b740ae2cab2874d468ab7340d77f5783abe3782285b88fe453547f82205661",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "fcd09e602f1525eb57d22f7b8cf7c6f3f71b1043ccfbfd1afd4c2defbe93755d",
       "bytes": 10100,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/eurynome/eurynome-elevation-thumbnail.webp",
           "bytes": 4918,
           "sha256": "8a3ab010081665d2b2c495ca1b553521851bd059dfb7ee9f4722aca2bc47ec77",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurynome/eurynome-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurynome/eurynome-elevation-surface@2x.webp",
           "bytes": 258158,
           "sha256": "cc88e2842ffdb1e7815784cc1a7fe49cef33e5ceb369735c1e87daf72ab468f9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/eurynome/eurynome-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/eurynome/eurynome-shape-surface@2x.webp",
           "bytes": 209864,
           "sha256": "41768975079f4c9ebace1308cff662f0f2d9fabd689118a4eafeaa0d5a516143",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

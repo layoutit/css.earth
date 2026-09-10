@@ -9,13 +9,13 @@ import {
   PLANET_TITLE_STANDARD,
   createPreparedTitleLayout,
   sha256,
-} from "../../src/platform/prepared-title.mjs";
+} from "../../src/platform/prepared-title.mts";
 import { PLANET_TITLE_RECIPE } from
-  "../../src/platform/planet-title-recipe.mjs";
-import { OBJECTS } from "../objects.mjs";
-import { prepareShellTitles } from "../../tools/prepare-shell-titles.mjs";
+  "../../src/platform/planet-title-recipe.mts";
+import { OBJECTS } from "../objects.mts";
+import { prepareShellTitles } from "../../tools/prepare-shell-titles.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
-import { SHELL_TITLE_SOURCES } from "../source/titles/manifest.mjs";
+import { SHELL_TITLE_SOURCES } from "../source/titles/manifest.mts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 

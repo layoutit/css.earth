@@ -1,4 +1,4 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 
@@ -15,8 +15,8 @@ import {
   DIRECTIONAL_SUN_PRESENTATION_STANDARD,
   validateDirectionalSunPlan,
   validateDirectionalSunPresentationStandard,
-} from "./directional-sun-contract.mjs";
-import { requireObject } from "../../site/objects.mjs";
+} from "./directional-sun-contract.mts";
+import { requireObject } from "../../site/objects.mts";
 
 const PLANETS = Object.freeze({
   mercury: PREPARED_MERCURY_SKY_SUN,

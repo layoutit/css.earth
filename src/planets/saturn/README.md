@@ -29,7 +29,7 @@ input to the runtime view.
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
 The recipe binds Saturn's settings to the shared
-[material-composition preparer](../../../tools/objects/material-composition/index.mjs),
+[material-composition preparer](../../../tools/objects/material-composition/index.mts),
 which uses the shared radial, cutaway, sky and content preparation modules.
 
 <details>

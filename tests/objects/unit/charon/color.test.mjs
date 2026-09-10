@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
-import { decodePds4Color, mapPds4Color } from '../../../../tools/objects/terrestrial-layers/observed-pds4.mjs';
+import { decodePds4Color, mapPds4Color } from '../../../../tools/objects/terrestrial-layers/observed-pds4.mts';
 
 const root = new URL('../../../../src/planets/charon/source/', import.meta.url);
 test('Charon MVIC bands and missing masks match independent NumPy source anchors', async () => {

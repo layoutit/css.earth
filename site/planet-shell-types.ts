@@ -1,11 +1,11 @@
-interface PreparedTitle {
+export interface PreparedTitle {
   label: string;
   src: string;
   width: number;
   height: number;
 }
 
-interface PlanetTitle {
+export interface PlanetTitle {
   label: string;
   viewBox: string;
   renderViewBox: string;
@@ -13,15 +13,16 @@ interface PlanetTitle {
   renderHeight: number;
   renderPathOffsetY: number;
   path: string;
+  baseline: number;
 }
 
-interface Fact {
+export interface Fact {
   id: string;
   label: string;
   value: string;
 }
 
-interface Chart {
+export interface Chart {
   id: string;
   title: Pick<PreparedTitle, "label">;
   open?: boolean;
@@ -31,7 +32,7 @@ interface Chart {
   alt: string;
 }
 
-interface GalleryItem {
+export interface GalleryItem {
   id: string;
   label: string;
   src: string;
@@ -42,7 +43,7 @@ interface GalleryItem {
   sourceUrl: string;
 }
 
-interface Gallery {
+export interface Gallery {
   id: string;
   hidden?: boolean;
   title: PreparedTitle;
@@ -51,7 +52,7 @@ interface Gallery {
   items: GalleryItem[];
 }
 
-interface Lens {
+export interface Lens {
   id: string;
   label: string;
   detail?: string;
@@ -79,7 +80,7 @@ interface Lens {
   };
 }
 
-interface Setting {
+export interface Setting {
   kind: "cycle" | "toggle";
   name: string;
   label: string;
@@ -87,7 +88,7 @@ interface Setting {
   checked?: boolean;
 }
 
-interface Resource {
+export interface Resource {
   label: string;
   role: string;
   description: string;
@@ -95,6 +96,7 @@ interface Resource {
 }
 
 export interface Props {
+  navigation?: boolean;
   objectId: string;
   destinations?: { searchLabel: string; description: string; };
   title: PlanetTitle;
@@ -104,7 +106,7 @@ export interface Props {
   galleries?: Gallery[];
   charts?: Chart[];
   resources?: Resource[];
-  provenance?: ReturnType<typeof import("../src/platform/object-provenance.mjs").validateObjectProvenance>;
+  provenance?: ReturnType<typeof import("../src/platform/object-provenance.mts").validateObjectProvenance>;
   lenses?: {
     title: PreparedTitle;
     controls: Lens[];

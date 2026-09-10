@@ -3,8 +3,8 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
-import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
+import {readObservation} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 
 const root = new URL('../../../../src/planets/umbriel/source/', import.meta.url).pathname;
 const read = async path => JSON.parse(await readFile(root + path));

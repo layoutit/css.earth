@@ -1,0 +1,4 @@
+# Preserve original archive/Horizons bytes, including fixed-width padding and CRLF.
+source/orbit/*.txt -text -whitespace
+source/reference/* -text -whitespace
+source/shape/*.tab -text -whitespace

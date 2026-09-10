@@ -25,7 +25,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc -p tools/tsconfig.json",
+    "typecheck:tools": "tsc -p tools/tsconfig.json",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "prepublishOnly": "npm run build"

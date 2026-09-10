@@ -4,8 +4,8 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { loadRadialTerrain, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from './radial-terrain.mjs';
-import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mjs';
+import { loadRadialTerrain, radialTriangles, simplifyRadialShape, validateClosedMesh, removeOppositeFacePairs } from './radial-terrain.mts';
+import { loadPdsScalarGrid, parsePdsScalarLabel } from './pds-scalar-grid.mts';
 
 test('source topology preserves translated inward-facing facets and welds duplicated positions', async () => {
   const vertices = [[1,0,0],[0,1,0],[0,0,1],[0,0,0]];

@@ -7,9 +7,9 @@
     "sha256": "0b52ede8dc045dd071e4b502a6e5e548bae522db4e3e45d2bfe122fc557865a2"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -311,7 +311,7 @@
       "sha256": "31699c5761b5b57e6e7e8eb7ff3da85293c5ffb2ea8aa6b60f3a795d8dbcc7e1",
       "bytes": 687286,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -335,7 +335,7 @@
       "sha256": "cfb19d2257c3227c07b80a2ba24c7c42490aba86bec4ca546dad72641bfe0d97",
       "bytes": 7830,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -392,19 +392,19 @@
           "url": "/scenes/oberon/oberon-normal-thumbnail.webp",
           "bytes": 2024,
           "sha256": "932626e748e2d4a13041e28b569d68b3e6b22b784bfcf4f6eaa5145a3705340c",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/oberon/oberon-normal-surface@2x.webp",
           "bytes": 692024,
           "sha256": "889a24ef1df21da317d41eefb8395aa3b1c41819d9a00b2b2dfe88a710d3f35a",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/oberon/oberon-normal-poles@2x.webp",
           "bytes": 39620,
           "sha256": "d7b5a3da4779ed70c3aca89ddfd939a38dc7bb12bb051d36d56c809a4111b420",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

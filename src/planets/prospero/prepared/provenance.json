@@ -7,9 +7,9 @@
     "sha256": "a50c875f4fff87cd96d115e06c8f2713ba159494dd5ce6ac844e1e3d36336ea1"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -252,7 +252,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -277,7 +277,7 @@
       "sha256": "8d77aada675ffa249f27d054ff1222009d3af3b2b57524fc6b78a70f773f9a07",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -294,7 +294,7 @@
       "sha256": "efa435ecac1fed07bc643139361c033f24b1dca4178a3fdc170af5aa9870c020",
       "bytes": 3412,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -332,13 +332,13 @@
           "url": "/scenes/prospero/prospero-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/prospero/prospero-model-surface@2x.webp",
           "bytes": 55078,
           "sha256": "8bc802ab91572b53bac24433672af704ff68319866e244ca6966f69e3b0b0fdc",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

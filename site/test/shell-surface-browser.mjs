@@ -15,9 +15,9 @@ try {
   await page.route('**/__shell-surface-fixture', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><html><body></body></html>' }));
   await page.goto(`${origin}/__shell-surface-fixture`);
   result.checks = await page.evaluate(async () => {
-    const { createSurfaceMapReader, surfaceMapContext } = await import('/site/surface-map-context.mjs');
-    const { createSurfaceMinimap } = await import('/site/surface-minimap.mjs');
-    const { createViewReadout, formatViewDistance, formatViewDate } = await import('/site/view-readout.mjs');
+    const { createSurfaceMapReader, surfaceMapContext } = await import('/site/surface-map-context.mts');
+    const { createSurfaceMinimap } = await import('/site/surface-minimap.mts');
+    const { createViewReadout, formatViewDistance, formatViewDate } = await import('/site/view-readout.mts');
     document.body.innerHTML = `<div class="planet-stage"><div class="polycss-scene"><div class="model"><div class="surface"></div></div></div></div>
       <div class="drawer"><details open><summary>Surface Lens</summary><div data-lens-details><div data-surface-minimap style="width:200px;height:100px;position:relative">
       <i class="planet-minimap-viewport"></i><i class="planet-minimap-viewport"></i><i class="planet-minimap-viewport"></i></div></div></details></div>

@@ -13,10 +13,16 @@
 - Preserve source/provenance files beside each planet and keep prepared outputs reproducible from the checked-in inputs.
 - Use source and runtime closure tests, object-package tests, router tests, and `OBJECTS`-derived browser conformance as proof. Do not duplicate those facts as declaration-only constants.
 
+## TypeScript ownership
+
+- Write new application, preparation, and tooling implementations in strict TypeScript. Validate external values at runtime; do not replace runtime validation with type assertions or unchecked declaration files.
+- Keep generated outputs and preserved vendor code in their source-owned formats. Existing JavaScript compatibility modules must only re-export their typed owners.
+- `pnpm check:typescript-ownership` enforces the remaining authored-JavaScript backlog and justified exceptions. Remove migrated or retired entries; do not add new implementation debt to make the check pass. Run `pnpm typecheck` and behavior/source checks appropriate to each migration.
+
 ## Provenance and documentation
 
 - Follow [the provenance and documentation contract](docs/provenance/CONTRACT.md) for source records, credits and test evidence. It combines PDS4 1.26.0 provenance guidance with ISO 24495-1:2023 plain-language principles in the existing repository formats. PROVENANCE DOCUMENTATION maintains the shared instructions; contributors update the records affected by their change.
 - For body work, use the checked-in [celestial skill](.agents/skills/celestial-skill/SKILL.md). Make the body README its source-and-evidence document: explain the datasets, processing, test results and known problems, with links to substantial method notes and original reports. Do not keep a duplicate SOURCE account. Keep installation and common usage in shared repo guides.
 - Keep each report tied to the version it tested. When reusing an old result, explain why it still applies to the new version.
 - Keep `docs/` for maintained shared explanations and their illustrations. Put processing code in `tools/`, test fixtures in `tests/`, and body evidence beside the body. Keep scratch runs in ignored `output/`; do not commit PR completion reports.
-- Before committing, inspect the staged diff, including added files and their sizes. Each added artifact must support a named claim, explanation or test. Use the [PR template](.github/pull_request_template.md) to report the change and its checks.
+- Before committing, inspect the staged diff, including added files and their sizes. Each added artifact must support a named claim, explanation or test. Follow the [PR rules](docs/provenance/CONTRACT.md#pull-requests) for the title and content, using the [PR template](.github/pull_request_template.md) as a starting point. Inspect every image on the published GitHub PR before handing it off.

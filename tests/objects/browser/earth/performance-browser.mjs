@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { chromium } from "playwright";
 import { CANONICAL_PREPARED_IMAGE_DENSITY } from
-  "../../../../site/runtime-policy.mjs";
+  "../../../../site/runtime-policy.mts";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_STARFIELD } from "../../unit/earth/prepared-fixture.mjs";
 

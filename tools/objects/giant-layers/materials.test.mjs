@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile}from'node:fs/promises';
-import {parseEllipsoidMaterialRecipe,rasterEllipsoidMaterial,writeMaterialAtlasTile}from'./materials.mjs';
+import {parseEllipsoidMaterialRecipe,rasterEllipsoidMaterial,writeMaterialAtlasTile}from'./materials.mts';
 test('ellipsoid material rejects unsupported physical, shading and residency input',async()=>{
  const config=JSON.parse(await readFile(new URL('../../../src/planets/uranus/source/preparation/materials.json',import.meta.url),'utf8'));
  for(const change of[c=>c.raster.shape.polarRadius=NaN,c=>c.raster.light.operations[0]={kind:'script'},c=>c.bank.columns=17,c=>c.raster.atmosphere.model='invented-clouds',c=>c.raster.lighting.ambient=2,c=>c.lenses[0].rowOutput='../escape-{row}.webp',c=>c.lenses[0].fixed[0].filename=c.lenses[1].fixed[0].filename]){const copy=structuredClone(config);change(copy);assert.throws(()=>parseEllipsoidMaterialRecipe(copy));}

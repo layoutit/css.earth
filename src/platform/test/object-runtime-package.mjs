@@ -4,9 +4,9 @@ import { createObjectRuntime, preparedObjectCapabilities } from "../../renderers
 import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding,
   createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation,
   initialObjectSelection } from "../../renderers/css/dist/testing.js";
-import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mjs";
+import { viewSunDirectionToPreparedLightDirection } from "../directional-sun-coordinate.mts";
 import { createSceneLifetime } from "@cssearth/engine";
-import { requireObjectRuntimeDefinition } from "../../../tools/object-runtime-contract.mjs";
+import { requireObjectRuntimeDefinition } from "../../../tools/object-runtime-contract.mts";
 
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 

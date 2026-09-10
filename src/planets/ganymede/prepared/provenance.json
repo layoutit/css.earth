@@ -1,15 +1,15 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "ganymede",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
     "sha256": "4b1a55dc054828c9d764c093e35aad58d41bdebb166c0a7f49282e7defba0bb5"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {

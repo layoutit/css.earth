@@ -7,9 +7,9 @@
     "sha256": "0123e365a5e679b91aa27b11b75055f530c92427dc75448ec1915d6380ffd2f6"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "8e623150e9c87568b82037ea5fae18d26f649948b9f7bb1a765c54d0c56abe03",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "eff95890ff4e65d2b2e358689255028db3915be4e8b0d0c8178259699e0c2485",
       "bytes": 10493,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/atalante/atalante-elevation-thumbnail.webp",
           "bytes": 6020,
           "sha256": "9db13980d4a5d8d6750d8ce922718b05936f1cf52c5589ae0b6af6756083c462",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/atalante/atalante-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/atalante/atalante-elevation-surface@2x.webp",
           "bytes": 302344,
           "sha256": "c57fea8d0257d1885ba3cfa4b7c546bf716dd64df69e4a2f667c52bff1845967",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/atalante/atalante-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/atalante/atalante-shape-surface@2x.webp",
           "bytes": 222294,
           "sha256": "15b450dead68d966317170a19ef498567b3fb8cd784c85594e2f678895181494",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

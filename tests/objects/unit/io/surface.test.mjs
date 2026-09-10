@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
-import {verifyRuntimeAssetClosure} from '../../../../src/platform/runtime-asset-closure.mjs';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
+import {verifyRuntimeAssetClosure} from '../../../../src/platform/runtime-asset-closure.mts';
 import {publishedObservation,canonicalPoint,assertDisplayClose,countInteriorPixels} from '../observed-atlas-proof.mjs';
 const source=await createSourceManifest({planetId:'io',planetName:'Io',sourceRoot:new URL('../../../../src/planets/io/source/',import.meta.url).pathname});
 const root=new URL('../../../../public/scenes/io/',import.meta.url);

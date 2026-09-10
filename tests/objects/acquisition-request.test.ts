@@ -4,6 +4,7 @@ import {mkdtemp,readFile,readdir,rm} from 'node:fs/promises';
 import {join,resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/operations-acquisition.js';
+import {execFileSync} from 'node:child_process';
 import type {SourceManifest} from '../../tools/objects/operations.js';
 
 const json=async(path:string)=>JSON.parse(await readFile(resolve(path),'utf8'));
@@ -37,10 +38,18 @@ test('Mars refresh restores both pinned PSG products from intercepted source res
  assert.equal(await readFile(join(root,'atmosphere/psg-mars-20260829.cfg'),'utf8'),configuration);
  assert.deepEqual((await readdir(join(root,'atmosphere'))).sort(),['psg-mars-20260829.cfg','psg-mars-r240-rif.txt']);
 }));
-test('solid observation packages retain complete pinned download refresh recipes',async()=>{
+test('solid observation inputs have an acquisition operation or byte-verified Git source',async()=>{
+ const tracked = new Set(execFileSync('git', ['ls-files', '-z', '--', 'src/planets/ceres/source', 'src/planets/io/source', 'src/planets/europa/source', 'src/planets/ganymede/source', 'src/planets/callisto/source'], {encoding:'utf8'}).split('\0'));
+ const {assertSourceBytes}=await import('../../tools/objects/operations.js');
  for(const id of ['ceres','io','europa','ganymede','callisto']){
-  const manifest:SourceManifest=await json(`src/planets/${id}/source/manifest.json`),plan=parseAcquisitionPlan(await json(`src/planets/${id}/source/preparation/acquisition.json`));
-  const paths=plan.operations.filter(step=>step.kind==='download'&&step.groups.includes('refresh')).map(step=>'path'in step?step.path:'');
-  assert.deepEqual(new Set(paths),new Set(manifest.inputs.map(entry=>entry.path)),`${id} refresh covers every pinned scientific input`);
+  const sourceRoot=`src/planets/${id}/source`;
+  const manifest:SourceManifest=await json(`${sourceRoot}/manifest.json`),plan=parseAcquisitionPlan(await json(`${sourceRoot}/preparation/acquisition.json`));
+  const paths=new Set(plan.operations.flatMap(step=>'path'in step?[step.path]:[]));
+  for (const entry of manifest.inputs) {
+   if (paths.has(entry.path)) continue;
+   assert.ok(tracked.has(`${sourceRoot}/${entry.path}`), `${id}: ${entry.path} needs acquisition or a retained Git source`);
+   assertSourceBytes(entry,await readFile(`${sourceRoot}/${entry.path}`));
+  }
+  for (const path of paths) assert.ok([...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].some(entry=>entry.path===path),`${id}: acquisition ${path} must be pinned`);
  }
 });

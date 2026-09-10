@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 import {createHash} from 'node:crypto';
-import {prepareLayeredLeafLayouts} from '../../../../tools/objects/material-composition/leaf-layouts.mjs';
+import {prepareLayeredLeafLayouts} from '../../../../tools/objects/material-composition/leaf-layouts.mts';
 import {readPreparedFixture} from '../../fixtures.mjs';
 const [scene, PREPARED_SATURN_LEAF_LAYOUTS] = await Promise.all(['scene','layouts'].map(name=>readPreparedFixture('saturn',name)));
 const stylesheet = await readFile(new URL('../../../../src/renderers/css/styles/saturn-surfaces.css',import.meta.url),'utf8');

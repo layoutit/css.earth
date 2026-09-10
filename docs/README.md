@@ -17,6 +17,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Scene navigation and prepared data | [Navigation ownership](prepared-navigation-ownership.md) |
 | Loading objects in the browser | [Page navigation transport](page-navigation-transport.md) |
 | Changing objects and cancelling a flight | [Flight lifecycle](flight-lifecycle.md) |
+| TypeScript owners, JavaScript exceptions and checks | [TypeScript ownership](architecture/typescript-ownership.md) |
 | Page titles, descriptions and search indexing | [SEO](seo.md) |
 
 For contribution steps, use the [body contributor guide](../src/planets/README.md).

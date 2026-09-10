@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mjs';
-import { sceneSources } from '../scene-sources.mjs';
+import { OBJECTS } from '../objects.mts';
+import { sceneSources } from '../scene-sources.mts';
 
 test('small shell attribution records match the checked scientific provenance', async () => {
   const read = async path => JSON.parse(await readFile(new URL(`../../src/objects/${path}`, import.meta.url), 'utf8'));

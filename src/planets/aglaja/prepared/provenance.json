@@ -7,9 +7,9 @@
     "sha256": "9589494ffa9c29e8ce0b37e0813261edf89613029d4c90508c0850f89c6bd55a"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -354,7 +354,7 @@
       "sha256": "5d85d9ffc8185618d1fb1a32c0b452dc7d5f1efcfc0008f25dd00f2a54d738e5",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "8e85c7a5e996337e3a2c2917711a96da187b4f62576d225e8696717247662e30",
       "bytes": 10190,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/aglaja/aglaja-elevation-thumbnail.webp",
           "bytes": 5576,
           "sha256": "3717c78930ad243f9d829c6514b53bac820e8966808875e0826ae459a8e037cd",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-elevation-surface@2x.webp",
           "bytes": 286484,
           "sha256": "38808bbe1795abda451c5818bc80c22fc9de1c18fb1c97f71b144efc79b342f1",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/aglaja/aglaja-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/aglaja/aglaja-shape-surface@2x.webp",
           "bytes": 241078,
           "sha256": "107308c85401df2f9ea447b1c357547b498d3361eac616d05d7e16cd12f84f52",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

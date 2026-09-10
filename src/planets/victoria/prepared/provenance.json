@@ -7,9 +7,9 @@
     "sha256": "62c95c7fd19da44ae2c08efa46ee65c7a24114b830af573094da2f2772f3b99d"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -325,7 +325,7 @@
       "sha256": "5caae90df135c838265bd8fe25a7027e16b819f6d03e4e985980a1ef1ef931ec",
       "bytes": 172219,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "eb19e0882c1db45d947d4c63c628c1b0ee3927e90a0d1b6a63ba08226d75d639",
       "bytes": 8351,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/victoria/victoria-elevation-thumbnail.webp",
           "bytes": 5780,
           "sha256": "f4fff2876dd0d3023a6817ef0667150cee18fe3470fe78a99e25830c9073e6e3",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/victoria/victoria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/victoria/victoria-elevation-surface@2x.webp",
           "bytes": 336790,
           "sha256": "ef447dbc0e68a3a974bf47e30208ab0bdc856dd824ec33341c288950c13e9310",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/victoria/victoria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/victoria/victoria-shape-surface@2x.webp",
           "bytes": 218708,
           "sha256": "a4875b1446990e425c96cc01b5b859218713ba6461dc0e43acc5e83e43e18993",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

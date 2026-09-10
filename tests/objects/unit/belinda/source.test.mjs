@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import sharp from 'sharp';
-import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {loadPdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const source=new URL('../../../../src/planets/belinda/source/',import.meta.url);
 const j=async p=>JSON.parse(await readFile(new URL(p,source)));
 

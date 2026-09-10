@@ -7,9 +7,9 @@
     "sha256": "24a784af001e7225087cf7100852ee56b465ba58f82782cd6a50c304237b0fb5"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -263,7 +263,7 @@
       "sha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "bytes": 135,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -288,7 +288,7 @@
       "sha256": "33433bfde43462cb04ed29e2dce75928e249c8976d307a76bb65f7f15adf2560",
       "bytes": 14147,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -305,7 +305,7 @@
       "sha256": "1cc04de92923d2d05d5844d2f62d01affc90f29501fbd2be282fc8b2d1b63431",
       "bytes": 3712,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -343,13 +343,13 @@
           "url": "/scenes/despina/despina-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/despina/despina-model-surface@2x.webp",
           "bytes": 49032,
           "sha256": "3765b7ecee1b03ac9a275d3b193665f590467357621de6d01bbe661b3c8e93d0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

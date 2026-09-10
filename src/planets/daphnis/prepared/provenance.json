@@ -7,9 +7,9 @@
     "sha256": "d1b8143ebb85bd5175c8f09031ac45db0763b25c7b84d30fe63c6a766a2bebce"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -401,7 +401,7 @@
       "sha256": "8fc85246848ad05de7c68b0686f9fde7d3c23529d02db9c1e7287864b74c34be",
       "bytes": 2019600,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -441,7 +441,7 @@
       "sha256": "d13c92192552c1c7a7cc4146b6767da7b7cc3dd1b753e80438670b08c1b16320",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -474,7 +474,7 @@
       "sha256": "4e9288fef8b341477517ceb86d5daaf12bedbf0b21178657b881628308563423",
       "bytes": 3829,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -514,7 +514,7 @@
       "sha256": "c8c1b35ac229a1b69b6767088298b1c412e7e6f9c28b762f1ccaf30a73a39eb0",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -547,7 +547,7 @@
       "sha256": "4c6172fabd9dadeb93d70b6896bdf78194c8350ceed7e5ef81fd429f27fae940",
       "bytes": 3828,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -587,7 +587,7 @@
       "sha256": "b026a3faac020e7829dd36c6b7e69f7e5cb17995961117bd3c9dbdc86c93d3ac",
       "bytes": 4202496,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -620,7 +620,7 @@
       "sha256": "25e85a27af3d62e800738d7819cd5022dc21140bc6b215c74b3e27b54dae93cc",
       "bytes": 3865,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -644,7 +644,7 @@
       "sha256": "7ea6f4f0add823d00e4a7d04fc203713733a67ed2ae5c4bcd8fab1753157201a",
       "bytes": 5248,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -677,19 +677,19 @@
           "url": "/scenes/daphnis/daphnis-elevation-thumbnail.webp",
           "bytes": 4514,
           "sha256": "5a7fab90da67b55a8cffcfc0e9e1b006549959b3c2d206077e1dbecc02040b70",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-elevation-surface@2x.webp",
           "bytes": 267548,
           "sha256": "b6a819ab54e43a39431d3e04d0eb2060fd02229d8382a0c00c050f88f5914993",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -727,13 +727,13 @@
           "url": "/scenes/daphnis/daphnis-normal-thumbnail.webp",
           "bytes": 2328,
           "sha256": "526f75327b04f745b9e6e56f4eb13494d34c5fb6fe06d6b167c8d3ecbf504b65",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/daphnis/daphnis-normal-surface@2x.webp",
           "bytes": 181544,
           "sha256": "0a951ef3f3e1a2a3b85c3aa5302e4ba064de02204d130a7ab3e810acc37d4099",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

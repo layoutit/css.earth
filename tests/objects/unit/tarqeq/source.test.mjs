@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import { simplifyRadialShape, validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import { simplifyRadialShape, validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../src/planets/tarqeq/source/', import.meta.url);
 const read = async path => JSON.parse(await readFile(new URL(path, root), 'utf8'));
 
@@ -37,7 +37,7 @@ test('Tarqeq supplies only missing coverage to the surface preparer', async () =
 
 
 test('tarqeq stays within the independent vector position guards', async () => {
-  const { loadAstronomyPackage } = await import('../../../../src/platform/astronomy-package.mjs');
+  const { loadAstronomyPackage } = await import('../../../../src/platform/astronomy-package.mts');
   const { satellitePositionKm, satelliteRecord } = await loadAstronomyPackage();
   const evidence = await read('validation/orbit-checks.json'), record = satelliteRecord('tarqeq');
   for (const row of evidence.runs.find(run => run.label === 'holdouts').comparisons) {

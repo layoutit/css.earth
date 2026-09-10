@@ -101,7 +101,7 @@ The moons are **not** a satellite theory. Each is a precessing Keplerian ellipse
 in its own Laplace plane, with elements derived from Horizons' own osculating
 elements. Most are sampled every 30 days across 1900–2100; the six current-era
 Saturn fits and Pan use a 5-day cadence over their recorded ranges
-(`tools/generate-satellites.mjs`). What follows is therefore a **fit residual**,
+(`tools/generate-satellites.mts`). What follows is therefore a **fit residual**,
 not an independent accuracy claim, measured at six epochs the fit never saw:
 
 | moon | error | of orbit radius | | moon | error | of orbit radius |
@@ -182,10 +182,10 @@ The series and fixtures are generated, and the generators re-download their
 sources into `tools/.cache` (gitignored):
 
 ```
-node tools/generate-series.mjs        # VSOP87A + ELP2000-82B, prints the truncation table
-node tools/generate-satellites.mjs    # satellite mean elements from Horizons
-node tools/fetch-fixtures.mjs         # Horizons vector fixtures
-node tools/fetch-rotation-fixtures.mjs # body-fixed site fixtures for the IAU models
+node tools/generate-series.mts        # VSOP87A + ELP2000-82B, prints the truncation table
+node tools/generate-satellites.mts    # satellite mean elements from Horizons
+node tools/fetch-fixtures.mts         # Horizons vector fixtures
+node tools/fetch-rotation-fixtures.mts # body-fixed site fixtures for the IAU models
 ```
 
 Sources: VSOP87A from CDS `VI/81` (Bretagnon & Francou 1988), ELP2000-82B from
@@ -266,7 +266,7 @@ the illustrative frozen surface orientation used by the scene.
 ### Slow longitude libration
 
 Polydeuces, Anthe and Aegaeon retain the shared precessing-ellipse model with
-three prepared harmonic terms in mean longitude. `tools/lib/fit-libration.mjs`
+three prepared harmonic terms in mean longitude. `tools/lib/fit-libration.mts`
 fits those terms jointly with the linear longitude trend to daily JPL Horizons
 samples over 2020–2032. The compact model represents slow resonant motion; it
 is not an N-body integration or a qualified extrapolation outside that interval.
@@ -324,7 +324,7 @@ limitations are retained in each body's source/validation/orbit-checks.json.
 The generator records actual returned sampling limits, which can precede a
 requested stop date when the cadence does not divide the interval exactly.
 
-Use `node tools/generate-satellites.mjs --object=kiviuq,albiorix` from this
+Use `node tools/generate-satellites.mts --object=kiviuq,albiorix` from this
 package to regenerate selected records while preserving the other checked
 records. Omitting the selection still runs the complete generator.
 
@@ -370,7 +370,7 @@ Hiʻiaka, Menoetius, Squannit and Romulus use `sceneSatelliteStateKm` at exactly
 JD 2461286.5 TT. A request at any other epoch throws. Their position accuracy is
 explicitly unknown (`estimateKm: null`); these snapshots do not extend the fitted
 satellite theory. Source hashes, target/center identities, gravity, frame and
-independent checks are validated by `tools/body-epoch-ephemeris.mjs` before the
+independent checks are validated by `tools/body-epoch-ephemeris.mts` before the
 compact math table is generated. Detailed evidence remains in each body package. Generic `dwarfPlanetFrameSpecs()` excludes these scene-only moons, so its propagated time domain remains intact. The scene generator takes no arguments and replaces output only after validating all four bodies.
 
 - Hiʻiaka and Menoetius retain primary-relative JPL tnosat vectors, solution GM,
@@ -397,7 +397,7 @@ supported instant. It is not an estimate of orbital apoapsis.
 Patroclus is an astronomy parent entry, with no fabricated standalone scene.
 Its JPL primary osculating conic has ±30-day vector residuals of 7,244.47 / 0 /
 6,180.29 km and an 8,332 km regression guard. This local conic is not a long-term
-binary ephemeris. Regenerate it with `node tools/generate-asteroids.mjs
+binary ephemeris. Regenerate it with `node tools/generate-asteroids.mts
 --object=patroclus`; selected generation preserves other checked records.
 
 The 41 additional main-belt models (Thetis through Ianthe) use the same

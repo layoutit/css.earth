@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readEncounterHdus, decodeEncounterFits } from './encounter-fits.mjs';
-import { encounterCamera, validateBodyFrame } from './encounter-camera.mjs';
+import { readEncounterHdus, decodeEncounterFits } from './encounter-fits.mts';
+import { encounterCamera, validateBodyFrame } from './encounter-camera.mts';
 const card = (key, value) => `${key.padEnd(8)}= ${typeof value === 'string' ? `'${value.replaceAll("'", "''")}'` : typeof value === 'boolean' ? value ? 'T' : 'F' : value}`.padEnd(80);
 function hdu(name, bitpix, data, extra = {}, width = 2, height = 2) {
   const header = Buffer.from([name === 'PRIMARY' ? card('SIMPLE', true) : card('XTENSION', 'IMAGE'), card('BITPIX', bitpix),

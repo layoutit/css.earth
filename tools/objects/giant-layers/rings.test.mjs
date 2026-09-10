@@ -4,7 +4,7 @@ import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { mapRadius, ringRayOccluded, parseRadialLayerRecipe, prepareGiantLayers, rasterAnnularField } from './index.mjs';
+import { mapRadius, ringRayOccluded, parseRadialLayerRecipe, prepareGiantLayers, rasterAnnularField } from './index.mts';
 
 const recipe = () => ({schema:'cssearth-radial-layer-recipe@1',units:'kilometers',sources:[],layers:[{
   kind:'annular-field',size:9,densities:[1],output:'hypothetical-ring{suffix}.webp',encoding:{lossless:true},

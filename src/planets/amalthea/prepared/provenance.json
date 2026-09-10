@@ -7,9 +7,9 @@
     "sha256": "d27cbdc2ce70e2abf52608ca937c17c380bb9c3a2d1a4e72dc5f7dfff8d0d243"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -463,7 +463,7 @@
       "sha256": "031ee6036cf67e170d39da24487672cd3d4dd2bbb5e9391cf1e3ad56c67706f1",
       "bytes": 70226,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -503,7 +503,7 @@
       "sha256": "0c2786700d45f25d74828a2a274ffc1e8b2cd9fdaf049e5c461e44800b7d48ee",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -536,7 +536,7 @@
       "sha256": "498fc2ee6c38eca35f33051a78f5e4b5ae082914e7dd8deee57f643259f02296",
       "bytes": 4754,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -576,7 +576,7 @@
       "sha256": "5183ec1e59c472691fd82c30956f485b37d499154a0ca9fddbc245ccadf25e0a",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -609,7 +609,7 @@
       "sha256": "ba48dd397a1e9dfd94b6dce4c71c07e9c3c9f80f0958fa1140d9b4e67a793a73",
       "bytes": 4842,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -649,7 +649,7 @@
       "sha256": "ed9310d63df477a715f46349aec4d07eb66466ef7878046f6de8fcc7a8e33495",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -682,7 +682,7 @@
       "sha256": "ec662262f35a5c10841283d69884888b2ba639bde352826224afd1ae8f35430d",
       "bytes": 5012,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -722,7 +722,7 @@
       "sha256": "28617d6c3a4e3efe8532db03d6479ed494f79712dd2c24d1ddd0e99964bc5b4f",
       "bytes": 831488,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -755,7 +755,7 @@
       "sha256": "2223991ed2b60d11428be5efc996132318c440be0f945ae4fc8f576e10a8dd32",
       "bytes": 5010,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -795,7 +795,7 @@
       "sha256": "a9984536219b37e770cd92036aca30cd53a83b91b9d87e881550ed0de23a01bf",
       "bytes": 840192,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -828,7 +828,7 @@
       "sha256": "7f3421111331a7dad25384ac63a89eebc4b63e672d34905e977ece5f5dbbe73e",
       "bytes": 5038,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -852,7 +852,7 @@
       "sha256": "cfa2dd3c1b764ac2553963e7a0c9936cb6b180e67dc56fb244120fc971f0bed7",
       "bytes": 5644,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -885,19 +885,19 @@
           "url": "/scenes/amalthea/amalthea-elevation-thumbnail.webp",
           "bytes": 6320,
           "sha256": "9d847355902640f4324b2a5a9da0065c1c4bff1df78ae75631a13da2f12d1144",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amalthea/amalthea-elevation-surface@2x.webp",
           "bytes": 235688,
           "sha256": "3628a7e922a59e4ad06bddce33da7c5177431d76e095c250fadae50d9ae57d18",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -939,13 +939,13 @@
           "url": "/scenes/amalthea/amalthea-normal-thumbnail.webp",
           "bytes": 3642,
           "sha256": "981e03ba4ea6120c914657603ee990e7f850db49f7042f611e24bde026fcaa04",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/amalthea/amalthea-normal-surface@2x.webp",
           "bytes": 153080,
           "sha256": "f2c72c3300ef926550eea6f0370f6cad7bef05bc2196cfbfdf34ca63be6bc7d0",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

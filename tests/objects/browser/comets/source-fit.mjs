@@ -5,11 +5,11 @@ import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
-import { OBJECTS } from '../../../../site/objects.mjs';
-import { loadObjShape, loadPdsPlanetocentricShape, loadPdsPlateShape, loadPdsRadiusTable, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import { OBJECTS } from '../../../../site/objects.mts';
+import { loadObjShape, loadPdsPlanetocentricShape, loadPdsPlateShape, loadPdsRadiusTable, parseObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { surfaceDistanceIndex } from './surface-distance.mjs';
-import { loadImageDem } from '../../../../tools/objects/terrestrial-layers/image-dem.mjs';
-import { loadContactEllipsoids } from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mjs';
+import { loadImageDem } from '../../../../tools/objects/terrestrial-layers/image-dem.mts';
+import { loadContactEllipsoids } from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mts';
 
 const output = resolve(process.argv[2] ?? 'output/comet-source-fit');
 const selected = OBJECTS.filter(object => object.classification === 'comet' && (!process.argv[3] || object.id === process.argv[3]));

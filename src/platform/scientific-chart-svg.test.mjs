@@ -5,7 +5,7 @@ import test from "node:test";
 import {
   renderReflectanceChart,
   renderTemperaturePressureChart,
-} from "./scientific-chart-svg.mjs";
+} from "./scientific-chart-svg.mts";
 
 test("renders deterministic representative Mars and Saturn reflectance data", () => {
   for (const [id, maximum] of [["mars", 0.16], ["saturn", 0.25]]) {
@@ -109,6 +109,6 @@ test("rejects malformed chart shapes and unsafe ids", () => {
 });
 
 test("contains no object id or source record", async () => {
-  const source = await readFile(new URL("./scientific-chart-svg.mjs", import.meta.url), "utf8");
+  const source = await readFile(new URL("./scientific-chart-svg.mts", import.meta.url), "utf8");
   assert.doesNotMatch(source, /mars|saturn|107740|107933/iu);
 });

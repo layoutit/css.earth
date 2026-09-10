@@ -8,9 +8,9 @@ import {
   fitPanoramaFrameRotation,
   galacticDegreesToPanoramaPixel,
   panoramaPixelToGalacticDegrees,
-} from "./eso-panorama-registration.mjs";
+} from "./eso-panorama-registration.mts";
 import { directionFromDegrees, transformDirection } from
-  "./galactic-frame.mjs";
+  "./galactic-frame.mts";
 
 test("pixel mapping: galactic longitude increases leftward, latitude upward", () => {
   const [width, height] = ESO_PANORAMA.size;

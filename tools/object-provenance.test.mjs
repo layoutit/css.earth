@@ -4,9 +4,9 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { prepareObjectProvenance } from './objects/provenance.mjs';
-import { productSourceIds, validateObjectProvenance } from '../src/platform/object-provenance.mjs';
-import { provenanceIdentity } from './prepare-provenance.mjs';
+import { prepareObjectProvenance } from './objects/provenance.mts';
+import { productSourceIds, validateObjectProvenance } from '../src/platform/object-provenance.mts';
+import { provenanceIdentity } from './prepare-provenance.mts';
 
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const read = async path => JSON.parse(await readFile(path, 'utf8'));

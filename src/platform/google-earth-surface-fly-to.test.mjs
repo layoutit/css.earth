@@ -5,7 +5,7 @@ import {
   GOOGLE_EARTH_SURFACE_FLY_TO,
   planGoogleEarthSurfaceFlyTo,
   sampleGoogleEarthSurfaceFlyTo,
-} from "./google-earth-surface-fly-to.mjs";
+} from "./google-earth-surface-fly-to.mts";
 
 const TRACKBALL = Object.freeze({
   centerX: 500,

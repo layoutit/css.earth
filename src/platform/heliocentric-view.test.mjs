@@ -1,13 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { orbitTrailWeights } from "./prepare-heliocentric-view.mjs";
+import { orbitTrailWeights } from "./prepare-heliocentric-view.mts";
 import {
   trailWeightsForSpans,
   validatePreparedHeliocentricView,
   projectHeliocentricView,
   validatePreparedPlanetarySystem,
-} from "./heliocentric-view.mjs";
+} from "./heliocentric-view.mts";
 import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
 
 const plan = PREPARED_MERCURY_SCENE.heliocentricView;

@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
-import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mjs';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
+import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.mts';
 const read=async p=>JSON.parse(await readFile(p,'utf8'));
 export function testCatalogNucleus(id){
  test(`${id}: retained mesh preserves the native source shape and closed topology`,async()=>{

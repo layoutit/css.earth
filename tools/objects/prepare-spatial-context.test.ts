@@ -11,7 +11,7 @@ import { prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/planets/sun/source/navigation/universe.json');
-const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mjs');
+const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
 
 test('migrated world-frame radii override astronomy only at the same position and epoch', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'cssearth-spatial-context-'));
@@ -74,7 +74,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
     assert.deepEqual(result.bodies.map((body: { id: string }) => body.id), source.bodies.map((body: { id: string }) => body.id));
     // Independently parse the retained Horizons output, bypassing the snapshot
-    // loader, solar-geometry.mjs and descriptor frames. Other bodies retain
+    // loader, solar-geometry.mts and descriptor frames. Other bodies retain
     // their compact astronomy models; Earth adds its source-owned EMB offset.
     const manifestPath = resolve(root, 'packages/astronomy/source/scene-epoch');
     const manifest = JSON.parse(await readFile(resolve(manifestPath, 'manifest.json'), 'utf8'));

@@ -3,14 +3,14 @@ import { loadPreparedCssObject } from '../loader.js';
 import type { PreparedCssTransport } from '../loader.js';
 import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
 import { createDeferredObjectMount } from './deferred-object-mount.js';
-import type { ObjectSceneLifecycle } from './deferred-object-mount.js';
-import type { ObjectRuntimeDefinition, ObjectMountOptions } from './object-runtime-types.js';
+import type { DeferredMountOptions, ObjectSceneLifecycle } from './deferred-object-mount.js';
+import type { ObjectRuntimeDefinition } from './object-runtime-types.js';
 import { createPreparedObjectNavigation } from './prepared-object-navigation.js';
 
-type Bind = (definition: ObjectRuntimeDefinition) => (stage: HTMLElement, options: ObjectMountOptions) => ObjectSceneLifecycle;
+type Bind<Options extends DeferredMountOptions> = (definition: ObjectRuntimeDefinition) => (stage: HTMLElement, options: Options) => ObjectSceneLifecycle;
 
 /** One decoded definition feeds preflight and the eventual single scene mount. */
-export function createNavigableObjectMount(input: unknown, transport: PreparedCssTransport, bind: Bind) {
+export function createNavigableObjectMount<Options extends DeferredMountOptions>(input: unknown, transport: PreparedCssTransport, bind: Bind<Options>) {
   const descriptor = parseObjectDescriptor(input);
   const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
   let loading: Promise<ObjectRuntimeDefinition> | null = null;
@@ -26,7 +26,7 @@ export function createNavigableObjectMount(input: unknown, transport: PreparedCs
     }
     return loading;
   }
-  const mount = createDeferredObjectMount(load, definition => (stage: HTMLElement, options: ObjectMountOptions) =>
+  const mount = createDeferredObjectMount(load, definition => (stage: HTMLElement, options: Options) =>
     bind(definition)(stage, { ...options, ...(frame ? { worldFrame: frame } : {}) }));
   const navigation = frame ? createPreparedObjectNavigation(load, frame) : null;
   return Object.assign(mount, { navigation });

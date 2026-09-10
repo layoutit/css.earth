@@ -19,7 +19,7 @@ try {
   await page.goto(`${origin}/sun/`, { waitUntil: 'domcontentloaded' });
   await ready(page, 'sun');
   await page.evaluate(async () => {
-    const { OBJECTS } = await import('/site/objects.mjs');
+    const { OBJECTS } = await import('/site/objects.mts');
     const selectors = ['.planet-stage', '.planet-sidebar', '.planet-input-surface', '.prepared-universe', '.prepared-volume-context', '.prepared-point-field', '.prepared-world-context'];
     const roots = selectors.map(selector => document.querySelector(selector));
     if (roots.some(root => !root)) throw new Error('All universe and shell roots must exist before first interaction.');

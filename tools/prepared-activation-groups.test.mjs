@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { prepareActivationGroups } from './prepared-activation-groups.mjs';
+import { prepareActivationGroups } from './prepared-activation-groups.mts';
 
 test('preparation bounds sibling batches without changing retained geometry or selection ownership', () => {
   const definition = { tree: { camera: 0, scene: 1,

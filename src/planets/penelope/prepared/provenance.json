@@ -7,9 +7,9 @@
     "sha256": "bc660c51af9726a8d1b6a04a1ceaef4177db4e85e00739f6f91900e13b3c3210"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -327,7 +327,7 @@
       "sha256": "0a169c305b444f8163b677a60de14d126a71717887f51bbbe980befd42279262",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "c3cf06338dd02e5524db412fc126a86292ce57daf1c64e34a04dd276f7b05600",
       "bytes": 8921,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/penelope/penelope-elevation-thumbnail.webp",
           "bytes": 5238,
           "sha256": "5168d93a9299375adb7ea67d30733acce6558afbe6d2c34d3dd1e0ddf5291c09",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/penelope/penelope-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/penelope/penelope-elevation-surface@2x.webp",
           "bytes": 312508,
           "sha256": "3f0842cad0dc3cfd178dd7cebe86e8b7e9c88f06975f6c43fe5e895648509aaa",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/penelope/penelope-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/penelope/penelope-shape-surface@2x.webp",
           "bytes": 208936,
           "sha256": "91e07fd7fc0426d4b1ad0cee2cd8a374202db3b2395a4748dd01396727f25fcf",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
 import { PREPARED_EARTH_SCENE, runtimeDefinition } from "../../unit/earth/prepared-fixture.mjs";
-import { readPublishedCoverage } from "../../../../tools/objects/geographic-pages/operations/published-coverage.mjs";
-import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
-import { prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
+import { readPublishedCoverage } from "../../../../tools/objects/geographic-pages/operations/published-coverage.mts";
+import { prepareCityPageGeometry } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
+import { prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
 
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const output = new URL("../../../../output/playwright/published-coverage/", import.meta.url);

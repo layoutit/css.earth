@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareLocationPoint } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
+import { prepareLocationPoint } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
 
 const base = (process.argv.slice(2).find(argument => /^https?:\/\//u.test(argument)) ?? "http://127.0.0.1:4210").replace(/\/$/u, "");
 const output = new URL(`../../../../output/playwright/city-selection-${Date.now()}/`, import.meta.url);

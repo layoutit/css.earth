@@ -4,9 +4,9 @@ import { mkdir,writeFile } from "node:fs/promises";
 import { chromium } from "playwright";
 import { PREPARED_EARTH_SCENE as scene, runtimeDefinition, preparePagingDiagnostic, routePagingDiagnostic } from "../../unit/earth/prepared-fixture.mjs";
 import { PREPARED_EARTH_CITY_PAGES as existing } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareWmtsTile,wmtsAddress,WMTS_RASTER_SCALE } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
-import { prepareLocationPoint,prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mjs";
-import { prepareWmtsBlocks } from "../../../../tools/objects/geographic-pages/operations/prepare-wmts-blocks.mjs";
+import { prepareWmtsTile,wmtsAddress,WMTS_RASTER_SCALE } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mts";
+import { prepareLocationPoint,prepareLocationCamera } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
+import { prepareWmtsBlocks } from "../../../../tools/objects/geographic-pages/operations/prepare-wmts-blocks.mts";
 
 const root=new URL("../../../../",import.meta.url);
 const base=(process.argv.slice(2).find(argument=>/^https?:\/\//u.test(argument))??"http://127.0.0.1:4210").replace(/\/$/u,"");

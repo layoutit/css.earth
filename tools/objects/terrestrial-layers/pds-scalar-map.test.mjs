@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseScalarMap, scalarMapIndex, createScalarMapSampler, validateScalarMapProfile } from './pds-scalar-map.mjs';
-import { parseObjShape } from './obj-shape.mjs';
+import { parseScalarMap, scalarMapIndex, createScalarMapSampler, validateScalarMapProfile } from './pds-scalar-map.mts';
+import { parseObjShape } from './obj-shape.mts';
 
 const grid = { width: 720, height: 360, stepDegrees: .5, latitudeFirst: 90, latitudeStep: -.5, noData: -1, frame: 'cheops-planetocentric-east-positive' };
 const iceGrid = { ...grid, latitudeFirst: -90, latitudeStep: .5 };

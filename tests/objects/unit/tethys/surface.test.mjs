@@ -4,7 +4,7 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {fromFile} from 'geotiff';
 import sharp from 'sharp';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 
 const root = new URL('../../../../', import.meta.url);
 const sourceRoot = new URL('src/planets/tethys/source/', root).pathname;

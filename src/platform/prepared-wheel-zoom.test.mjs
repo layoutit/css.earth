@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER } from "../../site/runtime-policy.mjs";
+import { WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER } from "../../site/runtime-policy.mts";
 
 import {
   createPreparedWheelZoomControls,
   PREPARED_WHEEL_ZOOM,
   zoomOutRayRotation,
-} from "./prepared-wheel-zoom.mjs";
+} from "./prepared-wheel-zoom.mts";
 
 for (const speedMultiplier of [1, WHEEL_ZOOM_SPEED_MULTIPLIER]) test(
 `wheel zoom retains its timing, anchoring and cancellation at speed ${speedMultiplier}`, (t) => {

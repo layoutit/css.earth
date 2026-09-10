@@ -21,7 +21,7 @@ export type PreparedWrite = { target: number; name: string } & (
   { kind: "attribute"; value: string | null } | { kind: "class"; value: boolean } |
   { kind: "style"; value: string } | { kind: "texture"; resource: string | null; quoted: boolean }
 );
-export interface PreparedSelectionNavigation { maximumZoom: number; camera?: { controlPitch: number; controlYaw: number; controlRoll?: number; zoom: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } }; }
+export interface PreparedSelectionNavigation { maximumZoom: number; camera?: { controlPitch: number; controlYaw: number; controlRoll?: number; zoom: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } } | null; }
 export interface PreparedVariant { when: Readonly<Record<string, ObjectSelection[string]>>; required: readonly string[]; materials: readonly PreparedMaterialSelection[]; writes: readonly PreparedWrite[]; navigation?: PreparedSelectionNavigation; }
 export interface PreparedTree {
   /** Offline first-paint batches. Runtime restores these exact retained leaves. */

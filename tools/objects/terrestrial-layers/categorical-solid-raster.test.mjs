@@ -4,8 +4,8 @@ import {mkdtemp, writeFile, readFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import sharp from 'sharp';
-import {prepareSolidRasters, prepareSolidMaterial} from './solid-raster.mjs';
-import {reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster} from '../../../src/platform/prepare-solid-body-surface.mjs';
+import {prepareSolidRasters, prepareSolidMaterial} from './solid-raster.mts';
+import {reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster} from '../../../src/platform/prepare-solid-body-surface.mts';
 
 const colors=['#ff0000','#00ff00'], rgb=colors.map(c=>[1,3,5].map(i=>parseInt(c.slice(i,i+2),16)));
 function assertPalette(bytes, message) {

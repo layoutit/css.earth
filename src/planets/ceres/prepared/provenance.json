@@ -7,9 +7,9 @@
     "sha256": "e0bb32876fc9782713e67e455adf1bb6b0404b5a5f3b5aac38c44b30f02a18a6"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -384,7 +384,7 @@
       "sha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
       "bytes": 9750062,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -435,7 +435,7 @@
       "sha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
       "bytes": 1033656,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -470,7 +470,7 @@
       "sha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
       "bytes": 466647217,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -494,7 +494,7 @@
       "sha256": "db7c4c51c376cf2660e70126ed0205b4697898637654804eeebbfd0f77cb7b05",
       "bytes": 9815,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -529,19 +529,19 @@
           "url": "/scenes/ceres/ceres-normal-thumbnail.webp",
           "bytes": 3756,
           "sha256": "57e7cb49b24c76096f5df3942cc926e9ae5e0422f6964d4a6c0cbcd6f7a47dd2",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-normal-surface@2x.webp",
           "bytes": 4533902,
           "sha256": "d6d6c665ea67a1742ab7781778c4fe49149c49c693c3dee64e3d6af10144c560",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-normal-poles@2x.webp",
           "bytes": 163390,
           "sha256": "49c47235bc306821f7cc5924561db009aa459a907624652f85caac2ddec5ce32",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -575,19 +575,19 @@
           "url": "/scenes/ceres/ceres-enhanced-thumbnail.webp",
           "bytes": 9784,
           "sha256": "df339adeaa99dcb0dfce95bfc03e7cc40e8f6cb6b2c2883817273ebaa4356ed6",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-enhanced-surface@2x.webp",
           "bytes": 2584476,
           "sha256": "a16a55ad059afd9c70845cc782e534ac620fc28650ef0042da7fc99af406eebb",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-enhanced-poles@2x.webp",
           "bytes": 126134,
           "sha256": "8d8016973c60d7fb3833267a1edc46a275e04e2d1ff9e8ce830827eb7061b849",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -620,25 +620,25 @@
           "url": "/scenes/ceres/ceres-elevation-thumbnail.webp",
           "bytes": 6496,
           "sha256": "333407659f6bc7b91073dcd7b1e0d6e896baae376c7131d52ca170ba2e96e94b",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-legend.webp",
           "bytes": 216,
           "sha256": "c1cb75a0ff10d78c262808c8188b385da4e98881290b8dc68bd7aa18ba4bc66f",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-surface@2x.webp",
           "bytes": 1445458,
           "sha256": "c733b1c283e7cca5b2a07a6cb0e87da224c3d1301e2696f27fa1f0f73c6322e4",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-elevation-poles@2x.webp",
           "bytes": 9906,
           "sha256": "f496d03b0cd8655b0d5ced0abb7271abb3474cab9a5060c0f0fec3fc916cc3ab",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -3,9 +3,9 @@ import {test} from 'node:test';
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
-import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
+import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 
 const directory=resolve(import.meta.dirname,'../../../../src/planets/aemilia'),sourceRoot=resolve(directory,'source');
 const read=async path=>JSON.parse(await readFile(resolve(directory,path),'utf8'));

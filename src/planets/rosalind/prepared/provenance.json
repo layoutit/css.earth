@@ -7,9 +7,9 @@
     "sha256": "ee74a31c43666926717529fc035a6c59f4ee7e9c4b7d0e5f17fa8c415005d7d8"
   },
   "generator": {
-    "path": "tools/objects/provenance.mjs",
-    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
-    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+    "path": "tools/objects/provenance.mts",
+    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
     {
@@ -258,7 +258,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -283,7 +283,7 @@
       "sha256": "b7828ab6755652da8588cb49cdf930becf841930f45428bea7dba8918a0e0f31",
       "bytes": 62404,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -300,7 +300,7 @@
       "sha256": "6152d114dbe193755a48d14c8ad89f9d3aebb7e4eda22f07d28ac489f35298ca",
       "bytes": 3384,
       "dependencies": [],
-      "verification": "manifest-pin",
+      "verification": "bytes-verified",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -338,13 +338,13 @@
           "url": "/scenes/rosalind/rosalind-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         },
         {
           "url": "/scenes/rosalind/rosalind-model-surface@2x.webp",
           "bytes": 55832,
           "sha256": "055b99cbb4c711164c0a60f2dde5a2f8e5c8879d2c482b0ef6f2ef7f1b9bb8a7",
-          "verification": "asset-manifest-pin"
+          "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"

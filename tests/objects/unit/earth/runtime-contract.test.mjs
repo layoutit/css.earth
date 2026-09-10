@@ -6,8 +6,8 @@ import { objectRuntimePackageTests, retainedPresentationFixture } from "../../..
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { initialObjectSelection } from "../../../../src/renderers/css/dist/testing.js";
 import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/dist/index.js';
-import { OBJECTS } from "../../../../site/objects.mjs";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";
+import { OBJECTS } from "../../../../site/objects.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 objectRuntimePackageTests(runtimeDefinition);
 test('diagnostic page substitutions preserve the real renderer and verified prepared envelope',async()=>{
   const plan={...PREPARED_EARTH_CITY_PAGES,qualification:'Test-only prepared page substitution'};

@@ -4,9 +4,9 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {createServer} from 'node:http';
 import {chromium} from 'playwright';
-import {runtimeAssets} from '../../../../tools/runtime-assets.mjs';
-import {installRuntimeAssets} from '../../../../tools/setup.mjs';
-import {contactEllipsoidMesh} from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mjs';
+import {runtimeAssets} from '../../../../tools/runtime-assets.mts';
+import {installRuntimeAssets} from '../../../../tools/setup.mts';
+import {contactEllipsoidMesh} from '../../../../tools/objects/terrestrial-layers/contact-ellipsoids.mts';
 import {BASE_TILE} from '@layoutit/polycss';
 // Run against a completed production build; serve fresh R2 bytes separately.
 const origin=process.argv[2]??'http://127.0.0.1:53135',id='comet-8p',out=resolve(process.argv[3]??'output/playwright/tuttle/arecibo');

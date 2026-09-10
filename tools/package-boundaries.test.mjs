@@ -70,7 +70,7 @@ test('runtime packages cannot reach site, legacy sources, Node tooling, or rever
     }
   }
   const fixture = path.join(root, 'packages/engine/src/runtime/probe.ts');
-  for (const specifier of ['../../../../site/runtime-policy.mjs', '../../../../src/platform/object-runtime.mjs', '@cssearth/objects', 'node:fs']) {
+  for (const specifier of ['../../../../site/runtime-policy.mts', '../../../../src/platform/object-runtime.mts', '@cssearth/objects', 'node:fs']) {
     const tree = parse(`import data from ${JSON.stringify(specifier)}`, { sourceType: 'module' });
     assert.ok(imports(tree).some(value => forbiddenImport('engine', fixture, value)), specifier);
   }

@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {decodeCalibratedCamera,controlledShapeCamera,insetCoverage} from './shape-camera-mosaic.mjs';
-import {parsePdsPlateShape} from './obj-shape.mjs';
+import {decodeCalibratedCamera,controlledShapeCamera,insetCoverage} from './shape-camera-mosaic.mts';
+import {parsePdsPlateShape} from './obj-shape.mts';
 
 test('calibrated VICAR skips binary telemetry and honors source byte order',()=>{
   for(const endian of ['RIEEE','IEEE']){

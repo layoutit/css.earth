@@ -4,7 +4,7 @@ import test from "node:test";
 import {
   orderScientificCharts,
   SCIENTIFIC_CHART_ORDER,
-} from "../scientific-chart-order.mjs";
+} from "../scientific-chart-order.mts";
 
 test("publishes the canonical scientific chart order", () => {
   assert.deepEqual(SCIENTIFIC_CHART_ORDER, [

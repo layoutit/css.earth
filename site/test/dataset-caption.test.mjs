@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { datasetCaption } from '../dataset-caption.mjs';
+import { datasetCaption } from '../dataset-caption.mts';
 
 const read = async id => JSON.parse(await readFile(new URL(`../../src/planets/${id}/prepared/provenance.json`, import.meta.url), 'utf8'));
 const lens = id => ({ id, label: id, title: `${id} instrument dataset`, description: 'Brightness records the measured surface response.' });
