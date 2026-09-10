@@ -9,8 +9,8 @@
 
 ## Evidence
 
-- [Recorded checks](../../../docs/centaur-population/VALIDATION.md): shape, [16 source records](../../../docs/centaur-population/source-validation.json), and [fresh image installation](../../../docs/centaur-population/fresh-install.json) for both Centaurs.
-- [Headless Chrome checks](../../../docs/centaur-population/browser-validation.json) cover both bodies at 1440 × 900 CSS pixels, DPR 1/2, after integration of `3badfb535`. Later PR #89 checks cover data integration; [default](../../../docs/centaur-population/evidence/bienor-default.png) and [close](../../../docs/centaur-population/evidence/bienor-close.png) captures retain their earlier build identities.
+- [Recorded checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/VALIDATION.md): shape, [16 source records](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/source-validation.json), and [fresh image installation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/fresh-install.json) for both Centaurs.
+- [Headless Chrome checks](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/browser-validation.json) cover both bodies at 1440 × 900 CSS pixels, DPR 1/2, after integration of `3badfb535`. Later PR #89 checks cover data integration; [default](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/evidence/bienor-default.png) and [close](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/evidence/bienor-close.png) captures retain their earlier build identities.
 
 ## Known problems
 
@@ -35,14 +35,18 @@ The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3
 
 The reference ellipsoid does not reproduce all observed light-curve asymmetry. The paper’s irregular-shape, contact-binary, albedo and satellite scenarios are alternatives rather than uniquely measured geometry. No ring or satellite is displayed because the selected occultations do not establish their geometry. Integrated light curves and spectra are not surface maps.
 
-[The source survey](../../../docs/centaur-population/README.md#source-survey-dispositions) records the selections and alternatives. Published papers are cited, not relicensed or bundled. Credits and reuse terms for the authored approximation, ESO panorama, Inter font and HYG metadata are in [NOTICE.md](NOTICE.md) and the manifest.
+[The source survey](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/README.md#source-survey-dispositions) records the selections and alternatives. Published papers are cited, not relicensed or bundled. Credits and reuse terms for the authored approximation, ESO panorama, Inter font and HYG metadata are in [NOTICE.md](NOTICE.md) and the manifest.
 
 ### Orbit
 
-This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `54598;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. [Independent vector comparisons](../../../docs/centaur-population/orbit-errors.json) sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.
+This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `54598;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. [Independent vector comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/centaur-population/orbit-errors.json) sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.
 
 ### Reproduction
 
-The [ellipsoid author](../../../docs/lucy-targets/author.mts), using [Centaur inputs](../../../docs/centaur-population/inputs.json), produces the authored geometry and grid thumbnail. The [terrestrial recipe](source/preparation/terrestrial.json) prepares geometry, texture and lighting for retained native PolyCSS raster triangles: 5,040 authored faces simplify to 480 body triangles. The [shared batch reproduction steps](../../../docs/centaur-population/README.md#reproduction) identify the remaining preparation owners.
+The [table tool](../../../tools/objects/source-authoring/README.md) reproduces the
+pinned radii from [measurements](source/measurements.json). The
+[navigation recipe](source/preparation/navigation.json) records the context image.
+
+The [terrestrial recipe](source/preparation/terrestrial.json) prepares geometry, texture and lighting for retained native PolyCSS raster triangles: 5,040 authored faces simplify to 480 body triangles. Use the [shared preparation commands](../../../.agents/skills/celestial-skill/references/implementation-map.md#commands-and-test-routing) to rebuild the scene.
 
 </details>

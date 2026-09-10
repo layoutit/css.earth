@@ -63,4 +63,3 @@ const report = { schema: "cssearth-earth-city-global-status@1", dataset: source.
   headsVerified: context.args.includes("--verify-heads") };
 console.log(JSON.stringify(report, null, 2));
 if (context.args.includes("--require-complete") && missing.length) process.exitCode = 1;
-

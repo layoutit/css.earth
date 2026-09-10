@@ -78,4 +78,3 @@ export function resampleMappedPageRgba(rgba: Uint8Array,sourceWidth: number,sour
   }
   return output;
 }
-

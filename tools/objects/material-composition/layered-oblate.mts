@@ -3720,7 +3720,7 @@ const scene = {
   },
   systemTransform,
   meshTransform,
-  
+
   preparedSurface,
   preparedLighting,
   fixedMaterialPlane: {
@@ -3746,7 +3746,7 @@ const scene = {
   ringMotionExpansionPlates: preparedRingMotionExpansionPlates,
   ringShadowPlane: croppedRingShadowTextureStyle(),
   ringPointGroups: preparedRingPointGroups,
-  
+
   bodyBands,
   interior: {
     schema: config.labels.label019,
@@ -4003,7 +4003,7 @@ function createRuntimeScenePlan(source:typeof scene) {
       leaf: runtimeLeaf(source.fixedMaterialPlane.leaf),
       interactionProjection: source.fixedMaterialPlane.interactionProjection,
     },
-    
+
     preparedRingSource: {
       planeVisualOrbitSeconds: source.preparedRingSource.planeVisualOrbitSeconds,
       [config.fields.gravitationalParameter]: source.preparedRingSource[config.fields.gravitationalParameter],
@@ -4038,7 +4038,7 @@ function createRuntimeScenePlan(source:typeof scene) {
       leaves: group.leaves.map(runtimeLeaf),
       expansionLeaves: group.expansionLeaves.map(runtimeLeaf),
     })),
-    
+
     bodyBands: source.bodyBands.map(runtimeBodyBand),
     interior: {
       schema: source.interior.schema,

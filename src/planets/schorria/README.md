@@ -15,7 +15,7 @@ The adopted diameter is **5.55 km** from [Alí-Lagoa & Delbo (2017), A&A603,A55]
 
 ## Evidence
 
-The [schorria validation record](../../../docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
+The [schorria validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.
 
 ## Known problems
 

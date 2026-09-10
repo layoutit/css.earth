@@ -11,7 +11,7 @@ async function files(root){const result=[];for(const entry of await readdir(root
 for(const {id} of selected){
  test(`${id}: authored object directory contains data and pinned sources only`,async()=>{
   const root=resolve(projectRoot,'src/planets',id),entries=await readdir(root,{withFileTypes:true});
-  for(const entry of entries)assert.ok(entry.isDirectory()?entry.name==='source'||entry.name==='prepared':(entry.name==='.gitignore'||entry.name.endsWith('.json')||/^(?:README|SOURCE|NOTICE|LICENSE)(?:[._-].*)?$/.test(entry.name)),`Executable/presentation owner leaked into object data: ${id}/${entry.name}`);
+  for(const entry of entries)assert.ok(entry.isDirectory()?entry.name==='source'||entry.name==='prepared':(entry.name==='.gitignore'||entry.name.endsWith('.json')||/^(?:README|NOTICE|LICENSE)(?:[._-].*)?$/.test(entry.name)),`Executable/presentation owner leaked into object data: ${id}/${entry.name}`);
   const prepared=await files(resolve(root,'prepared'));
   assert.ok(prepared.length>0,`Prepared data is missing: ${id}/prepared`);
   for(const path of await files(root))assert.equal(executable.test(path),false,`Object-specific executable remains: ${path}`);

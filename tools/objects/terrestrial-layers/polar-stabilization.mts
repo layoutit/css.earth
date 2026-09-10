@@ -212,4 +212,3 @@ function bilinearSample(source: RasterResult, sourceX: number, sourceY: number) 
     return top * (1 - mixY) + bottom * mixY;
   });
 }
-

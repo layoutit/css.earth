@@ -28,4 +28,3 @@ export async function writeCurvatureMaterial({ publicDirectory, material, densit
     `${material.output}${suffix}.webp`,
   ));
 }
-

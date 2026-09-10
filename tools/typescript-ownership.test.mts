@@ -15,7 +15,7 @@ function fixture(t: TestContext) {
     writeFileSync(join(root, path), text);
   };
   const manifest = (legacyAuthored: string[] = [], exceptions: Record<string, unknown> = {}) => write(
-    'docs/architecture/typescript-ownership.json',
+    'tools/typescript-ownership.json',
     JSON.stringify({ schemaVersion: 1, baselineCommit: '0'.repeat(40), legacyAuthored, exceptions }),
   );
   const stage = () => execFileSync('git', ['add', '--', '.'], { cwd: root });

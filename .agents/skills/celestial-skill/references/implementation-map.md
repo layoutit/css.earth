@@ -125,7 +125,7 @@ for availability; this reference does not establish merge or deployment status.
 | Deterministic surface samples, bounded overlap gains and observation selection | `tools/objects/terrestrial-layers/observation-mosaic.mts` |
 | Atlas baking and lossless observation-index output | `tools/objects/terrestrial-layers/radial-terrain.mts` |
 | Selection/level regressions and prepared provenance checks | `tools/objects/terrestrial-layers/observation-mosaic.test.mjs`, `tests/objects/unit/comet-67p/mosaic.test.mjs` |
-| Worked method, limitations and measured evidence | `docs/comets/67P-OSIRIS-COVERAGE.md`, `docs/comets/evidence/osiris-coverage.json` |
+| Worked method, limitations and measured evidence | [67P source and evidence account](../../../../src/planets/comet-67p/README.md) |
 
 Inspect the actual recipe/schema before reuse. The OSIRIS decoder and quality
 bits are instrument-specific; source identity, geometry qualification and

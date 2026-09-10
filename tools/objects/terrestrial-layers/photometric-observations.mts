@@ -157,5 +157,3 @@ export function matchObservedColorLevels(color: Pick<ReturnType<typeof composeCo
   }
   return levels;
 }
-
-

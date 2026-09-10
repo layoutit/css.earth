@@ -4,7 +4,7 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b14c081eeeb099631166df12668b5bc5892883d9033ed7abab9caa8c37c88696"
+    "sha256": "9eb903a779248167283e4134c9faa4193fd4e1c4e014934cf4ea57ead4368039"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -314,12 +314,12 @@
         "longitudeDirection": "east-positive",
         "referenceRadiusMeters": 9948
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Authored neutral image retained in Git.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -339,12 +339,12 @@
         "units": "km",
         "metersPerUnit": 1000
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Reacquire the archive input through source/preparation/acquisition.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
       "bytes": 3686921,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -373,12 +373,12 @@
         "type": "source-obj-uv",
         "description": "Two south polar azimuthal equidistant projections; source UVs identify each lobe."
       },
-      "acquisition": "Reacquire archive inputs through the pinned acquisition recipe; authored numerical inputs are reproduced by docs/trans-neptunian/author.py.",
+      "acquisition": "Reacquire the archive input through source/preparation/acquisition.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
       "bytes": 2882880,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -403,7 +403,7 @@
       "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "bytes": 9529,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -428,7 +428,7 @@
       "sha256": "e67c96c34f4bfd9f028373128ff05a3350e751c4bdb76932e35572e44207f6ef",
       "bytes": 5582,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -466,13 +466,13 @@
           "url": "/scenes/arrokoth/arrokoth-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-model-surface@2x.webp",
           "bytes": 119308,
           "sha256": "a0af64184a552756e7d6ad7253097dd4a28dd062eb1fd0d2e11970e9a8d0f89c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -506,19 +506,19 @@
           "url": "/scenes/arrokoth/arrokoth-albedo-thumbnail.webp",
           "bytes": 610,
           "sha256": "2e76824260e49b39725dafcdac028554d3825c160a4ae09320e26c90fff2339c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-legend.webp",
           "bytes": 58,
           "sha256": "aebcd74e76dd366669037255627ca7184e2a3c179dfde7e02b2055b248fbc845",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/arrokoth/arrokoth-albedo-surface@2x.webp",
           "bytes": 589518,
           "sha256": "f340d47302960824a87b15095a0be5f1614c74d26517d666235731d230fe72b0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

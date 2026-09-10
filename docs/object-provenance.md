@@ -103,8 +103,9 @@ This is not a claim of provenance for every scientific statement, every runtime
 byte, the shared sky, or remote geographic delivery. Authored information is
 recorded as authored content. Its reference links alone do not establish
 field-level scientific derivation. Shared scene credits retain their existing
-separate owner. Earth noise pages bind the modeled GeoJSON and exact prepared
-pages; this does not certify worldwide imagery coverage or remote availability.
+separate owner. The compiler also supports Earth noise page records, but those
+geographic views are absent from Earth's current descriptor. That binding does
+not certify worldwide imagery coverage or remote availability.
 
 ## Sources presentation metadata
 

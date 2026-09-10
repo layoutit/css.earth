@@ -149,4 +149,3 @@ function cssRotateZMatrix(degrees: number) {
 function round(value: number) {
   return Number(value.toFixed(12));
 }
-

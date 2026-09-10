@@ -1,52 +1,37 @@
 # TypeScript ownership
 
-All 421 authored JavaScript modules in the original ownership baseline now have strictly checked TypeScript owners. Integration with main at `8666462797772dc50bbebecd8618014f5e7bd16c` adds 38 further authored modules, also migrated and strictly checked. This includes preparation and acquisition tools, shared platform/navigation code, the application shell, package tooling, and source-authoring utilities under `docs/`. The original five duplicate runtime entry points delegate to existing typed owners.
+Application, preparation and source-authoring implementations use strictly checked TypeScript. Native Node tools use erasable `.mts` source; browser and package code is bundled from `.ts` or `.mts`. Compiled package imports retain their `.js` extension, while source-only Node imports name the actual `.mts` file. Preparation declarations come from their implementations.
 
-The baseline is `main` at `1fb76e44d6bf831e7ebcf0516b83c0b10e1716da`. The [inventory](typescript-ownership.json) has an empty `legacyAuthored` list. The guard rejects new authored JavaScript and imports that place production behavior inside excluded test or evidence directories.
+The [ownership inventory](../../tools/typescript-ownership.json) has no authored JavaScript backlog. Its guard inspects tracked and untracked nonignored code, rejects new implementation JavaScript, and rejects production imports from excluded test or evidence locations. It also inspects Astro frontmatter, client scripts and literal script sources. A file's name cannot hide an implementation inside a test directory.
 
-## What remains JavaScript
+## Where JavaScript belongs
 
-| Classification | Modules | Reason |
-| --- | ---: | --- |
-| Authored implementation and preparation | 0 | Every baseline owner is covered by a strict TypeScript project. |
-| Tests, fixtures and browser/oracle harnesses | 1,545 | Existing executable behavioral evidence remains usable without a test-only rewrite. |
-| Historical evidence harnesses | 81 | Exact paths with individual explanations; no blanket `docs/` exemption. |
-| Generated prepared output | 5 | Reproducible data modules with a named generator and checked source anchor. |
-| Preserved Cesium code | 3 | Upstream or reproduced code with exact provenance. |
-| Configuration boundaries | 2 | The existing Astro and ESLint entry points. |
-| Compatibility facades | 5 | AST-checked re-exports of typed implementations. |
+Existing tests, fixtures and browser/oracle harnesses remain executable JavaScript. Generated browser bundles and package distributions are ignored build products. The inventory names the other exceptions individually:
 
-Generated browser bundles and package distributions are JavaScript by design. They are ignored build products, not alternative implementation owners. Likewise, historical scientific inputs may name their original `.mjs` generator: those source records retain their pinned bytes. Preparation recognizes the old generator identity where necessary without executing a deleted implementation.
+- Five generated data modules, each with its generator and source anchor.
+- Three preserved Cesium modules with their upstream provenance.
+- The Astro and ESLint configuration entry points.
+- Five compatibility entry points that only re-export typed implementations.
 
-The five compatibility entry points are `src/platform/camera-math.mjs`, `sphere-drag.mjs`, `scene-lifetime.mjs`, `site/runtime-policy.mjs`, and `site/scene-contract.mjs`. Their allowed exports are explicit in the inventory; implementation statements are rejected.
+Those compatibility paths are `src/platform/camera-math.mjs`, `sphere-drag.mjs`, `scene-lifetime.mjs`, `site/runtime-policy.mjs`, and `site/scene-contract.mjs`. The guard checks their exact exports and rejects implementation statements. Historical source records retain the original generator identity and pinned bytes; a historical `.mjs` name does not execute a deleted implementation.
 
-## Checked implementation boundaries
+## Strict checking
 
-Native Node preparation tools use erasable `.mts` source. Browser, renderer and package source is bundled from `.ts` or `.mts`; public compiled imports retain their `.js` extension. Source-only Node imports point to the actual `.mts` file. Handwritten preparation declaration facades have been removed, and the preparation build now emits declarations from the implementation.
+`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and the typed browser-owner harness. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
 
-Offline adapters retain the actual types of the functions they import. External JSON starts as `unknown` and is checked at the consuming boundary. Source parsers validate the geometry, observations, prepared resources and optional capabilities that their algorithms consume. Array guards preserve known element types instead of widening checked readonly arrays to `any[]`.
+Node must satisfy `^22.18.0 || >=24.0.0`. Node strips types for native `.mts` execution; the TypeScript gates perform checking. Shell and native-tool configurations reject syntax requiring runtime transformation.
 
-`pnpm typecheck` covers packages and their tools, renderer, platform, preparation, root tools, source-authoring utilities, shell, Astro, the ownership tool, and the typed browser-owner harness. A separate compiler-program census confirms that all 459 migrated authored paths occur in strict projects; an empty JavaScript backlog alone is insufficient evidence.
+## Behavior and source comparisons
 
-Node must satisfy `^22.18.0 || >=24.0.0`. Node strips types for native `.mts` execution; the separate TypeScript gates perform checking. Shell and native-tool configurations reject syntax requiring runtime transformation.
+The migration preserves the generic object registry, shared shell and camera, retained DOM and prepared runtime data. Preparation owns geometry, textures, charts and source interpretation. Runtime transports and decodes those products.
 
-## Behavior and provenance
+The [celestial comparison](../../tools/evidence/celestial-typescript-parity.json) records exact equality for 52 freshly generated Mercury/Venus images from the original JavaScript and typed owners. The [presentation comparison](../../tools/evidence/presentation-typescript-parity.json) records complete raw presentation equality for identical pinned inputs. Each record identifies the compared owners and source hashes; these results do not claim reproduction of historical assets made from different recipes.
 
-The migration preserves the generic object registry, one shared shell and camera, retained DOM, and prepared runtime data. Preparation still owns geometry, textures, charts and source interpretation. Runtime transports and decodes those products.
+Full navigation preparation previously recompressed existing markers at Q75, while incremental publication retained decoded pixels. The owner now renders the pinned recipes, copies decoded tile rows and writes lossless atlases. Against the 406-body lossless baseline, both densities preserve exact alpha with at most one channel level of compositor rounding. The [navigation comparison](../../tools/evidence/navigation-lossless-atlases.json) records both this baseline and the later lossy publication, plus exact reproduction and publication rollback checks for the 432-body inventory. This is a preparation correction, separate from the JavaScript/TypeScript parity comparisons.
 
-Qualification includes source/runtime closure across the registry, malformed-input and tampering tests, native CSS preparation, original-JavaScript versus TypeScript comparisons, and real browser interaction. The [celestial receipt](typescript-celestial-validation.json) records exact equality for 52 freshly generated Mercury/Venus images. The [presentation receipt](typescript-presentation-validation.json) records complete raw output equality against the original JavaScript preparation helpers. These comparisons use identical inputs; they do not pretend historical accepted outputs were generated by a different recipe revision.
+An Earth texture-level recipe already had its new hash in the descriptor but its parent hash in the source manifest. The manifest now pins the existing recipe bytes. The correction changes no scientific input or texture-level parameter; provenance is rebuilt through its owner.
 
-Several existing fixtures assumed retired capabilities: Earth city paging, private per-object sky images, and depth partitions on bodies whose current topology is unpartitioned. Tests now exercise explicit retained paging fixtures, the shared universe's exact downloaded sky bytes, and an actual partitioned Mimas plan. Their rejection and retention assertions remain active. A fixture's optional capability does not enable that capability in the application.
-
-## Integration repairs
-
-The current registry contains 432 bodies. Main replaced the individual object pages with one shared dynamic route and prepared page metadata; those changes are retained. The new paging test fixture lives under `__fixtures__` and is included in the typed harness check.
-
-The navigation atlas reproduction check exposed two historical publication paths. Incremental additions retained decoded marker pixels, while a complete rebuild recomposited every tile and compressed it at Q75. Commit `bd265cf3a091c4ef17e9be76dfeb23410364884f` applied that compression to all existing markers, and subsequent additions retained those lossy pixels. Full preparation now renders the pinned recipes, copies decoded tile rows directly, and writes lossless atlases. Against the 406-body lossless baseline, both densities retain exact alpha and differ by at most one channel level from the old compositor's rounding. This is an explicit preparation repair; the earlier original-JavaScript versus TypeScript byte-parity receipts remain separate. The [navigation receipt](typescript-navigation-validation.json) records the source pins and both comparisons. The full reproduction test still requires exact encoded bytes.
-
-Main's Earth texture-level recipe also had a stale source-manifest entry: its descriptor already named the new recipe hash, while the manifest still named the parent revision without `textureLevels`. The manifest now pins the existing recipe bytes. No Earth scientific input or texture-level parameter was changed by that correction. Generated provenance is rebuilt through its owner.
-
-## Checks
+## Contributor checks
 
 ```sh
 pnpm check:typescript-ownership
@@ -58,9 +43,6 @@ pnpm test:renderer
 node --test --test-concurrency=1 src/platform/*.test.mjs src/navigation/*.test.mjs tools/*.test.mjs
 node --test --test-concurrency=1 site/test/*.test.mjs
 pnpm test:preparation
-node tools/typescript-ownership.mts --json
 ```
 
-The guard inspects tracked files and untracked nonignored files, including tracked files matched by ignore rules. Generated/vendor entries require existing provenance and matching source anchors; deleted exceptions fail. Test/evidence import checks cover JavaScript, TypeScript, Astro frontmatter, client scripts, and literal script sources. Runtime/source closure checks separately inspect executable dependency boundaries.
-
-The [validation receipt](typescript-ownership-validation.json) records the qualification commands and their actual outcomes. Migration ownership completion, browser qualification, a successful complete build, and GitHub mergeability are separate checks. Keep PR #84 draft until its qualification record is complete; merging is a separate operator action.
+Source/runtime closure, malformed-input and tampering tests, preparation comparisons and actual browser interaction provide different evidence. Record their current outcomes in the PR using the [template](../../.github/pull_request_template.md). A clean ownership inventory or typecheck alone does not prove application behavior or merge readiness.

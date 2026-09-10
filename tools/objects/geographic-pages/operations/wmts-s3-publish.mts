@@ -59,4 +59,3 @@ function run(args: string[],environment: NodeJS.ProcessEnv,capture=false){
     child.once("error",reject);child.once("exit",code=>code===0?accept(capture?Buffer.concat(chunks).toString("utf8"):""):reject(new Error(`rclone exited ${code}.`)));
   });
 }
-

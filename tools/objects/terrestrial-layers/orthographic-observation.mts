@@ -7,4 +7,3 @@ export function orthographicPoint(longitude: number, latitude: number, {centerLo
   return [radius * Math.cos(lat) * Math.sin(lon),
     radius * (Math.cos(lat0) * Math.sin(lat) - Math.sin(lat0) * Math.cos(lat) * Math.cos(lon))];
 }
-

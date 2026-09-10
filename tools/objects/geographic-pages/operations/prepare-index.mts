@@ -64,4 +64,3 @@ export function prepareCityIndex(pages: readonly CityRuntimePage[], dataset: str
   return { files, heads: [...nodes.values()].filter(node => node.level === 0)
     .sort((a, b) => a.key.localeCompare(b.key)).map(descriptor) };
 }
-

@@ -43,7 +43,8 @@ archive submission or second provenance format.
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
-| Reports and images under `docs/` | Original reports, screenshots and logs tied to the version tested |
+| Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
+| Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |
 
 Every file under `source/` needs a manifest entry. Body packages contain data,
@@ -112,9 +113,12 @@ license alone does not establish an input's terms.
 
 ## Save enough evidence to check the result
 
-Keep reports in their existing locations; new independent runs may use descriptive
-dated folders under `docs/evidence/`. No extra JSON format or fixed file set is required.
-Record:
+Store new original evidence with the body or shared test/tool that owns the claim,
+and link it from the existing body README or shared guide. Keep an artifact in the
+current tree when a maintained explanation or test needs it. Link historical
+reports at their exact Git revision; preserve their original contents there.
+Keep scratch captures and repetitive logs out of `docs/`. No extra JSON format
+or fixed file set is required. Record:
 
 - **What was tested:** bodies and views, code revision, and relevant source,
   prepared and runtime records. Link manifests. Save uncommitted changes, identify
@@ -162,15 +166,17 @@ availability. State what remains unknown.
 ## Update the docs with the change
 
 Update affected records, NOTICE credits/terms and the body README's explanation,
-results and known problems. Run relevant checks. For small corrections, append
-a dated result to the existing report; never overwrite failures or present old
-screenshots as new. Extend existing sections when adding a dataset.
+results and known problems. Extend existing sections when adding a dataset.
+Run relevant checks and summarize their results in the PR using the
+[template](../../.github/pull_request_template.md). Link the maintained account
+instead of adding a PR completion report to `docs/`.
 
-Commit the docs, source records and original evidence needed for review, including
-relevant failures and partial runs. Keep scratch output and repetitive logs ignored;
-explain unusually large additions once in the PR and use agreed storage. Historical
-evidence may be removed only after its replacement is authorized and verified.
-This contract authorizes neither uploads nor moving stored evidence.
+Commit source records and the evidence needed to review the change, including
+relevant failures. Each added artifact needs a named claim, explanation or test
+that uses it. Explain unusually large additions in the PR. Before removing an
+old report from the current tree, replace citations that still need it with
+verified links to its exact Git revision. Never rewrite its failures or present
+old screenshots as new.
 
 **PROVENANCE DOCUMENTATION** maintains shared guidance and resolves contradictions;
 contributors update instructions affected by their change without an extra approval

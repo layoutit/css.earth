@@ -30,7 +30,7 @@ type Inventory = {
 const javascript = /\.(?:c|m)?jsx?$/u;
 const code = /\.(?:[cm]?[jt]sx?|astro)$/u;
 const categories: Category[] = ['authored', 'test', 'evidence', 'generated', 'vendor', 'configuration', 'facade'];
-const manifestPath = 'docs/architecture/typescript-ownership.json';
+const manifestPath = 'tools/typescript-ownership.json';
 const astroCompiler: unknown = createRequire(import.meta.resolve('astro/package.json'))('@astrojs/compiler-rs');
 
 function isRecord(value: unknown): value is Record<string, unknown> {

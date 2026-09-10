@@ -8,12 +8,12 @@ Convex lightcurve model at the uncertain 1.2 km archive diameter.
 
 ## Evidence
 
-Recorded four-body results retain their [original build identities](../../../docs/non-belt-populations/README.md#evidence-identity).
+Recorded four-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).
 
-- Original mesh, scalar and sampled distance checks are in the [qualification record](../../../docs/near-earth-population/qualification.json). These are sampled distances, not an exhaustive Hausdorff bound or source-model accuracy.
+- Original mesh, scalar and sampled distance checks are in the [qualification record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/qualification.json). These are sampled distances, not an exhaustive Hausdorff bound or source-model accuracy.
 - Production browser checks passed at DPR 1 and 2. Settings was hidden, so optional
   Shadows was exercised through a bound control event.
-  [Browser record](../../../docs/near-earth-population/browser-validation.json) · [Source restoration](../../../docs/near-earth-population/source-restoration.json) · [Fresh asset installation](../../../docs/near-earth-population/fresh-install.json).
+  [Browser record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/browser-validation.json) · [Source restoration](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/source-restoration.json) · [Fresh asset installation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/near-earth-population/fresh-install.json).
 
 ## Known problems
 

@@ -7,7 +7,7 @@ import {decodeEncounterFits} from './encounter-fits.mts';
 import {encounterCamera} from './encounter-camera.mts';
 import {validateEncounterRegistration} from './encounter-registration.mts';
 const root=resolve(import.meta.dirname,'../../..');
-const anchors=JSON.parse(await readFile(resolve(root,'docs/comets/evidence/encounter-decoder-anchors.json')));
+const anchors=JSON.parse(await readFile(resolve(root,'tests/objects/fixtures/comets/encounter-decoder-anchors.json')));
 for(const body of ['comet-81p','comet-9p','comet-103p'])test(`${body}: real source pixels match independent FITS decoding and all cameras pass held-out controls`,async()=>{
  const source=resolve(root,`src/planets/${body}/source`),recipe=JSON.parse(await readFile(resolve(source,'preparation/terrestrial.json'))),manifest=JSON.parse(await readFile(resolve(source,'manifest.json')));
  const shape=manifest.inputs.find(e=>e.path===recipe.geometry.radialTerrain.path);

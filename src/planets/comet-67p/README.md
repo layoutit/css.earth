@@ -13,7 +13,7 @@
 | Geology | [ESA OSIRIS geological map, v1.0](https://doi.org/10.5270/esa-kokoti7) | Lines and dots mark mapped features; their display widths are not measured sizes. |
 
 The displayed rotation phase is arbitrary. Grid marks missing or rejected imagery.
-The [southern coverage report](../../../docs/comets/67P-SOUTHERN-OSIRIS.md) describes
+The [southern coverage report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-SOUTHERN-OSIRIS.md) describes
 the current eight-image selection and its calibration.
 
 ## Evidence
@@ -22,16 +22,16 @@ Recorded results for the southern coverage update:
 
 - **Coverage:** estimated accepted area rose from 56.25% to 71.26%, using 24
   deterministic samples per triangle, weighted by area. This measures the displayed
-  mesh, not exact coverage of the nucleus. [Coverage record](../../../docs/comets/evidence/67p-southern/coverage.json).
+  mesh, not exact coverage of the nucleus. [Coverage record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/coverage.json).
 - **Browser:** 15 conformance cases passed before integration with `7ae81ba2d`.
   Later production captures at DPR 1 and 2 are recorded separately.
-  [Conformance](../../../docs/comets/evidence/67p-southern/conformance.json) · [Integration results](../../../docs/comets/evidence/67p-southern/integration.json).
+  [Conformance](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/conformance.json) · [Integration results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/integration.json).
 - **Delivery:** a fresh installation verified all 56 runtime assets (21,933,880
   bytes) against their hashes, with no reused local files.
-  [Delivery record](../../../docs/comets/evidence/67p-southern/runtime-delivery.json).
+  [Delivery record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/runtime-delivery.json).
 
 The wider recorded runs include two missing Europa originals, three Earth fixture
-failures and two registry-audit failures. The [report](../../../docs/comets/67P-SOUTHERN-OSIRIS.md#verification-records)
+failures and two registry-audit failures. The [report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-SOUTHERN-OSIRIS.md#verification-records)
 separates those results from the comet checks. Earlier runs are retained below.
 
 ## Known problems
@@ -135,7 +135,7 @@ a median absolute deviation of log ratios ≤0.25 and gains within a 1.35× budg
 The first image is the reference; final gains range from 0.908 to 1.157.
 
 The fit uses 64 samples per triangle. An independent set of 63 disjoint samples
-produces gains within 0.8% of those values. [Calibration check](../../../docs/comets/evidence/67p-southern/calibration.json).
+produces gains within 0.8% of those values. [Calibration check](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/calibration.json).
 These residual adjustments follow the disk and phase corrections below.
 
 The lossless source-index raster identified by `prepared/osiris-source-index.json`
@@ -201,26 +201,26 @@ The retired six-image mosaic included September 13 and 20, 2014 exposures. Maxim
 errors on source pixels withheld from camera fitting were 0.00190 and 0.00161
 pixels. Their original [September 13](source/reference/n20140913-200612-geo.lbl)
 and [September 20](source/reference/n20140920-133916-geo.lbl) labels remain available.
-[Numerical results](../../../docs/comets/evidence/surface-imagery-qualification.json).
+[Numerical results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-qualification.json).
 
 #### Earlier runs
 
-The [six-image report](../../../docs/comets/SURFACE-IMAGERY.md) recorded coverage
+The [six-image report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/SURFACE-IMAGERY.md) recorded coverage
 rising from 56.04% to 56.25%; the September pair supplied an estimated 1.76% of the
 displayed area. At application commit [87ddd9680f](https://github.com/layoutit/cssEarth/commit/87ddd9680f76082eedd9915e86bda3253311b0f3),
 60 comet browser cases passed; the renderer suite had 367 passes and nine failures.
-[Browser results](../../../docs/comets/evidence/surface-imagery-browser.json) · [Conformance](../../../docs/comets/evidence/surface-imagery-conformance.json) · [Suite results](../../../docs/comets/evidence/surface-imagery-validation.json).
+[Browser results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-browser.json) · [Conformance](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-conformance.json) · [Suite results](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-validation.json).
 
 That four-comet run downloaded 16 new source files and installed 167 runtime files;
 sizes and hashes matched, while older inputs were copied.
-[Restoration](../../../docs/comets/evidence/surface-imagery-source-restore.json) · [Installation](../../../docs/comets/evidence/surface-imagery-delivery.json).
-Its [matched comparisons](../../../docs/comets/SURFACE-IMAGERY.md#matched-visual-comparisons)
+[Restoration](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-source-restore.json) · [Installation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/surface-imagery-delivery.json).
+Its [matched comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/SURFACE-IMAGERY.md#matched-visual-comparisons)
 include local-only screenshot links. Its Shadows test used a hidden input, so it
 did not prove a user could open Settings.
 
-The [initial photographic trial](../../../docs/comets/67P-OSIRIS-TRIAL.md) retains
-its original unnormalized camera comparison. [First integration](../../../docs/comets/67P-OSIRIS-INTEGRATION.md),
-[four-image mosaic](../../../docs/comets/67P-OSIRIS-COVERAGE.md) and [original tests](../../../docs/comets/QUALIFICATION.md)
+The [initial photographic trial](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-OSIRIS-TRIAL.md) retains
+its original unnormalized camera comparison. [First integration](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-OSIRIS-INTEGRATION.md),
+[four-image mosaic](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-OSIRIS-COVERAGE.md) and [original tests](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/QUALIFICATION.md)
 retain their earlier versions and results.
 
 </details>
@@ -243,7 +243,7 @@ feature sizes.
 
 Missing or unreliable surface correspondence remains gridded.
 
-See the [geology report](../../../docs/comets/67P-GEOLOGY.md) for the projection checks and
+See the [geology report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-GEOLOGY.md) for the projection checks and
 symbol rules.
 
 The Rosetta archive `RO-C-VIRTIS-5-67P-MAPS-V1.0` supplies albedo, spectral slope, 3.2 µm
@@ -251,7 +251,7 @@ absorption and modeled ice maps from August–September 2014. These are separate
 separate legends. Modeled ice is a model result.
 
 Registration is approximate; missing samples and ambiguous mapping near the neck remain
-gridded. The [VIRTIS report](../../../docs/comets/67P-VIRTIS.md) contains the decoding and
+gridded. The [VIRTIS report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/67P-VIRTIS.md) contains the decoding and
 registration method.
 
 </details>

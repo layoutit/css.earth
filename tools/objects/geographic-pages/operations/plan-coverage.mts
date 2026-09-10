@@ -37,4 +37,3 @@ export function* planCityCoverage(scene: GeographicScene,catalog: ReadonlyMap<st
   }
   for(const root of roots)yield* visit(root);
 }
-

@@ -44,4 +44,3 @@ export const body = (
   gravitationalParameterKm3PerS2: number,
   parent: BodyId | null,
 ): BodyData => ({ id, name, horizonsCode, meanRadiusKm, gravitationalParameterKm3PerS2, parent })
-

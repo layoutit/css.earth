@@ -55,7 +55,12 @@ function harness({ definition = moonDefinition, failAtElement = null, stageId = 
       createResources(options) {
         resourceOptions = options;
         resources = createPreparedResidency({ ...options, createImage() { return { src: "", naturalWidth: 1, naturalHeight: 1,
-          decode() { return new Promise((resolve, reject) => jobs.push({ resolve, reject, image: this, done: false })); },
+          decode() {
+            // This controlled native-image stub accounts for the declared
+            // decoded bytes; actual image geometry is covered by preparation.
+            this.naturalWidth = (definition.assets.entries.find(entry => entry.url === this.src)?.decodedBytes ?? 4) / 4;
+            return new Promise((resolve, reject) => jobs.push({ resolve, reject, image: this, done: false }));
+          },
           removeAttribute(name) { if (name === "src") this.src = ""; } }; } });
         return resources;
       },

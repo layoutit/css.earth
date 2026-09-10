@@ -85,7 +85,7 @@ test('NASA full coverage, published bins, and independently decoded pixels survi
   assert.equal(sha256(bytes), receipt.mosaic.sha256);
   const { data, info } = await sharp(bytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   assert.equal(info.width, 16384); assert.equal(info.height, 8192);
-  const witnesses = JSON.parse(await readFile('docs/evidence/earth-enso/mur-native-witnesses.json'));
+  const witnesses = JSON.parse(await readFile('tests/objects/fixtures/earth-enso/mur-native-witnesses.json'));
   for (const witness of witnesses.records) {
     const [x, y] = witness.outputPixel, offset = (y * info.width + x) * 3;
     assert.deepEqual([...data.subarray(offset, offset + 3)], witness.expectedMosaicRgb, witness.name);

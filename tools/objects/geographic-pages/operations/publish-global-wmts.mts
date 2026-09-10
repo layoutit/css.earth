@@ -104,4 +104,3 @@ try {
   report.complete = true;
 } catch (error) { report.error = error instanceof Error ? error.message : String(error); throw error; }
 finally { await writeFile(resolve(output, "report.json"), JSON.stringify(report, null, 2) + "\n"); }
-

@@ -460,4 +460,3 @@ async function assetDescriptor(path:string, width:number, height:number) {
 }
 
 }
-

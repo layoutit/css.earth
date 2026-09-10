@@ -26,7 +26,6 @@
   },
   "include": [
     "**/*.mts",
-    "../docs/**/*.mts",
     "../site/env.d.ts"
   ],
   "exclude": [
