@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "lutetia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "53e9317e68341468b8006cf1cd0b4caf9484ce18e37c2e853311d4227ef154bd"
+    "sha256": "d145e8397c827a47604e7a43cc61566a9dcc16ae062207d16d7e3299cfb753d3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -432,6 +432,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lutetia-lutetia-shape",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
       "bytes": 2954640,
       "dependencies": [],
@@ -456,6 +466,16 @@
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
       "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lutetia-lutetia-observations-n20100710t154047674id4df22-img",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
       "bytes": 37775872,
       "dependencies": [],
@@ -480,6 +500,10 @@
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
       "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
       "bytes": 5070,
       "dependencies": [],
@@ -496,6 +520,16 @@
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
       "acquisition": "Restore the pinned original with source/preparation/acquisition.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lutetia-lutetia-n20100710t154135529id4df22-img",
+            "role": "material",
+            "evidence": "src/planets/lutetia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      },
       "sha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
       "bytes": 37775872,
       "dependencies": [],
@@ -523,6 +557,10 @@
       "license": "Public scientific archive; retain original notices and full source attribution.",
       "redistribution": "Attributed scientific display derivatives and original source records.",
       "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "bytes": 5104,
       "dependencies": [],
@@ -533,6 +571,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

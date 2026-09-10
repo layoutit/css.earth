@@ -1,5 +1,5 @@
 {
-  "schema": "cssapophis-authoritative-sources@1",
+  "schema": "cssapophis-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/apophis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "apophis-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The weak 2012–2013 radar data admit multiple shapes; the 2026 PDS release preserves the 2018 Model B rather than a new reconstruction. Apophis tumbles: the archived precession and rotation periods are 27.45 and 265.7 hours. This view uses a fixed illustrative frame, without propagating its tumbling attitude. No optical surface map is supplied.",
       "expectedBytes": 197868,
-      "expectedSha256": "226c330bafda3a773533779228a01cf2a009e8d611f209329e872433fc00e266"
+      "expectedSha256": "226c330bafda3a773533779228a01cf2a009e8d611f209329e872433fc00e266",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-apophis-apophis-shape",
+            "role": "material",
+            "evidence": "src/planets/apophis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/apophis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "apophis-research-apophis-2018",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 2680618,
-      "expectedSha256": "3f95993fcc37d0e6da5cc52eea19084e3c0905a09e4eebca87db52a2c12ee585"
+      "expectedSha256": "3f95993fcc37d0e6da5cc52eea19084e3c0905a09e4eebca87db52a2c12ee585",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-apophis-apophis-research-apophis-2018",
+            "role": "method",
+            "evidence": "src/planets/apophis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 8853,
-      "expectedSha256": "6ffb96ea98ef0c0265fbaaf2c5fb676ddf6fc84dfc1652a919dbd7653c6cf3cc"
+      "expectedSha256": "6ffb96ea98ef0c0265fbaaf2c5fb676ddf6fc84dfc1652a919dbd7653c6cf3cc",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

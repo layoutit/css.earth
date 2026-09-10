@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "triton",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "723d65e146ae88aa8dac3b6c4f92cb1c2035959b265cff5e13f9b9548ac3a188"
+    "sha256": "f6321c266c18d1c67b7349cf0899189cf911e5f17eae8bfc8850b55c683f6fd2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -393,6 +393,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-triton-enhanced-color",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "ff533af3163f53cc5560cd983cfe0f06b1c2cd0f3db36518d4c5cc5f5ddfeabb",
       "bytes": 12442504,
       "dependencies": [],
@@ -419,6 +429,16 @@
       ],
       "acquisition": "Pinned source response",
       "redistribution": "Retain NASA/JPL credit",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-triton-sun-vectors",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "0204e69032f964e6cde29c866bea48fff33c34d6db2947ab0bd2d43107c18779",
       "bytes": 12149,
       "dependencies": [],
@@ -438,6 +458,16 @@
       ],
       "acquisition": "Pinned source response",
       "redistribution": "Retain NASA/JPL credit",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-triton-observer-vectors",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      },
       "sha256": "1f3e3ca7884365b866b5c26dc6243932dec7da61e927ed5614a5633a3382e32d",
       "bytes": 13670,
       "dependencies": [],
@@ -471,6 +501,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-usgs-2023-triton-clear-frames",
+            "role": "material",
+            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "59c2a4133472869afddc42c00b5a9becd7c0dda028ac646490af933ac0ce2fac",
       "bytes": 103721158,
       "dependencies": [],
@@ -488,6 +528,10 @@
     {
       "path": "content/object.json",
       "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

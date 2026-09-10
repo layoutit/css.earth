@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "veritas",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2b6eb0116fbbb16197054210d8232dfc87cf91f4a44c47590d7b3811ec7f2957"
+    "sha256": "2eb03855d2a960443178b3fa20d53f7c1382435b488cb82650eae7e908400269"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 59401.5
       },
       "coverage": "Published convex light-curve model 833. Approximate scale from a thermal diameter of 118.8 ± 1.83 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-3214",
+            "role": "material",
+            "evidence": "src/planets/veritas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "4b038d538898e8c11f692d3f034461d6cd06c41ece0c30f1d0b72d7ee4bca39a",
       "bytes": 82465,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "bdcfd1d32f2993633cb6ef9f81c11595ed780838b60d3af23e385692bb285907",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

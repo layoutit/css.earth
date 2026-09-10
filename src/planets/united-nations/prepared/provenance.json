@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "united-nations",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1749ec243806325612f2271b8c0645cafbd6bee8412abb0802112af1c73e07ab"
+    "sha256": "117ab531fd6d8303e453b08d6a0aaa9ccb1376177ed57112a6766320c4da847a"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 5500
       },
       "coverage": "Published convex light-curve model 1154. Approximate scale from a thermal diameter of 11 ± 0.295 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-4203",
+            "role": "material",
+            "evidence": "src/planets/united-nations/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "9f8df63e5658a5f6657a6f9abaa9ca55ed8adbc4712304e6d313c23e28f9167a",
       "bytes": 45528,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "7d104d6076bbecf5b345ae5ef6fc899d5b04209e050efaa72a63c861ace31175",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

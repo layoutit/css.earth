@@ -1,5 +1,5 @@
 {
-  "schema": "cssphobos-authoritative-sources@1",
+  "schema": "cssphobos-authoritative-sources@2",
   "inputs": [
     {
       "id": "stooke-mosaic",
@@ -47,6 +47,16 @@
             "reason": "The preserved source credits Viking collectively and does not identify which individual orbiter supplied these observations."
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phobos-stooke-mosaic",
+            "role": "material",
+            "evidence": "src/planets/phobos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -75,7 +85,17 @@
         "type": "body-fixed-mesh",
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m."
+      "coverage": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phobos-ernst-2023-shape",
+            "role": "material",
+            "evidence": "src/planets/phobos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -92,7 +112,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/phobos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -109,7 +139,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/phobos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "credit": "Carolyn Ernst and colleagues; JHU/APL Small Body Mapping Tool",
@@ -128,7 +168,17 @@
       ],
       "expectedBytes": 34508570,
       "expectedSha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
-      "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement."
+      "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phobos-phobos-facet-science",
+            "role": "material",
+            "evidence": "src/planets/phobos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -164,7 +214,11 @@
       "path": "content/object.json",
       "expectedBytes": 11394,
       "expectedSha256": "4ab5908b8965c98366e9b82b3e4730c9e2aeac3f4f0e057f260ada1dd47824f5",
-      "purpose": "Authored content, source documentation or preparation metadata."
+      "purpose": "Authored content, source documentation or preparation metadata.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

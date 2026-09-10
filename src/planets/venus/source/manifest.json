@@ -1,5 +1,5 @@
 {
-  "schema": "cssvenus-authoritative-sources@1",
+  "schema": "cssvenus-authoritative-sources@2",
   "inputs": [
     {
       "id": "venus-physical-solar-system-recipe",
@@ -16,7 +16,11 @@
         "sky-sun",
         "system-markers",
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "inter-venus-title-vector",
@@ -30,7 +34,13 @@
       "redistribution": "project-authored SVG outline with Inter attribution",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "inter-venus-title-vector",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-venus-navigation-disc",
@@ -47,7 +57,17 @@
       "redistribution": "checked NASA image with full credit and no endorsement claim",
       "consumers": [
         "navigation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-nasa-venus-navigation-disc",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "venus-venera-surface-gallery-metadata",
@@ -65,7 +85,13 @@
       "redistribution": "project-authored factual descriptions with institutional attribution",
       "consumers": [
         "surface-gallery"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "venus-venera-surface-gallery-metadata",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "venus-venera-9-surface-panorama",
@@ -84,7 +110,17 @@
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
       "consumers": [
         "surface-gallery"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-venus-venera-9-surface-panorama",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "venus-venera-10-surface-panorama",
@@ -103,7 +139,17 @@
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
       "consumers": [
         "surface-gallery"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-venus-venera-10-surface-panorama",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "venus-venera-13-surface-panorama",
@@ -122,7 +168,17 @@
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
       "consumers": [
         "surface-gallery"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-venus-venera-13-surface-panorama",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "venus-venera-14-surface-panorama",
@@ -141,7 +197,17 @@
       "redistribution": "exact institutional archive bytes with provenance and rights qualification",
       "consumers": [
         "surface-gallery"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-venus-venera-14-surface-panorama",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-venus-clouds",
@@ -159,7 +225,17 @@
       "consumers": [
         "scene",
         "lenses"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-openspace-venus-clouds",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "usgs-nasa-magellan-synthetic-color-wms",
@@ -188,6 +264,12 @@
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "usgs-nasa-magellan-synthetic-color-wms",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
       }
     },
     {
@@ -217,6 +299,12 @@
             "evidence": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "usgs-nasa-magellan-colorized-topography-wms",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
       }
     },
     {
@@ -231,7 +319,17 @@
       "redistribution": "permitted with the OpenSpace MIT notice",
       "consumers": [
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-openspace-venus-globe-specification",
+            "role": "method",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-venus-atmosphere-specification",
@@ -246,7 +344,17 @@
       "consumers": [
         "scene",
         "materials"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-openspace-venus-atmosphere-specification",
+            "role": "method",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-venus-cloud-layer-specification",
@@ -261,7 +369,17 @@
       "consumers": [
         "scene",
         "lenses"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-openspace-venus-cloud-layer-specification",
+            "role": "method",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-venus-radar-tms-specification",
@@ -276,7 +394,17 @@
       "consumers": [
         "scene",
         "lenses"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-openspace-venus-radar-tms-specification",
+            "role": "method",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-venus-dem-tms-specification",
@@ -291,7 +419,17 @@
       "consumers": [
         "scene",
         "lenses"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-openspace-venus-dem-tms-specification",
+            "role": "method",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-psg-venus-expanded-configuration",
@@ -306,7 +444,13 @@
       "consumers": [
         "spectrum",
         "temperature-pressure-profile"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-venus-expanded-configuration",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-psg-venus-r240-rif-response",
@@ -320,7 +464,13 @@
       "redistribution": "checked model response with NASA attribution",
       "consumers": [
         "spectrum"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-venus-r240-rif-response",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "hyg-v41-venus-field",
@@ -335,7 +485,17 @@
       "consumers": [
         "scene",
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-hyg-v41-venus-field",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -354,7 +514,17 @@
       "consumers": [
         "scene",
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-venus-sun-oracle-asset",
@@ -369,7 +539,17 @@
       "consumers": [
         "starfield",
         "sun-oracle"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-venus-google-maps-venus-sun-oracle-asset",
+            "role": "material",
+            "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-venus-sun-oracle-measurements",
@@ -386,7 +566,13 @@
         "materials",
         "starfield",
         "sun-oracle"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "google-maps-venus-sun-oracle-measurements",
+        "evidence": "src/planets/venus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "venus-object-content",
@@ -403,7 +589,11 @@
         "lenses",
         "charts",
         "surface-gallery"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "venus-chart-assets",
@@ -418,7 +608,11 @@
       "consumers": [
         "charts",
         "surface-gallery"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "venus-preparation-acquisition",
@@ -435,7 +629,11 @@
         "charts",
         "lenses",
         "surface-gallery"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "venus-preparation-navigation",
@@ -449,7 +647,11 @@
       "redistribution": "Prepared navigation asset.",
       "consumers": [
         "navigation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "venus-preparation-geometry",
@@ -464,7 +666,11 @@
       "consumers": [
         "scene",
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "venus-preparation-celestial",
@@ -480,7 +686,11 @@
         "sky-sun",
         "starfield",
         "system-markers"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "venus-preparation-presentation",
@@ -494,7 +704,11 @@
       "redistribution": "Prepared CSS presentation capabilities.",
       "consumers": [
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "venus-preparation-raster",
@@ -509,7 +723,11 @@
       "consumers": [
         "assets",
         "lenses"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "venus-surface-minimap-frame",
@@ -524,7 +742,11 @@
       "consumers": [
         "lenses",
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     }
   ],
   "generatedIntermediates": [],

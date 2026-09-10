@@ -1,5 +1,5 @@
 {
-  "schema": "csscomet-81p-authoritative-sources@1",
+  "schema": "csscomet-81p-authoritative-sources@2",
   "inputs": [
     {
       "id": "pds-shape",
@@ -16,7 +16,17 @@
       "redistribution": "Public scientific data; retain dataset identification and author attribution.",
       "consumers": [
         "shape"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-pds-shape",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "pds-observed-reference",
@@ -33,7 +43,17 @@
       "redistribution": "Public scientific data; retain dataset identification and author attribution.",
       "consumers": [
         "shape"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-pds-observed-reference",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "model-surface",
@@ -68,6 +88,10 @@
         "width": 512,
         "height": 256,
         "observedColor": "#b8b6b2"
+      },
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
       }
     },
     {
@@ -85,7 +109,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -102,7 +136,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "n2073we02-rr-path",
@@ -119,7 +163,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-n2073we02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "n2073we02-rr-labelPath",
@@ -136,7 +190,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-n2073we02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "n2073we02-rr-controlPath",
@@ -153,7 +217,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "n2075we02-rr-path",
@@ -170,7 +238,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-n2075we02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "n2075we02-rr-labelPath",
@@ -187,7 +265,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-n2075we02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "n2075we02-rr-controlPath",
@@ -204,7 +292,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "n2077we02-rr-path",
@@ -221,7 +313,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-n2077we02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "n2077we02-rr-labelPath",
@@ -238,7 +340,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-n2077we02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "n2077we02-rr-controlPath",
@@ -255,7 +367,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "stereo-trajectory-fit",
@@ -272,7 +388,17 @@
       "redistribution": "Retain attribution and product identity.",
       "consumers": [
         "encounter-frame-reference"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-stereo-trajectory-fit",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "stereo-trajectory-lbl",
@@ -289,7 +415,17 @@
       "redistribution": "Retain attribution and product identity.",
       "consumers": [
         "encounter-frame-reference"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-stereo-trajectory-lbl",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "n2079we02-rr-path",
@@ -306,7 +442,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-n2079we02-rr-path",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "n2079we02-rr-labelPath",
@@ -323,7 +469,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-81p-n2079we02-rr-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-81p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "n2079we02-rr-controlPath",
@@ -340,7 +496,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-navcam"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -381,7 +541,11 @@
       "path": "content/object.json",
       "expectedBytes": 4471,
       "expectedSha256": "54dd5e5150b7c8cd7792d9e38034486f1073561fe154dfe528793d1b32ed9ef0",
-      "purpose": "Wild 2 source evidence or authored preparation input."
+      "purpose": "Wild 2 source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

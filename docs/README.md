@@ -27,6 +27,7 @@ same workflow and implementation.
 
 ## Proposals under discussion
 
+- [SOURCES catalogue](architecture/sources-catalogue-proposal.md) — canonical source identity, local evidence, derived usage and migration.
 - [Missions, spacecraft and dataset attribution](architecture/exploration-catalog.md) — catalogue ownership, capture migration, preparation and dataset navigation.
 - [Spacecraft and individual mission catalogues](architecture/spacecraft-missions-proposal.md)
 
@@ -54,3 +55,5 @@ For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
 run `python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.
 This reads committed files; add `--index` to include the staged change. It does
 not acquire sources or qualify scientific claims.
+
+- [Sources catalogue](sources-catalogue.md): published identities, bindings, preparation and coverage.

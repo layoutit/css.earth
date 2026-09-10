@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-authoritative-sources@1",
+  "schema": "cssearth-authoritative-sources@2",
   "inputs": [
     {
       "id": "geonames-cities15000-zip",
@@ -16,7 +16,17 @@
       "redistribution": "CC-BY-4.0 with GeoNames attribution",
       "consumers": [
         "places"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-geonames-cities15000-zip",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "geonames-countryinfo-txt",
@@ -33,7 +43,17 @@
       "redistribution": "CC-BY-4.0 with GeoNames attribution",
       "consumers": [
         "places"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-geonames-countryinfo-txt",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "geonames-admin1codesascii-txt",
@@ -50,7 +70,17 @@
       "redistribution": "CC-BY-4.0 with GeoNames attribution",
       "consumers": [
         "places"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-geonames-admin1codesascii-txt",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "geonames-readme-geonames-txt",
@@ -67,7 +97,17 @@
       "redistribution": "CC-BY-4.0 with GeoNames attribution",
       "consumers": [
         "places"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-geonames-readme-geonames-txt",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-earth-navigation-globe",
@@ -84,7 +124,17 @@
       "redistribution": "NASA image with credit and no endorsement claim",
       "consumers": [
         "navigation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-earth-navigation-globe",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-blue-marble-december",
@@ -111,6 +161,16 @@
             "spacecraftId": "terra",
             "missionId": "terra",
             "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-blue-marble-december",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
         ]
       }
@@ -142,6 +202,16 @@
             "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-blue-marble-july",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
       }
     },
     {
@@ -159,7 +229,17 @@
       "redistribution": "NASA image with credit and no endorsement claim",
       "consumers": [
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-blue-marble-clouds",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-black-marble-2016",
@@ -186,6 +266,16 @@
             "evidence": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-black-marble-2016",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
       }
     },
     {
@@ -205,7 +295,17 @@
         "editorial",
         "panel",
         "interior"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-earth-editorial-record",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-psg-earth-configuration",
@@ -219,7 +319,13 @@
       "redistribution": "checked text configuration with NASA attribution",
       "consumers": [
         "spectrum"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-earth-configuration",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-psg-earth-spectrum",
@@ -233,7 +339,13 @@
       "redistribution": "checked numerical model response with NASA attribution",
       "consumers": [
         "spectrum"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-earth-spectrum",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "openspace-earth-globe-config",
@@ -247,7 +359,17 @@
       "redistribution": "permitted with OpenSpace MIT notice",
       "consumers": [
         "source-verification"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-openspace-earth-globe-config",
+            "role": "method",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-earth-atmosphere-config",
@@ -261,7 +383,17 @@
       "redistribution": "permitted with OpenSpace MIT notice",
       "consumers": [
         "atmosphere"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-openspace-earth-atmosphere-config",
+            "role": "method",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "google-earth-pro-atmosphere-presentation-response",
@@ -275,7 +407,11 @@
       "redistribution": "Factual response measurements and a clean-room prepared approximation only.",
       "consumers": [
         "atmosphere"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "inter-earth-title-font",
@@ -292,7 +428,17 @@
       "redistribution": "permitted under SIL OFL 1.1",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "hyg-v41-earth-field",
@@ -309,7 +455,17 @@
       "redistribution": "permitted under CC BY-SA 4.0 with attribution and share-alike",
       "consumers": [
         "stars"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hyg-v41",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "hyg-v41-earth-cubic-sky-registration",
@@ -326,7 +482,13 @@
       "redistribution": "Share-alike prepared subset with attribution and license evidence.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "hyg-v41-earth-cubic-sky-registration",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "eso-earth-milky-way-panorama",
@@ -344,7 +506,17 @@
       "consumers": [
         "starfield",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-earth-cubic-sky-sun-oracle-asset",
@@ -360,7 +532,17 @@
         "starfield",
         "sun-oracle",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-google-maps-earth-cubic-sky-sun-oracle-asset",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-earth-cubic-sky-sun-oracle-measurements",
@@ -377,7 +559,13 @@
         "sun-oracle",
         "scene",
         "lighting"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "google-maps-earth-cubic-sky-sun-oracle-measurements",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "buenos-aires-noise-source",
@@ -395,7 +583,17 @@
       "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
       "consumers": [
         "noise-lens"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-buenos-aires-noise-source",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      }
     },
     {
       "id": "buenos-aires-noise-pin",
@@ -413,7 +611,17 @@
       "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
       "consumers": [
         "noise-lens"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-buenos-aires-noise-pin",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      }
     },
     {
       "id": "worldcover-wmts-release",
@@ -430,7 +638,17 @@
       "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
       "consumers": [
         "city-wmts"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-worldcover-wmts-release",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      }
     },
     {
       "id": "worldcover-geographic-rebind",
@@ -447,7 +665,17 @@
       "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
       "consumers": [
         "city-wmts"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-worldcover-geographic-rebind",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
+      }
     },
     {
       "id": "noaa-coraltemp-anomaly",
@@ -464,7 +692,17 @@
       "redistribution": "Retained NOAA data with attribution",
       "consumers": [
         "enso"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-noaa-coraltemp-anomaly",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+          }
+        ]
+      }
     },
     {
       "id": "noaa-coraltemp-checksum",
@@ -481,7 +719,17 @@
       "redistribution": "Retained NOAA data with attribution",
       "consumers": [
         "enso"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-noaa-coraltemp-checksum",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-mur-gibs-tiles",
@@ -498,7 +746,13 @@
       "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
       "consumers": [
         "enso"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-mur-gibs-tiles",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-mur-gibs-receipt",
@@ -515,7 +769,17 @@
       "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
       "consumers": [
         "enso"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-mur-gibs-receipt",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-mur-gibs-layer",
@@ -532,7 +796,17 @@
       "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
       "consumers": [
         "enso"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-mur-gibs-layer",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-mur-gibs-colormap",
@@ -549,7 +823,17 @@
       "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
       "consumers": [
         "enso"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-mur-gibs-colormap",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-mur-gibs-description",
@@ -566,7 +850,17 @@
       "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
       "consumers": [
         "enso"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-mur-gibs-description",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-elevation",
@@ -583,7 +877,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-elevation",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-01",
@@ -600,7 +904,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-01",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-02",
@@ -617,7 +931,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-02",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-03",
@@ -634,7 +958,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-03",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-04",
@@ -651,7 +985,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-04",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-05",
@@ -668,7 +1012,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-05",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-06",
@@ -685,7 +1039,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-06",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-07",
@@ -702,7 +1066,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-07",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-08",
@@ -719,7 +1093,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-08",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/40"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-09",
@@ -736,7 +1120,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-09",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/41"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-10",
@@ -753,7 +1147,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-10",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/42"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-11",
@@ -770,7 +1174,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-11",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/43"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-12",
@@ -787,7 +1201,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-12",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/44"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-13",
@@ -804,7 +1228,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-13",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/45"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-14",
@@ -821,7 +1255,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-14",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/46"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-15",
@@ -838,7 +1282,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-15",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-16",
@@ -855,7 +1309,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-16",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/48"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-17",
@@ -872,7 +1336,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-17",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/49"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-18",
@@ -889,7 +1363,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-18",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/50"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-latitude-19",
@@ -906,7 +1390,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-latitude-19",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/51"
+          }
+        ]
+      }
     },
     {
       "id": "gebco-2026-metadata",
@@ -923,7 +1417,17 @@
       "redistribution": "Numeric GEBCO terrain subset and provider metadata retained with attribution. Not for navigation or safety at sea.",
       "consumers": [
         "topography"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-gebco-2026-metadata",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/52"
+          }
+        ]
+      }
     },
     {
       "id": "glad-m35-vsv",
@@ -941,7 +1445,17 @@
         "interior"
       ],
       "expectedBytes": 520307,
-      "expectedSha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb"
+      "expectedSha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-glad-m35-vsv",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/53"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-black-marble-2025-public-radiance",
@@ -959,7 +1473,17 @@
       "redistribution": "NASA factual radiance with NASA Black Marble and Jurij Stare / lightpollutionmap.info attribution; no map screenshots or sky-brightness model reused.",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-black-marble-2025-public-radiance",
+            "role": "material",
+            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/54"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -980,7 +1504,13 @@
       "consumers": [
         "enso"
       ],
-      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors"
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-mur-gibs-mosaic",
+        "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/generatedIntermediates/1",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     }
   ],
   "documents": [
@@ -1025,7 +1555,11 @@
       "expectedSha256": "26c32ab22618b14d98c582dcf2e924e5a52d20f8715447a6bd1a60475d7d1c4a",
       "expectedBytes": 1106,
       "purpose": "Source-qualified schematic Earth interior presentation specification",
-      "kind": "authored-document"
+      "kind": "authored-document",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
@@ -1073,7 +1607,11 @@
       "path": "content/object.json",
       "expectedBytes": 17864,
       "expectedSha256": "5fff010f61535248c8795144eed23cb29d3eedb4b5e7844e2996f81fb88d0157",
-      "purpose": "Authored source recipe and retained scientific evidence for shared preparation."
+      "purpose": "Authored source recipe and retained scientific evidence for shared preparation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "content/lens-bindings.json",
@@ -1141,7 +1679,11 @@
       "expectedSha256": "e6a1704233f77c3721264de924a5b6e14a291ef78fd4d52db034a89ad32fc5a0",
       "expectedBytes": 3060,
       "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
-      "kind": "authored-document"
+      "kind": "authored-document",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     }
   ]
 }

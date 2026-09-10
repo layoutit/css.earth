@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-spacecraft-render-library@1",
+  "schema": "cssearth-spacecraft-render-library@2",
   "background": "#0d0d0d",
   "format": "webp",
   "quality": 90,
@@ -83,6 +83,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-cassini",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/0"
+          }
+        ]
       }
     },
     {
@@ -122,6 +132,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-dawn",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/1"
+          }
+        ]
       }
     },
     {
@@ -217,6 +237,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-galileo",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/2"
+          }
+        ]
       }
     },
     {
@@ -306,6 +336,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-grail",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/3"
+          }
+        ]
       }
     },
     {
@@ -332,6 +372,16 @@
         "bytes": 393166,
         "kind": "official-prerendered-artwork",
         "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-hayabusa",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/4"
+          }
+        ]
       }
     },
     {
@@ -358,6 +408,16 @@
         "bytes": 1195703,
         "kind": "official-prerendered-artwork",
         "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-hayabusa2",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/5"
+          }
+        ]
       }
     },
     {
@@ -398,6 +458,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-hubble",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/6"
+          }
+        ]
       }
     },
     {
@@ -437,6 +507,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-juno",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/7"
+          }
+        ]
       }
     },
     {
@@ -476,6 +556,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-lro",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/8"
+          }
+        ]
       }
     },
     {
@@ -515,6 +605,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-magellan",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/9"
+          }
+        ]
       }
     },
     {
@@ -554,6 +654,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-mars-global-surveyor",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/10"
+          }
+        ]
       }
     },
     {
@@ -593,6 +703,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-messenger",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/11"
+          }
+        ]
       }
     },
     {
@@ -632,6 +752,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-mro",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/12"
+          }
+        ]
       }
     },
     {
@@ -671,6 +801,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-near-shoemaker",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/13"
+          }
+        ]
       }
     },
     {
@@ -710,6 +850,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-new-horizons",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/14"
+          }
+        ]
       }
     },
     {
@@ -749,6 +899,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-odyssey",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/15"
+          }
+        ]
       }
     },
     {
@@ -788,6 +948,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-osiris-rex",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/16"
+          }
+        ]
       }
     },
     {
@@ -883,6 +1053,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-rosetta",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/17"
+          }
+        ]
       }
     },
     {
@@ -922,6 +1102,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-sdo",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/18"
+          }
+        ]
       }
     },
     {
@@ -961,6 +1151,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-suomi-npp",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/19"
+          }
+        ]
       }
     },
     {
@@ -1000,6 +1200,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-terra",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/20"
+          }
+        ]
       }
     },
     {
@@ -1026,6 +1236,16 @@
         "bytes": 342620,
         "kind": "official-prerendered-artwork",
         "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-viking",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/21"
+          }
+        ]
       }
     },
     {
@@ -1074,6 +1294,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-voyager-1",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/22"
+          }
+        ]
       }
     },
     {
@@ -1122,6 +1352,16 @@
           "projection": "orthographic",
           "frameFill": 0.85
         }
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-render-voyager-2",
+            "role": "artwork",
+            "evidence": "site/source/spacecraft/render-library.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/entries/23"
+          }
+        ]
       }
     }
   ]

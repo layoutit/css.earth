@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "parysatis",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dc275a9f1f91459ba9b23d21c11530de852ad5489aed7ced77de33ff4be13f96"
+    "sha256": "0b63abab1475c5a3c4ab8077adeb1024c5710fdbf69f8a122ea86bb0b85e24c7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -339,6 +339,16 @@
         "referenceRadiusMeters": 22374.5
       },
       "coverage": "Published convex light-curve model 5820. Approximate scale from a thermal diameter of 44.749 ± 0.37 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-62120",
+            "role": "material",
+            "evidence": "src/planets/parysatis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "5d01fc5141682daead93573aef676e56dfd5cdee4f9608b15a0125d7887bf9bf",
       "bytes": 46419,
       "dependencies": [],
@@ -358,6 +368,10 @@
       "path": "content/object.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "sha256": "7778360534fcebfeedb537e46dc0dc4b2b48ae3c4e5221f77de961cd21f61338",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "csspluto-authoritative-sources@1",
+  "schema": "csspluto-authoritative-sources@2",
   "inputs": [
     {
       "id": "surface-pluto-color-mosaic-jpg",
@@ -26,6 +26,16 @@
             "spacecraftId": "new-horizons",
             "missionId": "new-horizons",
             "evidence": "https://science.nasa.gov/resource/pluto-global-color-map/"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pluto-surface-pluto-color-mosaic-jpg",
+            "role": "material",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
         ]
       }
@@ -55,6 +65,16 @@
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pluto-lenses-pluto-monochrome-tif",
+            "role": "material",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
       }
     },
     {
@@ -82,6 +102,16 @@
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pluto-lenses-pluto-dem-tif",
+            "role": "material",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -100,7 +130,17 @@
       "consumers": [
         "scene",
         "panel"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pluto-editorial-nasa-pluto-json",
+            "role": "material",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "presentation-title-mark-mjs",
@@ -117,7 +157,17 @@
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "stars-eso0932a-tif",
@@ -134,7 +184,17 @@
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "stars-hyg-v41-field-json",
@@ -151,7 +211,17 @@
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pluto-stars-hyg-v41-field-json",
+            "role": "material",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "lenses-pluto-dem-lbl",
@@ -168,7 +238,17 @@
       "redistribution": "Attributed source for reproducible preparation; see NOTICE.md",
       "consumers": [
         "lenses"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pluto-lenses-pluto-dem-lbl",
+            "role": "material",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "orbit-jpl-physical-values",
@@ -186,7 +266,17 @@
       "consumers": [
         "scene",
         "panel"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-pluto-orbit-jpl-physical-values",
+            "role": "material",
+            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -225,7 +315,11 @@
       "path": "content/static.json",
       "expectedBytes": 10753,
       "expectedSha256": "48f7b40b718034e143ed4e17308fcd55a7b20b0c5d2b49fa9f3ae46fcd685c84",
-      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility."
+      "purpose": "Authored preparation configuration and scientific interpretation pinned for reproducibility.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicit authored content document in the retained provenance record."
+      }
     },
     {
       "path": "preparation/navigation.json",

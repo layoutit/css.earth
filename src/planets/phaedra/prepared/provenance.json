@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "phaedra",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "efd49306c13346eee9a8b5cd731af1c52af116a3c2e43ca5d7587153adf509a0"
+    "sha256": "aad1eac01ba166a46bf2188ca459bde3761b33ace336575a90536d4a1cf08219"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 32040
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 64.08 km (catalog ±0.77 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. The selected Marciniak (2011) archive model 304 has one pole (266,5) and no calibrated size. Retain it as a convex light-curve model, with explicitly approximate thermal scale and no claim of measured craters or unique absolute rotational phase.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-1091",
+            "role": "material",
+            "evidence": "src/planets/phaedra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "1805d5dbef19e6956892f348a8f2bfea20036c710c9641352aebd224cde62acd",
       "bytes": 80763,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

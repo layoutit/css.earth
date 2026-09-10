@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "phobos",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3ef3b56b058bb52acbb23094066f2d1d99ada9cc8dede858aeb99fc49fc0b249"
+    "sha256": "7ace778bfba084d600df96fc7262e22db5691963a14406b6e0846b0b9e2dd745"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -537,6 +537,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phobos-stooke-mosaic",
+            "role": "material",
+            "evidence": "src/planets/phobos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "d7934d5b209e5f31ed26297e1e85a4713d8d0aa2906111ffe4b3d60d02ae0ccb",
       "bytes": 103738243,
       "dependencies": [],
@@ -572,6 +582,16 @@
         "longitudeDirection": "east-positive"
       },
       "coverage": "Radial height above an 11.1 km reference sphere, sampled from the Ernst et al. (2023) shape model. Fixed relief lighting shows slopes; mesh spacing is about 148 m.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phobos-ernst-2023-shape",
+            "role": "material",
+            "evidence": "src/planets/phobos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "69fffc77f4fd799767e50fc03631bea43f8d9110edcae8f355fad926136339fa",
       "bytes": 3018535,
       "dependencies": [],
@@ -600,6 +620,16 @@
       "origin": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
       "catalog": "https://doi.org/10.1186/s40623-023-01814-7",
       "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phobos-phobos-facet-science",
+            "role": "material",
+            "evidence": "src/planets/phobos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
       "bytes": 34508570,
       "dependencies": [],
@@ -617,6 +647,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored content, source documentation or preparation metadata.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

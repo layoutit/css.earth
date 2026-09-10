@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "mani",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4c5135f54ea4e391a7fa7e91e1dea5a76f0e1715047f21bb257b7998cf9055dd"
+    "sha256": "e20e8bf99c471f450f68788566c663b9068163eaa4e452f65eed091173e44128"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -253,6 +253,10 @@
       },
       "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
@@ -278,6 +282,16 @@
       },
       "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with docs/distant-worlds/author.py.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-2308-08062",
+            "role": "method",
+            "evidence": "src/planets/mani/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "48a4b472da24ef5972097d7dbeace883a0c35c99b167cfa634d1169e0c01b590",
       "bytes": 65105,
       "dependencies": [],
@@ -288,6 +302,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned source observation, interpretation or preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

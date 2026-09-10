@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "neptune",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa485562067c99697c0286565297df4c9c55ca3ad9e6b6c9e86b601948f565e6"
+    "sha256": "19f555cf25c2bf6299d0e48e968706b59851b4fd1cbb4e96ae5b27733cfa4be8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -1042,6 +1042,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-visible",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8",
       "bytes": 789926,
       "dependencies": [],
@@ -1069,6 +1079,16 @@
       "acquisition": "Shared pinned acquisition operator; see preparation/acquisition.json",
       "redistribution": "checked true-colour calibration reference with attribution",
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-ras-oxford-neptune-true-colour-reference",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "2f7d106d547adde83f356a3bd5f97053cd314a199fd6fb2c7d8d9c470df55ec7",
       "bytes": 338632,
       "dependencies": [],
@@ -1103,6 +1123,16 @@
             "spacecraftId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
             "missionId": "hubble"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-fq619n",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       },
@@ -1143,6 +1173,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-f845m",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      },
       "sha256": "7373c6c3daf3ace7cf1576596ed0480659cb03c255893b71629d282fe7291b4c",
       "bytes": 1045440,
       "dependencies": [],
@@ -1166,6 +1206,10 @@
       "license": "Project-authored specification; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "307ae52c4a437cb9b0704ff349613c867439b4382bd431fc77c7c759621bc122",
       "bytes": 14981,
       "dependencies": [],
@@ -1183,6 +1227,12 @@
       "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "checked raw ASCII response with NASA attribution",
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-neptune-r240-rif",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "141ebc0bc62a9dbb668718c4e59a91900214931a9383bcefeadf1b12e3a974ef",
       "bytes": 12113,
       "dependencies": [],
@@ -1218,6 +1268,12 @@
       "acquisition": "Checked scientific snapshot or authored JSON; shared source verification retains its exact identity.",
       "redistribution": "checked text configuration with NASA attribution",
       "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-neptune-configuration",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "sha256": "0a51c9b0ede933a9d9875197b960702514c39b291624ae02dd3bdc9b3ea01fe0",
       "bytes": 8864,
       "dependencies": [],

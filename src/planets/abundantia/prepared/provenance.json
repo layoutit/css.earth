@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "abundantia",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c64c67bba56722c3b40bf0cbf612b47c1912027df89bc7ca9c192e3a96ac280a"
+    "sha256": "6c7f66c87b7a168e8251ee8d3b243cf0b7979242ee11c09ea52718d34126de80"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -351,6 +351,16 @@
         "referenceRadiusMeters": 21090
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 42.18 km (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select one of the two complete 2020 ATLAS convex models, 4625 (188,32). The counterpart 4626 (3,16) remains possible. The independent 2021 ASAS-SN pole (187,21) supports the same broad family but is not the selected mesh or an exact attitude validation.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-53045",
+            "role": "material",
+            "evidence": "src/planets/abundantia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "30c56d5b9f294437dfb49eec0cc71c4ff68980845df2ef72f0ccfed1bac61478",
       "bytes": 46419,
       "dependencies": [],
@@ -369,6 +379,10 @@
     {
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

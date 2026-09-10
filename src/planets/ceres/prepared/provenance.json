@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "ceres",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b23b085f66aaa99965db239f381bb1bc49c15021d4afb43fb419be7263116e0c"
+    "sha256": "362c85224665355c028c6410ba40d63ac5827b9fb7ddcf1a0683e8a164082335"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -385,6 +385,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ceres-usgs-dawn-fc-global-140m",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
       "bytes": 9750062,
       "dependencies": [],
@@ -440,6 +450,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ceres-nasa-dawn-fc-pia19977",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
       "bytes": 1033656,
       "dependencies": [],
@@ -479,6 +499,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ceres-dawn-elevation",
+            "role": "material",
+            "evidence": "src/planets/ceres/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      },
       "sha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
       "bytes": 466647217,
       "dependencies": [],
@@ -496,6 +526,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored scientific and presentation recipe for reusable capability preparation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

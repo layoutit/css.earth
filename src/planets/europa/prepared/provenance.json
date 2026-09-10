@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "europa",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0686fe673474b00624a9aa620b81b2b0dd1da8df0d76b306ecb0dbcb4408a90d"
+    "sha256": "3bb14fc72a5cdb7b7f6a139f6c0414149c96b8a8f93793f98962f1b21cbf4dab"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -752,6 +752,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-voyager-galileo-global-500m",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      },
       "sha256": "a323f0c9ccb47d5af9902ea8297fe81f9a9708795645b80801f103c3f7c9a624",
       "bytes": 192777263,
       "dependencies": [],
@@ -809,6 +819,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-17189-4sz4-5024",
+            "role": "method",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
+          }
+        ]
+      },
       "sha256": "01f3ec428dae8907f29701e4bac1aecab8bb800fea488991332e60d65b9d5287",
       "bytes": 351656,
       "dependencies": [],
@@ -841,6 +861,16 @@
         "centerLongitudeDegrees": 180
       },
       "coverage": "Agenor regional DTM only. Source bilinear sampling requires a complete four-sample footprint; nearest, lossless display packing preserves that sampled validity boundary. No global datum or quality classes inferred.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-agenor-controlled-dtm",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/45"
+          }
+        ]
+      },
       "sha256": "335c16fcb53c5e278f5660f3df5f42f58cd65d0ce78722c9a055ee2e7a053d62",
       "bytes": 168472,
       "dependencies": [],
@@ -884,6 +914,16 @@
         "referenceRadiusMeters": 1562090
       },
       "coverage": "Pixel-center categorical grid; unmapped, unknown and conflicting units withheld.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-europa-geologic-units-grid",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/46"
+          }
+        ]
+      },
       "sha256": "9aeae6182c48a4022c0bc86f8550a0cb4804b00172a89f3fa807deceb9706ba1",
       "bytes": 109007,
       "dependencies": [],
@@ -899,6 +939,12 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
       "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "JPL Horizons Sun vectors relative to Europa",
+        "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/documents/5",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "id": "source-document:photometry/horizons-sun.json",
       "upstreamLineage": "not-recorded",
       "sha256": "0af0a446aa73341e382d3d006a8c9c1a0e6de8c1b2f0f81d33c2dd69bbac7cf1",
@@ -916,6 +962,12 @@
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-77%27&CENTER=%27500%40502%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272450902.3086344404%0A2450902.3087347527%0A2450902.3088350655%0A2450902.308935366%0A2450902.309035679%0A2450902.3091367553%0A2450902.3092370676%0A2450902.3093373803%0A2450902.309437681%0A2450902.3095379937%0A2450902.3104407713%0A2450902.310541084%0A2450902.3106413847%0A2450262.572702988%0A2450262.5729048634%0A2450262.5730051757%0A2450798.738217853%0A2450798.738420399%0A2450798.7385207117%0A2450798.738819705%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
       "credit": "NASA/JPL Solar System Dynamics — Horizons",
       "acquisition": "JPL Horizons request and JSON response saved together on 2026-09-06; the local JSON wrapper is not the original HTTP response bytes.",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "JPL Horizons Galileo vectors relative to Europa",
+        "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/documents/6",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      },
       "id": "source-document:photometry/horizons-galileo.json",
       "upstreamLineage": "not-recorded",
       "sha256": "0a4ca5c56c9a50be0a206701773b2b35715d4aad3120f587b3dffabf5d710113",
@@ -950,6 +1002,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875152/s0349875152.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0349875152-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
           }
         ]
       },
@@ -995,6 +1057,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0349875178-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      },
       "sha256": "b03385ff0a4eb81bb5ab6755b3c3aa2054a7c85570db78cc7ff6818e1f6a84f9",
       "bytes": 7406122,
       "dependencies": [],
@@ -1034,6 +1106,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0349875200/s0349875200.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0349875200-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
           }
         ]
       },
@@ -1079,6 +1161,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0426234600-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      },
       "sha256": "0d8988fa285cc918da5d896b4606bd2da5e5deb3fe23921656552bef14943a71",
       "bytes": 3657909,
       "dependencies": [],
@@ -1118,6 +1210,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234626/s0426234626.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0426234626-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
           }
         ]
       },
@@ -1163,6 +1265,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0426234639-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      },
       "sha256": "b7e528a4269e9fc8a9b633f5620dbf96cd899c2395c0e8a8cdf787ae3c06230a",
       "bytes": 3534165,
       "dependencies": [],
@@ -1202,6 +1314,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0426234678/s0426234678.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0426234678-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
           }
         ]
       },
@@ -1247,6 +1369,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984852-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      },
       "sha256": "f6d2610583d7ee0895f67cea72c8ef8e8ba44e4db215e389dde7bc1b0b13077a",
       "bytes": 7107148,
       "dependencies": [],
@@ -1286,6 +1418,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984865/s0440984865.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984865-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
           }
         ]
       },
@@ -1331,6 +1473,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984878-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      },
       "sha256": "7897b822a9be1c518341eb6e6eafc40d19f51eb05041764fae5270c845b91d07",
       "bytes": 7607954,
       "dependencies": [],
@@ -1370,6 +1522,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984901_00/s0440984901_00.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984901-00-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
           }
         ]
       },
@@ -1415,6 +1577,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984914-13-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      },
       "sha256": "9b5b2069c177f81792ee7b46c88f82546475eb85d9d157245f8af88a000a3b93",
       "bytes": 5048470,
       "dependencies": [],
@@ -1454,6 +1626,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984926/s0440984926.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984926-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
           }
         ]
       },
@@ -1499,6 +1681,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984939-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      },
       "sha256": "4c48daf581fbab988311b3258209fd143fec5fa1d09951d7bd121aedeb4e4003",
       "bytes": 2571253,
       "dependencies": [],
@@ -1538,6 +1730,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984952/s0440984952.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984952-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
           }
         ]
       },
@@ -1583,6 +1785,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984965-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      },
       "sha256": "03bbda32b885b93bf860f6de9c748668fd0e1da7c5f30ff6ff51f03d17f1cf61",
       "bytes": 4115365,
       "dependencies": [],
@@ -1622,6 +1834,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440984978/s0440984978.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440984978-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
           }
         ]
       },
@@ -1667,6 +1889,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440985113-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      },
       "sha256": "e92576a0b9e6196bd97b000f1ffa0e0fb73c27d8ec35feb464127d4341718bd3",
       "bytes": 5017172,
       "dependencies": [],
@@ -1706,6 +1938,16 @@
             "spacecraftId": "galileo",
             "evidence": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_observations/s0440985126/s0440985126.equi.photr.tif",
             "missionId": "galileo"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440985126-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
           }
         ]
       },
@@ -1751,6 +1993,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-europa-usgs-s0440985139-equi",
+            "role": "material",
+            "evidence": "src/planets/europa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      },
       "sha256": "95eb88fc84a49a91d2bd54faf1d6e5d964b5651a3c065a2e92fe87be03b4de67",
       "bytes": 6152531,
       "dependencies": [],
@@ -1768,6 +2020,10 @@
     {
       "path": "content/object.json",
       "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",

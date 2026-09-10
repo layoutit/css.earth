@@ -1,5 +1,5 @@
 {
-  "schema": "csstethys-authoritative-sources@1",
+  "schema": "csstethys-authoritative-sources@2",
   "inputs": [
     {
       "credit": "NASA/JPL-Caltech/Space Science Institute",
@@ -41,6 +41,16 @@
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Tethys_Cassini_mosaic_global_293m.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-iss-2012-tethys",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -80,6 +90,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18439.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-iss-2014-tethys-color",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -124,6 +144,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqradius_g.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-eq",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -162,6 +192,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npradius_g.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-np",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -204,6 +244,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spradius_g.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-sp",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
       }
     },
     {
@@ -221,7 +271,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -238,7 +298,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -258,7 +328,17 @@
       "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
       "expectedBytes": 17694840,
-      "expectedSha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759"
+      "expectedSha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-q128-shape",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -283,7 +363,17 @@
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 6044029,
-      "expectedSha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f"
+      "expectedSha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-eqalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -308,7 +398,17 @@
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 790789,
-      "expectedSha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610"
+      "expectedSha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-npalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "credit": "Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS; Cassini ISS",
@@ -333,7 +433,17 @@
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
       "expectedBytes": 790789,
-      "expectedSha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808"
+      "expectedSha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-cassini-spc-2025-tethys-tethys-spalbedo-g",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1807469104_1_ir-cub",
@@ -352,7 +462,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1807469104-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1807469104_1_ir-cub",
@@ -371,7 +491,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1807469104-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1807469104_1-qub",
@@ -390,7 +520,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1807469104-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1807456038_1_ir-cub",
@@ -409,7 +549,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1807456038-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1807456038_1_ir-cub",
@@ -428,7 +578,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1807456038-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1807456038_1-qub",
@@ -447,7 +607,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1807456038-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1807473499_1_ir-cub",
@@ -466,7 +636,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1807473499-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1807473499_1_ir-cub",
@@ -485,7 +665,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1807473499-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1807473499_1-qub",
@@ -504,7 +694,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1807473499-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1818547570_1_ir-cub",
@@ -523,7 +723,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1818547570-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1818547570_1_ir-cub",
@@ -542,7 +752,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1818547570-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1818547570_1-qub",
@@ -561,7 +781,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1818547570-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1561668191_1_ir-cub",
@@ -580,7 +810,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1561668191-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1561668191_1_ir-cub",
@@ -599,7 +839,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1561668191-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1561668191_1-qub",
@@ -618,7 +868,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1561668191-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1660463972_1_ir-cub",
@@ -637,7 +897,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1660463972-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1660463972_1_ir-cub",
@@ -656,7 +926,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1660463972-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1660463972_1-qub",
@@ -675,7 +955,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1660463972-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1719613772_1_ir-cub",
@@ -694,7 +984,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1719613772-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1719613772_1_ir-cub",
@@ -713,7 +1013,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1719613772-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1719613772_1-qub",
@@ -732,7 +1042,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1719613772-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1719616836_1_ir-cub",
@@ -751,7 +1071,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1719616836-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1719616836_1_ir-cub",
@@ -770,7 +1100,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1719616836-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1719616836_1-qub",
@@ -789,7 +1129,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1719616836-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-c1606213356_1_ir-cub",
@@ -808,7 +1158,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-c1606213356-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-n1606213356_1_ir-cub",
@@ -827,7 +1187,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-n1606213356-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-original-v1606213356_1-qub",
@@ -846,7 +1216,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-original-v1606213356-1-qub",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+          }
+        ]
+      }
     },
     {
       "id": "tethys-cassini-ice-absorption",
@@ -886,6 +1266,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
           }
         ]
       }
@@ -928,6 +1318,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1807469104_1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-tethys-tethys-cassini-infrared",
+            "role": "material",
+            "evidence": "src/planets/tethys/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
           }
         ]
       }
@@ -1004,7 +1404,11 @@
       "path": "content/object.json",
       "expectedBytes": 15503,
       "expectedSha256": "938ecf6097f442c49fd704f02ffc3be7f2350bb1920e9eba0be1ce263967a390",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "presentation/title-mark.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssryugu-authoritative-sources@1",
+  "schema": "cssryugu-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "ryugu-shape",
@@ -48,6 +58,16 @@
             "spacecraftId": "hayabusa2",
             "missionId": "hayabusa2",
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/hyb2_spice/spice_kernels/dsk/ryugu_shape_spc_200k_v20200323.bds"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ryugu-ryugu-shape",
+            "role": "material",
+            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -86,6 +106,16 @@
             "evidence": "https://data.darts.isas.jaxa.jp/pub/pds4/data/hyb2/in-prep/hyb2_onc_map_v001/data_reflectance_map/vband/hyb2_onc_20180710_BOX-A_l3em_v06.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ryugu-ryugu-normal",
+            "role": "material",
+            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -122,6 +152,16 @@
             "evidence": "https://doi.org/10.7910/DVN/WW3IH0"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-7910-dvn-ww3ih0",
+            "role": "method",
+            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
       }
     },
     {
@@ -136,7 +176,17 @@
         "reference"
       ],
       "expectedBytes": 9634064,
-      "expectedSha256": "3bc584b95c756b9b480e97238138a3906fe11e8ae8092132f4a5fe3a1c9d3c40"
+      "expectedSha256": "3bc584b95c756b9b480e97238138a3906fe11e8ae8092132f4a5fe3a1c9d3c40",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ryugu-ryugu-ryugu-global-color-enhanced-png",
+            "role": "material",
+            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "ryugu-ryugu_global.tif",
@@ -150,7 +200,17 @@
         "reference"
       ],
       "expectedBytes": 215772319,
-      "expectedSha256": "8775e50c6e0c01840b5d72207cf4b4a4ecd8d427aa35a087bde3ceef2340473a"
+      "expectedSha256": "8775e50c6e0c01840b5d72207cf4b4a4ecd8d427aa35a087bde3ceef2340473a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ryugu-ryugu-ryugu-global-tif",
+            "role": "material",
+            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "ryugu-ryugu_shape_spc_200k_v20200323.bds",
@@ -164,7 +224,17 @@
         "reference"
       ],
       "expectedBytes": 6936576,
-      "expectedSha256": "8af04c9aee94e5c9d49017043f7c50a140789d006ebfc46f155713567765db89"
+      "expectedSha256": "8af04c9aee94e5c9d49017043f7c50a140789d006ebfc46f155713567765db89",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ryugu-ryugu-ryugu-shape-spc-200k-v20200323-bds",
+            "role": "material",
+            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "ryugu-info.zip",
@@ -178,7 +248,17 @@
         "reference"
       ],
       "expectedBytes": 54623613,
-      "expectedSha256": "ee9fe9935303c39fb91509fd2136ab04a961619ca9324628cf32a4f22a89d519"
+      "expectedSha256": "ee9fe9935303c39fb91509fd2136ab04a961619ca9324628cf32a4f22a89d519",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ryugu-ryugu-info-zip",
+            "role": "material",
+            "evidence": "src/planets/ryugu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -214,7 +294,11 @@
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 9289,
-      "expectedSha256": "876031d92196120e35c87565e50d927027c02960840bad06681bc7a6ccfa1ce1"
+      "expectedSha256": "876031d92196120e35c87565e50d927027c02960840bad06681bc7a6ccfa1ce1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

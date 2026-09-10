@@ -1,14 +1,14 @@
 {
-  "schema": "cssearth-object-provenance@2",
+  "schema": "cssearth-object-provenance@3",
   "objectId": "mercury",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "2c66d93686fe80a9cecb39cf8b6b6e486d2e4cebc900a62534185a26c5f565ec"
+    "sha256": "3b58b40c58ea1f4d9cbf3212392a45fdf84a575a14edf0726a3f39624ab64334"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -694,6 +694,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-bdr-global-z3",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      },
       "sha256": "4b72646d9405f85e0c158cc321088229d6c47deea09ffa6e1d24a81e3ba36f37",
       "bytes": 9385021,
       "dependencies": [],
@@ -744,6 +754,16 @@
             "spacecraftId": "messenger",
             "evidence": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
             "missionId": "messenger"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-enhanced-global-z3",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
           }
         ]
       },
@@ -801,6 +821,16 @@
           }
         ]
       },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-usgs-messenger-topography-z3",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      },
       "sha256": "237521324ce260491eeb5d9215a2a3c72b1f018ae12450513bb82e78f5cffab9",
       "bytes": 15262047,
       "dependencies": [],
@@ -836,6 +866,16 @@
       "title": "Mercury interior structure",
       "displayCredit": "NASA Science",
       "sourceUrl": "https://science.nasa.gov/mercury/facts/",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-mercury-facts",
+            "role": "reference",
+            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      },
       "sha256": "1a2cf2f0dd8a9636010d5ab9d8f7ed259e4127c17965caee92fa38940de1ea78",
       "bytes": 2092,
       "dependencies": [],
@@ -858,6 +898,16 @@
       "redistribution": "Permitted by MIT license.",
       "title": "OpenSpace surface lighting",
       "displayCredit": "OpenSpace Team",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-openspace-globe-lighting-excerpt",
+            "role": "method",
+            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      },
       "sha256": "8cb235ec90ecf95be034f44a57d42f876677790dc7450e522703dd1a2f0163a0",
       "bytes": 1846,
       "dependencies": [],
@@ -874,6 +924,10 @@
       "license": "Repository-authored factual data",
       "acquisition": "Checked source JSON maintained beside Mercury inputs.",
       "redistribution": "Prepared shell content with source provenance.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      },
       "sha256": "5f5aab004d2dc42d943d638ad40999dec7a4e17cb83fafe58d40068ddd4d3376",
       "bytes": 16176,
       "dependencies": [],
@@ -896,6 +950,16 @@
       "title": "MESSENGER MASCS spectral cube",
       "displayCredit": "M. D’Amore · DLR · NASA/MESSENGER",
       "sourceUrl": "https://doi.org/10.5281/zenodo.7433033",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mercury-dlr-messenger-mascs-global-area-weighted-mean",
+            "role": "material",
+            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+          }
+        ]
+      },
       "sha256": "b1aaec4f4361318c40d4f4cbc10c798baca0dbfb309cdab41152d6f83925d756",
       "bytes": 13609,
       "dependencies": [],

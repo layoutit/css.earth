@@ -1,3 +1,5 @@
+import { sourceDigest } from './source-catalog.mts';
+import type { SourceResolver } from './source-catalog.mts';
 import { explorationArray, explorationId, explorationRecord, explorationText, explorationUrl, parseAgencies, parseExplorationCatalog } from './exploration-catalog.mts';
 import type { Agency } from './exploration-catalog.mts';
 import { parseContributionGraph } from './exploration-contributions.mts';
@@ -9,11 +11,11 @@ export function parseExplorationImage(raw: unknown): ExplorationImage {
   if (!/^\/shell\/spacecraft-(renders|emblems)\/[a-z0-9-]+\.(webp|png)$/.test(src) || !/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Invalid artwork identity.');
   return Object.freeze({ id: explorationId(image.id), src, sha256, width: number(image.width), height: number(image.height), bytes: number(image.bytes), kind: explorationText(image.kind), sourceUrl: explorationUrl(image.sourceUrl), credit: explorationText(image.credit) });
 }
-export function parsePreparedExploration(input: unknown) {
-  const value = explorationRecord(input, ['schema', 'catalog', 'agencies', 'images', 'emblems', 'graph', 'closure']);
-  if (value.schema !== 'cssearth-prepared-exploration@1') throw new TypeError('Unsupported prepared exploration catalogue.');
+export function parsePreparedExploration(input: unknown, sources: SourceResolver) {
+  const value = explorationRecord(input, ['schema', 'catalog', 'agencies', 'images', 'emblems', 'graph', 'closure', 'sourceCatalogSha256']);
+  if (value.schema !== 'cssearth-prepared-exploration@2') throw new TypeError('Unsupported prepared exploration catalogue.');
   const agencies: Readonly<Record<string, Agency>> = parseAgencies(value.agencies);
-  const catalog = parseExplorationCatalog(value.catalog, agencies);
+  const catalog = parseExplorationCatalog(value.catalog, agencies, sources);
   const assets = (raw: unknown) => {
     const images = explorationArray(raw, parseExplorationImage);
     if (new Set(images.map(image => image.id)).size !== images.length) throw new TypeError('Duplicate exploration artwork.');
@@ -28,5 +30,5 @@ export function parsePreparedExploration(input: unknown) {
     return [path, sha256];
   })));
   if (!Object.keys(closure).length) throw new TypeError('Exploration closure is empty.');
-  return Object.freeze({ catalog, agencies, images, emblems, graph: parseContributionGraph(value.graph, catalog), closure });
+  return Object.freeze({ sourceCatalogSha256: sourceDigest(value.sourceCatalogSha256), catalog, agencies, images, emblems, graph: parseContributionGraph(value.graph, catalog), closure });
 }
