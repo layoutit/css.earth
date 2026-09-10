@@ -1,5 +1,5 @@
 {
-  "schema": "cssitokawa-authoritative-sources@1",
+  "schema": "cssitokawa-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "itokawa-shape",
@@ -50,6 +60,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-itokawa-shape",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
       }
     },
     {
@@ -64,7 +84,17 @@
         "amica-observation"
       ],
       "expectedBytes": 1861460,
-      "expectedSha256": "f5fae5ef42a701c050693523d1d149a99b85b83da6e1c0c5ce58626decee1ca6"
+      "expectedSha256": "f5fae5ef42a701c050693523d1d149a99b85b83da6e1c0c5ce58626decee1ca6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep24-path",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "amica-sep24-labelPath",
@@ -78,7 +108,17 @@
         "amica-observation"
       ],
       "expectedBytes": 6640,
-      "expectedSha256": "f6cf948ba2df7c3196732b02e414710e9a7e80a71fcb859c6a586b37cd6085e6"
+      "expectedSha256": "f6cf948ba2df7c3196732b02e414710e9a7e80a71fcb859c6a586b37cd6085e6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep24-labelpath",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "amica-sep24-originalPath",
@@ -92,7 +132,17 @@
         "amica-observation"
       ],
       "expectedBytes": 1056960,
-      "expectedSha256": "639a57f2daaf2bac9700307565449bcb9b540a714e223d1bf321ff0d4c4f1c32"
+      "expectedSha256": "639a57f2daaf2bac9700307565449bcb9b540a714e223d1bf321ff0d4c4f1c32",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep24-originalpath",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "amica-sep26-path",
@@ -106,7 +156,17 @@
         "amica-observation"
       ],
       "expectedBytes": 2686546,
-      "expectedSha256": "589cb14fb9df512057d4446a556633fdfa106e2d69efaa66813ad56786726540"
+      "expectedSha256": "589cb14fb9df512057d4446a556633fdfa106e2d69efaa66813ad56786726540",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep26-path",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "amica-sep26-labelPath",
@@ -120,7 +180,17 @@
         "amica-observation"
       ],
       "expectedBytes": 6640,
-      "expectedSha256": "db3803da5a7ee636edf6e3282c679fb13788c97a64a2a2977f62aedd70733435"
+      "expectedSha256": "db3803da5a7ee636edf6e3282c679fb13788c97a64a2a2977f62aedd70733435",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep26-labelpath",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "amica-sep26-originalPath",
@@ -134,7 +204,17 @@
         "amica-observation"
       ],
       "expectedBytes": 1056960,
-      "expectedSha256": "771627b27137dc9a3fe3b35cf8c89084415e186920f5d86f307e0ef76fa8883d"
+      "expectedSha256": "771627b27137dc9a3fe3b35cf8c89084415e186920f5d86f307e0ef76fa8883d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep26-originalpath",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "amica-sep29-path",
@@ -148,7 +228,17 @@
         "amica-observation"
       ],
       "expectedBytes": 8142529,
-      "expectedSha256": "8b7a63ee56d362fcb7e59c80187c2706305955aacb6b517dbfb2a470b6762266"
+      "expectedSha256": "8b7a63ee56d362fcb7e59c80187c2706305955aacb6b517dbfb2a470b6762266",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep29-path",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "amica-sep29-labelPath",
@@ -162,7 +252,17 @@
         "amica-observation"
       ],
       "expectedBytes": 6640,
-      "expectedSha256": "d9cc5ecc1ca1e98103ed3acbfe8ec5d10bd04f5067d17a11c8bc2c7c3f24189f"
+      "expectedSha256": "d9cc5ecc1ca1e98103ed3acbfe8ec5d10bd04f5067d17a11c8bc2c7c3f24189f",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep29-labelpath",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "amica-sep29-originalPath",
@@ -176,7 +276,17 @@
         "amica-observation"
       ],
       "expectedBytes": 1056960,
-      "expectedSha256": "796fbc5cff65320b6d66f9e541a36e3d1933b3460217980dfc6b3334a3d8c7ad"
+      "expectedSha256": "796fbc5cff65320b6d66f9e541a36e3d1933b3460217980dfc6b3334a3d8c7ad",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-sep29-originalpath",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "amica-v-flat",
@@ -190,7 +300,17 @@
         "amica-observation"
       ],
       "expectedBytes": 4199040,
-      "expectedSha256": "b68d5b25053f7a6574d876619cb4f00dd5f609392a861d1c3998976f9f8980d6"
+      "expectedSha256": "b68d5b25053f7a6574d876619cb4f00dd5f609392a861d1c3998976f9f8980d6",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-v-flat",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "amica-v-flat-label",
@@ -204,7 +324,17 @@
         "reference"
       ],
       "expectedBytes": 4320,
-      "expectedSha256": "79d77d8c97aa7f9e250e95026fc92cd438ec90c16a70543553b657703e831765"
+      "expectedSha256": "79d77d8c97aa7f9e250e95026fc92cd438ec90c16a70543553b657703e831765",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-v-flat-label",
+            "role": "material",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "amica-calibration-paper",
@@ -218,7 +348,17 @@
         "reference"
       ],
       "expectedBytes": 1459262,
-      "expectedSha256": "e411d4f7bf93d345ac09575714611fac8aeb923b9f20a75140076e9e1c032f79"
+      "expectedSha256": "e411d4f7bf93d345ac09575714611fac8aeb923b9f20a75140076e9e1c032f79",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "arxiv-0912-4797",
+            "role": "method",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "amica-photometry-paper",
@@ -232,7 +372,17 @@
         "reference"
       ],
       "expectedBytes": 4420715,
-      "expectedSha256": "d064e5b338d77ed5bfe27e28ac08a68e69858053aedc183b888d98a9641a5468"
+      "expectedSha256": "d064e5b338d77ed5bfe27e28ac08a68e69858053aedc183b888d98a9641a5468",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-itokawa-amica-photometry-paper",
+            "role": "method",
+            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -267,7 +417,11 @@
       "path": "content/object.json",
       "purpose": "Pinned source documentation or authored package input.",
       "expectedBytes": 9583,
-      "expectedSha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275"
+      "expectedSha256": "2e8fb3414b446234b87f4255bff80b19bdd473806e1037d35e9dc547b1ad2275",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

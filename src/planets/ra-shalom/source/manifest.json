@@ -1,5 +1,5 @@
 {
-  "schema": "cssra-shalom-authoritative-sources@1",
+  "schema": "cssra-shalom-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/ra-shalom/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "ra-shalom-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied.",
       "expectedBytes": 67284,
-      "expectedSha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d"
+      "expectedSha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ra-shalom-ra-shalom-shape",
+            "role": "material",
+            "evidence": "src/planets/ra-shalom/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ra-shalom/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "ra-shalom-research-rashalom",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 2440297,
-      "expectedSha256": "36447f3728e28c8a7b63a70617ad08b8e3a70e58f6920708b6fabedbb10fe1a5"
+      "expectedSha256": "36447f3728e28c8a7b63a70617ad08b8e3a70e58f6920708b6fabedbb10fe1a5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ra-shalom-ra-shalom-research-rashalom",
+            "role": "method",
+            "evidence": "src/planets/ra-shalom/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 10698,
-      "expectedSha256": "4ebb543a09bb1c092a62d96f23314a987b957abcf401bd59d464d02f84c00e12"
+      "expectedSha256": "4ebb543a09bb1c092a62d96f23314a987b957abcf401bd59d464d02f84c00e12",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

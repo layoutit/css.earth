@@ -1,5 +1,5 @@
 {
-  "schema": "csscastalia-authoritative-sources@1",
+  "schema": "csscastalia-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/castalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "castalia-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The 1997 optical analysis statistically prefers the northern spin solution used here: period 4.089 h and ecliptic pole (253°, 56°). The alternative southern solution, period 4.094 h and pole (242°, 7°), was not absolutely excluded. This is the archived JPL shape, not a newly fitted model.",
       "expectedBytes": 148112,
-      "expectedSha256": "5301e6ebc10bf771c2cd563b736190903d23ccb1ddcfcc7c494a39ab4cfc8fe8"
+      "expectedSha256": "5301e6ebc10bf771c2cd563b736190903d23ccb1ddcfcc7c494a39ab4cfc8fe8",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-castalia-castalia-shape",
+            "role": "material",
+            "evidence": "src/planets/castalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/castalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "castalia-research-castalia-1997",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 649007,
-      "expectedSha256": "feccc6b31f852138a3fb4127a7030f2995309131fdd5d73b78471ef49278d467"
+      "expectedSha256": "feccc6b31f852138a3fb4127a7030f2995309131fdd5d73b78471ef49278d467",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-castalia-castalia-research-castalia-1997",
+            "role": "method",
+            "evidence": "src/planets/castalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "castalia-research-castalia-1994",
@@ -88,7 +128,17 @@
         "rotation"
       ],
       "expectedBytes": 1905009,
-      "expectedSha256": "8925537fe103b11fdaf30727ec0e72d0ecc0bf1be2eb73a53f906a14aaafc9e5"
+      "expectedSha256": "8925537fe103b11fdaf30727ec0e72d0ecc0bf1be2eb73a53f906a14aaafc9e5",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-castalia-castalia-research-castalia-1994",
+            "role": "method",
+            "evidence": "src/planets/castalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -123,7 +173,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 9891,
-      "expectedSha256": "e19eb025c52ca060d499fb58ff25eabd140ab6d4acc2eaa97fa69a77d0c99d2c"
+      "expectedSha256": "e19eb025c52ca060d499fb58ff25eabd140ab6d4acc2eaa97fa69a77d0c99d2c",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

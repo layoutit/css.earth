@@ -1,5 +1,5 @@
 {
-  "schema": "csspeitho-authoritative-sources@1",
+  "schema": "csspeitho-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/peitho/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "peitho-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 43.99 km effective diameter (catalog ±0.75 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The pole follows the archive’s occultation match. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Selected2020 archive update4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive. The prior opposite pole4474 remains listed as a comparison, not an equally supported orientation.",
       "expectedBytes": 81655,
-      "expectedSha256": "9586fd3156698a4c8021a37ba6ad8868551a540f5412c7f3a6f06c049442488d"
+      "expectedSha256": "9586fd3156698a4c8021a37ba6ad8868551a540f5412c7f3a6f06c049442488d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-51247",
+            "role": "material",
+            "evidence": "src/planets/peitho/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/peitho/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9104,
-      "expectedSha256": "b5ade93a76f27b1e1214d122b6949e7fcc038dced80f4f330be4798c8ad00c00"
+      "expectedSha256": "b5ade93a76f27b1e1214d122b6949e7fcc038dced80f4f330be4798c8ad00c00",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

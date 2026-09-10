@@ -1,5 +1,5 @@
 {
-  "schema": "csscomet-103p-authoritative-sources@1",
+  "schema": "csscomet-103p-authoritative-sources@2",
   "inputs": [
     {
       "id": "pds-shape",
@@ -16,7 +16,17 @@
       "redistribution": "Public scientific data; retain dataset identification and author attribution.",
       "consumers": [
         "shape"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-pds-shape",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "model-surface",
@@ -58,6 +68,10 @@
         "gridFlags": [
           3
         ]
+      },
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
       }
     },
     {
@@ -100,6 +114,16 @@
         "gridFlags": [
           3
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-constraint-surface",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -117,7 +141,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -134,7 +168,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "mv10110413-6000001-001-r-path",
@@ -151,7 +195,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-mv10110413-6000001-001-r-path",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "mv10110413-6000001-001-r-labelPath",
@@ -168,7 +222,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-mv10110413-6000001-001-r-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "mv10110413-6000001-001-r-controlPath",
@@ -185,7 +249,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "mv10110413-6000002-001-r-path",
@@ -202,7 +270,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-mv10110413-6000002-001-r-path",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "mv10110413-6000002-001-r-labelPath",
@@ -219,7 +297,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-mv10110413-6000002-001-r-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "mv10110413-6000002-001-r-controlPath",
@@ -236,7 +324,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "mv10110414-6000003-001-r-path",
@@ -253,7 +345,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-mv10110414-6000003-001-r-path",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "mv10110414-6000003-001-r-labelPath",
@@ -270,7 +372,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-mv10110414-6000003-001-r-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "mv10110414-6000003-001-r-controlPath",
@@ -287,7 +399,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "hv10110413-5004004-001-d050-path",
@@ -304,7 +420,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-hv10110413-5004004-001-d050-path",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     },
     {
       "id": "hv10110413-5004004-001-d050-labelPath",
@@ -321,7 +447,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-hv10110413-5004004-001-d050-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+          }
+        ]
+      }
     },
     {
       "id": "hv10110413-5004004-001-d050-controlPath",
@@ -338,7 +474,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "hv10110413-5004008-001-d050-path",
@@ -355,7 +495,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-hv10110413-5004008-001-d050-path",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+          }
+        ]
+      }
     },
     {
       "id": "hv10110413-5004008-001-d050-labelPath",
@@ -372,7 +522,17 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-comet-103p-hv10110413-5004008-001-d050-labelpath",
+            "role": "material",
+            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+          }
+        ]
+      }
     },
     {
       "id": "hv10110413-5004008-001-d050-controlPath",
@@ -389,7 +549,11 @@
       "redistribution": "Retain source attribution and product identity.",
       "consumers": [
         "photographs-mri"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -430,7 +594,11 @@
       "path": "content/object.json",
       "expectedBytes": 5822,
       "expectedSha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "purpose": "103P/Hartley 2 source evidence or authored preparation input.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

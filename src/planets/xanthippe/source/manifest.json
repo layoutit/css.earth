@@ -1,5 +1,5 @@
 {
-  "schema": "cssxanthippe-authoritative-sources@1",
+  "schema": "cssxanthippe-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/xanthippe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "xanthippe-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 115.49 km (catalog ±1.74 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select ATLAS convex model 4643 (197,9), retaining 4644 (22,15). The 2020 table gives two poles and 22.1157 h; the 2021 ASAS-SN table gives (32,37)/(202,24) and 22.116 h. These are independent broad-family checks, not release identity or a uniquely resolved pole.",
       "expectedBytes": 46419,
-      "expectedSha256": "422ea5874855df00a405ee696a57cf05421b5b30f4118f016eed543675e3855a"
+      "expectedSha256": "422ea5874855df00a405ee696a57cf05421b5b30f4118f016eed543675e3855a",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-53182",
+            "role": "material",
+            "evidence": "src/planets/xanthippe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/xanthippe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 11314,
-      "expectedSha256": "028ab222647e5a0f870ced06324967b86805398df0866bfe4338cb26081a97b4"
+      "expectedSha256": "028ab222647e5a0f870ced06324967b86805398df0866bfe4338cb26081a97b4",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssvibilia-authoritative-sources@1",
+  "schema": "cssvibilia-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/vibilia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "vibilia-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 143 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2017 rejects the opposite pole using two disk-resolved AO images and three occultation epochs. Archive D143±3 km and pole(251,63) are retained rather than paper ensemble D141±3 km and pole(250,58). No resolved surface imagery is projected onto this mesh.",
       "expectedBytes": 32486,
-      "expectedSha256": "7ad4f599bff34a11ba1ead1d48effff2f784a32ac0d456e695fff177d625ba64"
+      "expectedSha256": "7ad4f599bff34a11ba1ead1d48effff2f784a32ac0d456e695fff177d625ba64",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-4039",
+            "role": "material",
+            "evidence": "src/planets/vibilia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/vibilia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 8969,
-      "expectedSha256": "1e2040c3a8741b0ef3015c5eab6a69163f5780b2c30b84876065fd4126a63156"
+      "expectedSha256": "1e2040c3a8741b0ef3015c5eab6a69163f5780b2c30b84876065fd4126a63156",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

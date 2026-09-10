@@ -10,7 +10,8 @@ import { parsePreparedExploration } from '../../src/platform/prepared-exploratio
 import { compileContributions, contributionViews, parseContributionGraph } from '../../src/platform/exploration-contributions.mts';
 
 const json = async path => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
-const prepared = parsePreparedExploration(await json('../prepared-spacecraft.json'));
+const sources = (await import('../../src/platform/source-catalog.mts')).sourceResolver((await import('../../src/platform/source-catalog.mts')).parseSourceCatalog(await json('../../src/sources/catalog.json')));
+const prepared = parsePreparedExploration(await json('../prepared-spacecraft.json'), sources);
 const catalog = prepared.catalog;
 const provenance = id => json(`../../src/planets/${id}/prepared/provenance.json`);
 const missions = Object.fromEntries(catalog.missions.map(mission => [mission.id, mission]));

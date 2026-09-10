@@ -1,5 +1,5 @@
 {
-  "schema": "cssvesta-authoritative-sources@1",
+  "schema": "cssvesta-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "dlr-hamo-natural-color",
@@ -51,6 +61,16 @@
             "spacecraftId": "dawn",
             "missionId": "dawn",
             "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/truecolor/Vesta_true_color_HAMO-1-2_global.png"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dlr-hamo-natural-color",
+            "role": "material",
+            "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
           }
         ]
       }
@@ -89,6 +109,16 @@
             "evidence": "https://dawngis.dlr.de/data/Vesta/dtm/HAMO/Vesta_HAMO_dtm_global_64.pds.zip"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dlr-hamo-radius-model",
+            "role": "material",
+            "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -123,6 +153,16 @@
             "spacecraftId": "dawn",
             "missionId": "dawn",
             "evidence": "Dawn Framing Camera HAMO Clementine ratios; pinned DLR attached label identifies VESTA and the released HAMO archive."
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-vesta-ratios",
+            "role": "material",
+            "evidence": "src/planets/vesta/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
           }
         ]
       }
@@ -179,7 +219,11 @@
       "path": "content/object.json",
       "purpose": "Authored preparation or presentation data.",
       "expectedBytes": 9591,
-      "expectedSha256": "bf7a7271fd02c86f841b3dae2c2bb9d3c967c863633444a119d17112e2261bde"
+      "expectedSha256": "bf7a7271fd02c86f841b3dae2c2bb9d3c967c863633444a119d17112e2261bde",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

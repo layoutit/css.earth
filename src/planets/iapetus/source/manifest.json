@@ -1,5 +1,5 @@
 {
-  "schema": "cssiapetus-authoritative-sources@1",
+  "schema": "cssiapetus-authoritative-sources@2",
   "inputs": [
     {
       "credit": "NASA/JPL/Space Science Institute",
@@ -53,6 +53,16 @@
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-cassini-voyager-2008-iapetus",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -94,6 +104,16 @@
             "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-cassini-iss-2014-iapetus-color",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
       }
     },
     {
@@ -111,7 +131,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -128,7 +158,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-c1568129671_1_ir-cub",
@@ -147,7 +187,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-c1568129671-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-n1568129671_1_ir-cub",
@@ -166,7 +216,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-n1568129671-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-v1568129671_1-qub",
@@ -185,7 +245,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-v1568129671-1-qub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-c1568133146_2_ir-cub",
@@ -204,7 +274,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-c1568133146-2-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-n1568133146_2_ir-cub",
@@ -223,7 +303,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-n1568133146-2-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-v1568133146_2-qub",
@@ -242,7 +332,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-v1568133146-2-qub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-c1568157352_4_ir-cub",
@@ -261,7 +361,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-c1568157352-4-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-n1568157352_4_ir-cub",
@@ -280,7 +390,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-n1568157352-4-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-original-v1568157352_4-qub",
@@ -299,7 +419,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-original-v1568157352-4-qub",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "iapetus-cassini-ice-absorption",
@@ -339,6 +469,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
           }
         ]
       }
@@ -381,6 +521,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-iapetus-iapetus-cassini-infrared",
+            "role": "material",
+            "evidence": "src/planets/iapetus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
           }
         ]
       }
@@ -433,7 +583,11 @@
       "path": "content/object.json",
       "expectedBytes": 13167,
       "expectedSha256": "9385ba5b2291ed240afa983c52dbbcfa72d0bcea81636562869077b56f3466a4",
-      "purpose": "Source metadata, license evidence, or authored preparation and content."
+      "purpose": "Source metadata, license evidence, or authored preparation and content.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "presentation/title-mark.json",

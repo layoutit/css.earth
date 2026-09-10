@@ -1,5 +1,5 @@
 {
-  "schema": "cssparysatis-authoritative-sources@1",
+  "schema": "cssparysatis-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/parysatis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "parysatis-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Published convex light-curve model 5820. Approximate scale from a thermal diameter of 44.749 ± 0.37 km. Quoted fit error excludes about 10% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved. The selected pole is one of the published alternatives.",
       "expectedBytes": 46419,
-      "expectedSha256": "5d01fc5141682daead93573aef676e56dfd5cdee4f9608b15a0125d7887bf9bf"
+      "expectedSha256": "5d01fc5141682daead93573aef676e56dfd5cdee4f9608b15a0125d7887bf9bf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-62120",
+            "role": "material",
+            "evidence": "src/planets/parysatis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/parysatis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -95,7 +125,11 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 10626,
       "expectedSha256": "7778360534fcebfeedb537e46dc0dc4b2b48ae3c4e5221f77de961cd21f61338",
-      "sha256": "937ac2734ddac9ae894980011467938e94b4cbf8cc36350ed845f3fe27182483"
+      "sha256": "937ac2734ddac9ae894980011467938e94b4cbf8cc36350ed845f3fe27182483",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

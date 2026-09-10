@@ -1,5 +1,5 @@
 {
-  "schema": "csskemi-authoritative-sources@1",
+  "schema": "csskemi-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/kemi/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "kemi-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex lightcurve reconstruction at approximate thermal scale: 17.98 km effective diameter (catalog ±1.34 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes. AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred. Kemi has one catalog detection; this limited measurement support remains explicit.",
       "expectedBytes": 82627,
-      "expectedSha256": "0be47f09f2798dd4aa3bc7288dac1168de6bfc905e516b02c081e7bb2b151490"
+      "expectedSha256": "0be47f09f2798dd4aa3bc7288dac1168de6bfc905e516b02c081e7bb2b151490",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-4357",
+            "role": "material",
+            "evidence": "src/planets/kemi/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/kemi/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 8190,
-      "expectedSha256": "662a1d4f5035d873ab9cb2c9a112f8357a7a6c1f6d5577bf7c108202f52a5085"
+      "expectedSha256": "662a1d4f5035d873ab9cb2c9a112f8357a7a6c1f6d5577bf7c108202f52a5085",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

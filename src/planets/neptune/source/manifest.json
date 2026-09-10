@@ -1,5 +1,5 @@
 {
-  "schema": "cssneptune-authoritative-sources@1",
+  "schema": "cssneptune-authoritative-sources@2",
   "inputs": [
     {
       "id": "hubble-opal-neptune-visible",
@@ -27,6 +27,16 @@
             "spacecraftId": "hubble",
             "missionId": "hubble",
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-visible",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
         ]
       }
@@ -57,6 +67,16 @@
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-fq619n",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
       }
     },
     {
@@ -85,6 +105,16 @@
             "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-f845m",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
       }
     },
     {
@@ -101,7 +131,17 @@
         "lenses"
       ],
       "expectedBytes": 1541,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hubble-opal-neptune-readme",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "ras-oxford-neptune-true-colour-reference",
@@ -120,7 +160,17 @@
         "lenses"
       ],
       "expectedBytes": 338632,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-ras-oxford-neptune-true-colour-reference",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "openspace-neptune-globe",
@@ -138,7 +188,13 @@
         "scene"
       ],
       "expectedBytes": 1191,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "openspace-neptune-globe",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "openspace-neptune-kernels",
@@ -153,7 +209,13 @@
         "moons"
       ],
       "expectedBytes": 1147,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "openspace-neptune-kernels",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "openspace-neptune-major-moons",
@@ -168,7 +230,13 @@
         "moons"
       ],
       "expectedBytes": 2756,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "openspace-neptune-major-moons",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-science-neptune-editorial",
@@ -183,7 +251,17 @@
         "panel"
       ],
       "expectedBytes": 8148,
-      "historicalAcquisition": "tools/prepare-planet-information.mjs neptune during adapter acquisition"
+      "historicalAcquisition": "tools/prepare-planet-information.mjs neptune during adapter acquisition",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-nasa-science-neptune-editorial",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "nasa-psg-neptune-configuration",
@@ -199,7 +277,13 @@
         "temperature-pressure-profile"
       ],
       "expectedBytes": 8864,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-neptune-configuration",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "nasa-psg-neptune-r240-rif",
@@ -214,7 +298,13 @@
         "spectrum"
       ],
       "expectedBytes": 12113,
-      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh"
+      "historicalAcquisition": "node src/planets/neptune/tools/acquire.mjs --refresh",
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "nasa-psg-neptune-r240-rif",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "hyg-v41-neptune-field",
@@ -229,7 +319,17 @@
         "stars",
         "starfield"
       ],
-      "expectedBytes": 144994
+      "expectedBytes": 144994,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-hyg-v41-neptune-field",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "eso-neptune-milky-way-panorama",
@@ -247,7 +347,17 @@
       "consumers": [
         "starfield",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-neptune-cubic-sky-sun-oracle-asset",
@@ -263,7 +373,17 @@
         "starfield",
         "sun-oracle",
         "scene"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-neptune-google-maps-neptune-cubic-sky-sun-oracle-asset",
+            "role": "material",
+            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "google-maps-neptune-cubic-sky-sun-oracle-measurements",
@@ -280,7 +400,13 @@
         "sun-oracle",
         "scene",
         "lighting"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "google-maps-neptune-cubic-sky-sun-oracle-measurements",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "neptune-authored-preparation-rings",
@@ -294,7 +420,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "radial-layers"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "neptune-authored-preparation-navigation",
@@ -308,7 +438,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "navigation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "neptune-authored-content-object",
@@ -322,7 +456,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "content"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "neptune-authored-presentation-title-mark",
@@ -336,7 +474,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "neptune-authored-editorial-object",
@@ -350,7 +492,11 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "content"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "neptune-authored-observations",
@@ -364,7 +510,13 @@
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "observed-surfaces"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "neptune-authored-observations",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "neptune-authored-materials",
@@ -378,7 +530,13 @@
       "redistribution": "checked authored source with referenced observation provenance",
       "consumers": [
         "material-composition"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "neptune-authored-materials",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "neptune-authored-geometry",
@@ -392,7 +550,13 @@
       "redistribution": "checked authored source",
       "consumers": [
         "geometry"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "neptune-authored-geometry",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "neptune-authored-presentation",
@@ -406,7 +570,13 @@
       "redistribution": "checked authored source",
       "consumers": [
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "neptune-authored-presentation",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "neptune-authored-charts",
@@ -420,7 +590,13 @@
       "redistribution": "checked authored source with institutional provenance",
       "consumers": [
         "charts"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "neptune-authored-charts",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "neptune-authored-photometry",
@@ -434,7 +610,13 @@
       "redistribution": "checked authored source with institutional provenance",
       "consumers": [
         "charts"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "neptune-authored-photometry",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "neptune-authored-celestial",
@@ -448,7 +630,13 @@
       "redistribution": "checked authored source",
       "consumers": [
         "celestial"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "neptune-authored-celestial",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     },
     {
       "id": "neptune-authored-acquisition",
@@ -462,7 +650,13 @@
       "redistribution": "checked authored source",
       "consumers": [
         "acquisition"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "unresolved",
+        "label": "neptune-authored-acquisition",
+        "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27",
+        "reason": "Inherited record does not establish a single published identity. Its original acquisition, credits and interpretation remain authoritative; resolve from those records before asserting equivalence."
+      }
     }
   ],
   "generatedIntermediates": [],

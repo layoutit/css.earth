@@ -1,5 +1,5 @@
 {
-  "schema": "cssphoebe-authoritative-sources@1",
+  "schema": "cssphoebe-authoritative-sources@2",
   "inputs": [
     {
       "id": "cassini-mosaic",
@@ -45,6 +45,16 @@
             "evidence": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-cassini-mosaic",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
       }
     },
     {
@@ -70,7 +80,17 @@
         "type": "body-fixed-mesh",
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Historical source retained for provenance, outside the mounted view roster. Registration of the old monochrome mosaic to the 2023 shifted shape has not been demonstrated."
+      "coverage": "Historical source retained for provenance, outside the mounted view roster. Registration of the old monochrome mosaic to the 2023 shifted shape has not been demonstrated.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-gaskell-2012-shape",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "eso-milky-way-panorama",
@@ -87,7 +107,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -104,7 +134,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "id": "phoebe-2023-shape",
@@ -128,7 +168,17 @@
         "type": "body-fixed-mesh",
         "longitudeDirection": "east-positive"
       },
-      "coverage": "Published center-of-figure Q128 model, 1.195 km nominal GSD; poorly imaged terrain is less constrained. Source-preserving simplification is separately measured."
+      "coverage": "Published center-of-figure Q128 model, 1.195 km nominal GSD; poorly imaged terrain is less constrained. Source-preserving simplification is separately measured.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-2023-shape",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "phoebe-2023-albedo",
@@ -171,6 +221,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-2023-albedo",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
           }
         ]
       }
@@ -218,6 +278,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-2023-radius",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
       }
     },
     {
@@ -261,6 +331,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-2023-bestmap",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
           }
         ]
       }
@@ -308,6 +388,16 @@
             "evidence": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-2023-numimg",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
       }
     },
     {
@@ -327,7 +417,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-cassini-original-c1465671822-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "phoebe-cassini-original-n1465671822_1_ir-cub",
@@ -346,7 +446,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-cassini-original-n1465671822-1-ir-cub",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "phoebe-cassini-original-v1465671822_1-qub",
@@ -365,7 +475,17 @@
       "redistribution": "Retain archive authors and CC BY 4.0 attribution.",
       "consumers": [
         "cassini-ice-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-cassini-original-v1465671822-1-qub",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "phoebe-cassini-ice-absorption",
@@ -405,6 +525,16 @@
             "spacecraftId": "cassini",
             "missionId": "cassini",
             "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-cassini-ice-absorption",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
           }
         ]
       }
@@ -449,6 +579,16 @@
             "evidence": "https://vims.univ-nantes.fr/cube/1465671822_1"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-phoebe-phoebe-cassini-infrared",
+            "role": "material",
+            "evidence": "src/planets/phoebe/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
       }
     }
   ],
@@ -488,7 +628,11 @@
       "path": "content/object.json",
       "expectedBytes": 13158,
       "expectedSha256": "b9b8d32239e44ba08108e7bd064c22dcab4874a5fc94d8751427be79d1013923",
-      "purpose": "Authored content, source documentation or preparation metadata."
+      "purpose": "Authored content, source documentation or preparation metadata.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "observations/datainfo.txt",

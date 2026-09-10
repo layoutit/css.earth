@@ -182,5 +182,21 @@
       "path": "color-calibration.json",
       "sha256": "6cd56fff4e746963de9b4432bb6763395f0a2d680e33d5ce268835140493bc59"
     }
-  ]
+  ],
+  "sourceBinding": {
+    "kind": "catalogued",
+    "references": [
+      {
+        "catalogueId": "openspace-milky-way-volume",
+        "role": "material",
+        "evidence": "src/objects/milky-way/source/provenance.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/title"
+      }
+    ]
+  },
+  "catalogueDisplay": {
+    "feature": "galaxy",
+    "label": "OpenSpace",
+    "credit": "Milky Way volume · Jon Parker, Emil Axelsson, Carter Emmart; NAOJ, AMNH & OpenSpace.",
+    "description": "OpenSpace Milky Way volume. Jon Parker, Emil Axelsson, Carter Emmart, OpenSpace Team. National Astronomical Observatory of Japan (simulation); American Museum of Natural History (Dark Universe model); OpenSpace Project (volume adaptation)."
+  }
 }

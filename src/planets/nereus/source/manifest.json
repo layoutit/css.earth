@@ -1,5 +1,5 @@
 {
-  "schema": "cssnereus-authoritative-sources@1",
+  "schema": "cssnereus-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/nereus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "nereus-shape",
@@ -41,7 +51,17 @@
       },
       "coverage": "The archived filename contains alt1, but its measured 0.510 × 0.330 × 0.241 km extents identify the paper’s preferred smaller-volume model. Its polar dimension is weakly constrained; a thicker alternative fits comparably. The selected pole is within a 10° uncertainty radius and the period is 15.16 ± 0.04 h. No resolved optical surface map is supplied.",
       "expectedBytes": 67291,
-      "expectedSha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19"
+      "expectedSha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-nereus-nereus-shape",
+            "role": "material",
+            "evidence": "src/planets/nereus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -58,7 +78,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/nereus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "nereus-research-nereus",
@@ -73,7 +103,17 @@
         "rotation"
       ],
       "expectedBytes": 1780803,
-      "expectedSha256": "cce85ba4434fad2e39b0d615de004ffb968696d4f3b756408f2e249373e29f94"
+      "expectedSha256": "cce85ba4434fad2e39b0d615de004ffb968696d4f3b756408f2e249373e29f94",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-nereus-nereus-research-nereus",
+            "role": "method",
+            "evidence": "src/planets/nereus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -108,7 +148,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original scientific reference or authored preparation input.",
       "expectedBytes": 8420,
-      "expectedSha256": "d79c6182cb926954b53eeea5b86a5c502b95bb340320d020629e5bd3487347ab"
+      "expectedSha256": "d79c6182cb926954b53eeea5b86a5c502b95bb340320d020629e5bd3487347ab",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

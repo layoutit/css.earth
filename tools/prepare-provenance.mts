@@ -6,7 +6,7 @@ import { validateObjectProvenance } from '../src/platform/object-provenance.mts'
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 import { hasErrorCode } from './source-values.mts';
 import { prepareObjectProvenance } from './objects/provenance.mts';
-import { migrateProvenanceV1 } from './objects/migrate-provenance-v1.mts';
+import { sourceObject } from '../src/platform/source-catalog.mts';
 import { prepareSpacecraft } from './prepare-spacecraft.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
 
@@ -33,8 +33,8 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
     const path = resolve(root, 'src/planets', object.id, 'prepared/provenance.json');
     const existing = await readFile(path, 'utf8').then(text => {
       const raw: unknown = JSON.parse(text);
-      const migrated = migrateProvenanceV1(raw);
-      return { document: migrated, legacy: text.includes('"cssearth-object-provenance@1"') };
+      if (sourceObject(raw).schema !== 'cssearth-object-provenance@3') return null;
+      return { document: validateObjectProvenance(raw), legacy: false };
     }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
     const retained = existing && !existing.legacy && provenanceIdentity(existing.document) === provenanceIdentity(document) ? existing.document : document;
     documents.set(object.id, retained);
@@ -45,7 +45,7 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
   // Invalid identities, capture pairs, lens IDs or artwork leave the entire
   // previous prepared set in place. Consumers also verify the closure pins.
   const catalogue = await prepareSpacecraft({ root, publish: false, provenance: documents });
-  await writePreparedSet([...outputs, catalogue.output]);
+  await writePreparedSet([...outputs, ...catalogue.outputs]);
   return results;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

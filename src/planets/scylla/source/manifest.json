@@ -1,5 +1,5 @@
 {
-  "schema": "cssscylla-authoritative-sources@1",
+  "schema": "cssscylla-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/scylla/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "scylla-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 39.21 km (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select second archive pole 920 (356,53). Hanuš et al. (2018), Table A.3, rejects the revised (190,65) family and favors revised (346,41), corresponding to the selected broad family rather than archive 919 (201,69). The publication revised the nominal shape; its exact revised mesh is not located in the surveyed DAMIT listing, so the 39.0 ±0.8 km VS-TPM size is not silently assigned to the old mesh. AKARI 39.21 ±0.97 km is retained only as an explicit display-scale approximation.",
       "expectedBytes": 82708,
-      "expectedSha256": "6ee6620929ec650a72d7f2133a74f796fd91c07e8b3e24463808f878170adab2"
+      "expectedSha256": "6ee6620929ec650a72d7f2133a74f796fd91c07e8b3e24463808f878170adab2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-3479",
+            "role": "material",
+            "evidence": "src/planets/scylla/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/scylla/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9556,
-      "expectedSha256": "494a0727c96fe969c1ad75dd6f7964b679c16057a194961042368535c454d526"
+      "expectedSha256": "494a0727c96fe969c1ad75dd6f7964b679c16057a194961042368535c454d526",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

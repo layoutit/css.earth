@@ -1,5 +1,5 @@
 {
-  "schema": "cssisis-authoritative-sources@1",
+  "schema": "cssisis-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/isis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "isis-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Nonconvex model constrained by resolved imaging, 104 ± 4 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The raw table has an equivalent diameter of 285.89754 source units, inconsistent with its km-calibrated flag and declared 104 km diameter; scale 0.363766684… km per source unit restores the declared diameter. The source remains an inverse model, not a directly measured surface. The original ADAM study used only one AO observation for this body, limiting the shape constraints.",
       "expectedBytes": 32486,
-      "expectedSha256": "69468466831b229d880e8d0f58a4046ae973653da5d1155733fbbf8185ac9611"
+      "expectedSha256": "69468466831b229d880e8d0f58a4046ae973653da5d1155733fbbf8185ac9611",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-1150",
+            "role": "material",
+            "evidence": "src/planets/isis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/isis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 7915,
-      "expectedSha256": "502ac9369c07efe10bb7391074ead26e5bfbb2fa56e40041e45c62e96ba168b9"
+      "expectedSha256": "502ac9369c07efe10bb7391074ead26e5bfbb2fa56e40041e45c62e96ba168b9",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

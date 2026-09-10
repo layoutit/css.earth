@@ -1,5 +1,5 @@
 {
-  "schema": "cssiclea-authoritative-sources@1",
+  "schema": "cssiclea-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/iclea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "iclea-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Convex light-curve reconstruction scaled by stellar occultations: 86 km volume-equivalent diameter (model range79–99 km). The grid marks unavailable imagery; rotational phase is illustrative. Marciniak2023 §5.3 prefers pole1(31,13) based on the only available three-chord occultation, agreement with independent period/pole recovery, and inconsistent smaller size for pole2. Table1 gives volume-equivalent86 km with asymmetric interval79–99 km; these limits reflect model vertical-stretch variation, not Gaussian local surface error. The archive keeps the larger13 km side as a symmetric error field; the actual asymmetric range is preserved here.",
       "expectedBytes": 80439,
-      "expectedSha256": "3212a810d5ca2f09b46bdac82d0817c197955b84313426df41f473fc6f7945fe"
+      "expectedSha256": "3212a810d5ca2f09b46bdac82d0817c197955b84313426df41f473fc6f7945fe",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-127591",
+            "role": "material",
+            "evidence": "src/planets/iclea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/iclea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 8683,
-      "expectedSha256": "497ab8a25e52517c65dba23b9ad2d0cb6d1d52d23d9a8ae959404c543178a7fe"
+      "expectedSha256": "497ab8a25e52517c65dba23b9ad2d0cb6d1d52d23d9a8ae959404c543178a7fe",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

@@ -1,5 +1,5 @@
 {
-  "schema": "cssaemilia-authoritative-sources@1",
+  "schema": "cssaemilia-authoritative-sources@2",
   "inputs": [
     {
       "id": "eso-milky-way-panorama",
@@ -16,7 +16,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/aemilia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          }
+        ]
+      }
     },
     {
       "id": "aemilia-shape",
@@ -42,7 +52,17 @@
       },
       "coverage": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative. Photometry constrains the broad nonconvex shape; basin depths and fine relief are not directly resolved. A publication volume scale from the matching nominal SAGE pole family is applied uniformly; byte identity with the paper fit is not separately established. Diameter uncertainty does not bound local shape errors. No global reflectance mosaic, craters or regolith texture is inferred. The original body frame and connectivity are retained. Absolute display phase is arbitrary. Select ISAM SAGE model102, the nonconvex pole1 family from Marciniak et al. (2018). Its original OBJ pins target159, methodSAGE, pole(138.85848,65.93886) and period24.478724h. The published paper finds SAGE pole1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table4 explicitly supplies a135 ±7 km volume-equivalent occultation diameter for SAGE pole1; Table7 TPM137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole2 remains possible. This source supersedes DAMIT1869 convex130 ±7 km in this package; the archive model and its raw140-km size are retained as an excluded comparison.",
       "expectedBytes": 239882,
-      "expectedSha256": "4d412ad36155b974bdc0d1d676d426449c60f883b18f64a7ee609bdc753d08c9"
+      "expectedSha256": "4d412ad36155b974bdc0d1d676d426449c60f883b18f64a7ee609bdc753d08c9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-aemilia-aemilia-shape",
+            "role": "material",
+            "evidence": "src/planets/aemilia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -59,7 +79,17 @@
         "title"
       ],
       "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c"
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/aemilia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -94,7 +124,11 @@
       "path": "content/object.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 9510,
-      "expectedSha256": "4f658c937daf3edb14ba6fe786f0ed2ed7a244160db5f2fa724d986ecde8057e"
+      "expectedSha256": "4f658c937daf3edb14ba6fe786f0ed2ed7a244160db5f2fa724d986ecde8057e",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "preparation/acquisition.json",

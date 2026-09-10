@@ -1,5 +1,5 @@
 {
-  "schema": "cssganymede-authoritative-sources@1",
+  "schema": "cssganymede-authoritative-sources@2",
   "inputs": [
     {
       "id": "usgs-voyager-galileo-mono",
@@ -56,6 +56,16 @@
             "spacecraftId": "voyager-2",
             "missionId": "voyager-2",
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-usgs-voyager-galileo-mono",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
           }
         ]
       }
@@ -116,6 +126,16 @@
             "evidence": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif"
           }
         ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-usgs-voyager-galileo-color",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+          }
+        ]
       }
     },
     {
@@ -133,7 +153,17 @@
       "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
       "consumers": [
         "starfield"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso0932a",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+          }
+        ]
+      }
     },
     {
       "id": "inter-title-font",
@@ -150,7 +180,17 @@
       "redistribution": "Prepared title outlines under the font license.",
       "consumers": [
         "title"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+          }
+        ]
+      }
     },
     {
       "path": "system/jupiter-hubble.png",
@@ -168,7 +208,17 @@
         "https://www.nasa.gov/nasa-brand-center/images-and-media/"
       ],
       "acquisition": "Pinned Hubble Jupiter image, also used by Jupiter’s navigation recipe.",
-      "redistribution": "Credited prepared observational image; source binary excluded from Git."
+      "redistribution": "Credited prepared observational image; source binary excluded from Git.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-jupiter-hubble-parent",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+          }
+        ]
+      }
     },
     {
       "id": "ganymede-surface-minimap-frame",
@@ -183,7 +233,11 @@
       "consumers": [
         "lenses",
         "presentation"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+      }
     },
     {
       "id": "usgs-sim3237-geologyunits-dbf",
@@ -201,7 +255,17 @@
       "consumers": [
         "geology-surfaces"
       ],
-      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf"
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.dbf",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-usgs-sim3237-geologyunits-dbf",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+          }
+        ]
+      }
     },
     {
       "id": "usgs-sim3237-geologyunits-prj",
@@ -219,7 +283,17 @@
       "consumers": [
         "geology-surfaces"
       ],
-      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj"
+      "archiveMember": "Ganymede_SIM3237_Database/Ganymede_Geology_SIM3237_Shapefiles/Ganymede_GlobalGeology_15M/GeologyUnits.prj",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-usgs-sim3237-geologyunits-prj",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+          }
+        ]
+      }
     },
     {
       "id": "usgs-sim3237-geologic-units",
@@ -255,7 +329,17 @@
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 2632345
       },
-      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps."
+      "coverage": "Only archived nondegenerate base-unit polygons with an unambiguous category. No extrapolation across source gaps or conflicting overlaps.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-usgs-sim3237-geologic-units",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+          }
+        ]
+      }
     },
     {
       "id": "ganymede-muse-original-577-3nm-band-1",
@@ -273,7 +357,17 @@
       "redistribution": "CC BY 4.0 original numeric map with attribution.",
       "consumers": [
         "surface-chemistry-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-ganymede-muse-original-577-3nm-band-1",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+          }
+        ]
+      }
     },
     {
       "id": "ganymede-muse-original-577-3nm-band-2",
@@ -291,7 +385,17 @@
       "redistribution": "CC BY 4.0 original numeric map with attribution.",
       "consumers": [
         "surface-chemistry-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-ganymede-muse-original-577-3nm-band-2",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+          }
+        ]
+      }
     },
     {
       "id": "ganymede-muse-original-577-3nm-band-3",
@@ -309,7 +413,17 @@
       "redistribution": "CC BY 4.0 original numeric map with attribution.",
       "consumers": [
         "surface-chemistry-originals"
-      ]
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-ganymede-muse-original-577-3nm-band-3",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+          }
+        ]
+      }
     },
     {
       "id": "ganymede-muse-oxygen-signature-night-1",
@@ -347,7 +461,17 @@
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 2631200
       },
-      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-ganymede-muse-oxygen-signature-night-1",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+          }
+        ]
+      }
     },
     {
       "id": "ganymede-muse-oxygen-signature-night-2",
@@ -385,7 +509,17 @@
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 2631200
       },
-      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-ganymede-muse-oxygen-signature-night-2",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+          }
+        ]
+      }
     },
     {
       "id": "ganymede-muse-oxygen-signature-night-3",
@@ -423,7 +557,17 @@
         "latitudeType": "planetocentric",
         "referenceRadiusMeters": 2631200
       },
-      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging."
+      "coverage": "Native two-degree nodes under an explicit grid interpretation. One native-node edge buffer is withheld. Missing samples stay missing; absolute subpixel registration is unresolved. Overlap selects the earliest valid night without averaging.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-ganymede-ganymede-muse-oxygen-signature-night-3",
+            "role": "material",
+            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -480,7 +624,11 @@
       "path": "content/object.json",
       "expectedBytes": 18331,
       "expectedSha256": "0a453be4ee04370d6d36f3a7dc6f0e0dc0b9a9564f79268fb9c0d285dc50764a",
-      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure."
+      "purpose": "Authored scientific and presentation capability recipe migrated from exact PR11 source closure.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+      }
     },
     {
       "path": "presentation/title-mark.json",

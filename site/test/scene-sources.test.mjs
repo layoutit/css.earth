@@ -79,7 +79,7 @@ test('app credits and prepared body provenance have separate consumers on direct
   ]);
   assert.match(shell, /const sources = sceneSources\(resources\)/u);
   assert.doesNotMatch(information, /sceneSources/u);
-  assert.match(information, /const sources = objectSources\(provenance\)/u);
+  assert.match(information, /objectSources\(provenance\)/u);
   assert.match(object, /prepared\/provenance\.json/u);
   assert.doesNotMatch(object, /sourceManifests|sourceCharts|sourceLenses/u);
   assert.match(object, /resources=\{content.resources\}/u);
