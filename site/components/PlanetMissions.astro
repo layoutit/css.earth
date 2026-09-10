@@ -1,32 +1,43 @@
 ---
-import type { Mission } from '../spacecraft-types.mts';
-interface Props { objectId: string; missions: readonly Mission[]; }
+import type { MissionRecord } from '../../src/platform/exploration-catalog.mts';
+import type { ContributionEdge } from '../../src/platform/exploration-contributions.mts';
 import DatasetSpacecraft from './DatasetSpacecraft.astro';
+import SpacecraftDetails from './SpacecraftDetails.astro';
 import { spacecraftAgencies } from '../dataset-spacecraft.mts';
-import agencyLogosInput from '../source/agency-logos.json';
-const { objectId, missions } = Astro.props;
-const agencyLogos: Readonly<Record<string, { src: string }>> = agencyLogosInput;
+import { AGENCIES, EXPLORATION } from '../exploration-catalog.mts';
+interface Props { objectId: string; missions: readonly MissionRecord[]; notes: readonly ContributionEdge[]; }
+const { objectId, missions, notes } = Astro.props;
 const agencies = spacecraftAgencies(missions);
 const initialMissionIds = agencies[0]?.missions.map(mission => mission.id);
 const resultsId = `${objectId}-mission-results`;
+const noteGroups = [...new Map(notes.map(edge => [JSON.stringify(edge.attribution), edge.attribution])).values()];
+const evidenceUrl = (value: string) => { try { const url = new URL(value); return /^https?:$/.test(url.protocol) && !/\s/.test(value) ? value : null; } catch { return null; } };
 ---
-{agencies.length > 0 ? <>
+{agencies.length > 0 && <>
   <nav class="planet-observation-controls" aria-label="Mission agencies">
-    {agencies.map((agency, index) => <button
-      type="button"
-      class="planet-observation-control planet-mission-agency-control"
-      data-mission-agency={agency.name}
-      data-agency-missions={JSON.stringify(agency.missions.map(mission => mission.id))}
-      aria-pressed={index === 0 ? 'true' : 'false'}
-      aria-controls={resultsId}
-    >
-      <span class="planet-lens-label">{agency.name}</span>
+    {agencies.map((agency, index) => <button type="button" class="planet-observation-control planet-mission-agency-control"
+      data-mission-agency={agency.name} data-agency-missions={JSON.stringify(agency.missions.map(mission => mission.id))}
+      aria-pressed={index === 0 ? 'true' : 'false'} aria-controls={resultsId}>
+      <span class="planet-lens-label">{AGENCIES[agency.name].name}</span>
       <span class="planet-lens-detail">{agency.missions.length} {agency.missions.length === 1 ? 'mission' : 'missions'}</span>
-      {agencyLogos[agency.name] && <img class="planet-lens-icon planet-agency-logo"
-        src={agencyLogos[agency.name].src} width="14" height="14" alt="" />}
+      {AGENCIES[agency.name].src && <img class="planet-lens-icon planet-agency-logo" src={AGENCIES[agency.name].src} width="14" height="14" alt="" />}
     </button>)}
   </nav>
   <section class="planet-mission-details" id={resultsId} data-mission-results aria-label={`${agencies[0].name} missions`}>
-    <DatasetSpacecraft {missions} visibleMissionIds={initialMissionIds} />
+    <DatasetSpacecraft {objectId} {missions} visibleMissionIds={initialMissionIds} />
   </section>
-</> : <p class="planet-missions-empty">No mission data available for these datasets.</p>}
+</>}
+{noteGroups.length > 0 && <section class="planet-capture-notes" aria-label="Attribution limits">
+  <h3>Attribution limits</h3>
+  {noteGroups.map(attribution => {
+    const lensIds = new Set(notes.filter(edge => JSON.stringify(edge.attribution) === JSON.stringify(attribution)).flatMap(edge => edge.lensIds));
+    const views = EXPLORATION.graph.datasets.filter(view => view.objectId === objectId && lensIds.has(view.lensId));
+    const href = evidenceUrl(attribution.evidence);
+    return <article>
+      {attribution.kind === 'unresolved' ? <><h4>{attribution.label}</h4><p>{attribution.reason}</p></> : attribution.kind === 'spacecraft' && <><p>The source identifies this spacecraft but does not identify the mission.</p><SpacecraftDetails spacecraftId={attribution.spacecraftId} {objectId} contributed={true} /></>}
+      <ul class="planet-mission-datasets">{views.map(view => <li><a href={view.href} data-dataset-link>{view.label}</a></li>)}</ul>
+      {href ? <a href={href} target="_blank" rel="noreferrer">View source evidence</a> : <p>{attribution.evidence}</p>}
+    </article>;
+  })}
+</section>}
+{!agencies.length && !noteGroups.length && <p class="planet-missions-empty">No mission data available for these datasets.</p>}

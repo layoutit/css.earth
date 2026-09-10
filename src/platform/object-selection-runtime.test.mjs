@@ -195,3 +195,27 @@ test("same-row facts advance only after a successful shared native frame publica
   assert.throws(() => h.view(0, 2), /native frame failed/); assert.equal(h.coordinator.state().plan, successful);
   assert.equal(h.fatal.length, 1); assert.equal(h.lifetime.disposed, true);
 });
+
+test('an aborted dataset request settles before decoding and retains the committed scene', async t => {
+  const h = harness(); t.after(h.restore); await h.ready();
+  const signal = new AbortController(), committed = h.coordinator.state().plan;
+  const request = h.coordinator.dispatch({ kind: 'lens', id: 'topography' }, { signal: signal.signal });
+  await flush(); const late = h.jobs.findLast(job => !job.done); assert.ok(late);
+  signal.abort(); assert.equal(await request, false);
+  assert.equal(h.coordinator.state().pending, false);
+  assert.equal(h.coordinator.state().committed.lensId, 'normal');
+  assert.equal(h.coordinator.state().desired.lensId, 'normal');
+  assert.equal(h.coordinator.state().plan, committed);
+  late.reject(new Error('late cancelled decoder')); await flush();
+  assert.equal(h.commits.length, 1); assert.deepEqual(h.fatal, []);
+  const retry = h.lens('topography'); await h.resolveJobs(); assert.equal(await retry, true);
+});
+
+test('an already aborted dataset signal cannot replace a newer selection', async t => {
+  const h = harness(); t.after(h.restore); await h.ready();
+  const aborted = new AbortController(); aborted.abort();
+  const next = h.lens('topography');
+  assert.equal(await h.coordinator.dispatch({ kind: 'lens', id: 'normal' }, { signal: aborted.signal }), false);
+  await h.resolveJobs(); assert.equal(await next, true);
+  assert.equal(h.coordinator.state().committed.lensId, 'topography');
+});

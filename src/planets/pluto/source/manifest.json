@@ -20,10 +20,14 @@
         "navigation"
       ],
       "capture": {
-        "spacecraftIds": [
-          "new-horizons"
-        ],
-        "evidence": "https://science.nasa.gov/resource/pluto-global-color-map/"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://science.nasa.gov/resource/pluto-global-color-map/"
+          }
+        ]
       }
     },
     {
@@ -43,10 +47,14 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "new-horizons"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif"
+          }
+        ]
       }
     },
     {
@@ -66,10 +74,14 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "new-horizons"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif"
+          }
+        ]
       }
     },
     {

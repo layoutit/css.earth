@@ -16,6 +16,11 @@ function fixture() {
   const listeners = new Set<() => void>();
   const scene = {
     ready: nativeReady.promise,
+    datasets: {
+      ids: ['normal', 'mapped'], defaultId: 'normal', current: () => 'normal',
+      select: vi.fn(async (_id: string, _options?: { signal?: AbortSignal }) => true),
+      subscribe: (_listener: (id: string) => void) => () => {},
+    },
     sharedView: {
       capture: vi.fn(() => view), restore: vi.fn(async () => true),
       subscribe: vi.fn((listener: () => void) => { listeners.add(listener); return () => { listeners.delete(listener); }; }),
@@ -29,6 +34,20 @@ function fixture() {
   return { data, nativeReady, scene, listeners, nativeMount, bind, load, mount, onError, stage,
     fail(error: unknown) { if (!nativeOptions) throw new Error('Native scene not mounted.'); nativeOptions.onError(error); } };
 }
+
+test('dataset selection is exposed only after native readiness and forwards cancellation', async () => {
+  const f = fixture(), controller = f.mount(f.stage, { onError: f.onError });
+  expect(controller.datasets).toBeUndefined();
+  f.data.resolve('prepared');
+  await vi.waitFor(() => expect(f.nativeMount).toHaveBeenCalledOnce());
+  expect(controller.datasets).toBeUndefined();
+  f.nativeReady.resolve(); await controller.ready;
+  expect(controller.datasets).toBe(f.scene.datasets);
+  const signal = new AbortController().signal;
+  expect(await controller.datasets?.select('mapped', { signal })).toBe(true);
+  expect(f.scene.datasets.select).toHaveBeenCalledExactlyOnceWith('mapped', { signal });
+  controller.destroy(); expect(controller.datasets).toBeUndefined();
+});
 
 test('factory does not load; mount owns loading, native readiness, and the last playback command', async () => {
   const f = fixture();

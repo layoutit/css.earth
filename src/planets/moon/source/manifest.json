@@ -20,10 +20,14 @@
         "navigation"
       ],
       "capture": {
-        "spacecraftIds": [
-          "lro"
-        ],
-        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "lro",
+            "missionId": "lro",
+            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg"
+          }
+        ]
       }
     },
     {
@@ -44,10 +48,13 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "grail"
-        ],
-        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
+        "attributions": [
+          {
+            "kind": "mission",
+            "missionId": "grail",
+            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg"
+          }
+        ]
       }
     },
     {
@@ -187,10 +194,14 @@
         "lenses"
       ],
       "capture": {
-        "spacecraftIds": [
-          "lro"
-        ],
-        "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "lro",
+            "missionId": "lro",
+            "evidence": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.xml"
+          }
+        ]
       }
     },
     {

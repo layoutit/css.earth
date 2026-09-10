@@ -43,6 +43,7 @@ export function mountPlanetShell({
     throw new Error("Planet shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
+  let informationTabs: ReturnType<typeof createInformationTabsController>;
   let settingsController: ReturnType<typeof createSettingsController>, objectBrowser: ReturnType<typeof createObjectBrowserController>, contentLifetime: SceneLifetime | null, minimapController: ReturnType<typeof createSurfaceMinimap>, viewReadout: ReturnType<typeof createViewReadout>;
   let selectionPreview: SelectionPreview | null = null;
   let cardNavigation: { view: 'detail' | 'overview' } | null = null;
@@ -86,6 +87,11 @@ export function mountPlanetShell({
     throw error;
   }
   return Object.freeze({
+    showDataset() { informationTabs.show('dataset'); },
+    setDatasetNotice(message: string | null) {
+      const notice = drawer.querySelector<HTMLElement>('[data-dataset-notice]');
+      if (notice) { notice.textContent = message ?? ''; notice.hidden = message === null; }
+    },
     beginCardNavigation(object: ObjectEntry, targetWorldCamera?: WorldCameraPose) {
       // Classify the endpoint once. Intermediate flight poses and the camera
       // handoff must not toggle the destination's retained overview/detail card.
@@ -213,7 +219,7 @@ export function mountPlanetShell({
   function mountContent(id: string, motionEnabled: boolean, highContrastSky: boolean) {
     const owner = contentLifetime = createSceneLifetime();
     const retain = <T extends { destroy(): void }>(controller: T): T => { owner.onDispose(() => controller.destroy()); return controller; };
-    retain(createInformationTabsController(drawer, owner));
+    informationTabs = retain(createInformationTabsController(drawer, owner));
     retain(createMissionAgencyController(drawer, owner));
     retain(createChartSwitcherController(drawer, windowTarget, owner));
     retain(createChartPixelAlignmentController(drawer, windowTarget));
@@ -265,7 +271,10 @@ function createInformationTabsController(drawer: HTMLElement, lifetime: SceneLif
       select(siblings[next], true);
     }, { signal: events.signal });
   }
-  return { destroy() { events.abort(); } };
+  return { show(id: string) {
+    const tab = tabs.find(tab => tab.dataset.informationTab === id);
+    if (tab) select(tab);
+  }, destroy() { events.abort(); } };
 }
 
 function createMissionAgencyController(drawer: HTMLElement, lifetime: SceneLifetime) {
@@ -274,13 +283,13 @@ function createMissionAgencyController(drawer: HTMLElement, lifetime: SceneLifet
     button,
     missionIds: missionIds(button.dataset.agencyMissions),
   }));
-  const figures = [...(panel?.querySelectorAll<HTMLElement>('[data-spacecraft]') ?? [])];
+  const figures = [...(panel?.querySelectorAll<HTMLElement>('[data-mission]') ?? [])];
   const results = panel?.querySelector('[data-mission-results]');
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   const select = (choice: typeof choices[number], focus = false) => {
     for (const item of choices) item.button.setAttribute('aria-pressed', String(item === choice));
-    for (const figure of figures) figure.hidden = !choice.missionIds.has(figure.dataset.spacecraft ?? "");
+    for (const figure of figures) figure.hidden = !choice.missionIds.has(figure.dataset.mission ?? "");
     results?.setAttribute('aria-label', `${choice.button.dataset.missionAgency} missions`);
     if (focus) choice.button.focus();
   };

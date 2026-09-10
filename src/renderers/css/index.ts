@@ -16,6 +16,7 @@ export { loadPreparedCssObject, PREPARED_CSS_OBJECT_FORMAT } from './loader.js';
 export type { PreparedCssTransport } from './loader.js';
 export { parsePreparedObjectRuntime } from './validation/index.js';
 export { createDeferredObjectMount } from './runtime/deferred-object-mount.js';
+export type { ObjectDatasets } from './runtime/deferred-object-mount.js';
 export type { ObjectSharedView, ObjectSceneLifecycle, DeferredMountOptions } from './runtime/deferred-object-mount.js';
 export { createNavigableObjectMount } from './runtime/navigable-object-mount.js';
 export { parsePreparedWorldCameraFrame } from './validation/world-frame.js';

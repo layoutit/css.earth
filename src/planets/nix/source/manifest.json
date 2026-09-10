@@ -61,10 +61,14 @@
         "referenceRadiusMeters": 18265.603887767425
       },
       "capture": {
-        "spacecraftIds": [
-          "new-horizons"
-        ],
-        "evidence": "https://ndownloader.figshare.com/files/24176543"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "new-horizons",
+            "missionId": "new-horizons",
+            "evidence": "https://ndownloader.figshare.com/files/24176543"
+          }
+        ]
       }
     },
     {
