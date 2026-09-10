@@ -1,0 +1,370 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-c2013-a1",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "7d0a40362e5d98fb3158180acac5c5a0ba06610e215f5da7744688151f1f6d8e"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "eb0089d75bc28fe28d0b541b709256314b73d4a1b471d089ec3929cdbf7618e4",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-c2013-a1",
+        "displayName": "Siding Spring 2013",
+        "publicBase": "/scenes/comet-c2013-a1/",
+        "distanceAu": 27.900222087262012,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Illustrative nucleus"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 0.20279931294297818,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.85
+          },
+          "mapUrl": "/scenes/comet-c2013-a1/comet-c2013-a1-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-c2013-a1/comet-c2013-a1-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 4802,
+              "expectedFaces": 9600
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 13.750000000000002
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 5.5,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 70,
+              "latitudeDegrees": 20,
+              "ambient": 1,
+              "diffuse": 0
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
+          "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "6159084127559ce128a9aeea324c607d8ff475a482fd7e51eee29e5aa65eb2c7",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-c2013-a1",
+        "displayName": "Siding Spring 2013",
+        "panel": {
+          "introduction": "This Siding Spring comet passed close to Mars in October 2014. It is a different object from the short-period comet 162P/Siding Spring.",
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Catalog diameter",
+              "value": "≈0.55 km"
+            },
+            {
+              "id": "perihelion",
+              "label": "Closest to Sun",
+              "value": "1.39 AU"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Illustrative nucleus"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Illustrative nucleus",
+              "detail": "Celestia",
+              "title": "C/2013 A1 Siding Spring 2013",
+              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "thumbnail": "/scenes/comet-c2013-a1/comet-c2013-a1-model-thumbnail.webp",
+              "surface": "comet-c2013-a1-model-surface@2x.webp",
+              "poles": "comet-c2013-a1-model-poles@2x.webp",
+              "source": {
+                "id": "celestia-mesh",
+                "path": "../manifest.json",
+                "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+              },
+              "facts": [
+                {
+                  "id": "diameter",
+                  "label": "Catalog diameter",
+                  "value": "≈0.55 km"
+                },
+                {
+                  "id": "perihelion",
+                  "label": "Closest to Sun",
+                  "value": "1.39 AU"
+                }
+              ]
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Celestia",
+            "role": "surface",
+            "description": "Catalog entry and estimated scale",
+            "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+          },
+          {
+            "label": "JPL Horizons",
+            "role": "observations",
+            "description": "Position at 3 September 2026",
+            "href": "https://ssd.jpl.nasa.gov/horizons/"
+          },
+          {
+            "label": "About this comet",
+            "role": "observations",
+            "description": "Observations and history",
+            "href": "https://science.nasa.gov/solar-system/comets/c-2013-a1-siding-spring/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/solar-system/comets/c-2013-a1-siding-spring/",
+            "credit": "Sources listed in reference/source-record.json"
+          },
+          "physical": {
+            "path": "../shape/model.json",
+            "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "celestia-mesh",
+      "path": "shape/model.obj",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "credit": "Celestia Development Team / Chris Laurel; CelestiaContent catalog contributors",
+      "license": "GPL-2.0-or-later",
+      "licenseEvidence": [
+        "reference/celestia.ssc",
+        "reference/GPL-2.0-or-later.txt"
+      ],
+      "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
+      "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "sha256": "494baae429b711b258eedcda3c13d1fb98b8880d45861db62f811953e1315e6a",
+      "bytes": 439176,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "6159084127559ce128a9aeea324c607d8ff475a482fd7e51eee29e5aa65eb2c7",
+      "bytes": 3331,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Illustrative nucleus",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "celestia-mesh"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-c2013-a1/comet-c2013-a1-model-thumbnail.webp",
+          "bytes": 1410,
+          "sha256": "69b3466cdc2dfde0ac4620b064471b9988278c3d37be501c5206f3c63bd9e4a9",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-c2013-a1/comet-c2013-a1-model-surface@2x.webp",
+          "bytes": 119364,
+          "sha256": "903bdcabe32bb4579c8f25f179cce5733ab2dc1f2c252b464938bc6183ca0c57",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 11061,
+          "sha256": "2d717b04f04a23fc147306eace9daf98b0ca601849fa78f9538233a16778d496",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

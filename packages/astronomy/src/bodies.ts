@@ -39,7 +39,7 @@ export type TransNeptunianId = 'arrokoth' | 'quaoar' | 'gkunhomdima' | 'sedna' |
 export type InterstellarId = 'oumuamua'
 export type SmallBodyId = AsteroidId | TransNeptunianId | InterstellarId
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | SceneSatelliteId | DwarfPlanetId | AsteroidId | TransNeptunianId | InterstellarId | CometId
-export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p' | 'comet-1p' | 'comet-8p' | 'comet-19p' | 'comet-137p' | 'comet-143p' | 'comet-162p' | 'comet-2p' | 'comet-209p'
+export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p' | 'comet-1p' | 'comet-8p' | 'comet-19p' | 'comet-137p' | 'comet-143p' | 'comet-162p' | 'comet-2p' | 'comet-209p' | 'comet-17p' | 'comet-21p' | 'comet-26p' | 'comet-29p' | 'comet-46p' | 'comet-55p' | 'comet-96p' | 'comet-109p' | 'comet-167p' | 'comet-153p' | 'comet-c1983-h1' | 'comet-c1956-r1' | 'comet-c1973-e1' | 'comet-c1995-o1' | 'comet-c1996-b2' | 'comet-c2006-p1' | 'comet-c2013-a1' | 'comet-c2014-un271' | 'comet-c2020-f3' | 'comet-c2023-a3'
 export const PLANET_IDS: readonly PlanetId[] = [
   'mercury',
   'venus',
@@ -56,7 +56,7 @@ export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 
 export const TRANS_NEPTUNIAN_IDS: readonly TransNeptunianId[] = ['arrokoth', 'quaoar', 'gkunhomdima', 'sedna', 'gonggong', 'orcus', 'salacia', 'varuna', 'varda', 'mani', 'achlys']
 export const INTERSTELLAR_IDS: readonly InterstellarId[] = ['oumuamua']
 export const SMALL_BODY_IDS: readonly SmallBodyId[] = [...ASTEROID_IDS, ...TRANS_NEPTUNIAN_IDS, ...INTERSTELLAR_IDS]
-export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p', 'comet-1p', 'comet-8p', 'comet-19p', 'comet-137p', 'comet-143p', 'comet-162p', 'comet-2p', 'comet-209p']
+export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p', 'comet-1p', 'comet-8p', 'comet-19p', 'comet-137p', 'comet-143p', 'comet-162p', 'comet-2p', 'comet-209p', 'comet-17p', 'comet-21p', 'comet-26p', 'comet-29p', 'comet-46p', 'comet-55p', 'comet-96p', 'comet-109p', 'comet-167p', 'comet-153p', 'comet-c1983-h1', 'comet-c1956-r1', 'comet-c1973-e1', 'comet-c1995-o1', 'comet-c1996-b2', 'comet-c2006-p1', 'comet-c2013-a1', 'comet-c2014-un271', 'comet-c2020-f3', 'comet-c2023-a3']
 const body = (
   id: BodyId,
   name: string,
@@ -143,6 +143,26 @@ export const BODIES: Record<BodyId, BodyData> = {
   sun: body('sun', 'Sun', '10', 695700, 132712440041.93938, null),
   // Equivalent-volume radius of the Hubble contact model scaled by Spitzer.
   // Borrelly uses half its observed 8 km length as a navigation reference, not a mean or volume radius.
+  'comet-17p': body('comet-17p', "17P Holmes", 'DES=17P;CAP;', 1.2610430004817914, 0, 'sun'),
+  'comet-21p': body('comet-21p', "21P Giacobini–Zinner", 'DES=21P;CAP;', 0.7374520470653751, 0, 'sun'),
+  'comet-26p': body('comet-26p', "26P Grigg–Skjellerup", 'DES=26P;CAP;', 0.9586876611849877, 0, 'sun'),
+  'comet-29p': body('comet-29p', "29P Schwassmann–Wachmann 1", 'DES=29P;CAP;', 22.27105182137433, 0, 'sun'),
+  'comet-46p': body('comet-46p', "46P Wirtanen", 'DES=46P;CAP;', 0.4424712282392251, 0, 'sun'),
+  'comet-55p': body('comet-55p', "55P Tempel–Tuttle", 'DES=55P;CAP;', 1.3274136847176754, 0, 'sun'),
+  'comet-96p': body('comet-96p', "96P Machholz 1", 'DES=96P;CAP;', 2.3598465506092006, 0, 'sun'),
+  'comet-109p': body('comet-109p', "109P Swift–Tuttle", 'DES=109P;CAP;', 8.701934155371427, 0, 'sun'),
+  'comet-167p': body('comet-167p', "167P CINEOS", 'DES=167P;CAP;', 24.398600977157937, 0, 'sun'),
+  'comet-153p': body('comet-153p', "153P Ikeya–Zhang", 'DES=153P;CAP;', 1.8768154597813798, 0, 'sun'),
+  'comet-c1983-h1': body('comet-c1983-h1', "C/1983 H1 IRAS–Araki–Alcock", 'DES=C/1983 H1;CAP;', 3.3922794165007253, 0, 'sun'),
+  'comet-c1956-r1': body('comet-c1956-r1', "C/1956 R1 Arend–Roland", 'DES=C/1956 R1;CAP;', 1.1651742343632927, 0, 'sun'),
+  'comet-c1973-e1': body('comet-c1973-e1', "C/1973 E1 Kohoutek", 'DES=C/1973 E1;CAP;', 1.548649298837288, 0, 'sun'),
+  'comet-c1995-o1': body('comet-c1995-o1', "C/1995 O1 Hale–Bopp", 'DES=C/1995 O1;CAP;', 22.123561411961255, 0, 'sun'),
+  'comet-c1996-b2': body('comet-c1996-b2', "C/1996 B2 Hyakutake", 'DES=C/1996 B2;CAP;', 1.548649298837288, 0, 'sun'),
+  'comet-c2006-p1': body('comet-c2006-p1', "C/2006 P1 McNaught", 'DES=C/2006 P1;CAP;', 1.1651742343632927, 0, 'sun'),
+  'comet-c2013-a1': body('comet-c2013-a1', "C/2013 A1 Siding Spring 2013", 'DES=C/2013 A1;CAP;', 0.20279931294297818, 0, 'sun'),
+  'comet-c2014-un271': body('comet-c2014-un271', "C/2014 UN271 Bernardinelli–Bernstein", 'DES=C/2014 UN271;CAP;', 66.35274336710184, 0, 'sun'),
+  'comet-c2020-f3': body('comet-c2020-f3', "C/2020 F3 NEOWISE", 'DES=C/2020 F3;CAP;', 1.8436301176634378, 0, 'sun'),
+  'comet-c2023-a3': body('comet-c2023-a3', "C/2023 A3 Tsuchinshan–ATLAS", 'DES=C/2023 A3;CAP;', 4.350967077685714, 0, 'sun'),
   'comet-2p': body('comet-2p', '2P/Encke', 'DES=2P;CAP;', 2.4222366966152173, 0, 'sun'),
   'comet-209p': body('comet-209p', '209P/LINEAR', 'DES=209P;CAP;', 1.5069675850601332, 0, 'sun'),
   'comet-137p': body('comet-137p', '137P/Shoemaker-Levy 2', 'DES=137P;CAP;', 4.04, 0, 'sun'),

@@ -1,0 +1,370 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-c1995-o1",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "54dcc32c65fcd5e99be6c88c678f53879ff2dfe9f9c22f7161c8b6f3d2e518eb"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "152db3520039e5c892327cc5c799ff8c39c7b66c3521c603801fdf83ce912cbe",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-c1995-o1",
+        "displayName": "Hale–Bopp",
+        "publicBase": "/scenes/comet-c1995-o1/",
+        "distanceAu": 51.070270471508714,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Illustrative nucleus"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 22.123561411961255,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.85
+          },
+          "mapUrl": "/scenes/comet-c1995-o1/comet-c1995-o1-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-c1995-o1/comet-c1995-o1-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 4802,
+              "expectedFaces": 9600
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 1500
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 600,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 70,
+              "latitudeDegrees": 20,
+              "ambient": 1,
+              "diffuse": 0
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
+          "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "e6da02fc68eb3c1365ae6a39d8963a7ce5a317bf17a236c53b071a3b18d97bda",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-c1995-o1",
+        "displayName": "Hale–Bopp",
+        "panel": {
+          "introduction": "Hale–Bopp remained visible to the naked eye for about 18 months in 1996 and 1997. Its unusually large nucleus helped make it one of the most memorable comets of the twentieth century.",
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Catalog diameter",
+              "value": "≈60 km"
+            },
+            {
+              "id": "perihelion",
+              "label": "Closest to Sun",
+              "value": "0.925 AU"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Illustrative nucleus"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Illustrative nucleus",
+              "detail": "Celestia",
+              "title": "C/1995 O1 Hale–Bopp",
+              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "thumbnail": "/scenes/comet-c1995-o1/comet-c1995-o1-model-thumbnail.webp",
+              "surface": "comet-c1995-o1-model-surface@2x.webp",
+              "poles": "comet-c1995-o1-model-poles@2x.webp",
+              "source": {
+                "id": "celestia-mesh",
+                "path": "../manifest.json",
+                "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+              },
+              "facts": [
+                {
+                  "id": "diameter",
+                  "label": "Catalog diameter",
+                  "value": "≈60 km"
+                },
+                {
+                  "id": "perihelion",
+                  "label": "Closest to Sun",
+                  "value": "0.925 AU"
+                }
+              ]
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Celestia",
+            "role": "surface",
+            "description": "Catalog entry and estimated scale",
+            "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+          },
+          {
+            "label": "JPL Horizons",
+            "role": "observations",
+            "description": "Position at 3 September 2026",
+            "href": "https://ssd.jpl.nasa.gov/horizons/"
+          },
+          {
+            "label": "About this comet",
+            "role": "observations",
+            "description": "Observations and history",
+            "href": "https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/",
+            "credit": "Sources listed in reference/source-record.json"
+          },
+          "physical": {
+            "path": "../shape/model.json",
+            "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "celestia-mesh",
+      "path": "shape/model.obj",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "credit": "Celestia Development Team / Chris Laurel; CelestiaContent catalog contributors",
+      "license": "GPL-2.0-or-later",
+      "licenseEvidence": [
+        "reference/celestia.ssc",
+        "reference/GPL-2.0-or-later.txt"
+      ],
+      "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
+      "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "sha256": "13f4299aba81945399bc84ccfc96eb0bcbb81524071466c2e4e6a770b932212a",
+      "bytes": 439098,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "e6da02fc68eb3c1365ae6a39d8963a7ce5a317bf17a236c53b071a3b18d97bda",
+      "bytes": 3357,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Illustrative nucleus",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "celestia-mesh"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-c1995-o1/comet-c1995-o1-model-thumbnail.webp",
+          "bytes": 1378,
+          "sha256": "be78380ce789be49a62a4ac00449d097f835fb81faf6ae7c3b12851ee7eaae24",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-c1995-o1/comet-c1995-o1-model-surface@2x.webp",
+          "bytes": 120364,
+          "sha256": "880e9dbc01ce2f4c710df3ae9ecdf3dcc70dbe4555776f0b0c4bafea2629de6f",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6607,
+          "sha256": "757cc8d0450f696af852a9fa7c9dbe26de663c067dc566954046607b855f6780",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

@@ -1,0 +1,370 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-c1983-h1",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "8565204795bab884e4746648755e16d4c1eb694ba16c88de008d1bb242083e1f"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "71d12b9d15a7b2360e07fe7b4b1e4f0f59409033358dedd69d3c74f992a5b1bb",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-c1983-h1",
+        "displayName": "IRAS–Araki–Alcock",
+        "publicBase": "/scenes/comet-c1983-h1/",
+        "distanceAu": 62.962581525461886,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Illustrative nucleus"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 3.3922794165007253,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.85
+          },
+          "mapUrl": "/scenes/comet-c1983-h1/comet-c1983-h1-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-c1983-h1/comet-c1983-h1-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 4802,
+              "expectedFaces": 9600
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 229.99999999999997
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 92,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 70,
+              "latitudeDegrees": 20,
+              "ambient": 1,
+              "diffuse": 0
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
+          "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "a74db8371bd9e3c0960ff808685de776ecbe827a709fb91dd7b98059c0acdea1",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-c1983-h1",
+        "displayName": "IRAS–Araki–Alcock",
+        "panel": {
+          "introduction": "IRAS–Araki–Alcock was discovered in 1983 by the IRAS satellite and two independent observers. Its name records all three discoveries.",
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Catalog diameter",
+              "value": "≈9.2 km"
+            },
+            {
+              "id": "perihelion",
+              "label": "Closest to Sun",
+              "value": "0.996 AU"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Illustrative nucleus"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Illustrative nucleus",
+              "detail": "Celestia",
+              "title": "C/1983 H1 IRAS–Araki–Alcock",
+              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "thumbnail": "/scenes/comet-c1983-h1/comet-c1983-h1-model-thumbnail.webp",
+              "surface": "comet-c1983-h1-model-surface@2x.webp",
+              "poles": "comet-c1983-h1-model-poles@2x.webp",
+              "source": {
+                "id": "celestia-mesh",
+                "path": "../manifest.json",
+                "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+              },
+              "facts": [
+                {
+                  "id": "diameter",
+                  "label": "Catalog diameter",
+                  "value": "≈9.2 km"
+                },
+                {
+                  "id": "perihelion",
+                  "label": "Closest to Sun",
+                  "value": "0.996 AU"
+                }
+              ]
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Celestia",
+            "role": "surface",
+            "description": "Catalog entry and estimated scale",
+            "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+          },
+          {
+            "label": "JPL Horizons",
+            "role": "observations",
+            "description": "Position at 3 September 2026",
+            "href": "https://ssd.jpl.nasa.gov/horizons/"
+          },
+          {
+            "label": "About this comet",
+            "role": "observations",
+            "description": "Observations and history",
+            "href": "https://www.jpl.nasa.gov/news/new-comet-discovered/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://www.jpl.nasa.gov/news/new-comet-discovered/",
+            "credit": "Sources listed in reference/source-record.json"
+          },
+          "physical": {
+            "path": "../shape/model.json",
+            "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "celestia-mesh",
+      "path": "shape/model.obj",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "credit": "Celestia Development Team / Chris Laurel; CelestiaContent catalog contributors",
+      "license": "GPL-2.0-or-later",
+      "licenseEvidence": [
+        "reference/celestia.ssc",
+        "reference/GPL-2.0-or-later.txt"
+      ],
+      "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
+      "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "sha256": "550a12ae93ff460d47cd47f8189dd4b6b1c9380ed14cdfc9bc1ccf46f7d08a99",
+      "bytes": 439177,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "a74db8371bd9e3c0960ff808685de776ecbe827a709fb91dd7b98059c0acdea1",
+      "bytes": 3303,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Illustrative nucleus",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "celestia-mesh"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-c1983-h1/comet-c1983-h1-model-thumbnail.webp",
+          "bytes": 1404,
+          "sha256": "72ccfa7e5c1d61b19420741b0514a8eb113dbe346fbf9c25fb60fad8c153895b",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-c1983-h1/comet-c1983-h1-model-surface@2x.webp",
+          "bytes": 117958,
+          "sha256": "e505c1e014f3e4b8507883beb0a15794d808f200424d70f5f0f6392b812dd575",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 8335,
+          "sha256": "2e6150537a654b7c35ca22399905bc98c65775fc2c93b34643e8a62ef0dae7af",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

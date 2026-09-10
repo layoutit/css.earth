@@ -1,0 +1,370 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-96p",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "94dfbf3ec1e73e140fda3556ee85a788917be88c893e3350999ea5bee73967ad"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "7d54ae536c8f95c0cb1d232dcd3483a7ddca886158b16df3a26bea58fe73f791",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-96p",
+        "displayName": "Machholz 1",
+        "publicBase": "/scenes/comet-96p/",
+        "distanceAu": 5.448413475057264,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Illustrative nucleus"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 2.3598465506092006,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.85
+          },
+          "mapUrl": "/scenes/comet-96p/comet-96p-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-96p/comet-96p-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 4802,
+              "expectedFaces": 9600
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 160
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 64,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 70,
+              "latitudeDegrees": 20,
+              "ambient": 1,
+              "diffuse": 0
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
+          "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "4806516796422242b9607f4b4cd5501dcd20c3fefaec72b570770c102dd32f76",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-96p",
+        "displayName": "Machholz 1",
+        "panel": {
+          "introduction": "Machholz 1 repeatedly sweeps close to the Sun. SOHO and STEREO have watched its passages from different sides of Earth’s orbit.",
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Catalog diameter",
+              "value": "≈6.4 km"
+            },
+            {
+              "id": "perihelion",
+              "label": "Closest to Sun",
+              "value": "0.116 AU"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Illustrative nucleus"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Illustrative nucleus",
+              "detail": "Celestia",
+              "title": "96P/Machholz 1",
+              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "thumbnail": "/scenes/comet-96p/comet-96p-model-thumbnail.webp",
+              "surface": "comet-96p-model-surface@2x.webp",
+              "poles": "comet-96p-model-poles@2x.webp",
+              "source": {
+                "id": "celestia-mesh",
+                "path": "../manifest.json",
+                "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+              },
+              "facts": [
+                {
+                  "id": "diameter",
+                  "label": "Catalog diameter",
+                  "value": "≈6.4 km"
+                },
+                {
+                  "id": "perihelion",
+                  "label": "Closest to Sun",
+                  "value": "0.116 AU"
+                }
+              ]
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Celestia",
+            "role": "surface",
+            "description": "Catalog entry and estimated scale",
+            "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+          },
+          {
+            "label": "JPL Horizons",
+            "role": "observations",
+            "description": "Position at 3 September 2026",
+            "href": "https://ssd.jpl.nasa.gov/horizons/"
+          },
+          {
+            "label": "About this comet",
+            "role": "observations",
+            "description": "Observations and history",
+            "href": "https://www.nasa.gov/solar-system/return-of-the-comet-96p-spotted-by-esa-nasa-satellites/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://www.nasa.gov/solar-system/return-of-the-comet-96p-spotted-by-esa-nasa-satellites/",
+            "credit": "Sources listed in reference/source-record.json"
+          },
+          "physical": {
+            "path": "../shape/model.json",
+            "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "celestia-mesh",
+      "path": "shape/model.obj",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "credit": "Celestia Development Team / Chris Laurel; CelestiaContent catalog contributors",
+      "license": "GPL-2.0-or-later",
+      "licenseEvidence": [
+        "reference/celestia.ssc",
+        "reference/GPL-2.0-or-later.txt"
+      ],
+      "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
+      "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "sha256": "37ac98a4b2c9f29eef7b1b1c43e219551fd0329a10809c5c9fc9a6691615ad8f",
+      "bytes": 439338,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "4806516796422242b9607f4b4cd5501dcd20c3fefaec72b570770c102dd32f76",
+      "bytes": 3318,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Illustrative nucleus",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "celestia-mesh"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-96p/comet-96p-model-thumbnail.webp",
+          "bytes": 1400,
+          "sha256": "d5a4c275e1787501c44e9b05078f2b3c9fe356e23214118bc40b3003f22a9a62",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-96p/comet-96p-model-surface@2x.webp",
+          "bytes": 119016,
+          "sha256": "f51a51c282c7255dd60de3efcd1491dc25778add25c2b6034974d4a1394d184c",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6026,
+          "sha256": "37c77611e4379341fb144334a567ddf5b865383e82a1d0d3a20ad9215ff69080",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

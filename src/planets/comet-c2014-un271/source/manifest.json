@@ -1,0 +1,194 @@
+{
+  "schema": "csscomet-c2014-un271-authoritative-sources@1",
+  "inputs": [
+    {
+      "id": "eso-milky-way-panorama",
+      "path": "stars/eso0932a.tif",
+      "expectedBytes": 29082084,
+      "expectedSha256": "10f209ab83e1fd89e7fa1ed70277ffc6ed19c43549f04ec637c6806d98aff035",
+      "origin": "https://cdn.eso.org/images/original/eso0932a.tif",
+      "credit": "ESO/S. Brunier",
+      "license": "CC-BY-4.0",
+      "licenseEvidence": [
+        "stars/ESO-IMAGE-LICENSE.md"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Permitted under CC-BY-4.0 with the complete ESO/S. Brunier credit retained.",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ]
+    },
+    {
+      "id": "celestia-mesh",
+      "path": "shape/model.obj",
+      "expectedBytes": 437335,
+      "expectedSha256": "82859ed223bc22b0f4838b34069f5d8f458319e4d7c4144112ff404074b61e4d",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "credit": "Celestia Development Team / Chris Laurel; CelestiaContent catalog contributors",
+      "license": "GPL-2.0-or-later",
+      "licenseEvidence": [
+        "reference/celestia.ssc",
+        "reference/GPL-2.0-or-later.txt"
+      ],
+      "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
+      "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "consumers": [
+        "shape"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "expectedBytes": 45934,
+      "expectedSha256": "d5df20fe1a109a384ff41d4e2d9c149963cbf488e411cdd1fb4526210b0006d2",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara",
+      "license": "GPL-2.0-or-later (Celestia catalog); independent cssEarth preparation code MIT",
+      "licenseEvidence": [
+        "reference/celestia.ssc",
+        "reference/GPL-2.0-or-later.txt"
+      ],
+      "acquisition": "Reproduced from the native Celestia mesh export with the shared missing-imagery grid.",
+      "redistribution": "Preserve attribution and the distinction from a recovered surface mesh.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
+        "inputs": [
+          "celestia-mesh"
+        ],
+        "size": 512,
+        "longitudeDegrees": 70,
+        "latitudeDegrees": 20,
+        "ambient": 1,
+        "diffuse": 0,
+        "lensId": "model"
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3424,
+      "expectedSha256": "c116bb3dc84ba4c52e1876b8f1ef283c0f6b60c83248527f79cb176e44d312bc",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 1654,
+      "expectedSha256": "cd9f1d56dddcb0e3c9bf38bfc336b9ac54c4c38429c255d8512cb62d1981eede",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 336,
+      "expectedSha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 3031,
+      "expectedSha256": "ed2dbe610f21bdf80843450e08781d918e16493983122ce1acdae5e4497ed343",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 41,
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 10784,
+      "expectedSha256": "ecacb19e898788b19099b05347889bf4c8e32a56953a76aee24f9d3e156dfc95",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/celestia.ssc",
+      "expectedBytes": 3036,
+      "expectedSha256": "ee99aeddd2971ccbe5b73f8f9c5a0e21fce5aac41293508c7d5719daf7f38a58",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/GPL-2.0-or-later.txt",
+      "expectedBytes": 17337,
+      "expectedSha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-elements.txt",
+      "expectedBytes": 7304,
+      "expectedSha256": "30f3104da9f1eb7e09ebf36164212f5dc7a5dd7f0117cf0de8a5e3cc635f132d",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/horizons-vectors.txt",
+      "expectedBytes": 6594,
+      "expectedSha256": "c112e2e2ef71513fd056d730ad0f1194247447d89dce9a0f8402f998ec059360",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "reference/source-record.json",
+      "expectedBytes": 5599,
+      "expectedSha256": "a4729b73cd63132aac17d1d44d7d996eb45c0c138c1621fce91437a332887e01",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/model.json",
+      "expectedBytes": 1637,
+      "expectedSha256": "61bfb3a346ca6cbb0d46b46067c336533cfcc79315476dd9fb371aa0244ae6c7",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "shape/roughsphere.cms",
+      "expectedBytes": 330,
+      "expectedSha256": "744168aa06e2a33c3b87911fb7cbdbcc211f209d7e9554dd23fcdee7f68a6ef2",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/ESO-IMAGE-LICENSE.md",
+      "expectedBytes": 2192,
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/hyg-v41-field.json",
+      "expectedBytes": 860,
+      "expectedSha256": "84517384d5e415d120c1e0db4096298eed44f32e33b5d103bc316a4d60095d85",
+      "purpose": "Source evidence or authored preparation input."
+    },
+    {
+      "path": "stars/LICENSE.md",
+      "expectedBytes": 598,
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
+      "purpose": "Source evidence or authored preparation input."
+    }
+  ]
+}
