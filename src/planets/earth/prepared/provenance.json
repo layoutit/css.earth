@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "140e330cccf87c67273db9c61ccaf6da7bbfae62d2a9a8e249a50010b0837223"
+    "sha256": "bd42c8943697a61ab922cb82f1da71744803ab78ed519fb2839a1f138bb61d16"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "d2761a49bd6f8974a7bb4fbf5f74155f3d17bcb12529e751fefc121b63a11bc5",
+    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -1873,8 +1873,8 @@
     {
       "path": "science/night-lights-2025/provenance.json",
       "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
-      "id": "authored-document:science/night-lights-2025/provenance.json",
       "kind": "authored-document",
+      "id": "authored-document:science/night-lights-2025/provenance.json",
       "origin": "object:source/science/night-lights-2025/provenance.json",
       "title": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
       "credit": "cssEarth contributors",
@@ -2010,9 +2010,9 @@
       "origin": "tools/objects/paged-ellipsoid/mur-imagery.mjs",
       "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
       "kind": "generated-intermediate",
       "title": "science/mur-gibs.png",
-      "credit": "cssEarth contributors",
       "acquisition": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/planets/earth/source/science",
       "upstreamLineage": "not-recorded",
       "sha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0",
@@ -2025,8 +2025,8 @@
     {
       "path": "interior/earth-interior.json",
       "purpose": "Source-qualified schematic Earth interior presentation specification",
-      "id": "authored-document:interior/earth-interior.json",
       "kind": "authored-document",
+      "id": "authored-document:interior/earth-interior.json",
       "origin": "object:source/interior/earth-interior.json",
       "title": "Source-qualified schematic Earth interior presentation specification",
       "credit": "cssEarth contributors",

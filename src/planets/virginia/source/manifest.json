@@ -147,9 +147,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 2485,
-      "expectedSha256": "4c121699b0564f373393aa3044d8b475658356fb8a419aaeb2183919d77cb24b"
+      "expectedSha256": "4c121699b0564f373393aa3044d8b475658356fb8a419aaeb2183919d77cb24b",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/12738",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/franco-virginia-2020.pdf",
@@ -176,22 +179,10 @@
       "expectedSha256": "71070772a08b07ddb1edc7ecb93bea78c2f1d9eb05b91a5155eea8706f5bc783"
     },
     {
-      "path": "reference/model-12738.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 126103,
-      "expectedSha256": "2f232e3dc62ab0ea8c035966708efa20894a21acf8355f57961e5e06898667cc"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 4274,
       "expectedSha256": "2380a62162da008d5161801cf2eb8a28787467cad773b353fafd3213ac630cec"
-    },
-    {
-      "path": "reference/occultation-dimensions.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 767312,
-      "expectedSha256": "946b76560a3f5b21be4bddb154ffd0d5000d26166d127bf03ba3af4911999615"
     },
     {
       "path": "reference/ReadMe.AcuA.txt",

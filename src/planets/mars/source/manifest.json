@@ -228,34 +228,6 @@
       "expectedBytes": 1600012
     },
     {
-      "id": "jpl-mars-satellite-physical-parameters",
-      "path": "moons/jpl-physical-parameters.html",
-      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
-      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
-      "license": "United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked source snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 84633
-    },
-    {
-      "id": "jpl-mars-satellite-mean-elements",
-      "path": "moons/jpl-mean-elements.html",
-      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
-      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "credit": "NASA Jet Propulsion Laboratory Solar System Dynamics",
-      "license": "United States government data",
-      "acquisition": "shared acquisition recipe preparation/acquisition.json (refresh group)",
-      "redistribution": "checked source snapshot",
-      "consumers": [
-        "moons"
-      ],
-      "expectedBytes": 418952
-    },
-    {
       "id": "nasa-psg-mars-configuration",
       "path": "atmosphere/psg-mars-20260829.cfg",
       "expectedSha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
@@ -420,8 +392,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 5145,
-      "expectedSha256": "0bcae0e1294215bef84987bf076bfeec53bcdfb1b205bdef592b3ccab0f028cc",
+      "expectedBytes": 4757,
+      "expectedSha256": "a84ca43388d33a4db02ef6bc983deb6d60b48e9aab83f69420e723b05e7a3790",
       "purpose": "Authored source-informed capability preparation recipe."
     },
     {

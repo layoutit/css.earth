@@ -93,14 +93,14 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 6037,
-      "expectedSha256": "d72ac3b14f9953ceda7270f72b0536ce247987ae502e1646170bee81fbbe79c6",
+      "expectedBytes": 5342,
+      "expectedSha256": "dac82808655fc8bb29f06a6ca9cff31d38ea6629b27d39b230a98aaa046695d8",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 939,
-      "expectedSha256": "4e943017d18cf5344f4e156c1ac439490caa6c9c39fcfdc8bf3b75c3ac0329d9",
+      "expectedBytes": 732,
+      "expectedSha256": "14d322af343b2fdbe1d8ab464f599b854f233cec5628fcef31fcd865d970a81e",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -149,12 +149,6 @@
       "path": "reference/orcus-brown-butler-2018.pdf",
       "expectedBytes": 1598645,
       "expectedSha256": "a939fef5976cf9986bf1d1b4fba067b26f24caa0b9984155211073213d67764d",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/orcus-brown-butler-2023.html",
-      "expectedBytes": 41968,
-      "expectedSha256": "379184924496c714fec5aad30e176cac81b2209eb04a0822de14d84be0ec1eb9",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

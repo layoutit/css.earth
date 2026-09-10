@@ -6,6 +6,8 @@ Checked 2026-09-09. Original [DAMIT model 456](https://damit.cuni.cz/projects/da
 
 Convex lightcurve model at the uncertain 1.2 km archive diameter.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 Recorded four-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).

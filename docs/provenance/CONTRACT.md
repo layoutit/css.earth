@@ -44,7 +44,7 @@ archive submission or second provenance format.
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; never edit by hand |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |
-| Test fixtures under `tests/`; processing code and shared source references under `tools/` | Inputs and implementation used by executable checks and preparation; identify retained shared references in the owning guide |
+| Test fixtures under `tests/`; processing code under `tools/` | Inputs and implementation used by executable checks and preparation |
 | Root README and [body contributor guide](../../src/planets/README.md) | Shared installation, controls, commands and contribution workflow |
 
 Every file under `source/` needs a manifest entry. Body packages contain data,
@@ -96,22 +96,25 @@ Keeping every temporary response is unnecessary.
 
 ### References and retained files
 
-Choose what to retain by its role, not its file extension:
+Use citations for papers, catalogue pages, search results and explanatory webpages.
+In the body README, record the values that support a claim, their units and
+uncertainty, the source title and authors/year, DOI or versioned URL, and the
+specific table, field or section. Explain any transcription, selection or conversion.
+Keep exact values consumed by preparation in its existing data records and recipes;
+link them instead of copying long tables into Markdown.
 
-| Role | Keep |
-| --- | --- |
-| Background paper or explanatory page | A citation in the body README: title, authors/year, DOI or versioned URL, section/table and the claim it supports. |
-| Input read by preparation | Exact bytes or a tested restoration route with byte count and hash, in the existing source records. This includes HTML read by a parser. |
-| Evidence that a citation cannot preserve | One identifiable snapshot, with its origin and hash, at the existing shared source/tool owner or owning body; other bodies link to it. |
+Keep original scientific inputs and native labels needed to decode them, either
+in Git or through a tested restoration recipe with byte counts and hashes.
+An acquisition parser may read HTML temporarily. Save its selected data and source
+identity; the downloaded webpage does not become a permanent evidence file.
+“Reference evidence” and “the website might change” are not reasons to commit a page.
 
-Before removing a snapshot, check code, acquisition recipes, manifests, tests and
-provenance references. Preserve numerical extracts used by the work, their source
-identity and extraction method. Update affected records and generated pins together;
-keep historical reports intact at their recorded revision. Do not copy the same
-archive into each body or use blanket HTML deletion or ignore rules.
-GitHub language classification does not determine what evidence belongs in Git.
-The [shared source references](../surface-preparation.md#shared-source-references)
-show how to retain format definitions and terms without copying them per body.
+Before removing a page, check code, acquisition recipes, manifests, tests and
+provenance references. Preserve used numerical extracts, source identity and
+extraction method. Update active references and generated pins together. Original
+reports remain unchanged at their recorded Git revision. Do not replace duplicated
+pages with a shared webpage archive or a blanket ignore rule.
+GitHub language classification does not determine what belongs in Git.
 
 ### Interpretation
 

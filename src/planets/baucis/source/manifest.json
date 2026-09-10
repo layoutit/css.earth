@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 1910,
-      "expectedSha256": "b27614aeaf50933cf03f9b1716f396cf6fd0cab1c65b2a6b2c07f1418b1801fe"
+      "expectedBytes": 1686,
+      "expectedSha256": "f2664f45eaa1efdb011ba9c627a15408eb46dc64a3c29895a97460b8978f060f"
     },
     {
       "path": "preparation/navigation.json",
@@ -158,9 +158,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 12422,
-      "expectedSha256": "3bd1723590fbca778ed272e85ca01d5f26194b36d7430e7b2c7fb9e2a6efd042"
+      "expectedSha256": "3bd1723590fbca778ed272e85ca01d5f26194b36d7430e7b2c7fb9e2a6efd042",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/4695",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/durech-2020.pdf",
@@ -179,12 +182,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 6644,
       "expectedSha256": "e52546a4e60fba9f89385b959392dca8bd650cd30f2f36a7df71da5555e57f0e"
-    },
-    {
-      "path": "reference/model-4695.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 91441,
-      "expectedSha256": "796660184bb386ec3d381444d8d207e357caf12a064ab13667f8ceca82a96a3c"
     },
     {
       "path": "reference/model-properties.json",

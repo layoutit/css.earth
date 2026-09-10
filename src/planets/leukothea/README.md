@@ -15,6 +15,8 @@ Usui et al. (2011), the original ISAS/JAXA AcuA v1.0 catalog, report an effectiv
 
 The quoted ± value is the formal catalog error. The paper excludes additional shape, spin and thermal-model systematics, and describes rotational contributions of a few to about 10%, particularly with few detections. No invented total error bar is assigned.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The [leukothea validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.

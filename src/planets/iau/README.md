@@ -13,6 +13,8 @@ Selected [DAMIT model 12740](https://damit.cuni.cz/projects/damit/asteroid_model
 
 The adopted diameter is **4.242 km** from [Masiero et al. (2011), ApJ 741, 68](https://doi.org/10.1088/0004-637X/741/2/68); [original measurement data](https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D5000). Its quantity is **NEATM effective spherical diameter at the observing geometry**.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The [iau validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.

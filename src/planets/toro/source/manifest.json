@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 1406,
-      "expectedSha256": "ed7b19789fb1c7cfe7c5ec2e090af8f4474e3fdf80f7623d5a84d14ee710a2f1"
+      "expectedBytes": 986,
+      "expectedSha256": "feedc779a6adec6d993818c629a0e35ae869cbd794b1286aa4a6c6ec8b44e843"
     },
     {
       "path": "preparation/navigation.json",
@@ -146,15 +146,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 6992,
-      "expectedSha256": "227e64d66dca7f24bb06ea7395dc5f177615297c6b9cfb00da0b34812bd5685d"
-    },
-    {
-      "path": "reference/durech-2018.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 260761,
-      "expectedSha256": "cea477b3ce8f43ad41b07be979df7d050bd5c9346aacfa2ed2aa63b9f7743f2b"
+      "expectedSha256": "227e64d66dca7f24bb06ea7395dc5f177615297c6b9cfb00da0b34812bd5685d",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1862",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -167,12 +164,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 7045,
       "expectedSha256": "f464b0b807a26e8a7e57918a0136eae91967226877744715637052bbbe0548ed"
-    },
-    {
-      "path": "reference/model-1862.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 132016,
-      "expectedSha256": "a2bb42b7bdcf43c0025ac9c35a438baea34eb078bc35931c54d44aff31b7bd04"
     },
     {
       "path": "reference/model-properties.json",

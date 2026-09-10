@@ -141,9 +141,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 1507,
-      "expectedSha256": "6219c91657a8b339fbb2d174827051863b2bf6101819a34b9e270f9516ada5f7"
+      "expectedSha256": "6219c91657a8b339fbb2d174827051863b2bf6101819a34b9e270f9516ada5f7",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -170,12 +173,6 @@
       "expectedSha256": "6cec5824e942b6f3abea47934c4ab127445fd89a587308f36ddf167c94c5b500"
     },
     {
-      "path": "reference/model-10234.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 91219,
-      "expectedSha256": "e57fe8095c0046b88ac902e4b71a0fdde61a5de4cc62ee0ff296cf1797d31f73"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 6062,
@@ -192,12 +189,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 2685,
       "expectedSha256": "e38045c95eab5f30937efb27922434a5c6980e3dbafa2b8eac05052e1f275520"
-    },
-    {
-      "path": "reference/search.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 8990,
-      "expectedSha256": "1bdf4d257aee8b1117d1b47706c0009790cdcd28632362e06ad11cbf064038d2"
     },
     {
       "path": "reference/spin.txt",

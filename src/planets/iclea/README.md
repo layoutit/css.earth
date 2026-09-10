@@ -49,6 +49,8 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/5017) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/127591/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
 - [Marciniak et al. (2023), Scaling slowly rotating asteroids with stellar occultations](https://ui.adsabs.harvard.edu/abs/2023A&A...679A..60M) — original model publication record.

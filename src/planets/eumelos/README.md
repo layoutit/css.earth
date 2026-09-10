@@ -9,6 +9,8 @@ L4 Jupiter Trojan. Source records checked 2026-09-09.
 | [DAMIT model 3920](https://damit.cuni.cz/projects/damit/asteroid_models/view/3920), 2019-05-07; [Ďurech et al. (2019)](https://damit.cuni.cz/projects/damit/references/view/182) | Convex light-curve shape and paired sidereal spin. |
 | [NEOWISE v2, Gr12b](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html); [Grav et al. (2012)](https://arxiv.org/abs/1209.1549) | Effective spherical diameter 37.696 ± 0.329 km; approximate mesh-volume scale. |
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 - [Recorded qualification](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/trojan-population.md#preparation-and-validation) includes source/package checks, [independent mesh/scalar comparisons](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/trojan-population/numerical-summary.json), and fresh source/runtime installation.
@@ -40,7 +42,7 @@ Original +Z spin axis and +X reference meridian are retained. The selected eclip
 
 The [original mesh](https://damit.cuni.cz/projects/damit/stored_files/open/12274/shape.txt) is retained without changing its coordinates or connectivity. [DAMIT documentation](https://damit.cuni.cz/pages/documentation) supplies the coordinate units, pole and sidereal-period conventions; its CC BY 4.0 terms and other credits are linked from [NOTICE.md](NOTICE.md).
 
-Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in [the source manifest](source/manifest.json); [column definitions](../../../tools/objects/source-references/neowise-v2-columns.html) are shared.
+Disk-integrated colors do not constrain a regolith map. The selected original Gr12b catalog row marks diameter as fitted (`D` in `FIT_CODE`). The CSV row and original query are pinned in [the source manifest](source/manifest.json); [column definitions](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html) are shared.
 
 Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Table B.3 — adopts this existing DAMIT shape/spin solution. No replacement mesh is required by that survey.
 

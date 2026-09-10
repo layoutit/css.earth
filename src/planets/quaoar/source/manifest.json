@@ -99,8 +99,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 686,
-      "expectedSha256": "2da07b74da3e07ad2f9353e86fc75b1cd3734a2864de31c6799090b0d59e2457",
+      "expectedBytes": 488,
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -143,12 +143,6 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6645,
       "expectedSha256": "33270acb14ba6bfc481aeea35b006884af53c552b7bdfd8af02d9050c2afcdc5",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/quaoar-2026.html",
-      "expectedBytes": 804210,
-      "expectedSha256": "9ba62bfd834491306fa29db34d5dfc3b3fff71c2dcd513ea58f00ba15125d2a9",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

@@ -189,40 +189,6 @@
       }
     },
     {
-      "id": "jpl-satellite-physical",
-      "path": "moon/jpl-satellite-physical.html",
-      "expectedSha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440",
-      "expectedBytes": 84633,
-      "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "credit": "NASA JPL Solar System Dynamics",
-      "license": "United States government factual data",
-      "licenseEvidence": [
-        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-      ],
-      "acquisition": "checked satellite physical-parameter authority page",
-      "redistribution": "checked authority page with JPL attribution",
-      "consumers": [
-        "moon"
-      ]
-    },
-    {
-      "id": "jpl-satellite-elements",
-      "path": "moon/jpl-satellite-elements.html",
-      "expectedSha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8",
-      "expectedBytes": 418952,
-      "origin": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "credit": "NASA JPL Solar System Dynamics",
-      "license": "United States government factual data",
-      "licenseEvidence": [
-        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
-      ],
-      "acquisition": "checked satellite mean-elements authority page",
-      "redistribution": "checked authority page with JPL attribution",
-      "consumers": [
-        "moon"
-      ]
-    },
-    {
       "id": "nasa-earth-editorial-record",
       "path": "editorial/nasa-earth-record.json",
       "expectedSha256": "3818e2c43d202bffd757e32b0279915c1b2903c97069e591203f200e5467f218",
@@ -484,23 +450,6 @@
       ]
     },
     {
-      "id": "noaa-enso-advisory",
-      "path": "science/enso-advisory.html",
-      "origin": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml",
-      "expectedSha256": "8647a3804260856f979bba518475d63ffb69c2716d10e4f730658df530c3cc2d",
-      "expectedBytes": 13382,
-      "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
-      "license": "US government public domain",
-      "licenseEvidence": [
-        "https://www.ncei.noaa.gov/archive"
-      ],
-      "acquisition": "Snapshot checked 2026-09-09; raw analysis, publisher checksum, product description and advisory retained for reproducible preparation.",
-      "redistribution": "Retained NOAA data with attribution",
-      "consumers": [
-        "enso"
-      ]
-    },
-    {
       "id": "noaa-coraltemp-anomaly",
       "path": "science/coraltemp-latest.nc",
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc",
@@ -523,23 +472,6 @@
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc.md5",
       "expectedSha256": "4d1c024c5f28f4680f745f1302ec5f45e10011f3e7bdde4df58bde2ffa88f86c",
       "expectedBytes": 78,
-      "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
-      "license": "US government public domain",
-      "licenseEvidence": [
-        "https://www.ncei.noaa.gov/archive"
-      ],
-      "acquisition": "Snapshot checked 2026-09-09; raw analysis, publisher checksum, product description and advisory retained for reproducible preparation.",
-      "redistribution": "Retained NOAA data with attribution",
-      "consumers": [
-        "enso"
-      ]
-    },
-    {
-      "id": "noaa-coraltemp-product",
-      "path": "science/coraltemp-product.html",
-      "origin": "https://www.coralreefwatch.noaa.gov/product/5km/index_5km_ssta_clim19912020.php",
-      "expectedSha256": "114a52e9e07a40d9501dde9181153c30178b1185250c68df84b3c8c3f0930806",
-      "expectedBytes": 47868,
       "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
       "license": "US government public domain",
       "licenseEvidence": [
@@ -1175,8 +1107,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 32091,
-      "expectedSha256": "249bb925d410e70c18e4cf267eeba6564ec6acc01ea808d7e39b44936bd3941d",
+      "expectedBytes": 31479,
+      "expectedSha256": "fa50032aeddf5cc08467deab029c40cab14ce15bbd04d297cb6f0bb40239fc3a",
       "purpose": "Authored source acquisition and exact pinned derived-record restoration."
     },
     {

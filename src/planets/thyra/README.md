@@ -51,6 +51,8 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/154) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/369/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
 - [T. Michalowski (2004), Photometry and models of selected main-belt asteroids (I): 52 Europa, 115 Thyra, and 382 Dodona](https://ui.adsabs.harvard.edu/abs/2004A&A...416..353M/abstract) — original model publication record.

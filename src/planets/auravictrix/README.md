@@ -15,6 +15,8 @@ Concavities, craters, surface texture and exact current rotation phase are not r
 
 Adopted diameter: **16.421 ± 0.362 km**, meaning **effective body diameter**, from [Masiero et al. (2014), PDS NEOWISE Diameters and Albedos V2.0, reference codeMas14](https://doi.org/10.1088/0004-637X/791/2/121). The reference-sphere radius is 8.2105 km. The quoted statistical error excludes the approximately 10% survey systematic floor (about 1.6421 km), shape/orientation effects and rotational sampling limitations.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 <a id="provenance"></a>

@@ -153,9 +153,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 2435,
-      "expectedSha256": "5c1d4c815eddfc0b29a2e82dfc598ff7b58c931b5e81f4fd31bcf5e66e813462"
+      "expectedSha256": "5c1d4c815eddfc0b29a2e82dfc598ff7b58c931b5e81f4fd31bcf5e66e813462",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1695",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -176,22 +179,10 @@
       "expectedSha256": "17b92562e5648c819152d6fac4d6ab456c09f176d7f6af94302d7103f7c6900c"
     },
     {
-      "path": "reference/model-1695.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 121570,
-      "expectedSha256": "a1d9701e69f57f9a648e68e36f88d7f02e78ba419b8e803ded83b91509f925b7"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 4267,
       "expectedSha256": "1b1901b93757aed38490fa1f26de4dc03b0dc2d86de99fcef000dccd446680d4"
-    },
-    {
-      "path": "reference/occultation-dimensions.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 767312,
-      "expectedSha256": "946b76560a3f5b21be4bddb154ffd0d5000d26166d127bf03ba3af4911999615"
     },
     {
       "path": "reference/ReadMe.AcuA.txt",

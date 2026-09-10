@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 2116,
-      "expectedSha256": "130a7ec5fabbbe220dc60ad37ba2e1ea779abfbfa3dd60f739c451df41deda5b"
+      "expectedBytes": 1894,
+      "expectedSha256": "2037511eb7c62b0d6275cbd2d8fee000e45f347514da21b416fdad65932debca"
     },
     {
       "path": "preparation/navigation.json",
@@ -158,9 +158,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 12341,
-      "expectedSha256": "7265a772be9e68de555f6340a966c9b9a803290f1fb03508492f59f86bfc9811"
+      "expectedSha256": "7265a772be9e68de555f6340a966c9b9a803290f1fb03508492f59f86bfc9811",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/197",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/delbo-tanga-2009.pdf",
@@ -185,12 +188,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 6643,
       "expectedSha256": "7f00f99c4e447182559d335bd62f157b9da91de1cb047b44ca1a79c81096110b"
-    },
-    {
-      "path": "reference/model-197.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 125644,
-      "expectedSha256": "eb58bd04b8e79f077bfad2e234290d8cc982dc9c6abc19a1be6db7868fd8a531"
     },
     {
       "path": "reference/model-properties.json",

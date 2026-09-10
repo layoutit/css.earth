@@ -138,16 +138,13 @@
       "expectedSha256": "4587aadc9387ac3328e27073c0e407874e4216b9c05accb494e9a8dc4edc98be"
     },
     {
-      "path": "reference/damit-model.html",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
-      "expectedBytes": 82185,
-      "expectedSha256": "0243e7e941d56fa7b4a0e49524448c1ff6cbc3eadb36ee333131c22c97cdfde3"
-    },
-    {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original model record, source documentation, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 1431,
-      "expectedSha256": "27e2bd10314cf2419720f517f23378b2886d9d9fa7ed4a55a48c37e43e8e74b4"
+      "expectedSha256": "27e2bd10314cf2419720f517f23378b2886d9d9fa7ed4a55a48c37e43e8e74b4",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1832",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",

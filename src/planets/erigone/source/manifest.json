@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 1920,
-      "expectedSha256": "d9e56c11a8ce344e9ff55887f863b5bf47250443d316ed88726c9d4cb29244da"
+      "expectedBytes": 1696,
+      "expectedSha256": "8ea7e54a3485d88c9f62ae6ae60d5cb15f7362a3650afe278f1295a2731a1ecc"
     },
     {
       "path": "preparation/navigation.json",
@@ -158,9 +158,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 13638,
-      "expectedSha256": "21fd9a484e694a152ace7a0653d791306f052bc1bfada6623558dfbce7959a57"
+      "expectedSha256": "21fd9a484e694a152ace7a0653d791306f052bc1bfada6623558dfbce7959a57",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1399",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/durech-blueeye-2018.pdf",
@@ -179,12 +182,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 6644,
       "expectedSha256": "4b109e669623f430b75fcb31b822dfa91cdb78db3b6d5727c0b3a3400f91317f"
-    },
-    {
-      "path": "reference/model-1399.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 121257,
-      "expectedSha256": "b238feb888ef370bf31e3cf3a7ee8665e4162bac3e801c0fea88dae35dcec360"
     },
     {
       "path": "reference/model-properties.json",

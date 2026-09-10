@@ -43,38 +43,6 @@
     },
     {
       "kind": "download",
-      "path": "jpl/discovery.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "jpl/elements.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "jpl/physical.html",
-      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
-      "path": "pds/neptune-rings.html",
-      "url": "https://pds-rings.seti.org/neptune/neptune_tables.html",
-      "groups": [
-        "refresh"
-      ]
-    },
-    {
-      "kind": "download",
       "path": "editorial/neptune.json",
       "url": "https://science.nasa.gov/neptune/neptune-facts/",
       "groups": [

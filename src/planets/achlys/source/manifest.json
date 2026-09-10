@@ -93,14 +93,14 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 5633,
-      "expectedSha256": "9a65fa88b917865de4289a9da3ae2d574e8be625935991239950a1d49f0f7123",
+      "expectedBytes": 5480,
+      "expectedSha256": "06f74a5dcba3d2064e497377ec3f3feeb884591cb99439a9344931f6a9427ac7",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 975,
-      "expectedSha256": "19810b72435329ce60c0a015265a5ef032fed7afecba79a83365f32d61f712f4",
+      "expectedBytes": 767,
+      "expectedSha256": "d05761a1de4c9d1a3b7b746514418cc336beeb6c80e3c07d51798a87e96eccbe",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -137,12 +137,6 @@
       "path": "reference/achlys-wgsbn-2025-015.pdf",
       "expectedBytes": 473657,
       "expectedSha256": "4a18aa51fcbea9b63660f1e475df4e325ee3c02eb88caf4d5873e84e22985a70",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/az84-dias-oliveira-2017.html",
-      "expectedBytes": 284202,
-      "expectedSha256": "5c0a962c39ff7ef7d3ce81654afbef4d5e7760cf32e2ce843f519b197739beab",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

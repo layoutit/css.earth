@@ -90,8 +90,9 @@ Stop once the promising candidates have a disposition; do not build an exhaustiv
 catalog or repeat this survey for an unrelated repair.
 
 Use the contract's [reference retention rules](../../../docs/provenance/CONTRACT.md#references-and-retained-files)
-to distinguish citations, executable inputs and necessary snapshots. A research
-download does not automatically belong in the body package.
+to distinguish citations from scientific inputs. Record cited values and their
+meaning in the body README; keep preparation data in the existing source records.
+Do not commit downloaded webpages as evidence.
 
 Record the following for selected inputs in the existing source record and
 manifest:

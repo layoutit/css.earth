@@ -47,6 +47,8 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/1835) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/218/shape.txt) — included unchanged. Resolved-imaging-constrained nonconvex geometry; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
 - [Hanuš et al. (2017), Volumes and bulk densities of forty asteroids from ADAM shape modeling](https://ui.adsabs.harvard.edu/abs/2017A%26A...601A.114H) — original model publication record.

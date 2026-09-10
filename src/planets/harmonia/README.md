@@ -12,6 +12,8 @@
 
 The saved HTML is evidence only; its viewer scripts are never evaluated or included at runtime.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The [asteroid validation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-validation.md) records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.

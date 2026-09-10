@@ -93,14 +93,14 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 8061,
-      "expectedSha256": "9d1b04db9bb93bc0df2bdcce7e2eac077cdff392d12f659a1871caf0bba49c46",
+      "expectedBytes": 5629,
+      "expectedSha256": "2b2b0c7653407d893fcc63b7e978b2af8e85582310c199512bfdfe400ae9bcae",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 937,
-      "expectedSha256": "864a5a4a62dc10bb0cf9faedfcbbb273ac6c87978631065c7926761899effd28",
+      "expectedBytes": 526,
+      "expectedSha256": "179dcbdf58198c6218d0fbf511a76a3661e0db2ce9558eedb4022e632384b554",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {
@@ -143,24 +143,6 @@
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6646,
       "expectedSha256": "5cd83487c6ebb5740836d51c42a33cbc11eda8c7dab66d667ce73a9af1a2b270",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/salacia-collyer-2025.html",
-      "expectedBytes": 265567,
-      "expectedSha256": "39a29b49b2b0dcb92dda03ee3af61c5f7af7d5e4f021b6df47daebd705121acf",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/salacia-kiss-2025.html",
-      "expectedBytes": 162166,
-      "expectedSha256": "c2a3f501ffb53a50a82ee7da61ea93d15f7750f3d2b61989fd54b73b37568ba4",
-      "purpose": "Pinned source observation, interpretation or preparation input."
-    },
-    {
-      "path": "reference/salacia-wong-2025.html",
-      "expectedBytes": 182847,
-      "expectedSha256": "cbbb424ed5fdd7862fbe2b26682f361e6c49dbbf85351a9ea9b045d48dca8318",
       "purpose": "Pinned source observation, interpretation or preparation input."
     },
     {

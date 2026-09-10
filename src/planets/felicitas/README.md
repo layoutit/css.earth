@@ -51,6 +51,8 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/3097) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/9814/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
 - [Marciniak et al. (2019), Thermal properties of slowly rotating asteroids: results from a targeted survey](https://ui.adsabs.harvard.edu/abs/2019A%26A...625A.139M) — original model publication record.

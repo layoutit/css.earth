@@ -99,8 +99,8 @@
     {
       "path": "preparation/acquisition.json",
       "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 1906,
-      "expectedSha256": "c0103e3dedfc4fe7dc8af269ee6cb043d57259814afddbf9b15c0e795dab0213"
+      "expectedBytes": 1684,
+      "expectedSha256": "b2602de035c1d742541c4a992ae0536aef29f8972ee1c2eab38f47edc4f66435"
     },
     {
       "path": "preparation/navigation.json",
@@ -158,9 +158,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 12676,
-      "expectedSha256": "cd5a90b1155aa49476faf215da306f4c58b75f69d4f86868ca5183e691f0c057"
+      "expectedSha256": "cd5a90b1155aa49476faf215da306f4c58b75f69d4f86868ca5183e691f0c057",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/619",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/hanus-2013.pdf",
@@ -179,12 +182,6 @@
       "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 6643,
       "expectedSha256": "b3f58b65d7a9639508ed3b7cac9c64591508a9b9e0170ced051ff0ed5931201e"
-    },
-    {
-      "path": "reference/model-619.html",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 122613,
-      "expectedSha256": "7d346a1a8aee12a415b6b5e595aaf31eb34a315a208e3a972c5f09705505bf77"
     },
     {
       "path": "reference/model-properties.json",

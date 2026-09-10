@@ -15,6 +15,8 @@ Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Table A.3, report a **volume-equiv
 
 The physical scale is transferred to the nominal archived model from the same published shape/pole family; this does not claim that the nominal mesh is identical to every thermophysical realization.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The [petrina validation record](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids-size-calibration-validation.json) contains source, scale, atlas, installation and browser results for its recorded files and revision.

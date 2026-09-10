@@ -1,17 +1,7 @@
 {
   "schema": "cssearth-radial-layer-recipe@1",
   "units": "kilometers",
-  "sources": [
-    {
-      "id": "pds-neptune-ring-table",
-      "path": "pds/neptune-rings.html",
-      "expectedBytes": 14304,
-      "expectedSha256": "bf12c609c781da68134e7bb3b4eabe9dfe3656382103e47447796bc1f3b537d8",
-      "origin": "https://pds-rings.seti.org/neptune/neptune_tables.html",
-      "credit": "NASA PDS Rings Node, SETI Institute",
-      "license": "public NASA Planetary Data System scientific data"
-    }
-  ],
+  "sources": [],
   "layers": [
     {
       "kind": "annular-field",

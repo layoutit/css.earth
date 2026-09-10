@@ -69,7 +69,7 @@ implemented.
 
 **Satellite source archive**
 
-The checked JPL discovery and mean-elements snapshots retain the 29-satellite
+The source records retain the selected JPL values for the 29-satellite
 catalog. The NASA/JPL PIA01361 Voyager 2 montage remains pinned scientific
 source material, including its disclosed incomplete Miranda and Ariel coverage.
 These sources are preserved; they are not active embedded-moon render inputs.

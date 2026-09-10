@@ -1561,21 +1561,6 @@
       "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
     },
     {
-      "id": "europa-dtm-controlled-dtms-documentation-html",
-      "path": "science/controlled-dtms/documentation.html",
-      "expectedBytes": 160474,
-      "expectedSha256": "b0112464132a2471b4d7b4e5216cefc740ac6848ea5b7a922092a18fa7f29fd3",
-      "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
-      "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
-      "license": "CC0-1.0 source and repository-authored validation metadata",
-      "acquisition": "Checked-in source metadata snapshot or independent source-value validation record.",
-      "redistribution": "Source documentation and numeric anchors retained with attribution.",
-      "consumers": [
-        "controlled-dtm-audit"
-      ],
-      "purpose": "Checked-in source metadata snapshot or independent source-value validation record."
-    },
-    {
       "id": "europa-dtm-controlled-dtms-intake-downloads-json",
       "path": "science/controlled-dtms/intake-downloads.json",
       "expectedBytes": 2777,

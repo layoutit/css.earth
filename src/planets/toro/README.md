@@ -6,6 +6,8 @@ Checked 2026-09-09. Original [DAMIT model 1862](https://damit.cuni.cz/projects/d
 
 Convex lightcurve model at a thermophysical diameter of 3.5 km; the published interval is 3.1–3.8 km.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 Recorded four-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).

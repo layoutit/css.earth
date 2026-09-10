@@ -4,6 +4,8 @@
 
 Checked 2026-09-09. Selected **ISAM/SAGE model 102**, [original OBJ](http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102), pinned in the [input manifest](source/manifest.json). The archive does not declare a source release date; 2026-09-09 is the retrieval date. ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model 102; Marciniak et al. (2018), A&A 610, A7; Bartczak and collaborators.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 The shared recipe targets at most 800 native PolyCSS `u` raster triangles with 128 px cells and 1350 m simplification allowance. The independent source test preserves OBJ hashes, coordinates, connectivity, physical scale and pole. Actual simplification, scalar correspondence and browser evidence belong to the separate qualification records; source topology alone does not prove visual fidelity.

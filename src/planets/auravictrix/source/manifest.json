@@ -153,9 +153,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 1314,
-      "expectedSha256": "6b94f8b9a5bc08ea624e1f73b747fb6fdd5ca5302277dd62880ff6f8fd8a464a"
+      "expectedSha256": "6b94f8b9a5bc08ea624e1f73b747fb6fdd5ca5302277dd62880ff6f8fd8a464a",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1654",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -182,12 +185,6 @@
       "expectedSha256": "6cec5824e942b6f3abea47934c4ab127445fd89a587308f36ddf167c94c5b500"
     },
     {
-      "path": "reference/model-1654.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 121604,
-      "expectedSha256": "46888e3adfa1cf443f3ec3463a2aac3deb53090b3a93eb0dd7228f296ac2e2a8"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 4087,
@@ -210,12 +207,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3533,
       "expectedSha256": "faaa25bbeca6019ee78b263681cb9788b8c7887afae286bd0d58f7ee203d7c5b"
-    },
-    {
-      "path": "reference/search.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 10511,
-      "expectedSha256": "c1ca1aabaaad7f71949956b66b3869b5ba239f8554160fa7de2184da72b14fc8"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",

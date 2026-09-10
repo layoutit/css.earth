@@ -49,6 +49,8 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 <details>
 <summary>Source survey</summary>
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 - [Selected model](https://damit.cuni.cz/projects/damit/asteroid_models/view/1743) and [original counted mesh](https://damit.cuni.cz/projects/damit/stored_files/open/5968/shape.txt) — included unchanged. Convex light-curve reconstruction; fine relief is unresolved.
 - [DAMIT documentation](https://damit.cuni.cz/projects/damit/pages/documentation) — coordinate units, pole, period and diameter semantics. CC BY 4.0.
 - [Hanuš et al. (2018), Spin states of asteroids in the Eos collisional family](https://ui.adsabs.harvard.edu/abs/2018Icar..299...84H) — original model publication record.

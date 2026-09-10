@@ -6,6 +6,8 @@ Checked 2026-09-09. Selected DAMIT model [1202](https://damit.cuni.cz/projects/d
 
 Convex lightcurve shape, uniformly scaled to the AKARI effective diameter of 17.98 ±1.34 km.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 Recorded five-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).

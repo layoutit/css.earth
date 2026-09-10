@@ -147,9 +147,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 1099,
-      "expectedSha256": "f72e00a6d9dd0b4334790ccf10a40853403d5c0427a0d1f2f2c897ac03483358"
+      "expectedSha256": "f72e00a6d9dd0b4334790ccf10a40853403d5c0427a0d1f2f2c897ac03483358",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3529",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/diamalb.lbl",
@@ -182,12 +185,6 @@
       "expectedSha256": "2531f3f549c89677a4b4b0118ae2609d400865c9377a16d3dfa929574fd847ea"
     },
     {
-      "path": "reference/model-3529.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 91455,
-      "expectedSha256": "0434a6bce55f744740dc8546074aeedf323777b15847453e9488a52ec72d3a0b"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3587,
@@ -198,12 +195,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3006,
       "expectedSha256": "1bc427a82f8082978c413627123eeb212db4151861c9ffd1a06e1fc466aafb9a"
-    },
-    {
-      "path": "reference/search.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 8926,
-      "expectedSha256": "8d8fa355845299f7a37b10db965a6c6a81a6a08bd4605270db399b0292326de2"
     },
     {
       "path": "reference/simps.cat",

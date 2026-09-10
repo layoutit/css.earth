@@ -140,12 +140,6 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/AKARI-reuse.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 11064,
-      "expectedSha256": "9fb77b99f8f1983ba7694234ff6d017723e348eaeaa8c0f4565202385e81979b"
-    },
-    {
       "path": "reference/calibration.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 2923,
@@ -153,9 +147,12 @@
     },
     {
       "path": "reference/damit-model.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
       "expectedBytes": 1805,
-      "expectedSha256": "6009a4909c76e38e33df43daaa8e19fa6a3f541dbdd287f823511a33650973be"
+      "expectedSha256": "6009a4909c76e38e33df43daaa8e19fa6a3f541dbdd287f823511a33650973be",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/678",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
       "path": "reference/horizons-elements.txt",
@@ -176,12 +173,6 @@
       "expectedSha256": "da950dc1b8f65e1b1044f087f9571689f2bdd7a7863804d36bd012e52f5225c1"
     },
     {
-      "path": "reference/model-678.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 122968,
-      "expectedSha256": "56975b7c126f8d8a806d524fbe635187b1e191ad232cc0f23e73237060eb32d9"
-    },
-    {
       "path": "reference/model-properties.json",
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 4932,
@@ -198,12 +189,6 @@
       "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
       "expectedBytes": 3650,
       "expectedSha256": "447ae06dc84b0ed8d6115819eaa44caff633a7df76c432c867bed892f450d93e"
-    },
-    {
-      "path": "reference/search.html",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "expectedBytes": 10648,
-      "expectedSha256": "6ae03fb43943f72d775e77e52ec99798a0b8fe8b96b6b6b305438e7562f19bb4"
     },
     {
       "path": "reference/spin.txt",

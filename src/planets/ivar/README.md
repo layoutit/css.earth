@@ -6,6 +6,8 @@ Checked 2026-09-09. Original [DAMIT model 271](https://damit.cuni.cz/projects/da
 
 Convex lightcurve model at the archive fixed-shape diameter of 7.4 ±0.2 km.
 
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
 ## Evidence
 
 Recorded four-body results retain their [original build identities](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/non-belt-populations/README.md#evidence-identity).

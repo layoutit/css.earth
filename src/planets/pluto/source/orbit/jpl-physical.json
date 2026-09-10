@@ -1,0 +1,20 @@
+{
+  "body": "Pluto",
+  "source": {
+    "title": "Planetary Physical Parameters",
+    "provider": "NASA/JPL Solar System Dynamics",
+    "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
+    "table": "Dwarf Planets",
+    "row": "Pluto",
+    "retrieved": "2026-09-04"
+  },
+  "extraction": "Values transcribed from the mean radius, bulk density, sidereal rotation period and sidereal orbital period columns. Units follow the table; no numerical conversion.",
+  "meanRadiusKm": 1188.3,
+  "meanDensityGPerCm3": 1.853,
+  "rotationDays": -6.3872,
+  "orbitalPeriodYears": 247.92065,
+  "reportedUncertainty": {
+    "meanRadiusKm": 1.6,
+    "meanDensityGPerCm3": 0.004
+  }
+}
