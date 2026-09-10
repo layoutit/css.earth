@@ -163,13 +163,33 @@ A passing body test is not a full-suite pass. Runtime image installation does
 not prove source restoration, complete Earth paging or every remote file's
 availability. State what remains unknown.
 
-## Update the docs with the change
+## Pull requests
+
+Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
+for PR titles: `<type>[optional scope][!]: <summary>`. For example,
+`feat(universe): add prepared galaxy layers` or `docs: clarify source credits`.
+Use `feat` for features, `fix` for fixes and an appropriate type for other work.
+Scope is optional; name the affected area when useful. Mark breaking changes with `!`.
+
+Apply **ISO 24495-1:2023** to every PR title and description through the
+[plain-language rules](#plain-language). Lead with the problem and resulting
+behavior; give reviewers concrete changes, short explanations and visible limits.
+For claims about sources, processing or scientific views, apply the **PDS4 1.26.0**
+[content requirements adapted above](#standards-basis): identify changed products
+and versions, explain processing and interpretation changes, and link the records
+and evidence for the tested revision. Keep detailed provenance in its maintained
+account and link it from the PR.
 
 Update affected records, NOTICE credits/terms and the body README's explanation,
 results and known problems. Extend existing sections when adding a dataset.
-Run relevant checks and summarize their results in the PR using the
-[template](../../.github/pull_request_template.md). Link the maintained account
-instead of adding a PR completion report to `docs/`.
+Run relevant checks and summarize their results in the PR. GitHub already records
+CI revisions; identify the revision and relevant differences for local or reused
+evidence. Link the maintained account instead of adding a PR completion report to `docs/`.
+
+Use the [template](../../.github/pull_request_template.md) as a starting point.
+Headings are optional: a small change can be one paragraph explaining the problem,
+result and relevant check. Omit unused prompts. Do not add standards declarations,
+N/A entries or screenshots just to fill the template.
 
 Commit source records and the evidence needed to review the change, including
 relevant failures. Each added artifact needs a named claim, explanation or test
@@ -177,6 +197,19 @@ that uses it. Explain unusually large additions in the PR. Before removing an
 old report from the current tree, replace citations that still need it with
 verified links to its exact Git revision. Never rewrite its failures or present
 old screenshots as new.
+
+**Check images on GitHub (cssEarth rule).** Use a
+[GitHub attachment](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
+or an image committed at a fixed revision:
+`https://github.com/layoutit/cssEarth/blob/<commit>/<path>?raw=true`.
+Use the original attachment URL, not a temporary signed download URL.
+Local paths and localhost URLs are not reviewable evidence.
+
+After creating or editing a PR, reload its GitHub page and inspect every embedded
+image with normal repository access. Confirm it loads, is readable and matches the
+cited view and revision. File existence and HTTP success alone are insufficient.
+Fix broken embeds before handoff; if required visual evidence is unavailable,
+keep the PR in draft and say what is missing.
 
 **PROVENANCE DOCUMENTATION** maintains shared guidance and resolves contradictions;
 contributors update instructions affected by their change without an extra approval

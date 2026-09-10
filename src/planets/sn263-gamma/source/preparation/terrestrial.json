@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "sn263-gamma",
+  "displayName": "2001 SN263 Gamma",
+  "publicBase": "/scenes/sn263-gamma/",
+  "distanceAu": 1.9869,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.2242032362372403,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": -45,
+      "framingScale": 0.8026401586924221
+    },
+    "mapUrl": "/scenes/sn263-gamma/sn263-gamma-shape-surface@2x.webp",
+    "polesUrl": "/scenes/sn263-gamma/sn263-gamma-shape-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/a153591gamma.tab",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 1148,
+        "expectedFaces": 2292
+      },
+      "faceBudget": 800,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 10,
+        "regularize": false
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Orbital placement is approximate context extrapolated from the 2008 mutual-orbit fit. Current phase and long-term three-body evolution are not measured. Published radar and light-curve shape of the smaller, inner moon. Fine terrain and visible-light color are unresolved; the grid marks missing imagery. The archive includes weakly observed model regions. The model assumes the primary’s spin pole for this moon. Rotational phase is illustrative."
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

@@ -20,6 +20,10 @@ import { SATELLITE_ELEMENTS } from './data/satelliteElements.data.js'
  * three numbers and should not get them from here.
  */
 export const BODIES: Record<BodyId, BodyData> = {
+  // PDS Becker radar meshes: source-volume radii; GM unknown in Horizons.
+  'asteroid-2001-sn263': body('asteroid-2001-sn263', '2001 SN263', '153591;', 1.2482944893607866, 0, 'sun'),
+  'sn263-beta': body('sn263-beta', '2001 SN263 Beta', null, 0.39455452137070834, 0, 'asteroid-2001-sn263'),
+  'sn263-gamma': body('sn263-gamma', '2001 SN263 Gamma', null, 0.2242032362372403, 0, 'asteroid-2001-sn263'),
   'achlys': body('achlys', "Achlys", '208996;', 353.30862431538293, 0, 'sun'),
   'mani': body('mani', "Máni", '307261;', 402.7959116616533, 0, 'sun'),
   'varda': body('varda', "Varda", '174567;', 324.1345526598759, 0, 'sun'),

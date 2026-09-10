@@ -168,6 +168,40 @@ export const BODY_POSITION_PROVENANCE = Object.freeze({
       "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
     ]
   },
+  "sn263-beta": {
+    "model": "Published mutual-orbit model evaluated once at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "source": "https://arxiv.org/abs/1012.2154v2",
+    "sourcePath": "src/planets/sn263-beta/source/orbit/published-parameters.json",
+    "sha256": "c5806510c9b9c2350265ea3207d2cc2c805ffb768a088d57966bb618018c9bc8",
+    "timeQualification": "Fang et al. Table 4 gives MJD 54509.0 without naming its clock scale. MJD is converted to JD by adding 2400000.5; this display evaluates the numerical JD as TT. A possible UTC/TT/TDB difference of under 70 seconds is separate from the overwhelming long-extrapolation and omitted-precession uncertainty. The resulting vector is geometric, with no light-time correction.",
+    "limitations": [
+      "The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.",
+      "The original solution is a three-body integration. This two-body snapshot omits measured nodal and apsidal precession, mutual perturbations, primary oblateness and subsequent planetary encounters. Both orbital phase and plane at 2026 are unqualified.",
+      "Published adopted period uncertainties alone span many complete revolutions by the scene epoch; no useful present-day phase precision is claimed.",
+      "J2000 equatorial axes are treated as ICRF at this coarse precision. The source clock scale is unstated; its numerical epoch is treated as TT.",
+      "The numbered-asteroid Horizons solution is used as the Alpha heliocentric anchor. No independently resolved Alpha-center versus triple-system barycenter correction is available; the expected model offset is sub-kilometer.",
+      "Orbital elements do not establish a measured moon spin pole, current attitude or libration. The rendering orientation remains illustrative."
+    ]
+  },
+  "sn263-gamma": {
+    "model": "Published mutual-orbit model evaluated once at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "source": "https://arxiv.org/abs/1012.2154v2",
+    "sourcePath": "src/planets/sn263-gamma/source/orbit/published-parameters.json",
+    "sha256": "ccf972f3449a85b29229adf9561f4d30b74e9808eef7d7b0e354cce1aa170285",
+    "timeQualification": "Fang et al. Table 4 gives MJD 54509.0 without naming its clock scale. MJD is converted to JD by adding 2400000.5; this display evaluates the numerical JD as TT. A possible UTC/TT/TDB difference of under 70 seconds is separate from the overwhelming long-extrapolation and omitted-precession uncertainty. The resulting vector is geometric, with no light-time correction.",
+    "limitations": [
+      "The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.",
+      "The original solution is a three-body integration. This two-body snapshot omits measured nodal and apsidal precession, mutual perturbations, primary oblateness and subsequent planetary encounters. Both orbital phase and plane at 2026 are unqualified.",
+      "Published adopted period uncertainties alone span many complete revolutions by the scene epoch; no useful present-day phase precision is claimed.",
+      "J2000 equatorial axes are treated as ICRF at this coarse precision. The source clock scale is unstated; its numerical epoch is treated as TT.",
+      "The numbered-asteroid Horizons solution is used as the Alpha heliocentric anchor. No independently resolved Alpha-center versus triple-system barycenter correction is available; the expected model offset is sub-kilometer.",
+      "Orbital elements do not establish a measured moon spin pole, current attitude or libration. The rendering orientation remains illustrative."
+    ]
+  },
   "haumea": {
     "model": "Horizons geometric state at prepared epoch",
     "epochJdTt": 2461286.5,
@@ -220,6 +254,25 @@ export const BODY_POSITION_PROVENANCE = Object.freeze({
       "Miriade permits orbit computation from 1990 to 2030, but its position-error service stops at 2026-Jan-01; empty errors at this scene date are unavailable, not zero.",
       "Sky-plane checks do not independently determine the line-of-sight component, and geocentric projection omits observatory parallax and differential aberration.",
       "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
+    ]
+  },
+  "asteroid-2001-sn263": {
+    "model": "Horizons numbered-asteroid geometric state at prepared epoch",
+    "epochJdTt": 2461286.5,
+    "referenceFrame": "ICRF",
+    "target": 153591,
+    "targetKind": "numbered-asteroid",
+    "center": 10,
+    "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "sourcePath": "src/planets/sn263-gamma/source/orbit/parent-heliocentric.txt",
+    "sha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8",
+    "qualification": [
+      "The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.",
+      "The original solution is a three-body integration. This two-body snapshot omits measured nodal and apsidal precession, mutual perturbations, primary oblateness and subsequent planetary encounters. Both orbital phase and plane at 2026 are unqualified.",
+      "Published adopted period uncertainties alone span many complete revolutions by the scene epoch; no useful present-day phase precision is claimed.",
+      "J2000 equatorial axes are treated as ICRF at this coarse precision. The source clock scale is unstated; its numerical epoch is treated as TT.",
+      "The numbered-asteroid Horizons solution is used as the Alpha heliocentric anchor. No independently resolved Alpha-center versus triple-system barycenter correction is available; the expected model offset is sub-kilometer.",
+      "Orbital elements do not establish a measured moon spin pole, current attitude or libration. The rendering orientation remains illustrative."
     ]
   }
 });
@@ -316,6 +369,37 @@ export const BODY_HELIOCENTRIC_STATES: Readonly<Record<string, { positionKm: rea
         "No current phase offset is fitted; no continuous runtime ephemeris or out-of-epoch propagation is supported."
       ]
     }
+  },
+  "asteroid-2001-sn263": {
+    "positionKm": [
+      387073626.3866632,
+      -153612111.7567281,
+      -55949815.9445668
+    ],
+    "velocityKmPerDay": [
+      143605.7135081395,
+      1016802.933761815,
+      573888.0015445706
+    ],
+    "provenance": {
+      "model": "Horizons numbered-asteroid geometric state at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "target": 153591,
+      "targetKind": "numbered-asteroid",
+      "center": 10,
+      "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES",
+      "sourcePath": "src/planets/sn263-gamma/source/orbit/parent-heliocentric.txt",
+      "sha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8",
+      "qualification": [
+        "The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.",
+        "The original solution is a three-body integration. This two-body snapshot omits measured nodal and apsidal precession, mutual perturbations, primary oblateness and subsequent planetary encounters. Both orbital phase and plane at 2026 are unqualified.",
+        "Published adopted period uncertainties alone span many complete revolutions by the scene epoch; no useful present-day phase precision is claimed.",
+        "J2000 equatorial axes are treated as ICRF at this coarse precision. The source clock scale is unstated; its numerical epoch is treated as TT.",
+        "The numbered-asteroid Horizons solution is used as the Alpha heliocentric anchor. No independently resolved Alpha-center versus triple-system barycenter correction is available; the expected model offset is sub-kilometer.",
+        "Orbital elements do not establish a measured moon spin pole, current attitude or libration. The rendering orientation remains illustrative."
+      ]
+    }
   }
 });
 
@@ -373,6 +457,24 @@ export const BODY_FIXED_SUN_DIRECTIONS: Readonly<Record<string, readonly number[
     0.02042645067694286,
     0.9111808210198515,
     -0.4115000261462105,
+  ]),
+  // subsolar latitude -7.480°, longitude 1.706°
+  "asteroid-2001-sn263": Object.freeze([
+    0.991050426026496,
+    0.029523240317869515,
+    -0.13018230046298174,
+  ]),
+  // subsolar latitude -7.480°, longitude 1.706°
+  "sn263-beta": Object.freeze([
+    0.9910504252626349,
+    0.029523267512847833,
+    -0.13018230011071144,
+  ]),
+  // subsolar latitude -7.480°, longitude 1.706°
+  "sn263-gamma": Object.freeze([
+    0.9910504260867339,
+    0.0295232347399317,
+    -0.13018230126939043,
   ]),
   // subsolar latitude -4.448°, longitude 166.080°
   polymele: Object.freeze([
@@ -3136,6 +3238,24 @@ export const BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS: Readonly<Record<string, reado
     -0.3977771559319137,
     -2.4356826039297786e-17,
     0.9174820620691818,
+  ]),
+  // pole tilt to the ecliptic 170.000°, Sun ecliptic latitude -1.332°
+  "asteroid-2001-sn263": Object.freeze([
+    -0.15023076362943844,
+    -0.08708850249235867,
+    -0.9848077530122081,
+  ]),
+  // pole tilt to the ecliptic 170.000°, Sun ecliptic latitude -1.332°
+  "sn263-beta": Object.freeze([
+    -0.15023076362943844,
+    -0.08708850249235867,
+    -0.9848077530122081,
+  ]),
+  // pole tilt to the ecliptic 170.000°, Sun ecliptic latitude -1.332°
+  "sn263-gamma": Object.freeze([
+    -0.15023076362943844,
+    -0.08708850249235867,
+    -0.9848077530122081,
   ]),
   // pole tilt to the ecliptic 170.900°, Sun ecliptic latitude -4.122°
   polymele: Object.freeze([
@@ -5901,6 +6021,24 @@ export const BODY_FIXED_ORBIT_NORMAL_DIRECTIONS: Readonly<Record<string, readonl
     -0.4812201171762833,
     -0.35181312308447166,
     -0.8029039327655549,
+  ]),
+  // orbital inclination to the ecliptic 6.693°, obliquity to the orbit 166.477°
+  "asteroid-2001-sn263": Object.freeze([
+    -0.12176978014052423,
+    -0.19961874360589743,
+    -0.9722779838326749,
+  ]),
+  // orbital inclination to the ecliptic 172.611°, obliquity to the orbit 5.802°
+  "sn263-beta": Object.freeze([
+    0.02226719435113498,
+    0.09861218572258165,
+    0.9948767807536489,
+  ]),
+  // orbital inclination to the ecliptic 169.623°, obliquity to the orbit 11.110°
+  "sn263-gamma": Object.freeze([
+    0.16889039098044092,
+    -0.09277719418120936,
+    0.9812585938855956,
   ]),
   // orbital inclination to the ecliptic 12.977°, obliquity to the orbit 164.005°
   polymele: Object.freeze([
@@ -8668,6 +8806,24 @@ export const BODY_FIXED_ORBITAL_VELOCITY_DIRECTIONS: Readonly<Record<string, rea
     -0.9077255699986819,
     0.4181769582024116,
   ]),
+  // flight-path angle -15.575°
+  "asteroid-2001-sn263": Object.freeze([
+    0.213411340835034,
+    0.9513914091640702,
+    -0.22205851970099585,
+  ]),
+  // flight-path angle 0.854°
+  "sn263-beta": Object.freeze([
+    0.7016274439388476,
+    -0.7104401368286998,
+    0.05471509750204004,
+  ]),
+  // flight-path angle -0.867°
+  "sn263-gamma": Object.freeze([
+    -0.5844758628092838,
+    -0.8110586570979263,
+    0.023912769389004718,
+  ]),
   // flight-path angle 2.495°
   polymele: Object.freeze([
     -0.2095481346774435,
@@ -11433,6 +11589,24 @@ export const BODY_FIXED_TO_ICRF_MATRICES: Readonly<Record<string, readonly numbe
     6.123233995736766e-17, -1, 0,
     1, 6.123233995736766e-17, 0,
     0, 0, 1,
+  ]),
+  // pole RA 67.810°, Dec -73.181°, prime meridian W 0.000°
+  "asteroid-2001-sn263": Object.freeze([
+    -0.9259379405615559, 0.36152003778545827, 0.10928033907444423,
+    0.3776756945166378, 0.886329525883897, 0.2679198412171102,
+    0, 0.28934967396910444, -0.9572234672081399,
+  ]),
+  // pole RA 67.810°, Dec -73.181°, prime meridian W 0.000°
+  "sn263-beta": Object.freeze([
+    -0.9259379405615559, 0.36152003778545827, 0.10928033907444423,
+    0.3776756945166378, 0.886329525883897, 0.2679198412171102,
+    0, 0.28934967396910444, -0.9572234672081399,
+  ]),
+  // pole RA 67.810°, Dec -73.181°, prime meridian W 0.000°
+  "sn263-gamma": Object.freeze([
+    -0.9259379405615559, 0.36152003778545827, 0.10928033907444423,
+    0.3776756945166378, 0.886329525883897, 0.2679198412171102,
+    0, 0.28934967396910444, -0.9572234672081399,
   ]),
   // pole RA 109.335°, Dec -72.819°, prime meridian W 0.000°
   polymele: Object.freeze([
@@ -14282,6 +14456,57 @@ export const BODY_ORBITS: Readonly<Record<string, BodyOrbit>> = Object.freeze({
     inclinationDegrees: 123.04049084786986,
     perihelionAu: 0.2661269857791105,
     aphelionAu: null,
+  }),
+  // a 1.9877 AU, e 0.48001, perihelion 1.0336 AU, aphelion 2.9418 AU
+  "asteroid-2001-sn263": Object.freeze({
+    semiMajorAxisAu: 1.987696656219903,
+    eccentricity: 0.480013772276548,
+    heliocentricDistanceAu: 2.8087443149590032,
+    perihelionDirection: Object.freeze([
+      0.922889681008999,
+      0.33775166905728143,
+      -0.18492822049684174,
+    ]),
+    trueAnomalyDegrees: 198.43624998756212,
+    inclinationDegrees: 6.692968083612962,
+    perihelionAu: 1.0335748861263063,
+    aphelionAu: 2.9418184263134997,
+  }),
+  // a 1.1118e-7 AU, e 0.015000, perihelion 1.0952e-7 AU, aphelion 1.1285e-7 AU
+  "sn263-beta": Object.freeze({
+    centerBodyId: "asteroid-2001-sn263",
+    centerPositionAu: Object.freeze([7.814418478877529e-8,7.877556000142566e-8,-9.557245768828598e-9]),
+    parentHeliocentricState: {"positionKm":[387073626.3866632,-153612111.7567281,-55949815.9445668],"velocityKmPerDay":[143605.7135081395,1016802.933761815,573888.0015445706],"provenance":{"model":"Horizons numbered-asteroid geometric state at prepared epoch","epochJdTt":2461286.5,"referenceFrame":"ICRF","target":153591,"targetKind":"numbered-asteroid","center":10,"source":"https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES","sourcePath":"src/planets/sn263-beta/source/orbit/parent-heliocentric.txt","sha256":"dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8","qualification":["The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.","The original solution is a three-body integration. This two-body snapshot omits measured nodal and apsidal precession, mutual perturbations, primary oblateness and subsequent planetary encounters. Both orbital phase and plane at 2026 are unqualified.","Published adopted period uncertainties alone span many complete revolutions by the scene epoch; no useful present-day phase precision is claimed.","J2000 equatorial axes are treated as ICRF at this coarse precision. The source clock scale is unstated; its numerical epoch is treated as TT.","The numbered-asteroid Horizons solution is used as the Alpha heliocentric anchor. No independently resolved Alpha-center versus triple-system barycenter correction is available; the expected model offset is sub-kilometer.","Orbital elements do not establish a measured moon spin pole, current attitude or libration. The rendering orientation remains illustrative."]}},
+    semiMajorAxisAu: 1.1118473760469096e-7,
+    eccentricity: 0.015000000000000062,
+    heliocentricDistanceAu: 2.808744395973726,
+    perihelionDirection: Object.freeze([
+      -0.6178269772410885,
+      0.7837171064556891,
+      -0.06385392111578643,
+    ]),
+    trueAnomalyDegrees: 97.25703367549386,
+    inclinationDegrees: 172.6108668294645,
+    perihelionAu: 1.0951696654062059e-7,
+    aphelionAu: 1.1285250866876134e-7,
+  }),
+  // a 2.5428e-8 AU, e 0.016000, perihelion 2.5021e-8 AU, aphelion 2.5835e-8 AU
+  "sn263-gamma": Object.freeze({
+    centerBodyId: "asteroid-2001-sn263",
+    centerPositionAu: Object.freeze([2.005694603905624e-8,-1.5074548467757837e-8,-4.877409276840465e-9]),
+    parentHeliocentricState: {"positionKm":[387073626.3866632,-153612111.7567281,-55949815.9445668],"velocityKmPerDay":[143605.7135081395,1016802.933761815,573888.0015445706],"provenance":{"model":"Horizons numbered-asteroid geometric state at prepared epoch","epochJdTt":2461286.5,"referenceFrame":"ICRF","target":153591,"targetKind":"numbered-asteroid","center":10,"source":"https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES","sourcePath":"src/planets/sn263-gamma/source/orbit/parent-heliocentric.txt","sha256":"dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8","qualification":["The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.","The original solution is a three-body integration. This two-body snapshot omits measured nodal and apsidal precession, mutual perturbations, primary oblateness and subsequent planetary encounters. Both orbital phase and plane at 2026 are unqualified.","Published adopted period uncertainties alone span many complete revolutions by the scene epoch; no useful present-day phase precision is claimed.","J2000 equatorial axes are treated as ICRF at this coarse precision. The source clock scale is unstated; its numerical epoch is treated as TT.","The numbered-asteroid Horizons solution is used as the Alpha heliocentric anchor. No independently resolved Alpha-center versus triple-system barycenter correction is available; the expected model offset is sub-kilometer.","Orbital elements do not establish a measured moon spin pole, current attitude or libration. The rendering orientation remains illustrative."]}},
+    semiMajorAxisAu: 2.5428169413109147e-8,
+    eccentricity: 0.0160000000000004,
+    heliocentricDistanceAu: 2.8087443350263515,
+    perihelionDirection: Object.freeze([
+      -0.2958844585883266,
+      -0.9544144302605143,
+      -0.03931262489825086,
+    ]),
+    trueAnomalyDegrees: 250.23230386448637,
+    inclinationDegrees: 169.6229745131405,
+    perihelionAu: 2.5021318702499393e-8,
+    aphelionAu: 2.5835020123718905e-8,
   }),
   // a 5.1920 AU, e 0.095806, perihelion 4.6946 AU, aphelion 5.6894 AU
   polymele: Object.freeze({

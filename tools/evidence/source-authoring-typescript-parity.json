@@ -769,5 +769,7 @@
     "records": 32,
     "observations": 96,
     "identicalValues": true
-  }
+  },
+  "typedRevision": "46870c229f8b7cc4ebb896615229b223fe59d963",
+  "reuseScope": "Comparisons bind the 461-object candidate at typedRevision. The later merge adds three physical body records and reformats the retained fixture reader without changing these observations; the 461-body comparison is not a claim to have rerun all source acquisition for the 464-object registry."
 }

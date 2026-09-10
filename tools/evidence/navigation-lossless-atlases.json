@@ -7226,5 +7226,55 @@
     }
   ],
   "lossyPublicationCommit": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
-  "explanation": "The Encke/LINEAR integration recompressed all marker tiles with Q75. Later incremental additions retained those decoded lossy pixels. Canonical preparation now rebuilds pinned source recipes with lossless row-copy assembly. Original pre-compression baseline comparison is reported separately from the current-main comparison."
+  "explanation": "The Encke/LINEAR integration recompressed all marker tiles with Q75. Later incremental additions retained those decoded lossy pixels. Canonical preparation now rebuilds pinned source recipes with lossless row-copy assembly. Original pre-compression baseline comparison is reported separately from the current-main comparison.",
+  "subsequentMerge": {
+    "refs": {
+      "existing": "46870c229f8b7cc4ebb896615229b223fe59d963",
+      "incoming": "bbfbf86b5c9b71fc56ef5e6b4759fd00af11d8ec"
+    },
+    "objects": 464,
+    "densities": [
+      {
+        "density": 1,
+        "width": 7424,
+        "height": 16,
+        "inputs": {
+          "existing": {
+            "bytes": 123700,
+            "sha256": "a742739b1ddfe7113eabbd090df81ecb29c4cca40eeacdd2e97936ce06219e78"
+          },
+          "incoming": {
+            "bytes": 157864,
+            "sha256": "98990ee38e20625c8fbf14db0f1e7402975e125556da3a303c39442e3ec2e020"
+          }
+        },
+        "output": {
+          "bytes": 124874,
+          "sha256": "60e0ceae5200f55843abb5641a6986fb1cbc1f4962a20607fe526771e76295dd"
+        },
+        "changedVisiblePixels": 0
+      },
+      {
+        "density": 2,
+        "width": 14848,
+        "height": 32,
+        "inputs": {
+          "existing": {
+            "bytes": 366260,
+            "sha256": "504dee922a854dab5af47ae287ad732c461fb0f6bdebb2cc07afb74102db683b"
+          },
+          "incoming": {
+            "bytes": 429026,
+            "sha256": "d4c4b8a2a1f58a6b69a29a598053a326b02876a7c3347390a766a4b20648ec9b"
+          }
+        },
+        "output": {
+          "bytes": 399292,
+          "sha256": "632990f9f2324f60a764721da74daa373db9f51551b08ece5020eb18c02710af"
+        },
+        "changedVisiblePixels": 0
+      }
+    ],
+    "scope": "Preserve every existing corrected tile exactly; add the three incoming committed tiles. Lossless encoding; alpha and visible RGB checked."
+  }
 }

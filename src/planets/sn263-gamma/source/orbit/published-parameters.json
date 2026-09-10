@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-published-mutual-orbit@1",
+  "id": "sn263-gamma",
+  "centerBodyId": "asteroid-2001-sn263",
+  "referenceFrame": "EQJ2000",
+  "epochJd": 2454509.5,
+  "timeScale": "not stated in the source; numerical epoch treated as TT",
+  "timeQualification": "Fang et al. Table 4 gives MJD 54509.0 without naming its clock scale. MJD is converted to JD by adding 2400000.5; this display evaluates the numerical JD as TT. A possible UTC/TT/TDB difference of under 70 seconds is separate from the overwhelming long-extrapolation and omitted-precession uncertainty. The resulting vector is geometric, with no light-time correction.",
+  "semiMajorAxisKm": 3.804,
+  "eccentricity": 0.016,
+  "inclinationDegrees": 165.045,
+  "ascendingNodeDegrees": 198.689,
+  "argumentPeriapsisDegrees": 292.435,
+  "meanAnomalyDegrees": 248.816,
+  "meanMotionDegreesPerDay": 524.7813411078716,
+  "quadraticMeanAnomalyDegreesPerYear2": 0,
+  "citation": {
+    "authors": "Fang, Margot, Brozovic, Nolan, Benner and Taylor",
+    "year": 2011,
+    "title": "Orbits of near-Earth asteroid triples 2001 SN263 and 1994 CC: properties, origin, and evolution",
+    "url": "https://arxiv.org/abs/1012.2154v2",
+    "locator": "Table 4 and section 3.1, PDF page 6; component identities on page 1; precession in section 3.4 and Table 5",
+    "document": {
+      "url": "https://arxiv.org/pdf/1012.2154v2",
+      "bytes": 1028692,
+      "sha256": "9bc4753784e7b5836c254bdae627716935686606163a70a94c2293dc060b3fe7",
+      "retention": "Original document pinned remotely; the numerical facts are transcribed here."
+    }
+  },
+  "sourceValues": {
+    "periodDays": 0.686,
+    "sourceEpochMjd": 54509,
+    "parentMassKg": 9174660000000.0,
+    "bodyMassKg": 97730000000.0,
+    "observationMjdRange": [
+      54508.06138,
+      54522.12406
+    ]
+  },
+  "sourceIdentity": {
+    "component": "Gamma (inner)",
+    "note": "Fang section 1 names Beta as the outer, more massive satellite and Gamma as the inner satellite. The fetched JPL API attaches physical values to the opposite orbital rows; its unnamed physical-parameter fields are excluded."
+  },
+  "parameterConversion": "Table 4 directly supplies equatorial J2000 a,e,i,omega,Omega,M at MJD54509. The period in days gives n=360/P degrees per day. No ECLIPJ2000 obliquity rotation is applied. No orbital phase is selected from the visual mesh orientation.",
+  "modelQualification": "This approximation holds the 2008 osculating plane and apsidal line fixed, uses the published rounded mean period, and evaluates Kepler motion once at the shared scene epoch. It does not reproduce the paper's N-body integration or its reported radar fit.",
+  "uncertainties": {
+    "periodDaysAdopted1Sigma": 0.01,
+    "orbitPoleApproximateUncertaintyDegrees": 15,
+    "meanAnomalyDegreesFormal1Sigma": 11.509,
+    "note": "Section 3.1 adopted ranges, rather than the narrower formal Table 4 period errors. No full covariance or valid 2026 uncertainty distribution is available."
+  },
+  "gravityQualification": "The loader uses effective combined GM=a^3(2pi/P)^2 for internal consistency with the rounded source period. It is split by the published Alpha/companion mass ratio; this is a display convention, not a new measured mass or a full triple gravity model."
+}

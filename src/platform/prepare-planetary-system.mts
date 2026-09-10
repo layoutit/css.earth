@@ -1,3 +1,4 @@
+import sn263Photometry from "../planets/asteroid-2001-sn263/source/preparation/photometry.json" with { type: "json" };
 import type { Vector3, Matrix3 } from "../renderers/css/solar-system/types.ts";
 import type { BodyId, PlanetId, DwarfPlanetId, SmallBodyId, CometId, KeplerianElements } from "@cssearth/astronomy";
 import type { HeliocentricPreparationOptions } from "./prepare-heliocentric-view.mts";
@@ -92,6 +93,8 @@ export const GEOMETRIC_ALBEDO: Readonly<Record<string, number>> = Object.freeze(
   // Didymos system visible geometric albedo 0.15 ± 0.02: Daly et al. (2023),
   // https://www.nature.com/articles/s41586-023-05810-5; approximate point photometry.
   didymos: 0.15,
+  // Object-owned system-average estimate, used only for parent point photometry.
+  "asteroid-2001-sn263": sn263Photometry.geometricAlbedo,
   // Parent context only: common-system geometric albedos, not mapped surface colors.
   // Scheirich et al.2021 Table4; JPL SBDB Grav2012/Mainzer2014, pinned in https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/parent-inputs.json.
   moshup: 0.162, sylvia: 0.046, patroclus: 0.047,
