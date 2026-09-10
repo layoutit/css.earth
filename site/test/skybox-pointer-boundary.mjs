@@ -58,8 +58,8 @@ export async function proveSkyboxPointerBoundary(page, planet, profile) {
       assert.deepEqual(await cameraPose(page, planet.id), crossed,
         `${planet.id}: released sky input must not turn hover into drag`);
       // Navigation markers rotate across the sky during the preceding drag.
-      // Recheck beneath the transparent input using the actual picker's hit
-      // criteria before testing a deliberately empty-sky double click.
+      // Recheck the retained picker's hover result before testing a
+      // deliberately empty-sky double click.
       const clickSky = await emptySkyPoint(page, planet.id, profile.inputSelector, sky, cameraPlan);
       // Empty sky must neither deselect the body nor start a surface flight.
       await page.evaluate(() => {
@@ -164,18 +164,25 @@ async function emptySkyPoint(page, id, selector, preferred, cameraPlan) {
       [96, 150, 220, innerHeight - 96].map(y => ({ x: innerWidth - inset, y })))];
     const inspected = candidates.map(point => {
       const elements = document.elementsFromPoint(point.x, point.y);
-      const targets = elements.filter(element => element instanceof HTMLElement &&
-        element.dataset.objectNavigate && element.style.pointerEvents === "auto" && element.ariaDisabled !== "true")
-        .map(element => element.dataset.objectNavigate);
       const outsideBody = Math.hypot(point.x - camera.x - camera.width / 2,
         point.y - camera.y - camera.height / 2) > radius + 12;
-      return { point, targets, onInput: input.contains(elements[0]), outsideBody };
+      return { point, onInput: input.contains(elements[0]), outsideBody };
     });
-    return { selected: inspected.find(candidate => candidate.onInput && candidate.outsideBody && !candidate.targets.length)?.point,
-      inspected };
+    return { inspected };
   }, { id, selector, preferred, cameraPlan, baseTile: BASE_TILE });
-  assert.ok(result.selected, `${id}: no verified empty sky point: ${JSON.stringify(result.inspected)}`);
-  return result.selected;
+  // World targets use the retained screen-picking registry, not DOM hit boxes.
+  // Exercise its real hover path so this also works against a production build.
+  for (const candidate of result.inspected) {
+    if (!candidate.onInput || !candidate.outsideBody) continue;
+    await page.mouse.move(candidate.point.x, candidate.point.y);
+    candidate.targets = await page.evaluate(() => new Promise(resolve =>
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve(
+        [...document.querySelectorAll('.planet-stage [data-object-hovered="true"][data-object-navigate]')]
+          .map(element => element.dataset.objectNavigate),
+      )))));
+    if (!candidate.targets.length) return candidate.point;
+  }
+  assert.fail(`${id}: no verified empty sky point: ${JSON.stringify(result.inspected)}`);
 }
 
 function motionStats(page, id) {

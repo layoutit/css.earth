@@ -13,4 +13,6 @@ export const parsePolarPreview=shape({dimensions:shape({width:number,height:numb
 export const parseObservedPreview=shape({lenses:array(shape({id:text,products:array(shape({kind:text,filename:text,packing:shape({bandCount:number,gutter:number})}))}))});
 export const parseSpectralPreview=shape({namespace:text,descriptor:parsePreviewControls,parameters:shape({body2xWidth:number,body2xHeight:number,latitudeBandCount:number}),lenses:array(shape({id:text}))});
 export const parseGeometryPreview=shape({parameters:shape({planetRasterCellSize:number,longitudeSegments:number,latitudeSegments:number})});
-export const parsePreviewSurface=(value:unknown)=>Object.assign({},requireRecord(value),shape({id:text,map:optional(shape({url:text})),source:optional(text)})(value));
+// Authored rasters reference a source path; prepared surfaces instead retain
+// a provenance record and provide their preview through map.url.
+export const parsePreviewSurface=(value:unknown)=>Object.assign({},requireRecord(value),shape({id:text,map:optional(shape({url:text})),source:optional(value=>typeof value==='string'?text(value):requireRecord(value))})(value));

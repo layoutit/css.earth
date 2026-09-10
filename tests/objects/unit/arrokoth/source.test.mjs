@@ -46,7 +46,7 @@ test('Arrokoth UV orientation matches independently decoded released PNG scalar 
   for(const axis of [0,1])assert.ok(Math.abs(sample.uv[axis]-mapping.faces[faceId].reduce((s,i)=>s+mapping.uv[i][axis]/3,0))<1e-8);
  }
  assert.equal(lens.grid.noData,undefined,'the uniform source baseline is not an inferred observation mask');
- const content=await json('content/object.json');assert.equal(content.lenses.defaultLens,'model');
- assert.match(content.lenses.controls.find(l=>l.id==='albedo').description,/uniform baseline/);
+ const content=await json('content/object.json');assert.equal(content.lenses.defaultLens,'albedo');
+ assert.match(content.lenses.controls.find(l=>l.id==='albedo').description,/unconstrained model fill/);
  assert.ok(content.settings.controls.filter(c=>['shadows','orbit'].includes(c.name)).every(c=>c.checked===false));
 });
