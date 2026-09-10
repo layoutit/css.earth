@@ -25,6 +25,7 @@ import { requirePreparedResourceCatalog } from '../../object-runtime-contract.mj
 import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mjs';
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mjs';
 import { restoreDepthSource } from '../../prepared-depth-partitions.mjs';
+import { prepareTerrestrialRings } from './rings.mjs';
 
 async function prepareSolidEpochFrame({ config, celestial }) {
   const { namespace: id, geometry } = config;
@@ -50,10 +51,12 @@ async function prepareSolidEpochFrame({ config, celestial }) {
     }) };
 }
 
-export async function prepareSolidScene({ config, celestial, outputDirectory, radial = null }) {
+export async function prepareSolidScene({ config, celestial, outputDirectory, publicDirectory, radial = null }) {
   const { namespace: id, geometry } = config;
   const epoch = await prepareSolidEpochFrame({ config, celestial });
+  const rings = await prepareTerrestrialRings({ config, publicDirectory });
   const scene = { camera: epoch.camera, sky: epoch.sky, sun: epoch.sun,
+    ...(rings ? { rings } : {}),
     ...(radial ? { surfaceTriangles: radial.faces.map(face => face.vertices.map(v => [v[1] * BASE_TILE, v[0] * BASE_TILE, v[2] * BASE_TILE])) } : {}),
     ...(radial?.lensRanges ? { surfaceLensRanges: radial.lensRanges } : {}),
     systemTransform: epoch.systemTransform,
@@ -117,6 +120,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   await sharp(point, { raw: { width: 32, height: 32, channels: 4 } }).webp({ lossless: true }).toFile(resolve(publicDirectory, `${id}-system-point.webp`));
   const entries = [
     ...preparedSunResources(plan.sun, 'mounted'),
+    ...(plan.rings ? [plan.rings.resource] : []),
     { key: 'lighting', url: lighting.url, pool: 'mounted' },
     { key: 'system-point', url: pointUrl, pool: 'mounted' },
     ...(parentMarker ? [{ key: 'parent-marker', url: parentMarker.url, pool: 'mounted' }] : []),
@@ -126,7 +130,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       ...(s.shadowSurface ? [{ key: `shadow:${s.id}`, url: s.shadowSurface.url, pool: 'lenses' }] : []),
     ]),
   ];
-  const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads(plan.bodyLeaves.map(leaf => leaf.style)) });
+  const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.bodyLeaves, ...(plan.rings?.leaves ?? [])].map(leaf => leaf.style)) });
   const camera = b.mesh(`polycss-camera ${id}-camera planet-render-root`);
   const scene = b.mesh(`polycss-scene ${id}-scene`), system = b.mesh(`${id}-system`, `transform:${plan.systemTransform}`);
   const body = b.mesh(`${id}-body`);
@@ -135,6 +139,15 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     const node = b.leaf(leaf);
     Object.assign(node.attributes, leaf.attributes ?? {});
     b.append(body, node);
+  }
+  const rings = plan.rings ? b.mesh(`${id}-rings`) : null;
+  if (rings) {
+    b.append(system, rings);
+    for (const leaf of plan.rings.leaves) {
+      const node = b.leaf(leaf);
+      node.style.backgroundImage = `var(--${id}-ring-image)`;
+      b.append(rings, node);
+    }
   }
   const materialRoot = b.element('div', `${id}-material-root planet-render-root`);
   const billboard = b.element('s', `${id}-billboard`), material = b.element('s', `${id}-material`);
@@ -151,8 +164,9 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     (config.raster[kind]??[]).filter(lens=>lens.focus).map(lens=>[lens.id,lens.focus])));
   const variants = surfaces.flatMap(s => [false, true].flatMap(shadows => [false, true].map(orbit => ({
     ...(focus.has(s.id) ? {navigation: prepareScientificNavigation(id, focus.get(s.id), plan.camera)} : {}),
-    when: { lensId: s.id, shadows, orbit }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, 'lighting'],
+    when: { lensId: s.id, shadows, orbit }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, 'lighting', ...(rings ? ['rings'] : [])],
     writes: [
+      ...(rings ? [{ kind: 'texture', target: index(rings), name: `--${id}-ring-image`, resource: 'rings', quoted: true }] : []),
       { kind: 'texture', target: index(body), name: `--${id}-surface-image`, resource: s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, quoted: true },
       { kind: 'texture', target: index(body), name: `--${id}-poles-image`, resource: `poles:${s.id}`, quoted: true },
       ...[...new Set(plan.bodyLeaves.map(leaf => leaf.attributes?.['data-surface-model']).filter(Boolean))].map(model => ({

@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-observed-pole@1",
+  "rightAscensionDegrees": 3.645774612083301,
+  "declinationDegrees": 58.155984898781774,
+  "displayMeridianDegrees": 0,
+  "periodHours": 9.1736,
+  "phase": "arbitrary-display-phase",
+  "source": "https://doi.org/10.1051/0004-6361/202450833",
+  "coordinateSystem": "ICRF/J2000; observed or explicitly approximate pole; arbitrary display meridian",
+  "qualification": "The adopted prograde ecliptic pole is longitude 35° ± 8°, latitude +50° ± 3°. The 2024 study validates this pole over 22 years and uses its refined 9.1736 h period to compute rotational phase. Ecliptic J2000 coordinates are converted to ICRF using the established preparation recipe. The displayed longitude origin and absolute rotational phase are arbitrary."
+}

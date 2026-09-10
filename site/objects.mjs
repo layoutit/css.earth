@@ -1,3 +1,5 @@
+import bienorDescriptor from "../src/planets/bienor/object.json" with { type: "json" };
+import charikloDescriptor from "../src/planets/chariklo/object.json" with { type: "json" };
 import annefrankDescriptor from "../src/planets/annefrank/object.json" with { type: "json" };
 import brailleDescriptor from "../src/planets/braille/object.json" with { type: "json" };
 import heraDescriptor from "../src/planets/hera/object.json" with { type: "json" };
@@ -1517,6 +1519,10 @@ export const OBJECTS = defineObjects([
     "Explore Makemake with an illustrative NASA surface texture and its distant orbit around the Sun.", packaged(makemakeDescriptor), makemakeDescriptor.properties.worldFrame),
   object("eris", "Eris", "dwarf-planet", "#ddd6cf", 67.78,
     "Explore Eris with an illustrative NASA texture on its occultation-constrained spherical shape.", packaged(erisDescriptor), erisDescriptor.properties.worldFrame),
+  object("chariklo", "Chariklo", "asteroid", "#aaaaaa", 15.733429335695405,
+    "Explore Chariklo, a Centaur, with its observation-constrained shape and two narrow rings.", packaged(charikloDescriptor), charikloDescriptor.properties.worldFrame),
+  object("bienor", "Bienor", "asteroid", "#aaaaaa", 16.60224445563277,
+    "Explore Bienor, a Centaur, with its observation-constrained shape.", packaged(bienorDescriptor), bienorDescriptor.properties.worldFrame),
 ]);
 
 export function requireObject(id) {
