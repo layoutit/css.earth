@@ -11,7 +11,7 @@
     "setup:assets": "node tools/setup.mts",
     "publish:runtime-assets": "node tools/publish-runtime-assets.mts",
     "dev": "astro dev --host 127.0.0.1 --port 4210",
-    "postinstall": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:object-json && pnpm prepare:minimap",
+    "postinstall": "pnpm build:packages && pnpm build:renderer && pnpm build:preparation && pnpm prepare:environment-images && pnpm prepare:object-json && pnpm prepare:minimap",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
     "build": "astro build && pnpm assemble:planets",
