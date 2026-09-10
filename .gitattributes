@@ -1,4 +1,16 @@
 # Preserve hash-pinned upstream snapshots byte-for-byte, including whitespace.
+# Celestia catalog, native generator and original JPL responses.
+tools/objects/celestia-comets/source/** -text -whitespace
+tools/objects/celestia-comets/native/celengine/** -text -whitespace
+tools/objects/celestia-comets/native/celmath/** -text -whitespace
+tools/objects/celestia-comets/native/celcompat/** -text -whitespace
+tools/objects/celestia-comets/native/meshmanager.cpp -text -whitespace
+tools/objects/celestia-comets/native/model.cpp -text -whitespace
+src/planets/comet-*/source/shape/*.cms -text -whitespace
+src/planets/comet-*/source/reference/celestia.ssc -text -whitespace
+src/planets/comet-*/source/reference/GPL-2.0-or-later.txt -text -whitespace
+src/planets/comet-*/source/reference/horizons-elements.txt -text -whitespace
+src/planets/comet-*/source/reference/horizons-vectors.txt -text -whitespace
 src/planets/pluto/source/lenses/pluto-dem.lbl -whitespace
 src/planets/pluto/source/lenses/usgs-dem-metadata.html -whitespace
 src/planets/pluto/source/lenses/usgs-mosaic-metadata.html -whitespace

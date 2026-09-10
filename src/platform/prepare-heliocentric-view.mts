@@ -232,7 +232,8 @@ export function prepareHeliocentricView({
       aphelionAu: orbit.aphelionAu,
       trueAnomalyDegrees: orbit.trueAnomalyDegrees,
       bodyEccentricAnomalyDegrees: closed ? bodyEccentricAnomaly! * 180 / Math.PI : null,
-      closed,
+      // Existing ellipse packages use the implicit closed-orbit convention.
+      ...(closed ? {} : { closed: false }),
       ...(openPath === null ? {} : {
         bodyVertexIndex: openPath.bodyVertexIndex,
         bodyHyperbolicAnomalyRad: openPath.bodyHyperbolicAnomalyRad,

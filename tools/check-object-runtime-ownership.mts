@@ -493,9 +493,18 @@ function requireContextFrame(value: unknown, objectId: string) {
   for (const body of bodies) {
     if (body.orbit === undefined) continue;
     const orbit = requireRecord(body.orbit), parent = points.get(requireString(orbit.centerBodyId));
+    const open = orbit.closed === false;
+    const bodyVertexIndex = open ? orbit.bodyVertexIndex : 0;
+    if (open) {
+      if (!positive(orbit.displayExtentAu) || orbit.trailModel !== 'finite-open-trajectory-constant-weight' ||
+          !isArray(orbit.trail) || orbit.trail.some(weight => weight !== 1)) fail('open body orbit metadata is invalid');
+    } else if (['closed', 'bodyVertexIndex', 'displayExtentAu', 'trailModel'].some(key => orbit[key] !== undefined)) {
+      fail('open body orbit metadata requires closed: false');
+    }
     if (!parent || parent.id === body.id || !vector(orbit.centerPositionM) || !orbit.centerPositionM.every((value, axis) => value === parent.positionM[axis]) ||
         !isArray(orbit.verticesM) || orbit.verticesM.length < 8 || !orbit.verticesM.every(vector) ||
-        !orbit.verticesM[0].every((value, axis) => value === body.positionM[axis]) || !isArray(orbit.trail) || orbit.trail.length !== orbit.verticesM.length ||
+        typeof bodyVertexIndex !== 'number' || !Number.isSafeInteger(bodyVertexIndex) || bodyVertexIndex < 0 || bodyVertexIndex >= orbit.verticesM.length ||
+        !orbit.verticesM[bodyVertexIndex].every((value, axis) => value === body.positionM[axis]) || !isArray(orbit.trail) || orbit.trail.length !== orbit.verticesM.length - (open ? 1 : 0) ||
         orbit.trail.some(weight => typeof weight !== 'number' || !Number.isFinite(weight) || weight < 0 || weight > 1)) fail('body orbit parent or prepared vertices are invalid');
   }
   // Include coordinate-only origins, even unused ones, in the hierarchy check.

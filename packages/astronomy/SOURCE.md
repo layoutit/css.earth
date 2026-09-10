@@ -40,3 +40,7 @@ upstream commit. The local manifest hashes the raw NASA/JPL responses; preparati
 and independent world-context tests verify their centers, time conventions and
 actual published state. See that directory's README for the acquisition and
 no-image regeneration commands.
+
+## Hyperbolic Kepler support
+
+The distant-world integration extends `src/kepler.ts` and its tests for unbound orbits. These files are maintained locally; `upstream.json` retains their last mirrored hashes without attributing the new code to that commit. The source-bound hyperbolic tests and existing elliptic tests cover this extension. The body data and id types are likewise local, with the public exports retained in `src/bodies.ts`.

@@ -21,16 +21,16 @@
     "prose-project-link": "*.md: the [Galaxio](repo) project link -> [cssEarth](repo)",
     "prose-pipeline-writer-path": "*.md: the Python writer's path inside the upstream pipeline/ (absent here) -> `formats/catalog.py` of the external catalogue pipeline (not part of this repository)",
     "prose-pipeline-directory": "*.md: \"A Python writer lives in the repo's `pipeline/`\" (absent here) -> the external catalogue pipeline (not part of this repository)",
-    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md §2 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
+    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md \u00a72 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
     "prose-claude-symlink": "AGENTS.md: drop the sentence announcing the CLAUDE.md symlink, which is not mirrored (EXCLUDED_FILES)",
     "code-project-url": "src/modelAccuracy.ts: PROJECT_SOURCE_URL string literal, the upstream ARCHITECTURE.md -> this package's AGENTS.md in the cssEarth repository (a documentation URL; no behaviour change)",
-    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio … convention/definition' sourceLabel string literals -> 'cssEarth …' (labels only; no behaviour change)"
+    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio \u2026 convention/definition' sourceLabel string literals -> 'cssEarth \u2026' (labels only; no behaviour change)"
   },
   "rewrittenFiles": {},
   "excludedFiles": {},
   "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mts (tools/prepare-solar-geometry.mts first). A catalog consumer would be wired the same way.",
-  "fileCount": 22,
-  "byteCount": 328174,
+  "fileCount": 20,
+  "byteCount": 311507,
   "files": {
     "src/__fixtures__/compare.ts": {
       "sha256": "931eef57a5bb089623b82cebf29ae8f22723e9f364b3f0b275ab7249d5b45a7a",
@@ -71,14 +71,6 @@
     "src/frames.ts": {
       "sha256": "cd868d2ecb83e1534faceccec55b59490edfdd762558749a08b43988ff1bd41c",
       "bytes": 19278
-    },
-    "src/kepler.test.ts": {
-      "sha256": "c6245c3a8060ba24e7e6e954e6fe2a509bfb60bcceea6357a77731425f9ac521",
-      "bytes": 9623
-    },
-    "src/kepler.ts": {
-      "sha256": "f1e29b9fc0a30a806d04e3e7be25b2d6838f24a2d8ee9cbaccad53c9cf8c277f",
-      "bytes": 7044
     },
     "src/rotation.test.ts": {
       "sha256": "19f275611fff9f11a7d2643ef2bf927dd76187e632449c7bb230006982ff83bd",
@@ -152,6 +144,8 @@
     "src/asteroids.ts",
     "src/bodies.test.ts",
     "src/bodies.ts",
+    "src/body-data.ts",
+    "src/body-types.ts",
     "src/comets.test.ts",
     "src/comets.ts",
     "src/data/asteroidElements-1.data.ts",
@@ -173,6 +167,9 @@
     "src/dwarfPlanets.test.ts",
     "src/dwarfPlanets.ts",
     "src/index.ts",
+    "src/kepler-hyperbolic.test.ts",
+    "src/kepler.test.ts",
+    "src/kepler.ts",
     "src/modelAccuracy.test.ts",
     "src/modelAccuracy.ts",
     "src/periodicCorrection.test.ts",
@@ -358,6 +355,18 @@
       "lastMirroredBytes": 2841,
       "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
       "reason": "The TypeScript migration owns this file locally. The prior mirrored identity is retained here; the current TypeScript source and build configuration are not attributed to the mirrored commit."
+    },
+    "src/kepler.ts": {
+      "lastMirroredSha256": "f1e29b9fc0a30a806d04e3e7be25b2d6838f24a2d8ee9cbaccad53c9cf8c277f",
+      "lastMirroredBytes": 7044,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The distant-world integration added source-backed hyperbolic Kepler support. Current bytes are maintained locally and are not attributed to the last mirrored commit."
+    },
+    "src/kepler.test.ts": {
+      "lastMirroredSha256": "c6245c3a8060ba24e7e6e954e6fe2a509bfb60bcceea6357a77731425f9ac521",
+      "lastMirroredBytes": 9623,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The distant-world integration added source-backed hyperbolic Kepler support. Current bytes are maintained locally and are not attributed to the last mirrored commit."
     }
   }
 }

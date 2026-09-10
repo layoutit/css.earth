@@ -1,0 +1,370 @@
+{
+  "schema": "cssearth-object-provenance@1",
+  "objectId": "comet-55p",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "f696b1e3222ca90c27f0b1f2df37c9dd7fa41fa7eec7762b5728e344652d39e0"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mjs",
+    "sha256": "751c5c57da38feba461883796ddc70aa0b5339278a2f1dc5096a5d284ed0d59f",
+    "bindingsSha256": "b3158e4230fcd1bd9cc39f321474c3f90cb6a6061c4006042c019c0c5006210c"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "561189fdb6f7c0141051c729e93779a4d952841b7c2e2883aa4d76302244ba7e",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "comet-55p",
+        "displayName": "Tempel–Tuttle",
+        "publicBase": "/scenes/comet-55p/",
+        "distanceAu": 12.265992818638155,
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 100,
+          "reportMissingPixels": true,
+          "observations": [],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": [],
+          "shapeViews": [
+            {
+              "id": "model",
+              "consumer": "shape",
+              "label": "Illustrative nucleus"
+            }
+          ]
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 1.3274136847176754,
+          "camera": {
+            "initialScenePitchDegrees": 20,
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.85
+          },
+          "mapUrl": "/scenes/comet-55p/comet-55p-model-surface@2x.webp",
+          "polesUrl": "/scenes/comet-55p/comet-55p-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/model.obj",
+            "format": "wavefront-obj",
+            "grid": {
+              "metersPerUnit": 1,
+              "expectedVertices": 4802,
+              "expectedFaces": 9600
+            },
+            "faceBudget": 800,
+            "tileSize": 64,
+            "atlasColumns": 16,
+            "simplification": {
+              "method": "source-meshoptimizer",
+              "targetFaces": 800,
+              "maximumErrorMeters": 90
+            },
+            "primitive": "u",
+            "sourceLighting": {
+              "maximumDistanceMeters": 36,
+              "rayOffsetMeters": 0.25,
+              "ambient": 0.16,
+              "diffuse": 0.84,
+              "floodLights": [
+                {
+                  "direction": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "weight": 0.36
+                },
+                {
+                  "direction": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "weight": 0.24
+                },
+                {
+                  "direction": [
+                    1,
+                    0,
+                    0
+                  ],
+                  "weight": 0.24
+                }
+              ],
+              "uniformFlood": true
+            },
+            "thumbnail": {
+              "size": 96,
+              "longitudeDegrees": 70,
+              "latitudeDegrees": 20,
+              "ambient": 1,
+              "diffuse": 0
+            }
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons at the shared 3 September 2026 epoch; body attitude is explicitly illustrative.",
+          "qualification": "JPL position at the shared epoch; actual Celestia CMS mesh at its catalog scale. The shared mesh and fixed attitude are illustrative; no photographic surface is claimed."
+        },
+        "presentation": {
+          "defaultLens": "model",
+          "pointColor": [
+            184,
+            182,
+            178
+          ],
+          "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "b27277a21a7e18ba2a20abcadf68da01c4f8dbc2a9863b6a06dbb44a4414c3cf",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "comet-55p",
+        "displayName": "Tempel–Tuttle",
+        "panel": {
+          "introduction": "Tempel–Tuttle supplies the dust that makes the Leonid meteor shower. Earth encounters these particles as it crosses the comet’s trail each November.",
+          "facts": [
+            {
+              "id": "diameter",
+              "label": "Catalog diameter",
+              "value": "≈3.6 km"
+            },
+            {
+              "id": "perihelion",
+              "label": "Closest to Sun",
+              "value": "0.976 AU"
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Illustrative nucleus"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Illustrative nucleus",
+              "detail": "Celestia",
+              "title": "55P/Tempel–Tuttle",
+              "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+              "thumbnail": "/scenes/comet-55p/comet-55p-model-thumbnail.webp",
+              "surface": "comet-55p-model-surface@2x.webp",
+              "poles": "comet-55p-model-poles@2x.webp",
+              "source": {
+                "id": "celestia-mesh",
+                "path": "../manifest.json",
+                "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+              },
+              "facts": [
+                {
+                  "id": "diameter",
+                  "label": "Catalog diameter",
+                  "value": "≈3.6 km"
+                },
+                {
+                  "id": "perihelion",
+                  "label": "Closest to Sun",
+                  "value": "0.976 AU"
+                }
+              ]
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            },
+            {
+              "kind": "toggle",
+              "name": "orbit",
+              "label": "Orbit",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Celestia",
+            "role": "surface",
+            "description": "Catalog entry and estimated scale",
+            "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+          },
+          {
+            "label": "JPL Horizons",
+            "role": "observations",
+            "description": "Position at 3 September 2026",
+            "href": "https://ssd.jpl.nasa.gov/horizons/"
+          },
+          {
+            "label": "About this comet",
+            "role": "observations",
+            "description": "Observations and history",
+            "href": "https://science.nasa.gov/solar-system/meteors-meteorites/leonids/"
+          },
+          {
+            "label": "ESO",
+            "role": "stars",
+            "description": "Milky Way panorama",
+            "href": "https://www.eso.org/public/images/eso0932a/"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://science.nasa.gov/solar-system/meteors-meteorites/leonids/",
+            "credit": "Sources listed in reference/source-record.json"
+          },
+          "physical": {
+            "path": "../shape/model.json",
+            "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "celestia-mesh",
+      "path": "shape/model.obj",
+      "origin": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "credit": "Celestia Development Team / Chris Laurel; CelestiaContent catalog contributors",
+      "license": "GPL-2.0-or-later",
+      "licenseEvidence": [
+        "reference/celestia.ssc",
+        "reference/GPL-2.0-or-later.txt"
+      ],
+      "acquisition": "Exported by the pinned original Celestia SphereMesh and noise code; see tools/objects/celestia-comets/native/.",
+      "redistribution": "Preserve GPL license, source code, native export recipe, and illustrative status.",
+      "sha256": "98b1b31a2d4ff93af8f841bdeb25e159b6e66e8d3807161fe3e05c0c49eb52a3",
+      "bytes": 437080,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "purpose": "Source evidence or authored preparation input.",
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "Source evidence or authored preparation input.",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "b27277a21a7e18ba2a20abcadf68da01c4f8dbc2a9863b6a06dbb44a4414c3cf",
+      "bytes": 3303,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Illustrative nucleus",
+      "recipe": "terrestrial",
+      "selector": "/raster/shapeViews/0",
+      "parents": [],
+      "process": "Prepare the shapeViews recipe with its declared sampling, registration and display policy.",
+      "limitations": [
+        "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery."
+      ],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "kind": "shapeViews"
+      },
+      "inputs": [
+        "celestia-mesh"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/comet-55p/comet-55p-model-thumbnail.webp",
+          "bytes": 1428,
+          "sha256": "28312f0c6e47ed28725a36c3ef2e37fee09e9270f63545d559d3dbbaaf8c42c7",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/comet-55p/comet-55p-model-surface@2x.webp",
+          "bytes": 122050,
+          "sha256": "b0725a6002ddaafff659bad73a0f267cf83b092919dae777a749504c89ef81ae",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "parents": [],
+      "process": "Compile the authored introduction, facts, dataset descriptions and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 6708,
+          "sha256": "920bfbcab25afa35f5e6cd1a8173d4ea175f577957c5757f47b518212b84b276",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  }
+}

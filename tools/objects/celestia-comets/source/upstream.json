@@ -1,0 +1,30 @@
+{
+  "repository": "CelestiaProject/CelestiaContent",
+  "commit": "1993a082ee6307c0df7fdc0828eb117a0e8e9958",
+  "files": [
+    {
+      "path": "comets.ssc",
+      "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc",
+      "sha256": "437aa2e5ad66f26470829b9ee5f1ddb21b4514446b16c601c1d328a1b186b14f",
+      "bytes": 22363
+    },
+    {
+      "path": "asteroid.cms",
+      "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/asteroid.cms",
+      "sha256": "5616a5cb3471013ce423195be29c7bda31d292e0f16d95240472ccaaa4ea5361",
+      "bytes": 273
+    },
+    {
+      "path": "roughsphere.cms",
+      "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/models/roughsphere.cms",
+      "sha256": "744168aa06e2a33c3b87911fb7cbdbcc211f209d7e9554dd23fcdee7f68a6ef2",
+      "bytes": 330
+    },
+    {
+      "path": "GPL-2.0-or-later.txt",
+      "url": "https://raw.githubusercontent.com/CelestiaProject/CelestiaContent/1993a082ee6307c0df7fdc0828eb117a0e8e9958/LICENSES/GPL-2.0-or-later.txt",
+      "sha256": "aaf135472f81c5b4a0dca9367e5bb5e9750032b5bebe5442b36e4c0a47430df3",
+      "bytes": 17337
+    }
+  ]
+}

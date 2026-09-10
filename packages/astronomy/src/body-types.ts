@@ -1,6 +1,5 @@
-import type { SceneSatelliteId } from './sceneSatellites.js'
 import type { SatelliteId } from './data/satelliteElements.data.js'
-
+import type { SceneSatelliteId } from './sceneSatellites.js'
 export interface BodyData {
   readonly id: BodyId
   readonly name: string
@@ -20,7 +19,7 @@ export type TransNeptunianId = 'arrokoth' | 'quaoar' | 'gkunhomdima' | 'sedna' |
 export type InterstellarId = 'oumuamua'
 export type SmallBodyId = AsteroidId | TransNeptunianId | InterstellarId
 export type BodyId = 'sun' | PlanetId | 'moon' | SatelliteId | SceneSatelliteId | DwarfPlanetId | AsteroidId | TransNeptunianId | InterstellarId | CometId
-export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p' | 'comet-1p' | 'comet-8p' | 'comet-19p' | 'comet-137p' | 'comet-143p' | 'comet-162p' | 'comet-2p' | 'comet-209p'
+export type CometId = 'comet-67p' | 'comet-103p' | 'comet-9p' | 'comet-81p' | 'comet-1p' | 'comet-8p' | 'comet-19p' | 'comet-137p' | 'comet-143p' | 'comet-162p' | 'comet-2p' | 'comet-209p' | 'comet-17p' | 'comet-21p' | 'comet-26p' | 'comet-29p' | 'comet-46p' | 'comet-55p' | 'comet-96p' | 'comet-109p' | 'comet-167p' | 'comet-153p' | 'comet-c1983-h1' | 'comet-c1956-r1' | 'comet-c1973-e1' | 'comet-c1995-o1' | 'comet-c1996-b2' | 'comet-c2006-p1' | 'comet-c2013-a1' | 'comet-c2014-un271' | 'comet-c2020-f3' | 'comet-c2023-a3'
 export const PLANET_IDS: readonly PlanetId[] = [
   'mercury',
   'venus',
@@ -37,7 +36,7 @@ export const ASTEROID_IDS: readonly AsteroidId[] = ['vesta', 'eros', 'itokawa', 
 export const TRANS_NEPTUNIAN_IDS: readonly TransNeptunianId[] = ['arrokoth', 'quaoar', 'gkunhomdima', 'sedna', 'gonggong', 'orcus', 'salacia', 'varuna', 'varda', 'mani', 'achlys']
 export const INTERSTELLAR_IDS: readonly InterstellarId[] = ['oumuamua']
 export const SMALL_BODY_IDS: readonly SmallBodyId[] = [...ASTEROID_IDS, ...TRANS_NEPTUNIAN_IDS, ...INTERSTELLAR_IDS]
-export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p', 'comet-1p', 'comet-8p', 'comet-19p', 'comet-137p', 'comet-143p', 'comet-162p', 'comet-2p', 'comet-209p']
+export const COMET_IDS: readonly CometId[] = ['comet-67p', 'comet-103p', 'comet-9p', 'comet-81p', 'comet-1p', 'comet-8p', 'comet-19p', 'comet-137p', 'comet-143p', 'comet-162p', 'comet-2p', 'comet-209p', 'comet-17p', 'comet-21p', 'comet-26p', 'comet-29p', 'comet-46p', 'comet-55p', 'comet-96p', 'comet-109p', 'comet-167p', 'comet-153p', 'comet-c1983-h1', 'comet-c1956-r1', 'comet-c1973-e1', 'comet-c1995-o1', 'comet-c1996-b2', 'comet-c2006-p1', 'comet-c2013-a1', 'comet-c2014-un271', 'comet-c2020-f3', 'comet-c2023-a3']
 export const body = (
   id: BodyId,
   name: string,

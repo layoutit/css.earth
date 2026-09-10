@@ -1,0 +1,259 @@
+{
+  "ok": true,
+  "browser": "152.0.7977.84",
+  "baseUrl": "http://127.0.0.1:53135",
+  "capturedAt": "2026-09-10T04:26:09.235Z",
+  "qualification": "Natural-clock browser interaction checks; no native parity claim.",
+  "reports": [
+    {
+      "id": "comet-21p",
+      "case": "initial-shell",
+      "skipped": true
+    },
+    {
+      "id": "comet-21p",
+      "viewport": "desktop",
+      "motionActivation": "retained-input",
+      "surfaceFlyTo": {
+        "pitchDelta": -20.548700393408218,
+        "zoomRatio": 2.8110312661126122
+      },
+      "zoomPublication": {
+        "skyCube": 0,
+        "skyOrientation": 0
+      },
+      "projectiveTextureReport": {
+        "texturedLeafCount": 800,
+        "nestedProjectiveTextureCount": 0,
+        "finiteTextureBounds": true
+      },
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 123486,
+      "stable": true,
+      "retainedProof": {
+        "initialNodeCount": 123486,
+        "currentNodeCount": 123486,
+        "maximumNodeCount": 123486,
+        "initialNodesIntact": true,
+        "shellTextNodesIntact": true,
+        "undeclaredAddedRoots": [],
+        "undeclaredRemovedRoots": [],
+        "allowedMounts": []
+      }
+    },
+    {
+      "id": "comet-21p",
+      "viewport": "mobile",
+      "mountedPlanets": 1,
+      "stageCount": 1,
+      "cameraCount": 1,
+      "canvasCount": 0,
+      "sceneSvgCount": 0,
+      "stageChildren": 6,
+      "stageElements": 123486,
+      "stable": true
+    },
+    {
+      "id": "comet-21p",
+      "case": "dataset-interactions",
+      "skipped": true
+    },
+    {
+      "id": "comet-21p",
+      "case": "dataset-interactions-dpr-2",
+      "skipped": true
+    },
+    {
+      "id": "comet-21p",
+      "case": "pre-ready-hidden-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "comet-21p",
+      "case": "pre-ready-visible-motion-off",
+      "skipped": true
+    },
+    {
+      "id": "comet-21p",
+      "case": "pre-ready-hidden-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "comet-21p",
+      "case": "pre-ready-visible-motion-on",
+      "skipped": true
+    },
+    {
+      "id": "comet-21p",
+      "viewport": "dpr-1",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/comet-21p/comet-21p-lighting.webp",
+        "/scenes/comet-21p/comet-21p-model-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 0.8780869565217393,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.5707565217391306,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.2908752418181817,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "comet-21p-dpr-1.webm"
+    },
+    {
+      "id": "comet-21p",
+      "viewport": "dpr-2",
+      "selectedDensity": 2,
+      "requestedCanonicalAssets": [
+        "/scenes/comet-21p/comet-21p-lighting.webp",
+        "/scenes/comet-21p/comet-21p-model-surface@2x.webp"
+      ],
+      "skyboxPointerBoundary": [
+        {
+          "zoom": 0.8780869565217393,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        },
+        {
+          "zoom": 0.5707565217391306,
+          "sky": {
+            "x": 1168,
+            "y": 96
+          },
+          "clickSky": {
+            "x": 1168,
+            "y": 96
+          },
+          "body": {
+            "x": 600,
+            "y": 400
+          },
+          "passed": true
+        }
+      ],
+      "interactionInterruptions": {
+        "wheelInterruptedInertia": true,
+        "wheelZoomRatio": 1.6839073054545455,
+        "wheelAnchorRotationApplied": true,
+        "pointerStoppedInertia": true,
+        "captureLossStoppedDrag": true,
+        "wheelCoexistedWithFlyTo": true,
+        "dragInterruptedFlyTo": true,
+        "repeatedDoubleClickRestartedFlyTo": true,
+        "flyToCompletedAndRested": true,
+        "activeMotionCount": 0
+      },
+      "wheelTakeover": {
+        "bodyPressStopsWheel": true,
+        "skyPressStopsWheel": true,
+        "resetStopsWheel": true,
+        "heldWheelCancelsGrab": true
+      },
+      "releasePosition": {
+        "nonLaunchingReleaseRetainsDragPose": true,
+        "pausedReleaseCannotRestartMotion": true
+      },
+      "video": "comet-21p-dpr-2.webm"
+    }
+  ],
+  "testedPreparedSha256": "7096e65d16f459c4295253e1605de438a08fe3c85594603173b399ae2db06c6e",
+  "stylesheetSha256": "7d2615ec101b93037b0c9120ba899265b1d13ed6b88ac142a7f21dde2b1ccfd8",
+  "solarSystemHandoffs": [
+    {
+      "id": "comet-21p",
+      "dpr": 1,
+      "scenes": 1,
+      "error": null,
+      "shadows": false,
+      "orbit": false,
+      "datasets": [
+        "Illustrative nucleusCelestia"
+      ]
+    },
+    {
+      "id": "comet-21p",
+      "dpr": 2,
+      "scenes": 1,
+      "error": null,
+      "shadows": false,
+      "orbit": false,
+      "datasets": [
+        "Illustrative nucleusCelestia"
+      ]
+    }
+  ],
+  "reuse": {
+    "base": "d8d266542",
+    "currentPreparedSha256": "7096e65d16f459c4295253e1605de438a08fe3c85594603173b399ae2db06c6e",
+    "stylesheetBytesUnchanged": true,
+    "preparedRuntimeBytesUnchanged": true,
+    "reason": "Only stylesheet ownership/path and documentation placement changed after capture. Native sources, prepared geometry, materials, cameras, atlas bindings and controls are byte-identical.",
+    "emittedCssSha256": "99e5e174f9bd574f7f739715ccf7b0397d64cc4e3ea0898d1f8e5e1e81a016d3",
+    "emittedCssUnchanged": true
+  }
+}

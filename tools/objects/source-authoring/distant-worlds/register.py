@@ -32,7 +32,7 @@ def register_astronomy(s):
         row=f"  '{b['id']}': body('{b['id']}', {json.dumps(b['name'],ensure_ascii=False)}, '{b['horizons']}', {b['radiusKm']}, 0, 'sun'),\n"
         s=s.replace('export const BODIES: Record<BodyId, BodyData> = {\n','export const BODIES: Record<BodyId, BodyData> = {\n'+row)
     return s
-update('packages/astronomy/src/bodies.ts',register_astronomy)
+update('packages/astronomy/src/body-data.ts',register_astronomy)
 def generator(s):
     match=re.search(r'const bodies(?:\s*:[^=]+)? = (\[.*?\]);',s); rows=json.loads(match[1]); ids={x[0] for x in rows}
     rows.extend([[b['id'],b['horizons']] for b in bodies if b['id'] not in ids])

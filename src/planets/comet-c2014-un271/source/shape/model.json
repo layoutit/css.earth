@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-celestia-mesh@1",
+  "source": "roughsphere.cms",
+  "catalogRadiusKm": 68.5,
+  "sourceCodeCommit": "e9997cc011a57fdcc507f4ef5352bfd03cb17a6b",
+  "nativeSeed": 20260909,
+  "nativeExport": {
+    "source": "roughsphere.cms",
+    "nativeArguments": [
+      "1",
+      "1",
+      "1",
+      "17",
+      "42",
+      "45",
+      "0.2",
+      "2",
+      "50",
+      "100",
+      "20260909"
+    ],
+    "nativeSha256": "310b5fa70a3c12161ff963738b699b8271ddcd3eb72871eb439baf8675434384",
+    "objSha256": "54e293c775af7e77756f55461f197c6532b566dd3c5bbe74b84af6e362a67056",
+    "nativeVertices": 5050,
+    "vertices": 4802,
+    "faces": 9600,
+    "omittedDegenerate": 200,
+    "normalization": {
+      "center": [
+        -0.002512749982997775,
+        -0.0020891448948532343,
+        0.007990299724042416
+      ],
+      "scale": 0.9815566539764404,
+      "method": "Celestia Model::normalize bounding-box maximum extent"
+    },
+    "axisTransform": "[x,-z,y], proper Y-up to Z-up rotation",
+    "maximumWeldError": 1.7229467630386353e-7,
+    "volume": 3.807093522310331,
+    "volumeEquivalentRadius": 0.9686531878409028,
+    "repeatNativeExportIdentical": true
+  },
+  "scaling": "Celestia bounding-box normalization, then Catalog Radius * 1000 metres. This preserves maximum full extent = 2 * Catalog Radius.",
+  "axisTransform": "[x,-z,y], proper Y-up to Z-up rotation",
+  "volumeEquivalentRadiusKm": 66.35274336710184,
+  "illustrative": true,
+  "qualification": "The actual Celestia CMS mesh is reused. It is a shared illustrative shape, not a measured nucleus reconstruction. Grid surface; fixed illustrative attitude."
+}

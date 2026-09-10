@@ -220,7 +220,7 @@ export async function prepareMarkerAtlases({ projectRoot, outputRoot, descriptor
   }
 }
 
-async function renderNavigation({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
+export async function renderNavigation({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
   const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
   await prepareSunIndicator({ projectRoot, outputRoot });
 

@@ -8,6 +8,7 @@ The [ownership inventory](../../tools/typescript-ownership.json) has no authored
 
 Existing tests, fixtures and browser/oracle harnesses remain executable JavaScript. Generated browser bundles and package distributions are ignored build products. The inventory names the other exceptions individually:
 
+- Seven distant-world evidence helpers, each limited to its named audit or capture task.
 - Five generated data modules, each with its generator and source anchor.
 - Three preserved Cesium modules with their upstream provenance.
 - The Astro and ESLint configuration entry points.
@@ -27,7 +28,9 @@ The migration preserves the generic object registry, shared shell and camera, re
 
 The [celestial comparison](../../tools/evidence/celestial-typescript-parity.json) records exact equality for 52 freshly generated Mercury/Venus images from the original JavaScript and typed owners. The [presentation comparison](../../tools/evidence/presentation-typescript-parity.json) records complete raw presentation equality for identical pinned inputs. Each record identifies the compared owners and source hashes; these results do not claim reproduction of historical assets made from different recipes.
 
-Full navigation preparation previously recompressed existing markers at Q75, while incremental publication retained decoded pixels. The owner now renders the pinned recipes, copies decoded tile rows and writes lossless atlases. Against the 406-body lossless baseline, both densities preserve exact alpha with at most one channel level of compositor rounding. The [navigation comparison](../../tools/evidence/navigation-lossless-atlases.json) records both this baseline and the later lossy publication, plus exact reproduction and publication rollback checks for the 432-body inventory. This is a preparation correction, separate from the JavaScript/TypeScript parity comparisons.
+Full navigation preparation previously recompressed existing markers at Q75, while incremental publication retained decoded pixels. The owner now renders the pinned recipes, copies decoded tile rows and writes lossless atlases. Against the 406-body lossless baseline, both densities preserve exact alpha with at most one channel level of compositor rounding. The [navigation comparison](../../tools/evidence/navigation-lossless-atlases.json) records both this baseline and the later lossy publication, for the 461-body inventory. Full reproduction and publication rollback are exercised by the navigation preparation tests. This is a preparation correction, separate from the JavaScript/TypeScript parity comparisons.
+
+The [source-authoring comparison](../../tools/evidence/source-authoring-typescript-parity.json) covers the twenty comet meshes, the catalogue and astronomy records, 48 open-orbit cases, and nine distant-world source finalizations. Offline CLI replay supplies the original Horizons responses and native mesh bytes to both implementations; it does not claim a fresh native C++ build.
 
 An Earth texture-level recipe already had its new hash in the descriptor but its parent hash in the source manifest. The manifest now pins the existing recipe bytes. The correction changes no scientific input or texture-level parameter; provenance is rebuilt through its owner.
 

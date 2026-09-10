@@ -424,7 +424,7 @@ test('scene companion integration is preserved locally while shared ephemeris ma
     assert.ok(!Object.hasOwn(mirrored, file), `${file} is excluded from mirrored-byte claims`);
     assert.ok(!Object.hasOwn(provenance.files, file), `${file} is not attributed to the upstream commit`);
   }
-  for (const file of ['src/frames.ts', 'src/kepler.ts', 'src/vsop87.ts']) {
+  for (const file of ['src/frames.ts', 'src/vsop87.ts']) {
     assert.equal(isOwnedFile(astronomy, file), false, file);
     assert.ok(Object.hasOwn(mirrored, file), `${file} retains exact-copy protection`);
   }

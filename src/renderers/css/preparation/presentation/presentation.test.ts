@@ -33,8 +33,8 @@ describe('retained presentation compiler compatibility', () => {
     expect(createHash('sha256').update(JSON.stringify(canonical(prepared))).digest('hex')).toBe(expectedDigests[id]);
   }, 30_000);
 });
-// Full raw output hashes from original JS helpers; see docs/architecture/typescript-presentation-validation.json.
+// Full raw output hashes from original JS helpers; see tools/evidence/presentation-typescript-parity.json.
 const expectedDigests: Record<string, string> = {
-  mercury: '44727d88627fa542f90b2704242896b3e439ef06408252376b0398ce46a1c302',
-  venus: '579979d44b1ef59969457ac61c8179ac1c48a4889f3f890b4ee6f2799edf0eda',
+  mercury: '2f21b6943220eb050e5783c7809121ca37e6c13c1120468f6659a605c4cbfec5',
+  venus: 'e0df212c4a67bb80ec3abd5e11bd39cd84aa563e4c0044abff1d22c92c1bbdbe',
 };

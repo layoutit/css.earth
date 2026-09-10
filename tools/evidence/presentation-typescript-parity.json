@@ -1,5 +1,5 @@
 {
-  "baseline": "8666462797772dc50bbebecd8618014f5e7bd16c",
+  "baseline": "a1471af189b25c1bed46683f06bc345025a7cf67",
   "scope": "Original JavaScript preparation helpers and unchanged typed presentation compiler, supplied identical current pinned preparation inputs.",
   "owners": [
     {
@@ -69,7 +69,7 @@
         }
       ],
       "nodeCount": 909,
-      "canonicalSha256": "8a8c48c07669e0eeeb4b7a976dae6e6c49eb78fcbb37f3b7be9ea2a454d6c9a2",
+      "canonicalSha256": "2f21b6943220eb050e5783c7809121ca37e6c13c1120468f6659a605c4cbfec5",
       "identical": true
     },
     {
@@ -107,8 +107,14 @@
         }
       ],
       "nodeCount": 456,
-      "canonicalSha256": "ced8446c8c9565e4dc047e3019d7824edc02c75b50e1ae6cb9bd458227375965",
+      "canonicalSha256": "e0df212c4a67bb80ec3abd5e11bd39cd84aa563e4c0044abff1d22c92c1bbdbe",
       "identical": true
+    }
+  ],
+  "sharedInputs": [
+    {
+      "path": "site/prepared-navigation-markers.mjs",
+      "sha256": "1a9a61ca39bef10ade20ac204de189dfd4e140987d225d0aa717d8f9fc4211e2"
     }
   ]
 }

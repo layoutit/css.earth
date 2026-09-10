@@ -256,12 +256,13 @@ export function locallyMaintainedFile(target:Pick<SyncTarget,'id'>, rel:string) 
     "src/periodicCorrection.ts", "src/periodicCorrection.test.ts",
     "tools/scene-ephemeris.mjs", "tools/acquire-scene-ephemeris.mjs",
     // The local fixed-epoch companion path includes its solar-system integration.
-    // Shared frame transforms and Kepler/VSOP ephemeris math remain mirrored.
+    // Shared frame transforms and VSOP ephemeris math remain mirrored. Hyperbolic Kepler support is a local extension.
     "tools/body-epoch-ephemeris.mjs", "tools/generate-scene-satellites.mjs",
     "src/sceneSatellites.ts", "src/sceneSatellites.test.ts", "src/data/sceneSatelliteStates.data.ts",
     "src/solarSystem.ts",
     "tools/fetch-rotation-fixtures.mjs", "src/__fixtures__/rotation.ts",
-    "src/bodies.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
+    "src/kepler.ts", "src/kepler.test.ts", "src/kepler-hyperbolic.test.ts",
+    "src/bodies.ts", "src/body-types.ts", "src/body-data.ts", "src/bodies.test.ts", "src/dwarfPlanets.ts", "src/dwarfPlanets.test.ts",
     "src/modelAccuracy.ts", "src/modelAccuracy.test.ts", "src/satellites.ts", "src/rotation.ts", "src/rotation-neptune.ts", "src/satellites.test.ts", "src/solarSystem.test.ts"].includes(rel) ||
     /^src\/data\/asteroidElements-[1-4]\.data\.ts$/.test(rel) ||
     rel.startsWith("source/scene-epoch/") ||

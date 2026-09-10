@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {requireRecord,requireString,hasErrorCode} from './source-values.mts';
 
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -44,7 +45,14 @@ export async function preparePlanetTitleSources({
   });
   const prepared: Record<string, {source: PlanetTitleSource; moduleSource: string}> = {};
   for (const planet of OBJECTS) {
-    const source = createPlanetTitleSource(planet.name, font);
+    let label = planet.name;
+    try {
+      const content = requireRecord(JSON.parse(await readFile(resolve(projectRoot, `src/planets/${planet.id}/source/content/object.json`), 'utf8')));
+      label = requireString(content.displayName, `${planet.id} display name`);
+    } catch (error) {
+      if (!hasErrorCode(error, 'ENOENT')) throw error;
+    }
+    const source = createPlanetTitleSource(label, font);
     const exportName = `${planet.id.replaceAll('-', '_').toUpperCase()}_TITLE_SOURCE`;
     const moduleSource = serializePlanetTitleSource(exportName, source);
     await writeSource(planet, moduleSource, source);

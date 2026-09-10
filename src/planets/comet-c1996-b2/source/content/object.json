@@ -1,0 +1,115 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "comet-c1996-b2",
+  "displayName": "Hyakutake",
+  "panel": {
+    "introduction": "Hyakutake passed just 0.10 AU from Earth in March 1996. Its close approach made it a striking sight despite its much smaller nucleus than Hale–Bopp’s.",
+    "facts": [
+      {
+        "id": "diameter",
+        "label": "Catalog diameter",
+        "value": "≈4.2 km"
+      },
+      {
+        "id": "perihelion",
+        "label": "Closest to Sun",
+        "value": "0.24 AU"
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Illustrative nucleus"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Illustrative nucleus",
+        "detail": "Celestia",
+        "title": "C/1996 B2 Hyakutake",
+        "description": "Celestia’s mesh at the catalog’s estimated size. The shape is illustrative, and the grid marks missing surface imagery.",
+        "thumbnail": "/scenes/comet-c1996-b2/comet-c1996-b2-model-thumbnail.webp",
+        "surface": "comet-c1996-b2-model-surface@2x.webp",
+        "poles": "comet-c1996-b2-model-poles@2x.webp",
+        "source": {
+          "id": "celestia-mesh",
+          "path": "../manifest.json",
+          "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+        },
+        "facts": [
+          {
+            "id": "diameter",
+            "label": "Catalog diameter",
+            "value": "≈4.2 km"
+          },
+          {
+            "id": "perihelion",
+            "label": "Closest to Sun",
+            "value": "0.24 AU"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Celestia",
+      "role": "surface",
+      "description": "Catalog entry and estimated scale",
+      "href": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/comets.ssc"
+    },
+    {
+      "label": "JPL Horizons",
+      "role": "observations",
+      "description": "Position at 3 September 2026",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "About this comet",
+      "role": "observations",
+      "description": "Observations and history",
+      "href": "https://ssd.jpl.nasa.gov/sb/great_comets.html"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ssd.jpl.nasa.gov/sb/great_comets.html",
+      "credit": "Sources listed in reference/source-record.json"
+    },
+    "physical": {
+      "path": "../shape/model.json",
+      "credit": "Celestia contributors: Grant Hutchison, Chris Laurel, DaveBowman2001 and AstroChara"
+    }
+  }
+}

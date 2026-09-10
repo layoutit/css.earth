@@ -1,7 +1,7 @@
 {
-  "integratedMain": "8666462797772dc50bbebecd8618014f5e7bd16c",
-  "generatorSha256": "6fd5833b666396512bf27e5a8194f4c442eca53889a89c1f00b1c82c04a1c6d9",
-  "objectCount": 432,
+  "integratedMain": "a1471af189b25c1bed46683f06bc345025a7cf67",
+  "generatorSha256": "0bdea0c50cf77a6ae7f9ee6dd3f9ea6ef4b1578d85cb53bcacb9ba1ac8636b71",
+  "objectCount": 461,
   "recipePins": [
     {
       "id": "sun",
@@ -1539,6 +1539,11 @@
       "sourceSha256": "d86c4cd1b6ba6b2f0aa528c7c29493732cc60ac6de58a17e59a0aae589b2c170"
     },
     {
+      "id": "comet-17p",
+      "recipeSha256": "3bf47afda0fe75470f52adc72bddd2476aa3f555aaf3fa07df3d8dcb3c4b023f",
+      "sourceSha256": "4d7f77bd54f425f301141f7bac61547d9001d0d9e7ba794afc797042db166f7e"
+    },
+    {
       "id": "thule",
       "recipeSha256": "8a4c719b4b53c4b668322fce679e33f2ca4b5c9aa08b65b30b025c8f26cadb07",
       "sourceSha256": "be7fd16086672eb362bf3eea4e3614cda52c199c1e21b0ddd5617d49588dadb5"
@@ -1549,9 +1554,24 @@
       "sourceSha256": "ae51f55322a8f5c7a75cba4b1a3862a72ce722338541f4084c9517d4f61a7033"
     },
     {
+      "id": "comet-21p",
+      "recipeSha256": "6565f6dab8f0f492a05c378970be36858c682f375078cff2f428ca97e508dd43",
+      "sourceSha256": "9f3d78fce0c8ac73d409a4966410378b2eb93e4b0f49c4a64de348e77e2be03f"
+    },
+    {
       "id": "comet-143p",
       "recipeSha256": "41a5ac655a849f8820be61542dfb7d297338aa9ef9679f32f6263f45126dc5dd",
       "sourceSha256": "6caf4c9aba554ac33fa3f6c654482c6b4da2537c479639ab91a56cfb6a5eb0b0"
+    },
+    {
+      "id": "comet-26p",
+      "recipeSha256": "52d0f70b176aa32af7669b9fa872c33326c0dd00ec533a1d61416deb25cc4728",
+      "sourceSha256": "9198210af449b1a9f8e20bd6ae1316146e0974ac6602e24de3cef7ac4c11bbe0"
+    },
+    {
+      "id": "comet-46p",
+      "recipeSha256": "ff613367183606b77d317442fb58c8f1198229157d794f429833522871a7465c",
+      "sourceSha256": "79c49048ebcb9705d28525d470d6faa25187a61e5a150d43439206bece9a2134"
     },
     {
       "id": "lycomedes",
@@ -1694,6 +1714,11 @@
       "sourceSha256": "04dd998b7293911e8da6e2e6085a48df9f2145af2e6a683f3cdf0dcafe83199d"
     },
     {
+      "id": "comet-96p",
+      "recipeSha256": "32fdd580ce039445d666ae45abf99479b82aafed70f2ca52cb1de31475923b54",
+      "sourceSha256": "5f7b384c2afcde1046456f96bcfad45202bb6cd4672b63955fc4877038ea3eca"
+    },
+    {
       "id": "comet-8p",
       "recipeSha256": "9e5d1077d70cd7603c5a67b91d28145dce064973dd8316107aec3484c13f6b59",
       "sourceSha256": "137994fd40cdebb5510f2b21d1d084d6c36b836891edd982705493694cce869e"
@@ -1702,6 +1727,16 @@
       "id": "hidalgo",
       "recipeSha256": "4f102b40be16fc8d70c5c6253887f129de99d92fee773743d87cd906c21d0d8d",
       "sourceSha256": "5469df7d990447f6cc8ef0d5c31345ee2929c856029092c07930fda3ff318291"
+    },
+    {
+      "id": "comet-29p",
+      "recipeSha256": "a964c6136dd1d05c042699277c8942b42031ce31d73b951e4ae61aa1025c9351",
+      "sourceSha256": "d4ee9aa88d79ed9729a8bd934f329565dbba57aac4fc14ef28c79313c685e770"
+    },
+    {
+      "id": "comet-c2023-a3",
+      "recipeSha256": "bd4961b7a3aa0bff69dba438785de1034cd76401a5ccd389c1b0baf35efd9deb",
+      "sourceSha256": "bcd62443ff5077364db01b17f8e00087afc27178f994c514d666b8763018c8bc"
     },
     {
       "id": "paaliaq",
@@ -1939,6 +1974,16 @@
       "sourceSha256": "4a2a1a9cb3c5b5b6b91663897ed302bd78bbed6b09df19fe72f8698af7c275d1"
     },
     {
+      "id": "comet-55p",
+      "recipeSha256": "b80b5cc3dd5e871addde5af70439a4d32f590ed336bb0f51c02db5ab62988458",
+      "sourceSha256": "4c14bb71b5d06c7b72adc29ab9538e1ff5d06e5910e8ed2b0873026bfa2a8676"
+    },
+    {
+      "id": "comet-c2014-un271",
+      "recipeSha256": "cd9f1d56dddcb0e3c9bf38bfc336b9ac54c4c38429c255d8512cb62d1981eede",
+      "sourceSha256": "d5df20fe1a109a384ff41d4e2d9c149963cbf488e411cdd1fb4526210b0006d2"
+    },
+    {
       "id": "chariklo",
       "recipeSha256": "0ae6d3b4cbe268bb0946f4ef94af6467935caf21fe77f6c0001e708f813ff0bd",
       "sourceSha256": "4ff32db8171e71e146d15007850cb082efb6bfcf6380ee9f03372376bd690c1d"
@@ -1952,6 +1997,11 @@
       "id": "comet-1p",
       "recipeSha256": "4389852fcdfed3e07beb1979b0aed397a854e27f93977d8a4d28d299a25f93fe",
       "sourceSha256": "88e4da495091cecc72e66dbc6a9676ea2ab40ca48bceaa367f1d97a95faa90da"
+    },
+    {
+      "id": "comet-c2020-f3",
+      "recipeSha256": "676cbfc6c005a00e9561a3fa7740855777a428d1738d6a121f8f2f4e3a20c09a",
+      "sourceSha256": "bd947dc24e5a4a9635f1db532e7f65c56a569b3deecf1596ee4e2ca51734958c"
     },
     {
       "id": "caliban",
@@ -2054,6 +2104,16 @@
       "sourceSha256": "31699c5761b5b57e6e7e8eb7ff3da85293c5ffb2ea8aa6b60f3a795d8dbcc7e1"
     },
     {
+      "id": "comet-167p",
+      "recipeSha256": "93c7c2ab5e9550da73ebb16a6f80626a5301cad8567954e9817c68e656b45e74",
+      "sourceSha256": "ba5349a2dad09f092193f40fd911497d1154c0b13545533518ea94eb1e58d10f"
+    },
+    {
+      "id": "comet-c2013-a1",
+      "recipeSha256": "0f6209a577df340cd5aa169123fb44e234e2e763d9a806b6f4e8d56daa55157f",
+      "sourceSha256": "059b7c580ed01a5ea099152b07ec0bd590c4810c9d38356f9ef3b686771b93ba"
+    },
+    {
       "id": "neptune",
       "recipeSha256": "9fdd021f202113bf1d6a2eca6a05bf52653a2f11a13edb1b04e5ad3b8783647c",
       "sourceSha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8"
@@ -2129,6 +2189,21 @@
       "sourceSha256": "3847545e7f3c0d26e69e5bd72eead7a5a6dd9e3c9ce2102fbb7ac80639dd4a42"
     },
     {
+      "id": "comet-c2006-p1",
+      "recipeSha256": "631462528d74f18ca3b4b01db9e4d647efb996f654710af89b29bbea36c1834b",
+      "sourceSha256": "2827b39c765c4a43a0faba8d08dfdb1927b92516209aaf7891b4cec0fe87ec37"
+    },
+    {
+      "id": "comet-153p",
+      "recipeSha256": "fcefacefcbbfa4288f25cf386345fef341de0e3c413a629eb60dcf5108483a1f",
+      "sourceSha256": "2a10ddaa9ef25f721c9a9d07b0be6df4e2b1a24999daa3ea75122c4c94c411c7"
+    },
+    {
+      "id": "comet-109p",
+      "recipeSha256": "1f1f6341ad9ddcf555ce8e5a89f649d39fa4f49d05c76ab2fc73b7acaf45b6cc",
+      "sourceSha256": "bcd62443ff5077364db01b17f8e00087afc27178f994c514d666b8763018c8bc"
+    },
+    {
       "id": "hiiaka",
       "recipeSha256": "892a98b68c2777c7888d73b51b72cfa71ce697d7a870767cf02df096d62e3524",
       "sourceSha256": "7f24b71fcf6937c8b8d59af35b6cb5353eaa74217a52966f6da440841c9c6ea7"
@@ -2144,14 +2219,64 @@
       "sourceSha256": "1fffa210a7eee1a4fadd0c16fb34679a3b88f1140ed0fa7c7e61451c8d8d68b0"
     },
     {
+      "id": "achlys",
+      "recipeSha256": "8bd450ffa2a221d7d5d3804835a98edc4c333e95be706b32d54f5ebf4832abdb",
+      "sourceSha256": "0ff9addbc9483b4c401a4a35c80c2fdd0540c4fb9e6121ee263955706d2f0bf0"
+    },
+    {
       "id": "arrokoth",
       "recipeSha256": "e7dc0403db56018a9aefb0b02a9594a76c8b3b7d79f31fe04ac4241e9ca0b0dd",
       "sourceSha256": "a9107c3a96dc51dd575d0ca8ee2393d6640b564cb5e40f5ad4ac30db14677922"
     },
     {
+      "id": "varuna",
+      "recipeSha256": "39bf446e75ae45fda6c0e6b4fa8457c93459b97d507fc85c80a61aa1caaa7313",
+      "sourceSha256": "9f8b2914b0db8b0a6cc9f83f58abd748e3744313a9ffba85d60c2dbf5f2311c7"
+    },
+    {
+      "id": "salacia",
+      "recipeSha256": "d4088568d23c828925917ac324aa20496979d5743bb49ea1d80a700823d37a5d",
+      "sourceSha256": "13bf1c90260a4a1fe46901a90c34db9d4dcdb9a89aa2ffbe0c8f1629c9d654ea"
+    },
+    {
+      "id": "varda",
+      "recipeSha256": "6f671a1820a10ac00f6e8e9eea7d7db97ddfd259ef77b73cac5fbb8f4b8b0b25",
+      "sourceSha256": "27c7c5ddd3cc834d9b85b4c5841fb00a5c300a560ec52fcacdbdee5de9a617d9"
+    },
+    {
       "id": "makemake",
       "recipeSha256": "ceddfb717190b468d25b110136ae48551fb348c1cd7f7c3bd762dac22e1f67c7",
       "sourceSha256": "008ea868cd5512c2e4cecc519c3daae78ee1f54f27b40cec01d5a53e97206ce5"
+    },
+    {
+      "id": "mani",
+      "recipeSha256": "926afe3504dd10403b87d47e6cc1f77fbb60a04ee9ca51a60f74f6d1916e7417",
+      "sourceSha256": "7ae4ba6a1d92cfad6c25422820657e9f6e03a878a17ddac26855613b5517efa0"
+    },
+    {
+      "id": "orcus",
+      "recipeSha256": "53fa5f50e0d3fb97a0406aa0838316863cb63f0bf092b9f57e3716ff99f4c52b",
+      "sourceSha256": "ba9559e451fde6e3823cacda6a4fe7b317b09b854ea530e3612d17c8012ce510"
+    },
+    {
+      "id": "comet-c1995-o1",
+      "recipeSha256": "cd88b40d235254ee84776dd90cd8f794bfdb01f8906daf5fcde928a29ea0a974",
+      "sourceSha256": "746f72d92ef53df7f3d07528db1aacf917b6fdf6e91d7d4505c75dda0ed06712"
+    },
+    {
+      "id": "oumuamua",
+      "recipeSha256": "7151fadeaeecfd6975b3e0697b0b52e19ac1486f87330860f7280d57db632c3f",
+      "sourceSha256": "c87888e54a3bebd8027e12251bb6296f85fc0bed3a5fe933816493d1c581a381"
+    },
+    {
+      "id": "comet-c1996-b2",
+      "recipeSha256": "8f54388efbb6834f3c58fe8ba7ae677c737191a806040ceba7a3b61297a76841",
+      "sourceSha256": "394a23213ad228651ae400af1a819d31a8833253e04db9b2bc8e70f6bf11e4a9"
+    },
+    {
+      "id": "comet-c1983-h1",
+      "recipeSha256": "08a3d2508ef9127410d515805825b31e04a0b61a468fac7892ba795072ef78d2",
+      "sourceSha256": "81d1d29790a336b449d90b931c16dd23f926a925591da417f8ec7634812534d9"
     },
     {
       "id": "eris",
@@ -2162,34 +2287,54 @@
       "id": "gkunhomdima",
       "recipeSha256": "bb0598a38dd67832e3045696437ddd136d3c8b648a766146b6bf293263fa5f3d",
       "sourceSha256": "c183bd1a705510ce09ce0b994a808cc2adbe5826ee290d23645269fa7866d76a"
+    },
+    {
+      "id": "comet-c1973-e1",
+      "recipeSha256": "36e873bb23e9b5354f27d1e508b39f75f559b5b1c1f2fcaa87b65508d98306bb",
+      "sourceSha256": "394a23213ad228651ae400af1a819d31a8833253e04db9b2bc8e70f6bf11e4a9"
+    },
+    {
+      "id": "sedna",
+      "recipeSha256": "e43e5067d49f44a2cbb638970f97b53f852b741e91842398198995189cca7054",
+      "sourceSha256": "6dbd137c5599ba8635959ebca0b244d1af0352dbc48753c91f3d357025b061ed"
+    },
+    {
+      "id": "gonggong",
+      "recipeSha256": "72b4b2005a8dcbe48b3aa39c211718e06b47c7455b4ee41abaec70b2e4555660",
+      "sourceSha256": "e3d3213412d3205eb59e06490273cb2bb7221688b83b37136882fbb10c9428ba"
+    },
+    {
+      "id": "comet-c1956-r1",
+      "recipeSha256": "d969df849f2eeabadef8316b0dae38afec41c1f58367db772e1e007944f4f779",
+      "sourceSha256": "2827b39c765c4a43a0faba8d08dfdb1927b92516209aaf7891b4cec0fe87ec37"
     }
   ],
   "atlases": [
     {
       "filename": "planet-markers.webp",
-      "beforeSha256": "1848333a164ff5d30f641bba50ca17f791b76ea9feebba9156d2d0e26236b95f",
-      "afterSha256": "02024bedb78e8d709b654029241fcbebca0f0ea29cacf7083e7b38da2f8f1df6",
-      "beforeBytes": 148240,
-      "afterBytes": 118282,
-      "width": 6912,
+      "beforeSha256": "3b7b0f6596ee3a3b92a82cdd8b31c703f1c4d30b57fe340581b0f4e399610953",
+      "afterSha256": "a742739b1ddfe7113eabbd090df81ecb29c4cca40eeacdd2e97936ce06219e78",
+      "beforeBytes": 83624,
+      "afterBytes": 123700,
+      "width": 7376,
       "height": 16,
       "alphaChanges": 0,
-      "visibleChanges": 178240,
+      "visibleChanges": 200269,
       "maximumVisibleDelta": 215,
-      "hiddenChanges": 0
+      "hiddenChanges": 117471
     },
     {
       "filename": "planet-markers@2x.webp",
-      "beforeSha256": "5a4c63ac6e4986c3ef19fb6f2a16be92197aa6b02e9e2327acce9fd0f065bb93",
-      "afterSha256": "c783f3651ee89edc75a099bf00d0e2fb754e5667ce93d8537d007578cf845f80",
-      "beforeBytes": 382522,
-      "afterBytes": 348342,
-      "width": 13824,
+      "beforeSha256": "768b71385d49ff5d52bacbc799c99adf55d56fb6231a9e88b6ad5e5de168e9fc",
+      "afterSha256": "504dee922a854dab5af47ae287ad732c461fb0f6bdebb2cc07afb74102db683b",
+      "beforeBytes": 191616,
+      "afterBytes": 366260,
+      "width": 14752,
       "height": 32,
       "alphaChanges": 0,
-      "visibleChanges": 604604,
-      "maximumVisibleDelta": 195,
-      "hiddenChanges": 327192
+      "visibleChanges": 676764,
+      "maximumVisibleDelta": 194,
+      "hiddenChanges": 559041
     }
   ],
   "beforeLossyPublication": [
@@ -7081,13 +7226,5 @@
     }
   ],
   "lossyPublicationCommit": "bd265cf3a091c4ef17e9be76dfeb23410364884f",
-  "explanation": "The Encke/LINEAR integration recompressed all marker tiles with Q75. Later incremental additions retained those decoded lossy pixels. Canonical preparation now rebuilds pinned source recipes with lossless row-copy assembly. Original pre-compression baseline comparison is reported separately from the current-main comparison.",
-  "qualification": {
-    "status": "PASS",
-    "command": "node --test --test-concurrency=1 site/test/navigation-preparation.test.mjs",
-    "tests": 7,
-    "log": "output/typescript-ownership/navigation-reproduction-main-1.log",
-    "logSha256": "825b8163bc45e89a9202785787a514bae684054899c7773d07636ab3416fa1da",
-    "coverage": "Exact prepared presentation and encoded bytes for every current atlas, context and utility marker; source failure, publication failure, rollback recovery and cross-device move checks."
-  }
+  "explanation": "The Encke/LINEAR integration recompressed all marker tiles with Q75. Later incremental additions retained those decoded lossy pixels. Canonical preparation now rebuilds pinned source recipes with lossless row-copy assembly. Original pre-compression baseline comparison is reported separately from the current-main comparison."
 }
