@@ -306,6 +306,11 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   const lightingRecipe = config.geometry.radialTerrain.sourceLighting;
   const lighting = lightingRecipe ? createSourceMeshLighting(radial.grid, lightingRecipe,
     config.geometry.radiusKm * 1000 / config.geometry.radius, sunDirection) : null;
+  // Every surface at a given scale uses these exact plans, points and normals.
+  // Keep double-precision results across banks; ray tracing depends on geometry,
+  // never on the selected photograph or scientific colour.
+  const lightingByScale = new Map();
+  let reusedLightingSamples = 0;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
     // The retained CSS background size stays canonical. Only prepared image
@@ -316,6 +321,11 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
       throw new TypeError('Scaled radial atlas dimensions must remain integral.');
     }
     const flood = Buffer.alloc(width * height * 4), shadow = Buffer.alloc(width * height * 4);
+    let cachedLighting = lightingByScale.get(scale);
+    if (lighting && !cachedLighting) {
+      cachedLighting = new Float64Array(width * height * 2).fill(NaN);
+      lightingByScale.set(scale, cachedLighting);
+    }
     const nearest = surface.displaySampling === 'nearest';
     const sourceSurface = radial.scientificSurfaces?.get(surface.id);
     const scientific = sourceSurface && config.raster.scientific.find(lens => lens.id === surface.id);
@@ -350,7 +360,18 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         // raster so antialiasing never samples a transparent triangle edge.
         const normal = unit(face.vertexNormals[0].map((n, i) => n * (1 - u - v) + face.vertexNormals[1][i] * u + face.vertexNormals[2][i] * v));
         // Fixed-epoch directional illumination is baked in the body's frame.
-        const light = !face.estimated && lighting?.sample(point, normal);
+        const lightIndex = ((rect.y * scale + py) * width + rect.x * scale + px) * 2;
+        let light;
+        if (!face.estimated && lighting) {
+          if (Number.isNaN(cachedLighting[lightIndex])) {
+            light = lighting.sample(point, normal);
+            cachedLighting[lightIndex] = light.flood;
+            cachedLighting[lightIndex + 1] = light.shadow;
+          } else {
+            light = { flood: cachedLighting[lightIndex], shadow: cachedLighting[lightIndex + 1] };
+            reusedLightingSamples++;
+          }
+        }
         let illumination = light?.shadow ?? (.12 + .88 * Math.max(0, dot(normal, sunDirection)));
         const offset = ((rect.y * scale + py) * width + rect.x * scale + px) * 4;
         const clampedPoint = radial.grid?.imageGrid && closestTrianglePoint(point, a, ab, ac).point;
@@ -492,7 +513,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         width, height, includesAtlasBleed: true, codes };
     }
   }
-  if (lighting) await writeFile(resolve(outputDirectory, `source-lighting${suffix}.json`), JSON.stringify({ ...lighting.report, recipe: lightingRecipe }) + '\n');
+  if (lighting) await writeFile(resolve(outputDirectory, `source-lighting${suffix}.json`), JSON.stringify({ ...lighting.report, reusedLightingSamples, recipe: lightingRecipe }) + '\n');
   for (const entry of snapshotEntries.filter(entry =>
     entry.generator === 'tools/objects/terrestrial-layers/radial-snapshot.mjs')) {
     const surface = surfaces.find(surface => surface.id === entry.recipe?.lensId);
