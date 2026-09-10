@@ -169,7 +169,7 @@ The router owns both the fragment and history:
 The Moon illustrates the distinction between a mission contribution and vehicle
 participation. GRAIL links to the Crust dataset, while GRAIL-A and GRAIL-B are
 labelled as mission participants. These desktop and phone examples were captured
-from the production build with application sources at `9f0ac8797a98fc2d9fa4b9c760fb07200333396f`.
+from the production build with application sources at `bfc4ed3a682300c08cf324f23bbd5a6afd060fa1`.
 The [browser evidence](../../site/test/evidence/dataset-navigation-2026-09-10.json)
 records the cases, viewports, settings, build-file hashes and image hashes.
 

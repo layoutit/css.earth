@@ -1,6 +1,6 @@
 {
-  "testedRevision": "9f0ac8797a98fc2d9fa4b9c760fb07200333396f",
-  "buildVersion": "0.458",
+  "testedRevision": "bfc4ed3a682300c08cf324f23bbd5a6afd060fa1",
+  "buildVersion": "0.461",
   "scope": "Production catalogue/navigation behavior at desktop 1440x1000 DPR 1 and mobile 390x844 DPR 1. Settings use prepared defaults; the script does not change Motion or Shadows. Screenshots are interface examples, without a matched baseline or pixel-parity claim.",
   "command": "node site/test/dataset-navigation-browser.mts http://127.0.0.1:4238",
   "production": {
@@ -156,87 +156,88 @@
     "failedResponses": []
   },
   "sourceAndOutputConservation": {
-    "objects": 470,
-    "unchangedSourceIdentities": 1617,
-    "unchangedOutputIdentities": 3982
+    "base": "ee46ac802f813a6c121b8e16c5e4d265668c0732",
+    "objects": 473,
+    "unchangedSourceIdentities": 1623,
+    "unchangedOutputIdentities": 3994
   },
   "reproduction": {
-    "files": 471,
+    "files": 474,
     "byteIdentical": true
   },
   "delivery": {
-    "base": "1991273ff91753ad901f199b6187be5a240c5500",
+    "base": "ee46ac802f813a6c121b8e16c5e4d265668c0732",
     "previousPreparedCatalogueBytes": 50943,
-    "preparedCatalogueBytes": 772407,
+    "preparedCatalogueBytes": 773774,
     "html": [
       {
         "id": "mercury",
-        "bytes": 11263318,
+        "bytes": 11326044,
         "missionCards": 1
       },
       {
         "id": "mars",
-        "bytes": 11265878,
+        "bytes": 11328604,
         "missionCards": 2
       },
       {
         "id": "moon",
-        "bytes": 11289835,
+        "bytes": 11352561,
         "missionCards": 2
       },
       {
         "id": "jupiter",
-        "bytes": 11286453,
+        "bytes": 11349179,
         "missionCards": 2
       },
       {
         "id": "bennu",
-        "bytes": 11249846,
+        "bytes": 11312572,
         "missionCards": 1
       },
       {
         "id": "saturn",
-        "bytes": 11343470,
+        "bytes": 11406196,
         "missionCards": 2
       },
       {
         "id": "juno",
-        "bytes": 11239539,
+        "bytes": 11302265,
         "missionCards": 0
       }
     ],
     "forbiddenBrowserBundles": []
   },
   "servedFileHashes": {
-    "dist/moon/index.html": "e95276ee441f21494642b0f1a0221d33d548970082a7c4565d065f5f53c510da",
-    "dist/navigation/moon/index.html": "2a4ad9c94c39865d0b509fc46215046803b111d42ccc0d07c0a68b1592ba8bad",
-    "dist/bennu/index.html": "2d41ca6cefff59a7ba15366787d715bc2b62364f02945d81e4133ad0a5ee5a49",
-    "dist/navigation/bennu/index.html": "f9aa1a0330abc9a4c97b9b334a978e475c23cf1673a0647296c0aac9b21c5b1b",
-    "dist/saturn/index.html": "6156f3d65755f7bafa69c4995d048562f74b51d16bcf2a46f8fe77497e879de0",
-    "dist/navigation/saturn/index.html": "c186737fda006f0d2791146d023d0de52d6d8b058f41350aa5e4611af937658a",
-    "dist/titan/index.html": "2e1919b0d5ecfefa0bd17821ed89c52496a61b382650df0f01075bb45e18106e",
-    "dist/navigation/titan/index.html": "eb15496d392674b335b185cce9904f0b11b8e1ca74de74db89481e4165b5b472",
-    "dist/mercury/index.html": "c1495682c215b94bc6b1e62597be3493037cfdf8f44f10558123ae399c12fa55",
-    "dist/navigation/mercury/index.html": "0bcb7023071d61b00066b6367316fa8ea4591208fe9cef3eebee7f94f491427f",
-    "dist/mars/index.html": "9dff9f7d4abba64d72742905e9b2ce784fec55e052fd8e27beb40dbaf2da3922",
-    "dist/navigation/mars/index.html": "9065e3b379ee99b7e65d90c2142942b6fe9d174a2b5d90f3e94fdd8c8947089e",
-    "dist/jupiter/index.html": "cbe1dc7899d5204108a876558fa8e48515f79f405fa476f3f3885becffa76ed4",
-    "dist/navigation/jupiter/index.html": "6d9b459d6deac8d61a7afc894c09f49f2ce420e36eabb07ac2bc78b37363d74b",
-    "dist/juno/index.html": "a02713c4cf8962adaceec8307afeb7a8e7e4e2ded5e903bb478160987b86a96a",
-    "dist/navigation/juno/index.html": "0ed4fcd92fe2ccff9b0b616ca37a08367b7f23ed4bf40de8c940620dd4aebcbb",
-    "dist/_astro/ObjectPage.DgN5Q675.css": "d79ffd5568d7db651f26f9a3437eb8ac54b3561ecd3fc190eac3c8f60332c260",
-    "dist/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.D0qoI8GJ.js": "abbbbc49c03d0e314b5cec6218ced17622c3119acfb5e3a53ee268eb1f06c612",
+    "dist/moon/index.html": "6d172765b2a3bef187bf1317092576b577c409e93ecccf8cdbb901edfedf8385",
+    "dist/navigation/moon/index.html": "2a13dfe0cff161be31dbcdaecbea7ae38788b08e0e7fabed5e2c2912169763b1",
+    "dist/bennu/index.html": "c6f2b61ab502097e57d6e1f176b187d5ba9feb48f4d4266a0490c4539068b38e",
+    "dist/navigation/bennu/index.html": "a33f31f372d1f47bb2618f371a05e4aff7dba06b820be34d4ba9b16af0264e07",
+    "dist/saturn/index.html": "dfcd4e302339192721f19a9e5690a9ddb2d748c3b05dbd1dcfa321dacafd0ed3",
+    "dist/navigation/saturn/index.html": "bc12a20983ae951ed94a718cbb72ccb98138cb1d682f31a543d96a133d4071b3",
+    "dist/titan/index.html": "917a8a42e06d16d04235f06210c4a3418fc43db00fead1aad57417b85963bac7",
+    "dist/navigation/titan/index.html": "f25ef505532e433e74b78518ce651401105bf828e165ed3aaf93d9a74322f426",
+    "dist/mercury/index.html": "c6c1a01f261fceca0d8fcd47ba8143c118ef623f8d8c64e9c14e36058c5f94b5",
+    "dist/navigation/mercury/index.html": "9aa233a6bf14ed438a2f9c6aa9f3a88a558b1e8217df2201353831a9a0c1f375",
+    "dist/mars/index.html": "a1618829654952ef2a7108c68392eee7235337ec88dde07d9ac83c529da243b8",
+    "dist/navigation/mars/index.html": "79742c39d381b6a8715583d5d6fa66fdb48bada675a47707ebd565551f8e063c",
+    "dist/jupiter/index.html": "46147af963bb4da925887b95081da1921b3397d2dc53f8df672d4f4b83a2adb2",
+    "dist/navigation/jupiter/index.html": "08e1648d586e0dbfe8bc75feaa16fa7182de0b723abc26becd197f196fa95265",
+    "dist/juno/index.html": "bbfccd078a8ba07e4c458b39600a9e38888f5589ada73e8f5d5ece89af0bd749",
+    "dist/navigation/juno/index.html": "eccc7f700872883050828f014dd069f01b75c9efd422c0939ae48b46c4f75e31",
+    "dist/_astro/ObjectPage.DkTbp_6o.css": "fc0cb7dcf7db2722022d42a859783a39502cbdaf7e777a925bf30248a85a7295",
+    "dist/_astro/PlanetLayout.astro_astro_type_script_index_0_lang.DScdPwGU.js": "701765e8df39fcf0d1f76389643a0a7ae698bd388d8c1f6f1ac48ec31431cbf9",
     "dist/_astro/explorer-rail.4OkVIEAm.css": "9ad551bd72a315bcded6ca3fd8bbd798fda1d5eb18fa7b5437e6d4c72a719516",
     "dist/_astro/overview-spectrum.ha0JZeAA.css": "47f9c1f6264bb34e900a2ad0c0fec9d82b696c84436a0459fb009ed8f4af2aaa",
-    "dist/_astro/packaged-object-runtime.Ddq7bbXi.js": "66f548cbad3e4bf8b4ce9dab6249ce486d10bc4e60cc5cc25700fb1ba457411d",
+    "dist/_astro/packaged-object-runtime.B8Wkevmr.js": "19cef293f0054153a803a61b76b270248d70f20ab602c785c12fb638911bfefc",
     "dist/_astro/point-field-selection-worker-CMrTEVt-.js": "cb4bbe0c3d7a50cce711f453092c07064c766fe59c9e11da2fb9ed59a8dd44e8",
     "dist/_astro/prepared-object-worker-VaVudGWd.js": "7c6ea3c9e2ef68886b311dedf071c5ab6d7a08740ec3086d161df4f9644cc144",
     "dist/_astro/world-context-planner-worker-usIRqrnk.js": "ca0909a7fcca09b73b8ad25539de8c5f154281e4ffd7c4311855358ea8db9f8c"
   },
   "images": {
     "docs/images/catalogue-moon-missions-desktop.png": {
-      "sha256": "722f868874bf050d383c04badb4af178b07f5c25d461ae122143bf4c3bbfe89b",
-      "bytes": 748607
+      "sha256": "4c9d05236dd81fb5b158bfcbc59b92c1bba27e1967e0e113d0da30a451813bae",
+      "bytes": 748561
     },
     "docs/images/catalogue-moon-missions-mobile.png": {
       "sha256": "7e32ed3bebc7d368fd522517ac5a9e522c159497e8b8c60f59056c564ada6eaf",
