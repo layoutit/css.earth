@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-terrestrial-preparation@1",
+  "kind": "solid-observation-body",
+  "namespace": "dinkinesh",
+  "displayName": "Dinkinesh",
+  "publicBase": "/scenes/dinkinesh/",
+  "distanceAu": 2.073581431805674,
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "surfaceQuality": 94,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
+  },
+  "lighting": {
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 128,
+    "logicalSize": 460,
+    "terminatorWidth": 0.1,
+    "directionalAmbient": 0.05,
+    "fullPhaseAmbient": 0.35,
+    "fullPhaseDiffuse": 0.65,
+    "maximumOpacity": 0.95
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 0.369,
+    "camera": {
+      "initialScenePitchDegrees": 20,
+      "defaultControlYawDegrees": -45,
+      "framingScale": 0.75
+    },
+    "mapUrl": "/scenes/dinkinesh/dinkinesh-shape-surface@2x.webp",
+    "polesUrl": "/scenes/dinkinesh/dinkinesh-shape-poles@2x.webp",
+    "radialTerrain": {
+      "path": "shape/model.obj",
+      "format": "wavefront-obj",
+      "grid": {
+        "metersPerUnit": 1,
+        "expectedVertices": 51101,
+        "expectedFaces": 101512
+      },
+      "faceBudget": 1200,
+      "tileSize": 64,
+      "atlasColumns": 16,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "targetFaces": 1200,
+        "maximumErrorMeters": 12,
+        "regularize": false
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery. JPL supplies the heliocentric orbit. The reconstruction has an illustrative meridian; its detailed geometry and unseen hemisphere are not measured terrain."
+  },
+  "presentation": {
+    "defaultLens": "shape",
+    "pointColor": [
+      160,
+      160,
+      160
+    ],
+    "markerAtlasUrl": "/navigation/planet-markers@2x.webp"
+  }
+}

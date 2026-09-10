@@ -89,6 +89,9 @@ src/planets/sn263-gamma/source/orbit/*.txt -text -whitespace
 src/planets/sn263-gamma/source/reference/* -text -whitespace
 src/planets/sn263-gamma/source/shape/*.tab -text -whitespace
 
+# Preserve the pinned Galileo candidate-orbit catalog bytes.
+src/planets/dactyl/source/reference/asteroids.ssc -text -whitespace
+
 # Preserve the Halley archives' fixed-width records and original tool reports.
 src/planets/comet-1p/source/giotto/*.hdr -text -whitespace
 src/planets/comet-1p/source/giotto/*.lbl -text -whitespace

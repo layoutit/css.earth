@@ -1,0 +1,75 @@
+{
+  "id": "dinkinesh",
+  "classification": "asteroid",
+  "physical": {
+    "name": "Dinkinesh",
+    "horizonsCode": "152830;",
+    "meanRadiusKm": 0.369,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27152830%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 327847266.1608174,
+      "eccentricity": 0.1126841676722353,
+      "inclinationRad": 0.4433091933929112,
+      "ascendingNodeRad": 0.031000781753280148,
+      "argumentOfPeriapsisRad": 1.5109846507300149,
+      "meanAnomalyAtEpochRad": 0.9738785694303402,
+      "meanMotionRadPerDay": 0.005302274527319834
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27152830%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -250414751.501338,
+          155813680.6595113,
+          77634868.02565126
+        ],
+        "velocity": [
+          -1195335.47226126,
+          -1299061.460378719,
+          -598940.4079759333
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -282231298.5298607,
+          114639206.3536629,
+          58561722.53264888
+        ],
+        "velocity": [
+          -922662.3146152245,
+          -1437712.821771781,
+          -668760.9183477616
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -305646371.702094,
+          70039375.84701723,
+          37739164.57459749
+        ],
+        "velocity": [
+          -637124.8852767228,
+          -1527594.304030757,
+          -715623.4545051995
+        ]
+      }
+    ]
+  },
+  "physicalNotes": "Galileo/Lucy source dimensions and declared display assumptions. Source records and limits: src/planets/dinkinesh/README.md",
+  "acquisition": {
+    "heliocentric": {
+      "target": "152830;",
+      "model": "asteroid"
+    }
+  }
+}

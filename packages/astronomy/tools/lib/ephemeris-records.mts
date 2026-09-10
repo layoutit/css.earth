@@ -29,6 +29,7 @@ export function parseBodyEpochRecord(value: unknown) {
   return objectValue(value).schema === 'cssearth-published-body-epoch-ephemeris@1' ? publishedRecord(value) : horizonsRecord(value);
 }
 export const parsePublishedParameters = shape({ schema: literal('cssearth-published-mutual-orbit@1'), id: string,
+  placement: optional(literal('approximate')),
   centerBodyId: string, referenceFrame: string, epochJd: number, timeQualification: string, citation: shape({ url: string }),
   semiMajorAxisKm: number, eccentricity: number, inclinationDegrees: number, ascendingNodeDegrees: number,
   argumentPeriapsisDegrees: number, meanAnomalyDegrees: number, meanMotionDegreesPerDay: number,

@@ -1,0 +1,174 @@
+[
+  {
+    "name": "body-registration",
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "tools/body-additions.test.mjs",
+      "tools/prepare-marker-bindings.test.mjs"
+    ],
+    "status": 0,
+    "seconds": 0.87
+  },
+  {
+    "name": "moon-sources",
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "tests/objects/unit/dactyl/source.test.mjs",
+      "tests/objects/unit/dinkinesh/source.test.mjs",
+      "tests/objects/unit/selam/source.test.mjs",
+      "tools/objects/source-authoring/galileo-lucy/orbits.test.mjs"
+    ],
+    "status": 0,
+    "seconds": 1.71
+  },
+  {
+    "name": "moon-closure",
+    "command": [
+      "node",
+      "--test",
+      "--test-name-pattern=^(dactyl|dinkinesh|selam):",
+      "tests/objects/source-closure.test.mjs"
+    ],
+    "status": 0,
+    "seconds": 0.36
+  },
+  {
+    "name": "universe",
+    "command": [
+      "pnpm",
+      "test:preparation",
+      "--universe"
+    ],
+    "status": 0,
+    "seconds": 16.87
+  },
+  {
+    "name": "astronomy",
+    "command": [
+      "pnpm",
+      "--filter",
+      "@cssearth/astronomy",
+      "test",
+      "--maxWorkers=1"
+    ],
+    "status": 0,
+    "seconds": 11.55
+  },
+  {
+    "name": "renderer",
+    "command": [
+      "pnpm",
+      "test:renderer",
+      "--maxWorkers=1"
+    ],
+    "status": 0,
+    "seconds": 47.8
+  },
+  {
+    "name": "package-types",
+    "command": [
+      "pnpm",
+      "-r",
+      "--workspace-concurrency=1",
+      "--filter",
+      "./packages/**",
+      "typecheck"
+    ],
+    "status": 0,
+    "seconds": 3.28
+  },
+  {
+    "name": "typecheck:renderer",
+    "command": [
+      "pnpm",
+      "typecheck:renderer"
+    ],
+    "status": 0,
+    "seconds": 1.49
+  },
+  {
+    "name": "typecheck:platform",
+    "command": [
+      "pnpm",
+      "typecheck:platform"
+    ],
+    "status": 0,
+    "seconds": 4.06
+  },
+  {
+    "name": "typecheck:preparation",
+    "command": [
+      "pnpm",
+      "typecheck:preparation"
+    ],
+    "status": 0,
+    "seconds": 5.99
+  },
+  {
+    "name": "typecheck:tools",
+    "command": [
+      "pnpm",
+      "typecheck:tools"
+    ],
+    "status": 0,
+    "seconds": 5.88
+  },
+  {
+    "name": "typecheck:shell",
+    "command": [
+      "pnpm",
+      "typecheck:shell"
+    ],
+    "status": 0,
+    "seconds": 7.95
+  },
+  {
+    "name": "typecheck:astro",
+    "command": [
+      "pnpm",
+      "typecheck:astro"
+    ],
+    "status": 0,
+    "seconds": 11.11
+  },
+  {
+    "name": "typecheck:ownership",
+    "command": [
+      "pnpm",
+      "typecheck:ownership"
+    ],
+    "status": 0,
+    "seconds": 0.87
+  },
+  {
+    "name": "typecheck:browser-owners",
+    "command": [
+      "pnpm",
+      "typecheck:browser-owners"
+    ],
+    "status": 0,
+    "seconds": 1.49
+  },
+  {
+    "name": "check:typescript-ownership",
+    "command": [
+      "pnpm",
+      "check:typescript-ownership"
+    ],
+    "status": 0,
+    "seconds": 3.23
+  },
+  {
+    "name": "test:typescript-ownership",
+    "command": [
+      "pnpm",
+      "test:typescript-ownership"
+    ],
+    "status": 0,
+    "seconds": 0.88
+  }
+]

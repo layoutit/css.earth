@@ -1,0 +1,9 @@
+{
+  "geometricAlbedo": 0.27,
+  "uncertaintyLower": 0.06,
+  "uncertaintyUpper": 0.25,
+  "quantity": "visible geometric albedo",
+  "scope": "Pre-encounter unresolved WISE thermal estimate, adopted only for approximate parent context-point brightness. Not a mapped albedo or an independent Selam measurement.",
+  "source": "McFadden et al. (2023), Size and Albedo Constraints for (152830) Dinkinesh Using WISE Data; abstract and thermal-model result, 16th and 84th percentiles.",
+  "url": "https://arxiv.org/abs/2309.13158v1"
+}

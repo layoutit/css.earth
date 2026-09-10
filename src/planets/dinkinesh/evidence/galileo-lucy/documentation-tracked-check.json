@@ -1,0 +1,13 @@
+{
+  "base": null,
+  "markdownFiles": 1984,
+  "localInlineLinksChecked": 3317,
+  "errors": [],
+  "documentation": {
+    "guides": 11,
+    "reachableGuides": 11,
+    "illustrations": 5,
+    "usedIllustrations": 5
+  },
+  "scope": "Checks inline link targets and heading anchors, docs placement and duplicate body accounts. The docs index walk also accepts reference links and HTML a/img links. Excludes fenced examples, external URL availability and content quality."
+}

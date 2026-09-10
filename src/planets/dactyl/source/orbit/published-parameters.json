@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-published-mutual-orbit@1",
+  "id": "dactyl",
+  "centerBodyId": "ida",
+  "placement": "approximate",
+  "referenceFrame": "EQJ2000",
+  "epochJd": 2461286.5,
+  "timeScale": "TT",
+  "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
+  "semiMajorAxisKm": 82.3,
+  "eccentricity": 0.15,
+  "inclinationDegrees": 177.1,
+  "ascendingNodeDegrees": 258.76,
+  "argumentPeriapsisDegrees": 0,
+  "meanAnomalyDegrees": 0,
+  "meanMotionDegreesPerDay": 372.92560134253216,
+  "quadraticMeanAnomalyDegreesPerYear2": 0,
+  "citation": {
+    "title": "Celestia candidate orbit based on Belton (1996) and Petit (1997)",
+    "url": "https://github.com/CelestiaProject/CelestiaContent/blob/1993a082ee6307c0df7fdc0828eb117a0e8e9958/data/asteroids.ssc",
+    "locator": "Dactyl EllipticalOrbit: a=82.3 km, e=0.15, P=0.96534 days only; SSC node, anomaly and argument are not imported."
+  },
+  "modelQualification": "Approximate orbital placement. The 1993 encounter did not determine a unique orbit; the present orbital phase is illustrative. A synchronous orientation is assumed, not measured.",
+  "derivedAssumptions": "Plane taken opposite the existing Ida pole (RA 348.76, Dec 87.1 degrees). This neglects the roughly 8-degree mutual inclination and does not select a unique stable solution. Periapsis and phase are illustrative.",
+  "gravityQualification": "Effective GM=a^3(2pi/P)^2 ensures the display conic agrees with its chosen period. The zero moon GM is a massless display approximation, not a mass measurement."
+}

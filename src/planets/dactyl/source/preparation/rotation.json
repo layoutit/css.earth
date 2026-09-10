@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 168.76,
+  "declinationDegrees": -87.1,
+  "periodHours": 23.16816,
+  "phase": "arbitrary-display-phase",
+  "displayMeridianDegrees": 0,
+  "source": "Belton et al. (1996); candidate period from Celestia/Petit et al. (1997); parent pole from Ida package",
+  "coordinateSystem": "ICRF/J2000, right-handed Z-up model; illustrative zero meridian",
+  "qualification": "Retrograde parent-equatorial approximation to the approximately 172-degree encounter inclination; synchronous spin is assumed, not measured."
+}

@@ -77,6 +77,8 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     const result = JSON.parse(await readFile(outputPath, 'utf8'));
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
     assert.deepEqual(result.bodies.map((body: { id: string }) => body.id), contextEntries.map(body => body.id));
+    assert.deepEqual(result.bodies.filter((body: { placement?: string }) => body.placement === 'approximate')
+      .map((body: { id: string }) => body.id).sort(), ['dactyl', 'selam'], 'Catalogue preparation must preserve the source records’ phase qualification.');
     // Independently parse the retained Horizons output, bypassing the snapshot
     // loader, solar-geometry.mts and descriptor frames. Other bodies retain
     // their compact astronomy models; Earth adds its source-owned EMB offset.
