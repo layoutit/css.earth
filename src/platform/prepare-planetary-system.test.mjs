@@ -12,7 +12,7 @@ import {
 } from "./prepare-planetary-system.mts";
 import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mts";
 import { prepareHeliocentricView } from "./prepare-heliocentric-view.mts";
-import { validatePreparedPlanetarySystem } from "./heliocentric-view.mts";
+import { projectHeliocentricView, validatePreparedHeliocentricView, validatePreparedPlanetarySystem } from "./heliocentric-view.mts";
 import {
   ASTRONOMICAL_UNIT_KILOMETERS,
   BODY_FIXED_SUN_DIRECTIONS,
@@ -60,6 +60,42 @@ async function prepareMercurySystem(overrides = {}) {
     ...overrides,
   });
 }
+
+test("an interstellar observer prepares an open trajectory from its actual source geometry", async () => {
+  const bodyId = "oumuamua", astronomy = await loadAstronomyPackage();
+  const radiusKm = astronomy.BODIES[bodyId].meanRadiusKm;
+  const frame = prepareEclipticPresentationFrame(bodyId);
+  const system = await preparePlanetarySystem({ bodyId, presentationFrame: frame,
+    kilometersPerUnit: radiusKm / 230, astronomy });
+  const plan = prepareHeliocentricView({ bodyId, presentationFrame: frame,
+    bodyRadiusUnits: 230, bodyRadiusKilometers: radiusKm,
+    sunSprite: { imagePixels: 512, opaqueCoreDiameterShare: .2 }, system });
+  assert.equal(validatePreparedHeliocentricView(plan), plan);
+  assert.equal(plan.orbit.closed, false);
+  assert.equal(plan.orbit.aphelionAu, null);
+  assert.equal(plan.orbit.displayExtentAu, 600);
+  assert.equal(plan.orbit.trail.length, plan.orbit.vertexCount - 1);
+  assert.deepEqual(plan.orbit.vertices[plan.orbit.bodyVertexIndex], [0, 0, 0]);
+  assert.ok(plan.orbit.semiMajorAxisAu < 0 && plan.orbit.eccentricity > 1);
+});
+
+test("unbound context bodies retain their epoch markers without closed planetary rings", async () => {
+  const system = await prepareMercurySystem({ asteroids: ["oumuamua"] });
+  const visitor = system.bodies.find(body => body.id === "oumuamua");
+  assert.equal(visitor.kind, "interstellar");
+  assert.equal(visitor.orbit, null);
+  assert.equal(visitor.aphelionAu, null);
+  assert.ok(visitor.position.every(Number.isFinite));
+  const plan = prepareHeliocentricView({ bodyId: "mercury", presentationFrame,
+    bodyRadiusUnits: MERCURY_RADIUS_UNITS, bodyRadiusKilometers: MERCURY_RADIUS_KILOMETERS,
+    sunSprite: { imagePixels: 512, opaqueCoreDiameterShare: .2 }, system });
+  assert.equal(validatePreparedHeliocentricView(plan), plan);
+  const view = projectHeliocentricView(plan, { rotation: [1, 0, 0, 0, 1, 0, 0, 0, 1],
+    distance: system.maximumExtentUnits * 3, focal: 1247, viewportWidth: 1440, viewportHeight: 900, system: true });
+  const point = view.system.bodies.find(body => body.id === "oumuamua");
+  assert.ok(point.marker.visible);
+  assert.deepEqual(point.orbitSegments, []);
+});
 
 test("an outer observer's long orbit is enclosed together with the other planets", async () => {
   const bodyId = 'gkunhomdima', astronomy = await loadAstronomyPackage();

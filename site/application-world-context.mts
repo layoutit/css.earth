@@ -12,7 +12,7 @@ import { OBJECTS } from './objects.mts';
 import { CONTEXT_ANNOTATION_PRIORITY } from './runtime-policy.mts';
 
 const asteroidIds = OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
-const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian'].includes(object.classification)).map(object => object.id);
+const hiddenOrbitIds = OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id);
 const annotationPriorities = Object.fromEntries(OBJECTS.map(object =>
   [object.id, (CONTEXT_ANNOTATION_PRIORITY as Readonly<Partial<Record<typeof object.classification, number>>>)[object.classification] ?? 0]));
 

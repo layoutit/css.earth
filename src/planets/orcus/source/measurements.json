@@ -1,0 +1,133 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-09",
+  "periodHours": null,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed.",
+  "axesStatus": "Illustrative equal axes at the published effective diameter; these are not three independently measured axes.",
+  "radiusMeaning": "Volume-equivalent radius of the chosen illustrative equal-axis model, not a measured 3D-volume radius.",
+  "id": "orcus",
+  "name": "Orcus",
+  "jplId": "90482",
+  "horizons": "90482;",
+  "fullName": "90482 Orcus (2004 DW)",
+  "fullAxesKm": [
+    910,
+    910,
+    910
+  ],
+  "radiusKm": 454.99999999999983,
+  "diameterKm": 910,
+  "diameterUncertaintyKm": {
+    "minus": 40,
+    "plus": 50
+  },
+  "population": "Resonant trans-Neptunian object (plutino)",
+  "periodText": "Possibly synchronized with Vanth’s roughly 9.54-day orbit; no qualified sidereal spin is installed.",
+  "source": "https://arxiv.org/abs/1801.07221",
+  "credit": "Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling.",
+  "shapeMeaning": "Size-constrained spherical illustration at Orcus’s primary-only thermal diameter, 910 +50/−40 km. ALMA separated the binary components but did not resolve Orcus’s terrain or measure three shape axes.",
+  "introduction": "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.",
+  "papers": [
+    "https://doi.org/10.3847/1538-3881/aad9f2",
+    "https://arxiv.org/abs/2307.04848",
+    "https://arxiv.org/abs/2508.17101"
+  ],
+  "referencePins": [
+    {
+      "path": "output/distant-worlds/references/orcus-brown-butler-2018.pdf",
+      "url": "https://arxiv.org/pdf/1801.07221",
+      "resolvedUrl": "https://arxiv.org/pdf/1801.07221",
+      "bytes": 1598645,
+      "sha256": "a939fef5976cf9986bf1d1b4fba067b26f24caa0b9984155211073213d67764d",
+      "contentType": "application/pdf",
+      "purpose": "Spatially separated Orcus and Vanth thermal diameters"
+    },
+    {
+      "path": "output/distant-worlds/references/orcus-brown-butler-2023.html",
+      "url": "https://arxiv.org/abs/2307.04848",
+      "resolvedUrl": "https://arxiv.org/abs/2307.04848",
+      "bytes": 41968,
+      "sha256": "379184924496c714fec5aad30e176cac81b2209eb04a0822de14d84be0ec1eb9",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "Orcus-Vanth synchronized evolution context"
+    }
+  ],
+  "numericAnchors": [
+    {
+      "quantity": "Orcus primary thermal diameter",
+      "value": 910,
+      "unit": "km",
+      "uncertainty": "+50/−40 km (median with 16th/84th percentiles)",
+      "location": "Brown and Butler 2018 section 3, PDF page 3"
+    },
+    {
+      "quantity": "Vanth diameter, context only",
+      "value": 475,
+      "unit": "km",
+      "uncertainty": "±75 km",
+      "location": "Same paragraph; deliberately not included in Orcus scale"
+    }
+  ],
+  "sourceSurvey": [
+    {
+      "url": "https://arxiv.org/abs/1801.07221",
+      "status": "included",
+      "adds": "Separately modeled Orcus and Vanth thermal fluxes avoid using a system-equivalent diameter."
+    },
+    {
+      "url": "https://arxiv.org/abs/2307.04848",
+      "status": "included-context",
+      "adds": "Binary astrometric mass ratio and likely double-synchronous evolution; not unique spin attitude or shape."
+    },
+    {
+      "url": "https://arxiv.org/abs/2508.17101",
+      "status": "excluded-from-surface",
+      "adds": "JWST spectral characterization references include Orcus; no resolved longitude-latitude map."
+    },
+    {
+      "url": "https://arxiv.org/abs/1810.08977",
+      "status": "excluded-wrong-component",
+      "adds": "The 2017 occultation constrains Vanth, not Orcus; cannot use its 443 km diameter for the primary."
+    }
+  ],
+  "unresolved": [
+    "Thermal-model scale is not a unique resolved 3D shape.",
+    "Vanth, its orbital pole and combined-system thermal diameters must not be confused with primary body dimensions."
+  ],
+  "distanceAu": 47.98129781525766,
+  "classification": "trans-neptunian",
+  "shapeLabel": "Published size model; shape unresolved",
+  "references": [
+    {
+      "path": "output/distant-worlds/references/orcus-brown-butler-2018.pdf",
+      "url": "https://arxiv.org/pdf/1801.07221",
+      "resolvedUrl": "https://arxiv.org/pdf/1801.07221",
+      "bytes": 1598645,
+      "sha256": "a939fef5976cf9986bf1d1b4fba067b26f24caa0b9984155211073213d67764d",
+      "contentType": "application/pdf",
+      "purpose": "Spatially separated Orcus and Vanth thermal diameters",
+      "file": "orcus-brown-butler-2018.pdf"
+    },
+    {
+      "path": "output/distant-worlds/references/orcus-brown-butler-2023.html",
+      "url": "https://arxiv.org/abs/2307.04848",
+      "resolvedUrl": "https://arxiv.org/abs/2307.04848",
+      "bytes": 41968,
+      "sha256": "379184924496c714fec5aad30e176cac81b2209eb04a0822de14d84be0ec1eb9",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "Orcus-Vanth synchronized evolution context",
+      "file": "orcus-brown-butler-2023.html"
+    }
+  ],
+  "survey": [
+    "Included: Separately modeled Orcus and Vanth thermal fluxes avoid using a system-equivalent diameter.  https://arxiv.org/abs/1801.07221",
+    "Included-context: Binary astrometric mass ratio and likely double-synchronous evolution; not unique spin attitude or shape.  https://arxiv.org/abs/2307.04848",
+    "Excluded-from-surface: JWST spectral characterization references include Orcus; no resolved longitude-latitude map.  https://arxiv.org/abs/2508.17101",
+    "Excluded-wrong-component: The 2017 occultation constrains Vanth, not Orcus; cannot use its 443 km diameter for the primary.  https://arxiv.org/abs/1810.08977"
+  ]
+}

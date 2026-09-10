@@ -2,9 +2,9 @@ import { isArray } from './is-array.mts';
 import type { Vector2, Vector3, Matrix3, Matrix3dLike, VisibleRect } from "../renderers/css/solar-system/types.ts";
 import type { PreparedPlanetPoint, PlanetOrbitLabelPolicy } from "@cssearth/engine";
 export interface TrailSpans {solidTurns:number;fadeTurns:number;}
-export interface PreparedOrbit {normal:Vector3;perihelionDirection:Vector3;semiMajorAxisUnits:number;maximumExtentUnits:number;vertices:readonly Vector3[];vertexCount:number;trail:readonly number[];chordBehindTurns:readonly number[];trailSpans:TrailSpans;}
+export interface PreparedOrbit {normal:Vector3;perihelionDirection:Vector3;semiMajorAxisUnits:number;maximumExtentUnits:number;vertices:readonly Vector3[];vertexCount:number;trail:readonly number[];chordBehindTurns:readonly number[];trailSpans:TrailSpans|null;closed?:boolean;bodyVertexIndex?:number;eccentricity?:number;displayExtentAu?:number;}
 export interface PreparedIllumination {phaseAngleDegrees:number;illuminatedFraction:number;lightViewZ:number;markerOpacity:number;}
-export interface PreparedSystemBody {id:string;position:Vector3;semiMajorAxisUnits:number;radiusUnits:number;pointPresentation:PreparedPlanetPoint;orbit:Omit<PreparedOrbit,"semiMajorAxisUnits"|"maximumExtentUnits"> & {labelPresentation:PlanetOrbitLabelPolicy};illumination:PreparedIllumination;}
+export interface PreparedSystemBody {id:string;position:Vector3;semiMajorAxisUnits:number;radiusUnits:number;pointPresentation:PreparedPlanetPoint;orbit:Omit<PreparedOrbit,"semiMajorAxisUnits"|"maximumExtentUnits"> & {labelPresentation:PlanetOrbitLabelPolicy} | null;eccentricity?:number;illumination:PreparedIllumination;}
 export interface PreparedPlanetarySystem {schema:string;observer:string;sun:{position:Vector3};maximumExtentUnits:number;bodies:readonly PreparedSystemBody[];runtimeGeometryDerivation:boolean;epochJdTt?:number;}
 export interface HeliocentricViewPlan {schema:string;bodyId:string;units:{kilometersPerUnit:number;bodyRadiusUnits:number};sun:{direction:Vector3;position:Vector3;distanceUnits:number;radiusUnits:number;sprite:{worldDiameterUnits:number;imagePixels:number}};orbit:PreparedOrbit;system?:PreparedPlanetarySystem;runtimeGeometryDerivation:boolean;}
 export interface HeliocentricProjectionInput {rotation:Matrix3;distance:number;bodyCenter?:Vector3;focal:number;viewportWidth:number;viewportHeight:number;principalOffset?:Vector2;visibleRect?:VisibleRect|null;frustumPadding?:number;nearShare?:number;system?:boolean;systemOrbits?:boolean;trailWeights?:Readonly<Record<string,readonly number[]>>|null;}
@@ -54,6 +54,7 @@ export const PREPARED_HELIOCENTRIC_VIEW_SCHEMA =
 export const NOMINAL_SOLAR_RADIUS_KILOMETERS = 695700;
 
 export function validatePreparedHeliocentricView(plan: HeliocentricViewPlan) {
+  const bodyVertexIndex = plan.orbit?.closed === false ? plan.orbit.bodyVertexIndex ?? -1 : 0;
   if (plan?.schema !== PREPARED_HELIOCENTRIC_VIEW_SCHEMA ||
       !positive(plan.units?.kilometersPerUnit) ||
       !positive(plan.units?.bodyRadiusUnits) ||
@@ -63,15 +64,23 @@ export function validatePreparedHeliocentricView(plan: HeliocentricViewPlan) {
       !Number.isSafeInteger(plan.sun?.sprite?.imagePixels) ||
       !vector(plan.sun?.position) ||
       !unit(plan.orbit?.normal) || !unit(plan.orbit?.perihelionDirection) ||
-      !positive(plan.orbit?.semiMajorAxisUnits) ||
+      !(plan.orbit?.closed === false ? Number.isFinite(plan.orbit.semiMajorAxisUnits) &&
+        plan.orbit.semiMajorAxisUnits < 0 : positive(plan.orbit?.semiMajorAxisUnits)) ||
       !positive(plan.orbit?.maximumExtentUnits) ||
       !isArray(plan.orbit?.vertices) || plan.orbit.vertices.length < 8 ||
       plan.orbit.vertexCount !== plan.orbit.vertices.length ||
       !plan.orbit.vertices.every(vector) ||
-      plan.orbit.vertices[0].some((component: number) => component !== 0) ||
-      !validTrail(plan.orbit.trail, plan.orbit.vertexCount) ||
-      !validBehindTurns(plan.orbit.chordBehindTurns, plan.orbit.vertexCount) ||
-      !validTrailSpans(plan.orbit.trailSpans) ||
+      !Number.isSafeInteger(bodyVertexIndex) || bodyVertexIndex < 0 || bodyVertexIndex >= plan.orbit.vertexCount ||
+      plan.orbit.vertices[bodyVertexIndex].some((component) => component !== 0) ||
+      (plan.orbit.closed === false
+        ? !((plan.orbit.eccentricity ?? 0) > 1) || !positive(plan.orbit.displayExtentAu) ||
+          plan.orbit.trailSpans !== null || !Array.isArray(plan.orbit.chordBehindTurns) || plan.orbit.chordBehindTurns.length !== 0 ||
+          !Array.isArray(plan.orbit.trail) || plan.orbit.trail.length !== plan.orbit.vertexCount - 1 ||
+          !plan.orbit.trail.every(weight => weight === 1)
+        : (plan.orbit.closed !== undefined && plan.orbit.closed !== true) ||
+          !validTrail(plan.orbit.trail, plan.orbit.vertexCount) ||
+          !validBehindTurns(plan.orbit.chordBehindTurns, plan.orbit.vertexCount) ||
+          !validTrailSpans(plan.orbit.trailSpans)) ||
       plan.runtimeGeometryDerivation !== false) {
     throw new TypeError("Prepared heliocentric view is incompatible.");
   }
@@ -114,16 +123,20 @@ export function validatePreparedPlanetarySystem(system: PreparedPlanetarySystem,
   if (system?.schema !== PREPARED_PLANETARY_SYSTEM_SCHEMA ||
       system.observer !== plan.bodyId ||
       !vector(system.sun?.position) ||
-      system.sun.position.some((component: number, index: number) =>
-        Math.abs(component - plan.sun.position[index]) > 1e-3) ||
+      system.sun.position.some((component, index) =>
+        Math.abs(component - plan.sun.position[index]) >
+          Math.max(1e-3, 8 * Number.EPSILON * Math.hypot(...plan.sun.position))) ||
       !positive(system.maximumExtentUnits) ||
       !(system.maximumExtentUnits >= plan.orbit.maximumExtentUnits) ||
       !isArray(system.bodies) || system.bodies.length === 0 ||
       system.bodies.some((body) =>
         !/^[a-z][a-z0-9-]*$/u.test(body?.id ?? "") || body.id === plan.bodyId ||
-        !vector(body.position) || !positive(body.semiMajorAxisUnits) ||
+        !vector(body.position) || !(body.orbit === null
+          ? Number.isFinite(body.semiMajorAxisUnits) && body.semiMajorAxisUnits < 0 && (body.eccentricity ?? 0) > 1
+          : positive(body.semiMajorAxisUnits)) ||
         !positive(body.radiusUnits) || !validPreparedPlanetPoint(body.pointPresentation) ||
-        !positive(body.orbit?.labelPresentation?.radiusUnits) ||
+        !validIllumination(body.illumination) ||
+        (body.orbit !== null && (!positive(body.orbit?.labelPresentation?.radiusUnits) ||
         !positive(body.orbit.labelPresentation.angularFadeInRadians) ||
         !(body.orbit.labelPresentation.angularFullRadians > body.orbit.labelPresentation.angularFadeInRadians) ||
         !positive(body.orbit.labelPresentation.nearDistanceUnits) ||
@@ -135,8 +148,7 @@ export function validatePreparedPlanetarySystem(system: PreparedPlanetarySystem,
         !body.orbit.vertices.every(vector) ||
         !validTrail(body.orbit.trail, body.orbit.vertexCount) ||
         !validBehindTurns(body.orbit.chordBehindTurns, body.orbit.vertexCount) ||
-        !validIllumination(body.illumination) ||
-        body.orbit.vertices[0].some((component: number, index: number) => component !== body.position[index])) ||
+        body.orbit.vertices[0].some((component, index) => component !== body.position[index])))) ||
       new Set(system.bodies.map((body) => body.id)).size !== system.bodies.length ||
       system.runtimeGeometryDerivation !== false) {
     throw new TypeError("Prepared planetary system is incompatible.");
@@ -289,10 +301,10 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
   // Only the trailing chords (weight above zero) are projected; each segment
   // carries its chord's trail weight as its opacity, so the line fades
   // backwards from the body and the leading half of the orbit is never drawn.
-  const projectRing = (vertices: readonly Vector3[], trail: readonly number[]) => {
+  const projectRing = (vertices: readonly Vector3[], trail: readonly number[], closed = true) => {
     const eyes = vertices.map(toEye);
     const segments = [];
-    for (let index = 0; index < eyes.length; index += 1) {
+    for (let index = 0; index < eyes.length - (closed ? 0 : 1); index += 1) {
       const weight = trail[index];
       if (!(weight > 0)) continue;
       let start = eyes[index];
@@ -336,7 +348,7 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
     }
     return Object.freeze(segments);
   };
-  const segments = projectRing(plan.orbit.vertices, trailWeights?.own ?? plan.orbit.trail);
+  const segments = projectRing(plan.orbit.vertices, plan.orbit.closed === false ? plan.orbit.trail : trailWeights?.own ?? plan.orbit.trail, plan.orbit.closed !== false);
 
   // A point in the scene as a screen-space billboard: where it lands, and
   // whether it is in front of the camera, inside the viewport and not behind
@@ -382,7 +394,7 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
         diameterPx: Math.max(physicalDiameterPx, 2 * body.pointPresentation.policy.minimumRadiusPx),
         alpha: appearance.alpha,
         magnitude: appearance.magnitude,
-        labelPriority: planetOrbitLabelPriority(body.orbit.labelPresentation, magnitude(sunEye), centreDistance, appearance.magnitude),
+        labelPriority: body.orbit === null ? 0 : planetOrbitLabelPriority(body.orbit.labelPresentation, magnitude(sunEye), centreDistance, appearance.magnitude),
         physicalDiameterPx,
         photometricRadiusPx: appearance.radiusPx,
       });
@@ -392,7 +404,7 @@ export function projectHeliocentricView(plan: HeliocentricViewPlan, {
       bodies: Object.freeze(plan.system.bodies.map((body) => Object.freeze({
         id: body.id,
         marker: projectBody(body),
-        orbitSegments: systemOrbits ? projectRing(body.orbit.vertices, trailWeights?.[body.id] ?? body.orbit.trail) : Object.freeze([]),
+        orbitSegments: systemOrbits && body.orbit !== null ? projectRing(body.orbit.vertices, trailWeights?.[body.id] ?? body.orbit.trail) : Object.freeze([]),
       }))),
     });
   }

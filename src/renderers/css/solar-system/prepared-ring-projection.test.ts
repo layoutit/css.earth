@@ -80,6 +80,21 @@ test('full orbit reveal includes zero-weight chords at uniform opacity and resto
   expect(trail).toEqual([0, .2, .6, 1]);
 });
 
+test('full orbit reveal never adds a closing chord to an open trajectory', () => {
+  const vertices: Vector3[] = [[-50, 30, -200], [50, 30, -200], [50, 40, -200], [-50, 40, -200]];
+  const trail = [0, .5, 1], active = [1, 2], retained = createRetainedRingProjection(8);
+  const projector = createPreparedRingProjector({ ...limits, hidden: () => false, mayOcclude: () => false });
+  const original = projector(vertices, trail, active, false, undefined, false);
+  const revealed = projector(vertices, trail, active, true, undefined, false);
+  expect(original).toHaveLength(2);
+  expect(revealed).toHaveLength(vertices.length - 1);
+  expect(revealed.every(segment => segment[4] === 1)).toBe(true);
+  expect(revealed).toEqual(projector(vertices, [1, 1, 1, 0]));
+  expect(projector(vertices, trail, active, true, retained, false)).toEqual(revealed);
+  expect(projector(vertices, trail, active, false, retained, false)).toEqual(original);
+  expect(projector(vertices, [1, 1, 1, 1], undefined, true), 'bound rings retain their closing chord').toHaveLength(4);
+});
+
 test('prepared active chord indices preserve clipping while avoiding zero-weight vertex transforms', () => {
   let transformed = 0;
   for (const scale of [1, 1e14]) for (const distance of [-200, -30, 0, 30, 200, 1e8]) {

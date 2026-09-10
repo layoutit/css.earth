@@ -95,6 +95,9 @@ export const GEOMETRIC_ALBEDO: Readonly<Record<string, number>> = Object.freeze(
   // Parent context only: common-system geometric albedos, not mapped surface colors.
   // Scheirich et al.2021 Table4; JPL SBDB Grav2012/Mainzer2014, pinned in https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b1-preparation/parent-inputs.json.
   moshup: 0.162, sylvia: 0.046, patroclus: 0.047,
+  // Assumed geometric albedo, not a measurement: Mashchenko (2019), section 4,
+  // https://doi.org/10.1093/mnras/stz2378. Used only for approximate marker photometry.
+  oumuamua: 0.1,
   pluto: 0.52, ceres: 0.09, eris: 0.96, haumea: 0.80, makemake: 0.81, vesta: 0.4228,
 });
 
@@ -163,6 +166,7 @@ export async function preparePlanetarySystem({
     dwarfPlanetPositionKm,
     SMALL_BODY_IDS,
     TRANS_NEPTUNIAN_IDS = [],
+    INTERSTELLAR_IDS = [],
     asteroidElements,
     asteroidPositionKm,
     COMET_IDS = [],
@@ -314,7 +318,7 @@ export async function preparePlanetarySystem({
       const { semiMajorAxisKm, eccentricity, normalIcrf, perihelionIcrf } =
         heliocentricOrbitFromState(BODY_HELIOCENTRIC_STATES[id], BODIES.sun.gravitationalParameterKm3PerS2);
       return {
-        kind: isIncluded(COMET_IDS, id) ? 'comet' : isIncluded(TRANS_NEPTUNIAN_IDS, id) ? 'trans-neptunian' : isIncluded(smallBodies, id) ? 'asteroid' : isIncluded(dwarfPlanets, id) ? 'dwarf-planet' : 'planet',
+        kind: isIncluded(INTERSTELLAR_IDS, id) ? 'interstellar' : isIncluded(COMET_IDS, id) ? 'comet' : isIncluded(TRANS_NEPTUNIAN_IDS, id) ? 'trans-neptunian' : isIncluded(smallBodies, id) ? 'asteroid' : isIncluded(dwarfPlanets, id) ? 'dwarf-planet' : 'planet',
         semiMajorAxisAu: semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity,
         inclinationDegrees: Math.acos(Math.max(-1, Math.min(1, normalIcrf[2]))) * 180 / Math.PI,
@@ -329,7 +333,7 @@ export async function preparePlanetarySystem({
       const elements = (isIncluded(dwarfPlanets, id) ? dwarfPlanetElements(id) : smallBodyElements(id as SmallBodyId | CometId));
       const { normalIcrf, perihelionIcrf } = keplerOrientation(elements);
       return {
-        kind: isIncluded(COMET_IDS, id) ? 'comet' : isIncluded(TRANS_NEPTUNIAN_IDS, id) ? 'trans-neptunian' : isIncluded(smallBodies, id) ? 'asteroid' : 'dwarf-planet',
+        kind: isIncluded(INTERSTELLAR_IDS, id) ? 'interstellar' : isIncluded(COMET_IDS, id) ? 'comet' : isIncluded(TRANS_NEPTUNIAN_IDS, id) ? 'trans-neptunian' : isIncluded(smallBodies, id) ? 'asteroid' : 'dwarf-planet',
         semiMajorAxisAu: elements.semiMajorAxisKm / ASTRONOMICAL_UNIT_KILOMETERS,
         eccentricity: elements.eccentricity,
         inclinationDegrees: elements.inclinationRad * 180 / Math.PI,
@@ -364,33 +368,39 @@ export async function preparePlanetarySystem({
     const perihelionMotion = normalize(cross(normal, perihelionDirection));
     const semiMajorAxisUnits = orbit.semiMajorAxisAu * unitsPerAu;
     const eccentricity = orbit.eccentricity;
-    const semiMinorAxisUnits = semiMajorAxisUnits * Math.sqrt(1 - eccentricity * eccentricity);
+    const closed = eccentricity < 1;
+    const semiMinorAxisUnits = closed ? semiMajorAxisUnits * Math.sqrt(1 - eccentricity * eccentricity) : null;
     const center = add(sunPosition, scale(perihelionDirection, -semiMajorAxisUnits * eccentricity));
     const majorAxis = scale(perihelionDirection, semiMajorAxisUnits);
-    const minorAxis = scale(perihelionMotion, semiMinorAxisUnits);
-    const pointAt = (eccentricAnomaly: number) => add(
+    const minorAxis = semiMinorAxisUnits === null ? null : scale(perihelionMotion, semiMinorAxisUnits);
+    const pointAt = (eccentricAnomaly: number) => {
+      if (minorAxis === null) throw new TypeError("Elliptic path requires its minor axis.");
+      return add(
       center,
       add(scale(majorAxis, Math.cos(eccentricAnomaly)), scale(minorAxis, Math.sin(eccentricAnomaly))),
     );
+    };
     // The body's eccentric anomaly: from the planet's prepared true anomaly,
     // or (dwarf planets) from its position projected onto the ellipse axes.
-    const bodyEccentricAnomaly = orbit.trueAnomalyDegrees === null
+    const bodyEccentricAnomaly = !closed ? null : orbit.trueAnomalyDegrees === null
       ? Math.atan2(
-        dot(subtract(position, center), perihelionMotion) / semiMinorAxisUnits,
+        dot(subtract(position, center), perihelionMotion) / semiMinorAxisUnits!,
         dot(subtract(position, center), perihelionDirection) / semiMajorAxisUnits,
       )
       : 2 * Math.atan2(
         Math.sqrt(1 - eccentricity) * Math.sin(orbit.trueAnomalyDegrees * Math.PI / 360),
         Math.sqrt(1 + eccentricity) * Math.cos(orbit.trueAnomalyDegrees * Math.PI / 360),
       );
-    const trueAnomalyDegrees = orbit.trueAnomalyDegrees ?? (2 * Math.atan2(
-      Math.sqrt(1 + eccentricity) * Math.sin(bodyEccentricAnomaly / 2),
-      Math.sqrt(1 - eccentricity) * Math.cos(bodyEccentricAnomaly / 2),
+    const trueAnomalyDegrees = !closed ? Math.atan2(
+      dot(subtract(position, sunPosition), perihelionMotion),
+      dot(subtract(position, sunPosition), perihelionDirection)) * 180 / Math.PI : orbit.trueAnomalyDegrees ?? (2 * Math.atan2(
+      Math.sqrt(1 + eccentricity) * Math.sin(bodyEccentricAnomaly! / 2),
+      Math.sqrt(1 - eccentricity) * Math.cos(bodyEccentricAnomaly! / 2),
     ) * 180 / Math.PI + 360) % 360;
     // The ellipse from the elements must pass through the position the tree
     // resolved from the Sun direction: two derivations of one state vector.
-    const ringResidual = magnitude(subtract(pointAt(bodyEccentricAnomaly), position));
-    if (ringResidual > 1e-6 * semiMajorAxisUnits) {
+    const ringResidual = closed ? magnitude(subtract(pointAt(bodyEccentricAnomaly!), position)) : 0;
+    if (ringResidual > 1e-6 * Math.abs(semiMajorAxisUnits)) {
       throw new RangeError(
         `${id}: the body is ${ringResidual} units off its own orbit around ` +
           `${bodyId}; the orbital facts disagree with the Sun direction.`,
@@ -400,9 +410,9 @@ export async function preparePlanetarySystem({
     // Closed ring in the direction of motion, vertex 0 exactly at the body.
     // Whole units: one unit is a few kilometres against tens of au, so the
     // rounding is below 1e-7 relative and the prepared module stays small.
-    const vertices = Object.freeze(Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) =>
-      Object.freeze((index === 0 ? position : pointAt(bodyEccentricAnomaly + index * step)).map(Math.round))));
-    const behindTurns = chordBehindTurns(Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) => index * step));
+    const vertices = Object.freeze(closed ? Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) =>
+      Object.freeze((index === 0 ? position : pointAt(bodyEccentricAnomaly! + index * step)).map(Math.round))) : []);
+    const behindTurns = closed ? chordBehindTurns(Array.from({ length: SYSTEM_ORBIT_SEGMENTS }, (_, index) => index * step)) : [];
     const trail = trailWeightsForSpans(behindTurns, ORBIT_TRAIL_SPANS);
     // Illumination from the observer (at the origin): Sun-body-observer.
     const toSun = subtract(sunPosition, position);
@@ -442,9 +452,9 @@ export async function preparePlanetarySystem({
       inclinationDegrees: orbit.inclinationDegrees,
       inclinationReference: orbit.inclinationReference,
       perihelionAu: orbit.semiMajorAxisAu * (1 - eccentricity),
-      aphelionAu: orbit.semiMajorAxisAu * (1 + eccentricity),
+      aphelionAu: closed ? orbit.semiMajorAxisAu * (1 + eccentricity) : null,
       trueAnomalyDegrees,
-      orbit: Object.freeze({
+      orbit: !closed ? null : Object.freeze({
         labelPresentation: Object.freeze({
           radiusUnits: Math.max(...vertices.map((vertex) => magnitude(subtract(vertex, sunPosition)))),
           angularFadeInRadians: Math.PI / 180,
@@ -486,7 +496,8 @@ export async function preparePlanetarySystem({
   // wrong element would break it here rather than on screen.
   const ordered = bodies.map((id) => BODY_ORBITS[id]);
   for (let index = 1; index < ordered.length; index += 1) {
-    if (!(ordered[index].perihelionAu > ordered[index - 1].aphelionAu)) {
+    const previousAphelion = ordered[index - 1].aphelionAu;
+    if (previousAphelion === null || !(ordered[index].perihelionAu > previousAphelion)) {
       throw new RangeError(
         `${bodies[index]} (perihelion ${ordered[index].perihelionAu} au) does ` +
           `not lie outside ${bodies[index - 1]} (aphelion ${ordered[index - 1].aphelionAu} au).`,
@@ -494,7 +505,7 @@ export async function preparePlanetarySystem({
     }
   }
   const maximumExtentUnits = bodiesWithBrightness.reduce(
-    (extent, body) => body.orbit.vertices.reduce(
+    (extent, body) => (body.orbit?.vertices ?? []).reduce(
       (inner, vertex) => Math.max(inner, magnitude(vertex)),
       Math.max(extent, body.distanceUnits),
     ),
@@ -541,8 +552,9 @@ function heliocentricOrbitFromState({ positionKm, velocityKmPerDay }: { position
   );
   const eccentricity = magnitude(eccentricityVector);
   if (!positive(radius) || !positive(magnitude(angularMomentum)) ||
-      !positive(semiMajorAxisKm) || !Number.isFinite(eccentricity) || eccentricity >= 1) {
-    throw new RangeError("The parent heliocentric state must define a bound, non-degenerate ellipse.");
+      !Number.isFinite(semiMajorAxisKm) || !Number.isFinite(eccentricity) || eccentricity === 1 ||
+      !(eccentricity < 1 ? semiMajorAxisKm > 0 : semiMajorAxisKm < 0)) {
+    throw new RangeError("The parent heliocentric state must define a non-degenerate elliptic or hyperbolic conic.");
   }
   return {
     semiMajorAxisKm,

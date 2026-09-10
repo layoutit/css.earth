@@ -355,7 +355,7 @@
       "sha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,7 +380,7 @@
       "sha256": "63a9cc6698b524a1cf1aa00d0100d4c6548abb9b283b5296a8dac0a28f98655b",
       "bytes": 9284,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/pyrrhus/pyrrhus-elevation-thumbnail.webp",
           "bytes": 6148,
           "sha256": "e3131a410cbb8ab1ebac8e664c2d1dc2d00ae00334a04c8a34f84ce2dc40b454",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-elevation-surface@2x.webp",
           "bytes": 289352,
           "sha256": "8b073e6a0a1fc4a3f818c4f6b1cc7f4adaff987fa5701d3e622bba82bc609980",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -457,13 +457,13 @@
           "url": "/scenes/pyrrhus/pyrrhus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",
           "bytes": 228742,
           "sha256": "220fc8a607f9691a2b19df75935a51b417f737331963204d20953ac23275c143",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

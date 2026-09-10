@@ -149,6 +149,34 @@
       "category": "test",
       "reason": "Standalone Playwright camera/flight harness colocated with renderer code; never a runtime owner.",
       "anchor": "import { chromium } from 'playwright';"
+    },
+    "tools/audits/distant-worlds/browser-check.mjs": {
+      "category": "evidence",
+      "reason": "Production browser assertions for the nine distant-world packages, native drag and retained navigation."
+    },
+    "tools/audits/distant-worlds/contact-sheet.mjs": {
+      "category": "evidence",
+      "reason": "Evidence-only contact sheet assembled from actual browser captures."
+    },
+    "tools/audits/distant-worlds/drag-trace.mjs": {
+      "category": "evidence",
+      "reason": "Evidence-only native interaction trace and renderer cost analysis."
+    },
+    "tools/audits/distant-worlds/final-interactions.mjs": {
+      "category": "evidence",
+      "reason": "Browser assertions for world markers, search, lighting and responsive behavior."
+    },
+    "tools/audits/distant-worlds/fresh-install.mjs": {
+      "category": "evidence",
+      "reason": "Isolated runtime installation audit verifying original byte pins."
+    },
+    "tools/audits/distant-worlds/fresh-sources.mjs": {
+      "category": "evidence",
+      "reason": "Isolated source acquisition audit verifying original byte pins."
+    },
+    "tools/audits/distant-worlds/qualify.mjs": {
+      "category": "evidence",
+      "reason": "Package qualification harness asserting prepared budgets, controls and source contracts."
     }
   }
 }

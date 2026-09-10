@@ -1,7 +1,7 @@
 import { body, PLANET_IDS } from './body-types.js'
 import type { BodyId, BodyData, PlanetId } from './body-types.js'
-export { PLANET_IDS, DWARF_PLANET_IDS, ASTEROID_IDS, TRANS_NEPTUNIAN_IDS, SMALL_BODY_IDS, COMET_IDS } from './body-types.js'
-export type { BodyData, PlanetId, DwarfPlanetId, AsteroidId, TransNeptunianId, SmallBodyId, BodyId, CometId } from './body-types.js'
+export { PLANET_IDS, DWARF_PLANET_IDS, ASTEROID_IDS, TRANS_NEPTUNIAN_IDS, SMALL_BODY_IDS, COMET_IDS, INTERSTELLAR_IDS } from './body-types.js'
+export type { BodyData, PlanetId, DwarfPlanetId, AsteroidId, TransNeptunianId, SmallBodyId, BodyId, CometId, InterstellarId } from './body-types.js'
 import { SATELLITE_ELEMENTS } from './data/satelliteElements.data.js'
 /**
  * Physical data for the bodies this package places.
@@ -21,6 +21,15 @@ import { SATELLITE_ELEMENTS } from './data/satelliteElements.data.js'
  * three numbers and should not get them from here.
  */
 export const BODIES: Record<BodyId, BodyData> = {
+  'achlys': body('achlys', "Achlys", '208996;', 353.30862431538293, 0, 'sun'),
+  'mani': body('mani', "Máni", '307261;', 402.7959116616533, 0, 'sun'),
+  'varda': body('varda', "Varda", '174567;', 324.1345526598759, 0, 'sun'),
+  'varuna': body('varuna', "Varuna", '20000;', 350.00000006786365, 0, 'sun'),
+  'salacia': body('salacia', "Salacia", '120347;', 418.99999999999983, 0, 'sun'),
+  'orcus': body('orcus', "Orcus", '90482;', 454.99999999999983, 0, 'sun'),
+  'gonggong': body('gonggong', "Gonggong", '225088;', 614.9999999999998, 0, 'sun'),
+  'sedna': body('sedna', "Sedna", '90377;', 497.49999999999983, 0, 'sun'),
+  'oumuamua': body('oumuamua', "ʻOumuamua", '1I;', 0.0311813426009723, 0, 'sun'),
   chariklo: body('chariklo', 'Chariklo', '10199;', 124.43324035987013, 0, 'sun'),
   bienor: body('bienor', 'Bienor', '54598;', 67.99228574542066, 0, 'sun'),
   'diomedes': body('diomedes', 'Diomedes', '1437;', 59.4, 0, 'sun'),

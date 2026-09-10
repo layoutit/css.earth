@@ -63,7 +63,7 @@ const {
 } = await loadAstronomyPackage();
 
 const BODIES = OBJECTS.filter(body =>
-  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet"].includes(body.classification)).map(body => {
+  ["planet", "dwarf-planet", "satellite", "asteroid", "trans-neptunian", "comet", "interstellar"].includes(body.classification)).map(body => {
   if (!Object.hasOwn(ASTRONOMY_BODY_DATA, body.id)) throw new TypeError(`Unknown astronomy body: ${body.id}.`);
   return body.id as BodyId;
 });
@@ -304,7 +304,7 @@ const entries = BODIES.map((body) => {
     perihelionDirection,
     trueAnomalyDegrees,
     perihelionAu: semiMajorAxisAu * (1 - eccentricity),
-    aphelionAu: semiMajorAxisAu * (1 + eccentricity),
+    aphelionAu: eccentricity < 1 ? semiMajorAxisAu * (1 + eccentricity) : null,
   });
 });
 
@@ -432,7 +432,7 @@ ${
     },
   ) =>
     `  // a ${semiMajorAxisAu.toPrecision(5)} AU, e ${eccentricity.toPrecision(5)}, ` +
-    `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu.toPrecision(5)} AU\n` +
+    `perihelion ${perihelionAu.toPrecision(5)} AU, aphelion ${aphelionAu === null ? 'none (unbound)' : aphelionAu.toPrecision(5) + ' AU'}\n` +
     `  ${sourceKey(body)}: Object.freeze({\n` +
     (parent === "sun" ? "" : `    centerBodyId: ${JSON.stringify(parent)},\n    centerPositionAu: Object.freeze(${JSON.stringify(centerPositionAu)}),\n${epochStates.get(body)?.parentHeliocentricState ? `    parentHeliocentricState: ${JSON.stringify(epochStates.get(body)!.parentHeliocentricState)},\n` : ""}`) +
     `    semiMajorAxisAu: ${semiMajorAxisAu},\n` +
@@ -492,7 +492,7 @@ export function requireBodyFixedOrbitalVelocity(bodyId: string) {
 export interface BodyOrbit {
   semiMajorAxisAu: number; eccentricity: number; heliocentricDistanceAu: number;
   perihelionDirection: readonly number[]; trueAnomalyDegrees: number; inclinationDegrees: number;
-  perihelionAu: number; aphelionAu: number; centerBodyId?: string; centerPositionAu?: readonly number[];
+  perihelionAu: number; aphelionAu: number | null; centerBodyId?: string; centerPositionAu?: readonly number[];
 }
 
 export function requireBodyOrbit(bodyId: string): BodyOrbit {

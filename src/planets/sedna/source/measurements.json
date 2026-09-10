@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-09",
+  "periodHours": null,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed.",
+  "axesStatus": "Illustrative equal axes at the published effective diameter; these are not three independently measured axes.",
+  "radiusMeaning": "Volume-equivalent radius of the chosen illustrative equal-axis model, not a measured 3D-volume radius.",
+  "id": "sedna",
+  "name": "Sedna",
+  "jplId": "90377",
+  "horizons": "90377;",
+  "fullName": "90377 Sedna (2003 VB12)",
+  "fullAxesKm": [
+    995,
+    995,
+    995
+  ],
+  "radiusKm": 497.49999999999983,
+  "diameterKm": 995,
+  "diameterUncertaintyKm": {
+    "minus": 80,
+    "plus": 80
+  },
+  "population": "Detached trans-Neptunian object",
+  "periodText": "About 10.3 hours from photometry; aliases and a possible doubled shape period remain unresolved.",
+  "source": "https://arxiv.org/abs/1204.0899",
+  "credit": "Pál et al. (2012), Herschel/PACS thermophysical analysis; Gaudi et al. (2005), rotational photometry.",
+  "shapeMeaning": "Size-constrained spherical illustration at the 995 ±80 km thermal diameter. Herschel constrains effective size, not three axes; no resolved global shape or topography is represented.",
+  "introduction": "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.",
+  "papers": [
+    "https://doi.org/10.1051/0004-6361/201218874",
+    "https://doi.org/10.1086/444355",
+    "https://doi.org/10.1016/j.icarus.2024.116017"
+  ],
+  "referencePins": [
+    {
+      "path": "output/distant-worlds/references/sedna-pal-2012.pdf",
+      "url": "https://arxiv.org/pdf/1204.0899",
+      "resolvedUrl": "https://arxiv.org/pdf/1204.0899",
+      "bytes": 379111,
+      "sha256": "762181442ff374c35e500b6d7a916ebe8e9a63d5ba7fee68546c5f00ee535b08",
+      "contentType": "application/pdf",
+      "purpose": "Sedna thermal primary diameter, Pal et al. 2012"
+    },
+    {
+      "path": "output/distant-worlds/references/sedna-gaudi-2005.pdf",
+      "url": "https://www.astronomy.ohio-state.edu/gaudi.1/sedna.pdf",
+      "resolvedUrl": "https://www.astronomy.ohio-state.edu/gaudi.1/sedna.pdf",
+      "bytes": 95262,
+      "sha256": "7ec1bc5110ad945d48fa8c86f929ec6aad066e84ac884a21c811659f009523bd",
+      "contentType": "application/pdf",
+      "purpose": "Sedna photometric rotation, Gaudi et al. 2005"
+    },
+    {
+      "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
+      "url": "https://arxiv.org/abs/2309.15230",
+      "resolvedUrl": "https://arxiv.org/abs/2309.15230",
+      "bytes": 45900,
+      "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "JWST integrated spectroscopy; no mapped surface"
+    }
+  ],
+  "numericAnchors": [
+    {
+      "quantity": "thermal effective diameter",
+      "value": 995,
+      "unit": "km",
+      "uncertainty": "±80 km",
+      "location": "Pál et al. 2012 abstract and thermophysical-model discussion"
+    },
+    {
+      "quantity": "photometric period candidate",
+      "value": 10.273,
+      "unit": "hours",
+      "location": "Gaudi et al. 2005 abstract; neighboring aliases and approximately 18 h solution remain"
+    }
+  ],
+  "sourceSurvey": [
+    {
+      "url": "https://arxiv.org/abs/1204.0899",
+      "status": "included",
+      "adds": "Herschel effective primary diameter; equal axes remain illustrative."
+    },
+    {
+      "url": "https://doi.org/10.1086/444355",
+      "status": "included",
+      "adds": "Small photometric variation and rotation candidates; insufficient to select unique 3D axes."
+    },
+    {
+      "url": "https://doi.org/10.1016/j.icarus.2024.116017",
+      "status": "excluded-from-surface",
+      "adds": "JWST spectroscopy constrains integrated composition; it supplies no registered terrain or albedo map."
+    }
+  ],
+  "unresolved": [
+    "Thermal diameter does not establish a spherical surface; flattening, axis ratios and spin pole are unmeasured here.",
+    "No absolute meridian or sidereal spin solution is installed."
+  ],
+  "distanceAu": 82.85697523892613,
+  "classification": "trans-neptunian",
+  "shapeLabel": "Published size model; shape unresolved",
+  "references": [
+    {
+      "path": "output/distant-worlds/references/sedna-pal-2012.pdf",
+      "url": "https://arxiv.org/pdf/1204.0899",
+      "resolvedUrl": "https://arxiv.org/pdf/1204.0899",
+      "bytes": 379111,
+      "sha256": "762181442ff374c35e500b6d7a916ebe8e9a63d5ba7fee68546c5f00ee535b08",
+      "contentType": "application/pdf",
+      "purpose": "Sedna thermal primary diameter, Pal et al. 2012",
+      "file": "sedna-pal-2012.pdf"
+    },
+    {
+      "path": "output/distant-worlds/references/sedna-gaudi-2005.pdf",
+      "url": "https://www.astronomy.ohio-state.edu/gaudi.1/sedna.pdf",
+      "resolvedUrl": "https://www.astronomy.ohio-state.edu/gaudi.1/sedna.pdf",
+      "bytes": 95262,
+      "sha256": "7ec1bc5110ad945d48fa8c86f929ec6aad066e84ac884a21c811659f009523bd",
+      "contentType": "application/pdf",
+      "purpose": "Sedna photometric rotation, Gaudi et al. 2005",
+      "file": "sedna-gaudi-2005.pdf"
+    },
+    {
+      "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
+      "url": "https://arxiv.org/abs/2309.15230",
+      "resolvedUrl": "https://arxiv.org/abs/2309.15230",
+      "bytes": 45900,
+      "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "JWST integrated spectroscopy; no mapped surface",
+      "file": "sedna-gonggong-emery-2024.html"
+    }
+  ],
+  "survey": [
+    "Included: Herschel effective primary diameter; equal axes remain illustrative.  https://arxiv.org/abs/1204.0899",
+    "Included: Small photometric variation and rotation candidates; insufficient to select unique 3D axes.  https://doi.org/10.1086/444355",
+    "Excluded-from-surface: JWST spectroscopy constrains integrated composition; it supplies no registered terrain or albedo map.  https://doi.org/10.1016/j.icarus.2024.116017"
+  ]
+}

@@ -355,7 +355,7 @@
       "sha256": "cf6512831a00fabbe4b577fc396a7164c99325bcc0a8e35eb7d142dde7ac5a18",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,7 +380,7 @@
       "sha256": "dcbf53cc83b294e8111cf242e58a88a3c2269f0a16761ca6f4f85898add15395",
       "bytes": 10980,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/diomedes/diomedes-elevation-thumbnail.webp",
           "bytes": 5036,
           "sha256": "3a10c3a0eb100c166791ff56ef06f91a2977908e58ec82b85757d64e2a9e0a38",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/diomedes/diomedes-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/diomedes/diomedes-elevation-surface@2x.webp",
           "bytes": 265446,
           "sha256": "6cf156a55b0921b53cfee8bdc7faf70a1f0750879d9703bd60ca14a7bde26df3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -457,13 +457,13 @@
           "url": "/scenes/diomedes/diomedes-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/diomedes/diomedes-shape-surface@2x.webp",
           "bytes": 218474,
           "sha256": "85119ccacb2be2f70294934db274770074d6ce8501ff82dd8b61242a3c709d94",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

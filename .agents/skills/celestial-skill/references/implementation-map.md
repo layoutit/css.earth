@@ -54,6 +54,12 @@ fallback requirements are not the current authored-package template.
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/PlanetLayout.astro` |
 | Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare-planet-title-sources.mts`, `tools/prepare-surface-minimaps.mts` |
 | Search and marker presentation | `site/planet-search-objects.mts`, `tools/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
+| Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `src/platform/prepare-hyperbolic-path.mts`, shared world-context preparation and orbit validation/projector |
+
+For an unbound body, use the shared prepared hyperbolic path with explicit open
+endpoints and an epoch vertex. Do not wrap its anomaly, close its last edge or
+invent a revolution period. The finite display window is not a physical bound
+or a propagation-accuracy claim. See [open trajectories](../../../../docs/prepared-navigation-ownership.md#open-trajectories).
 
 Follow the selected preparation branch into its reusable implementation under
 `tools/objects/`. Preparation owns geometry, source interpretation, atlases,

@@ -57,9 +57,10 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
   // Painting and presentation measurement share the exact clipping path. A
   // measurement may stop once its consumer's existing fade is fully saturated.
   const visit = (vertices: readonly Vector3[], trail: readonly number[], activeChords: readonly number[] | undefined,
-    segment: (x0: number, y0: number, x1: number, y1: number, weight: number) => boolean, fullOrbit = false) => {
-    // Hover reveals the complete prepared ring, including zero-weight trail chords.
+    segment: (x0: number, y0: number, x1: number, y1: number, weight: number) => boolean, fullOrbit = false, closed = true) => {
+    // Hover reveals every prepared chord, but cannot close an open trajectory.
     const chords = fullOrbit ? undefined : activeChords;
+    const chordCount = closed ? vertices.length : vertices.length - 1;
     const eyes: (Vector3 | undefined)[] = [];
     const screens: (readonly number[] | undefined)[] = [];
     const eyeAt = (index: number) => eyes[index] ??= toEye(vertices[index]);
@@ -68,8 +69,9 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
     // new projections. These caches belong to one visit, never a stale view.
     const screenAt = (index: number) => screens[index] ??= project(eyeAt(index));
     const inside = (p: readonly number[]) => Math.abs(p[0]) <= clipX && Math.abs(p[1]) <= clipY;
-    for (let ordinal = 0; ordinal < (chords?.length ?? vertices.length); ordinal++) {
+    for (let ordinal = 0; ordinal < (chords?.length ?? chordCount); ordinal++) {
       const index = chords?.[ordinal] ?? ordinal;
+      if (index >= chordCount) continue;
       const weight = fullOrbit ? 1 : trail[index];
       if (!(weight > 0)) continue;
       const next = (index + 1) % vertices.length;
@@ -114,23 +116,23 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
     }
   };
   const projectRing = (vertices: readonly Vector3[], trail: readonly number[], activeChords?: readonly number[], fullOrbit = false,
-    retained?: ReturnType<typeof createRetainedRingProjection>): readonly OrbitSegment[] => {
+    retained?: ReturnType<typeof createRetainedRingProjection>, closed = true): readonly OrbitSegment[] => {
     if (retained) {
       retained.reset();
-      visit(vertices, trail, activeChords, retained.write, fullOrbit);
+      visit(vertices, trail, activeChords, retained.write, fullOrbit, closed);
       return retained.finish();
     }
     const segments: OrbitSegment[] = [];
     visit(vertices, trail, activeChords, (x0, y0, x1, y1, weight) => {
       segments.push(Object.freeze([x0, y0, x1, y1, weight]));
       return true;
-    }, fullOrbit);
+    }, fullOrbit, closed);
     return Object.freeze(segments);
   };
   return Object.assign(projectRing, {
     /** Exact projected extent, capped only at the caller's saturation point.
      * No partial geometry escapes this measurement-only operation. */
-    measureExtent(vertices: readonly Vector3[], trail: readonly number[], saturation: number, activeChords?: readonly number[]): number {
+    measureExtent(vertices: readonly Vector3[], trail: readonly number[], saturation: number, activeChords?: readonly number[], closed = true): number {
       if (!(saturation >= 1) || !Number.isFinite(saturation)) throw new TypeError('Orbit extent saturation must be finite and at least one pixel.');
       let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
       let extent = 1;
@@ -139,7 +141,7 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
         top = Math.min(top, y0, y1); bottom = Math.max(bottom, y0, y1);
         extent = Math.max(1, right - left, bottom - top);
         return extent < saturation;
-      });
+      }, false, closed);
       return Math.min(extent, saturation);
     },
   });

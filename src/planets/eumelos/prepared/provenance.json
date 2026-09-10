@@ -355,7 +355,7 @@
       "sha256": "02274aeb1ea9366ecd4cf1d93edd0ae05a027de53ad5261f0b3a1a2333755008",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,7 +380,7 @@
       "sha256": "0a39eac7089c03b3206f4e80e81ffd82a4b5ac1ac77d3dbb19b6aee734d591b0",
       "bytes": 9668,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/eumelos/eumelos-elevation-thumbnail.webp",
           "bytes": 5514,
           "sha256": "32feee1b79eef7b1a315a967e714036e132246c581a3829c3c4c448133f8a673",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eumelos/eumelos-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eumelos/eumelos-elevation-surface@2x.webp",
           "bytes": 300618,
           "sha256": "b604313e835cbcecfe3bb73358c29876061f200ac424fda91c22130667d76d58",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -457,13 +457,13 @@
           "url": "/scenes/eumelos/eumelos-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/eumelos/eumelos-shape-surface@2x.webp",
           "bytes": 227744,
           "sha256": "07a0c2b860dc2941e0445ebb153c8b379288819bbec20f713d36d2f8b5ebed3c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

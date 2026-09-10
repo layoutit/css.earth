@@ -463,7 +463,8 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
     padding-bottom: 0;
   }
 
-  .planet-viewport {
+  /* Body packages may emit site.css later; keep this responsive override stronger. */
+  body[data-object-shell] .planet-viewport {
     position: relative;
     inset: auto;
     order: 0;

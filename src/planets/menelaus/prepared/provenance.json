@@ -355,7 +355,7 @@
       "sha256": "6d021451ff77ee883cf053c605fdcd6de8774910a6f553e3734bfadbff7e7b8e",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -380,7 +380,7 @@
       "sha256": "5cef419c68954f6ac897c1137fdcf24a6a573dccb3a54174469009e62520a63c",
       "bytes": 11164,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -413,19 +413,19 @@
           "url": "/scenes/menelaus/menelaus-elevation-thumbnail.webp",
           "bytes": 4688,
           "sha256": "02aa7c63fe588bf751d6cd7aec666c5a9c1cf765f77848b0e0f0d1bb117731df",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/menelaus/menelaus-elevation-surface@2x.webp",
           "bytes": 258420,
           "sha256": "d7643837e56267dfbd453439e34ccb3ce79670e6825ddc2cdbf6454819341cef",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -457,13 +457,13 @@
           "url": "/scenes/menelaus/menelaus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/menelaus/menelaus-shape-surface@2x.webp",
           "bytes": 189398,
           "sha256": "56e5c7670b0579a22743dd0912f0fbb7eec5176e436470ed0970c2180cf48f42",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
