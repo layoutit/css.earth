@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "gerda",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "d0b4a2670b3b5be50f4ea2a72901937964545ef598a904c82ba6b06d2e4c37cc",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "683813254e3fa07ea80a916e8b1584e8489bc85d853db1abb4442a33f7a1a95a",
       "bytes": 9840,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/gerda/gerda-elevation-thumbnail.webp",
           "bytes": 5422,
           "sha256": "17d61188526d40ef2dd7f7720b54dfd155057475e145e8aeded3d413cc570c13",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gerda/gerda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gerda/gerda-elevation-surface@2x.webp",
           "bytes": 268992,
           "sha256": "573fac41966f8c8fe3a28d9933136a25ddb8d3e2386c0b5883ba3c8010f1e996",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/gerda/gerda-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/gerda/gerda-shape-surface@2x.webp",
           "bytes": 244562,
           "sha256": "bde5f4e5db985d70d986593a12a38e524ed5a8ab3c74f80807d844bd1083a4c2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "nysa",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "49ddba465ca9b6391d7dc8299c49c2309a360f30268bece4d8c1a7adadee7fa5",
       "bytes": 129688,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "714de0d27a735764056bad42f77613c671acabadfa72c8be4549e4fcb73d2b2d",
       "bytes": 7333,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/nysa/nysa-elevation-thumbnail.webp",
           "bytes": 4998,
           "sha256": "6e401cf417ae9dda94d21a9508c57ed727ad9d5b4ae38d3fdc58db49bba2823b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nysa/nysa-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nysa/nysa-elevation-surface@2x.webp",
           "bytes": 302888,
           "sha256": "a502f05e025a34a63fc573925233573590f7ae12c2eebc22ff5857a7618b6e25",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/nysa/nysa-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/nysa/nysa-shape-surface@2x.webp",
           "bytes": 202846,
           "sha256": "4e3f8f0f84a4664740b4d2b0fab6dfd9d45e896eb437184069e7da2e3ab51fa6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

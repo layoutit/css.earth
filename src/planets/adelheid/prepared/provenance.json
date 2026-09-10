@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "adelheid",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "10aace4ab515e08cf5ecbfe77fd3a7fc9f559519d9202ef6a2edd7b106ffe187",
       "bytes": 129364,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "5fba2621395a962d74c7cbe2a76a9ce0dca954f94158b6bbf73ec79a6837a039",
       "bytes": 9831,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/adelheid/adelheid-elevation-thumbnail.webp",
           "bytes": 5964,
           "sha256": "e8d4a324f491f50a620dd639a17dd56712bcee05b52d5702dc84064a795e4b7a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/adelheid/adelheid-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/adelheid/adelheid-elevation-surface@2x.webp",
           "bytes": 299342,
           "sha256": "6e15681a4a07ab2975b3ef8efe933c01c728eadea11808696057dbb998839992",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/adelheid/adelheid-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/adelheid/adelheid-shape-surface@2x.webp",
           "bytes": 220320,
           "sha256": "41a9b77029679a9ddb3ea3e5ac32d48941dfd8f7980300fe0b0be11a1d2d6327",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

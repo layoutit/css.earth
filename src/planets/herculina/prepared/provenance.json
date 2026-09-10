@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "herculina",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "2781684248c883af83718e222c487fa0b6b758a9d6277c2e42631a58d327a5e6",
       "bytes": 32486,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "b3b51b94a80981dcee9bed962cbfc8627b514c5823aa61a0082c696048f75a0e",
       "bytes": 8735,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/herculina/herculina-elevation-thumbnail.webp",
           "bytes": 5224,
           "sha256": "7275d726dfd95bdfcba7e0211e77588184839a17b0e6157111532af8d9e0da5d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/herculina/herculina-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/herculina/herculina-elevation-surface@2x.webp",
           "bytes": 280504,
           "sha256": "9073a63770d47ad61c5c306d8bc44d0bacd71be6aa6e216f921f7e9dbe4a5517",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/herculina/herculina-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/herculina/herculina-shape-surface@2x.webp",
           "bytes": 195448,
           "sha256": "76ac26aa9c4932d84962f75aad3601321a9a0a0cd9c3291645805917eb6cea91",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -67,10 +67,14 @@
       "expectedBytes": 6720450,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2019/08/STScI-01EVSV9A3VN7VYXN5H6Z1GDG93.tif/jcr:content/renditions/Full%20Res.png"
+          }
+        ]
       }
     },
     {
@@ -78,7 +82,7 @@
       "path": "surface/juno-pia24239-north-pole-detail.tif",
       "expectedSha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be",
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif",
-      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma W\u00e4lim\u00e4ki",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Emma Wälimäki",
       "license": "CC BY",
       "licenseEvidence": [
         "https://science.nasa.gov/photojournal/jupiter-north-pole-detail/"
@@ -91,10 +95,14 @@
       "expectedBytes": 193959,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
       "capture": {
-        "spacecraftIds": [
-          "juno"
-        ],
-        "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "juno",
+            "missionId": "juno",
+            "evidence": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia24/pia24239/PIA24239.tif"
+          }
+        ]
       }
     },
     {
@@ -102,7 +110,7 @@
       "path": "surface/juno-pia23808-north-polar-projection.jpg",
       "expectedSha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8",
       "origin": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg",
-      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichst\u00e4dt",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Gerald Eichstädt",
       "license": "NASA/JPL Media Usage Guidelines with contributor credit",
       "licenseEvidence": [
         "https://www.jpl.nasa.gov/images/pia23808-cyclones-of-color-at-jupiters-north-pole/"
@@ -115,10 +123,14 @@
       "expectedBytes": 633958,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
       "capture": {
-        "spacecraftIds": [
-          "juno"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "juno",
+            "missionId": "juno",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23808/PIA23808.jpg"
+          }
+        ]
       }
     },
     {
@@ -139,10 +151,14 @@
       "expectedBytes": 909084,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
       "capture": {
-        "spacecraftIds": [
-          "juno"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "juno",
+            "missionId": "juno",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23556/PIA23556.jpg"
+          }
+        ]
       }
     },
     {
@@ -163,10 +179,14 @@
       "expectedBytes": 154800,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh --polar-only",
       "capture": {
-        "spacecraftIds": [
-          "juno"
-        ],
-        "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "juno",
+            "missionId": "juno",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia21/pia21382/PIA21382.jpg"
+          }
+        ]
       }
     },
     {
@@ -215,10 +235,14 @@
       "expectedBytes": 25925760,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits"
+          }
+        ]
       }
     },
     {
@@ -236,10 +260,14 @@
       "expectedBytes": 25925760,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh",
       "capture": {
-        "spacecraftIds": [
-          "hubble"
-        ],
-        "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "hubble",
+            "missionId": "hubble",
+            "evidence": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/jupiter/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits"
+          }
+        ]
       }
     },
     {

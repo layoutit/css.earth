@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "elpis",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "6a4303f1791e988fba36d8524815aa00799d0268b7f81d4d263da431f15b331f",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "6d3393f42b7446a4fd99ad94e3da6e4be1eefca66acd63cc6a3395fc164523ef",
       "bytes": 8270,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/elpis/elpis-elevation-thumbnail.webp",
           "bytes": 5454,
           "sha256": "33bb69415659c61393f192140ac1ff9c4393da01fd6d3192a08b029be384ae84",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/elpis/elpis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/elpis/elpis-elevation-surface@2x.webp",
           "bytes": 284578,
           "sha256": "02278b1246bf4fd02b60b420389412f89281834d6cd11f7e6a997fc05aa5a06e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/elpis/elpis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/elpis/elpis-shape-surface@2x.webp",
           "bytes": 204610,
           "sha256": "f4d019d89290f3ebc73c791d156ec8d91e23aac42a2035e9d4ae00550d0a2332",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

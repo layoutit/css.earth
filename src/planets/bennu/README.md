@@ -95,3 +95,7 @@ Local boulder alignment to that simplified silhouette remains approximate.
 The albedo view covers approximately 55 degrees south to 55 degrees north and marks missing poles. Its publisher stretch maps 0.002–0.007 albedo to codes 1–254. The monochrome basemap uses different phase normalization (Minnaert at 30 degrees) and source control (SPC v28), so it remains a separate view rather than filling the albedo gaps. Spherical mapping cannot register individual boulders perfectly to the simplified OLA silhouette.
 
 </details>
+
+## Catalogue attribution
+
+The OSIRIS-REx inputs remain explicitly attributed to the OSIRIS-REx mission and spacecraft. The vehicle’s later OSIRIS-APEX mission is represented separately in the catalogue; its participation does not give APEX credit for the Bennu observations. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.

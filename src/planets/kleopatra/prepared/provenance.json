@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "kleopatra",
   "basis": "recovered",
   "manifest": {
@@ -254,7 +254,7 @@
       "sha256": "a0a22f4a3bdae76cc5235d7cb90c1b75198eebbce5995d661c19d392b4278fc7",
       "bytes": 190459,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -282,7 +282,7 @@
       "sha256": "9bac00803721992cd31b42a26fc3a148cc4bb7377816d55896bc2a8653b8b28b",
       "bytes": 8996,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -315,13 +315,13 @@
           "url": "/scenes/kleopatra/kleopatra-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kleopatra/kleopatra-shape-surface@2x.webp",
           "bytes": 189100,
           "sha256": "f2e92e0551c2e56603fe9c31be25938f4e20e494884cb14d85d4b4ef15a6e0d5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

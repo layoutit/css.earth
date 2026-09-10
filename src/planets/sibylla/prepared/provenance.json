@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "sibylla",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "f156336a2048015bfabaf6dc2be0d5a06683cdce4662d02c7e71931b33bbbb79",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "18c94734db443eaaf65e052ad70c6064c6c42222026c99c7dbbeba5016c7b4ad",
       "bytes": 9728,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/sibylla/sibylla-elevation-thumbnail.webp",
           "bytes": 5738,
           "sha256": "a72f647beb40e345a78f5551737f72e57e20974458ae2b65d3627b1f2e33c111",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sibylla/sibylla-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sibylla/sibylla-elevation-surface@2x.webp",
           "bytes": 262412,
           "sha256": "25509a081a81a5dc3431eaafb5dab3dc9cd5627633b74b60eaf7e38404d30a76",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/sibylla/sibylla-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/sibylla/sibylla-shape-surface@2x.webp",
           "bytes": 220798,
           "sha256": "8dbfe0a2e99ec5fcbf3e09c72c93914d8914e1b60c279bcefcfec8bcfa2490f9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

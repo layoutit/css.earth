@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "betulia",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "9fcf177c2b17a52154b3bfb84948366300b54ed860927d4043f96c9045eb1a1a",
       "bytes": 67284,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -350,7 +350,7 @@
       "sha256": "bd6462fee2c9a19d0c884862b6a0e7f9f59f6b5a29aff4d1701b1a8ae28efa97",
       "bytes": 8028,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -383,19 +383,19 @@
           "url": "/scenes/betulia/betulia-elevation-thumbnail.webp",
           "bytes": 5480,
           "sha256": "e75537f81c9916849f67e8250928f0812c260fdd3b09f06179c0e6033b335e4b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betulia/betulia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betulia/betulia-elevation-surface@2x.webp",
           "bytes": 327172,
           "sha256": "d6ccab96dcee8d74612020d2b1a60302c99e16f798ab8cf04c370d1f0c10e6e2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -427,13 +427,13 @@
           "url": "/scenes/betulia/betulia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/betulia/betulia-shape-surface@2x.webp",
           "bytes": 206516,
           "sha256": "22aea252cfd711ac79231e8e06e19e97e4a4cb41bb151d36e72b7260fab5117a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

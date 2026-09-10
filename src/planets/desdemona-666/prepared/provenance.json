@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "desdemona-666",
   "basis": "recovered",
   "manifest": {
@@ -327,7 +327,7 @@
       "sha256": "991cb9699f0cfeacb5f8304d276bd87c6fa9b28d6bdc5322f17b5286618131b0",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -352,7 +352,7 @@
       "sha256": "5ffbb1cef826629890ab876ad8a3e989bf09c3e825448f1ba6bd78f1653fb2c7",
       "bytes": 13892,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -385,19 +385,19 @@
           "url": "/scenes/desdemona-666/desdemona-666-elevation-thumbnail.webp",
           "bytes": 5012,
           "sha256": "009a7848f6b530a3ef43d1214d0c75f875c5d1dbe81027b8a3bc8a7b0a7bac72",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-elevation-surface@2x.webp",
           "bytes": 308728,
           "sha256": "2933c6e977cde9ff043d4cc34a6d7b9d16cc15c9b3d94e1385ff65587ef5b2e9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -429,13 +429,13 @@
           "url": "/scenes/desdemona-666/desdemona-666-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/desdemona-666/desdemona-666-shape-surface@2x.webp",
           "bytes": 243930,
           "sha256": "22b064b6922694068acff5148c171e1fbc0eebdd84bb8f092b7c8610d0567525",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

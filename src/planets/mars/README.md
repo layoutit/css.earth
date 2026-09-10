@@ -207,3 +207,7 @@ See the [contributor guide](../README.md) for shared commands. Body checks live
 under `tests/objects/unit/mars/`.
 
 </details>
+
+## Catalogue attribution
+
+The visible mosaic retains its collective Viking-orbiter capture credit. The catalogue now distinguishes Viking 1 and Viking 2 and their orbiters and landers, but this pinned image alone does not identify its individual contributors. The Missions tab presents that limit without assigning the mosaic to the landers or guessing individual mission links. See the [shared catalogue contract](../../../docs/architecture/exploration-catalog.md) and this body’s [source manifest](source/manifest.json). Dataset bytes and rendering are unchanged by this metadata migration.

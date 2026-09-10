@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "bacchus",
   "basis": "recovered",
   "manifest": {
@@ -329,7 +329,7 @@
       "sha256": "c4e8dd389eb60a0dba628f6f369a1d04fbfa7ff31ca7502248ed91502ec7090b",
       "bytes": 14163,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -354,7 +354,7 @@
       "sha256": "fa99c3d12d673f06214a4fd73934027af1176253ecd64482c64824bd62b6303c",
       "bytes": 10485,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -387,19 +387,19 @@
           "url": "/scenes/bacchus/bacchus-elevation-thumbnail.webp",
           "bytes": 5398,
           "sha256": "b2da157b6e277fe5a508ebab23b244717b03e959c031970981bf53620668c8d1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bacchus/bacchus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bacchus/bacchus-elevation-surface@2x.webp",
           "bytes": 193626,
           "sha256": "3299b57881d334649dd584e7cf168a759395337126163476c82b52cbd48a8fb4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -431,13 +431,13 @@
           "url": "/scenes/bacchus/bacchus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bacchus/bacchus-shape-surface@2x.webp",
           "bytes": 163996,
           "sha256": "4837f0f87cd5726af4efa08588a4c8f530ed7787f4eb3421d634a66249c4e35f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

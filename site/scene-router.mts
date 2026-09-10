@@ -30,6 +30,7 @@ import * as applicationWorldContext from './application-world-context.mts';
 import { solarSystemFocus, watchOverviewSelection } from './overview-selection.mts';
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
+import { readDatasetUrl, withDataset } from './dataset-url.mts';
 
 
 export function createSceneRouter({
@@ -213,6 +214,22 @@ export function createSceneRouter({
           if (drawnUrl) request.url = session.url = new URL(drawnUrl, windowTarget.location.href).href;
         }
       }
+      const datasetController = request?.controller ?? new AbortController();
+      session.lifetime.onDispose(() => datasetController.abort());
+      try {
+        const selected = session.url ? await selectDataset(session, session.url, datasetController.signal, { initial: true }) : true;
+        if (active !== session || datasetController.signal.aborted) return false;
+        if (!selected) throw new Error('Dataset selection was superseded.');
+      } catch (error) {
+        if (active !== session || datasetController.signal.aborted) return false;
+        shell.setDatasetNotice?.(`${errorMessage(error)} Showing the default dataset.`);
+        // A direct invalid link stays visible for diagnosis. A completed body
+        // navigation publishes the destination's actual default selection.
+        if (request) {
+          const datasets = mount.datasets, current = datasets?.current();
+          request.url = session.url = withDataset(new URL(request.url), current && current !== datasets?.defaultId ? current : null).href;
+        }
+      }
       if (request) historyOwner?.commit(request.url, request.options);
       if (mount.sharedView && windowTarget.location?.href) {
         session.viewUrl = bindViewUrl({ windowTarget, view: mount.sharedView,
@@ -239,6 +256,10 @@ export function createSceneRouter({
       shell.setCamera?.(mount);
       session.lifetime.onDispose(() => shell.setCamera?.(null));
       sceneState = "ready";
+      if (mount.datasets) session.lifetime.onDispose(mount.datasets.subscribe(() => {
+        if (active !== session || pending || sceneState !== 'ready') return;
+        syncDatasetUrl(session);
+      }));
       hasPresented = true;
       if (pending === request) pending = null;
       setOverview(Boolean(overviewScopeFromUrl(session.url ?? windowTarget.location?.href ?? 'https://example.test')));
@@ -257,6 +278,34 @@ export function createSceneRouter({
     const saved = active?.mount?.sharedView?.capture(motionEnabled);
     if (saved) url.searchParams.set('v', new URLSearchParams(formatSharedView(saved)).get('v')!);
     return url.pathname + url.search + url.hash;
+  }
+
+  function syncDatasetUrl(session: Session) {
+    const datasets = session.mount?.datasets;
+    if (!datasets || !session.url || active !== session) return;
+    const id = datasets.current();
+    if (id === null) return;
+    const url = withDataset(new URL(captureUrl() ?? session.url, windowTarget.location.href), id === datasets.defaultId ? null : id);
+    session.url = url.href;
+    historyOwner?.commit(url.href, { history: 'replace' });
+    session.shell?.setDatasetNotice?.(null);
+  }
+
+  function selectDataset(session: Session, href: string, signal: AbortSignal, { initial = false } = {}): boolean | Promise<boolean> {
+    const { id, requested } = readDatasetUrl(new URL(href));
+    const datasets = session.mount?.datasets;
+    if (requested && (!datasets || !datasets.ids.includes(id!))) throw new RangeError(`Dataset “${id}” is unavailable on this object.`);
+    if (!datasets || initial && !requested) return true;
+    const selected = id ?? datasets.defaultId;
+    const finish = (committed: boolean) => {
+      if (!committed || signal.aborted) return false;
+      session.shell?.setDatasetNotice?.(null);
+      if (requested) session.shell?.showDataset?.();
+      return true;
+    };
+    // Selecting the committed default also cancels an older, still decoding
+    // manual choice. Reading current() alone cannot establish that no work is pending.
+    return datasets.select(selected, { signal }).then(finish);
   }
 
   function navigate(id: string, options: NavigationOptions = {}): Promise<boolean | undefined> {
@@ -292,9 +341,10 @@ export function createSceneRouter({
     else historyOwner?.checkpoint();
     active?.viewUrl?.destroy();
     if (active) active.viewUrl = null;
-    const url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
+    let url = new URL(options.url ?? windowTarget.location?.href ?? object.route, windowTarget.location?.href);
     if (!options.url) {
       url.pathname = object.route; url.searchParams.delete('v'); url.searchParams.delete('overview');
+      url = withDataset(url, null);
       if (options.overview) url.searchParams.set('overview', options.overviewScope ?? 'solar-system');
     }
     const request: Request = { id, cancelledFlight, controller: new AbortController(), lifetime: createSceneLifetime(),
@@ -323,12 +373,22 @@ export function createSceneRouter({
     const source = active;
     try {
       if (source && objectId === object.id && sceneState === 'ready') {
+        const datasetLink = Boolean(request.options.url) && new URL(request.url).hash.split('&').some(field => /^#?dataset=/.test(field));
+        const datasetSelection = selectDataset(source, request.url, request.controller.signal);
+        if (!(typeof datasetSelection === 'boolean' ? datasetSelection : await datasetSelection)) {
+          if (pending !== request) return false;
+          pending = null; request.lifetime.destroy();
+          syncDatasetUrl(source);
+          await bindSessionView(source, { restore: false }); syncPlayback();
+          return false;
+        }
+        if (pending !== request) return false;
         const restore = request.options.history === 'pop' ||
           (Boolean(request.options.url) && new URL(request.url).searchParams.has('v'));
         if (restore) {
           if (request.options.history === 'pop' || request.url !== windowTarget.location.href) historyOwner?.commit(request.url, request.options);
           source.url = request.url;
-        } else if (!request.cancelledFlight && !request.options.preserveView && navigation.focus) {
+        } else if (!datasetLink && !request.cancelledFlight && !request.options.preserveView && navigation.focus) {
           syncPlayback();
           const focused = await request.lifetime.wait(navigation.focus({ objectId: object.id,
             mount: source.mount!, signal: request.controller.signal, reducedMotion: reducedMotionActive,
@@ -340,7 +400,7 @@ export function createSceneRouter({
           const changesSelection = overview !== Boolean(overviewScopeFromUrl(request.url)) ||
             overviewScopeFromUrl(windowTarget.location.href) !== overviewScopeFromUrl(request.url);
           historyOwner?.commit(request.url, { ...request.options,
-            history: changesSelection ? request.options.history : 'replace' });
+            history: changesSelection || datasetLink ? request.options.history : 'replace' });
         }
         setOverview(Boolean(overviewScopeFromUrl(request.url)));
         await bindSessionView(source, { restore });
@@ -390,10 +450,11 @@ export function createSceneRouter({
       centeredObjectId = null;
       worldContextMount?.setNavigationInFlight?.(false);
       if (active === source && source) {
+        source.shell?.setDatasetNotice?.(errorMessage(error));
         // The source still owns the last drawn camera when destination loading
         // fails. Rebinding its URL writer must not replay the departure pose.
         const url = captureUrl();
-        if (url && windowTarget.location.pathname !== new URL(source.url ?? windowTarget.location.href).pathname) historyOwner?.commit(url, { history: 'replace' });
+        if (url) historyOwner?.commit(url, { history: 'replace' });
         await bindSessionView(source, { restore: false });
         source.viewUrl?.flush(); syncPlayback();
         if (!record(error) || error.preserveView !== true) report(error);
@@ -595,7 +656,7 @@ export function createSceneRouter({
           // The mounted Sun and its overview share the same camera, detail and
           // subscriptions. Change their selection in place in either direction.
           setOverview(next.overview);
-          const url = new URL(windowTarget.location.href);
+          const url = withDataset(new URL(windowTarget.location.href), null);
           if (next.overview) url.searchParams.set('overview', 'solar-system');
           else url.searchParams.delete('overview');
           session.url = url.href;

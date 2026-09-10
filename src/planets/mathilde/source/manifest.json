@@ -42,10 +42,14 @@
       "expectedBytes": 70226,
       "expectedSha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/253mathilde.tab"
+          }
+        ]
       }
     },
     {
@@ -73,10 +77,14 @@
       "expectedBytes": 236192,
       "expectedSha256": "0b4acb5a2bc47697b9bb4d7c1e2a6a42e330bda3b241c10da2376c2a19ebae66",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/253mathilde.tab"
+          }
+        ]
       }
     },
     {
@@ -109,10 +117,14 @@
       "expectedBytes": 330486,
       "expectedSha256": "67437ac67da5fa50723b657d472191131d7cebe7d62358270e5c03c1bb98181e",
       "capture": {
-        "spacecraftIds": [
-          "near-shoemaker"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "near-shoemaker",
+            "missionId": "near-shoemaker",
+            "evidence": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg"
+          }
+        ]
       }
     },
     {

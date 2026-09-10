@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "julia",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "aa0104b2bd32fcf228a7abdacc8b5223890562bb11c74f61a4dcbefb5e2dead2",
       "bytes": 363259,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "a13327d2fac6c271ab24b9ba7867e57feda5358ff3837cbeb3fa556a0489ad17",
       "bytes": 6668,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/julia/julia-elevation-thumbnail.webp",
           "bytes": 5086,
           "sha256": "d8b173920aba3b2227db4c250541afcac08e8952ccbd376345b099a1c7a91496",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/julia/julia-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/julia/julia-elevation-surface@2x.webp",
           "bytes": 305474,
           "sha256": "b9be29f330924a65af383d6c3fbcc2c3957ce35a17debb7553b0e164daf65610",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/julia/julia-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/julia/julia-shape-surface@2x.webp",
           "bytes": 222628,
           "sha256": "33c3b7ce0ecad43c71176dbd9a9fae084a95e4b079e6fa2e31c0d7d4c9440fec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

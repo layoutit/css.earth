@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "yorp",
   "basis": "recovered",
   "manifest": {
@@ -329,7 +329,7 @@
       "sha256": "f9047ccbf39831b20d4571f17158f6960313d1b51c9d4ea429162ddb614a51e7",
       "bytes": 16131,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -354,7 +354,7 @@
       "sha256": "e84242a1a3fec598bb6446066bfbe6cb732db84e380b4f1a8fa0384784e14b34",
       "bytes": 7303,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -387,19 +387,19 @@
           "url": "/scenes/yorp/yorp-elevation-thumbnail.webp",
           "bytes": 6790,
           "sha256": "6eee5d1b476bebd6f1c5ca831c13a976c7e9e813bbce0201c8d673b0412a3de9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/yorp/yorp-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/yorp/yorp-elevation-surface@2x.webp",
           "bytes": 227432,
           "sha256": "c00a5cb83f222a51a4f5a0a94a9fc5f9ab1683ff0bef9b9bfe620b911c849ccf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -431,13 +431,13 @@
           "url": "/scenes/yorp/yorp-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/yorp/yorp-shape-surface@2x.webp",
           "bytes": 190290,
           "sha256": "5fafecb03476ea46ed38da686fb494dda076324963bb676ce695159041629e2d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

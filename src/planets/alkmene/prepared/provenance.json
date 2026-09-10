@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "alkmene",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "b1248125111cb430f90a711830816a8132f7fed1682bbebab7e10ee127af24d5",
       "bytes": 82546,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "1d9a6498ff0e81974c6bd5ae267287ca9d864164df4c3b2cca5aab0ea8cdf1b6",
       "bytes": 9153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/alkmene/alkmene-elevation-thumbnail.webp",
           "bytes": 5990,
           "sha256": "d9ee369ea8fd0ab67a5dbc91c0542fed3d65b4dc2373471ba19ee60de54d9321",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alkmene/alkmene-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alkmene/alkmene-elevation-surface@2x.webp",
           "bytes": 298774,
           "sha256": "8c55567bd095690b7ff377f534955c2580a294643b2da2e0801dc234cbf46e53",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/alkmene/alkmene-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/alkmene/alkmene-shape-surface@2x.webp",
           "bytes": 229362,
           "sha256": "87c9bda56950e6af3d4fa6055aa3c3544fdee001e259e6145abc0346c25c217a",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

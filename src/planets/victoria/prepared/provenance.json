@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "victoria",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "5caae90df135c838265bd8fe25a7027e16b819f6d03e4e985980a1ef1ef931ec",
       "bytes": 172219,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "eb19e0882c1db45d947d4c63c628c1b0ee3927e90a0d1b6a63ba08226d75d639",
       "bytes": 8351,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/victoria/victoria-elevation-thumbnail.webp",
           "bytes": 5780,
           "sha256": "f4fff2876dd0d3023a6817ef0667150cee18fe3470fe78a99e25830c9073e6e3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/victoria/victoria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/victoria/victoria-elevation-surface@2x.webp",
           "bytes": 336790,
           "sha256": "ef447dbc0e68a3a974bf47e30208ab0bdc856dd824ec33341c288950c13e9310",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/victoria/victoria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/victoria/victoria-shape-surface@2x.webp",
           "bytes": 218708,
           "sha256": "a4875b1446990e425c96cc01b5b859218713ba6461dc0e43acc5e83e43e18993",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

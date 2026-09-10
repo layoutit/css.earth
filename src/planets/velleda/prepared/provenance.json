@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "velleda",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "78ec4654953bce428c657665cc21c70e933184fdeb4952e7243df70d97be698e",
       "bytes": 82627,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "87ff365448e6a8c40a97203d9603b49ae4555a33e84f1931330783eb26b1b90d",
       "bytes": 9850,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/velleda/velleda-elevation-thumbnail.webp",
           "bytes": 5560,
           "sha256": "4479395533118ffeb8dccb69506cebab5ab9105fb3beab39229d11d70abdaca7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/velleda/velleda-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/velleda/velleda-elevation-surface@2x.webp",
           "bytes": 295224,
           "sha256": "6e9d4fdb8e523a9637c378b31b0dd4508610b90aff98df0cf0cb8b5f69a85019",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/velleda/velleda-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/velleda/velleda-shape-surface@2x.webp",
           "bytes": 211014,
           "sha256": "44194f12aefab1207e801c585ca48a8a8ffd3fbdc5d88499986be61643182bad",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

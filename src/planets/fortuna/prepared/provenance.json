@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "fortuna",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "2524c91828685a8f8e6d12a96e84187c2b7b68da1723c3055265f561380af726",
       "bytes": 557179,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "dd11a49fdd757b9bb48957fb256b945865f75e4c20f114008cb85c41f8ec1b46",
       "bytes": 7785,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/fortuna/fortuna-elevation-thumbnail.webp",
           "bytes": 5534,
           "sha256": "b42567210f3f8d4763c5269cb6935011c774a6c69b033c88a418a4e1d94f7abf",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/fortuna/fortuna-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/fortuna/fortuna-elevation-surface@2x.webp",
           "bytes": 309980,
           "sha256": "c17f9a6d7eaec220af5155d593ddd531068d2d07b86466b74f7f2fa9e46cdd70",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/fortuna/fortuna-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/fortuna/fortuna-shape-surface@2x.webp",
           "bytes": 224710,
           "sha256": "e8af4a99e44dc6ea5eef13803aa1528427f81139ff09bdf76fe9c93c5f9afffa",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

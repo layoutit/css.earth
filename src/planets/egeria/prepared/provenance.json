@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "egeria",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "4b3f0fd7817054f32c8d8703149bf81501cdcb41257ce232b3a59d9436864392",
       "bytes": 468859,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "d1ce1d9f83980d304410b5ccb7d9c40c930c4dcd5bf19f1f3a3cab8f1c4001d0",
       "bytes": 8087,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/egeria/egeria-elevation-thumbnail.webp",
           "bytes": 5602,
           "sha256": "5391f248ca1b72b1ab0e59b491c886291c18aa5bc5b7e27d3c08e9a5f0fd1f91",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/egeria/egeria-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/egeria/egeria-elevation-surface@2x.webp",
           "bytes": 324912,
           "sha256": "e332a2c244cea7840d7808ffe7c35f8caa6cd23d33e7cbf34ffef350f15a065d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/egeria/egeria-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/egeria/egeria-shape-surface@2x.webp",
           "bytes": 221916,
           "sha256": "7005e3d2255f0c4395c16bbad24925399f7de242a1a2cebb7ec4ea1a4f65213e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

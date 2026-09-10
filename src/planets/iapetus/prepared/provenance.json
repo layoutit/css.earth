@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "iapetus",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3c108e94860227c834c7660432368431f6f8f8b89179475225d25be8c382ae96"
+    "sha256": "669bcc9dbd70ed8c9769cc1a1eb4d9a45e323a5e9db1a133a3b0ae8cb6d2bb6d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -438,17 +438,31 @@
       },
       "coverage": "USGS May 2008 Cassini/Voyager mosaic. Exactly zero is GeoTIFF no-data; preserve all other values, including dark terrain. Voyager covers poles and some areas were acquired in Saturnshine. Photographed shading and resolution vary.",
       "capture": {
-        "spacecraftIds": [
-          "cassini",
-          "voyager-1",
-          "voyager-2"
-        ],
-        "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+            "missionId": "cassini"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-1",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+            "missionId": "voyager-1"
+          },
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://planetarymaps.usgs.gov/mosaic/Iapetus_Cassini_Voyager_mosaic_global_783m.tif",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
       "bytes": 16612487,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -485,15 +499,19 @@
       },
       "coverage": "Published global rectangular mosaic without a separate validity mask. Preserve every supplied pixel: the dark leading hemisphere is real surface albedo. Coarse polar coverage, patch seams and residual photographed shading remain.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18436.jpg",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b",
       "bytes": 4989080,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -532,15 +550,19 @@
       },
       "coverage": "Supported detector apertures cover approximately 23.35% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f",
       "bytes": 144017,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -572,15 +594,19 @@
       },
       "coverage": "Supported detector apertures cover approximately 23.35% of the reference sphere by angular grid weighting, not measured physical mesh area. Native resolution varies; output grid spacing is not observation detail. Preserve unsupported gaps. No photometric correction; registration limits are in cassini-ice/evidence/registration.md.",
       "capture": {
-        "spacecraftIds": [
-          "cassini"
-        ],
-        "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "cassini",
+            "evidence": "https://vims.univ-nantes.fr/cube/1568129671_1",
+            "missionId": "cassini"
+          }
+        ]
       },
       "sha256": "399a434937605b2d3215a3691fb630435b4957ff8b5eb23334b42bf42f440fdc",
       "bytes": 109434,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -597,7 +623,7 @@
       "sha256": "9385ba5b2291ed240afa983c52dbbcfa72d0bcea81636562869077b56f3466a4",
       "bytes": 13167,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -637,19 +663,19 @@
           "url": "/scenes/iapetus/iapetus-normal-thumbnail.webp",
           "bytes": 3272,
           "sha256": "08a31039ae1c61ae8ec62e23af063c3b714401dd5e011fec73d50032094ff125",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-normal-surface@2x.webp",
           "bytes": 5599434,
           "sha256": "cac49dcf9c062fc702a97a3d5dbcaae88da67c7d2be0fc799f02c6d7ea92c14b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-normal-poles@2x.webp",
           "bytes": 66522,
           "sha256": "5fb1afe9c68fe35c7cc9b198e45df62d95782c6bcd98ec4490b3d28697e14df0",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -685,19 +711,19 @@
           "url": "/scenes/iapetus/iapetus-enhanced-thumbnail.webp",
           "bytes": 5528,
           "sha256": "8ae7c9f2f827c49ba2ef2d9b6e019803a55d21dfd42d61ebfe031968ebc8c061",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-enhanced-surface@2x.webp",
           "bytes": 5088356,
           "sha256": "5a16eeba8ee8148781d8fbf256e4071d182819010b1311bf5784b46de20cd163",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-enhanced-poles@2x.webp",
           "bytes": 78254,
           "sha256": "23ab4d0e5828186d448bde797f6b00348be8a7e7e23a6a3a3db4f1a3b219f223",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -750,19 +776,19 @@
           "url": "/scenes/iapetus/iapetus-infrared-thumbnail.webp",
           "bytes": 2804,
           "sha256": "c80e178efdeb9b6c81531b06e88bf688e971647453da47c9dd0d2e881d1d6da9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-infrared-surface@2x.webp",
           "bytes": 38724,
           "sha256": "8557d0c4cb21fc54106d369105c4ac2949c9b738507edf7307b49e065a06fd6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-infrared-poles@2x.webp",
           "bytes": 2398,
           "sha256": "f598c19f08a618951ca07bb0cf35974fdbd8fa41b79afa0192900abde9aefd49",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -795,25 +821,25 @@
           "url": "/scenes/iapetus/iapetus-ice-absorption-thumbnail.webp",
           "bytes": 1420,
           "sha256": "fcebc06a9fd12623b7541e2929ecb2867a2b30d026555a3fb1487a74810f3317",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-ice-absorption-legend.webp",
           "bytes": 146,
           "sha256": "ed82e428e522e7e2d075c9f2d7989d8f3adb9c3ed7989f80445ad69750361b6e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-ice-absorption-surface@2x.webp",
           "bytes": 19840,
           "sha256": "790583b5ed53a39c8d6d81ebf63b75251e5b7e89a9c4d4bedef81679926e52c2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/iapetus/iapetus-ice-absorption-poles@2x.webp",
           "bytes": 1728,
           "sha256": "070a63e7aa4182c1403f153aa9aeca56c1a91e843f65f5d82f62f3850fa7c709",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

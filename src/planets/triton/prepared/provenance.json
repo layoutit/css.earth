@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "triton",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "116a6103f62e803924228220a30268e287bb846e171a80cae50c09c7c7e4b053"
+    "sha256": "723d65e146ae88aa8dac3b6c4f92cb1c2035959b265cff5e13f9b9548ac3a188"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -384,15 +384,19 @@
       },
       "coverage": "Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://www.lpi.usra.edu/icy_moons/images/tnmap-cyl-KH.jpg",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "ff533af3163f53cc5560cd983cfe0f06b1c2cd0f3db36518d4c5cc5f5ddfeabb",
       "bytes": 12442504,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -418,7 +422,7 @@
       "sha256": "0204e69032f964e6cde29c866bea48fff33c34d6db2947ab0bd2d43107c18779",
       "bytes": 12149,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -437,7 +441,7 @@
       "sha256": "1f3e3ca7884365b866b5c26dc6243932dec7da61e927ed5614a5633a3382e32d",
       "bytes": 13670,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -458,15 +462,19 @@
       "falseColor": false,
       "coverage": "Native clear-filter Voyager frames, corrected independently using source capture geometry before compositing. Missing and unstable geometry stay unavailable.",
       "capture": {
-        "spacecraftIds": [
-          "voyager-2"
-        ],
-        "evidence": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "voyager-2",
+            "evidence": "https://www.sciencebase.gov/catalog/file/get/6515fe80d34e469cabfce1bb?f=__disk__9c%2F3f%2F3a%2F9c3f3acb71a18cd818ce74c4703f23ca940b4594",
+            "missionId": "voyager-2"
+          }
+        ]
       },
       "sha256": "59c2a4133472869afddc42c00b5a9becd7c0dda028ac646490af933ac0ce2fac",
       "bytes": 103721158,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -490,7 +498,7 @@
       "sha256": "fb3b4056001a0384a0c9077ac8b64e05d86f85a6ba65a9c43da83a91f60c2a2c",
       "bytes": 7586,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -527,19 +535,19 @@
           "url": "/scenes/triton/triton-enhanced-thumbnail.webp",
           "bytes": 5856,
           "sha256": "e8ca1c373f4e61fcb31ff05b8d2ffa3021784eb6da957dd9cba9b61adba8997b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/triton/triton-enhanced-surface@2x.webp",
           "bytes": 5029180,
           "sha256": "1c3b28bf73b0b3ca1c018d5d2e4999f676ffbd2a81c32250ecb317e3bb83cfc6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/triton/triton-enhanced-poles@2x.webp",
           "bytes": 36936,
           "sha256": "8fe14ee708d9f96afc062965e71857132f18ea672f7d1fd045a04f3e4b737422",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -573,19 +581,19 @@
           "url": "/scenes/triton/triton-normal-thumbnail.webp",
           "bytes": 1894,
           "sha256": "bb8cb6f3b17142ae3dac6c065e2d793e237b8064de5329fdf3a165d4d3b79a56",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/triton/triton-normal-surface@2x.webp",
           "bytes": 1847950,
           "sha256": "b22c23099fb25a4bbe4517090b5629e2768d66d55472d9605cd22516e0ff3d92",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/triton/triton-normal-poles@2x.webp",
           "bytes": 24348,
           "sha256": "32a8e63d88d593b12643819ece768c71a30aa09ced226b777356e7eb295e1ddc",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

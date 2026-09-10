@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "meliboea",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "a692afa2b908756462c3ecacb063c11f0c5ebed62afcab6936510f7b92421240",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "1c4be794750dcf99568f0d02360203a4303323c2964b6803539cca413d6bc115",
       "bytes": 11286,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/meliboea/meliboea-elevation-thumbnail.webp",
           "bytes": 5220,
           "sha256": "d527964a3cd901325ca1f7bde85a3870480507877af13072ebe158d9a3762ca8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/meliboea/meliboea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/meliboea/meliboea-elevation-surface@2x.webp",
           "bytes": 269920,
           "sha256": "a8ea7e1cdff9b37f0086c8843cf83824e7b2098609d0fc37551578329d49cae9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/meliboea/meliboea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/meliboea/meliboea-shape-surface@2x.webp",
           "bytes": 227802,
           "sha256": "1a56f7f2095dec2d302b76f82575b85c5007ee2e78aec99ab0e726af1cd80fa8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

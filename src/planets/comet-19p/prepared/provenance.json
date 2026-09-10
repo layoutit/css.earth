@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "comet-19p",
   "basis": "recovered",
   "manifest": {
@@ -681,7 +681,7 @@
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -702,7 +702,7 @@
       "sha256": "88643dbc92765eae3ca00e87166e25b33ad18b268f43e28537bd7c6ed5c387ef",
       "bytes": 3521224,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -739,7 +739,7 @@
       "sha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "bytes": 137,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -759,7 +759,7 @@
       "sha256": "e2e6ebc47dcff737d830391e4f8457d809c2e85c5fd8aff7e514dc089e002091",
       "bytes": 67770,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -787,7 +787,7 @@
       "sha256": "19912df4bac7177bafe5556bebbcd4dd178dd1ea57d94c5f3ecfd2f60c8cccd1",
       "bytes": 704512,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -815,7 +815,7 @@
       "sha256": "3c415666d9ca641371c8579f659171273e36abfc4d1407a150f3900f67e8bf1e",
       "bytes": 704000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -843,7 +843,7 @@
       "sha256": "237a7f02e7ea4b64a92640abc2e69054218f4eb44b0710cce4ca6f81bd9f7e54",
       "bytes": 704000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -871,7 +871,7 @@
       "sha256": "ebda490e2e50e974406cda51fdba84859894e5d232a3a66ef4e0e14684705bc6",
       "bytes": 704000,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -895,7 +895,7 @@
       "sha256": "7d6a42940651ce580bffa72001fa8240c3edc1ffe2323ab33868d7845335e4f5",
       "bytes": 8285,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -933,13 +933,13 @@
           "url": "/scenes/comet-19p/comet-19p-usgs-thumbnail.webp",
           "bytes": 1112,
           "sha256": "8d369fa65143b27eec4ae73c2229caef847361cb74b38adad954e5039d1c639c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-usgs-surface@2x.webp",
           "bytes": 136448,
           "sha256": "5b6f1d989a60b12a7217ea09c2491399dd8229b7f654c8b6fa1c07268f569a9d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -976,13 +976,13 @@
           "url": "/scenes/comet-19p/comet-19p-dlr-thumbnail.webp",
           "bytes": 958,
           "sha256": "c864e0d89a069a381088cb4778dcb00cacc5ddcb84418a8cde1c2f5f9202761d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-dlr-surface@2x.webp",
           "bytes": 239172,
           "sha256": "400f3a676c5d4f799b318245ca2404eaf81527c24490897ce052d72bce443d8b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1014,19 +1014,19 @@
           "url": "/scenes/comet-19p/comet-19p-height-thumbnail.webp",
           "bytes": 1610,
           "sha256": "8ff789867ee6aec32e0678f094da4181a4146516d401533de4deba9a5e3e7a92",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-height-legend.webp",
           "bytes": 178,
           "sha256": "1c9f1f7c6d50ff53a25ed4ac6ac04d71c1b89bff2acba269a8a6ece9e2e2bac3",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-height-surface@2x.webp",
           "bytes": 214782,
           "sha256": "8fcb7ca3f64994ce066e54a0f75e6bb5f296373176edae8da928ab0cab262f56",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1059,19 +1059,19 @@
           "url": "/scenes/comet-19p/comet-19p-difference-thumbnail.webp",
           "bytes": 1544,
           "sha256": "6bb076a2d0a892eec5d7be69b0ffdd4e8b7cec1824c211fdaa19b4bf53f374d9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-difference-legend.webp",
           "bytes": 272,
           "sha256": "84e84bed22545a2801117c6ca377766cc4462285a03ddbf33e0af9088e26d450",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-difference-surface@2x.webp",
           "bytes": 324392,
           "sha256": "b20f27e952938a1d989d858d4902d3af6c5895717b1e345972c6ab9ac5347be6",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1107,13 +1107,13 @@
           "url": "/scenes/comet-19p/comet-19p-micas-thumbnail.webp",
           "bytes": 1068,
           "sha256": "0bb3e78b42695632c669bc7029fed00ca923d874971ffe662293b93d202eb120",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/comet-19p/comet-19p-micas-surface@2x.webp",
           "bytes": 138054,
           "sha256": "de05a96041fa15b33f56bdb382b53b0252b9fefd711fd649ac0c07a8f3a673c2",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

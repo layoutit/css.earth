@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "kiviuq",
   "basis": "recovered",
   "manifest": {
@@ -259,7 +259,7 @@
       "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "bytes": 153,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -285,7 +285,7 @@
       "sha256": "3d7a18da1fb1fc342002321d7f73f87a3a839f5b78a75405dd477c43d1eef686",
       "bytes": 59958,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     },
@@ -302,7 +302,7 @@
       "sha256": "7c7985496b84903fcdc29973b5c4a2c5fa276daa77def550fbdd56514bba4366",
       "bytes": 3300,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -340,13 +340,13 @@
           "url": "/scenes/kiviuq/kiviuq-model-thumbnail.webp",
           "bytes": 444,
           "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/kiviuq/kiviuq-model-surface@2x.webp",
           "bytes": 51444,
           "sha256": "6eb40102d8e65e6f857e97e92886c089b90b2471dd6df22eb10f52ea225f8c41",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

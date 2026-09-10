@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "elektra",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "fbda436c7c355e1e15554c69147c02f053d77d97cf20a39bc30179704b91a7a2",
       "bytes": 317179,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "5516fe8ba3daa7a233ba16614a973891526493c86e46de5d75069e6573c3c930",
       "bytes": 7423,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/elektra/elektra-elevation-thumbnail.webp",
           "bytes": 4874,
           "sha256": "811ec9cff5150f83f1476d32504e93c368ee1de18853df6a3463e6da04f7d5c4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/elektra/elektra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/elektra/elektra-elevation-surface@2x.webp",
           "bytes": 301670,
           "sha256": "012227f126c77c488373181628db685c5614f98f7fdb541a2802caf8135da721",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/elektra/elektra-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/elektra/elektra-shape-surface@2x.webp",
           "bytes": 213610,
           "sha256": "ea285ba48c7cf7402d4941ccedabbddd00fb21e5d2095b80f76a4499a5e38917",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

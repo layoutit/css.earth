@@ -1,10 +1,10 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "bennu",
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "20f0cb58cbee8f776801373cd9a6300bf57d5778fd943a13ea14a8555045b9da"
+    "sha256": "9d749f88598837e0214a46133d868a7ce9e347d15c1742684d8a3a1bdd070406"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -434,15 +434,19 @@
       },
       "coverage": "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps.",
       "capture": {
-        "spacecraftIds": [
-          "osiris-rex"
-        ],
-        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "osiris-rex",
+            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
+            "missionId": "osiris-rex"
+          }
+        ]
       },
       "sha256": "71bfeecce5615a5602d16d176c4cc17cc2550b2dc8c7cdac1332dea8d9f3da36",
       "bytes": 315960161,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -473,15 +477,19 @@
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
       "capture": {
-        "spacecraftIds": [
-          "osiris-rex"
-        ],
-        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "osiris-rex",
+            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/g_00880mm_alt_ptm_0000n00000_v020.obj",
+            "missionId": "osiris-rex"
+          }
+        ]
       },
       "sha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d",
       "bytes": 195300487,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -515,15 +523,19 @@
       },
       "coverage": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles.",
       "capture": {
-        "spacecraftIds": [
-          "osiris-rex"
-        ],
-        "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "osiris-rex",
+            "evidence": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_FB34_FB56_ShapeV28_GndControl_MinnaertPhase30_PAN_8bit.tif",
+            "missionId": "osiris-rex"
+          }
+        ]
       },
       "sha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd",
       "bytes": 493624548,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -557,15 +569,19 @@
       },
       "coverage": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
       "capture": {
-        "spacecraftIds": [
-          "osiris-rex"
-        ],
-        "evidence": "OSIRIS-REx OCAMS MapCam composite; pinned USGS ISIS label and DellaGiustina et al. (2020), Figure 1A."
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "osiris-rex",
+            "evidence": "OSIRIS-REx OCAMS MapCam composite; pinned USGS ISIS label and DellaGiustina et al. (2020), Figure 1A.",
+            "missionId": "osiris-rex"
+          }
+        ]
       },
       "sha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c",
       "bytes": 114072003,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -590,7 +606,7 @@
       "sha256": "1f05f0f7dab37f7fa2398956477c053103a3c395ba4c975b13230bf6b726da96",
       "bytes": 10463,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -638,13 +654,13 @@
           "url": "/scenes/bennu/bennu-normal-thumbnail.webp",
           "bytes": 3050,
           "sha256": "d109e039408b99c5100b7d51c3d1359df84a6d4239b3bf8028879873965f152d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bennu/bennu-normal-surface@2x.webp",
           "bytes": 4836700,
           "sha256": "f48e56950870b2f67ea5a0f21fefbf9e28a9f3529e1c5536a7d60518ee1e8e1c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -691,13 +707,13 @@
           "url": "/scenes/bennu/bennu-surface-thumbnail.webp",
           "bytes": 3486,
           "sha256": "db32b93c91974e4b84cb360cdc91d65bd0709a5a159d49c2acaf3f78b5bdc39e",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bennu/bennu-surface-surface@2x.webp",
           "bytes": 7419092,
           "sha256": "e22c354a68e7e15677967a7c1fbd1287b66d503e12e2180f45a251dbf88f71f8",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -751,13 +767,13 @@
           "url": "/scenes/bennu/bennu-spectral-thumbnail.webp",
           "bytes": 7048,
           "sha256": "d99a8add79833c48f8490e193df1a142ebc4d1456c68f8d0df4241233316858d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bennu/bennu-spectral-surface@2x.webp",
           "bytes": 5680926,
           "sha256": "70792870462b06dc89af0e468f1dabd0b0487e282f2c1c4ad0225827d0d05d8b",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -789,19 +805,19 @@
           "url": "/scenes/bennu/bennu-elevation-thumbnail.webp",
           "bytes": 7640,
           "sha256": "b5645f84329eabb9394de28aa23e38dfa73f32784a0bbd20261bf502548354a7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/bennu/bennu-elevation-surface@2x.webp",
           "bytes": 2846108,
           "sha256": "f9c0122c83a6bda3f7d35f86dbe6e1c3f029e9625bf557ee42835d545639de36",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

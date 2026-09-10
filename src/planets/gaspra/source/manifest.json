@@ -38,14 +38,18 @@
         "units": "kilometers",
         "referenceRadiusMeters": 6100
       },
-      "coverage": "Published complete radial model at 2\u00b0 spacing. Observational constraints vary; unseen regions are uncertain.",
+      "coverage": "Published complete radial model at 2° spacing. Observational constraints vary; unseen regions are uncertain.",
       "expectedBytes": 527072,
       "expectedSha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspra.tab"
+          }
+        ]
       }
     },
     {
@@ -77,10 +81,14 @@
       "expectedBytes": 262080,
       "expectedSha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1",
       "capture": {
-        "spacecraftIds": [
-          "galileo"
-        ],
-        "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit"
+        "attributions": [
+          {
+            "kind": "spacecraft",
+            "spacecraftId": "galileo",
+            "missionId": "galileo",
+            "evidence": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/951gaspram.fit"
+          }
+        ]
       }
     },
     {

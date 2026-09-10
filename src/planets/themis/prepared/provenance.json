@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "themis",
   "basis": "recovered",
   "manifest": {
@@ -325,7 +325,7 @@
       "sha256": "6a3b36dbee88acca8365d8b4baada532ec83ebedfd3c5ed2842ec4dd36889853",
       "bytes": 357499,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -353,7 +353,7 @@
       "sha256": "ce1af36dea1842ffe761e9d15ab4d28fa40d76d5bf434abfdcee269108e2b933",
       "bytes": 7476,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -386,19 +386,19 @@
           "url": "/scenes/themis/themis-elevation-thumbnail.webp",
           "bytes": 5416,
           "sha256": "85eacdae20394251b0b4db10204cf792ad54b5d2a719d367295a06dee737e323",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/themis/themis-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/themis/themis-elevation-surface@2x.webp",
           "bytes": 298092,
           "sha256": "61a95e73aba1ce3b87df1457144f53e3f6d05b5c6f92426ce4b0f8539ae422e1",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -430,13 +430,13 @@
           "url": "/scenes/themis/themis-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/themis/themis-shape-surface@2x.webp",
           "bytes": 221022,
           "sha256": "12ef18091e8044f32bafc5db7da9553c8f455e9e7e75a0dc2b0afd3622fce53c",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

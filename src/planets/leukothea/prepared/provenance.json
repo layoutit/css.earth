@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "leukothea",
   "basis": "recovered",
   "manifest": {
@@ -342,7 +342,7 @@
       "sha256": "c2abe03b883ffd4ac42bee1f6c015a6badadb1d0cec330476c2c15828a9ff593",
       "bytes": 81736,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -367,7 +367,7 @@
       "upstreamLineage": "not-recorded",
       "bytes": 9909,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -400,19 +400,19 @@
           "url": "/scenes/leukothea/leukothea-elevation-thumbnail.webp",
           "bytes": 5996,
           "sha256": "62b91f5da293fdd8874ce95aac178cf8f3322e29799669c7af83b4220a95744f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/leukothea/leukothea-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/leukothea/leukothea-elevation-surface@2x.webp",
           "bytes": 314496,
           "sha256": "761af488941168f843ba0d08590adf56c5be669903eddc187f5768d3a6d623cb",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -444,13 +444,13 @@
           "url": "/scenes/leukothea/leukothea-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/leukothea/leukothea-shape-surface@2x.webp",
           "bytes": 224222,
           "sha256": "71c5a345d9265541f2dc593cb5a0dcd171fab184b41a6708a40503799d64220d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

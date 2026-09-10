@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "klotho",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "11db1e440c1fdbe9f28f96d0750381d4238645ba651903e586b56fb08c1c7ccd",
       "bytes": 82708,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "4bcde24c81b5b7e98616961d51f848d34b8b1e8184a27858cf65f84a663d9fcc",
       "bytes": 8345,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/klotho/klotho-elevation-thumbnail.webp",
           "bytes": 5398,
           "sha256": "9301f8464972dc5c536dee05073a5c153a41e80d89fee06737637fc63a0bb9b4",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klotho/klotho-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klotho/klotho-elevation-surface@2x.webp",
           "bytes": 273012,
           "sha256": "772b1128b5e62c6344f5ad4ce58b456ac7a5719cc6da9f25b44b04b7e4f51d78",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/klotho/klotho-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/klotho/klotho-shape-surface@2x.webp",
           "bytes": 224042,
           "sha256": "a836807f45899bb8788bb1ab788115413073d0328b02aae657e8aedcef126bc7",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

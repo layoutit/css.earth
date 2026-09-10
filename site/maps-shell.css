@@ -573,6 +573,22 @@
 .planet-spacecraft[hidden] { display: none; }
 .planet-spacecraft:not([hidden]) ~ .planet-spacecraft:not([hidden]) { margin-top: 20px; }
 .planet-spacecraft-preview { position: relative; }
+.planet-spacecraft, .planet-capture-notes { font: 400 13px/18px var(--shell-ui-font); }
+.planet-spacecraft a, .planet-capture-notes a { color: inherit; text-underline-offset: 3px; }
+.planet-spacecraft a:hover, .planet-capture-notes a:hover { color: var(--shell-text); }
+.planet-spacecraft :is(a, summary):focus-visible, .planet-capture-notes :is(a, summary):focus-visible { outline: 1px solid var(--shell-focus); outline-offset: 3px; }
+.planet-spacecraft h4, .planet-capture-notes h4 { margin: 16px 0 8px; font-size: 12px; font-weight: 600; }
+.planet-mission-datasets { margin: 8px 0 16px; padding-inline-start: 16px; }
+.planet-mission-datasets li { margin: 6px 0; }
+.planet-spacecraft-details { padding: 10px 0; border-top: var(--explorer-divider-width) solid var(--explorer-divider); }
+.planet-spacecraft-details summary, .planet-mission-references summary { cursor: pointer; }
+.planet-spacecraft-details small { display: block; margin: 4px 0 0 14px; opacity: .7; }
+.planet-spacecraft-details > p { margin: 10px 0; }
+.planet-spacecraft-details .planet-spacecraft-image { height: auto; }
+.planet-mission-references { margin-top: 12px; font-size: 11px; }
+.planet-mission-status, .planet-spacecraft-facts { font-size: 11px; }
+.planet-capture-notes { margin-top: 18px; }
+[data-dataset-notice] { margin: 12px 0; font-size: 12px; }
 .planet-spacecraft-image-link { display: block; width: 100%; aspect-ratio: 2 / 1; background: var(--explorer-panel-background); }
 .planet-spacecraft-image { display: block; width: 100%; height: 100%; object-fit: contain; }
 .planet-spacecraft-emblem { position: absolute; left: 8px; bottom: 8px; display: block; width: 64px; height: 64px; }

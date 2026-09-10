@@ -1,5 +1,5 @@
 {
-  "schema": "cssearth-object-provenance@1",
+  "schema": "cssearth-object-provenance@2",
   "objectId": "phaedra",
   "basis": "recovered",
   "manifest": {
@@ -354,7 +354,7 @@
       "sha256": "1805d5dbef19e6956892f348a8f2bfea20036c710c9641352aebd224cde62acd",
       "bytes": 80763,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -379,7 +379,7 @@
       "sha256": "3685f0544b16075bb6e36d0ce71dcbad9b4e5154c88f80227f183be601a2cf7f",
       "bytes": 10853,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +412,19 @@
           "url": "/scenes/phaedra/phaedra-elevation-thumbnail.webp",
           "bytes": 5276,
           "sha256": "6cdfa39f51e5e51cdf26554d5ab48ee8f5a909e82e9f6c4a0e022c34c452c8ec",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phaedra/phaedra-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phaedra/phaedra-elevation-surface@2x.webp",
           "bytes": 275006,
           "sha256": "b899d3e493849cb33da0d7f8a1027564df42dc1092e23e16d571b7c9f431118d",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +456,13 @@
           "url": "/scenes/phaedra/phaedra-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/phaedra/phaedra-shape-surface@2x.webp",
           "bytes": 225860,
           "sha256": "499abcab521a43917bece36c342771db35129935bb8af8c89cac9d37655deae5",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
