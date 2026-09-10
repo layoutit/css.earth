@@ -18,7 +18,7 @@ test('fact-only preparation preserves other content and rejects source drift bef
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(resolve(root, 'source')); await mkdir(resolve(root, 'prepared'));
   const provenance = { sourceRecord: '../README.md' };
-  const source = JSON.stringify({ provenance, panel: { introduction: 'Body description', facts: [{ id: 'radius', label: 'Mean radius', value: '10 km', source: { url: 'http://archive.example/model/1', label: 'Published archive', checked: '2026-09-09' } }] }, lenses: { controls: [{ id: 'normal', label: 'Observed', description: 'Measured area with explicit gaps', summary: 'Measured terrain with gaps.', title: 'Instrument mosaic' }] } });
+  const source = JSON.stringify({ provenance, panel: { introduction: 'Body description', facts: [{ id: 'radius', label: 'Mean radius', value: '10 km', source: { catalogueId: 'published-model', url: 'http://archive.example/model/1', label: 'Published archive', checked: '2026-09-09' } }] }, lenses: { controls: [{ id: 'normal', label: 'Observed', description: 'Measured area with explicit gaps', summary: 'Measured terrain with gaps.', title: 'Instrument mosaic' }] } });
   const digest = createHash('sha256').update(source).digest('hex');
   const put = (path: string, value: unknown) => writeFile(resolve(root, path), JSON.stringify(value));
   await put('object.json', { id: 'body', properties: { recipe: { sources: [{ id: 'content', path: 'source/content.json', sha256: digest }] } } });
@@ -62,7 +62,7 @@ test('fact-only preparation preserves other content and rejects source drift bef
   const invalidManifest = JSON.parse(manifestBytes);
   Object.assign(invalidManifest.inputs[0], { expectedBytes: Buffer.byteLength(invalid), expectedSha256: invalidDigest });
   await put('source/manifest.json', invalidManifest);
-  await assert.rejects(prepareFactsheet(root), /public web URL/);
+  await assert.rejects(prepareFactsheet(root), /Invalid source URL/);
   assert.equal(await readFile(resolve(root, 'prepared/content.json'), 'utf8'), published);
   await writeFile(resolve(root, 'object.json'), descriptorBytes);
   await writeFile(resolve(root, 'source/manifest.json'), manifestBytes);

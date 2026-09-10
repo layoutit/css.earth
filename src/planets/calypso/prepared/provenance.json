@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "864cc383aac311db8b524ed93a5e5fe218c88b52eb21903d35f92c161953bf79"
+    "sha256": "0894f8058b2f880633d0bf45984e207d3368c777f87ec965b22166586f834bd0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -227,7 +227,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "52c8e53e80c7d6d7b2b8c0bd24a04fd6bc4ffbbee76764d2a03b7b2ba95b63df",
+      "sha256": "17ad0839c6af05ba993e43b6604aadfbecb1bc689bf6bfcd07b1ae6a036e0046",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -249,7 +249,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-approximate-planetary-positions",
+                "locator": "/references/0; distance-from-sun"
               }
             },
             {
@@ -848,20 +850,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Authored source interpretation or preparation metadata.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Authored source interpretation or preparation metadata.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "52c8e53e80c7d6d7b2b8c0bd24a04fd6bc4ffbbee76764d2a03b7b2ba95b63df",
-      "bytes": 5031,
+      "sha256": "17ad0839c6af05ba993e43b6604aadfbecb1bc689bf6bfcd07b1ae6a036e0046",
+      "bytes": 5152,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -977,8 +978,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6349,
-          "sha256": "a735e2aa47652f877e293c54982c4ae3e796602e49e5122fca96a16340218874",
+          "bytes": 6446,
+          "sha256": "318432bb067d7aefc7df0cfe793be984687990ddc608a877efb6672dcb12c811",
           "verification": "bytes-verified"
         }
       ],

@@ -122,71 +122,60 @@
   "documents": [
     {
       "path": "content/object.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
-      "expectedBytes": 10912,
-      "expectedSha256": "0b65e66665945d4cb89ad1e0ba150b69cc5f60e9323710883436bbb785e9666b",
+      "expectedBytes": 11332,
+      "expectedSha256": "bdad30798c697a8e5274caca87ed1b3280ae4e0fb3f2b1b04320b20289f5d890",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 1684,
       "expectedSha256": "93bc93421263dd6f5411663fc42a8070798ba509d70507a111e2444981f896cb"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 1248,
       "expectedSha256": "2f5821340b9b003e3c36bae7c0305e7b604913130cadfd2d524bd1308363ea85"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 597,
       "expectedSha256": "958807baf5406eed5e9884f10d52ba73e60b3a4ec238b74c727e6a6728ee43c7"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 3207,
       "expectedSha256": "8c953cc57a3998b221392d543fc99b89f1a7751b0e5ea789d12d0916e620939c"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 4370,
       "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 4959,
       "expectedSha256": "56c66318f9192956e89f8a1510e462f52c732572b5fca231654aa58410548ab9"
     },
     {
       "path": "reference/325-IAUspin.txt",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 34,
       "expectedSha256": "d3aba9cab51a7201575540fa34a9582ba388e96becc0068a8302d11c78782d33"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 120256,
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
       "path": "reference/ReadMe.AcuA.txt",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 3836,
       "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
     },
     {
       "path": "reference/calibration.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 2400,
       "expectedSha256": "003cf85f10b718c571f9c94a0fd0cb2bb55b4fcf7c2754c8cb6309cdc8a21c0b"
     },
@@ -201,43 +190,36 @@
     },
     {
       "path": "reference/hanus-2011.pdf",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 1418620,
       "expectedSha256": "ea83ec9c17b922173261130ce386632897f42f1cfa6db7f5fc2ae199a882f97c"
     },
     {
       "path": "reference/horizons-elements.txt",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 7353,
       "expectedSha256": "c7a21202b05ffae8cbc7f5412aa17618c5925bd113c2fc4188e0d627091d5a21"
     },
     {
       "path": "reference/horizons-vectors.txt",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 6643,
       "expectedSha256": "44ed9a53f973699c9f45b10b998a9e380cad9bf243dc89c08bafc97ddd869e5d"
     },
     {
       "path": "reference/model-properties.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 4945,
       "expectedSha256": "f80ebcb633766ff419f2bcb3c6e847654762a4d72e934240ee14ae0083db3bb9"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 2177,
       "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/LICENSE.md",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "expectedBytes": 144978,
       "expectedSha256": "1ff6c8a73358cc5e760ca2703e53657f60a88fb4c406479ce8ca73fb3fcbc422"
     }

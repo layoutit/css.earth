@@ -1,0 +1,24 @@
+{
+  "id": "nasa-venus-factsheet",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Venus factsheet",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://solarsystem.nasa.gov/internal_resources/1028/",
+      "label": "NASA Venus factsheet"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/venus/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "4c01d5f9dce6f3e557f18d69b7933a403f464902625107f519170addc9dbbdab",
+      "locator": "/panel/facts/4/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

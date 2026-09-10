@@ -1,0 +1,24 @@
+{
+  "id": "nasa-solar-science",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Solar Science",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/heliophysics/focus-areas/solar-science/",
+      "label": "NASA Solar Science"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/sun/source/content/static.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "f5b6ecd76597ff594505f40a946840645add4d749887ff8e922aaf18dbbe8cf0",
+      "locator": "/panel/moreFacts/4/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

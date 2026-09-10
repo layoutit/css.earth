@@ -645,7 +645,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored ring geometry and display settings; measurements are cited in this recipe."
       }
     },
     {
@@ -663,14 +663,14 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored marker, caption and camera settings."
       }
     },
     {
       "id": "jupiter-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 15136,
-      "expectedSha256": "167cd1b7d0031ca5b1199ad63da3722be04bf27cd65bdb65b907f1f8e602433e",
+      "expectedBytes": 16163,
+      "expectedSha256": "8d7c1c8656b30b7f3b1e6b03f222dfa231dffba6287f781fdc414ce72c18d35b",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -681,7 +681,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
@@ -699,7 +699,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored title lettering from the font identified in this record."
       }
     },
     {
@@ -707,17 +707,24 @@
       "path": "editorial/object.json",
       "expectedBytes": 12801,
       "expectedSha256": "305413d1b1edea39bfe58254b959af6df378ce20e08f63bdcf097a92f1c63e8b",
-      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "origin": "https://science.nasa.gov/jupiter/jupiter-facts/",
       "credit": "NASA Science",
       "license": "Project-authored specification; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
+      "acquisition": "NASA Science page text extracted into the existing editorial record.",
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "content"
       ],
       "sourceBinding": {
-        "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-jupiter-facts",
+            "role": "reference",
+            "evidence": "NASA Science text extract; source page 107551.",
+            "locator": "/sourceUrl"
+          }
+        ]
       }
     },
     {
@@ -789,7 +796,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored sampling and atlas settings for the pinned polar observations."
       }
     },
     {

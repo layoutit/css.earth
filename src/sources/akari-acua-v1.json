@@ -1,0 +1,31 @@
+{
+  "id": "akari-acua-v1",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "AKARI/IRC Mid-Infrared Asteroid Survey: AcuA v1.0",
+  "identifiers": [
+    {
+      "type": "JAXA catalogue",
+      "value": "AKARI-IRC_Catalogue_AllSky_AcuA_1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+      "label": "AKARI/IRC Mid-Infrared Asteroid Survey: AcuA v1.0"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/abundantia/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "de7140dd879aeccd902b9a932fb64fcc5fc541fdf74a3e9815d95571908c6e1a",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "JAXA DARTS",
+  "version": "1.0"
+}

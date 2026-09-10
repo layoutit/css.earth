@@ -1698,53 +1698,45 @@
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 848,
-      "expectedSha256": "a331430a197b0a24a9b5e466ce3031832a012284e46f94b27addd212bfb0fc59",
-      "purpose": "Authored preparation, shared source licensing or editorial content."
+      "expectedSha256": "a331430a197b0a24a9b5e466ce3031832a012284e46f94b27addd212bfb0fc59"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Authored preparation, shared source licensing or editorial content."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Authored preparation, shared source licensing or editorial content."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 11481,
-      "expectedSha256": "baad0759b526300aab67e29d536eee12aead0e301e773ef5ca1ad85dad7d771e",
-      "purpose": "Authored preparation, shared source licensing or editorial content."
+      "expectedSha256": "baad0759b526300aab67e29d536eee12aead0e301e773ef5ca1ad85dad7d771e"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 2545,
-      "expectedSha256": "281c032a625f08b9e14edf141102b4638b0c73a80fc0112a5fd28854878663f8",
-      "purpose": "Authored preparation, shared source licensing or editorial content."
+      "expectedSha256": "281c032a625f08b9e14edf141102b4638b0c73a80fc0112a5fd28854878663f8"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 18519,
-      "expectedSha256": "8b24b84b948b215263deb57ad0f22dab71d3a62c8cbbb6ccd6540eb653051c18",
-      "purpose": "Authored preparation, shared source licensing or editorial content."
+      "expectedSha256": "8b24b84b948b215263deb57ad0f22dab71d3a62c8cbbb6ccd6540eb653051c18"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 2559,
-      "expectedSha256": "368b4ae5dc17b4ad70c9f7ff47c572486d9f8ad23aba5c9d325700462b904296",
-      "purpose": "Authored preparation, shared source licensing or editorial content."
+      "expectedSha256": "368b4ae5dc17b4ad70c9f7ff47c572486d9f8ad23aba5c9d325700462b904296"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 14398,
-      "expectedSha256": "f37f24e3d98d94c6fd18496b7bbd168a13a4ae5ca8344a607180c24b3dfad287",
-      "purpose": "Authored preparation, shared source licensing or editorial content.",
+      "expectedBytes": 14736,
+      "expectedSha256": "43c125f9645ade91773e56b14f8c96c5f9433a6c905436bcaa50c9a50a19037c",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {

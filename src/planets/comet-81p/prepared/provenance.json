@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b17873a07497fa8aada4a8b08fed1ca2bb2edde6c23cf03d546a75e71c10555c"
+    "sha256": "b65ad5a46f3b9e5c1b2cbf9e233355adbbb994e1a6923b631b6df3c75f187246"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -369,7 +369,7 @@
       "lensId": "model",
       "label": "Completed shape model",
       "falseColor": false,
-      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mts",
       "recipe": {
         "kind": "plate-coverage",
         "width": 512,
@@ -378,7 +378,7 @@
       },
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-generated display material marking the PDS shape model constraint flags."
       },
       "sha256": "cbe16ca5372858e816d725a210beed6c5b7a7a614dfb028240d061448fbf766b",
       "bytes": 6258,
@@ -509,7 +509,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n2075we02_rr."
       },
       "sha256": "ee8baf4db4bdddc9606823ead83f6585709b7f04be79b2c2be80fc8c28e39e6a",
       "bytes": 22375,
@@ -604,7 +604,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n2073we02_rr."
       },
       "sha256": "0267d6fe1f8a4c779b0821783337227af8b694bbf060848a8f4c0ab805c02239",
       "bytes": 10236,
@@ -699,7 +699,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n2077we02_rr."
       },
       "sha256": "33930e6c289d2e6325455bd36947806fb80c6bf482ce03cb77449bbcfd131771",
       "bytes": 16501,
@@ -794,7 +794,7 @@
       "redistribution": "Retain source attribution and product identity.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for n2079we02_rr."
       },
       "sha256": "803cbfb265ad3020894b642bef466fb3a1acd27bfe400c0ffbcbd984fa45c7cd",
       "bytes": 8964,
@@ -805,15 +805,14 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Wild 2 source evidence or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Wild 2 source evidence or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",

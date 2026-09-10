@@ -101,7 +101,7 @@ test('source uses conserve all product dependencies, include models, and never c
   assert.equal(metadata.filter(edge=>edge.kind==='shared-context').length,4);
   const artworkCount = (await Promise.all(['render','emblem'].map(async kind => sourceArray(sourceObject(await read(`site/source/spacecraft/${kind}-library.json`)).entries,sourceObject).length))).reduce((a,b)=>a+b,0);
   assert.equal(metadata.filter(edge=>edge.kind==='artwork').length,artworkCount);
-  assert.ok(metadata.every(edge=>!edge.objectId && !edge.lensIds.length));
+  assert.ok(metadata.every(edge=>!edge.lensIds.length && (edge.consumerKind==='object-fact' || !edge.objectId)));
   assert.equal(prepared.usage.bySource['eso-eso0932a'],undefined,'unused retained panorama creates no active use');
   assert.ok(prepared.usage.edges.filter(edge => edge.kind === 'shared-context').every(edge => edge.catalogueId !== 'hyg-v41'), 'the current shared sky uses HYG v4.4');
   assert.ok(prepared.usage.bySource['hyg-v44'].length===1);
@@ -156,6 +156,14 @@ test('refreshing document pins retains bindings and native source metadata', asy
 });
 test('both catalogues prepare deterministically from the same input closure before publication', async () => {
   const result=await prepareSpacecraft({publish:false});
+  const facts = prepared.usage.edges.filter(edge => edge.consumerKind === 'object-fact');
+  assert.equal(facts.length, result.factsheets.cited);
+  assert.equal(result.factsheets.facts, result.factsheets.cited + result.factsheets.uncited.length);
+  assert.ok(facts.some(edge => edge.objectId === 'earth' && edge.consumerId === 'earth/radius'));
+  assert.ok(facts.some(edge => edge.objectId === 'abundantia' && edge.citationUrl?.includes('/4625')));
+  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/earth/source/editorial/factsheet-review.json'));
+  assert.ok(Object.hasOwn(result.preparedSources.closure, 'src/planets/abundantia/source/reference/damit-model.json'));
+  assert.deepEqual(sourceDatasetViews(prepared.usage, 'damit-models'), [], 'factsheet metadata is not a shape or imagery contribution');
   for (const output of result.outputs) assert.equal(output.text,await readFile(output.path,'utf8'),output.path);
   assert.equal(result.prepared.sourceCatalogSha256,result.preparedSources.catalogSha256);
   assert.deepEqual(result.prepared.closure,result.preparedSources.closure);
@@ -166,6 +174,31 @@ test('both catalogues prepare deterministically from the same input closure befo
   const before=await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8')));
   await assert.rejects(prepareSpacecraft({provenance:new Map([['mercury',corrupted]])}),/Unknown canonical source/);
   assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path,'utf8'))),before);
+});
+
+test('changed fact evidence and stale displayed facts leave both published catalogues intact', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-publication-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const outputs = ['site/prepared-sources.json', 'site/prepared-spacecraft.json'];
+  // Only the compiler's declared inputs are needed; no body assets or downloads.
+  for (const path of [...Object.keys(prepared.closure), ...outputs]) {
+    const target = join(root, path);
+    await mkdir(join(target, '..'), { recursive: true });
+    await copyFile(path, target);
+  }
+  const before = await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8')));
+  const evidencePath = join(root, 'src/planets/abundantia/source/reference/calibration.json');
+  const evidence = await readFile(evidencePath, 'utf8');
+  await writeFile(evidencePath, evidence.replace('42.18', '52.18'));
+  await assert.rejects(prepareSpacecraft({ root }), /fact evidence pin differs/);
+  assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
+  await writeFile(evidencePath, evidence);
+  const contentPath = join(root, 'src/planets/abundantia/prepared/content.json');
+  const content = sourceObject(await read(contentPath));
+  sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';
+  await writeFile(contentPath, JSON.stringify(content));
+  await assert.rejects(prepareSpacecraft({ root }), /Stale factsheet for abundantia/);
+  assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
 });
 
 test('numerical extraction uses current package records and preserves reviewed source bindings', async () => {

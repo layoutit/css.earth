@@ -706,7 +706,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored ring geometry and display settings; measurements are cited in this recipe."
       }
     },
     {
@@ -724,7 +724,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored marker, caption and camera settings."
       }
     },
     {
@@ -742,7 +742,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored title lettering from the font identified in this record."
       }
     },
     {
@@ -750,24 +750,31 @@
       "path": "editorial/object.json",
       "expectedBytes": 8643,
       "expectedSha256": "f8edb3a3a3f5d88b9865fa526080baed5fe5260bedd8f491dca084646404fe29",
-      "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
+      "origin": "https://science.nasa.gov/saturn/facts/",
       "credit": "NASA Science",
       "license": "Project-authored specification; referenced observations retain their source terms",
-      "acquisition": "checked repository source",
+      "acquisition": "NASA Science page text extracted into the existing editorial record.",
       "redistribution": "checked authored source with embedded provenance",
       "consumers": [
         "content"
       ],
       "sourceBinding": {
-        "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-saturn-facts",
+            "role": "reference",
+            "evidence": "NASA Science text extract; source page 107933.",
+            "locator": "/sourceUrl"
+          }
+        ]
       }
     },
     {
       "id": "saturn-authored-content",
       "path": "content/object.json",
-      "expectedBytes": 18171,
-      "expectedSha256": "35d71bad2dba37f7c4fb26a62f0c197103a2dcc22f748ee2a487e2a477c77d52",
+      "expectedBytes": 19083,
+      "expectedSha256": "e6227563c894bd830f1825779a3295d1056b29c8bfb9c2bd324773177c3bf4fd",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -778,7 +785,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
@@ -796,7 +803,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored CSS geometry, UV sampling and seam settings."
       }
     },
     {
@@ -814,7 +821,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored spectral-map sampling and material settings using the pinned OPAL observations."
       }
     },
     {
@@ -832,7 +839,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored cutaway textures and shading using the cited interior model."
       }
     },
     {
@@ -850,7 +857,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored ring motion and shadow illustration; the recipe names its physical parameters and display timing."
       }
     },
     {
@@ -868,7 +875,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored scene composition and supported views."
       }
     },
     {
@@ -886,7 +893,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored sky, Sun and marker preparation settings."
       }
     },
     {
@@ -904,7 +911,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored chart layout, scales and labels; each chart names its numerical input."
       }
     },
     {

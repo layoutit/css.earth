@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1b400d3f5508c2806ccdd6c7de0aa97176b0027024435b2bd3bb7fcc339e5acc"
+    "sha256": "2218007bf8808503344d42a5aa45d70b38d5286039e0164b4c57835b6c049021"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "aaeca74e5b794990896d1bec200516a800cd1c56cba89eff180cc6a2b0d9ae8e",
+      "sha256": "04bf872fb7a8595d3949ed3786d92ed712e352e4960c0abf95ed4d8c295218bf",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,7 +166,9 @@
                 "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
                 "label": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
                 "checked": "2026-09-09",
-                "path": "source/reference/calibration.json"
+                "path": "source/reference/calibration.json",
+                "catalogueId": "akari-acua-v1",
+                "locator": "/diameterKm; radius = diameterKm / 2"
               }
             },
             {
@@ -177,7 +179,9 @@
                 "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2786%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
                 "label": "JPL Horizons, 2026-09-03 epoch",
                 "checked": "2026-09-09",
-                "path": "source/reference/horizons-elements.txt"
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
               }
             },
             {
@@ -188,7 +192,9 @@
                 "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2786%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
                 "label": "JPL Horizons, 2026-09-03 epoch",
                 "checked": "2026-09-09",
-                "path": "source/reference/horizons-elements.txt"
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
             },
             {
@@ -199,7 +205,9 @@
                 "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5799",
                 "label": "DAMIT model 5799",
                 "checked": "2026-09-09",
-                "path": "source/reference/damit-model.json"
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 5799; version 2019-10-23; /periodHours"
               }
             }
           ],
@@ -378,20 +386,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned original source record or authored scientific preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "aaeca74e5b794990896d1bec200516a800cd1c56cba89eff180cc6a2b0d9ae8e",
-      "bytes": 10109,
+      "sha256": "04bf872fb7a8595d3949ed3786d92ed712e352e4960c0abf95ed4d8c295218bf",
+      "bytes": 10530,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -499,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7053,
-          "sha256": "d92b49c59f9f716605b093910ae160bec99e3f1330236e4c18ffa6f0f5a09262",
+          "bytes": 7378,
+          "sha256": "e3a77c775d5f37e10f9c56f45bfeee2b72e6f689ac5a7ac52d0ddff35caf1b66",
           "verification": "bytes-verified"
         }
       ],

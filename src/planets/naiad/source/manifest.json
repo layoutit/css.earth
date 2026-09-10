@@ -132,101 +132,85 @@
       "path": "content/object.json",
       "expectedBytes": 3533,
       "expectedSha256": "e736f26dd6bbd0217edb7a7462624e374b16e48699373092b0446efaa877db4c",
-      "purpose": "Naiad scientific source or authored preparation evidence.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 981,
-      "expectedSha256": "b404a559dbdf12a2dfa41f45d7a0347ed8b5346958fd2b967776e3c5b411d8d8",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "b404a559dbdf12a2dfa41f45d7a0347ed8b5346958fd2b967776e3c5b411d8d8"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1264,
-      "expectedSha256": "d3b50fb906328c61779fda8dd9c2a403759dba337b20c9976743b196b0a3c83d",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "d3b50fb906328c61779fda8dd9c2a403759dba337b20c9976743b196b0a3c83d"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2332,
-      "expectedSha256": "db3ecab28e79b622a78a8134f807e711b2214f6f97bb9b695c350fe22bf8073c",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "db3ecab28e79b622a78a8134f807e711b2214f6f97bb9b695c350fe22bf8073c"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3896,
-      "expectedSha256": "a67c4662b8d9eb6dc6693700b15811dfb4392a35fffc990fe901a8c1e33cb7cf",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "a67c4662b8d9eb6dc6693700b15811dfb4392a35fffc990fe901a8c1e33cb7cf"
     },
     {
       "path": "shape/horizons-physical.txt",
       "expectedBytes": 839,
-      "expectedSha256": "ccfca1e62ac99fecb257cd9161996c03be942c30835d31585765b2f3ceb291e0",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "ccfca1e62ac99fecb257cd9161996c03be942c30835d31585765b2f3ceb291e0"
     },
     {
       "path": "shape/pck00011.tpc",
       "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
       "path": "shape/publication.json",
       "expectedBytes": 433,
-      "expectedSha256": "86c1f154042f810947d4fa328422beeb58ba0f8cf7bd247fa2a91a6c807db217",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "86c1f154042f810947d4fa328422beeb58ba0f8cf7bd247fa2a91a6c807db217"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 848,
-      "expectedSha256": "101c77d8c15edaef036747eb27208c8fd700e5663acc6c06e0699987f0cf32fb",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "101c77d8c15edaef036747eb27208c8fd700e5663acc6c06e0699987f0cf32fb"
     },
     {
       "path": "survey/1134547-metadata.json",
       "expectedBytes": 14746,
-      "expectedSha256": "6e4556e1fedf15d087a28acaa7568edded7d4c7abcfab1b22c9788271efd1c89",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "6e4556e1fedf15d087a28acaa7568edded7d4c7abcfab1b22c9788271efd1c89"
     },
     {
       "path": "survey/1135231-metadata.json",
       "expectedBytes": 11536,
-      "expectedSha256": "d085eb934a1bcb1ba93cee2f094bfd02ecaefb03b0f0a0ebf732ce8ea1cea3a9",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "d085eb934a1bcb1ba93cee2f094bfd02ecaefb03b0f0a0ebf732ce8ea1cea3a9"
     },
     {
       "path": "survey/voyager-search.json",
       "expectedBytes": 1141,
-      "expectedSha256": "312483533d25c3b7befb87173638e3718b9d57275585db5e1cb465722cc8394e",
-      "purpose": "Naiad scientific source or authored preparation evidence."
+      "expectedSha256": "312483533d25c3b7befb87173638e3718b9d57275585db5e1cb465722cc8394e"
     }
   ],
   "generatedIntermediates": [

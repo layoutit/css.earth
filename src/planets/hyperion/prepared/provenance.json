@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "54dbe837ee47d200e890acf9f13964b3e90508dac0d55847338e3d741b72660e"
+    "sha256": "cd6e2d11b89267712010dc5827ecf65efac08657a695f47a21dd5b15b6333a2f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -370,7 +370,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "e8feec52261253013e54e285b48d1d8fe3a19944d6f0ea0886f9d72aba835191",
+      "sha256": "70f7fe8bbcfbde8c9e9e76396bf998a216a52eb4ac5f092d4cf4fb91c1fad360",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -387,7 +387,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; radius"
               }
             },
             {
@@ -398,7 +400,9 @@
                 "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-approximate-planetary-positions",
+                "locator": "/references/1; distance-from-sun"
               }
             },
             {
@@ -431,7 +435,9 @@
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
                 "label": "NASA/JPL reference",
                 "checked": "2026-09-08",
-                "path": "source/editorial/factsheet-review.json"
+                "path": "source/editorial/factsheet-review.json",
+                "catalogueId": "jpl-satellite-physical-parameters",
+                "locator": "/references/0; density"
               }
             }
           ]
@@ -1805,20 +1811,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Source documentation, controlled camera metadata or authored preparation.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Source documentation, controlled camera metadata or authored preparation.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "e8feec52261253013e54e285b48d1d8fe3a19944d6f0ea0886f9d72aba835191",
-      "bytes": 5858,
+      "sha256": "70f7fe8bbcfbde8c9e9e76396bf998a216a52eb4ac5f092d4cf4fb91c1fad360",
+      "bytes": 6196,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -1950,8 +1955,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6149,
-          "sha256": "95aa2090bc338aa602c5387b0ba60201d91201ac41b74ade465f6f9e348a327c",
+          "bytes": 6415,
+          "sha256": "31a3d615d66c44d24351be2c8ebd73f04ac22fa8821fd10e8d5955faca72570f",
           "verification": "bytes-verified"
         }
       ],

@@ -132,95 +132,80 @@
       "path": "content/object.json",
       "expectedBytes": 3101,
       "expectedSha256": "b4a4a0948362a674ead4d8c02262fb705f78badd3374e76d3bd989d49f25b7a1",
-      "purpose": "Scientific source interpretation and reproducible authored input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 2104,
-      "expectedSha256": "df03910627cac3e3a47e72d558c586c215c4b3eb603c1164cccabeb0ff34cf2f",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "df03910627cac3e3a47e72d558c586c215c4b3eb603c1164cccabeb0ff34cf2f"
     },
     {
       "path": "orbit/menoetius-epoch.txt",
       "expectedBytes": 6811,
-      "expectedSha256": "f6469c4b2b71cf87e87f1965c8dccf57960669e0843fae1928f41a66d1b38b9b",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "f6469c4b2b71cf87e87f1965c8dccf57960669e0843fae1928f41a66d1b38b9b"
     },
     {
       "path": "orbit/menoetius-heliocentric-check.txt",
       "expectedBytes": 6787,
-      "expectedSha256": "6f7fbf39c867990ad2ef04f9c632fe9c0a031467b6e48d937143ffc088469768",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "6f7fbf39c867990ad2ef04f9c632fe9c0a031467b6e48d937143ffc088469768"
     },
     {
       "path": "orbit/patroclus-epoch.txt",
       "expectedBytes": 6801,
-      "expectedSha256": "427924d795a0887115acb4ee033f42f7a2c254d63a9a2d6abe51b421c9132a97",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "427924d795a0887115acb4ee033f42f7a2c254d63a9a2d6abe51b421c9132a97"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1274,
-      "expectedSha256": "569c3411277680872bce9b7d4de9de8e75b42ea42c2f5de9adca859d5bdeea74",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "569c3411277680872bce9b7d4de9de8e75b42ea42c2f5de9adca859d5bdeea74"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 412,
-      "expectedSha256": "d41025c604456a98b4a31b658567dacdc4c4488a0b885940a83094c8c39389f2",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "d41025c604456a98b4a31b658567dacdc4c4488a0b885940a83094c8c39389f2"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2639,
-      "expectedSha256": "f74191e4a14a38bc39bcb65da2a28a226f0422c83c0f3b35e8fb95cb5773712a",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "f74191e4a14a38bc39bcb65da2a28a226f0422c83c0f3b35e8fb95cb5773712a"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 5247,
-      "expectedSha256": "c5fb8134eaf6d74a637887e5a99b0e94f409fff4ab7c85d56d2e36cffa3c55c0",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "c5fb8134eaf6d74a637887e5a99b0e94f409fff4ab7c85d56d2e36cffa3c55c0"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 852,
-      "expectedSha256": "e45498e72c41848d2355d6e20b8854263386f8c5d3746cb9fc6398aff169f9cb",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "e45498e72c41848d2355d6e20b8854263386f8c5d3746cb9fc6398aff169f9cb"
     },
     {
       "path": "validation/epoch-state.json",
       "expectedBytes": 3570,
-      "expectedSha256": "73f50988226fe571e10c906562f7016634066a0012e331610e5f058d063f383b",
-      "purpose": "Scientific source interpretation and reproducible authored input."
+      "expectedSha256": "73f50988226fe571e10c906562f7016634066a0012e331610e5f058d063f383b"
     }
   ],
   "generatedIntermediates": [

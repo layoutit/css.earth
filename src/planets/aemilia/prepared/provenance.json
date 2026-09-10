@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a1d6d857af49dc50f65a48ebeee17ac68cc5943f6db3d320a8bb86bf31328792"
+    "sha256": "16682ebf426f912b8e0e83e3f6d0c6a56a72afa29f5083d04cdc6a3254d6aa1f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -147,7 +147,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4f658c937daf3edb14ba6fe786f0ed2ed7a244160db5f2fa724d986ecde8057e",
+      "sha256": "f0a0be56c6ab724d871ac62b27ce50f7065801871950534252c4450b97659f4a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -164,7 +164,9 @@
                 "url": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
                 "label": "Marciniak et al. (2018), Table 4: SAGE pole 1",
                 "checked": "2026-09-09",
-                "path": "source/reference/calibration.json"
+                "path": "source/reference/calibration.json",
+                "catalogueId": "marciniak-2018-slow-asteroids",
+                "locator": "/diameterKm; radius = diameterKm / 2"
               }
             },
             {
@@ -175,7 +177,9 @@
                 "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27159%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
                 "label": "JPL Horizons, 2026-09-03 epoch",
                 "checked": "2026-09-09",
-                "path": "source/reference/horizons-elements.txt"
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
               }
             },
             {
@@ -186,7 +190,9 @@
                 "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27159%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
                 "label": "JPL Horizons, 2026-09-03 epoch",
                 "checked": "2026-09-09",
-                "path": "source/reference/horizons-elements.txt"
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
             },
             {
@@ -197,7 +203,9 @@
                 "url": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
                 "label": "ISAM/SAGE102 original OBJ rotation header",
                 "checked": "2026-09-09",
-                "path": "source/reference/isam-model.json"
+                "path": "source/reference/isam-model.json",
+                "catalogueId": "source-aemilia-aemilia-shape",
+                "locator": "/periodHours; ISAM model 102"
               }
             }
           ],
@@ -376,20 +384,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned original source record or authored scientific preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4f658c937daf3edb14ba6fe786f0ed2ed7a244160db5f2fa724d986ecde8057e",
-      "bytes": 9510,
+      "sha256": "f0a0be56c6ab724d871ac62b27ce50f7065801871950534252c4450b97659f4a",
+      "bytes": 9947,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -497,8 +504,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6540,
-          "sha256": "d538bbbfe8cd66e59d255b61a34335a0334c725da337d1f7cbc9737d180e0d5a",
+          "bytes": 6881,
+          "sha256": "c40e83e47c0ef54c23b629e0ad590e1056ee399bb89e8daf5b0a0f0e5a06b6d5",
           "verification": "bytes-verified"
         }
       ],

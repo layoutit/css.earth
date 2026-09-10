@@ -1,0 +1,30 @@
+{
+  "id": "galileo-jupiter-magnetometer-highres-v1",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Galileo Jupiter Magnetometer Calibrated High-Resolution Data V1.0",
+  "identifiers": [
+    {
+      "type": "PDS dataset",
+      "value": "GO-J-MAG-3-RDR-HIGHRES-V1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
+      "label": "Galileo Jupiter Magnetometer Calibrated High-Resolution Data V1.0"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/europa/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "b7cd3a7d52d8b7ae1fe55fbc71eb313827b966d250e5edf80c644b26d05b8d6a",
+      "locator": "/panel/facts/2/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "version": "1.0"
+}

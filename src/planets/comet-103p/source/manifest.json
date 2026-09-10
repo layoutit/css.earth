@@ -55,7 +55,7 @@
       "lensId": "model",
       "label": "Shape model",
       "falseColor": false,
-      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mjs",
+      "generator": "tools/objects/terrestrial-layers/pds-constraint-map.mts",
       "recipe": {
         "width": 512,
         "height": 256,
@@ -71,7 +71,7 @@
       },
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-generated display material marking the PDS shape model constraint flags."
       }
     },
     {
@@ -252,7 +252,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for mv10110413_6000001_001_r."
       }
     },
     {
@@ -327,7 +327,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for mv10110413_6000002_001_r."
       }
     },
     {
@@ -402,7 +402,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for mv10110414_6000003_001_r."
       }
     },
     {
@@ -477,7 +477,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for hv10110413_5004004_001_d050."
       }
     },
     {
@@ -552,7 +552,7 @@
       ],
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-measured camera registration controls for hv10110413_5004008_001_d050."
       }
     }
   ],
@@ -594,101 +594,85 @@
       "path": "content/object.json",
       "expectedBytes": 5822,
       "expectedSha256": "ab3111e15c3a0d169e02fe1916b617c101579078480fbf1ad4ceb2da250c8551",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 3596,
-      "expectedSha256": "c4974fbc229a727fe348ea21994baa5a257047ead48a638067e6acc141a3ba10",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "c4974fbc229a727fe348ea21994baa5a257047ead48a638067e6acc141a3ba10"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1621,
-      "expectedSha256": "f94b9fb7bd168c12c52e2622aa815e0e7b1d56537e72323199df3336b0ae24f4",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "f94b9fb7bd168c12c52e2622aa815e0e7b1d56537e72323199df3336b0ae24f4"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 441,
-      "expectedSha256": "96fb45bb515a9e33170ee398574e8aef17dd599d1ae0445807a3e778494fb201",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "96fb45bb515a9e33170ee398574e8aef17dd599d1ae0445807a3e778494fb201"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 7288,
-      "expectedSha256": "269899c03e5c22546fc5940bf2ed5dbb201187997375b5e2563c185f51e0535e",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "269899c03e5c22546fc5940bf2ed5dbb201187997375b5e2563c185f51e0535e"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3979,
-      "expectedSha256": "15b341f13ed33579391eda0943a1d6af71a7be18928572e95308b534064d69e8",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "15b341f13ed33579391eda0943a1d6af71a7be18928572e95308b534064d69e8"
     },
     {
       "path": "reference/dataset.cat",
       "expectedBytes": 16000,
-      "expectedSha256": "ee81fa632064305849cdd283ef331bf8996d567e1de3924b2321e51c6ac6d0b0",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "ee81fa632064305849cdd283ef331bf8996d567e1de3924b2321e51c6ac6d0b0"
     },
     {
       "path": "shape/hartley2_2012_plan.lbl",
       "expectedBytes": 12560,
-      "expectedSha256": "7890b02a5df3d77a18d195c3fb1a1880927613af07006f8d4489f3ea951db223",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "7890b02a5df3d77a18d195c3fb1a1880927613af07006f8d4489f3ea951db223"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 853,
-      "expectedSha256": "e25995be192ffa81faad3695eb34be3d208fc94402945394d6059777433cb14e",
-      "purpose": "103P/Hartley 2 source evidence or authored preparation input."
+      "expectedSha256": "e25995be192ffa81faad3695eb34be3d208fc94402945394d6059777433cb14e"
     },
     {
       "path": "reference/encounter-photography.md",
       "expectedBytes": 5948,
-      "expectedSha256": "142e98ffe05ff2326d48921a9260763a41433325dcfe47fb093a85901e5ecfbb",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "142e98ffe05ff2326d48921a9260763a41433325dcfe47fb093a85901e5ecfbb"
     },
     {
       "path": "reference/mri-dataset.cat",
       "expectedBytes": 59840,
-      "expectedSha256": "9cd868412db788e1ea924e8c0a1ba0e39e10c6918fa9dc6b74dcc2d8f0fef609",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "9cd868412db788e1ea924e8c0a1ba0e39e10c6918fa9dc6b74dcc2d8f0fef609"
     },
     {
       "path": "reference/hri-restoration-dataset.cat",
       "expectedBytes": 25200,
-      "expectedSha256": "d30b289c57d61cf3c58d6a6ae93e87f0a71adc201a7a76e24e97ab2808485770",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "d30b289c57d61cf3c58d6a6ae93e87f0a71adc201a7a76e24e97ab2808485770"
     },
     {
       "path": "reference/epoxi-sis.pdf",
       "expectedBytes": 6311705,
-      "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa",
-      "purpose": "Source format, camera frame, quality policy or encounter selection evidence."
+      "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa"
     }
   ]
 }

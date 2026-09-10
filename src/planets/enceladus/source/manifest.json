@@ -679,91 +679,77 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 15752,
-      "expectedSha256": "7427b79e3ae0f58d3c9b158cb5887655be993ef72299a48193a85bfe91632a6f",
-      "purpose": "Original source metadata, licensing, or authored preparation and content.",
+      "expectedBytes": 16090,
+      "expectedSha256": "433e669926c4bb484f84e74bdd9eacc67d751ab5d091473e768a11d56b0065f0",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.lbl",
       "expectedBytes": 1574,
-      "expectedSha256": "3d1f1cf57178368a315143e9dc9a9b87a95102f3120d8ddcd1be99dc3a0186e0",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "3d1f1cf57178368a315143e9dc9a9b87a95102f3120d8ddcd1be99dc3a0186e0"
     },
     {
       "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.xml",
       "expectedBytes": 9525,
-      "expectedSha256": "4735016c4147ab11b5c0d427a90f8cef97122188e683df8942177ff509f1e40c",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "4735016c4147ab11b5c0d427a90f8cef97122188e683df8942177ff509f1e40c"
     },
     {
       "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.lbl",
       "expectedBytes": 1583,
-      "expectedSha256": "32489887749bb1dab8abeaa14ccaca514c164567d86a75e00157b7c535d70399",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "32489887749bb1dab8abeaa14ccaca514c164567d86a75e00157b7c535d70399"
     },
     {
       "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.xml",
       "expectedBytes": 9542,
-      "expectedSha256": "caa946c123431e1079dc138c311347c1e97bb4757ff5d57abbeaee032dc6b67d",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "caa946c123431e1079dc138c311347c1e97bb4757ff5d57abbeaee032dc6b67d"
     },
     {
       "path": "observations/dem-catalog.txt",
       "expectedBytes": 7406,
-      "expectedSha256": "ed68c71a2b2497bb5cd40b65e313d8fcac102c4f6329c1b69e37255344c27aa9",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "ed68c71a2b2497bb5cd40b65e313d8fcac102c4f6329c1b69e37255344c27aa9"
     },
     {
       "path": "observations/mosaic-catalog.txt",
       "expectedBytes": 5692,
-      "expectedSha256": "82c08be0a841c3f4cb0ae032437e7a091471690ccdd42a8a4dafaa67e65cce9b",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "82c08be0a841c3f4cb0ae032437e7a091471690ccdd42a8a4dafaa67e65cce9b"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 6267,
-      "expectedSha256": "e9cecdb23b82d24073b8a26f21ed9ca957b5b78c98571c474004d19e09ebad2a",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "e9cecdb23b82d24073b8a26f21ed9ca957b5b78c98571c474004d19e09ebad2a"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 2164,
-      "expectedSha256": "c213d34132bf46390b114171748a567b93662074ae5dff1cb78e11e672955ec6",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "c213d34132bf46390b114171748a567b93662074ae5dff1cb78e11e672955ec6"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 6910,
-      "expectedSha256": "b88628b2b19d84eb9920adbaaee9c47c6839359682daab4a13fbb765d17c0e1a",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "b88628b2b19d84eb9920adbaaee9c47c6839359682daab4a13fbb765d17c0e1a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 5285,
-      "expectedSha256": "260343813824ac4967afeffd876addee5649809cb4f3d435e41109bcb4b830bc",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "260343813824ac4967afeffd876addee5649809cb4f3d435e41109bcb4b830bc"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 852,
-      "expectedSha256": "45865cf55d53451b9dbb5c28575c2d3cef8d83872fe3cbe0b683acc360354d9c",
-      "purpose": "Original source metadata, licensing, or authored preparation and content."
+      "expectedSha256": "45865cf55d53451b9dbb5c28575c2d3cef8d83872fe3cbe0b683acc360354d9c"
     },
     {
       "path": "editorial/factsheet-review.json",

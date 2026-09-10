@@ -134,83 +134,70 @@
       "path": "content/object.json",
       "expectedBytes": 3634,
       "expectedSha256": "f6c7b84e3ff2fa00d67b2744b6d560595bd0b95d58851bc7d5981491a8e8b654",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 1933,
-      "expectedSha256": "c4394666c34113baf7e9f4f69e90788849d618baf503878630f9cf981740769e",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "c4394666c34113baf7e9f4f69e90788849d618baf503878630f9cf981740769e"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1372,
-      "expectedSha256": "60acccbd2d7c51c6b18eb48d9e98bc3bf5dcae51e68a17b133ce80b8fcc194e9",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "60acccbd2d7c51c6b18eb48d9e98bc3bf5dcae51e68a17b133ce80b8fcc194e9"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 432,
-      "expectedSha256": "c6a8fb99df7174adb432c5311d606677426ead4b4990badcaf19a7a745f14e1c",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "c6a8fb99df7174adb432c5311d606677426ead4b4990badcaf19a7a745f14e1c"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2487,
-      "expectedSha256": "ddffeee8d8fd71d890c92be15002bdac33107a06476cb01e0c03cbad1855842d",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "ddffeee8d8fd71d890c92be15002bdac33107a06476cb01e0c03cbad1855842d"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3171,
-      "expectedSha256": "03e2c015ff4301279014265ba479247a51090d3c44300e9b54bd0c7107cba8fa",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "03e2c015ff4301279014265ba479247a51090d3c44300e9b54bd0c7107cba8fa"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 849,
-      "expectedSha256": "875342b290abec031291be44f8ec24ebe6f3231623115b4dffda5697e595b1fc",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "875342b290abec031291be44f8ec24ebe6f3231623115b4dffda5697e595b1fc"
     },
     {
       "path": "survey/research.json",
       "expectedBytes": 5731,
-      "expectedSha256": "b30e42517e0caa573ddfeb1c3781584fd770e2f6ed808f0d668f03c344f0e3e5",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "b30e42517e0caa573ddfeb1c3781584fd770e2f6ed808f0d668f03c344f0e3e5"
     },
     {
       "path": "validation/orbit-checks.json",
       "expectedBytes": 25698,
-      "expectedSha256": "fa1e836b59d7df631c4645968b0539bae25ec77de21dc1682b2baafeaff5116e",
-      "purpose": "Body-specific scientific interpretation, source evidence or preparation configuration."
+      "expectedSha256": "fa1e836b59d7df631c4645968b0539bae25ec77de21dc1682b2baafeaff5116e"
     }
   ],
   "generatedIntermediates": [

@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9971d1e36c571ed0001a7b9dae7889f754ac28dce020c465745e3a6f38c07b02"
+    "sha256": "dc20f1935bc5911b0ffcebdbea3dfb36e2dcf514e188391e9b4baaf4f85fd5c8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6def713bdb7340d8df89c1a60dbb5b07776e9a5b367ef7d9d59417dc9691988c",
+      "sha256": "58c4121495b9f1e2d635beffb25d66c4ca7b7f7fe47a8b36de5bf90ba776abdc",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -166,7 +166,9 @@
                 "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16284",
                 "label": "DAMIT model 16284",
                 "checked": "2026-09-09",
-                "path": "source/reference/calibration.json"
+                "path": "source/reference/calibration.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 16284; /diameterKm; radius = diameterKm / 2"
               }
             },
             {
@@ -177,7 +179,9 @@
                 "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27275%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
                 "label": "JPL Horizons, 2026-09-03 epoch",
                 "checked": "2026-09-09",
-                "path": "source/reference/horizons-elements.txt"
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; A (km) / 149597870.7"
               }
             },
             {
@@ -188,7 +192,9 @@
                 "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27275%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
                 "label": "JPL Horizons, 2026-09-03 epoch",
                 "checked": "2026-09-09",
-                "path": "source/reference/horizons-elements.txt"
+                "path": "source/reference/horizons-elements.txt",
+                "catalogueId": "jpl-horizons",
+                "locator": "$$SOE first epoch; PR (days) / 365.25"
               }
             },
             {
@@ -199,7 +205,9 @@
                 "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16284",
                 "label": "DAMIT model 16284",
                 "checked": "2026-09-09",
-                "path": "source/reference/damit-model.json"
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 16284; version 2023-10-03; /periodHours"
               }
             }
           ],
@@ -378,20 +386,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned original source record or authored scientific preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned original source record or authored scientific preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6def713bdb7340d8df89c1a60dbb5b07776e9a5b367ef7d9d59417dc9691988c",
-      "bytes": 11710,
+      "sha256": "58c4121495b9f1e2d635beffb25d66c4ca7b7f7fe47a8b36de5bf90ba776abdc",
+      "bytes": 12144,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -499,8 +506,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8750,
-          "sha256": "636e23c353be020a6efad3075e4a0349f444d6d711c19e612584fd6d1fd003a6",
+          "bytes": 9088,
+          "sha256": "1023475290c4417c0cefa99b313acbf88a4dafef4dbfa6c10d10fe597825c5d9",
           "verification": "bytes-verified"
         }
       ],

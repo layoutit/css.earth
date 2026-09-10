@@ -34,9 +34,9 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
     const existing = await readFile(path, 'utf8').then(text => {
       const raw: unknown = JSON.parse(text);
       if (sourceObject(raw).schema !== 'cssearth-object-provenance@3') return null;
-      return { document: validateObjectProvenance(raw), legacy: false };
+      return validateObjectProvenance(raw);
     }).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-    const retained = existing && !existing.legacy && provenanceIdentity(existing.document) === provenanceIdentity(document) ? existing.document : document;
+    const retained = existing && provenanceIdentity(existing) === provenanceIdentity(document) ? existing : document;
     documents.set(object.id, retained);
     outputs.push({ path, text: JSON.stringify(retained, null, 2) + '\n' });
     results.push({ id: object.id, products: document.products.length, sources: document.sources.length,
@@ -46,7 +46,10 @@ export async function recoverObjectProvenance(ids: readonly string[] | null = nu
   // previous prepared set in place. Consumers also verify the closure pins.
   const catalogue = await prepareSpacecraft({ root, publish: false, provenance: documents });
   await writePreparedSet([...outputs, ...catalogue.outputs]);
-  return results;
+  return results.map(result => ({ ...result,
+    citedFacts: catalogue.preparedSources.usage.edges.filter(edge => edge.consumerKind === 'object-fact' && edge.objectId === result.id).length,
+    uncitedFacts: catalogue.factsheets.uncited.filter(fact => fact.objectId === result.id).map(fact => fact.factId),
+  }));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), ids = args.filter(arg => arg !== '--verify');

@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a672b26ff0b12000c56f3447cec95510461830ecb8d2d1a7d8c938ddeebec624"
+    "sha256": "859bbf5e024704b36ca20bdaed21b4d810fa951ef7eb5cec23fd2b00e58fb0b4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -203,7 +203,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "39fcebc1eb16f4c5906bc3f3aae53422abac0b859011e1a24da920fe0fcc34a0",
+      "sha256": "ae50506b336c34a77bbfca240526fa4172f69e61b7dafdee203cef6ee6892214",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -259,7 +259,9 @@
                 "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
                 "label": "JPL Horizons pinned physical record",
                 "checked": "2026-09-08",
-                "path": "source/reference/horizons-physical.txt"
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: geometric albedo"
               }
             }
           ]
@@ -561,7 +563,7 @@
       "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Camera geometry calculated from the pinned image and mission kernels for 2867 STEINS at 2008-09-05T18:36:22.008."
       },
       "sha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9",
       "bytes": 2899,
@@ -618,7 +620,7 @@
       "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Camera geometry calculated from the pinned image and mission kernels for 2867 STEINS at 2008-09-05T18:36:46.044."
       },
       "sha256": "c300b7604f69398ee30f89554bd79e5aaeaa722ef48e4fb58a9d0425ca87430e",
       "bytes": 2932,
@@ -629,20 +631,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Source evidence or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Source evidence or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "39fcebc1eb16f4c5906bc3f3aae53422abac0b859011e1a24da920fe0fcc34a0",
-      "bytes": 10442,
+      "sha256": "ae50506b336c34a77bbfca240526fa4172f69e61b7dafdee203cef6ee6892214",
+      "bytes": 10557,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -802,8 +803,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5678,
-          "sha256": "de9ff3add3fb33e04c68b084b7dc22fdc0d9aad49a3a228d7eb9670a1e56e0e2",
+          "bytes": 5769,
+          "sha256": "8fce2ee0457ec3d3daffe37d8b6a11ae84b010e990e2752dadf1d645c6fdfd19",
           "verification": "bytes-verified"
         }
       ],

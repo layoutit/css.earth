@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "9f9d5cfaebd9fe97e64546fafe02ff20c17cdd6d73d053f8acb011d8811171ba"
+    "sha256": "0cfdc41b8d76103d1acb8320472b1e64f752a40be8ef84de2f8aa3985376f907"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -149,7 +149,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "823e808fc5c42e2a49e2a7c805ee5b7d6ce502f8cd1133cde4b4a64ad64a080a",
+      "sha256": "5bb4e4f32fd34de82842e6a09fbd3fcdf3a6d8d683944ba11fcaa4b4c8f440dd",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -183,7 +183,9 @@
                 "url": "https://doi.org/10.26033/pf3k-m168",
                 "label": "IRAS-A-FPA-3-RDR-IMPS-V6.0",
                 "checked": "2026-09-08",
-                "path": "source/reference/calibration.json"
+                "path": "source/reference/calibration.json",
+                "catalogueId": "iras-minor-planet-survey-v6",
+                "locator": "/diameterKm; radius = diameterKm / 2"
               }
             },
             {
@@ -204,7 +206,9 @@
                 "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3529",
                 "label": "DAMIT model 3529",
                 "checked": "2026-09-08",
-                "path": "source/reference/damit-model.json"
+                "path": "source/reference/damit-model.json",
+                "catalogueId": "damit-models",
+                "locator": "Model 3529; /periodHours"
               }
             }
           ],
@@ -366,20 +370,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned model, physical sizing evidence, or authored preparation input.",
-      "sha256": "823e808fc5c42e2a49e2a7c805ee5b7d6ce502f8cd1133cde4b4a64ad64a080a",
+      "sha256": "5bb4e4f32fd34de82842e6a09fbd3fcdf3a6d8d683944ba11fcaa4b4c8f440dd",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned model, physical sizing evidence, or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "bytes": 8487,
+      "bytes": 8694,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -487,8 +490,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5656,
-          "sha256": "241271d306f0e2218d7295a5bd1fd603fe52244bd2b9b92edc69800768f615cd",
+          "bytes": 5815,
+          "sha256": "735cc48391b529bef2e2fb9b6d46d19b18e050aad59a3cd3b8d4f6a07dafe3f1",
           "verification": "bytes-verified"
         }
       ],

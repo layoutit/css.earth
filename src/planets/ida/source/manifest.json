@@ -525,95 +525,80 @@
   "documents": [
     {
       "path": "content/object.json",
-      "purpose": "Pinned source label, source documentation or authored package input.",
-      "expectedBytes": 8544,
-      "expectedSha256": "ed181ef75b5ae936b52a0142964ca7c7647f6d150f4a419ca6fad0c6c5859e7a",
+      "expectedBytes": 8659,
+      "expectedSha256": "6fd1aecbdc81935d450358f95b63085b15ff53c9799a860f68f32e7cc337f737",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 5688,
       "expectedSha256": "ffcf423e1fa29020819262dd40794339c4de062ae4ee15004ae75f095885fabc"
     },
     {
       "path": "preparation/navigation.json",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 1296,
       "expectedSha256": "b9c0defb9f9f4ed54068af189d7476f17972267493bdca8a64d4bf604ae8ca39"
     },
     {
       "path": "preparation/rotation.json",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 412,
       "expectedSha256": "e9f1952a6c593ecbad2d0a8a544307ac64f75334db061d56ea72d77a31945ba5"
     },
     {
       "path": "preparation/terrestrial.json",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 5975,
       "expectedSha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c"
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 4370,
       "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
     },
     {
       "path": "presentation/title-mark.json",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 2284,
       "expectedSha256": "9d069652a17dc41f374dce86b05979f8b4914c343742dee33bc3e0cdf370faa9"
     },
     {
       "path": "reference/243ida.xml",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 5886,
       "expectedSha256": "6cf24f749a791938b7d634dfc1554cc13f1ff3ce4b2b8b93f2174bdd51eeecd0"
     },
     {
       "path": "reference/243idam.xml",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 7458,
       "expectedSha256": "917dabc37a1a6c3809e063b32fcedc5674b33c6a86a58ef8f49fd5a8d1a24318"
     },
     {
       "path": "reference/calibrated-ssi-bundle-description.txt",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 7968,
       "expectedSha256": "d8ab98d85239f906579328bed59af4f5179754f85e0cc3fa9a1606d00c5520bf"
     },
     {
       "path": "reference/horizons-physical.txt",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 1285,
       "expectedSha256": "f4b5b683d611db68de29f4bfbecb4577e29bc29c8ae82b81850f3d9fd1ce7439"
     },
     {
       "path": "reference/pck00007.tpc",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 90332,
       "expectedSha256": "ab7fd4ce7d34fe2c90217cb838b1f471f88d08308a521c86deefe271586ae6a0"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 2177,
       "expectedSha256": "673f53b5bb5c0960829b71ab2a187cee8f2bef70eadc525c17f34d42ef740f96"
     },
     {
       "path": "stars/LICENSE.md",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 595,
       "expectedSha256": "0f183925c9a4c30d91de52b9e31e0bf4347c3a5acb0d518be955966d96f7d8fe"
     },
     {
       "path": "stars/hyg-v41-field.json",
-      "purpose": "Pinned source label, source documentation or authored package input.",
       "expectedBytes": 89769,
       "expectedSha256": "38f9c18df6ddeaa1a72504d5ebfaa4ed74321044c387e39115a5611a56dec279"
     },

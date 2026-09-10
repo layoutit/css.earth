@@ -28,7 +28,9 @@
           "url": "https://science.nasa.gov/sun/facts/",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "nasa-sun-facts",
+          "locator": "/references/0; rotation-period"
         }
       },
       {
@@ -66,7 +68,9 @@
           "url": "https://science.nasa.gov/heliophysics/focus-areas/solar-science/",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "nasa-solar-science",
+          "locator": "/references/1; activity-cycle"
         }
       },
       {
@@ -77,7 +81,9 @@
           "url": "https://science.nasa.gov/heliophysics/focus-areas/solar-science/",
           "label": "NASA/JPL reference",
           "checked": "2026-09-08",
-          "path": "source/editorial/factsheet-review.json"
+          "path": "source/editorial/factsheet-review.json",
+          "catalogueId": "nasa-solar-science",
+          "locator": "/references/1; magnetic-cycle"
         }
       }
     ]

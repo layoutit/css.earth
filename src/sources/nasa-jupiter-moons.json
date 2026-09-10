@@ -1,0 +1,25 @@
+{
+  "id": "nasa-jupiter-moons",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA Science · Jupiter’s moons",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/jupiter/jupiter-moons/",
+      "label": "NASA Science · Jupiter’s moons"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/jupiter/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "167cd1b7d0031ca5b1199ad63da3722be04bf27cd65bdb65b907f1f8e602433e",
+      "locator": "/panel/facts/5/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Science"
+}

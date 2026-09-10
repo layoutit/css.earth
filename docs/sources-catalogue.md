@@ -1,8 +1,8 @@
 # Sources catalogue
 
-The Sources tab links published works and data products to the datasets that use
-them. A shared source has one identity across bodies; each body keeps its own
-input bytes, processing, credits and limits.
+The Sources tab links published works and data products to the datasets and
+factsheets that cite them. A shared source has one identity across bodies;
+each body keeps its own input bytes, processing, credits and limits.
 
 ## Find the record to change
 
@@ -10,6 +10,7 @@ input bytes, processing, credits and limits.
 | --- | --- |
 | [Source records](../src/sources/) (`<id>.json`) | One published identity per file: title, identifiers, version, citation links and evidence |
 | Body `source/manifest.json` | Local input IDs, paths, hashes, acquisition, credits and `sourceBinding` |
+| Body content recipe, `panel.facts` and `panel.moreFacts` | Citations on individual facts, with the source ID, checked date and evidence location |
 | Body `README.md` | Adopted values, source choices, processing, results and known problems |
 | [Mission and spacecraft catalogue](../site/source/spacecraft/catalog.json) | Citations for individual claims, with checked dates and locators |
 | [Render library](../site/source/spacecraft/render-library.json) and [emblem library](../site/source/spacecraft/emblem-library.json) | Artwork bindings, original credits and file pins |
@@ -42,7 +43,13 @@ evidence and plain language. Keep scientific tables in their existing records.
    change. Follow [preparation and checks](#prepare-and-check) below.
 
 A local recipe, measurement or display specification uses `kind: local` with a
-specific reason. Its external inputs remain connected through product lineage.
+specific reason: what the file contains and how the project made or chose it.
+For example, “Project-authored grid marking unavailable surface imagery.”
+An extracted provider page keeps the provider's attribution. Its location in
+the repository does not make it project-authored. External inputs to local
+calculations remain connected through product lineage.
+A document's `purpose` is optional. Keep it when it explains something the path,
+binding or native metadata does not; omit blanket descriptions and repetitions.
 A converted image is still derived from its published source; conversion does
 not create a new published work.
 
@@ -50,6 +57,12 @@ When consolidating duplicates, verify the published identity, update the current
 bindings and remove the redundant records. Each local input keeps its own pins.
 Preparation rejects missing, unknown or unresolved bindings. Establish the source
 identity from its evidence before publishing the prepared catalogue.
+
+Use the [factsheet fields](factsheets.md#editing-and-reproduction) for a fact
+citation. A database citation retains the exact query or model URL, version when
+available, and pinned numerical extract. This does not combine the identities of
+its native shape or image products. Fact citations never create dataset or
+mission-observation links.
 
 Independent additions touch separate files. Changes to the same published source
 still need to be reconciled. There is no shared index to update: preparation
@@ -84,10 +97,15 @@ need their body and preparation checks.
 ## Coverage and delivery
 
 The graph covers manifest inputs, used provenance documents/intermediates,
-mission and spacecraft citations, approved artwork and shared environments.
-Unused retained inputs create no usage edge. Factsheets, gallery descriptions,
-chart annotations and prose citations are not all indexed. A missing edge outside
-this scope does not establish that a source is unused throughout the repository.
+individual factsheet citations, mission and spacecraft citations, approved artwork
+and shared environments. The compiler checks and pins each cited factsheet
+evidence file. It rejects stale published facts before replacing either catalogue.
+
+Unused retained inputs create no usage edge. Facts without individual citations,
+gallery descriptions, chart annotations and prose citations remain outside the
+claim index. A missing edge does not establish that a source is unused throughout
+the repository. File checks establish identity; scientific review establishes
+whether the source supports the displayed quantity.
 
 Only relevant source cards become the current body's page HTML. The inert
 navigation previews omit Sources and Missions; the existing page transport fills

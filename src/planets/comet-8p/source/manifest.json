@@ -58,7 +58,7 @@
       "falseColor": false,
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored neutral display material."
       }
     },
     {
@@ -172,7 +172,7 @@
       "falseColor": false,
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Project-authored neutral display material for the Arecibo shape model."
       }
     }
   ],
@@ -215,89 +215,75 @@
       "path": "content/object.json",
       "expectedBytes": 4066,
       "expectedSha256": "9e5b017fbb350310376ebb6eac625c3194ab5848f5cd535b93ef4a430a188ba5",
-      "purpose": "Tuttle source evidence or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1572,
-      "expectedSha256": "9e5d1077d70cd7603c5a67b91d28145dce064973dd8316107aec3484c13f6b59",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "9e5d1077d70cd7603c5a67b91d28145dce064973dd8316107aec3484c13f6b59"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 412,
-      "expectedSha256": "0029e09de66921e2a22c5ec1bd13e26bfe9fefae7f00f2732ea3fb58c1e5671c",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "0029e09de66921e2a22c5ec1bd13e26bfe9fefae7f00f2732ea3fb58c1e5671c"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 5186,
-      "expectedSha256": "1f8074a74c5d85afba3b718a07779ab0f48a5539d67b37ab6e0456660288211d",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "1f8074a74c5d85afba3b718a07779ab0f48a5539d67b37ab6e0456660288211d"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 56,
-      "expectedSha256": "fd0259d6adfd494c9e376193813fc8d355cddcc8364eaa788abc06f359b5faa2",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "fd0259d6adfd494c9e376193813fc8d355cddcc8364eaa788abc06f359b5faa2"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 2292,
-      "expectedSha256": "ab49426ea608aa905b692ccd785d7e56eb57836c6cdc8d86e7750f6d8cee3240",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "ab49426ea608aa905b692ccd785d7e56eb57836c6cdc8d86e7750f6d8cee3240"
     },
     {
       "path": "reference/horizons-elements.txt",
       "expectedBytes": 7689,
-      "expectedSha256": "48b5685d301f690ead3cf7121b29487f5fe9d6eed79eb5ad1895007cbdbae76e",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "48b5685d301f690ead3cf7121b29487f5fe9d6eed79eb5ad1895007cbdbae76e"
     },
     {
       "path": "reference/horizons-spitzer.txt",
       "expectedBytes": 6761,
-      "expectedSha256": "4f07089d5e7b5a8c58091dbae46ff6664c63276e7a29ea38c49facff4efcf65f",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "4f07089d5e7b5a8c58091dbae46ff6664c63276e7a29ea38c49facff4efcf65f"
     },
     {
       "path": "reference/horizons-vectors.txt",
       "expectedBytes": 6979,
-      "expectedSha256": "e2ea2bba74157fc495d36637a25bd0d4f79739a9c78f373e1cd4843a92ef5b0c",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "e2ea2bba74157fc495d36637a25bd0d4f79739a9c78f373e1cd4843a92ef5b0c"
     },
     {
       "path": "reference/model-alternatives.json",
       "expectedBytes": 1819,
-      "expectedSha256": "6fe0824166a0d9ee2f6d0601ca052935453a071c2c2c0f74e9758b39b6242c69",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "6fe0824166a0d9ee2f6d0601ca052935453a071c2c2c0f74e9758b39b6242c69"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 851,
-      "expectedSha256": "17a70cc38cc672029eb89ffae7cb84513d29d09e0c3a6324d288f2d329268436",
-      "purpose": "Tuttle source evidence or authored preparation input."
+      "expectedSha256": "17a70cc38cc672029eb89ffae7cb84513d29d09e0c3a6324d288f2d329268436"
     }
   ]
 }

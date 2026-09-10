@@ -31,7 +31,9 @@
           "url": "https://doi.org/10.26033/pf3k-m168",
           "label": "IRAS-A-FPA-3-RDR-IMPS-V6.0",
           "checked": "2026-09-08",
-          "path": "source/reference/calibration.json"
+          "path": "source/reference/calibration.json",
+          "catalogueId": "iras-minor-planet-survey-v6",
+          "locator": "/diameterKm; radius = diameterKm / 2"
         }
       },
       {
@@ -52,7 +54,9 @@
           "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5856",
           "label": "DAMIT model 5856",
           "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json"
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 5856; /periodHours"
         }
       }
     ],

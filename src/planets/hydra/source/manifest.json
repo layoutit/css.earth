@@ -145,89 +145,75 @@
       "path": "content/object.json",
       "expectedBytes": 3883,
       "expectedSha256": "e2505a65631f159607e19fb11daf7591d46a2561bf1c1d262389893df5df46bd",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 1601,
-      "expectedSha256": "83cd279af2b69d7c86f9c42130ae77c198a9b17f8caf39dea4351ab7059e3822",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "83cd279af2b69d7c86f9c42130ae77c198a9b17f8caf39dea4351ab7059e3822"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 685,
-      "expectedSha256": "419d74ee876297a2d5b4fbefb0c2c0688d58e1366fb0014555917cccc26277d5",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "419d74ee876297a2d5b4fbefb0c2c0688d58e1366fb0014555917cccc26277d5"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1271,
-      "expectedSha256": "889766bf812c0f10b82af0a150ab9c9c3591b7d4e9d5face1dd556f31f00014e",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "889766bf812c0f10b82af0a150ab9c9c3591b7d4e9d5face1dd556f31f00014e"
     },
     {
       "path": "preparation/rotation.json",
       "expectedBytes": 720,
-      "expectedSha256": "e2087c3b7441104018a97571561c36170d4170c21718453a2b1d1c1d9f004311",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "e2087c3b7441104018a97571561c36170d4170c21718453a2b1d1c1d9f004311"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2461,
-      "expectedSha256": "71421b1e078a50a3b4c2e13e5931fdd7c8178d6d86bd16a8b2d0b08c53325b01",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "71421b1e078a50a3b4c2e13e5931fdd7c8178d6d86bd16a8b2d0b08c53325b01"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 3079,
-      "expectedSha256": "34d04876cf166b7fa1bfe6c820c7b5d8486ea052e2aa550d29f005abcc72f8ff",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "34d04876cf166b7fa1bfe6c820c7b5d8486ea052e2aa550d29f005abcc72f8ff"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 848,
-      "expectedSha256": "a6881eef218f6d57bf55b55cfbefdaa4c7712f54d600e72b0f5ce49b3e4fe7d9",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "a6881eef218f6d57bf55b55cfbefdaa4c7712f54d600e72b0f5ce49b3e4fe7d9"
     },
     {
       "path": "survey/composition-overview.docx",
       "expectedBytes": 31583,
-      "expectedSha256": "f5f5dfc5dd6d9085dd3d6d153a27f980977ae7caf10b4bdbf6a50e83d08189d0",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "f5f5dfc5dd6d9085dd3d6d153a27f980977ae7caf10b4bdbf6a50e83d08189d0"
     },
     {
       "path": "survey/figshare-v1.json",
       "expectedBytes": 10930,
-      "expectedSha256": "9ebacd8bfb84af7296de1dfadd0cbcfcb9f7479864ac5d0e8fc7268cb4af66de",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "9ebacd8bfb84af7296de1dfadd0cbcfcb9f7479864ac5d0e8fc7268cb4af66de"
     },
     {
       "path": "survey/lor_0299165548_0x630_sci.lbl",
       "expectedBytes": 46080,
-      "expectedSha256": "fd947906745512adcaf81365eac518f6019e752a618f4fb0cc335718a460a153",
-      "purpose": "Hydra source identity, survey evidence or authored preparation and content."
+      "expectedSha256": "fd947906745512adcaf81365eac518f6019e752a618f4fb0cc335718a460a153"
     }
   ],
   "generatedIntermediates": [

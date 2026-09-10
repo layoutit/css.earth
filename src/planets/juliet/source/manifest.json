@@ -132,107 +132,90 @@
       "path": "content/object.json",
       "expectedBytes": 3698,
       "expectedSha256": "5543b265ba0ec4f7e90fa874aeee45e4634462d54f6db9698fc9bf8476b196aa",
-      "purpose": "Juliet source evidence or authored preparation data.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       }
     },
     {
       "path": "measurements.json",
       "expectedBytes": 1104,
-      "expectedSha256": "2fd7d3dd17456225548cf3e849951f910a4ea4626f68aa584fb9c5f908e4a829",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "2fd7d3dd17456225548cf3e849951f910a4ea4626f68aa584fb9c5f908e4a829"
     },
     {
       "path": "preparation/acquisition.json",
       "expectedBytes": 488,
-      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "b78ebce258e50ea954c96af2bd06686264d45759be0efadfd9dc914587a34ef2"
     },
     {
       "path": "preparation/navigation.json",
       "expectedBytes": 1265,
-      "expectedSha256": "8ea4b5e90dfbbb46d0f1a8dccbeab3389766792cd05d070e0b8d40509ca94ca5",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "8ea4b5e90dfbbb46d0f1a8dccbeab3389766792cd05d070e0b8d40509ca94ca5"
     },
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 2397,
-      "expectedSha256": "9e0d70960e15204c9a91d913638c3c79e0f8df390453ea4cdd00426f02c4a136",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "9e0d70960e15204c9a91d913638c3c79e0f8df390453ea4cdd00426f02c4a136"
     },
     {
       "path": "presentation/minimap.json",
       "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
     },
     {
       "path": "presentation/title-mark.json",
       "expectedBytes": 2420,
-      "expectedSha256": "8eb006fba7550f1505e8a45afff38b0578a0c891d3cc37de4566a8a48eaaa813",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "8eb006fba7550f1505e8a45afff38b0578a0c891d3cc37de4566a8a48eaaa813"
     },
     {
       "path": "shape/pck00011.tpc",
       "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
       "path": "shape/publication.json",
       "expectedBytes": 1162,
-      "expectedSha256": "0c089fba4576f64b39e45346e968d0fe214702f6acc8592ecfdc91da18086541",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "0c089fba4576f64b39e45346e968d0fe214702f6acc8592ecfdc91da18086541"
     },
     {
       "path": "shape/rotation.json",
       "expectedBytes": 1169,
-      "expectedSha256": "349690700fdf9113bb044cd3c38ea7e785a9eb4b328041a29be36d55733387e8",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "349690700fdf9113bb044cd3c38ea7e785a9eb4b328041a29be36d55733387e8"
     },
     {
       "path": "stars/ESO-IMAGE-LICENSE.md",
       "expectedBytes": 2192,
-      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "672796020cb46cb21a44f85e716687f883e3ecd578d4ca6fbee52e63bfefcaba"
     },
     {
       "path": "stars/LICENSE.md",
       "expectedBytes": 598,
-      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "bbdc847811b0514e85e46cb735e6a263935672cc8bb56593490b434e1e0a4e01"
     },
     {
       "path": "stars/hyg-v41-field.json",
       "expectedBytes": 849,
-      "expectedSha256": "658dab930a4c4f4507319518bcff5d2775f01ea32f0f9ca5d65bebc3973523f4",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "658dab930a4c4f4507319518bcff5d2775f01ea32f0f9ca5d65bebc3973523f4"
     },
     {
       "path": "survey/native-inspection.json",
       "expectedBytes": 1024,
-      "expectedSha256": "a41e959fc7a78db0eec079091525bb782bb76fdc2b3c73a277eb24fcf8239dec",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "a41e959fc7a78db0eec079091525bb782bb76fdc2b3c73a277eb24fcf8239dec"
     },
     {
       "path": "survey/voyager-best-metadata.json",
       "expectedBytes": 14448,
-      "expectedSha256": "b6e44776f81894889abb3f9d363b9a1fd2a11ba65cf7eba407bf2d42c171a3d4",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "b6e44776f81894889abb3f9d363b9a1fd2a11ba65cf7eba407bf2d42c171a3d4"
     },
     {
       "path": "survey/voyager-best.lbl",
       "expectedBytes": 3334,
-      "expectedSha256": "5836eea24306a27ad61528c9d44732502de9b78f4e05dfaf43a6ba46eee6bf11",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "5836eea24306a27ad61528c9d44732502de9b78f4e05dfaf43a6ba46eee6bf11"
     },
     {
       "path": "survey/voyager-search.json",
       "expectedBytes": 663,
-      "expectedSha256": "67beb8b6d4c27916f7395777cf2344750a676aa4aa1ba6b6bcb1d8382734476a",
-      "purpose": "Juliet source evidence or authored preparation data."
+      "expectedSha256": "67beb8b6d4c27916f7395777cf2344750a676aa4aa1ba6b6bcb1d8382734476a"
     }
   ],
   "generatedIntermediates": [

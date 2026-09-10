@@ -50,9 +50,11 @@ also runs this recovery. It does not download or rebuild body assets.
 
 - `basis: recovered` means existing declared pins were bound. It does not prove
   that source bytes are present, that an acquisition happened in this run, or
-  that a complete body was freshly reproduced.
+  that a complete body was freshly reproduced. This is also the default when
+  calling the lineage helper directly, even with byte verification.
 - `basis: prepared` is emitted by the preparation pipeline after checking the
-  bound source and output bytes. A changed input, recipe, output or binding
+  bound source and output bytes. Only that pipeline requests `prepared`.
+  A changed input, recipe, output or binding
   invalidates that record. Recovery preserves a prepared record only when its
   full identity still matches.
 - `pnpm prepare:provenance mercury --verify` checks locally available source and
@@ -69,8 +71,11 @@ the compiler does not invent evidence to fill those gaps.
 Coverage is explicitly `object-datasets-and-bound-rendering-products`.
 This is not a claim of provenance for every scientific statement, every runtime
 byte, the shared sky, or remote geographic delivery. Authored information is
-recorded as authored content. Its reference links alone do not establish
-field-level scientific derivation. Shared scene credits retain their existing
+recorded as authored content. The Sources compiler separately reads the
+[citations on individual facts](factsheets.md); that records attribution, not
+independent verification of the quantity. The `generator` hash identifies the
+lineage compiler, not the implementation that originally made a recovered asset.
+Shared scene credits retain their existing
 separate owner. The compiler also supports Earth noise page records, but those
 geographic views are absent from Earth's current descriptor. That binding does
 not certify worldwide imagery coverage or remote availability.

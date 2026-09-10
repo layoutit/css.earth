@@ -4,11 +4,11 @@
   "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fa6ad5d5916a68e17f882ffc50faa941122e8e126ec31f8f10b28e243116d27f"
+    "sha256": "49394a97db23f758541133a7a8f720160ddc8f0f456e630203e208da8d30c773"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
-    "sha256": "5a5be580d792505b9849783903dbc483222e16d8bb6f806a93d51ff00a895a3e",
+    "sha256": "14dfd987c286f9285ce5bd2d5e9646cb777d02658fbcf7b6c4089476481c572c",
     "bindingsSha256": "606b8254780c43f22360bff0023bde2086e128773980e5eed76ab3a8d01116e3"
   },
   "recipes": [
@@ -198,7 +198,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "8e1e2637ce07eb7f672c0270b747831c3bd371ea786e32ef38ff40849fab7c89",
+      "sha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -254,7 +254,9 @@
                 "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
                 "label": "JPL Horizons pinned physical record",
                 "checked": "2026-09-08",
-                "path": "source/reference/horizons-physical.txt"
+                "path": "source/reference/horizons-physical.txt",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "Target physical data: geometric albedo"
               }
             }
           ]
@@ -502,7 +504,7 @@
       "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Camera geometry calculated from the pinned image and mission kernels for 21 LUTETIA at 2010-07-10T15:41:06.632."
       },
       "sha256": "e96bd42b06e9259e667c04bc595cf1a7c4859f05096ad299f32930eff3dbb6ac",
       "bytes": 5070,
@@ -559,7 +561,7 @@
       "acquisition": "Reproduce with tools/objects/terrestrial-layers/prepare-archived-camera.py; checked-in preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The retained record identifies repository preparation data or a local reference measurement. This binding makes no claim that its modeled output is a published observation; external dependencies remain in product lineage and body method notes."
+        "reason": "Camera geometry calculated from the pinned image and mission kernels for 21 LUTETIA at 2010-07-10T15:41:54.488."
       },
       "sha256": "619648154d976db683f43838d45668a140e9fac3ee508335eaf53076f2866fde",
       "bytes": 5104,
@@ -570,20 +572,19 @@
     },
     {
       "path": "content/object.json",
-      "purpose": "Pinned source documentation or authored preparation input.",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Explicitly authored content or preparation document in the retained provenance record. Published claim citations stay in its existing body source and method account."
+        "reason": "Project-authored page text, factsheet and view descriptions."
       },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
-      "title": "Pinned source documentation or authored preparation input.",
+      "title": "content/object.json",
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "8e1e2637ce07eb7f672c0270b747831c3bd371ea786e32ef38ff40849fab7c89",
-      "bytes": 10094,
+      "sha256": "bd587a259341019b545870b8ec95df98192d86003d5dee82bac00122471b0ce1",
+      "bytes": 10209,
       "dependencies": [],
       "verification": "manifest-pin",
       "acquisitionOperation": null,
@@ -733,8 +734,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5551,
-          "sha256": "9cc88d6a15330045045e35973e150a807ea3b91c742102658e51fb7f26cc4804",
+          "bytes": 5642,
+          "sha256": "e2223a97691e8b50582b084e148fdff2b75ad10991f1f9455be367a322fc9092",
           "verification": "bytes-verified"
         }
       ],

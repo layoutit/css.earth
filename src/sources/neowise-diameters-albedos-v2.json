@@ -1,0 +1,31 @@
+{
+  "id": "neowise-diameters-albedos-v2",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "NEOWISE Diameters and Albedos V2.0",
+  "identifiers": [
+    {
+      "type": "IRSA table",
+      "value": "neowisesbpropv2"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
+      "label": "NEOWISE Diameters and Albedos V2.0"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/planets/agenor/source/content/object.json",
+      "revision": "de0f9dd9062015251346a6bf6cb88692a618c3b2",
+      "sha256": "1625eb6dfe5de53aab0e2ecbd30835ec7978cf11ee180f28f5438a7c0fe74976",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA/IPAC Infrared Science Archive",
+  "version": "2.0"
+}
