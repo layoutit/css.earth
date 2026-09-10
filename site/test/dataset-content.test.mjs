@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
-import { OBJECTS } from '../objects.mjs';
-import { validateDatasetText } from '../dataset-content.mjs';
-import { datasetCaption } from '../dataset-caption.mjs';
+import { OBJECTS } from '../objects.mts';
+import { validateDatasetText } from '../dataset-content.mts';
+import { datasetCaption } from '../dataset-caption.mts';
 
 const read = async path => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 

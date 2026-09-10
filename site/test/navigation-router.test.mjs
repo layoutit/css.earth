@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createSceneRouter } from '../scene-router.mjs';
+import { createSceneRouter } from '../scene-router.mts';
 import { formatSharedView } from '../../src/renderers/css/dist/index.js';
 import { worldCameraFromCenteredPresentation } from '../../src/renderers/css/dist/navigation.js';
 

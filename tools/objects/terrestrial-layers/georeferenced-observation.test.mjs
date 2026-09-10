@@ -4,8 +4,8 @@ import {mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import {writeArrayBuffer,fromFile} from 'geotiff';
-import {resampleGeoreferencedObservation} from './observed-geotiff.mjs';
-import {readObservation} from './solid-raster.mjs';
+import {resampleGeoreferencedObservation} from './observed-geotiff.mts';
+import {readObservation} from './solid-raster.mts';
 
 const radius = 180 / Math.PI;
 const policy = {kind:'geotiff-rgb-alpha', noData:0, centerLongitude:0, channels:'rgb', zeroValidity:'all-channels',

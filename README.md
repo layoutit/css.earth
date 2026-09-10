@@ -140,7 +140,7 @@ The vendored astronomy package (`packages/astronomy`, see its `SOURCE.md`) is
 a preparation dependency only. It is consumed through its own build, which
 `pnpm install` runs as `postinstall` (`pnpm build:astronomy` repeats it);
 `pnpm prepare:planets` builds it first, and `pnpm prepare:solar-geometry`
-regenerates the checked-in `src/platform/solar-geometry.mjs` from it
+regenerates the checked-in `src/platform/solar-geometry.mts` from it
 bit-for-bit. The browser runtime never loads it.
 
 Surface minimaps are separate prepared WebP images, at most 640 pixels wide

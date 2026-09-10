@@ -4,7 +4,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import test from 'node:test';
 import sharp from 'sharp';
-import {prepareObservationLenses, observationRaster} from './raster.mjs';
+import {prepareObservationLenses, observationRaster} from './raster.mts';
 
 async function fixture() {
   const root=await mkdtemp(join(tmpdir(),'cssearth-scientific-display-'));

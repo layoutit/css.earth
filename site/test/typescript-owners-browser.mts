@@ -80,7 +80,7 @@ try {
   assert.deepEqual(report.waits, { completedFrames: 2, requestedFrames: 2, observedFrames: 1, cancelledFrames: 1, disposed: true });
 
   await page.evaluate(async () => {
-    const dragPath = '/src/platform/camera-input.mjs', policyPath = '/site/runtime-policy.mjs';
+    const dragPath = '/src/platform/camera-input.mts', policyPath = '/site/runtime-policy.mts';
     const { createUnboundedMatrixDragControls } = await import(dragPath) as DragModule;
     const policy = await import(policyPath) as typeof import('../runtime-policy.mts');
     const input = document.querySelector<HTMLElement>('#input');

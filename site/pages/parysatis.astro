@@ -3,8 +3,7 @@ import PlanetLayout from "../layouts/PlanetLayout.astro";
 import PreparedObjectHead from "../components/PreparedObjectHead.astro";
 import PreparedObjectPanel from "../components/PreparedObjectPanel.astro";
 import preparedContent from "../../src/planets/parysatis/prepared/content.json";
-import { loadObjectPageData } from "../object-page-data.mjs";
-import type { PreparedObjectContentDocument } from "../../tools/objects/content/types";
+import { loadObjectPageData } from "../object-page-data.mts";
 import "../../src/renderers/css/styles/parysatis-surfaces.css";
 import "../planet-shell.css";
 const preparedPage = await loadObjectPageData("parysatis");
@@ -12,5 +11,5 @@ const preparedPage = await loadObjectPageData("parysatis");
 
 <PlanetLayout objectId="parysatis">
   <PreparedObjectHead slot="planet-head" preparedAssets={preparedPage.assets} />
-  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent as PreparedObjectContentDocument} preparedControls={preparedPage.controls} />
+  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent} preparedControls={preparedPage.controls} />
 </PlanetLayout>

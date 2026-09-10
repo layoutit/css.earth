@@ -1,0 +1,52 @@
+import type { SourceInput, SourceEntry, SourceManifest } from '../../../src/platform/source-manifest.mts';
+/** Source-space geometry and numeric fields shared by preparation algorithms. */
+export interface MeshDimensions { metersPerUnit:number; expectedVertices:number; expectedFaces:number }
+export interface SurfaceHit { radius:number; faceId:number }
+export interface ClosestSurfacePoint extends SurfaceHit { point:number[]; barycentric:number[]; normal:number[]; distanceMeters:number }
+export interface SourceMesh {
+  faceProvenance?:ArrayLike<number>; constraintFlags?:ArrayLike<number>; imageGrid?:{zOffsetMeters:number};
+  vertices:number; faces:number; positions:number[][]; indices:number[][]; bounds:number[][];
+  hit(longitude:number,latitude:number,requireUnique?:boolean):SurfaceHit|null;
+  intersect(origin:readonly number[],direction:readonly number[],maximumDistance?:number,requireUnique?:boolean):SurfaceHit|null;
+  closestPoint(point:readonly number[],maximumDistance?:number,requireUnique?:boolean):ClosestSurfacePoint|null;
+  sample(longitude:number,latitude:number):number|null;
+}
+export interface SourceSurfaceSample extends ClosestSurfacePoint { value:number; sourceCell?:number }
+export interface SourceScalar { sample(longitude:number,latitude:number):number|null; samplePoint?(point:readonly number[]):SourceSurfaceSample|null }
+export interface RgbObservation { rgb:Uint8Array; missing:Uint8Array; width?:number; height?:number }
+export interface SourceFace { id:number; a:number[]; ab:number[]; ac:number[]; min:number[]; max:number[] }
+export type FaceTree = {min:number[];max:number[]} & ({items:SourceFace[];left?:never;right?:never}|{items?:never;left:FaceTree;right:FaceTree});
+export interface PixelValidityPolicy { noData:number|null; zeroValidity?:string; withholdLatitudeDegrees?:number; withholdLongitudeDegrees?:number[] }
+export interface RasterResult { data:Uint8Array; info:{width:number;height:number;channels:number} }
+export interface PreparedTriangle { vertices:readonly (readonly number[])[]; normal:number[]; vertexNormals:number[][]; estimated?:boolean }
+export interface GeologyPolygon { rings:number[][][]; south:number; north:number; category?:number|null }
+export interface SymbolSegment {a:number[];b:number[];radius:number;category:number;id:number}
+export interface PreparedSymbolSegment extends SymbolSegment {delta:number[];squared:number}
+export interface LinearTransform {scale:number;offset:number}
+export interface ScalarGrid {width:number;height:number;noData?:number|null;specialValueMagnitude?:number}
+export interface ScienceProjection {referenceRadiusMeters:number;projection?:string;poleLatitude?:number;centerLongitude:number;longitudeRange?:number[];wrapLongitude?:boolean}
+export interface Relief {referenceRadiusMeters:number;lightDirection:number[];ambient:number;heightToMeters?:number}
+export type SciencePalette = ({categories:{color:string}[];minimum?:number;maximum?:number;colors?:string[]} | {categories?:undefined;minimum:number;maximum:number;colors:string[]}) & {relief?:Relief;outputLongitudeOrigin?:number};
+export interface ObservationGeometry {sun:number[];observer:number[]}
+export interface ColorBand extends ScalarGrid {data:ArrayLike<number>;origin:number[];resolution:number[];filter:string;capture?:ObservationGeometry}
+export interface ObservedColorProfile {filters:string[];referenceRadiusMeters:number;centerLongitude:number;gamma:number}
+export interface PhotometryProfile {radiusKm:number;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;referenceIncidenceDegrees:number;referenceEmissionDegrees:number;observationWeights:Record<string,number>}
+export interface ObservedColorContext {groups:ReadonlyMap<string,ColorBand[]>;profile:ObservedColorProfile;width:number;height:number;sourceIds?:string[]}
+export interface DiskPhotometry {model?:string;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;maximumGain:number;coefficient?:number;phaseCoefficientPerDegree?:number}
+export interface GeoFrame {width:number;height:number;planes:Record<string,ArrayLike<number>>;xyz(index:number):number[];valid(index:number):boolean;
+  acceptPixel?(index:number):boolean;projectPoint?(point:readonly number[]):number[];quality?:{flags:ArrayLike<number>;allowLossy:boolean}}
+export type GeoSample = {reason:string;separationMeters?:number;radiance?:never;gain?:never;maximumEmissionDegrees?:never} |
+  {reason?:undefined;separationMeters:number;radiance:number;gain:number;maximumEmissionDegrees:number};
+export interface SipCamera {matrix:number[][];sip:{referencePixel:number[];a:number[][];b:number[][];offsetPixels:number[]}}
+
+export interface ObservationSample {reason?:string; radiance?:number; maximumEmissionDegrees?:number}
+export interface ObservationLevelPolicy {minimumPairs:number;maximumLogMad:number;maximumGain:number;samplesPerTriangle?:number}
+export interface SourceAccess {manifest?:SourceManifest;validateGroup(consumer:string):Promise<readonly SourceInput[]>;validatePath(path:string):Promise<SourceEntry>}
+export interface SurfaceConfig {geometry:{radius:number;radiusKm:number;radialTerrain:{path:string;format?:string;sourceTopology?:string;simplification:{method:string;maximumErrorMeters:number}}};raster:{height:number}}
+export interface RadialSurface {grid:SourceMesh;faces:PreparedTriangle[]}
+export interface SurfaceOptions {sourceDirectory:string;source:SourceAccess;recipe:unknown;radial:RadialSurface;config:SurfaceConfig}
+export type SurfaceColorSample = {reason:string;color:number[];radiance?:never;maximumEmissionDegrees?:never} |
+  {reason?:undefined;color:number[];radiance:number;distanceMeters?:number;separationMeters?:number;gain?:number;maximumEmissionDegrees?:number;frameId?:string;frameIndex?:number};
+
+export interface GeoObservationFrame extends GeoFrame {camera?:{matrix:number[][];positionKm:number[]};startTime?:string;filter?:string;
+ quality?:{flags:ArrayLike<number>;allowLossy:boolean;report?:Record<string,unknown>};qualityReport?:Record<string,unknown>;isLossyPixel?(index:number):boolean}

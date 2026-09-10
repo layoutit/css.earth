@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { createPreparedDestinations } from "./prepared-destinations.mjs";
+import { createPreparedDestinations } from "./prepared-destinations.mts";
 import { createSceneLifetime } from "./scene-lifetime.mjs";
 
-function fixture(options = {}) {
-  const bytes = JSON.stringify({ schema: "cssearth-prepared-destinations@1", places: [{ id: "a" }] });
+function fixture(options = {}, catalog = { schema: "cssearth-prepared-destinations@1", places: [{ id: "a" }] }) {
+  const bytes = JSON.stringify(catalog);
   const lifetime = createSceneLifetime(), calls = [];
   const plan = { catalog: { url: "/scenes/example/places.json", bytes: Buffer.byteLength(bytes), count: 1,
     sha256: createHash("sha256").update(bytes).digest("hex") }, defaultLens: "normal",
@@ -47,4 +47,14 @@ test("a superseded selection cannot start a stale destination flight", async () 
   const f = fixture({ selectLens: async () => false });
   await assert.rejects(f.destinations.select({ camera: {} }), /superseded/);
   assert.deepEqual(f.calls, []); f.lifetime.destroy();
+});
+
+test("matching catalogue pins cannot make a non-array places payload compatible", async t => {
+  for (const catalog of [null, { schema: "cssearth-prepared-destinations@1", places: { length: 1 } }]) {
+    const f = fixture({}, catalog);
+    t.mock.method(globalThis, "fetch", async () => new Response(f.bytes));
+    await assert.rejects(f.destinations.load(), /incompatible/);
+    f.lifetime.destroy();
+    t.mock.restoreAll();
+  }
 });

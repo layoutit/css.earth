@@ -8,8 +8,8 @@ try {
   await page.goto(`${origin}/mercury/`);
   await page.waitForFunction(() => window.__cssEarth?.ready === true);
   const proof = await page.evaluate(async () => {
-    const { createNavigationContent } = await import('/site/navigation-content.mjs');
-    const { mountPlanetShell } = await import('/site/planet-shell-client.mjs');
+    const { createNavigationContent } = await import('/site/navigation-content.mts');
+    const { mountPlanetShell } = await import('/site/planet-shell-client.mts');
     const headMetadata = doc => ({
       title: doc.title,
       tags: [...doc.head.querySelectorAll('link[rel="canonical"], meta[name="description"], meta[property^="og:"], meta[name^="twitter:"]')]

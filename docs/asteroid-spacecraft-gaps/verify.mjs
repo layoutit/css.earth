@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
-import {OBJECTS} from '../../site/objects.mjs';
-import {validateObjectPackageFiles,validatePlanetData} from '../../tools/object-package-contract.mjs';
+import {OBJECTS} from '../../site/objects.mts';
+import {validateObjectPackageFiles,validatePlanetData} from '../../tools/object-package-contract.mts';
 import {runOperations} from '../../tools/objects/dist/operations.js';
 const ids=['annefrank','braille'],results=[];
 for(const id of ids){

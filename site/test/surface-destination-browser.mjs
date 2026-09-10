@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { prepareLocationPoint } from '../../tools/objects/geographic-pages/prepare-location.mjs';
+import { prepareLocationPoint } from '../../tools/objects/geographic-pages/prepare-location.mts';
 
 const origin = process.env.CSSEARTH_TEST_ORIGIN ?? 'http://localhost:4210';
 const output = '.local/surface-destination-browser';

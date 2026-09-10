@@ -25,7 +25,7 @@ import {
   manifestProblems,
   readProvenance,
   targetFor,
-} from "./sync-upstream.mjs";
+} from "./sync-upstream.mts";
 
 const REQUIRED_FILES = {
   astronomy: [
@@ -136,7 +136,7 @@ for (const pkg of PACKAGES) {
     assert.match(provenance.headCommit, /^[0-9a-f]{40}$/);
     assert.equal(provenance.upstreamDirty, false);
     assert.ok(Number.isFinite(Date.parse(provenance.syncedAt)));
-    assert.equal(provenance.syncScript, "tools/sync-upstream.mjs");
+    assert.ok(["tools/sync-upstream.mjs", "tools/sync-upstream.mts"].includes(provenance.syncScript), "the receipt retains the sync owner used at that time");
     assert.equal(provenance.author, AUTHOR);
     assert.match(provenance.origin, /same author/);
     assert.match(provenance.origin, /not a third-party attribution/);
@@ -399,7 +399,7 @@ test("catalog is local and astronomy source sections survive sync", () => {
 test('local fixed-epoch science inputs survive upstream refresh without being attributed to the mirrored commit', async () => {
   const astronomy = targetFor('astronomy');
   const manifest = JSON.parse(await readFile(join(astronomy.dest, 'source/scene-epoch/manifest.json'), 'utf8'));
-  for (const file of ['tools/scene-ephemeris.mjs', 'tools/acquire-scene-ephemeris.mjs',
+  for (const file of ['tools/scene-ephemeris.mts', 'tools/acquire-scene-ephemeris.mts',
     'source/scene-epoch/README.md', 'source/scene-epoch/manifest.json',
     ...manifest.records.map(record => `source/scene-epoch/${record.path}`)]) {
     assert.ok(existsSync(join(astronomy.dest, file)), file);
@@ -415,7 +415,7 @@ test('scene companion integration is preserved locally while shared ephemeris ma
   const astronomy = targetFor('astronomy');
   const provenance = await readProvenance(astronomy);
   const mirrored = await buildManifest(astronomy);
-  for (const file of ['tools/body-epoch-ephemeris.mjs', 'tools/generate-scene-satellites.mjs',
+  for (const file of ['tools/body-epoch-ephemeris.mts', 'tools/generate-scene-satellites.mts',
     'src/sceneSatellites.ts', 'src/sceneSatellites.test.ts', 'src/data/sceneSatelliteStates.data.ts',
     'src/solarSystem.ts']) {
     assert.ok(existsSync(join(astronomy.dest, file)), file);
@@ -431,4 +431,15 @@ test('scene companion integration is preserved locally while shared ephemeris ma
   assert.equal(isOwnedFile(astronomy, 'src/sceneUnrelated.ts'), false, 'no broad scene-prefix exemption');
   assert.equal(isOwnedFile(astronomy, 'tools/unrelated-ephemeris.mjs'), false, 'no broad tools exemption');
   assert.match(provenance.locallyMaintainedOrigins['src/solarSystem.ts'].lastMirroredSha256, /^[0-9a-f]{64}$/);
+});
+
+
+test('upstream refresh preserves each renamed TypeScript owner and its historical JavaScript name', () => {
+  const astronomy=targetFor('astronomy');
+  for (const file of ['tools/scene-ephemeris','tools/acquire-scene-ephemeris','tools/body-epoch-ephemeris',
+    'tools/generate-scene-satellites','tools/lib/fit-position-correction','tools/lib/fit-harmonics',
+    'tools/generate-dwarf-planets','tools/generate-series','tools/lib/elp2000','tools/lib/horizons','tools/lib/sources','tools/lib/vsop87']) {
+    for (const extension of ['.mjs','.mts']) assert.equal(isOwnedFile(astronomy,file+extension),true,file+extension);
+  }
+  assert.equal(isOwnedFile(astronomy,'tools/unrelated-ephemeris.mts'),false);
 });

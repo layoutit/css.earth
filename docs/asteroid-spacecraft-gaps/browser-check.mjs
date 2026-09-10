@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright';
-import {OBJECTS} from '../../site/objects.mjs';
+import {OBJECTS} from '../../site/objects.mts';
 import {conformanceBrowserLaunch} from '../../site/test/conformance-browser-launch.mjs';
 const ids=['annefrank','braille'],origin='http://127.0.0.1:4278';
 const output=resolve('output/playwright/asteroid-spacecraft-gaps');await mkdir(output,{recursive:true});

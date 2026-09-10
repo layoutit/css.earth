@@ -3,8 +3,7 @@ import PlanetLayout from "../layouts/PlanetLayout.astro";
 import PreparedObjectHead from "../components/PreparedObjectHead.astro";
 import PreparedObjectPanel from "../components/PreparedObjectPanel.astro";
 import preparedContent from "../../src/planets/metis-9/prepared/content.json";
-import { loadObjectPageData } from "../object-page-data.mjs";
-import type { PreparedObjectContentDocument } from "../../tools/objects/content/types";
+import { loadObjectPageData } from "../object-page-data.mts";
 import "../../src/renderers/css/styles/metis-9-surfaces.css";
 import "../planet-shell.css";
 const preparedPage = await loadObjectPageData("metis-9");
@@ -12,5 +11,5 @@ const preparedPage = await loadObjectPageData("metis-9");
 
 <PlanetLayout objectId="metis-9">
   <PreparedObjectHead slot="planet-head" preparedAssets={preparedPage.assets} />
-  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent as PreparedObjectContentDocument} preparedControls={preparedPage.controls} />
+  <PreparedObjectPanel slot="planet-ui" preparedContent={preparedContent} preparedControls={preparedPage.controls} />
 </PlanetLayout>

@@ -21,7 +21,7 @@ try {
   const motion = page.locator('input[name="motion"]');
   if (await motion.isChecked()) await motion.uncheck({ force: true });
   await page.evaluate(async () => {
-    const { OBJECTS } = await import('/site/objects.mjs');
+    const { OBJECTS } = await import('/site/objects.mts');
     window.__handoffFrame = OBJECTS.find(object => object.id === 'sun').worldFrame;
     window.__handoffNodes = [...document.querySelector('.prepared-universe').querySelectorAll('*')];
   });

@@ -11,8 +11,9 @@
     "erasableSyntaxOnly": true,
     "skipLibCheck": true,
     "noEmit": true,
-    "types": []
+    "types": ["node"],
+    "typeRoots": ["../packages/engine/node_modules/@types", "../node_modules/@types"]
   },
-  "include": ["**/*.mts"],
+  "include": ["**/*.mts", "**/*.ts"],
   "exclude": ["test"]
 }

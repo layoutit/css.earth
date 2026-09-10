@@ -13,7 +13,7 @@ import {
   WHEEL_ZOOM_USE_SCROLL_DISTANCE,
   WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
   wheelZoomInputKind,
-} from "../runtime-policy.mjs";
+} from "../runtime-policy.mts";
 
 test("automatic playback has one complete readiness, intent and environment policy", () => {
   for (const sceneState of ["loading", "ready", "error", "destroyed"]) {

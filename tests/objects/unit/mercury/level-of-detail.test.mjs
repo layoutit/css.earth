@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/planets/mercury/prepared/runtime.json" with {type: "json"};
-import { resolvePreparedPresentation } from "../../../../src/platform/prepared-presentation.mjs";
+import { resolvePreparedPresentation } from "../../../../src/platform/prepared-presentation.mts";
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
 
 const BILLBOARD_LIGHTING_KEY = "lighting-billboard";

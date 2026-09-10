@@ -1,0 +1,33 @@
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { createHash } from 'node:crypto';
+import { parseObjectDescriptor } from '@cssearth/objects';
+import { requireAssets, requireControls } from '../src/renderers/css/dist/index.js';
+import { record } from './browser-types.mts';
+
+/** Server/build-only metadata read. Scene trees remain separate runtime assets. */
+export async function readPreparedObjectBytes(id: string, root = process.cwd()) {
+  if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object page identity.');
+  const directory = resolve(root, 'src/planets', id);
+  const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')));
+  if (descriptor.id !== id || descriptor.prepared?.url !== 'prepared/object.json') {
+    throw new TypeError(`${id}: invalid prepared page reference.`);
+  }
+  const bytes = await readFile(resolve(directory, 'prepared/object.json'));
+  if (createHash('sha256').update(bytes).digest('hex') !== descriptor.prepared.sha256) {
+    throw new Error(`${id}: prepared page data differs from its descriptor pin.`);
+  }
+  return { descriptor, bytes };
+}
+
+export async function loadObjectPageData(id: string, root = process.cwd()) {
+  const { bytes } = await readPreparedObjectBytes(id, root);
+  const object: unknown = JSON.parse(bytes.toString("utf8"));
+  if (!record(object) || object.schema !== 'cssearth-prepared-object@1' || object.id !== id ||
+      !record(object.data) || !object.data.assets || !object.data.controls) {
+    throw new TypeError(`${id}: incomplete prepared page data.`);
+  }
+  requireAssets(object.data.assets);
+  requireControls(object.data.controls);
+  return { assets: object.data.assets, controls: object.data.controls };
+}

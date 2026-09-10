@@ -6,12 +6,12 @@ import {tmpdir} from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {EventEmitter} from 'node:events';
 import {createHash} from 'node:crypto';
-import {createOperationContext,operationArguments} from '../../../../tools/objects/geographic-pages/operations/context.mjs';
-import {wmtsLocalMirror} from '../../../../tools/objects/geographic-pages/operations/wmts-local-server.mjs';
-import {prepareWmtsBlocks} from '../../../../tools/objects/geographic-pages/operations/prepare-wmts-blocks.mjs';
-import {publishPreparedCityAssets} from '../../../../tools/objects/geographic-pages/operations/r2-publish.mjs';
-import {prepareCityIndex} from '../../../../tools/objects/geographic-pages/operations/prepare-index.mjs';
-import {prepareWmtsPagePresentation} from '../../../../tools/objects/geographic-pages/pinned-hierarchy.mjs';
+import {createOperationContext,operationArguments} from '../../../../tools/objects/geographic-pages/operations/context.mts';
+import {wmtsLocalMirror} from '../../../../tools/objects/geographic-pages/operations/wmts-local-server.mts';
+import {prepareWmtsBlocks} from '../../../../tools/objects/geographic-pages/operations/prepare-wmts-blocks.mts';
+import {publishPreparedCityAssets} from '../../../../tools/objects/geographic-pages/operations/r2-publish.mts';
+import {prepareCityIndex} from '../../../../tools/objects/geographic-pages/operations/prepare-index.mts';
+import {prepareWmtsPagePresentation} from '../../../../tools/objects/geographic-pages/pinned-hierarchy.mts';
 import {PREPARED_EARTH_SCENE as scene} from './prepared-fixture.mjs';
 
 test('authored geographic page defaults exactly reproduce the accepted prepared presentation',async()=>{

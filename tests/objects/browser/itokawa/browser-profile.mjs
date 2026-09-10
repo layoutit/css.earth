@@ -10,6 +10,13 @@ export const browserProfile=createObjectBrowserProfile({id:'itokawa',controls,au
   "canonicalPreparedAssets": [
     "/scenes/itokawa/itokawa-amica-surface@2x.webp"
   ],
+  "lensRace": {
+    "defaultId": "amica",
+    "slowId": "elevation",
+    "winnerId": "amica",
+    "slowAsset": "/scenes/itokawa/itokawa-elevation-shadow@2x.webp",
+    "preReadyDisabled": true
+  },
   "retained": {
     "lensIds": [
       "amica",

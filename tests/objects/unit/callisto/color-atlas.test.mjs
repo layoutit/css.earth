@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {fromFile} from 'geotiff';
-import {missingCoverageColor} from '../../../../src/platform/prepare-missing-coverage.mjs';
+import {missingCoverageColor} from '../../../../src/platform/prepare-missing-coverage.mts';
 import {publishedObservation,canonicalPoint,assertDisplayClose} from '../observed-atlas-proof.mjs';
 const root=new URL('../../../../src/planets/callisto/',import.meta.url);
 

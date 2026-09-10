@@ -21,32 +21,17 @@
     "prose-project-link": "*.md: the [Galaxio](repo) project link -> [cssEarth](repo)",
     "prose-pipeline-writer-path": "*.md: the Python writer's path inside the upstream pipeline/ (absent here) -> `formats/catalog.py` of the external catalogue pipeline (not part of this repository)",
     "prose-pipeline-directory": "*.md: \"A Python writer lives in the repo's `pipeline/`\" (absent here) -> the external catalogue pipeline (not part of this repository)",
-    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md \u00a72 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
+    "prose-architecture-doc": "*.md: the upstream root ARCHITECTURE.md §2 reference (absent here) -> the \"The frame tree is the whole point\" section of AGENTS.md",
     "prose-claude-symlink": "AGENTS.md: drop the sentence announcing the CLAUDE.md symlink, which is not mirrored (EXCLUDED_FILES)",
     "code-project-url": "src/modelAccuracy.ts: PROJECT_SOURCE_URL string literal, the upstream ARCHITECTURE.md -> this package's AGENTS.md in the cssEarth repository (a documentation URL; no behaviour change)",
-    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio \u2026 convention/definition' sourceLabel string literals -> 'cssEarth \u2026' (labels only; no behaviour change)"
+    "code-convention-label": "src/modelAccuracy.ts: the two 'Galaxio … convention/definition' sourceLabel string literals -> 'cssEarth …' (labels only; no behaviour change)"
   },
-  "rewrittenFiles": {
-    "package.json": [
-      "package-name",
-      "package-urls"
-    ]
-  },
+  "rewrittenFiles": {},
   "excludedFiles": {},
-  "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mjs (tools/prepare-solar-geometry.mjs first). A catalog consumer would be wired the same way.",
-  "fileCount": 29,
-  "byteCount": 362136,
+  "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mts (tools/prepare-solar-geometry.mts first). A catalog consumer would be wired the same way.",
+  "fileCount": 22,
+  "byteCount": 328174,
   "files": {
-    "package.json": {
-      "sha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
-      "bytes": 1231,
-      "upstreamSha256": "6b9a40321c760ee9e1e0a96ae26f44a0a4059a1d9f9cf939dd81bda66b4347c9",
-      "upstreamBytes": 1227,
-      "identityRules": [
-        "package-name",
-        "package-urls"
-      ]
-    },
     "src/__fixtures__/compare.ts": {
       "sha256": "931eef57a5bb089623b82cebf29ae8f22723e9f364b3f0b275ab7249d5b45a7a",
       "bytes": 944
@@ -127,30 +112,6 @@
       "sha256": "86ef3df9c349d8c7f0db7bbe0aefecd203ab0a6d9a532d3bcaea6eef19c94172",
       "bytes": 162
     },
-    "tools/generate-dwarf-planets.mjs": {
-      "sha256": "791eaf7961ef6fa7251550cc42be8801699847bf23ba253f4936602faa58c2db",
-      "bytes": 4648
-    },
-    "tools/generate-series.mjs": {
-      "sha256": "a3d6df3b44ab389e08195eb0c190143fc12723706db2c77151d33fa3a6cc715e",
-      "bytes": 12614
-    },
-    "tools/lib/elp2000.mjs": {
-      "sha256": "46f83c9694c378749da5c3b54ef2ffd76a5ae1c94cb0b566baf08591cf3cbfca",
-      "bytes": 6983
-    },
-    "tools/lib/horizons.mjs": {
-      "sha256": "d61c8860072706118725b888256fb0e2523841c43de71a372cab9fb08a8b82e7",
-      "bytes": 3983
-    },
-    "tools/lib/sources.mjs": {
-      "sha256": "de597d891e8e9d5ed6d0e5011916a429b861cc1c9058002372d200933b7b735c",
-      "bytes": 1662
-    },
-    "tools/lib/vsop87.mjs": {
-      "sha256": "d62861ba16eccad92b2e452dd4fce2a97f1cee10da42bd4e22b9815295cd34ee",
-      "bytes": 2841
-    },
     "tsconfig.json": {
       "sha256": "5aa18f1f108ccfa0c1a1103a2968c9afa752d44d4d867ee9cb1649a0cd07a03f",
       "bytes": 155
@@ -165,11 +126,24 @@
     "AGENTS.md",
     "CLAUDE.md",
     "README.md",
+    "package.json",
+    "source/scene-epoch/README.md",
+    "source/scene-epoch/earth.txt",
+    "source/scene-epoch/epimetheus.txt",
+    "source/scene-epoch/helene.txt",
+    "source/scene-epoch/janus.txt",
+    "source/scene-epoch/manifest.json",
+    "source/scene-epoch/mimas.txt",
+    "source/scene-epoch/phobos.txt",
+    "source/scene-epoch/triton.txt",
     "src/__fixtures__/horizons.asteroids-1.ts",
     "src/__fixtures__/horizons.asteroids-2.ts",
+    "src/__fixtures__/horizons.asteroids-3.ts",
+    "src/__fixtures__/horizons.asteroids-4.ts",
     "src/__fixtures__/horizons.asteroids.ts",
     "src/__fixtures__/horizons.comets.ts",
     "src/__fixtures__/horizons.moons-and-small-bodies-2.ts",
+    "src/__fixtures__/horizons.moons-and-small-bodies-3.ts",
     "src/__fixtures__/horizons.moons-and-small-bodies.ts",
     "src/__fixtures__/horizons.planetary.ts",
     "src/__fixtures__/horizons.ts",
@@ -180,12 +154,18 @@
     "src/bodies.ts",
     "src/comets.test.ts",
     "src/comets.ts",
+    "src/data/asteroidElements-1.data.ts",
+    "src/data/asteroidElements-2.data.ts",
+    "src/data/asteroidElements-3.data.ts",
+    "src/data/asteroidElements-4.data.ts",
     "src/data/asteroidElements.data.ts",
     "src/data/cometElements.data.ts",
+    "src/data/satelliteElements.data.didymos.ts",
     "src/data/satelliteElements.data.jupiter.ts",
     "src/data/satelliteElements.data.mars.ts",
     "src/data/satelliteElements.data.neptune.ts",
     "src/data/satelliteElements.data.pluto.ts",
+    "src/data/satelliteElements.data.saturn-2.ts",
     "src/data/satelliteElements.data.saturn.ts",
     "src/data/satelliteElements.data.ts",
     "src/data/satelliteElements.data.uranus.ts",
@@ -195,6 +175,8 @@
     "src/index.ts",
     "src/modelAccuracy.test.ts",
     "src/modelAccuracy.ts",
+    "src/periodicCorrection.test.ts",
+    "src/periodicCorrection.ts",
     "src/rotation-neptune.ts",
     "src/rotation.ts",
     "src/satellites.test.ts",
@@ -203,14 +185,34 @@
     "src/sceneSatellites.ts",
     "src/solarSystem.test.ts",
     "src/solarSystem.ts",
-    "tools/body-epoch-ephemeris.mjs",
-    "tools/fetch-fixtures.mjs",
-    "tools/fetch-rotation-fixtures.mjs",
-    "tools/generate-asteroids.mjs",
-    "tools/generate-comets.mjs",
-    "tools/generate-satellites.mjs",
-    "tools/generate-scene-satellites.mjs",
-    "tools/lib/write-record-sections.mjs"
+    "tools/acquire-scene-ephemeris.mts",
+    "tools/body-epoch-ephemeris.mts",
+    "tools/fetch-fixtures.mts",
+    "tools/fetch-rotation-fixtures.mts",
+    "tools/generate-asteroids.mts",
+    "tools/generate-comets.mts",
+    "tools/generate-dwarf-planets.mts",
+    "tools/generate-satellites.mts",
+    "tools/generate-scene-satellites.mts",
+    "tools/generate-series.mts",
+    "tools/lib/elp2000.mts",
+    "tools/lib/ephemeris-records.mts",
+    "tools/lib/fit-cosine-series.mts",
+    "tools/lib/fit-cosine-series.test.mjs",
+    "tools/lib/fit-harmonics.mts",
+    "tools/lib/fit-harmonics.test.mjs",
+    "tools/lib/fit-libration.mts",
+    "tools/lib/fit-position-correction.mts",
+    "tools/lib/generator-records.mts",
+    "tools/lib/horizons.mts",
+    "tools/lib/satellite-fit.mts",
+    "tools/lib/source-records.test.mts",
+    "tools/lib/source-validation.mts",
+    "tools/lib/sources.mts",
+    "tools/lib/vsop87.mts",
+    "tools/lib/write-record-sections.mts",
+    "tools/scene-ephemeris.mts",
+    "tools/tsconfig.json"
   ],
   "originalLocalFileHashes": {
     "AGENTS.md": {
@@ -307,6 +309,55 @@
       "lastMirroredBytes": 13892,
       "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
       "reason": "The solar-system integration now composes local fixed-epoch companion states. This file is maintained locally; its current bytes are not attributed to the mirrored commit."
+    },
+    "package.json": {
+      "upstreamPath": "package.json",
+      "lastMirroredSha256": "a00c3ed14ee3f66a083a1f07a68bc2d02006f65c301dc467127a2b8cd1d5ea92",
+      "lastMirroredBytes": 1231,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The TypeScript migration owns this file locally. The prior mirrored identity is retained here; the current TypeScript source and build configuration are not attributed to the mirrored commit."
+    },
+    "tools/generate-dwarf-planets.mts": {
+      "upstreamPath": "tools/generate-dwarf-planets.mjs",
+      "lastMirroredSha256": "791eaf7961ef6fa7251550cc42be8801699847bf23ba253f4936602faa58c2db",
+      "lastMirroredBytes": 4648,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The TypeScript migration owns this file locally. The prior mirrored identity is retained here; the current TypeScript source and build configuration are not attributed to the mirrored commit."
+    },
+    "tools/generate-series.mts": {
+      "upstreamPath": "tools/generate-series.mjs",
+      "lastMirroredSha256": "a3d6df3b44ab389e08195eb0c190143fc12723706db2c77151d33fa3a6cc715e",
+      "lastMirroredBytes": 12614,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The TypeScript migration owns this file locally. The prior mirrored identity is retained here; the current TypeScript source and build configuration are not attributed to the mirrored commit."
+    },
+    "tools/lib/elp2000.mts": {
+      "upstreamPath": "tools/lib/elp2000.mjs",
+      "lastMirroredSha256": "46f83c9694c378749da5c3b54ef2ffd76a5ae1c94cb0b566baf08591cf3cbfca",
+      "lastMirroredBytes": 6983,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The TypeScript migration owns this file locally. The prior mirrored identity is retained here; the current TypeScript source and build configuration are not attributed to the mirrored commit."
+    },
+    "tools/lib/horizons.mts": {
+      "upstreamPath": "tools/lib/horizons.mjs",
+      "lastMirroredSha256": "d61c8860072706118725b888256fb0e2523841c43de71a372cab9fb08a8b82e7",
+      "lastMirroredBytes": 3983,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The TypeScript migration owns this file locally. The prior mirrored identity is retained here; the current TypeScript source and build configuration are not attributed to the mirrored commit."
+    },
+    "tools/lib/sources.mts": {
+      "upstreamPath": "tools/lib/sources.mjs",
+      "lastMirroredSha256": "de597d891e8e9d5ed6d0e5011916a429b861cc1c9058002372d200933b7b735c",
+      "lastMirroredBytes": 1662,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The TypeScript migration owns this file locally. The prior mirrored identity is retained here; the current TypeScript source and build configuration are not attributed to the mirrored commit."
+    },
+    "tools/lib/vsop87.mts": {
+      "upstreamPath": "tools/lib/vsop87.mjs",
+      "lastMirroredSha256": "d62861ba16eccad92b2e452dd4fce2a97f1cee10da42bd4e22b9815295cd34ee",
+      "lastMirroredBytes": 2841,
+      "lastMirroredSubtreeCommit": "ec8b1c28f25549655e5de95aa05aeda0356d1611",
+      "reason": "The TypeScript migration owns this file locally. The prior mirrored identity is retained here; the current TypeScript source and build configuration are not attributed to the mirrored commit."
     }
   }
 }

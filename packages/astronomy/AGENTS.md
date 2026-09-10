@@ -158,7 +158,7 @@ periodic term would live inside it forever. A guard alone is just a snapshot of
 whatever the code happens to do. Both, and the assertion that the guard is
 inside the budget, is what makes the claim real.
 
-Fixtures come from `tools/fetch-fixtures.mjs` and each records the Horizons URL
+Fixtures come from `tools/fetch-fixtures.mts` and each records the Horizons URL
 that produced it. Never assert against a value this package computed. Never widen
 a tolerance to make a test pass without changing the sentence in the README that
 the number is quoted in.
@@ -168,7 +168,7 @@ the number is quoted in.
 **1900-01-01 to 2100-01-01** (JD 2415020.5 to 2488069.5). Both series were
 truncated against this window and the moons' elements fitted over it. Evaluation
 outside still works and is still continuous; it is simply not bounded by
-anything this package has measured. If the window moves, `generate-series.mjs`
+anything this package has measured. If the window moves, `generate-series.mts`
 has to run again — the truncation thresholds depend on it.
 
 ### The moons are a fit, and the README says so

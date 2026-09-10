@@ -35,7 +35,7 @@ const require = createRequire(resolve(root, 'package.json'));
 const {chromium} = require('playwright');
 const localImport = path => import(pathToFileURL(resolve(root, path)).href);
 const [{OBJECTS}, {loadPlanetBrowserProfile, assertRenderedObjectControls}, {conformanceBrowserLaunch}] = await Promise.all([
-  localImport('site/objects.mjs'), localImport('site/test/load-browser-profile.mjs'),
+  localImport('site/objects.mts'), localImport('site/test/load-browser-profile.mjs'),
   localImport('site/test/conformance-browser-launch.mjs'),
 ]);
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -360,8 +360,8 @@ async function freezeSharedInputs() {
     path.endsWith('.css') && !path.startsWith('src/renderers/css/styles/') ||
     /^site\/(components|layouts)\/.*\.astro$/.test(path)));
   for(const path of ['src/renderers/css/styles/volume.css','src/renderers/css/styles/world-context.css',
-    'site/planet-shell-client.mjs','site/runtime-policy.mjs','site/scene-router.mjs','site/object-sources.mjs',
-    'site/dataset-spacecraft.mjs','site/prepared-spacecraft.json','site/diagnostics-policy.mjs'])required.add(path);
+    'site/planet-shell-client.mts','site/runtime-policy.mjs','site/scene-router.mts','site/object-sources.mts',
+    'site/dataset-spacecraft.mts','site/prepared-spacecraft.json','site/diagnostics-policy.mts'])required.add(path);
   for(const path of [...required].sort()){
     const file=await fingerprint(path);report.frozenFiles.push(file);report.sharedFiles.push(file);
   }

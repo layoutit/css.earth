@@ -45,7 +45,7 @@ jobs:
       - name: Restore pinned JSON transports for shell tests
         run: |
           node --test tools/restore-object-json.test.mjs
-          node tools/restore-object-json.mjs
+          node tools/restore-object-json.mts
       - name: Test shared shell and search ownership
         run: >-
           node --test site/test/shell-lifetime.test.mjs

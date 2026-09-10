@@ -2,21 +2,22 @@ import assert from "node:assert/strict";
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { stripTypeScriptTypes } from "node:module";
+import { createHash } from "node:crypto";
 import { chromium } from "playwright";
 import sharp from "sharp";
 import { conformanceBrowserLaunch } from "./conformance-browser-launch.mjs";
 
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { MOBILE_TOUCH_ACTION, WHEEL_ZOOM_SPEED_MULTIPLIER, WHEEL_ZOOM_DISCRETE_SPEED_MULTIPLIER,
-  WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../runtime-policy.mjs";
+  WHEEL_ZOOM_USE_SCROLL_DISTANCE } from "../runtime-policy.mts";
 import { loadPlanetBrowserProfile, assertRenderedObjectControls } from "./load-browser-profile.mjs";
 import { proveSkyboxPointerBoundary } from "./skybox-pointer-boundary.mjs";
 import { proveWheelZoomDistance, wheelWithReceipt } from "./wheel-zoom-distance.mjs";
 import { GOOGLE_EARTH_SURFACE_FLY_TO } from
-  "../../src/platform/google-earth-surface-fly-to.mjs";
+  "../../src/platform/google-earth-surface-fly-to.mts";
 import { GOOGLE_EARTH_DRAG_INERTIA } from
-  "../../src/platform/google-earth-drag-inertia.mjs";
-import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mjs";
+  "../../src/platform/google-earth-drag-inertia.mts";
+import { PREPARED_WHEEL_ZOOM } from "../../src/platform/prepared-wheel-zoom.mts";
 
 const baseUrl = process.argv[2] ?? "http://127.0.0.1:4210";
 const requestedId = process.argv[3] ?? null;
@@ -948,6 +949,8 @@ async function provePreparedDensity(browser, planet, profile, density) {
   const page = await context.newPage();
   const evidence = observePage(page, baseUrl);
   const requestedPaths = new Set();
+  const responses = new Map();
+  page.on("response", response => responses.set(new URL(response.url()).pathname, response));
   page.on("request", (request) => {
     requestedPaths.add(new URL(request.url()).pathname);
   });
@@ -974,13 +977,29 @@ async function provePreparedDensity(browser, planet, profile, density) {
     });
     assert.equal(await profile.selectedDensity(page), 2,
       `${planet.id}: DPR ${density} must select the canonical high-density bank`);
+    // The application now owns the shared universe. Its pinned sky replaces
+    // private object cubemaps and suns. Their retained bank may still warm its
+    // declared startup resources, but no private sky may render beside it.
+    const definition = JSON.parse(await readFile(resolve(`src/planets/${planet.id}/prepared/runtime.json`), 'utf8'));
+    const privateCelestialAssets = new Set([
+      ...definition.sky.faces.flatMap(face => [face.url, face.url2x, face.highContrastUrl, face.highContrastUrl2x]),
+      definition.sun?.asset.url, definition.sun?.asset.url2x,
+    ].filter(Boolean));
+    const sharedSky = await proveSharedPreparedSky(page, requestedPaths, responses);
+    assert.equal(await page.locator('.planet-cubic-sky-cube s, .planet-cubic-sky-stars s').count(), 0,
+      `${planet.id}: the application owns all rendered sky content`);
     const canonicalAssets = profile.audit.canonicalPreparedAssets ?? [];
     assert.ok(Array.isArray(canonicalAssets));
     for (const url of canonicalAssets) {
+      if (privateCelestialAssets.has(url)) continue;
       assert.ok(requestedPaths.has(url),
         `${planet.id}: DPR ${density} must request canonical ${url}`);
     }
     for (const pair of profile.audit.preparedAssetPairs) {
+      if (privateCelestialAssets.has(pair.one) && privateCelestialAssets.has(pair.two)) {
+        assert.equal(requestedPaths.has(pair.one), false, `${planet.id}: private bank must not request low-density ${pair.one}`);
+        continue;
+      }
       const selectedAsset = pair.two;
       const rejectedAsset = pair.one;
       assert.ok(requestedPaths.has(selectedAsset),
@@ -1016,7 +1035,10 @@ async function provePreparedDensity(browser, planet, profile, density) {
       id: planet.id,
       viewport: `dpr-${density}`,
       selectedDensity: 2,
-      requestedCanonicalAssets: [...canonicalAssets].sort(),
+      requestedCanonicalAssets: [...canonicalAssets].filter(url => !privateCelestialAssets.has(url)).sort(),
+      replacedPrivateCelestialAssets: [...privateCelestialAssets].sort(),
+      warmedPrivateCelestialAssets: [...privateCelestialAssets].filter(url => requestedPaths.has(url)).sort(),
+      sharedSky,
       skyboxPointerBoundary,
       interactionInterruptions,
       wheelTakeover,
@@ -1032,6 +1054,36 @@ async function provePreparedDensity(browser, planet, profile, density) {
     if (video && evidenceDirectory) await rename(await video.path(),
       resolve(evidenceDirectory, `${planet.id}-dpr-${density}.webm`));
   }
+}
+
+async function proveSharedPreparedSky(page, requestedPaths, responses) {
+  const context = JSON.parse(await readFile(resolve('src/planets/sun/prepared/world-context.json'), 'utf8'));
+  const root = resolve('src/objects', context.volume.objectId);
+  const descriptor = JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8'));
+  const bytes = await readFile(resolve(root, descriptor.prepared.url));
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), descriptor.prepared.sha256);
+  const payload = JSON.parse(bytes).data;
+  assert.equal(await page.locator('.prepared-universe').count(), 1);
+  assert.equal(await page.locator('.prepared-celestial-sky').count(), 1);
+  const rendered = await page.locator('.prepared-celestial-sky [data-sky-face]').evaluateAll(nodes => nodes.map(node => ({
+    id: node.dataset.skyFace, url: new URL(node.style.backgroundImage.match(/^url\(["']?(.*?)["']?\)$/)[1], location.href).href,
+  })));
+  assert.deepEqual(rendered.map(face => face.id), payload.sky.faces.map(face => face.id));
+  const receipt = [];
+  for (const face of payload.sky.faces) {
+    const resource = payload.resources.find(resource => resource.path === face.texturePath);
+    assert.ok(resource, `Prepared sky face ${face.id} requires a pinned resource`);
+    const path = new URL(rendered.find(value => value.id === face.id).url).pathname;
+    assert.ok(requestedPaths.has(path), `Shared sky must request ${face.id}`);
+    const response = responses.get(path);
+    assert.ok(response?.ok(), `Shared sky must load ${face.id}`);
+    const image = await response.body();
+    const sha256 = createHash('sha256').update(image).digest('hex');
+    assert.equal(image.length, resource.bytes, `${face.id}: shared sky byte count`);
+    assert.equal(sha256, resource.sha256, `${face.id}: exact prepared sky bytes`);
+    receipt.push({ id: face.id, bytes: image.length, sha256 });
+  }
+  return receipt;
 }
 
 async function proveReleasePosition(page, planet, profile) {

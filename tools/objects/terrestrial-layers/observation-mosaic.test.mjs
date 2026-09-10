@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './observation-mosaic.mjs';
-import { validateGeoSurfaceRecipe } from './observed-geo-surface.mjs';
+import { fitObservationLevels, selectObservation, sampleTrianglePoints } from './observation-mosaic.mts';
+import { validateGeoSurfaceRecipe } from './observed-geo-surface.mts';
 import { readFile } from 'node:fs/promises';
 const policy = { minimumPairs: 64, maximumLogMad: .25, maximumGain: 1.35 };
 const sample = (radiance, maximumEmissionDegrees = 30) => ({ radiance, maximumEmissionDegrees });

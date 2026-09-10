@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
+import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 const root=new URL('../../../../src/planets/adrastea/',import.meta.url);
 test('Adrastea model preserves the independently published triaxial dimensions in metres',async()=>{
   const source=await readFile(new URL('source/shape/pck00011.tpc',root),'utf8');

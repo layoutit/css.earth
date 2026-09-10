@@ -1,8 +1,8 @@
 import { execSync } from "node:child_process";
 
 import { defineConfig } from "astro/config";
-import { SITE_ORIGIN } from "./site/seo.mjs";
-import { wmtsLocalMirror } from "./tools/objects/geographic-pages/operations/wmts-local-server.mjs";
+import { SITE_ORIGIN } from "./site/seo.mts";
+import { wmtsLocalMirror } from "./tools/objects/geographic-pages/operations/wmts-local-server.mts";
 
 function cssEarthVersion() {
   try {

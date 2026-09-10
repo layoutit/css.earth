@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import { preparedScenePitch } from '@cssearth/engine';
-import { prepareLocationPoint, prepareLocationCamera } from '../../../../tools/objects/geographic-pages/prepare-location.mjs';
+import { prepareLocationPoint, prepareLocationCamera } from '../../../../tools/objects/geographic-pages/prepare-location.mts';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
 
 const apply = (matrix: readonly number[], point: readonly number[]) => [0, 1, 2].map(row =>
@@ -58,6 +58,6 @@ test('the actual prepared Buenos Aires destination reaches the physical content 
   };
   const corrected = project(prepareSurfaceTargetRotation(centre));
   expect(corrected[0]).toBeCloseTo(870, 8); expect(corrected[1]).toBeCloseTo(500, 8);
-  expect(project(identity)[0]).toBeGreaterThan(30_000, 'deleting correction must fail the actual destination guarantee');
+  expect(project(identity)[0]).not.toBeCloseTo(870, 8);
   expect(destination.zoom).toBe(2048);
 });

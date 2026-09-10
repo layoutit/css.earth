@@ -1,6 +1,6 @@
 import {readFile,mkdir} from 'node:fs/promises';
 import sharp from 'sharp';
-import {loadScienceSurface,paintScienceSurface} from '../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {loadScienceSurface,paintScienceSurface} from '../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 const read=async path=>JSON.parse(await readFile(path));
 await mkdir('output/b6-previews',{recursive:true});
 for(const [body,id] of [['moon','geology'],['moon','silicate-signature'],['europa','geology'],['charon','albedo']]){

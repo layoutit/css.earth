@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { gzipSync } from 'node:zlib';
 import sharp from 'sharp';
-import { decodeElevationDods, readElevationGrid, elevationColor, prepareElevationMap } from '../../../../tools/objects/paged-ellipsoid/elevation.mjs';
+import { decodeElevationDods, readElevationGrid, elevationColor, prepareElevationMap } from '../../../../tools/objects/paged-ellipsoid/elevation.mts';
 
 const sourceDirectory = resolve('src/planets/earth/source');
 const config = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/paged-ellipsoid.json')));

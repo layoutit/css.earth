@@ -1,4 +1,4 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
@@ -7,8 +7,8 @@ import { retainedPresentationFixture, preparedSelectionFixture } from "./test/ob
 import { mountPreparedPresentation } from '../renderers/css/dist/testing.js';
 const earthDefinition = await loadObjectTestDefinition('earth');
 const saturnDefinition = await loadObjectTestDefinition('saturn');
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mjs";
-import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mjs";
+import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
+import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mts";
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";

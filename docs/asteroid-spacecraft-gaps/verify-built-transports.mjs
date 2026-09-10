@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import {createReadStream} from 'node:fs';
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {OBJECTS} from '../../site/objects.mjs';
-import {loadObjectPageData} from '../../site/object-page-data.mjs';
+import {OBJECTS} from '../../site/objects.mts';
+import {loadObjectPageData} from '../../site/object-page-data.mts';
 const results=[];
 for(const {id} of OBJECTS){
  const descriptor=JSON.parse(await readFile(`src/planets/${id}/object.json`));

@@ -1,7 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
-import {preparePhotographicAtmosphere} from '../../../../tools/objects/terrestrial-layers/photographic-atmosphere.mjs';
-import {createEllipsoidGeometry} from '../../../../tools/objects/terrestrial-layers/ellipsoid-geometry.mjs';
+import {preparePhotographicAtmosphere} from '../../../../tools/objects/terrestrial-layers/photographic-atmosphere.mts';
+import {createEllipsoidGeometry} from '../../../../tools/objects/terrestrial-layers/ellipsoid-geometry.mts';
 const sourceDirectory=fileURLToPath(new URL('../../../../src/planets/mars/source/',import.meta.url));
 const read=async p=>JSON.parse(await readFile(new URL('../../../../src/planets/mars/'+p,import.meta.url)));
 export const runtimeDefinition=await read('prepared/runtime.json'),objectControls=await read('prepared/controls.json');

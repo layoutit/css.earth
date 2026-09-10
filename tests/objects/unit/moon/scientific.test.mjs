@@ -3,8 +3,8 @@ import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {basename} from 'node:path';
 import test from 'node:test';
-import {parsePdsImage} from '../../../../tools/objects/terrestrial-layers/pds-image.mjs';
-import {paintScienceSurface, colorForValue} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
+import {parsePdsImage} from '../../../../tools/objects/terrestrial-layers/pds-image.mts';
+import {paintScienceSurface, colorForValue} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 
 const sourceRoot=new URL('../../../../src/planets/moon/source/',import.meta.url);
 const recipe=JSON.parse(await readFile(new URL('preparation/raster.json',sourceRoot),'utf8'));

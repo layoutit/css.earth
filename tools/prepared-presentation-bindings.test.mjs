@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { preparePresentationBindings } from './prepared-presentation-bindings.mjs';
+import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 
 async function fixture(run) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-bindings-'));
@@ -55,7 +55,7 @@ test('unsupported motion cannot silently become an unowned native animation', as
 
 test('repreparation starts from canonical topology and reproduces the final depth transport', async () => {
   const root = fileURLToPath(new URL('../', import.meta.url));
-  const source = JSON.parse(await readFile(join(root, 'src/planets/deimos/prepared/runtime.json'), 'utf8'));
+  const source = JSON.parse(await readFile(join(root, 'src/planets/mimas/prepared/runtime.json'), 'utf8'));
   const first = await preparePresentationBindings(source, root);
   const second = await preparePresentationBindings(first, root);
   assert.deepEqual(second, first);

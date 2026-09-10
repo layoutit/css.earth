@@ -1,11 +1,11 @@
 ---
-import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mjs";
+import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import PreparedSidebarCards from "../components/PreparedSidebarCards.astro";
 import PlanetaryScale from "../components/PlanetaryScale.astro";
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
-import { googleAnalyticsBootstrap } from "../google-analytics.mjs";
-import { requireObject } from "../objects.mjs";
-import { objectSeo } from "../seo.mjs";
+import { googleAnalyticsBootstrap } from "../google-analytics.mts";
+import { requireObject } from "../objects.mts";
+import { objectSeo } from "../seo.mts";
 import "../../src/platform/cubic-sky.css";
 import "../../src/platform/heliocentric-view.css";
 import "../../src/renderers/css/styles/volume.css";
@@ -93,7 +93,7 @@ const seo = objectSeo(objectRecord);
       <div class="planet-scene-overlays"></div>
     </div>
     <script>
-      import "../scene-router.mjs";
+      import "../scene-router.mts";
     </script>
     <PreparedSidebarCards />
   </body>

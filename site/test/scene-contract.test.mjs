@@ -1,10 +1,10 @@
-import {loadObjectTestDefinition} from '../../tools/object-test-data.mjs';
+import {loadObjectTestDefinition} from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
 
 import { requireObjectControls } from "../scene-contract.mjs";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 
 test("asteroid and comet Shadows default off in authored content and prepared runtime", async () => {
   for (const { id } of OBJECTS.filter(object => ["asteroid", "comet"].includes(object.classification))) {

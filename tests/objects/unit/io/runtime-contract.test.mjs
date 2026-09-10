@@ -3,11 +3,11 @@ import { test } from "node:test";
 import runtimeDefinition from "../../../../src/planets/io/prepared/runtime.json" with {type:"json"};
 const {id: objectId, controls, ...presentation} = runtimeDefinition;
 const PREPARED_PRESENTATION = {...presentation, schema:PREPARED_PRESENTATION_SCHEMA};
-import { requirePreparedPresentation, PREPARED_PRESENTATION_SCHEMA } from "../../../../src/platform/prepared-presentation-contract.mjs";
-import { preparePlanetarySystem } from "../../../../src/platform/prepare-planetary-system.mjs";
-import { prepareEclipticPresentationFrame } from "../../../../src/platform/solar-presentation-frame.mjs";
-import { prepareHeliocentricView } from "../../../../src/platform/prepare-heliocentric-view.mjs";
-import { ASTRONOMICAL_UNIT_KILOMETERS } from "../../../../src/platform/solar-geometry.mjs";
+import { requirePreparedPresentation, PREPARED_PRESENTATION_SCHEMA } from "../../../../src/platform/prepared-presentation-contract.mts";
+import { preparePlanetarySystem } from "../../../../src/platform/prepare-planetary-system.mts";
+import { prepareEclipticPresentationFrame } from "../../../../src/platform/solar-presentation-frame.mts";
+import { prepareHeliocentricView } from "../../../../src/platform/prepare-heliocentric-view.mts";
+import { ASTRONOMICAL_UNIT_KILOMETERS } from "../../../../src/platform/solar-geometry.mts";
 
 test("Io mounts through the shared prepared object contract", () => {
   requirePreparedPresentation(PREPARED_PRESENTATION, { controls: runtimeDefinition.controls });

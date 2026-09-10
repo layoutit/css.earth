@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { bindViewUrl } from "../view-url-runtime.mjs";
-import { formatSharedView, parseSharedView } from "../../src/platform/view-url.mjs";
+import { bindViewUrl } from "../view-url-runtime.mts";
+import { formatSharedView, parseSharedView } from "../../src/platform/view-url.mts";
 
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 const saved = () => ({ camera: { controlPitch: 37, controlYaw: 92, zoom: 0.8, distanceKilometers: 12345,

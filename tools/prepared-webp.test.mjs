@@ -10,7 +10,7 @@ import sharp from "sharp";
 import {
   optimizePreparedDisplayLosslessWebp,
   optimizePreparedLosslessWebp,
-} from "./prepared-webp.mjs";
+} from "./prepared-webp.mts";
 
 const run = promisify(execFile);
 

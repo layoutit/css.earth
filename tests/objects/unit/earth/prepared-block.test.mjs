@@ -1,16 +1,16 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { gzipSync, gunzipSync } from "node:zlib";
-import { encodePreparedBlock, packWmtsRecords } from "../../../../tools/objects/geographic-pages/encode-prepared-block.mjs";
+import { encodePreparedBlock, packWmtsRecords } from "../../../../tools/objects/geographic-pages/encode-prepared-block.mts";
 import { createPreparedBlockDecoder, decodePreparedBlock, decodePreparedBlockAsync, restoreWmtsRecords } from "../../../../src/renderers/css/dist/testing.js";
 import { PREPARED_EARTH_SCENE as scene } from "../../unit/earth/prepared-fixture.mjs";
-import { prepareWmtsTile, wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
-import { prepareWmtsBlocks } from "../../../../tools/objects/geographic-pages/operations/prepare-wmts-blocks.mjs";
+import { prepareWmtsTile, wmtsAddress } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mts";
+import { prepareWmtsBlocks } from "../../../../tools/objects/geographic-pages/operations/prepare-wmts-blocks.mts";
 import { isPreparedBlockReference, readPreparedWmtsBlock } from "../../../../src/renderers/css/dist/testing.js";
 import { createCityIndex } from "../../../../src/renderers/css/dist/testing.js";
-import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mjs";
-import { wmtsLatitude } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mjs";
-import { worldCoverTileBounds } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mjs";
+import { prepareWmtsCoverage } from "../../../../tools/objects/geographic-pages/wmts-coverage.mts";
+import { wmtsLatitude } from "../../../../tools/objects/geographic-pages/wmts-page-geometry.mts";
+import { worldCoverTileBounds } from "../../../../tools/objects/geographic-pages/worldcover-catalog.mts";
 
 test("independent columns preserve finished double bits, including negative zero and extreme values", () => {
   const values = [0, -0, Number.MIN_VALUE, -Number.MIN_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE, Math.PI, 1 / 3];

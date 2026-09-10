@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { mountPreparedMapPages } from "./prepared-map/city-pages.mjs";
+import { mountPreparedMapPages } from "./prepared-map/city-pages.mts";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mjs";
 
 for (const failure of [null, "construction", "cleanup"]) test(`prepared map lifetime releases native pages and observers (${failure})`, () => {

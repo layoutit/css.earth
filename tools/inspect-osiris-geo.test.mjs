@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL } from './objects/terrestrial-layers/osiris-geo.mjs';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, sampleGeo, PLANE_NAMES, GEO_SHAPE_MODEL } from './objects/terrestrial-layers/osiris-geo.mts';
 
 function fixture({ replace = text => text } = {}) {
   let label = `PDS_VERSION_ID = PDS3\nRECORD_TYPE = FIXED_LENGTH\nRECORD_BYTES = 512\nFILE_RECORDS = 18\nLABEL_RECORDS = 8\nINSTRUMENT_ID = "OSINAC"\nIMAGE_ID = "12000700"\nSOFTWARE_VERSION_ID = "2.9.0"\nSTART_TIME = 2014-08-05T19:44:22.918\nFILTER_NAME = "FFP-Vis_Orange"\n`;

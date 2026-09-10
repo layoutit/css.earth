@@ -1,3 +1,4 @@
+import { isArray } from '../src/platform/is-array.mts';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -33,7 +34,7 @@ const manifestPath = 'docs/architecture/typescript-ownership.json';
 const astroCompiler: unknown = createRequire(import.meta.resolve('astro/package.json'))('@astrojs/compiler-rs');
 
 function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+  return typeof value === 'object' && value !== null && !isArray(value);
 }
 
 function requireCondition(value: unknown, message: string): asserts value {
@@ -51,7 +52,7 @@ function loadManifest(root: string): Manifest {
   requireCondition(isRecord(value) && value.schemaVersion === 1, 'Invalid ownership manifest schema.');
   requireCondition(typeof value.baselineCommit === 'string' && /^[a-f0-9]{40}$/u.test(value.baselineCommit),
     'The ownership baseline must be a full source commit.');
-  requireCondition(Array.isArray(value.legacyAuthored) && value.legacyAuthored.every(validPath),
+  requireCondition(isArray(value.legacyAuthored) && value.legacyAuthored.every(validPath),
     'legacyAuthored must contain repository-relative file paths.');
   requireCondition(isRecord(value.exceptions), 'exceptions must be an exact path map.');
   const paths = [...value.legacyAuthored, ...Object.keys(value.exceptions)];
@@ -71,7 +72,7 @@ function loadManifest(root: string): Manifest {
     if (exception.category === 'facade') {
       requireCondition(isRecord(exception.exports) && Object.keys(exception.exports).length > 0, `${path}: facade exports must be explicit.`);
       for (const names of Object.values(exception.exports)) {
-        requireCondition(Array.isArray(names) && names.length > 0 && names.every(name => typeof name === 'string'), `${path}: invalid facade export names.`);
+        requireCondition(isArray(names) && names.length > 0 && names.every(name => typeof name === 'string'), `${path}: invalid facade export names.`);
       }
     }
   }
@@ -107,11 +108,11 @@ function literalImports(node: unknown, imports: string[] = []): string[] {
     if (value !== undefined) imports.push(value);
   }
   if (node.type === 'CallExpression' && isRecord(node.callee) && node.callee.type === 'Identifier'
-    && node.callee.name === 'require' && Array.isArray(node.arguments)) {
+    && node.callee.name === 'require' && isArray(node.arguments)) {
     const value = literalValue(node.arguments[0]);
     if (value !== undefined) imports.push(value);
   }
-  if (node.type === 'JSXOpeningElement' && isRecord(node.name) && node.name.name === 'script' && Array.isArray(node.attributes)) {
+  if (node.type === 'JSXOpeningElement' && isRecord(node.name) && node.name.name === 'script' && isArray(node.attributes)) {
     for (const attribute of node.attributes) {
       if (!isRecord(attribute) || !isRecord(attribute.name) || attribute.name.name !== 'src') continue;
       const value = literalValue(attribute.value) ?? (isRecord(attribute.value) ? literalValue(attribute.value.expression) : undefined);
@@ -120,7 +121,7 @@ function literalImports(node: unknown, imports: string[] = []): string[] {
   }
   for (const [key, value] of Object.entries(node)) {
     if (['comments', 'tokens', 'loc', 'range', 'parent'].includes(key)) continue;
-    if (Array.isArray(value)) value.forEach(child => literalImports(child, imports));
+    if (isArray(value)) value.forEach(child => literalImports(child, imports));
     else if (isRecord(value)) literalImports(value, imports);
   }
   return imports;
@@ -129,7 +130,7 @@ function literalImports(node: unknown, imports: string[] = []): string[] {
 function parseAstroSource(source: string): unknown {
   requireCondition(isRecord(astroCompiler) && typeof astroCompiler.parse === 'function', 'Astro compiler parser is unavailable.');
   const parsed: unknown = (astroCompiler.parse as (source: string) => unknown)(source);
-  requireCondition(isRecord(parsed) && Array.isArray(parsed.diagnostics) && isRecord(parsed.ast), 'Invalid Astro parser result.');
+  requireCondition(isRecord(parsed) && isArray(parsed.diagnostics) && isRecord(parsed.ast), 'Invalid Astro parser result.');
   const error = parsed.diagnostics.find((diagnostic: unknown) => isRecord(diagnostic) && diagnostic.severity === 'error');
   if (isRecord(error)) throw new SyntaxError(String(error.text));
   return parsed.ast;

@@ -4,8 +4,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import test from 'node:test';
-import { OBJECTS } from '../site/objects.mjs';
-import { prepareFactsheet } from './prepare-factsheets.mjs';
+import { OBJECTS } from '../site/objects.mts';
+import { prepareFactsheet } from './prepare-factsheets.mts';
 
 test('every registered factsheet reproduces its pinned authored facts and evidence', async () => {
   for (const object of OBJECTS) {

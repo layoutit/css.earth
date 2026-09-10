@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
-import { auditObjectRuntimeOwnership } from "../../tools/check-object-runtime-ownership.mjs";
+import { auditObjectRuntimeOwnership } from "../../tools/check-object-runtime-ownership.mts";
 import { loadObjectContent } from "./load-object-content.mjs";
-import { OBJECTS } from "../objects.mjs";
-import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../runtime-policy.mjs";
+import { OBJECTS } from "../objects.mts";
+import { CANONICAL_PREPARED_IMAGE_DENSITY } from "../runtime-policy.mts";
 
 test("every object mounts one canonical high-density image bank", async () => {
   assert.equal(CANONICAL_PREPARED_IMAGE_DENSITY, 2);
@@ -36,7 +36,7 @@ test("every object mounts one canonical high-density image bank", async () => {
     if (file.endsWith(".css")) assert.doesNotMatch(await readFile(new URL(file, stylesRoot), "utf8"),
       /image-set\(/u, file + ": CSS must not select assets by device DPR");
   }
-  for (const file of ownership.sharedClosure.filter(file => file.startsWith("src/renderers/css/") || file === "site/packaged-object-runtime.mjs")) {
+  for (const file of ownership.sharedClosure.filter(file => file.startsWith("src/renderers/css/") || file === "site/packaged-object-runtime.mts")) {
     assert.doesNotMatch(await readFile(new URL("../../" + file, import.meta.url), "utf8"),
       /image-set\(|devicePixelRatio/u, file + ": renderer must not select assets by device DPR");
   }

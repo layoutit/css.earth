@@ -1,7 +1,7 @@
 ---
-import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mjs";
+import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
 import PlanetObjectResult from "./PlanetObjectResult.astro";
-import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount, matchesObjectCategory } from "../object-categories.mjs";
+import { OBJECT_CATEGORIES, objectCategory, objectCategoryCount, matchesObjectCategory } from "../object-categories.mts";
 
 interface Props { activeObjectId?: string; }
 const { activeObjectId } = Astro.props;

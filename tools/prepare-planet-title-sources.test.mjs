@@ -5,12 +5,12 @@ import { pathToFileURL } from "node:url";
 import test from "node:test";
 import * as fontkit from "fontkit";
 
-import { OBJECTS } from "../site/objects.mjs";
+import { OBJECTS } from "../site/objects.mts";
 import { PLANET_TITLE_RECIPE } from
-  "../src/platform/planet-title-recipe.mjs";
-import { createPreparedTitleLayout, sha256 } from "../src/platform/prepared-title.mjs";
+  "../src/platform/planet-title-recipe.mts";
+import { createPreparedTitleLayout, sha256 } from "../src/platform/prepared-title.mts";
 import { createPlanetTitleSource, preparePlanetTitleSources } from
-  "./prepare-planet-title-sources.mjs";
+  "./prepare-planet-title-sources.mts";
 
 const projectRoot = resolve(import.meta.dirname, "..");
 

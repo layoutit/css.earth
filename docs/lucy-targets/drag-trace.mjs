@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 import { conformanceBrowserLaunch } from '../../site/test/conformance-browser-launch.mjs';
-import { OBJECTS } from '../../site/objects.mjs';
+import { OBJECTS } from '../../site/objects.mts';
 import { traceDurationEvents } from '../../tests/objects/browser/comets/trace-events.mjs';
 const origin = process.argv[2] ?? 'http://127.0.0.1:4278';
 const dpr = Number(process.argv[3] ?? 1);

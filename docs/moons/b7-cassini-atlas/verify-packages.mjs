@@ -3,11 +3,11 @@ import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {relative} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {OBJECTS} from '../../../site/objects.mjs';
-import {validatePlanetData} from '../../../tools/object-package-contract.mjs';
-import {auditObjectRuntimeOwnership} from '../../../tools/check-object-runtime-ownership.mjs';
+import {OBJECTS} from '../../../site/objects.mts';
+import {validatePlanetData} from '../../../tools/object-package-contract.mts';
+import {auditObjectRuntimeOwnership} from '../../../tools/check-object-runtime-ownership.mts';
 import {loadPlanetBrowserProfile} from '../../../site/test/load-browser-profile.mjs';
-import {serializeObjectJson} from '../../../tools/prepare-object-json.mjs';
+import {serializeObjectJson} from '../../../tools/prepare-object-json.mts';
 
 const ids=['titan','dione','rhea'],base=process.env.B7_QUALIFICATION_BASE ?? 'a5a34bdefa849801d092f10755cf81f6f3f23f5e';
 const objects=OBJECTS.filter(object=>ids.includes(object.id));assert.equal(objects.length,3);
@@ -26,7 +26,7 @@ for(const object of objects){
  report.objects.push({id:object.id,...closure,retainedTreeUnchanged:true,sceneSha256:createHash('sha256').update(scene).digest('hex')});
 }
 const audit=await auditObjectRuntimeOwnership({objects,strict:false});
-assert.ok(!audit.sharedClosure.includes('src/platform/source-manifest.mjs'),'Source verification must stay outside runtime');
+assert.ok(!audit.sharedClosure.includes('src/platform/source-manifest.mts'),'Source verification must stay outside runtime');
 assert.ok(audit.entries.every(entry=>entry.migrated),'A selected object violates runtime ownership');
 report.runtimeOwnership=audit;
 if(!audit.complete){

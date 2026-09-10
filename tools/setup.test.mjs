@@ -4,7 +4,7 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { installRuntimeAssets } from "./setup.mjs";
+import { installRuntimeAssets } from "./setup.mts";
 
 test("setup installs pinned files, reuses them offline, and repairs a corrupt file", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-"));

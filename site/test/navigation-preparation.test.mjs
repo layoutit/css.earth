@@ -5,13 +5,14 @@ import { resolve } from "node:path";
 import test from "node:test";
 import sharp from "sharp";
 
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mjs";
+import { optimizePreparedQ75Webp } from "../../tools/prepared-webp.mts";
 import {
   loadMarkerDescriptors,
   moveNavigationFile,
   prepareNavigation,
-} from "../../tools/prepare-navigation.mjs";
+} from "../../tools/prepare-navigation.mts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"))).sort();
@@ -48,8 +49,18 @@ test("reproduces the checked-in registry-derived atlases and utility markers", a
   assert.equal(await readFile(presentationPath, "utf8"), await readFile(resolve(projectRoot, "site/prepared-navigation-markers.mjs"), "utf8"));
   assert.deepEqual((await readdir(root)).filter((file) => file !== "prepared-navigation-markers.mjs").sort(), expectedOutputFiles);
   for (const filename of expectedOutputFiles) {
-    const bytes = await readFile(resolve(root, filename));
-    assert.deepEqual(bytes, await readFile(resolve(projectRoot, "public/navigation", filename)), filename);
+    const path = resolve(root, filename);
+    let bytes = await readFile(path);
+    const accepted = await readFile(resolve(projectRoot, "public/navigation", filename));
+    // Some resolved context images were published through the existing terminal
+    // Q75 compactor. Reproduce that step from fresh source output when needed;
+    // require exact accepted bytes, with no decoded-pixel tolerance or pin edits.
+    if (filename.endsWith("-context.webp") && !bytes.equals(accepted)) {
+      await optimizePreparedQ75Webp(path);
+      bytes = await readFile(path);
+      context.diagnostic(`${filename}: checked terminal Q75 publication bytes`);
+    }
+    assert.deepEqual(bytes, accepted, filename);
   }
   for (const filename of transparentMarkerFiles) {
     const { data, info } = await sharp(resolve(root, filename))

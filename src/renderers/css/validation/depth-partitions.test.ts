@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
 
-const prepared = JSON.parse(await readFile(new URL('../../../../src/planets/deimos/prepared/object.json', import.meta.url), 'utf8')).data;
+const prepared = JSON.parse(await readFile(new URL('../../../../src/planets/mimas/prepared/object.json', import.meta.url), 'utf8')).data;
 
 test('the actual grouped surface keeps one object camera and validates before DOM construction', () => {
   const plan = parsePreparedObjectRuntime(prepared);

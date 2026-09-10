@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import {runtimeAssets} from '../../tools/runtime-assets.mjs';
-import {installRuntimeAssets} from '../../tools/setup.mjs';
+import {runtimeAssets} from '../../tools/runtime-assets.mts';
+import {installRuntimeAssets} from '../../tools/setup.mts';
 const root=resolve('output/asteroid-spacecraft-gaps/fresh-runtime');
 await mkdir(root,{recursive:true});
 const assets=(await runtimeAssets(process.cwd(),['annefrank','braille'])).map(asset=>({...asset,file:resolve(root,asset.id,asset.filename)}));

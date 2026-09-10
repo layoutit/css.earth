@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {fromFile} from 'geotiff';
-import {createSourceManifest} from '../../../../src/platform/source-manifest.mjs';
+import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {publishedObservation,canonicalPoint,expectedMonochromeTexel,assertDisplayClose,countInteriorPixels} from '../observed-atlas-proof.mjs';
 const sourceRoot=new URL('../../../../src/planets/ganymede/source/',import.meta.url);
 const source=await createSourceManifest({planetId:'ganymede',planetName:'Ganymede',sourceRoot:sourceRoot.pathname});

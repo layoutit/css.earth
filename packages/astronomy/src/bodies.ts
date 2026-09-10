@@ -3,7 +3,6 @@ import type { SatelliteId } from './data/satelliteElements.data.js'
 import { SATELLITE_ELEMENTS } from './data/satelliteElements.data.js'
 /**
  * Physical data for the bodies this package places.
- *
  * Values come from JPL Solar System Dynamics. Most are transcribed from
  * Horizons' `OBJ_DATA` block, fetched with
  * `format=text&COMMAND='<code>'&OBJ_DATA='YES'&MAKE_EPHEM='NO'`. The added
@@ -12,7 +11,6 @@ import { SATELLITE_ELEMENTS } from './data/satelliteElements.data.js'
  * ephemeris GM and IAU WGCCRE mean radius together. They are transcribed rather
  * than parsed because the physical-data blocks are free text whose layout
  * differs per body — a parser for them would be a second thing to get wrong.
- *
  * `meanRadiusKm` is the volumetric mean radius where Horizons gives one, and
  * the geometric mean of the triaxial radii where it gives only those (Phobos,
  * Deimos, Miranda, Ariel). It is NOT the equatorial radius: it is used for the

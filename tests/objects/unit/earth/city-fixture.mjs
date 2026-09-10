@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
-import { pageKey } from "../../../../tools/objects/geographic-pages/page-geometry.mjs";
-import { prepareCityIndex } from "../../../../tools/objects/geographic-pages/operations/prepare-index.mjs";
+import { pageKey } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
+import { prepareCityIndex } from "../../../../tools/objects/geographic-pages/operations/prepare-index.mts";
 import { PREPARED_EARTH_SCENE } from "./prepared-fixture.mjs";
 
 // Test-only filesystem walk. Production must discover directories on demand;

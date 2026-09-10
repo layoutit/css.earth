@@ -31,9 +31,9 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     return { definition, frame: context.frame, receipt: { schema: 'cssearth-world-navigation-preparation@1', id: descriptor.id,
       sources: descriptor.recipe.sources, frame: context.frame, model: 'authored-context-focus' } };
   }
-  const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mjs')).href) as Input;
-  const presentation = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-presentation-frame.mjs')).href) as Input;
-  const direction = await import(pathToFileURL(resolve(projectRoot, 'src/platform/prepare-sun-view-direction.mjs')).href) as Input;
+  const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
+  const presentation = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-presentation-frame.mts')).href) as Input;
+  const direction = await import(pathToFileURL(resolve(projectRoot, 'src/platform/prepare-sun-view-direction.mts')).href) as Input;
   const ecliptic = presentation.prepareEclipticPresentationFrame(descriptor.id);
   const authored = authoredPresentationBasis(sources, ecliptic.basis.flat() as Matrix3);
   const bodyToReference = solar.requireBodyFixedToIcrf(descriptor.id) as Matrix3;
@@ -64,7 +64,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
       frame, bodyToPresentation: authored.bodyToPresentation, sourceRadiusUnits: authored.sourceRadiusUnits,
       tilePixels: authored.tilePixels, sceneScale: camera.sceneScale, renderedRadiusUnits,
       sourceGeometryConvention: 'PolyCSS authored mesh axes; world raster X/Y transport is shared with the retained source geometry',
-      ephemerisSource: 'src/platform/solar-geometry.mjs' } };
+      ephemerisSource: 'src/platform/solar-geometry.mts' } };
 }
 
 function prepareWorldNavigationBindings(bindings: Input[], sources: ReadonlyMap<string, Input>): Input[] {
@@ -115,6 +115,6 @@ if (invoked) {
   await writeWorldNavigationArtifacts(outputDirectory, result, scene);
   const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
   await writeFile(descriptorPath, `${JSON.stringify({ ...descriptor, properties: { ...descriptor.properties, worldFrame: result.frame } }, null, 2)}\n`);
-  const { writeObjectJson } = await import(pathToFileURL(resolve(objectDirectory, '../../../tools/prepare-object-json.mjs')).href);
+  const { writeObjectJson } = await import(pathToFileURL(resolve(objectDirectory, '../../../tools/prepare-object-json.mts')).href);
   console.log(JSON.stringify(await writeObjectJson(descriptor.id, result.definition)));
 }

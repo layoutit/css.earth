@@ -11,7 +11,7 @@ assert.equal(installation.status,'PASS');
 const require=createRequire(resolve(root,'package.json'));
 const {chromium}=require('playwright');
 const {conformanceBrowserLaunch}=await import(pathToFileURL(resolve(root,'site/test/conformance-browser-launch.mjs')));
-const {OBJECTS}=await import(pathToFileURL(resolve(root,'site/objects.mjs')));
+const {OBJECTS}=await import(pathToFileURL(resolve(root,'site/objects.mts')));
 const {loadPlanetBrowserProfile,assertRenderedObjectControls}=await import(pathToFileURL(resolve(root,'site/test/load-browser-profile.mjs')));
 const plan={moon:['topography','rock-abundance'],phobos:['albedo','slope'],deimos:['albedo','slope'],dimorphos:['slope','albedo'],io:['geology'],europa:['elevation'],ganymede:['geology'],enceladus:['shape'],tethys:['relative-albedo'],dione:['relative-albedo'],rhea:['relative-albedo'],titan:['topography','interpolated','coverage-distance'],charon:['enhanced-color']};
 const assets=new Map(installation.assets.map(a=>[`/scenes/${a.id}/${a.filename}`,a]));

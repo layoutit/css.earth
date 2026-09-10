@@ -4,10 +4,10 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
 
-import { sha256 } from "../../src/platform/prepared-title.mjs";
-import { prepareShellIcons } from "../../tools/prepare-shell-icons.mjs";
+import { sha256 } from "../../src/platform/prepared-title.mts";
+import { prepareShellIcons } from "../../tools/prepare-shell-icons.mts";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
-import { SHELL_ICON_SOURCES } from "../source/icons/manifest.mjs";
+import { SHELL_ICON_SOURCES } from "../source/icons/manifest.mts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 

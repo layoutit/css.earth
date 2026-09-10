@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
-import {parseTerrestrialProfile} from './index.mjs';
+import {parseTerrestrialProfile} from './index.mts';
 const read = async id => JSON.parse(await readFile(new URL(`../../../src/planets/${id}/source/preparation/terrestrial.json`,import.meta.url)));
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{
  for(const id of ['mars','ceres','io','europa','ganymede','callisto'])assert.equal(parseTerrestrialProfile(await read(id)).namespace,id);

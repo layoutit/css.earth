@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import { validateClosedMesh } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../src/planets/annefrank/source/', import.meta.url);
 test('Annefrank uses published full dimensions once and keeps unknown attitude unqualified', async () => {
   const config = JSON.parse(await readFile(new URL('preparation/terrestrial.json', root)));

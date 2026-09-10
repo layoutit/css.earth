@@ -4,17 +4,17 @@ import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
-import {loadObjectPageData} from '../object-page-data.mjs';
-import {OBJECTS} from '../objects.mjs';
+import {loadObjectPageData} from '../object-page-data.mts';
+import {OBJECTS} from '../objects.mts';
 
 test('page data retains the pinned controls and preloads without retaining the scene tree',async t=>{
  const root=await mkdtemp(resolve(tmpdir(),'cssearth-page-data-'));
  t.after(()=>rm(root,{recursive:true,force:true}));
  const directory=resolve(root,'src/planets/body');await mkdir(resolve(directory,'prepared'),{recursive:true});
- const data={assets:{entries:[{key:'surface',url:'/scenes/body/surface.webp'}],startup:['surface']},
-  controls:{lenses:{defaultLens:'shape'},settings:{controls:[{name:'shadows',checked:false}]}},tree:{nodes:[{tag:'u'}]}};
+ const data={assets:{entries:[{key:'surface',url:'/scenes/body/surface.webp',pool:'body'}],pools:[{id:'body',capacity:1,concurrency:1,retention:'mount',reuse:false}],startup:['surface']},
+  controls:{lenses:{defaultLens:'shape',controls:[{id:'shape',label:'Shape'}]},settings:{controls:[{kind:'toggle',name:'shadows',label:'Shadows',checked:false}]}},tree:{nodes:[{tag:'u'}]}};
  const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:'body',data});
- const descriptor={id:'body',prepared:{url:'prepared/object.json',sha256:createHash('sha256').update(payload).digest('hex')}};
+ const descriptor={schema:'cssearth-object@1',id:'body',type:'layered-body',properties:{},prepared:{format:'cssearth-css-object@4',url:'prepared/object.json',sha256:createHash('sha256').update(payload).digest('hex')}};
  await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
  await writeFile(resolve(directory,'prepared/object.json'),payload);
  assert.deepEqual(await loadObjectPageData('body',root),{assets:data.assets,controls:data.controls});

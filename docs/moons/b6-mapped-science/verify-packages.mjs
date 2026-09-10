@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {OBJECTS} from '../../../site/objects.mjs';
-import {validatePlanetData} from '../../../tools/object-package-contract.mjs';
-import {auditObjectRuntimeOwnership} from '../../../tools/check-object-runtime-ownership.mjs';
+import {OBJECTS} from '../../../site/objects.mts';
+import {validatePlanetData} from '../../../tools/object-package-contract.mts';
+import {auditObjectRuntimeOwnership} from '../../../tools/check-object-runtime-ownership.mts';
 import {loadPlanetBrowserProfile} from '../../../site/test/load-browser-profile.mjs';
 
 const ids=['moon','europa','callisto','charon'],base=process.env.B6_QUALIFICATION_BASE ?? 'b3a0410f742501a1a1552dea14d9a3730fce7484';
@@ -24,7 +24,7 @@ for(const object of objects){
  report.objects.push({id:object.id,...closure,retainedTreeUnchanged:true,sceneSha256:createHash('sha256').update(scene).digest('hex')});
 }
 const audit=await auditObjectRuntimeOwnership({objects});assert.equal(audit.complete,true);
-assert.ok(!audit.sharedClosure.includes('src/platform/source-manifest.mjs'),'Source verification must stay outside runtime');
+assert.ok(!audit.sharedClosure.includes('src/platform/source-manifest.mts'),'Source verification must stay outside runtime');
 report.runtimeOwnership=audit;report.status='PASS';
 await mkdir('output/b6-qualification',{recursive:true});
 await writeFile('output/b6-qualification/packages.json',JSON.stringify(report,null,2)+'\n');

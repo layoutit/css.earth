@@ -4,7 +4,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { prepareByteObservation } from './observed-image.mjs';
+import { prepareByteObservation } from './observed-image.mts';
 
 test('projected RGB crops keep their extent, channel identity and dark valid samples', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-cropped-map-'));

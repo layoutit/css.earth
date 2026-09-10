@@ -17,12 +17,12 @@ async function fixture(t) {
   for (const dir of ['tools/objects/dist', 'site', 'src/planets/titan/source/preparation', 'src/planets/titan/prepared', 'public/scenes/titan']) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
-  await copyFile(resolve(project, 'tools/restore-source-inputs.mjs'), resolve(root, 'tools/restore-source-inputs.mjs'));
-  await copyFile(resolve(project, 'tools/runtime-assets.mjs'), resolve(root, 'tools/runtime-assets.mjs'));
+  await copyFile(resolve(project, 'tools/restore-source-inputs.mts'), resolve(root, 'tools/restore-source-inputs.mts'));
+  await copyFile(resolve(project, 'tools/runtime-assets.mts'), resolve(root, 'tools/runtime-assets.mts'));
   await copyFile(resolve(project, 'tools/objects/dist/operations.js'), resolve(root, 'tools/objects/dist/operations.js'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));
-  await writeFile(resolve(root, 'site/objects.mjs'), "export const OBJECTS = [{id:'titan',name:'Titan'}];");
+  await writeFile(resolve(root, 'site/objects.mts'), "export const OBJECTS = [{id:'titan',name:'Titan'}];");
   await json(resolve(root, 'src/planets/titan/object.json'), { id: 'titan' });
   return root;
 }
@@ -55,7 +55,7 @@ test('checkout restores a missing compressed observation without refreshing exis
   await writeFile(resolve(source, 'preparation/acquisition.json'), plan);
   await json(resolve(source, 'manifest.json'), { schema: 'csstitan-authoritative-sources@1', inputs,
     documents: [{ ...pin('preparation/acquisition.json', plan), purpose: 'Acquisition plan' }], generatedIntermediates: [] });
-  await run(root, ['tools/restore-source-inputs.mjs', '--object=titan']);
+  await run(root, ['tools/restore-source-inputs.mts', '--object=titan']);
   assert.deepEqual(requests, ['/observation.IMG.gz']);
   assert.deepEqual(await readFile(resolve(source, 'observation.IMG.gz')), radar);
   assert.deepEqual(await readFile(resolve(source, 'existing.png')), existing);

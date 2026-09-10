@@ -1,10 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { preparePlanetPoint } from "./prepare-planet-points.mjs";
-import { planetPointPresentation, planetOrbitLabelPriority, validPreparedPlanetPoint } from "./planet-point-presentation.mjs";
-import { preparePlanetarySystem } from "./prepare-planetary-system.mjs";
-import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mjs";
-import { projectHeliocentricView } from "./heliocentric-view.mjs";
+import { preparePlanetPoint } from "./prepare-planet-points.mts";
+import { planetPointPresentation, planetOrbitLabelPriority, validPreparedPlanetPoint } from "./planet-point-presentation.mts";
+import { preparePlanetarySystem } from "./prepare-planetary-system.mts";
+import { prepareEclipticPresentationFrame } from "./solar-presentation-frame.mts";
+import { projectHeliocentricView } from "./heliocentric-view.mts";
 import PREPARED_MERCURY_SCENE from "../../src/planets/mercury/prepared/scene.json" with {type: "json"};
 
 const AU_KILOMETERS = 149597870.7;

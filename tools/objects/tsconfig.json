@@ -6,9 +6,10 @@
     "strict": true,
     "noUncheckedIndexedAccess": false,
     "lib": [
-      "ES2022",
+      "ES2023",
       "DOM",
-      "DOM.Iterable"
+      "DOM.Iterable",
+      "DOM.AsyncIterable"
     ],
     "skipLibCheck": true,
     "noEmit": true,
@@ -18,12 +19,16 @@
     "types": [
       "node"
     ],
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true
   },
   "include": [
     "**/*.ts",
+    "**/*.mts",
     "../../src/preparation/**/*.ts",
-    "../../src/renderers/css/preparation/**/*.ts"
+    "../../src/renderers/css/preparation/**/*.ts",
+    "../external-modules.d.mts",
+    "../../site/env.d.ts"
   ],
   "exclude": [
     "**/*.test.ts",

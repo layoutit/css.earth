@@ -5,14 +5,14 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { authoredObjectFixture } from "./authored-object-fixture.mjs";
 
-import { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from "../object-schema.mjs";
-import { OBJECTS, requireObject } from "../objects.mjs";
+import { defineObject, defineObjects, OBJECT_CLASSIFICATIONS } from "../object-schema.mts";
+import { OBJECTS, requireObject } from "../objects.mts";
 import { parsePreparedWorldCameraFrame } from '../../src/renderers/css/dist/index.js';
 import {
   discoverPlanetTests,
   resolvePlanetAssembly,
   resolvePlanetCommand,
-} from "../../tools/run-implemented-planets.mjs";
+} from "../../tools/run-implemented-planets.mts";
 
 const loadScene = async () => () => {};
 const fixture = Object.freeze({

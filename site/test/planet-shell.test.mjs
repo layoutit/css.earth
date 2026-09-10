@@ -2,11 +2,11 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { objectAdapter } from "../object-adapter.mjs";
+import { objectAdapter } from "../object-adapter.mts";
 import { loadObjectContent } from "./load-object-content.mjs";
-import { OBJECTS } from "../objects.mjs";
+import { OBJECTS } from "../objects.mts";
 import { requireSceneLifecycle } from "../scene-contract.mjs";
-import { createSceneRouter } from "../scene-router.mjs";
+import { createSceneRouter } from "../scene-router.mts";
 
 test("keeps every implemented scene in one object registry", () => {
   assert.deepEqual(
@@ -299,9 +299,9 @@ test("keeps the shared shell planet-neutral", async () => {
     readFile(new URL("../components/PlanetShell.astro", import.meta.url), "utf8"),
     readFile(new URL("../components/PlanetInformationPanel.astro", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell-types.ts", import.meta.url), "utf8"),
-    readFile(new URL("../planet-shell-client.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../planet-shell-client.mts", import.meta.url), "utf8"),
     readFile(new URL("../planet-shell.css", import.meta.url), "utf8"),
-    readFile(new URL("../scene-router.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../scene-router.mts", import.meta.url), "utf8"),
     readFile(new URL("../site.css", import.meta.url), "utf8"),
   ]);
   assert.doesNotMatch(

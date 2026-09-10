@@ -4,9 +4,9 @@ import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';
 import {fromFile} from 'geotiff';
 import sharp from 'sharp';
-import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mjs';
-import {loadObjShape, parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mjs';
-import {simplifyRadialShape} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mjs';
+import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
+import {loadObjShape, parseObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
+import {simplifyRadialShape} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root = new URL('../../../../', import.meta.url);
 test('Mimas source simplification stays closed, preserves source positions and agrees with the independent radius product', async () => {
   const config = JSON.parse(await readFile(new URL('src/planets/mimas/source/preparation/terrestrial.json', root)));

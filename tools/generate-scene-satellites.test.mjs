@@ -18,9 +18,9 @@ async function fixture(t) {
   const data = resolve(root, 'packages/astronomy/src/data');
   await mkdir(tools, { recursive: true });
   await mkdir(data, { recursive: true });
-  const script = resolve(tools, 'generate-scene-satellites.mjs');
-  await copyFile(new URL('../packages/astronomy/tools/generate-scene-satellites.mjs', import.meta.url), script);
-  await writeFile(resolve(tools, 'body-epoch-ephemeris.mjs'), `
+  const script = resolve(tools, 'generate-scene-satellites.mts');
+  await copyFile(new URL('../packages/astronomy/tools/generate-scene-satellites.mts', import.meta.url), script);
+  await writeFile(resolve(tools, 'body-epoch-ephemeris.mts'), `
 export async function loadBodyEpochEphemeris({bodyId, centerBodyId, epochJdTt}) {
   if (bodyId === process.env.CSSEARTH_TEST_FAIL_BODY) throw new Error('Rejected source receipt');
   return {centerBodyId, epochJdTt, positionKm: [1, 2, 3], velocityKmPerDay: [4, 5, 6],

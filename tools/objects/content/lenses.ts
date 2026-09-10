@@ -1,6 +1,6 @@
-import { validateDatasetText } from "../../../site/dataset-content.mjs";
-import { prepareLensCategoryLegend, prepareLensScaleLegend } from "../../../site/prepared-lens-legends.mjs";
-import { LensRecipe, PreparedRasterAssets } from "./types";
+import { validateDatasetText } from "../../../site/dataset-content.mts";
+import { prepareLensCategoryLegend, prepareLensScaleLegend } from "../../../site/prepared-lens-legends.mts";
+import type { LensRecipe, PreparedRasterAssets } from "./types";
 
 const assetUrl = (objectId: string, asset: string | undefined): string | undefined => {
   if (!asset) return undefined;

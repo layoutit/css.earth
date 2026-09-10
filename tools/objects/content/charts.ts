@@ -1,7 +1,7 @@
 import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { readSpectrumData } from './spectrum-data.mjs';
+import { readSpectrumData } from './spectrum-data.mts';
 import { renderReflectanceChart,renderTemperaturePressureChart,renderPhotometricPhaseChart } from './chart-svg.js';
 import type { ChartIdentity } from './chart-svg.js';
 type JsonMap=Record<string,unknown>;

@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import sharp from 'sharp';
 import {BASE_TILE} from '@layoutit/polycss';
-import {prepareRadialMaterials} from './radial-terrain.mjs';
+import {prepareRadialMaterials} from './radial-terrain.mts';
 
 // The flat source has one real science color and one explicit unknown-cell
 // color on opposite sides of0E. Source-point science is intentionally absent:

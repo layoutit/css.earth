@@ -4,9 +4,9 @@ import { expect, test, vi } from 'vitest';
 import { mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import { screenPicking } from '../navigation/screen-picking.js';
-import { OBJECTS } from '../../../../site/objects.mjs';
-import { CONTEXT_ANNOTATION_PRIORITY } from '../../../../site/runtime-policy.mjs';
-import { SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mjs';
+import { OBJECTS } from '../../../../site/objects.mts';
+import { CONTEXT_ANNOTATION_PRIORITY } from '../../../../site/runtime-policy.mts';
+import { SYSTEM_VIEWS, systemFramingRect, systemViewTarget } from '../../../../site/system-framing.mts';
 
 class FakeElement extends EventTarget {
   readonly children: FakeElement[] = [];

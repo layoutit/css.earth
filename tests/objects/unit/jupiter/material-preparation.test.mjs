@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import{readFile}from'node:fs/promises';
-import{preparePhotometricDisc}from'../../../../tools/objects/giant-layers/photometric-disc.mjs';
+import{preparePhotometricDisc}from'../../../../tools/objects/giant-layers/photometric-disc.mts';
 test('source-derived normalized Minnaert material reproduces every accepted light phase row',async()=>{
  const sourceDirectory=new URL('../../../../src/planets/jupiter/source/',import.meta.url).pathname,config=JSON.parse(await readFile(new URL('preparation/materials.json',`file://${sourceDirectory}`),'utf8'));
  const result=await preparePhotometricDisc({sourceDirectory,config}),manifest=JSON.parse(await readFile(new URL('../../../../src/planets/jupiter/runtime-assets.json',import.meta.url),'utf8'));

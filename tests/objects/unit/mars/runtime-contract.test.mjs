@@ -1,12 +1,12 @@
-import {viewSunDirectionToPreparedLightDirection} from "../../../../src/platform/directional-sun-coordinate.mjs";
+import {viewSunDirectionToPreparedLightDirection} from "../../../../src/platform/directional-sun-coordinate.mts";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { runtimeDefinition } from "../../unit/mars/prepared-fixture.mjs";
 import { PREPARED_MARS_LIGHTING } from "../../unit/mars/prepared-fixture.mjs";
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mjs";
-import { OBJECTS } from "../../../../site/objects.mjs";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mjs";
+import { OBJECTS } from "../../../../site/objects.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
 
 objectRuntimePackageTests(runtimeDefinition);
 test("Mars's actual import closure has no private runtime owner", async () => {

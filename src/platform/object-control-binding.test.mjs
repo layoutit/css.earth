@@ -1,7 +1,7 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mjs';
+import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { OBJECTS } from "../../site/objects.mjs";
+import { OBJECTS } from "../../site/objects.mts";
 import { createObjectControlBinding } from '../renderers/css/dist/testing.js';
 import { initialObjectSelection, reduceObjectSelection, objectCycleStates } from '../renderers/css/dist/testing.js';
 const { controls: moonControls } = await loadObjectTestDefinition('moon');

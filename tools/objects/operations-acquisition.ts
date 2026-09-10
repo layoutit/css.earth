@@ -10,10 +10,10 @@ import { createHash } from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import { containedPath, publishPinnedSource } from './operations.js';
 import type { SourceManifest } from './operations.js';
-import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mjs';
-import {prepareProjectedCatalog} from './acquisition/projected-catalog.mjs';
-import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mjs';
-import {csvRow} from './acquisition/csv.mjs';
+import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
+import {prepareProjectedCatalog} from './acquisition/projected-catalog.mts';
+import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
+import {csvRow} from './acquisition/csv.mts';
 interface DskMesh extends OperationBase {kind:'dsk-mesh';path:string;recipe:Record<string,unknown>;}
 interface OperationBase { groups:string[]; }
 interface Download extends OperationBase {kind:'download';path:string;url:string;headers?:Record<string,string>;encoding?:'gzip'|'pretty-json';expectedJsonFields?:Record<string,unknown>;}
