@@ -46,9 +46,10 @@ jobs:
           pnpm build:renderer
           pnpm build:preparation
           pnpm prepare:world-context
+      - name: Restore environment images and prepare minimap
+        run: |
+          pnpm prepare:environment-images
           pnpm prepare:minimap
-      - name: Restore generated environment images
-        run: pnpm prepare:environment-images
       - name: Check source restoration and tracked inputs
         run: |
           node --test tools/restore-source-inputs.test.mjs

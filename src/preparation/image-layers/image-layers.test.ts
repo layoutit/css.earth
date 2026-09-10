@@ -6,7 +6,7 @@ import { test } from 'node:test';
 import sharp from 'sharp';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.js';
 import { prepareImageLayers, sha256 } from './prepare.js';
-import { restoreEnvironmentObject } from '../../../tools/objects/restore-environment-images.js';
+import { restoreEnvironmentObject } from '../environment-images.js';
 
 test('production preparation preserves canonical flux and supplies nondegenerate edge banks',async()=>{
   const root=await mkdtemp(join(tmpdir(),'image-layers-')),source=join(root,'source'),output=join(root,'prepared');
