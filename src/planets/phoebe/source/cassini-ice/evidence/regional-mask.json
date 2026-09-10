@@ -1,0 +1,3130 @@
+{
+  "schema": "cssearth-phoebe-coarse-registered-region@1",
+  "observationId": "1465671822_1",
+  "channel": "IR",
+  "width": 36,
+  "height": 24,
+  "scope": "Coarse regional placement under the fitted nominal mapping. Source pixel owners identify original measurements, not exact absolute surface position. No source brightness or index value controls this mask.",
+  "policy": {
+    "sourceRowsInclusive": [
+      4,
+      15
+    ],
+    "maximumIncidenceDegrees": 60,
+    "maximumEmissionDegrees": 60,
+    "surface": "Unchanged3500-face prepared2023Phoebe terrain; closest positive hit; source Sun vector and terrain self-shadow test.",
+    "exposureFractions": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "sensitivityOffsetsRadians": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        -0.00013388234694667876,
+        -0.00013471094099512236
+      ],
+      [
+        -0.00013388234694667876,
+        0.00013471094099512236
+      ],
+      [
+        0.00013388234694667876,
+        -0.00013471094099512236
+      ],
+      [
+        0.00013388234694667876,
+        0.00013471094099512236
+      ]
+    ],
+    "sensitivityMeaning": "Worst-case linearized parameter response to independent +/-0.5 fast-axis sample perturbations of training edge positions. Sampling sensitivity only; no statistical confidence or PSF/absolute-pointing bound.",
+    "acceptance": "Retain only original pixels whose centers satisfy the regional cuts in all25 sampled exposure/offset combinations. This is not a detector-footprint coverage mask or a continuous-motion bound.",
+    "mappingLimit": "Evaluate actual detector apertures and acquisition times against fixed terrain separately. Do not connect native scan lines or interpolate across unavailable source pixels."
+  },
+  "fitOffsetsRadians": [
+    0.000851639948572945,
+    0.00010016632943198674
+  ],
+  "fitOffsetsNativeSamplingPixels": [
+    3.4409694891836162,
+    0.20235622107472068
+  ],
+  "nominalPhysicalPixelCount": 108,
+  "nominalFullExposurePhysicalPixelCount": 107,
+  "retainedPixelCount": 41,
+  "allowedColumnsBySourceRowZeroBased": {
+    "0": [],
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [
+      20,
+      23,
+      24
+    ],
+    "5": [
+      22,
+      23
+    ],
+    "6": [
+      17,
+      18,
+      22,
+      26
+    ],
+    "7": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23
+    ],
+    "8": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "9": [
+      11,
+      12,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+    ],
+    "10": [],
+    "11": [],
+    "12": [
+      16,
+      18
+    ],
+    "13": [
+      11,
+      13,
+      14,
+      18,
+      19
+    ],
+    "14": [
+      19
+    ],
+    "15": [],
+    "16": [],
+    "17": [],
+    "18": [],
+    "19": [],
+    "20": [],
+    "21": [],
+    "22": [],
+    "23": []
+  },
+  "nativePixelMask": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "acceptedPixels": [
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 20,
+      "nativeFlatIndex": 164,
+      "nominal": {
+        "supported": true,
+        "et": 140251289.04621682,
+        "faceIndex": 2604,
+        "pointKm": [
+          53.31999499833182,
+          53.33808971035978,
+          -70.12550270478005
+        ],
+        "unitRayFixedFrame": [
+          -0.962738731100379,
+          0.1529142558782633,
+          0.22305014231878334
+        ],
+        "observerKm": [
+          19629.838343559815,
+          -3056.050407141679,
+          -4605.670882459153
+        ],
+        "incidenceDegrees": 51.03279148948175,
+        "emissionDegrees": 34.05872323341787,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        45.009720319126224,
+        -42.917183703378086
+      ],
+      "sampledMaximumIncidenceDegrees": 57.27129150959984,
+      "sampledMaximumEmissionDegrees": 50.21452553321644,
+      "sampledFullExposureGroundMotionKm": 0.19040727030352292,
+      "sampledFullExposureCenterRayMotionRadians": 3.423157094505146e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.548322871828747,
+      "nativePhocubeResolutionMeters": 9554.0771484375
+    },
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 23,
+      "nativeFlatIndex": 167,
+      "nominal": {
+        "supported": true,
+        "et": 140251289.83967182,
+        "faceIndex": 3499,
+        "pointKm": [
+          65.9465569346321,
+          35.76580768603526,
+          -71.71462646067175
+        ],
+        "unitRayFixedFrame": [
+          -0.9628193129934915,
+          0.1522827264596744,
+          0.22313435806425935
+        ],
+        "observerKm": [
+          19624.657836855884,
+          -3057.705458987787,
+          -4604.465919577824
+        ],
+        "incidenceDegrees": 51.23935546287425,
+        "emissionDegrees": 49.151398886271856,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        28.47298417238693,
+        -43.70920363239914
+      ],
+      "sampledMaximumIncidenceDegrees": 55.95657756621115,
+      "sampledMaximumEmissionDegrees": 49.30700146728726,
+      "sampledFullExposureGroundMotionKm": 0.22989018957137655,
+      "sampledFullExposureCenterRayMotionRadians": 3.42301495375816e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.929840077360301,
+      "nativePhocubeResolutionMeters": 9541.0849609375
+    },
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 24,
+      "nativeFlatIndex": 168,
+      "nominal": {
+        "supported": true,
+        "et": 140251290.10415682,
+        "faceIndex": 3481,
+        "pointKm": [
+          68.88793462012472,
+          30.11465305218144,
+          -71.95133628565509
+        ],
+        "unitRayFixedFrame": [
+          -0.9628460874312681,
+          0.15207220193263615,
+          0.2231624012186149
+        ],
+        "observerKm": [
+          19622.930988709697,
+          -3058.256814348355,
+          -4604.064265284089
+        ],
+        "incidenceDegrees": 55.75354260823036,
+        "emissionDegrees": 41.3295951613966,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        23.612747958779106,
+        -43.74186624211766
+      ],
+      "sampledMaximumIncidenceDegrees": 56.65560454565347,
+      "sampledMaximumEmissionDegrees": 49.30832121879512,
+      "sampledFullExposureGroundMotionKm": 0.20122675484921004,
+      "sampledFullExposureCenterRayMotionRadians": 3.422967975321325e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.247256875390512,
+      "nativePhocubeResolutionMeters": 9537.8466796875
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 22,
+      "nativeFlatIndex": 202,
+      "nominal": {
+        "supported": true,
+        "et": 140251299.77922156,
+        "faceIndex": 2473,
+        "pointKm": [
+          72.92658022214164,
+          37.80478489767347,
+          -63.55276695712382
+        ],
+        "unitRayFixedFrame": [
+          -0.9624683781448924,
+          0.15390725847703937,
+          0.22353339092677676
+        ],
+        "observerKm": [
+          19559.75734962067,
+          -3078.312864499678,
+          -4589.371442367306
+        ],
+        "incidenceDegrees": 53.58329364192687,
+        "emissionDegrees": 32.22285581921557,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        27.40200404960389,
+        -37.72853361754516
+      ],
+      "sampledMaximumIncidenceDegrees": 56.028974026791026,
+      "sampledMaximumEmissionDegrees": 32.22357287789185,
+      "sampledFullExposureGroundMotionKm": 0.14273911589564514,
+      "sampledFullExposureCenterRayMotionRadians": 3.403685092337548e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.57844017648241,
+      "nativePhocubeResolutionMeters": 9508.8349609375
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 23,
+      "nativeFlatIndex": 203,
+      "nominal": {
+        "supported": true,
+        "et": 140251300.04370657,
+        "faceIndex": 2446,
+        "pointKm": [
+          74.64217163616922,
+          32.360064902559316,
+          -63.580992200271794
+        ],
+        "unitRayFixedFrame": [
+          -0.9624962523870139,
+          0.15369687011857203,
+          0.2235581272436965
+        ],
+        "observerKm": [
+          19558.030274431323,
+          -3078.858044548275,
+          -4588.969788074371
+        ],
+        "incidenceDegrees": 55.87888813026215,
+        "emissionDegrees": 30.03137774414243,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        23.438465939716277,
+        -38.00854455836333
+      ],
+      "sampledMaximumIncidenceDegrees": 55.88009252285912,
+      "sampledMaximumEmissionDegrees": 59.73445855844969,
+      "sampledFullExposureGroundMotionKm": 0.13918778931350664,
+      "sampledFullExposureCenterRayMotionRadians": 3.40365796111379e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.234843212768483,
+      "nativePhocubeResolutionMeters": 9505.732421875
+    },
+    {
+      "lineZeroBased": 6,
+      "sampleZeroBased": 17,
+      "nativeFlatIndex": 233,
+      "nominal": {
+        "supported": true,
+        "et": 140251308.6608313,
+        "faceIndex": 2563,
+        "pointKm": [
+          65.70414154001992,
+          61.76041395724178,
+          -52.438763500474124
+        ],
+        "unitRayFixedFrame": [
+          -0.961996365933524,
+          0.15632105661106754,
+          0.22388997117042217
+        ],
+        "observerKm": [
+          19501.757728446006,
+          -3096.530553292029,
+          -4575.883582355291
+        ],
+        "incidenceDegrees": 30.100745419797192,
+        "emissionDegrees": 58.33245889187642,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        43.22784549616212,
+        -30.179177338897205
+      ],
+      "sampledMaximumIncidenceDegrees": 38.730517032461805,
+      "sampledMaximumEmissionDegrees": 58.3332824411646,
+      "sampledFullExposureGroundMotionKm": 0.18720731881991853,
+      "sampledFullExposureCenterRayMotionRadians": 3.4176883234389075e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 7.213301002552653,
+      "nativePhocubeResolutionMeters": 9492.9365234375
+    },
+    {
+      "lineZeroBased": 6,
+      "sampleZeroBased": 18,
+      "nativeFlatIndex": 234,
+      "nominal": {
+        "supported": true,
+        "et": 140251308.9253163,
+        "faceIndex": 2552,
+        "pointKm": [
+          71.81384458891262,
+          55.60821517321847,
+          -53.53806999616427
+        ],
+        "unitRayFixedFrame": [
+          -0.9620252097227149,
+          0.1561108869908421,
+          0.22391267677578913
+        ],
+        "observerKm": [
+          19500.03046479912,
+          -3097.0702163051287,
+          -4575.481928063055
+        ],
+        "incidenceDegrees": 31.25822303093303,
+        "emissionDegrees": 57.63242445374593,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        37.75199299570649,
+        -30.5173318965866
+      ],
+      "sampledMaximumIncidenceDegrees": 39.46644367570197,
+      "sampledMaximumEmissionDegrees": 58.33324748678936,
+      "sampledFullExposureGroundMotionKm": 0.18196426990656062,
+      "sampledFullExposureCenterRayMotionRadians": 3.4176832095354655e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 7.1828504591090185,
+      "nativePhocubeResolutionMeters": 9487.9404296875
+    },
+    {
+      "lineZeroBased": 6,
+      "sampleZeroBased": 22,
+      "nativeFlatIndex": 238,
+      "nominal": {
+        "supported": true,
+        "et": 140251309.9832563,
+        "faceIndex": 2439,
+        "pointKm": [
+          84.04442287186976,
+          33.008742945869926,
+          -55.0965541679534
+        ],
+        "unitRayFixedFrame": [
+          -0.9621401554288251,
+          0.1552701353052801,
+          0.2240033624606467
+        ],
+        "observerKm": [
+          19493.121356299536,
+          -3099.22722558693,
+          -4573.875310894315
+        ],
+        "incidenceDegrees": 47.396410770779006,
+        "emissionDegrees": 50.07026853274814,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        21.442592816160335,
+        -31.391095553797758
+      ],
+      "sampledMaximumIncidenceDegrees": 53.67791072508497,
+      "sampledMaximumEmissionDegrees": 59.79567065753376,
+      "sampledFullExposureGroundMotionKm": 0.1363543747669123,
+      "sampledFullExposureCenterRayMotionRadians": 3.4176644331637225e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.859364152929961,
+      "nativePhocubeResolutionMeters": 9473.7421875
+    },
+    {
+      "lineZeroBased": 6,
+      "sampleZeroBased": 26,
+      "nativeFlatIndex": 242,
+      "nominal": {
+        "supported": true,
+        "et": 140251311.04119632,
+        "faceIndex": 2351,
+        "pointKm": [
+          90.59384021918959,
+          11.48481506853068,
+          -55.33265146692975
+        ],
+        "unitRayFixedFrame": [
+          -0.9622534710379484,
+          0.1544352167304199,
+          0.2240937779342594
+        ],
+        "observerKm": [
+          19486.212162095107,
+          -3101.3816066326203,
+          -4572.268693725908
+        ],
+        "incidenceDegrees": 50.87239116713291,
+        "emissionDegrees": 46.73480946601679,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        7.224993438422166,
+        -31.21282820636247
+      ],
+      "sampledMaximumIncidenceDegrees": 59.40069902150612,
+      "sampledMaximumEmissionDegrees": 51.945996348212596,
+      "sampledFullExposureGroundMotionKm": 0.05577718421834978,
+      "sampledFullExposureCenterRayMotionRadians": 3.746025635414723e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.572612671375788,
+      "nativePhocubeResolutionMeters": 9464.25390625
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 17,
+      "nativeFlatIndex": 269,
+      "nominal": {
+        "supported": true,
+        "et": 140251318.86486605,
+        "faceIndex": 2533,
+        "pointKm": [
+          79.26319198919737,
+          57.52216953771995,
+          -45.42830883870283
+        ],
+        "unitRayFixedFrame": [
+          -0.9616659542893569,
+          0.1577328213549548,
+          0.2243188566040475
+        ],
+        "observerKm": [
+          19435.114758228712,
+          -3117.232082344678,
+          -4560.387450909022
+        ],
+        "incidenceDegrees": 34.26768583770288,
+        "emissionDegrees": 52.975884883157995,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        35.96880451892139,
+        -24.884570023687555
+      ],
+      "sampledMaximumIncidenceDegrees": 42.95938604793489,
+      "sampledMaximumEmissionDegrees": 58.38991017545965,
+      "sampledFullExposureGroundMotionKm": 0.16949269691600843,
+      "sampledFullExposureCenterRayMotionRadians": 3.4061566248588e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.3181946004384955,
+      "nativePhocubeResolutionMeters": 9457.3193359375
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 18,
+      "nativeFlatIndex": 270,
+      "nominal": {
+        "supported": true,
+        "et": 140251319.12935105,
+        "faceIndex": 2508,
+        "pointKm": [
+          83.40752493304899,
+          51.69928070608739,
+          -46.07626228834579
+        ],
+        "unitRayFixedFrame": [
+          -0.9616951174729211,
+          0.15752257895616908,
+          0.2243415658047819
+        ],
+        "observerKm": [
+          19433.38729487168,
+          -3117.765407978118,
+          -4559.985796617574
+        ],
+        "incidenceDegrees": 42.0584442711046,
+        "emissionDegrees": 48.231341041174694,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        31.792270847396935,
+        -25.15192451898022
+      ],
+      "sampledMaximumIncidenceDegrees": 52.76125030940103,
+      "sampledMaximumEmissionDegrees": 52.96879822061265,
+      "sampledFullExposureGroundMotionKm": 0.14831077093746114,
+      "sampledFullExposureCenterRayMotionRadians": 3.406151892984745e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.772646486980255,
+      "nativePhocubeResolutionMeters": 9453.1103515625
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 19,
+      "nativeFlatIndex": 271,
+      "nominal": {
+        "supported": true,
+        "et": 140251319.39383605,
+        "faceIndex": 2485,
+        "pointKm": [
+          86.75303252990125,
+          46.01010239221796,
+          -46.53814310483813
+        ],
+        "unitRayFixedFrame": [
+          -0.9617242376772585,
+          0.15731232915827686,
+          0.22436426132273155
+        ],
+        "observerKm": [
+          19431.6598265772,
+          -3118.298569365111,
+          -4559.584142326146
+        ],
+        "incidenceDegrees": 43.74607369980853,
+        "emissionDegrees": 42.82602203878018,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        27.939568814385854,
+        -25.357082353184172
+      ],
+      "sampledMaximumIncidenceDegrees": 43.74719817090238,
+      "sampledMaximumEmissionDegrees": 52.610067170248705,
+      "sampledFullExposureGroundMotionKm": 0.14444031420359013,
+      "sampledFullExposureCenterRayMotionRadians": 3.4061471710808324e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.437718493918888,
+      "nativePhocubeResolutionMeters": 9449.4150390625
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 20,
+      "nativeFlatIndex": 272,
+      "nominal": {
+        "supported": true,
+        "et": 140251319.65832105,
+        "faceIndex": 2454,
+        "pointKm": [
+          89.5565341862457,
+          40.41214683580574,
+          -46.87383016041895
+        ],
+        "unitRayFixedFrame": [
+          -0.9617533149004331,
+          0.1571020719748077,
+          0.22438694315679586
+        ],
+        "observerKm": [
+          19429.93235334459,
+          -3118.8315665854475,
+          -4559.182488034739
+        ],
+        "incidenceDegrees": 58.97053364326682,
+        "emissionDegrees": 31.953616024073938,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        24.28714931950225,
+        -25.504696866491116
+      ],
+      "sampledMaximumIncidenceDegrees": 58.971645393915885,
+      "sampledMaximumEmissionDegrees": 52.61218196687556,
+      "sampledFullExposureGroundMotionKm": 0.1261208441797545,
+      "sampledFullExposureCenterRayMotionRadians": 3.40614285431172e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.454837956437738,
+      "nativePhocubeResolutionMeters": 9446.1123046875
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 21,
+      "nativeFlatIndex": 273,
+      "nominal": {
+        "supported": true,
+        "et": 140251319.92280605,
+        "faceIndex": 2433,
+        "pointKm": [
+          91.44496050478483,
+          34.96590729636364,
+          -46.99624937927547
+        ],
+        "unitRayFixedFrame": [
+          -0.9617823491424308,
+          0.15689180740756684,
+          0.22440961130587417
+        ],
+        "observerKm": [
+          19428.204875211253,
+          -3119.364399482028,
+          -4558.780833743353
+        ],
+        "incidenceDegrees": 50.728596753195816,
+        "emissionDegrees": 33.599811539350604,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        20.92540790707594,
+        -25.64257753420813
+      ],
+      "sampledMaximumIncidenceDegrees": 53.5987331431053,
+      "sampledMaximumEmissionDegrees": 42.66901229567202,
+      "sampledFullExposureGroundMotionKm": 0.1346078428181047,
+      "sampledFullExposureCenterRayMotionRadians": 3.406137757147068e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.9596028491406265,
+      "nativePhocubeResolutionMeters": 9443.125
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 22,
+      "nativeFlatIndex": 274,
+      "nominal": {
+        "supported": true,
+        "et": 140251320.18729106,
+        "faceIndex": 2421,
+        "pointKm": [
+          93.44968992354552,
+          29.502755338769475,
+          -47.14602058896435
+        ],
+        "unitRayFixedFrame": [
+          -0.9618113404013232,
+          0.15668153547008346,
+          0.2244322657688667
+        ],
+        "observerKm": [
+          19426.47739217668,
+          -3119.897068134671,
+          -4558.379179451986
+        ],
+        "incidenceDegrees": 53.59557328781117,
+        "emissionDegrees": 37.99786375736951,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        17.521290379528626,
+        -25.692228243132018
+      ],
+      "sampledMaximumIncidenceDegrees": 58.83002202773377,
+      "sampledMaximumEmissionDegrees": 42.66121583769481,
+      "sampledFullExposureGroundMotionKm": 0.12918417520571693,
+      "sampledFullExposureCenterRayMotionRadians": 3.406133065136217e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.881111865058883,
+      "nativePhocubeResolutionMeters": 9440.4033203125
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 23,
+      "nativeFlatIndex": 275,
+      "nominal": {
+        "supported": true,
+        "et": 140251320.45177606,
+        "faceIndex": 2377,
+        "pointKm": [
+          95.1321661838665,
+          24.094112322195087,
+          -47.22080803910194
+        ],
+        "unitRayFixedFrame": [
+          -0.9618402886758195,
+          0.1564712561719795,
+          0.22445490654467534
+        ],
+        "observerKm": [
+          19424.749904252836,
+          -3120.4295725441825,
+          -4557.977525160637
+        ],
+        "incidenceDegrees": 58.466989323249,
+        "emissionDegrees": 28.661919253978592,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        14.212437072799883,
+        -25.695822499889303
+      ],
+      "sampledMaximumIncidenceDegrees": 58.82774563927124,
+      "sampledMaximumEmissionDegrees": 51.586015716858554,
+      "sampledFullExposureGroundMotionKm": 0.12605973041164426,
+      "sampledFullExposureCenterRayMotionRadians": 3.4061283830498646e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.792505968533165,
+      "nativePhocubeResolutionMeters": 9437.912109375
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 12,
+      "nativeFlatIndex": 300,
+      "nominal": {
+        "supported": true,
+        "et": 140251327.7464758,
+        "faceIndex": 2654,
+        "pointKm": [
+          68.42048542672273,
+          81.53199143529673,
+          -34.03417932324737
+        ],
+        "unitRayFixedFrame": [
+          -0.9611931019164862,
+          0.16012268796153514,
+          0.22465205458249546
+        ],
+        "observerKm": [
+          19377.102578680984,
+          -3135.051722702992,
+          -4546.899590946536
+        ],
+        "incidenceDegrees": 34.230729968251616,
+        "emissionDegrees": 53.97632957733354,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        49.99710457031397,
+        -17.732145301914397
+      ],
+      "sampledMaximumIncidenceDegrees": 34.23171526730804,
+      "sampledMaximumEmissionDegrees": 59.843552759251075,
+      "sampledFullExposureGroundMotionKm": 0.10927073175386569,
+      "sampledFullExposureCenterRayMotionRadians": 3.615847643371285e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.5112858283160655,
+      "nativePhocubeResolutionMeters": -3.4028226550889045e+38
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 13,
+      "nativeFlatIndex": 301,
+      "nominal": {
+        "supported": true,
+        "et": 140251328.0109608,
+        "faceIndex": 2597,
+        "pointKm": [
+          73.31490228028633,
+          75.62441843093256,
+          -34.85852684186921
+        ],
+        "unitRayFixedFrame": [
+          -0.9612223990481358,
+          0.1599145975963111,
+          0.2246749230416164
+        ],
+        "observerKm": [
+          19375.374956121464,
+          -3135.5795332731404,
+          -4546.497936655762
+        ],
+        "incidenceDegrees": 34.92793092429368,
+        "emissionDegrees": 53.25786333933378,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        45.888381410584984,
+        -18.311964244371282
+      ],
+      "sampledMaximumIncidenceDegrees": 34.92892394543367,
+      "sampledMaximumEmissionDegrees": 55.23650119690764,
+      "sampledFullExposureGroundMotionKm": 0.10733734453176905,
+      "sampledFullExposureCenterRayMotionRadians": 3.615841736769089e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.403150094928562,
+      "nativePhocubeResolutionMeters": 9445.2978515625
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 14,
+      "nativeFlatIndex": 302,
+      "nominal": {
+        "supported": true,
+        "et": 140251328.2754458,
+        "faceIndex": 2561,
+        "pointKm": [
+          78.48734645327932,
+          69.67400410633218,
+          -35.7481751862415
+        ],
+        "unitRayFixedFrame": [
+          -0.9612516540254427,
+          0.1597064998729305,
+          0.2246977782081697
+        ],
+        "observerKm": [
+          19373.647329029714,
+          -3136.107179625138,
+          -4546.096282365005
+        ],
+        "incidenceDegrees": 33.86129600486999,
+        "emissionDegrees": 52.07403306793181,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        41.5957857363346,
+        -18.809740637292826
+      ],
+      "sampledMaximumIncidenceDegrees": 43.39232914630097,
+      "sampledMaximumEmissionDegrees": 55.23928499307572,
+      "sampledFullExposureGroundMotionKm": 0.10866263430937678,
+      "sampledFullExposureCenterRayMotionRadians": 3.615835838490598e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.51786451838914,
+      "nativePhocubeResolutionMeters": 9437.2197265625
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 15,
+      "nativeFlatIndex": 303,
+      "nominal": {
+        "supported": true,
+        "et": 140251328.5399308,
+        "faceIndex": 2561,
+        "pointKm": [
+          83.23975607712055,
+          63.79675695681635,
+          -36.53995075363309
+        ],
+        "unitRayFixedFrame": [
+          -0.9612808668471403,
+          0.15949839480072506,
+          0.2247206200810303
+        ],
+        "observerKm": [
+          19371.919697417856,
+          -3136.634661759861,
+          -4545.694628074272
+        ],
+        "incidenceDegrees": 33.85912932998958,
+        "emissionDegrees": 52.0633263721908,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        37.467339459592715,
+        -19.208972700337103
+      ],
+      "sampledMaximumIncidenceDegrees": 46.33845334246036,
+      "sampledMaximumEmissionDegrees": 52.0746293077559,
+      "sampledFullExposureGroundMotionKm": 0.10826904240312034,
+      "sampledFullExposureCenterRayMotionRadians": 3.61583034351222e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.076014530139076,
+      "nativePhocubeResolutionMeters": 9431.384765625
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 16,
+      "nativeFlatIndex": 304,
+      "nominal": {
+        "supported": true,
+        "et": 140251328.8044158,
+        "faceIndex": 2524,
+        "pointKm": [
+          85.59834724689063,
+          58.31945565463411,
+          -36.77238400343231
+        ],
+        "unitRayFixedFrame": [
+          -0.9613100375113144,
+          0.15929028239293358,
+          0.2247434486590743
+        ],
+        "observerKm": [
+          19370.19206128514,
+          -3137.161979756873,
+          -4545.292973783555
+        ],
+        "incidenceDegrees": 34.41548910354543,
+        "emissionDegrees": 51.09221434812337,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        34.267199480141024,
+        -19.546079995951818
+      ],
+      "sampledMaximumIncidenceDegrees": 46.33645431116298,
+      "sampledMaximumEmissionDegrees": 53.13891406088176,
+      "sampledFullExposureGroundMotionKm": 0.10659495034949534,
+      "sampledFullExposureCenterRayMotionRadians": 3.615824066261608e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.764941082306805,
+      "nativePhocubeResolutionMeters": 9426.6103515625
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 17,
+      "nativeFlatIndex": 305,
+      "nominal": {
+        "supported": true,
+        "et": 140251329.0689008,
+        "faceIndex": 2507,
+        "pointKm": [
+          90.47359397438413,
+          52.4279247907466,
+          -37.59345046235012
+        ],
+        "unitRayFixedFrame": [
+          -0.9613391660179994,
+          0.15908216265107417,
+          0.22476626394117796
+        ],
+        "observerKm": [
+          19368.46442066921,
+          -3137.6891334596003,
+          -4544.891319492861
+        ],
+        "incidenceDegrees": 28.67878193147388,
+        "emissionDegrees": 53.13181123517612,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        30.09156989426124,
+        -19.774376916140103
+      ],
+      "sampledMaximumIncidenceDegrees": 45.31812018733654,
+      "sampledMaximumEmissionDegrees": 53.142038576476374,
+      "sampledFullExposureGroundMotionKm": 0.12165704092939147,
+      "sampledFullExposureCenterRayMotionRadians": 3.6158181924264114e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.798140717711731,
+      "nativePhocubeResolutionMeters": 9422.50390625
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 18,
+      "nativeFlatIndex": 306,
+      "nominal": {
+        "supported": true,
+        "et": 140251329.3333858,
+        "faceIndex": 2469,
+        "pointKm": [
+          93.81814022094841,
+          46.79269508919151,
+          -38.05691474154628
+        ],
+        "unitRayFixedFrame": [
+          -0.9613682523646374,
+          0.1588740355922928,
+          0.22478906592621895
+        ],
+        "observerKm": [
+          19366.73677555656,
+          -3138.2161230263246,
+          -4544.489665202185
+        ],
+        "incidenceDegrees": 40.86127389971971,
+        "emissionDegrees": 46.49234031237938,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        26.50816575705462,
+        -19.95091627695892
+      ],
+      "sampledMaximumIncidenceDegrees": 45.31540351670859,
+      "sampledMaximumEmissionDegrees": 50.32967528200197,
+      "sampledFullExposureGroundMotionKm": 0.0952729141390593,
+      "sampledFullExposureCenterRayMotionRadians": 3.6158127219169507e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.4049980950188425,
+      "nativePhocubeResolutionMeters": 9418.876953125
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 19,
+      "nativeFlatIndex": 307,
+      "nominal": {
+        "supported": true,
+        "et": 140251329.5978708,
+        "faceIndex": 2432,
+        "pointKm": [
+          96.91704446033691,
+          41.20066693055787,
+          -38.463196652384795
+        ],
+        "unitRayFixedFrame": [
+          -0.9613972965512617,
+          0.15866590121810892,
+          0.2248118546130754
+        ],
+        "observerKm": [
+          19365.009125984772,
+          -3138.742948300498,
+          -4544.088010911528
+        ],
+        "incidenceDegrees": 47.299390109349375,
+        "emissionDegrees": 36.83687747473993,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        23.03096136457819,
+        -20.063929491660204
+      ],
+      "sampledMaximumIncidenceDegrees": 47.30061048480639,
+      "sampledMaximumEmissionDegrees": 50.33278846538698,
+      "sampledFullExposureGroundMotionKm": 0.08921306622794471,
+      "sampledFullExposureCenterRayMotionRadians": 3.61580646916957e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.208431843862682,
+      "nativePhocubeResolutionMeters": 9415.62109375
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 20,
+      "nativeFlatIndex": 308,
+      "nominal": {
+        "supported": true,
+        "et": 140251329.8623558,
+        "faceIndex": 2413,
+        "pointKm": [
+          99.19270745746326,
+          35.74687370824222,
+          -38.67720919077601
+        ],
+        "unitRayFixedFrame": [
+          -0.9614262985759682,
+          0.15845775954176086,
+          0.22483463000062612
+        ],
+        "observerKm": [
+          19363.281471953185,
+          -3139.2696093616764,
+          -4543.686356620891
+        ],
+        "incidenceDegrees": 58.851373777841246,
+        "emissionDegrees": 31.104007996612005,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        19.818049167073113,
+        -20.1443753017951
+      ],
+      "sampledMaximumIncidenceDegrees": 58.85250419074362,
+      "sampledMaximumEmissionDegrees": 45.75906885195992,
+      "sampledFullExposureGroundMotionKm": 0.08093978083496364,
+      "sampledFullExposureCenterRayMotionRadians": 3.615800619791721e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.904138834436597,
+      "nativePhocubeResolutionMeters": 9412.666015625
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 11,
+      "nativeFlatIndex": 335,
+      "nominal": {
+        "supported": true,
+        "et": 140251337.68602553,
+        "faceIndex": 2621,
+        "pointKm": [
+          73.3652723780906,
+          83.65498354292458,
+          -25.441579311030182
+        ],
+        "unitRayFixedFrame": [
+          -0.960828323408398,
+          0.16173426695533683,
+          0.22505768111448046
+        ],
+        "observerKm": [
+          19312.17417734326,
+          -3154.774379468037,
+          -4531.805113846105
+        ],
+        "incidenceDegrees": 34.985228198671415,
+        "emissionDegrees": 46.961158769120225,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        48.74929508176765,
+        -12.879327761467295
+      ],
+      "sampledMaximumIncidenceDegrees": 43.33787536878267,
+      "sampledMaximumEmissionDegrees": 53.32865940791185,
+      "sampledFullExposureGroundMotionKm": 0.16437179551258335,
+      "sampledFullExposureCenterRayMotionRadians": 3.4168395660244675e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.883887536076155,
+      "nativePhocubeResolutionMeters": -3.4028226550889045e+38
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 12,
+      "nativeFlatIndex": 336,
+      "nominal": {
+        "supported": true,
+        "et": 140251337.95051053,
+        "faceIndex": 2602,
+        "pointKm": [
+          77.66518435841863,
+          77.81406211532567,
+          -26.136235068575843
+        ],
+        "unitRayFixedFrame": [
+          -0.9608583120258312,
+          0.1615242570305061,
+          0.22508047139103912
+        ],
+        "observerKm": [
+          19310.446392753798,
+          -3155.296019189594,
+          -4531.403459556066
+        ],
+        "incidenceDegrees": 47.219443845711595,
+        "emissionDegrees": 35.499708954411716,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        45.0548630426284,
+        -13.372734013842207
+      ],
+      "sampledMaximumIncidenceDegrees": 49.82233085244915,
+      "sampledMaximumEmissionDegrees": 46.959606992082854,
+      "sampledFullExposureGroundMotionKm": 0.1409450861006798,
+      "sampledFullExposureCenterRayMotionRadians": 3.416834754180325e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.21935524166305,
+      "nativePhocubeResolutionMeters": 9417.923828125
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 14,
+      "nativeFlatIndex": 338,
+      "nominal": {
+        "supported": true,
+        "et": 140251338.47948053,
+        "faceIndex": 2582,
+        "pointKm": [
+          84.92728461041406,
+          66.36586579414552,
+          -27.213013379546283
+        ],
+        "unitRayFixedFrame": [
+          -0.9609181605405984,
+          0.16110421448924528,
+          0.22512601097402335
+        ],
+        "observerKm": [
+          19306.990811337902,
+          -3156.338806155872,
+          -4530.600150976054
+        ],
+        "incidenceDegrees": 41.119262661284196,
+        "emissionDegrees": 40.78176248029739,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        38.00561280291237,
+        -14.169941550484124
+      ],
+      "sampledMaximumIncidenceDegrees": 49.81724798988853,
+      "sampledMaximumEmissionDegrees": 44.80890744446539,
+      "sampledFullExposureGroundMotionKm": 0.14243565602223454,
+      "sampledFullExposureCenterRayMotionRadians": 3.456590242161093e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.736558993732605,
+      "nativePhocubeResolutionMeters": 9402.529296875
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 15,
+      "nativeFlatIndex": 339,
+      "nominal": {
+        "supported": true,
+        "et": 140251338.74396554,
+        "faceIndex": 2506,
+        "pointKm": [
+          88.44276482620626,
+          60.69549146132249,
+          -27.672669932257122
+        ],
+        "unitRayFixedFrame": [
+          -0.9609472241997665,
+          0.1608955557264948,
+          0.22515117687950473
+        ],
+        "observerKm": [
+          19305.263014548353,
+          -3156.859953323899,
+          -4530.198496686075
+        ],
+        "incidenceDegrees": 46.25020231467459,
+        "emissionDegrees": 38.2024258312752,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        34.46058566601575,
+        -14.465805219298154
+      ],
+      "sampledMaximumIncidenceDegrees": 49.814706436852276,
+      "sampledMaximumEmissionDegrees": 44.78053249478282,
+      "sampledFullExposureGroundMotionKm": 0.10819646069827998,
+      "sampledFullExposureCenterRayMotionRadians": 3.621538646988289e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.825082271337952,
+      "nativePhocubeResolutionMeters": 9397.5478515625
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 16,
+      "nativeFlatIndex": 340,
+      "nominal": {
+        "supported": true,
+        "et": 140251339.00845054,
+        "faceIndex": 2496,
+        "pointKm": [
+          92.74356298510975,
+          54.90892765132776,
+          -28.29523123490162
+        ],
+        "unitRayFixedFrame": [
+          -0.9609759180883253,
+          0.16068745407833313,
+          0.22517732336122082
+        ],
+        "observerKm": [
+          19303.535213716226,
+          -3157.3809363091914,
+          -4529.796842396114
+        ],
+        "incidenceDegrees": 35.49545482068716,
+        "emissionDegrees": 51.61809090556119,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        30.62770029577809,
+        -14.709889266137177
+      ],
+      "sampledMaximumIncidenceDegrees": 47.68918698398105,
+      "sampledMaximumEmissionDegrees": 51.61889584821355,
+      "sampledFullExposureGroundMotionKm": 0.1475876464023584,
+      "sampledFullExposureCenterRayMotionRadians": 3.621520273066101e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.921257261064405,
+      "nativePhocubeResolutionMeters": 9393.3017578125
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 17,
+      "nativeFlatIndex": 341,
+      "nominal": {
+        "supported": true,
+        "et": 140251339.27293554,
+        "faceIndex": 2471,
+        "pointKm": [
+          96.38896423432016,
+          49.234892250098255,
+          -28.76451948313388
+        ],
+        "unitRayFixedFrame": [
+          -0.9610045694552534,
+          0.16047934502809516,
+          0.22520345757886645
+        ],
+        "observerKm": [
+          19301.807408853598,
+          -3157.9017551126467,
+          -4529.395188106177
+        ],
+        "incidenceDegrees": 44.78757329676887,
+        "emissionDegrees": 36.96942113259017,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        27.05766673808383,
+        -14.88284419318238
+      ],
+      "sampledMaximumIncidenceDegrees": 44.78889097239878,
+      "sampledMaximumEmissionDegrees": 56.68811658287522,
+      "sampledFullExposureGroundMotionKm": 0.11300151107347671,
+      "sampledFullExposureCenterRayMotionRadians": 3.621501897638697e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.423440992094611,
+      "nativePhocubeResolutionMeters": 9389.5673828125
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 18,
+      "nativeFlatIndex": 342,
+      "nominal": {
+        "supported": true,
+        "et": 140251339.53742054,
+        "faceIndex": 2444,
+        "pointKm": [
+          101.23142015577832,
+          43.364016247071504,
+          -29.514638961500168
+        ],
+        "unitRayFixedFrame": [
+          -0.9610331782994102,
+          0.16027122858507675,
+          0.22522957953067463
+        ],
+        "observerKm": [
+          19300.079599972523,
+          -3158.4224097351403,
+          -4528.993533816256
+        ],
+        "incidenceDegrees": 31.408934889910462,
+        "emissionDegrees": 50.406409275941876,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        23.188606643995332,
+        -15.002842023688213
+      ],
+      "sampledMaximumIncidenceDegrees": 58.641380039503815,
+      "sampledMaximumEmissionDegrees": 52.66105483828878,
+      "sampledFullExposureGroundMotionKm": 0.14010689920709107,
+      "sampledFullExposureCenterRayMotionRadians": 3.6214839166070355e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.527159376522834,
+      "nativePhocubeResolutionMeters": 9386.2236328125
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 19,
+      "nativeFlatIndex": 343,
+      "nominal": {
+        "supported": true,
+        "et": 140251339.80190554,
+        "faceIndex": 2430,
+        "pointKm": [
+          104.12297697687609,
+          37.82138056890517,
+          -29.8078380492816
+        ],
+        "unitRayFixedFrame": [
+          -0.9610617446190055,
+          0.16006310476247948,
+          0.22525568921487804
+        ],
+        "observerKm": [
+          19298.351787072235,
+          -3158.942900255991,
+          -4528.591879526357
+        ],
+        "incidenceDegrees": 56.396264006571165,
+        "emissionDegrees": 25.25031989407508,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        19.962924931957513,
+        -15.0601181321577
+      ],
+      "sampledMaximumIncidenceDegrees": 58.63887014188984,
+      "sampledMaximumEmissionDegrees": 38.92886924145473,
+      "sampledFullExposureGroundMotionKm": 0.09971585912272088,
+      "sampledFullExposureCenterRayMotionRadians": 3.621465142626721e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.6357714939146595,
+      "nativePhocubeResolutionMeters": 9383.193359375
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 16,
+      "nativeFlatIndex": 448,
+      "nominal": {
+        "supported": true,
+        "et": 140251369.6205548,
+        "faceIndex": 2461,
+        "pointKm": [
+          91.06525699813574,
+          47.599871568781055,
+          3.181236084989905
+        ],
+        "unitRayFixedFrame": [
+          -0.9599595873880018,
+          0.16481148710676233,
+          0.22652762370076457
+        ],
+        "observerKm": [
+          19103.53144518036,
+          -3216.5717323290037,
+          -4483.308448359702
+        ],
+        "incidenceDegrees": 52.89751656755585,
+        "emissionDegrees": 57.48631238153415,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        27.596099093693937,
+        1.7732749305347493
+      ],
+      "sampledMaximumIncidenceDegrees": 52.898492511833,
+      "sampledMaximumEmissionDegrees": 57.487076118157546,
+      "sampledFullExposureGroundMotionKm": 0.19748677377096416,
+      "sampledFullExposureCenterRayMotionRadians": 3.4158372461359525e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.702707093768897,
+      "nativePhocubeResolutionMeters": 9298.3271484375
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 18,
+      "nativeFlatIndex": 450,
+      "nominal": {
+        "supported": true,
+        "et": 140251370.1495248,
+        "faceIndex": 2437,
+        "pointKm": [
+          100.67872077328138,
+          35.834885337784726,
+          1.5138086202487102
+        ],
+        "unitRayFixedFrame": [
+          -0.9600208519609541,
+          0.16439161950060316,
+          0.22657307703726132
+        ],
+        "observerKm": [
+          19100.075062768723,
+          -3217.5752128019362,
+          -4482.505139784298
+        ],
+        "incidenceDegrees": 57.6312402800141,
+        "emissionDegrees": 51.973652270994,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        19.592325541417484,
+        0.8115681049756547
+      ],
+      "sampledMaximumIncidenceDegrees": 57.928765383353436,
+      "sampledMaximumEmissionDegrees": 58.97333038419155,
+      "sampledFullExposureGroundMotionKm": 0.17347161138521325,
+      "sampledFullExposureCenterRayMotionRadians": 3.415827645602258e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.970281801329254,
+      "nativePhocubeResolutionMeters": 9292.3369140625
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 11,
+      "nativeFlatIndex": 479,
+      "nominal": {
+        "supported": true,
+        "et": 140251378.50216454,
+        "faceIndex": 2617,
+        "pointKm": [
+          65.94728013936765,
+          73.84474354775557,
+          17.747794808447907
+        ],
+        "unitRayFixedFrame": [
+          -0.9594702890966019,
+          0.16718728920509882,
+          0.2268593720108002
+        ],
+        "observerKm": [
+          19045.49613426831,
+          -3233.3335602695056,
+          -4469.820588523207
+        ],
+        "incidenceDegrees": 56.84505620266013,
+        "emissionDegrees": 45.44756803400602,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        48.233452362564854,
+        10.162938339003988
+      ],
+      "sampledMaximumIncidenceDegrees": 56.846232214872785,
+      "sampledMaximumEmissionDegrees": 56.69038354135161,
+      "sampledFullExposureGroundMotionKm": 0.12391666088045124,
+      "sampledFullExposureCenterRayMotionRadians": 3.465403139523337e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.986570635603256,
+      "nativePhocubeResolutionMeters": 9290.86328125
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 13,
+      "nativeFlatIndex": 481,
+      "nominal": {
+        "supported": true,
+        "et": 140251379.03113455,
+        "faceIndex": 2572,
+        "pointKm": [
+          74.68564857681122,
+          62.28752454660298,
+          16.37727398104016
+        ],
+        "unitRayFixedFrame": [
+          -0.9595308784100478,
+          0.16677088973266574,
+          0.2269095937051085
+        ],
+        "observerKm": [
+          19042.039589290573,
+          -3234.3260224907526,
+          -4469.017279949221
+        ],
+        "incidenceDegrees": 51.14256425629903,
+        "emissionDegrees": 53.40043483474591,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        39.82796768762475,
+        9.559078593714792
+      ],
+      "sampledMaximumIncidenceDegrees": 51.143637162119795,
+      "sampledMaximumEmissionDegrees": 58.12445656707987,
+      "sampledFullExposureGroundMotionKm": 0.10043050196694014,
+      "sampledFullExposureCenterRayMotionRadians": 3.606297423187986e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.295999205021035,
+      "nativePhocubeResolutionMeters": 9279.263671875
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 14,
+      "nativeFlatIndex": 482,
+      "nominal": {
+        "supported": true,
+        "et": 140251379.29561955,
+        "faceIndex": 2541,
+        "pointKm": [
+          79.97965714940074,
+          56.357212887819514,
+          15.470519631606294
+        ],
+        "unitRayFixedFrame": [
+          -0.9595611015796321,
+          0.16656288589548085,
+          0.22693456629048792
+        ],
+        "observerKm": [
+          19040.311313493003,
+          -3234.8220075049003,
+          -4468.615625662255
+        ],
+        "incidenceDegrees": 39.34499888868009,
+        "emissionDegrees": 58.012930988225996,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        35.17022221005521,
+        8.985153031545186
+      ],
+      "sampledMaximumIncidenceDegrees": 46.39113414271736,
+      "sampledMaximumEmissionDegrees": 58.127520808570026,
+      "sampledFullExposureGroundMotionKm": 0.12305209956694237,
+      "sampledFullExposureCenterRayMotionRadians": 3.6062701765183834e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 8.088484178712557,
+      "nativePhocubeResolutionMeters": 9274.9921875
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 18,
+      "nativeFlatIndex": 486,
+      "nominal": {
+        "supported": true,
+        "et": 140251380.35355955,
+        "faceIndex": 2419,
+        "pointKm": [
+          97.5226082568588,
+          33.29876215279364,
+          12.699150934835416
+        ],
+        "unitRayFixedFrame": [
+          -0.9596815762948853,
+          0.165730792591228,
+          0.22703430689489948
+        ],
+        "observerKm": [
+          19033.398188468975,
+          -3236.8043072773194,
+          -4467.009008514618
+        ],
+        "incidenceDegrees": 53.293903671379375,
+        "emissionDegrees": 53.737977510944056,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        18.852295500991694,
+        7.025251601495815
+      ],
+      "sampledMaximumIncidenceDegrees": 59.51009107335427,
+      "sampledMaximumEmissionDegrees": 53.74967156606858,
+      "sampledFullExposureGroundMotionKm": 0.09649466052520028,
+      "sampledFullExposureCenterRayMotionRadians": 3.606159396300107e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.357695046966998,
+      "nativePhocubeResolutionMeters": 9262.2451171875
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 19,
+      "nativeFlatIndex": 487,
+      "nominal": {
+        "supported": true,
+        "et": 140251380.61804456,
+        "faceIndex": 2385,
+        "pointKm": [
+          101.74958734205575,
+          27.569364980683076,
+          12.0429949747504
+        ],
+        "unitRayFixedFrame": [
+          -0.9597115904771536,
+          0.16552274982121623,
+          0.22705920460407575
+        ],
+        "observerKm": [
+          19031.66990182134,
+          -3237.2994721157506,
+          -4466.607354227761
+        ],
+        "incidenceDegrees": 53.00076423532464,
+        "emissionDegrees": 54.29322184270136,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        15.160460442843766,
+        6.517211922005648
+      ],
+      "sampledMaximumIncidenceDegrees": 53.292853432686194,
+      "sampledMaximumEmissionDegrees": 57.68258213834098,
+      "sampledFullExposureGroundMotionKm": 0.09707368691574886,
+      "sampledFullExposureCenterRayMotionRadians": 3.6061318465626245e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.726384989449768,
+      "nativePhocubeResolutionMeters": 9259.7587890625
+    },
+    {
+      "lineZeroBased": 14,
+      "sampleZeroBased": 19,
+      "nativeFlatIndex": 523,
+      "nominal": {
+        "supported": true,
+        "et": 140251390.8220793,
+        "faceIndex": 2369,
+        "pointKm": [
+          97.80577947352867,
+          26.373301488723428,
+          22.44156622821174
+        ],
+        "unitRayFixedFrame": [
+          -0.9593714951960997,
+          0.16691850607481343,
+          0.22747427664452954
+        ],
+        "observerKm": [
+          18964.98975974298,
+          -3256.278079748638,
+          -4451.1112229900955
+        ],
+        "incidenceDegrees": 52.219864355608756,
+        "emissionDegrees": 56.78866839859271,
+        "shadow": false,
+        "exposureFraction": 0.5,
+        "angularOffsetPerturbation": [
+          0.0,
+          0.0
+        ]
+      },
+      "longitudeLatitudeDegrees": [
+        15.09086780868817,
+        12.491417711273142
+      ],
+      "sampledMaximumIncidenceDegrees": 52.2208581748706,
+      "sampledMaximumEmissionDegrees": 58.79188148130587,
+      "sampledFullExposureGroundMotionKm": 0.09424930881628667,
+      "sampledFullExposureCenterRayMotionRadians": 3.6129934712087305e-05,
+      "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.821993077299763,
+      "nativePhocubeResolutionMeters": 9230.65625
+    }
+  ],
+  "nominallyPassingButWithheld": [
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 17,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 18,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 21,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 22,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 25,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 4,
+      "sampleZeroBased": 28,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 14,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 16,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 18,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 19,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 20,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 21,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 26,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 5,
+      "sampleZeroBased": 27,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 6,
+      "sampleZeroBased": 14,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 6,
+      "sampleZeroBased": 19,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 6,
+      "sampleZeroBased": 23,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 6,
+      "sampleZeroBased": 25,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 14,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 16,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 24,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 7,
+      "sampleZeroBased": 26,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 10,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 11,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 8,
+      "sampleZeroBased": 21,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 10,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 9,
+      "sampleZeroBased": 13,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 10,
+      "sampleZeroBased": 8,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 10,
+      "sampleZeroBased": 9,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 10,
+      "sampleZeroBased": 10,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 10,
+      "sampleZeroBased": 13,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 10,
+      "sampleZeroBased": 14,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 10,
+      "sampleZeroBased": 16,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 10,
+      "sampleZeroBased": 18,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 10,
+      "sampleZeroBased": 19,
+      "reason": "nominal exposure poses leave physical region"
+    },
+    {
+      "lineZeroBased": 11,
+      "sampleZeroBased": 7,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 11,
+      "sampleZeroBased": 8,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 11,
+      "sampleZeroBased": 14,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 11,
+      "sampleZeroBased": 16,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 11,
+      "sampleZeroBased": 17,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 11,
+      "sampleZeroBased": 19,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 7,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 13,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 14,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 15,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 17,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 19,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 12,
+      "sampleZeroBased": 23,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 6,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 10,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 16,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 17,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 20,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 13,
+      "sampleZeroBased": 25,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 14,
+      "sampleZeroBased": 10,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 14,
+      "sampleZeroBased": 13,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 14,
+      "sampleZeroBased": 15,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 14,
+      "sampleZeroBased": 18,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 14,
+      "sampleZeroBased": 20,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 14,
+      "sampleZeroBased": 23,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 14,
+      "sampleZeroBased": 25,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 15,
+      "sampleZeroBased": 12,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 15,
+      "sampleZeroBased": 13,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 15,
+      "sampleZeroBased": 14,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 15,
+      "sampleZeroBased": 15,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 15,
+      "sampleZeroBased": 18,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    },
+    {
+      "lineZeroBased": 15,
+      "sampleZeroBased": 19,
+      "reason": "sampled fitted-offset sensitivity leaves physical region"
+    }
+  ],
+  "fitReceiptSha256": "e7e8d9b030135adc5e802c28daa9092bc77e37246bb2d50b59d36bdbb8d9b26a",
+  "terrainSha256": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178",
+  "cameraModuleSha256": "c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04",
+  "sunTableSha256": "8782f309aa719c988df6c4441e96c02e88bca8ffdb2d82ea02c37407a298205b",
+  "sourcePins": [
+    {
+      "file": "C1465671822_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
+      "bytes": 1090377,
+      "sha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee"
+    },
+    {
+      "file": "N1465671822_1_ir.cub",
+      "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
+      "resolvedUrl": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
+      "bytes": 226310,
+      "sha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3"
+    }
+  ],
+  "maximumSampledFullExposureGroundMotionKm": 0.22989018957137655,
+  "maximumSampledFullExposureRayMotionFastSamples": 0.1513545711278676,
+  "maximumSampledSensitivityCenterDisplacementKm": 8.088484178712557,
+  "wallSeconds": 0.93820300000516,
+  "peakRssBytesMacOS": 57376768,
+  "terrainUnchanged": true
+}

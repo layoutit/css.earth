@@ -73,7 +73,7 @@ const report = {
   contactSheet,
   earthViewContactSheet,
   sourceFingerprints: await fingerprints({
-    earthSource: "src/planets/earth/SOURCE.md",
+    earthSource: "src/planets/earth/README.md",
     earthScene: "src/planets/earth/prepared/scene.json",
     earthAssets: "src/planets/earth/runtime-assets.json",
     earthClient: "src/renderers/css/dist/index.js",
@@ -81,7 +81,7 @@ const report = {
     earthStyles: "src/renderers/css/styles/earth-surfaces.css",
     earthLenses: "src/planets/earth/prepared/lenses.json",
     earthSourceManifest: "src/planets/earth/source/manifest.json",
-    saturnSource: "src/planets/saturn/SOURCE.md",
+    saturnSource: "src/planets/saturn/README.md",
     saturnScene: "src/planets/saturn/prepared/scene.json",
     saturnAssets: "src/planets/saturn/runtime-assets.json",
     saturnClient: "src/renderers/css/dist/index.js",

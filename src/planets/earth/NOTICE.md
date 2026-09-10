@@ -36,7 +36,7 @@ authors and repository. The downloaded model metadata and author repository do
 not state a separate data license; we do not label the data as CC BY merely
 because the paper is open access. cssEarth retains a numeric scientific-data
 subset and creates its own false-color textures, with the coordinate,
-interpolation, reference-mean and seam transformations described in SOURCE.md.
+interpolation, reference-mean and seam transformations described in [README](README.md).
 No published illustration is copied and no author or EarthScope endorsement is
 implied. EMC repository citation: IRIS DMC (2011),
 [doi:10.17611/DP/EMC.1](https://doi.org/10.17611/DP/EMC.1).

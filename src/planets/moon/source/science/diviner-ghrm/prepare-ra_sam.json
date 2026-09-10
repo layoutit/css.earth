@@ -1,0 +1,48 @@
+{
+  "product": "dghrm_ra_sam_70s70n_img",
+  "input": "dghrm_ra_sam_70s70n_img.img",
+  "label": "dghrm_ra_sam_70s70n_img.xml",
+  "sha256": "4a4128ecc652850af367bfc8bc553ba9064dd40ca4df9521731024da05b8a123",
+  "labelSha256": "15ca35c0a6c3c82114683b2465c5387524a79c3ff90fd662506bbd8284fb6579",
+  "width": 4096,
+  "height": 2048,
+  "quantity": "rock-area-fraction",
+  "encoding": {
+    "scale": 2e-05,
+    "offset": 0.5,
+    "units": "surface-area fraction"
+  },
+  "histogram": {
+    "minimum": 0,
+    "step": 0.0001
+  },
+  "output": "ra_sam-compact.tif",
+  "receipt": "ra_sam-receipt.json",
+  "anchors": [
+    {
+      "name": "Aristarchus",
+      "longitude": 312.5,
+      "latitude": 23.7
+    },
+    {
+      "name": "Tycho",
+      "longitude": 348.64,
+      "latitude": -43.31
+    },
+    {
+      "name": "Powell",
+      "longitude": 30.763,
+      "latitude": 20.16
+    },
+    {
+      "name": "Equatorial farside",
+      "longitude": 180,
+      "latitude": 0
+    },
+    {
+      "name": "North boundary",
+      "longitude": 0,
+      "latitude": 69.99
+    }
+  ]
+}

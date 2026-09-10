@@ -88,7 +88,9 @@
       "enhanced": "Enhanced color",
       "elevation": "Elevation",
       "relative-albedo": "Relative albedo",
-      "shape": "Shape"
+      "shape": "Shape",
+      "infrared": "Infrared",
+      "ice-absorption": "Ice absorption"
     },
     "controls": [
       {
@@ -185,6 +187,54 @@
           "id": "cassini-spc-2025-tethys-q128-shape",
           "path": "../manifest.json"
         }
+      },
+      {
+        "id": "infrared",
+        "label": "Infrared",
+        "description": "Seven Cassini VIMS observations from 2007–2015. False color assigns red to about 2.02 µm, green to 1.59 µm and blue to 1.28 µm. All three channels share a 0–0.65 I/F display range and gamma 2.2; this stretch changes the display only. No photometric correction is applied, so illumination remains. Archive noise filtering and local replacement are retained; original detector defects and potentially affected neighbors are excluded. Gray grid marks unsupported areas and scan gaps.",
+        "summary": "Cassini false color: red 2.02, green 1.59, blue 1.28 µm. Coverage is partial; gray grid marks gaps. Illumination and archive filtering remain in these uncorrected measurements.",
+        "title": "Cassini VIMS regional spectra · 2007–2015",
+        "thumbnail": "/scenes/tethys/tethys-infrared-thumbnail.webp",
+        "surface": "tethys-infrared-surface@2x.webp",
+        "poles": "tethys-infrared-poles@2x.webp",
+        "source": {
+          "id": "tethys-cassini-infrared",
+          "path": "../manifest.json",
+          "url": "https://vims.univ-nantes.fr/cube/1719616836_1"
+        },
+        "detail": "Partial VIMS",
+        "falseColor": true
+      },
+      {
+        "id": "ice-absorption",
+        "label": "Ice absorption",
+        "description": "Near-2.02 µm water-ice band depth relative to a linear 1.82–2.20 µm continuum, using nine Cassini VIMS observations from 2007–2015. This measures absorption strength, not ice abundance. Viewing angle, grain size and noise also affect the values; no photometric correction is applied. Archive noise filtering and local replacement remain; original detector defects and potentially affected neighbors are excluded. Display colors saturate outside 0.55–0.75; original numerical values are retained. Gray grid marks unsupported areas and scan gaps.",
+        "summary": "Near-2.02 µm water-ice absorption in partial Cassini coverage. Gray grid marks gaps. Viewing angle, grain size, noise and archive filtering affect these uncorrected values; they do not measure ice abundance.",
+        "title": "Cassini VIMS regional water-ice absorption · 2007–2015",
+        "thumbnail": "/scenes/tethys/tethys-ice-absorption-thumbnail.webp",
+        "surface": "tethys-ice-absorption-surface@2x.webp",
+        "poles": "tethys-ice-absorption-poles@2x.webp",
+        "source": {
+          "id": "tethys-cassini-ice-absorption",
+          "path": "../manifest.json",
+          "url": "https://vims.univ-nantes.fr/cube/1719616836_1"
+        },
+        "detail": "Partial VIMS",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Ice absorption",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "0.55",
+            "0.65",
+            "0.75"
+          ],
+          "meta": "band-depth fraction",
+          "sourceUrl": "https://vims.univ-nantes.fr/cube/1719616836_1",
+          "image": "/scenes/tethys/tethys-ice-absorption-legend.webp"
+        }
       }
     ]
   },
@@ -242,6 +292,12 @@
       "role": "shape",
       "description": "2025 SPC shape and relative albedo products",
       "href": "https://sbn.psi.edu/pds/resource/weirichtethysshape.html"
+    },
+    {
+      "label": "Cassini VIMS",
+      "role": "surface",
+      "description": "Nantes calibrated spectra and navigation; archive filtering retained, CC BY 4.0",
+      "href": "https://vims.univ-nantes.fr/cube/1719616836_1"
     }
   ],
   "provenance": {
