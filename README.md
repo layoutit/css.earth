@@ -1,6 +1,6 @@
 # cssEarth 🪐
 
-A 3D CSS astrovisualization platform. cssEarth is a planetary explorer that renders celestial bodies as real HTML and CSS 3D
+A 3D CSS astrovisualization platform. cssEarth renders celestial bodies as real HTML and CSS 3D
 geometry through [PolyCSS](https://github.com/LayoutitStudio/polycss), without
 a WebGL or canvas scene renderer. It preprocesses planetary data into
 browser-ready textures, charts, and retained scene plans, then lets you orbit
