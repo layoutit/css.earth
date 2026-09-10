@@ -113,7 +113,8 @@ license alone does not establish an input's terms.
 
 ## Save enough evidence to check the result
 
-The body README links the evidence for its claims. Keep an artifact in the
+Store new original evidence with the body or shared test/tool that owns the claim,
+and link it from the existing body README or shared guide. Keep an artifact in the
 current tree when a maintained explanation or test needs it. Link historical
 reports at their exact Git revision; preserve their original contents there.
 Keep scratch captures and repetitive logs out of `docs/`. No extra JSON format
