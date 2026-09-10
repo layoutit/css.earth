@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "sedna",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sedna",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "b046fac2670d1b31fa42c686e3e0d78f086f1eca1717636159bfeddde988105f"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "c6d44c127f063e2f1ebf64794fdb7b9b5aee2b7751bd369e6d9e526c253b1524"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "ce2163bf12412b80836edbea45288bae50a9c28ddd01eed2b1630750f76fa54e"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "e43e5067d49f44a2cbb638970f97b53f852b741e91842398198995189cca7054"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "6782540c04baa7c51cc56998d6aed769c0e23fed59efa980ae1a9300da49b90b"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "652c5d558a8a363b1b0f7d8a3300bb0174f4fbee31b625b1ead5666e70122b20"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 497.49999999999983
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/sedna-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "b08a137cac53a0f1fb69611df78c7079ba74e565ac3c5b4358ec6f2d646c6f50"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5802653091364.853,
+        10786320153098.836,
+        1904250176047.8699
+      ],
+      "presentationToReference": [
+        0.47831406045521757,
+        0,
+        -0.8781888518825791,
+        0.805722518711396,
+        0.3977771559319137,
+        0.4388445705031363,
+        0.34932346387296487,
+        -0.9174820620691818,
+        0.1902624066101219
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 2163.0434782608686,
+      "bodyRadiusM": 497499.9999999998
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "fce9a8b516a19492e659754c266ba7fead4e4465e2ed67ffd6be1e4b6df8f3df"
+  }
+}

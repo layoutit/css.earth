@@ -14,3 +14,6 @@ Annefrank, Braille, Chariklo and Bienor. The Python calculation covers Quaoar an
 `gkunhomdima`. Body-owned measurements retain the scientific assumptions and
 citations. Shared acquisition and preparation tools continue to own the rest
 of each package.
+
+The [distant-world source helpers](distant-worlds/README.md) retain the initial
+extraction and preparation commands for ʻOumuamua and eight outer worlds.

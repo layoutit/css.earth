@@ -1,0 +1,122 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "varuna",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Varuna",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json",
+          "sha256": "b6331712db101685dad3582c099c4bee1827a1abeaf953712f8af9e84686fc65"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json",
+          "sha256": "394fbb52e62703f2f9a24065cfc5b9dccff9b4ecc4ba3c39f43f6fbfe46f90fa"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json",
+          "sha256": "8aa2020a6ca6ab187ff3444e03b6e941f09132689639907dad1e6b3b55b80240"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json",
+          "sha256": "39bf446e75ae45fda6c0e6b4fa8457c93459b97d507fc85c80a61aa1caaa7313"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json",
+          "sha256": "3be8dc59834a6c25ec646c6014190c23c316500d988d68b6a6f572bb5fd68361"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json",
+          "sha256": "eaab61aca72572870fd90a315699a9b015a76a259b6a2285ef6bd24d4e468b60"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 350.00000006786365
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/varuna-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "8abe1cecc0bd69cda683bcbe814e2167b74a5613acbd5cd7e395fc03d825e281"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4240489343130.602,
+        4115528695026.4326,
+        2988835950369.559
+      ],
+      "presentationToReference": [
+        -0.6494602021390623,
+        2.7755575615628914e-17,
+        -0.7603955850986304,
+        0.6976493094045934,
+        0.39777715593191376,
+        -0.5958680854904145,
+        0.30246799322371665,
+        -0.9174820620691817,
+        -0.25834043209784185
+      ],
+      "orbitUpReference": [
+        -2.7755575615628914e-17,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 1521.7391307298421,
+      "bodyRadiusM": 350000.0000678637
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@4",
+    "url": "prepared/object.json",
+    "sha256": "1554b9eed5b90dd03dac6869ffb6d0b01587922c86ad9607e0484edad76e66cb"
+  }
+}

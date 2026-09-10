@@ -1,3 +1,12 @@
+import achlysDescriptor from "../src/planets/achlys/object.json" with { type: "json" };
+import maniDescriptor from "../src/planets/mani/object.json" with { type: "json" };
+import vardaDescriptor from "../src/planets/varda/object.json" with { type: "json" };
+import varunaDescriptor from "../src/planets/varuna/object.json" with { type: "json" };
+import salaciaDescriptor from "../src/planets/salacia/object.json" with { type: "json" };
+import orcusDescriptor from "../src/planets/orcus/object.json" with { type: "json" };
+import gonggongDescriptor from "../src/planets/gonggong/object.json" with { type: "json" };
+import sednaDescriptor from "../src/planets/sedna/object.json" with { type: "json" };
+import oumuamuaDescriptor from "../src/planets/oumuamua/object.json" with { type: "json" };
 import sn263AlphaDescriptor from "../src/planets/asteroid-2001-sn263/object.json" with { type: "json" };
 import sn263BetaDescriptor from "../src/planets/sn263-beta/object.json" with { type: "json" };
 import sn263GammaDescriptor from "../src/planets/sn263-gamma/object.json" with { type: "json" };
@@ -438,6 +447,24 @@ import comet19pDescriptor from "../src/planets/comet-19p/object.json" with { typ
 import comet1pDescriptor from "../src/planets/comet-1p/object.json" with { type: "json" };
 
 export const OBJECTS = defineObjects([
+  object("achlys", "Achlys (2003 AZ84)", "trans-neptunian", "#aaaaaa", 43.53477215772988,
+    "Formerly 2003 AZ84, Achlys is a plutino in Neptune’s 3: 2 orbital resonance. Its changing occultation silhouette supports a flattened, elongated model, while a grazing event hints at a local depression.", packaged(achlysDescriptor), achlysDescriptor.properties.worldFrame),
+  object("mani", "Máni (2002 MS4)", "trans-neptunian", "#aaaaaa", 45.97552197787258,
+    "Formerly 2002 MS4, Máni has an outline measured through many stellar occultations. One event revealed a large depression along its edge, but its global terrain and three-dimensional shape remain unresolved.", packaged(maniDescriptor), maniDescriptor.properties.worldFrame),
+  object("varda", "Varda", "trans-neptunian", "#aaaaaa", 45.619915704968584,
+    "Varda is a distant binary-system primary whose outline was measured as it eclipsed a star. Its companion’s orbit helps orient this model, but Varda’s depth remains uncertain.", packaged(vardaDescriptor), vardaDescriptor.properties.worldFrame),
+  object("varuna", "Varuna", "trans-neptunian", "#aaaaaa", 44.266134719069306,
+    "Varuna’s rapid rotation and changing brightness reveal an elongated world beyond Neptune. This smooth model follows a published light-curve fit; its absolute size remains approximate.", packaged(varunaDescriptor), varunaDescriptor.properties.worldFrame),
+  object("salacia", "Salacia", "trans-neptunian", "#aaaaaa", 45.37159590675732,
+    "Salacia is a large, dark Kuiper-belt world with the moon Actaea. Long-term photometry supports a synchronized binary. This grid-covered illustration uses a separately estimated primary size, not a resolved surface.", packaged(salaciaDescriptor), salaciaDescriptor.properties.worldFrame),
+  object("orcus", "Orcus", "trans-neptunian", "#aaaaaa", 47.98129781525766,
+    "Orcus is a large resonant world beyond Neptune, partnered with the substantial moon Vanth. The displayed size belongs to Orcus alone; its smooth shape and grid surface are illustrative.", packaged(orcusDescriptor), orcusDescriptor.properties.worldFrame),
+  object("gonggong", "Gonggong", "trans-neptunian", "#aaaaaa", 89.84583026441713,
+    "Gonggong is a large, distant trans-Neptunian world with the moon Xiangliu. Its smooth model follows a published thermal size interpretation; the viewing pole and surface detail are illustrative.", packaged(gonggongDescriptor), gonggongDescriptor.properties.worldFrame),
+  object("sedna", "Sedna", "trans-neptunian", "#aaaaaa", 82.85697523892613,
+    "Sedna follows an exceptionally distant, elongated orbit beyond the planetary region. This grid-covered illustration conveys its thermal size estimate; its actual shape and surface terrain remain unresolved.", packaged(sednaDescriptor), sednaDescriptor.properties.worldFrame),
+  object("oumuamua", "ʻOumuamua", "interstellar", "#aaaaaa", 54.22423400905037,
+    "The first confirmed interstellar visitor crossed the Solar System in 2017. Its changing brightness supports competing shape interpretations; this view shows one published disc-like fit, with size set by an assumed reflectivity.", packaged(oumuamuaDescriptor), oumuamuaDescriptor.properties.worldFrame),
   object("asteroid-2001-sn263", "2001 SN263 Alpha", "asteroid", "#a0a0a0", 1.9869,
     "Explore the primary of 2001 SN263 through its archived radar shape.", packaged(sn263AlphaDescriptor), sn263AlphaDescriptor.properties.worldFrame),
   object("sn263-beta", "2001 SN263 Beta", "satellite", "#a0a0a0", 1.9869,

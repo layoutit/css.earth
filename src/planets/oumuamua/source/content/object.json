@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "oumuamua",
+  "displayName": "ʻOumuamua",
+  "panel": {
+    "introduction": "The first confirmed interstellar visitor crossed the Solar System in 2017. Its changing brightness supports competing shape interpretations; this view shows one published disc-like fit, with size set by an assumed reflectivity.",
+    "facts": [
+      {
+        "id": "shape",
+        "label": "Shape evidence",
+        "value": "Published light-curve interpretation"
+      },
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "115 × 111 × 19 m"
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "Tumbling; no unique single rotation period"
+      },
+      {
+        "id": "class",
+        "label": "Population",
+        "value": "Interstellar visitor"
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "uncertainty",
+        "label": "Shape interpretation",
+        "value": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo."
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "description": "Selected DISC light-curve model: full axes 115 × 111 × 19 m, assuming geometric albedo 0.1. The same study permits a 324 × 42 × 42 m CIGAR solution. These are competing inferred shapes; no resolved silhouette or surface map exists. Size depends on the assumed albedo. Arbitrary display pole and meridian. The object tumbles; this static view does not reconstruct its 2017 attitude or claim a current spin phase. The grid marks unmapped terrain.",
+        "title": "Published light-curve interpretation",
+        "detail": "Inferred shape · unmapped surface grid",
+        "thumbnail": "/scenes/oumuamua/oumuamua-model-thumbnail.webp",
+        "surface": "oumuamua-model-surface@2x.webp",
+        "poles": "oumuamua-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1093/mnras/stz2378"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      },
+      {
+        "kind": "toggle",
+        "name": "orbit",
+        "label": "Orbit",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "Mashchenko (2019), MNRAS489,3003–3021, §4 and Table1",
+      "href": "https://doi.org/10.1093/mnras/stz2378"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://www.nature.com/articles/s41550-018-0398-z"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://science.nasa.gov/solar-system/what-we-knowand-dont-knowabout-oumuamua/"
+    },
+    {
+      "label": "ESO",
+      "role": "stars",
+      "description": "Milky Way panorama",
+      "href": "https://www.eso.org/public/images/eso0932a/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://doi.org/10.1093/mnras/stz2378",
+      "credit": "Mashchenko (2019), MNRAS489,3003–3021, §4 and Table1"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "Mashchenko (2019), MNRAS489,3003–3021, §4 and Table1"
+    }
+  }
+}

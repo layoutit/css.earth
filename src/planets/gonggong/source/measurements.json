@@ -1,0 +1,138 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-09",
+  "periodHours": null,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "orientationMeaning": "Illustrative ICRF north pole (RA 0°, Dec +90°), arbitrary prime meridian and phase. No measured body pole or absolute surface attitude is claimed.",
+  "axesStatus": "Illustrative equal axes at the published effective diameter; these are not three independently measured axes.",
+  "radiusMeaning": "Volume-equivalent radius of the chosen illustrative equal-axis model, not a measured 3D-volume radius.",
+  "id": "gonggong",
+  "name": "Gonggong",
+  "jplId": "225088",
+  "horizons": "225088;",
+  "fullName": "225088 Gonggong (2007 OR10)",
+  "fullAxesKm": [
+    1230,
+    1230,
+    1230
+  ],
+  "radiusKm": 614.9999999999998,
+  "diameterKm": 1230,
+  "diameterUncertaintyKm": {
+    "minus": 50,
+    "plus": 50
+  },
+  "population": "Scattered trans-Neptunian object",
+  "periodText": "22.4 or 44.8 hours; the single- versus double-peaked interpretation is unresolved.",
+  "source": "https://doi.org/10.1016/j.icarus.2019.03.013",
+  "credit": "Kiss et al. (2019), thermophysical modeling with Hubble satellite-orbit constraints.",
+  "shapeMeaning": "Published spherical thermophysical interpretation, diameter 1230 ±50 km. It assumes Xiangliu orbits near Gonggong’s equatorial plane; the unknown local surface is shown with the grid.",
+  "introduction": "Gonggong is a large, distant trans-Neptunian world with the moon Xiangliu. Its smooth model follows a published thermal size interpretation; the viewing pole and surface detail are illustrative.",
+  "papers": [
+    "https://arxiv.org/abs/1903.05439",
+    "https://doi.org/10.1016/j.icarus.2024.116017"
+  ],
+  "referencePins": [
+    {
+      "path": "output/distant-worlds/references/gonggong-kiss-2019.pdf",
+      "url": "https://ntrs.nasa.gov/api/citations/20210012934/downloads/21-51.pdf?attachment=true",
+      "resolvedUrl": "https://ntrs.nasa.gov/api/citations/20210012934/downloads/21-51.pdf?attachment=true",
+      "bytes": 951981,
+      "sha256": "a9dde2eb150a8e275b2c347dbce7c3766353a728263322ff4cec420fdc63ba01",
+      "contentType": "application/pdf",
+      "purpose": "Gonggong spherical thermophysical fit, Kiss et al. 2019"
+    },
+    {
+      "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
+      "url": "https://arxiv.org/abs/2309.15230",
+      "resolvedUrl": "https://arxiv.org/abs/2309.15230",
+      "bytes": 45900,
+      "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "JWST integrated spectroscopy; no mapped surface"
+    },
+    {
+      "path": "output/distant-worlds/references/gonggong-pal-2016.html",
+      "url": "https://arxiv.org/abs/1603.03090",
+      "resolvedUrl": "https://arxiv.org/abs/1603.03090",
+      "bytes": 45567,
+      "sha256": "a20e1b3623e07a0198a08e9206a2fb2a7d28d0db87744a93e391af5045cbe0e8",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "Gonggong rotation alternatives and superseded size"
+    }
+  ],
+  "numericAnchors": [
+    {
+      "quantity": "primary spherical thermal diameter",
+      "value": 1230,
+      "unit": "km",
+      "uncertainty": "±50 km",
+      "location": "Kiss et al. 2019 abstract and section 3; primary size, not combined binary diameter"
+    }
+  ],
+  "sourceSurvey": [
+    {
+      "url": "https://doi.org/10.1016/j.icarus.2019.03.013",
+      "status": "included",
+      "adds": "1230 ±50 km spherical-model size conditioned on satellite equatorial alignment. Mirror orbit/spin alternatives remain."
+    },
+    {
+      "url": "https://arxiv.org/abs/1603.03090",
+      "status": "superseded-size",
+      "adds": "Earlier equator-on estimate 1535 +75/-225 km, revisited after satellite orbit constraints; not the selected diameter."
+    },
+    {
+      "url": "https://doi.org/10.1016/j.icarus.2024.116017",
+      "status": "excluded-from-surface",
+      "adds": "Integrated JWST composition, not a registered photographic texture."
+    }
+  ],
+  "unresolved": [
+    "Sphere is a stated thermophysical-model assumption, not an observed resolved silhouette.",
+    "Pole alignment and rotation alternatives change the thermal solution; no absolute attitude is installed."
+  ],
+  "distanceAu": 89.84583026441713,
+  "classification": "trans-neptunian",
+  "shapeLabel": "Published size model; shape unresolved",
+  "references": [
+    {
+      "path": "output/distant-worlds/references/gonggong-kiss-2019.pdf",
+      "url": "https://ntrs.nasa.gov/api/citations/20210012934/downloads/21-51.pdf?attachment=true",
+      "resolvedUrl": "https://ntrs.nasa.gov/api/citations/20210012934/downloads/21-51.pdf?attachment=true",
+      "bytes": 951981,
+      "sha256": "a9dde2eb150a8e275b2c347dbce7c3766353a728263322ff4cec420fdc63ba01",
+      "contentType": "application/pdf",
+      "purpose": "Gonggong spherical thermophysical fit, Kiss et al. 2019",
+      "file": "gonggong-kiss-2019.pdf"
+    },
+    {
+      "path": "output/distant-worlds/references/sedna-gonggong-emery-2024.html",
+      "url": "https://arxiv.org/abs/2309.15230",
+      "resolvedUrl": "https://arxiv.org/abs/2309.15230",
+      "bytes": 45900,
+      "sha256": "2fab5cb01d246ac9bf94782e573d096cd261198c9eeb6f97ea788ad1fe3d3919",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "JWST integrated spectroscopy; no mapped surface",
+      "file": "sedna-gonggong-emery-2024.html"
+    },
+    {
+      "path": "output/distant-worlds/references/gonggong-pal-2016.html",
+      "url": "https://arxiv.org/abs/1603.03090",
+      "resolvedUrl": "https://arxiv.org/abs/1603.03090",
+      "bytes": 45567,
+      "sha256": "a20e1b3623e07a0198a08e9206a2fb2a7d28d0db87744a93e391af5045cbe0e8",
+      "contentType": "text/html; charset=utf-8",
+      "purpose": "Gonggong rotation alternatives and superseded size",
+      "file": "gonggong-pal-2016.html"
+    }
+  ],
+  "survey": [
+    "Included: 1230 ±50 km spherical-model size conditioned on satellite equatorial alignment. Mirror orbit/spin alternatives remain.  https://doi.org/10.1016/j.icarus.2019.03.013",
+    "Superseded-size: Earlier equator-on estimate 1535 +75/-225 km, revisited after satellite orbit constraints; not the selected diameter.  https://arxiv.org/abs/1603.03090",
+    "Excluded-from-surface: Integrated JWST composition, not a registered photographic texture.  https://doi.org/10.1016/j.icarus.2024.116017"
+  ]
+}

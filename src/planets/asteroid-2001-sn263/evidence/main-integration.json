@@ -1,0 +1,163 @@
+{
+  "mainRevision": "085a404c16626ee90a8150f018229609e2c3828e",
+  "companionSourceRevision": "ea88f6feab538342257bda3b8bd7383126474017",
+  "scope": "PR100 integration with PR99; native companion sources, geometry and surface assets retained. Shared marker bindings, scene payload hashes and world context refreshed.",
+  "catalog": {
+    "objects": 444,
+    "moons": 97,
+    "contextBodies": 443,
+    "minimapBodies": 444,
+    "allIdentitySetsMatch": true,
+    "companionCenters": "asteroid-2001-sn263"
+  },
+  "navigation": {
+    "tool": "tools/audits/sn263/reconcile-navigation.mjs",
+    "toolSha256": "fce166bb926c96d17b589960bd5ca83b85ce49d9dfe00f815b5bb61f0b83be8a",
+    "method": "Copy decoded committed tiles by body identity and encode losslessly. Visible RGB and alpha must match each committed input tile exactly. Fully transparent RGB is not a visible value.",
+    "refs": {
+      "main": "085a404c16626ee90a8150f018229609e2c3828e",
+      "companions": "ea88f6feab538342257bda3b8bd7383126474017"
+    },
+    "densities": [
+      {
+        "density": 1,
+        "width": 7104,
+        "height": 16,
+        "inputs": {
+          "main": {
+            "bytes": 151426,
+            "sha256": "1db37a1ca60808a8daad08945e5c3f3b257f1e65c51af3181dcedb5172d31800"
+          },
+          "companions": {
+            "bytes": 79516,
+            "sha256": "98dee02da1b37573c776f1f02732a2d089aa35a5a643e33151779937d89f0f05"
+          }
+        },
+        "output": {
+          "bytes": 152362,
+          "sha256": "33cab7411410a184abb0313d8a9cbb19c1058cd245275f9bdef00ddf7c8327d9"
+        },
+        "changedVisiblePixels": 0
+      },
+      {
+        "density": 2,
+        "width": 14208,
+        "height": 32,
+        "inputs": {
+          "main": {
+            "bytes": 390826,
+            "sha256": "bec3bd9edd6c0d10e659220195bc8cf39d48c75d0e0195096a072b1242193f23"
+          },
+          "companions": {
+            "bytes": 182534,
+            "sha256": "4f92ad06de1021ca54571d9290d4b000ce029f7770b727c8385b1f957f95d1c8"
+          }
+        },
+        "output": {
+          "bytes": 416146,
+          "sha256": "9c75dca40aa9200fef932da81185f7139bde6f960f9a5f58a7c764f3ca93befc"
+        },
+        "changedVisiblePixels": 0
+      }
+    ],
+    "reusedContexts": 426,
+    "contextInventorySha256": "a2a0873b056061128310a25eea8e6c9e07c43ba96b208eb2f54ec3151c71fcbe"
+  },
+  "transports": {
+    "tool": "tools/objects/source-authoring/distant-worlds/refresh-transports.mjs",
+    "toolSha256": "0c95a5df31927ba4fd1eb21639e9fbdb54977d01770f09055850a2ba653b07be",
+    "count": 444,
+    "assertion": "For each runtime, the existing refresh tool asserts deep equality after excluding heliocentricView. prepareMarkerBindings changes only semantic sprite indices/counts. No presentation recompiles.",
+    "companions": [
+      {
+        "id": "asteroid-2001-sn263",
+        "bytes": 6621551,
+        "sha256": "5f79fa11a80bf53fb4e36be6d7ee672935bb4dd2aeda674c27fa41f378cab14d",
+        "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+      },
+      {
+        "id": "sn263-beta",
+        "bytes": 6991333,
+        "sha256": "d72f5382035203a11137450a3e365ddee64eac581d9f03d2e891093029415c3b",
+        "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+      },
+      {
+        "id": "sn263-gamma",
+        "bytes": 6993719,
+        "sha256": "0ed849bce269c904e40a96cefabf34a0ca7e1efc7af661eb6f43b999e40af91b",
+        "scope": "Existing marker binding and object serializer; all non-marker runtime fields retained exactly."
+      }
+    ]
+  },
+  "checks": {
+    "astronomy": {
+      "passed": 679,
+      "total": 679,
+      "command": "pnpm --filter @cssearth/astronomy test --maxWorkers=1 --no-file-parallelism"
+    },
+    "focused": {
+      "passed": 91,
+      "total": 92,
+      "remainingFailure": "Pre-existing Phobos compiled-partition fixture expects more than one group; marker refresh retains the original one-group topology."
+    },
+    "builds": [
+      "astronomy",
+      "preparation",
+      "renderer"
+    ],
+    "browser": "NOT RERUN on this integration. Historical captures do not qualify upstream renderer changes.",
+    "fullApplicationBuild": "Not rerun; aggregate qualification remains open."
+  },
+  "files": [
+    {
+      "path": "site/objects.mjs",
+      "bytes": 145253,
+      "sha256": "fd70d4c209295245ab5fcb2a17841e3143eee8e754b4158fcd3ebb92bf12f7db"
+    },
+    {
+      "path": "site/prepared-navigation-markers.mjs",
+      "bytes": 56173,
+      "sha256": "4560def2e68d10b9bb6c9775b11c5eb30a547f9e90cdcac86a5bed8c39b1ccd4"
+    },
+    {
+      "path": "site/minimap/prepared.json",
+      "bytes": 984703,
+      "sha256": "20edd6561c7bb69d2a47102990f608d5aaae4e7768bd281793b649c7a774144c"
+    },
+    {
+      "path": "src/platform/solar-geometry.mjs",
+      "bytes": 703922,
+      "sha256": "f776e8ef0f1d30ea55ebe02ae66f13a09f4e6f5f96039b7da25ef7203391dddf"
+    },
+    {
+      "path": "src/planets/sun/source/navigation/universe.json",
+      "bytes": 41453,
+      "sha256": "02b9e33628448798748dff77b569c01aaf3e2df5d1ad7ae36824d44cbe8a69b5"
+    },
+    {
+      "path": "src/planets/sun/source/manifest.json",
+      "bytes": 42379,
+      "sha256": "e1b87b50cffedd10c40edd36869fe9707dacb9b2bb37e39f3c7d0ae96d5b841e"
+    },
+    {
+      "path": "src/planets/sun/prepared/world-context.json",
+      "bytes": 9458292,
+      "sha256": "ff05ce87f5453eeb3f39beeed3c94590487870923b5e4daa92d25988779186b8"
+    },
+    {
+      "path": "src/planets/sun/prepared/provenance.json",
+      "bytes": 94605,
+      "sha256": "555752ab4c99c7fc00b0fc8144563d9428ffa65b4e0967e9e1bf13e118c47af3"
+    },
+    {
+      "path": "src/planets/asteroid-2001-sn263/evidence/integration-astronomy.log",
+      "bytes": 1753,
+      "sha256": "335b390399710728f924de1a46de918437fd2ead736ce9c8ab60b0daf04de35f"
+    },
+    {
+      "path": "src/planets/asteroid-2001-sn263/evidence/integration-focused.log",
+      "bytes": 22025,
+      "sha256": "b4918236a77bad4a329239c3e0843bc69978feec1ea71d970369b20944ae265b"
+    }
+  ]
+}

@@ -66,6 +66,24 @@ The visual comparison restores native backface handling on the exact same nodes,
 textures, camera and clocks. It requires zero changed pixels after pixelmatch's
 antialias handling (threshold 0.1); it does not accept a percentage difference.
 
+## Open trajectories
+
+For negative semimajor axis and eccentricity above one, the astronomy package
+uses the standard hyperbolic Kepler equation. Preparation samples a finite
+inbound-to-outbound path through
+[prepare-hyperbolic-path.mjs](../src/platform/prepare-hyperbolic-path.mjs),
+marks it `closed: false`, and records `bodyVertexIndex` for the epoch position.
+The parser and projector keep its N−1 edges open, including full-path highlighting.
+Runtime projects the prepared vertices; it does not derive orbital geometry.
+
+These paths have no periodic trail, finite apoapsis or revolution period.
+Parabolic and inconsistent elements are rejected. The drawing extent encloses
+at least 600 au and the epoch position; it is a display window, not a physical
+boundary or an accuracy claim over that interval. Body source notes must state
+the element epoch, frame and limits of the osculating two-body approximation.
+See [ʻOumuamua](../src/planets/oumuamua/README.md) for independent Horizons
+comparisons and the interpretation used for its model.
+
 ## Verification
 
 - `pnpm test` and `pnpm typecheck:renderer`

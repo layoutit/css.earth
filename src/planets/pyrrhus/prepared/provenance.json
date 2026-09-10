@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-object-provenance@1",
   "objectId": "pyrrhus",
-  "basis": "prepared",
+  "basis": "recovered",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f4b0d2178fd3b27791a9be2a7ce2da1cc1c8ec009963ea49debd878386a84210"
+    "sha256": "39bd91df58259a48b72f8b8fcff38fe3c3153a179214b58ae5d766d44af41919"
   },
   "generator": {
     "path": "tools/objects/provenance.mjs",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "4839a6421837db3fb8cb764f76002ee1d2dfac0ae74387823f86af223ec0ac45",
+      "sha256": "e6654dc65438d01d3139a767b89b701ab8445a33c1746a04225708e14f641a80",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -105,7 +105,8 @@
           "radiusKm": 24.178,
           "camera": {
             "initialScenePitchDegrees": 25,
-            "defaultControlYawDegrees": 0
+            "defaultControlYawDegrees": 0,
+            "framingScale": 0.7184721145910395
           },
           "mapUrl": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",
           "polesUrl": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",
@@ -149,7 +150,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "65962dff3d2441b85f013aa628385bad52a2bb2eb0231ce112bdb187e03a4792",
+      "sha256": "63a9cc6698b524a1cf1aa00d0100d4c6548abb9b283b5296a8dac0a28f98655b",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -222,7 +223,7 @@
                 "path": "../manifest.json"
               },
               "falseColor": false,
-              "detail": "Published shape · grid marks missing imagery"
+              "detail": "DAMIT model"
             },
             {
               "id": "elevation",
@@ -354,7 +355,7 @@
       "sha256": "f48628b4019c5f747601fc0b9b289dd0ff7f53eaa8251cd5b762d2763069d0f0",
       "bytes": 46419,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": {
         "kind": "download",
         "groups": [
@@ -376,10 +377,10 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "65962dff3d2441b85f013aa628385bad52a2bb2eb0231ce112bdb187e03a4792",
-      "bytes": 9318,
+      "sha256": "63a9cc6698b524a1cf1aa00d0100d4c6548abb9b283b5296a8dac0a28f98655b",
+      "bytes": 9284,
       "dependencies": [],
-      "verification": "bytes-verified",
+      "verification": "manifest-pin",
       "acquisitionOperation": null,
       "verificationOperations": []
     }
@@ -412,19 +413,19 @@
           "url": "/scenes/pyrrhus/pyrrhus-elevation-thumbnail.webp",
           "bytes": 6148,
           "sha256": "e3131a410cbb8ab1ebac8e664c2d1dc2d00ae00334a04c8a34f84ce2dc40b454",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-elevation-legend.webp",
           "bytes": 298,
           "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-elevation-surface@2x.webp",
           "bytes": 289352,
           "sha256": "8b073e6a0a1fc4a3f818c4f6b1cc7f4adaff987fa5701d3e622bba82bc609980",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"
@@ -456,13 +457,13 @@
           "url": "/scenes/pyrrhus/pyrrhus-shape-thumbnail.webp",
           "bytes": 764,
           "sha256": "8715ef0a0cbc3367d35baec7dc86dbf8c6099e9d362e285ead7bbd06c5d16b9f",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         },
         {
           "url": "/scenes/pyrrhus/pyrrhus-shape-surface@2x.webp",
           "bytes": 228742,
           "sha256": "220fc8a607f9691a2b19df75935a51b417f737331963204d20953ac23275c143",
-          "verification": "bytes-verified"
+          "verification": "asset-manifest-pin"
         }
       ],
       "inputBasis": "bound-inputs"

@@ -25,6 +25,7 @@ import {
   round,
   scale,
 } from "./heliocentric-view.mjs";
+import { prepareHyperbolicPath } from "./prepare-hyperbolic-path.mjs";
 
 const UNIFORM_ORBIT_SEGMENTS = 360;
 // Chords right at the body are refined by halving so the polyline stays
@@ -106,19 +107,24 @@ export function prepareHeliocentricView({
   const perihelionMotion = normalize(cross(orbitNormal, perihelionDirection));
   const semiMajorAxisUnits = orbit.semiMajorAxisAu * unitsPerAu;
   const eccentricity = orbit.eccentricity;
-  const semiMinorAxisUnits = semiMajorAxisUnits *
-    Math.sqrt(1 - eccentricity * eccentricity);
+  const closed = eccentricity < 1;
+  if (!(Number.isFinite(eccentricity) && eccentricity >= 0 && eccentricity !== 1 &&
+      Number.isFinite(semiMajorAxisUnits) && (closed ? semiMajorAxisUnits > 0 : semiMajorAxisUnits < 0))) {
+    throw new RangeError("Heliocentric view requires a consistent elliptic or hyperbolic conic.");
+  }
+  let semiMinorAxisUnits = closed ? semiMajorAxisUnits *
+    Math.sqrt(1 - eccentricity * eccentricity) : null;
   const sunDistanceUnits = orbit.heliocentricDistanceAu * unitsPerAu;
   const sunPosition = scale(sunDirection, sunDistanceUnits);
   // The orbit focus can be a parent planet while the Sun keeps its own position.
   const focus = orbit.centerPositionAu
     ? scale(presentationFrame.toPresentation(orbit.centerPositionAu), unitsPerAu) : sunPosition;
-  const center = add(
+  let center = add(
     focus,
     scale(perihelionDirection, -semiMajorAxisUnits * eccentricity),
   );
-  const majorAxis = scale(perihelionDirection, semiMajorAxisUnits);
-  const minorAxis = scale(perihelionMotion, semiMinorAxisUnits);
+  let majorAxis = scale(perihelionDirection, semiMajorAxisUnits);
+  let minorAxis = closed ? scale(perihelionMotion, semiMinorAxisUnits) : null;
   const pointAt = (eccentricAnomaly) => add(
     center,
     add(
@@ -127,12 +133,12 @@ export function prepareHeliocentricView({
     ),
   );
   const trueAnomaly = orbit.trueAnomalyDegrees * Math.PI / 180;
-  const bodyEccentricAnomaly = 2 * Math.atan2(
+  const bodyEccentricAnomaly = closed ? 2 * Math.atan2(
     Math.sqrt(1 - eccentricity) * Math.sin(trueAnomaly / 2),
     Math.sqrt(1 + eccentricity) * Math.cos(trueAnomaly / 2),
-  );
-  const bodyResidual = magnitude(pointAt(bodyEccentricAnomaly));
-  if (bodyResidual > 1e-6 * semiMajorAxisUnits) {
+  ) : null;
+  const bodyResidual = closed ? magnitude(pointAt(bodyEccentricAnomaly)) : 0;
+  if (bodyResidual > 1e-6 * Math.abs(semiMajorAxisUnits)) {
     throw new RangeError(
       `The body is ${bodyResidual} units off its own orbit; the orbital ` +
         "facts disagree with the Sun direction.",
@@ -149,12 +155,19 @@ export function prepareHeliocentricView({
     offsets.add(2 * Math.PI - local);
   }
   const sortedOffsets = [...offsets].sort((a, b) => a - b);
-  const vertices = sortedOffsets.map((offset, index) =>
+  let vertices = closed ? sortedOffsets.map((offset, index) =>
     index === 0
       ? Object.freeze([0, 0, 0])
-      : Object.freeze(pointAt(bodyEccentricAnomaly + offset).map(round)));
-  const behindTurns = chordBehindTurns(sortedOffsets);
-  const trail = trailWeightsForSpans(behindTurns, ORBIT_TRAIL_SPANS);
+      : Object.freeze(pointAt(bodyEccentricAnomaly + offset).map(round))) : [];
+  let behindTurns = closed ? chordBehindTurns(sortedOffsets) : [];
+  let trail = closed ? trailWeightsForSpans(behindTurns, ORBIT_TRAIL_SPANS) : [];
+  let openPath = null;
+  if (!closed) {
+    openPath = prepareHyperbolicPath({ semiMajorAxisUnits, eccentricity,
+      trueAnomalyRad: trueAnomaly, unitsPerAu, heliocentricDistanceAu: orbit.heliocentricDistanceAu,
+      focus, perihelionDirection, perihelionMotion });
+    ({ semiMinorAxisUnits, center, majorAxis, minorAxis, vertices, trail, chordBehindTurns: behindTurns } = openPath);
+  }
   const maximumExtentUnits = vertices.reduce(
     (extent, vertex) => Math.max(extent, magnitude(vertex)),
     0,
@@ -167,7 +180,8 @@ export function prepareHeliocentricView({
   const sunRadiusUnits = NOMINAL_SOLAR_RADIUS_KILOMETERS / kilometersPerUnit;
   const plan = Object.freeze({
     schema: PREPARED_HELIOCENTRIC_VIEW_SCHEMA,
-    model: "body-centred-true-ellipse-and-sun-at-observed-distance",
+    model: closed ? "body-centred-true-ellipse-and-sun-at-observed-distance"
+      : "body-centred-finite-hyperbola-and-sun-at-observed-distance",
     bodyId,
     presentationFrame: presentationFrame.model,
     units: Object.freeze({
@@ -203,7 +217,14 @@ export function prepareHeliocentricView({
       perihelionAu: orbit.perihelionAu,
       aphelionAu: orbit.aphelionAu,
       trueAnomalyDegrees: orbit.trueAnomalyDegrees,
-      bodyEccentricAnomalyDegrees: bodyEccentricAnomaly * 180 / Math.PI,
+      bodyEccentricAnomalyDegrees: closed ? bodyEccentricAnomaly * 180 / Math.PI : null,
+      closed,
+      ...(openPath === null ? {} : {
+        bodyVertexIndex: openPath.bodyVertexIndex,
+        bodyHyperbolicAnomalyRad: openPath.bodyHyperbolicAnomalyRad,
+        displayExtentAu: openPath.displayExtentAu,
+        displayExtentModel: openPath.displayExtentModel,
+      }),
       normal: orbitNormal,
       perihelionDirection,
       center: Object.freeze(center.map(round)),
@@ -215,8 +236,8 @@ export function prepareHeliocentricView({
       // The trail: one weight per chord (chord k joins vertex k to k + 1).
       trail,
       chordBehindTurns: behindTurns,
-      trailModel: ORBIT_TRAIL_MODEL,
-      trailSpans: ORBIT_TRAIL_SPANS,
+      trailModel: closed ? ORBIT_TRAIL_MODEL : openPath.trailModel,
+      trailSpans: closed ? ORBIT_TRAIL_SPANS : null,
       uniformSegments: UNIFORM_ORBIT_SEGMENTS,
       localRefinementHalvings: LOCAL_REFINEMENT_HALVINGS,
       maximumExtentUnits,

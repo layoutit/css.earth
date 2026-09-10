@@ -1,0 +1,36 @@
+
+> @cssearth/astronomy@0.0.0 test /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/astronomy
+> vitest run --maxWorkers=1 --no-file-parallelism
+
+
+ RUN  v3.2.7 /Users/ekrof/fed/cssEarth-moons-cassini-atlas/packages/astronomy
+
+ ✓ src/solarSystem.test.ts (24 tests) 4984ms
+   ✓ the solar-system frame tree > declares maxOffsetInParent that really bounds the origin, sampled over full orbits  2354ms
+   ✓ the bounds the builder declares > bounds each planet's offset from its barycentre by the moons' mass-weighted apoapses  799ms
+   ✓ the bounds the builder declares > bounds the Moon by MOON_MAX_GEOCENTRIC_KM with the margin it claims  1538ms
+ ✓ src/satellites.test.ts (365 tests) 1237ms
+ ✓ tools/lib/fit-harmonics.test.mjs (2 tests) 670ms
+   ✓ preparation harmonic fit > keeps a finite fit when a refinement crosses a forbidden frequency interval  627ms
+ ✓ src/elp2000.test.ts (6 tests) 36ms
+ ✓ src/dwarfPlanets.test.ts (22 tests) 30ms
+ ✓ src/bodies.test.ts (9 tests) 27ms
+ ✓ src/frames.test.ts (21 tests) 17ms
+ ✓ src/modelAccuracy.test.ts (112 tests) 13ms
+ ✓ src/rotation.test.ts (50 tests) 13ms
+ ✓ src/kepler.test.ts (10 tests) 13ms
+ ✓ src/vsop87.test.ts (22 tests) 8ms
+ ✓ src/asteroids.test.ts (2 tests) 9ms
+ ✓ src/kepler-hyperbolic.test.ts (8 tests) 4ms
+ ✓ tools/lib/fit-cosine-series.test.mjs (2 tests) 2ms
+ ✓ src/sceneSatellites.test.ts (6 tests) 3ms
+ ✓ src/comets.test.ts (2 tests) 2ms
+ ✓ src/angles.test.ts (8 tests) 2ms
+ ✓ src/periodicCorrection.test.ts (2 tests) 2ms
+ ✓ src/time.test.ts (6 tests) 1ms
+
+ Test Files  19 passed (19)
+      Tests  679 passed (679)
+   Start at  07:56:00
+   Duration  10.10s (transform 508ms, setup 0ms, collect 1.03s, tests 7.07s, environment 1ms, prepare 524ms)
+

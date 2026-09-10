@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-09",
+  "periodHours": null,
+  "population": "Trans-Neptunian object",
+  "surfaceMeaning": "Standard grid on a source-informed shape model; no resolved global surface map.",
+  "id": "achlys",
+  "name": "Achlys",
+  "aliases": [
+    "208996 Achlys",
+    "2003 AZ84",
+    "2003 AZ₈₄"
+  ],
+  "horizons": "208996;",
+  "fullAxesKm": [
+    940,
+    766,
+    490
+  ],
+  "axisUncertaintyKm": [
+    [
+      40,
+      40
+    ],
+    [
+      20,
+      20
+    ],
+    [
+      16,
+      16
+    ]
+  ],
+  "radiusKm": 353.30862431538293,
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "source": "https://arxiv.org/abs/1705.10895",
+  "credit": "Dias-Oliveira et al. (2017), AJ 154, 22; four stellar occultations",
+  "shapeMeaning": "Published Jacobi-ellipsoid interpretation, with semiaxes 470 ±20, 383 ±10 and 245 ±8 km. It assumes hydrostatic equilibrium and a 6.75-hour rotation; the smooth shape is inferred from occultations, not imaged terrain.",
+  "orientationMeaning": "Illustrative pole RA 0°, declination 90° and arbitrary meridian. The paper’s local projected-limb and opening angles do not provide a unique absolute surface attitude for this display.",
+  "periodText": "About 6.75 hours in the adopted shape interpretation; display phase is illustrative",
+  "introduction": "Formerly 2003 AZ84, Achlys is a plutino in Neptune’s 3: 2 orbital resonance. Its changing occultation silhouette supports a flattened, elongated model, while a grazing event hints at a local depression.",
+  "papers": [
+    "https://doi.org/10.3847/1538-3881/aa74e9",
+    "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_015.pdf",
+    "https://doi.org/10.1051/0004-6361/202346998"
+  ],
+  "numericEvidence": {
+    "section": "Dias-Oliveira et al. (2017), section IV.2 and conclusions",
+    "semiAxesKm": [
+      470,
+      383,
+      245
+    ],
+    "semiAxisErrorsKm": [
+      20,
+      10,
+      8
+    ],
+    "radiusFormula": "cbrt(470 * 383 * 245); volume-equivalent model radius, not the paper’s projected area-equivalent radius 386 ±6 km",
+    "periodModelHours": 6.75,
+    "periodErrorHours": 0.04,
+    "modelAssumptions": [
+      "Hydrostatic-equilibrium Jacobi ellipsoid",
+      "Single-peaked 6.75-hour modulation attributed to albedo variation",
+      "Fixed pole between 2012 and 2014 within limited aspect changes"
+    ],
+    "namingReference": "WGSBN Bulletin 5(15), 2025 June 30, page 16: (208996) Achlys = 2003 AZ84"
+  },
+  "unresolved": [
+    "The hydrostatic-equilibrium interpretation is conditional; no precise absolute spin attitude is supplied.",
+    "A limb depression admits several profiles; it is not reproduced as fabricated global topography.",
+    "The small satellite is outside this primary-body package."
+  ],
+  "sourceSurvey": [
+    {
+      "url": "https://arxiv.org/abs/1705.10895",
+      "provides": "Published 3D Jacobi dimensions constrained by multiple occultations",
+      "disposition": "included",
+      "reason": "Use the stated model dimensions through the existing ellipsoid recipe."
+    },
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202346998",
+      "provides": "JWST/NIRSpec spectrum of 2003 AZ84",
+      "disposition": "excluded",
+      "reason": "The source explicitly treats this target as spatially unresolved; a spectrum cannot become registered surface texels."
+    },
+    {
+      "url": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_015.pdf",
+      "provides": "Official 2025 name assignment",
+      "disposition": "included",
+      "reason": "Use Achlys and retain 2003 AZ84 as a search alias."
+    }
+  ],
+  "referenceFiles": [
+    "az84-dias-oliveira-2017.html",
+    "achlys-wgsbn-2025-015.pdf"
+  ],
+  "radiusMeaning": "Volume-equivalent radius of the selected displayed model; not an independently measured mean radius.",
+  "reuse": "Numeric measurements and authored interpretation with primary citations. Downloaded papers are local research references, not surface assets.",
+  "distanceAu": 43.53477215772988,
+  "classification": "trans-neptunian",
+  "shapeLabel": "Published Jacobi ellipsoid",
+  "references": [
+    {
+      "file": "az84-dias-oliveira-2017.html",
+      "sourceUrl": "https://arxiv.org/html/1705.10895",
+      "resolvedUrl": "https://arxiv.org/html/1705.10895",
+      "bytes": 284202,
+      "sha256": "5c0a962c39ff7ef7d3ce81654afbef4d5e7760cf32e2ce843f519b197739beab",
+      "retrievedAt": "2026-09-10T02:41:16.691469+00:00",
+      "url": "https://arxiv.org/html/1705.10895"
+    },
+    {
+      "file": "achlys-wgsbn-2025-015.pdf",
+      "sourceUrl": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_015.pdf",
+      "resolvedUrl": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_015.pdf",
+      "bytes": 473657,
+      "sha256": "4a18aa51fcbea9b63660f1e475df4e325ee3c02eb88caf4d5873e84e22985a70",
+      "retrievedAt": "2026-09-10T02:42:33.947535+00:00",
+      "url": "https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_015.pdf"
+    }
+  ],
+  "survey": [
+    "Included: Published 3D Jacobi dimensions constrained by multiple occultations Use the stated model dimensions through the existing ellipsoid recipe. https://arxiv.org/abs/1705.10895",
+    "Excluded: JWST/NIRSpec spectrum of 2003 AZ84 The source explicitly treats this target as spatially unresolved; a spectrum cannot become registered surface texels. https://doi.org/10.1051/0004-6361/202346998",
+    "Included: Official 2025 name assignment Use Achlys and retain 2003 AZ84 as a search alias. https://www.wgsbn-iau.org/files/Bulletins/V005/WGSBNBull_V005_015.pdf"
+  ]
+}
