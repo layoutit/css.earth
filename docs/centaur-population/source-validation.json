@@ -1,0 +1,30 @@
+[
+  {
+    "id": "chariklo",
+    "data": {
+      "assetCount": 32,
+      "sourceInputCount": 4
+    },
+    "source": {
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 12,
+      "verifiedCount": 17
+    },
+    "preparedSha256": "a7bc7c6f89aa260bc4a7c6e3748980d3dae28337425d9c6cad0ca7a07bd37b49"
+  },
+  {
+    "id": "bienor",
+    "data": {
+      "assetCount": 31,
+      "sourceInputCount": 4
+    },
+    "source": {
+      "inputCount": 4,
+      "generatedIntermediateCount": 1,
+      "documentCount": 11,
+      "verifiedCount": 16
+    },
+    "preparedSha256": "43971f3edd3df4d0a14407c17bd907dff5d9f2ef51ecb33809177d5110296c47"
+  }
+]

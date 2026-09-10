@@ -229,5 +229,12 @@ export const ASTEROID_ELEMENTS_4 = {
   "mentor": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%273451%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 777596236.3502679, "eccentricity": 0.07373947309954794, "inclinationRad": 0.020240559684473955, "ascendingNodeRad": 2.9422952384190104, "argumentOfPeriapsisRad": 2.5445887149148025, "meanAnomalyAtEpochRad": 2.31963313287348, "meanMotionRadPerDay": 0.001451571172442298 }
+  "chariklo": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2710199%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 2353687527.428948, "eccentricity": 0.1709770680389282, "inclinationRad": 0.7050155625164567, "ascendingNodeRad": 5.725957875751939, "argumentOfPeriapsisRad": 3.652701046553626, "meanAnomalyAtEpochRad": 2.2936110306294033, "meanMotionRadPerDay": 0.00027564260817776524 }
+  },
+  "bienor": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2754598%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": { "epochJdTt": 2461286.5, "semiMajorAxisKm": 2483660419.403543, "eccentricity": 0.205648666555473, "inclinationRad": 0.7556307933218552, "ascendingNodeRad": 6.087116847755935, "argumentOfPeriapsisRad": 2.4433950101626145, "meanAnomalyAtEpochRad": 6.158307257607408, "meanMotionRadPerDay": 0.000254291143727565 }
   }
 } satisfies Record<string, {query: string; elements: KeplerianElements}>

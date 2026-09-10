@@ -50,7 +50,7 @@ describe('asteroid positions against JPL Horizons', () => {
       // Expansion: ceil(measured independent endpoint maximum * 1.15) km.
       'annefrank': 394, 'braille': 668,
       // Trojan additions: ceil(measured independent +/-30-day maximum * 1.15) km.
-      diomedes: 426, ajax: 973, ilioneus: 561, pyrrhus: 530, eumelos: 573, lycomedes: 958, demodokus: 1682, menelaus: 1054, agenor: 607, mentor: 1444 }
+      diomedes: 426, ajax: 973, ilioneus: 561, pyrrhus: 530, eumelos: 573, lycomedes: 958, demodokus: 1682, menelaus: 1054, agenor: 607, mentor: 1444 , 'chariklo': 538, 'bienor': 944 }
     for (const id of ASTEROID_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])
